@@ -51,6 +51,13 @@ if ( ! class_exists( 'Jobly' ) ) {
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+
+			//Options
+			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+
+			//Post Type
+			require_once __DIR__ . '/includes/Admin/Post_Types.php';
+
 		}
 
 		/**
