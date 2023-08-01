@@ -52,12 +52,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
-			//Options
-			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-
-			//Post Type
-			require_once __DIR__ . '/includes/Admin/Post_Types.php';
-
 		}
 
 		/**
@@ -79,7 +73,28 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * @access public
 		 */
 		public function core_includes() {
+
+
 			require_once __DIR__ . '/includes/functions.php';
+
+
+			//Options
+			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+			require_once __DIR__ . '/includes/Admin/options/settings-options.php';
+			require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+
+
+			//Post Type
+			require_once __DIR__ . '/includes/Admin/Post_Types.php';
+
+
+			/**
+			 * Admin Settings
+			 */
+			if ( is_admin() ) {
+				//require_once __DIR__ . '/includes/Admin/classes/class-jobly-settings.php';
+				//require_once __DIR__ . '/includes/Admin/classes/class-jobly-meta-options.php';
+			}
             
 		}
 

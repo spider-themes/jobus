@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 class Jobly_Job_Post {
+
 	private static $instance = null;
 
 	public function __construct() {
@@ -24,28 +25,48 @@ class Jobly_Job_Post {
 	}
 
 
+	
+	public function register() {
+		
+		$this->register_post_types();
+
+	}
+
+
 	// Register the post type.
 	public function register_post_types() {
 
+		if (post_type_exists('job')) {
+			return;
+		}
+
+
 		$labels = array(
-			'name'              => esc_html__( 'Jobs', 'binary-job-listing' ),
-			'singular_name'     => esc_html__( 'Job', 'binary-job-listing' ),
-			'add_new'           => esc_html__( 'Add New', 'binary-job-listing' ),
-			'add_new_item'      => esc_html__( 'Add New Job', 'binary-job-listing' ),
-			'edit_item'         => esc_html__( 'Edit Job', 'binary-job-listing' ),
-			'new_item'          => esc_html__( 'New Job', 'binary-job-listing' ),
-			'new_item_name'     => esc_html__( 'New Job Name', 'binary-job-listing' ),
-			'all_items'         => esc_html__( 'All Jobs', 'binary-job-listing' ),
-			'view_item'         => esc_html__( 'View Job', 'binary-job-listing' ),
-			'view_items'        => esc_html__( 'Views', 'binary-job-listing' ),
-			'search_items'      => esc_html__( 'Search Jobs', 'binary-job-listing' ),
-			'not_found'         => esc_html__( 'No jobs found', 'binary-job-listing' ),
-			'not_found_in_trash'     => esc_html__( 'No jobs found in Trash', 'binary-job-listing' ),
-			'parent_item'       => esc_html__( 'Parent Job', 'binary-job-listing' ),
-			'parent_item_colon' => esc_html__( 'Parent Job:', 'binary-job-listing' ),
-			'update_item'       => esc_html__( 'Update Job', 'binary-job-listing' ),
-			'menu_name'         => esc_html__( 'Job Listings', 'binary-job-listing' ),
+			'name'              => esc_html__( 'Jobs', 'jobly' ),
+			'singular_name'     => esc_html__( 'Job', 'jobly' ),
+			'add_new'           => esc_html__( 'Add New', 'jobly' ),
+			'add_new_item'      => esc_html__( 'Add New Job', 'jobly' ),
+			'edit_item'         => esc_html__( 'Edit Job', 'jobly' ),
+			'new_item'          => esc_html__( 'New Job', 'jobly' ),
+			'new_item_name'     => esc_html__( 'New Job Name', 'jobly' ),
+			'all_items'         => esc_html__( 'All Jobs', 'jobly' ),
+			'view_item'         => esc_html__( 'View Job', 'jobly' ),
+			'view_items'        => esc_html__( 'Views', 'jobly' ),
+			'search_items'      => esc_html__( 'Search Jobs', 'jobly' ),
+			'not_found'         => esc_html__( 'No jobs found', 'jobly' ),
+			'not_found_in_trash'     => esc_html__( 'No jobs found in Trash', 'jobly' ),
+			'parent_item'       => esc_html__( 'Parent Job', 'jobly' ),
+			'parent_item_colon' => esc_html__( 'Parent Job:', 'jobly' ),
+			'update_item'       => esc_html__( 'Update Job', 'jobly' ),
+			'menu_name'         => esc_html__( 'Job Listings', 'jobly' ),
+			'item_published'           => __( 'Job listing published.', 'wp-job-openings' ),
+			'item_published_privately' => __( 'Job listing published privately.', 'wp-job-openings' ),
+			'item_reverted_to_draft'   => __( 'Job listing reverted to draft.', 'wp-job-openings' ),
+			'item_scheduled'           => __( 'Job listing scheduled.', 'wp-job-openings' ),
+			'item_updated'             => __( 'Job listing updated.', 'wp-job-openings' ),
 		);
+
+		$supports = [ 'title', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
 
 		$args = array(
 			'labels'                => $labels,
@@ -59,14 +80,17 @@ class Jobly_Job_Post {
 			'capability_type'       => 'post',
 			'has_archive'           => true,
 			'hierarchical'          => true,
+			'map_meta_cap'    => true,
+			'taxonomies'      => array(),
 			'menu_position'         => 8,
-			'supports'              => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'permalinks', 'page-attributes' ),
+			'supports'              => $supports,
 			'yarpp_support'         => true,
-			'menu_icon'             => 'dashicons-book',
+			'menu_icon'             => 'dashicons-money',
 			'show_admin_column'     => true,
+
 		);
 
-		register_post_type('job', $args); // Register the post type
+		register_post_type('job', $args); // Register the post type `job`
 
 	}
 
