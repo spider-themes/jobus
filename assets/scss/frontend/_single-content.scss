@@ -1,0 +1,26 @@
+.details-post-data {
+  .wp-block-group {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 35px 40px 20px;
+    margin-bottom: 30px;
+    .wp-block-heading {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-family: "gordita";
+      margin: 0;
+      code {
+        font-size: 14px;
+        background: #31795A !important;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

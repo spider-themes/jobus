@@ -13,7 +13,7 @@ if( class_exists( 'CSF' ) ) {
 	CSF::createOptions( $settings_prefix, array(
 		'menu_title' => esc_html__( 'Settings', 'jobly'),
 		'menu_slug'  => 'jobly-settings',
-		'framework_title'  => esc_html__( 'Settings dd', 'jobly'),
+		'framework_title'  => esc_html__( 'Jobly', 'jobly') . '<span> ' . JOBLY_VERSION . '</span>',
 		'menu_type'   => 'submenu',
 		'menu_parent' => 'edit.php?post_type=job',
 		'theme'           => 'dark',
@@ -29,7 +29,6 @@ if( class_exists( 'CSF' ) ) {
 			array(
 				'id'        => 'job_specifications',
 				'type'      => 'repeater',
-				//'title' => esc_html__( 'Job Specifications', 'jobly' ),
 				'fields'    => array(
 
 					array(
@@ -40,18 +39,12 @@ if( class_exists( 'CSF' ) ) {
 					),
 
 					array(
-						'id'      => 'key',
-						'type'    => 'text',
-						'title'   => esc_html__( 'Type Slug', 'jobly' ),
-						'default' => ''
-					),
-
-					array(
-						'id'      => 'select_topic',
+						'id'      => sanitize_title('select_topic'),
 						'type'    => 'select',
 						'multiple'    => true,
 						'chosen'      => true,
 						'options'	 =>  jobly_job_topics_text(),
+						'placeholder' => 'Select an/multiple Options',
 						'title'   => esc_html__( 'Select Topics', 'jobly' ),
 						'default' => ''
 					),
@@ -91,27 +84,17 @@ if( class_exists( 'CSF' ) ) {
 		)
 	) );
 
-
-	// Create a section
+	// Backup Options
 	CSF::createSection( $settings_prefix, array(
-		'title'  => 'Test Tab',
+		'title'  => 'Backup',
 		'fields' => array(
 			array(
-				'id'        => 'opt-sportable-1',
-				'type'      => 'sortable',
-				'title'     => 'Sortable',
-				'fields'    => array(
-					array(
-						'id'    => 'text-1',
-						'type'  => 'text',
-						'multiple'    => true,
-						'title' => 'Text 1'
-					),
-				),
+				'id'        => 'jobly_export_import',
+				'type'      => 'backup',
+				'title'     => esc_html__('Backup', 'jobly'),
 			),
-
-
 		)
 	) );
+
 
 }

@@ -37,6 +37,14 @@ if ( ! class_exists( 'Jobly' ) ) {
 		const version = '1.0.0';
 
 		/**
+		 * The plugin path
+		 *
+		 * @var string
+		 */
+		public $plugin_path;
+
+
+		/**
 		 * Constructor.
 		 *
 		 * Initialize the Jobly plugin
@@ -91,10 +99,10 @@ if ( ! class_exists( 'Jobly' ) ) {
 			/**
 			 * Admin Settings
 			 */
-			if ( is_admin() ) {
-				//require_once __DIR__ . '/includes/Admin/classes/class-jobly-settings.php';
-				//require_once __DIR__ . '/includes/Admin/classes/class-jobly-meta-options.php';
-			}
+			/*if ( is_admin() ) {
+				require_once __DIR__ . '/includes/Admin/classes/class-jobly-settings.php';
+				require_once __DIR__ . '/includes/Admin/classes/class-jobly-meta-options.php';
+			}*/
             
 		}
 
@@ -106,10 +114,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 			define( 'JOBLY_FILE', __FILE__ );
 			define( 'JOBLY_PATH', __DIR__ );
 			define( 'JOBLY_URL', plugins_url( '', JOBLY_FILE ) );
-            
-			define( 'JOBLY_ADMIN_CSS', JOBLY_URL . '/assets/css/admin' );
-			define( 'JOBLY_FRONT_CSS', JOBLY_URL . '/assets/css/frontend' );
-            
+
+			define( 'JOBLY_CSS', JOBLY_URL . '/assets/css' );
 			define( 'JOBLY_IMG', JOBLY_URL . '/assets/images' );
 			define( 'JOBLY_VEND', JOBLY_URL . '/assets/vendors' );
 		}
@@ -156,17 +162,32 @@ if ( ! class_exists( 'Jobly' ) ) {
 		}
 
 		/**
+		 * Get the plugin path.
+		 *
+		 * @return string
+		 */
+		public function plugin_path() {
+
+			if ( $this->plugin_path ) {
+				return $this->plugin_path;
+			}
+
+			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
+
+		}
+
+
+		/**
 		 * Get the plugin url.
 		 *
 		 * @return string
 		 */
-		public function plugin_url() {
-			if ( $this->plugin_url ) {
-				return $this->plugin_url;
-			}
+		public function template_path() {
 
-			return $this->plugin_url = untrailingslashit( plugins_url( '/', __FILE__ ) );
+			return $this->plugin_path() . '/templates/';
+
 		}
+
         
 	}
 }

@@ -29,6 +29,7 @@ class Jobly_Job_Post {
 	public function register() {
 		
 		$this->register_post_types();
+		$this->register_taxonomies();
 
 	}
 
@@ -76,7 +77,7 @@ class Jobly_Job_Post {
 			'show_ui'               => true,
 			'show_in_menu'          => true,
 			'query_var'             => true,
-			'rewrite'               => array( 'slug' => 'bjl_post' ),
+			'rewrite'               => array( 'slug' => 'job' ),
 			'capability_type'       => 'post',
 			'has_archive'           => true,
 			'hierarchical'          => true,
@@ -91,6 +92,30 @@ class Jobly_Job_Post {
 		);
 
 		register_post_type('job', $args); // Register the post type `job`
+
+
+		// Register post taxonomies Category
+		register_taxonomy( 'job_cat', 'job', array(
+			'public'                => true,
+			'hierarchical'          => true,
+			'show_admin_column'     => true,
+			'show_in_nav_menus'     => false,
+			'labels'                => array(
+				'name'  => esc_html__( 'Categories', 'jobly'),
+			)
+		));
+
+		// Register post taxonomies Location
+		register_taxonomy( 'job_location', 'job', array(
+			'public'                => true,
+			'hierarchical'          => true,
+			'show_admin_column'     => true,
+			'show_in_nav_menus'     => false,
+			'labels'                => array(
+				'name'  => esc_html__( 'Locations', 'jobly'),
+			)
+		));
+
 
 	}
 
