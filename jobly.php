@@ -89,11 +89,16 @@ if ( ! class_exists( 'Jobly' ) ) {
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
 			require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-			require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+			//require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+			require_once __DIR__ . '/includes/Admin/options/meta-job-specications.php';
+			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';
+
+            //Elementor Widgets
+            require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
 
 
 			/**
@@ -122,8 +127,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 		/**
 		 * Initializes a singleton instances
-		 * @return void
-		 */
+		 * @return false|Jobly
+         */
 		public static function init() {
 			static $instance = false;
 			if ( ! $instance ) {
@@ -146,6 +151,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
+            new Jobly\Elementor\Register_Widgets();
 
 		}
         

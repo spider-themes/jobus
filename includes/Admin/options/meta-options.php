@@ -35,7 +35,8 @@ if ( class_exists( 'CSF' ) ) {
 
 			// Add a 'select' field for each 'select_topic' option
 			$fields[] = [
-				'id'       => 'job_spec_' .sanitize_title( $field[ 'specification' ] ),
+				//'id'       => 'job_spec_' .sanitize_title( $field[ 'specification' ] ),
+				'id'       => sanitize_title( $field[ 'specification' ] ),
 				'type'     => 'select',
 				'title'    => $field[ 'specification' ],
 				'options'  => $options,
@@ -46,12 +47,14 @@ if ( class_exists( 'CSF' ) ) {
 
 		// Create the section with the 'fields' configurations
 		CSF::createSection( $meta_prefix, array(
+            'id'    => 'job_specifications_asdjfhksdajf', // This is the same as the 'id' of the 'repeater' field in settings options
 			'title'  => esc_html__( 'Job Specifications', 'jobly' ),
 			'fields' => $fields,
 		) );
 	}
 
-	// Create a section
+
+	// Company Info Meta Options
 	CSF::createSection( $meta_prefix, array(
 		'title'  => esc_html__( 'Company Info', 'jobly' ),
 		'fields' => array(
@@ -75,24 +78,48 @@ if ( class_exists( 'CSF' ) ) {
                 'title' => esc_html__( 'Website URL', 'jobly' ),
             ),
 
-
-
-            array(
-                'id'          => 'opt-select-1',
-                'type'        => 'select',
-                'title'       => 'Select',
-                'multiple'    => true,
-                'chosen'   => true,
-                'options'     => array(
-                    'option-1'  => 'Option 1',
-                    'option-2'  => 'Option 2',
-                    'option-3'  => 'Option 3',
-                ),
-                'default'     => 'option-2'
-            ),
-
 		)
 	) );
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //
+    // Control core classes for avoid errors
+    if( class_exists( 'CSF' ) ) {
+
+        //
+        // Set a unique slug-like ID
+        $meta_tax = 'jobly_taxonomy_cat';
+
+        //
+        // Create taxonomy options
+        CSF::createTaxonomyOptions( $meta_tax, array(
+            'taxonomy'  => 'job_cat', // taxonomy name
+            'data_type' => 'serialize', // The type of the database save options. `serialize` or `unserialize`
+        ) );
+
+        // Create a section
+        CSF::createSection( $meta_tax, array(
+            'fields' => array(
+                array(
+                    'id'        => 'cat_img',
+                    'type'      => 'media',
+                    'title'     => esc_html__( 'Image', 'listy' ),
+                ),
+            )
+        ) );
+
+    }
 
 }
 

@@ -105,17 +105,6 @@ class Jobly_Job_Post {
 			)
 		));
 
-		// Register post taxonomies Location
-		register_taxonomy( 'job_location', 'job', array(
-			'public'                => true,
-			'hierarchical'          => true,
-			'show_admin_column'     => true,
-			'show_in_nav_menus'     => false,
-			'labels'                => array(
-				'name'  => esc_html__( 'Locations', 'jobly'),
-			)
-		));
-
 
 	}
 

@@ -1,0 +1,85 @@
+.elementor-control-raw-html.elementor-warning {
+    padding: 10px;
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+    line-height: 1.4;
+}
+
+.elementor-control-raw-html.elementor-warning {
+    padding: 10px;
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+    line-height: 1.4;
+}
+
+/** === Style Variations === **/
+.elementor-control.elementor-control-style.elementor-control-type-choose.elementor-label-inline .elementor-control-input-wrapper,
+.elementor-control.elementor-control-style .elementor-control-content,
+.elementor-control.elementor-control-style .elementor-control-field {
+    display: block;
+}
+.elementor-control.elementor-control-style.elementor-control-type-choose.elementor-label-inline .elementor-control-input-wrapper {
+    margin-left: 0;
+}
+.elementor-control.elementor-control-style.elementor-control-type-choose label.elementor-control-title {
+    padding-bottom: 10px;
+    display: block;
+}
+.elementor-control.elementor-control-style .elementor-choices {
+    display: block;
+    height: auto;
+    width: 266px;
+}
+.elementor-control.elementor-control-style .elementor-choices .elementor-choices-label {
+    display: block;
+    width: 266px;
+    height: 110px;
+}
+.elementor-control.elementor-control-style .elementor-choices input:checked+.elementor-choices-label {
+    border-width: 2px;
+    padding-right: 2px;
+}
+.elementor-control.elementor-control-style .elementor-choices label:not(:first-of-type) {
+    margin-top: 10px;
+}
+.elementor-control.elementor-control-style .elementor-choices .elementor-choices-label:hover {
+    border: 1px solid #6d7882;
+}
+.elementor-control.elementor-control-style .elementor-choices .elementor-choices-label i {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.elementor-control.elementor-control-style .elementor-choices .elementor-choices-label i::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+}
+.elementor-control.elementor-control-style .elementor-choices input+.elementor-choices-label:hover i::before,
+.elementor-control.elementor-control-style .elementor-choices input:checked+.elementor-choices-label i::before {
+    opacity: 1;
+}
+
+/** === Testimonials === **/
+.category1::before {
+    background: url("../img/el-editor-preview/category1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+
+/*==================== Widget Preview Icon =====================*/
+.elementor-panel .elementor-element .icon .jobly-icon::after {
+    content: url("../images/el-editor-preview/jobly-icon.svg");
+    background-repeat: no-repeat;
+    opacity: .5;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

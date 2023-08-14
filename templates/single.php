@@ -21,28 +21,18 @@ $job_post = new \WP_Query($args);
 
 
 
-function jobly_disply_job_specification () {
+//==============
+$job_meta = get_post_meta(get_the_ID(), 'jobly_meta', true);
 
-    $meta = get_post_meta(get_the_ID(), 'jobly_meta', true);
-
-
-
-
-}
-
-
-$specifications = !empty($meta['specifications']) ? $meta['specifications'] : [];
+$job_types = !empty($job_meta['job-type']) ? $job_meta['job-type'] : [];
+$salary = !empty($job_meta['salary']) ? $job_meta['salary'] : [];
+$location = !empty($job_meta['location']) ? $job_meta['location'] : [];
+$duration = !empty($job_meta['duration']) ? $job_meta['duration'] : [];
+$experience = !empty($job_meta['experience']) ? $job_meta['experience'] : [];
 
 
-
-
-
-
-$job_types = !empty($meta['job-type']) ? $meta['job-type'] : [];
-
-foreach ( $job_types as $job_type ) {
-    echo $job_type;
-}
+// Retrieve the 'job_specifications' data
+$job_specifications = get_post_meta(get_the_ID(), 'jobly_meta', true);
 ?>
 
 
@@ -63,7 +53,7 @@ foreach ( $job_types as $job_type ) {
 
                     <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mt-50">
                         <?php
-                        if ( $company_logo['id'] ) {
+                        /*if ( $company_logo['id'] ) {
                             echo wp_get_attachment_image($company_logo['id'], 'full', '', [ 'class' => 'lazy-img m-auto logo'] );
                         }
                         if ( $company_name ) {
@@ -72,39 +62,32 @@ foreach ( $job_types as $job_type ) {
                         if ( $company_website['url'] ) {
                             $target = $company_website['target'] ? 'target="' . esc_attr($company_website['target']) . '"' : '';
                             echo '<a href="' . esc_url($company_website['url']) . '" class="website-btn tran3s" '.$target.'>' . esc_html($company_website['text']) . '</a>';
-                        }
+                        }*/
                         ?>
-
 						<div class="border-top mt-40 pt-40">
 							<ul class="job-meta-data row style-none">
-								<li class="col-xl-7 col-md-4 col-sm-6">
-									<span>Salary</span>
-									<div>50k-60k/year</div>
-								</li>
-								<li class="col-xl-5 col-md-4 col-sm-6">
-									<span>Expertise</span>
-									<div>Intermediate</div>
-								</li>
-								<li class="col-xl-7 col-md-4 col-sm-6">
-									<span>Location</span>
-									<div>Spain, Barcelona</div>
-								</li>
-								<li class="col-xl-5 col-md-4 col-sm-6">
-									<span>Job Type</span>
-                                    <?php
-                                    foreach ($job_types as $job_type) {
-                                        echo '<div>' . esc_html($job_type) . '</div>';
-                                    }
+                                <?php
+                                // Loop through each field in the 'job_specifications'
+                                foreach ($job_specifications as $field_key => $field_values) {
+                                    $get_title_key = str_replace('-', ' ', $field_key);
+                                    $title = ucwords($get_title_key);
                                     ?>
-								</li>
-								<li class="col-xl-7 col-md-4 col-sm-6">
-									<span>Date</span>
-									<div>12 jun, 2022  </div>
-								</li>
-								<li class="col-xl-5 col-md-4 col-sm-6">
-									<span>Experience</span>
-									<div>2 Years</div>
-								</li>
+                                    <li class="col-xl-6 col-md-4 col-sm-6">
+                                        <span><?php echo esc_html($title) ?></span>
+                                        <div>
+                                            <?php
+                                            // Loop through each selected value for the field
+                                            foreach ($field_values as $value) {
+                                                ?>
+                                                <?php echo esc_html($value) ?>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
 							</ul>
 
 							<div class="job-tags d-flex flex-wrap pt-15">
