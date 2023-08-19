@@ -16,7 +16,7 @@ if ( class_exists( 'CSF' ) ) {
     // Create taxonomy options
     CSF::createTaxonomyOptions( $meta_tax, array(
         'taxonomy'  => 'job_cat', // taxonomy name
-        'data_type' => 'unserialize', // The type of the database save options. `serialize` or `unserialize`
+        'data_type' => 'serialize', // The type of the database save options. `serialize` or `unserialize`
     ) );
 
     // Create a section

@@ -88,9 +88,10 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-			require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-			//require_once __DIR__ . '/includes/Admin/options/meta-options.php';
-			require_once __DIR__ . '/includes/Admin/options/meta-job-specications.php';
+
+            require_once __DIR__ . '/includes/Admin/options/settings-options.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-job-speciations.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options.php';
 			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
 
@@ -121,6 +122,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 			define( 'JOBLY_URL', plugins_url( '', JOBLY_FILE ) );
 
 			define( 'JOBLY_CSS', JOBLY_URL . '/assets/css' );
+			define( 'JOBLY_JS', JOBLY_URL . '/assets/js' );
 			define( 'JOBLY_IMG', JOBLY_URL . '/assets/images' );
 			define( 'JOBLY_VEND', JOBLY_URL . '/assets/vendors' );
 		}

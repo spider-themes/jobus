@@ -84,9 +84,55 @@ if( class_exists( 'CSF' ) ) {
 		)
 	) );
 
+
+    // Job Single Template
+    CSF::createSection( $settings_prefix, array(
+        'title' => esc_html__( 'Job Single Template', 'jobly' ),
+        'fields' => array(
+
+            array(
+                'id'        => 'job_single_layout',
+                'type'      => 'image_select',
+                'title'     => 'Image Select',
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/single-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/single-layout-2.png',
+                ),
+                'default'   => '1'
+            ),
+
+        )
+    ) );
+
+
+    // Title Bar
+    CSF::createSection( $settings_prefix, array(
+        'title'  => esc_html__( 'Title Bar', 'jobly' ),
+        'fields' => array(
+            array(
+                'id'        => 'shape1',
+                'type'      => 'media',
+                'title'     => esc_html__('Shape 01', 'jobly'),
+                'default'   => array(
+                    'url'   => JOBLY_IMG . '/banner/shape_1.svg'
+                )
+            ),
+
+            array(
+                'id'        => 'shape2',
+                'type'      => 'media',
+                'title'     => esc_html__('Shape 02', 'jobly'),
+                'default'   => array(
+                    'url'   => JOBLY_IMG . '/banner/shape_2.svg'
+                )
+            ),
+        )
+    ) );
+
+
 	// Backup Options
 	CSF::createSection( $settings_prefix, array(
-		'title'  => 'Backup',
+		'title'  => esc_html__( 'Backup', 'jobly' ),
 		'fields' => array(
 			array(
 				'id'        => 'jobly_export_import',

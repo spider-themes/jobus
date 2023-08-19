@@ -21,7 +21,8 @@ class Assets {
 
         // Enqueue Scripts
         wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );
-        
+        wp_enqueue_script( 'jobly-public', JOBLY_JS . '/public.js', [ 'jquery' ], JOBLY_VERSION, true );
+
     }
         
 }

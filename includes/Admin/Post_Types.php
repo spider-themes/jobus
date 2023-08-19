@@ -105,6 +105,17 @@ class Jobly_Job_Post {
 			)
 		));
 
+        // Register post taxonomies Tags
+        register_taxonomy( 'job_tag', 'job', array(
+            'public'                => true,
+            'hierarchical'          => false,
+            'show_admin_column'     => true,
+            'show_in_nav_menus'     => false,
+            'labels'                => array(
+                'name'  => esc_html__( 'Tags', 'jobly'),
+            )
+        ) );
+
 
 	}
 

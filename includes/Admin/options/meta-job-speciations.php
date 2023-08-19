@@ -4,15 +4,12 @@ if ( class_exists( 'CSF' ) ) {
     // Set a unique slug-like ID for meta options
     $meta_prefix = 'jobly_job_spec_meta';
 
-    // Create a metabox
+    // Create a meta-box
     CSF::createMetabox( $meta_prefix, array(
-        'title'        => esc_html__( 'Job Options', 'jobly' ),
+        'title'        => esc_html__( 'Job Specifications', 'jobly' ),
         'post_type'    => 'job',
         'theme'        => 'dark',
-        'output_css'   => true,
-        'show_restore' => true,
     ) );
-
 
     // Retrieve the repeater field configurations from settings options
     $settings_prefix           = 'jobly_opt';
@@ -35,7 +32,6 @@ if ( class_exists( 'CSF' ) ) {
 
             // Add a 'select' field for each 'select_topic' option
             $fields[] = [
-                //'id'       => 'job_spec_' .sanitize_title( $field[ 'specification' ] ),
                 'id'       => sanitize_title( $field[ 'specification' ] ),
                 'type'     => 'select',
                 'title'    => $field[ 'specification' ],
@@ -47,7 +43,6 @@ if ( class_exists( 'CSF' ) ) {
 
         // Create the section with the 'fields' configurations
         CSF::createSection( $meta_prefix, array(
-            'id'    => 'job_specifications_asdjfhksdajf', // This is the same as the 'id' of the 'repeater' field in settings options
             'title'  => esc_html__( 'Job Specifications', 'jobly' ),
             'fields' => $fields,
         ) );
