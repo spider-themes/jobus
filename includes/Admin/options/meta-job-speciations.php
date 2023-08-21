@@ -39,6 +39,7 @@ if ( class_exists( 'CSF' ) ) {
                 'multiple' => true,
                 'chosen'   => true,
             ];
+
         }
 
         // Create the section with the 'fields' configurations
