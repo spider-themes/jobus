@@ -24,20 +24,16 @@
                                             }
                                         }
                                     }
-
                                     if ( !empty($title) ) {
                                         echo '<span>'.esc_html($title).'</span>';
                                     }
-                                    if ( !empty($field_values) ) { ?>
-                                        <div>
-                                            <?php
+                                    if ( !empty($field_values) ) {
+                                        echo '<div>';
                                             // Loop through each selected value for the field
                                             foreach ($field_values as $value) {
                                                 echo esc_html($value);
                                             }
-                                            ?>
-                                        </div>
-                                        <?php
+                                        echo '</div>';
                                     }
                                     ?>
                                 </li>
@@ -46,11 +42,9 @@
                         }
                         ?>
                     </ul>
-
                     <?php the_content(); ?>
 
                     <a href="#" class="btn-ten fw-500 text-white text-center tran3s mt-30">Apply for this position</a>
-
                 </div>
             </div>
         </div>

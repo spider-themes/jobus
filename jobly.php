@@ -101,6 +101,9 @@ if ( ! class_exists( 'Jobly' ) ) {
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
 
+            // Gutenburg Blocks
+            //require_once __DIR__ . '/includes/Gutenburg/Blocks.php';
+
 
 			/**
 			 * Admin Settings

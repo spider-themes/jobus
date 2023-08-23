@@ -22,10 +22,11 @@ if ( class_exists( 'CSF' ) ) {
     // Create a section
     CSF::createSection( $meta_tax, array(
         'fields' => array(
+
             array(
-                'id'      => 'cat_icon',
-                'type'    => 'icon',
-                'title'   => esc_html__('Icon', 'jobly'),
+                'id'      => 'cat_img',
+                'type'    => 'media',
+                'title'   => esc_html__('Image', 'jobly'),
             ),
         )
     ) );

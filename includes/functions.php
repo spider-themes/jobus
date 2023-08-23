@@ -170,3 +170,26 @@ if ( ! function_exists( 'jobly_get_the_tag_list' ) ) {
 
     }
 }
+
+
+
+/**
+ * Get categories array
+ *
+ * @param string $term
+ *
+ * @return array
+ */
+function jobly_get_the_categories( $term = 'job_cat' ) {
+    $cats      = get_terms( array(
+        'taxonomy'   => $term,
+        'hide_empty' => true,
+        'parent'     => 0,
+    ) );
+    $cat_array = [];
+    foreach ( $cats as $cat ) {
+        $cat_array[ $cat->term_id ] = $cat->name;
+    }
+
+    return $cat_array;
+}

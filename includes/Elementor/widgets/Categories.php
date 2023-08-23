@@ -130,7 +130,7 @@ class Categories extends Widget_Base {
                 'label'       => esc_html__( 'Category', 'listy-core' ),
                 'description' => esc_html__( 'Display Listing by Location', 'listy-core' ),
                 'type'        => \Elementor\Controls_Manager::SELECT2,
-                //'options'     => Listy_Core_Helper()->get_the_categories( 'listing_cat' ),
+                'options'     => jobly_get_the_categories(),
                 'multiple'    => true,
                 'label_block' => true,
             ]
