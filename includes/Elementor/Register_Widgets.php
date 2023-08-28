@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Register_Widgets {
 
-
     public function __construct() {
 
         //Register Category
@@ -21,7 +20,7 @@ class Register_Widgets {
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
 
         // Register Elementor Preview Editor Scripts
-        add_action('elementor/editor/before_enqueue_scripts', [ $this, 'register_editor_scripts' ]);
+        //add_action('elementor/editor/before_enqueue_scripts', [ $this, 'register_editor_scripts' ]);
 
     }
 
@@ -48,9 +47,11 @@ class Register_Widgets {
 
         // Include Widget files
         require_once( __DIR__ . '/widgets/Categories.php' );
+        require_once( __DIR__ . '/widgets/Search_Form.php' );
 
         // Register Widgets Classes
         $widgets_manager->register( new widgets\Categories() );
+        $widgets_manager->register( new widgets\Search_Form() );
 
     }
 

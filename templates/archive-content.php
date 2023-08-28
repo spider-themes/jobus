@@ -1,17 +1,19 @@
 <?php
+/**
+ * Template Name: Job Search Results
+ */
 get_header();
 
 //jobly_get_template_part('search-banner');
 $args = array(
     'post_type' => 'job',
-    'posts_per_page' => 2,
+    'posts_per_page' => -1,
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
     'orderby' => 'date',
     'order' => 'DESC',
     'post_status' => 'publish',
     's' => get_query_var('s'),
 );
-
 
 $job_post = new \WP_Query($args);
 $job_sidebar = is_active_sidebar('jobly_job_sidebar') ? 'col-lg-8' : 'col-lg-12';
@@ -245,17 +247,19 @@ $job_sidebar = is_active_sidebar('jobly_job_sidebar') ? 'col-lg-8' : 'col-lg-12'
 
 					<div class="accordion-box list-style show">
 						<?php
-						if ( $job_post->have_posts() ) :
+						if ( $job_post->have_posts() ) {
 
-							while ( $job_post->have_posts() ) : $job_post->the_post();
+                            while ( $job_post->have_posts() ) {
+                                $job_post->the_post();
 
-								jobly_get_template_part( 'contents/content' );
+                                jobly_get_template_part('contents/content');
 
-							endwhile;
+                            }
                             wp_reset_postdata();
 
-						endif;
-
+                        } else {
+                            echo 'No jobs found.';
+                        }
 						?>
 
 					</div>

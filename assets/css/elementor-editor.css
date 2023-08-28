@@ -65,9 +65,17 @@
     opacity: 1;
 }
 
-/** === Testimonials === **/
-.category1::before {
-    background: url("../img/el-editor-preview/category1.jpg");
+/** === Categories === **/
+.category_1::before {
+    background: url("../images/el-editor-preview/category_1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+/** === Search From === **/
+.search_form_1::before {
+    background: url("../images/el-editor-preview/search_form_1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -75,6 +83,7 @@
 
 
 /*==================== Widget Preview Icon =====================*/
+/*
 .elementor-panel .elementor-element .icon .jobly-icon::after {
     content: url("../images/el-editor-preview/jobly-icon.svg");
     background-repeat: no-repeat;
@@ -82,4 +91,4 @@
     position: absolute;
     top: 5px;
     right: 5px;
-}
+}*/

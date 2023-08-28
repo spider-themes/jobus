@@ -62,6 +62,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 		}
 
+
 		/**
 		 * Load Textdomain
 		 *
@@ -82,13 +83,10 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public function core_includes() {
 
-
 			require_once __DIR__ . '/includes/functions.php';
-
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
             require_once __DIR__ . '/includes/Admin/options/meta-job-speciations.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options.php';
@@ -103,16 +101,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 
             // Gutenburg Blocks
             //require_once __DIR__ . '/includes/Gutenburg/Blocks.php';
-
-
-			/**
-			 * Admin Settings
-			 */
-			/*if ( is_admin() ) {
-				require_once __DIR__ . '/includes/Admin/classes/class-jobly-settings.php';
-				require_once __DIR__ . '/includes/Admin/classes/class-jobly-meta-options.php';
-			}*/
-            
 		}
 
 		/**
@@ -158,7 +146,16 @@ if ( ! class_exists( 'Jobly' ) ) {
 			}
             new Jobly\Elementor\Register_Widgets();
 
+
+            // Register Elementor Preview Editor Styles
+            add_action('elementor/editor/before_enqueue_styles', [ $this, 'register_editor_styles' ]);
+
 		}
+
+        public function register_editor_styles(){
+            wp_enqueue_style('jobly-elementor-editor', JOBLY_CSS . '/elementor-editor.css' );
+        }
+
         
 		/**
 		 * Do stuff upon plugin activation

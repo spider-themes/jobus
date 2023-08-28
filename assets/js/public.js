@@ -18,17 +18,31 @@
         }
 
         // Attach click event to element with class "copy-url"
-        const copyButton = document.querySelector('.copy-url');
-        copyButton.addEventListener('click', function(event) {
-            event.preventDefault();
+        var copyButton = document.querySelectorAll('.copy-url');
+        if ( copyButton.length > 0 ) {
+            copyButton.addEventListener('click', function (event) {
+                event.preventDefault();
 
-            // Get the current page's URL
-            const currentPageURL = window.location.href;
+                // Get the current page's URL
+                const currentPageURL = window.location.href;
 
-            // Copy the URL to the clipboard
-            copyToClipboard(currentPageURL);
+                // Copy the URL to the clipboard
+                copyToClipboard(currentPageURL);
 
-        }); // end copyButton click event
+            });
+        }// end copyButton click event
+
+
+        // Nice Select for search form
+        function niceSelect() {
+            let niceSelect = $('.nice-select');
+            if(niceSelect.length > 0  ) {
+                niceSelect.niceSelect();
+            }
+        }
+
+        niceSelect();// end Nice Select
+
        
     });
 
