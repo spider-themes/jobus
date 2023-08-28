@@ -122,12 +122,82 @@ class Search_Form extends Widget_Base {
         $this->end_controls_section();//End Select Style
 
 
+
+
+
         //===================== Filter =========================//
         $this->start_controls_section(
             'sec_filter', [
                 'label' => __( 'Filter', 'jobly' ),
             ]
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	    // Retrieve the repeater field configurations from settings options
+	    $settings_prefix           = 'jobly_opt';
+	    $job_specifications_fields = jobly_get_settings_repeater_fields( $settings_prefix, 'job_specifications' );
+
+	    if ( is_array( $job_specifications_fields ) ) {
+
+		    // Initialize an empty array to hold the 'fields' configurations
+		    $this->add_control = [];
+		    foreach ( $job_specifications_fields as $index => $field ) {
+
+			    // Prepare the options array with both value and label
+			    $options = [];
+			    if (isset($field['select_topic']) && is_array($field['select_topic'])) {
+				    foreach ($field['select_topic'] as $value) {
+					    $options[$value] = $value; // You can use any key-value pair format you want
+				    }
+			    }
+
+			    // Add a 'select' field for each 'select_topic' option
+			    $this->add_control[] = [
+				    'id'       => sanitize_title( $field[ 'specification' ] ),
+				    'type'     => 'select',
+				    'title'    => $field[ 'specification' ],
+				    'options'  => $options,
+				    'multiple' => true,
+				    'chosen'   => true,
+			    ];
+
+		    }
+
+	    }
+
+		$this->add_control(
+			'job_specifications', [
+				'label' => esc_html__( 'Job Specifications', 'jobly' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $this->add_control,
+				'default' => [
+					[
+						'title' => __( 'Keyword #1', 'jobly' ),
+					],
+					[
+						'title' => __( 'Keyword #2', 'jobly' ),
+					],
+				],
+				'title_field' => '{{{ title }}}',
+				'prevent_empty' => false,
+				'condition' => [
+					'is_keyword' => 'yes',
+				],
+			]
+		);
+
 
         $this->add_control(
             'action_url', [

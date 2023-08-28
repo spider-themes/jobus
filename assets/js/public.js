@@ -43,6 +43,18 @@
 
         niceSelect();// end Nice Select
 
+        /**
+         * Search Keywords
+         */
+        $('.keywords_search_form ul li a').on('click', function (event) {
+            event.preventDefault();
+            var content = $(this).text();
+
+            console.log(content);
+
+            $('#searchInput').val(content).focus();
+            fetchResults();
+        });
        
     });
 

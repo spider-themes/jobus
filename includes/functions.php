@@ -171,6 +171,21 @@ if ( ! function_exists( 'jobly_get_the_tag_list' ) ) {
     }
 }
 
+// Get the category list of job_cat every category then separator by comma
+function jobly_get_the_category_list( $term = 'job_cat' ) {
+	$terms = get_the_terms( get_the_ID(), $term );
+	$term = is_array( $terms ) ? $terms : '';
+
+	$cat_list = '';
+
+	if ( !empty( $term ) ) {
+		foreach ( $term as $cat ) {
+			$cat_list .= '<a href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a>';
+		}
+	}
+
+	return $cat_list;
+}
 
 
 /**

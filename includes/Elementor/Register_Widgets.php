@@ -48,10 +48,12 @@ class Register_Widgets {
         // Include Widget files
         require_once( __DIR__ . '/widgets/Categories.php' );
         require_once( __DIR__ . '/widgets/Search_Form.php' );
+        require_once( __DIR__ . '/widgets/Jobs.php' );
 
         // Register Widgets Classes
         $widgets_manager->register( new widgets\Categories() );
         $widgets_manager->register( new widgets\Search_Form() );
+        $widgets_manager->register( new widgets\Jobs() );
 
     }
 

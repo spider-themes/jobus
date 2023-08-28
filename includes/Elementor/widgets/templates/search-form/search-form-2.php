@@ -9,7 +9,7 @@
     <?php
     if ( $settings['is_keyword'] == 'yes' ) {
         ?>
-        <ul class="filter-tags d-flex flex-wrap style-none mt-25">
+        <ul class="keywords_search_form filter-tags d-flex flex-wrap style-none mt-25">
             <?php include 'keywords.php' ?>
         </ul>
         <?php
