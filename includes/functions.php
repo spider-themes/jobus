@@ -171,22 +171,6 @@ if ( ! function_exists( 'jobly_get_the_tag_list' ) ) {
     }
 }
 
-// Get the category list of job_cat every category then separator by comma
-function jobly_get_the_category_list( $term = 'job_cat' ) {
-	$terms = get_the_terms( get_the_ID(), $term );
-	$term = is_array( $terms ) ? $terms : '';
-
-	$cat_list = '';
-
-	if ( !empty( $term ) ) {
-		foreach ( $term as $cat ) {
-			$cat_list .= '<a href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a>';
-		}
-	}
-
-	return $cat_list;
-}
-
 
 /**
  * Get categories array
@@ -199,7 +183,6 @@ function jobly_get_the_categories( $term = 'job_cat' ) {
     $cats      = get_terms( array(
         'taxonomy'   => $term,
         'hide_empty' => true,
-        'parent'     => 0,
     ) );
     $cat_array = [];
     foreach ( $cats as $cat ) {
@@ -207,4 +190,34 @@ function jobly_get_the_categories( $term = 'job_cat' ) {
     }
 
     return $cat_array;
+}
+
+
+/**
+ * Get title excerpt length
+ * @param $settings
+ * @param $settings_key
+ * @param int $default
+ * @return string|void
+ */
+function jobly_the_title_length($settings, $settings_key, $default = 10) {
+
+    $title_length = !empty($settings[$settings_key]) ? $settings[$settings_key] : $default;
+    $title = get_the_title() ? wp_trim_words(get_the_title(), $title_length, '') : the_title();
+    echo esc_html($title);
+}
+
+/**
+ * Get post excerpt length
+ * @param $settings
+ * @param $settings_key
+ * @param int $default
+ * @return string
+ */
+function jobly_get_the_excerpt_length($settings, $settings_key, $default = 10) {
+
+    $excerpt_length = !empty($settings[$settings_key]) ? $settings[$settings_key] : $default;
+    $excerpt = get_the_excerpt() ? wp_trim_words(get_the_excerpt(), $excerpt_length, '...') : wp_trim_words(get_the_content(), $excerpt_length, '...');
+
+    return wp_kses_post($excerpt);
 }

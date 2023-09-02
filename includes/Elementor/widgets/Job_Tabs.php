@@ -1,0 +1,261 @@
+<?php
+/**
+ * Use namespace to avoid conflict
+ */
+namespace Jobly\Elementor\widgets;
+
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Image_Size;
+use Elementor\Group_Control_Typography;
+use Elementor\Widget_Base;
+use Elementor\Controls_Manager;
+use Elementor\Repeater;
+use WP_Query;
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Class Tabs
+ * @package spider\Widgets
+ * @since 1.0.0
+ */
+class Job_Tabs extends Widget_Base {
+
+    public function get_name ()
+    {
+        return 'jobly_job_tabs';
+    }
+
+    public function get_title ()
+    {
+        return esc_html__('Jobly Job Tabs', 'jobly');
+    }
+
+    public function get_icon ()
+    {
+        return 'eicon-tabs jobly-icon';
+    }
+
+    public function get_keywords ()
+    {
+        return [ 'Jobly', 'Jobly Listing', 'Jobs', 'Posts' ];
+    }
+
+    public function get_categories () {
+        return [ 'jobly-elements' ];
+    }
+
+    public function get_script_depends () {
+        return [ 'isotope' ];
+    }
+
+
+    /**
+     * Name: register_controls()
+     * Desc: Register controls for these widgets
+     * Params: no params
+     * Return: @void
+     * Since: @1.0.0
+     * Package: @jobly
+     * Author: spider-themes
+     */
+    protected function register_controls ()
+    {
+        $this->elementor_content_control();
+        $this->elementor_style_control();
+    }
+
+
+    /**
+     * Name: elementor_content_control()
+     * Desc: Register the Content Tab output on the Elementor editor.
+     * Params: no params
+     * Return: @void
+     * Since: @1.0.0
+     * Package: @jobly
+     * Author: spider-themes
+     */
+    public function elementor_content_control () {
+
+        //============================= Filter Options ================================//
+        $this->start_controls_section(
+            'filter_sec', [
+                'label' => __('Filter', 'banca-core'),
+            ]
+        );
+
+        $this->add_control(
+            'all_label', [
+                'label' => esc_html__( 'All filter label', 'landpagy-core' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'default' => 'All Categories'
+            ]
+        );
+
+        $this->add_control(
+            'cats', [
+                'label' => esc_html__('Category', 'banca-core'),
+                'description' => esc_html__('Display job by categories', 'banca-core'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => jobly_get_the_categories(),
+                'multiple' => true,
+                'label_block' => true,
+            ]
+        );
+
+        $this->add_control(
+            'show_count', [
+                'label' => esc_html__('Show Posts Count', 'banca-core'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => 3
+            ]
+        );
+
+        $this->add_control(
+            'order', [
+                'label' => esc_html__('Order', 'banca-core'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'ASC' => 'ASC',
+                    'DESC' => 'DESC'
+                ],
+                'default' => 'ASC'
+            ]
+        );
+
+        $this->add_control(
+            'orderby', [
+                'label' => esc_html__('Order By', 'banca-core'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'none' => 'None',
+                    'ID' => 'ID',
+                    'author' => 'Author',
+                    'title' => 'Title',
+                    'name' => 'Name (by post slug)',
+                    'date' => 'Date',
+                    'rand' => 'Random',
+                ],
+                'default' => 'none'
+            ]
+        );
+
+        $this->add_control(
+            'title_length', [
+                'label' => esc_html__('Title Length', 'banca-core'),
+                'type' => Controls_Manager::NUMBER,
+            ]
+        );
+
+        $this->add_control(
+            'excerpt_length', [
+                'label' => esc_html__('Excerpt Word Length', 'banca-core'),
+                'type' => Controls_Manager::NUMBER,
+            ]
+        );
+
+        $this->add_control(
+            'exclude', [
+                'label' => esc_html__('Exclude Job', 'banca-core'),
+                'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'banca-core'),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+            ]
+        );
+
+        $this->end_controls_section(); // End Filter Options
+
+    }
+
+
+    /**
+     * Name: elementor_style_control()
+     * Desc: Register the Style Tab output on the Elementor editor.
+     * Params: no params
+     * Return: @void
+     * Since: @1.0.0
+     * Package: @jobly
+     * Author: spider-themes
+     */
+    public function elementor_style_control ()
+    {
+
+
+
+    }
+
+
+    /**
+     * Name: elementor_render()
+     * Desc: Render the widget output on the frontend.
+     * Params: no params
+     * Return: @void
+     * Since: @1.0.0
+     * Package: @jobly
+     * Author: spider-themes
+     */
+    protected function render () {
+        $settings = $this->get_settings_for_display();
+        extract($settings); //extract all settings array to variables converted to name of key
+
+        // Get the post count for the 'job' post type
+        $post_count = wp_count_posts('job');
+
+        // Get the total count
+        $total_count = $post_count->publish;
+
+        // Format the count based on post count requirements
+        if ($total_count < 10) {
+            $formatted_count = $total_count;
+        } elseif ($total_count >= 10 && $total_count <= 999) {
+            $formatted_count = floor($total_count / 10) * 10 . '+';
+        } else {
+            $formatted_count = floor($total_count / 1000) . 'K+';
+        }
+
+        $args = [
+            'post_type' => 'job',
+            'post_status' => 'publish',
+        ];
+
+        if (!empty($show_count)) {
+            $args['posts_per_page'] = $show_count;
+        }
+
+        if (!empty($order)) {
+            $args['order'] = $order;
+        }
+
+        if (!empty($orderby)) {
+            $args['orderby'] = $orderby;
+        }
+
+        if (!empty($exclude)) {
+            $args['post__not_in'] = $exclude;
+        }
+
+        if (!empty($cats)) {
+            $args['tax_query'] = [
+                [
+                    'taxonomy' => 'job_cat',
+                    'field' => 'id',
+                    'terms' => $cats
+
+                ]
+            ];
+        }
+
+        $posts = new WP_Query($args);
+
+        //================= Template Parts =================//
+        include "templates/job-tabs/job-tab-1.php";
+
+    }
+
+
+}

@@ -216,7 +216,7 @@ class Jobs extends Widget_Base {
 		extract($settings); //extract all settings array to variables converted to name of key
 
 		$args = [
-			'post_type' => 'post',
+			'post_type' => 'job',
 			'post_status' => 'publish',
 		];
 

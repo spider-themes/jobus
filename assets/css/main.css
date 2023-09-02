@@ -1,3 +1,19 @@
+/*----------------------------------------------------
+@File: Default Styles
+
+This file contains the styling for the actual template, this
+is the file you need to edit to change the look of the
+template.
+---------------------------------------------------- */
+/*====================================================
+@Template Name: Jobly
+@Default Styles
+Table of Content:
+01/ variables
+02/ common
+03/ single_content
+04/ job_listing
+=====================================================*/
 .details-post-data .wp-block-group {
   border: 1px solid #000000;
   border-radius: 20px;
@@ -21,6 +37,10 @@
 }
 .details-post-data .wp-block-group:last-child {
   margin-bottom: 0;
+}
+
+.job-list-two .job-duration {
+  display: inline-block;
 }
 
 /*# sourceMappingURL=main.css.map */

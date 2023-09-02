@@ -15,7 +15,9 @@ class Assets {
 
         // Register Styles & Scripts
         wp_register_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css' );
+
         wp_register_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
+        wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
 
 
         // Enqueue Styles & Scripts

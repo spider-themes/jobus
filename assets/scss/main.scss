@@ -1,1 +1,22 @@
-@import "frontend/single-content";
+/*----------------------------------------------------
+@File: Default Styles
+
+This file contains the styling for the actual template, this
+is the file you need to edit to change the look of the
+template.
+---------------------------------------------------- */
+/*====================================================
+@Template Name: Jobly
+@Default Styles
+Table of Content:
+01/ variables
+02/ common
+03/ single_content
+04/ job_listing
+=====================================================*/
+
+
+@import "frontend/variables";
+@import "frontend/common";
+@import "frontend/single_content";
+@import "frontend/job_listing";

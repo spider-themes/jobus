@@ -17,6 +17,7 @@ if ( class_exists( 'CSF' ) ) {
 	// Company Info Meta Options
 	CSF::createSection( $meta_prefix, array(
 		'title'  => esc_html__( 'Company Info', 'jobly' ),
+        'id' => 'company_info',
 		'fields' => array(
 
             array(
