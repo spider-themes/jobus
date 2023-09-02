@@ -39,6 +39,10 @@ Table of Content:
   margin-bottom: 0;
 }
 
+.category-section-two .card-wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
 .category-section-two:before {
   height: 100% !important;
 }

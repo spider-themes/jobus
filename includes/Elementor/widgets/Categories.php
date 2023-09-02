@@ -189,7 +189,7 @@ class Categories extends Widget_Base {
 			[
 				'name' => 'background',
 				'types' => [ 'classic', 'gradient'],
-				'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a',
+				'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a,{{WRAPPER}} .card-style-four',
 			]
 		);
         $this->add_responsive_control(
@@ -198,7 +198,7 @@ class Categories extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a,{{WRAPPER}} .card-style-four a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -206,7 +206,7 @@ class Categories extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name'     => 'category_border',
-                'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a',
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a,{{WRAPPER}} .card-style-four',
             ]
         );
 
@@ -217,7 +217,7 @@ class Categories extends Widget_Base {
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a,{{WRAPPER}} .card-style-four' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -236,6 +236,7 @@ class Categories extends Widget_Base {
 				'name' => 'Category hover background',
 				'types' => [ 'classic', 'gradient'],
 				'selector' => '{{WRAPPER}} .card-style-one .wrapper.bg:hover,{{WRAPPER}} .card-style-one .wrapper.bg.active,{{WRAPPER}} .card-style-seven a:hover',
+                
 			]
 		);
         $this->add_control(
@@ -268,7 +269,7 @@ class Categories extends Widget_Base {
                 'label' => __( 'Text Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -277,7 +278,7 @@ class Categories extends Widget_Base {
             Group_Control_Typography::get_type(), [
                 'label' => 'Typography',
                 'name' => 'category_title_typo',
-                'selector' => '{{WRAPPER}} .card-style-one .wrapper .title',  
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-four .title',  
             ]
         );
         $this->add_responsive_control(
@@ -286,7 +287,7 @@ class Categories extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -294,22 +295,22 @@ class Categories extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'category_job_title_style',
+            'category_job_total_style',
             [
                 'label' => __( 'Job Total Style', 'jobly' ),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
-                    'layout' => '1',
+                    'layout' => ['1', '3'],
                 ],
             ]
         );
     
         $this->add_control(
-            'category_job_title_color', [
+            'category_job_total_color', [
                 'label' => __( 'Text Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .card-style-one .wrapper .total-job,{{WRAPPER}} .card-style-four .total-job' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -318,7 +319,7 @@ class Categories extends Widget_Base {
             Group_Control_Typography::get_type(), [
                 'label' => 'Typography',
                 'name' => 'category_job_typo',
-                'selector' => '{{WRAPPER}} .card-style-one .wrapper .total-job',  
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper .total-job,{{WRAPPER}} .card-style-four .total-job',  
             ]
         );
     

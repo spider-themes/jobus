@@ -1,6 +1,6 @@
 <section class="category-section-two position-relative">
     <div class="container">
-        <div class="card-wrapper row mt-80 lg-mt-40">
+        <div class="card-wrapper row">
             <?php
         if ( is_array($categories) ) {
             foreach ( $categories as $index => $category ) {
@@ -32,7 +32,7 @@
                         <div class="text-lg text-white"><?php echo esc_html__('Job already posted' , 'jobly') ?></div>
                         <div class="d-flex align-items-center justify-content-end mt-50">
                             <img src="<?php echo JOBLY_IMG . '/icons/shape_22.svg' ?>"
-                                alt="<?php esc_html_e('shap', 'jobly'); ?>" class="lazy-img">
+                                alt="<?php esc_html_e('shape', 'jobly'); ?>" class="lazy-img">
                             <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
                                 <img src="<?php echo JOBLY_IMG . '/icons/icon_19.svg' ?>"
                                     alt="<?php esc_html_e('Arrow Icon', 'jobly'); ?>" class="lazy-img">
@@ -43,9 +43,7 @@
                 <!-- /.card-style-four -->
             </div>
         </div>
-        <!-- /.card-wrapper -->
-        <div class="text-center d-sm-none mt-50"><a href="job-grid-v1.html" class="btn-six border-0">All Categories <img
-                    src="images/lazy.svg" data-src="images/shape/shape_23.svg" alt="" class="lazy-img shapes"></a></div>
     </div>
-    <img src="images/lazy.svg" data-src="images/shape/shape_24.svg" alt="" class="lazy-img shapes shape_01">
+    <img src="<?php echo JOBLY_IMG . '/icons/shape_24.svg'?>" alt="<?php esc_html_e('zigzag', 'jobly'); ?>"
+        class="lazy-img shapes shape_01">
 </section>

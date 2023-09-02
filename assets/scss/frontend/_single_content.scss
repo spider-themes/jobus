@@ -26,6 +26,12 @@
 }
 
 
-.category-section-two:before{
-  height: 100%;
+.category-section-two{
+  .card-wrapper{
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  &:before{
+    height: 100% !important;
+  }
 }
