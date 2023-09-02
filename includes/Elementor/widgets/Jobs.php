@@ -196,9 +196,244 @@ class Jobs extends Widget_Base {
 	 */
 	public function elementor_style_control ()
 	{
+		$this->start_controls_section(
+            'job_general_style',
+            [
+                'label' => __( 'General Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                
+            ]
+        );
+		$this->add_responsive_control(
+			'job_item_padding', [
+				'label' => esc_html__( 'Padding', 'jobly' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .job-list-one' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'list_inner_border',
+                'selector' => '{{WRAPPER}} .job-listing-wrapper.border-wrapper',
+            ]
+        );
+		$this->add_responsive_control(
+            'job_inner_border_radius',
+            [
+                'label' => __('Border Radius', 'jobly'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .job-listing-wrapper.border-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
 
+		$this-> end_controls_section();
 
+		$this->start_controls_section(
+            'job_item_style',
+            [
+                'label' => __( 'List Item Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                
+            ]
+        );
+    
+        $this->add_control(
+            'job_title_color', [
+                'label' => __( 'Job Title Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+		$this->add_control(
+            'job_title_hover_color', [
+                'label' => __( 'Job Title Hover Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Job Title Typography',
+                'name' => 'job_title_typo',
+                'selector' => '{{WRAPPER}} .job-list-one .title',  
+            ]
+        );
+
+		$this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'list_border',
+                'selector' => '{{WRAPPER}} .job-list-one.bottom-border',
+            ]
+        );
+
+		$this-> end_controls_section();
+
+		$this->start_controls_section(
+            'job_date_style',
+            [
+                'label' => __( 'Job Meta Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                
+            ]
+        );
+    
+        $this->add_control(
+            'job_date_color', [
+                'label' => __( 'Job Date Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .job-date' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Job Date Typography',
+                'name' => 'job_date_typo',
+                'selector' => '{{WRAPPER}} .job-list-one .job-date',  
+            ]
+        );
+
+		$this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Job Category Typography',
+                'name' => 'job_category_typo',
+                'selector' => '{{WRAPPER}} .job-list-one .job-category a',  
+            ]
+        );
+		$this-> end_controls_section();
+
+		$this->start_controls_section(
+            'job_button_style',
+            [
+                'label' => __( 'Job Button Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                
+            ]
+        );
+		
+		$this->start_controls_tabs(
+            'style_tabs'
+        );
+    
+        //button Style Normal Style
+        $this->start_controls_tab(
+            'style_normal',
+            [
+                'label' => __( 'Normal', 'jobly' ),
+            ]
+        );
+
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'background',
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
+			]
+		);
+        $this->add_responsive_control(
+			'job_button_padding', [
+				'label' => esc_html__( 'Padding', 'jobly' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .job-list-one .apply-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+            'job_button_color', [
+                'label' => __( 'Button Text Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .apply-btn' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Job Button Typography',
+                'name' => 'job_date_typo',
+                'selector' => '{{WRAPPER}} .job-list-one .apply-btn',  
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'botton_border',
+                'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'button_border_radius',
+            [
+                'label' => __('Border Radius', 'jobly'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .apply-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+		//Hover Color
+		$this->start_controls_tab(
+			'style_hover_btn',
+			[
+				'label' => __( 'Hover', 'jobly' ),
+			]
+		); 
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'Button hover background',
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .job-list-one .apply-btn:hover',
+			]
+		);
+		$this->add_control(
+            'job_button_hover_color', [
+                'label' => __( 'Hover Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .apply-btn:hover' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        $this->add_control(
+            'button_borders_color', [
+                'label' => __( 'Border Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .job-list-one .apply-btn:hover' => 'border-color: {{VALUE}}',
+                ],  
+            ]
+        );
+
+        $this->end_controls_tab();
+	    $this->end_controls_tabs();
+
+        $this->end_controls_section();
 	}
 
 

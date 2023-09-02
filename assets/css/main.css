@@ -39,6 +39,10 @@ Table of Content:
   margin-bottom: 0;
 }
 
+.category-section-two:before {
+  height: 100% !important;
+}
+
 .job-list-two .job-duration {
   display: inline-block;
 }

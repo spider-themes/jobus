@@ -96,6 +96,10 @@ class Categories extends Widget_Base {
                         'title' => __( '02: Category', 'jobly' ),
                         'icon'  => 'category2',
                     ],
+                    '3' => [
+                        'title' => __( '03: Category', 'jobly' ),
+                        'icon'  => 'category3',
+                    ],
                 ],
                 'default' => '1'
             ]
@@ -335,12 +339,30 @@ class Categories extends Widget_Base {
         $settings = $this->get_settings_for_display();
         extract($settings); //extract all settings array to variables converted to name of key
 
+         // Get the post count for the 'job' post type
+         $post_count = wp_count_posts('job');
+
+         // Get the total count
+         $total_count = $post_count->publish;
+ 
+         // Format the count based on post count requirements
+         if ($total_count < 10) {
+             $formatted_count = $total_count;
+         } elseif ($total_count >= 10 && $total_count <= 999) {
+             $formatted_count = floor($total_count / 10) * 10 . '+';
+         } else {
+             $formatted_count = floor($total_count / 1000) . 'K+';
+         }
+
+
         $categories = get_terms( array(
 
             'taxonomy'   => 'job_cat',
             'hide_empty' => true,
 
         ) );
+
+       
 
 
         //================= Template Parts =================//
