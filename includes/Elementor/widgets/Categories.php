@@ -79,18 +79,22 @@ class Categories extends Widget_Base {
         //===================== Select Preset ===========================//
         $this->start_controls_section(
             'sec_layout', [
-                'label' => esc_html__( 'Preset Skins', 'listy-core' ),
+                'label' => esc_html__( 'Preset Skins', 'jobly' ),
             ]
         );
 
         $this->add_control(
             'layout', [
-                'label'   => __( 'Layout', 'listy-core' ),
-                'type'    => \Elementor\Controls_Manager::CHOOSE,
+                'label'   => __( 'Layout', 'jobly' ),
+                'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __( '01: Category', 'listy-core' ),
+                        'title' => __( '01: Category', 'jobly' ),
                         'icon'  => 'category1',
+                    ],
+                    '2' => [
+                        'title' => __( '02: Category', 'jobly' ),
+                        'icon'  => 'category2',
                     ],
                 ],
                 'default' => '1'
@@ -103,14 +107,14 @@ class Categories extends Widget_Base {
         //===================== Location Filter =========================//
         $this->start_controls_section(
             'sec_filter', [
-                'label' => __( 'Filter', 'listy-core' ),
+                'label' => __( 'Filter', 'jobly' ),
             ]
         );
 
         $this->add_control(
             'cat', [
-                'label'       => esc_html__( 'Category', 'listy-core' ),
-                'description' => esc_html__( 'Display Listing by Location', 'listy-core' ),
+                'label'       => esc_html__( 'Category', 'jobly' ),
+                'description' => esc_html__( 'Display Listing by Location', 'jobly' ),
                 'type'        => \Elementor\Controls_Manager::SELECT2,
                 'options'     => jobly_get_the_categories(),
                 'multiple'    => true,
@@ -120,7 +124,7 @@ class Categories extends Widget_Base {
 
         $this->add_control(
             'show_count', [
-                'label'   => esc_html__( 'Show Posts Count', 'banca-core' ),
+                'label'   => esc_html__( 'Show Posts Count', 'jobly' ),
                 'type'    => \Elementor\Controls_Manager::NUMBER,
                 'default' => 4
             ]
@@ -128,13 +132,13 @@ class Categories extends Widget_Base {
 
         $this->add_control(
             'column', [
-                'label'   => esc_html__( 'Column', 'listy-core' ),
+                'label'   => esc_html__( 'Column', 'jobly' ),
                 'type'    => Controls_Manager::SELECT,
                 'options' => [
-                    '6' => esc_html__( 'Two', 'listy-core' ),
-                    '4' => esc_html__( 'Three', 'listy-core' ),
-                    '3' => esc_html__( 'Four', 'listy-core' ),
-                    '2' => esc_html__( 'Six', 'listy-core' ),
+                    '6' => esc_html__( 'Two', 'jobly' ),
+                    '4' => esc_html__( 'Three', 'jobly' ),
+                    '3' => esc_html__( 'Four', 'jobly' ),
+                    '2' => esc_html__( 'Six', 'jobly' ),
                 ],
                 'default' => 2,
             ]
@@ -157,8 +161,164 @@ class Categories extends Widget_Base {
     public function elementor_style_control ()
     {
 
+        //============================ Tab Style ============================//
+		$this->start_controls_section(
+			'category_style', [
+				'label' => __( 'Category Item Style', 'jobly' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+        $this->start_controls_tabs(
+            'style_tabs'
+        );
+    
+        //button Style Normal Style
+        $this->start_controls_tab(
+            'style_normal',
+            [
+                'label' => __( 'Normal', 'jobly' ),
+            ]
+        );
 
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'background',
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a',
+			]
+		);
+        $this->add_responsive_control(
+			'category_padding', [
+				'label' => esc_html__( 'Padding', 'jobly' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'category_border',
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a',
+            ]
+        );
 
+        $this->add_responsive_control(
+            'category_border_radius',
+            [
+                'label' => __('Border Radius', 'jobly'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+		//Hover Color
+		$this->start_controls_tab(
+			'style_hover_btn',
+			[
+				'label' => __( 'Hover', 'jobly' ),
+			]
+		); 
+        $this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'Category hover background',
+				'types' => [ 'classic', 'gradient'],
+				'selector' => '{{WRAPPER}} .card-style-one .wrapper.bg:hover,{{WRAPPER}} .card-style-one .wrapper.bg.active,{{WRAPPER}} .card-style-seven a:hover',
+			]
+		);
+        $this->add_control(
+            'category_borders_color', [
+                'label' => __( 'Border Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .card-style-one .wrapper.bg:hover,{{WRAPPER}} .card-style-seven a:hover' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .card-style-one .wrapper.bg.active' => 'border-color: {{VALUE}}', 
+                ],  
+            ]
+        );
+
+        $this->end_controls_tab();
+	    $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'category_title_style',
+            [
+                'label' => __( 'Headding Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                
+            ]
+        );
+    
+        $this->add_control(
+            'category_title_color', [
+                'label' => __( 'Text Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Typography',
+                'name' => 'category_title_typo',
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper .title',  
+            ]
+        );
+        $this->add_responsive_control(
+			'category_margin', [
+				'label' => esc_html__( 'Margin', 'jobly' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+				'selectors' => [
+					'{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+    
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'category_job_title_style',
+            [
+                'label' => __( 'Job Total Style', 'jobly' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'layout' => '1',
+                ],
+            ]
+        );
+    
+        $this->add_control(
+            'category_job_title_color', [
+                'label' => __( 'Text Color', 'jobly' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',
+                ],  
+            ]
+        );
+        
+        $this->add_group_control(
+            Group_Control_Typography::get_type(), [
+                'label' => 'Typography',
+                'name' => 'category_job_typo',
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper .total-job',  
+            ]
+        );
+    
+        $this->end_controls_section();
     }
 
 
