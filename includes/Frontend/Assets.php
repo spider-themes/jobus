@@ -18,11 +18,14 @@ class Assets {
 
         wp_register_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
+        wp_register_script( 'slick', JOBLY_VEND . '/slick/slick.min.js', [ 'jquery' ], '2.2.0', true );
 
 
         // Enqueue Styles & Scripts
         wp_enqueue_style( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css' );
         wp_enqueue_style( 'bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css' );
+        wp_enqueue_style( 'slick', JOBLY_VEND . '/slick/slick.css' );
+        wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css' );
         wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css' );
 
         wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );

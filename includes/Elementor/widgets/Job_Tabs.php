@@ -49,6 +49,10 @@ class Job_Tabs extends Widget_Base {
         return [ 'jobly-elements' ];
     }
 
+    public function get_style_depends() {
+        return [ 'slick', 'slick-theme'];
+    }
+
     public function get_script_depends () {
         return [ 'isotope' ];
     }

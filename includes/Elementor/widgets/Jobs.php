@@ -49,6 +49,10 @@ class Jobs extends Widget_Base {
 		return [ 'jobly-elements' ];
 	}
 
+	public function get_script_depends () {
+        return [ 'slick' ];
+    }
+
 
 	/**
 	 * Name: register_controls()
@@ -81,18 +85,22 @@ class Jobs extends Widget_Base {
 		//===================== Select Preset ===========================//
 		$this->start_controls_section(
 			'sec_layout', [
-				'label' => esc_html__( 'Preset Skins', 'listy-core' ),
+				'label' => esc_html__( 'Preset Skins', 'jobly' ),
 			]
 		);
 
 		$this->add_control(
 			'layout', [
-				'label'   => __( 'Layout', 'listy-core' ),
+				'label'   => __( 'Layout', 'jobly' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '01: Listing', 'listy-core' ),
+						'title' => __( '01: Listing', 'jobly' ),
 						'icon'  => 'job_1',
+					],
+					'2' => [
+						'title' => __( '02: Listing Slider', 'jobly' ),
+						'icon'  => 'job_2',
 					],
 				],
 				'default' => '1'
@@ -105,14 +113,14 @@ class Jobs extends Widget_Base {
 		//============================= Filter Options ================================//
 		$this->start_controls_section(
 			'filter_sec', [
-				'label' => __('Filter', 'banca-core'),
+				'label' => __('Filter', 'jobly'),
 			]
 		);
 
 		$this->add_control(
 			'cats', [
-				'label' => esc_html__('Category', 'banca-core'),
-				'description' => esc_html__('Display blog by categories', 'banca-core'),
+				'label' => esc_html__('Category', 'jobly'),
+				'description' => esc_html__('Display blog by categories', 'jobly'),
 				'type' => Controls_Manager::SELECT2,
 				'options' => jobly_get_the_categories(),
 				'multiple' => true,
@@ -242,7 +250,6 @@ class Jobs extends Widget_Base {
             [
                 'label' => __( 'List Item Style', 'jobly' ),
                 'tab' => Controls_Manager::TAB_STYLE,
-                
             ]
         );
     

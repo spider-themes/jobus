@@ -47,6 +47,17 @@ Table of Content:
   height: 100% !important;
 }
 
+.category-section-three {
+  padding-top: 80px;
+}
+.category-section-three .slider-arrows {
+  top: 0;
+}
+
+.card-style-six .text {
+  padding: 20px;
+}
+
 .job-list-two .job-duration {
   display: inline-block;
 }

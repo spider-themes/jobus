@@ -221,3 +221,8 @@ function jobly_get_the_excerpt_length($settings, $settings_key, $default = 10) {
 
     return wp_kses_post($excerpt);
 }
+
+// post featured image support 
+if ( function_exists( 'add_post_type_support' ) ) {
+    add_post_type_support( 'job', 'thumbnail' );
+}
