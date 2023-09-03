@@ -148,6 +148,17 @@ class Categories extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'view_all_btn_url', [
+                'label'   => esc_html__( 'View All Posts', 'jobly' ),
+                'type'    => \Elementor\Controls_Manager::URL,
+                'default' => [
+                    'url' => '#',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
         $this->end_controls_section(); //End Location Filter
 
     }
@@ -162,8 +173,7 @@ class Categories extends Widget_Base {
      * Package: @jobly
      * Author: spider-themes
      */
-    public function elementor_style_control ()
-    {
+    public function elementor_style_control () {
 
         //============================ Tab Style ============================//
 		$this->start_controls_section(
@@ -172,26 +182,26 @@ class Categories extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
+
         $this->start_controls_tabs(
-            'style_tabs'
+            'cat_style_tabs'
         );
     
         //button Style Normal Style
         $this->start_controls_tab(
-            'style_normal',
-            [
+            'style_normal', [
                 'label' => __( 'Normal', 'jobly' ),
             ]
         );
 
         $this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name' => 'background',
+			Group_Control_Background::get_type(), [
+				'name' => 'cat_bg_color',
 				'types' => [ 'classic', 'gradient'],
 				'selector' => '{{WRAPPER}} .card-style-one .wrapper,{{WRAPPER}} .card-style-seven a,{{WRAPPER}} .card-style-four',
 			]
 		);
+
         $this->add_responsive_control(
 			'category_padding', [
 				'label' => esc_html__( 'Padding', 'jobly' ),
@@ -202,6 +212,7 @@ class Categories extends Widget_Base {
 				],
 			]
 		);
+
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
@@ -211,8 +222,7 @@ class Categories extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'category_border_radius',
-            [
+            'category_border_radius', [
                 'label' => __('Border Radius', 'jobly'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
@@ -253,7 +263,7 @@ class Categories extends Widget_Base {
         $this->end_controls_tab();
 	    $this->end_controls_tabs();
 
-        $this->end_controls_section();
+        $this->end_controls_section(); //End Category Style
 
         $this->start_controls_section(
             'category_title_style',
@@ -276,7 +286,6 @@ class Categories extends Widget_Base {
         
         $this->add_group_control(
             Group_Control_Typography::get_type(), [
-                'label' => 'Typography',
                 'name' => 'category_title_typo',
                 'selector' => '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-four .title',  
             ]
@@ -317,13 +326,12 @@ class Categories extends Widget_Base {
         
         $this->add_group_control(
             Group_Control_Typography::get_type(), [
-                'label' => 'Typography',
                 'name' => 'category_job_typo',
                 'selector' => '{{WRAPPER}} .card-style-one .wrapper .total-job,{{WRAPPER}} .card-style-four .total-job',  
             ]
         );
     
-        $this->end_controls_section();
+        $this->end_controls_section(); //
     }
 
 
@@ -340,31 +348,26 @@ class Categories extends Widget_Base {
         $settings = $this->get_settings_for_display();
         extract($settings); //extract all settings array to variables converted to name of key
 
-         // Get the post count for the 'job' post type
-         $post_count = wp_count_posts('job');
+        // Get the post count for the 'job' post type
+        $post_count = wp_count_posts('job');
 
-         // Get the total count
-         $total_count = $post_count->publish;
+        // Get the total count
+        $total_count = $post_count->publish;
  
-         // Format the count based on post count requirements
-         if ($total_count < 10) {
+        // Format the count based on post count requirements
+        if ($total_count < 10) {
              $formatted_count = $total_count;
-         } elseif ($total_count >= 10 && $total_count <= 999) {
+        } elseif ($total_count >= 10 && $total_count <= 999) {
              $formatted_count = floor($total_count / 10) * 10 . '+';
-         } else {
+        } else {
              $formatted_count = floor($total_count / 1000) . 'K+';
-         }
-
+        }
 
         $categories = get_terms( array(
 
             'taxonomy'   => 'job_cat',
             'hide_empty' => true,
-
-        ) );
-
-       
-
+        ));
 
         //================= Template Parts =================//
         include "templates/categories/category-{$settings['layout']}.php";

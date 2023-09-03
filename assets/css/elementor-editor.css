@@ -75,7 +75,15 @@
 }
 .category2::before {
     content: "";
-    background: url("../images/el-editor-preview/category-2.jpg");
+    background: url("../images/el-editor-preview/category_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.category3::before {
+    content: "";
+    background: url("../images/el-editor-preview/category_3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;

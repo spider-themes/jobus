@@ -168,6 +168,17 @@ class Job_Tabs extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'view_all_btn_url', [
+                'label'   => esc_html__( 'View All Posts', 'jobly' ),
+                'type'    => \Elementor\Controls_Manager::URL,
+                'default' => [
+                    'url' => '#',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
         $this->end_controls_section(); // End Filter Options
 
     }
