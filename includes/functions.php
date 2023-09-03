@@ -222,7 +222,39 @@ function jobly_get_the_excerpt_length($settings, $settings_key, $default = 10) {
     return wp_kses_post($excerpt);
 }
 
-// post featured image support 
+/** 
+ * post featured image support 
+*/
+
 if ( function_exists( 'add_post_type_support' ) ) {
     add_post_type_support( 'job', 'thumbnail' );
+}
+
+
+/**
+ * @param $settings_key
+ * @param $is_echo
+ *
+ * The button link
+ * @return void
+ */
+function jobly_the_button( $settings_key, $is_echo = true ) {
+
+    if ( $is_echo == true ) {
+        echo !empty($settings_key['url']) ? "href='{$settings_key['url']}'" : '';
+        echo $settings_key['is_external'] == true ? 'target="_blank"' : '';
+        echo $settings_key['nofollow'] == true ? 'rel="nofollow"' : '';
+
+        if ( !empty($settings_key['custom_attributes']) ) {
+            $attrs = explode(',', $settings_key['custom_attributes']);
+
+            if(is_array($attrs)){
+                foreach($attrs as $data) {
+                    $data_attrs = explode('|', $data);
+                    echo esc_attr( $data_attrs[0].'='.$data_attrs[1] );
+                }
+            }
+        }
+    }
+
 }
