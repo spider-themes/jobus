@@ -209,7 +209,6 @@ class Jobs extends Widget_Base {
             [
                 'label' => __( 'General Style', 'jobly' ),
                 'tab' => Controls_Manager::TAB_STYLE,
-                
             ]
         );
 		$this->add_responsive_control(
@@ -218,7 +217,7 @@ class Jobs extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .job-list-one,{{WRAPPER}} .card-style-six .text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -228,6 +227,9 @@ class Jobs extends Widget_Base {
             [
                 'name'     => 'list_inner_border',
                 'selector' => '{{WRAPPER}} .job-listing-wrapper.border-wrapper',
+				'condition' => [
+                    'layout' => ['1'],
+                ],
             ]
         );
 		$this->add_responsive_control(
@@ -239,11 +241,15 @@ class Jobs extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .job-listing-wrapper.border-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+				'condition' => [
+                    'layout' => ['1'],
+                ],
             ]
         );
 
-
 		$this-> end_controls_section();
+
+		/*====== List Item Style ======*/
 
 		$this->start_controls_section(
             'job_item_style',
@@ -258,7 +264,7 @@ class Jobs extends Widget_Base {
                 'label' => __( 'Job Title Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .job-list-one .title,{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -267,7 +273,7 @@ class Jobs extends Widget_Base {
                 'label' => __( 'Job Title Hover Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .job-list-one .title:hover,{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -276,7 +282,7 @@ class Jobs extends Widget_Base {
             Group_Control_Typography::get_type(), [
                 'label' => 'Job Title Typography',
                 'name' => 'job_title_typo',
-                'selector' => '{{WRAPPER}} .job-list-one .title',  
+                'selector' => '{{WRAPPER}} .job-list-one .title,{{WRAPPER}} .card-style-six .text .title',  
             ]
         );
 
@@ -285,6 +291,9 @@ class Jobs extends Widget_Base {
             [
                 'name'     => 'list_border',
                 'selector' => '{{WRAPPER}} .job-list-one.bottom-border',
+				'condition' => [
+                    'layout' => ['1'],
+                ],
             ]
         );
 
@@ -295,7 +304,9 @@ class Jobs extends Widget_Base {
             [
                 'label' => __( 'Job Meta Style', 'jobly' ),
                 'tab' => Controls_Manager::TAB_STYLE,
-                
+                'condition' => [
+                    'layout' => ['1'],
+                ],
             ]
         );
     
@@ -331,7 +342,9 @@ class Jobs extends Widget_Base {
             [
                 'label' => __( 'Job Button Style', 'jobly' ),
                 'tab' => Controls_Manager::TAB_STYLE,
-                
+                'condition' => [
+                    'layout' => ['1'],
+                ],
             ]
         );
 		

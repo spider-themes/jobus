@@ -104,6 +104,12 @@
     background-size: cover;
     background-position: top;
 }
+.job_2::before {
+    background: url("../images/el-editor-preview/job_2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
 
 
 /*==================== Widget Preview Icon =====================*/

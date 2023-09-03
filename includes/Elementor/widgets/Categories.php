@@ -175,7 +175,7 @@ class Categories extends Widget_Base {
      */
     public function elementor_style_control () {
 
-        //============================ Tab Style ============================//
+        //============================ Category Item Style ============================//
 		$this->start_controls_section(
 			'category_style', [
 				'label' => __( 'Category Item Style', 'jobly' ),
@@ -233,6 +233,7 @@ class Categories extends Widget_Base {
         );
 
         $this->end_controls_tab();
+        
 		//Hover Color
 		$this->start_controls_tab(
 			'style_hover_btn',

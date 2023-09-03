@@ -11,7 +11,6 @@
                         <?php jobly_the_title_length($settings, 'title_length' ) ?></div>
                 </a>
             </div>
-            <!-- /.card-style-six -->
         </div>
         <?php endwhile; wp_reset_postdata();?>
     </div>

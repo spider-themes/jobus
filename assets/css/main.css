@@ -51,7 +51,7 @@ Table of Content:
   padding-top: 80px;
 }
 .category-section-three .slider-arrows {
-  top: 0;
+  top: 0 !important;
 }
 
 .card-style-six .text {
