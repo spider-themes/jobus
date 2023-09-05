@@ -111,15 +111,6 @@ class Search_Form extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'action_url', [
-                'label'   => esc_html__( 'Action URL', 'banca-core' ),
-                'type'    => \Elementor\Controls_Manager::TEXTAREA,
-                'placeholder' => 'www.example.com',
-                'default' => esc_url(home_url('/')),
-            ]
-        );
-
         $this->end_controls_section(); //End Filter
 
         //===================== Search Keywords =========================//
