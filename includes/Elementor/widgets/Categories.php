@@ -285,7 +285,7 @@ class Categories extends Widget_Base {
                 'label' => __( 'Text Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title,{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -293,7 +293,7 @@ class Categories extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(), [
                 'name' => 'category_title_typo',
-                'selector' => '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-four .title',  
+                'selector' => '{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-four .title,{{WRAPPER}} .card-style-six .text .title',  
             ]
         );
         $this->add_responsive_control(
@@ -302,7 +302,7 @@ class Categories extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors' => [
-					'{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .card-style-one .wrapper .title,{{WRAPPER}} .card-style-seven a .title,{{WRAPPER}} .card-style-four .title,{{WRAPPER}} .card-style-six .text .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);

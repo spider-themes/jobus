@@ -260,7 +260,7 @@ class Jobs extends Widget_Base {
                 'label' => __( 'Job Title Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .job-list-one .title,{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -269,7 +269,7 @@ class Jobs extends Widget_Base {
                 'label' => __( 'Job Title Hover Color', 'jobly' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .job-list-one .title:hover,{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
                 ],  
             ]
         );
@@ -278,7 +278,7 @@ class Jobs extends Widget_Base {
             Group_Control_Typography::get_type(), [
                 'label' => 'Job Title Typography',
                 'name' => 'job_title_typo',
-                'selector' => '{{WRAPPER}} .job-list-one .title,{{WRAPPER}} .card-style-six .text .title',  
+                'selector' => '{{WRAPPER}} .job-list-one .title',  
             ]
         );
 
