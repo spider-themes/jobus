@@ -21,93 +21,10 @@ if( class_exists( 'CSF' ) ) {
 	) );
 
 
-	// Job Specifications
-	CSF::createSection( $settings_prefix, array(
-		'title' => esc_html__( 'Job Specifications', 'jobly' ),
-		'fields' => array(
-
-			array(
-				'id'        => 'job_specifications',
-				'type'      => 'repeater',
-				'fields'    => array(
-
-					array(
-						'id'      => 'specification',
-						'type'    => 'text',
-						'title'   => esc_html__( 'Specifications', 'jobly' ),
-						'default' => ''
-					),
-
-					array(
-						'id'      => sanitize_title('select_topic'),
-						'type'    => 'select',
-						'multiple'    => true,
-						'chosen'      => true,
-						'options'	 =>  jobly_job_topics_text(),
-						'placeholder' => 'Select an/multiple Options',
-						'title'   => esc_html__( 'Select Topics', 'jobly' ),
-						'default' => ''
-					),
-
-					array(
-						'id'      => 'icon',
-						'type'    => 'icon',
-						'title'   => esc_html__( 'Icon (Optional)', 'jobly' ),
-						'default' => ''
-					),
-
-				),
-				'button_title' => esc_html__( 'Add New Spec', 'jobly' ),
-			),
-
-
-			// Add topic for job specification
-			array(
-				'id'        => 'job_topics',
-				'type'      => 'repeater',
-				'title' => esc_html__( 'Topics', 'jobly' ),
-				'subtitle'    => esc_html__( 'Add your topic template for select topic in job Specifications section', 'jobly' ),
-				'fields'    => array(
-
-					array(
-						'id'      => 'text',
-						'type'    => 'text',
-						'title'   => esc_html__( 'Topic Text', 'jobly' ),
-					),
-
-				),
-				'button_title' => esc_html__( 'Add Topic', 'jobly' ),
-			),
-
-
-
-		)
-	) );
-
-
-    // Job Single Template
-    CSF::createSection( $settings_prefix, array(
-        'title' => esc_html__( 'Job Single Template', 'jobly' ),
-        'fields' => array(
-
-            array(
-                'id'        => 'job_single_layout',
-                'type'      => 'image_select',
-                'title'     => 'Image Select',
-                'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/single-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/single-layout-2.png',
-                ),
-                'default'   => '1'
-            ),
-
-        )
-    ) );
-
-
-    // Title Bar
+    // Title Bar Settings
     CSF::createSection( $settings_prefix, array(
         'title'  => esc_html__( 'Title Bar', 'jobly' ),
+        'id' => 'jobly_title_bar',
         'fields' => array(
             array(
                 'id'        => 'shape1',
@@ -130,9 +47,132 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
+    // Job Archive Page Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_job_archive', // Set a unique slug-like ID
+        'title' => esc_html__( 'Archive Page', 'jobly' ),
+    ) );
+
+    // Job Single Template
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_job_archive',
+        'title' => esc_html__( 'Select Template', 'jobly' ),
+        'id' => 'jobly_job_archive_layout',
+        'fields' => array(
+
+            array(
+                'id'        => 'job_archive_layout',
+                'type'      => 'image_select',
+                'title'     => 'Image Select',
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/archive-layout-1.png',
+                ),
+                'default'   => '1'
+            ),
+
+        )
+    ) );
+
+
+    // Job Single Post Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_job_single', // Set a unique slug-like ID
+        'title' => esc_html__( 'Single Post', 'jobly' ),
+    ) );
+
+
+    // Job Single Template
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_job_single',
+        'title' => esc_html__( 'Single Template', 'jobly' ),
+        'id' => 'jobly_job_single_layout',
+        'fields' => array(
+
+            array(
+                'id'        => 'job_single_layout',
+                'type'      => 'image_select',
+                'title'     => 'Image Select',
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/single-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/single-layout-2.png',
+                ),
+                'default'   => '1'
+            ),
+
+        )
+    ) );
+
+
+    // Job Specifications
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_job_single',
+        'title' => esc_html__( 'Job Specifications', 'jobly' ),
+        'id' => 'jobly_job_specifications',
+        'fields' => array(
+
+            array(
+                'id'        => 'job_specifications',
+                'type'      => 'repeater',
+                'fields'    => array(
+
+                    array(
+                        'id'      => 'specification',
+                        'type'    => 'text',
+                        'title'   => esc_html__( 'Specifications', 'jobly' ),
+                        'default' => ''
+                    ),
+
+                    array(
+                        'id'      => sanitize_title('select_topic'),
+                        'type'    => 'select',
+                        'multiple'    => true,
+                        'chosen'      => true,
+                        'options'	 =>  jobly_job_topics_text(),
+                        'placeholder' => 'Select an/multiple Options',
+                        'title'   => esc_html__( 'Select Topics', 'jobly' ),
+                        'default' => ''
+                    ),
+
+                    array(
+                        'id'      => 'icon',
+                        'type'    => 'icon',
+                        'title'   => esc_html__( 'Icon (Optional)', 'jobly' ),
+                        'default' => ''
+                    ),
+
+                ),
+                'button_title' => esc_html__( 'Add New Spec', 'jobly' ),
+            ),
+
+
+            // Add topic for job specification
+            array(
+                'id'        => 'job_topics',
+                'type'      => 'repeater',
+                'title' => esc_html__( 'Topics', 'jobly' ),
+                'subtitle'    => esc_html__( 'Add your topic template for select topic in job Specifications section', 'jobly' ),
+                'fields'    => array(
+
+                    array(
+                        'id'      => 'text',
+                        'type'    => 'text',
+                        'title'   => esc_html__( 'Topic Text', 'jobly' ),
+                    ),
+
+                ),
+                'button_title' => esc_html__( 'Add Topic', 'jobly' ),
+            ),
+
+
+
+        )
+    ) );
+
+
 	// Backup Options
 	CSF::createSection( $settings_prefix, array(
 		'title'  => esc_html__( 'Backup', 'jobly' ),
+        'id'     => 'jobly_backup',
 		'fields' => array(
 			array(
 				'id'        => 'jobly_export_import',

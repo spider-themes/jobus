@@ -6,7 +6,7 @@ $shape1 = jobly_opt('shape1' );
 $shape2 = jobly_opt('shape2' );
 ?>
 
-<div class="inner-banner-one position-relative">
+<div class="inner-banner-one position-relative dfsdfsdfsd">
 	<div class="container">
 		<div class="position-relative">
 			<div class="row">

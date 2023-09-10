@@ -81,39 +81,6 @@ if ( !function_exists( 'jobly_get_template_part') ) {
 
 
 /**
- * @param $max_num_pages
- * @param $pagination_class
- *
- * @return void
- */
-if ( !function_exists( 'jobly_pagination') ) {
-    function jobly_pagination ($max_num_pages, $pagination_class = '') {
-
-        $current_page = max(1, get_query_var('paged'));
-        $pagination = '<ul class="' . $pagination_class . '">';
-
-        if ($current_page > 1) {
-            $pagination .= '<li><a href="' . esc_url(get_pagenum_link($current_page - 1)) . '">' . __('Previous Page', 'jobly') . '</a></li>';
-        }
-
-        for ( $i = 1; $i <= $max_num_pages; $i++ ) {
-            $active_class = ($current_page == $i) ? 'active' : '';
-            $pagination .= '<li class="' . $active_class . '"><a href="' . esc_url(get_pagenum_link($i)) . '">' . $i . '</a></li>';
-        }
-
-        if ($current_page < $max_num_pages) {
-            $pagination .= '<li class="ms-2"><a href="' . esc_url(get_pagenum_link($max_num_pages)) . '" class="d-flex align-items-center">' . esc_html__('Next Page', 'jobly') . '</a></li>';
-        }
-
-        $pagination .= '</ul>';
-
-        echo $pagination;
-
-    }
-}
-
-
-/**
  * @param $term
  * @get the first taxonomy
  * @return string
@@ -258,3 +225,43 @@ function jobly_the_button( $settings_key, $is_echo = true ) {
     }
 
 }
+
+
+/**
+ * @return string
+ * Job post count
+ */
+function jobly_job_post_count() {
+    $count = wp_count_posts('job');
+    return number_format_i18n($count->publish);
+}
+
+
+function jobly_job_post_count_result () {
+
+    // Check if posts_per_page is set in the $args array
+    if (isset($args['posts_per_page'])) {
+        $per_page = intval($args['posts_per_page']);
+    } else {
+        $per_page = 10;
+    }
+
+    $current_page = max(1, get_query_var('paged')); // Current page number
+    $total_jobs = wp_count_posts('job')->publish; // Total number of job posts
+
+    // Calculate the first and last result numbers
+    $first_result = ($per_page * $current_page) - $per_page + 1;
+    $last_result = min(($per_page * $current_page), $total_jobs);
+
+    // Display the post counter
+    $results = sprintf(
+        esc_html__('Showing %1$d-%2$d of %3$d results', 'jobly'),
+        $first_result,
+        $last_result,
+        $total_jobs
+    );
+
+    return $results;
+
+}
+
