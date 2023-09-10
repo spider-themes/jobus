@@ -98,10 +98,6 @@ class Jobs extends Widget_Base {
 						'title' => __( '01: Listing', 'jobly' ),
 						'icon'  => 'job_1',
 					],
-					'2' => [
-						'title' => __( '02: Listing Slider', 'jobly' ),
-						'icon'  => 'job_2',
-					],
 				],
 				'default' => '1'
 			]

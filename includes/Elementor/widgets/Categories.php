@@ -10,6 +10,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
+use WP_Query;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -99,6 +100,10 @@ class Categories extends Widget_Base {
                     '3' => [
                         'title' => __( '03: Category', 'jobly' ),
                         'icon'  => 'category3',
+                    ],
+                    '4' => [
+                        'title' => __( '04: Category', 'jobly' ),
+                        'icon'  => 'category4',
                     ],
                 ],
                 'default' => '1'
@@ -365,10 +370,10 @@ class Categories extends Widget_Base {
         }
 
         $categories = get_terms( array(
-
             'taxonomy'   => 'job_cat',
             'hide_empty' => true,
         ));
+
 
         //================= Template Parts =================//
         include "templates/categories/category-{$settings['layout']}.php";

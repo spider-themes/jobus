@@ -88,6 +88,12 @@
     background-size: cover;
     background-position: top;
 }
+.category4::before {
+    background: url("../images/el-editor-preview/job_2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
 
 /** === Search From === **/
 .search_form_1::before {
@@ -104,12 +110,7 @@
     background-size: cover;
     background-position: top;
 }
-.job_2::before {
-    background: url("../images/el-editor-preview/job_2.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-}
+
 
 
 /*==================== Widget Preview Icon =====================*/

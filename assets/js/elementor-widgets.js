@@ -7,7 +7,7 @@
       var E_FRONT = elementorFrontend;
       var widgetHandlersMap = {
         "jobly_job_tabs.default": jobly.jobTabs,
-        "jobly_job_listing.default": jobly.joblistSlider,
+        "jobly_job_categories.default": jobly.joblistSlider,
       };
 
       $.each(widgetHandlersMap, function (widgetName, callback) {
