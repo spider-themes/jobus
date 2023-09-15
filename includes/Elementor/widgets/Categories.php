@@ -368,10 +368,12 @@ class Categories extends Widget_Base {
         } else {
              $formatted_count = floor($total_count / 1000) . 'K+';
         }
+        $cat_ids = isset($settings['cat']) ? $settings['cat'] : array();
 
         $categories = get_terms( array(
             'taxonomy'   => 'job_cat',
             'hide_empty' => true,
+            'include'   => $cat_ids,
         ));
 
 
