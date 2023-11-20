@@ -1,3 +1,14 @@
-
+/* META [ JOB SPECIFICATIONS ] */
+.job_specifications .csf-fieldset {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.job_specifications .csf-fieldset .csf-after-text {
+  margin-left: -30px;
+}
+.job_specifications .csf-fieldset .csf-after-text i {
+  font-size: 20px;
+}
 
 /*# sourceMappingURL=admin.css.map */

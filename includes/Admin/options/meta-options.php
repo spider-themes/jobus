@@ -1,24 +1,23 @@
 <?php
 if ( class_exists( 'CSF' ) ) {
 
-	// Set a unique slug-like ID for meta options
-	$meta_prefix = 'jobly_meta';
+    // Set a unique slug-like ID for meta options
+    $meta_prefix = 'jobly_meta_options';
 
-	// Create a metabox
-	CSF::createMetabox( $meta_prefix, array(
+    CSF::createMetabox( $meta_prefix, array(
 		'title'        => esc_html__( 'Job Options', 'jobly' ),
 		'post_type'    => 'job',
 		'theme'        => 'dark',
 		'output_css'   => true,
 		'show_restore' => true,
 	) );
-
-
-	// Company Info Meta Options
+    
+    // Company Info Meta Options
 	CSF::createSection( $meta_prefix, array(
-		'title'  => esc_html__( 'Company Info', 'jobly' ),
-        'id' => 'company_info',
-		'fields' => array(
+		'title'     => esc_html__( 'General', 'jobly' ),
+        'id'        => 'jobly_meta_general',
+        'icon'      => 'fas fa-home',
+		'fields'    => array(
 
             array(
                 'id'    => 'company_logo',
@@ -37,10 +36,48 @@ if ( class_exists( 'CSF' ) ) {
                 'id'    => 'company_website',
                 'type'  => 'link',
                 'title' => esc_html__( 'Website URL', 'jobly' ),
-            ),
-
+            )
+            
 		)
 	) );
 
-}
+    // Retrieve the repeater field configurations from settings options    
+    $specifications     = jobly_opt( 'job_specifications' );
 
+    if ( is_array( $specifications ) ) {
+
+        foreach ( $specifications as $field ) {
+        
+            $meta_value     = $field['meta_values'] ?? '';  
+            $meta_icon      = ! empty ( $field['meta_icon'] ) ? '<i class="'.$field['meta_icon'].'"></i>' : '';  
+
+            $meta_values    = explode(',', $meta_value);
+            $opt_values     = [];
+
+            foreach ($meta_values as $value) {
+                // remove space using -
+                $opt_val = str_replace(' ', '-', $value);
+                $opt_values[$opt_val] = $value;
+            }
+
+            if ( ! empty ( $field['meta_key'] ) ) {
+                $fields[] = [
+                    'id'       => $field['meta_key'] ?? '',
+                    'type'     => 'select',
+                    'title'    => $field['meta_name'] ?? '',
+                    'options'  => $opt_values,
+                    'multiple' => true,
+                    'chosen'   => true,
+                    'after'    => $meta_icon,
+                    'class'    => 'job_specifications'
+                ];
+            }
+        }
+
+        CSF::createSection( $meta_prefix, array(
+            'title'  => esc_html__( 'Specifications', 'jobly' ),
+            'fields' => $fields,
+            'icon'   => 'fas fa-cogs',
+        ) );
+    }
+}

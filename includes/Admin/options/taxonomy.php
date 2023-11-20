@@ -27,10 +27,8 @@ if ( class_exists( 'CSF' ) ) {
                 'id'      => 'cat_img',
                 'type'    => 'media',
                 'title'   => esc_html__('Image', 'jobly'),
-            ),
+            )
         )
     ) );
 
 }
-
-

@@ -62,7 +62,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 		}
 
-
 		/**
 		 * Load Textdomain
 		 *
@@ -82,24 +81,19 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * @access public
 		 */
 		public function core_includes() {
-
 			require_once __DIR__ . '/includes/functions.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-job-speciations.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options.php';			
 			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-
-
 		}
 
 		/**
@@ -194,8 +188,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 			return $this->plugin_path() . '/templates/';
 
 		}
-
-        
+		
 	}
 }
 

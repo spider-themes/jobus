@@ -1,0 +1,15 @@
+/* META [ JOB SPECIFICATIONS ] */
+.job_specifications {
+    .csf-fieldset {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
+
+        .csf-after-text {
+            margin-left: -30px;
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+}

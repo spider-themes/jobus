@@ -109,62 +109,46 @@ if( class_exists( 'CSF' ) ) {
         'title' => esc_html__( 'Job Specifications', 'jobly' ),
         'id' => 'jobly_job_specifications',
         'fields' => array(
-
+            
             array(
                 'id'        => 'job_specifications',
-                'type'      => 'repeater',
+                'type'      => 'group',
+                'title'     => 'Specifications',
                 'fields'    => array(
-
+                    
                     array(
-                        'id'      => 'specification',
+                        'id'      => 'meta_name',
                         'type'    => 'text',
-                        'title'   => esc_html__( 'Specifications', 'jobly' ),
-                        'default' => ''
+                        'title'   => esc_html__( 'Name', 'jobly' )
                     ),
 
                     array(
-                        'id'      => sanitize_title('select_topic'),
-                        'type'    => 'select',
-                        'multiple'    => true,
-                        'chosen'      => true,
-                        'options'	 =>  jobly_job_topics_text(),
-                        'placeholder' => 'Select an/multiple Options',
-                        'title'   => esc_html__( 'Select Topics', 'jobly' ),
-                        'default' => ''
+                        'id'      => 'meta_key',
+                        'type'    => 'text',
+                        'title'   => esc_html__( 'Key', 'jobly' ),
+                        'after'   => esc_html__( 'Insert a unique key', 'jobly' ),
+                        'attributes' => [
+                            'style'     => 'float:left;margin-right:10px;'
+                        ]                        
+                    ),
+                    
+                    array(
+                        'id'            => 'meta_values',
+                        'type'          => 'textarea',
+                        'title'         => esc_html__( 'Options', 'jobly' ), 
+                        'placeholder'   => esc_html__( 'Use comma for multiple options', 'jobly' ), 
+                        'attributes'    => array(
+                            'style'     => 'min-height:50px;max-height:60px'
+                        )
                     ),
 
                     array(
-                        'id'      => 'icon',
+                        'id'      => 'meta_icon',
                         'type'    => 'icon',
-                        'title'   => esc_html__( 'Icon (Optional)', 'jobly' ),
-                        'default' => ''
-                    ),
-
-                ),
-                'button_title' => esc_html__( 'Add New Spec', 'jobly' ),
-            ),
-
-
-            // Add topic for job specification
-            array(
-                'id'        => 'job_topics',
-                'type'      => 'repeater',
-                'title' => esc_html__( 'Topics', 'jobly' ),
-                'subtitle'    => esc_html__( 'Add your topic template for select topic in job Specifications section', 'jobly' ),
-                'fields'    => array(
-
-                    array(
-                        'id'      => 'text',
-                        'type'    => 'text',
-                        'title'   => esc_html__( 'Topic Text', 'jobly' ),
-                    ),
-
-                ),
-                'button_title' => esc_html__( 'Add Topic', 'jobly' ),
-            ),
-
-
-
+                        'title'   => esc_html__( 'Icon (Optional)', 'jobly' )
+                    )
+                )
+            )
         )
     ) );
 
@@ -181,6 +165,5 @@ if( class_exists( 'CSF' ) ) {
 			),
 		)
 	) );
-
 
 }

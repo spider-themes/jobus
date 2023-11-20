@@ -1,8 +1,17 @@
 <?php
-// A Custom function for get an option
+// A Custom function for [ SETTINGS ]
 if ( ! function_exists( 'jobly_opt' ) ) {
 	function jobly_opt( $option = '', $default = null ) {
 		$options = get_option( 'jobly_opt' ); // Attention: Set your unique id of the framework
+
+        return ( isset( $options[$option] ) ) ? $options[$option] : $default;
+	}
+}
+
+// Custom function for [ META ]
+if ( ! function_exists( 'jobly_meta' ) ) {
+	function jobly_meta( $option = '', $default = null ) {
+		$options = get_option( 'jobly_meta_options' ); // Attention: Set your unique id of the framework
 
         return ( isset( $options[$option] ) ) ? $options[$option] : $default;
 	}
@@ -28,26 +37,6 @@ if ( ! function_exists( 'jobly_job_topics_text' ) ) {
 
 		return $job_options_text;
 
-	}
-}
-
-
-/**
- * Custom function to get repeater field configurations from settings options.
- *
- * @param string $settings_prefix The prefix used for the settings options.
- * @param string $repeater_id The ID of the repeater field in the settings options.
- * @return array|false Array of field configurations if available, or false if not found.
- */
-if ( ! function_exists( 'jobly_get_settings_repeater_fields' ) ) {
-	function jobly_get_settings_repeater_fields($settings_prefix, $repeater_id) {
-		$settings_options = get_option($settings_prefix);
-
-		if (isset($settings_options[$repeater_id]) && is_array($settings_options[$repeater_id])) {
-			return $settings_options[$repeater_id];
-		}
-
-		return false;
 	}
 }
 
@@ -264,4 +253,3 @@ function jobly_job_post_count_result () {
     return $results;
 
 }
-
