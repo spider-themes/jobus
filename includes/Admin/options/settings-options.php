@@ -146,11 +146,8 @@ if( class_exists( 'CSF' ) ) {
                         'fields' => array(
                             array(
                                 'id'            => 'meta_values',
-                                'type'          => 'textarea',
+                                'type'          => 'text',
                                 'title'         => null,
-                                'attributes'    => array(
-                                    'style'     => 'min-height:30px;max-height:60px'
-                                )
                             )
                         )
                     ),

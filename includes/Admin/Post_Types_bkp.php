@@ -12,9 +12,8 @@ class Post_Types {
 
 	public function __construct() {
 
-		// Register the posttype
-		add_action('init', [$this, 'register_post_types_job']);
-        add_action('init', [$this, 'register_post_types_company']);
+		// Register the post type
+		add_action('init', [$this, 'register_post_types']);
 
 	}
 
@@ -27,11 +26,12 @@ class Post_Types {
 
 
 	// Register the post type.
-	public function register_post_types_job() {
+	public function register_post_types() {
 
-		if (post_type_exists('job')) {
+		/*if (post_type_exists('job')) {
 			return;
-		}
+		}*/
+
 
 		$labels = array(
 			'name'              => esc_html__( 'Jobs', 'jobly' ),
@@ -113,38 +113,59 @@ class Post_Types {
 
 
 	}
+}
 
 
-    // Register the posttype Company.
-    public function register_post_types_company() {
+class Company_Post_Type {
 
-        if (post_type_exists('company')) {
-            return;
+    private static $instance = null;
+
+    public function __construct() {
+
+        // Register the post type
+        add_action('init', [$this, 'register_post_types']);
+
+    }
+
+    public static function init() {
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
         }
+        return self::$instance;
+    }
+
+
+    // Register the post type.
+    public function register_post_types() {
+
+        /*if (post_type_exists('job')) {
+            return;
+        }*/
+
 
         $labels = array(
-            'name'              => esc_html__( 'Companies', 'jobly' ),
-            'singular_name'     => esc_html__( 'Company', 'jobly' ),
+            'name'              => esc_html__( 'Company', 'jobly' ),
+            'singular_name'     => esc_html__( 'Job', 'jobly' ),
             'add_new'           => esc_html__( 'Add New', 'jobly' ),
-            'add_new_item'      => esc_html__( 'Add New Company', 'jobly' ),
-            'edit_item'         => esc_html__( 'Edit Company', 'jobly' ),
-            'new_item'          => esc_html__( 'New Company', 'jobly' ),
-            'new_item_name'     => esc_html__( 'New Company Name', 'jobly' ),
-            'all_items'         => esc_html__( 'All Companies', 'jobly' ),
-            'view_item'         => esc_html__( 'View Company', 'jobly' ),
+            'add_new_item'      => esc_html__( 'Add New Job', 'jobly' ),
+            'edit_item'         => esc_html__( 'Edit Job', 'jobly' ),
+            'new_item'          => esc_html__( 'New Job', 'jobly' ),
+            'new_item_name'     => esc_html__( 'New Job Name', 'jobly' ),
+            'all_items'         => esc_html__( 'All Jobs', 'jobly' ),
+            'view_item'         => esc_html__( 'View Job', 'jobly' ),
             'view_items'        => esc_html__( 'Views', 'jobly' ),
-            'search_items'      => esc_html__( 'Search Companies', 'jobly' ),
-            'not_found'         => esc_html__( 'No companies found', 'jobly' ),
-            'not_found_in_trash'     => esc_html__( 'No companies found in Trash', 'jobly' ),
-            'parent_item'       => esc_html__( 'Parent Company', 'jobly' ),
-            'parent_item_colon' => esc_html__( 'Parent Company:', 'jobly' ),
-            'update_item'       => esc_html__( 'Update Company', 'jobly' ),
-            'menu_name'         => esc_html__( 'Companies', 'jobly' ),
-            'item_published'           => __( 'Company published.', 'jobly' ),
-            'item_published_privately' => __( 'Company published privately.', 'jobly' ),
-            'item_reverted_to_draft'   => __( 'Company reverted to draft.', 'jobly' ),
-            'item_scheduled'           => __( 'Company scheduled.', 'jobly' ),
-            'item_updated'             => __( 'Company updated.', 'jobly' ),
+            'search_items'      => esc_html__( 'Search Jobs', 'jobly' ),
+            'not_found'         => esc_html__( 'No jobs found', 'jobly' ),
+            'not_found_in_trash'     => esc_html__( 'No jobs found in Trash', 'jobly' ),
+            'parent_item'       => esc_html__( 'Parent Job', 'jobly' ),
+            'parent_item_colon' => esc_html__( 'Parent Job:', 'jobly' ),
+            'update_item'       => esc_html__( 'Update Job', 'jobly' ),
+            'menu_name'         => esc_html__( 'Job Listings', 'jobly' ),
+            'item_published'           => __( 'Job listing published.', 'jobly' ),
+            'item_published_privately' => __( 'Job listing published privately.', 'jobly' ),
+            'item_reverted_to_draft'   => __( 'Job listing reverted to draft.', 'jobly' ),
+            'item_scheduled'           => __( 'Job listing scheduled.', 'jobly' ),
+            'item_updated'             => __( 'Job listing updated.', 'jobly' ),
         );
 
         $supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
@@ -166,15 +187,16 @@ class Post_Types {
             'menu_position'         => 8,
             'supports'              => $supports,
             'yarpp_support'         => true,
-            'menu_icon'             => 'dashicons-building',
+            'menu_icon'             => 'dashicons-money',
             'show_admin_column'     => true,
 
         );
 
-        register_post_type('company', $args); // Register the post type `company`
+        register_post_type('job', $args); // Register the post type `job`
+
 
         // Register post taxonomies Category
-        register_taxonomy( 'company_cat', 'company', array(
+        register_taxonomy( 'job_cat', 'job', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,
@@ -187,7 +209,7 @@ class Post_Types {
         ));
 
         // Register post taxonomies Tags
-        register_taxonomy( 'company_tag', 'company', array(
+        register_taxonomy( 'job_tag', 'job', array(
             'public'                => true,
             'hierarchical'          => false,
             'show_ui'               => true,
@@ -198,6 +220,7 @@ class Post_Types {
                 'name'  => esc_html__( 'Tags', 'jobly'),
             )
         ) );
+
 
     }
 }

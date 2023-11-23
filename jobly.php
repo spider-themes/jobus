@@ -136,7 +136,7 @@ if ( ! class_exists( 'Jobly' ) ) {
                 new Jobly\Frontend\Assets();
 			}
             new Jobly\Elementor\Register_Widgets();
-			new Jobly\Admin\Post_Types();
+            new Jobly\Admin\Post_Types();
 
 		}
 

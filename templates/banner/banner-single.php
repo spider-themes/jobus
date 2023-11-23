@@ -1,5 +1,5 @@
 <?php
-$meta = get_post_meta( get_the_ID(), 'jobly_meta', true );
+$meta = get_post_meta( get_the_ID(), 'jobly_meta_options', true );
 $company_name  = !empty($meta['company_name']) ? $meta['company_name'] : '';
 $company_website = !empty($meta['company_website']) ? $meta['company_website'] : '';
 $shape1 = jobly_opt('shape1' );

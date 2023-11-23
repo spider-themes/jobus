@@ -12,8 +12,13 @@ class Assets {
 	}
 	
 	public function jobly_enqueue_scripts()	{
-		wp_enqueue_style('jobly-admin-css', JOBLY_CSS . '/admin.css', [], JOBLY_VERSION);
-		wp_enqueue_script('jobly-admin-js', JOBLY_JS . '/admin.js', ['jquery'], JOBLY_VERSION, true);
+
+        // Enqueue Styles
+        wp_enqueue_style('jobly-admin', JOBLY_CSS . '/admin.css', [], JOBLY_VERSION);
+
+
+        // Enqueue Scripts
+        wp_enqueue_script('jobly-admin', JOBLY_JS . '/admin.js', ['jquery'], JOBLY_VERSION, true);
 	}
 
 }

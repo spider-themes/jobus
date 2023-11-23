@@ -25,7 +25,7 @@
         <?php
         while ( $posts->have_posts() ) : $posts->the_post();
             // Job Meta
-            $meta = get_post_meta(get_the_ID(), 'jobly_meta', true);
+            $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
             $company_logo = !empty($meta[ 'company_logo' ]) ? $meta[ 'company_logo' ] : '';
 
             // Job Specification Meta

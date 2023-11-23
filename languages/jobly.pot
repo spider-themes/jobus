@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-07-25 16:11+0600\n"
+"POT-Creation-Date: 2023-11-23 13:16+0600\n"
 "PO-Revision-Date: 2022-04-05 15:26+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,13 +11,595 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: esc_html__;esc_attr__;esc_html_e;esc_attr_e;_e;__;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: includes/functions.php:6
-msgid "Translation ready"
+#: includes/Admin/Post_Types.php:37
+msgid "Jobs"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:38
+msgid "Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:39
+msgid "Add New"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:40
+msgid "Add New Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:41
+msgid "Edit Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:42
+msgid "New Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:43
+msgid "New Job Name"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:44
+msgid "All Jobs"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:45
+msgid "View Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:46
+msgid "Views"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:47
+msgid "Search Jobs"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:48
+msgid "No jobs found"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:49
+msgid "No jobs found in Trash"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:50
+msgid "Parent Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:51
+msgid "Parent Job:"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:52
+msgid "Update Job"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:53
+msgid "Job Listings"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:54
+msgid "Job listing published."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:55
+msgid "Job listing published privately."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:56
+msgid "Job listing reverted to draft."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:57
+msgid "Job listing scheduled."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:58
+msgid "Job listing updated."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:95
+msgid "Categories"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:106
+msgid "Tags"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:8
+msgid "Job Options"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:17
+#: includes/Admin/options/settings-options.php:27
+msgid "General"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:25
+msgid "Logo"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:31
+#: includes/Admin/options/settings-options.php:122
+msgid "Name"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:32
+msgid "SpiderDevs"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:38
+msgid "Website URL"
+msgstr ""
+
+#: includes/Admin/options/meta-options.php:78
+msgid "Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:15
+msgid "Settings"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:17
+#: includes/Elementor/Register_Widgets.php:49
+msgid "Jobly"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:33
+msgid "Title Bar"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:39
+msgid "Shape 01"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:48
+msgid "Shape 02"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:60
+msgid "Appearance"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:66
+msgid "Listing Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:73
+#: includes/Admin/options/settings-options.php:94
+msgid "Image Select"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:87
+msgid "Details Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:108
+#: includes/Admin/options/settings-options.php:115
+msgid "Job Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:116
+msgid "Manage Job Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:123
+msgid "Enter a specification"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:124
+msgid "Insert a unique name"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:133
+msgid "Key"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:134
+msgid "Specification key"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:135
+msgid "Insert a unique key"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:144
+msgid "Options"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:145
+msgid "Enter options"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:149
+msgid "Use comma for multiple options. (Example: tag1, tag2 etc)"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:155
+msgid "Icon (Optional)"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:156
+msgid "Select icon"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:166
+#: includes/Admin/options/settings-options.php:172
+msgid "Backup"
+msgstr ""
+
+#: includes/Admin/options/taxonomy.php:29
+msgid "Image"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:34
+msgid "Categories Jobly"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:83
+#: includes/Elementor/widgets/Jobs.php:88
+#: includes/Elementor/widgets/Search_Form.php:82
+msgid "Preset Skins"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:89
+#: includes/Elementor/widgets/Jobs.php:94
+#: includes/Elementor/widgets/Search_Form.php:88
+msgid "Layout"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:93
+msgid "01: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:97
+msgid "02: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:101
+msgid "03: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:105
+msgid "04: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:119
+#: includes/Elementor/widgets/Job_Tabs.php:91
+#: includes/Elementor/widgets/Jobs.php:112
+#: includes/Elementor/widgets/Search_Form.php:110
+msgid "Filter"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:125
+#: includes/Elementor/widgets/Job_Tabs.php:106
+#: includes/Elementor/widgets/Jobs.php:118
+#: templates/banner/banner-search.php:53
+msgid "Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:126
+msgid "Display Listing by Location"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:136
+#: includes/Elementor/widgets/Job_Tabs.php:117
+#: includes/Elementor/widgets/Jobs.php:129
+msgid "Show Posts Count"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:144
+msgid "Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:147
+msgid "Two"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:148
+msgid "Three"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:149
+msgid "Four"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:150
+msgid "Six"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:158
+#: includes/Elementor/widgets/Job_Tabs.php:177
+msgid "View All Posts"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:186
+msgid "Category Item Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:198
+#: includes/Elementor/widgets/Jobs.php:355
+msgid "Normal"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:212
+#: includes/Elementor/widgets/Jobs.php:212
+#: includes/Elementor/widgets/Jobs.php:369
+msgid "Padding"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:231
+#: includes/Elementor/widgets/Jobs.php:234
+#: includes/Elementor/widgets/Jobs.php:405
+msgid "Border Radius"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:246
+#: includes/Elementor/widgets/Jobs.php:419
+msgid "Hover"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:260
+#: includes/Elementor/widgets/Jobs.php:441
+msgid "Border Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:277
+msgid "Headding Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:285
+#: includes/Elementor/widgets/Categories.php:325
+msgid "Text Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:301
+msgid "Margin"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:315
+msgid "Job Total Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:35
+msgid "Jobly Job Tabs"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:97
+msgid "All filter label"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:107
+msgid "Display job by categories"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:125
+#: includes/Elementor/widgets/Jobs.php:137
+msgid "Order"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:137
+#: includes/Elementor/widgets/Jobs.php:149
+msgid "Order By"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:154
+#: includes/Elementor/widgets/Jobs.php:166
+msgid "Title Length"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:161
+#: includes/Elementor/widgets/Jobs.php:173
+msgid "Excerpt Word Length"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:168
+#: includes/Elementor/widgets/Jobs.php:180
+msgid "Exclude Job"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:169
+#: includes/Elementor/widgets/Jobs.php:181
+msgid "Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:35
+msgid "Jobly Listing"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:98
+msgid "01: Listing"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:119
+msgid "Display blog by categories"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:206
+msgid "General Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:253
+msgid "List Item Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:260
+msgid "Job Title Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:269
+msgid "Job Title Hover Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:301
+msgid "Job Meta Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:311
+msgid "Job Date Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:339
+msgid "Job Button Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:379
+msgid "Button Text Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:432
+msgid "Hover Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:33
+msgid "Jobly Search Form"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:92
+msgid "01: Search Form"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:96
+msgid "02: Search Form"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:119
+#: includes/Elementor/widgets/Search_Form.php:126
+msgid "Keywords"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:128
+msgid "Show"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:129
+msgid "Hide"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:137
+msgid "Keywords Label"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:151
+msgid "Title"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:159
+msgid "Add Keyword"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:164
+msgid "Keyword #1"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:167
+msgid "Keyword #2"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/categories/category-3.php:20
+msgid "vacancy"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/categories/category-3.php:36
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:90
+msgid "Job already posted"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/categories/category-3.php:39
+msgid "shape"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/categories/category-3.php:42
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:96
+msgid "Arrow Icon"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:75
+#: includes/Elementor/widgets/templates/jobs/job-1.php:62
+#: templates/contents/content.php:71
+msgid "APPLY"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:93
+msgid "Line Icon"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/jobs/job-1.php:39
+#: templates/banner/banner-single.php:15
+msgid "by"
+msgstr ""
+
+#: includes/Elementor/widgets/templates/search-form/search-spinner.php:2
+msgid "loading"
+msgstr ""
+
+#: includes/functions.php:237
+#, php-format
+msgid "Showing %1$d-%2$d of %3$d results"
+msgstr ""
+
+#: templates/banner/banner-search.php:65
+msgid "Search"
+msgstr ""
+
+#: templates/banner/banner-search.php:79 templates/banner/banner-search.php:80
+#: templates/banner/banner-single.php:50 templates/banner/banner-single.php:51
+msgid "Shape Image"
+msgstr ""
+
+#: templates/banner/banner-single.php:30
+msgid "Facebook"
+msgstr ""
+
+#: templates/banner/banner-single.php:36
+msgid "Twitter"
+msgstr ""
+
+#: templates/banner/banner-single.php:42
+msgid "Copy"
+msgstr ""
+
+#: templates/contents/post-filter.php:6
+msgid "All"
+msgstr ""
+
+#: templates/contents/post-filter.php:8
+msgid "jobs found"
+msgstr ""
+
+#: templates/contents/post-filter.php:13
+msgid "Short By:"
+msgstr ""
+
+#: templates/contents/post-filter.php:15
+msgid "Default"
+msgstr ""
+
+#: templates/contents/post-filter.php:16
+msgid "Newest to Oldest"
+msgstr ""
+
+#: templates/contents/post-filter.php:17
+msgid "Oldest to Newest"
+msgstr ""
+
+#: templates/contents/post-filter.php:18
+msgid "Title Ascending "
+msgstr ""
+
+#: templates/contents/post-filter.php:19
+msgid "Title Descending"
+msgstr ""
+
+#: templates/contents/result-count.php:14
+#, php-format
+msgid "Showing <span class=\"text-dark fw-500\"> %1$d-%2$d </span> of <span class=\"text-dark fw-500\">%3$d</span> results"
 msgstr ""
