@@ -48,18 +48,15 @@ if ( class_exists( 'CSF' ) ) {
 
         foreach ( $specifications as $field ) {
         
-            $meta_value     = $field['meta_values'] ?? '';  
+            $meta_value     = $field['meta_values_group'] ?? '';  
             $meta_icon      = ! empty ( $field['meta_icon'] ) ? '<i class="'.$field['meta_icon'].'"></i>' : '';  
-
-            $meta_values    = explode(',', $meta_value);
             $opt_values     = [];
 
-            foreach ($meta_values as $value) {
-                // remove space using -
-                $opt_val = str_replace(' ', '-', $value);
-                $opt_values[$opt_val] = $value;
+            foreach ($meta_value as $value) {
+                $opt_val = str_replace(' ', '-', $value['meta_values']);
+                $opt_values[$opt_val] = $value['meta_values'];
             }
-
+            
             if ( ! empty ( $field['meta_key'] ) ) {
                 $fields[] = [
                     'id'       => $field['meta_key'] ?? '',

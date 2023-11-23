@@ -83,18 +83,18 @@ if( class_exists( 'CSF' ) ) {
 
     // Appearance Settings-> Details Page
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_appearance',
-        'title' => esc_html__( 'Details Page', 'jobly' ),
-        'id' => 'job_details_page',
-        'fields' => array(
+        'parent'    => 'jobly_appearance',
+        'title'     => esc_html__( 'Details Page', 'jobly' ),
+        'id'        => 'job_details_page',
+        'fields'    => array(
 
             array(
                 'id'        => 'job_single_layout',
                 'type'      => 'image_select',
                 'title'     => __('Image Select', 'jobly'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/single-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/single-layout-2.png',
+                    '1'     => JOBLY_IMG . '/layout/single-layout-1.png',
+                    '2'     => JOBLY_IMG . '/layout/single-layout-2.png',
                 ),
                 'default'   => '1'
             ),
@@ -105,54 +105,60 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Specifications
     CSF::createSection( $settings_prefix, array(
-        'title' => esc_html__( 'Job Specifications', 'jobly' ),
-        'id' => 'jobly_job_specifications',
-        'fields' => array(
+        'title'     => esc_html__( 'Job Specifications', 'jobly' ),
+        'id'        => 'jobly_job_specifications',
+        'fields'    => array(
             
             array(
-                'id'        => 'job_specifications',
-                'type'      => 'group',
-                'title'     => esc_html__( 'Job Specifications', 'jobly' ),
-                'subtitle' => esc_html__( 'Manage Job Specifications', 'jobly' ),
-                'fields'    => array(
+                'id'                => 'job_specifications',
+                'type'              => 'group',
+                'title'             => esc_html__( 'Job Specifications', 'jobly' ),
+                'subtitle'          => esc_html__( 'Manage Job Specifications', 'jobly' ),
+                'fields' => array(
                     
                     array(
-                        'id'      => 'meta_name',
-                        'type'    => 'text',
-                        'title'   => esc_html__( 'Name', 'jobly' ),
+                        'id'            => 'meta_name',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Name', 'jobly' ),
                         'placeholder'   => esc_html__( 'Enter a specification', 'jobly' ),
-                        'after'   => esc_html__( 'Insert a unique name', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique name', 'jobly' ),
                         'attributes' => [
                             'style'     => 'float:left;margin-right:10px;'
                         ],
                     ),
 
                     array(
-                        'id'      => 'meta_key',
-                        'type'    => 'text',
-                        'title'   => esc_html__( 'Key', 'jobly' ),
+                        'id'            => 'meta_key',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Key', 'jobly' ),
                         'placeholder'   => esc_html__( 'Specification key', 'jobly' ),
-                        'after'   => esc_html__( 'Insert a unique key', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique key', 'jobly' ),
                         'attributes' => [
                             'style'     => 'float:left;margin-right:10px;'
                         ],
                     ),
                     
                     array(
-                        'id'            => 'meta_values',
-                        'type'          => 'textarea',
+                        'id'            => 'meta_values_group',
+                        'type'          => 'repeater',
                         'title'         => esc_html__( 'Options', 'jobly' ), 
-                        'placeholder'   => esc_html__( 'Enter options', 'jobly' ),
-                        'attributes'    => array(
-                            'style'     => 'min-height:50px;max-height:60px'
-                        ),
-                        'desc' => esc_html__( 'Use comma for multiple options. (Example: tag1, tag2 etc)', 'jobly' ),
+                        'button_title'  => esc_html__( 'Add Option', 'jobly' ), 
+                        'fields' => array(
+                            array(
+                                'id'            => 'meta_values',
+                                'type'          => 'textarea',
+                                'title'         => null,
+                                'attributes'    => array(
+                                    'style'     => 'min-height:30px;max-height:60px'
+                                )
+                            )
+                        )
                     ),
 
                     array(
-                        'id'      => 'meta_icon',
-                        'type'    => 'icon',
-                        'title'   => esc_html__( 'Icon (Optional)', 'jobly' ),
+                        'id'            => 'meta_icon',
+                        'type'          => 'icon',
+                        'title'         => esc_html__( 'Icon (Optional)', 'jobly' ),
                         'placeholder'   => esc_html__( 'Select icon', 'jobly' ),
                     )
                 )
