@@ -14,8 +14,7 @@ if (!function_exists('jobly_opt')) {
 if (!function_exists('jobly_meta')) {
     function jobly_meta ($option = '', $default = null)
     {
-        $options = get_option('jobly_meta_options'); // Attention: Set your unique id of the framework
-
+        $options = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
         return (isset($options[ $option ])) ? $options[ $option ] : $default;
     }
 }

@@ -37,10 +37,9 @@ if ( class_exists( 'CSF' ) ) {
                 'type'  => 'link',
                 'title' => esc_html__( 'Website URL', 'jobly' ),
             )
-            
 		)
 	) );
-
+    
     // Retrieve the repeater field configurations from settings options    
     $specifications     = jobly_opt( 'job_specifications' );
 
@@ -48,12 +47,13 @@ if ( class_exists( 'CSF' ) ) {
 
         foreach ( $specifications as $field ) {
         
-            $meta_value     = $field['meta_values_group'] ?? '';  
+            $meta_value     = $field['meta_values_group'] ?? [];  
             $meta_icon      = ! empty ( $field['meta_icon'] ) ? '<i class="'.$field['meta_icon'].'"></i>' : '';  
             $opt_values     = [];
+            $opt_val        = '';
 
             foreach ($meta_value as $value) {
-                $opt_val = str_replace(' ', '-', $value['meta_values']);
+                $opt_val = str_replace(' ', '@space@', $value['meta_values']);
                 $opt_values[$opt_val] = $value['meta_values'];
             }
             
@@ -75,6 +75,26 @@ if ( class_exists( 'CSF' ) ) {
             'title'  => esc_html__( 'Specifications', 'jobly' ),
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
+        ) );
+
+        CSF::createSection( $meta_prefix, array(
+            'title'  => esc_html__( 'test', 'jobly' ),
+            'icon'   => 'fas fa-cogs',
+            'fields' => [
+                [
+                    'id'       => 'ddddddd',
+                    'type'     => 'select',
+                    'title'    =>  'dddddddddddddd',
+                    'options'  => [
+                        'fdsfds'  => 'fdsfdsd',
+                        'fdsfd 2 s'  => 'fdsfdsd',
+                        'fdsfds 3'  => 'fdsfdsd',
+                    ],
+                    'default' => 'fdsfds',
+                    'multiple' => true,
+                    'chosen'   => true,
+                ]
+            ]
         ) );
     }
 }

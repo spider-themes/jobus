@@ -131,12 +131,12 @@ if ( ! class_exists( 'Jobly' ) ) {
 			if ( is_admin() ) {
 				new Jobly\Admin\Admin();
                 new Jobly\Admin\Assets();
-                new Jobly\Admin\Post_Types();
 			} else {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
             new Jobly\Elementor\Register_Widgets();
+			new Jobly\Admin\Post_Types();
 
 		}
 
