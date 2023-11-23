@@ -76,25 +76,5 @@ if ( class_exists( 'CSF' ) ) {
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
         ) );
-
-        CSF::createSection( $meta_prefix, array(
-            'title'  => esc_html__( 'test', 'jobly' ),
-            'icon'   => 'fas fa-cogs',
-            'fields' => [
-                [
-                    'id'       => 'ddddddd',
-                    'type'     => 'select',
-                    'title'    =>  'dddddddddddddd',
-                    'options'  => [
-                        'fdsfds'  => 'fdsfdsd',
-                        'fdsfd 2 s'  => 'fdsfdsd',
-                        'fdsfds 3'  => 'fdsfdsd',
-                    ],
-                    'default' => 'fdsfds',
-                    'multiple' => true,
-                    'chosen'   => true,
-                ]
-            ]
-        ) );
     }
 }
