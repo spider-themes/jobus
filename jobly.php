@@ -25,7 +25,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 	/**
 	 * Class jobly
 	 */
-	class Jobly {
+	final class Jobly {
 
 		/**
 		 * Jobly Version
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const version = '1.0.0';
+		const VERSION = '1.0.0';
 
 		/**
 		 * The plugin path
@@ -43,6 +43,18 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public $plugin_path;
 
+        /**
+         * Initializes a singleton instances
+         * @return false|Jobly
+         */
+        public static function init() {
+            static $instance = false;
+            if ( ! $instance ) {
+                $instance = new self();
+            }
+
+            return $instance;
+        }
 
 		/**
 		 * Constructor.
@@ -51,12 +63,14 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @access public
 		 */
-		public function __construct() {
-			$this->define_constants();
-			// Include core files in action hook.
-			$this->core_includes();
+		private function __construct() {
 
-			register_activation_hook( __FILE__, [ $this, 'activate' ] );
+            register_activation_hook( __FILE__, [ $this, 'activate' ] );
+
+			$this->define_constants(); // Define constants.
+
+			$this->core_includes(); //Include the required files.
+
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
@@ -66,8 +80,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * Load Textdomain
 		 *
 		 * Load plugin localization files.
-		 *
-		 * @access public
 		 */
 		public function i18n() {
 			load_plugin_textdomain( 'jobly', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
@@ -77,11 +89,11 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * Include Files
 		 *
 		 * Load core files required to run the plugin.
-		 *
-		 * @access public
 		 */
 		public function core_includes() {
-			require_once __DIR__ . '/includes/functions.php';
+
+            //Functions
+            require_once __DIR__ . '/includes/functions.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
@@ -100,28 +112,14 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * Define constants
 		 */
 		public function define_constants() {
-			define( 'JOBLY_VERSION', self::version );
+			define( 'JOBLY_VERSION', self::VERSION );
 			define( 'JOBLY_FILE', __FILE__ );
 			define( 'JOBLY_PATH', __DIR__ );
 			define( 'JOBLY_URL', plugins_url( '', JOBLY_FILE ) );
-
 			define( 'JOBLY_CSS', JOBLY_URL . '/assets/css' );
 			define( 'JOBLY_JS', JOBLY_URL . '/assets/js' );
 			define( 'JOBLY_IMG', JOBLY_URL . '/assets/images' );
 			define( 'JOBLY_VEND', JOBLY_URL . '/assets/vendors' );
-		}
-
-		/**
-		 * Initializes a singleton instances
-		 * @return false|Jobly
-         */
-		public static function init() {
-			static $instance = false;
-			if ( ! $instance ) {
-				$instance = new self();
-			}
-
-			return $instance;
 		}
 
 		/**
@@ -133,21 +131,14 @@ if ( ! class_exists( 'Jobly' ) ) {
 			if ( is_admin() ) {
 				new Jobly\Admin\Admin();
                 new Jobly\Admin\Assets();
+                new Jobly\Admin\Post_Types();
 			} else {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
             new Jobly\Elementor\Register_Widgets();
 
-
-            // Register Elementor Preview Editor Styles
-            add_action('elementor/editor/before_enqueue_styles', [ $this, 'register_editor_styles' ]);
-
 		}
-
-        public function register_editor_styles(){
-            wp_enqueue_style('jobly-elementor-editor', JOBLY_CSS . '/elementor-editor.css' );
-        }
 
         
 		/**
@@ -200,14 +191,11 @@ if ( ! function_exists( 'jobly' ) ) {
 	 * Load jobly
 	 *
 	 * Main instance of jobly
-	 *
 	 */
 	function jobly() {
 		return Jobly::init();
 	}
 
-	/**
-	 * Kick of the plugin
-	 */
+	// Kick of the plugin
 	jobly();
 }

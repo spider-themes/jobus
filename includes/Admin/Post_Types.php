@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 	exit;// Exit if accessed directly
 }
 
-class Jobly_Job_Post {
+class Post_Types {
 
 	private static $instance = null;
 
@@ -22,15 +22,6 @@ class Jobly_Job_Post {
 			self::$instance = new self();
 		}
 		return self::$instance;
-	}
-
-
-	
-	public function register() {
-		
-		$this->register_post_types();
-		$this->register_taxonomies();
-
 	}
 
 
@@ -60,14 +51,14 @@ class Jobly_Job_Post {
 			'parent_item_colon' => esc_html__( 'Parent Job:', 'jobly' ),
 			'update_item'       => esc_html__( 'Update Job', 'jobly' ),
 			'menu_name'         => esc_html__( 'Job Listings', 'jobly' ),
-			'item_published'           => __( 'Job listing published.', 'wp-job-openings' ),
-			'item_published_privately' => __( 'Job listing published privately.', 'wp-job-openings' ),
-			'item_reverted_to_draft'   => __( 'Job listing reverted to draft.', 'wp-job-openings' ),
-			'item_scheduled'           => __( 'Job listing scheduled.', 'wp-job-openings' ),
-			'item_updated'             => __( 'Job listing updated.', 'wp-job-openings' ),
+			'item_published'           => __( 'Job listing published.', 'jobly' ),
+			'item_published_privately' => __( 'Job listing published privately.', 'jobly' ),
+			'item_reverted_to_draft'   => __( 'Job listing reverted to draft.', 'jobly' ),
+			'item_scheduled'           => __( 'Job listing scheduled.', 'jobly' ),
+			'item_updated'             => __( 'Job listing updated.', 'jobly' ),
 		);
 
-		$supports = [ 'title', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
+		$supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
 
 		$args = array(
 			'labels'                => $labels,
@@ -118,8 +109,4 @@ class Jobly_Job_Post {
 
 
 	}
-
-	// Rest of the class methods...
 }
-
-new Jobly_Job_Post();

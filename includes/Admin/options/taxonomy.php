@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' )  ) {
 if ( class_exists( 'CSF' ) ) {
 
 	/**
-	 * Listing Category Taxonomy
+	 * Jobly Category Taxonomy
 	 *
 	 * Set a unique slug-like ID
 	 */
