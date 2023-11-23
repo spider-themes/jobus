@@ -37,16 +37,16 @@ if (class_exists('CSF')) {
                 'type' => 'link',
                 'title' => esc_html__('Website URL', 'jobly'),
             )
-		)
-	) );
-    
+        )
+    ));
+
     // Retrieve the repeater field configurations from settings options    
     $specifications = jobly_opt('job_specifications');
     if (is_array($specifications)) {
-        foreach ( $specifications as $field ) {
-        
-            $meta_value     = $field['meta_values_group'] ?? [];  
-            $meta_icon      = ! empty ( $field['meta_icon'] ) ? '<i class="'.$field['meta_icon'].'"></i>' : '';  
+        foreach ($specifications as $field) {
+
+            $meta_value     = $field['meta_values_group'] ?? [];
+            $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . $field['meta_icon'] . '"></i>' : '';
             $opt_values     = [];
             $opt_val        = '';
 
@@ -56,11 +56,11 @@ if (class_exists('CSF')) {
                 $opt_values[$opt_val] = $value['meta_values'];
             }
 
-            if (!empty ($field[ 'meta_key' ])) {
+            if (!empty($field['meta_key'])) {
                 $fields[] = [
-                    'id' => $field[ 'meta_key' ] ?? '',
+                    'id' => $field['meta_key'] ?? '',
                     'type' => 'select',
-                    'title' => $field[ 'meta_name' ] ?? '',
+                    'title' => $field['meta_name'] ?? '',
                     'options' => $opt_values,
                     'multiple' => true,
                     'chosen' => true,
@@ -74,28 +74,6 @@ if (class_exists('CSF')) {
             'title' => esc_html__('Specifications', 'jobly'),
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
-        ) );
-
-        
-        /*CSF::createSection( $meta_prefix, array(
-            'title'  => esc_html__( 'test', 'jobly' ),
-            'icon'   => 'fas fa-cogs',
-            'fields' => [
-                [
-                    'id'       => 'ddddddd',
-                    'type'     => 'select',
-                    'title'    =>  'dddddddddddddd',
-                    'options'  => [
-                        'fdsfds'  => 'fdsfdsd',
-                        'fdsfd 2 s'  => 'fdsfdsd',
-                        'fdsfds 3'  => 'fdsfdsd',
-                    ],
-                    'default' => 'fdsfds',
-                    'multiple' => true,
-                    'chosen'   => true,
-                ]
-            ]
-        ) );*/
-
+        ));
     }
 }
