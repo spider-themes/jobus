@@ -1,7 +1,7 @@
-;(function($) {
+;(function ($) {
     'use strict';
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
         /**
@@ -17,26 +17,11 @@
             document.body.removeChild(textarea);
         }
 
-        // Attach click event to element with class "copy-url"
-        var copyButton = document.querySelectorAll('.copy-url');
-        if ( copyButton.length > 0 ) {
-            copyButton.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                // Get the current page's URL
-                const currentPageURL = window.location.href;
-
-                // Copy the URL to the clipboard
-                copyToClipboard(currentPageURL);
-
-            });
-        }// end copyButton click event
-
 
         // Nice Select for search form
         function niceSelect() {
             let niceSelect = $('.nice-select');
-            if(niceSelect.length > 0  ) {
+            if (niceSelect.length > 0) {
                 niceSelect.niceSelect();
             }
         }
@@ -55,7 +40,64 @@
             $('#searchInput').val(content).focus();
             fetchResults();
         });
-       
+
+
+        // Related Job Post slider
+        function relatedPost() {
+
+            let relatedJobSlider = $('.related-job-slider');
+            if (relatedJobSlider.length > 0) {
+                relatedJobSlider.slick({
+                    dots: false,
+                    arrows: true,
+                    lazyLoad: 'ondemand',
+                    prevArrow: $('.prev_e'),
+                    nextArrow: $('.next_e'),
+                    centerPadding: '0px',
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    responsive: [
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+
+        }
+        relatedPost(); // end Related Job Post slider
+
+
+        // Copy URL to clipboard
+        function copyButton() {
+            let copyBtn = document.querySelectorAll('.copy-url');
+            if (copyBtn.length > 0) {
+                copyBtn.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    // Get the current page's URL
+                    const currentPageURL = window.location.href;
+
+                    // Copy the URL to the clipboard
+                    copyToClipboard(currentPageURL);
+
+                });
+            }
+        }
+
+        copyButton(); // end copyButton click event
+
     });
 
 })(jQuery);

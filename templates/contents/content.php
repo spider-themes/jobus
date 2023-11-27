@@ -21,13 +21,7 @@ $duration = !empty($job_meta[ 'duration' ]) ? $job_meta[ 'duration' ] : [];
         <div class="col-md-5">
             <div class="job-title d-flex align-items-center">
                 <a href="<?php the_permalink(); ?>" class="logo">
-                    <?php
-                    if ($company_logo[ 'id' ]) {
-                        echo wp_get_attachment_image($company_logo[ 'id' ], 'full', '', [ 'class' => 'lazy-img m-auto' ]);
-                    } else {
-                        the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]);
-                    }
-                    ?>
+                    <img src="#" alt="" class="lazy-img m-auto">
                 </a>
                 <div class="split-box1">
                     <?php

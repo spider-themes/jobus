@@ -1,24 +1,17 @@
 <?php
 $meta = get_post_meta( get_the_ID(), 'jobly_meta_options', true );
-$company_name  = !empty($meta['company_name']) ? $meta['company_name'] : '';
-$company_website = !empty($meta['company_website']) ? $meta['company_website'] : '';
 $shape1 = jobly_opt('shape1' );
 $shape2 = jobly_opt('shape2' );
 ?>
 
-<div class="inner-banner-one position-relative dfsdfsdfsd">
+<div class="inner-banner-one position-relative">
 	<div class="container">
 		<div class="position-relative">
 			<div class="row">
 				<div class="col-xl-8 m-auto text-center">
 					<div class="post-date">
                         <?php the_time(get_option('date_format')); ?> <?php esc_html_e('by', 'jobly'); ?>
-                        <?php
-                        if ( $company_website['url']) {
-                            $target = $company_website['target'] ? 'target="' . esc_attr($company_website['target']) . '"' : '';
-                            echo '<a href="' . esc_url($company_website['url']) . '" class="fw-500 text-white" '.$target.'>' . esc_html($company_name) . '</a>';
-                        }
-                        ?>
+                        <a href="#" class="fw-500 text-dark">Adobe</a>
                     </div>
 					<div class="title-two">
 						<h2 class="text-white"><?php the_title() ?></h2>

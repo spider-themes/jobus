@@ -19,24 +19,6 @@ if (class_exists('CSF')) {
         'icon' => 'fas fa-home',
         'fields' => array(
 
-            array(
-                'id' => 'company_logo',
-                'type' => 'media',
-                'title' => esc_html__('Logo', 'jobly'),
-            ),
-
-            array(
-                'id' => 'company_name',
-                'type' => 'text',
-                'title' => esc_html__('Name', 'jobly'),
-                'default' => esc_html__('SpiderDevs', 'jobly')
-            ),
-
-            array(
-                'id' => 'company_website',
-                'type' => 'link',
-                'title' => esc_html__('Website URL', 'jobly'),
-            )
         )
     ));
 

@@ -1,6 +1,7 @@
 <section class="job-details pt-100 lg-pt-80 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
+
             <div class="col-xxl-9 col-xl-8">
                 <div class="details-post-data me-xxl-5 pe-xxl-4">
                     <?php the_content(); ?>
@@ -9,18 +10,11 @@
 
             <div class="col-xxl-3 col-xl-4">
                 <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mt-50">
-                    <?php
-                    if ($company_logo[ 'id' ]) {
-                        echo wp_get_attachment_image($company_logo[ 'id' ], 'full', '', [ 'class' => 'lazy-img m-auto logo' ]);
-                    }
-                    if ($company_name) {
-                        echo '<div class="text-md text-dark text-center mt-15 mb-20">' . esc_html($company_name) . '</div>';
-                    }
-                    if ($company_website[ 'url' ]) {
-                        $target = $company_website[ 'target' ] ? 'target="' . esc_attr($company_website[ 'target' ]) . '"' : '';
-                        echo '<a href="' . esc_url($company_website[ 'url' ]) . '" class="website-btn tran3s" ' . $target . '>' . esc_html($company_website[ 'text' ]) . '</a>';
-                    }
-                    ?>
+
+                    <img src="images/logo/media_37.png" alt="" class="lazy-img m-auto logo" style="">
+                    <div class="text-md text-dark text-center mt-15 mb-20">Adobe Inc.</div>
+                    <a href="#" class="website-btn tran3s">Visit website</a>
+
                     <div class="border-top mt-40 pt-40">
                         <ul class="job-meta-data row style-none">
                             <?php
