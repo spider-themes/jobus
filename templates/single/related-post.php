@@ -21,7 +21,6 @@ $args = [
 
 $related_jobs = new WP_Query($args);
 ?>
-
 <section class="related-job-section pt-90 lg-pt-70 pb-120 lg-pb-70">
     <div class="container">
         <div class="position-relative">
@@ -41,15 +40,26 @@ $related_jobs = new WP_Query($args);
                             </a>
                             <a href="job-details-v2.html" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
 
-                            <div><a href="job-details-v2.html" class="job-duration fw-500">Fulltime</a></div>
+                            <div>
+                                <a href="job-details-v2.html" class="job-duration fw-500">
+                                    <?php jobly_job_specifications( get_the_ID(), 1, false ); ?>
+                                </a>
+                            </div>
+
                             <div>
                                 <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s" title="<?php the_title_attribute() ?>">
                                     <?php the_title() ?>
                                 </a>
                             </div>
-                            <div class="job-salary"><span class="fw-500 text-dark">$300-$450</span> / Week</div>
+                            <div class="job-salary">
+                                <span class="fw-500 text-dark"> <?php jobly_job_specifications( get_the_ID(), 2, false ); ?> </span>
+                            </div>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
-                                <div class="job-location"><a href="job-details-v2.html">USA, California</a></div>
+                                <div class="job-location">
+                                    <a href="job-details-v2.html">
+                                        <?php jobly_job_specifications( get_the_ID(), 3, false ); ?>
+                                    </a>
+                                </div>
                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                     <?php esc_html_e('APPLY', 'jobly'); ?>
                                 </a>

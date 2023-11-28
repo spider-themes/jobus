@@ -274,3 +274,44 @@ if (!function_exists('jobly_company_post_list')) {
 
     }
 }
+
+/**
+ * Get all the job specifications
+ */
+function jobly_job_specifications( $post_id = 0, $step = 0, $label = true, $before_label = '', $after_label = '', $before_value = '', $after_value = '' ){
+
+    $specifications = jobly_opt('job_specifications');
+    if ( is_array( $specifications ) ) {
+        $i = 0;
+        foreach ( $specifications as $field ) {
+            $i++;
+
+            if ( $i == $step ) {
+
+            $meta_name      = $field[ 'meta_name' ] ?? '';
+            $meta_key       = $field[ 'meta_key' ] ?? '';
+            $meta_options   = get_post_meta($post_id, 'jobly_meta_options', true);
+
+            if ( isset ( $meta_options[ $meta_key ] ) ) {
+                if ( $label == true ) {
+                    if ( isset ( $meta_options[ $meta_key ] ) && !empty ( $meta_options[ $meta_key ] ) ) {
+                        echo $before_label . esc_html( $meta_name ) . $after_label;
+                    }
+                }
+
+                if ( ! empty ( $meta_options[ $meta_key ] && is_array( $meta_options[ $meta_key ] ) ) ) {
+                    echo $before_value;
+                    $option_name        = '';
+                    foreach ( $meta_options[ $meta_key ] as $value ) {
+                        $trimed_value   = str_replace('@space@', ' ', $value);
+                        $option_name   .= esc_html($trimed_value) . ', ';
+                    }
+                    echo rtrim($option_name, ', ');
+                    echo $after_value;
+                }
+            }
+            break;
+            }
+        }
+    }
+}

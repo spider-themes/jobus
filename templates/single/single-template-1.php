@@ -13,7 +13,7 @@
                     <?php
                     $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                     $select_company = $meta[ 'select_company' ] ?? '';
-
+                    $args = [];
                     if (!empty($select_company)) {
                         $args = array(
                             'post_type' => 'company',
@@ -58,7 +58,8 @@
                                             if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
                                                 echo '<div>';
                                                 foreach ( $meta_options[ $meta_key ] as $value ) {
-                                                    echo esc_html($value);
+                                                    $trimed_value = str_replace('@space@', ' ', $value);
+                                                    echo esc_html($trimed_value);
                                                 }
                                                 echo '</div>';
                                             }

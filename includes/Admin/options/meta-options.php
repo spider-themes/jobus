@@ -57,7 +57,7 @@ if (class_exists('CSF')) {
             $opt_val        = '';
 
             foreach ($meta_value as $value) {
-                $modifiedString = preg_replace('/[,\s]+/', '-', $value['meta_values']);
+                $modifiedString = preg_replace('/[,\s]+/', '@space@', $value['meta_values']);
                 $opt_val = strtolower($modifiedString);
                 $opt_values[$opt_val] = $value['meta_values'];
             }
