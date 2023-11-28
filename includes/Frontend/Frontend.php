@@ -16,7 +16,7 @@ class Frontend {
 
 		// Add Filter to redirect Archive Page Template
 		add_filter( 'template_include', [ $this, 'template_loader' ] );
-		add_filter( 'template_include', [ $this, 'template_loader_company' ] );
+		//add_filter( 'template_include', [ $this, 'template_loader_company' ] );
 
 	}
 
@@ -69,9 +69,7 @@ class Frontend {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-company.php';
             if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
-                $template = $theme_file;
-            } else {
-                $template = JOBLY_PATH . '/templates/' . $archive_template;
+                $company_template = $theme_file;
             }
         }
 
@@ -79,13 +77,11 @@ class Frontend {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-company.php';
             if ( $theme_file = locate_template( array( 'jobly/' . $single_template ) ) ) {
-                $template = $theme_file;
-            } else {
-                $template = JOBLY_PATH . '/templates/' . $single_template;
+                $company_template = $theme_file;
             }
         }
 
-        return $template;
+        return $company_template;
 
     }
 

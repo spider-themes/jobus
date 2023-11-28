@@ -36,10 +36,10 @@ Table of Content:
 .details-post-data .wp-block-group:last-child {
   margin-bottom: 0;
 }
-.details-post-data ul {
+.details-post-data .wp-block-group ul {
   padding-left: 0;
 }
-.details-post-data ul li {
+.details-post-data .wp-block-group ul li {
   position: relative;
   font-size: 17px;
   margin-top: 20px;
@@ -47,7 +47,7 @@ Table of Content:
   line-height: 1.882em;
   list-style: none;
 }
-.details-post-data ul li:before {
+.details-post-data .wp-block-group ul li:before {
   content: "\f633";
   font-family: bootstrap-icons;
   position: absolute;

@@ -58,25 +58,47 @@
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 3000,
-                    responsive: [
-                        {
-                            breakpoint: 992,
-                            settings: {
-                                slidesToShow: 2
-                            }
-                        },
-                        {
-                            breakpoint: 768,
-                            settings: {
-                                slidesToShow: 1
-                            }
+                    responsive: [{
+                        breakpoint: 992, settings: {
+                            slidesToShow: 2
                         }
-                    ]
+                    }, {
+                        breakpoint: 768, settings: {
+                            slidesToShow: 1
+                        }
+                    }]
                 });
             }
 
         }
+
         relatedPost(); // end Related Job Post slider
+
+
+        // Testimonial slider
+        function testimonialSlider() {
+
+            let reviewSlider = $('.company-review-slider');
+            if (reviewSlider.length > 0) {
+                reviewSlider.slick({
+                    dots: true,
+                    arrows: false,
+                    lazyLoad: 'ondemand',
+                    centerPadding: '0px',
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    responsive: [{
+                        breakpoint: 768, settings: {
+                            slidesToShow: 1
+                        }
+                    }]
+                });
+            }
+        }
+
+        testimonialSlider(); // end Testimonial slider
 
 
         // Copy URL to clipboard

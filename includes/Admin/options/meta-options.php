@@ -19,6 +19,30 @@ if (class_exists('CSF')) {
         'icon' => 'fas fa-home',
         'fields' => array(
 
+            // Company Information
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Company Info', 'jobly'),
+            ),
+
+            array(
+                'id' => 'select_company',
+                'type' => 'select',
+                'title' => esc_html__('Select Company', 'jobly'),
+                'options' => jobly_company_post_list(),
+                'chosen' => true,
+                'default' => '',
+            ),
+
+            array(
+                'id'       => 'company_website',
+                'type'     => 'link',
+                'title'    => esc_html__('Company Website', 'jobly'),
+                'default'  => array(
+                    'url'    => '#',
+                ),
+            ), // End company information
+
         )
     ));
 

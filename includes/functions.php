@@ -243,3 +243,34 @@ if (!function_exists('jobly_job_post_count_result')) {
 
     }
 }
+
+
+/**
+ * @return string
+ *
+ * Company post page data list
+ */
+if (!function_exists('jobly_company_post_list')) {
+    function jobly_company_post_list ()
+    {
+
+        // Get all the Company posts
+        $args = array(
+            'post_type' => 'company',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+        );
+
+        $posts = get_posts($args);
+        $options = array();
+
+        if ( !empty($posts)) {
+            foreach ( $posts as $post ) {
+                $options[ $post->ID ] = $post->post_title;
+            }
+        }
+
+        return $options;
+
+    }
+}

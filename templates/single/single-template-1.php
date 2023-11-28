@@ -10,10 +10,30 @@
 
             <div class="col-xxl-3 col-xl-4">
                 <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mt-50">
+                    <?php
+                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+                    $select_company = $meta[ 'select_company' ] ?? '';
 
-                    <img src="images/logo/media_37.png" alt="" class="lazy-img m-auto logo" style="">
-                    <div class="text-md text-dark text-center mt-15 mb-20">Adobe Inc.</div>
-                    <a href="#" class="website-btn tran3s">Visit website</a>
+                    if (!empty($select_company)) {
+                        $args = array(
+                            'post_type' => 'company',
+                            'post__in' => array( $select_company ),
+                        );
+                    }
+
+                    $company_query = new WP_Query($args);
+
+                    while ( $company_query->have_posts() ) : $company_query->the_post();
+                        ?>
+                        <?php the_post_thumbnail('full', array('class' => 'lazy-img m-auto logo')); ?>
+                        <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
+                        <a href="#" class="website-btn tran3s">
+                            <?php esc_html_e('Company Profile', 'jobly'); ?>
+                        </a>
+                        <?php
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
 
                     <div class="border-top mt-40 pt-40">
                         <ul class="job-meta-data row style-none">
@@ -32,7 +52,7 @@
                                         ?>
                                         <li class="col-xl-6 col-md-4 col-sm-6">
                                             <?php
-                                            if (isset($meta_options[$meta_key]) && !empty($meta_options[$meta_key])) {
+                                            if (isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ])) {
                                                 echo '<span>' . esc_html($meta_name) . '</span>';
                                             }
                                             if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {

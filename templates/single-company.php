@@ -7,11 +7,12 @@ get_header();
 jobly_get_template_part( 'banner/banner-single' );
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-
+$postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 ?>
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
             <div class="row">
+
                 <div class="col-xxl-3 col-xl-4 order-xl-last">
                     <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mb-50">
                         <img src="images/lazy.svg" data-src="images/logo/media_37.png" alt="" class="lazy-img m-auto logo">
@@ -60,19 +61,14 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                     </div>
                     <!-- /.job-company-info -->
                 </div>
+
                 <div class="col-xxl-9 col-xl-8 order-xl-first">
                     <div class="details-post-data me-xxl-5 pe-xxl-4">
-                        <h3>Overview</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Vulputate odio ut enim blandit. Nibh ipsum consequat nisl vel pretium lectus quam.</p>
-                        <p> Nulla at volutpat diam ut. Lobortis feugiat vivamus at augue eget arcu. Urna condimentum mattis pellentesque id nibh tortor id aliquet. Dignissim cras tincidunt lobortis feugiat. Est sit amet facilisis magna etiam tempor. Eu augue ut lectus arcu bibendum at varius vel pharetra. Vel facilisis volutpat est velit egestas dui id. Ut pharetra sit amet aliquam. Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Tellus in metus vulputate eu scelerisque felis imperdiet proin. Magna fringilla urna porttitor rhoncus. Et odio pellentesque diam volutpat. Congue eu consequat ac felis donec et odio pellentesque diam. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu. </p>
-                        <p>Felis eget velit aliquet sagittis id. Massa placerat duis ultricies lacus sed turpis tincidunt id. Vel eros donec ac odio tempor orci dapibus ultrices. Ipsum consequat nisl vel pretium lectus quam. Dignissim sodales ut eu sem. </p>
-                        <h3>Intro</h3>
-                        <div class="video-post d-flex align-items-center justify-content-center mb-50">
-                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="https://www.youtube.com/embed/aXFSJTjVjw0">
-                                <i class="bi bi-play-fill"></i>
-                            </a>
-                        </div>
+
+                        <?php the_content(); ?>
+
                         <div class="position-relative">
+
                             <h3>Company Reviews</h3>
 
                             <div class="company-review-slider">
@@ -149,13 +145,15 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         </div>
 
                         <div class="share-option mt-60">
+
                             <ul class="style-none d-flex align-items-center">
-                                <li class="fw-500 me-2">Share: </li>
-                                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-                                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
-                                <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                                <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobly'); ?></li>
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/share?url=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-twitter"></i></a></li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>
