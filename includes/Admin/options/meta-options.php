@@ -35,12 +35,24 @@ if (class_exists('CSF')) {
             ),
 
             array(
+                'id'         => 'is_company_website',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Company Website', 'jobly'),
+                'options'    => array(
+                    'default'  => esc_html__('Default', 'jobly'),
+                    'custom' => esc_html__('Custom', 'jobly'),
+                ),
+                'default'    => 'default'
+            ),
+
+            array(
                 'id'       => 'company_website',
                 'type'     => 'link',
-                'title'    => esc_html__('Company Website', 'jobly'),
+                'title'    => esc_html__('Website Button', 'jobly'),
                 'default'  => array(
                     'url'    => '#',
                 ),
+                'dependency' => array('is_company_website', '==', 'custom'),
             ), // End company information
 
         )

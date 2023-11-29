@@ -12,6 +12,9 @@
                 <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mt-50">
                     <?php
                     $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+                    $website = $meta[ 'company_website' ] ?? '';
+                    $website_target = $website[ 'target' ] ?? '_self';
+
                     $select_company = $meta[ 'select_company' ] ?? '';
                     $args = [];
                     if (!empty($select_company)) {
@@ -25,11 +28,22 @@
 
                     while ( $company_query->have_posts() ) : $company_query->the_post();
                         ?>
-                        <?php the_post_thumbnail('full', array('class' => 'lazy-img m-auto logo')); ?>
+                        <?php the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' )); ?>
                         <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
-                        <a href="#" class="website-btn tran3s">
-                            <?php esc_html_e('Company Profile', 'jobly'); ?>
-                        </a>
+                        <?php
+                        if ( $meta['is_company_website'] == 'custom' && !empty($website[ 'url' ])) { ?>
+                            <a href="<?php echo esc_url($website[ 'url' ]) ?>"
+                               target="<?php echo esc_attr($website_target) ?>" class="website-btn tran3s">
+                                <?php echo esc_html($website[ 'text' ]) ?>
+                            </a>
+                            <?php
+                        } else { ?>
+                            <a href="<?php the_permalink(); ?>" class="website-btn tran3s">
+                                <?php esc_html_e('Company Profile', 'jobly'); ?>
+                            </a>
+                            <?php
+                        }
+                        ?>
                         <?php
                     endwhile;
                     wp_reset_postdata();

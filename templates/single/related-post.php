@@ -25,11 +25,9 @@ $related_jobs = new WP_Query($args);
     <div class="container">
         <div class="position-relative">
             <div class="title-three text-center text-md-start mb-55 lg-mb-40">
-                <h2 class="main-font">Related Jobs</h2>
+                <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobly'); ?></h2>
             </div>
-
             <div class="related-job-slider">
-
                 <?php
                 while ( $related_jobs->have_posts()) : $related_jobs->the_post();
                     ?>
@@ -38,12 +36,12 @@ $related_jobs = new WP_Query($args);
                             <a href="<?php the_permalink(); ?>" class="logo">
                                 <?php the_post_thumbnail('full', ['class' => 'm-auto']); ?>
                             </a>
-                            <a href="job-details-v2.html" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
+                            <a href="javascript:void(0)" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
 
                             <div>
-                                <a href="job-details-v2.html" class="job-duration fw-500">
-                                    <?php jobly_job_specifications( get_the_ID(), 1, false ); ?>
-                                </a>
+                                <span class="job-duration fw-500">
+                                    <?php jobly_job_specifications( get_the_ID(), 4, false ); ?>
+                                </span>
                             </div>
 
                             <div>
@@ -52,12 +50,12 @@ $related_jobs = new WP_Query($args);
                                 </a>
                             </div>
                             <div class="job-salary">
-                                <span class="fw-500 text-dark"> <?php jobly_job_specifications( get_the_ID(), 2, false ); ?> </span>
+                                <span class="fw-500 text-dark"><?php jobly_job_specifications( get_the_ID(), 1, false ); ?></span>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
                                 <div class="job-location">
-                                    <a href="job-details-v2.html">
-                                        <?php jobly_job_specifications( get_the_ID(), 3, false ); ?>
+                                    <a href="#">
+                                        <?php jobly_job_specifications( get_the_ID(), 2, false ); ?>
                                     </a>
                                 </div>
                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
@@ -71,7 +69,6 @@ $related_jobs = new WP_Query($args);
                 wp_reset_postdata();
                 ?>
             </div>
-
             <ul class="slider-arrows slick-arrow-one color-two d-flex justify-content-center style-none sm-mt-20">
                 <li class="prev_e slick-arrow"><i class="bi bi-arrow-left"></i></li>
                 <li class="next_e slick-arrow"><i class="bi bi-arrow-right"></i></li>

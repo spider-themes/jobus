@@ -2,9 +2,7 @@
     <div class="container">
         <div class="row">
 
-
             <?php jobly_get_template_part('contents/sidebar-search-filter'); ?>
-
 
             <div class="col-xl-9 col-lg-8">
                 <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">

@@ -10,13 +10,33 @@ template.
 @Default Styles
 Table of Content:
 01/ variables
-02/ common
-03/ single_content
-04/ job_listing
+02/ mixins
+03/ base
+03/ prefix
+03/ layout
+04/ vendor
+05/ banner
+06/ candidates
+06/ card
+07/ company
+08/ dashboard
+09/ element
+10/ job-listing
+11/ single_content
 =====================================================*/
 
 
 @import "frontend/variables";
-@import "frontend/common";
+@import "frontend/mixins";
+@import "frontend/base";
+@import "frontend/prefix";
+@import "frontend/layout";
+@import "frontend/vendor";
+@import "frontend/banner";
+@import "frontend/candidates";
+@import "frontend/card";
+@import "frontend/company";
+@import "frontend/dashboard";
+@import "frontend/element";
+@import "frontend/job-listing";
 @import "frontend/single_content";
-@import "frontend/job_listing";
