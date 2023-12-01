@@ -6955,6 +6955,9 @@ body.compensate-for-scrollbar {
 .filter-area-tab .filter-block.bottom-line {
   border-bottom: 1px solid rgba(49, 121, 90, 0.3);
 }
+.filter-area-tab .filter-block.bottom-line + .filter-block {
+  margin-top: 25px;
+}
 .filter-area-tab .filter-title {
   font-size: 1em;
   position: relative;

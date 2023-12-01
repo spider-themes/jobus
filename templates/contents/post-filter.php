@@ -1,6 +1,28 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 $orderby    = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : '';
 ?>
+
+<div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+    <div class="total-job-found">All <span class="text-dark">7,096</span> jobs found</div>
+    <div class="d-flex align-items-center">
+        <div class="short-filter d-flex align-items-center">
+            <div class="text-dark fw-500 me-2">Short:</div>
+            <select class="nice-select">
+                <option value="0">Latest</option>
+                <option value="1">Category</option>
+                <option value="2">Job Type</option>
+            </select>
+        </div>
+        <button class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn" title="Active List"><i class="bi bi-list"></i></button>
+        <button class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn active" title="Active Grid"><i class="bi bi-grid"></i></button>
+    </div>
+</div>
+
+
 <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
     <div class="total-job-found">
         <?php esc_html_e('All', 'jobly'); ?>

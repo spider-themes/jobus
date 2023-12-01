@@ -275,6 +275,42 @@ if (!function_exists('jobly_company_post_list')) {
     }
 }
 
+
+function jobly_job_specs () {
+    $specifications = jobly_opt('job_specifications');
+
+    $specs = [];
+    if ( is_array( $specifications ) ) {
+        foreach ( $specifications as $field ) {
+            $meta_key = $field[ 'meta_key' ] ?? '';
+            $meta_name = $field[ 'meta_name' ] ?? '';
+            $specs[ $meta_key ] = $meta_name;
+        }
+    }
+
+    return $specs;
+}
+
+// get all job specifications options list with key and value
+function jobly_job_specs_options () {
+    $specifications = jobly_opt('job_specifications');
+
+    $specs = [];
+    if ( is_array( $specifications ) ) {
+        foreach ( $specifications as $field ) {
+            $meta_key = $field[ 'meta_key' ] ?? '';
+            $meta_value = $field[ 'meta_values_group' ] ?? '';
+            $specs[ $meta_key ] = $meta_value;
+        }
+    }
+
+    return $specs;
+}
+
+
+
+
+
 /**
  * Get all the job specifications
  */

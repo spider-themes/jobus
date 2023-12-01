@@ -1,4 +1,9 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+
 $per_page = isset($args['posts_per_page']) ? intval($args['posts_per_page']) : 10; // Posts per page
 $current_page = max(1, get_query_var('paged')); // Current page number
 

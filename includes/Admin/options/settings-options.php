@@ -54,17 +54,17 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
-    // Appearance Settings
+    // Job Archive Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_appearance', // Set a unique slug-like ID
-        'title' => esc_html__( 'Appearance', 'jobly' ),
+        'id'    => 'jobly_job_archive', // Set a unique slug-like ID
+        'title' => esc_html__( 'Job Archive Page', 'jobly' ),
     ) );
 
-    // Appearance Settings-> Listing Page
+    // Job Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_appearance',
-        'title' => esc_html__( 'Listing Page', 'jobly' ),
-        'id' => 'job_listing_page',
+        'parent' => 'jobly_job_archive',
+        'title' => esc_html__( 'Archive Settings', 'jobly' ),
+        'id' => 'job_archive_settings',
         'fields' => array(
 
             array(
@@ -77,13 +77,116 @@ if( class_exists( 'CSF' ) ) {
                 'default'   => '1'
             ),
 
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Job Speciation Attributes', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'archive_meta_1',
+                'type'      => 'select',
+                'title'     => esc_html__('Job Attribute 01', 'jobly'),
+                'options'   => jobly_job_specs(),
+                'dependency' => array('job_archive_layout', '==', '1'),
+            ),
+
+            array(
+                'id'        => 'archive_meta_2',
+                'type'      => 'select',
+                'title'     => esc_html__('Job Attribute 02', 'jobly'),
+                'options'   => jobly_job_specs(),
+                'dependency' => array('job_archive_layout', '==', '1'),
+            ),
+
+            array(
+                'id'        => 'archive_meta_3',
+                'type'      => 'select',
+                'title'     => esc_html__('Job Attribute 03', 'jobly'),
+                'options'   => jobly_job_specs(),
+                'dependency' => array('job_archive_layout', '==', '1'),
+            ),
+
+        )
+    ) );
+
+    // Job Archive Page Settings-> Sidebar Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_job_archive',
+        'title' => esc_html__( 'Sidebar Settings', 'jobly' ),
+        'id' => 'job_sidebar_settings',
+        'fields' => array(
+
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Search filter Widgets', 'jobly'),
+            ),
+
+            array(
+                'id'                => 'job_sidebar_widgets',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Widgets', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Widget', 'jobly' ),
+                'subtitle' => __( 'Choose the layout style for displaying widget options:', 'jobly' ) . '<br>' .
+                    __( '<strong>Dropdown:</strong> Display options in a dropdown menu.', 'jobly' ) . '<br>' .
+                    __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobly' ) . '<br>' .
+                    __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'widget_name',
+                        'type'          => 'select',
+                        'title'         => esc_html__( 'Widget', 'jobly' ),
+                        'options'       => jobly_job_specs(),
+                        'default'       => false,
+                    ),
+
+                    array(
+                        'id'            => 'widget_layout',
+                        'type'          => 'button_set',
+                        'title'         => esc_html__( 'Widget Layout', 'jobly' ),
+                        'options'       => array(
+                            'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
+                            'checkbox'      => esc_html__( 'Checkbox', 'jobly' ),
+                            'range'      => esc_html__( 'Range Slider', 'jobly' ),
+                        ),
+                        'default'       => 'checkbox',
+                    ),
+
+                )
+            ),
+
+
+            array(
+                'id'      => 'is_job_widget_cat',
+                'type'    => 'switcher',
+                'title'   => esc_html__('Category', 'jobly'),
+                'default' => true,
+            ),
+
+            array(
+                'id'      => 'is_job_widget_tag',
+                'type'    => 'switcher',
+                'title'   => esc_html__('Tag', 'jobly'),
+                'default' => true,
+            ),
+
+
         )
     ) );
 
 
+
+
+    // Job Details Page Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_job_details', // Set a unique slug-like ID
+        'title' => esc_html__( 'Job Details Page', 'jobly' ),
+    ) );
+
     // Appearance Settings-> Details Page
     CSF::createSection( $settings_prefix, array(
-        'parent'    => 'jobly_appearance',
+        'parent'    => 'jobly_job_details_page',
         'title'     => esc_html__( 'Details Page', 'jobly' ),
         'id'        => 'job_details_page',
         'fields'    => array(
@@ -159,7 +262,7 @@ if( class_exists( 'CSF' ) ) {
                         'placeholder'   => esc_html__( 'Select icon', 'jobly' ),
                     )
                 )
-            )
+            )// End job specifications
         )
     ) );
 

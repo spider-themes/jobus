@@ -49,6 +49,9 @@
     }
     .filter-block.bottom-line {
         border-bottom: 1px solid rgba($color: #31795A, $alpha: 0.3);
+        & + .filter-block {
+            margin-top: 25px;
+        }
     }
     .filter-title {
         font-size: 1em;

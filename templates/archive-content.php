@@ -13,15 +13,13 @@ $args = array(
 );
 
 $job_post = new \WP_Query($args);
-$job_sidebar = is_active_sidebar('jobly_job_sidebar') ? 'col-lg-8' : 'col-lg-12';
-
 $job_archive_layout = jobly_opt('job_archive_layout');
 
 // ================= Archive Banner ================//
 jobly_get_template_part('banner/banner-search');
 
 //=========== Template Parts ==============//
-include JOBLY_PATH . '/templates/contents/archive-template-' . $job_archive_layout . '.php';
+include JOBLY_PATH . '/templates/contents/archive-template-1.php';
 
 
 get_footer();
