@@ -92,6 +92,7 @@ if (class_exists('CSF')) {
             'title' => esc_html__('Specifications', 'jobly'),
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
+            'id'     => 'jobly_meta_specifications',
         ));
     }
 }

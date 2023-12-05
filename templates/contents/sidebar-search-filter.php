@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
-        <?php esc_html_e('Filter dfdsf', 'jobly'); ?>
+        <?php esc_html_e('Filter', 'jobly'); ?>
     </button>
 
     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
@@ -18,7 +18,6 @@ if (!defined('ABSPATH')) {
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
             <?php
-
             $filter_widgets = jobly_opt('job_sidebar_widgets');
             if (isset($filter_widgets) && is_array($filter_widgets)) {
                 foreach ( $filter_widgets as $index => $widget ) {

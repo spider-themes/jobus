@@ -80,13 +80,13 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Speciation Attributes', 'jobly'),
+                'content' => esc_html__('Job Speciations Attributes', 'jobly'),
             ),
 
             array(
                 'id'        => 'archive_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Job Attribute 01', 'jobly'),
+                'title'     => esc_html__('Attribute 01', 'jobly'),
                 'options'   => jobly_job_specs(),
                 'dependency' => array('job_archive_layout', '==', '1'),
             ),
@@ -94,7 +94,7 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'archive_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Job Attribute 02', 'jobly'),
+                'title'     => esc_html__('Attribute 02', 'jobly'),
                 'options'   => jobly_job_specs(),
                 'dependency' => array('job_archive_layout', '==', '1'),
             ),
@@ -102,7 +102,15 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'archive_meta_3',
                 'type'      => 'select',
-                'title'     => esc_html__('Job Attribute 03', 'jobly'),
+                'title'     => esc_html__('Attribute 03', 'jobly'),
+                'options'   => jobly_job_specs(),
+                'dependency' => array('job_archive_layout', '==', '1'),
+            ),
+
+            array(
+                'id'        => 'archive_meta_4',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 04', 'jobly'),
                 'options'   => jobly_job_specs(),
                 'dependency' => array('job_archive_layout', '==', '1'),
             ),

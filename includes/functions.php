@@ -264,7 +264,7 @@ if (!function_exists('jobly_company_post_list')) {
         $posts = get_posts($args);
         $options = array();
 
-        if ( !empty($posts)) {
+        if (!empty($posts)) {
             foreach ( $posts as $post ) {
                 $options[ $post->ID ] = $post->post_title;
             }
@@ -276,11 +276,12 @@ if (!function_exists('jobly_company_post_list')) {
 }
 
 
-function jobly_job_specs () {
+function jobly_job_specs ()
+{
     $specifications = jobly_opt('job_specifications');
 
     $specs = [];
-    if ( is_array( $specifications ) ) {
+    if (is_array($specifications)) {
         foreach ( $specifications as $field ) {
             $meta_key = $field[ 'meta_key' ] ?? '';
             $meta_name = $field[ 'meta_name' ] ?? '';
@@ -292,11 +293,12 @@ function jobly_job_specs () {
 }
 
 // get all job specifications options list with key and value
-function jobly_job_specs_options () {
+function jobly_job_specs_options ()
+{
     $specifications = jobly_opt('job_specifications');
 
     $specs = [];
-    if ( is_array( $specifications ) ) {
+    if (is_array($specifications)) {
         foreach ( $specifications as $field ) {
             $meta_key = $field[ 'meta_key' ] ?? '';
             $meta_value = $field[ 'meta_values_group' ] ?? '';
@@ -308,46 +310,63 @@ function jobly_job_specs_options () {
 }
 
 
-
-
-
 /**
  * Get all the job specifications
  */
-function jobly_job_specifications( $post_id = 0, $step = 0, $label = true, $before_label = '', $after_label = '', $before_value = '', $after_value = '' ){
+function jobly_job_specifications ($post_id = 0, $step = 0, $label = true, $before_label = '', $after_label = '', $before_value = '', $after_value = '')
+{
 
     $specifications = jobly_opt('job_specifications');
-    if ( is_array( $specifications ) ) {
+    if (is_array($specifications)) {
         $i = 0;
         foreach ( $specifications as $field ) {
             $i++;
 
-            if ( $i == $step ) {
+            if ($i == $step) {
 
-            $meta_name      = $field[ 'meta_name' ] ?? '';
-            $meta_key       = $field[ 'meta_key' ] ?? '';
-            $meta_options   = get_post_meta($post_id, 'jobly_meta_options', true);
+                $meta_name = $field[ 'meta_name' ] ?? '';
+                $meta_key = $field[ 'meta_key' ] ?? '';
+                $meta_options = get_post_meta($post_id, 'jobly_meta_options', true);
 
-            if ( isset ( $meta_options[ $meta_key ] ) ) {
-                if ( $label == true ) {
-                    if ( isset ( $meta_options[ $meta_key ] ) && !empty ( $meta_options[ $meta_key ] ) ) {
-                        echo $before_label . esc_html( $meta_name ) . $after_label;
+                if (isset ($meta_options[ $meta_key ])) {
+                    if ($label == true) {
+                        if (isset ($meta_options[ $meta_key ]) && !empty ($meta_options[ $meta_key ])) {
+                            echo $before_label . esc_html($meta_name) . $after_label;
+                        }
+                    }
+
+                    if (!empty ($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
+                        echo $before_value;
+                        $option_name = '';
+                        foreach ( $meta_options[ $meta_key ] as $value ) {
+                            $trimed_value = str_replace('@space@', ' ', $value);
+                            $option_name .= esc_html($trimed_value) . ', ';
+                        }
+                        echo rtrim($option_name, ', ');
+                        echo $after_value;
                     }
                 }
-
-                if ( ! empty ( $meta_options[ $meta_key ] && is_array( $meta_options[ $meta_key ] ) ) ) {
-                    echo $before_value;
-                    $option_name        = '';
-                    foreach ( $meta_options[ $meta_key ] as $value ) {
-                        $trimed_value   = str_replace('@space@', ' ', $value);
-                        $option_name   .= esc_html($trimed_value) . ', ';
-                    }
-                    echo rtrim($option_name, ', ');
-                    echo $after_value;
-                }
-            }
-            break;
+                break;
             }
         }
+    }
+}
+
+/**
+ * Retrieve and format job attributes based on the specified meta key.
+ *
+ * @param string $meta_key The meta key for the job attribute.
+ *
+ * @return string The formatted and sanitized job attribute value.
+ */
+if (!function_exists('jobly_get_job_attributes')) {
+    function jobly_get_job_attributes ($meta_key = '')
+    {
+        $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_options');
+        $meta_value = $meta_options[ 0 ][ jobly_opt($meta_key) ] ?? '';
+        $trimmed_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
+        $formatted_value = str_replace('@space@', ' ', $trimmed_value);
+
+        return esc_html($formatted_value);
     }
 }
