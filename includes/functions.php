@@ -311,48 +311,6 @@ function jobly_job_specs_options ()
 
 
 /**
- * Get all the job specifications
- */
-function jobly_job_specifications ($post_id = 0, $step = 0, $label = true, $before_label = '', $after_label = '', $before_value = '', $after_value = '')
-{
-
-    $specifications = jobly_opt('job_specifications');
-    if (is_array($specifications)) {
-        $i = 0;
-        foreach ( $specifications as $field ) {
-            $i++;
-
-            if ($i == $step) {
-
-                $meta_name = $field[ 'meta_name' ] ?? '';
-                $meta_key = $field[ 'meta_key' ] ?? '';
-                $meta_options = get_post_meta($post_id, 'jobly_meta_options', true);
-
-                if (isset ($meta_options[ $meta_key ])) {
-                    if ($label == true) {
-                        if (isset ($meta_options[ $meta_key ]) && !empty ($meta_options[ $meta_key ])) {
-                            echo $before_label . esc_html($meta_name) . $after_label;
-                        }
-                    }
-
-                    if (!empty ($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
-                        echo $before_value;
-                        $option_name = '';
-                        foreach ( $meta_options[ $meta_key ] as $value ) {
-                            $trimed_value = str_replace('@space@', ' ', $value);
-                            $option_name .= esc_html($trimed_value) . ', ';
-                        }
-                        echo rtrim($option_name, ', ');
-                        echo $after_value;
-                    }
-                }
-                break;
-            }
-        }
-    }
-}
-
-/**
  * Retrieve and format job attributes based on the specified meta key.
  *
  * @param string $meta_key The meta key for the job attribute.
@@ -369,4 +327,27 @@ if (!function_exists('jobly_get_job_attributes')) {
 
         return esc_html($formatted_value);
     }
+}
+
+
+
+function count_meta_key_usage($meta_key, $meta_value) {
+
+    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options');
+
+    $args = array(
+        'post_type' => 'job',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key' => $meta_key,
+                'value' => $meta_value,
+                'compare' => '=',
+            ),
+        ),
+    );
+
+    $query = new WP_Query($args);
+
+    return $query->found_posts;
 }

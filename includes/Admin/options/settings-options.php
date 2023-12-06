@@ -161,6 +161,14 @@ if( class_exists( 'CSF' ) ) {
                         'default'       => 'checkbox',
                     ),
 
+                    array(
+                        'id'            => 'range_suffix',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Range Suffix', 'jobly' ),
+                        'default'       => esc_html__( 'USD', 'jobly' ),
+                        'dependency'    => array( 'widget_layout', '==', 'range' ),
+                    ),
+
                 )
             ),
 
@@ -184,17 +192,15 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
-
-
     // Job Details Page Settings
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_job_details', // Set a unique slug-like ID
         'title' => esc_html__( 'Job Details Page', 'jobly' ),
     ) );
 
-    // Appearance Settings-> Details Page
+    // Job Details Page Settings-> Details Page
     CSF::createSection( $settings_prefix, array(
-        'parent'    => 'jobly_job_details_page',
+        'parent'    => 'jobly_job_details',
         'title'     => esc_html__( 'Details Page', 'jobly' ),
         'id'        => 'job_details_page',
         'fields'    => array(
@@ -212,6 +218,44 @@ if( class_exists( 'CSF' ) ) {
 
         )
     ) );
+
+    // Job Details Page Settings-> Related Jobs
+    CSF::createSection( $settings_prefix, array(
+        'parent'    => 'jobly_job_details',
+        'title'     => esc_html__( 'Related Posts', 'jobly' ),
+        'id'        => 'job_details_page_related_jobs',
+        'fields'    => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Job Speciations Attributes', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'job_related_post_meta_1',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 01', 'jobly'),
+                'options'   => jobly_job_specs(),
+            ),
+
+            array(
+                'id'        => 'job_related_post_meta_2',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 02', 'jobly'),
+                'options'   => jobly_job_specs(),
+            ),
+
+            array(
+                'id'        => 'job_related_post_meta_3',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 03', 'jobly'),
+                'options'   => jobly_job_specs(),
+            ),
+
+        )
+    ) );
+
 
 
     // Job Specifications

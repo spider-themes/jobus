@@ -19,6 +19,7 @@ if (!defined('ABSPATH')) {
 
             <?php
             $filter_widgets = jobly_opt('job_sidebar_widgets');
+
             if (isset($filter_widgets) && is_array($filter_widgets)) {
                 foreach ( $filter_widgets as $index => $widget ) {
                     $tab_count = $index + 1;
@@ -28,12 +29,16 @@ if (!defined('ABSPATH')) {
 
                     $widget_name = $widget[ 'widget_name' ];
                     $widget_layout = $widget[ 'widget_layout' ];
+                    $range_suffix = $widget[ 'range_suffix' ];
 
                     $specifications = jobly_job_specs();
                     $widget_title = $specifications[ $widget_name ];
 
                     $job_specifications = jobly_job_specs_options();
                     $job_specifications = $job_specifications[ $widget_name ];
+
+
+                    $salary =  $job_specifications;
                     ?>
                     <div class="filter-block bottom-line pb-25">
 
@@ -76,12 +81,20 @@ if (!defined('ABSPATH')) {
                                         <?php
                                         if (isset($job_specifications) && is_array($job_specifications)) {
                                             foreach ( $job_specifications as $key => $value ) {
+
+                                                $meta_key = $meta['meta_key'] ?? '';
+                                                $meta_value = $value['meta_values'] ?? '';
+
+                                                // Get the count for the current meta value
+                                                $meta_value_count = count_meta_key_usage($meta_key, $meta_value);
                                                 ?>
                                                 <li>
                                                     <input type="checkbox" name="<?php echo esc_attr($widget_name) ?>"
                                                            value="<?php echo esc_attr($key) ?>">
-                                                    <label><?php echo esc_html($value[ 'meta_values' ]) ?>
-                                                        <span>7</span></label>
+                                                    <label>
+                                                        <?php echo esc_html($value[ 'meta_values' ]) ?>
+                                                        <span><?php echo esc_html($meta_value_count) ?></span>
+                                                    </label>
                                                 </li>
                                                 <?php
                                             }
@@ -92,50 +105,59 @@ if (!defined('ABSPATH')) {
                             </div>
                             <?php
                         } // Range slider widget
+
                         elseif ($widget_layout == 'range') {
+
+                            $salary_value_list = $job_specifications;
+
+                            // Initialize an array to store all numeric values
+                            $all_values = [];
+
+                            // Extract numeric values from meta_values
+                            foreach ($salary_value_list as $item) {
+
+                                // Extract numbers and check for 'k'
+                                preg_match_all('/(\d+)(k)?/i', $item['meta_values'], $matches);
+                                foreach ($matches[1] as $key => $value) {
+                                    // If 'k' is present, multiply the number by 1000
+                                    $value = isset($matches[2][$key]) && strtolower($matches[2][$key]) == 'k' ? $value * 1000 : $value;
+
+                                    $all_values[] = $value;
+                                }
+                            }
+
+                            // Get the minimum and maximum values
+                            $min_salary = min($all_values);
+                            $max_salary = max($all_values);
                             ?>
-                            <div class="<?php echo esc_attr($is_collapsed_show) ?>"
-                                 id="collapse-<?php echo esc_attr($widget_name) ?>">
+                            <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapse-<?php echo esc_attr($widget_name) ?>">
                                 <div class="main-body">
                                     <div class="salary-slider">
                                         <div class="price-input d-flex align-items-center pt-5">
                                             <div class="field d-flex align-items-center">
-                                                <input type="number" class="input-min" value="0" readonly>
+                                                <input type="number" class="input-min" value="<?php echo esc_attr($min_salary); ?>" readonly>
                                             </div>
                                             <div class="pe-1 ps-1">-</div>
                                             <div class="field d-flex align-items-center">
-                                                <input type="number" class="input-max" value="300" readonly>
+                                                <input type="number" class="input-max" value="<?php echo esc_attr($max_salary); ?>" readonly>
                                             </div>
-                                            <div class="currency ps-1">USD</div>
+                                            <?php if ( !empty($range_suffix)) : ?>
+                                                <div class="currency ps-1"><?php echo esc_html($range_suffix) ?></div>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="slider">
                                             <div class="progress"></div>
                                         </div>
                                         <div class="range-input mb-10">
-                                            <input type="range" class="range-min" min="0" max="950" value="0" step="10">
-                                            <input type="range" class="range-max" min="0" max="1000" value="300" step="10">
+                                            <input type="range" class="range-min" min="0" max="<?php echo esc_attr($max_salary); ?>" value="<?php echo esc_attr($min_salary); ?>" step="10">
+                                            <input type="range" class="range-max" min="0" max="<?php echo esc_attr($max_salary); ?>" value="<?php echo esc_attr($max_salary); ?>" step="10">
                                         </div>
                                     </div>
-                                    <ul class="style-none d-flex flex-wrap justify-content-between radio-filter mb-5">
-                                        <li>
-                                            <input type="radio" name="jobDuration" value="01">
-                                            <label>Weekly</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="jobDuration" value="02">
-                                            <label>Monthly</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="jobDuration" value="03">
-                                            <label>Hourly</label>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <?php
                         }
                         ?>
-
                     </div>
                     <?php
                 }
