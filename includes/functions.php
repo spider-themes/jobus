@@ -351,3 +351,14 @@ function count_meta_key_usage($meta_key, $meta_value) {
 
     return $query->found_posts;
 }
+
+
+function jobly_pagination() {
+    the_posts_pagination(array(
+        'screen_reader_text' => ' ',
+        'prev_text'          => '<i class="arrow_left"></i>',
+        'next_text'          => '<i class="arrow_right"></i>'
+    ));
+
+    echo 'hello';
+}

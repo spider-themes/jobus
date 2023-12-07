@@ -7,9 +7,11 @@ if (!defined('ABSPATH')) {
     <div class="row justify-content-between align-items-center">
         <div class="col-md-5">
             <div class="job-title d-flex align-items-center">
-                <a href="<?php the_permalink(); ?>" class="logo">
-                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
-                </a>
+                <?php if (has_post_thumbnail()) : ?>
+                    <a href="<?php the_permalink(); ?>" class="logo">
+                        <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
+                    </a>
+                <?php endif; ?>
                 <div class="split-box1">
                     <!--Job Type-->
                     <?php if (jobly_get_job_attributes('archive_meta_1')) : ?>
