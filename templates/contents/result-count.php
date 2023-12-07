@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 
-$per_page = isset($args['posts_per_page']) ? intval($args['posts_per_page']) : 10; // Posts per page
+$per_page = isset($args['posts_per_page']) ? intval($args['posts_per_page']) : 3; // Posts per page
 $current_page = max(1, get_query_var('paged')); // Current page number
 
 $total_jobs = wp_count_posts('job');

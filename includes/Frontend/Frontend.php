@@ -32,6 +32,7 @@ class Frontend {
 
 		if ( is_post_type_archive( 'job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
+			//$archive_template = 'archive-content_bkp.php';
 			$archive_template = 'archive-job.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
 				$template = $theme_file;

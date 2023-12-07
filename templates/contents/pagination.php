@@ -4,6 +4,14 @@ if (!defined('ABSPATH')) {
 }
 
 global $job_post;
+
+the_posts_pagination(array(
+    'screen_reader_text' => ' ',
+    'prev_text'          => '<i class="arrow_left"></i>',
+    'next_text'          => '<i class="arrow_right"></i>'
+));
+
+
 ?>
 <ul class="pagination-one d-flex align-items-center justify-content-center justify-content-sm-start style-none">
     <?php

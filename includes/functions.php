@@ -353,12 +353,18 @@ function count_meta_key_usage($meta_key, $meta_value) {
 }
 
 
-function jobly_pagination() {
-    the_posts_pagination(array(
-        'screen_reader_text' => ' ',
-        'prev_text'          => '<i class="arrow_left"></i>',
-        'next_text'          => '<i class="arrow_right"></i>'
-    ));
+function jobly_pagination($query) {
 
-    echo 'hello';
+
+    $big = 999999999; // need an unlikely integer
+    echo paginate_links( array(
+        'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'format' => '?paged=%#%',
+        'current' => max( 1, get_query_var('paged') ),
+        'total' =>  $query->max_num_pages,
+        'prev_text' => '<i class="fas fa-chevron-left"></i>',
+        'next_text' => '<i class="fas fa-chevron-right"></i>',
+    ));
 }
+
+
