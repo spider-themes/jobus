@@ -153,6 +153,28 @@
         salaryRangeSlider(); // end Range Slider for Salary filter
 
 
+        // Job Category Show More Items
+        function jobCategoryShowMoreItems() {
+
+            let moreBtn = $(".more-btn");
+
+            if(moreBtn.length > 0) {
+                moreBtn.on("click", function() {
+                    let showMore = $(this).siblings('ul').toggleClass("show");
+
+                    if (showMore.hasClass('show')) {
+                        $(this).html('<i class="bi bi-dash"></i> Show Less');
+                    } else {
+                        $(this).html('<i class="bi bi-plus"></i> Show More');
+                    }
+                });
+            }
+        }
+
+        jobCategoryShowMoreItems(); // end jobCategoryShowMoreItems
+
+
+
 
         // Copy URL to clipboard
         function copyButton() {
