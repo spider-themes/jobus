@@ -37,6 +37,11 @@ $job_post = new \WP_Query($args);
 // ================= Archive Banner ================//
 jobly_get_template_part('banner/banner-search');
 
+$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+
+echo '<pre>';
+print_r($meta);
+echo '</pre>';
 ?>
 
     <section class="job-listing-three pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">

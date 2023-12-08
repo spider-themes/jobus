@@ -22,22 +22,22 @@ class Frontend {
 
 
 	/**
-	 * @param $template
+	 * @param $job_template
 	 *
 	 * @return mixed|string
 	 * Load custom template
 	 * @since 1.0.0
 	 */
-	public function template_loader( $template ) {
+	public function template_loader( $job_template ) {
 
 		if ( is_post_type_archive( 'job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			//$archive_template = 'archive-content_bkp.php';
 			$archive_template = 'archive-job.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
-				$template = $theme_file;
+                $job_template = $theme_file;
 			} else {
-				$template = JOBLY_PATH . '/templates/' . $archive_template;
+                $job_template = JOBLY_PATH . '/templates/' . $archive_template;
 			}
 		}
 
@@ -45,13 +45,13 @@ class Frontend {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			$single_template = 'single.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $single_template ) ) ) {
-				$template = $theme_file;
+                $job_template = $theme_file;
 			} else {
-				$template = JOBLY_PATH . '/templates/' . $single_template;
+                $job_template = JOBLY_PATH . '/templates/' . $single_template;
 			}
 		}
 
-		return $template;
+		return $job_template;
 
 	}
 
@@ -71,6 +71,8 @@ class Frontend {
             $archive_template = 'archive-company.php';
             if ($theme_file = locate_template(array('jobly/' . $archive_template))) {
                 $company_template = $theme_file;
+            } else {
+                $company_template = JOBLY_PATH . '/templates/' . $archive_template;
             }
         }
 
@@ -79,6 +81,8 @@ class Frontend {
             $single_template = 'single-company.php';
             if ($theme_file = locate_template(array('jobly/' . $single_template))) {
                 $company_template = $theme_file;
+            } else {
+                $company_template = JOBLY_PATH . '/templates/' . $single_template;
             }
         }
 

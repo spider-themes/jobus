@@ -28,6 +28,32 @@
 
         niceSelect();// end Nice Select
 
+
+        //============== Post View Switcher ==============//
+        function postViewSwitcher() {
+
+            let viewChangerBtn = $('.style-changer-btn');
+            if(viewChangerBtn.length > 0 ) {
+
+                $(".list-btn").on("click", function() {
+                    $(this).removeClass("active");
+                    $(".grid-btn").addClass("active");
+                    $(".grid-style").removeClass("show");
+                    $(".list-style").addClass("show");
+                });
+
+                $(".grid-btn").on("click", function() {
+                    $(this).removeClass("active");
+                    $(".list-btn").addClass("active");
+                    $(".grid-style").addClass("show");
+                    $(".list-style").removeClass("show");
+                });
+            }
+
+        }
+
+        postViewSwitcher(); // end Post View Switcher
+
         /**
          * Search Keywords
          */

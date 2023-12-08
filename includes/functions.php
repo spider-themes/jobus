@@ -205,9 +205,9 @@ if (!function_exists('jobly_the_button')) {
  * Job post count
  */
 if (!function_exists('jobly_job_post_count')) {
-    function jobly_job_post_count ()
+    function jobly_job_post_count ($post_type = 'job')
     {
-        $count = wp_count_posts('job');
+        $count = wp_count_posts($post_type);
         return number_format_i18n($count->publish);
     }
 }
@@ -365,6 +365,73 @@ function jobly_pagination($query) {
         'prev_text' => '<i class="fas fa-chevron-left"></i>',
         'next_text' => '<i class="fas fa-chevron-right"></i>',
     ));
+}
+
+
+// Function to get company counts
+function jobly_get_company_counts_bkp( $meta_id = '' ) {
+
+    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options');
+    $select_company = $meta[ 'select_company' ] ?? '';
+
+    $args = array(
+        'post_type' => 'job',
+        'posts_per_page' => -1,
+        'orderby' => 'meta_value',
+    );
+
+    if ( !empty($meta_id) ) {
+        $args['meta_query'] = array(
+            array(
+                'key' => $select_company,
+                'value' => $meta_id,
+            ),
+        );
+    }
+
+    $posts_list = get_posts( $args );
+    $meta_ids = array();
+
+    if ( !empty($posts_list) ) {
+        foreach ( $posts_list as $key => $post ) {
+            $meta_ids[$key] = get_post_meta( $post->ID, $select_company, true );
+        }
+    }
+
+    return $meta_ids;
+
+}
+
+
+
+
+// Function to get the count of selected companies
+function jobly_get_selected_company_count($company_id) {
+
+
+
+    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options');
+    $select_company = $meta[ 'select_company' ] ?? '';
+
+    $args = array(
+        'post_type'      => 'job',
+        'posts_per_page' => -1,
+        'meta_query'     => array(
+            array(
+                'key'   => $select_company,
+                'value' => $company_id,
+            ),
+        ),
+    );
+
+    $job_posts = get_posts($args);
+
+    $company_count = array();
+    foreach ( $job_posts as $key => $post ) {
+        $company_count[$key] = get_post_meta( $post->ID, $select_company, true );
+    }
+
+    return $company_count;
 }
 
 
