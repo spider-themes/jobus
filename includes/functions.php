@@ -205,8 +205,7 @@ if (!function_exists('jobly_the_button')) {
  * Job post count
  */
 if (!function_exists('jobly_job_post_count')) {
-    function jobly_job_post_count ($post_type = 'job')
-    {
+    function jobly_job_post_count ($post_type = 'job') {
         $count = wp_count_posts($post_type);
         return number_format_i18n($count->publish);
     }
@@ -214,8 +213,7 @@ if (!function_exists('jobly_job_post_count')) {
 
 
 if (!function_exists('jobly_job_post_count_result')) {
-    function jobly_job_post_count_result ()
-    {
+    function jobly_job_post_count_result () {
 
         // Check if posts_per_page is set in the $args array
         if (isset($args[ 'posts_per_page' ])) {
@@ -320,10 +318,10 @@ function jobly_job_specs_options ()
 if (!function_exists('jobly_get_job_attributes')) {
     function jobly_get_job_attributes ($meta_key = '')
     {
-        $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_options');
-        $meta_value = $meta_options[ 0 ][ jobly_opt($meta_key) ] ?? '';
-        $trimmed_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
-        $formatted_value = str_replace('@space@', ' ', $trimmed_value);
+        $meta_options       = get_post_meta(get_the_ID(), 'jobly_meta_options');
+        $meta_value         = $meta_options[ 0 ][ jobly_opt($meta_key) ] ?? '';
+        $trimmed_value      = !empty($meta_value) ? implode(', ', $meta_value) : '';
+        $formatted_value    = str_replace('@space@', ' ', $trimmed_value);
 
         return esc_html($formatted_value);
     }
@@ -435,3 +433,126 @@ function jobly_get_selected_company_count($company_id) {
 }
 
 
+/**
+ * Get the job search terms
+ */
+function jobly_search_terms($terms) {
+    $result = array();
+
+    // Check if the parameter is set in the URL
+    if (isset($_GET[$terms])) {
+        // Get the values of the parameter
+        $terms = $_GET[$terms];
+
+        // If there's only one value, convert it to an array for consistency
+        if (!is_array($terms)) {
+            $terms = [$terms];
+        }
+
+        // Return the array of terms
+        $result = $terms;
+    }
+
+    return $result;
+}
+
+
+/**
+ * Jobly search meta
+ */
+function jobly_all_search_meta($widgets = [ 'location' ] ) {
+
+    $sidebar_widgets = jobly_opt('job_sidebar_widgets');
+    foreach( $sidebar_widgets as $widget ) {
+        $widgets[] = $widget['widget_name'];
+    }
+
+    $job_meta_query = array();
+
+    if ( is_array($widgets) ) { 
+
+        foreach($widgets as $item => $job_value) {
+    
+            $job_type_meta = jobly_search_terms($job_value);
+            foreach ($job_type_meta as $key => $value) {
+                
+                if ( $item > 0 || $key > 0 ) {
+                    $job_meta_query['relation'] = 'OR';
+                }
+
+                if ( $key < 1 ) {
+                    $job_meta_query[$item] = array(
+                        'key'     => 'jobly_meta_options', // Replace with your actual meta key for job type
+                        'value'   => $value,
+                        'compare' => 'LIKE',
+                    );
+                }
+                
+                if ( $item < 1 ) {
+                    $job_meta_query[$key] = array(
+                        'key'     => 'jobly_meta_options', // Replace with your actual meta key for job type
+                        'value'   => $value,
+                        'compare' => 'LIKE',
+                    );
+                }
+                
+            }
+        }
+
+        return $job_meta_query;
+    }
+        return $job_meta_query;
+}
+
+/**
+ * Jobly meta & taxonomy arguments
+ */
+function jobly_meta_taxo_arguments( $data, $post_type = 'job', $taxonomy, $terms ){
+    $data_args = [];
+    if ( $data == 'taxonomy' ) {
+        $data_args = [
+            'post_type'         => $post_type,
+            'post_status'       => 'publish',
+            'tax_query' => array(
+                array(
+                    'taxonomy'  => $taxonomy,
+                    'field'     => 'slug',
+                    'terms'     => $terms,
+                ),
+            )
+        ];
+    } else {
+        $data_args = [
+            'post_type'         => $post_type,
+            'post_status'       => 'publish',
+            'meta_query'        => $terms,
+        ];
+    }
+    return $data_args;
+}
+
+/**
+ * jobly search meta & taxonomy queries merge
+ */
+function jobly_merge_queries_and_get_ids(...$queries) {
+    $combined_post_ids = array();
+
+    foreach ($queries as $query) {
+        if ( empty( $query['args'] ) || !is_array( $query['args'] ) ) {
+            continue; // Skip invalid or empty queries
+        }
+        
+        $wp_query = new \WP_Query($query['args']);
+        $post_ids = wp_list_pluck($wp_query->posts, 'ID');
+
+        if ( ! empty( $post_ids ) ) {
+            $combined_post_ids = array_merge($combined_post_ids, $post_ids);
+        }
+    }
+
+    // Ensure unique values in the combined array
+    $combined_post_ids = array_unique($combined_post_ids);
+
+    // If at least two queries have IDs, return the merged array, otherwise return as is
+    return count($queries) >= 2 ? $combined_post_ids : $combined_post_ids;
+}

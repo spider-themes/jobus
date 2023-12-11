@@ -1,47 +1,44 @@
 <?php
 get_header();
 
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
-$selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
+$paged              = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$selected_order_by  = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
+$selected_order     = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-$args = array(
-    'post_type' => 'job',
-    'post_status' => 'publish',
-    'posts_per_page' => -1,
-    'paged' => $paged,
-    'orderby' => $selected_order_by,
-    'order' => $selected_order,
-);
-
-// Handle search
-$search_query = get_query_var('s');
-if (!empty($search_query)) {
-    $args['s'] = $search_query;
-}
-
-// Handle category filter
-if (isset($_GET['job_cat']) && is_array($_GET['job_cat']) && !empty($_GET['job_cat'])) {
-    $args['tax_query'] = array(
-        array(
-            'taxonomy' => 'job_cat',
-            'field'    => 'slug',
-            'terms'    => $_GET['job_cat'],
-        ),
-    );
-}
-
-
-$job_post = new \WP_Query($args);
-
-// ================= Archive Banner ================//
 jobly_get_template_part('banner/banner-search');
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+$meta_args          = [ 'args' => jobly_meta_taxo_arguments('meta', 'job', '', jobly_all_search_meta()) ];
+$taxonomy_args1     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobly_search_terms('job_cats')) ];
+$taxonomy_args2     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_tag', jobly_search_terms('job_tags')) ];
 
-echo '<pre>';
-print_r($meta);
-echo '</pre>';
+if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
+    $result_ids = jobly_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
+} else {
+    $result_ids = jobly_merge_queries_and_get_ids( $taxonomy_args1, $taxonomy_args2 );
+}
+ 
+$args = array(
+    'post_type'         => 'job',
+    'post_status'       => 'publish',
+    'posts_per_page'    => -1,
+    'paged'             => $paged,
+    'orderby'           => $selected_order_by,
+    'order'             => $selected_order 
+);
+
+if ( ! empty( $result_ids ) ) {
+    $args['post__in'] = $result_ids;
+}
+
+if ( ! empty( get_query_var('s') ) ) {
+    $args['s'] = get_query_var('s');
+}
+
+$job_post = new \WP_Query($args);
+ 
+// ================= Archive Banner ================//
+
+$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 ?>
 
     <section class="job-listing-three pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -135,14 +132,17 @@ echo '</pre>';
 
                                                                     $meta_key = $meta[ 'meta_key' ] ?? '';
                                                                     $meta_value = $value[ 'meta_values' ] ?? '';
-
+                                                                    
+                                                                    $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                                    $opt_val        = strtolower($modifiedValues);
+                                                                    
                                                                     // Get the count for the current meta value
                                                                     $meta_value_count = count_meta_key_usage($meta_key, $meta_value);
                                                                     ?>
                                                                     <li>
                                                                         <input type="checkbox"
-                                                                               name="<?php echo esc_attr($widget_name) ?>"
-                                                                               value="<?php echo esc_attr($key) ?>">
+                                                                               name="<?php echo esc_attr($widget_name) ?>[]"
+                                                                               value="<?php echo esc_attr($opt_val) ?>">
                                                                         <label>
                                                                             <?php echo esc_html($value[ 'meta_values' ]) ?>
                                                                             <span><?php echo esc_html($meta_value_count) ?></span>
@@ -188,13 +188,13 @@ echo '</pre>';
                                                         <div class="salary-slider">
                                                             <div class="price-input d-flex align-items-center pt-5">
                                                                 <div class="field d-flex align-items-center">
-                                                                    <input type="number" class="input-min"
+                                                                    <input type="number" name="job-salary[]" class="input-min"
                                                                            value="<?php echo esc_attr($min_salary); ?>"
                                                                            readonly>
                                                                 </div>
                                                                 <div class="pe-1 ps-1">-</div>
                                                                 <div class="field d-flex align-items-center">
-                                                                    <input type="number" class="input-max"
+                                                                    <input type="number" name="job-salary[]" class="input-max"
                                                                            value="<?php echo esc_attr($max_salary); ?>"
                                                                            readonly>
                                                                 </div>
@@ -246,7 +246,7 @@ echo '</pre>';
                                                             $list_class = $key > 3 ? ' class=hide' : '';
                                                             ?>
                                                             <li<?php echo esc_attr($list_class) ?>>
-                                                                <input type="checkbox" name="cat-<?php echo esc_attr($term->term_id) ?>" value="<?php echo esc_attr($term->slug) ?>">
+                                                                <input type="checkbox" name="job_cats[]" value="<?php echo esc_attr($term->slug) ?>">
                                                                 <label><?php echo esc_html($term->name) ?>
                                                                     <span><?php echo esc_html($term->count) ?></span></label>
                                                             </li>
@@ -283,7 +283,7 @@ echo '</pre>';
                                                         foreach ( $term_tags as $term ) {
                                                             ?>
                                                             <li>
-                                                                <input type="checkbox" name="tag-<?php echo esc_attr($term->term_id) ?>" value="<?php echo esc_attr($term->slug) ?>">
+                                                                <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr($term->slug) ?>">
                                                                 <label><?php echo esc_html($term->name) ?></label>
                                                             </li>
                                                             <?php
@@ -302,7 +302,7 @@ echo '</pre>';
                                     <?php esc_html_e('Apply Filter', 'jobly'); ?>
                                 </button>
 
-                                <?php echo esc_url(add_query_arg($_GET)); ?>
+                                <?php //echo esc_url(add_query_arg($_GET)); ?>
 
                             </form>
                         </div>
@@ -325,7 +325,7 @@ echo '</pre>';
                                 $job_post->the_post();
 
                                 jobly_get_template_part('contents/content');
-
+                                
                                 wp_reset_postdata();
                             }
                             ?>
@@ -350,8 +350,6 @@ echo '</pre>';
             </div>
         </div>
     </section>
-
+ 
 <?php
-
-
 get_footer();
