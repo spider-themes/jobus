@@ -27,17 +27,6 @@ $args = [
 ];
 
 $company_query = new WP_Query($args);
-
-
-
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-
-global $meta;
-
-echo '<pre>';
-print_r($meta);
-echo '</pre>';
-
 ?>
     <section class="company-profiles pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
@@ -216,19 +205,7 @@ echo '</pre>';
                         <div class="accordion-box grid-style show">
                             <div class="row">
                                 <?php
-
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-
-
-                                $company_selection_count = count(jobly_get_selected_company_count(get_the_ID()));
-
-                                echo '<pre>';
-                                print_r($meta);
-                                echo '</pre>';
-
-
                                 while ($company_query->have_posts()) : $company_query->the_post();
-
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 d-flex">
                                         <div class="company-grid-layout favourite mb-30">
@@ -243,7 +220,8 @@ echo '</pre>';
                                             <p class="text-center mb-auto">New York, New York; Seattle, Washington...</p>
                                             <div class="bottom-line d-flex">
                                                 <a href="company-details.html">
-                                                    3 Vacancy
+                                                    <?php //echo sprintf(_n('Vacancy', 'vacancies', jobly_get_selected_company_count(get_the_ID() ), 'jobly' ));  ?>
+                                                    <?php echo esc_html(jobly_get_selected_company_count(get_the_ID())) ?>
                                                 </a>
                                             </div>
                                         </div>

@@ -10,6 +10,7 @@ if (class_exists('CSF')) {
         'theme' => 'dark',
         'output_css' => true,
         'show_restore' => true,
+        'data_type' => 'unserialize',
     ));
 
     // Company Info Meta Options
