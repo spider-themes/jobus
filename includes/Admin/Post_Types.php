@@ -15,6 +15,9 @@ class Post_Types {
 		// Register the posttype
 		add_action('init', [$this, 'register_post_types_job']);
         add_action('init', [$this, 'register_post_types_company']);
+
+        //Admin Columns
+        add_filter( 'manage_company_posts_columns', [$this, 'company_columns'] );
 	}
 
 	public static function init() {
@@ -198,5 +201,31 @@ class Post_Types {
             )
         ) );
 
+
+
     }
+
+    // Admin Columns
+    public function company_columns($columns) {
+
+        if ( empty( $columns ) && ! is_array( $columns ) ) {
+            $columns = array();
+        }
+
+        unset( $columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat'], $columns['taxonomy-company_tag'] );
+
+        $show_columns          = array();
+        $show_columns['cb']    = '<input type="checkbox" />';
+        $show_columns['title']       = esc_html__( 'Title', 'jobly' );
+        $show_columns['taxonomy-company_cat']       = esc_html__( 'Categories', 'jobly' );
+        $show_columns['taxonomy-company_tag']       = esc_html__( 'Tags', 'jobly' );
+        $show_columns['featured']    = '<span class="wc-featured parent-tips" data-tip="' . esc_attr__( 'Featured', 'woocommerce' ) . '">' . __( 'Featured', 'woocommerce' ) . '</span>';
+        $show_columns['author']       = esc_html__( 'Author', 'jobly' );
+        $show_columns['date']       = esc_html__( 'Date', 'jobly' );
+
+        return array_merge( $show_columns, $columns );
+
+
+    }
+
 }
