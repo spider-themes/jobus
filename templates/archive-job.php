@@ -23,7 +23,8 @@ $args = array(
     'posts_per_page'    => -1,
     'paged'             => $paged,
     'orderby'           => $selected_order_by,
-    'order'             => $selected_order 
+    'order'             => $selected_order,
+    'meta_value'        => 4724,
 );
 
 if ( ! empty( $result_ids ) ) {

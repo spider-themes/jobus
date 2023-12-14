@@ -266,6 +266,7 @@ if (!function_exists('jobly_company_post_list')) {
 
         if (!empty($posts)) {
             foreach ( $posts as $post ) {
+                $options[ '' ] = esc_html__('Default', 'jobly');
                 $options[ $post->ID ] = $post->post_title;
             }
         }
@@ -276,9 +277,9 @@ if (!function_exists('jobly_company_post_list')) {
 }
 
 
-function jobly_job_specs ()
+function jobly_job_specs ( $settings_id = 'job_specifications' )
 {
-    $specifications = jobly_opt('job_specifications');
+    $specifications = jobly_opt($settings_id);
 
     $specs = [];
     if (is_array($specifications)) {
@@ -318,9 +319,9 @@ function jobly_job_specs_options ()
  * @return string The formatted and sanitized job attribute value.
  */
 if (!function_exists('jobly_get_job_attributes')) {
-    function jobly_get_job_attributes ($meta_key = '')
+    function jobly_get_job_attributes ($meta_key = '', $meta_page_id = 'jobly_meta_options')
     {
-        $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_options');
+        $meta_options = get_post_meta(get_the_ID(), $meta_page_id);
         $meta_value = $meta_options[ 0 ][ jobly_opt($meta_key) ] ?? '';
         $trimmed_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
         $formatted_value = str_replace('@space@', ' ', $trimmed_value);

@@ -98,8 +98,9 @@ if ( ! class_exists( 'Jobly' ) ) {
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options.php';			
-			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
+            require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';

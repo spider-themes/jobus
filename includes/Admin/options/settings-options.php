@@ -54,6 +54,68 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
+
+    // Job Specifications
+    CSF::createSection( $settings_prefix, array(
+        'title'     => esc_html__( 'Job Specifications', 'jobly' ),
+        'id'        => 'jobly_job_specifications',
+        'fields'    => array(
+
+            array(
+                'id'                => 'job_specifications',
+                'type'              => 'group',
+                'title'             => esc_html__( 'Job Specifications', 'jobly' ),
+                'subtitle'          => esc_html__( 'Manage Job Specifications', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'meta_name',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Name', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Enter a specification', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique name', 'jobly' ),
+                        'attributes' => [
+                            'style'     => 'float:left;margin-right:10px;'
+                        ],
+                    ),
+
+                    array(
+                        'id'            => 'meta_key',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Key', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Specification key', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique key', 'jobly' ),
+                        'attributes' => [
+                            'style'     => 'float:left;margin-right:10px;'
+                        ],
+                    ),
+
+                    array(
+                        'id'            => 'meta_values_group',
+                        'type'          => 'repeater',
+                        'title'         => esc_html__( 'Options', 'jobly' ),
+                        'button_title'  => esc_html__( 'Add Option', 'jobly' ),
+                        'fields' => array(
+                            array(
+                                'id'            => 'meta_values',
+                                'type'          => 'text',
+                                'title'         => null,
+                            )
+                        )
+                    ),
+
+                    array(
+                        'id'            => 'meta_icon',
+                        'type'          => 'icon',
+                        'title'         => esc_html__( 'Icon (Optional)', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Select icon', 'jobly' ),
+                    )
+                )
+            )// End job specifications
+        )
+    ) );
+
+
     // Job Archive Page Settings
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_job_archive', // Set a unique slug-like ID
@@ -63,7 +125,7 @@ if( class_exists( 'CSF' ) ) {
     // Job Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_job_archive',
-        'title' => esc_html__( 'Archive Settings', 'jobly' ),
+        'title' => esc_html__( 'Archive', 'jobly' ),
         'id' => 'job_archive_settings',
         'fields' => array(
 
@@ -121,7 +183,7 @@ if( class_exists( 'CSF' ) ) {
     // Job Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_job_archive',
-        'title' => esc_html__( 'Sidebar Settings', 'jobly' ),
+        'title' => esc_html__( 'Sidebar', 'jobly' ),
         'id' => 'job_sidebar_settings',
         'fields' => array(
 
@@ -257,20 +319,24 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
+    /***
+     * Company Settings
+     *
+     */
 
-    // Job Specifications
+    // Company Specifications
     CSF::createSection( $settings_prefix, array(
-        'title'     => esc_html__( 'Job Specifications', 'jobly' ),
-        'id'        => 'jobly_job_specifications',
+        'title'     => esc_html__( 'Company Specifications', 'jobly' ),
+        'id'        => 'jobly_company_specifications',
         'fields'    => array(
-            
+
             array(
-                'id'                => 'job_specifications',
+                'id'                => 'company_specifications',
                 'type'              => 'group',
-                'title'             => esc_html__( 'Job Specifications', 'jobly' ),
-                'subtitle'          => esc_html__( 'Manage Job Specifications', 'jobly' ),
+                'title'             => esc_html__( 'Company Specifications', 'jobly' ),
+                'subtitle'          => esc_html__( 'Manage Company Specifications', 'jobly' ),
                 'fields' => array(
-                    
+
                     array(
                         'id'            => 'meta_name',
                         'type'          => 'text',
@@ -292,12 +358,12 @@ if( class_exists( 'CSF' ) ) {
                             'style'     => 'float:left;margin-right:10px;'
                         ],
                     ),
-                    
+
                     array(
                         'id'            => 'meta_values_group',
                         'type'          => 'repeater',
-                        'title'         => esc_html__( 'Options', 'jobly' ), 
-                        'button_title'  => esc_html__( 'Add Option', 'jobly' ), 
+                        'title'         => esc_html__( 'Options', 'jobly' ),
+                        'button_title'  => esc_html__( 'Add Option', 'jobly' ),
                         'fields' => array(
                             array(
                                 'id'            => 'meta_values',
@@ -315,6 +381,35 @@ if( class_exists( 'CSF' ) ) {
                     )
                 )
             )// End job specifications
+        )
+    ) );
+
+    // Company Archive Page Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_company_archive', // Set a unique slug-like ID
+        'title' => esc_html__( 'Company Archive Page', 'jobly' ),
+    ) );
+
+    // Job Archive Settings-> Archive Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_company_archive',
+        'title' => esc_html__( 'Archive', 'jobly' ),
+        'id' => 'company_archive_settings',
+        'fields' => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Company Attributes', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'company_archive_meta_1',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute', 'jobly'),
+                'options'   => jobly_job_specs('company_specifications'),
+            ),
+
         )
     ) );
 

@@ -15,7 +15,6 @@ class Post_Types {
 		// Register the posttype
 		add_action('init', [$this, 'register_post_types_job']);
         add_action('init', [$this, 'register_post_types_company']);
-
 	}
 
 	public static function init() {
@@ -43,7 +42,7 @@ class Post_Types {
 			'new_item_name'         => esc_html__( 'New Job Name', 'jobly' ),
 			'all_items'             => esc_html__( 'All Jobs', 'jobly' ),
 			'view_item'             => esc_html__( 'View Job', 'jobly' ),
-			'view_items'            => esc_html__( 'Views', 'jobly' ),
+			'view_items'            => esc_html__( 'View Jobs', 'jobly' ),
 			'search_items'          => esc_html__( 'Search Jobs', 'jobly' ),
 			'not_found'             => esc_html__( 'No jobs found', 'jobly' ),
 			'not_found_in_trash'    => esc_html__( 'No jobs found in Trash', 'jobly' ),
@@ -132,7 +131,7 @@ class Post_Types {
             'new_item_name'         => esc_html__( 'New Company Name', 'jobly' ),
             'all_items'             => esc_html__( 'All Companies', 'jobly' ),
             'view_item'             => esc_html__( 'View Company', 'jobly' ),
-            'view_items'            => esc_html__( 'Views', 'jobly' ),
+            'view_items'            => esc_html__( 'View Companies', 'jobly' ),
             'search_items'          => esc_html__( 'Search Companies', 'jobly' ),
             'not_found'             => esc_html__( 'No companies found', 'jobly' ),
             'not_found_in_trash'    => esc_html__( 'No companies found in Trash', 'jobly' ),

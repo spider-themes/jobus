@@ -14,8 +14,8 @@ get_header();
 jobly_get_template_part('banner/banner-company');
 
 $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
-$order_by = (isset($_GET['orderby'])) ? sanitize_text_field($_GET['orderby']) : 'date';
-$order = (isset($_GET['order'])) ? sanitize_text_field($_GET['order']) : 'DESC';
+$order_by = (isset($_GET[ 'orderby' ])) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
+$order = (isset($_GET[ 'order' ])) ? sanitize_text_field($_GET[ 'order' ]) : 'DESC';
 
 $args = [
     'post_type' => 'company',
@@ -34,16 +34,19 @@ $company_query = new WP_Query($args);
 
 
                 <div class="col-xl-3 col-lg-4">
-                    <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40" data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
+                    <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
+                            data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
                         <i class="bi bi-funnel"></i>
                         Filter
                     </button>
                     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
-                        <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
                         <div class="main-title fw-500 text-dark">Filter By</div>
                         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
                             <div class="filter-block bottom-line pb-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse" href="#collapseSemploye" role="button" aria-expanded="false">Search Company</a>
+                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
+                                   href="#collapseSemploye" role="button" aria-expanded="false">Search Company</a>
                                 <div class="collapse show" id="collapseSemploye">
                                     <div class="main-body">
                                         <form action="#" class="input-box position-relative">
@@ -55,7 +58,8 @@ $company_query = new WP_Query($args);
                             </div>
                             <!-- /.filter-block -->
                             <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse" href="#collapseCstatus" role="button" aria-expanded="false">Company Status</a>
+                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
+                                   href="#collapseCstatus" role="button" aria-expanded="false">Company Status</a>
                                 <div class="collapse show" id="collapseCstatus">
                                     <div class="main-body">
                                         <ul class="style-none filter-input">
@@ -77,7 +81,8 @@ $company_query = new WP_Query($args);
                             </div>
                             <!-- /.filter-block -->
                             <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse" href="#collapseLocation" role="button" aria-expanded="false">Location</a>
+                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
+                                   href="#collapseLocation" role="button" aria-expanded="false">Location</a>
                                 <div class="collapse show" id="collapseLocation">
                                     <div class="main-body">
                                         <select class="nice-select bg-white">
@@ -100,7 +105,8 @@ $company_query = new WP_Query($args);
                             <!-- /.filter-block -->
 
                             <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false">Category</a>
+                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
+                                   href="#collapseCategory" role="button" aria-expanded="false">Category</a>
                                 <div class="collapse" id="collapseCategory">
                                     <div class="main-body">
                                         <ul class="style-none filter-input">
@@ -139,7 +145,8 @@ $company_query = new WP_Query($args);
                             </div>
                             <!-- /.filter-block -->
                             <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse" href="#collapseTeam" role="button" aria-expanded="false">Team Size</a>
+                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
+                                   href="#collapseTeam" role="button" aria-expanded="false">Team Size</a>
                                 <div class="collapse" id="collapseTeam">
                                     <div class="main-body">
                                         <ul class="style-none filter-input">
@@ -168,7 +175,8 @@ $company_query = new WP_Query($args);
                                 </div>
                             </div>
                             <!-- /.filter-block -->
-                            <a href="#" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">Apply Filter</a>
+                            <a href="#" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">Apply
+                                Filter</a>
                         </div>
                     </div>
                     <!-- /.filter-area-tab -->
@@ -194,8 +202,10 @@ $company_query = new WP_Query($args);
                                     </select>
                                 </div>
 
-                                <button class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn active" title="Active List"><i class="bi bi-list"></i></button>
-                                <button class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn" title="Active Grid"><i class="bi bi-grid"></i></button>
+                                <button class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn active"
+                                        title="Active List"><i class="bi bi-list"></i></button>
+                                <button class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn"
+                                        title="Active Grid"><i class="bi bi-grid"></i></button>
 
                             </div>
                         </div>
@@ -205,28 +215,40 @@ $company_query = new WP_Query($args);
                         <div class="accordion-box grid-style show">
                             <div class="row">
                                 <?php
-                                while ($company_query->have_posts()) : $company_query->the_post();
+                                while ( $company_query->have_posts() ) : $company_query->the_post();
+                                    $company_count = jobly_get_selected_company_count(get_the_ID());
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 d-flex">
                                         <div class="company-grid-layout favourite mb-30">
-                                            <a href="<?php the_permalink(); ?>" class="company-logo me-auto ms-auto rounded-circle">
-                                                <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle']); ?>
-                                            </a>
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <a href="<?php the_permalink(); ?>"
+                                                   class="company-logo me-auto ms-auto rounded-circle">
+                                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img rounded-circle' ]); ?>
+                                                </a>
+                                            <?php endif; ?>
                                             <h5 class="text-center">
                                                 <a href="<?php the_permalink(); ?>" class="company-name tran3s">
                                                     <?php the_title() ?>
                                                 </a>
                                             </h5>
-                                            <p class="text-center mb-auto">New York, New York; Seattle, Washington...</p>
-                                            <div class="bottom-line d-flex">
-                                                <a href="company-details.html">
-                                                    <?php //echo sprintf(_n('Vacancy', 'vacancies', jobly_get_selected_company_count(get_the_ID() ), 'jobly' ));  ?>
-                                                    <?php echo esc_html(jobly_get_selected_company_count(get_the_ID())) ?>
-                                                </a>
-                                            </div>
+
+                                            <?php
+                                            if (jobly_get_job_attributes('company_archive_meta_1', 'jobly_meta_company_options')) { ?>
+                                                <p class="text-center mb-auto"><?php echo jobly_get_job_attributes('company_archive_meta_1', 'jobly_meta_company_options') ?></p>
+                                                <?php
+                                            }
+                                            if ($company_count > 0) { ?>
+                                                <div class="bottom-line d-flex">
+                                                    <a href="#">
+                                                        <?php echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count); ?>
+                                                    </a>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
                                     </div>
-                                    <?php
+                                <?php
                                 endwhile;
                                 wp_reset_postdata();
                                 ?>
@@ -238,14 +260,14 @@ $company_query = new WP_Query($args);
                         <div class="accordion-box list-style">
 
                             <?php
-                            while ($company_query->have_posts()) : $company_query->the_post();
+                            while ( $company_query->have_posts() ) : $company_query->the_post();
                                 ?>
                                 <div class="company-list-layout favourite mb-20">
                                     <div class="row justify-content-between align-items-center">
                                         <div class="col-xl-5">
                                             <div class="d-flex align-items-xl-center">
                                                 <a href="<?php the_permalink(); ?>" class="company-logo rounded-circle">
-                                                    <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle']); ?>
+                                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img rounded-circle' ]); ?>
                                                 </a>
                                                 <div class="company-data">
                                                     <h5 class="m0">
@@ -260,9 +282,12 @@ $company_query = new WP_Query($args);
                                         <div class="col-xl-4 col-md-8">
                                             <div class="d-flex align-items-center ps-xxl-5 lg-mt-20">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="images/lazy.svg" data-src="images/assets/img_42.png" alt="" class="lazy-img rounded-circle team-img">
-                                                    <img src="images/lazy.svg" data-src="images/assets/img_43.png" alt="" class="lazy-img rounded-circle team-img">
-                                                    <img src="images/lazy.svg" data-src="images/assets/img_44.png" alt="" class="lazy-img rounded-circle team-img">
+                                                    <img src="images/lazy.svg" data-src="images/assets/img_42.png"
+                                                         alt="" class="lazy-img rounded-circle team-img">
+                                                    <img src="images/lazy.svg" data-src="images/assets/img_43.png"
+                                                         alt="" class="lazy-img rounded-circle team-img">
+                                                    <img src="images/lazy.svg" data-src="images/assets/img_44.png"
+                                                         alt="" class="lazy-img rounded-circle team-img">
                                                     <div class="team-text">
                                                         <span class="text-md fw-500 text-dark d-block">14+ </span> <?php esc_html_e('Team Size', 'jobly'); ?>
                                                     </div>
@@ -271,27 +296,33 @@ $company_query = new WP_Query($args);
                                         </div>
                                         <div class="col-xl-3 col-md-4">
                                             <div class="btn-group d-flex align-items-center justify-content-md-end lg-mt-20">
-                                                <a href="company-details.html" class="open-job-btn text-center fw-500 tran3s me-2">3 open job</a>
-                                                <a href="company-details.html" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
+                                                <a href="company-details.html"
+                                                   class="open-job-btn text-center fw-500 tran3s me-2">3 open job</a>
+                                                <a href="company-details.html"
+                                                   class="save-btn text-center rounded-circle tran3s"
+                                                   title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <?php
+                            <?php
                             endwhile;
                             wp_reset_postdata();
                             ?>
                         </div>
 
                         <div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
-                            <p class="m0 order-sm-last text-center text-sm-start xs-pb-20">Showing <span class="text-dark fw-500">1 to 20</span> of <span class="text-dark fw-500">350</span></p>
+                            <p class="m0 order-sm-last text-center text-sm-start xs-pb-20">Showing <span
+                                        class="text-dark fw-500">1 to 20</span> of <span
+                                        class="text-dark fw-500">350</span></p>
                             <ul class="pagination-one d-flex align-items-center justify-content-center justify-content-sm-start style-none">
                                 <li class="active"><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
                                 <li><a href="#">3</a></li>
                                 <li><a href="#">4</a></li>
                                 <li>....</li>
-                                <li class="ms-2"><a href="#" class="d-flex align-items-center">Last <img src="images/icon/icon_50.svg" alt="" class="ms-2"></a></li>
+                                <li class="ms-2"><a href="#" class="d-flex align-items-center">Last <img
+                                                src="images/icon/icon_50.svg" alt="" class="ms-2"></a></li>
                             </ul>
                         </div>
 

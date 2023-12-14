@@ -2,9 +2,9 @@
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options
-    $meta_prefix = 'jobly_meta_options';
+    $meta_company_prefix = 'jobly_meta_company_options';
 
-    CSF::createMetabox($meta_prefix, array(
+    CSF::createMetabox($meta_company_prefix, array(
         'title' => esc_html__('Company Options', 'jobly'),
         'post_type' => 'company',
         'theme' => 'dark',
@@ -12,10 +12,22 @@ if (class_exists('CSF')) {
         'show_restore' => true,
     ));
 
+    // Company Info Meta Options
+    CSF::createSection($meta_company_prefix, array(
+        'title' => esc_html__('General', 'jobly'),
+        'id' => 'jobly_meta_general',
+        'icon' => 'fas fa-home',
+        'fields' => array(
+
+        )
+    ));
+
+
     // Retrieve the repeater field configurations from settings options
-    $specifications = jobly_opt('company_specifications');
-    if (is_array($specifications)) {
-        foreach ($specifications as $field) {
+    $company_specifications = jobly_opt('company_specifications');
+
+    if (!empty($company_specifications)) {
+        foreach ($company_specifications as $field) {
 
             $meta_value     = $field['meta_values_group'] ?? [];
             $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . $field['meta_icon'] . '"></i>' : '';
@@ -29,7 +41,7 @@ if (class_exists('CSF')) {
             }
 
             if (!empty($field['meta_key'])) {
-                $fields[] = [
+                $company_fields[] = [
                     'id' => $field['meta_key'] ?? '',
                     'type' => 'select',
                     'title' => $field['meta_name'] ?? '',
@@ -42,9 +54,9 @@ if (class_exists('CSF')) {
             }
         }
 
-        CSF::createSection($meta_prefix, array(
+        CSF::createSection($meta_company_prefix, array(
             'title' => esc_html__('Specifications', 'jobly'),
-            'fields' => $fields,
+            'fields' => $company_fields,
             'icon'   => 'fas fa-cogs',
             'id'     => 'jobly_meta_specifications',
         ));
