@@ -23,16 +23,104 @@ $args = array(
     'posts_per_page'    => -1,
     'paged'             => $paged,
     'orderby'           => $selected_order_by,
-    'order'             => $selected_order,
-    'meta_value'        => 4724,
+    'order'             => $selected_order
 );
-
-if ( ! empty( $result_ids ) ) {
-    $args['post__in'] = $result_ids;
-}
 
 if ( ! empty( get_query_var('s') ) ) {
     $args['s'] = get_query_var('s');
+}
+
+
+// Range fields value
+$filter_widgets = jobly_opt('job_sidebar_widgets');
+$search_widgets = [];
+
+if (isset($filter_widgets) && is_array($filter_widgets)) {
+    foreach ( $filter_widgets as $widget ) {   
+        if ( $widget[ 'widget_layout' ] == 'range' ) {  
+            $search_widgets[] = $widget[ 'widget_name' ];
+        }
+    }
+}
+
+$min_price      = []; 
+$price_ranged   = [];
+foreach( $search_widgets as $key =>  $input ) {
+    $min_price              = jobly_search_terms($input)[0] ?? '';
+    $max_price              = jobly_search_terms($input)[1] ?? '';
+    $price_ranged[$input]   = [$min_price, $max_price];
+}
+
+$formatted_price_ranged     = [];
+foreach ($price_ranged as $key => $values) {
+    $formatted_price_ranged[$key][] = implode('-', array_map(function ($value) {
+        return is_numeric($value) ? $value : preg_replace('/[^0-9.k]/', '', $value);
+    }, $values));
+}
+
+/**
+ * 
+ * Get all the range fields values
+ * Trim all the strings, keep only the numaric values
+ * 
+*/
+
+$allSliderValues        = jobly_all_range_field_value();
+$simplifiedSliderValues = [];
+
+foreach ($allSliderValues as $key => $values) {
+    foreach ($values as $innerKey => $innerValues) {
+        // Check if the range contains 'k'
+        if (strpos($innerValues[0], 'k') !== false) {
+            // Replace 'k' with '000'
+            $innerValues[0] = str_replace('k', '000', $innerValues[0]);
+        }
+        $simplifiedSliderValues[$key][$innerKey] = $innerValues[0];
+    }
+}
+
+ 
+/**
+ * Get matched ids by searched min and max values
+ */
+$matchedIds = [];
+
+foreach ($formatted_price_ranged as $key => $values) {
+  
+    foreach ($simplifiedSliderValues[$key] as $id => $range) {
+        // Extract min and max values from the existing range
+ 
+        list($rangeMin, $rangeMax) = explode('-', $range);
+        
+
+        foreach ($values as $formattedRange) {
+            // Extract min and max values from the formatted range
+            list($formattedMin, $formattedMax) = explode('-', $formattedRange);
+ 
+            // Compare and check if the entire formatted range falls within the existing range
+            if ( $formattedMin <= $rangeMin &&  $formattedMax >= $rangeMax ) {
+                $matchedIds[$key][] = $id;
+                break; // Break out of the loop if a match is found for the current ID
+            }
+        
+    }
+    }
+}
+ 
+// Flatten the array
+$flattenedIds = array_merge(...array_values($matchedIds));
+
+// Remove duplicates
+$uniqueIds = array_unique($flattenedIds);
+
+
+/**
+ * Merge searched ids with tax & meta queries ids
+ */
+$mergedIds = array_unique(array_merge($result_ids, $uniqueIds));
+
+if ( ! empty( $mergedIds ) ) {
+    $args['post__in'] = $mergedIds;
 }
 
 $job_post = new \WP_Query($args);
@@ -66,167 +154,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                 <input type="hidden" name="post_type" value="job"/>
 
                                 <?php
-                                $filter_widgets = jobly_opt('job_sidebar_widgets');
 
-                                if (isset($filter_widgets) && is_array($filter_widgets)) {
-                                    foreach ( $filter_widgets as $index => $widget ) {
-                                        $tab_count = $index + 1;
-                                        $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
-                                        $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
-                                        $area_expanded = $index == 1 ? 'true' : 'false';
+                                jobly_search_fields();
 
-                                        $widget_name = $widget[ 'widget_name' ];
-                                        $widget_layout = $widget[ 'widget_layout' ];
-                                        $range_suffix = $widget[ 'range_suffix' ];
-
-                                        $specifications = jobly_job_specs();
-                                        $widget_title = $specifications[ $widget_name ];
-
-                                        $job_specifications = jobly_job_specs_options();
-                                        $job_specifications = $job_specifications[ $widget_name ];
-
-
-                                        $salary = $job_specifications;
-                                        ?>
-                                        <div class="filter-block bottom-line pb-25">
-
-                                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
-                                               data-bs-toggle="collapse"
-                                               href="#collapse-<?php echo esc_attr($widget_name) ?>" role="button"
-                                               aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                                <?php echo esc_html($widget_title); ?>
-                                            </a>
-                                            <?php
-
-                                            // Dropdown menu widget
-                                            if ($widget_layout == 'dropdown') {
-                                                ?>
-                                                <div class="<?php echo esc_attr($is_collapsed_show) ?>"
-                                                     id="collapse-<?php echo esc_attr($widget_name) ?>">
-                                                    <div class="main-body">
-                                                        <select class="nice-select bg-white"
-                                                                name="<?php echo esc_attr($widget_name) ?>">
-                                                            <?php
-                                                            if (isset($job_specifications) && is_array($job_specifications)) {
-                                                                foreach ( $job_specifications as $key => $value ) {
-                                                                    ?>
-                                                                    <option value="<?php echo esc_attr($key) ?>"><?php echo esc_html($value[ 'meta_values' ]) ?></option>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            } // Checkbox widget
-
-                                            elseif ($widget_layout == 'checkbox') {
-                                                ?>
-                                                <div class="<?php echo esc_attr($is_collapsed_show) ?>"
-                                                     id="collapse-<?php echo esc_attr($widget_name) ?>">
-                                                    <div class="main-body">
-                                                        <ul class="style-none filter-input">
-                                                            <?php
-                                                            if (isset($job_specifications) && is_array($job_specifications)) {
-                                                                foreach ( $job_specifications as $key => $value ) {
-
-                                                                    $meta_key = $meta[ 'meta_key' ] ?? '';
-                                                                    $meta_value = $value[ 'meta_values' ] ?? '';
-                                                                    
-                                                                    $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                                    $opt_val        = strtolower($modifiedValues);
-                                                                    
-                                                                    // Get the count for the current meta value
-                                                                    $meta_value_count = count_meta_key_usage($meta_key, $meta_value);
-                                                                    ?>
-                                                                    <li>
-                                                                        <input type="checkbox"
-                                                                               name="<?php echo esc_attr($widget_name) ?>[]"
-                                                                               value="<?php echo esc_attr($opt_val) ?>">
-                                                                        <label>
-                                                                            <?php echo esc_html($value[ 'meta_values' ]) ?>
-                                                                            <span><?php echo esc_html($meta_value_count) ?></span>
-                                                                        </label>
-                                                                    </li>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                            ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            } // Range slider widget
-
-                                            elseif ($widget_layout == 'range') {
-
-                                                $salary_value_list = $job_specifications;
-
-                                                // Initialize an array to store all numeric values
-                                                $all_values = [];
-
-                                                // Extract numeric values from meta_values
-                                                foreach ( $salary_value_list as $item ) {
-
-                                                    // Extract numbers and check for 'k'
-                                                    preg_match_all('/(\d+)(k)?/i', $item[ 'meta_values' ], $matches);
-                                                    foreach ( $matches[ 1 ] as $key => $value ) {
-                                                        // If 'k' is present, multiply the number by 1000
-                                                        $value = isset($matches[ 2 ][ $key ]) && strtolower($matches[ 2 ][ $key ]) == 'k' ? $value * 1000 : $value;
-
-                                                        $all_values[] = $value;
-                                                    }
-                                                }
-
-                                                // Get the minimum and maximum values
-                                                $min_salary = min($all_values);
-                                                $max_salary = max($all_values);
-                                                ?>
-                                                <div class="<?php echo esc_attr($is_collapsed_show) ?>"
-                                                     id="collapse-<?php echo esc_attr($widget_name) ?>">
-                                                    <div class="main-body">
-                                                        <div class="salary-slider">
-                                                            <div class="price-input d-flex align-items-center pt-5">
-                                                                <div class="field d-flex align-items-center">
-                                                                    <input type="number" name="job-salary[]" class="input-min"
-                                                                           value="<?php echo esc_attr($min_salary); ?>"
-                                                                           readonly>
-                                                                </div>
-                                                                <div class="pe-1 ps-1">-</div>
-                                                                <div class="field d-flex align-items-center">
-                                                                    <input type="number" name="job-salary[]" class="input-max"
-                                                                           value="<?php echo esc_attr($max_salary); ?>"
-                                                                           readonly>
-                                                                </div>
-                                                                <?php if (!empty($range_suffix)) : ?>
-                                                                    <div class="currency ps-1"><?php echo esc_html($range_suffix) ?></div>
-                                                                <?php endif; ?>
-                                                            </div>
-                                                            <div class="slider">
-                                                                <div class="progress"></div>
-                                                            </div>
-                                                            <div class="range-input mb-10">
-                                                                <input type="range" class="range-min" min="0"
-                                                                       max="<?php echo esc_attr($max_salary); ?>"
-                                                                       value="<?php echo esc_attr($min_salary); ?>"
-                                                                       step="10">
-                                                                <input type="range" class="range-max" min="0"
-                                                                       max="<?php echo esc_attr($max_salary); ?>"
-                                                                       value="<?php echo esc_attr($max_salary); ?>"
-                                                                       step="10">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <?php
-                                    }
-                                }
-
+                                
                                 // Category Widget
                                 if (jobly_opt('is_job_widget_cat') == true) {
                                     ?>
@@ -243,11 +174,15 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                         'taxonomy' => 'job_cat',
                                                     ));
                                                     if (!empty($term_cats)) {
+                                                        $searched_opt   = jobly_search_terms('job_cats');
                                                         foreach ( $term_cats as $key => $term ) {
-                                                            $list_class = $key > 3 ? ' class=hide' : '';
+
+                                                            $list_class     = $key > 3 ? ' class=hide' : '';                                                            
+                                                            $check_status   = array_search($term->slug, $searched_opt); 
+
                                                             ?>
                                                             <li<?php echo esc_attr($list_class) ?>>
-                                                                <input type="checkbox" name="job_cats[]" value="<?php echo esc_attr($term->slug) ?>">
+                                                                <input type="checkbox" name="job_cats[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>>
                                                                 <label><?php echo esc_html($term->name) ?>
                                                                     <span><?php echo esc_html($term->count) ?></span></label>
                                                             </li>
@@ -281,10 +216,12 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                         'hide_empty' => false,
                                                     ));
                                                     if (!empty($term_tags)) {
-                                                        foreach ( $term_tags as $term ) {
+                                                        $searched_opt   = jobly_search_terms('job_tags');
+                                                        foreach ( $term_tags as $term ) {                                                
+                                                            $check_status   = array_search($term->slug, $searched_opt); 
                                                             ?>
                                                             <li>
-                                                                <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr($term->slug) ?>">
+                                                                <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>>
                                                                 <label><?php echo esc_html($term->name) ?></label>
                                                             </li>
                                                             <?php

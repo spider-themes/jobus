@@ -128,19 +128,20 @@
 
 
         // Range Slider for Salary filter
-        function salaryRangeSlider() {
-
-            if($(".salary-slider").length) {
-                const rangeInput = document.querySelectorAll(".range-input input"),
-                    priceInput = document.querySelectorAll(".price-input input"),
-                    range = document.querySelector(".slider .progress");
-                let priceGap = 10;
-
+        function salaryRangeSlider(selector) {
+            const sliderElements = document.querySelectorAll(selector);
+        
+            sliderElements.forEach((sliderElement) => {
+                const rangeInput = sliderElement.querySelectorAll(".range-input input"),
+                    priceInput = sliderElement.querySelectorAll(".price-input input"),
+                    range = sliderElement.querySelector(".slider .progress");
+                let priceGap = 1;
+        
                 priceInput.forEach((input) => {
                     input.addEventListener("input", (e) => {
                         let minPrice = parseInt(priceInput[0].value),
                             maxPrice = parseInt(priceInput[1].value);
-
+        
                         if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
                             if (e.target.className === "input-min") {
                                 rangeInput[0].value = minPrice;
@@ -152,12 +153,12 @@
                         }
                     });
                 });
-
+        
                 rangeInput.forEach((input) => {
                     input.addEventListener("input", (e) => {
                         let minVal = parseInt(rangeInput[0].value),
                             maxVal = parseInt(rangeInput[1].value);
-
+        
                         if (maxVal - minVal < priceGap) {
                             if (e.target.className === "range-min") {
                                 rangeInput[0].value = maxVal - priceGap;
@@ -172,11 +173,12 @@
                         }
                     });
                 });
-            }
-
+            });
         }
-
-        salaryRangeSlider(); // end Range Slider for Salary filter
+        
+        // Use the function with your specific class or attribute
+        salaryRangeSlider(".salary-slider");
+         // end Range Slider for Salary filter
 
 
         // Job Category Show More Items
