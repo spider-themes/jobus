@@ -205,8 +205,7 @@ if (!function_exists('jobly_the_button')) {
  * Job post count
  */
 if (!function_exists('jobly_job_post_count')) {
-    function jobly_job_post_count ($post_type = 'job')
-    {
+    function jobly_job_post_count ($post_type = 'job') {
         $count = wp_count_posts($post_type);
         return number_format_i18n($count->publish);
     }
@@ -230,6 +229,8 @@ if (!function_exists('jobly_job_post_count_result')) {
         // Calculate the first and last result numbers
         $first_result = ($per_page * $current_page) - $per_page + 1;
         $last_result = min(($per_page * $current_page), $total_jobs);
+
+        
 
         // Display the post-counter
         $results = sprintf(
@@ -373,21 +374,32 @@ function count_meta_key_usage ($meta_key, $meta_value)
     return $query->found_posts;
 }
 
-
-function jobly_pagination ($query)
-{
-
+/**
+ * Jobly job pagination
+ */
+function jobly_pagination( $job_query ) {
 
     $big = 999999999; // need an unlikely integer
     echo paginate_links(array(
         'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
         'format' => '?paged=%#%',
         'current' => max(1, get_query_var('paged')),
-        'total' => $query->max_num_pages,
+        'total' => $job_query->max_num_pages,
         'prev_text' => '<i class="fas fa-chevron-left"></i>',
         'next_text' => '<i class="fas fa-chevron-right"></i>',
     ));
 }
+
+/**
+ * Jobly job pagination
+ */
+function jobly_job_archive_query($query) {
+    if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
+        $query->set('posts_per_page', 6);
+    }
+}
+add_action('pre_get_posts', 'jobly_job_archive_query');
+
 
 
 // Function to get company counts
@@ -591,30 +603,9 @@ function jobly_merge_queries_and_get_ids (...$queries)
     return count($queries) >= 2 ? $combined_post_ids : $combined_post_ids;
 }
 
-
-
-
-
-
-
-
-function jobly_format_number($number) {
-    if ($number >= 10000000) {
-        // Convert to crores
-        return round($number / 10000000, 2) . 'cr';
-    } elseif ($number >= 100000) {
-        // Convert to lakhs
-        return round($number / 100000, 2) . 'l';
-    } elseif ($number >= 1000) {
-        // Convert to thousands
-        return round($number / 1000, 2) . 'k';
-    } else {
-        return $number;
-    }
-}
-
-
-
+/**
+ * Get the post IDs of all the range fields
+ */
 function jobly_all_range_field_value() {
     // All the post IDs of the 'job' post type
     $args = array(
@@ -626,12 +617,8 @@ function jobly_all_range_field_value() {
     $posts      = get_posts($args);
     $post_ids   = [];
 
-    if (!empty( $posts )) {
-
-
-       
-
-
+    if ( ! empty ( $posts ) ) {
+        
         foreach ($posts as $post) {
             $meta = get_post_meta($post->ID, 'jobly_meta_options', true);
 
@@ -641,7 +628,10 @@ function jobly_all_range_field_value() {
             if (isset($filter_widgets) && is_array($filter_widgets)) {
                 foreach ( $filter_widgets as $widget ) {   
                     if ( $widget[ 'widget_layout' ] == 'range' ) {  
-                        $search_widgets[] = $widget[ 'widget_name' ];
+                        // if get value in search bar
+                        if ( isset( $_GET[ $widget[ 'widget_name' ] ] ) ) {
+                            $search_widgets[] = $widget[ 'widget_name' ] ?? '';
+                        }
                     }
                 }
             }
@@ -649,215 +639,14 @@ function jobly_all_range_field_value() {
             foreach( $search_widgets as $serial => $input ) {
                 
                 $meta_salary = $meta[$input] ?? '';
-
-
-                if ( ! empty($meta_salary)) {
-
+                if ( ! empty( $meta_salary ) ) {
                     $value = preg_replace("/[^0-9-k]/", "", $meta_salary);
-
                     $post_ids[$input][$post->ID] = $value;
-
-
-
-
                 }
-            }
 
-            
+            }
         }
     }
 
     return $post_ids;
-}
-
- 
-
-
-
-
-
-
-function jobly_search_fields(){
-
-
-    $filter_widgets = jobly_opt('job_sidebar_widgets');
-
-    if (isset($filter_widgets) && is_array($filter_widgets)) {
-        foreach ( $filter_widgets as $index => $widget ) {
-
-            $tab_count = $index + 1;
-            $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
-            $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
-            $area_expanded = $index == 1 ? 'true' : 'false';
-
-            $widget_name = $widget[ 'widget_name' ];
-            $widget_layout = $widget[ 'widget_layout' ];
-            $range_suffix = $widget[ 'range_suffix' ];
-
-            $specifications = jobly_job_specs();
-            $widget_title = $specifications[ $widget_name ];
-
-            $job_specifications = jobly_job_specs_options();
-            $job_specifications = $job_specifications[ $widget_name ];
-            
-            ?>
-            <div class="filter-block bottom-line pb-25">
-
-                <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapse-<?php echo esc_attr($widget_name) ?>" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                    <?php echo esc_html($widget_title); ?>
-                </a>
-                <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapse-<?php echo esc_attr($widget_name) ?>">
-                    <div class="main-body">
-                    <?php
-
-                // Dropdown menu widget
-                // switch case $widget_layout
-                switch ($widget_layout) {
-                    case 'dropdown': 
-                        ?>
-                        <select class="nice-select bg-white" name="<?php echo esc_attr($widget_name) ?>[]">
-                            <?php
-                            if (isset($job_specifications) && is_array($job_specifications)) {
-                                foreach ( $job_specifications as $key => $value ) {
-
-                                    $select_value       = $value[ 'meta_values' ] ?? '';                                    
-                                    $modifiedSelect     = preg_replace('/[,\s]+/', '@space@', $select_value);
-                                    $modifiedVal        = strtolower($modifiedSelect);
-
-                                    $searched_val       = jobly_search_terms( $widget_name );
-                                    $selected_val       = $searched_val[0] ?? $modifiedVal;
-
-                                    ?>
-                                    <option value="<?php echo esc_attr($modifiedVal) ?>" <?php if ( $modifiedVal == $selected_val ) { echo "selected"; } ?>><?php echo esc_html($value[ 'meta_values' ]) ?></option>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                        <?php
-                        break;
-
-                    case 'range':
-                        $salary_value_list = $job_specifications;
-
-                        // Initialize an array to store all numeric values
-                        $all_values = [];
-
-                        // Extract numeric values from meta_values
-                        foreach ( $salary_value_list as $item ) {
-
-                            // Extract numbers and check for 'k'
-                            preg_match_all('/(\d+)(k)?/i', $item[ 'meta_values' ], $matches);
-                            foreach ( $matches[ 1 ] as $key => $value ) {
-                                // If 'k' is present, multiply the number by 1000
-                                $value = isset($matches[ 2 ][ $key ]) && strtolower($matches[ 2 ][ $key ]) == 'k' ? $value * 1000 : $value;
-
-                                $all_values[] = $value;
-                            }
-                        }
-                        
-                        // // Get the minimum and maximum values
-
-                          
-
-                        if ( ! empty ( $all_values ) ) :
-                            $min_values         = min($all_values);
-                            $max_values         = max($all_values);
-
-                            $min_salary         = jobly_search_terms($widget_name)[0] ?? $min_values;
-                            $max_salary         = jobly_search_terms($widget_name)[1] ?? $max_values;
-                            ?>
-                            
-                            <div class="salary-slider" data_widget="<?php echo esc_attr($widget_name) ?>[]">
-                                <div class="price-input d-flex align-items-center pt-5">
-                                    <div class="field d-flex align-items-center">
-                                        <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-min" value="<?php echo esc_attr($min_salary); ?>" readonly>
-                                    </div>
-                                    <div class="pe-1 ps-1">-</div>
-                                    <div class="field d-flex align-items-center">
-                                        <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-max" value="<?php echo esc_attr($max_salary); ?>" readonly>
-                                    </div>
-                                    <?php if (!empty($range_suffix)) : ?>
-                                        <div class="currency ps-1"><?php echo esc_html($range_suffix) ?></div>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="slider">
-                                    <div class="progress"></div>
-                                </div>
-                                <div class="range-input mb-10">
-                                    <input type="range" class="range-min" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>" value="<?php echo esc_attr($min_salary); ?>" step="1">
-                                    <input type="range" class="range-max" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>"  value="<?php echo esc_attr($max_salary); ?>" step="1">
-                                </div>
-                            </div>
-                            <?php
-                        endif;
-
-                        break;
-                    case 'checkbox':
-                        ?>
-
-                        <ul class="style-none filter-input">
-                            <?php
-                            if (isset($job_specifications) && is_array($job_specifications)) {
-                                foreach ( $job_specifications as $key => $value ) {
-
-                                    $meta_key           = $meta[ 'meta_key' ] ?? '';
-                                    $meta_value         = $value[ 'meta_values' ] ?? '';
-                                    
-                                    $modifiedValues     = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                    $opt_val            = strtolower($modifiedValues);
-                                    
-                                    // Get the count for the current meta value
-                                    $meta_value_count   = count_meta_key_usage('jobly_meta_options', $opt_val);
-                                    if ( $meta_value_count > 0 ) {
-
-                                        $searched_opt   = jobly_search_terms($widget_name);
-                                        $check_status   = array_search($opt_val, $searched_opt);                                     
-
-                                    ?>
-                                    <li>
-                                        <input type="checkbox" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?> name="<?php echo esc_attr($widget_name) ?>[]" value="<?php echo esc_attr($opt_val) ?>">
-                                        <label>
-                                            <?php echo esc_html($meta_value); ?>
-                                            <span><?php echo esc_html($meta_value_count); ?></span>
-                                        </label>
-                                    </li>
-                                    <?php
-                                    }
-                                }
-                            }
-                            ?>
-                        </ul>
-
-                        <?php
-                        break;
-                    // Additional cases as needed
-                    default:
-                        echo 'No selected input';
-                }
-                
-                    ?>
-                    
-
-
-
-                            
-
-
-                            
-
-
-
-                        </div>
-                    </div> 
-                    </div> 
-                
-            <?php
-        }
-    }
-
-
-
-
-
 }

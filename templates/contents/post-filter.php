@@ -3,12 +3,13 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 global $job_post;
+
 $orderby    = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : '';
 ?>
 <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
     <div class="total-job-found">
         <?php esc_html_e('All', 'jobly'); ?>
-        <span class="text-dark"><?php echo esc_html(jobly_job_post_count()) ?></span>
+        <span class="text-dark"><?php echo esc_html($job_post->post_count); ?></span>
         <?php esc_html_e('jobs found', 'jobly'); ?>
     </div>
 

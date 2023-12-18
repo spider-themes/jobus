@@ -59,8 +59,7 @@ class Post_Types {
 			'item_scheduled'           => __( 'Job scheduled.', 'jobly' ),
 			'item_updated'             => __( 'Job updated.', 'jobly' ),
 		);
-
-		$supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
+ 
 
 		$args = array(
 			'labels'                => $labels,
@@ -72,12 +71,11 @@ class Post_Types {
 			'query_var'             => true,
 			'rewrite'               => array( 'slug' => 'job' ),
 			'capability_type'       => 'post',
-			'has_archive'           => true,
+			'has_archive'           => 'jobs',
 			'hierarchical'          => true,
 			'map_meta_cap'          => true,
 			'taxonomies'            => array(),
-			'menu_position'         => 8,
-			'supports'              => $supports,
+			'menu_position'         => 8, 
 			'yarpp_support'         => true,
 			'menu_icon'             => 'dashicons-money',
 			'show_admin_column'     => true,
