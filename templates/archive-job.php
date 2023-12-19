@@ -11,6 +11,12 @@ $meta_args          = [ 'args' => jobly_meta_taxo_arguments('meta', 'job', '', j
 $taxonomy_args1     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobly_search_terms('job_cats')) ];
 $taxonomy_args2     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_tag', jobly_search_terms('job_tags')) ];
 
+
+echo '<pre>';
+print_r($meta_args);
+echo '</pre>';
+
+
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
     $result_ids = jobly_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
 } else {

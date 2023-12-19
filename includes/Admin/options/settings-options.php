@@ -234,7 +234,6 @@ if( class_exists( 'CSF' ) ) {
                 )
             ),
 
-
             array(
                 'id'      => 'is_job_widget_cat',
                 'type'    => 'switcher',
@@ -390,7 +389,7 @@ if( class_exists( 'CSF' ) ) {
         'title' => esc_html__( 'Company Archive Page', 'jobly' ),
     ) );
 
-    // Job Archive Settings-> Archive Settings
+    // Company Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_company_archive',
         'title' => esc_html__( 'Archive', 'jobly' ),
@@ -408,6 +407,64 @@ if( class_exists( 'CSF' ) ) {
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute', 'jobly'),
                 'options'   => jobly_job_specs('company_specifications'),
+            ),
+
+        )
+    ) );
+
+    // Company Archive Page Settings-> Sidebar Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_company_archive',
+        'title' => esc_html__( 'Sidebar', 'jobly' ),
+        'id' => 'company_sidebar_settings',
+        'fields' => array(
+
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Search filter Widgets', 'jobly'),
+            ),
+
+            array(
+                'id'      => 'is_company_widget_search',
+                'type'    => 'switcher',
+                'title'   => esc_html__('Search Form', 'jobly'),
+                'default' => true,
+            ),
+
+            array(
+                'id'                => 'company_sidebar_widgets',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Widgets', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Widget', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'widget_name',
+                        'type'          => 'select',
+                        'title'         => esc_html__( 'Widget', 'jobly' ),
+                        'options'       => jobly_job_specs('company_specifications'),
+                        'default'       => false,
+                    ),
+
+                    array(
+                        'id'            => 'widget_layout',
+                        'type'          => 'button_set',
+                        'title'         => esc_html__( 'Widget Layout', 'jobly' ),
+                        'options'       => array(
+                            'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
+                            'checkbox'      => esc_html__( 'Checkbox', 'jobly' ),
+                        ),
+                        'default'       => 'checkbox',
+                    ),
+
+                )
+            ),
+
+            array(
+                'id'      => 'is_company_widget_cat',
+                'type'    => 'switcher',
+                'title'   => esc_html__('Category', 'jobly'),
+                'default' => true,
             ),
 
         )

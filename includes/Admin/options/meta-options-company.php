@@ -19,6 +19,13 @@ if (class_exists('CSF')) {
         'icon' => 'fas fa-home',
         'fields' => array(
 
+            array(
+                'id' => 'post_favorite',
+                'type' => 'checkbox',
+                'title' => esc_html__('Favorite', 'jobly'),
+                'default' => false,
+            ),
+
         )
     ));
 

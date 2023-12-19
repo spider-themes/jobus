@@ -18,6 +18,7 @@ class Post_Types {
 
         //Admin Columns
         add_filter( 'manage_company_posts_columns', [$this, 'company_columns'] );
+        add_action('manage_company_posts_custom_column', array($this, 'render_featured_column'), 10, 2);
 	}
 
 	public static function init() {
@@ -141,7 +142,7 @@ class Post_Types {
             'parent_item'           => esc_html__( 'Parent Company', 'jobly' ),
             'parent_item_colon'     => esc_html__( 'Parent Company:', 'jobly' ),
             'update_item'           => esc_html__( 'Update Company', 'jobly' ),
-            'menu_name'             => esc_html__( 'Companies', 'jobly' ),
+            'menu_name'             => esc_html__( 'Company', 'jobly' ),
             'item_published'           => __( 'Company published.', 'jobly' ),
             'item_published_privately' => __( 'Company published privately.', 'jobly' ),
             'item_reverted_to_draft'   => __( 'Company reverted to draft.', 'jobly' ),
@@ -188,20 +189,6 @@ class Post_Types {
             )
         ));
 
-        // Register post taxonomies Tags
-        register_taxonomy( 'company_tag', 'company', array(
-            'public'                => true,
-            'hierarchical'          => false,
-            'show_ui'               => true,
-            'show_admin_column'     => true,
-            'show_in_nav_menus'     => true,
-            'show_in_rest'          => true,
-            'labels'                => array(
-                'name'  => esc_html__( 'Tags', 'jobly'),
-            )
-        ) );
-
-
 
     }
 
@@ -219,13 +206,54 @@ class Post_Types {
         $show_columns['title']       = esc_html__( 'Title', 'jobly' );
         $show_columns['taxonomy-company_cat']       = esc_html__( 'Categories', 'jobly' );
         $show_columns['taxonomy-company_tag']       = esc_html__( 'Tags', 'jobly' );
-        $show_columns['featured']    = '<span class="wc-featured parent-tips" data-tip="' . esc_attr__( 'Featured', 'woocommerce' ) . '">' . __( 'Featured', 'woocommerce' ) . '</span>';
+        //$show_columns['featured'] = '<span class="wc-featured tips" data-tip="' . esc_attr__('Featured', 'jobly') . '">' . __('Featured', 'jobly') . '</span>';
         $show_columns['author']       = esc_html__( 'Author', 'jobly' );
         $show_columns['date']       = esc_html__( 'Date', 'jobly' );
+
+        // Featured column header
+        $show_columns['featured'] = '<th scope="col" id="featured" class="manage-column column-featured" style="cursor: help;"><span class="wc-featured parent-tips" data-tip="Featured">Featured</span></th>';
+
 
         return array_merge( $show_columns, $columns );
 
 
+        ?>
+        <style>
+            .wc-featured {
+                display: inline-block;
+                text-align: center;
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                border-radius: 3px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            .wc-featured.tips {
+                background: #28a745;
+                color: #fff;
+            }
+
+            .wc-featured.not-featured.tips {
+                background: #dc3545;
+                color: #fff;
+            }
+        </style>
+
+        <?php
+
+    }
+
+
+    // Add content to Featured column
+    public function render_featured_column($column, $post_id) {
+        if ($column === 'featured') {
+            $url = wp_nonce_url(admin_url('admin-ajax.php?action=woocommerce_feature_product&product_id=' . $post_id), 'woocommerce-feature-product');
+            $featured = get_post_meta($post_id, '_featured', true) === 'yes' ? 'Yes' : 'No';
+
+            echo '<td class="featured column-featured" data-colname="Featured"><a href="' . esc_url($url) . '" aria-label="Toggle featured"><span class="wc-featured tips">' . esc_html($featured) . '</span></a></td>';
+        }
     }
 
 }

@@ -4740,7 +4740,7 @@ body.compensate-for-scrollbar {
 }
 .company-grid-layout .bottom-line a {
   display: block;
-  width: 50%;
+  width: 100%;
   font-size: 15px;
   font-weight: 500;
   color: #00BF58;
@@ -4759,9 +4759,6 @@ body.compensate-for-scrollbar {
 .company-grid-layout .bottom-line a:hover {
   background: #00BF58;
   color: #fff;
-}
-.company-grid-layout .bottom-line a:first-child {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .company-list-layout {

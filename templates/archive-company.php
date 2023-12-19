@@ -13,20 +13,52 @@ if (!defined('ABSPATH')) {
 get_header();
 jobly_get_template_part('banner/banner-company');
 
-$paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
-$order_by = (isset($_GET[ 'orderby' ])) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
-$order = (isset($_GET[ 'order' ])) ? sanitize_text_field($_GET[ 'order' ]) : 'DESC';
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
+$selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
+
+/*$meta_args = [
+    'args' => jobly_meta_taxo_arguments('meta', 'company', '', jobly_all_search_meta_for_company())
+];*/
+
+/*$taxonomy_args1 = [
+    'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobly_search_terms('job_cats'))
+];*/
+
+echo '<pre>';
+print_r($meta_args);
+echo '</pre>';
+
 
 $args = [
     'post_type' => 'company',
+    'post_status' => 'publish',
     'posts_per_page' => -1,
     'paged' => $paged,
-    'post_status' => 'publish',
-    'orderby' => $order_by,
-    'order' => $order,
+    'orderby' => $selected_order_by,
+    'order' => $selected_order,
 ];
 
+
+if (!empty(get_query_var('s'))) {
+    $args[ 's' ] = get_query_var('s');
+}
+
+$search_query = get_query_var('s');
+if (!empty($search_query)) {
+    $args[ 'meta_query' ] = array(
+        'relation' => 'OR',
+        array(
+            'key' => 'your_meta_key',  // Replace with your actual meta key
+            'value' => $search_query,
+            'compare' => 'LIKE',
+        ),
+    );
+}
+
 $company_query = new WP_Query($args);
+
+
 ?>
     <section class="company-profiles pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
@@ -37,149 +69,200 @@ $company_query = new WP_Query($args);
                     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
                             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
                         <i class="bi bi-funnel"></i>
-                        Filter
+                        <?php esc_html_e('Filter', 'jobly'); ?>
                     </button>
+
                     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
                         <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
-                        <div class="main-title fw-500 text-dark">Filter By</div>
+                        <div class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobly'); ?></div>
+
                         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
-                            <div class="filter-block bottom-line pb-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
-                                   href="#collapseSemploye" role="button" aria-expanded="false">Search Company</a>
-                                <div class="collapse show" id="collapseSemploye">
-                                    <div class="main-body">
-                                        <form action="#" class="input-box position-relative">
-                                            <input type="text" placeholder="Company Name">
-                                            <button><i class="bi bi-search"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.filter-block -->
-                            <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
-                                   href="#collapseCstatus" role="button" aria-expanded="false">Company Status</a>
-                                <div class="collapse show" id="collapseCstatus">
-                                    <div class="main-body">
-                                        <ul class="style-none filter-input">
-                                            <li>
-                                                <input type="checkbox" name="CompanyStatus" value="01">
-                                                <label>New</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="CompanyStatus" value="02">
-                                                <label>Top Rated</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="CompanyStatus" value="03">
-                                                <label>Older</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.filter-block -->
-                            <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
-                                   href="#collapseLocation" role="button" aria-expanded="false">Location</a>
-                                <div class="collapse show" id="collapseLocation">
-                                    <div class="main-body">
-                                        <select class="nice-select bg-white">
-                                            <option value="0">All Location</option>
-                                            <option value="1">California, CA</option>
-                                            <option value="2">New York</option>
-                                            <option value="3">Miami</option>
-                                        </select>
-                                        <div class="loccation-range-select mt-5">
-                                            <div class="d-flex align-items-center">
-                                                <span>Radius: &nbsp;</span>
-                                                <div id="rangeValue">50</div>
-                                                <span>&nbsp;miles</span>
+
+                            <form action="<?php echo esc_url(home_url()); ?>" role="search" method="get">
+                                <input type="hidden" name="post_type" value="company"/>
+
+                                <?php
+                                // Search by company name
+                                if (jobly_opt('is_company_widget_search') == true) {
+                                    ?>
+                                    <div class="filter-block bottom-line pb-25">
+                                        <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
+                                           href="#collapseSemploye" role="button"
+                                           aria-expanded="false"><?php esc_html_e('Search Company', 'jobly'); ?>
+                                        </a>
+                                        <div class="collapse show" id="collapseSemploye">
+                                            <div class="main-body">
+                                                <form action="#" class="input-box position-relative">
+                                                    <input type="text" placeholder="Company Name">
+                                                    <button><i class="bi bi-search"></i></button>
+                                                </form>
                                             </div>
-                                            <input type="range" id="locationRange" value="50" max="100">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- /.filter-block -->
+                                    <?php
+                                }
 
-                            <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
-                                   href="#collapseCategory" role="button" aria-expanded="false">Category</a>
-                                <div class="collapse" id="collapseCategory">
-                                    <div class="main-body">
-                                        <ul class="style-none filter-input">
-                                            <li>
-                                                <input type="checkbox" name="Experience" value="01">
-                                                <label>Web Design <span>15</span></label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Experience" value="02">
-                                                <label>Design & Creative <span>8</span></label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Experience" value="03">
-                                                <label>It & Development <span>7</span></label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Experience" value="04">
-                                                <label>Web & Mobile Dev <span>5</span></label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Experience" value="05">
-                                                <label>Writing <span>4</span></label>
-                                            </li>
-                                            <li class="hide">
-                                                <input type="checkbox" name="Experience" value="06">
-                                                <label>Sales & Marketing <span>25</span></label>
-                                            </li>
-                                            <li class="hide">
-                                                <input type="checkbox" name="Experience" value="07">
-                                                <label>Music & Audio <span>1</span></label>
-                                            </li>
-                                        </ul>
-                                        <div class="more-btn"><i class="bi bi-plus"></i> Show More</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.filter-block -->
-                            <div class="filter-block bottom-line pb-25 mt-25">
-                                <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
-                                   href="#collapseTeam" role="button" aria-expanded="false">Team Size</a>
-                                <div class="collapse" id="collapseTeam">
-                                    <div class="main-body">
-                                        <ul class="style-none filter-input">
-                                            <li>
-                                                <input type="checkbox" name="Team" value="01">
-                                                <label>12+ Team Size</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Team" value="02">
-                                                <label>7+ Team Size</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Team" value="03">
-                                                <label>10+ Team Size</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Team" value="04">
-                                                <label>15+ Team Size</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="Team" value="05">
-                                                <label>5+ Team Size</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.filter-block -->
-                            <a href="#" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">Apply
-                                Filter</a>
+                                // Widget for company meta data list
+                                $filter_widgets = jobly_opt('company_sidebar_widgets');
+
+                                if (is_array($filter_widgets)) {
+                                    foreach ( $filter_widgets as $index => $widget ) {
+
+                                        $tab_count = $index + 1;
+                                        $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
+                                        $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
+                                        $area_expanded = $index == 1 ? 'true' : 'false';
+
+                                        $widget_name = $widget[ 'widget_name' ] ?? '';
+                                        $widget_layout = $widget[ 'widget_layout' ] ?? '';
+
+                                        $specifications = jobly_job_specs('company_specifications');
+                                        $widget_title = $specifications[ $widget_name ];
+
+                                        $company_specifications = jobly_job_specs_options('company_specifications');
+                                        $company_specifications = $company_specifications[ $widget_name ];
+
+                                        ?>
+                                        <div class="filter-block bottom-line pb-25 mt-25">
+                                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
+                                               data-bs-toggle="collapse"
+                                               href="#collapse-<?php echo esc_attr($widget_name) ?>" role="button"
+                                               aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+                                                <?php echo esc_html($widget_title); ?>
+                                            </a>
+                                            <div class="<?php echo esc_attr($is_collapsed_show) ?>"
+                                                 id="collapse-<?php echo esc_attr($widget_name) ?>">
+                                                <div class="main-body">
+                                                    <?php
+
+                                                    if ($widget_layout == 'checkbox') {
+                                                        ?>
+                                                        <ul class="style-none filter-input">
+                                                            <?php
+                                                            if (!empty($company_specifications)) {
+                                                                foreach ( $company_specifications as $key => $value ) {
+
+                                                                    $meta_value = $value[ 'meta_values' ] ?? '';
+
+                                                                    $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                                    $opt_val = strtolower($modifiedValues);
+                                                                    ?>
+                                                                    <li>
+                                                                        <input type="checkbox"
+                                                                               name="<?php echo esc_attr($widget_name) ?>[]"
+                                                                               value="<?php echo esc_attr($opt_val) ?>">
+                                                                        <label><?php echo esc_html($meta_value); ?></label>
+                                                                    </li>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </ul>
+                                                        <?php
+                                                    } elseif ($widget_layout == 'dropdown') {
+                                                        ?>
+                                                        <select class="nice-select bg-white"
+                                                                name="<?php echo esc_attr($widget_name) ?>[]">
+                                                            <?php
+                                                            if (is_array($company_specifications)) {
+                                                                foreach ( $company_specifications as $key => $value ) {
+
+                                                                    $select_value = $value[ 'meta_values' ] ?? '';
+                                                                    $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $select_value);
+                                                                    $modifiedVal = strtolower($modifiedSelect);
+
+                                                                    $searched_val = jobly_search_terms($widget_name);
+                                                                    $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
+                                                                    ?>
+                                                                    <option value="<?php echo esc_attr($modifiedVal) ?>">
+                                                                        <?php echo esc_html($value[ 'meta_values' ]) ?>
+                                                                    </option>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <div class="loccation-range-select mt-5">
+                                                            <div class="d-flex align-items-center">
+                                                                <span>Radius:</span>
+                                                                <div id="rangeValue">50</div>
+                                                                <span>miles</span>
+                                                            </div>
+                                                            <input type="range" id="locationRange" value="50"
+                                                                   max="100">
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+
+                                // Widget Category List
+                                if (jobly_opt('is_job_widget_cat') == true) {
+                                    $term_cats = get_terms(array(
+                                        'taxonomy' => 'company_cat',
+                                    ));
+                                    if (!empty($term_cats)) {
+                                        ?>
+                                        <div class="filter-block bottom-line pb-25 mt-25">
+                                            <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
+                                               href="#collapseCategory" role="button"
+                                               aria-expanded="false"><?php esc_html_e('Category', 'jobly'); ?></a>
+                                            <div class="collapse" id="collapseCategory">
+                                                <div class="main-body">
+                                                    <ul class="style-none filter-input">
+                                                        <?php
+                                                        $searched_opt = jobly_search_terms('job_cats');
+                                                        foreach ( $term_cats as $key => $term ) {
+
+                                                            $list_class = $key > 1 ? ' class=hide' : '';
+                                                            $check_status = array_search($term->slug, $searched_opt);
+
+                                                            ?>
+                                                            <li<?php echo esc_attr($list_class) ?>>
+                                                                <input type="checkbox" name="company_cats[]"
+                                                                       value="<?php echo esc_attr($term->slug) ?>">
+                                                                <label>
+                                                                    <?php echo esc_html($term->name) ?>
+                                                                    <span><?php echo esc_html($term->count) ?></span>
+                                                                </label>
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                    <?php
+                                                    if (count($term_cats) > 2) {
+                                                        ?>
+                                                        <div class="more-btn"><i
+                                                                    class="bi bi-plus"></i><?php esc_html_e('Show More', 'jobly'); ?>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
+                                    <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                                </button>
+
+                                <?php echo esc_url(add_query_arg($_GET)); ?>
+
+                            </form>
+
+
                         </div>
                     </div>
-                    <!-- /.filter-area-tab -->
                 </div>
 
 
@@ -217,9 +300,12 @@ $company_query = new WP_Query($args);
                                 <?php
                                 while ( $company_query->have_posts() ) : $company_query->the_post();
                                     $company_count = jobly_get_selected_company_count(get_the_ID());
+                                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                    $post_favourite = $meta[ 'post_favorite' ] ?? '';
+                                    $is_favourite = ($post_favourite == '1') ? 'favourite' : '';
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 d-flex">
-                                        <div class="company-grid-layout favourite mb-30">
+                                        <div class="company-grid-layout <?php echo esc_attr($is_favourite) ?> mb-30">
                                             <?php if (has_post_thumbnail()) : ?>
                                                 <a href="<?php the_permalink(); ?>"
                                                    class="company-logo me-auto ms-auto rounded-circle">

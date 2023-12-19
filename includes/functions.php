@@ -302,26 +302,22 @@ function jobly_job_specs ( $settings_id = 'job_specifications' )
 }
 
 
-// $post_types = get_object_taxonomies();
-// echo '<pre>';
-// print_r($post_types);
-// echo '</pre>';
+if ( !function_exists('jobly_job_specs_options') ) {
+    function jobly_job_specs_options ( $settings_id = 'job_specifications')
+    {
+        $specifications = jobly_opt($settings_id);
 
-// get all job specifications options list with key and value
-function jobly_job_specs_options ()
-{
-    $specifications = jobly_opt('job_specifications');
-
-    $specs = [];
-    if (is_array($specifications)) {
-        foreach ( $specifications as $field ) {
-            $meta_key = $field[ 'meta_key' ] ?? '';
-            $meta_value = $field[ 'meta_values_group' ] ?? '';
-            $specs[ $meta_key ] = $meta_value;
+        $specs = [];
+        if (is_array($specifications)) {
+            foreach ( $specifications as $field ) {
+                $meta_key = $field[ 'meta_key' ] ?? '';
+                $meta_value = $field[ 'meta_values_group' ] ?? '';
+                $specs[ $meta_key ] = $meta_value;
+            }
         }
-    }
 
-    return $specs;
+        return $specs;
+    }
 }
 
 
