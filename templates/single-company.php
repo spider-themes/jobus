@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
-jobly_get_template_part( 'banner/banner-single' );
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";

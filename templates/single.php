@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
-jobly_get_template_part( 'banner/banner-single' );
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 $job_single_layout = jobly_opt('job_single_layout');

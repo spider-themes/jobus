@@ -11,24 +11,20 @@ if (!defined('ABSPATH')) {
 }
 
 get_header();
-jobly_get_template_part('banner/banner-company');
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-/*$meta_args = [
-    'args' => jobly_meta_taxo_arguments('meta', 'company', '', jobly_all_search_meta_for_company())
-];*/
+$meta_args = [ 'args' => jobly_meta_taxo_arguments('meta', 'company', '', jobly_all_search_meta('jobly_meta_company_options', 'company_sidebar_widgets' )) ];
+$taxonomy_args1     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'company', 'company_cat', jobly_search_terms('company_cats')) ];
 
-/*$taxonomy_args1 = [
-    'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobly_search_terms('job_cats'))
-];*/
 
-echo '<pre>';
-print_r($meta_args);
-echo '</pre>';
-
+if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
+    $result_ids = jobly_merge_queries_and_get_ids( $meta_args, $taxonomy_args1 );
+} else {
+    $result_ids = jobly_merge_queries_and_get_ids( $taxonomy_args1 );
+}
 
 $args = [
     'post_type' => 'company',
@@ -39,31 +35,20 @@ $args = [
     'order' => $selected_order,
 ];
 
-
 if (!empty(get_query_var('s'))) {
     $args[ 's' ] = get_query_var('s');
 }
 
-$search_query = get_query_var('s');
-if (!empty($search_query)) {
-    $args[ 'meta_query' ] = array(
-        'relation' => 'OR',
-        array(
-            'key' => 'your_meta_key',  // Replace with your actual meta key
-            'value' => $search_query,
-            'compare' => 'LIKE',
-        ),
-    );
+if ( ! empty( $result_ids ) ) {
+    $args['post__in'] = $result_ids;
 }
 
 $company_query = new WP_Query($args);
-
 
 ?>
     <section class="company-profiles pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
             <div class="row">
-
 
                 <div class="col-xl-3 col-lg-4">
                     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
@@ -79,7 +64,7 @@ $company_query = new WP_Query($args);
 
                         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-                            <form action="<?php echo esc_url(home_url()); ?>" role="search" method="get">
+                            <form action="<?php echo esc_url(get_post_type_archive_link('company')) ?>" role="search" method="get">
                                 <input type="hidden" name="post_type" value="company"/>
 
                                 <?php
@@ -144,17 +129,28 @@ $company_query = new WP_Query($args);
                                                                 foreach ( $company_specifications as $key => $value ) {
 
                                                                     $meta_value = $value[ 'meta_values' ] ?? '';
-
                                                                     $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                                     $opt_val = strtolower($modifiedValues);
-                                                                    ?>
-                                                                    <li>
-                                                                        <input type="checkbox"
-                                                                               name="<?php echo esc_attr($widget_name) ?>[]"
-                                                                               value="<?php echo esc_attr($opt_val) ?>">
-                                                                        <label><?php echo esc_html($meta_value); ?></label>
-                                                                    </li>
-                                                                    <?php
+
+                                                                    // Get the count for the current meta-value
+                                                                    $meta_value_count   = jobly_count_meta_key_usage('company', 'jobly_meta_company_options', $opt_val );
+
+                                                                    if ( $meta_value_count > 0 ) {
+                                                                        $searched_opt   = jobly_search_terms($widget_name);
+                                                                        $check_status   = array_search($opt_val, $searched_opt);
+                                                                        $check_status   = $check_status !== false ? ' checked' : '';
+                                                                        ?>
+                                                                        <li>
+                                                                            <input type="checkbox" name="<?php echo esc_attr($widget_name) ?>[]" value="<?php echo esc_attr($opt_val) ?>" <?php echo esc_attr($check_status) ?>>
+                                                                            <label>
+                                                                                <?php echo esc_html($meta_value); ?>
+                                                                                <span><?php echo esc_html($meta_value_count); ?></span>
+                                                                            </label>
+                                                                        </li>
+                                                                        <?php
+
+                                                                    }
+
                                                                 }
                                                             }
                                                             ?>
@@ -168,30 +164,27 @@ $company_query = new WP_Query($args);
                                                             if (is_array($company_specifications)) {
                                                                 foreach ( $company_specifications as $key => $value ) {
 
-                                                                    $select_value = $value[ 'meta_values' ] ?? '';
-                                                                    $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $select_value);
+                                                                    $meta_value = $value[ 'meta_values' ] ?? '';
+
+                                                                    $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                                     $modifiedVal = strtolower($modifiedSelect);
 
-                                                                    $searched_val = jobly_search_terms($widget_name);
-                                                                    $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
-                                                                    ?>
-                                                                    <option value="<?php echo esc_attr($modifiedVal) ?>">
-                                                                        <?php echo esc_html($value[ 'meta_values' ]) ?>
-                                                                    </option>
-                                                                    <?php
+                                                                    $meta_value_count   = jobly_count_meta_key_usage('company','jobly_meta_company_options', $modifiedVal);
+
+                                                                    if ( $meta_value_count > 0 ) {
+                                                                        $searched_val = jobly_search_terms($widget_name);
+                                                                        $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
+                                                                        $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
+                                                                        ?>
+                                                                        <option value="<?php echo esc_attr($modifiedVal) ?>" <?php echo esc_attr($selected_val) ?>>
+                                                                            <?php echo esc_html($meta_value) ?>
+                                                                        </option>
+                                                                        <?php
+                                                                    }
                                                                 }
                                                             }
                                                             ?>
                                                         </select>
-                                                        <div class="loccation-range-select mt-5">
-                                                            <div class="d-flex align-items-center">
-                                                                <span>Radius:</span>
-                                                                <div id="rangeValue">50</div>
-                                                                <span>miles</span>
-                                                            </div>
-                                                            <input type="range" id="locationRange" value="50"
-                                                                   max="100">
-                                                        </div>
                                                         <?php
                                                     }
                                                     ?>
@@ -203,7 +196,7 @@ $company_query = new WP_Query($args);
                                 }
 
                                 // Widget Category List
-                                if (jobly_opt('is_job_widget_cat') == true) {
+                                if (jobly_opt('is_company_widget_cat') == true) {
                                     $term_cats = get_terms(array(
                                         'taxonomy' => 'company_cat',
                                     ));
@@ -217,16 +210,15 @@ $company_query = new WP_Query($args);
                                                 <div class="main-body">
                                                     <ul class="style-none filter-input">
                                                         <?php
-                                                        $searched_opt = jobly_search_terms('job_cats');
+                                                        $searched_opt = jobly_search_terms('company_cats');
                                                         foreach ( $term_cats as $key => $term ) {
-
                                                             $list_class = $key > 1 ? ' class=hide' : '';
                                                             $check_status = array_search($term->slug, $searched_opt);
-
+                                                            $check_status = $check_status !== false ? ' checked' : '';
                                                             ?>
                                                             <li<?php echo esc_attr($list_class) ?>>
                                                                 <input type="checkbox" name="company_cats[]"
-                                                                       value="<?php echo esc_attr($term->slug) ?>">
+                                                                       value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($check_status) ?>>
                                                                 <label>
                                                                     <?php echo esc_html($term->name) ?>
                                                                     <span><?php echo esc_html($term->count) ?></span>
@@ -239,8 +231,9 @@ $company_query = new WP_Query($args);
                                                     <?php
                                                     if (count($term_cats) > 2) {
                                                         ?>
-                                                        <div class="more-btn"><i
-                                                                    class="bi bi-plus"></i><?php esc_html_e('Show More', 'jobly'); ?>
+                                                        <div class="more-btn">
+                                                            <i class="bi bi-plus"></i>
+                                                            <?php esc_html_e('Show More', 'jobly'); ?>
                                                         </div>
                                                         <?php
                                                     }
@@ -255,9 +248,6 @@ $company_query = new WP_Query($args);
                                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
                                     <?php esc_html_e('Apply Filter', 'jobly'); ?>
                                 </button>
-
-                                <?php echo esc_url(add_query_arg($_GET)); ?>
-
                             </form>
 
 

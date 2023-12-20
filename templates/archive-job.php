@@ -5,17 +5,9 @@ $paged              = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by  = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order     = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-jobly_get_template_part('banner/banner-search');
-
 $meta_args          = [ 'args' => jobly_meta_taxo_arguments('meta', 'job', '', jobly_all_search_meta()) ];
 $taxonomy_args1     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobly_search_terms('job_cats')) ];
 $taxonomy_args2     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'job', 'job_tag', jobly_search_terms('job_tags')) ];
-
-
-echo '<pre>';
-print_r($meta_args);
-echo '</pre>';
-
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
     $result_ids = jobly_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
@@ -289,7 +281,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                                 $opt_val            = strtolower($modifiedValues);
                                                                 
                                                                 // Get the count for the current meta value
-                                                                $meta_value_count   = count_meta_key_usage('jobly_meta_options', $opt_val);
+                                                                $meta_value_count   = jobly_count_meta_key_usage('job','jobly_meta_options', $opt_val);
                                                                 if ( $meta_value_count > 0 ) {
                                                                     $searched_opt   = jobly_search_terms($widget_name);
                                                                     $check_status   = array_search($opt_val, $searched_opt);

@@ -348,13 +348,11 @@ if (!function_exists('jobly_get_job_attributes')) {
 }
 
 
-function count_meta_key_usage ($meta_key, $meta_value)
+function jobly_count_meta_key_usage ( $post_type = 'job', $meta_key = '', $meta_value = '' )
 {
 
-    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options');
-
     $args = array(
-        'post_type' => 'job',
+        'post_type' => $post_type,
         'posts_per_page' => -1,
         'meta_query' => array(
             array(
@@ -479,13 +477,15 @@ function jobly_search_terms ($terms)
 }
 
 
+
+
 /**
  * Jobly search meta
  */
-function jobly_all_search_meta ($widgets = [ 'location' ])
+function jobly_all_search_meta ( $meta_page_id = 'jobly_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
 {
 
-    $sidebar_widgets = jobly_opt('job_sidebar_widgets');
+    $sidebar_widgets = jobly_opt($sidebar_widget_id);
     foreach ( $sidebar_widgets as $widget ) {
         $widgets[] = $widget[ 'widget_name' ];
     }
@@ -494,8 +494,7 @@ function jobly_all_search_meta ($widgets = [ 'location' ])
 
     if (is_array($widgets)) {
 
-         
-        $filter_widgets = jobly_opt('job_sidebar_widgets');
+        $filter_widgets = jobly_opt($sidebar_widget_id);
         $search_widgets = [];
 
         if (isset($filter_widgets) && is_array($filter_widgets)) {
@@ -505,7 +504,6 @@ function jobly_all_search_meta ($widgets = [ 'location' ])
                 }
             }
         }
-
 
         foreach ( $widgets as $item => $job_value ) {
             
@@ -521,7 +519,7 @@ function jobly_all_search_meta ($widgets = [ 'location' ])
 
                     if ($key < 1) {
                         $job_meta_query[ $item ] = array(
-                            'key' => 'jobly_meta_options', // Replace with your actual meta key for job type
+                            'key' => $meta_page_id, // Replace with your actual meta-key for job-type
                             'value' => $value,
                             'compare' => 'LIKE',
                         );
@@ -529,7 +527,7 @@ function jobly_all_search_meta ($widgets = [ 'location' ])
 
                     if ($item < 1) {
                         $job_meta_query[ $key ] = array(
-                            'key' => 'jobly_meta_options', // Replace with your actual meta key for job type
+                            'key' => $meta_page_id, // Replace with your actual meta-key for job-type
                             'value' => $value,
                             'compare' => 'LIKE',
                         );
