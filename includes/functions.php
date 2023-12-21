@@ -392,47 +392,11 @@ function jobly_pagination ($job_query)
 function jobly_job_archive_query ($query)
 {
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
-        $query->set('posts_per_page', 6);
+        $query->set('posts_per_page', 2);
     }
 }
 
 add_action('pre_get_posts', 'jobly_job_archive_query');
-
-
-// Function to get company counts
-function jobly_get_company_counts_bkp ($meta_id = '')
-{
-
-    $meta = get_post_meta(get_the_ID(), 'jobly_meta_options');
-    $select_company = $meta[ 'select_company' ] ?? '';
-
-    $args = array(
-        'post_type' => 'job',
-        'posts_per_page' => -1,
-        'orderby' => 'meta_value',
-    );
-
-    if (!empty($meta_id)) {
-        $args[ 'meta_query' ] = array(
-            array(
-                'key' => $select_company,
-                'value' => $meta_id,
-            ),
-        );
-    }
-
-    $posts_list = get_posts($args);
-    $meta_ids = array();
-
-    if (!empty($posts_list)) {
-        foreach ( $posts_list as $key => $post ) {
-            $meta_ids[ $key ] = get_post_meta($post->ID, $select_company, true);
-        }
-    }
-
-    return $meta_ids;
-
-}
 
 /*
  * Get the company count by post id and meta value
@@ -649,7 +613,7 @@ function jobly_all_range_field_value ()
 
 
 
-if ( !function_exists('jobly_the_showing_post_result_count') ) {
+if ( !function_exists('jobly_showing_post_result_count') ) {
     /**
      * Display the showing post-result count
      *
@@ -657,7 +621,7 @@ if ( !function_exists('jobly_the_showing_post_result_count') ) {
      * @param mixed $post_per_page The number of posts to display per page. Use -1 to display all posts.
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobly_showing_post_result_count ($post_type = 'job', $posts_per_page = ['posts_per_page' => -1 ], $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' )
+    function jobly_showing_post_result_count ($post_type, $posts_per_page = ['posts_per_page' => -1 ], $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' )
     {
         // Get the current page number
         $current_page = max(1, get_query_var('paged')); // Current page number

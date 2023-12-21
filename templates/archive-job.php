@@ -18,7 +18,7 @@ if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
 $args = array(
     'post_type'         => 'job',
     'post_status'       => 'publish',
-    'posts_per_page'    => 6,
+    'posts_per_page'    => 2,
     'paged'             => $paged,
     'orderby'           => $selected_order_by,
     'order'             => $selected_order
@@ -415,23 +415,33 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         <?php
                         while ( $job_post->have_posts() ) {
                             $job_post->the_post();
-
-                            jobly_get_template_part('contents/content');
-                            
-                            wp_reset_postdata();
+                            jobly_get_template_part('contents/content-list');
                         }
+                        wp_reset_postdata();
                         ?>
 
                     </div>
 
+
+                    <div class="accordion-box grid-style">
+                        <div class="row">
+                            <?php
+                            while ( $job_post->have_posts() ) {
+                                $job_post->the_post();
+
+                                jobly_get_template_part('contents/content-grid');
+                            }
+                            wp_reset_postdata();
+                            ?>
+
+                        </div>
+                    </div>
+
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_get_template_part('contents/result-count'); ?>
+                        <?php jobly_showing_post_result_count('job', 2) ?>
 
 
-                        <ul class="pagination-one d-flex align-items-center justify-content-center justify-content-sm-start style-none">
-                            <?php jobly_pagination($job_post); ?>
-                        </ul>
 
                     </div>
 
