@@ -39,10 +39,10 @@ $related_jobs = new WP_Query($args);
                             <a href="javascript:void(0)" class="save-btn text-center rounded-circle tran3s"
                                title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
 
-                            <?php if (jobly_get_job_attributes('job_related_post_meta_1')) : ?>
+                            <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
                                     <span class="job-duration fw-500">
-                                        <?php echo jobly_get_job_attributes('job_related_post_meta_1') ?>
+                                        <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1') ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -53,16 +53,16 @@ $related_jobs = new WP_Query($args);
                                     <?php the_title() ?>
                                 </a>
                             </div>
-                            <?php if (jobly_get_job_attributes('job_related_post_meta_2')) : ?>
+                            <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_2')) : ?>
                                 <div class="job-salary">
-                                    <span class="fw-500 text-dark"><?php echo jobly_get_job_attributes('job_related_post_meta_2') ?></span>
+                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_2') ?></span>
                                 </div>
                             <?php endif; ?>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
-                                <?php if (jobly_get_job_attributes('job_related_post_meta_3')) : ?>
+                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3')) : ?>
                                     <div class="job-location">
                                         <a href="#">
-                                            <?php echo jobly_get_job_attributes('job_related_post_meta_3') ?>
+                                            <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3') ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>

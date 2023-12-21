@@ -204,8 +204,9 @@ if (!function_exists('jobly_the_button')) {
  * @return string
  * Job post count
  */
-if (!function_exists('jobly_job_post_count')) {
-    function jobly_job_post_count ($post_type = 'job') {
+if (!function_exists('jobly_post_count')) {
+    function jobly_post_count ($post_type = 'job')
+    {
         $count = wp_count_posts($post_type);
         return number_format_i18n($count->publish);
     }
@@ -230,7 +231,6 @@ if (!function_exists('jobly_job_post_count_result')) {
         $first_result = ($per_page * $current_page) - $per_page + 1;
         $last_result = min(($per_page * $current_page), $total_jobs);
 
-        
 
         // Display the post-counter
         $results = sprintf(
@@ -278,7 +278,7 @@ if (!function_exists('jobly_company_post_list')) {
 }
 
 
-function jobly_job_specs ( $settings_id = 'job_specifications' )
+function jobly_job_specs ($settings_id = 'job_specifications')
 {
     $specifications = jobly_opt($settings_id);
 
@@ -291,19 +291,19 @@ function jobly_job_specs ( $settings_id = 'job_specifications' )
         }
     }
 
-     // Attach with taxonomy slugs for the 'job' post type
+    // Attach with taxonomy slugs for the 'job' post type
     $job_taxonomies = get_object_taxonomies('job', 'names');
-    foreach ($job_taxonomies as $taxonomy) {
+    foreach ( $job_taxonomies as $taxonomy ) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscores
-        $specs[$taxonomy_slug] = $taxonomy;
+        $specs[ $taxonomy_slug ] = $taxonomy;
     }
 
     return $specs;
 }
 
 
-if ( !function_exists('jobly_job_specs_options') ) {
-    function jobly_job_specs_options ( $settings_id = 'job_specifications')
+if (!function_exists('jobly_job_specs_options')) {
+    function jobly_job_specs_options ($settings_id = 'job_specifications')
     {
         $specifications = jobly_opt($settings_id);
 
@@ -328,27 +328,28 @@ if ( !function_exists('jobly_job_specs_options') ) {
  *
  * @return string The formatted and sanitized job attribute value.
  */
-if (!function_exists('jobly_get_job_attributes')) {
-    function jobly_get_job_attributes ($meta_key = '', $meta_page_id = 'jobly_meta_options')
+if (!function_exists('jobly_get_meta_attributes')) {
+    function jobly_get_meta_attributes ( $meta_page_id = '', $meta_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_page_id, true);
-        $metaValueKey = $meta_options[jobly_opt($meta_key)];
-        
-        if (isset($metaValueKey) && !empty($metaValueKey)) {
- 
-        $meta_value         = $meta_options[jobly_opt($meta_key)];
-        $trimmed_value      = !empty($meta_value) ? implode(', ', $meta_value) : '';
-        $formatted_value    = str_replace('@space@', ' ', $trimmed_value);
 
-        return esc_html($formatted_value);
-         
+        $metaValueKey = $meta_options[ jobly_opt($meta_key) ];
+
+        if (is_array($metaValueKey)) {
+
+            $meta_value = $meta_options[ jobly_opt($meta_key) ];
+            $trim_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
+            $formatted_value = str_replace('@space@', ' ', $trim_value);
+
+            return esc_html($formatted_value);
+
         }
-        
+
     }
 }
 
 
-function jobly_count_meta_key_usage ( $post_type = 'job', $meta_key = '', $meta_value = '' )
+function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = '')
 {
 
     $args = array(
@@ -371,7 +372,8 @@ function jobly_count_meta_key_usage ( $post_type = 'job', $meta_key = '', $meta_
 /**
  * Jobly job pagination
  */
-function jobly_pagination( $job_query ) {
+function jobly_pagination ($job_query)
+{
 
     $big = 999999999; // need an unlikely integer
     echo paginate_links(array(
@@ -387,13 +389,14 @@ function jobly_pagination( $job_query ) {
 /**
  * Jobly job pagination
  */
-function jobly_job_archive_query($query) {
+function jobly_job_archive_query ($query)
+{
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
         $query->set('posts_per_page', 6);
     }
 }
-add_action('pre_get_posts', 'jobly_job_archive_query');
 
+add_action('pre_get_posts', 'jobly_job_archive_query');
 
 
 // Function to get company counts
@@ -477,12 +480,10 @@ function jobly_search_terms ($terms)
 }
 
 
-
-
 /**
  * Jobly search meta
  */
-function jobly_all_search_meta ( $meta_page_id = 'jobly_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
+function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
 {
 
     $sidebar_widgets = jobly_opt($sidebar_widget_id);
@@ -498,16 +499,16 @@ function jobly_all_search_meta ( $meta_page_id = 'jobly_meta_options', $sidebar_
         $search_widgets = [];
 
         if (isset($filter_widgets) && is_array($filter_widgets)) {
-            foreach ( $filter_widgets as $widget ) {   
-                if ( $widget[ 'widget_layout' ] == 'range' ) {  
+            foreach ( $filter_widgets as $widget ) {
+                if ($widget[ 'widget_layout' ] == 'range') {
                     $search_widgets[] = $widget[ 'widget_name' ];
                 }
             }
         }
 
         foreach ( $widgets as $item => $job_value ) {
-            
-            if ( ! in_array( $job_value, $search_widgets ) ) {
+
+            if (!in_array($job_value, $search_widgets)) {
                 $job_type_meta = jobly_search_terms($job_value);
 
 
@@ -545,10 +546,10 @@ function jobly_all_search_meta ( $meta_page_id = 'jobly_meta_options', $sidebar_
 /**
  * Jobly meta & taxonomy arguments
  */
-function jobly_meta_taxo_arguments ( $data = '', $post_type = 'job', $taxonomy = '', $terms = [] )
+function jobly_meta_taxo_arguments ($data = '', $post_type = 'job', $taxonomy = '', $terms = [])
 {
     $data_args = [];
-    if ( $data == 'taxonomy' ) {
+    if ($data == 'taxonomy') {
         $data_args = [
             'post_type' => $post_type,
             'post_status' => 'publish',
@@ -600,42 +601,43 @@ function jobly_merge_queries_and_get_ids (...$queries)
 /**
  * Get the post IDs of all the range fields
  */
-function jobly_all_range_field_value() {
+function jobly_all_range_field_value ()
+{
     // All the post IDs of the 'job' post type
     $args = array(
-        'post_type'      => 'job',
+        'post_type' => 'job',
         'posts_per_page' => -1,
-        'post_status'    => 'publish',
+        'post_status' => 'publish',
     );
 
-    $posts      = get_posts($args);
-    $post_ids   = [];
+    $posts = get_posts($args);
+    $post_ids = [];
 
-    if ( ! empty ( $posts ) ) {
-        
-        foreach ($posts as $post) {
+    if (!empty ($posts)) {
+
+        foreach ( $posts as $post ) {
             $meta = get_post_meta($post->ID, 'jobly_meta_options', true);
 
             $filter_widgets = jobly_opt('job_sidebar_widgets');
             $search_widgets = [];
 
             if (isset($filter_widgets) && is_array($filter_widgets)) {
-                foreach ( $filter_widgets as $widget ) {   
-                    if ( $widget[ 'widget_layout' ] == 'range' ) {  
+                foreach ( $filter_widgets as $widget ) {
+                    if ($widget[ 'widget_layout' ] == 'range') {
                         // if get value in search bar
-                        if ( isset( $_GET[ $widget[ 'widget_name' ] ] ) ) {
+                        if (isset($_GET[ $widget[ 'widget_name' ] ])) {
                             $search_widgets[] = $widget[ 'widget_name' ] ?? '';
                         }
                     }
                 }
             }
 
-            foreach( $search_widgets as $serial => $input ) {
-                
-                $meta_salary = $meta[$input] ?? '';
-                if ( ! empty( $meta_salary ) ) {
+            foreach ( $search_widgets as $serial => $input ) {
+
+                $meta_salary = $meta[ $input ] ?? '';
+                if (!empty($meta_salary)) {
                     $value = preg_replace("/[^0-9-k]/", "", $meta_salary);
-                    $post_ids[$input][$post->ID] = $value;
+                    $post_ids[ $input ][ $post->ID ] = $value;
                 }
 
             }
@@ -643,4 +645,39 @@ function jobly_all_range_field_value() {
     }
 
     return $post_ids;
+}
+
+
+
+if ( !function_exists('jobly_the_showing_post_result_count') ) {
+    /**
+     * Display the showing post-result count
+     *
+     * @param string $post_type The post-type to display for the count.
+     * @param mixed $post_per_page The number of posts to display per page. Use -1 to display all posts.
+     * @param string $class The CSS class for the paragraph element.
+     */
+    function jobly_showing_post_result_count ($post_type = 'job', $posts_per_page = ['posts_per_page' => -1 ], $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' )
+    {
+        // Get the current page number
+        $current_page = max(1, get_query_var('paged')); // Current page number
+
+        // Get the total number of published posts for the specified post-type
+        $total_posts = wp_count_posts($post_type);
+        $total_posts = number_format_i18n($total_posts->publish);
+
+        // Calculate the range based on the current posts per page
+        $start_range = ($current_page - 1) * $posts_per_page + 1;
+        $end_range = min($current_page * $posts_per_page, $total_posts);
+        ?>
+        <p class="<?php echo esc_attr($class) ?>">
+            <?php
+            printf(
+                __('Showing <span class="text-dark fw-500"> %1$d-%2$d </span> of <span class="text-dark fw-500">%3$d</span> results', 'jobly'),
+                $start_range, $end_range, $total_posts
+            )
+            ?>
+        </p>
+        <?php
+    }
 }

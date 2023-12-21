@@ -402,11 +402,32 @@ if( class_exists( 'CSF' ) ) {
                 'content' => esc_html__('Company Attributes', 'jobly'),
             ),
 
+            // create a Switcher field grid and list view
+            array(
+                'id'         => 'company_archive_attr_layout',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Content Layout', 'jobly'),
+                'options'    => array(
+                    'grid'  => esc_html__('Grid', 'jobly'),
+                    'list'  => esc_html__('List', 'jobly'),
+                ),
+                'default'    => 'grid'
+            ),
+
             array(
                 'id'        => 'company_archive_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute', 'jobly'),
+                'title'     => esc_html__('Attribute 01', 'jobly'),
                 'options'   => jobly_job_specs('company_specifications'),
+                'dependency' => array('company_archive_attr_layout', '||', 'grid', 'list'),
+            ),
+
+            array(
+                'id'        => 'company_archive_meta_2',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 02', 'jobly'),
+                'options'   => jobly_job_specs('company_specifications'),
+                'dependency' => array('company_archive_attr_layout', '==', 'list'),
             ),
 
         )
