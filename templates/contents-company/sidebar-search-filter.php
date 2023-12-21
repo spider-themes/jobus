@@ -32,10 +32,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </a>
                         <div class="collapse show" id="collapseSemploye">
                             <div class="main-body">
-                                <form action="#" class="input-box position-relative">
-                                    <input type="text" placeholder="Company Name">
+                                <div class="input-box position-relative">
+                                    <input type="text" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('Company Name', 'jobly'); ?>">
                                     <button><i class="bi bi-search"></i></button>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,6 +46,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                 $filter_widgets = jobly_opt('company_sidebar_widgets');
 
                 if (is_array($filter_widgets)) {
+
+                    $searched_class_collapsed = jobly_search_terms('company_meta');
+
                     foreach ( $filter_widgets as $index => $widget ) {
 
                         $tab_count = $index + 1;
@@ -74,7 +77,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                                  id="collapse-<?php echo esc_attr($widget_name) ?>">
                                 <div class="main-body">
                                     <?php
-
                                     if ($widget_layout == 'checkbox') {
                                         ?>
                                         <ul class="style-none filter-input">
