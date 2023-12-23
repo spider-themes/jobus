@@ -28,7 +28,6 @@ if ( ! empty( get_query_var('s') ) ) {
     $args['s'] = get_query_var('s');
 }
 
-
 // Range fields value
 $filter_widgets = jobly_opt('job_sidebar_widgets');
 $search_widgets = [];
@@ -127,6 +126,11 @@ if ( ! empty( $result_ids ) ) {
     $args['post__in'] = $result_ids;
 }
 
+$search_type  = isset($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
+if ( $search_type == 'company_search' && isset($_GET['company_ids']) && !empty($_GET['company_ids'])) {
+    $args['post__in'] = explode(',', $_GET['company_ids'] ?? '');
+}
+
 $job_post = new \WP_Query($args);
  
 // ================= Archive Banner ================//
@@ -161,7 +165,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             if (isset($filter_widgets) && is_array($filter_widgets)) {
                                 foreach ( $filter_widgets as $index => $widget ) {
 
-                                    $tab_count          = $index + 1;
+                                    $tab_count          = $index + 1;                                    
                                     $is_collapsed       = $tab_count == 1 ? '' : ' collapsed';
                                     $is_collapsed_show  = $tab_count == 1 ? 'collapse show' : 'collapse';
                                     $area_expanded      = $index == 1 ? 'true' : 'false';
@@ -175,7 +179,18 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                                     $job_specifications = jobly_job_specs_options();
                                     $job_specifications = $job_specifications[ $widget_name ];
-                                    
+
+                                    if ( ! empty ( $_GET['post_type'] ?? '' == 'job' )) {
+                                        if (  ! empty ( $_GET[$widget_name] ) ) {
+                                            $is_collapsed_show  = 'collapse show';
+                                            $area_expanded      = 'true';
+                                            $is_collapsed       = '';
+                                        } else {
+                                            $is_collapsed_show  = 'collapse';
+                                            $area_expanded      = 'false';
+                                            $is_collapsed       = ' collapsed';
+                                        }
+                                    }                                    
                                     ?>
                                     <div class="filter-block bottom-line pb-25">
 
@@ -316,13 +331,26 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             
                             // Category Widget
                             if ( jobly_opt('is_job_widget_cat') == true ) {
+
+                                if ( ! empty ( $_GET['post_type'] ?? '' == 'job' )) {
+                                    if (  ! empty ( $_GET['job_cats'] ) ) {
+                                        $is_collapsed_show  = 'collapse show';
+                                        $area_expanded      = 'true';
+                                        $is_collapsed       = '';
+                                    } else {
+                                        $is_collapsed_show  = 'collapse';
+                                        $area_expanded      = 'false';
+                                        $is_collapsed       = ' collapsed';
+                                    }
+                                }
+
                                 ?>
                                 <div class="filter-block bottom-line pb-25">
-                                    <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
-                                        href="#collapseCategory" role="button" aria-expanded="false">
+                                    <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse"
+                                        href="#collapseCategory" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
                                         <?php esc_html_e('Category', 'jobly'); ?>
                                     </a>
-                                    <div class="collapse" id="collapseCategory">
+                                    <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                         <div class="main-body">
                                             <ul class="style-none filter-input">
                                                 <?php
@@ -334,13 +362,13 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     foreach ( $term_cats as $key => $term ) {
 
                                                         $list_class     = $key > 3 ? ' class=hide' : '';                                                            
-                                                        $check_status   = array_search($term->slug, $searched_opt); 
-
+                                                        $check_status   = array_search($term->slug, $searched_opt);
                                                         ?>
                                                         <li<?php echo esc_attr($list_class) ?>>
                                                             <input type="checkbox" name="job_cats[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>>
                                                             <label><?php echo esc_html($term->name) ?>
-                                                                <span><?php echo esc_html($term->count) ?></span></label>
+                                                                <span><?php echo esc_html($term->count) ?></span>
+                                                            </label>
                                                         </li>
                                                         <?php
                                                     }
@@ -356,14 +384,26 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             }
 
                             if (jobly_opt('is_job_widget_tag') == true) {
+
+                                if ( ! empty ( $_GET['post_type'] ?? '' == 'job' )) {
+                                    if (  ! empty ( $_GET['job_tags'] ) ) {
+                                        $is_collapsed_show  = 'collapse show';
+                                        $area_expanded      = 'true';
+                                        $is_collapsed       = '';
+                                    } else {
+                                        $is_collapsed_show  = 'collapse';
+                                        $area_expanded      = 'false';
+                                        $is_collapsed       = ' collapsed';
+                                    }
+                                }
+                                
                                 ?>
+
                                 <div class="filter-block bottom-line pb-25">
-                                    <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
-                                        href="#collapseTag"
-                                        role="button" aria-expanded="false">
+                                    <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseTag" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
                                         <?php esc_html_e('Tags', 'jobly'); ?>
                                     </a>
-                                    <div class="collapse" id="collapseTag">
+                                    <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseTag">
                                         <div class="main-body">
                                             <ul class="style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
                                                 <?php
@@ -372,9 +412,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     'hide_empty' => false,
                                                 ));
                                                 if (!empty($term_tags)) {
-                                                    $searched_opt   = jobly_search_terms('job_tags');
+                                                    $searched_opt = jobly_search_terms('job_tags');
                                                     foreach ( $term_tags as $term ) {                                                
-                                                        $check_status   = array_search($term->slug, $searched_opt); 
+                                                        $check_status = array_search($term->slug, $searched_opt); 
                                                         ?>
                                                         <li>
                                                             <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>>
@@ -388,7 +428,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         </div>
                                     </div>
                                 </div>
-                                <?php
+                            <?php
                             }
                             ?>
 
@@ -439,8 +479,11 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count('job', 2) ?>
-
+                         <?php jobly_showing_post_result_count('job', 2) ?>
+                         
+                         <ul class="pagination-one d-flex align-items-center justify-content-center justify-content-sm-start style-none">
+                            <?php jobly_pagination($job_post); ?>
+                        </ul>
 
 
                     </div>

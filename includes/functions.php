@@ -329,16 +329,16 @@ if (!function_exists('jobly_job_specs_options')) {
  * @return string The formatted and sanitized job attribute value.
  */
 if (!function_exists('jobly_get_meta_attributes')) {
-    function jobly_get_meta_attributes ( $meta_page_id = '', $meta_key = '' )
+    function jobly_get_meta_attributes( $meta_page_id = '', $meta_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_page_id, true);
 
-        $metaValueKey = $meta_options[ jobly_opt($meta_key) ];
-
+        $metaValueKey = $meta_options[ jobly_opt($meta_key) ] ?? '';
+    
         if (is_array($metaValueKey)) {
 
             $meta_value = $meta_options[ jobly_opt($meta_key) ];
-            $trim_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
+            $trim_value = ! empty( $meta_value ) ? implode(', ', $meta_value ) : '';
             $formatted_value = str_replace('@space@', ' ', $trim_value);
 
             return esc_html($formatted_value);
@@ -404,20 +404,51 @@ add_action('pre_get_posts', 'jobly_job_archive_query');
  * @return int
  */
 if (!function_exists('jobly_get_selected_company_count')) {
-    function jobly_get_selected_company_count ($company_id)
+    function jobly_get_selected_company_count ($company_id, $link = true)
     {
         $args = array(
             'post_type' => 'job',
             'posts_per_page' => -1,
-            'meta_value' => $company_id
+            'meta_query'     => array(
+                'relation' => 'AND', // Optional, defaults to "AND
+                array(
+                    'key'   => 'jobly_meta_options',
+                    'value' => $company_id,
+                    'compare' => 'LIKE',
+                ),
+            )
         );
+        
+        $job_posts = new \WP_Query($args); 
+        
+        // if link false then return only count
+        if ( $link == false ) {
+            return $job_posts->found_posts;
+        } else {
+            
+            $company_ids_arr = array();
 
-        $job_posts = new \WP_Query($args);
-
-        return $job_posts->found_posts;
+            // Loop through the query results and populate the array
+            if ($job_posts->have_posts()) {
+                while ($job_posts->have_posts()) {
+                    $job_posts->the_post();
+                    $company_ids_arr[] = get_the_ID();
+                }
+                wp_reset_postdata();
+            }
+    
+            $company_ids_array = implode(',', $company_ids_arr);
+            
+            // if post count 1 then return post link
+            if ( $job_posts->found_posts == 1 ) {
+                return esc_url(get_permalink( $company_ids_array ));
+            } else {
+                return esc_url(get_post_type_archive_link('job') . '?search_type=company_search&company_ids='.$company_ids_array);
+            }
+            
+        }
     }
 }
-
 
 /**
  * Get the job search terms
@@ -451,8 +482,10 @@ function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_w
 {
 
     $sidebar_widgets = jobly_opt($sidebar_widget_id);
-    foreach ( $sidebar_widgets as $widget ) {
-        $widgets[] = $widget[ 'widget_name' ];
+    if (isset($sidebar_widgets) && is_array($sidebar_widgets)) {
+        foreach ( $sidebar_widgets as $widget ) {
+            $widgets[] = $widget[ 'widget_name' ];
+        }
     }
 
     $job_meta_query = array();

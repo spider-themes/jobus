@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$company_count = jobly_get_selected_company_count(get_the_ID());
+$company_count = jobly_get_selected_company_count(get_the_ID(), false);
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
 $post_favourite = $meta[ 'post_favorite' ] ?? '';
 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
@@ -64,7 +64,7 @@ $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
             <div class="btn-group d-flex align-items-center justify-content-md-end lg-mt-20">
                 <?php
                 if ($company_count > 0) { ?>
-                    <a href="#" class="open-job-btn text-center fw-500 tran3s me-2">
+                    <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
                         <?php echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count); ?>
                     </a>
                     <?php
