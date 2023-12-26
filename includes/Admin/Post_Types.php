@@ -16,10 +16,11 @@ class Post_Types {
 		add_action('init', [$this, 'register_post_types_job']);
         add_action('init', [$this, 'register_post_types_company']);
 
-        //Admin Columns
-        add_filter( 'manage_company_posts_columns', [$this, 'company_columns'] );
-        add_action('manage_company_posts_custom_column', array($this, 'render_featured_column'), 10, 2);
+        // Admin Columns
+        add_filter('manage_company_posts_columns', [$this, 'company_columns']);
+        add_action('manage_company_posts_custom_column', [$this, 'company_custom_columns'], 10, 2);
 	}
+
 
 	public static function init() {
 		if (is_null(self::$instance)) {
@@ -28,8 +29,7 @@ class Post_Types {
 		return self::$instance;
 	}
 
-
-	// Register the post type.
+	// Register the post type Job.
 	public function register_post_types_job() {
 
 		if (post_type_exists('job')) {
@@ -174,7 +174,7 @@ class Post_Types {
 
         );
 
-        register_post_type('company', $args); // Register the post type `company`
+        register_post_type('company', $args); // Register the post-type `company`
 
         // Register post taxonomies Category
         register_taxonomy( 'company_cat', 'company', array(
@@ -184,9 +184,9 @@ class Post_Types {
             'show_admin_column'     => true,
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
-            'labels'                => array(
+            'labels'                => [
                 'name'  => esc_html__( 'Categories', 'jobly'),
-            )
+            ]
         ));
 
 
@@ -195,64 +195,31 @@ class Post_Types {
     // Admin Columns
     public function company_columns($columns) {
 
-        if ( empty( $columns ) && ! is_array( $columns ) ) {
-            $columns = array();
+        if (empty($columns) && !is_array($columns)) {
+            $columns = [];
         }
 
-        unset( $columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat'], $columns['taxonomy-company_tag'] );
+        unset($columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat']);
 
-        $show_columns          = array();
-        $show_columns['cb']    = '<input type="checkbox" />';
-        $show_columns['title']       = esc_html__( 'Title', 'jobly' );
-        $show_columns['taxonomy-company_cat']       = esc_html__( 'Categories', 'jobly' );
-        $show_columns['taxonomy-company_tag']       = esc_html__( 'Tags', 'jobly' );
-        //$show_columns['featured'] = '<span class="wc-featured tips" data-tip="' . esc_attr__('Featured', 'jobly') . '">' . __('Featured', 'jobly') . '</span>';
-        $show_columns['author']       = esc_html__( 'Author', 'jobly' );
-        $show_columns['date']       = esc_html__( 'Date', 'jobly' );
+        $show_columns = [];
+        $show_columns['cb'] = '<input type="checkbox" />';
+        $show_columns['title'] = esc_html__('Title', 'jobly');
+        $show_columns['taxonomy-company_cat'] = esc_html__('Categories', 'jobly');
+        $show_columns['author'] = esc_html__('Author', 'jobly');
+        $show_columns['date'] = esc_html__('Date', 'jobly');
 
-        // Featured column header
-        $show_columns['featured'] = '<th scope="col" id="featured" class="manage-column column-featured" style="cursor: help;"><span class="wc-featured parent-tips" data-tip="Featured">Featured</span></th>';
-
-
-        return array_merge( $show_columns, $columns );
-
-
-        ?>
-        <style>
-            .wc-featured {
-                display: inline-block;
-                text-align: center;
-                width: 22px;
-                height: 22px;
-                line-height: 22px;
-                border-radius: 3px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-            .wc-featured.tips {
-                background: #28a745;
-                color: #fff;
-            }
-
-            .wc-featured.not-featured.tips {
-                background: #dc3545;
-                color: #fff;
-            }
-        </style>
-
-        <?php
+        return array_merge($show_columns, $columns);
 
     }
 
 
-    // Add content to Featured column
-    public function render_featured_column($column, $post_id) {
-        if ($column === 'featured') {
-            $url = wp_nonce_url(admin_url('admin-ajax.php?action=woocommerce_feature_product&product_id=' . $post_id), 'woocommerce-feature-product');
-            $featured = get_post_meta($post_id, '_featured', true) === 'yes' ? 'Yes' : 'No';
-
-            echo '<td class="featured column-featured" data-colname="Featured"><a href="' . esc_url($url) . '" aria-label="Toggle featured"><span class="wc-featured tips">' . esc_html($featured) . '</span></a></td>';
+    // Custom Columns Content
+    public function company_custom_columns($column, $post_id)
+    {
+        switch ($column) {
+            case 'taxonomy-company_cat':
+                echo get_the_term_list($post_id, 'company_cat', '', ', ', '');
+                break;
         }
     }
 

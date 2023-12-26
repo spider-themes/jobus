@@ -329,10 +329,9 @@ if (!function_exists('jobly_job_specs_options')) {
  * @return string The formatted and sanitized job attribute value.
  */
 if (!function_exists('jobly_get_meta_attributes')) {
-    function jobly_get_meta_attributes( $meta_page_id = '', $meta_key = '' )
+    function jobly_get_meta_attributes( $meta_parent_id = '', $meta_key = '' )
     {
-        $meta_options = get_post_meta(get_the_ID(), $meta_page_id, true);
-
+        $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
         $metaValueKey = $meta_options[ jobly_opt($meta_key) ] ?? '';
     
         if (is_array($metaValueKey)) {
@@ -372,7 +371,7 @@ function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_v
 /**
  * Jobly job pagination
  */
-function jobly_pagination ($job_query)
+function jobly_pagination ($query)
 {
 
     $big = 999999999; // need an unlikely integer
@@ -380,9 +379,9 @@ function jobly_pagination ($job_query)
         'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
         'format' => '?paged=%#%',
         'current' => max(1, get_query_var('paged')),
-        'total' => $job_query->max_num_pages,
-        'prev_text' => '<i class="fas fa-chevron-left"></i>',
-        'next_text' => '<i class="fas fa-chevron-right"></i>',
+        'total' => $query->max_num_pages,
+        'prev_text' => '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly'),
+        'next_text' => esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />',
     ));
 }
 
@@ -392,7 +391,7 @@ function jobly_pagination ($job_query)
 function jobly_job_archive_query ($query)
 {
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
-        $query->set('posts_per_page', 2);
+        $query->set('posts_per_page', jobly_opt('job_posts_per_page'));
     }
 }
 

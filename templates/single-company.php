@@ -5,8 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-$postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+$website = $meta[ 'company_website' ] ?? '';
+$website_target = $website[ 'target' ] ?? '_self';
+
+$postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
 ?>
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
@@ -14,9 +17,19 @@ $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER
 
                 <div class="col-xxl-3 col-xl-4 order-xl-last">
                     <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mb-50">
-                        <img src="images/lazy.svg" data-src="images/logo/media_37.png" alt="" class="lazy-img m-auto logo">
-                        <div class="text-md text-dark text-center mt-15 mb-20 lg-mb-10">Adobe Inc.</div>
-                        <div class="text-center"><a href="#" class="website-btn-two tran3s" target="_blank">Visit our website</a></div>
+                        <?php
+                        if ( has_post_thumbnail() ) {
+                            the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' ));
+                        }
+                        ?>
+                        <div class="text-md text-dark text-center mt-15 mb-20 lg-mb-10"><?php the_title() ?></div>
+                        <?php if ( !empty($website['url']) ) : ?>
+                            <div class="text-center">
+                                <a href="<?php echo esc_url($website[ 'url' ]) ?>" class="website-btn-two tran3s" target="<?php echo esc_attr($website_target) ?>">
+                                    <?php echo esc_html($website['text']) ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="border-top mt-35 lg-mt-20 pt-25">
                             <ul class="job-meta-data row style-none">
@@ -143,15 +156,16 @@ $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER
                             </div>
                         </div>
 
-                        <div class="share-option mt-60">
+                        <nav class="share-option mt-60">
 
                             <ul class="style-none d-flex align-items-center">
                                 <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobly'); ?></li>
-                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-facebook"></i></a></li>
-                                <li><a href="https://www.linkedin.com/share?url=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-linkedin"></i></a></li>
-                                <li><a href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                                <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobly'); ?>"><i class="bi bi-facebook"></i></a></li>
+                                <li><a href="https://www.linkedin.com/share?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobly'); ?>"><i class="bi bi-linkedin"></i></a></li>
+                                <li><a href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobly'); ?>"><i class="bi bi-twitter"></i></a></li>
                             </ul>
-                        </div>
+
+                        </nav>
 
                     </div>
                 </div>

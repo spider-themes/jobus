@@ -25,34 +25,26 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'id' => 'jobly_general',
         'title'  => esc_html__( 'General', 'jobly' ),
-    ) );
-
-    // General Settings-> Title Bar
-    CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_general',
-        'title'  => esc_html__( 'Title Bar', 'jobly' ),
-        'id' => 'jobly_title_bar',
+        'icon' => 'fa fa-home',
         'fields' => array(
+
             array(
-                'id'        => 'shape1',
-                'type'      => 'media',
-                'title'     => esc_html__('Shape 01', 'jobly'),
-                'default'   => array(
-                    'url'   => JOBLY_IMG . '/banner/shape_1.svg'
-                )
+                'id'      => 'job_posts_per_page',
+                'type'    => 'number',
+                'title'   => esc_html__('Posts Per Page (Job)', 'jobly'),
+                'default' => -1,
+                'desc'   => esc_html__('Set the value to \'-1\' to display all job posts.', 'jobly'),
             ),
 
             array(
-                'id'        => 'shape2',
-                'type'      => 'media',
-                'title'     => esc_html__('Shape 02', 'jobly'),
-                'default'   => array(
-                    'url'   => JOBLY_IMG . '/banner/shape_2.svg'
-                )
+                'id'      => 'company_posts_per_page',
+                'type'    => 'number',
+                'title'   => esc_html__('Posts Per Page (Company)', 'jobly'),
+                'default' => -1,
+                'desc'   => esc_html__('Set the value to \'-1\' to display all company posts.', 'jobly'),
             ),
         )
     ) );
-
 
 
     // Job Specifications
@@ -120,6 +112,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_job_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Job Archive Page', 'jobly' ),
+        'icon' => 'fa fa-plus',
     ) );
 
     // Job Archive Settings-> Archive Settings
@@ -129,52 +122,53 @@ if( class_exists( 'CSF' ) ) {
         'id' => 'job_archive_settings',
         'fields' => array(
 
-            array(
-                'id'        => 'job_archive_layout',
-                'type'      => 'image_select',
-                'title'     => __('Image Select', 'jobly'),
-                'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/archive-layout-1.png',
-                ),
-                'default'   => '1'
-            ),
-
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Speciations Attributes', 'jobly'),
+                'content' => esc_html__('Job Attributes', 'jobly'),
             ),
 
             array(
-                'id'        => 'archive_meta_1',
+                'id'         => 'job_archive_attr_layout',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Content Layout', 'jobly'),
+                'options'    => array(
+                    'list'  => esc_html__('List', 'jobly'),
+                    'grid'  => esc_html__('Grid', 'jobly'),
+                ),
+                'default'    => 'list'
+            ),
+
+            array(
+                'id'        => 'job_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobly'),
                 'options'   => jobly_job_specs(),
-                'dependency' => array('job_archive_layout', '==', '1'),
+                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
             array(
-                'id'        => 'archive_meta_2',
+                'id'        => 'job_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobly'),
                 'options'   => jobly_job_specs(),
-                'dependency' => array('job_archive_layout', '==', '1'),
+                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
             array(
-                'id'        => 'archive_meta_3',
+                'id'        => 'job_archive_meta_3',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 03', 'jobly'),
                 'options'   => jobly_job_specs(),
-                'dependency' => array('job_archive_layout', '==', '1'),
+                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
             array(
-                'id'        => 'archive_meta_4',
+                'id'        => 'job_archive_meta_4',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 04', 'jobly'),
                 'options'   => jobly_job_specs(),
-                'dependency' => array('job_archive_layout', '==', '1'),
+                'dependency' => array('job_archive_attr_layout', '==', 'list'),
             ),
 
         )
@@ -265,17 +259,6 @@ if( class_exists( 'CSF' ) ) {
         'title'     => esc_html__( 'Details Page', 'jobly' ),
         'id'        => 'job_details_page',
         'fields'    => array(
-
-            array(
-                'id'        => 'job_single_layout',
-                'type'      => 'image_select',
-                'title'     => __('Image Select', 'jobly'),
-                'options'   => array(
-                    '1'     => JOBLY_IMG . '/layout/single-layout-1.png',
-                    '2'     => JOBLY_IMG . '/layout/single-layout-2.png',
-                ),
-                'default'   => '1'
-            ),
 
         )
     ) );
@@ -402,7 +385,6 @@ if( class_exists( 'CSF' ) ) {
                 'content' => esc_html__('Company Attributes', 'jobly'),
             ),
 
-            // create a Switcher field grid and list view
             array(
                 'id'         => 'company_archive_attr_layout',
                 'type'       => 'button_set',

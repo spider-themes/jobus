@@ -43,7 +43,7 @@ class Frontend {
 
 		if ( is_singular( 'job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
-			$single_template = 'single.php';
+			$single_template = 'single-job.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $single_template ) ) ) {
                 $job_template = $theme_file;
 			} else {

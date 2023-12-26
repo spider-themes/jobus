@@ -92,8 +92,9 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public function core_includes() {
 
-            //Functions
+            // Functions
             require_once __DIR__ . '/includes/functions.php';
+            require_once __DIR__ . '/includes/filters.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';

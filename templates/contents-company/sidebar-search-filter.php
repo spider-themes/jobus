@@ -168,7 +168,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <?php
                                         $searched_opt = jobly_search_terms('company_cats');
                                         foreach ( $term_cats as $key => $term ) {
-                                            $list_class = $key > 1 ? ' class=hide' : '';
+                                            $list_class = $key > 3 ? ' class=hide' : '';
                                             $check_status = array_search($term->slug, $searched_opt);
                                             $check_status = $check_status !== false ? ' checked' : '';
                                             ?>
@@ -185,7 +185,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         ?>
                                     </ul>
                                     <?php
-                                    if (count($term_cats) > 2) {
+                                    if (count($term_cats) > 3) {
                                         ?>
                                         <div class="more-btn">
                                             <i class="bi bi-plus"></i>

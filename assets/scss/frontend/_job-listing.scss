@@ -94,7 +94,7 @@
         box-shadow: none;
         padding: 0 15px 0 15px;
         &:before {
-            content: url(../images/icon/icon_49.svg);
+            content: '';
             position: absolute;
             right: 10px;
             top:8px;
@@ -296,6 +296,9 @@
             width: 100%;
             height: 4px;
             top: -4px;
+            border: none;
+            box-shadow: none;
+            padding: 0;
             background: none;
             pointer-events: none;
             appearance:none;
@@ -508,6 +511,7 @@
     .job-duration {
         font-size: 15px;
         color: $color-three;
+        text-transform: capitalize;
         &:hover {
             text-decoration: underline;
         }
@@ -527,6 +531,7 @@
     }
     .job-location a {
         font-size: 15px;
+        text-transform: capitalize;
         color: rgba($color: #000000, $alpha: 0.7);
         &:hover {
             color: #000;
@@ -543,6 +548,9 @@
         font-size: 15px;
         color: #AAAAAA;
         margin: 2px 0 0;
+        .expertise {
+            text-transform: capitalize;
+        }
     }
     .save-btn {
         width: 35px;
@@ -666,6 +674,7 @@
         font-size: 16px;
         color: #AAAAAA;
         margin: 18px 0 65px;
+        text-transform: capitalize;
     }
     .job-location a {
         font-size: 16px;
@@ -715,6 +724,7 @@
         }
         .job-duration {
             background: #E7F6EF;
+            text-transform: capitalize;
             color: $color-five;
             &.part-time {
                 background: rgba($color: #FF5757, $alpha: 0.08);
@@ -1041,5 +1051,35 @@
         position: absolute;
         right: 0;
         top:17px;
+    }
+}
+.jobly_pagination {
+    position: relative;
+    display: flex;
+    padding-left: 0;
+    .page-numbers {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 50%;
+        font-size: 17px;
+        font-weight: 500;
+        color: #31795A;
+        &:hover {
+            color: $color-three;
+        }
+        &.current {
+            background: #31795A;
+            color: #fff;
+        }
+        &.prev, &.next {
+            height: auto;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }

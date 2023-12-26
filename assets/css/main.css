@@ -7000,7 +7000,7 @@ body.compensate-for-scrollbar {
   padding: 0 15px 0 15px;
 }
 .filter-area-tab .nice-select:before {
-  content: url(../images/icon/icon_49.svg);
+  content: "";
   position: absolute;
   right: 10px;
   top: 8px;
@@ -7213,6 +7213,9 @@ body.compensate-for-scrollbar {
   width: 100%;
   height: 4px;
   top: -4px;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   background: none;
   pointer-events: none;
   appearance: none;
@@ -7430,6 +7433,7 @@ body.compensate-for-scrollbar {
 .job-list-one .job-duration {
   font-size: 15px;
   color: #00BF58;
+  text-transform: capitalize;
 }
 .job-list-one .job-duration:hover {
   text-decoration: underline;
@@ -7449,6 +7453,7 @@ body.compensate-for-scrollbar {
 }
 .job-list-one .job-location a {
   font-size: 15px;
+  text-transform: capitalize;
   color: rgba(0, 0, 0, 0.7);
 }
 .job-list-one .job-location a:hover {
@@ -7465,6 +7470,9 @@ body.compensate-for-scrollbar {
   font-size: 15px;
   color: #AAAAAA;
   margin: 2px 0 0;
+}
+.job-list-one .job-salary .expertise {
+  text-transform: capitalize;
 }
 .job-list-one .save-btn {
   width: 35px;
@@ -7602,6 +7610,7 @@ body.compensate-for-scrollbar {
   font-size: 16px;
   color: #AAAAAA;
   margin: 18px 0 65px;
+  text-transform: capitalize;
 }
 .job-list-two .job-location a {
   font-size: 16px;
@@ -7651,6 +7660,7 @@ body.compensate-for-scrollbar {
 }
 .job-list-two.style-two .job-duration {
   background: #E7F6EF;
+  text-transform: capitalize;
   color: #31795A;
 }
 .job-list-two.style-two .job-duration.part-time {
@@ -7993,6 +8003,37 @@ body.compensate-for-scrollbar {
   position: absolute;
   right: 0;
   top: 17px;
+}
+
+.jobly_pagination {
+  position: relative;
+  display: flex;
+  padding-left: 0;
+}
+.jobly_pagination .page-numbers {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 500;
+  color: #31795A;
+}
+.jobly_pagination .page-numbers:hover {
+  color: #00BF58;
+}
+.jobly_pagination .page-numbers.current {
+  background: #31795A;
+  color: #fff;
+}
+.jobly_pagination .page-numbers.prev, .jobly_pagination .page-numbers.next {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .details-post-data .wp-block-group {
