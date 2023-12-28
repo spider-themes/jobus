@@ -29,7 +29,7 @@ if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
 $args = [
     'post_type' => 'company',
     'post_status' => 'publish',
-    'posts_per_page' => -1,
+    'posts_per_page' => jobly_opt('company_posts_per_page'),
     'paged' => $paged,
     'orderby' => $selected_order_by,
     'order' => $selected_order,
@@ -51,7 +51,6 @@ $company_query = new WP_Query($args);
             <div class="row">
 
                 <?php jobly_get_template_part('contents-company/sidebar-search-filter'); ?>
-
 
                 <div class="col-xl-9 col-lg-8">
                     <div class="ms-xxl-5 ms-xl-3">
@@ -88,7 +87,11 @@ $company_query = new WP_Query($args);
 
                         <div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                            <?php jobly_showing_post_result_count('company', 3) ?>
+                            <?php jobly_showing_post_result_count('company', jobly_opt('company_posts_per_page')) ?>
+
+                            <ul class="jobly_pagination">
+                                <?php jobly_pagination($company_query); ?>
+                            </ul>
 
                         </div>
 

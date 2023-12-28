@@ -65,6 +65,18 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $company_specifications = jobly_job_specs_options('company_specifications');
                         $company_specifications = $company_specifications[ $widget_name ];
 
+
+                        if (!empty ($_GET[ 'post_type' ] ?? '' == 'company')) {
+                            if (!empty ($_GET[ $widget_name ])) {
+                                $is_collapsed_show = 'collapse show';
+                                $area_expanded = 'true';
+                                $is_collapsed = '';
+                            } else {
+                                $is_collapsed_show = 'collapse';
+                                $area_expanded = 'false';
+                                $is_collapsed = ' collapsed';
+                            }
+                        }
                         ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
@@ -153,16 +165,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 // Widget Category List
                 if (jobly_opt('is_company_widget_cat') == true) {
+
+                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'company')) {
+                        if (!empty ($_GET[ 'company_cats' ])) {
+                            $is_collapsed_show = 'collapse show';
+                            $area_expanded = 'true';
+                            $is_collapsed = '';
+                        } else {
+                            $is_collapsed_show = 'collapse';
+                            $area_expanded = 'false';
+                            $is_collapsed = ' collapsed';
+                        }
+                    }
+
                     $term_cats = get_terms(array(
                         'taxonomy' => 'company_cat',
+                        'hide_empty' => true,
                     ));
+
                     if (!empty($term_cats)) {
                         ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark collapsed" data-bs-toggle="collapse"
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse"
                                href="#collapseCategory" role="button"
-                               aria-expanded="false"><?php esc_html_e('Category', 'jobly'); ?></a>
-                            <div class="collapse" id="collapseCategory">
+                               aria-expanded="<?php echo esc_attr($area_expanded) ?>"><?php esc_html_e('Category', 'jobly'); ?></a>
+                            <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                 <div class="main-body">
                                     <ul class="style-none filter-input">
                                         <?php
@@ -205,7 +232,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <?php esc_html_e('Apply Filter', 'jobly'); ?>
                 </button>
             </form>
-
 
         </div>
     </div>

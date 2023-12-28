@@ -7,8 +7,8 @@ global $job_post;
 <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
     <div class="total-job-found">
         <?php esc_html_e('All', 'jobly'); ?>
-        <span class="text-dark"><?php echo esc_html($job_post->post_count); ?></span>
-        <?php esc_html_e('jobs found', 'jobly'); ?>
+        <span class="text-dark"><?php echo number_format_i18n($job_post->post_count); ?></span>
+        <?php printf(_n('job found', 'jobs found', $job_post->post_count, 'jobly'), number_format_i18n($job_post->post_count)); ?>
     </div>
 
     <div class="d-flex align-items-center">
@@ -26,7 +26,7 @@ global $job_post;
             <form action="" method="get">
                 <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
                     <option value=""><?php esc_html_e( 'Default', 'jobly' ); ?></option>
-                    <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old)  ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
+                    <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
                     <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
                     <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>
                     <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobly' ); ?></option>

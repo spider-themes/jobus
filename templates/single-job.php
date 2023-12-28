@@ -1,13 +1,11 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
 get_header();
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-$job_single_layout = jobly_opt('job_single_layout');
-
 ?>
     <section class="job-details pt-100 lg-pt-80 pb-130 lg-pb-80">
         <div class="container">
@@ -36,12 +34,15 @@ $job_single_layout = jobly_opt('job_single_layout');
 
                         $company_query = new WP_Query($args);
 
-                        while ( $company_query->have_posts() ) : $company_query->the_post();
-                            ?>
-                            <?php the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' )); ?>
-                            <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
-                            <?php
-                            if ( $meta['is_company_website'] == 'custom' && !empty($website[ 'url' ])) { ?>
+                        while ( $company_query->have_posts() ) {
+                            $company_query->the_post();
+                            if (has_post_thumbnail()) {
+                                ?>
+                                <?php the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' )); ?>
+                                <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
+                                <?php
+                            }
+                            if ($meta[ 'is_company_website' ] == 'custom' && !empty($website[ 'url' ])) { ?>
                                 <a href="<?php echo esc_url($website[ 'url' ]) ?>"
                                    target="<?php echo esc_attr($website_target) ?>" class="website-btn tran3s">
                                     <?php echo esc_html($website[ 'text' ]) ?>
@@ -53,23 +54,23 @@ $job_single_layout = jobly_opt('job_single_layout');
                                 </a>
                                 <?php
                             }
-                            ?>
-                            <?php
-                        endwhile;
+                        }
                         wp_reset_postdata();
                         ?>
-
                         <div class="border-top mt-40 pt-40">
-                            <ul class="job-meta-data row style-none">
-                                <?php
-                                $specifications = jobly_opt('job_specifications');
-                                if (is_array($specifications)) {
+                            <?php
+                            // Retrieve the repeater field configurations from settings options
+                            $specifications = jobly_opt('job_specifications');
+                            if (is_array($specifications)) {
+                                ?>
+                                <ul class="job-meta-data row style-none">
+                                    <?php
                                     foreach ( $specifications as $field ) {
 
                                         $meta_name = $field[ 'meta_name' ] ?? '';
                                         $meta_key = $field[ 'meta_key' ] ?? '';
 
-                                        // Get the stored meta values
+                                        // Get the stored meta-values
                                         $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                                         if (isset($meta_options[ $meta_key ])) {
@@ -82,8 +83,8 @@ $job_single_layout = jobly_opt('job_single_layout');
                                                 if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
                                                     echo '<div>';
                                                     foreach ( $meta_options[ $meta_key ] as $value ) {
-                                                        $trimed_value = str_replace('@space@', ' ', $value);
-                                                        echo esc_html($trimed_value);
+                                                        $trim_value = str_replace('@space@', ' ', $value);
+                                                        echo esc_html($trim_value);
                                                     }
                                                     echo '</div>';
                                                 }
@@ -91,15 +92,24 @@ $job_single_layout = jobly_opt('job_single_layout');
                                             </li>
                                             <?php
                                         }
-
                                     }
-                                }
-                                ?>
-                            </ul>
-                            <div class="job-tags d-flex flex-wrap pt-15">
-                                <?php echo jobly_get_the_tag_list() ?>
-                            </div>
-                            <a href="#" class="btn-one w-100 mt-25">Apply Now</a>
+                                    ?>
+                                </ul>
+                                <?php
+                            }
+                            if (jobly_get_the_tag_list()) { ?>
+                                <div class="job-tags d-flex flex-wrap pt-15">
+                                    <?php echo jobly_get_the_tag_list() ?>
+                                </div>
+                                <?php
+                            }
+                            if (!empty($meta[ 'apply_form_url' ])) { ?>
+                                <a href="<?php echo esc_url($meta[ 'apply_form_url' ]) ?>" class="btn-one w-100 mt-25">
+                                    <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                </a>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -109,7 +119,7 @@ $job_single_layout = jobly_opt('job_single_layout');
     </section>
 <?php
 
-
-include JOBLY_PATH . '/templates/single/related-post.php';
+// Related job posts
+jobly_get_template_part('single/related-job');
 
 get_footer();

@@ -251,16 +251,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_job_details', // Set a unique slug-like ID
         'title' => esc_html__( 'Job Details Page', 'jobly' ),
-    ) );
-
-    // Job Details Page Settings-> Details Page
-    CSF::createSection( $settings_prefix, array(
-        'parent'    => 'jobly_job_details',
-        'title'     => esc_html__( 'Details Page', 'jobly' ),
-        'id'        => 'job_details_page',
-        'fields'    => array(
-
-        )
+        'icon' => 'fa fa-plus',
     ) );
 
     // Job Details Page Settings-> Related Jobs
@@ -273,7 +264,7 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Speciations Attributes', 'jobly'),
+                'content' => esc_html__('Job Attributes', 'jobly'),
             ),
 
             array(
@@ -300,11 +291,6 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
-
-    /***
-     * Company Settings
-     *
-     */
 
     // Company Specifications
     CSF::createSection( $settings_prefix, array(

@@ -200,19 +200,6 @@ if (!function_exists('jobly_the_button')) {
 }
 
 
-/**
- * @return string
- * Job post count
- */
-if (!function_exists('jobly_post_count')) {
-    function jobly_post_count ($post_type = 'job')
-    {
-        $count = wp_count_posts($post_type);
-        return number_format_i18n($count->publish);
-    }
-}
-
-
 if (!function_exists('jobly_job_post_count_result')) {
     function jobly_job_post_count_result ()
     {
@@ -291,7 +278,7 @@ function jobly_job_specs ($settings_id = 'job_specifications')
         }
     }
 
-    // Attach with taxonomy slugs for the 'job' post type
+    // Attach with taxonomy slugs for the 'job' post-type
     $job_taxonomies = get_object_taxonomies('job', 'names');
     foreach ( $job_taxonomies as $taxonomy ) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscores
@@ -386,12 +373,17 @@ function jobly_pagination ($query)
 }
 
 /**
- * Jobly job pagination
+ * Jobly pagination
  */
 function jobly_job_archive_query ($query)
 {
+
     if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
         $query->set('posts_per_page', jobly_opt('job_posts_per_page'));
+    }
+
+    if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
+        $query->set('posts_per_page', jobly_opt('company_posts_per_page'));
     }
 }
 

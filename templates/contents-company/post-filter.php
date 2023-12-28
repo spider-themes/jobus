@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+global $company_query;
 
 $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
@@ -9,8 +10,8 @@ $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]
 <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
     <div class="total-job-found">
         <?php esc_html_e('All', 'jobly'); ?>
-        <span class="text-dark fw-500"><?php echo esc_html(jobly_post_count('company')) ?></span>
-        <?php esc_html_e('company found', 'jobly'); ?>
+        <span class="text-dark fw-500"><?php echo number_format_i18n($company_query->post_count); ?></span>
+        <?php printf(_n('company found', 'companies found', $company_query->post_count, 'jobly'), number_format_i18n($company_query->post_count)); ?>
     </div>
     <div class="d-flex align-items-center">
         <?php

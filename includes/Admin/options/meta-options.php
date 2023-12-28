@@ -55,6 +55,20 @@ if (class_exists('CSF')) {
                 'dependency' => array('is_company_website', '==', 'custom'),
             ), // End company information
 
+
+            //====================== Job Information ======================//
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Job Information', 'jobly'),
+            ),
+
+            array(
+                'id'       => 'apply_form_url',
+                'type'     => 'text',
+                'title'    => esc_html__('Apply Link', 'jobly'),
+                'default'  => '#',
+            ),
+
         )
     ));
 
@@ -73,7 +87,6 @@ if (class_exists('CSF')) {
                 $opt_val = strtolower($modifiedString);
                 $opt_values[$opt_val] = $value['meta_values'] ?? '';
             }
-            
 
             if (!empty($field['meta_key'])) {
                 $fields[] = [

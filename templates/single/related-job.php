@@ -36,21 +36,16 @@ $related_jobs = new WP_Query($args);
                             <a href="<?php the_permalink(); ?>" class="logo">
                                 <?php the_post_thumbnail('full', [ 'class' => 'm-auto' ]); ?>
                             </a>
-                            <a href="javascript:void(0)" class="save-btn text-center rounded-circle tran3s"
-                               title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
-
                             <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
-                                    <span class="job-duration fw-500">
+                                    <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
                                         <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1') ?>
-                                    </span>
+                                    </a>
                                 </div>
                             <?php endif; ?>
-
                             <div>
-                                <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s"
-                                   title="<?php the_title_attribute() ?>">
-                                    <?php the_title() ?>
+                                <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s" title="<?php the_title_attribute() ?>">
+                                    <?php the_title('<h3>', '</h3>'); ?>
                                 </a>
                             </div>
                             <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_2')) : ?>
@@ -61,7 +56,7 @@ $related_jobs = new WP_Query($args);
                             <div class="d-flex align-items-center justify-content-between mt-auto">
                                 <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3')) : ?>
                                     <div class="job-location">
-                                        <a href="#">
+                                        <a href="<?php the_permalink(); ?>">
                                             <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3') ?>
                                         </a>
                                     </div>
@@ -72,7 +67,7 @@ $related_jobs = new WP_Query($args);
                             </div>
                         </div>
                     </div>
-                <?php
+                    <?php
                 endwhile;
                 wp_reset_postdata();
                 ?>
