@@ -29,7 +29,7 @@
                                 ?>
                         </a>
                         <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
-                            <?php jobly_the_title_length($settings, 'title_length' ) ?>
+                            <?php jobly_title_length($settings, 'title_length' ) ?>
                         </a>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
                         <?php echo esc_html($location_value) ?>
                     </div>
                     <div class="job-category">
-                        <a href="<?php echo jobly_get_the_first_taxonomoy_link() ?>">
-                            <?php echo jobly_get_the_first_taxonomoy() ?>
+                        <a href="<?php echo jobly_get_first_taxonomoy_link() ?>">
+                            <?php echo jobly_get_first_taxonomoy() ?>
                         </a>
                     </div>
                 </div>

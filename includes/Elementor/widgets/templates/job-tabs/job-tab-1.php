@@ -61,7 +61,7 @@
                     <?php endif; ?>
                     <div>
                         <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
-                            <?php jobly_the_title_length($settings, 'title_length') ?>
+                            <?php jobly_title_length($settings, 'title_length') ?>
                         </a>
                     </div>
                     <div class="job-date"><?php the_time(get_option('date_format')); ?></div>
@@ -85,7 +85,7 @@
             ?>
             <div class="isotop-item">
                 <div class="card-style-four bg-color tran3s w-100 mt-40 lg-mt-20">
-                    <a <?php jobly_the_button($settings['view_all_btn_url']) ?> class="d-block">
+                    <a <?php jobly_button_link($settings['view_all_btn_url']) ?> class="d-block">
                         <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
                         <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobly'); ?></div>
                         <div class="d-flex align-items-center justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">

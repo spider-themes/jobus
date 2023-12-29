@@ -26,24 +26,12 @@ if (class_exists('CSF')) {
                 'default' => false,
             ),
 
-            // Compnay Info
             array(
-                'id' => 'company_info',
-                'type' => 'fieldset',
-                'title' => esc_html__('Company Info', 'jobly'),
-                'fields' => array(
-
-                    array(
-                        'id' => 'company_website',
-                        'type' => 'link',
-                        'title' => esc_html__('Website URL', 'jobly'),
-                        'attributes' => array(
-                            'placeholder' => esc_html__('https://www.example.com', 'jobly'),
-                        ),
-                        'default' => array(
-                            'url' => '#',
-                        ),
-                    ),
+                'id' => 'company_website',
+                'type' => 'link',
+                'title' => esc_html__('Company Website URL', 'jobly'),
+                'default' => array(
+                    'url' => '#',
                 ),
             ),
 

@@ -25,7 +25,6 @@ if (!function_exists('jobly_meta')) {
  * @return array
  */
 if (!function_exists('jobly_get_template_part')) {
-
     function jobly_get_template_part ($template)
     {
 
@@ -37,10 +36,8 @@ if (!function_exists('jobly_get_template_part')) {
         if ($theme_file = locate_template(array( 'jobly/' . $template ))) {
             $file = $theme_file;
         } else {
-            //here path to '/single-paper.php'
             $file = JOBLY_PATH . "/templates/" . $template;
         }
-
         if ($file) {
             load_template($file, false);
         }
@@ -53,8 +50,8 @@ if (!function_exists('jobly_get_template_part')) {
  * @get the first taxonomy
  * @return string
  */
-if (!function_exists('jobly_get_the_first_taxonomoy')) {
-    function jobly_get_the_first_taxonomoy ($term = 'job_cat')
+if (!function_exists('jobly_get_first_taxonomoy')) {
+    function jobly_get_first_taxonomoy ($term = 'job_cat')
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -71,8 +68,8 @@ if (!function_exists('jobly_get_the_first_taxonomoy')) {
  * @get the first taxonomy url
  * @return string
  */
-if (!function_exists('jobly_get_the_first_taxonomoy_link')) {
-    function jobly_get_the_first_taxonomoy_link ($term = 'job_cat')
+if (!function_exists('jobly_get_first_taxonomoy_link')) {
+    function jobly_get_first_taxonomoy_link ($term = 'job_cat')
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -89,8 +86,8 @@ if (!function_exists('jobly_get_the_first_taxonomoy_link')) {
  * @get the tag list of job_tag
  * @return string
  */
-if (!function_exists('jobly_get_the_tag_list')) {
-    function jobly_get_the_tag_list ($term = 'job_tag')
+if (!function_exists('jobly_get_tag_list')) {
+    function jobly_get_tag_list ($term = 'job_tag')
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -116,9 +113,8 @@ if (!function_exists('jobly_get_the_tag_list')) {
  *
  * @return array
  */
-if (!function_exists('jobly_get_the_categories')) {
-
-    function jobly_get_the_categories ($term = 'job_cat')
+if (!function_exists('jobly_get_categories')) {
+    function jobly_get_categories ($term = 'job_cat')
     {
         $cats = get_terms(array(
             'taxonomy' => $term,
@@ -141,8 +137,8 @@ if (!function_exists('jobly_get_the_categories')) {
  * @param int $default
  * @return string|void
  */
-if (!function_exists('jobly_the_title_length')) {
-    function jobly_the_title_length ($settings, $settings_key, $default = 10)
+if (!function_exists('jobly_title_length')) {
+    function jobly_title_length ($settings, $settings_key, $default = 10)
     {
         $title_length = !empty($settings[ $settings_key ]) ? $settings[ $settings_key ] : $default;
         $title = get_the_title() ? wp_trim_words(get_the_title(), $title_length, '') : the_title();
@@ -158,8 +154,8 @@ if (!function_exists('jobly_the_title_length')) {
  * @param int $default
  * @return string
  */
-if (!function_exists('jobly_get_the_excerpt_length')) {
-    function jobly_get_the_excerpt_length ($settings, $settings_key, $default = 10)
+if (!function_exists('jobly_get_excerpt_length')) {
+    function jobly_get_excerpt_length ($settings, $settings_key, $default = 10)
     {
         $excerpt_length = !empty($settings[ $settings_key ]) ? $settings[ $settings_key ] : $default;
         $excerpt = get_the_excerpt() ? wp_trim_words(get_the_excerpt(), $excerpt_length, '...') : wp_trim_words(get_the_content(), $excerpt_length, '...');
@@ -176,59 +172,26 @@ if (!function_exists('jobly_get_the_excerpt_length')) {
  * The button link
  * @return void
  */
-if (!function_exists('jobly_the_button')) {
-    function jobly_the_button ($settings_key, $is_echo = true)
+if (!function_exists('jobly_button_link')) {
+    function jobly_button_link ($settings_key, $is_echo = true)
     {
 
-        if ($is_echo == true) {
-            echo !empty($settings_key[ 'url' ]) ? "href='{$settings_key['url']}'" : '';
-            echo $settings_key[ 'is_external' ] == true ? 'target="_blank"' : '';
-            echo $settings_key[ 'nofollow' ] == true ? 'rel="nofollow"' : '';
+        if ($is_echo) {
+            echo !empty($settings_key['url']) ? 'href="' . esc_url($settings_key['url']) . '"' : '';
+            echo $settings_key['is_external'] ? ' target="_blank"' : '';
+            echo $settings_key['nofollow'] ? ' rel="nofollow"' : '';
 
-            if (!empty($settings_key[ 'custom_attributes' ])) {
-                $attrs = explode(',', $settings_key[ 'custom_attributes' ]);
+            if (!empty($settings_key['custom_attributes'])) {
+                $attrs = explode(',', $settings_key['custom_attributes']);
 
                 if (is_array($attrs)) {
-                    foreach ( $attrs as $data ) {
+                    foreach ($attrs as $data) {
                         $data_attrs = explode('|', $data);
-                        echo esc_attr($data_attrs[ 0 ] . '=' . $data_attrs[ 1 ]);
+                        echo ' ' . esc_attr($data_attrs[0]) . '="' . esc_attr($data_attrs[1]) . '"';
                     }
                 }
             }
         }
-    }
-}
-
-
-if (!function_exists('jobly_job_post_count_result')) {
-    function jobly_job_post_count_result ()
-    {
-
-        // Check if posts_per_page is set in the $args array
-        if (isset($args[ 'posts_per_page' ])) {
-            $per_page = intval($args[ 'posts_per_page' ]);
-        } else {
-            $per_page = 10;
-        }
-
-        $current_page = max(1, get_query_var('paged')); // Current page number
-        $total_jobs = wp_count_posts('job')->publish; // Total number of job posts
-
-        // Calculate the first and last result numbers
-        $first_result = ($per_page * $current_page) - $per_page + 1;
-        $last_result = min(($per_page * $current_page), $total_jobs);
-
-
-        // Display the post-counter
-        $results = sprintf(
-            esc_html__('Showing %1$d-%2$d of %3$d results', 'jobly'),
-            $first_result,
-            $last_result,
-            $total_jobs
-        );
-
-        return $results;
-
     }
 }
 
@@ -265,7 +228,7 @@ if (!function_exists('jobly_company_post_list')) {
 }
 
 
-function jobly_job_specs ($settings_id = 'job_specifications')
+function jobly_get_specs ($settings_id = 'job_specifications')
 {
     $specifications = jobly_opt($settings_id);
 
@@ -289,8 +252,8 @@ function jobly_job_specs ($settings_id = 'job_specifications')
 }
 
 
-if (!function_exists('jobly_job_specs_options')) {
-    function jobly_job_specs_options ($settings_id = 'job_specifications')
+if (!function_exists('jobly_get_specs_options')) {
+    function jobly_get_specs_options ($settings_id = 'job_specifications')
     {
         $specifications = jobly_opt($settings_id);
 
@@ -335,59 +298,68 @@ if (!function_exists('jobly_get_meta_attributes')) {
 }
 
 
-function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = '')
-{
-
-    $args = array(
-        'post_type' => $post_type,
-        'posts_per_page' => -1,
-        'meta_query' => array(
-            array(
-                'key' => $meta_key,
-                'value' => $meta_value,
-                'compare' => 'LIKE',
+if ( ! function_exists( 'jobly_get_meta_attributes' ) ) {
+    function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = '')
+    {
+        $args = array(
+            'post_type' => $post_type,
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key' => $meta_key,
+                    'value' => $meta_value,
+                    'compare' => 'LIKE',
+                ),
             ),
-        ),
-    );
+        );
 
-    $query = new WP_Query($args);
-
-    return $query->found_posts;
+        $query = new WP_Query($args);
+        return $query->found_posts;
+    }
 }
+
 
 /**
  * Jobly job pagination
  */
-function jobly_pagination ($query)
-{
 
-    $big = 999999999; // need an unlikely integer
-    echo paginate_links(array(
-        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-        'format' => '?paged=%#%',
-        'current' => max(1, get_query_var('paged')),
-        'total' => $query->max_num_pages,
-        'prev_text' => '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly'),
-        'next_text' => esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />',
-    ));
+if ( ! function_exists( 'jobly_pagination' ) ) {
+    function jobly_pagination ($query)
+    {
+
+        $big = 999999999; // need an unlikely integer
+        echo paginate_links(array(
+            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+            'format' => '?paged=%#%',
+            'current' => max(1, get_query_var('paged')),
+            'total' => $query->max_num_pages,
+            'prev_text' => '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly'),
+            'next_text' => esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />',
+        ));
+    }
 }
+
+
 
 /**
  * Jobly pagination
  */
-function jobly_job_archive_query ($query)
-{
+if ( !function_exists('jobly_job_archive_query') ) {
+    function jobly_job_archive_query ($query)
+    {
 
-    if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
-        $query->set('posts_per_page', jobly_opt('job_posts_per_page'));
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
+            $query->set('posts_per_page', jobly_opt('job_posts_per_page'));
+        }
+
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
+            $query->set('posts_per_page', jobly_opt('company_posts_per_page'));
+        }
     }
 
-    if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
-        $query->set('posts_per_page', jobly_opt('company_posts_per_page'));
-    }
+    add_action('pre_get_posts', 'jobly_job_archive_query');
 }
 
-add_action('pre_get_posts', 'jobly_job_archive_query');
 
 /*
  * Get the company count by post id and meta value
@@ -668,4 +640,77 @@ if ( !function_exists('jobly_showing_post_result_count') ) {
         </p>
         <?php
     }
+}
+
+
+if ( !function_exists('jobly_social_share_icons') ) {
+    /**
+     * Display the social share icons
+     *
+     * @param string $class The CSS class for the paragraph element.
+     */
+    function jobly_social_share_icons ($class = 'style-none d-flex align-items-center') {
+        $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
+        ?>
+        <ul class="<?php echo esc_attr($class) ?>">
+            <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobly'); ?></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobly'); ?>"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="https://www.linkedin.com/share?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobly'); ?>"><i class="bi bi-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobly'); ?>"><i class="bi bi-twitter"></i></a></li>
+        </ul>
+        <?php
+    }
+}
+
+
+
+
+
+
+
+/**
+ * Get custom icon [Elegant Icons]
+ */
+if ( ! function_exists( 'jobly_cs_bootstrap_icons' ) ) {
+
+    function jobly_cs_bootstrap_icons( $icons = [] ) {
+        // Adding new icons
+        $icons[] = array(
+            'title' => esc_html__('Bootstrap Icons', 'jobly'),
+            'icons' => array(
+                'bi bi-facebook',
+                'bi bi-twitter',
+                'bi bi-instagram',
+                'bi bi-linkedin',
+                'bi bi-youtube',
+                'bi bi-github',
+                'bi bi-dribbble',
+                'bi bi-behance',
+                'bi bi-pinterest',
+                'bi bi-skype',
+                'bi bi-vimeo',
+                'bi bi-google',
+                'bi bi-reddit',
+                'bi bi-whatsapp',
+                'bi bi-spotify',
+                'bi bi-twitch',
+                'bi bi-telegram',
+                'bi bi-snapchat',
+                'bi bi-slack',
+                'bi bi-quora',
+                'bi bi-paypal',
+                'bi bi-medium',
+                'bi bi-link',
+                'bi bi-link-45deg',
+                'bi bi-linkedin',
+            )
+        );
+
+        // Move custom icons to the top of the list.
+        $icons = array_reverse( $icons );
+
+        return $icons;
+    }
+
+    add_filter( 'csf_field_icon_add_icons', 'jobly_cs_bootstrap_icons' );
 }

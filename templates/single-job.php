@@ -97,9 +97,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                 </ul>
                                 <?php
                             }
-                            if (jobly_get_the_tag_list()) { ?>
+                            if (jobly_get_tag_list()) { ?>
                                 <div class="job-tags d-flex flex-wrap pt-15">
-                                    <?php echo jobly_get_the_tag_list() ?>
+                                    <?php echo jobly_get_tag_list() ?>
                                 </div>
                                 <?php
                             }

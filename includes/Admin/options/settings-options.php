@@ -143,7 +143,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
@@ -151,7 +151,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
@@ -159,7 +159,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_3',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 03', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
@@ -167,7 +167,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_4',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 04', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '==', 'list'),
             ),
 
@@ -201,7 +201,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobly' ),
-                        'options'       => jobly_job_specs(),
+                        'options'       => jobly_get_specs(),
                         'default'       => false,
                     ),
 
@@ -271,21 +271,21 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_related_post_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_3',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 03', 'jobly'),
-                'options'   => jobly_job_specs(),
+                'options'   => jobly_get_specs(),
             ),
 
         )
@@ -386,7 +386,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'company_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobly'),
-                'options'   => jobly_job_specs('company_specifications'),
+                'options'   => jobly_get_specs('company_specifications'),
                 'dependency' => array('company_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
@@ -394,7 +394,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'company_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobly'),
-                'options'   => jobly_job_specs('company_specifications'),
+                'options'   => jobly_get_specs('company_specifications'),
                 'dependency' => array('company_archive_attr_layout', '==', 'list'),
             ),
 
@@ -431,7 +431,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobly' ),
-                        'options'       => jobly_job_specs('company_specifications'),
+                        'options'       => jobly_get_specs('company_specifications'),
                         'default'       => false,
                     ),
 
@@ -459,6 +459,58 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+    // Social Icons
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_social_icons', // Set a unique slug-like ID
+        'title' => esc_html__( 'Social Icons', 'jobly' ),
+        'icon' => 'fa fa-plus',
+        'fields' => array(
+
+            array(
+                'id'                => 'jobly_social_icons',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Social Icons', 'jobly' ),
+                'subtitle'              => esc_html__( 'Customize and manage your social media icons along with respective URLs', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Icon', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'icon',
+                        'type'          => 'icon',
+                        'title'         => esc_html__( 'Icon', 'jobly' ),
+                        'default'       => 'fab fa-facebook-f',
+                    ),
+
+                    array(
+                        'id'            => 'url',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'URL', 'jobly' ),
+                        'default'       => '#',
+                    ),
+
+                ),
+                'default' => array(
+                    array(
+                        'icon' => 'fab fa-facebook-f',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'fab fa-twitter',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'fab fa-linkedin-in',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'fab fa-instagram',
+                        'url' => '#',
+                    ),
+                ),
+            )
+
+        )
+    ) );
 
 	// Backup Options
 	CSF::createSection( $settings_prefix, array(

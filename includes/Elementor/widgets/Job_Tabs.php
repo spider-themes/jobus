@@ -106,7 +106,7 @@ class Job_Tabs extends Widget_Base {
                 'label' => esc_html__('Category', 'banca-core'),
                 'description' => esc_html__('Display job by categories', 'banca-core'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => jobly_get_the_categories(),
+                'options' => jobly_get_categories(),
                 'multiple' => true,
                 'label_block' => true,
             ]

@@ -10,7 +10,6 @@ global $job_post;
         <span class="text-dark"><?php echo number_format_i18n($job_post->post_count); ?></span>
         <?php printf(_n('job found', 'jobs found', $job_post->post_count, 'jobly'), number_format_i18n($job_post->post_count)); ?>
     </div>
-
     <div class="d-flex align-items-center">
         <div class="short-filter d-flex align-items-center">
             <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>

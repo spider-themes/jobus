@@ -14,6 +14,7 @@ class Assets {
 	public function jobly_enqueue_scripts()	{
 
         // Enqueue Styles
+        wp_enqueue_style('bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css', [], JOBLY_VERSION);
         wp_enqueue_style('jobly-admin', JOBLY_CSS . '/admin.css', [], JOBLY_VERSION);
 
 

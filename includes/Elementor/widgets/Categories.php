@@ -125,7 +125,7 @@ class Categories extends Widget_Base {
                 'label'       => esc_html__( 'Category', 'jobly' ),
                 'description' => esc_html__( 'Display Listing by Location', 'jobly' ),
                 'type'        => \Elementor\Controls_Manager::SELECT2,
-                'options'     => jobly_get_the_categories(),
+                'options'     => jobly_get_categories(),
                 'multiple'    => true,
                 'label_block' => true,
             ]

@@ -31,7 +31,7 @@
         ?>
         <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
             <div class="card-style-four bg-color tran3s w-100 mt-30 wow fadeInUp" data-wow-delay="0.1s">
-                <a <?php jobly_the_button($settings['view_all_btn_url']) ?> class="d-block">
+                <a <?php jobly_button_link($settings['view_all_btn_url']) ?> class="d-block">
                     <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
                     <div class="text-lg text-white"><?php echo esc_html__('Job already posted', 'jobly') ?></div>
                     <div class="d-flex align-items-center justify-content-end mt-50">

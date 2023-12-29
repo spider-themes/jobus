@@ -8,7 +8,7 @@
                 style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>');">
                 <a href="<?php the_permalink(); ?>" class="w-100 h-100 text d-flex align-items-end">
                     <div class="title text-white fw-500 text-lg">
-                        <?php jobly_the_title_length($settings, 'title_length' ) ?></div>
+                        <?php jobly_title_length($settings, 'title_length' ) ?></div>
                 </a>
             </div>
         </div>
