@@ -274,51 +274,6 @@
         font-size: 18px;
     }
 }
-// Pagination One
-.pagination{
-    margin: 0 -1px;
-    .page-numbers{
-        width: 35px;
-        height: 35px;
-        text-align: center;
-        line-height: 35px;
-        border-radius: 50%;
-        font-size: 17px;
-        font-weight: 500;
-        color: $color-five;
-        display: inline-block;
-        &:last-child {
-            width: auto;
-            height: auto;
-        }
-        &.current {
-            background: $color-five;
-            color: #fff;
-        }
-    }
-}
-// Pagination Two
-.pagination-two {
-    border: 1px solid $color-five;
-    border-radius: 4px;
-    overflow: hidden;
-        a {
-            width: 35px;
-            height: 35px;
-            text-align: center;
-            line-height: 35px;
-            font-size: 15px;
-            font-weight: 500;
-            color: $color-five;
-            border-right: 1px solid $color-five;
-        }
-        .active a, a:hover {
-            background: rgba($color: $color-five, $alpha: 0.1);
-        }
-        li:last-child a {
-            border: none;
-        }
-}
 // Contact Form
 .form-style-one {
     .input-group-meta  {
