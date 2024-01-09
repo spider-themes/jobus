@@ -154,13 +154,13 @@ if (!function_exists('jobly_title_length')) {
  * @param int $default
  * @return string
  */
-if (!function_exists('jobly_get_excerpt_length')) {
-    function jobly_get_excerpt_length ($settings, $settings_key, $default = 10)
+if (!function_exists('jobly_excerpt_length')) {
+    function jobly_excerpt_length ($settings, $settings_key, $default = 10)
     {
         $excerpt_length = !empty($settings[ $settings_key ]) ? $settings[ $settings_key ] : $default;
         $excerpt = get_the_excerpt() ? wp_trim_words(get_the_excerpt(), $excerpt_length, '...') : wp_trim_words(get_the_content(), $excerpt_length, '...');
 
-        return wp_kses_post($excerpt);
+        echo wp_kses_post($excerpt);
     }
 }
 
@@ -298,7 +298,7 @@ if (!function_exists('jobly_get_meta_attributes')) {
 }
 
 
-if ( ! function_exists( 'jobly_get_meta_attributes' ) ) {
+if ( ! function_exists( 'jobly_count_meta_key_usage' ) ) {
     function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = '')
     {
         $args = array(
