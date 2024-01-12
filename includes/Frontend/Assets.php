@@ -13,10 +13,9 @@ class Assets {
     
     public static function jobly_enqueue_scripts() {
 
-        // Register Style's
-        wp_register_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css' );
-
+        // Enqueue Style's
         wp_enqueue_style( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css' );
+        wp_enqueue_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css' );
         wp_enqueue_style( 'bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css' );
         wp_enqueue_style( 'slick', JOBLY_VEND . '/slick/slick.css' );
         wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css' );
@@ -27,9 +26,11 @@ class Assets {
 
 
         // Register Scripts
-        wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );
-        wp_register_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
+
+        // Enqueue Scripts
+        wp_enqueue_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
+        wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );
         wp_enqueue_script( 'slick', JOBLY_VEND . '/slick/slick.min.js', [ 'jquery' ], '2.2.0', true );
         wp_enqueue_script( 'jobly-public', JOBLY_JS . '/public.js', [ 'jquery' ], JOBLY_VERSION, true );
 

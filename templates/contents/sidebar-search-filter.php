@@ -34,9 +34,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
                         $area_expanded = $index == 1 ? 'true' : 'false';
 
-                        $widget_name = $widget[ 'widget_name' ];
-                        $widget_layout = $widget[ 'widget_layout' ];
-                        $range_suffix = $widget[ 'range_suffix' ];
+                        $widget_name = $widget[ 'widget_name' ] ?? '';
+                        $widget_layout = $widget[ 'widget_layout' ] ?? '';
+                        $range_suffix = $widget[ 'range_suffix' ] ?? '';
 
                         $specifications = jobly_get_specs();
                         $widget_title = $specifications[ $widget_name ];
@@ -68,9 +68,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                  id="collapse-<?php echo esc_attr($widget_name) ?>">
                                 <div class="main-body">
                                     <?php
-                                    if ( $widget_layout == 'dropdown' ) {
+                                    if ($widget_layout == 'dropdown') {
                                         ?>
-                                        <select class="nice-select bg-white" name="<?php echo esc_attr($widget_name) ?>[]">
+                                        <select class="nice-select bg-white"
+                                                name="<?php echo esc_attr($widget_name) ?>[]">
                                             <?php
                                             if (isset($job_specifications) && is_array($job_specifications)) {
                                                 foreach ( $job_specifications as $key => $value ) {
@@ -80,8 +81,8 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                     $modifiedVal = strtolower($modifiedSelect);
 
-                                                    $meta_value_count   = jobly_count_meta_key_usage('job','jobly_meta_options', $modifiedVal);
-                                                    if ( $meta_value_count > 0 ) {
+                                                    $meta_value_count = jobly_count_meta_key_usage('job', 'jobly_meta_options', $modifiedVal);
+                                                    if ($meta_value_count > 0) {
                                                         $searched_val = jobly_search_terms($widget_name);
                                                         $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
                                                         $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
@@ -96,7 +97,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             ?>
                                         </select>
                                         <?php
-                                    } elseif ( $widget_layout == 'checkbox' ) {
+                                    } elseif ($widget_layout == 'checkbox') {
                                         ?>
                                         <ul class="style-none filter-input">
                                             <?php
@@ -131,7 +132,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             ?>
                                         </ul>
                                         <?php
-                                    } elseif ( $widget_layout == 'range' ) {
+                                    } elseif ($widget_layout == 'range') {
 
                                         $salary_value_list = $job_specifications;
 
@@ -248,7 +249,8 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             $check_status = $check_status !== false ? ' checked' : '';
                                             ?>
                                             <li<?php echo esc_attr($list_class) ?>>
-                                                <input type="checkbox" name="job_cats[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($check_status) ?>>
+                                                <input type="checkbox" name="job_cats[]"
+                                                       value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($check_status) ?>>
                                                 <label>
                                                     <?php echo esc_html($term->name) ?>
                                                     <span><?php echo esc_html($term->count) ?></span>

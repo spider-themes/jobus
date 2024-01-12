@@ -6236,6 +6236,7 @@ body.compensate-for-scrollbar {
   padding: 0 15px;
   font-size: 20px;
   color: #000;
+  border: none;
 }
 .job-search-one form .input-box .nice-select .option {
   font-size: 15px;

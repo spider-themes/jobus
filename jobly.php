@@ -108,6 +108,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
+            new Jobly\Elementor\Register_Widgets();
 		}
 
 		/**
@@ -137,7 +138,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
-            new Jobly\Elementor\Register_Widgets();
             new Jobly\Admin\Post_Types();
 
 		}

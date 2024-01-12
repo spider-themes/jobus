@@ -2,6 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
+
 namespace Jobly\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
@@ -21,7 +22,8 @@ if (!defined('ABSPATH')) {
  * @package spider\Widgets
  * @since 1.0.0
  */
-class Search_Form extends Widget_Base {
+class Search_Form extends Widget_Base
+{
 
     public function get_name ()
     {
@@ -43,7 +45,8 @@ class Search_Form extends Widget_Base {
         return [ 'Jobly', 'Search', 'Form', 'Search Form' ];
     }
 
-    public function get_categories () {
+    public function get_categories ()
+    {
         return [ 'jobly-elements' ];
     }
 
@@ -73,29 +76,30 @@ class Search_Form extends Widget_Base {
      * Package: @jobly
      * Author: spider-themes
      */
-    public function elementor_content_control () {
+    public function elementor_content_control ()
+    {
 
 
         //===================== Select Preset ===========================//
         $this->start_controls_section(
             'sec_layout', [
-                'label' => esc_html__( 'Preset Skins', 'jobly' ),
+                'label' => esc_html__('Preset Skins', 'jobly'),
             ]
         );
 
         $this->add_control(
             'layout', [
-                'label'   => __( 'Layout', 'jobly' ),
-                'type'    => \Elementor\Controls_Manager::CHOOSE,
+                'label' => __('Layout', 'jobly'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __( '01: Search Form', 'jobly' ),
-                        'icon'  => 'search_form_1',
+                        'title' => __('01: Search Form', 'jobly'),
+                        'icon' => 'search_form_1',
                     ],
-                    '2' => [
+                    /*'2' => [
                         'title' => __( '02: Search Form', 'jobly' ),
                         'icon'  => 'search_form_2',
-                    ],
+                    ],*/
                 ],
                 'default' => '1'
             ]
@@ -106,27 +110,89 @@ class Search_Form extends Widget_Base {
 
         //===================== Filter =========================//
         $this->start_controls_section(
-            'sec_filter', [
-                'label' => __( 'Filter', 'jobly' ),
+            'sec_search_form', [
+                'label' => __('Search Form', 'jobly'),
+            ]
+        );
+
+        // A repeater for search form fields
+        $repeater = new \Elementor\Repeater();
+        $repeater->add_control(
+            'form_title', [
+                'label' => __('Title', 'jobly'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'default' => __('Location', 'jobly'),
+            ]
+        );
+
+        $repeater->add_control(
+            'select_search_form', [
+                'label' => __('Select Form', 'jobly'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => jobly_get_specs(),
+            ]
+        );
+
+        // Column Select Fields
+        $repeater->add_control(
+            'column', [
+                'label' => __('Column', 'jobly'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    '2' => __('Two Column', 'jobly'),
+                    '3' => __('Three Column', 'jobly'),
+                    '4' => __('Four Column', 'jobly'),
+                    '5' => __('Five Column', 'jobly'),
+                    '6' => __('Six Column', 'jobly'),
+                ],
+                'default' => '4',
+            ]
+        );
+
+        $this->add_control(
+            'job_search_form', [
+                'label' => __('Add Form', 'jobly'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'title_field' => '{{{ form_title }}}',
+                'prevent_empty' => false,
+            ]
+        );
+
+        $this->add_control(
+            'form_btn_heading', [
+                'label' => __('Form Button', 'jobly'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'submit_btn', [
+                'label' => __('Button Label', 'jobly'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __('Search', 'jobly'),
             ]
         );
 
         $this->end_controls_section(); //End Filter
 
+
         //===================== Search Keywords =========================//
         $this->start_controls_section(
             'sec_keywords', [
-                'label' => __( 'Keywords', 'jobly' ),
+                'label' => __('Keywords', 'jobly'),
             ]
         );
 
         // Switcher field is_keyword
         $this->add_control(
             'is_keyword', [
-                'label' => esc_html__( 'Keywords', 'jobly' ),
+                'label' => esc_html__('Keywords', 'jobly'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Show', 'jobly' ),
-                'label_off' => esc_html__( 'Hide', 'jobly' ),
+                'label_on' => esc_html__('Show', 'jobly'),
+                'label_off' => esc_html__('Hide', 'jobly'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -134,7 +200,7 @@ class Search_Form extends Widget_Base {
 
         $this->add_control(
             'keyword_label', [
-                'label' => esc_html__( 'Keywords Label', 'docy-core' ),
+                'label' => esc_html__('Keywords Label', 'docy-core'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => 'Popular:',
@@ -148,7 +214,7 @@ class Search_Form extends Widget_Base {
         $keywords = new \Elementor\Repeater();
         $keywords->add_control(
             'title', [
-                'label' => __( 'Title', 'jobly' ),
+                'label' => __('Title', 'jobly'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
             ]
@@ -156,15 +222,15 @@ class Search_Form extends Widget_Base {
 
         $this->add_control(
             'keywords', [
-                'label' => __( 'Add Keyword', 'jobly' ),
+                'label' => __('Add Keyword', 'jobly'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $keywords->get_controls(),
                 'default' => [
                     [
-                        'title' => __( 'Keyword #1', 'jobly' ),
+                        'title' => __('Keyword #1', 'jobly'),
                     ],
                     [
-                        'title' => __( 'Keyword #2', 'jobly' ),
+                        'title' => __('Keyword #2', 'jobly'),
                     ],
                 ],
                 'title_field' => '{{{ title }}}',
@@ -175,7 +241,7 @@ class Search_Form extends Widget_Base {
             ]
         );
 
-        $this->end_controls_section(); //End Filter
+        $this->end_controls_section(); //End Search Keywords
 
     }
 
@@ -193,7 +259,6 @@ class Search_Form extends Widget_Base {
     {
 
 
-
     }
 
 
@@ -206,16 +271,17 @@ class Search_Form extends Widget_Base {
      * Package: @jobly
      * Author: spider-themes
      */
-    protected function render () {
+    protected function render ()
+    {
         $settings = $this->get_settings_for_display();
         extract($settings); //extract all settings array to variables converted to name of key
 
-        $categories = get_terms( array(
+        $categories = get_terms(array(
 
-            'taxonomy'   => 'job_cat',
+            'taxonomy' => 'job_cat',
             'hide_empty' => true,
 
-        ) );
+        ));
 
 
         //================= Template Parts =================//
