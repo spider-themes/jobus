@@ -42,7 +42,7 @@ class Search_Form extends Widget_Base
 
     public function get_keywords ()
     {
-        return [ 'Jobly', 'Search', 'Form', 'Search Form' ];
+        return [ 'Jobly', 'Filter' ];
     }
 
     public function get_categories ()
@@ -79,7 +79,6 @@ class Search_Form extends Widget_Base
     public function elementor_content_control ()
     {
 
-
         //===================== Select Preset ===========================//
         $this->start_controls_section(
             'sec_layout', [
@@ -96,10 +95,10 @@ class Search_Form extends Widget_Base
                         'title' => __('01: Search Form', 'jobly'),
                         'icon' => 'search_form_1',
                     ],
-                    /*'2' => [
+                    '2' => [
                         'title' => __( '02: Search Form', 'jobly' ),
                         'icon'  => 'search_form_2',
-                    ],*/
+                    ],
                 ],
                 'default' => '1'
             ]
@@ -116,26 +115,25 @@ class Search_Form extends Widget_Base
         );
 
         // A repeater for search form fields
-        $repeater = new \Elementor\Repeater();
-        $repeater->add_control(
-            'form_title', [
-                'label' => __('Title', 'jobly'),
+        $search_form_1 = new \Elementor\Repeater();
+        $search_form_1->add_control(
+            'attr_title', [
+                'label' => __('Attribute Title', 'jobly'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => __('Location', 'jobly'),
             ]
         );
 
-        $repeater->add_control(
-            'select_search_form', [
-                'label' => __('Select Form', 'jobly'),
+        $search_form_1->add_control(
+            'select_job_attr', [
+                'label' => __('Attribute', 'jobly'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => jobly_get_specs(),
             ]
         );
 
-        // Column Select Fields
-        $repeater->add_control(
+        $search_form_1->add_control(
             'column', [
                 'label' => __('Column', 'jobly'),
                 'type' => \Elementor\Controls_Manager::SELECT,
@@ -152,11 +150,14 @@ class Search_Form extends Widget_Base
 
         $this->add_control(
             'job_search_form', [
-                'label' => __('Add Form', 'jobly'),
+                'label' => __('Add Attributes', 'jobly'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $repeater->get_controls(),
+                'fields' => $search_form_1->get_controls(),
                 'title_field' => '{{{ form_title }}}',
                 'prevent_empty' => false,
+                'condition' => [
+                    'layout' => '1',
+                ],
             ]
         );
 
