@@ -78,12 +78,12 @@ if (!defined('ABSPATH')) {
     if (!empty($settings[ 'is_keyword' ])) {
         ?>
         <ul class="tags d-flex flex-wrap style-none mt-20">
-            <li class="fw-500 text-white me-2"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+            <li class="fw-500 text-white me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
             <?php
             if (!empty($settings[ 'keywords' ])) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     ?>
-                    <li><a href="#"><?php echo esc_html($keyword[ 'title' ]) ?></a></li>
+                    <li><a href="#"><?php echo esc_html($keyword[ 'title' ]) ?> </a></li>
                     <?php
                 }
             }

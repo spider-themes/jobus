@@ -50,8 +50,8 @@ if (!function_exists('jobly_get_template_part')) {
  * @get the first taxonomy
  * @return string
  */
-if (!function_exists('jobly_get_first_taxonomoy')) {
-    function jobly_get_first_taxonomoy ($term = 'job_cat')
+if (!function_exists('jobly_get_first_taxonomoy_name')) {
+    function jobly_get_first_taxonomoy_name ($term = 'job_cat')
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -120,6 +120,7 @@ if (!function_exists('jobly_get_categories')) {
             'taxonomy' => $term,
             'hide_empty' => true,
         ));
+
         $cat_array = [];
         foreach ( $cats as $cat ) {
             $cat_array[ $cat->term_id ] = $cat->name;

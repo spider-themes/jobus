@@ -459,6 +459,44 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+    // Company Details Page Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_company_details', // Set a unique slug-like ID
+        'title' => esc_html__( 'Company Details Page', 'jobly' ),
+        'icon' => 'fa fa-plus',
+    ) );
+
+    // Job Details Page Settings-> Open Job Position
+    CSF::createSection( $settings_prefix, array(
+        'parent'    => 'jobly_company_details',
+        'title'     => esc_html__( 'Open Job Position', 'jobly' ),
+        'id'        => 'company_details_page_open_jobs',
+        'fields'    => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Job Attributes', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'company_open_job_meta_1',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 01', 'jobly'),
+                'options'   => jobly_get_specs(),
+            ),
+
+            array(
+                'id'        => 'company_open_job_meta_2',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 02', 'jobly'),
+                'options'   => jobly_get_specs(),
+            ),
+
+        )
+    ) );
+
+
     // Social Icons
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_social_icons', // Set a unique slug-like ID

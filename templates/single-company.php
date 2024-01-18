@@ -9,6 +9,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
 $website = $meta[ 'company_website' ] ?? '';
 $website_target = $website[ 'target' ] ?? '_self';
 ?>
+
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
         <div class="container">
             <div class="row">
@@ -36,7 +37,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 <?php
                                 // Retrieve the repeater field configurations from settings options
                                 $specifications = jobly_opt('company_specifications');
-                                if ( $specifications ) {
+                                if ($specifications) {
 
                                     foreach ( $specifications as $field ) {
 
@@ -102,7 +103,8 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 ?>
                             </ul>
 
-                            <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
+                            <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>"
+                               class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
                                 <?php esc_html_e('Posted Jobs', 'jobly'); ?>
                             </a>
                         </div>
@@ -116,9 +118,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                         <?php the_content(); ?>
 
                         <nav class="share-option mt-60">
-
                             <?php jobly_social_share_icons() ?>
-
                         </nav>
 
                     </div>
@@ -126,7 +126,106 @@ $website_target = $website[ 'target' ] ?? '_self';
             </div>
         </div>
     </section>
-<?php
 
+    <section class="company-open-position pt-80 lg-pt-60 pb-100 lg-pb-60">
+        <div class="container">
+
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-6">
+                    <div class="title-two">
+                        <h2><?php esc_html_e('Open Position', 'jobly'); ?></h2>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="d-flex justify-content-lg-end">
+                        <a href="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="btn-six">
+                            <?php esc_html_e('Explore More', 'jobly'); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-50">
+                <?php
+                $job_meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+
+                $select_company = $job_meta['select_company'] ?? '';
+
+                $args = array(
+                    'post_type' => 'job',
+                    'posts_per_page' => -1,
+                    'meta_query' => array(
+                        'relation' => 'AND', // Optional, defaults to "AND
+                        array(
+                            'key' => 'jobly_meta_options',
+                            'value' => get_the_ID(),
+                            'compare' => 'LIKE',
+                        ),
+                    ),
+                );
+
+                $jobs = new WP_Query($args);
+
+                while ( $jobs->have_posts() ) : $jobs->the_post();
+                    // Get the selected company ID
+                    $job_meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+                    $company_id = $job_meta[ 'select_company' ] ?? '';
+                    ?>
+                    <div class="job-list-one style-two position-relative mb-20">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-xxl-3 col-lg-4">
+                                <div class="job-title d-flex align-items-center">
+                                    <a href="<?php the_permalink(); ?>" class="logo">
+                                        <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
+                                    </a>
+                                    <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
+                                        <?php the_title('<h3>', '</h3>') ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 ms-auto">
+                                <?php if (jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_1')) : ?>
+                                    <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
+                                        <?php echo jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_1') ?>
+                                    </a>
+                                <?php endif; ?>
+                                <div class="job-date">
+                                    <?php the_time(get_option('date_format')) . esc_html__('by', 'jobly') ?>
+                                    <a href="<?php echo esc_url(get_permalink($company_id)) ?>">
+                                        <?php echo get_the_title($company_id) ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 ms-auto xs-mt-10">
+                                <?php if (jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_2')) : ?>
+                                    <div class="job-location">
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php echo jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_2') ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="job-category">
+                                    <a href="<?php echo jobly_get_first_taxonomoy_link() ?>">
+                                        <?php echo jobly_get_first_taxonomoy_name(); ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4">
+                                <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
+                                    <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
+                                        <?php esc_html_e('APPLY', 'jobly'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </div>
+    </section>
+<?php
 
 get_footer();

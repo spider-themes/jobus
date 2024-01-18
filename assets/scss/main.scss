@@ -11,24 +11,20 @@ template.
 Table of Content:
 01/ variables
 02/ mixins
-03/ base
 03/ prefix
-03/ layout
-04/ vendor
-05/ banner
+04/ layout
+05/ vendor
 06/ candidates
-06/ card
-07/ company
-08/ dashboard
-09/ element
-10/ job-listing
-11/ single_content
+07/ card
+08/ company
+09/ dashboard
+10/ element
+11/ job-listing
+12/ single_content
 =====================================================*/
-
 
 @import "frontend/variables";
 @import "frontend/mixins";
-@import "frontend/base";
 @import "frontend/prefix";
 @import "frontend/layout";
 @import "frontend/vendor";
