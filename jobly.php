@@ -109,6 +109,11 @@ if ( ! class_exists( 'Jobly' ) ) {
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
             new Jobly\Elementor\Register_Widgets();
+
+
+            // Gutenberg Blocks
+            require_once __DIR__ . '/Blocks.php';
+            new Jobly\Gutenberg\Blocks();
 		}
 
 		/**

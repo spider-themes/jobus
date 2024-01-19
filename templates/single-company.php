@@ -147,10 +147,6 @@ $website_target = $website[ 'target' ] ?? '_self';
 
             <div class="mt-50">
                 <?php
-                $job_meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-
-                $select_company = $job_meta['select_company'] ?? '';
-
                 $args = array(
                     'post_type' => 'job',
                     'posts_per_page' => -1,
@@ -190,7 +186,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                     </a>
                                 <?php endif; ?>
                                 <div class="job-date">
-                                    <?php the_time(get_option('date_format')) . esc_html__('by', 'jobly') ?>
+                                    <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobly') ?>
                                     <a href="<?php echo esc_url(get_permalink($company_id)) ?>">
                                         <?php echo get_the_title($company_id) ?>
                                     </a>

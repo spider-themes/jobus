@@ -1,8 +1,6 @@
 {
   "name": "jobly",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build"
@@ -10,10 +8,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.19.0"
+  },
   "dependencies": {
     "latest-version": "^7.0.0"
   },
-  "devDependencies": {
-    "@wordpress/scripts": "^26.19.0"
-  }
+  "description": ""
 }
