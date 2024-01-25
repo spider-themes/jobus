@@ -494,8 +494,9 @@
         font-size: 19px;
         color: #000;
         line-height: 1.5em;
-        width: calc(100% - 90px);
         margin-left: 30px;
+        font-family: 'gordita';
+        margin-bottom: 0;
         &:hover {
             color: $color-three;
         }

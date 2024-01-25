@@ -126,7 +126,7 @@ class Jobs extends Widget_Base {
 
 		$this->add_control(
 			'show_count', [
-				'label' => esc_html__('Show Posts Count', 'banca-core'),
+				'label' => esc_html__('Show Posts Count', 'jobly'),
 				'type' => Controls_Manager::NUMBER,
 				'default' => 3
 			]
@@ -134,7 +134,7 @@ class Jobs extends Widget_Base {
 
 		$this->add_control(
 			'order', [
-				'label' => esc_html__('Order', 'banca-core'),
+				'label' => esc_html__('Order', 'jobly'),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
 					'ASC' => 'ASC',
@@ -146,7 +146,7 @@ class Jobs extends Widget_Base {
 
 		$this->add_control(
 			'orderby', [
-				'label' => esc_html__('Order By', 'banca-core'),
+				'label' => esc_html__('Order By', 'jobly'),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
 					'none' => 'None',
@@ -162,29 +162,42 @@ class Jobs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'title_length', [
-				'label' => esc_html__('Title Length', 'banca-core'),
-				'type' => Controls_Manager::NUMBER,
-			]
-		);
-
-		$this->add_control(
-			'excerpt_length', [
-				'label' => esc_html__('Excerpt Word Length', 'banca-core'),
-				'type' => Controls_Manager::NUMBER,
-			]
-		);
-
-		$this->add_control(
 			'exclude', [
-				'label' => esc_html__('Exclude Job', 'banca-core'),
-				'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'banca-core'),
+				'label' => esc_html__('Exclude Job', 'jobly'),
+				'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobly'),
 				'type' => Controls_Manager::TEXT,
 				'label_block' => true,
 			]
 		);
 
 		$this->end_controls_section(); // End Filter Options
+
+
+        //============================= Job Attributes ================================//
+        $this->start_controls_section(
+            'job_attrs_sec', [
+                'label' => __('Job Attributes', 'jobly'),
+            ]
+        );
+
+        $this->add_control(
+            'job_attr_meta_1', [
+                'label' => esc_html__('Attribute 01', 'jobly'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => jobly_get_specs(),
+            ]
+        );
+
+        $this->add_control(
+            'job_attr_meta_2', [
+                'label' => esc_html__('Attribute 02', 'jobly'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => jobly_get_specs(),
+            ]
+        );
+
+        $this->end_controls_section(); // End Job Attributes
+
 
 	}
 
