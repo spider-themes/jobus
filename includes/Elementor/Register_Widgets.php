@@ -82,6 +82,7 @@ class Register_Widgets
         require_once(__DIR__ . '/widgets/Jobs.php');
         require_once(__DIR__ . '/widgets/Job_Tabs.php');
 
+
         // Register Widgets Classes
         $widgets_manager->register(new widgets\Categories());
         $widgets_manager->register(new widgets\Search_Form());

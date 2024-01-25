@@ -110,6 +110,13 @@
     background-position: top;
 }
 
+.search_form_3::before {
+    background: url("../images/el-editor-preview/search_form_3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
 /** === Job Listing === **/
 .job_1::before {
     background: url("../images/el-editor-preview/job_1.png");

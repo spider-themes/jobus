@@ -99,6 +99,10 @@ class Search_Form extends Widget_Base
                         'title' => __( '02: Search Form', 'jobly' ),
                         'icon'  => 'search_form_2',
                     ],
+                    '3' => [
+                        'title' => __( '03: Search Form', 'jobly' ),
+                        'icon'  => 'search_form_3',
+                    ],
                 ],
                 'default' => '1'
             ]
@@ -134,6 +138,25 @@ class Search_Form extends Widget_Base
         );
 
         $search_form_1->add_control(
+            'layout_type', [
+                'label' => esc_html__( 'Attribute Layout', 'jobly' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'dropdown' => [
+                        'title' => esc_html__( 'Type Select', 'jobly' ),
+                        'icon' => 'eicon-select',
+                    ],
+                    'text' => [
+                        'title' => esc_html__( 'Type Text', 'jobly' ),
+                        'icon' => 'eicon-text-field',
+                    ],
+                ],
+                'default' => 'dropdown',
+                'separator' => 'after'
+            ]
+        );
+
+        $search_form_1->add_control(
             'column', [
                 'label' => __('Column', 'jobly'),
                 'type' => \Elementor\Controls_Manager::SELECT,
@@ -153,10 +176,10 @@ class Search_Form extends Widget_Base
                 'label' => __('Add Attributes', 'jobly'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $search_form_1->get_controls(),
-                'title_field' => '{{{ form_title }}}',
+                'title_field' => '{{{ attr_title }}}',
                 'prevent_empty' => false,
                 'condition' => [
-                    'layout' => '1',
+                    'layout' => [ '1', '3' ]
                 ],
             ]
         );
@@ -184,6 +207,9 @@ class Search_Form extends Widget_Base
         $this->start_controls_section(
             'sec_keywords', [
                 'label' => __('Keywords', 'jobly'),
+                'condition' => [
+                    'layout' => [ '1', '2' ]
+                ]
             ]
         );
 

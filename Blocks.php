@@ -15,7 +15,7 @@ class Blocks {
 
         // Register Block Editor and Frontend Assets
         add_action( 'enqueue_block_editor_assets', [ $this, 'register_block_editor_assets' ] );
-        add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
+        //add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
 
     }
 
