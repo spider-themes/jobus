@@ -6,6 +6,7 @@
             // Get the selected company ID
             $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
             $company_id = $meta[ 'select_company' ] ?? '';
+
             ?>
 
             <div class="job-list-one position-relative bottom-border">
@@ -23,9 +24,9 @@
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-6 ms-auto">
-                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', 'job_attr_meta_1'))) : ?>
+                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']))) : ?>
                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_attr_meta_1') ?>
+                                <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']) ?>
                             </a>
                         <?php endif ?>
                         <div class="job-date">
@@ -37,10 +38,10 @@
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-sm-6 ms-auto xs-mt-10">
-                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', 'job_attr_meta_2'))) : ?>
+                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']))) : ?>
                             <div class="job-location">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_attr_meta_2') ?>
+                                    <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']) ?>
                                 </a>
                             </div>
                         <?php endif; ?>

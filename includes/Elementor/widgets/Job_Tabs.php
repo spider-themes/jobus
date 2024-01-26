@@ -157,13 +157,6 @@ class Job_Tabs extends Widget_Base {
         );
 
         $this->add_control(
-            'excerpt_length', [
-                'label' => esc_html__('Excerpt Word Length', 'banca-core'),
-                'type' => Controls_Manager::NUMBER,
-            ]
-        );
-
-        $this->add_control(
             'exclude', [
                 'label' => esc_html__('Exclude Job', 'banca-core'),
                 'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'banca-core'),
@@ -174,7 +167,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'view_all_btn_url', [
-                'label'   => esc_html__( 'View All Posts', 'jobly' ),
+                'label'   => esc_html__( 'View All Posts URL', 'jobly' ),
                 'type'    => \Elementor\Controls_Manager::URL,
                 'default' => [
                     'url' => '#',
@@ -184,6 +177,32 @@ class Job_Tabs extends Widget_Base {
         );
 
         $this->end_controls_section(); // End Filter Options
+
+
+        //============================= Job Attributes ================================//
+        $this->start_controls_section(
+            'job_attrs_sec', [
+                'label' => __('Job Attributes', 'jobly'),
+            ]
+        );
+
+        $this->add_control(
+            'job_attr_meta_1', [
+                'label' => esc_html__('Attribute 01', 'jobly'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => jobly_get_specs(),
+            ]
+        );
+
+        $this->add_control(
+            'job_attr_meta_2', [
+                'label' => esc_html__('Attribute 02', 'jobly'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => jobly_get_specs(),
+            ]
+        );
+
+        $this->end_controls_section(); // End Job Attributes
 
     }
 

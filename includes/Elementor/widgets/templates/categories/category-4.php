@@ -19,7 +19,7 @@
             <div class="card-style-six position-relative" <?php echo $style; ?>>
                 <a href="<?php the_permalink(); ?>" class="w-100 h-100 text d-flex align-items-end">
                     <div class="title text-white fw-500 text-lg">
-                        <?php echo esc_html__(($category->name)) ?></div>
+                        <?php echo esc_html(($category->name)) ?></div>
                 </a>
             </div>
         </div>

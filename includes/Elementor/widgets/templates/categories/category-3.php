@@ -33,7 +33,7 @@
             <div class="card-style-four bg-color tran3s w-100 mt-30 wow fadeInUp" data-wow-delay="0.1s">
                 <a <?php jobly_button_link($settings['view_all_btn_url']) ?> class="d-block">
                     <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
-                    <div class="text-lg text-white"><?php echo esc_html__('Job already posted', 'jobly') ?></div>
+                    <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobly') ?></div>
                     <div class="d-flex align-items-center justify-content-end mt-50">
                         <img src="<?php echo JOBLY_IMG . '/icons/shape_22.svg' ?>"
                              alt="<?php esc_html_e('shape', 'jobly'); ?>" class="lazy-img">

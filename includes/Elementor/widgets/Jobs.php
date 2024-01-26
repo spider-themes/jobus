@@ -183,7 +183,7 @@ class Jobs extends Widget_Base {
         $this->add_control(
             'job_attr_meta_1', [
                 'label' => esc_html__('Attribute 01', 'jobly'),
-                'type' => Controls_Manager::SELECT2,
+                'type' => Controls_Manager::SELECT,
                 'options' => jobly_get_specs(),
             ]
         );
@@ -191,7 +191,7 @@ class Jobs extends Widget_Base {
         $this->add_control(
             'job_attr_meta_2', [
                 'label' => esc_html__('Attribute 02', 'jobly'),
-                'type' => Controls_Manager::SELECT2,
+                'type' => Controls_Manager::SELECT,
                 'options' => jobly_get_specs(),
             ]
         );

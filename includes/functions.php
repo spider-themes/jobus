@@ -284,12 +284,17 @@ if (!function_exists('jobly_get_meta_attributes')) {
     function jobly_get_meta_attributes( $meta_parent_id = '', $meta_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
-        $metaValueKey = $meta_options[ jobly_opt($meta_key) ] ?? '';
-    
-        if (is_array($metaValueKey)) {
 
-            $meta_value = $meta_options[ jobly_opt($meta_key) ];
-            $trim_value = ! empty( $meta_value ) ? implode(', ', $meta_value ) : '';
+        $metaValueKey = $meta_options[ $meta_key ] ?? '';
+        if (empty($metaValueKey)) {
+            $metaValueKey = $meta_options[ jobly_opt($meta_key) ] ?? '';
+        }
+
+        $meta_value = is_array($metaValueKey) ? $metaValueKey : [];
+    
+        if (is_array($metaValueKey )) {
+
+            $trim_value = !empty($meta_value) ? implode(', ', $meta_value) : '';
             $formatted_value = str_replace('@space@', ' ', $trim_value);
 
             return esc_html($formatted_value);
@@ -298,6 +303,27 @@ if (!function_exists('jobly_get_meta_attributes')) {
 
     }
 }
+
+
+
+function jobly_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
+{
+    $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
+    $metaValueKey = $meta_options[ $settings_key ] ?? '';
+
+    if (is_array($metaValueKey)) {
+
+        $meta_value = $meta_options[ $settings_key ];
+        $trim_value = ! empty( $meta_value ) ? implode(', ', $meta_value ) : '';
+        $formatted_value = str_replace('@space@', ' ', $trim_value);
+
+        return esc_html($formatted_value);
+
+    }
+
+}
+
+
 
 
 if ( ! function_exists( 'jobly_count_meta_key_usage' ) ) {

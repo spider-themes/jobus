@@ -16,7 +16,7 @@
                             <?php
                         }
                         ?>
-                        <div class="title fw-500"><?php echo esc_html__($category->name) ?></div>
+                        <div class="title fw-500"><?php echo esc_html($category->name) ?></div>
                     </a>
                 </div>
                 <?php
