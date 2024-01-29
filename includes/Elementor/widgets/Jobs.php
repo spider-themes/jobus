@@ -496,7 +496,7 @@ class Jobs extends Widget_Base {
 			$args['orderby'] = $orderby;
 		}
 
-		if (!empty($exclude)) {
+		if (is_array($exclude)) {
 			$args['post__not_in'] = $exclude;
 		}
 
