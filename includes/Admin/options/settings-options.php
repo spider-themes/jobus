@@ -51,6 +51,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'title'     => esc_html__( 'Job Specifications', 'jobly' ),
         'id'        => 'jobly_job_specifications',
+        'icon'      => 'fa fa-plus',
         'fields'    => array(
 
             array(
@@ -296,6 +297,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'title'     => esc_html__( 'Company Specifications', 'jobly' ),
         'id'        => 'jobly_company_specifications',
+        'icon'      => 'fa fa-plus',
         'fields'    => array(
 
             array(
@@ -356,6 +358,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_company_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Company Archive Page', 'jobly' ),
+        'icon'      => 'fa fa-plus',
     ) );
 
     // Company Archive Settings-> Archive Settings
@@ -501,7 +504,7 @@ if( class_exists( 'CSF' ) ) {
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_social_icons', // Set a unique slug-like ID
         'title' => esc_html__( 'Social Icons', 'jobly' ),
-        'icon' => 'fa fa-plus',
+        'icon' => 'fa fa-hashtag',
         'fields' => array(
 
             array(
@@ -554,6 +557,7 @@ if( class_exists( 'CSF' ) ) {
 	CSF::createSection( $settings_prefix, array(
 		'title'  => esc_html__( 'Backup', 'jobly' ),
         'id'     => 'jobly_backup',
+        'icon'      => 'fa fa-database',
 		'fields' => array(
 			array(
 				'id'        => 'jobly_export_import',

@@ -125,15 +125,10 @@
     background-position: top;
 }
 
-
-
-/*==================== Widget Preview Icon =====================*/
-/*
-.elementor-panel .elementor-element .icon .jobly-icon::after {
-    content: url("../images/el-editor-preview/jobly-icon.svg");
+/** === Company Listing === **/
+.company_1::before {
+    background: url("../images/el-editor-preview/company_1.jpg");
     background-repeat: no-repeat;
-    opacity: .5;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}*/
+    background-size: cover;
+    background-position: top;
+}

@@ -15,7 +15,7 @@ class Blocks {
 
         // Register Block Editor and Frontend Assets
         add_action( 'enqueue_block_editor_assets', [ $this, 'register_block_editor_assets' ] );
-        //add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
+        add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
 
     }
 
@@ -63,7 +63,11 @@ class Blocks {
     public function register_block_editor_assets ()
     {
 
-        // Enqueue JS
+        // Style's
+
+
+
+        // Scripts
         wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
 
     }
@@ -72,14 +76,12 @@ class Blocks {
     public function register_block_assets ()
     {
 
+        // Style's
         wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
 
-        wp_enqueue_script(
-            'jobly-block',
-            JOBLY_JS . '/block-frontend.js',
-            [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ],
-            filemtime( plugin_dir_path( __FILE__ ) . 'build/block-frontend.js' )
-        );
+
+        // Scripts
+        wp_enqueue_script('jobly-block', JOBLY_JS . '/block-frontend.js', [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), true);
 
     }
 

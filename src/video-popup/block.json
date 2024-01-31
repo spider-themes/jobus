@@ -2,7 +2,7 @@
   "apiVersion": 3,
   "name": "jobly/video-popup",
   "version": "1.0.0",
-  "title": "Jobly Video Popup dd",
+  "title": "Jobly Video Popup",
   "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
   "icon": "universal-access-alt",
   "category": "jobly-blocks",
