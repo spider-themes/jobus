@@ -42,6 +42,7 @@ class Blocks {
      */
     public function blocks_init() {
         $this->register_block( 'video-popup' );
+        $this->register_block( 'testimonials' );
     }
 
     /**

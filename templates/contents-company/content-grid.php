@@ -23,11 +23,11 @@ $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
         </h5>
 
         <?php
-            if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
-                ?>
-                <p class="text-center mb-auto"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
-                <?php
-            }
+        if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
+            ?>
+            <p class="text-center mb-auto"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+            <?php
+        }
         
         if ($company_count > 0) { 
             ?>

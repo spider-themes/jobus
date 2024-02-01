@@ -359,7 +359,37 @@ if( class_exists( 'CSF' ) ) {
         'id'    => 'jobly_company_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Company Archive Page', 'jobly' ),
         'icon'      => 'fa fa-plus',
+
     ) );
+
+    // Company Layout Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_company_archive',
+        'title' => esc_html__( 'Page Layout', 'jobly' ),
+        'id' => 'company_page_layout',
+        'fields' => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Company Page Layout', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'company_layout',
+                'type'      => 'image_select',
+                'title'     => esc_html__('Choose Layout', 'jobly'),
+                'subtitle'  => esc_html__('Select the preferred layout for your company page across the entire website.', 'jobly'),
+                'options'   => array(
+                    '1' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+                    '2' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+                ),
+                'default'   => '1'
+            ),
+
+        )
+    ) );
+
 
     // Company Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(

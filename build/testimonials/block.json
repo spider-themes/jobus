@@ -1,10 +1,10 @@
 {
   "apiVersion": 3,
-  "name": "jobly/video-popup",
+  "name": "jobly/testimonials",
   "version": "1.0.0",
-  "title": "Jobly Video Popup",
-  "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
-  "icon": "universal-access-alt",
+  "title": "Jobly Testimonials",
+  "description": "Jobly Testimonials. A block that allows you to add a client review to your page.",
+  "icon": "dashicons-testimonial",
   "category": "jobly-blocks",
   "supports": {
     "html": false
@@ -12,8 +12,8 @@
   "textdomain": "jobly",
   "keywords": [
     "jobly",
-    "video",
-    "popup"
+    "Testimonials",
+    "Review"
   ],
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css"

@@ -22,9 +22,6 @@ class Assets {
         wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css' );
 
 
-
-
-
         // Register Scripts
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
 
