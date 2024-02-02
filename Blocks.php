@@ -11,7 +11,13 @@ class Blocks {
     public function __construct() {
 
         add_action( 'init', [ $this, 'blocks_init' ] );
-        add_filter( 'block_categories_all', [ $this, 'register_block_category' ], 10, 2 );
+
+        // Register Categories
+        if ( version_compare( $GLOBALS['wp_version'], '5.7', '<' ) ) {
+            add_filter( 'block_categories', [ $this, 'register_block_category' ], 10, 2 );
+        } else {
+            add_filter( 'block_categories_all', [ $this, 'register_block_category' ], 10, 2 );
+        }
 
         // Register Block Editor and Frontend Assets
         add_action( 'enqueue_block_editor_assets', [ $this, 'register_block_editor_assets' ] );
@@ -42,7 +48,8 @@ class Blocks {
      */
     public function blocks_init() {
         $this->register_block( 'video-popup' );
-        $this->register_block( 'testimonials' );
+        $this->register_block( 'group-testimonials' );
+        $this->register_block( 'testimonials-item' );
     }
 
     /**

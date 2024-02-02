@@ -1,0 +1,1 @@
+{"version":3,"file":"testimonials-item/style-index.css","mappings":";;;AAEI;EACE;AADN,C","sources":["webpack://jobly/./src/testimonials-item/style.scss"],"sourcesContent":[".company-details {\r\n  .details-post-data {\r\n    .slick-dots {\r\n      width: auto;\r\n    }\r\n  }\r\n}"],"names":[],"sourceRoot":""}

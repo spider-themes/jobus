@@ -4213,6 +4213,15 @@ body.compensate-for-scrollbar {
   padding: 0;
   right: 10px;
   top: -37px;
+  width: auto;
+  bottom: inherit;
+}
+.company-details .details-post-data .slick-dots li {
+  width: 8px;
+  height: 8px;
+}
+.company-details .details-post-data .slick-dots li button {
+  padding: inherit;
 }
 .company-details .details-post-data .share-option li a {
   font-size: 15px;

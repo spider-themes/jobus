@@ -25,7 +25,36 @@
         }
 
 
+        // Start Company Details page testimonials slider
+        function companyTestimonialsSlider() {
+            let testimonialSlider = $('.company-review-slider');
+
+            if (testimonialSlider.length > 0 && $.fn.slick) {
+                testimonialSlider.slick({
+                    dots: true,
+                    arrows: false,
+                    lazyLoad: 'ondemand',
+                    centerPadding: '0px',
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+        }
+
+        companyTestimonialsSlider(); // End Company Details page testimonials slider
+
+
     });
 
 
-})(jQuery)
+})(jQuery);
