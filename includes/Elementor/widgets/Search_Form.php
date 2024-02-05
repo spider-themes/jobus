@@ -286,7 +286,128 @@ class Search_Form extends Widget_Base
     {
 
 
+	    $this->start_controls_section(
+		    'jobly_search_section', [
+			    'label' => esc_html__( 'Search Field', 'jobly' ),
+			    'tab'   => Controls_Manager::TAB_STYLE,
+			    'condition' => [
+				    'layout'  => [ '1', '2' ],
+				    'layout!' => [ '3' ]
+			    ],
+		    ]
+	    );
+
+//		----start search style 1-----//
+	    $this->start_controls_tabs(
+		    'style_search_tabs'
+	    );
+		//start normal
+	    $this->start_controls_tab(
+		    'style_accordion_icon_normal',
+		    [
+			    'label' => esc_html__( 'Normal', 'jobly' ),
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'search2_bg',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'exclude'  => [ 'image' ],
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn',
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'text_color',
+		    [
+			    'label'     => esc_html__( 'Text Color', 'jobly' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
+			    ],
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab(); //End Normal
+
+	    //=== hover ====
+	    $this->start_controls_tab(
+		    'style_tab_title_active', [
+			    'label' => esc_html__( 'Hover', 'jobly' ),
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'search2_hover_bg',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'exclude'  => [ 'image' ],
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover',
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->add_control(
+		    'text_hover_color',
+		    [
+			    'label'     => esc_html__( 'Text Color', 'jobly' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
+			    ],
+			    'condition' => [
+				    'layout'  => [ '1' ],
+				    'layout!' => [ '2', '3' ]
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab(); // End hover
+	    $this->end_controls_tabs(); // End jobi search Normal/hover/ State
+//	---end search style 1---//
+
+
+//		----start search style 2-----//
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'accordion_title_bg_color',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'exclude'  => [ 'image' ],
+			    'selector' => '{{WRAPPER}} .job-search-two form input',
+			    'condition' => [
+				    'layout'  => [ '2' ],
+				    'layout!' => [ '1', '3' ]
+			    ],
+		    ]
+	    );
+
+//	---end search style 2---//
     }
+
+
 
 
     /**
