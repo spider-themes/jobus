@@ -447,13 +447,6 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-                'id'      => 'is_company_widget_search',
-                'type'    => 'switcher',
-                'title'   => esc_html__('Search Form', 'jobly'),
-                'default' => true,
-            ),
-
-            array(
                 'id'                => 'company_sidebar_widgets',
                 'type'              => 'repeater',
                 'title'             => esc_html__( 'Widgets', 'jobly' ),
@@ -475,6 +468,7 @@ if( class_exists( 'CSF' ) ) {
                         'options'       => array(
                             'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
                             'checkbox'      => esc_html__( 'Checkbox', 'jobly' ),
+                            'text'      => esc_html__( 'Text', 'jobly' ),
                         ),
                         'default'       => 'checkbox',
                     ),

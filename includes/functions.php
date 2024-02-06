@@ -242,12 +242,20 @@ function jobly_get_specs ($settings_id = 'job_specifications')
         }
     }
 
-    // Attach with taxonomy slugs for the 'job' post-type
+    // Get taxonomies for 'job' post type
     $job_taxonomies = get_object_taxonomies('job');
-    foreach ( $job_taxonomies as $taxonomy ) {
+    foreach ($job_taxonomies as $taxonomy) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
         $taxonomy_name = str_replace('_', ' ', $taxonomy_slug); // Convert underscore to space
-        $specs[ $taxonomy_slug ] = ucwords($taxonomy_name);
+        $specs[$taxonomy_slug] = ucwords($taxonomy_name);
+    }
+
+    // Get taxonomies for 'company' post type
+    $company_taxonomies = get_object_taxonomies('company');
+    foreach ($company_taxonomies as $taxonomy) {
+        $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
+        $taxonomy_name = str_replace('_', ' ', $taxonomy_slug); // Convert underscore to space
+        $specs[$taxonomy_slug] = ucwords($taxonomy_name);
     }
 
     return $specs;

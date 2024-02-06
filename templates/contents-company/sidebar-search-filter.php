@@ -22,25 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <input type="hidden" name="post_type" value="company"/>
 
                 <?php
-                // Search by company name
-                if (jobly_opt('is_company_widget_search') == true) {
-                    ?>
-                    <div class="filter-block bottom-line pb-25">
-                        <a class="filter-title fw-500 text-dark" data-bs-toggle="collapse"
-                           href="#collapseSemploye" role="button"
-                           aria-expanded="false"><?php esc_html_e('Search Company', 'jobly'); ?>
-                        </a>
-                        <div class="collapse show" id="collapseSemploye">
-                            <div class="main-body">
-                                <div class="input-box position-relative">
-                                    <input type="text" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('Company Name', 'jobly'); ?>">
-                                    <button><i class="bi bi-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
 
                 // Widget for company meta data list
                 $filter_widgets = jobly_opt('company_sidebar_widgets');
@@ -153,6 +134,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             }
                                             ?>
                                         </select>
+                                        <?php
+                                    } elseif ($widget_layout == 'text') {
+                                        ?>
+                                        <div class="input-box position-relative">
+                                            <input type="text" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('Company Name', 'jobly'); ?>">
+                                            <button><i class="bi bi-search"></i></button>
+                                        </div>
                                         <?php
                                     }
                                     ?>

@@ -55,5 +55,7 @@ get_footer();
 
 
 //Sidebar Popup
-jobly_get_template_part('contents-company/sidebar-search-filter-popup');
+if ( jobly_opt('company_layout') == '2' ) {
+    jobly_get_template_part('contents-company/sidebar-search-filter-popup');
+}
 

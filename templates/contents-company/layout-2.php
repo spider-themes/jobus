@@ -1,4 +1,18 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+// Check if the view parameter is set in the URL
+$current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
+
+
+// Toggle between list and grid views
+$toggle_view = ($current_view === 'grid') ? 'list' : 'grid';
+
+// Build the URL for list and grid views
+$list_view_url = add_query_arg('view', 'list', get_permalink());
+$grid_view_url = add_query_arg('view', 'grid', get_permalink());
 ?>
 <section class="company-profiles bg-color pt-90 lg-pt-70 pb-160 xl-pb-150 lg-pb-80">
     <div class="container">
@@ -7,21 +21,44 @@
                 <div class="wrapper">
 
                     <div class="upper-filter d-flex justify-content-between align-items-start align-items-md-center mb-25">
+
                         <div class="d-md-flex align-items-center">
+
                             <button type="button" class="filter-btn fw-500 tran3s me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
-                                Filter
+                                <?php esc_html_e('Filter', 'jobly'); ?>
                             </button>
-                            <div class="total-job-found md-mt-10">All <span class="text-dark fw-500">320</span> company found</div>
+
+                            <div class="total-job-found md-mt-10">
+                                <?php esc_html_e('All', 'jobly'); ?>
+                                <span class="text-dark fw-500"><?php echo number_format_i18n($company_query->post_count); ?></span>
+                                <?php printf(_n('company found', 'companies found', $company_query->post_count, 'jobly'), number_format_i18n($company_query->post_count)); ?>
+                            </div>
+
                         </div>
+
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
-                                <div class="text-dark fw-500 me-2">Short:</div>
-                                <select class="nice-select">
-                                    <option value="0">Latest</option>
-                                    <option value="1">Category</option>
-                                    <option value="2">Job Type</option>
-                                </select>
+                                <?php
+                                $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
+                                $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
+
+                                $selected_new_to_old = $selected_order_by == 'date' && $selected_order == 'desc' ? 'selected' : '';
+                                $selected_old_to_new = $selected_order_by == 'date' && $selected_order == 'asc' ? 'selected' : '';
+                                $selected_title_asc = $selected_order_by == 'title' && $selected_order == 'asc' ? 'selected' : '';
+                                $selected_title_desc = $selected_order_by == 'title' && $selected_order == 'desc' ? 'selected' : '';
+                                ?>
+                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
+
+                                <form action="" method="get">
+                                    <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
+                                        <option value=""><?php esc_html_e( 'Default', 'jobly' ); ?></option>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobly' ); ?></option>
+                                    </select>
+                                </form>
                             </div>
                             <button class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn active" title="Active List"><i class="bi bi-list"></i></button>
                             <button class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn" title="Active Grid"><i class="bi bi-grid"></i></button>
@@ -31,7 +68,6 @@
 
                     <div class="accordion-box grid-style show">
                         <div class="row">
-
                             <?php
                             while ( $company_query->have_posts() ) : $company_query->the_post();
                                 $company_count  = jobly_get_selected_company_count(get_the_ID(), false);
@@ -72,17 +108,11 @@
                                     </div>
                                 </div>
                                 <?php
-
                             endwhile;
                             wp_reset_postdata();
                             ?>
-
-
-
-
                         </div>
                     </div>
-                    <!-- /.accordion-box -->
 
                     <!---------------------- List Style ----------------------->
                     <div class="accordion-box list-style">

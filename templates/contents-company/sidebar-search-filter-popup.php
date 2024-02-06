@@ -1,6 +1,10 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 ?>
-<div class="modal popUpModal fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal popUpModal fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
             <div class="filter-area-tab modal-content">
@@ -10,86 +14,137 @@
                     <div class="pt-25 pb-30 ps-4 pe-4">
 
 
-                        <form action="<?php echo esc_url(get_post_type_archive_link('company')) ?>" role="search" method="post">
+                        <form action="<?php echo esc_url(get_post_type_archive_link('company')) ?>" role="search"
+                              method="get">
                             <input type="hidden" name="post_type" value="company"/>
 
                             <div class="row">
+                                <?php
 
-                                <div class="col-lg-4">
-                                    <div class="filter-block pb-50 lg-pb-20">
-                                        <div class="filter-title fw-500 text-dark">Keyword or Title</div>
-                                        <div class="input-box position-relative">
-                                            <input type="text" placeholder="Search by Keywords">
-                                            <button><i class="bi bi-search"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.filter-block -->
-                                </div>
+                                // Widget for company meta data list
+                                $filter_widgets = jobly_opt('company_sidebar_widgets');
 
-                                <div class="col-lg-4">
-                                    <div class="filter-block pb-50 lg-pb-20">
-                                        <div class="filter-title fw-500 text-dark">Category</div>
-                                        <select class="nice-select">
-                                            <option value="0">Web Design</option>
-                                            <option value="1">Design & Creative </option>
-                                            <option value="2">It & Development</option>
-                                            <option value="3">Web & Mobile Dev</option>
-                                            <option value="4">Writing</option>
-                                            <option value="5">Sales & Marketing</option>
-                                        </select>
-                                    </div>
-                                    <!-- /.filter-block -->
-                                </div>
 
-                                <div class="col-lg-4">
-                                    <div class="filter-block pb-50 lg-pb-20">
-                                        <div class="filter-title fw-500 text-dark">Location</div>
-                                        <select class="nice-select">
-                                            <option value="0">All Location</option>
-                                            <option value="1">California, CA</option>
-                                            <option value="2">New York</option>
-                                            <option value="3">Miami</option>
-                                        </select>
-                                    </div>
-                                    <!-- /.filter-block -->
-                                </div>
+                                if (is_array($filter_widgets)) {
 
-                                <div class="col-lg-4">
-                                    <div class="filter-block pb-25">
-                                        <div class="filter-title fw-500 text-dark mt-1">Company Status</div>
-                                        <div class="main-body">
-                                            <ul class="style-none filter-input d-flex">
-                                                <li class="me-3">
-                                                    <input type="checkbox" name="CompanyStatus" value="01">
-                                                    <label>New</label>
-                                                </li>
-                                                <li class="me-3">
-                                                    <input type="checkbox" name="CompanyStatus" value="02">
-                                                    <label>Top Rated</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" name="CompanyStatus" value="03">
-                                                    <label>Older</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /.filter-block -->
-                                </div>
+                                    $searched_class_collapsed = jobly_search_terms('company_meta');
 
-                                <div class="col-lg-4">
-                                    <div class="filter-block pb-25">
-                                        <div class="loccation-range-select">
-                                            <div class="d-flex align-items-center">
-                                                <span>Radius: &nbsp;</span>
-                                                <div id="rangeValue">50</div>
-                                                <span>&nbsp;miles</span>
+                                    foreach ($filter_widgets as $index => $widget) {
+
+                                        $widget_name = $widget['widget_name'] ?? '';
+                                        $widget_layout = $widget['widget_layout'] ?? '';
+
+                                        $specifications = jobly_get_specs('company_specifications');
+                                        $widget_title = $specifications[$widget_name];
+
+                                        $company_specifications = jobly_get_specs_options('company_specifications');
+                                        $company_specifications = $company_specifications[$widget_name];
+                                        ?>
+                                        <div class="col-lg-4">
+                                            <div class="filter-block pb-25">
+                                                <div class="filter-title fw-500 text-dark mt-1"><?php echo esc_html($widget_title); ?></div>
+
+                                                <?php
+
+                                                if ($widget_layout == 'checkbox') {
+                                                    ?>
+                                                    <div class="main-body">
+                                                        <ul class="style-none filter-input d-flex">
+
+                                                            <?php
+                                                            if (!empty($company_specifications)) {
+                                                                foreach ($company_specifications as $key => $value) {
+
+                                                                    $meta_value = $value['meta_values'] ?? '';
+                                                                    $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                                    $opt_val = strtolower($modifiedValues);
+
+                                                                    $searched_opt = jobly_search_terms($widget_name);
+                                                                    $check_status = array_search($opt_val, $searched_opt);
+                                                                    $check_status = $check_status !== false ? ' checked' : '';
+                                                                    ?>
+                                                                    <li class="me-3">
+                                                                        <input type="checkbox"
+                                                                               name="<?php echo esc_attr($widget_name) ?>[]"
+                                                                               value="<?php echo esc_attr($opt_val) ?>" <?php echo esc_attr($check_status) ?>>
+                                                                        <label>
+                                                                            <?php echo esc_html($meta_value); ?>
+                                                                        </label>
+                                                                    </li>
+                                                                    <?php
+
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </ul>
+                                                    </div>
+                                                    <?php
+                                                } elseif ($widget_layout == 'dropdown') {
+                                                    ?>
+                                                    <select class="nice-select" name="<?php echo esc_attr($widget_name) ?>[]">
+                                                        <?php
+                                                        if (is_array($company_specifications)) {
+                                                            foreach ($company_specifications as $key => $value) {
+
+                                                                $meta_value = $value['meta_values'] ?? '';
+
+                                                                $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                                $modifiedVal = strtolower($modifiedSelect);
+
+                                                                $searched_val = jobly_search_terms($widget_name);
+                                                                $selected_val = $searched_val[0] ?? $modifiedVal;
+                                                                $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
+                                                                ?>
+                                                                <option value="<?php echo esc_attr($modifiedVal) ?>" <?php echo esc_attr($selected_val) ?>>
+                                                                    <?php echo esc_html($meta_value) ?>
+                                                                </option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <?php
+                                                } elseif ($widget_layout == 'text') {
+                                                    ?>
+                                                    <div class="input-box position-relative">
+                                                        <input type="text"  name="s" id="searchInput" placeholder="<?php esc_attr_e('Search by Keywords', 'jobly'); ?>">
+                                                        <button><i class="bi bi-search"></i></button>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
                                             </div>
-                                            <input type="range" id="locationRange" value="50" max="100">
+                                        </div>
+                                        <?php
+                                    }
+                                }
+
+                                //============= Is Categories
+                                if (jobly_opt('is_company_widget_cat') == true) {
+
+                                    $term_cats = get_terms(array(
+                                        'taxonomy' => 'company_cat',
+                                        'hide_empty' => true,
+                                    ));
+                                    ?>
+                                    <div class="col-lg-4">
+                                        <div class="filter-block pb-50 lg-pb-20">
+                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                            <select class="nice-select" name="company_cats[]">
+                                                <?php
+                                                foreach ( $term_cats as $key => $term ) {
+                                                    ?>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
-                                    <!-- /.filter-block -->
-                                </div>
+                                    <?php
+                                }
+
+                                ?>
 
                                 <div class="col-lg-4">
                                     <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
