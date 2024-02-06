@@ -52,7 +52,7 @@
 
         }
 
-        postViewSwitcher(); // end Post View Switcher
+        //postViewSwitcher(); // end Post View Switcher
 
         /**
          * Search Keywords
