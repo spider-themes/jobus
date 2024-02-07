@@ -45,7 +45,7 @@ if ( ! empty( $result_ids ) ) {
 
 $company_query = new WP_Query($args);
 
-$company_layout = jobly_opt('company_layout');
+$company_layout = jobly_opt('company_archive_layout');
 
 //============= Select Layout ==================//
 include 'contents-company/layout-'.$company_layout.'.php';

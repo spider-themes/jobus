@@ -13,8 +13,8 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit();
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
 // Make sure the same class is not loaded.
@@ -95,6 +95,9 @@ if ( ! class_exists( 'Jobly' ) ) {
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
+
+            // Shortcode
+            require_once __DIR__ . '/shortcode/shortcode.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';

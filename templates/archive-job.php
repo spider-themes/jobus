@@ -132,59 +132,12 @@ if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty(
 }
 
 $job_post = new \WP_Query($args);
-?>
 
-    <section class="job-listing-three pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
-        <div class="container">
-            <div class="row">
+$job_layout = jobly_opt('job_archive_layout');
 
-                <?php jobly_get_template_part('contents/sidebar-search-filter'); ?>
 
-                <div class="col-xl-9 col-lg-8">
-                    <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">
+//========================= Select Layout ========================//
+include 'contents/layout-'.$job_layout.'.php';
 
-                        <?php jobly_get_template_part('contents/post-filter'); ?>
 
-                        <div class="accordion-box list-style show">
-                            <?php
-                            while ( $job_post->have_posts() ) {
-                                $job_post->the_post();
-                                jobly_get_template_part('contents/content-list');
-                            }
-                            wp_reset_postdata();
-                            ?>
-                        </div>
-
-                        <div class="accordion-box grid-style">
-                            <div class="row">
-                                <?php
-                                while ( $job_post->have_posts() ) {
-                                    $job_post->the_post();
-
-                                    jobly_get_template_part('contents/content-grid');
-                                }
-                                wp_reset_postdata();
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
-
-                            <?php jobly_showing_post_result_count('job', jobly_opt('job_posts_per_page')) ?>
-
-                            <ul class="jobly_pagination">
-                                <?php jobly_pagination($job_post); ?>
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-<?php
 get_footer();
