@@ -381,8 +381,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobly'),
                 'subtitle'  => esc_html__('Select the preferred layout for your company page across the entire website.', 'jobly'),
                 'options'   => array(
-                    '1' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
-                    '2' => 'http://codestarframework.com/assets/images/placeholder/80x80-2c3e50.gif',
+                    '1' => JOBLY_IMG . '/layout/company/layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/company/layout-2.png',
                 ),
                 'default'   => '1'
             ),

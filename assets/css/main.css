@@ -6199,9 +6199,6 @@ body.compensate-for-scrollbar {
   border-color: #31795A;
 }
 
-.accordion-box {
-  display: none;
-}
 .accordion-box.show {
   display: block;
 }
@@ -6663,7 +6660,9 @@ body.compensate-for-scrollbar {
   border-color: #31795A;
 }
 .upper-filter .style-changer-btn.active {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bg-color .upper-filter .nice-select {

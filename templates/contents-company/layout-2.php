@@ -6,9 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
 
-// Toggle between list and grid views
-$toggle_view = ($current_view === 'grid') ? 'list' : 'grid';
-
 // Get the base URL for the archive page
 $archive_url = get_post_type_archive_link('company');
 
@@ -64,22 +61,20 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url($list_view_url); ?>" class="text-center rounded-circle tran3s ms-2 list-btn <?php echo ($current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>">
+                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn rounded-circle tran3s ms-2 list-btn <?php echo ($current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>">
                                 <i class="bi bi-list"></i>
                             </a>
-                            <a href="<?php echo esc_url($grid_view_url); ?>" class="text-center rounded-circle tran3s ms-2 grid-btn <?php echo ($current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>">
+                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn rounded-circle tran3s ms-2 grid-btn <?php echo ($current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>">
                                 <i class="bi bi-grid"></i>
                             </a>
 
                         </div>
                     </div>
-                    <!-- /.upper-filter -->
-
 
                     <?php
                     if ( $current_view == 'grid' ) {
                         ?>
-                        <div class="accordion-box grid-style show">
+                        <div class="accordion-box grid-style">
                             <div class="row">
                                 <?php
                                 while ( $company_query->have_posts() ) : $company_query->the_post();
@@ -129,7 +124,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         <?php
                     } elseif ( $current_view == 'list' ) {
                         ?>
-                        <div class="accordion-box list-style show">
+                        <div class="accordion-box list-style">
                             <?php
                             while ( $company_query->have_posts() ) : $company_query->the_post();
                                 $company_count = jobly_get_selected_company_count(get_the_ID(), false);
@@ -213,9 +208,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         </div>
                         <?php
                     }
-
                     ?>
-
                     <div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
                         <?php jobly_showing_post_result_count('company', jobly_opt('company_posts_per_page')) ?>
