@@ -750,3 +750,14 @@ if ( ! function_exists( 'jobly_cs_bootstrap_icons' ) ) {
 
     add_filter( 'csf_field_icon_add_icons', 'jobly_cs_bootstrap_icons' );
 }
+
+
+
+function jobly_posts_count($post_type) {
+
+    $total_posts = wp_count_posts($post_type);
+    $total_posts = number_format_i18n($total_posts->publish);
+
+    return $total_posts;
+
+}

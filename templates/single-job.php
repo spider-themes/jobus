@@ -120,6 +120,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 <?php
 
 // Related job posts
-jobly_get_template_part('single/related-job');
+jobly_get_template_part('single-job/related-job');
 
 get_footer();

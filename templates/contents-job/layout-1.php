@@ -18,7 +18,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
     <div class="container">
         <div class="row">
 
-            <?php jobly_get_template_part('contents/sidebar-search-filter'); ?>
+            <?php jobly_get_template_part('contents-job/sidebar-search-filter'); ?>
 
             <div class="col-xl-9 col-lg-8">
                 <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">
@@ -26,14 +26,13 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
-                            <span class="text-dark"><?php echo number_format_i18n($job_post->post_count); ?></span>
-                            <?php printf(_n('job found', 'jobs found', $job_post->post_count, 'jobly'), number_format_i18n($job_post->post_count)); ?>
+                            <span class="text-dark"><?php echo jobly_posts_count('job') ?></span>
+                            <?php printf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobly'), jobly_posts_count('job') ); ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
                                 <?php
-
                                 $form_submitted = isset($_GET['orderby']) && isset($_GET['order']) ? true : false;
                                 $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
                                 $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
@@ -54,8 +53,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn <?php echo ($current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>"><i class="bi bi-list"></i></a>
-                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn <?php echo ($current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>"><i class="bi bi-grid"></i></a>
+                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn<?php echo esc_attr($current_view == 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>"><i class="bi bi-list"></i></a>
+                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn<?php echo esc_attr($current_view == 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>"><i class="bi bi-grid"></i></a>
                         </div>
                     </div>
 

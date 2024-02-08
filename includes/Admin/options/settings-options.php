@@ -141,7 +141,6 @@ if( class_exists( 'CSF' ) ) {
                 ),
                 'default'   => '1'
             ),
-
         )
     ) );
 

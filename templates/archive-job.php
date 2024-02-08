@@ -137,7 +137,7 @@ $job_layout = jobly_opt('job_archive_layout');
 
 
 //========================= Select Layout ========================//
-include 'contents/layout-'.$job_layout.'.php';
+include 'contents-job/layout-'.$job_layout.'.php';
 
 
 get_footer();
