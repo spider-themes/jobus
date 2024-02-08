@@ -107,7 +107,7 @@ if (!defined('ABSPATH')) {
                                                 } elseif ($widget_layout == 'text') {
                                                     ?>
                                                     <div class="input-box position-relative">
-                                                        <input type="text"  name="s" id="searchInput" placeholder="<?php esc_attr_e('Search by Keywords', 'jobly'); ?>">
+                                                        <input type="text"  name="s" id="searchInput" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobly'); ?>">
                                                         <button><i class="bi bi-search"></i></button>
                                                     </div>
                                                     <?php
@@ -143,9 +143,7 @@ if (!defined('ABSPATH')) {
                                     </div>
                                     <?php
                                 }
-
                                 ?>
-
                                 <div class="col-lg-4">
                                     <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
                                         <?php esc_html_e('Apply Filter', 'jobly'); ?>

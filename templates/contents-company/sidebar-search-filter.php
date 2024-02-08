@@ -138,7 +138,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     } elseif ($widget_layout == 'text') {
                                         ?>
                                         <div class="input-box position-relative">
-                                            <input type="text" name="s" value="<?php echo esc_attr(get_search_query()); ?>" placeholder="<?php esc_attr_e('Company Name', 'jobly'); ?>">
+                                            <input type="text" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('Company Name', 'jobly'); ?>">
                                             <button><i class="bi bi-search"></i></button>
                                         </div>
                                         <?php

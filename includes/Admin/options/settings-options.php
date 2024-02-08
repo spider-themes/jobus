@@ -241,7 +241,8 @@ if( class_exists( 'CSF' ) ) {
                         'options'       => array(
                             'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
                             'checkbox'      => esc_html__( 'Checkbox', 'jobly' ),
-                            'range'      => esc_html__( 'Range Slider', 'jobly' ),
+                            'text'          => esc_html__( 'Text', 'jobly' ),
+                            'range'         => esc_html__( 'Range Slider', 'jobly' ),
                         ),
                         'default'       => 'checkbox',
                     ),

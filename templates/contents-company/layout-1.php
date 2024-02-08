@@ -26,8 +26,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
-                            <span class="text-dark fw-500"><?php echo number_format_i18n($company_query->post_count); ?></span>
-                            <?php printf(_n('company found', 'companies found', $company_query->post_count, 'jobly'), number_format_i18n($company_query->post_count)); ?>
+                            <span class="text-dark fw-500"><?php echo jobly_posts_count('company') ?></span>
+                            <?php printf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobly'), jobly_posts_count('company')); ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <?php
