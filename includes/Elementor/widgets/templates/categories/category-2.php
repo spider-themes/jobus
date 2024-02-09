@@ -1,5 +1,5 @@
 <div class="category-section-five">
-    <div class="card-wrapper d-flex flex-wrap justify-content-center">
+    <div class="card-wrapper d-flex flex-wrap jobly_cat_align">
         <?php
         if (is_array($categories)) {
             foreach ( $categories as $index => $category ) {

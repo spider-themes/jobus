@@ -132,14 +132,6 @@ class Categories extends Widget_Base {
         );
 
         $this->add_control(
-            'show_count', [
-                'label'   => esc_html__( 'Show Posts Count', 'jobly' ),
-                'type'    => \Elementor\Controls_Manager::NUMBER,
-                'default' => 4
-            ]
-        );
-
-        $this->add_control(
             'column', [
                 'label'   => esc_html__( 'Column', 'jobly' ),
                 'type'    => Controls_Manager::SELECT,
@@ -152,6 +144,33 @@ class Categories extends Widget_Base {
                 'default' => 2,
             ]
         );
+
+	    $this->add_responsive_control(
+		    'cat_alignment',
+		    [
+			    'label'     => esc_html__( 'Alignment', 'jobly' ),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'flex-start' => [
+					    'title' => esc_html__( 'Left', 'jobly' ),
+					    'icon'  => 'eicon-h-align-left',
+				    ],
+				    'center'     => [
+					    'title' => esc_html__( 'Center', 'jobly' ),
+					    'icon'  => ' eicon-h-align-center',
+				    ],
+				    'flex-end'   => [
+					    'title' => esc_html__( 'Right', 'jobly' ),
+					    'icon'  => 'eicon-h-align-right',
+				    ],
+			    ],
+			    'default'   => 'center',
+			    'toggle'    => true,
+			    'selectors' => [
+				    '{{WRAPPER}} .jobly_cat_align'  => 'justify-content: {{VALUE}};',
+			    ],
+		    ]
+	    );
 
         $this->add_control(
             'view_all_btn_url', [
