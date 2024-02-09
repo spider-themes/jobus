@@ -15,6 +15,8 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
             <div class="collapse border-top" id="collapseFilterHeader">
                 <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="pt-25 pb-30" role="search" method="get">
+                    <input type="hidden" name="post_type" value="job"/>
+
                     <div class="row">
                         <?php
                         $filter_widgets = jobly_opt('job_sidebar_widgets');

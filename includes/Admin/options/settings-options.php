@@ -138,6 +138,7 @@ if( class_exists( 'CSF' ) ) {
                 'options'   => array(
                     '1' => JOBLY_IMG . '/layout/job/archive-layout-1.png',
                     '2' => JOBLY_IMG . '/layout/job/archive-layout-2.png',
+                    '3' => JOBLY_IMG . '/layout/job/archive-layout-3.png',
                 ),
                 'default'   => '1'
             ),

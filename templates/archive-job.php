@@ -137,7 +137,12 @@ $job_layout = jobly_opt('job_archive_layout');
 
 
 //========================= Select Layout ========================//
-include 'contents-job/layout-'.$job_layout.'.php';
+include 'contents-job/job-archive-'.$job_layout.'.php';
 
 
 get_footer();
+
+
+if ( jobly_opt('job_archive_layout') == '3' ) {
+    jobly_get_template_part('contents-job/sidebar-search-filter-3');
+}
