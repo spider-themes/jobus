@@ -106,6 +106,11 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
+
+            // Frontend
+            require_once __DIR__ . '/includes/Frontend/Shortcode.php';
+
+
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';
 
@@ -146,7 +151,9 @@ if ( ! class_exists( 'Jobly' ) ) {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
+
             new Jobly\Admin\Post_Types();
+            new Jobly\Frontend\Shortcode();
 
 		}
 

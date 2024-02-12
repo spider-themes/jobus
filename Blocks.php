@@ -50,20 +50,21 @@ class Blocks {
         $this->register_block( 'video-popup' );
         $this->register_block( 'group-testimonials' );
         $this->register_block( 'testimonials-item' );
+        $this->register_block( 'shortcode-job-archive' );
     }
 
     /**
      * Register Block Category
      */
-    public function register_block_category( $categories, $post ) {
+    public function register_block_category( $categories ) {
         return array_merge(
-            $categories,
             array(
                 array(
                     'slug' => 'jobly-blocks',
                     'title' => __( 'Jobly Blocks', 'jobly-blocks' ),
                 ),
-            )
+            ),
+            $categories,
         );
     }
 

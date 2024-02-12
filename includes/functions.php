@@ -45,6 +45,36 @@ if (!function_exists('jobly_get_template_part')) {
 }
 
 
+
+/**
+ * Get template part implementation for eazydocs.
+ * Looks at the theme directory first
+ *
+ * @param       $template
+ * @param array $args
+ */
+function jobly_get_template( $template_name, $args = [] ) {
+    $ezd_obj = Jobly::init();
+
+    if ( $args && is_array( $args ) ) {
+        extract( $args );
+    }
+
+    $template = locate_template( [
+        $ezd_obj->theme_dir_path . $template_name,
+        $template_name,
+    ] );
+
+    if ( ! $template ) {
+        $template = $ezd_obj->template_path() . $template_name;
+    }
+
+    if ( file_exists( $template ) ) {
+        include $template;
+    }
+}
+
+
 /**
  * @param $term
  * @get the first taxonomy
