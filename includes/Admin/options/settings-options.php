@@ -117,7 +117,7 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
-    // Company Layout Settings
+    // Job Layout Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_job_archive',
         'title' => esc_html__( 'Page Layout', 'jobly' ),

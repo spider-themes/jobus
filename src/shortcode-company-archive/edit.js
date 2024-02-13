@@ -4,13 +4,12 @@ import { PanelBody, SelectControl } from '@wordpress/components';
 
 function Edit( { attributes, setAttributes } ) {
 
-    const { job_layout } = attributes;
+    const { company_archive_layout } = attributes;
     const blockProps = useBlockProps();
 
     const layoutOptions = [
         { label: __('Layout 01', 'jobly'), value: '1' },
         { label: __('Layout 02', 'jobly'), value: '2' },
-        { label: __('Layout 03', 'jobly'), value: '3' },
     ];
 
     return (
@@ -21,17 +20,17 @@ function Edit( { attributes, setAttributes } ) {
                     initialOpen={true}
                 >
                     <SelectControl
-                        label={__('Job Archive Layout', 'jobly')}
-                        value={job_layout}
+                        label={__('Company Archive Layout', 'jobly')}
+                        value={company_archive_layout}
                         options={layoutOptions}
-                        onChange={(value) => setAttributes({ job_layout: value })}
+                        onChange={(value) => setAttributes({ company_archive_layout: value })}
                     />
 
                 </PanelBody>
             </InspectorControls>
 
             <div { ...blockProps }>
-                [job_page]
+                [company_page]
             </div>
         </>
     );

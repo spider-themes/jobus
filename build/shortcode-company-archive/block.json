@@ -1,0 +1,26 @@
+{
+  "apiVersion": 3,
+  "name": "jobly/shortcode-company-archive",
+  "title": "Company Archive Shortcode (Jobly)",
+  "category": "jobly-blocks",
+  "icon": "dashicons dashicons-shortcode",
+  "description": "Display the Job Archive job posts on the website frontend",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "company_archive_layout": {
+      "type": "string",
+      "default": "1"
+    }
+  },
+  "keywords": [
+    "jobly",
+    "Shortcode",
+    "Company Archive"
+  ],
+  "textdomain": "jobly",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css"
+}

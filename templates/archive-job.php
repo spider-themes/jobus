@@ -133,16 +133,13 @@ if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty(
 
 $job_post = new \WP_Query($args);
 
-$job_layout = jobly_opt('job_archive_layout');
-
+$job_archive_layout = isset($jobly_job_archive_layout) ? $jobly_job_archive_layout : jobly_opt('job_archive_layout');
 
 //========================= Select Layout ========================//
-include 'contents-job/job-archive-'.$job_layout.'.php';
-
+include 'contents-job/job-archive-'.$job_archive_layout.'.php';
 
 get_footer();
 
-
-if ( jobly_opt('job_archive_layout') == '3' ) {
+if ( $job_archive_layout == '3' ) {
     jobly_get_template_part('contents-job/sidebar-search-filter-3');
 }

@@ -51,6 +51,7 @@ class Blocks {
         $this->register_block( 'group-testimonials' );
         $this->register_block( 'testimonials-item' );
         $this->register_block( 'shortcode-job-archive' );
+        $this->register_block( 'shortcode-company-archive' );
     }
 
     /**

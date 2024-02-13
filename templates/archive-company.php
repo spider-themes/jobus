@@ -45,17 +45,16 @@ if ( ! empty( $result_ids ) ) {
 
 $company_query = new WP_Query($args);
 
-$company_layout = jobly_opt('company_archive_layout');
+$company_archive_layout = isset($jobly_company_archive_layout) ? $jobly_company_archive_layout : jobly_opt('company_archive_layout');
 
 //============= Select Layout ==================//
-include 'contents-company/layout-'.$company_layout.'.php';
+include 'contents-company/layout-'.$company_archive_layout.'.php';
 
 
 get_footer();
 
 
 //Sidebar Popup
-if ( jobly_opt('company_layout') == '2' ) {
+if ( $company_archive_layout == '2' ) {
     jobly_get_template_part('contents-company/sidebar-search-filter-popup');
 }
-
