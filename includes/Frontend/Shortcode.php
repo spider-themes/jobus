@@ -11,11 +11,9 @@ class Shortcode {
      */
     public function __construct() {
 
-        //jobly_job_archive
-        //jobly_company_archive
+        add_shortcode( 'jobly_job_archive', [ $this, 'job_page_shortcode' ] );
+        add_shortcode( 'jobly_company_archive', [ $this, 'company_page_shortcode' ] );
 
-        add_shortcode( 'job_page', [ $this, 'job_page_shortcode' ] );
-        add_shortcode( 'company_page', [ $this, 'company_page_shortcode' ] );
     }
 
     /**

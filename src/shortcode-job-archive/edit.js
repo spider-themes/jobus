@@ -1,10 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import {useBlockProps, InspectorControls} from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
+import {Fragment} from "react";
+import {Preview} from "./preview";
 
 function Edit( { attributes, setAttributes } ) {
 
-    const { job_layout } = attributes;
+    const { job_layout, preview } = attributes;
     const blockProps = useBlockProps();
 
     const layoutOptions = [
@@ -13,8 +15,19 @@ function Edit( { attributes, setAttributes } ) {
         { label: __('Layout 03', 'jobly'), value: '3' },
     ];
 
+    // Preview image for this block
+    if ( preview ) {
+        return (
+            <div className="block-preview">
+                <Preview/>
+            </div>
+        )
+    }
+
+
     return (
-        <>
+        <Fragment>
+
             <InspectorControls>
                 <PanelBody
                     title={__('Filters', 'jobly')}
@@ -31,9 +44,9 @@ function Edit( { attributes, setAttributes } ) {
             </InspectorControls>
 
             <div { ...blockProps }>
-                [job_page]
+                [jobly_job_archive]
             </div>
-        </>
+        </Fragment>
     );
 }
 

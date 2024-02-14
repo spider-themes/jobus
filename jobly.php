@@ -150,7 +150,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 			} else {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
-                //new Jobly\Frontend\Shortcode();
 			}
 
             new Jobly\Admin\Post_Types();

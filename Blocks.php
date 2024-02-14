@@ -76,7 +76,6 @@ class Blocks {
         // Style's
 
 
-
         // Scripts
         wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
 
