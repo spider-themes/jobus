@@ -285,6 +285,34 @@ if( class_exists( 'CSF' ) ) {
         'icon' => 'fa fa-plus',
     ) );
 
+
+    // Job Details Layout Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_job_details',
+        'title' => esc_html__( 'Layout Preset', 'jobly' ),
+        'id' => 'job_details_layout',
+        'fields' => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Job Details Layout', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'job_details_layout',
+                'type'      => 'image_select',
+                'title'     => esc_html__('Choose Layout', 'jobly'),
+                'subtitle'  => esc_html__('Select the preferred layout for your job details page across the entire website.', 'jobly'),
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/job/archive-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/job/archive-layout-2.png',
+                ),
+                'default'   => '1'
+            ),
+        )
+    ) );
+
     // Job Details Page Settings-> Related Jobs
     CSF::createSection( $settings_prefix, array(
         'parent'    => 'jobly_job_details',
@@ -321,7 +349,6 @@ if( class_exists( 'CSF' ) ) {
 
         )
     ) );
-
 
     // Company Specifications
     CSF::createSection( $settings_prefix, array(
