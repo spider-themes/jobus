@@ -4,15 +4,24 @@
   "title": "Company Archive Shortcode (Jobly)",
   "category": "jobly-blocks",
   "icon": "dashicons dashicons-shortcode",
-  "description": "Display the Job Archive job posts on the website frontend",
+  "description": "Display the Company Archive posts on the website frontend",
   "supports": {
     "html": false,
     "anchor": true
   },
   "attributes": {
-    "company_archive_layout": {
+    "company_layout": {
       "type": "string",
       "default": "1"
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
     }
   },
   "keywords": [

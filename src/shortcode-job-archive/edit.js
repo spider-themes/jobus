@@ -24,7 +24,6 @@ function Edit( { attributes, setAttributes } ) {
         )
     }
 
-
     return (
         <Fragment>
 

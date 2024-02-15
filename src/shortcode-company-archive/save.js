@@ -3,12 +3,12 @@ import { useBlockProps } from '@wordpress/block-editor';
 
 function Save( props ) {
 
-    const { company_archive_layout } = props.attributes;
+    const { company_layout } = props.attributes;
 
     const blockProps = useBlockProps.save();
 
     // Use template literals to properly interpolate the job_layout value
-    const shortcode = `[company_page company_layout="${company_archive_layout}"]`;
+    const shortcode = `[jobly_company_archive company_layout="${company_layout}"]`;
 
     return (
         <>

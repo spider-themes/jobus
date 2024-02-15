@@ -2,12 +2,14 @@
 namespace Jobly\Frontend;
 
 /**
- * Shortcode.
+ * Class Shortcode
  */
 class Shortcode {
 
     /**
-     * Initialize the class
+     * Shortcode constructor.
+     *
+     * Registers shortcodes for job and company archives.
      */
     public function __construct() {
 
@@ -17,22 +19,18 @@ class Shortcode {
     }
 
     /**
-     * Shortcode handler.
+     * Job Page Shortcode Handler.
      *
-     * @param array  $atts
-     * @param string $content
+     * Generates the HTML content for the job archive page.
      *
-     * @return string
+     * @param array  $atts     Shortcode attributes.
+     * @param string $content  Shortcode content.
+     * @return string          Generated HTML content.
      */
     public function job_page_shortcode( $atts, $content = '' ) {
 
-        // Start output buffering
         ob_start();
-
-        // Display the archive page layout based on the selected job_layout attribute
         self::job_page_layout( $atts );
-
-        // Append the buffered output to the content
         $content .= ob_get_clean();
 
         return $content;
@@ -40,22 +38,18 @@ class Shortcode {
 
 
     /**
-     * Shortcode handler.
+     * Company Page Shortcode Handler.
      *
-     * @param array  $atts
-     * @param string $content
+     * Generates the HTML content for the company archive page.
      *
-     * @return string
+     * @param array $atts Shortcode attributes.
+     * @param string $content Shortcode content.
+     * @return string Generated HTML content.
      */
     public function company_page_shortcode( $atts, $content = '' )
     {
-        // Start output buffering
         ob_start();
-
-        // Display the archive page layout based on the selected job_layout attribute
         self::company_page_layout( $atts );
-
-        // Append the buffered output to the content
         $content .= ob_get_clean();
 
         return $content;
@@ -64,17 +58,14 @@ class Shortcode {
 
 
     /**
-     * Generic function for displaying docs.
+     * Displays the job archive page layout.
      *
-     * @param array $args
-     *
+     * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
     public static function job_page_layout( $args = [] ) {
 
-        // Check if we are not in the admin area
         if ( ! is_admin() ) {
-            // Call the template and pass the job_layout attribute
             jobly_get_template( 'archive-job.php', [
                 'jobly_job_archive_layout' => $args['job_layout'],
             ] );
@@ -84,16 +75,18 @@ class Shortcode {
 
 
     /**
-     * Generic function for displaying for company posts
+     * Displays the company archive page layout.
      *
-     * @param array $args
+     * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
     public static function company_page_layout( $args = [] ) {
 
-        /*jobly_get_template( 'archive-company.php', [
-            'jobly_company_archive_layout' => $args['company_archive_layout'],
-        ] );*/
+        if ( ! is_admin() ) {
+            jobly_get_template( 'archive-company.php', [
+                'jobly_company_archive_layout' => $args['company_layout'],
+            ] );
+        }
 
     }
 

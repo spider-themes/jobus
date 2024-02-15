@@ -20,6 +20,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shortcode-job-archive/preview */ "./src/shortcode-job-archive/preview.jsx");
+
 
 
 
@@ -29,7 +31,8 @@ function Edit({
   setAttributes
 }) {
   const {
-    company_archive_layout
+    company_layout,
+    preview
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const layoutOptions = [{
@@ -39,19 +42,26 @@ function Edit({
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Layout 02', 'jobly'),
     value: '2'
   }];
+
+  // Preview image for this block
+  if (preview) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "block-preview"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_4__.Preview, null));
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Filters', 'jobly'),
     initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Company Archive Layout', 'jobly'),
-    value: company_archive_layout,
+    value: company_layout,
     options: layoutOptions,
     onChange: value => setAttributes({
-      company_archive_layout: value
+      company_layout: value
     })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
-  }, "[company_page]"));
+  }, "[jobly_company_archive]"));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
 
@@ -75,17 +85,34 @@ __webpack_require__.r(__webpack_exports__);
 
 function Save(props) {
   const {
-    company_archive_layout
+    company_layout
   } = props.attributes;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
 
   // Use template literals to properly interpolate the job_layout value
-  const shortcode = `[company_page company_layout="${company_archive_layout}"]`;
+  const shortcode = `[jobly_company_archive company_layout="${company_layout}"]`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
   }, shortcode));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Save);
+
+/***/ }),
+
+/***/ "./src/shortcode-job-archive/preview.jsx":
+/*!***********************************************!*\
+  !*** ./src/shortcode-job-archive/preview.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Preview: () => (/* binding */ Preview)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const Preview = () => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "Here is a set of ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "job archive layout"), " shortcodes for your block widgets. These shortcodes are designed specifically to display job archive layouts");
 
 /***/ }),
 
@@ -145,7 +172,7 @@ module.exports = window["wp"]["i18n"];
   \**************************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"apiVersion":3,"name":"jobly/shortcode-company-archive","title":"Company Archive Shortcode (Jobly)","category":"jobly-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Job Archive job posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"company_archive_layout":{"type":"string","default":"1"}},"keywords":["jobly","Shortcode","Company Archive"],"textdomain":"jobly","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = JSON.parse('{"apiVersion":3,"name":"jobly/shortcode-company-archive","title":"Company Archive Shortcode (Jobly)","category":"jobly-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Company Archive posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"company_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobly","Shortcode","Company Archive"],"textdomain":"jobly","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
 
 /***/ })
 

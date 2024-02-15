@@ -96,9 +96,6 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
 
-            // Shortcode
-            require_once __DIR__ . '/shortcode/shortcode.php';
-
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
