@@ -290,10 +290,6 @@ class Search_Form extends Widget_Base
 		    'jobly_search_section', [
 			    'label' => esc_html__( 'Search Field', 'jobly' ),
 			    'tab'   => Controls_Manager::TAB_STYLE,
-			    'condition' => [
-				    'layout'  => [ '1', '2' ],
-				    'layout!' => [ '3' ]
-			    ],
 		    ]
 	    );
 
@@ -307,8 +303,8 @@ class Search_Form extends Widget_Base
 		    [
 			    'label' => esc_html__( 'Normal', 'jobly' ),
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -319,10 +315,11 @@ class Search_Form extends Widget_Base
 			    'name'     => 'search2_bg',
 			    'types'    => [ 'classic', 'gradient' ],
 			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn',
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
+			                   {{WRAPPER}} .btn-five.border6',
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -334,10 +331,11 @@ class Search_Form extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
 				    '{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five.border6' => 'color: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -349,8 +347,8 @@ class Search_Form extends Widget_Base
 		    'style_tab_title_active', [
 			    'label' => esc_html__( 'Hover', 'jobly' ),
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -361,10 +359,11 @@ class Search_Form extends Widget_Base
 			    'name'     => 'search2_hover_bg',
 			    'types'    => [ 'classic', 'gradient' ],
 			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover',
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
+	                           {{WRAPPER}} .btn-five.border6:hover',
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -376,10 +375,11 @@ class Search_Form extends Widget_Base
 			    'type'      => Controls_Manager::COLOR,
 			    'selectors' => [
 				    '{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five.border6:hover' => 'color: {{VALUE}};',
 			    ],
 			    'condition' => [
-				    'layout'  => [ '1' ],
-				    'layout!' => [ '2', '3' ]
+				    'layout'  => [ '1', '3' ],
+				    'layout!' => [ '2' ]
 			    ],
 		    ]
 	    );
@@ -405,6 +405,41 @@ class Search_Form extends Widget_Base
 	    );
 
 //	---end search style 2---//
+
+//	---start search style 3---//
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Border::get_type(),
+		    [
+			    'name'     => 'jobly_search_border',
+			    'label'    => esc_html__( 'Border', 'jobly' ),
+			    'selector' => '{{WRAPPER}} #searchform',
+			    'separator' => 'before',
+			    'condition' => [
+				    'layout'  => [ '3' ],
+				    'layout!' => [ '1', '2' ]
+			    ],
+		    ]
+	    );
+
+	    $this->add_responsive_control(
+		    'acc_item_border_radius', [
+			    'label'      => esc_html__( 'Border Radius', 'spider-elements' ),
+			    'type'       => Controls_Manager::DIMENSIONS,
+			    'size_units' => [ 'px', '%', 'em' ],
+			    'selectors'  => [
+				    '{{WRAPPER}} #searchform' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			    ],
+			    'condition' => [
+				    'layout'  => [ '3' ],
+				    'layout!' => [ '1', '2' ]
+			    ],
+		    ]
+	    );
+
+//	---end search style 3---//
+
+
     }
 
 

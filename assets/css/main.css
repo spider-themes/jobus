@@ -6199,6 +6199,10 @@ body.compensate-for-scrollbar {
   border-color: #31795A;
 }
 
+.style-two #searchform {
+  overflow: hidden;
+}
+
 .accordion-box.show {
   display: block;
 }

@@ -8,7 +8,7 @@
     <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" method="get" id="searchform">
         <input type="hidden" name="post_type" value="job"/>
 
-        <div class="row align-items-center">
+        <div class="row align-items-center jobly_srch_bor">
 
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
@@ -19,7 +19,7 @@
                     $job_specifications = jobly_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="  col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
 
