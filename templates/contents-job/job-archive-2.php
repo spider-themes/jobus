@@ -3,11 +3,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+$job_archive_layout = isset($jobly_job_archive_layout) ? $jobly_job_archive_layout : jobly_opt('job_archive_layout');
+
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'list';
 
 // Get the base URL for the archive page
-$archive_url = get_post_type_archive_link('job');
+if ( $job_archive_layout ) {
+    $archive_url = get_the_permalink(); //Created Page link
+} else {
+    $archive_url = get_post_type_archive_link('job');
+}
 
 // Build the URL for list and grid views
 $list_view_url = add_query_arg('view', 'list', $archive_url);
@@ -129,26 +135,48 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                     ?>
                                     <div class="col-lg-4 mb-30">
                                         <div class="job-list-two style-two position-relative">
-                                            <a href="<?php the_permalink(); ?>" class="logo">
-                                                <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto'] ); ?>
-                                            </a>
-                                            <div>
-                                                <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                    <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_4') ?>
+                                            <?php
+                                            if ( has_post_thumbnail()) {
+                                                ?>
+                                                <a href="<?php the_permalink(); ?>" class="logo">
+                                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto'] ); ?>
                                                 </a>
-                                            </div>
+                                                <?php
+                                            }
+                                            if ( jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_1')) {
+                                                ?>
+                                                <div>
+                                                    <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
+                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_1') ?>
+                                                    </a>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
                                             <div>
                                                 <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
                                                     <?php the_title('<h3>', '</h3>') ?>
                                                 </a>
                                             </div>
-                                            <div class="job-salary">
-                                                <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_4') ?></span>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mt-auto">
-                                                <div class="job-location">
-                                                    <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_4') ?></a>
+                                            <?php
+                                            if ( jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2')) {
+                                                ?>
+                                                <div class="job-salary">
+                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2') ?></span>
                                                 </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="d-flex align-items-center justify-content-between mt-auto">
+                                                <?php
+                                                if ( jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3')) {
+                                                    ?>
+                                                    <div class="job-location">
+                                                        <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3') ?></a>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                                     <?php esc_html_e('APPLY', 'jobly'); ?>
                                                 </a>
@@ -159,7 +187,6 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 }
                                 wp_reset_postdata();
                                 ?>
-
                             </div>
                         </div>
                         <?php

@@ -7345,32 +7345,32 @@ body.compensate-for-scrollbar {
   align-items: center;
 }
 
-.details-post-data .wp-block-group {
+.jobly_job_details .details-post-data .wp-block-group {
   border: 1px solid #000000;
   border-radius: 20px;
   padding: 35px 40px 20px;
   margin-bottom: 30px;
 }
-.details-post-data .wp-block-group .wp-block-heading {
+.jobly_job_details .details-post-data .wp-block-group .wp-block-heading {
   display: flex;
   align-items: center;
   font-size: 22px;
   font-family: "gordita";
   margin: 0;
 }
-.details-post-data .wp-block-group .wp-block-heading code mark {
+.jobly_job_details .details-post-data .wp-block-group .wp-block-heading code mark {
   font-size: 14px;
   padding: 5px 10px;
   border-radius: 100%;
   margin-right: 0.5rem;
 }
-.details-post-data .wp-block-group:last-child {
+.jobly_job_details .details-post-data .wp-block-group:last-child {
   margin-bottom: 0;
 }
-.details-post-data .wp-block-group ul {
+.jobly_job_details .details-post-data .wp-block-group ul {
   padding-left: 0;
 }
-.details-post-data .wp-block-group ul li {
+.jobly_job_details .details-post-data .wp-block-group ul li {
   position: relative;
   font-size: 17px;
   margin-top: 20px;
@@ -7378,7 +7378,7 @@ body.compensate-for-scrollbar {
   line-height: 1.882em;
   list-style: none;
 }
-.details-post-data .wp-block-group ul li:before {
+.jobly_job_details .details-post-data .wp-block-group ul li:before {
   content: "\f633";
   font-family: bootstrap-icons;
   position: absolute;

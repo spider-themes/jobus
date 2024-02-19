@@ -11,6 +11,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
             <div class="col-xxl-9 col-xl-10 m-auto">
                 <div class="details-post-data ps-xxl-4 pe-xxl-4">
                     <?php
+
                     // Retrieve the repeater field configurations from settings options
                     $specifications = jobly_opt('job_specifications');
                     if (is_array($specifications)) {

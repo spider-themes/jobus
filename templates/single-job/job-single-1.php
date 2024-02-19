@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 ?>
-<section class="job-details pt-100 lg-pt-80 pb-130 lg-pb-80">
+<section class="job-details jobly_job_details pt-100 lg-pt-80 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
 

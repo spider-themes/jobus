@@ -93,7 +93,7 @@ if (class_exists('CSF')) {
             if ($is_meta_icon == 'meta_icon' && !empty($field['meta_icon'])) {
                 $meta_options = '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
             } elseif ($is_meta_icon == 'meta_image' && !empty($field['meta_image'])) {
-                $meta_options = wp_get_attachment_image($field['meta_image']['id'], 'full', '', ['class' => 'lazy-img m-auto icon']);
+                $meta_options = '<img src="'.esc_url($field['meta_image']['url']).'" alt="" class="lazy-img m-auto icon">';
             }
 
             foreach ($meta_value as $value) {

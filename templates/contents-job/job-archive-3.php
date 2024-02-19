@@ -1,4 +1,23 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+$job_archive_layout = isset($jobly_job_archive_layout) ? $jobly_job_archive_layout : jobly_opt('job_archive_layout');
+
+// Check if the view parameter is set in the URL
+$current_view = isset($_GET['view']) ? $_GET['view'] : 'list';
+
+// Get the base URL for the archive page
+if ( $job_archive_layout ) {
+    $archive_url = get_the_permalink(); //Created Page link
+} else {
+    $archive_url = get_post_type_archive_link('job');
+}
+
+// Build the URL for list and grid views
+$list_view_url = add_query_arg('view', 'list', $archive_url);
+$grid_view_url = add_query_arg('view', 'grid', $archive_url);
 ?>
 
 <section class="job-listing-three bg-color pt-90 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -46,75 +65,148 @@
                                     </select>
                                 </form>
                             </div>
+
+                            <a href="<?php echo esc_url($list_view_url) ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn<?php echo esc_attr($current_view == 'grid') ? ' active' : '' ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>"><i class="bi bi-list"></i></a>
+                            <a href="<?php echo esc_url($grid_view_url) ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn<?php echo esc_attr($current_view == 'list') ? ' active' : '' ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>"><i class="bi bi-grid"></i></a>
+
                         </div>
 
                     </div>
 
-                    <!-- /.upper-filter -->
-                    <div class="wrapper">
-                        <div class="row">
+                    <?php
+                    if ( $current_view == 'list' ) {
+                        ?>
+                        <div class="wrapper">
+                            <div class="row">
 
-                            <?php
-                            while ( $job_post->have_posts() ) {
-                                $job_post->the_post();
-                                $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 20); // Adjust the word count as needed
+                                <?php
+                                while ( $job_post->have_posts() ) {
+                                    $job_post->the_post();
+                                    $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 20); // Adjust the word count as needed
+                                    ?>
+                                    <div class="col-lg-6 mb-30">
+                                        <div class="job-list-three d-flex h-100 w-100">
+                                            <div class="main-wrapper h-100 w-100">
+                                                <div class="list-header d-flex align-items-center">
+                                                    <a href="<?php the_permalink(); ?>" class="logo">
+                                                        <?php the_post_thumbnail('full', ['class' => 'lazy-img m-auto']); ?>
+                                                    </a>
+                                                    <div class="info-wrapper">
+                                                        <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
+                                                            <?php the_title() ?>
+                                                        </a>
+                                                        <ul class="style-none d-flex flex-wrap info-data">
+                                                            <?php
+                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) {
+                                                                ?>
+                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?></li>
+                                                                <?php
+                                                            }
+                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) {
+                                                                ?>
+                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></li>
+                                                                <?php
+                                                            }
+                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) {
+                                                                ?>
+                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></li>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <?php echo wpautop($excerpt) ?>
+                                                <div class="d-sm-flex align-items-center justify-content-between mt-auto">
+                                                    <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4')) :  ?>
+                                                        <div class="d-flex align-items-center">
+                                                            <a href="<?php the_permalink(); ?>" class="job-duration fw-500 text-capitalize">
+                                                                <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4') ?>
+                                                            </a>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s xs-mt-20">
+                                                        <?php esc_html_e('APPLY', 'jobly'); ?>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div> <!-- /.job-list-three -->
+                                    </div>
+                                    <?php
+                                }
+                                wp_reset_postdata();
                                 ?>
-                                <div class="col-lg-6 mb-30">
-                                    <div class="job-list-three d-flex h-100 w-100">
-                                        <div class="main-wrapper h-100 w-100">
-                                            <div class="list-header d-flex align-items-center">
+                            </div>
+
+                        </div>
+                        <?php
+                    } elseif ( $current_view == 'grid' ) {
+                        ?>
+                        <div class="accordion-box grid-style show">
+                            <div class="row">
+
+                                <?php
+                                while ( $job_post->have_posts() ) {
+                                    $job_post->the_post();
+                                    ?>
+                                    <div class="col-lg-4 mb-30">
+                                        <div class="job-list-two position-relative">
+                                            <?php
+                                            if ( has_post_thumbnail()) { ?>
                                                 <a href="<?php the_permalink(); ?>" class="logo">
                                                     <?php the_post_thumbnail('full', ['class' => 'lazy-img m-auto']); ?>
                                                 </a>
-                                                <div class="info-wrapper">
-                                                    <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
-                                                        <?php the_title() ?>
+                                                <?php
+                                            }
+                                            if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_1') ) {
+                                                ?>
+                                                <div>
+                                                    <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
+                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
                                                     </a>
-                                                    <ul class="style-none d-flex flex-wrap info-data">
-                                                        <?php
-                                                        if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) {
-                                                            ?>
-                                                            <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?></li>
-                                                            <?php
-                                                        }
-                                                        if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) {
-                                                            ?>
-                                                            <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></li>
-                                                            <?php
-                                                        }
-                                                        if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) {
-                                                            ?>
-                                                            <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></li>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </ul>
                                                 </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div>
+                                                <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
+                                                    <?php the_title('<h3>', '</h3>') ?>
+                                                </a>
                                             </div>
-                                            <?php echo wpautop($excerpt) ?>
-                                            <div class="d-sm-flex align-items-center justify-content-between mt-auto">
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4')) :  ?>
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="<?php the_permalink(); ?>" class="job-duration fw-500 text-capitalize">
-                                                            <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4') ?>
-                                                        </a>
+                                            <?php
+                                            if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_2') ) {
+                                                ?>
+                                                <div class="job-salary">
+                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="d-flex align-items-center justify-content-between mt-auto">
+                                                <?php
+                                                if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_3') ) {
+                                                    ?>
+                                                    <div class="job-location">
+                                                        <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></a>
                                                     </div>
-                                                <?php endif; ?>
-                                                <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s xs-mt-20">
+                                                    <?php
+                                                }
+                                                ?>
+                                                <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                                     <?php esc_html_e('APPLY', 'jobly'); ?>
                                                 </a>
                                             </div>
                                         </div>
-                                    </div> <!-- /.job-list-three -->
-                                </div>
-                                <?php
-                            }
-                            wp_reset_postdata();
-                            ?>
-
+                                    </div>
+                                    <?php
+                                }
+                                wp_reset_postdata();
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /.accordion-box -->
+                        <?php
+                    }
+                    ?>
 
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
