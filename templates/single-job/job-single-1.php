@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 ?>
 <section class="job-details pt-100 lg-pt-80 pb-130 lg-pb-80">

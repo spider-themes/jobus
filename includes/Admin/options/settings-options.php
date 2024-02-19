@@ -98,10 +98,30 @@ if( class_exists( 'CSF' ) ) {
                     ),
 
                     array(
+                        'id'         => 'is_meta_icon',
+                        'type'       => 'button_set',
+                        'title'      => esc_html__('Meta Options (Icon/Image)', 'jobly'),
+                        'options'    => array(
+                            'meta_icon'  => esc_html__('Icon', 'jobly'),
+                            'meta_image' => esc_html__('Image', 'jobly')
+                        ),
+                    ),
+
+
+                    array(
                         'id'            => 'meta_icon',
                         'type'          => 'icon',
                         'title'         => esc_html__( 'Icon (Optional)', 'jobly' ),
                         'placeholder'   => esc_html__( 'Select icon', 'jobly' ),
+                        'dependency'    => array('is_meta_icon', '==', 'meta_icon'),
+                    ),
+
+                    array(
+                        'id'            => 'meta_image',
+                        'type'          => 'media',
+                        'title'         => esc_html__( 'Image (Optional)', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Upload a Image', 'jobly' ),
+                        'dependency'    => array('is_meta_icon', '==', 'meta_image'),
                     )
                 )
             )// End job specifications

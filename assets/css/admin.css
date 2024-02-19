@@ -19,4 +19,12 @@
   background-color: #ebebeb;
 }
 
+#jobly_meta_options .job_specifications .csf-after-text i {
+  font-size: 20px;
+}
+#jobly_meta_options .job_specifications .csf-after-text img {
+  width: 20px;
+  height: 20px;
+}
+
 /*# sourceMappingURL=admin.css.map */

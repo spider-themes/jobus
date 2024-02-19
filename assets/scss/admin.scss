@@ -21,3 +21,17 @@
 .csf-field-repeater .csf-repeater-helper {
     background-color: #ebebeb;
 }
+
+#jobly_meta_options {
+    .job_specifications {
+        .csf-after-text {
+            i {
+                font-size: 20px;
+            }
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

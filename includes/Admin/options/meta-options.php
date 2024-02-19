@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options
@@ -78,9 +82,19 @@ if (class_exists('CSF')) {
         foreach ($specifications as $field) {
 
             $meta_value     = $field['meta_values_group'] ?? [];
-            $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . $field['meta_icon'] . '"></i>' : '';
             $opt_values     = [];
             $opt_val        = '';
+
+
+            // Determine meta options based on the value of the switcher
+            $is_meta_icon = isset($field['is_meta_icon']) ? $field['is_meta_icon'] : '';
+            $meta_options = '';
+
+            if ($is_meta_icon == 'meta_icon' && !empty($field['meta_icon'])) {
+                $meta_options = '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
+            } elseif ($is_meta_icon == 'meta_image' && !empty($field['meta_image'])) {
+                $meta_options = wp_get_attachment_image($field['meta_image']['id'], 'full', '', ['class' => 'lazy-img m-auto icon']);
+            }
 
             foreach ($meta_value as $value) {
                 $modifiedString = preg_replace('/[,\s]+/', '@space@', $value['meta_values'] ?? '');
@@ -96,7 +110,7 @@ if (class_exists('CSF')) {
                     'options' => $opt_values,
                     'multiple' => true,
                     'chosen' => true,
-                    'after' => $meta_icon,
+                    'after' => $meta_options,
                     'class' => 'job_specifications'
                 ];
             }
