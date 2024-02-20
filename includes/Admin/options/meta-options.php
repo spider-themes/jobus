@@ -23,6 +23,25 @@ if (class_exists('CSF')) {
         'icon' => 'fas fa-home',
         'fields' => array(
 
+            // Single Post Layout
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Single Post Layout', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'job_details_layout',
+                'type'      => 'image_select',
+                'title'     => esc_html__('Choose Layout', 'jobly'),
+                'subtitle'  => esc_html__('Select the preferred layout for your job post for this page.', 'jobly'),
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/job/single-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/job/single-layout-1.png',
+                ),
+                'default'   => '1'
+            ),
+
+
             // Company Information
             array(
                 'type'    => 'subheading',
