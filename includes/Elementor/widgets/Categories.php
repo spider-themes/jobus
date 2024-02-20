@@ -101,10 +101,6 @@ class Categories extends Widget_Base {
                         'title' => __( '03: Category', 'jobly' ),
                         'icon'  => 'category3',
                     ],
-                    '4' => [
-                        'title' => __( '04: Category', 'jobly' ),
-                        'icon'  => 'category4',
-                    ],
                 ],
                 'default' => '1'
             ]
