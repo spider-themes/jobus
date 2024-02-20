@@ -2,12 +2,19 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+$company_archive_layout = isset($jobly_company_archive_layout) ? $jobly_company_archive_layout : jobly_opt('company_archive_layout');
+
 
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
 
 // Get the base URL for the archive page
-$archive_url = get_post_type_archive_link('company');
+if ($company_archive_layout) {
+    $archive_url = get_the_permalink();
+} else {
+    $archive_url = get_post_type_archive_link('company');
+}
+
 
 // Build the URL for list and grid views
 $list_view_url = add_query_arg('view', 'list', $archive_url);

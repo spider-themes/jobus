@@ -48,7 +48,7 @@ $company_query = new WP_Query($args);
 $company_archive_layout = isset($jobly_company_archive_layout) ? $jobly_company_archive_layout : jobly_opt('company_archive_layout');
 
 //============= Select Layout ==================//
-include 'contents-company/layout-'.$company_archive_layout.'.php';
+include 'contents-company/company-archive-'.$company_archive_layout.'.php';
 
 
 get_footer();
