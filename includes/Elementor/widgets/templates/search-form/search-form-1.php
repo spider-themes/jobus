@@ -69,17 +69,19 @@ if (!defined('ABSPATH')) {
             }
             ?>
             <div class="col-md-3">
-                <button type="submit"
-                        class="fw-500 text-uppercase h-100 tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+                <button type="submit" class="fw-500 text-uppercase h-100 tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>
     <?php
-    if (!empty($settings[ 'is_keyword' ])) {
+    if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
         <ul class="tags d-flex flex-wrap style-none mt-20">
-            <li class="fw-500 text-white me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
             <?php
+            if ( !empty($settings['keyword_label']) ) { ?>
+                <li class="fw-500 text-white me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <?php
+            }
             if (!empty($settings[ 'keywords' ])) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     ?>

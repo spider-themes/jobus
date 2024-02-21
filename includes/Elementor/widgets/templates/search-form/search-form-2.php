@@ -7,11 +7,15 @@
     </form>
 
     <?php
-    if ( !empty($settings['is_keyword']) ) {
+    if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
         <ul class="filter-tags d-flex flex-wrap style-none mt-25">
-            <li class="fw-500 text-dark me-1"><?php echo esc_html($settings['keyword_label']) ?></li>
             <?php
+            if ( !empty($settings['keyword_label']) ) { ?>
+                <li class="fw-500 text-dark me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <?php
+            }
+
             if ( !empty($settings['keywords']) ) {
                 foreach ( $settings['keywords'] as $keyword ) {
                     ?>

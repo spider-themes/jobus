@@ -1,15 +1,8 @@
-<?php
-?>
 <div class="job-search-one style-two position-relative">
-
-
-
-
     <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" method="get" id="searchform">
         <input type="hidden" name="post_type" value="job"/>
 
         <div class="row align-items-center jobly_srch_bor">
-
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
@@ -81,4 +74,27 @@
             </div>
         </div>
     </form>
+
+    <?php
+    if ($settings[ 'is_keyword' ] == 'yes' ) {
+        ?>
+        <ul class="filter-tags d-flex flex-wrap style-none mt-25">
+            <?php
+            if ( !empty($settings['keyword_label']) ) { ?>
+                <li class="fw-500 text-dark me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <?php
+            }
+
+            if ( !empty($settings['keywords']) ) {
+                foreach ( $settings['keywords'] as $keyword ) {
+                    ?>
+                    <li><a href="#"><?php echo esc_html($keyword['title']) ?></a></li>
+                    <?php
+                }
+            }
+            ?>
+        </ul>
+        <?php
+    }
+    ?>
 </div>

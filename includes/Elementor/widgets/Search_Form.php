@@ -207,9 +207,6 @@ class Search_Form extends Widget_Base
         $this->start_controls_section(
             'sec_keywords', [
                 'label' => __('Keywords', 'jobly'),
-                'condition' => [
-                    'layout' => [ '1', '2' ]
-                ]
             ]
         );
 
