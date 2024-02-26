@@ -7387,6 +7387,34 @@ body.compensate-for-scrollbar {
   color: #31795A;
 }
 
+.jobly_job_details_2 .details-post-data .job-meta-data-two {
+  margin-bottom: 50px;
+}
+.jobly_job_details_2 .details-post-data .wp-block-heading {
+  font-size: 22px;
+  font-family: "gordita";
+  margin: 0;
+}
+.jobly_job_details_2 .details-post-data ul {
+  padding-left: 0;
+  list-style: none;
+}
+.jobly_job_details_2 .details-post-data ul li {
+  position: relative;
+  font-size: 17px;
+  margin-top: 20px;
+  padding-left: 30px;
+  line-height: 1.882em;
+}
+.jobly_job_details_2 .details-post-data ul li::before {
+  content: "\f26a";
+  font-family: bootstrap-icons;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #31795A;
+}
+
 .category-section-two .card-wrapper {
   padding-top: 80px;
   padding-bottom: 80px;

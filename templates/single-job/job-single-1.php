@@ -115,4 +115,4 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
     </div>
 </section>
 
-<?php jobly_get_template_part('related-job'); ?>
+<?php jobly_get_template_part('single-job/related-job'); ?>

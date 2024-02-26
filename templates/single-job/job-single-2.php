@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 ?>
 
-<section class="job-details style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
+<section class="job-details jobly_job_details_2 style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-xxl-9 col-xl-10 m-auto">
@@ -30,12 +30,13 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                     ?>
                                     <div class="bg-wrapper bg-white text-center">
                                         <?php
-
                                         // Check if the icon/image option is selected
-                                        if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
-                                            echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
-                                        } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
-                                            echo '<img src="' . esc_url($field['meta_image']['url']) . '" alt="' . esc_attr($meta_name) . '" class="lazy-img m-auto icon">';
+                                        if (isset($field['is_meta_icon'])) {
+                                            if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
+                                                echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
+                                            } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
+                                                echo '<img src="' . esc_url($field['meta_image']['url']) . '" alt="' . esc_attr($meta_name) . '" class="lazy-img m-auto icon">';
+                                            }
                                         }
 
                                         // Meta Name
