@@ -35,7 +35,19 @@
             text-align: center;
             color: $color-five;
             @include transition(0.2s);
+
+            &:hover {
+                color: #fff;
+                background-color: #31795A;
+            }
         }
+
+        // Add active styles
+        &:active::before, &:hover::before {
+            color: #fff;
+            background-color: #31795A;
+        }
+
         &:not(.collapsed):before {
             transform: rotate(180deg);
         }
@@ -93,7 +105,7 @@
         box-shadow: none;
         padding: 0 15px 0 15px;
         &:before {
-            content: '';
+            content: url(../images/icons/arrow-down.svg);
             position: absolute;
             right: 10px;
             top:8px;
@@ -282,7 +294,7 @@
         .slider .progress {
             height: 100%;
             left: 0;
-            right: 70%;
+            right: 0;
             position: absolute;
             border-radius: 7px;
             background: $color-three;
@@ -766,9 +778,6 @@
             border-bottom: 1px solid #EAEAEA;
             padding-bottom: 30px;
             margin-bottom: 25px;
-        }
-        .logo {
-            width: 50px;
         }
         .info-wrapper {
             width: calc(100% - 50px);

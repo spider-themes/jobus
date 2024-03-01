@@ -8,9 +8,13 @@
     @include transition(0.3s);
     &.bg {
         border:1px solid #ffff;
-        &:hover, &.active {
+        &.active {
             background: $color-two;
             border-color: #B9D640;
+        }
+        &:hover {
+            background: #f5ffcb;
+            border-color: #f5ffcb;
         }
     }
     &:hover, &.active {

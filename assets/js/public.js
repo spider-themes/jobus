@@ -19,14 +19,12 @@
 
 
         // Nice Select for search form
-        function niceSelect() {
-            let niceSelect = $('.nice-select');
-            if (niceSelect.length > 0) {
-                niceSelect.niceSelect();
-            }
+        let niceSelect = $('.nice-select');
+        if (niceSelect.length > 0) {
+            niceSelect.niceSelect();
         }
 
-        niceSelect();// end Nice Select
+
 
         /**
          * Search Keywords

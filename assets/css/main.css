@@ -3628,9 +3628,13 @@ body.compensate-for-scrollbar {
 .card-style-one .wrapper.bg {
   border: 1px solid white;
 }
-.card-style-one .wrapper.bg:hover, .card-style-one .wrapper.bg.active {
+.card-style-one .wrapper.bg.active {
   background: #D2F34C;
   border-color: #B9D640;
+}
+.card-style-one .wrapper.bg:hover {
+  background: #f5ffcb;
+  border-color: #f5ffcb;
 }
 .card-style-one .wrapper:hover, .card-style-one .wrapper.active {
   transform: translateY(-5px);
@@ -4125,8 +4129,6 @@ body.compensate-for-scrollbar {
 }
 .company-list-layout .company-logo {
   display: block;
-  width: 70px;
-  height: 70px;
   overflow: hidden;
 }
 .company-list-layout .company-data {
@@ -5725,6 +5727,8 @@ body.compensate-for-scrollbar {
 }
 .job-search-one form .input-box .nice-select .list {
   border-radius: 10px;
+  overflow: auto;
+  width: max-content;
 }
 .job-search-one form .input-box .keyword {
   border: none;
@@ -6245,6 +6249,14 @@ body.compensate-for-scrollbar {
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
+.filter-area-tab .filter-header:before:hover {
+  color: #fff;
+  background-color: #31795A;
+}
+.filter-area-tab .filter-header:active::before, .filter-area-tab .filter-header:hover::before {
+  color: #fff;
+  background-color: #31795A;
+}
 .filter-area-tab .filter-header:not(.collapsed):before {
   transform: rotate(180deg);
 }
@@ -6305,7 +6317,7 @@ body.compensate-for-scrollbar {
   padding: 0 15px 0 15px;
 }
 .filter-area-tab .nice-select:before {
-  content: "";
+  content: url(../images/icons/arrow-down.svg);
   position: absolute;
   right: 10px;
   top: 8px;
@@ -6505,7 +6517,7 @@ body.compensate-for-scrollbar {
 .filter-area-tab .salary-slider .slider .progress {
   height: 100%;
   left: 0;
-  right: 70%;
+  right: 0;
   position: absolute;
   border-radius: 7px;
   background: #00BF58;
@@ -7013,9 +7025,6 @@ body.compensate-for-scrollbar {
   border-bottom: 1px solid #EAEAEA;
   padding-bottom: 30px;
   margin-bottom: 25px;
-}
-.job-list-three .main-wrapper .logo {
-  width: 50px;
 }
 .job-list-three .main-wrapper .info-wrapper {
   width: calc(100% - 50px);

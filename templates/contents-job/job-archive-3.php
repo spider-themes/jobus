@@ -46,9 +46,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="short-filter d-flex align-items-center">
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
                                 <?php
-                                $form_submitted = isset($_GET['orderby']) && isset($_GET['order']) ? true : false;
-                                $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
-                                $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+                                $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                                $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $default = !empty($_GET['orderby']) ? 'selected' : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
@@ -57,7 +57,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 ?>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                        <option value="" <?php echo (!$form_submitted) ? 'selected' : ''; ?>><?php esc_html_e('Default', 'jobly'); ?></option>
+                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e('Default', 'jobly'); ?></option>
                                         <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
                                         <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
                                         <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>

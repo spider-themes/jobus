@@ -82,7 +82,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                                             elseif ( $widget_layout == 'checkbox' ) {
                                                 ?>
-                                                <div class="main-body ps-xl-4 flex-fill">
+                                                <div class="main-body flex-fill">
                                                     <ul class="style-none filter-input">
 
                                                         <?php
@@ -142,7 +142,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $min_salary = jobly_search_terms($widget_name)[ 0 ] ?? $min_values;
                                                     $max_salary = jobly_search_terms($widget_name)[ 1 ] ?? $max_values;
                                                     ?>
-                                                    <div class="main-body ps-xl-4 flex-fill">
+                                                    <div class="main-body flex-fill">
                                                         <div class="salary-slider" data_widget="<?php echo esc_attr($widget_name) ?>[]">
                                                             <div class="price-input d-flex align-items-center pt-5">
                                                                 <div class="field d-flex align-items-center">
