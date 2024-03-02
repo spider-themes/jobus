@@ -273,6 +273,16 @@ class Search_Form extends Widget_Base
             ]
         );
 
+        $keywords->add_control(
+            'link', [
+                'label' => __('Link', 'jobly'),
+                'type' => \Elementor\Controls_Manager::URL,
+                'default' => [
+                    'url' => '#'
+                ]
+            ]
+        );
+
         $this->add_control(
             'keywords', [
                 'label' => __('Add Keyword', 'jobly'),

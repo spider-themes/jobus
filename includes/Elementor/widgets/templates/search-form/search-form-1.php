@@ -84,9 +84,14 @@ if (!defined('ABSPATH')) {
             }
             if (!empty($settings[ 'keywords' ])) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
-                    ?>
-                    <li><a href="#"><?php echo esc_html($keyword[ 'title' ]) ?> </a></li>
-                    <?php
+                    if ( !empty($keyword['title']) ) { ?>
+                        <li>
+                            <a <?php jobly_button_link($keyword['link']); ?>>
+                                <?php echo esc_html($keyword[ 'title' ]) ?>
+                            </a>
+                        </li>
+                        <?php
+                    }
                 }
             }
             ?>
