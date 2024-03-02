@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 ?>
-<div class="modal popUpModal fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
             <div class="filter-area-tab modal-content">
