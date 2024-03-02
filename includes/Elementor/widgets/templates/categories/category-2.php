@@ -1,5 +1,5 @@
 <div class="category-section-five">
-    <div class="card-wrapper d-flex flex-wrap jobly_cat_align">
+    <div class="card-wrapper-two d-flex flex-wrap jobly_cat_align">
         <?php
         if (is_array($categories)) {
             foreach ($categories as $index => $category) {
@@ -18,7 +18,7 @@
                 }
                 ?>
 
-                <div class="card-style-seven bg-color text-center mt-15 wow fadeInUp">
+                <div class="card-style-seven bg-color text-center wow fadeInUp">
                     <a href="<?php echo get_category_link($category->term_id) ?>"
                        class="wrapper d-flex align-items-center<?php echo $hover_border_color ? ' hover_border_color' : '' ?>" <?php echo $text_bg_color ?>>
                         <?php

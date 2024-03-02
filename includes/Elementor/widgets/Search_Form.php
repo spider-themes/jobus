@@ -222,6 +222,35 @@ class Search_Form extends Widget_Base
             ]
         );
 
+	    $this->add_control(
+		    'keyword_alignment',
+		    [
+			    'label'     => esc_html__( 'Alignment', 'jobly' ),
+			    'type'      => Controls_Manager::CHOOSE,
+			    'options'   => [
+				    'flex-start' => [
+					    'title' => esc_html__( 'Left', 'jobly' ),
+					    'icon'  => 'eicon-h-align-left',
+				    ],
+				    'center'     => [
+					    'title' => esc_html__( 'Center', 'jobly' ),
+					    'icon'  => ' eicon-h-align-center',
+				    ],
+				    'flex-end'   => [
+					    'title' => esc_html__( 'Right', 'jobly' ),
+					    'icon'  => 'eicon-h-align-right',
+				    ],
+			    ],
+			    'default'   => 'flex-start',
+			    'toggle'    => true,
+			    'selectors' => [
+				    '{{WRAPPER}} .filter-tags' => 'justify-content: {{VALUE}};',
+				    '{{WRAPPER}} .tags' => 'justify-content: {{VALUE}};',
+			    ],
+			    'separator' => 'before'
+		    ]
+	    );
+
         $this->add_control(
             'keyword_label', [
                 'label' => esc_html__('Keywords Label', 'docy-core'),
@@ -290,103 +319,7 @@ class Search_Form extends Widget_Base
 		    ]
 	    );
 
-//		----start search style 1-----//
-	    $this->start_controls_tabs(
-		    'style_search_tabs'
-	    );
-		//start normal
-	    $this->start_controls_tab(
-		    'style_accordion_icon_normal',
-		    [
-			    'label' => esc_html__( 'Normal', 'jobly' ),
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Background::get_type(),
-		    [
-			    'name'     => 'search2_bg',
-			    'types'    => [ 'classic', 'gradient' ],
-			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
-			                   {{WRAPPER}} .btn-five.border6',
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_control(
-		    'text_color',
-		    [
-			    'label'     => esc_html__( 'Text Color', 'jobly' ),
-			    'type'      => Controls_Manager::COLOR,
-			    'selectors' => [
-				    '{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five.border6' => 'color: {{VALUE}};',
-			    ],
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->end_controls_tab(); //End Normal
-
-	    //=== hover ====
-	    $this->start_controls_tab(
-		    'style_tab_title_active', [
-			    'label' => esc_html__( 'Hover', 'jobly' ),
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Background::get_type(),
-		    [
-			    'name'     => 'search2_hover_bg',
-			    'types'    => [ 'classic', 'gradient' ],
-			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
-	                           {{WRAPPER}} .btn-five.border6:hover',
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_control(
-		    'text_hover_color',
-		    [
-			    'label'     => esc_html__( 'Text Color', 'jobly' ),
-			    'type'      => Controls_Manager::COLOR,
-			    'selectors' => [
-				    '{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five.border6:hover' => 'color: {{VALUE}};',
-			    ],
-			    'condition' => [
-				    'layout'  => [ '1', '3' ],
-				    'layout!' => [ '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->end_controls_tab(); // End hover
-	    $this->end_controls_tabs(); // End jobi search Normal/hover/ State
-//	---end search style 1---//
-
-
-//		----start search style 2-----//
+	    //		----start search style 2-----//
 	    $this->add_group_control(
 		    \Elementor\Group_Control_Background::get_type(),
 		    [
@@ -401,9 +334,25 @@ class Search_Form extends Widget_Base
 		    ]
 	    );
 
-//	---end search style 2---//
+	    $this->add_control(
+		    'placeholder_color',
+		    [
+			    'label'     => esc_html__( 'placeholder Color', 'jobly' ),
+//			    'description' => esc_html__( 'Change placeholder color', 'jobly' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} #searchInput::placeholder' => 'color: {{VALUE}};',
+			    ],
+			    'condition' => [
+				    'layout'  => [ '2' ],
+				    'layout!' => [ '1', '3' ]
+			    ],
+		    ]
+	    );
 
-//	---start search style 3---//
+		//	---end search style 2---//
+
+	    //	---start search field style 3---//
 
 	    $this->add_group_control(
 		    \Elementor\Group_Control_Border::get_type(),
@@ -411,7 +360,6 @@ class Search_Form extends Widget_Base
 			    'name'     => 'jobly_search_border',
 			    'label'    => esc_html__( 'Border', 'jobly' ),
 			    'selector' => '{{WRAPPER}} #searchform',
-			    'separator' => 'before',
 			    'condition' => [
 				    'layout'  => [ '3' ],
 				    'layout!' => [ '1', '2' ]
@@ -421,7 +369,7 @@ class Search_Form extends Widget_Base
 
 	    $this->add_responsive_control(
 		    'acc_item_border_radius', [
-			    'label'      => esc_html__( 'Border Radius', 'spider-elements' ),
+			    'label'      => esc_html__( 'Border Radius', 'jobly' ),
 			    'type'       => Controls_Manager::DIMENSIONS,
 			    'size_units' => [ 'px', '%', 'em' ],
 			    'selectors'  => [
@@ -434,7 +382,91 @@ class Search_Form extends Widget_Base
 		    ]
 	    );
 
-//	---end search style 3---//
+		//	---end search field style 3---//
+
+		$this->add_control(
+			'button_heading',
+			[
+				'label' => esc_html__( 'Search Button', 'jobly' ),
+				'type'  => Controls_Manager::HEADING,
+				'separator' => 'before',
+			]
+		);
+
+	//----start search Normal/Hover style 1,2,3-----//
+	    $this->start_controls_tabs(
+		    'style_search_tabs'
+	    );
+		//start normal
+	    $this->start_controls_tab(
+		    'style_accordion_icon_normal',
+		    [
+			    'label' => esc_html__( 'Normal', 'jobly' ),
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'search_bg',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'exclude'  => [ 'image' ],
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
+			                   {{WRAPPER}} .btn-five.border6,
+			                   {{WRAPPER}} .btn-five',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'text_color',
+		    [
+			    'label'     => esc_html__( 'Text Color', 'jobly' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five.border6' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab(); //End Normal
+
+	    //=== hover ====
+	    $this->start_controls_tab(
+		    'style_tab_title_active', [
+			    'label' => esc_html__( 'Hover', 'jobly' ),
+		    ]
+	    );
+
+	    $this->add_group_control(
+		    \Elementor\Group_Control_Background::get_type(),
+		    [
+			    'name'     => 'search2_hover_bg',
+			    'types'    => [ 'classic', 'gradient' ],
+			    'exclude'  => [ 'image' ],
+			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
+	                           {{WRAPPER}} .btn-five.border6:hover,
+	                           {{WRAPPER}} .btn-five:hover',
+		    ]
+	    );
+
+	    $this->add_control(
+		    'text_hover_color',
+		    [
+			    'label'     => esc_html__( 'Text Color', 'jobly' ),
+			    'type'      => Controls_Manager::COLOR,
+			    'selectors' => [
+				    '{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five.border6:hover' => 'color: {{VALUE}};',
+				    '{{WRAPPER}} .btn-five:hover' => 'color: {{VALUE}};',
+			    ],
+		    ]
+	    );
+
+	    $this->end_controls_tab(); // End hover
+	    $this->end_controls_tabs(); // End jobi search Normal/hover/ State
+	//	---end search Normal/Hover style 1,2,3---//
 
 
     }

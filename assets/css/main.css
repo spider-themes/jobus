@@ -4025,6 +4025,15 @@ body.compensate-for-scrollbar {
   background: #31795A;
 }
 
+.card-wrapper-two {
+  row-gap: 15px;
+  column-gap: 15px;
+}
+
+.card-wrapper-three {
+  row-gap: 30px;
+}
+
 .company-profiles.bg-color {
   background: #EFF6F3;
 }
@@ -6201,10 +6210,6 @@ body.compensate-for-scrollbar {
 .user-data-form .nav .nav-item .nav-link.active {
   color: #31795A;
   border-color: #31795A;
-}
-
-.style-two #searchform {
-  overflow: hidden;
 }
 
 .accordion-box.show {

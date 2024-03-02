@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <section class="category-section-one">
-    <div class="card-wrapper row justify-content-center">
+    <div class="card-wrapper-one row justify-content-center">
         <?php
         if (is_array($categories)) {
             foreach ( $categories as $index => $category ) {
