@@ -6051,7 +6051,7 @@ body.compensate-for-scrollbar {
   margin: 0 auto;
   max-width: 720px;
   border-radius: 20px !important;
-  padding: 50px 15px 20px;
+  padding: 50px 15px 50px;
 }
 .user-data-form h2 {
   font-size: 50px;
@@ -6721,6 +6721,10 @@ body.compensate-for-scrollbar {
   border-radius: 10px;
 }
 
+.logo img {
+  height: auto;
+}
+
 .job-list-one {
   background: #fff;
   padding: 42px 35px;
@@ -7005,6 +7009,13 @@ body.compensate-for-scrollbar {
 
 .job-listing-three.bg-color {
   background: #EFF6F3;
+}
+
+@media (max-width: 767px) {
+  .job-listing-three .job-post-item-wrapper .upper-filter {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
 }
 
 .job-list-three {

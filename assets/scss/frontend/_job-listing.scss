@@ -489,6 +489,12 @@
         border-radius: 10px;
     }
 }
+.logo {
+    img {
+        height: auto;
+    }
+}
+
 .job-list-one {
     background: #fff;
     padding: 42px 35px;
@@ -761,6 +767,18 @@
 .job-listing-three.bg-color {
     background: $light-bg;
 }
+
+.job-listing-three {
+    .job-post-item-wrapper {
+        .upper-filter {
+            @media(max-width: 767px) {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+        }
+    }
+}
+
 .job-list-three {
     background: #fff;
     border: 1px solid #EBEBEB;
