@@ -7344,6 +7344,11 @@ body.compensate-for-scrollbar {
   display: flex;
   padding-left: 0;
 }
+@media (max-width: 540px) {
+  .jobly_pagination {
+    justify-content: center;
+  }
+}
 .jobly_pagination .page-numbers {
   display: inline-block;
   width: 35px;
@@ -7375,6 +7380,11 @@ body.compensate-for-scrollbar {
   border-radius: 20px;
   padding: 35px 40px 20px;
   margin-bottom: 30px;
+}
+@media (max-width: 540px) {
+  .jobly_job_details .details-post-data .wp-block-group {
+    padding: 32px 24px 16px;
+  }
 }
 .jobly_job_details .details-post-data .wp-block-group .wp-block-heading {
   display: flex;

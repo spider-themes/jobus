@@ -5,14 +5,15 @@
       border-radius: 20px;
       padding: 35px 40px 20px;
       margin-bottom: 30px;
-
+      @media (max-width: 540px) {
+        padding: 32px 24px 16px
+      }
       .wp-block-heading {
         display: flex;
         align-items: center;
         font-size: 22px;
         font-family: "gordita";
         margin: 0;
-
         code {
           mark {
             font-size: 14px;
@@ -58,20 +59,24 @@
     .job-meta-data-two {
       margin-bottom: 50px;
     }
+
     .wp-block-heading {
       font-size: 22px;
       font-family: "gordita";
       margin: 0;
     }
+
     ul {
       padding-left: 0;
       list-style: none;
+
       li {
         position: relative;
         font-size: 17px;
         margin-top: 20px;
         padding-left: 30px;
         line-height: 1.882em;
+
         &::before {
           content: "\f26a";
           font-family: bootstrap-icons;
