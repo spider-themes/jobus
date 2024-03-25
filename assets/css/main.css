@@ -7018,6 +7018,17 @@ body.compensate-for-scrollbar {
   }
 }
 
+@media (max-width: 767px) {
+  .company-profiles .upper-filter {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+}
+
+.company-logo img {
+  height: auto;
+}
+
 .job-list-three {
   background: #fff;
   border: 1px solid #EBEBEB;

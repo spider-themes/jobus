@@ -779,6 +779,21 @@
     }
 }
 
+.company-profiles {
+    .upper-filter {
+        @media(max-width: 767px) {
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+    }
+}
+
+.company-logo {
+    img {
+        height: auto;
+    }
+}
+
 .job-list-three {
     background: #fff;
     border: 1px solid #EBEBEB;
