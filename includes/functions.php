@@ -309,18 +309,25 @@ if (!function_exists('jobly_get_specs_options')) {
 /**
  * Retrieve and format job attributes based on the specified meta key.
  *
- * @param string $meta_key The meta key for the job attribute.
+ * @param string $settings_key The settings key for the job attribute.
  *
  * @return string The formatted and sanitized job attribute value.
  */
 if (!function_exists('jobly_get_meta_attributes')) {
-    function jobly_get_meta_attributes( $meta_parent_id = '', $meta_key = '' )
+    function jobly_get_meta_attributes( $meta_parent_id = '', $settings_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
 
-        $metaValueKey = $meta_options[ $meta_key ] ?? '';
+        echo '<pre>';
+        print_r($meta_options);
+        echo '</pre>';
+
+        $meta_name = $meta_options[ $settings_key ] ?? '';
+
+
+        $metaValueKey = $meta_options[ $settings_key ] ?? '';
         if (empty($metaValueKey)) {
-            $metaValueKey = $meta_options[ jobly_opt($meta_key) ] ?? '';
+            $metaValueKey = $meta_options[ jobly_opt($settings_key) ] ?? '';
         }
 
         $meta_value = is_array($metaValueKey) ? $metaValueKey : [];

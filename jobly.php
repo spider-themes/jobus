@@ -101,6 +101,7 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
 

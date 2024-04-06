@@ -165,6 +165,7 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
     // Job Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_job_archive',
@@ -223,6 +224,7 @@ if( class_exists( 'CSF' ) ) {
 
         )
     ) );
+
 
     // Job Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
@@ -333,6 +335,7 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
     // Job Details Page Settings-> Related Jobs
     CSF::createSection( $settings_prefix, array(
         'parent'    => 'jobly_job_details',
@@ -369,6 +372,7 @@ if( class_exists( 'CSF' ) ) {
 
         )
     ) );
+
 
     // Company Specifications
     CSF::createSection( $settings_prefix, array(
@@ -431,6 +435,7 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
     // Company Archive Page Settings
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_company_archive', // Set a unique slug-like ID
@@ -438,6 +443,7 @@ if( class_exists( 'CSF' ) ) {
         'icon'      => 'fa fa-plus',
 
     ) );
+
 
     // Company Layout Settings
     CSF::createSection( $settings_prefix, array(
@@ -511,6 +517,7 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
     // Company Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_company_archive',
@@ -563,12 +570,14 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
     // Company Details Page Settings
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_company_details', // Set a unique slug-like ID
         'title' => esc_html__( 'Company Details Page', 'jobly' ),
         'icon' => 'fa fa-plus',
     ) );
+
 
     // Job Details Page Settings-> Open Job Position
     CSF::createSection( $settings_prefix, array(
@@ -600,6 +609,135 @@ if( class_exists( 'CSF' ) ) {
         )
     ) );
 
+
+    // Candidate Specifications
+    CSF::createSection( $settings_prefix, array(
+        'title'     => esc_html__( 'Candidate Specifications', 'jobly' ),
+        'id'        => 'jobly_candidate_specifications',
+        'icon'      => 'fa fa-plus',
+        'fields'    => array(
+
+            array(
+                'id'                => 'candidate_specifications',
+                'type'              => 'group',
+                'title'             => esc_html__( 'Candidate Specifications', 'jobly' ),
+                'subtitle'          => esc_html__( 'Manage Candidate Specifications', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'meta_name',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Name', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Enter a specification', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique name', 'jobly' ),
+                        'attributes' => [
+                            'style'     => 'float:left;margin-right:10px;'
+                        ],
+                    ),
+
+                    array(
+                        'id'            => 'meta_key',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Key', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Specification key', 'jobly' ),
+                        'after'         => esc_html__( 'Insert a unique key', 'jobly' ),
+                        'attributes' => [
+                            'style'     => 'float:left;margin-right:10px;'
+                        ],
+                    ),
+
+                    array(
+                        'id'            => 'meta_values_group',
+                        'type'          => 'repeater',
+                        'title'         => esc_html__( 'Options', 'jobly' ),
+                        'button_title'  => esc_html__( 'Add Option', 'jobly' ),
+                        'fields' => array(
+                            array(
+                                'id'            => 'meta_values',
+                                'type'          => 'text',
+                                'title'         => null,
+                            )
+                        )
+                    ),
+
+                    array(
+                        'id'            => 'meta_icon',
+                        'type'          => 'icon',
+                        'title'         => esc_html__( 'Icon (Optional)', 'jobly' ),
+                        'placeholder'   => esc_html__( 'Select icon', 'jobly' ),
+                    )
+                )
+            )// End job specifications
+        )
+    ) );
+
+
+    // Candidate Archive Page Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_candidate_archive', // Set a unique slug-like ID
+        'title' => esc_html__( 'Candidate Archive Page', 'jobly' ),
+        'icon'      => 'fa fa-plus',
+
+    ) );
+
+    // Candidate Archive Settings-> Archive Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_candidate_archive',
+        'title' => esc_html__( 'Candidate', 'jobly' ),
+        'id' => 'candidate_archive_settings',
+        'fields' => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Candidate Attributes', 'jobly'),
+            ),
+
+            array(
+                'id'         => 'candidate_archive_attr_layout',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Content Layout', 'jobly'),
+                'options'    => array(
+                    'grid'  => esc_html__('Grid', 'jobly'),
+                    'list'  => esc_html__('List', 'jobly'),
+                ),
+                'default'    => 'grid'
+            ),
+
+            array(
+                'id'        => 'candidate_archive_meta_1',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 01', 'jobly'),
+                'options'   => jobly_get_specs('candidate_specifications'),
+                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+            ),
+
+            array(
+                'id'        => 'candidate_archive_meta_2',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 02', 'jobly'),
+                'options'   => jobly_get_specs('candidate_specifications'),
+                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+            ),
+
+            array(
+                'id'        => 'candidate_archive_meta_3',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 03', 'jobly'),
+                'options'   => jobly_get_specs('candidate_specifications'),
+                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+            ),
+
+            array(
+                'id'        => 'candidate_archive_meta_4',
+                'type'      => 'select',
+                'title'     => esc_html__('Attribute 04', 'jobly'),
+                'options'   => jobly_get_specs('candidate_specifications'),
+                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+            ),
+
+        )
+    ) );
 
     // Social Icons
     CSF::createSection( $settings_prefix, array(

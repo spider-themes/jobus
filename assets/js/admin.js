@@ -3,12 +3,12 @@
 
     $(document).ready(function() {
 
-        let wrapperDataFieldId = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"] .csf-cloneable-item, .csf-cloneable-wrapper[data-field-id="[company_specifications]"] .csf-cloneable-item');
+        let wrapperDataFieldId = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"] .csf-cloneable-item, .csf-cloneable-wrapper[data-field-id="[company_specifications]"] .csf-cloneable-item, .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"] .csf-cloneable-item');
 
         // Disabled already exist key field [ Job Specifications ]
         $(wrapperDataFieldId).each(function() {
             var metaKey     = $(this).find('input[data-depend-id="meta_key"]').val();
-            var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"]');
+            var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"], .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"]');
 
             // add attr each item 
             var newIndex    = $(this).index() + 1; 
@@ -26,7 +26,7 @@
         
         // Meta-key automatically inserts [ Job Specifications ]
         $('.csf-cloneable-add').on('click', function () {
-            var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"]');
+            var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"], .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"]');
             var $lastItem   = $container.find('.csf-cloneable-item').last();
             
             // Index is zero-based, so we add 1 for the next index

@@ -15,8 +15,9 @@ class Frontend {
 	public function __construct() {
 
 		// Add Filter to redirect Archive Page Template
-		add_filter( 'template_include', [ $this, 'template_loader' ] );
+		add_filter( 'template_include', [ $this, 'template_loader_job' ] );
 		add_filter( 'template_include', [ $this, 'template_loader_company' ] );
+		add_filter( 'template_include', [ $this, 'template_loader_candidate' ] );
 
 	}
 
@@ -28,7 +29,7 @@ class Frontend {
 	 * Load custom template
 	 * @since 1.0.0
 	 */
-	public function template_loader( $job_template ) {
+	public function template_loader_job( $job_template ) {
 
 		if ( is_post_type_archive( 'job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
@@ -56,7 +57,6 @@ class Frontend {
 	}
 
 
-
     /**
      * @param $company_template
      *
@@ -77,6 +77,40 @@ class Frontend {
         }
 
         if (is_singular('company')) {
+            // Check if a custom template exists in the theme folder, if not, load the plugin template file
+            $single_template = 'single-company.php';
+            if ($theme_file = locate_template(array('jobly/' . $single_template))) {
+                $company_template = $theme_file;
+            } else {
+                $company_template = JOBLY_PATH . '/templates/' . $single_template;
+            }
+        }
+
+        return $company_template;
+
+    }
+
+
+    /**
+     * @param $company_template
+     *
+     * @return mixed|string
+     * Load custom template
+     * @since 1.0.0
+     */
+    public function template_loader_candidate($company_template) {
+
+        if (is_post_type_archive('candidate')) {
+            // Check if a custom template exists in the theme folder, if not, load the plugin template file
+            $archive_template = 'archive-candidate.php';
+            if ($theme_file = locate_template(array('jobly/' . $archive_template))) {
+                $company_template = $theme_file;
+            } else {
+                $company_template = JOBLY_PATH . '/templates/' . $archive_template;
+            }
+        }
+
+        if (is_singular('candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-company.php';
             if ($theme_file = locate_template(array('jobly/' . $single_template))) {

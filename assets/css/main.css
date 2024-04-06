@@ -3322,6 +3322,9 @@ body.compensate-for-scrollbar {
   top: 5px;
   right: 8px;
 }
+.candidate-profile-card .cadidate-avatar img {
+  height: auto;
+}
 .candidate-profile-card .candidate-name {
   font-family: "gordita";
   font-size: 18px;
