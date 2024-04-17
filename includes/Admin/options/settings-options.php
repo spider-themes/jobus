@@ -43,6 +43,14 @@ if( class_exists( 'CSF' ) ) {
                 'default' => -1,
                 'desc'   => esc_html__('Set the value to \'-1\' to display all company posts.', 'jobly'),
             ),
+
+            array(
+                'id'      => 'candidate_posts_per_page',
+                'type'    => 'number',
+                'title'   => esc_html__('Posts Per Page (Candidate)', 'jobly'),
+                'default' => -1,
+                'desc'   => esc_html__('Set the value to \'-1\' to display all candidate posts.', 'jobly'),
+            ),
         )
     ) );
 

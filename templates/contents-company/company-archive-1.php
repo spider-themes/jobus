@@ -211,9 +211,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                         <?php jobly_showing_post_result_count('company', jobly_opt('company_posts_per_page')) ?>
 
-                        <ul class="jobly_pagination">
-                            <?php jobly_pagination($company_query); ?>
-                        </ul>
+                        <?php jobly_pagination($company_query); ?>
 
                     </div>
 

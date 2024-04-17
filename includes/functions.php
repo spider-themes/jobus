@@ -287,6 +287,7 @@ function jobly_get_specs ($settings_id = 'job_specifications')
 }
 
 
+
 if (!function_exists('jobly_get_specs_options')) {
     function jobly_get_specs_options ($settings_id = 'job_specifications')
     {
@@ -306,6 +307,24 @@ if (!function_exists('jobly_get_specs_options')) {
 }
 
 
+function jobly_get_meta_name($meta_parent_id = '', $settings_key = '')
+{
+
+    // Get the meta options for the specified meta parent ID
+    $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
+
+    // Retrieve the meta name based on the settings key
+    $meta_value = $meta_options[jobly_opt($settings_key)] ?? '';
+
+    if (is_array($meta_value)) {
+        $meta_name = reset($meta_value);
+    }
+
+    return $meta_name;
+
+}
+
+
 /**
  * Retrieve and format job attributes based on the specified meta key.
  *
@@ -317,14 +336,6 @@ if (!function_exists('jobly_get_meta_attributes')) {
     function jobly_get_meta_attributes( $meta_parent_id = '', $settings_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
-
-        echo '<pre>';
-        print_r($meta_options);
-        echo '</pre>';
-
-        $meta_name = $meta_options[ $settings_key ] ?? '';
-
-
         $metaValueKey = $meta_options[ $settings_key ] ?? '';
         if (empty($metaValueKey)) {
             $metaValueKey = $meta_options[ jobly_opt($settings_key) ] ?? '';
@@ -340,7 +351,6 @@ if (!function_exists('jobly_get_meta_attributes')) {
             return esc_html($formatted_value);
 
         }
-
     }
 }
 
@@ -392,18 +402,30 @@ if ( ! function_exists( 'jobly_count_meta_key_usage' ) ) {
  */
 
 if ( ! function_exists( 'jobly_pagination' ) ) {
-    function jobly_pagination ($query)
+    function jobly_pagination ($query, $class = 'jobly_pagination', $prev = '', $next = '' )
     {
 
-        $big = 999999999; // need an unlikely integer
-        echo paginate_links(array(
-            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-            'format' => '?paged=%#%',
-            'current' => max(1, get_query_var('paged')),
-            'total' => $query->max_num_pages,
-            'prev_text' => '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly'),
-            'next_text' => esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />',
-        ));
+        // Default values for prev and next links
+        $default_prev = '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly');
+        $default_next = esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />';
+
+        // Use the provided values or the default values
+        $prev_text = !empty($prev) ? $prev : $default_prev;
+        $next_text = !empty($next) ? $next : $default_next;
+
+        echo '<ul class="' . esc_attr($class) . '">';
+
+            $big = 999999999; // need an unlikely integer
+            echo paginate_links(array(
+                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format' => '?paged=%#%',
+                'current' => max(1, get_query_var('paged')),
+                'total' => $query->max_num_pages,
+                'prev_text' => $prev_text,
+                'next_text' => $next_text,
+            ));
+
+        echo '</ul>';
     }
 }
 
@@ -423,6 +445,11 @@ if ( !function_exists('jobly_job_archive_query') ) {
         if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
             $query->set('posts_per_page', jobly_opt('company_posts_per_page'));
         }
+
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('candidate')) {
+            $query->set('posts_per_page', jobly_opt('candidate_posts_per_page'));
+        }
+
     }
 
     add_action('pre_get_posts', 'jobly_job_archive_query');
