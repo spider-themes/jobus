@@ -691,7 +691,7 @@ if( class_exists( 'CSF' ) ) {
     // Candidate Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_candidate_archive',
-        'title' => esc_html__( 'Candidate', 'jobly' ),
+        'title' => esc_html__( 'Archive', 'jobly' ),
         'id' => 'candidate_archive_settings',
         'fields' => array(
 
@@ -746,6 +746,72 @@ if( class_exists( 'CSF' ) ) {
 
         )
     ) );
+
+
+    // Candidate Archive Page Settings-> Sidebar Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_candidate_archive',
+        'title' => esc_html__( 'Sidebar', 'jobly' ),
+        'id' => 'candidate_sidebar_settings',
+        'fields' => array(
+
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Search filter Widgets', 'jobly'),
+            ),
+
+            array(
+                'id'                => 'candidate_sidebar_widgets',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Widgets', 'jobly' ),
+                'subtitle' => __( 'Choose the layout style for displaying widget options:', 'jobly' ) . '<br>' .
+                    __( '<strong>Dropdown:</strong> Display options in a dropdown menu.', 'jobly' ) . '<br>' .
+                    __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobly' ) . '<br>' .
+                    __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Widget', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'widget_name',
+                        'type'          => 'select',
+                        'title'         => esc_html__( 'Widget', 'jobly' ),
+                        'options'       => jobly_get_specs('candidate_specifications'),
+                        'default'       => false,
+                    ),
+
+                    array(
+                        'id'            => 'widget_layout',
+                        'type'          => 'button_set',
+                        'title'         => esc_html__( 'Widget Layout', 'jobly' ),
+                        'options'       => array(
+                            'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
+                            'checkbox'      => esc_html__( 'Checkbox', 'jobly' ),
+                            'text'          => esc_html__( 'Text', 'jobly' ),
+                            'range'         => esc_html__( 'Range Slider', 'jobly' ),
+                        ),
+                        'default'       => 'checkbox',
+                    ),
+
+                    array(
+                        'id'            => 'range_suffix',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Range Suffix', 'jobly' ),
+                        'default'       => esc_html__( 'USD', 'jobly' ),
+                        'dependency'    => array( 'widget_layout', '==', 'range' ),
+                    ),
+                )
+            ),
+
+            array(
+                'id'      => 'is_candidate_widget_cat',
+                'type'    => 'switcher',
+                'title'   => esc_html__('Category', 'jobly'),
+                'default' => true,
+            ),
+
+        )
+    ) );
+
 
     // Social Icons
     CSF::createSection( $settings_prefix, array(

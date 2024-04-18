@@ -71,15 +71,13 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="row">
                                 <?php
                                 while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                                     $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                     $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                     ?>
                                     <div class="col-xxl-4 col-sm-6 d-flex">
 
-                                        <div class="candidate-profile-card favourite text-center grid-layout mb-25">
-
-                                            <a href="candidate-profile-v1.html" class="save-btn tran3s"><i class="bi bi-heart"></i></a>
+                                        <div class="candidate-profile-card<?php echo esc_attr($is_favourite) ?> text-center grid-layout mb-25">
 
                                             <?php if ( has_post_thumbnail() ) : ?>
                                                 <div class="cadidate-avatar online position-relative d-block m-auto">
@@ -126,20 +124,11 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 </ul>
                                                 <?php
                                             }
-
-
-
-
-                                            echo '<pre>';
-                                            print_r('Meta Name : ' .jobly_get_meta_name('jobly_meta_candidate_options', 'candidate_archive_meta_3'));
-                                            echo '</pre>';
-
-
                                             ?>
                                             <div class="row gx-1">
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
-                                                        <span><?php echo jobly_get_meta_name('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></span>
+                                                        <span>Salary</span>
                                                         <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
                                                     </div>
                                                 </div>
@@ -152,23 +141,19 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </div>
 
                                             <div class="row gx-2 pt-25 sm-pt-10">
-
                                                 <div class="col-md-6">
                                                     <a href="<?php the_permalink() ?>" class="profile-btn tran3s w-100 mt-5">
                                                         <?php esc_html_e('View Profile', 'jobly') ?>
                                                     </a>
                                                 </div>
-
                                                 <div class="col-md-6">
                                                     <a href="candidate-profile-v1.html" class="msg-btn tran3s w-100 mt-5">
                                                         <?php esc_html_e('Message', 'jobly') ?>
                                                     </a>
                                                 </div>
-
                                             </div>
 
                                         </div>
-
 
                                     </div>
                                     <?php
@@ -185,46 +170,78 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         <div class="accordion-box list-style">
                             <?php
                             while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                 ?>
-                                <div class="candidate-profile-card favourite list-layout mb-25">
+                                <div class="candidate-profile-card<?php echo esc_attr($is_favourite) ?> list-layout mb-25">
                                     <div class="d-flex">
-                                        <div class="cadidate-avatar online position-relative d-block me-auto ms-auto"><a href="candidate-profile-v2.html" class="rounded-circle"><img src="images/lazy.svg" data-src="images/candidates/img_01.jpg" alt="" class="lazy-img rounded-circle"></a></div>
+                                        <div class="cadidate-avatar online position-relative d-block me-auto ms-auto">
+                                            <a href="<?php the_permalink() ?>" class="rounded-circle">
+                                                <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle']) ?>
+                                            </a>
+                                        </div>
                                         <div class="right-side">
                                             <div class="row gx-1 align-items-center">
                                                 <div class="col-xl-3">
                                                     <div class="position-relative">
-                                                        <h4 class="candidate-name mb-0"><a href="candidate-profile-v2.html" class="tran3s">Julia Ark</a></h4>
-                                                        <div class="candidate-post">Graphic Designer</div>
-                                                        <ul class="cadidate-skills style-none d-flex align-items-center">
-                                                            <li>Design</li>
-                                                            <li>UI</li>
-                                                            <li>Digital</li>
-                                                            <li class="more">2+</li>
-                                                        </ul>
-                                                        <!-- /.cadidate-skills -->
+                                                        <h4 class="candidate-name mb-0">
+                                                            <a href="<?php the_permalink() ?>" class="tran3s">
+                                                                <?php the_title() ?>
+                                                            </a>
+                                                        </h4>
+
+                                                        <?php
+                                                        if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
+                                                            ?>
+                                                            <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                            <?php
+                                                        }
+
+                                                        if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2' )) {
+                                                            ?>
+                                                            <ul class="cadidate-skills style-none d-flex align-items-center">
+                                                                <?php
+                                                                $skills = jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2');
+                                                                $skills = explode(',', $skills);
+                                                                $max_skill = 3;
+
+                                                                for ($i = 0; $i < min($max_skill, count($skills)); $i++) {
+                                                                    ?>
+                                                                    <li class="text-capitalize"><?php echo esc_html($skills[$i]); ?></li>
+                                                                    <?php
+                                                                }
+
+                                                                // Check if there are more than three skills
+                                                                if (count($skills) > $max_skill) {
+                                                                    ?>
+                                                                    <li class="more text-capitalize"><?php echo count($skills) - $max_skill; ?>+</li>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </ul>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                                     <div class="candidate-info">
                                                         <span>Salary</span>
-                                                        <div>$30k-$50k/yr</div>
+                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
                                                     </div>
-                                                    <!-- /.candidate-info -->
                                                 </div>
                                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                                     <div class="candidate-info">
                                                         <span>Location</span>
-                                                        <div>California, US</div>
+                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_4') ?></div>
                                                     </div>
-                                                    <!-- /.candidate-info -->
                                                 </div>
                                                 <div class="col-xl-3 col-md-4">
                                                     <div class="d-flex justify-content-lg-end">
-                                                        <a href="candidate-profile-v2.html" class="save-btn text-center rounded-circle tran3s mt-10"><i class="bi bi-heart"></i></a>
-                                                        <a href="candidate-profile-v2.html" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">View Profile</a>
+                                                        <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">
+                                                            <?php esc_html_e('View Profile', 'jobly') ?>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,10 +252,6 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             endwhile;
                             wp_reset_postdata();
                             ?>
-
-
-
-
                         </div>
                         <?php
                     }
