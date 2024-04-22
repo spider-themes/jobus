@@ -831,9 +831,11 @@ function jobly_meta_candidate_spec_name( $step = 1 ){
     $candidate_archive_meta     = $meta_options['candidate_archive_meta_'.$step];
     $candidate_specifications   = $meta_options['candidate_specifications'];
 
-    foreach( $candidate_specifications as $candidate_specification ) {        
-        if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
-            return $candidate_specification['meta_name'];
-        }        
+    if ( ! empty ( $candidate_specifications ) ) {
+        foreach( $candidate_specifications as $candidate_specification ) {        
+            if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
+                return $candidate_specification['meta_name'];
+            }        
+        }
     }
 }

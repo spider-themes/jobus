@@ -129,13 +129,13 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
                                                         <span><?php echo jobly_meta_candidate_spec_name(1); ?></span>
-                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
                                                         <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_4') ?></div>
+                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                     </div>
                                                 </div>
                                             </div>
