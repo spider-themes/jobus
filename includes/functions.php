@@ -820,3 +820,20 @@ function jobly_posts_count($post_type) {
     return $total_posts;
 
 }
+
+
+/**
+ * Retrieve archive meta name based on the selected specification key.
+ */
+function jobly_meta_candidate_spec_name( $step = 1 ){
+    
+    $meta_options               = get_option('jobly_opt');
+    $candidate_archive_meta     = $meta_options['candidate_archive_meta_'.$step];
+    $candidate_specifications   = $meta_options['candidate_specifications'];
+
+    foreach( $candidate_specifications as $candidate_specification ) {        
+        if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
+            return $candidate_specification['meta_name'];
+        }        
+    }
+}
