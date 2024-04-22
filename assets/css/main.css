@@ -3524,12 +3524,25 @@ body.compensate-for-scrollbar {
   text-align: center;
   background: #D2F34C;
 }
+.candidates-profile-details .candidate-portfolio-slider .item a img {
+  height: auto;
+}
 .candidates-profile-details .candidate-portfolio-slider .slick-dots {
   padding: 0;
   margin: 0;
   position: absolute;
   right: 10px;
   top: -35px;
+  width: auto;
+  bottom: unset;
+}
+.candidates-profile-details .candidate-portfolio-slider .slick-dots li {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+.candidates-profile-details .candidate-portfolio-slider .slick-dots li button {
+  padding: 0;
 }
 
 .cadidate-profile-sidebar .bg-wrapper {

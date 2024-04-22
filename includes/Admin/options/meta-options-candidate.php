@@ -32,7 +32,6 @@ if (class_exists('CSF')) {
 
     // Retrieve the repeater field configurations from settings options
     $candidate_specifications = jobly_opt('candidate_specifications');
-
     if (!empty($candidate_specifications)) {
         foreach ($candidate_specifications as $field) {
 
@@ -67,5 +66,248 @@ if (class_exists('CSF')) {
             'icon'   => 'fas fa-cogs',
             'id'     => 'jobly_meta_candidate_specifications',
         ));
-    }
+
+    } //End Candidate Specifications
+
+
+    // Social Icons
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_social_icons', // Set a unique slug-like ID
+        'title' => esc_html__( 'Social Icons', 'jobly' ),
+        'icon' => 'fa fa-hashtag',
+        'fields' => array(
+
+            array(
+                'id'                => 'social_icons',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Social Icons', 'jobly' ),
+                'subtitle'              => esc_html__( 'Customize and manage your social media icons along with respective URLs', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Icon', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'icon',
+                        'type'          => 'icon',
+                        'title'         => esc_html__( 'Icon', 'jobly' ),
+                        'default'       => 'bi bi-facebook',
+                    ),
+
+                    array(
+                        'id'            => 'url',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'URL', 'jobly' ),
+                        'default'       => '#',
+                    ),
+
+                ),
+                'default' => array(
+                    array(
+                        'icon' => 'bi bi-facebook',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'bi bi-instagram',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'bi bi-twitter',
+                        'url' => '#',
+                    ),
+                    array(
+                        'icon' => 'bi bi-linkedin',
+                        'url' => '#',
+                    ),
+                ),
+            )
+
+        )
+    ) ); //End Social Icons
+
+
+    // Intro Video
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_video', // Set a unique slug-like ID
+        'title' => esc_html__( 'Intro Video', 'jobly' ),
+        'icon' => 'fa fa-circle-play',
+        'fields' => array(
+
+            array(
+                'id'                => 'bg_img',
+                'type'              => 'media',
+                'title'             => esc_html__( 'Background Image', 'jobly' ),
+            ),
+
+            array(
+                'id'                => 'video_url',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Video URL', 'jobly' ),
+                'subtitle'          => esc_html__( 'Input the candidate video introduction', 'jobly' ),
+            ),
+
+        )
+    ) ); //End Intro Video
+
+
+    // Education History
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_education', // Set a unique slug-like ID
+        'title' => esc_html__( 'Education', 'jobly' ),
+        'icon' => 'fa fa-graduation-cap',
+        'fields' => array(
+
+            array(
+                'id'                => 'education',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Education', 'jobly' ),
+                'subtitle'              => esc_html__( 'Customize and manage your Academic history', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Item', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'sl_num',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Serial Number', 'jobly' ),
+                        'default'       => esc_html__('1', 'jobly'),
+                    ),
+
+                    array(
+                        'id'            => 'title',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Title', 'jobly' ),
+                        'default'       => esc_html__('Bachelor Degree of Design', 'jobly'),
+                    ),
+
+                    array(
+                        'id'            => 'academy',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Academy', 'jobly' ),
+                        'default'       => esc_html__('University of Boston', 'jobly'),
+                    ),
+
+                    /*array(
+                        'id'            => 'year',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Year', 'jobly' ),
+                        'default'       => esc_html__('2012-16', 'jobly'),
+                    ),*/
+
+                    array(
+                        'id'            => 'description',
+                        'type'          => 'wp_editor',
+                        'title'         => esc_html__( 'Description', 'jobly' ),
+                        'default'       => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobly' ),
+                    ),
+
+                ),
+                'default' => array(
+                    array(
+                        'sl_num' => esc_html__('1', 'jobly'),
+                        'title' => esc_html__('Bachelor Degree of Design', 'jobly'),
+                        'academy' => esc_html__('University of Boston', 'jobly'),
+                        'year' => esc_html__('2012-16', 'jobly'),
+                        'description' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobly' ),
+                    ),
+                ),
+            )
+
+        )
+    ) ); //End Education History
+
+
+    // Work Experience
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_experience', // Set a unique slug-like ID
+        'title' => esc_html__( 'Experience', 'jobly' ),
+        'icon' => 'fa fa-toolbox',
+        'fields' => array(
+
+            array(
+                'id'                => 'experience',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Work Experience', 'jobly' ),
+                'subtitle'              => esc_html__( 'Customize and manage your work experience', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Item', 'jobly' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'sl_num',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Serial Number', 'jobly' ),
+                        'default'       => esc_html__('1', 'jobly'),
+                    ),
+
+                    array(
+                        'id'            => 'title',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Title', 'jobly' ),
+                        'default'       => esc_html__('Product Designer (Google)', 'jobly'),
+                    ),
+
+                    array(
+                        'id'            => 'start_date',
+                        'type'          => 'date',
+                        'title'         => esc_html__( 'Start Date', 'jobly' ),
+                        'default'       => esc_html__('02/03/18 - 13/05/20', 'jobly'),
+                        'settings' => array(
+                            'dateFormat'      => 'dd/mm/yy',
+                            'changeMonth'     => true,
+                            'changeYear'      => true,
+                            'showButtonPanel' => true,
+                            'monthNamesShort' => array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ),
+                            'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
+                        )
+                    ),
+
+                    array(
+                        'id'            => 'end_date',
+                        'type'          => 'date',
+                        'title'         => esc_html__( 'End Date', 'jobly' ),
+                        'settings'      => array(
+                            'dateFormat'      => 'dd/mm/yy',
+                            'changeMonth'     => true,
+                            'changeYear'      => true,
+                            'showButtonPanel' => true,
+                            'monthNamesShort' => array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ),
+                            'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
+                        )
+                    ),
+
+                    array(
+                        'id'            => 'description',
+                        'type'          => 'wp_editor',
+                        'title'         => esc_html__( 'Description', 'jobly' ),
+                        'default'       => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobly' ),
+                    ),
+
+                ),
+                'default' => array(
+                    array(
+                        'sl_num' => esc_html__('1', 'jobly'),
+                        'title' => esc_html__('Product Designer (Google)', 'jobly'),
+                        'year' => esc_html__('2012-16', 'jobly'),
+                        'description' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobly' ),
+                    ),
+                ),
+            )
+
+        )
+    ) ); //End Experience
+
+
+    // Portfolio
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_portfolio', // Set a unique slug-like ID
+        'title' => esc_html__( 'Portfolio', 'jobly' ),
+        'icon' => 'fa fa-briefcase',
+        'fields' => array(
+
+            array(
+                'id'                => 'portfolio',
+                'type'              => 'gallery',
+                'title'             => esc_html__( 'Portfolio', 'jobly' ),
+            )
+
+        )
+    ) ); //End Portfolio
+
 }

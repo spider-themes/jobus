@@ -98,29 +98,29 @@ class Frontend {
      * Load custom template
      * @since 1.0.0
      */
-    public function template_loader_candidate($company_template) {
+    public function template_loader_candidate($candidate_template) {
 
         if (is_post_type_archive('candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-candidate.php';
             if ($theme_file = locate_template(array('jobly/' . $archive_template))) {
-                $company_template = $theme_file;
+                $candidate_template = $theme_file;
             } else {
-                $company_template = JOBLY_PATH . '/templates/' . $archive_template;
+                $candidate_template = JOBLY_PATH . '/templates/' . $archive_template;
             }
         }
 
         if (is_singular('candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
-            $single_template = 'single-company.php';
+            $single_template = 'single-candidate.php';
             if ($theme_file = locate_template(array('jobly/' . $single_template))) {
-                $company_template = $theme_file;
+                $candidate_template = $theme_file;
             } else {
-                $company_template = JOBLY_PATH . '/templates/' . $single_template;
+                $candidate_template = JOBLY_PATH . '/templates/' . $single_template;
             }
         }
 
-        return $company_template;
+        return $candidate_template;
 
     }
 

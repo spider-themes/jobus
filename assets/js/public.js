@@ -195,6 +195,43 @@
 
         copyButton(); // end copyButton click event
 
+
+        //============== Candidate Portfolio Slider ================//
+        function candidatePortfolio() {
+
+            let portfolioSlider = $('.candidate-portfolio-slider');
+
+            if( portfolioSlider.length ) {
+                portfolioSlider.slick({
+                    dots: true,
+                    arrows: false,
+                    lazyLoad: 'ondemand',
+                    centerPadding: '0px',
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    responsive: [
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        },
+                        {
+                            breakpoint: 450,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+
+        }
+
+        candidatePortfolio()//End Candidate Portfolio Slider
+
     });
 
 })(jQuery);

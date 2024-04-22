@@ -263,12 +263,31 @@
             }
         }
     }
-    .candidate-portfolio-slider .slick-dots {
-        padding: 0;
-        margin: 0;
-        position: absolute;
-        right: 10px;
-        top:-35px;
+    .candidate-portfolio-slider {
+        .item {
+            a {
+                img {
+                    height: auto;
+                }
+            }
+        }
+        .slick-dots {
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            right: 10px;
+            top:-35px;
+            width: auto;
+            bottom: unset;
+            li {
+                width: auto;
+                height: auto;
+                margin: 0 auto;
+                button {
+                    padding: 0;
+                }
+            }
+        }
     }
 }
 .cadidate-profile-sidebar {

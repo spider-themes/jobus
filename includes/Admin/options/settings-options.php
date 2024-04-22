@@ -832,7 +832,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'icon',
                         'type'          => 'icon',
                         'title'         => esc_html__( 'Icon', 'jobly' ),
-                        'default'       => 'fab fa-facebook-f',
+                        'default'       => 'bi bi-facebook',
                     ),
 
                     array(
@@ -845,19 +845,19 @@ if( class_exists( 'CSF' ) ) {
                 ),
                 'default' => array(
                     array(
-                        'icon' => 'fab fa-facebook-f',
+                        'icon' => 'bi bi-facebook',
                         'url' => '#',
                     ),
                     array(
-                        'icon' => 'fab fa-twitter',
+                        'icon' => 'bi bi-instagram',
                         'url' => '#',
                     ),
                     array(
-                        'icon' => 'fab fa-linkedin-in',
+                        'icon' => 'bi bi-twitter',
                         'url' => '#',
                     ),
                     array(
-                        'icon' => 'fab fa-instagram',
+                        'icon' => 'bi bi-linkedin',
                         'url' => '#',
                     ),
                 ),
