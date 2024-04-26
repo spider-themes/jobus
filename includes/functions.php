@@ -844,49 +844,15 @@ function jobly_meta_candidate_spec_name( $step = 1 ){
 add_action( 'phpmailer_init', 'jobly_phpmailer_init' );
 function jobly_phpmailer_init( $phpmailer ) {
     $phpmailer->isSMTP();
-    $phpmailer->Host = 'mail.spider-themes.net'; // your SMTP server
-    $phpmailer->Port = 465; // SSL
+    $phpmailer->Host = jobly_opt('smtp_host'); // your SMTP server
+    $phpmailer->Port = jobly_opt('smtp_port'); // SSL
     $phpmailer->CharSet = "utf-8";
-    $phpmailer->SMTPAuth = true;
-    $phpmailer->Username = 'no-reply@spider-themes.net';
-    $phpmailer->Password =  'LKJKPuQ43Keqzry';
-    $phpmailer->SMTPSecure = 'ssl';
-    $phpmailer->From       = 'no-reply@spider-themes.net';
-    $phpmailer->FromName   = 'EazyDocs';
+    $phpmailer->SMTPAuth = jobly_opt('smtp_authentication');
+    $phpmailer->Username = jobly_opt('smtp_username');
+    $phpmailer->Password =  jobly_opt('smtp_password');
+    $phpmailer->SMTPSecure = jobly_opt('smtp_encryption');
+    $phpmailer->From       = jobly_opt('smtp_from_mail_address');
+    $phpmailer->FromName   = jobly_opt('smtp_from_name');
+
+    return $phpmailer;
 }
-
-
-// Define custom fields for SMTP settings
-function jobly_custom_smtp_settings_fields() {
-    add_settings_section( 'jobly_smtp_settings_section', 'SMTP Settings', '', 'general' );
-    add_settings_field( 'jobly_smtp_host', 'SMTP Host', 'jobly_display_smtp_host_field', 'general', 'jobly_smtp_settings_section' );
-    add_settings_field( 'jobly_smtp_port', 'SMTP Port', 'jobly_display_smtp_port_field', 'general', 'jobly_smtp_settings_section' );
-    // Add more fields for other SMTP settings as needed
-}
-add_action( 'admin_init', 'jobly_custom_smtp_settings_fields' );
-
-// Display SMTP Host field
-function jobly_display_smtp_host_field() {
-    $smtp_host = get_option( 'jobly_smtp_host' );
-    echo '<input type="text" id="jobly_smtp_host" name="jobly_smtp_host" value="' . esc_attr( $smtp_host ) . '" />';
-}
-
-// Display SMTP Port field
-function jobly_display_smtp_port_field() {
-    $smtp_port = get_option( 'jobly_smtp_port' );
-    echo '<input type="text" id="jobly_smtp_port" name="jobly_smtp_port" value="' . esc_attr( $smtp_port ) . '" />';
-}
-
-// Configure SMTP settings dynamically
-function jobly_configure_smtp_settings( $phpmailer ) {
-    $smtp_host = get_option( 'jobly_smtp_host' );
-    $smtp_port = get_option( 'jobly_smtp_port' );
-
-    if ( !empty( $smtp_host ) && !empty( $smtp_port ) ) {
-        $phpmailer->isSMTP();
-        $phpmailer->Host = $smtp_host;
-        $phpmailer->Port = intval( $smtp_port );
-        // Add more SMTP settings here as needed
-    }
-}
-add_action( 'phpmailer_init', 'jobly_configure_smtp_settings' );

@@ -246,7 +246,6 @@ $skills = get_terms( array(
                         // Handle form submission
                         if (isset($_POST['send_message'])) {
 
-
                             // Retrieve form field values
                             $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
                             $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
@@ -263,24 +262,7 @@ $skills = get_terms( array(
                             $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
 
                             // Send email using SMTP
-                            $sent = wp_mail($candidate_mail, $subject, $message, $headers);
-
-                            if ($sent) {
-                                // Email sent successfully
-                                $mail_text = 'Email sent successfully.';
-                            } else {
-                                // Email sending failed
-                                $mail_text = 'Failed to send email.';
-                                // Log error details
-                                if (isset($GLOBALS['phpmailer']->ErrorInfo)) {
-                                    $mail_text .= ' Error: ' . $GLOBALS['phpmailer']->ErrorInfo;
-                                }
-                            }
-
-                            // Output debugging information
-                            echo '<pre>';
-                            print_r($mail_text);
-                            echo '</pre>';
+                            wp_mail($candidate_mail, $subject, $message, $headers);
                         }
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e('Email', 'jobly') ?> <?php the_title() ?></h4>

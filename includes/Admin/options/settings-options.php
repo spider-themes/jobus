@@ -736,14 +736,6 @@ if( class_exists( 'CSF' ) ) {
                 'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
-            array(
-                'id'        => 'candidate_archive_meta_4',
-                'type'      => 'select',
-                'title'     => esc_html__('Attribute 04', 'jobly'),
-                'options'   => jobly_get_specs('candidate_specifications'),
-                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
-            ),
-
         )
     ) );
 
@@ -875,64 +867,76 @@ if( class_exists( 'CSF' ) ) {
         'fields' => array(
 
             array(
-                'id'            => 'jobly_smtp_host',
+                'id'            => 'smtp_host',
                 'type'          => 'text',
-                'title'         => esc_html__( 'Host', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'title'         => esc_html__( 'SMTP Host', 'jobly' ),
+                'desc'          => esc_html__( 'The SMTP server which will be used to send email. For example: smtp.gmail.com', 'jobly' ),
                 'default'       => 'mail.spider-themes.net',
             ),
 
             array(
-                'id'            => 'jobly_smtp_port',
-                'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'id'            => 'smtp_authentication',
+                'type'          => 'select',
+                'title'         => esc_html__( 'SMTP Authentication', 'jobly' ),
+                'desc'          => esc_html__( 'Whether to use SMTP Authentication when sending an email (recommended: True).', 'jobly' ),
+                'options'       => array(
+                    'true'      => esc_html__('True', 'jobly'),
+                    'false'     => esc_html__('False', 'jobly'),
+                ),
+                'default'       => 'true',
             ),
 
-
             array(
-                'id'            => 'jobly_smtp_port',
-                'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'id'            => 'smtp_username',
+                'type'          => 'text',
+                'title'         => esc_html__( 'SMTP Username', 'jobly' ),
+                'desc'          => esc_html__( 'Your SMTP Username.', 'jobly' ),
+                'default'       => 'no-reply@spider-themes.net',
             ),
 
-
             array(
-                'id'            => 'jobly_smtp_port',
-                'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'id'            => 'smtp_password',
+                'type'          => 'text',
+                'title'         => esc_html__( 'SMTP Password', 'jobly' ),
+                'desc'          => esc_html__( 'Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options).', 'jobly' ),
+                'default'       => 'LKJKPuQ43Keqzry',
             ),
 
-
             array(
-                'id'            => 'jobly_smtp_port',
-                'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'id'            => 'smtp_encryption',
+                'type'          => 'select',
+                'title'         => esc_html__( 'Type of Encryption', 'jobly' ),
+                'desc'          => esc_html__( 'The encryption which will be used when sending an email (recommended: TLS).', 'jobly' ),
+                'options'       => array(
+                    'tls'      => esc_html__('TLS', 'jobly'),
+                    'ssl'     => esc_html__('SSL', 'jobly'),
+                    'none'     => esc_html__('No Encryption', 'jobly'),
+                ),
+                'default'       => 'ssl',
             ),
 
-
             array(
-                'id'            => 'jobly_smtp_port',
+                'id'            => 'smtp_port',
                 'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'title'         => esc_html__( 'SMTP Port', 'jobly' ),
+                'desc'          => esc_html__( 'The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead.', 'jobly' ),
+                'default'       => 465,
             ),
 
+            array(
+                'id'            => 'smtp_from_mail_address',
+                'type'          => 'text',
+                'title'         => esc_html__( 'From Email Address', 'jobly' ),
+                'desc'          => esc_html__( 'The email address which will be used as the From Address if it is not supplied to the mail function.', 'jobly' ),
+                'default'       => 'no-reply@spider-themes.net',
+            ),
 
             array(
-                'id'            => 'jobly_smtp_port',
-                'type'          => 'number',
-                'title'         => esc_html__( 'Port', 'jobly' ),
-                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
+                'id'            => 'smtp_from_name',
+                'type'          => 'text',
+                'title'         => esc_html__( 'From Name', 'jobly' ),
+                'desc'          => esc_html__( 'The name which will be used as the From Name if it is not supplied to the mail function.', 'jobly' ),
+                'default'       => 'EazyDocs',
             ),
 
         )
