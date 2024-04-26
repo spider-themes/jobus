@@ -26,6 +26,14 @@ if (class_exists('CSF')) {
                 'default' => false,
             ),
 
+            array(
+                'id'                => 'cv_attachment',
+                'type'              => 'upload',
+                'title'             => esc_html__( 'CV Attachment', 'jobly' ),
+                'button_title'      => esc_html__( 'Add or Upload Files', 'jobly' ),
+                'remove_title'      => esc_html__( 'Remove', 'jobly' ),
+            )
+
         )
     ));
 
@@ -124,11 +132,48 @@ if (class_exists('CSF')) {
     ) ); //End Social Icons
 
 
+    // Contact Information
+    CSF::createSection( $meta_candidate_prefix, array(
+        'id'    => 'jobly_meta_contact_info', // Set a unique slug-like ID
+        'title' => esc_html__( 'Contact Information', 'jobly' ),
+        'icon' => 'fa fa-map',
+        'fields' => array(
+
+            array(
+                'id'                => 'candidate_mail',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Candidate Mail', 'jobly' ),
+                'subtitle'          => esc_html__( 'Input the candidate Candidate Mail Address', 'jobly' ),
+            ),
+
+
+            array(
+                'id'          => 'candidate_location',
+                'type'        => 'map',
+                'title'       => esc_html__('Location', 'jobly'),
+                'height'   => '500px',
+                'settings' => array(
+                    'scrollWheelZoom' => true,
+                ),
+                'default'     => array(
+                    'address'   => 'Dhaka Division, Bangladesh',
+                    'latitude'  => '23.9456166',
+                    'longitude' => '90.2526382',
+                    'zoom'      => '20',
+                ),
+
+            ),
+
+
+        )
+    ) ); //End Contact Information
+
+
     // Intro Video
     CSF::createSection( $meta_candidate_prefix, array(
         'id'    => 'jobly_meta_video', // Set a unique slug-like ID
         'title' => esc_html__( 'Intro Video', 'jobly' ),
-        'icon' => 'fa fa-circle-play',
+        'icon' => 'fa fa-play',
         'fields' => array(
 
             array(

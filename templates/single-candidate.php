@@ -6,6 +6,17 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+$experience = !empty($meta['experience']) ? $meta['experience'] : '';
+$educations = !empty($meta['education']) ? $meta['education'] : '';
+$cv_attachment = !empty($meta['cv_attachment']) ? $meta['cv_attachment'] : '';
+
+$portfolio = !empty($meta['portfolio']) ? $meta['portfolio'] : '';
+$portfolio_ids = explode(',', $portfolio);
+
+$skills = get_terms( array(
+        'taxonomy' => 'candidate_skill'
+    )
+);
 ?>
 
     <section class="candidates-profile pt-100 lg-pt-70 pb-150 lg-pb-80">
@@ -27,7 +38,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                             <?php
                         }
 
-                        $educations = !empty($meta['education']) ? $meta['education'] : '';
                         if ( $educations ) {
                             ?>
                             <div class="inner-card border-style mb-75 lg-mb-50">
@@ -63,34 +73,22 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                             </div>
                             <?php
                         }
-                        ?>
 
-                        <!-- /.inner-card -->
-                        <div class="inner-card border-style mb-75 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e('Skills', 'jobly') ?></h3>
-                            <ul class="style-none skill-tags d-flex flex-wrap pb-25">
+                        if ( is_array($skills )) {
+                            ?>
+                            <div class="inner-card border-style mb-75 lg-mb-50">
+                                <h3 class="title"><?php esc_html_e('Skills', 'jobly') ?></h3>
+                                <ul class="style-none skill-tags d-flex flex-wrap pb-25">
+                                    <?php
+                                    foreach( $skills as $skill ) {
+                                        echo '<li>'.esc_html($skill->name).'</li>';
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php
+                        }
 
-                                <?php
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
-                                ?>
-
-
-                                <li>Figma</li>
-                                <li>HTML5</li>
-                                <li>Illustrator</li>
-                                <li>Adobe Photoshop</li>
-                                <li>WordPress</li>
-                                <li>jQuery</li>
-                                <li>Web Design</li>
-                                <li>Adobe XD</li>
-                                <li>CSS</li>
-                                <li class="more">3+</li>
-                            </ul>
-                        </div>
-
-
-                        <?php
-                        $experience = !empty($meta['experience']) ? $meta['experience'] : '';
                         if ( $experience ) {
                             ?>
                             <div class="inner-card border-style mb-60 lg-mb-50">
@@ -127,10 +125,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                             <?php
                         }
 
-
-                        $portfolio = !empty($meta['portfolio']) ? $meta['portfolio'] : '';
-                        $portfolio_ids = explode(',', $portfolio);
-
                         if ( $portfolio_ids ) {
                             ?>
                             <h3 class="title"><?php esc_html_e('Portfolio', 'jobly') ?></h3>
@@ -154,25 +148,28 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                 </div>
 
 
-
                 <div class="col-xxl-3 col-lg-4">
                     <div class="cadidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
                         <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                             <div class="pt-25">
                                 <div class="cadidate-avatar m-auto">
-                                    <img src="images/lazy.svg" data-src="images/candidates/img_01.jpg" alt="" class="lazy-img rounded-circle w-100">
+                                    <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle w-100']) ?>
                                 </div>
                             </div>
                             <h3 class="cadidate-name text-center"><?php the_title() ?></h3>
                             <div class="text-center pb-25">
-                                <a href="#" class="invite-btn fw-500"><?php esc_html_e( 'Invite', 'jobly' ) ?></a>
+                                <a href="#" class="invite-btn fw-500">
+                                    <?php esc_html_e( 'Invite', 'jobly' ) ?>
+                                </a>
                             </div>
-                            <ul class="style-none">
-                                <?php
-                                $specifications = jobly_opt('candidate_specifications');
-                                if ($specifications) {
-                                    foreach ( $specifications as $field ) {
 
+                            <?php
+                            $specifications = jobly_opt('candidate_specifications');
+                            if ($specifications) {
+                                ?>
+                                <ul class="style-none">
+                                    <?php
+                                    foreach ( $specifications as $field ) {
                                         $meta_name = $field[ 'meta_name' ] ?? '';
                                         $meta_key = $field[ 'meta_key' ] ?? '';
 
@@ -200,68 +197,124 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
                                         }
                                     }
 
-                                }
-
-                                $social_icons = !empty($meta['social_icons']) ? $meta['social_icons'] : '';
-                                if (is_array($social_icons)) {
-                                    ?>
-                                    <li>
-                                        <span><?php esc_html_e('Social: ', 'jobly'); ?></span>
-                                        <div>
-                                            <?php
-                                            foreach ( $social_icons as $item ) {
-                                                if (!empty($item[ 'url' ])) { ?>
-                                                    <a href="<?php echo esc_url($item[ 'url' ]) ?>" class="me-3">
-                                                        <i class="<?php echo esc_attr($item[ 'icon' ]) ?>"></i>
-                                                    </a>
-                                                    <?php
+                                    $social_icons = !empty($meta['social_icons']) ? $meta['social_icons'] : '';
+                                    if (is_array($social_icons)) {
+                                        ?>
+                                        <li>
+                                            <span><?php esc_html_e('Social: ', 'jobly'); ?></span>
+                                            <div>
+                                                <?php
+                                                foreach ( $social_icons as $item ) {
+                                                    if (!empty($item[ 'url' ])) { ?>
+                                                        <a href="<?php echo esc_url($item[ 'url' ]) ?>" class="me-3">
+                                                            <i class="<?php echo esc_attr($item[ 'icon' ]) ?>"></i>
+                                                        </a>
+                                                        <?php
+                                                    }
                                                 }
-                                            }
-                                            ?>
-                                        </div>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
-
-                            </ul>
-                            <a href="#" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15">Download CV</a>
+                                                ?>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+                                <a href="<?php echo esc_url($cv_attachment) ?>" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
+                                    <?php esc_html_e('Download CV', 'jobly') ?>
+                                </a>
+                                <?php
+                            }
+                            ?>
                         </div>
 
-                        <!-- /.cadidate-bio -->
-                        <h4 class="sidebar-title">Location</h4>
-                        <div class="map-area mb-60 md-mb-40">
-                            <div class="gmap_canvas h-100 w-100">
-                                <iframe class="gmap_iframe h-100 w-100" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=dhaka collage&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                        <?php
+                        $location = !empty($meta['candidate_location']) ? $meta['candidate_location'] : '';
+                        $is_http = is_ssl() ? 'https://' : 'http://';
+                        $iframe_url = "{$is_http}maps.google.com/maps?q={$location['latitude']},{$location['longitude']}&z=12&output=embed";
+
+                        if ( $location ) {
+                            ?>
+                            <h4 class="sidebar-title"><?php esc_html_e('Location', 'jobly') ?></h4>
+                            <div class="map-area mb-60 md-mb-40">
+                                <div class="gmap_canvas h-100 w-100">
+                                    <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url($iframe_url); ?>"></iframe>
+                                </div>
                             </div>
-                        </div>
-                        <h4 class="sidebar-title">Email Rashed Kabir.</h4>
+                            <?php
+                        }
+
+                        // Handle form submission
+                        if (isset($_POST['send_message'])) {
+
+
+                            // Retrieve form field values
+                            $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
+                            $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
+                            $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
+                            $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+
+                            // Set email subject
+                            $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
+
+                            // Set email headers
+                            $headers[] = "From: $sender_name <$sender_email>";
+                            $headers[] = "Reply-To: $sender_email";
+
+                            $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
+
+                            // Send email using SMTP
+                            $sent = wp_mail($candidate_mail, $subject, $message, $headers);
+
+                            if ($sent) {
+                                // Email sent successfully
+                                $mail_text = 'Email sent successfully.';
+                            } else {
+                                // Email sending failed
+                                $mail_text = 'Failed to send email.';
+                                // Log error details
+                                if (isset($GLOBALS['phpmailer']->ErrorInfo)) {
+                                    $mail_text .= ' Error: ' . $GLOBALS['phpmailer']->ErrorInfo;
+                                }
+                            }
+
+                            // Output debugging information
+                            echo '<pre>';
+                            print_r($mail_text);
+                            echo '</pre>';
+                        }
+                        ?>
+                        <h4 class="sidebar-title"><?php esc_html_e('Email', 'jobly') ?> <?php the_title() ?></h4>
                         <div class="email-form bg-wrapper bg-color">
-                            <p>Your email address & profile will be shown to the recipient.</p>
-                            <form action="#">
+                            <p><?php esc_html_e('Your email address & profile will be shown to the recipient.', 'jobly') ?></p>
+
+                            <form action="<?php echo esc_url(get_the_permalink()) ?>" method="post">
                                 <div class="d-sm-flex mb-25">
-                                    <label for="">Name</label>
-                                    <input type="text">
+                                    <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e('Your Name*', 'jobly') ?>" required>
                                 </div>
                                 <div class="d-sm-flex mb-25">
-                                    <label for="">Email</label>
-                                    <input type="email">
+                                    <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e('Your Email*', 'jobly') ?>" required>
                                 </div>
+
+                                <div class="d-sm-flex mb-25">
+                                    <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e('Your Subject', 'jobly') ?>">
+                                </div>
+
                                 <div class="d-sm-flex mb-25 xs-mb-10">
-                                    <label for="">Message</label>
-                                    <textarea></textarea>
+                                    <textarea name="message" id="message" placeholder="<?php esc_attr_e('Your Message', 'jobly') ?>"></textarea>
                                 </div>
                                 <div class="d-sm-flex">
-                                    <label for=""></label>
-                                    <button class="btn-ten fw-500 text-white flex-fill text-center tran3s">Send </button>
+                                    <button type="submit" name="send_message" class="btn-ten fw-500 text-white flex-fill text-center tran3s">
+                                        <?php esc_html_e('Send Message', 'jobly') ?>
+                                    </button>
                                 </div>
                             </form>
+
                         </div>
+
                     </div>
                 </div>
 
             </div>
-            <!-- /.row -->
         </div>
     </section>
 

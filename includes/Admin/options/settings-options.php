@@ -864,7 +864,80 @@ if( class_exists( 'CSF' ) ) {
             )
 
         )
+    ) ); //End Social Icons
+
+
+    // SMTP Settings
+    CSF::createSection( $settings_prefix, array(
+        'id'    => 'jobly_smtp', // Set a unique slug-like ID
+        'title' => esc_html__( 'SMTP Settings', 'jobly' ),
+        'icon' => 'fa fa-hashtag',
+        'fields' => array(
+
+            array(
+                'id'            => 'jobly_smtp_host',
+                'type'          => 'text',
+                'title'         => esc_html__( 'Host', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+
+            array(
+                'id'            => 'jobly_smtp_port',
+                'type'          => 'number',
+                'title'         => esc_html__( 'Port', 'jobly' ),
+                'subtitle'         => esc_html__( 'Place your SMTP server host', 'jobly' ),
+                'default'       => 'mail.spider-themes.net',
+            ),
+
+        )
     ) );
+
 
 	// Backup Options
 	CSF::createSection( $settings_prefix, array(

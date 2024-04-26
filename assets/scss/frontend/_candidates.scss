@@ -1,3 +1,7 @@
+img {
+    height: auto;
+}
+
 .candidates-profile.bg-color {
     background: $light-bg;
 }
@@ -171,7 +175,7 @@
             position: relative;
             border-radius: 15px;
             padding: 35px 35px 20px;
-            .title {
+            .title, > .wp-block-heading {
                 position: absolute;
                 background: #fff;
                 padding: 0 10px;
@@ -179,9 +183,15 @@
                 left: 25px;
                 z-index: 1;
             }
+            > .wp-block-heading {
+                font-size: 28px;
+                font-weight: 500;
+                font-family: $main-font;
+                margin-bottom: 22px;
+            }
         }
     }
-    .title {
+    .title  {
         font-size: 28px;
         font-weight: 500;
         font-family: $main-font;
@@ -358,7 +368,7 @@
             display: inline;
         }
         input {
-            width: calc(100% - 65px);
+            width: 100%;
             height: 45px;
             border-radius: 5px;
             border: 1px solid #e9e9e9;
@@ -367,7 +377,7 @@
             font-size: 13px;
         }
         textarea {
-            width: calc(100% - 65px);
+            width: 100%;
             height: 135px;
             max-height: 135px;
             border-radius: 5px;

@@ -265,6 +265,20 @@ class Post_Types {
             ]
         ));
 
+        // Register post taxonomies Tags
+        register_taxonomy( 'candidate_skill', 'candidate', array(
+            'public'                => true,
+            'hierarchical'          => false,
+            'show_ui'               => true,
+            'show_admin_column'     => true,
+            'show_in_nav_menus'     => true,
+            'show_in_rest'          => true,
+            'labels'                => array(
+                'name'  => esc_html__( 'Skills', 'jobly'),
+                'add_new_item'  => esc_html__( 'Add New Skill', 'jobly'),
+            )
+        ) );
+
     }
 
 
