@@ -176,7 +176,9 @@ $skills = get_terms( array(
                                         // Get the stored meta-values
                                         $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
 
-                                        if (isset($meta_options[ $meta_key ])) {
+
+
+                                        if ( isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ]) ) {
                                             ?>
                                             <li>
                                                 <?php
@@ -184,7 +186,7 @@ $skills = get_terms( array(
                                                     echo '<span>' . esc_html($meta_name) . ':</span>';
                                                 }
                                                 if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
-                                                    echo '<div>';
+                                                    echo '<div class="text-capitalize">';
                                                     foreach ( $meta_options[ $meta_key ] as $value ) {
                                                         $trim_value = str_replace('@space@', ' ', $value);
                                                         echo esc_html($trim_value);

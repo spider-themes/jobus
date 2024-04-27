@@ -96,33 +96,36 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             <?php
                                             if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                 ?>
-                                                <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                 <?php
                                             }
 
-                                            $skills = get_terms( array('taxonomy' => 'candidate_skill'));
+
+                                            $skills = get_the_terms(get_the_ID(), 'candidate_skill');
                                             $max_skills = 2;
 
-                                            if ( is_array($skills) ) {
-                                                ?>
-                                                <ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">
-                                                    <?php
-                                                    $counter = 0;
-                                                    foreach ( $skills as $skill ) {
-                                                        // Display only the first 3 skills
-                                                        if ($counter < $max_skills) {
-                                                            echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
-                                                        }
-                                                        $counter++;
+                                            if ($skills && count($skills) > $max_skills) {
+                                                // Shuffle the skills to get a random order
+                                                shuffle($skills);
+
+                                                // Display the first 2 skills
+                                                $displayed_skills = array_slice($skills, 0, $max_skills);
+                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+                                                    foreach ($displayed_skills as $skill) {
+                                                        echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                                     }
-                                                    // Check if there are more than three skills
-                                                    if (count($skills) > $max_skills) {
-                                                        $remaining_count = count($skills) - $max_skills;
-                                                        echo '<li class="more">' . $remaining_count . '+</li>';
+
+                                                    // Display the count of remaining skills
+                                                    $remaining_count = count($skills) - $max_skills;
+                                                    echo '<li class="more">' . $remaining_count . '+</li>';
+                                                echo '</ul>';
+                                            } else {
+                                                // Display all skills
+                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+                                                    foreach ($skills as $skill) {
+                                                        echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                                     }
-                                                    ?>
-                                                </ul>
-                                                <?php
+                                                echo '</ul>';
                                             }
                                             ?>
                                             <div class="row gx-1">
@@ -133,7 +136,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                                            <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -143,7 +146,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
-                                                            <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -205,7 +208,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         <?php
                                                         if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                             ?>
-                                                            <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                            <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                             <?php
                                                         }
 
@@ -236,18 +239,30 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                                    <div class="candidate-info">
-                                                        <span>Salary</span>
-                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+
+                                                <?php
+                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2' )) {
+                                                    ?>
+                                                    <div class="col-xl-3 col-md-4 col-sm-6">
+                                                        <div class="candidate-info">
+                                                            <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
+                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                                    <div class="candidate-info">
-                                                        <span>Location</span>
-                                                        <div><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_4') ?></div>
+                                                    <?php
+                                                }
+
+                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3' )) {
+                                                    ?>
+                                                    <div class="col-xl-3 col-md-4 col-sm-6">
+                                                        <div class="candidate-info">
+                                                            <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
+                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <?php
+                                                }
+                                                ?>
                                                 <div class="col-xl-3 col-md-4">
                                                     <div class="d-flex justify-content-lg-end">
                                                         <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">

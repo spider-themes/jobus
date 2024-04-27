@@ -42,6 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                         $widget_name = $widget[ 'widget_name' ] ?? '';
                         $widget_layout = $widget[ 'widget_layout' ] ?? '';
+                        $range_suffix = $widget[ 'range_suffix' ] ?? '';
 
                         $specifications = jobly_get_specs('candidate_specifications');
                         $widget_title = $specifications[ $widget_name ];

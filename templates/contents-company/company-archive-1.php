@@ -99,7 +99,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             <?php
                                             if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
                                                 ?>
-                                                <p class="text-center mb-auto"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                <p class="text-center mb-auto text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
                                                 <?php
                                             }
 
@@ -148,7 +148,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     </h5>
                                                     <?php
                                                     if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) { ?>
-                                                        <p><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                        <p class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
                                                         <?php
                                                     }
                                                     ?>
@@ -158,7 +158,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                         <div class="col-xl-4 col-md-8">
                                             <div class="d-flex align-items-center ps-xxl-5 lg-mt-20">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="team-text">
+                                                    <div class="team-text text-capitalize">
                                                         <?php
                                                         // Trim the content and get the first word
                                                         $company_archive_meta_2 = jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2');
