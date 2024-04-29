@@ -62,9 +62,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         </div>
                     </div>
 
-
-
                     <?php
+
                     if ( $current_view == 'grid' ) {
                         ?>
                         <div class="accordion-box grid-style show">
@@ -99,7 +98,6 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                 <?php
                                             }
-
 
                                             $skills = get_the_terms(get_the_ID(), 'candidate_skill');
                                             $max_skills = 2;
@@ -179,6 +177,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         </div>
                         <?php
                     }
+                    
                     elseif ( $current_view == 'list' ) {
                         ?>
                         <div class="accordion-box list-style">
@@ -197,7 +196,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                         </div>
                                         <div class="right-side">
                                             <div class="row gx-1 align-items-center">
-                                                <div class="col-xl-3">
+                                                <div class="col-xl-4">
                                                     <div class="position-relative">
                                                         <h4 class="candidate-name mb-0">
                                                             <a href="<?php the_permalink() ?>" class="tran3s">
@@ -212,29 +211,31 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                             <?php
                                                         }
 
-                                                        $skills = get_terms( array('taxonomy' => 'candidate_skill'));
+                                                        $skills = get_the_terms(get_the_ID(), 'candidate_skill');
                                                         $max_skills = 2;
 
-                                                        if ( is_array($skills) ) {
-                                                            ?>
-                                                            <ul class="cadidate-skills style-none d-flex align-items-center">
-                                                                <?php
-                                                                $counter = 0;
-                                                                foreach ( $skills as $skill ) {
-                                                                    // Display only the first 3 skills
-                                                                    if ($counter < $max_skills) {
-                                                                        echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
-                                                                    }
-                                                                    $counter++;
-                                                                }
-                                                                // Check if there are more than three skills
-                                                                if (count($skills) > $max_skills) {
-                                                                    $remaining_count = count($skills) - $max_skills;
-                                                                    echo '<li class="more">' . $remaining_count . '+</li>';
-                                                                }
-                                                                ?>
-                                                            </ul>
-                                                            <?php
+                                                        if ($skills && count($skills) > $max_skills) {
+                                                            // Shuffle the skills to get a random order
+                                                            shuffle($skills);
+
+                                                            // Display the first 2 skills
+                                                            $displayed_skills = array_slice($skills, 0, $max_skills);
+                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+                                                            foreach ($displayed_skills as $skill) {
+                                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                            }
+
+                                                            // Display the count of remaining skills
+                                                            $remaining_count = count($skills) - $max_skills;
+                                                            echo '<li class="more">' . $remaining_count . '+</li>';
+                                                            echo '</ul>';
+                                                        } else {
+                                                            // Display all skills
+                                                            echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+                                                            foreach ($skills as $skill) {
+                                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                            }
+                                                            echo '</ul>';
                                                         }
                                                         ?>
                                                     </div>
@@ -263,7 +264,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php
                                                 }
                                                 ?>
-                                                <div class="col-xl-3 col-md-4">
+                                                <div class="col-xl-2 col-md-4">
                                                     <div class="d-flex justify-content-lg-end">
                                                         <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">
                                                             <?php esc_html_e('View Profile', 'jobly') ?>
