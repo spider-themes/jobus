@@ -587,7 +587,7 @@ if( class_exists( 'CSF' ) ) {
     ) );
 
 
-    // Job Details Page Settings-> Open Job Position
+    // Company Details Page Settings-> Open Job Position
     CSF::createSection( $settings_prefix, array(
         'parent'    => 'jobly_company_details',
         'title'     => esc_html__( 'Open Job Position', 'jobly' ),
@@ -688,6 +688,34 @@ if( class_exists( 'CSF' ) ) {
 
     ) );
 
+    // Company Layout Settings
+    CSF::createSection( $settings_prefix, array(
+        'parent' => 'jobly_candidate_archive',
+        'title' => esc_html__( 'Page Layout', 'jobly' ),
+        'id' => 'jobly_candidate_archive',
+        'fields' => array(
+
+            //Subheading field
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Candidate Page Layout', 'jobly'),
+            ),
+
+            array(
+                'id'        => 'candidate_archive_layout',
+                'type'      => 'image_select',
+                'title'     => esc_html__('Choose Layout', 'jobly'),
+                'subtitle'  => esc_html__('Select the preferred layout for your candidate page across the entire website.', 'jobly'),
+                'options'   => array(
+                    '1' => JOBLY_IMG . '/layout/candidate/layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/candidate/layout-2.png',
+                ),
+                'default'   => '1'
+            ),
+
+        )
+    ) );
+
     // Candidate Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
         'parent' => 'jobly_candidate_archive',
@@ -753,6 +781,18 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
+                'id'         => 'candidate_sidebar_layout',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Choose Sidebar', 'jobly'),
+                'options'    => array(
+                    'sidebar_regular' => esc_html__('Regular', 'jobly'),
+                    'sidebar_popup' => esc_html__('Popup', 'jobly'),
+                ),
+                'default'    => 'sidebar_regular'
+            ),
+
+            // Sidebar Widget layout 01
+            array(
                 'id'                => 'candidate_sidebar_widgets',
                 'type'              => 'repeater',
                 'title'             => esc_html__( 'Widgets', 'jobly' ),
@@ -761,6 +801,7 @@ if( class_exists( 'CSF' ) ) {
                     __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobly' ) . '<br>' .
                     __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobly' ),
                 'button_title'      => esc_html__( 'Add Widget', 'jobly' ),
+                'dependency' => array( 'candidate_sidebar_layout', '==', 'sidebar_regular' ),
                 'fields' => array(
 
                     array(
@@ -782,6 +823,50 @@ if( class_exists( 'CSF' ) ) {
                             'range'         => esc_html__( 'Range Slider', 'jobly' ),
                         ),
                         'default'       => 'checkbox',
+                    ),
+
+                    array(
+                        'id'            => 'range_suffix',
+                        'type'          => 'text',
+                        'title'         => esc_html__( 'Range Suffix', 'jobly' ),
+                        'default'       => esc_html__( 'USD', 'jobly' ),
+                        'dependency'    => array( 'widget_layout', '==', 'range' ),
+                    ),
+                )
+            ),
+
+
+            // Sidebar Widget layout 02
+            array(
+                'id'                => 'candidate_sidebar_widgets_2',
+                'type'              => 'repeater',
+                'title'             => esc_html__( 'Widgets', 'jobly' ),
+                'subtitle' => __( 'Choose the layout style for displaying widget options:', 'jobly' ) . '<br>' .
+                    __( '<strong>Dropdown:</strong> Display options in a dropdown menu.', 'jobly' ) . '<br>' .
+                    __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobly' ) . '<br>' .
+                    __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobly' ),
+                'button_title'      => esc_html__( 'Add Widget', 'jobly' ),
+                'dependency' => array( 'candidate_sidebar_layout', '==', 'sidebar_popup' ),
+                'fields' => array(
+
+                    array(
+                        'id'            => 'widget_name',
+                        'type'          => 'select',
+                        'title'         => esc_html__( 'Widget', 'jobly' ),
+                        'options'       => jobly_get_specs('candidate_specifications'),
+                        'default'       => false,
+                    ),
+
+                    array(
+                        'id'            => 'widget_layout',
+                        'type'          => 'button_set',
+                        'title'         => esc_html__( 'Widget Layout', 'jobly' ),
+                        'options'       => array(
+                            'text'          => esc_html__( 'Text', 'jobly' ),
+                            'dropdown'      => esc_html__( 'Dropdown', 'jobly' ),
+                            'range'         => esc_html__( 'Range Slider', 'jobly' ),
+                        ),
+                        'default'       => 'dropdown',
                     ),
 
                     array(

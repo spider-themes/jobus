@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-
-
 <div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40" data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
@@ -264,6 +262,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </button>
 
             </form>
+
         </div>
 
     </div>
