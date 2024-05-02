@@ -15,30 +15,38 @@ class Frontend {
 	public function __construct() {
 
 		// Add Filter to redirect Archive Page Template
-		add_filter( 'template_include', [ $this, 'template_loader_job' ] );
-		add_filter( 'template_include', [ $this, 'template_loader_company' ] );
-		add_filter( 'template_include', [ $this, 'template_loader_candidate' ] );
+		add_filter( 'template_include', [ $this, 'template_loader' ] );
 
 	}
 
 
 	/**
-	 * @param $job_template
+	 * @param $template
 	 *
 	 * @return mixed|string
 	 * Load custom template
 	 * @since 1.0.0
 	 */
-	public function template_loader_job( $job_template ) {
+	public function template_loader( $template ) {
+
+        // Job Pages
+        if ( is_tax('job_cat') || is_tax('job_tag') ) {
+            // Check if a custom template exists in the theme folder, if not, load the plugin template file
+            $archive_template = 'taxonomy-job.php';
+            if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
+                $template = $theme_file;
+            } else {
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
+            }
+        }
 
 		if ( is_post_type_archive( 'job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
-			//$archive_template = 'archive-content_bkp.php';
 			$archive_template = 'archive-job.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
-                $job_template = $theme_file;
+                $template = $theme_file;
 			} else {
-                $job_template = JOBLY_PATH . '/templates/' . $archive_template;
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
 			}
 		}
 
@@ -46,33 +54,30 @@ class Frontend {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			$single_template = 'single-job.php';
 			if ( $theme_file = locate_template( array( 'jobly/' . $single_template ) ) ) {
-                $job_template = $theme_file;
+                $template = $theme_file;
 			} else {
-                $job_template = JOBLY_PATH . '/templates/' . $single_template;
+                $template = JOBLY_PATH . '/templates/' . $single_template;
 			}
 		}
 
-		return $job_template;
-
-	}
-
-
-    /**
-     * @param $company_template
-     *
-     * @return mixed|string
-     * Load custom template
-     * @since 1.0.0
-     */
-    public function template_loader_company($company_template) {
+        // Company Pages
+        if ( is_tax('company_cat') ) {
+            // Check if a custom template exists in the theme folder, if not, load the plugin template file
+            $archive_template = 'taxonomy-company.php';
+            if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
+                $template = $theme_file;
+            } else {
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
+            }
+        }
 
         if (is_post_type_archive('company')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-company.php';
             if ($theme_file = locate_template(array('jobly/' . $archive_template))) {
-                $company_template = $theme_file;
+                $template = $theme_file;
             } else {
-                $company_template = JOBLY_PATH . '/templates/' . $archive_template;
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
             }
         }
 
@@ -80,33 +85,32 @@ class Frontend {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-company.php';
             if ($theme_file = locate_template(array('jobly/' . $single_template))) {
-                $company_template = $theme_file;
+                $template = $theme_file;
             } else {
-                $company_template = JOBLY_PATH . '/templates/' . $single_template;
+                $template = JOBLY_PATH . '/templates/' . $single_template;
             }
         }
 
-        return $company_template;
 
-    }
+        // Candidate Pages
+        if ( is_tax('candidate_cat') || is_tax('candidate_skill') ) {
+            // Check if a custom template exists in the theme folder, if not, load the plugin template file
+            $archive_template = 'taxonomy-candidate.php';
+            if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {
+                $template = $theme_file;
+            } else {
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
+            }
+        }
 
-
-    /**
-     * @param $company_template
-     *
-     * @return mixed|string
-     * Load custom template
-     * @since 1.0.0
-     */
-    public function template_loader_candidate($candidate_template) {
 
         if (is_post_type_archive('candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-candidate.php';
             if ($theme_file = locate_template(array('jobly/' . $archive_template))) {
-                $candidate_template = $theme_file;
+                $template = $theme_file;
             } else {
-                $candidate_template = JOBLY_PATH . '/templates/' . $archive_template;
+                $template = JOBLY_PATH . '/templates/' . $archive_template;
             }
         }
 
@@ -114,14 +118,15 @@ class Frontend {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-candidate.php';
             if ($theme_file = locate_template(array('jobly/' . $single_template))) {
-                $candidate_template = $theme_file;
+                $template = $theme_file;
             } else {
-                $candidate_template = JOBLY_PATH . '/templates/' . $single_template;
+                $template = JOBLY_PATH . '/templates/' . $single_template;
             }
         }
 
-        return $candidate_template;
 
-    }
+		return $template;
+
+	}
 
 }

@@ -21,7 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="row">
 
                             <?php
-
                             // Widget for candidate meta data list
                             $filter_widgets = jobly_opt('candidate_sidebar_widgets');
 
@@ -30,11 +29,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 $searched_class_collapsed = jobly_search_terms('candidate_meta');
 
                                 foreach ( $filter_widgets as $index => $widget ) {
-
-                                    $tab_count = $index + 1;
-                                    $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
-                                    $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
-                                    $area_expanded = $index == 1 ? 'true' : 'false';
 
                                     $widget_name = $widget[ 'widget_name' ] ?? '';
                                     $widget_layout = $widget[ 'widget_layout' ] ?? '';
@@ -45,22 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                                     $candidate_specifications = jobly_get_specs_options('candidate_specifications');
                                     $candidate_specifications = $candidate_specifications[ $widget_name ];
-
-                                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'candidate')) {
-                                        if (!empty ($_GET[ $widget_name ])) {
-                                            $is_collapsed_show = 'collapse show';
-                                            $area_expanded = 'true';
-                                            $is_collapsed = '';
-                                        } else {
-                                            $is_collapsed_show = 'collapse';
-                                            $area_expanded = 'false';
-                                            $is_collapsed = ' collapsed';
-                                        }
-                                    }
-
-                                    $margin_top = $tab_count == 1 ? 'mt-25' : '';
                                     ?>
-
                                     <div class="col-lg-3">
                                         <div class="filter-block pb-50 md-pb-20">
                                             <div class="filter-title fw-500 text-dark"><?php echo esc_html($widget_title); ?></div>
@@ -78,7 +57,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             elseif ( $widget_layout == 'dropdown' ) {
                                                 ?>
                                                 <select class="nice-select" name="<?php echo esc_attr($widget_name) ?>[]">
-
                                                     <?php
                                                     if (is_array($candidate_specifications)) {
                                                         foreach ( $candidate_specifications as $key => $value ) {
@@ -106,6 +84,96 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 </select>
                                                 <?php
                                             }
+
+                                            elseif ( $widget_layout == 'range' ) {
+
+                                                $salary_value_list = $candidate_specifications;
+
+                                                // Initialize an array to store all numeric values
+                                                $all_values = [];
+
+                                                // Extract numeric values from meta_values
+                                                foreach ( $salary_value_list as $item ) {
+
+                                                    // Extract numbers and check for 'k'
+                                                    preg_match_all('/(\d+)(k)?/i', $item[ 'meta_values' ], $matches);
+                                                    foreach ( $matches[ 1 ] as $key => $value ) {
+                                                        // If 'k' is present, multiply the number by 1000
+                                                        $value = isset($matches[ 2 ][ $key ]) && strtolower($matches[ 2 ][ $key ]) == 'k' ? $value * 1000 : $value;
+
+                                                        $all_values[] = $value;
+                                                    }
+                                                }
+
+                                                // Get the minimum and maximum values
+                                                if (!empty ($all_values)) {
+                                                    $min_values = min($all_values);
+                                                    $max_values = max($all_values);
+
+                                                    $min_salary = jobly_search_terms($widget_name)[ 0 ] ?? $min_values;
+                                                    $max_salary = jobly_search_terms($widget_name)[ 1 ] ?? $max_values;
+                                                    ?>
+                                                    <div class="main-body">
+                                                        <div class="salary-slider" data_widget="<?php echo esc_attr($widget_name) ?>[]">
+                                                        <div class="price-input d-flex align-items-center pt-5">
+                                                            <div class="field d-flex align-items-center">
+                                                                <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-min" value="<?php echo esc_attr($min_salary); ?>" readonly>
+                                                            </div>
+                                                            <div class="pe-1 ps-1">-</div>
+                                                            <div class="field d-flex align-items-center">
+                                                                <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-max" value="<?php echo esc_attr($max_salary); ?>" readonly>
+                                                            </div>
+                                                            <?php if (!empty($range_suffix)) : ?>
+                                                                <div class="currency ps-1"><?php echo esc_html($range_suffix) ?></div>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                        <div class="slider">
+                                                            <div class="progress"></div>
+                                                        </div>
+                                                        <div class="range-input mb-10">
+                                                            <input type="range" class="range-min" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>" value="<?php echo esc_attr($min_salary); ?>" step="1">
+                                                            <input type="range" class="range-max" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>" value="<?php echo esc_attr($max_salary); ?>" step="1">
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            }
+
+                                            elseif ( $widget_layout == 'checkbox' ) {
+                                                ?>
+                                                <ul class="style-none filter-input">
+                                                    <?php
+                                                    if (!empty($candidate_specifications)) {
+                                                        foreach ( $candidate_specifications as $key => $value ) {
+
+                                                            $meta_value = $value[ 'meta_values' ] ?? '';
+                                                            $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                            $opt_val = strtolower($modifiedValues);
+
+                                                            // Get the count for the current meta-value
+                                                            $meta_value_count   = jobly_count_meta_key_usage('candidate', 'jobly_meta_candidate_options', $opt_val );
+
+                                                            if ( $meta_value_count > 0 ) {
+                                                                $searched_opt   = jobly_search_terms($widget_name);
+                                                                $check_status   = array_search($opt_val, $searched_opt);
+                                                                $check_status   = $check_status !== false ? ' checked' : '';
+                                                                ?>
+                                                                <li>
+                                                                    <input type="checkbox" name="<?php echo esc_attr($widget_name) ?>[]" value="<?php echo esc_attr($opt_val) ?>" <?php echo esc_attr($check_status) ?>>
+                                                                    <label>
+                                                                        <?php echo esc_html($meta_value); ?>
+                                                                    </label>
+                                                                </li>
+                                                                <?php
+
+                                                            }
+                                                        }
+                                                    }
+                                                    ?>
+                                                </ul>
+                                                <?php
+                                            }
                                             ?>
 
 
@@ -115,76 +183,48 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 }
                             }
 
+                            if (jobly_opt('is_candidate_widget_cat') == true ) {
+
+                                $term_cats = get_terms(array(
+                                    'taxonomy' => 'candidate_cat',
+                                    'hide_empty' => true,
+                                ));
+
+                                if (!empty($term_cats)) {
+                                    ?>
+                                    <div class="col-lg-3">
+                                        <div class="filter-block pb-50 md-pb-20">
+                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                            <select class="nice-select" name="candidate_cats[]">
+                                                <?php
+                                                $searched_opt = jobly_search_terms('candidate_cats');
+                                                foreach ( $term_cats as $key => $term ) {
+                                                    $list_class = $key > 3 ? ' class=hide' : '';
+                                                    $check_status = array_search($term->slug, $searched_opt);
+                                                    $check_status = $check_status !== false ? ' checked' : '';
+                                                    ?>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
                             ?>
-
-                            <div class="col-lg-3">
-                                <div class="filter-block pb-50 md-pb-20">
-                                    <div class="filter-title fw-500 text-dark">Category</div>
-                                    <select class="nice-select">
-                                        <option value="0">Web Design</option>
-                                        <option value="1">Design & Creative </option>
-                                        <option value="2">It & Development</option>
-                                        <option value="3">Web & Mobile Dev</option>
-                                        <option value="4">Writing</option>
-                                        <option value="5">Sales & Marketing</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-lg-3">
-                                <div class="filter-block pb-50 md-pb-20 pt-30">
-                                    <div class="loccation-range-select">
-                                        <div class="d-flex align-items-center">
-                                            <span>Radius: &nbsp;</span>
-                                            <div id="rangeValue">50</div>
-                                            <span>&nbsp;miles</span>
-                                        </div>
-                                        <input type="range" id="locationRange" value="50" max="100">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3">
-                                <div class="filter-block pb-25">
-                                    <div class="filter-title fw-500 text-dark">Salary Range</div>
-                                    <div class="main-body">
-                                        <div class="salary-slider">
-                                            <div class="price-input d-flex align-items-center pt-5">
-                                                <div class="field d-flex align-items-center">
-                                                    <input type="number" class="input-min" value="0" readonly>
-                                                </div>
-                                                <div class="pe-1 ps-1">-</div>
-                                                <div class="field d-flex align-items-center">
-                                                    <input type="number" class="input-max" value="300" readonly>
-                                                </div>
-                                                <div class="currency ps-1">USD</div>
-                                            </div>
-                                            <div class="slider">
-                                                <div class="progress"></div>
-                                            </div>
-                                            <div class="range-input mb-10">
-                                                <input type="range" class="range-min" min="0" max="950" value="0" step="10">
-                                                <input type="range" class="range-max" min="0" max="1000" value="300" step="10">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.filter-block -->
-                            </div>
-
 
                         </div>
 
                         <div class="row">
                             <div class="col-xl-2 m-auto">
-                                <a href="#" class="btn-ten fw-500 text-white w-100 text-center tran3s">Apply Filter</a>
+                                <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
+                                    <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <!-- /.filter header -->
                 </div>
 
             </div>

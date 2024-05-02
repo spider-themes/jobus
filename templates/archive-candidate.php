@@ -149,4 +149,10 @@ $candidate_archive_layout = jobly_opt('candidate_archive_layout');
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-'.$candidate_archive_layout.'.php';
 
+//Sidebar Popup
+if ( $candidate_archive_layout == '2' ) {
+    jobly_get_template_part('contents-candidate/sidebar-search-filter-popup');
+}
+
+
 get_footer();
