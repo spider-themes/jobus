@@ -15,6 +15,7 @@ class Shortcode {
 
         add_shortcode( 'jobly_job_archive', [ $this, 'job_page_shortcode' ] );
         add_shortcode( 'jobly_company_archive', [ $this, 'company_page_shortcode' ] );
+        add_shortcode( 'jobly_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
 
     }
 
@@ -58,6 +59,26 @@ class Shortcode {
 
 
     /**
+     * Candidate Page Shortcode Handler.
+     *
+     * Generates the HTML content for the Candidate archive page.
+     *
+     * @param array $atts Shortcode attributes.
+     * @param string $content Shortcode content.
+     * @return string Generated HTML content.
+     */
+    public function candidate_page_shortcode( $atts, $content = '' )
+    {
+        ob_start();
+        self::candidate_page_layout( $atts );
+        $content .= ob_get_clean();
+
+        return $content;
+
+    }
+
+
+    /**
      * Displays the job archive page layout.
      *
      * @param array $args  Additional arguments for customizing the layout.
@@ -85,6 +106,23 @@ class Shortcode {
         if ( ! is_admin() ) {
             jobly_get_template( 'archive-company.php', [
                 'jobly_company_archive_layout' => $args['company_layout'],
+            ] );
+        }
+
+    }
+
+
+    /**
+     * Displays the candidate archive page layout.
+     *
+     * @param array $args  Additional arguments for customizing the layout.
+     * @return void
+     */
+    public static function candidate_page_layout( $args = [] ) {
+
+        if ( ! is_admin() ) {
+            jobly_get_template( 'archive-candidate.php', [
+                'jobly_candidate_archive_layout' => $args['candidate_layout'],
             ] );
         }
 

@@ -144,15 +144,14 @@ if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty(
 
 $candidate_query = new WP_Query($args);
 
-$candidate_archive_layout = jobly_opt('candidate_archive_layout');
+$candidate_archive_layout = isset($jobly_candidate_archive_layout) ? $jobly_candidate_archive_layout : jobly_opt('candidate_archive_layout');
 
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-'.$candidate_archive_layout.'.php';
+
+get_footer();
 
 //Sidebar Popup
 if ( $candidate_archive_layout == '2' ) {
     jobly_get_template_part('contents-candidate/sidebar-search-filter-popup');
 }
-
-
-get_footer();

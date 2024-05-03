@@ -13,10 +13,12 @@
   },
   "dependencies": {
     "@wordpress/block-editor": "^12.18.2",
+    "@wordpress/blocks": "^12.33.0",
     "@wordpress/components": "^25.16.0",
     "@wordpress/element": "^5.27.0",
-    "@wordpress/i18n": "^4.51.0",
-    "latest-version": "^7.0.0"
+    "@wordpress/i18n": "^4.56.0",
+    "latest-version": "^7.0.0",
+    "react": "^18.3.1"
   },
   "description": ""
 }
