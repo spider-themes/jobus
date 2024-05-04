@@ -217,8 +217,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                     <?php
                     $location = !empty($meta['candidate_location']) ? $meta['candidate_location'] : '';
+                    $latitude = $location['latitude'] ?? '';
+                    $longitude = $location['longitude'] ?? '';
                     $is_http = is_ssl() ? 'https://' : 'http://';
-                    $iframe_url = "{$is_http}maps.google.com/maps?q={$location['latitude']},{$location['longitude']}&z=12&output=embed";
+                    $iframe_url = "{$is_http}maps.google.com/maps?q={$latitude},{$longitude}&z=12&output=embed";
 
                     if ( $location ) {
                         ?>
