@@ -1,6 +1,6 @@
 <div class="job-search-one style-two position-relative">
-    <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" method="get" id="searchform">
-        <input type="hidden" name="post_type" value="job"/>
+    <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" method="get" id="searchform">
+        <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 
         <div class="row align-items-center jobly_srch_bor">
             <?php
@@ -40,8 +40,7 @@
 
                                 if ( $item['layout_type'] == 'dropdown' ) {
                                     ?>
-                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
-                                            id="<?php echo esc_attr($select_job_attr) ?>">
+                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                         <?php
                                         if ($job_specifications) {
                                             foreach ( $job_specifications as $job_spec_value ) {
@@ -56,9 +55,8 @@
                                         ?>
                                     </select>
                                     <?php
-                                } elseif ($item['layout_type'] == 'text' ) {
-                                    ?>
-                                    <input type="text" name="s" id="searchInput" placeholder="<?php esc_attr_e('Design, branding', 'jobly'); ?>" class="keyword">
+                                } elseif ($item['layout_type'] == 'text' ) { ?>
+                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
                                     <?php
                                 }
                             }

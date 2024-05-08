@@ -157,6 +157,19 @@ class Search_Form extends Widget_Base
         );
 
         $search_form_1->add_control(
+            'text_placeholder', [
+                'label' => esc_html__( 'Placeholder', 'jobly' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'condition' => [
+                    'layout_type' => 'text',
+                ],
+                'default' => 'Design, branding',
+            ]
+        );
+
+
+        $search_form_1->add_control(
             'column', [
                 'label' => __('Column', 'jobly'),
                 'type' => \Elementor\Controls_Manager::SELECT,
@@ -197,6 +210,20 @@ class Search_Form extends Widget_Base
                 'label' => __('Button Label', 'jobly'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __('Search', 'jobly'),
+            ]
+        );
+
+        $this->add_control(
+            'search_result_form', [
+                'label' => __('Search Result Page', 'jobly'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'job' => __('Job', 'jobly'),
+                    'company' => __('Company', 'jobly'),
+                    'candidate' => __('Candidate', 'jobly'),
+                ],
+                'default' => 'job',
+                'separator' => 'before'
             ]
         );
 
@@ -497,6 +524,8 @@ class Search_Form extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         extract($settings); //extract all settings array to variables converted to name of key
+
+        $search_result_form = !empty($settings['search_result_form']) ? $settings['search_result_form'] : '';
 
         $categories = get_terms(array(
 

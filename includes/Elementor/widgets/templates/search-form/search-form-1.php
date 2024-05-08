@@ -3,11 +3,12 @@ if (!defined('ABSPATH')) {
     exit(); // Exit if accessed directly.
 }
 
+
 ?>
 
-<div class="job-search-one position-relative me-xl-5">
-    <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" role="search" method="get">
-        <input type="hidden" name="post_type" value="job"/>
+<div class="job-search-one position-relative">
+    <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" role="search" method="post">
+        <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 
         <div class="row">
             <?php
@@ -43,23 +44,28 @@ if (!defined('ABSPATH')) {
                                 </select>
                                 <?php
                             } elseif ($job_specifications) {
-                                ?>
-                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
-                                        id="<?php echo esc_attr($select_job_attr) ?>">
-                                    <?php
-                                    if ($job_specifications) {
-                                        foreach ( $job_specifications as $job_spec_value ) {
-                                            $meta_value = $job_spec_value[ 'meta_values' ] ?? '';
-                                            $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                            $modifiedVal = strtolower($modifiedSelect);
-                                            ?>
-                                            <option value="<?php echo esc_attr($modifiedVal) ?>"><?php echo esc_html($meta_value) ?></option>
-                                            <?php
-                                        }
-                                    }
+
+                                if ( $item['layout_type'] == 'dropdown' ) {
                                     ?>
-                                </select>
-                                <?php
+                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                        <?php
+                                        if ($job_specifications) {
+                                            foreach ( $job_specifications as $job_spec_value ) {
+                                                $meta_value = $job_spec_value[ 'meta_values' ] ?? '';
+                                                $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                                $modifiedVal = strtolower($modifiedSelect);
+                                                ?>
+                                                <option value="<?php echo esc_attr($modifiedVal) ?>"><?php echo esc_html($meta_value) ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php
+                                } elseif ($item['layout_type'] == 'text' ) { ?>
+                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                    <?php
+                                }
                             }
                             ?>
                         </div>
