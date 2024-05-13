@@ -900,7 +900,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Host', 'jobly' ),
                 'desc'          => esc_html__( 'The SMTP server which will be used to send email. For example: smtp.gmail.com', 'jobly' ),
-                'default'       => 'mail.spider-themes.net',
             ),
 
             array(
@@ -920,7 +919,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Username', 'jobly' ),
                 'desc'          => esc_html__( 'Your SMTP Username.', 'jobly' ),
-                'default'       => 'no-reply@spider-themes.net',
             ),
 
             array(
@@ -928,7 +926,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Password', 'jobly' ),
                 'desc'          => esc_html__( 'Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options).', 'jobly' ),
-                'default'       => 'LKJKPuQ43Keqzry',
             ),
 
             array(
@@ -949,7 +946,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'number',
                 'title'         => esc_html__( 'SMTP Port', 'jobly' ),
                 'desc'          => esc_html__( 'The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead.', 'jobly' ),
-                'default'       => 465,
             ),
 
             array(
@@ -957,7 +953,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'From Email Address', 'jobly' ),
                 'desc'          => esc_html__( 'The email address which will be used as the From Address if it is not supplied to the mail function.', 'jobly' ),
-                'default'       => 'no-reply@spider-themes.net',
             ),
 
             array(
@@ -965,7 +960,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'From Name', 'jobly' ),
                 'desc'          => esc_html__( 'The name which will be used as the From Name if it is not supplied to the mail function.', 'jobly' ),
-                'default'       => 'EazyDocs',
             ),
 
         )

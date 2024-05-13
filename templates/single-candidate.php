@@ -13,18 +13,14 @@ $cv_attachment = !empty($meta['cv_attachment']) ? $meta['cv_attachment'] : '';
 $portfolio = !empty($meta['portfolio']) ? $meta['portfolio'] : '';
 $portfolio_ids = explode(',', $portfolio);
 
-$skills = get_terms( array(
-        'taxonomy' => 'candidate_skill'
-    )
-);
+$skills = get_the_terms(get_the_ID(), 'candidate_skill');
 
-include 'single-candidate/candidate-single-1.php';
+$candidate_single_layout_page = isset($meta['candidate_profile_layout']) ? $meta['candidate_profile_layout'] : ''; // Individual page specific layout
+$candidate_single_layout_opt = jobly_opt('candidate_profile_layout', '1'); // Default layout for the entire website
 
-
-?>
+$candidate_single_layout = !empty($candidate_single_layout_page) ? $candidate_single_layout_page : $candidate_single_layout_opt;
 
 
-
-<?php
+include 'single-candidate/candidate-single-'.$candidate_single_layout.'.php';
 
 get_footer();

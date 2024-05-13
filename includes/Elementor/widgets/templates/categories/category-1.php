@@ -10,11 +10,11 @@ if (!defined('ABSPATH')) {
         if (is_array($categories)) {
             foreach ( $categories as $index => $category ) {
                 $meta = get_term_meta($category->term_id, 'jobly_taxonomy_cat', true);
-                $active = $index == 0 ? ' active' : '';
+
                 ?>
                 <div class="card-style-one text-center mt-20 wow fadeInUp">
                     <a href="<?php echo get_category_link($category->term_id) ?>"
-                       class="bg wrapper<?php echo esc_attr($active) ?>">
+                       class="bg wrapper">
                         <?php
                         if (!empty($meta[ 'cat_img' ][ 'id' ])) { ?>
                             <div class="icon d-flex align-items-center justify-content-center">

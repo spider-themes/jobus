@@ -8,18 +8,10 @@
     @include transition(0.3s);
     &.bg {
         border:1px solid #ffff;
-        &.active {
-            background: $color-two;
-            border-color: #B9D640;
-        }
         &:hover {
             background: #f5ffcb;
             border-color: #f5ffcb;
         }
-    }
-    &:hover, &.active {
-        transform: translateY(-5px);
-        border-color: $color-three;
     }
     .icon {
         height: 25px;
@@ -31,8 +23,10 @@
         font-size: 18px;
         color:$heading;
         margin: 40px 0 50px;
+        transition:0.3s;
     }
     .total-job {
+        transition: 0.3s;
         font-size: 14px;
         color: rgba($color: #09321C, $alpha: 0.6);
     }
@@ -84,6 +78,7 @@
     }
     &:hover .icon {
         background: $color-two;
+        border-color: transparent;
     }
     .title {
         color:$heading;
@@ -93,6 +88,7 @@
         color: $color-three;
     }
     .total-job {
+        transition: 0.3s;
         font-size: 16px;
         color: rgba($color: #09321C, $alpha: 0.4);
     }

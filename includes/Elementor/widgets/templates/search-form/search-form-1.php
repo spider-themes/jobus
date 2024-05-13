@@ -74,8 +74,8 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="col-md-3">
-                <button type="submit" class="fw-500 text-uppercase h-100 tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+            <div class="col-md-3 job-search-btn-wrapper">
+                <button type="submit" class="job-search-one-btn fw-500 text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>

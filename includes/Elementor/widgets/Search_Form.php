@@ -8,13 +8,14 @@ namespace Jobly\Elementor\widgets;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 
 // Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
 /**
@@ -22,522 +23,680 @@ if (!defined('ABSPATH')) {
  * @package spider\Widgets
  * @since 1.0.0
  */
-class Search_Form extends Widget_Base
-{
+class Search_Form extends Widget_Base {
 
-    public function get_name ()
-    {
-        return 'jobly_search_Form';
-    }
+	public function get_name() {
+		return 'jobly_search_Form';
+	}
 
-    public function get_title ()
-    {
-        return esc_html__('Jobly Search Form', 'jobly');
-    }
+	public function get_title() {
+		return esc_html__( 'Jobly Search Form', 'jobly' );
+	}
 
-    public function get_icon ()
-    {
-        return 'eicon-search jobly-icon';
-    }
+	public function get_icon() {
+		return 'eicon-search jobly-icon';
+	}
 
-    public function get_keywords ()
-    {
-        return [ 'Jobly', 'Filter' ];
-    }
+	public function get_keywords() {
+		return [ 'Jobly', 'Filter' ];
+	}
 
-    public function get_categories ()
-    {
-        return [ 'jobly-elements' ];
-    }
+	public function get_categories() {
+		return [ 'jobly-elements' ];
+	}
 
 
-    /**
-     * Name: register_controls()
-     * Desc: Register controls for these widgets
-     * Params: no params
-     * Return: @void
-     * Since: @1.0.0
-     * Package: @jobly
-     * Author: spider-themes
-     */
-    protected function register_controls ()
-    {
-        $this->elementor_content_control();
-        $this->elementor_style_control();
-    }
+	/**
+	 * Name: register_controls()
+	 * Desc: Register controls for these widgets
+	 * Params: no params
+	 * Return: @void
+	 * Since: @1.0.0
+	 * Package: @jobly
+	 * Author: spider-themes
+	 */
+	protected function register_controls() {
+		$this->elementor_content_control();
+		$this->elementor_style_control();
+	}
 
 
-    /**
-     * Name: elementor_content_control()
-     * Desc: Register the Content Tab output on the Elementor editor.
-     * Params: no params
-     * Return: @void
-     * Since: @1.0.0
-     * Package: @jobly
-     * Author: spider-themes
-     */
-    public function elementor_content_control ()
-    {
+	/**
+	 * Name: elementor_content_control()
+	 * Desc: Register the Content Tab output on the Elementor editor.
+	 * Params: no params
+	 * Return: @void
+	 * Since: @1.0.0
+	 * Package: @jobly
+	 * Author: spider-themes
+	 */
+	public function elementor_content_control() {
 
-        //===================== Select Preset ===========================//
-        $this->start_controls_section(
-            'sec_layout', [
-                'label' => esc_html__('Preset Skins', 'jobly'),
-            ]
-        );
-
-        $this->add_control(
-            'layout', [
-                'label' => __('Layout', 'jobly'),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    '1' => [
-                        'title' => __('01: Search Form', 'jobly'),
-                        'icon' => 'search_form_1',
-                    ],
-                    '2' => [
-                        'title' => __( '02: Search Form', 'jobly' ),
-                        'icon'  => 'search_form_2',
-                    ],
-                    '3' => [
-                        'title' => __( '03: Search Form', 'jobly' ),
-                        'icon'  => 'search_form_3',
-                    ],
-                ],
-                'default' => '1'
-            ]
-        );
-
-        $this->end_controls_section();//End Select Style
-
-
-        //===================== Filter =========================//
-        $this->start_controls_section(
-            'sec_search_form', [
-                'label' => __('Search Form', 'jobly'),
-            ]
-        );
-
-        // A repeater for search form fields
-        $search_form_1 = new \Elementor\Repeater();
-        $search_form_1->add_control(
-            'attr_title', [
-                'label' => __('Attribute Title', 'jobly'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'label_block' => true,
-                'default' => __('Location', 'jobly'),
-            ]
-        );
-
-        $search_form_1->add_control(
-            'select_job_attr', [
-                'label' => __('Attribute', 'jobly'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => jobly_get_specs(),
-            ]
-        );
-
-        $search_form_1->add_control(
-            'layout_type', [
-                'label' => esc_html__( 'Attribute Layout', 'jobly' ),
-                'type' => \Elementor\Controls_Manager::CHOOSE,
-                'options' => [
-                    'dropdown' => [
-                        'title' => esc_html__( 'Type Select', 'jobly' ),
-                        'icon' => 'eicon-select',
-                    ],
-                    'text' => [
-                        'title' => esc_html__( 'Type Text', 'jobly' ),
-                        'icon' => 'eicon-text-field',
-                    ],
-                ],
-                'default' => 'dropdown',
-                'separator' => 'after'
-            ]
-        );
-
-        $search_form_1->add_control(
-            'text_placeholder', [
-                'label' => esc_html__( 'Placeholder', 'jobly' ),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'label_block' => true,
-                'condition' => [
-                    'layout_type' => 'text',
-                ],
-                'default' => 'Design, branding',
-            ]
-        );
-
-
-        $search_form_1->add_control(
-            'column', [
-                'label' => __('Column', 'jobly'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    '2' => __('Two Column', 'jobly'),
-                    '3' => __('Three Column', 'jobly'),
-                    '4' => __('Four Column', 'jobly'),
-                    '5' => __('Five Column', 'jobly'),
-                    '6' => __('Six Column', 'jobly'),
-                ],
-                'default' => '4',
-            ]
-        );
-
-        $this->add_control(
-            'job_search_form', [
-                'label' => __('Add Attributes', 'jobly'),
-                'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $search_form_1->get_controls(),
-                'title_field' => '{{{ attr_title }}}',
-                'prevent_empty' => false,
-                'condition' => [
-                    'layout' => [ '1', '3' ]
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'form_btn_heading', [
-                'label' => __('Form Button', 'jobly'),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_control(
-            'submit_btn', [
-                'label' => __('Button Label', 'jobly'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Search', 'jobly'),
-            ]
-        );
-
-        $this->add_control(
-            'search_result_form', [
-                'label' => __('Search Result Page', 'jobly'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    'job' => __('Job', 'jobly'),
-                    'company' => __('Company', 'jobly'),
-                    'candidate' => __('Candidate', 'jobly'),
-                ],
-                'default' => 'job',
-                'separator' => 'before'
-            ]
-        );
-
-        $this->end_controls_section(); //End Filter
-
-
-        //===================== Search Keywords =========================//
-        $this->start_controls_section(
-            'sec_keywords', [
-                'label' => __('Keywords', 'jobly'),
-            ]
-        );
-
-        // Switcher field is_keyword
-        $this->add_control(
-            'is_keyword', [
-                'label' => esc_html__('Keywords', 'jobly'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Show', 'jobly'),
-                'label_off' => esc_html__('Hide', 'jobly'),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-	    $this->add_control(
-		    'keyword_alignment',
-		    [
-			    'label'     => esc_html__( 'Alignment', 'jobly' ),
-			    'type'      => Controls_Manager::CHOOSE,
-			    'options'   => [
-				    'flex-start' => [
-					    'title' => esc_html__( 'Left', 'jobly' ),
-					    'icon'  => 'eicon-h-align-left',
-				    ],
-				    'center'     => [
-					    'title' => esc_html__( 'Center', 'jobly' ),
-					    'icon'  => ' eicon-h-align-center',
-				    ],
-				    'flex-end'   => [
-					    'title' => esc_html__( 'Right', 'jobly' ),
-					    'icon'  => 'eicon-h-align-right',
-				    ],
-			    ],
-			    'default'   => 'flex-start',
-			    'toggle'    => true,
-			    'selectors' => [
-				    '{{WRAPPER}} .filter-tags' => 'justify-content: {{VALUE}};',
-				    '{{WRAPPER}} .tags' => 'justify-content: {{VALUE}};',
-			    ],
-			    'separator' => 'before'
-		    ]
-	    );
-
-        $this->add_control(
-            'keyword_label', [
-                'label' => esc_html__('Keywords Label', 'docy-core'),
-                'type' => Controls_Manager::TEXT,
-                'label_block' => true,
-                'default' => 'Popular:',
-                'condition' => [
-                    'is_keyword' => 'yes',
-                ],
-            ]
-        );
-
-        //Keywords
-        $keywords = new \Elementor\Repeater();
-        $keywords->add_control(
-            'title', [
-                'label' => __('Title', 'jobly'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'label_block' => true,
-            ]
-        );
-
-        $keywords->add_control(
-            'link', [
-                'label' => __('Link', 'jobly'),
-                'type' => \Elementor\Controls_Manager::URL,
-                'default' => [
-                    'url' => '#'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'keywords', [
-                'label' => __('Add Keyword', 'jobly'),
-                'type' => \Elementor\Controls_Manager::REPEATER,
-                'fields' => $keywords->get_controls(),
-                'default' => [
-                    [
-                        'title' => __('Keyword #1', 'jobly'),
-                    ],
-                    [
-                        'title' => __('Keyword #2', 'jobly'),
-                    ],
-                ],
-                'title_field' => '{{{ title }}}',
-                'prevent_empty' => false,
-                'condition' => [
-                    'is_keyword' => 'yes',
-                ],
-            ]
-        );
-
-        $this->end_controls_section(); //End Search Keywords
-
-    }
-
-
-    /**
-     * Name: elementor_style_control()
-     * Desc: Register the Style Tab output on the Elementor editor.
-     * Params: no params
-     * Return: @void
-     * Since: @1.0.0
-     * Package: @jobly
-     * Author: spider-themes
-     */
-    public function elementor_style_control ()
-    {
-
-
-	    $this->start_controls_section(
-		    'jobly_search_section', [
-			    'label' => esc_html__( 'Search Field', 'jobly' ),
-			    'tab'   => Controls_Manager::TAB_STYLE,
-		    ]
-	    );
-
-	    //		----start search style 2-----//
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Background::get_type(),
-		    [
-			    'name'     => 'accordion_title_bg_color',
-			    'types'    => [ 'classic', 'gradient' ],
-			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-two form input',
-			    'condition' => [
-				    'layout'  => [ '2' ],
-				    'layout!' => [ '1', '3' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_control(
-		    'placeholder_color',
-		    [
-			    'label'     => esc_html__( 'placeholder Color', 'jobly' ),
-//			    'description' => esc_html__( 'Change placeholder color', 'jobly' ),
-			    'type'      => Controls_Manager::COLOR,
-			    'selectors' => [
-				    '{{WRAPPER}} #searchInput::placeholder' => 'color: {{VALUE}};',
-			    ],
-			    'condition' => [
-				    'layout'  => [ '2' ],
-				    'layout!' => [ '1', '3' ]
-			    ],
-		    ]
-	    );
-
-		//	---end search style 2---//
-
-	    //	---start search field style 3---//
-
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Border::get_type(),
-		    [
-			    'name'     => 'jobly_search_border',
-			    'label'    => esc_html__( 'Border', 'jobly' ),
-			    'selector' => '{{WRAPPER}} #searchform',
-			    'condition' => [
-				    'layout'  => [ '3' ],
-				    'layout!' => [ '1', '2' ]
-			    ],
-		    ]
-	    );
-
-	    $this->add_responsive_control(
-		    'acc_item_border_radius', [
-			    'label'      => esc_html__( 'Border Radius', 'jobly' ),
-			    'type'       => Controls_Manager::DIMENSIONS,
-			    'size_units' => [ 'px', '%', 'em' ],
-			    'selectors'  => [
-				    '{{WRAPPER}} #searchform' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-			    ],
-			    'condition' => [
-				    'layout'  => [ '3' ],
-				    'layout!' => [ '1', '2' ]
-			    ],
-		    ]
-	    );
-
-		//	---end search field style 3---//
+		//===================== Select Preset ===========================//
+		$this->start_controls_section(
+			'sec_layout', [
+				'label' => esc_html__( 'Preset Skins', 'jobly' ),
+			]
+		);
 
 		$this->add_control(
-			'button_heading',
-			[
-				'label' => esc_html__( 'Search Button', 'jobly' ),
-				'type'  => Controls_Manager::HEADING,
+			'layout', [
+				'label'   => esc_html__( 'Layout', 'jobly' ),
+				'type'    => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'1' => [
+						'title' => esc_html__( '01: Search Form', 'jobly' ),
+						'icon'  => 'search_form_1',
+					],
+					'2' => [
+						'title' => esc_html__( '02: Search Form', 'jobly' ),
+						'icon'  => 'search_form_2',
+					],
+					'3' => [
+						'title' => esc_html__( '03: Search Form', 'jobly' ),
+						'icon'  => 'search_form_3',
+					],
+				],
+				'default' => '1'
+			]
+		);
+
+		$this->end_controls_section();//End Select Style
+
+
+		//===================== Filter =========================//
+		$this->start_controls_section(
+			'sec_search_form', [
+				'label' => esc_html__( 'Search Form', 'jobly' ),
+			]
+		);
+
+		// A repeater for search form fields
+		$search_form_1 = new \Elementor\Repeater();
+		$search_form_1->add_control(
+			'attr_title', [
+				'label'       => esc_html__( 'Attribute Label', 'jobly' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'label_block' => true,
+			]
+		);
+
+		$search_form_1->add_control(
+			'select_job_attr', [
+				'label'   => esc_html__( 'Attribute', 'jobly' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'options' => jobly_get_specs(),
+			]
+		);
+
+		$search_form_1->add_control(
+			'layout_type', [
+				'label'     => esc_html__( 'Attribute Layout', 'jobly' ),
+				'type'      => \Elementor\Controls_Manager::CHOOSE,
+				'options'   => [
+					'dropdown' => [
+						'title' => esc_html__( 'Type Select', 'jobly' ),
+						'icon'  => 'eicon-select',
+					],
+					'text'     => [
+						'title' => esc_html__( 'Type Text', 'jobly' ),
+						'icon'  => 'eicon-text-field',
+					],
+				],
+				'default'   => 'dropdown',
+				'separator' => 'after'
+			]
+		);
+
+		$search_form_1->add_control(
+			'text_placeholder', [
+				'label'       => esc_html__( 'Placeholder', 'jobly' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'label_block' => true,
+				'condition'   => [
+					'layout_type' => 'text',
+				],
+				'default'     => 'Design, branding',
+			]
+		);
+
+
+		$search_form_1->add_control(
+			'column', [
+				'label'   => esc_html__( 'Column', 'jobly' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					'2' => esc_html__( 'Two Column', 'jobly' ),
+					'3' => esc_html__( 'Three Column', 'jobly' ),
+					'4' => esc_html__( 'Four Column', 'jobly' ),
+					'5' => esc_html__( 'Five Column', 'jobly' ),
+					'6' => esc_html__( 'Six Column', 'jobly' ),
+				],
+				'default' => '4',
+			]
+		);
+
+		$this->add_control(
+			'job_search_form', [
+				'label'         => esc_html__( 'Add Attributes', 'jobly' ),
+				'type'          => \Elementor\Controls_Manager::REPEATER,
+				'fields'        => $search_form_1->get_controls(),
+				'title_field'   => '{{{ attr_title }}}',
+				'prevent_empty' => false,
+				'default'       => [
+					[
+						'attr_title' => esc_html__( 'Location', 'jobly' ),
+						'column'     => '5'
+					],
+					[
+						'attr_title' => esc_html__( 'Job Type', 'jobly' ),
+						'column'     => '4'
+					],
+				],
+				'condition'     => [
+					'layout' => [ '1', '3' ]
+				],
+			]
+		);
+
+		$this->add_control(
+			'form_btn_heading', [
+				'label'     => esc_html__( 'Form Button', 'jobly' ),
+				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
 		);
 
-	//----start search Normal/Hover style 1,2,3-----//
-	    $this->start_controls_tabs(
-		    'style_search_tabs'
-	    );
-		//start normal
-	    $this->start_controls_tab(
-		    'style_accordion_icon_normal',
-		    [
-			    'label' => esc_html__( 'Normal', 'jobly' ),
-		    ]
-	    );
+		$this->add_control(
+			'submit_btn', [
+				'label'   => esc_html__( 'Button Label', 'jobly' ),
+				'type'    => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Search', 'jobly' ),
+			]
+		);
 
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Background::get_type(),
-		    [
-			    'name'     => 'search_bg',
-			    'types'    => [ 'classic', 'gradient' ],
-			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
+		$this->add_control(
+			'search_result_form', [
+				'label'     => esc_html__( 'Search Result Page', 'jobly' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'options'   => [
+					'job'       => esc_html__( 'Job', 'jobly' ),
+					'company'   => esc_html__( 'Company', 'jobly' ),
+					'candidate' => esc_html__( 'Candidate', 'jobly' ),
+				],
+				'default'   => 'job',
+				'separator' => 'before'
+			]
+		);
+
+		$this->end_controls_section(); //End Filter
+
+
+		//===================== Search Keywords =========================//
+		$this->start_controls_section(
+			'sec_keywords', [
+				'label' => esc_html__( 'Keywords', 'jobly' ),
+			]
+		);
+
+		// Switcher field is_keyword
+		$this->add_control(
+			'is_keyword', [
+				'label'        => esc_html__( 'Keywords', 'jobly' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Show', 'jobly' ),
+				'label_off'    => esc_html__( 'Hide', 'jobly' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'keyword_alignment',
+			[
+				'label'     => esc_html__( 'Alignment', 'jobly' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => [
+					'flex-start' => [
+						'title' => esc_html__( 'Left', 'jobly' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center'     => [
+						'title' => esc_html__( 'Center', 'jobly' ),
+						'icon'  => ' eicon-h-align-center',
+					],
+					'flex-end'   => [
+						'title' => esc_html__( 'Right', 'jobly' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default'   => 'flex-start',
+				'toggle'    => true,
+				'selectors' => [
+					'{{WRAPPER}} .filter-tags' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .tags'        => 'justify-content: {{VALUE}};',
+				],
+				'separator' => 'before'
+			]
+		);
+
+		$this->add_control(
+			'keyword_label', [
+				'label'       => esc_html__( 'Keywords Label', 'docy-core' ),
+				'type'        => Controls_Manager::TEXT,
+				'label_block' => true,
+				'default'     => 'Popular:',
+				'condition'   => [
+					'is_keyword' => 'yes',
+				],
+			]
+		);
+
+		//Keywords
+		$keywords = new \Elementor\Repeater();
+		$keywords->add_control(
+			'title', [
+				'label'       => esc_html__( 'Title', 'jobly' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'label_block' => true,
+			]
+		);
+
+		$keywords->add_control(
+			'link', [
+				'label'   => esc_html__( 'Link', 'jobly' ),
+				'type'    => \Elementor\Controls_Manager::URL,
+				'default' => [
+					'url' => '#'
+				]
+			]
+		);
+
+		$this->add_control(
+			'keywords', [
+				'label'         => esc_html__( 'Add Keyword', 'jobly' ),
+				'type'          => \Elementor\Controls_Manager::REPEATER,
+				'fields'        => $keywords->get_controls(),
+				'default'       => [
+					[
+						'title' => esc_html__( 'Keyword #1', 'jobly' ),
+					],
+					[
+						'title' => esc_html__( 'Keyword #2', 'jobly' ),
+					],
+				],
+				'title_field'   => '{{{ title }}}',
+				'prevent_empty' => false,
+				'condition'     => [
+					'is_keyword' => 'yes',
+				],
+			]
+		);
+
+		$this->end_controls_section(); //End Search Keywords
+
+	}
+
+
+	/**
+	 * Name: elementor_style_control()
+	 * Desc: Register the Style Tab output on the Elementor editor.
+	 * Params: no params
+	 * Return: @void
+	 * Since: @1.0.0
+	 * Package: @jobly
+	 * Author: spider-themes
+	 */
+	public function elementor_style_control() {
+
+
+		$this->start_controls_section(
+			'jobly_search_section', [
+				'label' => esc_html__( 'Search Form', 'jobly' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		//		----start search style 2-----//
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'      => 'accordion_title_bg_color',
+				'types'     => [ 'classic', 'gradient' ],
+				'exclude'   => [ 'image' ],
+				'selector'  => '{{WRAPPER}} .job-search-two form input',
+				'condition' => [
+					'layout'  => [ '2' ],
+					'layout!' => [ '1', '3' ]
+				],
+			]
+		);
+
+		$this->add_control(
+			'placeholder_color',
+			[
+				'label'     => esc_html__( 'Search Text Color', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} #searchInput::placeholder, .job-search-two form input' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'layout'  => [ '2' ],
+					'layout!' => [ '1', '3' ]
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name'      => 'jobly_search_border',
+				'label'     => esc_html__( 'Border', 'jobly' ),
+				'selector'  => '{{WRAPPER}} #searchform,
+							    {{WRAPPER}} .job-search-one form',
+				'condition' => [
+					'layout'  => [ '1', '3' ],
+					'layout!' => [ '2' ]
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'acc_item_border_radius', [
+				'label'      => esc_html__( 'Border Radius', 'jobly' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} #searchform'          => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .job-search-one form' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'layout'  => [ '1', '3' ],
+					'layout!' => [ '2' ]
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(), [
+				'name'     => 'search_box_shadow',
+				'selector' => '{{WRAPPER}} .job-search-one form',
+			]
+		);
+
+		$this->add_control(
+			'keyword_heading', [
+				'label'     => esc_html__( 'KeyWord', 'jobly' ),
+				'type'      => Controls_Manager::HEADING,
+				"separator" => 'before'
+			]
+		);
+
+		$this->start_controls_tabs(
+			'keyword_style_tabs'
+		);
+
+		$this->start_controls_tab(
+			'keyword_normal_tab',
+			[
+				'label' => esc_html__( 'Normal', 'jobly' ),
+			]
+		);
+
+		$this->add_control(
+			'keyword_title_color',
+			[
+				'label'     => esc_html__( 'Label Color', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .job-search-one .tags li' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .filter-tags li'          => 'color: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'keyword_color',
+			[
+				'label'     => esc_html__( 'Keyword Color ', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .job-search-one .tags li a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .filter-tags li a'          => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'keyword_hover_tab',
+			[
+				'label' => esc_html__( 'Hover', 'jobly' ),
+			]
+		);
+
+		$this->add_control(
+			'keyword_hover_color',
+			[
+				'label'     => esc_html__( 'Keyword Color ', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .job-search-one .tags li a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .filter-tags li a:hover'          => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
+		//===========================================//
+
+		$this->start_controls_section(
+			'search_btn_section', [
+				'label' => esc_html__( 'Search Button', 'jobly' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+
+		//----start search Normal/Hover style 1,2,3-----//
+		$this->start_controls_tabs(
+			'style_search_tabs'
+		);
+		//start normal
+		$this->start_controls_tab(
+			'style_accordion_icon_normal',
+			[
+				'label' => esc_html__( 'Normal', 'jobly' ),
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'search_bg',
+				'types'    => [ 'classic', 'gradient' ],
+				'exclude'  => [ 'image' ],
+				'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
 			                   {{WRAPPER}} .btn-five.border6,
 			                   {{WRAPPER}} .btn-five',
-		    ]
-	    );
+			]
+		);
 
-	    $this->add_control(
-		    'text_color',
-		    [
-			    'label'     => esc_html__( 'Text Color', 'jobly' ),
-			    'type'      => Controls_Manager::COLOR,
-			    'selectors' => [
-				    '{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five.border6' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five' => 'color: {{VALUE}};',
-			    ],
-		    ]
-	    );
+		$this->add_control(
+			'text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .btn-five.border6'                => 'color: {{VALUE}};',
+					'{{WRAPPER}} .btn-five'                        => 'color: {{VALUE}};',
+				],
+			]
+		);
 
-	    $this->end_controls_tab(); //End Normal
+		$this->end_controls_tab(); //End Normal
 
-	    //=== hover ====
-	    $this->start_controls_tab(
-		    'style_tab_title_active', [
-			    'label' => esc_html__( 'Hover', 'jobly' ),
-		    ]
-	    );
+		//=== hover ====
+		$this->start_controls_tab(
+			'style_tab_title_active', [
+				'label' => esc_html__( 'Hover', 'jobly' ),
+			]
+		);
 
-	    $this->add_group_control(
-		    \Elementor\Group_Control_Background::get_type(),
-		    [
-			    'name'     => 'search2_hover_bg',
-			    'types'    => [ 'classic', 'gradient' ],
-			    'exclude'  => [ 'image' ],
-			    'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'     => 'search2_hover_bg',
+				'types'    => [ 'classic', 'gradient' ],
+				'exclude'  => [ 'image' ],
+				'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
 	                           {{WRAPPER}} .btn-five.border6:hover,
 	                           {{WRAPPER}} .btn-five:hover',
-		    ]
-	    );
+			]
+		);
 
-	    $this->add_control(
-		    'text_hover_color',
-		    [
-			    'label'     => esc_html__( 'Text Color', 'jobly' ),
-			    'type'      => Controls_Manager::COLOR,
-			    'selectors' => [
-				    '{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five.border6:hover' => 'color: {{VALUE}};',
-				    '{{WRAPPER}} .btn-five:hover' => 'color: {{VALUE}};',
-			    ],
-		    ]
-	    );
+		$this->add_control(
+			'text_hover_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'jobly' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .btn-five.border6:hover'                => 'color: {{VALUE}};',
+					'{{WRAPPER}} .btn-five:hover'                        => 'color: {{VALUE}};',
+				],
+			]
+		);
 
-	    $this->end_controls_tab(); // End hover
-	    $this->end_controls_tabs(); // End jobi search Normal/hover/ State
-	//	---end search Normal/Hover style 1,2,3---//
+		$this->end_controls_tab(); // End hover
+		$this->end_controls_tabs(); // End jobi search Normal/hover/ State
+		//	---end search Normal/Hover style 1,2,3---//
+
+		$this->add_responsive_control(
+			'btn_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'jobly' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px' ],
+				'separator'  => 'before',
+				'range'      => [
+					'px' => [
+						'min'  => - 100,
+						'max'  => 100,
+						'step' => 5,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+				'condition'  => [
+					'layout'  => [ '1' ],
+					'layout!' => [ '2', '3' ]
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'btn_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'jobly' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'layout'  => [ '1' ],
+					'layout!' => [ '2', '3' ]
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'btn_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'jobly' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition'  => [
+					'layout'  => [ '1' ],
+					'layout!' => [ '2', '3' ]
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'btn_height',
+			[
+				'label'      => esc_html__( 'Height', 'jobly' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', 'vh', 'custom' ],
+				'range'      => [
+					'px' => [
+						'min' => 10,
+						'max' => 1400,
+					],
+					'vh' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .job-search-one form .search-btn' => 'height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'layout'  => [ '1' ],
+					'layout!' => [ '2', '3' ]
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 
-    }
+	}
 
 
+	/**
+	 * Name: elementor_render()
+	 * Desc: Render the widget output on the frontend.
+	 * Params: no params
+	 * Return: @void
+	 * Since: @1.0.0
+	 * Package: @jobly
+	 * Author: spider-themes
+	 */
+	protected function render() {
+		$settings = $this->get_settings_for_display();
+		extract( $settings ); //extract all settings array to variables converted to name of key
+
+		$search_result_form = ! empty( $settings['search_result_form'] ) ? $settings['search_result_form'] : '';
+
+		$categories = get_terms( array(
+
+			'taxonomy'   => 'job_cat',
+			'hide_empty' => true,
+
+		) );
 
 
-    /**
-     * Name: elementor_render()
-     * Desc: Render the widget output on the frontend.
-     * Params: no params
-     * Return: @void
-     * Since: @1.0.0
-     * Package: @jobly
-     * Author: spider-themes
-     */
-    protected function render ()
-    {
-        $settings = $this->get_settings_for_display();
-        extract($settings); //extract all settings array to variables converted to name of key
+		//================= Template Parts =================//
+		include "templates/search-form/search-form-{$settings['layout']}.php";
 
-        $search_result_form = !empty($settings['search_result_form']) ? $settings['search_result_form'] : '';
-
-        $categories = get_terms(array(
-
-            'taxonomy' => 'job_cat',
-            'hide_empty' => true,
-
-        ));
-
-
-        //================= Template Parts =================//
-        include "templates/search-form/search-form-{$settings['layout']}.php";
-
-    }
+	}
 
 }

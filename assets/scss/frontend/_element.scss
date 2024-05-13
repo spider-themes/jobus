@@ -43,17 +43,25 @@
                 color: rgba($color: #000000, $alpha: 0.7);
             }
         }
-        .search-btn {
-            letter-spacing: 0.8px;
-            background: $color-two;
-            color: #000;
-            border-radius: 0 10px 10px 0;
-            width: 195px;
-            margin-left: auto;
-            margin-right: -1px;
-            &:hover {
-                background: $color-three;
-                color: #fff;
+        .job-search-btn-wrapper {
+            display: flex;
+            align-items: center;
+            .search-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 62px;
+                height: 100%;
+                letter-spacing: 0.8px;
+                background: $color-two;
+                color: #000;
+                border-radius: 0 10px 10px 0;
+                margin-left: auto;
+                margin-right: -1px;
+                &:hover {
+                    background: $color-three;
+                    color: #fff;
+                }
             }
         }
         .search-btn-two {
@@ -131,6 +139,14 @@
         box-shadow: none;
     }
 }
+//.job-search-btn-wrapper {
+//    display: flex;
+//    align-items: center;
+//    .job-search-one-btn {
+//        height: 100%;
+//    }
+//}
+
 // Job Search Two
 .job-search-two form {
     height: 60px;

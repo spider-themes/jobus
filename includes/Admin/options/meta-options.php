@@ -36,7 +36,7 @@ if (class_exists('CSF')) {
                 'subtitle'  => esc_html__('Select the preferred layout for your job post for this page.', 'jobly'),
                 'options'   => array(
                     '1' => JOBLY_IMG . '/layout/job/single-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/job/single-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/job/single-layout-2.png',
                 ),
                 'default'   => '1'
             ),

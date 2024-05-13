@@ -1,4 +1,48 @@
 <?php
+/**
+ * The template for displaying titlebar
+ *
+ * @package jobi
+ */
+$post_author_id = get_post_field( 'post_author', get_the_ID() );
+$banner_shape_1 = jobi_opt('banner_shape_1');
+$banner_shape_2 = jobi_opt('banner_shape_2');
+?>
+<div class="inner-banner-one position-relative jobi-single-banner">
+    <div class="container">
+        <div class="position-relative">
+            <div class="row">
+                <div class="col-xl-8 m-auto text-center">
+                    <h1 class="blog-heading"><?php the_title() ?></h1>
+                    <div class="blog-pubish-date text-white mt-30 lg-mt-20">
+						<?php
+						if ( has_category() ) {
+							echo get_the_category_list(', ') . ' . ';
+						}
+						?>
+						<?php the_time(get_option('date_format')) ?> .
+						<?php esc_html_e('By', 'jobi'); ?>
+                        <a href="<?php echo get_author_posts_url($post_author_id) ?>">
+							<?php echo get_the_author_meta('display_name', $post_author_id) ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<?php
+	if (jobi_opt('is_banner_shapes') == true) {
+		if ( !empty($banner_shape_1['id'] ) ) {
+			echo wp_get_attachment_image($banner_shape_1[ 'id' ], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ));
+		}
+		if ( !empty($banner_shape_2['id'] ) ) {
+			echo wp_get_attachment_image($banner_shape_2['id'], 'full', false, array('class' => 'lazy-img shapes shape_02'));
+		}
+	}
+	?>
+</div>
+
+<?php
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
