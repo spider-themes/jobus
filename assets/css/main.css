@@ -7440,7 +7440,7 @@ img {
 }
 
 @media (max-width: 767px) {
-  .company-profiles .upper-filter {
+  .company-profiles .upper-filter, .candidates-profile .upper-filter {
     flex-wrap: wrap;
     gap: 24px;
   }

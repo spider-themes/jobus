@@ -821,6 +821,24 @@ function jobly_posts_count($post_type) {
 
 }
 
+/**
+ * Retrieve archive meta name based on the selected specification key.
+ */
+function jobly_meta_company_spec_name( $step = 1 ){
+
+    $meta_options               = get_option('jobly_opt');
+    $company_archive_meta     = $meta_options['company_archive_meta_'.$step];
+    $company_specifications   = $meta_options['company_specifications'];
+
+    if ( ! empty ( $company_specifications ) ) {
+        foreach( $company_specifications as $company_specification ) {
+            if ( $company_archive_meta == $company_specification['meta_key'] ) {
+                return $company_specification['meta_name'];
+            }
+        }
+    }
+}
+
 
 /**
  * Retrieve archive meta name based on the selected specification key.

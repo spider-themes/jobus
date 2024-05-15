@@ -107,7 +107,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             <?php
                                             if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
                                                 ?>
-                                                <p class="text-center"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                <p class="text-center text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
                                                 <?php
                                             }
 
@@ -157,7 +157,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     </h5>
                                                     <?php
                                                     if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) { ?>
-                                                        <p><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                        <p class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
                                                         <?php
                                                     }
                                                     ?>
@@ -165,35 +165,18 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </div>
                                         </div>
 
-                                        <div class="col-xl-3 col-lg-4 col-md-8">
-                                            <div class="d-flex align-items-center md-mt-20">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="team-text">
-                                                        <?php
-                                                        // Trim the content and get the first word
-                                                        $company_archive_meta_2 = jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2');
-
-                                                        // Get the first word
-                                                        $trim_content = explode(' ', wp_trim_words($company_archive_meta_2, 1, ''));
-                                                        $first_trim_content = $trim_content[0];
-
-                                                        // Get the remaining words after removing the first word
-                                                        $remaining_words = implode(' ', array_slice(explode(' ', wp_trim_words($company_archive_meta_2, 9999, '')), 1));
-
-                                                        // Check if the first word is numeric or ends with '+'
-                                                        if (is_numeric($first_trim_content) || substr($first_trim_content, -1) === '+') {
-                                                            ?>
-                                                            <span class="text-md fw-500 text-dark d-block"><?php echo esc_html($first_trim_content) ?></span>
-                                                            <?php echo esc_html($remaining_words) ?>
-                                                            <?php
-                                                        } else {
-                                                            echo esc_html($company_archive_meta_2);
-                                                        }
-                                                        ?>
+                                        <?php if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2')) : ?>
+                                            <div class="col-xl-3 col-lg-4 col-md-8">
+                                                <div class="d-flex align-items-center md-mt-20">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="team-text">
+                                                            <span class="text-md fw-500 text-dark d-block"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2') ?></span>
+                                                            <?php echo jobly_meta_company_spec_name(2) ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
 
                                         <div class="col-lg-3 col-md-4">
                                             <div class="btn-group d-flex align-items-center justify-content-md-end md-mt-20">

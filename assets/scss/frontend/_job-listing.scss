@@ -779,7 +779,7 @@
     }
 }
 
-.company-profiles {
+.company-profiles, .candidates-profile {
     .upper-filter {
         @media(max-width: 767px) {
             flex-wrap: wrap;
