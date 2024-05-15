@@ -13,6 +13,10 @@ class Assets {
     
     public static function jobly_enqueue_scripts() {
 
+	    // Register Style's
+	    wp_register_style( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.css' );
+
+
         // Enqueue Style's
         wp_enqueue_style( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css' );
         wp_enqueue_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css' );
@@ -24,6 +28,7 @@ class Assets {
 
         // Register Scripts
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
+        wp_register_script( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.js', [ 'jquery' ], '2.11.4', true );
 
         // Enqueue Scripts
         wp_enqueue_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );

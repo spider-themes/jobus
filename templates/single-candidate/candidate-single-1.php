@@ -7,6 +7,10 @@
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
 $banner_shape_1 = jobi_opt('banner_shape_1');
 $banner_shape_2 = jobi_opt('banner_shape_2');
+
+wp_enqueue_style('lightbox');
+wp_enqueue_script('lightbox');
+
 ?>
 <div class="inner-banner-one position-relative jobi-single-banner">
     <div class="container">
@@ -161,10 +165,11 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         <div class="candidate-portfolio-slider">
                             <?php
                             foreach ( $portfolio_ids as $item ) {
+                                $image_url = wp_get_attachment_image_url($item, 'full')
                                 ?>
                                 <div class="item">
-                                    <a href="#" class="w-100 d-blok">
-                                        <?php echo wp_get_attachment_image($item, 'full', '', ['class' => 'w-100']) ?>
+                                    <a href="<?php echo esc_url($image_url) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
+                                        <?php echo wp_get_attachment_image($item, 'jobly_280x268') ?>
                                     </a>
                                 </div>
                                 <?php

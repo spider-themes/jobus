@@ -3536,6 +3536,7 @@ img {
 }
 .candidates-profile-details .candidate-portfolio-slider .item a img {
   height: auto;
+  border-radius: 6px;
 }
 .candidates-profile-details .candidate-portfolio-slider .slick-dots {
   padding: 0;
@@ -3918,6 +3919,7 @@ img {
 }
 .candidates-profile-details-2 .candidate-portfolio-slider .item a img {
   height: auto;
+  border-radius: 6px;
 }
 .candidates-profile-details-2 .candidate-portfolio-slider .slick-dots {
   padding: 0;

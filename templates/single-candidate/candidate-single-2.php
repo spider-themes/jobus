@@ -1,3 +1,8 @@
+<?php
+wp_enqueue_style('lightbox');
+wp_enqueue_script('lightbox');
+?>
+
 <div class="inner-banner-one position-relative">
     <div class="container">
         <div class="candidate-profile-card candidate-profile-two list-layout">
@@ -194,22 +199,23 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                     }
 
                     if ( $portfolio_ids ) {
-                    ?>
-                    <h3 class="title"><?php esc_html_e('Portfolio', 'jobly') ?></h3>
-                    <div class="candidate-portfolio-slider">
-                        <?php
-                        foreach ( $portfolio_ids as $item ) {
-                            ?>
-                            <div class="item">
-                                <a href="#" class="w-100 d-blok">
-                                    <?php echo wp_get_attachment_image($item, 'full', '', ['class' => 'w-100']) ?>
-                                </a>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                    <?php
+	                    ?>
+                        <h3 class="title"><?php esc_html_e('Portfolio', 'jobly') ?></h3>
+                        <div class="candidate-portfolio-slider">
+		                    <?php
+		                    foreach ( $portfolio_ids as $item ) {
+			                    $image_url = wp_get_attachment_image_url($item, 'full')
+			                    ?>
+                                <div class="item">
+                                    <a href="<?php echo esc_url($image_url) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
+					                    <?php echo wp_get_attachment_image($item, 'jobly_280x268') ?>
+                                    </a>
+                                </div>
+			                    <?php
+		                    }
+		                    ?>
+                        </div>
+	                    <?php
                     }
                     ?>
                 </div>
