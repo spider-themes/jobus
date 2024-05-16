@@ -4,6 +4,7 @@
  *
  * @package jobi
  */
+$meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
 $banner_shape_1 = jobi_opt('banner_shape_1');
 $banner_shape_2 = jobi_opt('banner_shape_2');
@@ -45,13 +46,6 @@ wp_enqueue_script('lightbox');
 	}
 	?>
 </div>
-
-<?php
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
-?>
 
 <section class="candidates-profile pt-100 lg-pt-70 pb-150 lg-pb-80">
     <div class="container">
@@ -265,13 +259,15 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                     </div>
 
                     <?php
-                    $location = !empty($meta['candidate_location']) ? $meta['candidate_location'] : '';
-                    $latitude = $location['latitude'] ?? '';
-                    $longitude = $location['longitude'] ?? '';
-                    $is_http = is_ssl() ? 'https://' : 'http://';
-                    $iframe_url = "{$is_http}maps.google.com/maps?q={$latitude},{$longitude}&z=12&output=embed";
+                    $location = $meta['candidate_location'] ?? '';
 
-                    if ( $location ) {
+                    if ( is_array($location) ) {
+                        $latitude = $location['latitude'] ?? '';
+                        $longitude = $location['longitude'] ?? '';
+                        $address_encoded = urlencode($location['address']); // URL encode the address for safety
+
+                        $is_http = is_ssl() ? 'https://' : 'http://';
+                        $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e('Location', 'jobly') ?></h4>
                         <div class="map-area mb-60 md-mb-40">
