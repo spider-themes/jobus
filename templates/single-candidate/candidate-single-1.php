@@ -4,13 +4,13 @@
  *
  * @package jobi
  */
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+$meta           = get_post_meta( get_the_ID(), 'jobly_meta_candidate_options', true );
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
-$banner_shape_1 = jobi_opt('banner_shape_1');
-$banner_shape_2 = jobi_opt('banner_shape_2');
+$banner_shape_1 = jobi_opt( 'banner_shape_1' );
+$banner_shape_2 = jobi_opt( 'banner_shape_2' );
 
-wp_enqueue_style('lightbox');
-wp_enqueue_script('lightbox');
+wp_enqueue_style( 'lightbox' );
+wp_enqueue_script( 'lightbox' );
 
 ?>
 <div class="inner-banner-one position-relative jobi-single-banner">
@@ -22,13 +22,13 @@ wp_enqueue_script('lightbox');
                     <div class="blog-pubish-date text-white mt-30 lg-mt-20">
 						<?php
 						if ( has_category() ) {
-							echo get_the_category_list(', ') . ' . ';
+							echo get_the_category_list( ', ' ) . ' . ';
 						}
 						?>
-						<?php the_time(get_option('date_format')) ?> .
-						<?php esc_html_e('By', 'jobi'); ?>
-                        <a href="<?php echo get_author_posts_url($post_author_id) ?>">
-							<?php echo get_the_author_meta('display_name', $post_author_id) ?>
+						<?php the_time( get_option( 'date_format' ) ) ?> .
+						<?php esc_html_e( 'By', 'jobi' ); ?>
+                        <a href="<?php echo get_author_posts_url( $post_author_id ) ?>">
+							<?php echo get_the_author_meta( 'display_name', $post_author_id ) ?>
                         </a>
                     </div>
                 </div>
@@ -36,12 +36,12 @@ wp_enqueue_script('lightbox');
         </div>
     </div>
 	<?php
-	if (jobi_opt('is_banner_shapes') == true) {
-		if ( !empty($banner_shape_1['id'] ) ) {
-			echo wp_get_attachment_image($banner_shape_1[ 'id' ], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ));
+	if ( jobi_opt( 'is_banner_shapes' ) == true ) {
+		if ( ! empty( $banner_shape_1['id'] ) ) {
+			echo wp_get_attachment_image( $banner_shape_1['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
 		}
-		if ( !empty($banner_shape_2['id'] ) ) {
-			echo wp_get_attachment_image($banner_shape_2['id'], 'full', false, array('class' => 'lazy-img shapes shape_02'));
+		if ( ! empty( $banner_shape_2['id'] ) ) {
+			echo wp_get_attachment_image( $banner_shape_2['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_02' ) );
 		}
 	}
 	?>
@@ -53,126 +53,130 @@ wp_enqueue_script('lightbox');
             <div class="col-xxl-9 col-lg-8">
                 <div class="candidates-profile-details me-xxl-5 pe-xxl-4">
                     <div class="inner-card border-style mb-65 lg-mb-40">
-                        <?php the_content() ?>
+						<?php the_content() ?>
                     </div>
-                    <?php
-                    if ( !empty($meta['video_url']) ) { ?>
-                        <h3 class="title"><?php esc_html_e('Intro', 'jobly') ?></h3>
-                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50" style="background-image: url(<?php echo esc_url($meta['bg_img']['url']) ?>)">
-                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="<?php echo esc_url($meta['video_url']) ?>">
+					<?php
+					if ( ! empty( $meta['video_url'] ) ) { ?>
+                        <h3 class="title"><?php esc_html_e( 'Intro', 'jobly' ) ?></h3>
+                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                             style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ) ?>)">
+                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
+                               href="<?php echo esc_url( $meta['video_url'] ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    if ( $educations ) {
-                        ?>
+					if ( $educations ) {
+						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e('Education', 'jobly') ?></h3>
+                            <h3 class="title"><?php esc_html_e( 'Education', 'jobly' ) ?></h3>
                             <div class="time-line-data position-relative pt-15">
-                                <?php
-                                foreach ( $educations as $item ) {
-                                    ?>
+								<?php
+								foreach ( $educations as $item ) {
+									?>
                                     <div class="info position-relative">
-                                        <?php
-                                        if ( !empty($item['sl_num']) ) { ?>
-                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['title']) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html($item['title']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['academy']) ) { ?>
-                                            <h4><?php echo esc_html($item['academy']) ?></h4>
-                                            <?php
-                                        }
-                                        if ( !empty($item['description']) ) { ?>
-                                            <?php echo wp_kses_post(wpautop($item['description'])) ?>
-                                            <?php
-                                        }
-                                        ?>
+										<?php
+										if ( ! empty( $item['sl_num'] ) ) { ?>
+                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['title'] ) ) { ?>
+                                            <div class="text_1 fw-500"><?php echo esc_html( $item['title'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['academy'] ) ) { ?>
+                                            <h4><?php echo esc_html( $item['academy'] ) ?></h4>
+											<?php
+										}
+										if ( ! empty( $item['description'] ) ) { ?>
+											<?php echo wp_kses_post( wpautop( $item['description'] ) ) ?>
+											<?php
+										}
+										?>
                                     </div>
-                                    <?php
-                                }
-                                ?>
+									<?php
+								}
+								?>
                             </div>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    if ( is_array($skills )) {
-                        ?>
+					if ( is_array( $skills ) ) {
+						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e('Skills', 'jobly') ?></h3>
+                            <h3 class="title"><?php esc_html_e( 'Skills', 'jobly' ) ?></h3>
                             <ul class="style-none skill-tags d-flex flex-wrap pb-25">
-                                <?php
-                                foreach( $skills as $skill ) {
-                                    echo '<li>'.esc_html($skill->name).'</li>';
-                                }
-                                ?>
+								<?php
+								foreach ( $skills as $skill ) {
+									echo '<li>' . esc_html( $skill->name ) . '</li>';
+								}
+								?>
                             </ul>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    if ( $experience ) {
-                        ?>
+					if ( $experience ) {
+						?>
                         <div class="inner-card border-style mb-60 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e('Work Experience', 'jobly') ?></h3>
+                            <h3 class="title"><?php esc_html_e( 'Work Experience', 'jobly' ) ?></h3>
                             <div class="time-line-data position-relative pt-15">
-                                <?php
-                                foreach ( $experience as $item ) {
-                                    ?>
+								<?php
+								foreach ( $experience as $item ) {
+									?>
                                     <div class="info position-relative">
-                                        <?php
-                                        if ( !empty($item['sl_num']) ) { ?>
-                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['start_date']) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html($item['start_date']) ?> - <?php echo esc_html($item['end_date']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['title']) ) { ?>
-                                            <h4><?php echo esc_html($item['title']) ?></h4>
-                                            <?php
-                                        }
-                                        if ( !empty($item['description']) ) { ?>
-                                            <?php echo wp_kses_post(wpautop($item['description'])) ?>
-                                            <?php
-                                        }
-                                        ?>
+										<?php
+										if ( ! empty( $item['sl_num'] ) ) { ?>
+                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['start_date'] ) ) { ?>
+                                            <div class="text_1 fw-500"><?php echo esc_html( $item['start_date'] ) ?>
+                                                - <?php echo esc_html( $item['end_date'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['title'] ) ) { ?>
+                                            <h4><?php echo esc_html( $item['title'] ) ?></h4>
+											<?php
+										}
+										if ( ! empty( $item['description'] ) ) { ?>
+											<?php echo wp_kses_post( wpautop( $item['description'] ) ) ?>
+											<?php
+										}
+										?>
                                     </div>
-                                    <?php
-                                }
-                                ?>
+									<?php
+								}
+								?>
                             </div>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    if ( $portfolio_ids ) {
-                        ?>
-                        <h3 class="title"><?php esc_html_e('Portfolio', 'jobly') ?></h3>
+					if ( $portfolio_ids ) {
+						?>
+                        <h3 class="title"><?php esc_html_e( 'Portfolio', 'jobly' ) ?></h3>
                         <div class="candidate-portfolio-slider">
-                            <?php
-                            foreach ( $portfolio_ids as $item ) {
-                                $image_url = wp_get_attachment_image_url($item, 'full')
-                                ?>
+							<?php
+							foreach ( $portfolio_ids as $item ) {
+								$image_url = wp_get_attachment_image_url( $item, 'full' )
+								?>
                                 <div class="item">
-                                    <a href="<?php echo esc_url($image_url) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
-                                        <?php echo wp_get_attachment_image($item, 'jobly_280x268') ?>
+                                    <a href="<?php echo esc_url( $image_url ) ?> "
+                                       class="example-image-link w-100 d-blok" data-lightbox="example-set">
+										<?php echo wp_get_attachment_image( $item, 'jobly_280x268' ) ?>
                                     </a>
                                 </div>
-                                <?php
-                            }
-                            ?>
+								<?php
+							}
+							?>
                         </div>
-                        <?php
-                    }
-                    ?>
+						<?php
+					}
+					?>
                 </div>
             </div>
 
@@ -182,148 +186,135 @@ wp_enqueue_script('lightbox');
                     <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                         <div class="pt-25">
                             <div class="cadidate-avatar m-auto">
-                                <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle w-100']) ?>
+								<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle w-100' ] ) ?>
                             </div>
                         </div>
                         <h3 class="cadidate-name text-center"><?php the_title() ?></h3>
                         <div class="text-center pb-25">
                             <a href="#" class="invite-btn fw-500">
-                                <?php esc_html_e( 'Invite', 'jobly' ) ?>
+								<?php esc_html_e( 'Invite', 'jobly' ) ?>
                             </a>
                         </div>
 
-                        <?php
-                        $specifications = jobly_opt('candidate_specifications');
-                        if ($specifications) {
-                            ?>
+						<?php
+						$specifications = jobly_opt( 'candidate_specifications' );
+						if ( $specifications ) {
+							?>
                             <ul class="style-none">
-                                <?php
-                                foreach ( $specifications as $field ) {
-                                    $meta_name = $field[ 'meta_name' ] ?? '';
-                                    $meta_key = $field[ 'meta_key' ] ?? '';
+								<?php
+								foreach ( $specifications as $field ) {
+									$meta_name = $field['meta_name'] ?? '';
+									$meta_key  = $field['meta_key'] ?? '';
 
-                                    // Get the stored meta-values
-                                    $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+									// Get the stored meta-values
+									$meta_options = get_post_meta( get_the_ID(), 'jobly_meta_candidate_options', true );
 
-
-
-                                    if ( isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ]) ) {
-                                        ?>
+									if ( isset( $meta_options[ $meta_key ] ) && ! empty( $meta_options[ $meta_key ] ) ) {
+										?>
                                         <li>
-                                            <?php
-                                            if (isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ])) {
-                                                echo '<span>' . esc_html($meta_name) . ':</span>';
-                                            }
-                                            if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
-                                                echo '<div class="text-capitalize">';
-                                                foreach ( $meta_options[ $meta_key ] as $value ) {
-                                                    $trim_value = str_replace('@space@', ' ', $value);
-                                                    echo esc_html($trim_value);
-                                                }
-                                                echo '</div>';
-                                            }
-                                            ?>
+											<?php
+											if ( isset( $meta_options[ $meta_key ] ) && ! empty( $meta_options[ $meta_key ] ) ) {
+												echo '<span>' . esc_html( $meta_name ) . ':</span>';
+											}
+											if ( ! empty( $meta_options[ $meta_key ] && is_array( $meta_options[ $meta_key ] ) ) ) {
+												echo '<div class="text-capitalize">';
+												foreach ( $meta_options[ $meta_key ] as $value ) {
+													$trim_value = str_replace( '@space@', ' ', $value );
+													echo esc_html( $trim_value );
+												}
+												echo '</div>';
+											}
+											?>
                                         </li>
-                                        <?php
-                                    }
-                                }
+										<?php
+									}
+								}
 
-                                $social_icons = !empty($meta['social_icons']) ? $meta['social_icons'] : '';
-                                if (is_array($social_icons)) {
-                                    ?>
+								$social_icons = ! empty( $meta['social_icons'] ) ? $meta['social_icons'] : '';
+								if ( is_array( $social_icons ) ) {
+									?>
                                     <li>
-                                        <span><?php esc_html_e('Social: ', 'jobly'); ?></span>
+                                        <span><?php esc_html_e( 'Social: ', 'jobly' ); ?></span>
                                         <div>
-                                            <?php
-                                            foreach ( $social_icons as $item ) {
-                                                if (!empty($item[ 'url' ])) { ?>
-                                                    <a href="<?php echo esc_url($item[ 'url' ]) ?>" class="me-3">
-                                                        <i class="<?php echo esc_attr($item[ 'icon' ]) ?>"></i>
+											<?php
+											foreach ( $social_icons as $item ) {
+												if ( ! empty( $item['url'] ) ) { ?>
+                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="me-3">
+                                                        <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                     </a>
-                                                    <?php
-                                                }
-                                            }
-                                            ?>
+													<?php
+												}
+											}
+											?>
                                         </div>
                                     </li>
-                                    <?php
-                                }
-                                ?>
+									<?php
+								}
+								?>
                             </ul>
-                            <a href="<?php echo esc_url($cv_attachment) ?>" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
-                                <?php esc_html_e('Download CV', 'jobly') ?>
+                            <a href="<?php echo esc_url( $cv_attachment ) ?>"
+                               class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
+								<?php esc_html_e( 'Download CV', 'jobly' ) ?>
                             </a>
-                            <?php
-                        }
-                        ?>
+							<?php
+						}
+						?>
                     </div>
 
-                    <?php
-                    $location = $meta['candidate_location'] ?? '';
+					<?php
+					$location = $meta['candidate_location'] ?? '';
 
-                    if ( is_array($location) ) {
-                        $latitude = $location['latitude'] ?? '';
-                        $longitude = $location['longitude'] ?? '';
-                        $address_encoded = urlencode($location['address']); // URL encode the address for safety
+					if ( is_array( $location ) ) {
+						$latitude        = $location['latitude'] ?? '';
+						$longitude       = $location['longitude'] ?? '';
+						$address_encoded = urlencode( $location['address'] ); // URL encode the address for safety
 
-                        $is_http = is_ssl() ? 'https://' : 'http://';
-                        $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
-                        ?>
-                        <h4 class="sidebar-title"><?php esc_html_e('Location', 'jobly') ?></h4>
+						$is_http    = is_ssl() ? 'https://' : 'http://';
+						$iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
+						?>
+                        <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobly' ) ?></h4>
                         <div class="map-area mb-60 md-mb-40">
                             <div class="gmap_canvas h-100 w-100">
-                                <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url($iframe_url); ?>"></iframe>
+                                <iframe class="gmap_iframe h-100 w-100"
+                                        src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    // Handle form submission
-                    if (isset($_POST['send_message'])) {
-
-                        // Retrieve form field values
-                        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
-                        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
-                        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
-                        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-
-                        // Set email subject
-                        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
-
-                        // Set email headers
-                        $headers[] = "From: $sender_name <$sender_email>";
-                        $headers[] = "Reply-To: $sender_email";
-
-                        $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
-
-                        // Send email using SMTP
-                        wp_mail($candidate_mail, $subject, $message, $headers);
-                    }
-                    ?>
-                    <h4 class="sidebar-title"><?php esc_html_e('Email', 'jobly') ?> <?php the_title() ?></h4>
+					?>
+                    <h4 class="sidebar-title"><?php esc_html_e( 'Email', 'jobly' ) ?><?php the_title() ?></h4>
                     <div class="email-form bg-wrapper bg-color">
-                        <p><?php esc_html_e('Your email address & profile will be shown to the recipient.', 'jobly') ?></p>
+                        <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobly' ) ?></p>
 
-                        <form action="<?php echo esc_url(get_the_permalink()) ?>" method="post">
+                        <form id="email-form" method="post">
+							<?php wp_nonce_field( 'contact_form_nonce', 'contact_form_nonce' ); ?>
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e('Your Name*', 'jobly') ?>" required>
+                                <input type="text" name="sender_name" id="sender_name"
+                                       placeholder="<?php esc_attr_e( 'Your Name*', 'jobly' ) ?>" required>
                             </div>
                             <div class="d-sm-flex mb-25">
-                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e('Your Email*', 'jobly') ?>" required>
+                                <input type="email" name="sender_email" id="sender_email"
+                                       placeholder="<?php esc_attr_e( 'Your Email*', 'jobly' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e('Your Subject', 'jobly') ?>">
+                                <input type="text" name="sender_subject" id="sender_subject"
+                                       placeholder="<?php esc_attr_e( 'Your Subject', 'jobly' ) ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
-                                <textarea name="message" id="message" placeholder="<?php esc_attr_e('Your Message', 'jobly') ?>"></textarea>
+                                <textarea name="message" id="message"
+                                          placeholder="<?php esc_attr_e( 'Your Message', 'jobly' ) ?>"></textarea>
                             </div>
+
                             <div class="d-sm-flex">
-                                <button type="submit" name="send_message" class="btn-ten fw-500 text-white flex-fill text-center tran3s">
-                                    <?php esc_html_e('Send Message', 'jobly') ?>
+                                <button type="submit" name="send_message"
+                                        class="btn-ten fw-500 text-white flex-fill text-center tran3s">
+									<?php esc_html_e( 'Send Message', 'jobly' ) ?>
                                 </button>
                             </div>
+                            <div id="email-form-message" class="email-form-message"></div>
                         </form>
 
                     </div>
@@ -334,3 +325,38 @@ wp_enqueue_script('lightbox');
         </div>
     </div>
 </section>
+
+<script>
+    ;(function ($) {
+
+        'use strict';
+        $(document).ready(function () {
+            $('#email-form').on('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                let formData = $(this).serialize(); // Serialize form data
+                let ajaxurl = jobly_local.ajaxurl;
+
+                $.ajax({
+                    url: ajaxurl, // WordPress AJAX URL
+                    type: 'POST',
+                    data: formData + '&action=send_contact_email&security=' + $('#contact_form_nonce').val(), // Combine form data with additional fields
+                    success: function(response) {
+                        var messageContainer = $('#email-form-message');
+                        messageContainer.removeClass('success error'); // Clear any previous messages
+
+                        if (response.success) {
+                            messageContainer.addClass('success').text(response.data);
+                        } else {
+                            messageContainer.addClass('error').text(response.data);
+                        }
+                    },
+                    error: function() {
+                        $('#email-form-message').addClass('error').text('There was an error with the AJAX request.');
+                    }
+                });
+            });
+        });
+    })(jQuery);
+
+</script>

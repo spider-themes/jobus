@@ -146,17 +146,20 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     </div>
                                                     <?php
                                                 }
-                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3' )) {
-                                                    ?>
-                                                    <div class="col-md-6">
-                                                        <div class="candidate-info mt-10">
-                                                            <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                }
                                                 ?>
+                                                <div class="col-md-6">
+                                                    <div class="candidate-info mt-10">
+                                                        <span><?php esc_html_e('Location', 'jobly'); ?></span>
+                                                        <?php
+                                                        $locations = get_the_terms(get_the_ID(), 'candidate_location');
+                                                        foreach ($locations as $location ) {
+                                                            ?>
+                                                            <div class="text-capitalize"><?php echo $location->name ?></div>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                             
                                             <div class="row gx-2 pt-25 sm-pt-10">

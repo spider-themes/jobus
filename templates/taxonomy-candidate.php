@@ -16,6 +16,7 @@ get_header();
 // Get the current job category and job tag
 $current_candidate_cat = get_term_by('slug', get_query_var('candidate_cat'), 'candidate_cat');
 $current_candidate_skill = get_term_by('slug', get_query_var('candidate_skill'), 'candidate_skill');
+$current_candidate_location = get_term_by('slug', get_query_var('candidate_location'), 'candidate_location');
 
 // These parameters are used to determine the sorting order of job posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
@@ -29,7 +30,7 @@ $args = array(
     'order'          => $selected_order,
 );
 
-if ($current_candidate_cat || $current_candidate_skill ) {
+if ($current_candidate_cat || $current_candidate_location || $current_candidate_skill) {
     $args['tax_query'] = array(
         'relation' => 'OR',//Must satisfy at least one taxonomy query
         array(
@@ -37,6 +38,11 @@ if ($current_candidate_cat || $current_candidate_skill ) {
             'field'    => 'slug',
             'terms'    => get_query_var('candidate_cat'),
         ),
+	    array(
+		    'taxonomy' => 'candidate_location',
+		    'field'    => 'slug',
+		    'terms'    => get_query_var('candidate_location'),
+	    ),
         array(
             'taxonomy' => 'candidate_skill',
             'field'    => 'slug',
@@ -174,6 +180,19 @@ $candidate_count = $candidate_query->found_posts;
                                                 <?php
                                             }
                                             ?>
+                                            <div class="col-md-6">
+                                                <div class="candidate-info mt-10">
+                                                    <span><?php esc_html_e('Location', 'jobly'); ?></span>
+			                                        <?php
+			                                        $locations = get_the_terms(get_the_ID(), 'candidate_location');
+			                                        foreach ($locations as $location ) {
+				                                        ?>
+                                                        <div class="text-capitalize"><?php echo $location->name ?></div>
+				                                        <?php
+			                                        }
+			                                        ?>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row gx-2 pt-25 sm-pt-10">

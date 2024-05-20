@@ -35,6 +35,10 @@ class Assets {
         wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );
         wp_enqueue_script( 'slick', JOBLY_VEND . '/slick/slick.min.js', [ 'jquery' ], '2.2.0', true );
         wp_enqueue_script( 'jobly-public', JOBLY_JS . '/public.js', [ 'jquery' ], JOBLY_VERSION, true );
+        //wp_enqueue_script( 'jobly-public', JOBLY_JS . '/candidate-ajax-login.js', [ 'ajax' ], JOBLY_VERSION, true );
+		wp_localize_script( 'jobly-public', 'jobly_local', array(
+			'ajaxurl' => admin_url('admin-ajax.php')
+		));
 
     }
         
