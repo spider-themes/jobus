@@ -190,6 +190,18 @@ class Post_Types {
             ]
         ));
 
+	    register_taxonomy( 'company_location', 'company', array(
+		    'public'                => true,
+		    'hierarchical'          => true,
+		    'show_ui'               => true,
+		    'show_admin_column'     => true,
+		    'show_in_nav_menus'     => true,
+		    'show_in_rest'          => true,
+		    'labels'                => [
+			    'name'  => esc_html__( 'Location', 'jobly'),
+		    ]
+	    ));
+
 
     }
 

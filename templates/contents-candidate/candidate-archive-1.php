@@ -147,19 +147,24 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php
                                                 }
                                                 ?>
+
+	                                            <?php
+	                                            $locations = get_the_terms(get_the_ID(), 'candidate_location');
+	                                            if (!empty($locations )) { ?>
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
                                                         <span><?php esc_html_e('Location', 'jobly'); ?></span>
                                                         <?php
-                                                        $locations = get_the_terms(get_the_ID(), 'candidate_location');
-                                                        foreach ($locations as $location ) {
-                                                            ?>
-                                                            <div class="text-capitalize"><?php echo $location->name ?></div>
-                                                            <?php
-                                                        }
-                                                        ?>
+                                                        foreach ($locations as $location ) { ?>
+                                                        <div class="text-capitalize"><?php echo $location->name ?></div>
+	                                                    <?php
+	                                                    }
+	                                                    ?>
                                                     </div>
                                                 </div>
+		                                            <?php
+	                                            }
+	                                            ?>
                                             </div>
                                             
                                             <div class="row gx-2 pt-25 sm-pt-10">
