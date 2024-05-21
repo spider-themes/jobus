@@ -17,3 +17,65 @@ include 'single-job/job-single-'.$job_single_layout.'.php';
 
 
 get_footer();
+
+?>
+
+    <div class="modal fade" id="applyJobModal" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applyJobModalLabel">Apply for this Position</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+
+                        <?php wp_nonce_field('job_application_nonce', 'job_application_nonce_field'); ?>
+
+                        <form action="#" name="job_application_form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" name="candidate_fname" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" name="candidate_lname" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="candidate_email" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="candidate_phone">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="candidate_message" rows="4"></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="upload_cv" class="form-label">Upload CV (PDF)</label>
+                                    <input type="file" class="form-control" id="upload_cv" name="candidate_cv" accept=".pdf">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<?php

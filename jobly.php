@@ -99,7 +99,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
             require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options.php';
+            require_once __DIR__ . '/includes/Admin/options/meta-options-job.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
@@ -111,6 +111,10 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';
+			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
+
+            //Admin Template Meta
+            //require_once __DIR__ . '/includes/Admin/templates/meta/applicant-single.php';
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -151,6 +155,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 			}
 
             new Jobly\Admin\Post_Types();
+            new Jobly\Admin\Posttypes\Job_Application();
             new Jobly\Frontend\Shortcode();
 
 		}

@@ -891,15 +891,30 @@ if( class_exists( 'CSF' ) ) {
     // SMTP Settings
     CSF::createSection( $settings_prefix, array(
         'id'    => 'jobly_smtp', // Set a unique slug-like ID
-        'title' => esc_html__( 'SMTP Settings', 'jobly' ),
+        'title' => esc_html__( 'SMTP Configuration', 'jobly' ),
         'icon' => 'fa fa-hashtag',
         'fields' => array(
+
+            array(
+                'type'    => 'notice',
+                'style'   => 'info',
+                'content' => __('<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.', 'jobly')
+            ),
+
+            array(
+                'id'            => 'is_smtp',
+                'type'          => 'switcher',
+                'title'         => esc_html__( 'SMTP (On/OFF)', 'jobly' ),
+                'desc'          => esc_html__( 'Enable or disable the SMTP server for sending emails', 'jobly' ),
+                'default'       => false,
+            ),
 
             array(
                 'id'            => 'smtp_host',
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Host', 'jobly' ),
                 'desc'          => esc_html__( 'The SMTP server which will be used to send email. For example: smtp.gmail.com', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -912,6 +927,7 @@ if( class_exists( 'CSF' ) ) {
                     'false'     => esc_html__('False', 'jobly'),
                 ),
                 'default'       => 'true',
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -919,6 +935,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Username', 'jobly' ),
                 'desc'          => esc_html__( 'Your SMTP Username.', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -926,6 +943,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'SMTP Password', 'jobly' ),
                 'desc'          => esc_html__( 'Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options).', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -939,6 +957,7 @@ if( class_exists( 'CSF' ) ) {
                     'none'     => esc_html__('No Encryption', 'jobly'),
                 ),
                 'default'       => 'ssl',
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -946,6 +965,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'number',
                 'title'         => esc_html__( 'SMTP Port', 'jobly' ),
                 'desc'          => esc_html__( 'The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead.', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -953,6 +973,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'From Email Address', 'jobly' ),
                 'desc'          => esc_html__( 'The email address which will be used as the From Address if it is not supplied to the mail function.', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
             array(
@@ -960,6 +981,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'          => 'text',
                 'title'         => esc_html__( 'From Name', 'jobly' ),
                 'desc'          => esc_html__( 'The name which will be used as the From Name if it is not supplied to the mail function.', 'jobly' ),
+                'dependency' => array( 'is_smtp', '==', 'true' ),
             ),
 
         )

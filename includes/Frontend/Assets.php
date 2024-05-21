@@ -30,6 +30,15 @@ class Assets {
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );
         wp_register_script( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.js', [ 'jquery' ], '2.11.4', true );
 
+        // Load Script and Ajax Process
+        wp_enqueue_script( 'jobly-job-ajax', JOBLY_JS . '/job-ajax.js', [ 'jquery' ], JOBLY_VERSION, true );
+
+        wp_localize_script('jobly-job-ajax', 'job_application_form', array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'nonce' => wp_create_nonce('job_application_nonce')
+        ));
+
+
         // Enqueue Scripts
         wp_enqueue_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
         wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );

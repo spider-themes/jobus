@@ -39,3 +39,53 @@ function send_contact_email_callback() {
 
 	wp_die(); // Always terminate AJAX calls
 }
+
+
+
+add_action('wp_ajax_handle_job_application', 'jobly_handle_job_application');
+add_action('wp_ajax_nopriv_handle_job_application', 'jobly_handle_job_application');
+function jobly_handle_job_application() {
+
+    check_ajax_referer('job_application_nonce', 'security');
+
+    // Get form data
+    $candidate_fname = sanitize_text_field($_POST['candidate_fname']);
+    $candidate_lname = sanitize_text_field($_POST['candidate_lname']);
+    $candidate_email = sanitize_email($_POST['candidate_email']);
+    $candidate_phone = sanitize_text_field($_POST['candidate_phone']);
+    $candidate_message = sanitize_textarea_field($_POST['candidate_message']);
+    $job_id = sanitize_text_field($_POST['job_id']);
+
+    // Save the application as a new post
+    $application_id = wp_insert_post(array(
+        'post_type' => 'job_application',
+        'post_status' => 'publish',
+        'post_title' => $candidate_fname . ' ' . $candidate_lname,
+    ));
+
+    if ($application_id) {
+        update_post_meta($application_id, 'candidate_fname', $candidate_fname);
+        update_post_meta($application_id, 'candidate_lname', $candidate_lname);
+        update_post_meta($application_id, 'candidate_email', $candidate_email);
+        update_post_meta($application_id, 'candidate_phone', $candidate_phone);
+        update_post_meta($application_id, 'candidate_message', $candidate_message);
+        update_post_meta($application_id, 'job_applied_for', $job_id);
+
+        if (!empty($_FILES['candidate_cv']['name'])) {
+            $uploaded = media_handle_upload('candidate_cv', $application_id);
+            if (is_wp_error($uploaded)) {
+                wp_send_json_error(array('message' => 'CV upload failed.'));
+            } else {
+                update_post_meta($application_id, 'candidate_cv', $uploaded);
+            }
+        }
+
+        wp_send_json_success(array('message' => 'Application submitted successfully.'));
+    } else {
+        wp_send_json_error(array('message' => 'Failed to submit application.'));
+    }
+
+    wp_die();
+
+
+}

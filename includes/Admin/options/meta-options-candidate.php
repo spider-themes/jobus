@@ -158,12 +158,12 @@ if (class_exists('CSF')) {
         'fields' => array(
 
             array(
-                'id'                => 'candidate_mail',
-                'type'              => 'text',
-                'title'             => esc_html__( 'Candidate Mail', 'jobly' ),
-                'subtitle'          => esc_html__( 'Input the candidate Candidate Mail Address', 'jobly' ),
+                'id'         => 'candidate_mail',
+                'type'       => 'text',
+                'title'      => esc_html__( 'Candidate Mail', 'jobly' ),
+                'subtitle'   => esc_html__( 'Input the Candidate Mail Address', 'jobly' ),
+                'default'    => 'demo.candidate@mail.com',
             ),
-
 
             array(
                 'id'          => 'candidate_location',
@@ -181,7 +181,6 @@ if (class_exists('CSF')) {
                 ),
 
             ),
-
 
         )
     ) ); //End Contact Information

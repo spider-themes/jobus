@@ -86,10 +86,23 @@ if (class_exists('CSF')) {
             ),
 
             array(
+                'id'         => 'is_apply_btn',
+                'type'       => 'button_set',
+                'title'      => esc_html__('Choose Option', 'jobly'),
+                'desc'       => esc_html__('Choose the Apply button for job post.', 'jobly'),
+                'options'    => array(
+                    'default'  => esc_html__('Default', 'jobly'),
+                    'custom'  => esc_html__('Custom with Link', 'jobly'),
+                ),
+                'default'    => 'default'
+            ),
+
+            array(
                 'id'       => 'apply_form_url',
                 'type'     => 'text',
                 'title'    => esc_html__('Apply Link', 'jobly'),
                 'default'  => '#',
+                'dependency' => array('is_apply_btn', '==', 'custom'),
             ),
 
         )

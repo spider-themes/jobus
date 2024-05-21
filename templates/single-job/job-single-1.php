@@ -100,10 +100,18 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             </div>
                             <?php
                         }
-                        if (!empty($meta[ 'apply_form_url' ])) { ?>
+                        if ( !empty($meta['is_apply_btn'] == 'custom') && !empty($meta[ 'apply_form_url' ])) { ?>
                             <a href="<?php echo esc_url($meta[ 'apply_form_url' ]) ?>" class="btn-one w-100 mt-25">
                                 <?php esc_html_e('Apply Now', 'jobly'); ?>
                             </a>
+                            <?php
+                        } else {
+                            ?>
+
+                            <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                <?php esc_html_e('Apply Job this Position', 'jobly'); ?>
+                            </a>
+
                             <?php
                         }
                         ?>
