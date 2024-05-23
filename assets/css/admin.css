@@ -1,3 +1,7 @@
+.widefat .column-applicant_photo {
+  width: 40px;
+}
+
 .post-type-job_application #post-body-content {
   margin-bottom: 0;
 }
@@ -34,6 +38,9 @@
   padding: 10px;
   font-size: 14px;
 }
+.jobly-application-container .applicant-image-details .applicant-resume-btn span {
+  display: block;
+}
 .jobly-application-container .applicant-content-details {
   flex-basis: 80%;
   border-left: 1px solid #dadfe5;
@@ -50,6 +57,12 @@
 }
 .jobly-application-container .applicant-content-details .details-list li:last-child {
   border-bottom: none;
+}
+.jobly-application-container .applicant-content-details .details-list li label {
+  font-weight: 700;
+}
+.jobly-application-container .applicant-content-details .details-list li span {
+  display: block;
 }
 
 /* META [ JOB SPECIFICATIONS ] */

@@ -105,13 +105,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                 <?php esc_html_e('Apply Now', 'jobly'); ?>
                             </a>
                             <?php
-                        } else {
-                            ?>
-
+                        } else { ?>
                             <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Job this Position', 'jobly'); ?>
                             </a>
-
                             <?php
                         }
                         ?>

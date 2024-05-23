@@ -31,11 +31,12 @@ class Assets {
         wp_register_script( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.js', [ 'jquery' ], '2.11.4', true );
 
         // Load Script and Ajax Process
-        wp_enqueue_script( 'jobly-job-ajax', JOBLY_JS . '/job-ajax.js', [ 'jquery' ], JOBLY_VERSION, true );
+        wp_register_script( 'jobly-job-application-form', JOBLY_JS . '/job-application-form.js', [ 'jquery' ], JOBLY_VERSION, true );
 
-        wp_localize_script('jobly-job-ajax', 'job_application_form', array(
+        wp_localize_script('jobly-job-application-form', 'job_application_form', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce('job_application_nonce')
+            'nonce' => wp_create_nonce('job_application_form_nonce'),
+            'job_id' => get_the_ID(),
         ));
 
 
