@@ -33,7 +33,10 @@ get_footer();
 
                     <div class="container">
 
-                        <?php wp_nonce_field('job_application_form_nonce', 'job_application_nonce_field'); ?>
+                        <?php
+                        wp_nonce_field('job_application_form_nonce', 'job_application_nonce_field');
+                        $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten text-white';
+                        ?>
 
                         <form action="#" name="job_application_form" class="job_application_form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
                             <div class="row g-4">
@@ -73,7 +76,7 @@ get_footer();
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-one"><?php esc_html_e('Submit Application', 'jobly'); ?></button>
+                                    <button type="submit" class="btn <?php echo esc_attr($btn_class) ?>"><?php esc_html_e('Submit Application', 'jobly'); ?></button>
                                 </div>
 
                             </div>

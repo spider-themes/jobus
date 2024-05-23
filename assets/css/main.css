@@ -7850,6 +7850,9 @@ img {
   border: none;
 }
 
+.job-application-wrapper {
+  background: rgba(0, 0, 0, 0.8);
+}
 .job-application-wrapper .modal-dialog .modal-content {
   background: #EFF6F3;
   margin: 0;
