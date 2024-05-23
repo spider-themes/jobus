@@ -107,12 +107,17 @@ $company_count = $company_query->found_posts;
                                             </a>
                                         </h5>
 
-                                        <?php
-                                        if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
-                                            ?>
-                                            <p class="text-center mb-auto text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
-                                            <?php
-                                        }
+	                                    <?php
+	                                    $locations=get_the_terms(get_the_ID(),'company_location');
+	                                    if(!empty($locations)){ ?>
+                                            <p class="text-center mb-auto text-capitalize">
+			                                    <?php foreach ( $locations as $location ) {echo $location->name ?>
+				                                    <?php
+			                                    }
+			                                    ?>
+                                            </p>
+		                                    <?php
+	                                    }
 
                                         if ($company_count > 0) {
                                             ?>

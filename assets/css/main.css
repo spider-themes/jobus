@@ -4048,6 +4048,18 @@ img {
   border: none;
 }
 
+.pagination-widget .pagination-one .current {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+  background: #31795a;
+}
+
 .card-style-one .wrapper {
   display: block;
   background: #fff;

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="modal popUpModal fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal popUpModal login_from fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
 
@@ -183,6 +183,39 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 }
                             }
 
+                                    if (jobly_opt('is_candidate_widget_location') == true ) {
+
+	                                    $term_loc = get_terms(array(
+	                                    'taxonomy' => 'candidate_location',
+	                                    'hide_empty' => true,
+                                    ));
+
+                                    if (!empty($term_loc)) {
+                                    ?>
+                            <div class="col-lg-3">
+                                <div class="filter-block pb-50 md-pb-20">
+                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('location', 'jobly'); ?></div>
+                                    <select class="nice-select" name="candidate_location[]">
+				                        <?php
+				                        $searched_opt = jobly_search_terms('candidate_location');
+				                        foreach ( $term_loc as $key => $term ) {
+					                        $list_class = $key > 3 ? ' class=hide' : '';
+					                        $check_status = array_search($term->slug, $searched_opt);
+					                        $check_status = $check_status !== false ? ' checked' : '';
+					                        ?>
+                                            <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+					                        <?php
+				                        }
+				                        ?>
+                                    </select>
+                                </div>
+                            </div>
+	                        <?php
+	                        }
+	                        }
+	                        ?>
+
+                            <?php
                             if (jobly_opt('is_candidate_widget_cat') == true ) {
 
                                 $term_cats = get_terms(array(
