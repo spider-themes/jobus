@@ -72,7 +72,7 @@ get_footer();
 
                                 <div class="col-md-12">
                                     <label for="upload_cv" class="form-label"><?php esc_html_e('Upload CV (PDF)', 'jobly'); ?></label>
-                                    <input type="file" class="form-control" id="upload_cv" name="candidate_cv" accept=".pdf">
+                                    <input type="file" class="form-control upload-cv" id="upload_cv" name="candidate_cv" accept=".pdf">
                                 </div>
 
                                 <div class="col-md-12">

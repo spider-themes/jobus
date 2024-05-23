@@ -18,7 +18,7 @@ class Job_Application {
         add_filter('manage_edit-job_application_columns', [$this, 'job_application_columns']);
         add_action('manage_job_application_posts_custom_column', [$this, 'job_application_columns_data'], 10, 2);
 
-        
+
         // Add custom content to edit form
         add_action('edit_form_top', array($this, 'admin_single_subtitle'));
         add_action('add_meta_boxes', [$this, 'admin_single_contents']);
@@ -35,7 +35,7 @@ class Job_Application {
     public function admin_single_subtitle($post) {
         if ($post->post_type === 'job_application') {
             $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
-            
+
             echo '<pre>';
             print_r($candidate_ip);
             echo '</pre>';

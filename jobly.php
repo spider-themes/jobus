@@ -113,9 +113,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 			require_once __DIR__ . '/includes/Admin/Post_Types.php';
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
 
-            //Admin Template Meta
-            //require_once __DIR__ . '/includes/Admin/templates/meta/applicant-single.php';
-
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
             new Jobly\Elementor\Register_Widgets();
