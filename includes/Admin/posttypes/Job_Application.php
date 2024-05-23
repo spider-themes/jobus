@@ -34,10 +34,16 @@ class Job_Application {
 
     public function admin_single_subtitle($post) {
         if ($post->post_type === 'job_application') {
+            $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
+            
+            echo '<pre>';
+            print_r($candidate_ip);
+            echo '</pre>';
             ?>
             <p class="jobly-application-submission-info">
-                <span class="jobly-application-submission-date">Submitted on 10:46 am, May 17, 2024</span>
-                <span class="jobly-applicant-ip">from IP 127.0.0.1</span>
+                <span class="jobly-application-submission-date">
+                    <?php esc_html_e('Submitted On ', 'jobly'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
+                <span class="jobly-applicant-ip">from IP <?php echo esc_html($candidate_ip); ?></span>
             </p>
             <?php
         }
@@ -97,14 +103,11 @@ class Job_Application {
 
         $columns = array(
             'cb'                 => '<input type="checkbox" />',
+            'applicant_photo'    => '',
             'title'              => esc_html__('Applicant', 'jobly'),
-            'applicant_id'       => esc_html__('Applicant ID', 'jobly'),
+            'applicant_id'       => esc_html__('ID', 'jobly'),
             'job_applied_for'    => esc_html__('Job', 'jobly'),
             'submission_time'    => esc_html__('Applied on', 'jobly'),
-            'candidate_email'    => esc_html__('Email', 'jobly'),
-            'candidate_phone'    => esc_html__('Phone', 'jobly'),
-            'candidate_message'  => esc_html__('Message', 'jobly'),
-            'candidate_cv'       => esc_html__('CV', 'jobly'),
         );
 
         return $columns;
@@ -112,43 +115,23 @@ class Job_Application {
 
     public function job_application_columns_data($column, $post_id) {
 
-        $job_id = get_post_meta($post_id, 'job_applied_for', true);
-        $job_title = get_the_title($job_id);
-
         switch ($column) {
-
+            case 'applicant_photo':
+                $candidate_email = get_post_meta($post_id, 'candidate_email', true);
+                echo get_avatar($candidate_email, 40);
+                break;
             case 'applicant_id':
-                if ( current_user_can( 'edit_others_applications' ) ) {
-                    edit_post_link( esc_html( $post_id ) );
-                } else {
-                    echo esc_html( $post_id );
-                }
+                echo esc_html( $post_id );
                 break;
             case 'job_applied_for':
+                $job_id = get_post_meta($post_id, 'job_applied_for_id', true);
+                $job_title = get_post_meta($post_id, 'job_applied_for_title', true);
                 if ($job_id && $job_title) {
-                    echo '<a href="' . get_edit_post_link($job_id) . '">' . esc_html($job_title) . '</a>';
-                } else {
-                    echo 'Job title not found';
+                    echo '<a href="' . esc_url(get_edit_post_link($job_id)) . '">' . esc_html($job_title) . '</a>';
                 }
                 break;
             case 'submission_time':
                 echo get_the_date('', $post_id);
-                break;
-            case 'candidate_email':
-                echo esc_html(get_post_meta($post_id, 'candidate_email', true));
-                break;
-            case 'candidate_phone':
-                echo esc_html(get_post_meta($post_id, 'candidate_phone', true));
-                break;
-            case 'candidate_message':
-                echo esc_html(get_post_meta($post_id, 'candidate_message', true));
-                break;
-            case 'candidate_cv':
-                $cv_id = get_post_meta($post_id, 'candidate_cv', true);
-                if ($cv_id) {
-                    $cv_url = wp_get_attachment_url($cv_id);
-                    echo '<a href="' . esc_url($cv_url) . '" target="_blank">' . esc_html__('Download CV', 'jobly') . '</a>';
-                }
                 break;
         }
     }

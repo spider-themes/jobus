@@ -3,15 +3,15 @@
 
     $(document).ready(function () {
         function jobApplicationForm() {
+
             let jobApplication = $('#jobApplicationForm');
 
             jobApplication.submit(function (event) {
                 event.preventDefault();
 
                 let formData = new FormData(this);
-                formData.append('action', 'handle_job_application');
+                formData.append('action', 'jobly_job_application');
                 formData.append('security', job_application_form.nonce);
-                formData.append('job_id', job_application_form.job_id);
 
                 $.ajax({
                     url: job_application_form.ajaxurl,
@@ -21,9 +21,8 @@
                     contentType: false,
                     success: function (response) {
                         if (response.success) {
-                            alert(response.data.message);
-                            $('#applyJobModal').modal('hide');
-                            jobApplication[0].reset();
+                            $('#jobApplicationForm').trigger('reset');
+                            $('#applicationSuccessMessage').fadeIn().delay(3000).fadeOut();
                         } else {
                             alert(response.data.message);
                         }

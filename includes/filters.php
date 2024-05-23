@@ -42,11 +42,11 @@ function send_contact_email_callback() {
 
 
 
-add_action('wp_ajax_handle_job_application', 'jobly_handle_job_application');
-add_action('wp_ajax_nopriv_handle_job_application', 'jobly_handle_job_application');
-function jobly_handle_job_application() {
+add_action('wp_ajax_jobly_job_application', 'jobly_job_application_form');
+add_action('wp_ajax_nopriv_jobly_job_application', 'jobly_job_application_form');
+function jobly_job_application_form() {
 
-    check_ajax_referer('job_application_nonce', 'security');
+    check_ajax_referer('job_application_form_nonce', 'security');
 
     // Get form data
     $candidate_fname = sanitize_text_field($_POST['candidate_fname']);
@@ -54,7 +54,8 @@ function jobly_handle_job_application() {
     $candidate_email = sanitize_email($_POST['candidate_email']);
     $candidate_phone = sanitize_text_field($_POST['candidate_phone']);
     $candidate_message = sanitize_textarea_field($_POST['candidate_message']);
-    $job_id = sanitize_text_field($_POST['job_id']);
+    $job_application_id = sanitize_text_field($_POST['job_application_id']);
+    $job_application_title = sanitize_text_field($_POST['job_application_title']);
 
     // Save the application as a new post
     $application_id = wp_insert_post(array(
@@ -69,7 +70,8 @@ function jobly_handle_job_application() {
         update_post_meta($application_id, 'candidate_email', $candidate_email);
         update_post_meta($application_id, 'candidate_phone', $candidate_phone);
         update_post_meta($application_id, 'candidate_message', $candidate_message);
-        update_post_meta($application_id, 'job_applied_for', $job_id);
+        update_post_meta($application_id, 'job_applied_for_id', $job_application_id);
+        update_post_meta($application_id, 'job_applied_for_title', $job_application_title);
 
         if (!empty($_FILES['candidate_cv']['name'])) {
             $uploaded = media_handle_upload('candidate_cv', $application_id);
@@ -86,6 +88,5 @@ function jobly_handle_job_application() {
     }
 
     wp_die();
-
 
 }
