@@ -47,7 +47,7 @@ wp_enqueue_script( 'lightbox' );
 	?>
 </div>
 
-<section class="candidates-profile pt-100 lg-pt-70 pb-150 lg-pb-80">
+<section class="candidates-profile pt-100 lg-pt-70 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-xxl-9 col-lg-8">

@@ -58,7 +58,7 @@ $candidate_count = $candidate_query->found_posts;
 
 ?>
 
-    <section class="candidates-profile pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
+    <section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

@@ -45,7 +45,7 @@ $company_count = $company_query->found_posts;
 
 ?>
 
-    <section class="company-profiles pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
+    <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
         <div class="container">
             <div class="row">
 

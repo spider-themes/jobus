@@ -79,7 +79,7 @@ wp_enqueue_script('lightbox');
     <img src="images/shape/shape_03.svg" alt="" class="lazy-img shapes shape_02" style="">
 </div>
 
-<section class="candidates-profile-2 bg-color pt-100 lg-pt-70 pb-150 lg-pb-80">
+<section class="candidates-profile-2 bg-color pt-100 lg-pt-70 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-xxl-9 col-lg-8">

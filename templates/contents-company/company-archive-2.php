@@ -21,7 +21,7 @@ $list_view_url = add_query_arg('view', 'list', $archive_url);
 $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
 ?>
-<section class="company-profiles bg-color pt-90 lg-pt-70 pb-160 xl-pb-150 lg-pb-80">
+<section class="company-profiles bg-color pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-12">
