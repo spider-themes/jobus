@@ -568,12 +568,19 @@ if( class_exists( 'CSF' ) ) {
                 )
             ),
 
-            array(
-                'id'      => 'is_company_widget_cat',
-                'type'    => 'switcher',
-                'title'   => esc_html__('Category', 'jobly'),
-                'default' => true,
-            ),
+	        array(
+		        'id'      => 'is_company_widget_cat',
+		        'type'    => 'switcher',
+		        'title'   => esc_html__('Category', 'jobly'),
+		        'default' => true,
+	        ),
+
+	        array(
+		        'id'      => 'is_company_widget_location',
+		        'type'    => 'switcher',
+		        'title'   => esc_html__('Category', 'jobly'),
+		        'default' => true,
+	        ),
 
         )
     ) );
@@ -822,6 +829,13 @@ if( class_exists( 'CSF' ) ) {
                     ),
                 )
             ),
+
+	        array(
+		        'id'      => 'company_location',
+		        'type'    => 'switcher',
+		        'title'   => esc_html__('Location', 'jobly'),
+		        'default' => true,
+	        ),
 
             array(
                 'id'      => 'is_candidate_widget_cat',

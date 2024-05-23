@@ -21,7 +21,7 @@ $list_view_url = add_query_arg('view', 'list', $archive_url);
 $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
 ?>
-<section class="company-profiles pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
+<section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
 
@@ -97,9 +97,14 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </h5>
 
                                             <?php
-                                            if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) {
-                                                ?>
-                                                <p class="text-center mb-auto text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                $locations=get_the_terms(get_the_ID(),'company_location');
+                                                if(!empty($locations)){ ?>
+                                                    <p class="text-center mb-auto text-capitalize">
+                                                            <?php foreach ( $locations as $location ) {echo $location->name ?>
+                                                        <?php
+                                                            }
+                                                        ?>
+                                                    </p>
                                                 <?php
                                             }
 

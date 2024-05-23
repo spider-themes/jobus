@@ -207,6 +207,55 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                 }
 
+                // candidate location sidebar
+                if (jobly_opt('is_candidate_widget_location') == true) {
+
+	                if ( ! empty ( $_GET['post_type'] ?? '' == 'candidate' ) ) {
+		                if ( ! empty ( $_GET['candidate_locations'] ) ) {
+			                $is_collapsed_show = 'collapse show';
+			                $area_expanded     = 'true';
+			                $is_collapsed      = '';
+		                } else {
+			                $is_collapsed_show = 'collapse';
+			                $area_expanded     = 'false';
+			                $is_collapsed      = ' collapsed';
+		                }
+	                }
+
+	                $term_loc = get_terms( array(
+		                'taxonomy'   => 'candidate_location',
+		                'hide_empty' => true,
+	                ) );
+
+	                if (!empty($term_loc)) {
+		                ?>
+                        <div class="filter-block bottom-line pb-25 mt-25">
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button"
+                               aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+				                <?php esc_html_e('Location', 'jobly'); ?>
+                            </a>
+                            <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
+                                <div class="main-body">
+                                    <select class="nice-select" name="candidate_locations[]">
+						                <?php
+						                $searched_opt = jobly_search_terms('candidate_locations');
+						                foreach ( $term_loc as $key => $term ) {
+							                $list_class = $key > 3 ? ' class=hide' : '';
+							                $check_status = array_search($term->slug, $searched_opt);
+							                $check_status = $check_status !== false ? ' checked' : '';
+							                ?>
+                                            <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+							                <?php
+						                }
+						                ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+		                <?php
+	                }
+                }
+
                 // Widget Category List
                 if (jobly_opt('is_candidate_widget_cat') == true) {
 

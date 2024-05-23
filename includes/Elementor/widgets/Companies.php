@@ -498,17 +498,6 @@ class Companies extends Widget_Base {
             ];
         }
 
-	    if (!empty($location)) {
-		    $args['tax_query'] = [
-			    [
-				    'taxonomy' => 'company_location',
-				    'field' => 'slug',
-				    'terms' => $location
-
-			    ]
-		    ];
-	    }
-
         $posts = new WP_Query($args);
 
 
@@ -516,6 +505,5 @@ class Companies extends Widget_Base {
         include "templates/companies/company-{$settings['layout']}.php";
 
     }
-
 
 }
