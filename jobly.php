@@ -5,7 +5,7 @@
  * Plugin URI: https://spider-themes.net/jobly
  * Author: spider-themes
  * Author URI: https://spider-themes.net/jobly
- * Version: 0.0.2
+ * Version: 0.0.3
  * Requires at least: 5.0
  * Requires PHP: 7.4
  * Text Domain: jobly
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.2';
+		const VERSION = '0.0.3';
 
 		/**
 		 * The plugin path

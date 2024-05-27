@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-11-23 13:16+0600\n"
+"POT-Creation-Date: 2024-05-27 17:54+0600\n"
 "PO-Revision-Date: 2022-04-05 15:26+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,362 +11,1405 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: esc_html__;esc_attr__;esc_html_e;esc_attr_e;_e;__;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: assets\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: includes/Admin/Post_Types.php:37
-msgid "Jobs"
-msgstr ""
-
-#: includes/Admin/Post_Types.php:38
-msgid "Job"
-msgstr ""
-
-#: includes/Admin/Post_Types.php:39
-msgid "Add New"
-msgstr ""
-
-#: includes/Admin/Post_Types.php:40
-msgid "Add New Job"
+#: Blocks.php:66
+msgid "Jobly Blocks"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:41
-msgid "Edit Job"
+msgid "Jobs"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:42
-msgid "New Job"
+#: includes/Admin/posttypes/Job_Application.php:109
+#: includes/Elementor/widgets/Search_Form.php:223
+msgid "Job"
 msgstr ""
 
-#: includes/Admin/Post_Types.php:43
-msgid "New Job Name"
+#: includes/Admin/Post_Types.php:43 includes/Admin/Post_Types.php:132
+#: includes/Admin/Post_Types.php:219
+msgid "Add New"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:44
-msgid "All Jobs"
+msgid "Add New Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:45
-msgid "View Job"
+msgid "Edit Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:46
-msgid "Views"
+msgid "New Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:47
-msgid "Search Jobs"
+msgid "New Job Name"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:48
-msgid "No jobs found"
+msgid "All Jobs"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:49
-msgid "No jobs found in Trash"
+msgid "View Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:50
-msgid "Parent Job"
+msgid "View Jobs"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:51
-msgid "Parent Job:"
+msgid "Search Jobs"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:52
-msgid "Update Job"
+msgid "No jobs found"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:53
-msgid "Job Listings"
+msgid "No jobs found in Trash"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:54
-msgid "Job listing published."
+msgid "Parent Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:55
-msgid "Job listing published privately."
+msgid "Parent Job:"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:56
-msgid "Job listing reverted to draft."
+msgid "Update Job"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:57
-msgid "Job listing scheduled."
+#: includes/Admin/options/settings-options.php:17
+#: includes/Elementor/Register_Widgets.php:49
+msgid "Jobly"
 msgstr ""
 
 #: includes/Admin/Post_Types.php:58
-msgid "Job listing updated."
+msgid "Job published."
 msgstr ""
 
-#: includes/Admin/Post_Types.php:95
+#: includes/Admin/Post_Types.php:59
+msgid "Job published privately."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:60
+msgid "Job reverted to draft."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:61
+msgid "Job scheduled."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:62
+msgid "Job updated."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:101 includes/Admin/Post_Types.php:189
+#: includes/Admin/Post_Types.php:276 includes/Admin/Post_Types.php:323
 msgid "Categories"
 msgstr ""
 
-#: includes/Admin/Post_Types.php:106
+#: includes/Admin/Post_Types.php:114
+#: templates/contents-job/sidebar-search-filter.php:299
 msgid "Tags"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:8
-msgid "Job Options"
+#: includes/Admin/Post_Types.php:130
+msgid "Companies"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:17
+#: includes/Admin/Post_Types.php:131 includes/Admin/Post_Types.php:146
+#: includes/Elementor/widgets/Search_Form.php:224
+msgid "Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:133
+msgid "Add New Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:134
+msgid "Edit Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:135
+msgid "New Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:136
+msgid "New Company Name"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:137
+msgid "All Companies"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:138
+msgid "View Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:139
+msgid "View Companies"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:140
+msgid "Search Companies"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:141
+msgid "No companies found"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:142
+msgid "No companies found in Trash"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:143
+msgid "Parent Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:144
+msgid "Parent Company:"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:145
+msgid "Update Company"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:147
+msgid "Company published."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:148
+msgid "Company published privately."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:149
+msgid "Company reverted to draft."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:150
+msgid "Company scheduled."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:151
+msgid "Company updated."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:201 includes/Admin/Post_Types.php:289
+#: includes/Admin/options/meta-options-candidate.php:171
+#: includes/Admin/options/settings-options.php:836
+#: includes/Elementor/widgets/Search_Form.php:188
+#: src/testimonials-item/index.js:46
+#: templates/contents-candidate/candidate-archive-1.php:156
+#: templates/contents-candidate/sidebar-search-filter.php:235
+#: templates/single-candidate/candidate-single-1.php:275
+#: templates/single-candidate/candidate-single-2.php:291
+#: templates/taxonomy-candidate.php:189
+msgid "Location"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:217
+msgid "Candidates"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:218 includes/Admin/Post_Types.php:233
+#: includes/Elementor/widgets/Search_Form.php:225
+msgid "Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:220
+msgid "Add New Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:221
+msgid "Edit Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:222
+msgid "New Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:223
+msgid "New Candidate Name"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:224
+msgid "All Candidates"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:225
+msgid "View Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:226
+msgid "View Candidates"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:227
+msgid "Search Candidates"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:228
+msgid "No candidates found"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:229
+msgid "No candidates found in Trash"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:230
+msgid "Parent Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:231
+msgid "Parent Candidate:"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:232
+msgid "Update Candidate"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:234
+msgid "Candidate published."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:235
+msgid "Candidate published privately."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:236
+msgid "Candidate reverted to draft."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:237
+msgid "Candidate scheduled."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:238
+msgid "Candidate updated."
+msgstr ""
+
+#: includes/Admin/Post_Types.php:290
+msgid "Add New Location"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:303
+#: templates/single-candidate/candidate-single-1.php:110
+#: templates/single-candidate/candidate-single-2.php:139
+msgid "Skills"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:304
+msgid "Add New Skill"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:322
+#: includes/Admin/options/meta-options-candidate.php:238
+#: includes/Admin/options/meta-options-candidate.php:304
+#: includes/Elementor/widgets/Search_Form.php:299
+msgid "Title"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:324
+msgid "Author"
+msgstr ""
+
+#: includes/Admin/Post_Types.php:325
+msgid "Date"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:8
+msgid "Candidate Options"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:17
+#: includes/Admin/options/meta-options-company.php:17
+#: includes/Admin/options/meta-options-job.php:21
 #: includes/Admin/options/settings-options.php:27
 msgid "General"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:25
-msgid "Logo"
+#: includes/Admin/options/meta-options-candidate.php:25
+#: includes/Admin/options/meta-options-job.php:29
+msgid "Single Post Layout"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:31
-#: includes/Admin/options/settings-options.php:122
-msgid "Name"
+#: includes/Admin/options/meta-options-candidate.php:31
+#: includes/Admin/options/meta-options-job.php:35
+#: includes/Admin/options/settings-options.php:164
+#: includes/Admin/options/settings-options.php:335
+#: includes/Admin/options/settings-options.php:472
+#: includes/Admin/options/settings-options.php:714
+msgid "Choose Layout"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:32
-msgid "SpiderDevs"
+#: includes/Admin/options/meta-options-candidate.php:32
+msgid "Select the preferred layout for your candidate post for this page."
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:38
-msgid "Website URL"
+#: includes/Admin/options/meta-options-candidate.php:43
+#: includes/Admin/options/meta-options-company.php:25
+msgid "Favorite"
 msgstr ""
 
-#: includes/Admin/options/meta-options.php:78
+#: includes/Admin/options/meta-options-candidate.php:50
+msgid "CV Attachment"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:51
+msgid "Add or Upload Files"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:52
+msgid "Remove"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:90
+#: includes/Admin/options/meta-options-company.php:74
+#: includes/Admin/options/meta-options-job.php:152
 msgid "Specifications"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:102
+#: includes/Admin/options/meta-options-candidate.php:109
+#: includes/Admin/options/settings-options.php:854
+#: includes/Admin/options/settings-options.php:861
+msgid "Social Icons"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:110
+#: includes/Admin/options/settings-options.php:862
+msgid "Customize and manage your social media icons along with respective URLs"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:111
+#: includes/Admin/options/settings-options.php:863
+msgid "Add Icon"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:117
+#: includes/Admin/options/settings-options.php:113
+#: includes/Admin/options/settings-options.php:869
+msgid "Icon"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:124
+#: includes/Admin/options/settings-options.php:876
+msgid "URL"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:156
+msgid "Contact Information"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:163
+msgid "Candidate Mail"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:164
+msgid "Input the Candidate Mail Address"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:192
+msgid "Intro Video"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:199
+msgid "Background Image"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:205
+#: src/video-popup/index.js:94
+msgid "Video URL"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:206
+msgid "Input the candidate video introduction"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:216
+#: includes/Admin/options/meta-options-candidate.php:223
+#: templates/single-candidate/candidate-single-1.php:74
+#: templates/single-candidate/candidate-single-2.php:103
+msgid "Education"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:224
+msgid "Customize and manage your Academic history"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:225
+#: includes/Admin/options/meta-options-candidate.php:291
+msgid "Add Item"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:231
+#: includes/Admin/options/meta-options-candidate.php:297
+msgid "Serial Number"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:232
+#: includes/Admin/options/meta-options-candidate.php:266
+#: includes/Admin/options/meta-options-candidate.php:298
+#: includes/Admin/options/meta-options-candidate.php:347
+msgid "1"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:239
+#: includes/Admin/options/meta-options-candidate.php:267
+msgid "Bachelor Degree of Design"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:245
+msgid "Academy"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:246
+#: includes/Admin/options/meta-options-candidate.php:268
+msgid "University of Boston"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:259
+#: includes/Admin/options/meta-options-candidate.php:340
+msgid "Description"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:260
+#: includes/Admin/options/meta-options-candidate.php:270
+#: includes/Admin/options/meta-options-candidate.php:341
+#: includes/Admin/options/meta-options-candidate.php:350
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:269
+#: includes/Admin/options/meta-options-candidate.php:349
+msgid "2012-16"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:282
+msgid "Experience"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:289
+#: templates/single-candidate/candidate-single-1.php:125
+#: templates/single-candidate/candidate-single-2.php:154
+msgid "Work Experience"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:290
+msgid "Customize and manage your work experience"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:305
+#: includes/Admin/options/meta-options-candidate.php:348
+msgid "Product Designer (Google)"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:311
+msgid "Start Date"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:312
+msgid "02/03/18 - 13/05/20"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:326
+msgid "End Date"
+msgstr ""
+
+#: includes/Admin/options/meta-options-candidate.php:362
+#: includes/Admin/options/meta-options-candidate.php:369
+#: templates/single-candidate/candidate-single-1.php:161
+#: templates/single-candidate/candidate-single-2.php:189
+msgid "Portfolio"
+msgstr ""
+
+#: includes/Admin/options/meta-options-company.php:8
+msgid "Company Options"
+msgstr ""
+
+#: includes/Admin/options/meta-options-company.php:32
+msgid "Company Website URL"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:12
+msgid "Job Options"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:36
+msgid "Select the preferred layout for your job post for this page."
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:48
+msgid "Company Info"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:54
+msgid "Select Company"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:63
+msgid "Company Website"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:65
+#: includes/Admin/options/meta-options-job.php:94 includes/functions.php:246
+#: templates/contents-candidate/candidate-archive-1.php:54
+#: templates/contents-candidate/candidate-archive-2.php:59
+#: templates/contents-company/company-archive-1.php:54
+#: templates/contents-company/company-archive-2.php:63
+#: templates/contents-job/job-archive-1.php:53
+#: templates/contents-job/job-archive-2.php:52
+#: templates/contents-job/job-archive-3.php:60
+#: templates/taxonomy-candidate.php:88 templates/taxonomy-company.php:75
+#: templates/taxonomy-job.php:81
+msgid "Default"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:66
+msgid "Custom"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:74
+msgid "Website Button"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:85
+msgid "Job Information"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:91
+msgid "Choose Option"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:92
+msgid "Choose the Apply button for job post."
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:95
+msgid "Custom with Link"
+msgstr ""
+
+#: includes/Admin/options/meta-options-job.php:103
+msgid "Apply Link"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:15
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:17
-#: includes/Elementor/Register_Widgets.php:49
-msgid "Jobly"
+#: includes/Admin/options/settings-options.php:34
+msgid "Posts Per Page (Job)"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:33
-msgid "Title Bar"
+#: includes/Admin/options/settings-options.php:36
+msgid "Set the value to '-1' to display all job posts."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:39
-msgid "Shape 01"
+#: includes/Admin/options/settings-options.php:42
+msgid "Posts Per Page (Company)"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:48
-msgid "Shape 02"
+#: includes/Admin/options/settings-options.php:44
+msgid "Set the value to '-1' to display all company posts."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:50
+msgid "Posts Per Page (Candidate)"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:52
+msgid "Set the value to '-1' to display all candidate posts."
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:60
-msgid "Appearance"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:66
-msgid "Listing Page"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:73
-#: includes/Admin/options/settings-options.php:94
-msgid "Image Select"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:87
-msgid "Details Page"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:108
-#: includes/Admin/options/settings-options.php:115
+#: includes/Admin/options/settings-options.php:68
 msgid "Job Specifications"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:116
+#: includes/Admin/options/settings-options.php:69
 msgid "Manage Job Specifications"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:123
+#: includes/Admin/options/settings-options.php:75
+#: includes/Admin/options/settings-options.php:402
+#: includes/Admin/options/settings-options.php:645
+#: includes/Admin/templates/meta/applicant-single.php:60
+msgid "Name"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:76
+#: includes/Admin/options/settings-options.php:403
+#: includes/Admin/options/settings-options.php:646
 msgid "Enter a specification"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:124
+#: includes/Admin/options/settings-options.php:77
+#: includes/Admin/options/settings-options.php:404
+#: includes/Admin/options/settings-options.php:647
 msgid "Insert a unique name"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:133
+#: includes/Admin/options/settings-options.php:86
+#: includes/Admin/options/settings-options.php:413
+#: includes/Admin/options/settings-options.php:656
 msgid "Key"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:134
+#: includes/Admin/options/settings-options.php:87
+#: includes/Admin/options/settings-options.php:414
+#: includes/Admin/options/settings-options.php:657
 msgid "Specification key"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:135
+#: includes/Admin/options/settings-options.php:88
+#: includes/Admin/options/settings-options.php:415
+#: includes/Admin/options/settings-options.php:658
 msgid "Insert a unique key"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:144
+#: includes/Admin/options/settings-options.php:97
+#: includes/Admin/options/settings-options.php:424
+#: includes/Admin/options/settings-options.php:667
 msgid "Options"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:145
-msgid "Enter options"
+#: includes/Admin/options/settings-options.php:98
+#: includes/Admin/options/settings-options.php:425
+#: includes/Admin/options/settings-options.php:668
+msgid "Add Option"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:149
-msgid "Use comma for multiple options. (Example: tag1, tag2 etc)"
+#: includes/Admin/options/settings-options.php:111
+msgid "Meta Options (Icon/Image)"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:155
-msgid "Icon (Optional)"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:156
-msgid "Select icon"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:166
-#: includes/Admin/options/settings-options.php:172
-msgid "Backup"
-msgstr ""
-
+#: includes/Admin/options/settings-options.php:114
 #: includes/Admin/options/taxonomy.php:29
 msgid "Image"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:34
-msgid "Categories Jobly"
+#: includes/Admin/options/settings-options.php:122
+#: includes/Admin/options/settings-options.php:438
+#: includes/Admin/options/settings-options.php:681
+msgid "Icon (Optional)"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:83
-#: includes/Elementor/widgets/Jobs.php:88
-#: includes/Elementor/widgets/Search_Form.php:82
-msgid "Preset Skins"
+#: includes/Admin/options/settings-options.php:123
+#: includes/Admin/options/settings-options.php:439
+#: includes/Admin/options/settings-options.php:682
+msgid "Select icon"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:89
-#: includes/Elementor/widgets/Jobs.php:94
-#: includes/Elementor/widgets/Search_Form.php:88
-msgid "Layout"
+#: includes/Admin/options/settings-options.php:130
+msgid "Image (Optional)"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:93
-msgid "01: Category"
+#: includes/Admin/options/settings-options.php:131
+msgid "Upload a Image"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:97
-msgid "02: Category"
+#: includes/Admin/options/settings-options.php:143
+msgid "Job Archive Page"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:101
-msgid "03: Category"
+#: includes/Admin/options/settings-options.php:151
+#: includes/Admin/options/settings-options.php:459
+#: includes/Admin/options/settings-options.php:701
+msgid "Page Layout"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:105
-msgid "04: Category"
+#: includes/Admin/options/settings-options.php:158
+msgid "Job Page Layout"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:119
-#: includes/Elementor/widgets/Job_Tabs.php:91
-#: includes/Elementor/widgets/Jobs.php:112
-#: includes/Elementor/widgets/Search_Form.php:110
-msgid "Filter"
+#: includes/Admin/options/settings-options.php:165
+msgid "Select the preferred layout for your job page across the entire website."
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:125
+#: includes/Admin/options/settings-options.php:180
+#: includes/Admin/options/settings-options.php:488
+#: includes/Admin/options/settings-options.php:729
+msgid "Archive"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:187
+#: includes/Admin/options/settings-options.php:357
+#: includes/Admin/options/settings-options.php:607
+#: includes/Elementor/widgets/Job_Tabs.php:185
+#: includes/Elementor/widgets/Jobs.php:179
+msgid "Job Attributes"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:193
+#: includes/Admin/options/settings-options.php:501
+#: includes/Admin/options/settings-options.php:742
+msgid "Content Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:195
+#: includes/Admin/options/settings-options.php:504
+#: includes/Admin/options/settings-options.php:745
+msgid "List"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:196
+#: includes/Admin/options/settings-options.php:503
+#: includes/Admin/options/settings-options.php:744
+msgid "Grid"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:204
+#: includes/Admin/options/settings-options.php:363
+#: includes/Admin/options/settings-options.php:512
+#: includes/Admin/options/settings-options.php:613
+#: includes/Admin/options/settings-options.php:753
+#: includes/Elementor/widgets/Companies.php:180
+#: includes/Elementor/widgets/Job_Tabs.php:191
+#: includes/Elementor/widgets/Jobs.php:185
+msgid "Attribute 01"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:212
+#: includes/Admin/options/settings-options.php:370
+#: includes/Admin/options/settings-options.php:520
+#: includes/Admin/options/settings-options.php:620
+#: includes/Admin/options/settings-options.php:761
+#: includes/Elementor/widgets/Job_Tabs.php:199
+#: includes/Elementor/widgets/Jobs.php:193
+msgid "Attribute 02"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:220
+#: includes/Admin/options/settings-options.php:377
+#: includes/Admin/options/settings-options.php:769
+msgid "Attribute 03"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:228
+msgid "Attribute 04"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:240
+#: includes/Admin/options/settings-options.php:532
+#: includes/Admin/options/settings-options.php:781
+msgid "Sidebar"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:246
+#: includes/Admin/options/settings-options.php:538
+#: includes/Admin/options/settings-options.php:787
+msgid "Search filter Widgets"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:252
+#: includes/Admin/options/settings-options.php:544
+#: includes/Admin/options/settings-options.php:794
+msgid "Widgets"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:253
+#: includes/Admin/options/settings-options.php:545
+#: includes/Admin/options/settings-options.php:799
+msgid "Add Widget"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:254
+#: includes/Admin/options/settings-options.php:795
+msgid "Choose the layout style for displaying widget options:"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:255
+#: includes/Admin/options/settings-options.php:796
+msgid "<strong>Dropdown:</strong> Display options in a dropdown menu."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:256
+#: includes/Admin/options/settings-options.php:797
+msgid "<strong>Checkbox:</strong> Use checkboxes for each option."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:257
+#: includes/Admin/options/settings-options.php:798
+msgid "<strong>Range Slider:</strong> Utilize a slider for numeric values only."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:263
+#: includes/Admin/options/settings-options.php:551
+#: includes/Admin/options/settings-options.php:805
+msgid "Widget"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:271
+#: includes/Admin/options/settings-options.php:559
+#: includes/Admin/options/settings-options.php:813
+msgid "Widget Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:273
+#: includes/Admin/options/settings-options.php:561
+#: includes/Admin/options/settings-options.php:815
+msgid "Dropdown"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:274
+#: includes/Admin/options/settings-options.php:562
+#: includes/Admin/options/settings-options.php:816
+msgid "Checkbox"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:275
+#: includes/Admin/options/settings-options.php:563
+#: includes/Admin/options/settings-options.php:817
+msgid "Text"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:276
+#: includes/Admin/options/settings-options.php:818
+msgid "Range Slider"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:284
+#: includes/Admin/options/settings-options.php:826
+msgid "Range Suffix"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:285
+#: includes/Admin/options/settings-options.php:827
+msgid "USD"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:295
+#: includes/Admin/options/settings-options.php:574
+#: includes/Admin/options/settings-options.php:581
+#: includes/Admin/options/settings-options.php:843
+#: includes/Elementor/widgets/Categories.php:117
+#: includes/Elementor/widgets/Companies.php:113
 #: includes/Elementor/widgets/Job_Tabs.php:106
 #: includes/Elementor/widgets/Jobs.php:118
-#: templates/banner/banner-search.php:53
+#: templates/contents-candidate/sidebar-search-filter-popup.php:230
+#: templates/contents-candidate/sidebar-search-filter.php:284
+#: templates/contents-company/sidebar-search-filter-popup.php:132
+#: templates/contents-company/sidebar-search-filter.php:179
+#: templates/contents-job/sidebar-search-filter-2.php:178
+#: templates/contents-job/sidebar-search-filter-3.php:184
+#: templates/contents-job/sidebar-search-filter.php:234
 msgid "Category"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:126
+#: includes/Admin/options/settings-options.php:302
+msgid "Tag"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:314
+msgid "Job Details Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:322
+msgid "Layout Preset"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:329
+msgid "Job Details Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:336
+msgid "Select the preferred layout for your job details page across the entire website."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:350
+msgid "Related Posts"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:387
+#: includes/Admin/options/settings-options.php:395
+msgid "Company Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:396
+msgid "Manage Company Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:450
+msgid "Company Archive Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:466
+msgid "Company Page Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:473
+msgid "Select the preferred layout for your company page across the entire website."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:495
+#: includes/Elementor/widgets/Companies.php:174
+msgid "Company Attributes"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:592
+msgid "Company Details Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:600
+msgid "Open Job Position"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:630
+#: includes/Admin/options/settings-options.php:638
+msgid "Candidate Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:639
+msgid "Manage Candidate Specifications"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:693
+msgid "Candidate Archive Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:708
+msgid "Candidate Page Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:715
+msgid "Select the preferred layout for your candidate page across the entire website."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:736
+msgid "Candidate Attributes"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:908
+msgid "SMTP Configuration"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:915
+msgid "<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:921
+msgid "SMTP (On/OFF)"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:922
+msgid "Enable or disable the SMTP server for sending emails"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:929
+msgid "SMTP Host"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:930
+msgid "The SMTP server which will be used to send email. For example: smtp.gmail.com"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:937
+msgid "SMTP Authentication"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:938
+msgid "Whether to use SMTP Authentication when sending an email (recommended: True)."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:940
+msgid "True"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:941
+msgid "False"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:950
+msgid "SMTP Username"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:951
+msgid "Your SMTP Username."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:958
+msgid "SMTP Password"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:959
+msgid "Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options)."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:966
+msgid "Type of Encryption"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:967
+msgid "The encryption which will be used when sending an email (recommended: TLS)."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:969
+msgid "TLS"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:970
+msgid "SSL"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:971
+msgid "No Encryption"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:980
+msgid "SMTP Port"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:981
+msgid "The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:988
+msgid "From Email Address"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:989
+msgid "The email address which will be used as the From Address if it is not supplied to the mail function."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:996
+msgid "From Name"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:997
+msgid "The name which will be used as the From Name if it is not supplied to the mail function."
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:1007
+#: includes/Admin/options/settings-options.php:1014
+msgid "Backup"
+msgstr ""
+
+#: includes/Admin/options/taxonomy.php:35
+#: includes/Elementor/widgets/Categories.php:282
+#: includes/Elementor/widgets/Categories.php:334
+#: includes/Elementor/widgets/Categories.php:382
+#: includes/Elementor/widgets/Search_Form.php:534
+#: includes/Elementor/widgets/Search_Form.php:568
+msgid "Text Color"
+msgstr ""
+
+#: includes/Admin/options/taxonomy.php:42 src/video-popup/index.js:53
+msgid "Background Color"
+msgstr ""
+
+#: includes/Admin/options/taxonomy.php:49
+msgid "Hover Border Color"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:45
+msgid "Submitted On "
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:56
+msgid "Applicant Details"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:76
+#: includes/Admin/posttypes/Job_Application.php:78
+#: includes/Admin/posttypes/Job_Application.php:79
+msgid "Applications"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:77
+msgid "Application"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:80
+msgid "Search Applications"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:81
+msgid "No Applications found"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:82
+msgid "No Applications found in Trash"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:107
+msgid "Applicant"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:108
+msgid "ID"
+msgstr ""
+
+#: includes/Admin/posttypes/Job_Application.php:110
+msgid "Applied on"
+msgstr ""
+
+#: includes/Admin/templates/meta/applicant-single.php:49
+msgid "Download Resume"
+msgstr ""
+
+#: includes/Admin/templates/meta/applicant-single.php:64
+#: templates/single-job.php:64
+msgid "Phone"
+msgstr ""
+
+#: includes/Admin/templates/meta/applicant-single.php:68
+#: templates/single-candidate/candidate-single-1.php:286
+#: templates/single-candidate/candidate-single-2.php:322
+#: templates/single-job.php:59
+msgid "Email"
+msgstr ""
+
+#: includes/Admin/templates/meta/applicant-single.php:72
+msgid "Cover Letter"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:33
+msgid "Categories Jobly"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:79
+#: includes/Elementor/widgets/Companies.php:83
+#: includes/Elementor/widgets/Jobs.php:88
+#: includes/Elementor/widgets/Search_Form.php:78
+msgid "Preset Skins"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:85
+#: includes/Elementor/widgets/Companies.php:89
+#: includes/Elementor/widgets/Jobs.php:94
+#: includes/Elementor/widgets/Search_Form.php:84
+msgid "Layout"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:89
+msgid "01: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:93
+msgid "02: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:97
+msgid "03: Category"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:111
+#: includes/Elementor/widgets/Companies.php:107
+#: includes/Elementor/widgets/Job_Tabs.php:91
+#: includes/Elementor/widgets/Jobs.php:112
+#: templates/contents-candidate/sidebar-search-filter.php:11
+#: templates/contents-company/company-archive-2.php:36
+#: templates/contents-company/sidebar-search-filter.php:11
+#: templates/contents-job/job-archive-3.php:34
+#: templates/contents-job/sidebar-search-filter.php:14
+msgid "Filter"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:118
 msgid "Display Listing by Location"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:136
+#: includes/Elementor/widgets/Categories.php:128
+#: includes/Elementor/widgets/Search_Form.php:166
+msgid "Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:131
+msgid "Two"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:132
+msgid "Three"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:133
+msgid "Four"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:134
+msgid "Six"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:143
+#: includes/Elementor/widgets/Search_Form.php:257
+msgid "Alignment"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:147
+#: includes/Elementor/widgets/Search_Form.php:261
+msgid "Left"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:151
+#: includes/Elementor/widgets/Search_Form.php:265
+msgid "Center"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:155
+#: includes/Elementor/widgets/Search_Form.php:269
+msgid "Right"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:169
+msgid "View All Posts"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:197
+msgid "Category Items"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:204
+#: includes/Elementor/widgets/Companies.php:212
+#: includes/Elementor/widgets/Companies.php:369
+#: includes/Elementor/widgets/Jobs.php:225
+#: includes/Elementor/widgets/Jobs.php:382
+#: includes/Elementor/widgets/Search_Form.php:613
+msgid "Padding"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:227
+#: includes/Elementor/widgets/Companies.php:234
+#: includes/Elementor/widgets/Companies.php:405
+#: includes/Elementor/widgets/Jobs.php:247
+#: includes/Elementor/widgets/Jobs.php:418
+#: includes/Elementor/widgets/Search_Form.php:406
+#: includes/Elementor/widgets/Search_Form.php:629
+msgid "Border Radius"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:246
+#: includes/Elementor/widgets/Companies.php:355
+#: includes/Elementor/widgets/Jobs.php:368
+#: includes/Elementor/widgets/Search_Form.php:442
+#: includes/Elementor/widgets/Search_Form.php:515
+msgid "Normal"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:266
+#: includes/Elementor/widgets/Companies.php:419
+#: includes/Elementor/widgets/Jobs.php:432
+#: includes/Elementor/widgets/Search_Form.php:475
+#: includes/Elementor/widgets/Search_Form.php:549
+msgid "Hover"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:294
+#: includes/Elementor/widgets/Companies.php:441
+#: includes/Elementor/widgets/Jobs.php:454
+msgid "Border Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:306
+msgid "Icon Background"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:326
+msgid "Job Title"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:355
+#: includes/Elementor/widgets/Search_Form.php:585
+msgid "Margin"
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:372
+msgid "Total Job"
+msgstr ""
+
+#: includes/Elementor/widgets/Companies.php:35
+msgid "Jobly Companies"
+msgstr ""
+
+#: includes/Elementor/widgets/Companies.php:93
+msgid "01: Company Grid"
+msgstr ""
+
+#: includes/Elementor/widgets/Companies.php:114
+#: includes/Elementor/widgets/Jobs.php:119
+msgid "Display blog by categories"
+msgstr ""
+
+#: includes/Elementor/widgets/Companies.php:124
 #: includes/Elementor/widgets/Job_Tabs.php:117
 #: includes/Elementor/widgets/Jobs.php:129
 msgid "Show Posts Count"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:144
-msgid "Column"
+#: includes/Elementor/widgets/Companies.php:132
+#: includes/Elementor/widgets/Job_Tabs.php:125
+#: includes/Elementor/widgets/Jobs.php:137
+msgid "Order"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:147
-msgid "Two"
+#: includes/Elementor/widgets/Companies.php:144
+#: includes/Elementor/widgets/Job_Tabs.php:137
+#: includes/Elementor/widgets/Jobs.php:149
+msgid "Order By"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:148
-msgid "Three"
+#: includes/Elementor/widgets/Companies.php:161
+msgid "Exclude Company"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:149
-msgid "Four"
+#: includes/Elementor/widgets/Companies.php:162
+msgid "Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:150
-msgid "Six"
+#: includes/Elementor/widgets/Companies.php:206
+#: includes/Elementor/widgets/Jobs.php:219
+msgid "General Style"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:158
-#: includes/Elementor/widgets/Job_Tabs.php:177
-msgid "View All Posts"
+#: includes/Elementor/widgets/Companies.php:253
+#: includes/Elementor/widgets/Jobs.php:266
+msgid "List Item Style"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:186
-msgid "Category Item Style"
+#: includes/Elementor/widgets/Companies.php:260
+#: includes/Elementor/widgets/Jobs.php:273
+msgid "Job Title Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:198
-#: includes/Elementor/widgets/Jobs.php:355
-msgid "Normal"
+#: includes/Elementor/widgets/Companies.php:269
+#: includes/Elementor/widgets/Jobs.php:282
+msgid "Job Title Hover Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:212
-#: includes/Elementor/widgets/Jobs.php:212
-#: includes/Elementor/widgets/Jobs.php:369
-msgid "Padding"
+#: includes/Elementor/widgets/Companies.php:301
+#: includes/Elementor/widgets/Jobs.php:314
+msgid "Job Meta Style"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:231
-#: includes/Elementor/widgets/Jobs.php:234
-#: includes/Elementor/widgets/Jobs.php:405
-msgid "Border Radius"
+#: includes/Elementor/widgets/Companies.php:311
+#: includes/Elementor/widgets/Jobs.php:324
+msgid "Job Date Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:246
-#: includes/Elementor/widgets/Jobs.php:419
-msgid "Hover"
+#: includes/Elementor/widgets/Companies.php:339
+#: includes/Elementor/widgets/Jobs.php:352
+msgid "Job Button Style"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:260
-#: includes/Elementor/widgets/Jobs.php:441
-msgid "Border Color"
+#: includes/Elementor/widgets/Companies.php:379
+#: includes/Elementor/widgets/Jobs.php:392
+msgid "Button Text Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:277
-msgid "Headding Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Categories.php:285
-#: includes/Elementor/widgets/Categories.php:325
-msgid "Text Color"
-msgstr ""
-
-#: includes/Elementor/widgets/Categories.php:301
-msgid "Margin"
-msgstr ""
-
-#: includes/Elementor/widgets/Categories.php:315
-msgid "Job Total Style"
+#: includes/Elementor/widgets/Companies.php:432
+#: includes/Elementor/widgets/Jobs.php:445
+msgid "Hover Color"
 msgstr ""
 
 #: includes/Elementor/widgets/Job_Tabs.php:35
@@ -381,34 +1424,22 @@ msgstr ""
 msgid "Display job by categories"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:125
-#: includes/Elementor/widgets/Jobs.php:137
-msgid "Order"
-msgstr ""
-
-#: includes/Elementor/widgets/Job_Tabs.php:137
-#: includes/Elementor/widgets/Jobs.php:149
-msgid "Order By"
-msgstr ""
-
 #: includes/Elementor/widgets/Job_Tabs.php:154
-#: includes/Elementor/widgets/Jobs.php:166
 msgid "Title Length"
 msgstr ""
 
 #: includes/Elementor/widgets/Job_Tabs.php:161
-#: includes/Elementor/widgets/Jobs.php:173
-msgid "Excerpt Word Length"
-msgstr ""
-
-#: includes/Elementor/widgets/Job_Tabs.php:168
-#: includes/Elementor/widgets/Jobs.php:180
+#: includes/Elementor/widgets/Jobs.php:166
 msgid "Exclude Job"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:169
-#: includes/Elementor/widgets/Jobs.php:181
+#: includes/Elementor/widgets/Job_Tabs.php:162
+#: includes/Elementor/widgets/Jobs.php:167
 msgid "Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated"
+msgstr ""
+
+#: includes/Elementor/widgets/Job_Tabs.php:170
+msgid "View All Posts URL"
 msgstr ""
 
 #: includes/Elementor/widgets/Jobs.php:35
@@ -419,89 +1450,155 @@ msgstr ""
 msgid "01: Listing"
 msgstr ""
 
-#: includes/Elementor/widgets/Jobs.php:119
-msgid "Display blog by categories"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:206
-msgid "General Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:253
-msgid "List Item Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:260
-msgid "Job Title Color"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:269
-msgid "Job Title Hover Color"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:301
-msgid "Job Meta Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:311
-msgid "Job Date Color"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:339
-msgid "Job Button Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:379
-msgid "Button Text Color"
-msgstr ""
-
-#: includes/Elementor/widgets/Jobs.php:432
-msgid "Hover Color"
-msgstr ""
-
 #: includes/Elementor/widgets/Search_Form.php:33
 msgid "Jobly Search Form"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:92
+#: includes/Elementor/widgets/Search_Form.php:88
 msgid "01: Search Form"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:96
+#: includes/Elementor/widgets/Search_Form.php:92
 msgid "02: Search Form"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:119
+#: includes/Elementor/widgets/Search_Form.php:96
+msgid "03: Search Form"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:110
+#: includes/Elementor/widgets/Search_Form.php:355
+msgid "Search Form"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:118
+msgid "Attribute Label"
+msgstr ""
+
 #: includes/Elementor/widgets/Search_Form.php:126
+msgid "Attribute"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:134
+msgid "Attribute Layout"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:138
+msgid "Type Select"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:142
+msgid "Type Text"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:153
+msgid "Placeholder"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:169
+msgid "Two Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:170
+msgid "Three Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:171
+msgid "Four Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:172
+msgid "Five Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:173
+msgid "Six Column"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:181
+msgid "Add Attributes"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:192
+msgid "Job Type"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:204
+msgid "Form Button"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:212
+msgid "Button Label"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:214
+msgid "Search"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:220
+msgid "Search Result Page"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:238
+#: includes/Elementor/widgets/Search_Form.php:245
 msgid "Keywords"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:128
+#: includes/Elementor/widgets/Search_Form.php:247
 msgid "Show"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:129
+#: includes/Elementor/widgets/Search_Form.php:248
 msgid "Hide"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:137
+#: includes/Elementor/widgets/Search_Form.php:285
 msgid "Keywords Label"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:151
-msgid "Title"
+#: includes/Elementor/widgets/Search_Form.php:307
+msgid "Link"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:159
+#: includes/Elementor/widgets/Search_Form.php:317
 msgid "Add Keyword"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:164
+#: includes/Elementor/widgets/Search_Form.php:322
 msgid "Keyword #1"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:167
+#: includes/Elementor/widgets/Search_Form.php:325
 msgid "Keyword #2"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:378
+msgid "Search Text Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:394
+msgid "Border"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:429
+msgid "KeyWord"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:449
+msgid "Label Color"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:461
+#: includes/Elementor/widgets/Search_Form.php:482
+msgid "Keyword Color "
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:501
+msgid "Search Button"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:645
+msgid "Height"
 msgstr ""
 
 #: includes/Elementor/widgets/templates/categories/category-3.php:20
@@ -509,7 +1606,7 @@ msgid "vacancy"
 msgstr ""
 
 #: includes/Elementor/widgets/templates/categories/category-3.php:36
-#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:90
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:84
 msgid "Job already posted"
 msgstr ""
 
@@ -518,88 +1615,414 @@ msgid "shape"
 msgstr ""
 
 #: includes/Elementor/widgets/templates/categories/category-3.php:42
-#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:96
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:88
 msgid "Arrow Icon"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:75
-#: includes/Elementor/widgets/templates/jobs/job-1.php:62
-#: templates/contents/content.php:71
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:68
+#: includes/Elementor/widgets/templates/jobs/job-1.php:58
+#: templates/contents-job/job-archive-1.php:116
+#: templates/contents-job/job-archive-1.php:168
+#: templates/contents-job/job-archive-2.php:116
+#: templates/contents-job/job-archive-2.php:181
+#: templates/contents-job/job-archive-3.php:129
+#: templates/contents-job/job-archive-3.php:196
+#: templates/single-company.php:212 templates/single-job/related-job.php:65
+#: templates/taxonomy-job.php:138
 msgid "APPLY"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:93
+#: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:86
 msgid "Line Icon"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/jobs/job-1.php:39
-#: templates/banner/banner-single.php:15
-msgid "by"
+#: includes/Elementor/widgets/templates/jobs/job-1.php:33
+#: templates/single-company.php:189
+msgid " by"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/search-form/search-spinner.php:2
-msgid "loading"
+#: includes/Elementor/widgets/templates/search-form/search-form-2.php:5
+msgid "Search job, title etc...."
 msgstr ""
 
-#: includes/functions.php:237
+#: includes/filters.php:26
+#: templates/single-candidate/candidate-single-2.php:310
+msgid "New Message"
+msgstr ""
+
+#: includes/functions.php:409
+msgid "arrow-left"
+msgstr ""
+
+#: includes/functions.php:409
+msgid "Prev"
+msgstr ""
+
+#: includes/functions.php:410
+msgid "Next"
+msgstr ""
+
+#: includes/functions.php:410
+msgid "arrow-right"
+msgstr ""
+
+#: includes/functions.php:731
 #, php-format
-msgid "Showing %1$d-%2$d of %3$d results"
+msgid "Showing <span class=\"text-dark fw-500\"> %1$d-%2$d </span> of <span class=\"text-dark fw-500\">%3$d</span> results"
 msgstr ""
 
-#: templates/banner/banner-search.php:65
-msgid "Search"
+#: includes/functions.php:751
+msgid "Share:"
 msgstr ""
 
-#: templates/banner/banner-search.php:79 templates/banner/banner-search.php:80
-#: templates/banner/banner-single.php:50 templates/banner/banner-single.php:51
-msgid "Shape Image"
+#: includes/functions.php:752
+msgid "Share on Facebook"
 msgstr ""
 
-#: templates/banner/banner-single.php:30
-msgid "Facebook"
+#: includes/functions.php:753
+msgid "Share on Linkedin"
 msgstr ""
 
-#: templates/banner/banner-single.php:36
-msgid "Twitter"
+#: includes/functions.php:754
+msgid "Share on Twitter"
 msgstr ""
 
-#: templates/banner/banner-single.php:42
-msgid "Copy"
+#: includes/functions.php:774
+msgid "Bootstrap Icons"
 msgstr ""
 
-#: templates/contents/post-filter.php:6
+#: src/shortcode-candidate-archive/edit.js:13
+#: src/shortcode-company-archive/edit.js:12
+#: src/shortcode-job-archive/edit.js:13
+msgid "Layout 01"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js:14
+#: src/shortcode-company-archive/edit.js:13
+#: src/shortcode-job-archive/edit.js:14
+msgid "Layout 02"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js:31
+#: src/shortcode-company-archive/edit.js:29
+#: src/shortcode-job-archive/edit.js:32
+msgid "Filters"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js:35
+msgid "Candidate Archive Layout"
+msgstr ""
+
+#: src/shortcode-company-archive/edit.js:33
+msgid "Company Archive Layout"
+msgstr ""
+
+#: src/shortcode-job-archive/edit.js:15
+msgid "Layout 03"
+msgstr ""
+
+#: src/shortcode-job-archive/edit.js:36
+msgid "Job Archive Layout"
+msgstr ""
+
+#: src/testimonials-item/index.js:38
+msgid "Author Name"
+msgstr ""
+
+#: src/testimonials-item/index.js:54
+msgid "Review Contents"
+msgstr ""
+
+#: src/testimonials-item/index.js:62
+msgid "Rating"
+msgstr ""
+
+#: src/testimonials-item/index.js:97
+msgid "out of 5"
+msgstr ""
+
+#: src/video-popup/index.js:10
+msgid "Jobly Video Popup"
+msgstr ""
+
+#: src/video-popup/index.js:41
+msgid "Icon Controls"
+msgstr ""
+
+#: src/video-popup/index.js:45
+msgid "Icon Color"
+msgstr ""
+
+#: src/video-popup/index.js:83
+msgid "Upload Background Image"
+msgstr ""
+
+#: src/video-popup/index.js:86
+msgid "Remove Image"
+msgstr ""
+
+#: templates/contents-candidate/candidate-archive-1.php:34
+#: templates/contents-candidate/candidate-archive-2.php:37
+#: templates/contents-company/company-archive-1.php:35
+#: templates/contents-company/company-archive-2.php:40
+#: templates/contents-job/job-archive-1.php:34
+#: templates/contents-job/job-archive-2.php:33
+#: templates/contents-job/job-archive-3.php:38
+#: templates/taxonomy-candidate.php:68 templates/taxonomy-company.php:56
+#: templates/taxonomy-job.php:62
 msgid "All"
 msgstr ""
 
-#: templates/contents/post-filter.php:8
-msgid "jobs found"
-msgstr ""
-
-#: templates/contents/post-filter.php:13
+#: templates/contents-candidate/candidate-archive-1.php:51
+#: templates/contents-candidate/candidate-archive-2.php:56
+#: templates/contents-company/company-archive-1.php:51
+#: templates/contents-company/company-archive-2.php:59
+#: templates/contents-job/job-archive-1.php:40
+#: templates/contents-job/job-archive-2.php:39
+#: templates/contents-job/job-archive-3.php:47
+#: templates/taxonomy-candidate.php:85 templates/taxonomy-company.php:72
+#: templates/taxonomy-job.php:68
 msgid "Short By:"
 msgstr ""
 
-#: templates/contents/post-filter.php:15
-msgid "Default"
-msgstr ""
-
-#: templates/contents/post-filter.php:16
+#: templates/contents-candidate/candidate-archive-1.php:55
+#: templates/contents-candidate/candidate-archive-2.php:60
+#: templates/contents-company/company-archive-1.php:55
+#: templates/contents-company/company-archive-2.php:64
+#: templates/contents-job/job-archive-1.php:54
+#: templates/contents-job/job-archive-2.php:53
+#: templates/contents-job/job-archive-3.php:61
+#: templates/taxonomy-candidate.php:89 templates/taxonomy-company.php:76
+#: templates/taxonomy-job.php:82
 msgid "Newest to Oldest"
 msgstr ""
 
-#: templates/contents/post-filter.php:17
+#: templates/contents-candidate/candidate-archive-1.php:56
+#: templates/contents-candidate/candidate-archive-2.php:61
+#: templates/contents-company/company-archive-1.php:56
+#: templates/contents-company/company-archive-2.php:65
+#: templates/contents-job/job-archive-1.php:55
+#: templates/contents-job/job-archive-2.php:54
+#: templates/contents-job/job-archive-3.php:62
+#: templates/taxonomy-candidate.php:90 templates/taxonomy-company.php:77
+#: templates/taxonomy-job.php:83
 msgid "Oldest to Newest"
 msgstr ""
 
-#: templates/contents/post-filter.php:18
+#: templates/contents-candidate/candidate-archive-1.php:57
+#: templates/contents-candidate/candidate-archive-2.php:62
+#: templates/contents-company/company-archive-1.php:57
+#: templates/contents-company/company-archive-2.php:66
+#: templates/contents-job/job-archive-1.php:56
+#: templates/contents-job/job-archive-2.php:55
+#: templates/contents-job/job-archive-3.php:63
+#: templates/taxonomy-candidate.php:91 templates/taxonomy-company.php:78
+#: templates/taxonomy-job.php:84
 msgid "Title Ascending "
 msgstr ""
 
-#: templates/contents/post-filter.php:19
+#: templates/contents-candidate/candidate-archive-1.php:58
+#: templates/contents-candidate/candidate-archive-2.php:63
+#: templates/contents-company/company-archive-1.php:58
+#: templates/contents-company/company-archive-2.php:67
+#: templates/contents-job/job-archive-1.php:57
+#: templates/contents-job/job-archive-2.php:56
+#: templates/contents-job/job-archive-3.php:64
+#: templates/taxonomy-candidate.php:92 templates/taxonomy-company.php:79
+#: templates/taxonomy-job.php:85
 msgid "Title Descending"
 msgstr ""
 
-#: templates/contents/result-count.php:14
-#, php-format
-msgid "Showing <span class=\"text-dark fw-500\"> %1$d-%2$d </span> of <span class=\"text-dark fw-500\">%3$d</span> results"
+#: templates/contents-candidate/candidate-archive-1.php:63
+#: templates/contents-candidate/candidate-archive-2.php:68
+#: templates/contents-company/company-archive-1.php:63
+#: templates/contents-company/company-archive-2.php:72
+#: templates/contents-job/job-archive-1.php:62
+#: templates/contents-job/job-archive-2.php:60
+#: templates/contents-job/job-archive-3.php:69
+msgid "Active List"
+msgstr ""
+
+#: templates/contents-candidate/candidate-archive-1.php:66
+#: templates/contents-candidate/candidate-archive-2.php:71
+#: templates/contents-company/company-archive-1.php:66
+#: templates/contents-company/company-archive-2.php:75
+#: templates/contents-job/job-archive-1.php:63
+#: templates/contents-job/job-archive-2.php:61
+#: templates/contents-job/job-archive-3.php:70
+msgid "Active Grid"
+msgstr ""
+
+#: templates/contents-candidate/candidate-archive-1.php:173
+#: templates/contents-candidate/candidate-archive-1.php:285
+#: templates/contents-candidate/candidate-archive-2.php:171
+#: templates/contents-candidate/candidate-archive-2.php:286
+#: templates/taxonomy-candidate.php:206
+msgid "View Profile"
+msgstr ""
+
+#: templates/contents-candidate/candidate-archive-1.php:178
+#: templates/contents-candidate/candidate-archive-2.php:176
+#: templates/single-job.php:69 templates/taxonomy-candidate.php:211
+msgid "Message"
+msgstr ""
+
+#: templates/contents-candidate/sidebar-search-filter-popup.php:18
+#: templates/contents-candidate/sidebar-search-filter.php:16
+#: templates/contents-company/sidebar-search-filter-popup.php:13
+#: templates/contents-company/sidebar-search-filter.php:17
+#: templates/contents-job/sidebar-search-filter-2.php:13
+#: templates/contents-job/sidebar-search-filter-3.php:15
+#: templates/contents-job/sidebar-search-filter.php:20
+msgid "Filter By"
+msgstr ""
+
+#: templates/contents-candidate/sidebar-search-filter-popup.php:51
+#: templates/contents-candidate/sidebar-search-filter.php:144
+msgid "Name or keyword"
+msgstr ""
+
+#: templates/contents-candidate/sidebar-search-filter-popup.php:197
+msgid "location"
+msgstr ""
+
+#: templates/contents-candidate/sidebar-search-filter-popup.php:256
+#: templates/contents-candidate/sidebar-search-filter.php:310
+#: templates/contents-company/sidebar-search-filter-popup.php:149
+#: templates/contents-company/sidebar-search-filter.php:220
+#: templates/contents-job/sidebar-search-filter-2.php:202
+#: templates/contents-job/sidebar-search-filter-3.php:210
+#: templates/contents-job/sidebar-search-filter.php:331
+msgid "Apply Filter"
+msgstr ""
+
+#: templates/contents-company/sidebar-search-filter-popup.php:110
+#: templates/contents-job/sidebar-search-filter-3.php:49
+msgid "Search by Keywords"
+msgstr ""
+
+#: templates/contents-company/sidebar-search-filter.php:141
+msgid "Company Name"
+msgstr ""
+
+#: templates/contents-company/sidebar-search-filter.php:207
+#: templates/contents-job/sidebar-search-filter.php:269
+msgid "Show More"
+msgstr ""
+
+#: templates/contents-job/sidebar-search-filter.php:19
+msgid "Close"
+msgstr ""
+
+#: templates/contents-job/sidebar-search-filter.php:204
+msgid "No selected input"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:29
+msgid "By"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:60
+#: templates/single-candidate/candidate-single-2.php:92
+msgid "Intro"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:195
+msgid "Invite"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:237
+#: templates/single-candidate/candidate-single-2.php:254
+#: templates/single-company.php:87
+msgid "Social: "
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:257
+#: templates/single-candidate/candidate-single-2.php:69
+#: templates/single-candidate/candidate-single-2.php:273
+msgid "Download CV"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:288
+#: templates/single-candidate/candidate-single-2.php:324
+msgid "Your email address & profile will be shown to the recipient."
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:294
+#: templates/single-candidate/candidate-single-2.php:328
+msgid "Your Name*"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:298
+#: templates/single-candidate/candidate-single-2.php:331
+msgid "Your Email*"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:303
+#: templates/single-candidate/candidate-single-2.php:335
+msgid "Your Subject"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:308
+#: templates/single-candidate/candidate-single-2.php:339
+msgid "Your Message"
+msgstr ""
+
+#: templates/single-candidate/candidate-single-1.php:314
+#: templates/single-candidate/candidate-single-2.php:343
+msgid "Send Message"
+msgstr ""
+
+#: templates/single-company.php:108
+msgid "Posted Jobs"
+msgstr ""
+
+#: templates/single-company.php:136
+msgid "Open Position"
+msgstr ""
+
+#: templates/single-company.php:142
+msgid "Explore More"
+msgstr ""
+
+#: templates/single-job.php:29
+msgid "Apply for this Position"
+msgstr ""
+
+#: templates/single-job.php:49
+msgid "First Name"
+msgstr ""
+
+#: templates/single-job.php:54
+msgid "Last Name"
+msgstr ""
+
+#: templates/single-job.php:74
+msgid "Upload CV (PDF)"
+msgstr ""
+
+#: templates/single-job.php:79
+msgid "Submit Application"
+msgstr ""
+
+#: templates/single-job.php:86
+msgid "Your application has been submitted successfully."
+msgstr ""
+
+#: templates/single-job/job-single-1.php:50
+msgid "Company Profile"
+msgstr ""
+
+#: templates/single-job/job-single-1.php:105
+#: templates/single-job/job-single-2.php:70
+msgid "Apply Now"
+msgstr ""
+
+#: templates/single-job/job-single-1.php:110
+#: templates/single-job/job-single-2.php:75
+msgid "Apply Job this Position"
+msgstr ""
+
+#: templates/single-job/related-job.php:28
+msgid "Related Jobs"
 msgstr ""
