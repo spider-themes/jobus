@@ -88,22 +88,30 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_1') ?>
                                                 </a>
                                             <?php endif; ?>
-
-                                            <?php if (jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2') || jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3'))  : ?>
-                                                <div class="job-salary">
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2') ?></span> .
-                                                    <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3') ?>
-                                                </div>
-                                            <?php endif ?>
+                                            <div class="job-salary">
+		                                        <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) : ?>
+                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
+		                                        <?php endif; ?>
+		                                        <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) : ?>
+                                                    <span class="expertise">. <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></span>
+		                                        <?php endif; ?>
+                                            </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-6">
-                                            <?php if (jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_4')) : ?>
-                                                <div class="job-location xs-mt-10">
-                                                    <a href="<?php the_permalink(); ?>">
-                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_4') ?>
-                                                    </a>
-                                                </div>
-                                            <?php endif ?>
+	                                            <?php
+	                                            $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                            if (!empty($locations )) { ?>
+                                                    <div class="job-location">
+			                                            <?php
+			                                            foreach ($locations as $location ) { ?>
+                                                            <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+				                                            <?php
+			                                            }
+			                                            ?>
+                                                    </div>
+		                                            <?php
+	                                            }
+	                                            ?>
                                             <div class="job-category">
                                                 <a href="<?php echo jobly_get_first_taxonomoy_link() ?>">
                                                     <?php echo jobly_get_first_taxonomoy_name(); ?>
@@ -168,15 +176,20 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             }
                                             ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">
-                                                <?php
-                                                if ( jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3')) {
-                                                    ?>
+	                                            <?php
+	                                            $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                            if (!empty($locations )) { ?>
                                                     <div class="job-location">
-                                                        <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_3') ?></a>
+			                                            <?php
+			                                            foreach ($locations as $location ) { ?>
+                                                            <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+				                                            <?php
+			                                            }
+			                                            ?>
                                                     </div>
-                                                    <?php
-                                                }
-                                                ?>
+		                                            <?php
+	                                            }
+	                                            ?>
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                                     <?php esc_html_e('APPLY', 'jobly'); ?>
                                                 </a>

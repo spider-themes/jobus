@@ -119,7 +119,33 @@ if (!defined('ABSPATH')) {
                                     }
                                 }
 
-                                //============= Is Categories
+                                //============= Is Categories=====================//
+                                if (jobly_opt('is_company_widget_location') == true) {
+
+                                    $term_cats = get_terms(array(
+                                        'taxonomy' => 'company_location',
+                                        'hide_empty' => true,
+                                    ));
+                                    ?>
+                                    <div class="col-lg-4">
+                                        <div class="filter-block pb-50 lg-pb-20">
+                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                            <select class="nice-select" name="company_locations[]">
+                                                <?php
+                                                foreach ( $term_cats as $key => $term ) {
+                                                    ?>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+
+
+                                //============= Is Categories=============================//
                                 if (jobly_opt('is_company_widget_cat') == true) {
 
                                     $term_cats = get_terms(array(
@@ -149,12 +175,8 @@ if (!defined('ABSPATH')) {
                                         <?php esc_html_e('Apply Filter', 'jobly'); ?>
                                     </button>
                                 </div>
-
-
                             </div>
-
                         </form>
-
                     </div>
                     <!-- /.filter header -->
                 </div>

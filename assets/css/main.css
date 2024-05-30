@@ -3746,7 +3746,7 @@ img {
   color: rgba(0, 0, 0, 0.4);
 }
 .candidate-profile-card .cadidate-skills {
-  margin: 0 -2px;
+  gap: 8px;
 }
 .candidate-profile-card .cadidate-skills li {
   margin: 0 2px 5px;
@@ -4046,18 +4046,6 @@ img {
   background: url(../images/layout/candidate/candidate-shape-2.svg) !important;
   background-size: cover !important;
   border: none;
-}
-
-.pagination-widget .pagination-one .current {
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: 500;
-  color: #fff;
-  background: #31795a;
 }
 
 .card-style-one .wrapper {

@@ -116,19 +116,27 @@ $job_count = $job_post->found_posts;
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-sm-6">
-                                            <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) : ?>
+                                            <!--         job archive 1 location         -->
+	                                        <?php
+	                                        $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                        if (!empty($locations )) { ?>
                                                 <div class="job-location">
-                                                    <a href="<?php the_permalink() ?>">
-                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?>
-                                                    </a>
+			                                        <?php
+			                                        foreach ($locations as $location ) { ?>
+                                                        <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+				                                        <?php
+			                                        }
+			                                        ?>
                                                 </div>
-                                            <?php endif; ?>
+		                                        <?php
+	                                        }
+	                                        ?>
                                             <div class="job-salary">
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></span>
+                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) : ?>
+                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
                                                 <?php endif; ?>
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4')) : ?>
-                                                    <span class="expertise">. <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4') ?></span>
+                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) : ?>
+                                                    <span class="expertise">. <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

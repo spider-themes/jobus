@@ -225,7 +225,12 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             $is_collapsed = ' collapsed';
                         }
                     }
-                    ?>
+	                $term_cats = get_terms( array(
+		                'taxonomy'   => 'job_cat',
+		                'hide_empty' => false,
+	                ) );
+	                if (!empty($term_cats)) {
+		                ?>
                     <div class="filter-block bottom-line pb-25">
                         <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
                            data-bs-toggle="collapse"
@@ -235,48 +240,76 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         </a>
                         <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                             <div class="main-body">
-                                <ul class="style-none filter-input">
-                                    <?php
-                                    $term_cats = get_terms(array(
-                                        'taxonomy' => 'job_cat',
-                                    ));
-                                    if (!empty($term_cats)) {
-                                        $searched_opt = jobly_search_terms('job_cats');
-                                        foreach ( $term_cats as $key => $term ) {
-
-                                            $list_class = $key > 3 ? ' class=hide' : '';
-                                            $check_status = array_search($term->slug, $searched_opt);
-                                            $check_status = $check_status !== false ? ' checked' : '';
-                                            ?>
-                                            <li<?php echo esc_attr($list_class) ?>>
-                                                <input type="checkbox" name="job_cats[]"
-                                                       value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($check_status) ?>>
-                                                <label>
-                                                    <?php echo esc_html($term->name) ?>
-                                                    <span><?php echo esc_html($term->count) ?></span>
-                                                </label>
-                                            </li>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-                                </ul>
-                                <?php
-                                if (count($term_cats) > 3) {
-                                    ?>
-                                    <div class="more-btn">
-                                        <i class="bi bi-plus"></i>
-                                        <?php esc_html_e('Show More', 'jobly'); ?>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
+                                <select class="nice-select" name="job_cats[]">
+				                    <?php
+				                    $searched_opt = jobly_search_terms('job_cats');
+				                    foreach ( $term_cats as $key => $term ) {
+					                    $list_class = $key > 3 ? ' class=hide' : '';
+					                    $check_status = array_search($term->slug, $searched_opt);
+					                    $check_status = $check_status !== false ? ' checked' : '';
+					                    ?>
+                                        <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+					                    <?php
+				                    }
+				                    ?>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <?php
+	            <?php
+	            }
+	            }
+
+                // Location Widget
+                if (jobly_opt('is_job_widget_location') == true) {
+
+                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'job')) {
+                        if (!empty ($_GET[ 'job_locations' ])) {
+                            $is_collapsed_show = 'collapse show';
+                            $area_expanded = 'true';
+                            $is_collapsed = '';
+                        } else {
+                            $is_collapsed_show = 'collapse';
+                            $area_expanded = 'false';
+                            $is_collapsed = 'collapsed';
+                        }
+                    }
+	                $term_loc = get_terms( array(
+		                'taxonomy'   => 'job_location',
+		                'hide_empty' => false,
+	                ) );
+                    if (!empty($term_loc)) {
+	                    ?>
+                <div class="filter-block bottom-line pb-25">
+                    <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
+                       data-bs-toggle="collapse"
+                       href="#collapseLocation" role="button"
+                       aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+			            <?php esc_html_e('Location', 'jobly'); ?>
+                    </a>
+                    <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
+                        <div class="main-body">
+                            <select class="nice-select" name="job_locations[]">
+					            <?php
+					            $searched_opt = jobly_search_terms('job_locations');
+					            foreach ( $term_loc as $key => $term ) {
+						            $list_class = $key > 3 ? ' class=hide' : '';
+						            $check_status = array_search($term->slug, $searched_opt);
+						            $check_status = $check_status !== false ? ' checked' : '';
+						            ?>
+                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+						            <?php
+					            }
+					            ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+	            <?php
+	            }
                 }
 
+            //  Tag widget
                 if (jobly_opt('is_job_widget_tag') == true) {
 
                     if (!empty ($_GET[ 'post_type' ] ?? '' == 'job')) {

@@ -93,7 +93,7 @@ class Frontend {
 
 
         // Candidate Pages
-        if ( is_tax('candidate_cat') || is_tax('candidate_skill') ) {
+        if ( is_tax('candidate_cat') || is_tax('candidate_location') || is_tax('candidate_skill') ) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'taxonomy-candidate.php';
             if ( $theme_file = locate_template( array( 'jobly/' . $archive_template ) ) ) {

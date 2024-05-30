@@ -15,9 +15,8 @@ get_header();
 
 // Get the current job category and job tag
 $current_candidate_cat = get_term_by('slug', get_query_var('candidate_cat'), 'candidate_cat');
+$current_candidate_loc = get_term_by('slug', get_query_var('candidate_location'), 'candidate_location');
 $current_candidate_skill = get_term_by('slug', get_query_var('candidate_skill'), 'candidate_skill');
-$current_candidate_location = get_term_by('slug', get_query_var('candidate_location'), 'candidate_location');
-
 // These parameters are used to determine the sorting order of job posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
@@ -30,7 +29,7 @@ $args = array(
     'order'          => $selected_order,
 );
 
-if ($current_candidate_cat || $current_candidate_location || $current_candidate_skill) {
+if ($current_candidate_cat || $current_candidate_loc || $current_candidate_skill) {
     $args['tax_query'] = array(
         'relation' => 'OR',//Must satisfy at least one taxonomy query
         array(

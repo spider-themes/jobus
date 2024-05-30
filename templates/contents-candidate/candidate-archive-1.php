@@ -115,7 +115,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                                                 // Display the first 2 skills
                                                 $displayed_skills = array_slice($skills, 0, $max_skills);
-                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center pt-30 sm-pt-20 pb-10">';
                                                     foreach ($displayed_skills as $skill) {
                                                         echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                                     }
@@ -146,9 +146,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     </div>
                                                     <?php
                                                 }
-                                                ?>
 
-	                                            <?php
 	                                            $locations = get_the_terms(get_the_ID(), 'candidate_location');
 	                                            if (!empty($locations )) { ?>
                                                 <div class="col-md-6">

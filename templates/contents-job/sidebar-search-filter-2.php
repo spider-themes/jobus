@@ -194,6 +194,31 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             </div>
                             <?php
                         }
+
+                        // Location Widget
+                        if (jobly_opt('is_job_widget_location') == true) {
+                            ?>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="filter-block pb-50 lg-pb-20">
+                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                    <select class="nice-select bg-white" name="job_locations[]">
+                                        <?php
+                                        $term_loc = get_terms(array(
+                                            'taxonomy' => 'job_location',
+                                        ));
+                                        if (!empty($term_loc)) {
+                                            foreach ( $term_loc as $term ) {
+                                                ?>
+                                                <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <?php
+                        }
                         ?>
                     </div>
 

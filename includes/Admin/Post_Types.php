@@ -102,6 +102,19 @@ class Post_Types {
 			)
 		));
 
+		// Register post taxonomies location
+		register_taxonomy( 'job_location', 'job', array(
+			'public'                => true,
+			'hierarchical'          => true,
+			'show_ui'               => true,
+			'show_admin_column'     => true,
+			'show_in_nav_menus'     => true,
+			'show_in_rest'          => true,
+			'labels'                => array(
+				'name'  => esc_html__( 'Location', 'jobly'),
+			)
+		));
+
         // Register post taxonomies Tags
         register_taxonomy( 'job_tag', 'job', array(
             'public'                => true,

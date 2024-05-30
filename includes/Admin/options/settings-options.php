@@ -217,15 +217,8 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'job_archive_meta_3',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 03', 'jobly'),
-                'options'   => jobly_get_specs(),
-                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
-            ),
-
-            array(
-                'id'        => 'job_archive_meta_4',
-                'type'      => 'select',
-                'title'     => esc_html__('Attribute 04', 'jobly'),
+                'title'     => esc_html__('
+                Attribute 03', 'jobly'),
                 'options'   => jobly_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '==', 'list'),
             ),
@@ -295,6 +288,13 @@ if( class_exists( 'CSF' ) ) {
                 'title'   => esc_html__('Category', 'jobly'),
                 'default' => true,
             ),
+
+	        array(
+		        'id'      => 'is_job_widget_location',
+		        'type'    => 'switcher',
+		        'title'   => esc_html__('Location', 'jobly'),
+		        'default' => true,
+	        ),
 
             array(
                 'id'      => 'is_job_widget_tag',
@@ -569,14 +569,14 @@ if( class_exists( 'CSF' ) ) {
             ),
 
 	        array(
-		        'id'      => 'is_company_widget_cat',
+		        'id'      => 'is_company_widget_location',
 		        'type'    => 'switcher',
-		        'title'   => esc_html__('Category', 'jobly'),
+		        'title'   => esc_html__('Location', 'jobly'),
 		        'default' => true,
 	        ),
 
 	        array(
-		        'id'      => 'is_company_widget_location',
+		        'id'      => 'is_company_widget_cat',
 		        'type'    => 'switcher',
 		        'title'   => esc_html__('Category', 'jobly'),
 		        'default' => true,
@@ -763,14 +763,6 @@ if( class_exists( 'CSF' ) ) {
                 'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
-            array(
-                'id'        => 'candidate_archive_meta_3',
-                'type'      => 'select',
-                'title'     => esc_html__('Attribute 03', 'jobly'),
-                'options'   => jobly_get_specs('candidate_specifications'),
-                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
-            ),
-
         )
     ) );
 
@@ -831,19 +823,18 @@ if( class_exists( 'CSF' ) ) {
             ),
 
 	        array(
-		        'id'      => 'company_location',
+		        'id'      => 'is_candidate_widget_location',
 		        'type'    => 'switcher',
 		        'title'   => esc_html__('Location', 'jobly'),
 		        'default' => true,
 	        ),
 
-            array(
-                'id'      => 'is_candidate_widget_cat',
-                'type'    => 'switcher',
-                'title'   => esc_html__('Category', 'jobly'),
-                'default' => true,
-            ),
-
+	        array(
+		        'id'      => 'is_candidate_widget_cat',
+		        'type'    => 'switcher',
+		        'title'   => esc_html__('Category', 'jobly'),
+		        'default' => true,
+	        ),
         )
     ) );
 

@@ -97,31 +97,38 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         </a>
                                                         <ul class="style-none d-flex flex-wrap info-data">
                                                             <?php
-                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) {
-                                                                ?>
-                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?></li>
-                                                                <?php
-                                                            }
                                                             if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) {
                                                                 ?>
                                                                 <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></li>
                                                                 <?php
                                                             }
                                                             if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) {
-                                                                ?>
+	                                                            ?>
                                                                 <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></li>
-                                                                <?php
+	                                                            <?php
                                                             }
+                                                            $locations = get_the_terms(get_the_ID(), 'job_location');
+                                                            if (!empty($locations )) { ?>
+                                                                <li class="text-capitalize">
+                                                                    <?php
+                                                                    foreach ($locations as $location ) { ?>
+                                                                        <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </li>
+                                                            <?php
+                                                                }
                                                             ?>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <?php echo wpautop($excerpt) ?>
                                                 <div class="d-sm-flex align-items-center justify-content-between mt-auto">
-                                                    <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4')) :  ?>
+                                                    <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) :  ?>
                                                         <div class="d-flex align-items-center">
                                                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500 text-capitalize">
-                                                                <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_4') ?>
+                                                                <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
                                                             </a>
                                                         </div>
                                                     <?php endif; ?>
@@ -184,10 +191,23 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">
                                                 <?php
-                                                if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_3') ) {
+                                                if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_2') ) {
                                                     ?>
                                                     <div class="job-location">
-                                                        <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></a>
+	                                                    <?php
+	                                                    $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                                    if (!empty($locations )) { ?>
+                                                            <div class="job-location">
+			                                                    <?php
+			                                                    foreach ($locations as $location ) { ?>
+                                                                    <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+				                                                    <?php
+			                                                    }
+			                                                    ?>
+                                                            </div>
+		                                                    <?php
+	                                                    }
+	                                                    ?>
                                                     </div>
                                                     <?php
                                                 }

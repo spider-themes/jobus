@@ -210,7 +210,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 // candidate location sidebar
                 if (jobly_opt('is_candidate_widget_location') == true) {
 
-	                if ( ! empty ( $_GET['post_type'] ?? '' == 'candidate' ) ) {
+                    if ( ! empty ( $_GET['post_type'] ?? '' == 'candidate' ) ) {
 		                if ( ! empty ( $_GET['candidate_locations'] ) ) {
 			                $is_collapsed_show = 'collapse show';
 			                $area_expanded     = 'true';
@@ -224,11 +224,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	                $term_loc = get_terms( array(
 		                'taxonomy'   => 'candidate_location',
-		                'hide_empty' => true,
+		                'hide_empty' => false,
 	                ) );
 
 	                if (!empty($term_loc)) {
-		                ?>
+                    ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button"
                                aria-expanded="<?php echo esc_attr($area_expanded) ?>">
@@ -255,6 +255,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		                <?php
 	                }
                 }
+
 
                 // Widget Category List
                 if (jobly_opt('is_candidate_widget_cat') == true) {

@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
                             }
 
                             // Select job category or job tag
-                            if ($select_job_attr == 'job_cat' || $select_job_attr == 'job_tag') {
+                            if ($select_job_attr == 'job_cat' || $select_job_attr == 'job_location' || $select_job_attr == 'job_tag') {
                                 ?>
                                 <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
                                         id="<?php echo esc_attr($select_job_attr) ?>">
