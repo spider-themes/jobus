@@ -874,3 +874,4 @@ function jobly_phpmailer_init( $phpmailer ) {
 
     return $phpmailer;
 }
+

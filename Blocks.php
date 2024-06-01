@@ -52,7 +52,7 @@ class Blocks {
         $this->register_block( 'shortcode-job-archive' );
         $this->register_block( 'shortcode-company-archive' );
         $this->register_block( 'shortcode-candidate-archive' );
-        $this->register_block( 'list-items' );
+        $this->register_block( 'register-form' );
     }
 
     /**

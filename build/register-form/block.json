@@ -1,19 +1,31 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "jobly/list-items",
-  "title": "List Items (Jobly)",
+  "name": "jobly/register-form",
+  "title": "Register Form (Jobly)",
   "category": "jobly-blocks",
   "icon": "dashicons dashicons-shortcode",
-  "description": "Display the Job Archive job posts on the website frontend",
+  "description": "A custom registration form for candidates and employers.",
   "supports": {
     "html": false,
     "anchor": true
   },
   "attributes": {
-    "job_layout": {
+    "candidate_username": {
       "type": "string",
-      "default": "1"
+      "default": "demo"
+    },
+    "candidate_email": {
+      "type": "string",
+      "default": "demo@gmail.com"
+    },
+    "candidate_pass": {
+      "type": "string",
+      "default": "demo"
+    },
+    "candidate_confirm_pass": {
+      "type": "string",
+      "default": "demo"
     },
     "preview": {
       "type": "boolean",
@@ -27,8 +39,9 @@
   },
   "keywords": [
     "jobly",
-    "Shortcode",
-    "job Archive"
+    "Candidate Register",
+    "Employer Register",
+    "Register Form"
   ],
   "textdomain": "jobly",
   "editorScript": "file:./index.js",
