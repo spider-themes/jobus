@@ -23,10 +23,6 @@
       "type": "string",
       "default": "demo"
     },
-    "candidate_confirm_pass": {
-      "type": "string",
-      "default": "demo"
-    },
     "preview": {
       "type": "boolean",
       "default": false

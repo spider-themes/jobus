@@ -1,4 +1,6 @@
-/* Blocks will be loaded here */
+/**
+ * Includes all blocks root files
+ */
 import './video-popup/index';
 import './group-testimonials/index';
 import './testimonials-item/index';
