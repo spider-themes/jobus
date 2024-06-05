@@ -108,10 +108,14 @@ if ( ! class_exists( 'Jobly' ) ) {
             // Frontend
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 
+            //Admin UI
+            require_once __DIR__ . '/includes/Admin/User.php';
 
 			//Post Type
-			require_once __DIR__ . '/includes/Admin/Post_Types.php';
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
+            require_once __DIR__ . '/includes/Admin/posttypes/Candidate.php';
+            require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
+            require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -145,14 +149,17 @@ if ( ! class_exists( 'Jobly' ) ) {
 
 			if ( is_admin() ) {
 				new Jobly\Admin\Admin();
+				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
 				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
 			}
 
-            new Jobly\Admin\Post_Types();
             new Jobly\Admin\Posttypes\Job_Application();
+            new Jobly\Admin\Posttypes\Candidate();
+            new Jobly\Admin\Posttypes\Job();
+            new Jobly\Admin\Posttypes\Company();
             new Jobly\Frontend\Shortcode();
 
 		}

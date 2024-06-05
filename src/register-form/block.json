@@ -13,15 +13,35 @@
   "attributes": {
     "candidate_username": {
       "type": "string",
-      "default": "demo"
+      "default": ""
     },
     "candidate_email": {
       "type": "string",
-      "default": "demo@gmail.com"
+      "default": ""
     },
     "candidate_pass": {
       "type": "string",
-      "default": "demo"
+      "default": ""
+    },
+    "candidate_confirm_pass": {
+      "type": "string",
+      "default": ""
+    },
+    "employer_username": {
+      "type": "string",
+      "default": ""
+    },
+    "employer_email": {
+      "type": "string",
+      "default": ""
+    },
+    "employer_pass": {
+      "type": "string",
+      "default": ""
+    },
+    "employer_confirm_pass": {
+      "type": "string",
+      "default": ""
     },
     "preview": {
       "type": "boolean",
@@ -30,7 +50,14 @@
   },
   "example": {
     "attributes": {
-      "preview": true
+      "candidate_username": "John Doe",
+      "candidate_email": "john.doe@example.com",
+      "candidate_pass": "password123",
+      "candidate_confirm_pass": "password123",
+      "employer_username": "Jane Smith",
+      "employer_email": "jane.smith@example.com",
+      "employer_pass": "password456",
+      "employer_confirm_pass": "password456"
     }
   },
   "keywords": [
