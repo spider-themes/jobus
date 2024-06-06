@@ -87,7 +87,7 @@ function Edit({ attributes, setAttributes }) {
 
                     <div className="form-wrapper m-auto">
 
-                        <ul className="nav nav-tabs border-0 w-100 mt-30" role="tablist">
+                        <ul className="nav nav-tabs border-0 w-100" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link" data-bs-toggle="tab" data-bs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobly')}</button>
                             </li>
@@ -96,34 +96,34 @@ function Edit({ attributes, setAttributes }) {
                             </li>
                         </ul>
 
-                        <div className="tab-content mt-40">
+                        <div className="tab-content">
 
                             <div className="tab-pane fade" role="tabpanel" id="fc1">
                                 <form>
                                     <div className="row">
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-25">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Name*', 'jobly')}</label>
                                                 <input type="text" placeholder={__('Rashed Kabir', 'jobly')}
                                                        value={candidate_username} readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-25">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Email*', 'jobly')}</label>
                                                 <input type="email" placeholder="rshdkabir@gmail.com"
                                                        value={candidate_email} readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-20">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Password*', 'jobly')}</label>
                                                 <input type="password" placeholder={__('Enter Password', 'jobly')}
                                                        value={candidate_pass} readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-20">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Confirm Password*', 'jobly')}</label>
                                                 <input type="password" placeholder={__('Confirm Password', 'jobly')}
                                                        value={candidate_confirm_pass} readOnly/>
@@ -137,28 +137,28 @@ function Edit({ attributes, setAttributes }) {
                                 <form>
                                     <div className="row">
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-25">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Name*', 'jobly')}</label>
                                                 <input type="text" placeholder="Zubayer Hasan" value={employer_username}
                                                        readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-25">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Email*', 'jobly')}</label>
                                                 <input type="email" placeholder="zubayerhasan@gmail.com"
                                                        value={employer_email} readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-20">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Password*', 'jobly')}</label>
                                                 <input type="password" placeholder={__('Enter Password', 'jobly')}
                                                        value={employer_pass} readOnly/>
                                             </div>
                                         </div>
                                         <div className="col-12">
-                                            <div className="input-group-meta position-relative mb-20">
+                                            <div className="input-group-meta position-relative">
                                                 <label>{__('Confirm Password*', 'jobly')}</label>
                                                 <input type="password" placeholder={__('Confirm Password', 'jobly')}
                                                        value={employer_confirm_pass} readOnly/>

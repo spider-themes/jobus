@@ -74,6 +74,8 @@ class Blocks {
     public function register_block_editor_assets () {
 
         // Style's
+        wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css');
+        wp_enqueue_style('jobly-block-editor', JOBLY_CSS . '/block-editor.css');
 
 
         // Scripts
@@ -85,11 +87,13 @@ class Blocks {
     public function register_block_assets () {
 
         // Style's
-        wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
+        wp_enqueue_style('jobly-block-frontend', JOBLY_CSS . '/block-frontend.css');
+
 
 
         // Script's
-        wp_enqueue_script('jobly-block', JOBLY_JS . '/block-frontend.js', [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), true);
+        wp_enqueue_script('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '5.1.3', true );
+        wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
         wp_enqueue_script('jobly-block', JOBLY_JS . '/block-frontend.js', [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), true);
 
     }

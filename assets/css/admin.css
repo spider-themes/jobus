@@ -94,4 +94,11 @@
   height: 20px;
 }
 
+.block-editor .csf-field .csf-title h4 {
+  font-size: inherit;
+}
+.block-editor .csf-nav ul {
+  padding: inherit;
+}
+
 /*# sourceMappingURL=admin.css.map */

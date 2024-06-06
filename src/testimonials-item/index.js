@@ -4,8 +4,6 @@ import { Fragment } from '@wordpress/element';
 import {SelectControl, TextareaControl, TextControl} from "@wordpress/components";
 import {__} from "@wordpress/i18n";
 
-import './style.scss'
-
 registerBlockType('jobly/testimonials-item', {
 
 
