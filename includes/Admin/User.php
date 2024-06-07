@@ -17,7 +17,10 @@ class User {
 
 
         add_action('admin_post_nopriv_register_candidate', [$this, 'candidate_registration']);
+        add_action('admin_post_register_candidate', [$this, 'candidate_registration']);
+
         add_action('admin_post_nopriv_register_employer', [$this, 'employer_registration']);
+        add_action('admin_post_register_employer', [$this, 'employer_registration']);
 
     }
 
@@ -64,9 +67,11 @@ class User {
 
     }
 
-    public function candidate_registration()
-    {
+    public function candidate_registration() {
         if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce($_POST['register_candidate_nonce'], 'register_candidate_action')) {
+
+            // Debug
+            error_log('Candidate registration hook triggered.');
 
             // Get form data
             $candidate_username = sanitize_user($_POST['candidate_username']);
@@ -103,7 +108,6 @@ class User {
                 }
             }
         }
-
     }
 
     public function employer_registration()

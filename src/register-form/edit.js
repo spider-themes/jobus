@@ -1,77 +1,74 @@
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl } from '@wordpress/components';
-import { Fragment } from 'react';
-import { __ } from '@wordpress/i18n';
+import {useBlockProps, InspectorControls} from '@wordpress/block-editor';
+import {PanelBody, TextControl} from '@wordpress/components';
+import {Fragment} from 'react';
+import {__} from '@wordpress/i18n';
 
-function Edit({ attributes, setAttributes }) {
+function Edit({attributes, setAttributes}) {
     const blockProps = useBlockProps({className: 'jobly-registration-section'});
-    const { candidate_username, candidate_email, candidate_pass, candidate_confirm_pass } = attributes;
-    const { employer_username, employer_email, employer_pass, employer_confirm_pass } = attributes;
+    const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass} = attributes;
+    const {employer_username, employer_email, employer_pass, employer_confirm_pass} = attributes;
 
     return (
         <Fragment>
 
             <InspectorControls>
 
-                <PanelBody title={__('Candidate Form', 'jobly')}>
+                {/*================ Candidate Form ============== */}
+                <PanelBody title={__('Candidate Form', 'jobly')} initialOpen={true}>
                     <TextControl
-                        label={__('Username', 'jobly')}
-                        type="text"
+                        label={__('Placeholder Username', 'jobly')}
                         value={candidate_username}
                         placeholder={__('candidate', 'jobly')}
                         onChange={(value) => setAttributes({candidate_username: value})}
                     />
                     <TextControl
-                        label={__('Email', 'jobly')}
+                        label={__('Placeholder Email', 'jobly')}
                         type="email"
                         value={candidate_email}
                         placeholder={__('candidate@example.com', 'jobly')}
                         onChange={(value) => setAttributes({candidate_email: value})}
                     />
                     <TextControl
-                        label={__('Password', 'jobly')}
-                        type="password"
+                        label={__('Placeholder Password', 'jobly')}
                         value={candidate_pass}
                         placeholder={__('demo', 'jobly')}
                         onChange={(value) => setAttributes({candidate_pass: value})}
                     />
                     <TextControl
-                        label={__('Confirm Password', 'jobly')}
-                        type="password"
+                        label={__('Placeholder Confirm Password', 'jobly')}
                         value={candidate_confirm_pass}
                         placeholder={__('demo', 'jobly')}
                         onChange={(value) => setAttributes({candidate_confirm_pass: value})}
                     />
                 </PanelBody>
 
-                <PanelBody title={__('Employer Form', 'jobly')}>
+                {/*================ Employer Form ============== */}
+                <PanelBody title={__('Employer Form', 'jobly')} initialOpen={false}>
                     <TextControl
-                        label={__('Username', 'jobly')}
+                        label={__('Placeholder Username', 'jobly')}
                         type="text"
                         value={employer_username}
                         placeholder={__('employer', 'jobly')}
-                        onChange={(value) => setAttributes({candidate_username: value})}
+                        onChange={(value) => setAttributes({employer_username: value})}
                     />
                     <TextControl
-                        label={__('Email', 'jobly')}
+                        label={__('Placeholder Email', 'jobly')}
                         type="email"
                         value={employer_email}
                         placeholder={__('employer@example.com', 'jobly')}
-                        onChange={(value) => setAttributes({candidate_email: value})}
+                        onChange={(value) => setAttributes({employer_email: value})}
                     />
                     <TextControl
-                        label={__('Password', 'jobly')}
-                        type="password"
+                        label={__('Placeholder Password', 'jobly')}
                         value={employer_pass}
                         placeholder={__('demo', 'jobly')}
-                        onChange={(value) => setAttributes({candidate_pass: value})}
+                        onChange={(value) => setAttributes({employer_pass: value})}
                     />
                     <TextControl
-                        label={__('Confirm Password', 'jobly')}
-                        type="password"
+                        label={__('Placeholder Confirm Password', 'jobly')}
                         value={employer_confirm_pass}
                         placeholder={__('demo', 'jobly')}
-                        onChange={(value) => setAttributes({candidate_confirm_pass: value})}
+                        onChange={(value) => setAttributes({employer_confirm_pass: value})}
                     />
                 </PanelBody>
 
@@ -89,79 +86,125 @@ function Edit({ attributes, setAttributes }) {
 
                         <ul className="nav nav-tabs border-0 w-100" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" data-bs-toggle="tab" data-bs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobly')}</button>
+                                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobly')}</button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#fc2" role="tab" aria-selected="true">{__('Employer', 'jobly')}</button>
+                                <button className="nav-link" data-bs-toggle="tab" data-bs-target="#fc2" role="tab" aria-selected="true">{__('Employer', 'jobly')}</button>
                             </li>
                         </ul>
 
                         <div className="tab-content">
 
-                            <div className="tab-pane fade" role="tabpanel" id="fc1">
-                                <form>
+                            {/*============= Candidate Form ===================*/}
+                            <div className="tab-pane fade active show" role="tabpanel" id="fc1">
+                                <form method="post">
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Name*', 'jobly')}</label>
-                                                <input type="text" placeholder={__('Rashed Kabir', 'jobly')}
-                                                       value={candidate_username} readOnly/>
+                                                <label htmlFor="candidate_username">{__('Name*', 'jobly')}</label>
+                                                <input
+                                                    type="text"
+                                                    name="candidate_username"
+                                                    id="candidate_username"
+                                                    placeholder={candidate_username}
+                                                    value={candidate_username}
+                                                    onChange={(event) => setAttributes({candidate_username: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Email*', 'jobly')}</label>
-                                                <input type="email" placeholder="rshdkabir@gmail.com"
-                                                       value={candidate_email} readOnly/>
+                                                <label htmlFor="candidate_email">{__('Email*', 'jobly')}</label>
+                                                <input
+                                                    type="email"
+                                                    name="candidate_email"
+                                                    id="candidate_email"
+                                                    placeholder={candidate_email}
+                                                    value={candidate_email}
+                                                    onChange={(event) => setAttributes({candidate_email: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Password*', 'jobly')}</label>
-                                                <input type="password" placeholder={__('Enter Password', 'jobly')}
-                                                       value={candidate_pass} readOnly/>
+                                                <label htmlFor="candidate_pass">{__('Password*', 'jobly')}</label>
+                                                <input
+                                                    name="candidate_pass"
+                                                    id="candidate_pass"
+                                                    placeholder={candidate_pass}
+                                                    value={candidate_pass}
+                                                    onChange={(event) => setAttributes({candidate_pass: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Confirm Password*', 'jobly')}</label>
-                                                <input type="password" placeholder={__('Confirm Password', 'jobly')}
-                                                       value={candidate_confirm_pass} readOnly/>
+                                                <label htmlFor="candidate_confirm_pass">{__('Confirm Password*', 'jobly')}</label>
+                                                <input
+                                                    name="candidate_confirm_pass"
+                                                    id="candidate_confirm_pass"
+                                                    placeholder={candidate_confirm_pass}
+                                                    value={candidate_confirm_pass}
+                                                    onChange={(event) => setAttributes({candidate_confirm_pass: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
 
-                            <div className="tab-pane fade active show" role="tabpanel" id="fc2">
-                                <form>
+                            {/*============= Employer Form ===================*/}
+                            <div className="tab-pane fade" role="tabpanel" id="fc2">
+                                <form method="post">
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Name*', 'jobly')}</label>
-                                                <input type="text" placeholder="Zubayer Hasan" value={employer_username}
-                                                       readOnly/>
+                                                <label htmlFor="employer_username">{__('Name*', 'jobly')}</label>
+                                                <input
+                                                    type="text"
+                                                    name="employer_username"
+                                                    id="employer_username"
+                                                    placeholder={employer_username}
+                                                    value={employer_username}
+                                                    onChange={(event) => setAttributes({employer_username: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Email*', 'jobly')}</label>
-                                                <input type="email" placeholder="zubayerhasan@gmail.com"
-                                                       value={employer_email} readOnly/>
+                                                <label htmlFor="employer_email">{__('Email*', 'jobly')}</label>
+                                                <input
+                                                    type="email"
+                                                    name="employer_email"
+                                                    id="employer_email"
+                                                    placeholder={employer_email}
+                                                    value={employer_email}
+                                                    onChange={(event) => setAttributes({employer_email: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Password*', 'jobly')}</label>
-                                                <input type="password" placeholder={__('Enter Password', 'jobly')}
-                                                       value={employer_pass} readOnly/>
+                                                <label htmlFor="employer_pass">{__('Password*', 'jobly')}</label>
+                                                <input
+                                                    name="employer_pass"
+                                                    id="employer_pass"
+                                                    placeholder={employer_pass}
+                                                    value={employer_pass}
+                                                    onChange={(event) => setAttributes({employer_pass: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label>{__('Confirm Password*', 'jobly')}</label>
-                                                <input type="password" placeholder={__('Confirm Password', 'jobly')}
-                                                       value={employer_confirm_pass} readOnly/>
+                                                <label htmlFor="employer_confirm_pass">{__('Confirm Password*', 'jobly')}</label>
+                                                <input
+                                                    name="employer_confirm_pass"
+                                                    id="employer_confirm_pass"
+                                                    placeholder={employer_confirm_pass}
+                                                    value={employer_confirm_pass}
+                                                    onChange={(event) => setAttributes({employer_confirm_pass: event.target.value})}
+                                                />
                                             </div>
                                         </div>
                                     </div>

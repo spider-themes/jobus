@@ -13,51 +13,39 @@
   "attributes": {
     "candidate_username": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Name"
     },
     "candidate_email": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Email"
     },
     "candidate_pass": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Password"
     },
     "candidate_confirm_pass": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Confirm Password"
     },
     "employer_username": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Name"
     },
     "employer_email": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Email"
     },
     "employer_pass": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Password"
     },
     "employer_confirm_pass": {
       "type": "string",
-      "default": ""
+      "default": "Enter Your Confirm Password"
     },
     "preview": {
       "type": "boolean",
       "default": false
-    }
-  },
-  "example": {
-    "attributes": {
-      "candidate_username": "John Doe",
-      "candidate_email": "john.doe@example.com",
-      "candidate_pass": "password123",
-      "candidate_confirm_pass": "password123",
-      "employer_username": "Jane Smith",
-      "employer_email": "jane.smith@example.com",
-      "employer_pass": "password456",
-      "employer_confirm_pass": "password456"
     }
   },
   "keywords": [

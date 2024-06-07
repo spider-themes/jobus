@@ -45,17 +45,17 @@ function Edit({
     employer_confirm_pass
   } = attributes;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Candidate Form', 'jobly')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Candidate Form', 'jobly'),
+    initialOpen: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Username', 'jobly'),
-    type: "text",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Username', 'jobly'),
     value: candidate_username,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('candidate', 'jobly'),
     onChange: value => setAttributes({
       candidate_username: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Email', 'jobly'),
     type: "email",
     value: candidate_email,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('candidate@example.com', 'jobly'),
@@ -63,54 +63,51 @@ function Edit({
       candidate_email: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password', 'jobly'),
-    type: "password",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Password', 'jobly'),
     value: candidate_pass,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('demo', 'jobly'),
     onChange: value => setAttributes({
       candidate_pass: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password', 'jobly'),
-    type: "password",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Confirm Password', 'jobly'),
     value: candidate_confirm_pass,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('demo', 'jobly'),
     onChange: value => setAttributes({
       candidate_confirm_pass: value
     })
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Employer Form', 'jobly')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Employer Form', 'jobly'),
+    initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Username', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Username', 'jobly'),
     type: "text",
     value: employer_username,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('employer', 'jobly'),
     onChange: value => setAttributes({
-      candidate_username: value
+      employer_username: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Email', 'jobly'),
     type: "email",
     value: employer_email,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('employer@example.com', 'jobly'),
     onChange: value => setAttributes({
-      candidate_email: value
+      employer_email: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password', 'jobly'),
-    type: "password",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Password', 'jobly'),
     value: employer_pass,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('demo', 'jobly'),
     onChange: value => setAttributes({
-      candidate_pass: value
+      employer_pass: value
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password', 'jobly'),
-    type: "password",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder Confirm Password', 'jobly'),
     value: employer_confirm_pass,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('demo', 'jobly'),
     onChange: value => setAttributes({
-      candidate_confirm_pass: value
+      employer_confirm_pass: value
     })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...blockProps
@@ -121,13 +118,13 @@ function Edit({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Create Account', 'jobly'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "form-wrapper m-auto"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
-    className: "nav nav-tabs border-0 w-100 mt-30",
+    className: "nav nav-tabs border-0 w-100",
     role: "tablist"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
     className: "nav-item",
     role: "presentation"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "nav-link",
+    className: "nav-link active",
     "data-bs-toggle": "tab",
     "data-bs-target": "#fc1",
     role: "tab",
@@ -136,97 +133,145 @@ function Edit({
     className: "nav-item",
     role: "presentation"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    className: "nav-link active",
+    className: "nav-link",
     "data-bs-toggle": "tab",
     "data-bs-target": "#fc2",
     role: "tab",
     "aria-selected": "true"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Employer', 'jobly')))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "tab-content mt-40"
+    className: "tab-content"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "tab-pane fade",
-    role: "tabpanel",
-    id: "fc1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "row"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-12"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-25"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Name*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Rashed Kabir', 'jobly'),
-    value: candidate_username,
-    readOnly: true
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-12"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-25"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "email",
-    placeholder: "rshdkabir@gmail.com",
-    value: candidate_email,
-    readOnly: true
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-12"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-20"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "password",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter Password', 'jobly'),
-    value: candidate_pass,
-    readOnly: true
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "col-12"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-20"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "password",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password', 'jobly'),
-    value: candidate_confirm_pass,
-    readOnly: true
-  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "tab-pane fade active show",
     role: "tabpanel",
-    id: "fc2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "fc1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+    method: "post"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-25"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Name*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "candidate_username"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Name*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "text",
-    placeholder: "Zubayer Hasan",
-    value: employer_username,
-    readOnly: true
+    name: "candidate_username",
+    id: "candidate_username",
+    placeholder: candidate_username,
+    value: candidate_username,
+    onChange: event => setAttributes({
+      candidate_username: event.target.value
+    })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-25"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "candidate_email"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "email",
-    placeholder: "zubayerhasan@gmail.com",
+    name: "candidate_email",
+    id: "candidate_email",
+    placeholder: candidate_email,
+    value: candidate_email,
+    onChange: event => setAttributes({
+      candidate_email: event.target.value
+    })
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "candidate_pass"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    name: "candidate_pass",
+    id: "candidate_pass",
+    placeholder: candidate_pass,
+    value: candidate_pass,
+    onChange: event => setAttributes({
+      candidate_pass: event.target.value
+    })
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "candidate_confirm_pass"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    name: "candidate_confirm_pass",
+    id: "candidate_confirm_pass",
+    placeholder: candidate_confirm_pass,
+    value: candidate_confirm_pass,
+    onChange: event => setAttributes({
+      candidate_confirm_pass: event.target.value
+    })
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tab-pane fade",
+    role: "tabpanel",
+    id: "fc2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", {
+    method: "post"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "row"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "employer_username"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Name*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    name: "employer_username",
+    id: "employer_username",
+    placeholder: employer_username,
+    value: employer_username,
+    onChange: event => setAttributes({
+      employer_username: event.target.value
+    })
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-12"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "employer_email"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "email",
+    name: "employer_email",
+    id: "employer_email",
+    placeholder: employer_email,
     value: employer_email,
-    readOnly: true
+    onChange: event => setAttributes({
+      employer_email: event.target.value
+    })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-20"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "password",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter Password', 'jobly'),
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "employer_pass"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    name: "employer_pass",
+    id: "employer_pass",
+    placeholder: employer_pass,
     value: employer_pass,
-    readOnly: true
+    onChange: event => setAttributes({
+      employer_pass: event.target.value
+    })
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col-12"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "input-group-meta position-relative mb-20"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "password",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password', 'jobly'),
+    className: "input-group-meta position-relative"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "employer_confirm_pass"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Confirm Password*', 'jobly')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    name: "employer_confirm_pass",
+    id: "employer_confirm_pass",
+    placeholder: employer_confirm_pass,
     value: employer_confirm_pass,
-    readOnly: true
+    onChange: event => setAttributes({
+      employer_confirm_pass: event.target.value
+    })
   })))))))))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -243,24 +288,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
 function Save({
-  save
+  attributes
 }) {
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    className: 'registration-section position-relative pt-100 lg-pt-80 pb-150 lg-pb-80'
-  });
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    ...blockProps
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "container"
-  }, "[jobly_register_form]")));
+  return null;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Save);
 
@@ -322,7 +353,7 @@ module.exports = window["wp"]["i18n"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jobly/register-form","title":"Register Form (Jobly)","category":"jobly-blocks","icon":"dashicons dashicons-shortcode","description":"A custom registration form for candidates and employers.","supports":{"html":false,"anchor":true},"attributes":{"candidate_username":{"type":"string","default":""},"candidate_email":{"type":"string","default":""},"candidate_pass":{"type":"string","default":""},"candidate_confirm_pass":{"type":"string","default":""},"employer_username":{"type":"string","default":""},"employer_email":{"type":"string","default":""},"employer_pass":{"type":"string","default":""},"employer_confirm_pass":{"type":"string","default":""},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"candidate_username":"John Doe","candidate_email":"john.doe@example.com","candidate_pass":"password123","candidate_confirm_pass":"password123","employer_username":"Jane Smith","employer_email":"jane.smith@example.com","employer_pass":"password456","employer_confirm_pass":"password456"}},"keywords":["jobly","Candidate Register","Employer Register","Register Form"],"textdomain":"jobly","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jobly/register-form","title":"Register Form (Jobly)","category":"jobly-blocks","icon":"dashicons dashicons-shortcode","description":"A custom registration form for candidates and employers.","supports":{"html":false,"anchor":true},"attributes":{"candidate_username":{"type":"string","default":"Enter Your Name"},"candidate_email":{"type":"string","default":"Enter Your Email"},"candidate_pass":{"type":"string","default":"Enter Your Password"},"candidate_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"employer_username":{"type":"string","default":"Enter Your Name"},"employer_email":{"type":"string","default":"Enter Your Email"},"employer_pass":{"type":"string","default":"Enter Your Password"},"employer_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"preview":{"type":"boolean","default":false}},"keywords":["jobly","Candidate Register","Employer Register","Register Form"],"textdomain":"jobly","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
 
 /***/ })
 

@@ -52,8 +52,27 @@ class Blocks {
         $this->register_block( 'shortcode-job-archive' );
         $this->register_block( 'shortcode-company-archive' );
         $this->register_block( 'shortcode-candidate-archive' );
-        $this->register_block( 'register-form' );
+
+        $this->register_block( 'register-form', array(
+            'render_callback' => [ $this, 'register_form_block_render' ],
+        ) );
     }
+
+
+    public function register_form_block_render($attributes, $content ) {
+
+        ob_start();
+
+        if ( is_user_logged_in()) {
+            echo '<p class="text-center mt-10">' . esc_html__('You are already logged in.', 'jobly') . '</p>';
+        } else {
+            include __DIR__ . '/src/register-form/register.php';
+        }
+
+        return ob_get_clean();
+
+    }
+
 
     /**
      * Register Block Category

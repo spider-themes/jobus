@@ -18,7 +18,7 @@ class Shortcode {
         add_shortcode( 'jobly_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
 
         // Register Form Candidate & Employers
-        add_shortcode( 'jobly_register_form', [ $this, 'register_form_shortcode' ] );
+        //add_shortcode( 'jobly_register_form', [ $this, 'register_form_shortcode' ] );
 
     }
 
@@ -234,8 +234,6 @@ class Shortcode {
             </div>
             <?php
         }
-
-
 
         ?>
 
