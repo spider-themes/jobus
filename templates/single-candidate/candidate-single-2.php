@@ -18,7 +18,9 @@ wp_enqueue_script('lightbox');
                             <div class="position-relative">
                                 <h4 class="candidate-name text-white mb-0"><?php the_title() ?></h4>
                                 <div class="andidate-post"><?php esc_html('Intro') ?></div>
-                                <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                <?php if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
+                                    <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-xl-3 order-xl-3">
@@ -51,25 +53,41 @@ wp_enqueue_script('lightbox');
                             }
                             ?>
                         </div>
-                        <div class="col-xl-2 col-md-4 order-xl-1">
-                            <div class="candidate-info">
-                                <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+
+                        <?php
+                        if (jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ) {
+                            ?>
+                            <div class="col-xl-2 col-md-4 order-xl-1">
+                                <div class="candidate-info">
+                                    <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
+                                    <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-2 col-md-4 order-xl-2">
-                            <div class="candidate-info">
-                                <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
-                                <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                            <?php
+                        }
+                        if (jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ) {
+                            ?>
+                            <div class="col-xl-2 col-md-4 order-xl-2">
+                                <div class="candidate-info">
+                                    <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
+                                    <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-md-4 order-xl-4">
-                            <div class="d-flex justify-content-md-end">
-                                <a href="<?php echo esc_url($cv_attachment) ?>" class="cv-download-btn fw-500 tran3s ms-md-3 sm-mt-20" target="_blank">
-		                            <?php esc_html_e('Download CV', 'jobly') ?>
-                                </a>
+                            <?php
+                        }
+
+                        if ( $cv_attachment) {
+                            ?>
+                            <div class="col-xl-3 col-md-4 order-xl-4">
+                                <div class="d-flex justify-content-md-end">
+                                    <a href="<?php echo esc_url($cv_attachment) ?>" class="cv-download-btn fw-500 tran3s ms-md-3 sm-mt-20" target="_blank">
+                                        <?php esc_html_e('Download CV', 'jobly') ?>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
