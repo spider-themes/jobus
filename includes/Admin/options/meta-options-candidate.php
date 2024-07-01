@@ -194,6 +194,13 @@ if (class_exists('CSF')) {
         'fields' => array(
 
             array(
+                'id'                => 'video_title',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Title', 'jobly' ),
+                'default'           => esc_html__( 'Intro', 'jobly' ),
+            ),
+
+            array(
                 'id'                => 'bg_img',
                 'type'              => 'media',
                 'title'             => esc_html__( 'Background Image', 'jobly' ),
@@ -216,6 +223,13 @@ if (class_exists('CSF')) {
         'title' => esc_html__( 'Education', 'jobly' ),
         'icon' => 'fa fa-graduation-cap',
         'fields' => array(
+
+            array(
+                'id'                => 'education_title',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Title', 'jobly' ),
+                'default'           => esc_html__( 'Education', 'jobly' ),
+            ),
 
             array(
                 'id'                => 'education',
@@ -282,6 +296,13 @@ if (class_exists('CSF')) {
         'title' => esc_html__( 'Experience', 'jobly' ),
         'icon' => 'fa fa-toolbox',
         'fields' => array(
+
+            array(
+                'id'                => 'experience_title',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Title', 'jobly' ),
+                'default'           => esc_html__( 'Work Experience', 'jobly' ),
+            ),
 
             array(
                 'id'                => 'experience',
@@ -362,6 +383,13 @@ if (class_exists('CSF')) {
         'title' => esc_html__( 'Portfolio', 'jobly' ),
         'icon' => 'fa fa-briefcase',
         'fields' => array(
+
+            array(
+                'id'                => 'portfolio_title',
+                'type'              => 'text',
+                'title'             => esc_html__( 'Title', 'jobly' ),
+                'default'           => esc_html__( 'Portfolio', 'jobly' ),
+            ),
 
             array(
                 'id'                => 'portfolio',

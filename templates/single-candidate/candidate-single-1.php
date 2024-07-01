@@ -56,8 +56,12 @@ wp_enqueue_script( 'lightbox' );
 						<?php the_content() ?>
                     </div>
 					<?php
-					if ( ! empty( $meta['video_url'] ) ) { ?>
-                        <h3 class="title"><?php esc_html_e( 'Intro', 'jobly' ) ?></h3>
+					if ( ! empty( $meta['video_url'] ) ) {
+                        if ( !empty($meta['video_title']) ) { ?>
+                            <h3 class="title"><?php echo esc_html($meta['video_title']) ?></h3>
+                            <?php
+                        }
+                        ?>
                         <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ) ?>)">
                             <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
@@ -71,7 +75,12 @@ wp_enqueue_script( 'lightbox' );
 					if ( $educations ) {
 						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e( 'Education', 'jobly' ) ?></h3>
+                            <?php
+                            if ( !empty($meta['education_title']) ) {?>
+                                <h3 class="title"><?php echo esc_html($meta['education_title']) ?></h3>
+                                <?php
+                            }
+                            ?>
                             <div class="time-line-data position-relative pt-15">
 								<?php
 								foreach ( $educations as $item ) {
@@ -122,7 +131,12 @@ wp_enqueue_script( 'lightbox' );
 					if ( $experience ) {
 						?>
                         <div class="inner-card border-style mb-60 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e( 'Work Experience', 'jobly' ) ?></h3>
+                            <?php
+                            if ( !empty($meta['experience_title']) ) {?>
+                                <h3 class="title"><?php echo esc_html($meta['experience_title']) ?></h3>
+                                <?php
+                            }
+                            ?>
                             <div class="time-line-data position-relative pt-15">
 								<?php
 								foreach ( $experience as $item ) {
@@ -157,8 +171,11 @@ wp_enqueue_script( 'lightbox' );
 					}
 
 					if ( $portfolio_ids ) {
-						?>
-                        <h3 class="title"><?php esc_html_e( 'Portfolio', 'jobly' ) ?></h3>
+                        if ( !empty($meta['portfolio_title']) ) {?>
+                            <h3 class="title"><?php echo esc_html($meta['portfolio_title']) ?></h3>
+                            <?php
+                        }
+                        ?>
                         <div class="candidate-portfolio-slider">
 							<?php
 							foreach ( $portfolio_ids as $item ) {

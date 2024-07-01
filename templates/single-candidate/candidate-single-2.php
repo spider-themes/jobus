@@ -106,48 +106,58 @@ wp_enqueue_script('lightbox');
 		                <?php the_content() ?>
                     </div>
                     <?php
-                    if ( !empty($meta['video_url']) ) { ?>
-                    <h3 class="title"><?php esc_html_e('Intro', 'jobly') ?></h3>
-                    <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50" style="background-image: url(<?php echo esc_url($meta['bg_img']['url']) ?>)">
-                        <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="<?php echo esc_url($meta['video_url']) ?>">
-                            <i class="bi bi-play"></i>
-                        </a>
-                    </div>
-                    <?php
-                    }
-                    if ( $educations ) {
-                    ?>
-                    <div class="inner-card border-style mb-75 lg-mb-50">
-                        <h3 class="title"><?php esc_html_e('Education', 'jobly') ?></h3>
-                        <div class="time-line-data position-relative pt-15">
+                    if ( !empty($meta['video_url']) ) {
+                        if ( !empty($meta['video_title']) ) { ?>
+                            <h3 class="title"><?php echo esc_html($meta['video_title']) ?></h3>
                             <?php
-                            foreach ( $educations as $item ) {
-                                ?>
-                                <div class="info position-relative">
-                                    <?php
-                                    if ( !empty($item['sl_num']) ) { ?>
-                                        <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
-                                        <?php
-                                    }
-                                    if ( !empty($item['title']) ) { ?>
-                                        <div class="text_1 fw-500"><?php echo esc_html($item['title']) ?></div>
-                                        <?php
-                                    }
-                                    if ( !empty($item['academy']) ) { ?>
-                                        <h4><?php echo esc_html($item['academy']) ?></h4>
-                                        <?php
-                                    }
-                                    if ( !empty($item['description']) ) { ?>
-                                        <?php echo wp_kses_post(wpautop($item['description'])) ?>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
+                        }
+                        ?>
+                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50" style="background-image: url(<?php echo esc_url($meta['bg_img']['url']) ?>)">
+                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="<?php echo esc_url($meta['video_url']) ?>">
+                                <i class="bi bi-play"></i>
+                            </a>
+                        </div>
+                        <?php
+                    }
+
+                    if ( $educations ) {
+                        ?>
+                        <div class="inner-card border-style mb-75 lg-mb-50">
+                            <?php
+                            if ( !empty($meta['education_title']) ) {?>
+                                <h3 class="title"><?php echo esc_html($meta['education_title']) ?></h3>
                                 <?php
                             }
                             ?>
+                            <div class="time-line-data position-relative pt-15">
+                                <?php
+                                foreach ( $educations as $item ) {
+                                    ?>
+                                    <div class="info position-relative">
+                                        <?php
+                                        if ( !empty($item['sl_num']) ) { ?>
+                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
+                                            <?php
+                                        }
+                                        if ( !empty($item['title']) ) { ?>
+                                            <div class="text_1 fw-500"><?php echo esc_html($item['title']) ?></div>
+                                            <?php
+                                        }
+                                        if ( !empty($item['academy']) ) { ?>
+                                            <h4><?php echo esc_html($item['academy']) ?></h4>
+                                            <?php
+                                        }
+                                        if ( !empty($item['description']) ) { ?>
+                                            <?php echo wp_kses_post(wpautop($item['description'])) ?>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </div>
-                    </div>
                     <?php
                     }
 
@@ -169,7 +179,12 @@ wp_enqueue_script('lightbox');
                     if ( $experience ) {
                     ?>
                     <div class="inner-card border-style mb-60 lg-mb-50">
-                        <h3 class="title"><?php esc_html_e('Work Experience', 'jobly') ?></h3>
+                        <?php
+                        if ( !empty($meta['experience_title']) ) {?>
+                            <h3 class="title"><?php echo esc_html($meta['experience_title']) ?></h3>
+                            <?php
+                        }
+                        ?>
                         <div class="time-line-data position-relative pt-15">
                             <?php
                             foreach ( $experience as $item ) {
@@ -203,8 +218,11 @@ wp_enqueue_script('lightbox');
                     }
 
                     if ( $portfolio_ids ) {
+                        if ( !empty($meta['portfolio_title']) ) {?>
+                            <h3 class="title"><?php echo esc_html($meta['portfolio_title']) ?></h3>
+                            <?php
+                        }
 	                    ?>
-                        <h3 class="title"><?php esc_html_e('Portfolio', 'jobly') ?></h3>
                         <div class="candidate-portfolio-slider">
 		                    <?php
 		                    foreach ( $portfolio_ids as $item ) {
