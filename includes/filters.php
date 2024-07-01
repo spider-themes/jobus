@@ -8,8 +8,8 @@ add_image_size('jobly_280x268', 280, 268, true ); //Candidate Profile 01/02
 
 
 // Candidate contact form ajax
-add_action('wp_ajax_send_contact_email', 'send_contact_email_callback');
-add_action('wp_ajax_nopriv_send_contact_email', 'send_contact_email_callback');
+//add_action('wp_ajax_send_contact_email', 'send_contact_email_callback');
+//add_action('wp_ajax_nopriv_send_contact_email', 'send_contact_email_callback');
 
 function send_contact_email_callback() {
 	// Check nonce for security

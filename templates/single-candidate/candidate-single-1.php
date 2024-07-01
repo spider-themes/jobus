@@ -50,6 +50,7 @@ wp_enqueue_script( 'lightbox' );
 <section class="candidates-profile pt-100 lg-pt-70 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
+
             <div class="col-xxl-9 col-lg-8">
                 <div class="candidates-profile-details me-xxl-5 pe-xxl-4">
                     <div class="inner-card border-style mb-65 lg-mb-40">
@@ -197,9 +198,9 @@ wp_enqueue_script( 'lightbox' );
                 </div>
             </div>
 
-
             <div class="col-xxl-3 col-lg-4">
                 <div class="cadidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
+
                     <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                         <div class="pt-25">
                             <div class="cadidate-avatar m-auto">
@@ -292,46 +293,67 @@ wp_enqueue_script( 'lightbox' );
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobly' ) ?></h4>
                         <div class="map-area mb-60 md-mb-40">
                             <div class="gmap_canvas h-100 w-100">
-                                <iframe class="gmap_iframe h-100 w-100"
-                                        src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
+                                <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
 						<?php
 					}
-
 					?>
-                    <h4 class="sidebar-title"><?php esc_html_e( 'Email', 'jobly' ) ?><?php the_title() ?></h4>
+
+
+                    <?php
+                    // Handle form submission
+                    if (isset($_POST['send_message'])) {
+                        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
+                        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
+                        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
+                        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+
+                        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
+                        $headers[] = "From: $sender_name <$sender_email>";
+                        $headers[] = "Reply-To: $sender_email";
+                        $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
+
+                        $sent = wp_mail($candidate_mail, $subject, $message, $headers);
+                    }
+                    ?>
+
+                    <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobly' ) ?><?php the_title() ?></h4>
+
                     <div class="email-form bg-wrapper bg-color">
+
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobly' ) ?></p>
 
-                        <form id="email-form" method="post">
+                        <form name="candidate_email_from" id="candidate_email_from" method="post">
 							<?php wp_nonce_field( 'contact_form_nonce', 'contact_form_nonce' ); ?>
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name"
-                                       placeholder="<?php esc_attr_e( 'Your Name*', 'jobly' ) ?>" required>
+                                <input type="text" name="sender_name" id="sender_name" autocomplete="on"
+                                       placeholder="<?php esc_attr_e( 'Name*', 'jobly' ) ?>" required>
                             </div>
                             <div class="d-sm-flex mb-25">
                                 <input type="email" name="sender_email" id="sender_email"
-                                       placeholder="<?php esc_attr_e( 'Your Email*', 'jobly' ) ?>" required>
+                                       placeholder="<?php esc_attr_e( 'Email*', 'jobly' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_subject" id="sender_subject"
-                                       placeholder="<?php esc_attr_e( 'Your Subject', 'jobly' ) ?>">
+                                       placeholder="<?php esc_attr_e( 'Subject', 'jobly' ) ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
                                 <textarea name="message" id="message"
-                                          placeholder="<?php esc_attr_e( 'Your Message', 'jobly' ) ?>"></textarea>
+                                          placeholder="<?php esc_attr_e( 'Message', 'jobly' ) ?>"></textarea>
                             </div>
 
                             <div class="d-sm-flex">
-                                <button type="submit" name="send_message"
+                                <button type="submit" name="send_message" id="send_message"
                                         class="btn-ten fw-500 text-white flex-fill text-center tran3s">
 									<?php esc_html_e( 'Send Message', 'jobly' ) ?>
                                 </button>
                             </div>
+
                             <div id="email-form-message" class="email-form-message"></div>
+
                         </form>
 
                     </div>
@@ -343,7 +365,7 @@ wp_enqueue_script( 'lightbox' );
     </div>
 </section>
 
-<script>
+<!--<script>
     ;(function ($) {
 
         'use strict';
@@ -376,4 +398,4 @@ wp_enqueue_script( 'lightbox' );
         });
     })(jQuery);
 
-</script>
+</script>-->

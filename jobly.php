@@ -90,7 +90,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * Load core files required to run the plugin.
 		 */
-		public function core_includes() {
+		public function core_includes(): void
+        {
 
             // Functions
             require_once __DIR__ . '/includes/functions.php';
@@ -104,6 +105,9 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
 
+
+            //Classes
+            require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 
             // Frontend
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
@@ -145,7 +149,11 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 * Initializes the plugin
 		 * @return void
 		 */
-		public function init_plugin() {
+		public function init_plugin(): void
+        {
+
+            //Classes
+            new Jobly\includes\Classes\Ajax_Actions();
 
 			if ( is_admin() ) {
 				new Jobly\Admin\Admin();
