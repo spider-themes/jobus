@@ -1,20 +1,35 @@
 {
   "apiVersion": 3,
   "name": "jobly/video-popup",
-  "version": "1.0.0",
   "title": "Jobly Video Popup",
-  "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
-  "icon": "universal-access-alt",
   "category": "jobly-blocks",
+  "icon": "video-alt3",
+  "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
   "supports": {
-    "html": false
+    "html": false,
+    "anchor": true,
+    "align": true
+  },
+  "attributes": {
+    "icon_bg_color": {
+      "type": "string",
+      "default": "#FF4646"
+    },
+    "icon_color": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "videoUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "backgroundImage": {
+      "type": "string",
+      "default": "#"
+    }
   },
   "textdomain": "jobly",
-  "keywords": [
-    "jobly",
-    "video",
-    "popup"
-  ],
+  "keywords": [ "jobly", "video", "popup", "block", "youtube" ],
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css"
 }

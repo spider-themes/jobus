@@ -1,40 +1,17 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-import { Fragment } from '@wordpress/element';
-import {TextControl} from "@wordpress/components";
 
-registerBlockType('jobly/group-testimonials', {
+import metadata from './block.json';
 
-    edit: ({ attributes, setAttributes }) => {
-
-        const blockProps = useBlockProps({className: 'company-review-slider'});
-
-        return (
-            <Fragment>
-                <div {...blockProps}>
+/**
+ * Internal dependencies
+ */
+import Edit from './edit';
+import Save from './save';
 
 
-                    <InnerBlocks
-                        allowedBlocks={['jobly/testimonials-item']}
-                        template={[
-                            ['jobly/testimonials-item'],
-                        ]}
-                    />
+registerBlockType(metadata, {
 
-                </div>
-            </Fragment>
-        );
-    },
+    edit: Edit,
+    save: Save,
 
-    save: ({ attributes }) => {
-
-        const { uniqueId } = attributes;
-        const blockProps = useBlockProps.save({className: 'company-review-slider'});
-
-        return (
-            <div {...blockProps}>
-                <InnerBlocks.Content />
-            </div>
-        );
-    },
 });

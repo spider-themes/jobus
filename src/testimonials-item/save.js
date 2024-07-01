@@ -1,0 +1,36 @@
+import {useBlockProps} from "@wordpress/block-editor";
+import {__} from "@wordpress/i18n";
+
+function Save ({attributes}) {
+
+    const blockProps = useBlockProps.save({className: 'item'});
+    const { authorName, location, reviewContents, rating, authorImage } = attributes;
+
+    return (
+        <div {...blockProps}>
+
+            <div className="feedback-block-four">
+                <div className="d-flex align-items-center">
+                    <ul className="style-none d-flex rating">
+                        {Array.from({length: rating}, (_, index) => (
+                            <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
+                        ))}
+                    </ul>
+                    <div className="review-score"><span className="fw-500 text-dark">{rating}</span> {__('out of 5', 'jobly')}</div>
+                </div>
+                <blockquote>{reviewContents}</blockquote>
+                <div className="d-flex align-items-center">
+                    {authorImage && <img src={authorImage} alt="Author" className="author-img rounded-circle"/>}
+                    <div className="ms-3">
+                        <div className="name fw-500 text-dark">{authorName}</div>
+                        <span className="opacity-50">{location}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+}
+
+
+export default Save;
