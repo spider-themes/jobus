@@ -40,7 +40,7 @@ class Assets {
 
 
         //Load Script for ajax mail to candidate
-        wp_register_script( 'jobly-candidate-email-form', JOBLY_JS . '/candidate-email-form.js', [ 'jquery' ], JOBLY_VERSION, true );
+	    wp_enqueue_script( 'jobly-candidate-email-form', JOBLY_JS . '/candidate-email-form.js', [ 'jquery' ], JOBLY_VERSION, true );
         wp_localize_script('jobly-candidate-email-form', 'jobly_candidate_email_form', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
             'nonce' => wp_create_nonce('jobly_candidate_contact_mail_form'),

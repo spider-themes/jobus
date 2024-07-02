@@ -321,9 +321,9 @@ wp_enqueue_script( 'lightbox' );
 
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobly' ) ?></p>
 
-                        <form name="candidate_email_from" id="candidate_email_from" method="post">
+                        <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
-                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'candidate_contact_mail_form' ); ?>
+                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'security' ); ?>
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" autocomplete="on"

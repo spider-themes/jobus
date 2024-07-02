@@ -1,26 +1,19 @@
-;(function($) {
+(function($) {
     'use strict';
 
     $(document).ready(function() {
-
-        let mailForm = $('#candidate_email_from')
-
-        mailForm.on('submit', function(event) {
+        $('#candidate_email_from').on('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            let formData = $(this).serialize(); // Serialize form data
+            var formData = $(this).serialize(); // Serialize form data
+            console.log("Form Data: ", formData); // Debugging: Log form data
 
             $.ajax({
                 url: jobly_candidate_email_form.ajaxurl, // WordPress AJAX URL
                 type: 'POST',
-                data: {
-                    action: 'candidate_send_mail_form',
-                    data_type: formData,
-                    security: jobly_candidate_email_form.nonce
-                },
-
+                data: formData + '&action=candidate_send_mail_form&security=' + jobly_candidate_email_form.nonce, // Combine form data with additional fields
                 success: function(response) {
-                    let messageContainer = $('#email-form-message');
+                    var messageContainer = $('#email-form-message');
                     messageContainer.removeClass('success error'); // Clear any previous messages
 
                     if (response.success) {
@@ -29,13 +22,10 @@
                         messageContainer.addClass('error').text(response.data);
                     }
                 },
-
                 error: function() {
                     $('#email-form-message').addClass('error').text('There was an error with the AJAX request.');
                 }
-
             });
         });
-
     });
 })(jQuery);
