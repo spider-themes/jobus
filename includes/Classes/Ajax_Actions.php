@@ -11,8 +11,8 @@ class Ajax_Actions {
     public function __construct()
     {
 
-        //add_action('wp_ajax_send_contact_email', [$this, 'ajax_send_contact_email']);
-        //add_action('wp_ajax_nopriv_send_contact_email', [$this, 'ajax_send_contact_email']);
+        add_action('wp_ajax_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
+        add_action('wp_ajax_nopriv_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
 
     }
 
@@ -21,7 +21,7 @@ class Ajax_Actions {
     {
 
         // Check nonce for security
-        //check_ajax_referer('contact_form_nonce', 'security');
+        check_ajax_referer('jobly_candidate_contact_mail_form', 'security');
 
         // Sanitize and get form data
         $sender_name    = sanitize_text_field($_POST['sender_name']);

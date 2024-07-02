@@ -298,10 +298,8 @@ wp_enqueue_script( 'lightbox' );
                         </div>
 						<?php
 					}
-					?>
 
 
-                    <?php
                     // Handle form submission
                     if (isset($_POST['send_message'])) {
                         $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
@@ -319,13 +317,14 @@ wp_enqueue_script( 'lightbox' );
                     ?>
 
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobly' ) ?><?php the_title() ?></h4>
-
                     <div class="email-form bg-wrapper bg-color">
 
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobly' ) ?></p>
 
                         <form name="candidate_email_from" id="candidate_email_from" method="post">
-							<?php wp_nonce_field( 'contact_form_nonce', 'contact_form_nonce' ); ?>
+
+                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'candidate_contact_mail_form' ); ?>
+
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" autocomplete="on"
                                        placeholder="<?php esc_attr_e( 'Name*', 'jobly' ) ?>" required>
@@ -364,38 +363,3 @@ wp_enqueue_script( 'lightbox' );
         </div>
     </div>
 </section>
-
-<!--<script>
-    ;(function ($) {
-
-        'use strict';
-        $(document).ready(function () {
-            $('#email-form').on('submit', function (event) {
-                event.preventDefault(); // Prevent default form submission
-
-                let formData = $(this).serialize(); // Serialize form data
-                let ajaxurl = jobly_local.ajaxurl;
-
-                $.ajax({
-                    url: ajaxurl, // WordPress AJAX URL
-                    type: 'POST',
-                    data: formData + '&action=send_contact_email&security=' + $('#contact_form_nonce').val(), // Combine form data with additional fields
-                    success: function(response) {
-                        var messageContainer = $('#email-form-message');
-                        messageContainer.removeClass('success error'); // Clear any previous messages
-
-                        if (response.success) {
-                            messageContainer.addClass('success').text(response.data);
-                        } else {
-                            messageContainer.addClass('error').text(response.data);
-                        }
-                    },
-                    error: function() {
-                        $('#email-form-message').addClass('error').text('There was an error with the AJAX request.');
-                    }
-                });
-            });
-        });
-    })(jQuery);
-
-</script>-->
