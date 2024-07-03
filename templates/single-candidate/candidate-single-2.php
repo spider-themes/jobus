@@ -332,53 +332,41 @@ wp_enqueue_script('lightbox');
                         </div>
 				        <?php
 			        }
-
-			        // Handle form submission
-			        if (isset($_POST['send_message'])) {
-
-				        // Retrieve form field values
-				        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
-				        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
-				        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
-				        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-
-				        // Set email subject
-				        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
-
-				        // Set email headers
-				        $headers[] = "From: $sender_name <$sender_email>";
-				        $headers[] = "Reply-To: $sender_email";
-
-				        $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
-
-				        // Send email using SMTP
-				        wp_mail($candidate_mail, $subject, $message, $headers);
-			        }
 			        ?>
+
                     <h4 class="sidebar-title"><?php esc_html_e('Email', 'jobly') ?> <?php the_title() ?></h4>
                     <div class="email-form bg-wrapper bg-color">
                         <p><?php esc_html_e('Your email address & profile will be shown to the recipient.', 'jobly') ?></p>
 
-                        <form action="<?php echo esc_url(get_the_permalink()) ?>" method="post">
+                        <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
+
+                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'security' ); ?>
+                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
+
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e('Your Name*', 'jobly') ?>" required>
-                            </div>
-                            <div class="d-sm-flex mb-25">
-                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e('Your Email*', 'jobly') ?>" required>
+                                <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e('Name*', 'jobly') ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e('Your Subject', 'jobly') ?>">
+                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e('Email*', 'jobly') ?>" required>
+                            </div>
+
+                            <div class="d-sm-flex mb-25">
+                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e('Subject', 'jobly') ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
-                                <textarea name="message" id="message" placeholder="<?php esc_attr_e('Your Message', 'jobly') ?>"></textarea>
+                                <textarea name="message" id="message" placeholder="<?php esc_attr_e('Message', 'jobly') ?>"></textarea>
                             </div>
+
                             <div class="d-sm-flex">
                                 <button type="submit" name="send_message" class="btn-ten fw-500 text-white flex-fill text-center tran3s">
 							        <?php esc_html_e('Send Message', 'jobly') ?>
                                 </button>
                             </div>
+
+                            <div id="email-form-message" class="email-form-message"></div>
+
                         </form>
 
                     </div>

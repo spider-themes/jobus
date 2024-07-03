@@ -298,22 +298,6 @@ wp_enqueue_script( 'lightbox' );
                         </div>
 						<?php
 					}
-
-
-                    // Handle form submission
-                    if (isset($_POST['send_message'])) {
-                        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
-                        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
-                        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
-                        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-
-                        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
-                        $headers[] = "From: $sender_name <$sender_email>";
-                        $headers[] = "Reply-To: $sender_email";
-                        $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
-
-                        $sent = wp_mail($candidate_mail, $subject, $message, $headers);
-                    }
                     ?>
 
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobly' ) ?><?php the_title() ?></h4>
@@ -324,6 +308,7 @@ wp_enqueue_script( 'lightbox' );
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
                             <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'security' ); ?>
+                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" autocomplete="on"
