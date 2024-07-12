@@ -122,26 +122,26 @@ if (!defined('ABSPATH')) {
                                 //============= Is Categories=====================//
                                 if (jobly_opt('is_company_widget_location') == true) {
 
-                                    $term_cats = get_terms(array(
+                                    $term_locations = get_terms(array(
                                         'taxonomy' => 'company_location',
-                                        'hide_empty' => true,
                                     ));
-                                    ?>
-                                    <div class="col-lg-4">
-                                        <div class="filter-block pb-50 lg-pb-20">
-                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
-                                            <select class="nice-select" name="company_locations[]">
-                                                <?php
-                                                foreach ( $term_cats as $key => $term ) {
-                                                    ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+
+                                    if ( !empty($term_locations) ) {
+                                        ?>
+                                        <div class="col-lg-4">
+                                            <div class="filter-block pb-50 lg-pb-20">
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                                <select class="nice-select" name="company_locations[]">
                                                     <?php
-                                                }
-                                                ?>
-                                            </select>
+                                                    foreach ( $term_locations as $key => $term ) {
+                                                        echo '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <?php
+                                        <?php
+                                    }
                                 }
 
 
@@ -150,24 +150,23 @@ if (!defined('ABSPATH')) {
 
                                     $term_cats = get_terms(array(
                                         'taxonomy' => 'company_cat',
-                                        'hide_empty' => true,
                                     ));
-                                    ?>
-                                    <div class="col-lg-4">
-                                        <div class="filter-block pb-50 lg-pb-20">
-                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
-                                            <select class="nice-select" name="company_cats[]">
-                                                <?php
-                                                foreach ( $term_cats as $key => $term ) {
-                                                    ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                    if ( !empty($term_cats) ) {
+                                        ?>
+                                        <div class="col-lg-4">
+                                            <div class="filter-block pb-50 lg-pb-20">
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                                <select class="nice-select" name="company_cats[]">
                                                     <?php
-                                                }
-                                                ?>
-                                            </select>
+                                                    foreach ( $term_cats as $key => $term ) {
+                                                        echo '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <?php
+                                        <?php
+                                    }
                                 }
                                 ?>
                                 <div class="col-lg-4">

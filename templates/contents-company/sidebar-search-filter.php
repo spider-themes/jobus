@@ -160,21 +160,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if ( jobly_opt( 'is_company_widget_location' ) == true ) {
 
+                    // Initialize variables with default values
+                    $is_collapsed_show = 'collapse';
+                    $area_expanded = 'false';
+                    $is_collapsed = ' collapsed';
+
 					if ( ! empty ( $_GET['post_type'] ?? '' == 'company' ) ) {
 						if ( ! empty ( $_GET['company_locations'] ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
 							$is_collapsed      = '';
-						} else {
-							$is_collapsed_show = 'collapse';
-							$area_expanded     = 'false';
-							$is_collapsed      = ' collapsed';
 						}
 					}
 
 					$term_locs = get_terms( array(
 						'taxonomy'   => 'company_location',
-						'hide_empty' => true,
 					) );
 
 					if ( ! empty( $term_locs ) ) {
@@ -224,26 +224,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 
 
-
-
 				// Widget Category List
 				if ( jobly_opt( 'is_company_widget_cat' ) == true ) {
+
+                    // Initialize variables with default values
+                    $is_collapsed_show = 'collapse';
+                    $area_expanded = 'false';
+                    $is_collapsed = ' collapsed';
 
 					if ( ! empty ( $_GET['post_type'] ?? '' == 'company' ) ) {
 						if ( ! empty ( $_GET['company_cats'] ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
 							$is_collapsed      = '';
-						} else {
-							$is_collapsed_show = 'collapse';
-							$area_expanded     = 'false';
-							$is_collapsed      = ' collapsed';
 						}
 					}
 
 					$term_cats = get_terms( array(
 						'taxonomy'   => 'company_cat',
-						'hide_empty' => true,
 					) );
 
 					if ( ! empty( $term_cats ) ) {
