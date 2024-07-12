@@ -218,7 +218,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 if ( ! empty( $sortables ) ) {
                     foreach ( $sortables as $key => $value ) {
 
-
                         // Initialize variables with default values
                         $is_collapsed_show = 'collapse';
                         $area_expanded = 'false';
@@ -357,7 +356,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             <?php
                         }
                     }
-                }S
+                }
                 ?>
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
                     <?php esc_html_e('Apply Filter', 'jobly'); ?>

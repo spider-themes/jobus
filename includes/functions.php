@@ -704,33 +704,38 @@ function jobly_all_range_field_value ()
 
 
 
-if ( !function_exists('jobly_showing_post_result_count') ) {
+if (!function_exists('jobly_showing_post_result_count')) {
     /**
      * Display the showing post-result count
      *
-     * @param string $post_type The post-type to display for the count.
-     * @param mixed $post_per_page The number of posts to display per page. Use -1 to display all posts.
+     * @param WP_Query $query The current WP_Query object.
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobly_showing_post_result_count ($post_type, $posts_per_page = ['posts_per_page' => -1 ], $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' )
+    function jobly_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
     {
-        // Get the current page number
-        $current_page = max(1, get_query_var('paged')); // Current page number
+        if (!$query->have_posts()) {
+            echo '<p class="' . esc_attr($class) . '">' . __('No results found', 'jobly') . '</p>';
+            return;
+        }
 
-        // Get the total number of published posts for the specified post-type
-        $total_posts = wp_count_posts($post_type);
-        $total_posts = number_format_i18n($total_posts->publish);
+        // Get the current page number
+        $current_page = max(1, get_query_var('paged'));
+
+        // Get the total number of posts for the current query
+        $total_posts = $query->found_posts;
+        $total_posts = number_format_i18n($total_posts);
 
         // Calculate the range based on the current posts per page
+        $posts_per_page = $query->get('posts_per_page');
         $start_range = ($current_page - 1) * $posts_per_page + 1;
-        $end_range = min($current_page * $posts_per_page, $total_posts);
+        $end_range = min($current_page * $posts_per_page, $query->found_posts);
         ?>
-        <p class="<?php echo esc_attr($class) ?>">
+        <p class="<?php echo esc_attr($class); ?>">
             <?php
             printf(
                 __('Showing <span class="text-dark fw-500"> %1$d-%2$d </span> of <span class="text-dark fw-500">%3$d</span> results', 'jobly'),
                 $start_range, $end_range, $total_posts
-            )
+            );
             ?>
         </p>
         <?php
