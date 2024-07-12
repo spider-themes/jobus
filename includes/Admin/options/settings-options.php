@@ -482,8 +482,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobly'),
                 'subtitle'  => esc_html__('Select the preferred layout for your company page across the entire website.', 'jobly'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/company/layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/company/layout-2.png',
+                    '1' => JOBLY_IMG . '/layout/company/archive-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/company/archive-layout-2.png',
                 ),
                 'default'   => '1'
             ),
@@ -724,8 +724,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobly'),
                 'subtitle'  => esc_html__('Select the preferred layout for your candidate page across the entire website.', 'jobly'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/candidate/layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/candidate/layout-2.png',
+                    '1' => JOBLY_IMG . '/layout/candidate/archive-layout-1.png',
+                    '2' => JOBLY_IMG . '/layout/candidate/archive-layout-2.png',
                 ),
                 'default'   => '1'
             ),

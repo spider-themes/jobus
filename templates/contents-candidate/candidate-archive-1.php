@@ -298,7 +298,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     ?>
                     <div class="pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count('candidate', jobly_opt('candidate_posts_per_page')) ?>
+                        <?php jobly_showing_post_result_count($candidate_query) ?>
 
                         <?php jobly_pagination($candidate_query, 'jobly_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
 
