@@ -207,7 +207,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     ?>
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count('job', jobly_opt('job_posts_per_page')) ?>
+                        <?php jobly_showing_post_result_count($job_post); ?>
 
                         <?php jobly_pagination($job_post); ?>
 

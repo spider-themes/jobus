@@ -26,7 +26,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 <?php
                 $filter_widgets = jobly_opt('job_sidebar_widgets');
 
-                if (!empty($filter_widgets)) {
+                if (isset($filter_widgets) && is_array($filter_widgets)) {
                     foreach ($filter_widgets as $index => $widget) {
 
                         $tab_count = $index + 1;
@@ -234,7 +234,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             }
                             $term_cats = get_terms(array(
                                 'taxonomy' => 'job_cat',
-                                'hide_empty' => false,
                             ));
                             if (!empty($term_cats)) {
                                 ?>
