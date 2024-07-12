@@ -94,19 +94,18 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-sm-6">
-                                            <!--         job archive 1 location         -->
+                                            <!--job archive 1 location-->
                                             <?php
                                             $locations = get_the_terms(get_the_ID(), 'job_location');
                                             if (!empty($locations )) { ?>
-                                            <div class="job-location">
+                                                <div class="job-location">
+                                                    <?php
+                                                    foreach ($locations as $location ) {
+                                                        echo '<a href="'.esc_url(get_the_permalink()).'">'.esc_html($location->name).'</a>';
+                                                    }
+                                                    ?>
+                                                </div>
                                                 <?php
-                                                foreach ($locations as $location ) { ?>
-                                                <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
-                                                <?php
-                                                }
-                                                ?>
-                                            </div>
-                                            <?php
 	                                        }
 	                                        ?>
                                             <div class="job-salary">

@@ -283,24 +283,34 @@ if( class_exists( 'CSF' ) ) {
             ),
 
             array(
-                'id'      => 'is_job_widget_cat',
-                'type'    => 'switcher',
-                'title'   => esc_html__('Category', 'jobly'),
-                'default' => true,
-            ),
+                'id'        => 'is_sortable_job_sidebar',
+                'type'      => 'sortable',
+                'title'     => esc_html__('Sortable', 'jobly'),
+                'subtitle'  => esc_html__('Display options in sorting order.', 'jobly'),
+                'fields'    => array(
 
-	        array(
-		        'id'      => 'is_job_widget_location',
-		        'type'    => 'switcher',
-		        'title'   => esc_html__('Location', 'jobly'),
-		        'default' => true,
-	        ),
+                    array(
+                        'id'      => 'is_job_widget_cat',
+                        'type'    => 'switcher',
+                        'title'   => esc_html__('Category', 'jobly'),
+                        'default' => true,
+                    ),
 
-            array(
-                'id'      => 'is_job_widget_tag',
-                'type'    => 'switcher',
-                'title'   => esc_html__('Tag', 'jobly'),
-                'default' => true,
+                    array(
+                        'id'      => 'is_job_widget_location',
+                        'type'    => 'switcher',
+                        'title'   => esc_html__('Location', 'jobly'),
+                        'default' => true,
+                    ),
+
+                    array(
+                        'id'      => 'is_job_widget_tag',
+                        'type'    => 'switcher',
+                        'title'   => esc_html__('Tag', 'jobly'),
+                        'default' => true,
+                    ),
+
+                ),
             ),
 
 
