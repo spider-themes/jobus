@@ -240,12 +240,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						                <?php
 						                $searched_opt = jobly_search_terms('candidate_locations');
 						                foreach ( $term_loc as $key => $term ) {
-							                $list_class = $key > 3 ? ' class=hide' : '';
-							                $check_status = array_search($term->slug, $searched_opt);
-							                $check_status = $check_status !== false ? ' checked' : '';
-							                ?>
-                                            <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
-							                <?php
+                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
+                                            echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
 						                }
 						                ?>
                                     </select>
@@ -290,12 +286,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         <?php
                                         $searched_opt = jobly_search_terms('candidate_cats');
                                         foreach ( $term_cats as $key => $term ) {
-                                            $list_class = $key > 3 ? ' class=hide' : '';
-                                            $check_status = array_search($term->slug, $searched_opt);
-                                            $check_status = $check_status !== false ? ' checked' : '';
-                                            ?>
-                                            <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
-                                            <?php
+                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
+                                            echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
                                         }
                                         ?>
                                     </select>
@@ -306,7 +298,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                 }
                 ?>
-
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
                     <?php esc_html_e('Apply Filter', 'jobly'); ?>
                 </button>

@@ -74,12 +74,14 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
-                                        <label for="remember">By hitting the "Register" button, you agree to the <a href="#">Terms conditions</a> & <a href="#">Privacy Policy</a></label>
+                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the'); ?>
+                                            <a href="#"><?php esc_html_e('Terms conditions', 'jobly'); ?></a> & <a href="#"><?php esc_html_e('Privacy Policy', 'jobly'); ?></a>
+                                        </label>
                                     </div>
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20">Register</button>
+                                <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e('Register', 'jobly'); ?></button>
                             </div>
                         </div>
                     </form>
@@ -128,7 +130,12 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
-                                        <label for="remember">By hitting the "Register" button, you agree to the <a href="#">Terms conditions</a> & <a href="#">Privacy Policy</a></label>
+                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobly'); ?>
+                                            <a href="#">
+                                                <?php esc_html_e('Terms conditions', 'jobly'); ?>
+                                            </a> &
+                                            <a href="#"><?php esc_html_e('Privacy Policy', 'jobly'); ?></a>
+                                        </label>
                                     </div>
                                 </div> <!-- /.agreement-checkbox -->
                             </div>

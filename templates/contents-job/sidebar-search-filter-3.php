@@ -195,8 +195,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
                                                     <select class="nice-select" name="company_cats[]">
                                                         <?php
+                                                        $searched_opt = jobly_search_terms('company_cats');
                                                         foreach ( $term_cats as $term ) {
-                                                            echo '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
+                                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
+                                                            echo '<option value="' . esc_attr($term->slug) . '" '.$selected.'>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>
@@ -210,7 +212,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                     if ( $key === 'is_job_widget_location' && $value ) {
                                         $term_loc = get_terms(array(
                                             'taxonomy' => 'job_location',
-                                            'hide_empty' => false,
                                         ));
                                         if (!empty($term_loc)) {
                                             ?>
@@ -219,8 +220,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
                                                     <select class="nice-select" name="job_locations[]">
                                                         <?php
+                                                        $searched_opt = jobly_search_terms('job_locations');
                                                         foreach ( $term_loc as $term ) {
-                                                            echo '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
+                                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
+                                                            echo '<option value="' . esc_attr($term->slug) . '" '.$selected.'>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>

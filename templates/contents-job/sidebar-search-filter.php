@@ -250,11 +250,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                 <?php
                                                 $searched_opt = jobly_search_terms('job_cats');
                                                 foreach ($term_cats as $key => $term) {
-                                                    $list_class = $key > 3 ? ' class=hide' : '';
-                                                    $check_status = array_search($term->slug, $searched_opt);
-                                                    $check_status = $check_status !== false ? ' checked' : '';
+                                                    $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo $selected; ?>><?php echo esc_html($term->name) ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -294,11 +292,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                 <?php
                                                 $searched_opt = jobly_search_terms('job_locations');
                                                 foreach ($term_loc as $key => $term) {
-                                                    $list_class = $key > 3 ? ' class=hide' : '';
-                                                    $check_status = array_search($term->slug, $searched_opt);
-                                                    $check_status = $check_status !== false ? ' checked' : '';
+                                                    $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo $selected; ?>><?php echo esc_html($term->name) ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -332,7 +328,6 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             <?php
                                             $term_tags = get_terms(array(
                                                 'taxonomy' => 'job_tag',
-                                                'hide_empty' => false,
                                             ));
                                             if (!empty($term_tags)) {
                                                 $searched_opt = jobly_search_terms('job_tags');
@@ -340,8 +335,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $check_status = array_search($term->slug, $searched_opt);
                                                     ?>
                                                     <li>
-                                                        <input type="checkbox" name="job_tags[]"
-                                                               value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr('checked=checked') : ''; ?>>
+                                                        <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr($term->slug) ?>" <?php echo $check_status !== false ? esc_attr('checked=checked') : ''; ?>>
                                                         <label><?php echo esc_html($term->name) ?></label>
                                                     </li>
                                                     <?php
