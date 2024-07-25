@@ -227,11 +227,11 @@ wp_enqueue_script( 'lightbox' );
 									// Get the stored meta-values
 									$meta_options = get_post_meta( get_the_ID(), 'jobly_meta_candidate_options', true );
 
-									if ( isset( $meta_options[ $meta_key ] ) && ! empty( $meta_options[ $meta_key ] ) ) {
+									if (! empty( $meta_options[ $meta_key ] )) {
 										?>
                                         <li>
 											<?php
-											if ( isset( $meta_options[ $meta_key ] ) && ! empty( $meta_options[ $meta_key ] ) ) {
+											if (! empty( $meta_options[ $meta_key ] )) {
 												echo '<span>' . esc_html( $meta_name ) . ':</span>';
 											}
 											if ( ! empty( $meta_options[ $meta_key ] && is_array( $meta_options[ $meta_key ] ) ) ) {

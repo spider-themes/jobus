@@ -3,10 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$company_archive_layout = isset($jobly_company_archive_layout) ? $jobly_company_archive_layout : jobly_opt('company_archive_layout');
+$company_archive_layout = $jobly_company_archive_layout ?? jobly_opt('company_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
+$current_view = $_GET['view'] ?? 'grid';
 
 
 // Get the base URL for the archive page
@@ -19,7 +19,6 @@ if ($company_archive_layout) {
 // Build the URL for list and grid views
 $list_view_url = add_query_arg('view', 'list', $archive_url);
 $grid_view_url = add_query_arg('view', 'grid', $archive_url);
-
 ?>
 <section class="company-profiles bg-color pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
@@ -39,7 +38,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobly'); ?>
                                 <span class="text-dark fw-500"><?php echo jobly_posts_count('company'); ?></span>
-                                <?php printf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobly'), jobly_posts_count('company')); ?>
+                                <?php
+                                /* translators: 1: company found, 2: companies found */
+                                printf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobly'), jobly_posts_count('company'));
+                                ?>
                             </div>
 
                         </div>
@@ -115,7 +117,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 ?>
                                                 <div class="bottom-line d-flex">
                                                     <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>">
-                                                        <?php echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count); ?>
+                                                        <?php
+                                                        /* translators: 1: Vacancy, 2: Vacancies */
+                                                        echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count);
+                                                        ?>
                                                     </a>
                                                 </div>
                                                 <?php
@@ -183,7 +188,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 <?php
                                                 if ($company_count > 0) { ?>
                                                     <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
-                                                        <?php echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count); ?>
+                                                        <?php
+                                                        /* translators: 1: open job, 2: open jobs */
+                                                        echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count);
+                                                        ?>
                                                     </a>
                                                     <?php
                                                 }

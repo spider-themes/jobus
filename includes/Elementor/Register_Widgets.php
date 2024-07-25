@@ -64,7 +64,7 @@ class Register_Widgets
      */
     public function register_editor_styles ()
     {
-        wp_enqueue_style('jobly-elementor-editor', JOBLY_CSS . '/elementor-editor.css');
+        wp_enqueue_style('jobly-elementor-editor', JOBLY_CSS . '/elementor-editor.css', [], JOBLY_VERSION);
     }
 
 

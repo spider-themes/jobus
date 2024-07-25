@@ -51,7 +51,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                             ?>
                                             <li class="col-12">
                                                 <?php
-                                                if (isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ])) {
+                                                if (!empty($meta_options[ $meta_key ])) {
                                                     echo '<span>' . esc_html($meta_name) . ':</span>';
                                                 }
                                                 if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {

@@ -44,7 +44,6 @@ class User {
             'delete_published_candidates' => true,
         ));
 
-
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobly'), array(
             'read' => true,
             'edit_post' => true,
@@ -81,11 +80,11 @@ class User {
 
             // Check if passwords match
             if ($candidate_password !== $candidate_confirm_password) {
-                wp_die(__('Passwords do not match', 'jobly'));
+                wp_die(esc_html__('Passwords do not match', 'jobly'));
             } else {
                 // Check if username or email already exists
                 if (username_exists($candidate_username) || email_exists($candidate_email)) {
-                    wp_die(__('Username or email already exists', 'jobly'));
+                    wp_die(esc_html__('Username or email already exists', 'jobly'));
                 } else {
                     // Create new user
                     $candidate_id = wp_create_user($candidate_username, $candidate_password, $candidate_email);
@@ -122,11 +121,11 @@ class User {
 
             // Check if passwords match
             if ($employer_password !== $employer_confirm_password) {
-                wp_die(__('Passwords do not match', 'jobly'));
+                wp_die(esc_html__('Passwords do not match', 'jobly'));
             } else {
                 // Check if username or email already exists
                 if (username_exists($employer_username) || email_exists($employer_email)) {
-                    wp_die(__('Username or email already exists', 'jobly'));
+                    wp_die(esc_html__('Username or email already exists', 'jobly'));
                 } else {
                     // Create new user
                     $employer_id = wp_create_user($employer_username, $employer_password, $employer_email);

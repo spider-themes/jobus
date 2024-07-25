@@ -65,7 +65,7 @@ $candidate_count = $candidate_query->found_posts;
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
-                            <span class="text-dark fw-500"><?php echo $candidate_count ?></span>
+                            <span class="text-dark fw-500"><?php echo esc_html($candidate_count) ?></span>
                             <?php printf(_n('candidate found', 'candidates found', $candidate_count, 'jobly'), $candidate_count); ?>
                         </div>
 
@@ -188,7 +188,7 @@ $candidate_count = $candidate_query->found_posts;
                                                         <span><?php esc_html_e('Location', 'jobly'); ?></span>
 				                                        <?php
 				                                        foreach ($locations as $location ) { ?>
-                                                            <div class="text-capitalize"><?php echo $location->name ?></div>
+                                                            <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
 					                                        <?php
 				                                        }
 				                                        ?>

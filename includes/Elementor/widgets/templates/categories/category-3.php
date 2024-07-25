@@ -7,14 +7,14 @@
             ?>
             <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
                 <div class="card-style-four tran3s w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr($delay_time) ?>s">
-                    <a href="<?php echo get_category_link($category->term_id) ?>" class="d-block">
+                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="d-block">
                         <?php if (!empty($meta[ 'cat_img' ][ 'id' ])) { ?>
                             <div class="icon tran3s d-flex align-items-center justify-content-center">
                                 <?php echo wp_get_attachment_image($meta[ 'cat_img' ][ 'id' ], 'full', '', [ 'class' => 'lazy-img' ]); ?>
                             </div>
                         <?php } ?>
                         <div class="title tran3s fw-500 text-lg">
-                            <?php echo esc_html__(($category->name)) ?>
+                            <?php echo esc_html(($category->name)) ?>
                         </div>
                         <div class="total-job">
                             <?php echo esc_html($category->count) . ' ' . esc_html__('vacancy', 'jobly'); ?>

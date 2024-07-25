@@ -4,9 +4,9 @@
         if (is_array($categories)) {
             foreach ($categories as $index => $category) {
                 $meta = get_term_meta($category->term_id, 'jobly_taxonomy_cat', true);
-                $text_color = isset($meta['text_color']) ? 'style=color:' . esc_attr($meta['text_color']) . '' : '';
-                $text_bg_color = isset($meta['text_bg_color']) ? 'style=background-color:' . esc_attr($meta['text_bg_color']) . '' : '';
-                $hover_border_color = isset($meta['hover_border_color']) ? $meta['hover_border_color'] : '';
+                $text_color = isset($meta['text_color']) ? 'style=color:' . esc_attr($meta['text_color']) : '';
+                $text_bg_color = isset($meta['text_bg_color']) ? 'style=background-color:' . esc_attr($meta['text_bg_color']) : '';
+                $hover_border_color = $meta['hover_border_color'] ?? '';
 
                 if ($hover_border_color) { ?>
                     <style>
@@ -19,8 +19,7 @@
                 ?>
 
                 <div class="card-style-seven bg-color text-center wow fadeInUp">
-                    <a href="<?php echo get_category_link($category->term_id) ?>"
-                       class="wrapper d-flex align-items-center<?php echo $hover_border_color ? ' hover_border_color' : '' ?>" <?php echo $text_bg_color ?>>
+                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="wrapper d-flex align-items-center<?php echo $hover_border_color ? ' hover_border_color' : '' ?>" <?php echo esc_attr($text_bg_color) ?>>
                         <?php
                         if (!empty($meta['cat_img']['id'])) { ?>
                             <div class="icon d-flex align-items-center justify-content-center">
@@ -29,7 +28,7 @@
                             <?php
                         }
                         ?>
-                        <div class="title fw-500" <?php echo $text_color ?>>
+                        <div class="title fw-500" <?php echo esc_attr($text_color) ?>>
                             <?php echo esc_html($category->name) ?>
                         </div>
                     </a>

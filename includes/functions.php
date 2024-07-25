@@ -754,9 +754,9 @@ if ( !function_exists('jobly_social_share_icons') ) {
         ?>
         <ul class="<?php echo esc_attr($class) ?>">
             <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobly'); ?></li>
-            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobly'); ?>"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="https://www.linkedin.com/share?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobly'); ?>"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://twitter.com/intent/tweet?url=<?php echo $postUrl; ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobly'); ?>"><i class="bi bi-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobly'); ?>"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="https://www.linkedin.com/share?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobly'); ?>"><i class="bi bi-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobly'); ?>"><i class="bi bi-twitter"></i></a></li>
         </ul>
         <?php
     }

@@ -149,17 +149,17 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
 	                                            $locations = get_the_terms(get_the_ID(), 'candidate_location');
 	                                            if (!empty($locations )) { ?>
-                                                <div class="col-md-6">
-                                                    <div class="candidate-info mt-10">
-                                                        <span><?php esc_html_e('Location', 'jobly'); ?></span>
-                                                        <?php
-                                                        foreach ($locations as $location ) { ?>
-                                                        <div class="text-capitalize"><?php echo $location->name ?></div>
-	                                                    <?php
-	                                                    }
-	                                                    ?>
+                                                    <div class="col-md-6">
+                                                        <div class="candidate-info mt-10">
+                                                            <span><?php esc_html_e('Location', 'jobly'); ?></span>
+                                                            <?php
+                                                            foreach ($locations as $location ) { ?>
+                                                                <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </div>
                                                     </div>
-                                                </div>
 		                                            <?php
 	                                            }
 	                                            ?>

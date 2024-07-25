@@ -206,7 +206,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @return string
 		 */
-		public function template_path() {
+		public function template_path(): string
+        {
 
 			return $this->plugin_path() . '/templates/';
 

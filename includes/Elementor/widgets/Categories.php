@@ -10,8 +10,6 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
-use WP_Query;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -427,7 +425,7 @@ class Categories extends Widget_Base {
 		} else {
 			$formatted_count = floor( $total_count / 1000 ) . 'K+';
 		}
-		$cat_ids = isset( $settings['cat'] ) ? $settings['cat'] : array();
+		$cat_ids = $settings['cat'] ?? array();
 
 		$categories = get_terms( array(
 			'taxonomy'   => 'job_cat',

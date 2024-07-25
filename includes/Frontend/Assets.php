@@ -14,16 +14,16 @@ class Assets {
     public static function jobly_enqueue_scripts() {
 
 	    // Register Style's
-	    wp_register_style( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.css' );
+	    wp_register_style( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.css', [], JOBLY_VERSION );
 
 
         // Enqueue Style's
-        wp_enqueue_style( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css' );
-        wp_enqueue_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css' );
-        wp_enqueue_style( 'bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css' );
-        wp_enqueue_style( 'slick', JOBLY_VEND . '/slick/slick.css' );
-        wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css' );
-        wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css' );
+        wp_enqueue_style( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css', [], '5.1.3' );
+        wp_enqueue_style( 'nice-select', JOBLY_VEND . '/nice-select/nice-select.css', [], JOBLY_VERSION );
+        wp_enqueue_style( 'bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css', [], JOBLY_VERSION );
+        wp_enqueue_style( 'slick', JOBLY_VEND . '/slick/slick.css', [], JOBLY_VERSION );
+        wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css', [], JOBLY_VERSION );
+        wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css', [], JOBLY_VERSION );
 
 
         // Register Scripts

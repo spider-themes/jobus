@@ -77,7 +77,8 @@ class Blocks {
     /**
      * Register Block Category
      */
-    public function register_block_category( $categories ) {
+    public function register_block_category( $categories ): array
+    {
         return array_merge(
             array(
                 array(
@@ -93,8 +94,8 @@ class Blocks {
     public function register_block_editor_assets () {
 
         // Style's
-        wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css');
-        wp_enqueue_style('jobly-block-editor', JOBLY_CSS . '/block-editor.css');
+        wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css', [], JOBLY_VERSION);
+        wp_enqueue_style('jobly-block-editor', JOBLY_CSS . '/block-editor.css', [], JOBLY_VERSION);
 
 
         // Scripts
@@ -106,7 +107,7 @@ class Blocks {
     public function register_block_assets () {
 
         // Style's
-        wp_enqueue_style('jobly-block-frontend', JOBLY_CSS . '/block-frontend.css');
+        wp_enqueue_style('jobly-block-frontend', JOBLY_CSS . '/block-frontend.css', [], JOBLY_VERSION);
 
 
 

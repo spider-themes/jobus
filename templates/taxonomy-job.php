@@ -60,7 +60,7 @@ $job_count = $job_post->found_posts;
                         <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                             <div class="total-job-found">
                                 <?php esc_html_e('All', 'jobly'); ?>
-                                <span class="text-dark"><?php echo $job_count ?></span>
+                                <span class="text-dark"><?php echo esc_html($job_count) ?></span>
                                 <?php printf(_n('job found', 'jobs found', $job_count, 'jobly'), $job_count ); ?>
                             </div>
                             <div class="d-flex align-items-center">
@@ -123,7 +123,7 @@ $job_count = $job_post->found_posts;
                                                 <div class="job-location">
 			                                        <?php
 			                                        foreach ($locations as $location ) { ?>
-                                                        <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+                                                        <a href="<?php the_permalink() ?>"><?php echo esc_html($location->name) ?></a>
 				                                        <?php
 			                                        }
 			                                        ?>

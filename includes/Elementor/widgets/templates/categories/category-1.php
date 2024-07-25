@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 
                 ?>
                 <div class="card-style-one text-center mt-20 wow fadeInUp">
-                    <a href="<?php echo get_category_link($category->term_id) ?>"
+                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>"
                        class="bg wrapper">
                         <?php
                         if (!empty($meta[ 'cat_img' ][ 'id' ])) { ?>
@@ -25,7 +25,10 @@ if (!defined('ABSPATH')) {
                         ?>
                         <div class="title fw-500"><?php echo esc_html($category->name) ?></div>
                         <div class="total-job">
-                            <?php printf(_n('%s Job', '%s Jobs', $category->count, 'jobly'), number_format_i18n($category->count)) ?>
+                            <?php
+                            /* translators: 1: Job, 2: Jobs */
+                            echo sprintf(_n('%s Job', '%s Jobs', $category->count, 'jobly'), number_format_i18n($category->count));
+                            ?>
                         </div>
                     </a>
                 </div>

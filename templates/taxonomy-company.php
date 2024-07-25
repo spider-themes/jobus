@@ -54,8 +54,11 @@ $company_count = $company_query->found_posts;
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
-                            <span class="text-dark fw-500"><?php echo $company_count ?></span>
-                            <?php printf(_n('company found', 'companies found', $company_count, 'jobly'), $company_count); ?>
+                            <span class="text-dark fw-500"><?php echo esc_html($company_count) ?></span>
+                            <?php
+                            /* translators: 1: company found, 2: companies found */
+                            printf(_n('company found', 'companies found', $company_count, 'jobly'), $company_count);
+                            ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <?php
@@ -111,8 +114,9 @@ $company_count = $company_query->found_posts;
 	                                    $locations=get_the_terms(get_the_ID(),'company_location');
 	                                    if(!empty($locations)){ ?>
                                             <p class="text-center mb-auto text-capitalize">
-			                                    <?php foreach ( $locations as $location ) {echo $location->name ?>
-				                                    <?php
+			                                    <?php
+                                                foreach ( $locations as $location ) {
+                                                    echo esc_html($location->name);
 			                                    }
 			                                    ?>
                                             </p>
@@ -123,7 +127,10 @@ $company_count = $company_query->found_posts;
                                             ?>
                                             <div class="bottom-line d-flex">
                                                 <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>">
-                                                    <?php echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count); ?>
+                                                    <?php
+                                                    /* translators: 1: Vacancy, 2: Vacancies */
+                                                    echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count);
+                                                    ?>
                                                 </a>
                                             </div>
                                             <?php

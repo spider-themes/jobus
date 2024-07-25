@@ -64,7 +64,8 @@ foreach ( $price_ranged as $key => $values ) {
 
 $allSliderValues = jobly_all_range_field_value();
 
-if (!empty($allSliderValues) && isset ($allSliderValues)) {
+if (!empty($allSliderValues)) {
+
     $simplifiedSliderValues = [];
 
     foreach ( $allSliderValues as $key => $values ) {
@@ -133,7 +134,7 @@ if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty(
 
 $job_post = new \WP_Query($args);
 
-$job_archive_layout = isset($jobly_job_archive_layout) ? $jobly_job_archive_layout : jobly_opt('job_archive_layout');
+$job_archive_layout = $jobly_job_archive_layout ?? jobly_opt('job_archive_layout');
 
 //========================= Select Layout ========================//
 include 'contents-job/job-archive-'.$job_archive_layout.'.php';

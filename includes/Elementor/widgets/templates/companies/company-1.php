@@ -19,7 +19,10 @@ if (!defined('ABSPATH')) {
                     <?php endif; ?>
                     <a href="<?php echo jobly_get_selected_company_count(get_the_ID()); ?>"
                        class="open-job-btn fw-500 tran3s">
-                        <?php echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count); ?>
+                        <?php
+                        /* translators: 1: open job, 2: open jobs */
+                        echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count);
+                        ?>
                     </a>
                 </div>
             </div>

@@ -252,7 +252,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                 foreach ($term_cats as $key => $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo $selected; ?>><?php echo esc_html($term->name) ?></option>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($selected); ?>><?php echo esc_html($term->name) ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -294,7 +294,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                 foreach ($term_loc as $key => $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo $selected; ?>><?php echo esc_html($term->name) ?></option>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($selected); ?>><?php echo esc_html($term->name) ?></option>
                                                     <?php
                                                 }
                                                 ?>

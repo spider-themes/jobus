@@ -170,7 +170,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <div class="job-location">
 		                                                <?php
 		                                                foreach ($locations as $location ) { ?>
-                                                            <a href="<?php the_permalink() ?>"><?php echo $location->name ?></a>
+                                                            <a href="<?php the_permalink() ?>"><?php echo esc_html($location->name) ?></a>
 			                                                <?php
 		                                                }
 		                                                ?>
