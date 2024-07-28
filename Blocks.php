@@ -94,7 +94,7 @@ class Blocks {
     public function register_block_editor_assets () {
 
         // Style's
-        wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css', [], JOBLY_VERSION);
+        //wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css', [], JOBLY_VERSION);
         wp_enqueue_style('jobly-block-editor', JOBLY_CSS . '/block-editor.css', [], JOBLY_VERSION);
 
 

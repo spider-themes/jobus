@@ -266,12 +266,18 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php
                                                 }
 
-                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3' )) {
+                                                $locations = get_the_terms(get_the_ID(), 'candidate_location');
+                                                if (!empty($locations )) {
                                                     ?>
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info">
-                                                            <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                                            <span><?php esc_html_e('Location', 'jobly'); ?></span>
+                                                            <?php
+                                                            foreach ($locations as $location ) { ?>
+                                                                <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
+                                                                <?php
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </div>
                                                     <?php
