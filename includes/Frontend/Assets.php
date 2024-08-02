@@ -25,6 +25,10 @@ class Assets {
         wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css', [], JOBLY_VERSION );
         wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css', [], JOBLY_VERSION );
 
+	    if ( is_rtl() ) {
+		    wp_enqueue_style( 'jobly-rtl', JOBLY_CSS . '/jobly-main-rtl.css' );
+	    }
+
 
         // Register Scripts
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );

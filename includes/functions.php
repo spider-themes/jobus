@@ -1,4 +1,10 @@
 <?php
+if ( ! function_exists( 'jobly_rtl') ) {
+	function jobly_rtl(): string {
+		return is_rtl() ? 'true' : 'false';
+	}
+}
+
 // A Custom function for [ SETTINGS ]
 if (!function_exists('jobly_opt')) {
     function jobly_opt ($option = '', $default = null)

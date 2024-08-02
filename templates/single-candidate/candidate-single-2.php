@@ -223,7 +223,7 @@ wp_enqueue_script('lightbox');
                             <?php
                         }
 	                    ?>
-                        <div class="candidate-portfolio-slider">
+                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(spel_rtl()) ?>">
 		                    <?php
 		                    foreach ( $portfolio_ids as $item ) {
 			                    $image_url = wp_get_attachment_image_url($item, 'full')

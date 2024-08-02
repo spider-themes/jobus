@@ -27,7 +27,7 @@ $related_jobs = new WP_Query($args);
             <div class="title-three text-center text-md-start mb-55 lg-mb-40">
                 <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobly'); ?></h2>
             </div>
-            <div class="related-job-slider">
+            <div class="related-job-slider" data-rtl="<?php echo esc_attr(spel_rtl()) ?>">
                 <?php
                 while ( $related_jobs->have_posts() ) : $related_jobs->the_post();
                     ?>

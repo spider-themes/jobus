@@ -44,8 +44,10 @@
         function relatedPost() {
 
             let relatedJobSlider = $('.related-job-slider');
+            let dataRtlrelated = relatedJobSlider.data("rtl");
             if (relatedJobSlider.length > 0) {
                 relatedJobSlider.slick({
+                    rtl: dataRtlrelated,
                     dots: false,
                     arrows: true,
                     lazyLoad: 'ondemand',
@@ -77,8 +79,10 @@
         function testimonialSlider() {
 
             let reviewSlider = $('.company-review-slider');
+            let dataRtlreview = reviewSlider.data("rtl");
             if (reviewSlider.length > 0) {
                 reviewSlider.slick({
+                    rtl: dataRtlreview,
                     dots: true,
                     arrows: false,
                     lazyLoad: 'ondemand',
@@ -102,18 +106,18 @@
         // Range Slider for Salary filter
         function salaryRangeSlider(selector) {
             const sliderElements = document.querySelectorAll(selector);
-        
+
             sliderElements.forEach((sliderElement) => {
                 const rangeInput = sliderElement.querySelectorAll(".range-input input"),
                     priceInput = sliderElement.querySelectorAll(".price-input input"),
                     range = sliderElement.querySelector(".slider .progress");
                 let priceGap = 1;
-        
+
                 priceInput.forEach((input) => {
                     input.addEventListener("input", (e) => {
                         let minPrice = parseInt(priceInput[0].value),
                             maxPrice = parseInt(priceInput[1].value);
-        
+
                         if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
                             if (e.target.className === "input-min") {
                                 rangeInput[0].value = minPrice;
@@ -125,12 +129,12 @@
                         }
                     });
                 });
-        
+
                 rangeInput.forEach((input) => {
                     input.addEventListener("input", (e) => {
                         let minVal = parseInt(rangeInput[0].value),
                             maxVal = parseInt(rangeInput[1].value);
-        
+
                         if (maxVal - minVal < priceGap) {
                             if (e.target.className === "range-min") {
                                 rangeInput[0].value = maxVal - priceGap;
@@ -147,10 +151,10 @@
                 });
             });
         }
-        
+
         // Use the function with your specific class or attribute
         salaryRangeSlider(".salary-slider");
-         // end Range Slider for Salary filter
+        // end Range Slider for Salary filter
 
 
         // Job Category Show More Items
@@ -200,9 +204,10 @@
         function candidatePortfolio() {
 
             let portfolioSlider = $('.candidate-portfolio-slider');
-
+            let dataRtlprofile = portfolioSlider.data("rtl");
             if( portfolioSlider.length ) {
                 portfolioSlider.slick({
+                    rtl: dataRtlprofile,
                     dots: true,
                     arrows: false,
                     lazyLoad: 'ondemand',
@@ -231,7 +236,7 @@
         }
 
         candidatePortfolio()//End Candidate Portfolio Slider
-
+        z
     });
 
 })(jQuery);
