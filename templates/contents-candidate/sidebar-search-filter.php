@@ -241,7 +241,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						                $searched_opt = jobly_search_terms('candidate_locations');
 						                foreach ( $term_loc as $key => $term ) {
                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                            echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
+                                            echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
 						                }
 						                ?>
                                     </select>
@@ -287,7 +287,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         $searched_opt = jobly_search_terms('candidate_cats');
                                         foreach ( $term_cats as $key => $term ) {
                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                            echo '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
+                                            echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
                                         }
                                         ?>
                                     </select>

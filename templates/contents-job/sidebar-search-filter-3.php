@@ -198,7 +198,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                         $searched_opt = jobly_search_terms('company_cats');
                                                         foreach ( $term_cats as $term ) {
                                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                            echo '<option value="' . esc_attr($term->slug) . '" '.$selected.'>' . esc_html($term->name) . '</option>';
+                                                            echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>
@@ -223,7 +223,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                         $searched_opt = jobly_search_terms('job_locations');
                                                         foreach ( $term_loc as $term ) {
                                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                            echo '<option value="' . esc_attr($term->slug) . '" '.$selected.'>' . esc_html($term->name) . '</option>';
+                                                            echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>

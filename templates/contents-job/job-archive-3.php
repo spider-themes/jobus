@@ -37,7 +37,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="total-job-found xs-mt-10">
                                 <?php esc_html_e('All', 'jobly'); ?>
                                 <span class="text-dark fw-500"><?php echo jobly_posts_count('job') ?></span>
-                                <?php printf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobly'), jobly_posts_count('job') ); ?>
+                                <?php
+                                /* translators: 1: job found, 2: jobs found */
+                                echo esc_html(sprintf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobly'), jobly_posts_count('job') ));
+                                ?>
                             </div>
 
                         </div>

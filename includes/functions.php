@@ -422,7 +422,7 @@ if ( ! function_exists( 'jobly_pagination' ) ) {
         echo '<ul class="' . esc_attr($class) . '">';
 
             $big = 999999999; // need an unlikely integer
-            echo paginate_links(array(
+            $pagination_links = paginate_links(array(
                 'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                 'format' => '?paged=%#%',
                 'current' => max(1, get_query_var('paged')),
@@ -430,6 +430,11 @@ if ( ! function_exists( 'jobly_pagination' ) ) {
                 'prev_text' => $prev_text,
                 'next_text' => $next_text,
             ));
+
+            // Output pagination links with escaping
+            if ($pagination_links) {
+                echo wp_kses_post($pagination_links);
+            }
 
         echo '</ul>';
     }
@@ -519,20 +524,24 @@ if (!function_exists('jobly_get_selected_company_count')) {
  */
 function jobly_search_terms ($terms)
 {
-    $result = array();
+    $result = [];
 
-    // Check if the parameter is set in the URL
-    if (isset($_GET[ $terms ])) {
-        // Get the values of the parameter
-        $terms = $_GET[ $terms ];
+    // Verify the nonce before processing the request
+    if (isset($_GET['jobly_nonce']) && wp_verify_nonce($_GET['jobly_nonce'], 'jobly_search_terms')) {
 
-        // If there's only one value, convert it to an array for consistency
-        if (!is_array($terms)) {
-            $terms = [ $terms ];
+        // Check if the parameter is set in the URL
+        if (isset($_GET[ $terms ])) {
+            // Get the values of the parameter
+            $terms = $_GET[ $terms ];
+
+            // If there's only one value, convert it to an array for consistency
+            if (!is_array($terms)) {
+                $terms = [ $terms ];
+            }
+
+            // Return the array of terms
+            $result = $terms;
         }
-
-        // Return the array of terms
-        $result = $terms;
     }
 
     return $result;
@@ -720,7 +729,7 @@ if (!function_exists('jobly_showing_post_result_count')) {
     function jobly_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
     {
         if (!$query->have_posts()) {
-            echo '<p class="' . esc_attr($class) . '">' . __('No results found', 'jobly') . '</p>';
+            echo '<p class="' . esc_attr($class) . '">' . esc_html__('No results found', 'jobly') . '</p>';
             return;
         }
 
@@ -738,10 +747,15 @@ if (!function_exists('jobly_showing_post_result_count')) {
         ?>
         <p class="<?php echo esc_attr($class); ?>">
             <?php
-            printf(
-                __('Showing <span class="text-dark fw-500"> %1$d-%2$d </span> of <span class="text-dark fw-500">%3$d</span> results', 'jobly'),
-                $start_range, $end_range, $total_posts
+            $show_results = sprintf(
+            /* translators: 1: start range, 2: end range, 3: total number of posts */
+                __('Showing %1$s-%2$s of %3$s results', 'jobly'),
+                '<span class="text-dark fw-500">' . $start_range . '</span>',
+                '<span class="text-dark fw-500">' . $end_range . '</span>',
+                '<span class="text-dark fw-500">' . $total_posts . '</span>'
             );
+
+            echo wp_kses($show_results, ['span' => ['class' => []]]);
             ?>
         </p>
         <?php
@@ -767,10 +781,6 @@ if ( !function_exists('jobly_social_share_icons') ) {
         <?php
     }
 }
-
-
-
-
 
 
 

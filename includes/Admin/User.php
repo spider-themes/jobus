@@ -24,13 +24,14 @@ class User {
 
     }
 
-    public function manage_user_roles()
+    public function manage_user_roles(): void
     {
         $this->add_user_roles();
     }
 
 
-    public function add_user_roles() {
+    public function add_user_roles(): void
+    {
 
         add_role( 'jobly_candidate', esc_html__('Candidate (Jobly)', 'jobly'), array(
             'read' => true,
@@ -59,18 +60,17 @@ class User {
     }
 
 
-    public function remove_user_roles() {
+    public function remove_user_roles(): void
+    {
 
         remove_role('jobly_candidate');
         remove_role('jobly_employer');
 
     }
 
-    public function candidate_registration() {
+    public function candidate_registration(): void
+    {
         if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce($_POST['register_candidate_nonce'], 'register_candidate_action')) {
-
-            // Debug
-            error_log('Candidate registration hook triggered.');
 
             // Get form data
             $candidate_username = sanitize_user($_POST['candidate_username']);
@@ -89,7 +89,7 @@ class User {
                     // Create new user
                     $candidate_id = wp_create_user($candidate_username, $candidate_password, $candidate_email);
                     if (is_wp_error($candidate_id)) {
-                        wp_die($candidate_id->get_error_message());
+                        wp_die(esc_html($candidate_id->get_error_message()));
                     } else {
                         // Assign custom role to user
                         $candidate = new \WP_User($candidate_id);
@@ -109,7 +109,7 @@ class User {
         }
     }
 
-    public function employer_registration()
+    public function employer_registration(): void
     {
         if (isset($_POST['register_employer_nonce']) && wp_verify_nonce($_POST['register_employer_nonce'], 'register_employer_action')) {
 
@@ -130,7 +130,7 @@ class User {
                     // Create new user
                     $employer_id = wp_create_user($employer_username, $employer_password, $employer_email);
                     if (is_wp_error($employer_id)) {
-                        wp_die($employer_id->get_error_message());
+                        wp_die(esc_html($employer_id->get_error_message()));
                     } else {
                         // Assign custom role to user
                         $employer = new \WP_User($employer_id);

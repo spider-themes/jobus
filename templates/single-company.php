@@ -74,7 +74,12 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 if (is_array($terms)) {
                                     ?>
                                     <li class="col-12">
-                                        <span><?php printf(_n('Category:', 'Categories:', count($terms), 'jobly')) ?></span>
+                                        <span>
+                                            <?php
+                                            /* translators: 1: Category, 2: Categories */
+                                            echo esc_html(printf(_n('Category:', 'Categories:', esc_html(count($terms)), 'jobly')));
+                                            ?>
+                                        </span>
                                         <?php echo '<div>' . implode(', ', $terms) . '</div>'; ?>
                                     </li>
                                     <?php

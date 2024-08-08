@@ -61,7 +61,10 @@ $job_count = $job_post->found_posts;
                             <div class="total-job-found">
                                 <?php esc_html_e('All', 'jobly'); ?>
                                 <span class="text-dark"><?php echo esc_html($job_count) ?></span>
-                                <?php printf(_n('job found', 'jobs found', $job_count, 'jobly'), $job_count ); ?>
+                                <?php
+                                /* translators: 1: company found, 2: companies found */
+                                echo esc_html(sprintf(_n('job found', 'jobs found', $job_count, 'jobly'), $job_count ));
+                                ?>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="short-filter d-flex align-items-center">

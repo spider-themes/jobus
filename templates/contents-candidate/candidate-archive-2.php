@@ -36,7 +36,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobly'); ?>
                                 <span class="text-dark fw-500"><?php echo jobly_posts_count('candidate') ?></span>
-                                <?php printf(_n('candidate found', 'candidates found', jobly_posts_count('candidate'), 'jobly'), jobly_posts_count('candidate')); ?>
+                                <?php
+                                /* translators: 1: candidate found, 2: candidates found */
+                                echo esc_html(sprintf(_n('candidate found', 'candidates found', jobly_posts_count('candidate'), 'jobly'), jobly_posts_count('candidate')));
+                                ?>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -128,7 +131,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                                                 // Display the count of remaining skills
                                                 $remaining_count = count($skills) - $max_skills;
-                                                echo '<li class="more">' . $remaining_count . '+</li>';
+                                                echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                                 echo '</ul>';
                                             } else {
                                                 // Display all skills
@@ -250,7 +253,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                                                             // Display the count of remaining skills
                                                             $remaining_count = count($skills) - $max_skills;
-                                                            echo '<li class="more">' . $remaining_count . '+</li>';
+                                                            echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                                             echo '</ul>';
                                                         } else {
                                                             // Display all skills

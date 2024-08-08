@@ -41,7 +41,7 @@ wp_enqueue_script('lightbox');
 
                                 // Display the count of remaining skills
                                 $remaining_count = count($skills) - $max_skills;
-                                echo '<li class="more">' . $remaining_count . '+</li>';
+                                echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                 echo '</ul>';
                             } else {
                             // Display all skills

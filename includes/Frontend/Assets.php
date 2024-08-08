@@ -26,7 +26,7 @@ class Assets {
         wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css', [], JOBLY_VERSION );
 
 	    if ( is_rtl() ) {
-		    wp_enqueue_style( 'jobly-rtl', JOBLY_CSS . '/jobly-main-rtl.css' );
+		    wp_enqueue_style( 'jobly-rtl', JOBLY_CSS . '/jobly-main-rtl.css', [], JOBLY_VERSION );
 	    }
 
 

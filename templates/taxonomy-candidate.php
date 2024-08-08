@@ -66,7 +66,10 @@ $candidate_count = $candidate_query->found_posts;
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
                             <span class="text-dark fw-500"><?php echo esc_html($candidate_count) ?></span>
-                            <?php printf(_n('candidate found', 'candidates found', $candidate_count, 'jobly'), $candidate_count); ?>
+                            <?php
+                            /* translators: 1: candidate found, 2: candidates found */
+                            echo esc_html(sprintf(_n('candidate found', 'candidates found', $candidate_count, 'jobly'), $candidate_count));
+                            ?>
                         </div>
 
                         <div class="d-flex align-items-center">
@@ -144,7 +147,7 @@ $candidate_count = $candidate_query->found_posts;
 
                                             // Display the count of remaining skills
                                             $remaining_count = count($skills) - $max_skills;
-                                            echo '<li class="more">' . $remaining_count . '+</li>';
+                                            echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                             echo '</ul>';
                                         } else {
                                             // Display all skills

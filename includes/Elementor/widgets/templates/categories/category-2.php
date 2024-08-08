@@ -11,7 +11,7 @@
                 if ($hover_border_color) { ?>
                     <style>
                         .hover_border_color:hover {
-                            border-color: <?php echo $hover_border_color ?> !important;
+                            border-color: <?php echo esc_attr($hover_border_color) ?> !important;
                         }
                     </style>
                     <?php
@@ -19,7 +19,7 @@
                 ?>
 
                 <div class="card-style-seven bg-color text-center wow fadeInUp">
-                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="wrapper d-flex align-items-center<?php echo $hover_border_color ? ' hover_border_color' : '' ?>" <?php echo esc_attr($text_bg_color) ?>>
+                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="wrapper d-flex align-items-center<?php echo esc_attr($hover_border_color) ? ' hover_border_color' : '' ?>" <?php echo esc_attr($text_bg_color) ?>>
                         <?php
                         if (!empty($meta['cat_img']['id'])) { ?>
                             <div class="icon d-flex align-items-center justify-content-center">

@@ -33,7 +33,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobly'); ?>
                             <span class="text-dark fw-500"><?php echo jobly_posts_count('company') ?></span>
-                            <?php printf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobly'), jobly_posts_count('company')); ?>
+                            <?php
+                            /* translators: 1: company found, 2: companies found */
+                            echo esc_html(sprintf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobly'), jobly_posts_count('company')));
+                            ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <?php
@@ -114,7 +117,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>">
                                                         <?php
                                                         /* translators: 1: Vacancy, 2: Vacancies */
-                                                        echo sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count);
+                                                        echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobly'), $company_count));
                                                         ?>
                                                     </a>
                                                 </div>
@@ -184,7 +187,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
                                                         <?php
                                                         /* translators: 1: open job, 2: open jobs */
-                                                        echo sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count); ?>
+                                                        echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count));
+                                                        ?>
                                                     </a>
                                                     <?php
                                                 }
