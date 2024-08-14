@@ -5,13 +5,9 @@
 
 namespace Jobly\Elementor\widgets;
 
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,7 +26,7 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Jobly Search Form', 'jobly' );
+		return esc_html__( 'Search Form (Jobly)', 'jobly' );
 	}
 
 	public function get_icon() {
@@ -680,14 +676,14 @@ class Search_Form extends Widget_Base {
 	 * Package: @jobly
 	 * Author: spider-themes
 	 */
-	protected function render() {
+	protected function render(): void
+    {
 		$settings = $this->get_settings_for_display();
 		extract( $settings ); //extract all settings array to variables converted to name of key
 
 		$search_result_form = ! empty( $settings['search_result_form'] ) ? $settings['search_result_form'] : '';
 
 		$categories = get_terms( array(
-
 			'taxonomy'   => 'job_cat',
 			'hide_empty' => true,
 

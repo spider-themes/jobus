@@ -32,7 +32,7 @@ class Companies extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Jobly Companies', 'jobly');
+        return esc_html__('Companies (Jobly)', 'jobly');
     }
 
     public function get_icon ()

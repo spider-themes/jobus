@@ -43,7 +43,7 @@ class Job_Application {
             <p class="jobly-application-submission-info">
                 <span class="jobly-application-submission-date">
                     <?php esc_html_e('Submitted On ', 'jobly'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
-                <span class="jobly-applicant-ip">from IP <?php echo esc_html($candidate_ip); ?></span>
+                <span class="jobly-applicant-ip"><?php esc_html_e('from IP', 'jobly'); ?> <?php echo esc_html($candidate_ip); ?></span>
             </p>
             <?php
         }

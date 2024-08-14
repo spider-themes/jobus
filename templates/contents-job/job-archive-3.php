@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$job_archive_layout = isset($jobly_job_archive_layout) ? $jobly_job_archive_layout : jobly_opt('job_archive_layout');
+$job_archive_layout = $jobly_job_archive_layout ?? jobly_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'list';

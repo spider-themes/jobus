@@ -119,7 +119,7 @@ $job_count = $job_post->found_posts;
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-sm-6">
-                                            <!--         job archive 1 location         -->
+                                            <!-- job archive 1 location -->
 	                                        <?php
 	                                        $locations = get_the_terms(get_the_ID(), 'job_location');
 	                                        if (!empty($locations )) { ?>
@@ -171,7 +171,6 @@ $job_count = $job_post->found_posts;
             </div>
         </div>
     </section>
-
 
 <?php
 

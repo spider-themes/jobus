@@ -896,3 +896,8 @@ function jobly_phpmailer_init( $phpmailer ) {
     return $phpmailer;
 }
 
+if ( ! function_exists( 'jobly_rtl') ) {
+    function jobly_rtl(): string {
+        return is_rtl() ? 'true' : 'false';
+    }
+}

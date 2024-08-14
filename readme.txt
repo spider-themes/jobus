@@ -1,30 +1,59 @@
-=== Jobly - Job Listing, Career Page and Recruitment Tool ===
-Contributors: mdjwel, spiderdevs, arifrahman1, delweratjk, alimran01
-Tags: career, careers, job board, job listing, job manager, job portal, jobs, company, hiring, job openings
+=== Jobly - Job Listing, Career Page, and Recruitment Tool ===
+Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
+Tags: job board, job listing, recruitment, job portal, hiring
 Stable tag: 0.0.1
-Requires at least: 5.0
+Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-License: GPL2 or later
+License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-Jobly tool is the most simple yet powerful solution for setting up a job listing page for your WordPress website.
+Jobly is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobly simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
 
+== Features ==
+* **Easy Setup and Use**: Simple and intuitive interface for quick setup.
+* **User-Friendly Design**: Clean, responsive, and accessible design.
+* **Unlimited Job Specifications**: Easily add and manage job details.
+* **WordPress UI Integration**: Manage job listings using the familiar WordPress interface.
+* **Location-Based Job Listings**: Add job locations to individual job postings.
+* **Job Application Management**: Job seekers can apply directly through the job application form on each job post.
+* **Applicant Tracking**: View a list of applicants who have applied for each job.
+* **User Account Pages**: Custom account pages for both employers and candidates.
+* **Custom User Roles**: Define custom roles for different user types.
+* **Featured Jobs**: Highlight special jobs with an attention-grabbing badge.
+* **Social Sharing**: Integrated social sharing options for job posts.
+* **Customizable Appearance**: Easily modify the plugin's look and feel from the settings page.
+* **Pre-made Templates**: Ready-to-use templates for careers, job listings, and company pages.
+* **Multiple Layouts**: Choose from various pre-made layout templates for candidates, jobs, and companies.
+
+== Elementor Widgets ==
+= This plugin offers 5 widgets =
+* **Categories**
+* **Companies**
+* **Job Tabs**
+* **Job Listing**
+* **Search Form**
+
+== Blocks ==
+= This plugin provides 6 blocks =
+* **Testimonials**
+* **Register Form**
+* **Candidate Archive**
+* **Company Archive**
+* **Job Archive**
+* **Video Popup**
 
 == Installation ==
 = Minimum Requirements =
+* WordPress 6.0 or greater
+* PHP 7.4 or greater
+* MySQL 8.0 or greater OR MariaDB 10.5 or greater
+* HTTPS support
 
-* WordPress 5.0 or greater
-* PHP 7.4 or greater is recommended
-* MySQL 5.6 or greater is recommended
+= Recommended Hosting Setup =
+* WordPress memory limit of 256 MB or higher
 
-= We Recommend Your Host Supports =
-WordPress Memory limit of 128 MB or higher is preferred
-
-= Installation =
-
-1. Upload the plugin folder to the /wp-content/plugins/ directory, or install the plugin through the WordPress plugins screen directly.
+= Installation Steps =
+1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the ‘Plugins’ screen in WordPress
-3. You can type "Spider or Spider Elements" on your element tabs within the Elementor editor and all the available elements will appear.
-4. Also, you can see them under the category  "Spider Elements" on your element/widget list.

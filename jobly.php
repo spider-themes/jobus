@@ -5,7 +5,7 @@
  * Plugin URI: https://spider-themes.net/jobly
  * Author: spider-themes
  * Author URI: https://spider-themes.net/jobly
- * Version: 0.0.5
+ * Version: 0.0.1
  * Requires at least: 5.0
  * Requires PHP: 7.4
  * Text Domain: jobly
@@ -156,7 +156,6 @@ if ( ! class_exists( 'Jobly' ) ) {
             new Jobly\includes\Classes\Ajax_Actions();
 
 			if ( is_admin() ) {
-				new Jobly\Admin\Admin();
 				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
@@ -176,7 +175,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		/**
 		 * Do stuff upon plugin activation
 		 */
-		public function activate() {
+		public function activate(): void
+        {
 			//Insert the installation time into the database
 			$installed = get_option( 'jobly_installed' );
 			if ( ! $installed ) {
@@ -190,7 +190,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @return string
 		 */
-		public function plugin_path() {
+		public function plugin_path(): string
+        {
 
 			if ( $this->plugin_path ) {
 				return $this->plugin_path;
@@ -225,7 +226,8 @@ if ( ! function_exists( 'jobly' ) ) {
 	 *
 	 * Main instance of jobly
 	 */
-	function jobly() {
+	function jobly(): bool|Jobly
+    {
 		return Jobly::init();
 	}
 

@@ -45,7 +45,8 @@ class Blocks {
     /**
      * Blocks Initialization
      */
-    public function blocks_init() {
+    public function blocks_init(): void
+    {
         $this->register_block( 'video-popup' );
         $this->register_block( 'group-testimonials' );
         $this->register_block( 'testimonials-item' );
@@ -59,7 +60,8 @@ class Blocks {
     }
 
 
-    public function register_form_block_render($attributes, $content ) {
+    public function register_form_block_render($attributes, $content ): bool|string
+    {
 
         ob_start();
 
@@ -91,7 +93,8 @@ class Blocks {
     }
 
 
-    public function register_block_editor_assets () {
+    public function register_block_editor_assets (): void
+    {
 
         // Style's
         //wp_enqueue_style('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.css', [], JOBLY_VERSION);
@@ -104,12 +107,11 @@ class Blocks {
     }
 
 
-    public function register_block_assets () {
+    public function register_block_assets (): void
+    {
 
         // Style's
         wp_enqueue_style('jobly-block-frontend', JOBLY_CSS . '/block-frontend.css', [], JOBLY_VERSION);
-
-
 
         // Script's
         wp_enqueue_script('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '5.1.3', true );

@@ -46,7 +46,7 @@ class Register_Widgets
     {
         $elements_manager->add_category(
             'jobly-elements', [
-                'title' => __('Jobly', 'jobly'),
+                'title' => esc_html__('Jobly', 'jobly'),
                 'icon' => 'fa fa-plug',
             ]
         );

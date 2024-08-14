@@ -93,8 +93,6 @@ wp_enqueue_script('lightbox');
             </div>
         </div>
     </div>
-    <img src="images/shape/shape_02.svg" alt="" class="lazy-img shapes shape_01" style="">
-    <img src="images/shape/shape_03.svg" alt="" class="lazy-img shapes shape_02" style="">
 </div>
 
 <section class="candidates-profile-2 bg-color pt-100 lg-pt-70 pb-130 lg-pb-80">
@@ -223,7 +221,7 @@ wp_enqueue_script('lightbox');
                             <?php
                         }
 	                    ?>
-                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(spel_rtl()) ?>">
+                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(jobly_rtl()) ?>">
 		                    <?php
 		                    foreach ( $portfolio_ids as $item ) {
 			                    $image_url = wp_get_attachment_image_url($item, 'full')

@@ -32,7 +32,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Jobly Job Tabs', 'jobly');
+        return esc_html__('Job Tabs (Jobly)', 'jobly');
     }
 
     public function get_icon ()

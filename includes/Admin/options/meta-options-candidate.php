@@ -31,8 +31,8 @@ if (class_exists('CSF')) {
 		        'title'     => esc_html__('Choose Layout', 'jobly'),
 		        'subtitle'  => esc_html__('Select the preferred layout for your candidate post for this page.', 'jobly'),
 		        'options'   => array(
-			        '1' => JOBLY_IMG . '/layout/candidate/candidate-profile-1.png',
-			        '2' => JOBLY_IMG . '/layout/candidate/candidate-profile-2.png',
+			        '1' => esc_url(JOBLY_IMG . '/layout/candidate/candidate-profile-1.png'),
+			        '2' => esc_url(JOBLY_IMG . '/layout/candidate/candidate-profile-2.png'),
 		        ),
 		        'default'   => '1'
 	        ),
@@ -62,21 +62,21 @@ if (class_exists('CSF')) {
         foreach ($candidate_specifications as $field) {
 
             $meta_value     = $field['meta_values_group'] ?? [];
-            $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . $field['meta_icon'] . '"></i>' : '';
+            $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . esc_attr($field['meta_icon']) . '"></i>' : '';
             $opt_values     = [];
             $opt_val        = '';
 
             foreach ($meta_value as $value) {
                 $modifiedString = preg_replace('/[,\s]+/', '@space@', $value['meta_values']);
                 $opt_val = strtolower($modifiedString);
-                $opt_values[$opt_val] = $value['meta_values'];
+                $opt_values[esc_attr($opt_val)] = esc_html($value['meta_values']);
             }
 
             if (!empty($field['meta_key'])) {
                 $candidate_fields[] = [
-                    'id' => $field['meta_key'] ?? '',
+                    'id' => esc_attr($field['meta_key']) ?? '',
                     'type' => 'select',
-                    'title' => $field['meta_name'] ?? '',
+                    'title' => esc_html($field['meta_name']) ?? '',
                     'options' => $opt_values,
                     'multiple' => true,
                     'chosen' => true,

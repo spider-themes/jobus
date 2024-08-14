@@ -67,68 +67,47 @@
 
 /** === Categories === **/
 .category1::before {
-    content: "";
-    background: url("../images/el-editor-preview/category_1.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/category_1.jpg") no-repeat top;
 }
 .category2::before {
-    content: "";
-    background: url("../images/el-editor-preview/category_2.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/category_2.jpg") no-repeat top;
 }
 
 .category3::before {
-    content: "";
-    background: url("../images/el-editor-preview/category_3.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/category_3.jpg") no-repeat top;
 }
 .category4::before {
-    background: url("../images/el-editor-preview/job_2.png");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/job_2.png") no-repeat top;
 }
 
 /** === Search From === **/
 .search_form_1::before {
-    background: url("../images/el-editor-preview/search_form_1.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/search_form_1.jpg") no-repeat top;
 }
 
 .search_form_2::before {
-    background: url("../images/el-editor-preview/search_form_2.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/search_form_2.jpg") no-repeat top;
 }
 
 .search_form_3::before {
-    background: url("../images/el-editor-preview/search_form_3.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/search_form_3.jpg") no-repeat top;
 }
 
 /** === Job Listing === **/
 .job_1::before {
-    background: url("../images/el-editor-preview/job_1.png");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/job_1.png") no-repeat top;
 }
 
 /** === Company Listing === **/
 .company_1::before {
-    background: url("../images/el-editor-preview/company_1.jpg");
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: top;
+    background: url("../images/el-editor-preview/company_1.jpg") no-repeat top;
 }

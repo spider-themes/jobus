@@ -11,7 +11,8 @@ $candidate_cv = esc_attr( get_post_meta( $post->ID, 'candidate_cv', true ) );
 $candidate_cv_url = $candidate_cv ? wp_get_attachment_url($candidate_cv) : '';
 
 // Function to format file size
-function jobly_job_application_format_size_units($bytes) {
+function jobly_job_application_format_size_units($bytes): string
+{
     if ($bytes >= 1048576) {
         $bytes = number_format($bytes / 1048576, 2) . ' MB';
     } elseif ($bytes >= 1024) {
@@ -39,10 +40,9 @@ if ($candidate_cv_url) {
 
 <div class="jobly-application-container jobly-clearfix">
 
-
     <div class="applicant-image-details">
         <div class="applicant-image">
-            <?php echo get_avatar($candidate_email, 150, '', $candidate_fname, ['class' => 'test' ]) ?>
+            <?php echo get_avatar($candidate_email, 150, '', $candidate_fname) ?>
         </div>
         <?php if ($candidate_cv_url) : ?>
             <a href="<?php echo esc_url($candidate_cv_url); ?>" class="button applicant-resume-btn" rel="nofollow" target="_blank">

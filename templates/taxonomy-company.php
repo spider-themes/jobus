@@ -153,7 +153,6 @@ $company_count = $company_query->found_posts;
 
                 </div>
 
-
             </div>
         </div>
     </section>

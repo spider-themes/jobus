@@ -11,7 +11,8 @@ class Assets {
 		add_action('admin_enqueue_scripts', [$this, 'jobly_enqueue_scripts'], 999);
 	}
 	
-	public function jobly_enqueue_scripts()	{
+	public function jobly_enqueue_scripts(): void
+    {
 
         // Enqueue Styles
         wp_enqueue_style('bootstrap-icons', JOBLY_VEND . '/bootstrap-icons/font.css', [], JOBLY_VERSION);

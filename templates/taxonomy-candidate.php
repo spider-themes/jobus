@@ -17,6 +17,7 @@ get_header();
 $current_candidate_cat = get_term_by('slug', get_query_var('candidate_cat'), 'candidate_cat');
 $current_candidate_loc = get_term_by('slug', get_query_var('candidate_location'), 'candidate_location');
 $current_candidate_skill = get_term_by('slug', get_query_var('candidate_skill'), 'candidate_skill');
+
 // These parameters are used to determine the sorting order of job posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
@@ -243,7 +244,6 @@ $candidate_count = $candidate_query->found_posts;
             </div>
         </div>
     </section>
-
 
 <?php
 

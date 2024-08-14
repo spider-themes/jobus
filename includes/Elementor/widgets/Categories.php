@@ -28,7 +28,7 @@ class Categories extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Categories Jobly', 'jobly' );
+		return esc_html__( 'Categories (Jobly)', 'jobly' );
 	}
 
 	public function get_icon() {
