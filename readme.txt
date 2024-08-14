@@ -35,15 +35,6 @@ Jobly is a comprehensive and powerful tool for creating job, company, and candid
 * **Job Listing**
 * **Search Form**
 
-== Blocks ==
-= This plugin provides 6 blocks =
-* **Testimonials**
-* **Register Form**
-* **Candidate Archive**
-* **Company Archive**
-* **Job Archive**
-* **Video Popup**
-
 == Installation ==
 = Minimum Requirements =
 * WordPress 6.0 or greater

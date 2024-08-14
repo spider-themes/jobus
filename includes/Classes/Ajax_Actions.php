@@ -13,6 +13,10 @@ class Ajax_Actions
     {
         add_action('wp_ajax_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
         add_action('wp_ajax_nopriv_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
+
+        // Job Single Page-> Job Application Form
+        add_action('wp_ajax_jobly_job_application', 'job_application_form');
+        add_action('wp_ajax_nopriv_jobly_job_application', 'job_application_form');
     }
 
     public function ajax_send_contact_email(): void
@@ -59,5 +63,52 @@ class Ajax_Actions
 
         wp_die(); // Always terminate AJAX calls
 
+    }
+
+
+    public function job_application_form()
+    {
+        check_ajax_referer('job_application_form_nonce', 'security');
+
+        // Get form data
+        $candidate_fname = sanitize_text_field($_POST['candidate_fname']);
+        $candidate_lname = sanitize_text_field($_POST['candidate_lname']);
+        $candidate_email = sanitize_email($_POST['candidate_email']);
+        $candidate_phone = sanitize_text_field($_POST['candidate_phone']);
+        $candidate_message = sanitize_textarea_field($_POST['candidate_message']);
+        $job_application_id = sanitize_text_field($_POST['job_application_id']);
+        $job_application_title = sanitize_text_field($_POST['job_application_title']);
+
+        // Save the application as a new post
+        $application_id = wp_insert_post(array(
+            'post_type' => 'job_application',
+            'post_status' => 'publish',
+            'post_title' => $candidate_fname . ' ' . $candidate_lname,
+        ));
+
+        if ($application_id) {
+            update_post_meta($application_id, 'candidate_fname', $candidate_fname);
+            update_post_meta($application_id, 'candidate_lname', $candidate_lname);
+            update_post_meta($application_id, 'candidate_email', $candidate_email);
+            update_post_meta($application_id, 'candidate_phone', $candidate_phone);
+            update_post_meta($application_id, 'candidate_message', $candidate_message);
+            update_post_meta($application_id, 'job_applied_for_id', $job_application_id);
+            update_post_meta($application_id, 'job_applied_for_title', $job_application_title);
+
+            if (!empty($_FILES['candidate_cv']['name'])) {
+                $uploaded = media_handle_upload('candidate_cv', $application_id);
+                if (is_wp_error($uploaded)) {
+                    wp_send_json_error(array('message' => 'CV upload failed.'));
+                } else {
+                    update_post_meta($application_id, 'candidate_cv', $uploaded);
+                }
+            }
+
+            wp_send_json_success(array('message' => 'Application submitted successfully.'));
+        } else {
+            wp_send_json_error(array('message' => 'Failed to submit application.'));
+        }
+
+        wp_die();
     }
 }

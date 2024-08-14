@@ -75,7 +75,7 @@ foreach ( $price_ranged as $key => $values ) {
 
 $allSliderValues = jobly_all_range_field_value();
 
-if (!empty($allSliderValues) && isset ($allSliderValues)) {
+if (!empty($allSliderValues)) {
     $simplifiedSliderValues = [];
 
     foreach ( $allSliderValues as $key => $values ) {

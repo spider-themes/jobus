@@ -5,7 +5,7 @@
  * Plugin URI: https://spider-themes.net/jobly
  * Author: spider-themes
  * Author URI: https://spider-themes.net/jobly
- * Version: 0.0.1
+ * Version: 0.0.5
  * Requires at least: 5.0
  * Requires PHP: 7.4
  * Text Domain: jobly
@@ -47,7 +47,8 @@ if ( ! class_exists( 'Jobly' ) ) {
          * Initializes a singleton instances
          * @return false|Jobly
          */
-        public static function init() {
+        public static function init(): bool|Jobly
+        {
             static $instance = false;
             if ( ! $instance ) {
                 $instance = new self();
@@ -81,7 +82,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * Load plugin localization files.
 		 */
-		public function i18n() {
+		public function i18n(): void
+        {
 			load_plugin_textdomain( 'jobly', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
@@ -134,7 +136,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		/**
 		 * Define constants
 		 */
-		public function define_constants() {
+		public function define_constants(): void
+        {
 			define( 'JOBLY_VERSION', self::VERSION );
 			define( 'JOBLY_FILE', __FILE__ );
 			define( 'JOBLY_PATH', __DIR__ );
