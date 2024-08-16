@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-$user_input = (!empty($_POST['user_input'])) ? sanitize_text_field($_POST['user_input']) : '';
-$password = (!empty($_POST['user_pwd'])) ? $_POST['user_pwd'] : '';
+$user_input = sanitize_text_field($_POST['user_input']) ?? '';
+$password = sanitize_textarea_field($_POST['user_pwd']) ?? '';
 
 if (is_user_logged_in()) {
     $current_user = wp_get_current_user();
@@ -45,8 +45,10 @@ if (is_user_logged_in()) {
                         </p>
                     </div>
                     <div class="form-wrapper m-auto">
-                        <form action="<?php echo esc_url(home_url('/')) ?>wp-login.php" class="mt-10" name="loginform"
-                              id="loginform" method="post">
+                        <form action="<?php echo esc_url(home_url('/')) ?>wp-login.php" class="mt-10" name="loginform" id="loginform" method="post">
+
+                            <?php wp_nonce_field('jobi_login_action', 'jobi_login_nonce'); ?>
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group-meta position-relative mb-25">

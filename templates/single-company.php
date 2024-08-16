@@ -77,10 +77,15 @@ $website_target = $website[ 'target' ] ?? '_self';
                                         <span>
                                             <?php
                                             /* translators: 1: Category, 2: Categories */
-                                            echo esc_html(printf(_n('Category:', 'Categories:', esc_html(count($terms)), 'jobly')));
+                                            echo esc_html(sprintf(_n('Category:', 'Categories:', '', 'jobly'), '' ));
                                             ?>
                                         </span>
-                                        <?php echo '<div>' . implode(', ', $terms) . '</div>'; ?>
+                                        <div>
+                                            <?php
+                                            $terms_list = implode(', ', $terms);
+                                            echo esc_html($terms_list);
+                                            ?>
+                                        </div>
                                     </li>
                                     <?php
                                 }

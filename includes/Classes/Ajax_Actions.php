@@ -29,7 +29,7 @@ class Ajax_Actions
         }
 
         // Get candidate ID
-        $candidate_id = intval($_POST['candidate_id']);
+        $candidate_id = intval($_POST['candidate_id']) ?? '';
 
         // Retrieve candidate email
         $meta = get_post_meta($candidate_id, 'jobly_meta_candidate_options', true);
@@ -71,13 +71,13 @@ class Ajax_Actions
         check_ajax_referer('job_application_form_nonce', 'security');
 
         // Get form data
-        $candidate_fname = sanitize_text_field($_POST['candidate_fname']);
-        $candidate_lname = sanitize_text_field($_POST['candidate_lname']);
-        $candidate_email = sanitize_email($_POST['candidate_email']);
-        $candidate_phone = sanitize_text_field($_POST['candidate_phone']);
-        $candidate_message = sanitize_textarea_field($_POST['candidate_message']);
-        $job_application_id = sanitize_text_field($_POST['job_application_id']);
-        $job_application_title = sanitize_text_field($_POST['job_application_title']);
+        $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
+        $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
+        $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
+        $candidate_phone = sanitize_text_field($_POST['candidate_phone']) ?? '';
+        $candidate_message = sanitize_textarea_field($_POST['candidate_message']) ?? '';
+        $job_application_id = sanitize_text_field($_POST['job_application_id']) ?? '';
+        $job_application_title = sanitize_text_field($_POST['job_application_title']) ?? '';
 
         // Save the application as a new post
         $application_id = wp_insert_post(array(

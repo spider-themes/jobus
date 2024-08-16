@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name: Jobly
- * Description: Efficient job search and recruitment plugin. Connects job seekers with opportunities and helps businesses find top talent.
+ * Description: A powerful recruitment and job listing plugin that seamlessly connects job seekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Plugin URI: https://spider-themes.net/jobly
  * Author: spider-themes
  * Author URI: https://spider-themes.net/jobly
- * Version: 0.0.5
- * Requires at least: 5.0
+ * Version: 0.0.1
+ * Requires at least: 6.0
+ * Tested up to: 6.6.1
  * Requires PHP: 7.4
  * Text Domain: jobly
  * License: GPLv2 or later
@@ -34,7 +35,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.5';
+		const VERSION = '0.0.1';
 
 		/**
 		 * The plugin path

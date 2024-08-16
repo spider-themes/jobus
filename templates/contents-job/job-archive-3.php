@@ -126,7 +126,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <?php echo wpautop($excerpt) ?>
+                                                <?php echo wp_kses_post($excerpt) ?>
                                                 <div class="d-sm-flex align-items-center justify-content-between mt-auto">
                                                     <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) :  ?>
                                                         <div class="d-flex align-items-center">
