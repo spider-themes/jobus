@@ -15,12 +15,25 @@ class User {
         register_activation_hook(__FILE__, [$this, 'add_user_roles']);
         register_deactivation_hook(__FILE__, [$this, 'remove_user_roles']);
 
-
+        // Handle Candidate Registration
         add_action('admin_post_nopriv_register_candidate', [$this, 'candidate_registration']);
         add_action('admin_post_register_candidate', [$this, 'candidate_registration']);
 
+        // Handle Employer Registration
         add_action('admin_post_nopriv_register_employer', [$this, 'employer_registration']);
         add_action('admin_post_register_employer', [$this, 'employer_registration']);
+
+        // Restrict admin menu for Candidate role
+        add_action('admin_menu', [$this, 'restrict_candidate_menu'], 999);
+
+        // Restrict candidates to see only their own posts
+        add_action('pre_get_posts', [$this, 'restrict_candidate_to_own_posts']);
+
+
+        // Redirect Candidate role to custom dashboard
+        //add_filter('login_redirect', [$this, 'redirect_candidate_dashboard'], 10, 3);
+
+
 
     }
 
@@ -33,16 +46,12 @@ class User {
     public function add_user_roles(): void
     {
 
-        add_role( 'jobly_candidate', esc_html__('Candidate (Jobly)', 'jobly'), array(
+        add_role('jobly_candidate', esc_html__('Candidate (Jobly)', 'jobly'), array(
             'read' => true,
-            'edit_candidate' => true,
-            'delete_candidate' => true,
-            'edit_candidates' => true,
-            'publish_candidates' => true,
-            'read_private_candidates' => true,
-            'delete_candidates' => true,
-            'edit_published_candidates' => true,
-            'delete_published_candidates' => true,
+            'edit_posts' => true, // Allows editing their own posts
+            'delete_posts' => true, // Allows deleting their own posts
+            'publish_posts' => true, // Allows publishing their own posts
+            'upload_files' => true, // Allows uploading files
         ));
 
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobly'), array(
@@ -149,6 +158,41 @@ class User {
             }
         }
     }
+
+
+    // Restrict admin menu for Candidate role
+    public function restrict_candidate_menu() {
+        $user = wp_get_current_user();
+        if (in_array('jobly_candidate', (array) $user->roles)) {
+            // Remove unnecessary menus
+            remove_menu_page('edit.php'); // Posts
+            remove_menu_page('edit-comments.php'); // Comments
+            remove_menu_page('tools.php'); // Tools
+            remove_menu_page('edit.php?post_type=job'); // Job
+            remove_menu_page('edit.php?post_type=company'); // Company
+            remove_menu_page('edit.php?post_type=elementor_library'); // elementor_library
+
+            // Keep only Dashboard, Candidate, Profile, and Collapse Menu
+        }
+    }
+
+    public function restrict_candidate_to_own_posts($query) {
+        if (is_admin() && $query->is_main_query() ) {
+            $user = wp_get_current_user();
+            if (in_array('jobly_candidate', (array)$user->roles)) {
+                $query->set('author', $user->ID); // Restrict posts to the current author
+            }
+        }
+    }
+
+
+    // Redirect candidates to a custom dashboard after login
+    /*public function redirect_candidate_dashboard($redirect_to, $requested_redirect_to, $user) {
+        if (in_array('jobly_candidate', (array) $user->roles)) {
+            return home_url('/candidate-dashboard'); // Replace with your custom dashboard URL
+        }
+        return $redirect_to;
+    }*/
 
 
 }
