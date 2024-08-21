@@ -2,7 +2,7 @@
 namespace Jobly\Admin;
 
 /**
- * Class Admin
+ * Class User
  *
  * @package Jobly\Admin
  */
@@ -10,65 +10,70 @@ class User {
 
     public function __construct() {
 
-        // Add Manage Custom User Roles
+        // Hook to manage custom user roles on initialization
         add_action('init', [$this, 'manage_user_roles']);
+
+        // Hook to add user roles on plugin/theme activation
         register_activation_hook(__FILE__, [$this, 'add_user_roles']);
+
+        // Hook to remove user roles on plugin/theme deactivation
         register_deactivation_hook(__FILE__, [$this, 'remove_user_roles']);
 
-        // Handle Candidate Registration
+        // Handle Candidate Registration for non-logged and logged-in in users
         add_action('admin_post_nopriv_register_candidate', [$this, 'candidate_registration']);
         add_action('admin_post_register_candidate', [$this, 'candidate_registration']);
 
-        // Handle Employer Registration
+        // Handle Employer  Registration for non-logged and logged-in in users
         add_action('admin_post_nopriv_register_employer', [$this, 'employer_registration']);
         add_action('admin_post_register_employer', [$this, 'employer_registration']);
 
-        // Restrict admin menu for Candidate role
-        add_action('admin_menu', [$this, 'restrict_candidate_menu'], 999);
-
-        // Restrict candidates to see only their own posts
-        add_action('pre_get_posts', [$this, 'restrict_candidate_to_own_posts']);
-
-
-        // Redirect Candidate role to custom dashboard
-        //add_filter('login_redirect', [$this, 'redirect_candidate_dashboard'], 10, 3);
-
-
+        // Restrict admin menu items for users with the Candidate role
+        add_action('admin_menu', [$this, 'restrict_candidate_menu']);
 
     }
 
+    /**
+     * Manage custom user roles by removing and re-adding them.
+     */
     public function manage_user_roles(): void
     {
+        $this->remove_user_roles();
         $this->add_user_roles();
     }
 
-
+    /**
+     * Add custom user roles for Candidate and Employer.
+     */
     public function add_user_roles(): void
     {
 
         add_role('jobly_candidate', esc_html__('Candidate (Jobly)', 'jobly'), array(
-            'read' => true,
-            'edit_posts' => true, // Allows editing their own posts
-            'delete_posts' => true, // Allows deleting their own posts
-            'publish_posts' => true, // Allows publishing their own posts
-            'upload_files' => true, // Allows uploading files
+            'read'                     => true,
+            'edit_candidate'           => true,
+            'edit_candidates'          => true,
+            'publish_candidates'       => true,
+            'read_private_candidates'  => true,
+            'edit_published_candidates'=> true,
+            'delete_candidates'        => true,
+            'delete_published_candidates' => true,
         ));
 
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobly'), array(
-            'read' => true,
-            'edit_post' => true,
-            'delete_post' => true,
-            'edit_posts' => true,
-            'publish_posts' => true,
-            'read_private_posts' => true,
-            'delete_posts' => true,
-            'edit_published_posts' => true,
-            'delete_published_posts' => true,
+            'read'                     => true,
+            'edit_candidate'           => true,
+            'edit_candidates'          => true,
+            'publish_candidates'       => true,
+            'read_private_candidates'  => true,
+            'edit_published_candidates'=> true,
+            'delete_candidates'        => true,
+            'delete_published_candidates' => true,
         ));
 
     }
 
-
+    /**
+     * Remove custom user roles for Candidate and Employer.
+     */
     public function remove_user_roles(): void
     {
 
@@ -77,6 +82,9 @@ class User {
 
     }
 
+    /**
+     * Handle the Candidate registration process.
+     */
     public function candidate_registration(): void
     {
         if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce($_POST['register_candidate_nonce'], 'register_candidate_action')) {
@@ -118,6 +126,9 @@ class User {
         }
     }
 
+    /**
+     * Handle the Employer registration process.
+     */
     public function employer_registration(): void
     {
         if (isset($_POST['register_employer_nonce']) && wp_verify_nonce($_POST['register_employer_nonce'], 'register_employer_action')) {
@@ -161,6 +172,9 @@ class User {
 
 
     // Restrict admin menu for Candidate role
+    /**
+     * Restrict certain admin menu items for users with the Candidate role.
+     */
     public function restrict_candidate_menu() {
         $user = wp_get_current_user();
         if (in_array('jobly_candidate', (array) $user->roles)) {
@@ -171,28 +185,8 @@ class User {
             remove_menu_page('edit.php?post_type=job'); // Job
             remove_menu_page('edit.php?post_type=company'); // Company
             remove_menu_page('edit.php?post_type=elementor_library'); // elementor_library
-
-            // Keep only Dashboard, Candidate, Profile, and Collapse Menu
         }
     }
-
-    public function restrict_candidate_to_own_posts($query) {
-        if (is_admin() && $query->is_main_query() ) {
-            $user = wp_get_current_user();
-            if (in_array('jobly_candidate', (array)$user->roles)) {
-                $query->set('author', $user->ID); // Restrict posts to the current author
-            }
-        }
-    }
-
-
-    // Redirect candidates to a custom dashboard after login
-    /*public function redirect_candidate_dashboard($redirect_to, $requested_redirect_to, $user) {
-        if (in_array('jobly_candidate', (array) $user->roles)) {
-            return home_url('/candidate-dashboard'); // Replace with your custom dashboard URL
-        }
-        return $redirect_to;
-    }*/
 
 
 }
