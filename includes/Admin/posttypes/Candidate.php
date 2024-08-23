@@ -57,24 +57,6 @@ class Candidate {
             'item_updated'              => esc_html__( 'Candidate updated.', 'jobly' ),
         );
 
-
-        $capabilities = array(
-            'edit_post'             => 'edit_candidate',
-            'read_post'             => 'read_candidate',
-            'delete_post'           => 'delete_candidate',
-            'edit_posts'            => 'edit_candidates',
-            'edit_others_posts'     => 'edit_others_candidates',
-            'publish_posts'         => 'publish_candidates',
-            'read_private_posts'    => 'read_private_candidates',
-            'delete_posts'          => 'delete_candidates',
-            'delete_private_posts'  => 'delete_private_candidates',
-            'delete_published_posts'=> 'delete_published_candidates',
-            'delete_others_posts'   => 'delete_others_candidates',
-            'edit_private_posts'    => 'edit_private_candidates',
-            'edit_published_posts'  => 'edit_published_candidates',
-            'create_posts'          => 'edit_candidates',
-        );
-
         $args = array(
             'labels'                => $labels,
             'public'                => true,
@@ -83,19 +65,16 @@ class Candidate {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'query_var'             => true,
-            'rewrite'               => array( 'slug' => 'candidate' ),
-            'capability_type'       => array('candidate', 'candidates'),
-            'capabilities'          => $capabilities,
+            'rewrite'               => array('slug' => 'candidate'),
+            'capability_type'       => 'post',
             'has_archive'           => true,
             'hierarchical'          => true,
             'map_meta_cap'          => true,
-            'taxonomies'            => array(),
+            'taxonomies'            => array('candidate_cat', 'candidate_location', 'candidate_skill'),
+            'supports'              => ['title', 'thumbnail', 'editor', 'excerpt', 'author'],
             'menu_position'         => 8,
-            'supports'              => [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'publicize' ],
-            'yarpp_support'         => true,
             'menu_icon'             => 'dashicons-plus-alt',
             'show_admin_column'     => true,
-
         );
 
         register_post_type('candidate', $args); // Register the post-type `candidate`

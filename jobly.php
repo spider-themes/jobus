@@ -4,7 +4,7 @@
  * Description: A powerful recruitment and job listing plugin that seamlessly connects job seekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: Spider Themes
  * Author URI: https://profiles.wordpress.org/spiderdevs/
- * Version: 0.0.1
+ * Version: 0.0.5
  * Requires at least: 6.0
  * Tested up to: 6.6.1
  * Requires PHP: 7.4

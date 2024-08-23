@@ -48,14 +48,25 @@ class User {
     {
 
         add_role('jobly_candidate', esc_html__('Candidate (Jobly)', 'jobly'), array(
-            'read'                     => true,
-            'edit_candidate'           => true,
-            'edit_candidates'          => true,
-            'publish_candidates'       => true,
-            'read_private_candidates'  => true,
-            'edit_published_candidates'=> true,
-            'delete_candidates'        => true,
-            'delete_published_candidates' => true,
+            'read'                  => true,
+            'read_post'             => true,
+            'read_private_posts'    => true,
+            'edit_post'             => true,
+            'edit_posts'            => true,
+            'edit_others_posts'     => false, // Restrict editing others' posts
+            'edit_private_posts'    => true,
+            'edit_published_posts'  => true,
+            'create_posts'          => true,
+            'publish_posts'         => true,
+            'delete_post'           => true,
+            'delete_posts'          => true,
+            'delete_private_posts'  => true,
+            'delete_others_posts'   => false, // Restrict deleting others' posts
+            'delete_published_posts'=> true,
+            'manage_categories'     => true,  // Capability to manage categories
+            'manage_candidate_cat'  => true,  // Capability to manage candidate categories
+            'manage_candidate_location' => true,  // Capability to manage candidate locations
+            'manage_candidate_skill' => true,  // Capability to manage candidate skills
         ));
 
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobly'), array(
@@ -175,7 +186,8 @@ class User {
     /**
      * Restrict certain admin menu items for users with the Candidate role.
      */
-    public function restrict_candidate_menu() {
+    public function restrict_candidate_menu(): void
+    {
         $user = wp_get_current_user();
         if (in_array('jobly_candidate', (array) $user->roles)) {
             // Remove unnecessary menus
@@ -187,6 +199,5 @@ class User {
             remove_menu_page('edit.php?post_type=elementor_library'); // elementor_library
         }
     }
-
 
 }
