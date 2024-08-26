@@ -319,7 +319,7 @@ class Companies extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(), [
                 'label' => 'Job Date Typography',
-                'name' => 'job_date_typo',
+                'name' => 'jobs_date_typo',
                 'selector' => '{{WRAPPER}} .job-list-one .job-date',
             ]
         );
