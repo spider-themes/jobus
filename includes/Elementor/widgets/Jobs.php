@@ -88,11 +88,11 @@ class Jobs extends Widget_Base {
 
 		$this->add_control(
 			'layout', [
-				'label'   => __( 'Layout', 'jobly' ),
+				'label'   => esc_html__( 'Layout', 'jobly' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '01: Listing', 'jobly' ),
+						'title' => esc_html__( '01: Listing', 'jobly' ),
 						'icon'  => 'job_1',
 					],
 				],
@@ -106,7 +106,7 @@ class Jobs extends Widget_Base {
 		//============================= Filter Options ================================//
 		$this->start_controls_section(
 			'filter_sec', [
-				'label' => __( 'Filter', 'jobly' ),
+				'label' => esc_html__( 'Filter', 'jobly' ),
 			]
 		);
 
@@ -173,7 +173,7 @@ class Jobs extends Widget_Base {
 		//============================= Job Attributes ================================//
 		$this->start_controls_section(
 			'job_attrs_sec', [
-				'label' => __( 'Job Attributes', 'jobly' ),
+				'label' => esc_html__( 'Job Attributes', 'jobly' ),
 			]
 		);
 
@@ -212,7 +212,7 @@ class Jobs extends Widget_Base {
 		$this->start_controls_section(
 			'job_general_style',
 			[
-				'label' => __( 'General Style', 'jobly' ),
+				'label' => esc_html__( 'General', 'jobly' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -240,7 +240,7 @@ class Jobs extends Widget_Base {
 		$this->add_responsive_control(
 			'job_inner_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'jobly' ),
+				'label'      => esc_html__( 'Border Radius', 'jobly' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -259,14 +259,14 @@ class Jobs extends Widget_Base {
 		$this->start_controls_section(
 			'job_item_style',
 			[
-				'label' => __( 'List Item Style', 'jobly' ),
+				'label' => esc_html__( 'List Item', 'jobly' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_control(
 			'job_title_color', [
-				'label'     => __( 'Job Title Color', 'jobly' ),
+				'label'     => esc_html__( 'Title Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
@@ -275,7 +275,7 @@ class Jobs extends Widget_Base {
 		);
 		$this->add_control(
 			'job_title_hover_color', [
-				'label'     => __( 'Job Title Hover Color', 'jobly' ),
+				'label'     => esc_html__( 'Title Hover Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
@@ -285,7 +285,7 @@ class Jobs extends Widget_Base {
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
-				'label'    => 'Job Title Typography',
+				'label'    => 'Title Typography',
 				'name'     => 'job_title_typo',
 				'selector' => '{{WRAPPER}} .job-list-one .title',
 			]
@@ -307,7 +307,7 @@ class Jobs extends Widget_Base {
 		$this->start_controls_section(
 			'job_date_style',
 			[
-				'label'     => __( 'Job Meta Style', 'jobly' ),
+				'label'     => esc_html__( 'Job Meta', 'jobly' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'layout' => [ '1' ],
@@ -317,7 +317,7 @@ class Jobs extends Widget_Base {
 
 		$this->add_control(
 			'job_date_color', [
-				'label'     => __( 'Job Date Color', 'jobly' ),
+				'label'     => esc_html__( 'Job Date Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .job-date' => 'color: {{VALUE}};',
@@ -345,7 +345,7 @@ class Jobs extends Widget_Base {
 		$this->start_controls_section(
 			'job_button_style',
 			[
-				'label'     => __( 'Job Button Style', 'jobly' ),
+				'label'     => esc_html__( 'Job Button', 'jobly' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'layout' => [ '1' ],
@@ -361,7 +361,7 @@ class Jobs extends Widget_Base {
 		$this->start_controls_tab(
 			'style_normal',
 			[
-				'label' => __( 'Normal', 'jobly' ),
+				'label' => esc_html__( 'Normal', 'jobly' ),
 			]
 		);
 
@@ -385,7 +385,7 @@ class Jobs extends Widget_Base {
 		);
 		$this->add_control(
 			'job_button_color', [
-				'label'     => __( 'Button Text Color', 'jobly' ),
+				'label'     => esc_html__( 'Text Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .apply-btn' => 'color: {{VALUE}};',
@@ -395,7 +395,6 @@ class Jobs extends Widget_Base {
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
-				'label'    => 'Job Button Typography',
 				'name'     => 'job_btn_typo',
 				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
 			]
@@ -411,7 +410,7 @@ class Jobs extends Widget_Base {
 		$this->add_responsive_control(
 			'button_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'jobly' ),
+				'label'      => esc_html__( 'Border Radius', 'jobly' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -425,7 +424,7 @@ class Jobs extends Widget_Base {
 		$this->start_controls_tab(
 			'style_hover_btn',
 			[
-				'label' => __( 'Hover', 'jobly' ),
+				'label' => esc_html__( 'Hover', 'jobly' ),
 			]
 		);
 		$this->add_group_control(
@@ -438,7 +437,7 @@ class Jobs extends Widget_Base {
 		);
 		$this->add_control(
 			'job_button_hover_color', [
-				'label'     => __( 'Hover Color', 'jobly' ),
+				'label'     => esc_html__( 'Hover Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .apply-btn:hover' => 'color: {{VALUE}};',
@@ -447,7 +446,7 @@ class Jobs extends Widget_Base {
 		);
 		$this->add_control(
 			'button_borders_color', [
-				'label'     => __( 'Border Color', 'jobly' ),
+				'label'     => esc_html__( 'Border Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-list-one .apply-btn:hover' => 'border-color: {{VALUE}}',

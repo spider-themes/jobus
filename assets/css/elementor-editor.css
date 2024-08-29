@@ -68,20 +68,16 @@
 /** === Categories === **/
 .category1::before {
     background-size: cover;
-    background: url("../images/el-editor-preview/category_1.jpg") no-repeat top;
+    background: url("../images/el-editor-preview/categories-1.png") no-repeat top;
 }
 .category2::before {
     background-size: cover;
-    background: url("../images/el-editor-preview/category_2.jpg") no-repeat top;
+    background: url("../images/el-editor-preview/categories-2.png") no-repeat top;
 }
 
 .category3::before {
     background-size: cover;
-    background: url("../images/el-editor-preview/category_3.jpg") no-repeat top;
-}
-.category4::before {
-    background-size: cover;
-    background: url("../images/el-editor-preview/job_2.png") no-repeat top;
+    background: url("../images/el-editor-preview/categories-3.png") no-repeat top;
 }
 
 /** === Search From === **/
@@ -103,11 +99,11 @@
 /** === Job Listing === **/
 .job_1::before {
     background-size: cover;
-    background: url("../images/el-editor-preview/job_1.png") no-repeat top;
+    background: url("../images/el-editor-preview/job-1.png") no-repeat top;
 }
 
 /** === Company Listing === **/
 .company_1::before {
     background-size: cover;
-    background: url("../images/el-editor-preview/company_1.jpg") no-repeat top;
+    background: url("../images/el-editor-preview/company-1.png") no-repeat top;
 }

@@ -18,8 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Class Tabs
+ *
  * @package spider\Widgets
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Categories extends Widget_Base {
 
@@ -123,15 +124,18 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'column', [
-				'label'   => esc_html__( 'Column', 'jobly' ),
-				'type'    => Controls_Manager::SELECT,
-				'options' => [
+				'label'     => esc_html__( 'Column', 'jobly' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => [
 					'6' => esc_html__( 'Two', 'jobly' ),
 					'4' => esc_html__( 'Three', 'jobly' ),
 					'3' => esc_html__( 'Four', 'jobly' ),
 					'2' => esc_html__( 'Six', 'jobly' ),
 				],
-				'default' => 2,
+				'default'   => '3',
+				'condition' => [
+					'layout' => [ '3' ],
+				],
 			]
 		);
 
@@ -158,6 +162,9 @@ class Categories extends Widget_Base {
 				'toggle'    => true,
 				'selectors' => [
 					'{{WRAPPER}} .jobly_cat_align' => 'justify-content: {{VALUE}};',
+				],
+				'condition' => [
+					'layout' => [ '2' ],
 				],
 			]
 		);
@@ -225,7 +232,7 @@ class Categories extends Widget_Base {
 				'label'      => __( 'Border Radius', 'jobly' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
-				'separator' => 'after',
+				'separator'  => 'after',
 				'selectors'  => [
 					'{{WRAPPER}} .card-style-one .wrapper,
 					{{WRAPPER}} .card-style-seven a,
@@ -281,8 +288,8 @@ class Categories extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper:hover .title, {{WRAPPER}} .card-style-one .wrapper:hover .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-seven .wrapper:hover .title ' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-four:hover a .title, {{WRAPPER}} .card-style-four:hover a .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-seven .wrapper:hover .title '                                                     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-four:hover a .title, {{WRAPPER}} .card-style-four:hover a .total-job'             => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -292,9 +299,9 @@ class Categories extends Widget_Base {
 				'label'     => __( 'Border Color', 'jobly' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-one .wrapper.bg:hover'=> 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-style-seven a:hover'=> 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-style-four:hover'=> 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-one .wrapper.bg:hover' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-seven a:hover'         => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-four:hover'            => 'border-color: {{VALUE}}',
 				],
 			]
 		);
@@ -307,7 +314,7 @@ class Categories extends Widget_Base {
 					'{{WRAPPER}} .card-style-four:hover .icon' => 'background: {{VALUE}};',
 				],
 				'condition' => [
-					'layout' => [ '3' ],
+					'layout'  => [ '3' ],
 					'layout!' => [ '1', '2' ]
 				],
 			]
@@ -381,7 +388,7 @@ class Categories extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-four .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-four .total-job'         => 'color: {{VALUE}};',
 				],
 			]
 		);

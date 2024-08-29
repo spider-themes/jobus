@@ -487,6 +487,10 @@
     &.border-wrapper {
         border: 1px solid #DBE8E5;
         border-radius: 10px;
+        overflow: hidden;
+    }
+    .job-list-one:last-child {
+        border-bottom: none !important;
     }
 }
 .logo {
@@ -501,7 +505,7 @@
     border-radius: 10px;
     &.bottom-border {
         border-bottom: 1px solid #DBE8E5;
-        border-radius: 10px 10px 0 0;
+        border-radius: 0;
     }
     &.border-style {
         border: 1px solid #DBE8E5;  
