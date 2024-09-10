@@ -499,6 +499,23 @@
     }
 }
 
+.job_specifications_area {
+    .jod_list_title_area {
+        flex-basis: 30%;
+    }
+    .jod_list_meta_area {
+        text-align: center;
+        flex-basis: 30%;
+    }
+    .jod_list_cat_area {
+        text-align: center;
+        flex-basis: 20%;
+    }
+    .jod_list_btn_area {
+        flex-basis: 20%;
+    }
+}
+
 .job-list-one {
     background: #fff;
     padding: 42px 35px;

@@ -10,9 +10,9 @@
             ?>
 
             <div class="job-list-one position-relative bottom-border">
-                <div class="row justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center job_specifications_area">
 
-                    <div class="col-lg-4">
+                    <div class="jod_list_title_area">
                         <div class="job-title d-flex align-items-center">
                             <a href="<?php the_permalink(); ?>" class="logo">
                                 <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-6 ms-auto">
+                    <div class="jod_list_meta_area">
                         <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']))) : ?>
                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
                                 <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']) ?>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-4 col-sm-6 ms-auto xs-mt-10">
+                    <div class="jod_list_cat_area">
                         <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']))) : ?>
                             <div class="job-location">
                                 <a href="<?php the_permalink(); ?>">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-4">
+                    <div class="jod_list_btn_area">
                         <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
                             <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                 <?php esc_html_e('APPLY', 'jobly'); ?>
