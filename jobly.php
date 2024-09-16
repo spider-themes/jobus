@@ -171,6 +171,7 @@ if ( ! class_exists( 'Jobly' ) ) {
                 new Jobly\Frontend\Assets();
                 new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Template_Loader();
+                new Jobly\Frontend\Dashboard();
 			}
 
             new Jobly\Admin\Posttypes\Job_Application();
