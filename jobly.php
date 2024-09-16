@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 // Make sure the same class is not loaded.
 if ( ! class_exists( 'Jobly' ) ) {
 
-	require_once __DIR__ . '/vendor/autoload.php';
+    require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
 	 * Class jobly
@@ -111,17 +111,23 @@ if ( ! class_exists( 'Jobly' ) ) {
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 
-            // Frontend
+
+            // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
+            require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
+            require_once __DIR__ . '/includes/Frontend/Dashboard.php';
+
 
             //Admin UI
             require_once __DIR__ . '/includes/Admin/User.php';
+
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Candidate.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
+
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -156,14 +162,15 @@ if ( ! class_exists( 'Jobly' ) ) {
         {
 
             //Classes
-            new Jobly\includes\Classes\Ajax_Actions();
+            new Jobly\Classes\Ajax_Actions();
 
 			if ( is_admin() ) {
 				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
-				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
+                new Jobly\Frontend\Frontend();
+                new Jobly\Frontend\Template_Loader();
 			}
 
             new Jobly\Admin\Posttypes\Job_Application();

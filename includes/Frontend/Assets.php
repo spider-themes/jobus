@@ -8,10 +8,11 @@ namespace Jobly\Frontend;
 class Assets {
     
     public function __construct() {
-        add_action( 'wp_enqueue_scripts', [ $this, 'jobly_enqueue_scripts' ] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
     }
     
-    public static function jobly_enqueue_scripts() {
+    public static function enqueue_scripts(): void
+    {
 
 	    // Register Style's
 	    wp_register_style( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.css', [], JOBLY_VERSION );
@@ -28,7 +29,6 @@ class Assets {
 	    if ( is_rtl() ) {
 		    wp_enqueue_style( 'jobly-rtl', JOBLY_CSS . '/jobly-main-rtl.css', [], JOBLY_VERSION );
 	    }
-
 
         // Register Scripts
         wp_register_script( 'isotope', JOBLY_VEND . '/isotope/isotope.pkgd.min.js', [ 'jquery' ], '2.2.2', true );

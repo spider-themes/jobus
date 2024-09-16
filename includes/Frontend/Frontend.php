@@ -15,7 +15,7 @@ class Frontend {
 	public function __construct() {
 
 		// Add Filter to redirect Archive Page Template
-		add_filter( 'template_include', [ $this, 'template_loader' ] );
+		//add_filter( 'template_include', [ $this, 'template_loader' ] );
 
 	}
 

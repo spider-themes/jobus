@@ -39,10 +39,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         $range_suffix = $widget['range_suffix'] ?? '';
 
                         $specifications = jobly_get_specs();
-                        $widget_title = $specifications[$widget_name];
+                        $widget_title = $specifications[$widget_name] ?? '';
 
                         $job_specifications = jobly_get_specs_options();
-                        $job_specifications = $job_specifications[$widget_name];
+                        $job_specifications = $job_specifications[$widget_name] ?? '';
 
                         if (!empty ($_GET['post_type'] ?? '' == 'job')) {
                             if (!empty ($_GET[$widget_name])) {

@@ -70,14 +70,21 @@ class User {
         ));
 
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobly'), array(
-            'read'                     => true,
-            'edit_candidate'           => true,
-            'edit_candidates'          => true,
-            'publish_candidates'       => true,
-            'read_private_candidates'  => true,
-            'edit_published_candidates'=> true,
-            'delete_candidates'        => true,
-            'delete_published_candidates' => true,
+            'read'                  => true,
+            'read_post'             => true,
+            'read_private_posts'    => true,
+            'edit_post'             => true,
+            'edit_posts'            => true,
+            'edit_others_posts'     => false, // Restrict editing others' posts
+            'edit_private_posts'    => true,
+            'edit_published_posts'  => true,
+            'create_posts'          => true,
+            'publish_posts'         => true,
+            'delete_post'           => true,
+            'delete_posts'          => true,
+            'delete_private_posts'  => true,
+            'delete_others_posts'   => false, // Restrict deleting others' posts
+            'delete_published_posts'=> true,
         ));
 
     }

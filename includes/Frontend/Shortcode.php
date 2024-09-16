@@ -24,11 +24,12 @@ class Shortcode {
      *
      * Generates the HTML content for the job archive page.
      *
-     * @param array  $atts     Shortcode attributes.
+     * @param array $atts     Shortcode attributes.
      * @param string $content  Shortcode content.
      * @return string          Generated HTML content.
      */
-    public function job_page_shortcode( $atts, $content = '' ) {
+    public function job_page_shortcode(array $atts, string $content = '' ): string
+    {
 
         ob_start();
         self::job_page_layout( $atts );
@@ -47,7 +48,7 @@ class Shortcode {
      * @param string $content Shortcode content.
      * @return string Generated HTML content.
      */
-    public function company_page_shortcode( $atts, $content = '' )
+    public function company_page_shortcode(array $atts, string $content = '' ): string
     {
         ob_start();
         self::company_page_layout( $atts );

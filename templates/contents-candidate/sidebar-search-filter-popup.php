@@ -36,10 +36,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 									$range_suffix  = $widget['range_suffix'] ?? '';
 
 									$specifications = jobly_get_specs( 'candidate_specifications' );
-									$widget_title   = $specifications[ $widget_name ];
+									$widget_title   = $specifications[ $widget_name ] ?? '';
 
 									$candidate_specifications = jobly_get_specs_options( 'candidate_specifications' );
-									$candidate_specifications = $candidate_specifications[ $widget_name ];
+									$candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 									?>
                                     <div class="col-lg-3">
                                         <div class="filter-block pb-50 md-pb-20">
