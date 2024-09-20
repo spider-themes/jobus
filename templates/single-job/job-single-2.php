@@ -65,7 +65,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                     the_content();
 
-                    if ( !empty($meta['is_apply_btn'] == 'custom') && !empty($meta[ 'apply_form_url' ])) { ?>
+                    if ( isset($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url']) ) { ?>
                         <a href="<?php echo esc_url($meta[ 'apply_form_url' ]) ?>" class="btn-ten fw-500 text-white text-center tran3s mt-30">
                             <?php esc_html_e('Apply Now', 'jobly'); ?>
                         </a>

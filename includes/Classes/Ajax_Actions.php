@@ -15,8 +15,8 @@ class Ajax_Actions
         add_action('wp_ajax_nopriv_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
 
         // Job Single Page-> Job Application Form
-        add_action('wp_ajax_jobly_job_application', 'job_application_form');
-        add_action('wp_ajax_nopriv_jobly_job_application', 'job_application_form');
+        add_action('wp_ajax_jobly_job_application', [$this, 'job_application_form']);
+        add_action('wp_ajax_nopriv_jobly_job_application', [$this, 'job_application_form']);
     }
 
     public function ajax_send_contact_email(): void
@@ -70,10 +70,27 @@ class Ajax_Actions
     {
         check_ajax_referer('job_application_form_nonce', 'security');
 
+
+        // Get form data for logged-in users
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user();
+
+            // Get user meta data for first and last name
+            $first_name = get_user_meta($user->ID, 'first_name', true);
+            $last_name = get_user_meta($user->ID, 'last_name', true);
+
+            // Fallback to display name if first/last names are missing
+            $candidate_fname = !empty($first_name) ? $first_name : $user->display_name;
+            $candidate_lname = !empty($last_name) ? $last_name : (empty($candidate_fname) ? $user->display_name : '');
+            $candidate_email = $user->user_email;
+        } else {
+            // For non-logged-in users, retrieve the form data
+            $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
+            $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
+            $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
+        }
+
         // Get form data
-        $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
-        $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
-        $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
         $candidate_phone = sanitize_text_field($_POST['candidate_phone']) ?? '';
         $candidate_message = sanitize_textarea_field($_POST['candidate_message']) ?? '';
         $job_application_id = sanitize_text_field($_POST['job_application_id']) ?? '';
@@ -95,6 +112,7 @@ class Ajax_Actions
             update_post_meta($application_id, 'job_applied_for_id', $job_application_id);
             update_post_meta($application_id, 'job_applied_for_title', $job_application_title);
 
+            // Handle CV upload
             if (!empty($_FILES['candidate_cv']['name'])) {
                 $uploaded = media_handle_upload('candidate_cv', $application_id);
                 if (is_wp_error($uploaded)) {
@@ -103,7 +121,6 @@ class Ajax_Actions
                     update_post_meta($application_id, 'candidate_cv', $uploaded);
                 }
             }
-
             wp_send_json_success(array('message' => 'Application submitted successfully.'));
         } else {
             wp_send_json_error(array('message' => 'Failed to submit application.'));

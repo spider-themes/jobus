@@ -100,18 +100,45 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             </div>
                             <?php
                         }
-                        if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                            <a href="<?php echo esc_url($meta[ 'apply_form_url' ]) ?>" class="btn-one w-100 mt-25">
-                                <?php esc_html_e('Apply Now', 'jobly'); ?>
-                            </a>
-                            <?php
-                        } else { ?>
-                            <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
-                                <?php esc_html_e('Apply Job this Position', 'jobly'); ?>
-                            </a>
-                            <?php
+
+                        $is_logged_in = is_user_logged_in();
+                        $apply_url = !empty($meta['apply_form_url']) ? esc_url($meta['apply_form_url']) : '#';
+                        $button_text = esc_html__('Apply Now', 'jobly');
+                        $button_attrs = 'class="btn-one w-100 mt-25"';
+
+                        if ($is_logged_in) {
+                            $user = wp_get_current_user();
+                            $applied = get_posts([
+                                'post_type'     => 'job_application',
+                                'post_status'   => 'publish',
+                                'relation'      => 'OR',
+                                'meta_query'    => [
+                                    [
+                                        'key' => 'job_applied_for_id',
+                                        'value' => get_the_ID(),
+                                        'compare' => '='
+                                    ],
+                                    [
+                                        'key' => 'candidate_email',
+                                        'value' => $user->user_email,
+                                        'compare' => '='
+                                    ]
+                                ]
+                            ]);
+
+                            if (!empty($applied)) {
+                                $button_text = esc_html__('Applied the Job', 'jobly');
+                                $button_attrs .= ' disabled';
+                            }
                         }
+
+                        $modal_attrs = empty($meta['apply_form_url']) ? 'data-bs-toggle="modal" data-bs-target="#applyJobModal"' : '';
                         ?>
+
+                        <a href="<?php echo $apply_url ?? '#'; ?>" <?php echo $button_attrs . ' ' . $modal_attrs; ?>>
+                            <?php echo $button_text; ?>
+                        </a>
+
                     </div>
                 </div>
             </div>

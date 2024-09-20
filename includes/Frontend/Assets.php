@@ -16,6 +16,7 @@ class Assets {
 
 	    // Register Style's
 	    wp_register_style( 'lightbox', JOBLY_VEND . '/lightbox/lightbox.min.css', [], JOBLY_VERSION );
+        wp_register_style('jobly-frontend-dashboard', JOBLY_CSS . '/frontend-dashboard.css', [], JOBLY_VERSION );
 
 
         // Enqueue Style's
@@ -25,6 +26,7 @@ class Assets {
         wp_enqueue_style( 'slick', JOBLY_VEND . '/slick/slick.css', [], JOBLY_VERSION );
         wp_enqueue_style( 'slick-theme', JOBLY_VEND . '/slick/slick-theme.css', [], JOBLY_VERSION );
         wp_enqueue_style( 'jobly-main', JOBLY_CSS . '/main.css', [], JOBLY_VERSION );
+
 
 	    if ( is_rtl() ) {
 		    wp_enqueue_style( 'jobly-rtl', JOBLY_CSS . '/jobly-main-rtl.css', [], JOBLY_VERSION );
