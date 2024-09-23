@@ -20,9 +20,15 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
+
                         if (response.success) {
-                            $('#jobApplicationForm').trigger('reset');
                             $('#applicationSuccessMessage').fadeIn().delay(3000).fadeOut();
+
+                            // Update the form fields with the submitted values
+                            $('#firstName').val(formData.get('candidate_fname'));
+                            $('#lastName').val(formData.get('candidate_lname'));
+                            $('#email').val(formData.get('candidate_email'));
+
                         } else {
                             alert(response.data.message);
                         }

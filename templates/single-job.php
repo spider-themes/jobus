@@ -38,20 +38,16 @@ get_footer();
 
                         // Get current user information
                         $user = wp_get_current_user();
-                        $is_user_logged_in = is_user_logged_in();
+                        $candidate_fname = '';
+                        $candidate_lname = '';
+                        $candidate_email = '';
 
-                        // Pre-fill form fields for logged-in users
-                        $first_name = '';
-                        $last_name = '';
-                        $email = '';
 
-                        if ($is_user_logged_in) {
-                            $first_name = !empty($user->first_name) ? $user->first_name : '';
-                            $last_name = !empty($user->last_name) ? $user->last_name : '';
-                            $email = $user->user_email;
-                        }
+                        // Fallback to display name if first/last names are missing
+                        $candidate_fname = get_user_meta($user->ID, 'first_name', true) ?: $user->display_name;
+                        $candidate_lname = get_user_meta($user->ID, 'last_name', true) ?: '';
+                        $candidate_email = $user->user_email;
                         ?>
-
                         <form action="#" name="job_application_form" class="job_application_form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
                             <div class="row g-4">
 
@@ -59,34 +55,21 @@ get_footer();
                                 <input type="hidden" name="job_application_title" value="<?php echo esc_attr(get_the_title(get_the_ID())); ?>">
                                 <input type="hidden" name="submission_time" value="<?php echo esc_attr(get_the_time(get_option('date_format'))); ?>">
 
-                                <?php
-                                if ($is_user_logged_in) {
-                                    // Hidden fields with pre-filled data for logged-in users
-                                    ?>
-                                    <input type="hidden" name="candidate_fname" value="<?php echo esc_attr($first_name); ?>">
-                                    <input type="hidden" name="candidate_lname" value="<?php echo esc_attr($last_name); ?>">
-                                    <input type="hidden" name="candidate_email" value="<?php echo esc_attr($email); ?>">
-                                    <?php
-                                } else {
-                                    // Input fields for non-logged-in users to fill out manually
-                                    ?>
-                                    <div class="col-md-6">
-                                        <label for="firstName" class="form-label"><?php esc_html_e('First Name', 'jobly'); ?></label>
-                                        <input type="text" class="form-control" id="firstName" name="candidate_fname" required>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label"><?php esc_html_e('First Name', 'jobly'); ?></label>
+                                    <input type="text" class="form-control" id="firstName" name="candidate_fname" value="<?php echo esc_attr($candidate_fname); ?>" required>
+                                </div>
 
-                                    <div class="col-md-6">
-                                        <label for="lastName" class="form-label"><?php esc_html_e('Last Name', 'jobly'); ?></label>
-                                        <input type="text" class="form-control" id="lastName" name="candidate_lname" required>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label"><?php esc_html_e('Last Name', 'jobly'); ?></label>
+                                    <input type="text" class="form-control" id="lastName" name="candidate_lname" value="<?php echo esc_attr($candidate_lname); ?>" required>
+                                </div>
 
-                                    <div class="col-md-12">
-                                        <label for="email" class="form-label"><?php esc_html_e('Email', 'jobly'); ?></label>
-                                        <input type="email" class="form-control" id="email" name="candidate_email" required>
-                                    </div>
-                                    <?php
-                                }
-                                ?>
+                                <div class="col-md-12">
+                                    <label for="email" class="form-label"><?php esc_html_e('Email', 'jobly'); ?></label>
+                                    <input type="email" class="form-control" id="email" name="candidate_email" value="<?php echo esc_attr($candidate_email); ?>" required>
+                                </div>
+
                                 <div class="col-md-12">
                                     <label for="phone" class="form-label"><?php esc_html_e('Phone', 'jobly'); ?></label>
                                     <input type="tel" class="form-control" id="phone" name="candidate_phone">

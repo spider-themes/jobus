@@ -70,27 +70,13 @@ class Ajax_Actions
     {
         check_ajax_referer('job_application_form_nonce', 'security');
 
+        // Always prioritize form data over pre-filled values, even for logged-in users
+        $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
+        $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
+        $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
 
-        // Get form data for logged-in users
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
 
-            // Get user meta data for first and last name
-            $first_name = get_user_meta($user->ID, 'first_name', true);
-            $last_name = get_user_meta($user->ID, 'last_name', true);
-
-            // Fallback to display name if first/last names are missing
-            $candidate_fname = !empty($first_name) ? $first_name : $user->display_name;
-            $candidate_lname = !empty($last_name) ? $last_name : (empty($candidate_fname) ? $user->display_name : '');
-            $candidate_email = $user->user_email;
-        } else {
-            // For non-logged-in users, retrieve the form data
-            $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
-            $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
-            $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
-        }
-
-        // Get form data
+        // Additional form data
         $candidate_phone = sanitize_text_field($_POST['candidate_phone']) ?? '';
         $candidate_message = sanitize_textarea_field($_POST['candidate_message']) ?? '';
         $job_application_id = sanitize_text_field($_POST['job_application_id']) ?? '';

@@ -101,44 +101,65 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                             <?php
                         }
 
-                        $is_logged_in = is_user_logged_in();
-                        $apply_url = !empty($meta['apply_form_url']) ? esc_url($meta['apply_form_url']) : '#';
-                        $button_text = esc_html__('Apply Now', 'jobly');
-                        $button_attrs = 'class="btn-one w-100 mt-25"';
+                        // Check if user is logged in
+                        if (is_user_logged_in()) {
 
-                        if ($is_logged_in) {
-                            $user = wp_get_current_user();
-                            $applied = get_posts([
-                                'post_type'     => 'job_application',
-                                'post_status'   => 'publish',
-                                'relation'      => 'OR',
-                                'meta_query'    => [
-                                    [
-                                        'key' => 'job_applied_for_id',
-                                        'value' => get_the_ID(),
-                                        'compare' => '='
-                                    ],
-                                    [
-                                        'key' => 'candidate_email',
-                                        'value' => $user->user_email,
-                                        'compare' => '='
-                                    ]
-                                ]
-                            ]);
+                            // Get the current user ID and current job ID
+                            $user_id = get_current_user_id();
+                            $job_id = get_the_ID();
+                            $user =  wp_get_current_user();
 
-                            if (!empty($applied)) {
-                                $button_text = esc_html__('Applied the Job', 'jobly');
-                                $button_attrs .= ' disabled';
+                            // Check if the user has already applied for this job
+                            $has_applied = get_posts(array(
+                                'post_type' => 'job_application',
+                                'post_status' => 'publish',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => 'job_applied_for_id', // Meta key for the job ID in the application post
+                                        'value' => $job_id,
+                                        'compare' => '='
+                                    ),
+                                    array(
+                                        'key' => 'candidate_email', // Meta key for user email
+                                        'value' => $user->user_email, // Compare with logged-in user's email
+                                        'compare' => '='
+                                    )
+                                )
+                            ));
+
+                            // If the user has already applied, show "Applied the Job" button
+                            if (!empty($has_applied)) {
+                                ?>
+                                <a href="javascript:void(0)" class="btn-one w-100 mt-25 disabled">
+                                    <?php esc_html_e('Already Applied', 'jobly'); ?>
+                                </a>
+                                <?php
+                            } else {
+                                // Show the apply button if the user has not applied yet
+                                if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
+                                    <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one w-100 mt-25">
+                                        <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                        <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                    </a>
+                                <?php }
+                            }
+                        } else {
+                            if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
+                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one w-100 mt-25">
+                                    <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                </a>
+                                <?php
+                            } else { ?>
+                                <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                    <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                </a>
+                                <?php
                             }
                         }
-
-                        $modal_attrs = empty($meta['apply_form_url']) ? 'data-bs-toggle="modal" data-bs-target="#applyJobModal"' : '';
                         ?>
-
-                        <a href="<?php echo $apply_url ?? '#'; ?>" <?php echo $button_attrs . ' ' . $modal_attrs; ?>>
-                            <?php echo $button_text; ?>
-                        </a>
-
                     </div>
                 </div>
             </div>
