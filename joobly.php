@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name: Joobly
- * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
- * Author: Spider Themes
- * Author URI: https://profiles.wordpress.org/spiderdevs/
+ * Description: A powerful recruitment and job listing plugin that seamlessly connects job seekers with employers, enabling businesses to find the best talent quickly and efficiently.
+ * Author: spider-themes
  * Version: 0.0.2
  * Requires at least: 6.0
  * Tested up to: 6.6.2
  * Requires PHP: 7.4
- * Text Domain: jobly
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: jobly
+ * Domain Path: /languages
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 // Make sure the same class is not loaded.
 if ( ! class_exists( 'Jobly' ) ) {
 
-    require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
 	 * Class jobly
@@ -111,23 +111,17 @@ if ( ! class_exists( 'Jobly' ) ) {
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 
-
-            // Frontend UI
+            // Frontend
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
-            require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
-            require_once __DIR__ . '/includes/Frontend/Dashboard.php';
-
 
             //Admin UI
             require_once __DIR__ . '/includes/Admin/User.php';
-
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Candidate.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
-
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -162,16 +156,14 @@ if ( ! class_exists( 'Jobly' ) ) {
         {
 
             //Classes
-            new Jobly\Classes\Ajax_Actions();
+            new Jobly\includes\Classes\Ajax_Actions();
 
 			if ( is_admin() ) {
 				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
+				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
-                new Jobly\Frontend\Frontend();
-                new Jobly\Frontend\Template_Loader();
-                new Jobly\Frontend\Dashboard();
 			}
 
             new Jobly\Admin\Posttypes\Job_Application();
