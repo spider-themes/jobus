@@ -2,16 +2,15 @@
 /**
  * Plugin Name: Joobly
  * Description: A powerful recruitment and job listing plugin that seamlessly connects job seekers with employers, enabling businesses to find the best talent quickly and efficiently.
- * Plugin URI: https://spider-themes.net/jobly
  * Author: spider-themes
- * Author URI: https://spider-themes.net/jobly
  * Version: 0.0.2
  * Requires at least: 6.0
  * Tested up to: 6.6.2
  * Requires PHP: 7.4
- * Text Domain: jobly
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: jobly
+ * Domain Path: /languages
  */
 
 if (!defined('ABSPATH')) {
