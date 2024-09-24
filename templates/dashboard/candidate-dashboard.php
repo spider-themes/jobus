@@ -3,28 +3,51 @@ wp_enqueue_style('jobly-frontend-dashboard');
 
 // Check if the logged-in user has the 'jobly_candidate' role
 $user = wp_get_current_user();
-$avatar = get_avatar($user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img']);
 
-// Get the current logged-in candidate's user ID
-$candidate_id = get_current_user_id();
-
-$applicants = []; //Initialize as an empty error.
+$applicants = [];
+$candidates = [];
 
 if (in_array('jobly_candidate', $user->roles)) {
+
     $applicants = get_posts(
         array(
             'post_type' => 'job_application',
             'post_status' => 'publish',
-            'author'      => $candidate_id, // Filter by the current user's ID (post_author)
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key' => 'candidate_email', // Assuming you're using candidate email in the meta
+                    'value' => $user->user_email,
+                    'compare' => '='
+                )
+            )
         )
     );
-} else {
-    echo '<p>' . esc_html__('Access denied. You are not a candidate.', 'jobly') . '</p>';
+
+    $candidates = get_posts(
+        array(
+            'post_type' => 'candidate',
+            'author'    => $user,
+            'posts_per_page' => 1,
+        )
+    );
+
 }
 
-echo '<pre>';
-print_r(($applicants));
-echo '</pre>';
+$candidate_id = $candidates[0]->ID;
+
+
+// Fetch the view count from post meta
+$view_count = get_post_meta($candidate_id, 'jobly_employer_post_view_count', true);
+
+// If no view count is found, set it to 0
+if (!$view_count) {
+    $view_count = 0;
+}
+
+// Display the view count safely
+echo '<p>' . esc_html__('Employer View Count: ', 'jobly') . esc_html($view_count) . '</p>';
+
 ?>
 
 <style>
@@ -57,7 +80,7 @@ echo '</pre>';
         <div class="user-data">
 
             <div class="user-avatar online position-relative rounded-circle">
-                <?php echo $avatar ?>
+                <?php echo get_avatar($user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img']) ?>
             </div>
 
             <!-- /.user-avatar -->
@@ -67,13 +90,22 @@ echo '</pre>';
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-profile.html"><img src="../images/lazy.svg" data-src="images/icon/icon_23.svg" alt="" class="lazy-img"><span class="ms-2 ps-1">Profile</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-profile.html">
+                            <img src="../images/lazy.svg" data-src="images/icon/icon_23.svg" alt="" class="lazy-img">
+                            <span class="ms-2 ps-1">Profile</span>
+                        </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-settings.html"><img src="../images/lazy.svg" data-src="images/icon/icon_24.svg" alt="" class="lazy-img"><span class="ms-2 ps-1">Account Settings</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-settings.html">
+                            <img src="../images/lazy.svg" data-src="images/icon/icon_24.svg" alt="" class="lazy-img">
+                            <span class="ms-2 ps-1">Account Settings</span>
+                        </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_25.svg" alt="" class="lazy-img"><span class="ms-2 ps-1">Notification</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <img src="../images/lazy.svg" data-src="images/icon/icon_25.svg" alt="" class="lazy-img">
+                            <span class="ms-2 ps-1">Notification</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -140,6 +172,9 @@ echo '</pre>';
 
 </aside>
 
+
+
+
 <div class="dashboard-body">
     <div class="position-relative">
 
@@ -149,10 +184,12 @@ echo '</pre>';
                 <button class="dash-mobile-nav-toggler d-block d-md-none me-auto">
                     <span></span>
                 </button>
+
                 <form action="#" class="search-form">
                     <input type="text" placeholder="Search here..">
                     <button><img src="../images/lazy.svg" data-src="images/icon/icon_10.svg" alt="" class="lazy-img m-auto"></button>
                 </form>
+
                 <div class="profile-notification ms-2 ms-md-5 me-4">
                     <button class="noti-btn dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         <img src="../images/lazy.svg" data-src="images/icon/icon_11.svg" alt="" class="lazy-img">
@@ -240,10 +277,10 @@ echo '</pre>';
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="../images/lazy.svg" data-src="images/icon/icon_15.svg" alt="" class="lazy-img">
+                            <img src="<?php echo JOBLY_IMG . '/dashboard/icons/applied_job.svg' ?>" alt="" class="lazy-img">
                         </div>
                         <div class="order-sm-0">
-                            <div class="value fw-500">07</div>
+                            <div class="value fw-500"><?php echo esc_html(count($applicants)) ?></div>
                             <span><?php esc_html_e('Applied Job', 'jobly'); ?></span>
                         </div>
                     </div>
@@ -251,111 +288,80 @@ echo '</pre>';
             </div>
 
         </div>
+
         <div class="row d-flex pt-50 lg-pt-10">
+
             <div class="col-xl-7 col-lg-6 d-flex flex-column">
                 <div class="user-activity-chart bg-white border-20 mt-30 h-100">
                     <h4 class="dash-title-two">Profile Views</h4>
                     <div class="ps-5 pe-5 mt-50"><img src="../images/lazy.svg" data-src="images/main-graph.png" alt="" class="lazy-img m-auto"></div>
                 </div>
             </div>
+
+
             <div class="col-xl-5 col-lg-6 d-flex">
                 <div class="recent-job-tab bg-white border-20 mt-30 w-100">
-                    <h4 class="dash-title-two">Recent Applied Job</h4>
+                    <h4 class="dash-title-two"><?php esc_html_e('Recent Applied Job', 'jobly'); ?></h4>
                     <div class="wrapper">
-                        <div class="job-item-list d-flex align-items-center">
-                            <div><img src="../images/lazy.svg" data-src="../images/logo/media_22.png" alt="" class="lazy-img logo"></div>
-                            <div class="job-title">
-                                <h6 class="mb-5"><a href="#">Web & Mobile Prototype</a></h6>
-                                <div class="meta"><span>Fulltime</span> . <span>Spain</span></div>
+
+
+                        <?php
+                        foreach ($applicants as $applicant ) {
+
+                            $job_id = get_post_meta($applicant->ID, 'job_applied_for_id', true);
+                            $job_cat = get_the_terms($job_id, 'job_cat');
+                            $job_location = get_the_terms($job_id, 'job_location');
+                            ?>
+                            <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr($job_id); ?>">
+                                <div><?php echo get_the_post_thumbnail($job_id, 'full', ['class' => 'lazy-img logo' ]) ?></div>
+                                <div class="job-title">
+                                    <h6 class="mb-5">
+                                        <a href="<?php echo get_the_permalink($job_id) ?>">
+                                            <?php echo get_the_title($job_id) ?>
+                                        </a>
+                                    </h6>
+                                    <div class="meta">
+                                        <?php
+                                        if ( $job_cat ) { ?>
+                                            <span><?php echo esc_html($job_cat[0]->name) ?></span>
+                                            <?php
+                                        }
+                                        if ( $job_location ) { ?>
+                                            . <span><?php echo esc_html($job_location[0]->name) ?></span>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="job-action">
+                                    <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="<?php echo get_the_permalink($job_id) ?>" class="dropdown-item">
+                                                <?php esc_html_e('View Job', 'jobly'); ?>
+                                            </a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Archive</a></li>
+                                        <li>
+                                            <a href="#" class="dropdown-item delete-job" data-job-id="<?php echo esc_attr($job_id); ?>">
+                                                <?php esc_html_e('Delete', 'jobly'); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="job-action">
-                                <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">View Job</a></li>
-                                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.job-item-list -->
-                        <div class="job-item-list d-flex align-items-center">
-                            <div><img src="../images/lazy.svg" data-src="../images/logo/media_23.png" alt="" class="lazy-img logo"></div>
-                            <div class="job-title">
-                                <h6 class="mb-5"><a href="#">Document Writer</a></h6>
-                                <div class="meta"><span>Part-time</span> . <span>Italy</span></div>
-                            </div>
-                            <div class="job-action">
-                                <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">View Job</a></li>
-                                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.job-item-list -->
-                        <div class="job-item-list d-flex align-items-center">
-                            <div><img src="../images/lazy.svg" data-src="../images/logo/media_24.png" alt="" class="lazy-img logo"></div>
-                            <div class="job-title">
-                                <h6 class="mb-5"><a href="#">Outbound Call Service</a></h6>
-                                <div class="meta"><span>Fulltime</span> . <span>USA</span></div>
-                            </div>
-                            <div class="job-action">
-                                <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">View Job</a></li>
-                                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.job-item-list -->
-                        <div class="job-item-list d-flex align-items-center">
-                            <div><img src="../images/lazy.svg" data-src="../images/logo/media_25.png" alt="" class="lazy-img logo"></div>
-                            <div class="job-title">
-                                <h6 class="mb-5"><a href="#">Product Designer</a></h6>
-                                <div class="meta"><span>Part-time</span> . <span>Dubai</span></div>
-                            </div>
-                            <div class="job-action">
-                                <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">View Job</a></li>
-                                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.job-item-list -->
-                        <div class="job-item-list d-flex align-items-center">
-                            <div><img src="../images/lazy.svg" data-src="../images/logo/media_26.png" alt="" class="lazy-img logo"></div>
-                            <div class="job-title">
-                                <h6 class="mb-5"><a href="#">Marketing Specialist</a></h6>
-                                <div class="meta"><span>Part-time</span> . <span>UK</span></div>
-                            </div>
-                            <div class="job-action">
-                                <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">View Job</a></li>
-                                    <li><a class="dropdown-item" href="#">Archive</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- /.job-item-list -->
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
+
+
         </div>
+
     </div>
 </div>
 <!-- /.dashboard-body -->

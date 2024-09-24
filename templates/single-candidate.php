@@ -5,6 +5,9 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
+// Call the function to track views by employers only
+jobly_employer_post_view_count(get_the_ID());
+
 $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
 $experience = !empty($meta['experience']) ? $meta['experience'] : '';
 $educations = !empty($meta['education']) ? $meta['education'] : '';

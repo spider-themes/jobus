@@ -27,6 +27,7 @@ class Dashboard {
 
     }
 
+
     /**
      * Shortcode handler for the user dashboard.
      *

@@ -53,6 +53,11 @@ class Assets {
         ));
 
 
+        //Load Script for ajax Dashboard
+        wp_enqueue_script( 'jobly-dashboard-ajax-action', JOBLY_JS . '/dashboard-ajax-action.js', [ 'jquery' ], JOBLY_VERSION, true );
+
+
+
         // Enqueue Scripts
         wp_enqueue_script( 'nice-select', JOBLY_VEND . '/nice-select/jquery.nice-select.min.js', [ 'jquery' ], '1.0', true );
         wp_enqueue_script( 'bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', [ 'jquery' ], '5.1.3', true );
@@ -60,7 +65,8 @@ class Assets {
         wp_enqueue_script( 'jobly-public', JOBLY_JS . '/public.js', [ 'jquery' ], JOBLY_VERSION, true );
 
         wp_localize_script( 'jobly-public', 'jobly_local', array(
-			'ajaxurl' => admin_url('admin-ajax.php')
+			'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('jobly_nonce'),
 		));
 
     }

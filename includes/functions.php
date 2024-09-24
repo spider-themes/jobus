@@ -901,3 +901,33 @@ if ( ! function_exists( 'jobly_rtl') ) {
         return is_rtl() ? 'true' : 'false';
     }
 }
+
+/**
+ * Increment view count when an employer views a candidate post.
+ *
+ * @param int $postID
+ */
+function jobly_employer_post_view_count(int $postID): void
+{
+
+    $count_key = 'jobly_employer_post_view_count';
+
+    // Check if the user is logged in and is an employer
+    if (is_user_logged_in()) {
+        $user = wp_get_current_user();
+        if (in_array('jobly_employer', (array) $user->roles)) {
+            // Get the current view count
+            $count = get_post_meta($postID, $count_key, true);
+
+            // Initialize count if not set
+            if (empty($count)) {
+                $count = 0;
+            }
+
+            // Increment and update the view count
+            $count++;
+            update_post_meta($postID, $count_key, $count);
+        }
+    }
+
+}

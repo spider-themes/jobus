@@ -17,7 +17,16 @@ class Ajax_Actions
         // Job Single Page-> Job Application Form
         add_action('wp_ajax_jobly_job_application', [$this, 'job_application_form']);
         add_action('wp_ajax_nopriv_jobly_job_application', [$this, 'job_application_form']);
+
+
+        /**
+         * Dashboard Ajax Action
+         */
+        //Ajax Action
+        add_action('wp_ajax_delete_job_application', [$this, 'delete_job_application']);
+        add_action('wp_ajax_nopriv_delete_job_application', [$this, 'delete_job_application']);
     }
+
 
     public function ajax_send_contact_email(): void
     {
@@ -113,5 +122,35 @@ class Ajax_Actions
         }
 
         wp_die();
+    }
+
+
+    public function delete_job_application(): void
+    {
+
+        // Check the nonce for security
+        check_ajax_referer('jobly_nonce', 'security');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => 'Unauthorized access']);
+            return;
+        }
+
+        // Get the job ID from the AJAX request
+        $job_id = intval($_POST['job_id']);
+        if ($job_id) {
+            // Attempt to delete the job application
+            $deleted = wp_delete_post($job_id, true); // true = force delete
+            if ($deleted) {
+                wp_send_json_success(); // Return success
+            } else {
+                wp_send_json_error(['message' => 'Failed to delete the job.']);
+            }
+        } else {
+            wp_send_json_error(['message' => 'Invalid job ID.']);
+        }
+
+        wp_die(); // Always terminate to avoid further output
+
     }
 }
