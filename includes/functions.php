@@ -902,32 +902,44 @@ if ( ! function_exists( 'jobly_rtl') ) {
     }
 }
 
-/**
- * Increment view count when an employer views a candidate post.
- *
- * @param int $postID
- */
-function jobly_employer_post_view_count(int $postID): void
+
+
+
+
+function jobly_track_candidate_views(int $candidate_id): void
 {
 
-    $count_key = 'jobly_employer_post_view_count';
+    // Check if the user is logged in
+    if (!is_user_logged_in()) {
+        return; // If not logged in, no count is incremented.
+    }
 
-    // Check if the user is logged in and is an employer
-    if (is_user_logged_in()) {
-        $user = wp_get_current_user();
-        if (in_array('jobly_employer', (array) $user->roles)) {
-            // Get the current view count
-            $count = get_post_meta($postID, $count_key, true);
+    $user = wp_get_current_user();
+    $user_id = $user->ID;
 
-            // Initialize count if not set
-            if (empty($count)) {
-                $count = 0;
-            }
+    // Check if the user has already viewed this candidate's post.
+    $user_viewed_key = 'jobly_user_viewed_' . $user_id . '_' . $candidate_id;
+    if (get_user_meta($user_id, $user_viewed_key, true)) {
+        return; // If the user has already viewed the post, don't count again.
+    }
 
-            // Increment and update the view count
-            $count++;
-            update_post_meta($postID, $count_key, $count);
-        }
+    // Mark that the user has viewed this post.
+    update_user_meta($user_id, $user_viewed_key, '1');
+
+    // Track all-user views (excluding jobly_candidate role)
+    if (!in_array('jobly_candidate', (array) $user->roles)) {
+        $all_user_view_count = get_post_meta($candidate_id, 'all_user_view_count', true);
+        $all_user_view_count = empty($all_user_view_count) ? 0 : intval($all_user_view_count);
+        $all_user_view_count++;
+        update_post_meta($candidate_id, 'all_user_view_count', $all_user_view_count);
+    }
+
+    // Track employer-specific views
+    if (in_array('jobly_employer', (array) $user->roles)) {
+        $employer_view_count = get_post_meta($candidate_id, 'employer_view_count', true);
+        $employer_view_count = empty($employer_view_count) ? 0 : intval($employer_view_count);
+        $employer_view_count++;
+        update_post_meta($candidate_id, 'employer_view_count', $employer_view_count);
     }
 
 }
