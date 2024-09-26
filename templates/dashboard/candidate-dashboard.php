@@ -1,4 +1,5 @@
 <?php
+
 wp_enqueue_style('jobly-frontend-dashboard');
 
 // Check if the logged-in user has the 'jobly_candidate' role
@@ -33,7 +34,9 @@ if (in_array('jobly_candidate', $user->roles)) {
     );
 
 }
+
 $candidate_id = $candidates[0]->ID;  // Get candidate post ID
+
 ?>
 
 <style>
@@ -97,46 +100,21 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
             </div>
         </div>
 
+        <?php
+        if (has_nav_menu('candidate_menu')) {
 
-        <!-- /.user-data -->
-        <nav class="dasboard-main-nav">
-            <ul class="style-none">
-                <li>
-                    <a href="candidate-dashboard-index.html" class="d-flex w-100 align-items-center active">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_1_active.svg" alt="" class="lazy-img">
-                        <span>Dashboard</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-profile.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_2.svg" alt="" class="lazy-img">
-                        <span>My Profile</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-resume.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_3.svg" alt="" class="lazy-img">
-                        <span>Resume</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-message.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_4.svg" alt="" class="lazy-img">
-                        <span>Messages</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-job-alert.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_5.svg" alt="" class="lazy-img">
-                        <span>Job Alert</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-saved-jobs.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_6.svg" alt="" class="lazy-img">
-                        <span>Saved Job</span>
-                    </a></li>
-                <li><a href="candidate-dashboard-settings.html" class="d-flex w-100 align-items-center">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_7.svg" alt="" class="lazy-img">
-                        <span>Account Settings</span>
-                    </a></li>
-                <li><a href="#" class="d-flex w-100 align-items-center" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_8.svg" alt="" class="lazy-img">
-                        <span>Delete Account</span>
-                    </a></li>
-            </ul>
-        </nav>
-
+            wp_nav_menu([
+                'menu'              => 'candidate_menu',
+                'theme_location'    => 'candidate_menu',
+                'container'         => 'nav',
+                'container_class'   => 'dasboard-main-nav',
+                'menu_class'        => 'style-none',
+                'fallback_cb'       => false,
+                'depth'             => 1,
+                'walker'            => new \Jobly\Classes\Nav_Walker(),
+            ]);
+        }
+        ?>
 
         <!-- /.dasboard-main-nav -->
         <div class="profile-complete-status">

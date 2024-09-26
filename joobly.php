@@ -75,6 +75,9 @@ if ( ! class_exists( 'Jobly' ) ) {
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
+            // Register the candidate menu for administrators only
+            add_action('init', [$this, 'register_menu']);
+
 		}
 
 		/**
@@ -86,6 +89,15 @@ if ( ! class_exists( 'Jobly' ) ) {
         {
 			load_plugin_textdomain( 'jobly', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
+
+        public function register_menu(): void
+        {
+            register_nav_menus([
+                'candidate_menu' => esc_html__('Candidate Menu', 'jobly'),
+            ]);
+
+        }
+
 
 		/**
 		 * Include Files
@@ -110,6 +122,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
+            require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
 
             // Frontend UI
@@ -164,7 +177,7 @@ if ( ! class_exists( 'Jobly' ) ) {
             //Classes
             new Jobly\Classes\Ajax_Actions();
 
-			if ( is_admin() ) {
+            if ( is_admin() ) {
 				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
