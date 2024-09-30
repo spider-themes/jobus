@@ -349,7 +349,6 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
 
     </div>
 </div>
-<!-- /.dashboard-body -->
 
 
 
