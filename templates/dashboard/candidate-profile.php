@@ -5,15 +5,7 @@ $user = wp_get_current_user();
 // Check if the user has uploaded a custom profile image
 $custom_avatar_url = get_user_meta($user->ID, 'candidate_profile_picture', true);
 $avatar_url = !empty($custom_avatar_url) ? $custom_avatar_url : get_avatar_url($user->ID);
-
-// Fetch user bio (description) from the WordPress profile
-$user_bio = get_user_meta($user->ID, 'description', true); // Get the user's bio (profile description)
-
-
-echo '<pre>';
-print_r($user_bio);
-echo '</pre>';
-
+$user_bio = get_user_meta($user->ID, 'description', true);
 ?>
 
 <style>
@@ -169,21 +161,17 @@ echo '</pre>';
         <form action="#" id="candidateProfileForm" method="post" enctype="multipart/form-data">
 
             <div class="bg-white card-box border-20">
-
                 <div class="user-avatar-setting d-flex align-items-center mb-30">
-
-
                     <!-- Image Display -->
                     <img src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($user->display_name); ?>" class="lazy-img user-img" id="candidate_avatar">
 
                     <!-- File Upload -->
                     <div class="upload-btn position-relative tran3s ms-4 me-3">
-                        Upload new photo
+                        <?php esc_html_e('Upload new photo', 'jobly'); ?>
                         <input type="file" id="uploadImg" name="candidate_profile_picture" accept="image/*">
                     </div>
 
-
-                    <button type="submit" class="delete-btn tran3s">Delete</button>
+                    <button type="submit" class="delete-btn tran3s"><?php esc_html_e('Delete', 'jobly'); ?></button>
                 </div>
 
                 <div class="dash-input-wrapper mb-30">
@@ -192,8 +180,8 @@ echo '</pre>';
                 </div>
 
                 <div class="dash-input-wrapper">
-                    <label for="">Bio*</label>
-                    <textarea class="size-lg" value="<?php echo esc_attr($user_bio) ?>"></textarea>
+                    <label for=""><?php esc_html_e('Bio*', 'jobly'); ?></label>
+                    <textarea class="size-lg"><?php echo esc_attr($user_bio) ?></textarea>
                     <div class="alert-text"><?php esc_html_e('Brief description for your profile. URLs are hyperlinked.', 'jobly'); ?></div>
                 </div>
             </div>
@@ -201,15 +189,52 @@ echo '</pre>';
             <div class="bg-white card-box border-20 mt-40">
                 <h4 class="dash-title-three">Social Media</h4>
 
+
+                <div id="cmb-group-_candidate_socials-0" class="postbox cmb-row cmb-repeatable-grouping closed" data-iterator="0"><button type="button" data-selector="_candidate_socials_repeat" data-confirm="" class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="Remove Network"></button>
+                    <div class="cmbhandle" title="Click to toggle"><br></div>
+                    <h3 class="cmb-group-title cmbhandle-title">Network 1</h3>
+
+                    <div class="inside cmb-td cmb-nested cmb-field-list"><div class="cmb-row cmb-type-select cmb2-id--candidate-socials-0-network cmb-repeat-group-field" data-fieldtype="select">
+                            <div class="cmb-th">
+                                <label for="_candidate_socials_1_network">Network</label>
+                            </div>
+                            <div class="cmb-td">
+                                <select class="cmb2_select select2-hidden-accessible" name="_candidate_socials[0][network]" id="_candidate_socials_1_network" data-hash="3ocd0q82oak0" tabindex="-1" aria-hidden="true">	<option value="facebook">Facebook</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="linkedin">Linkedin</option>
+                                    <option value="dribbble">Dribbble</option>
+                                    <option value="tumblr">Tumblr</option>
+                                    <option value="pinterest">Pinterest</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="youtube">Youtube</option>
+                                    <option value="tiktok">Tiktok</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="discord">Discord</option>
+                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-_candidate_socials_1_network-container" role="combobox"><span class="select2-selection__rendered" id="select2-_candidate_socials_1_network-container" role="textbox" aria-readonly="true" title="Facebook">Facebook</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div><div class="cmb-row cmb-type-text cmb2-id--candidate-socials-0-url cmb-repeat-group-field table-layout" data-fieldtype="text">
+                            <div class="cmb-th">
+                                <label for="_candidate_socials_1_url">Url</label>
+                            </div>
+                            <div class="cmb-td">
+                                <input type="text" class="regular-text" name="_candidate_socials[0][url]" id="_candidate_socials_1_url" value="#" data-hash="3098diak8qc0">
+                            </div>
+                        </div>
+                        <div class="cmb-row cmb-remove-field-row">
+                            <div class="cmb-remove-row">
+                                <button type="button" data-selector="_candidate_socials_repeat" data-confirm="" class="cmb-remove-group-row cmb-remove-group-row-button alignright button-secondary">Remove Network</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Initial Social Media Links -->
                 <div class="dash-input-wrapper mb-20">
                     <label for="">Network 1</label>
                     <input type="text" placeholder="https://www.facebook.com/zubayer0145">
                 </div>
-                <!-- /.dash-input-wrapper -->
-                <div class="dash-input-wrapper mb-20">
-                    <label for="">Network 2</label>
-                    <input type="text" placeholder="https://twitter.com/FIFAcom">
-                </div>
+
                 <!-- /.dash-input-wrapper -->
                 <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more link</a>
             </div>
