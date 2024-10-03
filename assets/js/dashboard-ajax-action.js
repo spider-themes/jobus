@@ -43,6 +43,31 @@
         });
 
 
+
+        /*
+        * Candidate Profile Image
+        */
+        const fileInput = $('#uploadImg');
+        const imgPreview = $('#candidate_avatar');
+
+        // Listen for file input change
+        fileInput.on('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                // When the file is loaded, set the src of the image to the file's data URL
+                reader.onload = function (e) {
+                    imgPreview.attr('src', e.target.result);
+                }
+
+                // Read the image file as a data URL
+                reader.readAsDataURL(file);
+            }
+        });
+
+
     })
 
 

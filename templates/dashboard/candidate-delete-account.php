@@ -4,7 +4,6 @@ $user = wp_get_current_user();
 ?>
 
 <style>
-
     header, footer, .inner-banner-one {
         display: none;
     }
@@ -15,7 +14,6 @@ $user = wp_get_current_user();
     .page_wrapper .container {
         max-width: 100%;
     }
-
 </style>
 
 
