@@ -1,7 +1,7 @@
-=== Joobly - Job Listing, Career Page, and Recruitment Tool ===
+=== Jobus - Job Listing, Career Page, and Recruitment Tool ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 Requires at least: 6.0
 Tested up to: 6.6.2
 Requires PHP: 7.4
@@ -9,7 +9,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-Joobly is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Joobly simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
+Jobus is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
 
 == Features ==
 * **Easy Setup and Use**: Simple and intuitive interface for quick setup.
