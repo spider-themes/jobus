@@ -2,7 +2,7 @@
 
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" class="d-flex align-items-center justify-content-between" id="searchform" method="get" autocomplete="on">
         <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
-        <input type="search" id="searchInput" name="s" placeholder="<?php esc_attr_e('Search job, title etc....', 'jobly'); ?>">
+        <input type="search" id="searchInput" name="s" placeholder="<?php esc_attr_e('Search job, title etc....', 'jobus'); ?>">
         <button type="submit" class="btn-five h-100"><?php echo esc_html($settings['submit_btn']) ?></button>
     </form>
 

@@ -32,7 +32,7 @@ class Companies extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Companies (Jobly)', 'jobly');
+        return esc_html__('Companies (Jobly)', 'jobus');
     }
 
     public function get_icon ()
@@ -80,17 +80,17 @@ class Companies extends Widget_Base {
         //===================== Select Preset ===========================//
         $this->start_controls_section(
             'sec_layout', [
-                'label' => esc_html__( 'Preset Skins', 'jobly' ),
+                'label' => esc_html__( 'Preset Skins', 'jobus' ),
             ]
         );
 
         $this->add_control(
             'layout', [
-                'label'   => __( 'Layout', 'jobly' ),
+                'label'   => __( 'Layout', 'jobus' ),
                 'type'    => \Elementor\Controls_Manager::CHOOSE,
                 'options' => [
                     '1' => [
-                        'title' => __( '01: Company Grid', 'jobly' ),
+                        'title' => __( '01: Company Grid', 'jobus' ),
                         'icon'  => 'company_1',
                     ],
                 ],
@@ -104,14 +104,14 @@ class Companies extends Widget_Base {
         //============================= Filter Options ================================//
         $this->start_controls_section(
             'filter_sec', [
-                'label' => __('Filter', 'jobly'),
+                'label' => __('Filter', 'jobus'),
             ]
         );
 
         $this->add_control(
             'cats', [
-                'label' => esc_html__('Category', 'jobly'),
-                'description' => esc_html__('Display blog by categories', 'jobly'),
+                'label' => esc_html__('Category', 'jobus'),
+                'description' => esc_html__('Display blog by categories', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobly_get_categories(),
                 'multiple' => true,
@@ -121,7 +121,7 @@ class Companies extends Widget_Base {
 
         $this->add_control(
             'show_count', [
-                'label' => esc_html__('Show Posts Count', 'jobly'),
+                'label' => esc_html__('Show Posts Count', 'jobus'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3
             ]
@@ -129,7 +129,7 @@ class Companies extends Widget_Base {
 
         $this->add_control(
             'order', [
-                'label' => esc_html__('Order', 'jobly'),
+                'label' => esc_html__('Order', 'jobus'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'ASC' => 'ASC',
@@ -141,7 +141,7 @@ class Companies extends Widget_Base {
 
         $this->add_control(
             'orderby', [
-                'label' => esc_html__('Order By', 'jobly'),
+                'label' => esc_html__('Order By', 'jobus'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'none' => 'None',
@@ -158,8 +158,8 @@ class Companies extends Widget_Base {
 
         $this->add_control(
             'exclude', [
-                'label' => esc_html__('Exclude Company', 'jobly'),
-                'description' => esc_html__('Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobly'),
+                'label' => esc_html__('Exclude Company', 'jobus'),
+                'description' => esc_html__('Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
             ]
@@ -171,13 +171,13 @@ class Companies extends Widget_Base {
         //============================= Company Attributes ================================//
         $this->start_controls_section(
             'company_attrs_sec', [
-                'label' => __('Company Attributes', 'jobly'),
+                'label' => __('Company Attributes', 'jobus'),
             ]
         );
 
         $this->add_control(
             'company_attr_meta_1', [
-                'label' => esc_html__('Attribute 01', 'jobly'),
+                'label' => esc_html__('Attribute 01', 'jobus'),
                 'type' => Controls_Manager::SELECT,
                 'options' => jobly_get_specs('company_specifications'),
             ]
@@ -203,13 +203,13 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_general_style',
             [
-                'label' => __( 'General Style', 'jobly' ),
+                'label' => __( 'General Style', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
         $this->add_responsive_control(
             'job_item_padding', [
-                'label' => esc_html__( 'Padding', 'jobly' ),
+                'label' => esc_html__( 'Padding', 'jobus' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'selectors' => [
@@ -231,7 +231,7 @@ class Companies extends Widget_Base {
         $this->add_responsive_control(
             'job_inner_border_radius',
             [
-                'label' => __('Border Radius', 'jobly'),
+                'label' => __('Border Radius', 'jobus'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -250,14 +250,14 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_item_style',
             [
-                'label' => __( 'List Item Style', 'jobly' ),
+                'label' => __( 'List Item Style', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
             'job_title_color', [
-                'label' => __( 'Job Title Color', 'jobly' ),
+                'label' => __( 'Job Title Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
@@ -266,7 +266,7 @@ class Companies extends Widget_Base {
         );
         $this->add_control(
             'job_title_hover_color', [
-                'label' => __( 'Job Title Hover Color', 'jobly' ),
+                'label' => __( 'Job Title Hover Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
@@ -298,7 +298,7 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_date_style',
             [
-                'label' => __( 'Job Meta Style', 'jobly' ),
+                'label' => __( 'Job Meta Style', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'layout' => ['1'],
@@ -308,7 +308,7 @@ class Companies extends Widget_Base {
 
         $this->add_control(
             'job_date_color', [
-                'label' => __( 'Job Date Color', 'jobly' ),
+                'label' => __( 'Job Date Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .job-date' => 'color: {{VALUE}};',
@@ -336,7 +336,7 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_button_style',
             [
-                'label' => __( 'Job Button Style', 'jobly' ),
+                'label' => __( 'Job Button Style', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'layout' => ['1'],
@@ -352,7 +352,7 @@ class Companies extends Widget_Base {
         $this->start_controls_tab(
             'style_normal',
             [
-                'label' => __( 'Normal', 'jobly' ),
+                'label' => __( 'Normal', 'jobus' ),
             ]
         );
 
@@ -366,7 +366,7 @@ class Companies extends Widget_Base {
         );
         $this->add_responsive_control(
             'job_button_padding', [
-                'label' => esc_html__( 'Padding', 'jobly' ),
+                'label' => esc_html__( 'Padding', 'jobus' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
                 'selectors' => [
@@ -376,7 +376,7 @@ class Companies extends Widget_Base {
         );
         $this->add_control(
             'job_button_color', [
-                'label' => __( 'Button Text Color', 'jobly' ),
+                'label' => __( 'Button Text Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .apply-btn' => 'color: {{VALUE}};',
@@ -402,7 +402,7 @@ class Companies extends Widget_Base {
         $this->add_responsive_control(
             'button_border_radius',
             [
-                'label' => __('Border Radius', 'jobly'),
+                'label' => __('Border Radius', 'jobus'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -416,7 +416,7 @@ class Companies extends Widget_Base {
         $this->start_controls_tab(
             'style_hover_btn',
             [
-                'label' => __( 'Hover', 'jobly' ),
+                'label' => __( 'Hover', 'jobus' ),
             ]
         );
         $this->add_group_control(
@@ -429,7 +429,7 @@ class Companies extends Widget_Base {
         );
         $this->add_control(
             'job_button_hover_color', [
-                'label' => __( 'Hover Color', 'jobly' ),
+                'label' => __( 'Hover Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .apply-btn:hover' => 'color: {{VALUE}};',
@@ -438,7 +438,7 @@ class Companies extends Widget_Base {
         );
         $this->add_control(
             'button_borders_color', [
-                'label' => __( 'Border Color', 'jobly' ),
+                'label' => __( 'Border Color', 'jobus' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .job-list-one .apply-btn:hover' => 'border-color: {{VALUE}}',

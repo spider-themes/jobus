@@ -26,7 +26,7 @@ get_footer();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="applyJobModalLabel"><?php esc_html_e('Apply for this Position', 'jobly'); ?></h5>
+                    <h5 class="modal-title" id="applyJobModalLabel"><?php esc_html_e('Apply for this Position', 'jobus'); ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -46,44 +46,44 @@ get_footer();
                                 <input type="hidden" name="submission_time" value="<?php echo esc_attr(get_the_time(get_option('date_format'))); ?>">
 
                                 <div class="col-md-6">
-                                    <label for="firstName" class="form-label"><?php esc_html_e('First Name', 'jobly'); ?></label>
+                                    <label for="firstName" class="form-label"><?php esc_html_e('First Name', 'jobus'); ?></label>
                                     <input type="text" class="form-control" id="firstName" name="candidate_fname" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="lastName" class="form-label"><?php esc_html_e('Last Name', 'jobly'); ?></label>
+                                    <label for="lastName" class="form-label"><?php esc_html_e('Last Name', 'jobus'); ?></label>
                                     <input type="text" class="form-control" id="lastName" name="candidate_lname" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="email" class="form-label"><?php esc_html_e('Email', 'jobly'); ?></label>
+                                    <label for="email" class="form-label"><?php esc_html_e('Email', 'jobus'); ?></label>
                                     <input type="email" class="form-control" id="email" name="candidate_email" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="phone" class="form-label"><?php esc_html_e('Phone', 'jobly'); ?></label>
+                                    <label for="phone" class="form-label"><?php esc_html_e('Phone', 'jobus'); ?></label>
                                     <input type="tel" class="form-control" id="phone" name="candidate_phone">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="message" class="form-label"><?php esc_html_e('Message', 'jobly'); ?></label>
+                                    <label for="message" class="form-label"><?php esc_html_e('Message', 'jobus'); ?></label>
                                     <textarea class="form-control" id="message" name="candidate_message" rows="4"></textarea>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="upload_cv" class="form-label"><?php esc_html_e('Upload CV (PDF)', 'jobly'); ?></label>
+                                    <label for="upload_cv" class="form-label"><?php esc_html_e('Upload CV (PDF)', 'jobus'); ?></label>
                                     <input type="file" class="form-control upload-cv" id="upload_cv" name="candidate_cv" accept=".pdf">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn <?php echo esc_attr($btn_class) ?>"><?php esc_html_e('Submit Application', 'jobly'); ?></button>
+                                    <button type="submit" class="btn <?php echo esc_attr($btn_class) ?>"><?php esc_html_e('Submit Application', 'jobus'); ?></button>
                                 </div>
 
                             </div>
                         </form>
 
                         <div id="applicationSuccessMessage" style="display:none;" class="alert alert-success mt-3">
-                            <?php esc_html_e('Your application has been submitted successfully.', 'jobly'); ?>
+                            <?php esc_html_e('Your application has been submitted successfully.', 'jobus'); ?>
                         </div>
 
                     </div>

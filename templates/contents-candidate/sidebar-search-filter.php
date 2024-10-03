@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40" data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
-        <?php esc_html_e('Filter', 'jobly'); ?>
+        <?php esc_html_e('Filter', 'jobus'); ?>
     </button>
     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
         <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         <div class="main-title fw-500 text-dark">
-            <?php esc_html_e('Filter By', 'jobly'); ?>
+            <?php esc_html_e('Filter By', 'jobus'); ?>
         </div>
 
 
@@ -141,7 +141,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     elseif ($widget_layout == 'text') {
                                         ?>
                                         <div class="input-box position-relative">
-                                            <input type="text" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_html_e('Name or keyword', 'jobly') ?>">
+                                            <input type="text" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_html_e('Name or keyword', 'jobus') ?>">
                                             <button><i class="bi bi-search"></i></button>
                                         </div>
                                         <?php
@@ -232,7 +232,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button"
                                aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-				                <?php esc_html_e('Location', 'jobly'); ?>
+				                <?php esc_html_e('Location', 'jobus'); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
                                 <div class="main-body">
@@ -278,7 +278,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseCategory" role="button"
                                aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                <?php esc_html_e('Category', 'jobly'); ?>
+                                <?php esc_html_e('Category', 'jobus'); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                 <div class="main-body">
@@ -299,7 +299,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 }
                 ?>
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
-                    <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                    <?php esc_html_e('Apply Filter', 'jobus'); ?>
                 </button>
 
             </form>

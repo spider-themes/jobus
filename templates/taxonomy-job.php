@@ -59,16 +59,16 @@ $job_count = $job_post->found_posts;
                     <div class="job-post-item-wrapper">
                         <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                             <div class="total-job-found">
-                                <?php esc_html_e('All', 'jobly'); ?>
+                                <?php esc_html_e('All', 'jobus'); ?>
                                 <span class="text-dark"><?php echo esc_html($job_count) ?></span>
                                 <?php
                                 /* translators: 1: company found, 2: companies found */
-                                echo esc_html(sprintf(_n('job found', 'jobs found', $job_count, 'jobly'), $job_count ));
+                                echo esc_html(sprintf(_n('job found', 'jobs found', $job_count, 'jobus'), $job_count ));
                                 ?>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="short-filter d-flex align-items-center">
-                                    <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
+                                    <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                     <?php
                                     $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                                     $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
@@ -81,11 +81,11 @@ $job_count = $job_post->found_posts;
                                     ?>
                                     <form action="" method="get">
                                         <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                            <option <?php echo esc_attr($default); ?>><?php esc_html_e('Default', 'jobly'); ?></option>
-                                            <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
-                                            <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
-                                            <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>
-                                            <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobly' ); ?></option>
+                                            <option <?php echo esc_attr($default); ?>><?php esc_html_e('Default', 'jobus'); ?></option>
+                                            <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
+                                            <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
+                                            <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
+                                            <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
                                         </select>
                                     </form>
                                 </div>
@@ -146,7 +146,7 @@ $job_count = $job_post->found_posts;
                                         <div class="col-md-3 col-sm-6">
                                             <div class="btn-group d-flex align-items-center justify-content-sm-end xs-mt-20">
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                                    <?php esc_html_e('APPLY', 'jobly'); ?>
+                                                    <?php esc_html_e('APPLY', 'jobus'); ?>
                                                 </a>
                                             </div>
                                         </div>

@@ -117,7 +117,7 @@ wp_enqueue_script( 'lightbox' );
 					if ( is_array( $skills ) ) {
 						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            <h3 class="title"><?php esc_html_e( 'Skills', 'jobly' ) ?></h3>
+                            <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
                             <ul class="style-none skill-tags d-flex flex-wrap pb-25">
 								<?php
 								foreach ( $skills as $skill ) {
@@ -210,7 +210,7 @@ wp_enqueue_script( 'lightbox' );
                         <h3 class="cadidate-name text-center"><?php the_title() ?></h3>
                         <div class="text-center pb-25">
                             <a href="#" class="invite-btn fw-500">
-								<?php esc_html_e( 'Invite', 'jobly' ) ?>
+								<?php esc_html_e( 'Invite', 'jobus' ) ?>
                             </a>
                         </div>
 
@@ -252,7 +252,7 @@ wp_enqueue_script( 'lightbox' );
 								if ( is_array( $social_icons ) ) {
 									?>
                                     <li>
-                                        <span><?php esc_html_e( 'Social: ', 'jobly' ); ?></span>
+                                        <span><?php esc_html_e( 'Social: ', 'jobus' ); ?></span>
                                         <div>
 											<?php
 											foreach ( $social_icons as $item ) {
@@ -272,7 +272,7 @@ wp_enqueue_script( 'lightbox' );
                             </ul>
                             <a href="<?php echo esc_url( $cv_attachment ) ?>"
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
-								<?php esc_html_e( 'Download CV', 'jobly' ) ?>
+								<?php esc_html_e( 'Download CV', 'jobus' ) ?>
                             </a>
 							<?php
 						}
@@ -290,7 +290,7 @@ wp_enqueue_script( 'lightbox' );
 						$is_http    = is_ssl() ? 'https://' : 'http://';
 						$iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
 						?>
-                        <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobly' ) ?></h4>
+                        <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
                         <div class="map-area mb-60 md-mb-40">
                             <div class="gmap_canvas h-100 w-100">
                                 <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
@@ -300,10 +300,10 @@ wp_enqueue_script( 'lightbox' );
 					}
                     ?>
 
-                    <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobly' ) ?><?php the_title() ?></h4>
+                    <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobus' ) ?><?php the_title() ?></h4>
                     <div class="email-form bg-wrapper bg-color">
 
-                        <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobly' ) ?></p>
+                        <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
@@ -312,27 +312,27 @@ wp_enqueue_script( 'lightbox' );
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" autocomplete="on"
-                                       placeholder="<?php esc_attr_e( 'Name*', 'jobly' ) ?>" required>
+                                       placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
                             <div class="d-sm-flex mb-25">
                                 <input type="email" name="sender_email" id="sender_email"
-                                       placeholder="<?php esc_attr_e( 'Email*', 'jobly' ) ?>" required>
+                                       placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_subject" id="sender_subject"
-                                       placeholder="<?php esc_attr_e( 'Subject', 'jobly' ) ?>">
+                                       placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
                                 <textarea name="message" id="message"
-                                          placeholder="<?php esc_attr_e( 'Message', 'jobly' ) ?>"></textarea>
+                                          placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>"></textarea>
                             </div>
 
                             <div class="d-sm-flex">
                                 <button type="submit" name="send_message" id="send_message"
                                         class="btn-ten fw-500 text-white flex-fill text-center tran3s">
-									<?php esc_html_e( 'Send Message', 'jobly' ) ?>
+									<?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>
 

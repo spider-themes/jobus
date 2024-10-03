@@ -10,9 +10,9 @@ function Edit( { attributes, setAttributes } ) {
     const blockProps = useBlockProps();
 
     const layoutOptions = [
-        { label: __('Layout 01', 'jobly'), value: '1' },
-        { label: __('Layout 02', 'jobly'), value: '2' },
-        { label: __('Layout 03', 'jobly'), value: '3' },
+        { label: __('Layout 01', 'jobus'), value: '1' },
+        { label: __('Layout 02', 'jobus'), value: '2' },
+        { label: __('Layout 03', 'jobus'), value: '3' },
     ];
 
     // Preview image for this block
@@ -29,11 +29,11 @@ function Edit( { attributes, setAttributes } ) {
 
             <InspectorControls>
                 <PanelBody
-                    title={__('Filters', 'jobly')}
+                    title={__('Filters', 'jobus')}
                     initialOpen={true}
                 >
                     <SelectControl
-                        label={__('Job Archive Layout', 'jobly')}
+                        label={__('Job Archive Layout', 'jobus')}
                         value={job_layout}
                         options={layoutOptions}
                         onChange={(value) => setAttributes({ job_layout: value })}

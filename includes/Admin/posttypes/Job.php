@@ -32,28 +32,28 @@ class Job {
         }
 
         $labels = array(
-            'name'                      => esc_html__( 'Jobs', 'jobly' ),
-            'singular_name'             => esc_html__( 'Job', 'jobly' ),
-            'add_new'                   => esc_html__( 'Add New', 'jobly' ),
-            'add_new_item'              => esc_html__( 'Add New Job', 'jobly' ),
-            'edit_item'                 => esc_html__( 'Edit Job', 'jobly' ),
-            'new_item'                  => esc_html__( 'New Job', 'jobly' ),
-            'new_item_name'             => esc_html__( 'New Job Name', 'jobly' ),
-            'all_items'                 => esc_html__( 'All Jobs', 'jobly' ),
-            'view_item'                 => esc_html__( 'View Job', 'jobly' ),
-            'view_items'                => esc_html__( 'View Jobs', 'jobly' ),
-            'search_items'              => esc_html__( 'Search Jobs', 'jobly' ),
-            'not_found'                 => esc_html__( 'No jobs found', 'jobly' ),
-            'not_found_in_trash'        => esc_html__( 'No jobs found in Trash', 'jobly' ),
-            'parent_item'               => esc_html__( 'Parent Job', 'jobly' ),
-            'parent_item_colon'         => esc_html__( 'Parent Job:', 'jobly' ),
-            'update_item'               => esc_html__( 'Update Job', 'jobly' ),
-            'menu_name'                 => esc_html__( 'Jobly', 'jobly' ),
-            'item_published'            => esc_html__( 'Job published.', 'jobly' ),
-            'item_published_privately'  => esc_html__( 'Job published privately.', 'jobly' ),
-            'item_reverted_to_draft'    => esc_html__( 'Job reverted to draft.', 'jobly' ),
-            'item_scheduled'            => esc_html__( 'Job scheduled.', 'jobly' ),
-            'item_updated'              => esc_html__( 'Job updated.', 'jobly' ),
+            'name'                      => esc_html__( 'Jobs', 'jobus' ),
+            'singular_name'             => esc_html__( 'Job', 'jobus' ),
+            'add_new'                   => esc_html__( 'Add New', 'jobus' ),
+            'add_new_item'              => esc_html__( 'Add New Job', 'jobus' ),
+            'edit_item'                 => esc_html__( 'Edit Job', 'jobus' ),
+            'new_item'                  => esc_html__( 'New Job', 'jobus' ),
+            'new_item_name'             => esc_html__( 'New Job Name', 'jobus' ),
+            'all_items'                 => esc_html__( 'All Jobs', 'jobus' ),
+            'view_item'                 => esc_html__( 'View Job', 'jobus' ),
+            'view_items'                => esc_html__( 'View Jobs', 'jobus' ),
+            'search_items'              => esc_html__( 'Search Jobs', 'jobus' ),
+            'not_found'                 => esc_html__( 'No jobs found', 'jobus' ),
+            'not_found_in_trash'        => esc_html__( 'No jobs found in Trash', 'jobus' ),
+            'parent_item'               => esc_html__( 'Parent Job', 'jobus' ),
+            'parent_item_colon'         => esc_html__( 'Parent Job:', 'jobus' ),
+            'update_item'               => esc_html__( 'Update Job', 'jobus' ),
+            'menu_name'                 => esc_html__( 'Jobus', 'jobus' ),
+            'item_published'            => esc_html__( 'Job published.', 'jobus' ),
+            'item_published_privately'  => esc_html__( 'Job published privately.', 'jobus' ),
+            'item_reverted_to_draft'    => esc_html__( 'Job reverted to draft.', 'jobus' ),
+            'item_scheduled'            => esc_html__( 'Job scheduled.', 'jobus' ),
+            'item_updated'              => esc_html__( 'Job updated.', 'jobus' ),
         );
 
         $supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author' ];
@@ -92,7 +92,7 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Categories', 'jobly'),
+                'name'  => esc_html__( 'Categories', 'jobus'),
             )
         ));
 
@@ -105,7 +105,7 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Location', 'jobly'),
+                'name'  => esc_html__( 'Location', 'jobus'),
             )
         ));
 
@@ -118,7 +118,7 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Tags', 'jobly'),
+                'name'  => esc_html__( 'Tags', 'jobus'),
             )
         ) );
 

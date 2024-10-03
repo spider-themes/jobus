@@ -28,7 +28,7 @@ class Categories extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Categories (Jobly)', 'jobly' );
+		return esc_html__( 'Categories (Jobly)', 'jobus' );
 	}
 
 	public function get_icon() {
@@ -36,7 +36,7 @@ class Categories extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'Job Category', 'Category', 'Jobly', 'Jobly Category' ];
+		return [ 'Job Category', 'Category', 'Jobus', 'Jobly Category' ];
 	}
 
 	public function get_categories() {
@@ -74,25 +74,25 @@ class Categories extends Widget_Base {
 		//===================== Select Preset ===========================//
 		$this->start_controls_section(
 			'sec_layout', [
-				'label' => esc_html__( 'Preset Skins', 'jobly' ),
+				'label' => esc_html__( 'Preset Skins', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'layout', [
-				'label'   => __( 'Layout', 'jobly' ),
+				'label'   => __( 'Layout', 'jobus' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '01: Category', 'jobly' ),
+						'title' => __( '01: Category', 'jobus' ),
 						'icon'  => 'category1',
 					],
 					'2' => [
-						'title' => __( '02: Category', 'jobly' ),
+						'title' => __( '02: Category', 'jobus' ),
 						'icon'  => 'category2',
 					],
 					'3' => [
-						'title' => __( '03: Category', 'jobly' ),
+						'title' => __( '03: Category', 'jobus' ),
 						'icon'  => 'category3',
 					],
 				],
@@ -106,14 +106,14 @@ class Categories extends Widget_Base {
 		//===================== Location Filter =========================//
 		$this->start_controls_section(
 			'sec_filter', [
-				'label' => __( 'Filter', 'jobly' ),
+				'label' => __( 'Filter', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'cat', [
-				'label'       => esc_html__( 'Category', 'jobly' ),
-				'description' => esc_html__( 'Display Listing by Location', 'jobly' ),
+				'label'       => esc_html__( 'Category', 'jobus' ),
+				'description' => esc_html__( 'Display Listing by Location', 'jobus' ),
 				'type'        => \Elementor\Controls_Manager::SELECT2,
 				'options'     => jobly_get_categories(),
 				'multiple'    => true,
@@ -123,13 +123,13 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'column', [
-				'label'   => esc_html__( 'Column', 'jobly' ),
+				'label'   => esc_html__( 'Column', 'jobus' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => [
-					'6' => esc_html__( 'Two', 'jobly' ),
-					'4' => esc_html__( 'Three', 'jobly' ),
-					'3' => esc_html__( 'Four', 'jobly' ),
-					'2' => esc_html__( 'Six', 'jobly' ),
+					'6' => esc_html__( 'Two', 'jobus' ),
+					'4' => esc_html__( 'Three', 'jobus' ),
+					'3' => esc_html__( 'Four', 'jobus' ),
+					'2' => esc_html__( 'Six', 'jobus' ),
 				],
 				'default' => 2,
 			]
@@ -138,19 +138,19 @@ class Categories extends Widget_Base {
 		$this->add_responsive_control(
 			'cat_alignment',
 			[
-				'label'     => esc_html__( 'Alignment', 'jobly' ),
+				'label'     => esc_html__( 'Alignment', 'jobus' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'flex-start' => [
-						'title' => esc_html__( 'Left', 'jobly' ),
+						'title' => esc_html__( 'Left', 'jobus' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center'     => [
-						'title' => esc_html__( 'Center', 'jobly' ),
+						'title' => esc_html__( 'Center', 'jobus' ),
 						'icon'  => ' eicon-h-align-center',
 					],
 					'flex-end'   => [
-						'title' => esc_html__( 'Right', 'jobly' ),
+						'title' => esc_html__( 'Right', 'jobus' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -164,7 +164,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'view_all_btn_url', [
-				'label'     => esc_html__( 'View All Posts', 'jobly' ),
+				'label'     => esc_html__( 'View All Posts', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::URL,
 				'default'   => [
 					'url' => '#',
@@ -192,14 +192,14 @@ class Categories extends Widget_Base {
 		//============================ Category Item Style ============================//
 		$this->start_controls_section(
 			'category_style', [
-				'label' => __( 'Category Items', 'jobly' ),
+				'label' => __( 'Category Items', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		$this->add_responsive_control(
 			'category_padding', [
-				'label'      => esc_html__( 'Padding', 'jobly' ),
+				'label'      => esc_html__( 'Padding', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
@@ -222,7 +222,7 @@ class Categories extends Widget_Base {
 
 		$this->add_responsive_control(
 			'category_border_radius', [
-				'label'      => __( 'Border Radius', 'jobly' ),
+				'label'      => __( 'Border Radius', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'separator' => 'after',
@@ -241,7 +241,7 @@ class Categories extends Widget_Base {
 		//button Style Normal Style
 		$this->start_controls_tab(
 			'style_normal', [
-				'label' => __( 'Normal', 'jobly' ),
+				'label' => __( 'Normal', 'jobus' ),
 			]
 		);
 
@@ -261,7 +261,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_tab(
 			'style_hover_btn',
 			[
-				'label' => __( 'Hover', 'jobly' ),
+				'label' => __( 'Hover', 'jobus' ),
 			]
 		);
 		$this->add_group_control(
@@ -277,7 +277,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'hover_title_color', [
-				'label'     => __( 'Text Color', 'jobly' ),
+				'label'     => __( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper:hover .title, {{WRAPPER}} .card-style-one .wrapper:hover .total-job' => 'color: {{VALUE}};',
@@ -289,7 +289,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_borders_color', [
-				'label'     => __( 'Border Color', 'jobly' ),
+				'label'     => __( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper.bg:hover'=> 'border-color: {{VALUE}}',
@@ -301,7 +301,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'icon_hover_bg', [
-				'label'     => __( 'Icon Background', 'jobly' ),
+				'label'     => __( 'Icon Background', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-four:hover .icon' => 'background: {{VALUE}};',
@@ -321,7 +321,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_section(
 			'category_title_style',
 			[
-				'label' => __( 'Job Title', 'jobly' ),
+				'label' => __( 'Job Title', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 
 			]
@@ -329,7 +329,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_title_color', [
-				'label'     => __( 'Text Color', 'jobly' ),
+				'label'     => __( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .title,
@@ -350,7 +350,7 @@ class Categories extends Widget_Base {
 		);
 		$this->add_responsive_control(
 			'category_margin', [
-				'label'      => esc_html__( 'Margin', 'jobly' ),
+				'label'      => esc_html__( 'Margin', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
@@ -367,7 +367,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_section(
 			'category_job_total_style',
 			[
-				'label'     => __( 'Total Job', 'jobly' ),
+				'label'     => __( 'Total Job', 'jobus' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'layout' => [ '1', '3' ],
@@ -377,7 +377,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_job_total_color', [
-				'label'     => __( 'Text Color', 'jobly' ),
+				'label'     => __( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',

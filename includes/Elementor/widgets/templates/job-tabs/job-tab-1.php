@@ -65,7 +65,7 @@
                             </div>
                         <?php endif ?>
                         <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                            <?php esc_html_e('APPLY', 'jobly'); ?>
+                            <?php esc_html_e('APPLY', 'jobus'); ?>
                         </a>
                     </div>
                 </div>
@@ -81,11 +81,11 @@
                 <div class="card-style-four bg-color tran3s w-100 mt-40 lg-mt-20">
                     <a <?php jobly_button_link($settings['view_all_btn_url']) ?> class="d-block">
                         <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
-                        <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobly'); ?></div>
+                        <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobus'); ?></div>
                         <div class="d-flex align-items-center justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">
-                            <img src="<?php echo JOBLY_IMG . '/icons/line.svg' ?>" alt="<?php esc_html_e('Line Icon', 'jobly'); ?>" class="lazy-img">
+                            <img src="<?php echo JOBLY_IMG . '/icons/line.svg' ?>" alt="<?php esc_html_e('Line Icon', 'jobus'); ?>" class="lazy-img">
                             <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
-                                <img src="<?php echo JOBLY_IMG . '/icons/arrow_icon.svg' ?>" alt="<?php esc_html_e('Arrow Icon', 'jobly'); ?>" class="lazy-img">
+                                <img src="<?php echo JOBLY_IMG . '/icons/arrow_icon.svg' ?>" alt="<?php esc_html_e('Arrow Icon', 'jobus'); ?>" class="lazy-img">
                             </div>
                         </div>
                     </a>

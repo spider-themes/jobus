@@ -25,7 +25,7 @@ $related_jobs = new WP_Query($args);
     <div class="container">
         <div class="position-relative">
             <div class="title-three text-center text-md-start mb-55 lg-mb-40">
-                <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobly'); ?></h2>
+                <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
             </div>
             <div class="related-job-slider" data-rtl="<?php echo esc_attr(jobly_rtl()) ?>">
                 <?php
@@ -62,7 +62,7 @@ $related_jobs = new WP_Query($args);
                                     </div>
                                 <?php endif; ?>
                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                    <?php esc_html_e('APPLY', 'jobly'); ?>
+                                    <?php esc_html_e('APPLY', 'jobus'); ?>
                                 </a>
                             </div>
                         </div>

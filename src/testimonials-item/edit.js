@@ -29,7 +29,7 @@ function Edit({ attributes, setAttributes }) {
 
 
                 <TextControl
-                    label={__('Author Name', 'jobly')}
+                    label={__('Author Name', 'jobus')}
                     value={attributes.authorName}
                     onChange={(val) =>
                         setAttributes({ authorName: val })
@@ -37,7 +37,7 @@ function Edit({ attributes, setAttributes }) {
                 />
 
                 <TextControl
-                    label={__('Location', 'jobly')}
+                    label={__('Location', 'jobus')}
                     value={attributes.location}
                     onChange={(val) =>
                         setAttributes({ location: val })
@@ -45,7 +45,7 @@ function Edit({ attributes, setAttributes }) {
                 />
 
                 <TextareaControl
-                    label={__('Review Contents', 'jobly')}
+                    label={__('Review Contents', 'jobus')}
                     value={attributes.reviewContents}
                     onChange={(val) =>
                         setAttributes({ reviewContents: val })
@@ -53,7 +53,7 @@ function Edit({ attributes, setAttributes }) {
                 />
 
                 <SelectControl
-                    label={__('Rating', 'jobly')}
+                    label={__('Rating', 'jobus')}
                     value={attributes.rating}
                     options={[
                         { label: '1', value: 1 },

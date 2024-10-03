@@ -33,28 +33,28 @@ class Candidate {
         }
 
         $labels = array(
-            'name'                      => esc_html__( 'Candidates', 'jobly' ),
-            'singular_name'             => esc_html__( 'Candidate', 'jobly' ),
-            'add_new'                   => esc_html__( 'Add New', 'jobly' ),
-            'add_new_item'              => esc_html__( 'Add New Candidate', 'jobly' ),
-            'edit_item'                 => esc_html__( 'Edit Candidate', 'jobly' ),
-            'new_item'                  => esc_html__( 'New Candidate', 'jobly' ),
-            'new_item_name'             => esc_html__( 'New Candidate Name', 'jobly' ),
-            'all_items'                 => esc_html__( 'All Candidates', 'jobly' ),
-            'view_item'                 => esc_html__( 'View Candidate', 'jobly' ),
-            'view_items'                => esc_html__( 'View Candidates', 'jobly' ),
-            'search_items'              => esc_html__( 'Search Candidates', 'jobly' ),
-            'not_found'                 => esc_html__( 'No candidates found', 'jobly' ),
-            'not_found_in_trash'        => esc_html__( 'No candidates found in Trash', 'jobly' ),
-            'parent_item'               => esc_html__( 'Parent Candidate', 'jobly' ),
-            'parent_item_colon'         => esc_html__( 'Parent Candidate:', 'jobly' ),
-            'update_item'               => esc_html__( 'Update Candidate', 'jobly' ),
-            'menu_name'                 => esc_html__( 'Candidate', 'jobly' ),
-            'item_published'            => esc_html__( 'Candidate published.', 'jobly' ),
-            'item_published_privately'  => esc_html__( 'Candidate published privately.', 'jobly' ),
-            'item_reverted_to_draft'    => esc_html__( 'Candidate reverted to draft.', 'jobly' ),
-            'item_scheduled'            => esc_html__( 'Candidate scheduled.', 'jobly' ),
-            'item_updated'              => esc_html__( 'Candidate updated.', 'jobly' ),
+            'name'                      => esc_html__( 'Candidates', 'jobus' ),
+            'singular_name'             => esc_html__( 'Candidate', 'jobus' ),
+            'add_new'                   => esc_html__( 'Add New', 'jobus' ),
+            'add_new_item'              => esc_html__( 'Add New Candidate', 'jobus' ),
+            'edit_item'                 => esc_html__( 'Edit Candidate', 'jobus' ),
+            'new_item'                  => esc_html__( 'New Candidate', 'jobus' ),
+            'new_item_name'             => esc_html__( 'New Candidate Name', 'jobus' ),
+            'all_items'                 => esc_html__( 'All Candidates', 'jobus' ),
+            'view_item'                 => esc_html__( 'View Candidate', 'jobus' ),
+            'view_items'                => esc_html__( 'View Candidates', 'jobus' ),
+            'search_items'              => esc_html__( 'Search Candidates', 'jobus' ),
+            'not_found'                 => esc_html__( 'No candidates found', 'jobus' ),
+            'not_found_in_trash'        => esc_html__( 'No candidates found in Trash', 'jobus' ),
+            'parent_item'               => esc_html__( 'Parent Candidate', 'jobus' ),
+            'parent_item_colon'         => esc_html__( 'Parent Candidate:', 'jobus' ),
+            'update_item'               => esc_html__( 'Update Candidate', 'jobus' ),
+            'menu_name'                 => esc_html__( 'Candidate', 'jobus' ),
+            'item_published'            => esc_html__( 'Candidate published.', 'jobus' ),
+            'item_published_privately'  => esc_html__( 'Candidate published privately.', 'jobus' ),
+            'item_reverted_to_draft'    => esc_html__( 'Candidate reverted to draft.', 'jobus' ),
+            'item_scheduled'            => esc_html__( 'Candidate scheduled.', 'jobus' ),
+            'item_updated'              => esc_html__( 'Candidate updated.', 'jobus' ),
         );
 
         $args = array(
@@ -90,7 +90,7 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Categories', 'jobly'),
+                'name'  => esc_html__( 'Categories', 'jobus'),
             ]
         ));
 
@@ -103,8 +103,8 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Location', 'jobly'),
-                'add_new_item'  => esc_html__( 'Add New Location', 'jobly'),
+                'name'  => esc_html__( 'Location', 'jobus'),
+                'add_new_item'  => esc_html__( 'Add New Location', 'jobus'),
             )
         ) );
 
@@ -117,8 +117,8 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Skills', 'jobly'),
-                'add_new_item'  => esc_html__( 'Add New Skill', 'jobly'),
+                'name'  => esc_html__( 'Skills', 'jobus'),
+                'add_new_item'  => esc_html__( 'Add New Skill', 'jobus'),
             )
         ) );
 

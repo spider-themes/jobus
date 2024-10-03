@@ -17,7 +17,7 @@
                             <?php echo esc_html(($category->name)) ?>
                         </div>
                         <div class="total-job">
-                            <?php echo esc_html($category->count) . ' ' . esc_html__('vacancy', 'jobly'); ?>
+                            <?php echo esc_html($category->count) . ' ' . esc_html__('vacancy', 'jobus'); ?>
                         </div>
                     </a>
                 </div>
@@ -33,13 +33,13 @@
             <div class="card-style-four bg-color tran3s w-100 wow fadeInUp" data-wow-delay="0.1s">
                 <a <?php jobly_button_link($settings['view_all_btn_url']) ?> class="d-block">
                     <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
-                    <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobly') ?></div>
+                    <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobus') ?></div>
                     <div class="d-flex align-items-center justify-content-end mt-50">
                         <img src="<?php echo JOBLY_IMG . '/icons/shape_22.svg' ?>"
-                             alt="<?php esc_html_e('shape', 'jobly'); ?>" class="lazy-img">
+                             alt="<?php esc_html_e('shape', 'jobus'); ?>" class="lazy-img">
                         <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
                             <img src="<?php echo JOBLY_IMG . '/icons/icon_19.svg' ?>"
-                                 alt="<?php esc_html_e('Arrow Icon', 'jobly'); ?>" class="lazy-img">
+                                 alt="<?php esc_html_e('Arrow Icon', 'jobus'); ?>" class="lazy-img">
                         </div>
                     </div>
                 </a>

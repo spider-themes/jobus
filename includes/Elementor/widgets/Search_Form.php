@@ -26,7 +26,7 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Search Form (Jobly)', 'jobly' );
+		return esc_html__( 'Search Form (Jobly)', 'jobus' );
 	}
 
 	public function get_icon() {
@@ -34,7 +34,7 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'Jobly', 'Filter' ];
+		return [ 'Jobus', 'Filter' ];
 	}
 
 	public function get_categories() {
@@ -71,25 +71,25 @@ class Search_Form extends Widget_Base {
 		//===================== Select Preset ===========================//
 		$this->start_controls_section(
 			'sec_layout', [
-				'label' => esc_html__( 'Preset Skins', 'jobly' ),
+				'label' => esc_html__( 'Preset Skins', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'layout', [
-				'label'   => esc_html__( 'Layout', 'jobly' ),
+				'label'   => esc_html__( 'Layout', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => esc_html__( '01: Search Form', 'jobly' ),
+						'title' => esc_html__( '01: Search Form', 'jobus' ),
 						'icon'  => 'search_form_1',
 					],
 					'2' => [
-						'title' => esc_html__( '02: Search Form', 'jobly' ),
+						'title' => esc_html__( '02: Search Form', 'jobus' ),
 						'icon'  => 'search_form_2',
 					],
 					'3' => [
-						'title' => esc_html__( '03: Search Form', 'jobly' ),
+						'title' => esc_html__( '03: Search Form', 'jobus' ),
 						'icon'  => 'search_form_3',
 					],
 				],
@@ -103,7 +103,7 @@ class Search_Form extends Widget_Base {
 		//===================== Filter =========================//
 		$this->start_controls_section(
 			'sec_search_form', [
-				'label' => esc_html__( 'Search Form', 'jobly' ),
+				'label' => esc_html__( 'Search Form', 'jobus' ),
 			]
 		);
 
@@ -111,7 +111,7 @@ class Search_Form extends Widget_Base {
 		$search_form_1 = new \Elementor\Repeater();
 		$search_form_1->add_control(
 			'attr_title', [
-				'label'       => esc_html__( 'Attribute Label', 'jobly' ),
+				'label'       => esc_html__( 'Attribute Label', 'jobus' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
 			]
@@ -119,7 +119,7 @@ class Search_Form extends Widget_Base {
 
 		$search_form_1->add_control(
 			'select_job_attr', [
-				'label'   => esc_html__( 'Attribute', 'jobly' ),
+				'label'   => esc_html__( 'Attribute', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => jobly_get_specs(),
 			]
@@ -127,15 +127,15 @@ class Search_Form extends Widget_Base {
 
 		$search_form_1->add_control(
 			'layout_type', [
-				'label'     => esc_html__( 'Attribute Layout', 'jobly' ),
+				'label'     => esc_html__( 'Attribute Layout', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::CHOOSE,
 				'options'   => [
 					'dropdown' => [
-						'title' => esc_html__( 'Type Select', 'jobly' ),
+						'title' => esc_html__( 'Type Select', 'jobus' ),
 						'icon'  => 'eicon-select',
 					],
 					'text'     => [
-						'title' => esc_html__( 'Type Text', 'jobly' ),
+						'title' => esc_html__( 'Type Text', 'jobus' ),
 						'icon'  => 'eicon-text-field',
 					],
 				],
@@ -146,7 +146,7 @@ class Search_Form extends Widget_Base {
 
 		$search_form_1->add_control(
 			'text_placeholder', [
-				'label'       => esc_html__( 'Placeholder', 'jobly' ),
+				'label'       => esc_html__( 'Placeholder', 'jobus' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
 				'condition'   => [
@@ -159,14 +159,14 @@ class Search_Form extends Widget_Base {
 
 		$search_form_1->add_control(
 			'column', [
-				'label'   => esc_html__( 'Column', 'jobly' ),
+				'label'   => esc_html__( 'Column', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'options' => [
-					'2' => esc_html__( 'Two Column', 'jobly' ),
-					'3' => esc_html__( 'Three Column', 'jobly' ),
-					'4' => esc_html__( 'Four Column', 'jobly' ),
-					'5' => esc_html__( 'Five Column', 'jobly' ),
-					'6' => esc_html__( 'Six Column', 'jobly' ),
+					'2' => esc_html__( 'Two Column', 'jobus' ),
+					'3' => esc_html__( 'Three Column', 'jobus' ),
+					'4' => esc_html__( 'Four Column', 'jobus' ),
+					'5' => esc_html__( 'Five Column', 'jobus' ),
+					'6' => esc_html__( 'Six Column', 'jobus' ),
 				],
 				'default' => '4',
 			]
@@ -174,18 +174,18 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'job_search_form', [
-				'label'         => esc_html__( 'Add Attributes', 'jobly' ),
+				'label'         => esc_html__( 'Add Attributes', 'jobus' ),
 				'type'          => \Elementor\Controls_Manager::REPEATER,
 				'fields'        => $search_form_1->get_controls(),
 				'title_field'   => '{{{ attr_title }}}',
 				'prevent_empty' => false,
 				'default'       => [
 					[
-						'attr_title' => esc_html__( 'Location', 'jobly' ),
+						'attr_title' => esc_html__( 'Location', 'jobus' ),
 						'column'     => '5'
 					],
 					[
-						'attr_title' => esc_html__( 'Job Type', 'jobly' ),
+						'attr_title' => esc_html__( 'Job Type', 'jobus' ),
 						'column'     => '4'
 					],
 				],
@@ -197,7 +197,7 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'form_btn_heading', [
-				'label'     => esc_html__( 'Form Button', 'jobly' ),
+				'label'     => esc_html__( 'Form Button', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -205,20 +205,20 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'submit_btn', [
-				'label'   => esc_html__( 'Button Label', 'jobly' ),
+				'label'   => esc_html__( 'Button Label', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Search', 'jobly' ),
+				'default' => esc_html__( 'Search', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'search_result_form', [
-				'label'     => esc_html__( 'Search Result Page', 'jobly' ),
+				'label'     => esc_html__( 'Search Result Page', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'options'   => [
-					'job'       => esc_html__( 'Job', 'jobly' ),
-					'company'   => esc_html__( 'Company', 'jobly' ),
-					'candidate' => esc_html__( 'Candidate', 'jobly' ),
+					'job'       => esc_html__( 'Job', 'jobus' ),
+					'company'   => esc_html__( 'Company', 'jobus' ),
+					'candidate' => esc_html__( 'Candidate', 'jobus' ),
 				],
 				'default'   => 'job',
 				'separator' => 'before'
@@ -231,17 +231,17 @@ class Search_Form extends Widget_Base {
 		//===================== Search Keywords =========================//
 		$this->start_controls_section(
 			'sec_keywords', [
-				'label' => esc_html__( 'Keywords', 'jobly' ),
+				'label' => esc_html__( 'Keywords', 'jobus' ),
 			]
 		);
 
 		// Switcher field is_keyword
 		$this->add_control(
 			'is_keyword', [
-				'label'        => esc_html__( 'Keywords', 'jobly' ),
+				'label'        => esc_html__( 'Keywords', 'jobus' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Show', 'jobly' ),
-				'label_off'    => esc_html__( 'Hide', 'jobly' ),
+				'label_on'     => esc_html__( 'Show', 'jobus' ),
+				'label_off'    => esc_html__( 'Hide', 'jobus' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]
@@ -250,19 +250,19 @@ class Search_Form extends Widget_Base {
 		$this->add_control(
 			'keyword_alignment',
 			[
-				'label'     => esc_html__( 'Alignment', 'jobly' ),
+				'label'     => esc_html__( 'Alignment', 'jobus' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => [
 					'flex-start' => [
-						'title' => esc_html__( 'Left', 'jobly' ),
+						'title' => esc_html__( 'Left', 'jobus' ),
 						'icon'  => 'eicon-h-align-left',
 					],
 					'center'     => [
-						'title' => esc_html__( 'Center', 'jobly' ),
+						'title' => esc_html__( 'Center', 'jobus' ),
 						'icon'  => ' eicon-h-align-center',
 					],
 					'flex-end'   => [
-						'title' => esc_html__( 'Right', 'jobly' ),
+						'title' => esc_html__( 'Right', 'jobus' ),
 						'icon'  => 'eicon-h-align-right',
 					],
 				],
@@ -292,7 +292,7 @@ class Search_Form extends Widget_Base {
 		$keywords = new \Elementor\Repeater();
 		$keywords->add_control(
 			'title', [
-				'label'       => esc_html__( 'Title', 'jobly' ),
+				'label'       => esc_html__( 'Title', 'jobus' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
 			]
@@ -300,7 +300,7 @@ class Search_Form extends Widget_Base {
 
 		$keywords->add_control(
 			'link', [
-				'label'   => esc_html__( 'Link', 'jobly' ),
+				'label'   => esc_html__( 'Link', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::URL,
 				'default' => [
 					'url' => '#'
@@ -310,15 +310,15 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'keywords', [
-				'label'         => esc_html__( 'Add Keyword', 'jobly' ),
+				'label'         => esc_html__( 'Add Keyword', 'jobus' ),
 				'type'          => \Elementor\Controls_Manager::REPEATER,
 				'fields'        => $keywords->get_controls(),
 				'default'       => [
 					[
-						'title' => esc_html__( 'Keyword #1', 'jobly' ),
+						'title' => esc_html__( 'Keyword #1', 'jobus' ),
 					],
 					[
-						'title' => esc_html__( 'Keyword #2', 'jobly' ),
+						'title' => esc_html__( 'Keyword #2', 'jobus' ),
 					],
 				],
 				'title_field'   => '{{{ title }}}',
@@ -348,7 +348,7 @@ class Search_Form extends Widget_Base {
 
 		$this->start_controls_section(
 			'jobly_search_section', [
-				'label' => esc_html__( 'Search Form', 'jobly' ),
+				'label' => esc_html__( 'Search Form', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -371,7 +371,7 @@ class Search_Form extends Widget_Base {
 		$this->add_control(
 			'placeholder_color',
 			[
-				'label'     => esc_html__( 'Search Text Color', 'jobly' ),
+				'label'     => esc_html__( 'Search Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} #searchInput::placeholder, .job-search-two form input' => 'color: {{VALUE}};',
@@ -387,7 +387,7 @@ class Search_Form extends Widget_Base {
 			\Elementor\Group_Control_Border::get_type(),
 			[
 				'name'      => 'jobly_search_border',
-				'label'     => esc_html__( 'Border', 'jobly' ),
+				'label'     => esc_html__( 'Border', 'jobus' ),
 				'selector'  => '{{WRAPPER}} #searchform,
 							    {{WRAPPER}} .job-search-one form',
 				'condition' => [
@@ -399,7 +399,7 @@ class Search_Form extends Widget_Base {
 
 		$this->add_responsive_control(
 			'acc_item_border_radius', [
-				'label'      => esc_html__( 'Border Radius', 'jobly' ),
+				'label'      => esc_html__( 'Border Radius', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -422,7 +422,7 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'keyword_heading', [
-				'label'     => esc_html__( 'KeyWord', 'jobly' ),
+				'label'     => esc_html__( 'KeyWord', 'jobus' ),
 				'type'      => Controls_Manager::HEADING,
 				"separator" => 'before'
 			]
@@ -435,14 +435,14 @@ class Search_Form extends Widget_Base {
 		$this->start_controls_tab(
 			'keyword_normal_tab',
 			[
-				'label' => esc_html__( 'Normal', 'jobly' ),
+				'label' => esc_html__( 'Normal', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'keyword_title_color',
 			[
-				'label'     => esc_html__( 'Label Color', 'jobly' ),
+				'label'     => esc_html__( 'Label Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-search-one .tags li' => 'color: {{VALUE}} !important;',
@@ -454,7 +454,7 @@ class Search_Form extends Widget_Base {
 		$this->add_control(
 			'keyword_color',
 			[
-				'label'     => esc_html__( 'Keyword Color ', 'jobly' ),
+				'label'     => esc_html__( 'Keyword Color ', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-search-one .tags li a' => 'color: {{VALUE}};',
@@ -468,14 +468,14 @@ class Search_Form extends Widget_Base {
 		$this->start_controls_tab(
 			'keyword_hover_tab',
 			[
-				'label' => esc_html__( 'Hover', 'jobly' ),
+				'label' => esc_html__( 'Hover', 'jobus' ),
 			]
 		);
 
 		$this->add_control(
 			'keyword_hover_color',
 			[
-				'label'     => esc_html__( 'Keyword Color ', 'jobly' ),
+				'label'     => esc_html__( 'Keyword Color ', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-search-one .tags li a:hover' => 'color: {{VALUE}};',
@@ -494,7 +494,7 @@ class Search_Form extends Widget_Base {
 
 		$this->start_controls_section(
 			'search_btn_section', [
-				'label' => esc_html__( 'Search Button', 'jobly' ),
+				'label' => esc_html__( 'Search Button', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -508,7 +508,7 @@ class Search_Form extends Widget_Base {
 		$this->start_controls_tab(
 			'style_accordion_icon_normal',
 			[
-				'label' => esc_html__( 'Normal', 'jobly' ),
+				'label' => esc_html__( 'Normal', 'jobus' ),
 			]
 		);
 
@@ -527,7 +527,7 @@ class Search_Form extends Widget_Base {
 		$this->add_control(
 			'text_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'jobly' ),
+				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
@@ -542,7 +542,7 @@ class Search_Form extends Widget_Base {
 		//=== hover ====
 		$this->start_controls_tab(
 			'style_tab_title_active', [
-				'label' => esc_html__( 'Hover', 'jobly' ),
+				'label' => esc_html__( 'Hover', 'jobus' ),
 			]
 		);
 
@@ -561,7 +561,7 @@ class Search_Form extends Widget_Base {
 		$this->add_control(
 			'text_hover_color',
 			[
-				'label'     => esc_html__( 'Text Color', 'jobly' ),
+				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
@@ -578,7 +578,7 @@ class Search_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'btn_margin',
 			[
-				'label'      => esc_html__( 'Margin', 'jobly' ),
+				'label'      => esc_html__( 'Margin', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'separator'  => 'before',
@@ -606,7 +606,7 @@ class Search_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'btn_padding',
 			[
-				'label'      => esc_html__( 'Padding', 'jobly' ),
+				'label'      => esc_html__( 'Padding', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
@@ -622,7 +622,7 @@ class Search_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'btn_border_radius',
 			[
-				'label'      => esc_html__( 'Border Radius', 'jobly' ),
+				'label'      => esc_html__( 'Border Radius', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
@@ -638,7 +638,7 @@ class Search_Form extends Widget_Base {
 		$this->add_responsive_control(
 			'btn_height',
 			[
-				'label'      => esc_html__( 'Height', 'jobly' ),
+				'label'      => esc_html__( 'Height', 'jobus' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', 'em', 'rem', 'vh', 'custom' ],
 				'range'      => [

@@ -65,11 +65,11 @@ $candidate_count = $candidate_query->found_posts;
 
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
-                            <?php esc_html_e('All', 'jobly'); ?>
+                            <?php esc_html_e('All', 'jobus'); ?>
                             <span class="text-dark fw-500"><?php echo esc_html($candidate_count) ?></span>
                             <?php
                             /* translators: 1: candidate found, 2: candidates found */
-                            echo esc_html(sprintf(_n('candidate found', 'candidates found', $candidate_count, 'jobly'), $candidate_count));
+                            echo esc_html(sprintf(_n('candidate found', 'candidates found', $candidate_count, 'jobus'), $candidate_count));
                             ?>
                         </div>
 
@@ -85,14 +85,14 @@ $candidate_count = $candidate_query->found_posts;
                             $selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
                             ?>
                             <div class="short-filter d-flex align-items-center">
-                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
+                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobly' ); ?></option>
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old)  ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobly' ); ?></option>
+                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old)  ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
                                     </select>
                                 </form>
                             </div>
@@ -178,7 +178,7 @@ $candidate_count = $candidate_query->found_posts;
                                                 ?>
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
-                                                        <span><?php esc_html_e('Location', 'jobly'); ?></span>
+                                                        <span><?php esc_html_e('Location', 'jobus'); ?></span>
                                                         <?php
                                                         foreach ($locations as $location ) { ?>
                                                             <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
@@ -196,7 +196,7 @@ $candidate_count = $candidate_query->found_posts;
 	                                        if (!empty($locations )) { ?>
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
-                                                        <span><?php esc_html_e('Location', 'jobly'); ?></span>
+                                                        <span><?php esc_html_e('Location', 'jobus'); ?></span>
 				                                        <?php
 				                                        foreach ($locations as $location ) { ?>
                                                             <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
@@ -213,12 +213,12 @@ $candidate_count = $candidate_query->found_posts;
                                         <div class="row gx-2 pt-25 sm-pt-10">
                                             <div class="col-md-6">
                                                 <a href="<?php the_permalink() ?>" class="profile-btn tran3s w-100 mt-5">
-                                                    <?php esc_html_e('View Profile', 'jobly') ?>
+                                                    <?php esc_html_e('View Profile', 'jobus') ?>
                                                 </a>
                                             </div>
                                             <div class="col-md-6">
                                                 <a href="javascript:void(0)" class="msg-btn tran3s w-100 mt-5">
-                                                    <?php esc_html_e('Message', 'jobly') ?>
+                                                    <?php esc_html_e('Message', 'jobus') ?>
                                                 </a>
                                             </div>
                                         </div>

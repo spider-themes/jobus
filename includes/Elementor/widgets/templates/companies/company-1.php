@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
                        class="open-job-btn fw-500 tran3s">
                         <?php
                         /* translators: 1: open job, 2: open jobs */
-                        echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobly'), $company_count));
+                        echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobus'), $company_count));
                         ?>
                     </a>
                 </div>

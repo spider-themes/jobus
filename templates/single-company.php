@@ -77,7 +77,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                         <span>
                                             <?php
                                             /* translators: 1: Category, 2: Categories */
-                                            echo esc_html(sprintf(_n('Category:', 'Categories:', '', 'jobly'), '' ));
+                                            echo esc_html(sprintf(_n('Category:', 'Categories:', '', 'jobus'), '' ));
                                             ?>
                                         </span>
                                         <div>
@@ -94,7 +94,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 if (is_array($social_icons)) {
                                     ?>
                                     <li class="col-12">
-                                        <span><?php esc_html_e('Social: ', 'jobly'); ?></span>
+                                        <span><?php esc_html_e('Social: ', 'jobus'); ?></span>
                                         <div>
                                             <?php
                                             foreach ( $social_icons as $item ) {
@@ -115,7 +115,7 @@ $website_target = $website[ 'target' ] ?? '_self';
 
                             <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>"
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
-                                <?php esc_html_e('Posted Jobs', 'jobly'); ?>
+                                <?php esc_html_e('Posted Jobs', 'jobus'); ?>
                             </a>
                         </div>
                     </div>
@@ -143,13 +143,13 @@ $website_target = $website[ 'target' ] ?? '_self';
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-6">
                     <div class="title-two">
-                        <h2><?php esc_html_e('Open Position', 'jobly'); ?></h2>
+                        <h2><?php esc_html_e('Open Position', 'jobus'); ?></h2>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="d-flex justify-content-lg-end">
                         <a href="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="btn-six">
-                            <?php esc_html_e('Explore More', 'jobly'); ?>
+                            <?php esc_html_e('Explore More', 'jobus'); ?>
                         </a>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                     </a>
                                 <?php endif; ?>
                                 <div class="job-date">
-                                    <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobly') ?>
+                                    <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobus') ?>
                                     <a href="<?php echo esc_url(get_permalink($company_id)) ?>">
                                         <?php echo get_the_title($company_id) ?>
                                     </a>
@@ -219,7 +219,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                             <div class="col-lg-2 col-md-4">
                                 <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
                                     <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                        <?php esc_html_e('APPLY', 'jobly'); ?>
+                                        <?php esc_html_e('APPLY', 'jobus'); ?>
                                     </a>
                                 </div>
                             </div>

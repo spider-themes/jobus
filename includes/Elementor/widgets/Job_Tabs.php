@@ -32,7 +32,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Job Tabs (Jobly)', 'jobly');
+        return esc_html__('Job Tabs (Jobly)', 'jobus');
     }
 
     public function get_icon ()
@@ -42,7 +42,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_keywords ()
     {
-        return [ 'Jobly', 'Jobly Listing', 'Jobs', 'Posts' ];
+        return [ 'Jobus', 'Jobly Listing', 'Jobs', 'Posts' ];
     }
 
     public function get_categories () {
@@ -167,7 +167,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'view_all_btn_url', [
-                'label'   => esc_html__( 'View All Posts URL', 'jobly' ),
+                'label'   => esc_html__( 'View All Posts URL', 'jobus' ),
                 'type'    => \Elementor\Controls_Manager::URL,
                 'default' => [
                     'url' => '#',
@@ -182,13 +182,13 @@ class Job_Tabs extends Widget_Base {
         //============================= Job Attributes ================================//
         $this->start_controls_section(
             'job_attrs_sec', [
-                'label' => __('Job Attributes', 'jobly'),
+                'label' => __('Job Attributes', 'jobus'),
             ]
         );
 
         $this->add_control(
             'job_attr_meta_1', [
-                'label' => esc_html__('Attribute 01', 'jobly'),
+                'label' => esc_html__('Attribute 01', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobly_get_specs(),
             ]
@@ -196,7 +196,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'job_attr_meta_2', [
-                'label' => esc_html__('Attribute 02', 'jobly'),
+                'label' => esc_html__('Attribute 02', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobly_get_specs(),
             ]

@@ -9,7 +9,7 @@
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: jobly
+ * Text Domain: jobus
  * Domain Path: /languages
  */
 
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public function i18n(): void
         {
-			load_plugin_textdomain( 'jobly', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
 		/**
@@ -223,7 +223,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 /**
  * @return Jobly|false
  */
-if ( ! function_exists( 'jobly' ) ) {
+if ( ! function_exists( 'jobus' ) ) {
 	/**
 	 * Load jobly
 	 *

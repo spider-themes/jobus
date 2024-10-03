@@ -66,7 +66,7 @@ class Blocks {
         ob_start();
 
         if ( is_user_logged_in()) {
-            echo '<p class="text-center mt-10">' . esc_html__('You are already logged in.', 'jobly') . '</p>';
+            echo '<p class="text-center mt-10">' . esc_html__('You are already logged in.', 'jobus') . '</p>';
         } else {
             include __DIR__ . '/src/register-form/register.php';
         }
