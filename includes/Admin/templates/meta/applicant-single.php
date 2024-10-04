@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 global $post;
 $candidate_fname = esc_attr( get_post_meta( $post->ID, 'candidate_fname', true ) );
 $candidate_lname = esc_attr( get_post_meta( $post->ID, 'candidate_lname', true ) );

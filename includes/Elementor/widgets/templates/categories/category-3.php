@@ -1,3 +1,8 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+?>
 <div class="card-wrapper-three row">
     <?php
     if (is_array($categories)) {

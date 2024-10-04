@@ -1,3 +1,10 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+?>
+
 <div class="job-search-two position-relative">
 
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" class="d-flex align-items-center justify-content-between" id="searchform" method="get" autocomplete="on">

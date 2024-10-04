@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 // Placeholder values from block attributes
 $candidate_placeholder_username = $attributes['candidate_username'] ?? '';
 $candidate_placeholder_email = $attributes['candidate_email'] ?? '';

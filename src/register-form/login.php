@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) {
-    exit();
+    exit; // Exit if accessed directly
 }
 
 $user_input = sanitize_text_field($_POST['user_input']) ?? '';

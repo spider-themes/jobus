@@ -1,4 +1,9 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+
 if ( ! function_exists( 'jobly_rtl') ) {
 	function jobly_rtl(): string {
 		return is_rtl() ? 'true' : 'false';

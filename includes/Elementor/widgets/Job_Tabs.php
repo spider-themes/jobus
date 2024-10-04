@@ -13,9 +13,8 @@ use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use WP_Query;
 
-// Exit if accessed directly
 if (!defined('ABSPATH')) {
-    exit;
+    exit; // Exit if accessed directly
 }
 
 /**

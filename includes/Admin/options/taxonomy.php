@@ -1,7 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' )  ) {
-	die;
-} // Cannot access directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 
 // Control core classes for avoid errors
 if ( class_exists( 'CSF' ) ) {

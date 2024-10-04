@@ -1,6 +1,10 @@
 <?php
 namespace Jobly\Admin;
 
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 /**
  * Class Admin
  *
