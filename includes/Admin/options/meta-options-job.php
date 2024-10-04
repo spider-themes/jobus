@@ -9,7 +9,7 @@ if (class_exists('CSF')) {
     $meta_prefix = 'jobly_meta_options';
 
     CSF::createMetabox($meta_prefix, array(
-        'title' => esc_html__('Job Options', 'jobly'),
+        'title' => esc_html__('Job Options', 'jobus'),
         'post_type' => 'job',
         'theme' => 'dark',
         'output_css' => true,
@@ -18,7 +18,7 @@ if (class_exists('CSF')) {
 
     // Company Info Meta Options
     CSF::createSection($meta_prefix, array(
-        'title' => esc_html__('General', 'jobly'),
+        'title' => esc_html__('General', 'jobus'),
         'id' => 'jobly_meta_general',
         'icon' => 'fas fa-home',
         'fields' => array(
@@ -26,14 +26,14 @@ if (class_exists('CSF')) {
             // Single Post Layout
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Single Post Layout', 'jobly'),
+                'content' => esc_html__('Single Post Layout', 'jobus'),
             ),
 
             array(
                 'id'        => 'job_details_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobly'),
-                'subtitle'  => esc_html__('Select the preferred layout for your job post for this page.', 'jobly'),
+                'title'     => esc_html__('Choose Layout', 'jobus'),
+                'subtitle'  => esc_html__('Select the preferred layout for your job post for this page.', 'jobus'),
                 'options'   => array(
                     '1' => JOBLY_IMG . '/layout/job/single-layout-1.png',
                     '2' => JOBLY_IMG . '/layout/job/single-layout-2.png',
@@ -45,13 +45,13 @@ if (class_exists('CSF')) {
             // Company Information
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Company Info', 'jobly'),
+                'content' => esc_html__('Company Info', 'jobus'),
             ),
 
             array(
                 'id' => 'select_company',
                 'type' => 'select',
-                'title' => esc_html__('Select Company', 'jobly'),
+                'title' => esc_html__('Select Company', 'jobus'),
                 'options' => jobly_company_post_list(),
                 'chosen' => true,
                 'default' => '',
@@ -60,10 +60,10 @@ if (class_exists('CSF')) {
             array(
                 'id'         => 'is_company_website',
                 'type'       => 'button_set',
-                'title'      => esc_html__('Company Website', 'jobly'),
+                'title'      => esc_html__('Company Website', 'jobus'),
                 'options'    => array(
-                    'default'  => esc_html__('Default', 'jobly'),
-                    'custom' => esc_html__('Custom', 'jobly'),
+                    'default'  => esc_html__('Default', 'jobus'),
+                    'custom' => esc_html__('Custom', 'jobus'),
                 ),
                 'default'    => 'default'
             ),
@@ -71,7 +71,7 @@ if (class_exists('CSF')) {
             array(
                 'id'       => 'company_website',
                 'type'     => 'link',
-                'title'    => esc_html__('Website Button', 'jobly'),
+                'title'    => esc_html__('Website Button', 'jobus'),
                 'default'  => array(
                     'url'    => '#',
                 ),
@@ -82,17 +82,17 @@ if (class_exists('CSF')) {
             //====================== Job Information ======================//
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Information', 'jobly'),
+                'content' => esc_html__('Job Information', 'jobus'),
             ),
 
             array(
                 'id'         => 'is_apply_btn',
                 'type'       => 'button_set',
-                'title'      => esc_html__('Choose Option', 'jobly'),
-                'desc'       => esc_html__('Choose the Apply button for job post.', 'jobly'),
+                'title'      => esc_html__('Choose Option', 'jobus'),
+                'desc'       => esc_html__('Choose the Apply button for job post.', 'jobus'),
                 'options'    => array(
-                    'default'  => esc_html__('Default', 'jobly'),
-                    'custom'  => esc_html__('Custom with Link', 'jobly'),
+                    'default'  => esc_html__('Default', 'jobus'),
+                    'custom'  => esc_html__('Custom with Link', 'jobus'),
                 ),
                 'default'    => 'default'
             ),
@@ -100,7 +100,7 @@ if (class_exists('CSF')) {
             array(
                 'id'       => 'apply_form_url',
                 'type'     => 'text',
-                'title'    => esc_html__('Apply Link', 'jobly'),
+                'title'    => esc_html__('Apply Link', 'jobus'),
                 'default'  => '#',
                 'dependency' => array('is_apply_btn', '==', 'custom'),
             ),
@@ -149,7 +149,7 @@ if (class_exists('CSF')) {
         }
 
         CSF::createSection($meta_prefix, array(
-            'title' => esc_html__('Specifications', 'jobly'),
+            'title' => esc_html__('Specifications', 'jobus'),
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
             'id'     => 'jobly_meta_specifications',

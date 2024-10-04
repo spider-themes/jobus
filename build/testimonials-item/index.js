@@ -53,25 +53,25 @@ function Edit({
       alt: "Author"
     }))
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Author Name', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Author Name', 'jobus'),
     value: attributes.authorName,
     onChange: val => setAttributes({
       authorName: val
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Location', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Location', 'jobus'),
     value: attributes.location,
     onChange: val => setAttributes({
       location: val
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Review Contents', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Review Contents', 'jobus'),
     value: attributes.reviewContents,
     onChange: val => setAttributes({
       reviewContents: val
     })
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Rating', 'jobly'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Rating', 'jobus'),
     value: attributes.rating,
     options: [{
       label: '1',
@@ -151,7 +151,7 @@ function Save({
     className: "review-score"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "fw-500 text-dark"
-  }, rating), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('out of 5', 'jobly'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("blockquote", null, reviewContents), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, rating), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('out of 5', 'jobus'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("blockquote", null, reviewContents), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center"
   }, authorImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: authorImage,

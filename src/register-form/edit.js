@@ -14,60 +14,60 @@ function Edit({attributes, setAttributes}) {
             <InspectorControls>
 
                 {/*================ Candidate Form ============== */}
-                <PanelBody title={__('Candidate Form', 'jobly')} initialOpen={true}>
+                <PanelBody title={__('Candidate Form', 'jobus')} initialOpen={true}>
                     <TextControl
-                        label={__('Placeholder Username', 'jobly')}
+                        label={__('Placeholder Username', 'jobus')}
                         value={candidate_username}
-                        placeholder={__('candidate', 'jobly')}
+                        placeholder={__('candidate', 'jobus')}
                         onChange={(value) => setAttributes({candidate_username: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Email', 'jobly')}
+                        label={__('Placeholder Email', 'jobus')}
                         type="email"
                         value={candidate_email}
-                        placeholder={__('candidate@example.com', 'jobly')}
+                        placeholder={__('candidate@example.com', 'jobus')}
                         onChange={(value) => setAttributes({candidate_email: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Password', 'jobly')}
+                        label={__('Placeholder Password', 'jobus')}
                         value={candidate_pass}
-                        placeholder={__('demo', 'jobly')}
+                        placeholder={__('demo', 'jobus')}
                         onChange={(value) => setAttributes({candidate_pass: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Confirm Password', 'jobly')}
+                        label={__('Placeholder Confirm Password', 'jobus')}
                         value={candidate_confirm_pass}
-                        placeholder={__('demo', 'jobly')}
+                        placeholder={__('demo', 'jobus')}
                         onChange={(value) => setAttributes({candidate_confirm_pass: value})}
                     />
                 </PanelBody>
 
                 {/*================ Employer Form ============== */}
-                <PanelBody title={__('Employer Form', 'jobly')} initialOpen={false}>
+                <PanelBody title={__('Employer Form', 'jobus')} initialOpen={false}>
                     <TextControl
-                        label={__('Placeholder Username', 'jobly')}
+                        label={__('Placeholder Username', 'jobus')}
                         type="text"
                         value={employer_username}
-                        placeholder={__('employer', 'jobly')}
+                        placeholder={__('employer', 'jobus')}
                         onChange={(value) => setAttributes({employer_username: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Email', 'jobly')}
+                        label={__('Placeholder Email', 'jobus')}
                         type="email"
                         value={employer_email}
-                        placeholder={__('employer@example.com', 'jobly')}
+                        placeholder={__('employer@example.com', 'jobus')}
                         onChange={(value) => setAttributes({employer_email: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Password', 'jobly')}
+                        label={__('Placeholder Password', 'jobus')}
                         value={employer_pass}
-                        placeholder={__('demo', 'jobly')}
+                        placeholder={__('demo', 'jobus')}
                         onChange={(value) => setAttributes({employer_pass: value})}
                     />
                     <TextControl
-                        label={__('Placeholder Confirm Password', 'jobly')}
+                        label={__('Placeholder Confirm Password', 'jobus')}
                         value={employer_confirm_pass}
-                        placeholder={__('demo', 'jobly')}
+                        placeholder={__('demo', 'jobus')}
                         onChange={(value) => setAttributes({employer_confirm_pass: value})}
                     />
                 </PanelBody>
@@ -79,17 +79,17 @@ function Edit({attributes, setAttributes}) {
                 <div className="user-data-form">
 
                     <div className="text-center">
-                        <h2>{__('Create Account', 'jobly')}</h2>
+                        <h2>{__('Create Account', 'jobus')}</h2>
                     </div>
 
                     <div className="form-wrapper m-auto">
 
                         <ul className="nav nav-tabs border-0 w-100" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobly')}</button>
+                                <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobus')}</button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" data-bs-toggle="tab" data-bs-target="#fc2" role="tab" aria-selected="true">{__('Employer', 'jobly')}</button>
+                                <button className="nav-link" data-bs-toggle="tab" data-bs-target="#fc2" role="tab" aria-selected="true">{__('Employer', 'jobus')}</button>
                             </li>
                         </ul>
 
@@ -101,7 +101,7 @@ function Edit({attributes, setAttributes}) {
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="candidate_username">{__('Name*', 'jobly')}</label>
+                                                <label htmlFor="candidate_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
                                                     name="candidate_username"
@@ -114,7 +114,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="candidate_email">{__('Email*', 'jobly')}</label>
+                                                <label htmlFor="candidate_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
                                                     name="candidate_email"
@@ -127,7 +127,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="candidate_pass">{__('Password*', 'jobly')}</label>
+                                                <label htmlFor="candidate_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_pass"
                                                     id="candidate_pass"
@@ -139,7 +139,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="candidate_confirm_pass">{__('Confirm Password*', 'jobly')}</label>
+                                                <label htmlFor="candidate_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_confirm_pass"
                                                     id="candidate_confirm_pass"
@@ -159,7 +159,7 @@ function Edit({attributes, setAttributes}) {
                                     <div className="row">
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="employer_username">{__('Name*', 'jobly')}</label>
+                                                <label htmlFor="employer_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
                                                     name="employer_username"
@@ -172,7 +172,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="employer_email">{__('Email*', 'jobly')}</label>
+                                                <label htmlFor="employer_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
                                                     name="employer_email"
@@ -185,7 +185,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="employer_pass">{__('Password*', 'jobly')}</label>
+                                                <label htmlFor="employer_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_pass"
                                                     id="employer_pass"
@@ -197,7 +197,7 @@ function Edit({attributes, setAttributes}) {
                                         </div>
                                         <div className="col-12">
                                             <div className="input-group-meta position-relative">
-                                                <label htmlFor="employer_confirm_pass">{__('Confirm Password*', 'jobly')}</label>
+                                                <label htmlFor="employer_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_confirm_pass"
                                                     id="employer_confirm_pass"

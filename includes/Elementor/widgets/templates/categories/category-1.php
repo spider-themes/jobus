@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
                         <div class="total-job">
                             <?php
                             /* translators: 1: Job, 2: Jobs */
-                            echo esc_html(sprintf(_n('%s Job', '%s Jobs', $category->count, 'jobly'), number_format_i18n($category->count)));
+                            echo esc_html(sprintf(_n('%s Job', '%s Jobs', $category->count, 'jobus'), number_format_i18n($category->count)));
                             ?>
                         </div>
                     </a>

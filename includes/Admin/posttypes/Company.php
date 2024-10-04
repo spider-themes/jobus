@@ -37,27 +37,27 @@ class Company {
         }
 
         $labels = array(
-            'name'                      => esc_html__( 'Companies', 'jobly' ),
-            'singular_name'             => esc_html__( 'Company', 'jobly' ),
-            'add_new'                   => esc_html__( 'Add New', 'jobly' ),
-            'add_new_item'              => esc_html__( 'Add New Company', 'jobly' ),
-            'edit_item'                 => esc_html__( 'Edit Company', 'jobly' ),
-            'new_item'                  => esc_html__( 'New Company', 'jobly' ),
-            'new_item_name'             => esc_html__( 'New Company Name', 'jobly' ),
-            'all_items'                 => esc_html__( 'All Companies', 'jobly' ),
-            'view_item'                 => esc_html__( 'View Company', 'jobly' ),
-            'view_items'                => esc_html__( 'View Companies', 'jobly' ),
-            'search_items'              => esc_html__( 'Search Companies', 'jobly' ),
-            'not_found'                 => esc_html__( 'No companies found', 'jobly' ),
-            'not_found_in_trash'        => esc_html__( 'No companies found in Trash', 'jobly' ),
-            'parent_item'               => esc_html__( 'Parent Company', 'jobly' ),
-            'parent_item_colon'         => esc_html__( 'Parent Company:', 'jobly' ),
-            'update_item'               => esc_html__( 'Update Company', 'jobly' ),
-            'item_published'            => esc_html__( 'Company published.', 'jobly' ),
-            'item_published_privately'  => esc_html__( 'Company published privately.', 'jobly' ),
-            'item_reverted_to_draft'    => esc_html__( 'Company reverted to draft.', 'jobly' ),
-            'item_scheduled'            => esc_html__( 'Company scheduled.', 'jobly' ),
-            'item_updated'              => esc_html__( 'Company updated.', 'jobly' ),
+            'name'                      => esc_html__( 'Companies', 'jobus' ),
+            'singular_name'             => esc_html__( 'Company', 'jobus' ),
+            'add_new'                   => esc_html__( 'Add New', 'jobus' ),
+            'add_new_item'              => esc_html__( 'Add New Company', 'jobus' ),
+            'edit_item'                 => esc_html__( 'Edit Company', 'jobus' ),
+            'new_item'                  => esc_html__( 'New Company', 'jobus' ),
+            'new_item_name'             => esc_html__( 'New Company Name', 'jobus' ),
+            'all_items'                 => esc_html__( 'All Companies', 'jobus' ),
+            'view_item'                 => esc_html__( 'View Company', 'jobus' ),
+            'view_items'                => esc_html__( 'View Companies', 'jobus' ),
+            'search_items'              => esc_html__( 'Search Companies', 'jobus' ),
+            'not_found'                 => esc_html__( 'No companies found', 'jobus' ),
+            'not_found_in_trash'        => esc_html__( 'No companies found in Trash', 'jobus' ),
+            'parent_item'               => esc_html__( 'Parent Company', 'jobus' ),
+            'parent_item_colon'         => esc_html__( 'Parent Company:', 'jobus' ),
+            'update_item'               => esc_html__( 'Update Company', 'jobus' ),
+            'item_published'            => esc_html__( 'Company published.', 'jobus' ),
+            'item_published_privately'  => esc_html__( 'Company published privately.', 'jobus' ),
+            'item_reverted_to_draft'    => esc_html__( 'Company reverted to draft.', 'jobus' ),
+            'item_scheduled'            => esc_html__( 'Company scheduled.', 'jobus' ),
+            'item_updated'              => esc_html__( 'Company updated.', 'jobus' ),
         );
 
         $supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
@@ -95,7 +95,7 @@ class Company {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Categories', 'jobly'),
+                'name'  => esc_html__( 'Categories', 'jobus'),
             ]
         ));
 
@@ -107,7 +107,7 @@ class Company {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Location', 'jobly'),
+                'name'  => esc_html__( 'Location', 'jobus'),
             ]
         ));
 
@@ -126,10 +126,10 @@ class Company {
 
         $show_columns = [];
         $show_columns['cb'] = '<input type="checkbox" />';
-        $show_columns['title'] = esc_html__('Title', 'jobly');
-        $show_columns['taxonomy-company_cat'] = esc_html__('Categories', 'jobly');
-        $show_columns['author'] = esc_html__('Author', 'jobly');
-        $show_columns['date'] = esc_html__('Date', 'jobly');
+        $show_columns['title'] = esc_html__('Title', 'jobus');
+        $show_columns['taxonomy-company_cat'] = esc_html__('Categories', 'jobus');
+        $show_columns['author'] = esc_html__('Author', 'jobus');
+        $show_columns['date'] = esc_html__('Date', 'jobus');
 
         return array_merge($show_columns, $columns);
 

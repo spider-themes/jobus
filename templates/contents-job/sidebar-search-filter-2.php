@@ -10,7 +10,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
         <div class="light-bg border-20 ps-4 pe-4">
 
             <a class="filter-header border-20 d-block collapsed" data-bs-toggle="collapse" href="#collapseFilterHeader" role="button" aria-expanded="false">
-                <span class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobly'); ?></span>
+                <span class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
             </a>
 
             <div class="collapse border-top" id="collapseFilterHeader">
@@ -187,7 +187,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         ?>
                                         <div class="col-lg-3 col-sm-6">
                                             <div class="filter-block pb-50 lg-pb-20">
-                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobus'); ?></div>
                                                 <select class="nice-select bg-white" name="company_cats[]">
                                                     <?php
                                                     $searched_opt = jobly_search_terms('company_cats');
@@ -212,7 +212,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         ?>
                                         <div class="col-lg-3 col-sm-6">
                                             <div class="filter-block pb-50 lg-pb-20">
-                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobus'); ?></div>
                                                 <select class="nice-select bg-white" name="job_locations[]">
                                                     <?php
                                                     $searched_opt = jobly_search_terms('job_locations');
@@ -234,7 +234,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                     <div class="row">
                         <div class="col-xl-2 m-auto">
-                            <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30 md-mt-10"><?php esc_html_e('Apply Filter', 'jobly'); ?></button>
+                            <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30 md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
                         </div>
                     </div>
                 </form>

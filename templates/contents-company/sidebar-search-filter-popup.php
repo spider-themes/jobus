@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
             <div class="filter-area-tab modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="position-relative">
-                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobly'); ?></div>
+                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <div class="pt-25 pb-30 ps-4 pe-4">
 
 
@@ -107,7 +107,7 @@ if (!defined('ABSPATH')) {
                                                 } elseif ($widget_layout == 'text') {
                                                     ?>
                                                     <div class="input-box position-relative">
-                                                        <input type="text"  name="s" id="searchInput" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobly'); ?>">
+                                                        <input type="text"  name="s" id="searchInput" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobus'); ?>">
                                                         <button><i class="bi bi-search"></i></button>
                                                     </div>
                                                     <?php
@@ -130,7 +130,7 @@ if (!defined('ABSPATH')) {
                                         ?>
                                         <div class="col-lg-4">
                                             <div class="filter-block pb-50 lg-pb-20">
-                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobus'); ?></div>
                                                 <select class="nice-select" name="company_locations[]">
                                                     <?php
                                                     foreach ( $term_locations as $key => $term ) {
@@ -155,7 +155,7 @@ if (!defined('ABSPATH')) {
                                         ?>
                                         <div class="col-lg-4">
                                             <div class="filter-block pb-50 lg-pb-20">
-                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                                <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobus'); ?></div>
                                                 <select class="nice-select" name="company_cats[]">
                                                     <?php
                                                     foreach ( $term_cats as $key => $term ) {
@@ -171,7 +171,7 @@ if (!defined('ABSPATH')) {
                                 ?>
                                 <div class="col-lg-4">
                                     <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
-                                        <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                                        <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                     </button>
                                 </div>
                             </div>

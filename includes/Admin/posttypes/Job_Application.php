@@ -42,8 +42,8 @@ class Job_Application {
             ?>
             <p class="jobly-application-submission-info">
                 <span class="jobly-application-submission-date">
-                    <?php esc_html_e('Submitted On ', 'jobly'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
-                <span class="jobly-applicant-ip"><?php esc_html_e('from IP', 'jobly'); ?> <?php echo esc_html($candidate_ip); ?></span>
+                    <?php esc_html_e('Submitted On ', 'jobus'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
+                <span class="jobly-applicant-ip"><?php esc_html_e('from IP', 'jobus'); ?> <?php echo esc_html($candidate_ip); ?></span>
             </p>
             <?php
         }
@@ -53,7 +53,7 @@ class Job_Application {
     {
         add_meta_box(
             'applicant-details-meta-box',
-            esc_html__('Applicant Details', 'jobly'),
+            esc_html__('Applicant Details', 'jobus'),
             array($this, 'render_single_contents'),
             'job_application'
         );
@@ -73,13 +73,13 @@ class Job_Application {
     // Register the post type Applications
     public function register_post_types_applications() {
         $labels = array(
-            'name'                  => esc_html__('Applications', 'jobly'),
-            'singular_name'         => esc_html__('Application', 'jobly'),
-            'menu_name'             => esc_html__('Applications', 'jobly'),
-            'edit_item'             => esc_html__('Applications', 'jobly'),
-            'search_items'          => esc_html__('Search Applications', 'jobly'),
-            'not_found'             => esc_html__('No Applications found', 'jobly'),
-            'not_found_in_trash'    => esc_html__('No Applications found in Trash', 'jobly'),
+            'name'                  => esc_html__('Applications', 'jobus'),
+            'singular_name'         => esc_html__('Application', 'jobus'),
+            'menu_name'             => esc_html__('Applications', 'jobus'),
+            'edit_item'             => esc_html__('Applications', 'jobus'),
+            'search_items'          => esc_html__('Search Applications', 'jobus'),
+            'not_found'             => esc_html__('No Applications found', 'jobus'),
+            'not_found_in_trash'    => esc_html__('No Applications found in Trash', 'jobus'),
         );
 
         $args = array(
@@ -104,10 +104,10 @@ class Job_Application {
         $columns = array(
             'cb'                 => '<input type="checkbox" />',
             'applicant_photo'    => '',
-            'title'              => esc_html__('Applicant', 'jobly'),
-            'applicant_id'       => esc_html__('ID', 'jobly'),
-            'job_applied_for'    => esc_html__('Job', 'jobly'),
-            'submission_time'    => esc_html__('Applied on', 'jobly'),
+            'title'              => esc_html__('Applicant', 'jobus'),
+            'applicant_id'       => esc_html__('ID', 'jobus'),
+            'job_applied_for'    => esc_html__('Job', 'jobus'),
+            'submission_time'    => esc_html__('Applied on', 'jobus'),
         );
 
         return $columns;

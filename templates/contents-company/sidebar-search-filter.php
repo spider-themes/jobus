@@ -8,13 +8,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
-		<?php esc_html_e( 'Filter', 'jobly' ); ?>
+		<?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>
 
     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
         <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
-        <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobly' ); ?></div>
+        <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
@@ -140,7 +140,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										?>
                                         <div class="input-box position-relative">
                                             <input type="text" name="s" value="<?php echo get_search_query(); ?>"
-                                                   placeholder="<?php esc_attr_e( 'Company Name', 'jobly' ); ?>">
+                                                   placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>">
                                             <button><i class="bi bi-search"></i></button>
                                         </div>
 										<?php
@@ -183,7 +183,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
                                data-bs-toggle="collapse"
                                href="#collapseLocation" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Location', 'jobly' ); ?></a>
+                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Location', 'jobus' ); ?></a>
                             <div class="<?php echo esc_attr( $is_collapsed_show ) ?>" id="collapseLocation">
                                 <div class="main-body">
                                     <ul class="style-none filter-input">
@@ -211,7 +211,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										?>
                                         <div class="more-btn">
                                             <i class="bi bi-plus"></i>
-											<?php esc_html_e( 'Show More', 'jobly' ); ?>
+											<?php esc_html_e( 'Show More', 'jobus' ); ?>
                                         </div>
 										<?php
 									}
@@ -250,7 +250,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
                                data-bs-toggle="collapse"
                                href="#collapseCategory" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Category', 'jobly' ); ?></a>
+                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Category', 'jobus' ); ?></a>
                             <div class="<?php echo esc_attr( $is_collapsed_show ) ?>" id="collapseCategory">
                                 <div class="main-body">
                                     <ul class="style-none filter-input">
@@ -278,7 +278,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 										?>
                                         <div class="more-btn">
                                             <i class="bi bi-plus"></i>
-											<?php esc_html_e( 'Show More', 'jobly' ); ?>
+											<?php esc_html_e( 'Show More', 'jobus' ); ?>
                                         </div>
 										<?php
 									}
@@ -291,7 +291,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 				?>
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
-					<?php esc_html_e( 'Apply Filter', 'jobly' ); ?>
+					<?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                 </button>
             </form>
 

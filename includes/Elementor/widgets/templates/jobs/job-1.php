@@ -30,7 +30,7 @@
                             </a>
                         <?php endif ?>
                         <div class="job-date">
-                            <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobly') ?>
+                            <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobus') ?>
                             <a href="<?php echo esc_url(get_permalink($company_id)) ?>">
                                 <?php echo get_the_title($company_id) ?>
                             </a>
@@ -55,7 +55,7 @@
                     <div class="jod_list_btn_area">
                         <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
                             <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                <?php esc_html_e('APPLY', 'jobly'); ?>
+                                <?php esc_html_e('APPLY', 'jobus'); ?>
                             </a>
                         </div>
                     </div>

@@ -38,10 +38,10 @@ function Edit({ attributes, setAttributes }) {
                                 value={attributes.backgroundImage}
                                 render={({ open }) => (
                                     <Fragment>
-                                        <button onClick={open}>{__('Upload Background Image', 'jobly')}</button>
+                                        <button onClick={open}>{__('Upload Background Image', 'jobus')}</button>
                                         {attributes.backgroundImage && (
                                             <button onClick={() => setAttributes({ backgroundImage: '' })}>
-                                                {__('Remove Image', 'jobly')}
+                                                {__('Remove Image', 'jobus')}
                                             </button>
                                         )}
                                     </Fragment>
@@ -49,7 +49,7 @@ function Edit({ attributes, setAttributes }) {
                             />
                         </MediaUploadCheck>
                         <TextControl
-                            label={__('Video URL', 'jobly')}
+                            label={__('Video URL', 'jobus')}
                             value={attributes.videoUrl}
                             onChange={(val) => setAttributes({videoUrl: val})}
                         />

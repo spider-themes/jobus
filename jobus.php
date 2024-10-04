@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name: Joobly
+ * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
- * Author: Spider Themes
- * Author URI: https://profiles.wordpress.org/spiderdevs/
- * Version: 0.0.2
+ * Author: spider-themes
+ * Version: 0.0.3
  * Requires at least: 6.0
  * Tested up to: 6.6.2
  * Requires PHP: 7.4
- * Text Domain: jobly
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: jobus
+ * Domain Path: /languages
  */
 
 if (!defined('ABSPATH')) {
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 // Make sure the same class is not loaded.
 if ( ! class_exists( 'Jobly' ) ) {
 
-    require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
 	 * Class jobly
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.2';
+		const VERSION = '0.0.3';
 
 		/**
 		 * The plugin path
@@ -75,9 +75,6 @@ if ( ! class_exists( 'Jobly' ) ) {
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
-            // Register the candidate menu for administrators only
-            add_action('init', [$this, 'register_menu']);
-
 		}
 
 		/**
@@ -87,17 +84,8 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public function i18n(): void
         {
-			load_plugin_textdomain( 'jobly', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
-
-        public function register_menu(): void
-        {
-            register_nav_menus([
-                'candidate_menu' => esc_html__('Candidate Menu', 'jobly'),
-            ]);
-
-        }
-
 
 		/**
 		 * Include Files
@@ -118,30 +106,22 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-            require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
-            require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
-
-            // Frontend UI
+            // Frontend
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
-            require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
-            require_once __DIR__ . '/includes/Frontend/Dashboard.php';
-
 
             //Admin UI
             require_once __DIR__ . '/includes/Admin/User.php';
-
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Candidate.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
-
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -176,16 +156,14 @@ if ( ! class_exists( 'Jobly' ) ) {
         {
 
             //Classes
-            new Jobly\Classes\Ajax_Actions();
+            new Jobly\includes\Classes\Ajax_Actions();
 
-            if ( is_admin() ) {
+			if ( is_admin() ) {
 				new Jobly\Admin\User();
                 new Jobly\Admin\Assets();
 			} else {
+				new Jobly\Frontend\Frontend();
                 new Jobly\Frontend\Assets();
-                new Jobly\Frontend\Frontend();
-                new Jobly\Frontend\Template_Loader();
-                new Jobly\Frontend\Dashboard();
 			}
 
             new Jobly\Admin\Posttypes\Job_Application();
@@ -245,7 +223,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 /**
  * @return Jobly|false
  */
-if ( ! function_exists( 'jobly' ) ) {
+if ( ! function_exists( 'jobus' ) ) {
 	/**
 	 * Load jobly
 	 *

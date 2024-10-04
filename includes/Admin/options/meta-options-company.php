@@ -5,7 +5,7 @@ if (class_exists('CSF')) {
     $meta_company_prefix = 'jobly_meta_company_options';
 
     CSF::createMetabox($meta_company_prefix, array(
-        'title' => esc_html__('Company Options', 'jobly'),
+        'title' => esc_html__('Company Options', 'jobus'),
         'post_type' => 'company',
         'theme' => 'dark',
         'output_css' => true,
@@ -14,7 +14,7 @@ if (class_exists('CSF')) {
 
     // Company Info Meta Options
     CSF::createSection($meta_company_prefix, array(
-        'title' => esc_html__('General', 'jobly'),
+        'title' => esc_html__('General', 'jobus'),
         'id' => 'jobly_meta_general',
         'icon' => 'fas fa-home',
         'fields' => array(
@@ -22,14 +22,14 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'post_favorite',
                 'type' => 'checkbox',
-                'title' => esc_html__('Favorite', 'jobly'),
+                'title' => esc_html__('Favorite', 'jobus'),
                 'default' => false,
             ),
 
             array(
                 'id' => 'company_website',
                 'type' => 'link',
-                'title' => esc_html__('Company Website URL', 'jobly'),
+                'title' => esc_html__('Company Website URL', 'jobus'),
                 'default' => array(
                     'url' => '#',
                 ),
@@ -71,7 +71,7 @@ if (class_exists('CSF')) {
         }
 
         CSF::createSection($meta_company_prefix, array(
-            'title' => esc_html__('Specifications', 'jobly'),
+            'title' => esc_html__('Specifications', 'jobus'),
             'fields' => $company_fields,
             'icon'   => 'fas fa-cogs',
             'id'     => 'jobly_meta_specifications',

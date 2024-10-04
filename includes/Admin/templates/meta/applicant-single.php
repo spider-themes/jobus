@@ -46,7 +46,7 @@ if ($candidate_cv_url) {
         </div>
         <?php if ($candidate_cv_url) : ?>
             <a href="<?php echo esc_url($candidate_cv_url); ?>" class="button applicant-resume-btn" rel="nofollow" target="_blank">
-                <strong><?php esc_html_e('Download Resume', 'jobly'); ?></strong>
+                <strong><?php esc_html_e('Download Resume', 'jobus'); ?></strong>
                 <?php if ($file_size) : ?>
                     <span><?php echo 'PDF(' . esc_html($file_size) . ')'; ?></span>
                 <?php endif; ?>
@@ -57,19 +57,19 @@ if ($candidate_cv_url) {
     <div class="applicant-content-details">
         <ul class="details-list">
             <li>
-                <label><?php esc_html_e('Name', 'jobly'); ?></label>
+                <label><?php esc_html_e('Name', 'jobus'); ?></label>
                 <span><?php echo esc_html($candidate_fname . ' ' . $candidate_lname) ?></span>
             </li>
             <li>
-                <label><?php esc_html_e('Phone', 'jobly'); ?></label>
+                <label><?php esc_html_e('Phone', 'jobus'); ?></label>
                 <span><?php echo esc_html($candidate_phone) ?></span>
             </li>
             <li>
-                <label><?php esc_html_e('Email', 'jobly'); ?></label>
+                <label><?php esc_html_e('Email', 'jobus'); ?></label>
                 <span><?php echo esc_html($candidate_email) ?></span>
             </li>
             <li>
-                <label><?php esc_html_e('Cover Letter', 'jobly'); ?></label>
+                <label><?php esc_html_e('Cover Letter', 'jobus'); ?></label>
                 <p><?php echo wp_kses_post($candidate_message) ?></p>
             </li>
         </ul>

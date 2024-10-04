@@ -31,16 +31,16 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
-                            <?php esc_html_e('All', 'jobly'); ?>
+                            <?php esc_html_e('All', 'jobus'); ?>
                             <span class="text-dark"><?php echo jobly_posts_count('job') ?></span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
-                            echo esc_html(sprintf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobly'), jobly_posts_count('job') ));
+                            echo esc_html(sprintf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobus'), jobly_posts_count('job') ));
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
-                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobly'); ?></div>
+                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <?php
                                 $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                                 $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
@@ -53,17 +53,17 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 ?>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e('Default', 'jobly'); ?></option>
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobly' ); ?></option>
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobly' ); ?></option>
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobly' ); ?></option>
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobly' ); ?></option>
+                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e('Default', 'jobus'); ?></option>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
                                     </select>
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn<?php echo esc_attr($current_view == 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobly'); ?>"><i class="bi bi-list"></i></a>
-                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn<?php echo esc_attr($current_view == 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobly'); ?>"><i class="bi bi-grid"></i></a>
+                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn<?php echo esc_attr($current_view == 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobus'); ?>"><i class="bi bi-list"></i></a>
+                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn<?php echo esc_attr($current_view == 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobus'); ?>"><i class="bi bi-grid"></i></a>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                         <div class="col-md-3 col-sm-6">
                                             <div class="btn-group d-flex align-items-center justify-content-sm-end xs-mt-20">
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                                    <?php esc_html_e('APPLY', 'jobly'); ?>
+                                                    <?php esc_html_e('APPLY', 'jobus'); ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 	                                            }
 	                                            ?>
                                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
-                                                    <?php esc_html_e('APPLY', 'jobly'); ?>
+                                                    <?php esc_html_e('APPLY', 'jobus'); ?>
                                                 </a>
                                             </div>
                                         </div>

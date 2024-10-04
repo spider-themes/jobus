@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 <div class="position-relative">
 
-                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e( 'Filter By', 'jobly' ); ?></div>
+                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
                     <div class="pt-25 pb-30 ps-4 pe-4">
                         <div class="row">
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                 <div class="input-box position-relative">
                                                     <input type="text" name="s"
                                                            value="<?php echo get_search_query(); ?>"
-                                                           placeholder="<?php esc_html_e( 'Name or keyword', 'jobly' ) ?>">
+                                                           placeholder="<?php esc_html_e( 'Name or keyword', 'jobus' ) ?>">
                                                     <button><i class="bi bi-search"></i></button>
                                                 </div>
 												<?php
@@ -209,7 +209,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									?>
                                     <div class="col-lg-3">
                                         <div class="filter-block pb-50 md-pb-20">
-                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'location', 'jobly' ); ?></div>
+                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'location', 'jobus' ); ?></div>
                                             <select class="nice-select" name="candidate_location[]">
 												<?php
 												$searched_opt = jobly_search_terms( 'candidate_location' );
@@ -242,7 +242,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									?>
                                     <div class="col-lg-3">
                                         <div class="filter-block pb-50 md-pb-20">
-                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'Category', 'jobly' ); ?></div>
+                                            <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'Category', 'jobus' ); ?></div>
                                             <select class="nice-select" name="candidate_cats[]">
 												<?php
 												$searched_opt = jobly_search_terms( 'candidate_cats' );
@@ -264,7 +264,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="row">
                             <div class="col-xl-2 m-auto">
                                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
-									<?php esc_html_e( 'Apply Filter', 'jobly' ); ?>
+									<?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                                 </button>
                             </div>
                         </div>

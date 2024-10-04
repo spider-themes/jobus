@@ -16,7 +16,7 @@ function Save ({attributes}) {
                             <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
                         ))}
                     </ul>
-                    <div className="review-score"><span className="fw-500 text-dark">{rating}</span> {__('out of 5', 'jobly')}</div>
+                    <div className="review-score"><span className="fw-500 text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
                 </div>
                 <blockquote>{reviewContents}</blockquote>
                 <div className="d-flex align-items-center">

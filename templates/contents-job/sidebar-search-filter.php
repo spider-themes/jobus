@@ -11,13 +11,13 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
-        <?php esc_html_e('Filter', 'jobly'); ?>
+        <?php esc_html_e('Filter', 'jobus'); ?>
     </button>
 
     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
         <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas"
-                aria-label="<?php esc_attr_e('Close', 'jobly'); ?>"></button>
-        <div class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobly'); ?></div>
+                aria-label="<?php esc_attr_e('Close', 'jobus'); ?>"></button>
+        <div class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></div>
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
             <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" role="search" method="get">
@@ -201,7 +201,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         endif;
 
                                     } else {
-                                        esc_html_e('No selected input', 'jobly');
+                                        esc_html_e('No selected input', 'jobus');
                                     }
                                     ?>
                                 </div>
@@ -242,7 +242,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                        data-bs-toggle="collapse"
                                        href="#collapseCategory" role="button"
                                        aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                        <?php esc_html_e('Category', 'jobly'); ?>
+                                        <?php esc_html_e('Category', 'jobus'); ?>
                                     </a>
                                     <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                         <div class="main-body">
@@ -284,7 +284,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                        data-bs-toggle="collapse"
                                        href="#collapseLocation" role="button"
                                        aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                        <?php esc_html_e('Location', 'jobly'); ?>
+                                        <?php esc_html_e('Location', 'jobus'); ?>
                                     </a>
                                     <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
                                         <div class="main-body">
@@ -320,7 +320,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                 <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
                                    data-bs-toggle="collapse" href="#collapseTag" role="button"
                                    aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                    <?php esc_html_e('Tags', 'jobly'); ?>
+                                    <?php esc_html_e('Tags', 'jobus'); ?>
                                 </a>
                                 <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseTag">
                                     <div class="main-body">
@@ -352,7 +352,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 }
                 ?>
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
-                    <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                    <?php esc_html_e('Apply Filter', 'jobus'); ?>
                 </button>
             </form>
         </div>

@@ -170,12 +170,12 @@ class Ajax_Actions
 
         // Validate required fields
         if (empty($sender_name) || empty($sender_email) || empty($message) || empty($candidate_mail)) {
-            wp_send_json_error(esc_html__('Please fill in all required fields.', 'jobly'));
+            wp_send_json_error(esc_html__('Please fill in all required fields.', 'jobus'));
             return;
         }
 
         // Set email subject
-        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobly');
+        $subject = !empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobus');
         $headers[] = "From: $sender_name <$sender_email>";
         $headers[] = "Reply-To: $sender_email";
 
@@ -183,9 +183,9 @@ class Ajax_Actions
         $success = wp_mail($candidate_mail, $subject, $message, $headers);
 
         if ($success) {
-            wp_send_json_success(esc_html__('Your message has been sent successfully!', 'jobly')); // This will be displayed in green
+            wp_send_json_success(esc_html__('Your message has been sent successfully!', 'jobus')); // This will be displayed in green
         } else {
-            wp_send_json_error(esc_html__('There was a problem sending your message. Please try again.', 'jobly')); // This will be displayed in red
+            wp_send_json_error(esc_html__('There was a problem sending your message. Please try again.', 'jobus')); // This will be displayed in red
         }
 
         wp_die(); // Always terminate AJAX calls

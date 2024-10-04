@@ -12,7 +12,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="position-relative">
 
-                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobly'); ?></div>
+                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
 
                     <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="pt-25 pb-30 ps-4 pe-4" role="search" method="get">
                         <input type="hidden" name="post_type" value="job"/>
@@ -46,7 +46,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             if ( $widget_layout == 'text' ) {
                                                 ?>
                                                 <div class="input-box position-relative">
-                                                    <input type="text" name="s" id="searchInput" value="<?php echo esc_attr(get_search_query()) ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobly'); ?>">
+                                                    <input type="text" name="s" id="searchInput" value="<?php echo esc_attr(get_search_query()) ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobus'); ?>">
                                                     <button><i class="bi bi-search"></i></button>
                                                 </div>
                                                 <?php
@@ -192,7 +192,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             ?>
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="filter-block pb-50 lg-pb-20">
-                                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobly'); ?></div>
+                                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobus'); ?></div>
                                                     <select class="nice-select" name="company_cats[]">
                                                         <?php
                                                         $searched_opt = jobly_search_terms('company_cats');
@@ -217,7 +217,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             ?>
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="filter-block pb-50 lg-pb-20">
-                                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobly'); ?></div>
+                                                    <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobus'); ?></div>
                                                     <select class="nice-select" name="job_locations[]">
                                                         <?php
                                                         $searched_opt = jobly_search_terms('job_locations');
@@ -241,7 +241,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         <div class="row">
                             <div class="col-xl-2 m-auto">
                                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30 md-mt-10">
-                                    <?php esc_html_e('Apply Filter', 'jobly'); ?>
+                                    <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                 </button>
                             </div>
                         </div>

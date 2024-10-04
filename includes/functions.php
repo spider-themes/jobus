@@ -249,7 +249,7 @@ if (!function_exists('jobly_company_post_list')) {
 
         if (!empty($posts)) {
             foreach ( $posts as $post ) {
-                $options[ '' ] = esc_html__('Default', 'jobly');
+                $options[ '' ] = esc_html__('Default', 'jobus');
                 $options[ $post->ID ] = $post->post_title;
             }
         }
@@ -412,8 +412,8 @@ if ( ! function_exists( 'jobly_pagination' ) ) {
     {
 
         // Default values for prev and next links
-        $default_prev = '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobly').'" class="me-2" />' . esc_html__('Prev', 'jobly');
-        $default_next = esc_html__('Next', 'jobly') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobly').'" class="ms-2" />';
+        $default_prev = '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobus').'" class="me-2" />' . esc_html__('Prev', 'jobus');
+        $default_next = esc_html__('Next', 'jobus') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobus').'" class="ms-2" />';
 
         // Use the provided values or the default values
         $prev_text = !empty($prev) ? $prev : $default_prev;
@@ -729,7 +729,7 @@ if (!function_exists('jobly_showing_post_result_count')) {
     function jobly_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
     {
         if (!$query->have_posts()) {
-            echo '<p class="' . esc_attr($class) . '">' . esc_html__('No results found', 'jobly') . '</p>';
+            echo '<p class="' . esc_attr($class) . '">' . esc_html__('No results found', 'jobus') . '</p>';
             return;
         }
 
@@ -749,7 +749,7 @@ if (!function_exists('jobly_showing_post_result_count')) {
             <?php
             $show_results = sprintf(
             /* translators: 1: start range, 2: end range, 3: total number of posts */
-                __('Showing %1$s-%2$s of %3$s results', 'jobly'),
+                __('Showing %1$s-%2$s of %3$s results', 'jobus'),
                 '<span class="text-dark fw-500">' . $start_range . '</span>',
                 '<span class="text-dark fw-500">' . $end_range . '</span>',
                 '<span class="text-dark fw-500">' . $total_posts . '</span>'
@@ -773,10 +773,10 @@ if ( !function_exists('jobly_social_share_icons') ) {
         $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
         ?>
         <ul class="<?php echo esc_attr($class) ?>">
-            <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobly'); ?></li>
-            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobly'); ?>"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="https://www.linkedin.com/share?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobly'); ?>"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobly'); ?>"><i class="bi bi-twitter"></i></a></li>
+            <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobus'); ?></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobus'); ?>"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="https://www.linkedin.com/share?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobus'); ?>"><i class="bi bi-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobus'); ?>"><i class="bi bi-twitter"></i></a></li>
         </ul>
         <?php
     }
@@ -792,7 +792,7 @@ if ( ! function_exists( 'jobly_cs_bootstrap_icons' ) ) {
     function jobly_cs_bootstrap_icons( $icons = [] ) {
         // Adding new icons
         $icons[] = array(
-            'title' => esc_html__('Bootstrap Icons', 'jobly'),
+            'title' => esc_html__('Bootstrap Icons', 'jobus'),
             'icons' => array(
                 'bi bi-facebook',
                 'bi bi-twitter',
