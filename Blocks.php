@@ -85,7 +85,7 @@ class Blocks {
             array(
                 array(
                     'slug' => 'jobly-blocks',
-                    'title' => __( 'Jobly Blocks', 'jobly-blocks' ),
+                    'title' => __( 'Jobly Blocks', 'jobus' ),
                 ),
             ),
             $categories

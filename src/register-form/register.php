@@ -38,19 +38,19 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="candidate_username"> Name* </label>
+                                    <label for="candidate_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="candidate_username" id="candidate_username" placeholder="<?php echo esc_attr($candidate_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="candidate_email">Email*</label>
+                                    <label for="candidate_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="candidate_email" id="candidate_email" placeholder="<?php echo esc_attr($candidate_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="candidate_pass">Password*</label>
+                                    <label for="candidate_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_pass" id="candidate_pass" placeholder="<?php echo esc_attr($candidate_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
@@ -61,7 +61,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="candidate_confirm_pass">Confirm Password*</label>
+                                    <label for="candidate_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass" placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
@@ -74,7 +74,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
-                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the'); ?>
+                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
                                             <a href="#"><?php esc_html_e('Terms conditions', 'jobus'); ?></a> & <a href="#"><?php esc_html_e('Privacy Policy', 'jobus'); ?></a>
                                         </label>
                                     </div>
@@ -94,19 +94,19 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="employer_username">Name*</label>
+                                    <label for="employer_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="employer_username" id="employer_username" placeholder="<?php echo esc_attr($employer_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="employer_email">Email*</label>
+                                    <label for="employer_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="employer_email" id="employer_email" placeholder="<?php echo esc_attr($employer_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="employer_pass">Password*</label>
+                                    <label for="employer_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="employer_pass" id="employer_pass" placeholder="<?php echo esc_attr($employer_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">

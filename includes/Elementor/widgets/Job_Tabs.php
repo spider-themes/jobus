@@ -88,13 +88,13 @@ class Job_Tabs extends Widget_Base {
         //============================= Filter Options ================================//
         $this->start_controls_section(
             'filter_sec', [
-                'label' => __('Filter', 'banca-core'),
+                'label' => __('Filter', 'jobus'),
             ]
         );
 
         $this->add_control(
             'all_label', [
-                'label' => esc_html__( 'All filter label', 'landpagy-core' ),
+                'label' => esc_html__( 'All filter label', 'jobus' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => 'All Categories'
@@ -103,8 +103,8 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'cats', [
-                'label' => esc_html__('Category', 'banca-core'),
-                'description' => esc_html__('Display job by categories', 'banca-core'),
+                'label' => esc_html__('Category', 'jobus'),
+                'description' => esc_html__('Display job by categories', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobly_get_categories(),
                 'multiple' => true,
@@ -114,7 +114,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'show_count', [
-                'label' => esc_html__('Show Posts Count', 'banca-core'),
+                'label' => esc_html__('Show Posts Count', 'jobus'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3
             ]
@@ -122,7 +122,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'order', [
-                'label' => esc_html__('Order', 'banca-core'),
+                'label' => esc_html__('Order', 'jobus'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'ASC' => 'ASC',
@@ -134,7 +134,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'orderby', [
-                'label' => esc_html__('Order By', 'banca-core'),
+                'label' => esc_html__('Order By', 'jobus'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'none' => 'None',
@@ -151,15 +151,15 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'title_length', [
-                'label' => esc_html__('Title Length', 'banca-core'),
+                'label' => esc_html__('Title Length', 'jobus'),
                 'type' => Controls_Manager::NUMBER,
             ]
         );
 
         $this->add_control(
             'exclude', [
-                'label' => esc_html__('Exclude Job', 'banca-core'),
-                'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'banca-core'),
+                'label' => esc_html__('Exclude Job', 'jobus'),
+                'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
             ]

@@ -278,7 +278,7 @@ class Search_Form extends Widget_Base {
 
 		$this->add_control(
 			'keyword_label', [
-				'label'       => esc_html__( 'Keywords Label', 'docy-core' ),
+				'label'       => esc_html__( 'Keywords Label', 'jobus' ),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
 				'default'     => 'Popular:',
