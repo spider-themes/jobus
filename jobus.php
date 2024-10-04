@@ -18,17 +18,17 @@ if (!defined('ABSPATH')) {
 }
 
 // Make sure the same class is not loaded.
-if ( ! class_exists( 'Jobly' ) ) {
+if ( ! class_exists( 'Jobus' ) ) {
 
 	require_once __DIR__ . '/vendor/autoload.php';
 
 	/**
-	 * Class jobly
+	 * Class jobus
 	 */
-	final class Jobly {
+	final class Jobus {
 
 		/**
-		 * Jobly Version
+		 * Jobus Version
 		 *
 		 * Holds the version of the plugin.
 		 *
@@ -45,9 +45,9 @@ if ( ! class_exists( 'Jobly' ) ) {
 
         /**
          * Initializes a singleton instances
-         * @return false|Jobly
+         * @return false|Jobus
          */
-        public static function init(): bool|Jobly
+        public static function init(): bool|Jobus
         {
             static $instance = false;
             if ( ! $instance ) {
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Jobly' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * Initialize the Jobly plugin
+		 * Initialize the Jobus plugin
 		 *
 		 * @access public
 		 */
@@ -112,10 +112,13 @@ if ( ! class_exists( 'Jobly' ) ) {
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 
             // Frontend
+            require_once __DIR__ . '/includes/Frontend/Assets.php';
+            require_once __DIR__ . '/includes/Frontend/Frontend.php';
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 
             //Admin UI
             require_once __DIR__ . '/includes/Admin/User.php';
+            require_once __DIR__ . '/includes/Admin/Assets.php';
 
 			//Post Type
 			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
@@ -125,12 +128,12 @@ if ( ! class_exists( 'Jobly' ) ) {
 
             //Elementor Widgets
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-            new Jobly\Elementor\Register_Widgets();
+            new Jobus\Elementor\Register_Widgets();
 
 
             // Gutenberg Blocks
             require_once __DIR__ . '/Blocks.php';
-            new Jobly\Gutenberg\Blocks();
+            new Jobus\Gutenberg\Blocks();
 		}
 
 		/**
@@ -138,14 +141,14 @@ if ( ! class_exists( 'Jobly' ) ) {
 		 */
 		public function define_constants(): void
         {
-			define( 'JOBLY_VERSION', self::VERSION );
-			define( 'JOBLY_FILE', __FILE__ );
-			define( 'JOBLY_PATH', __DIR__ );
-			define( 'JOBLY_URL', plugins_url( '', JOBLY_FILE ) );
-			define( 'JOBLY_CSS', JOBLY_URL . '/assets/css' );
-			define( 'JOBLY_JS', JOBLY_URL . '/assets/js' );
-			define( 'JOBLY_IMG', JOBLY_URL . '/assets/images' );
-			define( 'JOBLY_VEND', JOBLY_URL . '/assets/vendors' );
+			define( 'JOBUS_VERSION', self::VERSION );
+			define( 'JOBUS_FILE', __FILE__ );
+			define( 'JOBUS_PATH', __DIR__ );
+			define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
+			define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
+			define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
+			define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
+			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
 		}
 
 		/**
@@ -156,21 +159,21 @@ if ( ! class_exists( 'Jobly' ) ) {
         {
 
             //Classes
-            new Jobly\includes\Classes\Ajax_Actions();
+            new Jobus\includes\Classes\Ajax_Actions();
 
 			if ( is_admin() ) {
-				new Jobly\Admin\User();
-                new Jobly\Admin\Assets();
+				new Jobus\Admin\User();
+                new Jobus\Admin\Assets();
 			} else {
-				new Jobly\Frontend\Frontend();
-                new Jobly\Frontend\Assets();
+				new Jobus\Frontend\Frontend();
+                new Jobus\Frontend\Assets();
 			}
 
-            new Jobly\Admin\Posttypes\Job_Application();
-            new Jobly\Admin\Posttypes\Candidate();
-            new Jobly\Admin\Posttypes\Job();
-            new Jobly\Admin\Posttypes\Company();
-            new Jobly\Frontend\Shortcode();
+            new Jobus\Admin\Posttypes\Job_Application();
+            new Jobus\Admin\Posttypes\Candidate();
+            new Jobus\Admin\Posttypes\Job();
+            new Jobus\Admin\Posttypes\Company();
+            new Jobus\Frontend\Shortcode();
 
 		}
 
@@ -181,11 +184,11 @@ if ( ! class_exists( 'Jobly' ) ) {
 		public function activate(): void
         {
 			//Insert the installation time into the database
-			$installed = get_option( 'jobly_installed' );
+			$installed = get_option( 'jobus_installed' );
 			if ( ! $installed ) {
-				update_option( 'jobly_installed', time() );
+				update_option( 'jobus_installed', time() );
 			}
-			update_option( 'jobly_version', JOBLY_VERSION );
+			update_option( 'jobus_version', JOBUS_VERSION );
 		}
 
 		/**
@@ -221,19 +224,19 @@ if ( ! class_exists( 'Jobly' ) ) {
 }
 
 /**
- * @return Jobly|false
+ * @return Jobus|false
  */
 if ( ! function_exists( 'jobus' ) ) {
 	/**
-	 * Load jobly
+	 * Load jobus
 	 *
-	 * Main instance of jobly
+	 * Main instance of jobus
 	 */
-	function jobly(): bool|Jobly
+	function jobus(): bool|Jobus
     {
-		return Jobly::init();
+		return Jobus::init();
 	}
 
 	// Kick of the plugin
-	jobly();
+	jobus();
 }

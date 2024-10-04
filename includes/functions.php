@@ -44,10 +44,10 @@ if (!function_exists('jobly_get_template_part')) {
         $template = $template_slug . '.php';
 
         // Check if a custom template exists in the theme folder, if not, load the plugin template file
-        if ($theme_file = locate_template(array( 'jobly/' . $template ))) {
+        if ($theme_file = locate_template(array( 'jobus/' . $template ))) {
             $file = $theme_file;
         } else {
-            $file = JOBLY_PATH . "/templates/" . $template;
+            $file = JOBUS_PATH . "/templates/" . $template;
         }
         if ($file) {
             load_template($file, false);
@@ -66,14 +66,14 @@ if (!function_exists('jobly_get_template_part')) {
  */
 function jobly_get_template( $template_name, $args = [] ) {
 
-    $jobly_obj = Jobly::init();
+    $jobus_obj = Jobus::init();
 
     if ( $args && is_array( $args ) ) {
         extract( $args );
     }
 
     // Construct the template path manually
-    $template_path = trailingslashit( $jobly_obj->plugin_path() ) . 'templates/' . $template_name;
+    $template_path = trailingslashit( $jobus_obj->plugin_path() ) . 'templates/' . $template_name;
 
     if ( file_exists( $template_path ) ) {
         include $template_path;
@@ -417,8 +417,8 @@ if ( ! function_exists( 'jobly_pagination' ) ) {
     {
 
         // Default values for prev and next links
-        $default_prev = '<img src="' . esc_url(JOBLY_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobus').'" class="me-2" />' . esc_html__('Prev', 'jobus');
-        $default_next = esc_html__('Next', 'jobus') . '<img src="' . esc_url(JOBLY_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobus').'" class="ms-2" />';
+        $default_prev = '<img src="' . esc_url(JOBUS_IMG . '/icons/prev.svg') . '" alt="'.esc_attr__('arrow-left', 'jobus').'" class="me-2" />' . esc_html__('Prev', 'jobus');
+        $default_next = esc_html__('Next', 'jobus') . '<img src="' . esc_url(JOBUS_IMG . '/icons/next.svg') . '" alt="'.esc_attr__('arrow-right', 'jobus').'" class="ms-2" />';
 
         // Use the provided values or the default values
         $prev_text = !empty($prev) ? $prev : $default_prev;

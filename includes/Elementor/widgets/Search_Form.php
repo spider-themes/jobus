@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobly\Elementor\widgets;
+namespace Jobus\Elementor\widgets;
 
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
@@ -37,7 +37,7 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'jobly-elements' ];
+		return [ 'jobus-elements' ];
 	}
 
 
@@ -47,7 +47,7 @@ class Search_Form extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	protected function register_controls() {
@@ -62,7 +62,7 @@ class Search_Form extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	public function elementor_content_control() {
@@ -339,7 +339,7 @@ class Search_Form extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	public function elementor_style_control() {
@@ -672,7 +672,7 @@ class Search_Form extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	protected function render(): void

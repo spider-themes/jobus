@@ -2,7 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
-namespace Jobly\Elementor\widgets;
+namespace Jobus\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -45,7 +45,7 @@ class Companies extends Widget_Base {
     }
 
     public function get_categories () {
-        return [ 'jobly-elements' ];
+        return [ 'jobus-elements' ];
     }
 
     /**
@@ -54,7 +54,7 @@ class Companies extends Widget_Base {
      * Params: no params
      * Return: @void
      * Since: @1.0.0
-     * Package: @jobly
+     * Package: @jobus
      * Author: spider-themes
      */
     protected function register_controls ()
@@ -70,7 +70,7 @@ class Companies extends Widget_Base {
      * Params: no params
      * Return: @void
      * Since: @1.0.0
-     * Package: @jobly
+     * Package: @jobus
      * Author: spider-themes
      */
     public function elementor_content_control () {
@@ -194,7 +194,7 @@ class Companies extends Widget_Base {
      * Params: no params
      * Return: @void
      * Since: @1.0.0
-     * Package: @jobly
+     * Package: @jobus
      * Author: spider-themes
      */
     public function elementor_style_control ()
@@ -458,7 +458,7 @@ class Companies extends Widget_Base {
      * Params: no params
      * Return: @void
      * Since: @1.0.0
-     * Package: @jobly
+     * Package: @jobus
      * Author: spider-themes
      */
     protected function render () {

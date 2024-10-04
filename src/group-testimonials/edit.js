@@ -11,9 +11,9 @@ function Edit({attributes, setAttributes}) {
 
 
                 <InnerBlocks
-                    allowedBlocks={['jobly/testimonials-item']}
+                    allowedBlocks={['jobus/testimonials-item']}
                     template={[
-                        ['jobly/testimonials-item'],
+                        ['jobus/testimonials-item'],
                     ]}
                 />
 

@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-wp_enqueue_script('jobly-job-application-form');
+wp_enqueue_script('jobus-job-application-form');
 
 get_header();
 

@@ -1,5 +1,5 @@
 <?php
-namespace Jobly\Frontend;
+namespace Jobus\Frontend;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

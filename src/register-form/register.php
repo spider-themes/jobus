@@ -58,7 +58,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                     <input type="password" name="candidate_pass" id="candidate_pass" placeholder="<?php echo esc_attr($candidate_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
@@ -69,7 +69,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                     <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass" placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
@@ -114,7 +114,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                     <input type="password" name="employer_pass" id="employer_pass" placeholder="<?php echo esc_attr($employer_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
@@ -125,7 +125,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                     <input type="password" name="employer_confirm_pass" id="employer_confirm_pass" placeholder="<?php echo esc_attr($employer_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
