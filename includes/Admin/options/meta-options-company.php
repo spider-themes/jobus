@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options

@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * The template for displaying titlebar
  *
@@ -26,7 +28,7 @@ wp_enqueue_script( 'lightbox' );
 						}
 						?>
 						<?php the_time( get_option( 'date_format' ) ) ?> .
-						<?php esc_html_e( 'By', 'jobi' ); ?>
+						<?php esc_html_e( 'By', 'jobus' ); ?>
                         <a href="<?php echo get_author_posts_url( $post_author_id ) ?>">
 							<?php echo get_the_author_meta( 'display_name', $post_author_id ) ?>
                         </a>

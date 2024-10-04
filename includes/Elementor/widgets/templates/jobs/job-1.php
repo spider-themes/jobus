@@ -1,3 +1,10 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+?>
+
 <section class="job-listing-one">
     <div class="job-listing-wrapper border-wrapper wow fadeInUp">
         <?php

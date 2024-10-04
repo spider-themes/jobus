@@ -1,8 +1,8 @@
 {
   "apiVersion": 3,
-  "name": "jobly/shortcode-job-archive",
+  "name": "jobus/shortcode-job-archive",
   "title": "Job Archive Shortcode (Jobly)",
-  "category": "jobly-blocks",
+  "category": "jobus-blocks",
   "icon": "dashicons dashicons-shortcode",
   "description": "Display the Job Archive job posts on the website frontend",
   "supports": {

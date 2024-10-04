@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options
@@ -31,8 +35,8 @@ if (class_exists('CSF')) {
 		        'title'     => esc_html__('Choose Layout', 'jobus'),
 		        'subtitle'  => esc_html__('Select the preferred layout for your candidate post for this page.', 'jobus'),
 		        'options'   => array(
-			        '1' => esc_url(JOBLY_IMG . '/layout/candidate/candidate-profile-1.png'),
-			        '2' => esc_url(JOBLY_IMG . '/layout/candidate/candidate-profile-2.png'),
+			        '1' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-1.png'),
+			        '2' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-2.png'),
 		        ),
 		        'default'   => '1'
 	        ),

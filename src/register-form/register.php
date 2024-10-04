@@ -1,4 +1,8 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 // Placeholder values from block attributes
 $candidate_placeholder_username = $attributes['candidate_username'] ?? '';
 $candidate_placeholder_email = $attributes['candidate_email'] ?? '';
@@ -32,42 +36,40 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
             </ul>
             <div class="tab-content mt-40">
                 <div class="tab-pane fade show active" role="tabpanel" id="fc1">
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobly-candidate-registration-form" id="jobly-candidate-registration-form" method="post"><form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobly-candidate-registration-form" id="jobly-candidate-registration-form" method="post">
-
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobly-candidate-registration-form" id="jobly-candidate-registration-form" method="post">
                         <?php wp_nonce_field('register_candidate_action', 'register_candidate_nonce'); ?>
                         <input type="hidden" name="action" value="register_candidate">
-
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="candidate_username"><?php esc_html_e('Name*', 'jobly'); ?></label>
+                                    <label for="candidate_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="candidate_username" id="candidate_username" placeholder="<?php echo esc_attr($candidate_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="candidate_email"><?php esc_html_e('Email*', 'jobly'); ?></label>
+                                    <label for="candidate_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="candidate_email" id="candidate_email" placeholder="<?php echo esc_attr($candidate_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="candidate_pass"><?php esc_html_e('Password*', 'jobly'); ?></label>
+                                    <label for="candidate_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_pass" id="candidate_pass" placeholder="<?php echo esc_attr($candidate_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="candidate_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobly'); ?></label>
+                                    <label for="candidate_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass" placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
@@ -76,7 +78,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
-                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the'); ?>
+                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
                                             <a href="#"><?php esc_html_e('Terms conditions', 'jobus'); ?></a> & <a href="#"><?php esc_html_e('Privacy Policy', 'jobus'); ?></a>
                                         </label>
                                     </div>
@@ -96,34 +98,34 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="employer_username"><?php esc_html_e('Name*', 'jobly'); ?></label>
+                                    <label for="employer_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="employer_username" id="employer_username" placeholder="<?php echo esc_attr($employer_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-25">
-                                    <label for="employer_email"><?php esc_html_e('Email*', 'jobly'); ?></label>
+                                    <label for="employer_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="employer_email" id="employer_email" placeholder="<?php echo esc_attr($employer_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="employer_pass"><?php esc_html_e('Password*', 'jobly'); ?></label>
+                                    <label for="employer_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="employer_pass" id="employer_pass" placeholder="<?php echo esc_attr($employer_placeholder_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
-                                    <label for="employer_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobly'); ?></label>
+                                    <label for="employer_confirm_pass">Confirm Password*</label>
                                     <input type="password" name="employer_confirm_pass" id="employer_confirm_pass" placeholder="<?php echo esc_attr($employer_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo JOBLY_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
+                                            <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>

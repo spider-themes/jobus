@@ -1,8 +1,8 @@
 {
   "apiVersion": 3,
-  "name": "jobly/video-popup",
+  "name": "jobus/video-popup",
   "title": "Jobly Video Popup",
-  "category": "jobly-blocks",
+  "category": "jobus-blocks",
   "icon": "video-alt3",
   "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
   "supports": {

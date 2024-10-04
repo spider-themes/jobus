@@ -1,14 +1,14 @@
 <?php
 
-namespace Jobly\Elementor;
+namespace Jobus\Elementor;
 
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+    exit; // Exit if accessed directly
 }
 
 /**
  * Class Jobly_Services
- * @package Jobly\includes\Elementor
+ * @package Jobus\includes\Elementor
  */
 class Register_Widgets
 {
@@ -45,7 +45,7 @@ class Register_Widgets
     public function register_category ($elements_manager)
     {
         $elements_manager->add_category(
-            'jobly-elements', [
+            'jobus-elements', [
                 'title' => esc_html__('Jobus', 'jobus'),
                 'icon' => 'fa fa-plug',
             ]
@@ -55,7 +55,7 @@ class Register_Widgets
 
     public function register_editor_scripts ()
     {
-        wp_enqueue_script('jobly-elementor-widgets', JOBLY_JS . '/elementor-widgets.js', [ 'jquery', 'elementor-frontend' ], JOBLY_VERSION, true);
+        wp_enqueue_script('jobus-elementor-widgets', JOBUS_JS . '/elementor-widgets.js', [ 'jquery', 'elementor-frontend' ], JOBUS_VERSION, true);
     }
 
     /**
@@ -64,7 +64,7 @@ class Register_Widgets
      */
     public function register_editor_styles ()
     {
-        wp_enqueue_style('jobly-elementor-editor', JOBLY_CSS . '/elementor-editor.css', [], JOBLY_VERSION);
+        wp_enqueue_style('jobus-elementor-editor', JOBUS_CSS . '/elementor-editor.css', [], JOBUS_VERSION);
     }
 
 

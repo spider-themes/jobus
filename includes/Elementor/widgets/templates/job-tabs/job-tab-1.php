@@ -1,3 +1,10 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
+?>
+
 <section class="job-listing-two">
     <ul class="style-none d-flex justify-content-center justify-content-lg-end flex-wrap isotop-menu-wrapper g-control-nav">
         <?php
@@ -83,9 +90,9 @@
                         <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
                         <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobus'); ?></div>
                         <div class="d-flex align-items-center justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">
-                            <img src="<?php echo JOBLY_IMG . '/icons/line.svg' ?>" alt="<?php esc_html_e('Line Icon', 'jobus'); ?>" class="lazy-img">
+                            <img src="<?php echo JOBUS_IMG . '/icons/line.svg' ?>" alt="<?php esc_html_e('Line Icon', 'jobus'); ?>" class="lazy-img">
                             <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
-                                <img src="<?php echo JOBLY_IMG . '/icons/arrow_icon.svg' ?>" alt="<?php esc_html_e('Arrow Icon', 'jobus'); ?>" class="lazy-img">
+                                <img src="<?php echo JOBUS_IMG . '/icons/arrow_icon.svg' ?>" alt="<?php esc_html_e('Arrow Icon', 'jobus'); ?>" class="lazy-img">
                             </div>
                         </div>
                     </a>

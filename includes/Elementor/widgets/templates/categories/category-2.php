@@ -1,3 +1,9 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+?>
+
 <div class="category-section-five">
     <div class="card-wrapper-two d-flex flex-wrap jobly_cat_align">
         <?php

@@ -1,6 +1,6 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	die; // Cannot access directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
 
@@ -13,8 +13,8 @@ if( class_exists( 'CSF' ) ) {
 	// Create options
 	CSF::createOptions( $settings_prefix, array(
 		'menu_title' => esc_html__( 'Settings', 'jobus'),
-		'menu_slug'  => 'jobly-settings',
-		'framework_title'  => esc_html__( 'Jobus', 'jobus') . '<span> ' . JOBLY_VERSION . '</span>',
+		'menu_slug'  => 'jobus-settings',
+		'framework_title'  => esc_html__( 'Jobus', 'jobus') . '<span> ' . JOBUS_VERSION . '</span>',
 		'menu_type'   => 'submenu',
 		'menu_parent' => 'edit.php?post_type=job',
 		'theme'           => 'dark',
@@ -164,9 +164,9 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobus'),
                 'subtitle'  => esc_html__('Select the preferred layout for your job page across the entire website.', 'jobus'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/job/archive-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/job/archive-layout-2.png',
-                    '3' => JOBLY_IMG . '/layout/job/archive-layout-3.png',
+                    '1' => JOBUS_IMG . '/layout/job/archive-layout-1.png',
+                    '2' => JOBUS_IMG . '/layout/job/archive-layout-2.png',
+                    '3' => JOBUS_IMG . '/layout/job/archive-layout-3.png',
                 ),
                 'default'   => '1'
             ),
@@ -345,8 +345,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobus'),
                 'subtitle'  => esc_html__('Select the preferred layout for your job details page across the entire website.', 'jobus'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/job/single-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/job/single-layout-1.png',
+                    '1' => JOBUS_IMG . '/layout/job/single-layout-1.png',
+                    '2' => JOBUS_IMG . '/layout/job/single-layout-1.png',
                 ),
                 'default'   => '1'
             ),
@@ -482,8 +482,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobus'),
                 'subtitle'  => esc_html__('Select the preferred layout for your company page across the entire website.', 'jobus'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/company/archive-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/company/archive-layout-2.png',
+                    '1' => JOBUS_IMG . '/layout/company/archive-layout-1.png',
+                    '2' => JOBUS_IMG . '/layout/company/archive-layout-2.png',
                 ),
                 'default'   => '1'
             ),
@@ -724,8 +724,8 @@ if( class_exists( 'CSF' ) ) {
                 'title'     => esc_html__('Choose Layout', 'jobus'),
                 'subtitle'  => esc_html__('Select the preferred layout for your candidate page across the entire website.', 'jobus'),
                 'options'   => array(
-                    '1' => JOBLY_IMG . '/layout/candidate/archive-layout-1.png',
-                    '2' => JOBLY_IMG . '/layout/candidate/archive-layout-2.png',
+                    '1' => JOBUS_IMG . '/layout/candidate/archive-layout-1.png',
+                    '2' => JOBUS_IMG . '/layout/candidate/archive-layout-2.png',
                 ),
                 'default'   => '1'
             ),

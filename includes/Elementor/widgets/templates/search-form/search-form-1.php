@@ -2,8 +2,6 @@
 if (!defined('ABSPATH')) {
     exit(); // Exit if accessed directly.
 }
-
-
 ?>
 
 <div class="job-search-one position-relative">

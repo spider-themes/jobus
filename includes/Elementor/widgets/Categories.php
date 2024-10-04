@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobly\Elementor\widgets;
+namespace Jobus\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -11,9 +11,8 @@ use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
 /**
@@ -40,7 +39,7 @@ class Categories extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'jobly-elements' ];
+		return [ 'jobus-elements' ];
 	}
 
 
@@ -50,7 +49,7 @@ class Categories extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	protected function register_controls() {
@@ -65,7 +64,7 @@ class Categories extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	public function elementor_content_control() {
@@ -184,7 +183,7 @@ class Categories extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	public function elementor_style_control() {
@@ -404,7 +403,7 @@ class Categories extends Widget_Base {
 	 * Params: no params
 	 * Return: @void
 	 * Since: @1.0.0
-	 * Package: @jobly
+	 * Package: @jobus
 	 * Author: spider-themes
 	 */
 	protected function render() {

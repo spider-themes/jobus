@@ -1,3 +1,8 @@
+<?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+?>
 <div class="card-wrapper-three row">
     <?php
     if (is_array($categories)) {
@@ -35,10 +40,10 @@
                     <div class="title text-white"><?php echo esc_html($formatted_count) ?></div>
                     <div class="text-lg text-white"><?php esc_html_e('Job already posted', 'jobus') ?></div>
                     <div class="d-flex align-items-center justify-content-end mt-50">
-                        <img src="<?php echo JOBLY_IMG . '/icons/shape_22.svg' ?>"
+                        <img src="<?php echo JOBUS_IMG . '/icons/shape_22.svg' ?>"
                              alt="<?php esc_html_e('shape', 'jobus'); ?>" class="lazy-img">
                         <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
-                            <img src="<?php echo JOBLY_IMG . '/icons/icon_19.svg' ?>"
+                            <img src="<?php echo JOBUS_IMG . '/icons/icon_19.svg' ?>"
                                  alt="<?php esc_html_e('Arrow Icon', 'jobus'); ?>" class="lazy-img">
                         </div>
                     </div>

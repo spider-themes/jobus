@@ -1,10 +1,14 @@
 <?php
-namespace Jobly\Admin;
+namespace Jobus\Admin;
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 
 /**
  * Class Admin
  *
- * @package Jobly\Admin
+ * @package Jobus\Admin
  */
 class User {
 

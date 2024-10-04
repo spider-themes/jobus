@@ -1,5 +1,5 @@
 <?php
-namespace Jobly\Gutenberg;
+namespace Jobus\Gutenberg;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
@@ -84,8 +84,8 @@ class Blocks {
         return array_merge(
             array(
                 array(
-                    'slug' => 'jobly-blocks',
-                    'title' => __( 'Jobly Blocks', 'jobly-blocks' ),
+                    'slug' => 'jobus-blocks',
+                    'title' => __( 'Jobly Blocks', 'jobus' ),
                 ),
             ),
             $categories
@@ -97,11 +97,11 @@ class Blocks {
     {
 
         // Style's
-        wp_enqueue_style('jobly-block-editor', JOBLY_CSS . '/block-editor.css', [], JOBLY_VERSION);
+        wp_enqueue_style('jobus-block-editor', JOBUS_CSS . '/block-editor.css', [], JOBUS_VERSION);
 
 
         // Scripts
-        wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
+        wp_enqueue_script('fancybox', JOBUS_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
 
     }
 
@@ -110,12 +110,12 @@ class Blocks {
     {
 
         // Style's
-        wp_enqueue_style('jobly-block-frontend', JOBLY_CSS . '/block-frontend.css', [], JOBLY_VERSION);
+        wp_enqueue_style('jobus-block-frontend', JOBUS_CSS . '/block-frontend.css', [], JOBUS_VERSION);
 
         // Script's
-        wp_enqueue_script('bootstrap', JOBLY_VEND . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '5.1.3', true );
-        wp_enqueue_script('fancybox', JOBLY_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
-        wp_enqueue_script('jobly-block', JOBLY_JS . '/block-frontend.js', [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), true);
+        wp_enqueue_script('bootstrap', JOBUS_VEND . '/bootstrap/bootstrap.min.js', array( 'jquery' ), '5.1.3', true );
+        wp_enqueue_script('fancybox', JOBUS_VEND . '/fancybox/fancybox.min.js', array( 'jquery' ), '3.3.5', true );
+        wp_enqueue_script('jobus-block', JOBUS_JS . '/block-frontend.js', [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), true);
 
     }
 
