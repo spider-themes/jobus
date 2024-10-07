@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Admin\Posttypes;
+namespace Jobus\Admin\CPT;
 
 
 if (!defined('ABSPATH')) {
@@ -27,7 +27,7 @@ class Job {
     // Register the post type Job.
     public function register_post_types_job() {
 
-        if (post_type_exists('job')) {
+        if (post_type_exists('jobus_job')) {
             return;
         }
 
@@ -66,7 +66,7 @@ class Job {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'query_var'             => true,
-            'rewrite'               => array( 'slug' => 'job' ),
+            'rewrite'               => array( 'slug' => 'jobus_job' ),
             'capability_type'       => 'post',
             'has_archive'           => true,
             'hierarchical'          => true,
@@ -80,11 +80,11 @@ class Job {
 
         );
 
-        register_post_type('job', $args); // Register the posttype `job`
+        register_post_type('jobus_job', $args); // Register the posttype `job`
 
 
         // Register post taxonomies Category
-        register_taxonomy( 'job_cat', 'job', array(
+        register_taxonomy( 'jobus_job_cat', 'jobus_job', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,
@@ -97,7 +97,7 @@ class Job {
         ));
 
         // Register post taxonomies location
-        register_taxonomy( 'job_location', 'job', array(
+        register_taxonomy( 'jobus_job_location', 'jobus_job', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,
@@ -110,7 +110,7 @@ class Job {
         ));
 
         // Register post taxonomies Tags
-        register_taxonomy( 'job_tag', 'job', array(
+        register_taxonomy( 'jobus_job_tag', 'jobus_job', array(
             'public'                => true,
             'hierarchical'          => false,
             'show_ui'               => true,

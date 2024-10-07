@@ -89,7 +89,8 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function job_page_layout( $args = [] ) {
+    public static function job_page_layout(array $args = [] ): void
+    {
 
         if ( ! is_admin() ) {
             jobus_get_template( 'archive-job.php', [
@@ -106,7 +107,8 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function company_page_layout( $args = [] ) {
+    public static function company_page_layout(array $args = [] ): void
+    {
 
         if ( ! is_admin() ) {
             jobus_get_template( 'archive-company.php', [

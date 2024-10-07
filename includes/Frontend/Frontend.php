@@ -15,7 +15,7 @@ class Frontend {
 	public function __construct() {
 
 		// Add Filter to redirect Archive Page Template
-		//add_filter( 'template_include', [ $this, 'template_loader' ] );
+		add_filter( 'template_include', [ $this, 'template_loader' ] );
 
 	}
 
@@ -27,7 +27,8 @@ class Frontend {
 	 * Load custom template
 	 * @since 1.0.0
 	 */
-	public function template_loader( $template ) {
+	public function template_loader( $template ): mixed
+    {
 
         // Job Pages
         if ( is_tax('job_cat') || is_tax('job_tag') ) {
@@ -123,7 +124,6 @@ class Frontend {
                 $template = JOBUS_PATH . '/templates/' . $single_template;
             }
         }
-
 
 		return $template;
 

@@ -1,5 +1,14 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * The template for displaying archive pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package jobus
+ */
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 get_header();
 
@@ -119,7 +128,7 @@ if (!empty($allSliderValues)) {
     $uniqueIds = array_unique($flattenedIds);
 
     /**
-     * Merge searched ids with tax & meta queries ids
+     * Merge searched ids with tax- & meta-queries ids
      */
     $result_ids = array_unique(array_merge($result_ids, $uniqueIds));
 }
@@ -130,8 +139,8 @@ if (!empty($result_ids)) {
 }
 
 $search_type = isset($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
-if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty($_GET[ 'company_ids' ])) {
-    $args[ 'post__in' ] = explode(',', $_GET[ 'company_ids' ] ?? '');
+if ($search_type == 'company_search' && !empty($_GET[ 'company_ids' ])) {
+    $args[ 'post__in' ] = explode(',', sanitize_text_field($_GET[ 'company_ids' ]) ?? '');
 }
 
 $job_post = new \WP_Query($args);

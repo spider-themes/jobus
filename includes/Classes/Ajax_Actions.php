@@ -1,5 +1,4 @@
 <?php
-
 namespace Jobus\includes\Classes;
 
 if (!defined('ABSPATH')) {

@@ -98,7 +98,7 @@ class User {
 
     public function candidate_registration(): void
     {
-        if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce($_POST['register_candidate_nonce'], 'register_candidate_action')) {
+        if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['register_candidate_nonce'])), 'register_candidate_action')) {
 
             // Get form data
             $candidate_username = sanitize_user($_POST['candidate_username']) ?? '';
@@ -139,7 +139,7 @@ class User {
 
     public function employer_registration(): void
     {
-        if (isset($_POST['register_employer_nonce']) && wp_verify_nonce($_POST['register_employer_nonce'], 'register_employer_action')) {
+        if (isset($_POST['register_employer_nonce']) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action')) {
 
             // Get form data
             $employer_username = sanitize_user($_POST['employer_username']) ?? '';

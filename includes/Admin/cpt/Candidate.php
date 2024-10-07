@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Admin\Posttypes;
+namespace Jobus\Admin\CPT;
 
 
 if (!defined('ABSPATH')) {
@@ -28,7 +28,7 @@ class Candidate {
     // Register the `posttype` Candidates
     public function register_post_types_candidates() {
 
-        if (post_type_exists('candidate')) {
+        if (post_type_exists('jobus_candidate')) {
             return;
         }
 
@@ -65,7 +65,7 @@ class Candidate {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'query_var'             => true,
-            'rewrite'               => array('slug' => 'candidate'),
+            'rewrite'               => array('slug' => 'jobus_candidate'),
             'capability_type'       => 'post',
             'has_archive'           => true,
             'hierarchical'          => true,
@@ -77,10 +77,10 @@ class Candidate {
             'show_admin_column'     => true,
         );
 
-        register_post_type('candidate', $args); // Register the post-type `candidate`
+        register_post_type('jobus_candidate', $args); // Register the post-type `candidate`
 
         // Register post taxonomies Category
-        register_taxonomy( 'candidate_cat', 'candidate', array(
+        register_taxonomy( 'jobus_candidate_cat', 'jobus_candidate', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,
@@ -93,7 +93,7 @@ class Candidate {
         ));
 
         // Register post taxonomies Tags
-        register_taxonomy( 'candidate_location', 'candidate', array(
+        register_taxonomy( 'jobus_candidate_location', 'jobus_candidate', array(
             'public'                => true,
             'hierarchical'          => false,
             'show_ui'               => true,
@@ -107,7 +107,7 @@ class Candidate {
         ) );
 
         // Register post taxonomies Tags
-        register_taxonomy( 'candidate_skill', 'candidate', array(
+        register_taxonomy( 'jobus_candidate_skill', 'jobus_candidate', array(
             'public'                => true,
             'hierarchical'          => false,
             'show_ui'               => true,

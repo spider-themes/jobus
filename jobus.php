@@ -135,10 +135,10 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/Assets.php';
 
 			//Post Type
-			require_once __DIR__ . '/includes/Admin/posttypes/Job_Application.php';
-            require_once __DIR__ . '/includes/Admin/posttypes/Candidate.php';
-            require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
-            require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
+			require_once __DIR__ . '/includes/Admin/cpt/Job_Application.php';
+            require_once __DIR__ . '/includes/Admin/cpt/Candidate.php';
+            require_once __DIR__ . '/includes/Admin/cpt/Job.php';
+            require_once __DIR__ . '/includes/Admin/cpt/Company.php';
 
             //Elementor & Blocks
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
@@ -163,10 +163,10 @@ if ( ! class_exists( 'Jobus' ) ) {
             }
 
             //Post Type
-            new Jobus\Admin\Posttypes\Job_Application();
-            new Jobus\Admin\Posttypes\Candidate();
-            new Jobus\Admin\Posttypes\Job();
-            new Jobus\Admin\Posttypes\Company();
+            new Jobus\Admin\CPT\Job_Application();
+            new Jobus\Admin\CPT\Candidate();
+            new Jobus\Admin\CPT\Job();
+            new Jobus\Admin\CPT\Company();
 
             // Frontend UI
             new Jobus\Frontend\Assets();

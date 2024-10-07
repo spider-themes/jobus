@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Admin\Posttypes;
+namespace Jobus\Admin\CPT;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -33,7 +33,7 @@ class Job_Application {
     }
 
     public function admin_single_subtitle($post) {
-        if ($post->post_type === 'job_application') {
+        if ($post->post_type === 'jobus_job_application') {
             $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
             ?>
             <p class="jobus-application-submission-info">
@@ -51,14 +51,14 @@ class Job_Application {
             'applicant-details-meta-box',
             esc_html__('Applicant Details', 'jobus'),
             array($this, 'render_single_contents'),
-            'job_application'
+            'jobus_job_application'
         );
     }
 
     public function render_single_contents($post)
     {
 
-        if ($post->post_type === 'job_application') {
+        if ($post->post_type === 'jobus_job_application') {
             require_once plugin_dir_path(__FILE__) . '../templates/meta/applicant-single.php';
         }
 
@@ -92,7 +92,7 @@ class Job_Application {
             'rewrite'               => false,
         );
 
-        register_post_type('job_application', $args); // Register the post type `job_application`
+        register_post_type('jobus_job_application', $args); // Register the post type `job_application`
     }
 
     public function job_application_columns($columns) {

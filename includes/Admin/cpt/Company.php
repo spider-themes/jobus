@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Admin\Posttypes;
+namespace Jobus\Admin\CPT;
 
 
 if (!defined('ABSPATH')) {
@@ -32,7 +32,7 @@ class Company {
     // Register the posttype Company.
     public function register_post_types_company() {
 
-        if (post_type_exists('company')) {
+        if (post_type_exists('jobus_company')) {
             return;
         }
 
@@ -70,7 +70,7 @@ class Company {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'query_var'             => true,
-            'rewrite'               => array( 'slug' => 'company' ),
+            'rewrite'               => array( 'slug' => 'jobus_company' ),
             'capability_type'       => 'post',
             'has_archive'           => true,
             'hierarchical'          => true,
@@ -84,10 +84,10 @@ class Company {
 
         );
 
-        register_post_type('company', $args); // Register the post-type `company`
+        register_post_type('jobus_company', $args); // Register the post-type `company`
 
         // Register post taxonomies Category
-        register_taxonomy( 'company_cat', 'company', array(
+        register_taxonomy( 'jobus_company_cat', 'jobus_company', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,
@@ -99,7 +99,7 @@ class Company {
             ]
         ));
 
-        register_taxonomy( 'company_location', 'company', array(
+        register_taxonomy( 'jobus_company_location', 'jobus_company', array(
             'public'                => true,
             'hierarchical'          => true,
             'show_ui'               => true,

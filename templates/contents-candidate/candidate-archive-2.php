@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
+$current_view = $_GET['view'] ?? 'grid';
 
 // Get the base URL for the archive page
 if ($candidate_archive_layout) {

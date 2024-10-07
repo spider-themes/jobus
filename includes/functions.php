@@ -265,7 +265,7 @@ if (!function_exists('jobus_company_post_list')) {
 }
 
 
-function jobus_get_specs ($settings_id = 'job_specifications')
+function jobus_get_specs ($settings_id = 'job_specifications'): array
 {
     $specifications = jobus_opt($settings_id);
 
@@ -300,7 +300,7 @@ function jobus_get_specs ($settings_id = 'job_specifications')
 
 
 if (!function_exists('jobus_get_specs_options')) {
-    function jobus_get_specs_options ($settings_id = 'job_specifications')
+    function jobus_get_specs_options ($settings_id = 'job_specifications'): array
     {
         $specifications = jobus_opt($settings_id);
 
@@ -473,12 +473,12 @@ if ( !function_exists('jobus_job_archive_query') ) {
 
 
 /*
- * Get the company count by post id and meta value
+ * Get the company count by post id and meta-value
  * @param $company_id
  * @return int
  */
 if (!function_exists('jobus_get_selected_company_count')) {
-    function jobus_get_selected_company_count ($company_id, $link = true)
+    function jobus_get_selected_company_count ($company_id, $link = true): int|string
     {
         $args = array(
             'post_type' => 'job',
@@ -495,8 +495,8 @@ if (!function_exists('jobus_get_selected_company_count')) {
         
         $job_posts = new \WP_Query($args); 
         
-        // if link false then return only count
-        if ( $link == false ) {
+        // if a link false, then return only count
+        if (!$link) {
             return $job_posts->found_posts;
         } else {
             
@@ -513,7 +513,7 @@ if (!function_exists('jobus_get_selected_company_count')) {
     
             $company_ids_array = implode(',', $company_ids_arr);
             
-            // if post count 1 then return post link
+            // if post counts 1 then return a post-link
             if ( $job_posts->found_posts == 1 ) {
                 return esc_url(get_permalink( $company_ids_array ));
             } else {
@@ -527,17 +527,17 @@ if (!function_exists('jobus_get_selected_company_count')) {
 /**
  * Get the job search terms
  */
-function jobus_search_terms ($terms)
+function jobus_search_terms ($terms): array|string
 {
     $result = [];
 
     // Verify the nonce before processing the request
-    if (isset($_GET['jobus_nonce']) && wp_verify_nonce($_GET['jobus_nonce'], 'jobus_search_terms')) {
+    if (isset($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_nonce']), 'jobus_search_terms')) {
 
         // Check if the parameter is set in the URL
         if (isset($_GET[ $terms ])) {
             // Get the values of the parameter
-            $terms = $_GET[ $terms ];
+            $terms = sanitize_text_field( $_GET[ $terms ] );
 
             // If there's only one value, convert it to an array for consistency
             if (!is_array($terms)) {
@@ -556,7 +556,7 @@ function jobus_search_terms ($terms)
 /**
  * Jobus search meta
  */
-function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
+function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ]): array
 {
 
     $sidebar_widgets = jobus_opt($sidebar_widget_id);
@@ -595,7 +595,7 @@ function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_w
 
                     if ($key < 1) {
                         $job_meta_query[ $item ] = array(
-                            'key' => $meta_page_id, // Replace with your actual meta-key for job-type
+                            'key' => $meta_page_id, // Replace it with your actual meta-key for a job-type
                             'value' => $value,
                             'compare' => 'LIKE',
                         );
@@ -603,12 +603,11 @@ function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_w
 
                     if ($item < 1) {
                         $job_meta_query[ $key ] = array(
-                            'key' => $meta_page_id, // Replace with your actual meta-key for job-type
+                            'key' => $meta_page_id, // Replace it with your actual meta-key for a job-type
                             'value' => $value,
                             'compare' => 'LIKE',
                         );
                     }
-
                 }
             }
         }
@@ -774,14 +773,14 @@ if ( !function_exists('jobus_social_share_icons') ) {
      *
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobus_social_share_icons ($class = 'style-none d-flex align-items-center') {
-        $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
+    function jobus_social_share_icons (string $class = 'style-none d-flex align-items-center'): void
+    {
         ?>
         <ul class="<?php echo esc_attr($class) ?>">
             <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobus'); ?></li>
-            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobus'); ?>"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="https://www.linkedin.com/share?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobus'); ?>"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://twitter.com/intent/tweet?url=<?php echo esc_url($postUrl); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobus'); ?>"><i class="bi bi-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobus'); ?>"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobus'); ?>"><i class="bi bi-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobus'); ?>"><i class="bi bi-twitter"></i></a></li>
         </ul>
         <?php
     }
@@ -828,9 +827,7 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
         );
 
         // Move custom icons to the top of the list.
-        $icons = array_reverse( $icons );
-
-        return $icons;
+        return array_reverse( $icons );
     }
 
     add_filter( 'csf_field_icon_add_icons', 'jobus_cs_bootstrap_icons' );
@@ -838,19 +835,18 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
 
 
-function jobus_posts_count($post_type) {
+function jobus_posts_count($post_type): string
+{
 
     $total_posts = wp_count_posts($post_type);
-    $total_posts = number_format_i18n($total_posts->publish);
-
-    return $total_posts;
+    return number_format_i18n($total_posts->publish);
 
 }
 
 /**
- * Retrieve archive meta name based on the selected specification key.
+ * Retrieve archive meta-name based on the selected specification key.
  */
-function jobus_meta_company_spec_name( $step = 1 ){
+function jobus_meta_company_spec_name( $step = 1 ) {
 
     $meta_options               = get_option('jobus_opt');
     $company_archive_meta     = $meta_options['company_archive_meta_'.$step];
@@ -867,9 +863,9 @@ function jobus_meta_company_spec_name( $step = 1 ){
 
 
 /**
- * Retrieve archive meta name based on the selected specification key.
+ * Retrieve archive meta-name based on the selected specification key.
  */
-function jobus_meta_candidate_spec_name( $step = 1 ){
+function jobus_meta_candidate_spec_name( $step = 1 ) {
     
     $meta_options               = get_option('jobus_opt');
     $candidate_archive_meta     = $meta_options['candidate_archive_meta_'.$step];
@@ -907,10 +903,6 @@ if ( ! function_exists( 'jobus_rtl') ) {
     }
 }
 
-
-
-
-
 function jobus_track_candidate_views(int $candidate_id): void
 {
 
@@ -931,7 +923,7 @@ function jobus_track_candidate_views(int $candidate_id): void
     // Mark that the user has viewed this post.
     update_user_meta($user_id, $user_viewed_key, '1');
 
-    // Track all-user views (excluding jobus_candidate role)
+    // Track all-user views (excluding a jobus_candidate role)
     if (!in_array('jobus_candidate', (array) $user->roles)) {
         $all_user_view_count = get_post_meta($candidate_id, 'all_user_view_count', true);
         $all_user_view_count = empty($all_user_view_count) ? 0 : intval($all_user_view_count);

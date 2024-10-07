@@ -138,8 +138,8 @@ if (!empty($result_ids)) {
 }
 
 $search_type = isset($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
-if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty($_GET[ 'company_ids' ])) {
-    $args[ 'post__in' ] = explode(',', $_GET[ 'company_ids' ] ?? '');
+if ($search_type == 'company_search' && !empty($_GET[ 'company_ids' ])) {
+    $args[ 'post__in' ] = explode(',', sanitize_text_field( $_GET['company_ids']) ?? '');
 }
 
 $candidate_query = new WP_Query($args);

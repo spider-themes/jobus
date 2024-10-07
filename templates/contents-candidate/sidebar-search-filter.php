@@ -48,7 +48,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $candidate_specifications = jobus_get_specs_options('candidate_specifications');
                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
-
                         if (!empty ($_GET[ 'post_type' ] ?? '' == 'candidate')) {
                             if (!empty ($_GET[ $widget_name ])) {
                                 $is_collapsed_show = 'collapse show';
