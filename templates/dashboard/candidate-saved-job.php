@@ -1,5 +1,5 @@
 <?php
-// Check if the logged-in user has the 'jobly_candidate' role
+// Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
 ?>
 
@@ -74,7 +74,7 @@ $user = wp_get_current_user();
                 'menu_class'        => 'style-none',
                 'fallback_cb'       => false,
                 'depth'             => 1,
-                'walker'            => new \Jobly\Classes\Nav_Walker(),
+                'walker'            => new \Jobus\Classes\Nav_Walker(),
             ]);
         }
         ?>

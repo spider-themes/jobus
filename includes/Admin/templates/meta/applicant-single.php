@@ -15,7 +15,7 @@ $candidate_cv = esc_attr( get_post_meta( $post->ID, 'candidate_cv', true ) );
 $candidate_cv_url = $candidate_cv ? wp_get_attachment_url($candidate_cv) : '';
 
 // Function to format file size
-function jobly_job_application_format_size_units($bytes): string
+function jobus_job_application_format_size_units($bytes): string
 {
     if ($bytes >= 1048576) {
         $bytes = number_format($bytes / 1048576, 2) . ' MB';
@@ -37,12 +37,12 @@ $file_size = '';
 if ($candidate_cv_url) {
     $file_path = get_attached_file($candidate_cv);
     if (file_exists($file_path)) {
-        $file_size = jobly_job_application_format_size_units(filesize($file_path));
+        $file_size = jobus_job_application_format_size_units(filesize($file_path));
     }
 }
 ?>
 
-<div class="jobly-application-container jobly-clearfix">
+<div class="jobus-application-container jobus-clearfix">
 
     <div class="applicant-image-details">
         <div class="applicant-image">

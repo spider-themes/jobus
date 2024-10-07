@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+$meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
 ?>
 <div class="col-xl-3 col-lg-4">
@@ -24,7 +24,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 <input type="hidden" name="post_type" value="job"/>
 
                 <?php
-                $filter_widgets = jobly_opt('job_sidebar_widgets');
+                $filter_widgets = jobus_opt('job_sidebar_widgets');
 
                 if (isset($filter_widgets) && is_array($filter_widgets)) {
                     foreach ($filter_widgets as $index => $widget) {
@@ -81,9 +81,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                     $modifiedVal = strtolower($modifiedSelect);
 
-                                                    $meta_value_count = jobly_count_meta_key_usage('job', 'jobly_meta_options', $modifiedVal);
+                                                    $meta_value_count = jobus_count_meta_key_usage('job', 'jobus_meta_options', $modifiedVal);
                                                     if ($meta_value_count > 0) {
-                                                        $searched_val = jobly_search_terms($widget_name);
+                                                        $searched_val = jobus_search_terms($widget_name);
                                                         $selected_val = $searched_val[0] ?? $modifiedVal;
                                                         $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
                                                         ?>
@@ -111,9 +111,9 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $opt_val = strtolower($modifiedValues);
 
                                                     // Get the count for the current meta value
-                                                    $meta_value_count = jobly_count_meta_key_usage('job', 'jobly_meta_options', $opt_val);
+                                                    $meta_value_count = jobus_count_meta_key_usage('job', 'jobus_meta_options', $opt_val);
                                                     if ($meta_value_count > 0) {
-                                                        $searched_opt = jobly_search_terms($widget_name);
+                                                        $searched_opt = jobus_search_terms($widget_name);
                                                         $check_status = array_search($opt_val, $searched_opt);
                                                         ?>
                                                         <li>
@@ -157,8 +157,8 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                             $min_values = min($all_values);
                                             $max_values = max($all_values);
 
-                                            $min_salary = jobly_search_terms($widget_name)[0] ?? $min_values;
-                                            $max_salary = jobly_search_terms($widget_name)[1] ?? $max_values;
+                                            $min_salary = jobus_search_terms($widget_name)[0] ?? $min_values;
+                                            $max_salary = jobus_search_terms($widget_name)[1] ?? $max_values;
                                             ?>
 
                                             <div class="salary-slider"
@@ -212,7 +212,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                 }
 
                 // Retrieve the sortable field value
-                $sortables = jobly_opt('is_sortable_job_sidebar');
+                $sortables = jobus_opt('is_sortable_job_sidebar');
 
                 // Check if the sortable field value is not empty
                 if ( ! empty( $sortables ) ) {
@@ -248,7 +248,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         <div class="main-body">
                                             <select class="nice-select" name="job_cats[]">
                                                 <?php
-                                                $searched_opt = jobly_search_terms('job_cats');
+                                                $searched_opt = jobus_search_terms('job_cats');
                                                 foreach ($term_cats as $key => $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
@@ -290,7 +290,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                         <div class="main-body">
                                             <select class="nice-select" name="job_locations[]">
                                                 <?php
-                                                $searched_opt = jobly_search_terms('job_locations');
+                                                $searched_opt = jobus_search_terms('job_locations');
                                                 foreach ($term_loc as $key => $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
@@ -330,7 +330,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                 'taxonomy' => 'job_tag',
                                             ));
                                             if (!empty($term_tags)) {
-                                                $searched_opt = jobly_search_terms('job_tags');
+                                                $searched_opt = jobus_search_terms('job_tags');
                                                 foreach ($term_tags as $term) {
                                                     $check_status = array_search($term->slug, $searched_opt);
                                                     ?>

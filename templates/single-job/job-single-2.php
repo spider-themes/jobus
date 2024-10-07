@@ -2,10 +2,10 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+$meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 ?>
 
-<section class="job-details jobly_job_details_2 style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
+<section class="job-details jobus_job_details_2 style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-xxl-9 col-xl-10 m-auto">
@@ -13,7 +13,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                     <?php
 
                     // Retrieve the repeater field configurations from settings options
-                    $specifications = jobly_opt('job_specifications');
+                    $specifications = jobus_opt('job_specifications');
                     if (is_array($specifications)) {
                         ?>
                         <div class="job-meta-data-two d-flex flex-wrap justify-content-center justify-content-lg-between style-none">
@@ -24,7 +24,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                 $meta_key = $field['meta_key'] ?? '';
 
                                 // Get the stored meta-values
-                                $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+                                $meta_options = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                                 if (!empty($meta_options[$meta_key])) {
                                     ?>
@@ -95,30 +95,30 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                         if (!empty($has_applied)) {
                             ?>
                             <a href="javascript:void(0)" class="btn-one w-100 mt-25 disabled">
-                                <?php esc_html_e('Already Applied', 'jobly'); ?>
+                                <?php esc_html_e('Already Applied', 'jobus'); ?>
                             </a>
                             <?php
                         } else {
                             // Show the apply button if the user has not applied yet
                             if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
                                 <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one w-100 mt-25">
-                                    <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                    <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
                                 <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
-                                    <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                    <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php }
                         }
                     } else {
                         if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
                             <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one w-100 mt-25">
-                                <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         } else { ?>
                             <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
-                                <?php esc_html_e('Apply Now', 'jobly'); ?>
+                                <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         }

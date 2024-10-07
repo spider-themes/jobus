@@ -42,7 +42,7 @@ function Edit( { attributes, setAttributes } ) {
             </InspectorControls>
 
             <div { ...blockProps }>
-                [jobly_candidate_archive]
+                [jobus_candidate_archive]
             </div>
         </Fragment>
     );

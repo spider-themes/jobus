@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$job_archive_layout = $jobly_job_archive_layout ?? jobly_opt('job_archive_layout');
+$job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'list';
@@ -32,10 +32,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark"><?php echo jobly_posts_count('job') ?></span>
+                            <span class="text-dark"><?php echo jobus_posts_count('job') ?></span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
-                            echo esc_html(sprintf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobus'), jobly_posts_count('job') ));
+                            echo esc_html(sprintf(_n('job found', 'jobs found', jobus_posts_count('job'), 'jobus'), jobus_posts_count('job') ));
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
@@ -85,9 +85,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     </a>
                                                 <?php endif; ?>
                                                 <div class="split-box1">
-                                                    <?php if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_1')) : ?>
+                                                    <?php if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1')) : ?>
                                                         <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                            <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
+                                                            <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
                                                         </a>
                                                     <?php endif; ?>
                                                     <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
@@ -112,11 +112,11 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 	                                        }
 	                                        ?>
                                             <div class="job-salary">
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
+                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
+                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
                                                 <?php endif; ?>
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="expertise">. <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></span>
+                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
+                                                    <span class="expertise">. <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -151,19 +151,19 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
                                                 </a>
                                             <?php endif; ?>
-                                            <?php if (jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_1')) : ?>
+                                            <?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) : ?>
                                                 <div>
                                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_1') ?>
+                                                        <?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ?>
                                                     </a>
                                                 </div>
                                             <?php endif; ?>
                                             <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
                                                 <?php the_title('<h3>', '</h3>') ?>
                                             </a>
-                                            <?php if (jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2')) : ?>
+                                            <?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) : ?>
                                                 <div class="job-salary">
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options', 'job_archive_meta_2') ?></span>
+                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2') ?></span>
                                                 </div>
                                             <?php endif; ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">
@@ -199,9 +199,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count($job_post); ?>
+                        <?php jobus_showing_post_result_count($job_post); ?>
 
-                        <?php jobly_pagination($job_post); ?>
+                        <?php jobus_pagination($job_post); ?>
 
                     </div>
 

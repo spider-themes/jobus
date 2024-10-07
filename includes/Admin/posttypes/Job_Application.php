@@ -35,15 +35,11 @@ class Job_Application {
     public function admin_single_subtitle($post) {
         if ($post->post_type === 'job_application') {
             $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
-
-            echo '<pre>';
-            print_r($candidate_ip);
-            echo '</pre>';
             ?>
-            <p class="jobly-application-submission-info">
-                <span class="jobly-application-submission-date">
+            <p class="jobus-application-submission-info">
+                <span class="jobus-application-submission-date">
                     <?php esc_html_e('Submitted On ', 'jobus'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
-                <span class="jobly-applicant-ip"><?php esc_html_e('from IP', 'jobus'); ?> <?php echo esc_html($candidate_ip); ?></span>
+                <span class="jobus-applicant-ip"><?php esc_html_e('from IP', 'jobus'); ?> <?php echo esc_html($candidate_ip); ?></span>
             </p>
             <?php
         }

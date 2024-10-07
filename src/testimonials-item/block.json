@@ -3,8 +3,8 @@
   "name": "jobly/testimonials-item",
   "parent": ["jobly/group-testimonials"],
   "version": "1.0.0",
-  "title": "Testimonial Item (Jobly)",
-  "description": "Jobly Testimonials. A block that allows you to add a client review to your page.",
+  "title": "Testimonial Item (Jobus)",
+  "description": "Jobus Testimonials. A block that allows you to add a client review to your page.",
   "icon": "dashicons-testimonial",
   "category": "jobus-blocks",
   "supports": {
@@ -33,9 +33,9 @@
       "default": "5"
     }
   },
-  "textdomain": "jobly",
+  "textdomain": "jobus",
   "keywords": [
-    "jobly",
+    "jobus",
     "Testimonials Item",
     "Review Item"
   ],

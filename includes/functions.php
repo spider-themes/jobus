@@ -11,10 +11,10 @@ if ( ! function_exists( 'jobus_rtl') ) {
 }
 
 // A Custom function for [ SETTINGS ]
-if (!function_exists('jobly_opt')) {
-    function jobly_opt ($option = '', $default = null)
+if (!function_exists('jobus_opt')) {
+    function jobus_opt ($option = '', $default = null)
     {
-        $options = get_option('jobly_opt'); // Attention: Set your unique id of the framework
+        $options = get_option('jobus_opt'); // Attention: Set your unique id of the framework
 
         return (isset($options[ $option ])) ? $options[ $option ] : $default;
     }
@@ -22,17 +22,17 @@ if (!function_exists('jobly_opt')) {
 
 
 // Custom function for [ META ]
-if (!function_exists('jobly_meta')) {
-    function jobly_meta ($option = '', $default = null)
+if (!function_exists('jobus_meta')) {
+    function jobus_meta ($option = '', $default = null)
     {
-        $options = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+        $options = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
         return (isset($options[ $option ])) ? $options[ $option ] : $default;
     }
 }
 
 
 /**
- * Jobly Custom Template Part
+ * Jobus Custom Template Part
  * @return array
  */
 if (!function_exists('jobus_get_template_part')) {
@@ -57,7 +57,7 @@ if (!function_exists('jobus_get_template_part')) {
 
 
 /**
- * Get template part implementation for jobly.
+ * Get template part implementation for jobus.
  * Looks at the theme directory first
  *
  * @param $template_name
@@ -267,7 +267,7 @@ if (!function_exists('jobus_company_post_list')) {
 
 function jobus_get_specs ($settings_id = 'job_specifications')
 {
-    $specifications = jobly_opt($settings_id);
+    $specifications = jobus_opt($settings_id);
 
     $specs = [];
     if (is_array($specifications)) {
@@ -302,7 +302,7 @@ function jobus_get_specs ($settings_id = 'job_specifications')
 if (!function_exists('jobus_get_specs_options')) {
     function jobus_get_specs_options ($settings_id = 'job_specifications')
     {
-        $specifications = jobly_opt($settings_id);
+        $specifications = jobus_opt($settings_id);
 
         $specs = [];
         if (is_array($specifications)) {
@@ -318,14 +318,14 @@ if (!function_exists('jobus_get_specs_options')) {
 }
 
 
-function jobly_get_meta_name($meta_parent_id = '', $settings_key = '')
+function jobus_get_meta_name($meta_parent_id = '', $settings_key = '')
 {
 
     // Get the meta options for the specified meta parent ID
     $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
 
     // Retrieve the meta name based on the settings key
-    $meta_value = $meta_options[jobly_opt($settings_key)] ?? '';
+    $meta_value = $meta_options[jobus_opt($settings_key)] ?? '';
 
     if (is_array($meta_value)) {
         $meta_name = reset($meta_value);
@@ -343,13 +343,13 @@ function jobly_get_meta_name($meta_parent_id = '', $settings_key = '')
  *
  * @return string The formatted and sanitized job attribute value.
  */
-if (!function_exists('jobly_get_meta_attributes')) {
-    function jobly_get_meta_attributes( $meta_parent_id = '', $settings_key = '' )
+if (!function_exists('jobus_get_meta_attributes')) {
+    function jobus_get_meta_attributes( $meta_parent_id = '', $settings_key = '' )
     {
         $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
         $metaValueKey = $meta_options[ $settings_key ] ?? '';
         if (empty($metaValueKey)) {
-            $metaValueKey = $meta_options[ jobly_opt($settings_key) ] ?? '';
+            $metaValueKey = $meta_options[ jobus_opt($settings_key) ] ?? '';
         }
 
         $meta_value = is_array($metaValueKey) ? $metaValueKey : [];
@@ -367,7 +367,7 @@ if (!function_exists('jobly_get_meta_attributes')) {
 
 
 
-function jobly_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
+function jobus_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
 {
     $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
     $metaValueKey = $meta_options[ $settings_key ] ?? '';
@@ -387,8 +387,8 @@ function jobly_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
 
 
 
-if ( ! function_exists( 'jobly_count_meta_key_usage' ) ) {
-    function jobly_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = '')
+if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
+    function jobus_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = ''): int
     {
         $args = array(
             'post_type' => $post_type,
@@ -409,11 +409,11 @@ if ( ! function_exists( 'jobly_count_meta_key_usage' ) ) {
 
 
 /**
- * Jobly job pagination
+ * Jobus job pagination
  */
 
-if ( ! function_exists( 'jobly_pagination' ) ) {
-    function jobly_pagination ($query, $class = 'jobly_pagination', $prev = '', $next = '' )
+if ( ! function_exists( 'jobus_pagination' ) ) {
+    function jobus_pagination($query, $class = 'jobus_pagination', $prev = '', $next = '' ): void
     {
 
         // Default values for prev and next links
@@ -448,27 +448,27 @@ if ( ! function_exists( 'jobly_pagination' ) ) {
 
 
 /**
- * Jobly pagination
+ * Jobus pagination
  */
-if ( !function_exists('jobly_job_archive_query') ) {
-    function jobly_job_archive_query ($query)
+if ( !function_exists('jobus_job_archive_query') ) {
+    function jobus_job_archive_query($query): void
     {
 
         if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
-            $query->set('posts_per_page', jobly_opt('job_posts_per_page'));
+            $query->set('posts_per_page', jobus_opt('job_posts_per_page'));
         }
 
         if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
-            $query->set('posts_per_page', jobly_opt('company_posts_per_page'));
+            $query->set('posts_per_page', jobus_opt('company_posts_per_page'));
         }
 
         if ($query->is_main_query() && !is_admin() && is_post_type_archive('candidate')) {
-            $query->set('posts_per_page', jobly_opt('candidate_posts_per_page'));
+            $query->set('posts_per_page', jobus_opt('candidate_posts_per_page'));
         }
 
     }
 
-    add_action('pre_get_posts', 'jobly_job_archive_query');
+    add_action('pre_get_posts', 'jobus_job_archive_query');
 }
 
 
@@ -477,8 +477,8 @@ if ( !function_exists('jobly_job_archive_query') ) {
  * @param $company_id
  * @return int
  */
-if (!function_exists('jobly_get_selected_company_count')) {
-    function jobly_get_selected_company_count ($company_id, $link = true)
+if (!function_exists('jobus_get_selected_company_count')) {
+    function jobus_get_selected_company_count ($company_id, $link = true)
     {
         $args = array(
             'post_type' => 'job',
@@ -486,7 +486,7 @@ if (!function_exists('jobly_get_selected_company_count')) {
             'meta_query'     => array(
                 'relation' => 'AND', // Optional, defaults to "AND
                 array(
-                    'key'   => 'jobly_meta_options',
+                    'key'   => 'jobus_meta_options',
                     'value' => $company_id,
                     'compare' => 'LIKE',
                 ),
@@ -527,12 +527,12 @@ if (!function_exists('jobly_get_selected_company_count')) {
 /**
  * Get the job search terms
  */
-function jobly_search_terms ($terms)
+function jobus_search_terms ($terms)
 {
     $result = [];
 
     // Verify the nonce before processing the request
-    if (isset($_GET['jobly_nonce']) && wp_verify_nonce($_GET['jobly_nonce'], 'jobly_search_terms')) {
+    if (isset($_GET['jobus_nonce']) && wp_verify_nonce($_GET['jobus_nonce'], 'jobus_search_terms')) {
 
         // Check if the parameter is set in the URL
         if (isset($_GET[ $terms ])) {
@@ -554,12 +554,12 @@ function jobly_search_terms ($terms)
 
 
 /**
- * Jobly search meta
+ * Jobus search meta
  */
-function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
+function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ])
 {
 
-    $sidebar_widgets = jobly_opt($sidebar_widget_id);
+    $sidebar_widgets = jobus_opt($sidebar_widget_id);
     if (isset($sidebar_widgets) && is_array($sidebar_widgets)) {
         foreach ( $sidebar_widgets as $widget ) {
             $widgets[] = $widget[ 'widget_name' ];
@@ -570,7 +570,7 @@ function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_w
 
     if (is_array($widgets)) {
 
-        $filter_widgets = jobly_opt($sidebar_widget_id);
+        $filter_widgets = jobus_opt($sidebar_widget_id);
         $search_widgets = [];
 
         if (isset($filter_widgets) && is_array($filter_widgets)) {
@@ -584,7 +584,7 @@ function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_w
         foreach ( $widgets as $item => $job_value ) {
 
             if (!in_array($job_value, $search_widgets)) {
-                $job_type_meta = jobly_search_terms($job_value);
+                $job_type_meta = jobus_search_terms($job_value);
 
 
                 foreach ( $job_type_meta as $key => $value ) {
@@ -619,9 +619,9 @@ function jobly_all_search_meta ($meta_page_id = 'jobly_meta_options', $sidebar_w
 }
 
 /**
- * Jobly meta & taxonomy arguments
+ * Jobus meta & taxonomy arguments
  */
-function jobly_meta_taxo_arguments ($data = '', $post_type = 'job', $taxonomy = '', $terms = [])
+function jobus_meta_taxo_arguments ($data = '', $post_type = 'job', $taxonomy = '', $terms = [])
 {
     $data_args = [];
     if ($data == 'taxonomy') {
@@ -647,9 +647,9 @@ function jobly_meta_taxo_arguments ($data = '', $post_type = 'job', $taxonomy = 
 }
 
 /**
- * jobly search meta & taxonomy queries merge
+ * jobus search meta & taxonomy queries merge
  */
-function jobly_merge_queries_and_get_ids (...$queries)
+function jobus_merge_queries_and_get_ids (...$queries)
 {
     $combined_post_ids = array();
 
@@ -676,7 +676,7 @@ function jobly_merge_queries_and_get_ids (...$queries)
 /**
  * Get the post IDs of all the range fields
  */
-function jobly_all_range_field_value ()
+function jobus_all_range_field_value ()
 {
     // All the post IDs of the 'job' post type
     $args = array(
@@ -691,9 +691,9 @@ function jobly_all_range_field_value ()
     if (!empty ($posts)) {
 
         foreach ( $posts as $post ) {
-            $meta = get_post_meta($post->ID, 'jobly_meta_options', true);
+            $meta = get_post_meta($post->ID, 'jobus_meta_options', true);
 
-            $filter_widgets = jobly_opt('job_sidebar_widgets');
+            $filter_widgets = jobus_opt('job_sidebar_widgets');
             $search_widgets = [];
 
             if (isset($filter_widgets) && is_array($filter_widgets)) {
@@ -724,14 +724,14 @@ function jobly_all_range_field_value ()
 
 
 
-if (!function_exists('jobly_showing_post_result_count')) {
+if (!function_exists('jobus_showing_post_result_count')) {
     /**
      * Display the showing post-result count
      *
      * @param WP_Query $query The current WP_Query object.
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobly_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
+    function jobus_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
     {
         if (!$query->have_posts()) {
             echo '<p class="' . esc_attr($class) . '">' . esc_html__('No results found', 'jobus') . '</p>';
@@ -768,13 +768,13 @@ if (!function_exists('jobly_showing_post_result_count')) {
 }
 
 
-if ( !function_exists('jobly_social_share_icons') ) {
+if ( !function_exists('jobus_social_share_icons') ) {
     /**
      * Display the social share icons
      *
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobly_social_share_icons ($class = 'style-none d-flex align-items-center') {
+    function jobus_social_share_icons ($class = 'style-none d-flex align-items-center') {
         $postUrl = 'http' . (isset($_SERVER[ 'HTTPS' ]) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
         ?>
         <ul class="<?php echo esc_attr($class) ?>">
@@ -792,9 +792,9 @@ if ( !function_exists('jobly_social_share_icons') ) {
 /**
  * Get custom icon [Elegant Icons]
  */
-if ( ! function_exists( 'jobly_cs_bootstrap_icons' ) ) {
+if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
-    function jobly_cs_bootstrap_icons( $icons = [] ) {
+    function jobus_cs_bootstrap_icons( $icons = [] ) {
         // Adding new icons
         $icons[] = array(
             'title' => esc_html__('Bootstrap Icons', 'jobus'),
@@ -833,12 +833,12 @@ if ( ! function_exists( 'jobly_cs_bootstrap_icons' ) ) {
         return $icons;
     }
 
-    add_filter( 'csf_field_icon_add_icons', 'jobly_cs_bootstrap_icons' );
+    add_filter( 'csf_field_icon_add_icons', 'jobus_cs_bootstrap_icons' );
 }
 
 
 
-function jobly_posts_count($post_type) {
+function jobus_posts_count($post_type) {
 
     $total_posts = wp_count_posts($post_type);
     $total_posts = number_format_i18n($total_posts->publish);
@@ -850,9 +850,9 @@ function jobly_posts_count($post_type) {
 /**
  * Retrieve archive meta name based on the selected specification key.
  */
-function jobly_meta_company_spec_name( $step = 1 ){
+function jobus_meta_company_spec_name( $step = 1 ){
 
-    $meta_options               = get_option('jobly_opt');
+    $meta_options               = get_option('jobus_opt');
     $company_archive_meta     = $meta_options['company_archive_meta_'.$step];
     $company_specifications   = $meta_options['company_specifications'];
 
@@ -869,9 +869,9 @@ function jobly_meta_company_spec_name( $step = 1 ){
 /**
  * Retrieve archive meta name based on the selected specification key.
  */
-function jobly_meta_candidate_spec_name( $step = 1 ){
+function jobus_meta_candidate_spec_name( $step = 1 ){
     
-    $meta_options               = get_option('jobly_opt');
+    $meta_options               = get_option('jobus_opt');
     $candidate_archive_meta     = $meta_options['candidate_archive_meta_'.$step];
     $candidate_specifications   = $meta_options['candidate_specifications'];
 
@@ -885,18 +885,18 @@ function jobly_meta_candidate_spec_name( $step = 1 ){
 }
 
 
-add_action( 'phpmailer_init', 'jobly_phpmailer_init' );
-function jobly_phpmailer_init( $phpmailer ) {
+add_action( 'phpmailer_init', 'jobus_phpmailer_init' );
+function jobus_phpmailer_init( $phpmailer ) {
     $phpmailer->isSMTP();
-    $phpmailer->Host = jobly_opt('smtp_host'); // your SMTP server
-    $phpmailer->Port = jobly_opt('smtp_port'); // SSL
+    $phpmailer->Host = jobus_opt('smtp_host'); // your SMTP server
+    $phpmailer->Port = jobus_opt('smtp_port'); // SSL
     $phpmailer->CharSet = "utf-8";
-    $phpmailer->SMTPAuth = jobly_opt('smtp_authentication');
-    $phpmailer->Username = jobly_opt('smtp_username');
-    $phpmailer->Password =  jobly_opt('smtp_password');
-    $phpmailer->SMTPSecure = jobly_opt('smtp_encryption');
-    $phpmailer->From       = jobly_opt('smtp_from_mail_address');
-    $phpmailer->FromName   = jobly_opt('smtp_from_name');
+    $phpmailer->SMTPAuth = jobus_opt('smtp_authentication');
+    $phpmailer->Username = jobus_opt('smtp_username');
+    $phpmailer->Password =  jobus_opt('smtp_password');
+    $phpmailer->SMTPSecure = jobus_opt('smtp_encryption');
+    $phpmailer->From       = jobus_opt('smtp_from_mail_address');
+    $phpmailer->FromName   = jobus_opt('smtp_from_name');
 
     return $phpmailer;
 }
@@ -911,7 +911,7 @@ if ( ! function_exists( 'jobus_rtl') ) {
 
 
 
-function jobly_track_candidate_views(int $candidate_id): void
+function jobus_track_candidate_views(int $candidate_id): void
 {
 
     // Check if the user is logged in
@@ -923,7 +923,7 @@ function jobly_track_candidate_views(int $candidate_id): void
     $user_id = $user->ID;
 
     // Check if the user has already viewed this candidate's post.
-    $user_viewed_key = 'jobly_user_viewed_' . $user_id . '_' . $candidate_id;
+    $user_viewed_key = 'jobus_user_viewed_' . $user_id . '_' . $candidate_id;
     if (get_user_meta($user_id, $user_viewed_key, true)) {
         return; // If the user has already viewed the post, don't count again.
     }
@@ -931,8 +931,8 @@ function jobly_track_candidate_views(int $candidate_id): void
     // Mark that the user has viewed this post.
     update_user_meta($user_id, $user_viewed_key, '1');
 
-    // Track all-user views (excluding jobly_candidate role)
-    if (!in_array('jobly_candidate', (array) $user->roles)) {
+    // Track all-user views (excluding jobus_candidate role)
+    if (!in_array('jobus_candidate', (array) $user->roles)) {
         $all_user_view_count = get_post_meta($candidate_id, 'all_user_view_count', true);
         $all_user_view_count = empty($all_user_view_count) ? 0 : intval($all_user_view_count);
         $all_user_view_count++;
@@ -940,7 +940,7 @@ function jobly_track_candidate_views(int $candidate_id): void
     }
 
     // Track employer-specific views
-    if (in_array('jobly_employer', (array) $user->roles)) {
+    if (in_array('jobus_employer', (array) $user->roles)) {
         $employer_view_count = get_post_meta($candidate_id, 'employer_view_count', true);
         $employer_view_count = empty($employer_view_count) ? 0 : intval($employer_view_count);
         $employer_view_count++;

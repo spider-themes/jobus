@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package jobly
+ * @package jobus
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -16,20 +16,20 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-$meta_args = [ 'args' => jobly_meta_taxo_arguments('meta', 'candidate', '', jobly_all_search_meta()) ];
-$taxonomy_args1 = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'candidate', 'candidate_cat', jobly_search_terms('candidate_cats')) ];
-$taxonomy_args2 = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'candidate', 'candidate_tag', jobly_search_terms('candidate_tags')) ];
+$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'candidate', '', jobus_all_search_meta()) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'candidate', 'candidate_cat', jobus_search_terms('candidate_cats')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'candidate', 'candidate_tag', jobus_search_terms('candidate_tags')) ];
 
 if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
-    $result_ids = jobly_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
+    $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
 } else {
-    $result_ids = jobly_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2);
+    $result_ids = jobus_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2);
 }
 
 $args = [
     'post_type' => 'candidate',
     'post_status' => 'publish',
-    'posts_per_page' => jobly_opt('candidate_posts_per_page'),
+    'posts_per_page' => jobus_opt('candidate_posts_per_page'),
     'paged' => $paged,
     'orderby' => $selected_order_by,
     'order' => $selected_order,
@@ -40,7 +40,7 @@ if (!empty(get_query_var('s'))) {
 }
 
 // Range fields value
-$filter_widgets = jobly_opt('candidate_sidebar_widgets');
+$filter_widgets = jobus_opt('candidate_sidebar_widgets');
 $search_widgets = [];
 
 if (isset($filter_widgets) && is_array($filter_widgets)) {
@@ -54,8 +54,8 @@ if (isset($filter_widgets) && is_array($filter_widgets)) {
 $min_price = [];
 $price_ranged = [];
 foreach ( $search_widgets as $key => $input ) {
-    $min_price = jobly_search_terms($input)[ 0 ] ?? '';
-    $max_price = jobly_search_terms($input)[ 1 ] ?? '';
+    $min_price = jobus_search_terms($input)[ 0 ] ?? '';
+    $max_price = jobus_search_terms($input)[ 1 ] ?? '';
     $price_ranged[ $input ] = [ $min_price, $max_price ];
 }
 
@@ -73,7 +73,7 @@ foreach ( $price_ranged as $key => $values ) {
  *
  */
 
-$allSliderValues = jobly_all_range_field_value();
+$allSliderValues = jobus_all_range_field_value();
 
 if (!empty($allSliderValues)) {
     $simplifiedSliderValues = [];
@@ -144,7 +144,7 @@ if ($search_type == 'company_search' && isset($_GET[ 'company_ids' ]) && !empty(
 
 $candidate_query = new WP_Query($args);
 
-$candidate_archive_layout = $jobly_candidate_archive_layout ?? jobly_opt('candidate_archive_layout');
+$candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-'.$candidate_archive_layout.'.php';

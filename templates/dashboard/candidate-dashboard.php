@@ -1,14 +1,14 @@
 <?php
 
-wp_enqueue_style('jobly-frontend-dashboard');
+wp_enqueue_style('jobus-frontend-dashboard');
 
-// Check if the logged-in user has the 'jobly_candidate' role
+// Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
 
 $applicants = [];
 $candidates = [];
 
-if (in_array('jobly_candidate', $user->roles)) {
+if (in_array('jobus_candidate', $user->roles)) {
 
     $applicants = get_posts(
         array(
@@ -112,7 +112,7 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                 'menu_class'        => 'style-none',
                 'fallback_cb'       => false,
                 'depth'             => 1,
-                'walker'            => new \Jobly\Classes\Nav_Walker(),
+                'walker'            => new \Jobus\Classes\Nav_Walker(),
             ]);
         }
         ?>
@@ -195,7 +195,7 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
 
 
         <!--Dashboard Candidate -->
-        <h2 class="main-title"><?php esc_html_e('Dashboard', 'jobly'); ?></h2>
+        <h2 class="main-title"><?php esc_html_e('Dashboard', 'jobus'); ?></h2>
         <div class="row">
 
 
@@ -223,11 +223,11 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                     <div class="dash-card-one bg-white border-30 position-relative mb-15">
                         <div class="d-sm-flex align-items-center justify-content-between">
                             <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo JOBLY_IMG . '/dashboard/icons/total_visitor.svg' ?>" alt="<?php esc_attr_e('Total Visitor', 'jobly'); ?>" class="lazy-img">
+                                <img src="<?php echo JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ?>" alt="<?php esc_attr_e('Total Visitor', 'jobus'); ?>" class="lazy-img">
                             </div>
                             <div class="order-sm-0">
                                 <div class="value fw-500"><?php echo esc_html($all_user_view_count) ?></div>
-                                <span><?php esc_html_e('Total Visitor', 'jobly'); ?></span>
+                                <span><?php esc_html_e('Total Visitor', 'jobus'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -242,11 +242,11 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                     <div class="dash-card-one bg-white border-30 position-relative mb-15">
                         <div class="d-sm-flex align-items-center justify-content-between">
                             <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo JOBLY_IMG . '/dashboard/icons/view.svg' ?>" alt="<?php esc_attr_e('View', 'jobly'); ?>" class="lazy-img">
+                                <img src="<?php echo JOBUS_IMG . '/dashboard/icons/view.svg' ?>" alt="<?php esc_attr_e('View', 'jobus'); ?>" class="lazy-img">
                             </div>
                             <div class="order-sm-0">
                                 <div class="value fw-500"><?php echo esc_html($employer_view_count) ?></div>
-                                <span><?php esc_html_e('Views', 'jobly'); ?></span>
+                                <span><?php esc_html_e('Views', 'jobus'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -260,11 +260,11 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                     <div class="dash-card-one bg-white border-30 position-relative mb-15">
                         <div class="d-sm-flex align-items-center justify-content-between">
                             <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo JOBLY_IMG . '/dashboard/icons/applied_job.svg' ?>" alt="" class="lazy-img">
+                                <img src="<?php echo JOBUS_IMG . '/dashboard/icons/applied_job.svg' ?>" alt="" class="lazy-img">
                             </div>
                             <div class="order-sm-0">
                                 <div class="value fw-500"><?php echo esc_html(count($applicants)) ?></div>
-                                <span><?php esc_html_e('Applied Job', 'jobly'); ?></span>
+                                <span><?php esc_html_e('Applied Job', 'jobus'); ?></span>
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
 
             <div class="col-xl-5 col-lg-6 d-flex">
                 <div class="recent-job-tab bg-white border-20 mt-30 w-100">
-                    <h4 class="dash-title-two"><?php esc_html_e('Recent Applied Job', 'jobly'); ?></h4>
+                    <h4 class="dash-title-two"><?php esc_html_e('Recent Applied Job', 'jobus'); ?></h4>
                     <div class="wrapper">
 
 
@@ -326,13 +326,13 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="<?php echo get_the_permalink($job_id) ?>" class="dropdown-item">
-                                                <?php esc_html_e('View Job', 'jobly'); ?>
+                                                <?php esc_html_e('View Job', 'jobus'); ?>
                                             </a>
                                         </li>
                                         <li><a class="dropdown-item" href="#">Archive</a></li>
                                         <li>
                                             <a href="#" class="dropdown-item delete-job" data-job-id="<?php echo esc_attr($job_id); ?>">
-                                                <?php esc_html_e('Delete', 'jobly'); ?>
+                                                <?php esc_html_e('Delete', 'jobus'); ?>
                                             </a>
                                         </li>
                                     </ul>

@@ -23,11 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 							<?php
 							// Widget for candidate meta data list
-							$filter_widgets = jobly_opt( 'candidate_sidebar_widgets' );
+							$filter_widgets = jobus_opt( 'candidate_sidebar_widgets' );
 
 							if ( is_array( $filter_widgets ) ) {
 
-								$searched_class_collapsed = jobly_search_terms( 'candidate_meta' );
+								$searched_class_collapsed = jobus_search_terms( 'candidate_meta' );
 
 								foreach ( $filter_widgets as $index => $widget ) {
 
@@ -68,10 +68,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 															$modifiedSelect = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 															$modifiedVal    = strtolower( $modifiedSelect );
 
-															$meta_value_count = jobly_count_meta_key_usage( 'candidate', 'jobly_meta_candidate_options', $modifiedVal );
+															$meta_value_count = jobus_count_meta_key_usage( 'candidate', 'jobus_meta_candidate_options', $modifiedVal );
 
 															if ( $meta_value_count > 0 ) {
-																$searched_val = jobly_search_terms( $widget_name );
+																$searched_val = jobus_search_terms( $widget_name );
 																$selected_val = $searched_val[0] ?? $modifiedVal;
 																$selected_val = $modifiedVal == $selected_val ? ' selected' : '';
 																?>
@@ -110,8 +110,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 													$min_values = min( $all_values );
 													$max_values = max( $all_values );
 
-													$min_salary = jobly_search_terms( $widget_name )[0] ?? $min_values;
-													$max_salary = jobly_search_terms( $widget_name )[1] ?? $max_values;
+													$min_salary = jobus_search_terms( $widget_name )[0] ?? $min_values;
+													$max_salary = jobus_search_terms( $widget_name )[1] ?? $max_values;
 													?>
                                                     <div class="main-body">
                                                         <div class="salary-slider"
@@ -167,10 +167,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 															$opt_val        = strtolower( $modifiedValues );
 
 															// Get the count for the current meta-value
-															$meta_value_count = jobly_count_meta_key_usage( 'candidate', 'jobly_meta_candidate_options', $opt_val );
+															$meta_value_count = jobus_count_meta_key_usage( 'candidate', 'jobus_meta_candidate_options', $opt_val );
 
 															if ( $meta_value_count > 0 ) {
-																$searched_opt = jobly_search_terms( $widget_name );
+																$searched_opt = jobus_search_terms( $widget_name );
 																$check_status = array_search( $opt_val, $searched_opt );
 																$check_status = $check_status !== false ? ' checked' : '';
 																?>
@@ -198,7 +198,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								}
 							}
 
-							if ( jobly_opt( 'is_candidate_widget_location' ) == true ) {
+							if ( jobus_opt( 'is_candidate_widget_location' ) == true ) {
 
 								$term_loc = get_terms( array(
 									'taxonomy'   => 'candidate_location',
@@ -212,7 +212,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'location', 'jobus' ); ?></div>
                                             <select class="nice-select" name="candidate_location[]">
 												<?php
-												$searched_opt = jobly_search_terms( 'candidate_location' );
+												$searched_opt = jobus_search_terms( 'candidate_location' );
 												foreach ( $term_loc as $key => $term ) {
 													$list_class   = $key > 3 ? ' class=hide' : '';
 													$check_status = array_search( $term->slug, $searched_opt );
@@ -231,7 +231,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							?>
 
 							<?php
-							if ( jobly_opt( 'is_candidate_widget_cat' ) == true ) {
+							if ( jobus_opt( 'is_candidate_widget_cat' ) == true ) {
 
 								$term_cats = get_terms( array(
 									'taxonomy'   => 'candidate_cat',
@@ -245,7 +245,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'Category', 'jobus' ); ?></div>
                                             <select class="nice-select" name="candidate_cats[]">
 												<?php
-												$searched_opt = jobly_search_terms( 'candidate_cats' );
+												$searched_opt = jobus_search_terms( 'candidate_cats' );
 												foreach ( $term_cats as $key => $term ) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';

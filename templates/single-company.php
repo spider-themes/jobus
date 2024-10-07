@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+$meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
 $website = $meta[ 'company_website' ] ?? '';
 $website_target = $website[ 'target' ] ?? '_self';
 ?>
@@ -36,7 +36,7 @@ $website_target = $website[ 'target' ] ?? '_self';
 
                                 <?php
                                 // Retrieve the repeater field configurations from settings options
-                                $specifications = jobly_opt('company_specifications');
+                                $specifications = jobus_opt('company_specifications');
                                 if ($specifications) {
 
                                     foreach ( $specifications as $field ) {
@@ -45,7 +45,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                         $meta_key = $field[ 'meta_key' ] ?? '';
 
                                         // Get the stored meta-values
-                                        $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                        $meta_options = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
 
                                         if (isset($meta_options[ $meta_key ])) {
                                             ?>
@@ -90,7 +90,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                     <?php
                                 }
 
-                                $social_icons = jobly_opt('jobly_social_icons');
+                                $social_icons = jobus_opt('jobus_social_icons');
                                 if (is_array($social_icons)) {
                                     ?>
                                     <li class="col-12">
@@ -113,7 +113,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 ?>
                             </ul>
 
-                            <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>"
+                            <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>"
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
                                 <?php esc_html_e('Posted Jobs', 'jobus'); ?>
                             </a>
@@ -128,7 +128,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                         <?php the_content(); ?>
 
                         <nav class="share-option mt-60">
-                            <?php jobly_social_share_icons() ?>
+                            <?php jobus_social_share_icons() ?>
                         </nav>
 
                     </div>
@@ -163,7 +163,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                     'meta_query' => array(
                         'relation' => 'AND', // Optional, defaults to "AND
                         array(
-                            'key' => 'jobly_meta_options',
+                            'key' => 'jobus_meta_options',
                             'value' => get_the_ID(),
                             'compare' => 'LIKE',
                         ),
@@ -174,7 +174,7 @@ $website_target = $website[ 'target' ] ?? '_self';
 
                 while ( $jobs->have_posts() ) : $jobs->the_post();
                     // Get the selected company ID
-                    $job_meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+                    $job_meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     $company_id = $job_meta[ 'select_company' ] ?? '';
                     ?>
                     <div class="job-list-one style-two position-relative mb-20">
@@ -190,9 +190,9 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 ms-auto">
-                                <?php if (jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_1')) : ?>
+                                <?php if (jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_1')) : ?>
                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                        <?php echo jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_1') ?>
+                                        <?php echo jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_1') ?>
                                     </a>
                                 <?php endif; ?>
                                 <div class="job-date">
@@ -203,10 +203,10 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 </div>
                             </div>
                             <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 ms-auto xs-mt-10">
-                                <?php if (jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_2')) : ?>
+                                <?php if (jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_2')) : ?>
                                     <div class="job-location">
                                         <a href="<?php the_permalink(); ?>">
-                                            <?php echo jobly_get_meta_attributes('jobly_meta_options', 'company_open_job_meta_2') ?>
+                                            <?php echo jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_2') ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>

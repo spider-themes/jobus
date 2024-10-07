@@ -7,11 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( class_exists( 'CSF' ) ) {
 
     /**
-     * Jobly Category Taxonomy
+     * Jobus Category Taxonomy
      *
      * Set a unique slug-like ID
      */
-    $nav_menu = 'jobly_nav_menu';
+    $nav_menu = 'jobus_nav_menu';
 
     // Create taxonomy options
     CSF::createNavMenuOptions( $nav_menu, array(
@@ -25,7 +25,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'    => 'menu_img',
                 'type'  => 'media',
-                'title' => esc_html__('Menu Image', 'jobly'),
+                'title' => esc_html__('Menu Image', 'jobus'),
             ),
 
         )

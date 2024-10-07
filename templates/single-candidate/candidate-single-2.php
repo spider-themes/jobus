@@ -22,8 +22,8 @@ wp_enqueue_script('lightbox');
                             <div class="position-relative">
                                 <h4 class="candidate-name text-white mb-0"><?php the_title() ?></h4>
                                 <div class="andidate-post"><?php esc_html('Intro') ?></div>
-                                <?php if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
-                                    <div class="candidate-post"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                <?php if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
+                                    <div class="candidate-post"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -59,22 +59,22 @@ wp_enqueue_script('lightbox');
                         </div>
 
                         <?php
-                        if (jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ) {
+                        if (jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ) {
                             ?>
                             <div class="col-xl-2 col-md-4 order-xl-1">
                                 <div class="candidate-info">
-                                    <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                    <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                    <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                    <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                 </div>
                             </div>
                             <?php
                         }
-                        if (jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ) {
+                        if (jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ) {
                             ?>
                             <div class="col-xl-2 col-md-4 order-xl-2">
                                 <div class="candidate-info">
-                                    <span><?php echo jobly_meta_candidate_spec_name(3); ?></span>
-                                    <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                    <span><?php echo jobus_meta_candidate_spec_name(3); ?></span>
+                                    <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
                                 </div>
                             </div>
                             <?php
@@ -232,7 +232,7 @@ wp_enqueue_script('lightbox');
 			                    ?>
                                 <div class="item">
                                     <a href="<?php echo esc_url($image_url) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
-					                    <?php echo wp_get_attachment_image($item, 'jobly_280x268') ?>
+					                    <?php echo wp_get_attachment_image($item, 'jobus_280x268') ?>
                                     </a>
                                 </div>
 			                    <?php
@@ -250,7 +250,7 @@ wp_enqueue_script('lightbox');
                 <div class="cadidate-profile-2-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
                     <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
 				        <?php
-				        $specifications = jobly_opt('candidate_specifications');
+				        $specifications = jobus_opt('candidate_specifications');
 				        if ($specifications) {
 					        ?>
                             <ul class="style-none">
@@ -260,7 +260,7 @@ wp_enqueue_script('lightbox');
 							        $meta_key = $field[ 'meta_key' ] ?? '';
 
 							        // Get the stored meta-values
-							        $meta_options = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+							        $meta_options = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 
 
 
@@ -342,7 +342,7 @@ wp_enqueue_script('lightbox');
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
-                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'security' ); ?>
+                            <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">

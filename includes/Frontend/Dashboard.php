@@ -2,10 +2,10 @@
 /**
  * Template Dashboard
  *
- * @package jobly
+ * @package jobus
  * @author spiderdevs
  */
-namespace Jobly\Frontend;
+namespace Jobus\Frontend;
 
 use WP_User;
 
@@ -16,21 +16,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Dashboard
  *
- * @package Jobly\Includes\Frontend
+ * @package Jobus\Includes\Frontend
  */
 class Dashboard {
 
     public function __construct() {
 
         // Register shortcode for the user dashboard
-        add_shortcode('jobly_user_dashboard', [$this, 'user_dashboard']);
-        add_shortcode('jobly_user_profile', [$this, 'user_profile']);
-        add_shortcode('jobly_user_resume', [$this, 'user_resume']);
-        add_shortcode('jobly_user_message', [$this, 'user_message']);
-        add_shortcode('jobly_user_job_alert', [$this, 'user_job_alert']);
-        add_shortcode('jobly_user_saved_job', [$this, 'user_saved_job']);
-        add_shortcode('jobly_user_account_settings', [$this, 'user_account_settings']);
-        add_shortcode('jobly_user_delete_account', [$this, 'user_delete_account']);
+        add_shortcode('jobus_user_dashboard', [$this, 'user_dashboard']);
+        add_shortcode('jobus_user_profile', [$this, 'user_profile']);
+        add_shortcode('jobus_user_resume', [$this, 'user_resume']);
+        add_shortcode('jobus_user_message', [$this, 'user_message']);
+        add_shortcode('jobus_user_job_alert', [$this, 'user_job_alert']);
+        add_shortcode('jobus_user_saved_job', [$this, 'user_saved_job']);
+        add_shortcode('jobus_user_account_settings', [$this, 'user_account_settings']);
+        add_shortcode('jobus_user_delete_account', [$this, 'user_delete_account']);
 
     }
 
@@ -45,8 +45,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_delete_account($user);
             }
 
@@ -88,8 +88,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_account_settings($user);
             }
 
@@ -129,8 +129,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_saved_job($user);
             }
 
@@ -170,8 +170,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_job_alert($user);
             }
 
@@ -212,8 +212,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_message($user);
             }
 
@@ -253,8 +253,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_resume($user);
             }
 
@@ -295,8 +295,8 @@ class Dashboard {
             $user = wp_get_current_user();
             $roles = $user->roles;
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_profile($user);
             }
 
@@ -349,8 +349,8 @@ class Dashboard {
                 return Template_Loader::get_template_part('dashboard/not-allowed');
             }
 
-            // Load candidate dashboard if a user has the 'jobly_candidate' role
-            if (in_array('jobly_candidate', $roles)) {
+            // Load candidate dashboard if a user has the 'jobus_candidate' role
+            if (in_array('jobus_candidate', $roles)) {
                 return $this->load_candidate_dashboard($user);
             }
 

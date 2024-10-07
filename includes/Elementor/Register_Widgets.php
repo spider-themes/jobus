@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class Jobly_Services
+ * Class Jobus_Services
  * @package Jobus\includes\Elementor
  */
 class Register_Widgets
@@ -20,7 +20,7 @@ class Register_Widgets
 
     }
 
-    public function plugin_register ()
+    public function plugin_register (): void
     {
         //Register Category for Elementor Widgets
         add_action('elementor/elements/categories_registered', [ $this, 'register_category' ]);

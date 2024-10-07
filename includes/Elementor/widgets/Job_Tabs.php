@@ -31,17 +31,17 @@ class Job_Tabs extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Job Tabs (Jobly)', 'jobus');
+        return esc_html__('Job Tabs (Jobus)', 'jobus');
     }
 
     public function get_icon ()
     {
-        return 'eicon-tabs jobly-icon';
+        return 'eicon-tabs jobus-icon';
     }
 
     public function get_keywords ()
     {
-        return [ 'Jobus', 'Jobly Listing', 'Jobs', 'Posts' ];
+        return [ 'Jobus', 'Jobus Listing', 'Jobs', 'Posts' ];
     }
 
     public function get_categories () {

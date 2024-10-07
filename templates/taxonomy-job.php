@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package jobly
+ * @package jobus
  */
 
 if (!defined('ABSPATH')) {
@@ -24,7 +24,7 @@ $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 
 $args = array(
     'post_type'      => 'job',
     'post_status'    => 'publish',
-    'posts_per_page' => jobly_opt('job_posts_per_page'),
+    'posts_per_page' => jobus_opt('job_posts_per_page'),
     'orderby'        => $selected_order_by,
     'order'          => $selected_order,
 );
@@ -107,9 +107,9 @@ $job_count = $job_post->found_posts;
                                                     </a>
                                                 <?php endif; ?>
                                                 <div class="split-box1">
-                                                    <?php if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_1')) : ?>
+                                                    <?php if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1')) : ?>
                                                         <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                            <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
+                                                            <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
                                                         </a>
                                                     <?php endif; ?>
                                                     <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
@@ -135,11 +135,11 @@ $job_count = $job_post->found_posts;
 	                                        }
 	                                        ?>
                                             <div class="job-salary">
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
+                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
+                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
                                                 <?php endif; ?>
-                                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="expertise">. <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></span>
+                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
+                                                    <span class="expertise">. <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -160,7 +160,7 @@ $job_count = $job_post->found_posts;
 
                         <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                            <?php jobly_pagination($job_post); ?>
+                            <?php jobus_pagination($job_post); ?>
 
                         </div>
 

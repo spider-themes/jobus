@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$candidate_archive_layout = $jobly_candidate_archive_layout ?? jobly_opt('candidate_archive_layout');
+$candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'grid';
@@ -32,10 +32,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark fw-500"><?php echo jobly_posts_count('candidate') ?></span>
+                            <span class="text-dark fw-500"><?php echo jobus_posts_count('candidate') ?></span>
                             <?php
                             /* translators: 1: candidate found, 2: candidates found */
-                            echo esc_html(sprintf(_n('candidate found', 'candidates found', jobly_posts_count('candidate'), 'jobus'), jobly_posts_count('candidate')));
+                            echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('candidate'), 'jobus'), jobus_posts_count('candidate')));
                             ?>
                         </div>
 
@@ -80,7 +80,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="row">
                                 <?php
                                 while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+                                    $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
                                     $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                     $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                     ?>
@@ -103,9 +103,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </h4>
 
                                             <?php
-                                            if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
+                                            if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                 ?>
-                                                <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                 <?php
                                             }
 
@@ -138,13 +138,13 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             ?>
                                             <div class="row gx-1">
                                                 <?php
-                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2' )) {
+                                                if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2' )) {
                                                     ?>
 
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
-                                                            <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -199,7 +199,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         <div class="accordion-box list-style">
                             <?php
                             while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+                                $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                 ?>
@@ -221,9 +221,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         </h4>
 
                                                         <?php
-                                                        if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
+                                                        if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                             ?>
-                                                            <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                            <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                                             <?php
                                                         }
 
@@ -258,12 +258,12 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 </div>
 
                                                 <?php
-                                                if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2' )) {
+                                                if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2' )) {
                                                     ?>
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info">
-                                                            <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -307,9 +307,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     ?>
                     <div class="pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count($candidate_query) ?>
+                        <?php jobus_showing_post_result_count($candidate_query) ?>
 
-                        <?php jobly_pagination($candidate_query, 'jobly_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
+                        <?php jobus_pagination($candidate_query, 'jobus_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
 
                     </div>
 

@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options
-    $meta_candidate_prefix = 'jobly_meta_candidate_options';
+    $meta_candidate_prefix = 'jobus_meta_candidate_options';
 
     CSF::createMetabox($meta_candidate_prefix, array(
         'title' => esc_html__('Candidate Options', 'jobus'),
@@ -19,7 +19,7 @@ if (class_exists('CSF')) {
     // Company Info Meta Options
     CSF::createSection($meta_candidate_prefix, array(
         'title' => esc_html__('General', 'jobus'),
-        'id' => 'jobly_meta_general',
+        'id' => 'jobus_meta_general',
         'icon' => 'fas fa-home',
         'fields' => array(
 
@@ -61,7 +61,7 @@ if (class_exists('CSF')) {
 
 
     // Retrieve the repeater field configurations from settings options
-    $candidate_specifications = jobly_opt('candidate_specifications');
+    $candidate_specifications = jobus_opt('candidate_specifications');
     if (!empty($candidate_specifications)) {
         foreach ($candidate_specifications as $field) {
 
@@ -94,7 +94,7 @@ if (class_exists('CSF')) {
             'title' => esc_html__('Specifications', 'jobus'),
             'fields' => $candidate_fields,
             'icon'   => 'fas fa-cogs',
-            'id'     => 'jobly_meta_candidate_specifications',
+            'id'     => 'jobus_meta_candidate_specifications',
         ));
 
     } //End Candidate Specifications
@@ -102,7 +102,7 @@ if (class_exists('CSF')) {
 
     // Social Icons
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_social_icons', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_social_icons', // Set a unique slug-like ID
         'title' => esc_html__( 'Social Icons', 'jobus' ),
         'icon' => 'fa fa-hashtag',
         'fields' => array(
@@ -156,7 +156,7 @@ if (class_exists('CSF')) {
 
     // Contact Information
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_contact_info', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_contact_info', // Set a unique slug-like ID
         'title' => esc_html__( 'Contact Information', 'jobus' ),
         'icon' => 'fa fa-map',
         'fields' => array(
@@ -192,7 +192,7 @@ if (class_exists('CSF')) {
 
     // Intro Video
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_video', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_video', // Set a unique slug-like ID
         'title' => esc_html__( 'Intro Video', 'jobus' ),
         'icon' => 'fa fa-play',
         'fields' => array(
@@ -223,7 +223,7 @@ if (class_exists('CSF')) {
 
     // Education History
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_education', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_education', // Set a unique slug-like ID
         'title' => esc_html__( 'Education', 'jobus' ),
         'icon' => 'fa fa-graduation-cap',
         'fields' => array(
@@ -296,7 +296,7 @@ if (class_exists('CSF')) {
 
     // Work Experience
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_experience', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_experience', // Set a unique slug-like ID
         'title' => esc_html__( 'Experience', 'jobus' ),
         'icon' => 'fa fa-toolbox',
         'fields' => array(
@@ -383,7 +383,7 @@ if (class_exists('CSF')) {
 
     // Portfolio
     CSF::createSection( $meta_candidate_prefix, array(
-        'id'    => 'jobly_meta_portfolio', // Set a unique slug-like ID
+        'id'    => 'jobus_meta_portfolio', // Set a unique slug-like ID
         'title' => esc_html__( 'Portfolio', 'jobus' ),
         'icon' => 'fa fa-briefcase',
         'fields' => array(

@@ -2,10 +2,10 @@
 /**
  * Template Loader
  *
- * @package jobly
+ * @package jobus
  * @author spiderdevs
  */
-namespace Jobly\Frontend;
+namespace Jobus\Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Template_Loader
  *
- * @package Jobly\Includes\Classes
+ * @package Jobus\Includes\Classes
  */
 class Template_Loader {
 
@@ -79,12 +79,12 @@ class Template_Loader {
      */
     private function locate_template(string $template_name, string $default_template ): string
     {
-        $theme_file = locate_template( [ "jobly/$template_name.php" ] );
+        $theme_file = locate_template( [ "jobus/$template_name.php" ] );
         if ( $theme_file ) {
             return $theme_file;
         }
 
-        $plugin_template = JOBLY_PATH . "/templates/$template_name.php";
+        $plugin_template = JOBUS_PATH . "/templates/$template_name.php";
         if ( file_exists( $plugin_template ) ) {
             return $plugin_template;
         }
@@ -100,7 +100,7 @@ class Template_Loader {
      * @param string $plugin_dir
      * @return string
      */
-    public static function get_template_part(string $name, array $args = [], string $plugin_dir = JOBLY_PATH ): string
+    public static function get_template_part(string $name, array $args = [], string $plugin_dir = JOBUS_PATH ): string
     {
         if ( ! empty( $args ) && is_array( $args ) ) {
             extract( $args, EXTR_SKIP );
@@ -121,9 +121,9 @@ class Template_Loader {
      * @param string $plugin_dir
      * @return string|false
      */
-    public static function locate(string $name, string $plugin_dir = JOBLY_PATH ): bool|string
+    public static function locate(string $name, string $plugin_dir = JOBUS_PATH ): bool|string
     {
-        $theme_file = locate_template( [ "jobly/{$name}.php" ] );
+        $theme_file = locate_template( [ "jobus/{$name}.php" ] );
         if ( $theme_file ) {
             return $theme_file;
         }

@@ -23,19 +23,19 @@ if (!defined('ABSPATH')) {
 class Categories extends Widget_Base {
 
 	public function get_name() {
-		return 'jobly_job_categories';
+		return 'jobus_job_categories';
 	}
 
 	public function get_title() {
-		return esc_html__( 'Categories (Jobly)', 'jobus' );
+		return esc_html__( 'Categories (Jobus)', 'jobus' );
 	}
 
 	public function get_icon() {
-		return 'eicon-tags jobly-icon';
+		return 'eicon-tags jobus-icon';
 	}
 
 	public function get_keywords() {
-		return [ 'Job Category', 'Category', 'Jobus', 'Jobly Category' ];
+		return [ 'Job Category', 'Category', 'Jobus', 'Jobus Category' ];
 	}
 
 	public function get_categories() {
@@ -156,7 +156,7 @@ class Categories extends Widget_Base {
 				'default'   => 'center',
 				'toggle'    => true,
 				'selectors' => [
-					'{{WRAPPER}} .jobly_cat_align' => 'justify-content: {{VALUE}};',
+					'{{WRAPPER}} .jobus_cat_align' => 'justify-content: {{VALUE}};',
 				],
 			]
 		);

@@ -31,12 +31,12 @@ class Companies extends Widget_Base {
 
     public function get_title ()
     {
-        return esc_html__('Companies (Jobly)', 'jobus');
+        return esc_html__('Companies (Jobus)', 'jobus');
     }
 
     public function get_icon ()
     {
-        return 'eicon-post jobly-icon';
+        return 'eicon-post jobus-icon';
     }
 
     public function get_keywords ()

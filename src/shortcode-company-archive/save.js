@@ -8,7 +8,7 @@ function Save( props ) {
     const blockProps = useBlockProps.save();
 
     // Use template literals to properly interpolate the job_layout value
-    const shortcode = `[jobly_company_archive company_layout="${company_layout}"]`;
+    const shortcode = `[jobus_company_archive company_layout="${company_layout}"]`;
 
     return (
         <>

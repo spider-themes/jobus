@@ -17,9 +17,9 @@ class Shortcode {
      */
     public function __construct() {
 
-        add_shortcode( 'jobly_job_archive', [ $this, 'job_page_shortcode' ] );
-        add_shortcode( 'jobly_company_archive', [ $this, 'company_page_shortcode' ] );
-        add_shortcode( 'jobly_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
+        add_shortcode( 'jobus_job_archive', [ $this, 'job_page_shortcode' ] );
+        add_shortcode( 'jobus_company_archive', [ $this, 'company_page_shortcode' ] );
+        add_shortcode( 'jobus_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
 
     }
 
@@ -93,7 +93,7 @@ class Shortcode {
 
         if ( ! is_admin() ) {
             jobus_get_template( 'archive-job.php', [
-                'jobly_job_archive_layout' => $args['job_layout'],
+                'jobus_job_archive_layout' => $args['job_layout'],
             ] );
         }
 
@@ -110,7 +110,7 @@ class Shortcode {
 
         if ( ! is_admin() ) {
             jobus_get_template( 'archive-company.php', [
-                'jobly_company_archive_layout' => $args['company_layout'],
+                'jobus_company_archive_layout' => $args['company_layout'],
             ] );
         }
 
@@ -128,7 +128,7 @@ class Shortcode {
 
         if (!is_admin()) {
             jobus_get_template('archive-candidate.php', [
-                'jobly_candidate_archive_layout' => $args['candidate_layout'],
+                'jobus_candidate_archive_layout' => $args['candidate_layout'],
             ]);
         }
 

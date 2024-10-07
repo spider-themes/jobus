@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package jobly
+ * @package jobus
  */
 
 if (!defined('ABSPATH')) {
@@ -23,7 +23,7 @@ $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 
 $args = array(
     'post_type'      => 'company',
     'post_status'    => 'publish',
-    'posts_per_page' => jobly_opt('company_posts_per_page'),
+    'posts_per_page' => jobus_opt('company_posts_per_page'),
     'orderby'        => $selected_order_by,
     'order'          => $selected_order,
 );
@@ -91,8 +91,8 @@ $company_count = $company_query->found_posts;
                         <div class="row">
                             <?php
                             while ( $company_query->have_posts() ) : $company_query->the_post();
-                                $company_count  = jobly_get_selected_company_count(get_the_ID(), false);
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                $company_count  = jobus_get_selected_company_count(get_the_ID(), false);
+                                $meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                 ?>
@@ -126,7 +126,7 @@ $company_count = $company_query->found_posts;
                                         if ($company_count > 0) {
                                             ?>
                                             <div class="bottom-line d-flex">
-                                                <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>">
+                                                <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>">
                                                     <?php
                                                     /* translators: 1: Vacancy, 2: Vacancies */
                                                     echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobus'), $company_count));
@@ -147,7 +147,7 @@ $company_count = $company_query->found_posts;
 
                     <div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_pagination($company_query); ?>
+                        <?php jobus_pagination($company_query); ?>
 
                     </div>
 

@@ -5,11 +5,11 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="category-section-five">
-    <div class="card-wrapper-two d-flex flex-wrap jobly_cat_align">
+    <div class="card-wrapper-two d-flex flex-wrap jobus_cat_align">
         <?php
         if (is_array($categories)) {
             foreach ($categories as $index => $category) {
-                $meta = get_term_meta($category->term_id, 'jobly_taxonomy_cat', true);
+                $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
                 $text_color = isset($meta['text_color']) ? 'style=color:' . esc_attr($meta['text_color']) : '';
                 $text_bg_color = isset($meta['text_bg_color']) ? 'style=background-color:' . esc_attr($meta['text_bg_color']) : '';
                 $hover_border_color = $meta['hover_border_color'] ?? '';

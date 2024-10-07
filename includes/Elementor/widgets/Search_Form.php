@@ -25,11 +25,11 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Search Form (Jobly)', 'jobus' );
+		return esc_html__( 'Search Form (Jobus)', 'jobus' );
 	}
 
 	public function get_icon() {
-		return 'eicon-search jobly-icon';
+		return 'eicon-search jobus-icon';
 	}
 
 	public function get_keywords() {
@@ -346,7 +346,7 @@ class Search_Form extends Widget_Base {
 
 
 		$this->start_controls_section(
-			'jobly_search_section', [
+			'search_section', [
 				'label' => esc_html__( 'Search Form', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
@@ -385,7 +385,7 @@ class Search_Form extends Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Border::get_type(),
 			[
-				'name'      => 'jobly_search_border',
+				'name'      => 'search_border',
 				'label'     => esc_html__( 'Border', 'jobus' ),
 				'selector'  => '{{WRAPPER}} #searchform,
 							    {{WRAPPER}} .job-search-one form',

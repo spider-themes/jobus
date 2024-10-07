@@ -94,7 +94,7 @@ if ( ! class_exists( 'Jobus' ) ) {
         public function register_menu(): void
         {
             register_nav_menus([
-                'candidate_menu' => esc_html__('Candidate Menu', 'jobly'),
+                'candidate_menu' => esc_html__('Candidate Menu', 'jobus'),
             ]);
 
         }

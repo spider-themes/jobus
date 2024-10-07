@@ -4,7 +4,7 @@ import {Fragment} from 'react';
 import {__} from '@wordpress/i18n';
 
 function Edit({attributes, setAttributes}) {
-    const blockProps = useBlockProps({className: 'jobly-registration-section'});
+    const blockProps = useBlockProps({className: 'jobus-registration-section'});
     const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass} = attributes;
     const {employer_username, employer_email, employer_pass, employer_confirm_pass} = attributes;
 

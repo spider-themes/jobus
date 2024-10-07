@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
         <?php
         if (is_array($categories)) {
             foreach ( $categories as $index => $category ) {
-                $meta = get_term_meta($category->term_id, 'jobly_taxonomy_cat', true);
+                $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
 
                 ?>
                 <div class="card-style-one text-center mt-20 wow fadeInUp">

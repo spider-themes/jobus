@@ -1,10 +1,10 @@
 {
   "apiVersion": 3,
   "name": "jobly/video-popup",
-  "title": "Jobly Video Popup",
+  "title": "Jobus Video Popup",
   "category": "jobus-blocks",
   "icon": "video-alt3",
-  "description": "Jobly Video Popup. A block that allows you to add a video popup to your page.",
+  "description": "Jobus Video Popup. A block that allows you to add a video popup to your page.",
   "supports": {
     "html": false,
     "anchor": true,
@@ -28,8 +28,8 @@
       "default": "#"
     }
   },
-  "textdomain": "jobly",
-  "keywords": [ "jobly", "video", "popup", "block", "youtube" ],
+  "textdomain": "jobus",
+  "keywords": [ "jobus", "video", "popup", "block", "youtube" ],
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css"
 }

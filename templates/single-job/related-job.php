@@ -36,10 +36,10 @@ $related_jobs = new WP_Query($args);
                             <a href="<?php the_permalink(); ?>" class="logo">
                                 <?php the_post_thumbnail('full', [ 'class' => 'm-auto' ]); ?>
                             </a>
-                            <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1')) : ?>
+                            <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                        <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_1') ?>
+                                        <?php echo jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1') ?>
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -48,16 +48,16 @@ $related_jobs = new WP_Query($args);
                                     <?php the_title('<h3>', '</h3>'); ?>
                                 </a>
                             </div>
-                            <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_2')) : ?>
+                            <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_2')) : ?>
                                 <div class="job-salary">
-                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_2') ?></span>
+                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_2') ?></span>
                                 </div>
                             <?php endif; ?>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
-                                <?php if (jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3')) : ?>
+                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_3')) : ?>
                                     <div class="job-location">
                                         <a href="<?php the_permalink(); ?>">
-                                            <?php echo jobly_get_meta_attributes('jobly_meta_options','job_related_post_meta_3') ?>
+                                            <?php echo jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_3') ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>

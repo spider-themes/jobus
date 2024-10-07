@@ -1,5 +1,5 @@
 {
-  "name": "jobly",
+  "name": "jobus",
   "version": "1.0.0",
   "scripts": {
     "start": "wp-scripts start",

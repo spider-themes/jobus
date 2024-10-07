@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     if (is_array($categories)) {
         $delay_time = 0.1;
         foreach ( $categories as $index => $category ) {
-            $meta = get_term_meta($category->term_id, 'jobly_taxonomy_cat', true);
+            $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
             ?>
             <div class="col-lg-<?php echo esc_attr($column); ?> col-md-4 col-sm-6 d-flex">
                 <div class="card-style-four tran3s w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr($delay_time) ?>s">

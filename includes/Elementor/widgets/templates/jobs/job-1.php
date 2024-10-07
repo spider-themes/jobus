@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
         while ($posts->have_posts()) : $posts->the_post();
 
             // Get the selected company ID
-            $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+            $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
             $company_id = $meta[ 'select_company' ] ?? '';
 
             ?>
@@ -31,9 +31,9 @@ if (!defined('ABSPATH')) {
                     </div>
 
                     <div class="jod_list_meta_area">
-                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']))) : ?>
+                        <?php if ( !empty(jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1']))) : ?>
                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']) ?>
+                                <?php echo jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1']) ?>
                             </a>
                         <?php endif ?>
                         <div class="job-date">
@@ -45,10 +45,10 @@ if (!defined('ABSPATH')) {
                     </div>
 
                     <div class="jod_list_cat_area">
-                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']))) : ?>
+                        <?php if ( !empty(jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_2']))) : ?>
                             <div class="job-location">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']) ?>
+                                    <?php echo jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_2']) ?>
                                 </a>
                             </div>
                         <?php endif; ?>

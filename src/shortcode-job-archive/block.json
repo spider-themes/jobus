@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "jobly/shortcode-job-archive",
-  "title": "Job Archive Shortcode (Jobly)",
+  "title": "Job Archive Shortcode (Jobus)",
   "category": "jobus-blocks",
   "icon": "dashicons dashicons-shortcode",
   "description": "Display the Job Archive job posts on the website frontend",
@@ -25,11 +25,11 @@
     }
   },
   "keywords": [
-    "jobly",
+    "jobus",
     "Shortcode",
     "job Archive"
   ],
-  "textdomain": "jobly",
+  "textdomain": "jobus",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css"
 }

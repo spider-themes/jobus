@@ -31,7 +31,7 @@ class Assets {
         wp_enqueue_style( 'jobus-main', JOBUS_CSS . '/main.css', [], JOBUS_VERSION );
 
 	    if ( is_rtl() ) {
-		    wp_enqueue_style( 'jobus-rtl', JOBUS_CSS . '/jobly-main-rtl.css', [], JOBUS_VERSION );
+		    wp_enqueue_style( 'jobus-rtl', JOBUS_CSS . '/jobus-main-rtl.css', [], JOBUS_VERSION );
 	    }
 
 
@@ -50,9 +50,9 @@ class Assets {
 
         //Load Script for ajax mail to candidate
 	    wp_enqueue_script( 'jobus-candidate-email-form', JOBUS_JS . '/candidate-email-form.js', [ 'jquery' ], JOBUS_VERSION, true );
-        wp_localize_script('jobus-candidate-email-form', 'jobly_candidate_email_form', array(
+        wp_localize_script('jobus-candidate-email-form', 'jobus_candidate_email_form', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce('jobly_candidate_contact_mail_form'),
+            'nonce' => wp_create_nonce('jobus_candidate_contact_mail_form'),
         ));
 
 
@@ -62,7 +62,7 @@ class Assets {
         wp_enqueue_script( 'slick', JOBUS_VEND . '/slick/slick.min.js', [ 'jquery' ], '2.2.0', true );
         wp_enqueue_script( 'jobus-public', JOBUS_JS . '/public.js', [ 'jquery' ], JOBUS_VERSION, true );
 
-        wp_localize_script( 'jobus-public', 'jobly_local', array(
+        wp_localize_script( 'jobus-public', 'jobus_local', array(
 			'ajaxurl' => admin_url('admin-ajax.php')
 		));
 

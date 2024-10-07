@@ -50,10 +50,10 @@ if (!defined('ABSPATH')) {
                         <?php
                     }
 
-                    if (!empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']))) { ?>
+                    if (!empty(jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1']))) { ?>
                         <div>
                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                <?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_1']) ?>
+                                <?php echo jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1']) ?>
                             </a>
                         </div>
                         <?php
@@ -66,9 +66,9 @@ if (!defined('ABSPATH')) {
                     </div>
                     <div class="job-date"><?php the_time(get_option('date_format')); ?></div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <?php if ( !empty(jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']))) : ?>
+                        <?php if ( !empty(jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_2']))) : ?>
                             <div class="job-location">
-                                <a href="<?php the_permalink(); ?>"><?php echo jobly_get_meta_attributes('jobly_meta_options', $settings['job_attr_meta_2']) ?></a>
+                                <a href="<?php the_permalink(); ?>"><?php echo jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_2']) ?></a>
                             </div>
                         <?php endif ?>
                         <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">

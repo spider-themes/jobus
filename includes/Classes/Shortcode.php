@@ -2,11 +2,11 @@
 /**
  * Shortcodes
  *
- * @package jobly
+ * @package jobus
  * @author spiderdevs
  */
 
-namespace jobly\includes\Classes;
+namespace jobus\includes\Classes;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -25,7 +25,7 @@ class Shortcode
     {
 
 
-        add_shortcode('jobly_user_dashboard', [__CLASS__, 'user_dashboard']);
+        add_shortcode('jobus_user_dashboard', [__CLASS__, 'user_dashboard']);
 
     }
 

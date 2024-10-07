@@ -45,7 +45,7 @@ class User {
     public function add_user_roles(): void
     {
 
-        add_role( 'jobly_candidate', esc_html__('Candidate (Jobly)', 'jobus'), array(
+        add_role( 'jobus_candidate', esc_html__('Candidate (Jobus)', 'jobus'), array(
             'read'                  => true,
             'read_post'             => true,
             'read_private_posts'    => true,
@@ -67,7 +67,7 @@ class User {
             'manage_candidate_skill' => true,  // Capability to manage candidate skills
         ));
 
-        add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobus'), array(
+        add_role( 'jobus_employer', esc_html__('Employer (Jobus)', 'jobus'), array(
             'read'                  => true,
             'read_post'             => true,
             'read_private_posts'    => true,
@@ -91,8 +91,8 @@ class User {
     public function remove_user_roles(): void
     {
 
-        remove_role('jobly_candidate');
-        remove_role('jobly_employer');
+        remove_role('jobus_candidate');
+        remove_role('jobus_employer');
 
     }
 
@@ -121,7 +121,7 @@ class User {
                     } else {
                         // Assign custom role to user
                         $candidate = new \WP_User($candidate_id);
-                        $candidate->set_role('jobly_candidate'); // Assign the custom 'jobly_candidate' role
+                        $candidate->set_role('jobus_candidate'); // Assign the custom 'jobus_candidate' role
 
                         // Log the user in
                         wp_set_current_user($candidate_id);
@@ -162,7 +162,7 @@ class User {
                     } else {
                         // Assign custom role to user
                         $employer = new \WP_User($employer_id);
-                        $employer->set_role('jobly_employer'); // Assign the custom 'jobly_employer' role
+                        $employer->set_role('jobus_employer'); // Assign the custom 'jobus_employer' role
 
                         // Log the user in
                         wp_set_current_user($employer_id);
@@ -185,7 +185,7 @@ class User {
     public function restrict_candidate_menu(): void
     {
         $user = wp_get_current_user();
-        if (in_array('jobly_candidate', (array) $user->roles)) {
+        if (in_array('jobus_candidate', (array) $user->roles)) {
             // Remove unnecessary menus
             remove_menu_page('edit.php'); // Posts
             remove_menu_page('edit-comments.php'); // Comments

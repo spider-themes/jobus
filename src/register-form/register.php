@@ -36,7 +36,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
             </ul>
             <div class="tab-content mt-40">
                 <div class="tab-pane fade show active" role="tabpanel" id="fc1">
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobly-candidate-registration-form" id="jobly-candidate-registration-form" method="post">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobus-candidate-registration-form" id="jobus-candidate-registration-form" method="post">
                         <?php wp_nonce_field('register_candidate_action', 'register_candidate_nonce'); ?>
                         <input type="hidden" name="action" value="register_candidate">
                         <div class="row">
@@ -92,7 +92,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane fade" role="tabpanel" id="fc2">
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobly-employer-registration-form" id="jobly-employer-registration-form" method="post">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobus-employer-registration-form" id="jobus-employer-registration-form" method="post">
                         <?php wp_nonce_field('register_employer_action', 'register_employer_nonce'); ?>
                         <input type="hidden" name="action" value="register_employer">
                         <div class="row">

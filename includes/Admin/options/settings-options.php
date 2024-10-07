@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 if( class_exists( 'CSF' ) ) {
 
 	// Set a unique slug ID for settings options
-	$settings_prefix = 'jobly_opt';
+	$settings_prefix = 'jobus_opt';
 
 	// Create options
 	CSF::createOptions( $settings_prefix, array(
@@ -23,7 +23,7 @@ if( class_exists( 'CSF' ) ) {
 
     // General Settings
     CSF::createSection( $settings_prefix, array(
-        'id' => 'jobly_general',
+        'id' => 'jobus_general',
         'title'  => esc_html__( 'General', 'jobus' ),
         'icon' => 'fa fa-home',
         'fields' => array(
@@ -58,7 +58,7 @@ if( class_exists( 'CSF' ) ) {
     // Job Specifications
     CSF::createSection( $settings_prefix, array(
         'title'     => esc_html__( 'Job Specifications', 'jobus' ),
-        'id'        => 'jobly_job_specifications',
+        'id'        => 'jobus_job_specifications',
         'icon'      => 'fa fa-plus',
         'fields'    => array(
 
@@ -139,7 +139,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Archive Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_job_archive', // Set a unique slug-like ID
+        'id'    => 'jobus_job_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Job Archive Page', 'jobus' ),
         'icon' => 'fa fa-plus',
     ) );
@@ -147,7 +147,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Layout Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_job_archive',
+        'parent' => 'jobus_job_archive',
         'title' => esc_html__( 'Page Layout', 'jobus' ),
         'id' => 'job_page_layout',
         'fields' => array(
@@ -176,7 +176,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_job_archive',
+        'parent' => 'jobus_job_archive',
         'title' => esc_html__( 'Archive', 'jobus' ),
         'id' => 'job_archive_settings',
         'fields' => array(
@@ -229,7 +229,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_job_archive',
+        'parent' => 'jobus_job_archive',
         'title' => esc_html__( 'Sidebar', 'jobus' ),
         'id' => 'job_sidebar_settings',
         'fields' => array(
@@ -320,7 +320,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Details Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_job_details', // Set a unique slug-like ID
+        'id'    => 'jobus_job_details', // Set a unique slug-like ID
         'title' => esc_html__( 'Job Details Page', 'jobus' ),
         'icon' => 'fa fa-plus',
     ) );
@@ -328,7 +328,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Details Layout Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_job_details',
+        'parent' => 'jobus_job_details',
         'title' => esc_html__( 'Layout Preset', 'jobus' ),
         'id' => 'job_details_layout',
         'fields' => array(
@@ -356,7 +356,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Job Details Page Settings-> Related Jobs
     CSF::createSection( $settings_prefix, array(
-        'parent'    => 'jobly_job_details',
+        'parent'    => 'jobus_job_details',
         'title'     => esc_html__( 'Related Posts', 'jobus' ),
         'id'        => 'job_details_page_related_jobs',
         'fields'    => array(
@@ -395,7 +395,7 @@ if( class_exists( 'CSF' ) ) {
     // Company Specifications
     CSF::createSection( $settings_prefix, array(
         'title'     => esc_html__( 'Company Specifications', 'jobus' ),
-        'id'        => 'jobly_company_specifications',
+        'id'        => 'jobus_company_specifications',
         'icon'      => 'fa fa-plus',
         'fields'    => array(
 
@@ -456,7 +456,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Archive Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_company_archive', // Set a unique slug-like ID
+        'id'    => 'jobus_company_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Company Archive Page', 'jobus' ),
         'icon'      => 'fa fa-plus',
 
@@ -465,7 +465,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Layout Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_company_archive',
+        'parent' => 'jobus_company_archive',
         'title' => esc_html__( 'Page Layout', 'jobus' ),
         'id' => 'company_page_layout',
         'fields' => array(
@@ -494,7 +494,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_company_archive',
+        'parent' => 'jobus_company_archive',
         'title' => esc_html__( 'Archive', 'jobus' ),
         'id' => 'company_archive_settings',
         'fields' => array(
@@ -538,7 +538,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_company_archive',
+        'parent' => 'jobus_company_archive',
         'title' => esc_html__( 'Sidebar', 'jobus' ),
         'id' => 'company_sidebar_settings',
         'fields' => array(
@@ -598,7 +598,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Details Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_company_details', // Set a unique slug-like ID
+        'id'    => 'jobus_company_details', // Set a unique slug-like ID
         'title' => esc_html__( 'Company Details Page', 'jobus' ),
         'icon' => 'fa fa-plus',
     ) );
@@ -606,7 +606,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Details Page Settings-> Open Job Position
     CSF::createSection( $settings_prefix, array(
-        'parent'    => 'jobly_company_details',
+        'parent'    => 'jobus_company_details',
         'title'     => esc_html__( 'Open Job Position', 'jobus' ),
         'id'        => 'company_details_page_open_jobs',
         'fields'    => array(
@@ -638,7 +638,7 @@ if( class_exists( 'CSF' ) ) {
     // Candidate Specifications
     CSF::createSection( $settings_prefix, array(
         'title'     => esc_html__( 'Candidate Specifications', 'jobus' ),
-        'id'        => 'jobly_candidate_specifications',
+        'id'        => 'jobus_candidate_specifications',
         'icon'      => 'fa fa-plus',
         'fields'    => array(
 
@@ -699,7 +699,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Candidate Archive Page Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_candidate_archive', // Set a unique slug-like ID
+        'id'    => 'jobus_candidate_archive', // Set a unique slug-like ID
         'title' => esc_html__( 'Candidate Archive Page', 'jobus' ),
         'icon'      => 'fa fa-plus',
 
@@ -707,9 +707,9 @@ if( class_exists( 'CSF' ) ) {
 
     // Company Layout Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_candidate_archive',
+        'parent' => 'jobus_candidate_archive',
         'title' => esc_html__( 'Page Layout', 'jobus' ),
-        'id' => 'jobly_candidate_archive',
+        'id' => 'jobus_candidate_archive',
         'fields' => array(
 
             //Subheading field
@@ -735,7 +735,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Candidate Archive Settings-> Archive Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_candidate_archive',
+        'parent' => 'jobus_candidate_archive',
         'title' => esc_html__( 'Archive', 'jobus' ),
         'id' => 'candidate_archive_settings',
         'fields' => array(
@@ -779,7 +779,7 @@ if( class_exists( 'CSF' ) ) {
 
     // Candidate Archive Page Settings-> Sidebar Settings
     CSF::createSection( $settings_prefix, array(
-        'parent' => 'jobly_candidate_archive',
+        'parent' => 'jobus_candidate_archive',
         'title' => esc_html__( 'Sidebar', 'jobus' ),
         'id' => 'candidate_sidebar_settings',
         'fields' => array(
@@ -851,13 +851,13 @@ if( class_exists( 'CSF' ) ) {
 
     // Social Icons
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_social_icons', // Set a unique slug-like ID
+        'id'    => 'jobus_social_icons', // Set a unique slug-like ID
         'title' => esc_html__( 'Social Icons', 'jobus' ),
         'icon' => 'fa fa-hashtag',
         'fields' => array(
 
             array(
-                'id'                => 'jobly_social_icons',
+                'id'                => 'jobus_social_icons',
                 'type'              => 'repeater',
                 'title'             => esc_html__( 'Social Icons', 'jobus' ),
                 'subtitle'              => esc_html__( 'Customize and manage your social media icons along with respective URLs', 'jobus' ),
@@ -905,7 +905,7 @@ if( class_exists( 'CSF' ) ) {
 
     // SMTP Settings
     CSF::createSection( $settings_prefix, array(
-        'id'    => 'jobly_smtp', // Set a unique slug-like ID
+        'id'    => 'jobus_smtp', // Set a unique slug-like ID
         'title' => esc_html__( 'SMTP Configuration', 'jobus' ),
         'icon' => 'fa fa-hashtag',
         'fields' => array(
@@ -1006,11 +1006,11 @@ if( class_exists( 'CSF' ) ) {
 	// Backup Options
 	CSF::createSection( $settings_prefix, array(
 		'title'  => esc_html__( 'Backup', 'jobus' ),
-        'id'     => 'jobly_backup',
+        'id'     => 'jobus_backup',
         'icon'      => 'fa fa-database',
 		'fields' => array(
 			array(
-				'id'        => 'jobly_export_import',
+				'id'        => 'jobus_export_import',
 				'type'      => 'backup',
 				'title'     => esc_html__('Backup', 'jobus'),
 			),

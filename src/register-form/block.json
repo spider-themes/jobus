@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "jobly/register-form",
-  "title": "Register Form (Jobly)",
+  "title": "Register Form (Jobus)",
   "category": "jobus-blocks",
   "icon": "dashicons dashicons-shortcode",
   "description": "A custom registration form for candidates and employers.",
@@ -49,12 +49,12 @@
     }
   },
   "keywords": [
-    "jobly",
+    "jobus",
     "Candidate Register",
     "Employer Register",
     "Register Form"
   ],
-  "textdomain": "jobly",
+  "textdomain": "jobus",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css"
 }

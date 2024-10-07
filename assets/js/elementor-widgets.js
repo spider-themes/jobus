@@ -2,12 +2,12 @@
     "use strict";
     var $window = $(elementor);
 
-    var jobly = {
+    var jobus = {
         onInit: function () {
             var E_FRONT = elementorFrontend;
             var widgetHandlersMap = {
-                "jobly_job_tabs.default": jobly.jobTabs,
-                "jobly_job_categories.default": jobly.joblistSlider,
+                "jobly_job_tabs.default": jobus.jobTabs,
+                "jobly_job_categories.default": jobus.joblistSlider,
             };
 
             $.each(widgetHandlersMap, function (widgetName, callback) {
@@ -93,5 +93,5 @@
         },
     };
 
-    $window.on("elementor/frontend/init", jobly.onInit);
+    $window.on("elementor/frontend/init", jobus.onInit);
 })(jQuery, window);

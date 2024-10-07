@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
-$company_archive_layout = $jobly_company_archive_layout ?? jobly_opt('company_archive_layout');
+$company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_layout');
 
 
 // Check if the view parameter is set in the URL
@@ -32,10 +32,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark fw-500"><?php echo jobly_posts_count('company') ?></span>
+                            <span class="text-dark fw-500"><?php echo jobus_posts_count('company') ?></span>
                             <?php
                             /* translators: 1: company found, 2: companies found */
-                            echo esc_html(sprintf(_n('company found', 'companies found', jobly_posts_count('company'), 'jobus'), jobly_posts_count('company')));
+                            echo esc_html(sprintf(_n('company found', 'companies found', jobus_posts_count('company'), 'jobus'), jobus_posts_count('company')));
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
@@ -79,8 +79,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="row">
                                 <?php
                                 while ( $company_query->have_posts() ) : $company_query->the_post();
-                                    $company_count  = jobly_get_selected_company_count(get_the_ID(), false);
-                                    $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                    $company_count  = jobus_get_selected_company_count(get_the_ID(), false);
+                                    $meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
                                     $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                     $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                     ?>
@@ -114,7 +114,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             if ($company_count > 0) {
                                                 ?>
                                                 <div class="bottom-line d-flex">
-                                                    <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>">
+                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>">
                                                         <?php
                                                         /* translators: 1: Vacancy, 2: Vacancies */
                                                         echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobus'), $company_count));
@@ -139,8 +139,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <?php
                             while ( $company_query->have_posts() ) : $company_query->the_post();
 
-                                $company_count = jobly_get_selected_company_count(get_the_ID(), false);
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_company_options', true);
+                                $company_count = jobus_get_selected_company_count(get_the_ID(), false);
+                                $meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                 ?>
@@ -158,8 +158,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         </a>
                                                     </h5>
                                                     <?php
-                                                    if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1')) { ?>
-                                                        <p class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                    if (jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1')) { ?>
+                                                        <p class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1') ?></p>
                                                         <?php
                                                     }
                                                     ?>
@@ -167,13 +167,13 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </div>
                                         </div>
 
-                                        <?php if (jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2')) : ?>
+                                        <?php if (jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2')) : ?>
                                             <div class="col-xl-4 col-md-8">
                                                 <div class="d-flex align-items-center ps-xxl-5 lg-mt-20">
                                                     <div class="d-flex align-items-center">
                                                         <div class="team-text text-capitalize">
-                                                            <span class="text-md fw-500 text-dark d-block"><?php echo jobly_get_meta_attributes('jobly_meta_company_options', 'company_archive_meta_2') ?></span>
-                                                            <?php echo jobly_meta_company_spec_name(2) ?>
+                                                            <span class="text-md fw-500 text-dark d-block"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2') ?></span>
+                                                            <?php echo jobus_meta_company_spec_name(2) ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,7 +184,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             <div class="btn-group d-flex align-items-center justify-content-md-end lg-mt-20">
                                                 <?php
                                                 if ($company_count > 0) { ?>
-                                                    <a href="<?php echo jobly_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
+                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
                                                         <?php
                                                         /* translators: 1: open job, 2: open jobs */
                                                         echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobus'), $company_count));
@@ -208,9 +208,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     ?>
                     <div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count($company_query) ?>
+                        <?php jobus_showing_post_result_count($company_query) ?>
 
-                        <?php jobly_pagination($company_query); ?>
+                        <?php jobus_pagination($company_query); ?>
 
                     </div>
 

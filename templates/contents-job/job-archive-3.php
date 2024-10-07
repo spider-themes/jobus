@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$job_archive_layout = $jobly_job_archive_layout ?? jobly_opt('job_archive_layout');
+$job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = isset($_GET['view']) ? $_GET['view'] : 'list';
@@ -36,10 +36,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                             <div class="total-job-found xs-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo jobly_posts_count('job') ?></span>
+                                <span class="text-dark fw-500"><?php echo jobus_posts_count('job') ?></span>
                                 <?php
                                 /* translators: 1: job found, 2: jobs found */
-                                echo esc_html(sprintf(_n('job found', 'jobs found', jobly_posts_count('job'), 'jobus'), jobly_posts_count('job') ));
+                                echo esc_html(sprintf(_n('job found', 'jobs found', jobus_posts_count('job'), 'jobus'), jobus_posts_count('job') ));
                                 ?>
                             </div>
 
@@ -100,14 +100,14 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                         </a>
                                                         <ul class="style-none d-flex flex-wrap info-data">
                                                             <?php
-                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2')) {
+                                                            if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) {
                                                                 ?>
-                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></li>
+                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></li>
                                                                 <?php
                                                             }
-                                                            if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3')) {
+                                                            if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) {
 	                                                            ?>
-                                                                <li class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_3') ?></li>
+                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></li>
 	                                                            <?php
                                                             }
                                                             $locations = get_the_terms(get_the_ID(), 'job_location');
@@ -128,10 +128,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 </div>
                                                 <?php echo wp_kses_post($excerpt) ?>
                                                 <div class="d-sm-flex align-items-center justify-content-between mt-auto">
-                                                    <?php if (jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1')) :  ?>
+                                                    <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1')) :  ?>
                                                         <div class="d-flex align-items-center">
                                                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500 text-capitalize">
-                                                                <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
+                                                                <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
                                                             </a>
                                                         </div>
                                                     <?php endif; ?>
@@ -168,11 +168,11 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 </a>
                                                 <?php
                                             }
-                                            if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_1') ) {
+                                            if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1') ) {
                                                 ?>
                                                 <div>
                                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                        <?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_1') ?>
+                                                        <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
                                                     </a>
                                                 </div>
                                                 <?php
@@ -184,17 +184,17 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 </a>
                                             </div>
                                             <?php
-                                            if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_2') ) {
+                                            if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_2') ) {
                                                 ?>
                                                 <div class="job-salary">
-                                                    <span class="fw-500 text-dark"><?php echo jobly_get_meta_attributes('jobly_meta_options','job_archive_meta_2') ?></span>
+                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
                                                 </div>
                                                 <?php
                                             }
                                             ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">
                                                 <?php
-                                                if (jobly_get_meta_attributes( 'jobly_meta_options','job_archive_meta_2') ) {
+                                                if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_2') ) {
                                                     ?>
                                                     <div class="job-location">
 	                                                    <?php
@@ -233,9 +233,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                     <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_showing_post_result_count($job_post); ?>
+                        <?php jobus_showing_post_result_count($job_post); ?>
 
-                        <?php jobly_pagination($job_post); ?>
+                        <?php jobus_pagination($job_post); ?>
 
                     </div>
                 </div>

@@ -6,7 +6,7 @@ function Save( props ) {
 
     const { candidate_layout } = props.attributes;
     const blockProps = useBlockProps.save();
-    const shortcode = `[jobly_candidate_archive candidate_layout="${candidate_layout}"]`;
+    const shortcode = `[jobus_candidate_archive candidate_layout="${candidate_layout}"]`;
 
     return (
         <Fragment>

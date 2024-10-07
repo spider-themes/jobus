@@ -22,12 +22,12 @@ if (!defined('ABSPATH')) {
                                 <?php
 
                                 // Widget for company meta data list
-                                $filter_widgets = jobly_opt('company_sidebar_widgets');
+                                $filter_widgets = jobus_opt('company_sidebar_widgets');
 
 
                                 if (is_array($filter_widgets)) {
 
-                                    $searched_class_collapsed = jobly_search_terms('company_meta');
+                                    $searched_class_collapsed = jobus_search_terms('company_meta');
 
                                     foreach ($filter_widgets as $index => $widget) {
 
@@ -59,7 +59,7 @@ if (!defined('ABSPATH')) {
                                                                     $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                                     $opt_val = strtolower($modifiedValues);
 
-                                                                    $searched_opt = jobly_search_terms($widget_name);
+                                                                    $searched_opt = jobus_search_terms($widget_name);
                                                                     $check_status = array_search($opt_val, $searched_opt);
                                                                     $check_status = $check_status !== false ? ' checked' : '';
                                                                     ?>
@@ -91,7 +91,7 @@ if (!defined('ABSPATH')) {
                                                                 $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                                 $modifiedVal = strtolower($modifiedSelect);
 
-                                                                $searched_val = jobly_search_terms($widget_name);
+                                                                $searched_val = jobus_search_terms($widget_name);
                                                                 $selected_val = $searched_val[0] ?? $modifiedVal;
                                                                 $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
                                                                 ?>
@@ -120,7 +120,7 @@ if (!defined('ABSPATH')) {
                                 }
 
                                 //============= Is Categories=====================//
-                                if (jobly_opt('is_company_widget_location') == true) {
+                                if (jobus_opt('is_company_widget_location') == true) {
 
                                     $term_locations = get_terms(array(
                                         'taxonomy' => 'company_location',
@@ -146,7 +146,7 @@ if (!defined('ABSPATH')) {
 
 
                                 //============= Is Categories=============================//
-                                if (jobly_opt('is_company_widget_cat') == true) {
+                                if (jobus_opt('is_company_widget_cat') == true) {
 
                                     $term_cats = get_terms(array(
                                         'taxonomy' => 'company_cat',

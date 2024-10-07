@@ -6,9 +6,9 @@ if (!defined('ABSPATH')) {
 get_header();
 
 // Call the function to track views
-jobly_track_candidate_views(get_the_ID());
+jobus_track_candidate_views(get_the_ID());
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+$meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 $experience = !empty($meta['experience']) ? $meta['experience'] : '';
 $educations = !empty($meta['education']) ? $meta['education'] : '';
 $cv_attachment = !empty($meta['cv_attachment']) ? $meta['cv_attachment'] : '';
@@ -19,7 +19,7 @@ $portfolio_ids = explode(',', $portfolio);
 $skills = get_the_terms(get_the_ID(), 'candidate_skill');
 
 $candidate_single_layout_page = $meta['candidate_profile_layout'] ?? ''; // Individual page specific layout
-$candidate_single_layout_opt = jobly_opt('candidate_profile_layout', '1'); // Default layout for the entire website
+$candidate_single_layout_opt = jobus_opt('candidate_profile_layout', '1'); // Default layout for the entire website
 
 $candidate_single_layout = $candidate_single_layout_page ?? $candidate_single_layout_opt;
 

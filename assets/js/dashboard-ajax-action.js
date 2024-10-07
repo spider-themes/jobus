@@ -14,12 +14,12 @@
             let jobId = $(this).attr('data-job-id');
 
             $.ajax({
-                url: jobly_local.ajax_url,
+                url: jobus_local.ajax_url,
                 method: 'POST',
                 data: {
                     action: 'delete_job_application',
                     job_id: jobId,
-                    security: jobly_local.nonce
+                    security: jobus_local.nonce
                 },
 
                 success: function (response) {

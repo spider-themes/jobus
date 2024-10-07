@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @package jobi
  */
-$meta           = get_post_meta( get_the_ID(), 'jobly_meta_candidate_options', true );
+$meta           = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
 $banner_shape_1 = jobi_opt( 'banner_shape_1' );
 $banner_shape_2 = jobi_opt( 'banner_shape_2' );
@@ -187,7 +187,7 @@ wp_enqueue_script( 'lightbox' );
                                 <div class="item">
                                     <a href="<?php echo esc_url( $image_url ) ?> "
                                        class="example-image-link w-100 d-blok" data-lightbox="example-set">
-										<?php echo wp_get_attachment_image( $item, 'jobly_280x268' ) ?>
+										<?php echo wp_get_attachment_image( $item, 'jobus_280x268' ) ?>
                                     </a>
                                 </div>
 								<?php
@@ -217,7 +217,7 @@ wp_enqueue_script( 'lightbox' );
                         </div>
 
 						<?php
-						$specifications = jobly_opt( 'candidate_specifications' );
+						$specifications = jobus_opt( 'candidate_specifications' );
 						if ( $specifications ) {
 							?>
                             <ul class="style-none">
@@ -227,7 +227,7 @@ wp_enqueue_script( 'lightbox' );
 									$meta_key  = $field['meta_key'] ?? '';
 
 									// Get the stored meta-values
-									$meta_options = get_post_meta( get_the_ID(), 'jobly_meta_candidate_options', true );
+									$meta_options = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 
 									if (! empty( $meta_options[ $meta_key ] )) {
 										?>
@@ -309,7 +309,7 @@ wp_enqueue_script( 'lightbox' );
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
-                            <?php wp_nonce_field( 'jobly_candidate_contact_mail_form', 'security' ); ?>
+                            <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">

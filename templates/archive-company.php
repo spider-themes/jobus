@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package jobly
+ * @package jobus
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -16,20 +16,20 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-$meta_args = [ 'args' => jobly_meta_taxo_arguments('meta', 'company', '', jobly_all_search_meta('jobly_meta_company_options', 'company_sidebar_widgets' )) ];
-$taxonomy_args1     = [ 'args' => jobly_meta_taxo_arguments('taxonomy', 'company', 'company_cat', jobly_search_terms('company_cats')) ];
+$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'company', '', jobus_all_search_meta('jobus_meta_company_options', 'company_sidebar_widgets' )) ];
+$taxonomy_args1     = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'company', 'company_cat', jobus_search_terms('company_cats')) ];
 
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
-    $result_ids = jobly_merge_queries_and_get_ids( $meta_args, $taxonomy_args1 );
+    $result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1 );
 } else {
-    $result_ids = jobly_merge_queries_and_get_ids( $taxonomy_args1 );
+    $result_ids = jobus_merge_queries_and_get_ids( $taxonomy_args1 );
 }
 
 $args = [
     'post_type' => 'company',
     'post_status' => 'publish',
-    'posts_per_page' => jobly_opt('company_posts_per_page'),
+    'posts_per_page' => jobus_opt('company_posts_per_page'),
     'paged' => $paged,
     'orderby' => $selected_order_by,
     'order' => $selected_order,
@@ -45,7 +45,7 @@ if ( ! empty( $result_ids ) ) {
 
 $company_query = new WP_Query($args);
 
-$company_archive_layout = $jobly_company_archive_layout ?? jobly_opt('company_archive_layout');
+$company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_layout');
 
 //============= Select Layout ==================//
 include 'contents-company/company-archive-'.$company_archive_layout.'.php';

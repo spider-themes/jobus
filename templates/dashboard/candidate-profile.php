@@ -79,7 +79,7 @@ $user_bio = get_user_meta($user->ID, 'description', true);
                 'menu_class'        => 'style-none',
                 'fallback_cb'       => false,
                 'depth'             => 1,
-                'walker'            => new \Jobly\Classes\Nav_Walker(),
+                'walker'            => new \Jobus\Classes\Nav_Walker(),
             ]);
         }
         ?>
@@ -156,7 +156,7 @@ $user_bio = get_user_meta($user->ID, 'description', true);
         </header>
         <!-- End Header -->
 
-        <h2 class="main-title"><?php esc_html_e('My Profile', 'jobly'); ?></h2>
+        <h2 class="main-title"><?php esc_html_e('My Profile', 'jobus'); ?></h2>
 
         <form action="#" id="candidateProfileForm" method="post" enctype="multipart/form-data">
 
@@ -167,22 +167,22 @@ $user_bio = get_user_meta($user->ID, 'description', true);
 
                     <!-- File Upload -->
                     <div class="upload-btn position-relative tran3s ms-4 me-3">
-                        <?php esc_html_e('Upload new photo', 'jobly'); ?>
+                        <?php esc_html_e('Upload new photo', 'jobus'); ?>
                         <input type="file" id="uploadImg" name="candidate_profile_picture" accept="image/*">
                     </div>
 
-                    <button type="submit" class="delete-btn tran3s"><?php esc_html_e('Delete', 'jobly'); ?></button>
+                    <button type="submit" class="delete-btn tran3s"><?php esc_html_e('Delete', 'jobus'); ?></button>
                 </div>
 
                 <div class="dash-input-wrapper mb-30">
-                    <label for=""><?php esc_html_e('Full Name*', 'jobly'); ?></label>
+                    <label for=""><?php esc_html_e('Full Name*', 'jobus'); ?></label>
                     <input type="text" placeholder="<?php echo esc_attr($user->display_name) ?>">
                 </div>
 
                 <div class="dash-input-wrapper">
-                    <label for=""><?php esc_html_e('Bio*', 'jobly'); ?></label>
+                    <label for=""><?php esc_html_e('Bio*', 'jobus'); ?></label>
                     <textarea class="size-lg"><?php echo esc_attr($user_bio) ?></textarea>
-                    <div class="alert-text"><?php esc_html_e('Brief description for your profile. URLs are hyperlinked.', 'jobly'); ?></div>
+                    <div class="alert-text"><?php esc_html_e('Brief description for your profile. URLs are hyperlinked.', 'jobus'); ?></div>
                 </div>
             </div>
 

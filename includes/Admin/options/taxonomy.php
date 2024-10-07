@@ -7,11 +7,11 @@ if (!defined('ABSPATH')) {
 if ( class_exists( 'CSF' ) ) {
 
 	/**
-	 * Jobly Category Taxonomy
+	 * Jobus Category Taxonomy
 	 *
 	 * Set a unique slug-like ID
 	 */
-    $meta_tax = 'jobly_taxonomy_cat';
+    $meta_tax = 'jobus_taxonomy_cat';
 
     // Create taxonomy options
     CSF::createTaxonomyOptions( $meta_tax, array(

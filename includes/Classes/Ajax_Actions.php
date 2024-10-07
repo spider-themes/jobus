@@ -15,15 +15,15 @@ class Ajax_Actions
         add_action('wp_ajax_nopriv_candidate_send_mail_form', [$this, 'ajax_send_contact_email']);
 
         // Job Single Page-> Job Application Form
-        add_action('wp_ajax_jobly_job_application', 'job_application_form');
-        add_action('wp_ajax_nopriv_jobly_job_application', 'job_application_form');
+        add_action('wp_ajax_jobus_job_application', 'job_application_form');
+        add_action('wp_ajax_nopriv_jobus_job_application', 'job_application_form');
     }
 
     public function ajax_send_contact_email(): void
     {
 
         // Check nonce for security
-        if (!check_ajax_referer('jobly_candidate_contact_mail_form', 'security', false)) {
+        if (!check_ajax_referer('jobus_candidate_contact_mail_form', 'security', false)) {
             wp_send_json_error('Nonce verification failed.');
             return;
         }
@@ -32,7 +32,7 @@ class Ajax_Actions
         $candidate_id = intval($_POST['candidate_id']) ?? '';
 
         // Retrieve candidate email
-        $meta = get_post_meta($candidate_id, 'jobly_meta_candidate_options', true);
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
         $candidate_mail = !empty($meta['candidate_mail']) ? sanitize_email($meta['candidate_mail']) : '';
 
         // Sanitize and get form data

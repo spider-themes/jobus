@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package jobly
+ * @package jobus
  */
 
 if (!defined('ABSPATH')) {
@@ -25,7 +25,7 @@ $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 
 $args = array(
     'post_type'      => 'candidate',
     'post_status'    => 'publish',
-    'posts_per_page' => jobly_opt('candidate_posts_per_page'),
+    'posts_per_page' => jobus_opt('candidate_posts_per_page'),
     'orderby'        => $selected_order_by,
     'order'          => $selected_order,
 );
@@ -103,7 +103,7 @@ $candidate_count = $candidate_query->found_posts;
                         <div class="row">
                             <?php
                             while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                $meta = get_post_meta(get_the_ID(), 'jobly_meta_candidate_options', true);
+                                $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
                                 $is_favourite = ($post_favourite == '1') ? ' favourite' : '';
                                 ?>
@@ -126,9 +126,9 @@ $candidate_count = $candidate_query->found_posts;
                                         </h4>
 
                                         <?php
-                                        if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1' )) {
+                                        if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                             ?>
-                                            <div class="candidate-post text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                            <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
                                             <?php
                                         }
 
@@ -161,13 +161,13 @@ $candidate_count = $candidate_query->found_posts;
                                         ?>
                                         <div class="row gx-1">
                                             <?php
-                                            if ( jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2' )) {
+                                            if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2' )) {
                                                 ?>
 
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
-                                                        <span><?php echo jobly_meta_candidate_spec_name(2); ?></span>
-                                                        <div class="text-capitalize"><?php echo jobly_get_meta_attributes('jobly_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                        <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                        <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                     </div>
                                                 </div>
                                                 <?php
@@ -236,7 +236,7 @@ $candidate_count = $candidate_query->found_posts;
 
                     <div class="pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobly_pagination($candidate_query, 'jobly_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
+                        <?php jobus_pagination($candidate_query, 'jobus_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
 
                     </div>
 

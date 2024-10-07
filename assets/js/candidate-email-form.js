@@ -12,9 +12,9 @@
             let messageContainer = $('#email-form-message');
 
             $.ajax({
-                url: jobly_candidate_email_form.ajaxurl, // WordPress AJAX URL
+                url: jobus_candidate_email_form.ajaxurl, // WordPress AJAX URL
                 type: 'POST',
-                data: formData + '&action=candidate_send_mail_form&security=' + jobly_candidate_email_form.nonce + '&candidate_id=' + candidateId,
+                data: formData + '&action=candidate_send_mail_form&security=' + jobus_candidate_email_form.nonce + '&candidate_id=' + candidateId,
                 success: function(response) {
                     messageContainer.removeClass('success error'); // Clear any previous messages
 

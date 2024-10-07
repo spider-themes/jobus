@@ -40,7 +40,7 @@ function Edit( { attributes, setAttributes } ) {
             </InspectorControls>
 
             <div { ...blockProps }>
-                [jobly_company_archive]
+                [jobus_company_archive]
             </div>
         </>
     );

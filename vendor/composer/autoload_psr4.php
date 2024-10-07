@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Jobly\\' => array($baseDir . '/includes'),
+    'Jobus\\' => array($baseDir . '/includes'),
 );

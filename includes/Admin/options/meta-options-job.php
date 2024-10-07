@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 if (class_exists('CSF')) {
 
     // Set a unique slug-like ID for meta options
-    $meta_prefix = 'jobly_meta_options';
+    $meta_prefix = 'jobus_meta_options';
 
     CSF::createMetabox($meta_prefix, array(
         'title' => esc_html__('Job Options', 'jobus'),
@@ -19,7 +19,7 @@ if (class_exists('CSF')) {
     // Company Info Meta Options
     CSF::createSection($meta_prefix, array(
         'title' => esc_html__('General', 'jobus'),
-        'id' => 'jobly_meta_general',
+        'id' => 'jobus_meta_general',
         'icon' => 'fas fa-home',
         'fields' => array(
 
@@ -109,7 +109,7 @@ if (class_exists('CSF')) {
     ));
 
     // Retrieve the repeater field configurations from settings options    
-    $specifications = jobly_opt('job_specifications');
+    $specifications = jobus_opt('job_specifications');
     if (is_array($specifications)) {
         foreach ($specifications as $field) {
 
@@ -152,7 +152,7 @@ if (class_exists('CSF')) {
             'title' => esc_html__('Specifications', 'jobus'),
             'fields' => $fields,
             'icon'   => 'fas fa-cogs',
-            'id'     => 'jobly_meta_specifications',
+            'id'     => 'jobus_meta_specifications',
         ));
     }
 }

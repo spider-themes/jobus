@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-$meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
+$meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 ?>
 <div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
@@ -19,7 +19,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
                         <div class="row">
                             <?php
-                            $filter_widgets = jobly_opt('job_sidebar_widgets');
+                            $filter_widgets = jobus_opt('job_sidebar_widgets');
 
                             if (isset($filter_widgets) && is_array($filter_widgets)) {
                                 foreach ( $filter_widgets as $index => $widget ) {
@@ -64,7 +64,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                             $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                             $modifiedVal = strtolower($modifiedSelect);
 
-                                                            $searched_val = jobly_search_terms($widget_name);
+                                                            $searched_val = jobus_search_terms($widget_name);
                                                             $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
                                                             $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
                                                             ?>
@@ -95,7 +95,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                                 $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                                 $opt_val = strtolower($modifiedValues);
 
-                                                                $searched_opt = jobly_search_terms($widget_name);
+                                                                $searched_opt = jobus_search_terms($widget_name);
                                                                 $check_status = array_search($opt_val, $searched_opt);
                                                                 ?>
                                                                 <li>
@@ -139,8 +139,8 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     $min_values = min($all_values);
                                                     $max_values = max($all_values);
 
-                                                    $min_salary = jobly_search_terms($widget_name)[ 0 ] ?? $min_values;
-                                                    $max_salary = jobly_search_terms($widget_name)[ 1 ] ?? $max_values;
+                                                    $min_salary = jobus_search_terms($widget_name)[ 0 ] ?? $min_values;
+                                                    $max_salary = jobus_search_terms($widget_name)[ 1 ] ?? $max_values;
                                                     ?>
                                                     <div class="main-body flex-fill">
                                                         <div class="salary-slider" data_widget="<?php echo esc_attr($widget_name) ?>[]">
@@ -177,7 +177,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
 
 
                             // Retrieve the sortable field value
-                            $sortables = jobly_opt('is_sortable_job_sidebar');
+                            $sortables = jobus_opt('is_sortable_job_sidebar');
 
                             // Check if the sortable field value is not empty
                             if ( ! empty( $sortables ) ) {
@@ -195,7 +195,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobus'); ?></div>
                                                     <select class="nice-select" name="company_cats[]">
                                                         <?php
-                                                        $searched_opt = jobly_search_terms('company_cats');
+                                                        $searched_opt = jobus_search_terms('company_cats');
                                                         foreach ( $term_cats as $term ) {
                                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                             echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';
@@ -220,7 +220,7 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobus'); ?></div>
                                                     <select class="nice-select" name="job_locations[]">
                                                         <?php
-                                                        $searched_opt = jobly_search_terms('job_locations');
+                                                        $searched_opt = jobus_search_terms('job_locations');
                                                         foreach ( $term_loc as $term ) {
                                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                             echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';

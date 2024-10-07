@@ -1,11 +1,11 @@
 {
-    "name": "spider-themes/jobly",
+    "name": "spider-themes/jobus",
     "description": "Efficient job search and recruitment plugin. Connects job seekers with opportunities and helps businesses find top talent.",
     "type": "wordpress-plugin",
     "license": "GPLv2",
     "autoload": {
         "psr-4": {
-            "Jobly\\": "includes/"
+            "Jobus\\": "includes/"
         }
     },
     "minimum-stability": "dev",
