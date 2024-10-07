@@ -24,7 +24,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
     <div class="container">
         <div class="row">
 
-            <?php jobly_get_template_part('contents-job/sidebar-search-filter-2'); ?>
+            <?php jobus_get_template_part('contents-job/sidebar-search-filter-2'); ?>
 
             <div class="col-12">
                 <div class="job-post-item-wrapper">
@@ -116,8 +116,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 	                                            }
 	                                            ?>
                                             <div class="job-category">
-                                                <a href="<?php echo jobly_get_first_taxonomoy_link() ?>">
-                                                    <?php echo jobly_get_first_taxonomoy_name(); ?>
+                                                <a href="<?php echo jobus_get_first_taxonomoy_link() ?>">
+                                                    <?php echo jobus_get_first_taxonomoy_name(); ?>
                                                 </a>
                                             </div>
                                         </div>

@@ -92,7 +92,7 @@ class Shortcode {
     public static function job_page_layout( $args = [] ) {
 
         if ( ! is_admin() ) {
-            jobly_get_template( 'archive-job.php', [
+            jobus_get_template( 'archive-job.php', [
                 'jobly_job_archive_layout' => $args['job_layout'],
             ] );
         }
@@ -109,7 +109,7 @@ class Shortcode {
     public static function company_page_layout( $args = [] ) {
 
         if ( ! is_admin() ) {
-            jobly_get_template( 'archive-company.php', [
+            jobus_get_template( 'archive-company.php', [
                 'jobly_company_archive_layout' => $args['company_layout'],
             ] );
         }
@@ -127,7 +127,7 @@ class Shortcode {
     {
 
         if (!is_admin()) {
-            jobly_get_template('archive-candidate.php', [
+            jobus_get_template('archive-candidate.php', [
                 'jobly_candidate_archive_layout' => $args['candidate_layout'],
             ]);
         }

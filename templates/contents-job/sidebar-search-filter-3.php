@@ -28,10 +28,10 @@ $meta = get_post_meta(get_the_ID(), 'jobly_meta_options', true);
                                     $widget_layout = $widget[ 'widget_layout' ] ?? '';
                                     $range_suffix = $widget[ 'range_suffix' ] ?? '';
 
-                                    $specifications = jobly_get_specs();
+                                    $specifications = jobus_get_specs();
                                     $widget_title = $specifications[ $widget_name ] ?? '';
 
-                                    $job_specifications = jobly_get_specs_options();
+                                    $job_specifications = jobus_get_specs_options();
                                     $job_specifications = $job_specifications[ $widget_name ] ?? '';
 
                                     ?>

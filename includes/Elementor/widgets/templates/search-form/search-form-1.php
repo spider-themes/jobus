@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 
                     $border_left = $index > 0 ? ' border-left' : '';
                     $select_job_attr = $item[ 'select_job_attr' ] ?? '';
-                    $job_specifications = jobly_get_specs_options();
+                    $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
                     <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
@@ -90,7 +90,7 @@ if (!defined('ABSPATH')) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     if ( !empty($keyword['title']) ) { ?>
                         <li>
-                            <a <?php jobly_button_link($keyword['link']); ?>>
+                            <a <?php jobus_button_link($keyword['link']); ?>>
                                 <?php echo esc_html($keyword[ 'title' ]) ?>
                             </a>
                         </li>

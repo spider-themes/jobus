@@ -153,5 +153,5 @@ get_footer();
 
 //Sidebar Popup
 if ( $candidate_archive_layout == '2' ) {
-    jobly_get_template_part('contents-candidate/sidebar-search-filter-popup');
+    jobus_get_template_part('contents-candidate/sidebar-search-filter-popup');
 }

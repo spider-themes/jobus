@@ -24,7 +24,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
     <div class="container">
         <div class="row">
 
-            <?php jobly_get_template_part('contents-candidate/sidebar-search-filter'); ?>
+            <?php jobus_get_template_part('contents-candidate/sidebar-search-filter'); ?>
 
             <div class="col-xl-9 col-lg-8">
                 <div class="ms-xxl-5 ms-xl-3">

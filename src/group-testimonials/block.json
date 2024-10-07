@@ -1,6 +1,6 @@
 {
   "apiVersion": 3,
-  "name": "jobus/group-testimonials",
+  "name": "jobly/group-testimonials",
   "version": "1.0.0",
   "title": "Testimonials (Jobly)",
   "description": "Jobly Testimonials. A block that allows you to add a client review to your page.",

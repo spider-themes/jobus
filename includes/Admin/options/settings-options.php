@@ -202,7 +202,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
@@ -210,7 +210,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
             ),
 
@@ -219,7 +219,7 @@ if( class_exists( 'CSF' ) ) {
                 'type'      => 'select',
                 'title'     => esc_html__('
                 Attribute 03', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
                 'dependency' => array('job_archive_attr_layout', '==', 'list'),
             ),
 
@@ -254,7 +254,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobus' ),
-                        'options'       => jobly_get_specs(),
+                        'options'       => jobus_get_specs(),
                         'default'       => false,
                     ),
 
@@ -371,21 +371,21 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'job_related_post_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_3',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 03', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
             ),
 
         )
@@ -520,7 +520,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'company_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobly_get_specs('company_specifications'),
+                'options'   => jobus_get_specs('company_specifications'),
                 'dependency' => array('company_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
@@ -528,7 +528,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'company_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobly_get_specs('company_specifications'),
+                'options'   => jobus_get_specs('company_specifications'),
                 'dependency' => array('company_archive_attr_layout', '==', 'list'),
             ),
 
@@ -559,7 +559,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobus' ),
-                        'options'       => jobly_get_specs('company_specifications'),
+                        'options'       => jobus_get_specs('company_specifications'),
                         'default'       => false,
                     ),
 
@@ -621,14 +621,14 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'company_open_job_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'company_open_job_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobly_get_specs(),
+                'options'   => jobus_get_specs(),
             ),
 
         )
@@ -761,7 +761,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'candidate_archive_meta_1',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobly_get_specs('candidate_specifications'),
+                'options'   => jobus_get_specs('candidate_specifications'),
                 'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
@@ -769,7 +769,7 @@ if( class_exists( 'CSF' ) ) {
                 'id'        => 'candidate_archive_meta_2',
                 'type'      => 'select',
                 'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobly_get_specs('candidate_specifications'),
+                'options'   => jobus_get_specs('candidate_specifications'),
                 'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
             ),
 
@@ -805,7 +805,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobus' ),
-                        'options'       => jobly_get_specs('candidate_specifications'),
+                        'options'       => jobus_get_specs('candidate_specifications'),
                         'default'       => false,
                     ),
 

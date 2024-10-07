@@ -42,10 +42,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $widget_layout = $widget[ 'widget_layout' ] ?? '';
                         $range_suffix = $widget[ 'range_suffix' ] ?? '';
 
-                        $specifications = jobly_get_specs('candidate_specifications');
+                        $specifications = jobus_get_specs('candidate_specifications');
                         $widget_title = $specifications[ $widget_name ] ?? '';
 
-                        $candidate_specifications = jobly_get_specs_options('candidate_specifications');
+                        $candidate_specifications = jobus_get_specs_options('candidate_specifications');
                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
 

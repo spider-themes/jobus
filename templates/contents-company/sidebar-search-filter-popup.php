@@ -34,10 +34,10 @@ if (!defined('ABSPATH')) {
                                         $widget_name = $widget['widget_name'] ?? '';
                                         $widget_layout = $widget['widget_layout'] ?? '';
 
-                                        $specifications = jobly_get_specs('company_specifications');
+                                        $specifications = jobus_get_specs('company_specifications');
                                         $widget_title = $specifications[$widget_name] ?? '';
 
-                                        $company_specifications = jobly_get_specs_options('company_specifications');
+                                        $company_specifications = jobus_get_specs_options('company_specifications');
                                         $company_specifications = $company_specifications[$widget_name] ?? '';
                                         ?>
                                         <div class="col-lg-4">

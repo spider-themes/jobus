@@ -1,6 +1,6 @@
 {
   "apiVersion": 3,
-  "name": "jobus/shortcode-candidate-archive",
+  "name": "jobly/shortcode-candidate-archive",
   "title": "Candidate Archive Shortcode (Jobly)",
   "category": "jobus-blocks",
   "icon": "dashicons dashicons-shortcode",

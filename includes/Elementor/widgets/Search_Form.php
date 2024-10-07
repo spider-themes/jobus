@@ -120,7 +120,7 @@ class Search_Form extends Widget_Base {
 			'select_job_attr', [
 				'label'   => esc_html__( 'Attribute', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
-				'options' => jobly_get_specs(),
+				'options' => jobus_get_specs(),
 			]
 		);
 

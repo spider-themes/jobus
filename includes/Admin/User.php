@@ -16,15 +16,23 @@ class User {
 
         // Add Manage Custom User Roles
         add_action('init', [$this, 'manage_user_roles']);
+
+        // Add Manage Custom User Roles
         register_activation_hook(__FILE__, [$this, 'add_user_roles']);
+
+        // Hook to remove user roles on plugin/theme deactivation
         register_deactivation_hook(__FILE__, [$this, 'remove_user_roles']);
 
-
+        // Handle Candidate Registration for non-logged and logged-in in users
         add_action('admin_post_nopriv_register_candidate', [$this, 'candidate_registration']);
         add_action('admin_post_register_candidate', [$this, 'candidate_registration']);
 
+        // Handle Employer  Registration for non-logged and logged-in in users
         add_action('admin_post_nopriv_register_employer', [$this, 'employer_registration']);
         add_action('admin_post_register_employer', [$this, 'employer_registration']);
+
+        // Restrict admin menu items for users with the Candidate role
+        add_action('admin_menu', [$this, 'restrict_candidate_menu']);
 
     }
 
@@ -38,27 +46,43 @@ class User {
     {
 
         add_role( 'jobly_candidate', esc_html__('Candidate (Jobly)', 'jobus'), array(
-            'read' => true,
-            'edit_candidate' => true,
-            'delete_candidate' => true,
-            'edit_candidates' => true,
-            'publish_candidates' => true,
-            'read_private_candidates' => true,
-            'delete_candidates' => true,
-            'edit_published_candidates' => true,
-            'delete_published_candidates' => true,
+            'read'                  => true,
+            'read_post'             => true,
+            'read_private_posts'    => true,
+            'edit_post'             => true,
+            'edit_posts'            => true,
+            'edit_others_posts'     => false, // Restrict editing others' posts
+            'edit_private_posts'    => true,
+            'edit_published_posts'  => true,
+            'create_posts'          => true,
+            'publish_posts'         => true,
+            'delete_post'           => true,
+            'delete_posts'          => true,
+            'delete_private_posts'  => true,
+            'delete_others_posts'   => false, // Restrict deleting others' posts
+            'delete_published_posts'=> true,
+            'manage_categories'     => true,  // Capability to manage categories
+            'manage_candidate_cat'  => true,  // Capability to manage candidate categories
+            'manage_candidate_location' => true,  // Capability to manage candidate locations
+            'manage_candidate_skill' => true,  // Capability to manage candidate skills
         ));
 
         add_role( 'jobly_employer', esc_html__('Employer (Jobly)', 'jobus'), array(
-            'read' => true,
-            'edit_post' => true,
-            'delete_post' => true,
-            'edit_posts' => true,
-            'publish_posts' => true,
-            'read_private_posts' => true,
-            'delete_posts' => true,
-            'edit_published_posts' => true,
-            'delete_published_posts' => true,
+            'read'                  => true,
+            'read_post'             => true,
+            'read_private_posts'    => true,
+            'edit_post'             => true,
+            'edit_posts'            => true,
+            'edit_others_posts'     => false, // Restrict editing others' posts
+            'edit_private_posts'    => true,
+            'edit_published_posts'  => true,
+            'create_posts'          => true,
+            'publish_posts'         => true,
+            'delete_post'           => true,
+            'delete_posts'          => true,
+            'delete_private_posts'  => true,
+            'delete_others_posts'   => false, // Restrict deleting others' posts
+            'delete_published_posts'=> true,
         ));
 
     }
@@ -154,5 +178,22 @@ class User {
         }
     }
 
+
+    /**
+     * Restrict certain admin menu items for users with the Candidate role.
+     */
+    public function restrict_candidate_menu(): void
+    {
+        $user = wp_get_current_user();
+        if (in_array('jobly_candidate', (array) $user->roles)) {
+            // Remove unnecessary menus
+            remove_menu_page('edit.php'); // Posts
+            remove_menu_page('edit-comments.php'); // Comments
+            remove_menu_page('tools.php'); // Tools
+            remove_menu_page('edit.php?post_type=job'); // Job
+            remove_menu_page('edit.php?post_type=company'); // Company
+            remove_menu_page('edit.php?post_type=elementor_library'); // elementor_library
+        }
+    }
 
 }

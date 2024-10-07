@@ -52,7 +52,7 @@ if (class_exists('CSF')) {
                 'id' => 'select_company',
                 'type' => 'select',
                 'title' => esc_html__('Select Company', 'jobus'),
-                'options' => jobly_company_post_list(),
+                'options' => jobus_company_post_list(),
                 'chosen' => true,
                 'default' => '',
             ),

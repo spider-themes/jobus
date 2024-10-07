@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) {
 }
 
 
-if ( ! function_exists( 'jobly_rtl') ) {
-	function jobly_rtl(): string {
+if ( ! function_exists( 'jobus_rtl') ) {
+	function jobus_rtl(): string {
 		return is_rtl() ? 'true' : 'false';
 	}
 }
@@ -35,8 +35,8 @@ if (!function_exists('jobly_meta')) {
  * Jobly Custom Template Part
  * @return array
  */
-if (!function_exists('jobly_get_template_part')) {
-    function jobly_get_template_part ($template)
+if (!function_exists('jobus_get_template_part')) {
+    function jobus_get_template_part ($template): void
     {
 
         // Get the slug
@@ -56,15 +56,15 @@ if (!function_exists('jobly_get_template_part')) {
 }
 
 
-
 /**
  * Get template part implementation for jobly.
  * Looks at the theme directory first
  *
- * @param       $template
+ * @param $template_name
  * @param array $args
  */
-function jobly_get_template( $template_name, $args = [] ) {
+function jobus_get_template($template_name, array $args = [] ): void
+{
 
     $jobus_obj = Jobus::init();
 
@@ -86,8 +86,8 @@ function jobly_get_template( $template_name, $args = [] ) {
  * @get the first taxonomy
  * @return string
  */
-if (!function_exists('jobly_get_first_taxonomoy_name')) {
-    function jobly_get_first_taxonomoy_name ($term = 'job_cat')
+if (!function_exists('jobus_get_first_taxonomoy_name')) {
+    function jobus_get_first_taxonomoy_name ($term = 'job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -104,8 +104,8 @@ if (!function_exists('jobly_get_first_taxonomoy_name')) {
  * @get the first taxonomy url
  * @return string
  */
-if (!function_exists('jobly_get_first_taxonomoy_link')) {
-    function jobly_get_first_taxonomoy_link ($term = 'job_cat')
+if (!function_exists('jobus_get_first_taxonomoy_link')) {
+    function jobus_get_first_taxonomoy_link ($term = 'job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -122,8 +122,8 @@ if (!function_exists('jobly_get_first_taxonomoy_link')) {
  * @get the tag list of job_tag
  * @return string
  */
-if (!function_exists('jobly_get_tag_list')) {
-    function jobly_get_tag_list ($term = 'job_tag')
+if (!function_exists('jobus_get_tag_list')) {
+    function jobus_get_tag_list ($term = 'job_tag'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -149,8 +149,8 @@ if (!function_exists('jobly_get_tag_list')) {
  *
  * @return array
  */
-if (!function_exists('jobly_get_categories')) {
-    function jobly_get_categories ($term = 'job_cat')
+if (!function_exists('jobus_get_categories')) {
+    function jobus_get_categories ($term = 'job_cat'): array
     {
         $cats = get_terms(array(
             'taxonomy' => $term,
@@ -174,8 +174,8 @@ if (!function_exists('jobly_get_categories')) {
  * @param int $default
  * @return string|void
  */
-if (!function_exists('jobly_title_length')) {
-    function jobly_title_length ($settings, $settings_key, $default = 10)
+if (!function_exists('jobus_title_length')) {
+    function jobus_title_length ($settings, $settings_key, $default = 10): void
     {
         $title_length = !empty($settings[ $settings_key ]) ? $settings[ $settings_key ] : $default;
         $title = get_the_title() ? wp_trim_words(get_the_title(), $title_length, '') : the_title();
@@ -191,8 +191,8 @@ if (!function_exists('jobly_title_length')) {
  * @param int $default
  * @return string
  */
-if (!function_exists('jobly_excerpt_length')) {
-    function jobly_excerpt_length ($settings, $settings_key, $default = 10)
+if (!function_exists('jobus_excerpt_length')) {
+    function jobus_excerpt_length ($settings, $settings_key, $default = 10): void
     {
         $excerpt_length = !empty($settings[ $settings_key ]) ? $settings[ $settings_key ] : $default;
         $excerpt = get_the_excerpt() ? wp_trim_words(get_the_excerpt(), $excerpt_length, '...') : wp_trim_words(get_the_content(), $excerpt_length, '...');
@@ -209,8 +209,8 @@ if (!function_exists('jobly_excerpt_length')) {
  * The button link
  * @return void
  */
-if (!function_exists('jobly_button_link')) {
-    function jobly_button_link ($settings_key, $is_echo = true)
+if (!function_exists('jobus_button_link')) {
+    function jobus_button_link ($settings_key, $is_echo = true): void
     {
 
         if ($is_echo) {
@@ -238,8 +238,8 @@ if (!function_exists('jobly_button_link')) {
  *
  * Company post page data list
  */
-if (!function_exists('jobly_company_post_list')) {
-    function jobly_company_post_list ()
+if (!function_exists('jobus_company_post_list')) {
+    function jobus_company_post_list (): array
     {
 
         // Get all the Company posts
@@ -265,7 +265,7 @@ if (!function_exists('jobly_company_post_list')) {
 }
 
 
-function jobly_get_specs ($settings_id = 'job_specifications')
+function jobus_get_specs ($settings_id = 'job_specifications')
 {
     $specifications = jobly_opt($settings_id);
 
@@ -299,8 +299,8 @@ function jobly_get_specs ($settings_id = 'job_specifications')
 
 
 
-if (!function_exists('jobly_get_specs_options')) {
-    function jobly_get_specs_options ($settings_id = 'job_specifications')
+if (!function_exists('jobus_get_specs_options')) {
+    function jobus_get_specs_options ($settings_id = 'job_specifications')
     {
         $specifications = jobly_opt($settings_id);
 
@@ -901,8 +901,8 @@ function jobly_phpmailer_init( $phpmailer ) {
     return $phpmailer;
 }
 
-if ( ! function_exists( 'jobly_rtl') ) {
-    function jobly_rtl(): string {
+if ( ! function_exists( 'jobus_rtl') ) {
+    function jobus_rtl(): string {
         return is_rtl() ? 'true' : 'false';
     }
 }

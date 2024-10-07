@@ -1,6 +1,6 @@
 {
   "apiVersion": 3,
-  "name": "jobus/shortcode-job-archive",
+  "name": "jobly/shortcode-job-archive",
   "title": "Job Archive Shortcode (Jobly)",
   "category": "jobus-blocks",
   "icon": "dashicons dashicons-shortcode",

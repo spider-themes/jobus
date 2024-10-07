@@ -112,7 +112,7 @@ class Companies extends Widget_Base {
                 'label' => esc_html__('Category', 'jobus'),
                 'description' => esc_html__('Display blog by categories', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => jobly_get_categories(),
+                'options' => jobus_get_categories(),
                 'multiple' => true,
                 'label_block' => true,
             ]
@@ -178,7 +178,7 @@ class Companies extends Widget_Base {
             'company_attr_meta_1', [
                 'label' => esc_html__('Attribute 01', 'jobus'),
                 'type' => Controls_Manager::SELECT,
-                'options' => jobly_get_specs('company_specifications'),
+                'options' => jobus_get_specs('company_specifications'),
             ]
         );
 

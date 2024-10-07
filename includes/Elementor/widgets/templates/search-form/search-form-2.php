@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     if ( !empty($keyword['title']) ) { ?>
                         <li>
-                            <a <?php jobly_button_link($keyword['link']); ?>>
+                            <a <?php jobus_button_link($keyword['link']); ?>>
                                 <?php echo esc_html($keyword[ 'title' ]) ?>
                             </a>
                         </li>

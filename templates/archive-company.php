@@ -56,5 +56,5 @@ get_footer();
 
 //Sidebar Popup
 if ( $company_archive_layout == '2' ) {
-    jobly_get_template_part('contents-company/sidebar-search-filter-popup');
+    jobus_get_template_part('contents-company/sidebar-search-filter-popup');
 }

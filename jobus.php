@@ -75,6 +75,9 @@ if ( ! class_exists( 'Jobus' ) ) {
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
+            // Register the candidate menu for administrators only
+            add_action('init', [$this, 'register_menu']);
+
 		}
 
 		/**
@@ -86,6 +89,16 @@ if ( ! class_exists( 'Jobus' ) ) {
         {
 			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
+
+
+        public function register_menu(): void
+        {
+            register_nav_menus([
+                'candidate_menu' => esc_html__('Candidate Menu', 'jobly'),
+            ]);
+
+        }
+
 
 		/**
 		 * Include Files
@@ -106,12 +119,13 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-
+            require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
+            require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
-            // Frontend
+            // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Assets.php';
             require_once __DIR__ . '/includes/Frontend/Frontend.php';
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
@@ -126,15 +140,44 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/posttypes/Job.php';
             require_once __DIR__ . '/includes/Admin/posttypes/Company.php';
 
-            //Elementor Widgets
+            //Elementor & Blocks
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-            new Jobus\Elementor\Register_Widgets();
-
-
-            // Gutenberg Blocks
             require_once __DIR__ . '/Blocks.php';
-            new Jobus\Gutenberg\Blocks();
+
 		}
+
+        /**
+         * Initializes the plugin
+         * @return void
+         */
+        public function init_plugin(): void
+        {
+
+            // Classes
+            new Jobus\includes\Classes\Ajax_Actions();
+
+            //Admin UI
+            if ( is_admin() ) {
+                new Jobus\Admin\User();
+                new Jobus\Admin\Assets();
+            }
+
+            //Post Type
+            new Jobus\Admin\Posttypes\Job_Application();
+            new Jobus\Admin\Posttypes\Candidate();
+            new Jobus\Admin\Posttypes\Job();
+            new Jobus\Admin\Posttypes\Company();
+
+            // Frontend UI
+            new Jobus\Frontend\Assets();
+            new Jobus\Frontend\Frontend();
+            new Jobus\Frontend\Shortcode();
+
+            //Elementor & Blocks
+            new Jobus\Elementor\Register_Widgets();
+            new Jobus\Gutenberg\Blocks();
+
+        }
 
 		/**
 		 * Define constants
@@ -149,32 +192,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
 			define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
 			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
-		}
-
-		/**
-		 * Initializes the plugin
-		 * @return void
-		 */
-		public function init_plugin(): void
-        {
-
-            //Classes
-            new Jobus\includes\Classes\Ajax_Actions();
-
-			if ( is_admin() ) {
-				new Jobus\Admin\User();
-                new Jobus\Admin\Assets();
-			} else {
-				new Jobus\Frontend\Frontend();
-                new Jobus\Frontend\Assets();
-			}
-
-            new Jobus\Admin\Posttypes\Job_Application();
-            new Jobus\Admin\Posttypes\Candidate();
-            new Jobus\Admin\Posttypes\Job();
-            new Jobus\Admin\Posttypes\Company();
-            new Jobus\Frontend\Shortcode();
-
 		}
 
         

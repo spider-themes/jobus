@@ -225,7 +225,7 @@ wp_enqueue_script('lightbox');
                             <?php
                         }
 	                    ?>
-                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(jobly_rtl()) ?>">
+                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">
 		                    <?php
 		                    foreach ( $portfolio_ids as $item ) {
 			                    $image_url = wp_get_attachment_image_url($item, 'full')

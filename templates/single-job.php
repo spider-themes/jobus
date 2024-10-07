@@ -36,6 +36,18 @@ get_footer();
                         <?php
                         wp_nonce_field('job_application_form_nonce', 'job_application_nonce_field');
                         $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten text-white';
+
+                        // Get current user information
+                        $user = wp_get_current_user();
+                        $candidate_fname = '';
+                        $candidate_lname = '';
+                        $candidate_email = '';
+
+
+                        // Fallback to display name if first/last names are missing
+                        $candidate_fname = get_user_meta($user->ID, 'first_name', true) ?: $user->display_name;
+                        $candidate_lname = get_user_meta($user->ID, 'last_name', true) ?: '';
+                        $candidate_email = $user->user_email;
                         ?>
 
                         <form action="#" name="job_application_form" class="job_application_form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
@@ -47,17 +59,17 @@ get_footer();
 
                                 <div class="col-md-6">
                                     <label for="firstName" class="form-label"><?php esc_html_e('First Name', 'jobus'); ?></label>
-                                    <input type="text" class="form-control" id="firstName" name="candidate_fname" required>
+                                    <input type="text" class="form-control" id="firstName" name="candidate_fname" value="<?php echo esc_attr($candidate_fname); ?>" required>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="lastName" class="form-label"><?php esc_html_e('Last Name', 'jobus'); ?></label>
-                                    <input type="text" class="form-control" id="lastName" name="candidate_lname" required>
+                                    <input type="text" class="form-control" id="lastName" name="candidate_lname" value="<?php echo esc_attr($candidate_lname); ?>" required>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label for="email" class="form-label"><?php esc_html_e('Email', 'jobus'); ?></label>
-                                    <input type="email" class="form-control" id="email" name="candidate_email" required>
+                                    <input type="email" class="form-control" id="email" name="candidate_email" value="<?php echo esc_attr($candidate_email); ?>" required>
                                 </div>
 
                                 <div class="col-md-12">

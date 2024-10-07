@@ -53,8 +53,8 @@ if (!defined('ABSPATH')) {
                             </div>
                         <?php endif; ?>
                         <div class="job-category">
-                            <a href="<?php echo jobly_get_first_taxonomoy_link() ?>">
-                                <?php echo jobly_get_first_taxonomoy_name(); ?>
+                            <a href="<?php echo jobus_get_first_taxonomoy_link() ?>">
+                                <?php echo jobus_get_first_taxonomoy_name(); ?>
                             </a>
                         </div>
                     </div>
