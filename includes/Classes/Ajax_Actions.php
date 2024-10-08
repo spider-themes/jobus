@@ -80,7 +80,7 @@ class Ajax_Actions
 
         // Save the application as a new post
         $application_id = wp_insert_post(array(
-            'post_type' => 'job_application',
+            'post_type' => 'jobus_job_application',
             'post_status' => 'publish',
             'post_title' => $candidate_fname . ' ' . $candidate_lname,
         ));

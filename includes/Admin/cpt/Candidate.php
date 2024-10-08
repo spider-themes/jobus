@@ -70,7 +70,7 @@ class Candidate {
             'has_archive'           => true,
             'hierarchical'          => true,
             'map_meta_cap'          => true,
-            'taxonomies'            => array('candidate_cat', 'candidate_location', 'candidate_skill'),
+            'taxonomies'            => array('jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'),
             'supports'              => ['title', 'thumbnail', 'editor', 'excerpt', 'author'],
             'menu_position'         => 8,
             'menu_icon'             => 'dashicons-plus-alt',

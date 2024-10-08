@@ -10,7 +10,7 @@ if (class_exists('CSF')) {
 
     CSF::createMetabox($meta_prefix, array(
         'title' => esc_html__('Job Options', 'jobus'),
-        'post_type' => 'job',
+        'post_type' => 'jobus_job',
         'theme' => 'dark',
         'output_css' => true,
         'show_restore' => true,

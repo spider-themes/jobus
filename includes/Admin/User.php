@@ -190,8 +190,8 @@ class User {
             remove_menu_page('edit.php'); // Posts
             remove_menu_page('edit-comments.php'); // Comments
             remove_menu_page('tools.php'); // Tools
-            remove_menu_page('edit.php?post_type=job'); // Job
-            remove_menu_page('edit.php?post_type=company'); // Company
+            remove_menu_page('edit.php?post_type=jobus_job'); // Job
+            remove_menu_page('edit.php?post_type=jobus_company'); // Company
             remove_menu_page('edit.php?post_type=elementor_library'); // elementor_library
         }
     }

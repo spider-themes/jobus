@@ -7,14 +7,14 @@ if (!defined('ABSPATH')) {
 $current_post_id = get_the_ID();
 
 $args = [
-    'post_type' => 'job',
+    'post_type' => 'jobus_job',
     'posts_per_page' => 4, // Adjust the number of related jobs to display
     'post__not_in' => [ $current_post_id ], // Exclude the current post
     'tax_query' => [
         [
-            'taxonomy' => 'job_cat',
+            'taxonomy' => 'jobus_job_cat',
             'field' => 'id',
-            'terms' => wp_get_post_terms($current_post_id, 'job_cat', [ 'fields' => 'ids' ]),
+            'terms' => wp_get_post_terms($current_post_id, 'jobus_job_cat', [ 'fields' => 'ids' ]),
         ],
     ],
 ];

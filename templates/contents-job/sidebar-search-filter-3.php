@@ -14,7 +14,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
 
-                    <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="pt-25 pb-30 ps-4 pe-4" role="search" method="get">
+                    <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30 ps-4 pe-4" role="search" method="get">
                         <input type="hidden" name="post_type" value="job"/>
 
                         <div class="row">
@@ -186,7 +186,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     // Widget Categories
                                     if ( $key === 'is_job_widget_cat' && $value ) {
                                         $term_cats = get_terms(array(
-                                            'taxonomy' => 'job_cat',
+                                            'taxonomy' => 'jobus_job_cat',
                                         ));
                                         if (!empty($term_cats)) {
                                             ?>
@@ -211,7 +211,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     // Widget Locations
                                     if ( $key === 'is_job_widget_location' && $value ) {
                                         $term_loc = get_terms(array(
-                                            'taxonomy' => 'job_location',
+                                            'taxonomy' => 'jobus_job_location',
                                         ));
                                         if (!empty($term_loc)) {
                                             ?>

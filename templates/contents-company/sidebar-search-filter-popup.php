@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
                     <div class="pt-25 pb-30 ps-4 pe-4">
 
 
-                        <form action="<?php echo esc_url(get_post_type_archive_link('company')) ?>" role="search"
+                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search"
                               method="get">
                             <input type="hidden" name="post_type" value="company"/>
 
@@ -123,7 +123,7 @@ if (!defined('ABSPATH')) {
                                 if (jobus_opt('is_company_widget_location') == true) {
 
                                     $term_locations = get_terms(array(
-                                        'taxonomy' => 'company_location',
+                                        'taxonomy' => 'jobus_company_location',
                                     ));
 
                                     if ( !empty($term_locations) ) {
@@ -149,7 +149,7 @@ if (!defined('ABSPATH')) {
                                 if (jobus_opt('is_company_widget_cat') == true) {
 
                                     $term_cats = get_terms(array(
-                                        'taxonomy' => 'company_cat',
+                                        'taxonomy' => 'jobus_company_cat',
                                     ));
                                     if ( !empty($term_cats) ) {
                                         ?>

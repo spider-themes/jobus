@@ -14,16 +14,16 @@ if (!defined('ABSPATH')) {
 get_header();
 
 // Get the current job category and job tag
-$current_candidate_cat = get_term_by('slug', get_query_var('candidate_cat'), 'candidate_cat');
-$current_candidate_loc = get_term_by('slug', get_query_var('candidate_location'), 'candidate_location');
-$current_candidate_skill = get_term_by('slug', get_query_var('candidate_skill'), 'candidate_skill');
+$current_candidate_cat = get_term_by('slug', get_query_var('jobus_candidate_cat'), 'jobus_candidate_cat');
+$current_candidate_loc = get_term_by('slug', get_query_var('jobus_candidate_location'), 'jobus_candidate_location');
+$current_candidate_skill = get_term_by('slug', get_query_var('jobus_candidate_skill'), 'jobus_candidate_skill');
 
 // These parameters are used to determine the sorting order of job posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
-    'post_type'      => 'candidate',
+    'post_type'      => 'jobus_candidate',
     'post_status'    => 'publish',
     'posts_per_page' => jobus_opt('candidate_posts_per_page'),
     'orderby'        => $selected_order_by,
@@ -34,19 +34,19 @@ if ($current_candidate_cat || $current_candidate_loc || $current_candidate_skill
     $args['tax_query'] = array(
         'relation' => 'OR',//Must satisfy at least one taxonomy query
         array(
-            'taxonomy' => 'candidate_cat',
+            'taxonomy' => 'jobus_candidate_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('candidate_cat'),
+            'terms'    => get_query_var('jobus_candidate_cat'),
         ),
 	    array(
-		    'taxonomy' => 'candidate_location',
+		    'taxonomy' => 'jobus_candidate_location',
 		    'field'    => 'slug',
-		    'terms'    => get_query_var('candidate_location'),
+		    'terms'    => get_query_var('jobus_candidate_location'),
 	    ),
         array(
-            'taxonomy' => 'candidate_skill',
+            'taxonomy' => 'jobus_candidate_skill',
             'field'    => 'slug',
-            'terms'    => get_query_var('candidate_skill'),
+            'terms'    => get_query_var('jobus_candidate_skill'),
         ),
     );
 }
@@ -132,7 +132,7 @@ $candidate_count = $candidate_query->found_posts;
                                             <?php
                                         }
 
-                                        $skills = get_the_terms(get_the_ID(), 'candidate_skill');
+                                        $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                         $max_skills = 2;
 
                                         if ($skills && count($skills) > $max_skills) {
@@ -173,7 +173,7 @@ $candidate_count = $candidate_query->found_posts;
                                                 <?php
                                             }
 
-                                            $locations = get_the_terms(get_the_ID(), 'candidate_location');
+                                            $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
                                             if (!empty($locations )) {
                                                 ?>
                                                 <div class="col-md-6">
@@ -192,7 +192,7 @@ $candidate_count = $candidate_query->found_posts;
                                             ?>
 
 	                                        <?php
-	                                        $locations = get_the_terms(get_the_ID(), 'candidate_location');
+	                                        $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
 	                                        if (!empty($locations )) { ?>
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">

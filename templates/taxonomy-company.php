@@ -14,26 +14,33 @@ if (!defined('ABSPATH')) {
 get_header();
 
 // Get the current company category
-$current_company_cat = get_term_by('slug', get_query_var('company_cat'), 'company_cat');
+$current_company_cat = get_term_by('slug', get_query_var('jobus_company_cat'), 'jobus_company_cat');
+$current_company_location = get_term_by('slug', get_query_var('jobus_company_location'), 'jobus_company_location');
 
 // These parameters are used to determine the sorting order of company posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
-    'post_type'      => 'company',
+    'post_type'      => 'jobus_company',
     'post_status'    => 'publish',
     'posts_per_page' => jobus_opt('company_posts_per_page'),
     'orderby'        => $selected_order_by,
     'order'          => $selected_order,
 );
 
-if ($current_company_cat ) {
+if ( $current_company_cat || $current_company_location ) {
     $args['tax_query'] = array(
+        'relation' => 'OR',//Must satisfy at least one taxonomy query
         array(
-            'taxonomy' => 'company_cat',
+            'taxonomy' => 'jobus_company_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('company_cat'),
+            'terms'    => get_query_var('jobus_company_cat'),
+        ),
+        array(
+            'taxonomy' => 'jobus_company_location',
+            'field'    => 'slug',
+            'terms'    => get_query_var('jobus_company_location'),
         ),
     );
 }
@@ -111,7 +118,7 @@ $company_count = $company_query->found_posts;
                                         </h5>
 
 	                                    <?php
-	                                    $locations=get_the_terms(get_the_ID(),'company_location');
+	                                    $locations=get_the_terms(get_the_ID(),'jobus_company_location');
 	                                    if(!empty($locations)){ ?>
                                             <p class="text-center mb-auto text-capitalize">
 			                                    <?php

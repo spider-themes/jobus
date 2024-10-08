@@ -70,7 +70,7 @@ $website_target = $website[ 'target' ] ?? '_self';
 
                                 }
 
-                                $terms = wp_get_post_terms(get_the_ID(), 'company_cat', array( 'fields' => 'names' ));
+                                $terms = wp_get_post_terms(get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ));
                                 if (is_array($terms)) {
                                     ?>
                                     <li class="col-12">
@@ -148,7 +148,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                 </div>
                 <div class="col-lg-5">
                     <div class="d-flex justify-content-lg-end">
-                        <a href="<?php echo esc_url(get_post_type_archive_link('job')) ?>" class="btn-six">
+                        <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn-six">
                             <?php esc_html_e('Explore More', 'jobus'); ?>
                         </a>
                     </div>
@@ -158,7 +158,7 @@ $website_target = $website[ 'target' ] ?? '_self';
             <div class="mt-50">
                 <?php
                 $args = array(
-                    'post_type' => 'job',
+                    'post_type' => 'jobus_job',
                     'posts_per_page' => -1,
                     'meta_query' => array(
                         'relation' => 'AND', // Optional, defaults to "AND

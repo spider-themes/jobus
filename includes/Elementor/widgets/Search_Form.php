@@ -215,11 +215,11 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Search Result Page', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'options'   => [
-					'job'       => esc_html__( 'Job', 'jobus' ),
-					'company'   => esc_html__( 'Company', 'jobus' ),
-					'candidate' => esc_html__( 'Candidate', 'jobus' ),
+					'jobus_job'       => esc_html__( 'Job', 'jobus' ),
+					'jobus_company'   => esc_html__( 'Company', 'jobus' ),
+					'jobus_candidate' => esc_html__( 'Candidate', 'jobus' ),
 				],
-				'default'   => 'job',
+				'default'   => 'jobus_job',
 				'separator' => 'before'
 			]
 		);
@@ -683,7 +683,7 @@ class Search_Form extends Widget_Base {
 		$search_result_form = ! empty( $settings['search_result_form'] ) ? $settings['search_result_form'] : '';
 
 		$categories = get_terms( array(
-			'taxonomy'   => 'job_cat',
+			'taxonomy'   => 'jobus_job_cat',
 			'hide_empty' => true,
 
 		) );

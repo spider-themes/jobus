@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url( get_post_type_archive_link( 'company' ) ) ?>" role="search" method="get">
+            <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="company"/>
 
 				<?php
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$company_specifications = $company_specifications[ $widget_name ] ?? '';
 
 
-						if ( ! empty ( $_GET['post_type'] ?? '' == 'company' ) ) {
+						if ( ! empty ( $_GET['post_type'] ?? '' == 'jobus_company' ) ) {
 							if ( ! empty ( $_GET[ $widget_name ] ) ) {
 								$is_collapsed_show = 'collapse show';
 								$area_expanded     = 'true';
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 													$opt_val        = strtolower( $modifiedValues );
 
 													// Get the count for the current meta-value
-													$meta_value_count = jobus_count_meta_key_usage( 'company', 'jobus_meta_company_options', $opt_val );
+													$meta_value_count = jobus_count_meta_key_usage( 'jobus_company', 'jobus_meta_company_options', $opt_val );
 
 													if ( $meta_value_count > 0 ) {
 														$searched_opt = jobus_search_terms( $widget_name );
@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 													$modifiedSelect = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 													$modifiedVal    = strtolower( $modifiedSelect );
 
-													$meta_value_count = jobus_count_meta_key_usage( 'company', 'jobus_meta_company_options', $modifiedVal );
+													$meta_value_count = jobus_count_meta_key_usage( 'jobus_company', 'jobus_meta_company_options', $modifiedVal );
 
 													if ( $meta_value_count > 0 ) {
 														$searched_val = jobus_search_terms( $widget_name );
@@ -165,7 +165,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-					if ( ! empty ( $_GET['post_type'] ?? '' == 'company' ) ) {
+					if ( ! empty ( $_GET['post_type'] ?? '' == 'jobus_company' ) ) {
 						if ( ! empty ( $_GET['company_locations'] ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
@@ -174,7 +174,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 
 					$term_locs = get_terms( array(
-						'taxonomy'   => 'company_location',
+						'taxonomy'   => 'jobus_company_location',
 					) );
 
 					if ( ! empty( $term_locs ) ) {
@@ -232,7 +232,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-					if ( ! empty ( $_GET['post_type'] ?? '' == 'company' ) ) {
+					if ( ! empty ( $_GET['post_type'] ?? '' == 'jobus_company' ) ) {
 						if ( ! empty ( $_GET['company_cats'] ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
@@ -241,7 +241,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 
 					$term_cats = get_terms( array(
-						'taxonomy'   => 'company_cat',
+						'taxonomy'   => 'jobus_company_cat',
 					) );
 
 					if ( ! empty( $term_cats ) ) {

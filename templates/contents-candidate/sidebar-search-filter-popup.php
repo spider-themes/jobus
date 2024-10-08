@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 															$modifiedSelect = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 															$modifiedVal    = strtolower( $modifiedSelect );
 
-															$meta_value_count = jobus_count_meta_key_usage( 'candidate', 'jobus_meta_candidate_options', $modifiedVal );
+															$meta_value_count = jobus_count_meta_key_usage( 'jobus_candidate', 'jobus_meta_candidate_options', $modifiedVal );
 
 															if ( $meta_value_count > 0 ) {
 																$searched_val = jobus_search_terms( $widget_name );
@@ -167,7 +167,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 															$opt_val        = strtolower( $modifiedValues );
 
 															// Get the count for the current meta-value
-															$meta_value_count = jobus_count_meta_key_usage( 'candidate', 'jobus_meta_candidate_options', $opt_val );
+															$meta_value_count = jobus_count_meta_key_usage( 'jobus_candidate', 'jobus_meta_candidate_options', $opt_val );
 
 															if ( $meta_value_count > 0 ) {
 																$searched_opt = jobus_search_terms( $widget_name );
@@ -201,7 +201,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							if ( jobus_opt( 'is_candidate_widget_location' ) == true ) {
 
 								$term_loc = get_terms( array(
-									'taxonomy'   => 'candidate_location',
+									'taxonomy'   => 'jobus_candidate_location',
 									'hide_empty' => true,
 								) );
 
@@ -212,7 +212,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'location', 'jobus' ); ?></div>
                                             <select class="nice-select" name="candidate_location[]">
 												<?php
-												$searched_opt = jobus_search_terms( 'candidate_location' );
+												$searched_opt = jobus_search_terms( 'jobus_candidate_location' );
 												foreach ( $term_loc as $key => $term ) {
 													$list_class   = $key > 3 ? ' class=hide' : '';
 													$check_status = array_search( $term->slug, $searched_opt );
@@ -234,7 +234,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							if ( jobus_opt( 'is_candidate_widget_cat' ) == true ) {
 
 								$term_cats = get_terms( array(
-									'taxonomy'   => 'candidate_cat',
+									'taxonomy'   => 'jobus_candidate_cat',
 									'hide_empty' => true,
 								) );
 

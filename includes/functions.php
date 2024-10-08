@@ -87,7 +87,7 @@ function jobus_get_template($template_name, array $args = [] ): void
  * @return string
  */
 if (!function_exists('jobus_get_first_taxonomoy_name')) {
-    function jobus_get_first_taxonomoy_name ($term = 'job_cat'): string
+    function jobus_get_first_taxonomoy_name ($term = 'jobus_job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -105,7 +105,7 @@ if (!function_exists('jobus_get_first_taxonomoy_name')) {
  * @return string
  */
 if (!function_exists('jobus_get_first_taxonomoy_link')) {
-    function jobus_get_first_taxonomoy_link ($term = 'job_cat'): string
+    function jobus_get_first_taxonomoy_link ($term = 'jobus_job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -123,7 +123,7 @@ if (!function_exists('jobus_get_first_taxonomoy_link')) {
  * @return string
  */
 if (!function_exists('jobus_get_tag_list')) {
-    function jobus_get_tag_list ($term = 'job_tag'): string
+    function jobus_get_tag_list ($term = 'jobus_job_tag'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -150,7 +150,7 @@ if (!function_exists('jobus_get_tag_list')) {
  * @return array
  */
 if (!function_exists('jobus_get_categories')) {
-    function jobus_get_categories ($term = 'job_cat'): array
+    function jobus_get_categories ($term = 'jobus_job_cat'): array
     {
         $cats = get_terms(array(
             'taxonomy' => $term,
@@ -244,7 +244,7 @@ if (!function_exists('jobus_company_post_list')) {
 
         // Get all the Company posts
         $args = array(
-            'post_type' => 'company',
+            'post_type' => 'jobus_company',
             'posts_per_page' => -1,
             'post_status' => 'publish',
         );
@@ -278,16 +278,16 @@ function jobus_get_specs ($settings_id = 'job_specifications'): array
         }
     }
 
-    // Get taxonomies for 'job' post type
-    $job_taxonomies = get_object_taxonomies('job');
+    // Get taxonomies for 'jobus_job' post type
+    $job_taxonomies = get_object_taxonomies('jobus_job');
     foreach ($job_taxonomies as $taxonomy) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
         $taxonomy_name = str_replace('_', ' ', $taxonomy_slug); // Convert underscore to space
         $specs[$taxonomy_slug] = ucwords($taxonomy_name);
     }
 
-    // Get taxonomies for 'company' post type
-    $company_taxonomies = get_object_taxonomies('company');
+    // Get taxonomies for 'jobus_company' post type
+    $company_taxonomies = get_object_taxonomies('jobus_company');
     foreach ($company_taxonomies as $taxonomy) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
         $taxonomy_name = str_replace('_', ' ', $taxonomy_slug); // Convert underscore to space
@@ -388,7 +388,7 @@ function jobus_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
 
 
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
-    function jobus_count_meta_key_usage ($post_type = 'job', $meta_key = '', $meta_value = ''): int
+    function jobus_count_meta_key_usage ($post_type = 'jobus_job', $meta_key = '', $meta_value = ''): int
     {
         $args = array(
             'post_type' => $post_type,
@@ -454,15 +454,15 @@ if ( !function_exists('jobus_job_archive_query') ) {
     function jobus_job_archive_query($query): void
     {
 
-        if ($query->is_main_query() && !is_admin() && is_post_type_archive('job')) {
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('jobus_job')) {
             $query->set('posts_per_page', jobus_opt('job_posts_per_page'));
         }
 
-        if ($query->is_main_query() && !is_admin() && is_post_type_archive('company')) {
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('jobus_company')) {
             $query->set('posts_per_page', jobus_opt('company_posts_per_page'));
         }
 
-        if ($query->is_main_query() && !is_admin() && is_post_type_archive('candidate')) {
+        if ($query->is_main_query() && !is_admin() && is_post_type_archive('jobus_candidate')) {
             $query->set('posts_per_page', jobus_opt('candidate_posts_per_page'));
         }
 
@@ -481,7 +481,7 @@ if (!function_exists('jobus_get_selected_company_count')) {
     function jobus_get_selected_company_count ($company_id, $link = true): int|string
     {
         $args = array(
-            'post_type' => 'job',
+            'post_type' => 'jobus_job',
             'posts_per_page' => -1,
             'meta_query'     => array(
                 'relation' => 'AND', // Optional, defaults to "AND
@@ -517,7 +517,7 @@ if (!function_exists('jobus_get_selected_company_count')) {
             if ( $job_posts->found_posts == 1 ) {
                 return esc_url(get_permalink( $company_ids_array ));
             } else {
-                return esc_url(get_post_type_archive_link('job') . '?search_type=company_search&company_ids='.$company_ids_array);
+                return esc_url(get_post_type_archive_link('jobus_job') . '?search_type=company_search&company_ids='.$company_ids_array);
             }
             
         }
@@ -620,7 +620,7 @@ function jobus_all_search_meta ($meta_page_id = 'jobus_meta_options', $sidebar_w
 /**
  * Jobus meta & taxonomy arguments
  */
-function jobus_meta_taxo_arguments ($data = '', $post_type = 'job', $taxonomy = '', $terms = [])
+function jobus_meta_taxo_arguments ($data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [])
 {
     $data_args = [];
     if ($data == 'taxonomy') {
@@ -677,9 +677,9 @@ function jobus_merge_queries_and_get_ids (...$queries)
  */
 function jobus_all_range_field_value ()
 {
-    // All the post IDs of the 'job' post type
+    // All the post IDs of the 'jobus_job' post type
     $args = array(
-        'post_type' => 'job',
+        'post_type' => 'jobus_job',
         'posts_per_page' => -1,
         'post_status' => 'publish',
     );

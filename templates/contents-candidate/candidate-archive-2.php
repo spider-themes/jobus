@@ -12,7 +12,7 @@ $current_view = $_GET['view'] ?? 'grid';
 if ($candidate_archive_layout) {
     $archive_url = get_the_permalink();
 } else {
-    $archive_url = get_post_type_archive_link('candidate');
+    $archive_url = get_post_type_archive_link('jobus_candidate');
 }
 
 // Build the URL for list and grid views
@@ -35,10 +35,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             </button>
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo jobus_posts_count('candidate') ?></span>
+                                <span class="text-dark fw-500"><?php echo jobus_posts_count('jobus_candidate') ?></span>
                                 <?php
                                 /* translators: 1: candidate found, 2: candidates found */
-                                echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('candidate'), 'jobus'), jobus_posts_count('candidate')));
+                                echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('jobus_candidate'), 'jobus'), jobus_posts_count('jobus_candidate')));
                                 ?>
                             </div>
                         </div>
@@ -115,7 +115,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                 <?php
                                             }
 
-                                            $skills = get_the_terms(get_the_ID(), 'candidate_skill');
+                                            $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                             $max_skills = 2;
 
                                             if ($skills && count($skills) > $max_skills) {
@@ -156,7 +156,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php
                                                 }
 
-                                                $locations = get_the_terms(get_the_ID(), 'candidate_location');
+                                                $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
                                                 if (!empty($locations )) {
                                                     ?>
                                                     <div class="col-md-6">
@@ -237,7 +237,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                             <?php
                                                         }
 
-                                                        $skills = get_the_terms(get_the_ID(), 'candidate_skill');
+                                                        $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                                         $max_skills = 2;
 
                                                         if ($skills && count($skills) > $max_skills) {
@@ -279,7 +279,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <?php
                                                 }
 
-                                                $locations = get_the_terms(get_the_ID(), 'candidate_location');
+                                                $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
                                                 if (!empty($locations )) {
                                                     ?>
                                                     <div class="col-xl-2 col-md-4 col-sm-6">
