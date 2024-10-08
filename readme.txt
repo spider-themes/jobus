@@ -1,7 +1,7 @@
 === Jobus - Job Listing, Career Page, and Recruitment Tool ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 Requires at least: 6.0
 Tested up to: 6.6.2
 Requires PHP: 7.4
@@ -28,7 +28,7 @@ Jobus is a comprehensive and powerful tool for creating job, company, and candid
 * **Multiple Layouts**: Choose from various pre-made layout templates for candidates, jobs, and companies.
 
 == Elementor Widgets ==
-= This plugin offers 5 widgets =
+= This plugin offers five widgets =
 * **Categories**
 * **Companies**
 * **Job Tabs**

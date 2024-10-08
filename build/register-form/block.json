@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jobly/register-form",
+  "title": "Register Form (Jobus)",
+  "category": "jobus-blocks",
+  "icon": "dashicons dashicons-shortcode",
+  "description": "A custom registration form for candidates and employers.",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "candidate_username": {
+      "type": "string",
+      "default": "Enter Your Name"
+    },
+    "candidate_email": {
+      "type": "string",
+      "default": "Enter Your Email"
+    },
+    "candidate_pass": {
+      "type": "string",
+      "default": "Enter Your Password"
+    },
+    "candidate_confirm_pass": {
+      "type": "string",
+      "default": "Enter Your Confirm Password"
+    },
+    "employer_username": {
+      "type": "string",
+      "default": "Enter Your Name"
+    },
+    "employer_email": {
+      "type": "string",
+      "default": "Enter Your Email"
+    },
+    "employer_pass": {
+      "type": "string",
+      "default": "Enter Your Password"
+    },
+    "employer_confirm_pass": {
+      "type": "string",
+      "default": "Enter Your Confirm Password"
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "keywords": [
+    "jobus",
+    "Candidate Register",
+    "Employer Register",
+    "Register Form"
+  ],
+  "textdomain": "jobus",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css"
+}

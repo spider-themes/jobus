@@ -1,0 +1,35 @@
+{
+  "apiVersion": 3,
+  "name": "jobly/shortcode-company-archive",
+  "title": "Company Archive Shortcode (Jobus)",
+  "category": "jobus-blocks",
+  "icon": "dashicons dashicons-shortcode",
+  "description": "Display the Company Archive posts on the website frontend",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "company_layout": {
+      "type": "string",
+      "default": "1"
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "keywords": [
+    "jobus",
+    "Shortcode",
+    "Company Archive"
+  ],
+  "textdomain": "jobus",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css"
+}

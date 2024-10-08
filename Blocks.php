@@ -38,7 +38,8 @@ class Blocks {
     /**
      * Blocks Registration
      */
-    public function register_block( $name, $options = array() ) {
+    public function register_block( $name, $options = array() ): void
+    {
         register_block_type( __DIR__ . '/build/' . $name, $options );
     }
 
