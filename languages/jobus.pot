@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-10-07 15:50+0600\n"
+"POT-Creation-Date: 2024-10-08 12:10+0600\n"
 "PO-Revision-Date: 2022-04-05 15:26+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: assets\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: Blocks.php:69
+#: Blocks.php:70
 msgid "You are already logged in."
 msgstr ""
 
-#: Blocks.php:88
+#: Blocks.php:89
 msgid "Jobus Blocks"
 msgstr ""
 
@@ -40,6 +40,373 @@ msgstr ""
 
 #: includes/Admin/User.php:115 includes/Admin/User.php:156
 msgid "Username or email already exists"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:36 src/register-form/edit.js:89
+#: src/register-form/register.php:28
+msgid "Candidates"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:37 includes/Admin/cpt/Candidate.php:52
+#: includes/Elementor/widgets/Search_Form.php:220
+msgid "Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:38 includes/Admin/cpt/Company.php:42
+#: includes/Admin/cpt/Job.php:37
+msgid "Add New"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:39
+msgid "Add New Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:40
+msgid "Edit Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:41
+msgid "New Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:42
+msgid "New Candidate Name"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:43
+msgid "All Candidates"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:44
+msgid "View Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:45
+msgid "View Candidates"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:46
+msgid "Search Candidates"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:47
+msgid "No candidates found"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:48
+msgid "No candidates found in Trash"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:49
+msgid "Parent Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:50
+msgid "Parent Candidate:"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:51
+msgid "Update Candidate"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:53
+msgid "Candidate published."
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:54
+msgid "Candidate published privately."
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:55
+msgid "Candidate reverted to draft."
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:56
+msgid "Candidate scheduled."
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:57
+msgid "Candidate updated."
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:91 includes/Admin/cpt/Company.php:98
+#: includes/Admin/cpt/Company.php:130 includes/Admin/cpt/Job.php:95
+msgid "Categories"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:104 includes/Admin/cpt/Company.php:110
+#: includes/Admin/cpt/Job.php:108
+#: includes/Admin/options/meta-options-candidate.php:175
+#: includes/Admin/options/settings-options.php:302
+#: includes/Admin/options/settings-options.php:584
+#: includes/Admin/options/settings-options.php:838
+#: includes/Elementor/widgets/Search_Form.php:183
+#: src/testimonials-item/edit.js:40
+#: templates/contents-candidate/candidate-archive-1.php:157
+#: templates/contents-candidate/candidate-archive-1.php:277
+#: templates/contents-candidate/candidate-archive-2.php:164
+#: templates/contents-candidate/candidate-archive-2.php:287
+#: templates/contents-candidate/sidebar-search-filter.php:234
+#: templates/contents-company/sidebar-search-filter-popup.php:133
+#: templates/contents-company/sidebar-search-filter.php:186
+#: templates/contents-job/sidebar-search-filter-2.php:215
+#: templates/contents-job/sidebar-search-filter-3.php:220
+#: templates/contents-job/sidebar-search-filter.php:287
+#: templates/single-candidate/candidate-single-1.php:295
+#: templates/single-candidate/candidate-single-2.php:329
+#: templates/taxonomy-candidate.php:181 templates/taxonomy-candidate.php:199
+msgid "Location"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:105
+msgid "Add New Location"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:118
+#: templates/single-candidate/candidate-single-1.php:122
+#: templates/single-candidate/candidate-single-2.php:169
+msgid "Skills"
+msgstr ""
+
+#: includes/Admin/cpt/Candidate.php:119
+msgid "Add New Skill"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:40
+msgid "Companies"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:41
+#: includes/Elementor/widgets/Search_Form.php:219
+msgid "Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:43
+msgid "Add New Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:44
+msgid "Edit Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:45
+msgid "New Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:46
+msgid "New Company Name"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:47
+msgid "All Companies"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:48
+msgid "View Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:49
+msgid "View Companies"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:50
+msgid "Search Companies"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:51
+msgid "No companies found"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:52
+msgid "No companies found in Trash"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:53
+msgid "Parent Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:54
+msgid "Parent Company:"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:55
+msgid "Update Company"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:56
+msgid "Company published."
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:57
+msgid "Company published privately."
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:58
+msgid "Company reverted to draft."
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:59
+msgid "Company scheduled."
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:60
+msgid "Company updated."
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:129
+#: includes/Admin/options/meta-options-candidate.php:203
+#: includes/Admin/options/meta-options-candidate.php:234
+#: includes/Admin/options/meta-options-candidate.php:256
+#: includes/Admin/options/meta-options-candidate.php:307
+#: includes/Admin/options/meta-options-candidate.php:329
+#: includes/Admin/options/meta-options-candidate.php:394
+#: includes/Elementor/widgets/Search_Form.php:294
+msgid "Title"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:131
+msgid "Author"
+msgstr ""
+
+#: includes/Admin/cpt/Company.php:132
+msgid "Date"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:35
+msgid "Jobs"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:36 includes/Admin/cpt/Job_Application.php:105
+#: includes/Elementor/widgets/Search_Form.php:218
+msgid "Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:38
+msgid "Add New Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:39
+msgid "Edit Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:40
+msgid "New Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:41
+msgid "New Job Name"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:42
+msgid "All Jobs"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:43
+msgid "View Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:44
+msgid "View Jobs"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:45
+msgid "Search Jobs"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:46
+msgid "No jobs found"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:47
+msgid "No jobs found in Trash"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:48
+msgid "Parent Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:49
+msgid "Parent Job:"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:50
+msgid "Update Job"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:51 includes/Admin/options/settings-options.php:17
+#: includes/Elementor/Register_Widgets.php:49
+msgid "Jobus"
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:52
+msgid "Job published."
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:53
+msgid "Job published privately."
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:54
+msgid "Job reverted to draft."
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:55
+msgid "Job scheduled."
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:56
+msgid "Job updated."
+msgstr ""
+
+#: includes/Admin/cpt/Job.php:121
+#: templates/contents-job/sidebar-search-filter.php:323
+msgid "Tags"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:41
+msgid "Submitted On "
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:42
+msgid "from IP"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:52
+msgid "Applicant Details"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:72
+#: includes/Admin/cpt/Job_Application.php:74
+#: includes/Admin/cpt/Job_Application.php:75
+msgid "Applications"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:73
+msgid "Application"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:76
+msgid "Search Applications"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:77
+msgid "No Applications found"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:78
+msgid "No Applications found in Trash"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:103
+msgid "Applicant"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:104
+msgid "ID"
+msgstr ""
+
+#: includes/Admin/cpt/Job_Application.php:106
+msgid "Applied on"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:12
@@ -134,44 +501,8 @@ msgstr ""
 msgid "Input the Candidate Mail Address"
 msgstr ""
 
-#: includes/Admin/options/meta-options-candidate.php:175
-#: includes/Admin/options/settings-options.php:302
-#: includes/Admin/options/settings-options.php:584
-#: includes/Admin/options/settings-options.php:838
-#: includes/Admin/posttypes/Candidate.php:104
-#: includes/Admin/posttypes/Company.php:110
-#: includes/Admin/posttypes/Job.php:108
-#: includes/Elementor/widgets/Search_Form.php:183
-#: src/testimonials-item/edit.js:40
-#: templates/contents-candidate/candidate-archive-1.php:157
-#: templates/contents-candidate/candidate-archive-1.php:277
-#: templates/contents-candidate/candidate-archive-2.php:164
-#: templates/contents-candidate/candidate-archive-2.php:287
-#: templates/contents-candidate/sidebar-search-filter.php:235
-#: templates/contents-company/sidebar-search-filter-popup.php:133
-#: templates/contents-company/sidebar-search-filter.php:186
-#: templates/contents-job/sidebar-search-filter-2.php:215
-#: templates/contents-job/sidebar-search-filter-3.php:220
-#: templates/contents-job/sidebar-search-filter.php:287
-#: templates/single-candidate/candidate-single-1.php:295
-#: templates/single-candidate/candidate-single-2.php:329
-#: templates/taxonomy-candidate.php:181 templates/taxonomy-candidate.php:199
-msgid "Location"
-msgstr ""
-
 #: includes/Admin/options/meta-options-candidate.php:196
 msgid "Intro Video"
-msgstr ""
-
-#: includes/Admin/options/meta-options-candidate.php:203
-#: includes/Admin/options/meta-options-candidate.php:234
-#: includes/Admin/options/meta-options-candidate.php:256
-#: includes/Admin/options/meta-options-candidate.php:307
-#: includes/Admin/options/meta-options-candidate.php:329
-#: includes/Admin/options/meta-options-candidate.php:394
-#: includes/Admin/posttypes/Company.php:129
-#: includes/Elementor/widgets/Search_Form.php:294
-msgid "Title"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:204
@@ -359,18 +690,8 @@ msgstr ""
 msgid "icon"
 msgstr ""
 
-#: includes/Admin/options/nav-menu-options.php:28
-msgid "Menu Image"
-msgstr ""
-
 #: includes/Admin/options/settings-options.php:15
 msgid "Settings"
-msgstr ""
-
-#: includes/Admin/options/settings-options.php:17
-#: includes/Admin/posttypes/Job.php:51
-#: includes/Elementor/Register_Widgets.php:49
-msgid "Jobus"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:34
@@ -666,7 +987,7 @@ msgstr ""
 #: includes/Elementor/widgets/Job_Tabs.php:105
 #: includes/Elementor/widgets/Jobs.php:117
 #: templates/contents-candidate/sidebar-search-filter-popup.php:245
-#: templates/contents-candidate/sidebar-search-filter.php:281
+#: templates/contents-candidate/sidebar-search-filter.php:280
 #: templates/contents-company/sidebar-search-filter-popup.php:158
 #: templates/contents-company/sidebar-search-filter.php:253
 #: templates/contents-job/sidebar-search-filter-2.php:190
@@ -884,337 +1205,6 @@ msgstr ""
 msgid "Hover Border Color"
 msgstr ""
 
-#: includes/Admin/posttypes/Candidate.php:36 src/register-form/edit.js:89
-#: src/register-form/register.php:28
-msgid "Candidates"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:37
-#: includes/Admin/posttypes/Candidate.php:52
-#: includes/Elementor/widgets/Search_Form.php:220
-msgid "Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:38
-#: includes/Admin/posttypes/Company.php:42 includes/Admin/posttypes/Job.php:37
-msgid "Add New"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:39
-msgid "Add New Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:40
-msgid "Edit Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:41
-msgid "New Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:42
-msgid "New Candidate Name"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:43
-msgid "All Candidates"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:44
-msgid "View Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:45
-msgid "View Candidates"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:46
-msgid "Search Candidates"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:47
-msgid "No candidates found"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:48
-msgid "No candidates found in Trash"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:49
-msgid "Parent Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:50
-msgid "Parent Candidate:"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:51
-msgid "Update Candidate"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:53
-msgid "Candidate published."
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:54
-msgid "Candidate published privately."
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:55
-msgid "Candidate reverted to draft."
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:56
-msgid "Candidate scheduled."
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:57
-msgid "Candidate updated."
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:91
-#: includes/Admin/posttypes/Company.php:98
-#: includes/Admin/posttypes/Company.php:130 includes/Admin/posttypes/Job.php:95
-msgid "Categories"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:105
-msgid "Add New Location"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:118
-#: templates/single-candidate/candidate-single-1.php:122
-#: templates/single-candidate/candidate-single-2.php:169
-msgid "Skills"
-msgstr ""
-
-#: includes/Admin/posttypes/Candidate.php:119
-msgid "Add New Skill"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:40
-msgid "Companies"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:41
-#: includes/Elementor/widgets/Search_Form.php:219
-msgid "Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:43
-msgid "Add New Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:44
-msgid "Edit Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:45
-msgid "New Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:46
-msgid "New Company Name"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:47
-msgid "All Companies"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:48
-msgid "View Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:49
-msgid "View Companies"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:50
-msgid "Search Companies"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:51
-msgid "No companies found"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:52
-msgid "No companies found in Trash"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:53
-msgid "Parent Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:54
-msgid "Parent Company:"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:55
-msgid "Update Company"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:56
-msgid "Company published."
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:57
-msgid "Company published privately."
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:58
-msgid "Company reverted to draft."
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:59
-msgid "Company scheduled."
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:60
-msgid "Company updated."
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:131
-msgid "Author"
-msgstr ""
-
-#: includes/Admin/posttypes/Company.php:132
-msgid "Date"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:35
-msgid "Jobs"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:36
-#: includes/Admin/posttypes/Job_Application.php:105
-#: includes/Elementor/widgets/Search_Form.php:218
-msgid "Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:38
-msgid "Add New Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:39
-msgid "Edit Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:40
-msgid "New Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:41
-msgid "New Job Name"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:42
-msgid "All Jobs"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:43
-#: templates/dashboard/candidate-dashboard.php:329
-msgid "View Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:44
-msgid "View Jobs"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:45
-msgid "Search Jobs"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:46
-msgid "No jobs found"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:47
-msgid "No jobs found in Trash"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:48
-msgid "Parent Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:49
-msgid "Parent Job:"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:50
-msgid "Update Job"
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:52
-msgid "Job published."
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:53
-msgid "Job published privately."
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:54
-msgid "Job reverted to draft."
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:55
-msgid "Job scheduled."
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:56
-msgid "Job updated."
-msgstr ""
-
-#: includes/Admin/posttypes/Job.php:121
-#: templates/contents-job/sidebar-search-filter.php:323
-msgid "Tags"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:41
-msgid "Submitted On "
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:42
-msgid "from IP"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:52
-msgid "Applicant Details"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:72
-#: includes/Admin/posttypes/Job_Application.php:74
-#: includes/Admin/posttypes/Job_Application.php:75
-msgid "Applications"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:73
-msgid "Application"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:76
-msgid "Search Applications"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:77
-msgid "No Applications found"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:78
-msgid "No Applications found in Trash"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:103
-msgid "Applicant"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:104
-msgid "ID"
-msgstr ""
-
-#: includes/Admin/posttypes/Job_Application.php:106
-msgid "Applied on"
-msgstr ""
-
 #: includes/Admin/templates/meta/applicant-single.php:53
 msgid "Download Resume"
 msgstr ""
@@ -1225,7 +1215,6 @@ msgid "Phone"
 msgstr ""
 
 #: includes/Admin/templates/meta/applicant-single.php:72
-#: templates/dashboard/candidate-account-settings.php:188
 #: templates/single-candidate/candidate-single-2.php:339
 #: templates/single-job.php:71
 msgid "Email"
@@ -1235,19 +1224,19 @@ msgstr ""
 msgid "Cover Letter"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:46
+#: includes/Classes/Ajax_Actions.php:45
 msgid "Please fill in all required fields."
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:51
+#: includes/Classes/Ajax_Actions.php:50
 msgid "New Message"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:59
+#: includes/Classes/Ajax_Actions.php:58
 msgid "Your message has been sent successfully!"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:61
+#: includes/Classes/Ajax_Actions.php:60
 msgid "There was a problem sending your message. Please try again."
 msgstr ""
 
@@ -1737,32 +1726,32 @@ msgstr ""
 msgid "arrow-right"
 msgstr ""
 
-#: includes/functions.php:737
+#: includes/functions.php:736
 msgid "No results found"
 msgstr ""
 
-#: includes/functions.php:757
+#: includes/functions.php:756
 #, php-format
 msgid "Showing %1$s-%2$s of %3$s results"
 msgstr ""
 
-#: includes/functions.php:781
+#: includes/functions.php:780
 msgid "Share:"
 msgstr ""
 
-#: includes/functions.php:782
+#: includes/functions.php:781
 msgid "Share on Facebook"
 msgstr ""
 
-#: includes/functions.php:783
+#: includes/functions.php:782
 msgid "Share on Linkedin"
 msgstr ""
 
-#: includes/functions.php:784
+#: includes/functions.php:783
 msgid "Share on Twitter"
 msgstr ""
 
-#: includes/functions.php:800
+#: includes/functions.php:799
 msgid "Bootstrap Icons"
 msgstr ""
 
@@ -2114,7 +2103,7 @@ msgid "Filter By"
 msgstr ""
 
 #: templates/contents-candidate/sidebar-search-filter-popup.php:54
-#: templates/contents-candidate/sidebar-search-filter.php:144
+#: templates/contents-candidate/sidebar-search-filter.php:143
 msgid "Name or keyword"
 msgstr ""
 
@@ -2123,7 +2112,7 @@ msgid "location"
 msgstr ""
 
 #: templates/contents-candidate/sidebar-search-filter-popup.php:267
-#: templates/contents-candidate/sidebar-search-filter.php:302
+#: templates/contents-candidate/sidebar-search-filter.php:301
 #: templates/contents-company/sidebar-search-filter-popup.php:174
 #: templates/contents-company/sidebar-search-filter.php:294
 #: templates/contents-job/sidebar-search-filter-2.php:237
@@ -2152,90 +2141,6 @@ msgstr ""
 
 #: templates/contents-job/sidebar-search-filter.php:204
 msgid "No selected input"
-msgstr ""
-
-#: templates/dashboard/candidate-account-settings.php:164
-msgid "Account Settings"
-msgstr ""
-
-#: templates/dashboard/candidate-account-settings.php:167
-msgid "Edit & Update"
-msgstr ""
-
-#: templates/dashboard/candidate-account-settings.php:174
-#: templates/single-job.php:61
-msgid "First Name"
-msgstr ""
-
-#: templates/dashboard/candidate-account-settings.php:181
-#: templates/single-job.php:66
-msgid "Last Name"
-msgstr ""
-
-#: templates/dashboard/candidate-account-settings.php:195
-msgid "Phone Number"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:198
-msgid "Dashboard"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:226
-#: templates/dashboard/candidate-dashboard.php:230
-msgid "Total Visitor"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:245
-msgid "View"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:249
-msgid "Views"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:267
-msgid "Applied Job"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:290
-msgid "Recent Applied Job"
-msgstr ""
-
-#: templates/dashboard/candidate-dashboard.php:335
-#: templates/dashboard/candidate-profile.php:174
-msgid "Delete"
-msgstr ""
-
-#: templates/dashboard/candidate-profile.php:159
-msgid "My Profile"
-msgstr ""
-
-#: templates/dashboard/candidate-profile.php:170
-msgid "Upload new photo"
-msgstr ""
-
-#: templates/dashboard/candidate-profile.php:178
-msgid "Full Name*"
-msgstr ""
-
-#: templates/dashboard/candidate-profile.php:183
-msgid "Bio*"
-msgstr ""
-
-#: templates/dashboard/candidate-profile.php:185
-msgid "Brief description for your profile. URLs are hyperlinked."
-msgstr ""
-
-#: templates/dashboard/need-login.php:2
-msgid "Please log in to access your dashboard. dsfsdf"
-msgstr ""
-
-#: templates/dashboard/need-login.php:3
-msgid "Log In"
-msgstr ""
-
-#: templates/dashboard/not-allowed.php:2
-msgid "You are not allowed to access this page."
 msgstr ""
 
 #: templates/single-candidate/candidate-single-1.php:31
@@ -2291,6 +2196,14 @@ msgstr ""
 
 #: templates/single-job.php:29
 msgid "Apply for this Position"
+msgstr ""
+
+#: templates/single-job.php:61
+msgid "First Name"
+msgstr ""
+
+#: templates/single-job.php:66
+msgid "Last Name"
 msgstr ""
 
 #: templates/single-job.php:86
