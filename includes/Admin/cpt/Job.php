@@ -12,7 +12,7 @@ class Job {
 
     public function __construct() {
 
-        // Register the posttype
+        // Register the post type
         add_action('init', [$this, 'register_post_types_job']);
     }
 
@@ -25,7 +25,8 @@ class Job {
     }
 
     // Register the post type Job.
-    public function register_post_types_job() {
+    public function register_post_types_job(): void
+    {
 
         if (post_type_exists('jobus_job')) {
             return;
@@ -112,7 +113,7 @@ class Job {
         // Register post taxonomies Tags
         register_taxonomy( 'jobus_job_tag', 'jobus_job', array(
             'public'                => true,
-            'hierarchical'          => false,
+            'hierarchical'          => true,
             'show_ui'               => true,
             'show_admin_column'     => true,
             'show_in_nav_menus'     => true,

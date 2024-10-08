@@ -410,8 +410,8 @@ class Categories extends Widget_Base {
 		$settings = $this->get_settings_for_display();
 		extract( $settings ); //extract all settings array to variables converted to name of key
 
-		// Get the post count for the 'job' post type
-		$post_count = wp_count_posts( 'job' );
+		// Get the post count for the 'jobus_job' post type
+		$post_count = wp_count_posts( 'jobus_job' );
 
 		// Get the total count
 		$total_count = $post_count->publish;
@@ -427,7 +427,7 @@ class Categories extends Widget_Base {
 		$cat_ids = $settings['cat'] ?? array();
 
 		$categories = get_terms( array(
-			'taxonomy'   => 'job_cat',
+			'taxonomy'   => 'jobus_job_cat',
 			'hide_empty' => true,
 			'include'    => $cat_ids,
 		) );

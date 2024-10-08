@@ -12,7 +12,7 @@ $current_view = $_GET['view'] ?? 'list';
 if ( $job_archive_layout ) {
     $archive_url = get_the_permalink(); //Created Page link
 } else {
-    $archive_url = get_post_type_archive_link('job');
+    $archive_url = get_post_type_archive_link('jobus_job');
 }
 
 // Build the URL for list and grid views
@@ -31,10 +31,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-25 mt-70 lg-mt-40">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark"><?php echo jobus_posts_count('job') ?></span>
+                            <span class="text-dark"><?php echo jobus_posts_count('jobus_job') ?></span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
-                            echo esc_html(printf(_n('job found', 'jobs found', jobus_posts_count('job'), 'jobus'), jobus_posts_count('job')));
+                            echo esc_html(printf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job')));
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
@@ -102,7 +102,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-6">
 	                                            <?php
-	                                            $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                            $locations = get_the_terms(get_the_ID(), 'jobus_job_location');
 	                                            if (!empty($locations )) { ?>
                                                     <div class="job-location">
 			                                            <?php
@@ -180,7 +180,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">
 	                                            <?php
-	                                            $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                            $locations = get_the_terms(get_the_ID(), 'jobus_job_location');
 	                                            if (!empty($locations )) { ?>
                                                     <div class="job-location">
 			                                            <?php

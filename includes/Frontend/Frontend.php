@@ -31,7 +31,7 @@ class Frontend {
     {
 
         // Job Pages
-        if ( is_tax('job_cat') || is_tax('job_tag') ) {
+        if ( is_tax('jobus_job_cat') || is_tax('jobus_job_tag') ) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'taxonomy-job.php';
             if ( $theme_file = locate_template( array( 'jobus/' . $archive_template ) ) ) {
@@ -41,7 +41,7 @@ class Frontend {
             }
         }
 
-		if ( is_post_type_archive( 'job' ) ) {
+		if ( is_post_type_archive( 'jobus_job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			$archive_template = 'archive-job.php';
 			if ( $theme_file = locate_template( array( 'jobus/' . $archive_template ) ) ) {
@@ -51,7 +51,7 @@ class Frontend {
 			}
 		}
 
-		if ( is_singular( 'job' ) ) {
+		if ( is_singular( 'jobus_job' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			$single_template = 'single-job.php';
 			if ( $theme_file = locate_template( array( 'jobus/' . $single_template ) ) ) {
@@ -62,7 +62,7 @@ class Frontend {
 		}
 
         // Company Pages
-        if ( is_tax('company_cat') ) {
+        if ( is_tax('jobus_company_cat') ) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'taxonomy-company.php';
             if ( $theme_file = locate_template( array( 'jobus/' . $archive_template ) ) ) {
@@ -72,7 +72,7 @@ class Frontend {
             }
         }
 
-        if (is_post_type_archive('company')) {
+        if (is_post_type_archive('jobus_company')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-company.php';
             if ($theme_file = locate_template(array('jobus/' . $archive_template))) {
@@ -82,7 +82,7 @@ class Frontend {
             }
         }
 
-        if (is_singular('company')) {
+        if (is_singular('jobus_company')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-company.php';
             if ($theme_file = locate_template(array('jobus/' . $single_template))) {
@@ -94,7 +94,7 @@ class Frontend {
 
 
         // Candidate Pages
-        if ( is_tax('candidate_cat') || is_tax('candidate_location') || is_tax('candidate_skill') ) {
+        if ( is_tax('jobus_candidate_cat') || is_tax('jobus_candidate_location') || is_tax('jobus_candidate_skill') ) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'taxonomy-candidate.php';
             if ( $theme_file = locate_template( array( 'jobus/' . $archive_template ) ) ) {
@@ -105,7 +105,7 @@ class Frontend {
         }
 
 
-        if (is_post_type_archive('candidate')) {
+        if (is_post_type_archive('jobus_candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $archive_template = 'archive-candidate.php';
             if ($theme_file = locate_template(array('jobus/' . $archive_template))) {
@@ -115,7 +115,7 @@ class Frontend {
             }
         }
 
-        if (is_singular('candidate')) {
+        if (is_singular('jobus_candidate')) {
             // Check if a custom template exists in the theme folder, if not, load the plugin template file
             $single_template = 'single-candidate.php';
             if ($theme_file = locate_template(array('jobus/' . $single_template))) {

@@ -10,7 +10,7 @@ if (class_exists('CSF')) {
 
     CSF::createMetabox($meta_candidate_prefix, array(
         'title' => esc_html__('Candidate Options', 'jobus'),
-        'post_type' => 'candidate',
+        'post_type' => 'jobus_candidate',
         'theme' => 'dark',
         'output_css' => true,
         'show_restore' => true,
@@ -170,7 +170,7 @@ if (class_exists('CSF')) {
             ),
 
             array(
-                'id'          => 'candidate_location',
+                'id'          => 'jobus_candidate_location',
                 'type'        => 'map',
                 'title'       => esc_html__('Location', 'jobus'),
                 'height'   => '500px',

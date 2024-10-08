@@ -12,7 +12,7 @@ if (in_array('jobus_candidate', $user->roles)) {
 
     $applicants = get_posts(
         array(
-            'post_type' => 'job_application',
+            'post_type' => 'jobus_job_application',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'meta_query' => array(
@@ -27,7 +27,7 @@ if (in_array('jobus_candidate', $user->roles)) {
 
     $candidates = get_posts(
         array(
-            'post_type' => 'candidate',
+            'post_type' => 'jobus_candidate',
             'author'    => $user,
             'posts_per_page' => 1,
         )
@@ -295,8 +295,8 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                         foreach ($applicants as $applicant ) {
 
                             $job_id = get_post_meta($applicant->ID, 'job_applied_for_id', true);
-                            $job_cat = get_the_terms($job_id, 'job_cat');
-                            $job_location = get_the_terms($job_id, 'job_location');
+                            $job_cat = get_the_terms($job_id, 'jobus_job_cat');
+                            $job_location = get_the_terms($job_id, 'jobus_job_location');
                             ?>
                             <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr($job_id); ?>">
                                 <div><?php echo get_the_post_thumbnail($job_id, 'full', ['class' => 'lazy-img logo' ]) ?></div>

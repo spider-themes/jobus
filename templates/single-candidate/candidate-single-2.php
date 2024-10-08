@@ -29,7 +29,7 @@ wp_enqueue_script('lightbox');
                         </div>
                         <div class="col-xl-3 order-xl-3">
                             <?php
-                            $skills = get_the_terms(get_the_ID(), 'candidate_skill');
+                            $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                             $max_skills = 2;
 
                             if ($skills && count($skills) > $max_skills) {
@@ -316,7 +316,7 @@ wp_enqueue_script('lightbox');
                     </div>
 
 			        <?php
-                    $location = $meta['candidate_location'] ?? '';
+                    $location = $meta['jobus_candidate_location'] ?? '';
 
                     if ( is_array($location) ) {
                         $latitude = $location['latitude'] ?? '';

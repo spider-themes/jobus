@@ -282,7 +282,7 @@ wp_enqueue_script( 'lightbox' );
                     </div>
 
 					<?php
-					$location = $meta['candidate_location'] ?? '';
+					$location = $meta['jobus_candidate_location'] ?? '';
 
 					if ( is_array( $location ) ) {
 						$latitude        = $location['latitude'] ?? '';

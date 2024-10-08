@@ -16,9 +16,9 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = isset($_GET[ 'orderby' ]) ? sanitize_text_field($_GET[ 'orderby' ]) : 'date';
 $selected_order = isset($_GET[ 'order' ]) ? sanitize_text_field($_GET[ 'order' ]) : 'desc';
 
-$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'job', '', jobus_all_search_meta()) ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'job', 'job_cat', jobus_search_terms('job_cats')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'job', 'job_tag', jobus_search_terms('job_tags')) ];
+$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms('job_tags')) ];
 
 if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
     $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
@@ -27,7 +27,7 @@ if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
 }
 
 $args = array(
-    'post_type' => 'job',
+    'post_type' => 'jobus_job',
     'post_status' => 'publish',
     'posts_per_page' => jobus_opt('job_posts_per_page'),
     'paged' => $paged,

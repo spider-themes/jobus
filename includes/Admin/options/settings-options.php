@@ -16,7 +16,7 @@ if( class_exists( 'CSF' ) ) {
 		'menu_slug'  => 'jobus-settings',
 		'framework_title'  => esc_html__( 'Jobus', 'jobus') . '<span> ' . JOBUS_VERSION . '</span>',
 		'menu_type'   => 'submenu',
-		'menu_parent' => 'edit.php?post_type=job',
+		'menu_parent' => 'edit.php?post_type=jobus_job',
 		'theme'           => 'dark',
 		'sticky_header'   => 'true',
 	) );

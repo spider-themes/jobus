@@ -14,33 +14,39 @@ if (!defined('ABSPATH')) {
 get_header();
 
 // Get the current job category and job tag
-$current_job_cat = get_term_by('slug', get_query_var('job_cat'), 'job_cat');
-$current_job_tag = get_term_by('slug', get_query_var('job_tag'), 'job_tag');
+$current_job_cat = get_term_by('slug', get_query_var('jobus_job_cat'), 'jobus_job_cat');
+$current_job_location = get_term_by('slug', get_query_var('jobus_job_location'), 'jobus_job_location');
+$current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
 
 // These parameters are used to determine the sorting order of job posts
 $selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
-    'post_type'      => 'job',
+    'post_type'      => 'jobus_job',
     'post_status'    => 'publish',
     'posts_per_page' => jobus_opt('job_posts_per_page'),
     'orderby'        => $selected_order_by,
     'order'          => $selected_order,
 );
 
-if ($current_job_cat || $current_job_tag ) {
+if ( $current_job_cat || $current_job_location || $current_job_tag ) {
     $args['tax_query'] = array(
         'relation' => 'OR',//Must satisfy at least one taxonomy query
         array(
-            'taxonomy' => 'job_cat',
+            'taxonomy' => 'jobus_job_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('job_cat'),
+            'terms'    => get_query_var('jobus_job_cat'),
         ),
         array(
-            'taxonomy' => 'job_tag',
+            'taxonomy' => 'jobus_job_location',
             'field'    => 'slug',
-            'terms'    => get_query_var('job_tag'),
+            'terms'    => get_query_var('jobus_job_location'),
+        ),
+        array(
+            'taxonomy' => 'jobus_job_tag',
+            'field'    => 'slug',
+            'terms'    => get_query_var('jobus_job_tag'),
         ),
     );
 }
@@ -52,7 +58,7 @@ $job_count = $job_post->found_posts;
 
 ?>
 
-    <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+    <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80 sdfsdafdsf">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -121,7 +127,7 @@ $job_count = $job_post->found_posts;
                                         <div class="col-md-4 col-sm-6">
                                             <!-- job archive 1 location -->
 	                                        <?php
-	                                        $locations = get_the_terms(get_the_ID(), 'job_location');
+	                                        $locations = get_the_terms(get_the_ID(), 'jobus_job_location');
 	                                        if (!empty($locations )) { ?>
                                                 <div class="job-location">
 			                                        <?php

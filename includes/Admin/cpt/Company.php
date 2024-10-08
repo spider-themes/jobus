@@ -141,7 +141,7 @@ class Company {
     {
         switch ($column) {
             case 'taxonomy-company_cat':
-                echo get_the_term_list($post_id, 'company_cat', '', ', ', '');
+                echo get_the_term_list($post_id, 'jobus_company_cat', '', ', ', '');
                 break;
         }
     }

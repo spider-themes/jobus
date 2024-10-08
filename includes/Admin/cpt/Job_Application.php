@@ -19,7 +19,7 @@ class Job_Application {
         add_action('manage_job_application_posts_custom_column', [$this, 'job_application_columns_data'], 10, 2);
 
 
-        // Add custom content to edit form
+        // Add custom content to an edit form
         add_action('edit_form_top', array($this, 'admin_single_subtitle'));
         add_action('add_meta_boxes', [$this, 'admin_single_contents']);
 
@@ -32,7 +32,8 @@ class Job_Application {
         return self::$instance;
     }
 
-    public function admin_single_subtitle($post) {
+    public function admin_single_subtitle($post): void
+    {
         if ($post->post_type === 'jobus_job_application') {
             $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
             ?>
@@ -45,7 +46,7 @@ class Job_Application {
         }
     }
 
-    public function admin_single_contents()
+    public function admin_single_contents(): void
     {
         add_meta_box(
             'applicant-details-meta-box',
@@ -55,7 +56,7 @@ class Job_Application {
         );
     }
 
-    public function render_single_contents($post)
+    public function render_single_contents($post): void
     {
 
         if ($post->post_type === 'jobus_job_application') {
@@ -64,10 +65,9 @@ class Job_Application {
 
     }
 
-
-
     // Register the post type Applications
-    public function register_post_types_applications() {
+    public function register_post_types_applications(): void
+    {
         $labels = array(
             'name'                  => esc_html__('Applications', 'jobus'),
             'singular_name'         => esc_html__('Application', 'jobus'),
@@ -83,7 +83,7 @@ class Job_Application {
             'public'                => false,
             'show_ui'               => true,
             'map_meta_cap'          => true,
-            'show_in_menu'          => 'edit.php?post_type=job',
+            'show_in_menu'          => 'edit.php?post_type=jobus_job',
             'capability_type'       => 'post',
             'capabilities'          => array(
                 'create_posts' => 'do_not_allow',
@@ -92,12 +92,13 @@ class Job_Application {
             'rewrite'               => false,
         );
 
-        register_post_type('jobus_job_application', $args); // Register the post type `job_application`
+        register_post_type('jobus_job_application', $args); // Register the post-type `jobus_job_application`
     }
 
-    public function job_application_columns($columns) {
+    public function job_application_columns($columns): array
+    {
 
-        $columns = array(
+        return array(
             'cb'                 => '<input type="checkbox" />',
             'applicant_photo'    => '',
             'title'              => esc_html__('Applicant', 'jobus'),
@@ -105,11 +106,10 @@ class Job_Application {
             'job_applied_for'    => esc_html__('Job', 'jobus'),
             'submission_time'    => esc_html__('Applied on', 'jobus'),
         );
-
-        return $columns;
     }
 
-    public function job_application_columns_data($column, $post_id) {
+    public function job_application_columns_data($column, $post_id): void
+    {
 
         switch ($column) {
             case 'applicant_photo':

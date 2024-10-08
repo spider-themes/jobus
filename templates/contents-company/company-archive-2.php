@@ -13,7 +13,7 @@ $current_view = $_GET['view'] ?? 'grid';
 if ($company_archive_layout) {
     $archive_url = get_the_permalink();
 } else {
-    $archive_url = get_post_type_archive_link('company');
+    $archive_url = get_post_type_archive_link('jobus_company');
 }
 
 // Build the URL for list and grid views
@@ -37,10 +37,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo jobus_posts_count('company'); ?></span>
+                                <span class="text-dark fw-500"><?php echo jobus_posts_count('jobus_company'); ?></span>
                                 <?php
                                 /* translators: 1: company found, 2: companies found */
-                                echo esc_html(sprintf(_n('company found', 'companies found', jobus_posts_count('company'), 'jobus'), jobus_posts_count('company')));
+                                echo esc_html(sprintf(_n('company found', 'companies found', jobus_posts_count('jobus_company'), 'jobus'), jobus_posts_count('jobus_company')));
                                 ?>
                             </div>
 
@@ -107,7 +107,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                             </h5>
 
 	                                        <?php
-	                                        $locations=get_the_terms(get_the_ID(),'company_location');
+	                                        $locations=get_the_terms(get_the_ID(),'jobus_company_location');
 	                                        if ( !empty($locations) ) { ?>
                                                 <p class="text-center mb-auto text-capitalize">
 			                                        <?php

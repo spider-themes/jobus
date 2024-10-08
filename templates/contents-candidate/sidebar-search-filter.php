@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url(get_post_type_archive_link('candidate')) ?>" role="search" method="get">
+            <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="candidate"/>
 
                 <?php
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $candidate_specifications = jobus_get_specs_options('candidate_specifications');
                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
-                        if (!empty ($_GET[ 'post_type' ] ?? '' == 'candidate')) {
+                        if (!empty ($_GET[ 'post_type' ] ?? '' == 'jobus_candidate')) {
                             if (!empty ($_GET[ $widget_name ])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -85,7 +85,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                     $opt_val = strtolower($modifiedValues);
 
                                                     // Get the count for the current meta-value
-                                                    $meta_value_count   = jobus_count_meta_key_usage('candidate', 'jobus_meta_candidate_options', $opt_val );
+                                                    $meta_value_count   = jobus_count_meta_key_usage('jobus_candidate', 'jobus_meta_candidate_options', $opt_val );
 
                                                     if ( $meta_value_count > 0 ) {
                                                         $searched_opt   = jobus_search_terms($widget_name);
@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                                     $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                     $modifiedVal = strtolower($modifiedSelect);
 
-                                                    $meta_value_count   = jobus_count_meta_key_usage('candidate','jobus_meta_candidate_options', $modifiedVal);
+                                                    $meta_value_count   = jobus_count_meta_key_usage('jobus_candidate','jobus_meta_candidate_options', $modifiedVal);
 
                                                     if ( $meta_value_count > 0 ) {
                                                         $searched_val = jobus_search_terms($widget_name);
@@ -214,7 +214,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-                    if ( ! empty ( $_GET['post_type'] ?? '' == 'candidate' ) ) {
+                    if ( ! empty ( $_GET['post_type'] ?? '' == 'jobus_candidate' ) ) {
 		                if ( ! empty ( $_GET['candidate_locations'] ) ) {
 			                $is_collapsed_show = 'collapse show';
 			                $area_expanded     = 'true';
@@ -223,7 +223,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	                }
 
 	                $term_loc = get_terms( array(
-		                'taxonomy'   => 'candidate_location',
+		                'taxonomy'   => 'jobus_candidate_location',
 	                ) );
 
 	                if (!empty($term_loc)) {
@@ -260,7 +260,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'candidate')) {
+                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'jobus_candidate')) {
                         if (!empty ($_GET[ 'candidate_cats' ])) {
                             $is_collapsed_show = 'collapse show';
                             $area_expanded = 'true';
@@ -269,7 +269,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
 
                     $term_cats = get_terms(array(
-                        'taxonomy' => 'candidate_cat',
+                        'taxonomy' => 'jobus_candidate_cat',
                     ));
 
                     if (!empty($term_cats)) {

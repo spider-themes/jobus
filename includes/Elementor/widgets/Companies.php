@@ -466,7 +466,7 @@ class Companies extends Widget_Base {
         extract($settings); //extract all settings array to variables converted to name of key
 
         $args = [
-            'post_type' => 'company',
+            'post_type' => 'jobus_company',
             'post_status' => 'publish',
         ];
 
@@ -489,7 +489,7 @@ class Companies extends Widget_Base {
         if (!empty($cats)) {
             $args['tax_query'] = [
                 [
-                    'taxonomy' => 'company_cat',
+                    'taxonomy' => 'jobus_company_cat',
                     'field' => 'slug',
                     'terms' => $cats
 

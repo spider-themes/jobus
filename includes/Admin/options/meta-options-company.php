@@ -9,7 +9,7 @@ if (class_exists('CSF')) {
 
     CSF::createMetabox($meta_company_prefix, array(
         'title' => esc_html__('Company Options', 'jobus'),
-        'post_type' => 'company',
+        'post_type' => 'jobus_company',
         'theme' => 'dark',
         'output_css' => true,
         'show_restore' => true,

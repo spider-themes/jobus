@@ -20,7 +20,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
         <div class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></div>
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url(get_post_type_archive_link('job')) ?>" role="search" method="get">
+            <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="job"/>
 
                 <?php
@@ -44,7 +44,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         $job_specifications = jobus_get_specs_options();
                         $job_specifications = $job_specifications[$widget_name] ?? '';
 
-                        if (!empty ($_GET['post_type'] ?? '' == 'job')) {
+                        if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
                             if (!empty ($_GET[$widget_name])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -81,7 +81,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                                     $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
                                                     $modifiedVal = strtolower($modifiedSelect);
 
-                                                    $meta_value_count = jobus_count_meta_key_usage('job', 'jobus_meta_options', $modifiedVal);
+                                                    $meta_value_count = jobus_count_meta_key_usage('jobus_job', 'jobus_meta_options', $modifiedVal);
                                                     if ($meta_value_count > 0) {
                                                         $searched_val = jobus_search_terms($widget_name);
                                                         $selected_val = $searched_val[0] ?? $modifiedVal;
@@ -111,7 +111,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                                     $opt_val = strtolower($modifiedValues);
 
                                                     // Get the count for the current meta value
-                                                    $meta_value_count = jobus_count_meta_key_usage('job', 'jobus_meta_options', $opt_val);
+                                                    $meta_value_count = jobus_count_meta_key_usage('jobus_job', 'jobus_meta_options', $opt_val);
                                                     if ($meta_value_count > 0) {
                                                         $searched_opt = jobus_search_terms($widget_name);
                                                         $check_status = array_search($opt_val, $searched_opt);
@@ -225,7 +225,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Categories
                         if ( $key === 'is_job_widget_cat' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'job')) {
+                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
                                 if (!empty($_GET['job_cats'])) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
@@ -233,7 +233,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 }
                             }
                             $term_cats = get_terms(array(
-                                'taxonomy' => 'job_cat',
+                                'taxonomy' => 'jobus_job_cat',
                             ));
                             if (!empty($term_cats)) {
                                 ?>
@@ -266,7 +266,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Locations
                         if ( $key === 'is_job_widget_location' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'job')) {
+                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
                                 if (!empty ($_GET['job_locations'])) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
@@ -274,7 +274,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 }
                             }
                             $term_loc = get_terms(array(
-                                'taxonomy' => 'job_location',
+                                'taxonomy' => 'jobus_job_location',
                                 'hide_empty' => false,
                             ));
                             if (!empty($term_loc)) {
@@ -308,7 +308,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Tag
                         if ( $key === 'is_job_widget_tag' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'job')) {
+                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
                                 if (!empty ($_GET['job_tags'])) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
@@ -327,7 +327,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                         <ul class="style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
                                             <?php
                                             $term_tags = get_terms(array(
-                                                'taxonomy' => 'job_tag',
+                                                'taxonomy' => 'jobus_job_tag',
                                             ));
                                             if (!empty($term_tags)) {
                                                 $searched_opt = jobus_search_terms('job_tags');

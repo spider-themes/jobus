@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
         }
         if (is_array($settings['cats'])) {
             foreach ($settings['cats'] as $cat) {
-                $cat = get_term($cat, 'job_cat');
+                $cat = get_term($cat, 'jobus_job_cat');
                 ?>
                 <li data-filter=".<?php echo esc_attr($cat->slug); ?>">
                     <?php echo esc_html($cat->name); ?>
@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
         <?php
         while ($posts->have_posts()) : $posts->the_post();
 
-            $cats = get_the_terms(get_the_ID(), 'job_cat');
+            $cats = get_the_terms(get_the_ID(), 'jobus_job_cat');
             $cat_slug = '';
             foreach ($cats as $cat) {
                 $cat_slug .= $cat->slug . ' ';
