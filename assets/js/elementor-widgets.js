@@ -6,8 +6,8 @@
         onInit: function () {
             var E_FRONT = elementorFrontend;
             var widgetHandlersMap = {
-                "jobly_job_tabs.default": jobus.jobTabs,
-                "jobly_job_categories.default": jobus.joblistSlider,
+                "jobus_job_tabs.default": jobus.jobTabs,
+                "jobus_job_categories.default": jobus.joblistSlider,
             };
 
             $.each(widgetHandlersMap, function (widgetName, callback) {

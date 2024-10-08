@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 class Search_Form extends Widget_Base {
 
 	public function get_name() {
-		return 'jobly_search_Form';
+		return 'jobus_search_Form';
 	}
 
 	public function get_title() {

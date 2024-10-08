@@ -26,7 +26,7 @@ class Jobs extends Widget_Base {
 
 	public function get_name ()
 	{
-		return 'jobly_job_listing';
+		return 'jobus_job_listing';
 	}
 
 	public function get_title ()

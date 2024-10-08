@@ -26,7 +26,7 @@ class Companies extends Widget_Base {
 
     public function get_name ()
     {
-        return 'jobly_companies';
+        return 'jobus_companies';
     }
 
     public function get_title ()

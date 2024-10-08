@@ -26,7 +26,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_name ()
     {
-        return 'jobly_job_tabs';
+        return 'jobus_job_tabs';
     }
 
     public function get_title ()
