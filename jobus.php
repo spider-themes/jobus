@@ -19,9 +19,6 @@ if (!defined('ABSPATH')) {
 
 // Make sure the same class is not loaded.
 if ( ! class_exists( 'Jobus' ) ) {
-
-	require_once __DIR__ . '/vendor/autoload.php';
-
 	/**
 	 * Class jobus
 	 */
@@ -34,7 +31,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.3';
+		const VERSION = '0.0.4';
 
 		/**
 		 * The plugin path
@@ -221,19 +218,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			}
 
 			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-
-		}
-
-
-		/**
-		 * Get the plugin url.
-		 *
-		 * @return string
-		 */
-		public function template_path(): string
-        {
-
-			return $this->plugin_path() . '/templates/';
 
 		}
 		

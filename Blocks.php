@@ -27,7 +27,8 @@ class Blocks {
     /**
      * Initialize the plugin
      */
-    public static function init() {
+    public static function init(): bool|Blocks
+    {
         static $instance = false;
         if( ! $instance ) {
             $instance = new self();
