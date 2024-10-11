@@ -153,15 +153,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         $all_values = [];
 
                                         // Extract numeric values from meta_values
-                                        foreach ( $salary_value_list as $item ) {
+                                        if ( !empty($salary_value_list) ) {
+                                            foreach ($salary_value_list as $item) {
 
-                                            // Extract numbers and check for 'k'
-                                            preg_match_all('/(\d+)(k)?/i', $item[ 'meta_values' ], $matches);
-                                            foreach ( $matches[ 1 ] as $key => $value ) {
-                                                // If 'k' is present, multiply the number by 1000
-                                                $value = isset($matches[ 2 ][ $key ]) && strtolower($matches[ 2 ][ $key ]) == 'k' ? $value * 1000 : $value;
+                                                // Extract numbers and check for 'k'
+                                                preg_match_all('/(\d+)(k)?/i', $item['meta_values'], $matches);
+                                                foreach ($matches[1] as $key => $value) {
+                                                    // If 'k' is present, multiply the number by 1000
+                                                    $value = isset($matches[2][$key]) && strtolower($matches[2][$key]) == 'k' ? $value * 1000 : $value;
 
-                                                $all_values[] = $value;
+                                                    $all_values[] = $value;
+                                                }
                                             }
                                         }
 

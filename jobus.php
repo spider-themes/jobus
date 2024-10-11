@@ -108,6 +108,7 @@ if ( ! class_exists( 'Jobus' ) ) {
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
+            require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';

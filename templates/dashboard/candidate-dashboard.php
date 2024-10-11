@@ -12,7 +12,7 @@ if (in_array('jobus_candidate', $user->roles)) {
 
     $applicants = get_posts(
         array(
-            'post_type' => 'jobus_job_application',
+            'post_type' => 'jobus_applicant',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'meta_query' => array(

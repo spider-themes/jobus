@@ -34,7 +34,7 @@ class Job_Application {
 
     public function admin_single_subtitle($post): void
     {
-        if ($post->post_type === 'jobus_job_application') {
+        if ($post->post_type === 'jobus_applicant') {
             $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
             ?>
             <p class="jobus-application-submission-info">
@@ -52,14 +52,14 @@ class Job_Application {
             'applicant-details-meta-box',
             esc_html__('Applicant Details', 'jobus'),
             array($this, 'render_single_contents'),
-            'jobus_job_application'
+            'jobus_applicant'
         );
     }
 
     public function render_single_contents($post): void
     {
 
-        if ($post->post_type === 'jobus_job_application') {
+        if ($post->post_type === 'jobus_applicant') {
             require_once plugin_dir_path(__FILE__) . '../templates/meta/applicant-single.php';
         }
 
@@ -92,7 +92,7 @@ class Job_Application {
             'rewrite'               => false,
         );
 
-        register_post_type('jobus_job_application', $args); // Register the post-type `jobus_job_application`
+        register_post_type('jobus_applicant', $args); // Register the post-type `jobus_applicant`
     }
 
     public function job_application_columns($columns): array

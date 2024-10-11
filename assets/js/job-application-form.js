@@ -10,7 +10,7 @@
                 event.preventDefault();
 
                 let formData = new FormData(this);
-                formData.append('action', 'jobus_job_application');
+                formData.append('action', 'jobus_applicant');
                 formData.append('security', job_application_form.nonce);
 
                 $.ajax({
