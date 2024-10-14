@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="candidate"/>
+                <input type="hidden" name="jobus_filter_nonce" value="<?php echo wp_create_nonce('jobus_filter_nonce'); ?>" />
 
                 <?php
 
@@ -48,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $candidate_specifications = jobus_get_specs_options('candidate_specifications');
                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
-                        if (!empty ($_GET[ 'post_type' ] ?? '' == 'jobus_candidate')) {
+                        if (!empty (sanitize_text_field($_GET[ 'post_type' ]) ?? '' == 'jobus_candidate')) {
                             if (!empty ($_GET[ $widget_name ])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -216,8 +217,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-                    if ( ! empty ( $_GET['post_type'] ?? '' == 'jobus_candidate' ) ) {
-		                if ( ! empty ( $_GET['candidate_locations'] ) ) {
+                    if ( ! empty ( sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_candidate' ) ) {
+		                if ( ! empty ( sanitize_text_field($_GET['candidate_locations']) ) ) {
 			                $is_collapsed_show = 'collapse show';
 			                $area_expanded     = 'true';
 			                $is_collapsed      = '';

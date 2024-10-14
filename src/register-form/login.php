@@ -67,7 +67,7 @@ if (is_user_logged_in()) {
                                                class="pass_log_id">
                                         <span class="placeholder_icon">
                                             <span class="passVicon">
-                                                <img src="<?php echo JOBUS_IMG . '/icons/icon-eye.svg' ?>"
+                                                <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>"
                                                      alt="<?php esc_attr_e('eye-icon', 'jobus'); ?>">
                                             </span>
                                         </span>

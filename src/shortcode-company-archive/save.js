@@ -1,6 +1,4 @@
 import { useBlockProps } from '@wordpress/block-editor';
-
-
 function Save( props ) {
 
     const { company_layout } = props.attributes;

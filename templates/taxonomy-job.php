@@ -19,8 +19,8 @@ $current_job_location = get_term_by('slug', get_query_var('jobus_job_location'),
 $current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = sanitize_text_field($_GET['orderby']) ?? 'date';
+$selected_order = sanitize_text_field($_GET['order']) ?? 'desc';
 
 $args = array(
     'post_type'      => 'jobus_job',

@@ -839,7 +839,7 @@ function jobus_posts_count($post_type): string
 {
 
     $total_posts = wp_count_posts($post_type);
-    return number_format_i18n($total_posts->publish);
+    return esc_html(number_format_i18n($total_posts->publish));
 
 }
 

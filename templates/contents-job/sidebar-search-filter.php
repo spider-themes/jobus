@@ -44,7 +44,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         $job_specifications = jobus_get_specs_options();
                         $job_specifications = $job_specifications[$widget_name] ?? '';
 
-                        if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
+                        if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
                             if (!empty ($_GET[$widget_name])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -225,7 +225,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Categories
                         if ( $key === 'is_job_widget_cat' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
+                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
                                 if (!empty($_GET['job_cats'])) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
@@ -266,7 +266,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Locations
                         if ( $key === 'is_job_widget_location' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
+                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
                                 if (!empty ($_GET['job_locations'])) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
@@ -308,8 +308,8 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Tag
                         if ( $key === 'is_job_widget_tag' && $value ) {
-                            if (!empty ($_GET['post_type'] ?? '' == 'jobus_job')) {
-                                if (!empty ($_GET['job_tags'])) {
+                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
+                                if (!empty (sanitize_text_field($_GET['job_tags']))) {
                                     $is_collapsed_show = 'collapse show';
                                     $area_expanded = 'true';
                                     $is_collapsed = '';

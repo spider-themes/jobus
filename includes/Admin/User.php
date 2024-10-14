@@ -125,7 +125,7 @@ class User {
 
                         // Log the user in
                         wp_set_current_user($candidate_id);
-                        wp_set_auth_cookie($candidate_id);
+                        wp_signon($candidate_id, false);
                         do_action('wp_login', $candidate_username, $candidate);
 
                         // Redirect to admin panel
@@ -145,7 +145,7 @@ class User {
             $employer_username = sanitize_user($_POST['employer_username']) ?? '';
             $employer_email = sanitize_email($_POST['employer_email']) ?? '';
             $employer_password = sanitize_text_field($_POST['employer_pass']) ?? '';
-            $employer_confirm_password = $_POST['employer_confirm_pass'] ?? '';
+            $employer_confirm_password = sanitize_text_field($_POST['employer_confirm_pass']) ?? '';
 
             // Check if passwords match
             if ($employer_password !== $employer_confirm_password) {
@@ -166,7 +166,7 @@ class User {
 
                         // Log the user in
                         wp_set_current_user($employer_id);
-                        wp_set_auth_cookie($employer_id);
+                        wp_signon($employer_id, false);
                         do_action('wp_login', $employer_username, $employer);
 
                         // Redirect to admin panel
