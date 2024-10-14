@@ -75,7 +75,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Check if the user has already applied for this job
                         $has_applied = get_posts(array(
-                            'post_type' => 'jobus_job_application',
+                            'post_type' => 'jobus_applicant',
                             'post_status' => 'publish',
                             'meta_query' => array(
                                 array(

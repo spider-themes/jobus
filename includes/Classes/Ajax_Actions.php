@@ -35,10 +35,10 @@ class Ajax_Actions
         $candidate_mail = !empty($meta['candidate_mail']) ? sanitize_email($meta['candidate_mail']) : '';
 
         // Sanitize and get form data
-        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
-        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
-        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
-        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+        $sender_name = sanitize_text_field($_POST['sender_name']) ?? '';
+        $sender_email = sanitize_email($_POST['sender_email']) ?? '';
+        $sender_subject = sanitize_text_field($_POST['sender_subject']) ?? '';
+        $message = sanitize_textarea_field($_POST['message']) ?? '';
 
         // Validate required fields
         if (empty($sender_name) || empty($sender_email) || empty($message) || empty($candidate_mail)) {
@@ -80,7 +80,7 @@ class Ajax_Actions
 
         // Save the application as a new post
         $application_id = wp_insert_post(array(
-            'post_type' => 'jobus_job_application',
+            'post_type' => 'jobus_applicant',
             'post_status' => 'publish',
             'post_title' => $candidate_fname . ' ' . $candidate_lname,
         ));

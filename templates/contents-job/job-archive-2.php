@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 $job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = $_GET['view'] ?? 'list';
+$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';
 
 // Get the base URL for the archive page
 if ( $job_archive_layout ) {
-    $archive_url = get_the_permalink(); //Created Page link
+    $archive_url = get_the_permalink(); //Created a Page link
 } else {
     $archive_url = get_post_type_archive_link('jobus_job');
 }
@@ -41,14 +41,14 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <div class="short-filter d-flex align-items-center">
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <?php
-                                $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $order = sanitize_text_field($_GET['order']) ?? '';
+                                $order_by = sanitize_text_field($_GET['orderby']) ?? '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_asc = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
-                                $default = !empty($_GET['orderby']) ? 'selected' : '';
+                                $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
                                 ?>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">

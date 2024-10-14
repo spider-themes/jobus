@@ -35,8 +35,8 @@ if (class_exists('CSF')) {
                 'title'     => esc_html__('Choose Layout', 'jobus'),
                 'subtitle'  => esc_html__('Select the preferred layout for your job post for this page.', 'jobus'),
                 'options'   => array(
-                    '1' => JOBUS_IMG . '/layout/job/single-layout-1.png',
-                    '2' => JOBUS_IMG . '/layout/job/single-layout-2.png',
+                    '1' => esc_url(JOBUS_IMG . '/layout/job/single-layout-1.png'),
+                    '2' => esc_url(JOBUS_IMG . '/layout/job/single-layout-2.png'),
                 ),
                 'default'   => '1'
             ),

@@ -3,7 +3,7 @@
  * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
- * Version: 0.0.4
+ * Version: 0.0.5
  * Requires at least: 6.0
  * Tested up to: 6.6.2
  * Requires PHP: 7.4
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.4';
+		const VERSION = '0.0.5';
 
 		/**
 		 * The plugin path
@@ -108,6 +108,7 @@ if ( ! class_exists( 'Jobus' ) ) {
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
+            require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
@@ -116,6 +117,7 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
+            require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
@@ -217,19 +219,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			}
 
 			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-
-		}
-
-
-		/**
-		 * Get the plugin url.
-		 *
-		 * @return string
-		 */
-		public function template_path(): string
-        {
-
-			return $this->plugin_path() . '/templates/';
 
 		}
 		

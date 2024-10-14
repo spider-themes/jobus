@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = $_GET['view'] ?? 'grid';
+$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
 if ($candidate_archive_layout) {
@@ -16,8 +16,8 @@ if ($candidate_archive_layout) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = add_query_arg('view', 'list', $archive_url);
-$grid_view_url = add_query_arg('view', 'grid', $archive_url);
+$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
+$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
 <section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
@@ -43,7 +43,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                             <?php
                             $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                             $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                            $default = !empty($_GET['orderby']) ? 'selected' : '';
+                            $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
 
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                             $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
@@ -63,10 +63,10 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn <?php echo ($current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobus'); ?>">
+                            <a href="<?php echo esc_url($list_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn <?php echo esc_attr($current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobus'); ?>">
                                 <i class="bi bi-list"></i>
                             </a>
-                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn <?php echo ($current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobus'); ?>">
+                            <a href="<?php echo esc_url($grid_view_url); ?>" class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn <?php echo esc_attr($current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobus'); ?>">
                                 <i class="bi bi-grid"></i>
                             </a>
                         </div>
