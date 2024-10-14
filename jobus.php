@@ -72,9 +72,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
-            // Register the candidate menu for administrators only
-            add_action('init', [$this, 'register_menu']);
-
 		}
 
 		/**
@@ -88,15 +85,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 		}
 
 
-        public function register_menu(): void
-        {
-            register_nav_menus([
-                'candidate_menu' => esc_html__('Candidate Menu', 'jobus'),
-            ]);
-
-        }
-
-
 		/**
 		 * Include Files
 		 *
@@ -108,7 +96,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
-            require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
@@ -117,11 +104,9 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-            require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
-            require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
             // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Assets.php';

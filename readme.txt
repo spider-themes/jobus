@@ -14,7 +14,7 @@ Jobus is a comprehensive and powerful tool for creating job, company, and candid
 == Features ==
 * **Easy Setup and Use**: Simple and intuitive interface for quick setup.
 * **User-Friendly Design**: Clean, responsive, and accessible design.
-* **Unlimited Job Specifications**: Easily add and manage job details.
+* **Unlimited Job Specifications**: Add and manage job details.
 * **WordPress UI Integration**: Manage job listings using the familiar WordPress interface.
 * **Location-Based Job Listings**: Add job locations to individual job postings.
 * **Job Application Management**: Job seekers can apply directly through the job application form on each job post.
@@ -23,7 +23,7 @@ Jobus is a comprehensive and powerful tool for creating job, company, and candid
 * **Custom User Roles**: Define custom roles for different user types.
 * **Featured Jobs**: Highlight special jobs with an attention-grabbing badge.
 * **Social Sharing**: Integrated social sharing options for job posts.
-* **Customizable Appearance**: Easily modify the plugin's look and feel from the settings page.
+* **Customizable Appearance**: Modify the plugin's look and feel from the settings page.
 * **Pre-made Templates**: Ready-to-use templates for careers, job listings, and company pages.
 * **Multiple Layouts**: Choose from various pre-made layout templates for candidates, jobs, and companies.
 
