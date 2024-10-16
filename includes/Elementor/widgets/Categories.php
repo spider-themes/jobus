@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobus\Elementor\widgets;
+namespace Jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -79,19 +79,19 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'layout', [
-				'label'   => __( 'Layout', 'jobus' ),
+				'label'   => esc_html__( 'Layout', 'jobus' ),
 				'type'    => Controls_Manager::CHOOSE,
 				'options' => [
 					'1' => [
-						'title' => __( '01: Category', 'jobus' ),
+						'title' => esc_html__( '01: Category', 'jobus' ),
 						'icon'  => 'category1',
 					],
 					'2' => [
-						'title' => __( '02: Category', 'jobus' ),
+						'title' => esc_html__( '02: Category', 'jobus' ),
 						'icon'  => 'category2',
 					],
 					'3' => [
-						'title' => __( '03: Category', 'jobus' ),
+						'title' => esc_html__( '03: Category', 'jobus' ),
 						'icon'  => 'category3',
 					],
 				],
@@ -105,7 +105,7 @@ class Categories extends Widget_Base {
 		//===================== Location Filter =========================//
 		$this->start_controls_section(
 			'sec_filter', [
-				'label' => __( 'Filter', 'jobus' ),
+				'label' => esc_html__( 'Filter', 'jobus' ),
 			]
 		);
 
@@ -191,7 +191,7 @@ class Categories extends Widget_Base {
 		//============================ Category Item Style ============================//
 		$this->start_controls_section(
 			'category_style', [
-				'label' => __( 'Category Items', 'jobus' ),
+				'label' => esc_html__( 'Category Items', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -221,7 +221,7 @@ class Categories extends Widget_Base {
 
 		$this->add_responsive_control(
 			'category_border_radius', [
-				'label'      => __( 'Border Radius', 'jobus' ),
+				'label'      => esc_html__( 'Border Radius', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'separator' => 'after',
@@ -240,7 +240,7 @@ class Categories extends Widget_Base {
 		//button Style Normal Style
 		$this->start_controls_tab(
 			'style_normal', [
-				'label' => __( 'Normal', 'jobus' ),
+				'label' => esc_html__( 'Normal', 'jobus' ),
 			]
 		);
 
@@ -260,7 +260,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_tab(
 			'style_hover_btn',
 			[
-				'label' => __( 'Hover', 'jobus' ),
+				'label' => esc_html__( 'Hover', 'jobus' ),
 			]
 		);
 		$this->add_group_control(
@@ -276,7 +276,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'hover_title_color', [
-				'label'     => __( 'Text Color', 'jobus' ),
+				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper:hover .title, {{WRAPPER}} .card-style-one .wrapper:hover .total-job' => 'color: {{VALUE}};',
@@ -288,7 +288,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_borders_color', [
-				'label'     => __( 'Border Color', 'jobus' ),
+				'label'     => esc_html__( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper.bg:hover'=> 'border-color: {{VALUE}}',
@@ -300,7 +300,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'icon_hover_bg', [
-				'label'     => __( 'Icon Background', 'jobus' ),
+				'label'     => esc_html__( 'Icon Background', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-four:hover .icon' => 'background: {{VALUE}};',
@@ -320,7 +320,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_section(
 			'category_title_style',
 			[
-				'label' => __( 'Job Title', 'jobus' ),
+				'label' => esc_html__( 'Job Title', 'jobus' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 
 			]
@@ -328,7 +328,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_title_color', [
-				'label'     => __( 'Text Color', 'jobus' ),
+				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .title,
@@ -366,7 +366,7 @@ class Categories extends Widget_Base {
 		$this->start_controls_section(
 			'category_job_total_style',
 			[
-				'label'     => __( 'Total Job', 'jobus' ),
+				'label'     => esc_html__( 'Total Job', 'jobus' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'layout' => [ '1', '3' ],
@@ -376,7 +376,7 @@ class Categories extends Widget_Base {
 
 		$this->add_control(
 			'category_job_total_color', [
-				'label'     => __( 'Text Color', 'jobus' ),
+				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',

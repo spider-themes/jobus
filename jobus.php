@@ -125,8 +125,10 @@ if ( ! class_exists( 'Jobus' ) ) {
 
             // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Assets.php';
+            require_once __DIR__ . '/includes/Frontend/Dashboard.php';
             require_once __DIR__ . '/includes/Frontend/Frontend.php';
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
+            require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 
             //Admin UI
             require_once __DIR__ . '/includes/Admin/User.php';
@@ -156,23 +158,25 @@ if ( ! class_exists( 'Jobus' ) ) {
 
             //Admin UI
             if ( is_admin() ) {
-                new Jobus\Admin\User();
-                new Jobus\Admin\Assets();
+                new Jobus\includes\Admin\User();
+                new Jobus\includes\Admin\Assets();
             }
 
             //Post Type
-            new Jobus\Admin\CPT\Job_Application();
-            new Jobus\Admin\CPT\Candidate();
-            new Jobus\Admin\CPT\Job();
-            new Jobus\Admin\CPT\Company();
+            new Jobus\includes\Admin\CPT\Job_Application();
+            new Jobus\includes\Admin\CPT\Candidate();
+            new Jobus\includes\Admin\CPT\Job();
+            new Jobus\includes\Admin\CPT\Company();
 
             // Frontend UI
-            new Jobus\Frontend\Assets();
-            new Jobus\Frontend\Frontend();
-            new Jobus\Frontend\Shortcode();
+            new Jobus\includes\Frontend\Assets();
+            new Jobus\includes\Frontend\Dashboard();
+            new Jobus\includes\Frontend\Frontend();
+            new Jobus\includes\Frontend\Shortcode();
+            new Jobus\includes\Frontend\Template_Loader();
 
             //Elementor & Blocks
-            new Jobus\Elementor\Register_Widgets();
+            new Jobus\includes\Elementor\Register_Widgets();
             new Jobus\Gutenberg\Blocks();
 
         }

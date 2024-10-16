@@ -19,8 +19,8 @@ $current_candidate_loc = get_term_by('slug', get_query_var('jobus_candidate_loca
 $current_candidate_skill = get_term_by('slug', get_query_var('jobus_candidate_skill'), 'jobus_candidate_skill');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = sanitize_text_field($_GET['orderby']) ?? 'date';
-$selected_order = sanitize_text_field($_GET['order']) ?? 'desc';
+$selected_order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
     'post_type'      => 'jobus_candidate',

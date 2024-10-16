@@ -5,7 +5,7 @@
  * @package jobus
  * @author spiderdevs
  */
-namespace Jobus\Frontend;
+namespace Jobus\includes\Frontend;
 
 use WP_User;
 
@@ -73,9 +73,6 @@ class Dashboard {
         ]);
 
     }
-
-
-
 
 
     public function user_account_settings(): string
@@ -324,7 +321,6 @@ class Dashboard {
         ]);
 
     }
-
 
 
     /**

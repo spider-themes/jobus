@@ -5,7 +5,7 @@
  * @package jobus
  * @author spiderdevs
  */
-namespace Jobus\Frontend;
+namespace Jobus\includes\Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly

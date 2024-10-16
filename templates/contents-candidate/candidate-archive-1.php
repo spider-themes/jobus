@@ -43,7 +43,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                             <?php
                             $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                             $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                            $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                            $default = !empty($_GET['orderby']) ? 'selected' : '';
 
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                             $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';

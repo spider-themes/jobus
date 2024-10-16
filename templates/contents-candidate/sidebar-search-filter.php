@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+$post_type = isset($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
 ?>
 
 <div class="col-xl-3 col-lg-4">
@@ -38,7 +39,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
                         $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
                         $area_expanded = $index == 1 ? 'true' : 'false';
-
                         $widget_name = $widget[ 'widget_name' ] ?? '';
                         $widget_layout = $widget[ 'widget_layout' ] ?? '';
                         $range_suffix = $widget[ 'range_suffix' ] ?? '';
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $candidate_specifications = jobus_get_specs_options('candidate_specifications');
                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
-                        if (!empty (sanitize_text_field($_GET[ 'post_type' ]) ?? '' == 'jobus_candidate')) {
+                        if ($post_type == 'jobus_candidate') {
                             if (!empty ($_GET[ $widget_name ])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -217,7 +217,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-                    if ( ! empty ( sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_candidate' ) ) {
+                    if ( $post_type == 'jobus_candidate' ) {
 		                if ( ! empty ( sanitize_text_field($_GET['candidate_locations']) ) ) {
 			                $is_collapsed_show = 'collapse show';
 			                $area_expanded     = 'true';
@@ -263,7 +263,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-                    if (!empty ($_GET[ 'post_type' ] ?? '' == 'jobus_candidate')) {
+                    if ( $post_type == 'jobus_candidate' ) {
                         if (!empty ($_GET[ 'candidate_cats' ])) {
                             $is_collapsed_show = 'collapse show';
                             $area_expanded = 'true';

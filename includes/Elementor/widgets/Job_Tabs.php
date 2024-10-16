@@ -2,7 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
-namespace Jobus\Elementor\widgets;
+namespace Jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -87,7 +87,7 @@ class Job_Tabs extends Widget_Base {
         //============================= Filter Options ================================//
         $this->start_controls_section(
             'filter_sec', [
-                'label' => __('Filter', 'jobus'),
+                'label' => esc_html__('Filter', 'jobus'),
             ]
         );
 
@@ -181,7 +181,7 @@ class Job_Tabs extends Widget_Base {
         //============================= Job Attributes ================================//
         $this->start_controls_section(
             'job_attrs_sec', [
-                'label' => __('Job Attributes', 'jobus'),
+                'label' => esc_html__('Job Attributes', 'jobus'),
             ]
         );
 

@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = sanitize_text_field($_GET[ 'orderby' ]) ?? 'date';
-$selected_order = sanitize_text_field($_GET[ 'order' ]) ?? 'desc';
+$selected_order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];

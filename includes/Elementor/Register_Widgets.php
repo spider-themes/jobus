@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobus\Elementor;
+namespace Jobus\includes\Elementor;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -42,7 +42,7 @@ class Register_Widgets
      * @return void
      * Register Category
      */
-    public function register_category ($elements_manager)
+    public function register_category ($elements_manager): void
     {
         $elements_manager->add_category(
             'jobus-elements', [
@@ -62,7 +62,7 @@ class Register_Widgets
      * @return void
      * Register Elementor Preview Editor Scripts
      */
-    public function register_editor_styles ()
+    public function register_editor_styles (): void
     {
         wp_enqueue_style('jobus-elementor-editor', esc_url(JOBUS_CSS . '/elementor-editor.css'), [], JOBUS_VERSION);
     }
@@ -73,7 +73,7 @@ class Register_Widgets
      * @return void
      * Register Elementor Widgets
      */
-    public function register_widgets ($widgets_manager)
+    public function register_widgets ($widgets_manager): void
     {
 
         // Include Widget files
