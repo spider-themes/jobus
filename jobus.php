@@ -13,6 +13,8 @@
  * Domain Path: /languages
  */
 
+namespace Jobus;
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }

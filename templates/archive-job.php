@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
@@ -138,9 +138,10 @@ if (!empty($result_ids)) {
     $args[ 'post__in' ] = $result_ids;
 }
 
-$search_type = sanitize_text_field($_GET[ 'search_type' ]) ?? '';
-if ($search_type == 'company_search' && !empty(sanitize_text_field($_GET[ 'company_ids' ]))) {
-    $args[ 'post__in' ] = explode(',', sanitize_text_field($_GET[ 'company_ids' ]) ?? '');
+$search_type = !empty($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
+$company_ids = !empty($_GET[ 'company_ids' ]) ? sanitize_text_field($_GET[ 'company_ids' ]) : '';
+if ( $search_type == 'company_search' && $company_ids ) {
+    $args[ 'post__in' ] = explode(',', $company_ids);
 }
 
 $job_post = new \WP_Query($args);

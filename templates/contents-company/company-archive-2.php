@@ -49,8 +49,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
                                 <?php
-                                $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                $order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                                $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
                                 $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';

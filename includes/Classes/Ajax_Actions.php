@@ -28,17 +28,17 @@ class Ajax_Actions
         }
 
         // Get candidate ID
-        $candidate_id = intval($_POST['candidate_id']) ?? '';
+        $candidate_id = isset($_POST['candidate_id']) ? intval($_POST['candidate_id']) : 0;
 
         // Retrieve candidate email
         $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
         $candidate_mail = !empty($meta['candidate_mail']) ? sanitize_email($meta['candidate_mail']) : '';
 
         // Sanitize and get form data
-        $sender_name = sanitize_text_field($_POST['sender_name']) ?? '';
-        $sender_email = sanitize_email($_POST['sender_email']) ?? '';
-        $sender_subject = sanitize_text_field($_POST['sender_subject']) ?? '';
-        $message = sanitize_textarea_field($_POST['message']) ?? '';
+        $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
+        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
+        $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
+        $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
 
         // Validate required fields
         if (empty($sender_name) || empty($sender_email) || empty($message) || empty($candidate_mail)) {
@@ -70,13 +70,13 @@ class Ajax_Actions
         check_ajax_referer('job_application_form_nonce', 'security');
 
         // Get form data
-        $candidate_fname = sanitize_text_field($_POST['candidate_fname']) ?? '';
-        $candidate_lname = sanitize_text_field($_POST['candidate_lname']) ?? '';
-        $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
-        $candidate_phone = sanitize_text_field($_POST['candidate_phone']) ?? '';
-        $candidate_message = sanitize_textarea_field($_POST['candidate_message']) ?? '';
-        $job_application_id = sanitize_text_field($_POST['job_application_id']) ?? '';
-        $job_application_title = sanitize_text_field($_POST['job_application_title']) ?? '';
+        $candidate_fname = !empty($_POST['candidate_fname']) ? sanitize_text_field($_POST['candidate_fname']) : '';
+        $candidate_lname = !empty($_POST['candidate_lname']) ? sanitize_text_field($_POST['candidate_lname']) : '';
+        $candidate_email = !empty($_POST['candidate_email']) ? sanitize_email($_POST['candidate_email']) : '';
+        $candidate_phone = !empty($_POST['candidate_phone']) ? sanitize_text_field($_POST['candidate_phone']) : '';
+        $candidate_message = !empty($_POST['candidate_message']) ? sanitize_textarea_field($_POST['candidate_message']) : '';
+        $job_application_id = !empty($_POST['job_application_id']) ? sanitize_text_field($_POST['job_application_id']) : '';
+        $job_application_title = !empty($_POST['job_application_title']) ? sanitize_text_field($_POST['job_application_title']) : '';
 
         // Save the application as a new post
         $application_id = wp_insert_post(array(

@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-$post_type = isset($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
+$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
 ?>
 
 <div class="col-xl-3 col-lg-4">

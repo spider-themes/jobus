@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-$user_input = sanitize_text_field($_POST['user_input']) ?? '';
-$password = sanitize_textarea_field($_POST['user_pwd']) ?? '';
+$user_input = !empty($_POST['user_input']) ? sanitize_text_field($_POST['user_input']) : '';
+$password = !empty($_POST['user_pwd']) ? sanitize_textarea_field($_POST['user_pwd']) : '';
 
 if (is_user_logged_in()) {
     $current_user = wp_get_current_user();

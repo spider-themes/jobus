@@ -43,7 +43,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <?php
                                 $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                $order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
                                 $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';

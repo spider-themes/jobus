@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_company', '', jobus_all_search_meta('jobus_meta_company_options', 'company_sidebar_widgets' )) ];

@@ -537,7 +537,7 @@ function jobus_search_terms ($terms): array|string
         // Check if the parameter is set in the URL
         if (isset($_GET[ $terms ])) {
             // Get the values of the parameter
-            $terms = sanitize_text_field( $_GET[ $terms ] );
+            $terms = !empty( $_GET[ $terms ]) ? sanitize_text_field( $_GET[ $terms ] ) : '';
 
             // If there's only one value, convert it to an array for consistency
             if (!is_array($terms)) {

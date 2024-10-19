@@ -101,10 +101,10 @@ class User {
         if (isset($_POST['register_candidate_nonce']) && wp_verify_nonce(sanitize_text_field( wp_unslash($_POST['register_candidate_nonce'])), 'register_candidate_action')) {
 
             // Get form data
-            $candidate_username = sanitize_user($_POST['candidate_username']) ?? '';
-            $candidate_email = sanitize_email($_POST['candidate_email']) ?? '';
-            $candidate_password = sanitize_text_field($_POST['candidate_pass']) ?? '';
-            $candidate_confirm_password = sanitize_text_field($_POST['candidate_confirm_pass']) ?? '';
+            $candidate_username = !empty($_POST['candidate_username']) ? sanitize_user($_POST['candidate_username']) : '';
+            $candidate_email = !empty($_POST['candidate_email']) ? sanitize_email($_POST['candidate_email']) : '';
+            $candidate_password = !empty($_POST['candidate_pass']) ? sanitize_text_field($_POST['candidate_pass']) : '';
+            $candidate_confirm_password = !empty($_POST['candidate_confirm_pass']) ? sanitize_text_field($_POST['candidate_confirm_pass']) : '';
 
             // Check if passwords match
             if ($candidate_password !== $candidate_confirm_password) {
@@ -142,10 +142,10 @@ class User {
         if (isset($_POST['register_employer_nonce']) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action')) {
 
             // Get form data
-            $employer_username = sanitize_user($_POST['employer_username']) ?? '';
-            $employer_email = sanitize_email($_POST['employer_email']) ?? '';
-            $employer_password = sanitize_text_field($_POST['employer_pass']) ?? '';
-            $employer_confirm_password = sanitize_text_field($_POST['employer_confirm_pass']) ?? '';
+            $employer_username = !empty($_POST['employer_username']) ? sanitize_user($_POST['employer_username']) : '';
+            $employer_email = !empty($_POST['employer_email']) ? sanitize_email($_POST['employer_email']) : '';
+            $employer_password = !empty($_POST['employer_pass']) ? sanitize_text_field($_POST['employer_pass']) : '';
+            $employer_confirm_password = !empty($_POST['employer_confirm_pass']) ? sanitize_text_field($_POST['employer_confirm_pass']) : '';
 
             // Check if passwords match
             if ($employer_password !== $employer_confirm_password) {

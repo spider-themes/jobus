@@ -19,7 +19,7 @@ $current_job_location = get_term_by('slug', get_query_var('jobus_job_location'),
 $current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = isset($GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
@@ -76,8 +76,8 @@ $job_count = $job_post->found_posts;
                                 <div class="short-filter d-flex align-items-center">
                                     <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                     <?php
-                                    $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                    $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                    $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                                    $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
                                     $default = !empty($_GET['orderby']) ? 'selected' : '';
 
                                     $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
