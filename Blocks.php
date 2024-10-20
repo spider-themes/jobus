@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Gutenberg;
+namespace jobus\Gutenberg;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.

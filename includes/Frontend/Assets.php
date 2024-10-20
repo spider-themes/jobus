@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\includes\Frontend;
+namespace jobus\includes\Frontend;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

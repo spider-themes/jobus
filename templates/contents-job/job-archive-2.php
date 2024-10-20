@@ -31,7 +31,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-25 mt-70 lg-mt-40">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark"><?php echo jobus_posts_count('jobus_job') ?></span>
+                            <span class="text-dark"><?php echo esc_html(jobus_posts_count('jobus_job')) ?></span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
                             echo esc_html(printf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job')));
@@ -48,7 +48,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_asc = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
-                                $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                                $default = ! empty( $order_by ) ? 'selected' : '';
                                 ?>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">

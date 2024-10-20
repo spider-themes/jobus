@@ -36,7 +36,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 
                             <div class="total-job-found xs-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo jobus_posts_count('jobus_job') ?></span>
+                                <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_job')) ?></span>
                                 <?php
                                 /* translators: 1: job found, 2: jobs found */
                                 echo esc_html(sprintf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job') ));
@@ -51,7 +51,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                 <?php
                                 $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                                 $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                                $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                                $default = ! empty( $order_by ) ? 'selected' : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';

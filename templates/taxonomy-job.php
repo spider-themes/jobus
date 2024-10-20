@@ -78,7 +78,7 @@ $job_count = $job_post->found_posts;
                                     <?php
                                     $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
                                     $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                                    $default = !empty($_GET['orderby']) ? 'selected' : '';
+                                    $default = ! empty( $order_by ) ? 'selected' : '';
 
                                     $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                     $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';

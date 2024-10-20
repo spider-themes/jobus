@@ -13,7 +13,7 @@
  * Domain Path: /languages
  */
 
-namespace Jobus;
+namespace jobus;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -156,30 +156,30 @@ if ( ! class_exists( 'Jobus' ) ) {
         {
 
             // Classes
-            new Jobus\includes\Classes\Ajax_Actions();
+            new includes\Classes\Ajax_Actions();
 
             //Admin UI
             if ( is_admin() ) {
-                new Jobus\includes\Admin\User();
-                new Jobus\includes\Admin\Assets();
+                new includes\Admin\User();
+                new includes\Admin\Assets();
             }
 
             //Post Type
-            new Jobus\includes\Admin\CPT\Job_Application();
-            new Jobus\includes\Admin\CPT\Candidate();
-            new Jobus\includes\Admin\CPT\Job();
-            new Jobus\includes\Admin\CPT\Company();
+            new includes\Admin\CPT\Job_Application();
+            new includes\Admin\CPT\Candidate();
+            new includes\Admin\CPT\Job();
+            new includes\Admin\CPT\Company();
 
             // Frontend UI
-            new Jobus\includes\Frontend\Assets();
-            new Jobus\includes\Frontend\Dashboard();
-            new Jobus\includes\Frontend\Frontend();
-            new Jobus\includes\Frontend\Shortcode();
-            new Jobus\includes\Frontend\Template_Loader();
+            new includes\Frontend\Assets();
+            new includes\Frontend\Dashboard();
+            new includes\Frontend\Frontend();
+            new includes\Frontend\Shortcode();
+            new includes\Frontend\Template_Loader();
 
             //Elementor & Blocks
-            new Jobus\includes\Elementor\Register_Widgets();
-            new Jobus\Gutenberg\Blocks();
+            new includes\Elementor\Register_Widgets();
+            new Gutenberg\Blocks();
 
         }
 

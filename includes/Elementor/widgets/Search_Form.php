@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobus\includes\Elementor\widgets;
+namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
