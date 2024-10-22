@@ -1,0 +1,108 @@
+.elementor-control-raw-html.elementor-warning {
+    padding: 10px;
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+    line-height: 1.4;
+}
+
+.elementor-control-raw-html.elementor-warning {
+    padding: 10px;
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+    line-height: 1.4;
+}
+
+/** === Style Variations === **/
+.elementor-control.elementor-control-layout.elementor-control-type-choose.elementor-label-inline .elementor-control-input-wrapper,
+.elementor-control.elementor-control-layout .elementor-control-content,
+.elementor-control.elementor-control-layout .elementor-control-field {
+    display: block;
+}
+.elementor-control.elementor-control-layout.elementor-control-type-choose.elementor-label-inline .elementor-control-input-wrapper {
+    margin-left: 0;
+}
+.elementor-control.elementor-control-layout.elementor-control-type-choose label.elementor-control-title {
+    padding-bottom: 10px;
+    display: block;
+}
+.elementor-control.elementor-control-layout .elementor-choices {
+    display: block;
+    height: auto;
+    width: 266px;
+}
+.elementor-control.elementor-control-layout .elementor-choices .elementor-choices-label {
+    display: block;
+    width: 266px;
+    height: 110px;
+}
+.elementor-control.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label {
+    border-width: 2px;
+    padding-right: 2px;
+}
+.elementor-control.elementor-control-layout .elementor-choices label:not(:first-of-type) {
+    margin-top: 10px;
+}
+.elementor-control.elementor-control-layout .elementor-choices .elementor-choices-label:hover {
+    border: 1px solid #6d7882;
+}
+.elementor-control.elementor-control-layout .elementor-choices .elementor-choices-label i {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.elementor-control.elementor-control-layout .elementor-choices .elementor-choices-label i::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+}
+.elementor-control.elementor-control-layout .elementor-choices input+.elementor-choices-label:hover i::before,
+.elementor-control.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label i::before {
+    opacity: 1;
+}
+
+/** === Categories === **/
+.category1::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/category_1.png") no-repeat top;
+}
+.category2::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/category_2.png") no-repeat top;
+}
+.category3::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/category_3.png") no-repeat top;
+}
+
+/** === Search From === **/
+.search_form_1::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/search_form_1.jpg") no-repeat top;
+}
+
+.search_form_2::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/search_form_2.jpg") no-repeat top;
+}
+
+.search_form_3::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/search_form_3.jpg") no-repeat top;
+}
+
+/** === Job Listing === **/
+.job_1::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/job_1.png") no-repeat top;
+}
+
+/** === Company Listing === **/
+.company_1::before {
+    background-size: cover;
+    background: url("../images/el-editor-preview/company_1.png") no-repeat top;
+}
