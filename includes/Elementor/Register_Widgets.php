@@ -52,7 +52,7 @@ class Register_Widgets
 
     public function register_editor_scripts(): void
     {
-        wp_enqueue_script('jobus-elementor-widgets', esc_url(JOBUS_JS . '/elementor-widgets.js'), ['jquery', 'elementor-frontend'], JOBUS_VERSION, true);
+        wp_enqueue_script('jobus-elementor-widgets', esc_url(JOBUS_JS . '/elementor-widgets.js'), ['jquery', 'elementor-frontend'], JOBUS_VERSION, [ 'strategy' => 'defer' ]);
     }
 
     /**
