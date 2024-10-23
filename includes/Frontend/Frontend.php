@@ -25,7 +25,6 @@ class Frontend {
 	 *
 	 * @return mixed|string
 	 * Load custom template
-	 * @since 1.0.0
 	 */
 	public function template_loader( $template ): mixed
     {

@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];
@@ -79,14 +79,9 @@ if (!empty($allSliderValues)) {
 
     $simplifiedSliderValues = [];
 
-    foreach ( $allSliderValues as $key => $values ) {
-        foreach ( $values as $innerKey => $innerValues ) {
-            // Check if the range contains 'k'
-            if (strpos($innerValues[ 0 ], 'k') !== false) {
-                // Replace 'k' with '000'
-                $innerValues[ 0 ] = str_replace('k', '000', $innerValues[ 0 ]);
-            }
-            $simplifiedSliderValues[ $key ][ $innerKey ] = $innerValues[ 0 ];
+    foreach ($simplifiedSliderValues as $key => $values) {
+        foreach ($values as $innerKey => $innerValues) {
+            $innerValues[0] = preg_replace('/[^0-9.k]/', '', sanitize_text_field($innerValues[0])); // Sanitize numeric strings
         }
     }
 
@@ -134,14 +129,14 @@ if (!empty($allSliderValues)) {
 }
 
 
-if (!empty($result_ids)) {
-    $args[ 'post__in' ] = $result_ids;
+if (isset($result_ids)) {
+    $args[ 'post__in' ] = array_map('absint', $result_ids);;
 }
 
 $search_type = !empty($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
-$company_ids = !empty($_GET[ 'company_ids' ]) ? sanitize_text_field($_GET[ 'company_ids' ]) : '';
+$company_ids = !empty($_GET['company_ids']) ? array_map('absint', explode(',', sanitize_text_field($_GET['company_ids']))) : [];
 if ( $search_type == 'company_search' && $company_ids ) {
-    $args[ 'post__in' ] = explode(',', $company_ids);
+    $args[ 'post__in' ] = $company_ids;
 }
 
 $job_post = new \WP_Query($args);

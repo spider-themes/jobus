@@ -40,12 +40,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                         }
 
                                         // Meta Name
-                                        if (isset($meta_options[$meta_key]) && !empty($meta_options[$meta_key])) {
+                                        if (isset($meta_options[$meta_key])) {
                                             echo '<span>' . esc_html($meta_name) . '</span>';
                                         }
 
                                         //Meta Options
-                                        if (!empty($meta_options[$meta_key] && is_array($meta_options[$meta_key]))) {
+                                        if ( !empty(is_array($meta_options[$meta_key])) ) {
                                             echo '<div>';
                                             foreach ($meta_options[$meta_key] as $value) {
                                                 $trim_value = str_replace('@space@', ' ', $value);
@@ -71,7 +71,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         // Get the current user ID and current job ID
                         $user_id = get_current_user_id();
                         $job_id = get_the_ID();
-                        $user =  wp_get_current_user();
+                        $user = wp_get_current_user();
 
                         // Check if the user has already applied for this job
                         $has_applied = get_posts(array(
@@ -105,7 +105,8 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal"
+                                   data-bs-target="#applyJobModal">
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php }
@@ -117,14 +118,13 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                            <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal"
+                               data-bs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         }
                     }
-
-
 
                     ?>
                 </div>

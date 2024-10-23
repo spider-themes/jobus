@@ -46,7 +46,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                             if ( $widget_layout == 'text' ) {
                                                 ?>
                                                 <div class="input-box position-relative">
-                                                    <input type="text" name="s" id="searchInput" value="<?php echo esc_attr(get_search_query()) ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobus'); ?>">
+                                                    <input type="text" name="s" id="searchInput" value="<?php echo get_search_query() ?>" placeholder="<?php esc_attr_e('Search by Keywords', 'jobus'); ?>">
                                                     <button><i class="bi bi-search"></i></button>
                                                 </div>
                                                 <?php
@@ -56,17 +56,14 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                                 ?>
                                                 <select class="nice-select" name="<?php echo esc_attr($widget_name) ?>[]">
                                                     <?php
-                                                    if (isset($job_specifications) && is_array($job_specifications)) {
+                                                    if (is_array($job_specifications)) {
                                                         foreach ( $job_specifications as $key => $value ) {
 
                                                             $meta_value = $value[ 'meta_values' ] ?? '';
-
-                                                            $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                            $modifiedVal = strtolower($modifiedSelect);
+                                                            $modifiedVal = strtolower(preg_replace('/[,\s]+/', '@space@', $meta_value));
 
                                                             $searched_val = jobus_search_terms($widget_name);
-                                                            $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
-                                                            $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
+                                                            $selected_val = in_array($modifiedVal, $searched_val) ? ' selected' : '';
                                                             ?>
                                                             <option value="<?php echo esc_attr($modifiedVal) ?>" <?php echo esc_attr($selected_val) ?>>
                                                                 <?php echo esc_html($meta_value) ?>

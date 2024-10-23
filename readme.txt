@@ -1,7 +1,7 @@
 === Jobus - Job Listing, Career Page, and Recruitment Tool ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.0.5
+Stable tag: 0.0.6
 Requires at least: 6.0
 Tested up to: 6.6.2
 Requires PHP: 7.4

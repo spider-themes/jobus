@@ -19,8 +19,8 @@ $current_candidate_loc = get_term_by('slug', get_query_var('jobus_candidate_loca
 $current_candidate_skill = get_term_by('slug', get_query_var('jobus_candidate_skill'), 'jobus_candidate_skill');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
     'post_type'      => 'jobus_candidate',
@@ -30,23 +30,25 @@ $args = array(
     'order'          => $selected_order,
 );
 
+
+// Taxonomy query
 if ($current_candidate_cat || $current_candidate_loc || $current_candidate_skill) {
     $args['tax_query'] = array(
-        'relation' => 'OR',//Must satisfy at least one taxonomy query
+        'relation' => 'OR',
         array(
             'taxonomy' => 'jobus_candidate_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_candidate_cat'),
+            'terms'    => $current_candidate_cat,
         ),
-	    array(
-		    'taxonomy' => 'jobus_candidate_location',
-		    'field'    => 'slug',
-		    'terms'    => get_query_var('jobus_candidate_location'),
-	    ),
+        array(
+            'taxonomy' => 'jobus_candidate_location',
+            'field'    => 'slug',
+            'terms'    => $current_candidate_loc,
+        ),
         array(
             'taxonomy' => 'jobus_candidate_skill',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_candidate_skill'),
+            'terms'    => $current_candidate_skill,
         ),
     );
 }
@@ -75,8 +77,8 @@ $candidate_count = $candidate_query->found_posts;
 
                         <div class="d-flex align-items-center">
                             <?php
-                            $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                            $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                            $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                            $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
                             $default = ! empty( $order_by ) ? 'selected' : '';
 
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
@@ -166,7 +168,7 @@ $candidate_count = $candidate_query->found_posts;
 
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
-                                                        <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                        <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                         <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                     </div>
                                                 </div>

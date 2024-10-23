@@ -211,8 +211,8 @@ $website_target = $website[ 'target' ] ?? '_self';
                                     </div>
                                 <?php endif; ?>
                                 <div class="job-category">
-                                    <a href="<?php echo jobus_get_first_taxonomoy_link() ?>">
-                                        <?php echo jobus_get_first_taxonomoy_name(); ?>
+                                    <a href="<?php echo jobus_get_first_taxonomy_link() ?>">
+                                        <?php echo jobus_get_first_taxonomy_name(); ?>
                                     </a>
                                 </div>
                             </div>

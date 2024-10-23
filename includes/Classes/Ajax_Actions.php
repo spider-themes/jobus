@@ -29,7 +29,7 @@ class Ajax_Actions
 	    }
 
         // Get candidate ID
-        $candidate_id = isset($_POST['candidate_id']) ? intval($_POST['candidate_id']) : 0;
+        $candidate_id = !empty($_POST['candidate_id']) ? intval($_POST['candidate_id']) : '';
 
         // Retrieve candidate email
         $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);

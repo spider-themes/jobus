@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
+$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
 if ($candidate_archive_layout) {
@@ -41,10 +41,10 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                         <div class="d-flex align-items-center">
                             <?php
-                            $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                            $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                            $default = ! empty( $order_by ) ? 'selected' : '';
+                            $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                            $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
 
+                            $default = ! empty( $order_by ) ? 'selected' : '';
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                             $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
                             $selected_title_asc = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
@@ -55,7 +55,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
                                         <option <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old)  ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
                                         <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
                                         <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
                                         <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
@@ -145,7 +145,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
-                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                             <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
@@ -264,7 +264,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     ?>
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info">
-                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                             <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>

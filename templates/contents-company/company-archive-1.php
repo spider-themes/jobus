@@ -7,7 +7,7 @@ $company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_
 
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
+$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
 if ($company_archive_layout) {
@@ -17,8 +17,8 @@ if ($company_archive_layout) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = add_query_arg('view', 'list', $archive_url);
-$grid_view_url = add_query_arg('view', 'grid', $archive_url);
+$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
+$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
 <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
@@ -174,7 +174,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <div class="d-flex align-items-center">
                                                         <div class="team-text text-capitalize">
                                                             <span class="text-md fw-500 text-dark d-block"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2') ?></span>
-                                                            <?php echo jobus_meta_company_spec_name(2) ?>
+                                                            <?php echo esc_html(jobus_meta_company_spec_name(2)) ?>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -18,7 +18,6 @@ if (!defined('ABSPATH')) {
 /**
  * Class Tabs
  * @package spider\Widgets
- * @since 1.0.0
  */
 class Categories extends Widget_Base {
 
@@ -48,7 +47,6 @@ class Categories extends Widget_Base {
 	 * Desc: Register controls for these widgets
 	 * Params: no params
 	 * Return: @void
-	 * Since: @1.0.0
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
@@ -63,7 +61,6 @@ class Categories extends Widget_Base {
 	 * Desc: Register the Content Tab output on the Elementor editor.
 	 * Params: no params
 	 * Return: @void
-	 * Since: @1.0.0
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
@@ -182,7 +179,6 @@ class Categories extends Widget_Base {
 	 * Desc: Register the Style Tab output on the Elementor editor.
 	 * Params: no params
 	 * Return: @void
-	 * Since: @1.0.0
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
@@ -402,7 +398,6 @@ class Categories extends Widget_Base {
 	 * Desc: Render the widget output on the frontend.
 	 * Params: no params
 	 * Return: @void
-	 * Since: @1.0.0
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */

@@ -19,8 +19,8 @@ $current_job_location = get_term_by('slug', get_query_var('jobus_job_location'),
 $current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
     'post_type'      => 'jobus_job',
@@ -32,21 +32,21 @@ $args = array(
 
 if ( $current_job_cat || $current_job_location || $current_job_tag ) {
     $args['tax_query'] = array(
-        'relation' => 'OR',//Must satisfy at least one taxonomy query
+        'relation' => 'OR',
         array(
             'taxonomy' => 'jobus_job_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_job_cat'),
+            'terms'    => $current_job_cat,
         ),
         array(
             'taxonomy' => 'jobus_job_location',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_job_location'),
+            'terms'    => $current_job_location,
         ),
         array(
             'taxonomy' => 'jobus_job_tag',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_job_tag'),
+            'terms'    => $current_job_tag,
         ),
     );
 }
