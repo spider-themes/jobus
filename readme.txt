@@ -1,4 +1,4 @@
-=== Jobus - Job Listing, Career Page, and Recruitment Tool ===
+=== Jobus ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
 Stable tag: 0.0.6

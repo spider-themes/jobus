@@ -495,11 +495,11 @@ function jobus_search_terms (string $terms): array|string
     $result = [];
 
     // Verify the nonce before processing the request
-    if (!empty($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_nonce']), 'jobus_search_terms')) {
+    if (!empty($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['jobus_nonce'])), 'jobus_search_terms')) {
 
         // Check if the parameter is set in the URL and sanitize the input
         if (isset($_GET[$terms])) {
-            $raw_terms = $_GET[$terms];
+            $raw_terms = wp_unslash($_GET[$terms]);
 
             // If it's an array, sanitize each element, otherwise sanitize the single value
             if (is_array($raw_terms)) {

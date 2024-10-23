@@ -37,7 +37,7 @@ class Ajax_Actions
 
         // Sanitize and get form data
         $sender_name = !empty($_POST['sender_name']) ? sanitize_text_field($_POST['sender_name']) : '';
-        $sender_email = !empty($_POST['sender_email']) ? sanitize_email($_POST['sender_email']) : '';
+        $sender_email = !empty($_POST['sender_email']) ? sanitize_email(wp_unslash($_POST['sender_email'])) : '';
         $sender_subject = !empty($_POST['sender_subject']) ? sanitize_text_field($_POST['sender_subject']) : '';
         $message = !empty($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
 
@@ -76,7 +76,7 @@ class Ajax_Actions
         // Get form data
         $candidate_fname = !empty($_POST['candidate_fname']) ? sanitize_text_field($_POST['candidate_fname']) : '';
         $candidate_lname = !empty($_POST['candidate_lname']) ? sanitize_text_field($_POST['candidate_lname']) : '';
-        $candidate_email = !empty($_POST['candidate_email']) ? sanitize_email($_POST['candidate_email']) : '';
+        $candidate_email = !empty($_POST['candidate_email']) ? sanitize_email(wp_unslash($_POST['candidate_email'])) : '';
         $candidate_phone = !empty($_POST['candidate_phone']) ? sanitize_text_field($_POST['candidate_phone']) : '';
         $candidate_message = !empty($_POST['candidate_message']) ? sanitize_textarea_field($_POST['candidate_message']) : '';
         $job_application_id = !empty($_POST['job_application_id']) ? sanitize_text_field($_POST['job_application_id']) : '';
@@ -109,13 +109,13 @@ class Ajax_Actions
 		        $file_type = wp_check_filetype($_FILES['candidate_cv']['name']);
 
 		        if (!in_array($file_type['type'], $allowed_file_types)) {
-			        wp_send_json_error(array('message' => esc_html__('Invalid file type. Only PDF and Word documents are allowed.')));
+			        wp_send_json_error(array('message' => esc_html__('Invalid file type. Only PDF and Word documents are allowed.', 'jobus')));
 			        wp_die();
 		        }
 
 		        $uploaded = media_handle_upload('candidate_cv', $application_id);
 		        if (is_wp_error($uploaded)) {
-			        wp_send_json_error(array('message' => esc_html__('CV upload failed.')));
+			        wp_send_json_error(array('message' => esc_html__('CV upload failed.', 'jobus')));
 		        } else {
 			        update_post_meta($application_id, 'candidate_cv', $uploaded);
 		        }
