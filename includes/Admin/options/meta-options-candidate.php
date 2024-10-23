@@ -264,13 +264,6 @@ if (class_exists('CSF')) {
                         'default'       => esc_html__('University of Boston', 'jobus'),
                     ),
 
-                    /*array(
-                        'id'            => 'year',
-                        'type'          => 'text',
-                        'title'         => esc_html__( 'Year', 'jobus' ),
-                        'default'       => esc_html__('2012-16', 'jobus'),
-                    ),*/
-
                     array(
                         'id'            => 'description',
                         'type'          => 'wp_editor',

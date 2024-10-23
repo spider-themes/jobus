@@ -5,9 +5,6 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-// Call the function to track views
-jobus_track_candidate_views(get_the_ID());
-
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 $experience = !empty($meta['experience']) ? $meta['experience'] : '';
 $educations = !empty($meta['education']) ? $meta['education'] : '';

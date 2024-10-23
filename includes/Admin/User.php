@@ -63,8 +63,8 @@ class User {
             'delete_published_posts'=> true,
             'manage_categories'     => true,  // Capability to manage categories
             'manage_candidate_cat'  => true,  // Capability to manage candidate categories
-            'manage_candidate_location' => true,  // Capability to manage candidate locations
-            'manage_candidate_skill' => true,  // Capability to manage candidate skills
+            'manage_candidate_location' => true,  // Ability to manage candidate locations
+            'manage_candidate_skill' => true,  // Ability to manage candidate skills
         ));
 
         add_role( 'jobus_employer', esc_html__('Employer (Jobus)', 'jobus'), array(
@@ -119,7 +119,7 @@ class User {
                     if (is_wp_error($candidate_id)) {
                         wp_die(esc_html($candidate_id->get_error_message()));
                     } else {
-                        // Assign custom role to user
+                        // Assign a custom role to user
                         $candidate = new \WP_User($candidate_id);
                         $candidate->set_role('jobus_candidate'); // Assign the custom 'jobus_candidate' role
 

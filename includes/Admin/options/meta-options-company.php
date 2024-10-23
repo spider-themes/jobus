@@ -63,7 +63,7 @@ if (class_exists('CSF')) {
                 $company_fields[] = [
                     'id' => $field['meta_key'] ?? '',
                     'type' => 'select',
-                    'title' => $field['meta_name'] ?? '',
+                    'title' => esc_html($field['meta_name']) ?? '',
                     'options' => $opt_values,
                     'multiple' => true,
                     'chosen' => true,

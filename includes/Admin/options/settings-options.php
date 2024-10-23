@@ -100,7 +100,7 @@ if( class_exists( 'CSF' ) ) {
                             array(
                                 'id'            => 'meta_values',
                                 'type'          => 'text',
-                                'title'         => null,
+                                'title'         => esc_html__('Meta Value', 'jobus'),
                             )
                         )
                     ),
@@ -244,10 +244,6 @@ if( class_exists( 'CSF' ) ) {
                 'type'              => 'repeater',
                 'title'             => esc_html__( 'Widgets', 'jobus' ),
                 'button_title'      => esc_html__( 'Add Widget', 'jobus' ),
-                'subtitle' => __( 'Choose the layout style for displaying widget options:', 'jobus' ) . '<br>' .
-                    __( '<strong>Dropdown:</strong> Display options in a dropdown menu.', 'jobus' ) . '<br>' .
-                    __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobus' ) . '<br>' .
-                    __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobus' ),
                 'fields' => array(
 
                     array(
@@ -794,10 +790,6 @@ if( class_exists( 'CSF' ) ) {
                 'id'                => 'candidate_sidebar_widgets',
                 'type'              => 'repeater',
                 'title'             => esc_html__( 'Widgets', 'jobus' ),
-                'subtitle' => __( 'Choose the layout style for displaying widget options:', 'jobus' ) . '<br>' .
-                    __( '<strong>Dropdown:</strong> Display options in a dropdown menu.', 'jobus' ) . '<br>' .
-                    __( '<strong>Checkbox:</strong> Use checkboxes for each option.', 'jobus' ) . '<br>' .
-                    __( '<strong>Range Slider:</strong> Utilize a slider for numeric values only.', 'jobus' ),
                 'button_title'      => esc_html__( 'Add Widget', 'jobus' ),
                 'fields' => array(
 
@@ -913,7 +905,7 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'type'    => 'notice',
                 'style'   => 'info',
-                'content' => __('<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.', 'jobus')
+                'content' => esc_html__('SMTP Configuration: Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.', 'jobus')
             ),
 
             array(
