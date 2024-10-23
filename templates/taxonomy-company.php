@@ -18,8 +18,8 @@ $current_company_cat = get_term_by('slug', get_query_var('jobus_company_cat'), '
 $current_company_location = get_term_by('slug', get_query_var('jobus_company_location'), 'jobus_company_location');
 
 // These parameters are used to determine the sorting order of company posts
-$selected_order_by = sanitize_text_field($_GET['orderby']) ?? 'date';
-$selected_order = sanitize_text_field($_GET['order']) ?? 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $args = array(
     'post_type'      => 'jobus_company',
@@ -29,21 +29,24 @@ $args = array(
     'order'          => $selected_order,
 );
 
-if ( $current_company_cat || $current_company_location ) {
+// Taxonomy query
+if ($current_company_cat || $current_company_location) {
     $args['tax_query'] = array(
-        'relation' => 'OR',//Must satisfy at least one taxonomy query
+        'relation' => 'OR',
         array(
             'taxonomy' => 'jobus_company_cat',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_company_cat'),
+            'terms'    => $current_company_cat,
         ),
         array(
             'taxonomy' => 'jobus_company_location',
             'field'    => 'slug',
-            'terms'    => get_query_var('jobus_company_location'),
+            'terms'    => $current_company_location,
         ),
     );
 }
+
+
 
 $company_query = new \WP_Query($args);
 
@@ -69,9 +72,9 @@ $company_count = $company_query->found_posts;
                         </div>
                         <div class="d-flex align-items-center">
                             <?php
-                            $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                            $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                            $default = !empty($_GET['orderby']) ? 'selected' : '';
+                            $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                            $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                            $default = ! empty( $order_by ) ? 'selected' : '';
 
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                             $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';

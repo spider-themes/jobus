@@ -63,7 +63,7 @@ wp_enqueue_script('lightbox');
                             ?>
                             <div class="col-xl-2 col-md-4 order-xl-1">
                                 <div class="candidate-info">
-                                    <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                    <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                     <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ wp_enqueue_script('lightbox');
                             ?>
                             <div class="col-xl-2 col-md-4 order-xl-2">
                                 <div class="candidate-info">
-                                    <span><?php echo jobus_meta_candidate_spec_name(3); ?></span>
+                                    <span><?php echo esc_html(jobus_meta_candidate_spec_name(3)); ?></span>
                                     <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
                                 </div>
                             </div>

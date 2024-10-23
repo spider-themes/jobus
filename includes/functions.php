@@ -86,8 +86,8 @@ function jobus_get_template($template_name, array $args = [] ): void
  * @get the first taxonomy
  * @return string
  */
-if (!function_exists('jobus_get_first_taxonomoy_name')) {
-    function jobus_get_first_taxonomoy_name ($term = 'jobus_job_cat'): string
+if (!function_exists('jobus_get_first_taxonomy_name')) {
+    function jobus_get_first_taxonomy_name ($term = 'jobus_job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -104,8 +104,8 @@ if (!function_exists('jobus_get_first_taxonomoy_name')) {
  * @get the first taxonomy url
  * @return string
  */
-if (!function_exists('jobus_get_first_taxonomoy_link')) {
-    function jobus_get_first_taxonomoy_link ($term = 'jobus_job_cat'): string
+if (!function_exists('jobus_get_first_taxonomy_link')) {
+    function jobus_get_first_taxonomy_link ($term = 'jobus_job_cat'): string
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
@@ -318,24 +318,6 @@ if (!function_exists('jobus_get_specs_options')) {
 }
 
 
-function jobus_get_meta_name($meta_parent_id = '', $settings_key = '')
-{
-
-    // Get the meta options for the specified meta parent ID
-    $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
-
-    // Retrieve the meta name based on the settings key
-    $meta_value = $meta_options[jobus_opt($settings_key)] ?? '';
-
-    if (is_array($meta_value)) {
-        $meta_name = reset($meta_value);
-    }
-
-    return $meta_name;
-
-}
-
-
 /**
  * Retrieve and format job attributes based on the specified meta key.
  *
@@ -366,27 +348,6 @@ if (!function_exists('jobus_get_meta_attributes')) {
 }
 
 
-
-function jobus_get_meta_attributes_el($meta_parent_id = '', $settings_key = '' )
-{
-    $meta_options = get_post_meta(get_the_ID(), $meta_parent_id, true);
-    $metaValueKey = $meta_options[ $settings_key ] ?? '';
-
-    if (is_array($metaValueKey)) {
-
-        $meta_value = $meta_options[ $settings_key ];
-        $trim_value = ! empty( $meta_value ) ? implode(', ', $meta_value ) : '';
-        $formatted_value = str_replace('@space@', ' ', $trim_value);
-
-        return esc_html($formatted_value);
-
-    }
-
-}
-
-
-
-
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage ($post_type = 'jobus_job', $meta_key = '', $meta_value = ''): int
     {
@@ -411,7 +372,6 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
 /**
  * Jobus job pagination
  */
-
 if ( ! function_exists( 'jobus_pagination' ) ) {
     function jobus_pagination($query, $class = 'jobus_pagination', $prev = '', $next = '' ): void
     {
@@ -526,27 +486,29 @@ if (!function_exists('jobus_get_selected_company_count')) {
 
 /**
  * Get the job search terms
+ *
+ * @param string $terms The name of the query parameter to retrieve.
+ * @return array|string The sanitized search terms.
  */
-function jobus_search_terms ($terms): array|string
+function jobus_search_terms (string $terms): array|string
 {
     $result = [];
 
     // Verify the nonce before processing the request
-    if (isset($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_nonce']), 'jobus_search_terms')) {
+    if (!empty($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_nonce']), 'jobus_search_terms')) {
 
-        // Check if the parameter is set in the URL
-        if (isset($_GET[ $terms ])) {
-            // Get the values of the parameter
-            $terms = sanitize_text_field( $_GET[ $terms ] );
+        // Check if the parameter is set in the URL and sanitize the input
+        if (isset($_GET[$terms])) {
+            $raw_terms = $_GET[$terms];
 
-            // If there's only one value, convert it to an array for consistency
-            if (!is_array($terms)) {
-                $terms = [ $terms ];
+            // If it's an array, sanitize each element, otherwise sanitize the single value
+            if (is_array($raw_terms)) {
+                $result = array_map('sanitize_text_field', $raw_terms);
+            } else {
+                $result = [sanitize_text_field($raw_terms)];
             }
-
-            // Return the array of terms
-            $result = $terms;
         }
+
     }
 
     return $result;
@@ -648,7 +610,7 @@ function jobus_meta_taxo_arguments ($data = '', $post_type = 'jobus_job', $taxon
 /**
  * jobus search meta & taxonomy queries merge
  */
-function jobus_merge_queries_and_get_ids (...$queries)
+function jobus_merge_queries_and_get_ids (...$queries): array
 {
     $combined_post_ids = array();
 
@@ -673,11 +635,11 @@ function jobus_merge_queries_and_get_ids (...$queries)
 }
 
 /**
- * Get the post IDs of all the range fields
+ * Get the post-IDs of all the range fields
  */
-function jobus_all_range_field_value ()
+function jobus_all_range_field_value (): array
 {
-    // All the post IDs of the 'jobus_job' post type
+    // All the post-IDs of the 'jobus_job' post-type
     $args = array(
         'post_type' => 'jobus_job',
         'posts_per_page' => -1,
@@ -699,7 +661,7 @@ function jobus_all_range_field_value ()
                 foreach ( $filter_widgets as $widget ) {
                     if ($widget[ 'widget_layout' ] == 'range') {
                         // if get value in search bar
-                        if (isset($_GET[ $widget[ 'widget_name' ] ])) {
+                        if (!empty($_GET[ $widget[ 'widget_name' ] ])) {
                             $search_widgets[] = $widget[ 'widget_name' ] ?? '';
                         }
                     }
@@ -730,7 +692,7 @@ if (!function_exists('jobus_showing_post_result_count')) {
      * @param WP_Query $query The current WP_Query object.
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobus_showing_post_result_count($query, $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20')
+    function jobus_showing_post_result_count(WP_Query $query, string $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20'): void
     {
         if (!$query->have_posts()) {
             echo '<p class="' . esc_attr($class) . '">' . esc_html__('No results found', 'jobus') . '</p>';
@@ -839,7 +801,7 @@ function jobus_posts_count($post_type): string
 {
 
     $total_posts = wp_count_posts($post_type);
-    return esc_html(number_format_i18n($total_posts->publish));
+    return number_format_i18n($total_posts->publish);
 
 }
 

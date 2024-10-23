@@ -19,13 +19,14 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     <?php
                     $website = $meta[ 'company_website' ] ?? '';
                     $website_target = $website[ 'target' ] ?? '_self';
-
                     $select_company = $meta[ 'select_company' ] ?? '';
+                    $select_company_ids = array_map('absint', (array) $select_company);
+
                     $args = [];
                     if (!empty($select_company)) {
                         $args = array(
                             'post_type' => 'jobus_company',
-                            'post__in' => array( $select_company ),
+                            'post__in' => $select_company_ids,
                         );
                     }
 
@@ -34,8 +35,8 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     while ( $company_query->have_posts() ) {
                         $company_query->the_post();
                         if (has_post_thumbnail()) {
+                            the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' ));
                             ?>
-                            <?php the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' )); ?>
                             <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
                             <?php
                         }
@@ -74,7 +75,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                         ?>
                                         <li class="col-xl-6 col-md-4 col-sm-6">
                                             <?php
-                                            if (isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ])) {
+                                            if (!empty($meta_options[ $meta_key ])) {
                                                 echo '<span>' . esc_html($meta_name) . '</span>';
                                             }
                                             if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {

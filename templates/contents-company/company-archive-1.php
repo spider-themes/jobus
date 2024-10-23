@@ -1,4 +1,5 @@
-<?php
+
+.0<?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
@@ -6,7 +7,7 @@ $company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_
 
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
+$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
 if ($company_archive_layout) {
@@ -16,8 +17,8 @@ if ($company_archive_layout) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = add_query_arg('view', 'list', $archive_url);
-$grid_view_url = add_query_arg('view', 'grid', $archive_url);
+$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
+$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
 <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
@@ -32,7 +33,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark fw-500"><?php echo jobus_posts_count('jobus_company') ?></span>
+                            <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_company')) ?></span>
                             <?php
                             /* translators: 1: company found, 2: companies found */
                             echo esc_html(sprintf(_n('company found', 'companies found', jobus_posts_count('jobus_company'), 'jobus'), jobus_posts_count('jobus_company')));
@@ -40,9 +41,9 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                         </div>
                         <div class="d-flex align-items-center">
                             <?php
-                            $order = sanitize_text_field($_GET['order']) ?? '';
-                            $order_by = sanitize_text_field($_GET['orderby']) ?? '';
-                            $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                            $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                            $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                            $default = ! empty( $order_by ) ? 'selected' : '';
 
                             $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                             $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
@@ -173,7 +174,7 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                                                     <div class="d-flex align-items-center">
                                                         <div class="team-text text-capitalize">
                                                             <span class="text-md fw-500 text-dark d-block"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2') ?></span>
-                                                            <?php echo jobus_meta_company_spec_name(2) ?>
+                                                            <?php echo esc_html(jobus_meta_company_spec_name(2)) ?>
                                                         </div>
                                                     </div>
                                                 </div>

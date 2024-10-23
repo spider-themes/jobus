@@ -2,7 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
-namespace Jobus\Elementor\widgets;
+namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -20,7 +20,6 @@ if (!defined('ABSPATH')) {
 /**
  * Class Tabs
  * @package spider\Widgets
- * @since 1.0.0
  */
 class Job_Tabs extends Widget_Base {
 
@@ -62,7 +61,6 @@ class Job_Tabs extends Widget_Base {
      * Desc: Register controls for these widgets
      * Params: no params
      * Return: @void
-     * Since: @1.0.0
      * Package: @jobus
      * Author: spider-themes
      */
@@ -78,7 +76,6 @@ class Job_Tabs extends Widget_Base {
      * Desc: Register the Content Tab output on the Elementor editor.
      * Params: no params
      * Return: @void
-     * Since: @1.0.0
      * Package: @jobus
      * Author: spider-themes
      */
@@ -87,7 +84,7 @@ class Job_Tabs extends Widget_Base {
         //============================= Filter Options ================================//
         $this->start_controls_section(
             'filter_sec', [
-                'label' => __('Filter', 'jobus'),
+                'label' => esc_html__('Filter', 'jobus'),
             ]
         );
 
@@ -181,7 +178,7 @@ class Job_Tabs extends Widget_Base {
         //============================= Job Attributes ================================//
         $this->start_controls_section(
             'job_attrs_sec', [
-                'label' => __('Job Attributes', 'jobus'),
+                'label' => esc_html__('Job Attributes', 'jobus'),
             ]
         );
 
@@ -211,7 +208,6 @@ class Job_Tabs extends Widget_Base {
      * Desc: Register the Style Tab output on the Elementor editor.
      * Params: no params
      * Return: @void
-     * Since: @1.0.0
      * Package: @jobus
      * Author: spider-themes
      */
@@ -228,7 +224,6 @@ class Job_Tabs extends Widget_Base {
      * Desc: Render the widget output on the frontend.
      * Params: no params
      * Return: @void
-     * Since: @1.0.0
      * Package: @jobus
      * Author: spider-themes
      */

@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Frontend;
+namespace jobus\includes\Frontend;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -31,39 +31,41 @@ class Assets {
         wp_enqueue_style( 'jobus-main', esc_url(JOBUS_CSS . '/main.css'), [], JOBUS_VERSION );
 
 	    if ( is_rtl() ) {
-		    wp_enqueue_style( 'jobus-rtl', esc_url(JOBUS_CSS . '/jobus-main-rtl.css'), [], JOBUS_VERSION );
+		    wp_enqueue_style( 'jobus-main-rtl', esc_url(JOBUS_CSS . '/main-rtl.css'), [], JOBUS_VERSION );
 	    }
 
 
         // Register Scripts
-        wp_register_script( 'isotope', esc_url(JOBUS_VEND . '/isotope/isotope.pkgd.min.js'), [ 'jquery' ], '3.0.6', true );
-        wp_register_script( 'lightbox', esc_url(JOBUS_VEND . '/lightbox/lightbox.min.js'), [ 'jquery' ], '2.11.4', true );
+        wp_register_script( 'isotope', esc_url(JOBUS_VEND . '/isotope/isotope.pkgd.min.js'), [ 'jquery' ], '3.0.6', [ 'strategy' => 'defer' ] );
+        wp_register_script( 'lightbox', esc_url(JOBUS_VEND . '/lightbox/lightbox.min.js'), [ 'jquery' ], '2.11.4', [ 'strategy' => 'defer' ] );
+
+        $ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 
         // Load Script and Ajax Process
-        wp_register_script( 'jobus-job-application-form', esc_url(JOBUS_JS . '/job-application-form.js'), [ 'jquery' ], JOBUS_VERSION, true );
+        wp_enqueue_script( 'jobus-job-application-form', esc_url(JOBUS_JS . '/job-application-form.js'), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
         wp_localize_script('jobus-job-application-form', 'job_application_form', array(
-            'ajaxurl' => esc_url(admin_url( 'admin-ajax.php' )),
+            'ajaxurl' => $ajax_url,
             'nonce' => wp_create_nonce('job_application_form_nonce'),
             'job_id' => get_the_ID(),
         ));
 
 
         //Load Script for ajax mail to candidate
-	    wp_enqueue_script( 'jobus-candidate-email-form', esc_url(JOBUS_JS . '/candidate-email-form.js'), [ 'jquery' ], JOBUS_VERSION, true );
+	    wp_enqueue_script( 'jobus-candidate-email-form', esc_url(JOBUS_JS . '/candidate-email-form.js'), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
         wp_localize_script('jobus-candidate-email-form', 'jobus_candidate_email_form', array(
-            'ajaxurl' => esc_url(admin_url( 'admin-ajax.php' )),
+            'ajaxurl' => $ajax_url,
             'nonce' => wp_create_nonce('jobus_candidate_contact_mail_form'),
         ));
 
 
         // Enqueue Scripts
-        wp_enqueue_script( 'nice-select', esc_url(JOBUS_VEND . '/nice-select/jquery.nice-select.min.js'), [ 'jquery' ], '1.0', true );
-        wp_enqueue_script( 'bootstrap', esc_url(JOBUS_VEND . '/bootstrap/bootstrap.min.js'), [ 'jquery' ], '5.1.3', true );
-        wp_enqueue_script( 'slick', esc_url(JOBUS_VEND . '/slick/slick.min.js'), [ 'jquery' ], '2.2.0', true );
-        wp_enqueue_script( 'jobus-public', esc_url(JOBUS_JS . '/public.js'), [ 'jquery' ], JOBUS_VERSION, true );
+        wp_enqueue_script( 'nice-select', esc_url(JOBUS_VEND . '/nice-select/jquery.nice-select.min.js'), [ 'jquery' ], '1.0', [ 'strategy' => 'defer' ] );
+        wp_enqueue_script( 'bootstrap', esc_url(JOBUS_VEND . '/bootstrap/bootstrap.min.js'), [ 'jquery' ], '5.1.3', [ 'strategy' => 'defer' ] );
+        wp_enqueue_script( 'slick', esc_url(JOBUS_VEND . '/slick/slick.min.js'), [ 'jquery' ], '2.2.0', [ 'strategy' => 'defer' ] );
+        wp_enqueue_script( 'jobus-public', esc_url(JOBUS_JS . '/public.js'), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
         wp_localize_script( 'jobus-public', 'jobus_local', array(
-			'ajaxurl' => esc_url(admin_url( 'admin-ajax.php' )),
+			'ajaxurl' => $ajax_url,
 		));
 
     }

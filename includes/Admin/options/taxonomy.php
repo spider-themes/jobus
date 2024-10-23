@@ -44,6 +44,13 @@ if ( class_exists( 'CSF' ) ) {
             ),
 
             array(
+                'id'          => 'hover_bg_color',
+                'type'        => 'color',
+                'title'       => esc_html__('Hover Background Color', 'jobus'),
+                'output_mode' => 'background-color'
+            ),
+
+            array(
                 'id'          => 'hover_border_color',
                 'type'        => 'color',
                 'title'       => esc_html__('Hover Border Color', 'jobus'),

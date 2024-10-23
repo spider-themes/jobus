@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
-
+$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
 ?>
 <div class="col-xl-3 col-lg-4">
 
@@ -44,7 +44,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         $job_specifications = jobus_get_specs_options();
                         $job_specifications = $job_specifications[$widget_name] ?? '';
 
-                        if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
+                        if ($post_type == 'jobus_job') {
                             if (!empty ($_GET[$widget_name])) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
@@ -225,12 +225,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Categories
                         if ( $key === 'is_job_widget_cat' && $value ) {
-                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
-                                if (!empty($_GET['job_cats'])) {
-                                    $is_collapsed_show = 'collapse show';
-                                    $area_expanded = 'true';
-                                    $is_collapsed = '';
-                                }
+
+                            $job_cats = !empty($_GET['job_cats']) ? array_map('sanitize_text_field', $_GET['job_cats']) : [];
+                            if ( $post_type == 'jobus_job' && $job_cats ) {
+                                $is_collapsed_show = 'collapse show';
+                                $area_expanded = 'true';
+                                $is_collapsed = '';
                             }
                             $term_cats = get_terms(array(
                                 'taxonomy' => 'jobus_job_cat',
@@ -266,12 +266,11 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Locations
                         if ( $key === 'is_job_widget_location' && $value ) {
-                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
-                                if (!empty ($_GET['job_locations'])) {
-                                    $is_collapsed_show = 'collapse show';
-                                    $area_expanded = 'true';
-                                    $is_collapsed = '';
-                                }
+                            $locations = !empty($_GET['job_locations']) ? array_map('sanitize_text_field', $_GET['job_locations']) : [];
+                            if ( $post_type == 'jobus_job' &&  $locations ) {
+                                $is_collapsed_show = 'collapse show';
+                                $area_expanded = 'true';
+                                $is_collapsed = '';
                             }
                             $term_loc = get_terms(array(
                                 'taxonomy' => 'jobus_job_location',
@@ -308,12 +307,13 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                         // Widget Tag
                         if ( $key === 'is_job_widget_tag' && $value ) {
-                            if (!empty (sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_job')) {
-                                if (!empty (sanitize_text_field($_GET['job_tags']))) {
-                                    $is_collapsed_show = 'collapse show';
-                                    $area_expanded = 'true';
-                                    $is_collapsed = '';
-                                }
+
+                            $job_tags = !empty($_GET['job_tags']) ? array_map('sanitize_text_field', $_GET['job_tags']) : [];
+
+                            if ($post_type == 'jobus_job' && $job_tags ) {
+                                $is_collapsed_show = 'collapse show';
+                                $area_expanded = 'true';
+                                $is_collapsed = '';
                             }
                             ?>
                             <div class="filter-block bottom-line pb-25">
@@ -357,4 +357,6 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
             </form>
         </div>
     </div>
+
+
 </div>

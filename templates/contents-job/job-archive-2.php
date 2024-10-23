@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';
+$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';
 
 // Get the base URL for the archive page
 if ( $job_archive_layout ) {
@@ -16,8 +16,8 @@ if ( $job_archive_layout ) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = add_query_arg('view', 'list', $archive_url);
-$grid_view_url = add_query_arg('view', 'grid', $archive_url);
+$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
+$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
 <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
@@ -31,24 +31,24 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-25 mt-70 lg-mt-40">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark"><?php echo jobus_posts_count('jobus_job') ?></span>
+                            <span class="text-dark"><?php echo esc_html(jobus_posts_count('jobus_job')) ?></span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
-                            echo esc_html(printf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job')));
+                            echo esc_html(sprintf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job')));
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <?php
-                                $order = sanitize_text_field($_GET['order']) ?? '';
-                                $order_by = sanitize_text_field($_GET['orderby']) ?? '';
+                                $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                                $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_asc = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
                                 $selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
-                                $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                                $default = ! empty( $order_by ) ? 'selected' : '';
                                 ?>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
@@ -116,8 +116,8 @@ $grid_view_url = add_query_arg('view', 'grid', $archive_url);
 	                                            }
 	                                            ?>
                                             <div class="job-category">
-                                                <a href="<?php echo jobus_get_first_taxonomoy_link() ?>">
-                                                    <?php echo jobus_get_first_taxonomoy_name(); ?>
+                                                <a href="<?php echo jobus_get_first_taxonomy_link() ?>">
+                                                    <?php echo jobus_get_first_taxonomy_name(); ?>
                                                 </a>
                                             </div>
                                         </div>

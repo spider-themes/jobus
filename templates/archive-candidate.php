@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = sanitize_text_field($_GET[ 'orderby' ]) ?? 'date';
-$selected_order = sanitize_text_field($_GET[ 'order' ]) ?? 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
@@ -66,13 +66,14 @@ foreach ( $price_ranged as $key => $values ) {
     }, $values));
 }
 
+
+
 /**
  *
  * Get all the range fields values
- * Trim all the strings, keep only the numaric values
+ * to Trim all the strings, keep only the numeric values
  *
  */
-
 $allSliderValues = jobus_all_range_field_value();
 
 if (!empty($allSliderValues)) {
@@ -81,7 +82,7 @@ if (!empty($allSliderValues)) {
     foreach ( $allSliderValues as $key => $values ) {
         foreach ( $values as $innerKey => $innerValues ) {
             // Check if the range contains 'k'
-            if (strpos($innerValues[ 0 ], 'k') !== false) {
+            if (str_contains($innerValues[0], 'k')) {
                 // Replace 'k' with '000'
                 $innerValues[ 0 ] = str_replace('k', '000', $innerValues[ 0 ]);
             }
@@ -96,12 +97,9 @@ if (!empty($allSliderValues)) {
 
 
     foreach ( $formatted_price_ranged as $key => $values ) {
-
         foreach ( $simplifiedSliderValues[ $key ] as $id => $range ) {
             // Extract min and max values from the existing range
-
             $rangeValues = explode('-', $range);
-
             list($rangeMin, $rangeMax) = $rangeValues + [ null, -1 ];
 
             foreach ( $values as $formattedRange ) {
@@ -115,7 +113,6 @@ if (!empty($allSliderValues)) {
                     $matchedIds[ $key ][] = $id;
                     break; // Break out of the loop if a match is found for the current ID
                 }
-
             }
         }
     }
@@ -127,27 +124,27 @@ if (!empty($allSliderValues)) {
     $uniqueIds = array_unique($flattenedIds);
 
     /**
-     * Merge searched ids with tax & meta queries ids
+     * Merge searched ids with tax- & meta-queries ids
      */
     $result_ids = array_unique(array_merge($result_ids, $uniqueIds));
 }
 
 
-if (!empty($result_ids)) {
-    $args[ 'post__in' ] = $result_ids;
+if (isset($result_ids)) {
+    $args[ 'post__in' ] = array_map('absint', $result_ids);
 }
 
-$search_type = sanitize_text_field($_GET[ 'search_type' ]) ?? '';
 
-$search_type = isset($_GET['search_type']) ? sanitize_text_field($_GET['search_type']) : '';
-$company_ids = isset($_GET['company_ids']) ? sanitize_text_field($_GET['company_ids']) : '';
+// Sanitize company_ids
+$search_type = !empty($_GET['search_type']) ? sanitize_text_field($_GET['search_type']) : '';
+$company_ids = !empty($_GET['company_ids']) ? array_map('absint', explode(',', sanitize_text_field($_GET['company_ids']))) : [];
 if ($search_type == 'company_search' && !empty($company_ids)) {
-    $args[ 'post__in' ] = explode(',', $company_ids);
+    $args[ 'post__in' ] = $company_ids;
 }
 
 $candidate_query = new WP_Query($args);
-
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
+
 
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-'.$candidate_archive_layout.'.php';

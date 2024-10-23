@@ -1,5 +1,5 @@
 <?php
-namespace Jobus\Admin;
+namespace jobus\includes\Admin;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -24,7 +24,7 @@ class Assets {
 
 
         // Enqueue Scripts
-        wp_enqueue_script('jobus-admin', esc_url(JOBUS_JS . '/admin.js'), ['jquery'], JOBUS_VERSION, true);
+        wp_enqueue_script('jobus-admin', esc_url(JOBUS_JS . '/admin.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
 	}
 
 }

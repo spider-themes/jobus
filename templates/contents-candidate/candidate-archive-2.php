@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
+$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
 if ($candidate_archive_layout) {
@@ -35,7 +35,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                             </button>
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo jobus_posts_count('jobus_candidate') ?></span>
+                                <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_candidate')) ?></span>
                                 <?php
                                 /* translators: 1: candidate found, 2: candidates found */
                                 echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('jobus_candidate'), 'jobus'), jobus_posts_count('jobus_candidate')));
@@ -46,9 +46,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                             <div class="short-filter d-flex align-items-center">
 
                                 <?php
-                                $order = isset($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                $order_by = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
-                                $default = !empty(sanitize_text_field($_GET['orderby'])) ? 'selected' : '';
+                                $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
+                                $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $default = ! empty( $order_by ) ? 'selected' : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
@@ -78,7 +78,6 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                         </div>
                     </div>
 
-
                     <?php
 
                     if ( $current_view == 'grid' ) {
@@ -93,8 +92,6 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                     ?>
                                     <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex">
                                         <div class="candidate-profile-card<?php echo esc_attr($is_favourite) ?> text-center grid-layout border-0 mb-25">
-
-                                            <a href="candidate-profile-v1.html" class="save-btn tran3s"><i class="bi bi-heart"></i></a>
 
                                             <div class="cadidate-avatar online position-relative d-block m-auto">
                                                 <a href="<?php the_permalink(); ?>" class="rounded-circle">
@@ -149,7 +146,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
-                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                             <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
@@ -272,7 +269,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     ?>
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info mt-10">
-                                                            <span><?php echo jobus_meta_candidate_spec_name(2); ?></span>
+                                                            <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                             <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
                                                         </div>
                                                     </div>
@@ -280,7 +277,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 }
 
                                                 $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
-                                                if (!empty($locations )) {
+                                                if ( !empty($locations) ) {
                                                     ?>
                                                     <div class="col-xl-2 col-md-4 col-sm-6">
                                                         <div class="candidate-info mt-10">
