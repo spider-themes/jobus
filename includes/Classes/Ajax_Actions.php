@@ -1,5 +1,5 @@
 <?php
-namespace jobus\includes\Classes;
+namespace Jobus\includes\Classes;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

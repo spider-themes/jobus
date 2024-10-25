@@ -15,7 +15,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
             <div class="collapse border-top" id="collapseFilterHeader">
                 <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30" role="search" method="get">
-                    <input type="hidden" name="post_type" value="job"/>
+                    <input type="hidden" name="post_type" value="jobus_job"/>
 
                     <div class="row">
                         <?php

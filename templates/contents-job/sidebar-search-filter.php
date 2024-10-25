@@ -6,8 +6,8 @@ if (!defined('ABSPATH')) {
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
 ?>
-<div class="col-xl-3 col-lg-4">
 
+<div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
@@ -20,8 +20,8 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
         <div class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></div>
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" role="search" method="get">
-                <input type="hidden" name="post_type" value="job"/>
+            <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')); ?>" role="search" method="get">
+                <input type="hidden" name="post_type" value="jobus_job"/>
 
                 <?php
                 $filter_widgets = jobus_opt('job_sidebar_widgets');
@@ -57,7 +57,6 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         }
                         ?>
                         <div class="filter-block bottom-line pb-25">
-
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
                                data-bs-toggle="collapse" href="#collapse-<?php echo esc_attr($widget_name) ?>"
                                role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
@@ -215,8 +214,8 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                 $sortables = jobus_opt('is_sortable_job_sidebar');
 
                 // Check if the sortable field value is not empty
-                if ( ! empty( $sortables ) ) {
-                    foreach ( $sortables as $key => $value ) {
+                if (!empty($sortables)) {
+                    foreach ($sortables as $key => $value) {
 
                         // Initialize variables with default values
                         $is_collapsed_show = 'collapse';
@@ -224,10 +223,10 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         $is_collapsed = ' collapsed';
 
                         // Widget Categories
-                        if ( $key === 'is_job_widget_cat' && $value ) {
+                        if ($key === 'is_job_widget_cat' && $value) {
 
                             $job_cats = !empty($_GET['job_cats']) ? array_map('sanitize_text_field', $_GET['job_cats']) : [];
-                            if ( $post_type == 'jobus_job' && $job_cats ) {
+                            if ($post_type == 'jobus_job' && $job_cats) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
                                 $is_collapsed = '';
@@ -238,21 +237,20 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                             if (!empty($term_cats)) {
                                 ?>
                                 <div class="filter-block bottom-line pb-25">
-                                    <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>"
-                                       data-bs-toggle="collapse"
-                                       href="#collapseCategory" role="button"
-                                       aria-expanded="<?php echo esc_attr($area_expanded) ?>">
-                                        <?php esc_html_e('Category', 'jobus'); ?>
+                                    <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+                                        <?php esc_html_e('Categories', 'jobus'); ?>
                                     </a>
                                     <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                         <div class="main-body">
                                             <select class="nice-select" name="job_cats[]">
                                                 <?php
                                                 $searched_opt = jobus_search_terms('job_cats');
-                                                foreach ($term_cats as $key => $term) {
+                                                foreach ($term_cats as $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
-                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($selected); ?>><?php echo esc_html($term->name) ?></option>
+                                                    <option value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($selected); ?>>
+                                                        <?php echo esc_html($term->name) ?>
+                                                    </option>
                                                     <?php
                                                 }
                                                 ?>
@@ -265,9 +263,9 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         }
 
                         // Widget Locations
-                        if ( $key === 'is_job_widget_location' && $value ) {
+                        if ($key === 'is_job_widget_location' && $value) {
                             $locations = !empty($_GET['job_locations']) ? array_map('sanitize_text_field', $_GET['job_locations']) : [];
-                            if ( $post_type == 'jobus_job' &&  $locations ) {
+                            if ($post_type == 'jobus_job' &&  $locations) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
                                 $is_collapsed = '';
@@ -290,7 +288,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                             <select class="nice-select" name="job_locations[]">
                                                 <?php
                                                 $searched_opt = jobus_search_terms('job_locations');
-                                                foreach ($term_loc as $key => $term) {
+                                                foreach ($term_loc as $term) {
                                                     $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                                     ?>
                                                     <option value="<?php echo esc_attr($term->slug) ?>" <?php echo esc_attr($selected); ?>><?php echo esc_html($term->name) ?></option>
@@ -306,11 +304,9 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         }
 
                         // Widget Tag
-                        if ( $key === 'is_job_widget_tag' && $value ) {
-
+                        if ($key === 'is_job_widget_tag' && $value) {
                             $job_tags = !empty($_GET['job_tags']) ? array_map('sanitize_text_field', $_GET['job_tags']) : [];
-
-                            if ($post_type == 'jobus_job' && $job_tags ) {
+                            if ($post_type == 'jobus_job' && $job_tags) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded = 'true';
                                 $is_collapsed = '';
@@ -357,6 +353,4 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
             </form>
         </div>
     </div>
-
-
 </div>

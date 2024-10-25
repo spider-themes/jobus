@@ -16,9 +16,9 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
-$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'candidate_tag', jobus_search_terms('candidate_tags')) ];
+$meta_args = [ 'args' => jobus_meta_taxonomy_args('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_candidate', 'candidate_tag', jobus_search_terms('candidate_tags')) ];
 
 if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
     $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);

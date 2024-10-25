@@ -5,7 +5,7 @@
  * @package jobus
  * @author spiderdevs
  */
-namespace jobus\includes\Frontend;
+namespace Jobus\includes\Frontend;
 
 use WP_User;
 

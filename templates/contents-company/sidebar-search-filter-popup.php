@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
                         <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search"
                               method="get">
-                            <input type="hidden" name="post_type" value="company"/>
+                            <input type="hidden" name="post_type" value="jobus_company"/>
 
                             <div class="row">
                                 <?php

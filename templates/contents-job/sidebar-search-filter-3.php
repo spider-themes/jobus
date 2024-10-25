@@ -15,7 +15,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
 
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30 ps-4 pe-4" role="search" method="get">
-                        <input type="hidden" name="post_type" value="job"/>
+                        <input type="hidden" name="post_type" value="jobus_job"/>
 
                         <div class="row">
                             <?php

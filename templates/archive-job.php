@@ -16,9 +16,9 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
 $selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
 
-$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms('job_tags')) ];
+$meta_args = [ 'args' => jobus_meta_taxonomy_args('meta', 'jobus_job', '', jobus_all_search_meta()) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms('job_tags')) ];
 
 if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
     $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
@@ -32,12 +32,13 @@ $args = array(
     'posts_per_page' => jobus_opt('job_posts_per_page'),
     'paged' => $paged,
     'orderby' => $selected_order_by,
-    'order' => $selected_order
+    'order' => $selected_order,
 );
 
 if (!empty(get_query_var('s'))) {
     $args[ 's' ] = get_query_var('s');
 }
+
 
 // Range fields value
 $filter_widgets = jobus_opt('job_sidebar_widgets');
@@ -133,7 +134,7 @@ if (isset($result_ids)) {
     $args[ 'post__in' ] = array_map('absint', $result_ids);;
 }
 
-$search_type = !empty($_GET[ 'search_type' ]) ? sanitize_text_field($_GET[ 'search_type' ]) : '';
+$search_type = !empty($_GET['search_type']) ? sanitize_text_field($_GET['search_type']) : '';
 $company_ids = !empty($_GET['company_ids']) ? array_map('absint', explode(',', sanitize_text_field($_GET['company_ids']))) : [];
 if ( $search_type == 'company_search' && $company_ids ) {
     $args[ 'post__in' ] = $company_ids;

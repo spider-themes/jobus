@@ -1,5 +1,5 @@
 <?php
-namespace jobus\includes\Admin;
+namespace Jobus\includes\Admin;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
