@@ -12,23 +12,27 @@ if (!defined('ABSPATH')) {
         <div class="row align-items-center jobus_srch_bor">
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
+
+                $is_job_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
+
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
 
                     $border_left = $index > 0 ? ' border-left' : '';
                     $select_job_attr = $item[ 'select_job_attr' ] ?? '';
+                    $job_attributes = $select_job_attr ==
+
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="  col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
-
-                            if (!empty($item[ 'attr_title' ])) { ?>
+                            if ( !empty($item[ 'attr_title' ] ) ) { ?>
                                 <div class="label"><?php echo esc_html($item[ 'attr_title' ]) ?></div>
                                 <?php
                             }
 
-                            if ($select_job_attr == 'jobus_job_cat' || $select_job_attr == 'jobus_job_location' || $select_job_attr == 'jobus_job_tag') {
+                            if ( in_array( $select_job_attr, $is_job_taxonomy, true )) {
                                 ?>
                                 <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                     <?php
@@ -44,7 +48,6 @@ if (!defined('ABSPATH')) {
                             }
 
                             elseif ($job_specifications) {
-
                                 if ( $item['layout_type'] == 'dropdown' ) {
                                     ?>
                                     <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">

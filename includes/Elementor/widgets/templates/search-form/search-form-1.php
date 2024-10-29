@@ -11,6 +11,9 @@ if (!defined('ABSPATH')) {
         <div class="row">
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
+
+                $is_job_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
+
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
 
                     $border_left = $index > 0 ? ' border-left' : '';
@@ -27,7 +30,7 @@ if (!defined('ABSPATH')) {
                             }
 
                             // Select job category or job tag
-                            if ($select_job_attr == 'jobus_job_cat' || $select_job_attr == 'jobus_job_location' || $select_job_attr == 'jobus_job_tag') {
+                            if ( in_array( $select_job_attr, $is_job_taxonomy, true )) {
                                 ?>
                                 <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
                                         id="<?php echo esc_attr($select_job_attr) ?>">

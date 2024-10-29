@@ -278,7 +278,7 @@ function jobus_get_specs ($settings_id = 'job_specifications'): array
         }
     }
 
-    // Get taxonomies for 'jobus_job' post type
+    // Get taxonomies for 'jobus_job' post-type
     $job_taxonomies = get_object_taxonomies('jobus_job');
     foreach ($job_taxonomies as $taxonomy) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
@@ -286,7 +286,7 @@ function jobus_get_specs ($settings_id = 'job_specifications'): array
         $specs[$taxonomy_slug] = ucwords($taxonomy_name);
     }
 
-    // Get taxonomies for 'jobus_company' post type
+    // Get taxonomies for 'jobus_company' post-type
     $company_taxonomies = get_object_taxonomies('jobus_company');
     foreach ($company_taxonomies as $taxonomy) {
         $taxonomy_slug = str_replace('-', '_', $taxonomy); // Convert hyphens to underscore
