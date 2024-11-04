@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
-                <input type="hidden" name="post_type" value="company"/>
+                <input type="hidden" name="post_type" value="jobus_company"/>
 
 				<?php
 

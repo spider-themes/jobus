@@ -21,7 +21,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" role="search" method="get">
-                <input type="hidden" name="post_type" value="job"/>
+                <input type="hidden" name="post_type" value="jobus_job"/>
 
                 <?php
                 $filter_widgets = jobus_opt('job_sidebar_widgets');

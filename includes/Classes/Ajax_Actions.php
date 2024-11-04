@@ -106,7 +106,8 @@ class Ajax_Actions
 
 	        if (!empty($_FILES['candidate_cv']['name'])) {
 		        $allowed_file_types = array('application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-		        $file_type = wp_check_filetype($_FILES['candidate_cv']['name']);
+                $file_name = sanitize_file_name($_FILES['candidate_cv']['name']);
+                $file_type = wp_check_filetype($file_name);
 
 		        if (!in_array($file_type['type'], $allowed_file_types)) {
 			        wp_send_json_error(array('message' => esc_html__('Invalid file type. Only PDF and Word documents are allowed.', 'jobus')));
