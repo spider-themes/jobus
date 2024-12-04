@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'admin_notices', function () {
 
     // Check if the Jobly plugin is active and migration is not done
-    if ( is_plugin_active( 'jobly/jobly.php' ) && !get_option( 'jobus_data_migrated' ) ) {
+    if (is_plugin_active('jobly/jobly.php') && !get_option('jobus_data_migrated')) {
         ?>
         <div class="notice notice-warning eaz-notice">
             <p>
@@ -33,7 +33,7 @@ add_action( 'admin_notices', function () {
  * Show a success message after migration
  */
 add_action('admin_notices', function() {
-    if ( isset( $_GET['migrated'] ) && $_GET['migrated'] === '1' ) {
+    if (isset($_GET['migrated']) && $_GET['migrated'] === '1') {
         ?>
         <div class="notice notice-success">
             <p><?php _e('The Jobly plugin has been successfully deactivated, and your data has been migrated to the new Jobus plugin structure.', 'jobus'); ?></p>
@@ -49,45 +49,31 @@ add_action('admin_notices', function() {
  */
 add_action( 'admin_init', function() {
 
-    // Check if the deactivation of Jobly is triggered
-    if ( isset( $_GET['jobus-deactivate-plugin'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'jobus_deactivate_plugin_nonce' ) ) {
-
-        // Check if the current user can activate/deactivate plugins
-        if ( current_user_can( 'activate_plugins' ) ) {
-            // Deactivate the Jobly plugin
-            $plugin = sanitize_text_field( $_GET['jobus-deactivate-plugin'] );
-            if ( $plugin === 'jobly' ) {
-                deactivate_plugins( 'jobly/jobly.php' );
-                wp_safe_redirect( admin_url( 'plugins.php?deactivated=1' ) );
+    // Deactivation trigger for Jobly
+    if (isset($_GET['jobus-deactivate-plugin']) && wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_plugin_nonce')) {
+        if (current_user_can('activate_plugins')) {
+            $plugin = sanitize_text_field($_GET['jobus-deactivate-plugin']);
+            if ($plugin === 'jobly') {
+                deactivate_plugins('jobly/jobly.php');
+                wp_safe_redirect(admin_url('plugins.php?deactivated=1'));
                 exit;
             }
         }
     }
 
 
-    // Check if the deactivation and migration is triggered
-    if ( isset( $_GET['jobus-deactivate-migrate'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'jobus_deactivate_migrate_nonce' ) ) {
-
-        // Check if the current user can activate/deactivate plugins
-        if ( current_user_can( 'activate_plugins' ) ) {
-            // Deactivate the Jobly plugin if still active
-            if ( is_plugin_active( 'jobly/jobly.php' ) ) {
-                deactivate_plugins( 'jobly/jobly.php' );
+    // Deactivation and migration trigger
+    if (isset($_GET['jobus-deactivate-migrate']) && wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_migrate_nonce')) {
+        if (current_user_can('activate_plugins')) {
+            if (is_plugin_active('jobly/jobly.php')) {
+                deactivate_plugins('jobly/jobly.php');
             }
-
-            // Run the data migration logic
             jobus_migrate_cpt_and_tax_and_metadata();
-
-            // Mark the migration as complete to prevent this notice from showing again
-            update_option( 'jobus_data_migrated', true );
-
-            // Redirect with a success message
-            wp_safe_redirect( admin_url( 'plugins.php?migrated=1' ) );
+            update_option('jobus_data_migrated', true);
+            wp_safe_redirect(admin_url('plugins.php?migrated=1'));
             exit;
         }
     }
-
-
 
 });
 
@@ -95,7 +81,7 @@ add_action( 'admin_init', function() {
 
 /**
  * Migrate
- * Custom Post Types,
+ * Custom Post-Types,
  * Taxonomies,
  * Page Meta Keys,
  * Settings
@@ -104,20 +90,20 @@ function jobus_migrate_cpt_and_tax_and_metadata(): void {
     global $wpdb;
 
     // Step 1: Migrate Post-Types
-    $post_type_mappings = array(
-        'candidate'         => 'jobus_candidate',
-        'job'               => 'jobus_job',
-        'company'           => 'jobus_company',
-    );
+    $post_type_mappings = [
+        'candidate' => 'jobus_candidate',
+        'job'       => 'jobus_job',
+        'company'   => 'jobus_company',
+    ];
 
-    foreach ( $post_type_mappings as $old_post_type => $new_post_type ) {
-        $wpdb->query( $wpdb->prepare("
-            UPDATE $wpdb->posts SET post_type = %s WHERE post_type = %s", $new_post_type, $old_post_type
-        ));
+    foreach ($post_type_mappings as $old_post_type => $new_post_type) {
+        $wpdb->query(
+            $wpdb->prepare("UPDATE $wpdb->posts SET post_type = %s WHERE post_type = %s", $new_post_type, $old_post_type)
+        );
     }
 
     // Step 2: Migrate Taxonomies
-    $taxonomy_mappings = array(
+    $taxonomy_mapping = array(
         'job_cat'               => 'jobus_job_cat',
         'job_location'          => 'jobus_job_location',
         'job_tag'               => 'jobus_job_tag',
@@ -129,11 +115,14 @@ function jobus_migrate_cpt_and_tax_and_metadata(): void {
         'job_application'       => 'jobus_applicant',
     );
 
-    foreach ( $taxonomy_mappings as $old_taxonomy => $new_taxonomy ) {
-        $wpdb->query( $wpdb->prepare("
-            UPDATE $wpdb->term_taxonomy SET taxonomy = %s WHERE taxonomy = %s", $new_taxonomy, $old_taxonomy
+    foreach ($taxonomy_mapping as $old_taxonomy => $new_taxonomy) {
+        $wpdb->query($wpdb->prepare(
+            "UPDATE {$wpdb->term_taxonomy} SET taxonomy = %s WHERE taxonomy = %s",
+            $new_taxonomy,
+            $old_taxonomy
         ));
     }
+
 
     // Step 3: Migrate Taxonomy Meta Keys (jobly_taxonomy_cat to jobus_taxonomy_cat)
     $meta_tax_mappings = array(
@@ -154,11 +143,10 @@ function jobus_migrate_cpt_and_tax_and_metadata(): void {
         'jobly_meta_options'           => 'jobus_meta_options',
     );
 
-    foreach ( $meta_key_mappings as $old_meta_key => $new_meta_key ) {
-        // Update post meta keys from old to new
-        $wpdb->query( $wpdb->prepare("
-            UPDATE $wpdb->postmeta SET meta_key = %s WHERE meta_key = %s", $new_meta_key, $old_meta_key
-        ));
+    foreach ($meta_key_mappings as $old_meta_key => $new_meta_key) {
+        $wpdb->query(
+            $wpdb->prepare("UPDATE $wpdb->postmeta SET meta_key = %s WHERE meta_key = %s", $new_meta_key, $old_meta_key)
+        );
     }
 
     // Step 5: Migrate Plugin Options
@@ -176,4 +164,30 @@ function jobus_migrate_cpt_and_tax_and_metadata(): void {
             delete_option( $old_option );
         }
     }
+
+    // Step 6: Migrate Elementor Widget Names
+    $widget_name_mappings = array(
+        'jobly_job_categories' => 'jobus_job_categories',
+        'jobly_companies' => 'jobus_companies',
+        'jobly_job_tabs' => 'jobus_job_tabs',
+        'jobly_job_listing' => 'jobus_job_listing',
+        'jobly_search_Form' => 'jobus_search_Form',
+
+    );
+
+    $elementor_data = $wpdb->get_results("SELECT meta_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_elementor_data'");
+
+    foreach ($elementor_data as $data) {
+        $meta_id = $data->meta_id;
+        $meta_value = json_decode($data->meta_value, true);
+        if ($meta_value) {
+            array_walk_recursive($meta_value, function (&$value) use ($widget_name_mappings) {
+                if (isset($widget_name_mappings[$value])) {
+                    $value = $widget_name_mappings[$value];
+                }
+            });
+            $wpdb->update($wpdb->postmeta, ['meta_value' => wp_json_encode($meta_value)], ['meta_id' => $meta_id]);
+        }
+    }
+
 }

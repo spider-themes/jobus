@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobus\includes\Elementor\widgets;
+namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -21,23 +21,28 @@ if (!defined('ABSPATH')) {
  */
 class Categories extends Widget_Base {
 
-	public function get_name() {
+	public function get_name(): string
+    {
 		return 'jobus_job_categories';
 	}
 
-	public function get_title() {
+	public function get_title(): string
+    {
 		return esc_html__( 'Categories (Jobus)', 'jobus' );
 	}
 
-	public function get_icon() {
+	public function get_icon(): string
+    {
 		return 'eicon-tags jobus-icon';
 	}
 
-	public function get_keywords() {
+	public function get_keywords(): array
+    {
 		return [ 'Job Category', 'Category', 'Jobus', 'Jobus Category' ];
 	}
 
-	public function get_categories() {
+	public function get_categories(): array
+    {
 		return [ 'jobus-elements' ];
 	}
 
@@ -50,9 +55,12 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function register_controls() {
+	protected function register_controls(): void
+    {
+
 		$this->elementor_content_control();
 		$this->elementor_style_control();
+
 	}
 
 
@@ -64,8 +72,8 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	public function elementor_content_control() {
-
+	public function elementor_content_control(): void
+    {
 
 		//===================== Select Preset ===========================//
 		$this->start_controls_section(
@@ -182,7 +190,8 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	public function elementor_style_control() {
+	public function elementor_style_control(): void
+    {
 
 		//============================ Category Item Style ============================//
 		$this->start_controls_section(
@@ -401,17 +410,19 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function render() {
+	protected function render(): void
+    {
+
 		$settings = $this->get_settings_for_display();
 		extract( $settings ); //extract all settings array to variables converted to name of key
 
-		// Get the post count for the 'jobus_job' post type
+		// Get the post count for the 'jobus_job' post-type
 		$post_count = wp_count_posts( 'jobus_job' );
 
 		// Get the total count
 		$total_count = $post_count->publish;
 
-		// Format the count based on post count requirements
+		// Format the count based on post-count requirements
 		if ( $total_count < 10 ) {
 			$formatted_count = $total_count;
 		} elseif ( $total_count >= 10 && $total_count <= 999 ) {
@@ -419,6 +430,7 @@ class Categories extends Widget_Base {
 		} else {
 			$formatted_count = floor( $total_count / 1000 ) . 'K+';
 		}
+
 		$cat_ids = $settings['cat'] ?? array();
 
 		$categories = get_terms( array(
@@ -426,7 +438,6 @@ class Categories extends Widget_Base {
 			'hide_empty' => true,
 			'include'    => $cat_ids,
 		) );
-
 
 		//================= Template Parts =================//
 		include "templates/categories/category-{$settings['layout']}.php";

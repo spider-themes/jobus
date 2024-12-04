@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobus\includes\Elementor;
+namespace jobus\includes\Elementor;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

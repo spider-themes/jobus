@@ -117,7 +117,6 @@ if (class_exists('CSF')) {
             $opt_values     = [];
             $opt_val        = '';
 
-
             // Determine meta options based on the value of the switcher
             $is_meta_icon = isset($field['is_meta_icon']) ? $field['is_meta_icon'] : '';
             $meta_options = '';

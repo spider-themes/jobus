@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace Jobus\includes\Elementor\widgets;
+namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 class Search_Form extends Widget_Base {
 
 	public function get_name() {
-		return 'jobly_search_Form';
+		return 'jobus_search_Form';
 	}
 
 	public function get_title() {

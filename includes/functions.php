@@ -159,11 +159,18 @@ if (!function_exists('jobus_get_categories')) {
 
         $cat_array = [];
         foreach ( $cats as $cat ) {
-            $cat_array[ $cat->term_id ] = $cat->name;
+
+            if ( !isset($cat_array[$cat->term_id]) ) {
+                $cat_array[$cat->term_id] = $cat->name;
+            } else {
+                $cat_array[$cat->slug] = $cat->name;
+            }
+
         }
 
         return $cat_array;
     }
+
 }
 
 
@@ -181,6 +188,7 @@ if (!function_exists('jobus_title_length')) {
         $title = get_the_title() ? wp_trim_words(get_the_title(), $title_length, '') : the_title();
         echo esc_html($title);
     }
+
 }
 
 

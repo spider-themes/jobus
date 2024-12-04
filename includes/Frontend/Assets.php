@@ -21,7 +21,6 @@ class Assets {
 	    // Register Style's
 	    wp_register_style('lightbox', esc_url(JOBUS_VEND . '/lightbox/lightbox.min.css'), [], JOBUS_VERSION );
 
-
         wp_enqueue_style( 'fa5', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', array(), '5.13.0', 'all' );
 
         // Enqueue Style's
@@ -51,14 +50,12 @@ class Assets {
             'job_id' => get_the_ID(),
         ));
 
-
         //Load Script for ajax mail to candidate
 	    wp_enqueue_script( 'jobus-candidate-email-form', esc_url(JOBUS_JS . '/candidate-email-form.js'), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
         wp_localize_script('jobus-candidate-email-form', 'jobus_candidate_email_form', array(
             'ajaxurl' => $ajax_url,
             'nonce' => wp_create_nonce('jobus_candidate_contact_mail_form'),
         ));
-
 
         // Enqueue Scripts
         wp_enqueue_script( 'nice-select', esc_url(JOBUS_VEND . '/nice-select/jquery.nice-select.min.js'), [ 'jquery' ], '1.0', [ 'strategy' => 'defer' ] );

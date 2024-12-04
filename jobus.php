@@ -64,9 +64,9 @@ if ( ! class_exists( 'Jobus' ) ) {
 		private function __construct() {
 
             register_activation_hook( __FILE__, [ $this, 'activate' ] );
+            register_deactivation_hook(__FILE__, [$this, 'deactivate'] );
 
 			$this->define_constants(); // Define constants.
-
 			$this->core_includes(); //Include the required files.
 
 			add_action( 'init', [ $this, 'i18n' ] );
@@ -84,6 +84,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function i18n(): void
         {
+
 			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
@@ -105,10 +106,19 @@ if ( ! class_exists( 'Jobus' ) ) {
 		public function core_includes(): void
         {
 
+            add_action('plugins_loaded', function () {
+                if (!function_exists('is_plugin_active')) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
+                if (is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/admin/notice/deactivate-plugins.php')) {
+                    require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
+                }
+            });
+
+
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
-            require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
@@ -178,7 +188,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 
             //Elementor & Blocks
             new Jobus\Gutenberg\Blocks();
-            new Jobus\includes\Elementor\Register_Widgets();
+            new jobus\includes\Elementor\Register_Widgets();
 
         }
 
@@ -203,13 +213,35 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function activate(): void
         {
-			//Insert the installation time into the database
-			$installed = get_option( 'jobus_installed' );
-			if ( ! $installed ) {
-				update_option( 'jobus_installed', time() );
-			}
-			update_option( 'jobus_version', JOBUS_VERSION );
+
+            global $wp_version;
+
+            if (version_compare(PHP_VERSION, '7.4', '<') || version_compare($wp_version, '6.0', '<')) {
+                deactivate_plugins(plugin_basename(__FILE__));
+                wp_die(
+                    sprintf(
+                        __('Jobus requires at least PHP 7.4 and WordPress 6.0 to run. You are running PHP %s and WordPress %s.', 'jobus'),
+                        PHP_VERSION,
+                        $wp_version
+                    ),
+                    __('Plugin Activation Error', 'jobus'),
+                    ['back_link' => true]
+                );
+            }
+
+            if (!get_option('jobus_installed')) {
+                update_option('jobus_installed', time());
+            }
+
+            update_option('jobus_version', JOBUS_VERSION);
+
+
 		}
+
+        public function deactivate(): void {
+            delete_option('jobus_version');
+        }
+
 
 		/**
 		 * Get the plugin path.

@@ -2,7 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
-namespace Jobus\includes\Elementor\widgets;
+namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
@@ -25,7 +25,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_name ()
     {
-        return 'jobly_job_tabs';
+        return 'jobus_job_tabs';
     }
 
     public function get_title ()
