@@ -23,32 +23,29 @@ if (!defined('ABSPATH')) {
  */
 class Job_Tabs extends Widget_Base {
 
-    public function get_name ()
+    public function get_name (): string
     {
         return 'jobus_job_tabs';
     }
 
-    public function get_title ()
+    public function get_title (): string
     {
         return esc_html__('Job Tabs (Jobus)', 'jobus');
     }
 
-    public function get_icon ()
+    public function get_icon (): string
     {
         return 'eicon-tabs jobus-icon';
     }
 
-    public function get_keywords ()
+    public function get_keywords (): array
     {
         return [ 'Jobus', 'Jobus Listing', 'Jobs', 'Posts' ];
     }
 
-    public function get_categories () {
+    public function get_categories (): array
+    {
         return [ 'jobus-elements' ];
-    }
-
-    public function get_style_depends() {
-        return [ 'slick', 'slick-theme'];
     }
 
     public function get_script_depends () {
@@ -149,6 +146,7 @@ class Job_Tabs extends Widget_Base {
             'title_length', [
                 'label' => esc_html__('Title Length', 'jobus'),
                 'type' => Controls_Manager::NUMBER,
+                'default' => 6
             ]
         );
 
@@ -157,7 +155,6 @@ class Job_Tabs extends Widget_Base {
                 'label' => esc_html__('Exclude Job', 'jobus'),
                 'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus'),
                 'type' => Controls_Manager::TEXT,
-                'label_block' => true,
             ]
         );
 

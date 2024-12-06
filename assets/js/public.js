@@ -236,7 +236,7 @@
         }
 
         candidatePortfolio()//End Candidate Portfolio Slider
-        z
+
     });
 
 })(jQuery);

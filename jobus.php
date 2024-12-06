@@ -67,7 +67,7 @@ if ( ! class_exists( 'Jobus' ) ) {
             register_deactivation_hook(__FILE__, [$this, 'deactivate'] );
 
 			$this->define_constants(); // Define constants.
-			$this->core_includes(); //Include the required files.
+			$this->load_files(); //Include the required files.
 
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
@@ -103,15 +103,15 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * Load core files required to run the plugin.
 		 */
-		public function core_includes(): void
+		public function load_files(): void
         {
 
             add_action('plugins_loaded', function () {
                 if (!function_exists('is_plugin_active')) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
-                if (is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/admin/notice/deactivate-plugins.php')) {
-                    require_once __DIR__ . '/includes/admin/notice/deactivate-plugins.php';
+                if (is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/Admin/notice/deactivate-plugins.php')) {
+                    require_once __DIR__ . '/includes/Admin/notice/deactivate-plugins.php';
                 }
             });
 
@@ -207,20 +207,18 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
 		}
 
-        
-		/**
-		 * Do stuff upon plugin activation
-		 */
-		public function activate(): void
-        {
 
+        /**
+         * Activation hook
+         */
+        public function activate(): void {
             global $wp_version;
 
             if (version_compare(PHP_VERSION, '7.4', '<') || version_compare($wp_version, '6.0', '<')) {
                 deactivate_plugins(plugin_basename(__FILE__));
                 wp_die(
                     sprintf(
-                        __('Jobus requires at least PHP 7.4 and WordPress 6.0 to run. You are running PHP %s and WordPress %s.', 'jobus'),
+                        __('Jobus requires PHP 7.4 and WordPress 6.0 or higher. You are running PHP %s and WordPress %s.', 'jobus'),
                         PHP_VERSION,
                         $wp_version
                     ),
@@ -234,10 +232,11 @@ if ( ! class_exists( 'Jobus' ) ) {
             }
 
             update_option('jobus_version', JOBUS_VERSION);
+        }
 
-
-		}
-
+        /**
+         * Deactivation hook
+         */
         public function deactivate(): void {
             delete_option('jobus_version');
         }

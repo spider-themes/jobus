@@ -1,79 +1,82 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit(); // Exit if accessed directly.
+}
 /**
- * Notice
- * Deactivate the JOBLY plugin
+ * Notice to deactivate the Jobly Plugin
  *
  * @return void
  */
 add_action( 'admin_notices', function () {
-    if ( is_plugin_active( 'jobly/jobly.php' ) ) :
+
+    // Check if the Jobly plugin is active and migration is not done
+    if (is_plugin_active('jobly/jobly.php') && !get_option('jobus_data_migrated')) {
         ?>
         <div class="notice notice-warning eaz-notice">
             <p>
                 <?php esc_html_e( 'We have renamed the Jobly plugin to Jobus according to WordPress.org guidelines.', 'jobus' ); ?> <br>
                 <?php esc_html_e( 'Please deactivate the Jobly plugin and migrate your data to avoid conflicts with the new Jobus plugin.', 'jobus' ); ?>
             </p>
-
-            <a href="<?php echo esc_url(wp_nonce_url(admin_url('?jobus-deactivate-plugin=jobly'), 'jobus_deactivate_plugin_nonce')); ?>" class="button-primary">
-                <?php esc_html_e('Deactivate Jobly and Migrate Data', 'jobus'); ?>
-            </a>
-
+            <p>
+                <a href="<?php echo esc_url( wp_nonce_url( admin_url( '?jobus-deactivate-migrate=true' ), 'jobus_deactivate_migrate_nonce' ) ); ?>" class="button-primary button-large">
+                    <?php esc_html_e( 'Deactivate Jobly and Migrate Data', 'jobus' ); ?>
+                </a>
+            </p>
         </div>
-    <?php
-    endif;
-} );
+        <?php
+    }
 
-/**
- * Deactivate the Jobly plugin action
- */
-if ( ! empty( $_GET['jobus-deactivate-plugin'] ) ) {
-
-
-    add_action('admin_init', function () {
-        // Ensure the user has permissions to activate/deactivate plugins
-        if (!current_user_can('activate_plugins')) {
-            return;
-        }
-
-        $plugin = sanitize_text_field($_GET['jobus-deactivate-plugin']);
-
-        // Verify nonce for security
-        if (!wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_plugin_nonce')) {
-            wp_die(__('Invalid request. Please try again.', 'jobus'));
-        }
-
-        // Deactivate the Jobly plugin if active
-        if (is_plugin_active("$plugin/jobly.php")) {
-            deactivate_plugins("$plugin/jobly.php");
-
-            // Migrate data after deactivation
-            jobus_migrate_cpt_and_tax_and_metadata();
-
-            // Redirect to the plugin page with a success message
-            wp_safe_redirect(admin_url('plugins.php?migrated=1'));
-        } else {
-            // Redirect if Jobly is not active
-            wp_safe_redirect(admin_url('plugins.php?jobly-not-active=1'));
-        }
-        exit;
-
-    });
-
-}
+});
 
 
 /**
- * Show success or error messages
+ * Show a success message after migration
  */
-add_action('admin_notices', function () {
+add_action('admin_notices', function() {
     if (isset($_GET['migrated']) && $_GET['migrated'] === '1') {
         ?>
         <div class="notice notice-success">
-            <p><?php esc_html_e('The Jobly plugin has been successfully deactivated, and your data has been migrated to the new Jobus plugin structure.', 'jobus'); ?></p>
+            <p><?php _e('The Jobly plugin has been successfully deactivated, and your data has been migrated to the new Jobus plugin structure.', 'jobus'); ?></p>
         </div>
         <?php
     }
 });
+
+
+
+/**
+ * Deactivate the Jobly plugin action
+ */
+add_action( 'admin_init', function() {
+
+    // Deactivation trigger for Jobly
+    if (isset($_GET['jobus-deactivate-plugin']) && wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_plugin_nonce')) {
+        if (current_user_can('activate_plugins')) {
+            $plugin = sanitize_text_field($_GET['jobus-deactivate-plugin']);
+            if ($plugin === 'jobly') {
+                deactivate_plugins('jobly/jobly.php');
+                wp_safe_redirect(admin_url('plugins.php?deactivated=1'));
+                exit;
+            }
+        }
+    }
+
+
+    // Deactivation and migration trigger
+    if (isset($_GET['jobus-deactivate-migrate']) && wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_migrate_nonce')) {
+        if (current_user_can('activate_plugins')) {
+            if (is_plugin_active('jobly/jobly.php')) {
+                deactivate_plugins('jobly/jobly.php');
+            }
+            jobus_migrate_cpt_and_tax_and_metadata();
+            update_option('jobus_data_migrated', true);
+            wp_safe_redirect(admin_url('plugins.php?migrated=1'));
+            exit;
+        }
+    }
+
+});
+
 
 
 /**

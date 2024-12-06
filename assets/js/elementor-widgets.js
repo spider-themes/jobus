@@ -1,13 +1,15 @@
-(function ($, elementor) {
+;(function ($, elementor) {
     "use strict";
-    var $window = $(elementor);
 
-    var jobus = {
+    const $window = $(elementor);
+
+    const jobus = {
+
         onInit: function () {
-            var E_FRONT = elementorFrontend;
-            var widgetHandlersMap = {
-                "jobly_job_tabs.default": jobus.jobTabs,
-                "jobly_job_categories.default": jobus.joblistSlider,
+            const E_FRONT = elementorFrontend;
+            const widgetHandlersMap = {
+                "jobus_job_tabs.default": jobus.jobTabs,
+                "jobus_job_categories.default": jobus.jobCategory,
             };
 
             $.each(widgetHandlersMap, function (widgetName, callback) {
@@ -18,11 +20,11 @@
             });
         },
 
-        /*======= job listing slider css ========*/
-        joblistSlider: function ($scope) {
+        /*======= Job Category ========*/
+        jobCategory: function ($scope) {
+
             let sliderWrapper = $scope.find(".category-slider-one");
-            // ------------------------ Category Slider
-            if (sliderWrapper.length) {
+            if ( sliderWrapper.length > 0 ) {
                 sliderWrapper.slick({
                     dots: false,
                     arrows: true,
@@ -58,26 +60,24 @@
             }
         },
 
-        //===================== Job Listing Tabs =====================//
+        //===================== Job Tabs =====================//
         jobTabs: function ($scope) {
 
             let isotopeWrapper = $scope.find("#isotop-gallery-wrapper");
             let isotopeMenuWrapper = $scope.find(".isotop-menu-wrapper");
 
-            if (isotopeWrapper.length > 0) {
-                var $grid = isotopeWrapper.isotope({
-                    // options
+            if ( isotopeWrapper.length > 0 ) {
+                let $grid = isotopeWrapper.isotope({
                     itemSelector: ".isotop-item",
                     percentPosition: true,
                     masonry: {
-                        // use element for option
                         columnWidth: ".grid-sizer",
                     },
                 });
 
                 // filter items on button click
                 isotopeMenuWrapper.on("click", "li", function () {
-                    var filterValue = $(this).attr("data-filter");
+                    let filterValue = $(this).attr("data-filter");
                     $grid.isotope({filter: filterValue});
                 });
 
