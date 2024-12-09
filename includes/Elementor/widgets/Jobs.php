@@ -23,31 +23,33 @@ if (!defined('ABSPATH')) {
  */
 class Jobs extends Widget_Base {
 
-	public function get_name ()
-	{
+	public function get_name (): string
+    {
 		return 'jobus_job_listing';
 	}
 
-	public function get_title ()
-	{
+	public function get_title (): string
+    {
 		return esc_html__('Job Listing (Jobus)', 'jobus');
 	}
 
-	public function get_icon ()
-	{
+	public function get_icon (): string
+    {
 		return 'eicon-post jobus-icon';
 	}
 
-	public function get_keywords ()
-	{
+	public function get_keywords (): array
+    {
 		return [ 'Jobus', 'Jobus Listing', 'Jobs', 'Posts' ];
 	}
 
-	public function get_categories () {
+	public function get_categories (): array
+    {
 		return [ 'jobus-elements' ];
 	}
 
-	public function get_script_depends () {
+	public function get_script_depends (): array
+    {
         return [ 'slick' ];
     }
 
@@ -60,8 +62,8 @@ class Jobs extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function register_controls ()
-	{
+	protected function register_controls (): void
+    {
 		$this->elementor_content_control();
 		$this->elementor_style_control();
 	}
@@ -75,7 +77,8 @@ class Jobs extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	public function elementor_content_control () {
+	public function elementor_content_control (): void
+    {
 
 
 		//===================== Select Preset ===========================//
@@ -193,7 +196,6 @@ class Jobs extends Widget_Base {
         );
 
         $this->end_controls_section(); // End Job Attributes
-
 
 	}
 

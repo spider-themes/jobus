@@ -500,18 +500,18 @@
 }
 
 .job_specifications_area {
-    .jod_list_title_area {
+    .job_list_title_area {
         flex-basis: 30%;
     }
-    .jod_list_meta_area {
+    .job_list_meta_area {
         text-align: center;
         flex-basis: 30%;
     }
-    .jod_list_cat_area {
+    .job_list_cat_area {
         text-align: center;
         flex-basis: 20%;
     }
-    .jod_list_btn_area {
+    .job_list_btn_area {
         flex-basis: 20%;
     }
 }
@@ -1230,6 +1230,18 @@
                     &:focus {
                         box-shadow: none;
                     }
+                }
+            }
+        }
+    }
+}
+
+.jobus-jobs {
+    &.job-listing-one {
+        .job-list-one {
+            .job_specifications_area {
+                .job_list_meta_area {
+
                 }
             }
         }

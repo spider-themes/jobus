@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<section class="job-listing-one">
+<section class="jobus-jobs job-listing-one">
     <div class="job-listing-wrapper border-wrapper wow fadeInUp">
         <?php
         while ($posts->have_posts()) : $posts->the_post();
@@ -20,18 +20,23 @@ if (!defined('ABSPATH')) {
             <div class="job-list-one position-relative bottom-border">
                 <div class="d-flex justify-content-between align-items-center job_specifications_area">
 
-                    <div class="jod_list_title_area">
+                    <div class="job_list_title_area">
                         <div class="job-title d-flex align-items-center">
-                            <a href="<?php the_permalink(); ?>" class="logo">
-                                <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
-                            </a>
+                            <?php
+                            if ( has_post_thumbnail() ) { ?>
+                                <a href="<?php the_permalink(); ?>" class="logo">
+                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
+                                </a>
+                                <?php
+                            }
+                            ?>
                             <a href="<?php the_permalink(); ?>">
                                 <?php the_title('<h3 class="title fw-500 tran3s">', '</h3>') ?>
                             </a>
                         </div>
                     </div>
 
-                    <div class="jod_list_meta_area">
+                    <div class="job_list_meta_area">
                         <?php
                         if ( in_array( $job_attr_meta_1, $is_taxonomy, true )) {
                             $terms = get_the_terms(get_the_ID(), $job_attr_meta_1);
@@ -58,8 +63,7 @@ if (!defined('ABSPATH')) {
                         </div>
                     </div>
 
-                    <div class="jod_list_cat_area">
-
+                    <div class="job_list_cat_area">
                         <?php
                         if ( in_array( $job_attr_meta_2, $is_taxonomy, true )) {
                             $terms = get_the_terms(get_the_ID(), $job_attr_meta_2);
@@ -87,7 +91,7 @@ if (!defined('ABSPATH')) {
                         </div>
                     </div>
 
-                    <div class="jod_list_btn_area">
+                    <div class="job_list_btn_area">
                         <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
                             <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                 <?php esc_html_e('APPLY', 'jobus'); ?>
