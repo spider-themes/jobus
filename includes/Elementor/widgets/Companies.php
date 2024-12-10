@@ -23,27 +23,28 @@ if (!defined('ABSPATH')) {
  */
 class Companies extends Widget_Base {
 
-    public function get_name ()
+    public function get_name (): string
     {
         return 'jobus_companies';
     }
 
-    public function get_title ()
+    public function get_title (): string
     {
         return esc_html__('Companies (Jobus)', 'jobus');
     }
 
-    public function get_icon ()
+    public function get_icon (): string
     {
         return 'eicon-post jobus-icon';
     }
 
-    public function get_keywords ()
+    public function get_keywords (): array
     {
         return [ 'Companies' ];
     }
 
-    public function get_categories () {
+    public function get_categories (): array
+    {
         return [ 'jobus-elements' ];
     }
 
@@ -55,7 +56,7 @@ class Companies extends Widget_Base {
      * Package: @jobus
      * Author: spider-themes
      */
-    protected function register_controls ()
+    protected function register_controls (): void
     {
         $this->elementor_content_control();
         $this->elementor_style_control();
@@ -70,7 +71,8 @@ class Companies extends Widget_Base {
      * Package: @jobus
      * Author: spider-themes
      */
-    public function elementor_content_control () {
+    public function elementor_content_control (): void
+    {
 
 
         //===================== Select Preset ===========================//
@@ -107,9 +109,9 @@ class Companies extends Widget_Base {
         $this->add_control(
             'cats', [
                 'label' => esc_html__('Category', 'jobus'),
-                'description' => esc_html__('Display blog by categories', 'jobus'),
+                'description' => esc_html__('Display company by categories', 'jobus'),
                 'type' => Controls_Manager::SELECT2,
-                'options' => jobus_get_categories(),
+                'options' => jobus_get_categories('jobus_company_cat'),
                 'multiple' => true,
                 'label_block' => true,
             ]
@@ -167,7 +169,7 @@ class Companies extends Widget_Base {
         //============================= Company Attributes ================================//
         $this->start_controls_section(
             'company_attrs_sec', [
-                'label' => esc_html__('Company Attributes', 'jobus'),
+                'label' => esc_html__('Attributes', 'jobus'),
             ]
         );
 
@@ -180,7 +182,6 @@ class Companies extends Widget_Base {
         );
 
         $this->end_controls_section(); // End Company Attributes
-
 
     }
 
@@ -195,10 +196,11 @@ class Companies extends Widget_Base {
      */
     public function elementor_style_control ()
     {
+
         $this->start_controls_section(
             'job_general_style',
             [
-                'label' => esc_html__( 'General Style', 'jobus' ),
+                'label' => esc_html__( 'General', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -241,11 +243,10 @@ class Companies extends Widget_Base {
         $this-> end_controls_section();
 
         /*====== List Item Style ======*/
-
         $this->start_controls_section(
             'job_item_style',
             [
-                'label' => esc_html__( 'List Item Style', 'jobus' ),
+                'label' => esc_html__( 'List Item', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -293,7 +294,7 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_date_style',
             [
-                'label' => esc_html__( 'Job Meta Style', 'jobus' ),
+                'label' => esc_html__( 'Job Meta', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'layout' => ['1'],
@@ -331,7 +332,7 @@ class Companies extends Widget_Base {
         $this->start_controls_section(
             'job_button_style',
             [
-                'label' => esc_html__( 'Job Button Style', 'jobus' ),
+                'label' => esc_html__( 'Job Button', 'jobus' ),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'layout' => ['1'],
@@ -485,7 +486,7 @@ class Companies extends Widget_Base {
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'jobus_company_cat',
-                    'field' => 'slug',
+                    'field' => 'id',
                     'terms' => $cats
 
                 ]

@@ -214,3 +214,15 @@
 .company-open-position {
     background: $light-bg;
 }
+
+
+.jobus-company {
+
+    &.company-one {
+        .title {
+            color: #212529;
+            font-family: "gordita";
+            margin-bottom: 0;
+        }
+    }
+}
