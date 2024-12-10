@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
 
-                $is_job_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
+                $is_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
 
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
 
@@ -32,23 +32,9 @@ if (!defined('ABSPATH')) {
                                 <?php
                             }
 
-                            if ( in_array( $select_job_attr, $is_job_taxonomy, true )) {
-                                ?>
-                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
-                                    <?php
-                                    $taxonomy_terms = get_terms($select_job_attr);
-                                    foreach ($taxonomy_terms as $term) {
-                                        ?>
-                                        <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                                <?php
-                            }
-
-                            elseif ($job_specifications) {
-                                if ( $item['layout_type'] == 'dropdown' ) {
+                            // Select job category or job tag
+                            if ( $job_specifications ) {
+                                if ($item['layout_type'] === 'dropdown') {
                                     ?>
                                     <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                         <?php
@@ -65,10 +51,27 @@ if (!defined('ABSPATH')) {
                                         ?>
                                     </select>
                                     <?php
-                                } elseif ($item['layout_type'] == 'text' ) { ?>
+                                }  elseif ($item['layout_type'] === 'text') { ?>
                                     <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
                                     <?php
                                 }
+                            } elseif ($item['layout_type'] === 'text' ) {
+                                ?>
+                                <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                <?php
+                            } elseif (in_array($select_job_attr, $is_taxonomy, true)) {
+                                ?>
+                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                    <?php
+                                    $taxonomy_terms = get_terms($select_job_attr);
+                                    foreach ($taxonomy_terms as $term) {
+                                        ?>
+                                        <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                                <?php
                             }
                             ?>
                         </div>

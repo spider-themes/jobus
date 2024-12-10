@@ -19,15 +19,18 @@ if (!defined('ABSPATH')) {
  */
 class Search_Form extends Widget_Base {
 
-	public function get_name() {
+	public function get_name(): string
+    {
 		return 'jobus_search_Form';
 	}
 
-	public function get_title() {
+	public function get_title(): string
+    {
 		return esc_html__( 'Search Form (Jobus)', 'jobus' );
 	}
 
-	public function get_icon() {
+	public function get_icon(): string
+    {
 		return 'eicon-search jobus-icon';
 	}
 
@@ -96,7 +99,7 @@ class Search_Form extends Widget_Base {
 		$this->end_controls_section();//End Select Style
 
 
-		//===================== Filter =========================//
+		//===================== Start Search Form =========================//
 		$this->start_controls_section(
 			'sec_search_form', [
 				'label' => esc_html__( 'Search Form', 'jobus' ),
@@ -110,6 +113,7 @@ class Search_Form extends Widget_Base {
 				'label'       => esc_html__( 'Attribute Label', 'jobus' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
+                'default'     => esc_html__( 'Location', 'jobus' ),
 			]
 		);
 
@@ -221,7 +225,7 @@ class Search_Form extends Widget_Base {
 			]
 		);
 
-		$this->end_controls_section(); //End Filter
+		$this->end_controls_section(); //End Search Form
 
 
 		//===================== Search Keywords =========================//

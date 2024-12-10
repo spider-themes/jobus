@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
 
-                $is_job_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
+                $is_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
 
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
 
@@ -21,52 +21,52 @@ if (!defined('ABSPATH')) {
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="col-md-<?php echo esc_attr($item['column']) ?>">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
-                            if (!empty($item[ 'attr_title' ])) { ?>
-                                <div class="label"><?php echo esc_html($item[ 'attr_title' ]) ?></div>
+                            if (!empty($item['attr_title'])) { ?>
+                                <div class="label"><?php echo esc_html($item['attr_title']); ?></div>
                                 <?php
                             }
 
                             // Select job category or job tag
-                            if ( in_array( $select_job_attr, $is_job_taxonomy, true )) {
+                            if ( $job_specifications ) {
+                                if ($item['layout_type'] === 'dropdown') {
+                                    ?>
+                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr); ?>" id="<?php echo esc_attr($select_job_attr); ?>">
+                                        <?php
+                                        foreach ($job_specifications as $job_spec_value) {
+                                            $meta_value = $job_spec_value['meta_values'] ?? '';
+                                            $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
+                                            $modifiedVal = strtolower($modifiedSelect);
+                                            ?>
+                                            <option value="<?php echo esc_attr($modifiedVal); ?>"><?php echo esc_html($meta_value); ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php
+                                }  elseif ($item['layout_type'] === 'text') { ?>
+                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                    <?php
+                                }
+                            } elseif ($item['layout_type'] === 'text' ) {
                                 ?>
-                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
-                                        id="<?php echo esc_attr($select_job_attr) ?>">
+                                <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                <?php
+                            } elseif (in_array($select_job_attr, $is_taxonomy, true)) {
+                                ?>
+                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr); ?>" id="<?php echo esc_attr($select_job_attr); ?>">
                                     <?php
                                     $taxonomy_terms = get_terms($select_job_attr);
                                     foreach ($taxonomy_terms as $term) {
                                         ?>
-                                        <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                        <option value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>
                                         <?php
                                     }
                                     ?>
                                 </select>
                                 <?php
-                            } elseif ($job_specifications) {
-
-                                if ( $item['layout_type'] == 'dropdown' ) {
-                                    ?>
-                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
-                                        <?php
-                                        if ($job_specifications) {
-                                            foreach ( $job_specifications as $job_spec_value ) {
-                                                $meta_value = $job_spec_value[ 'meta_values' ] ?? '';
-                                                $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                $modifiedVal = strtolower($modifiedSelect);
-                                                ?>
-                                                <option value="<?php echo esc_attr($modifiedVal) ?>"><?php echo esc_html($meta_value) ?></option>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                    <?php
-                                } elseif ($item['layout_type'] == 'text' ) { ?>
-                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
-                                    <?php
-                                }
                             }
                             ?>
                         </div>
