@@ -172,7 +172,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"apiVersion":3,"name":"jobly/shortcode-candidate-archive","title":"Candidate Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Candidate Archive candidate posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"candidate_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","candidate Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-candidate-archive","title":"Candidate Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Candidate Archive candidate posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"candidate_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","candidate Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
 
 /***/ })
 

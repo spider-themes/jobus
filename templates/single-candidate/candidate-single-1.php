@@ -313,27 +313,22 @@ wp_enqueue_script( 'lightbox' );
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name" autocomplete="on"
-                                       placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
+                                <input type="text" name="sender_name" id="sender_name" autocomplete="on" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
                             <div class="d-sm-flex mb-25">
-                                <input type="email" name="sender_email" id="sender_email"
-                                       placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
+                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_subject" id="sender_subject"
-                                       placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
+                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
-                                <textarea name="message" id="message"
-                                          placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>"></textarea>
+                                <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>"></textarea>
                             </div>
 
                             <div class="d-sm-flex">
-                                <button type="submit" name="send_message" id="send_message"
-                                        class="btn-ten fw-500 text-white flex-fill text-center tran3s">
+                                <button type="submit" name="send_message" id="send_message" class="btn-ten fw-500 text-white flex-fill text-center tran3s">
 									<?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

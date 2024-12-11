@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
 ?>
 <div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
@@ -47,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$company_specifications = $company_specifications[ $widget_name ] ?? '';
 
 
-						if ( ! empty ( sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_company' ) ) {
+						if ( isset($_GET['post_type']) == 'jobus_company'  ) {
 							if ( ! empty ( $_GET[ $widget_name ] ) ) {
 								$is_collapsed_show = 'collapse show';
 								$area_expanded     = 'true';
@@ -154,18 +155,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 
 				// Widget location List
-
-
-
-
-				if ( jobus_opt( 'is_company_widget_location' ) == true ) {
+				if ( jobus_opt('is_company_widget_location') ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-					if ( ! empty ( sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_company' ) ) {
+					if ( $post_type == 'jobus_company' ) {
 						if ( ! empty ( sanitize_text_field($_GET['company_locations']) ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
@@ -225,14 +222,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 				// Widget Category List
-				if ( jobus_opt( 'is_company_widget_cat' ) == true ) {
+				if ( jobus_opt('is_company_widget_cat') ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
                     $area_expanded = 'false';
                     $is_collapsed = ' collapsed';
 
-					if ( ! empty ( sanitize_text_field($_GET['post_type']) ?? '' == 'jobus_company' ) ) {
+					if ( $post_type == 'jobus_company' ) {
 						if ( ! empty ( sanitize_text_field($_GET['company_cats']) ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';

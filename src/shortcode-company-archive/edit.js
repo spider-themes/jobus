@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import {useBlockProps, InspectorControls} from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
 import {Preview} from "../shortcode-job-archive/preview";
-
 function Edit( { attributes, setAttributes } ) {
 
     const { company_layout, preview } = attributes;
@@ -23,7 +22,7 @@ function Edit( { attributes, setAttributes } ) {
     }
 
     return (
-        <>
+        <Fragment>
             <InspectorControls>
                 <PanelBody
                     title={__('Filters', 'jobus')}
@@ -42,7 +41,7 @@ function Edit( { attributes, setAttributes } ) {
             <div { ...blockProps }>
                 [jobus_company_archive]
             </div>
-        </>
+        </Fragment>
     );
 }
 

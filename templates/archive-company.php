@@ -45,7 +45,7 @@ if ( ! empty( $result_ids ) ) {
 
 $company_query = new WP_Query($args);
 
-$company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_layout');
+$company_archive_layout = $jobus_company_archive_layout ?? jobus_opt('company_archive_layout');
 
 //============= Select Layout ==================//
 include 'contents-company/company-archive-'.$company_archive_layout.'.php';

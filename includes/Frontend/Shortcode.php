@@ -72,7 +72,7 @@ class Shortcode {
      * @param string $content Shortcode content.
      * @return string Generated HTML content.
      */
-    public function candidate_page_shortcode( $atts, $content = '' )
+    public function candidate_page_shortcode(array $atts, string $content = '' ): string
     {
         ob_start();
         self::candidate_page_layout( $atts );
@@ -125,7 +125,7 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function candidate_page_layout( $args = [] )
+    public static function candidate_page_layout(array $args = [] ): void
     {
 
         if (!is_admin()) {

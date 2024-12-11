@@ -118,7 +118,7 @@ module.exports = window["wp"]["element"];
   \*******************************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"apiVersion":3,"name":"jobly/group-testimonials","version":"1.0.0","title":"Testimonials (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"uniqueId":{"type":"string"},"testimonials":{"type":"array","default":[{"author_name":"Arif Rahman","location":"Bangladesh","review_content":"","rating":5}]}},"textdomain":"jobus","keywords":["jobus","Testimonials","Review"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = JSON.parse('{"apiVersion":3,"name":"jobly/group-testimonials","version":"1.0.0","title":"Testimonials (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"uniqueId":{"type":"string"},"testimonials":{"type":"array","default":[{"author_name":"Arif Rahman","location":"Bangladesh","review_content":"","rating":5}]}},"textdomain":"jobus","keywords":["jobus","Testimonials","Review"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
 
 /***/ })
 

@@ -9,11 +9,11 @@ function Save( props ) {
     const shortcode = `[jobus_company_archive company_layout="${company_layout}"]`;
 
     return (
-        <>
+        <Fragment>
             <div { ...blockProps }>
                 { shortcode }
             </div>
-        </>
+        </Fragment>
     );
 }
 

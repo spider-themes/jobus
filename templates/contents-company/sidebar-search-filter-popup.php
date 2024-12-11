@@ -12,8 +12,6 @@ if (!defined('ABSPATH')) {
                 <div class="position-relative">
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <div class="pt-25 pb-30 ps-4 pe-4">
-
-
                         <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search"
                               method="get">
                             <input type="hidden" name="post_type" value="jobus_company"/>
@@ -23,7 +21,6 @@ if (!defined('ABSPATH')) {
 
                                 // Widget for company meta data list
                                 $filter_widgets = jobus_opt('company_sidebar_widgets');
-
 
                                 if (is_array($filter_widgets)) {
 
@@ -120,7 +117,7 @@ if (!defined('ABSPATH')) {
                                 }
 
                                 //============= Is Categories=====================//
-                                if (jobus_opt('is_company_widget_location') == true) {
+                                if (jobus_opt('is_company_widget_location')) {
 
                                     $term_locations = get_terms(array(
                                         'taxonomy' => 'jobus_company_location',
@@ -144,9 +141,8 @@ if (!defined('ABSPATH')) {
                                     }
                                 }
 
-
                                 //============= Is Categories=============================//
-                                if (jobus_opt('is_company_widget_cat') == true) {
+                                if (jobus_opt('is_company_widget_cat')) {
 
                                     $term_cats = get_terms(array(
                                         'taxonomy' => 'jobus_company_cat',
@@ -177,10 +173,8 @@ if (!defined('ABSPATH')) {
                             </div>
                         </form>
                     </div>
-                    <!-- /.filter header -->
                 </div>
             </div>
-            <!-- /.filter-area-tab -->
         </div>
     </div>
 </div>

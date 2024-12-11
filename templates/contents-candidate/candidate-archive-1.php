@@ -128,7 +128,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                                 echo '</ul>';
                                             } else {
-                                                if ( !empty($skill) ) {
+                                                if ( !empty($skills) ) {
                                                     // Display all skills
                                                     echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
                                                     foreach ($skills as $skill) {

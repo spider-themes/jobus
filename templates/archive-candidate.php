@@ -143,7 +143,7 @@ if ($search_type == 'company_search' && !empty($company_ids)) {
 }
 
 $candidate_query = new WP_Query($args);
-$candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
+$candidate_archive_layout = $jobus_candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
 
 
 //============= Select Layout ==================//

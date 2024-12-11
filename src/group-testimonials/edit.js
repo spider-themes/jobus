@@ -1,6 +1,5 @@
 import {InnerBlocks, useBlockProps} from "@wordpress/block-editor";
 import {Fragment} from "@wordpress/element";
-
 function Edit({attributes, setAttributes}) {
 
     const blockProps = useBlockProps({className: 'company-review-slider'});
