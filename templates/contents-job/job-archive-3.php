@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-$job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
+$job_archive_layout = $jobus_job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';

@@ -2,7 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
-$job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
+
+$job_archive_layout = $jobus_job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
 $current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';
@@ -21,7 +22,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 $wrap_class = match ($job_archive_layout) {
     '1' => 'mb-20',
     '2' => 'mb-25 mt-70 lg-mt-40',
+    default => 'mb-20',
 };
+
 ?>
 <div class="upper-filter d-flex justify-content-between align-items-center <?php echo esc_attr($wrap_class) ?>">
     <div class="total-job-found">

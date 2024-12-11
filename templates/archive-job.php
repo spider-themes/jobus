@@ -70,7 +70,7 @@ foreach ( $price_ranged as $key => $values ) {
 /**
  *
  * Get all the range fields values
- * Trim all the strings, keep only the numaric values
+ * to Trim all the strings, keep only the numeric values
  *
  */
 
@@ -142,7 +142,8 @@ if ( $search_type == 'company_search' && $company_ids ) {
 
 $job_post = new \WP_Query($args);
 
-$job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
+
+$job_archive_layout = $jobus_job_archive_layout ?? jobus_opt('job_archive_layout');
 
 //========================= Select Layout ========================//
 include 'contents-job/job-archive-'.$job_archive_layout.'.php';
