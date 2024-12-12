@@ -501,18 +501,21 @@
 
 .job_specifications_area {
     .job_list_title_area {
-        flex-basis: 30%;
+        flex-basis: 25%;
     }
     .job_list_meta_area {
-        text-align: center;
-        flex-basis: 30%;
+
+        text-align: left;
+        flex-basis: 25%;
+        margin-left: auto;
     }
     .job_list_cat_area {
-        text-align: center;
-        flex-basis: 20%;
+        text-align: left;
+        flex-basis: 16.66666667%;
+        margin-left: auto;
     }
     .job_list_btn_area {
-        flex-basis: 20%;
+        flex-basis: 16.66666667%;
     }
 }
 
