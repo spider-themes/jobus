@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
                     if ( in_array( $company_attr_meta_1, $is_taxonomy, true )) {
                         $terms = get_the_terms(get_the_ID(), $company_attr_meta_1);
                         ?>
-                        <a href="<?php echo get_category_link($terms[0]->term_id) ?>" class="mb-20 text-capitalize d-block">
+                        <a href="<?php echo esc_url(get_category_link($terms[0]->term_id)) ?>" class="mb-20 text-capitalize d-block">
                             <?php echo esc_html($terms[0]->name) ?>
                         </a>
                         <?php

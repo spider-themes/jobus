@@ -41,7 +41,7 @@ if (!defined('ABSPATH')) {
                         if ( in_array( $job_attr_meta_1, $is_taxonomy, true )) {
                             $terms = get_the_terms(get_the_ID(), $job_attr_meta_1);
                             ?>
-                            <a href="<?php echo get_category_link($terms[0]->term_id) ?>" class="job-duration fw-500">
+                            <a href="<?php echo esc_url(get_category_link($terms[0]->term_id)) ?>" class="job-duration fw-500">
                                 <?php echo esc_html($terms[0]->name) ?>
                             </a>
                             <?php
@@ -68,7 +68,7 @@ if (!defined('ABSPATH')) {
                         if ( in_array( $job_attr_meta_2, $is_taxonomy, true )) {
                             $terms = get_the_terms(get_the_ID(), $job_attr_meta_2);
                             ?>
-                            <a href="<?php echo get_category_link($terms[0]->term_id) ?>" class="job-duration fw-500">
+                            <a href="<?php echo esc_url(get_category_link($terms[0]->term_id)) ?>" class="job-duration fw-500">
                                 <?php echo esc_html($terms[0]->name) ?>
                             </a>
                             <?php

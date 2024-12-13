@@ -39,7 +39,7 @@ if ( ! empty( $_GET['jobus-deactivate-plugin'] ) ) {
 
         // Verify nonce for security
         if (!wp_verify_nonce($_GET['_wpnonce'], 'jobus_deactivate_plugin_nonce')) {
-            wp_die(__('Invalid request. Please try again.', 'jobus'));
+            wp_die(esc_html__('Invalid request. Please try again.', 'jobus'));
         }
 
         // Deactivate the Jobly plugin if active

@@ -109,13 +109,13 @@ class Ajax_Actions
 		        $file_type = wp_check_filetype($_FILES['candidate_cv']['name']);
 
 		        if (!in_array($file_type['type'], $allowed_file_types)) {
-			        wp_send_json_error(array('message' => esc_html__('Invalid file type. Only PDF and Word documents are allowed.')));
+			        wp_send_json_error(array('message' => esc_html__('Invalid file type. Only PDF and Word documents are allowed.', 'jobus')));
 			        wp_die();
 		        }
 
 		        $uploaded = media_handle_upload('candidate_cv', $application_id);
 		        if (is_wp_error($uploaded)) {
-			        wp_send_json_error(array('message' => esc_html__('CV upload failed.')));
+			        wp_send_json_error(array('message' => esc_html__('CV upload failed.', 'jobus')));
 		        } else {
 			        update_post_meta($application_id, 'candidate_cv', $uploaded);
 		        }

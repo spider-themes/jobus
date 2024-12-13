@@ -96,36 +96,40 @@ class User {
 
     private function create_user($username, $password, $email, $role): \WP_Error|int
     {
-        $user_id = wp_create_user($username, $password, $email);
-        if (is_wp_error($user_id)) {
-            return $user_id;
-        }
 
-        $user = new \WP_User($user_id);
-        $user->set_role($role);
-        return $user_id;
+        $user_data = [
+            'user_login' => $username,
+            'user_pass'  => $password,
+            'user_email' => $email,
+            'role'       => $role, // Role like 'jobus_candidate' or 'jobus_employer'
+        ];
+
+        return wp_insert_user($user_data);
+
     }
 
     private function login_user($username, $password): \WP_Error|\WP_User
     {
+
         $credentials = [
-            'user_login' => $username,
+            'user_login'    => $username,
             'user_password' => $password,
-            'remember' => true
+            'remember'      => true,
         ];
 
         $user = wp_signon($credentials, false);
 
-        if (!is_wp_error($user)) {
+        if ( !is_wp_error($user) ) {
             wp_set_current_user($user->ID);
-            do_action('wp_login', $username, $user);
+            wp_set_auth_cookie($user->ID, true);
+            do_action('wp_login', $user->user_login, $user);
         }
 
         return $user;
     }
 
 
-    public function candidate_registration(): void
+    #[NoReturn] public function candidate_registration(): void
     {
 
         if (empty($_POST['register_candidate_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['register_candidate_nonce'])), 'register_candidate_action')) {
@@ -156,7 +160,7 @@ class User {
             wp_die(esc_html($candidate_signon->get_error_message()));
         }
 
-        wp_redirect(admin_url());
+        wp_safe_redirect(admin_url());
         exit;
 
     }
@@ -164,7 +168,7 @@ class User {
     /**
      * Handles employer registration and login.
      */
-    public function employer_registration(): void
+    #[NoReturn] public function employer_registration(): void
     {
 
         if (empty($_POST['register_employer_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['register_employer_nonce'])), 'register_employer_action')) {
@@ -195,7 +199,7 @@ class User {
             wp_die(esc_html($employer_signon->get_error_message()));
         }
 
-        wp_redirect(admin_url());
+        wp_safe_redirect(admin_url());
         exit;
 
     }

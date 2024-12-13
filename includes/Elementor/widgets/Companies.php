@@ -154,15 +154,6 @@ class Companies extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'exclude', [
-                'label' => esc_html__('Exclude Company', 'jobus'),
-                'description' => esc_html__('Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus'),
-                'type' => Controls_Manager::TEXT,
-                'label_block' => true,
-            ]
-        );
-
         $this->end_controls_section(); // End Filter Options
 
 
@@ -478,15 +469,11 @@ class Companies extends Widget_Base {
             $args['orderby'] = $orderby;
         }
 
-        if (is_array($exclude)) {
-            $args['post__not_in'] = $exclude;
-        }
-
         if (!empty($cats)) {
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'jobus_company_cat',
-                    'field' => 'id',
+                    'field' => 'slug',
                     'terms' => $cats
 
                 ]

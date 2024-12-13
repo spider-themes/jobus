@@ -12,7 +12,7 @@ class Blocks {
         add_action( 'init', [ $this, 'blocks_init' ] );
 
         // Register Categories
-        if ( version_compare( $GLOBALS['wp_version'], '5.7', '<' ) ) {
+        if ( version_compare( $GLOBALS['wp_version'], '6.0', '<' ) ) {
             add_filter( 'block_categories', [ $this, 'register_block_category' ], 10, 2 );
         } else {
             add_filter( 'block_categories_all', [ $this, 'register_block_category' ], 10, 2 );

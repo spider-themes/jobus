@@ -7,22 +7,26 @@ if (!defined('ABSPATH')) {
     <?php
     if (is_array($categories)) {
         $delay_time = 0.1;
-        foreach ( $categories as $index => $category ) {
-            $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
+        foreach ( $categories as $index => $cat ) {
+            $meta_tax = get_term_meta($cat->term_id, 'jobus_taxonomy_cat', true);
+            $cat_link = get_category_link($cat);
             ?>
             <div class="col-lg-<?php echo esc_attr($column); ?> col-md-4 col-sm-6 d-flex">
                 <div class="card-style-four tran3s w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr($delay_time) ?>s">
-                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="d-block">
-                        <?php if (!empty($meta[ 'cat_img' ][ 'id' ])) { ?>
+                    <a href="<?php echo esc_url($cat_link) ?>" class="d-block">
+                        <?php
+                        if (!empty($meta_tax['cat_img']['url'])) { ?>
                             <div class="icon tran3s d-flex align-items-center justify-content-center">
-                                <?php echo wp_get_attachment_image($meta[ 'cat_img' ][ 'id' ], 'full', '', [ 'class' => 'lazy-img' ]); ?>
+                                <img src="<?php echo esc_url($meta_tax['cat_img']['url']) ?>" alt="<?php echo esc_attr($meta_tax['cat_img']['alt']); ?>" class="lazy-img">
                             </div>
-                        <?php } ?>
+                            <?php
+                        }
+                        ?>
                         <div class="title tran3s fw-500 text-lg">
-                            <?php echo esc_html(($category->name)) ?>
+                            <?php echo esc_html(($cat->name)) ?>
                         </div>
                         <div class="total-job">
-                            <?php echo esc_html($category->count) . ' ' . esc_html__('vacancy', 'jobus'); ?>
+                            <?php echo esc_html($cat->count) . ' ' . esc_html__('vacancy', 'jobus'); ?>
                         </div>
                     </a>
                 </div>

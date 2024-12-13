@@ -3,9 +3,9 @@
  * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
- * Version: 0.0.6
+ * Version: 0.0.8
  * Requires at least: 6.0
- * Tested up to: 6.6.2
+ * Tested up to: 6.7.1
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.6';
+		const VERSION = '0.0.8';
 
 		/**
 		 * The plugin path
@@ -212,20 +212,6 @@ if ( ! class_exists( 'Jobus' ) ) {
          * Activation hook
          */
         public function activate(): void {
-            global $wp_version;
-
-            if (version_compare(PHP_VERSION, '7.4', '<') || version_compare($wp_version, '6.0', '<')) {
-                deactivate_plugins(plugin_basename(__FILE__));
-                wp_die(
-                    sprintf(
-                        __('Jobus requires PHP 7.4 and WordPress 6.0 or higher. You are running PHP %s and WordPress %s.', 'jobus'),
-                        PHP_VERSION,
-                        $wp_version
-                    ),
-                    __('Plugin Activation Error', 'jobus'),
-                    ['back_link' => true]
-                );
-            }
 
             if (!get_option('jobus_installed')) {
                 update_option('jobus_installed', time());
@@ -238,6 +224,7 @@ if ( ! class_exists( 'Jobus' ) ) {
          * Deactivation hook
          */
         public function deactivate(): void {
+            delete_option('jobus_installed');
             delete_option('jobus_version');
         }
 
@@ -277,4 +264,5 @@ if ( ! function_exists( 'jobus' ) ) {
 
 	// Kick of the plugin
 	jobus();
+
 }

@@ -431,12 +431,12 @@ class Categories extends Widget_Base {
 			$formatted_count = floor( $total_count / 1000 ) . 'K+';
 		}
 
-		$cat_ids = $settings['cat'] ?? array();
+		$cat_slug = $settings['cat'] ?? '';
 
 		$categories = get_terms( array(
 			'taxonomy'   => 'jobus_job_cat',
 			'hide_empty' => true,
-			'include'    => $cat_ids,
+			'include'    => $cat_slug,
 		) );
 
 		//================= Template Parts =================//

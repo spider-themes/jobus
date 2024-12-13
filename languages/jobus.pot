@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-10-14 18:04+0600\n"
+"POT-Creation-Date: 2024-12-13 17:18+0600\n"
 "PO-Revision-Date: 2022-04-05 15:26+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,19 +26,23 @@ msgstr ""
 msgid "Jobus Blocks"
 msgstr ""
 
-#: includes/Admin/User.php:48
+#: includes/Admin/User.php:50
 msgid "Candidate (Jobus)"
 msgstr ""
 
-#: includes/Admin/User.php:70
+#: includes/Admin/User.php:68
 msgid "Employer (Jobus)"
 msgstr ""
 
-#: includes/Admin/User.php:111 includes/Admin/User.php:152
+#: includes/Admin/User.php:136 includes/Admin/User.php:175
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: includes/Admin/User.php:146 includes/Admin/User.php:185
 msgid "Passwords do not match"
 msgstr ""
 
-#: includes/Admin/User.php:115 includes/Admin/User.php:156
+#: includes/Admin/User.php:150 includes/Admin/User.php:189
 msgid "Username or email already exists"
 msgstr ""
 
@@ -48,7 +52,7 @@ msgid "Candidates"
 msgstr ""
 
 #: includes/Admin/cpt/Candidate.php:37 includes/Admin/cpt/Candidate.php:52
-#: includes/Elementor/widgets/Search_Form.php:220
+#: includes/Elementor/widgets/Search_Form.php:221
 msgid "Candidate"
 msgstr ""
 
@@ -132,6 +136,7 @@ msgstr ""
 #: includes/Admin/cpt/Candidate.php:91 includes/Admin/cpt/Company.php:98
 #: includes/Admin/cpt/Company.php:130 includes/Admin/cpt/Job.php:96
 #: node_modules/@wordpress/components/build-module/query-controls/index.js:116
+#: templates/contents-job/sidebar-search-filter.php:242
 msgid "Categories"
 msgstr ""
 
@@ -141,21 +146,22 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:302
 #: includes/Admin/options/settings-options.php:584
 #: includes/Admin/options/settings-options.php:838
-#: includes/Elementor/widgets/Search_Form.php:183
+#: includes/Elementor/widgets/Search_Form.php:116
+#: includes/Elementor/widgets/Search_Form.php:184
 #: src/testimonials-item/edit.js:40
 #: templates/contents-candidate/candidate-archive-1.php:159
 #: templates/contents-candidate/candidate-archive-1.php:279
-#: templates/contents-candidate/candidate-archive-2.php:164
-#: templates/contents-candidate/candidate-archive-2.php:287
+#: templates/contents-candidate/candidate-archive-2.php:161
+#: templates/contents-candidate/candidate-archive-2.php:284
 #: templates/contents-candidate/sidebar-search-filter.php:237
-#: templates/contents-company/sidebar-search-filter-popup.php:133
-#: templates/contents-company/sidebar-search-filter.php:186
+#: templates/contents-company/sidebar-search-filter-popup.php:130
+#: templates/contents-company/sidebar-search-filter.php:183
 #: templates/contents-job/sidebar-search-filter-2.php:215
-#: templates/contents-job/sidebar-search-filter-3.php:220
-#: templates/contents-job/sidebar-search-filter.php:287
+#: templates/contents-job/sidebar-search-filter-3.php:217
+#: templates/contents-job/sidebar-search-filter.php:285
 #: templates/single-candidate/candidate-single-1.php:295
 #: templates/single-candidate/candidate-single-2.php:329
-#: templates/taxonomy-candidate.php:181 templates/taxonomy-candidate.php:199
+#: templates/taxonomy-candidate.php:183 templates/taxonomy-candidate.php:201
 msgid "Location"
 msgstr ""
 
@@ -178,7 +184,7 @@ msgid "Companies"
 msgstr ""
 
 #: includes/Admin/cpt/Company.php:41
-#: includes/Elementor/widgets/Search_Form.php:219
+#: includes/Elementor/widgets/Search_Form.php:220
 msgid "Company"
 msgstr ""
 
@@ -261,7 +267,7 @@ msgstr ""
 #: includes/Admin/options/meta-options-candidate.php:307
 #: includes/Admin/options/meta-options-candidate.php:329
 #: includes/Admin/options/meta-options-candidate.php:394
-#: includes/Elementor/widgets/Search_Form.php:294
+#: includes/Elementor/widgets/Search_Form.php:295
 msgid "Title"
 msgstr ""
 
@@ -280,7 +286,7 @@ msgid "Jobs"
 msgstr ""
 
 #: includes/Admin/cpt/Job.php:37 includes/Admin/cpt/Job_Application.php:106
-#: includes/Elementor/widgets/Search_Form.php:218
+#: includes/Elementor/widgets/Search_Form.php:219
 msgid "Job"
 msgstr ""
 
@@ -338,7 +344,7 @@ msgid "Update Job"
 msgstr ""
 
 #: includes/Admin/cpt/Job.php:52 includes/Admin/options/settings-options.php:17
-#: includes/Elementor/Register_Widgets.php:49
+#: includes/Elementor/Register_Widgets.php:46
 msgid "Jobus"
 msgstr ""
 
@@ -363,7 +369,7 @@ msgid "Job updated."
 msgstr ""
 
 #: includes/Admin/cpt/Job.php:122
-#: templates/contents-job/sidebar-search-filter.php:323
+#: templates/contents-job/sidebar-search-filter.php:320
 msgid "Tags"
 msgstr ""
 
@@ -413,19 +419,23 @@ msgstr ""
 msgid "Applied on"
 msgstr ""
 
-#: includes/Admin/notice/deactivate-plugins.php:17
+#: includes/Admin/notice/deactivate-plugins.php:13
 msgid "We have renamed the Jobly plugin to Jobus according to WordPress.org guidelines."
 msgstr ""
 
-#: includes/Admin/notice/deactivate-plugins.php:18
+#: includes/Admin/notice/deactivate-plugins.php:14
 msgid "Please deactivate the Jobly plugin and migrate your data to avoid conflicts with the new Jobus plugin."
 msgstr ""
 
-#: includes/Admin/notice/deactivate-plugins.php:22
+#: includes/Admin/notice/deactivate-plugins.php:18
 msgid "Deactivate Jobly and Migrate Data"
 msgstr ""
 
-#: includes/Admin/notice/deactivate-plugins.php:39
+#: includes/Admin/notice/deactivate-plugins.php:42
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: includes/Admin/notice/deactivate-plugins.php:72
 msgid "The Jobly plugin has been successfully deactivated, and your data has been migrated to the new Jobus plugin structure."
 msgstr ""
 
@@ -437,6 +447,7 @@ msgstr ""
 #: includes/Admin/options/meta-options-company.php:20
 #: includes/Admin/options/meta-options-job.php:21
 #: includes/Admin/options/settings-options.php:27
+#: includes/Elementor/widgets/Companies.php:194
 msgid "General"
 msgstr ""
 
@@ -451,6 +462,7 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:345
 #: includes/Admin/options/settings-options.php:482
 #: includes/Admin/options/settings-options.php:724
+#: includes/Admin/options/settings-options.php:875
 msgid "Choose Layout"
 msgstr ""
 
@@ -477,35 +489,35 @@ msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:94
 #: includes/Admin/options/meta-options-company.php:77
-#: includes/Admin/options/meta-options-job.php:152
+#: includes/Admin/options/meta-options-job.php:151
 msgid "Specifications"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:106
 #: includes/Admin/options/meta-options-candidate.php:113
-#: includes/Admin/options/settings-options.php:855
-#: includes/Admin/options/settings-options.php:862
+#: includes/Admin/options/settings-options.php:891
+#: includes/Admin/options/settings-options.php:898
 msgid "Social Icons"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:114
-#: includes/Admin/options/settings-options.php:863
+#: includes/Admin/options/settings-options.php:899
 msgid "Customize and manage your social media icons along with respective URLs"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:115
-#: includes/Admin/options/settings-options.php:864
+#: includes/Admin/options/settings-options.php:900
 msgid "Add Icon"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:121
 #: includes/Admin/options/settings-options.php:113
-#: includes/Admin/options/settings-options.php:870
+#: includes/Admin/options/settings-options.php:906
 msgid "Icon"
 msgstr ""
 
 #: includes/Admin/options/meta-options-candidate.php:128
-#: includes/Admin/options/settings-options.php:877
+#: includes/Admin/options/settings-options.php:913
 #: node_modules/@wordpress/block-editor/build-module/components/media-placeholder/index.js:41
 #: node_modules/@wordpress/block-editor/build-module/components/url-input/index.js:386
 #: node_modules/@wordpress/block-editor/src/components/media-placeholder/index.js:48
@@ -669,7 +681,7 @@ msgid "Company Website"
 msgstr ""
 
 #: includes/Admin/options/meta-options-job.php:65
-#: includes/Admin/options/meta-options-job.php:94 includes/functions.php:257
+#: includes/Admin/options/meta-options-job.php:94 includes/functions.php:265
 #: node_modules/@wordpress/block-editor/build-module/components/block-styles/index.native.js:49
 #: node_modules/@wordpress/block-editor/build-module/components/block-styles/utils.js:65
 #: node_modules/@wordpress/block-editor/build-module/components/colors-gradients/use-multiple-origin-colors-and-gradients.js:36
@@ -704,10 +716,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:62
 #: templates/contents-company/company-archive-1.php:56
 #: templates/contents-company/company-archive-2.php:65
-#: templates/contents-job/job-archive-1.php:56
+#: templates/contents-job/job-archive-1.php:57
 #: templates/contents-job/job-archive-2.php:55
 #: templates/contents-job/job-archive-3.php:63
-#: templates/taxonomy-candidate.php:91 templates/taxonomy-company.php:85
+#: templates/contents-job/sorting_filter.php:53 templates/loop/sorting.php:50
+#: templates/taxonomy-candidate.php:93 templates/taxonomy-company.php:88
 #: templates/taxonomy-job.php:90
 msgid "Default"
 msgstr ""
@@ -761,7 +774,7 @@ msgstr ""
 msgid "Apply Link"
 msgstr ""
 
-#: includes/Admin/options/meta-options-job.php:128
+#: includes/Admin/options/meta-options-job.php:127
 msgid "icon"
 msgstr ""
 
@@ -923,7 +936,7 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:187
 #: includes/Admin/options/settings-options.php:367
 #: includes/Admin/options/settings-options.php:617
-#: includes/Elementor/widgets/Job_Tabs.php:184
+#: includes/Elementor/widgets/Job_Tabs.php:178
 #: includes/Elementor/widgets/Jobs.php:178
 msgid "Job Attributes"
 msgstr ""
@@ -953,8 +966,8 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:522
 #: includes/Admin/options/settings-options.php:623
 #: includes/Admin/options/settings-options.php:763
-#: includes/Elementor/widgets/Companies.php:179
-#: includes/Elementor/widgets/Job_Tabs.php:190
+#: includes/Elementor/widgets/Companies.php:169
+#: includes/Elementor/widgets/Job_Tabs.php:184
 #: includes/Elementor/widgets/Jobs.php:184
 msgid "Attribute 01"
 msgstr ""
@@ -964,7 +977,7 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:530
 #: includes/Admin/options/settings-options.php:630
 #: includes/Admin/options/settings-options.php:771
-#: includes/Elementor/widgets/Job_Tabs.php:198
+#: includes/Elementor/widgets/Job_Tabs.php:192
 #: includes/Elementor/widgets/Jobs.php:192
 msgid "Attribute 02"
 msgstr ""
@@ -1089,19 +1102,18 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:295
 #: includes/Admin/options/settings-options.php:591
 #: includes/Admin/options/settings-options.php:845
-#: includes/Elementor/widgets/Categories.php:114
-#: includes/Elementor/widgets/Companies.php:112
-#: includes/Elementor/widgets/Job_Tabs.php:105
+#: includes/Elementor/widgets/Categories.php:119
+#: includes/Elementor/widgets/Companies.php:111
+#: includes/Elementor/widgets/Job_Tabs.php:99
 #: includes/Elementor/widgets/Jobs.php:117
 #: node_modules/@wordpress/components/build-module/query-controls/index.js:108
 #: node_modules/@wordpress/components/build-module/query-controls/index.native.js:60
 #: templates/contents-candidate/sidebar-search-filter-popup.php:245
 #: templates/contents-candidate/sidebar-search-filter.php:283
-#: templates/contents-company/sidebar-search-filter-popup.php:158
-#: templates/contents-company/sidebar-search-filter.php:253
+#: templates/contents-company/sidebar-search-filter-popup.php:154
+#: templates/contents-company/sidebar-search-filter.php:250
 #: templates/contents-job/sidebar-search-filter-2.php:190
-#: templates/contents-job/sidebar-search-filter-3.php:195
-#: templates/contents-job/sidebar-search-filter.php:245
+#: templates/contents-job/sidebar-search-filter-3.php:192
 msgid "Category"
 msgstr ""
 
@@ -1114,6 +1126,7 @@ msgid "Job Details Page"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:332
+#: includes/Admin/options/settings-options.php:862
 msgid "Layout Preset"
 msgstr ""
 
@@ -1122,6 +1135,7 @@ msgid "Job Details Layout"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:346
+#: includes/Admin/options/settings-options.php:876
 msgid "Select the preferred layout for your job details page across the entire website."
 msgstr ""
 
@@ -1155,7 +1169,6 @@ msgid "Select the preferred layout for your company page across the entire websi
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:505
-#: includes/Elementor/widgets/Companies.php:173
 msgid "Company Attributes"
 msgstr ""
 
@@ -1192,115 +1205,123 @@ msgstr ""
 msgid "Candidate Attributes"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:909
+#: includes/Admin/options/settings-options.php:854
+msgid "Candidate Details Page"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:869
+msgid "Candidate Profile Layout"
+msgstr ""
+
+#: includes/Admin/options/settings-options.php:945
 msgid "SMTP Configuration"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:916
+#: includes/Admin/options/settings-options.php:952
 msgid "<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:922
+#: includes/Admin/options/settings-options.php:958
 msgid "SMTP (On/OFF)"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:923
+#: includes/Admin/options/settings-options.php:959
 msgid "Enable or disable the SMTP server for sending emails"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:930
+#: includes/Admin/options/settings-options.php:966
 msgid "SMTP Host"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:931
+#: includes/Admin/options/settings-options.php:967
 msgid "The SMTP server which will be used to send email. For example: smtp.gmail.com"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:938
+#: includes/Admin/options/settings-options.php:974
 msgid "SMTP Authentication"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:939
+#: includes/Admin/options/settings-options.php:975
 msgid "Whether to use SMTP Authentication when sending an email (recommended: True)."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:941
+#: includes/Admin/options/settings-options.php:977
 msgid "True"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:942
+#: includes/Admin/options/settings-options.php:978
 msgid "False"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:951
+#: includes/Admin/options/settings-options.php:987
 msgid "SMTP Username"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:952
+#: includes/Admin/options/settings-options.php:988
 msgid "Your SMTP Username."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:959
+#: includes/Admin/options/settings-options.php:995
 msgid "SMTP Password"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:960
+#: includes/Admin/options/settings-options.php:996
 msgid "Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options)."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:967
+#: includes/Admin/options/settings-options.php:1003
 msgid "Type of Encryption"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:968
+#: includes/Admin/options/settings-options.php:1004
 msgid "The encryption which will be used when sending an email (recommended: TLS)."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:970
+#: includes/Admin/options/settings-options.php:1006
 msgid "TLS"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:971
+#: includes/Admin/options/settings-options.php:1007
 msgid "SSL"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:972
+#: includes/Admin/options/settings-options.php:1008
 msgid "No Encryption"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:981
+#: includes/Admin/options/settings-options.php:1017
 msgid "SMTP Port"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:982
+#: includes/Admin/options/settings-options.php:1018
 msgid "The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:989
+#: includes/Admin/options/settings-options.php:1025
 msgid "From Email Address"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:990
+#: includes/Admin/options/settings-options.php:1026
 msgid "The email address which will be used as the From Address if it is not supplied to the mail function."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:997
+#: includes/Admin/options/settings-options.php:1033
 msgid "From Name"
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:998
+#: includes/Admin/options/settings-options.php:1034
 msgid "The name which will be used as the From Name if it is not supplied to the mail function."
 msgstr ""
 
-#: includes/Admin/options/settings-options.php:1008
-#: includes/Admin/options/settings-options.php:1015
+#: includes/Admin/options/settings-options.php:1044
+#: includes/Admin/options/settings-options.php:1051
 msgid "Backup"
 msgstr ""
 
 #: includes/Admin/options/taxonomy.php:35
-#: includes/Elementor/widgets/Categories.php:279
-#: includes/Elementor/widgets/Categories.php:331
-#: includes/Elementor/widgets/Categories.php:379
+#: includes/Elementor/widgets/Categories.php:284
+#: includes/Elementor/widgets/Categories.php:336
+#: includes/Elementor/widgets/Categories.php:384
 #: includes/Elementor/widgets/Search_Form.php:529
 #: includes/Elementor/widgets/Search_Form.php:563
 msgid "Text Color"
@@ -1311,6 +1332,10 @@ msgid "Background Color"
 msgstr ""
 
 #: includes/Admin/options/taxonomy.php:49
+msgid "Hover Background Color"
+msgstr ""
+
+#: includes/Admin/options/taxonomy.php:56
 msgid "Hover Border Color"
 msgstr ""
 
@@ -1334,35 +1359,59 @@ msgstr ""
 msgid "Cover Letter"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:45
+#: includes/Classes/Ajax_Actions.php:27 includes/Classes/Ajax_Actions.php:72
+msgid "Nonce verification failed."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:46
 msgid "Please fill in all required fields."
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:50
+#: includes/Classes/Ajax_Actions.php:51
 msgid "New Message"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:58
+#: includes/Classes/Ajax_Actions.php:59
 msgid "Your message has been sent successfully!"
 msgstr ""
 
-#: includes/Classes/Ajax_Actions.php:60
+#: includes/Classes/Ajax_Actions.php:61
 msgid "There was a problem sending your message. Please try again."
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:30
+#: includes/Classes/Ajax_Actions.php:87
+msgid "Invalid email address."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:112
+msgid "Invalid file type. Only PDF and Word documents are allowed."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:118
+msgid "CV upload failed."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:124
+msgid "Application submitted successfully."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:126
+msgid "Failed to submit application."
+msgstr ""
+
+#: includes/Elementor/widgets/Categories.php:31
 msgid "Categories (Jobus)"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:76
-#: includes/Elementor/widgets/Companies.php:82
+#: includes/Elementor/widgets/Categories.php:81
+#: includes/Elementor/widgets/Companies.php:81
 #: includes/Elementor/widgets/Jobs.php:87
 #: includes/Elementor/widgets/Search_Form.php:73
 msgid "Preset Skins"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:82
-#: includes/Elementor/widgets/Companies.php:88
+#: includes/Elementor/widgets/Categories.php:87
+#: includes/Elementor/widgets/Companies.php:87
 #: includes/Elementor/widgets/Jobs.php:93
 #: includes/Elementor/widgets/Search_Form.php:79
 #: node_modules/@wordpress/block-editor/build-module/hooks/layout.js:189
@@ -1370,95 +1419,95 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:86
+#: includes/Elementor/widgets/Categories.php:91
 msgid "01: Category"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:90
+#: includes/Elementor/widgets/Categories.php:95
 msgid "02: Category"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:94
+#: includes/Elementor/widgets/Categories.php:99
 msgid "03: Category"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:108
-#: includes/Elementor/widgets/Companies.php:106
-#: includes/Elementor/widgets/Job_Tabs.php:90
+#: includes/Elementor/widgets/Categories.php:113
+#: includes/Elementor/widgets/Companies.php:105
+#: includes/Elementor/widgets/Job_Tabs.php:84
 #: includes/Elementor/widgets/Jobs.php:111
-#: templates/contents-candidate/sidebar-search-filter.php:11
+#: templates/contents-candidate/sidebar-search-filter.php:12
 #: templates/contents-company/company-archive-2.php:35
-#: templates/contents-company/sidebar-search-filter.php:11
+#: templates/contents-company/sidebar-search-filter.php:12
 #: templates/contents-job/job-archive-3.php:34
-#: templates/contents-job/sidebar-search-filter.php:14
+#: templates/contents-job/sidebar-search-filter.php:15
 msgid "Filter"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:115
+#: includes/Elementor/widgets/Categories.php:120
 msgid "Display Listing by Location"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:125
-#: includes/Elementor/widgets/Search_Form.php:161
+#: includes/Elementor/widgets/Categories.php:130
+#: includes/Elementor/widgets/Search_Form.php:162
 msgid "Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:128
+#: includes/Elementor/widgets/Categories.php:133
 msgid "Two"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:129
+#: includes/Elementor/widgets/Categories.php:134
 msgid "Three"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:130
+#: includes/Elementor/widgets/Categories.php:135
 msgid "Four"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:131
+#: includes/Elementor/widgets/Categories.php:136
 msgid "Six"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:140
-#: includes/Elementor/widgets/Search_Form.php:252
+#: includes/Elementor/widgets/Categories.php:145
+#: includes/Elementor/widgets/Search_Form.php:253
 msgid "Alignment"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:144
-#: includes/Elementor/widgets/Search_Form.php:256
+#: includes/Elementor/widgets/Categories.php:149
+#: includes/Elementor/widgets/Search_Form.php:257
 #: node_modules/@wordpress/block-editor/build-module/components/spacing-sizes-control/utils.js:27
 #: node_modules/@wordpress/block-editor/src/components/spacing-sizes-control/utils.js:39
 #: node_modules/@wordpress/components/build-module/focal-point-picker/controls.js:44
 msgid "Left"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:148
-#: includes/Elementor/widgets/Search_Form.php:260
+#: includes/Elementor/widgets/Categories.php:153
+#: includes/Elementor/widgets/Search_Form.php:261
 #: node_modules/@wordpress/components/build-module/alignment-matrix-control/utils.js:18
 #: node_modules/@wordpress/components/build-module/alignment-matrix-control/utils.js:19
 msgid "Center"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:152
-#: includes/Elementor/widgets/Search_Form.php:264
+#: includes/Elementor/widgets/Categories.php:157
+#: includes/Elementor/widgets/Search_Form.php:265
 #: node_modules/@wordpress/block-editor/build-module/components/spacing-sizes-control/utils.js:28
 #: node_modules/@wordpress/block-editor/src/components/spacing-sizes-control/utils.js:40
 msgid "Right"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:166
+#: includes/Elementor/widgets/Categories.php:171
 msgid "View All Posts"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:194
+#: includes/Elementor/widgets/Categories.php:199
 msgid "Category Items"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:201
-#: includes/Elementor/widgets/Companies.php:211
-#: includes/Elementor/widgets/Companies.php:368
-#: includes/Elementor/widgets/Jobs.php:224
-#: includes/Elementor/widgets/Jobs.php:381
+#: includes/Elementor/widgets/Categories.php:206
+#: includes/Elementor/widgets/Companies.php:200
+#: includes/Elementor/widgets/Companies.php:356
+#: includes/Elementor/widgets/Jobs.php:222
+#: includes/Elementor/widgets/Jobs.php:379
 #: includes/Elementor/widgets/Search_Form.php:608
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/dimensions-panel.js:395
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/dimensions-panel.js:405
@@ -1469,19 +1518,19 @@ msgstr ""
 msgid "Padding"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:224
-#: includes/Elementor/widgets/Companies.php:233
-#: includes/Elementor/widgets/Companies.php:404
-#: includes/Elementor/widgets/Jobs.php:246
-#: includes/Elementor/widgets/Jobs.php:417
+#: includes/Elementor/widgets/Categories.php:229
+#: includes/Elementor/widgets/Companies.php:222
+#: includes/Elementor/widgets/Companies.php:392
+#: includes/Elementor/widgets/Jobs.php:244
+#: includes/Elementor/widgets/Jobs.php:415
 #: includes/Elementor/widgets/Search_Form.php:401
 #: includes/Elementor/widgets/Search_Form.php:624
 msgid "Border Radius"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:243
-#: includes/Elementor/widgets/Companies.php:354
-#: includes/Elementor/widgets/Jobs.php:367
+#: includes/Elementor/widgets/Categories.php:248
+#: includes/Elementor/widgets/Companies.php:342
+#: includes/Elementor/widgets/Jobs.php:365
 #: includes/Elementor/widgets/Search_Form.php:437
 #: includes/Elementor/widgets/Search_Form.php:510
 #: node_modules/@wordpress/block-editor/build-module/store/defaults.js:98
@@ -1489,9 +1538,9 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:263
-#: includes/Elementor/widgets/Companies.php:418
-#: includes/Elementor/widgets/Jobs.php:431
+#: includes/Elementor/widgets/Categories.php:268
+#: includes/Elementor/widgets/Companies.php:406
+#: includes/Elementor/widgets/Jobs.php:429
 #: includes/Elementor/widgets/Search_Form.php:470
 #: includes/Elementor/widgets/Search_Form.php:544
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/color-panel.js:410
@@ -1499,21 +1548,21 @@ msgstr ""
 msgid "Hover"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:291
-#: includes/Elementor/widgets/Companies.php:440
-#: includes/Elementor/widgets/Jobs.php:453
+#: includes/Elementor/widgets/Categories.php:296
+#: includes/Elementor/widgets/Companies.php:428
+#: includes/Elementor/widgets/Jobs.php:451
 msgid "Border Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:303
+#: includes/Elementor/widgets/Categories.php:308
 msgid "Icon Background"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:323
+#: includes/Elementor/widgets/Categories.php:328
 msgid "Job Title"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:352
+#: includes/Elementor/widgets/Categories.php:357
 #: includes/Elementor/widgets/Search_Form.php:580
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/dimensions-panel.js:423
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/dimensions-panel.js:433
@@ -1524,125 +1573,112 @@ msgstr ""
 msgid "Margin"
 msgstr ""
 
-#: includes/Elementor/widgets/Categories.php:369
+#: includes/Elementor/widgets/Categories.php:374
 msgid "Total Job"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:34
+#: includes/Elementor/widgets/Companies.php:33
 msgid "Companies (Jobus)"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:92
+#: includes/Elementor/widgets/Companies.php:91
 msgid "01: Company Grid"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:113
-#: includes/Elementor/widgets/Jobs.php:118
-msgid "Display blog by categories"
+#: includes/Elementor/widgets/Companies.php:112
+msgid "Display company by categories"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:123
-#: includes/Elementor/widgets/Job_Tabs.php:116
+#: includes/Elementor/widgets/Companies.php:122
+#: includes/Elementor/widgets/Job_Tabs.php:110
 #: includes/Elementor/widgets/Jobs.php:128
 msgid "Show Posts Count"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:131
-#: includes/Elementor/widgets/Job_Tabs.php:124
+#: includes/Elementor/widgets/Companies.php:130
+#: includes/Elementor/widgets/Job_Tabs.php:118
 #: includes/Elementor/widgets/Jobs.php:136
 msgid "Order"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:143
-#: includes/Elementor/widgets/Job_Tabs.php:136
+#: includes/Elementor/widgets/Companies.php:142
+#: includes/Elementor/widgets/Job_Tabs.php:130
 #: includes/Elementor/widgets/Jobs.php:148
 msgid "Order By"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:160
-msgid "Exclude Company"
+#: includes/Elementor/widgets/Companies.php:163
+msgid "Attributes"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:161
-msgid "Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated"
+#: includes/Elementor/widgets/Companies.php:240
+msgid "List Item"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:205
-#: includes/Elementor/widgets/Jobs.php:218
-msgid "General Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Companies.php:252
-#: includes/Elementor/widgets/Jobs.php:265
-msgid "List Item Style"
-msgstr ""
-
-#: includes/Elementor/widgets/Companies.php:259
-#: includes/Elementor/widgets/Jobs.php:272
+#: includes/Elementor/widgets/Companies.php:247
+#: includes/Elementor/widgets/Jobs.php:270
 msgid "Job Title Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:268
-#: includes/Elementor/widgets/Jobs.php:281
+#: includes/Elementor/widgets/Companies.php:256
+#: includes/Elementor/widgets/Jobs.php:279
 msgid "Job Title Hover Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:300
-#: includes/Elementor/widgets/Jobs.php:313
-msgid "Job Meta Style"
+#: includes/Elementor/widgets/Companies.php:288
+msgid "Job Meta"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:310
-#: includes/Elementor/widgets/Jobs.php:323
+#: includes/Elementor/widgets/Companies.php:298
+#: includes/Elementor/widgets/Jobs.php:321
 msgid "Job Date Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:338
-#: includes/Elementor/widgets/Jobs.php:351
-msgid "Job Button Style"
+#: includes/Elementor/widgets/Companies.php:326
+msgid "Job Button"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:378
-#: includes/Elementor/widgets/Jobs.php:391
+#: includes/Elementor/widgets/Companies.php:366
+#: includes/Elementor/widgets/Jobs.php:389
 msgid "Button Text Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Companies.php:431
-#: includes/Elementor/widgets/Jobs.php:444
+#: includes/Elementor/widgets/Companies.php:419
+#: includes/Elementor/widgets/Jobs.php:442
 msgid "Hover Color"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:34
+#: includes/Elementor/widgets/Job_Tabs.php:33
 msgid "Job Tabs (Jobus)"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:96
+#: includes/Elementor/widgets/Job_Tabs.php:90
 msgid "All filter label"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:106
+#: includes/Elementor/widgets/Job_Tabs.php:100
 msgid "Display job by categories"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:153
+#: includes/Elementor/widgets/Job_Tabs.php:147
 msgid "Title Length"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:160
+#: includes/Elementor/widgets/Job_Tabs.php:155
 #: includes/Elementor/widgets/Jobs.php:165
 msgid "Exclude Job"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:161
+#: includes/Elementor/widgets/Job_Tabs.php:156
 #: includes/Elementor/widgets/Jobs.php:166
 msgid "Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated"
 msgstr ""
 
-#: includes/Elementor/widgets/Job_Tabs.php:169
+#: includes/Elementor/widgets/Job_Tabs.php:163
 msgid "View All Posts URL"
 msgstr ""
 
-#: includes/Elementor/widgets/Jobs.php:34
+#: includes/Elementor/widgets/Jobs.php:33
 msgid "Job Listing (Jobus)"
 msgstr ""
 
@@ -1650,7 +1686,27 @@ msgstr ""
 msgid "01: Listing"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:28
+#: includes/Elementor/widgets/Jobs.php:118
+msgid "Display blog by categories"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:216
+msgid "General Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:263
+msgid "List Item Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:311
+msgid "Job Meta Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Jobs.php:349
+msgid "Job Button Style"
+msgstr ""
+
+#: includes/Elementor/widgets/Search_Form.php:29
 msgid "Search Form (Jobus)"
 msgstr ""
 
@@ -1675,63 +1731,63 @@ msgstr ""
 msgid "Attribute Label"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:121
+#: includes/Elementor/widgets/Search_Form.php:122
 msgid "Attribute"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:129
+#: includes/Elementor/widgets/Search_Form.php:130
 msgid "Attribute Layout"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:133
+#: includes/Elementor/widgets/Search_Form.php:134
 msgid "Type Select"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:137
+#: includes/Elementor/widgets/Search_Form.php:138
 msgid "Type Text"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:148
+#: includes/Elementor/widgets/Search_Form.php:149
 msgid "Placeholder"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:164
+#: includes/Elementor/widgets/Search_Form.php:165
 msgid "Two Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:165
+#: includes/Elementor/widgets/Search_Form.php:166
 msgid "Three Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:166
+#: includes/Elementor/widgets/Search_Form.php:167
 msgid "Four Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:167
+#: includes/Elementor/widgets/Search_Form.php:168
 msgid "Five Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:168
+#: includes/Elementor/widgets/Search_Form.php:169
 msgid "Six Column"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:176
+#: includes/Elementor/widgets/Search_Form.php:177
 msgid "Add Attributes"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:187
+#: includes/Elementor/widgets/Search_Form.php:188
 msgid "Job Type"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:199
+#: includes/Elementor/widgets/Search_Form.php:200
 msgid "Form Button"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:207
+#: includes/Elementor/widgets/Search_Form.php:208
 msgid "Button Label"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:209
+#: includes/Elementor/widgets/Search_Form.php:210
 #: node_modules/@wordpress/block-editor/build-module/components/inserter/block-patterns-explorer/pattern-explorer-sidebar.js:42
 #: node_modules/@wordpress/block-editor/build-module/components/inserter/media-tab/media-panel.js:54
 #: node_modules/@wordpress/block-editor/build-module/components/inserter/menu.js:147
@@ -1743,28 +1799,28 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:215
+#: includes/Elementor/widgets/Search_Form.php:216
 msgid "Search Result Page"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:233
-#: includes/Elementor/widgets/Search_Form.php:240
+#: includes/Elementor/widgets/Search_Form.php:234
+#: includes/Elementor/widgets/Search_Form.php:241
 msgid "Keywords"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:242
+#: includes/Elementor/widgets/Search_Form.php:243
 msgid "Show"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:243
+#: includes/Elementor/widgets/Search_Form.php:244
 msgid "Hide"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:280
+#: includes/Elementor/widgets/Search_Form.php:281
 msgid "Keywords Label"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:302
+#: includes/Elementor/widgets/Search_Form.php:303
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/color-panel.js:397
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/get-global-styles-changes.js:15
 #: node_modules/@wordpress/block-editor/build-module/components/link-control/search-input.js:104
@@ -1774,15 +1830,15 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:312
+#: includes/Elementor/widgets/Search_Form.php:313
 msgid "Add Keyword"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:317
+#: includes/Elementor/widgets/Search_Form.php:318
 msgid "Keyword #1"
 msgstr ""
 
-#: includes/Elementor/widgets/Search_Form.php:320
+#: includes/Elementor/widgets/Search_Form.php:321
 msgid "Keyword #2"
 msgstr ""
 
@@ -1837,30 +1893,30 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/categories/category-3.php:25
+#: includes/Elementor/widgets/templates/categories/category-3.php:29
 msgid "vacancy"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/categories/category-3.php:41
+#: includes/Elementor/widgets/templates/categories/category-3.php:45
 #: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:91
 msgid "Job already posted"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/categories/category-3.php:44
+#: includes/Elementor/widgets/templates/categories/category-3.php:48
 msgid "shape"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/categories/category-3.php:47
+#: includes/Elementor/widgets/templates/categories/category-3.php:51
 #: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:95
 msgid "Arrow Icon"
 msgstr ""
 
 #: includes/Elementor/widgets/templates/job-tabs/job-tab-1.php:75
-#: includes/Elementor/widgets/templates/jobs/job-1.php:65
-#: templates/contents-job/job-archive-1.php:126
-#: templates/contents-job/job-archive-1.php:185
-#: templates/contents-job/job-archive-2.php:127
-#: templates/contents-job/job-archive-2.php:197
+#: includes/Elementor/widgets/templates/jobs/job-1.php:97
+#: templates/contents-job/job-archive-1.php:127
+#: templates/contents-job/job-archive-1.php:186
+#: templates/contents-job/job-archive-2.php:128
+#: templates/contents-job/job-archive-2.php:198
 #: templates/contents-job/job-archive-3.php:139
 #: templates/contents-job/job-archive-3.php:219
 #: templates/single-company.php:222 templates/single-job/related-job.php:65
@@ -1872,7 +1928,7 @@ msgstr ""
 msgid "Line Icon"
 msgstr ""
 
-#: includes/Elementor/widgets/templates/jobs/job-1.php:40
+#: includes/Elementor/widgets/templates/jobs/job-1.php:59
 #: templates/single-company.php:199
 msgid " by"
 msgstr ""
@@ -1881,55 +1937,55 @@ msgstr ""
 msgid "Search job, title etc...."
 msgstr ""
 
-#: includes/functions.php:420
+#: includes/functions.php:388
 msgid "arrow-left"
 msgstr ""
 
-#: includes/functions.php:420
+#: includes/functions.php:388
 msgid "Prev"
 msgstr ""
 
-#: includes/functions.php:421
+#: includes/functions.php:389
 #: node_modules/@wordpress/components/build-module/guide/index.js:133
 msgid "Next"
 msgstr ""
 
-#: includes/functions.php:421
+#: includes/functions.php:389
 msgid "arrow-right"
 msgstr ""
 
-#: includes/functions.php:736
+#: includes/functions.php:708
 #: node_modules/@wordpress/block-editor/build-module/components/inserter/block-patterns-tab/pattern-category-previews.js:86
 #: node_modules/@wordpress/block-editor/src/components/inserter/block-patterns-tab/pattern-category-previews.js:156
 msgid "No results found"
 msgstr ""
 
-#: includes/functions.php:756
+#: includes/functions.php:728
 #, php-format
 msgid "Showing %1$s-%2$s of %3$s results"
 msgstr ""
 
-#: includes/functions.php:780
+#: includes/functions.php:752
 msgid "Share:"
 msgstr ""
 
-#: includes/functions.php:781
+#: includes/functions.php:753
 msgid "Share on Facebook"
 msgstr ""
 
-#: includes/functions.php:782
+#: includes/functions.php:754
 msgid "Share on Linkedin"
 msgstr ""
 
-#: includes/functions.php:783
+#: includes/functions.php:755
 msgid "Share on Twitter"
 msgstr ""
 
-#: includes/functions.php:799
+#: includes/functions.php:771
 msgid "Bootstrap Icons"
 msgstr ""
 
-#: jobus.php:94
+#: jobus.php:95
 msgid "Candidate Menu"
 msgstr ""
 
@@ -3927,7 +3983,7 @@ msgstr ""
 #: node_modules/@wordpress/block-editor/build-module/components/global-styles/filters-panel.js:48
 #: node_modules/@wordpress/block-editor/src/components/global-styles/filters-panel.js:82
 #: src/shortcode-candidate-archive/edit.js:31
-#: src/shortcode-company-archive/edit.js:29
+#: src/shortcode-company-archive/edit.js:28
 #: src/shortcode-job-archive/edit.js:32
 msgid "Filters"
 msgstr ""
@@ -4245,10 +4301,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:37
 #: templates/contents-company/company-archive-1.php:34
 #: templates/contents-company/company-archive-2.php:39
-#: templates/contents-job/job-archive-1.php:34
+#: templates/contents-job/job-archive-1.php:35
 #: templates/contents-job/job-archive-2.php:33
 #: templates/contents-job/job-archive-3.php:38
-#: templates/taxonomy-candidate.php:68 templates/taxonomy-company.php:63
+#: templates/contents-job/sorting_filter.php:31 templates/loop/sorting.php:28
+#: templates/taxonomy-candidate.php:70 templates/taxonomy-company.php:66
 #: templates/taxonomy-job.php:68
 msgid "All"
 msgstr ""
@@ -4594,7 +4651,7 @@ msgstr ""
 #: node_modules/@wordpress/block-editor/src/components/url-input/button.js:56
 #: node_modules/@wordpress/components/build-module/modal/index.js:247
 #: node_modules/@wordpress/components/build-module/notice/index.js:128
-#: templates/contents-job/sidebar-search-filter.php:19
+#: templates/contents-job/sidebar-search-filter.php:20
 msgid "Close"
 msgstr ""
 
@@ -7368,14 +7425,14 @@ msgstr ""
 
 #: src/register-form/edit.js:104 src/register-form/edit.js:162
 #: src/register-form/register.php:45 src/register-form/register.php:101
-#: templates/single-candidate/candidate-single-1.php:317
+#: templates/single-candidate/candidate-single-1.php:316
 #: templates/single-candidate/candidate-single-2.php:349
 msgid "Name*"
 msgstr ""
 
 #: src/register-form/edit.js:117 src/register-form/edit.js:175
 #: src/register-form/register.php:51 src/register-form/register.php:107
-#: templates/single-candidate/candidate-single-1.php:321
+#: templates/single-candidate/candidate-single-1.php:319
 #: templates/single-candidate/candidate-single-2.php:353
 msgid "Email*"
 msgstr ""
@@ -7481,13 +7538,13 @@ msgid "Sign In"
 msgstr ""
 
 #: src/shortcode-candidate-archive/edit.js:13
-#: src/shortcode-company-archive/edit.js:12
+#: src/shortcode-company-archive/edit.js:11
 #: src/shortcode-job-archive/edit.js:13
 msgid "Layout 01"
 msgstr ""
 
 #: src/shortcode-candidate-archive/edit.js:14
-#: src/shortcode-company-archive/edit.js:13
+#: src/shortcode-company-archive/edit.js:12
 #: src/shortcode-job-archive/edit.js:14
 msgid "Layout 02"
 msgstr ""
@@ -7496,7 +7553,7 @@ msgstr ""
 msgid "Candidate Archive Layout"
 msgstr ""
 
-#: src/shortcode-company-archive/edit.js:33
+#: src/shortcode-company-archive/edit.js:32
 msgid "Company Archive Layout"
 msgstr ""
 
@@ -7536,10 +7593,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:59
 #: templates/contents-company/company-archive-1.php:53
 #: templates/contents-company/company-archive-2.php:61
-#: templates/contents-job/job-archive-1.php:43
+#: templates/contents-job/job-archive-1.php:44
 #: templates/contents-job/job-archive-2.php:42
 #: templates/contents-job/job-archive-3.php:50
-#: templates/taxonomy-candidate.php:88 templates/taxonomy-company.php:82
+#: templates/contents-job/sorting_filter.php:40 templates/loop/sorting.php:37
+#: templates/taxonomy-candidate.php:90 templates/taxonomy-company.php:85
 #: templates/taxonomy-job.php:77
 msgid "Short By:"
 msgstr ""
@@ -7548,10 +7606,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:63
 #: templates/contents-company/company-archive-1.php:57
 #: templates/contents-company/company-archive-2.php:66
-#: templates/contents-job/job-archive-1.php:57
+#: templates/contents-job/job-archive-1.php:58
 #: templates/contents-job/job-archive-2.php:56
 #: templates/contents-job/job-archive-3.php:64
-#: templates/taxonomy-candidate.php:92 templates/taxonomy-company.php:86
+#: templates/contents-job/sorting_filter.php:54 templates/loop/sorting.php:51
+#: templates/taxonomy-candidate.php:94 templates/taxonomy-company.php:89
 #: templates/taxonomy-job.php:91
 msgid "Newest to Oldest"
 msgstr ""
@@ -7560,10 +7619,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:64
 #: templates/contents-company/company-archive-1.php:58
 #: templates/contents-company/company-archive-2.php:67
-#: templates/contents-job/job-archive-1.php:58
+#: templates/contents-job/job-archive-1.php:59
 #: templates/contents-job/job-archive-2.php:57
 #: templates/contents-job/job-archive-3.php:65
-#: templates/taxonomy-candidate.php:93 templates/taxonomy-company.php:87
+#: templates/contents-job/sorting_filter.php:55 templates/loop/sorting.php:52
+#: templates/taxonomy-candidate.php:95 templates/taxonomy-company.php:90
 #: templates/taxonomy-job.php:92
 msgid "Oldest to Newest"
 msgstr ""
@@ -7572,10 +7632,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:65
 #: templates/contents-company/company-archive-1.php:59
 #: templates/contents-company/company-archive-2.php:68
-#: templates/contents-job/job-archive-1.php:59
+#: templates/contents-job/job-archive-1.php:60
 #: templates/contents-job/job-archive-2.php:58
 #: templates/contents-job/job-archive-3.php:66
-#: templates/taxonomy-candidate.php:94 templates/taxonomy-company.php:88
+#: templates/contents-job/sorting_filter.php:56 templates/loop/sorting.php:53
+#: templates/taxonomy-candidate.php:96 templates/taxonomy-company.php:91
 #: templates/taxonomy-job.php:93
 msgid "Title Ascending "
 msgstr ""
@@ -7584,10 +7645,11 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:66
 #: templates/contents-company/company-archive-1.php:60
 #: templates/contents-company/company-archive-2.php:69
-#: templates/contents-job/job-archive-1.php:60
+#: templates/contents-job/job-archive-1.php:61
 #: templates/contents-job/job-archive-2.php:59
 #: templates/contents-job/job-archive-3.php:67
-#: templates/taxonomy-candidate.php:95 templates/taxonomy-company.php:89
+#: templates/contents-job/sorting_filter.php:57 templates/loop/sorting.php:54
+#: templates/taxonomy-candidate.php:97 templates/taxonomy-company.php:92
 #: templates/taxonomy-job.php:94
 msgid "Title Descending"
 msgstr ""
@@ -7596,9 +7658,10 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:71
 #: templates/contents-company/company-archive-1.php:65
 #: templates/contents-company/company-archive-2.php:74
-#: templates/contents-job/job-archive-1.php:65
-#: templates/contents-job/job-archive-2.php:63
+#: templates/contents-job/job-archive-1.php:66
+#: templates/contents-job/job-archive-2.php:64
 #: templates/contents-job/job-archive-3.php:72
+#: templates/contents-job/sorting_filter.php:62 templates/loop/sorting.php:59
 msgid "Active List"
 msgstr ""
 
@@ -7606,35 +7669,36 @@ msgstr ""
 #: templates/contents-candidate/candidate-archive-2.php:74
 #: templates/contents-company/company-archive-1.php:68
 #: templates/contents-company/company-archive-2.php:77
-#: templates/contents-job/job-archive-1.php:66
-#: templates/contents-job/job-archive-2.php:64
+#: templates/contents-job/job-archive-1.php:67
+#: templates/contents-job/job-archive-2.php:65
 #: templates/contents-job/job-archive-3.php:73
+#: templates/contents-job/sorting_filter.php:63 templates/loop/sorting.php:60
 msgid "Active Grid"
 msgstr ""
 
 #: templates/contents-candidate/candidate-archive-1.php:176
 #: templates/contents-candidate/candidate-archive-1.php:294
-#: templates/contents-candidate/candidate-archive-2.php:181
-#: templates/contents-candidate/candidate-archive-2.php:302
-#: templates/taxonomy-candidate.php:216
+#: templates/contents-candidate/candidate-archive-2.php:178
+#: templates/contents-candidate/candidate-archive-2.php:299
+#: templates/taxonomy-candidate.php:218
 msgid "View Profile"
 msgstr ""
 
 #: templates/contents-candidate/candidate-archive-1.php:181
-#: templates/contents-candidate/candidate-archive-2.php:186
-#: templates/single-candidate/candidate-single-1.php:331
+#: templates/contents-candidate/candidate-archive-2.php:183
+#: templates/single-candidate/candidate-single-1.php:327
 #: templates/single-candidate/candidate-single-2.php:361
-#: templates/single-job.php:81 templates/taxonomy-candidate.php:221
+#: templates/single-job.php:81 templates/taxonomy-candidate.php:223
 msgid "Message"
 msgstr ""
 
 #: templates/contents-candidate/sidebar-search-filter-popup.php:19
-#: templates/contents-candidate/sidebar-search-filter.php:16
+#: templates/contents-candidate/sidebar-search-filter.php:17
 #: templates/contents-company/sidebar-search-filter-popup.php:13
-#: templates/contents-company/sidebar-search-filter.php:17
+#: templates/contents-company/sidebar-search-filter.php:18
 #: templates/contents-job/sidebar-search-filter-2.php:13
 #: templates/contents-job/sidebar-search-filter-3.php:15
-#: templates/contents-job/sidebar-search-filter.php:20
+#: templates/contents-job/sidebar-search-filter.php:21
 msgid "Filter By"
 msgstr ""
 
@@ -7649,25 +7713,25 @@ msgstr ""
 
 #: templates/contents-candidate/sidebar-search-filter-popup.php:267
 #: templates/contents-candidate/sidebar-search-filter.php:304
-#: templates/contents-company/sidebar-search-filter-popup.php:174
-#: templates/contents-company/sidebar-search-filter.php:294
+#: templates/contents-company/sidebar-search-filter-popup.php:170
+#: templates/contents-company/sidebar-search-filter.php:291
 #: templates/contents-job/sidebar-search-filter-2.php:237
-#: templates/contents-job/sidebar-search-filter-3.php:244
-#: templates/contents-job/sidebar-search-filter.php:355
+#: templates/contents-job/sidebar-search-filter-3.php:241
+#: templates/contents-job/sidebar-search-filter.php:352
 msgid "Apply Filter"
 msgstr ""
 
-#: templates/contents-company/sidebar-search-filter-popup.php:110
+#: templates/contents-company/sidebar-search-filter-popup.php:107
 #: templates/contents-job/sidebar-search-filter-3.php:49
 msgid "Search by Keywords"
 msgstr ""
 
-#: templates/contents-company/sidebar-search-filter.php:143
+#: templates/contents-company/sidebar-search-filter.php:144
 msgid "Company Name"
 msgstr ""
 
-#: templates/contents-company/sidebar-search-filter.php:214
-#: templates/contents-company/sidebar-search-filter.php:281
+#: templates/contents-company/sidebar-search-filter.php:211
+#: templates/contents-company/sidebar-search-filter.php:278
 msgid "Show More"
 msgstr ""
 
@@ -7743,7 +7807,7 @@ msgid "Brief description for your profile. URLs are hyperlinked."
 msgstr ""
 
 #: templates/dashboard/need-login.php:2
-msgid "Please log in to access your dashboard. dsfsdf"
+msgid "Please log in to access your dashboard."
 msgstr ""
 
 #: templates/dashboard/need-login.php:3
@@ -7783,12 +7847,12 @@ msgstr ""
 msgid "Your email address & profile will be shown to the recipient."
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:326
+#: templates/single-candidate/candidate-single-1.php:323
 #: templates/single-candidate/candidate-single-2.php:357
 msgid "Subject"
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:337
+#: templates/single-candidate/candidate-single-1.php:332
 #: templates/single-candidate/candidate-single-2.php:366
 msgid "Send Message"
 msgstr ""
@@ -7821,23 +7885,23 @@ msgstr ""
 msgid "Your application has been submitted successfully."
 msgstr ""
 
-#: templates/single-job/job-single-1.php:50
+#: templates/single-job/job-single-1.php:51
 msgid "Company Profile"
 msgstr ""
 
-#: templates/single-job/job-single-1.php:133
+#: templates/single-job/job-single-1.php:134
 #: templates/single-job/job-single-2.php:98
 msgid "Already Applied"
 msgstr ""
 
-#: templates/single-job/job-single-1.php:140
-#: templates/single-job/job-single-1.php:144
-#: templates/single-job/job-single-1.php:151
-#: templates/single-job/job-single-1.php:156
+#: templates/single-job/job-single-1.php:141
+#: templates/single-job/job-single-1.php:145
+#: templates/single-job/job-single-1.php:152
+#: templates/single-job/job-single-1.php:157
 #: templates/single-job/job-single-2.php:105
-#: templates/single-job/job-single-2.php:109
-#: templates/single-job/job-single-2.php:116
-#: templates/single-job/job-single-2.php:121
+#: templates/single-job/job-single-2.php:110
+#: templates/single-job/job-single-2.php:117
+#: templates/single-job/job-single-2.php:123
 msgid "Apply Now"
 msgstr ""
 

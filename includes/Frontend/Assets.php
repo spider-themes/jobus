@@ -21,8 +21,6 @@ class Assets {
 	    // Register Style's
 	    wp_register_style('lightbox', esc_url(JOBUS_VEND . '/lightbox/lightbox.min.css'), [], JOBUS_VERSION );
 
-        wp_enqueue_style( 'fa5', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', array(), '5.13.0', 'all' );
-
         // Enqueue Style's
         wp_enqueue_style( 'bootstrap', esc_url(JOBUS_VEND . '/bootstrap/bootstrap.min.css'), [], '5.1.3' );
         wp_enqueue_style( 'nice-select', esc_url(JOBUS_VEND . '/nice-select/nice-select.css'), [], JOBUS_VERSION );

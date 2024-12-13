@@ -1,12 +1,15 @@
-=== Jobus - Job Listing, Career Page, and Recruitment Tool ===
-Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
+=== Jobus ===
+Contributors: spiderdevs, mdjwel, arifrahman1, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.0.6
+Stable tag: 0.0.8
 Requires at least: 6.0
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+== Short Description ==
+Jobus is a powerful and user-friendly plugin for creating job boards, listing job vacancies, and managing the recruitment process on WordPress websites.
 
 == Description ==
 Jobus is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
