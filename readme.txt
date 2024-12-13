@@ -8,8 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-== Short Description ==
-Jobus is a powerful and user-friendly plugin for creating job boards, listing job vacancies, and managing the recruitment process on WordPress websites.
+Jobus is a powerful and user-friendly plugin for creating job boards, listing job vacancies, and managing the recruitment process on your websites.
 
 == Description ==
 Jobus is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.

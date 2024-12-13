@@ -106,16 +106,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 		public function load_files(): void
         {
 
-            add_action('plugins_loaded', function () {
-                if (!function_exists('is_plugin_active')) {
-                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                }
-                if (is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/Admin/notice/deactivate-plugins.php')) {
-                    require_once __DIR__ . '/includes/Admin/notice/deactivate-plugins.php';
-                }
-            });
-
-
             // Functions
             require_once __DIR__ . '/includes/functions.php';
             require_once __DIR__ . '/includes/filters.php';
@@ -127,16 +117,12 @@ if ( ! class_exists( 'Jobus' ) ) {
             require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
             require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
             require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-            require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 
             //Classes
             require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
-            require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
             // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Assets.php';
-            require_once __DIR__ . '/includes/Frontend/Dashboard.php';
-            //require_once __DIR__ . '/includes/Frontend/Frontend.php';
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
             require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 
@@ -181,8 +167,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 
             // Frontend UI
             new Jobus\includes\Frontend\Assets();
-            new Jobus\includes\Frontend\Dashboard();
-            //new Jobus\includes\Frontend\Frontend();
             new Jobus\includes\Frontend\Shortcode();
             new Jobus\includes\Frontend\Template_Loader();
 
