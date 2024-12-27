@@ -95,7 +95,7 @@ class Candidate {
         // Register post taxonomies Tags
         register_taxonomy( 'jobus_candidate_location', 'jobus_candidate', array(
             'public'                => true,
-            'hierarchical'          => false,
+            'hierarchical'          => true,
             'show_ui'               => true,
             'show_admin_column'     => true,
             'show_in_nav_menus'     => true,

@@ -151,23 +151,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     </div>
                                                     <?php
                                                 }
-
-	                                            $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
-	                                            if (!empty($locations )) { ?>
-                                                    <div class="col-md-6">
-                                                        <div class="candidate-info mt-10">
-                                                            <span><?php esc_html_e('Location', 'jobus'); ?></span>
-                                                            <?php
-                                                            foreach ($locations as $location ) { ?>
-                                                                <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                    </div>
-		                                            <?php
-	                                            }
 	                                            ?>
+                                                <div class="col-md-6">
+                                                    <div class="candidate-info mt-10">
+                                                        <span><?php esc_html_e('Location', 'jobus'); ?></span>
+                                                        <div class="text-capitalize"><?php echo esc_html(jobus_get_first_taxonomy_name('jobus_candidate_location')) ?></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             
                                             <div class="row gx-2 pt-25 sm-pt-10">
@@ -270,24 +260,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     </div>
                                                     <?php
                                                 }
-
-                                                $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
-                                                if (!empty($locations )) {
-                                                    ?>
-                                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                                        <div class="candidate-info">
-                                                            <span><?php esc_html_e('Location', 'jobus'); ?></span>
-                                                            <?php
-                                                            foreach ($locations as $location ) { ?>
-                                                                <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                }
                                                 ?>
+                                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                                    <div class="candidate-info">
+                                                        <span><?php esc_html_e('Location', 'jobus'); ?></span>
+                                                        <div class="text-capitalize"><?php echo esc_html(jobus_get_first_taxonomy_name('jobus_candidate_location')) ?></div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-xl-2 col-md-4">
                                                     <div class="d-flex justify-content-lg-end">
                                                         <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">

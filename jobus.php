@@ -136,7 +136,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             // Frontend UI
             require_once __DIR__ . '/includes/Frontend/Assets.php';
             require_once __DIR__ . '/includes/Frontend/Dashboard.php';
-            //require_once __DIR__ . '/includes/Frontend/Frontend.php';
             require_once __DIR__ . '/includes/Frontend/Shortcode.php';
             require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 
@@ -182,7 +181,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             // Frontend UI
             new Jobus\includes\Frontend\Assets();
             new Jobus\includes\Frontend\Dashboard();
-            //new Jobus\includes\Frontend\Frontend();
             new Jobus\includes\Frontend\Shortcode();
             new Jobus\includes\Frontend\Template_Loader();
 

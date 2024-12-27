@@ -18,9 +18,9 @@ $selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) :
 
 $meta_args = [ 'args' => jobus_meta_taxonomy_args('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_candidate', 'candidate_tag', jobus_search_terms('candidate_tags')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxonomy_args('taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms('candidate_locations')) ];
 
-if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
+if ( !empty ($meta_args[ 'args' ][ 'meta_query' ]) ) {
     $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
 } else {
     $result_ids = jobus_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2);
@@ -35,9 +35,33 @@ $args = [
     'order' => $selected_order,
 ];
 
-if (!empty(get_query_var('s'))) {
+if ( !empty(get_query_var('s') )) {
     $args[ 's' ] = get_query_var('s');
 }
+
+
+if (!empty($_GET['candidate_cats']) || !empty($_GET['candidate_locations'])) {
+    $args['tax_query'] = array(
+        'relation' => 'OR',
+    );
+
+    if (!empty($_GET['candidate_cats'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'jobus_candidate_cat',
+            'field'    => 'slug',
+            'terms'    => $_GET['candidate_cats'],
+        );
+    }
+
+    if (!empty($_GET['candidate_locations'])) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'jobus_candidate_location',
+            'field'    => 'slug',
+            'terms'    => $_GET['candidate_locations'],
+        );
+    }
+}
+
 
 // Range fields value
 $filter_widgets = jobus_opt('candidate_sidebar_widgets');
@@ -65,8 +89,6 @@ foreach ( $price_ranged as $key => $values ) {
         return is_numeric($value) ? $value : preg_replace('/[^0-9.k]/', '', $value);
     }, $values));
 }
-
-
 
 /**
  *
@@ -133,7 +155,6 @@ if (!empty($allSliderValues)) {
 if (isset($result_ids)) {
     $args[ 'post__in' ] = array_map('absint', $result_ids);
 }
-
 
 // Sanitize company_ids
 $search_type = !empty($_GET['search_type']) ? sanitize_text_field($_GET['search_type']) : '';

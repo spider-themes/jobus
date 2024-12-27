@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
+$current_url = add_query_arg($_GET, get_post_type_archive_link('jobus_candidate'));
 ?>
 
 <div class="col-xl-3 col-lg-4">
@@ -20,7 +21,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
+            <form action="<?php echo esc_url($current_url) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="jobus_candidate"/>
                 <input type="hidden" name="jobus_filter_nonce" value="<?php echo wp_create_nonce('jobus_filter_nonce'); ?>" />
 
@@ -210,7 +211,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                 }
 
                 // candidate location sidebar
-                if (jobus_opt('is_candidate_widget_location') == true) {
+                if ( jobus_opt('is_candidate_widget_location' )) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
@@ -218,18 +219,18 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                     $is_collapsed = ' collapsed';
 
                     if ( $post_type == 'jobus_candidate' ) {
-		                if ( ! empty ( sanitize_text_field($_GET['candidate_locations']) ) ) {
-			                $is_collapsed_show = 'collapse show';
-			                $area_expanded     = 'true';
-			                $is_collapsed      = '';
-		                }
-	                }
+                        if (!empty ($_GET[ 'candidate_locations' ])) {
+                            $is_collapsed_show = 'collapse show';
+                            $area_expanded = 'true';
+                            $is_collapsed = '';
+                        }
+                    }
 
-	                $term_loc = get_terms( array(
+	                $term_locations = get_terms( array(
 		                'taxonomy'   => 'jobus_candidate_location',
 	                ) );
 
-	                if (!empty($term_loc)) {
+	                if (!empty($term_locations)) {
                         ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button"
@@ -241,7 +242,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                     <select class="nice-select" name="candidate_locations[]">
 						                <?php
 						                $searched_opt = jobus_search_terms('candidate_locations');
-						                foreach ( $term_loc as $key => $term ) {
+						                foreach ( $term_locations as $key => $term ) {
                                             $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
                                             echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
 						                }
@@ -254,9 +255,8 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 	                }
                 }
 
-
                 // Widget Category List
-                if (jobus_opt('is_candidate_widget_cat') == true) {
+                if ( jobus_opt('is_candidate_widget_cat' ) ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';

@@ -91,9 +91,7 @@ if (!function_exists('jobus_get_first_taxonomy_name')) {
     {
 
         $terms = get_the_terms(get_the_ID(), $term);
-        $term = is_array($terms) ? $terms[ 0 ]->name : '';
-
-        return esc_html($term);
+        return is_array($terms) ? $terms[ 0 ]->name : '';
 
     }
 }
@@ -496,17 +494,17 @@ if (!function_exists('jobus_get_selected_company_count')) {
  * Get the job search terms
  *
  * @param string $terms The name of the query parameter to retrieve.
- * @return array|string The sanitized search terms.
+ * @return array The sanitized search terms.
  */
-function jobus_search_terms (string $terms): array|string
+function jobus_search_terms(string $terms): array
 {
     $result = [];
 
     // Verify the nonce before processing the request
-    if ( !empty($_GET['jobus_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_nonce']), 'jobus_search_terms') ) {
+    if (!empty($_GET['jobus_filter_nonce']) && wp_verify_nonce(sanitize_text_field($_GET['jobus_filter_nonce']), 'jobus_filter_nonce')) {
 
         // Check if the parameter is set in the URL and sanitize the input
-        if ( isset($_GET[$terms]) ) {
+        if (isset($_GET[$terms])) {
             $raw_terms = $_GET[$terms];
 
             // If it's an array, sanitize each element, otherwise sanitize the single value
@@ -622,11 +620,17 @@ function jobus_meta_taxonomy_args ($data = '', $post_type = 'jobus_job', $taxono
  */
 function jobus_merge_queries_and_get_ids (...$queries): array
 {
-    $combined_post_ids = array();
+
+    $combined_post_ids = [];
+    $search_term = get_query_var('s');
 
     foreach ( $queries as $query ) {
         if (empty($query[ 'args' ]) || !is_array($query[ 'args' ])) {
             continue; // Skip invalid or empty queries
+        }
+
+        if ( !empty($search_term) ) {
+            $query['args']['s'] = $search_term;
         }
 
         $wp_query = new \WP_Query($query[ 'args' ]);
@@ -637,11 +641,7 @@ function jobus_merge_queries_and_get_ids (...$queries): array
         }
     }
 
-    // Ensure unique values in the combined array
-    $combined_post_ids = array_unique($combined_post_ids);
-
-    // If at least two queries have IDs, return the merged array, otherwise return as is
-    return count($queries) >= 2 ? $combined_post_ids : $combined_post_ids;
+    return array_unique($combined_post_ids);
 }
 
 /**
