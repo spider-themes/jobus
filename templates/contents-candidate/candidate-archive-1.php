@@ -3,23 +3,19 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-$candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
-
 // Check if the view parameter is set in the URL
 $current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'grid';
 
 // Get the base URL for the archive page
-if ($candidate_archive_layout) {
-    $archive_url = get_the_permalink();
-} else {
+if (is_post_type_archive('jobus_candidate')) {
     $archive_url = get_post_type_archive_link('jobus_candidate');
+} else {
+    $archive_url = get_the_permalink();
 }
 
 // Build the URL for list and grid views
 $list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
 $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
-
-
 ?>
 <section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
@@ -134,8 +130,8 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
                                                 echo '</ul>';
                                             } else {
+                                                // Display all skills
                                                 if (!empty($skills)) {
-                                                    // Display all skills
                                                     echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
                                                     foreach ($skills as $skill) {
                                                         echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
@@ -148,7 +144,6 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 <?php
                                                 if (jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) {
                                                     ?>
-
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
@@ -244,11 +239,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                             echo '</ul>';
                                                         } else {
                                                             // Display all skills
-                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
-                                                            foreach ($skills as $skill) {
-                                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                            if (!empty($skills)) {
+                                                                echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+                                                                foreach ($skills as $skill) {
+                                                                    echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                                }
+                                                                echo '</ul>';
                                                             }
-                                                            echo '</ul>';
                                                         }
                                                         ?>
                                                     </div>
