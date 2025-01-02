@@ -7088,7 +7088,7 @@ img {
   position: relative;
 }
 .upper-filter .total-job-found {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.6);
 }
 .upper-filter .short-filter .nice-select {
   min-width: 154px;

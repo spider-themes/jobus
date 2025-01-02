@@ -31,9 +31,8 @@
          */
         $('.keywords_search_form ul li a').on('click', function (event) {
             event.preventDefault();
-            var content = $(this).text();
 
-            console.log(content);
+            let content = $(this).text();
 
             $('#searchInput').val(content).focus();
             fetchResults();
