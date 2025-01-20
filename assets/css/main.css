@@ -6553,6 +6553,13 @@ img {
   margin-left: auto;
   margin-right: -1px;
 }
+@media (max-width: 767px) {
+  .job-search-one form .job-search-btn-wrapper .search-btn {
+    margin: 0;
+    height: 50px;
+    border-radius: 0 0 10px 10px;
+  }
+}
 .job-search-one form .job-search-btn-wrapper .search-btn:hover {
   background: #00BF58;
   color: #fff;
