@@ -1449,10 +1449,39 @@
   }
 }
 
+// Jobus Job Listing style
 .jobus-jobs {
   &.job-listing-one {
     .job-list-one {
       .job_specifications_area {
+        flex-wrap: wrap;
+
+        .job_list_title_area {
+          @media (max-width: 768px) {
+            flex-basis: 100%;
+          }
+        }
+
+        .job_list_meta_area {
+          @media (max-width: 768px) {
+            flex-basis: 33%;
+            margin-left: 0;
+          }
+          @media (max-width: 560px) {
+            flex-basis: 100%;
+          }
+        }
+
+        .job_list_cat_area {
+          @media (max-width: 768px) {
+            flex-basis: 33%;
+            margin-left: 0;
+          }
+          @media (max-width: 560px) {
+            flex-basis: 100%;
+            margin-top: 15px;
+          }
+        }
         .job_list_meta_area {
 
         }

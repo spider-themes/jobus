@@ -139,8 +139,7 @@ $website_target = $website[ 'target' ] ?? '_self';
 
     <section class="company-open-position pt-80 lg-pt-60 pb-100 lg-pb-60">
         <div class="container">
-
-            <div class="row justify-content-between align-items-center">
+            <div class="row justify-content-between align-items-center company-position-title">
                 <div class="col-lg-6">
                     <div class="title-two">
                         <h2><?php esc_html_e('Open Position', 'jobus'); ?></h2>
@@ -155,7 +154,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                 </div>
             </div>
 
-            <div class="mt-50">
+            <div class="mt-50 company-positions">
                 <?php
                 $args = array(
                     'post_type' => 'jobus_job',

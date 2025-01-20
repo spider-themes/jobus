@@ -213,6 +213,40 @@
 // Company Open Position
 .company-open-position {
     background: $light-bg;
+
+    .company-position-title {
+        @media (max-width: 991px) {
+            row-gap: 15px;
+        }
+    }
+
+    .company-positions {
+        .job-list-one {
+            .job-title {
+                @media (max-width: 991px) {
+                    column-gap: 15px;
+                    margin-bottom: 15px;
+                }
+
+                .logo {
+                    @media (max-width: 991px) {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .title {
+                    @media (max-width: 991px) {
+                        margin-bottom: 0;
+                    }
+                    h3 {
+                        @media (max-width: 991px) {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
