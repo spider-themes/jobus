@@ -1,40 +1,33 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit;// Exit if accessed directly
 }
 
-class Company {
+class Company{
 
     private static $instance = null;
 
     public function __construct() {
 
         // Register the posttype
-        add_action('init', [$this, 'register_post_types_company']);
+        add_action( 'init', [ $this, 'register_post_types_company' ] );
 
         // Admin Columns
-        add_filter('manage_company_posts_columns', [$this, 'company_columns']);
-        add_action('manage_company_posts_custom_column', [$this, 'company_custom_columns'], 10, 2);
+        add_filter( 'manage_company_posts_columns', [ $this, 'company_columns' ] );
+        add_action( 'manage_company_posts_custom_column', [ $this, 'company_custom_columns' ], 10, 2 );
     }
 
-
     public static function init() {
-        if (is_null(self::$instance)) {
+        if ( is_null(self::$instance) ) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-
     // Register the posttype Company.
-    public function register_post_types_company() {
-
-        if (post_type_exists('jobus_company')) {
-            return;
-        }
+    public function register_post_types_company(){
 
         $labels = array(
             'name'                      => esc_html__( 'Companies', 'jobus' ),
@@ -80,11 +73,10 @@ class Company {
             'supports'              => $supports,
             'yarpp_support'         => true,
             'menu_icon'             => 'dashicons-plus-alt',
-            'show_admin_column'     => true,
-
+            'show_admin_column'     => true
         );
 
-        register_post_type('jobus_company', $args); // Register the post-type `company`
+        register_post_type( 'jobus_company', $args ); // Register the post-type `company`
 
         // Register post taxonomies Category
         register_taxonomy( 'jobus_company_cat', 'jobus_company', array(
@@ -95,7 +87,7 @@ class Company {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Categories', 'jobus'),
+                'name'  => esc_html__( 'Categories', 'jobus' ),
             ]
         ));
 
@@ -107,43 +99,37 @@ class Company {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Location', 'jobus'),
+                'name'  => esc_html__( 'Location', 'jobus' ),
             ]
         ));
-
-
     }
 
-
     // Admin Columns
-    public function company_columns($columns) {
+    public function company_columns( $columns ) {
 
-        if (empty($columns) && !is_array($columns)) {
+        if ( empty( $columns ) && !is_array( $columns ) ) {
             $columns = [];
         }
 
         unset($columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat']);
 
-        $show_columns = [];
-        $show_columns['cb'] = '<input type="checkbox" />';
-        $show_columns['title'] = esc_html__('Title', 'jobus');
-        $show_columns['taxonomy-company_cat'] = esc_html__('Categories', 'jobus');
-        $show_columns['author'] = esc_html__('Author', 'jobus');
-        $show_columns['date'] = esc_html__('Date', 'jobus');
+        $show_columns           = [];
+        $show_columns['cb']     = '<input type="checkbox" />';
+        $show_columns['title']  = esc_html__( 'Title', 'jobus' );
+        $show_columns['taxonomy-company_cat'] = esc_html__( 'Categories', 'jobus' );
+        $show_columns['author'] = esc_html__( 'Author', 'jobus' );
+        $show_columns['date']   = esc_html__( 'Date', 'jobus' );
 
-        return array_merge($show_columns, $columns);
-
+        return array_merge( $show_columns, $columns );
     }
 
-
     // Custom Columns Content
-    public function company_custom_columns($column, $post_id)
+    public function company_custom_columns( $column, $post_id )
     {
-        switch ($column) {
+        switch( $column ) {
             case 'taxonomy-company_cat':
-                echo get_the_term_list($post_id, 'jobus_company_cat', '', ', ', '');
+                echo get_the_term_list( $post_id, 'jobus_company_cat', '', ', ', '' );
                 break;
         }
     }
-
 }

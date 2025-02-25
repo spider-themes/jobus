@@ -1,28 +1,26 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit; // Exit if accessed directly
 }
 
-class Job_Application {
+class Job_Application{
 
     private static $instance = null;
 
     public function __construct() {
 
         // Register the post type
-        add_action('init', [$this, 'register_post_types_applications']);
+        add_action( 'init', [ $this, 'register_post_types_applications' ] );
 
         // Admin Columns
-        add_filter('manage_edit-job_application_columns', [$this, 'job_application_columns']);
-        add_action('manage_job_application_posts_custom_column', [$this, 'job_application_columns_data'], 10, 2);
-
+        add_filter('manage_edit-job_application_columns', [ $this, 'job_application_columns' ] );
+        add_action('manage_job_application_posts_custom_column', [ $this, 'job_application_columns_data'], 10, 2);
 
         // Add custom content to an edit form
-        add_action('edit_form_top', array($this, 'admin_single_subtitle'));
-        add_action('add_meta_boxes', [$this, 'admin_single_contents']);
-
+        add_action('edit_form_top', array( $this, 'admin_single_subtitle'));
+        add_action('add_meta_boxes', [ $this, 'admin_single_contents' ] );
     }
 
     public static function init() {
@@ -34,13 +32,19 @@ class Job_Application {
 
     public function admin_single_subtitle($post): void
     {
-        if ($post->post_type === 'jobus_applicant') {
-            $candidate_ip = get_post_meta($post->ID, 'candidate_ip', true);
+        if ( $post->post_type === 'jobus_applicant' ) {
+            $candidate_ip = get_post_meta( $post->ID, 'candidate_ip', true );
             ?>
             <p class="jobus-application-submission-info">
                 <span class="jobus-application-submission-date">
-                    <?php esc_html_e('Submitted On ', 'jobus'); ?> <?php echo esc_html( get_the_time(get_option('date_format'))) ?></span>
-                <span class="jobus-applicant-ip"><?php esc_html_e('from IP', 'jobus'); ?> <?php echo esc_html($candidate_ip); ?></span>
+                    <?php 
+                    esc_html_e('Submitted On ', 'jobus' );
+                    echo esc_html( get_the_time(get_option('date_format')));
+                    ?>
+                </span>
+                <span class="jobus-applicant-ip"><?php esc_html_e('from IP', 'jobus' ); ?> 
+                    <?php echo esc_html( $candidate_ip ); ?>
+                </span>
             </p>
             <?php
         }
@@ -48,34 +52,27 @@ class Job_Application {
 
     public function admin_single_contents(): void
     {
-        add_meta_box(
-            'applicant-details-meta-box',
-            esc_html__('Applicant Details', 'jobus'),
-            array($this, 'render_single_contents'),
-            'jobus_applicant'
-        );
+        add_meta_box( 'applicant-details-meta-box', esc_html__( 'Applicant Details', 'jobus' ), array( $this, 'render_single_contents' ), 'jobus_applicant' );
     }
 
     public function render_single_contents($post): void
     {
-
-        if ($post->post_type === 'jobus_applicant') {
+        if ( $post->post_type === 'jobus_applicant' ) {
             require_once plugin_dir_path(__FILE__) . '../templates/meta/applicant-single.php';
         }
-
     }
 
     // Register the post type Applications
     public function register_post_types_applications(): void
     {
         $labels = array(
-            'name'                  => esc_html__('Applications', 'jobus'),
-            'singular_name'         => esc_html__('Application', 'jobus'),
-            'menu_name'             => esc_html__('Applications', 'jobus'),
-            'edit_item'             => esc_html__('Applications', 'jobus'),
-            'search_items'          => esc_html__('Search Applications', 'jobus'),
-            'not_found'             => esc_html__('No Applications found', 'jobus'),
-            'not_found_in_trash'    => esc_html__('No Applications found in Trash', 'jobus'),
+            'name'                  => esc_html__( 'Applications', 'jobus' ),
+            'singular_name'         => esc_html__( 'Application', 'jobus' ),
+            'menu_name'             => esc_html__( 'Applications', 'jobus' ),
+            'edit_item'             => esc_html__( 'Applications', 'jobus' ),
+            'search_items'          => esc_html__( 'Search Applications', 'jobus' ),
+            'not_found'             => esc_html__( 'No Applications found', 'jobus' ),
+            'not_found_in_trash'    => esc_html__( 'No Applications found in Trash', 'jobus' ),
         );
 
         $args = array(
@@ -92,42 +89,41 @@ class Job_Application {
             'rewrite'               => false,
         );
 
-        register_post_type('jobus_applicant', $args); // Register the post-type `jobus_applicant`
+        register_post_type( 'jobus_applicant', $args ); // Register the post-type `jobus_applicant`
     }
 
-    public function job_application_columns($columns): array
+    public function job_application_columns( $columns ): array
     {
 
         return array(
             'cb'                 => '<input type="checkbox" />',
             'applicant_photo'    => '',
-            'title'              => esc_html__('Applicant', 'jobus'),
-            'applicant_id'       => esc_html__('ID', 'jobus'),
-            'job_applied_for'    => esc_html__('Job', 'jobus'),
-            'submission_time'    => esc_html__('Applied on', 'jobus'),
+            'title'              => esc_html__( 'Applicant', 'jobus' ),
+            'applicant_id'       => esc_html__( 'ID', 'jobus' ),
+            'job_applied_for'    => esc_html__( 'Job', 'jobus' ),
+            'submission_time'    => esc_html__( 'Applied on', 'jobus' ),
         );
     }
 
-    public function job_application_columns_data($column, $post_id): void
+    public function job_application_columns_data( $column, $post_id ): void
     {
-
-        switch ($column) {
+        switch( $column ) {
             case 'applicant_photo':
-                $candidate_email = get_post_meta($post_id, 'candidate_email', true);
-                echo get_avatar($candidate_email, 40);
+                $candidate_email = get_post_meta( $post_id, 'candidate_email', true );
+                echo get_avatar( $candidate_email, 40 );
                 break;
             case 'applicant_id':
                 echo esc_html( $post_id );
                 break;
             case 'job_applied_for':
-                $job_id = get_post_meta($post_id, 'job_applied_for_id', true);
-                $job_title = get_post_meta($post_id, 'job_applied_for_title', true);
-                if ($job_id && $job_title) {
-                    echo '<a href="' . esc_url(get_edit_post_link($job_id)) . '">' . esc_html($job_title) . '</a>';
+                $job_id = get_post_meta( $post_id, 'job_applied_for_id', true );
+                $job_title = get_post_meta( $post_id, 'job_applied_for_title', true );
+                if ( $job_id && $job_title ) {
+                    echo '<a href="' . esc_url(get_edit_post_link( $job_id ) ) . '">' . esc_html( $job_title ) . '</a>';
                 }
                 break;
             case 'submission_time':
-                echo get_the_date('', $post_id);
+                echo get_the_date( '', $post_id );
                 break;
         }
     }

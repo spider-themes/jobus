@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Blocks {
 
     public function __construct() {
-
         add_action( 'init', [ $this, 'blocks_init' ] );
 
         // Register Categories
@@ -21,7 +20,6 @@ class Blocks {
         // Register Block Editor and Frontend Assets
         add_action( 'enqueue_block_editor_assets', [ $this, 'register_block_editor_assets' ] );
         add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
-
     }
 
     /**
@@ -61,24 +59,23 @@ class Blocks {
         ) );
     }
 
-
-    public function register_form_block_render($attributes, $content ): bool|string
+    /**
+     * Renders the Register Form block on the frontend.
+     */
+    public function register_form_block_render( $attributes, $content ): bool|string
     {
-
         ob_start();
         $nonce = wp_create_nonce('jobus_register_form_nonce');
 
         if ( is_user_logged_in()) {
-            echo '<p class="text-center mt-10">' . esc_html__('You are already logged in.', 'jobus') . '</p>';
+            echo '<p class="text-center mt-10">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</p>';
         } else {
             include __DIR__ . '/src/register-form/register.php';
             echo '<input type="hidden" name="jobus_nonce" value="' . esc_attr($nonce) . '">';
         }
-
+        
         return ob_get_clean();
-
     }
-
 
     /**
      * Register Block Category
@@ -95,31 +92,32 @@ class Blocks {
             $categories
         );
     }
-
-
+    
+    /**
+     * Register Block Editor Assets
+     */
     public function register_block_editor_assets (): void
     {
-
         // Style's
-        wp_enqueue_style('jobus-block-editor', esc_url( JOBUS_CSS . '/block-editor.css' ), [], JOBUS_VERSION);
+        wp_enqueue_style( 'jobus-block-editor', esc_url( JOBUS_CSS . '/block-editor.css' ), [], JOBUS_VERSION );
 
         // Scripts
-        wp_enqueue_script('fancybox', esc_url(JOBUS_VEND . '/fancybox/fancybox.min.js'), array( 'jquery' ), '3.3.5', ['strategy' => 'defer'] );
-
+        wp_enqueue_script( 'fancybox', esc_url(JOBUS_VEND . '/fancybox/fancybox.min.js'), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
     }
-
-
+    
+    /**
+     * Register Block Assets
+     */
     public function register_block_assets (): void
     {
-
         // Style's
         wp_enqueue_style('jobus-block-frontend', esc_url(JOBUS_CSS . '/block-frontend.css'), [], JOBUS_VERSION);
 
         // Script's
-        wp_enqueue_script('bootstrap', esc_url(JOBUS_VEND . '/bootstrap/bootstrap.min.js'), array( 'jquery' ), '5.1.3', ['strategy' => 'defer'] );
-        wp_enqueue_script('fancybox', esc_url(JOBUS_VEND . '/fancybox/fancybox.min.js'), array( 'jquery' ), '3.3.5', ['strategy' => 'defer'] );
-        wp_enqueue_script('jobus-block', esc_url(JOBUS_JS . '/block-frontend.js'), [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), ['strategy' => 'defer']);
+        wp_enqueue_script( 'bootstrap', esc_url(JOBUS_VEND . '/bootstrap/bootstrap.min.js'), array( 'jquery' ), '5.1.3', [ 'strategy' => 'defer' ] );
 
+        wp_enqueue_script( 'fancybox', esc_url(JOBUS_VEND . '/fancybox/fancybox.min.js'), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
+
+        wp_enqueue_script( 'jobus-block', esc_url(JOBUS_JS . '/block-frontend.js'), [  'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), [ 'strategy' => 'defer' ] );
     }
-
 }

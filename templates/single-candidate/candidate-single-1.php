@@ -8,12 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 $meta           = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
-$banner_shape_1 = jobi_opt( 'banner_shape_1' );
-$banner_shape_2 = jobi_opt( 'banner_shape_2' );
+$banner_shape_1 = function_exists('jobi_opt') ? jobi_opt('banner_shape_1') : false;
+$banner_shape_2 = function_exists('jobi_opt') ? jobi_opt('banner_shape_2') : false;
 
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
-
 ?>
 <div class="inner-banner-one position-relative jobi-single-banner">
     <div class="container">
@@ -38,12 +37,15 @@ wp_enqueue_script( 'lightbox' );
         </div>
     </div>
 	<?php
-	if ( jobi_opt( 'is_banner_shapes' ) == true ) {
-		if ( ! empty( $banner_shape_1['id'] ) ) {
-			echo wp_get_attachment_image( $banner_shape_1['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
+	if ( function_exists('jobi_opt') && jobi_opt('is_banner_shapes') ) {
+		$banner_shape_1_id = isset($banner_shape_1['id']) ? $banner_shape_1['id'] : '';
+		$banner_shape_2_id = isset($banner_shape_2['id']) ? $banner_shape_2['id'] : '';
+
+		if ( ! empty($banner_shape_1_id) ) {
+			echo wp_get_attachment_image( $banner_shape_1_id, 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
 		}
-		if ( ! empty( $banner_shape_2['id'] ) ) {
-			echo wp_get_attachment_image( $banner_shape_2['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_02' ) );
+		if ( ! empty($banner_shape_2_id) ) {
+			echo wp_get_attachment_image( $banner_shape_2_id, 'full', false, array( 'class' => 'lazy-img shapes shape_02' ) );
 		}
 	}
 	?>
@@ -59,11 +61,12 @@ wp_enqueue_script( 'lightbox' );
 						<?php the_content() ?>
                     </div>
 					<?php
-					if ( ! empty( $meta['video_url'] ) ) {
-                        if ( !empty($meta['video_title']) ) { ?>
+					if ( ! empty( $meta['video_url'] ) ) :
+                        if ( !empty($meta['video_title']) ) :
+							?>
                             <h3 class="title"><?php echo esc_html($meta['video_title']) ?></h3>
                             <?php
-                        }
+                        endif;
                         ?>
                         <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ) ?>)">
@@ -73,16 +76,17 @@ wp_enqueue_script( 'lightbox' );
                             </a>
                         </div>
 						<?php
-					}
+					endif;
 
-					if ( $educations ) {
+					if ( $educations ) :
 						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
                             <?php
-                            if ( !empty($meta['education_title']) ) {?>
-                                <h3 class="title"><?php echo esc_html($meta['education_title']) ?></h3>
+                            if ( ! empty( $meta['education_title'] ) ) :
+								?>
+                                <h3 class="title"> <?php echo esc_html($meta['education_title']) ?> </h3>
                                 <?php
-                            }
+                            endif;
                             ?>
                             <div class="time-line-data position-relative pt-15">
 								<?php
@@ -114,7 +118,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
                         </div>
 						<?php
-					}
+					endif;
 
 					if ( is_array( $skills ) ) {
 						?>

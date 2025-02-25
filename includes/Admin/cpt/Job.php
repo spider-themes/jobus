@@ -1,8 +1,7 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit;// Exit if accessed directly
 }
 
@@ -13,12 +12,11 @@ class Job {
     public function __construct() {
 
         // Register the post type
-        add_action('init', [$this, 'register_post_types_job']);
+        add_action( 'init', [ $this, 'register_post_types_job' ] );
     }
 
-
     public static function init() {
-        if (is_null(self::$instance)) {
+        if ( is_null(self::$instance) ) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -27,11 +25,6 @@ class Job {
     // Register the post type Job.
     public function register_post_types_job(): void
     {
-
-        if (post_type_exists('jobus_job')) {
-            return;
-        }
-
         $labels = array(
             'name'                      => esc_html__( 'Jobs', 'jobus' ),
             'singular_name'             => esc_html__( 'Job', 'jobus' ),
@@ -77,12 +70,10 @@ class Job {
             'supports'              => $supports,
             'yarpp_support'         => true,
             'menu_icon'             => 'dashicons-money',
-            'show_admin_column'     => true,
-
+            'show_admin_column'     => true
         );
 
         register_post_type('jobus_job', $args); // Register the posttype `job`
-
 
         // Register post taxonomies Category
         register_taxonomy( 'jobus_job_cat', 'jobus_job', array(
@@ -93,7 +84,7 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Categories', 'jobus'),
+                'name' => esc_html__( 'Categories', 'jobus' ),
             )
         ));
 
@@ -106,7 +97,7 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Location', 'jobus'),
+                'name'  => esc_html__( 'Location', 'jobus' ),
             )
         ));
 
@@ -119,11 +110,8 @@ class Job {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Tags', 'jobus'),
+                'name'  => esc_html__( 'Tags', 'jobus' ),
             )
         ) );
-
-
     }
-
 }

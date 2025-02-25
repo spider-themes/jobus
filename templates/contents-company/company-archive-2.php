@@ -62,11 +62,27 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
+                                        
+                                        <option <?php echo esc_attr($default); ?>>
+                                            <?php esc_html_e( 'Default', 'jobus' ); ?>
+                                        </option>
+
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old ) ?>>
+                                            <?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
+                                        </option>
+
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new ) ?>>
+                                            <?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
+                                        </option>
+                                        
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc ) ?>>
+                                            <?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
+                                        </option>
+
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc ) ?>>
+                                            <?php esc_html_e( 'Title Descending', 'jobus' ); ?>
+                                        </option>
+
                                     </select>
                                 </form>
                             </div>

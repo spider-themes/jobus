@@ -13,7 +13,7 @@
  * Domain Path: /languages
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit; // Exit if accessed directly.
 }
 
@@ -50,7 +50,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             if ( ! $instance ) {
                 $instance = new self();
             }
-
             return $instance;
         }
 
@@ -64,7 +63,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		private function __construct() {
 
             register_activation_hook( __FILE__, [ $this, 'activate' ] );
-            register_deactivation_hook(__FILE__, [$this, 'deactivate'] );
+            register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 
 			$this->define_constants(); // Define constants.
 			$this->load_files(); //Include the required files.
@@ -73,8 +72,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
             // Register the candidate menu for administrators only
-            add_action('init', [$this, 'register_menu']);
-
+            add_action( 'init', [$this, 'register_menu'] );
 		}
 
 		/**
@@ -84,20 +82,19 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function i18n(): void
         {
-
-			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+            load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
-
-
+        
+        /**
+         * Menu register
+         */
         public function register_menu(): void
         {
             register_nav_menus([
                 'candidate_menu' => esc_html__('Candidate Menu', 'jobus'),
             ]);
-
         }
-
-
+        
 		/**
 		 * Include Files
 		 *
@@ -105,16 +102,14 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function load_files(): void
         {
-
             add_action('plugins_loaded', function () {
-                if (!function_exists('is_plugin_active')) {
+                if ( ! function_exists('is_plugin_active') ) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
-                if (is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/Admin/notice/deactivate-plugins.php')) {
+                if ( is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/Admin/notice/deactivate-plugins.php') ) {
                     require_once __DIR__ . '/includes/Admin/notice/deactivate-plugins.php';
                 }
             });
-
 
             // Functions
             require_once __DIR__ . '/includes/functions.php';
@@ -151,9 +146,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 
             //Elementor & Blocks
             require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-
             require_once __DIR__ . '/Blocks.php';
-
 		}
 
         /**
@@ -162,7 +155,6 @@ if ( ! class_exists( 'Jobus' ) ) {
          */
         public function init_plugin(): void
         {
-
             // Classes
             new Jobus\includes\Classes\Ajax_Actions();
 
@@ -187,7 +179,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             //Elementor & Blocks
             new Jobus\Gutenberg\Blocks();
             new jobus\includes\Elementor\Register_Widgets();
-
         }
 
 		/**
@@ -205,16 +196,13 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
 		}
 
-
         /**
          * Activation hook
          */
         public function activate(): void {
-
-            if (!get_option('jobus_installed')) {
+            if ( ! get_option('jobus_installed') ) {
                 update_option('jobus_installed', time());
             }
-
             update_option('jobus_version', JOBUS_VERSION);
         }
 
@@ -226,7 +214,6 @@ if ( ! class_exists( 'Jobus' ) ) {
             delete_option('jobus_version');
         }
 
-
 		/**
 		 * Get the plugin path.
 		 *
@@ -234,15 +221,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function plugin_path(): string
         {
-
 			if ( $this->plugin_path ) {
 				return $this->plugin_path;
 			}
-
 			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-
 		}
-		
 	}
 }
 
@@ -262,5 +245,4 @@ if ( ! function_exists( 'jobus' ) ) {
 
 	// Kick of the plugin
 	jobus();
-
 }

@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit; // Exit if accessed directly
 }
 
@@ -37,11 +37,23 @@ if (is_user_logged_in()) {
                 <div class="user-data-form modal-content">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center">
-                        <h2><?php esc_html_e('Hi, Welcome Back!', 'jobus') ?></h2>
-                        <p><?php esc_html_e('Still don\'t have an account?', 'jobus'); ?>
-                            <a href="<?php echo esc_url(jobi_opt('login_signup_btn_url')) ?>">
-                                <?php echo esc_html(jobi_opt('login_signup_btn_label')) ?>
-                            </a>
+                        <h2> <?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ); ?> </h2>
+                        <p>
+                            <?php 
+                            esc_html_e( 'Still don\'t have an account?', 'jobus' );
+                            if ( function_exists('jobi_opt') ) :
+                                $btn_url    = jobi_opt( 'login_signup_btn_url' ); 
+                                $btn_label  = jobi_opt( 'login_signup_btn_label' );
+                                
+                                if ( ! empty( $btn_url ) && !empty( $btn_label ) ): 
+                                    ?>
+                                    <a href="<?php echo esc_url( $btn_url ); ?>">
+                                        <?php echo esc_html( $btn_label ); ?>
+                                    </a>
+                                    <?php
+                                endif;
+                            endif;
+                            ?>
                         </p>
                     </div>
                     <div class="form-wrapper m-auto">

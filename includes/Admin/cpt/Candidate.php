@@ -1,37 +1,30 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-
-if (!defined('ABSPATH')) {
+if ( ! defined('ABSPATH') ) {
     exit;// Exit if accessed directly
 }
 
-class Candidate {
+class Candidate{
 
     private static $instance = null;
 
     public function __construct() {
-
+        
         // Register the posttype
-        add_action('init', [$this, 'register_post_types_candidates']);
-
+        add_action( 'init', [ $this, 'register_post_types_candidates' ] );
     }
 
     public static function init() {
-        if (is_null(self::$instance)) {
+        if ( is_null(self::$instance) ) {
             self::$instance = new self();
         }
         return self::$instance;
     }
-
-
+    
     // Register the `posttype` Candidates
     public function register_post_types_candidates() {
-
-        if (post_type_exists('jobus_candidate')) {
-            return;
-        }
-
+        
         $labels = array(
             'name'                      => esc_html__( 'Candidates', 'jobus' ),
             'singular_name'             => esc_html__( 'Candidate', 'jobus' ),
@@ -65,19 +58,19 @@ class Candidate {
             'show_ui'               => true,
             'show_in_menu'          => true,
             'query_var'             => true,
-            'rewrite'               => array('slug' => 'jobus_candidate'),
+            'rewrite'               => array( 'slug' => 'jobus_candidate' ),
             'capability_type'       => 'post',
             'has_archive'           => true,
             'hierarchical'          => true,
             'map_meta_cap'          => true,
-            'taxonomies'            => array('jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'),
-            'supports'              => ['title', 'thumbnail', 'editor', 'excerpt', 'author'],
+            'taxonomies'            => array( 'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill' ),
+            'supports'              => [ 'title', 'thumbnail', 'editor', 'excerpt', 'author' ],
             'menu_position'         => 8,
             'menu_icon'             => 'dashicons-plus-alt',
             'show_admin_column'     => true,
         );
 
-        register_post_type('jobus_candidate', $args); // Register the post-type `candidate`
+        register_post_type( 'jobus_candidate', $args ); // Register the post-type `candidate`
 
         // Register post taxonomies Category
         register_taxonomy( 'jobus_candidate_cat', 'jobus_candidate', array(
@@ -88,7 +81,7 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => [
-                'name'  => esc_html__( 'Categories', 'jobus'),
+                'name'  => esc_html__( 'Categories', 'jobus' ),
             ]
         ));
 
@@ -101,8 +94,8 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Location', 'jobus'),
-                'add_new_item'  => esc_html__( 'Add New Location', 'jobus'),
+                'name'          => esc_html__( 'Location', 'jobus' ),
+                'add_new_item'  => esc_html__( 'Add New Location', 'jobus' ),
             )
         ) );
 
@@ -115,11 +108,9 @@ class Candidate {
             'show_in_nav_menus'     => true,
             'show_in_rest'          => true,
             'labels'                => array(
-                'name'  => esc_html__( 'Skills', 'jobus'),
-                'add_new_item'  => esc_html__( 'Add New Skill', 'jobus'),
+                'name'          => esc_html__( 'Skills', 'jobus' ),
+                'add_new_item'  => esc_html__( 'Add New Skill', 'jobus' ),
             )
         ) );
-
     }
-
 }
