@@ -22,7 +22,6 @@
 
         /*======= Job Category ========*/
         jobCategory: function ($scope) {
-
             let sliderWrapper = $scope.find(".category-slider-one");
             if ( sliderWrapper.length > 0 ) {
                 sliderWrapper.slick({

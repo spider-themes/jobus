@@ -123,17 +123,17 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                             <?php
                                                             if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2' ) ) :
                                                                 ?>
-                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2' ) ?></li>
+                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ?></li>
                                                                 <?php
                                                             endif;
 
-                                                            if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_3' ) ) :
+                                                            if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_3' ) ) :
 	                                                            ?>
-                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3' ) ?></li>
+                                                                <li class="text-capitalize"><?php echo jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_3' ) ?></li>
 	                                                            <?php
                                                             endif;
 
-                                                            $locations = get_the_terms(get_the_ID(), 'jobus_job_location' );
+                                                            $locations = get_the_terms( get_the_ID(), 'jobus_job_location' );
                                                             if ( ! empty( $locations ) ) :
                                                                 ?>
                                                                 <li class="text-capitalize">
@@ -141,7 +141,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                                     foreach ( $locations as $location ) :
                                                                         ?>
                                                                         <a href="<?php the_permalink() ?>">
-                                                                            <?php echo esc_html($location->name) ?>
+                                                                            <?php echo esc_html( $location->name ) ?>
                                                                         </a>
                                                                         <?php
                                                                     endforeach;
@@ -158,7 +158,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
 
                                                 <div class="d-sm-flex align-items-center justify-content-between mt-auto">
                                                     <?php 
-                                                    if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1' ) ) :  
+                                                    if ( jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1' ) ) :  
                                                         ?>
                                                         <div class="d-flex align-items-center">
                                                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500 text-capitalize">

@@ -11,13 +11,13 @@ if ( ! defined('ABSPATH') ) {
 
                 $meta_tax = get_term_meta( $cat->term_id, 'jobus_taxonomy_cat', true );
                 $cat_link = get_term_link( $cat ); // More generic than get_category_link()
-                
+
                 // Ensure no errors in the term link
                 if ( is_wp_error( $cat_link ) ) {
                     continue;
                 }
                 ?>
-                
+
                 <div class="card-style-seven bg-color text-center wow fadeInUp category-<?php echo esc_attr( $cat->term_id ); ?>">
                     <a href="<?php echo esc_url( $cat_link ); ?>" class="wrapper d-flex align-items-center">
                         <?php 

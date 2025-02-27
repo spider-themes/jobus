@@ -1,10 +1,7 @@
 ;(function ($) {
-
     'use strict';
 
-
     $(document).ready(function () {
-
 
         //Delete Job Action
         const deleteJob = $('.recent-job-tab .job-action .delete-job');
@@ -21,28 +18,19 @@
                     job_id: jobId,
                     security: jobus_local.nonce
                 },
-
                 success: function (response) {
-
                     console.log(response); // This will help in troubleshooting the server response
-
                     if (response.success) {
                         $('#job-' + jobId).fadeOut(); // Remove the job from the UI
                     } else {
                         alert('hello');
                     }
                 },
-
                 error: function(xhr, status, error) {
                     console.error('Delete failed: ', error);
                 }
-
             })
-
-
         });
-
-
 
         /*
         * Candidate Profile Image
@@ -66,9 +54,6 @@
                 reader.readAsDataURL(file);
             }
         });
-
-
+        
     })
-
-
 })(jQuery);

@@ -66,7 +66,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                             <div class="col-12">
                                 <div class="input-group-meta position-relative mb-20">
                                     <label for="candidate_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobus'); ?></label>
-                                    <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass" placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
+                                    <input type="pasHITTINGsword" name="candidate_confirm_pass" id="candidate_confirm_pass" placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
                                     <span class="placeholder_icon">
                                         <span class="passVicon">
                                             <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
@@ -78,8 +78,14 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
-                                        <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
-                                            <a href="#"><?php esc_html_e('Terms conditions', 'jobus'); ?></a> & <a href="#"><?php esc_html_e('Privacy Policy', 'jobus'); ?></a>
+                                        <label for="remember">
+                                            <?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
+                                            <a href="#">
+                                                <?php esc_html_e('Terms conditions', 'jobus'); ?>
+                                            </a> & 
+                                            <a href="#">
+                                                <?php esc_html_e('Privacy Policy', 'jobus'); ?>
+                                            </a>
                                         </label>
                                     </div>
                                 </div> <!-- /.agreement-checkbox -->

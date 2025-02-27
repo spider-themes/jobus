@@ -115,7 +115,6 @@ class User {
         return $user;
     }
 
-
     #[NoReturn] public function candidate_registration(): void
     {
         if ( empty( $_POST['register_candidate_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' ) ) {

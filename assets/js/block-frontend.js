@@ -1,9 +1,7 @@
 ;(function ($) {
-
     'use strict'
 
     $(document).ready(function () {
-
 
         // Video Popup with FancyBox
         var fancy = $ (".fancybox");
@@ -23,7 +21,6 @@
                 transitionEffect: "zoom-in-out",
             });
         }
-
 
         // Start Company Details page testimonials slider
         function companyTestimonialsSlider() {
@@ -53,8 +50,5 @@
 
         companyTestimonialsSlider(); // End Company Details page testimonials slider
 
-
     });
-
-
 })(jQuery);

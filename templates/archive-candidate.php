@@ -127,7 +127,7 @@ if ( ! empty( $allSliderValues ) ) {
 
             foreach ( $values as $formattedRange ) {
                 // Extract min and max values from the formatted range
-                list( $formattedMin, $formattedMax ) = explode('-', $formattedRange);
+                list( $formattedMin, $formattedMax ) = explode( '-', $formattedRange );
                 if ( empty( $formattedMax ) ) {
                     $formattedMax = [$formattedMin];
                 }
@@ -141,10 +141,10 @@ if ( ! empty( $allSliderValues ) ) {
     }
 
     // Flatten the array
-    $flattenedIds = array_merge(...array_values( $matchedIds ));
+    $flattenedIds   = array_merge(...array_values( $matchedIds ));
 
     // Remove duplicates
-    $uniqueIds = array_unique( $flattenedIds );
+    $uniqueIds      = array_unique( $flattenedIds );
 
     /**
      * Merge searched ids with tax- & meta-queries ids
@@ -153,17 +153,17 @@ if ( ! empty( $allSliderValues ) ) {
 }
 
 if ( isset( $result_ids ) ) {
-    $args['post__in'] = array_map('absint', $result_ids );
+    $args['post__in'] = array_map( 'absint', $result_ids );
 }
 
 $search_type = ! empty( $_GET[ 'search_type' ] ) ? sanitize_text_field( $_GET['search_type']) : '';
-$company_ids = ! empty( $_GET[ 'company_ids' ] ) ? array_map('absint', explode(',', sanitize_text_field( $_GET['company_ids']))) : [];
+$company_ids = ! empty( $_GET[ 'company_ids' ] ) ? array_map( 'absint', explode( ',', sanitize_text_field( $_GET['company_ids'] ) ) ) : [];
 if ( $search_type == 'company_search' && $company_ids ) {
     $args['post__in'] = $company_ids;
 }
 
-$candidate_query = new WP_Query($args);
-$candidate_archive_layout = $jobus_candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
+$candidate_query            = new WP_Query($args);
+$candidate_archive_layout   = $jobus_candidate_archive_layout ?? jobus_opt( 'candidate_archive_layout' );
 
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-' . $candidate_archive_layout . '.php';
@@ -172,5 +172,5 @@ get_footer();
 
 //Sidebar Popup
 if ( $candidate_archive_layout == '2' ) {
-    jobus_get_template_part('contents-candidate/sidebar-search-filter-popup');
+    jobus_get_template_part( 'contents-candidate/sidebar-search-filter-popup' );
 }

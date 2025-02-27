@@ -3,7 +3,6 @@
 
     $(document).ready(function () {
 
-
         /**
          * Copy URL to clipboard
          * @param text
@@ -17,14 +16,11 @@
             document.body.removeChild(textarea);
         }
 
-
         // Nice Select for search form
         let niceSelect = $('.nice-select');
         if (niceSelect.length > 0) {
             niceSelect.niceSelect();
         }
-
-
 
         /**
          * Search Keywords
@@ -37,11 +33,9 @@
             $('#searchInput').val(content).focus();
             fetchResults();
         });
-
-
+        
         // Related Job Post slider
         function relatedPost() {
-
             let relatedJobSlider = $('.related-job-slider');
             let dataRtlrelated = relatedJobSlider.data("rtl");
             if (relatedJobSlider.length > 0) {
@@ -68,15 +62,11 @@
                     }]
                 });
             }
-
         }
-
         relatedPost(); // end Related Job Post slider
-
 
         // Testimonial slider
         function testimonialSlider() {
-
             let reviewSlider = $('.company-review-slider');
             let dataRtlreview = reviewSlider.data("rtl");
             if (reviewSlider.length > 0) {
@@ -98,9 +88,7 @@
                 });
             }
         }
-
         testimonialSlider(); // end Testimonial slider
-
 
         // Range Slider for Salary filter
         function salaryRangeSlider(selector) {
@@ -155,12 +143,9 @@
         salaryRangeSlider(".salary-slider");
         // end Range Slider for Salary filter
 
-
         // Job Category Show More Items
         function jobCategoryShowMoreItems() {
-
             let moreBtn = $(".more-btn");
-
             if(moreBtn.length > 0) {
                 moreBtn.on("click", function() {
                     let showMore = $(this).siblings('ul').toggleClass("show");
@@ -173,11 +158,7 @@
                 });
             }
         }
-
         jobCategoryShowMoreItems(); // end jobCategoryShowMoreItems
-
-
-
 
         // Copy URL to clipboard
         function copyButton() {
@@ -191,17 +172,13 @@
 
                     // Copy the URL to the clipboard
                     copyToClipboard(currentPageURL);
-
                 });
             }
         }
-
         copyButton(); // end copyButton click event
-
 
         //============== Candidate Portfolio Slider ================//
         function candidatePortfolio() {
-
             let portfolioSlider = $('.candidate-portfolio-slider');
             let dataRtlprofile = portfolioSlider.data("rtl");
             if( portfolioSlider.length ) {
@@ -231,11 +208,8 @@
                     ]
                 });
             }
-
         }
-
         candidatePortfolio()//End Candidate Portfolio Slider
 
     });
-
 })(jQuery);

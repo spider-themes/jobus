@@ -462,11 +462,11 @@ function jobus_search_terms( string $terms ): array
     $result = [];
 
     // Verify the nonce before processing the request
-    if (!empty( $_GET[ 'jobus_filter_nonce' ] ) && wp_verify_nonce( sanitize_text_field( $_GET['jobus_filter_nonce']), 'jobus_filter_nonce' ) ) {
+    if ( ! empty( $_GET[ 'jobus_filter_nonce' ] ) && wp_verify_nonce( sanitize_text_field( $_GET['jobus_filter_nonce']), 'jobus_filter_nonce' ) ) {
 
         // Check if the parameter is set in the URL and sanitize the input
-        if (isset( $_GET[$terms]) ) {
-            $raw_terms = $_GET[$terms];
+        if (isset( $_GET[$terms] ) ) {
+            $raw_terms = $_GET[$terms] ?? '';
 
             // If it's an array, sanitize each element, otherwise sanitize the single value
             if (is_array( $raw_terms) ) {
@@ -475,12 +475,9 @@ function jobus_search_terms( string $terms ): array
                 $result = [sanitize_text_field( $raw_terms)];
             }
         }
-
     }
-
     return $result;
 }
-
 
 /**
  * Jobus search meta
@@ -621,7 +618,7 @@ function jobus_all_range_field_value (): array
             $filter_widgets = jobus_opt('job_sidebar_widgets');
             $search_widgets = [];
 
-            if (isset( $filter_widgets) && is_array( $filter_widgets) ) {
+            if (isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
                 foreach ( $filter_widgets as $widget ) {
                     if ( $widget[ 'widget_layout' ] == 'range') {
                         // if get value in search bar
