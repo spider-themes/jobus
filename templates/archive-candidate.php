@@ -62,10 +62,6 @@ if ( ! empty( $_GET[ 'candidate_locations' ] ) ) {
     );
 }
 
-/*if ( ! empty( $result_ids ) ) {
-    $args[ 'post__in' ] = $result_ids;
-}*/
-
 
 // Range fields value
 $filter_widgets = jobus_opt( 'job_sidebar_widgets' );

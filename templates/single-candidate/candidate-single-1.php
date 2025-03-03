@@ -1,5 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 /**
  * The template for displaying titlebar
@@ -63,34 +65,35 @@ wp_enqueue_script( 'lightbox' );
 
 					<?php
 					if ( ! empty( $meta['video_url'] ) ) :
-                        
+
 						if ( ! empty( $meta['video_title'] ) ) :
 							?>
                             <h3 class="title"><?php echo esc_html( $meta['video_title'] ); ?></h3>
-                            <?php
-                        endif;
-                        ?>
+						<?php
+						endif;
+						?>
 
-                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50" style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ); ?>)">
+                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                             style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ); ?>)">
                             <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
                                href="<?php echo esc_url( $meta['video_url'] ); ?>">
                                 <i class="bi bi-play"></i>
                             </a>
                         </div>
-						<?php
+					<?php
 					endif;
 
 					if ( $educations ) :
 						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            
+
 							<?php
-                            if ( ! empty( $meta['education_title'] ) ) :
+							if ( ! empty( $meta['education_title'] ) ) :
 								?>
                                 <h3 class="title"> <?php echo esc_html( $meta['education_title'] ); ?> </h3>
-                                <?php
-                            endif;
-                            ?>
+							<?php
+							endif;
+							?>
 
                             <div class="time-line-data position-relative pt-15">
 								<?php
@@ -103,35 +106,35 @@ wp_enqueue_script( 'lightbox' );
 											?>
                                             <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center">
 												<?php echo esc_html( $item['sl_num'] ); ?>
-											</div>
-											<?php
+                                            </div>
+										<?php
 										endif;
 
 										if ( ! empty( $item['title'] ) ) :
 											?>
                                             <div class="text_1 fw-500">
 												<?php echo esc_html( $item['title'] ); ?>
-											</div>
-											<?php
+                                            </div>
+										<?php
 										endif;
 
 										if ( ! empty( $item['academy'] ) ) :
-										 	?>
+											?>
                                             <h4> <?php echo esc_html( $item['academy'] ); ?> </h4>
-											<?php
+										<?php
 										endif;
-										
+
 										if ( ! empty( $item['description'] ) ) {
 											echo wp_kses_post( wpautop( $item['description'] ) );
 										}
 										?>
                                     </div>
-									<?php
+								<?php
 								endforeach;
 								?>
                             </div>
                         </div>
-						<?php
+					<?php
 					endif;
 
 					if ( is_array( $skills ) ) :
@@ -146,20 +149,20 @@ wp_enqueue_script( 'lightbox' );
 								?>
                             </ul>
                         </div>
-						<?php
+					<?php
 					endif;
 
 					if ( $experience ) {
 						?>
                         <div class="inner-card border-style mb-60 lg-mb-50">
-                            
+
 							<?php
-                            if ( ! empty( $meta['experience_title'] ) ) :
+							if ( ! empty( $meta['experience_title'] ) ) :
 								?>
                                 <h3 class="title"><?php echo esc_html( $meta['experience_title'] ); ?></h3>
-                                <?php
-                            endif;
-                            ?>
+							<?php
+							endif;
+							?>
 
                             <div class="time-line-data position-relative pt-15">
 								<?php
@@ -171,23 +174,23 @@ wp_enqueue_script( 'lightbox' );
 											?>
                                             <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center">
 												<?php echo esc_html( $item['sl_num'] ); ?>
-											</div>
-											<?php
+                                            </div>
+										<?php
 										endif;
-										
+
 										if ( ! empty( $item['start_date'] ) ) :
 											?>
                                             <div class="text_1 fw-500">
 												<?php echo esc_html( $item['start_date'] ); ?>
                                                 - <?php echo esc_html( $item['end_date'] ); ?>
-											</div>
-											<?php
+                                            </div>
+										<?php
 										endif;
-										
+
 										if ( ! empty( $item['title'] ) ) :
 											?>
                                             <h4> <?php echo esc_html( $item['title'] ); ?> </h4>
-											<?php
+										<?php
 										endif;
 
 										if ( ! empty( $item['description'] ) ) {
@@ -195,7 +198,7 @@ wp_enqueue_script( 'lightbox' );
 										}
 										?>
                                     </div>
-									<?php
+								<?php
 								endforeach;
 								?>
                             </div>
@@ -204,13 +207,13 @@ wp_enqueue_script( 'lightbox' );
 					}
 
 					if ( $portfolio_ids ) :
-                        
+
 						if ( ! empty( $meta['portfolio_title'] ) ) :
 							?>
                             <h3 class="title"> <?php echo esc_html( $meta['portfolio_title'] ); ?> </h3>
-                            <?php
-                        endif;
-                        ?>
+						<?php
+						endif;
+						?>
 
                         <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr( jobus_rtl() ); ?>">
 							<?php
@@ -222,12 +225,12 @@ wp_enqueue_script( 'lightbox' );
 										<?php echo wp_get_attachment_image( $item, 'jobus_280x268' ); ?>
                                     </a>
                                 </div>
-								<?php
+							<?php
 							endforeach;
 							?>
                         </div>
 
-						<?php
+					<?php
 					endif;
 					?>
                 </div>
@@ -237,8 +240,8 @@ wp_enqueue_script( 'lightbox' );
                 <div class="cadidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
 
                     <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
-                        
-						<div class="pt-25">
+
+                        <div class="pt-25">
                             <div class="cadidate-avatar m-auto">
 								<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle w-100' ] ); ?>
                             </div>
@@ -260,7 +263,7 @@ wp_enqueue_script( 'lightbox' );
 								<?php
 								foreach ( $specifications as $field ) :
 									$meta_name = $field['meta_name'] ?? '';
-									$meta_key  = $field['meta_key'] ?? '';
+									$meta_key = $field['meta_key'] ?? '';
 
 									// Get the stored meta-values
 									$meta_options = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
@@ -283,7 +286,7 @@ wp_enqueue_script( 'lightbox' );
 											}
 											?>
                                         </li>
-										<?php
+									<?php
 									endif;
 								endforeach;
 
@@ -300,13 +303,13 @@ wp_enqueue_script( 'lightbox' );
                                                     <a href="<?php echo esc_url( $item['url'] ); ?>" class="me-3">
                                                         <i class="<?php echo esc_attr( $item['icon'] ); ?>"></i>
                                                     </a>
-													<?php
+												<?php
 												endif;
 											endforeach;
 											?>
                                         </div>
                                     </li>
-									<?php
+								<?php
 								endif;
 								?>
                             </ul>
@@ -314,15 +317,15 @@ wp_enqueue_script( 'lightbox' );
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
 								<?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
-							<?php
+						<?php
 						endif;
 						?>
                     </div>
 
 					<?php
-					$location = $meta['jobus_candidate_location'] ?? '';
+					$location            = $meta['jobus_candidate_location'] ?? '';
 					if ( is_array( $location ) ) :
-						$latitude        = $location['latitude'] ?? '';
+						$latitude = $location['latitude'] ?? '';
 						$longitude       = $location['longitude'] ?? '';
 						$address_encoded = urlencode( $location['address'] ); // URL encode the address for safety
 
@@ -335,27 +338,28 @@ wp_enqueue_script( 'lightbox' );
                                 <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
-						<?php
+					<?php
 					endif;
-                    ?>
+					?>
 
                     <h4 class="sidebar-title">
 						<?php esc_html_e( 'Email to ', 'jobus' ); ?>
 						<?php the_title(); ?>
-					</h4>
+                    </h4>
 
                     <div class="email-form bg-wrapper bg-color">
 
-                       <?php echo wpautop( esc_html__( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ); ?>
+						<?php echo wpautop( esc_html__( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ); ?>
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
-                            <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
+							<?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
 
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name" autocomplete="on" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ); ?>" required>
+                                <input type="text" name="sender_name" id="sender_name" autocomplete="on" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ); ?>"
+                                       required>
                             </div>
 
                             <div class="d-sm-flex mb-25">

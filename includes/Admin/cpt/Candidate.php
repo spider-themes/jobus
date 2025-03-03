@@ -24,7 +24,6 @@ class Candidate{
     
     // Register the `posttype` Candidates
     public function register_post_types_candidates() {
-        
         $labels = array(
             'name'                      => esc_html__( 'Candidates', 'jobus' ),
             'singular_name'             => esc_html__( 'Candidate', 'jobus' ),
