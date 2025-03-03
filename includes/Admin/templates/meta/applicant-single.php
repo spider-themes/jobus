@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -12,18 +12,18 @@ $candidate_message  = esc_attr( get_post_meta( $post->ID, 'candidate_message', t
 $candidate_cv       = esc_attr( get_post_meta( $post->ID, 'candidate_cv', true ) );
 
 // Get the URL of the CV file
-$candidate_cv_url   = $candidate_cv ? wp_get_attachment_url($candidate_cv) : '';
+$candidate_cv_url   = $candidate_cv ? wp_get_attachment_url( $candidate_cv ) : '';
 
 // Function to format file size
-function jobus_job_application_format_size_units($bytes): string
+function jobus_job_application_format_size_units( $bytes ): string
 {
-    if ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . ' MB';
-    } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . ' KB';
-    } elseif ($bytes > 1) {
+    if ( $bytes >= 1048576) {
+        $bytes = number_format( $bytes / 1048576, 2) . ' MB';
+    } elseif ( $bytes >= 1024) {
+        $bytes = number_format( $bytes / 1024, 2) . ' KB';
+    } elseif ( $bytes > 1) {
         $bytes = $bytes . ' bytes';
-    } elseif ($bytes == 1) {
+    } elseif ( $bytes == 1) {
         $bytes = $bytes . ' byte';
     } else {
         $bytes = '0 bytes';
@@ -33,10 +33,10 @@ function jobus_job_application_format_size_units($bytes): string
 
 // Get the file size
 $file_size = '';
-if ($candidate_cv_url) {
-    $file_path = get_attached_file($candidate_cv);
-    if (file_exists($file_path)) {
-        $file_size = jobus_job_application_format_size_units(filesize($file_path));
+if ( $candidate_cv_url ) {
+    $file_path = get_attached_file( $candidate_cv );
+    if (file_exists( $file_path ) ) {
+        $file_size = jobus_job_application_format_size_units(filesize( $file_path ) );
     }
 }
 ?>
@@ -44,7 +44,7 @@ if ($candidate_cv_url) {
 <div class="jobus-application-container jobus-clearfix">
     <div class="applicant-image-details">
         <div class="applicant-image">
-            <?php echo get_avatar( $candidate_email, 150, '', $candidate_fname ) ?>
+            <?php echo get_avatar( $candidate_email, 150, '', $candidate_fname ); ?>
         </div>
         <?php 
         if ( $candidate_cv_url ) : 
@@ -54,7 +54,7 @@ if ($candidate_cv_url) {
                 <?php 
                 if ( $file_size ) : 
                     ?>
-                    <span><?php echo 'PDF(' . esc_html( $file_size ) . ')'; ?></span>
+                    <span><?php echo 'PDF( ' . esc_html( $file_size ) . ' )'; ?></span>
                     <?php 
                 endif; 
                 ?>
@@ -68,19 +68,19 @@ if ($candidate_cv_url) {
         <ul class="details-list">
             <li>
                 <label><?php esc_html_e( 'Name', 'jobus' ); ?></label>
-                <span><?php echo esc_html($candidate_fname . ' ' . $candidate_lname) ?></span>
+                <span><?php echo esc_html( $candidate_fname . ' ' . $candidate_lname ); ?></span>
             </li>
             <li>
                 <label><?php esc_html_e( 'Phone', 'jobus' ); ?></label>
-                <span><?php echo esc_html($candidate_phone) ?></span>
+                <span><?php echo esc_html( $candidate_phone ); ?></span>
             </li>
             <li>
                 <label><?php esc_html_e( 'Email', 'jobus' ); ?></label>
-                <span><?php echo esc_html($candidate_email) ?></span>
+                <span><?php echo esc_html( $candidate_email ); ?></span>
             </li>
             <li>
                 <label><?php esc_html_e( 'Cover Letter', 'jobus' ); ?></label>
-                <p><?php echo wp_kses_post($candidate_message) ?></p>
+                <p><?php echo wp_kses_post( $candidate_message ); ?></p>
             </li>
         </ul>
     </div>

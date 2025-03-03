@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;// Exit if accessed directly
 }
 
@@ -20,7 +20,7 @@ class Company{
     }
 
     public static function init() {
-        if ( is_null(self::$instance) ) {
+        if ( is_null(self::$instance ) ) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -89,7 +89,7 @@ class Company{
             'labels'                => [
                 'name'  => esc_html__( 'Categories', 'jobus' ),
             ]
-        ));
+        ) );
 
         register_taxonomy( 'jobus_company_location', 'jobus_company', array(
             'public'                => true,
@@ -101,17 +101,17 @@ class Company{
             'labels'                => [
                 'name'  => esc_html__( 'Location', 'jobus' ),
             ]
-        ));
+        ) );
     }
 
     // Admin Columns
     public function company_columns( $columns ) {
 
-        if ( empty( $columns ) && !is_array( $columns ) ) {
+        if ( empty( $columns ) && ! is_array( $columns ) ) {
             $columns = [];
         }
 
-        unset($columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat']);
+        unset( $columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat'] );
 
         $show_columns           = [];
         $show_columns['cb']     = '<input type="checkbox" />';

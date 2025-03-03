@@ -13,7 +13,7 @@ use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use WP_Query;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -30,7 +30,7 @@ class Job_Tabs extends Widget_Base {
 
     public function get_title (): string
     {
-        return esc_html__('Job Tabs (Jobus)', 'jobus');
+        return esc_html__( 'Job Tabs (Jobus)', 'jobus' );
     }
 
     public function get_icon (): string
@@ -81,7 +81,7 @@ class Job_Tabs extends Widget_Base {
         //============================= Filter Options ================================//
         $this->start_controls_section(
             'filter_sec', [
-                'label' => esc_html__('Filter', 'jobus'),
+                'label' => esc_html__( 'Filter', 'jobus' ),
             ]
         );
 
@@ -96,8 +96,8 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'cats', [
-                'label' => esc_html__('Category', 'jobus'),
-                'description' => esc_html__('Display job by categories', 'jobus'),
+                'label' => esc_html__( 'Category', 'jobus' ),
+                'description' => esc_html__( 'Display job by categories', 'jobus' ),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobus_get_categories(),
                 'multiple' => true,
@@ -107,7 +107,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'show_count', [
-                'label' => esc_html__('Show Posts Count', 'jobus'),
+                'label' => esc_html__( 'Show Posts Count', 'jobus' ),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 3
             ]
@@ -115,7 +115,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'order', [
-                'label' => esc_html__('Order', 'jobus'),
+                'label' => esc_html__( 'Order', 'jobus' ),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'ASC' => 'ASC',
@@ -127,14 +127,14 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'orderby', [
-                'label' => esc_html__('Order By', 'jobus'),
+                'label' => esc_html__( 'Order By', 'jobus' ),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'none' => 'None',
                     'ID' => 'ID',
                     'author' => 'Author',
                     'title' => 'Title',
-                    'name' => 'Name (by post slug)',
+                    'name' => 'Name (by post slug )',
                     'date' => 'Date',
                     'rand' => 'Random',
                 ],
@@ -144,7 +144,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'title_length', [
-                'label' => esc_html__('Title Length', 'jobus'),
+                'label' => esc_html__( 'Title Length', 'jobus' ),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 6
             ]
@@ -152,8 +152,8 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'exclude', [
-                'label' => esc_html__('Exclude Job', 'jobus'),
-                'description' => esc_html__('Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus'),
+                'label' => esc_html__( 'Exclude Job', 'jobus' ),
+                'description' => esc_html__( 'Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus' ),
                 'type' => Controls_Manager::TEXT,
             ]
         );
@@ -175,13 +175,13 @@ class Job_Tabs extends Widget_Base {
         //============================= Job Attributes ================================//
         $this->start_controls_section(
             'job_attrs_sec', [
-                'label' => esc_html__('Job Attributes', 'jobus'),
+                'label' => esc_html__( 'Job Attributes', 'jobus' ),
             ]
         );
 
         $this->add_control(
             'job_attr_meta_1', [
-                'label' => esc_html__('Attribute 01', 'jobus'),
+                'label' => esc_html__( 'Attribute 01', 'jobus' ),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobus_get_specs(),
             ]
@@ -189,7 +189,7 @@ class Job_Tabs extends Widget_Base {
 
         $this->add_control(
             'job_attr_meta_2', [
-                'label' => esc_html__('Attribute 02', 'jobus'),
+                'label' => esc_html__( 'Attribute 02', 'jobus' ),
                 'type' => Controls_Manager::SELECT2,
                 'options' => jobus_get_specs(),
             ]
@@ -226,21 +226,21 @@ class Job_Tabs extends Widget_Base {
      */
     protected function render () {
         $settings = $this->get_settings_for_display();
-        extract($settings); //extract all settings array to variables converted to name of key
+        extract( $settings ); //extract all settings array to variables converted to name of key
 
         // Get the post count for the 'jobus_job' post type
-        $post_count = wp_count_posts('jobus_job');
+        $post_count = wp_count_posts( 'jobus_job' );
 
         // Get the total count
         $total_count = $post_count->publish;
 
         // Format the count based on post count requirements
-        if ($total_count < 10) {
+        if ( $total_count < 10) {
             $formatted_count = $total_count;
-        } elseif ($total_count >= 10 && $total_count <= 999) {
-            $formatted_count = floor($total_count / 10) * 10 . '+';
+        } elseif ( $total_count >= 10 && $total_count <= 999) {
+            $formatted_count = floor( $total_count / 10) * 10 . '+';
         } else {
-            $formatted_count = floor($total_count / 1000) . 'K+';
+            $formatted_count = floor( $total_count / 1000) . 'K+';
         }
 
         $args = [
@@ -248,23 +248,23 @@ class Job_Tabs extends Widget_Base {
             'post_status' => 'publish',
         ];
 
-        if (!empty($show_count)) {
+        if ( ! empty( $show_count ) ) {
             $args['posts_per_page'] = $show_count;
         }
 
-        if (!empty($order)) {
+        if ( ! empty( $order ) ) {
             $args['order'] = $order;
         }
 
-        if (!empty($orderby)) {
+        if ( ! empty( $orderby ) ) {
             $args['orderby'] = $orderby;
         }
 
-        if (!empty($exclude)) {
+        if ( ! empty( $exclude ) ) {
             $args['post__not_in'] = $exclude;
         }
 
-        if (!empty($cats)) {
+        if ( ! empty( $cats ) ) {
             $args['tax_query'] = [
                 [
                     'taxonomy' => 'jobus_job_cat',
@@ -275,7 +275,7 @@ class Job_Tabs extends Widget_Base {
             ];
         }
 
-        $posts = new WP_Query($args);
+        $posts = new WP_Query( $args );
 
         //================= Template Parts =================//
         include "templates/job-tabs/job-tab-1.php";

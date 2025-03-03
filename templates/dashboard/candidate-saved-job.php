@@ -2,27 +2,23 @@
 // Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
 ?>
-
 <style>
-
     header, footer, .inner-banner-one {
         display: none;
     }
     .page_wrapper {
         padding: 0;
     }
-
     .page_wrapper .container {
         max-width: 100%;
     }
-
 </style>
 
 <aside class="dash-aside-navbar">
     <div class="position-relative">
         <div class="logo text-md-center d-md-block d-flex align-items-center justify-content-between">
 
-            <a href="<?php esc_url(home_url('/')) ?>">
+            <a href="<?php esc_url( home_url( '/' ) ); ?>">
                 <img src="images/logo_01.png" alt="">
             </a>
 
@@ -32,13 +28,13 @@ $user = wp_get_current_user();
         <div class="user-data">
 
             <div class="user-avatar online position-relative rounded-circle">
-                <?php echo get_avatar($user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img']) ?>
+                <?php echo get_avatar( $user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img'] ); ?>
             </div>
 
             <!-- /.user-avatar -->
             <div class="user-name-data">
                 <button class="user-name dropdown-toggle" type="button" id="profile-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                    <?php echo esc_html($user->display_name) ?>
+                    <?php echo esc_html( $user->display_name ); ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                     <li>
@@ -64,9 +60,8 @@ $user = wp_get_current_user();
         </div>
 
         <?php
-        if (has_nav_menu('candidate_menu')) {
-
-            wp_nav_menu([
+        if ( has_nav_menu( 'candidate_menu' ) ) {
+            wp_nav_menu( [
                 'menu'              => 'candidate_menu',
                 'theme_location'    => 'candidate_menu',
                 'container'         => 'nav',
@@ -75,7 +70,7 @@ $user = wp_get_current_user();
                 'fallback_cb'       => false,
                 'depth'             => 1,
                 'walker'            => new \Jobus\Classes\Nav_Walker(),
-            ]);
+            ] );
         }
         ?>
 
@@ -190,8 +185,11 @@ $user = wp_get_current_user();
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_18.svg" alt="" class="lazy-img"> View</a></li>
+                                
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_19.svg" alt="" class="lazy-img"> Share</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_20.svg" alt="" class="lazy-img"> Edit</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_21.svg" alt="" class="lazy-img"> Delete</a></li>
                             </ul>
                         </div>
@@ -227,8 +225,11 @@ $user = wp_get_current_user();
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_18.svg" alt="" class="lazy-img"> View</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_19.svg" alt="" class="lazy-img"> Share</a></li>
+                                
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_20.svg" alt="" class="lazy-img"> Edit</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_21.svg" alt="" class="lazy-img"> Delete</a></li>
                             </ul>
                         </div>
@@ -264,8 +265,11 @@ $user = wp_get_current_user();
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_18.svg" alt="" class="lazy-img"> View</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_19.svg" alt="" class="lazy-img"> Share</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_20.svg" alt="" class="lazy-img"> Edit</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_21.svg" alt="" class="lazy-img"> Delete</a></li>
                             </ul>
                         </div>
@@ -301,8 +305,11 @@ $user = wp_get_current_user();
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_18.svg" alt="" class="lazy-img"> View</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_19.svg" alt="" class="lazy-img"> Share</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_20.svg" alt="" class="lazy-img"> Edit</a></li>
+
                                 <li><a class="dropdown-item" href="#"><img src="../images/lazy.svg" data-src="images/icon/icon_21.svg" alt="" class="lazy-img"> Delete</a></li>
                             </ul>
                         </div>
@@ -323,23 +330,28 @@ $user = wp_get_current_user();
                 <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
             </ul>
         </div>
+
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
             <div class="remove-account-popup text-center modal-content">
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                 <img src="../images/lazy.svg" data-src="images/icon/icon_22.svg" alt="" class="lazy-img m-auto">
+
                 <h2>Are you sure?</h2>
                 <p>Are you sure to delete your account? All data will be lost.</p>
+
                 <div class="button-group d-inline-flex justify-content-center align-items-center pt-15">
                     <a href="#" class="confirm-btn fw-500 tran3s me-3">Yes</a>
                     <button type="button" class="btn-close fw-500 ms-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
                 </div>
+
             </div>
         </div>
     </div>

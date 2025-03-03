@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -12,9 +12,9 @@ if( class_exists( 'CSF' ) ) {
 
 	// Create options
 	CSF::createOptions( $settings_prefix, array(
-		'menu_title' => esc_html__( 'Settings', 'jobus'),
+		'menu_title' => esc_html__( 'Settings', 'jobus' ),
 		'menu_slug'  => 'jobus-settings',
-		'framework_title'  => esc_html__( 'Jobus', 'jobus') . '<span> ' . JOBUS_VERSION . '</span>',
+		'framework_title'  => esc_html__( 'Jobus', 'jobus' ) . '<span> ' . JOBUS_VERSION . '</span>',
 		'menu_type'   => 'submenu',
 		'menu_parent' => 'edit.php?post_type=jobus_job',
 		'theme'           => 'dark',
@@ -31,25 +31,25 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'      => 'job_posts_per_page',
                 'type'    => 'number',
-                'title'   => esc_html__('Posts Per Page (Job)', 'jobus'),
+                'title'   => esc_html__( 'Posts Per Page (Job)', 'jobus' ),
                 'default' => -1,
-                'desc'   => esc_html__('Set the value to \'-1\' to display all job posts.', 'jobus'),
+                'desc'   => esc_html__( 'Set the value to \'-1\' to display all job posts.', 'jobus' ),
             ),
 
             array(
                 'id'      => 'company_posts_per_page',
                 'type'    => 'number',
-                'title'   => esc_html__('Posts Per Page (Company)', 'jobus'),
+                'title'   => esc_html__( 'Posts Per Page (Company)', 'jobus' ),
                 'default' => -1,
-                'desc'   => esc_html__('Set the value to \'-1\' to display all company posts.', 'jobus'),
+                'desc'   => esc_html__( 'Set the value to \'-1\' to display all company posts.', 'jobus' ),
             ),
 
             array(
                 'id'      => 'candidate_posts_per_page',
                 'type'    => 'number',
-                'title'   => esc_html__('Posts Per Page (Candidate)', 'jobus'),
+                'title'   => esc_html__( 'Posts Per Page (Candidate )', 'jobus' ),
                 'default' => -1,
-                'desc'   => esc_html__('Set the value to \'-1\' to display all candidate posts.', 'jobus'),
+                'desc'   => esc_html__( 'Set the value to \'-1\' to display all candidate posts.', 'jobus' ),
             ),
         )
     ) );
@@ -108,10 +108,10 @@ if( class_exists( 'CSF' ) ) {
                     array(
                         'id'         => 'is_meta_icon',
                         'type'       => 'button_set',
-                        'title'      => esc_html__('Meta Options (Icon/Image)', 'jobus'),
+                        'title'      => esc_html__( 'Meta Options (Icon/Image )', 'jobus' ),
                         'options'    => array(
-                            'meta_icon'  => esc_html__('Icon', 'jobus'),
-                            'meta_image' => esc_html__('Image', 'jobus')
+                            'meta_icon'  => esc_html__( 'Icon', 'jobus' ),
+                            'meta_image' => esc_html__( 'Image', 'jobus' )
                         ),
                     ),
 
@@ -119,17 +119,17 @@ if( class_exists( 'CSF' ) ) {
                     array(
                         'id'            => 'meta_icon',
                         'type'          => 'icon',
-                        'title'         => esc_html__( 'Icon (Optional)', 'jobus' ),
+                        'title'         => esc_html__( 'Icon (Optional )', 'jobus' ),
                         'placeholder'   => esc_html__( 'Select icon', 'jobus' ),
-                        'dependency'    => array('is_meta_icon', '==', 'meta_icon'),
+                        'dependency'    => array( 'is_meta_icon', '==', 'meta_icon' ),
                     ),
 
                     array(
                         'id'            => 'meta_image',
                         'type'          => 'media',
-                        'title'         => esc_html__( 'Image (Optional)', 'jobus' ),
+                        'title'         => esc_html__( 'Image (Optional )', 'jobus' ),
                         'placeholder'   => esc_html__( 'Upload a Image', 'jobus' ),
-                        'dependency'    => array('is_meta_icon', '==', 'meta_image'),
+                        'dependency'    => array( 'is_meta_icon', '==', 'meta_image' ),
                     )
                 )
             )// End job specifications
@@ -155,18 +155,18 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Page Layout', 'jobus'),
+                'content' => esc_html__( 'Job Page Layout', 'jobus' ),
             ),
 
             array(
                 'id'        => 'job_archive_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobus'),
-                'subtitle'  => esc_html__('Select the preferred layout for your job page across the entire website.', 'jobus'),
+                'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+                'subtitle'  => esc_html__( 'Select the preferred layout for your job page across the entire website.', 'jobus' ),
                 'options'   => array(
-                    '1' => esc_url(JOBUS_IMG . '/layout/job/archive-layout-1.png'),
-                    '2' => esc_url(JOBUS_IMG . '/layout/job/archive-layout-2.png'),
-                    '3' => esc_url(JOBUS_IMG . '/layout/job/archive-layout-3.png'),
+                    '1' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-1.png' ),
+                    '2' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-2.png' ),
+                    '3' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-3.png' ),
                 ),
                 'default'   => '1'
             ),
@@ -184,16 +184,16 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Attributes', 'jobus'),
+                'content' => esc_html__( 'Job Attributes', 'jobus' ),
             ),
 
             array(
                 'id'         => 'job_archive_attr_layout',
                 'type'       => 'button_set',
-                'title'      => esc_html__('Content Layout', 'jobus'),
+                'title'      => esc_html__( 'Content Layout', 'jobus' ),
                 'options'    => array(
-                    'list'  => esc_html__('List', 'jobus'),
-                    'grid'  => esc_html__('Grid', 'jobus'),
+                    'list'  => esc_html__( 'List', 'jobus' ),
+                    'grid'  => esc_html__( 'Grid', 'jobus' ),
                 ),
                 'default'    => 'list'
             ),
@@ -201,26 +201,26 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'job_archive_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 01', 'jobus'),
+                'title'     => esc_html__( 'Attribute 01', 'jobus' ),
                 'options'   => jobus_get_specs(),
-                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
+                'dependency' => array( 'job_archive_attr_layout', '||', true, ['list, grid'] ),
             ),
 
             array(
                 'id'        => 'job_archive_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 02', 'jobus'),
+                'title'     => esc_html__( 'Attribute 02', 'jobus' ),
                 'options'   => jobus_get_specs(),
-                'dependency' => array('job_archive_attr_layout', '||', true, ['list, grid']),
+                'dependency' => array( 'job_archive_attr_layout', '||', true, ['list, grid'] ),
             ),
 
             array(
                 'id'        => 'job_archive_meta_3',
                 'type'      => 'select',
-                'title'     => esc_html__('
-                Attribute 03', 'jobus'),
+                'title'     => esc_html__( '
+                Attribute 03', 'jobus' ),
                 'options'   => jobus_get_specs(),
-                'dependency' => array('job_archive_attr_layout', '==', 'list'),
+                'dependency' => array( 'job_archive_attr_layout', '==', 'list' ),
             ),
 
         )
@@ -236,7 +236,7 @@ if( class_exists( 'CSF' ) ) {
 
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Search filter Widgets', 'jobus'),
+                'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
             ),
 
             array(
@@ -285,28 +285,28 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'is_sortable_job_sidebar',
                 'type'      => 'sortable',
-                'title'     => esc_html__('Sortable', 'jobus'),
-                'subtitle'  => esc_html__('Display options in sorting order.', 'jobus'),
+                'title'     => esc_html__( 'Sortable', 'jobus' ),
+                'subtitle'  => esc_html__( 'Display options in sorting order.', 'jobus' ),
                 'fields'    => array(
 
                     array(
                         'id'      => 'is_job_widget_cat',
                         'type'    => 'switcher',
-                        'title'   => esc_html__('Category', 'jobus'),
+                        'title'   => esc_html__( 'Category', 'jobus' ),
                         'default' => true,
                     ),
 
                     array(
                         'id'      => 'is_job_widget_location',
                         'type'    => 'switcher',
-                        'title'   => esc_html__('Location', 'jobus'),
+                        'title'   => esc_html__( 'Location', 'jobus' ),
                         'default' => true,
                     ),
 
                     array(
                         'id'      => 'is_job_widget_tag',
                         'type'    => 'switcher',
-                        'title'   => esc_html__('Tag', 'jobus'),
+                        'title'   => esc_html__( 'Tag', 'jobus' ),
                         'default' => true,
                     ),
 
@@ -336,17 +336,17 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Details Layout', 'jobus'),
+                'content' => esc_html__( 'Job Details Layout', 'jobus' ),
             ),
 
             array(
                 'id'        => 'job_details_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobus'),
-                'subtitle'  => esc_html__('Select the preferred layout for your job details page across the entire website.', 'jobus'),
+                'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+                'subtitle'  => esc_html__( 'Select the preferred layout for your job details page across the entire website.', 'jobus' ),
                 'options'   => array(
-                    '1' => esc_url(JOBUS_IMG . '/layout/job/single-layout-1.png'),
-                    '2' => esc_url(JOBUS_IMG . '/layout/job/single-layout-1.png'),
+                    '1' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
+                    '2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
                 ),
                 'default'   => '1'
             ),
@@ -364,27 +364,27 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Attributes', 'jobus'),
+                'content' => esc_html__( 'Job Attributes', 'jobus' ),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 01', 'jobus'),
+                'title'     => esc_html__( 'Attribute 01', 'jobus' ),
                 'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 02', 'jobus'),
+                'title'     => esc_html__( 'Attribute 02', 'jobus' ),
                 'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'job_related_post_meta_3',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 03', 'jobus'),
+                'title'     => esc_html__( 'Attribute 03', 'jobus' ),
                 'options'   => jobus_get_specs(),
             ),
 
@@ -445,7 +445,7 @@ if( class_exists( 'CSF' ) ) {
                     array(
                         'id'            => 'meta_icon',
                         'type'          => 'icon',
-                        'title'         => esc_html__( 'Icon (Optional)', 'jobus' ),
+                        'title'         => esc_html__( 'Icon (Optional )', 'jobus' ),
                         'placeholder'   => esc_html__( 'Select icon', 'jobus' ),
                     )
                 )
@@ -473,17 +473,17 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Company Page Layout', 'jobus'),
+                'content' => esc_html__( 'Company Page Layout', 'jobus' ),
             ),
 
             array(
                 'id'        => 'company_archive_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobus'),
-                'subtitle'  => esc_html__('Select the preferred layout for your company page across the entire website.', 'jobus'),
+                'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+                'subtitle'  => esc_html__( 'Select the preferred layout for your company page across the entire website.', 'jobus' ),
                 'options'   => array(
-                    '1' => esc_url(JOBUS_IMG . '/layout/company/archive-layout-1.png'),
-                    '2' => esc_url(JOBUS_IMG . '/layout/company/archive-layout-2.png'),
+                    '1' => esc_url( JOBUS_IMG . '/layout/company/archive-layout-1.png' ),
+                    '2' => esc_url( JOBUS_IMG . '/layout/company/archive-layout-2.png' ),
                 ),
                 'default'   => '1'
             ),
@@ -502,16 +502,16 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Company Attributes', 'jobus'),
+                'content' => esc_html__( 'Company Attributes', 'jobus' ),
             ),
 
             array(
                 'id'         => 'company_archive_attr_layout',
                 'type'       => 'button_set',
-                'title'      => esc_html__('Content Layout', 'jobus'),
+                'title'      => esc_html__( 'Content Layout', 'jobus' ),
                 'options'    => array(
-                    'grid'  => esc_html__('Grid', 'jobus'),
-                    'list'  => esc_html__('List', 'jobus'),
+                    'grid'  => esc_html__( 'Grid', 'jobus' ),
+                    'list'  => esc_html__( 'List', 'jobus' ),
                 ),
                 'default'    => 'grid'
             ),
@@ -519,17 +519,17 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'company_archive_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobus_get_specs('company_specifications'),
-                'dependency' => array('company_archive_attr_layout', '||', 'grid', 'list'),
+                'title'     => esc_html__( 'Attribute 01', 'jobus' ),
+                'options'   => jobus_get_specs( 'company_specifications' ),
+                'dependency' => array( 'company_archive_attr_layout', '||', 'grid', 'list' ),
             ),
 
             array(
                 'id'        => 'company_archive_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobus_get_specs('company_specifications'),
-                'dependency' => array('company_archive_attr_layout', '==', 'list'),
+                'title'     => esc_html__( 'Attribute 02', 'jobus' ),
+                'options'   => jobus_get_specs( 'company_specifications' ),
+                'dependency' => array( 'company_archive_attr_layout', '==', 'list' ),
             ),
 
         )
@@ -545,7 +545,7 @@ if( class_exists( 'CSF' ) ) {
 
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Search filter Widgets', 'jobus'),
+                'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
             ),
 
             array(
@@ -559,7 +559,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobus' ),
-                        'options'       => jobus_get_specs('company_specifications'),
+                        'options'       => jobus_get_specs( 'company_specifications' ),
                         'default'       => false,
                     ),
 
@@ -581,14 +581,14 @@ if( class_exists( 'CSF' ) ) {
 	        array(
 		        'id'      => 'is_company_widget_location',
 		        'type'    => 'switcher',
-		        'title'   => esc_html__('Location', 'jobus'),
+		        'title'   => esc_html__( 'Location', 'jobus' ),
 		        'default' => true,
 	        ),
 
 	        array(
 		        'id'      => 'is_company_widget_cat',
 		        'type'    => 'switcher',
-		        'title'   => esc_html__('Category', 'jobus'),
+		        'title'   => esc_html__( 'Category', 'jobus' ),
 		        'default' => true,
 	        ),
 
@@ -614,20 +614,20 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Job Attributes', 'jobus'),
+                'content' => esc_html__( 'Job Attributes', 'jobus' ),
             ),
 
             array(
                 'id'        => 'company_open_job_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 01', 'jobus'),
+                'title'     => esc_html__( 'Attribute 01', 'jobus' ),
                 'options'   => jobus_get_specs(),
             ),
 
             array(
                 'id'        => 'company_open_job_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 02', 'jobus'),
+                'title'     => esc_html__( 'Attribute 02', 'jobus' ),
                 'options'   => jobus_get_specs(),
             ),
 
@@ -688,7 +688,7 @@ if( class_exists( 'CSF' ) ) {
                     array(
                         'id'            => 'meta_icon',
                         'type'          => 'icon',
-                        'title'         => esc_html__( 'Icon (Optional)', 'jobus' ),
+                        'title'         => esc_html__( 'Icon (Optional )', 'jobus' ),
                         'placeholder'   => esc_html__( 'Select icon', 'jobus' ),
                     )
                 )
@@ -715,17 +715,17 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Candidate Page Layout', 'jobus'),
+                'content' => esc_html__( 'Candidate Page Layout', 'jobus' ),
             ),
 
             array(
                 'id'        => 'candidate_archive_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobus'),
-                'subtitle'  => esc_html__('Select the preferred layout for your candidate page across the entire website.', 'jobus'),
+                'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+                'subtitle'  => esc_html__( 'Select the preferred layout for your candidate page across the entire website.', 'jobus' ),
                 'options'   => array(
-                    '1' => esc_url(JOBUS_IMG . '/layout/candidate/archive-layout-1.png'),
-                    '2' => esc_url(JOBUS_IMG . '/layout/candidate/archive-layout-2.png'),
+                    '1' => esc_url( JOBUS_IMG . '/layout/candidate/archive-layout-1.png' ),
+                    '2' => esc_url( JOBUS_IMG . '/layout/candidate/archive-layout-2.png' ),
                 ),
                 'default'   => '1'
             ),
@@ -743,16 +743,16 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Candidate Attributes', 'jobus'),
+                'content' => esc_html__( 'Candidate Attributes', 'jobus' ),
             ),
 
             array(
                 'id'         => 'candidate_archive_attr_layout',
                 'type'       => 'button_set',
-                'title'      => esc_html__('Content Layout', 'jobus'),
+                'title'      => esc_html__( 'Content Layout', 'jobus' ),
                 'options'    => array(
-                    'grid'  => esc_html__('Grid', 'jobus'),
-                    'list'  => esc_html__('List', 'jobus'),
+                    'grid'  => esc_html__( 'Grid', 'jobus' ),
+                    'list'  => esc_html__( 'List', 'jobus' ),
                 ),
                 'default'    => 'grid'
             ),
@@ -760,17 +760,17 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'id'        => 'candidate_archive_meta_1',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 01', 'jobus'),
-                'options'   => jobus_get_specs('candidate_specifications'),
-                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+                'title'     => esc_html__( 'Attribute 01', 'jobus' ),
+                'options'   => jobus_get_specs( 'candidate_specifications' ),
+                'dependency' => array( 'candidate_archive_attr_layout', '||', 'grid', 'list' ),
             ),
 
             array(
                 'id'        => 'candidate_archive_meta_2',
                 'type'      => 'select',
-                'title'     => esc_html__('Attribute 02', 'jobus'),
-                'options'   => jobus_get_specs('candidate_specifications'),
-                'dependency' => array('candidate_archive_attr_layout', '||', 'grid', 'list'),
+                'title'     => esc_html__( 'Attribute 02', 'jobus' ),
+                'options'   => jobus_get_specs( 'candidate_specifications' ),
+                'dependency' => array( 'candidate_archive_attr_layout', '||', 'grid', 'list' ),
             ),
 
         )
@@ -786,7 +786,7 @@ if( class_exists( 'CSF' ) ) {
 
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Search filter Widgets', 'jobus'),
+                'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
             ),
 
             // Sidebar Widget layout 01
@@ -805,7 +805,7 @@ if( class_exists( 'CSF' ) ) {
                         'id'            => 'widget_name',
                         'type'          => 'select',
                         'title'         => esc_html__( 'Widget', 'jobus' ),
-                        'options'       => jobus_get_specs('candidate_specifications'),
+                        'options'       => jobus_get_specs( 'candidate_specifications' ),
                         'default'       => false,
                     ),
 
@@ -835,14 +835,14 @@ if( class_exists( 'CSF' ) ) {
 	        array(
 		        'id'      => 'is_candidate_widget_location',
 		        'type'    => 'switcher',
-		        'title'   => esc_html__('Location', 'jobus'),
+		        'title'   => esc_html__( 'Location', 'jobus' ),
 		        'default' => true,
 	        ),
 
 	        array(
 		        'id'      => 'is_candidate_widget_cat',
 		        'type'    => 'switcher',
-		        'title'   => esc_html__('Category', 'jobus'),
+		        'title'   => esc_html__( 'Category', 'jobus' ),
 		        'default' => true,
 	        ),
         )
@@ -866,17 +866,17 @@ if( class_exists( 'CSF' ) ) {
             //Subheading field
             array(
                 'type'    => 'subheading',
-                'content' => esc_html__('Candidate Profile Layout', 'jobus'),
+                'content' => esc_html__( 'Candidate Profile Layout', 'jobus' ),
             ),
 
             array(
                 'id'        => 'candidate_profile_layout',
                 'type'      => 'image_select',
-                'title'     => esc_html__('Choose Layout', 'jobus'),
-                'subtitle'  => esc_html__('Select the preferred layout for your job details page across the entire website.', 'jobus'),
+                'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+                'subtitle'  => esc_html__( 'Select the preferred layout for your job details page across the entire website.', 'jobus' ),
                 'options'   => array(
-                    '1' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-1.png'),
-                    '2' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-2.png'),
+                    '1' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-1.png' ),
+                    '2' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-2.png' ),
                 ),
                 'default'   => '1'
             ),
@@ -949,7 +949,7 @@ if( class_exists( 'CSF' ) ) {
             array(
                 'type'    => 'notice',
                 'style'   => 'info',
-                'content' => __('<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.', 'jobus')
+                'content' => __( '<strong>SMTP Configuration:</strong> Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.', 'jobus' )
             ),
 
             array(
@@ -972,10 +972,10 @@ if( class_exists( 'CSF' ) ) {
                 'id'            => 'smtp_authentication',
                 'type'          => 'select',
                 'title'         => esc_html__( 'SMTP Authentication', 'jobus' ),
-                'desc'          => esc_html__( 'Whether to use SMTP Authentication when sending an email (recommended: True).', 'jobus' ),
+                'desc'          => esc_html__( 'Whether to use SMTP Authentication when sending an email (recommended: True ).', 'jobus' ),
                 'options'       => array(
-                    'true'      => esc_html__('True', 'jobus'),
-                    'false'     => esc_html__('False', 'jobus'),
+                    'true'      => esc_html__( 'True', 'jobus' ),
+                    'false'     => esc_html__( 'False', 'jobus' ),
                 ),
                 'default'       => 'true',
                 'dependency' => array( 'is_smtp', '==', 'true' ),
@@ -1001,11 +1001,11 @@ if( class_exists( 'CSF' ) ) {
                 'id'            => 'smtp_encryption',
                 'type'          => 'select',
                 'title'         => esc_html__( 'Type of Encryption', 'jobus' ),
-                'desc'          => esc_html__( 'The encryption which will be used when sending an email (recommended: TLS).', 'jobus' ),
+                'desc'          => esc_html__( 'The encryption which will be used when sending an email (recommended: TLs ).', 'jobus' ),
                 'options'       => array(
-                    'tls'      => esc_html__('TLS', 'jobus'),
-                    'ssl'     => esc_html__('SSL', 'jobus'),
-                    'none'     => esc_html__('No Encryption', 'jobus'),
+                    'tls'      => esc_html__( 'TLS', 'jobus' ),
+                    'ssl'     => esc_html__( 'SSL', 'jobus' ),
+                    'none'     => esc_html__( 'No Encryption', 'jobus' ),
                 ),
                 'default'       => 'ssl',
                 'dependency' => array( 'is_smtp', '==', 'true' ),
@@ -1048,7 +1048,7 @@ if( class_exists( 'CSF' ) ) {
 			array(
 				'id'        => 'jobus_export_import',
 				'type'      => 'backup',
-				'title'     => esc_html__('Backup', 'jobus'),
+				'title'     => esc_html__( 'Backup', 'jobus' ),
 			),
 		)
 	) );

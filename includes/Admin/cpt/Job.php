@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;// Exit if accessed directly
 }
 
@@ -16,7 +16,7 @@ class Job {
     }
 
     public static function init() {
-        if ( is_null(self::$instance) ) {
+        if ( is_null(self::$instance ) ) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -73,7 +73,7 @@ class Job {
             'show_admin_column'     => true
         );
 
-        register_post_type('jobus_job', $args); // Register the posttype `job`
+        register_post_type( 'jobus_job', $args ); // Register the posttype `job`
 
         // Register post taxonomies Category
         register_taxonomy( 'jobus_job_cat', 'jobus_job', array(
@@ -86,7 +86,7 @@ class Job {
             'labels'                => array(
                 'name' => esc_html__( 'Categories', 'jobus' ),
             )
-        ));
+        ) );
 
         // Register post taxonomies location
         register_taxonomy( 'jobus_job_location', 'jobus_job', array(
@@ -99,7 +99,7 @@ class Job {
             'labels'                => array(
                 'name'  => esc_html__( 'Location', 'jobus' ),
             )
-        ));
+        ) );
 
         // Register post taxonomies Tags
         register_taxonomy( 'jobus_job_tag', 'jobus_job', array(

@@ -1,17 +1,17 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
 ?>
 
 <div class="job-search-one style-two position-relative">
-    <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" method="get" id="searchform">
-        <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
+    <form action="<?php echo esc_url( get_post_type_archive_link( $search_result_form ) ); ?>" method="get" id="searchform">
+        <input type="hidden" name="post_type" value="<?php echo esc_attr( $search_result_form ); ?>"/>
 
         <div class="row align-items-center jobus_srch_bor">
             <?php
-            if (!empty($settings[ 'job_search_form' ])) {
+            if ( ! empty( $settings[ 'job_search_form' ] ) ) {
 
                 $is_taxonomy = ['jobus_job_cat', 'jobus_job_location', 'jobus_job_tag', 'jobus_company_cat', 'jobus_company_location' ];
 
@@ -24,49 +24,49 @@ if (!defined('ABSPATH')) {
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
-                        <div class="input-box<?php echo esc_attr($border_left) ?>">
+                    <div class="col-md-<?php echo esc_attr( $item[ 'column' ] ); ?>">
+                        <div class="input-box<?php echo esc_attr( $border_left ); ?>">
                             <?php
-                            if ( !empty($item[ 'attr_title' ] ) ) { ?>
-                                <div class="label"><?php echo esc_html($item[ 'attr_title' ]) ?></div>
+                            if ( ! empty( $item[ 'attr_title' ] ) ) { ?>
+                                <div class="label"><?php echo esc_html( $item[ 'attr_title' ] ); ?></div>
                                 <?php
                             }
 
                             // Select job category or job tag
                             if ( $job_specifications ) {
-                                if ($item['layout_type'] === 'dropdown') {
+                                if ( $item['layout_type'] === 'dropdown' ) {
                                     ?>
-                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                    <select class="nice-select lg" name="<?php echo esc_attr( $select_job_attr ); ?>" id="<?php echo esc_attr( $select_job_attr ); ?>">
                                         <?php
-                                        if ($job_specifications) {
+                                        if ( $job_specifications ) {
                                             foreach ( $job_specifications as $job_spec_value ) {
                                                 $meta_value = $job_spec_value[ 'meta_values' ] ?? '';
-                                                $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                $modifiedVal = strtolower($modifiedSelect);
+                                                $modifiedSelect = preg_replace( '/[,\s]+/', '@space@', $meta_value );
+                                                $modifiedVal = strtolower( $modifiedSelect );
                                                 ?>
-                                                <option value="<?php echo esc_attr($modifiedVal) ?>"><?php echo esc_html($meta_value) ?></option>
+                                                <option value="<?php echo esc_attr( $modifiedVal ); ?>"><?php echo esc_html( $meta_value ); ?></option>
                                                 <?php
                                             }
                                         }
                                         ?>
                                     </select>
                                     <?php
-                                }  elseif ($item['layout_type'] === 'text') { ?>
-                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                }  elseif ( $item['layout_type'] === 'text' ) { ?>
+                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr( $item['text_placeholder'] ); ?>" class="keyword">
                                     <?php
                                 }
-                            } elseif ($item['layout_type'] === 'text' ) {
+                            } elseif ( $item['layout_type'] === 'text' ) {
                                 ?>
-                                <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr( $item['text_placeholder'] ); ?>" class="keyword">
                                 <?php
-                            } elseif (in_array($select_job_attr, $is_taxonomy, true)) {
+                            } elseif ( in_array( $select_job_attr, $is_taxonomy, true ) ) {
                                 ?>
-                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                <select class="nice-select lg" name="<?php echo esc_attr( $select_job_attr ); ?>" id="<?php echo esc_attr( $select_job_attr ); ?>">
                                     <?php
-                                    $taxonomy_terms = get_terms($select_job_attr);
-                                    foreach ($taxonomy_terms as $term) {
+                                    $taxonomy_terms = get_terms( $select_job_attr );
+                                    foreach ( $taxonomy_terms as $term ) {
                                         ?>
-                                        <option value="<?php echo esc_attr($term->slug) ?>"><?php echo esc_html($term->name) ?></option>
+                                        <option value="<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></option>
                                         <?php
                                     }
                                     ?>
@@ -81,27 +81,27 @@ if (!defined('ABSPATH')) {
             }
             ?>
             <div class="col-md-3 sm-mb-10 sm-mt-10">
-                <button type="submit" class="text-uppercase btn-five border6 tran3s m-auto"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+                <button type="submit" class="text-uppercase btn-five border6 tran3s m-auto"><?php echo esc_html( $settings[ 'submit_btn' ] ); ?></button>
             </div>
         </div>
     </form>
 
     <?php
-    if ($settings[ 'is_keyword' ] == 'yes' ) {
+    if ( $settings[ 'is_keyword' ] == 'yes' ) {
         ?>
         <ul class="filter-tags d-flex flex-wrap style-none mt-25">
             <?php
-            if ( !empty($settings['keyword_label']) ) { ?>
-                <li class="fw-500 text-dark me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+            if ( ! empty( $settings['keyword_label'] ) ) { ?>
+                <li class="fw-500 text-dark me-1"><?php echo esc_html( $settings[ 'keyword_label' ] ); ?></li>
                 <?php
             }
 
-            if (!empty($settings[ 'keywords' ])) {
+            if ( ! empty( $settings[ 'keywords' ] ) ) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
-                    if ( !empty($keyword['title']) ) { ?>
+                    if ( ! empty( $keyword['title'] ) ) { ?>
                         <li>
-                            <a <?php jobus_button_link($keyword['link']); ?>>
-                                <?php echo esc_html($keyword[ 'title' ]) ?>
+                            <a <?php jobus_button_link( $keyword['link'] ); ?>>
+                                <?php echo esc_html( $keyword[ 'title' ] ); ?>
                             </a>
                         </li>
                         <?php

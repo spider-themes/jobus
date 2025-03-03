@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Admin;
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -18,10 +18,10 @@ class Assets {
 	public function enqueue_scripts(): void
     {
         // Enqueue Styles
-        wp_enqueue_style('bootstrap-icons', esc_url( JOBUS_VEND . '/bootstrap-icons/font.css' ), [], JOBUS_VERSION);
-        wp_enqueue_style('jobus-admin', esc_url( JOBUS_CSS . '/admin.css' ), [], JOBUS_VERSION );
+        wp_enqueue_style( 'bootstrap-icons', esc_url( JOBUS_VEND . '/bootstrap-icons/font.css' ), [], JOBUS_VERSION );
+        wp_enqueue_style( 'jobus-admin', esc_url( JOBUS_CSS . '/admin.css' ), [], JOBUS_VERSION );
 
         // Enqueue Scripts
-        wp_enqueue_script('jobus-admin', esc_url( JOBUS_JS . '/admin.js' ), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer'] );
+        wp_enqueue_script( 'jobus-admin', esc_url( JOBUS_JS . '/admin.js' ), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer'] );
 	}
 }

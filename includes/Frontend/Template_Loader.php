@@ -31,7 +31,7 @@ class Template_Loader {
     {
 
         //======= Load Job Pages
-        if ( is_tax( 'jobus_job_cat' ) || is_tax( 'jobus_job_location' ) || is_tax( 'jobus_job_tag') ) {
+        if ( is_tax( 'jobus_job_cat' ) || is_tax( 'jobus_job_location' ) || is_tax( 'jobus_job_tag' ) ) {
             return $this->locate_template( 'taxonomy-job', $template );
         }
 
@@ -44,7 +44,7 @@ class Template_Loader {
         }
 
         //======= Load Company Pages
-        if ( is_tax( 'jobus_company_cat' ) || is_tax('jobus_company_location' ) ) {
+        if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location' ) ) {
             return $this->locate_template( 'taxonomy-company', $template );
         }
 
@@ -85,14 +85,14 @@ class Template_Loader {
     private static function find_template(string $template_name, string $default_template = '', string $plugin_dir = JOBUS_PATH): string
     {
         // Check in the theme's "jobus" folder
-        $theme_template = locate_template([ "jobus/$template_name.php" ]);
-        if ($theme_template) {
+        $theme_template = locate_template([ "jobus/$template_name.php" ] );
+        if ( $theme_template ) {
             return $theme_template;
         }
 
         // Check in the plugin's templates folder
         $plugin_template = "$plugin_dir/templates/$template_name.php";
-        if (file_exists($plugin_template)) {
+        if (file_exists( $plugin_template ) ) {
             return $plugin_template;
         }
 
@@ -101,15 +101,15 @@ class Template_Loader {
     }
 
     /**
-     * Locate template from theme or plugin (used by instance methods)
+     * Locate template from theme or plugin (used by instance methods )
      *
      * @param string $template_name
      * @param string $default_template
      * @return string
      */
-    private function locate_template(string $template_name, string $default_template = ''): string
+    private function locate_template(string $template_name, string $default_template = '' ): string
     {
-        return self::find_template($template_name, $default_template);
+        return self::find_template( $template_name, $default_template );
     }
 
     /**
@@ -123,13 +123,13 @@ class Template_Loader {
      */
     public static function get_template_part(string $name, array $args = [], string $plugin_dir = JOBUS_PATH): string
     {
-        if (!empty($args) && is_array($args)) {
-            extract($args, EXTR_SKIP);
+        if ( ! empty( $args ) && is_array( $args ) ) {
+            extract( $args, EXTR_SKIP);
         }
 
-        $template = self::find_template($name, '', $plugin_dir);
+        $template = self::find_template( $name, '', $plugin_dir);
         ob_start();
-        if ($template) {
+        if ( $template ) {
             include $template;
         }
         return ob_get_clean();

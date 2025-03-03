@@ -32,7 +32,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e( 'Total', 'jobus' ); ?>
                                 <span class="fw-500">
-                                    <?php echo esc_html( $candidate_query->found_posts) ?>
+                                    <?php echo esc_html( $candidate_query->found_posts ); ?>
                                 </span>
                                 <?php
                                 /* translators: 1: candidate found, 2: candidates found */
@@ -61,23 +61,23 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
 
-                                        <option <?php echo esc_attr( $default); ?>>
+                                        <option <?php echo esc_attr( $default ); ?>>
                                             <?php esc_html_e( 'Default', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old) ?>>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old ); ?>>
                                             <?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new) ?>>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new ); ?>>
                                             <?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc) ?>>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc ); ?>>
                                             <?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc) ?>>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc ); ?>>
                                             <?php esc_html_e( 'Title Descending', 'jobus' ); ?>
                                         </option>
                                         
@@ -85,12 +85,12 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url( $list_view_url); ?>"
+                            <a href="<?php echo esc_url( $list_view_url ); ?>"
                                class="style-changer-btn text-center rounded-circle tran3s ms-2 list-btn <?php echo esc_attr( $current_view === 'grid' ) ? ' active' : ''; ?>"
                                title="<?php esc_attr_e( 'Active List', 'jobus' ); ?>">
                                 <i class="bi bi-list"></i>
                             </a>
-                            <a href="<?php echo esc_url( $grid_view_url); ?>"
+                            <a href="<?php echo esc_url( $grid_view_url ); ?>"
                                class="style-changer-btn text-center rounded-circle tran3s ms-2 grid-btn <?php echo esc_attr( $current_view === 'list' ) ? ' active' : ''; ?>"
                                title="<?php esc_attr_e( 'Active Grid', 'jobus' ); ?>">
                                 <i class="bi bi-grid"></i>
@@ -107,12 +107,12 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                             <div class="row">
                                 <?php
                                 while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                    $meta = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true);
+                                    $meta = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
                                     $post_favourite = $meta['post_favorite'] ?? '';
                                     $is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
                                     ?>
                                     <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex">
-                                        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite) ?> text-center grid-layout border-0 mb-25">
+                                        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ); ?> text-center grid-layout border-0 mb-25">
 
                                             <div class="cadidate-avatar online position-relative d-block m-auto">
                                                 <a href="<?php the_permalink(); ?>" class="rounded-circle">
@@ -122,7 +122,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
 
                                             <h4 class="candidate-name mt-15 mb-0">
                                                 <a href="<?php the_permalink(); ?>" class="tran3s">
-                                                    <?php the_title() ?>
+                                                    <?php the_title(); ?>
                                                 </a>
                                             </h4>
 
@@ -130,7 +130,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                             if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) :
                                                 ?>
                                                 <div class="candidate-post text-capitalize">
-                                                    <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ?>
+                                                    <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ); ?>
                                                 </div>
                                                 <?php
                                             endif;
@@ -175,7 +175,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                             </span>
 
                                                             <div class="text-capitalize">
-                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ?>
+                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -188,7 +188,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                             <?php esc_html_e( 'Location', 'jobus' ); ?>
                                                         </span>
                                                         <div class="text-capitalize">
-                                                            <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) ?>
+                                                            <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,7 +198,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                 <div class="col-md-6">
                                                     <a href="<?php the_permalink(); ?>"
                                                        class="profile-btn tran3s w-100 mt-5">
-                                                        <?php esc_html_e( 'View Profile', 'jobus' ) ?>
+                                                        <?php esc_html_e( 'View Profile', 'jobus' ); ?>
                                                     </a>
                                                 </div>
                                                 <div class="col-md-6">
@@ -223,11 +223,11 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
 
                             <?php
                             while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
-                                $meta = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true);
+                                $meta = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
                                 $post_favourite = $meta['post_favorite'] ?? '';
                                 $is_favourite = ( $post_favourite == '1' ) ? ' favourite' : '';
                                 ?>
-                                <div class="candidate-profile-card<?php echo esc_attr( $is_favourite) ?> list-layout border-0 mb-25">
+                                <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ); ?> list-layout border-0 mb-25">
                                     <div class="d-flex">
 
                                         <div class="cadidate-avatar online position-relative d-block me-auto ms-auto">
@@ -242,7 +242,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                     <div class="position-relative">
                                                         <h4 class="candidate-name mb-0">
                                                             <a href="<?php the_permalink(); ?>" class="tran3s">
-                                                                <?php the_title() ?>
+                                                                <?php the_title(); ?>
                                                             </a>
                                                         </h4>
 
@@ -250,7 +250,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                         if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) :
                                                             ?>
                                                             <div class="candidate-post text-capitalize">
-                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ?>
+                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ); ?>
                                                             </div>
                                                             <?php
                                                         endif;
@@ -296,7 +296,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                                 <?php echo esc_html( jobus_meta_candidate_spec_name(2) ); ?>
                                                             </span>
                                                             <div class="text-capitalize">
-                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ?>
+                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -310,7 +310,7 @@ $grid_view_url = esc_url(add_query_arg( 'view', 'grid', $archive_url ) );
                                                             <?php esc_html_e( 'Location', 'jobus' ); ?>
                                                         </span>
                                                         <div class="text-capitalize">
-                                                            <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) ?>
+                                                            <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ); ?>
                                                         </div>
                                                     </div>
                                                 </div>

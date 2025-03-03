@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;// Exit if accessed directly
 }
 
@@ -16,7 +16,7 @@ class Candidate{
     }
 
     public static function init() {
-        if ( is_null(self::$instance) ) {
+        if ( is_null(self::$instance ) ) {
             self::$instance = new self();
         }
         return self::$instance;
@@ -83,7 +83,7 @@ class Candidate{
             'labels'                => [
                 'name'  => esc_html__( 'Categories', 'jobus' ),
             ]
-        ));
+        ) );
 
         // Register post taxonomies Tags
         register_taxonomy( 'jobus_candidate_location', 'jobus_candidate', array(

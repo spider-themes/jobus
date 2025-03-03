@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
+$post_type = ! empty( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
 ?>
 <div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
@@ -19,7 +19,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
-            <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
+            <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ); ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="jobus_company"/>
 
 				<?php
@@ -48,7 +48,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 						$company_specifications = $company_specifications[ $widget_name ] ?? '';
 
 
-						if ( isset($_GET['post_type']) == 'jobus_company'  ) {
+						if ( isset( $_GET['post_type'] ) == 'jobus_company'  ) {
 							if ( ! empty ( $_GET[ $widget_name ] ) ) {
 								$is_collapsed_show = 'collapse show';
 								$area_expanded     = 'true';
@@ -61,14 +61,14 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 						}
 						?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ); ?>"
                                data-bs-toggle="collapse"
-                               href="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
+                               href="#collapse-<?php echo esc_attr( $widget_name ); ?>" role="button"
+                               aria-expanded="<?php echo esc_attr( $area_expanded ); ?>">
 								<?php echo esc_html( $widget_title ); ?>
                             </a>
-                            <div class="<?php echo esc_attr( $is_collapsed_show ) ?>"
-                                 id="collapse-<?php echo esc_attr( $widget_name ) ?>">
+                            <div class="<?php echo esc_attr( $is_collapsed_show ); ?>"
+                                 id="collapse-<?php echo esc_attr( $widget_name ); ?>">
                                 <div class="main-body">
 									<?php
 									if ( $widget_layout == 'checkbox' ) {
@@ -92,8 +92,8 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 														?>
                                                         <li>
                                                             <input type="checkbox"
-                                                                   name="<?php echo esc_attr( $widget_name ) ?>[]"
-                                                                   value="<?php echo esc_attr( $opt_val ) ?>" <?php echo esc_attr( $check_status ) ?>>
+                                                                   name="<?php echo esc_attr( $widget_name ); ?>[]"
+                                                                   value="<?php echo esc_attr( $opt_val ); ?>" <?php echo esc_attr( $check_status ); ?>>
                                                             <label>
 																<?php echo esc_html( $meta_value ); ?>
                                                                 <span><?php echo esc_html( $meta_value_count ); ?></span>
@@ -110,7 +110,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 									} elseif ( $widget_layout == 'dropdown' ) {
 										?>
                                         <select class="nice-select bg-white"
-                                                name="<?php echo esc_attr( $widget_name ) ?>[]">
+                                                name="<?php echo esc_attr( $widget_name ); ?>[]">
 											<?php
 											if ( is_array( $company_specifications ) ) {
 												foreach ( $company_specifications as $key => $value ) {
@@ -127,8 +127,8 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 														$selected_val = $searched_val[0] ?? $modifiedVal;
 														$selected_val = $modifiedVal == $selected_val ? ' selected' : '';
 														?>
-                                                        <option value="<?php echo esc_attr( $modifiedVal ) ?>" <?php echo esc_attr( $selected_val ) ?>>
-															<?php echo esc_html( $meta_value ) ?>
+                                                        <option value="<?php echo esc_attr( $modifiedVal ); ?>" <?php echo esc_attr( $selected_val ); ?>>
+															<?php echo esc_html( $meta_value ); ?>
                                                         </option>
 														<?php
 													}
@@ -155,7 +155,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 				}
 
 				// Widget location List
-				if ( jobus_opt('is_company_widget_location') ) {
+				if ( jobus_opt( 'is_company_widget_location' ) ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
@@ -163,7 +163,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                     $is_collapsed = ' collapsed';
 
 					if ( $post_type == 'jobus_company' ) {
-						if ( ! empty ( sanitize_text_field($_GET['company_locations']) ) ) {
+						if ( ! empty ( sanitize_text_field( $_GET['company_locations'] ) ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
 							$is_collapsed      = '';
@@ -177,11 +177,11 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 					if ( ! empty( $term_locs ) ) {
 						?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ); ?>"
                                data-bs-toggle="collapse"
                                href="#collapseLocation" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Location', 'jobus' ); ?></a>
-                            <div class="<?php echo esc_attr( $is_collapsed_show ) ?>" id="collapseLocation">
+                               aria-expanded="<?php echo esc_attr( $area_expanded ); ?>"><?php esc_html_e( 'Location', 'jobus' ); ?></a>
+                            <div class="<?php echo esc_attr( $is_collapsed_show ); ?>" id="collapseLocation">
                                 <div class="main-body">
                                     <ul class="style-none filter-input">
 										<?php
@@ -191,12 +191,12 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 											$check_status = array_search( $term->slug, $searched_opt );
 											$check_status = $check_status !== false ? ' checked' : '';
 											?>
-                                            <li<?php echo esc_attr( $list_class ) ?>>
+                                            <li<?php echo esc_attr( $list_class ); ?>>
                                                 <input type="checkbox" name="company_locations[]"
-                                                       value="<?php echo esc_attr( $term->slug ) ?>" <?php echo esc_attr( $check_status ) ?>>
+                                                       value="<?php echo esc_attr( $term->slug ); ?>" <?php echo esc_attr( $check_status ); ?>>
                                                 <label>
-													<?php echo esc_html( $term->name ) ?>
-                                                    <span><?php echo esc_html( $term->count ) ?></span>
+													<?php echo esc_html( $term->name ); ?>
+                                                    <span><?php echo esc_html( $term->count ); ?></span>
                                                 </label>
                                             </li>
 											<?php
@@ -222,7 +222,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 
 
 				// Widget Category List
-				if ( jobus_opt('is_company_widget_cat') ) {
+				if ( jobus_opt( 'is_company_widget_cat' ) ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
@@ -230,7 +230,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                     $is_collapsed = ' collapsed';
 
 					if ( $post_type == 'jobus_company' ) {
-						if ( ! empty ( sanitize_text_field($_GET['company_cats']) ) ) {
+						if ( ! empty ( sanitize_text_field( $_GET['company_cats'] ) ) ) {
 							$is_collapsed_show = 'collapse show';
 							$area_expanded     = 'true';
 							$is_collapsed      = '';
@@ -244,11 +244,11 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 					if ( ! empty( $term_cats ) ) {
 						?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ); ?>"
                                data-bs-toggle="collapse"
                                href="#collapseCategory" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>"><?php esc_html_e( 'Category', 'jobus' ); ?></a>
-                            <div class="<?php echo esc_attr( $is_collapsed_show ) ?>" id="collapseCategory">
+                               aria-expanded="<?php echo esc_attr( $area_expanded ); ?>"><?php esc_html_e( 'Category', 'jobus' ); ?></a>
+                            <div class="<?php echo esc_attr( $is_collapsed_show ); ?>" id="collapseCategory">
                                 <div class="main-body">
                                     <ul class="style-none filter-input">
 										<?php
@@ -258,12 +258,12 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 											$check_status = array_search( $term->slug, $searched_opt );
 											$check_status = $check_status !== false ? ' checked' : '';
 											?>
-                                            <li<?php echo esc_attr( $list_class ) ?>>
+                                            <li<?php echo esc_attr( $list_class ); ?>>
                                                 <input type="checkbox" name="company_cats[]"
-                                                       value="<?php echo esc_attr( $term->slug ) ?>" <?php echo esc_attr( $check_status ) ?>>
+                                                       value="<?php echo esc_attr( $term->slug ); ?>" <?php echo esc_attr( $check_status ); ?>>
                                                 <label>
-													<?php echo esc_html( $term->name ) ?>
-                                                    <span><?php echo esc_html( $term->count ) ?></span>
+													<?php echo esc_html( $term->name ); ?>
+                                                    <span><?php echo esc_html( $term->count ); ?></span>
                                                 </label>
                                             </li>
 											<?php

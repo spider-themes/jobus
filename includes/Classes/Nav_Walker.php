@@ -28,7 +28,7 @@ class Nav_Walker extends \Walker_Nav_Menu {
         $indent = ($depth) ? str_repeat("\t", $depth) : '';
 
         // Set classes for each <li>
-        $classes = empty($data_object->classes) ? array() : (array) $data_object->classes;
+        $classes = empty($data_object->classes) ? array() : ( array ) $data_object->classes;
         $classes[] = 'menu-item-' . $data_object->ID;
 
         // Join classes and apply them to the <li>

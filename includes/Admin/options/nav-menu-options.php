@@ -25,7 +25,7 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'    => 'menu_img',
                 'type'  => 'media',
-                'title' => esc_html__('Menu Image', 'jobus'),
+                'title' => esc_html__( 'Menu Image', 'jobus' ),
             ),
 
         )

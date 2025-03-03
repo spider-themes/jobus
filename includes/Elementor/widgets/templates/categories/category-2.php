@@ -1,5 +1,5 @@
 <?php
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 ?>
@@ -24,7 +24,7 @@ if ( ! defined('ABSPATH') ) {
                         if ( ! empty( $meta_tax['cat_img']['url'] ) ) : 
                             ?>
                             <div class="icon d-flex align-items-center justify-content-center">
-                                <img src="<?php echo esc_url($meta_tax['cat_img']['url']); ?>" alt="<?php echo isset($meta_tax['cat_img']['alt']) ? esc_attr($meta_tax['cat_img']['alt']) : ''; ?>" class="lazy-img">
+                                <img src="<?php echo esc_url( $meta_tax['cat_img']['url'] ); ?>" alt="<?php echo isset( $meta_tax['cat_img']['alt'] ) ? esc_attr( $meta_tax['cat_img']['alt'] ) : ''; ?>" class="lazy-img">
                             </div>
                             <?php 
                         endif; 

@@ -1,9 +1,9 @@
 <?php
-if (!defined('ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if ( ! function_exists( 'jobus_rtl') ) {
+if ( ! function_exists( 'jobus_rtl' ) ) {
 	function jobus_rtl(): string {
 		return is_rtl() ? 'true' : 'false';
 	}
@@ -11,20 +11,20 @@ if ( ! function_exists( 'jobus_rtl') ) {
 
 // A Custom function for [ SETTINGS ]
 if ( ! function_exists( 'jobus_opt' ) ) {
-    function jobus_opt( $option = '', $default = null)
+    function jobus_opt( $option = '', $default = null )
     {
-        $options = get_option('jobus_opt'); // Attention: Set your unique id of the framework
+        $options = get_option( 'jobus_opt' ); // Attention: Set your unique id of the framework
 
-        return (isset( $options[ $option ]) ) ? $options[ $option ] : $default;
+        return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
     }
 }
 
 // Custom function for [ META ]
 if ( ! function_exists( 'jobus_meta' ) ) {
-    function jobus_meta( $option = '', $default = null)
+    function jobus_meta( $option = '', $default = null )
     {
-        $options = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
-        return (isset( $options[ $option ]) ) ? $options[ $option ] : $default;
+        $options = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
+        return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
     }
 }
 
@@ -45,7 +45,7 @@ if ( ! function_exists( 'jobus_get_template_part' ) ) {
         } else {
             $file = JOBUS_PATH . "/templates/" . $template;
         }
-        if ( $file) {
+        if ( $file ) {
             load_template( $file, false );
         }
     }
@@ -80,10 +80,10 @@ function jobus_get_template( $template_name, array $args = [] ): void
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
-    function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat'): string
+    function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat' ): string
     {
-        $terms = get_the_terms(get_the_ID(), $term);
-        return is_array( $terms) ? $terms[ 0 ]->name : '';
+        $terms = get_the_terms( get_the_ID(), $term );
+        return is_array( $terms ) ? $terms[ 0 ]->name : '';
     }
 }
 
@@ -93,11 +93,11 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
-    function jobus_get_first_taxonomy_link ( $term = 'jobus_job_cat'): string
+    function jobus_get_first_taxonomy_link ( $term = 'jobus_job_cat' ): string
     {
         $terms  = get_the_terms( get_the_ID(), $term );
-        $term   = is_array( $terms) ? get_category_link( $terms[ 0 ]->term_id ) : '';
-        return esc_url( $term);
+        $term   = is_array( $terms ) ? get_category_link( $terms[ 0 ]->term_id ) : '';
+        return esc_url( $term );
     }
 }
 
@@ -107,15 +107,15 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
  * @return string
  */
 if ( ! function_exists( 'jobus_get_tag_list' ) ) {
-    function jobus_get_tag_list( $term = 'jobus_job_tag'): string
+    function jobus_get_tag_list( $term = 'jobus_job_tag' ): string
     {
-        $terms      = get_the_terms(get_the_ID(), $term);
-        $term       = is_array( $terms) ? $terms : '';
+        $terms      = get_the_terms( get_the_ID(), $term );
+        $term       = is_array( $terms ) ? $terms : '';
         $tag_list   = '';
 
         if ( ! empty( $term ) ) {
             foreach ( $term as $tag ) {
-                $tag_list .= '<a href="' . esc_url(get_category_link( $tag->term_id) ) . '">' . esc_html( $tag->name) . '</a>';
+                $tag_list .= '<a href="' . esc_url( get_category_link( $tag->term_id ) ) . '">' . esc_html( $tag->name ) . '</a>';
             }
         }
 
@@ -195,8 +195,8 @@ if ( ! function_exists( 'jobus_button_link' ) ) {
 
         if ( $is_echo ) {
             echo ! empty( $settings_key['url'] ) ? 'href="' . esc_url( $settings_key['url'] ) . '"' : '';
-            echo ! empty( $settings_key['is_external']) ? ' target="' . esc_attr('_blank') . '"' : '';
-            echo ! empty( $settings_key['nofollow']) ? ' rel="' . esc_attr('nofollow') . '"' : '';
+            echo ! empty( $settings_key['is_external'] ) ? ' target="' . esc_attr( '_blank' ) . '"' : '';
+            echo ! empty( $settings_key['nofollow'] ) ? ' rel="' . esc_attr( 'nofollow' ) . '"' : '';
 
 
             if ( ! empty( $settings_key['custom_attributes'] ) ) {
@@ -228,12 +228,12 @@ if ( ! function_exists( 'jobus_company_post_list' ) ) {
             'post_status' => 'publish',
         );
 
-        $posts   = get_posts( $args);
+        $posts   = get_posts( $args );
         $options = array();
 
         if ( ! empty( $posts ) ) {
             foreach ( $posts as $post ) {
-                $options[ '' ] = esc_html__('Default', 'jobus');
+                $options[ '' ] = esc_html__( 'Default', 'jobus' );
                 $options[ $post->ID ] = $post->post_title;
             }
         }
@@ -245,9 +245,9 @@ if ( ! function_exists( 'jobus_company_post_list' ) ) {
 /**
  * Get specifications
  */
-function jobus_get_specs ( $settings_id = 'job_specifications'): array
+function jobus_get_specs ( $settings_id = 'job_specifications' ): array
 {
-    $specifications = jobus_opt( $settings_id);
+    $specifications = jobus_opt( $settings_id );
     $specs          = [];
 
     if ( is_array( $specifications ) ) {
@@ -338,7 +338,7 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
             )
         );
 
-        $query = new WP_Query( $args);
+        $query = new WP_Query( $args );
         return $query->found_posts;
     }
 }
@@ -351,7 +351,7 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
     {
 
         // Default values for prev and next links
-        $default_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="'.esc_attr__('arrow-left', 'jobus').'" class="me-2" />' . esc_html__( 'Prev', 'jobus');
+        $default_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="'.esc_attr__( 'arrow-left', 'jobus' ).'" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
 
         $default_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="'.esc_attr__( 'arrow-right', 'jobus' ).'" class="ms-2" />';
 
@@ -361,10 +361,10 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
 
         echo '<ul class="' . esc_attr( $class ) . '">';
             $big = 999999999; // need an unlikely integer
-            $pagination_links = paginate_links(array(
+            $pagination_links = paginate_links( array(
                 'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
                 'format'    => '?paged=%#%',
-                'current'   => max(1, get_query_var('paged') ),
+                'current'   => max(1, get_query_var( 'paged' ) ),
                 'total'     => $query->max_num_pages,
                 'prev_text' => $prev_text,
                 'next_text' => $next_text,
@@ -393,7 +393,7 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
         }
 
         if ( $query->is_main_query() && ! is_admin() && is_post_type_archive( 'jobus_candidate' ) ) {
-            $query->set( 'posts_per_page', jobus_opt( 'candidate_posts_per_page') );
+            $query->set( 'posts_per_page', jobus_opt( 'candidate_posts_per_page' ) );
         }
     }
     add_action( 'pre_get_posts', 'jobus_job_archive_query' );
@@ -420,7 +420,7 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
             )
         );
         
-        $job_posts = new \WP_Query( $args); 
+        $job_posts = new \WP_Query( $args ); 
         
         // if a link false, then return only count
         if ( ! $link ) {
@@ -444,7 +444,7 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
             if ( $job_posts->found_posts == 1 ) {
                 return esc_url( get_permalink( $company_ids_array ) );
             } else {
-                return esc_url( get_post_type_archive_link('jobus_job') . '?search_type=company_search&company_ids='.$company_ids_array );
+                return esc_url( get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids='.$company_ids_array );
             }
             
         }
@@ -462,17 +462,17 @@ function jobus_search_terms( string $terms ): array
     $result = [];
 
     // Verify the nonce before processing the request
-    if ( ! empty( $_GET[ 'jobus_filter_nonce' ] ) && wp_verify_nonce( sanitize_text_field( $_GET['jobus_filter_nonce']), 'jobus_filter_nonce' ) ) {
+    if ( ! empty( $_GET[ 'jobus_filter_nonce' ] ) && wp_verify_nonce( sanitize_text_field( $_GET['jobus_filter_nonce'] ), 'jobus_filter_nonce' ) ) {
 
         // Check if the parameter is set in the URL and sanitize the input
-        if (isset( $_GET[$terms] ) ) {
+        if ( isset( $_GET[$terms] ) ) {
             $raw_terms = $_GET[$terms] ?? '';
 
             // If it's an array, sanitize each element, otherwise sanitize the single value
-            if (is_array( $raw_terms) ) {
-                $result = array_map('sanitize_text_field', $raw_terms);
+            if ( is_array( $raw_terms ) ) {
+                $result = array_map( 'sanitize_text_field', $raw_terms );
             } else {
-                $result = [sanitize_text_field( $raw_terms)];
+                $result = [sanitize_text_field( $raw_terms )];
             }
         }
     }
@@ -570,13 +570,13 @@ function jobus_meta_taxonomy_args( $data = '', $post_type = 'jobus_job', $taxono
 /**
  * jobus search meta & taxonomy queries merge
  */
-function jobus_merge_queries_and_get_ids(...$queries): array
+function jobus_merge_queries_and_get_ids(...$queries ): array
 {
     $combined_post_ids = []; 
-    $search_term = get_query_var('s');
+    $search_term = get_query_var( 's' );
 
     foreach ( $queries as $query ) {
-        if (empty( $query[ 'args' ]) || !is_array( $query[ 'args' ]) ) {
+        if (empty( $query[ 'args' ] ) || ! is_array( $query[ 'args' ] ) ) {
             continue; // Skip invalid or empty queries
         }
 
@@ -584,15 +584,15 @@ function jobus_merge_queries_and_get_ids(...$queries): array
             $query['args']['s'] = $search_term;
         }
 
-        $wp_query = new \WP_Query( $query[ 'args' ]);
-        $post_ids = wp_list_pluck( $wp_query->posts, 'ID');
+        $wp_query = new \WP_Query( $query[ 'args' ] );
+        $post_ids = wp_list_pluck( $wp_query->posts, 'ID' );
 
-        if ( ! empty( $post_ids) ) {
-            $combined_post_ids = array_merge( $combined_post_ids, $post_ids);
+        if ( ! empty( $post_ids ) ) {
+            $combined_post_ids = array_merge( $combined_post_ids, $post_ids );
         }
     }
 
-    return array_unique( $combined_post_ids);
+    return array_unique( $combined_post_ids );
 }
 
 /**
@@ -607,22 +607,22 @@ function jobus_all_range_field_value (): array
         'post_status' => 'publish',
     );
 
-    $posts = get_posts( $args);
+    $posts = get_posts( $args );
     $post_ids = [];
 
-    if (!empty ( $posts) ) {
+    if ( ! empty ( $posts ) ) {
 
         foreach ( $posts as $post ) {
-            $meta = get_post_meta( $post->ID, 'jobus_meta_options', true);
+            $meta = get_post_meta( $post->ID, 'jobus_meta_options', true );
 
-            $filter_widgets = jobus_opt('job_sidebar_widgets');
+            $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
             $search_widgets = [];
 
-            if (isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+            if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
                 foreach ( $filter_widgets as $widget ) {
-                    if ( $widget[ 'widget_layout' ] == 'range') {
+                    if ( $widget[ 'widget_layout' ] == 'range' ) {
                         // if get value in search bar
-                        if ( ! empty( $_GET[ $widget[ 'widget_name' ] ]) ) {
+                        if ( ! empty( $_GET[ $widget[ 'widget_name' ] ] ) ) {
                             $search_widgets[] = $widget[ 'widget_name' ] ?? '';
                         }
                     }
@@ -651,56 +651,56 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
      * @param WP_Query $query The current WP_Query object.
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobus_showing_post_result_count(WP_Query $query, string $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20'): void
+    function jobus_showing_post_result_count( wP_Query $query, string $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' ): void
     {
-        if (!$query->have_posts() ) {
-            echo '<p class="' . esc_attr( $class) . '">' . esc_html__('No results found', 'jobus') . '</p>';
+        if ( !$query->have_posts() ) {
+            echo '<p class="' . esc_attr( $class ) . '">' . esc_html__( 'No results found', 'jobus' ) . '</p>';
             return;
         }
 
         // Get the current page number
-        $current_page = max(1, get_query_var('paged') );
+        $current_page = max(1, get_query_var( 'paged' ) );
 
         // Get the total number of posts for the current query
         $total_posts = $query->found_posts;
-        $total_posts = number_format_i18n( $total_posts);
+        $total_posts = number_format_i18n( $total_posts );
 
         // Calculate the range based on the current posts per page
-        $posts_per_page = $query->get('posts_per_page');
+        $posts_per_page = $query->get( 'posts_per_page' );
         $start_range = ( $current_page - 1) * $posts_per_page + 1;
-        $end_range = min( $current_page * $posts_per_page, $query->found_posts);
+        $end_range = min( $current_page * $posts_per_page, $query->found_posts );
         ?>
-        <p class="<?php echo esc_attr( $class); ?>">
+        <p class="<?php echo esc_attr( $class ); ?>">
             <?php
             $show_results = sprintf(
             /* translators: 1: start range, 2: end range, 3: total number of posts */
-                __('Showing %1$s-%2$s of %3$s results', 'jobus'),
+                __( 'Showing %1$s-%2$s of %3$s results', 'jobus' ),
                 '<span class="text-dark fw-500">' . $start_range . '</span>',
                 '<span class="text-dark fw-500">' . $end_range . '</span>',
                 '<span class="text-dark fw-500">' . $total_posts . '</span>'
             );
 
-            echo wp_kses( $show_results, ['span' => ['class' => []]]);
+            echo wp_kses( $show_results, ['span' => ['class' => []]] );
             ?>
         </p>
         <?php
     }
 }
 
-if ( !function_exists('jobus_social_share_icons') ) {
+if ( !function_exists( 'jobus_social_share_icons' ) ) {
     /**
      * Display the social share icons
      *
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobus_social_share_icons (string $class = 'style-none d-flex align-items-center'): void
+    function jobus_social_share_icons (string $class = 'style-none d-flex align-items-center' ): void
     {
         ?>
-        <ul class="<?php echo esc_attr( $class) ?>">
-            <li class="fw-500 me-2"><?php esc_html_e('Share:', 'jobus'); ?></li>
-            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Facebook', 'jobus'); ?>"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Linkedin', 'jobus'); ?>"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e('Share on Twitter', 'jobus'); ?>"><i class="bi bi-twitter"></i></a></li>
+        <ul class="<?php echo esc_attr( $class ); ?>">
+            <li class="fw-500 me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e( 'Share on Facebook', 'jobus' ); ?>"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e( 'Share on Linkedin', 'jobus' ); ?>"><i class="bi bi-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>" target="_blank" aria-label="<?php esc_attr_e( 'Share on Twitter', 'jobus' ); ?>"><i class="bi bi-twitter"></i></a></li>
         </ul>
         <?php
     }
@@ -716,7 +716,7 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
     function jobus_cs_bootstrap_icons( $icons = [] ) {
         // Adding new icons
         $icons[] = array(
-            'title' => esc_html__('Bootstrap Icons', 'jobus'),
+            'title' => esc_html__( 'Bootstrap Icons', 'jobus' ),
             'icons' => array(
                 'bi bi-facebook',
                 'bi bi-twitter',
@@ -755,10 +755,10 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
 
 
-function jobus_posts_count( $post_type): string
+function jobus_posts_count( $post_type ): string
 {
 
-    $total_posts = wp_count_posts( $post_type);
+    $total_posts = wp_count_posts( $post_type );
     return number_format_i18n( $total_posts->publish);
 
 }
@@ -768,7 +768,7 @@ function jobus_posts_count( $post_type): string
  */
 function jobus_meta_company_spec_name( $step = 1 ) {
 
-    $meta_options               = get_option('jobus_opt');
+    $meta_options               = get_option( 'jobus_opt' );
     $company_archive_meta     = $meta_options['company_archive_meta_'.$step];
     $company_specifications   = $meta_options['company_specifications'];
 
@@ -787,7 +787,7 @@ function jobus_meta_company_spec_name( $step = 1 ) {
  */
 function jobus_meta_candidate_spec_name( $step = 1 ) {
     
-    $meta_options               = get_option('jobus_opt');
+    $meta_options               = get_option( 'jobus_opt' );
     $candidate_archive_meta     = $meta_options['candidate_archive_meta_'.$step];
     $candidate_specifications   = $meta_options['candidate_specifications'];
 
@@ -804,30 +804,30 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
 add_action( 'phpmailer_init', 'jobus_phpmailer_init' );
 function jobus_phpmailer_init( $phpmailer ) {
     $phpmailer->isSMTP();
-    $phpmailer->Host = jobus_opt('smtp_host'); // your SMTP server
-    $phpmailer->Port = jobus_opt('smtp_port'); // SSL
+    $phpmailer->Host = jobus_opt( 'smtp_host' ); // your SMTP server
+    $phpmailer->Port = jobus_opt( 'smtp_port' ); // SSL
     $phpmailer->CharSet = "utf-8";
-    $phpmailer->SMTPAuth = jobus_opt('smtp_authentication');
-    $phpmailer->Username = jobus_opt('smtp_username');
-    $phpmailer->Password =  jobus_opt('smtp_password');
-    $phpmailer->SMTPSecure = jobus_opt('smtp_encryption');
-    $phpmailer->From       = jobus_opt('smtp_from_mail_address');
-    $phpmailer->FromName   = jobus_opt('smtp_from_name');
+    $phpmailer->SMTPAuth = jobus_opt( 'smtp_authentication' );
+    $phpmailer->Username = jobus_opt( 'smtp_username' );
+    $phpmailer->Password =  jobus_opt( 'smtp_password' );
+    $phpmailer->SMTPSecure = jobus_opt( 'smtp_encryption' );
+    $phpmailer->From       = jobus_opt( 'smtp_from_mail_address' );
+    $phpmailer->FromName   = jobus_opt( 'smtp_from_name' );
 
     return $phpmailer;
 }
 
-if ( ! function_exists( 'jobus_rtl') ) {
+if ( ! function_exists( 'jobus_rtl' ) ) {
     function jobus_rtl(): string {
         return is_rtl() ? 'true' : 'false';
     }
 }
 
-function jobus_track_candidate_views(int $candidate_id): void
+function jobus_track_candidate_views(int $candidate_id ): void
 {
 
     // Check if the user is logged in
-    if (!is_user_logged_in() ) {
+    if ( ! is_user_logged_in() ) {
         return; // If not logged in, no count is incremented.
     }
 
@@ -836,27 +836,27 @@ function jobus_track_candidate_views(int $candidate_id): void
 
     // Check if the user has already viewed this candidate's post.
     $user_viewed_key = 'jobus_user_viewed_' . $user_id . '_' . $candidate_id;
-    if (get_user_meta( $user_id, $user_viewed_key, true) ) {
+    if ( get_user_meta( $user_id, $user_viewed_key, true ) ) {
         return; // If the user has already viewed the post, don't count again.
     }
 
     // Mark that the user has viewed this post.
-    update_user_meta( $user_id, $user_viewed_key, '1');
+    update_user_meta( $user_id, $user_viewed_key, '1' );
 
-    // Track all-user views (excluding a jobus_candidate role)
-    if (!in_array('jobus_candidate', (array) $user->roles) ) {
-        $all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true);
-        $all_user_view_count = empty( $all_user_view_count) ? 0 : intval( $all_user_view_count);
+    // Track all-user views (excluding a jobus_candidate role )
+    if ( ! in_array( 'jobus_candidate', ( array ) $user->roles ) ) {
+        $all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true );
+        $all_user_view_count = empty( $all_user_view_count ) ? 0 : intval( $all_user_view_count );
         $all_user_view_count++;
-        update_post_meta( $candidate_id, 'all_user_view_count', $all_user_view_count);
+        update_post_meta( $candidate_id, 'all_user_view_count', $all_user_view_count );
     }
 
     // Track employer-specific views
-    if (in_array('jobus_employer', (array) $user->roles) ) {
-        $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true);
-        $employer_view_count = empty( $employer_view_count) ? 0 : intval( $employer_view_count);
+    if ( in_array( 'jobus_employer', ( array ) $user->roles ) ) {
+        $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
+        $employer_view_count = empty( $employer_view_count ) ? 0 : intval( $employer_view_count );
         $employer_view_count++;
-        update_post_meta( $candidate_id, 'employer_view_count', $employer_view_count);
+        update_post_meta( $candidate_id, 'employer_view_count', $employer_view_count );
     }
 
 }

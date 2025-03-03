@@ -13,7 +13,7 @@
  * Domain Path: /languages
  */
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
@@ -91,8 +91,8 @@ if ( ! class_exists( 'Jobus' ) ) {
         public function register_menu(): void
         {
             register_nav_menus([
-                'candidate_menu' => esc_html__('Candidate Menu', 'jobus'),
-            ]);
+                'candidate_menu' => esc_html__( 'Candidate Menu', 'jobus' ),
+            ] );
         }
         
 		/**
@@ -102,11 +102,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function load_files(): void
         {
-            add_action('plugins_loaded', function () {
-                if ( ! function_exists('is_plugin_active') ) {
+            add_action( 'plugins_loaded', function () {
+                if ( ! function_exists( 'is_plugin_active' ) ) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
-                if ( is_plugin_active('jobly/jobly.php') && file_exists(__DIR__ . '/includes/Admin/notice/deactivate-plugins.php') ) {
+                if ( is_plugin_active( 'jobly/jobly.php' ) && file_exists( __DIR__ . '/includes/Admin/notice/deactivate-plugins.php' ) ) {
                     require_once __DIR__ . '/includes/Admin/notice/deactivate-plugins.php';
                 }
             });
@@ -200,18 +200,18 @@ if ( ! class_exists( 'Jobus' ) ) {
          * Activation hook
          */
         public function activate(): void {
-            if ( ! get_option('jobus_installed') ) {
-                update_option('jobus_installed', time());
+            if ( ! get_option( 'jobus_installed' ) ) {
+                update_option( 'jobus_installed', time() );
             }
-            update_option('jobus_version', JOBUS_VERSION);
+            update_option( 'jobus_version', JOBUS_VERSION );
         }
 
         /**
          * Deactivation hook
          */
         public function deactivate(): void {
-            delete_option('jobus_installed');
-            delete_option('jobus_version');
+            delete_option( 'jobus_installed' );
+            delete_option( 'jobus_version' );
         }
 
 		/**

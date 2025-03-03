@@ -807,7 +807,7 @@ msgid "Set the value to '-1' to display all company posts."
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:50
-msgid "Posts Per Page (Candidate)"
+msgid "Posts Per Page (Candidate )"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:52
@@ -877,7 +877,7 @@ msgid "Add Option"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:111
-msgid "Meta Options (Icon/Image)"
+msgid "Meta Options (Icon/Image )"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:114
@@ -892,7 +892,7 @@ msgstr ""
 #: includes/Admin/options/settings-options.php:122
 #: includes/Admin/options/settings-options.php:448
 #: includes/Admin/options/settings-options.php:691
-msgid "Icon (Optional)"
+msgid "Icon (Optional )"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:123
@@ -902,7 +902,7 @@ msgid "Select icon"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:130
-msgid "Image (Optional)"
+msgid "Image (Optional )"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:131
@@ -1242,7 +1242,7 @@ msgid "SMTP Authentication"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:975
-msgid "Whether to use SMTP Authentication when sending an email (recommended: True)."
+msgid "Whether to use SMTP Authentication when sending an email (recommended: True )."
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:977
@@ -1266,7 +1266,7 @@ msgid "SMTP Password"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:996
-msgid "Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options)."
+msgid "Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options )."
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:1003
@@ -1274,7 +1274,7 @@ msgid "Type of Encryption"
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:1004
-msgid "The encryption which will be used when sending an email (recommended: TLS)."
+msgid "The encryption which will be used when sending an email (recommended: TLs )."
 msgstr ""
 
 #: includes/Admin/options/settings-options.php:1006
@@ -2988,7 +2988,7 @@ msgstr ""
 #: node_modules/@wordpress/block-editor/build-module/components/block-settings-menu/block-settings-dropdown.js:67
 #: node_modules/@wordpress/block-editor/src/components/block-settings-menu/block-settings-dropdown.js:73
 #, javascript-format
-msgid "Select parent block (%s)"
+msgid "Select parent block (%s )"
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/block-settings-menu/block-settings-dropdown.js:239
@@ -4703,22 +4703,22 @@ msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:20
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:20
-msgid "Duplicate the selected block(s)."
+msgid "Duplicate the selected block(s )."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:29
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:30
-msgid "Remove the selected block(s)."
+msgid "Remove the selected block(s )."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:38
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:41
-msgid "Insert a new block before the selected block(s)."
+msgid "Insert a new block before the selected block(s )."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:47
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:53
-msgid "Insert a new block after the selected block(s)."
+msgid "Insert a new block after the selected block(s )."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:56
@@ -4748,12 +4748,12 @@ msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:102
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:119
-msgid "Move the selected block(s) up."
+msgid "Move the selected block(s ) up."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/keyboard-shortcuts/index.js:111
 #: node_modules/@wordpress/block-editor/src/components/keyboard-shortcuts/index.js:129
-msgid "Move the selected block(s) down."
+msgid "Move the selected block(s ) down."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/line-height-control/index.native.js:18
@@ -4880,7 +4880,7 @@ msgstr ""
 #: node_modules/@wordpress/block-editor/build-module/components/list-view/block.js:99
 #: node_modules/@wordpress/block-editor/src/components/list-view/block.js:120
 #, javascript-format
-msgid "%s (locked)"
+msgid "%s (locked )"
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/list-view/block.js:102
@@ -5275,7 +5275,7 @@ msgstr ""
 #: node_modules/@wordpress/block-editor/build-module/components/spacing-sizes-control/input-controls/spacing-input-control.js:169
 #: node_modules/@wordpress/block-editor/src/components/spacing-sizes-control/input-controls/spacing-input-control.js:125
 #, javascript-format
-msgid "Custom (%s)"
+msgid "Custom (%s )"
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/spacing-sizes-control/input-controls/spacing-input-control.js:298
@@ -5479,7 +5479,7 @@ msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/use-paste-styles/index.js:113
 #: node_modules/@wordpress/block-editor/src/components/use-paste-styles/index.js:146
-msgid "Unable to paste styles. This feature is only available on secure (https) sites in supporting browsers."
+msgid "Unable to paste styles. This feature is only available on secure (https ) sites in supporting browsers."
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/components/use-paste-styles/index.js:121
@@ -5637,7 +5637,7 @@ msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/hooks/custom-class-name.js:54
 #: node_modules/@wordpress/block-editor/src/hooks/custom-class-name.js:53
-msgid "Additional CSS class(es)"
+msgid "Additional CSS class(es )"
 msgstr ""
 
 #: node_modules/@wordpress/block-editor/build-module/hooks/custom-class-name.js:61
@@ -6457,7 +6457,7 @@ msgstr ""
 #: node_modules/@wordpress/components/build-module/font-size-picker/index.native.js:74
 #: node_modules/@wordpress/components/src/font-size-picker/index.native.js:81
 #, javascript-format
-msgid "%1$s (%2$s)"
+msgid "%1$s (%2$s )"
 msgstr ""
 
 #: node_modules/@wordpress/components/build-module/font-size-picker/index.native.js:80
@@ -6521,7 +6521,7 @@ msgstr ""
 
 #: node_modules/@wordpress/components/build-module/form-token-field/token.js:47
 #, javascript-format
-msgid "%1$s (%2$s of %3$s)"
+msgid "%1$s (%2$s of %3$s )"
 msgstr ""
 
 #: node_modules/@wordpress/components/build-module/gradient-picker/index.js:43
@@ -7082,7 +7082,7 @@ msgstr ""
 
 #: node_modules/@wordpress/components/build-module/unit-control/utils.js:99
 #: node_modules/@wordpress/components/build-module/unit-control/utils.js:100
-msgid "Points (pt)"
+msgid "Points (pt )"
 msgstr ""
 
 #: node_modules/@wordpress/components/build-module/unit-control/utils.js:105

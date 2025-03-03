@@ -28,11 +28,11 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                         <div class="total-job-found">
                             <?php esc_html_e( 'All', 'jobus' ); ?>
                             <span class="text-dark fw-500">
-                                <?php echo esc_html(jobus_posts_count('jobus_company' ) ) ?>
+                                <?php echo esc_html( jobus_posts_count( 'jobus_company' ) ); ?>
                             </span>
                             <?php
                             /* translators: 1: company found, 2: companies found */
-                            echo esc_html( sprintf( _n( 'company found', 'companies found', jobus_posts_count('jobus_company'), 'jobus' ), jobus_posts_count( 'jobus_company' ) ) );
+                            echo esc_html( sprintf( _n( 'company found', 'companies found', jobus_posts_count( 'jobus_company' ), 'jobus' ), jobus_posts_count( 'jobus_company' ) ) );
                             ?>
                         </div>
                         <div class="d-flex align-items-center">
@@ -53,23 +53,23 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
 
-                                        <option <?php echo esc_attr( $default); ?>>
+                                        <option <?php echo esc_attr( $default ); ?>>
                                             <?php esc_html_e( 'Default', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old)  ?>>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old )  ?>>
                                             <?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new) ?>>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new ); ?>>
                                             <?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc) ?>>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc ); ?>>
                                             <?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
                                         </option>
 
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc) ?>>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc ); ?>>
                                             <?php esc_html_e( 'Title Descending', 'jobus' ); ?>
                                         </option> 
                                                                                
@@ -77,10 +77,10 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                 </form>
                             </div>
 
-                            <a href="<?php echo esc_url( $list_view_url); ?>" class="style-changer-btn rounded-circle tran3s ms-2 list-btn <?php echo esc_attr( $current_view === 'grid') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active List', 'jobus'); ?>">
+                            <a href="<?php echo esc_url( $list_view_url ); ?>" class="style-changer-btn rounded-circle tran3s ms-2 list-btn <?php echo esc_attr( $current_view === 'grid' ) ? ' active' : ''; ?>" title="<?php esc_attr_e( 'Active List', 'jobus' ); ?>">
                                 <i class="bi bi-list"></i>
                             </a>
-                            <a href="<?php echo esc_url( $grid_view_url); ?>" class="style-changer-btn rounded-circle tran3s ms-2 grid-btn <?php echo esc_attr( $current_view === 'list') ? ' active' : ''; ?>" title="<?php esc_attr_e('Active Grid', 'jobus'); ?>">
+                            <a href="<?php echo esc_url( $grid_view_url ); ?>" class="style-changer-btn rounded-circle tran3s ms-2 grid-btn <?php echo esc_attr( $current_view === 'list' ) ? ' active' : ''; ?>" title="<?php esc_attr_e( 'Active Grid', 'jobus' ); ?>">
                                 <i class="bi bi-grid"></i>
                             </a>
 
@@ -94,17 +94,17 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                             <div class="row">
                                 <?php
                                 while ( $company_query->have_posts() ) : $company_query->the_post();
-                                    $company_count  = jobus_get_selected_company_count(get_the_ID(), false);
-                                    $meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
+                                    $company_count  = jobus_get_selected_company_count( get_the_ID(), false );
+                                    $meta = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
                                     $post_favourite = $meta[ 'post_favorite' ] ?? '';
-                                    $is_favourite = ( $post_favourite == '1') ? ' favourite' : '';
+                                    $is_favourite = ( $post_favourite == '1' ) ? ' favourite' : '';
                                     ?>
                                     <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 d-flex">
-                                        <div class="company-grid-layout mb-30<?php echo esc_attr( $is_favourite) ?>">
+                                        <div class="company-grid-layout mb-30<?php echo esc_attr( $is_favourite ); ?>">
                                             <?php if ( has_post_thumbnail() ) : ?>
                                                 <a href="<?php the_permalink(); ?>"
                                                    class="company-logo me-auto ms-auto rounded-circle">
-                                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
+                                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
                                                 </a>
                                             <?php endif; ?>
                                             <h5 class="text-center">
@@ -120,7 +120,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                 <p class="text-center mb-auto text-capitalize">
                                                     <?php
                                                     foreach ( $locations as $location ) {
-                                                        echo esc_html( $location->name);
+                                                        echo esc_html( $location->name );
                                                     }
                                                     ?>
                                                 </p>
@@ -133,7 +133,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                     <a href="<?php echo jobus_get_selected_company_count( get_the_ID(), true ); ?>">
                                                         <?php
                                                         /* translators: 1: Vacancy, 2: Vacancies */
-                                                        echo esc_html( sprintf( _n('%d Vacancy', '%d Vacancies', $company_count, 'jobus' ), $company_count ) );
+                                                        echo esc_html( sprintf( _n( '%d Vacancy', '%d Vacancies', $company_count, 'jobus' ), $company_count ) );
                                                         ?>
                                                     </a>
                                                 </div>
@@ -154,17 +154,17 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                         <div class="accordion-box list-style">
                             <?php
                             while ( $company_query->have_posts() ) : $company_query->the_post();
-                                $company_count  = jobus_get_selected_company_count(get_the_ID(), false);
-                                $meta           = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
+                                $company_count  = jobus_get_selected_company_count( get_the_ID(), false );
+                                $meta           = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
                                 $post_favourite = $meta[ 'post_favorite' ] ?? '';
-                                $is_favourite   = ( $post_favourite == '1') ? ' favourite' : '';
+                                $is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
                                 ?>
-                                <div class="company-list-layout mb-20<?php echo esc_attr( $is_favourite) ?>">
+                                <div class="company-list-layout mb-20<?php echo esc_attr( $is_favourite ); ?>">
                                     <div class="row justify-content-between align-items-center">
                                         <div class="col-xl-5">
                                             <div class="d-flex align-items-xl-center">
                                                 <a href="<?php the_permalink(); ?>" class="company-logo rounded-circle">
-                                                    <?php the_post_thumbnail('full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
+                                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
                                                 </a>
                                                 <div class="company-data">
                                                     
@@ -194,9 +194,9 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                     <div class="d-flex align-items-center">
                                                         <div class="team-text text-capitalize">
                                                             <span class="text-md fw-500 text-dark d-block">
-                                                                <?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2') ?>
+                                                                <?php echo jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_2' ); ?>
                                                             </span>
-                                                            <?php echo esc_html( jobus_meta_company_spec_name(2 ) ) ?>
+                                                            <?php echo esc_html( jobus_meta_company_spec_name(2 ) ); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -210,7 +210,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
                                                     <a href="<?php echo jobus_get_selected_company_count( get_the_ID(), true ); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
                                                         <?php
                                                         /* translators: 1: open job, 2: open jobs */
-                                                        echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobus'), $company_count ) );
+                                                        echo esc_html( sprintf( _n( '%d open job', '%d open jobs', $company_count, 'jobus' ), $company_count ) );
                                                         ?>
                                                     </a>
                                                     <?php

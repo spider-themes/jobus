@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Admin\CPT;
 
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -15,22 +15,22 @@ class Job_Application{
         add_action( 'init', [ $this, 'register_post_types_applications' ] );
 
         // Admin Columns
-        add_filter('manage_edit-job_application_columns', [ $this, 'job_application_columns' ] );
-        add_action('manage_job_application_posts_custom_column', [ $this, 'job_application_columns_data'], 10, 2);
+        add_filter( 'manage_edit-job_application_columns', [ $this, 'job_application_columns' ] );
+        add_action( 'manage_job_application_posts_custom_column', [ $this, 'job_application_columns_data'], 10, 2);
 
         // Add custom content to an edit form
-        add_action('edit_form_top', array( $this, 'admin_single_subtitle'));
-        add_action('add_meta_boxes', [ $this, 'admin_single_contents' ] );
+        add_action( 'edit_form_top', array( $this, 'admin_single_subtitle' ) );
+        add_action( 'add_meta_boxes', [ $this, 'admin_single_contents' ] );
     }
 
     public static function init() {
-        if (is_null(self::$instance)) {
+        if (is_null(self::$instance ) ) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function admin_single_subtitle($post): void
+    public function admin_single_subtitle( $post ): void
     {
         if ( $post->post_type === 'jobus_applicant' ) {
             $candidate_ip = get_post_meta( $post->ID, 'candidate_ip', true );
@@ -38,11 +38,11 @@ class Job_Application{
             <p class="jobus-application-submission-info">
                 <span class="jobus-application-submission-date">
                     <?php 
-                    esc_html_e('Submitted On ', 'jobus' );
-                    echo esc_html( get_the_time(get_option('date_format')));
+                    esc_html_e( 'Submitted On ', 'jobus' );
+                    echo esc_html( get_the_time( get_option( 'date_format' ) ));
                     ?>
                 </span>
-                <span class="jobus-applicant-ip"><?php esc_html_e('from IP', 'jobus' ); ?> 
+                <span class="jobus-applicant-ip"><?php esc_html_e( 'from IP', 'jobus' ); ?> 
                     <?php echo esc_html( $candidate_ip ); ?>
                 </span>
             </p>
@@ -55,7 +55,7 @@ class Job_Application{
         add_meta_box( 'applicant-details-meta-box', esc_html__( 'Applicant Details', 'jobus' ), array( $this, 'render_single_contents' ), 'jobus_applicant' );
     }
 
-    public function render_single_contents($post): void
+    public function render_single_contents( $post ): void
     {
         if ( $post->post_type === 'jobus_applicant' ) {
             require_once plugin_dir_path(__FILE__) . '../templates/meta/applicant-single.php';
@@ -119,7 +119,7 @@ class Job_Application{
                 $job_id = get_post_meta( $post_id, 'job_applied_for_id', true );
                 $job_title = get_post_meta( $post_id, 'job_applied_for_title', true );
                 if ( $job_id && $job_title ) {
-                    echo '<a href="' . esc_url(get_edit_post_link( $job_id ) ) . '">' . esc_html( $job_title ) . '</a>';
+                    echo '<a href="' . esc_url( get_edit_post_link( $job_id ) ) . '">' . esc_html( $job_title ) . '</a>';
                 }
                 break;
             case 'submission_time':

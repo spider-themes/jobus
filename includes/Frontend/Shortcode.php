@@ -1,7 +1,7 @@
 <?php
 namespace Jobus\includes\Frontend;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -32,7 +32,7 @@ class Shortcode {
      * @param string $content  Shortcode content.
      * @return string          Generated HTML content.
      */
-    public function job_page_shortcode(array $atts, string $content = '' ): string
+    public function job_page_shortcode( array $atts, string $content = '' ): string
     {
 
         ob_start();
@@ -52,7 +52,7 @@ class Shortcode {
      * @param string $content Shortcode content.
      * @return string Generated HTML content.
      */
-    public function company_page_shortcode(array $atts, string $content = '' ): string
+    public function company_page_shortcode( array $atts, string $content = '' ): string
     {
         ob_start();
         self::company_page_layout( $atts );
@@ -72,7 +72,7 @@ class Shortcode {
      * @param string $content Shortcode content.
      * @return string Generated HTML content.
      */
-    public function candidate_page_shortcode(array $atts, string $content = '' ): string
+    public function candidate_page_shortcode( array $atts, string $content = '' ): string
     {
         ob_start();
         self::candidate_page_layout( $atts );
@@ -89,7 +89,7 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function job_page_layout(array $args = [] ): void
+    public static function job_page_layout( array $args = [] ): void
     {
 
         if ( ! is_admin() ) {
@@ -107,7 +107,7 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function company_page_layout(array $args = [] ): void
+    public static function company_page_layout( array $args = [] ): void
     {
 
         if ( ! is_admin() ) {
@@ -125,13 +125,13 @@ class Shortcode {
      * @param array $args  Additional arguments for customizing the layout.
      * @return void
      */
-    public static function candidate_page_layout(array $args = [] ): void
+    public static function candidate_page_layout( array $args = [] ): void
     {
 
-        if (!is_admin()) {
-            jobus_get_template('archive-candidate.php', [
+        if ( ! is_admin() ) {
+            jobus_get_template( 'archive-candidate.php', [
                 'jobus_candidate_archive_layout' => $args['candidate_layout'],
-            ]);
+            ] );
         }
 
     }

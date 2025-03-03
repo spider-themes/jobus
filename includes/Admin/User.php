@@ -2,7 +2,7 @@
 namespace jobus\includes\Admin;
 use JetBrains\PhpStorm\NoReturn;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -16,7 +16,7 @@ class User {
     public function __construct() {
 
         // Add Manage Custom User Roles
-        add_action('init', [ $this, 'manage_user_roles' ] );
+        add_action( 'init', [ $this, 'manage_user_roles' ] );
 
         // Add Manage Custom User Roles
         register_activation_hook(__FILE__, [ $this, 'add_user_roles' ] );
@@ -25,15 +25,15 @@ class User {
         register_deactivation_hook(__FILE__, [ $this, 'remove_user_roles' ] );
 
         // Handle Candidate Registration for non-logged and logged-in in users
-        add_action('admin_post_nopriv_register_candidate', [ $this, 'candidate_registration' ] );
-        add_action('admin_post_register_candidate', [ $this, 'candidate_registration' ] );
+        add_action( 'admin_post_nopriv_register_candidate', [ $this, 'candidate_registration' ] );
+        add_action( 'admin_post_register_candidate', [ $this, 'candidate_registration' ] );
 
         // Handle Employer  Registration for non-logged and logged-in in users
-        add_action('admin_post_nopriv_register_employer', [ $this, 'employer_registration' ] );
-        add_action('admin_post_register_employer', [ $this, 'employer_registration' ] );
+        add_action( 'admin_post_nopriv_register_employer', [ $this, 'employer_registration' ] );
+        add_action( 'admin_post_register_employer', [ $this, 'employer_registration' ] );
 
         // Restrict admin menu items for users with the Candidate role
-        add_action('admin_menu', [ $this, 'restrict_candidate_menu' ] );
+        add_action( 'admin_menu', [ $this, 'restrict_candidate_menu' ] );
     }
 
     public function manage_user_roles(): void
@@ -59,7 +59,7 @@ class User {
             'delete_private_posts'  => true,
             'delete_others_posts'   => false, // Restrict deleting others' posts
             'delete_published_posts'=> true,
-        ));
+        ) );
 
         add_role( 'jobus_employer', esc_html__( 'Employer (Jobus)', 'jobus' ), array(
             'read'                  => true,
@@ -77,16 +77,16 @@ class User {
             'delete_private_posts'  => true,
             'delete_others_posts'   => false, // Restrict deleting others' posts
             'delete_published_posts'=> true,
-        ));
+        ) );
     }
 
     public function remove_user_roles(): void
     {
-        remove_role('jobus_candidate' );
-        remove_role('jobus_employer' );
+        remove_role( 'jobus_candidate' );
+        remove_role( 'jobus_employer' );
     }
 
-    private function create_user($username, $password, $email, $role): \WP_Error|int
+    private function create_user( $username, $password, $email, $role ): \WP_Error|int
     {
         $user_data = [
             'user_login' => $username,
@@ -94,7 +94,7 @@ class User {
             'user_email' => $email,
             'role'       => $role, // Role like 'jobus_candidate' or 'jobus_employer'
         ];
-        return wp_insert_user($user_data);
+        return wp_insert_user( $user_data);
     }
 
     private function login_user( $username, $password ): \WP_Error|\WP_User
@@ -135,14 +135,14 @@ class User {
             wp_die( esc_html__( 'Username or email already exists', 'jobus' ) );
         }
 
-        $candidate_id = $this->create_user($candidate_username, $candidate_password, $candidate_email, 'jobus_candidate' );
-        if (is_wp_error($candidate_id)) {
-            wp_die( esc_html( $candidate_id->get_error_message()));
+        $candidate_id = $this->create_user( $candidate_username, $candidate_password, $candidate_email, 'jobus_candidate' );
+        if (is_wp_error( $candidate_id ) ) {
+            wp_die( esc_html( $candidate_id->get_error_message() ));
         }
         
         // Proceed only if a valid user ID is returned
-        if ($candidate_id && is_numeric($candidate_id)) {
-            $candidate_signon = $this->login_user($candidate_username, $candidate_password);
+        if ( $candidate_id && is_numeric( $candidate_id ) ) {
+            $candidate_signon = $this->login_user( $candidate_username, $candidate_password );
             if ( is_wp_error( $candidate_signon ) ) {
                 wp_die( esc_html( $candidate_signon->get_error_message() ) );
             }
@@ -163,10 +163,10 @@ class User {
         }
 
         // Get form data
-        $employer_username = ! empty( $_POST['employer_username' ] ) ? sanitize_user( wp_unslash($_POST['employer_username' ] ) ) : '';
-        $employer_email = ! empty( $_POST['employer_email' ] ) ? sanitize_email( wp_unslash($_POST['employer_email' ] ) ) : '';
-        $employer_password = ! empty( $_POST['employer_pass' ] ) ? sanitize_text_field( wp_unslash($_POST['employer_pass' ] ) ) : '';
-        $employer_confirm_password = ! empty( $_POST['employer_confirm_pass' ] ) ? sanitize_text_field( wp_unslash($_POST['employer_confirm_pass' ] ) ) : '';
+        $employer_username = ! empty( $_POST['employer_username' ] ) ? sanitize_user( wp_unslash( $_POST['employer_username' ] ) ) : '';
+        $employer_email = ! empty( $_POST['employer_email' ] ) ? sanitize_email( wp_unslash( $_POST['employer_email' ] ) ) : '';
+        $employer_password = ! empty( $_POST['employer_pass' ] ) ? sanitize_text_field( wp_unslash( $_POST['employer_pass' ] ) ) : '';
+        $employer_confirm_password = ! empty( $_POST['employer_confirm_pass' ] ) ? sanitize_text_field( wp_unslash( $_POST['employer_confirm_pass' ] ) ) : '';
 
         if ( $employer_password !== $employer_confirm_password ) {
             wp_die( esc_html__( 'Passwords do not match', 'jobus' ) );
@@ -196,7 +196,7 @@ class User {
     public function restrict_candidate_menu(): void
     {
         $user = wp_get_current_user();
-        if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
+        if ( in_array( 'jobus_candidate', ( array ) $user->roles ) ) {
             // Remove unnecessary menus
             remove_menu_page( 'edit.php' ); // Posts
             remove_menu_page( 'edit-comments.php' ); // Comments

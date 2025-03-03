@@ -1,24 +1,24 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if (class_exists('CSF')) {
+if (class_exists( 'CSF' ) ) {
 
     // Set a unique slug-like ID for meta options
     $meta_candidate_prefix = 'jobus_meta_candidate_options';
 
-    CSF::createMetabox($meta_candidate_prefix, array(
-        'title' => esc_html__('Candidate Options', 'jobus'),
+    CSF::createMetabox( $meta_candidate_prefix, array(
+        'title' => esc_html__( 'Candidate Options', 'jobus' ),
         'post_type' => 'jobus_candidate',
         'theme' => 'dark',
         'output_css' => true,
         'show_restore' => true,
-    ));
+    ) );
 
     // Company Info Meta Options
-    CSF::createSection($meta_candidate_prefix, array(
-        'title' => esc_html__('General', 'jobus'),
+    CSF::createSection( $meta_candidate_prefix, array(
+        'title' => esc_html__( 'General', 'jobus' ),
         'id' => 'jobus_meta_general',
         'icon' => 'fas fa-home',
         'fields' => array(
@@ -26,17 +26,17 @@ if (class_exists('CSF')) {
 	        // Single Post Layout
 	        array(
 		        'type'    => 'subheading',
-		        'content' => esc_html__('Single Post Layout', 'jobus'),
+		        'content' => esc_html__( 'Single Post Layout', 'jobus' ),
 	        ),
 
 	        array(
 		        'id'        => 'candidate_profile_layout',
 		        'type'      => 'image_select',
-		        'title'     => esc_html__('Choose Layout', 'jobus'),
-		        'subtitle'  => esc_html__('Select the preferred layout for your candidate post for this page.', 'jobus'),
+		        'title'     => esc_html__( 'Choose Layout', 'jobus' ),
+		        'subtitle'  => esc_html__( 'Select the preferred layout for your candidate post for this page.', 'jobus' ),
 		        'options'   => array(
-			        '1' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-1.png'),
-			        '2' => esc_url(JOBUS_IMG . '/layout/candidate/candidate-profile-2.png'),
+			        '1' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-1.png' ),
+			        '2' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-2.png' ),
 		        ),
 		        'default'   => '1'
 	        ),
@@ -44,7 +44,7 @@ if (class_exists('CSF')) {
             array(
                 'id' => 'post_favorite',
                 'type' => 'checkbox',
-                'title' => esc_html__('Favorite', 'jobus'),
+                'title' => esc_html__( 'Favorite', 'jobus' ),
                 'default' => false,
             ),
 
@@ -57,30 +57,30 @@ if (class_exists('CSF')) {
             )
 
         )
-    ));
+    ) );
 
 
     // Retrieve the repeater field configurations from settings options
-    $candidate_specifications = jobus_opt('candidate_specifications');
-    if (!empty($candidate_specifications)) {
-        foreach ($candidate_specifications as $field) {
+    $candidate_specifications = jobus_opt( 'candidate_specifications' );
+    if ( ! empty( $candidate_specifications ) ) {
+        foreach ( $candidate_specifications as $field ) {
 
             $meta_value     = $field['meta_values_group'] ?? [];
-            $meta_icon      = !empty($field['meta_icon']) ? '<i class="' . esc_attr($field['meta_icon']) . '"></i>' : '';
+            $meta_icon      = ! empty( $field['meta_icon'] ) ? '<i class="' . esc_attr( $field['meta_icon'] ) . '"></i>' : '';
             $opt_values     = [];
             $opt_val        = '';
 
-            foreach ($meta_value as $value) {
-                $modifiedString = preg_replace('/[,\s]+/', '@space@', $value['meta_values']);
-                $opt_val = strtolower($modifiedString);
-                $opt_values[esc_attr($opt_val)] = esc_html($value['meta_values']);
+            foreach ( $meta_value as $value ) {
+                $modifiedString = preg_replace( '/[,\s]+/', '@space@', $value['meta_values'] );
+                $opt_val = strtolower( $modifiedString);
+                $opt_values[esc_attr( $opt_val )] = esc_html( $value['meta_values'] );
             }
 
-            if (!empty($field['meta_key'])) {
+            if ( ! empty( $field['meta_key'] ) ) {
                 $candidate_fields[] = [
-                    'id' => esc_attr($field['meta_key']) ?? '',
+                    'id' => esc_attr( $field['meta_key'] ) ?? '',
                     'type' => 'select',
-                    'title' => esc_html($field['meta_name']) ?? '',
+                    'title' => esc_html( $field['meta_name'] ) ?? '',
                     'options' => $opt_values,
                     'multiple' => true,
                     'chosen' => true,
@@ -90,12 +90,12 @@ if (class_exists('CSF')) {
             }
         }
 
-        CSF::createSection($meta_candidate_prefix, array(
-            'title' => esc_html__('Specifications', 'jobus'),
+        CSF::createSection( $meta_candidate_prefix, array(
+            'title' => esc_html__( 'Specifications', 'jobus' ),
             'fields' => $candidate_fields,
             'icon'   => 'fas fa-cogs',
             'id'     => 'jobus_meta_candidate_specifications',
-        ));
+        ) );
 
     } //End Candidate Specifications
 
@@ -172,7 +172,7 @@ if (class_exists('CSF')) {
             array(
                 'id'          => 'jobus_candidate_location',
                 'type'        => 'map',
-                'title'       => esc_html__('Location', 'jobus'),
+                'title'       => esc_html__( 'Location', 'jobus' ),
                 'height'   => '500px',
                 'settings' => array(
                     'scrollWheelZoom' => true,
@@ -247,28 +247,28 @@ if (class_exists('CSF')) {
                         'id'            => 'sl_num',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Serial Number', 'jobus' ),
-                        'default'       => esc_html__('1', 'jobus'),
+                        'default'       => esc_html__( '1', 'jobus' ),
                     ),
 
                     array(
                         'id'            => 'title',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Title', 'jobus' ),
-                        'default'       => esc_html__('Bachelor Degree of Design', 'jobus'),
+                        'default'       => esc_html__( 'Bachelor Degree of Design', 'jobus' ),
                     ),
 
                     array(
                         'id'            => 'academy',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Academy', 'jobus' ),
-                        'default'       => esc_html__('University of Boston', 'jobus'),
+                        'default'       => esc_html__( 'University of Boston', 'jobus' ),
                     ),
 
                     /*array(
                         'id'            => 'year',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Year', 'jobus' ),
-                        'default'       => esc_html__('2012-16', 'jobus'),
+                        'default'       => esc_html__( '2012-16', 'jobus' ),
                     ),*/
 
                     array(
@@ -281,10 +281,10 @@ if (class_exists('CSF')) {
                 ),
                 'default' => array(
                     array(
-                        'sl_num' => esc_html__('1', 'jobus'),
-                        'title' => esc_html__('Bachelor Degree of Design', 'jobus'),
-                        'academy' => esc_html__('University of Boston', 'jobus'),
-                        'year' => esc_html__('2012-16', 'jobus'),
+                        'sl_num' => esc_html__( '1', 'jobus' ),
+                        'title' => esc_html__( 'Bachelor Degree of Design', 'jobus' ),
+                        'academy' => esc_html__( 'University of Boston', 'jobus' ),
+                        'year' => esc_html__( '2012-16', 'jobus' ),
                         'description' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobus' ),
                     ),
                 ),
@@ -320,21 +320,21 @@ if (class_exists('CSF')) {
                         'id'            => 'sl_num',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Serial Number', 'jobus' ),
-                        'default'       => esc_html__('1', 'jobus'),
+                        'default'       => esc_html__( '1', 'jobus' ),
                     ),
 
                     array(
                         'id'            => 'title',
                         'type'          => 'text',
                         'title'         => esc_html__( 'Title', 'jobus' ),
-                        'default'       => esc_html__('Product Designer (Google)', 'jobus'),
+                        'default'       => esc_html__( 'Product Designer (Google)', 'jobus' ),
                     ),
 
                     array(
                         'id'            => 'start_date',
                         'type'          => 'date',
                         'title'         => esc_html__( 'Start Date', 'jobus' ),
-                        'default'       => esc_html__('02/03/18 - 13/05/20', 'jobus'),
+                        'default'       => esc_html__( '02/03/18 - 13/05/20', 'jobus' ),
                         'settings' => array(
                             'dateFormat'      => 'dd/mm/yy',
                             'changeMonth'     => true,
@@ -369,9 +369,9 @@ if (class_exists('CSF')) {
                 ),
                 'default' => array(
                     array(
-                        'sl_num' => esc_html__('1', 'jobus'),
-                        'title' => esc_html__('Product Designer (Google)', 'jobus'),
-                        'year' => esc_html__('2012-16', 'jobus'),
+                        'sl_num' => esc_html__( '1', 'jobus' ),
+                        'title' => esc_html__( 'Product Designer (Google)', 'jobus' ),
+                        'year' => esc_html__( '2012-16', 'jobus' ),
                         'description' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobus' ),
                     ),
                 ),

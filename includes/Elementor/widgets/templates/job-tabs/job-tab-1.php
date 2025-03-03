@@ -1,5 +1,5 @@
 <?php
-if ( ! defined('ABSPATH') ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 ?>
@@ -38,7 +38,7 @@ if ( ! defined('ABSPATH') ) {
                 $cat_slug .= $cat->slug . ' ';
             }
             ?>
-            <div class="isotop-item <?php echo esc_attr($cat_slug) ?>">
+            <div class="isotop-item <?php echo esc_attr( $cat_slug ); ?>">
                 <div class="job-list-two mt-40 lg-mt-20 position-relative">
 
                     <?php
@@ -54,7 +54,7 @@ if ( ! defined('ABSPATH') ) {
                         ?>
                         <div>
                             <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                <?php echo jobus_get_meta_attributes( 'jobus_meta_options', $settings[  'job_attr_meta_1' ] ) ?>
+                                <?php echo jobus_get_meta_attributes( 'jobus_meta_options', $settings[  'job_attr_meta_1' ] ); ?>
                             </a>
                         </div>
                         <?php
@@ -62,11 +62,11 @@ if ( ! defined('ABSPATH') ) {
                     ?>
                     <div>
                         <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
-                            <?php jobus_title_length( $settings, 'title_length' ) ?>
+                            <?php jobus_title_length( $settings, 'title_length' ); ?>
                         </a>
                     </div>
                     <div class="job-date">
-                        <?php the_time( get_option('date_format') ); ?>
+                        <?php the_time( get_option( 'date_format' ) ); ?>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <?php 
@@ -74,7 +74,7 @@ if ( ! defined('ABSPATH') ) {
                             ?>
                             <div class="job-location">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php echo jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_2'] ) ?>
+                                    <?php echo jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_2'] ); ?>
                                 </a>
                             </div>
                             <?php 
@@ -95,18 +95,18 @@ if ( ! defined('ABSPATH') ) {
             ?>
             <div class="isotop-item">
                 <div class="card-style-four bg-color tran3s w-100 mt-40 lg-mt-20">
-                    <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="d-block">
+                    <a <?php jobus_button_link( $settings['view_all_btn_url'] ); ?> class="d-block">
                         <div class="title text-white">
-                            <?php echo esc_html( $formatted_count ) ?>
+                            <?php echo esc_html( $formatted_count ); ?>
                         </div>
                         <div class="text-lg text-white">
-                            <?php esc_html_e('Job already posted', 'jobus'); ?>
+                            <?php esc_html_e( 'Job already posted', 'jobus' ); ?>
                         </div>
                         <div class="d-flex align-items-center justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">
-                            <img src="<?php echo esc_url( JOBUS_IMG . '/icons/line.svg' ) ?>" alt="<?php esc_attr_e( 'Line Icon', 'jobus' ); ?>" class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/icons/line.svg' ); ?>" alt="<?php esc_attr_e( 'Line Icon', 'jobus' ); ?>" class="lazy-img">
 
                             <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
-                                <img src="<?php echo esc_url( JOBUS_IMG . '/icons/arrow_icon.svg' ) ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">
+                                <img src="<?php echo esc_url( JOBUS_IMG . '/icons/arrow_icon.svg' ); ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">
                             </div>
                         </div>
                     </a>

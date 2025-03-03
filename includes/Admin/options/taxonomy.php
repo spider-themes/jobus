@@ -1,5 +1,5 @@
 <?php
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
@@ -26,34 +26,34 @@ if ( class_exists( 'CSF' ) ) {
             array(
                 'id'      => 'cat_img',
                 'type'    => 'media',
-                'title'   => esc_html__('Image', 'jobus'),
+                'title'   => esc_html__( 'Image', 'jobus' ),
             ),
 
             array(
                 'id'          => 'text_color',
                 'type'        => 'color',
-                'title'       => esc_html__('Text Color', 'jobus'),
+                'title'       => esc_html__( 'Text Color', 'jobus' ),
                 'output_mode' => 'color'
             ),
 
             array(
                 'id'          => 'text_bg_color',
                 'type'        => 'color',
-                'title'       => esc_html__('Background Color', 'jobus'),
+                'title'       => esc_html__( 'Background Color', 'jobus' ),
                 'output_mode' => 'background-color'
             ),
 
             array(
                 'id'          => 'hover_bg_color',
                 'type'        => 'color',
-                'title'       => esc_html__('Hover Background Color', 'jobus'),
+                'title'       => esc_html__( 'Hover Background Color', 'jobus' ),
                 'output_mode' => 'background-color'
             ),
 
             array(
                 'id'          => 'hover_border_color',
                 'type'        => 'color',
-                'title'       => esc_html__('Hover Border Color', 'jobus'),
+                'title'       => esc_html__( 'Hover Border Color', 'jobus' ),
                 'output_mode' => 'border-color'
             ),
 

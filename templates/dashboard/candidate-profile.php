@@ -1,11 +1,10 @@
 <?php
 $user = wp_get_current_user();
 
-
 // Check if the user has uploaded a custom profile image
-$custom_avatar_url = get_user_meta($user->ID, 'candidate_profile_picture', true);
-$avatar_url = !empty($custom_avatar_url) ? $custom_avatar_url : get_avatar_url($user->ID);
-$user_bio = get_user_meta($user->ID, 'description', true);
+$custom_avatar_url = get_user_meta( $user->ID, 'candidate_profile_picture', true );
+$avatar_url = ! empty( $custom_avatar_url ) ? $custom_avatar_url : get_avatar_url( $user->ID);
+$user_bio = get_user_meta( $user->ID, 'description', true );
 ?>
 
 <style>
@@ -27,7 +26,7 @@ $user_bio = get_user_meta($user->ID, 'description', true);
     <div class="position-relative">
         <div class="logo text-md-center d-md-block d-flex align-items-center justify-content-between">
 
-            <a href="<?php esc_url(home_url('/')) ?>">
+            <a href="<?php esc_url( home_url( '/' ) ); ?>">
                 <img src="images/logo_01.png" alt="">
             </a>
 
@@ -37,13 +36,13 @@ $user_bio = get_user_meta($user->ID, 'description', true);
         <div class="user-data">
 
             <div class="user-avatar online position-relative rounded-circle">
-                <?php echo get_avatar($user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img']) ?>
+                <?php echo get_avatar( $user->user_email, 75, '', $user->display_name, ['class' => 'lazy-img'] ); ?>
             </div>
 
             <!-- /.user-avatar -->
             <div class="user-name-data">
                 <button class="user-name dropdown-toggle" type="button" id="profile-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                    <?php echo esc_html($user->display_name) ?>
+                    <?php echo esc_html( $user->display_name ); ?>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                     <li>
@@ -69,9 +68,8 @@ $user_bio = get_user_meta($user->ID, 'description', true);
         </div>
 
         <?php
-        if (has_nav_menu('candidate_menu')) {
-
-            wp_nav_menu([
+        if ( has_nav_menu( 'candidate_menu' ) ) {
+            wp_nav_menu( [
                 'menu'              => 'candidate_menu',
                 'theme_location'    => 'candidate_menu',
                 'container'         => 'nav',
@@ -80,7 +78,7 @@ $user_bio = get_user_meta($user->ID, 'description', true);
                 'fallback_cb'       => false,
                 'depth'             => 1,
                 'walker'            => new \Jobus\Classes\Nav_Walker(),
-            ]);
+            ] );
         }
         ?>
 
@@ -102,7 +100,6 @@ $user_bio = get_user_meta($user->ID, 'description', true);
     </div>
 
 </aside>
-
 
 <div class="dashboard-body">
     <div class="position-relative">
@@ -156,33 +153,33 @@ $user_bio = get_user_meta($user->ID, 'description', true);
         </header>
         <!-- End Header -->
 
-        <h2 class="main-title"><?php esc_html_e('My Profile', 'jobus'); ?></h2>
+        <h2 class="main-title"><?php esc_html_e( 'My Profile', 'jobus' ); ?></h2>
 
         <form action="#" id="candidateProfileForm" method="post" enctype="multipart/form-data">
 
             <div class="bg-white card-box border-20">
                 <div class="user-avatar-setting d-flex align-items-center mb-30">
                     <!-- Image Display -->
-                    <img src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($user->display_name); ?>" class="lazy-img user-img" id="candidate_avatar">
+                    <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
 
                     <!-- File Upload -->
                     <div class="upload-btn position-relative tran3s ms-4 me-3">
-                        <?php esc_html_e('Upload new photo', 'jobus'); ?>
+                        <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                         <input type="file" id="uploadImg" name="candidate_profile_picture" accept="image/*">
                     </div>
 
-                    <button type="submit" class="delete-btn tran3s"><?php esc_html_e('Delete', 'jobus'); ?></button>
+                    <button type="submit" class="delete-btn tran3s"><?php esc_html_e( 'Delete', 'jobus' ); ?></button>
                 </div>
 
                 <div class="dash-input-wrapper mb-30">
-                    <label for=""><?php esc_html_e('Full Name*', 'jobus'); ?></label>
-                    <input type="text" placeholder="<?php echo esc_attr($user->display_name) ?>">
+                    <label for=""><?php esc_html_e( 'Full Name*', 'jobus' ); ?></label>
+                    <input type="text" placeholder="<?php echo esc_attr( $user->display_name ); ?>">
                 </div>
 
                 <div class="dash-input-wrapper">
-                    <label for=""><?php esc_html_e('Bio*', 'jobus'); ?></label>
-                    <textarea class="size-lg"><?php echo esc_attr($user_bio) ?></textarea>
-                    <div class="alert-text"><?php esc_html_e('Brief description for your profile. URLs are hyperlinked.', 'jobus'); ?></div>
+                    <label for=""><?php esc_html_e( 'Bio*', 'jobus' ); ?></label>
+                    <textarea class="size-lg"><?php echo esc_attr( $user_bio ); ?></textarea>
+                    <div class="alert-text"><?php esc_html_e( 'Brief description for your profile. URLs are hyperlinked.', 'jobus' ); ?></div>
                 </div>
             </div>
 
@@ -340,13 +337,9 @@ $user_bio = get_user_meta($user->ID, 'description', true);
             <button type="submit" class="dash-btn-two tran3s">Save</button>
 
         </form>
-
-
-
-
+        
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
