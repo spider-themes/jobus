@@ -13,8 +13,8 @@
  * Domain Path: /languages
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
 // Make sure the same class is not loaded.
@@ -40,19 +40,19 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public $plugin_path;
 
-        /**
-         * Initializes a singleton instances
-         * @return false|Jobus
-         */
-        public static function init(): bool|Jobus
-        {
-            static $instance = false;
-            if ( ! $instance ) {
-                $instance = new self();
-            }
+		/**
+		 * Initializes a singleton instances
+		 *
+		 * @return false|Jobus
+		 */
+		public static function init(): bool|Jobus {
+			static $instance = false;
+			if ( ! $instance ) {
+				$instance = new self();
+			}
 
-            return $instance;
-        }
+			return $instance;
+		}
 
 		/**
 		 * Constructor.
@@ -62,16 +62,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 * @access public
 		 */
 		private function __construct() {
-
-            register_activation_hook( __FILE__, [ $this, 'activate' ] );
-
+			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			$this->define_constants(); // Define constants.
-
 			$this->core_includes(); //Include the required files.
-
 			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
-
 		}
 
 		/**
@@ -79,8 +74,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * Load plugin localization files.
 		 */
-		public function i18n(): void
-        {
+		public function i18n(): void {
 			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
@@ -90,86 +84,80 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * Load core files required to run the plugin.
 		 */
-		public function core_includes(): void
-        {
-
-            // Functions
-            require_once __DIR__ . '/includes/functions.php';
-            require_once __DIR__ . '/includes/filters.php';
+		public function core_includes(): void {
+			// Functions
+			require_once __DIR__ . '/includes/functions.php';
+			require_once __DIR__ . '/includes/filters.php';
 
 			//Options
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-            require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options-job.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
-            require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
-            require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
+			require_once __DIR__ . '/Admin/options/settings-options.php';
+			require_once __DIR__ . '/Admin/options/meta-options-job.php';
+			require_once __DIR__ . '/Admin/options/meta-options-company.php';
+			require_once __DIR__ . '/Admin/options/meta-options-candidate.php';
+			require_once __DIR__ . '/Admin/options/taxonomy.php';
 
-            //Classes
-            require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
+			//Classes
+			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 
-            // Frontend UI
-            require_once __DIR__ . '/includes/Frontend/Assets.php';
-            require_once __DIR__ . '/includes/Frontend/Frontend.php';
-            require_once __DIR__ . '/includes/Frontend/Shortcode.php';
-            require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
+			// Frontend UI
+			require_once __DIR__ . '/includes/Frontend/Assets.php';
+			require_once __DIR__ . '/includes/Frontend/Frontend.php';
+			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
+			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 
-            //Admin UI
-            require_once __DIR__ . '/includes/Admin/User.php';
-            require_once __DIR__ . '/includes/Admin/Assets.php';
+			//Admin UI
+			require_once __DIR__ . '/Admin/User.php';
+			require_once __DIR__ . '/Admin/Assets.php';
 
 			//Post Type
-			require_once __DIR__ . '/includes/Admin/cpt/Job_Application.php';
-            require_once __DIR__ . '/includes/Admin/cpt/Candidate.php';
-            require_once __DIR__ . '/includes/Admin/cpt/Job.php';
-            require_once __DIR__ . '/includes/Admin/cpt/Company.php';
+			require_once __DIR__ . '/Admin/cpt/Job_Application.php';
+			require_once __DIR__ . '/Admin/cpt/Candidate.php';
+			require_once __DIR__ . '/Admin/cpt/Job.php';
+			require_once __DIR__ . '/Admin/cpt/Company.php';
 
-            //Elementor & Blocks
-            require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
+			//Elementor & Blocks
+			require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
 
-            require_once __DIR__ . '/Blocks.php';
-
+			require_once __DIR__ . '/Blocks.php';
 		}
 
-        /**
-         * Initializes the plugin
-         * @return void
-         */
-        public function init_plugin(): void
-        {
+		/**
+		 * Initializes the plugin
+		 *
+		 * @return void
+		 */
+		public function init_plugin(): void {
+			// Classes
+			new Jobus\includes\Classes\Ajax_Actions();
 
-            // Classes
-            new Jobus\includes\Classes\Ajax_Actions();
+			//Admin UI
+			if ( is_admin() ) {
+				new \jobus\Admin\User();
+				new \jobus\Admin\Assets();
+			}
 
-            //Admin UI
-            if ( is_admin() ) {
-                new Jobus\includes\Admin\User();
-                new Jobus\includes\Admin\Assets();
-            }
+			//Post Type
+			new \jobus\Admin\cpt\Job_Application();
+			new \jobus\Admin\cpt\Candidate();
+			new \jobus\Admin\cpt\Job();
+			new \jobus\Admin\cpt\Company();
 
-            //Post Type
-            new Jobus\includes\Admin\CPT\Job_Application();
-            new Jobus\includes\Admin\CPT\Candidate();
-            new Jobus\includes\Admin\CPT\Job();
-            new Jobus\includes\Admin\CPT\Company();
+			// Frontend UI
+			new Jobus\includes\Frontend\Assets();
+			new Jobus\includes\Frontend\Frontend();
+			new Jobus\includes\Frontend\Shortcode();
+			new Jobus\includes\Frontend\Template_Loader();
 
-            // Frontend UI
-            new Jobus\includes\Frontend\Assets();
-            new Jobus\includes\Frontend\Frontend();
-            new Jobus\includes\Frontend\Shortcode();
-            new Jobus\includes\Frontend\Template_Loader();
-
-            //Elementor & Blocks
-            new Jobus\Gutenberg\Blocks();
-            new Jobus\includes\Elementor\Register_Widgets();
-
-        }
+			//Elementor & Blocks
+			new Jobus\Gutenberg\Blocks();
+			new Jobus\includes\Elementor\Register_Widgets();
+		}
 
 		/**
 		 * Define constants
 		 */
-		public function define_constants(): void
-        {
+		public function define_constants(): void {
 			define( 'JOBUS_VERSION', self::VERSION );
 			define( 'JOBUS_FILE', __FILE__ );
 			define( 'JOBUS_PATH', __DIR__ );
@@ -180,12 +168,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
 		}
 
-        
+
 		/**
 		 * Do stuff upon plugin activation
 		 */
-		public function activate(): void
-        {
+		public function activate(): void {
 			//Insert the installation time into the database
 			$installed = get_option( 'jobus_installed' );
 			if ( ! $installed ) {
@@ -199,17 +186,12 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @return string
 		 */
-		public function plugin_path(): string
-        {
-
+		public function plugin_path(): string {
 			if ( $this->plugin_path ) {
 				return $this->plugin_path;
 			}
-
 			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-
 		}
-		
 	}
 }
 
@@ -222,8 +204,7 @@ if ( ! function_exists( 'jobus' ) ) {
 	 *
 	 * Main instance of jobus
 	 */
-	function jobus(): bool|Jobus
-    {
+	function jobus(): bool|Jobus {
 		return Jobus::init();
 	}
 

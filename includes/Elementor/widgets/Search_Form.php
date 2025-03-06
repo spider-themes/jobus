@@ -9,12 +9,13 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
 /**
  * Class Tabs
+ *
  * @package spider\Widgets
  */
 class Search_Form extends Widget_Base {
@@ -670,8 +671,7 @@ class Search_Form extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function render(): void
-    {
+	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 		extract( $settings ); //extract all settings array to variables converted to name of key
 

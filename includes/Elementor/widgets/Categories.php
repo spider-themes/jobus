@@ -11,12 +11,13 @@ use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
 /**
  * Class Tabs
+ *
  * @package spider\Widgets
  */
 class Categories extends Widget_Base {
@@ -220,7 +221,7 @@ class Categories extends Widget_Base {
 				'label'      => esc_html__( 'Border Radius', 'jobus' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
-				'separator' => 'after',
+				'separator'  => 'after',
 				'selectors'  => [
 					'{{WRAPPER}} .card-style-one .wrapper,
 					{{WRAPPER}} .card-style-seven a,
@@ -276,8 +277,8 @@ class Categories extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper:hover .title, {{WRAPPER}} .card-style-one .wrapper:hover .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-seven .wrapper:hover .title ' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-four:hover a .title, {{WRAPPER}} .card-style-four:hover a .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-seven .wrapper:hover .title '                                                     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-four:hover a .title, {{WRAPPER}} .card-style-four:hover a .total-job'             => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -287,9 +288,9 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-one .wrapper.bg:hover'=> 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-style-seven a:hover'=> 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-style-four:hover'=> 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-one .wrapper.bg:hover' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-seven a:hover'         => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .card-style-four:hover'            => 'border-color: {{VALUE}}',
 				],
 			]
 		);
@@ -302,7 +303,7 @@ class Categories extends Widget_Base {
 					'{{WRAPPER}} .card-style-four:hover .icon' => 'background: {{VALUE}};',
 				],
 				'condition' => [
-					'layout' => [ '3' ],
+					'layout'  => [ '3' ],
 					'layout!' => [ '1', '2' ]
 				],
 			]
@@ -376,7 +377,7 @@ class Categories extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .card-style-one .wrapper .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-four .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .card-style-four .total-job'         => 'color: {{VALUE}};',
 				],
 			]
 		);

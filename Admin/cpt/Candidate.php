@@ -1,5 +1,5 @@
 <?php
-namespace jobus\includes\Admin\CPT;
+namespace jobus\Admin\cpt;
 
 
 if (!defined('ABSPATH')) {
