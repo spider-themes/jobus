@@ -17,7 +17,6 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
             <?php esc_html_e('Filter By', 'jobus'); ?>
         </div>
 
-
         <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
 
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
@@ -65,8 +64,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         ?>
 
                         <div class="filter-block bottom-line pb-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse"
-                               href="#collapse-<?php echo esc_attr($widget_name) ?>" role="button"
+                            <a class="filter-title fw-500 text-dark <?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapse-<?php echo esc_attr($widget_name) ?>" role="button"
                                aria-expanded="<?php echo esc_attr($area_expanded) ?>">
                                 <?php echo esc_html($widget_title); ?>
                             </a>
@@ -78,7 +76,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                         ?>
                                         <ul class="style-none filter-input">
                                             <?php
-                                            if (!empty($candidate_specifications)) {
+                                            if ( !empty($candidate_specifications) ) {
                                                 foreach ( $candidate_specifications as $key => $value ) {
 
                                                     $meta_value = $value[ 'meta_values' ] ?? '';
@@ -100,19 +98,17 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                                             </label>
                                                         </li>
                                                         <?php
-
                                                     }
                                                 }
                                             }
                                             ?>
                                         </ul>
                                         <?php
-                                    }
-                                    elseif ($widget_layout == 'dropdown') {
+                                    } elseif ( $widget_layout == 'dropdown' ) {
                                         ?>
                                         <select class="nice-select" name="<?php echo esc_attr($widget_name) ?>[]">
                                             <?php
-                                            if (is_array($candidate_specifications)) {
+                                            if ( is_array($candidate_specifications) ) {
                                                 foreach ( $candidate_specifications as $key => $value ) {
 
                                                     $meta_value = $value[ 'meta_values' ] ?? '';
@@ -146,7 +142,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                         </div>
                                         <?php
                                     }
-                                    elseif ($widget_layout == 'range') {
+                                    elseif ( $widget_layout == 'range' ) {
 
                                         $salary_value_list = $candidate_specifications;
 
@@ -169,7 +165,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                                         }
 
                                         // Get the minimum and maximum values
-                                        if (!empty ($all_values)) {
+                                        if ( !empty ($all_values) ) {
                                             $min_values = min($all_values);
                                             $max_values = max($all_values);
 
@@ -210,7 +206,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                 }
 
                 // candidate location sidebar
-                if (jobus_opt('is_candidate_widget_location') == true) {
+                if ( jobus_opt('is_candidate_widget_location') == true ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
@@ -232,8 +228,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 	                if (!empty($term_loc)) {
                         ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button"
-                               aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
 				                <?php esc_html_e('Location', 'jobus'); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
@@ -256,7 +251,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 
 
                 // Widget Category List
-                if (jobus_opt('is_candidate_widget_cat') == true) {
+                if ( jobus_opt('is_candidate_widget_cat') ) {
 
                     // Initialize variables with default values
                     $is_collapsed_show = 'collapse';
@@ -275,11 +270,10 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                         'taxonomy' => 'jobus_candidate_cat',
                     ));
 
-                    if (!empty($term_cats)) {
+                    if ( !empty($term_cats) ) {
                         ?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseCategory" role="button"
-                               aria-expanded="<?php echo esc_attr($area_expanded) ?>">
+                            <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
                                 <?php esc_html_e('Category', 'jobus'); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
@@ -303,10 +297,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
                 <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
                     <?php esc_html_e('Apply Filter', 'jobus'); ?>
                 </button>
-
             </form>
-
         </div>
-
     </div>
 </div>

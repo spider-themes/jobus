@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
 
-
             <div class="filter-area-tab modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -114,8 +113,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 													$max_salary = jobus_search_terms( $widget_name )[1] ?? $max_values;
 													?>
                                                     <div class="main-body">
-                                                        <div class="salary-slider"
-                                                             data_widget="<?php echo esc_attr( $widget_name ) ?>[]">
+                                                        <div class="salary-slider" data_widget="<?php echo esc_attr( $widget_name ) ?>[]">
                                                             <div class="price-input d-flex align-items-center pt-5">
                                                                 <div class="field d-flex align-items-center">
                                                                     <input type="number"

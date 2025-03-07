@@ -3,7 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
 // Control core classes for avoid errors
 if ( class_exists( 'CSF' ) ) {
 
@@ -305,11 +304,8 @@ if ( class_exists( 'CSF' ) ) {
 						'title'   => esc_html__( 'Tag', 'jobus' ),
 						'default' => true,
 					),
-
 				),
 			),
-
-
 		)
 	) );
 

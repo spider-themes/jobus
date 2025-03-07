@@ -87,12 +87,9 @@ function jobus_get_template( $template_name, array $args = [] ): void {
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
 	function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat' ): string {
-
 		$terms = get_the_terms( get_the_ID(), $term );
 		$term  = is_array( $terms ) ? $terms[0]->name : '';
-
-		return esc_html( $term );
-
+		return $term;
 	}
 }
 
@@ -105,12 +102,9 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
 	function jobus_get_first_taxonomy_link( $term = 'jobus_job_cat' ): string {
-
 		$terms = get_the_terms( get_the_ID(), $term );
 		$term  = is_array( $terms ) ? get_category_link( $terms[0]->term_id ) : '';
-
-		return esc_url( $term );
-
+		return $term;
 	}
 }
 
@@ -337,8 +331,7 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
 			$trim_value      = ! empty( $meta_value ) ? implode( ', ', $meta_value ) : '';
 			$formatted_value = str_replace( '@space@', ' ', $trim_value );
 
-			return esc_html( $formatted_value );
-
+			return $formatted_value;
 		}
 	}
 }
@@ -427,7 +420,7 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
 }
 
 
-/*
+/**
  * Get the company count by post id and meta-value
  * @param $company_id
  * @return int
@@ -473,7 +466,6 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
 			} else {
 				return esc_url( get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array );
 			}
-
 		}
 	}
 }

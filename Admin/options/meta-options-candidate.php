@@ -128,7 +128,6 @@ if ( class_exists( 'CSF' ) ) {
 						'title'   => esc_html__( 'URL', 'jobus' ),
 						'default' => '#',
 					),
-
 				),
 				'default'      => array(
 					array(
@@ -149,7 +148,6 @@ if ( class_exists( 'CSF' ) ) {
 					),
 				),
 			)
-
 		)
 	) ); //End Social Icons
 

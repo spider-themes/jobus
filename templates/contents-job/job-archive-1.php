@@ -87,7 +87,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 <div class="split-box1">
                                                     <?php if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1')) : ?>
                                                         <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                            <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
+                                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1')) ?>
                                                         </a>
                                                     <?php endif; ?>
                                                     <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
@@ -100,10 +100,10 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             <!--job archive 1 location-->
                                             <?php
                                             $locations = get_the_terms(get_the_ID(), 'jobus_job_location');
-                                            if (!empty($locations )) { ?>
+                                            if ( !empty($locations ) ) { ?>
                                                 <div class="job-location">
                                                     <?php
-                                                    foreach ($locations as $location ) {
+                                                    foreach ( $locations as $location ) {
                                                         echo '<a href="'.esc_url(get_the_permalink()).'">'.esc_html($location->name).'</a>';
                                                     }
                                                     ?>
@@ -112,11 +112,15 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 	                                        }
 	                                        ?>
                                             <div class="job-salary">
-                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
+                                                <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ) : ?>
+                                                    <span class="fw-500 text-dark">
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) ?>
+                                                    </span>
                                                 <?php endif; ?>
-                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="expertise">. <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></span>
+                                                <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ) : ?>
+                                                    <span class="expertise">. 
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) ?>
+                                                    </span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
@@ -151,19 +155,21 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     <?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
                                                 </a>
                                             <?php endif; ?>
-                                            <?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) : ?>
+                                            <?php if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ) : ?>
                                                 <div>
                                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                        <?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ?>
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) ?>
                                                     </a>
                                                 </div>
                                             <?php endif; ?>
                                             <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
                                                 <?php the_title('<h3>', '</h3>') ?>
                                             </a>
-                                            <?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) : ?>
+                                            <?php if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2') ) : ?>
                                                 <div class="job-salary">
-                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2') ?></span>
+                                                    <span class="fw-500 text-dark">
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) ?>
+                                                    </span>
                                                 </div>
                                             <?php endif; ?>
                                             <div class="d-flex align-items-center justify-content-between mt-auto">

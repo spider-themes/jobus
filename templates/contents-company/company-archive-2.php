@@ -122,7 +122,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             if ($company_count > 0) {
                                                 ?>
                                                 <div class="bottom-line d-flex">
-                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>">
+                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID()); ?>">
                                                         <?php
                                                         /* translators: 1: Vacancy, 2: Vacancies */
                                                         echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobus'), $company_count));
@@ -167,8 +167,10 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                         </a>
                                                     </h5>
                                                     <?php
-                                                    if (jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1')) { ?>
-                                                        <p class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1') ?></p>
+                                                    if ( jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1') ) { ?>
+                                                        <p class="text-capitalize">
+                                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_1')) ?>
+                                                        </p>
                                                         <?php
                                                     }
                                                     ?>
@@ -181,7 +183,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 <div class="d-flex align-items-center md-mt-20">
                                                     <div class="d-flex align-items-center">
                                                         <div class="team-text">
-                                                            <span class="text-md fw-500 text-dark d-block"><?php echo jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2') ?></span>
+                                                            <span class="text-md fw-500 text-dark d-block">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_company_options', 'company_archive_meta_2')) ?>
+                                                            </span>
                                                             <?php echo esc_html(jobus_meta_company_spec_name(2)) ?>
                                                         </div>
                                                     </div>

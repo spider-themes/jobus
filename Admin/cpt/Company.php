@@ -81,7 +81,6 @@ class Company {
 			'yarpp_support'      => true,
 			'menu_icon'          => 'dashicons-plus-alt',
 			'show_admin_column'  => true,
-
 		);
 
 		register_post_type( 'jobus_company', $args ); // Register the post-type `company`

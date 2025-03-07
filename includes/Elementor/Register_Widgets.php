@@ -29,7 +29,6 @@ class Register_Widgets {
 		add_action( 'elementor/editor/before_enqueue_scripts', [ $this, 'register_editor_styles' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
-
 	}
 
 
@@ -50,8 +49,7 @@ class Register_Widgets {
 
 
 	public function register_editor_scripts(): void {
-		wp_enqueue_script( 'jobus-elementor-widgets', esc_url( JOBUS_JS . '/elementor-widgets.js' ), [ 'jquery', 'elementor-frontend' ], JOBUS_VERSION,
-			[ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'jobus-elementor-widgets', esc_url( JOBUS_JS . '/elementor-widgets.js' ), [ 'jquery', 'elementor-frontend' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 	}
 
 	/**
@@ -126,7 +124,6 @@ class Register_Widgets {
 	 * Register Elementor Widgets
 	 */
 	public function register_widgets( $widgets_manager ): void {
-
 		// Include Widget files
 		require_once( __DIR__ . '/widgets/Categories.php' );
 		require_once( __DIR__ . '/widgets/Search_Form.php' );
@@ -134,15 +131,11 @@ class Register_Widgets {
 		require_once( __DIR__ . '/widgets/Job_Tabs.php' );
 		require_once( __DIR__ . '/widgets/Companies.php' );
 
-
 		// Register Widgets Classes
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Categories() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Search_Form() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Jobs() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Job_Tabs() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Companies() );
-
 	}
-
-
 }

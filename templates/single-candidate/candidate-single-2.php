@@ -23,7 +23,9 @@ wp_enqueue_script('lightbox');
                                 <h4 class="candidate-name text-white mb-0"><?php the_title() ?></h4>
                                 <div class="andidate-post"><?php esc_html('Intro') ?></div>
                                 <?php if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
-                                    <div class="candidate-post"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                    <div class="candidate-post">
+                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -64,17 +66,21 @@ wp_enqueue_script('lightbox');
                             <div class="col-xl-2 col-md-4 order-xl-1">
                                 <div class="candidate-info">
                                     <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                    <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                    <div class="text-capitalize">
+                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                    </div>
                                 </div>
                             </div>
                             <?php
                         }
-                        if (jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ) {
+                        if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ) {
                             ?>
                             <div class="col-xl-2 col-md-4 order-xl-2">
                                 <div class="candidate-info">
                                     <span><?php echo esc_html(jobus_meta_candidate_spec_name(3)); ?></span>
-                                    <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ?></div>
+                                    <div class="text-capitalize">
+                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3')) ?>
+                                    </div>
                                 </div>
                             </div>
                             <?php
@@ -262,8 +268,6 @@ wp_enqueue_script('lightbox');
 							        // Get the stored meta-values
 							        $meta_options = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 
-
-
 							        if ( isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ]) ) {
 								        ?>
                                         <li>
@@ -368,7 +372,6 @@ wp_enqueue_script('lightbox');
                             </div>
 
                             <div id="email-form-message" class="email-form-message"></div>
-
                         </form>
 
                     </div>

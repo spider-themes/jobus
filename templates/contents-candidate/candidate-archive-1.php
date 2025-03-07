@@ -54,11 +54,21 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <form action="" method="get">
                                     <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                                        <option <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
-                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>><?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?></option>
-                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>><?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?></option>
-                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>><?php esc_html_e( 'Title Ascending ', 'jobus' ); ?></option>
-                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>><?php esc_html_e( 'Title Descending', 'jobus' ); ?></option>
+                                        <option
+                                            <?php echo esc_attr($default); ?>><?php esc_html_e( 'Default', 'jobus' ); ?>
+                                        </option>
+                                        <option value="orderby=date&order=desc" <?php echo esc_attr($selected_new_to_old) ?>>
+                                            <?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
+                                        </option>
+                                        <option value="orderby=date&order=asc" <?php echo esc_attr($selected_old_to_new) ?>>
+                                            <?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
+                                        </option>
+                                        <option value="orderby=title&order=asc" <?php echo esc_attr($selected_title_asc) ?>>
+                                            <?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
+                                        </option>
+                                        <option value="orderby=title&order=desc" <?php echo esc_attr($selected_title_desc) ?>>
+                                            <?php esc_html_e( 'Title Descending', 'jobus' ); ?>
+                                        </option>
                                     </select>
                                 </form>
                             </div>
@@ -105,21 +115,23 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             <?php
                                             if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                 ?>
-                                                <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                <div class="candidate-post text-capitalize">
+                                                    <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                                </div>
                                                 <?php
                                             }
 
                                             $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                             $max_skills = 2;
 
-                                            if ($skills && count($skills) > $max_skills) {
+                                            if ( $skills && count($skills) > $max_skills ) {
                                                 // Shuffle the skills to get a random order
                                                 shuffle($skills);
 
                                                 // Display the first 2 skills
-                                                $displayed_skills = array_slice($skills, 0, $max_skills);
+                                                $displayed_skills = array_slice( $skills, 0, $max_skills );
                                                 echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center pt-30 sm-pt-20 pb-10">';
-                                                    foreach ($displayed_skills as $skill) {
+                                                    foreach ( $displayed_skills as $skill ) {
                                                         echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                                     }
 
@@ -145,20 +157,22 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
-                                                            <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <span> <?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?> </span>
+                                                            <div class="text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <?php
                                                 }
 
 	                                            $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
-	                                            if (!empty($locations )) { ?>
+	                                            if ( !empty($locations) ) { ?>
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php esc_html_e('Location', 'jobus'); ?></span>
                                                             <?php
-                                                            foreach ($locations as $location ) { ?>
+                                                            foreach ( $locations as $location ) { ?>
                                                                 <div class="text-capitalize"><?php echo esc_html($location->name) ?></div>
                                                                 <?php
                                                             }
@@ -169,7 +183,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 	                                            }
 	                                            ?>
                                             </div>
-                                            
+
                                             <div class="row gx-2 pt-25 sm-pt-10">
                                                 <div class="col-md-6">
                                                     <a href="<?php the_permalink() ?>" class="profile-btn tran3s w-100 mt-5">
@@ -225,7 +239,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                         <?php
                                                         if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                             ?>
-                                                            <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                            <div class="candidate-post text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                                            </div>
                                                             <?php
                                                         }
 
@@ -265,7 +281,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info">
                                                             <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <div class="text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -299,7 +317,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                         </div>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                             endwhile;
                             wp_reset_postdata();
                             ?>
@@ -314,7 +332,6 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                         <?php jobus_pagination($candidate_query, 'jobus_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
 
                     </div>
-
                 </div>
             </div>
         </div>

@@ -1,11 +1,15 @@
 <?php
-
 namespace jobus\includes\Classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Class Ajax_Actions
+ *
+ * Handles AJAX actions for the Jobus plugin.
+ */
 class Ajax_Actions {
 
 	public function __construct() {
@@ -58,7 +62,6 @@ class Ajax_Actions {
 		}
 
 		wp_die(); // Always terminate AJAX calls
-
 	}
 
 

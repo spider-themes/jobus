@@ -88,15 +88,15 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                         <div class="col-lg-3 col-md-4 col-sm-6">
                                             <?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) : ?>
                                                 <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                    <?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ?>
+                                                    <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) ?>
                                                 </a>
                                             <?php endif; ?>
                                             <div class="job-salary">
 		                                        <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
+                                                    <span class="fw-500 text-dark"><?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) ?></span>
 		                                        <?php endif; ?>
 		                                        <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="expertise">. <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></span>
+                                                    <span class="expertise">. <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) ?></span>
 		                                        <?php endif; ?>
                                             </div>
                                         </div>
@@ -116,8 +116,8 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 	                                            }
 	                                            ?>
                                             <div class="job-category">
-                                                <a href="<?php echo jobus_get_first_taxonomy_link() ?>">
-                                                    <?php echo jobus_get_first_taxonomy_name(); ?>
+                                                <a href="<?php echo esc_url( jobus_get_first_taxonomy_link() ) ?>">
+                                                    <?php echo esc_html( jobus_get_first_taxonomy_name() ); ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -158,7 +158,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 ?>
                                                 <div>
                                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                        <?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ?>
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) ?>
                                                     </a>
                                                 </div>
                                                 <?php
@@ -173,7 +173,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) {
                                                 ?>
                                                 <div class="job-salary">
-                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2') ?></span>
+                                                    <span class="fw-500 text-dark">
+                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) ?>
+                                                    </span>
                                                 </div>
                                                 <?php
                                             }

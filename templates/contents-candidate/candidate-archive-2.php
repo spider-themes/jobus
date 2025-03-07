@@ -31,7 +31,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                         <div class="d-md-flex justify-content-between align-items-center">
                             <button type="button" class="filter-btn fw-500 tran3s me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
-                                Filter
+                                <?php esc_html_e('Filter', 'jobus') ?>
                             </button>
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
@@ -108,14 +108,16 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             <?php
                                             if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                 ?>
-                                                <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                <div class="candidate-post text-capitalize">
+                                                    <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                                </div>
                                                 <?php
                                             }
 
                                             $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                             $max_skills = 2;
 
-                                            if ($skills && count($skills) > $max_skills) {
+                                            if ( $skills && count($skills) > $max_skills ) {
                                                 // Shuffle the skills to get a random order
                                                 shuffle($skills);
 
@@ -147,7 +149,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <div class="text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -230,14 +234,16 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                         <?php
                                                         if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                                             ?>
-                                                            <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                                            <div class="candidate-post text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                                            </div>
                                                             <?php
                                                         }
 
                                                         $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
                                                         $max_skills = 2;
 
-                                                        if ($skills && count($skills) > $max_skills) {
+                                                        if ( $skills && count($skills) > $max_skills ) {
                                                             // Shuffle the skills to get a random order
                                                             shuffle($skills);
 
@@ -270,7 +276,9 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                                         <div class="candidate-info mt-10">
                                                             <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                                            <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                            <div class="text-capitalize">
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <?php
@@ -304,7 +312,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                         </div>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                             endwhile;
                             ?>
                         </div>

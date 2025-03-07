@@ -130,7 +130,9 @@ $candidate_count = $candidate_query->found_posts;
                                         <?php
                                         if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' )) {
                                             ?>
-                                            <div class="candidate-post text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1') ?></div>
+                                            <div class="candidate-post text-capitalize">
+                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+                                            </div>
                                             <?php
                                         }
 
@@ -169,7 +171,9 @@ $candidate_count = $candidate_query->found_posts;
                                                 <div class="col-md-6">
                                                     <div class="candidate-info mt-10">
                                                         <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
-                                                        <div class="text-capitalize"><?php echo jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ?></div>
+                                                        <div class="text-capitalize">
+                                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <?php
@@ -228,11 +232,10 @@ $candidate_count = $candidate_query->found_posts;
                                     </div>
 
                                 </div>
-                            <?php
+                                <?php
                             endwhile;
                             wp_reset_postdata();
                             ?>
-
                         </div>
                         </div>
 

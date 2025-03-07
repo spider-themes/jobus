@@ -115,7 +115,7 @@ $job_count = $job_post->found_posts;
                                                 <div class="split-box1">
                                                     <?php if (jobus_get_meta_attributes( 'jobus_meta_options','job_archive_meta_1')) : ?>
                                                         <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                                            <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1') ?>
+                                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_1')) ?>
                                                         </a>
                                                     <?php endif; ?>
                                                     <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
@@ -141,11 +141,11 @@ $job_count = $job_post->found_posts;
 	                                        }
 	                                        ?>
                                             <div class="job-salary">
-                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
-                                                    <span class="fw-500 text-dark"><?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ?></span>
+                                                <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2') ) : ?>
+                                                    <span class="fw-500 text-dark"> <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) ?></span>
                                                 <?php endif; ?>
-                                                <?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
-                                                    <span class="expertise">. <?php echo jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ?></span>
+                                                <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3') ) : ?>
+                                                    <span class="expertise">. <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) ?></span>
                                                 <?php endif; ?>
                                             </div>
                                         </div>

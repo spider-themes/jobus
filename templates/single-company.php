@@ -192,13 +192,13 @@ $website_target = $website[ 'target' ] ?? '_self';
                             <div class="col-lg-3 col-md-4 col-sm-6 ms-auto">
                                 <?php if (jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_1')) : ?>
                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
-                                        <?php echo jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_1') ?>
+                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_1')) ?>
                                     </a>
                                 <?php endif; ?>
                                 <div class="job-date">
-                                    <?php the_time(get_option('date_format')) . esc_html_e(' by', 'jobus') ?>
+                                    <?php echo esc_html( get_the_time(get_option('date_format')) ) . esc_html_e(' by', 'jobus') ?>
                                     <a href="<?php echo esc_url(get_permalink($company_id)) ?>">
-                                        <?php echo get_the_title($company_id) ?>
+                                        <?php echo esc_html( get_the_title($company_id) ) ?>
                                     </a>
                                 </div>
                             </div>
@@ -206,13 +206,13 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 <?php if (jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_2')) : ?>
                                     <div class="job-location">
                                         <a href="<?php the_permalink(); ?>">
-                                            <?php echo jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_2') ?>
+                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'company_open_job_meta_2')) ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>
                                 <div class="job-category">
-                                    <a href="<?php echo jobus_get_first_taxonomy_link() ?>">
-                                        <?php echo jobus_get_first_taxonomy_name(); ?>
+                                    <a href="<?php echo esc_url( jobus_get_first_taxonomy_link() ) ?>">
+                                        <?php echo esc_html( jobus_get_first_taxonomy_name() ); ?>
                                     </a>
                                 </div>
                             </div>
