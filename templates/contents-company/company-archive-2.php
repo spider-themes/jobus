@@ -122,7 +122,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             if ($company_count > 0) {
                                                 ?>
                                                 <div class="bottom-line d-flex">
-                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID()); ?>">
+                                                    <a href="<?php echo esc_url( jobus_get_selected_company_count(get_the_ID()) ); ?>">
                                                         <?php
                                                         /* translators: 1: Vacancy, 2: Vacancies */
                                                         echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobus'), $company_count));
@@ -197,7 +197,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                             <div class="btn-group d-flex align-items-center justify-content-md-end md-mt-20">
                                                 <?php
                                                 if ($company_count > 0) { ?>
-                                                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
+                                                    <a href="<?php echo esc_url( jobus_get_selected_company_count(get_the_ID()) ); ?>" class="open-job-btn text-center fw-500 tran3s me-2">
                                                         <?php
                                                         /* translators: 1: open job, 2: open jobs */
                                                         echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobus'), $company_count));

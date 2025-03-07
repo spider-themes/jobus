@@ -113,7 +113,7 @@ $website_target = $website[ 'target' ] ?? '_self';
                                 ?>
                             </ul>
 
-                            <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>"
+                            <a href="<?php echo esc_url(jobus_get_selected_company_count( get_the_ID()) ); ?>"
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
                                 <?php esc_html_e('Posted Jobs', 'jobus'); ?>
                             </a>

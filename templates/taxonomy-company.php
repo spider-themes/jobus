@@ -136,7 +136,7 @@ $company_count = $company_query->found_posts;
                                         if ($company_count > 0) {
                                             ?>
                                             <div class="bottom-line d-flex">
-                                                <a href="<?php echo jobus_get_selected_company_count(get_the_ID(), true); ?>">
+                                                <a href="<?php echo esc_url( jobus_get_selected_company_count(get_the_ID()) ); ?>">
                                                     <?php
                                                     /* translators: 1: Vacancy, 2: Vacancies */
                                                     echo esc_html(sprintf(_n('%d Vacancy', '%d Vacancies', $company_count, 'jobus'), $company_count));

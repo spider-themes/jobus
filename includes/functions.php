@@ -462,10 +462,11 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
 
 			// if post counts 1 then return a post-link
 			if ( $job_posts->found_posts == 1 ) {
-				return esc_url( get_permalink( $company_ids_array ) );
+				return get_permalink( $company_ids_array );
 			} else {
-				return esc_url( get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array );
+				return get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array;
 			}
+
 		}
 	}
 }

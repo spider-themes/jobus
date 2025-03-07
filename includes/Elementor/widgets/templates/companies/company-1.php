@@ -19,7 +19,7 @@ $company_attr_meta_1 = jobus_get_meta_attributes('jobus_meta_company_options', $
                     <?php if ( !empty( $company_attr_meta_1 ) ) : ?>
                         <p class="mb-20 text-capitalize"><?php echo esc_html($company_attr_meta_1) ?></p>
                     <?php endif; ?>
-                    <a href="<?php echo jobus_get_selected_company_count(get_the_ID()); ?>" class="open-job-btn fw-500 tran3s">
+                    <a href="<?php echo esc_url(jobus_get_selected_company_count(get_the_ID())); ?>" class="open-job-btn fw-500 tran3s">
                         <?php
                         /* translators: 1: open job, 2: open jobs */
                         echo esc_html(sprintf(_n('%d open job', '%d open jobs', $company_count, 'jobus'), $company_count));
