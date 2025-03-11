@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,7 +43,6 @@ class Shortcode {
 		return $content;
 	}
 
-
 	/**
 	 * Company Page Shortcode Handler.
 	 *
@@ -59,7 +60,6 @@ class Shortcode {
 
 		return $content;
 	}
-
 
 	/**
 	 * Candidate Page Shortcode Handler.
@@ -79,7 +79,6 @@ class Shortcode {
 		return $content;
 	}
 
-
 	/**
 	 * Displays the job archive page layout.
 	 *
@@ -95,7 +94,6 @@ class Shortcode {
 		}
 	}
 
-
 	/**
 	 * Displays the company archive page layout.
 	 *
@@ -110,7 +108,6 @@ class Shortcode {
 			] );
 		}
 	}
-
 
 	/**
 	 * Displays the candidate archive page layout.

@@ -2,7 +2,6 @@
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Box_Shadow;
@@ -14,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Tabs
+ * Class Search_Form
  *
- * @package spider\Widgets
+ * @package jobus\Widgets
  */
 class Search_Form extends Widget_Base {
 

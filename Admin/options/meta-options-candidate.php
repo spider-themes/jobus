@@ -55,7 +55,6 @@ if ( class_exists( 'CSF' ) ) {
 				'button_title' => esc_html__( 'Add or Upload Files', 'jobus' ),
 				'remove_title' => esc_html__( 'Remove', 'jobus' ),
 			)
-
 		)
 	) );
 
@@ -114,14 +113,12 @@ if ( class_exists( 'CSF' ) ) {
 				'subtitle'     => esc_html__( 'Customize and manage your social media icons along with respective URLs', 'jobus' ),
 				'button_title' => esc_html__( 'Add Icon', 'jobus' ),
 				'fields'       => array(
-
 					array(
 						'id'      => 'icon',
 						'type'    => 'icon',
 						'title'   => esc_html__( 'Icon', 'jobus' ),
 						'default' => 'bi bi-facebook',
 					),
-
 					array(
 						'id'      => 'url',
 						'type'    => 'text',
@@ -214,7 +211,6 @@ if ( class_exists( 'CSF' ) ) {
 				'title'    => esc_html__( 'Video URL', 'jobus' ),
 				'subtitle' => esc_html__( 'Input the candidate video introduction', 'jobus' ),
 			),
-
 		)
 	) ); //End Intro Video
 
@@ -240,28 +236,24 @@ if ( class_exists( 'CSF' ) ) {
 				'subtitle'     => esc_html__( 'Customize and manage your Academic history', 'jobus' ),
 				'button_title' => esc_html__( 'Add Item', 'jobus' ),
 				'fields'       => array(
-
 					array(
 						'id'      => 'sl_num',
 						'type'    => 'text',
 						'title'   => esc_html__( 'Serial Number', 'jobus' ),
 						'default' => esc_html__( '1', 'jobus' ),
 					),
-
 					array(
 						'id'      => 'title',
 						'type'    => 'text',
 						'title'   => esc_html__( 'Title', 'jobus' ),
 						'default' => esc_html__( 'Bachelor Degree of Design', 'jobus' ),
 					),
-
 					array(
 						'id'      => 'academy',
 						'type'    => 'text',
 						'title'   => esc_html__( 'Academy', 'jobus' ),
 						'default' => esc_html__( 'University of Boston', 'jobus' ),
 					),
-
 					array(
 						'id'      => 'description',
 						'type'    => 'wp_editor',
@@ -269,7 +261,6 @@ if ( class_exists( 'CSF' ) ) {
 						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
 							'jobus' ),
 					),
-
 				),
 				'default'      => array(
 					array(
@@ -308,21 +299,18 @@ if ( class_exists( 'CSF' ) ) {
 				'subtitle'     => esc_html__( 'Customize and manage your work experience', 'jobus' ),
 				'button_title' => esc_html__( 'Add Item', 'jobus' ),
 				'fields'       => array(
-
 					array(
 						'id'      => 'sl_num',
 						'type'    => 'text',
 						'title'   => esc_html__( 'Serial Number', 'jobus' ),
 						'default' => esc_html__( '1', 'jobus' ),
 					),
-
 					array(
 						'id'      => 'title',
 						'type'    => 'text',
 						'title'   => esc_html__( 'Title', 'jobus' ),
 						'default' => esc_html__( 'Product Designer (Google)', 'jobus' ),
 					),
-
 					array(
 						'id'       => 'start_date',
 						'type'     => 'date',
@@ -350,7 +338,6 @@ if ( class_exists( 'CSF' ) ) {
 							'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
 						)
 					),
-
 					array(
 						'id'       => 'end_date',
 						'type'     => 'date',
@@ -377,7 +364,6 @@ if ( class_exists( 'CSF' ) ) {
 							'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
 						)
 					),
-
 					array(
 						'id'      => 'description',
 						'type'    => 'wp_editor',
@@ -385,7 +371,6 @@ if ( class_exists( 'CSF' ) ) {
 						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
 							'jobus' ),
 					),
-
 				),
 				'default'      => array(
 					array(
@@ -421,8 +406,6 @@ if ( class_exists( 'CSF' ) ) {
 				'type'  => 'gallery',
 				'title' => esc_html__( 'Portfolio', 'jobus' ),
 			)
-
 		)
 	) ); //End Portfolio
-
 }

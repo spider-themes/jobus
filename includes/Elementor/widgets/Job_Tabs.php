@@ -2,7 +2,6 @@
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
@@ -19,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Tabs
+ * Class Job_Tabs
  *
- * @package spider\Widgets
+ * @package jobus\Widgets
  */
 class Job_Tabs extends Widget_Base {
 
@@ -150,15 +149,6 @@ class Job_Tabs extends Widget_Base {
 		);
 
 		$this->add_control(
-			'exclude', [
-				'label'       => esc_html__( 'Exclude Job', 'jobus' ),
-				'description' => esc_html__( 'Enter the job post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus' ),
-				'type'        => Controls_Manager::TEXT,
-				'label_block' => true,
-			]
-		);
-
-		$this->add_control(
 			'view_all_btn_url', [
 				'label'     => esc_html__( 'View All Posts URL', 'jobus' ),
 				'type'      => \Elementor\Controls_Manager::URL,
@@ -256,10 +246,6 @@ class Job_Tabs extends Widget_Base {
 
 		if ( ! empty( $orderby ) ) {
 			$args['orderby'] = $orderby;
-		}
-
-		if ( ! empty( $exclude ) ) {
-			$args['post__not_in'] = $exclude;
 		}
 
 		if ( ! empty( $cats ) ) {

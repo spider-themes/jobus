@@ -35,7 +35,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                             if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
                                                 echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
                                             } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
-                                                echo '<img src="' . esc_url($field['meta_image']['url']) . '" alt="' . esc_attr($meta_name) . '" class="lazy-img m-auto icon">';
+                                                wp_get_attachment_image($field['meta_image']['id'], 'full', '', ['class' => 'lazy-img m-auto icon'] );
                                             }
                                         }
 

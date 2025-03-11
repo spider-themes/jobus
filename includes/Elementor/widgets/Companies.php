@@ -2,7 +2,6 @@
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
@@ -19,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Tabs
+ * Class Companies
  *
- * @package spider\Widgets
+ * @package jobus\Widgets
  */
 class Companies extends Widget_Base {
 
@@ -58,7 +57,6 @@ class Companies extends Widget_Base {
 		$this->elementor_style_control();
 	}
 
-
 	/**
 	 * Name: elementor_content_control()
 	 * Desc: Register the Content Tab output on the Elementor editor.
@@ -68,7 +66,6 @@ class Companies extends Widget_Base {
 	 * Author: spider-themes
 	 */
 	public function elementor_content_control() {
-
 
 		//===================== Select Preset ===========================//
 		$this->start_controls_section(
@@ -149,15 +146,6 @@ class Companies extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'exclude', [
-				'label'       => esc_html__( 'Exclude Company', 'jobus' ),
-				'description' => esc_html__( 'Enter the company post IDs to hide/exclude. Input the multiple ID with comma separated', 'jobus' ),
-				'type'        => Controls_Manager::TEXT,
-				'label_block' => true,
-			]
-		);
-
 		$this->end_controls_section(); // End Filter Options
 
 
@@ -180,7 +168,6 @@ class Companies extends Widget_Base {
 
 
 	}
-
 
 	/**
 	 * Name: elementor_style_control()
@@ -443,7 +430,6 @@ class Companies extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-
 	/**
 	 * Name: elementor_render()
 	 * Desc: Render the widget output on the frontend.
@@ -473,10 +459,6 @@ class Companies extends Widget_Base {
 			$args['orderby'] = $orderby;
 		}
 
-		if ( is_array( $exclude ) ) {
-			$args['post__not_in'] = $exclude;
-		}
-
 		if ( ! empty( $cats ) ) {
 			$args['tax_query'] = [
 				[
@@ -490,10 +472,8 @@ class Companies extends Widget_Base {
 
 		$posts = new WP_Query( $args );
 
-
 		//================= Template Parts =================//
 		include "templates/companies/company-{$settings['layout']}.php";
 
 	}
-
 }

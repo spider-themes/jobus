@@ -379,7 +379,6 @@ if ( class_exists( 'CSF' ) ) {
 				'title'   => esc_html__( 'Attribute 03', 'jobus' ),
 				'options' => jobus_get_specs(),
 			),
-
 		)
 	) );
 
@@ -479,7 +478,6 @@ if ( class_exists( 'CSF' ) ) {
 				),
 				'default'  => '1'
 			),
-
 		)
 	) );
 
@@ -523,7 +521,6 @@ if ( class_exists( 'CSF' ) ) {
 				'options'    => jobus_get_specs( 'company_specifications' ),
 				'dependency' => array( 'company_archive_attr_layout', '==', 'list' ),
 			),
-
 		)
 	) );
 
@@ -1007,5 +1004,4 @@ if ( class_exists( 'CSF' ) ) {
 			),
 		)
 	) );
-
 }

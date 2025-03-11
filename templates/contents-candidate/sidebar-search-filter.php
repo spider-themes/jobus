@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
+$post_type = !empty($_GET['post_type']) ? sanitize_text_field( wp_unslash( $_GET['post_type']) ) : '';
 ?>
 
 <div class="col-xl-3 col-lg-4">
@@ -21,7 +21,7 @@ $post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']
 
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
                 <input type="hidden" name="post_type" value="candidate"/>
-                <input type="hidden" name="jobus_filter_nonce" value="<?php echo wp_create_nonce('jobus_filter_nonce'); ?>" />
+                <input type="hidden" name="jobus_filter_nonce" value="<?php echo esc_attr(wp_create_nonce('jobus_filter_nonce')); ?>" />
 
                 <?php
 

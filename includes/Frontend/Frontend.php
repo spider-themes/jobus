@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,7 +19,6 @@ class Frontend {
 		// Add Filter to redirect Archive Page Template
 		add_filter( 'template_include', [ $this, 'template_loader' ] );
 	}
-
 
 	/**
 	 * @param $template
@@ -99,7 +100,6 @@ class Frontend {
 			}
 		}
 
-
 		if ( is_post_type_archive( 'jobus_candidate' ) ) {
 			// Check if a custom template exists in the theme folder, if not, load the plugin template file
 			$archive_template = 'archive-candidate.php';
@@ -122,5 +122,4 @@ class Frontend {
 
 		return $template;
 	}
-
 }

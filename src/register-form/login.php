@@ -3,8 +3,8 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-$user_input = !empty($_POST['user_input']) ? sanitize_text_field($_POST['user_input']) : '';
-$password = !empty($_POST['user_pwd']) ? sanitize_textarea_field($_POST['user_pwd']) : '';
+$user_input = !empty( $_POST['user_input'] ) ? sanitize_text_field( wp_unslash($_POST['user_input'] )) : '';
+$password = !empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash($_POST['user_pwd']) ) : '';
 
 if (is_user_logged_in()) {
     $current_user = wp_get_current_user();
@@ -17,11 +17,17 @@ if (is_user_logged_in()) {
                     <div class="text-center">
                         <h2><?php esc_html_e('Welcome ', 'jobus') ?><?php echo esc_html($current_user->display_name); ?></h2>
                         <p><?php esc_html_e('You are logged in', 'jobus') ?></p>
-                        <p> <?php esc_html_e('You can logout from', 'jobus') ?>
-                            <a href="<?php echo esc_url(wp_logout_url(home_url('/'))) ?>"> <?php esc_html_e('here', 'jobus') ?> </a>
+                        <p>
+                            <?php esc_html_e('You can logout from', 'jobus') ?>
+                            <a href="<?php echo esc_url(wp_logout_url(home_url('/'))) ?>">
+                                <?php esc_html_e('here', 'jobus') ?>
+                            </a>
                         </p>
-                        <p><?php esc_html_e('Or navigate to the website', 'jobus') ?>
-                            <a href="<?php echo esc_url(home_url('/')) ?>"> <?php esc_html_e('Homepage', 'jobus') ?> </a>
+                        <p>
+                            <?php esc_html_e('Or navigate to the website', 'jobus') ?>
+                            <a href="<?php echo esc_url(home_url('/')) ?>">
+                                <?php esc_html_e('Homepage', 'jobus') ?>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -38,10 +44,13 @@ if (is_user_logged_in()) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center">
                         <h2><?php esc_html_e('Hi, Welcome Back!', 'jobus') ?></h2>
-                        <p><?php esc_html_e('Still don\'t have an account?', 'jobus'); ?>
-                            <a href="<?php echo esc_url(jobi_opt('login_signup_btn_url')) ?>">
-                                <?php echo esc_html(jobi_opt('login_signup_btn_label')) ?>
-                            </a>
+                        <p>
+                            <?php esc_html_e('Still don\'t have an account?', 'jobus'); ?>
+                            <?php if ( function_exists('jobi_opt') ) : ?>
+                                <a href="<?php echo esc_url(jobi_opt('login_signup_btn_url')) ?>">
+                                    <?php echo esc_html(jobi_opt('login_signup_btn_label')) ?>
+                                </a>
+                            <?php endif; ?>
                         </p>
                     </div>
                     <div class="form-wrapper m-auto">

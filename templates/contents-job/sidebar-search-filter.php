@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
-$post_type = !empty($_GET['post_type']) ? sanitize_text_field($_GET['post_type']) : '';
+$post_type = !empty($_GET['post_type']) ? sanitize_text_field( wp_unslash($_GET['post_type']) ) : '';
 ?>
 <div class="col-xl-3 col-lg-4">
 

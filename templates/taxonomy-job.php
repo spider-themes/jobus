@@ -19,8 +19,8 @@ $current_job_location = get_term_by('slug', get_query_var('jobus_job_location'),
 $current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
 
 // These parameters are used to determine the sorting order of job posts
-$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
 
 $args = array(
     'post_type'      => 'jobus_job',
@@ -76,8 +76,8 @@ $job_count = $job_post->found_posts;
                                 <div class="short-filter d-flex align-items-center">
                                     <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                     <?php
-                                    $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                    $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                    $order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : '';
+                                    $order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : '';
                                     $default = ! empty( $order_by ) ? 'selected' : '';
 
                                     $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';

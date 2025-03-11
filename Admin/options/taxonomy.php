@@ -56,8 +56,6 @@ if ( class_exists( 'CSF' ) ) {
                 'title'       => esc_html__('Hover Border Color', 'jobus'),
                 'output_mode' => 'border-color'
             ),
-
         )
     ) );
-
 }

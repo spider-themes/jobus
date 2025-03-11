@@ -1,4 +1,7 @@
 <?php
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,10 +39,10 @@ class Ajax_Actions {
 		$candidate_mail = ! empty( $meta['candidate_mail'] ) ? sanitize_email( $meta['candidate_mail'] ) : '';
 
 		// Sanitize and get form data
-		$sender_name    = ! empty( $_POST['sender_name'] ) ? sanitize_text_field( $_POST['sender_name'] ) : '';
+		$sender_name    = ! empty( $_POST['sender_name'] ) ? sanitize_text_field( wp_unslash( $_POST['sender_name'] ) ) : '';
 		$sender_email   = ! empty( $_POST['sender_email'] ) ? sanitize_email( wp_unslash( $_POST['sender_email'] ) ) : '';
-		$sender_subject = ! empty( $_POST['sender_subject'] ) ? sanitize_text_field( $_POST['sender_subject'] ) : '';
-		$message        = ! empty( $_POST['message'] ) ? sanitize_textarea_field( $_POST['message'] ) : '';
+		$sender_subject = ! empty( $_POST['sender_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['sender_subject'] ) ) : '';
+		$message        = ! empty( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
 
 		// Validate required fields
 		if ( empty( $sender_name ) || empty( $sender_email ) || empty( $message ) || empty( $candidate_mail ) ) {
@@ -64,7 +67,6 @@ class Ajax_Actions {
 		wp_die(); // Always terminate AJAX calls
 	}
 
-
 	public function job_application_form() {
 		if ( ! check_ajax_referer( 'job_application_form_nonce', 'security', false ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ) );
@@ -72,13 +74,13 @@ class Ajax_Actions {
 		}
 
 		// Get form data
-		$candidate_fname       = ! empty( $_POST['candidate_fname'] ) ? sanitize_text_field( $_POST['candidate_fname'] ) : '';
-		$candidate_lname       = ! empty( $_POST['candidate_lname'] ) ? sanitize_text_field( $_POST['candidate_lname'] ) : '';
+		$candidate_fname       = ! empty( $_POST['candidate_fname'] ) ? sanitize_text_field( wp_unslash($_POST['candidate_fname'] ) ) : '';
+		$candidate_lname       = ! empty( $_POST['candidate_lname'] ) ? sanitize_text_field( wp_unslash($_POST['candidate_lname'] ) ) : '';
 		$candidate_email       = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
-		$candidate_phone       = ! empty( $_POST['candidate_phone'] ) ? sanitize_text_field( $_POST['candidate_phone'] ) : '';
-		$candidate_message     = ! empty( $_POST['candidate_message'] ) ? sanitize_textarea_field( $_POST['candidate_message'] ) : '';
-		$job_application_id    = ! empty( $_POST['job_application_id'] ) ? sanitize_text_field( $_POST['job_application_id'] ) : '';
-		$job_application_title = ! empty( $_POST['job_application_title'] ) ? sanitize_text_field( $_POST['job_application_title'] ) : '';
+		$candidate_phone       = ! empty( $_POST['candidate_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_phone'] ) ) : '';
+		$candidate_message     = ! empty( $_POST['candidate_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['candidate_message'] ) ) : '';
+		$job_application_id    = ! empty( $_POST['job_application_id'] ) ? sanitize_text_field( wp_unslash( $_POST['job_application_id'] ) ) : '';
+		$job_application_title = ! empty( $_POST['job_application_title'] ) ? sanitize_text_field( wp_unslash( $_POST['job_application_title'] ) ) : '';
 
 		// Validate email
 		if ( ! is_email( $candidate_email ) ) {
@@ -108,8 +110,9 @@ class Ajax_Actions {
 					'application/msword',
 					'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 				);
-				$file_type          = wp_check_filetype( $_FILES['candidate_cv']['name'] );
 
+				$file_name = sanitize_file_name( $_FILES['candidate_cv']['name'] );
+				$file_type = wp_check_filetype( $file_name );
 				if ( ! in_array( $file_type['type'], $allowed_file_types ) ) {
 					wp_send_json_error( array( 'message' => esc_html__( 'Invalid file type. Only PDF and Word documents are allowed.', 'jobus' ) ) );
 					wp_die();
@@ -122,12 +125,10 @@ class Ajax_Actions {
 					update_post_meta( $application_id, 'candidate_cv', $uploaded );
 				}
 			}
-
 			wp_send_json_success( array( 'message' => esc_html__( 'Application submitted successfully.', 'jobus' ) ) );
 		} else {
 			wp_send_json_error( array( 'message' => esc_html__( 'Failed to submit application.', 'jobus' ) ) );
 		}
-
 		wp_die();
 	}
 }

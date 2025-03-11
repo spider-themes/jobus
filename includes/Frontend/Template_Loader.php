@@ -1,9 +1,6 @@
 <?php
 /**
- * Template Loader
- *
- * @package jobus
- * @author spiderdevs
+ * Use namespace to avoid conflict
  */
 namespace jobus\includes\Frontend;
 
@@ -22,7 +19,7 @@ class Template_Loader {
         add_filter( 'template_include', [ $this, 'template_loader' ] );
     }
 
-    /**
+    /**a
      * Load custom template
      *
      * @param string $template

@@ -41,7 +41,6 @@ if (class_exists('CSF')) {
                 'default'   => '1'
             ),
 
-
             // Company Information
             array(
                 'type'    => 'subheading',
@@ -78,7 +77,6 @@ if (class_exists('CSF')) {
                 'dependency' => array('is_company_website', '==', 'custom'),
             ), // End company information
 
-
             //====================== Job Information ======================//
             array(
                 'type'    => 'subheading',
@@ -104,9 +102,9 @@ if (class_exists('CSF')) {
                 'default'  => '#',
                 'dependency' => array('is_apply_btn', '==', 'custom'),
             ),
-
         )
     ));
+
 
     // Retrieve the repeater field configurations from settings options    
     $specifications = jobus_opt('job_specifications');
@@ -116,7 +114,6 @@ if (class_exists('CSF')) {
             $meta_value     = $field['meta_values_group'] ?? [];
             $opt_values     = [];
             $opt_val        = '';
-
 
             // Determine meta options based on the value of the switcher
             $is_meta_icon = isset($field['is_meta_icon']) ? $field['is_meta_icon'] : '';

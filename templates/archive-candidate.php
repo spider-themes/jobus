@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
-$selected_order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : 'desc';
+$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
+$selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
@@ -136,8 +136,8 @@ if (isset($result_ids)) {
 
 
 // Sanitize company_ids
-$search_type = !empty($_GET['search_type']) ? sanitize_text_field($_GET['search_type']) : '';
-$company_ids = !empty($_GET['company_ids']) ? array_map('absint', explode(',', sanitize_text_field($_GET['company_ids']))) : [];
+$search_type = !empty($_GET['search_type']) ? sanitize_text_field( wp_unslash($_GET['search_type']) ) : '';
+$company_ids = !empty($_GET['company_ids']) ? array_map('absint', explode(',', sanitize_text_field( wp_unslash($_GET['company_ids']) ))) : [];
 if ($search_type == 'company_search' && !empty($company_ids)) {
     $args[ 'post__in' ] = $company_ids;
 }

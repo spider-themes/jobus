@@ -59,7 +59,6 @@ if ( $candidate_cv_url ) {
 
     <div class="applicant-content-details">
         <ul class="details-list">
-
 			<?php if ( ! empty( $candidate_fname ) && ! empty( $candidate_lname ) ) : ?>
                 <li>
                     <label> <?php esc_html_e( 'Name', 'jobus' ); ?> </label>
@@ -72,14 +71,12 @@ if ( $candidate_cv_url ) {
                     <span><?php echo esc_html( $candidate_phone ) ?></span>
                 </li>
 			<?php endif; ?>
-
 			<?php if ( ! empty( $candidate_email ) ) : ?>
                 <li>
                     <label><?php esc_html_e( 'Email', 'jobus' ); ?></label>
                     <span><?php echo esc_html( $candidate_email ) ?></span>
                 </li>
 			<?php endif; ?>
-
 			<?php if ( ! empty( $candidate_message ) ) : ?>
                 <li>
                     <label><?php esc_html_e( 'Cover Letter', 'jobus' ); ?></label>

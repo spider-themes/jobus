@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -40,7 +42,6 @@ class User {
 	public function manage_user_roles(): void {
 		$this->add_user_roles();
 	}
-
 
 	public function add_user_roles(): void {
 
@@ -83,9 +84,7 @@ class User {
 			'delete_others_posts'    => false, // Restrict deleting others' posts
 			'delete_published_posts' => true,
 		) );
-
 	}
-
 
 	public function remove_user_roles(): void {
 		remove_role( 'jobus_candidate' );
@@ -93,16 +92,13 @@ class User {
 	}
 
 	public function candidate_registration(): void {
-		if ( ! empty( $_POST['register_candidate_nonce'] )
-		     && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' )
-		) {
+		if ( ! empty( $_POST['register_candidate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' ) ) {
 
 			// Get form data
 			$candidate_username         = ! empty( $_POST['candidate_username'] ) ? sanitize_user( wp_unslash( $_POST['candidate_username'] ) ) : '';
 			$candidate_email            = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
 			$candidate_password         = ! empty( $_POST['candidate_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_pass'] ) ) : '';
-			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) )
-				: '';
+			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) ) : '';
 
 			// Check if passwords match
 			if ( $candidate_password !== $candidate_confirm_password ) {
@@ -136,9 +132,7 @@ class User {
 	}
 
 	public function employer_registration(): void {
-		if ( ! empty( $_POST['register_employer_nonce'] )
-		     && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action' )
-		) {
+		if ( ! empty( $_POST['register_employer_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action' ) ) {
 
 			// Get form data
 			$employer_username         = ! empty( $_POST['employer_username'] ) ? sanitize_user( wp_unslash( $_POST['employer_username'] ) ) : '';
@@ -177,13 +171,13 @@ class User {
 		}
 	}
 
-
 	/**
 	 * Restrict certain admin menu items for users with the Candidate role.
 	 */
 	public function restrict_candidate_menu(): void {
 		$user = wp_get_current_user();
 		if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
+
 			// Remove unnecessary menus
 			remove_menu_page( 'edit.php' ); // Posts
 			remove_menu_page( 'edit-comments.php' ); // Comments
@@ -193,5 +187,4 @@ class User {
 			remove_menu_page( 'edit.php?post_type=elementor_library' ); // elementor_library
 		}
 	}
-
 }

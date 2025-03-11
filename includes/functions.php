@@ -3,7 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
 if ( ! function_exists( 'jobus_rtl' ) ) {
 	function jobus_rtl(): string {
 		return is_rtl() ? 'true' : 'false';
@@ -19,7 +18,6 @@ if ( ! function_exists( 'jobus_opt' ) ) {
 	}
 }
 
-
 // Custom function for [ META ]
 if ( ! function_exists( 'jobus_meta' ) ) {
 	function jobus_meta( $option = '', $default = null ) {
@@ -28,7 +26,6 @@ if ( ! function_exists( 'jobus_meta' ) ) {
 		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
 	}
 }
-
 
 /**
  * Jobus Custom Template Part
@@ -54,7 +51,6 @@ if ( ! function_exists( 'jobus_get_template_part' ) ) {
 	}
 }
 
-
 /**
  * Get template part implementation for jobus.
  * Looks at the theme directory first
@@ -65,7 +61,6 @@ if ( ! function_exists( 'jobus_get_template_part' ) ) {
 function jobus_get_template( $template_name, array $args = [] ): void {
 
 	$jobus_obj = Jobus::init();
-
 	if ( $args && is_array( $args ) ) {
 		extract( $args );
 	}
@@ -78,7 +73,6 @@ function jobus_get_template( $template_name, array $args = [] ): void {
 	}
 }
 
-
 /**
  * @param $term
  *
@@ -88,11 +82,9 @@ function jobus_get_template( $template_name, array $args = [] ): void {
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
 	function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat' ): string {
 		$terms = get_the_terms( get_the_ID(), $term );
-		$term  = is_array( $terms ) ? $terms[0]->name : '';
-		return $term;
+		return is_array( $terms ) ? $terms[0]->name : '';
 	}
 }
-
 
 /**
  * @param $term
@@ -103,11 +95,9 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
 	function jobus_get_first_taxonomy_link( $term = 'jobus_job_cat' ): string {
 		$terms = get_the_terms( get_the_ID(), $term );
-		$term  = is_array( $terms ) ? get_category_link( $terms[0]->term_id ) : '';
-		return $term;
+		return is_array( $terms ) ? get_category_link( $terms[0]->term_id ) : '';
 	}
 }
-
 
 /**
  * @param $term
@@ -122,7 +112,6 @@ if ( ! function_exists( 'jobus_get_tag_list' ) ) {
 		$term  = is_array( $terms ) ? $terms : '';
 
 		$tag_list = '';
-
 		if ( ! empty( $term ) ) {
 			foreach ( $term as $tag ) {
 				$tag_list .= '<a href="' . esc_url( get_category_link( $tag->term_id ) ) . '">' . esc_html( $tag->name ) . '</a>';
@@ -132,7 +121,6 @@ if ( ! function_exists( 'jobus_get_tag_list' ) ) {
 		return $tag_list;
 	}
 }
-
 
 /**
  * Get categories array
@@ -157,7 +145,6 @@ if ( ! function_exists( 'jobus_get_categories' ) ) {
 	}
 }
 
-
 /**
  * Get title excerpt length
  *
@@ -175,7 +162,6 @@ if ( ! function_exists( 'jobus_title_length' ) ) {
 	}
 }
 
-
 /**
  * Get post excerpt length
  *
@@ -188,14 +174,10 @@ if ( ! function_exists( 'jobus_title_length' ) ) {
 if ( ! function_exists( 'jobus_excerpt_length' ) ) {
 	function jobus_excerpt_length( $settings, $settings_key, $default = 10 ): void {
 		$excerpt_length = ! empty( $settings[ $settings_key ] ) ? $settings[ $settings_key ] : $default;
-		$excerpt        = get_the_excerpt()
-			? wp_trim_words( get_the_excerpt(), $excerpt_length, '...' )
-			: wp_trim_words( get_the_content(), $excerpt_length, '...' );
-
+		$excerpt        = get_the_excerpt() ? wp_trim_words( get_the_excerpt(), $excerpt_length, '...' ) : wp_trim_words( get_the_content(), $excerpt_length, '...' );
 		echo wp_kses_post( $excerpt );
 	}
 }
-
 
 /**
  * @param $settings_key
@@ -227,7 +209,6 @@ if ( ! function_exists( 'jobus_button_link' ) ) {
 	}
 }
 
-
 /**
  * @return string
  *
@@ -254,10 +235,8 @@ if ( ! function_exists( 'jobus_company_post_list' ) ) {
 		}
 
 		return $options;
-
 	}
 }
-
 
 function jobus_get_specs( $settings_id = 'job_specifications' ): array {
 	$specifications = jobus_opt( $settings_id );
@@ -290,7 +269,6 @@ function jobus_get_specs( $settings_id = 'job_specifications' ): array {
 	return $specs;
 }
 
-
 if ( ! function_exists( 'jobus_get_specs_options' ) ) {
 	function jobus_get_specs_options( $settings_id = 'job_specifications' ): array {
 		$specifications = jobus_opt( $settings_id );
@@ -307,7 +285,6 @@ if ( ! function_exists( 'jobus_get_specs_options' ) ) {
 		return $specs;
 	}
 }
-
 
 /**
  * Retrieve and format job attributes based on the specified meta key.
@@ -336,7 +313,6 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
 	function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
 		$args = array(
@@ -356,7 +332,6 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
 		return $query->found_posts;
 	}
 }
-
 
 /**
  * Jobus job pagination
@@ -395,7 +370,6 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
 	}
 }
 
-
 /**
  * Jobus pagination
  */
@@ -418,7 +392,6 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
 
 	add_action( 'pre_get_posts', 'jobus_job_archive_query' );
 }
-
 
 /**
  * Get the company count by post id and meta-value
@@ -486,7 +459,7 @@ function jobus_search_terms( string $terms ): array|string {
 
 		// Check if the parameter is set in the URL and sanitize the input
 		if ( isset( $_GET[ $terms ] ) ) {
-			$raw_terms = wp_unslash( $_GET[ $terms ] );
+			$raw_terms = $_GET[ $terms ];
 
 			// If it's an array, sanitize each element, otherwise sanitize the single value
 			if ( is_array( $raw_terms ) ) {
@@ -495,12 +468,10 @@ function jobus_search_terms( string $terms ): array|string {
 				$result = [ sanitize_text_field( $raw_terms ) ];
 			}
 		}
-
 	}
 
 	return $result;
 }
-
 
 /**
  * Jobus search meta
@@ -514,8 +485,7 @@ function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_w
 		}
 	}
 
-	$job_meta_query = array();
-
+	$job_meta_query = [];
 	if ( is_array( $widgets ) ) {
 
 		$filter_widgets = jobus_opt( $sidebar_widget_id );
@@ -533,7 +503,6 @@ function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_w
 
 			if ( ! in_array( $job_value, $search_widgets ) ) {
 				$job_type_meta = jobus_search_terms( $job_value );
-
 
 				foreach ( $job_type_meta as $key => $value ) {
 
@@ -660,7 +629,6 @@ function jobus_all_range_field_value(): array {
 					$value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
 					$post_ids[ $input ][ $post->ID ] = $value;
 				}
-
 			}
 		}
 	}

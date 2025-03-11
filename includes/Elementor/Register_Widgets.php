@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Register_Widgets {
 
 	public function __construct() {
-
 		//Register Category for Elementor Widgets
 		add_action( 'elementor/elements/categories_registered', [ $this, 'register_category' ] );
 
@@ -31,7 +32,6 @@ class Register_Widgets {
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ] );
 	}
 
-
 	/**
 	 * @param $elements_manager
 	 *
@@ -46,7 +46,6 @@ class Register_Widgets {
 			]
 		);
 	}
-
 
 	public function register_editor_scripts(): void {
 		wp_enqueue_script( 'jobus-elementor-widgets', esc_url( JOBUS_JS . '/elementor-widgets.js' ), [ 'jquery', 'elementor-frontend' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
@@ -88,16 +87,14 @@ class Register_Widgets {
 					$dynamic_css .= "
                     .card-style-seven.category-{$cat->term_id} a .title { 
                         color: " . esc_attr( $text_color ) . " !important; 
-                    }
-                ";
+                    }";
 				}
 
 				if ( $bg_color ) {
 					$dynamic_css .= "
                     .card-style-seven.category-{$cat->term_id} a { 
                         background-color: " . esc_attr( $bg_color ) . " !important; 
-                    }
-                ";
+                    }";
 				}
 
 				if ( $hover_bg_color || $hover_border_color ) {
@@ -105,8 +102,7 @@ class Register_Widgets {
                     .card-style-seven.category-{$cat->term_id} a:hover { 
                         background-color: " . esc_attr( $hover_bg_color ) . " !important; 
                         border-color: " . esc_attr( $hover_border_color ) . " !important; 
-                    }
-                ";
+                    }";
 				}
 			}
 		}

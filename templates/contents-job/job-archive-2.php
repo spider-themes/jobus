@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $job_archive_layout = $job_archive_layout ?? jobus_opt('job_archive_layout');
 
 // Check if the view parameter is set in the URL
-$current_view = !empty($_GET['view']) ? sanitize_text_field($_GET['view']) : 'list';
+$current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
 
 // Get the base URL for the archive page
 if ( $job_archive_layout ) {
@@ -41,8 +41,8 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                             <div class="short-filter d-flex align-items-center">
                                 <div class="text-dark fw-500 me-2"><?php esc_html_e('Short By:', 'jobus'); ?></div>
                                 <?php
-                                $order = !empty($_GET['order']) ? sanitize_text_field($_GET['order']) : '';
-                                $order_by = !empty($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : '';
+                                $order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : '';
+                                $order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : '';
 
                                 $selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
                                 $selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';

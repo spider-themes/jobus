@@ -2,7 +2,6 @@
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
@@ -16,32 +15,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Tabs
+ * Class Categories
  *
- * @package spider\Widgets
+ * @package jobus\Widgets
  */
 class Categories extends Widget_Base {
 
-	public function get_name() {
+	public function get_name(): string {
 		return 'jobus_job_categories';
 	}
 
-	public function get_title() {
+	public function get_title(): string {
 		return esc_html__( 'Categories (Jobus)', 'jobus' );
 	}
 
-	public function get_icon() {
+	public function get_icon(): string {
 		return 'eicon-tags jobus-icon';
 	}
 
-	public function get_keywords() {
+	public function get_keywords(): array {
 		return [ 'Job Category', 'Category', 'Jobus', 'Jobus Category' ];
 	}
 
-	public function get_categories() {
+	public function get_categories(): array {
 		return [ 'jobus-elements' ];
 	}
-
 
 	/**
 	 * Name: register_controls()
@@ -51,11 +49,10 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function register_controls() {
+	protected function register_controls(): void {
 		$this->elementor_content_control();
 		$this->elementor_style_control();
 	}
-
 
 	/**
 	 * Name: elementor_content_control()
@@ -65,7 +62,7 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	public function elementor_content_control() {
+	public function elementor_content_control(): void {
 
 
 		//===================== Select Preset ===========================//
@@ -174,7 +171,6 @@ class Categories extends Widget_Base {
 
 	}
 
-
 	/**
 	 * Name: elementor_style_control()
 	 * Desc: Register the Style Tab output on the Elementor editor.
@@ -183,7 +179,8 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	public function elementor_style_control() {
+	public function elementor_style_control(): void {
+
 
 		//============================ Category Item Style ============================//
 		$this->start_controls_section(
@@ -260,6 +257,7 @@ class Categories extends Widget_Base {
 				'label' => esc_html__( 'Hover', 'jobus' ),
 			]
 		);
+
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -310,6 +308,7 @@ class Categories extends Widget_Base {
 		);
 
 		$this->end_controls_tab();
+
 		$this->end_controls_tabs();
 
 		$this->end_controls_section(); //End Category Style
@@ -393,7 +392,6 @@ class Categories extends Widget_Base {
 		$this->end_controls_section(); //
 	}
 
-
 	/**
 	 * Name: elementor_render()
 	 * Desc: Render the widget output on the frontend.
@@ -402,7 +400,7 @@ class Categories extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function render() {
+	protected function render(): void {
 		$settings = $this->get_settings_for_display();
 		extract( $settings ); //extract all settings array to variables converted to name of key
 
@@ -428,11 +426,8 @@ class Categories extends Widget_Base {
 			'include'    => $cat_ids,
 		) );
 
-
 		//================= Template Parts =================//
 		include "templates/categories/category-{$settings['layout']}.php";
 
 	}
-
-
 }
