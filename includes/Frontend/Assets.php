@@ -51,8 +51,7 @@ class Assets {
 		) );
 
 		//Load Script for ajax mail to candidate
-		wp_enqueue_script( 'jobus-candidate-email-form', esc_url( JOBUS_JS . '/candidate-email-form.js' ), [ 'jquery' ], JOBUS_VERSION,
-			[ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'jobus-candidate-email-form', esc_url( JOBUS_JS . '/candidate-email-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script( 'jobus-candidate-email-form', 'jobus_candidate_email_form', array(
 			'ajaxurl' => $ajax_url,
 			'nonce'   => wp_create_nonce( 'jobus_candidate_contact_mail_form' ),

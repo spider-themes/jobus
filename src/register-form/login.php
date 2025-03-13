@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
 
 $user_input = !empty( $_POST['user_input'] ) ? sanitize_text_field( wp_unslash($_POST['user_input'] )) : '';
 $password = !empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash($_POST['user_pwd']) ) : '';
+$jobus_nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
 
 if (is_user_logged_in()) {
     $current_user = wp_get_current_user();
@@ -53,52 +54,58 @@ if (is_user_logged_in()) {
                             <?php endif; ?>
                         </p>
                     </div>
-                    <div class="form-wrapper m-auto">
-                        <form action="<?php echo esc_url(home_url('/')) ?>wp-login.php" class="mt-10" name="loginform" id="loginform" method="post">
+                    <?php
+                    if ( empty($jobus_nonce) || wp_verify_nonce($jobus_nonce, 'jobus_login_action')) {
+                        ?>
+                        <div class="form-wrapper m-auto">
+                            <form action="<?php echo esc_url(home_url('/')) ?>wp-login.php" class="mt-10" name="loginform" id="loginform" method="post">
 
-                            <?php wp_nonce_field('jobi_login_action', 'jobi_login_nonce'); ?>
+			                    <?php wp_nonce_field('jobus_login_action', 'jobus_nonce'); ?>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="input-group-meta position-relative mb-25">
-                                        <label><?php esc_html_e('Username/Email*', 'jobus'); ?></label>
-                                        <input type="text" name="user_input" id="user_input"
-                                               value="<?php echo esc_attr($user_input) ?>"
-                                               placeholder="<?php esc_attr_e('Enter username or email', 'jobus'); ?>">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label><?php esc_html_e('Username/Email*', 'jobus'); ?></label>
+                                            <input type="text" name="user_input" id="user_input"
+                                                   value="<?php echo esc_attr($user_input) ?>"
+                                                   placeholder="<?php esc_attr_e('Enter username or email', 'jobus'); ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-group-meta position-relative mb-20">
-                                        <label><?php esc_html_e('Password*', 'jobus') ?></label>
-                                        <input type="password" name="pwd" id="password"
-                                               value="<?php echo esc_attr($password) ?>"
-                                               placeholder="<?php esc_attr_e('Enter Password', 'jobus'); ?>"
-                                               class="pass_log_id">
-                                        <span class="placeholder_icon">
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label><?php esc_html_e('Password*', 'jobus') ?></label>
+                                            <input type="password" name="pwd" id="password"
+                                                   value="<?php echo esc_attr($password) ?>"
+                                                   placeholder="<?php esc_attr_e('Enter Password', 'jobus'); ?>"
+                                                   class="pass_log_id">
+                                            <span class="placeholder_icon">
                                             <span class="passVicon">
                                                 <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>"
                                                      alt="<?php esc_attr_e('eye-icon', 'jobus'); ?>">
                                             </span>
                                         </span>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="agreement-checkbox d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <input type="checkbox" id="remember">
-                                            <label for="remember"><?php esc_html_e('Keep me logged in', 'jobus'); ?></label>
                                         </div>
-                                        <a href="<?php echo esc_url(home_url('/')) . '/wp-login.php?action=lostpassword'; ?>">
-                                            <?php esc_html_e('Forget Password?', 'jobus'); ?>
-                                        </a>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <input type="checkbox" id="remember">
+                                                <label for="remember"><?php esc_html_e('Keep me logged in', 'jobus'); ?></label>
+                                            </div>
+                                            <a href="<?php echo esc_url(home_url('/')) . '/wp-login.php?action=lostpassword'; ?>">
+							                    <?php esc_html_e('Forget Password?', 'jobus'); ?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e('Login', 'jobus'); ?></button>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e('Login', 'jobus'); ?></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

@@ -72,7 +72,6 @@ foreach ( $price_ranged as $key => $values ) {
  * Trim all the strings, keep only the numaric values
  *
  */
-
 $allSliderValues = jobus_all_range_field_value();
 
 if (!empty($allSliderValues)) {
@@ -127,7 +126,6 @@ if (!empty($allSliderValues)) {
      */
     $result_ids = array_unique(array_merge($result_ids, $uniqueIds));
 }
-
 
 if (isset($result_ids)) {
     $args[ 'post__in' ] = array_map('absint', $result_ids);;

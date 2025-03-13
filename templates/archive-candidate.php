@@ -66,8 +66,6 @@ foreach ( $price_ranged as $key => $values ) {
     }, $values));
 }
 
-
-
 /**
  *
  * Get all the range fields values
@@ -94,7 +92,6 @@ if (!empty($allSliderValues)) {
      * Get matched ids by searched min and max values
      */
     $matchedIds = [];
-
 
     foreach ( $formatted_price_ranged as $key => $values ) {
         foreach ( $simplifiedSliderValues[ $key ] as $id => $range ) {
@@ -129,11 +126,9 @@ if (!empty($allSliderValues)) {
     $result_ids = array_unique(array_merge($result_ids, $uniqueIds));
 }
 
-
 if (isset($result_ids)) {
     $args[ 'post__in' ] = array_map('absint', $result_ids);
 }
-
 
 // Sanitize company_ids
 $search_type = !empty($_GET['search_type']) ? sanitize_text_field( wp_unslash($_GET['search_type']) ) : '';
@@ -144,7 +139,6 @@ if ($search_type == 'company_search' && !empty($company_ids)) {
 
 $candidate_query = new WP_Query($args);
 $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt('candidate_archive_layout');
-
 
 //============= Select Layout ==================//
 include 'contents-candidate/candidate-archive-'.$candidate_archive_layout.'.php';

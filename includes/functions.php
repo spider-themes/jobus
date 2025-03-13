@@ -452,20 +452,20 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
  * @return array|string The sanitized search terms.
  */
 function jobus_search_terms( string $terms ): array|string {
-	$result = [];
+
+    $result = [];
+	$jobus_nonce = !empty($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
 
 	// Verify the nonce before processing the request
-	if ( ! empty( $_GET['jobus_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ), 'jobus_search_terms' ) ) {
+	if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_terms' ) ) {
 
 		// Check if the parameter is set in the URL and sanitize the input
-		if ( isset( $_GET[ $terms ] ) ) {
-			$raw_terms = $_GET[ $terms ];
-
+		if (isset($_GET[$terms])) {
 			// If it's an array, sanitize each element, otherwise sanitize the single value
-			if ( is_array( $raw_terms ) ) {
-				$result = array_map( 'sanitize_text_field', $raw_terms );
+			if ( is_array($_GET[$terms]) ) {
+				$result = array_map('sanitize_text_field', wp_unslash($_GET[$terms]));
 			} else {
-				$result = [ sanitize_text_field( $raw_terms ) ];
+				$result = [sanitize_text_field(wp_unslash($_GET[$terms])) ];
 			}
 		}
 	}
@@ -602,36 +602,39 @@ function jobus_all_range_field_value(): array {
 
 	$posts    = get_posts( $args );
 	$post_ids = [];
+	$jobus_nonce = !empty($_GET['jobus_nonce']) ? sanitize_text_field(wp_unslash($_GET['jobus_nonce'])) : '';
 
-	if ( ! empty ( $posts ) ) {
+    if ( $jobus_nonce && wp_verify_nonce($jobus_nonce, 'jobus_search_nonce') ) {
+	    if ( !empty($posts) ) {
 
-		foreach ( $posts as $post ) {
-			$meta = get_post_meta( $post->ID, 'jobus_meta_options', true );
+		    foreach ( $posts as $post ) {
+			    $meta = get_post_meta( $post->ID, 'jobus_meta_options', true );
 
-			$filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-			$search_widgets = [];
+			    $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+			    $search_widgets = [];
 
-			if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-				foreach ( $filter_widgets as $widget ) {
-					if ( $widget['widget_layout'] == 'range' ) {
-						// if get value in search bar
-						if ( ! empty( $_GET[ $widget['widget_name'] ] ) ) {
-							$search_widgets[] = $widget['widget_name'] ?? '';
-						}
-					}
-				}
-			}
+			    if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+				    foreach ( $filter_widgets as $widget ) {
+					    if ( $widget['widget_layout'] == 'range' ) {
+						    // if you get value in search bar
+						    $widget_name = !empty($widget['widget_name']) ? sanitize_text_field(wp_unslash($widget['widget_name'])) : '';
+						    if ( $widget_name ) {
+							    $search_widgets[] = $widget_name;
+						    }
+					    }
+				    }
+			    }
 
-			foreach ( $search_widgets as $serial => $input ) {
-
-				$meta_salary = $meta[ $input ] ?? '';
-				if ( ! empty( $meta_salary ) ) {
-					$value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
-					$post_ids[ $input ][ $post->ID ] = $value;
-				}
-			}
-		}
-	}
+			    foreach ( $search_widgets as $serial => $input ) {
+				    $meta_salary = $meta[ $input ] ?? '';
+				    if ( ! empty( $meta_salary ) ) {
+					    $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
+					    $post_ids[ $input ][ $post->ID ] = $value;
+				    }
+			    }
+		    }
+	    }
+    }
 
 	return $post_ids;
 }

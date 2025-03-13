@@ -2,8 +2,11 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
-?>
-<div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
+$jobus_nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
+
+if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) :
+    ?>
+    <div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="container">
@@ -13,9 +16,9 @@ if (!defined('ABSPATH')) {
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <div class="pt-25 pb-30 ps-4 pe-4">
 
+                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get">
 
-                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search"
-                              method="get">
+	                        <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
                             <input type="hidden" name="post_type" value="company"/>
 
                             <div class="row">
@@ -184,3 +187,5 @@ if (!defined('ABSPATH')) {
         </div>
     </div>
 </div>
+    <?php
+endif;
