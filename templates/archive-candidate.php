@@ -16,11 +16,11 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
 $selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
 
-$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_candidate', '', jobus_all_search_meta()) ];
+$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_candidate', '', jobus_all_search_meta( 'jobus_meta_candidate_options', 'candidate_sidebar_widgets' ) ) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms('candidate_cats')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'candidate_tag', jobus_search_terms('candidate_tags')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms('candidate_locations')) ];
 
-if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
+if ( !empty ($meta_args[ 'args' ][ 'meta_query' ]) ) {
     $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
 } else {
     $result_ids = jobus_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2);
@@ -37,6 +37,30 @@ $args = [
 
 if (!empty(get_query_var('s'))) {
     $args[ 's' ] = get_query_var('s');
+}
+
+// Handle Taxonomy Queries
+$candidate_cats = !empty( $_GET['candidate_cats'] ) ? sanitize_text_field( wp_unslash($_GET['candidate_cats']) ) : '';
+$candidate_locations = !empty( $_GET['candidate_locations'] ) ? sanitize_text_field( wp_unslash($_GET['candidate_locations']) ) : '';
+
+$args[ 'tax_query' ] = array(
+	'relation' => 'OR',
+);
+
+if ( $candidate_cats ) {
+	$args[ 'tax_query' ][] = array(
+		'taxonomy'  => 'jobus_candidate_cat',
+		'field'     => 'slug',
+		'terms'     => $candidate_cats,
+	);
+}
+
+if ( $candidate_locations ) {
+	$args[ 'tax_query' ][] = array(
+		'taxonomy'  => 'jobus_candidate_location',
+		'field'     => 'slug',
+		'terms'     => $candidate_locations,
+	);
 }
 
 // Range fields value

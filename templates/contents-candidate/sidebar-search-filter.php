@@ -23,11 +23,10 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
                 <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
 
-                    <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
-                    <input type="hidden" name="post_type" value="candidate"/>
+                    <input type="hidden" name="post_type" value="jobus_candidate"/>
+	                <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
 
                     <?php
-
                     // Widget for candidate meta data list
                     $filter_widgets = jobus_opt('candidate_sidebar_widgets');
 
@@ -207,13 +206,13 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                     }
 
                     // candidate location sidebar
-                    if ( jobus_opt('is_candidate_widget_location') == true ) {
+                    if ( jobus_opt('is_candidate_widget_location') ) {
 
                         // Initialize variables with default values
                         $is_collapsed_show = 'collapse';
                         $area_expanded = 'false';
                         $is_collapsed = ' collapsed';
-                        $candidate_locations = !empty($_GET['candidate_locations']) ? sanitize_text_field( wp_unslash($_GET['candidate_locations']) ) : '';
+	                    $candidate_locations = !empty($_GET['candidate_locations']) ? array_map('sanitize_text_field', wp_unslash($_GET['candidate_locations'])) : [];
 
                         if ( $post_type == 'jobus_candidate' && $candidate_locations ) {
 	                        $is_collapsed_show = 'collapse show';
@@ -221,11 +220,11 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 	                        $is_collapsed      = '';
                         }
 
-                        $term_loc = get_terms( array(
+	                    $term_locations = get_terms( array(
                             'taxonomy'   => 'jobus_candidate_location',
                         ) );
 
-                        if (!empty($term_loc)) {
+                        if (!empty($term_locations)) {
                             ?>
                             <div class="filter-block bottom-line pb-25 mt-25">
                                 <a class="filter-title fw-500 text-dark<?php echo esc_attr($is_collapsed) ?>" data-bs-toggle="collapse" href="#collapseLocation" role="button" aria-expanded="<?php echo esc_attr($area_expanded) ?>">
@@ -234,13 +233,14 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                 <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseLocation">
                                     <div class="main-body">
                                         <select class="nice-select" name="candidate_locations[]">
-                                            <?php
-                                            $searched_opt = jobus_search_terms('candidate_locations');
-                                            foreach ( $term_loc as $key => $term ) {
-                                                $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
-                                            }
-                                            ?>
+                                            <option value="" disabled selected><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
+		                                    <?php
+		                                    $searched_opt = jobus_search_terms( 'candidate_locations' );
+		                                    foreach ( $term_locations as $key => $term ) {
+			                                    $selected = in_array($term->slug, $searched_opt) ? ' selected' : '';
+			                                    echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
+		                                    }
+		                                    ?>
                                         </select>
                                     </div>
                                 </div>
@@ -256,7 +256,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                         $is_collapsed_show = 'collapse';
                         $area_expanded = 'false';
                         $is_collapsed = ' collapsed';
-	                    $candidate_cats = !empty($_GET['candidate_cats']) ? sanitize_text_field( wp_unslash($_GET['candidate_cats']) ) : '';
+	                    $candidate_cats = !empty($_GET['candidate_cats']) ? array_map('sanitize_text_field', wp_unslash($_GET['candidate_cats'])) : [];
 
                         if ( $post_type == 'jobus_candidate' && $candidate_cats ) {
                             $is_collapsed_show = 'collapse show';
@@ -277,13 +277,14 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                 <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapseCategory">
                                     <div class="main-body">
                                         <select class="nice-select" name="candidate_cats[]">
-                                            <?php
-                                            $searched_opt = jobus_search_terms('candidate_cats');
-                                            foreach ( $term_cats as $key => $term ) {
-                                                $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
-                                            }
-                                            ?>
+                                            <option value="" disabled selected><?php esc_html_e('Select Category', 'jobus'); ?></option>
+		                                    <?php
+		                                    $searched_opt = jobus_search_terms( 'candidate_cats' );
+		                                    foreach ( $term_cats as $key => $term ) {
+			                                    $selected = (in_array( $term->slug, $searched_opt ) ) ? ' selected' : '';
+			                                    echo '<option value="' . esc_attr( $term->slug ) . '"' . esc_attr( $selected ) . '>' . esc_html( $term->name ) . '</option>';
+		                                    }
+		                                    ?>
                                         </select>
                                     </div>
                                 </div>
@@ -296,6 +297,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                         <?php esc_html_e('Apply Filter', 'jobus'); ?>
                     </button>
                 </form>
+
             </div>
         </div>
     </div>

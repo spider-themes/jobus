@@ -457,7 +457,7 @@ function jobus_search_terms( string $terms ): array|string {
 	$jobus_nonce = !empty($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
 
 	// Verify the nonce before processing the request
-	if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_terms' ) ) {
+	if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) {
 
 		// Check if the parameter is set in the URL and sanitize the input
 		if (isset($_GET[$terms])) {

@@ -20,7 +20,6 @@ $list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
 $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
-
 <section class="candidates-profile bg-color pt-90 lg-pt-70 pb-160 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
@@ -35,11 +34,11 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                             </button>
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_candidate')) ?></span>
-                                <?php
-                                /* translators: 1: candidate found, 2: candidates found */
-                                echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('jobus_candidate'), 'jobus'), jobus_posts_count('jobus_candidate')));
-                                ?>
+                                <span class="fw-500"><?php echo esc_html( $candidate_query->found_posts ); ?></span>
+	                            <?php
+	                            /* translators: 1: candidate found, 2: candidates found */
+	                            echo esc_html( sprintf( _n( 'candidate found', 'candidates found', $candidate_query->found_posts, 'jobus' ), $candidate_query->found_posts ) );
+	                            ?>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -148,11 +147,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 echo '</ul>';
                                             } else {
                                                 // Display all skills
-                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
-                                                foreach ($skills as $skill) {
-                                                    echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                if ( !empty($skills) ) {
+	                                                echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+	                                                foreach ($skills as $skill) {
+		                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+	                                                }
+	                                                echo '</ul>';
                                                 }
-                                                echo '</ul>';
                                             }
                                             ?>
                                             <div class="row gx-1">
@@ -274,11 +275,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                             echo '</ul>';
                                                         } else {
                                                             // Display all skills
-                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
-                                                            foreach ($skills as $skill) {
-                                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                            if ( !empty($skills) ) {
+	                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+	                                                            foreach ($skills as $skill) {
+		                                                            echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+	                                                            }
+	                                                            echo '</ul>';
                                                             }
-                                                            echo '</ul>';
                                                         }
                                                         ?>
                                                     </div>

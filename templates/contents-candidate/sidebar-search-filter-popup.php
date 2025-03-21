@@ -18,8 +18,8 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search" method="get">
 
-		                <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
-                        <input type="hidden" name="post_type" value="candidate"/>
+                        <input type="hidden" name="post_type" value="jobus_candidate"/>
+	                    <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
 
                         <div class="pt-25 pb-30 ps-4 pe-4">
                             <div class="row">
@@ -199,7 +199,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 				                    }
 			                    }
 
-			                    if ( jobus_opt( 'is_candidate_widget_location' ) == true ) {
+			                    if ( jobus_opt( 'is_candidate_widget_location' ) ) {
 
 				                    $term_loc = get_terms( array(
 					                    'taxonomy'   => 'jobus_candidate_location',
@@ -211,16 +211,14 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                         <div class="col-lg-3">
                                             <div class="filter-block pb-50 md-pb-20">
                                                 <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'location', 'jobus' ); ?></div>
-                                                <select class="nice-select" name="candidate_location[]">
-								                    <?php
-								                    $searched_opt = jobus_search_terms( 'jobus_candidate_location' );
+                                                <select class="nice-select" name="candidate_locations[]">
+                                                    <option value="" disabled selected><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
+                                                    <?php
+								                    $searched_opt = jobus_search_terms( 'candidate_locations' );
 								                    foreach ( $term_loc as $key => $term ) {
 									                    $list_class   = $key > 3 ? ' class=hide' : '';
-									                    $check_status = array_search( $term->slug, $searched_opt );
-									                    $check_status = $check_status !== false ? ' checked' : '';
-									                    ?>
-                                                        <option value="<?php echo esc_attr( $term->slug ) ?>"><?php echo esc_html( $term->name ) ?></option>
-									                    <?php
+									                    $selected = in_array($term->slug, $searched_opt) ? ' selected' : '';
+									                    echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
 								                    }
 								                    ?>
                                                 </select>
@@ -232,7 +230,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 			                    ?>
 
 			                    <?php
-			                    if ( jobus_opt( 'is_candidate_widget_cat' ) == true ) {
+			                    if ( jobus_opt( 'is_candidate_widget_cat' ) ) {
 
 				                    $term_cats = get_terms( array(
 					                    'taxonomy'   => 'jobus_candidate_cat',
@@ -245,10 +243,11 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                             <div class="filter-block pb-50 md-pb-20">
                                                 <div class="filter-title fw-500 text-dark"><?php esc_html_e( 'Category', 'jobus' ); ?></div>
                                                 <select class="nice-select" name="candidate_cats[]">
+                                                    <option value="" disabled selected><?php esc_html_e('Select Category', 'jobus'); ?></option>
 								                    <?php
 								                    $searched_opt = jobus_search_terms( 'candidate_cats' );
 								                    foreach ( $term_cats as $key => $term ) {
-									                    $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
+									                    $selected = in_array($term->slug, $searched_opt) ? ' selected' : '';
 									                    echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
 								                    }
 								                    ?>

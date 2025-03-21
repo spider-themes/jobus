@@ -32,11 +32,11 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_candidate')) ?></span>
-                            <?php
-                            /* translators: 1: candidate found, 2: candidates found */
-                            echo esc_html(sprintf(_n('candidate found', 'candidates found', jobus_posts_count('jobus_candidate'), 'jobus'), jobus_posts_count('jobus_candidate')));
-                            ?>
+                            <span class="fw-500"><?php echo esc_html( $candidate_query->found_posts ); ?></span>
+	                        <?php
+	                        /* translators: 1: candidate found, 2: candidates found */
+	                        echo esc_html( sprintf( _n( 'candidate found', 'candidates found', $candidate_query->found_posts, 'jobus' ), $candidate_query->found_posts ) );
+	                        ?>
                         </div>
 
                         <div class="d-flex align-items-center">

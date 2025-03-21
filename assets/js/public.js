@@ -3,7 +3,6 @@
 
     $(document).ready(function () {
 
-
         /**
          * Copy URL to clipboard
          * @param text
@@ -17,14 +16,11 @@
             document.body.removeChild(textarea);
         }
 
-
         // Nice Select for search form
         let niceSelect = $('.nice-select');
         if (niceSelect.length > 0) {
             niceSelect.niceSelect();
         }
-
-
 
         /**
          * Search Keywords
@@ -38,7 +34,6 @@
             $('#searchInput').val(content).focus();
             fetchResults();
         });
-
 
         // Related Job Post slider
         function relatedPost() {
@@ -71,9 +66,7 @@
             }
 
         }
-
         relatedPost(); // end Related Job Post slider
-
 
         // Testimonial slider
         function testimonialSlider() {
@@ -99,9 +92,7 @@
                 });
             }
         }
-
         testimonialSlider(); // end Testimonial slider
-
 
         // Range Slider for Salary filter
         function salaryRangeSlider(selector) {
@@ -151,11 +142,7 @@
                 });
             });
         }
-
-        // Use the function with your specific class or attribute
         salaryRangeSlider(".salary-slider");
-        // end Range Slider for Salary filter
-
 
         // Job Category Show More Items
         function jobCategoryShowMoreItems() {
@@ -174,10 +161,7 @@
                 });
             }
         }
-
         jobCategoryShowMoreItems(); // end jobCategoryShowMoreItems
-
-
 
 
         // Copy URL to clipboard
@@ -196,7 +180,6 @@
                 });
             }
         }
-
         copyButton(); // end copyButton click event
 
 
@@ -234,8 +217,6 @@
             }
 
         }
-
         candidatePortfolio()//End Candidate Portfolio Slider
     });
-
 })(jQuery);
