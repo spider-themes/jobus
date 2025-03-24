@@ -36,11 +36,11 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                             <div class="total-job-found xs-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_job')) ?></span>
-                                <?php
-                                /* translators: 1: job found, 2: jobs found */
-                                echo esc_html(sprintf(_n('job found', 'jobs found', jobus_posts_count('jobus_job'), 'jobus'), jobus_posts_count('jobus_job') ));
-                                ?>
+                                <span class="fw-500"><?php echo esc_html( $job_post->found_posts ); ?></span>
+	                            <?php
+	                            /* translators: 1: job found, 2: jobs found */
+	                            echo esc_html(sprintf(_n('job found', 'jobs found', $job_post->found_posts, 'jobus'), $job_post->found_posts ));
+	                            ?>
                             </div>
 
                         </div>

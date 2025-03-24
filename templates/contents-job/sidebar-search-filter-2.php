@@ -20,7 +20,7 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30" role="search" method="get">
 
                         <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
-                        <input type="hidden" name="post_type" value="job"/>
+                        <input type="hidden" name="post_type" value="jobus_job"/>
 
                         <div class="row">
                             <?php
@@ -175,7 +175,6 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                                 }
                             }
 
-
                             // Retrieve the sortable field value
                             $sortables = jobus_opt('is_sortable_job_sidebar');
 
@@ -193,12 +192,13 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="filter-block pb-50 lg-pb-20">
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Category', 'jobus'); ?></div>
-                                                    <select class="nice-select bg-white" name="company_cats[]">
+                                                    <select class="nice-select bg-white" name="job_cats[]">
+                                                        <option value="" disabled selected><?php esc_html_e( 'Select Category', 'jobus' ); ?></option>
                                                         <?php
-                                                        $searched_opt = jobus_search_terms('company_cats');
+                                                        $searched_opt = jobus_search_terms('job_cats');
                                                         foreach ( $term_cats as $term ) {
-                                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                            echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';
+	                                                        $selected = in_array($term->slug, $searched_opt) ? ' selected' : '';
+	                                                        echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>
@@ -219,11 +219,12 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                                                 <div class="filter-block pb-50 lg-pb-20">
                                                     <div class="filter-title fw-500 text-dark"><?php esc_html_e('Location', 'jobus'); ?></div>
                                                     <select class="nice-select bg-white" name="job_locations[]">
+                                                        <option value="" disabled selected><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
                                                         <?php
                                                         $searched_opt = jobus_search_terms('job_locations');
                                                         foreach ( $term_loc as $term ) {
-                                                            $selected = (in_array($term->slug, $searched_opt)) ? ' selected' : '';
-                                                            echo '<option value="' . esc_attr($term->slug) . '" '.esc_attr($selected).'>' . esc_html($term->name) . '</option>';
+	                                                        $selected = in_array($term->slug, $searched_opt) ? ' selected' : '';
+	                                                        echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
                                                         }
                                                         ?>
                                                     </select>
