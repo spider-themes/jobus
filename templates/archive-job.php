@@ -18,13 +18,13 @@ $selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_job', '', jobus_all_search_meta()) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms('job_cats')) ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_location', jobus_search_terms('job_locations')) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms('job_tags')) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_location', jobus_search_terms('job_locations')) ];
+$taxonomy_args3 = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms('job_tags')) ];
 
 if (!empty ($meta_args[ 'args' ][ 'meta_query' ])) {
-    $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2);
+    $result_ids = jobus_merge_queries_and_get_ids($meta_args, $taxonomy_args1, $taxonomy_args2, $taxonomy_args3);
 } else {
-    $result_ids = jobus_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2);
+    $result_ids = jobus_merge_queries_and_get_ids($taxonomy_args1, $taxonomy_args2, $taxonomy_args3);
 }
 
 $args = array(

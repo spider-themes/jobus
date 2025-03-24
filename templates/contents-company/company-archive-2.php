@@ -36,11 +36,11 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                             <div class="total-job-found md-mt-10">
                                 <?php esc_html_e('All', 'jobus'); ?>
-                                <span class="text-dark fw-500"><?php echo esc_html(jobus_posts_count('jobus_company')); ?></span>
-                                <?php
-                                /* translators: 1: company found, 2: companies found */
-                                echo esc_html(sprintf(_n('company found', 'companies found', jobus_posts_count('jobus_company'), 'jobus'), jobus_posts_count('jobus_company')));
-                                ?>
+                                <span class="fw-500"><?php echo esc_html( $company_query->found_posts ); ?></span>
+	                            <?php
+	                            /* translators: 1: job found, 2: jobs found */
+	                            echo esc_html(sprintf(_n('company found', 'companies found', $company_query->found_posts, 'jobus'), $company_query->found_posts ));
+	                            ?>
                             </div>
 
                         </div>

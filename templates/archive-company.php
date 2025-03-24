@@ -18,11 +18,12 @@ $selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET
 
 $meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_company', '', jobus_all_search_meta('jobus_meta_company_options', 'company_sidebar_widgets' )) ];
 $taxonomy_args1     = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_company', 'jobus_company_cat', jobus_search_terms('company_cats')) ];
+$taxonomy_args2     = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_company', 'jobus_company_location', jobus_search_terms('company_locations')) ];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
-    $result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1 );
+    $result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
 } else {
-    $result_ids = jobus_merge_queries_and_get_ids( $taxonomy_args1 );
+    $result_ids = jobus_merge_queries_and_get_ids( $taxonomy_args1,$taxonomy_args2 );
 }
 
 $args = [
@@ -37,6 +38,31 @@ $args = [
 if (!empty(get_query_var('s'))) {
     $args[ 's' ] = get_query_var('s');
 }
+
+// Handle Taxonomy Queries
+$company_cats = !empty( $_GET['company_cats'] ) ? sanitize_text_field( wp_unslash($_GET['company_cats']) ) : '';
+$company_locations = !empty( $_GET['company_locations'] ) ? sanitize_text_field( wp_unslash($_GET['company_locations']) ) : '';
+
+$args[ 'tax_query' ] = array(
+	'relation' => 'OR',
+);
+
+if ( $company_cats ) {
+	$args[ 'tax_query' ][] = array(
+		'taxonomy'  => 'jobus_company_cat',
+		'field'     => 'slug',
+		'terms'     => $company_cats,
+	);
+}
+
+if ( $company_locations ) {
+	$args[ 'tax_query' ][] = array(
+		'taxonomy'  => 'jobus_company_location',
+		'field'     => 'slug',
+		'terms'     => $company_locations,
+	);
+}
+
 
 if ( ! empty( $result_ids ) ) {
     $args['post__in'] = $result_ids;

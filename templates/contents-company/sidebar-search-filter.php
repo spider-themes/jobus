@@ -21,8 +21,9 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
             <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
                 <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
+
                     <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
-                    <input type="hidden" name="post_type" value="company"/>
+                    <input type="hidden" name="post_type" value="jobus_company"/>
 
                     <?php
                     // Widget for company meta data list
@@ -153,13 +154,13 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                     }
 
                     // Widget location List
-                    if ( jobus_opt( 'is_company_widget_location' ) == true ) {
+                    if ( jobus_opt( 'is_company_widget_location' ) ) {
 
                         // Initialize variables with default values
                         $is_collapsed_show = 'collapse';
                         $area_expanded = 'false';
                         $is_collapsed = ' collapsed';
-	                    $company_locations = !empty($_GET['company_locations']) ? sanitize_text_field( wp_unslash($_GET['company_locations']) ) : '';
+	                    $company_locations = !empty($_GET['company_locations']) ? array_map('sanitize_text_field', wp_unslash($_GET['company_locations'])) : [];
 
                         if ( $post_type == 'jobus_company' && $company_locations ) {
 	                        $is_collapsed_show = 'collapse show';
@@ -218,13 +219,13 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                     }
 
                     // Widget Category List
-                    if ( jobus_opt( 'is_company_widget_cat' ) == true ) {
+                    if ( jobus_opt( 'is_company_widget_cat' ) ) {
 
                         // Initialize variables with default values
                         $is_collapsed_show = 'collapse';
                         $area_expanded = 'false';
                         $is_collapsed = ' collapsed';
-	                    $company_cats = !empty($_GET['company_cats']) ? sanitize_text_field( wp_unslash($_GET['company_cats']) ) : '';
+	                    $company_cats = !empty($_GET['company_cats']) ? array_map('sanitize_text_field', wp_unslash($_GET['company_cats'])) : [];
 
                         if ( $post_type == 'jobus_company' && $company_cats ) {
 	                        $is_collapsed_show = 'collapse show';
