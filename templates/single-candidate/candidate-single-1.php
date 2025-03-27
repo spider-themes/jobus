@@ -28,8 +28,8 @@ wp_enqueue_script( 'lightbox' );
 						?>
 						<?php the_time( get_option( 'date_format' ) ) ?> .
 						<?php esc_html_e( 'By', 'jobus' ); ?>
-                        <a href="<?php echo get_author_posts_url( $post_author_id ) ?>">
-							<?php echo get_the_author_meta( 'display_name', $post_author_id ) ?>
+                        <a href="<?php echo esc_url(get_author_posts_url( $post_author_id )) ?>">
+							<?php echo esc_html(get_the_author_meta( 'display_name', $post_author_id )) ?>
                         </a>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ wp_enqueue_script( 'lightbox' );
         </div>
     </div>
 	<?php
-	if ( jobi_opt( 'is_banner_shapes' ) == true ) {
+	if ( jobi_opt( 'is_banner_shapes' ) ) {
 		if ( ! empty( $banner_shape_1['id'] ) ) {
 			echo wp_get_attachment_image( $banner_shape_1['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
 		}
@@ -282,7 +282,6 @@ wp_enqueue_script( 'lightbox' );
 
 					<?php
 					$location = $meta['jobus_candidate_location'] ?? '';
-
 					if ( is_array( $location ) ) {
 						$latitude        = $location['latitude'] ?? '';
 						$longitude       = $location['longitude'] ?? '';
@@ -303,11 +302,8 @@ wp_enqueue_script( 'lightbox' );
 
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobus' ) ?><?php the_title() ?></h4>
                     <div class="email-form bg-wrapper bg-color">
-
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
-
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
-
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
@@ -338,11 +334,8 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div id="email-form-message" class="email-form-message"></div>
-
                         </form>
-
                     </div>
-
                 </div>
             </div>
 

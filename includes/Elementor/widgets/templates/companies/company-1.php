@@ -3,8 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-$company_attr_meta_1 = jobus_get_meta_attributes('jobus_meta_company_options', $settings['company_attr_meta_1']));
-
+$company_attr_meta_1 = jobus_get_meta_attributes( 'jobus_meta_company_options', $settings['company_attr_meta_1'] );
 ?>
 <section class="top-company-section">
     <div class="row gy-4">

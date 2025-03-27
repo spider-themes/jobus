@@ -5,8 +5,8 @@
  * Author: spider-themes
  * Version: 0.0.8
  * Requires at least: 6.0
- * Tested up to: 6.6.2
- * Requires PHP: 7.4
+ * Tested up to: 6.7
+ * Requires PHP: 8.0
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: jobus
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.0.6';
+		const VERSION = '0.0.8';
 
 		/**
 		 * The plugin path
@@ -65,17 +65,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			$this->define_constants(); // Define constants.
 			$this->core_includes(); //Include the required files.
-			add_action( 'init', [ $this, 'i18n' ] );
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
-		}
-
-		/**
-		 * Load Textdomain
-		 *
-		 * Load plugin localization files.
-		 */
-		public function i18n(): void {
-			load_plugin_textdomain( 'jobus', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 		}
 
 

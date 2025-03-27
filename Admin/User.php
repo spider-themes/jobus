@@ -100,34 +100,32 @@ class User {
 			$candidate_password         = ! empty( $_POST['candidate_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_pass'] ) ) : '';
 			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) ) : '';
 
-			// Check if passwords match
-			if ( $candidate_password !== $candidate_confirm_password ) {
-				wp_die( esc_html__( 'Passwords do not match', 'jobus' ) );
-			} else {
-				// Check if username or email already exists
-				if ( username_exists( $candidate_username ) || email_exists( $candidate_email ) ) {
-					wp_die( esc_html__( 'Username or email already exists', 'jobus' ) );
-				} else {
-					// Create new user
-					$candidate_id = wp_create_user( $candidate_username, $candidate_password, $candidate_email );
-					if ( is_wp_error( $candidate_id ) ) {
-						wp_die( esc_html( $candidate_id->get_error_message() ) );
-					} else {
-						// Assign a custom role to user
-						$candidate = new \WP_User( $candidate_id );
-						$candidate->set_role( 'jobus_candidate' ); // Assign the custom 'jobus_candidate' role
-
-						// Log the user in
-						wp_set_current_user( $candidate_id );
-						wp_signon( array( 'user_login' => $candidate_username, 'user_password' => $candidate_password ), false );
-						do_action( 'wp_login', $candidate_username, $candidate );
-
-						// Redirect to admin panel
-						wp_redirect( admin_url() );
-						exit;
-					}
-				}
+			if ($candidate_password !== $candidate_confirm_password) {
+				wp_send_json_error(esc_html__('Passwords do not match', 'jobus'));
 			}
+
+			if (username_exists($candidate_username) || email_exists($candidate_email)) {
+				wp_send_json_error(esc_html__('Username or email already exists', 'jobus'));
+			}
+
+			$user_data = [
+				'user_login' => $candidate_username,
+				'user_pass'  => $candidate_password,
+				'user_email' => $candidate_email,
+				'role'       => 'jobus_candidate',
+			];
+
+			$candidate_id = wp_insert_user($user_data);
+			if (is_wp_error($candidate_id)) {
+				wp_send_json_error(esc_html__('Candidate registration failed: ', 'jobus') . esc_html($candidate_id->get_error_message()));
+			}
+
+			wp_set_current_user($candidate_id);
+			wp_signon(['user_login' => $candidate_username, 'user_password' => $candidate_password], false);
+			do_action('wp_login', $candidate_username, new \WP_User($candidate_id));
+
+			wp_safe_redirect(home_url());
+			exit;
 		}
 	}
 
@@ -140,34 +138,34 @@ class User {
 			$employer_password         = ! empty( $_POST['employer_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_pass'] ) ) : '';
 			$employer_confirm_password = ! empty( $_POST['employer_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_confirm_pass'] ) ) : '';
 
-			// Check if passwords match
-			if ( $employer_password !== $employer_confirm_password ) {
-				wp_die( esc_html__( 'Passwords do not match', 'jobus' ) );
-			} else {
-				// Check if username or email already exists
-				if ( username_exists( $employer_username ) || email_exists( $employer_email ) ) {
-					wp_die( esc_html__( 'Username or email already exists', 'jobus' ) );
-				} else {
-					// Create new user
-					$employer_id = wp_create_user( $employer_username, $employer_password, $employer_email );
-					if ( is_wp_error( $employer_id ) ) {
-						wp_die( esc_html( $employer_id->get_error_message() ) );
-					} else {
-						// Assign custom role to user
-						$employer = new \WP_User( $employer_id );
-						$employer->set_role( 'jobus_employer' ); // Assign the custom 'jobus_employer' role
 
-						// Log the user in
-						wp_set_current_user( $employer_id );
-						wp_signon( array( 'user_login' => $employer_username, 'user_password' => $employer_password ), false );
-						do_action( 'wp_login', $employer_username, $employer );
-
-						// Redirect to admin panel
-						wp_redirect( admin_url() );
-						exit;
-					}
-				}
+			if ($employer_password !== $employer_confirm_password) {
+				wp_send_json_error(esc_html__('Passwords do not match', 'jobus'));
 			}
+
+			if (username_exists($employer_username) || email_exists($employer_email)) {
+				wp_send_json_error(esc_html__('Username or email already exists', 'jobus'));
+			}
+
+			$user_data = [
+				'user_login' => $employer_username,
+				'user_pass'  => $employer_password,
+				'user_email' => $employer_email,
+				'role'       => 'jobus_employer',
+			];
+
+			$employer_id = wp_insert_user($user_data);
+
+			if (is_wp_error($employer_id)) {
+				wp_send_json_error(esc_html__('Employer registration failed: ', 'jobus') . esc_html($employer_id->get_error_message()));
+			}
+
+			wp_set_current_user($employer_id);
+			wp_signon(['user_login' => $employer_username, 'user_password' => $employer_password], false);
+			do_action('wp_login', $employer_username, new \WP_User($employer_id));
+
+			wp_safe_redirect( home_url() );
+			exit;
 		}
 	}
 

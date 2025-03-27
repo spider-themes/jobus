@@ -97,7 +97,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         }
                         if (jobus_get_tag_list()) { ?>
                             <div class="job-tags d-flex flex-wrap pt-15">
-                                <?php echo jobus_get_tag_list() ?>
+                                <?php echo wp_kses_post(jobus_get_tag_list()) ?>
                             </div>
                             <?php
                         }
