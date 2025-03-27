@@ -287,7 +287,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                         <div class="candidate-info">
                                                             <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
                                                             <div class="text-capitalize">
-                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+                                                                <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ) ?>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -8,8 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 $meta           = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 $post_author_id = get_post_field( 'post_author', get_the_ID() );
-$banner_shape_1 = function_exists( 'jobi_opt' ) ? jobi_opt( 'banner_shape_1' ) : '';
-$banner_shape_2 = function_exists( 'jobi_opt' ) ? jobi_opt( 'banner_shape_2' ) : '';
+$banner_shape_1 = jobus_opt( 'banner_shape_1' );
+$banner_shape_2 = jobus_opt( 'banner_shape_2' );
 
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
@@ -37,7 +37,7 @@ wp_enqueue_script( 'lightbox' );
         </div>
     </div>
 	<?php
-	if ( jobi_opt( 'is_banner_shapes' ) ) {
+	if ( jobus_opt( 'is_banner_shapes' ) ) {
 		if ( ! empty( $banner_shape_1['id'] ) ) {
 			echo wp_get_attachment_image( $banner_shape_1['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
 		}

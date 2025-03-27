@@ -173,7 +173,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                 }
 
                                                 $locations = get_the_terms(get_the_ID(), 'jobus_candidate_location');
-                                                if (!empty($locations )) {
+                                                if ( !empty($locations) ) {
                                                     ?>
                                                     <div class="col-md-6">
                                                         <div class="candidate-info mt-10">
@@ -206,7 +206,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
                                         </div>
                                     </div>
-                                <?php
+                                    <?php
                                 endwhile;
                                 ?>
 

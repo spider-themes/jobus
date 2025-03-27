@@ -47,9 +47,9 @@ if (is_user_logged_in()) {
                         <h2><?php esc_html_e('Hi, Welcome Back!', 'jobus') ?></h2>
                         <p>
                             <?php esc_html_e('Still don\'t have an account?', 'jobus'); ?>
-                            <?php if ( function_exists('jobi_opt') ) : ?>
-                                <a href="<?php echo esc_url(jobi_opt('login_signup_btn_url')) ?>">
-                                    <?php echo esc_html(jobi_opt('login_signup_btn_label')) ?>
+                            <?php if ( function_exists('jobus_opt') ) : ?>
+                                <a href="<?php echo esc_url(jobus_opt('login_signup_btn_url')) ?>">
+                                    <?php echo esc_html(jobus_opt('login_signup_btn_label')) ?>
                                 </a>
                             <?php endif; ?>
                         </p>
