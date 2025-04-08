@@ -23,7 +23,7 @@ $current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( $_GET['view'] ) 
     <div class="container">
         <div class="row">
 
-            <?php jobus_get_template_part( 'contents-job/sidebar-search-filter' ); ?>
+            <?php jobus_get_template_part( 'contents-job/sidebar-classic-filters' ); ?>
 
             <div class="col-xl-9 col-lg-8">
                 <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">

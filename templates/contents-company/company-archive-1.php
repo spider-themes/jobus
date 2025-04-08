@@ -21,7 +21,7 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
 <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
-            <?php jobus_get_template_part( 'contents-company/sidebar-search-filter' ); ?>
+            <?php jobus_get_template_part( 'contents-company/sidebar-classic-filters' ); ?>
             <div class="col-xl-9 col-lg-8">
                 <div class="ms-xxl-5 ms-xl-3">
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
