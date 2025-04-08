@@ -77,12 +77,12 @@ if ( $job_tags ) {
 $filter_widgets = jobus_opt('job_sidebar_widgets');
 $search_widgets = [];
 
-if (isset($filter_widgets) && is_array($filter_widgets)) {
-    foreach ( $filter_widgets as $widget ) {
-        if ($widget[ 'widget_layout' ] == 'range') {
-            $search_widgets[] = $widget[ 'widget_name' ];
-        }
-    }
+if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+	foreach ( $filter_widgets as $widget ) {
+		if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
+			$search_widgets[] = $widget['widget_name'];
+		}
+	}
 }
 
 $min_price = [];

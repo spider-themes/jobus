@@ -481,11 +481,14 @@ function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_w
 	$sidebar_widgets = jobus_opt( $sidebar_widget_id );
 	if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
 		foreach ( $sidebar_widgets as $widget ) {
-			$widgets[] = $widget['widget_name'];
+			if ( isset( $widget['widget_name'] ) ) {
+				$widgets[] = $widget['widget_name'];
+			}
 		}
 	}
 
-	$job_meta_query = [];
+	$job_meta_query = array();
+
 	if ( is_array( $widgets ) ) {
 
 		$filter_widgets = jobus_opt( $sidebar_widget_id );
@@ -493,7 +496,7 @@ function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_w
 
 		if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
 			foreach ( $filter_widgets as $widget ) {
-				if ( $widget['widget_layout'] == 'range' ) {
+				if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
 					$search_widgets[] = $widget['widget_name'];
 				}
 			}
