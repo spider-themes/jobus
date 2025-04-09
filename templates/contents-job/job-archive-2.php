@@ -24,7 +24,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
     <div class="container">
         <div class="row">
 
-            <?php jobus_get_template_part('contents-job/sidebar-search-filter-2'); ?>
+            <?php jobus_get_template_part('contents-job/sidebar-topbar-filters'); ?>
 
             <div class="col-12">
                 <div class="job-post-item-wrapper">

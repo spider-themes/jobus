@@ -241,10 +241,10 @@ if ( class_exists( 'CSF' ) ) {
 			array(
 				'id'           => 'job_sidebar_widgets',
 				'type'         => 'repeater',
-				'title'        => esc_html__( 'Widgets', 'jobus' ),
+				'title'        => esc_html__( 'Meta Widgets', 'jobus' ),
+				'subtitle'     => esc_html__( 'Widgets based on the Job meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 				'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 				'fields'       => array(
-
 					array(
 						'id'      => 'widget_name',
 						'type'    => 'select',
@@ -273,15 +273,14 @@ if ( class_exists( 'CSF' ) ) {
 						'default'    => esc_html__( 'USD', 'jobus' ),
 						'dependency' => array( 'widget_layout', '==', 'range' ),
 					),
-
 				)
 			),
 
 			array(
-				'id'       => 'is_sortable_job_sidebar',
+				'id'       => 'job_taxonomy_widgets',
 				'type'     => 'sortable',
-				'title'    => esc_html__( 'Sortable', 'jobus' ),
-				'subtitle' => esc_html__( 'Display options in sorting order.', 'jobus' ),
+				'title'    => esc_html__( 'Taxonomy Widgets', 'jobus' ),
+				'subtitle' => esc_html__( 'Drag and drop to sort the order of the widgets.', 'jobus' ),
 				'fields'   => array(
 
 					array(

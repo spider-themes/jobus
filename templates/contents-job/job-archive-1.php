@@ -24,7 +24,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
     <div class="container">
         <div class="row">
 
-            <?php jobus_get_template_part('contents-job/sidebar-search-filter'); ?>
+            <?php jobus_get_template_part('contents-job/sidebar-classic-filters'); ?>
 
             <div class="col-xl-9 col-lg-8">
                 <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">
@@ -32,7 +32,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
                         <div class="total-job-found">
                             <?php esc_html_e('All', 'jobus'); ?>
-                            <span class="fw-500"><?php echo esc_html( $job_post->found_posts ); ?></span>
+                            <span class="fw-500"> <?php echo esc_html( $job_post->found_posts ); ?> </span>
                             <?php
                             /* translators: 1: job found, 2: jobs found */
                             echo esc_html(sprintf(_n('job found', 'jobs found', $job_post->found_posts, 'jobus'), $job_post->found_posts ));
@@ -40,7 +40,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                         </div>
                         <div class="d-flex align-items-center">
                             <div class="short-filter d-flex align-items-center">
-                                <div class="text-dark fw-500 me-2"><?php esc_html_e('Sort By:', 'jobus'); ?></div>
+                                <div class="text-dark fw-500 me-2"> <?php esc_html_e('Sort By:', 'jobus'); ?> </div>
                                 <?php
                                 $order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : '';
                                 $order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : '';
