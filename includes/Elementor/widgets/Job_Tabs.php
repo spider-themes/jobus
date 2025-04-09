@@ -252,19 +252,17 @@ class Job_Tabs extends Widget_Base {
 			$args['tax_query'] = [
 				[
 					'taxonomy' => 'jobus_job_cat',
-					'field'    => 'id',
+					'field'    => 'slug',
 					'terms'    => $cats
-
 				]
 			];
 		}
 
-		$posts = new WP_Query( $args );
+		$job_posts = new WP_Query( $args );
 
 		//================= Template Parts =================//
 		include "templates/job-tabs/job-tab-1.php";
 
 	}
-
 
 }

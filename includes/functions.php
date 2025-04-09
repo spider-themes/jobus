@@ -138,9 +138,8 @@ if ( ! function_exists( 'jobus_get_categories' ) ) {
 
 		$cat_array = [];
 		foreach ( $cats as $cat ) {
-			$cat_array[ $cat->term_id ] = $cat->name;
+			$cat_array[ $cat->slug ] = $cat->name; // Use slug as the key
 		}
-
 		return $cat_array;
 	}
 }

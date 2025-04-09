@@ -1,5 +1,4 @@
-
-.0<?php
+<?php
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
@@ -232,11 +231,8 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                         <?php jobus_pagination($company_query); ?>
 
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>

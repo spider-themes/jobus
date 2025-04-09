@@ -12,8 +12,8 @@ if (!defined('ABSPATH')) {
                 $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
                 ?>
 
-                <div class="card-style-seven bg-color text-center wow fadeInUp category-<?php echo esc_attr($category->term_id); ?>"">
-                    <a href="<?php echo esc_url(get_category_link($category->term_id)) ?>" class="wrapper d-flex align-items-center">
+                <div class="card-style-seven bg-color text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="wrapper d-flex align-items-center">
                         <?php
                         if ( !empty($meta['cat_img']['id']) ) { ?>
                             <div class="icon d-flex align-items-center justify-content-center">

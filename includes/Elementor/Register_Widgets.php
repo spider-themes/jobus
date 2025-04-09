@@ -85,21 +85,21 @@ class Register_Widgets {
 				// Generate dynamic CSS for text color, background color, and hover effects
 				if ( $text_color ) {
 					$dynamic_css .= "
-                    .card-style-seven.category-{$cat->term_id} a .title { 
+                    .card-style-seven.category-{$cat->slug} a .title { 
                         color: " . esc_attr( $text_color ) . " !important; 
                     }";
 				}
 
 				if ( $bg_color ) {
 					$dynamic_css .= "
-                    .card-style-seven.category-{$cat->term_id} a { 
+                    .card-style-seven.category-{$cat->slug} a { 
                         background-color: " . esc_attr( $bg_color ) . " !important; 
                     }";
 				}
 
 				if ( $hover_bg_color || $hover_border_color ) {
 					$dynamic_css .= "
-                    .card-style-seven.category-{$cat->term_id} a:hover { 
+                    .card-style-seven.category-{$cat->slug} a:hover { 
                         background-color: " . esc_attr( $hover_bg_color ) . " !important; 
                         border-color: " . esc_attr( $hover_border_color ) . " !important; 
                     }";

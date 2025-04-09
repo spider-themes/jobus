@@ -2,11 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-global $posts;
-
 ?>
-
 <section class="job-listing-two">
     <ul class="style-none d-flex justify-content-center justify-content-lg-end flex-wrap isotop-menu-wrapper g-control-nav">
 		<?php
@@ -18,10 +14,10 @@ global $posts;
 		}
 		if ( is_array( $settings['cats'] ) ) {
 			foreach ( $settings['cats'] as $cat ) {
-				$cat = get_term( $cat, 'jobus_job_cat' );
+				$cat_slug = get_term_by( 'slug', $cat, 'jobus_job_cat' );
 				?>
-                <li data-filter=".<?php echo esc_attr( $cat->slug ); ?>">
-					<?php echo esc_html( $cat->name ); ?>
+                <li data-filter=".<?php echo esc_attr( $cat_slug->slug ); ?>">
+					<?php echo esc_html( $cat_slug->name ); ?>
                 </li>
 				<?php
 			}
@@ -33,7 +29,7 @@ global $posts;
         <div class="grid-sizer"></div>
 
 		<?php
-		while ( $posts->have_posts() ) : $posts->the_post();
+		while ( $job_posts->have_posts() ) : $job_posts->the_post();
 
 			$cats     = get_the_terms( get_the_ID(), 'jobus_job_cat' );
 			$cat_slug = '';

@@ -2,6 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;
@@ -418,13 +419,13 @@ class Categories extends Widget_Base {
 		} else {
 			$formatted_count = floor( $total_count / 1000 ) . 'K+';
 		}
-		$cat_ids = $settings['cat'] ?? array();
 
-		$categories = get_terms( array(
+		$cat_slugs = $settings['cat'] ?? [];
+		$categories = get_terms(array(
 			'taxonomy'   => 'jobus_job_cat',
 			'hide_empty' => true,
-			'include'    => $cat_ids,
-		) );
+			'slug'       => $cat_slugs,
+		));
 
 		//================= Template Parts =================//
 		include "templates/categories/category-{$settings['layout']}.php";
