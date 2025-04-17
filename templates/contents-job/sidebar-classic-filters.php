@@ -28,8 +28,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
                     <?php
                     $filter_widgets = jobus_opt('job_sidebar_widgets');
-
-                    if (isset($filter_widgets) && is_array($filter_widgets)) {
+                    if ( isset($filter_widgets) && is_array($filter_widgets) ) {
                         foreach ($filter_widgets as $index => $widget) {
 
                             $tab_count = $index + 1;
@@ -86,6 +85,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
                             // Widget Categories
 		                    if ( $key === 'is_job_widget_cat' && $value ) {
+                                $taxonomy = 'jobus_job_cat';
 			                    include ('loop/classic-tax-wrapper-start.php');
 			                    include("filter-widgets/categories.php");
                                 include ('loop/classic-tax-wrapper-end.php');
@@ -93,6 +93,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
 		                    // Widget Locations
 		                    if ( $key === 'is_job_widget_location' && $value ) {
+                                $taxonomy = 'jobus_job_location';
 			                    include ('loop/classic-tax-wrapper-start.php');
 			                    include("filter-widgets/locations.php");
 			                    include ('loop/classic-tax-wrapper-end.php');
@@ -100,6 +101,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 
 		                    // Widget Tag
 		                    if ( $key === 'is_job_widget_tag' && $value ) {
+                                $taxonomy = 'jobus_job_tag';
 			                    include ('loop/classic-tax-wrapper-start.php');
 			                    include("filter-widgets/tags.php");
 			                    include ('loop/classic-tax-wrapper-end.php');

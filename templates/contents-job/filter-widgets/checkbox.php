@@ -1,4 +1,14 @@
 <?php
+/*
+ * Checkbox filter widget for job specifications.
+ *
+ * @package Jobus
+ */
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
 $widget_name        = $widget['widget_name'] ?? '';
 $job_specifications = jobus_get_specs_options();
 $job_specifications = $job_specifications[$widget_name] ?? '';
@@ -19,7 +29,7 @@ $job_specifications = $job_specifications[$widget_name] ?? '';
 			$meta_value_count = jobus_count_meta_key_usage( 'jobus_job', 'jobus_meta_options', $opt_val );
 			if ( $meta_value_count > 0) {
 				$searched_opt = jobus_search_terms( $widget_name );
-				$check_status = array_search( $opt_val, $searched_opt );
+				$check_status = in_array($opt_val, $searched_opt);
 				?>
 				<li>
 					<input type="checkbox" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>

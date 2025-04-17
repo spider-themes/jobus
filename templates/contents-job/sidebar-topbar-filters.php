@@ -61,17 +61,26 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
 	                            foreach ( $taxonomy_widgets as $key => $value ) {
 
 		                            if ( $key === 'is_job_widget_cat' && $value ) {
-			                            include("filter-widgets/categories.php");
+                                        $taxonomy = 'jobus_job_cat';
+                                        include ('loop/topbar-tax-wrapper-start.php');
+                                        include("filter-widgets/categories.php");
+                                        include ('loop/topbar-tax-wrapper-end.php');
 		                            }
 
 		                            // Widget Locations
 		                            if ( $key === 'is_job_widget_location' && $value ) {
-			                            include("filter-widgets/locations.php");
+                                        $taxonomy = 'jobus_job_location';
+                                        include ('loop/topbar-tax-wrapper-start.php');
+                                        include("filter-widgets/locations.php");
+                                        include ('loop/topbar-tax-wrapper-end.php');
 		                            }
 
 		                            // Widget Tag
 		                            if ( $key === 'is_job_widget_tag' && $value ) {
-			                            include("filter-widgets/tags.php");
+                                        $taxonomy = 'jobus_job_tag';
+                                        include ('loop/topbar-tax-wrapper-start.php');
+                                        include("filter-widgets/tags.php");
+                                        include ('loop/topbar-tax-wrapper-end.php');
 		                            }
 	                            }
                             }
@@ -85,6 +94,7 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

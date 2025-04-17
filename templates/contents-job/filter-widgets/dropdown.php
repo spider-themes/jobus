@@ -1,4 +1,14 @@
 <?php
+/*
+ * Dropdown filter widget for job specifications.
+ *
+ * @package Jobus
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
 $widget_name        = $widget['widget_name'] ?? '';
 $job_specifications = jobus_get_specs_options();
 $job_specifications = $job_specifications[$widget_name] ?? '';

@@ -1,22 +1,25 @@
 <?php
-$post_type = ! empty( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
-$job_tags = ! empty( $_GET['job_tags'] ) ? array_map( 'sanitize_text_field', $_GET['job_tags'] ) : [];
-if ( $post_type == 'jobus_job' && $job_tags ) {
-	$is_collapsed_show = 'collapse show';
-	$area_expanded = 'true';
-	$is_collapsed = '';
+/*
+ * Tags filter widget for the job listing
+ *
+ * @package Jobus
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
-?>
 
-<ul class="style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
-    <?php
-    $term_tags = get_terms( array(
-        'taxonomy' => 'jobus_job_tag',
-    ) );
-    if ( ! empty( $term_tags ) ) {
+$term_tags = get_terms( array(
+    'taxonomy' => 'jobus_job_tag',
+) );
+
+
+if ( ! empty( $term_tags ) ) {
+    ?>
+    <ul class="style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
+        <?php
         $searched_opt = jobus_search_terms( 'job_tags' );
         foreach ( $term_tags as $term ) {
-            $check_status = array_search( $term->slug, $searched_opt );
+            $check_status = in_array($term->slug, $searched_opt);
             ?>
             <li>
                 <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr( $term->slug ); ?>" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>>
@@ -24,6 +27,7 @@ if ( $post_type == 'jobus_job' && $job_tags ) {
             </li>
             <?php
         }
-    }
-    ?>
-</ul>
+        ?>
+    </ul>
+    <?php
+}

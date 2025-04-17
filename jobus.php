@@ -3,7 +3,7 @@
  * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
- * Version: 0.0.7
+ * Version: 0.0.8
  * Requires at least: 6.0
  * Tested up to: 6.7
  * Requires PHP: 8.0

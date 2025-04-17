@@ -1,4 +1,13 @@
 <?php
+/*
+ * Category filter widget for the job listing
+ *
+ * @package Jobus
+ */
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 $term_cats = get_terms( array(
 	'taxonomy' => 'jobus_job_cat',
@@ -7,6 +16,7 @@ $term_cats = get_terms( array(
 if ( ! empty( $term_cats ) ) {
 	?>
     <select class="nice-select" name="job_cats[]">
+        <option value="" disabled selected><?php esc_html_e( 'Select Category', 'jobus' ); ?></option>
         <?php
         $searched_opt = jobus_search_terms( 'job_cats' );
         foreach ( $term_cats as $term ) {
