@@ -27,7 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <div id="isotop-gallery-wrapper" class="grid-3column pt-55 lg-pt-20">
         <div class="grid-sizer"></div>
-
 		<?php
 		while ( $job_posts->have_posts() ) : $job_posts->the_post();
 

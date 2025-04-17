@@ -1,18 +1,26 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\Gutenberg;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Class Blocks
+ */
 class Blocks {
 
+	/**
+	 * Constructor
+	 */
 	public function __construct() {
 
 		add_action( 'init', [ $this, 'blocks_init' ] );
 
-		// Register Categories
+		// Register block categories based on WordPress version
 		if ( version_compare( $GLOBALS['wp_version'], '5.7', '<' ) ) {
 			add_filter( 'block_categories', [ $this, 'register_block_category' ], 10, 2 );
 		} else {
@@ -26,6 +34,9 @@ class Blocks {
 
 	/**
 	 * Initialize the plugin
+	 * Ensures a single instance of the Blocks class is created.
+	 *
+	 * @return bool|Blocks Instance of the Blocks class.
 	 */
 	public static function init(): bool|Blocks {
 		static $instance = false;
@@ -37,16 +48,21 @@ class Blocks {
 	}
 
 	/**
-	 * Blocks Registration
+	 * Register a Gutenberg block
+	 *
+	 * @param string $name    Block name (directory name in the 'build' folder).
+	 * @param array  $options Optional block registration options.
 	 */
-	public function register_block( $name, $options = array() ): void {
+	public function register_block( string $name, array $options = array() ): void {
 		register_block_type( plugin_dir_path( __FILE__ ) . 'build/' . $name, $options );
 	}
 
 	/**
-	 * Blocks Initialization
+	 * Initialize and register all Gutenberg blocks
 	 */
 	public function blocks_init(): void {
+
+		// Register individual blocks
 		$this->register_block( 'video-popup' );
 		$this->register_block( 'group-testimonials' );
 		$this->register_block( 'testimonials-item' );
@@ -54,13 +70,21 @@ class Blocks {
 		$this->register_block( 'shortcode-company-archive' );
 		$this->register_block( 'shortcode-candidate-archive' );
 
+		// Register block with a render callback
 		$this->register_block( 'register-form', array(
 			'render_callback' => [ $this, 'register_form_block_render' ],
 		) );
 	}
 
-
-	public function register_form_block_render( $attributes, $content ): bool|string {
+	/**
+	 * Render callback for the 'register-form' block
+	 *
+	 * @param array  $attributes Block attributes.
+	 * @param string $content    Block content.
+	 *
+	 * @return bool|string Rendered block content.
+	 */
+	public function register_form_block_render( array $attributes, string $content ): bool|string {
 		ob_start();
 		$nonce = wp_create_nonce( 'jobus_register_form_nonce' );
 
@@ -73,7 +97,6 @@ class Blocks {
 
 		return ob_get_clean();
 	}
-
 
 	/**
 	 * Register Block Category
@@ -90,7 +113,9 @@ class Blocks {
 		);
 	}
 
-
+	/**
+	 * Enqueue block editor assets
+	 */
 	public function register_block_editor_assets(): void {
 		// Style's
 		wp_enqueue_style( 'jobus-block-editor', esc_url( JOBUS_CSS . '/block-editor.css' ), [], JOBUS_VERSION );
@@ -99,7 +124,9 @@ class Blocks {
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
 	}
 
-
+	/**
+	 * Enqueue block frontend assets
+	 */
 	public function register_block_assets(): void {
 
 		// Style's
