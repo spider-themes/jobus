@@ -38,9 +38,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</a>
 					<?php if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2') ) : ?>
 						<div class="job-salary">
-                                                    <span class="fw-500 text-dark">
-                                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) ?>
-                                                    </span>
+                            <span class="fw-500 text-dark">
+                                <?php echo esc_html(jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_2')) ?>
+                            </span>
 						</div>
 					<?php endif; ?>
 					<div class="d-flex align-items-center justify-content-between mt-auto">

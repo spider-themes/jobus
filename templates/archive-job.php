@@ -175,9 +175,10 @@ $job_post = new \WP_Query( $args );
 
 $job_archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
 
-//========================= Select Layout ========================//
-//include 'contents-job/job-archive-' . $job_archive_layout . '.php';
+// Check if the view parameter is set in the URL
+$current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
 
+//========================= Select Layout ========================//
 if ( $job_archive_layout == '1' ) {
 	include ('contents-job/job-archive-classic.php');
 } elseif ( $job_archive_layout == '2' ) {

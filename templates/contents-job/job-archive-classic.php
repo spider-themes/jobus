@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-// Check if the view parameter is set in the URL
-$current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
+
+
 ?>
 <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
