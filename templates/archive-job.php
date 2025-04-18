@@ -176,10 +176,18 @@ $job_post = new \WP_Query( $args );
 $job_archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
 
 //========================= Select Layout ========================//
-include 'contents-job/job-archive-' . $job_archive_layout . '.php';
+//include 'contents-job/job-archive-' . $job_archive_layout . '.php';
+
+if ( $job_archive_layout == '1' ) {
+	include ('contents-job/job-archive-classic.php');
+} elseif ( $job_archive_layout == '2' ) {
+	include ('contents-job/job-archive-topbar.php');
+} elseif ( $job_archive_layout == '3' ) {
+	include ('contents-job/job-archive-popup.php');
+}
 
 get_footer();
 
 if ( $job_archive_layout == '3' ) {
-	jobus_get_template_part( 'contents-job/sidebar-popup-filter' );
+	jobus_get_template_part( 'contents-job/sidebar-popup-filters' );
 }

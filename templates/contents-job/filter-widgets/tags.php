@@ -14,7 +14,7 @@ $term_tags = get_terms( array(
 
 if ( ! empty( $term_tags ) ) {
 	?>
-    <ul class="style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
+    <ul class="tags style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
 		<?php
 		$searched_opt = jobus_search_terms( 'job_tags' );
 		foreach ( $term_tags as $term ) {

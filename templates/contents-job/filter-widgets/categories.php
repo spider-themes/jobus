@@ -1,8 +1,14 @@
 <?php
-/*
- * Category filter widget for the job listing
+/**
+ * Category - This template is used to display a dropdown list of job categories for filtering job listings.
  *
- * @package Jobus
+ * This template can be overridden by copying it to yourtheme/jobus/contents-job/filter-widgets/categories.php.
+ *
+ *  HOWEVER, on occasion Jobus will need to update template files and you
+ *  (the theme developer) will need to copy the new files to your theme to
+ *  maintain compatibility. We try to do this as little as possible, but it does
+ *  happen. When this occurs the version of the template file will be bumped and
+ *  the readme will list any important changes.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

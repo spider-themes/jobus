@@ -1,0 +1,56 @@
+<?php
+/**
+ * Job Archive Template
+ *
+ * This template can be overridden by copying it to yourtheme/jobus/contents-job/job-archive-1.php.
+ *
+ * This template can be used to display job listings in a grid or list format.
+ * It includes a sidebar for filters, sorting options, and pagination.
+ *
+ * @package Jobus/Templates
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+// Check if the view parameter is set in the URL
+$current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
+?>
+<section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+    <div class="container">
+        <div class="row">
+
+            <?php jobus_get_template_part('contents-job/sidebar-classic-filters'); ?>
+
+            <div class="col-xl-9 col-lg-8">
+                <div class="job-post-item-wrapper ms-xxl-5 ms-xl-3">
+
+                    <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+
+                        <?php include ('loop/result-count.php'); ?>
+
+	                    <?php include ('loop/sortby.php'); ?>
+
+                    </div>
+
+                    <?php
+                    // Check if the current view is set to 'list' or 'grid' contents
+                    if ( $current_view == 'list' ) {
+                        include ( 'contents/content-list-4-col.php' );
+                    }
+                    elseif ( $current_view == 'grid' ) {
+	                    include ( 'contents/content-grid.php' );
+                    }
+
+                    // Pagination
+                    include ( 'loop/pagination.php' );
+                    ?>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
