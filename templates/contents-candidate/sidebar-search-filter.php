@@ -40,6 +40,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                             $is_collapsed = $tab_count == 1 ? '' : ' collapsed';
                             $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
                             $area_expanded = $index == 1 ? 'true' : 'false';
+
                             $widget_name = $widget[ 'widget_name' ] ?? '';
                             $widget_layout = $widget[ 'widget_layout' ] ?? '';
                             $range_suffix = $widget[ 'range_suffix' ] ?? '';
@@ -47,8 +48,8 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                             $specifications = jobus_get_specs('candidate_specifications');
                             $widget_title = $specifications[ $widget_name ] ?? '';
 
-                            $candidate_specifications = jobus_get_specs_options('candidate_specifications');
-                            $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
+	                        $candidate_specifications = jobus_get_specs_options('candidate_specifications');
+	                        $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
 
                             if ( $post_type == 'jobus_candidate' ) {
                                 if ( !empty ($_GET[ $widget_name ]) ) {
@@ -72,137 +73,44 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                 </a>
                                 <div class="<?php echo esc_attr($is_collapsed_show) ?>" id="collapse-<?php echo esc_attr($widget_name) ?>">
                                     <div class="main-body">
-                                        <?php
-                                        if ($widget_layout == 'checkbox') {
-                                            ?>
-                                            <ul class="style-none filter-input">
-                                                <?php
-                                                if ( !empty($candidate_specifications) ) {
-                                                    foreach ( $candidate_specifications as $key => $value ) {
 
-                                                        $meta_value = $value[ 'meta_values' ] ?? '';
-                                                        $modifiedValues = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                        $opt_val = strtolower($modifiedValues);
+	                                    <?php
+	                                    // Include the appropriate widget layout file based on the widget type
+	                                    include("filter-widgets/$widget_layout.php");
+	                                    ?>
 
-                                                        // Get the count for the current meta-value
-                                                        $meta_value_count   = jobus_count_meta_key_usage('jobus_candidate', 'jobus_meta_candidate_options', $opt_val );
-
-                                                        if ( $meta_value_count > 0 ) {
-                                                            $searched_opt   = jobus_search_terms($widget_name);
-                                                            $check_status   = array_search($opt_val, $searched_opt);
-                                                            $check_status   = $check_status !== false ? ' checked' : '';
-                                                            ?>
-                                                            <li>
-                                                                <input type="checkbox" name="<?php echo esc_attr($widget_name) ?>[]" value="<?php echo esc_attr($opt_val) ?>" <?php echo esc_attr($check_status) ?>>
-                                                                <label>
-                                                                    <?php echo esc_html($meta_value); ?>
-                                                                </label>
-                                                            </li>
-                                                            <?php
-                                                        }
-                                                    }
-                                                }
-                                                ?>
-                                            </ul>
-                                            <?php
-                                        } elseif ( $widget_layout == 'dropdown' ) {
-                                            ?>
-                                            <select class="nice-select" name="<?php echo esc_attr($widget_name) ?>[]">
-                                                <?php
-                                                if ( is_array($candidate_specifications) ) {
-                                                    foreach ( $candidate_specifications as $key => $value ) {
-
-                                                        $meta_value = $value[ 'meta_values' ] ?? '';
-
-                                                        $modifiedSelect = preg_replace('/[,\s]+/', '@space@', $meta_value);
-                                                        $modifiedVal = strtolower($modifiedSelect);
-
-                                                        $meta_value_count   = jobus_count_meta_key_usage('jobus_candidate','jobus_meta_candidate_options', $modifiedVal);
-
-                                                        if ( $meta_value_count > 0 ) {
-                                                            $searched_val = jobus_search_terms($widget_name);
-                                                            $selected_val = $searched_val[ 0 ] ?? $modifiedVal;
-                                                            $selected_val = $modifiedVal == $selected_val ? ' selected' : '';
-                                                            ?>
-                                                            <option value="<?php echo esc_attr($modifiedVal) ?>" <?php echo esc_attr($selected_val) ?>>
-                                                                <?php echo esc_html($meta_value) ?>
-                                                            </option>
-                                                            <?php
-                                                        }
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                            <?php
-                                        }
-                                        elseif ($widget_layout == 'text') {
-                                            ?>
-                                            <div class="input-box position-relative">
-                                                <input type="text" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_html_e('Name or keyword', 'jobus') ?>">
-                                                <button><i class="bi bi-search"></i></button>
-                                            </div>
-                                            <?php
-                                        }
-                                        elseif ( $widget_layout == 'range' ) {
-
-                                            $salary_value_list = $candidate_specifications;
-
-                                            // Initialize an array to store all numeric values
-                                            $all_values = [];
-
-                                            // Extract numeric values from meta_values
-                                            if ( !empty($salary_value_list) ) {
-                                                foreach ($salary_value_list as $item) {
-
-                                                    // Extract numbers and check for 'k'
-                                                    preg_match_all('/(\d+)(k)?/i', $item['meta_values'], $matches);
-                                                    foreach ($matches[1] as $key => $value) {
-                                                        // If 'k' is present, multiply the number by 1000
-                                                        $value = isset($matches[2][$key]) && strtolower($matches[2][$key]) == 'k' ? $value * 1000 : $value;
-
-                                                        $all_values[] = $value;
-                                                    }
-                                                }
-                                            }
-
-                                            // Get the minimum and maximum values
-                                            if ( !empty ($all_values) ) {
-                                                $min_values = min($all_values);
-                                                $max_values = max($all_values);
-
-                                                $min_salary = jobus_search_terms($widget_name)[ 0 ] ?? $min_values;
-                                                $max_salary = jobus_search_terms($widget_name)[ 1 ] ?? $max_values;
-                                                ?>
-                                                <div class="salary-slider" data_widget="<?php echo esc_attr($widget_name) ?>[]">
-                                                    <div class="price-input d-flex align-items-center pt-5">
-                                                        <div class="field d-flex align-items-center">
-                                                            <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-min" value="<?php echo esc_attr($min_salary); ?>" readonly>
-                                                        </div>
-                                                        <div class="pe-1 ps-1">-</div>
-                                                        <div class="field d-flex align-items-center">
-                                                            <input type="number" name="<?php echo esc_attr($widget_name) ?>[]" class="input-max" value="<?php echo esc_attr($max_salary); ?>" readonly>
-                                                        </div>
-                                                        <?php if (!empty($range_suffix)) : ?>
-                                                            <div class="currency ps-1"><?php echo esc_html($range_suffix) ?></div>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                    <div class="slider">
-                                                        <div class="progress"></div>
-                                                    </div>
-                                                    <div class="range-input mb-10">
-                                                        <input type="range" class="range-min" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>" value="<?php echo esc_attr($min_salary); ?>" step="1">
-                                                        <input type="range" class="range-max" min="<?php echo esc_attr($min_values); ?>" max="<?php echo esc_attr($max_values); ?>" value="<?php echo esc_attr($max_salary); ?>" step="1">
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
                                     </div>
                                 </div>
                             </div>
                             <?php
                         }
+                    }
+
+
+                    /**
+                     * Taxonomy Filter Widgets
+                     */
+                    $taxonomy_widgets = jobus_opt( 'candidate_taxonomy_widgets' );
+                    // Check if the sortable field value is not empty
+                    if ( ! empty( $taxonomy_widgets ) ) {
+	                    foreach ( $taxonomy_widgets as $key => $value ) {
+
+		                    // Widget Categories
+		                    if ( $key === 'is_candidate_widget_cat' && $value ) {
+			                    $taxonomy = 'jobus_job_cat';
+			                    include ('loop/classic-tax-wrapper-start.php');
+			                    include("filter-widgets/categories.php");
+			                    include ('loop/classic-tax-wrapper-end.php');
+		                    }
+
+		                    // Widget Locations
+		                    if ( $key === 'is_candidate_widget_location' && $value ) {
+			                    $taxonomy = 'jobus_job_location';
+			                    include ('loop/classic-tax-wrapper-start.php');
+			                    include("filter-widgets/locations.php");
+			                    include ('loop/classic-tax-wrapper-end.php');
+		                    }
+	                    }
                     }
 
                     // candidate location sidebar
