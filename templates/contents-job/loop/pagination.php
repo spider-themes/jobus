@@ -2,7 +2,7 @@
 /**
  * Pagination - Show numbered pagination for job listings
  *
- * This template can be overridden by copying it to yourtheme/jobus/loop/pagination.php.
+ * This template can be overridden by copying it to yourtheme/jobus/contents-job/loop/pagination.
  *
  * HOWEVER, on occasion Jobus will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to

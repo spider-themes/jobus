@@ -18,7 +18,6 @@ if ($candidate_archive_layout) {
 // Build the URL for list and grid views
 $list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
 $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
-
 ?>
 <section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
@@ -201,7 +200,6 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                     </a>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                     </div>

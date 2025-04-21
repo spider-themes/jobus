@@ -2,7 +2,7 @@
 /**
  * Job Archive Template
  *
- * This template can be overridden by copying it to yourtheme/jobus/contents-job/job-archive-1.php.
+ * This template can be overridden by copying it to yourtheme/jobus/contents-job/job-archive-classic.php.
  *
  * This template can be used to display job listings in a grid or list format.
  * It includes a sidebar for filters, sorting options, and pagination.

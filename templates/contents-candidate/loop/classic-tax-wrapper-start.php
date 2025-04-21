@@ -20,7 +20,7 @@ if ( isset( $taxonomy ) && ! empty( $taxonomy ) ) {
 	$candidate_taxonomy = ! empty( $_GET[ $taxonomy ] ) ? array_map( 'sanitize_text_field', wp_unslash( $_GET[ $taxonomy ] ) ) : [];
 }
 
-if ( ! empty( $job_taxonomy ) ) {
+if ( ! empty( $candidate_taxonomy ) ) {
 	$is_collapsed_show = 'collapse show';
 	$area_expanded     = 'true';
 	$is_collapsed      = '';
