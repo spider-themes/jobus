@@ -27,6 +27,7 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                     <input type="hidden" name="post_type" value="jobus_job"/>
 
                     <?php
+                    // Widget for candidate meta data list
                     $filter_widgets = jobus_opt('job_sidebar_widgets');
                     if ( isset($filter_widgets) && is_array($filter_widgets) ) {
                         foreach ($filter_widgets as $index => $widget) {

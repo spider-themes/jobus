@@ -270,11 +270,13 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
                                                             echo '</ul>';
                                                         } else {
                                                             // Display all skills
-                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
-                                                            foreach ($skills as $skill) {
-                                                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+                                                            if ( !empty($skills) ) {
+	                                                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+	                                                            foreach ($skills as $skill) {
+		                                                            echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+	                                                            }
+	                                                            echo '</ul>';
                                                             }
-                                                            echo '</ul>';
                                                         }
                                                         ?>
                                                     </div>
