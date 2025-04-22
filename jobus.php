@@ -74,6 +74,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			// Register the candidate menu for administrators only
 			add_action( 'init', [ $this, 'register_menu' ] );
+			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		}
 
 		/**
@@ -113,15 +114,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/includes/functions.php';
 			require_once __DIR__ . '/includes/filters.php';
 
-			//Options
-			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-			require_once __DIR__ . '/includes/Admin/options/settings-options.php';
-			require_once __DIR__ . '/includes/Admin/options/meta-options-job.php';
-			require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
-			require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
-			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
-			require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
-
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 			require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
@@ -145,6 +137,19 @@ if ( ! class_exists( 'Jobus' ) ) {
 			//Elementor & Blocks
 			require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
 			require_once __DIR__ . '/Blocks.php';
+		}
+
+		/**
+		 * Include CSF files include
+		 */
+		public function load_csf_files(){
+			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+			require_once __DIR__ . '/includes/Admin/options/settings-options.php';
+			require_once __DIR__ . '/includes/Admin/options/meta-options-job.php';
+			require_once __DIR__ . '/includes/Admin/options/meta-options-company.php';
+			require_once __DIR__ . '/includes/Admin/options/meta-options-candidate.php';
+			require_once __DIR__ . '/includes/Admin/options/taxonomy.php';
+			require_once __DIR__ . '/includes/Admin/options/nav-menu-options.php';
 		}
 
 		/**
