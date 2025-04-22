@@ -172,7 +172,11 @@ $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt( 'candidate_a
 $current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
 
 //============= Select Layout ==================//
-include 'contents-candidate/candidate-archive-' . $candidate_archive_layout . '.php';
+if ( $candidate_archive_layout == '1' ) {
+	include 'contents-candidate/candidate-archive-classic.php';
+} elseif ( $candidate_archive_layout == '2' ) {
+	include 'contents-candidate/candidate-archive-popup.php';
+}
 
 get_footer();
 

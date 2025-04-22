@@ -1,0 +1,51 @@
+<?php
+/**
+ * Candidate Archive - Template for displaying candidate archive
+ *
+ * This template can be overridden by copying it to yourtheme/jobus/contents-candidate/candidate-archive-1.php.
+ *
+ * HOWEVER, on occasion Jobus will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @package Jobus\Templates
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+?>
+<section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+    <div class="container">
+        <div class="row">
+
+            <?php jobus_get_template_part('contents-candidate/sidebar-classic-filters'); ?>
+
+            <div class="col-xl-9 col-lg-8">
+                <div class="ms-xxl-5 ms-xl-3">
+
+                    <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+
+                        <?php include ( 'loop/result-count.php' ); ?>
+
+                        <?php include ( 'loop/sortby.php' ); ?>
+
+                    </div>
+
+                    <?php
+                    if ( $current_view == 'grid' ) {
+                        include ( 'contents/content-grid.php' );
+                    } elseif ( $current_view == 'list' ) {
+                        include ( 'contents/content-list-5-col.php' );
+                    }
+
+                    // Pagination
+                    include ( 'loop/pagination.php' );
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
