@@ -1,9 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
+	exit; // Exit if accessed directly.
 }
 ?>
-
 <section class="job-listing-three bg-color pt-90 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
@@ -15,33 +14,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                             <button type="button" class="filter-btn fw-500 tran3s me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
-                                <?php esc_html_e('Filter', 'jobus'); ?>
+								<?php esc_html_e( 'Filter', 'jobus' ); ?>
                             </button>
 
-	                        <?php include ('loop/result-count.php') ?>
+							<?php include( 'loop/result-count.php' ) ?>
 
                         </div>
 
-	                    <?php include ('loop/sortby.php'); ?>
+						<?php include( 'loop/sortby.php' ); ?>
 
                     </div>
 
-                    <?php
-                    // Check if the current view is set to 'list' or 'grid' contents
-                    if ( $current_view == 'list' ) {
-                        include ( 'contents/content-grid-details.php' );
-                    } elseif ( $current_view == 'grid' ) {
-                        include ( 'contents/content-grid.php' );
-                    }
+					<?php
+					// Check if the current view is set to 'list' or 'grid' contents
+					if ( $current_view == 'list' ) {
+						include( 'contents/content-grid-details.php' );
+					} elseif ( $current_view == 'grid' ) {
+						include( 'contents/content-grid.php' );
+					}
 
-                    // Pagination
-                    include ( 'loop/pagination.php' );
+					// Pagination
+					include( 'loop/pagination.php' );
 
-                    ?>
+					?>
                 </div>
-                <!-- /.job-post-item-wrapper -->
             </div>
-            <!-- /.col- -->
         </div>
     </div>
 </section>

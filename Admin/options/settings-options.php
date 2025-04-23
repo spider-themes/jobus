@@ -538,10 +538,12 @@ if ( class_exists( 'CSF' ) ) {
 				'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
 			),
 
+			// Meta Widgets
 			array(
 				'id'           => 'company_sidebar_widgets',
 				'type'         => 'repeater',
-				'title'        => esc_html__( 'Widgets', 'jobus' ),
+				'title'        => esc_html__( 'Meta Widgets', 'jobus' ),
+				'subtitle'     => esc_html__( 'Widgets based on the Job meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 				'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 				'fields'       => array(
 
@@ -568,18 +570,28 @@ if ( class_exists( 'CSF' ) ) {
 				)
 			),
 
+			// Taxonomy Widgets
 			array(
-				'id'      => 'is_company_widget_location',
-				'type'    => 'switcher',
-				'title'   => esc_html__( 'Location', 'jobus' ),
-				'default' => true,
-			),
+				'id'       => 'company_taxonomy_widgets',
+				'type'     => 'sortable',
+				'title'    => esc_html__( 'Taxonomy Widgets', 'jobus' ),
+				'subtitle' => esc_html__( 'Drag and drop to sort the order of the widgets.', 'jobus' ),
+				'fields'   => array(
 
-			array(
-				'id'      => 'is_company_widget_cat',
-				'type'    => 'switcher',
-				'title'   => esc_html__( 'Category', 'jobus' ),
-				'default' => true,
+					array(
+						'id'      => 'is_company_widget_location',
+						'type'    => 'switcher',
+						'title'   => esc_html__( 'Location', 'jobus' ),
+						'default' => true,
+					),
+
+					array(
+						'id'      => 'is_company_widget_cat',
+						'type'    => 'switcher',
+						'title'   => esc_html__( 'Category', 'jobus' ),
+						'default' => true,
+					),
+				),
 			),
 
 		)

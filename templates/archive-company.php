@@ -2,81 +2,81 @@
 /**
  * The template for displaying archive pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package jobus
  */
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
 get_header();
 
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
-$selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
+$paged             = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+$selected_order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
+$selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'desc';
 
-$meta_args = [ 'args' => jobus_meta_taxo_arguments('meta', 'jobus_company', '', jobus_all_search_meta('jobus_meta_company_options', 'company_sidebar_widgets' )) ];
-$taxonomy_args1     = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_company', 'jobus_company_cat', jobus_search_terms('company_cats')) ];
-$taxonomy_args2     = [ 'args' => jobus_meta_taxo_arguments('taxonomy', 'jobus_company', 'jobus_company_location', jobus_search_terms('company_locations')) ];
+$meta_args      = [ 'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_company', '', jobus_all_search_meta( 'jobus_meta_company_options', 'company_sidebar_widgets' ) ) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_cat', jobus_search_terms( 'company_cats' ) ) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_location', jobus_search_terms( 'company_locations' ) ) ];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
-    $result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
+	$result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
 } else {
-    $result_ids = jobus_merge_queries_and_get_ids( $taxonomy_args1,$taxonomy_args2 );
+	$result_ids = jobus_merge_queries_and_get_ids( $taxonomy_args1, $taxonomy_args2 );
 }
 
 $args = [
-    'post_type' => 'jobus_company',
-    'post_status' => 'publish',
-    'posts_per_page' => jobus_opt('company_posts_per_page'),
-    'paged' => $paged,
-    'orderby' => $selected_order_by,
-    'order' => $selected_order,
+	'post_type'      => 'jobus_company',
+	'post_status'    => 'publish',
+	'posts_per_page' => jobus_opt( 'company_posts_per_page' ),
+	'paged'          => $paged,
+	'orderby'        => $selected_order_by,
+	'order'          => $selected_order,
 ];
 
-if (!empty(get_query_var('s'))) {
-    $args[ 's' ] = get_query_var('s');
+if ( ! empty( get_query_var( 's' ) ) ) {
+	$args['s'] = get_query_var( 's' );
 }
 
 // Handle Taxonomy Queries
-$company_cats = !empty( $_GET['company_cats'] ) ? sanitize_text_field( wp_unslash($_GET['company_cats']) ) : '';
-$company_locations = !empty( $_GET['company_locations'] ) ? sanitize_text_field( wp_unslash($_GET['company_locations']) ) : '';
+$company_cats      = ! empty( $_GET['company_cats'] ) ? sanitize_text_field( wp_unslash( $_GET['company_cats'] ) ) : '';
+$company_locations = ! empty( $_GET['company_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['company_locations'] ) ) : '';
 
-$args[ 'tax_query' ] = array(
+$args['tax_query'] = array(
 	'relation' => 'OR',
 );
 
 if ( $company_cats ) {
-	$args[ 'tax_query' ][] = array(
-		'taxonomy'  => 'jobus_company_cat',
-		'field'     => 'slug',
-		'terms'     => $company_cats,
+	$args['tax_query'][] = array(
+		'taxonomy' => 'jobus_company_cat',
+		'field'    => 'slug',
+		'terms'    => $company_cats,
 	);
 }
 
 if ( $company_locations ) {
-	$args[ 'tax_query' ][] = array(
-		'taxonomy'  => 'jobus_company_location',
-		'field'     => 'slug',
-		'terms'     => $company_locations,
+	$args['tax_query'][] = array(
+		'taxonomy' => 'jobus_company_location',
+		'field'    => 'slug',
+		'terms'    => $company_locations,
 	);
 }
 
 
 if ( ! empty( $result_ids ) ) {
-    $args['post__in'] = $result_ids;
+	$args['post__in'] = $result_ids;
 }
 
-$company_query = new WP_Query($args);
-$company_archive_layout = $company_archive_layout ?? jobus_opt('company_archive_layout');
+$company_query          = new WP_Query( $args );
+$company_archive_layout = $company_archive_layout ?? jobus_opt( 'company_archive_layout' );
 
 //============= Select Layout ==================//
-include 'contents-company/company-archive-'.$company_archive_layout.'.php';
+include 'contents-company/company-archive-' . $company_archive_layout . '.php';
 
 get_footer();
 
 //Sidebar Popup
 if ( $company_archive_layout == '2' ) {
-    jobus_get_template_part('contents-company/sidebar-search-filter-popup');
+	jobus_get_template_part( 'contents-company/sidebar-search-filter-popup' );
 }
