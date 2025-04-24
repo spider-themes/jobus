@@ -44,7 +44,7 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                                             <div class="filter-title fw-500 text-dark"><?php echo esc_html($widget_title) ?></div>
                                             <?php
                                             // Include the appropriate widget layout file based on the widget type
-                                            include( "filter-widgets/$widget_layout.php" );
+                                            include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
                                             ?>
                                         </div>
                                     </div>
@@ -62,25 +62,25 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
 
 		                            if ( $key === 'is_job_widget_cat' && $value ) {
                                         $taxonomy = 'jobus_job_cat';
-                                        include ('loop/topbar-tax-wrapper-start.php');
-                                        include("filter-widgets/categories.php");
-                                        include ('loop/topbar-tax-wrapper-end.php');
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-start.php' );
+			                            include ( __DIR__ . '/../filter-widgets/categories.php' );
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-end.php' );
 		                            }
 
 		                            // Widget Locations
 		                            if ( $key === 'is_job_widget_location' && $value ) {
                                         $taxonomy = 'jobus_job_location';
-                                        include ('loop/topbar-tax-wrapper-start.php');
-                                        include("filter-widgets/locations.php");
-                                        include ('loop/topbar-tax-wrapper-end.php');
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-start.php' );
+			                            include ( __DIR__ . '/../filter-widgets/locations.php' );
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-end.php' );
 		                            }
 
 		                            // Widget Tag
 		                            if ( $key === 'is_job_widget_tag' && $value ) {
                                         $taxonomy = 'jobus_job_tag';
-                                        include ('loop/topbar-tax-wrapper-start.php');
-                                        include("filter-widgets/tags.php");
-                                        include ('loop/topbar-tax-wrapper-end.php');
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-start.php' );
+			                            include ( __DIR__ . '/../filter-widgets/tags.php' );
+			                            include ( __DIR__ . '/../loop/topbar-tax-wrapper-end.php' );
 		                            }
 	                            }
                             }

@@ -10,16 +10,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $term_location = get_terms( array(
-	'taxonomy'   => 'jobus_job_location',
-	'hide_empty' => false,
+	'taxonomy'   => $taxonomy,
 ) );
 
 if ( ! empty( $term_location ) ) {
 	?>
-    <select class="nice-select" name="job_locations[]">
+    <select class="nice-select" name="<?php echo esc_attr($taxonomy) ?>[]">
         <option value="" disabled selected><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
 		<?php
-		$searched_opt = jobus_search_terms( 'job_locations' );
+		$searched_opt = jobus_search_terms( $taxonomy );
 		foreach ( $term_location as $term ) {
 			$selected = ( in_array( $term->slug, $searched_opt ) ) ? ' selected' : '';
 			?>

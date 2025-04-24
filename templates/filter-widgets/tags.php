@@ -9,19 +9,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $term_tags = get_terms( array(
-	'taxonomy' => 'jobus_job_tag',
+	'taxonomy' => $taxonomy,
 ) );
 
 if ( ! empty( $term_tags ) ) {
 	?>
     <ul class="tags style-none d-flex flex-wrap justify-space-between radio-filter mb-5">
 		<?php
-		$searched_opt = jobus_search_terms( 'job_tags' );
+		$searched_opt = jobus_search_terms( $taxonomy );
 		foreach ( $term_tags as $term ) {
 			$check_status = in_array( $term->slug, $searched_opt );
 			?>
             <li>
-                <input type="checkbox" name="job_tags[]" value="<?php echo esc_attr( $term->slug ); ?>" <?php echo $check_status !== false
+                <input type="checkbox" name="<?php echo esc_attr($taxonomy) ?>[]" value="<?php echo esc_attr( $term->slug ); ?>" <?php echo $check_status !== false
 					? esc_attr( 'checked=checked' ) : ''; ?>>
                 <label><?php echo esc_html( $term->name ); ?></label>
             </li>

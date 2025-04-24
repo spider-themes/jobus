@@ -33,7 +33,7 @@ if ( ! function_exists( 'jobus_meta' ) ) {
  * @return array
  */
 if ( ! function_exists( 'jobus_get_template_part' ) ) {
-	function jobus_get_template_part( $template ): void {
+	function jobus_get_template_part( $template, $args = [] ): void {
 
 		// Get the slug
 		$template_slug = rtrim( $template );
@@ -46,6 +46,9 @@ if ( ! function_exists( 'jobus_get_template_part' ) ) {
 			$file = JOBUS_PATH . "/templates/" . $template;
 		}
 		if ( $file ) {
+			if ( ! empty( $args ) && is_array( $args ) ) {
+				extract( $args );
+			}
 			load_template( $file, false );
 		}
 	}

@@ -3,7 +3,7 @@
  * Classic Tax Wrapper Start
  * This template is used to display the start of the classic tax wrapper for job listings.
  *
- * This template can be overridden by copying it to yourtheme/jobus/contents-job/loop/classic-tax-wrapper-start.php.
+ * This template can be overridden by copying it to yourtheme/jobus/loop/classic-tax-wrapper-start.php.
  *
  * HOWEVER, on occasion Jobus will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+if ( isset( $taxonomy ) && ! empty( $taxonomy ) ) {
+	$job_taxonomy = ! empty( $_GET[ $taxonomy ] ) ? array_map( 'sanitize_text_field', wp_unslash( $_GET[ $taxonomy ] ) ) : [];
+}
+
 // Initialize variables with default values
 $is_collapsed_show = 'collapse';
 $area_expanded     = 'false';
 $is_collapsed      = ' collapsed';
-
-if ( isset( $taxonomy ) && ! empty( $taxonomy ) ) {
-	$job_taxonomy = ! empty( $_GET[ $taxonomy ] ) ? array_map( 'sanitize_text_field', wp_unslash( $_GET[ $taxonomy ] ) ) : [];
-}
 
 if ( ! empty( $job_taxonomy ) ) {
 	$is_collapsed_show = 'collapse show';

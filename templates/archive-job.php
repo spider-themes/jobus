@@ -17,9 +17,9 @@ $selected_order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unsla
 $selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'desc';
 
 $meta_args      = [ 'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_job', '', jobus_all_search_meta() ) ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms( 'job_cats' ) ) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_location', jobus_search_terms( 'job_locations' ) ) ];
-$taxonomy_args3 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms( 'job_tags' ) ) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms( 'jobus_job_cat' ) ) ];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_location', jobus_search_terms( 'jobus_job_location' ) ) ];
+$taxonomy_args3 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_tag', jobus_search_terms( 'jobus_job_tag' ) ) ];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
 	$result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2, $taxonomy_args3 );
@@ -41,9 +41,9 @@ if ( ! empty( get_query_var( 's' ) ) ) {
 }
 
 // Handle Taxonomy Queries
-$job_cats      = ! empty( $_GET['job_cats'] ) ? sanitize_text_field( wp_unslash( $_GET['job_cats'] ) ) : '';
-$job_locations = ! empty( $_GET['job_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['job_locations'] ) ) : '';
-$job_tags      = ! empty( $_GET['job_tags'] ) ? sanitize_text_field( wp_unslash( $_GET['job_tags'] ) ) : '';
+$job_cats      = ! empty( $_GET['jobus_job_cat'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_cat'] ) ) : '';
+$job_locations = ! empty( $_GET['jobus_job_location'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_location'] ) ) : '';
+$job_tags      = ! empty( $_GET['jobus_job_tag'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_tag'] ) ) : '';
 
 $args['tax_query'] = array(
 	'relation' => 'OR',

@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @package Jobus
+ * @package Jobus/Templates
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
