@@ -21,9 +21,7 @@ if ( ! empty( $term_location ) ) {
 		$searched_opt = jobus_search_terms( $taxonomy );
 		foreach ( $term_location as $term ) {
 			$selected = ( in_array( $term->slug, $searched_opt ) ) ? ' selected' : '';
-			?>
-            <option value="<?php echo esc_attr( $term->slug ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $term->name ); ?></option>
-			<?php
+			echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
 		}
 		?>
     </select>

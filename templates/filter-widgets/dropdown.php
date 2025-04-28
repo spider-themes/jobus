@@ -20,13 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <select class="nice-select bg-white" name="<?php echo esc_attr( $widget_name ); ?>[]">
 	<?php
-	if ( isset( $job_specifications ) && is_array( $job_specifications ) ) {
-		foreach ( $job_specifications as $key => $value ) {
+	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
+		foreach ( $specifications_data as $key => $value ) {
 
 			$meta_value       = $value['meta_values'] ?? '';
 			$modifiedSelect   = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 			$modifiedVal      = strtolower( $modifiedSelect );
-			$meta_value_count = jobus_count_meta_key_usage( 'jobus_job', 'jobus_meta_options', $modifiedVal );
+			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $modifiedVal );
 
 			if ( $meta_value_count > 0 ) {
 				$searched_val = jobus_search_terms( $widget_name );

@@ -25,7 +25,7 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
                 <input type="hidden" name="post_type" value="jobus_company"/>
 
 				<?php
-				// Widget for company meta data list
+				// Widget for a company meta-data list
 				$filter_widgets = jobus_opt( 'company_sidebar_widgets' );
 				if ( is_array( $filter_widgets ) ) {
 					foreach ( $filter_widgets as $index => $widget ) {
@@ -67,7 +67,10 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
                                 <div class="main-body">
 									<?php
 									// Include the appropriate widget layout file based on the widget type
-									include( "filter-widgets/$widget_layout.php" );
+									$specifications_data = $company_specifications;
+									$post_type = 'jobus_company';
+									$meta_opt_parent_key = 'jobus_meta_company_options';
+									include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
 									?>
                                 </div>
                             </div>
@@ -81,25 +84,23 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
 				 * This section handles the taxonomy filter widgets for company categories and locations.
 				 */
 				$taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
-
-				// Check if the sortable field value is not empty
 				if ( ! empty( $taxonomy_widgets ) ) {
 					foreach ( $taxonomy_widgets as $key => $value ) {
 
 						// Widget Categories
 						if ( $key === 'is_company_widget_cat' && $value ) {
 							$taxonomy = 'jobus_company_cat';
-							include( 'loop/classic-tax-wrapper-start.php' );
-							include( 'filter-widgets/categories.php' );
-							include( 'loop/classic-tax-wrapper-end.php' );
+							include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
+							include ( __DIR__ . '/../filter-widgets/categories.php' );
+							include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
 						}
 
 						// Widget Locations
 						if ( $key === 'is_company_widget_location' && $value ) {
 							$taxonomy = 'jobus_company_location';
-							include( 'loop/classic-tax-wrapper-start.php' );
-							include( 'filter-widgets/locations.php' );
-							include( 'loop/classic-tax-wrapper-end.php' );
+							include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
+							include ( __DIR__ . '/../filter-widgets/locations.php' );
+							include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
 						}
 					}
 				}

@@ -35,13 +35,13 @@ if ( ! empty( $job_taxonomy ) ) {
 
 // Determine the dynamic text based on the taxonomy
 $taxonomy_text = '';
-if ( $taxonomy === 'jobus_job_cat' ) {
+if ( $taxonomy == 'jobus_job_cat' || $taxonomy == 'jobus_company_cat' ) {
 	$taxonomy_text = esc_html__( 'Categories', 'jobus' );
 }
-if ( $taxonomy === 'jobus_job_location' ) {
+if ( $taxonomy == 'jobus_job_location' || $taxonomy == 'jobus_company_location' ) {
 	$taxonomy_text = esc_html__( 'Locations', 'jobus' );
 }
-if ( $taxonomy === 'jobus_job_tag' ) {
+if ( $taxonomy == 'jobus_job_tag' ) {
 	$taxonomy_text = esc_html__( 'Tags', 'jobus' );
 }
 ?>

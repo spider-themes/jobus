@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <ul class="style-none filter-input">
 	<?php
-	if ( isset( $job_specifications ) && is_array( $job_specifications ) ) {
-		foreach ( $job_specifications as $key => $value ) {
+	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
+		foreach ( $specifications_data as $value ) {
 
 			$meta_key   = $meta['meta_key'] ?? '';
 			$meta_value = $value['meta_values'] ?? '';
@@ -30,15 +30,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$opt_val        = strtolower( $modifiedValues );
 
 			// Get the count for the current meta value
-			$meta_value_count = jobus_count_meta_key_usage( 'jobus_job', 'jobus_meta_options', $opt_val );
+			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val );
 			if ( $meta_value_count > 0 ) {
 				$searched_opt = jobus_search_terms( $widget_name );
 				$check_status = in_array( $opt_val, $searched_opt );
+				$check_status = $check_status !== false ? ' checked' : '';
 				?>
                 <li>
-                    <input type="checkbox" <?php echo $check_status !== false ? esc_attr( 'checked=checked' ) : ''; ?>
-                           name="<?php echo esc_attr( $widget_name ); ?>[]"
-                           value="<?php echo esc_attr( $opt_val ); ?>">
+                    <input type="checkbox" name="<?php echo esc_attr( $widget_name ); ?>[]" value="<?php echo esc_attr( $opt_val ); ?>" <?php echo esc_attr( $check_status ) ?>>
                     <label>
 						<?php echo esc_html( $meta_value ); ?>
                         <span><?php echo esc_html( $meta_value_count ); ?></span>

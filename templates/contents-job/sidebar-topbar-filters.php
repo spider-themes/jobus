@@ -42,10 +42,13 @@ if ( empty($jobus_nonce) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter'
                                     <div class="col-lg-3 col-sm-6">
                                         <div class="filter-block pb-50 lg-pb-20">
                                             <div class="filter-title fw-500 text-dark"><?php echo esc_html($widget_title) ?></div>
-                                            <?php
-                                            // Include the appropriate widget layout file based on the widget type
-                                            include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
-                                            ?>
+	                                        <?php
+	                                        // Include the appropriate widget layout file based on the widget type
+	                                        $specifications_data = $job_specifications;
+	                                        $post_type = 'jobus_job';
+	                                        $meta_opt_parent_key = 'jobus_meta_options';
+	                                        include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
+	                                        ?>
                                         </div>
                                     </div>
                                     <?php

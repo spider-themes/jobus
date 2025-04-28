@@ -9,12 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$widget_name        = $widget['widget_name'] ?? '';
-$job_specifications = jobus_get_specs_options();
-$job_specifications = $job_specifications[ $widget_name ] ?? '';
-
-$range_suffix      = $widget['range_suffix'] ?? '';
-$salary_value_list = $job_specifications;
+$salary_value_list = $specifications_data;
 
 // Initialize an array to store all numeric values
 $all_values     = [];

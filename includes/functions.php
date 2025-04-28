@@ -272,7 +272,16 @@ function jobus_get_specs( $settings_id = 'job_specifications' ): array {
 }
 
 if ( ! function_exists( 'jobus_get_specs_options' ) ) {
-	function jobus_get_specs_options( $settings_id = 'job_specifications' ): array {
+	/**
+	 * Retrieves specification options based on the provided settings ID.
+	 * Transforms the specifications into an associative array where keys are meta keys
+	 * and values are their corresponding meta value groups.
+	 *
+	 * @param string $settings_id The settings identifier to retrieve the specifications. Defaults to 'job_specifications'.
+	 *
+	 * @return array An associative array of specifications with meta-keys as array keys and meta-value groups as values.
+	 */
+	function jobus_get_specs_options( string $settings_id = 'job_specifications' ): array {
 		$specifications = jobus_opt( $settings_id );
 
 		$specs = [];
