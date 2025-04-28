@@ -19,9 +19,9 @@ $selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash
 $meta_args      = [
 	'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_candidate', '', jobus_all_search_meta( 'jobus_meta_candidate_options', 'candidate_sidebar_widgets' ) )
 ];
-$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms( 'candidate_cats' ) ) ];
+$taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms( 'jobus_candidate_cat' ) ) ];
 $taxonomy_args2 = [
-	'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms( 'candidate_locations' ) )
+	'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms( 'jobus_candidate_location' ) )
 ];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
@@ -44,8 +44,8 @@ if ( ! empty( get_query_var( 's' ) ) ) {
 }
 
 // Handle Taxonomy Queries
-$candidate_cats      = ! empty( $_GET['candidate_cats'] ) ? sanitize_text_field( wp_unslash( $_GET['candidate_cats'] ) ) : '';
-$candidate_locations = ! empty( $_GET['candidate_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['candidate_locations'] ) ) : '';
+$candidate_cats      = ! empty( $_GET['jobus_candidate_cat'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_candidate_cat'] ) ) : '';
+$candidate_locations = ! empty( $_GET['jobus_candidate_location'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_candidate_location'] ) ) : '';
 
 $args['tax_query'] = array(
 	'relation' => 'OR',

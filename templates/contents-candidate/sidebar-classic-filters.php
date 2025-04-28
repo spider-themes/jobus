@@ -85,12 +85,13 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
                                 </a>
                                 <div class="<?php echo esc_attr( $is_collapsed_show ) ?>" id="collapse-<?php echo esc_attr( $widget_name ) ?>">
                                     <div class="main-body">
-
 										<?php
 										// Include the appropriate widget layout file based on the widget type
-										include( "filter-widgets/$widget_layout.php" );
+										$specifications_data = $candidate_specifications;
+										$post_type = 'jobus_candidate';
+										$meta_opt_parent_key = 'jobus_meta_candidate_options';
+										include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
 										?>
-
                                     </div>
                                 </div>
                             </div>
@@ -109,17 +110,17 @@ if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filte
 							// Widget Categories
 							if ( $key === 'is_candidate_widget_cat' && $value ) {
 								$taxonomy = 'jobus_candidate_cat';
-								include( 'loop/classic-tax-wrapper-start.php' );
-								include( 'filter-widgets/categories.php' );
-								include( 'loop/classic-tax-wrapper-end.php' );
+								include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
+								include ( __DIR__ . '/../filter-widgets/categories.php' );
+								include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
 							}
 
 							// Widget Locations
 							if ( $key === 'is_candidate_widget_location' && $value ) {
 								$taxonomy = 'jobus_candidate_location';
-								include( 'loop/classic-tax-wrapper-start.php' );
-								include( 'filter-widgets/locations.php' );
-								include( 'loop/classic-tax-wrapper-end.php' );
+								include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
+								include ( __DIR__ . '/../filter-widgets/locations.php' );
+								include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
 							}
 						}
 					}

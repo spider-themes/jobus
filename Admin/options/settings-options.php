@@ -479,6 +479,20 @@ if ( class_exists( 'CSF' ) ) {
 				),
 				'default'  => '1'
 			),
+
+			array(
+				'id'         => 'company_archive_grid_column',
+				'type'       => 'select',
+				'title'      => esc_html__( 'Select Column', 'jobus' ),
+				'subtitle'   => esc_html__( 'Select the number of columns to display in the company grid layout.', 'jobus' ),
+				'options'    => array(
+					'6' => esc_html__( 'Two Column', 'jobus' ),
+					'4' => esc_html__( 'Three Column', 'jobus' ),
+					'3' => esc_html__( 'Four Column', 'jobus' ),
+					'2' => esc_html__( 'Six Column', 'jobus' ),
+				),
+				'default'    => '4',
+			),
 		)
 	) );
 
@@ -732,7 +746,6 @@ if ( class_exists( 'CSF' ) ) {
 				'default'  => '1'
 			),
 
-
 			array(
 				'id'         => 'candidate_archive_grid_column',
 				'type'       => 'select',
@@ -745,7 +758,6 @@ if ( class_exists( 'CSF' ) ) {
 					'2' => esc_html__( 'Six Column', 'jobus' ),
 				),
 				'default'    => '4',
-				'dependency' => array( 'candidate_archive_layout', '==', '2' ),
 			),
 		)
 	) );

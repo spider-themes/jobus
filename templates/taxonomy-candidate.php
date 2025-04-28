@@ -30,7 +30,6 @@ $args = array(
     'order'          => $selected_order,
 );
 
-
 // Taxonomy query
 if ($current_candidate_cat || $current_candidate_loc || $current_candidate_skill) {
     $args['tax_query'] = array(
