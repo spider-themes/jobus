@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                             <?php
                             // Display the total number of companies found
-                            $result_count = $company_query;
                             include __DIR__ . '/../loop/result-count.php';
                             ?>
 

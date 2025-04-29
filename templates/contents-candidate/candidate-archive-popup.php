@@ -30,7 +30,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<?php esc_html_e( 'Filter', 'jobus' ) ?>
                             </button>
 
-							<?php include( 'loop/result-count.php' ) ?>
+							<?php
+                            // Display the total number of candidates found
+							include (__DIR__ . '/../loop/result-count.php');
+                            ?>
 
                         </div>
 

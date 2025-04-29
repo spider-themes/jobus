@@ -13,7 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="job-post-item-wrapper">
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-25 mt-70 lg-mt-40">
 
-	                    <?php include ('loop/result-count.php') ?>
+	                    <?php
+	                    // Display the total number of companies found
+	                    include __DIR__ . '/../loop/result-count.php';
+	                    ?>
 
 	                    <?php include ('loop/sortby.php'); ?>
 

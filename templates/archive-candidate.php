@@ -176,6 +176,11 @@ $pagination_query = $candidate_query;
 $pagination_prev = '<i class="bi bi-chevron-left"></i>';
 $pagination_next = '<i class="bi bi-chevron-right"></i>';
 
+// Result Count
+$post_type = 'jobus_candidate';
+$result_count = $candidate_query;
+
+
 //============= Select Layout ==================//
 if ( $candidate_archive_layout == '1' ) {
 	include 'contents-candidate/candidate-archive-classic.php';

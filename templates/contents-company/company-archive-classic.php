@@ -14,9 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
 	                    <?php
-
 	                    // Display the total number of companies found
-	                    $result_count = $company_query;
 	                    include __DIR__ . '/../loop/result-count.php';
 
 	                    include __DIR__ . '/../loop/sortby.php';

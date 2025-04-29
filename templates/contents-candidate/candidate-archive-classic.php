@@ -28,7 +28,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
 
-						<?php include( 'loop/result-count.php' ); ?>
+						<?php
+                        // Display the total number of candidates found
+						include (__DIR__ . '/../loop/result-count.php');
+                        ?>
 
 						<?php include( 'loop/sortby.php' ); ?>
 

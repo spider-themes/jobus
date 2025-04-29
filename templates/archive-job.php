@@ -183,6 +183,10 @@ $pagination_query = $job_post;
 $pagination_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
 $pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="ms-2" />';
 
+// Result Count
+$post_type = 'jobus_job';
+$result_count = $job_post;
+
 //========================= Select Layout ========================//
 if ( $job_archive_layout == '1' ) {
 	include ('contents-job/job-archive-classic.php');
