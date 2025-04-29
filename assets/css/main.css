@@ -3253,6 +3253,127 @@ body.compensate-for-scrollbar {
   display: none;
 }
 
+/**=== Job Classic, Topbar and Popup Pagination ===**/
+/**=== Company Classic and Popup Pagination ===**/
+.jobus-job-classic .pagination-wrap,
+.jobus-job-topbar .pagination-wrap,
+.jobus-job-popup .pagination-wrap,
+.jobus-company-classic .pagination-wrap,
+.jobus-company-popup .pagination-wrap {
+  padding-top: 30px;
+}
+@media (width > 540px) {
+  .jobus-job-classic .pagination-wrap,
+  .jobus-job-topbar .pagination-wrap,
+  .jobus-job-popup .pagination-wrap,
+  .jobus-company-classic .pagination-wrap,
+  .jobus-company-popup .pagination-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.jobus-job-classic .pagination-wrap .pagination,
+.jobus-job-topbar .pagination-wrap .pagination,
+.jobus-job-popup .pagination-wrap .pagination,
+.jobus-company-classic .pagination-wrap .pagination,
+.jobus-company-popup .pagination-wrap .pagination {
+  position: relative;
+  display: flex;
+  padding-left: 0;
+}
+@media (max-width: 540px) {
+  .jobus-job-classic .pagination-wrap .pagination,
+  .jobus-job-topbar .pagination-wrap .pagination,
+  .jobus-job-popup .pagination-wrap .pagination,
+  .jobus-company-classic .pagination-wrap .pagination,
+  .jobus-company-popup .pagination-wrap .pagination {
+    justify-content: center;
+  }
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 500;
+  color: #31795A;
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers:hover,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers:hover,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers:hover,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers:hover,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers:hover {
+  color: #00BF58;
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers.current,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers.current,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers.current,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers.current,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers.current {
+  background: #31795A;
+  color: #fff;
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers.prev, .jobus-job-classic .pagination-wrap .pagination .page-numbers.next,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers.prev,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers.next,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers.prev,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers.next,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers.prev,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers.next,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers.prev,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers.next {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/**=== Candidate Classic and Popup Pagination ===**/
+.jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+  padding-top: 30px;
+}
+@media (width > 540px) {
+  .jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.jobus-candidate-classic .pagination-wrap .pagination, .jobus-candidate-popup .pagination-wrap .pagination {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid #31795A;
+  border-radius: 4px;
+}
+.jobus-candidate-classic .pagination-wrap .pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .pagination .page-numbers {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #31795A;
+  border-right: 1px solid #31795A;
+  border-radius: 0;
+}
+.jobus-candidate-classic .pagination-wrap .pagination .page-numbers.current, .jobus-candidate-classic .pagination-wrap .pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .pagination .page-numbers:hover {
+  background: rgba(49, 121, 90, 0.1);
+}
+.jobus-candidate-classic .pagination-wrap .pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .pagination .page-numbers:last-child {
+  border: none;
+}
+
 img {
   height: auto;
 }
@@ -7808,67 +7929,6 @@ img {
   position: absolute;
   right: 0;
   top: 17px;
-}
-
-.jobus_pagination {
-  position: relative;
-  display: flex;
-  padding-left: 0;
-}
-@media (max-width: 540px) {
-  .jobus_pagination {
-    justify-content: center;
-  }
-}
-.jobus_pagination .page-numbers {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: 500;
-  color: #31795A;
-}
-.jobus_pagination .page-numbers:hover {
-  color: #00BF58;
-}
-.jobus_pagination .page-numbers.current {
-  background: #31795A;
-  color: #fff;
-}
-.jobus_pagination .page-numbers.prev, .jobus_pagination .page-numbers.next {
-  height: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.jobus_pagination_two {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border: 1px solid #31795A;
-  border-radius: 4px;
-}
-.jobus_pagination_two .page-numbers {
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #31795A;
-  border-right: 1px solid #31795A;
-}
-.jobus_pagination_two .page-numbers.current, .jobus_pagination_two .page-numbers:hover {
-  background: rgba(49, 121, 90, 0.1);
-}
-.jobus_pagination_two .page-numbers:last-child {
-  border: none;
 }
 
 .job-application-wrapper {

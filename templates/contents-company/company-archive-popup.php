@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="company-profiles bg-color pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80">
+<section class="jobus-company-classic company-profiles bg-color pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -40,7 +40,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
 
                     // Pagination
-                    $pagination = $company_query;
                     include __DIR__ . '/../loop/pagination.php';
                     ?>
                 </div>

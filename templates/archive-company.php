@@ -20,9 +20,7 @@ $meta_args      = [
 	'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_company', '', jobus_all_search_meta( 'jobus_meta_company_options', 'company_sidebar_widgets' ) )
 ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_cat', jobus_search_terms( 'jobus_company_cat' ) ) ];
-$taxonomy_args2 = [
-	'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_location', jobus_search_terms( 'jobus_company_location' ) )
-];
+$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_location', jobus_search_terms( 'jobus_company_location' ) ) ];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
 	$result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
@@ -74,6 +72,11 @@ if ( ! empty( $result_ids ) ) {
 
 $company_query          = new WP_Query( $args );
 $company_archive_layout = $company_archive_layout ?? jobus_opt( 'company_archive_layout' );
+
+// Pagination
+$pagination_query = $company_query;
+$pagination_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
+$pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="ms-2" />';
 
 //============= Select Layout ==================//
 if ( $company_archive_layout == '1' ) {

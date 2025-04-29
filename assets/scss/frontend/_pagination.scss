@@ -1,0 +1,95 @@
+/**=== Job Classic, Topbar and Popup Pagination ===**/
+/**=== Company Classic and Popup Pagination ===**/
+.jobus-job-classic,
+.jobus-job-topbar,
+.jobus-job-popup,
+.jobus-company-classic,
+.jobus-company-popup {
+  .pagination-wrap {
+    padding-top: 30px;
+    @media (width > 540px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pagination {
+      position: relative;
+      display: flex;
+      padding-left: 0;
+      @media (max-width: 540px) {
+        justify-content: center;
+      }
+
+      .page-numbers {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 50%;
+        font-size: 17px;
+        font-weight: 500;
+        color: #31795A;
+
+        &:hover {
+          color: $color-three;
+        }
+
+        &.current {
+          background: #31795A;
+          color: #fff;
+        }
+
+        &.prev, &.next {
+          height: auto;
+          width: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+/**=== Candidate Classic and Popup Pagination ===**/
+.jobus-candidate-classic, .jobus-candidate-popup {
+  .pagination-wrap {
+    padding-top: 30px;
+    @media (width > 540px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pagination {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      border: 1px solid #31795A;
+      border-radius: 4px;
+
+      .page-numbers {
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #31795A;
+        border-right: 1px solid #31795A;
+        border-radius: 0;
+
+        &.current, &:hover {
+          background: rgba(49, 121, 90, 0.1);
+        }
+
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+  }
+}

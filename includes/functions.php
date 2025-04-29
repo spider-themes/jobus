@@ -344,23 +344,23 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
 	}
 }
 
-/**
- * Jobus job pagination
- */
+
 if ( ! function_exists( 'jobus_pagination' ) ) {
-	function jobus_pagination( $query, $class = 'jobus_pagination', $prev = '', $next = '' ): void {
+	/**
+	 * Renders pagination links for a given query object.
+	 *
+	 * Generates and outputs a pagination control as an unordered list.
+	 * Supports customization of "previous" and "next" text.
+	 *
+	 * @param WP_Query $query Query object containing pagination data.
+	 * @param string   $prev  Custom text for the "previous" pagination link. Default is an empty string.
+	 * @param string   $next  Custom text for the "next" pagination link. Default is an empty string.
+	 *
+	 * @return void
+	 */
+	function jobus_pagination( WP_Query $query, string $prev = '', string $next = '' ): void {
 
-		// Default values for prev and next links
-		$default_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />'
-		                . esc_html__( 'Prev', 'jobus' );
-		$default_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right',
-				'jobus' ) . '" class="ms-2" />';
-
-		// Use the provided values or the default values
-		$prev_text = ! empty( $prev ) ? $prev : $default_prev;
-		$next_text = ! empty( $next ) ? $next : $default_next;
-
-		echo '<ul class="' . esc_attr( $class ) . '">';
+		echo '<ul class="pagination">';
 
 		$big              = 999999999; // need an unlikely integer
 		$pagination_links = paginate_links( array(
@@ -368,8 +368,8 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
 			'format'    => '?paged=%#%',
 			'current'   => max( 1, get_query_var( 'paged' ) ),
 			'total'     => $query->max_num_pages,
-			'prev_text' => $prev_text,
-			'next_text' => $next_text,
+			'prev_text' => $prev,
+			'next_text' => $next,
 		) );
 
 		// Output pagination links with escaping

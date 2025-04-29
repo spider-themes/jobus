@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<section class="job-listing-three bg-color pt-90 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+<section class="jobus-job-popup job-listing-three bg-color pt-90 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -34,8 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 
 					// Pagination
-					include( 'loop/pagination.php' );
-
+					include (__DIR__ . '/../loop/pagination.php');
 					?>
                 </div>
             </div>

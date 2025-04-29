@@ -5,14 +5,14 @@ if ( !defined('ABSPATH') ) {
 
 // Determine the dynamic text based on the taxonomy
 $taxonomy_text = '';
-if ( $taxonomy === 'jobus_job_cat' ) {
-    $taxonomy_text = __('Categories', 'jobus');
+if ( $taxonomy === 'jobus_job_cat' || $taxonomy == 'jobus_company_cat' || $taxonomy == 'jobus_candidate_cat' ) {
+    $taxonomy_text = esc_html__('Categories', 'jobus');
 }
-if ( $taxonomy === 'jobus_job_location' ) {
-    $taxonomy_text = __('Locations', 'jobus');
+if ( $taxonomy === 'jobus_job_location' || $taxonomy == 'jobus_company_location' || $taxonomy == 'jobus_candidate_location' ) {
+    $taxonomy_text = esc_html__('Locations', 'jobus');
 }
 if ( $taxonomy === 'jobus_job_tag' ) {
-    $taxonomy_text = __('Tags', 'jobus');
+    $taxonomy_text = esc_html__('Tags', 'jobus');
 }
 ?>
 <div class="col-lg-3 col-sm-6">

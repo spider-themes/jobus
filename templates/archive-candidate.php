@@ -171,6 +171,11 @@ $candidate_archive_layout = $candidate_archive_layout ?? jobus_opt( 'candidate_a
 // Check if the view parameter is set in the URL
 $current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
 
+// Pagination
+$pagination_query = $candidate_query;
+$pagination_prev = '<i class="bi bi-chevron-left"></i>';
+$pagination_next = '<i class="bi bi-chevron-right"></i>';
+
 //============= Select Layout ==================//
 if ( $candidate_archive_layout == '1' ) {
 	include 'contents-candidate/candidate-archive-classic.php';

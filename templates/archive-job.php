@@ -178,6 +178,11 @@ $job_archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
 // Check if the view parameter is set in the URL
 $current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
 
+// Pagination
+$pagination_query = $job_post;
+$pagination_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
+$pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="ms-2" />';
+
 //========================= Select Layout ========================//
 if ( $job_archive_layout == '1' ) {
 	include ('contents-job/job-archive-classic.php');

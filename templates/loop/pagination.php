@@ -19,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="pt-50 lg-pt-20 d-sm-flex align-items-center justify-content-between">
+<div class="pagination-wrap">
 
-	<?php jobus_showing_post_result_count($pagination) ?>
+	<?php jobus_showing_post_result_count($pagination_query) ?>
 
-	<?php jobus_pagination($pagination); ?>
+	<?php jobus_pagination($pagination_query, $pagination_prev, $pagination_next ); ?>
 
 </div>

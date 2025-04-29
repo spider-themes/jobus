@@ -14,36 +14,36 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
+	exit; // Exit if accessed directly.
 }
 ?>
-<section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+<section class="jobus-candidate-classic candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">
         <div class="row">
 
-            <?php jobus_get_template_part('contents-candidate/sidebar-classic-filters'); ?>
+			<?php jobus_get_template_part( 'contents-candidate/sidebar-classic-filters' ); ?>
 
             <div class="col-xl-9 col-lg-8">
                 <div class="ms-xxl-5 ms-xl-3">
 
                     <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
 
-                        <?php include ( 'loop/result-count.php' ); ?>
+						<?php include( 'loop/result-count.php' ); ?>
 
-                        <?php include ( 'loop/sortby.php' ); ?>
+						<?php include( 'loop/sortby.php' ); ?>
 
                     </div>
 
-                    <?php
-                    if ( $current_view == 'grid' ) {
-                        include ( 'contents/content-grid.php' );
-                    } elseif ( $current_view == 'list' ) {
-                        include ( 'contents/content-list-5-col.php' );
-                    }
+					<?php
+					if ( $current_view == 'grid' ) {
+						include( 'contents/content-grid.php' );
+					} elseif ( $current_view == 'list' ) {
+						include( 'contents/content-list-5-col.php' );
+					}
 
-                    // Pagination
-                    include ( 'loop/pagination.php' );
-                    ?>
+					// Pagination
+					include (__DIR__ . '/../loop/pagination.php');
+					?>
                 </div>
             </div>
         </div>

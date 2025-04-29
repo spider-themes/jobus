@@ -246,7 +246,7 @@ $candidate_count = $candidate_query->found_posts;
 
                     <div class="pt-20 d-sm-flex align-items-center justify-content-between">
 
-                        <?php jobus_pagination($candidate_query, 'jobus_pagination_two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
+                        <?php jobus_pagination($candidate_query, 'pagination-two', '<i class="bi bi-chevron-left"></i>', '<i class="bi bi-chevron-right"></i>'); ?>
 
                     </div>
 
