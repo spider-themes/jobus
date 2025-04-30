@@ -21,24 +21,20 @@ $found_posts = $result_count->found_posts;
 $formatted_count = number_format_i18n( $found_posts );
 
 // Dynamic strings text based on post-type
-$message = match ( $post_type ) {
-	'jobus_job' => (
-		// translators: %s: number of jobs found
-	    sprintf( _n( '%s job found', '%s jobs found', $found_posts, 'jobus' ), $formatted_count )
-	),
-	'jobus_candidate' => (
-		// translators: %s: number of candidates found
-	    sprintf( _n( '%s candidate found', '%s candidates found', $found_posts, 'jobus' ), $formatted_count )
-	),
-	'jobus_company' => (
-		// translators: %s: number of companies found
-	    sprintf( _n( '%s company found', '%s companies found', $found_posts, 'jobus' ), $formatted_count )
-	),
-	default => (
-		// translators: %s: number of items found
-	    sprintf( _n( '%s item found', '%s items found', $found_posts, 'jobus' ), $formatted_count )
-	),
-};
+switch ( $post_type ) {
+    case 'jobus_job':
+        $message = _n( 'job found', 'jobs found', $found_posts, 'jobus' );
+        break;
+    case 'jobus_candidate':
+        $message = _n( 'candidate found', 'candidates found', $found_posts, 'jobus' );
+        break;
+    case 'jobus_company':
+        $message = _n( 'company found', 'companies found', $found_posts, 'jobus' );
+        break;
+    default:
+        $message = _n( 'item found', 'items found', $found_posts, 'jobus' );
+        break;
+}
 ?>
 <div class="total-job-found">
 	<?php esc_html_e( 'All', 'jobus' ); ?>

@@ -19,10 +19,9 @@ include 'single-job/job-single-'.$job_single_layout.'.php';
 
 
 get_footer();
-
 ?>
 
-    <div class="modal fade job-application-wrapper" id="applyJobModal" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
+<div class="modal fade job-application-wrapper" id="applyJobModal" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,7 +41,6 @@ get_footer();
                         $candidate_fname = '';
                         $candidate_lname = '';
                         $candidate_email = '';
-
 
                         // Fallback to display name if first/last names are missing
                         $candidate_fname = get_user_meta($user->ID, 'first_name', true) ?: $user->display_name;
