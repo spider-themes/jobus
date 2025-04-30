@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	                    // Display the total number of companies found
 	                    include __DIR__ . '/../loop/result-count.php';
 
+                        // Display the sort by dropdown
 	                    include __DIR__ . '/../loop/sortby.php';
 	                    ?>
                     </div>

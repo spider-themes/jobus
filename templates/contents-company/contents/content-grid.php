@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 			$post_favourite       = $meta['post_favorite'] ?? '';
 			$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-			$is_popup_border_none = $company_archive_layout == '2' ? ' border-0' : '';
+			$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
 			$column               = sanitize_html_class( jobus_opt( 'company_archive_grid_column' ) );
 			?>
             <div class="col-lg-<?php echo esc_attr( $column ) ?> col-md-4 col-sm-6 d-flex">
@@ -27,7 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php the_title(); ?>
                         </a>
                     </h5>
-
 					<?php
 					$locations = get_the_terms( get_the_ID(), 'jobus_company_location' );
 					if ( ! empty( $locations ) ) { ?>

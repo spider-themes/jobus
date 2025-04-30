@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 		$post_favourite       = $meta['post_favorite'] ?? '';
 		$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-		$is_popup_border_none = $company_archive_layout == '2' ? ' border-0' : '';
+		$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
 		?>
         <div class="company-list-layout mb-20<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
             <div class="row justify-content-between align-items-center">

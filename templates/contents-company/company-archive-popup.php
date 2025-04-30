@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
 
 	                    <?php
+	                    // Display the sort by dropdown
 	                    include __DIR__ . '/../loop/sortby.php';
 	                    ?>
 

@@ -31,9 +31,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
                         // Display the total number of candidates found
 						include (__DIR__ . '/../loop/result-count.php');
-                        ?>
 
-						<?php include( 'loop/sortby.php' ); ?>
+						// Display the sort by dropdown
+						include __DIR__ . '/../loop/sortby.php';
+                        ?>
 
                     </div>
 

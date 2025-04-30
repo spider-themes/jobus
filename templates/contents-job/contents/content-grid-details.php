@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrapper">
 	<div class="row">
 		<?php
-		while ( $job_post->have_posts() ) {
-			$job_post->the_post();
+		while ( $job_query->have_posts() ) {
+			$job_query->the_post();
 			$excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 20); // Adjust the word count as needed
 			?>
 			<div class="col-lg-6 mb-30">

@@ -24,7 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                         </div>
 
-						<?php include( 'loop/sortby.php' ); ?>
+						<?php
+						// Display the sort by dropdown
+						include __DIR__ . '/../loop/sortby.php';
+                        ?>
 
                     </div>
 

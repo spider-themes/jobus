@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="accordion-box grid-style">
 	<div class="row">
 		<?php
-		while ( $job_post->have_posts() ) {
-			$job_post->the_post();
+		while ( $job_query->have_posts() ) {
+			$job_query->the_post();
 			?>
 			<div class="col-sm-6 mb-30">
 				<div class="job-list-two style-two position-relative">

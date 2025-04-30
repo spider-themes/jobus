@@ -165,8 +165,7 @@ if ( $search_type == 'company_search' && ! empty( $company_ids ) ) {
 	$args['post__in'] = $company_ids;
 }
 
-$candidate_query          = new WP_Query( $args );
-$candidate_archive_layout = $candidate_archive_layout ?? jobus_opt( 'candidate_archive_layout' );
+$candidate_query     = new WP_Query( $args );
 
 // Check if the view parameter is set in the URL
 $current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
@@ -180,17 +179,20 @@ $pagination_next = '<i class="bi bi-chevron-right"></i>';
 $post_type = 'jobus_candidate';
 $result_count = $candidate_query;
 
+//=== Sort By
+$archive_url = get_post_type_archive_link( 'jobus_candidate' );
 
 //============= Select Layout ==================//
-if ( $candidate_archive_layout == '1' ) {
+$archive_layout      = $archive_layout ?? jobus_opt( 'candidate_archive_layout' );
+if ( $archive_layout == '1' ) {
 	include 'contents-candidate/candidate-archive-classic.php';
-} elseif ( $candidate_archive_layout == '2' ) {
+} elseif ( $archive_layout == '2' ) {
 	include 'contents-candidate/candidate-archive-popup.php';
 }
 
 get_footer();
 
 //Sidebar Popup
-if ( $candidate_archive_layout == '2' ) {
+if ( $archive_layout == '2' ) {
 	jobus_get_template_part( 'contents-candidate/sidebar-popup-filters' );
 }

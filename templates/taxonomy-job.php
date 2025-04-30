@@ -51,10 +51,10 @@ if ( $current_job_cat || $current_job_location || $current_job_tag ) {
     );
 }
 
-$job_post = new \WP_Query($args);
+$job_query = new \WP_Query($args);
 
 // Get the count of posts for the current term
-$job_count = $job_post->found_posts;
+$job_count = $job_query->found_posts;
 
 ?>
 
@@ -106,8 +106,8 @@ $job_count = $job_post->found_posts;
 
                         <div class="accordion-box list-style">
                             <?php
-                            while ( $job_post->have_posts() ) {
-                                $job_post->the_post();
+                            while ( $job_query->have_posts() ) {
+                                $job_query->the_post();
                                 ?>
                                 <div class="job-list-one style-two position-relative border-style mb-20">
                                     <div class="row justify-content-between align-items-center">
@@ -172,7 +172,7 @@ $job_count = $job_post->found_posts;
 
                         <div class="pt-30 lg-pt-20 d-sm-flex align-items-center justify-content-between">
 
-                            <?php jobus_pagination($job_post); ?>
+                            <?php jobus_pagination($job_query); ?>
 
                         </div>
 

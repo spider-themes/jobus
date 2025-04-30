@@ -17,60 +17,45 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$company_archive_layout = $company_archive_layout ?? jobus_opt( 'company_archive_layout' );
-
-// Check if the view parameter is set in the URL
-$current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
-
-// Get the base URL for the archive page
-if ( $company_archive_layout ) {
-	$archive_url = get_the_permalink();
-} else {
-	$archive_url = get_post_type_archive_link( 'jobus_company' );
-}
-
 // Build the URL for list and grid views
 $list_view_url = esc_url( add_query_arg( 'view', 'list', $archive_url ) );
 $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
-
 ?>
 <div class="d-flex align-items-center">
     <div class="short-filter d-flex align-items-center">
 		<?php
 		$order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : '';
 		$order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : '';
-		$default  = ! empty( $order_by ) ? 'selected' : '';
+		$default  = empty( $order_by ) ? 'selected' : '';
 
 		$selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
 		$selected_old_to_new = $order_by == 'date' && $order == 'asc' ? 'selected' : '';
 		$selected_title_asc  = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
 		$selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
-		$jobus_nonce         = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+        ?>
+        <div class="text-dark fw-500 me-2"><?php esc_html_e( 'Sort By:', 'jobus' ); ?></div>
+        <form action="" method="get">
 
-		if ( empty( $jobus_nonce ) && ! wp_verify_nonce( $jobus_nonce, 'jobus_sort_filter' ) ) {
-			?>
-            <div class="text-dark fw-500 me-2"><?php esc_html_e( 'Sort By:', 'jobus' ); ?></div>
-            <form action="" method="get">
-				<?php wp_nonce_field( 'jobus_sort_filter', 'jobus_nonce' ); ?>
-                <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
-                    <option <?php echo esc_attr( $default ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
-                    <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old ) ?>>
-						<?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
-                    </option>
-                    <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new ) ?>>
-						<?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
-                    </option>
-                    <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc ) ?>>
-						<?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
-                    </option>
-                    <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc ) ?>>
-						<?php esc_html_e( 'Title Descending', 'jobus' ); ?>
-                    </option>
-                </select>
-            </form>
-			<?php
-		}
-		?>
+            <?php wp_nonce_field( 'jobus_sort_filter', 'jobus_nonce' ); ?>
+
+            <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
+                <option <?php echo esc_attr( $default ); ?>>
+                    <?php esc_html_e( 'Default', 'jobus' ); ?>
+                </option>
+                <option value="orderby=date&order=desc" <?php echo esc_attr( $selected_new_to_old ) ?>>
+                    <?php esc_html_e( 'Newest to Oldest', 'jobus' ); ?>
+                </option>
+                <option value="orderby=date&order=asc" <?php echo esc_attr( $selected_old_to_new ) ?>>
+                    <?php esc_html_e( 'Oldest to Newest', 'jobus' ); ?>
+                </option>
+                <option value="orderby=title&order=asc" <?php echo esc_attr( $selected_title_asc ) ?>>
+                    <?php esc_html_e( 'Title Ascending ', 'jobus' ); ?>
+                </option>
+                <option value="orderby=title&order=desc" <?php echo esc_attr( $selected_title_desc ) ?>>
+                    <?php esc_html_e( 'Title Descending', 'jobus' ); ?>
+                </option>
+            </select>
+        </form>
     </div>
 
     <a href="<?php echo esc_url( $list_view_url ); ?>"
@@ -85,4 +70,3 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
     </a>
 
 </div>
-

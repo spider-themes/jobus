@@ -18,32 +18,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $found_posts = $result_count->found_posts;
+$formatted_count = number_format_i18n( $found_posts );
 
 // Dynamic strings text based on post-type
-switch ( $post_type ) {
-	case 'jobus_job':
-		$singular = esc_html__( 'job found', 'jobus' );
-		$plural   = esc_html__( 'jobs found', 'jobus' );
-		break;
-        case 'jobus_candidate':
-		$singular = esc_html__( 'candidate found', 'jobus' );
-		$plural   = esc_html__( 'candidates found', 'jobus' );
-		break;
-	case 'jobus_company':
-		$singular = esc_html__( 'company found', 'jobus' );
-		$plural   = esc_html__( 'companies found', 'jobus' );
-		break;
-	default:
-		$singular = esc_html__( 'item found', 'jobus' );
-		$plural   = esc_html__( 'items found', 'jobus' );
-		break;
-}
+$message = match ( $post_type ) {
+	'jobus_job' => (
+		// translators: %s: number of jobs found
+	    sprintf( _n( '%s job found', '%s jobs found', $found_posts, 'jobus' ), $formatted_count )
+	),
+	'jobus_candidate' => (
+		// translators: %s: number of candidates found
+	    sprintf( _n( '%s candidate found', '%s candidates found', $found_posts, 'jobus' ), $formatted_count )
+	),
+	'jobus_company' => (
+		// translators: %s: number of companies found
+	    sprintf( _n( '%s company found', '%s companies found', $found_posts, 'jobus' ), $formatted_count )
+	),
+	default => (
+		// translators: %s: number of items found
+	    sprintf( _n( '%s item found', '%s items found', $found_posts, 'jobus' ), $formatted_count )
+	),
+};
 ?>
 <div class="total-job-found">
 	<?php esc_html_e( 'All', 'jobus' ); ?>
     <span class="fw-500"><?php echo esc_html( $found_posts ); ?></span>
-	<?php
-	/* translators: %s: number of items found */
-	echo esc_html( sprintf( _n( $singular, $plural, $found_posts, 'jobus' ), $found_posts ) );
-	?>
+	<?php echo esc_html( $message ); ?>
 </div>

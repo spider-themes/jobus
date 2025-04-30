@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="accordion-box list-style">
 	<?php
-	while ( $job_post->have_posts() ) {
-		$job_post->the_post();
+	while ( $job_query->have_posts() ) {
+		$job_query->the_post();
 		?>
 		<div class="job-list-one style-two position-relative border-style mb-20">
 			<div class="row justify-content-between align-items-center">

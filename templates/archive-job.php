@@ -171,33 +171,36 @@ if ( $search_type == 'company_search' && $company_ids ) {
 	$args['post__in'] = $company_ids;
 }
 
-$job_post = new \WP_Query( $args );
-
-$job_archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
+$job_query = new \WP_Query( $args );
 
 // Check if the view parameter is set in the URL
 $current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
 
 // Pagination
-$pagination_query = $job_post;
+$pagination_query = $job_query;
 $pagination_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
 $pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="ms-2" />';
 
 // Result Count
 $post_type = 'jobus_job';
-$result_count = $job_post;
+$result_count = $job_query;
+
+//=== Sort By
+$archive_url = get_post_type_archive_link( 'jobus_job' );
 
 //========================= Select Layout ========================//
-if ( $job_archive_layout == '1' ) {
+$archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
+if ( $archive_layout == '1' ) {
 	include ('contents-job/job-archive-classic.php');
-} elseif ( $job_archive_layout == '2' ) {
+} elseif ( $archive_layout == '2' ) {
 	include ('contents-job/job-archive-topbar.php');
-} elseif ( $job_archive_layout == '3' ) {
+} elseif ( $archive_layout == '3' ) {
 	include ('contents-job/job-archive-popup.php');
 }
 
 get_footer();
 
-if ( $job_archive_layout == '3' ) {
+//Sidebar Popup
+if ( $archive_layout == '3' ) {
 	jobus_get_template_part( 'contents-job/sidebar-popup-filters' );
 }
