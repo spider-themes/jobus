@@ -86,7 +86,7 @@ $pagination_next  = '<i class="bi bi-chevron-right"></i>';
                 </div>
 
                 <?php
-                // Post-Grid Layout
+                // Post-list Layout
                 include( 'contents-candidate/contents/content-list-5-col.php' );
 
                 // Pagination

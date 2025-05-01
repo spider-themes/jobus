@@ -41,11 +41,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 		public $plugin_path;
 
 		/**
-		 * Initializes a singleton instances
+		 * Initializes a singleton instance
 		 *
 		 * @return false|Jobus
 		 */
-		public static function init(): bool|Jobus {
+		public static function init() {
 			static $instance = false;
 			if ( ! $instance ) {
 				$instance = new self();
@@ -92,7 +92,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			// Frontend UI
 			require_once __DIR__ . '/includes/Frontend/Assets.php';
-			require_once __DIR__ . '/includes/Frontend/Frontend.php';
 			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 
@@ -108,7 +107,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			//Elementor & Blocks
 			require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-
 			require_once __DIR__ . '/Blocks.php';
 		}
 
@@ -135,7 +133,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			// Frontend UI
 			new Jobus\includes\Frontend\Assets();
-			new Jobus\includes\Frontend\Frontend();
 			new Jobus\includes\Frontend\Shortcode();
 			new Jobus\includes\Frontend\Template_Loader();
 
@@ -194,7 +191,7 @@ if ( ! function_exists( 'jobus' ) ) {
 	 *
 	 * Main instance of jobus
 	 */
-	function jobus(): bool|Jobus {
+	function jobus() {
 		return Jobus::init();
 	}
 
