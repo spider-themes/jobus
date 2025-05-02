@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $paged             = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-$selected_order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
-$selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'desc';
 
 $meta_args      = [ 'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_job', '', jobus_all_search_meta() ) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_job', 'jobus_job_cat', jobus_search_terms( 'jobus_job_cat' ) ) ];
@@ -32,8 +30,8 @@ $args = array(
 	'post_status'    => 'publish',
 	'posts_per_page' => jobus_opt( 'job_posts_per_page' ),
 	'paged'          => $paged,
-	'orderby'        => $selected_order_by,
-	'order'          => $selected_order
+	'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
+	'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' )
 );
 
 if ( ! empty( get_query_var( 's' ) ) ) {
@@ -41,9 +39,9 @@ if ( ! empty( get_query_var( 's' ) ) ) {
 }
 
 // Handle Taxonomy Queries
-$job_cats      = ! empty( $_GET['jobus_job_cat'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_cat'] ) ) : '';
-$job_locations = ! empty( $_GET['jobus_job_location'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_location'] ) ) : '';
-$job_tags      = ! empty( $_GET['jobus_job_tag'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_job_tag'] ) ) : '';
+$job_cats      = jobus_get_sanitized_query_param( 'jobus_job_cat', '', 'jobus_sort_filter' );
+$job_locations = jobus_get_sanitized_query_param( 'jobus_job_location', '', 'jobus_sort_filter' );
+$job_tags      = jobus_get_sanitized_query_param( 'jobus_job_tag', '', 'jobus_sort_filter' );
 
 $args['tax_query'] = array(
 	'relation' => 'OR',
@@ -165,16 +163,18 @@ if ( isset( $result_ids ) ) {
 	$args['post__in'] = array_map( 'absint', $result_ids );;
 }
 
-$search_type = ! empty( $_GET['search_type'] ) ? sanitize_text_field( wp_unslash( $_GET['search_type'] ) ) : '';
-$company_ids = ! empty( $_GET['company_ids'] ) ? array_map( 'absint', explode( ',', sanitize_text_field( wp_unslash( $_GET['company_ids'] ) ) ) ) : [];
-if ( $search_type == 'company_search' && $company_ids ) {
+// Sanitize and verify
+$search_type = jobus_get_sanitized_query_param( 'search_type', '', 'jobus_sort_filter' );
+$company_ids_raw = jobus_get_sanitized_query_param( 'company_ids', '', 'jobus_sort_filter' );
+$company_ids = ! empty( $company_ids_raw ) ? array_map( 'absint', explode( ',', $company_ids_raw ) ) : [];
+if ( $search_type === 'company_search' && ! empty( $company_ids ) ) {
 	$args['post__in'] = $company_ids;
 }
 
 $job_query = new \WP_Query( $args );
 
 // Check if the view parameter is set in the URL
-$current_view = !empty($_GET['view']) ? sanitize_text_field( wp_unslash($_GET['view']) ) : 'list';
+$current_view = jobus_get_sanitized_query_param( 'view', 'grid' );
 
 // Pagination
 $pagination_query = $job_query;

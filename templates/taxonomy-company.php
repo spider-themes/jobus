@@ -17,16 +17,12 @@ get_header();
 $current_company_cat = get_term_by('slug', get_query_var('jobus_company_cat'), 'jobus_company_cat');
 $current_company_location = get_term_by('slug', get_query_var('jobus_company_location'), 'jobus_company_location');
 
-// These parameters are used to determine the sorting order of company posts
-$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
-$selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
-
 $args = array(
     'post_type'      => 'jobus_company',
     'post_status'    => 'publish',
     'posts_per_page' => jobus_opt('company_posts_per_page'),
-    'orderby'        => $selected_order_by,
-    'order'          => $selected_order,
+    'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
+    'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' )
 );
 
 // Taxonomy query

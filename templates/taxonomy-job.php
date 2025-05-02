@@ -2,59 +2,55 @@
 /**
  * The template for displaying archive pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package jobus
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
 get_header();
 
 // Get the current job category and job tag
-$current_job_cat = get_term_by('slug', get_query_var('jobus_job_cat'), 'jobus_job_cat');
-$current_job_location = get_term_by('slug', get_query_var('jobus_job_location'), 'jobus_job_location');
-$current_job_tag = get_term_by('slug', get_query_var('jobus_job_tag'), 'jobus_job_tag');
-
-// These parameters are used to determine the sorting order of job posts
-$selected_order_by = !empty($_GET['orderby']) ? sanitize_text_field( wp_unslash($_GET['orderby']) ) : 'date';
-$selected_order = !empty($_GET['order']) ? sanitize_text_field( wp_unslash($_GET['order']) ) : 'desc';
+$current_job_cat      = get_term_by( 'slug', get_query_var( 'jobus_job_cat' ), 'jobus_job_cat' );
+$current_job_location = get_term_by( 'slug', get_query_var( 'jobus_job_location' ), 'jobus_job_location' );
+$current_job_tag      = get_term_by( 'slug', get_query_var( 'jobus_job_tag' ), 'jobus_job_tag' );
 
 $args = array(
-    'post_type'      => 'jobus_job',
-    'post_status'    => 'publish',
-    'posts_per_page' => jobus_opt('job_posts_per_page'),
-    'orderby'        => $selected_order_by,
-    'order'          => $selected_order,
+	'post_type'      => 'jobus_job',
+	'post_status'    => 'publish',
+	'posts_per_page' => jobus_opt( 'job_posts_per_page' ),
+	'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
+	'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' )
 );
 
 if ( $current_job_cat || $current_job_location || $current_job_tag ) {
-    $args['tax_query'] = array(
-        'relation' => 'OR',
-        array(
-            'taxonomy' => 'jobus_job_cat',
-            'field'    => 'slug',
-            'terms'    => $current_job_cat,
-        ),
-        array(
-            'taxonomy' => 'jobus_job_location',
-            'field'    => 'slug',
-            'terms'    => $current_job_location,
-        ),
-        array(
-            'taxonomy' => 'jobus_job_tag',
-            'field'    => 'slug',
-            'terms'    => $current_job_tag,
-        ),
-    );
+	$args['tax_query'] = array(
+		'relation' => 'OR',
+		array(
+			'taxonomy' => 'jobus_job_cat',
+			'field'    => 'slug',
+			'terms'    => $current_job_cat,
+		),
+		array(
+			'taxonomy' => 'jobus_job_location',
+			'field'    => 'slug',
+			'terms'    => $current_job_location,
+		),
+		array(
+			'taxonomy' => 'jobus_job_tag',
+			'field'    => 'slug',
+			'terms'    => $current_job_tag,
+		),
+	);
 }
 
-$job_query = new \WP_Query($args);
+$job_query = new \WP_Query( $args );
 
 // Result Count
-$post_type = 'jobus_job';
+$post_type    = 'jobus_job';
 $result_count = $job_query;
 
 //=== Sort By
@@ -62,8 +58,10 @@ $archive_url = get_post_type_archive_link( 'jobus_job' );
 
 // Pagination
 $pagination_query = $job_query;
-$pagination_prev = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />' . esc_html__( 'Prev', 'jobus' );
-$pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="ms-2" />';
+$pagination_prev  = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />'
+                    . esc_html__( 'Prev', 'jobus' );
+$pagination_next  = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' )
+                    . '" class="ms-2" />';
 ?>
 <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
     <div class="container">

@@ -18,16 +18,12 @@ $current_candidate_cat   = get_term_by( 'slug', get_query_var( 'jobus_candidate_
 $current_candidate_loc   = get_term_by( 'slug', get_query_var( 'jobus_candidate_location' ), 'jobus_candidate_location' );
 $current_candidate_skill = get_term_by( 'slug', get_query_var( 'jobus_candidate_skill' ), 'jobus_candidate_skill' );
 
-// These parameters are used to determine the sorting order of job posts
-$selected_order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
-$selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'desc';
-
 $args = array(
 	'post_type'      => 'jobus_candidate',
 	'post_status'    => 'publish',
 	'posts_per_page' => jobus_opt( 'candidate_posts_per_page' ),
-	'orderby'        => $selected_order_by,
-	'order'          => $selected_order,
+	'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
+	'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' )
 );
 
 // Taxonomy query
@@ -53,9 +49,6 @@ if ( $current_candidate_cat || $current_candidate_loc || $current_candidate_skil
 }
 
 $candidate_query = new \WP_Query( $args );
-
-// Check if the view parameter is set in the URL
-$current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
 
 // Result Count
 $post_type    = 'jobus_candidate';

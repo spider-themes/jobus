@@ -18,15 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = esc_url( add_query_arg( 'view', 'list', $archive_url ) );
-$grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
+$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
+$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
 
 ?>
 <div class="d-flex align-items-center">
     <div class="short-filter d-flex align-items-center">
 		<?php
-		$order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : '';
-		$order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : '';
+		$order_by = jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' );
+		$order    = jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' );
 		$default  = empty( $order_by ) ? 'selected' : '';
 
 		$selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';
@@ -75,5 +75,4 @@ $grid_view_url = esc_url( add_query_arg( 'view', 'grid', $archive_url ) );
         <?php
 	}
 	?>
-
 </div>

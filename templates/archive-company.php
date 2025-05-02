@@ -13,9 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $paged             = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-$selected_order_by = ! empty( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
-$selected_order    = ! empty( $_GET['order'] ) ? sanitize_text_field( wp_unslash( $_GET['order'] ) ) : 'desc';
-
 $meta_args      = [ 'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_company', '', jobus_all_search_meta( 'jobus_meta_company_options', 'company_sidebar_widgets' ) ) ];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_company', 'jobus_company_cat', jobus_search_terms( 'jobus_company_cat' ) ) ];
 $taxonomy_args2 = [
@@ -33,8 +30,8 @@ $args = [
 	'post_status'    => 'publish',
 	'posts_per_page' => jobus_opt( 'company_posts_per_page' ),
 	'paged'          => $paged,
-	'orderby'        => $selected_order_by,
-	'order'          => $selected_order,
+	'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
+	'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' )
 ];
 
 if ( ! empty( get_query_var( 's' ) ) ) {
@@ -42,8 +39,8 @@ if ( ! empty( get_query_var( 's' ) ) ) {
 }
 
 // Handle Taxonomy Queries
-$company_cats      = ! empty( $_GET['jobus_company_cat'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_company_cat'] ) ) : '';
-$company_locations = ! empty( $_GET['jobus_company_location'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_company_location'] ) ) : '';
+$company_cats      = jobus_get_sanitized_query_param( 'jobus_company_cat', '', 'jobus_sort_filter' );
+$company_locations = jobus_get_sanitized_query_param( 'jobus_company_location', '', 'jobus_sort_filter' );
 
 $args['tax_query'] = array(
 	'relation' => 'OR',
@@ -72,7 +69,7 @@ if ( ! empty( $result_ids ) ) {
 $company_query  = new WP_Query( $args );
 
 // Check if the view parameter is set in the URL
-$current_view = ! empty( $_GET['view'] ) ? sanitize_text_field( wp_unslash( $_GET['view'] ) ) : 'grid';
+$current_view = jobus_get_sanitized_query_param( 'view', 'grid' );
 
 //=== Pagination
 $pagination_query = $company_query;

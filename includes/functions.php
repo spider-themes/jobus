@@ -833,3 +833,40 @@ if ( ! function_exists( 'jobus_rtl' ) ) {
 		return is_rtl() ? 'true' : 'false';
 	}
 }
+
+
+/**
+ * Retrieve a sanitized query parameter with optional nonce verification.
+ *
+ * Use for filtering, sorting, or paginating query parameters securely.
+ *
+ * @param string $param         The query parameter key.
+ * @param mixed  $default       Fallback value if not set or nonce fails.
+ * @param string $nonce_action  Optional nonce action slug (for secure checks).
+ *
+ * @return mixed Sanitized parameter value or default.
+ */
+function jobus_get_sanitized_query_param( string $param, $default = '', string $nonce_action = '' ) {
+
+	if ( ! isset( $_GET[ $param ] ) ) {
+		return $default;
+	}
+
+	$value = sanitize_text_field( wp_unslash( $_GET[ $param ] ) );
+
+	// If nonce validation is requested
+	if ( $nonce_action ) {
+		$nonce = sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ?? '' ) );
+
+		// No nonce? Allow fallback unless strict security is needed
+		if ( empty( $nonce ) ) {
+			return $value;
+		}
+
+		if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+			return $default;
+		}
+	}
+
+	return $value ? $value : $default;
+}
