@@ -2,9 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$post_type   = ! empty( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
-$jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
-
+$post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="col-xl-3 col-lg-4">
     <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
@@ -42,9 +40,10 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
 
 						$company_specifications = jobus_get_specs_options( 'company_specifications' );
 						$company_specifications = $company_specifications[ $widget_name ] ?? '';
+						$widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
 
 						if ( $post_type == 'jobus_company' ) {
-							if ( ! empty ( $_GET[ $widget_name ] ) ) {
+							if ( ! empty ($widget_param) ) {
 								$is_collapsed_show = 'collapse show';
 								$area_expanded     = 'true';
 								$is_collapsed      = '';

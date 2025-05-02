@@ -18,16 +18,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( isset( $taxonomy ) && ! empty( $taxonomy ) ) {
-	$job_taxonomy = ! empty( $_GET[ $taxonomy ] ) ? array_map( 'sanitize_text_field', wp_unslash( $_GET[ $taxonomy ] ) ) : [];
+if ( !empty($taxonomy) ) {
+	// Verify nonce for taxonomy filtering
+	$nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field(wp_unslash($_GET['jobus_nonce'])) : '';
+	if ( !wp_verify_nonce($nonce, 'jobus_search_filter') ) {
+		$taxonomy_arr = [];
+	} else {
+		// Sanitize and process taxonomy data
+		$taxonomy_arr = !empty($_GET[$taxonomy]) ? array_map('sanitize_text_field', wp_unslash($_GET[$taxonomy])) : [];
+	}
 }
+
 
 // Initialize variables with default values
 $is_collapsed_show = 'collapse';
 $area_expanded     = 'false';
 $is_collapsed      = ' collapsed';
 
-if ( ! empty( $job_taxonomy ) ) {
+if ( ! empty( $taxonomy_arr  ) ) {
 	$is_collapsed_show = 'collapse show';
 	$area_expanded     = 'true';
 	$is_collapsed      = '';

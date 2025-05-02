@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Build the URL for list and grid views
 $list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
 $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
-
 ?>
 <div class="d-flex align-items-center">
     <div class="short-filter d-flex align-items-center">

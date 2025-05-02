@@ -2,7 +2,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
 
 ?>
 <div class="modal popUpModal login_from fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
