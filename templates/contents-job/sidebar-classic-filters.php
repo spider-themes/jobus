@@ -4,9 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $meta        = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
-$post_type   = ! empty( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
-$jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
-
+$post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="col-xl-3 col-lg-4">
 
@@ -46,9 +44,10 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
 
                         $job_specifications = jobus_get_specs_options();
                         $job_specifications = $job_specifications[ $widget_name ] ?? '';
+	                    $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
 
                         if ( $post_type == 'jobus_job' ) {
-                            if ( ! empty ( $_GET[ $widget_name ] ) ) {
+                            if ( ! empty ( $widget_param ) ) {
                                 $is_collapsed_show = 'collapse show';
                                 $area_expanded     = 'true';
                                 $is_collapsed      = '';
