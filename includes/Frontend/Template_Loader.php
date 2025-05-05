@@ -29,7 +29,7 @@ class Template_Loader {
 	 */
 	public function template_loader( string $template ): string {
 
-		if ( is_tax( 'jobus_job_cat' ) || is_tax( 'jobus_job_tag' ) ) {
+		if ( is_tax( 'jobus_job_cat' ) || is_tax( 'jobus_job_tag' ) || is_tax( 'jobus_job_location' ) ) {
 			return $this->locate_template( 'taxonomy-job', $template );
 		}
 
@@ -41,7 +41,7 @@ class Template_Loader {
 			return $this->locate_template( 'single-job', $template );
 		}
 
-		if ( is_tax( 'jobus_company_cat' ) ) {
+		if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location') ) {
 			return $this->locate_template( 'taxonomy-company', $template );
 		}
 

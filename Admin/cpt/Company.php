@@ -70,7 +70,10 @@ class Company {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'jobus_company' ),
+			'rewrite'            => [
+				'slug'       => 'company',
+				'with_front' => false,
+			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => true,
@@ -93,6 +96,10 @@ class Company {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'company-category',
+				'with_front' => false,
+			),
 			'labels'            => [
 				'name' => esc_html__( 'Categories', 'jobus' ),
 			]
@@ -105,6 +112,10 @@ class Company {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'company-location',
+				'with_front' => false,
+			),
 			'labels'            => [
 				'name' => esc_html__( 'Location', 'jobus' ),
 			]

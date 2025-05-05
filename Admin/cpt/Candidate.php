@@ -62,7 +62,10 @@ class Candidate {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'jobus_candidate' ),
+			'rewrite'            => [
+				'slug'       => 'candidate',
+				'with_front' => false,
+			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => true,
@@ -84,6 +87,10 @@ class Candidate {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'candidate-category',
+				'with_front' => false,
+			),
 			'labels'            => [
 				'name' => esc_html__( 'Categories', 'jobus' ),
 			]
@@ -97,6 +104,10 @@ class Candidate {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'candidate-location',
+				'with_front' => false,
+			),
 			'labels'            => array(
 				'name'         => esc_html__( 'Location', 'jobus' ),
 				'add_new_item' => esc_html__( 'Add New Location', 'jobus' ),
@@ -111,6 +122,10 @@ class Candidate {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'candidate-skill',
+				'with_front' => false,
+			),
 			'labels'            => array(
 				'name'         => esc_html__( 'Skills', 'jobus' ),
 				'add_new_item' => esc_html__( 'Add New Skill', 'jobus' ),

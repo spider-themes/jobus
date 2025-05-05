@@ -64,7 +64,10 @@ class Job {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'jobus_job' ),
+			'rewrite'            => [
+				'slug'       => 'job',
+				'with_front' => false,
+			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => true,
@@ -74,8 +77,7 @@ class Job {
 			'supports'           => $supports,
 			'yarpp_support'      => true,
 			'menu_icon'          => 'dashicons-money',
-			'show_admin_column'  => true,
-
+			'show_admin_column'  => true
 		);
 
 		register_post_type( 'jobus_job', $args ); // Register the posttype `job`
@@ -89,6 +91,10 @@ class Job {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'job-category',
+				'with_front' => false,
+			),
 			'labels'            => array(
 				'name' => esc_html__( 'Categories', 'jobus' ),
 			)
@@ -102,6 +108,10 @@ class Job {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'job-location',
+				'with_front' => false,
+			),
 			'labels'            => array(
 				'name' => esc_html__( 'Location', 'jobus' ),
 			)
@@ -115,6 +125,10 @@ class Job {
 			'show_admin_column' => true,
 			'show_in_nav_menus' => true,
 			'show_in_rest'      => true,
+			'rewrite'           => array(
+				'slug'       => 'job-tag',
+				'with_front' => false,
+			),
 			'labels'            => array(
 				'name' => esc_html__( 'Tags', 'jobus' ),
 			)
