@@ -115,13 +115,13 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 'post_status' => 'publish',
                                 'meta_query' => array(
                                     array(
-                                        'key' => 'job_applied_for_id', // Meta key for the job ID in the application post
+                                        'key' => 'job_applied_for_id', // Meta-key for the job ID in the application post
                                         'value' => $job_id,
                                         'compare' => '='
                                     ),
                                     array(
                                         'key' => 'candidate_email', // Meta key for user email
-                                        'value' => $user->user_email, // Compare with logged-in user's email
+                                        'value' => $user->user_email, // Compare with a logged-in user's email
                                         'compare' => '='
                                     )
                                 )

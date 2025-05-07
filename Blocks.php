@@ -20,7 +20,7 @@ class Blocks {
 
 		add_action( 'init', [ $this, 'blocks_init' ] );
 
-		// Register block categories based on WordPress version
+		// Register block categories based on the WordPress version
 		if ( version_compare( $GLOBALS['wp_version'], '5.7', '<' ) ) {
 			add_filter( 'block_categories', [ $this, 'register_block_category' ], 10, 2 );
 		} else {
@@ -38,7 +38,7 @@ class Blocks {
 	 *
 	 * @return bool|Blocks Instance of the Blocks class.
 	 */
-	public static function init(): bool|Blocks {
+	public static function init() {
 		static $instance = false;
 		if ( ! $instance ) {
 			$instance = new self();
@@ -70,7 +70,7 @@ class Blocks {
 		$this->register_block( 'shortcode-company-archive' );
 		$this->register_block( 'shortcode-candidate-archive' );
 
-		// Register block with a render callback
+		// Register a block with a render callback
 		$this->register_block( 'register-form', array(
 			'render_callback' => [ $this, 'register_form_block_render' ],
 		) );
@@ -135,13 +135,7 @@ class Blocks {
 		// Script's
 		wp_enqueue_script( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.js' ), array( 'jquery' ), '5.1.3', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
-		wp_enqueue_script(
-			'jobus-block',
-			esc_url( JOBUS_JS . '/block-frontend.js' ),
-			[ 'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ],
-			filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ),
-			[ 'strategy' => 'defer' ]
-		);
+		wp_enqueue_script( 'jobus-block', esc_url( JOBUS_JS . '/block-frontend.js' ), [ 'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), [ 'strategy' => 'defer' ] );
 	}
 
 }

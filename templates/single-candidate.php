@@ -15,7 +15,7 @@ $portfolio_ids = explode(',', $portfolio);
 
 $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
 
-$candidate_single_layout_page = $meta['candidate_profile_layout'] ?? ''; // Individual page specific layout
+$candidate_single_layout_page = $meta['candidate_profile_layout'] ?? ''; // Individual page-specific layout
 $candidate_single_layout_opt = jobus_opt('candidate_profile_layout', '1'); // Default layout for the entire website
 
 $candidate_single_layout = $candidate_single_layout_page ?? $candidate_single_layout_opt;

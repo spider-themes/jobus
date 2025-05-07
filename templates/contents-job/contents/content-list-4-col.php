@@ -41,20 +41,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <!--job archive 1 location-->
-					<?php
-					$locations = get_the_terms( get_the_ID(), 'jobus_job_location' );
-					if ( ! empty( $locations ) ) { ?>
-                        <div class="job-location">
-							<?php
-							foreach ( $locations as $location ) {
-								echo '<a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( $location->name ) . '</a>';
-							}
-							?>
-                        </div>
-						<?php
-					}
-					?>
+                    <div class="job-location">
+                        <a href="<?php echo esc_url( jobus_get_first_taxonomy_link('jobus_job_location') ) ?>">
+			                <?php echo esc_html( jobus_get_first_taxonomy_name('jobus_job_location') ); ?>
+                        </a>
+                    </div>
                     <div class="job-salary">
 						<?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) : ?>
                             <span class="fw-500 text-dark">

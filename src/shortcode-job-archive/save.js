@@ -1,7 +1,6 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import {Fragment} from "react";
 
-
 function Save( props ) {
 
     const { job_layout } = props.attributes;
@@ -16,6 +15,5 @@ function Save( props ) {
         </Fragment>
     );
 }
-
 
 export default Save;

@@ -12,10 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$paged             = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-$meta_args      = [ 'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_candidate', '', jobus_all_search_meta( 'jobus_meta_candidate_options', 'candidate_sidebar_widgets' ) ) ];
+$paged          = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+$meta_args      = [
+	'args' => jobus_meta_taxo_arguments( 'meta', 'jobus_candidate', '', jobus_all_search_meta( 'jobus_meta_candidate_options', 'candidate_sidebar_widgets' ) )
+];
 $taxonomy_args1 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_cat', jobus_search_terms( 'jobus_candidate_cat' ) ) ];
-$taxonomy_args2 = [ 'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms( 'jobus_candidate_location' ) ) ];
+$taxonomy_args2 = [
+	'args' => jobus_meta_taxo_arguments( 'taxonomy', 'jobus_candidate', 'jobus_candidate_location', jobus_search_terms( 'jobus_candidate_location' ) )
+];
 
 if ( ! empty ( $meta_args['args']['meta_query'] ) ) {
 	$result_ids = jobus_merge_queries_and_get_ids( $meta_args, $taxonomy_args1, $taxonomy_args2 );
@@ -37,8 +41,8 @@ if ( ! empty( get_query_var( 's' ) ) ) {
 }
 
 // Handle Taxonomy Queries
-$candidate_cats        = jobus_get_sanitized_query_param( 'jobus_candidate_cat', '', 'jobus_sort_filter' );
-$candidate_locations   = jobus_get_sanitized_query_param( 'jobus_candidate_location', '', 'jobus_sort_filter' );
+$candidate_cats      = jobus_get_sanitized_query_param( 'jobus_candidate_cat', '', 'jobus_sort_filter' );
+$candidate_locations = jobus_get_sanitized_query_param( 'jobus_candidate_location', '', 'jobus_sort_filter' );
 
 $args['tax_query'] = array(
 	'relation' => 'OR',
@@ -152,32 +156,29 @@ if ( isset( $result_ids ) ) {
 }
 
 // Sanitize and verify
-$search_type = jobus_get_sanitized_query_param( 'search_type', '', 'jobus_sort_filter' );
+$search_type     = jobus_get_sanitized_query_param( 'search_type', '', 'jobus_sort_filter' );
 $company_ids_raw = jobus_get_sanitized_query_param( 'company_ids', '', 'jobus_sort_filter' );
-$company_ids = ! empty( $company_ids_raw ) ? array_map( 'absint', explode( ',', $company_ids_raw ) ) : [];
+$company_ids     = ! empty( $company_ids_raw ) ? array_map( 'absint', explode( ',', $company_ids_raw ) ) : [];
 if ( $search_type === 'company_search' && ! empty( $company_ids ) ) {
 	$args['post__in'] = $company_ids;
 }
 
-$candidate_query     = new WP_Query( $args );
+$candidate_query = new WP_Query( $args );
 
 // Check if the view parameter is set in the URL
 $current_view = jobus_get_sanitized_query_param( 'view', 'grid' );
 
 // Pagination
 $pagination_query = $candidate_query;
-$pagination_prev = '<i class="bi bi-chevron-left"></i>';
-$pagination_next = '<i class="bi bi-chevron-right"></i>';
+$pagination_prev  = '<i class="bi bi-chevron-left"></i>';
+$pagination_next  = '<i class="bi bi-chevron-right"></i>';
 
 // Result Count
-$post_type = 'jobus_candidate';
+$post_type    = 'jobus_candidate';
 $result_count = $candidate_query;
 
-//=== Sort By
-$archive_url = get_post_type_archive_link( 'jobus_candidate' );
-
 //============= Select Layout ==================//
-$archive_layout      = $archive_layout ?? jobus_opt( 'candidate_archive_layout' );
+$archive_layout = $jobus_candidate_archive_layout ?? jobus_opt( 'candidate_archive_layout' );
 if ( $archive_layout == '1' ) {
 	include 'contents-candidate/candidate-archive-classic.php';
 } elseif ( $archive_layout == '2' ) {

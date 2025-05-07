@@ -53,9 +53,6 @@ $pagination_next  = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBU
 $post_type    = 'jobus_company';
 $result_count = $company_query;
 
-//=== Sort By
-$archive_url = get_post_type_archive_link( 'jobus_company' );
-
 $archive_layout = $company_archive_layout ?? jobus_opt( 'company_archive_layout' );
 ?>
 <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">

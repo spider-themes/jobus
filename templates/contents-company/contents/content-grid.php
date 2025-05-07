@@ -30,13 +30,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php
 					$locations = get_the_terms( get_the_ID(), 'jobus_company_location' );
 					if ( ! empty( $locations ) ) { ?>
-                        <p class="text-center mb-auto text-capitalize">
+                        <div class="location">
 							<?php
 							foreach ( $locations as $location ) {
-								echo esc_html( $location->name );
+								?>
+                                <a href="<?php echo esc_url(get_term_link($location)) ?>">
+									<?php echo esc_html( $location->name ); ?>
+                                </a>
+								<?php
 							}
 							?>
-                        </p>
+                        </div>
 						<?php
 					}
 

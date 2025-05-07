@@ -54,9 +54,6 @@ $candidate_query = new \WP_Query( $args );
 $post_type    = 'jobus_candidate';
 $result_count = $candidate_query;
 
-//=== Sort By
-$archive_url = get_post_type_archive_link( 'jobus_candidate' );
-
 // Pagination
 $pagination_query = $candidate_query;
 $pagination_prev  = '<i class="bi bi-chevron-left"></i>';

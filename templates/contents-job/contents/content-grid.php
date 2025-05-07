@@ -44,20 +44,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					<?php endif; ?>
 					<div class="d-flex align-items-center justify-content-between mt-auto">
-						<?php
-						$locations = get_the_terms(get_the_ID(), 'jobus_job_location');
-						if (!empty($locations )) { ?>
-							<div class="job-location">
-								<?php
-								foreach ($locations as $location ) { ?>
-									<a href="<?php the_permalink() ?>"><?php echo esc_html($location->name) ?></a>
-									<?php
-								}
-								?>
-							</div>
-							<?php
-						}
-						?>
+                        <div class="job-location">
+                            <a href="<?php echo esc_url( jobus_get_first_taxonomy_link('jobus_job_location') ) ?>">
+								<?php echo esc_html( jobus_get_first_taxonomy_name('jobus_job_location') ); ?>
+                            </a>
+                        </div>
 						<a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
 							<?php esc_html_e('APPLY', 'jobus'); ?>
 						</a>

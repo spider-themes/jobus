@@ -174,7 +174,7 @@ if ( $search_type === 'company_search' && ! empty( $company_ids ) ) {
 $job_query = new \WP_Query( $args );
 
 // Check if the view parameter is set in the URL
-$current_view = jobus_get_sanitized_query_param( 'view', 'grid' );
+$current_view = jobus_get_sanitized_query_param( 'view', 'list' );
 
 // Pagination
 $pagination_query = $job_query;
@@ -185,11 +185,8 @@ $pagination_next = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS
 $post_type = 'jobus_job';
 $result_count = $job_query;
 
-//=== Sort By
-$archive_url = get_post_type_archive_link( 'jobus_job' );
-
 //========================= Select Layout ========================//
-$archive_layout = $job_archive_layout ?? jobus_opt( 'job_archive_layout' );
+$archive_layout = $jobus_job_archive_layout ?? jobus_opt( 'job_archive_layout' );
 if ( $archive_layout == '1' ) {
 	include ('contents-job/job-archive-classic.php');
 } elseif ( $archive_layout == '2' ) {

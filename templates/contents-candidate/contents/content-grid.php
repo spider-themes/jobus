@@ -59,9 +59,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						// Display the first 2 skills
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
-						echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center pt-30 sm-pt-20 pb-10">';
+						echo '<ul class="candidate-skills style-none d-flex flex-wrap align-items-center justify-content-center pt-30 sm-pt-20 pb-10">';
 						foreach ( $displayed_skills as $skill ) {
-							echo '<li class="text-capitalize">' . esc_html( $skill->name ) . '</li>';
+							echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
 
 						// Display the count of remaining skills
@@ -71,9 +71,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 					} else {
 						if ( ! empty( $skills ) ) {
 							// Display all skills
-							echo '<ul class="cadidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+							echo '<ul class="candidate-skills style-none d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
 							foreach ( $skills as $skill ) {
-								echo '<li class="text-capitalize">' . esc_html( $skill->name ) . '</li>';
+								echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 							}
 							echo '</ul>';
 						}
@@ -83,7 +83,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
 						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
 							?>
-
                             <div class="col-md-6">
                                 <div class="candidate-info mt-10">
                                     <span> <?php echo esc_html( jobus_meta_candidate_spec_name( 2 ) ); ?> </span>
@@ -94,18 +93,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </div>
 							<?php
 						}
-
-						$locations = get_the_terms( get_the_ID(), 'jobus_candidate_location' );
-						if ( ! empty( $locations ) ) { ?>
+						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
                             <div class="col-md-6">
                                 <div class="candidate-info mt-10">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
-									<?php
-									foreach ( $locations as $location ) { ?>
-                                        <div class="text-capitalize"><?php echo esc_html( $location->name ) ?></div>
-										<?php
-									}
-									?>
+                                    <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>" class="text-capitalize">
+										<?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ); ?>
+                                    </a>
                                 </div>
                             </div>
 							<?php

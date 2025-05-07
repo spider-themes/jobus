@@ -29,26 +29,34 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 </a>
                             </h5>
 							<?php
-							if ( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_1' ) ) { ?>
-                                <p class="text-capitalize">
-									<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_1' ) ) ?>
-                                </p>
+							$locations = get_the_terms( get_the_ID(), 'jobus_company_location' );
+							if ( ! empty( $locations ) ) { ?>
+                                <div class="location">
+									<?php
+									foreach ( $locations as $location ) {
+										?>
+                                        <a href="<?php echo esc_url(get_term_link($location)) ?>">
+											<?php echo esc_html( $location->name ); ?>
+                                        </a>
+										<?php
+									}
+									?>
+                                </div>
 								<?php
 							}
 							?>
                         </div>
                     </div>
                 </div>
-
-				<?php if ( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_2' ) ) : ?>
+				<?php if ( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_1' ) ) : ?>
                     <div class="col-xl-4 col-md-8">
                         <div class="d-flex align-items-center ps-xxl-5 lg-mt-20">
                             <div class="d-flex align-items-center">
                                 <div class="team-text text-capitalize">
 									<span class="text-md fw-500 text-dark d-block">
-										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_2' ) ) ?>
+										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_1' ) ) ?>
 									</span>
-									<?php echo esc_html( jobus_meta_company_spec_name( 2 ) ) ?>
+									<?php echo esc_html( jobus_meta_company_spec_name( 1 ) ) ?>
                                 </div>
                             </div>
                         </div>

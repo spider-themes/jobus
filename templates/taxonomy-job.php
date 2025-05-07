@@ -53,9 +53,6 @@ $job_query = new \WP_Query( $args );
 $post_type    = 'jobus_job';
 $result_count = $job_query;
 
-//=== Sort By
-$archive_url = get_post_type_archive_link( 'jobus_job' );
-
 // Pagination
 $pagination_query = $job_query;
 $pagination_prev  = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />'

@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					if ( $current_view == 'grid' ) {
 						include( 'contents/content-grid.php' );
 					} elseif ( $current_view == 'list' ) {
-						include( 'contents/content-list-5-col.php' );
+						include( 'contents/content-list.php' );
 					}
 
 					// Pagination

@@ -40,7 +40,7 @@ wp_enqueue_script('lightbox');
 
                             // Display the first 2 skills
                             $displayed_skills = array_slice($skills, 0, $max_skills);
-                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+                            echo '<ul class="candidate-skills style-none d-flex align-items-center">';
                                 foreach ($displayed_skills as $skill) {
                                 echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                 }
@@ -51,7 +51,7 @@ wp_enqueue_script('lightbox');
                                 echo '</ul>';
                             } else {
                             // Display all skills
-                            echo '<ul class="cadidate-skills style-none d-flex align-items-center">';
+                            echo '<ul class="candidate-skills style-none d-flex align-items-center">';
                                 foreach ($skills as $skill) {
                                 echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
                                 }

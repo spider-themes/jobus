@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Build the URL for list and grid views
-$list_view_url = esc_url(add_query_arg('view', 'list', $archive_url));
-$grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
+$list_view_url = add_query_arg( 'view', 'list' );
+$grid_view_url = add_query_arg( 'view', 'grid' );
 ?>
 <div class="d-flex align-items-center">
     <div class="short-filter d-flex align-items-center">
@@ -59,8 +59,18 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
     </div>
 
 	<?php
-	if ( is_post_type_archive( $post_type ) ) {
-        ?>
+	$excluded_taxonomies = [
+		'jobus_job_cat',
+		'jobus_job_location',
+		'jobus_job_tag',
+		'jobus_candidate_cat',
+		'jobus_candidate_location',
+		'jobus_candidate_skill',
+		'jobus_company_cat',
+		'jobus_company_location'
+	];
+	if ( ! is_tax( $excluded_taxonomies ) ) {
+		?>
         <a href="<?php echo esc_url( $list_view_url ); ?>"
            class="style-changer-btn rounded-circle tran3s ms-2 list-btn <?php echo esc_attr( $current_view === 'grid' ) ? ' active' : ''; ?>"
            title="<?php esc_attr_e( 'Active List', 'jobus' ); ?>">
@@ -71,7 +81,7 @@ $grid_view_url = esc_url(add_query_arg('view', 'grid', $archive_url));
            title="<?php esc_attr_e( 'Active Grid', 'jobus' ); ?>">
             <i class="bi bi-grid"></i>
         </a>
-        <?php
+		<?php
 	}
 	?>
 </div>

@@ -526,14 +526,6 @@ if ( class_exists( 'CSF' ) ) {
 				'type'       => 'select',
 				'title'      => esc_html__( 'Attribute 01', 'jobus' ),
 				'options'    => jobus_get_specs( 'company_specifications' ),
-				'dependency' => array( 'company_archive_attr_layout', '||', 'grid', 'list' ),
-			),
-
-			array(
-				'id'         => 'company_archive_meta_2',
-				'type'       => 'select',
-				'title'      => esc_html__( 'Attribute 02', 'jobus' ),
-				'options'    => jobus_get_specs( 'company_specifications' ),
 				'dependency' => array( 'company_archive_attr_layout', '==', 'list' ),
 			),
 		)
