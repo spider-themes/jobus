@@ -2,7 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
-namespace jobus\Gutenberg;
+namespace jobus;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.

@@ -66,8 +66,38 @@ if ( ! class_exists( 'Jobus' ) ) {
 			$this->define_constants(); // Define constants.
 			$this->core_includes(); //Include the required files.
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+
+			// Register the candidate menu for administrators only
+			add_action( 'init', [ $this, 'register_menu' ] );
+			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		}
 
+
+		/**
+		 * Load CSF files
+		 */
+		public function load_csf_files(): void {
+			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+			require_once __DIR__ . '/Admin/options/settings-options.php';
+			require_once __DIR__ . '/Admin/options/meta-options-job.php';
+			require_once __DIR__ . '/Admin/options/meta-options-company.php';
+			require_once __DIR__ . '/Admin/options/meta-options-candidate.php';
+			require_once __DIR__ . '/Admin/options/taxonomy.php';
+		}
+
+
+		/**
+		 * Registers navigation menus for the dashboard.
+		 *
+		 * This method registers a navigation menu with a specific location and description.
+		 *
+		 * @return void
+		 */
+		public function register_menu(): void {
+			register_nav_menus( [
+				'candidate_menu' => esc_html__( 'Candidate Menu', 'jobus' ),
+			] );
+		}
 
 		/**
 		 * Include Files
@@ -75,17 +105,10 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 * Load core files required to run the plugin.
 		 */
 		public function core_includes(): void {
+
 			// Functions
 			require_once __DIR__ . '/includes/functions.php';
 			require_once __DIR__ . '/includes/filters.php';
-
-			//Options
-			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-			require_once __DIR__ . '/Admin/options/settings-options.php';
-			require_once __DIR__ . '/Admin/options/meta-options-job.php';
-			require_once __DIR__ . '/Admin/options/meta-options-company.php';
-			require_once __DIR__ . '/Admin/options/meta-options-candidate.php';
-			require_once __DIR__ . '/Admin/options/taxonomy.php';
 
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
@@ -94,6 +117,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/includes/Frontend/Assets.php';
 			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
+			require_once __DIR__ . '/includes/Frontend/Dashboard.php';
 
 			//Admin UI
 			require_once __DIR__ . '/Admin/User.php';
@@ -132,13 +156,14 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\Admin\cpt\Company();
 
 			// Frontend UI
-			new Jobus\includes\Frontend\Assets();
-			new Jobus\includes\Frontend\Shortcode();
-			new Jobus\includes\Frontend\Template_Loader();
+			new \jobus\includes\Frontend\Assets();
+			new \jobus\includes\Frontend\Shortcode();
+			new \jobus\includes\Frontend\Template_Loader();
+			new \jobus\includes\Frontend\Dashboard();
 
 			//Elementor & Blocks
-			new Jobus\Gutenberg\Blocks();
-			new Jobus\includes\Elementor\Register_Widgets();
+			new \jobus\Blocks();
+			new \jobus\includes\Elementor\Register_Widgets();
 		}
 
 		/**
