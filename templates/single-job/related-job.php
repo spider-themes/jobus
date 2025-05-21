@@ -56,20 +56,19 @@ $related_jobs = new WP_Query($args);
                                 </div>
                             <?php endif; ?>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
-                                <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_3') ) : ?>
-                                    <div class="job-location">
-                                        <a href="<?php the_permalink(); ?>">
-                                            <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_3')) ?>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+                                <div class="job-location">
+                                    <a href="<?php echo jobus_get_first_taxonomy_link('jobus_job_location') ?>">
+                                        <?php echo jobus_get_first_taxonomy_name('jobus_job_location') ?>
+                                    </a>
+                                </div>
+
                                 <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
                                     <?php esc_html_e('APPLY', 'jobus'); ?>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <?php
+                <?php
                 endwhile;
                 wp_reset_postdata();
                 ?>
