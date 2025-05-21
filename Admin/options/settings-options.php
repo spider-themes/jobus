@@ -339,7 +339,7 @@ if ( class_exists( 'CSF' ) ) {
 				'subtitle' => esc_html__( 'Select the preferred layout for your job details page across the entire website.', 'jobus' ),
 				'options'  => array(
 					'1' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
-					'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
+					'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-2.png' ),
 				),
 				'default'  => '1'
 			),
@@ -371,13 +371,6 @@ if ( class_exists( 'CSF' ) ) {
 				'id'      => 'job_related_post_meta_2',
 				'type'    => 'select',
 				'title'   => esc_html__( 'Attribute 02', 'jobus' ),
-				'options' => jobus_get_specs(),
-			),
-
-			array(
-				'id'      => 'job_related_post_meta_3',
-				'type'    => 'select',
-				'title'   => esc_html__( 'Attribute 03', 'jobus' ),
 				'options' => jobus_get_specs(),
 			),
 		)

@@ -797,7 +797,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
   @include transition(0.2s);
 
   &:hover {
@@ -805,8 +805,8 @@
   }
 
   .logo {
-    height: 45px;
-    width: fit-content;
+    height: auto;
+    max-width: 45px;
 
     img {
       max-height: 100%;
