@@ -83,6 +83,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/Admin/options/meta-options-company.php';
 			require_once __DIR__ . '/Admin/options/meta-options-candidate.php';
 			require_once __DIR__ . '/Admin/options/taxonomy.php';
+			require_once __DIR__ . '/Admin/options/meta-nav_menu.php';
 		}
 
 
@@ -95,7 +96,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function register_menu(): void {
 			register_nav_menus( [
-				'candidate_menu' => esc_html__( 'Candidate Menu', 'jobus' ),
+				'jobus_candidate_menu' => esc_html__( 'Candidate Menu', 'jobus' ),
 			] );
 		}
 

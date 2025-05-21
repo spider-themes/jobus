@@ -49,11 +49,29 @@ class Nav_Walker extends \Walker_Nav_Menu {
 		$active_class = in_array( 'current-menu-item', $classes ) || in_array( 'current_page_item', $classes ) ? ' active' : '';
 		$attributes   .= ' class="d-flex w-100 align-items-center' . $active_class . '"';
 
+		// Fetch custom meta fields for this menu item
+		$regular_img  = get_post_meta( $data_object->ID, 'jobus_menu_regular_image', true );
+		$active_img   = get_post_meta( $data_object->ID, 'jobus_menu_active_image', true );
+
+		// Determine if this menu item is active
+		$is_active = in_array( 'current-menu-item', $classes ) || in_array( 'current_page_item', $classes );
 
 		// The menu item title
 		$item_output = $args->before;
 		$item_output .= '<a' . $attributes . '>';
-		$item_output .= $args->link_before . apply_filters( 'the_title', $data_object->title, $data_object->ID ) . $args->link_after;
+
+		// Output the correct image (active or regular)
+		$image_url = '';
+		if ( $is_active && !empty($active_img) && !empty($active_img['url']) ) {
+			$image_url = $active_img['url'];
+		} elseif ( !empty($regular_img) && !empty($regular_img['url']) ) {
+			$image_url = $regular_img['url'];
+		}
+		if ( $image_url ) {
+			$item_output .= '<img src="'.esc_url($image_url).'" data-src="' . esc_url($image_url) . '" alt="" class="lazy-img">';
+		}
+
+		$item_output .= '<span>' . $args->link_before . apply_filters( 'the_title', $data_object->title, $data_object->ID ) . $args->link_after . '</span>';
 		$item_output .= '</a>';
 		$item_output .= $args->after;
 
@@ -68,3 +86,4 @@ class Nav_Walker extends \Walker_Nav_Menu {
 	}
 
 }
+
