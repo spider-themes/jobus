@@ -75,7 +75,7 @@ $phone      = get_user_meta( $user->ID, 'candidate_phone', true );
                 'menu_class'        => 'style-none',
                 'fallback_cb'       => false,
                 'depth'             => 1,
-                'walker'            => new \Jobus\Classes\Nav_Walker(),
+                'walker'            => new \jobus\includes\Classes\Nav_Walker(),
             ] );
         }
         ?>

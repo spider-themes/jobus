@@ -33,7 +33,7 @@ if ( in_array( 'jobus_candidate', $user->roles ) ) {
     );
 }
 
-$candidate_id = $candidates[0]->ID;  // Get candidate post ID
+$candidate_id = !empty($candidates) ? $candidates[0]->ID : 0; // or null, or handle as needed
 ?>
 
 <style>
@@ -108,7 +108,7 @@ $candidate_id = $candidates[0]->ID;  // Get candidate post ID
                 'menu_class'        => 'style-none',
                 'fallback_cb'       => false,
                 'depth'             => 1,
-                'walker'            => new \Jobus\Classes\Nav_Walker(),
+                'walker'            => new \jobus\includes\Classes\Nav_Walker(),
             ] );
         }
         ?>

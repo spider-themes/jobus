@@ -112,6 +112,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
+			require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
 			// Frontend UI
 			require_once __DIR__ . '/includes/Frontend/Assets.php';
