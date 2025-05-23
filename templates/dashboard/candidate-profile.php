@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $user = wp_get_current_user();
 
 // Check if the user has uploaded a custom profile image

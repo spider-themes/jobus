@@ -1,18 +1,14 @@
 <?php
+/**
+ * The template for displaying the sidebar menu in the candidate dashboard
+ *
+ * @package jobus
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
-
-<style>
-    header, footer, .inner-banner-one {
-        display: none;
-    }
-    .page_wrapper {
-        padding: 0;
-    }
-    .page_wrapper .container {
-        max-width: 100%;
-    }
-</style>
-
 <aside class="dash-aside-navbar">
 	<div class="position-relative">
 
@@ -84,7 +80,7 @@
 			<div class="progress-line position-relative">
 				<div class="inner-line" style="width:80%;"></div>
 			</div>
-			<p>Profile Complete</p>
+			<p><?php esc_html_e('Profile Complete', 'jobus'); ?></p>
 		</div>
 		<!-- /.profile-complete-status -->
 

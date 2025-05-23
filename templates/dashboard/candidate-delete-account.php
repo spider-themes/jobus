@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 // Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
 

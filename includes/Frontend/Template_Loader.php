@@ -17,18 +17,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Template_Loader {
 
 	public function __construct() {
-		add_filter( 'template_include', [ $this, 'template_loader' ] );
+		add_filter( 'template_include', [ $this, 'handle_template_include' ] );
+		add_filter( 'theme_page_templates', [ $this, 'register_dashboard_template' ] );
 	}
 
-	/**a
-	 * Load custom template
+	/**
+	 * Registers the dashboard page template in the page template dropdown.
 	 *
-	 * @param string $template
-	 *
-	 * @return string
+	 * @param array $templates Existing templates.
+	 * @return array Modified templates.
 	 */
-	public function template_loader( string $template ): string {
+	public function register_dashboard_template( array $templates ): array {
+		$templates['dashboard/page-template-dashboard.php'] = esc_html__( 'Jobus Dashboard', 'jobus' );
+		return $templates;
+	}
 
+
+	/**
+	 * Handles conditional template overrides: dashboard template and CPT templates.
+	 *
+	 * @param string $template Default template path.
+	 * @return string Modified template path.
+	 */
+	public function handle_template_include( string $template ): string {
+
+		// Handle custom dashboard template
+		if ( is_page() ) {
+			$selected_template = get_page_template_slug( get_queried_object_id() );
+			if ( $selected_template === 'dashboard/page-template-dashboard.php' ) {
+				$plugin_template = JOBUS_PATH . '/templates/dashboard/page-template-dashboard.php';
+				if ( file_exists( $plugin_template ) ) {
+					return $plugin_template;
+				}
+			}
+		}
+
+		// Handle CPT templates
+		return $this->template_loader( $template );
+	}
+
+	/**
+	 * Load custom templates for taxonomies, archives, and singles.
+	 *
+	 * @param string $template Default template path.
+	 * @return string Modified template path.
+	 */
+	private function template_loader( string $template ): string {
 		if ( is_tax( 'jobus_job_cat' ) || is_tax( 'jobus_job_tag' ) || is_tax( 'jobus_job_location' ) ) {
 			return $this->locate_template( 'taxonomy-job', $template );
 		}
