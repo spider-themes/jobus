@@ -44,7 +44,6 @@ $candidate_id = !empty($candidates) ? $candidates[0]->ID : 0; // or null, or han
 
 //Sidebar Menu
 include ('candidate-templates/sidebar-menu.php');
-
 ?>
 
 

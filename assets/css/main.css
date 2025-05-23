@@ -4821,6 +4821,10 @@ img {
   background: #EFF6F3;
 }
 
+.admin-bar .dash-aside-navbar {
+  margin-top: 32px;
+}
+
 .dash-aside-navbar {
   position: fixed;
   z-index: 1000;

@@ -35,7 +35,6 @@ class Dashboard {
 
 	}
 
-
 	public function user_delete_account(): string {
 		if ( ! is_user_logged_in() ) {
 			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in

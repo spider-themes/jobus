@@ -78,12 +78,12 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 */
 		public function load_csf_files(): void {
 			require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-			require_once __DIR__ . '/Admin/options/settings-options.php';
-			require_once __DIR__ . '/Admin/options/meta-options-job.php';
-			require_once __DIR__ . '/Admin/options/meta-options-company.php';
-			require_once __DIR__ . '/Admin/options/meta-options-candidate.php';
-			require_once __DIR__ . '/Admin/options/taxonomy.php';
-			require_once __DIR__ . '/Admin/options/meta-nav_menu.php';
+			require_once __DIR__ . '/Admin/csf/options/settings.php';
+			require_once __DIR__ . '/Admin/csf/meta/meta-options-job.php';
+			require_once __DIR__ . '/Admin/csf/meta/meta-options-company.php';
+			require_once __DIR__ . '/Admin/csf/meta/meta-options-candidate.php';
+			require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
+			require_once __DIR__ . '/Admin/csf/meta/meta-nav_menu.php';
 		}
 
 
