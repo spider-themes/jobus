@@ -75,6 +75,9 @@ class Candidate {
 			'menu_position'      => 8,
 			'menu_icon'          => 'dashicons-plus-alt',
 			'show_admin_column'  => true,
+			'capabilities'       => array(
+				'create_posts' => 'do_not_allow', // Disable Add New
+			),
 		);
 
 		register_post_type( 'jobus_candidate', $args ); // Register the post-type `candidate`

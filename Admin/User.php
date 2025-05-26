@@ -37,6 +37,10 @@ class User {
 		// Restrict admin menu items for users with the Candidate role
 		add_action( 'admin_menu', [ $this, 'restrict_candidate_menu' ] );
 
+		// User-Candidate Synchronization
+		add_action( 'user_register', [ $this, 'create_candidate_post_for_user' ] );
+		add_action( 'profile_update', [ $this, 'create_candidate_post_for_user' ] );
+
 	}
 
 	public function manage_user_roles(): void {
@@ -185,4 +189,43 @@ class User {
 			remove_menu_page( 'edit.php?post_type=elementor_library' ); // elementor_library
 		}
 	}
+
+	/**
+	 * Create a Candidate post for users with the 'jobus_candidate' role.
+	 *
+	 * @param int $user_id The user ID
+	 */
+	public function create_candidate_post_for_user( $user_id ) {
+		$user = get_userdata( $user_id );
+		if ( ! $user || ! in_array( 'jobus_candidate', (array) $user->roles ) ) {
+			return;
+		}
+
+		// Check if a candidate post already exists for this user
+		$existing = get_posts( [
+			'post_type'   => 'jobus_candidate',
+			'author'      => $user_id,
+			'post_status' => 'any',
+			'numberposts' => 1,
+		] );
+
+		if ( empty( $existing ) ) {
+			// Create a new candidate post
+			$post_id = wp_insert_post( [
+				'post_type'   => 'jobus_candidate',
+				'post_title'  => $user->display_name,
+				'post_status' => 'publish',
+				'post_author' => $user_id,
+			] );
+
+			if ( ! is_wp_error( $post_id ) ) {
+				// Add user ID as post-meta for extra linkage
+				update_post_meta( $post_id, 'jobus_candidate_id', $user_id );
+
+				// Allow other code to hook into this event
+				do_action( 'jobus_candidate_post_created', $post_id, $user_id );
+			}
+		}
+	}
+
 }

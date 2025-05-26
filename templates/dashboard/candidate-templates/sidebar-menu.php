@@ -74,7 +74,7 @@ $logo = jobus_opt( 'dashboard_logo' );
 				'fallback_cb'     => false,
 				'depth'           => 1,
 				'walker'          => new \jobus\includes\Classes\Nav_Walker(),
-			] );
+			]);
 		}
 		?>
 
@@ -84,7 +84,7 @@ $logo = jobus_opt( 'dashboard_logo' );
             <div class="progress-line position-relative">
                 <div class="inner-line" style="width:80%;"></div>
             </div>
-            <p><?php esc_html_e( 'Profile Complete', 'jobus' ); ?></p>
+            <p> <?php esc_html_e( 'Profile Complete', 'jobus' ); ?> </p>
         </div>
         <!-- /.profile-complete-status -->
 
@@ -92,6 +92,5 @@ $logo = jobus_opt( 'dashboard_logo' );
             <img src="../images/lazy.svg" data-src="images/icon/icon_9.svg" alt="" class="lazy-img">
             <span>Logout</span>
         </a>
-
     </div>
 </aside>

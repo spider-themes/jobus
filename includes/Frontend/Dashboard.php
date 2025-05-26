@@ -66,7 +66,7 @@ class Dashboard {
 	private function load_candidate_delete_account( wP_User $user ): string {
 
 		// Load the candidate dashboard template with passed user data
-		return Template_Loader::get_template_part( 'dashboard/candidate-account-settings', [
+		return Template_Loader::get_template_part( 'dashboard/candidate-delete-account', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
@@ -149,7 +149,6 @@ class Dashboard {
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
-
 	}
 
 
@@ -172,7 +171,6 @@ class Dashboard {
 
 		// Default fallback for users without access
 		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
 	}
 
 	/**
@@ -223,13 +221,11 @@ class Dashboard {
 	 * @return string Candidate dashboard HTML.
 	 */
 	private function load_candidate_message( WP_User $user ): string {
-
 		// Load the candidate dashboard template with passed user data
 		return Template_Loader::get_template_part( 'dashboard/candidate-message', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
-
 	}
 
 
@@ -247,12 +243,10 @@ class Dashboard {
 			if ( in_array( 'jobus_candidate', $roles ) ) {
 				return $this->load_candidate_resume( $user );
 			}
-
 		}
 
 		// Default fallback for users without access
 		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
 	}
 
 	/**
@@ -263,13 +257,11 @@ class Dashboard {
 	 * @return string Candidate dashboard HTML.
 	 */
 	private function load_candidate_resume( WP_User $user ): string {
-
 		// Load the candidate dashboard template with passed user data
 		return Template_Loader::get_template_part( 'dashboard/candidate-resume', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
-
 	}
 
 
@@ -340,12 +332,10 @@ class Dashboard {
 			if ( in_array( 'jobus_candidate', $roles ) ) {
 				return $this->load_candidate_dashboard( $user );
 			}
-
 		}
 
 		// Default fallback for users without access
 		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
 	}
 
 

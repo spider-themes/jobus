@@ -23,7 +23,6 @@ class Nav_Walker extends \Walker_Nav_Menu {
 		$output .= "$indent</ul>\n";
 	}
 
-
 	// Start of the <li> element
 	public function start_el( &$output, $data_object, $depth = 0, $args = array(), $current_object_id = 0 ): void {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -79,11 +78,9 @@ class Nav_Walker extends \Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $data_object, $depth, $args );
 	}
 
-
 	// End of the <li> element
 	public function end_el( &$output, $data_object, $depth = 0, $args = array() ): void {
 		$output .= "</li>\n";
 	}
-
 }
 
