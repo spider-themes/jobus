@@ -14,7 +14,7 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
-<div class="inner-banner-one position-relative jobi-single-banner">
+<div class="inner-banner-one position-relative jobi-single-banner dfdsfdsf">
     <div class="container">
         <div class="position-relative">
             <div class="row">

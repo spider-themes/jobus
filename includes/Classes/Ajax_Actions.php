@@ -68,7 +68,7 @@ class Ajax_Actions {
 	}
 
 	public function job_application_form() {
-		if ( ! check_ajax_referer( 'job_application_form_nonce', 'security', false ) ) {
+		if ( ! check_ajax_referer( 'jobus_job_application', 'job_application_nonce', false ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ) );
 			wp_die();
 		}

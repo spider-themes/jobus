@@ -7972,30 +7972,30 @@ img {
 .job-application-wrapper .modal-dialog .modal-content .modal-body {
   padding: 1rem 0;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form label {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form label {
   font-size: 14px;
   font-weight: 500;
   color: #31795A;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form .form-control {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control {
   border: 1px solid #e9e9e9;
   font-size: 14px;
   font-weight: 400;
   line-height: 2;
   padding-left: 20px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form .form-control:focus {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control:focus {
   border-color: #31795A;
   box-shadow: none;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form .form-control.upload-cv {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control.upload-cv {
   padding-left: 12px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form .btn {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form .btn {
   margin-top: 10px;
   padding: 10px 40px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job_application_form .btn:focus {
+.job-application-wrapper .modal-dialog .modal-content .job-application-form .btn:focus {
   box-shadow: none;
 }
 

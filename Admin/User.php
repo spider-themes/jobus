@@ -30,7 +30,7 @@ class User {
 		add_action( 'admin_post_nopriv_register_candidate', [ $this, 'candidate_registration' ] );
 		add_action( 'admin_post_register_candidate', [ $this, 'candidate_registration' ] );
 
-		// Handle Employer  Registration for non-logged and logged-in in users
+		// Handle Employer Registration for non-logged and logged-in in users
 		add_action( 'admin_post_nopriv_register_employer', [ $this, 'employer_registration' ] );
 		add_action( 'admin_post_register_employer', [ $this, 'employer_registration' ] );
 

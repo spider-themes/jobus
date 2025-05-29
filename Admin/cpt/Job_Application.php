@@ -15,8 +15,8 @@ class Job_Application {
 		add_action( 'init', [ $this, 'register_post_types_applications' ] );
 
 		// Admin Columns
-		add_filter( 'manage_edit-job_application_columns', [ $this, 'job_application_columns' ] );
-		add_action( 'manage_job_application_posts_custom_column', [ $this, 'job_application_columns_data' ], 10, 2 );
+		add_filter( 'manage_jobus_applicant_posts_columns', [ $this, 'job_application_columns' ] );
+		add_action( 'manage_jobus_applicant_posts_custom_column', [ $this, 'job_application_columns_data' ], 10, 2 );
 
 		// Add custom content to an edit form
 		add_action( 'edit_form_top', array( $this, 'admin_single_subtitle' ) );
@@ -51,6 +51,46 @@ class Job_Application {
 			array( $this, 'render_single_contents' ),
 			'jobus_applicant'
 		);
+
+		// Add Application Status metabox to the sidebar
+		add_meta_box(
+			'applicant-status-meta-box',
+			esc_html__( 'Application Status', 'jobus' ),
+			array( $this, 'render_status_metabox' ),
+			'jobus_applicant',
+			'side',
+			'high'
+		);
+	}
+
+	/**
+	 * Render the status metabox content
+	 */
+	public function render_status_metabox( $post ): void {
+		$application_status = get_post_meta( $post->ID, 'application_status', true ) ?: 'pending';
+
+		// Save status change if form submitted
+		if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) ) {
+			$new_status = sanitize_text_field( $_POST['application_status'] );
+			update_post_meta( $post->ID, 'application_status', $new_status );
+			$application_status = $new_status;
+		}
+		?>
+		<div class="application-status-section">
+			<form method="post">
+				<select name="application_status" id="application_status" class="widefat">
+					<option value="pending" <?php selected($application_status, 'pending'); ?>><?php esc_html_e('Pending', 'jobus'); ?></option>
+					<option value="approved" <?php selected($application_status, 'approved'); ?>><?php esc_html_e('Approve', 'jobus'); ?></option>
+					<option value="rejected" <?php selected($application_status, 'rejected'); ?>><?php esc_html_e('Rejected', 'jobus'); ?></option>
+				</select>
+				<p>
+					<button type="submit" name="save_application_status" class="button button-primary" style="margin-top: 10px; width: 100%;">
+						<?php esc_html_e('Update Status', 'jobus'); ?>
+					</button>
+				</p>
+			</form>
+		</div>
+		<?php
 	}
 
 	public function render_single_contents( $post ): void {
@@ -93,8 +133,10 @@ class Job_Application {
 			'cb'              => '<input type="checkbox" />',
 			'applicant_photo' => '',
 			'title'           => esc_html__( 'Applicant', 'jobus' ),
-			'applicant_id'    => esc_html__( 'ID', 'jobus' ),
 			'job_applied_for' => esc_html__( 'Job', 'jobus' ),
+			'view_profile'    => esc_html__( 'View Profile', 'jobus' ),
+			'author'          => esc_html__( 'Author', 'jobus' ),
+			'job_status'      => esc_html__( 'Status', 'jobus' ),
 			'submission_time' => esc_html__( 'Applied on', 'jobus' ),
 		);
 	}
@@ -105,16 +147,64 @@ class Job_Application {
 				$candidate_email = get_post_meta( $post_id, 'candidate_email', true );
 				echo get_avatar( $candidate_email, 40 );
 				break;
-			case 'applicant_id':
-				echo esc_html( $post_id );
-				break;
 			case 'job_applied_for':
 				$job_id    = get_post_meta( $post_id, 'job_applied_for_id', true );
 				$job_title = get_post_meta( $post_id, 'job_applied_for_title', true );
 				if ( $job_id && $job_title ) {
 					echo '<a href="' . esc_url( get_edit_post_link( $job_id ) ) . '">' . esc_html( $job_title ) . '</a>';
+				} else {
+					echo esc_html__( 'N/A', 'jobus' );
 				}
 				break;
+			case 'view_profile':
+				$candidate_email = get_post_meta( $post_id, 'candidate_email', true );
+				$user = get_user_by( 'email', $candidate_email );
+				if ( ! $user ) {
+					echo esc_html__( 'N/A', 'jobus' );
+					break;
+				}
+
+				$candidates = get_posts( [
+					'post_type'   => 'jobus_candidate',
+					'author'      => $user->ID,
+					'post_status' => 'publish',
+					'numberposts' => 1
+				] );
+
+				if ( empty( $candidates ) ) {
+					echo esc_html__( 'N/A', 'jobus' );
+					break;
+				}
+				echo '<a href="' . esc_url( get_permalink($candidates[0]->ID) ) . '" class="button button-small" target="_blank">' .
+				     esc_html__( 'View Profile', 'jobus' ) . '</a>';
+				break;
+			case 'author':
+				$post = get_post( $post_id );
+				if ( $post && $post->post_author ) {
+					$author = get_userdata( $post->post_author );
+					if ( $author ) {
+						echo esc_html( $author->display_name );
+					} else {
+						echo '—';
+					}
+				}
+				break;
+            case 'job_status':
+                $status = get_post_meta( $post_id, 'application_status', true );
+                $status = !empty( $status ) ? $status : 'pending';
+
+                $status_labels = [
+                    'pending'  => esc_html__( 'Pending', 'jobus' ),
+                    'approved' => esc_html__( 'Approved', 'jobus' ),
+                    'rejected' => esc_html__( 'Rejected', 'jobus' ),
+                ];
+
+                $status_class = 'jobus-status-' . $status;
+                $status_text = isset( $status_labels[$status] ) ? $status_labels[$status] : $status_labels['pending'];
+
+                echo '<span class="jobus-application-status ' . esc_attr( $status_class ) . '">' .
+                     esc_html( $status_text ) . '</span>';
+                break;
 			case 'submission_time':
 				echo get_the_date( '', $post_id );
 				break;

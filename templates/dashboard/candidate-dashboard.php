@@ -1,8 +1,10 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-
+/**
+ * Template for the candidate dashboard.
+ *
+ * @package jobus
+ * @author  spiderdevs
+ */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -16,41 +18,46 @@ $applicants = [];
 $candidates = [];
 
 if ( in_array( 'jobus_candidate', $user->roles ) ) {
-    $applicants = get_posts(
-        array(
-            'post_type'      => 'jobus_applicant',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'meta_query' => array(
-                array(
-                    'key'     => 'candidate_email', // Assuming you're using candidate email in the meta
-                    'value'   => $user->user_email,
-                    'compare' => '='
-                )
-            )
-        )
-    );
+	$applicants = get_posts(
+		array(
+			'post_type'      => 'jobus_applicant',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+			'meta_query'     => array(
+				array(
+					'key'     => 'candidate_email', // Assuming you're using candidate email in the meta
+					'value'   => $user->user_email,
+					'compare' => '='
+				)
+			)
+		)
+	);
 
-    $candidates = get_posts(
-        array(
-            'post_type' => 'jobus_candidate',
-            'author'    => $user,
-            'posts_per_page' => 1,
-        )
-    );
+	$candidates = get_posts(
+		array(
+			'post_type'      => 'jobus_candidate',
+			'author'         => $user,
+			'posts_per_page' => 1,
+		)
+	);
 }
 
-$candidate_id = !empty($candidates) ? $candidates[0]->ID : 0; // or null, or handle as needed
+$candidate_id = ! empty( $candidates ) ? $candidates[0]->ID : 0; // or null, or handle as needed
+
+$all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true );
+$all_user_view_count = ! empty( $all_user_view_count ) ? intval( $all_user_view_count ) : 0;
+$employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
+$employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
 
 //Sidebar Menu
-include ('candidate-templates/sidebar-menu.php');
+include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 
 <div class="dashboard-body">
     <div class="position-relative">
 
-	    <?php include ('candidate-templates/action-btn.php'); ?>
+		<?php include( 'candidate-templates/action-btn.php' ); ?>
 
         <!--Dashboard Candidate -->
         <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
@@ -59,7 +66,26 @@ include ('candidate-templates/sidebar-menu.php');
             <div class="col-lg-3 col-6">
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
-                        
+                        <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>"
+                                 alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
+                        </div>
+                        <div class="order-sm-0">
+                            <div class="value fw-500">
+								<?php echo esc_html( $all_user_view_count ); ?>
+                            </div>
+                            <span>
+                                <?php esc_html_e( 'Total Visitor', 'jobus' ); ?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <div class="dash-card-one bg-white border-30 position-relative mb-15">
+                    <div class="d-sm-flex align-items-center justify-content-between">
+
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
                             <img src="../images/lazy.svg" data-src="images/icon/icon_13.svg" alt="" class="lazy-img">
                         </div>
@@ -74,78 +100,41 @@ include ('candidate-templates/sidebar-menu.php');
                 <!-- /.dash-card-one -->
             </div>
 
-            <?php
-            $all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true );
-            $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
-            $all_user_view_count = ! empty( $all_user_view_count ) ? intval( $all_user_view_count ) : 0;
-            $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
-
-            if ( $all_user_view_count ) :
-                ?>
-                <div class="col-lg-3 col-6">
-                    <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>" alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
-                            </div>
-                            <div class="order-sm-0">
-                                <div class="value fw-500">
-                                    <?php echo esc_html( $all_user_view_count ); ?>
-                                </div>
-                                <span>
-                                    <?php esc_html_e( 'Total Visitor', 'jobus' ); ?>
-                                </span>
-                            </div>
+            <div class="col-lg-3 col-6">
+                <div class="dash-card-one bg-white border-30 position-relative mb-15">
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                        <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>"
+                                 class="lazy-img">
                         </div>
-                    </div>
-                    <!-- /.dash-card-one -->
-                </div>
-                <?php
-            endif;
-
-            if ( $employer_view_count ) :
-                ?>
-                <div class="col-lg-3 col-6">
-                    <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>" class="lazy-img">
-                            </div>
-                            <div class="order-sm-0">
-                                <div class="value fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
-                                <span><?php esc_html_e( 'Views', 'jobus' ); ?></span>
-                            </div>
+                        <div class="order-sm-0">
+                            <div class="value fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
+                            <span><?php esc_html_e( 'Views', 'jobus' ); ?></span>
                         </div>
                     </div>
                 </div>
-                <?php
-            endif;
+            </div>
 
-            if ( ! empty(count( $applicants ) > 0 ) ) :
-                ?>
-                <div class="col-lg-3 col-6">
-                    <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            
-                            <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                                <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>" alt="" class="lazy-img">
+            <div class="col-lg-3 col-6">
+                <div class="dash-card-one bg-white border-30 position-relative mb-15">
+                    <div class="d-sm-flex align-items-center justify-content-between">
+
+                        <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>" alt="" class="lazy-img">
+                        </div>
+
+                        <div class="order-sm-0">
+                            <div class="value fw-500">
+								<?php echo esc_html( count( $applicants ) ); ?>
                             </div>
-
-                            <div class="order-sm-0">
-                                <div class="value fw-500">
-                                    <?php echo esc_html(count( $applicants ) ); ?>
-                                </div>
-                                <span>
+                            <span>
                                     <?php esc_html_e( 'Applied Job', 'jobus' ); ?>
                                 </span>
-                            </div>
-
                         </div>
+
                     </div>
                 </div>
-                <?php
-            endif;
-            ?>
+            </div>
 
         </div>
 
@@ -157,76 +146,55 @@ include ('candidate-templates/sidebar-menu.php');
                     <div class="ps-5 pe-5 mt-50"><img src="../images/lazy.svg" data-src="images/main-graph.png" alt="" class="lazy-img m-auto"></div>
                 </div>
             </div>
-            
+
             <div class="col-xl-5 col-lg-6 d-flex">
                 <div class="recent-job-tab bg-white border-20 mt-30 w-100">
                     <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                     <div class="wrapper">
-                        
-                        <?php
-                        foreach ( $applicants as $applicant ) :
 
-                            $job_id     = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
-                            $job_cat    = get_the_terms( $job_id, 'jobus_job_cat' );
-                            $job_location = get_the_terms( $job_id, 'jobus_job_location' );
-                            ?>
+						<?php
+						foreach ( $applicants as $applicant ) {
+							$job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
+							$job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
+							$job_location = get_the_terms( $job_id, 'jobus_job_location' );
+
+                            echo '<pre>';
+                            print_r($job_id);
+                            echo '</pre>';
+							?>
                             <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
-                                <div><?php echo get_the_post_thumbnail( $job_id, 'full', ['class' => 'lazy-img logo' ] ); ?></div>
+                                <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                                 <div class="job-title">
                                     <h6 class="mb-5">
                                         <a href="<?php echo get_the_permalink( $job_id ); ?>">
-                                            <?php echo get_the_title( $job_id ); ?>
+											<?php echo get_the_title( $job_id ); ?>
                                         </a>
                                     </h6>
                                     <div class="meta">
-
-                                        <?php
-                                        if ( $job_cat ) : 
-                                            ?>
-                                            <span> 
+										<?php
+										if ( $job_cat ) { ?>
+                                            <a href="<?php echo esc_url(get_term_link( $job_cat[0] )) ?>">
+                                                <span>
                                                 <?php echo esc_html( $job_cat[0]->name ); ?>
                                             </span>
-                                            <?php
-                                        endif;
-
-                                        if ( $job_location ) :
-                                            ?>
-                                            . <span>
+                                            </a>
+											<?php
+										}
+										if ( $job_location ) { ?>
+                                            <a href="<?php echo esc_url(get_term_link( $job_location[0] )) ?>">
+                                                . <span>
                                                 <?php echo esc_html( $job_location[0]->name ); ?>
                                             </span>
-                                            <?php
-                                        endif;
-                                        ?>
+                                            </a>
+											<?php
+										}
+										?>
                                     </div>
                                 </div>
-                                <div class="job-action">
-
-                                    <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span></span>
-                                    </button>
-
-                                    <ul class="dropdown-menu">
-
-                                        <li>
-                                            <a href="<?php echo get_the_permalink( $job_id ); ?>" class="dropdown-item">
-                                                <?php esc_html_e( 'View Job', 'jobus' ); ?>
-                                            </a>
-                                        </li>
-
-                                        <li><a class="dropdown-item" href="#">Archive</a></li>
-                                        
-                                        <li>
-                                            <a href="#" class="dropdown-item delete-job" data-job-id="<?php echo esc_attr( $job_id ); ?>">
-                                                <?php esc_html_e( 'Delete', 'jobus' ); ?>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
                             </div>
-                            <?php
-                        endforeach;
-                        ?>
+							<?php
+						}
+						?>
                     </div>
                 </div>
             </div>

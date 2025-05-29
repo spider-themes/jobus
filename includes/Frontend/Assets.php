@@ -41,14 +41,15 @@ class Assets {
 
 		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 
-		// Load Script and Ajax Process
-		wp_enqueue_script( 'jobus-job-application-form', esc_url( JOBUS_JS . '/job-application-form.js' ), [ 'jquery' ], JOBUS_VERSION,
-			[ 'strategy' => 'defer' ] );
-		wp_localize_script( 'jobus-job-application-form', 'job_application_form', array(
-			'ajaxurl' => $ajax_url,
-			'nonce'   => wp_create_nonce( 'job_application_form_nonce' ),
-			'job_id'  => get_the_ID(),
-		) );
+		// Load Script for Job Application Form
+		if ( is_singular( 'jobus_job' ) ) {
+			wp_enqueue_script( 'jobus-job-application-form', esc_url( JOBUS_JS . '/job-application-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_localize_script( 'jobus-job-application-form', 'jobus_job_application_obj', array(
+				'ajaxurl' => $ajax_url,
+				'nonce'   => wp_create_nonce( 'jobus_job_application' ),
+				'job_id'  => get_the_ID(),
+			) );
+		}
 
 		//Load Script for ajax mail to candidate
 		wp_enqueue_script( 'jobus-candidate-email-form', esc_url( JOBUS_JS . '/candidate-email-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
