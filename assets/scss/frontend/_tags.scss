@@ -1,0 +1,39 @@
+.jobus-tags-wrapper {
+
+  .tag-item {
+    margin-bottom: 12px;
+
+    &.hide {
+      display: none;
+    }
+  }
+
+  .more-btn {
+    color: #31795A;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #275c44;
+    }
+
+    i {
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    &.showing-all {
+      i {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+}
+

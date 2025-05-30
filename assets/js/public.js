@@ -218,5 +218,33 @@
 
         }
         candidatePortfolio()//End Candidate Portfolio Slider
+
+        //==== Tags Filter ====//
+        function tagsFilter() {
+            const moreBtn = $('.more-btn');
+            const filterInput = $('.jobus-tags-wrapper');
+
+            if (moreBtn.length) {
+                moreBtn.on('click', function() {
+                    const $this = $(this);
+                    const hiddenItems = filterInput.find('li.tag-item.hide');
+
+                    if ($this.hasClass('showing-all')) {
+                        // Hide items after initial limit
+                        hiddenItems.slideUp(300);
+                        $this.removeClass('showing-all')
+                            .html('<i class="bi bi-plus"></i> Show More');
+                    } else {
+                        // Show all hidden items
+                        hiddenItems.slideDown(300);
+                        $this.addClass('showing-all')
+                            .html('<i class="bi bi-dash"></i> Show Less');
+                    }
+                });
+            }
+        }
+        tagsFilter(); // end tagsFilter
+
     });
 })(jQuery);
+
