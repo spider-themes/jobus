@@ -21,6 +21,9 @@ class Job_Application {
 		// Add custom content to an edit form
 		add_action( 'edit_form_top', array( $this, 'admin_single_subtitle' ) );
 		add_action( 'add_meta_boxes', [ $this, 'admin_single_contents' ] );
+
+        // Save post meta data
+        add_action( 'save_post_jobus_applicant', [ $this, 'save_application_status' ], 10, 3 );
 	}
 
 	public static function init() {
@@ -56,7 +59,7 @@ class Job_Application {
 		add_meta_box(
 			'applicant-status-meta-box',
 			esc_html__( 'Application Status', 'jobus' ),
-			array( $this, 'render_status_metabox' ),
+			array( $this, 'render_single_job_status' ),
 			'jobus_applicant',
 			'side',
 			'high'
@@ -66,31 +69,30 @@ class Job_Application {
 	/**
 	 * Render the status metabox content
 	 */
-	public function render_status_metabox( $post ): void {
-		$application_status = get_post_meta( $post->ID, 'application_status', true ) ?: 'pending';
+	public function render_single_job_status( $post ): void {
+		if ( $post->post_type === 'jobus_applicant' ) {
+			// Process form submission directly (maintaining current functionality)
+			if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) ) {
+				$new_status = sanitize_text_field( $_POST['application_status'] );
+				update_post_meta( $post->ID, 'application_status', $new_status );
+			}
 
-		// Save status change if form submitted
-		if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) ) {
-			$new_status = sanitize_text_field( $_POST['application_status'] );
-			update_post_meta( $post->ID, 'application_status', $new_status );
-			$application_status = $new_status;
+			// Include the template file
+			require_once plugin_dir_path( __FILE__ ) . '../templates/meta/applicant-status.php';
 		}
-		?>
-		<div class="application-status-section">
-			<form method="post">
-				<select name="application_status" id="application_status" class="widefat">
-					<option value="pending" <?php selected($application_status, 'pending'); ?>><?php esc_html_e('Pending', 'jobus'); ?></option>
-					<option value="approved" <?php selected($application_status, 'approved'); ?>><?php esc_html_e('Approve', 'jobus'); ?></option>
-					<option value="rejected" <?php selected($application_status, 'rejected'); ?>><?php esc_html_e('Rejected', 'jobus'); ?></option>
-				</select>
-				<p>
-					<button type="submit" name="save_application_status" class="button button-primary" style="margin-top: 10px; width: 100%;">
-						<?php esc_html_e('Update Status', 'jobus'); ?>
-					</button>
-				</p>
-			</form>
-		</div>
-		<?php
+	}
+
+	/**
+	 * Save application status when a post is saved
+	 *
+	 * @param int $post_id The post-ID
+	 */
+	public function save_application_status( int $post_id ): void {
+		// Check if our custom status is set
+		if ( isset( $_POST['application_status'] ) ) {
+			$status = sanitize_text_field( $_POST['application_status'] );
+			update_post_meta( $post_id, 'application_status', $status );
+		}
 	}
 
 	public function render_single_contents( $post ): void {
@@ -99,7 +101,7 @@ class Job_Application {
 		}
 	}
 
-	// Register the post type Applications
+	// Register the post-type Applications
 	public function register_post_types_applications(): void {
 		$labels = array(
 			'name'               => esc_html__( 'Applications', 'jobus' ),
@@ -191,18 +193,20 @@ class Job_Application {
 				break;
             case 'job_status':
                 $status = get_post_meta( $post_id, 'application_status', true );
-                $status = !empty( $status ) ? $status : 'pending';
+                $status = !empty( $status ) ? $status : 'pending'; // Default to pending if empty
 
                 $status_labels = [
+                    ''         => esc_html__( 'Default', 'jobus' ),
                     'pending'  => esc_html__( 'Pending', 'jobus' ),
                     'approved' => esc_html__( 'Approved', 'jobus' ),
                     'rejected' => esc_html__( 'Rejected', 'jobus' ),
                 ];
 
                 $status_class = 'jobus-status-' . $status;
-                $status_text = isset( $status_labels[$status] ) ? $status_labels[$status] : $status_labels['pending'];
+                // Use the status label if it exists, otherwise use 'Default'
+                $status_text = $status_labels[ $status ] ?? $status_labels[''];
 
-                echo '<span class="jobus-application-status ' . esc_attr( $status_class ) . '">' .
+                echo '<span class="button button-small jobus-application-status ' . esc_attr( $status_class ) . '">' .
                      esc_html( $status_text ) . '</span>';
                 break;
 			case 'submission_time':

@@ -27,7 +27,6 @@ function jobus_job_application_format_size_units( $bytes ): string {
 	} else {
 		$bytes = '0 bytes';
 	}
-
 	return $bytes;
 }
 

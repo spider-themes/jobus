@@ -67,16 +67,13 @@ include( 'candidate-templates/sidebar-menu.php' );
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>"
-                                 alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>" alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
                         </div>
                         <div class="order-sm-0">
                             <div class="value fw-500">
 								<?php echo esc_html( $all_user_view_count ); ?>
                             </div>
-                            <span>
-                                <?php esc_html_e( 'Total Visitor', 'jobus' ); ?>
-                            </span>
+                            <span><?php esc_html_e( 'Total Visitor', 'jobus' ); ?></span>
                         </div>
                     </div>
                 </div>
@@ -85,27 +82,34 @@ include( 'candidate-templates/sidebar-menu.php' );
             <div class="col-lg-3 col-6">
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
-
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="../images/lazy.svg" data-src="images/icon/icon_13.svg" alt="" class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg') ?>" alt="<?php esc_attr_e('shortlist', 'jobus'); ?>" class="lazy-img">
                         </div>
-
                         <div class="order-sm-0">
-                            <div class="value fw-500">03</div>
-                            <span>Shortlisted</span>
+                            <div class="value fw-500">
+                                <?php
+                                // Count shortlisted applications directly in the markup
+                                $shortlisted_count = 0;
+                                foreach ($applicants as $applicant) {
+                                    $status = get_post_meta($applicant->ID, 'application_status', true);
+                                    if ($status === 'approved') {
+                                        $shortlisted_count++;
+                                    }
+                                }
+                                echo esc_html($shortlisted_count);
+                                ?>
+                            </div>
+                            <span><?php esc_html_e( 'Shortlisted', 'jobus' ); ?></span>
                         </div>
-
                     </div>
                 </div>
-                <!-- /.dash-card-one -->
             </div>
 
             <div class="col-lg-3 col-6">
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>"
-                                 class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>" class="lazy-img">
                         </div>
                         <div class="order-sm-0">
                             <div class="value fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
@@ -127,9 +131,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                             <div class="value fw-500">
 								<?php echo esc_html( count( $applicants ) ); ?>
                             </div>
-                            <span>
-                                    <?php esc_html_e( 'Applied Job', 'jobus' ); ?>
-                                </span>
+                            <span><?php esc_html_e( 'Applied Job', 'jobus' ); ?></span>
                         </div>
 
                     </div>
@@ -151,16 +153,11 @@ include( 'candidate-templates/sidebar-menu.php' );
                 <div class="recent-job-tab bg-white border-20 mt-30 w-100">
                     <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                     <div class="wrapper">
-
 						<?php
 						foreach ( $applicants as $applicant ) {
 							$job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
 							$job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
 							$job_location = get_the_terms( $job_id, 'jobus_job_location' );
-
-                            echo '<pre>';
-                            print_r($job_id);
-                            echo '</pre>';
 							?>
                             <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
                                 <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
