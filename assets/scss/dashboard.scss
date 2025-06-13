@@ -1,0 +1,18 @@
+/*----------------------------------------------------
+@File: Dashboard Frontend Styles
+
+This file contains the main SCSS imports and documentation for the Jobus frontend dashboard.
+Edit this file to change the look and feel of the dashboard UI.
+----------------------------------------------------*/
+/*====================================================
+@Template Name: Jobus
+@Dashboard Frontend Styles
+Table of Contents:
+01/ Variables
+02/ Mixins
+03/ Dashboard Layout & Components
+=====================================================*/
+
+@import "dashboard/variables";
+@import "dashboard/mixins";
+@import "dashboard/dashboard";

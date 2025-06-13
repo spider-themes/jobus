@@ -23,6 +23,9 @@ class Assets {
 		// Register Style's
 		wp_register_style( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.css' ), [], JOBUS_VERSION );
 
+		// Candidate Dashboard Style
+		wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
+
 		// Enqueue Style's
 		wp_enqueue_style( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.css' ), [], '5.1.3' );
 		wp_enqueue_style( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/nice-select.css' ), [], JOBUS_VERSION );
@@ -51,7 +54,7 @@ class Assets {
 			) );
 		}
 
-		//Load Script for ajax mail to candidate
+		// Load Script for ajax mail to candidate
 		wp_enqueue_script( 'jobus-candidate-email-form', esc_url( JOBUS_JS . '/candidate-email-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script( 'jobus-candidate-email-form', 'jobus_candidate_email_form', array(
 			'ajaxurl' => $ajax_url,
@@ -67,5 +70,16 @@ class Assets {
 		wp_localize_script( 'jobus-public', 'jobus_local', array(
 			'ajaxurl' => $ajax_url,
 		) );
+
+		// Candidate Dashboard Scripts
+		wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
+			'ajax_url' => $ajax_url,
+			'security' => wp_create_nonce('jobus_dashboard_nonce'),
+			'deleting_text' => __('Deleting...', 'jobus'),
+			'delete_text' => __('Delete', 'jobus'),
+			'default_avatar' => get_avatar_url(0), // Default WordPress avatar
+		]);
+
 	}
 }

@@ -23,17 +23,16 @@ Table of Content:
 12/ single_content
 =====================================================*/
 
-@import "frontend/variables";
-@import "frontend/mixins";
-@import "frontend/prefix";
-@import "frontend/layout";
-@import "frontend/vendor";
-@import "frontend/pagination";
-@import "frontend/candidates";
-@import "frontend/card";
-@import "frontend/company";
-@import "frontend/dashboard";
-@import "frontend/element";
-@import "frontend/job-listing";
-@import "frontend/single_content";
-@import "frontend/tags";
+@import "main/variables";
+@import "main/mixins";
+@import "main/prefix";
+@import "main/layout";
+@import "main/vendor";
+@import "main/pagination";
+@import "main/candidates";
+@import "main/card";
+@import "main/company";
+@import "main/element";
+@import "main/job-listing";
+@import "main/single_content";
+@import "main/tags";

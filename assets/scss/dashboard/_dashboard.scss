@@ -1710,3 +1710,15 @@
     box-shadow: none;
   }
 }
+
+/*========== Editor Markup Styling ===========*/
+#candidateProfileForm {
+  .wp-editor-container {
+    .quicktags-toolbar {
+      .ed_button {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+}

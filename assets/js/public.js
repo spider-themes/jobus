@@ -245,6 +245,10 @@
         }
         tagsFilter(); // end tagsFilter
 
+
+
     });
+
+
 })(jQuery);
 

@@ -120,6 +120,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
 			require_once __DIR__ . '/includes/Frontend/Dashboard.php';
+			require_once __DIR__ . '/includes/Frontend/Dashboard_Helper.php';
 
 			//Admin UI
 			require_once __DIR__ . '/Admin/User.php';
@@ -162,6 +163,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\includes\Frontend\Shortcode();
 			new \jobus\includes\Frontend\Template_Loader();
 			new \jobus\includes\Frontend\Dashboard();
+			new \jobus\includes\Frontend\Dashboard_Helper();
 
 			//Elementor & Blocks
 			new \jobus\Blocks();
