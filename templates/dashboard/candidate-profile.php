@@ -4,8 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $user = wp_get_current_user();
 
+// Get candidate post ID for current user
+$candidate_id = false;
+$args = array(
+    'post_type'      => 'jobus_candidate',
+    'author'         => $user->ID,
+    'posts_per_page' => 1,
+    'fields'         => 'ids',
+);
+
+$candidate_query = new WP_Query($args);
+if ( ! empty($candidate_query->posts) ) {
+    $candidate_id = $candidate_query->posts[0];
+}
+
 // Handle form submission
-if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'] ) || isset( $_POST['candidate_description'] ) ) {
+if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'] ) || isset( $_POST['candidate_description'] ) || isset( $_POST['social_icons'] ) ) {
 
 	// Process name change
 	if ( ! empty( $_POST['candidate_name'] ) ) {
@@ -57,6 +71,26 @@ if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'
 		update_user_meta( $user->ID, 'description', $description );
 	}
 
+	// Save social icons to candidate post meta (inside jobus_meta_candidate_options)
+	if ( $candidate_id && isset( $_POST['social_icons'] ) && is_array( $_POST['social_icons'] ) ) {
+		$social_icons = array();
+		foreach ( $_POST['social_icons'] as $item ) {
+			$icon = isset($item['icon']) ? sanitize_text_field($item['icon']) : '';
+			$url  = isset($item['url']) ? esc_url_raw($item['url']) : '';
+			// Save all items, even if url is empty (to preserve new/empty fields)
+			if ( $icon ) {
+				$social_icons[] = array('icon' => $icon, 'url' => $url);
+			}
+		}
+		// Load full meta array
+		$meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+		if (!is_array($meta)) $meta = [];
+
+		// Update only the social_icons key
+		$meta['social_icons'] = $social_icons;
+		update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
+	}
+
 	// Refresh user data
 	$user = wp_get_current_user();
 }
@@ -95,7 +129,6 @@ include( 'candidate-templates/sidebar-menu.php' );
 			echo '<div class="alert alert-danger" role="alert">' . esc_html( $error_message ) . '</div>';
 		}
 		?>
-
         <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" id="candidateProfileForm" method="post" enctype="multipart/form-data">
 
             <div class="bg-white card-box border-20">
@@ -152,72 +185,53 @@ include( 'candidate-templates/sidebar-menu.php' );
                 <h4 class="dash-title-three">
                     <?php esc_html_e( 'Social Media', 'jobus' ); ?>
                 </h4>
-                <div id="cmb-group-_candidate_socials-0" class="postbox cmb-row cmb-repeatable-grouping closed" data-iterator="0">
-                    <button type="button" data-selector="_candidate_socials_repeat" data-confirm=""
-                            class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="Remove Network"></button>
-                    <div class="cmbhandle" title="Click to toggle"><br></div>
-                    <h3 class="cmb-group-title cmbhandle-title">Network 1</h3>
 
-                    <div class="inside cmb-td cmb-nested cmb-field-list">
-                        <div class="cmb-row cmb-type-select cmb2-id--candidate-socials-0-network cmb-repeat-group-field" data-fieldtype="select">
-                            <div class="cmb-th">
-                                <label for="_candidate_socials_1_network">Network</label>
-                            </div>
-                            <div class="cmb-td">
-                                <select class="cmb2_select select2-hidden-accessible" name="_candidate_socials[0][network]" id="_candidate_socials_1_network"
-                                        data-hash="3ocd0q82oak0" tabindex="-1" aria-hidden="true">
-                                    <option value="facebook">Facebook</option>
-                                    <option value="twitter">Twitter</option>
-                                    <option value="linkedin">Linkedin</option>
-                                    <option value="dribbble">Dribbble</option>
-                                    <option value="tumblr">Tumblr</option>
-                                    <option value="pinterest">Pinterest</option>
-                                    <option value="instagram">Instagram</option>
-                                    <option value="youtube">Youtube</option>
-                                    <option value="tiktok">Tiktok</option>
-                                    <option value="telegram">Telegram</option>
-                                    <option value="discord">Discord</option>
-                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span
-                                            class="selection"><span class="select2-selection select2-selection--single" aria-haspopup="true"
-                                                                    aria-expanded="false" tabindex="0"
-                                                                    aria-labelledby="select2-_candidate_socials_1_network-container" role="combobox"><span
-                                                    class="select2-selection__rendered" id="select2-_candidate_socials_1_network-container" role="textbox"
-                                                    aria-readonly="true" title="Facebook">Facebook</span><span class="select2-selection__arrow"
-                                                                                                               role="presentation"><b
-                                                        role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                                                                                           aria-hidden="true"></span></span>
-                            </div>
+                <?php
+                $available_icons = array(
+                    'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
+                    'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
+                    'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
+                    'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
+                    'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
+                    'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
+                    'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
+                    'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
+                    'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
+                    'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
+                );
+                $user_social_links = array();
+                if ( $candidate_id ) {
+                    $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+                    if ( is_array($meta) && !empty($meta['social_icons']) ) {
+                        $user_social_links = $meta['social_icons'];
+                    }
+                }
+                if ( ! is_array( $user_social_links ) ) {
+                    $user_social_links = array();
+                }
+                ?>
+                <div id="social-links-repeater">
+                    <?php
+                    foreach ( $user_social_links as $index => $item ) :
+                        ?>
+                        <div class="dash-input-wrapper mb-20 social-link-item d-flex align-items-center gap-2">
+                            <label for="" class="me-2 mb-0"><?php echo esc_html__( 'Network', 'jobus' ) . ' ' . esc_html( $index + 1 ); ?></label>
+                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" class="form-select icon-select me-2" style="max-width:140px" aria-label="#">
+                                <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
+                                    <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
+                                        <?php echo esc_html( $icon_label ); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" class="form-control me-2" placeholder="#" value="<?php echo esc_attr( $item['url'] ); ?>" style="min-width:260px">
+                            <button type="button" class="btn btn-danger remove-social-link" title="<?php echo esc_attr__( 'Remove Item', 'jobus' ); ?>"><i class="bi bi-x"></i></button>
                         </div>
-                        <div class="cmb-row cmb-type-text cmb2-id--candidate-socials-0-url cmb-repeat-group-field table-layout" data-fieldtype="text">
-                            <div class="cmb-th">
-                                <label for="_candidate_socials_1_url">Url</label>
-                            </div>
-                            <div class="cmb-td">
-                                <input type="text" class="regular-text" name="_candidate_socials[0][url]" id="_candidate_socials_1_url" value="#"
-                                       data-hash="3098diak8qc0">
-                            </div>
-                        </div>
-                        <div class="cmb-row cmb-remove-field-row">
-                            <div class="cmb-remove-row">
-                                <button type="button" data-selector="_candidate_socials_repeat" data-confirm=""
-                                        class="cmb-remove-group-row cmb-remove-group-row-button alignright button-secondary">Remove Network
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
+                        <?php
+                    endforeach;
+                    ?>
                 </div>
-
-                <!-- Initial Social Media Links -->
-                <div class="dash-input-wrapper mb-20">
-                    <label for="">Network 1</label>
-                    <input type="text" placeholder="https://www.facebook.com/zubayer0145">
-                </div>
-
-                <!-- /.dash-input-wrapper -->
-                <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more link</a>
+                <a href="#" class="dash-btn-one" id="add-social-link"><i class="bi bi-plus"></i> <?php esc_html_e( 'Add more link', 'jobus' ); ?></a>
             </div>
-            <!-- /.card-box -->
 
             <div class="bg-white card-box border-20 mt-40">
                 <h4 class="dash-title-three">Address & Location</h4>

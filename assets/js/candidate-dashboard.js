@@ -124,10 +124,63 @@
             });
         }
 
+        /**
+         * Handles the dynamic repeater for social media links.
+         */
+        function SocialLinksRepeater() {
+            const icons = [
+                { value: 'bi bi-facebook', label: 'Facebook' },
+                { value: 'bi bi-instagram', label: 'Instagram' },
+                { value: 'bi bi-twitter', label: 'Twitter' },
+                { value: 'bi bi-linkedin', label: 'LinkedIn' },
+                { value: 'bi bi-github', label: 'GitHub' },
+                { value: 'bi bi-youtube', label: 'YouTube' },
+                { value: 'bi bi-dribbble', label: 'Dribbble' },
+                { value: 'bi bi-behance', label: 'Behance' },
+                { value: 'bi bi-pinterest', label: 'Pinterest' },
+                { value: 'bi bi-tiktok', label: 'TikTok' }
+            ];
+
+            const iconOptions = icons.map(icon => `<option value="${icon.value}">${icon.label}</option>`).join('');
+            const repeater = $('#social-links-repeater');
+            let index = repeater.children('.social-link-item').length;
+
+            // Add new item
+            $('#add-social-link').on('click', function (e) {
+                e.preventDefault();
+                const newItem = $(`
+                    <div class="dash-input-wrapper mb-20 social-link-item d-flex align-items-center gap-2">
+                        <label class="me-2 mb-0">Network ${index + 1}</label>
+                        <select name="social_icons[${index}][icon]" class="form-select icon-select me-2 max-w-140">
+                            ${iconOptions}
+                        </select>
+                        <input type="text" name="social_icons[${index}][url]" class="form-control me-2 min-w-260" placeholder="#">
+                        <button type="button" class="btn btn-danger remove-social-link" title="Remove Item"><i class="bi bi-x"></i></button>
+                    </div>
+                `);
+                repeater.append(newItem);
+                index++;
+            });
+
+            // Remove item
+            repeater.on('click', '.remove-social-link', function () {
+                $(this).closest('.social-link-item').remove();
+
+                // Re-index remaining items
+                repeater.children('.social-link-item').each(function (i, el) {
+                    $(el).find('label').text(`Network ${i + 1}`);
+                    $(el).find('select').attr('name', `social_icons[${i}][icon]`);
+                    $(el).find('input[type="text"]').attr('name', `social_icons[${i}][url]`);
+                });
+                index = repeater.children('.social-link-item').length;
+            });
+        }
+
         // Initialize all handlers
         updateProfilePicturePreview();
         handleDeleteProfilePicture();
         handleProfileFormSubmit();
+        SocialLinksRepeater();
 
     })
 
