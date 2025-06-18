@@ -15,7 +15,7 @@
   right: initial;
 }
 
-.cadidate-profile-sidebar .email-form input {
+.candidate-profile-sidebar .email-form input {
   text-align: right;
 }
 
@@ -48,7 +48,7 @@
 .candidate-profile-card .profile-btn {
   margin: 10px 0 0 !important;
 }
-.candidate-profile-card .cadidate-avatar.online:before {
+.candidate-profile-card .candidate-avatar.online:before {
   right: 60px;
 }
 
@@ -57,7 +57,7 @@
   padding-right: 30px;
 }
 
-.cadidate-profile-2-sidebar .email-form input {
+.candidate-profile-2-sidebar .email-form input {
   text-align: right;
 }
 

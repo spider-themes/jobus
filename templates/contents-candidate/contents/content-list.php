@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
         <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout mb-25">
             <div class="d-flex">
-                <div class="cadidate-avatar online position-relative d-block me-auto ms-auto">
+                <div class="candidate-avatar online position-relative d-block me-auto ms-auto">
                     <a href="<?php the_permalink() ?>" class="rounded-circle">
 						<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ) ?>
                     </a>

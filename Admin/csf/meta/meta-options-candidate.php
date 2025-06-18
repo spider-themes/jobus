@@ -87,7 +87,58 @@ if ( class_exists( 'CSF' ) ) {
 					'class'    => 'job_specifications'
 				];
 			}
+
 		}
+
+		// Add custom fields to the candidate_fields array
+		$candidate_fields[] = [
+			'id'      => 'candidate_age',
+			'type'    => 'date',
+			'title'   => esc_html__( 'Date of Birth (Age)', 'jobus' ),
+			'subtitle' => esc_html__( 'Input the candidate date of birth', 'jobus' ),
+			'settings' => array(
+				'changeMonth'     => true,
+				'changeYear'      => true,
+				'monthNamesShort' => array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ),
+				'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
+			),
+			'default' => esc_html__( '01/01/1990', 'jobus' ),
+		];
+
+		$candidate_fields[] = [
+			'id'       => 'candidate_mail',
+			'type'     => 'text',
+			'title'    => esc_html__( 'Candidate Mail', 'jobus' ),
+			'subtitle' => esc_html__( 'Input the Candidate Mail Address', 'jobus' ),
+			'default'  => 'demo.candidate@mail.com',
+		];
+
+		$candidate_fields[] = [
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Additional Specifications', 'jobus' ),
+		];
+
+		$candidate_fields[] = [
+			'id'      => 'candidate_specifications',
+			'type'    => 'repeater',
+			'title'   => esc_html__( 'Specifications', 'jobus' ),
+			'subtitle' => esc_html__( 'Customize and manage your candidate specifications', 'jobus' ),
+			'button_title' => esc_html__( 'Add Specification', 'jobus' ),
+			'fields'  => array(
+				array(
+					'id'      => 'title',
+					'type'    => 'text',
+					'title'   => esc_html__( 'Title', 'jobus' ),
+					'placeholder' => esc_html__( 'Enter specification title', 'jobus' ),
+				),
+				array(
+					'id'      => 'value',
+					'type'    => 'text',
+					'title'   => esc_html__( 'Value', 'jobus' ),
+					'placeholder' => esc_html__( 'Enter specification value', 'jobus' ),
+				),
+			),
+		];
 
 		CSF::createSection( $meta_candidate_prefix, array(
 			'title'  => esc_html__( 'Specifications', 'jobus' ),
@@ -155,14 +206,6 @@ if ( class_exists( 'CSF' ) ) {
 		'title'  => esc_html__( 'Contact Information', 'jobus' ),
 		'icon'   => 'fa fa-map',
 		'fields' => array(
-
-			array(
-				'id'       => 'candidate_mail',
-				'type'     => 'text',
-				'title'    => esc_html__( 'Candidate Mail', 'jobus' ),
-				'subtitle' => esc_html__( 'Input the Candidate Mail Address', 'jobus' ),
-				'default'  => 'demo.candidate@mail.com',
-			),
 
 			array(
 				'id'       => 'jobus_candidate_location',
@@ -317,24 +360,9 @@ if ( class_exists( 'CSF' ) ) {
 						'title'    => esc_html__( 'Start Date', 'jobus' ),
 						'default'  => esc_html__( '02/03/18 - 13/05/20', 'jobus' ),
 						'settings' => array(
-							'dateFormat'      => 'dd/mm/yy',
 							'changeMonth'     => true,
 							'changeYear'      => true,
-							'showButtonPanel' => true,
-							'monthNamesShort' => array(
-								'January',
-								'February',
-								'March',
-								'April',
-								'May',
-								'June',
-								'July',
-								'August',
-								'September',
-								'October',
-								'November',
-								'December'
-							),
+							'monthNamesShort' => array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ),
 							'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
 						)
 					),
@@ -343,24 +371,9 @@ if ( class_exists( 'CSF' ) ) {
 						'type'     => 'date',
 						'title'    => esc_html__( 'End Date', 'jobus' ),
 						'settings' => array(
-							'dateFormat'      => 'dd/mm/yy',
 							'changeMonth'     => true,
 							'changeYear'      => true,
-							'showButtonPanel' => true,
-							'monthNamesShort' => array(
-								'January',
-								'February',
-								'March',
-								'April',
-								'May',
-								'June',
-								'July',
-								'August',
-								'September',
-								'October',
-								'November',
-								'December'
-							),
+							'monthNamesShort' => array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ),
 							'dayNamesMin'     => array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ),
 						)
 					),
@@ -368,8 +381,7 @@ if ( class_exists( 'CSF' ) ) {
 						'id'      => 'description',
 						'type'    => 'wp_editor',
 						'title'   => esc_html__( 'Description', 'jobus' ),
-						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.',
-							'jobus' ),
+						'default' => esc_html__( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.', 'jobus' ),
 					),
 				),
 				'default'      => array(

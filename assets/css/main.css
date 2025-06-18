@@ -3432,12 +3432,12 @@ img {
   top: 4px;
   left: 7px;
 }
-.candidate-profile-card .cadidate-avatar {
+.candidate-profile-card .candidate-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
 }
-.candidate-profile-card .cadidate-avatar.online:before {
+.candidate-profile-card .candidate-avatar.online:before {
   content: "";
   position: absolute;
   width: 11px;
@@ -3447,7 +3447,7 @@ img {
   top: 5px;
   right: 8px;
 }
-.candidate-profile-card .cadidate-avatar img {
+.candidate-profile-card .candidate-avatar img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
@@ -3679,70 +3679,70 @@ img {
   padding: 0;
 }
 
-.cadidate-profile-sidebar .bg-wrapper {
+.candidate-profile-sidebar .bg-wrapper {
   background: #fff;
   border-radius: 15px;
   padding: 0 20px 25px;
 }
-.cadidate-profile-sidebar .bg-wrapper.bg-color {
+.candidate-profile-sidebar .bg-wrapper.bg-color {
   background: #EFF6F3;
 }
-.cadidate-profile-sidebar .cadidate-bio .cadidate-avatar {
+.candidate-profile-sidebar .candidate-bio .candidate-avatar {
   width: 80px;
   height: 80px;
 }
-.cadidate-profile-sidebar .cadidate-bio .cadidate-name {
+.candidate-profile-sidebar .candidate-bio .candidate-name {
   font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
-.cadidate-profile-sidebar .cadidate-bio .invite-btn {
+.candidate-profile-sidebar .candidate-bio .invite-btn {
   font-size: 15px;
   letter-spacing: -0.5px;
   color: #008FDF;
   text-decoration: underline;
 }
-.cadidate-profile-sidebar .cadidate-bio ul li {
+.candidate-profile-sidebar .candidate-bio ul li {
   border-top: 1px solid #E6E6E6;
   padding: 14px 0;
 }
-.cadidate-profile-sidebar .cadidate-bio ul li span {
+.candidate-profile-sidebar .candidate-bio ul li span {
   font-size: 15px;
   color: rgba(36, 64, 52, 0.6);
 }
-.cadidate-profile-sidebar .cadidate-bio ul li div {
+.candidate-profile-sidebar .candidate-bio ul li div {
   font-size: 15px;
   font-weight: 500;
   color: #244034;
   margin: 4px 0 0;
 }
-.cadidate-profile-sidebar .cadidate-bio ul li div a:hover {
+.candidate-profile-sidebar .candidate-bio ul li div a:hover {
   text-decoration: underline;
   color: #244034;
 }
-.cadidate-profile-sidebar .sidebar-title {
+.candidate-profile-sidebar .sidebar-title {
   font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
-.cadidate-profile-sidebar .map-area {
+.candidate-profile-sidebar .map-area {
   height: 235px;
   border-radius: 10px;
   overflow: hidden;
 }
-.cadidate-profile-sidebar .email-form p {
+.candidate-profile-sidebar .email-form p {
   font-size: 15px;
   line-height: 22px;
   padding: 20px 0 0;
 }
-.cadidate-profile-sidebar .email-form label {
+.candidate-profile-sidebar .email-form label {
   font-size: 13px;
   font-weight: 500;
   color: #31795A;
   width: 65px;
   display: inline;
 }
-.cadidate-profile-sidebar .email-form input {
+.candidate-profile-sidebar .email-form input {
   width: 100%;
   height: 45px;
   border-radius: 5px;
@@ -3751,7 +3751,7 @@ img {
   padding: 0 15px;
   font-size: 13px;
 }
-.cadidate-profile-sidebar .email-form textarea {
+.candidate-profile-sidebar .email-form textarea {
   width: 100%;
   height: 135px;
   max-height: 135px;
@@ -3838,12 +3838,12 @@ img {
   top: 4px;
   left: 7px;
 }
-.candidate-profile-card .cadidate-avatar {
+.candidate-profile-card .candidate-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
 }
-.candidate-profile-card .cadidate-avatar.online:before {
+.candidate-profile-card .candidate-avatar.online:before {
   content: "";
   position: absolute;
   width: 11px;
@@ -3853,7 +3853,7 @@ img {
   top: 5px;
   right: 8px;
 }
-.candidate-profile-card .cadidate-avatar img {
+.candidate-profile-card .candidate-avatar img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
@@ -4069,71 +4069,71 @@ img {
   padding: 0;
 }
 
-.cadidate-profile-2-sidebar .bg-wrapper {
+.candidate-profile-2-sidebar .bg-wrapper {
   background: #fff;
   border-radius: 15px;
   padding: 0 20px 25px;
 }
-.cadidate-profile-2-sidebar .cadidate-bio .cadidate-avatar {
+.candidate-profile-2-sidebar .candidate-bio .candidate-avatar {
   width: 80px;
   height: 80px;
 }
-.cadidate-profile-2-sidebar .cadidate-bio .cadidate-name {
+.candidate-profile-2-sidebar .candidate-bio .candidate-name {
   font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
-.cadidate-profile-2-sidebar .cadidate-bio .invite-btn {
+.candidate-profile-2-sidebar .candidate-bio .invite-btn {
   font-size: 15px;
   letter-spacing: -0.5px;
   color: #008FDF;
   text-decoration: underline;
 }
-.cadidate-profile-2-sidebar .cadidate-bio ul li {
+.candidate-profile-2-sidebar .candidate-bio ul li {
   border-bottom: 1px solid #E6E6E6;
   padding: 14px 0;
   list-style-type: none;
 }
-.cadidate-profile-2-sidebar .cadidate-bio ul li li:first-child {
+.candidate-profile-2-sidebar .candidate-bio ul li li:first-child {
   border-top: 0;
 }
-.cadidate-profile-2-sidebar .cadidate-bio ul li span {
+.candidate-profile-2-sidebar .candidate-bio ul li span {
   font-size: 15px;
   color: rgba(36, 64, 52, 0.6);
 }
-.cadidate-profile-2-sidebar .cadidate-bio ul li div {
+.candidate-profile-2-sidebar .candidate-bio ul li div {
   font-size: 15px;
   font-weight: 500;
   color: #244034;
   margin: 4px 0 0;
 }
-.cadidate-profile-2-sidebar .cadidate-bio ul li div a:hover {
+.candidate-profile-2-sidebar .candidate-bio ul li div a:hover {
   text-decoration: underline;
   color: #244034;
 }
-.cadidate-profile-2-sidebar .sidebar-title {
+.candidate-profile-2-sidebar .sidebar-title {
   font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
-.cadidate-profile-2-sidebar .map-area {
+.candidate-profile-2-sidebar .map-area {
   height: 235px;
   border-radius: 10px;
   overflow: hidden;
 }
-.cadidate-profile-2-sidebar .email-form p {
+.candidate-profile-2-sidebar .email-form p {
   font-size: 14px;
   line-height: 22px;
   padding: 20px 0 0;
 }
-.cadidate-profile-2-sidebar .email-form label {
+.candidate-profile-2-sidebar .email-form label {
   font-size: 13px;
   font-weight: 500;
   color: #31795A;
   width: 80px;
   display: inline;
 }
-.cadidate-profile-2-sidebar .email-form input {
+.candidate-profile-2-sidebar .email-form input {
   width: 100%;
   height: 45px;
   border-radius: 5px;
@@ -4142,7 +4142,7 @@ img {
   padding: 0 15px;
   font-size: 13px;
 }
-.cadidate-profile-2-sidebar .email-form textarea {
+.candidate-profile-2-sidebar .email-form textarea {
   width: 100%;
   height: 135px;
   max-height: 135px;

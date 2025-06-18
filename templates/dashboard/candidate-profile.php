@@ -185,7 +185,6 @@ include( 'candidate-templates/sidebar-menu.php' );
                 <h4 class="dash-title-three">
                     <?php esc_html_e( 'Social Media', 'jobus' ); ?>
                 </h4>
-
                 <?php
                 $available_icons = array(
                     'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
@@ -230,7 +229,10 @@ include( 'candidate-templates/sidebar-menu.php' );
                     endforeach;
                     ?>
                 </div>
-                <a href="#" class="dash-btn-one" id="add-social-link"><i class="bi bi-plus"></i> <?php esc_html_e( 'Add more link', 'jobus' ); ?></a>
+                <a href="javascript:void(0)" class="dash-btn-one" id="add-social-link">
+                    <i class="bi bi-plus"></i>
+                    <?php esc_html_e( 'Add more link', 'jobus' ); ?>
+                </a>
             </div>
 
             <div class="bg-white card-box border-20 mt-40">
@@ -245,8 +247,8 @@ include( 'candidate-templates/sidebar-menu.php' );
                     </div>
                     <div class="col-lg-3">
                         <div class="dash-input-wrapper mb-25">
-                            <label for="">Country*</label>
-                            <select class="nice-select">
+                            <label for="">Age*</label>
+                                <select class="nice-select">
                                 <option>Afghanistan</option>
                                 <option>Albania</option>
                                 <option>Algeria</option>
@@ -325,7 +327,6 @@ include( 'candidate-templates/sidebar-menu.php' );
                     </div>
                 </div>
             </div>
-            <!-- /.card-box -->
 
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save', 'jobus' ); ?></button>

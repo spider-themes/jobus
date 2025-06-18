@@ -1,19 +1,19 @@
 <?php
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-wp_enqueue_style('lightbox');
-wp_enqueue_script('lightbox');
+wp_enqueue_style( 'lightbox' );
+wp_enqueue_script( 'lightbox' );
 ?>
 
 <div class="inner-banner-one position-relative">
     <div class="container">
         <div class="candidate-profile-card candidate-profile-two list-layout">
             <div class="d-flex align-items-start align-items-xl-center">
-                <div class="cadidate-avatar position-relative d-block me-auto ms-auto">
+                <div class="candidate-avatar position-relative d-block me-auto ms-auto">
                     <a href="<?php the_permalink() ?>" class="rounded-circle">
-		                <?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle']) ?>
+						<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ) ?>
                     </a>
                 </div>
                 <div class="right-side">
@@ -21,83 +21,85 @@ wp_enqueue_script('lightbox');
                         <div class="col-xl-2 order-xl-0">
                             <div class="position-relative">
                                 <h4 class="candidate-name text-white mb-0"><?php the_title() ?></h4>
-                                <div class="andidate-post"><?php esc_html('Intro') ?></div>
-                                <?php if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
+                                <div class="andidate-post"><?php esc_html( 'Intro' ) ?></div>
+								<?php if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
                                     <div class="candidate-post">
-                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_1')) ?>
+										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) ?>
                                     </div>
-                                <?php endif; ?>
+								<?php endif; ?>
                             </div>
                         </div>
                         <div class="col-xl-3 order-xl-3">
-                            <?php
-                            $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
-                            $max_skills = 2;
+							<?php
+							$skills     = get_the_terms( get_the_ID(), 'jobus_candidate_skill' );
+							$max_skills = 2;
 
-                            if ($skills && count($skills) > $max_skills) {
-                            // Shuffle the skills to get a random order
-                            shuffle($skills);
+							if ( $skills && count( $skills ) > $max_skills ) {
+								// Shuffle the skills to get a random order
+								shuffle( $skills );
 
-                            // Display the first 2 skills
-                            $displayed_skills = array_slice($skills, 0, $max_skills);
-                            echo '<ul class="candidate-skills style-none d-flex align-items-center">';
-                                foreach ($displayed_skills as $skill) {
-                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
+								// Display the first 2 skills
+								$displayed_skills = array_slice( $skills, 0, $max_skills );
+								echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+								foreach ( $displayed_skills as $skill ) {
+									echo '<li class="text-capitalize">' . esc_html( $skill->name ) . '</li>';
+								}
+
+								// Display the count of remaining skills
+								$remaining_count = count( $skills ) - $max_skills;
+								echo '<li class="more">' . esc_html( $remaining_count ) . '+</li>';
+								echo '</ul>';
+							} else {
+								// Display all skills
+								if ( !empty($skills) ) {
+									echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+									foreach ( $skills as $skill ) {
+										echo '<li class="text-capitalize">' . esc_html( $skill->name ) . '</li>';
+									}
+									echo '</ul>';
                                 }
-
-                                // Display the count of remaining skills
-                                $remaining_count = count($skills) - $max_skills;
-                                echo '<li class="more">' . esc_html($remaining_count) . '+</li>';
-                                echo '</ul>';
-                            } else {
-                            // Display all skills
-                            echo '<ul class="candidate-skills style-none d-flex align-items-center">';
-                                foreach ($skills as $skill) {
-                                echo '<li class="text-capitalize">' . esc_html($skill->name) . '</li>';
-                                }
-                                echo '</ul>';
-                            }
-                            ?>
+							}
+							?>
                         </div>
 
-                        <?php
-                        if (jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2') ) {
-                            ?>
+						<?php
+						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
+							?>
                             <div class="col-xl-2 col-md-4 order-xl-1">
                                 <div class="candidate-info">
-                                    <span><?php echo esc_html(jobus_meta_candidate_spec_name(2)); ?></span>
+                                    <span><?php echo esc_html( jobus_meta_candidate_spec_name( 2 ) ); ?></span>
                                     <div class="text-capitalize">
-                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_2')) ?>
+										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        if ( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3') ) {
-                            ?>
+							<?php
+						}
+						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_3' ) ) {
+							?>
                             <div class="col-xl-2 col-md-4 order-xl-2">
                                 <div class="candidate-info">
-                                    <span><?php echo esc_html(jobus_meta_candidate_spec_name(3)); ?></span>
+                                    <span><?php echo esc_html( jobus_meta_candidate_spec_name( 3 ) ); ?></span>
                                     <div class="text-capitalize">
-                                        <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_candidate_options', 'candidate_archive_meta_3')) ?>
+										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_3' ) ) ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        }
+							<?php
+						}
 
-                        if ( $cv_attachment) {
-                            ?>
+						if ( $cv_attachment ) {
+							?>
                             <div class="col-xl-3 col-md-4 order-xl-4">
                                 <div class="d-flex justify-content-md-end">
-                                    <a href="<?php echo esc_url($cv_attachment) ?>" class="cv-download-btn fw-500 tran3s ms-md-3 sm-mt-20" target="_blank">
-                                        <?php esc_html_e('Download CV', 'jobus') ?>
+                                    <a href="<?php echo esc_url( $cv_attachment ) ?>" class="cv-download-btn fw-500 tran3s ms-md-3 sm-mt-20" target="_blank">
+										<?php esc_html_e( 'Download CV', 'jobus' ) ?>
                                     </a>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        ?>
+							<?php
+						}
+						?>
                     </div>
                 </div>
             </div>
@@ -111,263 +113,306 @@ wp_enqueue_script('lightbox');
             <div class="col-xxl-9 col-lg-8">
                 <div class="candidates-profile-details-2 me-xxl-5 pe-xxl-4">
                     <div class="inner-card border-style mb-65 lg-mb-40">
-		                <?php the_content() ?>
+						<?php the_content() ?>
                     </div>
-                    <?php
-                    if ( !empty($meta['video_url']) ) {
-                        if ( !empty($meta['video_title']) ) { ?>
-                            <h3 class="title"><?php echo esc_html($meta['video_title']) ?></h3>
-                            <?php
-                        }
-                        ?>
-                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50" style="background-image: url(<?php echo esc_url($meta['bg_img']['url']) ?>)">
-                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="<?php echo esc_url($meta['video_url']) ?>">
+					<?php
+					if ( ! empty( $meta['video_url'] ) ) {
+						if ( ! empty( $meta['video_title'] ) ) { ?>
+                            <h3 class="title"><?php echo esc_html( $meta['video_title'] ) ?></h3>
+							<?php
+						}
+						?>
+                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                             style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ) ?>)">
+                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
+                               href="<?php echo esc_url( $meta['video_url'] ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
                         </div>
-                        <?php
-                    }
+						<?php
+					}
 
-                    if ( $educations ) {
-                        ?>
+					if ( $educations ) {
+						?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
-                            <?php
-                            if ( !empty($meta['education_title']) ) {?>
-                                <h3 class="title"><?php echo esc_html($meta['education_title']) ?></h3>
-                                <?php
-                            }
-                            ?>
+							<?php
+							if ( ! empty( $meta['education_title'] ) ) { ?>
+                                <h3 class="title"><?php echo esc_html( $meta['education_title'] ) ?></h3>
+								<?php
+							}
+							?>
                             <div class="time-line-data position-relative pt-15">
-                                <?php
-                                foreach ( $educations as $item ) {
-                                    ?>
+								<?php
+								foreach ( $educations as $item ) {
+									?>
                                     <div class="info position-relative">
-                                        <?php
-                                        if ( !empty($item['sl_num']) ) { ?>
-                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['title']) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html($item['title']) ?></div>
-                                            <?php
-                                        }
-                                        if ( !empty($item['academy']) ) { ?>
-                                            <h4><?php echo esc_html($item['academy']) ?></h4>
-                                            <?php
-                                        }
-                                        if ( !empty($item['description']) ) { ?>
-                                            <?php echo wp_kses_post(wpautop($item['description'])) ?>
-                                            <?php
-                                        }
-                                        ?>
+										<?php
+										if ( ! empty( $item['sl_num'] ) ) { ?>
+                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['title'] ) ) { ?>
+                                            <div class="text_1 fw-500"><?php echo esc_html( $item['title'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['academy'] ) ) { ?>
+                                            <h4><?php echo esc_html( $item['academy'] ) ?></h4>
+											<?php
+										}
+										if ( ! empty( $item['description'] ) ) { ?>
+											<?php echo wp_kses_post( wpautop( $item['description'] ) ) ?>
+											<?php
+										}
+										?>
                                     </div>
-                                    <?php
-                                }
-                                ?>
+									<?php
+								}
+								?>
                             </div>
                         </div>
-                    <?php
-                    }
+						<?php
+					}
 
-                    if ( is_array($skills )) {
-                    ?>
-                    <div class="inner-card border-style mb-75 lg-mb-50">
-                        <h3 class="title"><?php esc_html_e('Skills', 'jobus') ?></h3>
-                        <ul class="style-none skill-tags d-flex flex-wrap pb-25">
-                            <?php
-                            foreach( $skills as $skill ) {
-                                echo '<li>'.esc_html($skill->name).'</li>';
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <?php
-                    }
-
-                    if ( $experience ) {
-                    ?>
-                    <div class="inner-card border-style mb-60 lg-mb-50">
-                        <?php
-                        if ( !empty($meta['experience_title']) ) {?>
-                            <h3 class="title"><?php echo esc_html($meta['experience_title']) ?></h3>
-                            <?php
-                        }
-                        ?>
-                        <div class="time-line-data position-relative pt-15">
-                            <?php
-                            foreach ( $experience as $item ) {
-                                ?>
-                                <div class="info position-relative">
-                                    <?php
-                                    if ( !empty($item['sl_num']) ) { ?>
-                                        <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html($item['sl_num']) ?></div>
-                                        <?php
-                                    }
-                                    if ( !empty($item['start_date']) ) { ?>
-                                        <div class="text_1 fw-500"><?php echo esc_html($item['start_date']) ?> - <?php echo esc_html($item['end_date']) ?></div>
-                                        <?php
-                                    }
-                                    if ( !empty($item['title']) ) { ?>
-                                        <h4><?php echo esc_html($item['title']) ?></h4>
-                                        <?php
-                                    }
-                                    if ( !empty($item['description']) ) { ?>
-                                        <?php echo wp_kses_post(wpautop($item['description'])) ?>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
-                                <?php
-                            }
-                            ?>
+					if ( is_array( $skills ) ) {
+						?>
+                        <div class="inner-card border-style mb-75 lg-mb-50">
+                            <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
+                            <ul class="style-none skill-tags d-flex flex-wrap pb-25">
+								<?php
+								foreach ( $skills as $skill ) {
+									echo '<li>' . esc_html( $skill->name ) . '</li>';
+								}
+								?>
+                            </ul>
                         </div>
-                    </div>
-                    <?php
-                    }
+						<?php
+					}
 
-                    if ( $portfolio_ids ) {
-                        if ( !empty($meta['portfolio_title']) ) {?>
-                            <h3 class="title"><?php echo esc_html($meta['portfolio_title']) ?></h3>
-                            <?php
-                        }
-	                    ?>
-                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">
-		                    <?php
-		                    foreach ( $portfolio_ids as $item ) {
-			                    $image_url = wp_get_attachment_image_url($item, 'full')
-			                    ?>
+					if ( $experience ) {
+						?>
+                        <div class="inner-card border-style mb-60 lg-mb-50">
+							<?php
+							if ( ! empty( $meta['experience_title'] ) ) { ?>
+                                <h3 class="title"><?php echo esc_html( $meta['experience_title'] ) ?></h3>
+								<?php
+							}
+							?>
+                            <div class="time-line-data position-relative pt-15">
+								<?php
+								foreach ( $experience as $item ) {
+									?>
+                                    <div class="info position-relative">
+										<?php
+										if ( ! empty( $item['sl_num'] ) ) { ?>
+                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['start_date'] ) ) { ?>
+                                            <div class="text_1 fw-500"><?php echo esc_html( $item['start_date'] ) ?>
+                                                - <?php echo esc_html( $item['end_date'] ) ?></div>
+											<?php
+										}
+										if ( ! empty( $item['title'] ) ) { ?>
+                                            <h4><?php echo esc_html( $item['title'] ) ?></h4>
+											<?php
+										}
+										if ( ! empty( $item['description'] ) ) { ?>
+											<?php echo wp_kses_post( wpautop( $item['description'] ) ) ?>
+											<?php
+										}
+										?>
+                                    </div>
+									<?php
+								}
+								?>
+                            </div>
+                        </div>
+						<?php
+					}
+
+					if ( $portfolio_ids ) {
+						if ( ! empty( $meta['portfolio_title'] ) ) { ?>
+                            <h3 class="title"><?php echo esc_html( $meta['portfolio_title'] ) ?></h3>
+							<?php
+						}
+						?>
+                        <div class="candidate-portfolio-slider" data-rtl="<?php echo esc_attr( jobus_rtl() ) ?>">
+							<?php
+							foreach ( $portfolio_ids as $item ) {
+								$image_url = wp_get_attachment_image_url( $item, 'full' )
+								?>
                                 <div class="item">
-                                    <a href="<?php echo esc_url($image_url) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
-					                    <?php echo wp_get_attachment_image($item, 'jobus_280x268') ?>
+                                    <a href="<?php echo esc_url( $image_url ) ?> " class="example-image-link w-100 d-blok" data-lightbox="example-set">
+										<?php echo wp_get_attachment_image( $item, 'jobus_280x268' ) ?>
                                     </a>
                                 </div>
-			                    <?php
-		                    }
-		                    ?>
+								<?php
+							}
+							?>
                         </div>
-	                    <?php
-                    }
-                    ?>
+						<?php
+					}
+					?>
                 </div>
             </div>
             <!-- /.candidates-profile-details -->
 
             <div class="col-xxl-3 col-lg-4">
-                <div class="cadidate-profile-2-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
-                    <div class="cadidate-bio bg-wrapper bg-color mb-60 md-mb-40">
-				        <?php
-				        $specifications = jobus_opt('candidate_specifications');
-				        if ($specifications) {
-					        ?>
-                            <ul class="style-none">
-						        <?php
-						        foreach ( $specifications as $field ) {
-							        $meta_name = $field[ 'meta_name' ] ?? '';
-							        $meta_key = $field[ 'meta_key' ] ?? '';
+                <div class="candidate-profile-2-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
+                    <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
+                        <ul class="style-none">
+							<?php
+							if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
+                                <li class="border-0">
+                                    <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
+                                    <div><?php echo jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ?></div>
+                                </li>
+								<?php
+							}
 
-							        // Get the stored meta-values
-							        $meta_options = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
+							if ( $candidate_age ) { ?>
+                                <li>
+                                    <span><?php esc_html_e( 'Age: ', 'jobus' ); ?></span>
+                                    <div>
+										<?php
+										$birthDate = DateTime::createFromFormat( 'd/m/Y', $candidate_age );
+										if ( $birthDate ) {
+											$today = new DateTime( 'now' );
+											$age   = $today->diff( $birthDate )->y;
+											echo esc_html( $age );
+										}
+										?>
+                                    </div>
+                                </li>
+								<?php
+							}
 
-							        if ( isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ]) ) {
-								        ?>
+							if ( $candidate_mail ) { ?>
+                                <li>
+                                    <span><?php esc_html_e( 'Email: ', 'jobus' ); ?></span>
+                                    <div>
+                                        <a href="mailto:<?php echo esc_attr( $meta['candidate_mail'] ) ?>">
+											<?php echo esc_html( $meta['candidate_mail'] ) ?>
+                                        </a>
+                                    </div>
+                                </li>
+								<?php
+							}
+
+							if ( ! empty( $specifications ) ) {
+								foreach ( $specifications as $field ) {
+									$meta_name = $field['meta_name'] ?? '';
+									$meta_key  = $field['meta_key'] ?? '';
+
+									// Get the stored meta-values
+									$meta_options = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
+
+									if ( ! empty( $meta_options[ $meta_key ] ) ) {
+										?>
                                         <li>
-									        <?php
-									        if (isset($meta_options[ $meta_key ]) && !empty($meta_options[ $meta_key ])) {
-										        echo '<span>' . esc_html($meta_name) . ':</span>';
-									        }
-									        if (!empty($meta_options[ $meta_key ] && is_array($meta_options[ $meta_key ]))) {
-										        echo '<div class="text-capitalize">';
-										        foreach ( $meta_options[ $meta_key ] as $value ) {
-											        $trim_value = str_replace('@space@', ' ', $value);
-											        echo esc_html($trim_value);
-										        }
-										        echo '</div>';
-									        }
-									        ?>
+											<?php
+											if ( ! empty( $meta_options[ $meta_key ] ) ) {
+												echo '<span>' . esc_html( $meta_name ) . ':</span>';
+											}
+											if ( ! empty( is_array( $meta_options[ $meta_key ] ) ) ) {
+												echo '<div class="text-capitalize">';
+												foreach ( $meta_options[ $meta_key ] as $value ) {
+													$trim_value = str_replace( '@space@', ' ', $value );
+													echo esc_html( $trim_value );
+												}
+												echo '</div>';
+											}
+											?>
                                         </li>
-								        <?php
-							        }
-						        }
+										<?php
+									}
+								}
+							}
 
-						        $social_icons = !empty($meta['social_icons']) ? $meta['social_icons'] : '';
-						        if (is_array($social_icons)) {
-							        ?>
-                                    <li>
-                                        <span><?php esc_html_e('Social: ', 'jobus'); ?></span>
-                                        <div>
-									        <?php
-									        foreach ( $social_icons as $item ) {
-										        if (!empty($item[ 'url' ])) { ?>
-                                                    <a href="<?php echo esc_url($item[ 'url' ]) ?>" class="me-3">
-                                                        <i class="<?php echo esc_attr($item[ 'icon' ]) ?>"></i>
-                                                    </a>
-											        <?php
-										        }
-									        }
-									        ?>
-                                        </div>
-                                    </li>
-							        <?php
-						        }
-						        ?>
-                            </ul>
-                            <a href="<?php echo esc_url($cv_attachment) ?>" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
-						        <?php esc_html_e('Download CV', 'jobus') ?>
-                            </a>
-					        <?php
-				        }
-				        ?>
+							if ( $candidate_specifications ) {
+								foreach ( $candidate_specifications as $specification ) {
+									if ( ! empty( $specification['title'] ) && ! empty( $specification['value'] ) ) { ?>
+                                        <li>
+                                            <span><?php echo esc_html( $specification['title'] ); ?>: </span>
+                                            <div><?php echo esc_html( $specification['value'] ); ?></div>
+                                        </li>
+										<?php
+									}
+								}
+							}
+
+							if ( $social_icons ) {
+								?>
+                                <li>
+                                    <span><?php esc_html_e( 'Social: ', 'jobus' ); ?></span>
+                                    <div>
+										<?php
+										foreach ( $social_icons as $item ) {
+											if ( ! empty( $item['url'] ) ) { ?>
+                                                <a href="<?php echo esc_url( $item['url'] ) ?>" class="me-3">
+                                                    <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
+                                                </a>
+												<?php
+											}
+										}
+										?>
+                                    </div>
+                                </li>
+								<?php
+							}
+							?>
+                        </ul>
                     </div>
 
-			        <?php
-                    $location = $meta['jobus_candidate_location'] ?? '';
+					<?php
+					$location = $meta['jobus_candidate_location'] ?? '';
 
-                    if ( is_array($location) ) {
-                        $latitude = $location['latitude'] ?? '';
-                        $longitude = $location['longitude'] ?? '';
-                        $address_encoded = urlencode($location['address']); // URL encode the address for safety
+					if ( is_array( $location ) ) {
+						$latitude        = $location['latitude'] ?? '';
+						$longitude       = $location['longitude'] ?? '';
+						$address_encoded = urlencode( $location['address'] ); // URL encode the address for safety
 
-                        $is_http = is_ssl() ? 'https://' : 'http://';
-                        $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
-				        ?>
-                        <h4 class="sidebar-title"><?php esc_html_e('Location', 'jobus') ?></h4>
+						$is_http    = is_ssl() ? 'https://' : 'http://';
+						$iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
+						?>
+                        <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
                         <div class="map-area mb-60 md-mb-40">
                             <div class="gmap_canvas h-100 w-100">
-                                <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url($iframe_url); ?>"></iframe>
+                                <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
-				        <?php
-			        }
-			        ?>
+						<?php
+					}
+					?>
 
-                    <h4 class="sidebar-title"><?php esc_html_e('Email', 'jobus') ?> <?php the_title() ?></h4>
+                    <h4 class="sidebar-title"><?php esc_html_e( 'Email', 'jobus' ) ?><?php the_title() ?></h4>
                     <div class="email-form bg-wrapper bg-color">
-                        <p><?php esc_html_e('Your email address & profile will be shown to the recipient.', 'jobus') ?></p>
+                        <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
-                            <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
+							<?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e('Name*', 'jobus') ?>" required>
+                                <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
-                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e('Email*', 'jobus') ?>" required>
+                                <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
                             <div class="d-sm-flex mb-25">
-                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e('Subject', 'jobus') ?>">
+                                <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
-                                <textarea name="message" id="message" placeholder="<?php esc_attr_e('Message', 'jobus') ?>"></textarea>
+                                <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>"></textarea>
                             </div>
 
                             <div class="d-sm-flex">
                                 <button type="submit" name="send_message" class="btn-ten fw-500 text-white flex-fill text-center tran3s">
-							        <?php esc_html_e('Send Message', 'jobus') ?>
+									<?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>
 
