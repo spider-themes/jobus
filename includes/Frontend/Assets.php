@@ -80,6 +80,5 @@ class Assets {
 			'delete_text' => __('Delete', 'jobus'),
 			'default_avatar' => get_avatar_url(0), // Default WordPress avatar
 		]);
-
 	}
 }

@@ -18,6 +18,40 @@ if ( ! empty($candidate_query->posts) ) {
     $candidate_id = $candidate_query->posts[0];
 }
 
+// --- Candidate Location Meta Logic (CSF Sync) ---
+// 1. Always define $candidate_location with CSF meta field default values before any use
+$candidate_location = array(
+    'address'   => 'Dhaka Division, Bangladesh',
+    'latitude'  => '23.9456166',
+    'longitude' => '90.2526382',
+    'zoom'      => '20',
+);
+// 2. If candidate meta exists, override defaults
+if ( $candidate_id ) {
+    $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+    if ( is_array($meta) && isset($meta['jobus_candidate_location']) && is_array($meta['jobus_candidate_location']) ) {
+        $candidate_location = wp_parse_args($meta['jobus_candidate_location'], $candidate_location);
+    }
+}
+// 3. On form submit, update the meta field just like $social_icons
+if ( $candidate_id && isset($_POST['candidate_location_address']) ) {
+    $location = array(
+        'address'   => sanitize_text_field($_POST['candidate_location_address']),
+        'latitude'  => sanitize_text_field($_POST['candidate_location_lat']),
+        'longitude' => sanitize_text_field($_POST['candidate_location_lng']),
+        'zoom'      => sanitize_text_field($_POST['candidate_location_zoom']),
+    );
+    $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+    if (!is_array($meta)) $meta = array();
+    $meta['jobus_candidate_location'] = $location;
+    update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
+    // Optionally, update the single meta for compatibility
+    update_post_meta( $candidate_id, 'jobus_candidate_location', $location );
+    // Update the local variable for immediate UI feedback
+    $candidate_location = $location;
+}
+// --- End Candidate Location Meta Logic ---
+
 // Handle form submission
 if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'] ) || isset( $_POST['candidate_description'] ) || isset( $_POST['social_icons'] ) ) {
 
@@ -308,19 +342,38 @@ include( 'candidate-templates/sidebar-menu.php' );
                         </div>
                         <!-- /.dash-input-wrapper -->
                     </div>
+
+
                     <div class="col-12">
                         <div class="dash-input-wrapper mb-25">
-                            <label for="">Map Location*</label>
+                            <label for="candidate_location_address"><?php esc_html_e('Map Location*', 'jobus') ?></label>
                             <div class="position-relative">
-                                <input type="text" placeholder="XC23+6XC, Moiran, N105">
-                                <button class="location-pin tran3s"><img src="../images/lazy.svg" data-src="images/icon/icon_16.svg" alt=""
-                                                                         class="lazy-img m-auto"></button>
+                                <input type="text" name="candidate_location_address" id="candidate_location_address" placeholder="<?php esc_attr_e('XC23+6XC, Moiran, N105', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['address']); ?>">
                             </div>
-                            <div class="map-frame mt-30">
-                                <div class="gmap_canvas h-100 w-100">
-                                    <iframe class="gmap_iframe h-100 w-100"
-                                            src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=dhaka collage&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                            <div class="row mt-2">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" name="candidate_location_lat" id="candidate_location_lat" placeholder="Latitude" value="<?php echo esc_attr($candidate_location['latitude']); ?>">
                                 </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" name="candidate_location_lng" id="candidate_location_lng" placeholder="Longitude" value="<?php echo esc_attr($candidate_location['longitude']); ?>">
+                                </div>
+                            </div>
+
+	                        <?php
+	                        $lat = trim($candidate_location['latitude']);
+	                        $lng = trim($candidate_location['longitude']);
+	                        $zoom = !empty($candidate_location['zoom']) ? intval($candidate_location['zoom']) : 15;
+	                        $is_http = is_ssl() ? 'https://' : 'http://';
+	                        $iframe_url = $is_http . "maps.google.com/maps?q={$lat},{$lng}&z={$zoom}&output=embed";
+	                        ?>
+                            <div class="map-frame mt-30">
+                                <iframe class="gmap_iframe h-100 w-100"
+                                        id="candidate_gmap_iframe"
+                                        style="height:100%;min-height:300px;border:0;"
+                                        src="<?php echo esc_url($iframe_url); ?>"
+                                        allowfullscreen=""
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                         <!-- /.dash-input-wrapper -->
