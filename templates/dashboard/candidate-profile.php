@@ -2,15 +2,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// Get the current logged-in user object
 $user = wp_get_current_user();
 
-// Get candidate post ID for current user
+// Retrieve the candidate post ID for the current user (if exists)
 $candidate_id = false;
 $args = array(
-    'post_type'      => 'jobus_candidate',
-    'author'         => $user->ID,
-    'posts_per_page' => 1,
-    'fields'         => 'ids',
+    'post_type'      => 'jobus_candidate', // Custom post type for candidates
+    'author'         => $user->ID,         // Filter by current user as author
+    'posts_per_page' => 1,                 // Only need one post (should be unique)
+    'fields'         => 'ids',             // Only get post IDs
 );
 
 $candidate_query = new WP_Query($args);
@@ -18,22 +20,23 @@ if ( ! empty($candidate_query->posts) ) {
     $candidate_id = $candidate_query->posts[0];
 }
 
-// --- Candidate Location Meta Logic (CSF Sync) ---
-// 1. Always define $candidate_location with CSF meta field default values before any use
+// Set default candidate location values (used if no meta is set)
 $candidate_location = array(
     'address'   => 'Dhaka Division, Bangladesh',
     'latitude'  => '23.9456166',
     'longitude' => '90.2526382',
     'zoom'      => '20',
 );
-// 2. If candidate meta exists, override defaults
+
+// If candidate meta exists, override location defaults with saved values
 if ( $candidate_id ) {
     $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
     if ( is_array($meta) && isset($meta['jobus_candidate_location']) && is_array($meta['jobus_candidate_location']) ) {
         $candidate_location = wp_parse_args($meta['jobus_candidate_location'], $candidate_location);
     }
 }
-// 3. On form submit, update the meta field just like $social_icons
+
+// Handle location update on form submission
 if ( $candidate_id && isset($_POST['candidate_location_address']) ) {
     $location = array(
         'address'   => sanitize_text_field($_POST['candidate_location_address']),
@@ -45,12 +48,82 @@ if ( $candidate_id && isset($_POST['candidate_location_address']) ) {
     if (!is_array($meta)) $meta = array();
     $meta['jobus_candidate_location'] = $location;
     update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
-    // Optionally, update the single meta for compatibility
+
+    // Also update a single meta field for compatibility (if needed)
     update_post_meta( $candidate_id, 'jobus_candidate_location', $location );
+
     // Update the local variable for immediate UI feedback
     $candidate_location = $location;
 }
-// --- End Candidate Location Meta Logic ---
+
+// Initialize specification variables
+$candidate_specifications = array();
+$candidate_age = '';
+$candidate_mail = '';
+
+// Dynamic select fields (Expert Level, Qualification, etc.)
+$candidate_dynamic_fields = array();
+// If candidate meta exists, override defaults for specifications
+if ( $candidate_id ) {
+    $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+    if ( is_array($meta) ) {
+        $candidate_specifications = isset($meta['candidate_specifications']) && is_array($meta['candidate_specifications']) ? $meta['candidate_specifications'] : array();
+        $candidate_age = $meta['candidate_age'] ?? '';
+        $candidate_mail = $meta['candidate_mail'] ?? '';
+
+        // Dynamic select fields (Expert Level, Qualification, etc.)
+        $candidate_dynamic_fields = array();
+        if (function_exists('jobus_opt')) {
+            $candidate_spec_fields = jobus_opt('candidate_specifications');
+            if (!empty($candidate_spec_fields)) {
+                foreach ($candidate_spec_fields as $field) {
+                    $meta_key = $field['meta_key'] ?? '';
+                    if ($meta_key) {
+                        $candidate_dynamic_fields[$meta_key] = $meta[ $meta_key ] ?? '';
+                    }
+                }
+            }
+        }
+    }
+}
+
+// On form submit, update the candidate specification meta fields
+if ( $candidate_id && (isset($_POST['candidate_mail']) || isset($_POST['candidate_age'])) ) {
+    $meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+    if (!is_array($meta)) $meta = array();
+    $meta['candidate_age'] = isset($_POST['candidate_age']) ? sanitize_text_field($_POST['candidate_age']) : '';
+    $meta['candidate_mail'] = isset($_POST['candidate_mail']) ? sanitize_email($_POST['candidate_mail']) : '';
+
+    // Handle dynamic select fields
+    if (function_exists('jobus_opt')) {
+        $candidate_spec_fields = jobus_opt('candidate_specifications');
+        if (!empty($candidate_spec_fields)) {
+            foreach ($candidate_spec_fields as $field) {
+                $meta_key = $field['meta_key'] ?? '';
+                if ($meta_key && isset($_POST[$meta_key])) {
+                    $meta[$meta_key] = is_array($_POST[$meta_key]) ? array_map('sanitize_text_field', $_POST[$meta_key]) : sanitize_text_field($_POST[$meta_key]);
+                }
+            }
+        }
+    }
+    // Save repeater fields for additional specifications
+    $specs = array();
+    if (isset($_POST['candidate_specifications']) && is_array($_POST['candidate_specifications'])) {
+        foreach ($_POST['candidate_specifications'] as $spec) {
+            $title = isset($spec['title']) ? sanitize_text_field($spec['title']) : '';
+            $value = isset($spec['value']) ? sanitize_text_field($spec['value']) : '';
+            if ($title !== '' || $value !== '') {
+                $specs[] = array('title' => $title, 'value' => $value);
+            }
+        }
+    }
+    $meta['candidate_specifications'] = $specs;
+    update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
+    $candidate_specifications = $specs;
+    $candidate_age = $meta['candidate_age'] ?? '';
+    $candidate_mail = $meta['candidate_mail'] ?? '';
+    $candidate_dynamic_fields = $candidate_dynamic_fields ?? [];
+}
 
 // Handle form submission
 if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'] ) || isset( $_POST['candidate_description'] ) || isset( $_POST['social_icons'] ) ) {
@@ -210,7 +283,7 @@ include( 'candidate-templates/sidebar-menu.php' );
 						?>
                     </div>
                     <div class="alert-text">
-						<?php esc_html_e( 'Brief description for your profile. URLs are hyperlinked.', 'jobus' ); ?>
+                        <?php esc_html_e( 'Brief description for your profile. URLs are hyperlinked.', 'jobus' ); ?>
                     </div>
                 </div>
             </div>
@@ -265,85 +338,86 @@ include( 'candidate-templates/sidebar-menu.php' );
                 </div>
                 <a href="javascript:void(0)" class="dash-btn-one" id="add-social-link">
                     <i class="bi bi-plus"></i>
-                    <?php esc_html_e( 'Add more link', 'jobus' ); ?>
+                    <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
                 </a>
             </div>
 
             <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three">Address & Location</h4>
+                <h4 class="dash-title-three"><?php esc_html_e('Specifications', 'jobus'); ?></h4>
+                <div class="row">
+                    <?php
+                    if ( !empty($candidate_age) ) { ?>
+                        <div class="col-lg-3">
+                            <div class="dash-input-wrapper mb-25">
+                                <label for="candidate_age"><?php esc_html_e('Date of Birth (Age)', 'jobus'); ?></label>
+                                <input type="date" name="candidate_age" id="candidate_age" class="form-control" value="<?php echo esc_attr($candidate_age); ?>">
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if ( !empty($candidate_mail) ) { ?>
+                        <div class="col-lg-3">
+                            <div class="dash-input-wrapper mb-25">
+                                <label for="candidate_mail"><?php esc_html_e('Candidate Email', 'jobus'); ?></label>
+                                <input type="email" name="candidate_mail" id="candidate_mail" class="form-control" value="<?php echo esc_attr($candidate_mail); ?>">
+                            </div>
+                        </div>
+                        <?php
+                    }
+
+			        // Dynamic fields for candidate specifications
+			        if (function_exists('jobus_opt')) {
+				        $candidate_spec_fields = jobus_opt('candidate_specifications');
+				        if (!empty($candidate_spec_fields)) {
+					        foreach ($candidate_spec_fields as $field) {
+						        $meta_key = $field['meta_key'] ?? '';
+						        $meta_name = $field['meta_name'] ?? '';
+						        $meta_value = $candidate_dynamic_fields[ $meta_key ] ?? '';
+						        $meta_values = $field['meta_values_group'] ?? array();
+						        echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
+						        echo '<label for="' . esc_attr($meta_key) . '">' . esc_html($meta_name) . '</label>';
+						        echo '<select name="' . esc_attr($meta_key) . '[]" id="' . esc_attr($meta_key) . '" class="nice-select" multiple>';
+						        foreach ($meta_values as $option) {
+							        $val = strtolower(preg_replace('/[\s,]+/', '@space@', $option['meta_values']));
+							        $selected = (is_array($meta_value) && in_array($val, $meta_value)) ? 'selected' : '';
+							        echo '<option value="' . esc_attr($val) . '" ' . $selected . '>' . esc_html($option['meta_values']) . '</option>';
+						        }
+						        echo '</select></div></div>';
+					        }
+				        }
+			        }
+			        ?>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="dash-input-wrapper mb-25">
-                            <label for="">Address*</label>
-                            <input type="text" placeholder="Cowrasta, Chandana, Gazipur Sadar">
+                            <label><?php esc_html_e('Additional Specifications', 'jobus'); ?></label>
+                            <div id="specifications-repeater">
+						        <?php
+                                if (!empty($candidate_specifications)) {
+							        foreach ($candidate_specifications as $i => $spec) {
+                                        ?>
+                                        <div class="dash-input-wrapper mb-20 specification-item d-flex align-items-center gap-2">
+                                            <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][title]" class="form-control me-2" placeholder="<?php esc_attr_e('Title', 'jobus'); ?>" value="<?php echo esc_attr($spec['title']); ?>" style="min-width:180px">
+                                            <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][value]" class="form-control me-2" placeholder="<?php esc_attr_e('Value', 'jobus'); ?>" value="<?php echo esc_attr($spec['value']); ?>" style="min-width:180px">
+                                            <button type="button" class="btn btn-danger remove-specification" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i></button>
+                                        </div>
+							            <?php
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <a href="javascript:void(0)" class="dash-btn-one" id="add-specification">
+                                <i class="bi bi-plus"></i> <?php esc_html_e('Add Specification', 'jobus'); ?>
+                            </a>
                         </div>
-                        <!-- /.dash-input-wrapper -->
                     </div>
-                    <div class="col-lg-3">
-                        <div class="dash-input-wrapper mb-25">
-                            <label for="">Age*</label>
-                                <select class="nice-select">
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                                <option>Andorra</option>
-                                <option>Angola</option>
-                                <option>Antigua and Barbuda</option>
-                                <option>Argentina</option>
-                                <option>Armenia</option>
-                                <option>Australia</option>
-                                <option>Austria</option>
-                                <option>Azerbaijan</option>
-                                <option>Bahamas</option>
-                                <option>Bahrain</option>
-                                <option>Bangladesh</option>
-                                <option>Barbados</option>
-                                <option>Belarus</option>
-                                <option>Belgium</option>
-                                <option>Belize</option>
-                                <option>Benin</option>
-                                <option>Bhutan</option>
-                            </select>
-                        </div>
-                        <!-- /.dash-input-wrapper -->
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="dash-input-wrapper mb-25">
-                            <label for="">City*</label>
-                            <select class="nice-select">
-                                <option>Dhaka</option>
-                                <option>Tokyo</option>
-                                <option>Delhi</option>
-                                <option>Shanghai</option>
-                                <option>Mumbai</option>
-                                <option>Bangalore</option>
-                            </select>
-                        </div>
-                        <!-- /.dash-input-wrapper -->
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="dash-input-wrapper mb-25">
-                            <label for="">Zip Code*</label>
-                            <input type="number" placeholder="1708">
-                        </div>
-                        <!-- /.dash-input-wrapper -->
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="dash-input-wrapper mb-25">
-                            <label for="">State*</label>
-                            <select class="nice-select">
-                                <option>Dhaka</option>
-                                <option>Tokyo</option>
-                                <option>Delhi</option>
-                                <option>Shanghai</option>
-                                <option>Mumbai</option>
-                                <option>Bangalore</option>
-                            </select>
-                        </div>
-                        <!-- /.dash-input-wrapper -->
-                    </div>
+                </div>
+            </div>
 
-
+            <div class="bg-white card-box border-20 mt-40">
+                <h4 class="dash-title-three"><?php esc_html_e('Address & Location', 'jobus'); ?></h4>
+                <div class="row">
                     <div class="col-12">
                         <div class="dash-input-wrapper mb-25">
                             <label for="candidate_location_address"><?php esc_html_e('Map Location*', 'jobus') ?></label>
@@ -352,13 +426,12 @@ include( 'candidate-templates/sidebar-menu.php' );
                             </div>
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
-                                    <input type="text" name="candidate_location_lat" id="candidate_location_lat" placeholder="Latitude" value="<?php echo esc_attr($candidate_location['latitude']); ?>">
+                                    <input type="text" name="candidate_location_lat" id="candidate_location_lat" placeholder="<?php esc_attr_e('Latitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['latitude']); ?>">
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <input type="text" name="candidate_location_lng" id="candidate_location_lng" placeholder="Longitude" value="<?php echo esc_attr($candidate_location['longitude']); ?>">
+                                    <input type="text" name="candidate_location_lng" id="candidate_location_lng" placeholder="<?php esc_attr_e('Longitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['longitude']); ?>">
                                 </div>
                             </div>
-
 	                        <?php
 	                        $lat = trim($candidate_location['latitude']);
 	                        $lng = trim($candidate_location['longitude']);
@@ -369,21 +442,17 @@ include( 'candidate-templates/sidebar-menu.php' );
                             <div class="map-frame mt-30">
                                 <iframe class="gmap_iframe h-100 w-100"
                                         id="candidate_gmap_iframe"
-                                        style="height:100%;min-height:300px;border:0;"
                                         src="<?php echo esc_url($iframe_url); ?>"
                                         allowfullscreen=""
                                         loading="lazy"
                                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
-                        <!-- /.dash-input-wrapper -->
                     </div>
                 </div>
             </div>
-
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save', 'jobus' ); ?></button>
-                <a href="#" class="dash-cancel-btn tran3s">Cancel</a>
             </div>
 
         </form>

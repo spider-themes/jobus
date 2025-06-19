@@ -176,11 +176,36 @@
             });
         }
 
+        /**
+         * Handles the dynamic repeater for candidate specifications (add/remove rows)
+         */
+        function CandidateSpecificationsRepeater() {
+            let repeater = document.getElementById('specifications-repeater');
+            let addBtn = document.getElementById('add-specification');
+            if (repeater && addBtn) {
+                addBtn.addEventListener('click', function() {
+                    let idx = repeater.querySelectorAll('.specification-item').length;
+                    let div = document.createElement('div');
+                    div.className = 'dash-input-wrapper mb-20 specification-item d-flex align-items-center gap-2';
+                    div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="form-control me-2" placeholder="Title" style="min-width:180px">' +
+                        '<input type="text" name="candidate_specifications['+idx+'][value]" class="form-control me-2" placeholder="Value" style="min-width:180px">' +
+                        '<button type="button" class="btn btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';
+                    repeater.appendChild(div);
+                });
+                repeater.addEventListener('click', function(e) {
+                    if (e.target.closest('.remove-specification')) {
+                        e.target.closest('.specification-item').remove();
+                    }
+                });
+            }
+        }
+
         // Initialize all handlers
         updateProfilePicturePreview();
         handleDeleteProfilePicture();
         handleProfileFormSubmit();
         SocialLinksRepeater();
+        CandidateSpecificationsRepeater();
 
     })
 

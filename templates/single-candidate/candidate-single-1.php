@@ -232,7 +232,10 @@ wp_enqueue_script( 'lightbox' );
                                     <span><?php esc_html_e( 'Age: ', 'jobus' ); ?></span>
                                     <div>
 										<?php
-										$birthDate = DateTime::createFromFormat( 'd/m/Y', $candidate_age );
+										$birthDate = DateTime::createFromFormat( 'Y-m-d', $candidate_age );
+										if ( ! $birthDate ) {
+											$birthDate = DateTime::createFromFormat( 'd/m/Y', $candidate_age );
+										}
 										if ( $birthDate ) {
 											$today = new DateTime( 'now' );
 											$age   = $today->diff( $birthDate )->y;
@@ -241,8 +244,8 @@ wp_enqueue_script( 'lightbox' );
 										?>
                                     </div>
                                 </li>
-								<?php
-							}
+							    <?php
+                            }
 
 							if ( $candidate_mail ) { ?>
                                 <li>
@@ -256,26 +259,26 @@ wp_enqueue_script( 'lightbox' );
 								<?php
 							}
 
-							if ( !empty( $specifications ) ) {
+							if ( ! empty( $specifications ) ) {
 								foreach ( $specifications as $field ) {
-									$meta_name = $field[ 'meta_name' ] ?? '';
-									$meta_key = $field[ 'meta_key' ] ?? '';
+									$meta_name = $field['meta_name'] ?? '';
+									$meta_key  = $field['meta_key'] ?? '';
 
 									// Get the stored meta-values
-									$meta_options = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
+									$meta_options = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 
-									if ( !empty($meta_options[ $meta_key ]) ) {
+									if ( ! empty( $meta_options[ $meta_key ] ) ) {
 										?>
                                         <li>
 											<?php
-											if ( !empty($meta_options[ $meta_key ]) ) {
-												echo '<span>' . esc_html($meta_name) . ':</span>';
+											if ( ! empty( $meta_options[ $meta_key ] ) ) {
+												echo '<span>' . esc_html( $meta_name ) . ':</span>';
 											}
-											if (!empty( is_array($meta_options[ $meta_key ]) )) {
+											if ( ! empty( is_array( $meta_options[ $meta_key ] ) ) ) {
 												echo '<div class="text-capitalize">';
 												foreach ( $meta_options[ $meta_key ] as $value ) {
-													$trim_value = str_replace('@space@', ' ', $value);
-													echo esc_html($trim_value);
+													$trim_value = str_replace( '@space@', ' ', $value );
+													echo esc_html( $trim_value );
 												}
 												echo '</div>';
 											}
@@ -284,7 +287,7 @@ wp_enqueue_script( 'lightbox' );
 										<?php
 									}
 								}
-                            }
+							}
 
 							if ( $candidate_specifications ) {
 								foreach ( $candidate_specifications as $specification ) {
