@@ -211,3 +211,63 @@
 
 
 })(jQuery);
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    /**
+     * Enhanced CV upload functionality for the candidate resume form
+     * Handles file selection, preview display, and removal
+     */
+    function cvUploadHandler() {
+        let cvInput = document.getElementById('cv_attachment');
+        let preview = document.getElementById('cv-upload-preview');
+        let filenameSpan = document.getElementById('cv-uploaded-filename');
+        let removeBtn = document.getElementById('remove-uploaded-cv');
+        let uploadBtnWrapper = document.getElementById('cv-upload-btn-wrapper');
+        let fileInfo = document.getElementById('cv-file-info');
+        let cvActionField = document.getElementById('profile_cv_action');
+
+        if (cvInput) {
+            // File selection handler
+            cvInput.addEventListener('change', function(e) {
+                if (cvInput.files.length > 0) {
+                    let file = cvInput.files[0];
+
+                    // Update the filename display
+                    filenameSpan.textContent = file.name;
+
+                    // Show preview section and hide upload button
+                    preview.style.display = 'flex';
+                    if(uploadBtnWrapper) uploadBtnWrapper.style.display = 'none';
+                    if(fileInfo) fileInfo.style.display = 'none';
+
+                    // Set the action to upload for form processing
+                    if(cvActionField) cvActionField.value = 'upload';
+                }
+            });
+        }
+
+        // File removal handler
+        if(removeBtn) {
+            removeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Reset file input
+                if(cvInput) cvInput.value = '';
+
+                // Hide preview and show upload button
+                if(preview) preview.style.display = 'none';
+                if(uploadBtnWrapper) uploadBtnWrapper.style.display = 'inline-block';
+                if(fileInfo) fileInfo.style.display = 'block';
+
+                // Set the action to delete for form processing
+                if(cvActionField) cvActionField.value = 'delete';
+            });
+        }
+    }
+
+    // Initialize handlers
+    cvUploadHandler();
+});

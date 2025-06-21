@@ -1,0 +1,68 @@
+// CV Upload Preview Section
+.cv-preview {
+  display: flex;
+  margin-bottom: 1rem;
+
+  &.hidden {
+    display: none;
+  }
+
+  .attached-file {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+
+    span {
+      font-size: 0.95rem;
+      color: #343a40;
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .remove-btn {
+      color: #dc3545;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #bd2130;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// CV Upload Button Wrapper
+#cv-upload-btn-wrapper {
+  margin-bottom: 0.5rem;
+
+  &.hidden {
+    display: none;
+  }
+
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
+// CV File Info Text
+.file-info {
+  display: block;
+  margin-top: 0.5rem;
+
+  &.hidden {
+    display: none;
+  }
+
+  small {
+    color: #6c757d;
+    font-style: italic;
+  }
+}

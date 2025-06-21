@@ -3,8 +3,135 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Check if the logged-in user has the 'jobus_candidate' role
+// Get the current logged-in user object
 $user = wp_get_current_user();
+
+// Retrieve the candidate post ID for the current user (if exists)
+$candidate_id = false;
+$args = array(
+    'post_type'      => 'jobus_candidate', // Custom post type for candidates
+    'author'         => $user->ID,         // Filter by current user as author
+    'posts_per_page' => 1,                 // Only need one post (should be unique)
+    'fields'         => 'ids',             // Only get post IDs
+);
+
+$candidate_query = new WP_Query($args);
+if ( ! empty($candidate_query->posts) ) {
+    $candidate_id = $candidate_query->posts[0];
+}
+
+// Get the CV attachment if it exists
+$cv_attachment = '';
+$cv_file_name = '';
+
+if ($candidate_id) {
+    // Get full meta array
+    $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+    if (is_array($meta) && isset($meta['cv_attachment'])) {
+        $cv_attachment = $meta['cv_attachment'];
+        if (!empty($cv_attachment)) {
+            $cv_file_name = basename(get_attached_file($cv_attachment));
+        }
+    }
+}
+
+// Handle form submission for CV upload/delete
+if ($candidate_id && isset($_POST['profile_cv_action']) && $_POST['profile_cv_action'] != '') {
+    // Get meta data array
+    $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+    if (!is_array($meta)) $meta = array();
+
+    // Process CV action
+    $action = sanitize_text_field($_POST['profile_cv_action']);
+
+    // Upload new CV
+    if ($action === 'upload' && isset($_FILES['cv_attachment']) && $_FILES['cv_attachment']['error'] === 0) {
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+        // Get upload directory info
+        $upload_dir = wp_upload_dir();
+
+        // Create a dedicated folder for CV files if it doesn't exist
+        $cv_dir = $upload_dir['basedir'] . '/candidate-cvs';
+        if (!file_exists($cv_dir)) {
+            wp_mkdir_p($cv_dir);
+        }
+
+        // Get the original filename and sanitize it
+        $file = $_FILES['cv_attachment'];
+        $filename = sanitize_file_name(basename($file['name']));
+
+        // Create a unique filepath based on candidate ID to avoid duplicates across candidates
+        // but maintain consistency for the same candidate
+        $filepath = $cv_dir . '/' . $candidate_id . '-' . $filename;
+
+        // Move the uploaded file to our custom location
+        if (move_uploaded_file($file['tmp_name'], $filepath)) {
+            // Insert the attachment into the WordPress media library
+            $filetype = wp_check_filetype($filename);
+            $attachment = array(
+                'guid' => $upload_dir['baseurl'] . '/candidate-cvs/' . $candidate_id . '-' . $filename,
+                'post_mime_type' => $filetype['type'],
+                'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+                'post_content' => '',
+                'post_status' => 'inherit'
+            );
+
+            $attachment_id = wp_insert_attachment($attachment, $filepath);
+
+            if (!is_wp_error($attachment_id)) {
+                // Generate attachment metadata
+                $attach_data = wp_generate_attachment_metadata($attachment_id, $filepath);
+                wp_update_attachment_metadata($attachment_id, $attach_data);
+
+                // Save attachment ID to meta options array with correct structure
+                $meta['cv_attachment'] = $attachment_id;
+                update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+
+                // Update displayed filename
+                $cv_attachment = $attachment_id;
+                $cv_file_name = $filename;
+
+                // Success message
+                $success_message = __('CV uploaded successfully.', 'jobus');
+            } else {
+                // Error message
+                $error_message = $attachment_id->get_error_message();
+                // Clean up the file if attachment creation failed
+                @unlink($filepath);
+            }
+        } else {
+            $error_message = __('Failed to upload the file.', 'jobus');
+        }
+    }
+
+    // Delete CV
+    if ($action === 'delete' && !empty($_POST['existing_cv_id'])) {
+        $existing_id = intval($_POST['existing_cv_id']);
+
+        // Delete the attachment
+        if (wp_delete_attachment($existing_id, true)) {
+            // Remove from meta array - correct structure
+            if (isset($meta['cv_attachment'])) {
+                unset($meta['cv_attachment']);
+            }
+            update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+
+
+            // Update display variables
+            $cv_attachment = '';
+            $cv_file_name = '';
+
+            // Success message
+            $success_message = __('CV deleted successfully.', 'jobus');
+        } else {
+            // Error message
+            $error_message = __('Failed to delete the CV.', 'jobus');
+        }
+    }
+}
 
 //Sidebar Menu
 include ('candidate-templates/sidebar-menu.php');
@@ -15,38 +142,61 @@ include ('candidate-templates/sidebar-menu.php');
 
 	    <?php include ('candidate-templates/action-btn.php'); ?>
 
-        <h2 class="main-title">My Resume</h2>
+        <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
 
-        <div class="bg-white card-box border-20">
-            <h4 class="dash-title-three">Resume Attachment</h4>
-            <div class="dash-input-wrapper mb-20">
-                <label for="">CV Attachment*</label>
+        <?php
+        // Display success message
+        if (isset($success_message)) {
+            echo '<div class="alert alert-success" role="alert">' . esc_html($success_message) . '</div>';
+        }
 
-                <div class="attached-file d-flex align-items-center justify-content-between mb-15">
-                    <span>MyCvResume.PDF</span>
-                    <a href="#" class="remove-btn"><i class="bi bi-x"></i></a>
+        // Display error message
+        if (isset($error_message)) {
+            echo '<div class="alert alert-danger" role="alert">' . esc_html($error_message) . '</div>';
+        }
+        ?>
+
+        <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" name="candidate-resume-form" id="candidate-resume-form" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="candidate_id" value="<?php echo esc_attr($candidate_id); ?>">
+
+            <div class="bg-white card-box border-20">
+                <h4 class="dash-title-three"><?php esc_html_e('Resume Attachment', 'jobus'); ?></h4>
+                <div class="dash-input-wrapper mb-20">
+                    <label for="cv_attachment"><?php esc_html_e('CV Attachment*', 'jobus'); ?></label>
+
+                    <div id="cv-upload-preview" class="cv-preview <?php echo empty($cv_attachment) ? 'hidden' : ''; ?>">
+                        <div class="attached-file d-flex align-items-center justify-content-between">
+                            <span id="cv-uploaded-filename"><?php echo esc_html($cv_file_name); ?></span>
+                            <a href="#" id="remove-uploaded-cv" class="remove-btn"><i class="bi bi-x"></i></a>
+                        </div>
+                    </div>
+                    <input type="hidden" name="profile_cv_action" id="profile_cv_action" value="">
+                    <input type="hidden" name="existing_cv_id" value="<?php echo esc_attr($cv_attachment); ?>">
                 </div>
-                <div class="attached-file d-flex align-items-center justify-content-between">
-                    <span>CandidateCV02.PDF</span>
-                    <a href="#" class="remove-btn"><i class="bi bi-x"></i></a>
+                <!-- /.dash-input-wrapper -->
+                <div id="cv-upload-btn-wrapper" class="dash-btn-one d-inline-block position-relative me-3 <?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
+                    <i class="bi bi-plus"></i>
+                    <?php esc_html_e('Upload CV', 'jobus'); ?>
+                    <input type="file" id="cv_attachment" name="cv_attachment" accept=".pdf,.doc,.docx">
+                </div>
+                <div id="cv-file-info" class="file-info <?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
+                    <small><?php esc_html_e('Upload file .pdf, .doc, .docx', 'jobus'); ?></small>
                 </div>
             </div>
-            <!-- /.dash-input-wrapper -->
-            <div class="dash-btn-one d-inline-block position-relative me-3">
-                <i class="bi bi-plus"></i>
-                Upload CV
-                <input type="file" id="uploadCV" name="uploadCV" placeholder="">
+
+            <div class="button-group d-inline-flex align-items-center mt-30">
+                <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
             </div>
-            <small>Upload file .pdf, .doc, .docx</small>
-        </div>
+
+        </form>
         <!-- /.card-box -->
 
         <div class="bg-white card-box border-20 mt-40">
-            <h4 class="dash-title-three">Intro & Overview</h4>
+            <h4 class="dash-title-three"><?php esc_html_e('Intro & Overview', 'jobus'); ?></h4>
             <div class="dash-input-wrapper mb-35 md-mb-20">
-                <label for="">Overview*</label>
-                <textarea class="size-lg" placeholder="Write something interesting about you...."></textarea>
-                <div class="alert-text">Brief description for your resume. URLs are hyperlinked.</div>
+                <label for="candidate_overview"><?php esc_html_e('Overview*', 'jobus'); ?></label>
+                <textarea id="candidate_overview" class="size-lg" placeholder="<?php esc_attr_e('Write something interesting about you....', 'jobus'); ?>"></textarea>
+                <div class="alert-text"><?php esc_html_e('Brief description for your resume. URLs are hyperlinked.', 'jobus'); ?></div>
             </div>
             <!-- /.dash-input-wrapper -->
             <div class="row">
@@ -520,9 +670,6 @@ include ('candidate-templates/sidebar-menu.php');
         </div>
         <!-- /.card-box -->
 
-        <div class="button-group d-inline-flex align-items-center mt-30">
-            <a href="#" class="dash-btn-two tran3s me-3">Save</a>
-            <a href="#" class="dash-cancel-btn tran3s">Cancel</a>
-        </div>
+
     </div>
 </div>

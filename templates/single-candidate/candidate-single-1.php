@@ -324,10 +324,14 @@ wp_enqueue_script( 'lightbox' );
                         </ul>
 						<?php
 						if ( $cv_attachment ) {
+							// Get the direct file URL without any query parameters
+							$attachment_url = wp_get_attachment_url($cv_attachment);
+							// Remove query parameters that might cause versioning
+							$clean_url = preg_replace('/\?.*/', '', $attachment_url);
 							?>
-                            <a href="<?php echo esc_url( $cv_attachment ) ?>"
+                            <a href="<?php echo esc_url($clean_url); ?>"
                                class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
-								<?php esc_html_e( 'Download CV', 'jobus' ) ?>
+								<?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
 							<?php
 						}
