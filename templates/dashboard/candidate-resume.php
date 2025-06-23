@@ -9,15 +9,15 @@ $user = wp_get_current_user();
 // Retrieve the candidate post ID for the current user (if exists)
 $candidate_id = false;
 $args = array(
-    'post_type'      => 'jobus_candidate', // Custom post type for candidates
-    'author'         => $user->ID,         // Filter by current user as author
-    'posts_per_page' => 1,                 // Only need one post (should be unique)
-    'fields'         => 'ids',             // Only get post IDs
+	'post_type'      => 'jobus_candidate', // Custom post type for candidates
+	'author'         => $user->ID,         // Filter by current user as author
+	'posts_per_page' => 1,                 // Only need one post (should be unique)
+	'fields'         => 'ids',             // Only get post IDs
 );
 
 $candidate_query = new WP_Query($args);
 if ( ! empty($candidate_query->posts) ) {
-    $candidate_id = $candidate_query->posts[0];
+	$candidate_id = $candidate_query->posts[0];
 }
 
 // Get the CV attachment if it exists
@@ -35,12 +35,38 @@ if ($candidate_id) {
     }
 }
 
-// Handle form submission for CV upload/delete
-if ($candidate_id && isset($_POST['profile_cv_action']) && $_POST['profile_cv_action'] != '') {
-    // Get meta data array
+$intro_video = $_POST['video_title'];
+// Handle form submission
+if ( isset($intro_video) ) {
+
     $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
     if (!is_array($meta)) $meta = array();
 
+    // Handle Intro Video fields update
+    if (isset($_POST['video_title'])) {
+        $meta['video_title'] = sanitize_text_field($_POST['video_title']);
+    }
+    if (isset($_POST['video_url'])) {
+        $meta['video_url'] = esc_url_raw($_POST['video_url']);
+    }
+    // Only process image upload if a file is selected and form is submitted
+    if (isset($_FILES['bg_img']) && isset($_FILES['bg_img']['tmp_name']) && $_FILES['bg_img']['error'] === 0) {
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        $attachment_id = media_handle_upload('bg_img', $candidate_id);
+        if (!is_wp_error($attachment_id)) {
+            $img_url = wp_get_attachment_image_url($attachment_id, 'full');
+            $meta['bg_img'] = array('id' => $attachment_id, 'url' => $img_url);
+        }
+    }
+    // Remove background image only if requested and form is submitted
+    if (isset($_POST['remove_bg_img']) && $_POST['remove_bg_img'] == '1') {
+        if (!empty($meta['bg_img']['id'])) {
+            wp_delete_attachment($meta['bg_img']['id'], true);
+        }
+        unset($meta['bg_img']);
+    }
     // Process CV action
     $action = sanitize_text_field($_POST['profile_cv_action']);
 
@@ -157,13 +183,11 @@ include ('candidate-templates/sidebar-menu.php');
         ?>
 
         <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" name="candidate-resume-form" id="candidate-resume-form" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="candidate_id" value="<?php echo esc_attr($candidate_id); ?>">
 
             <div class="bg-white card-box border-20">
                 <h4 class="dash-title-three"><?php esc_html_e('Resume Attachment', 'jobus'); ?></h4>
                 <div class="dash-input-wrapper mb-20">
                     <label for="cv_attachment"><?php esc_html_e('CV Attachment*', 'jobus'); ?></label>
-
                     <div id="cv-upload-preview" class="cv-preview <?php echo empty($cv_attachment) ? 'hidden' : ''; ?>">
                         <div class="attached-file d-flex align-items-center justify-content-between">
                             <span id="cv-uploaded-filename"><?php echo esc_html($cv_file_name); ?></span>
@@ -173,7 +197,6 @@ include ('candidate-templates/sidebar-menu.php');
                     <input type="hidden" name="profile_cv_action" id="profile_cv_action" value="">
                     <input type="hidden" name="existing_cv_id" value="<?php echo esc_attr($cv_attachment); ?>">
                 </div>
-                <!-- /.dash-input-wrapper -->
                 <div id="cv-upload-btn-wrapper" class="dash-btn-one d-inline-block position-relative me-3 <?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
                     <i class="bi bi-plus"></i>
                     <?php esc_html_e('Upload CV', 'jobus'); ?>
@@ -184,41 +207,37 @@ include ('candidate-templates/sidebar-menu.php');
                 </div>
             </div>
 
+            <div class="bg-white card-box border-20 mt-40">
+                <h4 class="dash-title-three"><?php esc_html_e('Intro Video', 'jobus'); ?></h4>
+                <div class="intro-video-form position-relative mt-20 w-100">
+                    <div class="dash-input-wrapper mb-15">
+                        <label for="video_title"><?php esc_html_e('Video Title', 'jobus'); ?></label>
+                        <input type="text" id="video_title" name="video_title" value="<?php echo esc_attr($meta['video_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Intro', 'jobus'); ?>">
+                    </div>
+                    <div class="dash-input-wrapper mb-15">
+                        <label for="video_url"><?php esc_html_e('Video URL', 'jobus'); ?></label>
+                        <input type="text" id="video_url" name="video_url" value="<?php echo esc_attr($meta['video_url'] ?? ''); ?>" placeholder="https://www.youtube.com/embed/...">
+                    </div>
+                    <div class="dash-input-wrapper mb-15">
+                        <label for="bg_img"><?php esc_html_e('Background Image', 'jobus'); ?></label>
+                        <input type="file" id="bg_img" name="bg_img" accept="image/*">
+                        <?php if (!empty($meta['bg_img']['url'])): ?>
+                            <div class="d-flex align-items-center mt-2">
+                                <input type="text" class="form-control me-2" value="<?php echo esc_url($meta['bg_img']['url']); ?>" readonly>
+                                <button type="submit" name="remove_bg_img" value="1" class="btn btn-outline-danger btn-sm" title="<?php esc_attr_e('Remove background image', 'jobus'); ?>">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
             </div>
 
         </form>
-        <!-- /.card-box -->
-
-        <div class="bg-white card-box border-20 mt-40">
-            <h4 class="dash-title-three"><?php esc_html_e('Intro & Overview', 'jobus'); ?></h4>
-            <div class="dash-input-wrapper mb-35 md-mb-20">
-                <label for="candidate_overview"><?php esc_html_e('Overview*', 'jobus'); ?></label>
-                <textarea id="candidate_overview" class="size-lg" placeholder="<?php esc_attr_e('Write something interesting about you....', 'jobus'); ?>"></textarea>
-                <div class="alert-text"><?php esc_html_e('Brief description for your resume. URLs are hyperlinked.', 'jobus'); ?></div>
-            </div>
-            <!-- /.dash-input-wrapper -->
-            <div class="row">
-                <div class="col-sm-6 d-flex">
-                    <div class="intro-video-post position-relative mt-20" style="background-image: url(images/video_post.jpg);">
-                        <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox="" href="https://www.youtube.com/embed/aXFSJTjVjw0">
-                            <i class="bi bi-play"></i>
-                        </a>
-                        <a href="#" class="close"><i class="bi bi-x"></i></a>
-                    </div>
-                    <!-- /.intro-video-post -->
-                </div>
-                <div class="col-sm-6 d-flex">
-                    <div class="intro-video-post position-relative empty mt-20">
-                        <span>+ Add Intro Video</span>
-                        <input type="file" id="uploadVdo" name="uploadVdo" placeholder="">
-                    </div>
-                    <!-- /.intro-video-post -->
-                </div>
-            </div>
-        </div>
-        <!-- /.card-box -->
 
         <div class="bg-white card-box border-20 mt-40">
             <h4 class="dash-title-three">Education</h4>
