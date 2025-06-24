@@ -200,12 +200,233 @@
             }
         }
 
+        /**
+         * Handles the dynamic repeater for education history (add/remove rows)
+         */
+        function EducationRepeater() {
+            const repeater = $('#education-repeater');
+            const addBtn = $('#add-education');
+            let index = repeater.children('.education-item').length;
+
+            // Form validation function
+            function validateEducationForm(form) {
+                let isValid = true;
+                const requiredFields = form.find('input[required], textarea[required]');
+
+                requiredFields.each(function() {
+                    if (!$(this).val()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid');
+                        // Add error message below the field
+                        if (!$(this).next('.invalid-feedback').length) {
+                            $(this).after(`<div class="invalid-feedback">${window.jobus_required_field_text || 'This field is required'}</div>`);
+                        }
+                    } else {
+                        $(this).removeClass('is-invalid');
+                        $(this).next('.invalid-feedback').remove();
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Auto-save draft functionality
+            let autoSaveTimeout;
+            function setupAutoSave() {
+                repeater.on('input', 'input, textarea', function() {
+                    clearTimeout(autoSaveTimeout);
+                    autoSaveTimeout = setTimeout(function() {
+                        const formData = new FormData($('#candidate-resume-form')[0]);
+                        formData.append('action', 'save_education_draft');
+                        formData.append('security', window.jobus_nonce);
+
+                        $.ajax({
+                            url: window.jobus_ajax_url,
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                if (response.success) {
+                                    // Optional: Show a subtle "Draft saved" message
+                                    const savedMsg = $('<div class="text-success small mt-2 fade-out">Draft saved</div>');
+                                    $('#add-education').before(savedMsg);
+                                    setTimeout(() => savedMsg.fadeOut('slow', function() { $(this).remove(); }), 2000);
+                                }
+                            }
+                        });
+                    }, 2000); // Wait 2 seconds after last input before saving
+                });
+            }
+
+            addBtn.on('click', function(e) {
+                e.preventDefault();
+                const newItem = $(`
+                    <div class="accordion-item education-item">
+                        <div class="accordion-header" id="headingOne-${index}">
+                            <button class="accordion-button" type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapseOne-${index}" 
+                                aria-expanded="true" 
+                                aria-controls="collapseOne-${index}">
+                                ${window.jobus_education_default_title || 'Education'}
+                            </button>
+                        </div>
+                        <div id="collapseOne-${index}" class="accordion-collapse collapse show" 
+                            aria-labelledby="headingOne-${index}" 
+                            data-bs-parent="#education-repeater">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="education_${index}_sl_num">${window.jobus_education_sl_label || 'Serial Number'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="education[${index}][sl_num]" 
+                                                id="education_${index}_sl_num" 
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="education_${index}_title">${window.jobus_education_title_label || 'Title'}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="education[${index}][title]" 
+                                                id="education_${index}_title">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="education_${index}_academy">${window.jobus_education_academy_label || 'Academy'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="education[${index}][academy]" 
+                                                id="education_${index}_academy" 
+                                                required 
+                                                placeholder="Google Arts College & University">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="education_${index}_description">${window.jobus_education_description_label || 'Description'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <textarea class="size-lg form-control" 
+                                                name="education[${index}][description]" 
+                                                id="education_${index}_description" 
+                                                required 
+                                                placeholder="Enter your education description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-education mt-2" title="${window.jobus_remove_text || 'Remove'}">
+                                        <i class="bi bi-x"></i> ${window.jobus_remove_text || 'Remove'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                repeater.append(newItem);
+                // Update accordion header when title changes
+                newItem.find('input[name$="[title]"]').on('input', function() {
+                    const title = $(this).val() || (window.jobus_education_default_title || 'Education');
+                    $(this).closest('.education-item').find('.accordion-button').text(title);
+                });
+                index++;
+            });
+
+            // Remove education item
+            repeater.on('click', '.remove-education', function() {
+                const item = $(this).closest('.education-item');
+                // Add confirmation dialog
+                if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this education item?')) {
+                    item.fadeOut('fast', function() {
+                        $(this).remove();
+                        reindexEducationItems();
+                    });
+                }
+            });
+
+            // Reindex remaining items
+            function reindexEducationItems() {
+                repeater.children('.education-item').each(function(i) {
+                    const item = $(this);
+                    // Update IDs and names
+                    item.find('input, textarea').each(function() {
+                        let name = $(this).attr('name');
+                        let id = $(this).attr('id');
+                        if (name) {
+                            name = name.replace(/education\[\d+\]/, 'education[' + i + ']');
+                            $(this).attr('name', name);
+                        }
+                        if (id) {
+                            id = id.replace(/education_\d+_/, 'education_' + i + '_');
+                            $(this).attr('id', id);
+                        }
+                    });
+                    // Update accordion attributes
+                    item.find('.accordion-header')
+                        .attr('id', 'headingOne-' + i)
+                        .find('.accordion-button')
+                        .attr('data-bs-target', '#collapseOne-' + i)
+                        .attr('aria-controls', 'collapseOne-' + i);
+
+                    item.find('.accordion-collapse')
+                        .attr('id', 'collapseOne-' + i)
+                        .attr('aria-labelledby', 'headingOne-' + i);
+                });
+                index = repeater.children('.education-item').length;
+            }
+
+            // Setup validation on form submit
+            $('#candidate-resume-form').on('submit', function(e) {
+                const isValid = validateEducationForm($(this));
+                if (!isValid) {
+                    e.preventDefault();
+                    // Scroll to first error
+                    const firstError = $('.is-invalid').first();
+                    if (firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: firstError.offset().top - 100
+                        }, 500);
+                    }
+                }
+            });
+
+            // Initialize auto-save
+            setupAutoSave();
+        }
+
         // Initialize all handlers
         updateProfilePicturePreview();
         handleDeleteProfilePicture();
         handleProfileFormSubmit();
         SocialLinksRepeater();
         CandidateSpecificationsRepeater();
+        EducationRepeater();
 
     })
 

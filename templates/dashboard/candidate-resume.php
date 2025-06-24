@@ -157,12 +157,76 @@ if ( isset($intro_video) ) {
             $error_message = __('Failed to delete the CV.', 'jobus');
         }
     }
+
+    // Handle Education form submission
+    if (isset($_POST['education']) && is_array($_POST['education'])) {
+        if (!isset($meta) || !is_array($meta)) {
+            $meta = array();
+        }
+
+        $education = array();
+        $has_changes = false;
+
+        // Get existing education data for comparison
+        $existing_education = isset($meta['education']) ? $meta['education'] : array();
+
+        foreach ($_POST['education'] as $key => $edu) {
+            // Validate required fields
+            if (empty($edu['academy']) || empty($edu['description'])) {
+                $error_message = esc_html__('Academy and Description are required fields for education.', 'jobus');
+                continue;
+            }
+
+            // Sanitize and prepare new data
+            $new_edu = array(
+                'sl_num'      => isset($edu['sl_num']) ? sanitize_text_field($edu['sl_num']) : '',
+                'title'       => isset($edu['title']) ? sanitize_text_field($edu['title']) : '',
+                'academy'     => sanitize_text_field($edu['academy']),
+                'description' => wp_kses_post($edu['description']),
+            );
+
+            // Compare with existing data to detect changes
+            if (!isset($existing_education[$key]) ||
+                $existing_education[$key] !== $new_edu) {
+                $has_changes = true;
+            }
+
+            $education[] = $new_edu;
+        }
+
+        // Check if number of items changed
+        if (count($education) !== count($existing_education)) {
+            $has_changes = true;
+        }
+
+        // Update education title if changed
+        if (isset($_POST['education_title']) &&
+            (!isset($meta['education_title']) || $meta['education_title'] !== $_POST['education_title'])) {
+            $meta['education_title'] = sanitize_text_field($_POST['education_title']);
+            $has_changes = true;
+        }
+
+        $meta['education'] = $education;
+
+        if ($has_changes) {
+            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+            if ($updated !== false) {
+                $success_message = esc_html__('Education information updated successfully.', 'jobus');
+            } else {
+                $error_message = esc_html__('Failed to update education information.', 'jobus');
+            }
+        } else {
+            // Only show no changes message if form was actually submitted
+            if (!empty($_POST)) {
+                $success_message = esc_html__('No changes detected in education information.', 'jobus');
+            }
+        }
+    }
 }
 
 //Sidebar Menu
 include ('candidate-templates/sidebar-menu.php');
 ?>
-
 <div class="dashboard-body">
     <div class="position-relative">
 
@@ -233,202 +297,120 @@ include ('candidate-templates/sidebar-menu.php');
                 </div>
             </div>
 
+            <div class="bg-white card-box border-20 mt-40">
+                <h4 class="dash-title-three"><?php esc_html_e('Education', 'jobus'); ?></h4>
+
+                <div class="dash-input-wrapper mb-15">
+                    <label for="education_title"><?php esc_html_e('Title', 'jobus'); ?></label>
+                    <input type="text" id="education_title" name="education_title" value="<?php echo esc_attr($meta['education_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Education', 'jobus'); ?>">
+                </div>
+
+                <div class="accordion dash-accordion-one" id="education-repeater">
+                    <?php
+                    $education = isset($meta['education']) && is_array($meta['education']) ? $meta['education'] : array();
+                    if (empty($education)) {
+                        $education[] = array(
+                            'sl_num' => '',
+                            'title' => '',
+                            'academy' => '',
+                            'description' => '',
+                        );
+                    }
+                    foreach ($education as $key => $value) {
+                        $accordion_id = 'collapseOne-' . esc_attr($key);
+                        ?>
+                        <div class="accordion-item education-item">
+                            <div class="accordion-header" id="headingOne-<?php echo esc_attr($key); ?>">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
+                                    aria-expanded="false"
+                                    aria-controls="<?php echo esc_attr($accordion_id); ?>">
+                                    <?php echo esc_html($value['title'] ?? esc_html__('Education', 'jobus')); ?>
+                                </button>
+                            </div>
+                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
+                                aria-labelledby="headingOne-<?php echo esc_attr($key); ?>"
+                                data-bs-parent="#education-repeater">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>">
+                                                    <?php esc_html_e('Serial Number', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    name="<?php echo esc_attr('education[' . $key . '][sl_num]'); ?>"
+                                                    id="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>"
+                                                    value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_title'); ?>">
+                                                    <?php esc_html_e('Title', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control" name="education[<?php echo $key; ?>][title]" id="education_<?php echo $key; ?>_title" value="<?php echo esc_attr($value['title'] ?? ''); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_academy'); ?>">
+                                                    <?php esc_html_e('Academy', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control" name="education[<?php echo $key; ?>][academy]" id="education_<?php echo $key; ?>_academy" value="<?php echo esc_attr($value['academy'] ?? ''); ?>" placeholder="Google Arts Collage &amp; University">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_description'); ?>">
+                                                    <?php esc_html_e('Description', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <textarea class="size-lg form-control" name="education[<?php echo $key; ?>][description]" id="education_<?php echo $key; ?>_description" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-danger btn-sm remove-education mt-2" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education"><i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?></a>
+            </div>
+
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
             </div>
 
         </form>
-
-        <div class="bg-white card-box border-20 mt-40">
-            <h4 class="dash-title-three">Education</h4>
-
-            <div class="accordion dash-accordion-one" id="accordionOne">
-                <div class="accordion-item">
-                    <div class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Add Education*
-                        </button>
-                    </div>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionOne">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Title*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Product Designer (Google)">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Academy*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Google Arts Collage & University">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Year*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Description*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <textarea class="size-lg" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."></textarea>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Add Education*
-                        </button>
-                    </div>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionOne">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Title*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Product Designer (Google)">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Academy*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Google Arts Collage & University">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Year*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Description*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <textarea class="size-lg" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."></textarea>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- /.dash-accordion-one -->
-            <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more</a>
-        </div>
-        <!-- /.card-box -->
 
         <div class="bg-white card-box border-20 mt-40">
             <h4 class="dash-title-three">Skills & Experience</h4>
