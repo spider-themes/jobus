@@ -420,6 +420,334 @@
             setupAutoSave();
         }
 
+        /**
+         * Handles the dynamic repeater for work experience (add/remove rows)
+         */
+        function ExperienceRepeater() {
+            const repeater = $('#experience-repeater');
+            const addBtn = $('#add-experience');
+            let index = repeater.children('.experience-item').length;
+
+            // Form validation function
+            function validateExperienceForm(form) {
+                let isValid = true;
+                const requiredFields = form.find('input[required], textarea[required]');
+
+                requiredFields.each(function() {
+                    if (!$(this).val()) {
+                        isValid = false;
+                        $(this).addClass('is-invalid');
+                        if (!$(this).next('.invalid-feedback').length) {
+                            $(this).after(`<div class="invalid-feedback">${window.jobus_required_field_text || 'This field is required'}</div>`);
+                        }
+                    } else {
+                        $(this).removeClass('is-invalid');
+                        $(this).next('.invalid-feedback').remove();
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Auto-save draft functionality
+            let autoSaveTimeout;
+            function setupAutoSave() {
+                repeater.on('input', 'input, textarea', function() {
+                    clearTimeout(autoSaveTimeout);
+                    autoSaveTimeout = setTimeout(function() {
+                        const formData = new FormData($('#candidate-resume-form')[0]);
+                        formData.append('action', 'save_experience_draft');
+                        formData.append('security', window.jobus_nonce);
+
+                        $.ajax({
+                            url: window.jobus_ajax_url,
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                if (response.success) {
+                                    const savedMsg = $('<div class="text-success small mt-2 fade-out">Draft saved</div>');
+                                    $('#add-experience').before(savedMsg);
+                                    setTimeout(() => savedMsg.fadeOut('slow', function() { $(this).remove(); }), 2000);
+                                }
+                            }
+                        });
+                    }, 2000);
+                });
+            }
+
+            // Add new experience item
+            addBtn.on('click', function(e) {
+                e.preventDefault();
+                const newItem = $(`
+                    <div class="accordion-item experience-item">
+                        <div class="accordion-header" id="headingExp-${index}">
+                            <button class="accordion-button" type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapseExp-${index}" 
+                                aria-expanded="true" 
+                                aria-controls="collapseExp-${index}">
+                                ${window.jobus_experience_default_title || 'Experience'}
+                            </button>
+                        </div>
+                        <div id="collapseExp-${index}" class="accordion-collapse collapse show" 
+                            aria-labelledby="headingExp-${index}" 
+                            data-bs-parent="#experience-repeater">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_sl_num">${window.jobus_experience_sl_label || 'Serial Number'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="experience[${index}][sl_num]" 
+                                                id="experience_${index}_sl_num" 
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_title">${window.jobus_experience_title_label || 'Title'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="experience[${index}][title]" 
+                                                id="experience_${index}_title"
+                                                required
+                                                placeholder="${window.jobus_experience_title_placeholder || 'Lead Product Designer'}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_company">${window.jobus_experience_company_label || 'Company'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" 
+                                                class="form-control" 
+                                                name="experience[${index}][company]" 
+                                                id="experience_${index}_company"
+                                                required
+                                                placeholder="${window.jobus_experience_company_placeholder || 'Google Inc'}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label>${window.jobus_experience_duration_label || 'Duration'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dash-input-wrapper mb-30">
+                                                    <input type="date" 
+                                                        class="form-control" 
+                                                        name="experience[${index}][start_date]" 
+                                                        id="experience_${index}_start_date"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dash-input-wrapper mb-30">
+                                                    <input type="date" 
+                                                        class="form-control" 
+                                                        name="experience[${index}][end_date]" 
+                                                        id="experience_${index}_end_date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_description">${window.jobus_experience_description_label || 'Description'}*</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <textarea class="size-lg form-control" 
+                                                name="experience[${index}][description]" 
+                                                id="experience_${index}_description" 
+                                                required 
+                                                placeholder="${window.jobus_experience_description_placeholder || 'Describe your role and achievements'}"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-experience mt-2" title="${window.jobus_remove_text || 'Remove'}">
+                                        <i class="bi bi-x"></i> ${window.jobus_remove_text || 'Remove'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                repeater.append(newItem);
+
+                // Update accordion header when title changes
+                newItem.find('input[name$="[title]"]').on('input', function() {
+                    const title = $(this).val() || (window.jobus_experience_default_title || 'Experience');
+                    $(this).closest('.experience-item').find('.accordion-button').text(title);
+                });
+                index++;
+            });
+
+            // Remove experience item
+            repeater.on('click', '.remove-experience', function() {
+                const item = $(this).closest('.experience-item');
+                if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this experience item?')) {
+                    item.fadeOut('fast', function() {
+                        $(this).remove();
+                        reindexExperienceItems();
+                    });
+                }
+            });
+
+            // Reindex remaining items
+            function reindexExperienceItems() {
+                repeater.children('.experience-item').each(function(i) {
+                    const item = $(this);
+                    item.find('input, textarea').each(function() {
+                        let name = $(this).attr('name');
+                        let id = $(this).attr('id');
+                        if (name) {
+                            name = name.replace(/experience\[\d+\]/, 'experience[' + i + ']');
+                            $(this).attr('name', name);
+                        }
+                        if (id) {
+                            id = id.replace(/experience_\d+_/, 'experience_' + i + '_');
+                            $(this).attr('id', id);
+                        }
+                    });
+
+                    item.find('.accordion-header')
+                        .attr('id', 'headingExp-' + i)
+                        .find('.accordion-button')
+                        .attr('data-bs-target', '#collapseExp-' + i)
+                        .attr('aria-controls', 'collapseExp-' + i);
+
+                    item.find('.accordion-collapse')
+                        .attr('id', 'collapseExp-' + i)
+                        .attr('aria-labelledby', 'headingExp-' + i);
+                });
+                index = repeater.children('.experience-item').length;
+            }
+
+            // Setup validation on form submit
+            $('#candidate-resume-form').on('submit', function(e) {
+                const isValid = validateExperienceForm($(this));
+                if (!isValid) {
+                    e.preventDefault();
+                    // Scroll to first error
+                    const firstError = $('.is-invalid').first();
+                    if (firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: firstError.offset().top - 100
+                        }, 500);
+                    }
+                }
+            });
+
+            // Initialize auto-save
+            setupAutoSave();
+        }
+
+            /**
+         * Handles the portfolio gallery functionality
+         */
+
+            function PortfolioGallery() {
+                const portfolioContainer = $('#portfolio-images-container');
+                const portfolioGalleryInput = $('#portfolio_gallery');
+                const addImagesBtn = $('#add-portfolio-images');
+                let frame;
+
+                // Open media library
+                function initMediaFrame() {
+                    frame = wp.media({
+                        title: window.jobus_portfolio_frame_title || 'Select Portfolio Images',
+                        button: {
+                            text: window.jobus_portfolio_button_text || 'Add to Portfolio'
+                        },
+                        multiple: true,
+                        library: { type: 'image' }
+                    });
+
+                    // When images are selected
+                    frame.on('select', function () {
+                        const attachments = frame.state().get('selection').toJSON();
+                        let currentIds = portfolioGalleryInput.val() ? portfolioGalleryInput.val().split(',') : [];
+
+                        attachments.forEach(function (attachment) {
+                            const imageId = attachment.id.toString();
+                            if (!currentIds.includes(imageId)) {
+                                currentIds.push(imageId);
+
+                                const imageUrl = attachment.sizes?.thumbnail?.url || attachment.url;
+
+                                const imageItem = $(`
+                            <div class="col-lg-3 col-6 portfolio-image-item mb-25" data-image-id="${imageId}">
+                                <div class="candidate-portfolio-block position-relative">
+                                    <img src="${imageUrl}" alt="" class="w-100">
+                                    <button type="button" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `);
+
+                                portfolioContainer.append(imageItem);
+                            }
+                        });
+
+                        portfolioGalleryInput.val(currentIds.join(','));
+                    });
+                }
+
+                // Open media on button click
+                addImagesBtn.on('click', function (e) {
+                    e.preventDefault();
+
+                    if (!frame) {
+                        initMediaFrame();
+                    }
+
+                    frame.open();
+                });
+
+                // Remove image handler
+                portfolioContainer.on('click', '.remove-portfolio-item', function (e) {
+                    e.preventDefault();
+
+                    const imageItem = $(this).closest('.portfolio-image-item');
+                    const imageId = imageItem.data('image-id').toString();
+                    const currentIds = portfolioGalleryInput.val().split(',');
+
+                    const newIds = currentIds.filter(id => id !== imageId);
+                    portfolioGalleryInput.val(newIds.join(','));
+
+                    imageItem.fadeOut(200, function () {
+                        $(this).remove();
+                    });
+                });
+            }
+
         // Initialize all handlers
         updateProfilePicturePreview();
         handleDeleteProfilePicture();
@@ -427,6 +755,8 @@
         SocialLinksRepeater();
         CandidateSpecificationsRepeater();
         EducationRepeater();
+        ExperienceRepeater();
+        PortfolioGallery();
 
     })
 

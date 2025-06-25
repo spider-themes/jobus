@@ -222,6 +222,73 @@ if ( isset($intro_video) ) {
             }
         }
     }
+
+    // Handle Work Experience form submission
+    if (isset($_POST['experience']) && is_array($_POST['experience'])) {
+        if (!isset($meta) || !is_array($meta)) {
+            $meta = array();
+        }
+
+        $experience = array();
+        $has_changes = false;
+
+        // Get existing experience data for comparison
+        $existing_experience = isset($meta['experience']) ? $meta['experience'] : array();
+
+        foreach ($_POST['experience'] as $key => $exp) {
+            // Validate required fields
+            if (empty($exp['title']) || empty($exp['company']) || empty($exp['description'])) {
+                $error_message = esc_html__('Title, Company, and Description are required fields for work experience.', 'jobus');
+                continue;
+            }
+
+            // Sanitize and prepare new data
+            $new_exp = array(
+                'sl_num'      => isset($exp['sl_num']) ? sanitize_text_field($exp['sl_num']) : '',
+                'title'       => sanitize_text_field($exp['title']),
+                'company'     => sanitize_text_field($exp['company']),
+                'start_date'  => sanitize_text_field($exp['start_date']),
+                'end_date'    => sanitize_text_field($exp['end_date']),
+                'description' => wp_kses_post($exp['description']),
+            );
+
+            // Compare with existing data to detect changes
+            if (!isset($existing_experience[$key]) ||
+                $existing_experience[$key] !== $new_exp) {
+                $has_changes = true;
+            }
+
+            $experience[] = $new_exp;
+        }
+
+        // Check if number of items changed
+        if (count($experience) !== count($existing_experience)) {
+            $has_changes = true;
+        }
+
+        // Update experience title if changed
+        if (isset($_POST['experience_title']) &&
+            (!isset($meta['experience_title']) || $meta['experience_title'] !== $_POST['experience_title'])) {
+            $meta['experience_title'] = sanitize_text_field($_POST['experience_title']);
+            $has_changes = true;
+        }
+
+        $meta['experience'] = $experience;
+
+        if ($has_changes) {
+            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+            if ($updated !== false) {
+                $success_message = esc_html__('Work experience information updated successfully.', 'jobus');
+            } else {
+                $error_message = esc_html__('Failed to update work experience information.', 'jobus');
+            }
+        } else {
+            // Only show no changes message if form was actually submitted
+            if (!empty($_POST)) {
+                $success_message = esc_html__('No changes detected in work experience information.', 'jobus');
+            }
+        }
+    }
 }
 
 //Sidebar Menu
@@ -406,6 +473,205 @@ include ('candidate-templates/sidebar-menu.php');
                 <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education"><i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?></a>
             </div>
 
+
+            <div class="bg-white card-box border-20 mt-40">
+                <h4 class="dash-title-three"><?php esc_html_e('Work Experience', 'jobus'); ?></h4>
+
+                <div class="dash-input-wrapper mb-15">
+                    <label for="experience_title"><?php esc_html_e('Title', 'jobus'); ?></label>
+                    <input type="text" id="experience_title" name="experience_title" value="<?php echo esc_attr($meta['experience_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Work Experience', 'jobus'); ?>">
+                </div>
+
+                <div class="accordion dash-accordion-one" id="experience-repeater">
+                    <?php
+                    $experience = isset($meta['experience']) && is_array($meta['experience']) ? $meta['experience'] : array();
+                    if (empty($experience)) {
+                        $experience[] = array(
+                            'sl_num' => '',
+                            'title' => '',
+                            'company' => '',
+                            'start_date' => '',
+                            'end_date' => '',
+                            'description' => '',
+                        );
+                    }
+                    foreach ($experience as $key => $value) {
+                        $accordion_id = 'collapseExp-' . esc_attr($key);
+                        ?>
+                        <div class="accordion-item experience-item">
+                            <div class="accordion-header" id="headingExp-<?php echo esc_attr($key); ?>">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
+                                    aria-expanded="false"
+                                    aria-controls="<?php echo esc_attr($accordion_id); ?>">
+                                    <?php echo esc_html($value['title'] ?? esc_html__('Experience', 'jobus')); ?>
+                                </button>
+                            </div>
+                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
+                                aria-labelledby="headingExp-<?php echo esc_attr($key); ?>"
+                                data-bs-parent="#experience-repeater">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('experience_' . $key . '_sl_num'); ?>">
+                                                    <?php esc_html_e('Serial Number', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text"
+                                                    class="form-control"
+                                                    name="<?php echo esc_attr('experience[' . $key . '][sl_num]'); ?>"
+                                                    id="<?php echo esc_attr('experience_' . $key . '_sl_num'); ?>"
+                                                    value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('experience_' . $key . '_title'); ?>">
+                                                    <?php esc_html_e('Title', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control" name="experience[<?php echo $key; ?>][title]" id="experience_<?php echo $key; ?>_title" value="<?php echo esc_attr($value['title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Lead Product Designer', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('experience_' . $key . '_company'); ?>">
+                                                    <?php esc_html_e('Company', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control" name="experience[<?php echo $key; ?>][company]" id="experience_<?php echo $key; ?>_company" value="<?php echo esc_attr($value['company'] ?? ''); ?>" placeholder="<?php esc_attr_e('Google Inc', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for=""><?php esc_html_e('Duration', 'jobus'); ?>*</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="dash-input-wrapper mb-30">
+                                                        <input type="date"
+                                                            class="form-control"
+                                                            name="experience[<?php echo $key; ?>][start_date]"
+                                                            id="experience_<?php echo $key; ?>_start_date"
+                                                            value="<?php echo esc_attr($value['start_date'] ?? ''); ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="dash-input-wrapper mb-30">
+                                                        <input type="date"
+                                                            class="form-control"
+                                                            name="experience[<?php echo $key; ?>][end_date]"
+                                                            id="experience_<?php echo $key; ?>_end_date"
+                                                            value="<?php echo esc_attr($value['end_date'] ?? ''); ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('experience_' . $key . '_description'); ?>">
+                                                    <?php esc_html_e('Description', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <textarea class="size-lg form-control" name="experience[<?php echo $key; ?>][description]" id="experience_<?php echo $key; ?>_description" placeholder="<?php esc_attr_e('Describe your role and achievements', 'jobus'); ?>"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-danger btn-sm remove-experience mt-2" title="<?php esc_attr_e('Remove', 'jobus'); ?>">
+                                            <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-experience">
+                    <i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?>
+                </a>
+            </div>
+
+
+            <div class="bg-white card-box border-20 mt-40">
+                <h4 class="dash-title-three"><?php esc_html_e('Portfolio', 'jobus'); ?></h4>
+
+                <div class="dash-input-wrapper mb-30">
+                    <label for="portfolio_title"><?php esc_html_e('Title', 'jobus'); ?></label>
+                    <input type="text" id="portfolio_title" name="portfolio_title" value="<?php echo esc_attr($meta['portfolio_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Portfolio', 'jobus'); ?>">
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="candidate-portfolio-block position-relative mb-25">
+                            <a href="#" class="d-block">
+                                <img src="images/portfolio_img_01.jpg" alt="" class="lazy-img w-100" style="">
+                            </a>
+                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
+                        </div>
+                        <!-- /.candidate-portfolio-block -->
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="candidate-portfolio-block position-relative mb-25">
+                            <a href="#" class="d-block">
+                                <img src="images/portfolio_img_02.jpg" alt="" class="lazy-img w-100" style="">
+                            </a>
+                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
+                        </div>
+                        <!-- /.candidate-portfolio-block -->
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="candidate-portfolio-block position-relative mb-25">
+                            <a href="#" class="d-block">
+                                <img src="images/portfolio_img_03.jpg" alt="" class="lazy-img w-100" style="">
+                            </a>
+                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
+                        </div>
+                        <!-- /.candidate-portfolio-block -->
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="candidate-portfolio-block position-relative mb-25">
+                            <a href="#" class="d-block">
+                                <img src="images/portfolio_img_04.jpg" alt="" class="lazy-img w-100" style="">
+                            </a>
+                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
+                        </div>
+                        <!-- /.candidate-portfolio-block -->
+                    </div>
+                </div>
+
+                <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more</a>
+
+
+            </div>
+
+
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
             </div>
@@ -434,241 +700,8 @@ include ('candidate-templates/sidebar-menu.php');
                 <!-- /.skills-wrapper -->
             </div>
             <!-- /.dash-input-wrapper -->
-
-            <div class="dash-input-wrapper mb-15">
-                <label for="">Add Work Experience*</label>
-            </div>
-            <!-- /.dash-input-wrapper -->
-            <div class="accordion dash-accordion-one" id="accordionTwo">
-                <div class="accordion-item">
-                    <div class="accordion-header" id="headingOneA">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneA" aria-expanded="false" aria-controls="collapseOneA">
-                            Experience 1*
-                        </button>
-                    </div>
-                    <div id="collapseOneA" class="accordion-collapse collapse" aria-labelledby="headingOneA" data-bs-parent="#accordionTwo">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Title*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Lead Product Designer ">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Company*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Amazon Inc">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Year*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Description*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <textarea class="size-lg" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."></textarea>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header" id="headingTwoA">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoA" aria-expanded="false" aria-controls="collapseTwoA">
-                            Experience 2*
-                        </button>
-                    </div>
-                    <div id="collapseTwoA" class="accordion-collapse collapse show" aria-labelledby="headingTwoA" data-bs-parent="#accordionTwo">
-                        <div class="accordion-body">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Title*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Lead Product Designer ">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Company*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <input type="text" placeholder="Amazon Inc">
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Year*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <select class="nice-select">
-                                                    <option>2023</option>
-                                                    <option>2022</option>
-                                                    <option>2021</option>
-                                                    <option>2020</option>
-                                                    <option>2019</option>
-                                                    <option>2018</option>
-                                                </select>
-                                            </div>
-                                            <!-- /.dash-input-wrapper -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-30 md-mb-10">
-                                        <label for="">Description*</label>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-30">
-                                        <textarea class="size-lg" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."></textarea>
-                                    </div>
-                                    <!-- /.dash-input-wrapper -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- /.dash-accordion-one -->
-            <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more</a>
         </div>
         <!-- /.card-box -->
-
-        <div class="bg-white card-box border-20 mt-40">
-            <h4 class="dash-title-three">Portfolio</h4>
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <div class="candidate-portfolio-block position-relative mb-25">
-                        <a href="#" class="d-block">
-                            <img src="../images/lazy.svg" data-src="images/portfolio_img_01.jpg" alt="" class="lazy-img w-100">
-                        </a>
-                        <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                    </div>
-                    <!-- /.candidate-portfolio-block -->
-                </div>
-                <div class="col-lg-3 col-6">
-                    <div class="candidate-portfolio-block position-relative mb-25">
-                        <a href="#" class="d-block">
-                            <img src="../images/lazy.svg" data-src="images/portfolio_img_02.jpg" alt="" class="lazy-img w-100">
-                        </a>
-                        <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                    </div>
-                    <!-- /.candidate-portfolio-block -->
-                </div>
-                <div class="col-lg-3 col-6">
-                    <div class="candidate-portfolio-block position-relative mb-25">
-                        <a href="#" class="d-block">
-                            <img src="../images/lazy.svg" data-src="images/portfolio_img_03.jpg" alt="" class="lazy-img w-100">
-                        </a>
-                        <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                    </div>
-                    <!-- /.candidate-portfolio-block -->
-                </div>
-                <div class="col-lg-3 col-6">
-                    <div class="candidate-portfolio-block position-relative mb-25">
-                        <a href="#" class="d-block">
-                            <img src="../images/lazy.svg" data-src="images/portfolio_img_04.jpg" alt="" class="lazy-img w-100">
-                        </a>
-                        <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                    </div>
-                    <!-- /.candidate-portfolio-block -->
-                </div>
-            </div>
-            <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more</a>
-        </div>
         <!-- /.card-box -->
 
 
