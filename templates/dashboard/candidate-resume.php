@@ -289,7 +289,49 @@ if ( isset($intro_video) ) {
             }
         }
     }
-}
+
+    // Handle Portfolio form submission
+    if (isset($_POST['portfolio_title']) || isset($_POST['portfolio'])) {
+        if (!isset($meta) || !is_array($meta)) {
+            $meta = array();
+        }
+
+        $has_changes = false;
+
+        // Update portfolio title
+        if (isset($_POST['portfolio_title'])) {
+            $new_title = sanitize_text_field($_POST['portfolio_title']);
+            if (!isset($meta['portfolio_title']) || $meta['portfolio_title'] !== $new_title) {
+                $meta['portfolio_title'] = $new_title;
+                $has_changes = true;
+            }
+        }
+
+        // Update portfolio gallery
+        if (isset($_POST['portfolio'])) {
+            $portfolio_ids = array_filter(
+                explode(',', sanitize_text_field($_POST['portfolio'])),
+                function($id) { return is_numeric($id) && $id > 0; }
+            );
+
+            // Check if portfolio images have changed
+            $existing_portfolio = isset($meta['portfolio']) ? (array)$meta['portfolio'] : array();
+            if (array_diff($portfolio_ids, $existing_portfolio) || array_diff($existing_portfolio, $portfolio_ids)) {
+                $meta['portfolio'] = $portfolio_ids;
+                $has_changes = true;
+            }
+        }
+
+        if ($has_changes) {
+            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+            if ($updated !== false) {
+                $success_message = esc_html__('Portfolio updated successfully.', 'jobus');
+            } else {
+                $error_message = esc_html__('Failed to update portfolio.', 'jobus');
+            }
+        }
+    }
+} // End of form submission check
 
 //Sidebar Menu
 include ('candidate-templates/sidebar-menu.php');
@@ -475,7 +517,27 @@ include ('candidate-templates/sidebar-menu.php');
 
 
             <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Work Experience', 'jobus'); ?></h4>
+                <h4 class="dash-title-three"><?php esc_html_e('Skills & Experience', 'jobus'); ?></h4>
+
+                <div class="dash-input-wrapper mb-40">
+                    <label for="">Add Skills*</label>
+
+                    <div class="skills-wrapper">
+                        <ul class="style-none d-flex flex-wrap align-items-center">
+                            <li class="is_tag"><button>Figma <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>HTML5 <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>Illustrator <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>Adobe Photoshop <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>WordPress <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>jQuery <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>Web Design <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>Adobe XD <i class="bi bi-x"></i></button></li>
+                            <li class="is_tag"><button>CSS <i class="bi bi-x"></i></button></li>
+                            <li class="more_tag"><button>+</button></li>
+                        </ul>
+                    </div>
+                    <!-- /.skills-wrapper -->
+                </div>
 
                 <div class="dash-input-wrapper mb-15">
                     <label for="experience_title"><?php esc_html_e('Title', 'jobus'); ?></label>
@@ -619,91 +681,48 @@ include ('candidate-templates/sidebar-menu.php');
             </div>
 
 
-            <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Portfolio', 'jobus'); ?></h4>
-
+            <div class="bg-white card-box border-20 mt-40" id="portfolio-section">
+                <h4 class="dash-title-three"><?php esc_html_e('Portfolio Gallery', 'jobus'); ?></h4>
                 <div class="dash-input-wrapper mb-30">
-                    <label for="portfolio_title"><?php esc_html_e('Title', 'jobus'); ?></label>
-                    <input type="text" id="portfolio_title" name="portfolio_title" value="<?php echo esc_attr($meta['portfolio_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Portfolio', 'jobus'); ?>">
+                    <label for="portfolio_title"><?php esc_html_e('Portfolio Title', 'jobus'); ?></label>
+                    <input type="text"
+                        id="portfolio_title"
+                        name="portfolio_title"
+                        value="<?php echo esc_attr($meta['portfolio_title'] ?? ''); ?>"
+                        class="form-control"
+                        placeholder="<?php esc_attr_e('My Portfolio', 'jobus'); ?>">
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="candidate-portfolio-block position-relative mb-25">
-                            <a href="#" class="d-block">
-                                <img src="images/portfolio_img_01.jpg" alt="" class="lazy-img w-100" style="">
-                            </a>
-                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                        </div>
-                        <!-- /.candidate-portfolio-block -->
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="candidate-portfolio-block position-relative mb-25">
-                            <a href="#" class="d-block">
-                                <img src="images/portfolio_img_02.jpg" alt="" class="lazy-img w-100" style="">
-                            </a>
-                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                        </div>
-                        <!-- /.candidate-portfolio-block -->
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="candidate-portfolio-block position-relative mb-25">
-                            <a href="#" class="d-block">
-                                <img src="images/portfolio_img_03.jpg" alt="" class="lazy-img w-100" style="">
-                            </a>
-                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                        </div>
-                        <!-- /.candidate-portfolio-block -->
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="candidate-portfolio-block position-relative mb-25">
-                            <a href="#" class="d-block">
-                                <img src="images/portfolio_img_04.jpg" alt="" class="lazy-img w-100" style="">
-                            </a>
-                            <a href="#" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s"><i class="bi bi-x"></i></a>
-                        </div>
-                        <!-- /.candidate-portfolio-block -->
-                    </div>
+                <div class="row" id="portfolio-items">
+                    <?php
+                    $portfolio_ids = isset($meta['portfolio']) ? (array)$meta['portfolio'] : array();
+
+                    foreach($portfolio_ids as $image_id):
+                        $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
+                        if ($image_url):
+                            ?>
+                            <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="<?php echo esc_attr($image_id); ?>">
+                                <div class="portfolio-image-wrapper position-relative">
+                                    <img src="<?php echo esc_url($image_url); ?>" class="img-fluid" alt="<?php echo esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true)); ?>">
+                                    <button type="button" class="remove-portfolio-image btn-close position-absolute" aria-label="<?php esc_attr_e('Remove', 'jobus'); ?>"></button>
+                                </div>
+                            </div>
+                            <?php
+                        endif;
+                    endforeach;
+                    ?>
                 </div>
 
-                <a href="#" class="dash-btn-one"><i class="bi bi-plus"></i> Add more</a>
-
-
+                <input type="hidden" name="portfolio_ids" id="portfolio_ids" value="<?php echo esc_attr(implode(',', $portfolio_ids)); ?>">
+                <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
+                    <i class="bi bi-plus"></i> <?php esc_html_e('Add Portfolio Images', 'jobus'); ?>
+                </button>
             </div>
-
 
             <div class="button-group d-inline-flex align-items-center mt-30">
                 <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
             </div>
-
         </form>
-
-        <div class="bg-white card-box border-20 mt-40">
-            <h4 class="dash-title-three">Skills & Experience</h4>
-            <div class="dash-input-wrapper mb-40">
-                <label for="">Add Skills*</label>
-
-                <div class="skills-wrapper">
-                    <ul class="style-none d-flex flex-wrap align-items-center">
-                        <li class="is_tag"><button>Figma <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>HTML5 <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>Illustrator <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>Adobe Photoshop <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>WordPress <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>jQuery <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>Web Design <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>Adobe XD <i class="bi bi-x"></i></button></li>
-                        <li class="is_tag"><button>CSS <i class="bi bi-x"></i></button></li>
-                        <li class=more_tag><button>+</button></li>
-                    </ul>
-                </div>
-                <!-- /.skills-wrapper -->
-            </div>
-            <!-- /.dash-input-wrapper -->
-        </div>
-        <!-- /.card-box -->
-        <!-- /.card-box -->
-
 
     </div>
 </div>

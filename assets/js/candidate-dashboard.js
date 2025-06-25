@@ -668,85 +668,95 @@
             setupAutoSave();
         }
 
-            /**
-         * Handles the portfolio gallery functionality
+        /**
+         * Handles the portfolio gallery functionality.
          */
+        function PortfolioManager() {
+            const portfolioSection = $('#portfolio-section');
 
-            function PortfolioGallery() {
-                const portfolioContainer = $('#portfolio-images-container');
-                const portfolioGalleryInput = $('#portfolio_gallery');
-                const addImagesBtn = $('#add-portfolio-images');
-                let frame;
+            // Initialize media uploader
+            let mediaUploader;
 
-                // Open media library
-                function initMediaFrame() {
-                    frame = wp.media({
-                        title: window.jobus_portfolio_frame_title || 'Select Portfolio Images',
+            function setupMediaUploader() {
+                $('#add-portfolio-images').on('click', function(e) {
+                    e.preventDefault();
+
+                    if (mediaUploader) {
+                        mediaUploader.open();
+                        return;
+                    }
+
+                    mediaUploader = wp.media({
+                        title: window.jobus_portfolio_upload_title || 'Select Portfolio Images',
                         button: {
-                            text: window.jobus_portfolio_button_text || 'Add to Portfolio'
+                            text: window.jobus_portfolio_select_text || 'Add to Portfolio'
                         },
-                        multiple: true,
-                        library: { type: 'image' }
+                        multiple: true
                     });
 
-                    // When images are selected
-                    frame.on('select', function () {
-                        const attachments = frame.state().get('selection').toJSON();
-                        let currentIds = portfolioGalleryInput.val() ? portfolioGalleryInput.val().split(',') : [];
+                    mediaUploader.on('select', function() {
+                        const selection = mediaUploader.state().get('selection');
+                        const portfolioContainer = $('#portfolio-items');
+                        const portfolioIds = [];
 
-                        attachments.forEach(function (attachment) {
-                            const imageId = attachment.id.toString();
-                            if (!currentIds.includes(imageId)) {
-                                currentIds.push(imageId);
+                        // Get existing IDs
+                        const existingIds = $('#portfolio_ids').val().split(',').filter(id => id);
 
-                                const imageUrl = attachment.sizes?.thumbnail?.url || attachment.url;
+                        selection.map(function(attachment) {
+                            attachment = attachment.toJSON();
+                            portfolioIds.push(attachment.id);
 
-                                const imageItem = $(`
-                            <div class="col-lg-3 col-6 portfolio-image-item mb-25" data-image-id="${imageId}">
-                                <div class="candidate-portfolio-block position-relative">
-                                    <img src="${imageUrl}" alt="" class="w-100">
-                                    <button type="button" class="remove-portfolio-item rounded-circle d-flex align-items-center justify-content-center tran3s">
-                                        <i class="bi bi-x"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        `);
-
-                                portfolioContainer.append(imageItem);
+                            // Add new image preview if it doesn't exist
+                            if (!existingIds.includes(attachment.id.toString())) {
+                                portfolioContainer.append(`
+                                    <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="${attachment.id}">
+                                        <div class="portfolio-image-wrapper position-relative">
+                                            <img src="${attachment.sizes.thumbnail.url}" class="img-fluid" alt="${attachment.title}">
+                                            <button type="button" class="remove-portfolio-image btn-close position-absolute" aria-label="Remove"></button>
+                                        </div>
+                                    </div>
+                                `);
                             }
                         });
 
-                        portfolioGalleryInput.val(currentIds.join(','));
+                        // Update hidden input with all IDs (existing + new)
+                        const allIds = [...new Set([...existingIds, ...portfolioIds])];
+                        $('#portfolio_ids').val(allIds.join(','));
                     });
-                }
 
-                // Open media on button click
-                addImagesBtn.on('click', function (e) {
-                    e.preventDefault();
-
-                    if (!frame) {
-                        initMediaFrame();
-                    }
-
-                    frame.open();
-                });
-
-                // Remove image handler
-                portfolioContainer.on('click', '.remove-portfolio-item', function (e) {
-                    e.preventDefault();
-
-                    const imageItem = $(this).closest('.portfolio-image-item');
-                    const imageId = imageItem.data('image-id').toString();
-                    const currentIds = portfolioGalleryInput.val().split(',');
-
-                    const newIds = currentIds.filter(id => id !== imageId);
-                    portfolioGalleryInput.val(newIds.join(','));
-
-                    imageItem.fadeOut(200, function () {
-                        $(this).remove();
-                    });
+                    mediaUploader.open();
                 });
             }
+
+            function setupImageRemoval() {
+                $(document).on('click', '.remove-portfolio-image', function(e) {
+                    e.preventDefault();
+                    const item = $(this).closest('.portfolio-item');
+                    const imageId = item.data('id');
+
+                    if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this image?')) {
+                        // Update hidden input
+                        const currentIds = $('#portfolio_ids').val().split(',').filter(id => id && id != imageId);
+                        $('#portfolio_ids').val(currentIds.join(','));
+
+                        // Remove preview
+                        item.fadeOut('fast', function() {
+                            $(this).remove();
+                        });
+                    }
+                });
+            }
+
+            function init() {
+                if (portfolioSection.length) {
+                    setupMediaUploader();
+                    setupImageRemoval();
+                }
+            }
+
+            return { init };
+        }
+
 
         // Initialize all handlers
         updateProfilePicturePreview();
@@ -756,13 +766,12 @@
         CandidateSpecificationsRepeater();
         EducationRepeater();
         ExperienceRepeater();
-        PortfolioGallery();
+        PortfolioManager().init(); // Initialize portfolio manager
 
     })
 
 
 })(jQuery);
-
 
 
 document.addEventListener('DOMContentLoaded', function() {

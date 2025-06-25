@@ -80,5 +80,14 @@ class Assets {
 			'delete_text' => __('Delete', 'jobus'),
 			'default_avatar' => get_avatar_url(0), // Default WordPress avatar
 		]);
+
+		// Only load media scripts for candidate users
+		if ( is_user_logged_in() ) {
+			$user = wp_get_current_user();
+			if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
+				wp_enqueue_media();
+			}
+		}
+
 	}
 }
