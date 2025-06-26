@@ -757,6 +757,157 @@
             return { init };
         }
 
+        /**
+         * Candidate Skills Picker
+         */
+        function CandidateSkillsPicker() {
+            const skillsList = $('#candidate-skills-list');
+            const addBtn = $('#add-skill-btn');
+            const dropdown = $('#all-skills-dropdown');
+            const hiddenInput = $('#candidate_skills_input');
+            let selectedSkills = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
+
+            // Show dropdown on + click
+            addBtn.on('click', function(e) {
+                e.stopPropagation();
+                const btnOffset = addBtn.offset();
+                dropdown.css({
+                    top: addBtn.position().top + addBtn.outerHeight() + 4,
+                    left: addBtn.position().left
+                });
+                dropdown.show();
+            });
+
+            // Hide dropdown on outside click
+            $(document).on('click', function(e) {
+                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
+                    dropdown.hide();
+                }
+            });
+
+            // Add skill from dropdown
+            dropdown.on('click', '.dropdown-skill-item:not(.taken)', function() {
+                const skillId = $(this).data('skill-id');
+                const skillName = $(this).text();
+                if (selectedSkills.includes(String(skillId))) return;
+                // Add tag before the + button
+                $('<li class="is_tag selected-skill" data-skill-id="'+skillId+'"><button type="button">'+skillName+' <i class="bi bi-x"></i></button></li>')
+                    .insertBefore(addBtn);
+                selectedSkills.push(String(skillId));
+                hiddenInput.val(selectedSkills.join(','));
+                // Mark as taken in dropdown
+                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
+            });
+
+            // Remove skill
+            skillsList.on('click', '.selected-skill button', function(e) {
+                e.preventDefault();
+                const li = $(this).closest('li.selected-skill');
+                const skillId = li.data('skill-id');
+                li.remove();
+                selectedSkills = selectedSkills.filter(id => id != skillId);
+                hiddenInput.val(selectedSkills.join(','));
+                // Unmark in dropdown
+                dropdown.find('.dropdown-skill-item[data-skill-id="'+skillId+'"]')
+                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
+            });
+        }
+
+        /**
+         * Candidate Category Picker
+         */
+        function CandidateCategoryPicker() {
+            const categoryList = $('#candidate-category-list');
+            const addBtn = $('#add-category-btn');
+            const dropdown = $('#all-categories-dropdown');
+            const hiddenInput = $('#candidate_categories_input');
+            let selectedCategories = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
+
+            // Show dropdown on + click
+            addBtn.on('click', function(e) {
+                e.stopPropagation();
+                dropdown.show();
+            });
+
+            // Hide dropdown on outside click
+            $(document).on('click', function(e) {
+                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
+                    dropdown.hide();
+                }
+            });
+
+            // Add category from dropdown
+            dropdown.on('click', '.dropdown-category-item:not(.taken)', function() {
+                const catId = $(this).data('category-id');
+                const catName = $(this).text();
+                if (selectedCategories.includes(String(catId))) return;
+                $('<li class="is_tag selected-category" data-category-id="'+catId+'"><button type="button">'+catName+' <i class="bi bi-x"></i></button></li>')
+                    .insertBefore(addBtn);
+                selectedCategories.push(String(catId));
+                hiddenInput.val(selectedCategories.join(','));
+                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
+            });
+
+            // Remove category
+            categoryList.on('click', '.selected-category button', function(e) {
+                e.preventDefault();
+                const li = $(this).closest('li.selected-category');
+                const catId = li.data('category-id');
+                li.remove();
+                selectedCategories = selectedCategories.filter(id => id != catId);
+                hiddenInput.val(selectedCategories.join(','));
+                dropdown.find('.dropdown-category-item[data-category-id="'+catId+'"]')
+                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
+            });
+        }
+
+        /**
+         * Candidate Location Picker
+         */
+        function CandidateLocationPicker() {
+            const locationList = $('#candidate-location-list');
+            const addBtn = $('#add-location-btn');
+            const dropdown = $('#all-locations-dropdown');
+            const hiddenInput = $('#candidate_locations_input');
+            let selectedLocations = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
+
+            // Show dropdown on + click
+            addBtn.on('click', function(e) {
+                e.stopPropagation();
+                dropdown.show();
+            });
+
+            // Hide dropdown on outside click
+            $(document).on('click', function(e) {
+                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
+                    dropdown.hide();
+                }
+            });
+
+            // Add location from dropdown
+            dropdown.on('click', '.dropdown-location-item:not(.taken)', function() {
+                const locationId = $(this).data('location-id');
+                const locationName = $(this).text();
+                if (selectedLocations.includes(String(locationId))) return;
+                $('<li class="is_tag selected-location" data-location-id="'+locationId+'"><button type="button">'+locationName+' <i class="bi bi-x"></i></button></li>')
+                    .insertBefore(addBtn);
+                selectedLocations.push(String(locationId));
+                hiddenInput.val(selectedLocations.join(','));
+                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
+            });
+
+            // Remove location
+            locationList.on('click', '.selected-location button', function(e) {
+                e.preventDefault();
+                const li = $(this).closest('li.selected-location');
+                const locationId = li.data('location-id');
+                li.remove();
+                selectedLocations = selectedLocations.filter(id => id != locationId);
+                hiddenInput.val(selectedLocations.join(','));
+                dropdown.find('.dropdown-location-item[data-location-id="'+locationId+'"]')
+                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
+            });
+        }
 
         // Initialize all handlers
         updateProfilePicturePreview();
@@ -767,7 +918,9 @@
         EducationRepeater();
         ExperienceRepeater();
         PortfolioManager().init(); // Initialize portfolio manager
-
+        CandidateSkillsPicker();
+        CandidateCategoryPicker();
+        CandidateLocationPicker();
     })
 
 
