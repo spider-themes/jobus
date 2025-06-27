@@ -530,120 +530,36 @@ include ('candidate-templates/sidebar-menu.php');
             </div>
 
             <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Skills & Experience', 'jobus'); ?></h4>
-
+                <h4 class="dash-title-three"><?php esc_html_e('Skills', 'jobus'); ?></h4>
                 <div class="dash-input-wrapper mb-40">
-
-                    <!-- Add Category -->
-                    <label for="candidate-category-list"><?php esc_html_e('Add Category*', 'jobus'); ?></label>
-                    <div class="skills-wrapper">
-                        <ul class="style-none d-flex flex-wrap align-items-center" id="candidate-category-list">
-                            <?php
-                            // Get all categories from taxonomy
-                            $all_categories = get_terms([
-                                'taxonomy' => 'jobus_candidate_cat',
-                                'hide_empty' => false,
-                                'orderby' => 'name',
-                                'order' => 'ASC',
-                            ]);
-                            // Get selected categories for this candidate
-                            $selected_categories = $candidate_id ? wp_get_object_terms($candidate_id, 'jobus_candidate_cat', ['fields' => 'ids']) : array();
-                            // Output selected categories first
-                            if (!empty($selected_categories)) {
-                                foreach ($all_categories as $cat) {
-                                    if (in_array($cat->term_id, $selected_categories)) {
-                                        echo '<li class="is_tag selected-category" data-category-id="' . esc_attr($cat->term_id) . '"><button type="button">' . esc_html($cat->name) . ' <i class="bi bi-x"></i></button></li>';
-                                    }
-                                }
-                            }
-                            // Output the "+" button
-                            echo '<li class="more_tag" id="add-category-btn"><button type="button">+</button></li>';
-                            ?>
-                        </ul>
-                        <div id="all-categories-dropdown" class="skills-dropdown" style="display:none;position:absolute;z-index:10;background:#fff;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:10px 0;min-width:180px;max-height:220px;overflow:auto;">
-                            <?php
-                            foreach ($all_categories as $cat) {
-                                $is_selected = in_array($cat->term_id, $selected_categories);
-                                echo '<div class="dropdown-category-item' . ($is_selected ? ' taken' : '') . '" data-category-id="' . esc_attr($cat->term_id) . '" style="padding:6px 18px;cursor:' . ($is_selected ? 'not-allowed' : 'pointer') . ';color:' . ($is_selected ? '#bbb' : '#222') . ';">' . esc_html($cat->name) . '</div>';
-                            }
-                            ?>
-                        </div>
-                        <input type="hidden" name="candidate_categories" id="candidate_categories_input" value="<?php echo esc_attr(implode(',', $selected_categories)); ?>">
-                    </div>
-
-                    <!-- Add Location -->
-                    <label for="candidate-location-list"><?php esc_html_e('Add Location*', 'jobus'); ?></label>
-                    <div class="skills-wrapper">
-                        <ul class="style-none d-flex flex-wrap align-items-center" id="candidate-location-list">
-                            <?php
-                            // Get all locations from taxonomy
-                            $all_locations = get_terms([
-                                'taxonomy' => 'jobus_candidate_location',
-                                'hide_empty' => false,
-                                'orderby' => 'name',
-                                'order' => 'ASC',
-                            ]);
-                            // Get selected locations for this candidate
-                            $selected_locations = $candidate_id ? wp_get_object_terms($candidate_id, 'jobus_candidate_location', ['fields' => 'ids']) : array();
-                            // Output selected locations first
-                            if (!empty($selected_locations)) {
-                                foreach ($all_locations as $location) {
-                                    if (in_array($location->term_id, $selected_locations)) {
-                                        echo '<li class="is_tag selected-location" data-location-id="' . esc_attr($location->term_id) . '"><button type="button">' . esc_html($location->name) . ' <i class="bi bi-x"></i></button></li>';
-                                    }
-                                }
-                            }
-                            // Output the "+" button
-                            echo '<li class="more_tag" id="add-location-btn"><button type="button">+</button></li>';
-                            ?>
-                        </ul>
-                        <div id="all-locations-dropdown" class="skills-dropdown" style="display:none;position:absolute;z-index:10;background:#fff;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:10px 0;min-width:180px;max-height:220px;overflow:auto;">
-                            <?php
-                            foreach ($all_locations as $location) {
-                                $is_selected = in_array($location->term_id, $selected_locations);
-                                echo '<div class="dropdown-location-item' . ($is_selected ? ' taken' : '') . '" data-location-id="' . esc_attr($location->term_id) . '" style="padding:6px 18px;cursor:' . ($is_selected ? 'not-allowed' : 'pointer') . ';color:' . ($is_selected ? '#bbb' : '#222') . ';">' . esc_html($location->name) . '</div>';
-                            }
-                            ?>
-                        </div>
-                        <input type="hidden" name="candidate_locations" id="candidate_locations_input" value="<?php echo esc_attr(implode(',', $selected_locations)); ?>">
-                    </div>
 
                     <!-- Add Skills -->
                     <label for="candidate-skills-list"><?php esc_html_e('Add Skills*', 'jobus'); ?></label>
                     <div class="skills-wrapper">
-                        <ul class="style-none d-flex flex-wrap align-items-center" id="candidate-skills-list">
-                            <?php
-                            // Get all skills from taxonomy
-                            $all_skills = get_terms([
-                                'taxonomy' => 'jobus_candidate_skill',
-                                'hide_empty' => false,
-                                'orderby' => 'name',
-                                'order' => 'ASC',
-                            ]);
-                            // Get selected skills for this candidate
-                            $selected_skills = $candidate_id ? wp_get_object_terms($candidate_id, 'jobus_candidate_skill', ['fields' => 'ids']) : array();
-                            // Output selected skills first
-                            if (!empty($selected_skills)) {
-                                foreach ($all_skills as $skill) {
-                                    if (in_array($skill->term_id, $selected_skills)) {
-                                        echo '<li class="is_tag selected-skill" data-skill-id="' . esc_attr($skill->term_id) . '"><button type="button">' . esc_html($skill->name) . ' <i class="bi bi-x"></i></button></li>';
-                                    }
-                                }
-                            }
-                            // Output the "+" button
-                            echo '<li class="more_tag" id="add-skill-btn"><button type="button">+</button></li>';
-                            ?>
+                        <?php
+                        // Fetch candidate's current skills (term objects)
+                        $current_skills = array();
+                        if (
+                            isset(
+                                $candidate_id
+                            ) && $candidate_id
+                        ) {
+                            $current_skills = wp_get_object_terms($candidate_id, 'jobus_candidate_skill');
+                        }
+                        ?>
+                        <ul id="candidate-skills-list" class="style-none d-flex flex-wrap align-items-center">
+                            <?php if (!empty($current_skills) && !is_wp_error($current_skills)): ?>
+                                <?php foreach ($current_skills as $skill): ?>
+                                    <li class="is_tag" data-skill-id="<?php echo esc_attr($skill->term_id); ?>">
+                                        <button type="button"><?php echo esc_html($skill->name); ?> <i class="bi bi-x"></i></button>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <li class="more_tag"><button type="button">+</button></li>
                         </ul>
-                        <div id="all-skills-dropdown" class="skills-dropdown" style="display:none;position:absolute;z-index:10;background:#fff;border:1px solid #eee;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:10px 0;min-width:180px;max-height:220px;overflow:auto;">
-                            <?php
-                            foreach ($all_skills as $skill) {
-                                $is_selected = in_array($skill->term_id, $selected_skills);
-                                echo '<div class="dropdown-skill-item' . ($is_selected ? ' taken' : '') . '" data-skill-id="' . esc_attr($skill->term_id) . '" style="padding:6px 18px;cursor:' . ($is_selected ? 'not-allowed' : 'pointer') . ';color:' . ($is_selected ? '#bbb' : '#222') . ';">' . esc_html($skill->name) . '</div>';
-                            }
-                            ?>
-                        </div>
-                        <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo esc_attr(implode(',', $selected_skills)); ?>">
+                        <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo !empty($current_skills) && !is_wp_error($current_skills) ? esc_attr(implode(',', wp_list_pluck($current_skills, 'term_id'))) : ''; ?>">
                     </div>
+
                 </div>
             </div>
 

@@ -1522,4 +1522,82 @@ Table of Contents:
   font-style: italic;
 }
 
+.taxonomy-input-wrapper {
+  position: relative;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+}
+
+.taxonomy-input {
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 150px;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.taxonomy-input:focus {
+  border-color: #7B67FF;
+  box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
+}
+
+.is_tag {
+  background: #F6F4FF;
+  border-radius: 4px;
+  padding: 5px 12px;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  font-size: 14px;
+  color: #7B67FF;
+  font-weight: 500;
+}
+
+.is_tag button {
+  background: none;
+  border: none;
+  color: #7B67FF;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.is_tag button i {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.is_tag button:hover i {
+  opacity: 1;
+}
+
+.more_tag {
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.more_tag button {
+  background: #F6F4FF;
+  border: none;
+  color: #7B67FF;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.more_tag button:hover {
+  background: #7B67FF;
+  color: #fff;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

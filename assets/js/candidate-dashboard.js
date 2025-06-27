@@ -758,154 +758,139 @@
         }
 
         /**
-         * Candidate Skills Picker
+         * Handles the dynamic taxonomy for candidate categories, locations, and skills with suggestions and tag management
          */
-        function CandidateSkillsPicker() {
-            const skillsList = $('#candidate-skills-list');
-            const addBtn = $('#add-skill-btn');
-            const dropdown = $('#all-skills-dropdown');
-            const hiddenInput = $('#candidate_skills_input');
-            let selectedSkills = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
+        function CandidateTaxonomyManager(taxonomy) {
+            const $list = $(taxonomy.listSelector);
+            const $input = $(taxonomy.inputSelector);
+            let $inputWrapper = $list.find('.taxonomy-input-wrapper');
+            if ($inputWrapper.length === 0) {
+                $inputWrapper = $('<li class="taxonomy-input-wrapper" style="display:none;"><input type="text" class="taxonomy-input" placeholder="Type and press Enter to add"><ul class="taxonomy-suggestions dropdown-menu"></ul></li>');
+                $list.find('.more_tag').before($inputWrapper);
+            }
+            const $textInput = $inputWrapper.find('input');
+            const $suggestions = $inputWrapper.find('.taxonomy-suggestions');
 
-            // Show dropdown on + click
-            addBtn.on('click', function(e) {
-                e.stopPropagation();
-                const btnOffset = addBtn.offset();
-                dropdown.css({
-                    top: addBtn.position().top + addBtn.outerHeight() + 4,
-                    left: addBtn.position().left
+            // Show input on plus click
+            $list.on('click', '.more_tag button', function(e) {
+                e.preventDefault();
+                $inputWrapper.show();
+                $textInput.val('').focus();
+                $suggestions.hide().empty();
+            });
+
+            // Remove tag
+            $list.on('click', '.is_tag button', function(e) {
+                e.preventDefault();
+                const $tag = $(this).closest('.is_tag');
+                const termId = $tag.data(taxonomy.dataAttr);
+                $tag.remove();
+                // Update hidden input
+                let ids = $input.val() ? $input.val().split(',') : [];
+                ids = ids.filter(id => id != termId);
+                $input.val(ids.join(','));
+            });
+
+            // Suggest terms as user types
+            $textInput.on('input', function() {
+                const query = $textInput.val().trim();
+                if (query.length < 1) {
+                    $suggestions.hide().empty();
+                    return;
+                }
+                $.ajax({
+                    url: jobus_dashboard_params.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'jobus_suggest_taxonomy_terms',
+                        security: jobus_dashboard_params.security,
+                        taxonomy: taxonomy.taxonomy,
+                        term_query: query
+                    },
+                    success: function(response) {
+                        if (response.success && response.data && response.data.length) {
+                            $suggestions.empty();
+                            response.data.forEach(function(term) {
+                                $suggestions.append('<li class="dropdown-item" data-term-id="'+term.term_id+'">'+term.name+'</li>');
+                            });
+                            $suggestions.show();
+                        } else {
+                            $suggestions.hide().empty();
+                        }
+                    },
+                    error: function() {
+                        $suggestions.hide().empty();
+                    }
                 });
-                dropdown.show();
             });
 
-            // Hide dropdown on outside click
-            $(document).on('click', function(e) {
-                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
-                    dropdown.hide();
+            // Select suggestion
+            $suggestions.on('click', 'li', function() {
+                const termId = $(this).data('term-id');
+                const termName = $(this).text();
+                // Add tag
+                const newTag = $('<li class="is_tag" data-'+taxonomy.dataAttr+'="'+termId+'"><button type="button">'+termName+' <i class="bi bi-x"></i></button></li>');
+                $list.find('.more_tag').before(newTag);
+                // Update hidden input
+                let ids = $input.val() ? $input.val().split(',') : [];
+                if (!ids.includes(termId.toString())) {
+                    ids.push(termId);
+                }
+                $input.val(ids.join(','));
+                // Hide and reset input
+                $textInput.val('');
+                $inputWrapper.hide();
+                $suggestions.hide().empty();
+            });
+
+            // Create new term on Enter
+            $textInput.on('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const termName = $textInput.val().trim();
+                    if (!termName) return;
+                    $textInput.prop('disabled', true).attr('placeholder', 'Creating...');
+                    $.ajax({
+                        url: jobus_dashboard_params.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'jobus_create_taxonomy_term',
+                            security: jobus_dashboard_params.security,
+                            term_name: termName,
+                            taxonomy: taxonomy.taxonomy
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                // Add new tag
+                                const newTag = $('<li class="is_tag" data-'+taxonomy.dataAttr+'="'+response.data.term_id+'"><button type="button">'+response.data.term_name+' <i class="bi bi-x"></i></button></li>');
+                                $list.find('.more_tag').before(newTag);
+                                // Update hidden input
+                                let ids = $input.val() ? $input.val().split(',') : [];
+                                ids.push(response.data.term_id);
+                                $input.val(ids.join(','));
+                                // Hide and reset input
+                                $textInput.val('').prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                                $inputWrapper.hide();
+                                $suggestions.hide().empty();
+                            } else {
+                                alert(response.data && response.data.message ? response.data.message : 'Error creating term');
+                                $textInput.prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                            }
+                        },
+                        error: function() {
+                            alert('Server error. Please try again.');
+                            $textInput.prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                        }
+                    });
+                } else if (e.key === 'Escape') {
+                    $inputWrapper.hide();
+                    $suggestions.hide().empty();
                 }
             });
 
-            // Add skill from dropdown
-            dropdown.on('click', '.dropdown-skill-item:not(.taken)', function() {
-                const skillId = $(this).data('skill-id');
-                const skillName = $(this).text();
-                if (selectedSkills.includes(String(skillId))) return;
-                // Add tag before the + button
-                $('<li class="is_tag selected-skill" data-skill-id="'+skillId+'"><button type="button">'+skillName+' <i class="bi bi-x"></i></button></li>')
-                    .insertBefore(addBtn);
-                selectedSkills.push(String(skillId));
-                hiddenInput.val(selectedSkills.join(','));
-                // Mark as taken in dropdown
-                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
-            });
-
-            // Remove skill
-            skillsList.on('click', '.selected-skill button', function(e) {
-                e.preventDefault();
-                const li = $(this).closest('li.selected-skill');
-                const skillId = li.data('skill-id');
-                li.remove();
-                selectedSkills = selectedSkills.filter(id => id != skillId);
-                hiddenInput.val(selectedSkills.join(','));
-                // Unmark in dropdown
-                dropdown.find('.dropdown-skill-item[data-skill-id="'+skillId+'"]')
-                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
-            });
-        }
-
-        /**
-         * Candidate Category Picker
-         */
-        function CandidateCategoryPicker() {
-            const categoryList = $('#candidate-category-list');
-            const addBtn = $('#add-category-btn');
-            const dropdown = $('#all-categories-dropdown');
-            const hiddenInput = $('#candidate_categories_input');
-            let selectedCategories = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
-
-            // Show dropdown on + click
-            addBtn.on('click', function(e) {
-                e.stopPropagation();
-                dropdown.show();
-            });
-
-            // Hide dropdown on outside click
-            $(document).on('click', function(e) {
-                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
-                    dropdown.hide();
-                }
-            });
-
-            // Add category from dropdown
-            dropdown.on('click', '.dropdown-category-item:not(.taken)', function() {
-                const catId = $(this).data('category-id');
-                const catName = $(this).text();
-                if (selectedCategories.includes(String(catId))) return;
-                $('<li class="is_tag selected-category" data-category-id="'+catId+'"><button type="button">'+catName+' <i class="bi bi-x"></i></button></li>')
-                    .insertBefore(addBtn);
-                selectedCategories.push(String(catId));
-                hiddenInput.val(selectedCategories.join(','));
-                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
-            });
-
-            // Remove category
-            categoryList.on('click', '.selected-category button', function(e) {
-                e.preventDefault();
-                const li = $(this).closest('li.selected-category');
-                const catId = li.data('category-id');
-                li.remove();
-                selectedCategories = selectedCategories.filter(id => id != catId);
-                hiddenInput.val(selectedCategories.join(','));
-                dropdown.find('.dropdown-category-item[data-category-id="'+catId+'"]')
-                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
-            });
-        }
-
-        /**
-         * Candidate Location Picker
-         */
-        function CandidateLocationPicker() {
-            const locationList = $('#candidate-location-list');
-            const addBtn = $('#add-location-btn');
-            const dropdown = $('#all-locations-dropdown');
-            const hiddenInput = $('#candidate_locations_input');
-            let selectedLocations = hiddenInput.val() ? hiddenInput.val().split(',').filter(Boolean) : [];
-
-            // Show dropdown on + click
-            addBtn.on('click', function(e) {
-                e.stopPropagation();
-                dropdown.show();
-            });
-
-            // Hide dropdown on outside click
-            $(document).on('click', function(e) {
-                if (!dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
-                    dropdown.hide();
-                }
-            });
-
-            // Add location from dropdown
-            dropdown.on('click', '.dropdown-location-item:not(.taken)', function() {
-                const locationId = $(this).data('location-id');
-                const locationName = $(this).text();
-                if (selectedLocations.includes(String(locationId))) return;
-                $('<li class="is_tag selected-location" data-location-id="'+locationId+'"><button type="button">'+locationName+' <i class="bi bi-x"></i></button></li>')
-                    .insertBefore(addBtn);
-                selectedLocations.push(String(locationId));
-                hiddenInput.val(selectedLocations.join(','));
-                $(this).addClass('taken').css({'color':'#bbb','cursor':'not-allowed'});
-            });
-
-            // Remove location
-            locationList.on('click', '.selected-location button', function(e) {
-                e.preventDefault();
-                const li = $(this).closest('li.selected-location');
-                const locationId = li.data('location-id');
-                li.remove();
-                selectedLocations = selectedLocations.filter(id => id != locationId);
-                hiddenInput.val(selectedLocations.join(','));
-                dropdown.find('.dropdown-location-item[data-location-id="'+locationId+'"]')
-                    .removeClass('taken').css({'color':'#222','cursor':'pointer'});
+            // Hide input on blur
+            $textInput.on('blur', function() {
+                setTimeout(function() { $inputWrapper.hide(); $suggestions.hide().empty(); }, 150);
             });
         }
 
@@ -918,9 +903,26 @@
         EducationRepeater();
         ExperienceRepeater();
         PortfolioManager().init(); // Initialize portfolio manager
-        CandidateSkillsPicker();
-        CandidateCategoryPicker();
-        CandidateLocationPicker();
+
+        // Initialize dynamic taxonomy managers for category, location, and skill
+        CandidateTaxonomyManager({
+            listSelector: '#candidate-category-list',
+            inputSelector: '#candidate_categories_input',
+            taxonomy: 'jobus_candidate_cat',
+            dataAttr: 'category-id'
+        });
+        CandidateTaxonomyManager({
+            listSelector: '#candidate-location-list',
+            inputSelector: '#candidate_locations_input',
+            taxonomy: 'jobus_candidate_location',
+            dataAttr: 'location-id'
+        });
+        CandidateTaxonomyManager({
+            listSelector: '#candidate-skills-list',
+            inputSelector: '#candidate_skills_input',
+            taxonomy: 'jobus_candidate_skill',
+            dataAttr: 'skill-id'
+        });
     })
 
 
