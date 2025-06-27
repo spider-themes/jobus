@@ -529,21 +529,63 @@ include ('candidate-templates/sidebar-menu.php');
                 <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education"><i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?></a>
             </div>
 
-            <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Skills', 'jobus'); ?></h4>
-                <div class="dash-input-wrapper mb-40">
+            <div class="bg-white card-box border-20 mt-40" id="candidate-taxonomy">
 
-                    <!-- Add Skills -->
+                <!-- Add Categories -->
+                <div class="dash-input-wrapper mb-40 mt-20">
+                    <label for="candidate-category-list"><?php esc_html_e('Categories', 'jobus'); ?></label>
+                    <div class="skills-wrapper">
+                        <?php
+                        $current_categories = array();
+                        if (isset($candidate_id) && $candidate_id) {
+                            $current_categories = wp_get_object_terms($candidate_id, 'jobus_candidate_cat');
+                        }
+                        ?>
+                        <ul id="candidate-category-list" class="style-none d-flex flex-wrap align-items-center">
+                            <?php if (!empty($current_categories) && !is_wp_error($current_categories)): ?>
+                                <?php foreach ($current_categories as $cat): ?>
+                                    <li class="is_tag" data-category-id="<?php echo esc_attr($cat->term_id); ?>">
+                                        <button type="button"><?php echo esc_html($cat->name); ?> <i class="bi bi-x"></i></button>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <li class="more_tag"><button type="button">+</button></li>
+                        </ul>
+                        <input type="hidden" name="candidate_categories" id="candidate_categories_input" value="<?php echo !empty($current_categories) && !is_wp_error($current_categories) ? esc_attr(implode(',', wp_list_pluck($current_categories, 'term_id'))) : ''; ?>">
+                    </div>
+                </div>
+
+                <!-- Add Locations -->
+                <div class="dash-input-wrapper mb-40 mt-20">
+                    <label for="candidate-location-list"><?php esc_html_e('Locations', 'jobus'); ?></label>
+                    <div class="skills-wrapper">
+                        <?php
+                        $current_locations = array();
+                        if (isset($candidate_id) && $candidate_id) {
+                            $current_locations = wp_get_object_terms($candidate_id, 'jobus_candidate_location');
+                        }
+                        ?>
+                        <ul id="candidate-location-list" class="style-none d-flex flex-wrap align-items-center">
+                            <?php if (!empty($current_locations) && !is_wp_error($current_locations)): ?>
+                                <?php foreach ($current_locations as $loc): ?>
+                                    <li class="is_tag" data-location-id="<?php echo esc_attr($loc->term_id); ?>">
+                                        <button type="button"><?php echo esc_html($loc->name); ?> <i class="bi bi-x"></i></button>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <li class="more_tag"><button type="button">+</button></li>
+                        </ul>
+                        <input type="hidden" name="candidate_locations" id="candidate_locations_input" value="<?php echo !empty($current_locations) && !is_wp_error($current_locations) ? esc_attr(implode(',', wp_list_pluck($current_locations, 'term_id'))) : ''; ?>">
+                    </div>
+                </div>
+
+                <!-- Add Skills -->
+                <div class="dash-input-wrapper mb-40 mt-20">
                     <label for="candidate-skills-list"><?php esc_html_e('Add Skills*', 'jobus'); ?></label>
                     <div class="skills-wrapper">
                         <?php
-                        // Fetch candidate's current skills (term objects)
                         $current_skills = array();
-                        if (
-                            isset(
-                                $candidate_id
-                            ) && $candidate_id
-                        ) {
+                        if ( isset( $candidate_id ) && $candidate_id ) {
                             $current_skills = wp_get_object_terms($candidate_id, 'jobus_candidate_skill');
                         }
                         ?>
@@ -559,9 +601,9 @@ include ('candidate-templates/sidebar-menu.php');
                         </ul>
                         <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo !empty($current_skills) && !is_wp_error($current_skills) ? esc_attr(implode(',', wp_list_pluck($current_skills, 'term_id'))) : ''; ?>">
                     </div>
-
                 </div>
             </div>
+
 
             <div class="bg-white card-box border-20 mt-40">
                 <h4 class="dash-title-three"><?php esc_html_e('Experience', 'jobus'); ?></h4>
