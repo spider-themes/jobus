@@ -22,7 +22,7 @@ include ('candidate-templates/sidebar-menu.php');
         <div class="bg-white card-box border-20">
             <h4 class="dash-title-three"><?php esc_html_e( 'Edit & Update', 'jobus' ); ?></h4>
 
-            <form id="candidateProfileForm" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <div class="row">
 
                     <div class="col-lg-6">

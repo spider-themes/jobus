@@ -72,7 +72,7 @@
 
                             // Show success message
                             const successElement = $('<div class="alert alert-success" role="alert"></div>').text(response.data.message);
-                            $('#candidateProfileForm').before(successElement);
+                            $('#candidate-profile-form').before(successElement);
 
                             // Remove success message after 3 seconds
                             setTimeout(function() {
@@ -83,7 +83,7 @@
                         } else {
                             // Show error message
                             const errorElement = $('<div class="alert alert-danger" role="alert"></div>').text(response.data.message || 'Error deleting image');
-                            $('#candidateProfileForm').before(errorElement);
+                            $('#candidate-profile-form').before(errorElement);
 
                             // Remove error message after 3 seconds
                             setTimeout(function() {
@@ -96,7 +96,7 @@
                     error: function() {
                         // Show error message
                         const errorElement = $('<div class="alert alert-danger" role="alert"></div>').text('Server error. Please try again.');
-                        $('#candidateProfileForm').before(errorElement);
+                        $('#candidate-profile-form').before(errorElement);
 
                         // Remove error message after 3 seconds
                         setTimeout(function() {
@@ -119,7 +119,7 @@
          */
         function handleProfileFormSubmit() {
             // Form submission handling
-            $('#candidateProfileForm').on('submit', function(e) {
+            $('#candidate-profile-form').on('submit', function(e) {
                 // Additional form handling logic can go here if needed
             });
         }
@@ -894,6 +894,30 @@
             });
         }
 
+        /**
+         * Handles the WordPress media uploader for background image selection in the resume video section
+         */
+        function BgImageMediaUploader() {
+            const selectBtn = document.getElementById('select_bg_img');
+            const imgIdInput = document.getElementById('bg_img_id');
+            const imgUrlInput = document.getElementById('bg_img_url');
+            if (!selectBtn || !window.wp || !window.wp.media) return;
+            selectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                let mediaUploader = wp.media({
+                    title: 'Select Background Image',
+                    button: { text: 'Use this image' },
+                    multiple: false
+                });
+                mediaUploader.on('select', function() {
+                    const attachment = mediaUploader.state().get('selection').first().toJSON();
+                    if (imgIdInput) imgIdInput.value = attachment.id;
+                    if (imgUrlInput) imgUrlInput.value = attachment.url;
+                });
+                mediaUploader.open();
+            });
+        }
+
         // Initialize all handlers
         updateProfilePicturePreview();
         handleDeleteProfilePicture();
@@ -923,6 +947,7 @@
             taxonomy: 'jobus_candidate_skill',
             dataAttr: 'skill-id'
         });
+        BgImageMediaUploader();
     })
 
 

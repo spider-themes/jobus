@@ -137,6 +137,14 @@ if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'
 			'ID'           => $user->ID,
 			'display_name' => $name
 		) );
+
+		// Update candidate post title if exists
+		if ( $candidate_id ) {
+			wp_update_post( array(
+				'ID'         => $candidate_id,
+				'post_title' => $name
+			) );
+		}
 	}
 
 	// Process profile picture
@@ -175,7 +183,14 @@ if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'
 	// Save candidate description (bio)
 	if ( isset( $_POST['candidate_description'] ) ) {
 		$description = wp_kses_post( $_POST['candidate_description'] );
-		update_user_meta( $user->ID, 'description', $description );
+
+		// Only update candidate post content
+		if ( $candidate_id ) {
+			wp_update_post( array(
+				'ID'           => $candidate_id,
+				'post_content' => $description
+			) );
+		}
 	}
 
 	// Save social icons to candidate post meta (inside jobus_meta_candidate_options)
@@ -212,7 +227,14 @@ if ( ! empty( $custom_avatar_url ) ) {
 	$avatar_url = get_avatar_url( 0 );
 }
 
-$user_bio = get_user_meta( $user->ID, 'description', true );
+// Set $description to the candidate post content if available
+$description = '';
+if ( $candidate_id ) {
+    $candidate_post = get_post( $candidate_id );
+    if ( $candidate_post ) {
+        $description = $candidate_post->post_content;
+    }
+}
 
 //Sidebar Menu
 include( 'candidate-templates/sidebar-menu.php' );
@@ -236,9 +258,9 @@ include( 'candidate-templates/sidebar-menu.php' );
 			echo '<div class="alert alert-danger" role="alert">' . esc_html( $error_message ) . '</div>';
 		}
 		?>
-        <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" id="candidateProfileForm" method="post" enctype="multipart/form-data">
+        <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" id="candidate-profile-form" method="post" enctype="multipart/form-data">
 
-            <div class="bg-white card-box border-20">
+            <div class="bg-white card-box border-20" id="candidate-profile-description">
 
                 <div class="user-avatar-setting d-flex align-items-center mb-30">
                     <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
@@ -247,7 +269,6 @@ include( 'candidate-templates/sidebar-menu.php' );
 						<?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                         <input type="file" id="uploadImg" name="candidate_profile_picture" accept="image/*">
                     </div>
-
                     <button type="button" name="delete_profile_picture" class="delete-btn tran3s" id="delete_profile_picture">
 						<?php esc_html_e( 'Delete', 'jobus' ); ?>
                     </button>
@@ -260,11 +281,11 @@ include( 'candidate-templates/sidebar-menu.php' );
                 </div>
 
                 <div class="dash-input-wrapper">
-                    <label for="candidate_description"><?php esc_html_e( 'Bio*', 'jobus' ); ?></label>
+                    <label for="candidate_description"><?php esc_html_e( 'Description', 'jobus' ); ?></label>
                     <div class="editor-wrapper">
 						<?php
 						wp_editor(
-							$user_bio,
+							$description,
 							'candidate_description',
 							array(
 								'textarea_name' => 'candidate_description',

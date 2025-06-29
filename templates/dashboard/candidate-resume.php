@@ -394,11 +394,11 @@ include ('candidate-templates/sidebar-menu.php');
                 </div>
             </div>
 
-            <div class="bg-white card-box border-20 mt-40">
+            <div class="bg-white card-box border-20 mt-40" id="candidate-resume-video">
                 <h4 class="dash-title-three"><?php esc_html_e('Intro Video', 'jobus'); ?></h4>
                 <div class="intro-video-form position-relative mt-20 w-100">
                     <div class="dash-input-wrapper mb-15">
-                        <label for="video_title"><?php esc_html_e('Video Title', 'jobus'); ?></label>
+                        <label for="video_title"><?php esc_html_e('Title', 'jobus'); ?></label>
                         <input type="text" id="video_title" name="video_title" value="<?php echo esc_attr($meta['video_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Intro', 'jobus'); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-15">
@@ -407,14 +407,18 @@ include ('candidate-templates/sidebar-menu.php');
                     </div>
                     <div class="dash-input-wrapper mb-15">
                         <label for="bg_img"><?php esc_html_e('Background Image', 'jobus'); ?></label>
-                        <input type="file" id="bg_img" name="bg_img" accept="image/*">
-                        <?php if (!empty($meta['bg_img']['url'])): ?>
-                            <div class="d-flex align-items-center mt-2">
-                                <input type="text" class="form-control me-2" value="<?php echo esc_url($meta['bg_img']['url']); ?>" readonly>
-                                <button type="submit" name="remove_bg_img" value="1" class="btn btn-outline-danger btn-sm" title="<?php esc_attr_e('Remove background image', 'jobus'); ?>">
+                        <div class="input-group">
+                            <input type="hidden" id="bg_img_id" name="bg_img_id" value="<?php echo esc_attr($meta['bg_img']['id'] ?? ''); ?>">
+                            <input type="text" id="bg_img_url" name="bg_img_url" class="form-control" value="<?php echo esc_url($meta['bg_img']['url'] ?? ''); ?>" readonly>
+                            <button type="button" id="select_bg_img" class="btn btn-outline-primary"><?php esc_html_e('Select Image', 'jobus'); ?></button>
+                            <?php if (!empty($meta['bg_img']['url'])): ?>
+                                <button type="submit" name="remove_bg_img" value="1" class="btn btn-outline-danger btn-sm ms-2" title="<?php esc_attr_e('Remove background image', 'jobus'); ?>">
                                     <i class="bi bi-x"></i>
                                 </button>
-                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if (!empty($meta['bg_img']['url'])): ?>
+                            <div class="mt-2"><img src="<?php echo esc_url($meta['bg_img']['url']); ?>" alt="" style="max-width: 200px;"></div>
                         <?php endif; ?>
                     </div>
                 </div>
