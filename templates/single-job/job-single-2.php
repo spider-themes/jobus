@@ -31,12 +31,10 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     <div class="bg-wrapper bg-white text-center">
                                         <?php
                                         // Check if the icon/image option is selected
-                                        if (isset($field['is_meta_icon'])) {
-                                            if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
-                                                echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
-                                            } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
-                                                wp_get_attachment_image($field['meta_image']['id'], 'full', '', ['class' => 'lazy-img m-auto icon'] );
-                                            }
+                                        if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
+                                            echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
+                                        } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
+                                            echo wp_get_attachment_image($field['meta_image']['id'], 'full', false, ['class' => 'lazy-img m-auto icon']);
                                         }
 
                                         // Meta Name
