@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="accordion-box list-style">
 	<?php
-	while ( $job_query->have_posts() ) {
-		$job_query->the_post();
+	while ( $job_query->have_posts() ) : $job_query->the_post();
+		$save_job_status = jobus_get_job_save_status();
 		?>
 		<div class="job-list-one style-two position-relative border-style mb-20">
 			<div class="row justify-content-between align-items-center">
@@ -59,7 +59,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div class="col-lg-2 col-md-4">
 					<div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
-						<a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
+						<?php
+						if ( $save_job_status ) { ?>
+                            <a href="javascript:void(0);"
+                               class="save-btn text-center rounded-circle tran3s me-3 jobus-candidate-saved-job"
+                               data-job_id="<?php echo esc_attr( $save_job_status['job_id'] ); ?>"
+                               title="<?php echo esc_attr( $save_job_status['is_saved'] ? esc_html__( 'Saved', 'jobus' ) : esc_html__( 'Save Job', 'jobus' ) ); ?>">
+                                <i class="bi <?php echo esc_attr( $save_job_status['is_saved'] ? 'bi-bookmark-check-fill text-primary' : 'bi-bookmark-dash' ); ?>"></i>
+                            </a>
+							<?php
+						}
+						?>
+                        <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
 							<?php esc_html_e('APPLY', 'jobus'); ?>
 						</a>
 					</div>
@@ -67,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 		<?php
-	}
+	endwhile;
 	wp_reset_postdata();
 	?>
 </div>

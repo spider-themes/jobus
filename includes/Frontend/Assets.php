@@ -71,6 +71,14 @@ class Assets {
 			'ajaxurl' => $ajax_url,
 		) );
 
+
+		// Public Scripts for frontend
+		wp_enqueue_script( 'jobus-public-ajax-actions', esc_url( JOBUS_JS . '/public-ajax-actions.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_localize_script( 'jobus-public-ajax-actions', 'jobus_public_obj', [
+			'ajax_url' => $ajax_url,
+			'save_job_nonce' => wp_create_nonce( 'jobus_candidate_saved_job' ),
+		] );
+
 		// Candidate Dashboard Scripts
 		wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [

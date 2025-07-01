@@ -16,23 +16,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="accordion-box grid-style">
 	<div class="row">
 		<?php
-		while ( $job_query->have_posts() ) {
-			$job_query->the_post();
+		while ( $job_query->have_posts() ) : $job_query->the_post();
+			$save_job_status = jobus_get_job_save_status();
 			?>
 			<div class="col-sm-6 mb-30">
 				<div class="job-list-two style-two position-relative">
-					<?php if (has_post_thumbnail()) : ?>
+					<?php
+                    if (has_post_thumbnail()) { ?>
 						<a href="<?php the_permalink(); ?>" class="logo">
 							<?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
 						</a>
-					<?php endif; ?>
-					<?php if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ) : ?>
+					    <?php
+                    }
+					if ( $save_job_status ) { ?>
+                        <a href="javascript:void(0);"
+                           class="save-btn text-center rounded-circle tran3s jobus-candidate-saved-job"
+                           data-job_id="<?php echo esc_attr( $save_job_status['job_id'] ); ?>"
+                           title="<?php echo esc_attr( $save_job_status['is_saved'] ? esc_html__( 'Saved', 'jobus' ) : esc_html__( 'Save Job', 'jobus' ) ); ?>">
+                            <i class="bi <?php echo esc_attr( $save_job_status['is_saved'] ? 'bi-bookmark-check-fill text-primary' : 'bi-bookmark-dash' ); ?>"></i>
+                        </a>
+						<?php
+					}
+					if ( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1') ) { ?>
 						<div>
 							<a href="<?php the_permalink(); ?>" class="job-duration fw-500">
 								<?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) ?>
 							</a>
 						</div>
-					<?php endif; ?>
+					    <?php
+                    }
+                    ?>
 					<a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
 						<?php the_title('<h3>', '</h3>') ?>
 					</a>
@@ -56,7 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 			</div>
 			<?php
-		}
+		endwhile;
 		wp_reset_postdata();
 		?>
 	</div>

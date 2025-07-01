@@ -2,6 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\includes\Classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +23,42 @@ class Ajax_Actions {
 		// Job Single Page-> Job Application Form
 		add_action( 'wp_ajax_jobus_job_application', [ $this, 'job_application_form' ] );
 		add_action( 'wp_ajax_nopriv_jobus_job_application', [ $this, 'job_application_form' ] );
+
+		// Candidate Saved Job for Dashboard
+		add_action( 'wp_ajax_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
+		add_action( 'wp_ajax_nopriv_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
 	}
+
+
+	public function candidate_saved_job() {
+
+		check_ajax_referer( 'jobus_candidate_saved_job', 'nonce' );
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in.', 'jobus' ) ] );
+		}
+
+		$user_id = get_current_user_id();
+		$user    = get_userdata( $user_id );
+		if ( empty( $user ) || ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Only candidates can save jobs.', 'jobus' ) ] );
+		}
+
+		$job_id     = absint( $_POST['job_id'] );
+		$saved_jobs = (array) get_user_meta( $user_id, 'jobus_saved_jobs', true );
+
+		if ( in_array( $job_id, $saved_jobs ) ) {
+			$saved_jobs = array_diff( $saved_jobs, [ $job_id ] );
+			$action     = 'removed';
+		} else {
+			$saved_jobs[] = $job_id;
+			$action       = 'added';
+		}
+
+		update_user_meta( $user_id, 'jobus_saved_jobs', array_values( $saved_jobs ) );
+		wp_send_json_success( [ 'status' => $action ] ); // Only send back the action status
+	}
+
 
 	public function ajax_send_contact_email(): void {
 		// Check nonce for security
@@ -74,8 +110,8 @@ class Ajax_Actions {
 		}
 
 		// Get form data
-		$candidate_fname       = ! empty( $_POST['candidate_fname'] ) ? sanitize_text_field( wp_unslash($_POST['candidate_fname'] ) ) : '';
-		$candidate_lname       = ! empty( $_POST['candidate_lname'] ) ? sanitize_text_field( wp_unslash($_POST['candidate_lname'] ) ) : '';
+		$candidate_fname       = ! empty( $_POST['candidate_fname'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_fname'] ) ) : '';
+		$candidate_lname       = ! empty( $_POST['candidate_lname'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_lname'] ) ) : '';
 		$candidate_email       = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
 		$candidate_phone       = ! empty( $_POST['candidate_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_phone'] ) ) : '';
 		$candidate_message     = ! empty( $_POST['candidate_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['candidate_message'] ) ) : '';

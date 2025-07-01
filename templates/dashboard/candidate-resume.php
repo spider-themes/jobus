@@ -769,8 +769,8 @@ include ('candidate-templates/sidebar-menu.php');
                     <?php
                     $portfolio_ids = isset($meta['portfolio']) ? (array)$meta['portfolio'] : array();
 
-                    foreach($portfolio_ids as $image_id):
-                        $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
+                    foreach($portfolio_ids as $image_id) :
+                        $image_url = wp_get_attachment_image_url($image_id);
                         if ($image_url):
                             ?>
                             <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="<?php echo esc_attr($image_id); ?>">
