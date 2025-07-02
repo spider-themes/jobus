@@ -1600,4 +1600,12 @@ Table of Contents:
   color: #fff;
 }
 
+/*==== Saved Job ======*/
+.dashboard-body .action-button {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+}
+
 /*# sourceMappingURL=dashboard.css.map */
