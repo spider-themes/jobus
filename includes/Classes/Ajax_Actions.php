@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Ajax_Actions {
 
 	public function __construct() {
+
+		// Candidate Single Page-> Contact Form
 		add_action( 'wp_ajax_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
 		add_action( 'wp_ajax_nopriv_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
 
@@ -61,6 +63,7 @@ class Ajax_Actions {
 
 
 	public function ajax_send_contact_email(): void {
+
 		// Check nonce for security
 		if ( ! check_ajax_referer( 'jobus_candidate_contact_mail_form', 'security', false ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ) );
@@ -104,6 +107,7 @@ class Ajax_Actions {
 	}
 
 	public function job_application_form() {
+
 		if ( ! check_ajax_referer( 'jobus_job_application', 'job_application_nonce', false ) ) {
 			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ) );
 			wp_die();
@@ -125,10 +129,11 @@ class Ajax_Actions {
 		}
 
 		// Save the application as a new post
+		$post_title = trim($candidate_fname . ( !empty($candidate_lname) ? ' ' . $candidate_lname : '' ));
 		$application_id = wp_insert_post( array(
 			'post_type'   => 'jobus_applicant',
 			'post_status' => 'publish',
-			'post_title'  => $candidate_fname . ' ' . $candidate_lname,
+			'post_title'  => $post_title,
 		) );
 
 		if ( $application_id ) {

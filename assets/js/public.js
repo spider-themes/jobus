@@ -66,6 +66,7 @@
             }
 
         }
+
         relatedPost(); // end Related Job Post slider
 
         // Testimonial slider
@@ -92,6 +93,7 @@
                 });
             }
         }
+
         testimonialSlider(); // end Testimonial slider
 
         // Range Slider for Salary filter
@@ -142,6 +144,7 @@
                 });
             });
         }
+
         salaryRangeSlider(".salary-slider");
 
         // Job Category Show More Items
@@ -149,8 +152,8 @@
 
             let moreBtn = $(".more-btn");
 
-            if(moreBtn.length > 0) {
-                moreBtn.on("click", function() {
+            if (moreBtn.length > 0) {
+                moreBtn.on("click", function () {
                     let showMore = $(this).siblings('ul').toggleClass("show");
 
                     if (showMore.hasClass('show')) {
@@ -161,6 +164,7 @@
                 });
             }
         }
+
         jobCategoryShowMoreItems(); // end jobCategoryShowMoreItems
 
 
@@ -180,6 +184,7 @@
                 });
             }
         }
+
         copyButton(); // end copyButton click event
 
 
@@ -188,7 +193,7 @@
 
             let portfolioSlider = $('.candidate-portfolio-slider');
             let dataRtlprofile = portfolioSlider.data("rtl");
-            if( portfolioSlider.length ) {
+            if (portfolioSlider.length) {
                 portfolioSlider.slick({
                     rtl: dataRtlprofile,
                     dots: true,
@@ -217,6 +222,7 @@
             }
 
         }
+
         candidatePortfolio()//End Candidate Portfolio Slider
 
         //==== Tags Filter ====//
@@ -225,7 +231,7 @@
             const filterInput = $('.jobus-tags-wrapper');
 
             if (moreBtn.length) {
-                moreBtn.on('click', function() {
+                moreBtn.on('click', function () {
                     const $this = $(this);
                     const hiddenItems = filterInput.find('li.tag-item.hide');
 
@@ -243,12 +249,10 @@
                 });
             }
         }
+
         tagsFilter(); // end tagsFilter
 
-
-
     });
-
 
 })(jQuery);
 

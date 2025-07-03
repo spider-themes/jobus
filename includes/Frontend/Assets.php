@@ -42,41 +42,22 @@ class Assets {
 		wp_register_script( 'isotope', esc_url( JOBUS_VEND . '/isotope/isotope.pkgd.min.js' ), [ 'jquery' ], '3.0.6', [ 'strategy' => 'defer' ] );
 		wp_register_script( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.js' ), [ 'jquery' ], '2.11.4', [ 'strategy' => 'defer' ] );
 
-		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
-
-		// Load Script for Job Application Form
-		if ( is_singular( 'jobus_job' ) ) {
-			wp_enqueue_script( 'jobus-job-application-form', esc_url( JOBUS_JS . '/job-application-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-			wp_localize_script( 'jobus-job-application-form', 'jobus_job_application_obj', array(
-				'ajaxurl' => $ajax_url,
-				'nonce'   => wp_create_nonce( 'jobus_job_application' ),
-				'job_id'  => get_the_ID(),
-			) );
-		}
-
-		// Load Script for ajax mail to candidate
-		wp_enqueue_script( 'jobus-candidate-email-form', esc_url( JOBUS_JS . '/candidate-email-form.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-		wp_localize_script( 'jobus-candidate-email-form', 'jobus_candidate_email_form', array(
-			'ajaxurl' => $ajax_url,
-			'nonce'   => wp_create_nonce( 'jobus_candidate_contact_mail_form' ),
-		) );
-
 		// Enqueue Scripts
 		wp_enqueue_script( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/jquery.nice-select.min.js' ), [ 'jquery' ], '1.0', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.js' ), [ 'jquery' ], '5.1.3', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'slick', esc_url( JOBUS_VEND . '/slick/slick.min.js' ), [ 'jquery' ], '2.2.0', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-public', esc_url( JOBUS_JS . '/public.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
-		wp_localize_script( 'jobus-public', 'jobus_local', array(
-			'ajaxurl' => $ajax_url,
-		) );
-
+		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 
 		// Public Scripts for frontend
 		wp_enqueue_script( 'jobus-public-ajax-actions', esc_url( JOBUS_JS . '/public-ajax-actions.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script( 'jobus-public-ajax-actions', 'jobus_public_obj', [
 			'ajax_url' => $ajax_url,
-			'save_job_nonce' => wp_create_nonce( 'jobus_candidate_saved_job' ),
+			'save_job_nonce' => wp_create_nonce( 'jobus_candidate_saved_job' ), // Nonce for saving job
+			'job_application_nonce' => wp_create_nonce( 'jobus_job_application' ), // Nonce for job application
+			'job_id'  => get_the_ID(), // Current job ID for job application
+			'candidate_email_nonce' => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form
 		] );
 
 		// Candidate Dashboard Scripts

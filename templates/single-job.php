@@ -26,7 +26,6 @@ get_footer();
             <div class="modal-body">
 
                 <div class="container">
-
                     <?php
                     $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten text-white';
 
@@ -50,7 +49,7 @@ get_footer();
                             <input type="hidden" name="job_application_nonce" value="<?php echo esc_attr( wp_create_nonce( 'jobus_job_application' ) ); ?>">
 
                             <div class="col-md-6">
-                                <label for="firstName" class="form-label"><?php esc_html_e( 'First Name', 'jobus' ); ?></label>
+                                <label for="firstName" class="form-label"><?php esc_html_e( 'First Name*', 'jobus' ); ?></label>
                                 <input type="text" class="form-control" id="firstName" name="candidate_fname"
                                        value="<?php echo esc_attr( $candidate_fname ); ?>" required>
                             </div>
@@ -58,11 +57,11 @@ get_footer();
                             <div class="col-md-6">
                                 <label for="lastName" class="form-label"><?php esc_html_e( 'Last Name', 'jobus' ); ?></label>
                                 <input type="text" class="form-control" id="lastName" name="candidate_lname"
-                                       value="<?php echo esc_attr( $candidate_lname ); ?>" required>
+                                       value="<?php echo esc_attr( $candidate_lname ); ?>">
                             </div>
 
                             <div class="col-md-12">
-                                <label for="email" class="form-label"><?php esc_html_e( 'Email', 'jobus' ); ?></label>
+                                <label for="email" class="form-label"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                                 <input type="email" class="form-control" id="email" name="candidate_email"
                                        value="<?php echo esc_attr( $candidate_email ); ?>" required>
                             </div>
