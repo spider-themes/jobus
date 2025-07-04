@@ -1,0 +1,32 @@
+/*============= Candidate Job Applied ================*/
+.dashboard-body {
+
+  .company-name {
+    .company-placeholder {
+      width: 48px;
+      height: 48px;
+      background: #CBCBCB;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .job-actions {
+    .action-button {
+      .save-btn {
+        width: 35px;
+        height: 35px;
+        line-height: 32px;
+        border: 1px solid #D6D6D6;
+        color: #CBCBCB;
+        &:hover {
+          background: #E7F6EF;
+          border-color: #E7F6EF;
+          color: #005025;
+        }
+      }
+    }
+  }
+}

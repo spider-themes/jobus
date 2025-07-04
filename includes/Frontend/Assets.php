@@ -82,8 +82,8 @@ class Assets {
 		wp_enqueue_script('jobus-candidate-dashboard-ajax-actions', esc_url(JOBUS_JS . '/candidate-dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
 		wp_localize_script('jobus-candidate-dashboard-ajax-actions', 'jobus_candidate_dashboard_obj', [
 			'ajax_url' => $ajax_url,
+			'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
 		]);
-
 
 	}
 }

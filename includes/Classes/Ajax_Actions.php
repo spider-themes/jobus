@@ -29,6 +29,10 @@ class Ajax_Actions {
 		// Candidate Saved Job for Dashboard
 		add_action( 'wp_ajax_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
 		add_action( 'wp_ajax_nopriv_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
+
+		// Remove Job Application
+		add_action( 'wp_ajax_remove_job_application', [ $this, 'remove_job_application' ] );
+		add_action( 'wp_ajax_nopriv_remove_job_application', [ $this, 'remove_job_application' ] );
 	}
 
 
@@ -129,7 +133,7 @@ class Ajax_Actions {
 		}
 
 		// Save the application as a new post
-		$post_title = trim($candidate_fname . ( !empty($candidate_lname) ? ' ' . $candidate_lname : '' ));
+		$post_title     = trim( $candidate_fname . ( ! empty( $candidate_lname ) ? ' ' . $candidate_lname : '' ) );
 		$application_id = wp_insert_post( array(
 			'post_type'   => 'jobus_applicant',
 			'post_status' => 'publish',
@@ -171,5 +175,41 @@ class Ajax_Actions {
 			wp_send_json_error( array( 'message' => esc_html__( 'Failed to submit application.', 'jobus' ) ) );
 		}
 		wp_die();
+	}
+
+	/**
+	 * Handle removing a job application submission.
+	 */
+	public function remove_job_application() {
+		if ( ! check_ajax_referer( 'jobus_remove_application_nonce', 'nonce', false ) ) {
+			wp_send_json_error();
+		}
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error();
+		}
+
+		$application_id = isset( $_POST['job_id'] ) ? absint( $_POST['job_id'] ) : 0;
+		if ( ! $application_id ) {
+			wp_send_json_error();
+		}
+
+		$application = get_post( $application_id );
+		if ( ! $application || $application->post_type !== 'jobus_applicant' ) {
+			wp_send_json_error();
+		}
+
+		$user              = wp_get_current_user();
+		$application_email = get_post_meta( $application_id, 'candidate_email', true );
+		if ( $user->user_email !== $application_email ) {
+			wp_send_json_error();
+		}
+
+		$result = wp_delete_post( $application_id, true );
+		if ( ! $result ) {
+			wp_send_json_error();
+		}
+
+		wp_send_json_success();
 	}
 }

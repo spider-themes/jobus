@@ -125,96 +125,60 @@ if ( $candidate_id && (isset($_POST['candidate_mail']) || isset($_POST['candidat
     $candidate_dynamic_fields = $candidate_dynamic_fields ?? [];
 }
 
-// Handle form submission
-if ( isset( $_POST['candidate_name'] ) || isset( $_POST['profile_picture_action'] ) || isset( $_POST['candidate_description'] ) || isset( $_POST['social_icons'] ) ) {
+// Handle form submission for candidate profile updates
+if ( isset( $_POST['candidate_name'] ) || isset( $_POST['candidate_description'] ) ) {
+    $candidate_updated = false;
 
-	// Process name change
-	if ( ! empty( $_POST['candidate_name'] ) ) {
-		$name = sanitize_text_field( $_POST['candidate_name'] );
+    // Prepare post data array
+    $post_data = array(
+        'ID' => $candidate_id
+    );
 
-		// Update user's display name
-		wp_update_user( array(
-			'ID'           => $user->ID,
-			'display_name' => $name
-		) );
+    // Update name if provided
+    if ( !empty($_POST['candidate_name']) ) {
+        $name = sanitize_text_field($_POST['candidate_name']);
+        $post_data['post_title'] = $name;
 
-		// Update candidate post title if exists
-		if ( $candidate_id ) {
-			wp_update_post( array(
-				'ID'         => $candidate_id,
-				'post_title' => $name
-			) );
-		}
-	}
+        // Update user display name
+        wp_update_user(array(
+            'ID' => $user->ID,
+            'display_name' => $name
+        ));
 
-	// Process profile picture
-	if ( isset( $_POST['profile_picture_action'] ) ) {
-		$action = sanitize_text_field( $_POST['profile_picture_action'] );
+        $candidate_updated = true;
+    }
 
-		// Delete profile picture
-		if ( $action === 'delete' ) {
-			delete_user_meta( $user->ID, 'candidate_profile_picture' );
-			// Success message
-			$success_message = __( 'Profile picture deleted successfully.', 'jobus' );
-		}
+    // Update description if provided
+    if ( isset($_POST['candidate_description']) ) {
+        $post_data['post_content'] = wp_kses_post($_POST['candidate_description']);
+        $candidate_updated = true;
+    }
 
-		// Upload new profile picture
-		if ( $action === 'upload' && isset( $_FILES['candidate_profile_picture'] ) && $_FILES['candidate_profile_picture']['error'] === 0 ) {
-			require_once( ABSPATH . 'wp-admin/includes/image.php' );
-			require_once( ABSPATH . 'wp-admin/includes/file.php' );
-			require_once( ABSPATH . 'wp-admin/includes/media.php' );
+    // Update the post if changes were made
+    if ( $candidate_id && $candidate_updated ) {
+        wp_update_post($post_data);
+        // Refresh the description for immediate display
+        $description = get_post_field('post_content', $candidate_id);
+    }
+}
 
-			// Upload the file and get attachment ID
-			$attachment_id = media_handle_upload( 'candidate_profile_picture', 0 );
+// Handle profile picture separately
+if ( isset($_POST['profile_picture_action']) ) {
+    $action = sanitize_text_field($_POST['profile_picture_action']);
 
-			if ( ! is_wp_error( $attachment_id ) ) {
-				// Get image URL and save to user meta
-				$image_url = wp_get_attachment_url( $attachment_id );
-				update_user_meta( $user->ID, 'candidate_profile_picture', $image_url );
-				// Success message
-				$success_message = __( 'Profile updated successfully.', 'jobus' );
-			} else {
-				// Error message
-				$error_message = $attachment_id->get_error_message();
-			}
-		}
-	}
+    if ( $action === 'delete' ) {
+        delete_user_meta($user->ID, 'candidate_profile_picture');
+    } elseif ( $action === 'upload' && isset($_FILES['candidate_profile_picture']) && $_FILES['candidate_profile_picture']['error'] === 0 ) {
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
 
-	// Save candidate description (bio)
-	if ( isset( $_POST['candidate_description'] ) ) {
-		$description = wp_kses_post( $_POST['candidate_description'] );
+        $attachment_id = media_handle_upload('candidate_profile_picture', 0);
 
-		// Only update candidate post content
-		if ( $candidate_id ) {
-			wp_update_post( array(
-				'ID'           => $candidate_id,
-				'post_content' => $description
-			) );
-		}
-	}
-
-	// Save social icons to candidate post meta (inside jobus_meta_candidate_options)
-	if ( $candidate_id && isset( $_POST['social_icons'] ) && is_array( $_POST['social_icons'] ) ) {
-		$social_icons = array();
-		foreach ( $_POST['social_icons'] as $item ) {
-			$icon = isset($item['icon']) ? sanitize_text_field($item['icon']) : '';
-			$url  = isset($item['url']) ? esc_url_raw($item['url']) : '';
-			// Save all items, even if url is empty (to preserve new/empty fields)
-			if ( $icon ) {
-				$social_icons[] = array('icon' => $icon, 'url' => $url);
-			}
-		}
-		// Load full meta array
-		$meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
-		if (!is_array($meta)) $meta = [];
-
-		// Update only the social_icons key
-		$meta['social_icons'] = $social_icons;
-		update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
-	}
-
-	// Refresh user data
-	$user = wp_get_current_user();
+        if ( !is_wp_error($attachment_id) ) {
+            update_user_meta($user->ID, 'candidate_profile_picture', wp_get_attachment_url($attachment_id));
+        }
+    }
 }
 
 // Check if the user has uploaded a custom profile image
@@ -266,11 +230,11 @@ include( 'candidate-templates/sidebar-menu.php' );
                     <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                          id="candidate_avatar">
                     <div class="upload-btn position-relative tran3s ms-4 me-3">
-						<?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
-                        <input type="file" id="uploadImg" name="candidate_profile_picture" accept="image/*">
+                        <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
+                        <input type="hidden" id="candidate_profile_picture_id" name="candidate_profile_picture_id" value="<?php echo esc_attr( get_user_meta($user->ID, 'candidate_profile_picture_id', true) ); ?>">
                     </div>
                     <button type="button" name="delete_profile_picture" class="delete-btn tran3s" id="delete_profile_picture">
-						<?php esc_html_e( 'Delete', 'jobus' ); ?>
+                        <?php esc_html_e( 'Delete', 'jobus' ); ?>
                     </button>
                     <input type="hidden" name="profile_picture_action" id="profile_picture_action" value="">
                 </div>
@@ -473,10 +437,11 @@ include( 'candidate-templates/sidebar-menu.php' );
                 </div>
             </div>
             <div class="button-group d-inline-flex align-items-center mt-30">
-                <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save', 'jobus' ); ?></button>
+                <button type="submit" class="dash-btn-two tran3s me-3 rounded-3"><?php esc_html_e( 'Save', 'jobus' ); ?></button>
             </div>
 
         </form>
 
     </div>
 </div>
+

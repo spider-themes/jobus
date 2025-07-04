@@ -22,6 +22,7 @@
     const JobusAjaxActions = {
         init: function () {
             this.removeSavedJob();
+            this.removeApplication();
         },
 
         /**
@@ -77,6 +78,57 @@
                         btn.removeClass('loading disabled');
                         icon.attr('class', originalIcon);
                         alert('Error removing job. Please try again.');
+                    }
+                });
+            });
+        },
+
+        /**
+         * Handles removing a job application from candidate's dashboard
+         */
+        removeApplication: function () {
+            $(document).on('click', '.remove-application', function (e) {
+                e.preventDefault();
+
+                const btn = $(this);
+                const jobId = btn.data('job_id');
+                const nonce = btn.data('nonce'); // Changed to match the data attribute from template
+                const row = btn.closest('tr');
+                const icon = btn.find('i');
+
+                if (!jobId || !nonce || btn.hasClass('disabled')) return;
+
+                // Store original icon class
+                const originalIcon = icon.attr('class');
+
+                // Show loading spinner
+                icon.attr('class', 'spinner-border spinner-border-sm align-middle');
+                btn.addClass('loading disabled');
+
+                $.ajax({
+                    url: jobus_candidate_dashboard_obj.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'remove_job_application',
+                        job_id: jobId,
+                        nonce: nonce
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            row.fadeOut(300, function() {
+                                $(this).remove();
+                                if ($('.job-alert-table tbody tr').length === 0) {
+                                    $('.job-alert-table').empty();
+                                }
+                            });
+                        } else {
+                            btn.removeClass('loading disabled');
+                            icon.attr('class', originalIcon);
+                        }
+                    },
+                    error: function() {
+                        btn.removeClass('loading disabled');
+                        icon.attr('class', originalIcon);
                     }
                 });
             });

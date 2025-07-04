@@ -68,16 +68,32 @@ class Candidate {
 			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
-			'hierarchical'       => true,
+			'hierarchical'       => false,
 			'map_meta_cap'       => true,
 			'taxonomies'         => array( 'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill' ),
-			'supports'           => [ 'title', 'thumbnail', 'editor', 'excerpt', 'author' ],
+			'supports'           => [
+				'title',
+				'editor',
+				'thumbnail',
+				'excerpt',
+				'author',
+				'revisions',
+				'custom-fields'
+			],
 			'menu_position'      => 8,
 			'menu_icon'          => 'dashicons-plus-alt',
-			'show_admin_column'  => true,
 			'capabilities'       => array(
-				'create_posts' => 'do_not_allow', // Disable Add New
+				'edit_post'              => 'edit_post',
+				'read_post'              => 'read_post',
+				'delete_post'            => 'delete_post',
+				'edit_posts'             => 'edit_posts',
+				'edit_others_posts'      => 'edit_others_posts',
+				'publish_posts'          => 'publish_posts',
+				'read_private_posts'     => 'read_private_posts',
+				'create_posts'           => 'edit_posts'
 			),
+			'show_in_rest'       => true, // Enable Gutenberg editor
+			'rest_base'          => 'candidates',
 		);
 
 		register_post_type( 'jobus_candidate', $args ); // Register the post-type `candidate`

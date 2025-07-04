@@ -1460,7 +1460,7 @@ Table of Contents:
 }
 
 /*========== Editor Markup Styling ===========*/
-#candidateProfileForm .wp-editor-container .quicktags-toolbar .ed_button {
+#candidate-profile-form .wp-editor-container .quicktags-toolbar .ed_button {
   width: auto;
   height: auto;
 }
@@ -1606,6 +1606,29 @@ Table of Contents:
   align-items: center;
   justify-content: end;
   gap: 12px;
+}
+
+/*============= Candidate Job Applied ================*/
+.dashboard-body .company-name .company-placeholder {
+  width: 48px;
+  height: 48px;
+  background: #CBCBCB;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-body .job-actions .action-button .save-btn {
+  width: 35px;
+  height: 35px;
+  line-height: 32px;
+  border: 1px solid #D6D6D6;
+  color: #CBCBCB;
+}
+.dashboard-body .job-actions .action-button .save-btn:hover {
+  background: #E7F6EF;
+  border-color: #E7F6EF;
+  color: #005025;
 }
 
 /*# sourceMappingURL=dashboard.css.map */
