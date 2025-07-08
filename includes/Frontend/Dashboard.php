@@ -30,7 +30,7 @@ class Dashboard {
 		add_shortcode( 'jobus_user_message', [ $this, 'user_message' ] );
 		add_shortcode( 'jobus_user_job_applied', [ $this, 'user_job_applied' ] );
 		add_shortcode( 'jobus_user_saved_job', [ $this, 'user_saved_job' ] );
-		add_shortcode( 'jobus_user_account_settings', [ $this, 'user_account_settings' ] );
+		add_shortcode( 'jobus_user_change_password', [ $this, 'user_change_password' ] );
 		add_shortcode( 'jobus_user_delete_account', [ $this, 'user_delete_account' ] );
 
 	}
@@ -74,7 +74,7 @@ class Dashboard {
 	}
 
 
-	public function user_account_settings(): string {
+	public function user_change_password(): string {
 		if ( ! is_user_logged_in() ) {
 			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
 		} else {
@@ -85,7 +85,7 @@ class Dashboard {
 
 			// Load the candidate dashboard if a user has the 'jobus_candidate' role
 			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_account_settings( $user );
+				return $this->load_candidate_change_password( $user );
 			}
 
 		}
@@ -102,10 +102,10 @@ class Dashboard {
 	 *
 	 * @return string Candidate dashboard HTML.
 	 */
-	private function load_candidate_account_settings( WP_User $user ): string {
+	private function load_candidate_change_password( WP_User $user ): string {
 
 		// Load the candidate dashboard template with passed user data
-		return Template_Loader::get_template_part( 'dashboard/candidate-account-settings', [
+		return Template_Loader::get_template_part( 'dashboard/candidate-change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
