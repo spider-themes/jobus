@@ -3,16 +3,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Check if the logged-in user has the 'jobus_candidate' role
+// Get the current user
 $user = wp_get_current_user();
 
-//Sidebar Menu
+// Include Sidebar Menu
 include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body">
     <div class="position-relative">
-
         <div class="wrapper">
 			<?php
 			$user_id    = get_current_user_id();
@@ -30,7 +29,6 @@ include( 'candidate-templates/sidebar-menu.php' );
 					?>
                     <div class="job-list-one style-two position-relative mb-20">
                         <div class="row justify-content-between align-items-center">
-
                             <div class="col-lg-4">
                                 <div class="job-title d-flex align-items-center">
                                     <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="logo">
@@ -41,7 +39,6 @@ include( 'candidate-templates/sidebar-menu.php' );
                                     </a>
                                 </div>
                             </div>
-
                             <div class="col-lg-3">
                                 <?php
                                 if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
@@ -62,11 +59,9 @@ include( 'candidate-templates/sidebar-menu.php' );
                                 }
                                 ?>
                             </div>
-
                             <div class="col-lg-3 xs-mt-10">
                                 <span class="fw-500"><?php echo esc_html(get_the_date(get_option('date_format'), $job_id)); ?></span>
                             </div>
-
                             <div class="col-lg-2 xs-mt-10">
                                 <div class="action-button">
                                     <a href="javascript:void(0)"
@@ -84,7 +79,6 @@ include( 'candidate-templates/sidebar-menu.php' );
                                     </a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 					<?php
@@ -94,6 +88,5 @@ include( 'candidate-templates/sidebar-menu.php' );
 			}
 			?>
         </div>
-
     </div>
 </div>

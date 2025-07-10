@@ -28,21 +28,26 @@ class Candidate_Form_Submission {
      * Check if we should handle form submission
      */
     public function candidate_form_submission() {
-
-		// Only process if this is our form submission
-        if ( !isset($_POST['candidate_profile_form_submit']) ) {
+        // Only process if this is our form submission
+        if ( !isset($_POST['candidate_profile_form_submit']) && !isset($_POST['candidate_resume_form_submit'])) {
             return;
-        }
-
-        // Verify nonce first
-        if (!isset($_POST['candidate_profile_nonce']) ||  !wp_verify_nonce($_POST['candidate_profile_nonce'], 'candidate_profile_update')) {
-            wp_die(esc_html__('Security check failed.', 'jobus'));
         }
 
         // Must be a candidate
         $user = wp_get_current_user();
-        if (!in_array('jobus_candidate', $user->roles, true)) {
+        if ( !in_array('jobus_candidate', $user->roles, true) ) {
             wp_die(esc_html__('Access denied. You must be a candidate to update this profile.', 'jobus'));
+        }
+
+        // Check which form is being submitted and verify appropriate nonce
+        if (isset($_POST['candidate_resume_form_submit'])) {
+            if (!isset($_POST['candidate_resume_nonce']) || !wp_verify_nonce($_POST['candidate_resume_nonce'], 'candidate_resume_update')) {
+                wp_die(esc_html__('Security check failed.', 'jobus'));
+            }
+        } else {
+            if (!isset($_POST['candidate_profile_nonce']) || !wp_verify_nonce($_POST['candidate_profile_nonce'], 'candidate_profile_update')) {
+                wp_die(esc_html__('Security check failed.', 'jobus'));
+            }
         }
 
         // Process the form
@@ -254,6 +259,255 @@ class Candidate_Form_Submission {
     }
 
     /**
+     * Get candidate description data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing profile description data
+     */
+    public static function get_candidate_description(int $candidate_id): array {
+
+        // Get description from post content
+        $description = '';
+        $candidate_post = get_post($candidate_id);
+        if ($candidate_post) {
+            $description = $candidate_post->post_content;
+        }
+
+        // Get avatar data
+        $user_id = get_post_field('post_author', $candidate_id);
+        $profile_picture_id = get_user_meta($user_id, 'candidate_profile_picture_id', true);
+        $avatar_url = $profile_picture_id ? wp_get_attachment_url($profile_picture_id) : get_avatar_url($user_id);
+
+        return array(
+            'description' => $description,
+            'avatar_url' => $avatar_url,
+            'profile_picture_id' => $profile_picture_id
+        );
+    }
+
+    /**
+     * Save candidate description data
+     *
+     * @param int   $candidate_id The candidate post ID
+     * @param array $post_data    POST data from the form submission
+     * @return bool True on success, false on failure
+     */
+    public function save_candidate_description(int $candidate_id, array $post_data): bool {
+
+        // Update candidate name if provided
+        if ( !empty($post_data['candidate_name']) ) {
+            $user_id = get_post_field('post_author', $candidate_id);
+            $new_name = sanitize_text_field($post_data['candidate_name']);
+
+            // Update post title first
+            wp_update_post(array(
+                'ID' => $candidate_id,
+                'post_title' => $new_name
+            ));
+
+            // Update user display name
+            if ($user_id) {
+                wp_update_user(array(
+                    'ID' => $user_id,
+                    'display_name' => $new_name
+                ));
+            }
+
+            // Clear caches immediately
+            clean_post_cache($candidate_id);
+            clean_user_cache($user_id);
+            wp_cache_delete($candidate_id, 'posts');
+            wp_cache_delete($user_id, 'users');
+        }
+
+        // Update description
+        $description = isset($post_data['candidate_description']) ? wp_kses_post($post_data['candidate_description']) : '';
+        wp_update_post(array(
+            'ID' => $candidate_id,
+            'post_content' => $description
+        ));
+
+	    // Handle profile picture
+	    if (!empty($post_data['profile_picture_action'])) {
+		    $user_id = get_post_field('post_author', $candidate_id);
+		    if ($post_data['profile_picture_action'] === 'delete') {
+			    // Delete the profile picture from user meta
+			    delete_user_meta($user_id, 'candidate_profile_picture_id');
+
+			    // Default avatar URL if no image is set
+			    update_user_meta($user_id, 'candidate_profile_picture_id', ''); // Ensures no image is set
+		    } elseif (!empty($post_data['candidate_profile_picture_id'])) {
+			    // If there's a new image ID, update the user meta with the new image
+			    update_user_meta($user_id, 'candidate_profile_picture_id', absint($post_data['candidate_profile_picture_id']));
+		    }
+	    }
+
+
+	    return true;
+    }
+
+    /**
+     * Get candidate CV data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing CV data
+     */
+    public static function get_candidate_cv(int $candidate_id): array {
+
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if ( !is_array($meta) ) {
+            return array(
+                'cv_attachment' => '',
+                'cv_file_name' => ''
+            );
+        }
+
+        $cv_attachment = $meta['cv_attachment'] ?? '';
+        $cv_file_name = '';
+
+        if (!empty($cv_attachment)) {
+            $cv_file_name = basename(get_attached_file($cv_attachment));
+        }
+
+        return array(
+            'cv_attachment' => $cv_attachment,
+            'cv_file_name' => $cv_file_name
+        );
+    }
+
+    /**
+     * Save candidate CV
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     * @return bool True on success, false on failure
+     */
+    private function save_candidate_cv(int $candidate_id, array $post_data): bool {
+        if (!$candidate_id) {
+            return false;
+        }
+
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        // Handle CV action
+        $action = sanitize_text_field($post_data['profile_cv_action'] ?? '');
+
+        // Delete existing CV
+        if ($action === 'delete' && !empty($post_data['existing_cv_id'])) {
+            $existing_id = intval($post_data['existing_cv_id']);
+            if (wp_delete_attachment($existing_id, true)) {
+                unset($meta['cv_attachment']);
+            }
+        }
+        // Upload new CV
+        elseif ($action === 'upload' && isset($_FILES['cv_attachment']) && $_FILES['cv_attachment']['error'] === 0) {
+            require_once(ABSPATH . 'wp-admin/includes/file.php');
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+            // Get upload directory info
+            $upload_dir = wp_upload_dir();
+            $cv_dir = $upload_dir['basedir'] . '/candidate-cvs';
+
+            // Create CV directory if it doesn't exist
+            if (!file_exists($cv_dir)) {
+                wp_mkdir_p($cv_dir);
+            }
+
+            // Process the file upload
+            $file = $_FILES['cv_attachment'];
+            $filename = sanitize_file_name(basename($file['name']));
+            $filepath = $cv_dir . '/' . $candidate_id . '-' . $filename;
+
+            if (move_uploaded_file($file['tmp_name'], $filepath)) {
+                $filetype = wp_check_filetype($filename);
+                $attachment = array(
+                    'guid' => $upload_dir['baseurl'] . '/candidate-cvs/' . $candidate_id . '-' . $filename,
+                    'post_mime_type' => $filetype['type'],
+                    'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
+                    'post_content' => '',
+                    'post_status' => 'inherit'
+                );
+
+                $attachment_id = wp_insert_attachment($attachment, $filepath);
+
+                if (!is_wp_error($attachment_id)) {
+                    $attach_data = wp_generate_attachment_metadata($attachment_id, $filepath);
+                    wp_update_attachment_metadata($attachment_id, $attach_data);
+                    $meta['cv_attachment'] = $attachment_id;
+                }
+            }
+        }
+
+        return update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+    }
+
+    /**
+     * Get candidate video data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing video data
+     */
+    public static function get_candidate_video(int $candidate_id): array {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+
+        return array(
+            'video_title' => $meta['video_title'] ?? '',
+            'video_url' => $meta['video_url'] ?? '',
+            'video_bg_img' => $meta['video_bg_img'] ?? array(
+                'id' => '',
+                'url' => ''
+            )
+        );
+    }
+
+    /**
+     * Save candidate video data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     */
+    private function save_candidate_video(int $candidate_id, array $post_data): void {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        // Handle video fields
+        if (isset($post_data['video_title'])) {
+            $meta['video_title'] = sanitize_text_field($post_data['video_title']);
+        }
+        if (isset($post_data['video_url'])) {
+            $meta['video_url'] = esc_url_raw($post_data['video_url']);
+        }
+
+        // Handle background image using the correct field name 'video_bg_img'
+        if (!empty($post_data['video_bg_img'])) {
+            $bg_img = $post_data['video_bg_img'];
+
+            // CSF framework media field returns array with 'url' and 'id' keys
+            if (is_array($bg_img)) {
+                $meta['video_bg_img'] = array(
+                    'url' => esc_url_raw($bg_img['url'] ?? ''),
+                    'id'  => absint($bg_img['id'] ?? 0)
+                );
+            }
+            // Handle string input (URL only)
+            else {
+                $meta['video_bg_img'] = array(
+                    'url' => esc_url_raw($bg_img),
+                    'id'  => 0
+                );
+            }
+        }
+
+        update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+    }
+
+    /**
      * Handle the actual form submission
      */
     private function handle_form_submission() {
@@ -261,8 +515,13 @@ class Candidate_Form_Submission {
 
         // Get candidate ID
         $candidate_id = $this->get_candidate_id($user->ID);
-        if (!$candidate_id) {
+        if ( !$candidate_id) {
             wp_die(esc_html__('Candidate profile not found.', 'jobus'));
+        }
+
+        // Handle description if present
+        if (isset($_POST['candidate_name']) || isset($_POST['candidate_description']) || isset($_POST['profile_picture_action'])) {
+            $this->save_candidate_description($candidate_id, $_POST);
         }
 
         // Handle social icons if present
@@ -278,6 +537,16 @@ class Candidate_Form_Submission {
         // Handle location if present
         if (isset($_POST['candidate_location_address']) || isset($_POST['candidate_location_lat']) || isset($_POST['candidate_location_lng'])) {
             $this->save_candidate_location($candidate_id, $_POST);
+        }
+
+        // Handle CV if present
+        if (isset($_POST['cv_attachment']) || isset($_POST['profile_cv_action'])) {
+            $this->save_candidate_cv($candidate_id, $_POST);
+        }
+
+        // Handle video data if present (including background image)
+        if (isset($_POST['video_title']) || isset($_POST['video_url']) || isset($_POST['video_bg_img'])) {
+            $this->save_candidate_video($candidate_id, $_POST);
         }
     }
 }

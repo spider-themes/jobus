@@ -1,375 +1,46 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+/**
+ * Template for the candidate profile page.
+ *
+ * @package Jobus
+ * @subpackage Templates
+ */
+
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-// Get the current logged-in user object
+// Get current user
 $user = wp_get_current_user();
 
-// Retrieve the candidate post ID for the current user (if exists)
-$candidate_id = false;
-$args = array(
-	'post_type'      => 'jobus_candidate', // Custom post type for candidates
-	'author'         => $user->ID,         // Filter by current user as author
-	'posts_per_page' => 1,                 // Only need one post (should be unique)
-	'fields'         => 'ids',             // Only get post IDs
-);
+// Called the helper functions
+$candidate_form = new jobus\includes\Classes\Candidate_Form_Submission();
 
-$candidate_query = new WP_Query($args);
-if ( ! empty($candidate_query->posts) ) {
-	$candidate_id = $candidate_query->posts[0];
-}
+// Get candidate data
+$candidate_id = $candidate_form->get_candidate_id($user->ID);
+$cv_data = $candidate_form->get_candidate_cv($candidate_id);
+$video_data = $candidate_form->get_candidate_video($candidate_id);
+$cv_attachment = $cv_data['cv_attachment'];
+$cv_file_name = $cv_data['cv_file_name'];
 
-// Get the CV attachment if it exists
-$cv_attachment = '';
-$cv_file_name = '';
+echo '<pre>';
+print_r($video_data);
+echo '</pre>';
 
-if ($candidate_id) {
-    // Get full meta array
-    $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
-    if (is_array($meta) && isset($meta['cv_attachment'])) {
-        $cv_attachment = $meta['cv_attachment'];
-        if (!empty($cv_attachment)) {
-            $cv_file_name = basename(get_attached_file($cv_attachment));
-        }
-    }
-}
-
-$intro_video = $_POST['video_title'];
-// Handle form submission
-if ( isset($intro_video) ) {
-
-    $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
-    if (!is_array($meta)) $meta = array();
-
-    // Handle Intro Video fields update
-    if (isset($_POST['video_title'])) {
-        $meta['video_title'] = sanitize_text_field($_POST['video_title']);
-    }
-    if (isset($_POST['video_url'])) {
-        $meta['video_url'] = esc_url_raw($_POST['video_url']);
-    }
-    // Only process image upload if a file is selected and form is submitted
-    if (isset($_FILES['bg_img']) && isset($_FILES['bg_img']['tmp_name']) && $_FILES['bg_img']['error'] === 0) {
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-        $attachment_id = media_handle_upload('bg_img', $candidate_id);
-        if (!is_wp_error($attachment_id)) {
-            $img_url = wp_get_attachment_image_url($attachment_id, 'full');
-            $meta['bg_img'] = array('id' => $attachment_id, 'url' => $img_url);
-        }
-    }
-    // Remove background image only if requested and form is submitted
-    if (isset($_POST['remove_bg_img']) && $_POST['remove_bg_img'] == '1') {
-        if (!empty($meta['bg_img']['id'])) {
-            wp_delete_attachment($meta['bg_img']['id'], true);
-        }
-        unset($meta['bg_img']);
-    }
-    // Process CV action
-    $action = sanitize_text_field($_POST['profile_cv_action']);
-
-    // Upload new CV
-    if ($action === 'upload' && isset($_FILES['cv_attachment']) && $_FILES['cv_attachment']['error'] === 0) {
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        require_once(ABSPATH . 'wp-admin/includes/media.php');
-
-        // Get upload directory info
-        $upload_dir = wp_upload_dir();
-
-        // Create a dedicated folder for CV files if it doesn't exist
-        $cv_dir = $upload_dir['basedir'] . '/candidate-cvs';
-        if (!file_exists($cv_dir)) {
-            wp_mkdir_p($cv_dir);
-        }
-
-        // Get the original filename and sanitize it
-        $file = $_FILES['cv_attachment'];
-        $filename = sanitize_file_name(basename($file['name']));
-
-        // Create a unique filepath based on candidate ID to avoid duplicates across candidates
-        // but maintain consistency for the same candidate
-        $filepath = $cv_dir . '/' . $candidate_id . '-' . $filename;
-
-        // Move the uploaded file to our custom location
-        if (move_uploaded_file($file['tmp_name'], $filepath)) {
-            // Insert the attachment into the WordPress media library
-            $filetype = wp_check_filetype($filename);
-            $attachment = array(
-                'guid' => $upload_dir['baseurl'] . '/candidate-cvs/' . $candidate_id . '-' . $filename,
-                'post_mime_type' => $filetype['type'],
-                'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
-                'post_content' => '',
-                'post_status' => 'inherit'
-            );
-
-            $attachment_id = wp_insert_attachment($attachment, $filepath);
-
-            if (!is_wp_error($attachment_id)) {
-                // Generate attachment metadata
-                $attach_data = wp_generate_attachment_metadata($attachment_id, $filepath);
-                wp_update_attachment_metadata($attachment_id, $attach_data);
-
-                // Save attachment ID to meta options array with correct structure
-                $meta['cv_attachment'] = $attachment_id;
-                update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-
-                // Update displayed filename
-                $cv_attachment = $attachment_id;
-                $cv_file_name = $filename;
-
-                // Success message
-                $success_message = __('CV uploaded successfully.', 'jobus');
-            } else {
-                // Error message
-                $error_message = $attachment_id->get_error_message();
-                // Clean up the file if attachment creation failed
-                @unlink($filepath);
-            }
-        } else {
-            $error_message = __('Failed to upload the file.', 'jobus');
-        }
-    }
-
-    // Delete CV
-    if ($action === 'delete' && !empty($_POST['existing_cv_id'])) {
-        $existing_id = intval($_POST['existing_cv_id']);
-
-        // Delete the attachment
-        if (wp_delete_attachment($existing_id, true)) {
-            // Remove from meta array - correct structure
-            if (isset($meta['cv_attachment'])) {
-                unset($meta['cv_attachment']);
-            }
-            update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-
-
-            // Update display variables
-            $cv_attachment = '';
-            $cv_file_name = '';
-
-            // Success message
-            $success_message = __('CV deleted successfully.', 'jobus');
-        } else {
-            // Error message
-            $error_message = __('Failed to delete the CV.', 'jobus');
-        }
-    }
-
-    // Handle Education form submission
-    if (isset($_POST['education']) && is_array($_POST['education'])) {
-        if (!isset($meta) || !is_array($meta)) {
-            $meta = array();
-        }
-
-        $education = array();
-        $has_changes = false;
-
-        // Get existing education data for comparison
-        $existing_education = isset($meta['education']) ? $meta['education'] : array();
-
-        foreach ($_POST['education'] as $key => $edu) {
-            // Validate required fields
-            if (empty($edu['academy']) || empty($edu['description'])) {
-                $error_message = esc_html__('Academy and Description are required fields for education.', 'jobus');
-                continue;
-            }
-
-            // Sanitize and prepare new data
-            $new_edu = array(
-                'sl_num'      => isset($edu['sl_num']) ? sanitize_text_field($edu['sl_num']) : '',
-                'title'       => isset($edu['title']) ? sanitize_text_field($edu['title']) : '',
-                'academy'     => sanitize_text_field($edu['academy']),
-                'description' => wp_kses_post($edu['description']),
-            );
-
-            // Compare with existing data to detect changes
-            if (!isset($existing_education[$key]) ||
-                $existing_education[$key] !== $new_edu) {
-                $has_changes = true;
-            }
-
-            $education[] = $new_edu;
-        }
-
-        // Check if number of items changed
-        if (count($education) !== count($existing_education)) {
-            $has_changes = true;
-        }
-
-        // Update education title if changed
-        if (isset($_POST['education_title']) &&
-            (!isset($meta['education_title']) || $meta['education_title'] !== $_POST['education_title'])) {
-            $meta['education_title'] = sanitize_text_field($_POST['education_title']);
-            $has_changes = true;
-        }
-
-        $meta['education'] = $education;
-
-        if ($has_changes) {
-            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-            if ($updated !== false) {
-                $success_message = esc_html__('Education information updated successfully.', 'jobus');
-            } else {
-                $error_message = esc_html__('Failed to update education information.', 'jobus');
-            }
-        } else {
-            // Only show no changes message if form was actually submitted
-            if (!empty($_POST)) {
-                $success_message = esc_html__('No changes detected in education information.', 'jobus');
-            }
-        }
-    }
-
-    // Handle Work Experience form submission
-    if (isset($_POST['experience']) && is_array($_POST['experience'])) {
-        if (!isset($meta) || !is_array($meta)) {
-            $meta = array();
-        }
-
-        $experience = array();
-        $has_changes = false;
-
-        // Get existing experience data for comparison
-        $existing_experience = isset($meta['experience']) ? $meta['experience'] : array();
-
-        foreach ($_POST['experience'] as $key => $exp) {
-            // Validate required fields
-            if (empty($exp['title']) || empty($exp['company']) || empty($exp['description'])) {
-                $error_message = esc_html__('Title, Company, and Description are required fields for work experience.', 'jobus');
-                continue;
-            }
-
-            // Sanitize and prepare new data
-            $new_exp = array(
-                'sl_num'      => isset($exp['sl_num']) ? sanitize_text_field($exp['sl_num']) : '',
-                'title'       => sanitize_text_field($exp['title']),
-                'company'     => sanitize_text_field($exp['company']),
-                'start_date'  => sanitize_text_field($exp['start_date']),
-                'end_date'    => sanitize_text_field($exp['end_date']),
-                'description' => wp_kses_post($exp['description']),
-            );
-
-            // Compare with existing data to detect changes
-            if (!isset($existing_experience[$key]) ||
-                $existing_experience[$key] !== $new_exp) {
-                $has_changes = true;
-            }
-
-            $experience[] = $new_exp;
-        }
-
-        // Check if number of items changed
-        if (count($experience) !== count($existing_experience)) {
-            $has_changes = true;
-        }
-
-        // Update experience title if changed
-        if (isset($_POST['experience_title']) &&
-            (!isset($meta['experience_title']) || $meta['experience_title'] !== $_POST['experience_title'])) {
-            $meta['experience_title'] = sanitize_text_field($_POST['experience_title']);
-            $has_changes = true;
-        }
-
-        $meta['experience'] = $experience;
-
-        if ($has_changes) {
-            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-            if ($updated !== false) {
-                $success_message = esc_html__('Work experience information updated successfully.', 'jobus');
-            } else {
-                $error_message = esc_html__('Failed to update work experience information.', 'jobus');
-            }
-        } else {
-            // Only show no changes message if form was actually submitted
-            if (!empty($_POST)) {
-                $success_message = esc_html__('No changes detected in work experience information.', 'jobus');
-            }
-        }
-    }
-
-    // Handle Portfolio form submission
-    if (isset($_POST['portfolio_title']) || isset($_POST['portfolio'])) {
-        if (!isset($meta) || !is_array($meta)) {
-            $meta = array();
-        }
-
-        $has_changes = false;
-
-        // Update portfolio title
-        if (isset($_POST['portfolio_title'])) {
-            $new_title = sanitize_text_field($_POST['portfolio_title']);
-            if (!isset($meta['portfolio_title']) || $meta['portfolio_title'] !== $new_title) {
-                $meta['portfolio_title'] = $new_title;
-                $has_changes = true;
-            }
-        }
-
-        // Update portfolio gallery
-        if (isset($_POST['portfolio'])) {
-            $portfolio_ids = array_filter(
-                explode(',', sanitize_text_field($_POST['portfolio'])),
-                function($id) { return is_numeric($id) && $id > 0; }
-            );
-
-            // Check if portfolio images have changed
-            $existing_portfolio = isset($meta['portfolio']) ? (array)$meta['portfolio'] : array();
-            if (array_diff($portfolio_ids, $existing_portfolio) || array_diff($existing_portfolio, $portfolio_ids)) {
-                $meta['portfolio'] = $portfolio_ids;
-                $has_changes = true;
-            }
-        }
-
-        if ($has_changes) {
-            $updated = update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-            if ($updated !== false) {
-                $success_message = esc_html__('Portfolio updated successfully.', 'jobus');
-            } else {
-                $error_message = esc_html__('Failed to update portfolio.', 'jobus');
-            }
-        }
-    }
-
-    // Handle Category, Location, and Skill taxonomy save
-    if (isset($_POST['candidate_categories'])) {
-        $cat_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_categories']))));
-        wp_set_object_terms($candidate_id, $cat_ids, 'jobus_candidate_cat');
-    }
-    if (isset($_POST['candidate_locations'])) {
-        $location_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_locations']))));
-        wp_set_object_terms($candidate_id, $location_ids, 'jobus_candidate_location');
-    }
-    if (isset($_POST['candidate_skills'])) {
-        $skill_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_skills']))));
-        wp_set_object_terms($candidate_id, $skill_ids, 'jobus_candidate_skill');
-    }
-} // End of form submission check
-
-//Sidebar Menu
-include ('candidate-templates/sidebar-menu.php');
+// Include Sidebar Menu
+include('candidate-templates/sidebar-menu.php');
 ?>
 <div class="dashboard-body">
     <div class="position-relative">
-
         <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
+        <?php jobus_get_template('dashboard/candidate-templates/notice.php'); ?>
 
-        <?php
-        // Display success message
-        if (isset($success_message)) {
-            echo '<div class="alert alert-success" role="alert">' . esc_html($success_message) . '</div>';
-        }
+        <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" id="candidate-resume-form" method="post" enctype="multipart/form-data">
 
-        // Display error message
-        if (isset($error_message)) {
-            echo '<div class="alert alert-danger" role="alert">' . esc_html($error_message) . '</div>';
-        }
-        ?>
+            <?php wp_nonce_field('candidate_resume_update', 'candidate_resume_nonce'); ?>
+            <input type="hidden" name="candidate_resume_form_submit" value="1">
 
-        <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" name="candidate-resume-form" id="candidate-resume-form" method="post" enctype="multipart/form-data">
-
-            <div class="bg-white card-box border-20">
+            <div class="bg-white card-box border-20" id="candidate-resume">
                 <h4 class="dash-title-three"><?php esc_html_e('Resume Attachment', 'jobus'); ?></h4>
                 <div class="dash-input-wrapper mb-20">
                     <label for="cv_attachment"><?php esc_html_e('CV Attachment*', 'jobus'); ?></label>
@@ -397,402 +68,46 @@ include ('candidate-templates/sidebar-menu.php');
                 <div class="intro-video-form position-relative mt-20 w-100">
                     <div class="dash-input-wrapper mb-15">
                         <label for="video_title"><?php esc_html_e('Title', 'jobus'); ?></label>
-                        <input type="text" id="video_title" name="video_title" value="<?php echo esc_attr($meta['video_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Intro', 'jobus'); ?>">
+                        <input type="text" id="video_title" name="video_title" value="<?php echo esc_attr($video_data['video_title']); ?>" placeholder="<?php esc_attr_e('Intro', 'jobus'); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-15">
                         <label for="video_url"><?php esc_html_e('Video URL', 'jobus'); ?></label>
-                        <input type="text" id="video_url" name="video_url" value="<?php echo esc_attr($meta['video_url'] ?? ''); ?>" placeholder="https://www.youtube.com/embed/...">
+                        <input type="text" id="video_url" name="video_url" value="<?php echo esc_attr($video_data['video_url']); ?>" placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-15">
-                        <label for="bg_img"><?php esc_html_e('Background Image', 'jobus'); ?></label>
-                        <div class="input-group">
-                            <input type="hidden" id="bg_img_id" name="bg_img_id" value="<?php echo esc_attr($meta['bg_img']['id'] ?? ''); ?>">
-                            <input type="text" id="bg_img_url" name="bg_img_url" class="form-control" value="<?php echo esc_url($meta['bg_img']['url'] ?? ''); ?>" readonly>
-                            <button type="button" id="select_bg_img" class="btn btn-outline-primary"><?php esc_html_e('Select Image', 'jobus'); ?></button>
-                            <?php if (!empty($meta['bg_img']['url'])): ?>
-                                <button type="submit" name="remove_bg_img" value="1" class="btn btn-outline-danger btn-sm ms-2" title="<?php esc_attr_e('Remove background image', 'jobus'); ?>">
-                                    <i class="bi bi-x"></i>
-                                </button>
-                            <?php endif; ?>
-                        </div>
-                        <?php if (!empty($meta['bg_img']['url'])): ?>
-                            <div class="mt-2"><img src="<?php echo esc_url($meta['bg_img']['url']); ?>" alt="" style="max-width: 200px;"></div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
+                        <label for="video_bg_img"><?php esc_html_e('Background Image', 'jobus'); ?></label>
 
-            <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Education', 'jobus'); ?></h4>
-
-                <div class="dash-input-wrapper mb-15">
-                    <label for="education_title"><?php esc_html_e('Title', 'jobus'); ?></label>
-                    <input type="text" id="education_title" name="education_title" value="<?php echo esc_attr($meta['education_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Education', 'jobus'); ?>">
-                </div>
-
-                <div class="accordion dash-accordion-one" id="education-repeater">
-                    <?php
-                    $education = isset($meta['education']) && is_array($meta['education']) ? $meta['education'] : array();
-                    if (empty($education)) {
-                        $education[] = array(
-                            'sl_num' => '',
-                            'title' => '',
-                            'academy' => '',
-                            'description' => '',
-                        );
-                    }
-                    foreach ($education as $key => $value) {
-                        $accordion_id = 'collapseOne-' . esc_attr($key);
-                        ?>
-                        <div class="accordion-item education-item">
-                            <div class="accordion-header" id="headingOne-<?php echo esc_attr($key); ?>">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
-                                    aria-expanded="false"
-                                    aria-controls="<?php echo esc_attr($accordion_id); ?>">
-                                    <?php echo esc_html($value['title'] ?? esc_html__('Education', 'jobus')); ?>
-                                </button>
-                            </div>
-                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
-                                aria-labelledby="headingOne-<?php echo esc_attr($key); ?>"
-                                data-bs-parent="#education-repeater">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>">
-                                                    <?php esc_html_e('Serial Number', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text"
-                                                    class="form-control"
-                                                    name="<?php echo esc_attr('education[' . $key . '][sl_num]'); ?>"
-                                                    id="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>"
-                                                    value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('education_' . $key . '_title'); ?>">
-                                                    <?php esc_html_e('Title', 'jobus'); ?>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text" class="form-control" name="education[<?php echo $key; ?>][title]" id="education_<?php echo $key; ?>_title" value="<?php echo esc_attr($value['title'] ?? ''); ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('education_' . $key . '_academy'); ?>">
-                                                    <?php esc_html_e('Academy', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text" class="form-control" name="education[<?php echo $key; ?>][academy]" id="education_<?php echo $key; ?>_academy" value="<?php echo esc_attr($value['academy'] ?? ''); ?>" placeholder="Google Arts Collage &amp; University">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('education_' . $key . '_description'); ?>">
-                                                    <?php esc_html_e('Description', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <textarea class="size-lg form-control" name="education[<?php echo $key; ?>][description]" id="education_<?php echo $key; ?>_description" placeholder="Morbi ornare ipsum sed sem condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum aliquam et pulvinar tortor luctus."><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-end">
-                                        <button type="button" class="btn btn-danger btn-sm remove-education mt-2" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Image Preview Section -->
                         <?php
-                    }
-                    ?>
-                </div>
-                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education"><i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?></a>
-            </div>
-
-            <div class="bg-white card-box border-20 mt-40" id="candidate-taxonomy">
-
-                <!-- Add Categories -->
-                <div class="dash-input-wrapper mb-40 mt-20">
-                    <label for="candidate-category-list"><?php esc_html_e('Categories', 'jobus'); ?></label>
-                    <div class="skills-wrapper">
-                        <?php
-                        $current_categories = array();
-                        if (isset($candidate_id) && $candidate_id) {
-                            $current_categories = wp_get_object_terms($candidate_id, 'jobus_candidate_cat');
-                        }
-                        ?>
-                        <ul id="candidate-category-list" class="style-none d-flex flex-wrap align-items-center">
-                            <?php if (!empty($current_categories) && !is_wp_error($current_categories)): ?>
-                                <?php foreach ($current_categories as $cat): ?>
-                                    <li class="is_tag" data-category-id="<?php echo esc_attr($cat->term_id); ?>">
-                                        <button type="button"><?php echo esc_html($cat->name); ?> <i class="bi bi-x"></i></button>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <li class="more_tag"><button type="button">+</button></li>
-                        </ul>
-                        <input type="hidden" name="candidate_categories" id="candidate_categories_input" value="<?php echo !empty($current_categories) && !is_wp_error($current_categories) ? esc_attr(implode(',', wp_list_pluck($current_categories, 'term_id'))) : ''; ?>">
-                    </div>
-                </div>
-
-                <!-- Add Locations -->
-                <div class="dash-input-wrapper mb-40 mt-20">
-                    <label for="candidate-location-list"><?php esc_html_e('Locations', 'jobus'); ?></label>
-                    <div class="skills-wrapper">
-                        <?php
-                        $current_locations = array();
-                        if (isset($candidate_id) && $candidate_id) {
-                            $current_locations = wp_get_object_terms($candidate_id, 'jobus_candidate_location');
-                        }
-                        ?>
-                        <ul id="candidate-location-list" class="style-none d-flex flex-wrap align-items-center">
-                            <?php if (!empty($current_locations) && !is_wp_error($current_locations)): ?>
-                                <?php foreach ($current_locations as $loc): ?>
-                                    <li class="is_tag" data-location-id="<?php echo esc_attr($loc->term_id); ?>">
-                                        <button type="button"><?php echo esc_html($loc->name); ?> <i class="bi bi-x"></i></button>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <li class="more_tag"><button type="button">+</button></li>
-                        </ul>
-                        <input type="hidden" name="candidate_locations" id="candidate_locations_input" value="<?php echo !empty($current_locations) && !is_wp_error($current_locations) ? esc_attr(implode(',', wp_list_pluck($current_locations, 'term_id'))) : ''; ?>">
-                    </div>
-                </div>
-
-                <!-- Add Skills -->
-                <div class="dash-input-wrapper mb-40 mt-20">
-                    <label for="candidate-skills-list"><?php esc_html_e('Add Skills*', 'jobus'); ?></label>
-                    <div class="skills-wrapper">
-                        <?php
-                        $current_skills = array();
-                        if ( isset( $candidate_id ) && $candidate_id ) {
-                            $current_skills = wp_get_object_terms($candidate_id, 'jobus_candidate_skill');
-                        }
-                        ?>
-                        <ul id="candidate-skills-list" class="style-none d-flex flex-wrap align-items-center">
-                            <?php if (!empty($current_skills) && !is_wp_error($current_skills)): ?>
-                                <?php foreach ($current_skills as $skill): ?>
-                                    <li class="is_tag" data-skill-id="<?php echo esc_attr($skill->term_id); ?>">
-                                        <button type="button"><?php echo esc_html($skill->name); ?> <i class="bi bi-x"></i></button>
-                                    </li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <li class="more_tag"><button type="button">+</button></li>
-                        </ul>
-                        <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo !empty($current_skills) && !is_wp_error($current_skills) ? esc_attr(implode(',', wp_list_pluck($current_skills, 'term_id'))) : ''; ?>">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="bg-white card-box border-20 mt-40">
-                <h4 class="dash-title-three"><?php esc_html_e('Experience', 'jobus'); ?></h4>
-                <div class="dash-input-wrapper mb-15">
-                    <label for="experience_title"><?php esc_html_e('Title', 'jobus'); ?></label>
-                    <input type="text" id="experience_title" name="experience_title" value="<?php echo esc_attr($meta['experience_title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Work Experience', 'jobus'); ?>">
-                </div>
-
-                <div class="accordion dash-accordion-one" id="experience-repeater">
-                    <?php
-                    $experience = isset($meta['experience']) && is_array($meta['experience']) ? $meta['experience'] : array();
-                    if (empty($experience)) {
-                        $experience[] = array(
-                            'sl_num' => '',
-                            'title' => '',
-                            'company' => '',
-                            'start_date' => '',
-                            'end_date' => '',
-                            'description' => '',
-                        );
-                    }
-                    foreach ($experience as $key => $value) {
-                        $accordion_id = 'collapseExp-' . esc_attr($key);
-                        ?>
-                        <div class="accordion-item experience-item">
-                            <div class="accordion-header" id="headingExp-<?php echo esc_attr($key); ?>">
-                                <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
-                                    aria-expanded="false"
-                                    aria-controls="<?php echo esc_attr($accordion_id); ?>">
-                                    <?php echo esc_html($value['title'] ?? esc_html__('Experience', 'jobus')); ?>
-                                </button>
-                            </div>
-                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
-                                aria-labelledby="headingExp-<?php echo esc_attr($key); ?>"
-                                data-bs-parent="#experience-repeater">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('experience_' . $key . '_sl_num'); ?>">
-                                                    <?php esc_html_e('Serial Number', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text"
-                                                    class="form-control"
-                                                    name="<?php echo esc_attr('experience[' . $key . '][sl_num]'); ?>"
-                                                    id="<?php echo esc_attr('experience_' . $key . '_sl_num'); ?>"
-                                                    value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>">
-                                            </div>
-                                        </div>
+                        if ( !empty($video_data['video_bg_img']['url']) ) {
+                            // If background image is set, show the preview
+	                        ?>
+                            <div id="bg-img-preview" class="bg-img-preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?> mb-2">
+                                <div class="attached-file d-flex align-items-center justify-content-between">
+                                    <div class="img-preview-wrap" style="max-width: 150px;">
+                                        <img src="<?php echo esc_url( $video_data['video_bg_img']['url'] ); ?>"
+                                             alt="<?php esc_attr_e( 'Background Image Preview', 'jobus' ); ?>">
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('experience_' . $key . '_title'); ?>">
-                                                    <?php esc_html_e('Title', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text" class="form-control" name="experience[<?php echo $key; ?>][title]" id="experience_<?php echo $key; ?>_title" value="<?php echo esc_attr($value['title'] ?? ''); ?>" placeholder="<?php esc_attr_e('Lead Product Designer', 'jobus'); ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('experience_' . $key . '_company'); ?>">
-                                                    <?php esc_html_e('Company', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <input type="text" class="form-control" name="experience[<?php echo $key; ?>][company]" id="experience_<?php echo $key; ?>_company" value="<?php echo esc_attr($value['company'] ?? ''); ?>" placeholder="<?php esc_attr_e('Google Inc', 'jobus'); ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for=""><?php esc_html_e('Duration', 'jobus'); ?>*</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="dash-input-wrapper mb-30">
-                                                        <input type="date"
-                                                            class="form-control"
-                                                            name="experience[<?php echo $key; ?>][start_date]"
-                                                            id="experience_<?php echo $key; ?>_start_date"
-                                                            value="<?php echo esc_attr($value['start_date'] ?? ''); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="dash-input-wrapper mb-30">
-                                                        <input type="date"
-                                                            class="form-control"
-                                                            name="experience[<?php echo $key; ?>][end_date]"
-                                                            id="experience_<?php echo $key; ?>_end_date"
-                                                            value="<?php echo esc_attr($value['end_date'] ?? ''); ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="dash-input-wrapper mb-30 md-mb-10">
-                                                <label for="<?php echo esc_attr('experience_' . $key . '_description'); ?>">
-                                                    <?php esc_html_e('Description', 'jobus'); ?>*
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-10">
-                                            <div class="dash-input-wrapper mb-30">
-                                                <textarea class="size-lg form-control" name="experience[<?php echo $key; ?>][description]" id="experience_<?php echo $key; ?>_description" placeholder="<?php esc_attr_e('Describe your role and achievements', 'jobus'); ?>"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-end">
-                                        <button type="button" class="btn btn-danger btn-sm remove-experience mt-2" title="<?php esc_attr_e('Remove', 'jobus'); ?>">
-                                            <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-experience">
-                    <i class="bi bi-plus"></i> <?php esc_html_e('Add more', 'jobus'); ?>
-                </a>
-            </div>
-
-
-            <div class="bg-white card-box border-20 mt-40" id="portfolio-section">
-                <h4 class="dash-title-three"><?php esc_html_e('Portfolio Gallery', 'jobus'); ?></h4>
-                <div class="dash-input-wrapper mb-30">
-                    <label for="portfolio_title"><?php esc_html_e('Portfolio Title', 'jobus'); ?></label>
-                    <input type="text"
-                        id="portfolio_title"
-                        name="portfolio_title"
-                        value="<?php echo esc_attr($meta['portfolio_title'] ?? ''); ?>"
-                        class="form-control"
-                        placeholder="<?php esc_attr_e('My Portfolio', 'jobus'); ?>">
-                </div>
-
-                <div class="row" id="portfolio-items">
-                    <?php
-                    $portfolio_ids = isset($meta['portfolio']) ? (array)$meta['portfolio'] : array();
-
-                    foreach($portfolio_ids as $image_id) :
-                        $image_url = wp_get_attachment_image_url($image_id);
-                        if ($image_url):
-                            ?>
-                            <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="<?php echo esc_attr($image_id); ?>">
-                                <div class="portfolio-image-wrapper position-relative">
-                                    <img src="<?php echo esc_url($image_url); ?>" class="img-fluid" alt="<?php echo esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true)); ?>">
-                                    <button type="button" class="remove-portfolio-image btn-close position-absolute" aria-label="<?php esc_attr_e('Remove', 'jobus'); ?>"></button>
+                                    <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
                                 </div>
                             </div>
                             <?php
-                        endif;
-                    endforeach;
-                    ?>
+                        }
+                        ?>
+                        <div id="bg-img-upload-btn-wrapper" class="dash-btn-one d-inline-block position-relative me-3 <?php echo !empty($video_data['video_bg_img']['url']) ? 'hidden' : ''; ?>">
+                            <i class="bi bi-plus"></i>
+                            <?php esc_html_e('Upload Image', 'jobus'); ?>
+                            <input type="file" id="video_bg_img" name="video_bg_img" accept="image/png, image/jpeg" />
+                            <input type="hidden" id="video_bg_img_id" name="video_bg_img[id]" value="<?php echo esc_attr($video_data['video_bg_img']['id'] ?? ''); ?>">
+                            <input type="hidden" id="video_bg_img_url" name="video_bg_img[url]" value="<?php echo esc_attr($video_data['video_bg_img']['url'] ?? ''); ?>">
+                        </div>
+                    </div>
                 </div>
-
-                <input type="hidden" name="portfolio_ids" id="portfolio_ids" value="<?php echo esc_attr(implode(',', $portfolio_ids)); ?>">
-                <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
-                    <i class="bi bi-plus"></i> <?php esc_html_e('Add Portfolio Images', 'jobus'); ?>
-                </button>
             </div>
 
             <div class="button-group d-inline-flex align-items-center mt-30">
-                <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save', 'jobus'); ?></button>
+                <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e('Save Changes', 'jobus'); ?></button>
             </div>
         </form>
-
     </div>
 </div>

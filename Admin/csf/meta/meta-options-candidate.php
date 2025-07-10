@@ -243,7 +243,7 @@ if ( class_exists( 'CSF' ) ) {
 			),
 
 			array(
-				'id'    => 'bg_img',
+				'id'    => 'video_bg_img',
 				'type'  => 'media',
 				'title' => esc_html__( 'Background Image', 'jobus' ),
 			),

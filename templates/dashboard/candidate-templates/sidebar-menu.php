@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
 $logo = jobus_opt( 'dashboard_logo' );
 ?>
 <aside class="dash-aside-navbar">

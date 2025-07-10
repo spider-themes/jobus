@@ -27,7 +27,7 @@
             this.EducationRepeater();
             this.ExperienceRepeater();
             this.PortfolioManager().init();
-            this.BgImageMediaUploader();
+            this.VideoBgImage();
 
             this.CandidateTaxonomyManager({
                 listSelector: '#candidate-category-list',
@@ -58,9 +58,13 @@
             const profilePictureAction = $('#profile_picture_action');
             const mediaBtn = $('#open_media_library');
             const hiddenId = $('#candidate_profile_picture_id');
+            const originalAvatarUrl = imgPreview.attr('src');  // Store the original avatar URL
+            let tempImageUrl = null;  // Store temporary image URL for preview
 
+            // Ensure the media library is functional
             if (!mediaBtn.length || !window.wp || !window.wp.media) return;
 
+            // Open media library on button click
             mediaBtn.on('click', function(e) {
                 e.preventDefault();
                 let mediaUploader = wp.media({
@@ -68,13 +72,35 @@
                     button: { text: 'Use this image' },
                     multiple: false
                 });
+
                 mediaUploader.on('select', function() {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    imgPreview.attr('src', attachment.url);
-                    hiddenId.val(attachment.id);
-                    profilePictureAction.val('upload');
+                    tempImageUrl = attachment.url;  // Store temporary URL
+                    imgPreview.attr('src', tempImageUrl);  // Update preview
+                    hiddenId.val(attachment.id);  // Store the new image ID
+                    profilePictureAction.val('upload');  // Mark the action as 'upload'
                 });
+
                 mediaUploader.open();
+            });
+
+            // Delete the avatar (revert to original avatar)
+            $('#delete_profile_picture').on('click', function(e) {
+                e.preventDefault();
+                imgPreview.attr('src', originalAvatarUrl);  // Revert to the original avatar
+                hiddenId.val('');  // Clear the image ID
+                profilePictureAction.val('delete');  // Mark the action as 'delete'
+                tempImageUrl = null;  // Clear temporary URL
+            });
+
+            // Handle form reset/cancel - revert to original image
+            $('#candidate-profile-form').on('reset', function() {
+                if (tempImageUrl) {
+                    imgPreview.attr('src', originalAvatarUrl);
+                    hiddenId.val('');
+                    profilePictureAction.val('');
+                    tempImageUrl = null;
+                }
             });
         },
 
@@ -83,26 +109,86 @@
          * Handles background image selection using the WordPress media uploader.
          * Allows users to select an image from the media library and set it as background.
          *
-         * @function BgImageMediaUploader
+         * @function VideoBgImage
          * @returns {void}
          */
-        BgImageMediaUploader: function () {
-            const selectBtn = document.getElementById('select_bg_img');
-            const imgIdInput = document.getElementById('bg_img_id');
-            const imgUrlInput = document.getElementById('bg_img_url');
-            if (!selectBtn || !window.wp || !window.wp.media) return;
-            selectBtn.addEventListener('click', function(e) {
+        VideoBgImage: function () {
+            const uploadBtn = $('#video_bg_img');
+            const preview = $('#bg-img-preview');
+            const previewImg = preview.find('img');
+            const uploadBtnWrapper = $('#bg-img-upload-btn-wrapper');
+            const fileInfo = $('#bg-img-file-info');
+            const imgIdInput = $('#video_bg_img_id');
+            const imgUrlInput = $('#video_bg_img_url');
+            const removeBtn = $('#remove-uploaded-bg-img');
+
+            if (!window.wp || !window.wp.media) return;
+
+            // Handle file input change
+            uploadBtn.on('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Check if file is an image
+                    if (!file.type.match('image.*')) {
+                        alert('Please select an image file (.jpg, .jpeg, .png)');
+                        return;
+                    }
+
+                    // Create a temporary URL for the file
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Show preview
+                        previewImg.attr('src', e.target.result);
+                        preview.removeClass('hidden');
+                        uploadBtnWrapper.addClass('hidden');
+                        fileInfo.addClass('hidden');
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Handle remove button click
+            removeBtn.on('click', function(e) {
                 e.preventDefault();
-                let mediaUploader = wp.media({
+
+                // Clear file input and hidden fields
+                uploadBtn.val('');
+                imgIdInput.val('');
+                imgUrlInput.val('');
+
+                // Reset UI
+                preview.addClass('hidden');
+                uploadBtnWrapper.removeClass('hidden');
+                fileInfo.removeClass('hidden');
+                previewImg.attr('src', '');
+            });
+
+            // Handle WordPress media uploader
+            uploadBtn.on('click', function(e) {
+                e.preventDefault();
+
+                const mediaUploader = wp.media({
                     title: 'Select Background Image',
-                    button: { text: 'Use this image' },
+                    button: {
+                        text: 'Use this image'
+                    },
                     multiple: false
                 });
+
                 mediaUploader.on('select', function() {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    if (imgIdInput) imgIdInput.value = attachment.id;
-                    if (imgUrlInput) imgUrlInput.value = attachment.url;
+
+                    // Update hidden fields
+                    imgIdInput.val(attachment.id);
+                    imgUrlInput.val(attachment.url);
+
+                    // Update preview
+                    previewImg.attr('src', attachment.url);
+                    preview.removeClass('hidden');
+                    uploadBtnWrapper.addClass('hidden');
+                    fileInfo.addClass('hidden');
                 });
+
                 mediaUploader.open();
             });
         },

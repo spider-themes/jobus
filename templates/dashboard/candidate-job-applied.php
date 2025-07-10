@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Check if the logged-in user has the 'jobus_candidate' role
+// Get the current user
 $user       = wp_get_current_user();
 $user_email = $user->user_email;
 
@@ -22,17 +22,15 @@ $args = array(
 
 $applications = new \WP_Query( $args );
 
-//Sidebar Menu
+// Include Sidebar Menu
 include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body">
     <div class="position-relative">
-
         <div class="d-flex align-items-center justify-content-between mb-40 lg-mb-30">
             <h2 class="main-title m0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
         </div>
-
 		<?php
 		if ( $applications->have_posts() ) :
 			?>
@@ -92,23 +90,19 @@ include( 'candidate-templates/sidebar-menu.php' );
                                         }
                                         ?>
                                     </td>
-
                                     <td class="job-title">
                                         <a href="<?php echo esc_url( $job_link ); ?>" class="job-link fw-500 text-dark">
                                             <?php echo esc_html( $job_title ? $job_title : __( 'Job not found', 'jobus' ) ); ?>
                                         </a>
                                     </td>
-
                                     <td class="job-date">
                                         <?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>
                                     </td>
-
                                     <td class="job-status">
                                             <span class="badge <?php echo esc_attr( $status_class ); ?>">
                                                 <?php echo esc_html( ucfirst( __( $status, 'jobus' ) ) ); ?>
                                             </span>
                                     </td>
-
                                     <td class="job-actions">
                                         <div class="action-button">
                                             <a href="javascript:void(0)"

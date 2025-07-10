@@ -123,7 +123,7 @@ wp_enqueue_script( 'lightbox' );
 						}
 						?>
                         <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
-                             style="background-image: url(<?php echo esc_url( $meta['bg_img']['url'] ) ?>)">
+                             style="background-image: url(<?php echo esc_url( $meta['video_bg_img']['url'] ) ?>)">
                             <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
                                href="<?php echo esc_url( $meta['video_url'] ) ?>">
                                 <i class="bi bi-play"></i>
