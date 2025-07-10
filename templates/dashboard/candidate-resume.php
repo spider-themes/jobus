@@ -22,10 +22,8 @@ $cv_data = $candidate_form->get_candidate_cv($candidate_id);
 $video_data = $candidate_form->get_candidate_video($candidate_id);
 $cv_attachment = $cv_data['cv_attachment'];
 $cv_file_name = $cv_data['cv_file_name'];
-
-echo '<pre>';
-print_r($video_data);
-echo '</pre>';
+$education_data = $candidate_form->get_candidate_education($candidate_id);
+$experience_data = $candidate_form->get_candidate_experience($candidate_id);
 
 // Include Sidebar Menu
 include('candidate-templates/sidebar-menu.php');
@@ -103,6 +101,291 @@ include('candidate-templates/sidebar-menu.php');
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="bg-white card-box border-20 mt-40" id="candidate-resume-education">
+                <h4 class="dash-title-three"><?php esc_html_e('Education', 'jobus'); ?></h4>
+
+                <div class="dash-input-wrapper mb-15">
+                    <label for="education_title"><?php esc_html_e('Title', 'jobus'); ?></label>
+                    <input type="text" id="education_title" name="education_title"
+                           value="<?php echo esc_attr($education_data['education_title']); ?>"
+                           placeholder="<?php esc_attr_e('Education', 'jobus'); ?>">
+                </div>
+
+                <div class="accordion dash-accordion-one" id="education-repeater">
+                    <?php
+                    $education = $education_data['education'];
+                    if (empty($education)) {
+                        $education[] = array(
+                            'sl_num' => '',
+                            'title' => '',
+                            'academy' => '',
+                            'description' => '',
+                        );
+                    }
+                    foreach ($education as $key => $value) {
+                        $accordion_id = 'collapseOne-' . esc_attr($key);
+                        ?>
+                        <div class="accordion-item education-item">
+                            <div class="accordion-header" id="headingOne-<?php echo esc_attr($key); ?>">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
+                                        aria-expanded="false"
+                                        aria-controls="<?php echo esc_attr($accordion_id); ?>">
+							        <?php echo esc_html($value['title'] ?? esc_html__('Education', 'jobus')); ?>
+                                </button>
+                            </div>
+                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
+                                 aria-labelledby="headingOne-<?php echo esc_attr($key); ?>"
+                                 data-bs-parent="#education-repeater">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>">
+											        <?php esc_html_e('Serial Number', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       name="<?php echo esc_attr('education[' . $key . '][sl_num]'); ?>"
+                                                       id="<?php echo esc_attr('education_' . $key . '_sl_num'); ?>"
+                                                       value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_title'); ?>">
+											        <?php esc_html_e('Title', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control"
+                                                       name="education[<?php echo $key; ?>][title]"
+                                                       id="education_<?php echo $key; ?>_title"
+                                                       value="<?php echo esc_attr($value['title'] ?? ''); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_academy'); ?>">
+											        <?php esc_html_e('Academy', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control"
+                                                       name="education[<?php echo $key; ?>][academy]"
+                                                       id="education_<?php echo $key; ?>_academy"
+                                                       value="<?php echo esc_attr($value['academy'] ?? ''); ?>"
+                                                       placeholder="<?php esc_attr_e('Google Arts College & University', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="<?php echo esc_attr('education_' . $key . '_description'); ?>">
+											        <?php esc_html_e('Description', 'jobus'); ?>*
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <textarea class="size-lg form-control"
+                                                          name="education[<?php echo $key; ?>][description]"
+                                                          id="education_<?php echo $key; ?>_description"
+                                                          placeholder="<?php esc_attr_e('Description of your education', 'jobus'); ?>"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-danger btn-sm remove-education mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                            <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education">
+                    <i class="bi bi-plus"></i> <?php esc_html_e('Add Education Item', 'jobus'); ?>
+                </a>
+            </div>
+
+            <div class="bg-white card-box border-20 mt-40" id="candidate-resume-experience">
+                <h4 class="dash-title-three"><?php esc_html_e('Experience', 'jobus'); ?></h4>
+                <div class="dash-input-wrapper mb-15">
+                    <label for="experience_title"><?php esc_html_e('Title', 'jobus'); ?></label>
+                    <input type="text" id="experience_title" name="experience_title"
+                           value="<?php echo esc_attr($experience_data['experience_title']); ?>"
+                           placeholder="<?php esc_attr_e('Work Experience', 'jobus'); ?>">
+                </div>
+
+                <div class="accordion dash-accordion-one" id="experience-repeater">
+                    <?php
+                    $experience = $experience_data['experience'];
+                    if (empty($experience)) {
+                        $experience[] = array(
+                            'sl_num' => '',
+                            'title' => '',
+                            'company' => '',
+                            'start_date' => '',
+                            'end_date' => '',
+                            'description' => '',
+                        );
+                    }
+                    foreach ($experience as $key => $value) {
+                        $accordion_id = 'experience-' . esc_attr($key);
+                        ?>
+                        <div class="accordion-item experience-item">
+                            <div class="accordion-header" id="headingExp-<?php echo esc_attr($key); ?>">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#<?php echo esc_attr($accordion_id); ?>"
+                                        aria-expanded="false"
+                                        aria-controls="<?php echo esc_attr($accordion_id); ?>">
+							        <?php echo esc_html($value['title'] ?? esc_html__('Experience', 'jobus')); ?>
+                                </button>
+                            </div>
+                            <div id="<?php echo esc_attr($accordion_id); ?>" class="accordion-collapse collapse"
+                                 aria-labelledby="headingExp-<?php echo esc_attr($key); ?>"
+                                 data-bs-parent="#experience-repeater">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="experience_<?php echo $key; ?>_sl_num">
+                                                    <?php esc_html_e('Serial Number', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control"
+                                                       name="experience[<?php echo $key; ?>][sl_num]"
+                                                       id="experience_<?php echo $key; ?>_sl_num"
+                                                       value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>"
+                                                       placeholder="<?php esc_attr_e('Enter serial number', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="experience_<?php echo $key; ?>_title">
+                                                    <?php esc_html_e('Title', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control"
+                                                       name="experience[<?php echo $key; ?>][title]"
+                                                       id="experience_<?php echo $key; ?>_title"
+                                                       value="<?php echo esc_attr($value['title'] ?? ''); ?>"
+                                                       placeholder="<?php esc_attr_e('Lead Product Designer', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="experience_<?php echo $key; ?>_company">
+                                                    <?php esc_html_e('Company', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <input type="text" class="form-control"
+                                                       name="experience[<?php echo $key; ?>][company]"
+                                                       id="experience_<?php echo $key; ?>_company"
+                                                       value="<?php echo esc_attr($value['company'] ?? ''); ?>"
+                                                       placeholder="<?php esc_attr_e('Google Inc', 'jobus'); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label><?php esc_html_e('Duration', 'jobus'); ?></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="dash-input-wrapper mb-30">
+                                                        <input type="date" class="form-control"
+                                                               name="experience[<?php echo $key; ?>][start_date]"
+                                                               id="experience_<?php echo $key; ?>_start_date"
+                                                               value="<?php echo esc_attr($value['start_date'] ?? ''); ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="dash-input-wrapper mb-30">
+                                                        <input type="date" class="form-control"
+                                                               name="experience[<?php echo $key; ?>][end_date]"
+                                                               id="experience_<?php echo $key; ?>_end_date"
+                                                               value="<?php echo esc_attr($value['end_date'] ?? ''); ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="dash-input-wrapper mb-30 md-mb-10">
+                                                <label for="experience_<?php echo $key; ?>_description">
+                                                    <?php esc_html_e('Description', 'jobus'); ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <div class="dash-input-wrapper mb-30">
+                                                <textarea class="form-control"
+                                                          name="experience[<?php echo $key; ?>][description]"
+                                                          id="experience_<?php echo $key; ?>_description"
+                                                          placeholder="<?php esc_attr_e('Describe your role and achievements', 'jobus'); ?>"
+                                                          rows="4"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-danger btn-sm remove-experience mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                            <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-experience">
+                    <i class="bi bi-plus"></i> <?php esc_html_e('Add Experience Item', 'jobus'); ?>
+                </a>
             </div>
 
             <div class="button-group d-inline-flex align-items-center mt-30">

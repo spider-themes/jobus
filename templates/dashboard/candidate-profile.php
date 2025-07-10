@@ -178,7 +178,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                                     </div>
 
                                     <div class="text-end">
-                                        <button type="button" class="btn btn-danger btn-sm remove-social-link mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                        <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
                                             <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
                                         </button>
                                     </div>

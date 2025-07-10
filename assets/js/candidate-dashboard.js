@@ -270,7 +270,7 @@
                                 </div>
         
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link" title="Remove Item">
+                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>
@@ -352,143 +352,139 @@
             const addBtn = $('#add-education');
             let index = repeater.children('.education-item').length;
 
-            function validateEducationForm(form) {
-                let isValid = true;
-                const requiredFields = form.find('input[required], textarea[required]');
-                requiredFields.each(function () {
-                    if (!$(this).val()) {
-                        isValid = false;
-                        $(this).addClass('is-invalid');
-                        if (!$(this).next('.invalid-feedback').length) {
-                            $(this).after(`<div class="invalid-feedback">${window.jobus_required_field_text || 'This field is required'}</div>`);
-                        }
-                    } else {
-                        $(this).removeClass('is-invalid');
-                        $(this).next('.invalid-feedback').remove();
-                    }
-                });
-                return isValid;
-            }
-
-            function setupAutoSave() {
-                let autoSaveTimeout;
-                repeater.on('input', 'input, textarea', function () {
-                    clearTimeout(autoSaveTimeout);
-                    autoSaveTimeout = setTimeout(function () {
-                        const formData = new FormData($('#candidate-resume-form')[0]);
-                        formData.append('action', 'save_education_draft');
-                        formData.append('security', window.jobus_nonce);
-
-                        $.ajax({
-                            url: window.jobus_ajax_url,
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (response) {
-                                if (response.success) {
-                                    const savedMsg = $('<div class="text-success small mt-2 fade-out">Draft saved</div>');
-                                    $('#add-education').before(savedMsg);
-                                    setTimeout(() => savedMsg.fadeOut('slow', function () { $(this).remove(); }), 2000);
-                                }
-                            }
-                        });
-                    }, 2000);
-                });
-            }
-
             addBtn.on('click', function (e) {
                 e.preventDefault();
+                const accordionId = `education-${index}`;
                 const newItem = $(`
                     <div class="accordion-item education-item">
-                        <div class="accordion-header" id="headingOne-${index}">
-                            <button class="accordion-button" type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#collapseOne-${index}" 
-                                aria-expanded="true" 
-                                aria-controls="collapseOne-${index}">
-                                ${window.jobus_education_default_title || 'Education'}
+                        <div class="accordion-header" id="heading-${index}">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#${accordionId}"
+                                    aria-expanded="false"
+                                    aria-controls="${accordionId}">
+                                Education #${index + 1}
                             </button>
                         </div>
-                        <div id="collapseOne-${index}" class="accordion-collapse collapse show" 
-                            aria-labelledby="headingOne-${index}" 
-                            data-bs-parent="#education-repeater">
+                        <div id="${accordionId}" class="accordion-collapse collapse"
+                             aria-labelledby="heading-${index}"
+                             data-bs-parent="#education-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-12">
-                                        <input type="text" class="form-control mb-2" name="education[${index}][sl_num]" placeholder="Serial Number" required />
-                                        <input type="text" class="form-control mb-2" name="education[${index}][title]" placeholder="Title" />
-                                        <input type="text" class="form-control mb-2" name="education[${index}][academy]" placeholder="Academy" required />
-                                        <textarea class="form-control" name="education[${index}][description]" placeholder="Description" required></textarea>
-                                        <button type="button" class="btn btn-danger btn-sm mt-2 remove-education"><i class="bi bi-x"></i> ${window.jobus_remove_text || 'Remove'}</button>
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="education_${index}_sl_num">Serial Number</label>
+                                        </div>
                                     </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="education[${index}][sl_num]" 
+                                                   id="education_${index}_sl_num" 
+                                                   class="form-control"
+                                                   placeholder="Enter serial number" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="education_${index}_title">Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="education[${index}][title]" 
+                                                   id="education_${index}_title" 
+                                                   class="form-control"
+                                                   placeholder="Enter education title" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="education_${index}_academy">Academy</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="education[${index}][academy]" 
+                                                   id="education_${index}_academy" 
+                                                   class="form-control"
+                                                   placeholder="Enter academy name" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="education_${index}_description">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <textarea name="education[${index}][description]" 
+                                                      id="education_${index}_description" 
+                                                      class="form-control"
+                                                      placeholder="Enter description" 
+                                                      rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-education mt-2 mb-2" title="Remove Item">
+                                        <i class="bi bi-x"></i> Remove
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `);
+
                 repeater.append(newItem);
-
-                newItem.find('input[name$="[title]"]').on('input', function () {
-                    const title = $(this).val() || (window.jobus_education_default_title || 'Education');
-                    $(this).closest('.education-item').find('.accordion-button').text(title);
-                });
-
                 index++;
             });
 
             repeater.on('click', '.remove-education', function () {
-                const item = $(this).closest('.education-item');
-                if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this education item?')) {
-                    item.fadeOut('fast', function () {
-                        $(this).remove();
-                        reindexEducationItems();
-                    });
-                }
-            });
+                $(this).closest('.education-item').remove();
 
-            function reindexEducationItems() {
+                // Re-index all fields
                 repeater.children('.education-item').each(function (i) {
-                    const item = $(this);
-                    item.find('input, textarea').each(function () {
+                    const accordionId = `education-${i}`;
+                    const $el = $(this);
+
+                    $el.find('.accordion-header').attr('id', `heading-${i}`);
+                    $el.find('.accordion-button')
+                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('aria-controls', accordionId)
+                        .text(`Education #${i + 1}`);
+
+                    $el.find('.accordion-collapse')
+                        .attr('id', accordionId)
+                        .attr('aria-labelledby', `heading-${i}`);
+
+                    $el.find('input, textarea').each(function() {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
-                            name = name.replace(/education\\[\\d+\\]/, 'education[' + i + ']');
+                            name = name.replace(/education\[\d+\]/, `education[${i}]`);
                             $(this).attr('name', name);
                         }
                         if (id) {
-                            id = id.replace(/education_\\d+_/, 'education_' + i + '_');
+                            id = id.replace(/education_\d+_/, `education_${i}_`);
                             $(this).attr('id', id);
+                            // Update associated label
+                            $el.find(`label[for^="education_"]`).attr('for', id);
                         }
                     });
-                    item.find('.accordion-header')
-                        .attr('id', 'headingOne-' + i)
-                        .find('.accordion-button')
-                        .attr('data-bs-target', '#collapseOne-' + i)
-                        .attr('aria-controls', 'collapseOne-' + i);
-
-                    item.find('.accordion-collapse')
-                        .attr('id', 'collapseOne-' + i)
-                        .attr('aria-labelledby', 'headingOne-' + i);
                 });
+
                 index = repeater.children('.education-item').length;
-            }
-
-            $('#candidate-resume-form').on('submit', function (e) {
-                const isValid = validateEducationForm($(this));
-                if (!isValid) {
-                    e.preventDefault();
-                    const firstError = $('.is-invalid').first();
-                    if (firstError.length) {
-                        $('html, body').animate({
-                            scrollTop: firstError.offset().top - 100
-                        }, 500);
-                    }
-                }
             });
-
-            setupAutoSave();
         },
 
 
@@ -504,150 +500,165 @@
             const addBtn = $('#add-experience');
             let index = repeater.children('.experience-item').length;
 
-            function validateExperienceForm(form) {
-                let isValid = true;
-                const requiredFields = form.find('input[required], textarea[required]');
-                requiredFields.each(function () {
-                    if (!$(this).val()) {
-                        isValid = false;
-                        $(this).addClass('is-invalid');
-                        if (!$(this).next('.invalid-feedback').length) {
-                            $(this).after(`<div class="invalid-feedback">${window.jobus_required_field_text || 'This field is required'}</div>`);
-                        }
-                    } else {
-                        $(this).removeClass('is-invalid');
-                        $(this).next('.invalid-feedback').remove();
-                    }
-                });
-                return isValid;
-            }
-
-            function setupAutoSave() {
-                let autoSaveTimeout;
-                repeater.on('input', 'input, textarea', function () {
-                    clearTimeout(autoSaveTimeout);
-                    autoSaveTimeout = setTimeout(function () {
-                        const formData = new FormData($('#candidate-resume-form')[0]);
-                        formData.append('action', 'save_experience_draft');
-                        formData.append('security', window.jobus_nonce);
-
-                        $.ajax({
-                            url: window.jobus_ajax_url,
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (response) {
-                                if (response.success) {
-                                    const savedMsg = $('<div class="text-success small mt-2 fade-out">Draft saved</div>');
-                                    $('#add-experience').before(savedMsg);
-                                    setTimeout(() => savedMsg.fadeOut('slow', function () { $(this).remove(); }), 2000);
-                                }
-                            }
-                        });
-                    }, 2000);
-                });
-            }
-
             addBtn.on('click', function (e) {
                 e.preventDefault();
+                const accordionId = `experience-${index}`;
                 const newItem = $(`
                     <div class="accordion-item experience-item">
                         <div class="accordion-header" id="headingExp-${index}">
-                            <button class="accordion-button" type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#collapseExp-${index}" 
-                                aria-expanded="true" 
-                                aria-controls="collapseExp-${index}">
-                                ${window.jobus_experience_default_title || 'Experience'}
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#${accordionId}"
+                                    aria-expanded="false"
+                                    aria-controls="${accordionId}">
+                                Experience #${index + 1}
                             </button>
                         </div>
-                        <div id="collapseExp-${index}" class="accordion-collapse collapse show" 
-                            aria-labelledby="headingExp-${index}" 
-                            data-bs-parent="#experience-repeater">
+                        <div id="${accordionId}" class="accordion-collapse collapse"
+                             aria-labelledby="headingExp-${index}"
+                             data-bs-parent="#experience-repeater">
                             <div class="accordion-body">
-                                <input type="text" class="form-control mb-2" name="experience[${index}][sl_num]" placeholder="Serial Number" required />
-                                <input type="text" class="form-control mb-2" name="experience[${index}][title]" placeholder="Title" required />
-                                <input type="text" class="form-control mb-2" name="experience[${index}][company]" placeholder="Company" required />
-                                <div class="row g-2 mb-2">
-                                    <div class="col">
-                                        <input type="date" class="form-control" name="experience[${index}][start_date]" required />
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_sl_num">Serial Number</label>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <input type="date" class="form-control" name="experience[${index}][end_date]" />
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" class="form-control" 
+                                                   name="experience[${index}][sl_num]" 
+                                                   id="experience_${index}_sl_num"
+                                                   placeholder="Enter serial number">
+                                        </div>
                                     </div>
                                 </div>
-                                <textarea class="form-control" name="experience[${index}][description]" placeholder="Description" required></textarea>
-                                <button type="button" class="btn btn-danger btn-sm mt-2 remove-experience">
-                                    <i class="bi bi-x"></i> ${window.jobus_remove_text || 'Remove'}
-                                </button>
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_title">Title</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" class="form-control"
+                                                   name="experience[${index}][title]"
+                                                   id="experience_${index}_title"
+                                                   placeholder="Enter experience title">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_company">Company</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <input type="text" class="form-control"
+                                                   name="experience[${index}][company]"
+                                                   id="experience_${index}_company"
+                                                   placeholder="Enter company name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label>Duration</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="dash-input-wrapper mb-30">
+                                                    <input type="date" class="form-control"
+                                                           name="experience[${index}][start_date]"
+                                                           id="experience_${index}_start_date">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="dash-input-wrapper mb-30">
+                                                    <input type="date" class="form-control"
+                                                           name="experience[${index}][end_date]"
+                                                           id="experience_${index}_end_date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                            <label for="experience_${index}_description">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-30">
+                                            <textarea class="form-control"
+                                                      name="experience[${index}][description]"
+                                                      id="experience_${index}_description"
+                                                      placeholder="Enter description"
+                                                      rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-experience mt-2 mb-2" title="Remove Item">
+                                        <i class="bi bi-x"></i> Remove
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 `);
 
                 repeater.append(newItem);
-
-                newItem.find('input[name$="[title]"]').on('input', function () {
-                    const title = $(this).val() || (window.jobus_experience_default_title || 'Experience');
-                    $(this).closest('.experience-item').find('.accordion-button').text(title);
-                });
-
                 index++;
             });
 
             repeater.on('click', '.remove-experience', function () {
-                const item = $(this).closest('.experience-item');
-                if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this experience item?')) {
-                    item.fadeOut('fast', function () {
-                        $(this).remove();
-                        reindexExperienceItems();
-                    });
-                }
-            });
+                $(this).closest('.experience-item').remove();
 
-            function reindexExperienceItems() {
+                // Re-index all fields
                 repeater.children('.experience-item').each(function (i) {
-                    const item = $(this);
-                    item.find('input, textarea').each(function () {
+                    const accordionId = `experience-${i}`;
+                    const $el = $(this);
+
+                    $el.find('.accordion-header').attr('id', `headingExp-${i}`);
+                    $el.find('.accordion-button')
+                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('aria-controls', accordionId)
+                        .text(`Experience #${i + 1}`);
+
+                    $el.find('.accordion-collapse')
+                        .attr('id', accordionId)
+                        .attr('aria-labelledby', `headingExp-${i}`);
+
+                    $el.find('input, textarea').each(function() {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
-                            name = name.replace(/experience\\[\\d+\\]/, 'experience[' + i + ']');
+                            name = name.replace(/experience\[\d+\]/, `experience[${i}]`);
                             $(this).attr('name', name);
                         }
                         if (id) {
-                            id = id.replace(/experience_\\d+_/, 'experience_' + i + '_');
+                            id = id.replace(/experience_\d+_/, `experience_${i}_`);
                             $(this).attr('id', id);
+                            // Update associated label
+                            $el.find(`label[for^="experience_"]`).attr('for', id);
                         }
                     });
-                    item.find('.accordion-header')
-                        .attr('id', 'headingExp-' + i)
-                        .find('.accordion-button')
-                        .attr('data-bs-target', '#collapseExp-' + i)
-                        .attr('aria-controls', 'collapseExp-' + i);
-
-                    item.find('.accordion-collapse')
-                        .attr('id', 'collapseExp-' + i)
-                        .attr('aria-labelledby', 'headingExp-' + i);
                 });
+
                 index = repeater.children('.experience-item').length;
-            }
-
-            $('#candidate-resume-form').on('submit', function (e) {
-                const isValid = validateExperienceForm($(this));
-                if (!isValid) {
-                    e.preventDefault();
-                    const firstError = $('.is-invalid').first();
-                    if (firstError.length) {
-                        $('html, body').animate({
-                            scrollTop: firstError.offset().top - 100
-                        }, 500);
-                    }
-                }
             });
-
-            setupAutoSave();
         },
 
 

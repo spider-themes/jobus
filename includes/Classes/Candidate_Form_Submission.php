@@ -508,6 +508,126 @@ class Candidate_Form_Submission {
     }
 
     /**
+     * Get candidate education data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing education data
+     */
+    public static function get_candidate_education(int $candidate_id): array {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+
+        return array(
+            'education_title' => $meta['education_title'] ?? '',
+            'education' => isset($meta['education']) && is_array($meta['education']) ? $meta['education'] : array()
+        );
+    }
+
+    /**
+     * Save candidate education data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     */
+    private function save_candidate_education(int $candidate_id, array $post_data): void {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        // Handle education title
+        if (isset($post_data['education_title'])) {
+            $meta['education_title'] = sanitize_text_field($post_data['education_title']);
+        }
+
+        // Reset education array to ensure removed items are actually removed
+        $meta['education'] = array();
+
+        // Only process education items if they exist in the POST data
+        if (isset($post_data['education']) && is_array($post_data['education'])) {
+            foreach ($post_data['education'] as $key => $edu) {
+                // Skip this item if it's marked for removal or empty
+                if (
+                    (isset($edu['remove']) && $edu['remove'] === '1') // Check if marked for removal
+                    || (empty($edu['academy']) && empty($edu['title']) && empty($edu['description']) && empty($edu['sl_num'])) // Check if all fields are empty
+                ) {
+                    continue;
+                }
+
+                // Add the education item to the array
+                $meta['education'][] = array(
+                    'sl_num' => isset($edu['sl_num']) ? sanitize_text_field($edu['sl_num']) : '',
+                    'title' => isset($edu['title']) ? sanitize_text_field($edu['title']) : '',
+                    'academy' => isset($edu['academy']) ? sanitize_text_field($edu['academy']) : '',
+                    'description' => isset($edu['description']) ? wp_kses_post($edu['description']) : ''
+                );
+            }
+        }
+
+        update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+    }
+
+    /**
+     * Get candidate experience data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing experience data
+     */
+    public static function get_candidate_experience(int $candidate_id): array {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+
+        return array(
+            'experience_title' => $meta['experience_title'] ?? '',
+            'experience' => isset($meta['experience']) && is_array($meta['experience']) ? $meta['experience'] : array()
+        );
+    }
+
+    /**
+     * Save candidate experience data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     */
+    private function save_candidate_experience(int $candidate_id, array $post_data): void {
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        // Handle experience title
+        if (isset($post_data['experience_title'])) {
+            $meta['experience_title'] = sanitize_text_field($post_data['experience_title']);
+        }
+
+        // Reset experience array to ensure removed items are actually removed
+        $meta['experience'] = array();
+
+        // Only process experience items if they exist in the POST data
+        if (isset($post_data['experience']) && is_array($post_data['experience'])) {
+            foreach ($post_data['experience'] as $exp) {
+                // Skip this item if it's marked for removal or empty
+                if (
+                    (isset($exp['remove']) && $exp['remove'] === '1')
+                    || (empty($exp['company']) && empty($exp['title']) && empty($exp['description']))
+                ) {
+                    continue;
+                }
+
+                // Add the experience item to the array
+                $meta['experience'][] = array(
+                    'sl_num' => isset($exp['sl_num']) ? sanitize_text_field($exp['sl_num']) : '',
+                    'title' => isset($exp['title']) ? sanitize_text_field($exp['title']) : '',
+                    'company' => isset($exp['company']) ? sanitize_text_field($exp['company']) : '',
+                    'start_date' => isset($exp['start_date']) ? sanitize_text_field($exp['start_date']) : '',
+                    'end_date' => isset($exp['end_date']) ? sanitize_text_field($exp['end_date']) : '',
+                    'description' => isset($exp['description']) ? wp_kses_post($exp['description']) : ''
+                );
+            }
+        }
+
+        update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+    }
+
+    /**
      * Handle the actual form submission
      */
     private function handle_form_submission() {
@@ -547,6 +667,16 @@ class Candidate_Form_Submission {
         // Handle video data if present (including background image)
         if (isset($_POST['video_title']) || isset($_POST['video_url']) || isset($_POST['video_bg_img'])) {
             $this->save_candidate_video($candidate_id, $_POST);
+        }
+
+        // Handle education data if present
+        if (isset($_POST['education_title']) || (isset($_POST['education']) && is_array($_POST['education']))) {
+            $this->save_candidate_education($candidate_id, $_POST);
+        }
+
+        // Handle experience data if present
+        if (isset($_POST['experience_title']) || (isset($_POST['experience']) && is_array($_POST['experience']))) {
+            $this->save_candidate_experience($candidate_id, $_POST);
         }
     }
 }
