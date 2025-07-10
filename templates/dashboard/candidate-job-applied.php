@@ -29,8 +29,6 @@ include( 'candidate-templates/sidebar-menu.php' );
 <div class="dashboard-body">
     <div class="position-relative">
 
-        <?php include( 'candidate-templates/action-btn.php' ); ?>
-
         <div class="d-flex align-items-center justify-content-between mb-40 lg-mb-30">
             <h2 class="main-title m0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
         </div>

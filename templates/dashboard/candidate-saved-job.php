@@ -13,8 +13,6 @@ include( 'candidate-templates/sidebar-menu.php' );
 <div class="dashboard-body">
     <div class="position-relative">
 
-		<?php include( 'candidate-templates/action-btn.php' ); ?>
-
         <div class="wrapper">
 			<?php
 			$user_id    = get_current_user_id();

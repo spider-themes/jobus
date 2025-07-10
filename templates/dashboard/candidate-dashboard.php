@@ -1,55 +1,58 @@
 <?php
 /**
  * Template for the candidate dashboard.
- *
- * @package jobus
- * @author  spiderdevs
  */
+
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-wp_enqueue_style( 'jobus-frontend-dashboard' );
-
 // Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
-
-$applicants = [];
-$candidates = [];
-
-if ( in_array( 'jobus_candidate', $user->roles ) ) {
-	$applicants = get_posts(
-		array(
-			'post_type'      => 'jobus_applicant',
-			'post_status'    => 'publish',
-			'posts_per_page' => - 1,
-			'meta_query'     => array(
-				array(
-					'key'     => 'candidate_email', // Assuming you're using candidate email in the meta
-					'value'   => $user->user_email,
-					'compare' => '='
-				)
-			)
-		)
-	);
-
-	$candidates = get_posts(
-		array(
-			'post_type'      => 'jobus_candidate',
-			'author'         => $user,
-			'posts_per_page' => 1,
-		)
-	);
+if ( ! $user || ! in_array( 'jobus_candidate', $user->roles, true ) ) {
+	wp_die( esc_html__( 'Access denied. You must be a candidate to view this page.', 'jobus' ) );
 }
 
-$candidate_id = ! empty( $candidates ) ? $candidates[0]->ID : 0; // or null, or handle as needed
+// Initialize variables
+$applicants = [];
+$candidates = [];
+$candidate_id = 0;
 
+// Get candidate data
+$candidates = get_posts( [
+	'post_type'      => 'jobus_candidate',
+	'author'         => $user->ID,
+	'posts_per_page' => 1,
+	'post_status'    => 'publish',
+	'fields'         => 'ids', // Only get IDs for performance
+] );
+
+$candidate_id = ! empty( $candidates ) ? $candidates[0] : 0;
+
+// Get applicant data only if candidate exists
+if ( $candidate_id ) {
+	$applicants = get_posts( [
+		'post_type'      => 'jobus_applicant',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'meta_query'     => [
+			[
+				'key'     => 'candidate_email',
+				'value'   => $user->user_email,
+				'compare' => '='
+			]
+		]
+	] );
+}
+
+// Get view counts with default fallback
 $all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true );
 $all_user_view_count = ! empty( $all_user_view_count ) ? intval( $all_user_view_count ) : 0;
 $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
 $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
 
-//Sidebar Menu
+// Include sidebar menu
 include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
@@ -57,12 +60,9 @@ include( 'candidate-templates/sidebar-menu.php' );
 <div class="dashboard-body">
     <div class="position-relative">
 
-		<?php include( 'candidate-templates/action-btn.php' ); ?>
-
         <!--Dashboard Candidate -->
         <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
         <div class="row">
-
             <div class="col-lg-3 col-6">
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
@@ -83,7 +83,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg') ?>" alt="<?php esc_attr_e('shortlist', 'jobus'); ?>" class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg') ?>" alt="<?php esc_attr_e('Shortlist', 'jobus'); ?>" class="lazy-img">
                         </div>
                         <div class="order-sm-0">
                             <div class="value fw-500">
@@ -122,26 +122,21 @@ include( 'candidate-templates/sidebar-menu.php' );
             <div class="col-lg-3 col-6">
                 <div class="dash-card-one bg-white border-30 position-relative mb-15">
                     <div class="d-sm-flex align-items-center justify-content-between">
-
                         <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>" alt="" class="lazy-img">
+                            <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>" alt="<?php esc_attr_e( 'Applied Jobs', 'jobus' ); ?>" class="lazy-img">
                         </div>
-
                         <div class="order-sm-0">
                             <div class="value fw-500">
 								<?php echo esc_html( count( $applicants ) ); ?>
                             </div>
                             <span><?php esc_html_e( 'Applied Job', 'jobus' ); ?></span>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="row d-flex pt-50 lg-pt-10">
-
             <div class="col-xl-7 col-lg-6 d-flex flex-column">
                 <div class="user-activity-chart bg-white border-20 mt-30 h-100">
                     <h4 class="dash-title-two">Profile Views</h4>

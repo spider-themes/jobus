@@ -1,0 +1,11 @@
+.dash-aside-navbar {
+  .dasboard-main-nav {
+    .menu-item {
+      .active {
+        img {
+          filter: brightness(0) saturate(100%) invert(1);
+        }
+      }
+    }
+  }
+}

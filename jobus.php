@@ -65,6 +65,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			$this->define_constants(); // Define constants.
 			$this->core_includes(); //Include the required files.
+
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
 			// Register the candidate menu for administrators only
@@ -113,6 +114,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
+			require_once __DIR__ . '/includes/Classes/Candidate_Form_Submission.php';
 			require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
 			// Frontend UI
@@ -143,8 +145,10 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 * @return void
 		 */
 		public function init_plugin(): void {
+
 			// Classes
 			new Jobus\includes\Classes\Ajax_Actions();
+			new Jobus\includes\Classes\Candidate_Form_Submission();
 
 			//Admin UI
 			if ( is_admin() ) {

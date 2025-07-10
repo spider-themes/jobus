@@ -13,22 +13,22 @@ include ('candidate-templates/sidebar-menu.php');
 <div class="dashboard-body">
     <div class="position-relative">
 
-		<?php include ('candidate-templates/action-btn.php'); ?>
-
         <h2 class="main-title">
 			<?php esc_html_e( 'Delete Account', 'jobus' ); ?>
         </h2>
 
-        <div class="bg-white card-box border-20">
-            <div class="text-center">
-                <img src="../images/lazy.svg" data-src="images/icon/icon_22.svg" alt="" class="lazy-img m-auto">
-                <h2>Are you sure?</h2>
-                <p>Are you sure to delete your account? All data will be lost.</p>
-                <div class="button-group d-inline-flex justify-content-center align-items-center pt-15">
-                    <a href="#" class="confirm-btn fw-500 tran3s me-3">Yes</a>
-                    <button type="button" class="btn-close fw-500 ms-3">Cancel</button>
+        <div class="candidate-delete-account-wrap bg-white card-box border-20">
+            <h4 class="title"><?php esc_html_e( 'Confirm Account Deletion.', 'jobus'); ?></h4>
+            <p><?php esc_html_e( 'Are you sure to delete your account? All data will be lost.', 'jobus' ); ?></p>
+            <form action="#" id="candidate-delete-account-form" method="post">
+                <div class="dash-input-wrapper mb-20">
+                    <label for="candidate_password"><?php esc_html_e( 'Current Password*', 'jobus' ); ?></label>
+                    <input type="password" id="candidate_password" name="candidate_password" required>
                 </div>
-            </div>
+                <div class="button-group d-inline-flex align-items-center">
+                    <button type="submit" class="dash-btn-two tran3s rounded-3"><?php esc_html_e( 'Delete Profile', 'jobus' ); ?></button>
+                </div>
+            </form>
         </div>
 
     </div>

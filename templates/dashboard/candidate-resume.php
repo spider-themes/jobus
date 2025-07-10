@@ -353,8 +353,6 @@ include ('candidate-templates/sidebar-menu.php');
 <div class="dashboard-body">
     <div class="position-relative">
 
-	    <?php include ('candidate-templates/action-btn.php'); ?>
-
         <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
 
         <?php

@@ -3,7 +3,7 @@
  * Template Dashboard
  *
  * @package jobus
- * @author  spiderdevs
+ * @author  spider-themes
  */
 
 namespace jobus\includes\Frontend;

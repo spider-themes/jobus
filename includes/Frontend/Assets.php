@@ -64,10 +64,6 @@ class Assets {
 		wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
 			'ajax_url' => $ajax_url,
-			'security' => wp_create_nonce('jobus_dashboard_nonce'),
-			'deleting_text' => __('Deleting...', 'jobus'),
-			'delete_text' => __('Delete', 'jobus'),
-			'default_avatar' => get_avatar_url(0), // Default WordPress avatar
 		]);
 
 		// Only load media scripts for candidate users

@@ -22,15 +22,9 @@ if( class_exists( 'CSF' ) ) {
 		'title' => esc_html__('Menu Image', 'jobus'),
 		'fields' => array(
 			array(
-				'id'          => 'jobus_menu_regular_image',
+				'id'          => 'jobus_menu_image',
 				'type'        => 'media',
 				'title'       => esc_html__('Image', 'jobus'),
-				'default'     => false
-			),
-			array(
-				'id'          => 'jobus_menu_active_image',
-				'type'        => 'media',
-				'title'       => esc_html__('Active Image', 'jobus'),
 				'default'     => false
 			),
 		)

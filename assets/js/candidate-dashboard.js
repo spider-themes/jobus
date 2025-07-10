@@ -22,7 +22,6 @@
 
         init: function () {
             this.updateProfilePicturePreview();
-            this.handleDeleteProfilePicture();
             this.SocialLinksRepeater();
             this.CandidateSpecificationsRepeater();
             this.EducationRepeater();
@@ -81,25 +80,6 @@
 
 
         /**
-         * Handles the deletion of the profile picture.
-         * Sets the default avatar, clears the hidden ID field,
-         */
-        handleDeleteProfilePicture: function () {
-            const deleteButton = $('#delete_profile_picture');
-            const imgPreview = $('#candidate_avatar');
-            const profilePictureAction = $('#profile_picture_action');
-            const hiddenId = $('#candidate_profile_picture_id');
-            const defaultAvatar = jobus_dashboard_params.default_avatar || '';
-
-            deleteButton.on('click', function() {
-                imgPreview.attr('src', defaultAvatar);
-                hiddenId.val('');
-                profilePictureAction.val('delete');
-            });
-        },
-
-
-        /**
          * Handles background image selection using the WordPress media uploader.
          * Allows users to select an image from the media library and set it as background.
          *
@@ -149,38 +129,95 @@
                 { value: 'bi bi-tiktok', label: 'TikTok' }
             ];
 
-            const iconOptions = icons.map(icon => `<option value="${icon.value}">${icon.label}</option>`).join('');
+            const iconOptions = icons.map(icon =>
+                `<option value="${icon.value}">${icon.label}</option>`
+            ).join('');
+
             const repeater = $('#social-links-repeater');
             let index = repeater.children('.social-link-item').length;
 
-            // Add new social link
             $('#add-social-link').on('click', function (e) {
                 e.preventDefault();
+
+                const accordionId = `social-link-${index}`;
                 const newItem = $(`
-                    <div class="dash-input-wrapper mb-20 social-link-item d-flex align-items-center gap-2">
-                        <label class="me-2 mb-0">Network ${index + 1}</label>
-                        <select name="social_icons[${index}][icon]" class="form-select icon-select me-2 max-w-140">
-                            ${iconOptions}
-                        </select>
-                        <input type="text" name="social_icons[${index}][url]" class="form-control me-2 min-w-260" placeholder="#">
-                        <button type="button" class="btn btn-danger remove-social-link" title="Remove Item">
-                            <i class="bi bi-x"></i>
-                        </button>
+                    <div class="accordion-item social-link-item">
+                        <div class="accordion-header" id="heading-${index}">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#${accordionId}"
+                                    aria-expanded="false"
+                                    aria-controls="${accordionId}">
+                                Social Network #${index + 1}
+                            </button>
+                        </div>
+                        <div id="${accordionId}" class="accordion-collapse collapse"
+                             aria-labelledby="heading-${index}"
+                             data-bs-parent="#social-links-repeater">
+                            <div class="accordion-body">
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_${index}_icon">Icon</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
+                                                ${iconOptions}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_${index}_url">URL</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-social-link" title="Remove Item">
+                                        <i class="bi bi-x"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `);
+
                 repeater.append(newItem);
                 index++;
             });
 
-            // Remove social link
             repeater.on('click', '.remove-social-link', function () {
                 $(this).closest('.social-link-item').remove();
 
-                // Re-index remaining items
+                // Re-index all fields
                 repeater.children('.social-link-item').each(function (i, el) {
-                    $(el).find('label').text(`Network ${i + 1}`);
-                    $(el).find('select').attr('name', `social_icons[${i}][icon]`);
-                    $(el).find('input[type="text"]').attr('name', `social_icons[${i}][url]`);
+                    const accordionId = `social-link-${i}`;
+                    const $el = $(el);
+
+                    $el.find('.accordion-header').attr('id', `heading-${i}`);
+                    $el.find('.accordion-button')
+                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('aria-controls', accordionId)
+                        .text(`Social Network #${i + 1}`);
+
+                    $el.find('.accordion-collapse')
+                        .attr('id', accordionId)
+                        .attr('aria-labelledby', `heading-${i}`);
+
+                    $el.find('select').attr('name', `social_icons[${i}][icon]`).attr('id', `social_${i}_icon`);
+                    $el.find('input[name$="[title]"]').attr('name', `social_icons[${i}][title]`).attr('id', `social_${i}_title`);
+                    $el.find('input[name$="[url]"]').attr('name', `social_icons[${i}][url]`).attr('id', `social_${i}_url`);
                 });
 
                 index = repeater.children('.social-link-item').length;
@@ -673,7 +710,6 @@
                     type: 'POST',
                     data: {
                         action: 'jobus_suggest_taxonomy_terms',
-                        security: jobus_dashboard_params.security,
                         taxonomy: taxonomy.taxonomy,
                         term_query: query
                     },
@@ -724,7 +760,6 @@
                         type: 'POST',
                         data: {
                             action: 'jobus_create_taxonomy_term',
-                            security: jobus_dashboard_params.security,
                             term_name: termName,
                             taxonomy: taxonomy.taxonomy
                         },
@@ -773,7 +808,6 @@
     });
 
 })(jQuery);
-
 
 
 document.addEventListener('DOMContentLoaded', function() {

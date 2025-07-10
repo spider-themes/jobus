@@ -12,6 +12,10 @@ Table of Contents:
 02/ Mixins
 03/ Dashboard Layout & Components
 =====================================================*/
+.dash-aside-navbar .dasboard-main-nav .menu-item .active img {
+  filter: brightness(0) saturate(100%) invert(1);
+}
+
 .admin-bar .dash-aside-navbar {
   margin-top: 32px;
 }
@@ -837,7 +841,7 @@ Table of Contents:
   box-shadow: none;
 }
 .dashboard-body .dash-accordion-one .accordion-item .accordion-button:after {
-  content: url(../dashboard/images/icon/icon_17.svg);
+  content: url(../images/dashboard/icons/arrow-icon.svg);
   background-image: none;
 }
 .dashboard-body .dash-accordion-one .accordion-item .accordion-body {
@@ -1629,6 +1633,12 @@ Table of Contents:
   background: #E7F6EF;
   border-color: #E7F6EF;
   color: #005025;
+}
+
+.candidate-delete-account-wrap .title {
+  font-family: "gordita";
+  font-size: 24px;
+  color: #31795A;
 }
 
 /*# sourceMappingURL=dashboard.css.map */

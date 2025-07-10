@@ -15,7 +15,9 @@ Table of Contents:
 
 @import "dashboard/variables";
 @import "dashboard/mixins";
+@import "dashboard/sidebar_menu";
 @import "dashboard/dashboard";
 @import "dashboard/candidate_resume";
 @import "dashboard/candidate_saved_job";
 @import "dashboard/candidate_job_applied";
+@import "dashboard/candidate_delete_account";
