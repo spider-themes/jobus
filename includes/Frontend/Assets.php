@@ -63,7 +63,15 @@ class Assets {
 		// Candidate Dashboard Scripts
 		wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
-			'ajax_url' => $ajax_url,
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+			'taxonomy_nonce' => wp_create_nonce('jobus_taxonomy_nonce'),
+			'suggest_taxonomy_nonce' => wp_create_nonce('jobus_suggest_taxonomy_terms'),
+			'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
+			'texts' => [
+				'taxonomy_create_error' => esc_html__('Error creating term. Please try again.', 'jobus'),
+				'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus')
+			]
 		]);
 
 		// Only load media scripts for candidate users

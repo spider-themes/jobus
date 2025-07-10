@@ -628,6 +628,131 @@ class Candidate_Form_Submission {
     }
 
     /**
+     * Get candidate taxonomy data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing taxonomy data
+     */
+    public static function get_candidate_taxonomies(int $candidate_id): array {
+        return array(
+            'categories' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_cat') : array(),
+            'locations' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_location') : array(),
+            'skills' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_skill') : array()
+        );
+    }
+
+    /**
+     * Save candidate taxonomy terms
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     * @return bool True on success, false on failure
+     */
+    private function save_candidate_taxonomies(int $candidate_id, array $post_data): bool {
+        if (!$candidate_id) {
+            return false;
+        }
+
+        $taxonomies = array(
+            'jobus_candidate_cat' => 'candidate_categories',
+            'jobus_candidate_location' => 'candidate_locations',
+            'jobus_candidate_skill' => 'candidate_skills'
+        );
+
+        foreach ($taxonomies as $taxonomy => $field_name) {
+            if (isset($post_data[$field_name])) {
+                $term_string = sanitize_text_field($post_data[$field_name]);
+                $term_ids = array();
+
+                if (!empty($term_string)) {
+                    $term_ids = array_map('intval', explode(',', $term_string));
+                    $term_ids = array_filter($term_ids); // Remove any 0 or empty values
+                }
+
+                // Always set terms, even if empty array to clear terms
+                $result = wp_set_object_terms($candidate_id, $term_ids, $taxonomy, false);
+
+                if (is_wp_error($result)) {
+                    error_log('Error saving ' . $taxonomy . ' terms: ' . $result->get_error_message());
+                    continue;
+                }
+
+                // Clear term caches
+                clean_object_term_cache($candidate_id, $taxonomy);
+                if (!empty($term_ids)) {
+                    clean_term_cache($term_ids, $taxonomy);
+                }
+            }
+        }
+
+        // Force refresh post cache
+        clean_post_cache($candidate_id);
+        wp_cache_delete($candidate_id, 'posts');
+
+        return true;
+    }
+
+    /**
+     * Get candidate portfolio data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @return array Array containing portfolio data
+     */
+    public static function get_candidate_portfolio(int $candidate_id): array {
+        if (!$candidate_id) {
+            return array(
+                'portfolio_title' => '',
+                'portfolio' => array()
+            );
+        }
+
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        return array(
+            'portfolio_title' => $meta['portfolio_title'] ?? '',
+            'portfolio' => isset($meta['portfolio']) ? (array)$meta['portfolio'] : array()
+        );
+    }
+
+    /**
+     * Save candidate portfolio data
+     *
+     * @param int $candidate_id The candidate post ID
+     * @param array $post_data POST data from the form submission
+     *
+     * @return void True on success, false on failure
+     */
+    private function save_candidate_portfolio(int $candidate_id, array $post_data ): void {
+        if (!$candidate_id ) {
+	        return ;
+        }
+
+        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        // Handle portfolio title
+        if (isset($post_data['portfolio_title'])) {
+            $meta['portfolio_title'] = sanitize_text_field($post_data['portfolio_title']);
+        }
+
+        // Handle portfolio images
+        if (isset($post_data['portfolio'])) {
+            $portfolio_ids = array_filter(
+                explode(',', sanitize_text_field($post_data['portfolio'])),
+                function($id) { return is_numeric($id) && $id > 0; }
+            );
+            $meta['portfolio'] = $portfolio_ids;
+        }
+
+	    update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta);
+    }
+
+    /**
      * Handle the actual form submission
      */
     private function handle_form_submission() {
@@ -677,6 +802,16 @@ class Candidate_Form_Submission {
         // Handle experience data if present
         if (isset($_POST['experience_title']) || (isset($_POST['experience']) && is_array($_POST['experience']))) {
             $this->save_candidate_experience($candidate_id, $_POST);
+        }
+
+        // Handle taxonomy terms if present
+        if ( isset($_POST['candidate_categories']) || isset($_POST['candidate_locations']) || isset($_POST['candidate_skills']) ) {
+            $this->save_candidate_taxonomies($candidate_id, $_POST);
+        }
+
+        // Handle portfolio data if present
+        if (isset($_POST['portfolio_title']) || isset($_POST['portfolio'])) {
+            $this->save_candidate_portfolio($candidate_id, $_POST);
         }
     }
 }

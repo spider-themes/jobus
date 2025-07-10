@@ -671,66 +671,91 @@
          */
         PortfolioManager: function () {
             const portfolioSection = $('#portfolio-section');
+            const portfolioContainer = $('#portfolio-items');
+            const portfolioIdsField = $('#portfolio_ids');
             let mediaUploader;
 
+            /**
+             * Sets up the WordPress media uploader for portfolio images
+             * @private
+             */
             function setupMediaUploader() {
                 $('#add-portfolio-images').on('click', function (e) {
                     e.preventDefault();
 
-                    if (mediaUploader) {
-                        mediaUploader.open();
-                        return;
-                    }
-
-                    mediaUploader = wp.media({
-                        title: window.jobus_portfolio_upload_title || 'Select Portfolio Images',
-                        button: {
-                            text: window.jobus_portfolio_select_text || 'Add to Portfolio'
-                        },
-                        multiple: true
-                    });
-
-                    mediaUploader.on('select', function () {
-                        const selection = mediaUploader.state().get('selection');
-                        const portfolioContainer = $('#portfolio-items');
-                        const portfolioIds = [];
-
-                        const existingIds = $('#portfolio_ids').val().split(',').filter(id => id);
-
-                        selection.map(function (attachment) {
-                            attachment = attachment.toJSON();
-                            portfolioIds.push(attachment.id);
-
-                            if (!existingIds.includes(attachment.id.toString())) {
-                                portfolioContainer.append(`
-                            <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="${attachment.id}">
-                                <div class="portfolio-image-wrapper position-relative">
-                                    <img src="${attachment.sizes.thumbnail.url}" class="img-fluid" alt="${attachment.title}">
-                                    <button type="button" class="remove-portfolio-image btn-close position-absolute" aria-label="Remove"></button>
-                                </div>
-                            </div>
-                        `);
+                    // Create or reuse media uploader instance
+                    if (!mediaUploader) {
+                        mediaUploader = wp.media({
+                            title: window.jobus_portfolio_upload_title || esc_html__('Select Portfolio Images', 'jobus'),
+                            button: {
+                                text: window.jobus_portfolio_select_text || esc_html__('Add to Portfolio', 'jobus')
+                            },
+                            multiple: true,
+                            library: {
+                                type: 'image'
                             }
                         });
 
-                        const allIds = [...new Set([...existingIds, ...portfolioIds])];
-                        $('#portfolio_ids').val(allIds.join(','));
-                    });
+                        // Handle image selection
+                        mediaUploader.on('select', function () {
+                            const selection = mediaUploader.state().get('selection');
+                            const portfolioIds = [];
+                            const existingIds = portfolioIdsField.val().split(',').filter(id => id);
+
+                            selection.map(function (attachment) {
+                                attachment = attachment.toJSON();
+                                portfolioIds.push(attachment.id);
+
+                                if (!existingIds.includes(attachment.id.toString())) {
+                                    appendPortfolioItem(attachment);
+                                }
+                            });
+
+                            // Update hidden input with all IDs, maintaining order
+                            const allIds = [...existingIds, ...portfolioIds];
+                            portfolioIdsField.val([...new Set(allIds)].join(','));
+                        });
+                    }
 
                     mediaUploader.open();
                 });
             }
 
+            /**
+             * Appends a new portfolio item to the container
+             * @private
+             * @param {Object} attachment - WordPress media attachment object
+             */
+            function appendPortfolioItem(attachment) {
+                const thumbnailUrl = attachment.sizes?.thumbnail?.url || attachment.url;
+                portfolioContainer.append(`
+                    <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="${attachment.id}">
+                        <div class="portfolio-image-wrapper position-relative">
+                            <img src="${thumbnailUrl}" class="img-fluid" alt="${attachment.alt || attachment.title}">
+                            <button type="button" class="remove-portfolio-image btn-close position-absolute" 
+                                    aria-label="${esc_html__('Remove', 'jobus')}">
+                            </button>
+                        </div>
+                    </div>
+                `);
+            }
+
+            /**
+             * Sets up image removal functionality
+             * @private
+             */
             function setupImageRemoval() {
                 $(document).on('click', '.remove-portfolio-image', function (e) {
                     e.preventDefault();
                     const item = $(this).closest('.portfolio-item');
                     const imageId = item.data('id');
 
-                    if (confirm(window.jobus_confirm_remove_text || 'Are you sure you want to remove this image?')) {
-                        const currentIds = $('#portfolio_ids').val().split(',').filter(id => id && id != imageId);
-                        $('#portfolio_ids').val(currentIds.join(','));
+                    if (confirm(window.jobus_confirm_remove_text || esc_html__('Are you sure you want to remove this image?', 'jobus'))) {
+                        // Update hidden input value by filtering out removed ID
+                        const currentIds = portfolioIdsField.val().split(',').filter(id => id && id != imageId);
+                        portfolioIdsField.val(currentIds.join(','));
 
+                        // Remove item with animation
                         item.fadeOut('fast', function () {
                             $(this).remove();
                         });
@@ -738,8 +763,12 @@
                 });
             }
 
+            /**
+             * Initializes the portfolio manager functionality
+             * @public
+             */
             function init() {
-                if (portfolioSection.length) {
+                if (portfolioSection.length && window.wp && window.wp.media) {
                     setupMediaUploader();
                     setupImageRemoval();
                 }
@@ -747,7 +776,6 @@
 
             return { init };
         },
-
 
         /**
          * Handles candidate taxonomy management (categories, locations, skills) in the dashboard.
@@ -766,6 +794,11 @@
             const $input = $(taxonomy.inputSelector);
             let $inputWrapper = $list.find('.taxonomy-input-wrapper');
 
+            if (!jobus_dashboard_params || !jobus_dashboard_params.ajax_url) {
+                console.error('Dashboard parameters not properly initialized');
+                return;
+            }
+
             if ($inputWrapper.length === 0) {
                 $inputWrapper = $(`
                     <li class="taxonomy-input-wrapper" style="display:none;">
@@ -779,6 +812,7 @@
             const $textInput = $inputWrapper.find('input');
             const $suggestions = $inputWrapper.find('.taxonomy-suggestions');
 
+            // Show input on plus button click
             $list.on('click', '.more_tag button', function (e) {
                 e.preventDefault();
                 $inputWrapper.show();
@@ -786,29 +820,55 @@
                 $suggestions.hide().empty();
             });
 
+            // Remove tag on click
             $list.on('click', '.is_tag button', function (e) {
                 e.preventDefault();
                 const $tag = $(this).closest('.is_tag');
                 const termId = $tag.data(taxonomy.dataAttr);
-                $tag.remove();
-                let ids = $input.val() ? $input.val().split(',') : [];
-                ids = ids.filter(id => id != termId);
-                $input.val(ids.join(','));
+
+                // Remove the tag from UI
+                $tag.fadeOut(200, function() {
+                    $(this).remove();
+
+                    // Update hidden input value by getting all remaining term IDs
+                    const remainingIds = [];
+                    $list.find('.is_tag').each(function() {
+                        remainingIds.push($(this).data(taxonomy.dataAttr));
+                    });
+                    $input.val(remainingIds.join(','));
+                });
             });
 
+            // Handle form submission
+            const $form = $list.closest('form');
+            $form.on('submit', function(e) {
+                // Update hidden input one final time before submission
+                const finalIds = [];
+                $list.find('.is_tag').each(function() {
+                    finalIds.push($(this).data(taxonomy.dataAttr));
+                });
+                $input.val(finalIds.join(','));
+            });
+
+            // Handle input for suggestions
             $textInput.on('input', function () {
                 const query = $textInput.val().trim();
                 if (query.length < 1) {
                     $suggestions.hide().empty();
                     return;
                 }
+
                 $.ajax({
                     url: jobus_dashboard_params.ajax_url,
                     type: 'POST',
                     data: {
                         action: 'jobus_suggest_taxonomy_terms',
+                        security: jobus_dashboard_params.suggest_taxonomy_nonce,
                         taxonomy: taxonomy.taxonomy,
                         term_query: query
+                    },
+                    beforeSend: function() {
+                        $textInput.addClass('loading');
                     },
                     success: function (response) {
                         if (response.success && response.data && response.data.length) {
@@ -822,66 +882,55 @@
                         }
                     },
                     error: function () {
+                        alert(jobus_dashboard_params.texts.taxonomy_suggest_error);
                         $suggestions.hide().empty();
+                    },
+                    complete: function() {
+                        $textInput.removeClass('loading');
                     }
                 });
             });
 
+            // Handle suggestion click
             $suggestions.on('click', 'li', function () {
                 const termId = $(this).data('term-id');
                 const termName = $(this).text();
-                const newTag = $(`
-                    <li class="is_tag" data-${taxonomy.dataAttr}="${termId}">
-                        <button type="button">${termName} <i class="bi bi-x"></i></button>
-                    </li>
-                `);
-                $list.find('.more_tag').before(newTag);
-                let ids = $input.val() ? $input.val().split(',') : [];
-                if (!ids.includes(termId.toString())) {
-                    ids.push(termId);
-                }
-                $input.val(ids.join(','));
-                $textInput.val('');
-                $inputWrapper.hide();
-                $suggestions.hide().empty();
+                addTerm(termId, termName);
             });
 
+            // Handle term creation on Enter
             $textInput.on('keydown', function (e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     const termName = $textInput.val().trim();
                     if (!termName) return;
+
                     $textInput.prop('disabled', true).attr('placeholder', 'Creating...');
+
                     $.ajax({
                         url: jobus_dashboard_params.ajax_url,
                         type: 'POST',
                         data: {
                             action: 'jobus_create_taxonomy_term',
+                            security: jobus_dashboard_params.create_taxonomy_nonce,
                             term_name: termName,
                             taxonomy: taxonomy.taxonomy
                         },
                         success: function (response) {
                             if (response.success) {
-                                const newTag = $(`
-                            <li class="is_tag" data-${taxonomy.dataAttr}="${response.data.term_id}">
-                                <button type="button">${response.data.term_name} <i class="bi bi-x"></i></button>
-                            </li>
-                        `);
-                                $list.find('.more_tag').before(newTag);
-                                let ids = $input.val() ? $input.val().split(',') : [];
-                                ids.push(response.data.term_id);
-                                $input.val(ids.join(','));
-                                $textInput.val('').prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                                addTerm(response.data.term_id, response.data.term_name);
+                                $textInput.val('');
                                 $inputWrapper.hide();
-                                $suggestions.hide().empty();
                             } else {
-                                alert(response.data?.message || 'Error creating term');
-                                $textInput.prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                                alert(response.data?.message || jobus_dashboard_params.texts.taxonomy_create_error);
                             }
                         },
                         error: function () {
-                            alert('Server error. Please try again.');
-                            $textInput.prop('disabled', false).attr('placeholder', 'Type and press Enter to add');
+                            alert(jobus_dashboard_params.texts.taxonomy_create_error);
+                        },
+                        complete: function() {
+                            $textInput.prop('disabled', false)
+                                    .attr('placeholder', 'Type and press Enter to add');
                         }
                     });
                 } else if (e.key === 'Escape') {
@@ -890,13 +939,34 @@
                 }
             });
 
+            // Handle input blur
             $textInput.on('blur', function () {
                 setTimeout(function () {
                     $inputWrapper.hide();
                     $suggestions.hide().empty();
                 }, 150);
             });
-        }
+
+            // Helper function to add a term to the list
+            function addTerm(termId, termName) {
+                const newTag = $(`
+                    <li class="is_tag" data-${taxonomy.dataAttr}="${termId}">
+                        <button type="button">${termName} <i class="bi bi-x"></i></button>
+                    </li>
+                `);
+                $list.find('.more_tag').before(newTag);
+
+                let ids = $input.val() ? $input.val().split(',') : [];
+                if (!ids.includes(termId.toString())) {
+                    ids.push(termId);
+                }
+                $input.val(ids.join(','));
+
+                $textInput.val('');
+                $inputWrapper.hide();
+                $suggestions.hide().empty();
+            }
+        },
 
     };
 
