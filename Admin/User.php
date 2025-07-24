@@ -23,9 +23,6 @@ class User {
 		// Add Manage Custom User Roles
 		register_activation_hook( __FILE__, [ $this, 'add_user_roles' ] );
 
-		// Hook to remove user roles on plugin/theme deactivation
-		register_deactivation_hook( __FILE__, [ $this, 'remove_user_roles' ] );
-
 		// Handle Candidate Registration for non-logged and logged-in in users
 		add_action( 'admin_post_nopriv_register_candidate', [ $this, 'candidate_registration' ] );
 		add_action( 'admin_post_register_candidate', [ $this, 'candidate_registration' ] );
@@ -40,7 +37,6 @@ class User {
 		// User-Candidate Synchronization
 		add_action( 'user_register', [ $this, 'create_candidate_post_for_user' ] );
 		add_action( 'profile_update', [ $this, 'create_candidate_post_for_user' ] );
-
 	}
 
 	public function manage_user_roles(): void {
@@ -50,25 +46,8 @@ class User {
 	public function add_user_roles(): void {
 
 		add_role( 'jobus_candidate', esc_html__( 'Candidate (Jobus)', 'jobus' ), array(
-			'read'                      => true,
-			'read_post'                 => true,
-			'read_private_posts'        => true,
-			'edit_post'                 => true,
-			'edit_posts'                => true,
-			'edit_others_posts'         => false, // Restrict editing others' posts
-			'edit_private_posts'        => true,
-			'edit_published_posts'      => true,
-			'create_posts'              => true,
-			'publish_posts'             => true,
-			'delete_post'               => true,
-			'delete_posts'              => true,
-			'delete_private_posts'      => true,
-			'delete_others_posts'       => false, // Restrict deleting others' posts
-			'delete_published_posts'    => true,
-			'manage_categories'         => true,  // Capability to manage categories
-			'manage_candidate_cat'      => true,  // Capability to manage candidate categories
-			'manage_candidate_location' => true,  // Ability to manage candidate locations
-			'manage_candidate_skill'    => true,  // Ability to manage candidate skills
+			'read'         => true,  // Only allow reading
+			'edit_profile' => true,  // Allow editing their own profile
 		) );
 
 		add_role( 'jobus_employer', esc_html__( 'Employer (Jobus)', 'jobus' ), array(
@@ -88,11 +67,6 @@ class User {
 			'delete_others_posts'    => false, // Restrict deleting others' posts
 			'delete_published_posts' => true,
 		) );
-	}
-
-	public function remove_user_roles(): void {
-		remove_role( 'jobus_candidate' );
-		remove_role( 'jobus_employer' );
 	}
 
 	public function candidate_registration(): void {

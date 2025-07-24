@@ -92,7 +92,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                                     </td>
                                     <td class="job-title">
                                         <a href="<?php echo esc_url( $job_link ); ?>" class="job-link fw-500 text-dark">
-                                            <?php echo esc_html( $job_title ? $job_title : __( 'Job not found', 'jobus' ) ); ?>
+                                            <?php echo esc_html($job_title); ?>
                                         </a>
                                     </td>
                                     <td class="job-date">
@@ -100,7 +100,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                                     </td>
                                     <td class="job-status">
                                             <span class="badge <?php echo esc_attr( $status_class ); ?>">
-                                                <?php echo esc_html( ucfirst( __( $status, 'jobus' ) ) ); ?>
+                                                <?php echo esc_html( ucfirst( $status )); ?>
                                             </span>
                                     </td>
                                     <td class="job-actions">

@@ -90,9 +90,8 @@ class Candidate {
 				'edit_others_posts'      => 'edit_others_posts',
 				'publish_posts'          => 'publish_posts',
 				'read_private_posts'     => 'read_private_posts',
-				'create_posts'           => 'edit_posts'
+				'create_posts'           => false // Set too false to remove add new button
 			),
-			'show_in_rest'       => true, // Enable Gutenberg editor
 			'rest_base'          => 'candidates',
 		);
 

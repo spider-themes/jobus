@@ -9,6 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+$candidate = get_posts([
+	'post_type' => 'jobus_candidate',
+	'author' => get_current_user_id(),
+	'numberposts' => 1,
+]);
+
+$profile_url = !empty($candidate) ? get_permalink($candidate[0]) : '';
+
 $logo = jobus_opt( 'dashboard_logo' );
 ?>
 <aside class="dash-aside-navbar">
@@ -31,7 +39,6 @@ $logo = jobus_opt( 'dashboard_logo' );
 
             <!-- /.user-avatar -->
             <div class="user-name-data">
-
                 <button class="user-name dropdown-toggle" type="button" id="profile-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                         aria-expanded="false">
 					<?php echo esc_html( $user->display_name ); ?>
@@ -39,28 +46,12 @@ $logo = jobus_opt( 'dashboard_logo' );
 
                 <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-profile.html">
-                            <img src="../images/lazy.svg" data-src="images/icon/icon_23.svg" alt="" class="lazy-img">
-                            <span class="ms-2 ps-1">Profile</span>
+                        <a href="<?php echo esc_url($profile_url); ?>" class="dropdown-item d-flex align-items-center">
+                            <img src="<?php echo JOBUS_IMG . '/dashboard/icons/profile.svg' ?>" alt="<?php esc_attr_e( 'Candidate Profile', 'jobus' ); ?>" class="lazy-img">
+                            <span class="ms-2 ps-1"><?php esc_html_e( 'View Profile', 'jobus' ); ?></span>
                         </a>
                     </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="candidate-dashboard-settings.html">
-                            <img src="../images/lazy.svg" data-src="images/icon/icon_24.svg" alt="" class="lazy-img">
-                            <span class="ms-2 ps-1">Account Settings</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <img src="../images/lazy.svg" data-src="images/icon/icon_25.svg" alt="" class="lazy-img">
-                            <span class="ms-2 ps-1">Notification</span>
-                        </a>
-                    </li>
-
                 </ul>
-
             </div>
         </div>
 
@@ -70,7 +61,7 @@ $logo = jobus_opt( 'dashboard_logo' );
 				'menu'            => 'jobus_candidate_menu',
 				'theme_location'  => 'jobus_candidate_menu',
 				'container'       => 'nav',
-				'container_class' => 'dasboard-main-nav',
+				'container_class' => 'dashboard-main-nav',
 				'menu_class'      => 'style-none',
 				'fallback_cb'     => false,
 				'depth'           => 1,
@@ -79,19 +70,9 @@ $logo = jobus_opt( 'dashboard_logo' );
 		}
 		?>
 
-        <!-- /.dasboard-main-nav -->
-        <div class="profile-complete-status">
-            <div class="progress-value fw-500">87%</div>
-            <div class="progress-line position-relative">
-                <div class="inner-line" style="width:80%;"></div>
-            </div>
-            <p> <?php esc_html_e( 'Profile Complete', 'jobus' ); ?> </p>
-        </div>
-        <!-- /.profile-complete-status -->
-
-        <a href="#" class="d-flex w-100 align-items-center logout-btn">
-            <img src="../images/lazy.svg" data-src="images/icon/icon_9.svg" alt="" class="lazy-img">
-            <span>Logout</span>
+        <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="d-flex w-100 align-items-center logout-btn mt-25">
+            <img src="<?php echo JOBUS_IMG . '/dashboard/icons/logout.svg' ?>" alt="<?php esc_attr_e('Logout', 'jobus'); ?>" class="lazy-img">
+            <span><?php esc_html_e('Logout', 'jobus'); ?></span>
         </a>
     </div>
 </aside>

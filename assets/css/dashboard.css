@@ -12,7 +12,7 @@ Table of Contents:
 02/ Mixins
 03/ Dashboard Layout & Components
 =====================================================*/
-.dash-aside-navbar .dasboard-main-nav .menu-item .active img {
+.dash-aside-navbar .dashboard-main-nav .menu-item .active img {
   filter: brightness(0) saturate(100%) invert(1);
 }
 
@@ -107,7 +107,7 @@ Table of Contents:
 .dash-aside-navbar .user-data .user-name:after {
   vertical-align: 3px;
 }
-.dash-aside-navbar .dasboard-main-nav li a {
+.dash-aside-navbar .dashboard-main-nav li a {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.16px;
@@ -120,17 +120,17 @@ Table of Contents:
   -o-transition: all 0.25s ease-in-out 0s;
   transition: all 0.25s ease-in-out 0s;
 }
-.dash-aside-navbar .dasboard-main-nav li a span {
+.dash-aside-navbar .dashboard-main-nav li a span {
   padding-left: 10px;
 }
-.dash-aside-navbar .dasboard-main-nav li a:hover {
+.dash-aside-navbar .dashboard-main-nav li a:hover {
   color: #3c8968;
 }
-.dash-aside-navbar .dasboard-main-nav li a.active {
+.dash-aside-navbar .dashboard-main-nav li a.active {
   background: #3F634D;
   color: #fff;
 }
-.dash-aside-navbar .dasboard-main-nav li a img {
+.dash-aside-navbar .dashboard-main-nav li a img {
   max-width: 20px;
 }
 .dash-aside-navbar .profile-complete-status {
@@ -1639,6 +1639,47 @@ Table of Contents:
   font-family: "gordita";
   font-size: 24px;
   color: #31795A;
+}
+
+.dashboard-body .placeholder_icon {
+  position: absolute;
+  height: 60px;
+  top: 30px;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  text-align: center;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 17px;
+}
+.dashboard-body .placeholder_icon span {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+.dashboard-body .placeholder_icon span::before {
+  content: "";
+  width: 2px;
+  height: 26px;
+  background: #000;
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  transform: rotate(45deg);
+  z-index: 5;
+  transition: all 0.2s ease-in-out;
+}
+.dashboard-body .placeholder_icon span.eye-slash::before {
+  opacity: 0;
+}
+.dashboard-body .placeholder_icon span img {
+  position: relative;
+  top: 50%;
+  margin: 0 auto;
+  transform: translateY(-50%);
 }
 
 /*# sourceMappingURL=dashboard.css.map */
