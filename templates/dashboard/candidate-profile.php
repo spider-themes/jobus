@@ -27,7 +27,7 @@ $description = $description_data['description'];
 $avatar_url = $description_data['avatar_url'];
 
 // Include Sidebar Menu
-include( 'candidate-templates/sidebar-menu.php' );
+//include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body">

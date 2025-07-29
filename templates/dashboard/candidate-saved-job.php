@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user = wp_get_current_user();
 
 // Include Sidebar Menu
-include( 'candidate-templates/sidebar-menu.php' );
+//include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body">

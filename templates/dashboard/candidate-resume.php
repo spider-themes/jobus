@@ -28,7 +28,7 @@ $taxonomy_data = $candidate_form->get_candidate_taxonomies($candidate_id);
 $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
 
 // Include Sidebar Menu
-include('candidate-templates/sidebar-menu.php');
+//include('candidate-templates/sidebar-menu.php');
 ?>
 <div class="dashboard-body">
     <div class="position-relative">

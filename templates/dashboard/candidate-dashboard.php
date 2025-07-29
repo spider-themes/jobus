@@ -53,11 +53,8 @@ $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true
 $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
 
 // Include sidebar menu
-include( 'candidate-templates/sidebar-menu.php' );
+//include( 'candidate-templates/sidebar-menu.php' );
 ?>
-
-
-<div class="dashboard-body">
     <div class="position-relative">
 
         <!--Dashboard Candidate -->
@@ -158,8 +155,8 @@ include( 'candidate-templates/sidebar-menu.php' );
                                 <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                                 <div class="job-title">
                                     <h6 class="mb-5">
-                                        <a href="<?php echo get_the_permalink( $job_id ); ?>">
-											<?php echo get_the_title( $job_id ); ?>
+                                        <a href="<?php echo esc_url( get_the_permalink( $job_id ) ); ?>">
+											<?php echo esc_html( get_the_title( $job_id ) ); ?>
                                         </a>
                                     </h6>
                                     <div class="meta">
@@ -192,4 +189,3 @@ include( 'candidate-templates/sidebar-menu.php' );
             </div>
         </div>
     </div>
-</div>

@@ -18,41 +18,93 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Dashboard
  *
  * @package Jobus\Includes\Frontend
+ *
+ * WooCommerce My Account style dashboard controller:
+ * - Handles endpoint detection (like WooCommerce)
+ * - Loads sidebar and main content
+ * - Passes active endpoint to sidebar for highlighting
+ * - Content templates only render their own content (no sidebar)
  */
 class Dashboard {
 
 	public function __construct() {
 
-		// Register a shortcode for the user dashboard
-		add_shortcode( 'jobus_user_dashboard', [ $this, 'user_dashboard' ] );
-		add_shortcode( 'jobus_user_profile', [ $this, 'user_profile' ] );
-		add_shortcode( 'jobus_user_resume', [ $this, 'user_resume' ] );
-		add_shortcode( 'jobus_user_message', [ $this, 'user_message' ] );
-		add_shortcode( 'jobus_user_job_applied', [ $this, 'user_job_applied' ] );
-		add_shortcode( 'jobus_user_saved_job', [ $this, 'user_saved_job' ] );
-		add_shortcode( 'jobus_user_change_password', [ $this, 'user_change_password' ] );
-		add_shortcode( 'jobus_user_delete_account', [ $this, 'user_delete_account' ] );
+		// Register a single shortcode for the candidate dashboard
+		add_shortcode( 'jobus_candidate_dashboard', [ $this, 'candidate_dashboard' ] );
 
+		// Register endpoints for each dashboard section
+		add_action( 'init', [ $this, 'register_dashboard_endpoints' ] );
 	}
 
-	public function user_delete_account(): string {
+	public function register_dashboard_endpoints(): void {
+		add_rewrite_endpoint( 'dashboard', EP_PAGES );
+		add_rewrite_endpoint( 'profile', EP_PAGES );
+		add_rewrite_endpoint( 'resume', EP_PAGES );
+		add_rewrite_endpoint( 'applied-jobs', EP_PAGES );
+		add_rewrite_endpoint( 'saved-jobs', EP_PAGES );
+		add_rewrite_endpoint( 'change-password', EP_PAGES );
+	}
+
+	public function candidate_dashboard() {
 		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_delete_account( $user );
-			}
-
+			return Template_Loader::get_template_part( 'dashboard/need-login' );
+		}
+		$user = wp_get_current_user();
+		$roles = $user->roles;
+		if ( ! in_array( 'jobus_candidate', $roles ) ) {
+			return Template_Loader::get_template_part( 'dashboard/not-allowed' );
 		}
 
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
+		$nav_items = [
+			'dashboard'        => __( 'Dashboard', 'jobus' ),
+			'profile'          => __( 'Profile', 'jobus' ),
+			'resume'           => __( 'Resume', 'jobus' ),
+			'applied-jobs'     => __( 'Applied Jobs', 'jobus' ),
+			'saved-jobs'       => __( 'Saved Jobs', 'jobus' ),
+			'change-password'  => __( 'Change Password', 'jobus' ),
+		];
+
+		$active = 'dashboard';
+		foreach ( $nav_items as $endpoint => $label ) {
+			if ( isset( $GLOBALS['wp_query']->query_vars[ $endpoint ] ) ) {
+				$active = $endpoint;
+				break;
+			}
+		}
+
+		ob_start();
+
+		echo '<div class="dashboard-wrapper">';
+		echo '<aside class="dash-aside-navbar">';
+		echo $this->load_sidebar_menu($active);
+		echo '</aside>';
+		echo '<main class="dashboard-body">';
+
+		switch ( $active ) {
+			case 'profile':
+				echo $this->load_candidate_profile( $user );
+				break;
+			case 'resume':
+				echo $this->load_candidate_resume( $user );
+				break;
+			case 'applied-jobs':
+				echo $this->load_candidate_job_applied( $user );
+				break;
+			case 'saved-jobs':
+				echo $this->load_candidate_saved_job( $user );
+				break;
+			case 'change-password':
+				echo $this->load_candidate_change_password( $user );
+				break;
+			default:
+				echo $this->load_candidate_dashboard( $user );
+				break;
+		}
+
+		echo '</main>';
+		echo '</div>';
+
+		return ob_get_clean();
 	}
 
 
@@ -63,35 +115,14 @@ class Dashboard {
 	 *
 	 * @return string Candidate dashboard HTML.
 	 */
-	private function load_candidate_delete_account( wP_User $user ): string {
+	private function load_candidate_dashboard( WP_User $user ): string {
 
 		// Load the candidate dashboard template with passed user data
-		return Template_Loader::get_template_part( 'dashboard/candidate-delete-account', [
+		return Template_Loader::get_template_part( 'dashboard/candidate-dashboard', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
 
-	}
-
-
-	public function user_change_password(): string {
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_change_password( $user );
-			}
-
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
 	}
 
 
@@ -113,28 +144,6 @@ class Dashboard {
 	}
 
 
-	public function user_saved_job(): string {
-
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_saved_job( $user );
-			}
-
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
-	}
-
 	/**
 	 * Load the candidate dashboard template.
 	 *
@@ -152,27 +161,6 @@ class Dashboard {
 	}
 
 
-	public function user_job_applied(): string {
-
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_job_applied( $user );
-			}
-
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-	}
-
 	/**
 	 * Load the candidate dashboard template.
 	 *
@@ -180,7 +168,7 @@ class Dashboard {
 	 *
 	 * @return string Candidate dashboard HTML.
 	 */
-	private function load_candidate_job_applied( wP_User $user ): string {
+	private function load_candidate_job_applied( WP_User $user ): string {
 
 		// Load the candidate dashboard template with passed user data
 		return Template_Loader::get_template_part( 'dashboard/candidate-job-applied', [
@@ -190,64 +178,6 @@ class Dashboard {
 
 	}
 
-
-	public function user_message( $atts ): string {
-
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_message( $user );
-			}
-
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
-	}
-
-	/**
-	 * Load the candidate dashboard template.
-	 *
-	 * @param WP_User $user The current user.
-	 *
-	 * @return string Candidate dashboard HTML.
-	 */
-	private function load_candidate_message( WP_User $user ): string {
-		// Load the candidate dashboard template with passed user data
-		return Template_Loader::get_template_part( 'dashboard/candidate-message', [
-			'user_id'  => $user->ID,
-			'username' => $user->user_login,
-		] );
-	}
-
-
-	public function user_resume( $atts ): string {
-
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_resume( $user );
-			}
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-	}
 
 	/**
 	 * Load the candidate dashboard template.
@@ -262,29 +192,6 @@ class Dashboard {
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
-	}
-
-
-	public function user_profile( $atts ): string {
-
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_profile( $user );
-			}
-
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-
 	}
 
 
@@ -306,51 +213,13 @@ class Dashboard {
 	}
 
 
-	/**
-	 * Shortcode handler for the user dashboard.
-	 *
-	 * @param array $atts Shortcode attributes.
-	 *
-	 * @return string Output for the user dashboard.
-	 */
-	public function user_dashboard( array $atts ): string {
+	private function load_sidebar_menu( $active ): string {
 
-		// Check if the user is logged in
-		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' ); // Redirect to log in if not logged in
-		} else {
-			// Get the current user and roles
-			$user  = wp_get_current_user();
-			$roles = $user->roles;
-
-			// Admin users do not have a specific dashboard view
-			if ( in_array( 'administrator', $roles ) ) {
-				return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-			}
-
-			// Load the candidate dashboard if a user has the 'jobus_candidate' role
-			if ( in_array( 'jobus_candidate', $roles ) ) {
-				return $this->load_candidate_dashboard( $user );
-			}
-		}
-
-		// Default fallback for users without access
-		return Template_Loader::get_template_part( 'dashboard/not-allowed' );
-	}
-
-
-	/**
-	 * Load the candidate dashboard template.
-	 *
-	 * @param WP_User $user The current user.
-	 *
-	 * @return string Candidate dashboard HTML.
-	 */
-	private function load_candidate_dashboard( WP_User $user ): string {
-		// Load the candidate dashboard template with passed user data
-		return Template_Loader::get_template_part( 'dashboard/candidate-dashboard', [
-			'user_id'  => $user->ID,
-			'username' => $user->user_login,
+		// Load the sidebar menu template with the active endpoint
+		return Template_Loader::get_template_part( 'dashboard/candidate-templates/sidebar-menu', [
+			'active_endpoint' => $active,
 		] );
+
 	}
+
 }

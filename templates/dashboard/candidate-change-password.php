@@ -53,7 +53,7 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
 }
 
 //Sidebar Menu
-include( 'candidate-templates/sidebar-menu.php' );
+//include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body position-relative">

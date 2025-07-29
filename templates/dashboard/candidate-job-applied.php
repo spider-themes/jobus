@@ -23,7 +23,7 @@ $args = array(
 $applications = new \WP_Query( $args );
 
 // Include Sidebar Menu
-include( 'candidate-templates/sidebar-menu.php' );
+//include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
 <div class="dashboard-body">
@@ -108,7 +108,7 @@ include( 'candidate-templates/sidebar-menu.php' );
                                             <a href="javascript:void(0)"
                                                class="save-btn text-center rounded-circle tran3s remove-application"
                                                data-job_id="<?php echo esc_attr(get_the_ID()); ?>"
-                                               data-nonce="<?php echo wp_create_nonce('jobus_remove_application_nonce'); ?>"
+                                               data-nonce="<?php echo esc_attr(wp_create_nonce('jobus_remove_application_nonce')); ?>"
                                                title="<?php esc_attr_e('Remove Application', 'jobus'); ?>">
                                                 <i class="bi bi-x-circle-fill"></i>
                                             </a>
