@@ -9,51 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-global $wp;
-
 // Get current user and base dashboard URL
 $user = wp_get_current_user();
 $dashboard_url = get_permalink();
 
-
-// If on base dashboard URL (no endpoint), set to dashboard
-if ($dashboard_url === home_url( add_query_arg( [], $wp->request ) . '/' )) {
-	$active_endpoint = 'dashboard';
-}
-
-// Define endpoints and menu items
-$menu_items = [
-	[
-		'endpoint' => 'dashboard',
-		'label' => __( 'Dashboard', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_1_active.svg',
-	],
-	[
-		'endpoint' => 'profile',
-		'label' => __( 'My Profile', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_2.svg',
-	],
-	[
-		'endpoint' => 'resume',
-		'label' => __( 'Resume', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_3.svg',
-	],
-	[
-		'endpoint' => 'applied-jobs',
-		'label' => __( 'Applied Jobs', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_5.svg',
-	],
-	[
-		'endpoint' => 'saved-jobs',
-		'label' => __( 'Saved Jobs', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_6.svg',
-	],
-	[
-		'endpoint' => 'change-password',
-		'label' => __( 'Account Settings', 'jobus' ),
-		'icon' => JOBUS_IMG . '/dashboard/icons/icon_7.svg',
-	],
-];
+// Use menu_items passed from Dashboard class
+$menu_items = $args['menu_items'] ?? [];
 
 // Determine active endpoint from $args if available, otherwise default to dashboard
 $active_endpoint = $args['active_endpoint'] ?? 'dashboard';
@@ -104,13 +65,13 @@ $logo = jobus_opt( 'dashboard_logo' );
         </div>
     </div>
 
-    <nav class="dashboard-main-nav">
+    <nav class="main-nav">
         <ul class="style-none">
 			<?php
-			foreach ( $menu_items as $item ) :
-				$url = trailingslashit( $dashboard_url ) . $item['endpoint'] . '/';
-				$is_active = $active_endpoint === $item['endpoint'];
-				$align_class = 'd-flex w-100 align-items-center dashboard-navigation-link dashboard-navigation-link--' . $item['endpoint'];
+			foreach ( $menu_items as $endpoint => $item ) :
+				$url = trailingslashit( $dashboard_url ) . $endpoint . '/';
+				$is_active = $active_endpoint === $endpoint;
+				$align_class = 'd-flex w-100 align-items-center dashboard-navigation-link dashboard-navigation-link--' . $endpoint;
 				if ( $is_active ) {
 					$align_class .= ' active';
 				}

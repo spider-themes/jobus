@@ -1,10 +1,8 @@
-.dash-aside-navbar {
-  .dashboard-main-nav {
-    .menu-item {
-      .active {
-        img {
-          filter: brightness(0) saturate(100%) invert(1);
-        }
+.dashboard-navbar {
+  .main-nav {
+    .active {
+      img {
+        filter: brightness(0) saturate(100%) invert(1);
       }
     }
   }

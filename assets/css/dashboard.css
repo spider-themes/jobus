@@ -12,15 +12,15 @@ Table of Contents:
 02/ Mixins
 03/ Dashboard Layout & Components
 =====================================================*/
-.dash-aside-navbar .dashboard-main-nav .menu-item .active img {
+.dashboard-navbar .main-nav .active img {
   filter: brightness(0) saturate(100%) invert(1);
 }
 
-.admin-bar .dash-aside-navbar {
+.admin-bar .dashboard-navbar {
   margin-top: 32px;
 }
 
-.dash-aside-navbar {
+.dashboard-navbar {
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -32,25 +32,25 @@ Table of Contents:
   background: #fff;
   padding: 30px 20px 30px;
 }
-.dash-aside-navbar::-webkit-scrollbar {
+.dashboard-navbar::-webkit-scrollbar {
   width: 5px;
 }
-.dash-aside-navbar::-webkit-scrollbar-track {
+.dashboard-navbar::-webkit-scrollbar-track {
   background: #fff;
 }
-.dash-aside-navbar::-webkit-scrollbar-thumb {
+.dashboard-navbar::-webkit-scrollbar-thumb {
   background: #fff;
   border-radius: 0;
 }
-.dash-aside-navbar .user-data .user-avatar {
+.dashboard-navbar .user-data .user-avatar {
   width: 75px;
   height: 75px;
   margin: 40px auto 0;
 }
-.dash-aside-navbar .user-data .user-avatar img {
+.dashboard-navbar .user-data .user-avatar img {
   border-radius: 50%;
 }
-.dash-aside-navbar .user-data .user-avatar.online:before {
+.dashboard-navbar .user-data .user-avatar.online:before {
   content: "";
   position: absolute;
   width: 15px;
@@ -62,14 +62,14 @@ Table of Contents:
   bottom: 10px;
   z-index: 1;
 }
-.dash-aside-navbar .user-data .user-name-data .dropdown-menu {
+.dashboard-navbar .user-data .user-name-data .dropdown-menu {
   width: 100%;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   padding: 12px 0;
 }
-.dash-aside-navbar .user-data .user-name-data .dropdown-menu .dropdown-item {
+.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item {
   text-transform: capitalize;
   line-height: 45px;
   padding: 0 5px 0 20px;
@@ -86,28 +86,28 @@ Table of Contents:
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.dash-aside-navbar .user-data .user-name-data .dropdown-menu .dropdown-item i {
+.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item i {
   font-weight: 700;
   font-size: 1.1em;
 }
-.dash-aside-navbar .user-data .user-name-data .dropdown-menu .dropdown-item:hover {
+.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item:hover {
   color: #31795A;
   background: rgba(0, 0, 0, 0.01);
 }
-.dash-aside-navbar .user-data .user-name-data .dropdown-menu .dropdown-item img {
+.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item img {
   width: 20px;
 }
-.dash-aside-navbar .user-data .user-name {
+.dashboard-navbar .user-data .user-name {
   width: 100%;
   font-size: 18px;
   font-weight: 500;
   color: #244034;
   margin: 15px 0 45px;
 }
-.dash-aside-navbar .user-data .user-name:after {
+.dashboard-navbar .user-data .user-name:after {
   vertical-align: 3px;
 }
-.dash-aside-navbar .dashboard-main-nav li a {
+.dashboard-navbar .main-nav li a {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.16px;
@@ -120,46 +120,46 @@ Table of Contents:
   -o-transition: all 0.25s ease-in-out 0s;
   transition: all 0.25s ease-in-out 0s;
 }
-.dash-aside-navbar .dashboard-main-nav li a span {
+.dashboard-navbar .main-nav li a span {
   padding-left: 10px;
 }
-.dash-aside-navbar .dashboard-main-nav li a:hover {
+.dashboard-navbar .main-nav li a:hover {
   color: #3c8968;
 }
-.dash-aside-navbar .dashboard-main-nav li a.active {
+.dashboard-navbar .main-nav li a.active {
   background: #3F634D;
   color: #fff;
 }
-.dash-aside-navbar .dashboard-main-nav li a img {
+.dashboard-navbar .main-nav li a img {
   max-width: 20px;
 }
-.dash-aside-navbar .profile-complete-status {
+.dashboard-navbar .profile-complete-status {
   margin: 60px 0 75px 20px;
 }
-.dash-aside-navbar .profile-complete-status .progress-value {
+.dashboard-navbar .profile-complete-status .progress-value {
   color: #244034;
 }
-.dash-aside-navbar .profile-complete-status .progress-line {
+.dashboard-navbar .profile-complete-status .progress-line {
   height: 5px;
   border-radius: 10px;
   background: #3F634D;
   overflow: hidden;
   margin: 9px 0 3px;
 }
-.dash-aside-navbar .profile-complete-status .progress-line .inner-line {
+.dashboard-navbar .profile-complete-status .progress-line .inner-line {
   position: absolute;
   height: 100%;
   left: 0;
   top: 0;
   background: #D3FA38;
 }
-.dash-aside-navbar .profile-complete-status p {
+.dashboard-navbar .profile-complete-status p {
   font-size: 11px;
   font-weight: 500;
   margin: 0;
   color: rgba(36, 64, 52, 0.5);
 }
-.dash-aside-navbar .logout-btn {
+.dashboard-navbar .logout-btn {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.16px;
@@ -171,13 +171,13 @@ Table of Contents:
   -o-transition: all 0.25s ease-in-out 0s;
   transition: all 0.25s ease-in-out 0s;
 }
-.dash-aside-navbar .logout-btn span {
+.dashboard-navbar .logout-btn span {
   padding-left: 10px;
 }
-.dash-aside-navbar .logout-btn:hover {
+.dashboard-navbar .logout-btn:hover {
   color: #ff5656;
 }
-.dash-aside-navbar .close-btn {
+.dashboard-navbar .close-btn {
   font-size: 22px;
   font-weight: bold;
   color: #244034;

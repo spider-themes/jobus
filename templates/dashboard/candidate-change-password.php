@@ -51,12 +51,9 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
         $error_message = esc_html__( 'Security verification failed. Please try again.', 'jobus' );
     }
 }
-
-//Sidebar Menu
-//include( 'candidate-templates/sidebar-menu.php' );
 ?>
 
-<div class="dashboard-body position-relative">
+<div class="position-relative">
     <h2 class="main-title">
         <?php esc_html_e( 'Change Password', 'jobus' ); ?>
     </h2>
