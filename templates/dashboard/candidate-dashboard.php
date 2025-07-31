@@ -10,9 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
-if ( ! $user || ! in_array( 'jobus_candidate', $user->roles, true ) ) {
-	wp_die( esc_html__( 'Access denied. You must be a candidate to view this page.', 'jobus' ) );
-}
 
 // Initialize variables
 $applicants = [];

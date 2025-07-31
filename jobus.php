@@ -67,9 +67,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			$this->core_includes(); //Include the required files.
 
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
-
-			// Register the candidate menu for administrators only
-			add_action( 'init', [ $this, 'register_menu' ] );
 			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		}
 
@@ -84,22 +81,8 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-company.php';
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-candidate.php';
 			require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
-			require_once __DIR__ . '/Admin/csf/meta/meta-nav_menu.php';
 		}
 
-
-		/**
-		 * Registers navigation menus for the dashboard.
-		 *
-		 * This method registers a navigation menu with a specific location and description.
-		 *
-		 * @return void
-		 */
-		public function register_menu(): void {
-			register_nav_menus( [
-				'jobus_candidate_menu' => esc_html__( 'Candidate Menu', 'jobus' ),
-			] );
-		}
 
 		/**
 		 * Include Files
@@ -115,7 +98,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 			require_once __DIR__ . '/includes/Classes/Candidate_Form_Submission.php';
-			require_once __DIR__ . '/includes/Classes/Nav_Walker.php';
 
 			// Frontend UI
 			require_once __DIR__ . '/includes/Frontend/Assets.php';

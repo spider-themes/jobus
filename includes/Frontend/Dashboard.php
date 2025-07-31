@@ -80,13 +80,16 @@ class Dashboard {
 	 * @return string Dashboard HTML output.
 	 */
 	public function candidate_dashboard(): string {
+
 		if ( ! is_user_logged_in() ) {
-			return Template_Loader::get_template_part( 'dashboard/need-login' );
+			// Show the login form if user is not logged in
+			return Template_Loader::get_template_part( 'dashboard/login-form' );
 		}
+
 		$user = wp_get_current_user();
-		$roles = $user->roles;
-		if ( ! in_array( 'jobus_candidate', $roles ) ) {
-			return Template_Loader::get_template_part( 'dashboard/not-allowed' );
+		if ( ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
+			// If not a candidate, show the logout form (prevent dashboard access for other roles)
+			return Template_Loader::get_template_part( 'dashboard/logout-form' );
 		}
 
 		$nav_items = self::get_nav_items();

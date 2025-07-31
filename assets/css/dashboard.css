@@ -1469,6 +1469,20 @@ Table of Contents:
   height: auto;
 }
 
+/*========== Login Form Styling ===========*/
+.jobus-login-from.dashboard-body, .jobus-logout-from.dashboard-body {
+  margin-left: 0;
+}
+.jobus-login-from.dashboard-body .login_from, .jobus-logout-from.dashboard-body .login_from {
+  background-color: transparent;
+}
+.jobus-login-from .logout_from .user-data-form .btn, .jobus-logout-from .logout_from .user-data-form .btn {
+  line-height: 52px;
+  max-width: 50%;
+  margin: 0 auto;
+  color: #fff;
+}
+
 .cv-preview {
   display: flex;
   margin-bottom: 1rem;
