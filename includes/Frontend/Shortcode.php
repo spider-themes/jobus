@@ -124,7 +124,7 @@ class Shortcode {
 									   class="pass_log_id" required>
 								<span class="placeholder_icon">
 									<span class="passVicon">
-                                        <img src="<?php echo JOBUS_IMG . '/dashboard/icons/view.svg' ?>"
+                                        <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/view.svg') ?>"
                                              alt="<?php esc_attr_e( 'eye-icon', 'jobus' ); ?>">
 									</span>
 								</span>
@@ -169,8 +169,16 @@ class Shortcode {
 			$current_user = wp_get_current_user();
 			?>
 			<div class="text-center">
-				<h2><?php printf( esc_html__('Welcome, %s!', 'jobus'), esc_html($current_user->display_name) ); ?></h2>
-				<p><?php esc_html_e('You are currently logged in to your account.', 'jobus'); ?></p>
+                <h2>
+					<?php
+					// translators: %s: User's display name
+					echo sprintf(
+						esc_html__( 'Welcome, %s!', 'jobus' ),
+						esc_html( $current_user->display_name )
+					);
+					?>
+                </h2>
+                <p><?php esc_html_e('You are currently logged in to your account.', 'jobus'); ?></p>
 				<p><?php esc_html_e('If you wish to log out, please click the button below.', 'jobus'); ?></p>
 				<a href="<?php echo esc_url(wp_logout_url(home_url('/'))) ?>" class="btn btn-eleven fw-500 tran3s d-block mt-20">
 					<?php esc_html_e('Logout', 'jobus') ?>

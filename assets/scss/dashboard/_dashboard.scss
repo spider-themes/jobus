@@ -1723,6 +1723,17 @@
   }
 }
 
+.media-frame-toolbar {
+  .media-toolbar-primary {
+    .media-button {
+      position: unset;
+      transform: none;
+    }
+  }
+}
+
+
+
 /*========== Login Form Styling ===========*/
 .jobus-login-from, .jobus-logout-from {
   &.dashboard-body {

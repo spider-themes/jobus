@@ -1469,6 +1469,11 @@ Table of Contents:
   height: auto;
 }
 
+.media-frame-toolbar .media-toolbar-primary .media-button {
+  position: unset;
+  transform: none;
+}
+
 /*========== Login Form Styling ===========*/
 .jobus-login-from.dashboard-body, .jobus-logout-from.dashboard-body {
   margin-left: 0;

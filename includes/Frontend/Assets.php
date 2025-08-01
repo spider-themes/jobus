@@ -23,9 +23,6 @@ class Assets {
 		// Register Style's
 		wp_register_style( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.css' ), [], JOBUS_VERSION );
 
-		// Candidate Dashboard Style
-		wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
-
 		// Enqueue Style's
 		wp_enqueue_style( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.css' ), [], '5.1.3' );
 		wp_enqueue_style( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/nice-select.css' ), [], JOBUS_VERSION );
@@ -60,34 +57,34 @@ class Assets {
 			'candidate_email_nonce' => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form
 		] );
 
-		// Candidate Dashboard Scripts
-		wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-		wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
-			'ajax_url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
-			'taxonomy_nonce' => wp_create_nonce('jobus_taxonomy_nonce'),
-			'suggest_taxonomy_nonce' => wp_create_nonce('jobus_suggest_taxonomy_terms'),
-			'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
-			'texts' => [
-				'taxonomy_create_error' => esc_html__('Error creating term. Please try again.', 'jobus'),
-				'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus')
-			]
-		]);
 
-		// Only load media scripts for candidate users
-		if ( is_user_logged_in() ) {
-			$user = wp_get_current_user();
-			if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
-				wp_enqueue_media();
-			}
+		$post = get_post();
+		if ( $post && has_shortcode($post->post_content, 'jobus_candidate_dashboard')) {
+
+			// Style's for candidate dashboard
+			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
+
+			// Scripts for candidate dashboard
+			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+				'taxonomy_nonce' => wp_create_nonce('jobus_taxonomy_nonce'),
+				'suggest_taxonomy_nonce' => wp_create_nonce('jobus_suggest_taxonomy_terms'),
+				'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
+				'texts' => [
+					'taxonomy_create_error' => esc_html__('Error creating term. Please try again.', 'jobus'),
+					'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus')
+				]
+			]);
+
+			wp_enqueue_script('jobus-candidate-dashboard-ajax-actions', esc_url(JOBUS_JS . '/candidate-dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
+			wp_localize_script('jobus-candidate-dashboard-ajax-actions', 'jobus_candidate_dashboard_obj', [
+				'ajax_url' => $ajax_url,
+				'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
+			]);
+
 		}
-
-		// Script's for candidate dashboard
-		wp_enqueue_script('jobus-candidate-dashboard-ajax-actions', esc_url(JOBUS_JS . '/candidate-dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
-		wp_localize_script('jobus-candidate-dashboard-ajax-actions', 'jobus_candidate_dashboard_obj', [
-			'ajax_url' => $ajax_url,
-			'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
-		]);
 
 	}
 }

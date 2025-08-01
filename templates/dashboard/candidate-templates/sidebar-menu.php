@@ -57,7 +57,7 @@ $logo = jobus_opt( 'dashboard_logo' );
             <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                 <li>
                     <a href="<?php echo esc_url($profile_url); ?>" class="dropdown-item d-flex align-items-center">
-                        <img src="<?php echo JOBUS_IMG . '/dashboard/icons/profile.svg' ?>" alt="<?php esc_attr_e( 'Candidate Profile', 'jobus' ); ?>" class="lazy-img">
+                        <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/profile.svg') ?>" alt="<?php esc_attr_e( 'Candidate Profile', 'jobus' ); ?>" class="lazy-img">
                         <span class="ms-2 ps-1"><?php esc_html_e( 'View Profile', 'jobus' ); ?></span>
                     </a>
                 </li>
@@ -90,7 +90,7 @@ $logo = jobus_opt( 'dashboard_logo' );
     </nav>
 
     <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="d-flex w-100 align-items-center logout-btn mt-25">
-        <img src="<?php echo JOBUS_IMG . '/dashboard/icons/logout.svg' ?>" alt="<?php esc_attr_e('Logout', 'jobus'); ?>" class="lazy-img">
+        <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/logout.svg') ?>" alt="<?php esc_attr_e('Logout', 'jobus'); ?>" class="lazy-img">
         <span><?php esc_html_e('Logout', 'jobus'); ?></span>
     </a>
 </div>

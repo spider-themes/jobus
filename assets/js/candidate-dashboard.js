@@ -59,10 +59,13 @@
         updateProfilePicturePreview: function () {
             const imgPreview = $('#candidate_avatar');
             const profilePictureAction = $('#profile_picture_action');
-            const mediaBtn = $('#open_media_library');
+            const mediaBtn = $('#candidate_profile_picture_upload');
             const hiddenId = $('#candidate_profile_picture_id');
             const originalAvatarUrl = imgPreview.attr('src');  // Store the original avatar URL
             let tempImageUrl = null;  // Store temporary image URL for preview
+            const defaultAvatarUrl = jobus_dashboard_params && jobus_dashboard_params.default_avatar_url ?
+                jobus_dashboard_params.default_avatar_url :
+                'https://secure.gravatar.com/avatar/?s=96&d=mm&r=g'; // Fallback to WordPress default avatar
 
             // Ensure the media library is functional
             if (!mediaBtn.length || !window.wp || !window.wp.media) return;
@@ -87,13 +90,21 @@
                 mediaUploader.open();
             });
 
-            // Delete the avatar (revert to original avatar)
+            // Delete the avatar (revert to default avatar)
             $('#delete_profile_picture').on('click', function(e) {
                 e.preventDefault();
-                imgPreview.attr('src', originalAvatarUrl);  // Revert to the original avatar
-                hiddenId.val('');  // Clear the image ID
-                profilePictureAction.val('delete');  // Mark the action as 'delete'
-                tempImageUrl = null;  // Clear temporary URL
+
+                // Set the image to default avatar or original avatar if available
+                imgPreview.attr('src', defaultAvatarUrl);
+
+                // Clear the image ID
+                hiddenId.val('');
+
+                // Mark the action as 'delete'
+                profilePictureAction.val('delete');
+
+                // Clear temporary URL
+                tempImageUrl = null;
             });
 
             // Handle form reset/cancel - revert to original image
