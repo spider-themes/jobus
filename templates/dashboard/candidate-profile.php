@@ -31,7 +31,7 @@ $avatar_url = $description_data['avatar_url'];
 
     <?php jobus_get_template('dashboard/candidate-templates/notice.php'); ?>
 
-    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" id="candidate-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form action="#" id="candidate-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
         <?php wp_nonce_field('candidate_profile_update', 'candidate_profile_nonce'); ?>
         <input type="hidden" name="candidate_profile_form_submit" value="1" />
@@ -138,14 +138,14 @@ $avatar_url = $description_data['avatar_url'];
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
-                                            <label for="social_<?php echo $index; ?>_icon">
+                                            <label for="social_<?php echo esc_attr($index); ?>_icon">
                                                 <?php esc_html_e( 'Icon', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo $index; ?>_icon" class="nice-select">
+                                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
                                                     <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
                                                         <?php echo esc_html( $icon_label ); ?>
@@ -159,14 +159,14 @@ $avatar_url = $description_data['avatar_url'];
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
-                                            <label for="social_<?php echo $index; ?>_url">
+                                            <label for="social_<?php echo esc_attr($index); ?>_url">
                                                 <?php esc_html_e( 'URL', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo $index; ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
+                                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@ $avatar_url = $description_data['avatar_url'];
                             foreach ($meta_values as $option) {
                                 $val = strtolower(preg_replace('/[\s,]+/', '@space@', $option['meta_values']));
                                 $selected = (is_array($meta_value) && in_array($val, $meta_value)) ? 'selected' : '';
-                                echo '<option value="' . esc_attr($val) . '" ' . $selected . '>' . esc_html($option['meta_values']) . '</option>';
+                                echo '<option value="' . esc_attr($val) . '" ' . esc_attr($selected) . '>' . esc_html($option['meta_values']) . '</option>';
                             }
                             echo '</select></div></div>';
                         }

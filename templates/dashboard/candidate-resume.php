@@ -31,7 +31,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
     <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
     <?php jobus_get_template('dashboard/candidate-templates/notice.php'); ?>
 
-    <form action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" id="candidate-resume-form" method="post" enctype="multipart/form-data">
+    <form action="" id="candidate-resume-form" method="post" enctype="multipart/form-data">
 
         <?php wp_nonce_field('candidate_resume_update', 'candidate_resume_nonce'); ?>
         <input type="hidden" name="candidate_resume_form_submit" value="1">
@@ -168,8 +168,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
-                                                   name="education[<?php echo $key; ?>][title]"
-                                                   id="education_<?php echo $key; ?>_title"
+                                                   name="education[<?php echo esc_attr($key); ?>][title]"
+                                                   id="education_<?php echo esc_attr($key); ?>_title"
                                                    value="<?php echo esc_attr($value['title'] ?? ''); ?>">
                                         </div>
                                     </div>
@@ -185,8 +185,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
-                                                   name="education[<?php echo $key; ?>][academy]"
-                                                   id="education_<?php echo $key; ?>_academy"
+                                                   name="education[<?php echo esc_attr($key); ?>][academy]"
+                                                   id="education_<?php echo esc_attr($key); ?>_academy"
                                                    value="<?php echo esc_attr($value['academy'] ?? ''); ?>"
                                                    placeholder="<?php esc_attr_e('Google Arts College & University', 'jobus'); ?>">
                                         </div>
@@ -203,8 +203,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <textarea class="size-lg form-control"
-                                                      name="education[<?php echo $key; ?>][description]"
-                                                      id="education_<?php echo $key; ?>_description"
+                                                      name="education[<?php echo esc_attr($key); ?>][description]"
+                                                      id="education_<?php echo esc_attr($key); ?>_description"
                                                       placeholder="<?php esc_attr_e('Description of your education', 'jobus'); ?>"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
                                         </div>
                                     </div>
@@ -268,7 +268,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_<?php echo $key; ?>_sl_num">
+                                            <label for="experience_<?php echo esc_attr($key); ?>_sl_num">
                                                 <?php esc_html_e('Serial Number', 'jobus'); ?>
                                             </label>
                                         </div>
@@ -276,8 +276,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
-                                                   name="experience[<?php echo $key; ?>][sl_num]"
-                                                   id="experience_<?php echo $key; ?>_sl_num"
+                                                   name="experience[<?php echo esc_attr($key); ?>][sl_num]"
+                                                   id="experience_<?php echo esc_attr($key); ?>_sl_num"
                                                    value="<?php echo esc_attr($value['sl_num'] ?? ''); ?>"
                                                    placeholder="<?php esc_attr_e('Enter serial number', 'jobus'); ?>">
                                         </div>
@@ -287,7 +287,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_<?php echo $key; ?>_title">
+                                            <label for="experience_<?php echo esc_attr($key); ?>_title">
                                                 <?php esc_html_e('Title', 'jobus'); ?>
                                             </label>
                                         </div>
@@ -295,8 +295,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
-                                                   name="experience[<?php echo $key; ?>][title]"
-                                                   id="experience_<?php echo $key; ?>_title"
+                                                   name="experience[<?php echo esc_attr($key); ?>][title]"
+                                                   id="experience_<?php echo esc_attr($key); ?>_title"
                                                    value="<?php echo esc_attr($value['title'] ?? ''); ?>"
                                                    placeholder="<?php esc_attr_e('Lead Product Designer', 'jobus'); ?>">
                                         </div>
@@ -306,7 +306,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_<?php echo $key; ?>_company">
+                                            <label for="experience_<?php echo esc_attr($key); ?>_company">
                                                 <?php esc_html_e('Company', 'jobus'); ?>
                                             </label>
                                         </div>
@@ -314,8 +314,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
-                                                   name="experience[<?php echo $key; ?>][company]"
-                                                   id="experience_<?php echo $key; ?>_company"
+                                                   name="experience[<?php echo esc_attr($key); ?>][company]"
+                                                   id="experience_<?php echo esc_attr($key); ?>_company"
                                                    value="<?php echo esc_attr($value['company'] ?? ''); ?>"
                                                    placeholder="<?php esc_attr_e('Google Inc', 'jobus'); ?>">
                                         </div>
@@ -333,16 +333,16 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                             <div class="col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
                                                     <input type="date" class="form-control"
-                                                           name="experience[<?php echo $key; ?>][start_date]"
-                                                           id="experience_<?php echo $key; ?>_start_date"
+                                                           name="experience[<?php echo esc_attr($key); ?>][start_date]"
+                                                           id="experience_<?php echo esc_attr($key); ?>_start_date"
                                                            value="<?php echo esc_attr($value['start_date'] ?? ''); ?>">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
                                                     <input type="date" class="form-control"
-                                                           name="experience[<?php echo $key; ?>][end_date]"
-                                                           id="experience_<?php echo $key; ?>_end_date"
+                                                           name="experience[<?php echo esc_attr($key); ?>][end_date]"
+                                                           id="experience_<?php echo esc_attr($key); ?>_end_date"
                                                            value="<?php echo esc_attr($value['end_date'] ?? ''); ?>">
                                                 </div>
                                             </div>
@@ -353,7 +353,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_<?php echo $key; ?>_description">
+                                            <label for="experience_<?php echo esc_attr($key); ?>_description">
                                                 <?php esc_html_e('Description', 'jobus'); ?>
                                             </label>
                                         </div>
@@ -361,8 +361,8 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <textarea class="form-control"
-                                                      name="experience[<?php echo $key; ?>][description]"
-                                                      id="experience_<?php echo $key; ?>_description"
+                                                      name="experience[<?php echo esc_attr($key); ?>][description]"
+                                                      id="experience_<?php echo esc_attr($key); ?>_description"
                                                       placeholder="<?php esc_attr_e('Describe your role and achievements', 'jobus'); ?>"
                                                       rows="4"><?php echo esc_textarea($value['description'] ?? ''); ?></textarea>
                                         </div>

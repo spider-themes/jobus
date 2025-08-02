@@ -58,11 +58,21 @@ class Assets {
 		] );
 
 
+		if ( is_user_logged_in() ) {
+			$user = wp_get_current_user();
+			if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
+				wp_enqueue_media();
+			}
+		}
+
 		$post = get_post();
 		if ( $post && has_shortcode($post->post_content, 'jobus_candidate_dashboard')) {
 
 			// Style's for candidate dashboard
 			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
+
+			// Enqueue media uploader for candidate dashboard
+			wp_enqueue_media();
 
 			// Scripts for candidate dashboard
 			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );

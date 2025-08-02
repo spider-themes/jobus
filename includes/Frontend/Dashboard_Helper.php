@@ -69,7 +69,7 @@ class Dashboard_Helper {
 			wp_send_json_error(['message' => esc_html__('Security check failed.', 'jobus')]);
 		}
 
-		$term_name = isset($_POST['term_name']) ? sanitize_text_field($_POST['term_name']) : '';
+		$term_name = isset($_POST['term_name']) ? sanitize_text_field(wp_unslash($_POST['term_name'])) : '';
 		$taxonomy = isset($_POST['taxonomy']) ? sanitize_key($_POST['taxonomy']) : '';
 
 		$allowed_taxonomies = ['jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'];
@@ -108,7 +108,7 @@ class Dashboard_Helper {
 		}
 
 		$taxonomy = isset($_POST['taxonomy']) ? sanitize_key($_POST['taxonomy']) : '';
-		$query = isset($_POST['term_query']) ? sanitize_text_field($_POST['term_query']) : '';
+		$query = isset($_POST['term_query']) ? sanitize_text_field(wp_unslash($_POST['term_query'])) : '';
 
 		if (!$taxonomy || !$query) {
 			wp_send_json_error(['message' => esc_html__('Missing required parameters.', 'jobus')]);

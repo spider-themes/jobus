@@ -15,7 +15,7 @@ $message_type = '';
 $message = '';
 
 // Verify nonce if it exists
-$nonce_verified = isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce'], 'jobus_dashboard_action');
+$nonce_verified = isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_GET['_wpnonce'])), 'jobus_dashboard_action');
 
 // Only process messages if nonce is verified or if it's a safe message type
 if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'], ['profile_updated', 'error'], true))) {
@@ -31,7 +31,7 @@ if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'],
             $message_type = 'danger';
             if (isset($_GET['error_msg'])) {
                 // Properly sanitize and unslash the error message
-                $message = esc_html(wp_unslash(sanitize_text_field($_GET['error_msg'])));
+                $message = esc_html(sanitize_text_field(wp_unslash($_GET['error_msg'])));
             } else {
                 $message = esc_html__( 'An error occurred. Please try again.', 'jobus' );
             }
@@ -42,7 +42,7 @@ if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'],
 // Display the notice if we have a message
 if ( ! empty( $message ) ) : ?>
 	<div class="alert alert-<?php echo esc_attr( $message_type ); ?> alert-dismissible fade show" role="alert">
-		<?php echo $message; ?>
+		<?php echo wp_kses_post( $message ); ?>
 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
 	</div>
     <?php

@@ -78,7 +78,7 @@ $logo = jobus_opt( 'dashboard_logo' );
 				$aria_current = $is_active ? ' aria-current="page"' : '';
 				?>
                 <li>
-                    <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr($align_class) ?>"<?php echo $aria_current; ?>>
+                    <a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr($align_class) ?>"<?php echo esc_attr($aria_current); ?>>
                         <img src="<?php echo esc_url( $item['icon'] ); ?>" alt="" class="lazy-img">
                         <span><?php echo esc_html( $item['label'] ); ?></span>
                     </a>

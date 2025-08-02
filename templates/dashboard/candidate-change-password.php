@@ -22,12 +22,12 @@ $do_redirect = false;
 // Handle form submission
 if ( isset( $_POST['update_candidate_password'] ) ) {
     // Verify nonce
-    if ( isset( $_POST['update_candidate_password_nonce'] ) && wp_verify_nonce( $_POST['update_candidate_password_nonce'], 'update_candidate_password' ) ) {
+    if ( isset( $_POST['update_candidate_password_nonce'] ) && wp_verify_nonce( sanitize_key(wp_unslash($_POST['update_candidate_password_nonce'])), 'update_candidate_password' ) ) {
 
-        // Get password values
-        $old_password = $_POST['old_password'] ?? '';
-        $new_password = $_POST['new_password'] ?? '';
-        $confirm_password = $_POST['confirm_password'] ?? '';
+        // Get password values - sanitize and unslash inputs
+        $old_password = isset($_POST['old_password']) ? sanitize_text_field(wp_unslash($_POST['old_password'])) : '';
+        $new_password = isset($_POST['new_password']) ? sanitize_text_field(wp_unslash($_POST['new_password'])) : '';
+        $confirm_password = isset($_POST['confirm_password']) ? sanitize_text_field(wp_unslash($_POST['confirm_password'])) : '';
 
         // Validate inputs
         if ( empty( $old_password ) || empty( $new_password ) || empty( $confirm_password ) ) {
@@ -75,7 +75,7 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
             </div>
         <?php endif; ?>
 
-        <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" id="candidate-password-form" method="post">
+        <form action="#" id="candidate-password-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
             <?php wp_nonce_field( 'update_candidate_password', 'update_candidate_password_nonce' ); ?>
             <input type="hidden" name="update_candidate_password" value="1">
@@ -128,4 +128,3 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
         </form>
     </div>
 </div>
-
