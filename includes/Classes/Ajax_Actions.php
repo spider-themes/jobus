@@ -50,7 +50,7 @@ class Ajax_Actions {
 			wp_send_json_error( [ 'message' => esc_html__( 'Only candidates can save jobs.', 'jobus' ) ] );
 		}
 
-		$job_id     = absint( $_POST['job_id'] );
+		$job_id     = isset( $_POST['job_id'] ) ? absint( $_POST['job_id'] ) : 0;
 		$saved_jobs = (array) get_user_meta( $user_id, 'jobus_saved_jobs', true );
 
 		if ( in_array( $job_id, $saved_jobs ) ) {

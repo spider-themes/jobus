@@ -9,6 +9,7 @@ get_header();
 jobus_count_candidate_views( get_the_ID() );
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
+
 $experience = !empty($meta['experience']) ? $meta['experience'] : '';
 $educations = !empty($meta['education']) ? $meta['education'] : '';
 $candidate_mail = !empty($meta['candidate_mail']) ? $meta['candidate_mail'] : '';
@@ -23,12 +24,21 @@ $portfolio_ids = explode(',', $portfolio);
 $specifications = jobus_opt('candidate_specifications');
 $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
 
-$candidate_single_layout_page = $meta['candidate_profile_layout'] ?? ''; // Individual page-specific layout
-$candidate_single_layout_opt = jobus_opt('candidate_profile_layout', '1'); // Default layout for the entire website
+$single_layout_page = $meta['candidate_profile_layout'] ?? ''; // Individual page specific layout
+$single_layout_opt  = jobus_opt( 'candidate_profile_layout', '1' ); // Default layout for the entire website
 
-$candidate_single_layout = $candidate_single_layout_page ?? $candidate_single_layout_opt;
+$single_layout = !empty($single_layout_page) ? $single_layout_page : $single_layout_opt;
+$single_layout = !empty($single_layout) ? $single_layout : '1'; // Set default layout to 1 if both sources are empty
 
-//=============== Template Part =================//
-include 'single-candidate/candidate-single-'.$candidate_single_layout.'.php';
+// Define template file path
+$template_file = 'single-candidate/candidate-single-' . $single_layout . '.php';
+
+// Check if template file exists before trying to include it
+$template_path = dirname(__FILE__) . '/' . $template_file;
+if (file_exists($template_path)) {
+    include $template_file;
+} else {
+    include 'single-candidate/candidate-single-1.php';
+}
 
 get_footer();

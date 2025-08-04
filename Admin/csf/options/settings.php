@@ -33,6 +33,7 @@ if ( class_exists( 'CSF' ) ) {
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_company-details.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-specifications.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-archive.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-details.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_social_icons.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_register.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/opt_smtp.php';

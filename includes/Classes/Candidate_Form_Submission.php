@@ -28,27 +28,28 @@ class Candidate_Form_Submission {
      * Check if we should handle form submission
      */
     public function candidate_form_submission() {
-        // Only process if this is our form submission
-        if ( !isset($_POST['candidate_profile_form_submit']) && !isset($_POST['candidate_resume_form_submit'])) {
-            return;
-        }
 
-        // Must be a candidate
-        $user = wp_get_current_user();
-        if ( !in_array('jobus_candidate', $user->roles, true) ) {
-            wp_die(esc_html__('Access denied. You must be a candidate to update this profile.', 'jobus'));
-        }
+	    if ( !(isset($_POST['candidate_profile_form_submit']) || isset($_POST['candidate_resume_form_submit'])) ) {
+		    return;
+	    }
 
-        // Check which form is being submitted and verify appropriate nonce
-        if (isset($_POST['candidate_resume_form_submit'])) {
-            if (!isset($_POST['candidate_resume_nonce']) || !wp_verify_nonce($_POST['candidate_resume_nonce'], 'candidate_resume_update')) {
-                wp_die(esc_html__('Security check failed.', 'jobus'));
-            }
-        } else {
-            if (!isset($_POST['candidate_profile_nonce']) || !wp_verify_nonce($_POST['candidate_profile_nonce'], 'candidate_profile_update')) {
-                wp_die(esc_html__('Security check failed.', 'jobus'));
-            }
-        }
+	    // Must be a candidate
+	    $user = wp_get_current_user();
+	    if (!in_array('jobus_candidate', $user->roles, true)) {
+		    wp_die(esc_html__('Access denied. You must be a candidate to update this profile.', 'jobus'));
+	    }
+
+	    if (isset($_POST['candidate_resume_form_submit'])) {
+		    $nonce = isset($_POST['candidate_resume_nonce']) ? sanitize_text_field(wp_unslash($_POST['candidate_resume_nonce'])) : '';
+		    if (!$nonce || !wp_verify_nonce($nonce, 'candidate_resume_update')) {
+			    wp_die(esc_html__('Security check failed.', 'jobus'));
+		    }
+	    } else {
+		    $nonce = isset($_POST['candidate_profile_nonce']) ? sanitize_text_field(wp_unslash($_POST['candidate_profile_nonce'])) : '';
+		    if (!$nonce || !wp_verify_nonce($nonce, 'candidate_profile_update')) {
+			    wp_die(esc_html__('Security check failed.', 'jobus'));
+		    }
+	    }
 
         // Process the form
         $this->handle_form_submission();
@@ -77,29 +78,37 @@ class Candidate_Form_Submission {
         return !empty($candidate_query->posts) ? $candidate_query->posts[0] : false;
     }
 
-    /**
-     * Save social icons data
-     *
-     * @param int $candidate_id
-     */
-    private function save_social_icons( int $candidate_id) {
-        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
-        if (!is_array($meta)) {
-            $meta = array();
-        }
+	/**
+	 * Save social icons data
+	 *
+	 * @param int   $candidate_id
+	 * @param array $post_data
+	 */
+    private function save_social_icons( int $candidate_id, array $post_data ): void {
+		if ( !$candidate_id ) {
+			return ;
+		}
+
+		// Get existing meta data or initialize an empty array
+	    $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+	    if ( !is_array($meta) ) {
+		    $meta = array();
+	    }
 
         $social_icons = array();
-        foreach ($_POST['social_icons'] as $item) {
-            $icon = isset($item['icon']) ? sanitize_text_field($item['icon']) : '';
-            $url = isset($item['url']) ? esc_url_raw($item['url']) : '';
+	    if ( isset($post_data['social_icons']) && is_array($post_data['social_icons']) ) {
+		    foreach ($post_data['social_icons'] as $item) {
+			    $icon = isset($item['icon']) ? sanitize_text_field($item['icon']) : '';
+			    $url = isset($item['url']) ? esc_url_raw($item['url']) : '';
 
-            if ($icon && $url) {
-                $social_icons[] = array(
-                    'icon' => $icon,
-                    'url'  => $url
-                );
-            }
-        }
+			    if ($icon && $url) {
+				    $social_icons[] = array(
+					    'icon' => $icon,
+					    'url'  => $url
+				    );
+			    }
+		    }
+	    }
 
         $meta['social_icons'] = $social_icons;
         update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
@@ -375,75 +384,85 @@ class Candidate_Form_Submission {
         );
     }
 
-    /**
-     * Save candidate CV
-     *
-     * @param int $candidate_id The candidate post ID
-     * @param array $post_data POST data from the form submission
-     * @return bool True on success, false on failure
-     */
-    private function save_candidate_cv(int $candidate_id, array $post_data): bool {
-        if (!$candidate_id) {
-            return false;
-        }
+	/**
+	 * Save candidate CV
+	 *
+	 * @param int   $candidate_id The candidate post ID
+	 * @param array $post_data    POST data from the form submission
+	 *
+	 * @return void
+	 */
+	private function save_candidate_cv(int $candidate_id, array $post_data): void {
+		if (!$candidate_id) {
+			return;
+		}
 
-        $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
-        if (!is_array($meta)) {
-            $meta = array();
-        }
+		$meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
+		if (!is_array($meta)) {
+			$meta = array();
+		}
 
-        // Handle CV action
-        $action = sanitize_text_field($post_data['profile_cv_action'] ?? '');
+		if (isset($_POST['candidate_profile_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['candidate_profile_nonce'])), 'candidate_profile_update')) {
+			// Sanitize action
+			$action = isset($post_data['profile_cv_action']) ? sanitize_text_field($post_data['profile_cv_action']) : '';
 
-        // Delete existing CV
-        if ($action === 'delete' && !empty($post_data['existing_cv_id'])) {
-            $existing_id = intval($post_data['existing_cv_id']);
-            if (wp_delete_attachment($existing_id, true)) {
-                unset($meta['cv_attachment']);
-            }
-        }
-        // Upload new CV
-        elseif ($action === 'upload' && isset($_FILES['cv_attachment']) && $_FILES['cv_attachment']['error'] === 0) {
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
-            require_once(ABSPATH . 'wp-admin/includes/image.php');
-            require_once(ABSPATH . 'wp-admin/includes/media.php');
+			// Create a properly validated and sanitized file data variable
+			$file_data = $_FILES['cv_attachment'] ?? null;
 
-            // Get upload directory info
-            $upload_dir = wp_upload_dir();
-            $cv_dir = $upload_dir['basedir'] . '/candidate-cvs';
+			// Validate if file data exists and has the required structure
+			if (isset($file_data) &&
+			    is_array($file_data) &&
+			    isset($file_data['name']) &&
+			    isset($file_data['type']) &&
+			    isset($file_data['tmp_name']) &&
+			    isset($file_data['error']) &&
+			    isset($file_data['size'])) {
 
-            // Create CV directory if it doesn't exist
-            if (!file_exists($cv_dir)) {
-                wp_mkdir_p($cv_dir);
-            }
+				// Sanitize filename
+				$filename = sanitize_file_name(basename(wp_unslash($file_data['name'])));
+				$file_data['name'] = $filename;
 
-            // Process the file upload
-            $file = $_FILES['cv_attachment'];
-            $filename = sanitize_file_name(basename($file['name']));
-            $filepath = $cv_dir . '/' . $candidate_id . '-' . $filename;
+				// Handle file upload if it exists and action is upload
+				if ($file_data['error'] === 0 && $action === 'upload') {
+					// Required WordPress media handling functions
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+					require_once ABSPATH . 'wp-admin/includes/media.php';
 
-            if (move_uploaded_file($file['tmp_name'], $filepath)) {
-                $filetype = wp_check_filetype($filename);
-                $attachment = array(
-                    'guid' => $upload_dir['baseurl'] . '/candidate-cvs/' . $candidate_id . '-' . $filename,
-                    'post_mime_type' => $filetype['type'],
-                    'post_title' => preg_replace('/\.[^.]+$/', '', $filename),
-                    'post_content' => '',
-                    'post_status' => 'inherit'
-                );
+					// Handle the upload with WordPress functions
+					$uploaded_file = wp_handle_upload($file_data, array('test_form' => false));
 
-                $attachment_id = wp_insert_attachment($attachment, $filepath);
+					if (!isset($uploaded_file['error'])) {
+						$filename = sanitize_file_name(basename($uploaded_file['file']));
+						$filetype = wp_check_filetype($filename);
 
-                if (!is_wp_error($attachment_id)) {
-                    $attach_data = wp_generate_attachment_metadata($attachment_id, $filepath);
-                    wp_update_attachment_metadata($attachment_id, $attach_data);
-                    $meta['cv_attachment'] = $attachment_id;
-                }
-            }
-        }
+						$attachment = array(
+							'guid' => esc_url_raw($uploaded_file['url']),
+							'post_mime_type' => sanitize_mime_type($filetype['type']),
+							'post_title' => sanitize_text_field(preg_replace('/\.[^.]+$/', '', $filename)),
+							'post_content' => '',
+							'post_status' => 'inherit'
+						);
 
-        return update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
-    }
+						$attachment_id = wp_insert_attachment($attachment, $uploaded_file['file']);
+
+						if (!is_wp_error($attachment_id)) {
+							$attach_data = wp_generate_attachment_metadata($attachment_id, $uploaded_file['file']);
+							wp_update_attachment_metadata($attachment_id, $attach_data);
+							$meta['cv_attachment'] = absint($attachment_id);
+						}
+					}
+				}
+			} elseif ($action === 'delete' && !empty($post_data['existing_cv_id'])) {
+				$existing_id = absint($post_data['existing_cv_id']);
+				if ($existing_id > 0 && wp_delete_attachment($existing_id, true)) {
+					unset($meta['cv_attachment']);
+				}
+			}
+		}
+
+		update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
+	}
 
     /**
      * Get candidate video data
@@ -646,11 +665,12 @@ class Candidate_Form_Submission {
      *
      * @param int $candidate_id The candidate post ID
      * @param array $post_data POST data from the form submission
-     * @return bool True on success, false on failure
+     *
+     * @return void True on success, false on failure
      */
-    private function save_candidate_taxonomies(int $candidate_id, array $post_data): bool {
-        if (!$candidate_id) {
-            return false;
+    private function save_candidate_taxonomies(int $candidate_id, array $post_data ): void {
+        if (!$candidate_id ) {
+	        return ;
         }
 
         $taxonomies = array(
@@ -670,12 +690,7 @@ class Candidate_Form_Submission {
                 }
 
                 // Always set terms, even if empty array to clear terms
-                $result = wp_set_object_terms($candidate_id, $term_ids, $taxonomy, false);
-
-                if (is_wp_error($result)) {
-                    error_log('Error saving ' . $taxonomy . ' terms: ' . $result->get_error_message());
-                    continue;
-                }
+                $result = wp_set_object_terms($candidate_id, $term_ids, $taxonomy);
 
                 // Clear term caches
                 clean_object_term_cache($candidate_id, $taxonomy);
@@ -687,9 +702,8 @@ class Candidate_Form_Submission {
 
         // Force refresh post cache
         clean_post_cache($candidate_id);
-        wp_cache_delete($candidate_id, 'posts');
+        wp_cache_delete($candidate_id, 'posts' );
 
-        return true;
     }
 
     /**
@@ -764,54 +778,54 @@ class Candidate_Form_Submission {
             wp_die(esc_html__('Candidate profile not found.', 'jobus'));
         }
 
-        // Handle description if present
-        if (isset($_POST['candidate_name']) || isset($_POST['candidate_description']) || isset($_POST['profile_picture_action'])) {
-            $this->save_candidate_description($candidate_id, $_POST);
+        // Handle candidate description if present
+        if (isset($post_data['candidate_name']) || isset($post_data['candidate_description']) || isset($post_data['profile_picture_action'])) {
+            $this->save_candidate_description($candidate_id, $post_data);
         }
 
-        // Handle social icons if present
-        if (isset($_POST['social_icons']) && is_array($_POST['social_icons'])) {
-            $this->save_social_icons($candidate_id);
-        }
+		// Handle social icons if present
+	    if (isset($post_data['social_icons']) && is_array($post_data['social_icons'])) {
+		    $this->save_social_icons($candidate_id, $post_data);
+	    }
 
-        // Handle specifications if present
-        if (isset($_POST['candidate_age']) || isset($_POST['candidate_mail']) || isset($_POST['candidate_specifications'])) {
-            $this->save_candidate_specifications($candidate_id, $_POST);
-        }
+		// Handle specifications if present
+	    if (isset($post_data['candidate_age']) || isset($post_data['candidate_mail']) || isset($post_data['candidate_specifications'])) {
+		    $this->save_candidate_specifications($candidate_id, $post_data);
+	    }
 
-        // Handle location if present
-        if (isset($_POST['candidate_location_address']) || isset($_POST['candidate_location_lat']) || isset($_POST['candidate_location_lng'])) {
-            $this->save_candidate_location($candidate_id, $_POST);
-        }
+		// Handle location if present
+	    if (isset($post_data['candidate_location_address']) || isset($post_data['candidate_location_lat']) || isset($post_data['candidate_location_lng'])) {
+		    $this->save_candidate_location($candidate_id, $post_data);
+	    }
 
-        // Handle CV if present
-        if (isset($_POST['cv_attachment']) || isset($_POST['profile_cv_action'])) {
-            $this->save_candidate_cv($candidate_id, $_POST);
-        }
+		// Handle CV if present
+	    if (isset($post_data['cv_attachment']) || isset($post_data['profile_cv_action'])) {
+		    $this->save_candidate_cv($candidate_id, $post_data);
+	    }
 
-        // Handle video data if present (including background image)
-        if (isset($_POST['video_title']) || isset($_POST['video_url']) || isset($_POST['video_bg_img'])) {
-            $this->save_candidate_video($candidate_id, $_POST);
-        }
+		// Handle video data if present (including background image)
+	    if (isset($post_data['video_title']) || isset($post_data['video_url']) || isset($post_data['video_bg_img'])) {
+		    $this->save_candidate_video($candidate_id, $post_data);
+	    }
 
-        // Handle education data if present
-        if (isset($_POST['education_title']) || (isset($_POST['education']) && is_array($_POST['education']))) {
-            $this->save_candidate_education($candidate_id, $_POST);
-        }
+		// Handle education data if present
+	    if (isset($post_data['education_title']) || (isset($post_data['education']) && is_array($post_data['education']))) {
+		    $this->save_candidate_education($candidate_id, $post_data);
+	    }
 
-        // Handle experience data if present
-        if (isset($_POST['experience_title']) || (isset($_POST['experience']) && is_array($_POST['experience']))) {
-            $this->save_candidate_experience($candidate_id, $_POST);
-        }
+		// Handle experience data if present
+	    if (isset($post_data['experience_title']) || (isset($post_data['experience']) && is_array($post_data['experience']))) {
+		    $this->save_candidate_experience($candidate_id, $post_data);
+	    }
 
-        // Handle taxonomy terms if present
-        if ( isset($_POST['candidate_categories']) || isset($_POST['candidate_locations']) || isset($_POST['candidate_skills']) ) {
-            $this->save_candidate_taxonomies($candidate_id, $_POST);
-        }
+		// Handle taxonomy terms if present
+	    if (isset($post_data['candidate_categories']) || isset($post_data['candidate_locations']) || isset($post_data['candidate_skills'])) {
+		    $this->save_candidate_taxonomies($candidate_id, $post_data);
+	    }
 
-        // Handle portfolio data if present
-        if (isset($_POST['portfolio_title']) || isset($_POST['portfolio'])) {
-            $this->save_candidate_portfolio($candidate_id, $_POST);
-        }
+		// Handle portfolio data if present
+	    if (isset($post_data['portfolio_title']) || isset($post_data['portfolio'])) {
+		    $this->save_candidate_portfolio($candidate_id, $post_data);
+	    }
     }
 }

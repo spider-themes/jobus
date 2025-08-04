@@ -63,8 +63,8 @@
             const hiddenId = $('#candidate_profile_picture_id');
             const originalAvatarUrl = imgPreview.attr('src');  // Store the original avatar URL
             let tempImageUrl = null;  // Store temporary image URL for preview
-            const defaultAvatarUrl = jobus_dashboard_params && jobus_dashboard_params.default_avatar_url ?
-                jobus_dashboard_params.default_avatar_url :
+            const defaultAvatarUrl = jobus_dashboard_params && jobus_dashboard_params.default_avatar_url ? 
+                jobus_dashboard_params.default_avatar_url : 
                 'https://secure.gravatar.com/avatar/?s=96&d=mm&r=g'; // Fallback to WordPress default avatar
 
             // Ensure the media library is functional
@@ -93,16 +93,16 @@
             // Delete the avatar (revert to default avatar)
             $('#delete_profile_picture').on('click', function(e) {
                 e.preventDefault();
-
+                
                 // Set the image to default avatar or original avatar if available
                 imgPreview.attr('src', defaultAvatarUrl);
-
+                
                 // Clear the image ID
                 hiddenId.val('');
-
+                
                 // Mark the action as 'delete'
                 profilePictureAction.val('delete');
-
+                
                 // Clear temporary URL
                 tempImageUrl = null;
             });

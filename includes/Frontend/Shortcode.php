@@ -92,8 +92,14 @@ class Shortcode {
 		ob_start();
 
 		if ( ! is_user_logged_in() ) {
-			$user_login = isset( $_POST['user_login'] ) ? sanitize_text_field( $_POST['user_login'] ) : '';
-			$password   = $_POST['pwd'] ?? '';
+			// Verify nonce before processing form data
+			if ( isset( $_POST['jobus_login_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['jobus_login_nonce'] ) ), 'jobus_login_action' ) ) {
+				$user_login = isset( $_POST['user_login'] ) ? sanitize_text_field( wp_unslash($_POST['user_login']) ) : '';
+				$password = isset( $_POST['pwd'] ) ? sanitize_text_field( wp_unslash($_POST['pwd']) ) : '';
+			} else {
+                $user_login = '';
+                $password = '';
+            }
 			?>
 			<div class="text-center">
 				<h2><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ) ?></h2>
@@ -171,10 +177,10 @@ class Shortcode {
 			<div class="text-center">
                 <h2>
 					<?php
-					// translators: %s: User's display name
 					echo sprintf(
+					    // translators: %s is the display name of the current user
 						esc_html__( 'Welcome, %s!', 'jobus' ),
-						esc_html( $current_user->display_name )
+						esc_html($current_user->display_name)
 					);
 					?>
                 </h2>

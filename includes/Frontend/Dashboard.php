@@ -106,27 +106,34 @@ class Dashboard {
 
 		echo '<div class="dashboard-wrapper">';
 		echo '<aside class="dashboard-navbar">';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo $this->load_sidebar_menu($active, $nav_items);
 		echo '</aside>';
 		echo '<main class="dashboard-body">';
 
 		switch ( $active ) {
 			case 'profile':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_profile( $user );
 				break;
 			case 'resume':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_resume( $user );
 				break;
 			case 'applied-jobs':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_job_applied( $user );
 				break;
 			case 'saved-jobs':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_saved_job( $user );
 				break;
 			case 'change-password':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_change_password( $user );
 				break;
 			default:
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_dashboard( $user );
 				break;
 		}

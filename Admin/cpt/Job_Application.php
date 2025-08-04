@@ -72,8 +72,11 @@ class Job_Application {
 	public function render_single_job_status( $post ): void {
 		if ( $post->post_type === 'jobus_applicant' ) {
 			// Process form submission directly (maintaining current functionality)
-			if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) ) {
-				$new_status = sanitize_text_field( $_POST['application_status'] );
+			if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) &&
+				isset( $_POST['job_application_status_nonce'] ) &&
+				wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
+
+				$new_status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
 				update_post_meta( $post->ID, 'application_status', $new_status );
 			}
 
@@ -88,9 +91,15 @@ class Job_Application {
 	 * @param int $post_id The post-ID
 	 */
 	public function save_application_status( int $post_id ): void {
+		// Verify nonce for security
+		if ( !isset( $_POST['job_application_status_nonce'] ) ||
+			!wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
+			return;
+		}
+
 		// Check if our custom status is set
 		if ( isset( $_POST['application_status'] ) ) {
-			$status = sanitize_text_field( $_POST['application_status'] );
+			$status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
 			update_post_meta( $post_id, 'application_status', $status );
 		}
 	}
