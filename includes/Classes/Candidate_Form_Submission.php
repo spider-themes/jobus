@@ -711,66 +711,6 @@ class Candidate_Form_Submission {
     }
 
     /**
-     * Get candidate taxonomy data
-     *
-     * @param int $candidate_id The candidate post ID
-     * @return array Array containing taxonomy data
-     */
-    public static function get_candidate_taxonomies(int $candidate_id): array {
-        return array(
-            'categories' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_cat') : array(),
-            'locations' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_location') : array(),
-            'skills' => !empty($candidate_id) ? wp_get_object_terms($candidate_id, 'jobus_candidate_skill') : array()
-        );
-    }
-
-    /**
-     * Save candidate taxonomy terms
-     *
-     * @param int $candidate_id The candidate post ID
-     * @param array $post_data POST data from the form submission
-     *
-     * @return void True on success, false on failure
-     */
-    private function save_candidate_taxonomies(int $candidate_id, array $post_data ): void {
-        if (!$candidate_id ) {
-	        return ;
-        }
-
-        $taxonomies = array(
-            'jobus_candidate_cat' => 'candidate_categories',
-            'jobus_candidate_location' => 'candidate_locations',
-            'jobus_candidate_skill' => 'candidate_skills'
-        );
-
-        foreach ($taxonomies as $taxonomy => $field_name) {
-            if (isset($post_data[$field_name])) {
-                $term_string = sanitize_text_field($post_data[$field_name]);
-                $term_ids = array();
-
-                if (!empty($term_string)) {
-                    $term_ids = array_map('intval', explode(',', $term_string));
-                    $term_ids = array_filter($term_ids); // Remove any 0 or empty values
-                }
-
-                // Always set terms, even if empty array to clear terms
-                $result = wp_set_object_terms($candidate_id, $term_ids, $taxonomy);
-
-                // Clear term caches
-                clean_object_term_cache($candidate_id, $taxonomy);
-                if (!empty($term_ids)) {
-                    clean_term_cache($term_ids, $taxonomy);
-                }
-            }
-        }
-
-        // Force refresh post cache
-        clean_post_cache($candidate_id);
-        wp_cache_delete($candidate_id, 'posts' );
-
-    }
-
-    /**
      * Get candidate portfolio data
      *
      * @param int $candidate_id The candidate post ID
@@ -882,11 +822,6 @@ class Candidate_Form_Submission {
 		// Handle experience data if present
 	    if (isset($post_data['experience_title']) || (isset($post_data['experience']) && is_array($post_data['experience']))) {
 		    $this->save_candidate_experience($candidate_id, $post_data);
-	    }
-
-		// Handle taxonomy terms if present
-	    if (isset($post_data['candidate_categories']) || isset($post_data['candidate_locations']) || isset($post_data['candidate_skills'])) {
-		    $this->save_candidate_taxonomies($candidate_id, $post_data);
 	    }
 
 		// Handle portfolio data if present

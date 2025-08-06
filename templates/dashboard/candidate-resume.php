@@ -24,8 +24,28 @@ $cv_attachment = $cv_data['cv_attachment'];
 $cv_file_name = $cv_data['cv_file_name'];
 $education_data = $candidate_form->get_candidate_education($candidate_id);
 $experience_data = $candidate_form->get_candidate_experience($candidate_id);
-$taxonomy_data = $candidate_form->get_candidate_taxonomies($candidate_id);
 $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
+
+
+// Handle form submission for taxonomies [categories, locations, skills]
+if (isset($_POST['candidate_resume_form_submit'])) {
+
+	if (isset($_POST['candidate_categories'])) {
+		$cat_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_categories']))) );
+		wp_set_object_terms($candidate_id, $cat_ids, 'jobus_candidate_cat');
+	}
+
+	if (isset($_POST['candidate_locations'])) {
+		$cat_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_locations']))) );
+		wp_set_object_terms($candidate_id, $cat_ids, 'jobus_candidate_location');
+	}
+
+	if (isset($_POST['candidate_skills'])) {
+		$cat_ids = array_filter(array_map('intval', explode(',', sanitize_text_field($_POST['candidate_skills']))) );
+		wp_set_object_terms($candidate_id, $cat_ids, 'jobus_candidate_skill');
+	}
+}
+
 ?>
 <div class="position-relative">
     <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
@@ -238,7 +258,6 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                     $experience[] = array(
                         'sl_num' => '',
                         'title' => '',
-                        'company' => '',
                         'start_date' => '',
                         'end_date' => '',
                         'description' => '',
@@ -295,25 +314,6 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                                                    id="experience_<?php echo esc_attr($key); ?>_title"
                                                    value="<?php echo esc_attr($value['title'] ?? ''); ?>"
                                                    placeholder="<?php esc_attr_e('Lead Product Designer', 'jobus'); ?>">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_<?php echo esc_attr($key); ?>_company">
-                                                <?php esc_html_e('Company', 'jobus'); ?>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-30">
-                                            <input type="text" class="form-control"
-                                                   name="experience[<?php echo esc_attr($key); ?>][company]"
-                                                   id="experience_<?php echo esc_attr($key); ?>_company"
-                                                   value="<?php echo esc_attr($value['company'] ?? ''); ?>"
-                                                   placeholder="<?php esc_attr_e('Google Inc', 'jobus'); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -389,20 +389,26 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
             <div class="dash-input-wrapper mb-40 mt-20">
                 <label for="candidate-category-list"><?php esc_html_e('Categories', 'jobus'); ?></label>
                 <div class="skills-wrapper">
+			        <?php
+			        $current_categories = array();
+			        if (isset($candidate_id) && $candidate_id) {
+				        $current_categories = wp_get_object_terms($candidate_id, 'jobus_candidate_cat');
+			        }
+
+                    // To store category IDs
+                    $category_ids = !empty($current_categories) ? implode(',', wp_list_pluck($current_categories, 'term_id')) : '';
+			        ?>
                     <ul id="candidate-category-list" class="style-none d-flex flex-wrap align-items-center">
-                        <?php if (!empty($taxonomy_data['categories']) && !is_wp_error($taxonomy_data['categories'])): ?>
-                            <?php foreach ($taxonomy_data['categories'] as $cat): ?>
+				        <?php if (!empty($current_categories)): ?>
+					        <?php foreach ($current_categories as $cat): ?>
                                 <li class="is_tag" data-category-id="<?php echo esc_attr($cat->term_id); ?>">
                                     <button type="button"><?php echo esc_html($cat->name); ?> <i class="bi bi-x"></i></button>
                                 </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                        <li class="more_tag"><button type="button">+</button></li>
+					        <?php endforeach; ?>
+				        <?php endif; ?>
+                        <li class="more_tag"><button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button></li>
                     </ul>
-                    <input type="hidden" name="candidate_categories" id="candidate_categories_input"
-                           value="<?php echo !empty($taxonomy_data['categories']) && !is_wp_error($taxonomy_data['categories'])
-                               ? esc_attr(implode(',', wp_list_pluck($taxonomy_data['categories'], 'term_id')))
-                               : ''; ?>">
+                    <input type="hidden" name="candidate_categories" id="candidate_categories_input" value="<?php echo esc_attr($category_ids); ?>">
                 </div>
             </div>
 
@@ -410,37 +416,53 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
             <div class="dash-input-wrapper mb-40 mt-20">
                 <label for="candidate-location-list"><?php esc_html_e('Locations', 'jobus'); ?></label>
                 <div class="skills-wrapper">
+			        <?php
+			        $current_location = array();
+			        if (isset($candidate_id) && $candidate_id) {
+				        $current_location = wp_get_object_terms($candidate_id, 'jobus_candidate_location');
+			        }
+
+			        // To store category IDs
+			        $locations_ids = !empty($current_location) ? implode(',', wp_list_pluck($current_location, 'term_id')) : '';
+			        ?>
                     <ul id="candidate-location-list" class="style-none d-flex flex-wrap align-items-center">
-                        <?php if (!empty($taxonomy_data['locations']) && !is_wp_error($taxonomy_data['locations'])): ?>
-                            <?php foreach ($taxonomy_data['locations'] as $loc): ?>
-                                <li class="is_tag" data-location-id="<?php echo esc_attr($loc->term_id); ?>">
-                                    <button type="button"><?php echo esc_html($loc->name); ?> <i class="bi bi-x"></i></button>
+				        <?php if (!empty($current_location)) : ?>
+					        <?php foreach ($current_location as $location): ?>
+                                <li class="is_tag" data-location-id="<?php echo esc_attr($location->term_id); ?>">
+                                    <button type="button"><?php echo esc_html($location->name); ?> <i class="bi bi-x"></i></button>
                                 </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                        <li class="more_tag"><button type="button">+</button></li>
+					        <?php endforeach; ?>
+				        <?php endif; ?>
+                        <li class="more_tag"><button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button></li>
                     </ul>
-                    <input type="hidden" name="candidate_locations"
-                           id="candidate_locations_input"
-                           value="<?php echo !empty($taxonomy_data['locations']) && !is_wp_error($taxonomy_data['locations']) ? esc_attr(implode(',', wp_list_pluck($taxonomy_data['locations'], 'term_id'))) : ''; ?>">
+                    <input type="hidden" name="candidate_locations" id="candidate_locations_input" value="<?php echo esc_attr($locations_ids); ?>">
                 </div>
             </div>
 
             <!-- Add Skills -->
             <div class="dash-input-wrapper mb-40 mt-20">
-                <label for="candidate-skills-list"><?php esc_html_e('Add Skills*', 'jobus'); ?></label>
+                <label for="candidate-skills-list"><?php esc_html_e('Add Skills', 'jobus'); ?></label>
                 <div class="skills-wrapper">
+			        <?php
+			        $current_skills = array();
+			        if (isset($candidate_id) && $candidate_id) {
+				        $current_skills = wp_get_object_terms($candidate_id, 'jobus_candidate_skill');
+			        }
+
+			        // To store category IDs
+			        $skill_ids = !empty($current_skills) ? implode(',', wp_list_pluck($current_skills, 'term_id')) : '';
+			        ?>
                     <ul id="candidate-skills-list" class="style-none d-flex flex-wrap align-items-center">
-                        <?php if (!empty($taxonomy_data['skills']) && !is_wp_error($taxonomy_data['skills'])): ?>
-                            <?php foreach ($taxonomy_data['skills'] as $skill): ?>
+				        <?php if (!empty($current_skills)) : ?>
+					        <?php foreach ($current_skills as $skill): ?>
                                 <li class="is_tag" data-skill-id="<?php echo esc_attr($skill->term_id); ?>">
                                     <button type="button"><?php echo esc_html($skill->name); ?> <i class="bi bi-x"></i></button>
                                 </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                        <li class="more_tag"><button type="button">+</button></li>
+					        <?php endforeach; ?>
+				        <?php endif; ?>
+                        <li class="more_tag"><button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button></li>
                     </ul>
-                    <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo !empty($taxonomy_data['skills']) && !is_wp_error($taxonomy_data['skills']) ? esc_attr(implode(',', wp_list_pluck($taxonomy_data['skills'], 'term_id'))) : ''; ?>">
+                    <input type="hidden" name="candidate_skills" id="candidate_skills_input" value="<?php echo esc_attr($skill_ids); ?>">
                 </div>
             </div>
         </div>
@@ -464,7 +486,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                 <?php
                 if (!empty($portfolio_data['portfolio'])) :
                     foreach($portfolio_data['portfolio'] as $image_id) :
-                        $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
+                        $image_url = wp_get_attachment_image_url($image_id);
                         if ($image_url):
                             ?>
                             <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="<?php echo esc_attr($image_id); ?>">

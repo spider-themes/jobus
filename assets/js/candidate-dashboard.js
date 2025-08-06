@@ -554,22 +554,6 @@
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
-                                            <label for="experience_${index}_company">Company</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-30">
-                                            <input type="text" class="form-control"
-                                                   name="experience[${index}][company]"
-                                                   id="experience_${index}_company"
-                                                   placeholder="Enter company name">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
@@ -794,6 +778,9 @@
             const $list = $(taxonomy.listSelector);
             const $input = $(taxonomy.inputSelector);
             let $inputWrapper = $list.find('.taxonomy-input-wrapper');
+            // Track new terms that haven't been saved to database yet
+            const tempTerms = [];
+            let tempTermCounter = -1; // Use negative IDs for temporary terms
 
             if (!jobus_dashboard_params || !jobus_dashboard_params.ajax_url) {
                 console.error('Dashboard parameters not properly initialized');
@@ -842,13 +829,48 @@
 
             // Handle form submission
             const $form = $list.closest('form');
-            $form.on('submit', function(e) {
+            $form.on('submit', function() {
                 // Update hidden input one final time before submission
                 const finalIds = [];
+                const finalTerms = [];
+
                 $list.find('.is_tag').each(function() {
-                    finalIds.push($(this).data(taxonomy.dataAttr));
+                    const $tag = $(this);
+                    const id = $tag.data(taxonomy.dataAttr);
+                    const name = $tag.find('button').text().trim().replace(' ×', '').replace(/\s*<i.*<\/i>\s*$/, '');
+
+                    finalIds.push(id);
+
+                    // If this is a temporary term (negative ID) or a newly created term that hasn't been processed yet
+                    if (id < 0 || tempTerms.includes(id)) {
+                        finalTerms.push({
+                            id: id,
+                            name: name
+                        });
+                    }
                 });
-                $input.val(finalIds.join(','));
+
+                // Store both IDs and new terms data
+                if (finalIds.length > 0) {
+                    $input.val(finalIds.join(','));
+                } else {
+                    $input.val(''); // Ensure empty value if no terms
+                }
+
+                // Add a hidden field with new term data if there are any
+                if (finalTerms.length > 0) {
+                    const termsFieldName = $input.attr('name') + '_new_terms';
+                    // Remove any existing field with this name to prevent duplicates
+                    $form.find(`input[name="${termsFieldName}"]`).remove();
+
+                    // Add new hidden field with JSON data of new terms
+                    const hiddenField = $('<input>').attr({
+                        type: 'hidden',
+                        name: termsFieldName,
+                        value: JSON.stringify(finalTerms)
+                    });
+                    $form.append(hiddenField);
+                }
             });
 
             // Handle input for suggestions
@@ -877,13 +899,25 @@
                             response.data.forEach(function (term) {
                                 $suggestions.append(`<li class="dropdown-item" data-term-id="${term.term_id}">${term.name}</li>`);
                             });
+                            // Add "Create new" option if no exact match
+                            const exactMatch = response.data.some(term => term.name.toLowerCase() === query.toLowerCase());
+                            if (!exactMatch && query.length > 0) {
+                                $suggestions.append(`<li class="dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                            }
                             $suggestions.show();
                         } else {
-                            $suggestions.hide().empty();
+                            $suggestions.empty();
+                            // If no results, show create option
+                            if (query.length > 0) {
+                                $suggestions.append(`<li class="dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                                $suggestions.show();
+                            } else {
+                                $suggestions.hide();
+                            }
                         }
                     },
                     error: function () {
-                        alert(jobus_dashboard_params.texts.taxonomy_suggest_error);
+                        console.error(jobus_dashboard_params.texts.taxonomy_suggest_error);
                         $suggestions.hide().empty();
                     },
                     complete: function() {
@@ -892,11 +926,20 @@
                 });
             });
 
-            // Handle suggestion click
+            // Handle suggestion click (both existing terms and create new)
             $suggestions.on('click', 'li', function () {
-                const termId = $(this).data('term-id');
-                const termName = $(this).text();
-                addTerm(termId, termName);
+                const $item = $(this);
+
+                if ($item.hasClass('create-new-term')) {
+                    // Handle creating a new term
+                    const termName = $item.data('term-name');
+                    createTerm(termName);
+                } else {
+                    // Handle selecting an existing term
+                    const termId = $item.data('term-id');
+                    const termName = $item.text();
+                    addTerm(termId, termName);
+                }
             });
 
             // Handle term creation on Enter
@@ -906,35 +949,21 @@
                     const termName = $textInput.val().trim();
                     if (!termName) return;
 
-                    $textInput.prop('disabled', true).attr('placeholder', 'Creating...');
-
-                    $.ajax({
-                        url: jobus_dashboard_params.ajax_url,
-                        type: 'POST',
-                        data: {
-                            action: 'jobus_create_taxonomy_term',
-                            security: jobus_dashboard_params.create_taxonomy_nonce,
-                            term_name: termName,
-                            taxonomy: taxonomy.taxonomy
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                addTerm(response.data.term_id, response.data.term_name);
-                                $textInput.val('');
-                                $inputWrapper.hide();
-                            } else {
-                                alert(response.data?.message || jobus_dashboard_params.texts.taxonomy_create_error);
-                            }
-                        },
-                        error: function () {
-                            alert(jobus_dashboard_params.texts.taxonomy_create_error);
-                        },
-                        complete: function() {
-                            $textInput.prop('disabled', false)
-                                    .attr('placeholder', 'Type and press Enter to add');
-                        }
+                    // Check if there's a visible suggestion that's an exact match
+                    const $exactMatch = $suggestions.find('li:not(.create-new-term)').filter(function() {
+                        return $(this).text().toLowerCase() === termName.toLowerCase();
                     });
-                } else if (e.key === 'Escape') {
+
+                    if ($exactMatch.length) {
+                        // Use the existing term if there's an exact match
+                        const termId = $exactMatch.data('term-id');
+                        addTerm(termId, $exactMatch.text());
+                    } else {
+                        // Otherwise create a new term
+                        createTerm(termName);
+                    }
+                }
+                else if (e.key === 'Escape') {
                     $inputWrapper.hide();
                     $suggestions.hide().empty();
                 }
@@ -948,8 +977,82 @@
                 }, 150);
             });
 
+            // Helper function to create a term via AJAX
+            function createTerm(termName) {
+                // First check if we already have this term in the list
+                let alreadyExists = false;
+                $list.find('.is_tag').each(function() {
+                    const existingName = $(this).find('button').text().trim().replace(' ×', '').replace(/\s*<i.*<\/i>\s*$/, '');
+                    if (existingName.toLowerCase() === termName.toLowerCase()) {
+                        alreadyExists = true;
+                        return false; // break the loop
+                    }
+                });
+
+                if (alreadyExists) {
+                    $textInput.val('');
+                    $inputWrapper.hide();
+                    $suggestions.hide().empty();
+                    return;
+                }
+
+                // Try to create the term via AJAX
+                $.ajax({
+                    url: jobus_dashboard_params.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'jobus_create_taxonomy_term',
+                        security: jobus_dashboard_params.create_taxonomy_nonce,
+                        taxonomy: taxonomy.taxonomy,
+                        term_name: termName
+                    },
+                    beforeSend: function() {
+                        $textInput.addClass('loading');
+                    },
+                    success: function(response) {
+                        if (response.success && response.data) {
+                            // Add the newly created term
+                            const termId = response.data.term_id;
+                            addTerm(termId, response.data.term_name);
+                            // Add to tempTerms array to track it for form submission
+                            tempTerms.push(termId);
+                        } else {
+                            // If server-side creation fails, fall back to temporary ID
+                            tempTermCounter--;
+                            addTerm(tempTermCounter, termName);
+                            console.error('Term creation error:', response.data ? response.data.message : 'Unknown error');
+                        }
+                    },
+                    error: function() {
+                        // On error, use a temporary ID
+                        tempTermCounter--;
+                        addTerm(tempTermCounter, termName);
+                        console.error(jobus_dashboard_params.texts.taxonomy_create_error);
+                    },
+                    complete: function() {
+                        $textInput.removeClass('loading');
+                    }
+                });
+            }
+
             // Helper function to add a term to the list
             function addTerm(termId, termName) {
+                // First check if we already have this term ID in the list
+                let alreadyExists = false;
+                $list.find('.is_tag').each(function() {
+                    if ($(this).data(taxonomy.dataAttr) == termId) {
+                        alreadyExists = true;
+                        return false; // break the loop
+                    }
+                });
+
+                if (alreadyExists) {
+                    $textInput.val('');
+                    $inputWrapper.hide();
+                    $suggestions.hide().empty();
+                    return;
+                }
+
                 const newTag = $(`
                     <li class="is_tag" data-${taxonomy.dataAttr}="${termId}">
                         <button type="button">${termName} <i class="bi bi-x"></i></button>
@@ -1083,7 +1186,6 @@ document.addEventListener('DOMContentLoaded', function() {
      * Handles file selection, preview display, and removal
      */
     function cvUploadHandler() {
-        let cvInput = document.getElementById('cv_attachment');
         let preview = document.getElementById('cv-upload-preview');
         let filenameSpan = document.getElementById('cv-uploaded-filename');
         let removeBtn = document.getElementById('remove-uploaded-cv');

@@ -79,7 +79,6 @@ class Assets {
 			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
 				'ajax_url' => admin_url('admin-ajax.php'),
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
-				'taxonomy_nonce' => wp_create_nonce('jobus_taxonomy_nonce'),
 				'suggest_taxonomy_nonce' => wp_create_nonce('jobus_suggest_taxonomy_terms'),
 				'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
 				'texts' => [
