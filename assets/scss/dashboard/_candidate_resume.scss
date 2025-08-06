@@ -1,138 +1,210 @@
-// CV Upload Preview Section
-.cv-preview {
-  display: flex;
-  margin-bottom: 1rem;
+// Upload Preview Section
+.dashboard-body {
+  .preview {
+    display: flex;
+    margin-bottom: 1rem;
 
-  &.hidden {
-    display: none;
-  }
-
-  .attached-file {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-
-    span {
-      font-size: 0.95rem;
-      color: #343a40;
-      font-weight: 500;
-      word-break: break-word;
+    &.hidden {
+      display: none;
     }
 
-    .remove-btn {
-      color: #dc3545;
-      transition: all 0.3s ease;
+    .attached-file {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
 
-      &:hover {
-        color: #bd2130;
-        transform: scale(1.1);
+      span {
+        font-size: 0.95rem;
+        color: #343a40;
+        font-weight: 500;
+        word-break: break-word;
+      }
+
+      .remove-btn {
+        color: #dc3545;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #bd2130;
+          transform: scale(1.1);
+        }
       }
     }
   }
-}
 
-// CV Upload Button Wrapper
-#cv-upload-btn-wrapper {
-  margin-bottom: 0.5rem;
+  // CV Upload Button Wrapper
+  #cv-upload-btn-wrapper {
+    margin-bottom: 0.5rem;
 
-  &.hidden {
-    display: none;
+    &.hidden {
+      display: none;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
   }
 
-  input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+  // CV File Info Text
+  .file-info {
+    display: block;
+    margin-top: 0.5rem;
+
+    &.hidden {
+      display: none;
+    }
+
+    small {
+      color: #6c757d;
+      font-style: italic;
+    }
+  }
+
+  // Video Background Image Upload Preview Section
+  .bg-img-preview {
+    display: flex;
+    margin-bottom: 1rem;
+
+    &.hidden {
+      display: none;
+    }
+
+    .attached-file {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+
+      span {
+        font-size: 0.95rem;
+        color: #343a40;
+        font-weight: 500;
+        word-break: break-word;
+        max-width: 85%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .remove-btn {
+        color: #dc3545;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: #bd2130;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+
+  // Video Background Image Upload Button Wrapper
+  #bg-img-upload-btn-wrapper {
+    margin-bottom: 0.5rem;
+
+    &.hidden {
+      display: none !important;
+    }
+
+    #video_bg_img_upload_btn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 10;
+    }
+  }
+
+
+  // Dynamic Taxonomy Input & Tag Styles
+  .taxonomy-input-wrapper {
+    position: relative;
+    margin: 0 5px 5px 0;
+    display: inline-block;
+  }
+
+  .taxonomy-input {
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: 150px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+
+  .taxonomy-input:focus {
+    border-color: #7B67FF;
+    box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
+  }
+
+  .is_tag {
+    background: #F6F4FF;
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin: 0 5px 5px 0;
+    display: inline-block;
+    font-size: 14px;
+    color: #7B67FF;
+    font-weight: 500;
+  }
+
+  .is_tag button {
+    background: none;
+    border: none;
+    color: #7B67FF;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
     cursor: pointer;
   }
-}
 
-// CV File Info Text
-.file-info {
-  display: block;
-  margin-top: 0.5rem;
-
-  &.hidden {
-    display: none;
+  .is_tag button i {
+    font-size: 12px;
+    opacity: 0.7;
   }
 
-  small {
-    color: #6c757d;
-    font-style: italic;
+  .is_tag button:hover i {
+    opacity: 1;
   }
-}
 
-// Dynamic Taxonomy Input & Tag Styles
-.taxonomy-input-wrapper {
-  position: relative;
-  margin: 0 5px 5px 0;
-  display: inline-block;
-}
-.taxonomy-input {
-  border: 1px solid #e9ecef;
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-size: 14px;
-  min-width: 150px;
-  outline: none;
-  background: #fff;
-  transition: border-color 0.2s;
-}
-.taxonomy-input:focus {
-  border-color: #7B67FF;
-  box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
-}
-.is_tag {
-  background: #F6F4FF;
-  border-radius: 4px;
-  padding: 5px 12px;
-  margin: 0 5px 5px 0;
-  display: inline-block;
-  font-size: 14px;
-  color: #7B67FF;
-  font-weight: 500;
-}
-.is_tag button {
-  background: none;
-  border: none;
-  color: #7B67FF;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.is_tag button i {
-  font-size: 12px;
-  opacity: 0.7;
-}
-.is_tag button:hover i {
-  opacity: 1;
-}
-.more_tag {
-  margin-left: 5px;
-  display: inline-block;
-}
-.more_tag button {
-  background: #F6F4FF;
-  border: none;
-  color: #7B67FF;
-  width: 30px;
-  height: 30px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: background 0.2s, color 0.2s;
-}
-.more_tag button:hover {
-  background: #7B67FF;
-  color: #fff;
+  .more_tag {
+    margin-left: 5px;
+    display: inline-block;
+  }
+
+  .more_tag button {
+    background: #F6F4FF;
+    border: none;
+    color: #7B67FF;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .more_tag button:hover {
+    background: #7B67FF;
+    color: #fff;
+  }
+
 }

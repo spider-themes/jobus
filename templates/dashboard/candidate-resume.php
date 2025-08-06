@@ -6,7 +6,7 @@
  * @subpackage Templates
  */
 
-if (!defined('ABSPATH')) {
+if ( !defined('ABSPATH') ) {
 	exit; // Exit if accessed directly.
 }
 
@@ -29,7 +29,6 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
 ?>
 <div class="position-relative">
     <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
-    <?php jobus_get_template('dashboard/template-part/notice.php'); ?>
 
     <form action="" id="candidate-resume-form" method="post" enctype="multipart/form-data">
 
@@ -40,19 +39,21 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
             <h4 class="dash-title-three"><?php esc_html_e('Resume Attachment', 'jobus'); ?></h4>
             <div class="dash-input-wrapper mb-20">
                 <label for="cv_attachment"><?php esc_html_e('CV Attachment*', 'jobus'); ?></label>
-                <div id="cv-upload-preview" class="cv-preview <?php echo empty($cv_attachment) ? 'hidden' : ''; ?>">
+                <div id="cv-upload-preview" class="preview <?php echo empty($cv_attachment) ? 'hidden' : ''; ?>">
                     <div class="attached-file d-flex align-items-center justify-content-between">
                         <span id="cv-uploaded-filename"><?php echo esc_html($cv_file_name); ?></span>
                         <a href="#" id="remove-uploaded-cv" class="remove-btn"><i class="bi bi-x"></i></a>
                     </div>
                 </div>
                 <input type="hidden" name="profile_cv_action" id="profile_cv_action" value="">
-                <input type="hidden" name="existing_cv_id" value="<?php echo esc_attr($cv_attachment); ?>">
+                <input type="hidden" name="cv_attachment_id" id="cv_attachment_id" value="<?php echo esc_attr($cv_attachment); ?>">
             </div>
-            <div id="cv-upload-btn-wrapper" class="dash-btn-one d-inline-block position-relative me-3 <?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
-                <i class="bi bi-plus"></i>
-                <?php esc_html_e('Upload CV', 'jobus'); ?>
-                <input type="file" id="cv_attachment" name="cv_attachment" accept=".pdf,.doc,.docx">
+            <div id="cv-upload-btn-wrapper" class="<?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
+                <div class="dash-btn-one d-inline-block position-relative me-3">
+                    <i class="bi bi-plus"></i>
+                    <?php esc_html_e( 'Upload CV', 'jobus' ); ?>
+                    <input type="file" id="upload_cv_button" name="upload_cv_button">
+                </div>
             </div>
             <div id="cv-file-info" class="file-info <?php echo !empty($cv_attachment) ? 'hidden' : ''; ?>">
                 <small><?php esc_html_e('Upload file .pdf, .doc, .docx', 'jobus'); ?></small>
@@ -74,29 +75,24 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
                     <label for="video_bg_img"><?php esc_html_e('Background Image', 'jobus'); ?></label>
 
                     <!-- Image Preview Section -->
-                    <?php
-                    if ( !empty($video_data['video_bg_img']['url']) ) {
-                        // If background image is set, show the preview
-                        ?>
-                        <div id="bg-img-preview" class="bg-img-preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?> mb-2">
-                            <div class="attached-file d-flex align-items-center justify-content-between">
-                                <div class="img-preview-wrap" style="max-width: 150px;">
-                                    <img src="<?php echo esc_url( $video_data['video_bg_img']['url'] ); ?>"
-                                         alt="<?php esc_attr_e( 'Background Image Preview', 'jobus' ); ?>">
-                                </div>
-                                <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
-                            </div>
+                    <div id="bg-img-preview" class="preview <?php echo empty($video_data['video_bg_img']['url']) ? 'hidden' : ''; ?>">
+                        <div class="attached-file d-flex align-items-center justify-content-between">
+                            <span id="video-bg-image-uploaded-filename"><?php echo esc_html($video_data['video_bg_img']['url']); ?></span>
+                            <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
                         </div>
-                        <?php
-                    }
-                    ?>
-                    <div id="bg-img-upload-btn-wrapper" class="dash-btn-one d-inline-block position-relative me-3 <?php echo !empty($video_data['video_bg_img']['url']) ? 'hidden' : ''; ?>">
-                        <i class="bi bi-plus"></i>
-                        <?php esc_html_e('Upload Image', 'jobus'); ?>
-                        <input type="file" id="video_bg_img" name="video_bg_img" accept="image/png, image/jpeg" />
-                        <input type="hidden" id="video_bg_img_id" name="video_bg_img[id]" value="<?php echo esc_attr($video_data['video_bg_img']['id'] ?? ''); ?>">
-                        <input type="hidden" id="video_bg_img_url" name="video_bg_img[url]" value="<?php echo esc_attr($video_data['video_bg_img']['url'] ?? ''); ?>">
                     </div>
+
+                    <div id="bg-img-upload-btn-wrapper" class="<?php echo !empty($video_data['video_bg_img']['url']) ? 'hidden' : ''; ?>">
+                        <div class="dash-btn-one d-inline-block position-relative me-3">
+                            <i class="bi bi-plus"></i>
+			                <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
+                            <button type="button" id="video_bg_img_upload_btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                        </div>
+                    </div>
+                    <!-- Hidden fields for image data -->
+                    <input type="hidden" id="video_bg_img_id" name="video_bg_img[id]" value="<?php echo esc_attr($video_data['video_bg_img']['id'] ?? ''); ?>">
+                    <input type="hidden" id="video_bg_img_url" name="video_bg_img[url]" value="<?php echo esc_attr($video_data['video_bg_img']['url'] ?? ''); ?>">
+                    <input type="hidden" id="video_bg_img_action" name="video_bg_img_action" value="">
                 </div>
             </div>
         </div>

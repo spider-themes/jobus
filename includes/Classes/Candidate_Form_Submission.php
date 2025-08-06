@@ -451,65 +451,71 @@ class Candidate_Form_Submission {
 			$meta = array();
 		}
 
-		if (isset($_POST['candidate_profile_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['candidate_profile_nonce'])), 'candidate_profile_update')) {
-			// Sanitize action
-			$action = isset($post_data['profile_cv_action']) ? sanitize_text_field($post_data['profile_cv_action']) : '';
+		// Sanitize action
+		$action = isset($post_data['profile_cv_action']) ? sanitize_text_field($post_data['profile_cv_action']) : '';
 
-			// Create a properly validated and sanitized file data variable
-			$file_data = $_FILES['cv_attachment'] ?? null;
+		// Handle CV attachment
+		if ($action === 'delete') {
+			// Remove CV attachment reference
+			unset($meta['cv_attachment']);
+		} elseif ($action === 'upload') {
+			// Check if this is a media library selection
+			if (!empty($post_data['cv_attachment_id'])) {
+				// Media library selection - just store the attachment ID
+				$meta['cv_attachment'] = absint($post_data['cv_attachment_id']);
+			} elseif (isset($_FILES['cv_attachment']) && !empty($_FILES['cv_attachment']['name'])) {
+				// Direct file upload - create a properly validated and sanitized file data variable
+				$file_data = $_FILES['cv_attachment'] ?? null;
 
-			// Validate if file data exists and has the required structure
-			if (isset($file_data) &&
-			    is_array($file_data) &&
-			    isset($file_data['name']) &&
-			    isset($file_data['type']) &&
-			    isset($file_data['tmp_name']) &&
-			    isset($file_data['error']) &&
-			    isset($file_data['size'])) {
+				// Validate if file data exists and has the required structure
+				if (isset($file_data) &&
+					is_array($file_data) &&
+					isset($file_data['name']) &&
+					isset($file_data['type']) &&
+					isset($file_data['tmp_name']) &&
+					isset($file_data['error']) &&
+					isset($file_data['size'])) {
 
-				// Sanitize filename
-				$filename = sanitize_file_name(basename(wp_unslash($file_data['name'])));
-				$file_data['name'] = $filename;
+					// Sanitize filename
+					$filename = sanitize_file_name(basename(wp_unslash($file_data['name'])));
+					$file_data['name'] = $filename;
 
-				// Handle file upload if it exists and action is upload
-				if ($file_data['error'] === 0 && $action === 'upload') {
-					// Required WordPress media handling functions
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-					require_once ABSPATH . 'wp-admin/includes/image.php';
-					require_once ABSPATH . 'wp-admin/includes/media.php';
+					// Handle file upload if it exists and there are no errors
+					if ($file_data['error'] === 0) {
+						// Required WordPress media handling functions
+						require_once ABSPATH . 'wp-admin/includes/file.php';
+						require_once ABSPATH . 'wp-admin/includes/image.php';
+						require_once ABSPATH . 'wp-admin/includes/media.php';
 
-					// Handle the upload with WordPress functions
-					$uploaded_file = wp_handle_upload($file_data, array('test_form' => false));
+						// Handle the upload with WordPress functions
+						$uploaded_file = wp_handle_upload($file_data, array('test_form' => false));
 
-					if (!isset($uploaded_file['error'])) {
-						$filename = sanitize_file_name(basename($uploaded_file['file']));
-						$filetype = wp_check_filetype($filename);
+						if (!isset($uploaded_file['error'])) {
+							$filename = sanitize_file_name(basename($uploaded_file['file']));
+							$filetype = wp_check_filetype($filename);
 
-						$attachment = array(
-							'guid' => esc_url_raw($uploaded_file['url']),
-							'post_mime_type' => sanitize_mime_type($filetype['type']),
-							'post_title' => sanitize_text_field(preg_replace('/\.[^.]+$/', '', $filename)),
-							'post_content' => '',
-							'post_status' => 'inherit'
-						);
+							$attachment = array(
+								'guid' => esc_url_raw($uploaded_file['url']),
+								'post_mime_type' => sanitize_mime_type($filetype['type']),
+								'post_title' => sanitize_text_field(preg_replace('/\.[^.]+$/', '', $filename)),
+								'post_content' => '',
+								'post_status' => 'inherit'
+							);
 
-						$attachment_id = wp_insert_attachment($attachment, $uploaded_file['file']);
+							$attachment_id = wp_insert_attachment($attachment, $uploaded_file['file']);
 
-						if (!is_wp_error($attachment_id)) {
-							$attach_data = wp_generate_attachment_metadata($attachment_id, $uploaded_file['file']);
-							wp_update_attachment_metadata($attachment_id, $attach_data);
-							$meta['cv_attachment'] = absint($attachment_id);
+							if (!is_wp_error($attachment_id)) {
+								$attach_data = wp_generate_attachment_metadata($attachment_id, $uploaded_file['file']);
+								wp_update_attachment_metadata($attachment_id, $attach_data);
+								$meta['cv_attachment'] = absint($attachment_id);
+							}
 						}
 					}
-				}
-			} elseif ($action === 'delete' && !empty($post_data['existing_cv_id'])) {
-				$existing_id = absint($post_data['existing_cv_id']);
-				if ($existing_id > 0 && wp_delete_attachment($existing_id, true)) {
-					unset($meta['cv_attachment']);
 				}
 			}
 		}
 
+		// Update meta
 		update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
 	}
 
@@ -552,8 +558,17 @@ class Candidate_Form_Submission {
             $meta['video_url'] = esc_url_raw($post_data['video_url']);
         }
 
-        // Handle background image using the correct field name 'video_bg_img'
-        if (!empty($post_data['video_bg_img'])) {
+        // Handle background image action (delete or upload)
+        $bg_img_action = isset($post_data['video_bg_img_action']) ? sanitize_text_field($post_data['video_bg_img_action']) : '';
+
+        if ($bg_img_action === 'delete') {
+            // Clear the background image data
+            $meta['video_bg_img'] = array(
+                'url' => '',
+                'id' => 0
+            );
+        } elseif ($bg_img_action === 'upload' && !empty($post_data['video_bg_img'])) {
+            // Handle background image using the correct field name 'video_bg_img'
             $bg_img = $post_data['video_bg_img'];
 
             // CSF framework media field returns array with 'url' and 'id' keys

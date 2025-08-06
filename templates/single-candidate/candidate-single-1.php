@@ -324,9 +324,7 @@ wp_enqueue_script( 'lightbox' );
                         </ul>
 						<?php
 						if ( $cv_attachment ) {
-							// Get the direct file URL without any query parameters
 							$attachment_url = wp_get_attachment_url($cv_attachment);
-							// Remove query parameters that might cause versioning
 							$clean_url = preg_replace('/\?.*/', '', $attachment_url);
 							?>
                             <a href="<?php echo esc_url($clean_url); ?>"

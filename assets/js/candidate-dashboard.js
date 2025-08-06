@@ -127,54 +127,34 @@
          * @returns {void}
          */
         VideoBgImage: function () {
-            const uploadBtn = $('#video_bg_img');
+            const uploadBtn = $('#video_bg_img_upload_btn'); // This is the button we want to target
             const preview = $('#bg-img-preview');
-            const previewImg = preview.find('img');
+            const previewFilename = $('#video-bg-image-uploaded-filename');
             const uploadBtnWrapper = $('#bg-img-upload-btn-wrapper');
-            const fileInfo = $('#bg-img-file-info');
             const imgIdInput = $('#video_bg_img_id');
             const imgUrlInput = $('#video_bg_img_url');
+            const actionInput = $('#video_bg_img_action');
             const removeBtn = $('#remove-uploaded-bg-img');
 
             if (!window.wp || !window.wp.media) return;
-
-            // Handle file input change
-            uploadBtn.on('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    // Check if file is an image
-                    if (!file.type.match('image.*')) {
-                        alert('Please select an image file (.jpg, .jpeg, .png)');
-                        return;
-                    }
-
-                    // Create a temporary URL for the file
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Show preview
-                        previewImg.attr('src', e.target.result);
-                        preview.removeClass('hidden');
-                        uploadBtnWrapper.addClass('hidden');
-                        fileInfo.addClass('hidden');
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
 
             // Handle remove button click
             removeBtn.on('click', function(e) {
                 e.preventDefault();
 
-                // Clear file input and hidden fields
-                uploadBtn.val('');
+                // Set action to delete
+                actionInput.val('delete');
+
+                // Clear hidden fields
                 imgIdInput.val('');
                 imgUrlInput.val('');
 
-                // Reset UI
+                // Clear the filename
+                previewFilename.text('');
+
+                // Hide preview and show upload button
                 preview.addClass('hidden');
                 uploadBtnWrapper.removeClass('hidden');
-                fileInfo.removeClass('hidden');
-                previewImg.attr('src', '');
             });
 
             // Handle WordPress media uploader
@@ -182,25 +162,32 @@
                 e.preventDefault();
 
                 const mediaUploader = wp.media({
-                    title: 'Select Background Image',
+                    title: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_upload_title || 'Select Background Image',
                     button: {
-                        text: 'Use this image'
+                        text: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_select_text || 'Use this image'
                     },
-                    multiple: false
+                    multiple: false,
+                    library: {
+                        type: 'image'
+                    }
                 });
 
                 mediaUploader.on('select', function() {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
 
+                    // Set action to upload
+                    actionInput.val('upload');
+
                     // Update hidden fields
                     imgIdInput.val(attachment.id);
                     imgUrlInput.val(attachment.url);
 
-                    // Update preview
-                    previewImg.attr('src', attachment.url);
+                    // Update the filename in preview
+                    previewFilename.text(attachment.url);
+
+                    // Show preview, hide upload button
                     preview.removeClass('hidden');
                     uploadBtnWrapper.addClass('hidden');
-                    fileInfo.addClass('hidden');
                 });
 
                 mediaUploader.open();
@@ -1103,24 +1090,59 @@ document.addEventListener('DOMContentLoaded', function() {
         let uploadBtnWrapper = document.getElementById('cv-upload-btn-wrapper');
         let fileInfo = document.getElementById('cv-file-info');
         let cvActionField = document.getElementById('profile_cv_action');
+        let uploadBtn = document.getElementById('upload_cv_button');
+        let cvAttachmentId = document.getElementById('cv_attachment_id');
 
-        if (cvInput) {
-            // File selection handler
-            cvInput.addEventListener('change', function(e) {
-                if (cvInput.files.length > 0) {
-                    let file = cvInput.files[0];
+        if (uploadBtn && window.wp && window.wp.media) {
+            // Media library integration
+            uploadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
 
-                    // Update the filename display
-                    filenameSpan.textContent = file.name;
+                // Create the media frame
+                const mediaUploader = wp.media({
+                    title: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.cv_upload_title || 'Select CV Document',
+                    button: {
+                        text: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.cv_select_text || 'Use this document'
+                    },
+                    library: {
+                        type: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+                    },
+                    multiple: false
+                });
 
-                    // Show preview section and hide upload button
-                    preview.style.display = 'flex';
-                    if(uploadBtnWrapper) uploadBtnWrapper.style.display = 'none';
-                    if(fileInfo) fileInfo.style.display = 'none';
+                // When a file is selected
+                mediaUploader.on('select', function() {
+                    const attachment = mediaUploader.state().get('selection').first().toJSON();
 
-                    // Set the action to upload for form processing
-                    if(cvActionField) cvActionField.value = 'upload';
-                }
+                    // Update hidden field with attachment ID
+                    if (cvAttachmentId) {
+                        cvAttachmentId.value = attachment.id;
+                    }
+
+                    // Update the display
+                    if (filenameSpan) {
+                        filenameSpan.textContent = attachment.title || attachment.filename;
+                    }
+
+                    // Show preview, hide upload button
+                    if (preview) {
+                        preview.classList.remove('hidden');
+                    }
+                    if (uploadBtnWrapper) {
+                        uploadBtnWrapper.classList.add('hidden');
+                    }
+                    if (fileInfo) {
+                        fileInfo.classList.add('hidden');
+                    }
+
+                    // Set action to upload for form processing
+                    if (cvActionField) {
+                        cvActionField.value = 'upload';
+                    }
+                });
+
+                // Open the media library dialog
+                mediaUploader.open();
             });
         }
 
@@ -1129,13 +1151,13 @@ document.addEventListener('DOMContentLoaded', function() {
             removeBtn.addEventListener('click', function(e) {
                 e.preventDefault();
 
-                // Reset file input
-                if(cvInput) cvInput.value = '';
+                // Reset file input and ID field
+                if(cvAttachmentId) cvAttachmentId.value = '';
 
                 // Hide preview and show upload button
-                if(preview) preview.style.display = 'none';
-                if(uploadBtnWrapper) uploadBtnWrapper.style.display = 'inline-block';
-                if(fileInfo) fileInfo.style.display = 'block';
+                if(preview) preview.classList.add('hidden');
+                if(uploadBtnWrapper) uploadBtnWrapper.classList.remove('hidden');
+                if(fileInfo) fileInfo.classList.remove('hidden');
 
                 // Set the action to delete for form processing
                 if(cvActionField) cvActionField.value = 'delete';
