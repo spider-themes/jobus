@@ -29,7 +29,7 @@ $portfolio_data = $candidate_form->get_candidate_portfolio($candidate_id);
 ?>
 <div class="position-relative">
     <h2 class="main-title"><?php esc_html_e('My Resume', 'jobus'); ?></h2>
-    <?php jobus_get_template('dashboard/candidate-templates/notice.php'); ?>
+    <?php jobus_get_template('dashboard/template-part/notice.php'); ?>
 
     <form action="" id="candidate-resume-form" method="post" enctype="multipart/form-data">
 

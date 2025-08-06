@@ -221,7 +221,6 @@ if ( class_exists( 'CSF' ) ) {
 					'longitude' => '90.2526382',
 					'zoom'      => '20',
 				),
-
 			),
 
 		)

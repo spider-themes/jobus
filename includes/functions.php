@@ -947,3 +947,13 @@ function jobus_get_job_save_status( $job_id = '' ): array {
 		'is_saved' => $is_saved
 	];
 }
+
+
+if ( !function_exists('recursive_sanitize_text_field') ) {
+	function recursive_sanitize_text_field($data) {
+		if ( is_array($data) ) {
+			return array_map('recursive_sanitize_text_field', wp_unslash($data));
+		}
+		return sanitize_text_field(wp_unslash($data));
+	}
+}

@@ -62,8 +62,8 @@ class Candidate_Form_Submission {
      *
      * @return int|false Candidate ID or false if not found
      */
-    public static function get_candidate_id(int $user_id = null ) {
-        if (null === $user_id) {
+    public static function get_candidate_id( int $user_id = null ) {
+        if ( null === $user_id) {
             $user_id = get_current_user_id();
         }
 
@@ -122,7 +122,7 @@ class Candidate_Form_Submission {
      * @return array Array containing specification data
      */
     public static function get_candidate_specifications(int $candidate_id): array {
-        if (!$candidate_id) {
+        if ( !$candidate_id ) {
             return array(
                 'specifications' => array(),
                 'age' => '',
@@ -132,14 +132,12 @@ class Candidate_Form_Submission {
         }
 
         $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
-        if (!is_array($meta)) {
+        if ( !is_array($meta) ) {
             $meta = array();
         }
 
         $specifications = array(
-            'specifications' => isset($meta['candidate_specifications']) && is_array($meta['candidate_specifications'])
-                ? $meta['candidate_specifications']
-                : array(),
+            'specifications' => isset($meta['candidate_specifications']) && is_array($meta['candidate_specifications']) ? $meta['candidate_specifications'] : array(),
             'age' => $meta['candidate_age'] ?? '',
             'mail' => $meta['candidate_mail'] ?? '',
             'dynamic_fields' => array()
@@ -190,7 +188,13 @@ class Candidate_Form_Submission {
                 foreach ($candidate_spec_fields as $field) {
                     $meta_key = $field['meta_key'] ?? '';
                     if ($meta_key && isset($post_data[$meta_key])) {
-                        $meta[$meta_key] = is_array($post_data[$meta_key]) ? array_map('sanitize_text_field', $post_data[$meta_key]) : sanitize_text_field($post_data[$meta_key]);
+                        if (is_array($post_data[$meta_key])) {
+                            // Handle array values (like multiple select fields)
+                            $meta[$meta_key] = array_map('sanitize_text_field', wp_unslash($post_data[$meta_key]));
+                        } else {
+                            // Handle single values
+                            $meta[$meta_key] = sanitize_text_field(wp_unslash($post_data[$meta_key]));
+                        }
                     }
                 }
             }
@@ -200,14 +204,24 @@ class Candidate_Form_Submission {
         $specs = array();
         if (isset($post_data['candidate_specifications']) && is_array($post_data['candidate_specifications'])) {
             foreach ($post_data['candidate_specifications'] as $spec) {
-                $title = isset($spec['title']) ? sanitize_text_field($spec['title']) : '';
-                $value = isset($spec['value']) ? sanitize_text_field($spec['value']) : '';
-                if ($title !== '' || $value !== '') {
-                    $specs[] = array('title' => $title, 'value' => $value);
+                if (is_array($spec)) {
+                    $title = isset($spec['title']) ? sanitize_text_field(wp_unslash($spec['title'])) : '';
+                    $value = isset($spec['value']) ? sanitize_text_field(wp_unslash($spec['value'])) : '';
+
+                    // Only add non-empty specifications
+                    if (!empty($title) || !empty($value)) {
+                        $specs[] = array('title' => $title, 'value' => $value);
+                    }
                 }
             }
         }
+
+        // Always set the specifications array, even if empty
         $meta['candidate_specifications'] = $specs;
+
+        // Debug output - uncomment if needed to troubleshoot
+        // error_log('Dynamic fields: ' . print_r($candidate_spec_fields, true));
+        // error_log('Saving meta: ' . print_r($meta, true));
 
         return update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
     }
@@ -258,11 +272,21 @@ class Candidate_Form_Submission {
             $meta = array();
         }
 
-        // Save location fields
+        // Save location fields for frontend form
         $meta['candidate_location_address'] = isset($post_data['candidate_location_address']) ? sanitize_text_field($post_data['candidate_location_address']) : '';
         $meta['candidate_location_lat'] = isset($post_data['candidate_location_lat']) ? sanitize_text_field($post_data['candidate_location_lat']) : '';
         $meta['candidate_location_lng'] = isset($post_data['candidate_location_lng']) ? sanitize_text_field($post_data['candidate_location_lng']) : '';
         $meta['candidate_location_zoom'] = isset($post_data['candidate_location_zoom']) ? intval($post_data['candidate_location_zoom']) : 15;
+
+        // Also update the CSF map field for admin compatibility
+        if (!empty($meta['candidate_location_address']) && !empty($meta['candidate_location_lat']) && !empty($meta['candidate_location_lng'])) {
+            $meta['jobus_candidate_location'] = array(
+                'address'   => $meta['candidate_location_address'],
+                'latitude'  => $meta['candidate_location_lat'],
+                'longitude' => $meta['candidate_location_lng'],
+                'zoom'      => $meta['candidate_location_zoom']
+            );
+        }
 
         return update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
     }
@@ -285,6 +309,19 @@ class Candidate_Form_Submission {
         // Get avatar data
         $user_id = get_post_field('post_author', $candidate_id);
         $profile_picture_id = get_user_meta($user_id, 'candidate_profile_picture_id', true);
+        $thumb_id = get_post_thumbnail_id($candidate_id);
+
+        // Synchronize profile picture ID and featured image
+        if (empty($profile_picture_id) && !empty($thumb_id)) {
+            // If only featured image exists, sync to user meta
+            update_user_meta($user_id, 'candidate_profile_picture_id', $thumb_id);
+            $profile_picture_id = $thumb_id;
+        } elseif (!empty($profile_picture_id) && (empty($thumb_id) || $thumb_id != $profile_picture_id)) {
+            // If only user meta exists or they're different, sync to featured image
+            set_post_thumbnail($candidate_id, $profile_picture_id);
+        }
+
+        // Get the correct avatar URL
         $avatar_url = $profile_picture_id ? wp_get_attachment_url($profile_picture_id) : get_avatar_url($user_id);
 
         return array(
@@ -302,7 +339,6 @@ class Candidate_Form_Submission {
      * @return bool True on success, false on failure
      */
     public function save_candidate_description(int $candidate_id, array $post_data): bool {
-
         // Update candidate name if provided
         if ( !empty($post_data['candidate_name']) ) {
             $user_id = get_post_field('post_author', $candidate_id);
@@ -336,23 +372,36 @@ class Candidate_Form_Submission {
             'post_content' => $description
         ));
 
-	    // Handle profile picture
-	    if (!empty($post_data['profile_picture_action'])) {
-		    $user_id = get_post_field('post_author', $candidate_id);
-		    if ($post_data['profile_picture_action'] === 'delete') {
-			    // Delete the profile picture from user meta
-			    delete_user_meta($user_id, 'candidate_profile_picture_id');
+        // Handle profile picture
+        if ( !empty($post_data['profile_picture_action']) ) {
+            $user_id = get_post_field('post_author', $candidate_id);
+            if ($post_data['profile_picture_action'] === 'delete') {
+                // Delete the profile picture from user meta
+                delete_user_meta($user_id, 'candidate_profile_picture_id');
 
-			    // Default avatar URL if no image is set
-			    update_user_meta($user_id, 'candidate_profile_picture_id', ''); // Ensures no image is set
-		    } elseif (!empty($post_data['candidate_profile_picture_id'])) {
-			    // If there's a new image ID, update the user meta with the new image
-			    update_user_meta($user_id, 'candidate_profile_picture_id', absint($post_data['candidate_profile_picture_id']));
-		    }
-	    }
+                // Also delete the featured image if exists
+                delete_post_thumbnail($candidate_id);
 
+                // Clear caches immediately to ensure changes are visible
+                clean_post_cache($candidate_id);
+                wp_cache_delete($candidate_id, 'posts');
+            } elseif (!empty($post_data['candidate_profile_picture_id'])) {
+                // If there's a new image ID, update the user meta with the new image
+                $image_id = absint($post_data['candidate_profile_picture_id']);
 
-	    return true;
+                // Update user meta
+                update_user_meta($user_id, 'candidate_profile_picture_id', $image_id);
+
+                // Also set as featured image (this is the key part for synchronization)
+                set_post_thumbnail($candidate_id, $image_id);
+
+                // Clear caches immediately to ensure changes are visible
+                clean_post_cache($candidate_id);
+                wp_cache_delete($candidate_id, 'posts');
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -772,9 +821,11 @@ class Candidate_Form_Submission {
     private function handle_form_submission() {
         $user = wp_get_current_user();
 
+	    $post_data = recursive_sanitize_text_field($_POST);
+
         // Get candidate ID
         $candidate_id = $this->get_candidate_id($user->ID);
-        if ( !$candidate_id) {
+        if (!$candidate_id) {
             wp_die(esc_html__('Candidate profile not found.', 'jobus'));
         }
 
@@ -783,7 +834,7 @@ class Candidate_Form_Submission {
             $this->save_candidate_description($candidate_id, $post_data);
         }
 
-		// Handle social icons if present
+        // Handle social icons if present
 	    if (isset($post_data['social_icons']) && is_array($post_data['social_icons'])) {
 		    $this->save_social_icons($candidate_id, $post_data);
 	    }

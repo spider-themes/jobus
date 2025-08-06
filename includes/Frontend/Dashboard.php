@@ -239,7 +239,7 @@ class Dashboard {
 	 * @return string Rendered sidebar menu HTML.
 	 */
 	private function load_sidebar_menu( string $active, array $nav_items = [] ): string {
-		return Template_Loader::get_template_part( 'dashboard/candidate-templates/sidebar-menu', [
+		return Template_Loader::get_template_part( 'dashboard/candidate-sidebar-menu', [
 			'active_endpoint' => $active,
 			'menu_items' => $nav_items ?: self::get_nav_items(),
 		] );

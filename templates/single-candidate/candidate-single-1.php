@@ -207,7 +207,7 @@ wp_enqueue_script( 'lightbox' );
                     <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                         <div class="pt-25">
                             <div class="candidate-avatar m-auto">
-								<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle w-100' ] ) ?>
+								<?php the_post_thumbnail('full', ['class' => 'lazy-img rounded-circle w-100']); ?>
                             </div>
                         </div>
                         <h3 class="candidate-name text-center"><?php the_title() ?></h3>
@@ -338,11 +338,11 @@ wp_enqueue_script( 'lightbox' );
 						?>
                     </div>
 					<?php
-					$location = $meta['jobus_candidate_location'] ?? '';
-					if ( is_array( $location ) ) {
-						$latitude        = $location['latitude'] ?? '';
-						$longitude       = $location['longitude'] ?? '';
-						$address_encoded = urlencode( $location['address'] ); // URL encode the address for safety
+					$google_map = $meta['jobus_candidate_location'] ?? '';
+					if ( is_array( $google_map ) ) {
+						$latitude        = $google_map['latitude'] ?? '';
+						$longitude       = $google_map['longitude'] ?? '';
+						$address_encoded = urlencode( $google_map['address'] ); // URL encode the address for safety
 
 						$is_http    = is_ssl() ? 'https://' : 'http://';
 						$iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
