@@ -84,79 +84,96 @@ class Shortcode {
 	/**
 	 * Login Form Shortcode Handler.
 	 *
-	 * Usage: [jobus_login_form]
+	 * Usage: [jobus_login_form redirect="" signup_link=""]
+	 *
+	 * @param array $atts Shortcode attributes.
 	 *
 	 * @return string Login form HTML.
 	 */
-	public function login_form_shortcode(): string {
-		ob_start();
-
-		if ( ! is_user_logged_in() ) {
-			// Verify nonce before processing form data
-			if ( isset( $_POST['jobus_login_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['jobus_login_nonce'] ) ), 'jobus_login_action' ) ) {
-				$user_login = isset( $_POST['user_login'] ) ? sanitize_text_field( wp_unslash($_POST['user_login']) ) : '';
-				$password = isset( $_POST['pwd'] ) ? sanitize_text_field( wp_unslash($_POST['pwd']) ) : '';
-			} else {
-                $user_login = '';
-                $password = '';
-            }
-			?>
-			<div class="text-center">
-				<h2><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ) ?></h2>
-				<p><?php esc_html_e( 'Still don\'t have an account?', 'jobus' ); ?>
-					<a href="<?php echo esc_url( jobus_opt( 'login_signup_btn_url' ) ) ?>">
-						<?php echo esc_html( jobus_opt( 'login_signup_btn_label' ) ) ?>
-					</a>
-				</p>
-			</div>
-			<div class="form-wrapper m-auto">
-				<form action="<?php echo esc_url( home_url( '/' ) ) ?>wp-login.php" class="mt-10" name="loginform" id="loginform" method="post">
-					<?php wp_nonce_field( 'jobus_login_action', 'jobus_login_nonce' ); ?>
-					<div class="row">
-						<div class="col-12">
-							<div class="input-group-meta position-relative mb-25">
-								<label for="user_login"><?php esc_html_e( 'Username/Email*', 'jobus' ); ?></label>
-								<input type="text" name="log" id="user_login" value="<?php echo esc_attr( $user_login ) ?>"
-									   placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>" autocapitalize="off"
-									   autocomplete="username" required>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="input-group-meta position-relative mb-20">
-								<label for="user_pass"><?php esc_html_e( 'Password*', 'jobus' ) ?></label>
-								<input type="password" name="pwd" id="user_pass"
-									   value="<?php echo esc_attr( $password ) ?>"
-									   placeholder="<?php esc_attr_e( 'Enter Password', 'jobus' ); ?>"
-									   class="pass_log_id" required>
-								<span class="placeholder_icon">
-									<span class="passVicon">
-                                        <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/view.svg') ?>"
-                                             alt="<?php esc_attr_e( 'eye-icon', 'jobus' ); ?>">
-									</span>
-								</span>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="agreement-checkbox d-flex justify-content-between align-items-center">
-								<div>
-									<input type="checkbox" name="rememberme" id="rememberme">
-									<label for="rememberme"><?php esc_html_e( 'Keep me logged in', 'jobus' ); ?></label>
-								</div>
-								<a href="<?php echo esc_url( home_url( '/' ) ) . 'wp-login.php?action=lostpassword'; ?>">
-									<?php esc_html_e( 'Forget Password?', 'jobus' ); ?>
-								</a>
-							</div>
-						</div>
-						<div class="col-12">
-							<button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e( 'Login',
-								'jobus' ); ?></button>
-							<input type="hidden" name="redirect_to" value="<?php echo esc_url( admin_url() ); ?>">
-						</div>
-					</div>
-				</form>
-			</div>
-			<?php
+	public function login_form_shortcode( array $atts = [] ): string {
+		// Verify nonce on form submission
+		if ( isset( $_POST['jobus_login_nonce'] ) ) {
+			if ( ! wp_verify_nonce( wp_unslash($_POST['jobus_login_nonce']), 'jobus_login_action' ) ) {
+				wp_die( esc_html__( 'Security check failed!', 'jobus' ) );
+			}
 		}
+
+        // If user already logged in, return a message
+		if ( is_user_logged_in() ) {
+			return '<div class="login-already">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</div>';
+		}
+
+		// Extract shortcode attributes with defaults
+		$atts = shortcode_atts( array(
+			'redirect'             => '',
+			'signup_link'         => jobus_opt('login_signup_btn_url'),
+			'signup_label'        => jobus_opt('login_signup_btn_label'),
+			'submit_label'        => esc_html__( 'Login', 'jobus' ),
+			'username_label'      => esc_html__( 'Username/Email*', 'jobus' ),
+			'password_label'      => esc_html__( 'Password*', 'jobus' ),
+			'remember_label'      => esc_html__( 'Keep me logged in', 'jobus' ),
+			'username_placeholder'=> esc_attr__( 'Enter username or email', 'jobus' ),
+			'password_placeholder'=> esc_attr__( 'Enter Password', 'jobus' ),
+		), $atts );
+
+		// Set redirect URL with fallback to admin URL
+		$redirect_url = ! empty( $atts['redirect'] ) ? esc_url_raw( $atts['redirect'] ) : admin_url();
+
+		ob_start();
+		?>
+        <div class="login-form-wrapper section-padding">
+            <div class="login-form-header text-center">
+                <h2 class="form-title"><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ); ?></h2>
+                <p class="form-subtitle">
+					<?php esc_html_e( 'Still don\'t have an account?', 'jobus' ); ?>
+                    <a href="<?php echo esc_url( $atts['signup_link'] ); ?>" class="signup-link">
+						<?php echo esc_html( $atts['signup_label'] ); ?>
+                    </a>
+                </p>
+            </div>
+            <div class="form-wrapper login-form-box m-auto">
+                <form name="jobus_login_form" id="jobus_login_form" action="<?php echo esc_url( wp_login_url() ); ?>" method="post" class="mt-10">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group-meta position-relative mb-25">
+                                <label for="user_login"><?php echo esc_html( $atts['username_label'] ); ?></label>
+                                <input type="text" name="log" id="user_login" class="input" value="" placeholder="<?php echo esc_attr( $atts['username_placeholder'] ); ?>" autocomplete="username">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group-meta position-relative mb-20">
+                                <label for="user_pass"><?php echo esc_html( $atts['password_label'] ); ?></label>
+                                <input type="password" name="pwd" id="user_pass" class="input pass_log_id" value="" placeholder="<?php echo esc_attr( $atts['password_placeholder'] ); ?>" autocomplete="current-password">
+                                <span class="placeholder_icon">
+                                    <span class="passVicon">
+                                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'Toggle password visibility', 'jobus' ); ?>" class="eye-icon">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever">
+                                    <label for="rememberme"><?php echo esc_html( $atts['remember_label'] ); ?></label>
+                                </div>
+                                <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" class="reset-link">
+                                    <?php esc_html_e( 'Forget Password?', 'jobus' ); ?>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven fw-500 tran3s d-block mt-20">
+                                <?php echo esc_html( $atts['submit_label'] ); ?>
+                            </button>
+                            <input type="hidden" name="redirect_to" value="<?php echo esc_url( $redirect_url ); ?>">
+                        </div>
+                    </div>
+                    <?php wp_nonce_field( 'jobus_login_action', 'jobus_login_nonce' ); ?>
+                </form>
+            </div>
+        </div>
+		<?php
 
 		return ob_get_clean();
 	}

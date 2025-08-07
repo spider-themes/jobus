@@ -265,7 +265,7 @@ wp_enqueue_script( 'lightbox' );
 							if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
                                 <li class="border-0">
                                     <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
-                                    <div><?php echo jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ?></div>
+                                    <div><?php echo esc_html(jobus_get_first_taxonomy_name( 'jobus_candidate_location' )) ?></div>
                                 </li>
 								<?php
 							}
@@ -392,7 +392,7 @@ wp_enqueue_script( 'lightbox' );
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 
 							<?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
-                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
+                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>

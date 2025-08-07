@@ -57,8 +57,8 @@ $related_jobs = new WP_Query($args);
                             <?php endif; ?>
                             <div class="d-flex align-items-center justify-content-between mt-auto">
                                 <div class="job-location">
-                                    <a href="<?php echo jobus_get_first_taxonomy_link('jobus_job_location') ?>">
-                                        <?php echo jobus_get_first_taxonomy_name('jobus_job_location') ?>
+                                    <a href="<?php echo esc_url(jobus_get_first_taxonomy_link('jobus_job_location')) ?>">
+                                        <?php echo esc_html(jobus_get_first_taxonomy_name('jobus_job_location')) ?>
                                     </a>
                                 </div>
 

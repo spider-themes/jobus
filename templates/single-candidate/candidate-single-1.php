@@ -25,7 +25,7 @@ wp_enqueue_script( 'lightbox' );
                     <div class="blog-pubish-date text-white mt-30 lg-mt-20">
 						<?php
 						if ( has_category() ) {
-							echo get_the_category_list( ', ' ) . ' . ';
+							echo wp_kses_post(get_the_category_list( ', ' )) . ' . ';
 						}
 						?>
 						<?php the_time( get_option( 'date_format' ) ) ?> .
@@ -222,7 +222,7 @@ wp_enqueue_script( 'lightbox' );
 							if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
                                 <li>
                                     <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
-                                    <div><?php echo jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ?></div>
+                                    <div><?php echo esc_html(jobus_get_first_taxonomy_name( 'jobus_candidate_location' )) ?></div>
                                 </li>
 								<?php
 							}
@@ -359,7 +359,7 @@ wp_enqueue_script( 'lightbox' );
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
 							<?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
-                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo get_the_ID(); ?>">
+                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo esc_attr(get_the_ID()); ?>">
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" autocomplete="on"

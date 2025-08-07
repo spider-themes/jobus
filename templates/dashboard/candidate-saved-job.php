@@ -38,7 +38,7 @@ $user = wp_get_current_user();
                             <?php
                             if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
                                 <div class="job-location">
-                                    <a href="<?php echo get_term_link( $location[0]->term_id ) ?>">
+                                    <a href="<?php echo esc_url(get_term_link( $location[0]->term_id )) ?>">
                                         <?php echo esc_html( $location[0]->name ) ?>
                                     </a>
                                 </div>
@@ -46,7 +46,7 @@ $user = wp_get_current_user();
                             }
                             if ( ! empty( $category ) && count( $category ) > 0 ) { ?>
                                 <div class="job-category">
-                                    <a href="<?php echo get_term_link( $category[0]->term_id ) ?>">
+                                    <a href="<?php echo esc_url( get_term_link( $category[0]->term_id )) ?>">
                                         <?php echo esc_html( $category[0]->name ); ?>
                                     </a>
                                 </div>
