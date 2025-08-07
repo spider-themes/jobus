@@ -26,7 +26,7 @@
             this.CandidateSpecificationsRepeater();
             this.EducationRepeater();
             this.ExperienceRepeater();
-            this.PortfolioManager().init();
+            this.PortfolioManager();
             this.VideoBgImage();
 
             this.CandidateTaxonomyManager({
@@ -652,13 +652,19 @@
          * Handles image uploads via the WordPress media library, image removal, and UI updates.
          *
          * @function PortfolioManager
-         * @returns {{init: function}} An object with an init method to initialize the portfolio manager.
+         * @returns {void}
          */
         PortfolioManager: function () {
             const portfolioSection = $('#portfolio-section');
             const portfolioContainer = $('#portfolio-items');
             const portfolioIdsField = $('#portfolio_ids');
             let mediaUploader;
+
+            // Initialize only if requirements are met
+            if (!portfolioSection.length || !window.wp || !window.wp.media) return;
+
+            setupMediaUploader();
+            setupImageRemoval();
 
             /**
              * Sets up the WordPress media uploader for portfolio images
@@ -668,42 +674,61 @@
                 $('#add-portfolio-images').on('click', function (e) {
                     e.preventDefault();
 
-                    // Create or reuse media uploader instance
                     if (!mediaUploader) {
+                        // Create media uploader instance
                         mediaUploader = wp.media({
-                            title: window.jobus_portfolio_upload_title || esc_html__('Select Portfolio Images', 'jobus'),
-                            button: {
-                                text: window.jobus_portfolio_select_text || esc_html__('Add to Portfolio', 'jobus')
-                            },
+                            title: window.jobus_dashboard_params?.texts?.portfolio_upload_title || 'Select Portfolio Images',
+                            button: { text: window.jobus_dashboard_params?.texts?.portfolio_select_text || 'Add to Portfolio' },
                             multiple: true,
-                            library: {
-                                type: 'image'
-                            }
+                            library: { type: 'image' },
+                            frame: 'post'
                         });
 
-                        // Handle image selection
-                        mediaUploader.on('select', function () {
-                            const selection = mediaUploader.state().get('selection');
-                            const portfolioIds = [];
-                            const existingIds = portfolioIdsField.val().split(',').filter(id => id);
-
-                            selection.map(function (attachment) {
-                                attachment = attachment.toJSON();
-                                portfolioIds.push(attachment.id);
-
-                                if (!existingIds.includes(attachment.id.toString())) {
-                                    appendPortfolioItem(attachment);
-                                }
-                            });
-
-                            // Update hidden input with all IDs, maintaining order
-                            const allIds = [...existingIds, ...portfolioIds];
-                            portfolioIdsField.val([...new Set(allIds)].join(','));
-                        });
+                        // Set up selection handler
+                        mediaUploader.on('select', handleImageSelection);
                     }
 
+                    // Open the media uploader
                     mediaUploader.open();
+
+                    // Configure the media frame for better UX
+                    const mediaFrame = mediaUploader.state().frame;
+                    if (mediaFrame?.content.get()?.collection) {
+                        mediaFrame.content.get().collection.props.set('_orderBy', 'menuOrder');
+                    }
+                    if (mediaFrame?.content.get()?.toolbar) {
+                        mediaFrame.content.get().toolbar.$el.find('.media-button-select')
+                            .text('Add Selected Images');
+                    }
                 });
+            }
+
+            /**
+             * Handles the image selection from the media library
+             * @private
+             */
+            function handleImageSelection() {
+                const selection = mediaUploader.state().get('selection');
+                const portfolioIds = [];
+                const existingIds = portfolioIdsField.val().split(',').filter(id => id);
+
+                selection.map(function (attachment) {
+                    attachment = attachment.toJSON();
+                    portfolioIds.push(attachment.id);
+
+                    if (!existingIds.includes(attachment.id.toString())) {
+                        appendPortfolioItem(attachment);
+                    }
+                });
+
+                // Update hidden input with all IDs
+                const allIds = [...existingIds, ...portfolioIds];
+                portfolioIdsField.val([...new Set(allIds)].join(','));
+
+                // Show success message if images were added
+                if (portfolioIds.length > 0) {
+                    showSuccessMessage(portfolioIds.length);
+                }
             }
 
             /**
@@ -713,16 +738,36 @@
              */
             function appendPortfolioItem(attachment) {
                 const thumbnailUrl = attachment.sizes?.thumbnail?.url || attachment.url;
+                const altText = attachment.alt || attachment.title || '';
+                const removeText = window.jobus_dashboard_params?.texts?.remove || 'Remove';
+
                 portfolioContainer.append(`
                     <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="${attachment.id}">
                         <div class="portfolio-image-wrapper position-relative">
-                            <img src="${thumbnailUrl}" class="img-fluid" alt="${attachment.alt || attachment.title}">
+                            <img src="${thumbnailUrl}" class="img-fluid" alt="${altText}">
                             <button type="button" class="remove-portfolio-image btn-close position-absolute" 
-                                    aria-label="${esc_html__('Remove', 'jobus')}">
+                                    aria-label="${removeText}">
                             </button>
                         </div>
                     </div>
                 `);
+            }
+
+            /**
+             * Shows a success message after adding images
+             * @private
+             * @param {number} count - Number of images added
+             */
+            function showSuccessMessage(count) {
+                const message = $(`<div class="alert alert-success mt-2 mb-2">
+                    Successfully added ${count} image${count > 1 ? 's' : ''} to your portfolio
+                </div>`);
+                $('#portfolio-section').append(message);
+
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    message.fadeOut(300, function() { $(this).remove(); });
+                }, 3000);
             }
 
             /**
@@ -734,8 +779,10 @@
                     e.preventDefault();
                     const item = $(this).closest('.portfolio-item');
                     const imageId = item.data('id');
+                    const confirmText = window.jobus_dashboard_params?.texts?.confirm_remove_text ||
+                                        'Are you sure you want to remove this image?';
 
-                    if (confirm(window.jobus_confirm_remove_text || esc_html__('Are you sure you want to remove this image?', 'jobus'))) {
+                    if (confirm(confirmText)) {
                         // Update hidden input value by filtering out removed ID
                         const currentIds = portfolioIdsField.val().split(',').filter(id => id && id != imageId);
                         portfolioIdsField.val(currentIds.join(','));
@@ -747,20 +794,8 @@
                     }
                 });
             }
-
-            /**
-             * Initializes the portfolio manager functionality
-             * @public
-             */
-            function init() {
-                if (portfolioSection.length && window.wp && window.wp.media) {
-                    setupMediaUploader();
-                    setupImageRemoval();
-                }
-            }
-
-            return { init };
         },
+
 
         /**
          * Handles candidate taxonomy management (categories, locations, skills) in the dashboard.

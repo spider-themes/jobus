@@ -83,7 +83,11 @@ class Assets {
 				'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
 				'texts' => [
 					'taxonomy_create_error' => esc_html__('Error creating term. Please try again.', 'jobus'),
-					'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus')
+					'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus'),
+					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
+					'portfolio_select_text' => esc_html__('Add Selected Images', 'jobus'),
+					'remove' => esc_html__('Remove', 'jobus'),
+					'confirm_remove_text' => esc_html__('Are you sure you want to remove this image?', 'jobus')
 				]
 			]);
 
