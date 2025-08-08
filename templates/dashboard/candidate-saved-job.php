@@ -5,6 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Get the current user
 $user = wp_get_current_user();
+
+// Check if this is the dashboard view or full view
+$is_dashboard = $args['is_dashboard'] ?? true;
+$limit = $is_dashboard ? 2 : -1; // Limit to 4 items in dashboard, all items in full view
 ?>
 <div class="position-relative">
     <div class="wrapper">
@@ -16,9 +20,13 @@ $user = wp_get_current_user();
             $saved_jobs = ! empty( $saved_jobs ) ? [ $saved_jobs ] : [];
         }
         $saved_jobs = array_filter( array_map( 'intval', $saved_jobs ) );
+        $total_jobs = count($saved_jobs);
 
-        if ( ! empty( $saved_jobs ) ) {
-            foreach ( $saved_jobs as $job_id ) {
+        // If in dashboard mode, limit the jobs to display
+        $display_jobs = $is_dashboard && $limit > 0 ? array_slice($saved_jobs, 0, $limit) : $saved_jobs;
+
+        if ( ! empty( $display_jobs ) ) {
+            foreach ( $display_jobs as $job_id ) {
                 $location = get_the_terms( $job_id, 'jobus_job_location' );
                 $category = get_the_terms( $job_id, 'jobus_job_cat' );
                 ?>
@@ -78,6 +86,20 @@ $user = wp_get_current_user();
                 </div>
                 <?php
             }
+
+            // Show "View More" button if in dashboard and there are more jobs than the limit
+            if ($is_dashboard && $total_jobs > $limit) {
+                $saved_jobs_url = home_url('/candidate-dashboard/saved-jobs/');
+                ?>
+                <div class="text-center mt-30 mb-20">
+                    <a href="<?php echo esc_url($saved_jobs_url); ?>" class="btn-one fw-500">
+                        <?php esc_html_e('View More', 'jobus'); ?>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <?php
+            }
+
         } else {
             echo '<div class="no-jobs-found">'.esc_html__( 'No saved jobs found.', 'jobus' ).'</div>';
         }

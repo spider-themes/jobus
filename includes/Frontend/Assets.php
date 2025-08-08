@@ -87,7 +87,10 @@ class Assets {
 					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
 					'portfolio_select_text' => esc_html__('Add Selected Images', 'jobus'),
 					'remove' => esc_html__('Remove', 'jobus'),
-					'confirm_remove_text' => esc_html__('Are you sure you want to remove this image?', 'jobus')
+					'confirm_remove_text' => esc_html__('Are you sure you want to remove this image?', 'jobus'),
+					'edit_portfolio' => esc_html__('Edit Gallery', 'jobus'),
+					'clear_portfolio' => esc_html__('Clear', 'jobus'),
+					'confirm_clear_gallery' => esc_html__('Are you sure you want to clear the entire gallery?', 'jobus')
 				]
 			]);
 

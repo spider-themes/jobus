@@ -481,52 +481,38 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
         </div>
 
         <div class="bg-white card-box border-20 mt-40" id="portfolio-section">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Portfolio Gallery', 'jobus' ); ?></h4>
+            <h4 class="dash-title-three"><?php esc_html_e( 'Portfolio', 'jobus' ); ?></h4>
             <div class="dash-input-wrapper mb-30">
-                <label for="portfolio_title"><?php esc_html_e( 'Portfolio Title', 'jobus' ); ?></label>
-				<?php
-				$portfolio_data = $candidate_form->get_candidate_portfolio( $candidate_id );
-				?>
+                <label for="portfolio_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text"
                        id="portfolio_title"
                        name="portfolio_title"
                        value="<?php echo esc_attr( $portfolio_data['portfolio_title'] ); ?>"
-                       class="form-control"
-                       placeholder="<?php esc_attr_e( 'My Portfolio', 'jobus' ); ?>">
+                       class="form-control">
             </div>
 
             <!-- Portfolio Preview Gallery -->
             <div class="portfolio-preview-wrapper mb-4">
-                <div class="row" id="portfolio-items">
-					<?php
-					if ( ! empty( $portfolio_data['portfolio'] ) ) :
-						foreach ( $portfolio_data['portfolio'] as $image_id ) :
-							$image_url = wp_get_attachment_image_url( $image_id );
-							if ( $image_url ):
-								?>
-                                <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="<?php echo esc_attr( $image_id ); ?>">
-                                    <div class="portfolio-image-wrapper position-relative">
-                                        <img src="<?php echo esc_url( $image_url ); ?>" class="img-fluid"
-                                             alt="<?php echo esc_attr( get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ); ?>">
-                                        <button type="button" class="remove-portfolio-image btn-close position-absolute"
-                                                aria-label="<?php esc_attr_e( 'Remove', 'jobus' ); ?>"></button>
-                                    </div>
-                                </div>
-							    <?php
-							endif;
-						endforeach;
-					endif;
-					?>
+                <div id="portfolio-items">
+                    <?php if (!empty($portfolio_data['portfolio'])) : ?>
+                        <ul class="portfolio-image-list">
+                            <?php foreach ($portfolio_data['portfolio'] as $image_id) :
+                                $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
+                                if ($image_url) : ?>
+                                    <li data-id="<?php echo esc_attr($image_id); ?>">
+                                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true)); ?>">
+                                    </li>
+                                <?php endif;
+                            endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <input type="hidden" name="portfolio" id="portfolio_ids" value="<?php echo esc_attr( implode( ',', $portfolio_data['portfolio'] ) ); ?>">
+            <input type="hidden" name="portfolio" id="portfolio_ids" value="<?php echo !empty($portfolio_data['portfolio']) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
             <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
-                <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Portfolio Images', 'jobus' ); ?>
+                <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>
-            <div class="mt-2">
-                <small class="text-muted"><?php esc_html_e( 'You can select multiple images at once. Click or drag images to select.', 'jobus' ); ?></small>
-            </div>
         </div>
 
         <div class="button-group d-inline-flex align-items-center mt-30">

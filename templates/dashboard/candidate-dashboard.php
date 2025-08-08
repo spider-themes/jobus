@@ -127,15 +127,16 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
     </div>
 
     <div class="row d-flex pt-50 lg-pt-10">
-        <div class="col-xl-7 col-lg-6 d-flex flex-column">
-            <div class="user-activity-chart bg-white border-20 mt-30 h-100">
-                <h4 class="dash-title-two">Profile Views</h4>
-                <div class="ps-5 pe-5 mt-50"><img src="../images/lazy.svg" data-src="images/main-graph.png" alt="" class="lazy-img m-auto"></div>
+
+        <div class="col-lg-7">
+            <div class="saved-job-tab bg-white border-20">
+                <h4 class="dash-title-two"><?php esc_html_e( 'Saved Job', 'jobus' ); ?></h4>
+	            <?php jobus_get_template_part('dashboard/candidate-saved-job'); ?>
             </div>
         </div>
 
-        <div class="col-xl-5 col-lg-6 d-flex">
-            <div class="recent-job-tab bg-white border-20 mt-30 w-100">
+        <div class="col-lg-5">
+            <div class="recent-job-tab bg-white border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                 <div class="wrapper">
                     <?php

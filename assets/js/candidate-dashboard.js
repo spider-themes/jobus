@@ -26,7 +26,6 @@
             this.CandidateSpecificationsRepeater();
             this.EducationRepeater();
             this.ExperienceRepeater();
-            this.PortfolioManager();
             this.VideoBgImage();
 
             this.CandidateTaxonomyManager({
@@ -648,156 +647,6 @@
 
 
         /**
-         * Manages the portfolio section for candidates.
-         * Handles image uploads via the WordPress media library, image removal, and UI updates.
-         *
-         * @function PortfolioManager
-         * @returns {void}
-         */
-        PortfolioManager: function () {
-            const portfolioSection = $('#portfolio-section');
-            const portfolioContainer = $('#portfolio-items');
-            const portfolioIdsField = $('#portfolio_ids');
-            let mediaUploader;
-
-            // Initialize only if requirements are met
-            if (!portfolioSection.length || !window.wp || !window.wp.media) return;
-
-            setupMediaUploader();
-            setupImageRemoval();
-
-            /**
-             * Sets up the WordPress media uploader for portfolio images
-             * @private
-             */
-            function setupMediaUploader() {
-                $('#add-portfolio-images').on('click', function (e) {
-                    e.preventDefault();
-
-                    if (!mediaUploader) {
-                        // Create media uploader instance
-                        mediaUploader = wp.media({
-                            title: window.jobus_dashboard_params?.texts?.portfolio_upload_title || 'Select Portfolio Images',
-                            button: { text: window.jobus_dashboard_params?.texts?.portfolio_select_text || 'Add to Portfolio' },
-                            multiple: true,
-                            library: { type: 'image' },
-                            frame: 'post'
-                        });
-
-                        // Set up selection handler
-                        mediaUploader.on('select', handleImageSelection);
-                    }
-
-                    // Open the media uploader
-                    mediaUploader.open();
-
-                    // Configure the media frame for better UX
-                    const mediaFrame = mediaUploader.state().frame;
-                    if (mediaFrame?.content.get()?.collection) {
-                        mediaFrame.content.get().collection.props.set('_orderBy', 'menuOrder');
-                    }
-                    if (mediaFrame?.content.get()?.toolbar) {
-                        mediaFrame.content.get().toolbar.$el.find('.media-button-select')
-                            .text('Add Selected Images');
-                    }
-                });
-            }
-
-            /**
-             * Handles the image selection from the media library
-             * @private
-             */
-            function handleImageSelection() {
-                const selection = mediaUploader.state().get('selection');
-                const portfolioIds = [];
-                const existingIds = portfolioIdsField.val().split(',').filter(id => id);
-
-                selection.map(function (attachment) {
-                    attachment = attachment.toJSON();
-                    portfolioIds.push(attachment.id);
-
-                    if (!existingIds.includes(attachment.id.toString())) {
-                        appendPortfolioItem(attachment);
-                    }
-                });
-
-                // Update hidden input with all IDs
-                const allIds = [...existingIds, ...portfolioIds];
-                portfolioIdsField.val([...new Set(allIds)].join(','));
-
-                // Show success message if images were added
-                if (portfolioIds.length > 0) {
-                    showSuccessMessage(portfolioIds.length);
-                }
-            }
-
-            /**
-             * Appends a new portfolio item to the container
-             * @private
-             * @param {Object} attachment - WordPress media attachment object
-             */
-            function appendPortfolioItem(attachment) {
-                const thumbnailUrl = attachment.sizes?.thumbnail?.url || attachment.url;
-                const altText = attachment.alt || attachment.title || '';
-                const removeText = window.jobus_dashboard_params?.texts?.remove || 'Remove';
-
-                portfolioContainer.append(`
-                    <div class="col-lg-3 col-md-4 col-6 portfolio-item mb-30" data-id="${attachment.id}">
-                        <div class="portfolio-image-wrapper position-relative">
-                            <img src="${thumbnailUrl}" class="img-fluid" alt="${altText}">
-                            <button type="button" class="remove-portfolio-image btn-close position-absolute" 
-                                    aria-label="${removeText}">
-                            </button>
-                        </div>
-                    </div>
-                `);
-            }
-
-            /**
-             * Shows a success message after adding images
-             * @private
-             * @param {number} count - Number of images added
-             */
-            function showSuccessMessage(count) {
-                const message = $(`<div class="alert alert-success mt-2 mb-2">
-                    Successfully added ${count} image${count > 1 ? 's' : ''} to your portfolio
-                </div>`);
-                $('#portfolio-section').append(message);
-
-                // Remove the message after 3 seconds
-                setTimeout(() => {
-                    message.fadeOut(300, function() { $(this).remove(); });
-                }, 3000);
-            }
-
-            /**
-             * Sets up image removal functionality
-             * @private
-             */
-            function setupImageRemoval() {
-                $(document).on('click', '.remove-portfolio-image', function (e) {
-                    e.preventDefault();
-                    const item = $(this).closest('.portfolio-item');
-                    const imageId = item.data('id');
-                    const confirmText = window.jobus_dashboard_params?.texts?.confirm_remove_text ||
-                                        'Are you sure you want to remove this image?';
-
-                    if (confirm(confirmText)) {
-                        // Update hidden input value by filtering out removed ID
-                        const currentIds = portfolioIdsField.val().split(',').filter(id => id && id != imageId);
-                        portfolioIdsField.val(currentIds.join(','));
-
-                        // Remove item with animation
-                        item.fadeOut('fast', function () {
-                            $(this).remove();
-                        });
-                    }
-                });
-            }
-        },
-
-
-        /**
          * Handles candidate taxonomy management (categories, locations, skills) in the dashboard.
          * Provides autocomplete, creation, and removal of taxonomy terms using AJAX and UI updates.
          *
@@ -1302,6 +1151,264 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+    /**
+     * Portfolio Gallery functionality for the candidate dashboard
+     * Handles image uploads, selection, and removal for candidate portfolios
+     */
+    function PortfolioGallery() {
+        // Basic DOM elements
+        const portfolioContainer = document.getElementById('portfolio-items');
+        const portfolioIdsField = document.getElementById('portfolio_ids');
+        const addButton = document.getElementById('add-portfolio-images');
+        let buttonsContainer;
+
+        // Exit if required elements don't exist
+        if (!portfolioContainer || !portfolioIdsField || !addButton || !window.wp?.media) return;
+
+        // Function to update button states based on gallery content
+        function updateGalleryButtons() {
+            const hasImages = portfolioIdsField.value.length > 0;
+
+            // Create buttons container if it doesn't exist
+            if (!buttonsContainer) {
+                buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'portfolio-buttons-container mt-3 d-flex gap-2';
+                addButton.parentNode.insertBefore(buttonsContainer, addButton.nextSibling);
+            }
+
+            // Update buttons visibility
+            if (hasImages) {
+                // Show Edit and Clear buttons, hide Add Gallery
+                addButton.style.display = 'none';
+
+                // Clear the container and add the edit and clear buttons
+                buttonsContainer.innerHTML = `
+                    <button type="button" id="edit-portfolio-images" class="dash-btn-two">
+                        <i class="bi bi-pencil"></i> ${jobus_dashboard_params?.texts?.edit_portfolio || 'Edit Gallery'}
+                    </button>
+                    <button type="button" id="clear-portfolio-images" class="dash-btn-danger">
+                        <i class="bi bi-trash"></i> ${jobus_dashboard_params?.texts?.clear_portfolio || 'Clear'}
+                    </button>
+                `;
+
+                // Add event listeners to the new buttons
+                document.getElementById('edit-portfolio-images').addEventListener('click', openMediaGallery);
+                document.getElementById('clear-portfolio-images').addEventListener('click', clearGallery);
+            } else {
+                // Show Add Gallery, hide Edit and Clear buttons
+                addButton.style.display = '';
+                buttonsContainer.innerHTML = '';
+            }
+        }
+
+        // Function to clear the gallery
+        function clearGallery(e) {
+            if (e) e.preventDefault();
+
+            // Confirm before clearing
+            if (confirm(jobus_dashboard_params?.texts?.confirm_clear_gallery || 'Are you sure you want to clear the entire gallery?')) {
+                // Clear the hidden field
+                portfolioIdsField.value = '';
+
+                // Clear the gallery container
+                const listContainer = portfolioContainer.querySelector('ul.portfolio-image-list');
+                if (listContainer) {
+                    listContainer.innerHTML = '';
+                }
+
+                // Update buttons
+                updateGalleryButtons();
+            }
+        }
+
+        // Function to open the media gallery for editing
+        function openMediaGallery(e) {
+            if (e) e.preventDefault();
+
+            // Create the media frame with gallery view
+            const frame = wp.media({
+                frame: 'post',  // Use post frame which includes gallery view
+                state: 'gallery-edit',  // Start in the gallery edit state
+                title: jobus_dashboard_params?.texts?.portfolio_upload_title || 'Edit Portfolio Images',
+                button: {
+                    text: jobus_dashboard_params?.texts?.portfolio_select_text || 'Update Gallery'
+                },
+                library: {
+                    type: 'image'
+                },
+                multiple: true
+            });
+
+            // When media frame opens, pre-select existing images and set to GRID view
+            frame.on('open', function() {
+                // Set view to grid/gallery mode
+                if (frame.content.get() !== null) {
+                    frame.content.get().collection.props.set('display', 'grid');
+                    frame.content.get().options.mode = 'grid';
+                }
+
+                // Get current selection
+                const selection = frame.state().get('selection');
+
+                // If we have existing image IDs, pre-select them
+                if (portfolioIdsField.value) {
+                    const ids = portfolioIdsField.value.split(',').filter(id => id.trim());
+
+                    ids.forEach(function(id) {
+                        const attachment = wp.media.attachment(id);
+                        attachment.fetch();
+                        selection.add(attachment);
+                    });
+                }
+            });
+
+            // When images are selected
+            frame.on('select', function() {
+                // Get selected images
+                const selection = frame.state().get('selection').toJSON();
+
+                // Show loading state
+                const editButton = document.getElementById('edit-portfolio-images');
+                if (editButton) {
+                    editButton.classList.add('processing');
+                    editButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+                }
+
+                // Clear previous selection
+                portfolioIdsField.value = '';
+                const listContainer = getOrCreateListContainer();
+                listContainer.innerHTML = '';
+
+                // Debug log to verify selection
+                console.log('Selected images:', selection.length, selection);
+
+                // If there are selected images
+                if (selection.length > 0) {
+                    const allIds = [];
+
+                    // Process each selected image
+                    selection.forEach(function(attachment) {
+                        const id = attachment.id.toString();
+                        allIds.push(id);
+
+                        // Get the best available image size
+                        const imageUrl = attachment.sizes?.thumbnail?.url ||
+                                       attachment.sizes?.medium?.url ||
+                                       attachment.url;
+
+                        // Create list item with image
+                        const listItem = document.createElement('li');
+                        listItem.setAttribute('data-id', id);
+                        
+                        // Add image to the list item
+                        listItem.innerHTML = `<img src="${imageUrl}" alt="${attachment.alt || attachment.title || ''}">`;
+                        
+                        // Append the list item to the container
+                        listContainer.appendChild(listItem);
+                    });
+
+                    // Update the hidden field with all image IDs
+                    portfolioIdsField.value = allIds.join(',');
+                    
+                    // Debug log to verify hidden field value
+                    console.log('Portfolio IDs field value:', portfolioIdsField.value);
+
+                    // Ensure the preview container is visible
+                    portfolioContainer.style.display = 'block';
+                    
+                    // Make sure the parent preview wrapper is visible too
+                    const previewWrapper = portfolioContainer.closest('.portfolio-preview-wrapper');
+                    if (previewWrapper) {
+                        previewWrapper.style.display = 'block';
+                    }
+                }
+
+                // Reset the button and update gallery buttons
+                if (editButton) {
+                    editButton.classList.remove('processing');
+                    editButton.innerHTML = `<i class="bi bi-pencil"></i> ${jobus_dashboard_params?.texts?.edit_portfolio || 'Edit Gallery'}`;
+                }
+
+                updateGalleryButtons();
+            });
+
+            // Open the media frame
+            frame.open();
+        }
+
+        // Create or get the list container
+        function getOrCreateListContainer() {
+            // Check if the list container already exists
+            let listContainer = portfolioContainer.querySelector('ul.portfolio-image-list');
+            if (!listContainer) {
+                // Create a list container if it doesn't exist
+                listContainer = document.createElement('ul');
+                listContainer.className = 'portfolio-image-list';
+                portfolioContainer.innerHTML = ''; // Clear existing content
+                portfolioContainer.appendChild(listContainer);
+            }
+            return listContainer;
+        }
+
+        // Add button click handler - now just calls openMediaGallery
+        addButton.addEventListener('click', openMediaGallery);
+
+        // Initialize the portfolio container and buttons
+        function initializePortfolioContainer() {
+            if (!portfolioIdsField.value) {
+                updateGalleryButtons();
+                return;
+            }
+
+            const ids = portfolioIdsField.value.split(',').filter(id => id.trim());
+            if (ids.length === 0) {
+                updateGalleryButtons();
+                return;
+            }
+
+            // Get or create the list container
+            const listContainer = getOrCreateListContainer();
+
+            // For each ID, try to get the attachment and create a list item
+            ids.forEach(id => {
+                // Skip if this ID is already in the list
+                if (listContainer.querySelector(`li[data-id="${id}"]`)) return;
+
+                const attachment = wp.media.attachment(id);
+                attachment.fetch({
+                    success: function() {
+                        const imageUrl = attachment.get('sizes')?.thumbnail?.url ||
+                                        attachment.get('sizes')?.medium?.url ||
+                                        attachment.get('url');
+
+                        // Create list item without remove button
+                        const listItem = document.createElement('li');
+                        listItem.setAttribute('data-id', id);
+
+                        // Add image to the list item
+                        listItem.innerHTML = `<img src="${imageUrl}" alt="${attachment.get('alt') || attachment.get('title') || ''}">`;
+
+                        // Append the list item to the container
+                        listContainer.appendChild(listItem);
+
+                        // Update buttons after adding images
+                        updateGalleryButtons();
+                    }
+                });
+            });
+
+            // Ensure buttons are updated even if images don't load
+            updateGalleryButtons();
+        }
+
+        // Initialize on page load
+        if (window.wp?.media) {
+            initializePortfolioContainer();
+        }
+    }
+
     // Initialize handlers
     cvUploadHandler();
+    PortfolioGallery();
 });
