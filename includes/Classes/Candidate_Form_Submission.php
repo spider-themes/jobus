@@ -760,11 +760,25 @@ class Candidate_Form_Submission {
 
         // Handle portfolio images
         if (isset($post_data['portfolio'])) {
-            $portfolio_ids = array_filter(
-                explode(',', sanitize_text_field($post_data['portfolio'])),
-                function($id) { return is_numeric($id) && $id > 0; }
-            );
-            $meta['portfolio'] = $portfolio_ids;
+            // Check if portfolio is an array with a single string value (comma-separated IDs)
+            if (is_array($post_data['portfolio']) && count($post_data['portfolio']) === 1 && is_string($post_data['portfolio'][0])) {
+                $portfolio_ids = array_filter(
+                    explode(',', sanitize_text_field($post_data['portfolio'][0])),
+                    function($id) { return is_numeric($id) && intval($id) > 0; }
+                );
+                $meta['portfolio'] = array_map('intval', $portfolio_ids);
+            } 
+            // Handle direct array of IDs
+            else if (is_array($post_data['portfolio'])) {
+                $portfolio_ids = array_filter(
+                    $post_data['portfolio'],
+                    function($id) { return is_numeric($id) && intval($id) > 0; }
+                );
+                $meta['portfolio'] = array_map('intval', $portfolio_ids);
+            }
+        } else {
+            // If no portfolio data is submitted, set as empty array
+            $meta['portfolio'] = array();
         }
 
 	    update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta);
