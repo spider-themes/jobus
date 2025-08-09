@@ -181,8 +181,9 @@ class Dashboard {
 	 */
 	private function load_candidate_saved_job( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/candidate-saved-job', [
-			'user_id'  => $user->ID,
-			'username' => $user->user_login,
+			'user_id'      => $user->ID,
+			'username'     => $user->user_login,
+			'is_dashboard' => false
 		] );
 	}
 

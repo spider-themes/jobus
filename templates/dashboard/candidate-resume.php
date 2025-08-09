@@ -494,7 +494,8 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             <!-- Portfolio Preview Gallery -->
             <div class="portfolio-preview-wrapper mb-4">
                 <div id="portfolio-items">
-                    <?php if (!empty($portfolio_data['portfolio'])) : ?>
+                    <?php
+                    if (!empty($portfolio_data['portfolio'])) : ?>
                         <ul class="portfolio-image-list">
                             <?php foreach ($portfolio_data['portfolio'] as $image_id) :
                                 $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');

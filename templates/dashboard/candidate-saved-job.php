@@ -8,7 +8,8 @@ $user = wp_get_current_user();
 
 // Check if this is the dashboard view or full view
 $is_dashboard = $args['is_dashboard'] ?? true;
-$limit = $is_dashboard ? 2 : -1; // Limit to 4 items in dashboard, all items in full view
+$limit = $is_dashboard ? 4 : -1; // Limit to 4 items in dashboard, no limit in full view
+
 ?>
 <div class="position-relative">
     <div class="wrapper">
@@ -23,7 +24,7 @@ $limit = $is_dashboard ? 2 : -1; // Limit to 4 items in dashboard, all items in 
         $total_jobs = count($saved_jobs);
 
         // If in dashboard mode, limit the jobs to display
-        $display_jobs = $is_dashboard && $limit > 0 ? array_slice($saved_jobs, 0, $limit) : $saved_jobs;
+        $display_jobs = $is_dashboard ? array_slice($saved_jobs, 0, $limit) : $saved_jobs;
 
         if ( ! empty( $display_jobs ) ) {
             foreach ( $display_jobs as $job_id ) {
@@ -87,11 +88,25 @@ $limit = $is_dashboard ? 2 : -1; // Limit to 4 items in dashboard, all items in 
                 <?php
             }
 
-            // Show "View More" button if in dashboard and there are more jobs than the limit
-            if ($is_dashboard && $total_jobs > $limit) {
-                $saved_jobs_url = home_url('/candidate-dashboard/saved-jobs/');
+            // Show "View More" button only in dashboard view if there are more jobs than the limit
+            if ($is_dashboard && $total_jobs > 4) {
+                // Get page that contains the shortcode
+                $args = array(
+                    'post_type' => 'page',
+                    'posts_per_page' => 1,
+                    'post_status' => 'publish',
+                    's' => '[jobus_candidate_dashboard]'
+                );
+                $shortcode_page = get_posts($args);
+
+                if (!empty($shortcode_page)) {
+                    $page_url = trailingslashit(get_permalink($shortcode_page[0]->ID));
+                    $saved_jobs_url = $page_url . 'saved-jobs';
+                } else {
+                    $saved_jobs_url = home_url('/saved-jobs/');
+                }
                 ?>
-                <div class="text-center mt-30 mb-20">
+                <div class="view-more-btn">
                     <a href="<?php echo esc_url($saved_jobs_url); ?>" class="btn-one fw-500">
                         <?php esc_html_e('View More', 'jobus'); ?>
                         <i class="bi bi-arrow-right"></i>

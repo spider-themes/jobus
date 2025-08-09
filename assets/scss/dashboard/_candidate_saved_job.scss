@@ -6,4 +6,14 @@
     justify-content: end;
     gap: 12px;
   }
+  .saved-job-tab {
+    .job-list-one {
+      border-radius: 0;
+      border-bottom: 1px solid #E3F0EB;
+    }
+    .view-more-btn {
+      text-align: center;
+      padding-bottom: 24px;
+    }
+  }
 }

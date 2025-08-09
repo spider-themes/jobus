@@ -1665,6 +1665,14 @@ Table of Contents:
   justify-content: end;
   gap: 12px;
 }
+.dashboard-body .saved-job-tab .job-list-one {
+  border-radius: 0;
+  border-bottom: 1px solid #E3F0EB;
+}
+.dashboard-body .saved-job-tab .view-more-btn {
+  text-align: center;
+  padding-bottom: 24px;
+}
 
 /*============= Candidate Job Applied ================*/
 .dashboard-body .company-name .company-placeholder {

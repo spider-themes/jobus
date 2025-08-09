@@ -57,14 +57,6 @@ class Assets {
 			'candidate_email_nonce' => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form
 		] );
 
-
-		if ( is_user_logged_in() ) {
-			$user = wp_get_current_user();
-			if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
-				wp_enqueue_media();
-			}
-		}
-
 		$post = get_post();
 		if ( $post && has_shortcode($post->post_content, 'jobus_candidate_dashboard')) {
 
