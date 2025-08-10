@@ -1,7 +1,7 @@
 === Jobus ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.0.9
+Stable tag: 0.1.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4

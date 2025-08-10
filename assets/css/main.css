@@ -5178,7 +5178,12 @@ img {
   margin: 0 auto;
   max-width: 720px;
   border-radius: 20px !important;
-  padding: 50px 15px 50px;
+  padding: 50px 35px 50px;
+}
+@media (max-width: 450px) {
+  .user-data-form {
+    padding: 30px 15px 30px;
+  }
 }
 .user-data-form h2 {
   font-size: 50px;
