@@ -2,6 +2,7 @@
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\includes\Frontend;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -93,12 +94,12 @@ class Shortcode {
 	public function login_form_shortcode( array $atts = [] ): string {
 		// Verify nonce on form submission
 		if ( isset( $_POST['jobus_login_nonce'] ) ) {
-			if ( ! wp_verify_nonce( wp_unslash($_POST['jobus_login_nonce']), 'jobus_login_action' ) ) {
+			if ( ! wp_verify_nonce( wp_unslash( $_POST['jobus_login_nonce'] ), 'jobus_login_action' ) ) {
 				wp_die( esc_html__( 'Security check failed!', 'jobus' ) );
 			}
 		}
 
-        // If user already logged in, return a message
+		// If user already logged in, return a message
 		if ( is_user_logged_in() ) {
 			return '<div class="login-already">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</div>';
 		}
@@ -106,14 +107,14 @@ class Shortcode {
 		// Extract shortcode attributes with defaults
 		$atts = shortcode_atts( array(
 			'redirect'             => '',
-			'signup_link'         => jobus_opt('login_signup_btn_url'),
-			'signup_label'        => jobus_opt('login_signup_btn_label'),
-			'submit_label'        => esc_html__( 'Login', 'jobus' ),
-			'username_label'      => esc_html__( 'Username/Email*', 'jobus' ),
-			'password_label'      => esc_html__( 'Password*', 'jobus' ),
-			'remember_label'      => esc_html__( 'Keep me logged in', 'jobus' ),
-			'username_placeholder'=> esc_attr__( 'Enter username or email', 'jobus' ),
-			'password_placeholder'=> esc_attr__( 'Enter Password', 'jobus' ),
+			'signup_link'          => jobus_opt( 'login_signup_btn_url' ),
+			'signup_label'         => jobus_opt( 'login_signup_btn_label' ),
+			'submit_label'         => esc_html__( 'Login', 'jobus' ),
+			'username_label'       => esc_html__( 'Username/Email*', 'jobus' ),
+			'password_label'       => esc_html__( 'Password*', 'jobus' ),
+			'remember_label'       => esc_html__( 'Keep me logged in', 'jobus' ),
+			'username_placeholder' => esc_attr__( 'Enter username or email', 'jobus' ),
+			'password_placeholder' => esc_attr__( 'Enter Password', 'jobus' ),
 		), $atts );
 
 		// Set redirect URL with fallback to admin URL
@@ -137,16 +138,19 @@ class Shortcode {
                         <div class="col-12">
                             <div class="input-group-meta position-relative mb-25">
                                 <label for="user_login"><?php echo esc_html( $atts['username_label'] ); ?></label>
-                                <input type="text" name="log" id="user_login" class="input" value="" placeholder="<?php echo esc_attr( $atts['username_placeholder'] ); ?>" autocomplete="username">
+                                <input type="text" name="log" id="user_login" class="input" value=""
+                                       placeholder="<?php echo esc_attr( $atts['username_placeholder'] ); ?>" autocomplete="username">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="input-group-meta position-relative mb-20">
                                 <label for="user_pass"><?php echo esc_html( $atts['password_label'] ); ?></label>
-                                <input type="password" name="pwd" id="user_pass" class="input pass_log_id" value="" placeholder="<?php echo esc_attr( $atts['password_placeholder'] ); ?>" autocomplete="current-password">
+                                <input type="password" name="pwd" id="user_pass" class="input pass_log_id" value=""
+                                       placeholder="<?php echo esc_attr( $atts['password_placeholder'] ); ?>" autocomplete="current-password">
                                 <span class="placeholder_icon">
                                     <span class="passVicon">
-                                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'Toggle password visibility', 'jobus' ); ?>" class="eye-icon">
+                                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>"
+                                             alt="<?php esc_attr_e( 'Toggle password visibility', 'jobus' ); ?>" class="eye-icon">
                                     </span>
                                 </span>
                             </div>
@@ -158,18 +162,18 @@ class Shortcode {
                                     <label for="rememberme"><?php echo esc_html( $atts['remember_label'] ); ?></label>
                                 </div>
                                 <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" class="reset-link">
-                                    <?php esc_html_e( 'Forget Password?', 'jobus' ); ?>
+									<?php esc_html_e( 'Forget Password?', 'jobus' ); ?>
                                 </a>
                             </div>
                         </div>
                         <div class="col-12">
                             <button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven fw-500 tran3s d-block mt-20">
-                                <?php echo esc_html( $atts['submit_label'] ); ?>
+								<?php echo esc_html( $atts['submit_label'] ); ?>
                             </button>
                             <input type="hidden" name="redirect_to" value="<?php echo esc_url( $redirect_url ); ?>">
                         </div>
                     </div>
-                    <?php wp_nonce_field( 'jobus_login_action', 'jobus_login_nonce' ); ?>
+					<?php wp_nonce_field( 'jobus_login_action', 'jobus_login_nonce' ); ?>
                 </form>
             </div>
         </div>
@@ -190,27 +194,46 @@ class Shortcode {
 
 		if ( is_user_logged_in() ) {
 			$current_user = wp_get_current_user();
+
+			// Get candidate dashboard page URL
+			$page_url = home_url('/');
+			$dashboard_page = get_posts([
+				'post_type'      => 'page',
+				'posts_per_page' => 1,
+				'post_status'    => 'publish',
+				'fields'         => 'ids', // Only get IDs for better performance
+				's'              => '[jobus_candidate_dashboard]'
+			]);
+
+			if ( !empty($dashboard_page)) {
+				$page_url = trailingslashit(get_permalink($dashboard_page[0]));
+			}
 			?>
-			<div class="text-center">
-                <h2>
+            <div class="text-center">
+                <h2 class="name">
 					<?php
 					echo sprintf(
-					    // translators: %s is the display name of the current user
+					// translators: %s is the display name of the current user
 						esc_html__( 'Welcome, %s!', 'jobus' ),
-						esc_html($current_user->display_name)
+						esc_html( $current_user->display_name )
 					);
 					?>
                 </h2>
-                <p><?php esc_html_e('You are currently logged in to your account.', 'jobus'); ?></p>
-				<p><?php esc_html_e('If you wish to log out, please click the button below.', 'jobus'); ?></p>
-				<a href="<?php echo esc_url(wp_logout_url(home_url('/'))) ?>" class="btn btn-eleven fw-500 tran3s d-block mt-20">
-					<?php esc_html_e('Logout', 'jobus') ?>
-				</a>
-				<p class="mt-3">
-					<?php esc_html_e('Or return to the', 'jobus'); ?>
-					<a href="<?php echo esc_url(home_url('/')) ?>"> <?php esc_html_e('Homepage', 'jobus') ?> </a>
-				</p>
-			</div>
+                <p><?php esc_html_e( 'You are currently logged in to your account.', 'jobus' ); ?></p>
+                <p><?php esc_html_e( 'If you wish to log out, please click the button below.', 'jobus' ); ?></p>
+                <div class="user-action-buttons">
+                    <a href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ) ?>" class="btn-three">
+						<?php esc_html_e( 'Logout', 'jobus' ) ?>
+                    </a>
+                    <a href="<?php echo esc_url( $page_url ) ?>" class="btn-four">
+						<?php esc_html_e( 'Dashboard', 'jobus' ) ?>
+                    </a>
+                </div>
+                <p class="mt-3">
+					<?php esc_html_e( 'Or return to the', 'jobus' ); ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ) ?>"> <?php esc_html_e( 'Homepage', 'jobus' ) ?> </a>
+                </p>
+            </div>
 			<?php
 		}
 

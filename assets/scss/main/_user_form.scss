@@ -1,0 +1,11 @@
+.user-data-form {
+  .name {
+    text-transform: capitalize;
+  }
+  .user-action-buttons  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+}

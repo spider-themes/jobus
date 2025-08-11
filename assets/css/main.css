@@ -6692,4 +6692,14 @@ img {
   transform: rotate(180deg);
 }
 
+.user-data-form .name {
+  text-transform: capitalize;
+}
+.user-data-form .user-action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
 /*# sourceMappingURL=main.css.map */
