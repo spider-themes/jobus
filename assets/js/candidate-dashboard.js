@@ -1264,70 +1264,31 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // When images are selected
-            frame.on('select', function() {
-                // Get selected images
-                const selection = frame.state().get('selection').toJSON();
-
-                // Show loading state
-                const editButton = document.getElementById('edit-portfolio-images');
-                if (editButton) {
-                    editButton.classList.add('processing');
-                    editButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
-                }
-
+            frame.on('update', function(selection) {
+                // Convert selection to JSON
+                const attachments = selection.toJSON();
                 // Clear previous selection
                 portfolioIdsField.value = '';
                 const listContainer = getOrCreateListContainer();
                 listContainer.innerHTML = '';
 
-                // Debug log to verify selection
-                console.log('Selected images:', selection.length, selection);
-
-                // If there are selected images
-                if (selection.length > 0) {
+                if (attachments.length > 0) {
                     const allIds = [];
 
-                    // Process each selected image
-                    selection.forEach(function(attachment) {
+                    attachments.forEach(function(attachment) {
                         const id = attachment.id.toString();
                         allIds.push(id);
-
-                        // Get the best available image size
-                        const imageUrl = attachment.sizes?.thumbnail?.url ||
-                                       attachment.sizes?.medium?.url ||
-                                       attachment.url;
-
-                        // Create list item with image
+                        const imageUrl = attachment.sizes?.thumbnail?.url || attachment.sizes?.medium?.url || attachment.url;
                         const listItem = document.createElement('li');
                         listItem.setAttribute('data-id', id);
-                        
-                        // Add image to the list item
                         listItem.innerHTML = `<img src="${imageUrl}" alt="${attachment.alt || attachment.title || ''}">`;
-                        
-                        // Append the list item to the container
                         listContainer.appendChild(listItem);
                     });
 
-                    // Update the hidden field with all image IDs
                     portfolioIdsField.value = allIds.join(',');
-                    
-                    // Debug log to verify hidden field value
-                    console.log('Portfolio IDs field value:', portfolioIdsField.value);
-
-                    // Ensure the preview container is visible
                     portfolioContainer.style.display = 'block';
-                    
-                    // Make sure the parent preview wrapper is visible too
                     const previewWrapper = portfolioContainer.closest('.portfolio-preview-wrapper');
-                    if (previewWrapper) {
-                        previewWrapper.style.display = 'block';
-                    }
-                }
-
-                // Reset the button and update gallery buttons
-                if (editButton) {
-                    editButton.classList.remove('processing');
-                    editButton.innerHTML = `<i class="bi bi-pencil"></i> ${jobus_dashboard_params?.texts?.edit_portfolio || 'Edit Gallery'}`;
+                    if (previewWrapper) previewWrapper.style.display = 'block';
                 }
 
                 updateGalleryButtons();

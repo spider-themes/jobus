@@ -26,7 +26,6 @@ $education_data  = $candidate_form->get_candidate_education( $candidate_id );
 $experience_data = $candidate_form->get_candidate_experience( $candidate_id );
 $portfolio_data  = $candidate_form->get_candidate_portfolio( $candidate_id );
 
-
 // Handle form submission for taxonomies [categories, locations, skills]
 if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
@@ -510,7 +509,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 </div>
             </div>
 
-            <input type="hidden" name="portfolio" id="portfolio_ids" value="<?php echo !empty($portfolio_data['portfolio']) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
+            <input type="hidden" name="portfolio[]" id="portfolio_ids" value="<?php echo !empty($portfolio_data['portfolio']) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
             <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>

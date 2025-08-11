@@ -743,9 +743,9 @@ class Candidate_Form_Submission {
      *
      * @return void True on success, false on failure
      */
-    private function save_candidate_portfolio(int $candidate_id, array $post_data ): void {
-        if (!$candidate_id ) {
-	        return ;
+    private function save_candidate_portfolio(int $candidate_id, array $post_data): void {
+        if (!$candidate_id) {
+            return;
         }
 
         $meta = get_post_meta($candidate_id, 'jobus_meta_candidate_options', true);
@@ -760,30 +760,32 @@ class Candidate_Form_Submission {
 
         // Handle portfolio images
         if (isset($post_data['portfolio'])) {
-            // Check if portfolio is an array with a single string value (comma-separated IDs)
             if (is_array($post_data['portfolio']) && count($post_data['portfolio']) === 1 && is_string($post_data['portfolio'][0])) {
                 $portfolio_ids = array_filter(
                     explode(',', sanitize_text_field($post_data['portfolio'][0])),
-                    function($id) { return is_numeric($id) && intval($id) > 0; }
-                );
-                $meta['portfolio'] = array_map('intval', $portfolio_ids);
-            } 
-            // Handle direct array of IDs
-            else if (is_array($post_data['portfolio'])) {
-                $portfolio_ids = array_filter(
-                    $post_data['portfolio'],
-                    function($id) { return is_numeric($id) && intval($id) > 0; }
+                    fn($id) => is_numeric($id) && intval($id) > 0
                 );
                 $meta['portfolio'] = array_map('intval', $portfolio_ids);
             }
-        } else {
-            // If no portfolio data is submitted, set as empty array
-            $meta['portfolio'] = array();
+            elseif (is_array($post_data['portfolio'])) {
+                $portfolio_ids = array_filter(
+                    $post_data['portfolio'],
+                    fn($id) => is_numeric($id) && intval($id) > 0
+                );
+                $meta['portfolio'] = array_map('intval', $portfolio_ids);
+            }
+            elseif (is_string($post_data['portfolio'])) {
+                $portfolio_ids = array_filter(
+                    explode(',', sanitize_text_field($post_data['portfolio'])),
+                    fn($id) => is_numeric($id) && intval($id) > 0
+                );
+                $meta['portfolio'] = array_map('intval', $portfolio_ids);
+            }
         }
 
-	    update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta);
+        update_post_meta($candidate_id, 'jobus_meta_candidate_options', $meta);
     }
-
+    
     /**
      * Handle the actual form submission
      */

@@ -18,8 +18,10 @@ $candidate_specifications = !empty($meta['candidate_specifications']) && is_arra
 $cv_attachment = !empty($meta['cv_attachment']) ? $meta['cv_attachment'] : '';
 $social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons']) ? $meta['social_icons'] : '';
 
-$portfolio = !empty($meta['portfolio']) ? $meta['portfolio'] : '';
-$portfolio_ids = explode(',', $portfolio);
+$portfolio_ids = [];
+if ( ! empty( $meta['portfolio'] ) ) {
+    $portfolio_ids = is_array($meta['portfolio']) ? $meta['portfolio'] : explode(',', $meta['portfolio']);
+}
 
 $specifications = jobus_opt('candidate_specifications');
 $skills = get_the_terms(get_the_ID(), 'jobus_candidate_skill');
