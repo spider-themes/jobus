@@ -1474,18 +1474,22 @@ Table of Contents:
   transform: none;
 }
 
-/*========== Login Form Styling ===========*/
-.jobus-login-from.dashboard-body, .jobus-logout-from.dashboard-body {
-  margin-left: 0;
+/*========== Portfolio Styling ===========*/
+.portfolio-preview-wrapper .portfolio-image-list {
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
-.jobus-login-from.dashboard-body .login_from, .jobus-logout-from.dashboard-body .login_from {
-  background-color: transparent;
+.portfolio-preview-wrapper .portfolio-image-list li {
+  list-style: none;
+  border: 1px solid #E3E3E3;
+  border-radius: 10px;
+  overflow: hidden;
 }
-.jobus-login-from .logout_from .user-data-form .btn, .jobus-logout-from .logout_from .user-data-form .btn {
-  line-height: 52px;
-  max-width: 50%;
-  margin: 0 auto;
-  color: #fff;
+.portfolio-preview-wrapper .portfolio-image-list li img {
+  width: 100px;
+  height: 100px;
 }
 
 .dashboard-body .preview {
@@ -1665,13 +1669,35 @@ Table of Contents:
   justify-content: end;
   gap: 12px;
 }
-.dashboard-body .saved-job-tab .job-list-one {
-  border-radius: 0;
-  border-bottom: 1px solid #E3F0EB;
+.dashboard-body .saved-job-tab .saved-jobs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 30px;
 }
-.dashboard-body .saved-job-tab .view-more-btn {
-  text-align: center;
-  padding-bottom: 24px;
+.dashboard-body .saved-job-tab .saved-jobs-header .title, .dashboard-body .saved-job-tab .saved-jobs-header .view-more-btn {
+  font-family: "gordita", serif;
+  font-size: 20px;
+  color: #244034;
+  font-weight: 500;
+  margin: 0;
+}
+.dashboard-body .saved-job-tab .saved-jobs-header .view-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+.dashboard-body .saved-job-tab .saved-jobs-header .view-more-btn:hover {
+  color: #3F634D;
+}
+.dashboard-body .saved-job-tab .job-list-one {
+  border-top: 1px solid #E3F0EB;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.dashboard-body .saved-job-tab .job-list-one:last-child {
+  border-radius: 10px;
 }
 
 /*============= Candidate Job Applied ================*/

@@ -1733,23 +1733,21 @@
   }
 }
 
-
-
-/*========== Login Form Styling ===========*/
-.jobus-login-from, .jobus-logout-from {
-  &.dashboard-body {
-    margin-left: 0;
-    .login_from {
-      background-color: transparent;
-    }
-  }
-  .logout_from {
-    .user-data-form {
-      .btn {
-        line-height: 52px;
-        max-width: 50%;
-        margin: 0 auto;
-        color: #fff;
+/*========== Portfolio Styling ===========*/
+.portfolio-preview-wrapper {
+  .portfolio-image-list {
+    padding: 0;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    li {
+      list-style: none;
+      border: 1px solid #E3E3E3;;
+      border-radius: 10px;
+      overflow: hidden;
+      img {
+        width: 100px;
+        height: 100px;
       }
     }
   }

@@ -6,14 +6,43 @@
     justify-content: end;
     gap: 12px;
   }
+
   .saved-job-tab {
-    .job-list-one {
-      border-radius: 0;
-      border-bottom: 1px solid #E3F0EB;
+
+    .saved-jobs-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 30px;
+
+      .title, .view-more-btn {
+        font-family: "gordita", serif;
+        font-size: 20px;
+        color: #244034;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .view-more-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+
+        &:hover {
+          color: #3F634D;
+        }
+      }
     }
-    .view-more-btn {
-      text-align: center;
-      padding-bottom: 24px;
+
+    .job-list-one {
+      border-top: 1px solid #E3F0EB;
+      border-radius: 0;
+      margin-bottom: 0;
+
+      &:last-child {
+        border-radius: 10px;
+      }
     }
   }
 }

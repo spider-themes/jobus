@@ -493,23 +493,30 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             <!-- Portfolio Preview Gallery -->
             <div class="portfolio-preview-wrapper mb-4">
                 <div id="portfolio-items">
-                    <?php
-                    if (!empty($portfolio_data['portfolio'])) : ?>
+					<?php
+					if ( ! empty( $portfolio_data['portfolio'] ) ) {
+                        ?>
                         <ul class="portfolio-image-list">
-                            <?php foreach ($portfolio_data['portfolio'] as $image_id) :
-                                $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
-                                if ($image_url) : ?>
-                                    <li data-id="<?php echo esc_attr($image_id); ?>">
-                                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_post_meta($image_id, '_wp_attachment_image_alt', true)); ?>">
+							<?php
+                            foreach ( $portfolio_data['portfolio'] as $image_id ) {
+								$image_url = wp_get_attachment_image_url( $image_id );
+								if ( $image_url ) { ?>
+                                    <li data-id="<?php echo esc_attr( $image_id ); ?>">
+                                        <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( get_post_meta( $image_id, '_wp_attachment_image_alt', true ) ); ?>">
                                     </li>
-                                <?php endif;
-                            endforeach; ?>
+								    <?php
+								}
+                            }
+                            ?>
                         </ul>
-                    <?php endif; ?>
+					    <?php
+					}
+                    ?>
                 </div>
             </div>
 
-            <input type="hidden" name="portfolio[]" id="portfolio_ids" value="<?php echo !empty($portfolio_data['portfolio']) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
+            <input type="hidden" name="portfolio[]" id="portfolio_ids"
+                   value="<?php echo ! empty( $portfolio_data['portfolio'] ) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
             <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>
