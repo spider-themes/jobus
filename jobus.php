@@ -70,7 +70,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		}
 
-
 		/**
 		 * Load CSF files
 		 */
@@ -83,14 +82,12 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
 		}
 
-
 		/**
 		 * Include Files
 		 *
 		 * Load core files required to run the plugin.
 		 */
 		public function core_includes(): void {
-
 			// Functions
 			require_once __DIR__ . '/includes/functions.php';
 			require_once __DIR__ . '/includes/filters.php';
@@ -127,7 +124,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 * @return void
 		 */
 		public function init_plugin(): void {
-
 			// Classes
 			new Jobus\includes\Classes\Ajax_Actions();
 			new Jobus\includes\Classes\Candidate_Form_Submission();
@@ -169,7 +165,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
 			define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
 		}
-
 
 		/**
 		 * Do stuff upon plugin activation

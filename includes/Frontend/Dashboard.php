@@ -245,5 +245,4 @@ class Dashboard {
 			'menu_items' => $nav_items ?: self::get_nav_items(),
 		] );
 	}
-
 }
