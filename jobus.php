@@ -100,7 +100,8 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/includes/Frontend/Assets.php';
 			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
 			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
-			require_once __DIR__ . '/includes/Frontend/Dashboard.php';
+			require_once __DIR__ . '/includes/Frontend/Dashboard_Candidate.php';
+			require_once __DIR__ . '/includes/Frontend/Dashboard_Employer.php';
 			require_once __DIR__ . '/includes/Frontend/Dashboard_Helper.php';
 
 			//Admin UI
@@ -144,7 +145,8 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\includes\Frontend\Assets();
 			new \jobus\includes\Frontend\Shortcode();
 			new \jobus\includes\Frontend\Template_Loader();
-			new \jobus\includes\Frontend\Dashboard();
+			new \jobus\includes\Frontend\Dashboard_Candidate();
+			new \jobus\includes\Frontend\Dashboard_Employer();
 			new \jobus\includes\Frontend\Dashboard_Helper();
 
 			//Elementor & Blocks

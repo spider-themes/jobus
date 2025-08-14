@@ -177,7 +177,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
 
 				<?php
 				// Load the saved jobs template
-				jobus_get_template_part( 'dashboard/candidate-saved-job', [
+				jobus_get_template_part( 'dashboard/candidate/saved-job', [
 					'is_dashboard' => true,
 					'limit'        => $limit
 				] );
