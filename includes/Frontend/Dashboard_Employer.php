@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Dashboard
  *
- * Handles the candidate dashboard logic, including:
+ * Handles the employer dashboard logic, including:
  * - Registering dashboard endpoints
  * - Rendering the dashboard and sidebar
  * - Loading section templates based on the active endpoint
@@ -32,7 +32,7 @@ class Dashboard_Employer {
 	 * Registers shortcode and dashboard endpoints.
 	 */
 	public function __construct() {
-		// Register a single shortcode for the candidate dashboard
+		// Register a single shortcode for the employer dashboard
 		add_shortcode( 'jobus_employer_dashboard', [ $this, 'employer_dashboard' ] );
 
 		// Register endpoints for each dashboard section
@@ -47,6 +47,10 @@ class Dashboard_Employer {
 	 */
 	public function register_dashboard_endpoints(): void {
 		add_rewrite_endpoint( 'dashboard', EP_PAGES );
+		add_rewrite_endpoint( 'profile', EP_PAGES );
+		add_rewrite_endpoint( 'jobs', EP_PAGES );
+		add_rewrite_endpoint( 'saved-candidate', EP_PAGES );
+		add_rewrite_endpoint( 'change-password', EP_PAGES );
 	}
 
 	/**
@@ -59,16 +63,15 @@ class Dashboard_Employer {
 	public static function get_nav_items(): array {
 		return [
 			'dashboard'        => [ 'label' => esc_html__( 'Dashboard', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/dashboard.svg' ],
-			'profile'          => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
-			'resume'           => [ 'label' => esc_html__( 'Resume', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
-			'applied-jobs'     => [ 'label' => esc_html__( 'Applied Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
-			'saved-jobs'       => [ 'label' => esc_html__( 'Saved Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/saved-job.svg' ],
+			'profile'           => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
+			'jobs'          => [ 'label' => esc_html__( 'My Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
+			'saved-candidate'     => [ 'label' => esc_html__( 'Saved Candidate', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
 			'change-password'  => [ 'label' => esc_html__( 'Change Password', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/password.svg' ],
 		];
 	}
 
 	/**
-	 * Render the candidate dashboard main layout.
+	 * Render the employer dashboard main layout.
 	 *
 	 * Handles authentication, role checking, sidebar rendering, and loads the correct section template.
 	 *
@@ -82,8 +85,8 @@ class Dashboard_Employer {
 		}
 
 		$user = wp_get_current_user();
-		if ( ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
-			// If not a candidate, show the logout form (prevent dashboard access for other roles)
+		if ( ! in_array( 'jobus_employer', (array) $user->roles, true ) ) {
+			// If not a employer, show the logout form (prevent dashboard access for other roles)
 			return Template_Loader::get_template_part( 'dashboard/logout-form' );
 		}
 
@@ -99,7 +102,7 @@ class Dashboard_Employer {
 
 		ob_start();
 
-		echo '<div class="dashboard-wrapper">';
+		echo '<div class="dashboard-wrapper ffff">';
 		echo '<aside class="dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo $this->load_sidebar_menu($active, $nav_items);
@@ -111,21 +114,17 @@ class Dashboard_Employer {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_profile( $user );
 				break;
-			case 'resume':
+			case 'jobs':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_resume( $user );
+				echo $this->load_jobs( $user );
 				break;
-			case 'applied-jobs':
+			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_candidate_job_applied( $user );
-				break;
-			case 'saved-jobs':
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_candidate_saved_job( $user );
+				echo $this->load_saved_candidate( $user );
 				break;
 			case 'change-password':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_candidate_change_password( $user );
+				echo $this->load_change_password( $user );
 				break;
 			default:
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
@@ -140,11 +139,11 @@ class Dashboard_Employer {
 	}
 
 	/**
-	 * Load the candidate dashboard template.
+	 * Load the employer dashboard template.
 	 *
 	 * @param WP_User $user The current user.
 	 *
-	 * @return string Candidate dashboard HTML.
+	 * @return string Employer dashboard HTML.
 	 */
 	private function load_dashboard( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/dashboard', [
@@ -160,25 +159,10 @@ class Dashboard_Employer {
 	 *
 	 * @return string Change password section HTML.
 	 */
-	private function load_candidate_change_password( WP_User $user ): string {
+	private function load_change_password( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
-		] );
-	}
-
-	/**
-	 * Load the saved jobs section template.
-	 *
-	 * @param WP_User $user The current user.
-	 *
-	 * @return string Saved jobs section HTML.
-	 */
-	private function load_candidate_saved_job( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/saved-job', [
-			'user_id'      => $user->ID,
-			'username'     => $user->user_login,
-			'is_dashboard' => false
 		] );
 	}
 
@@ -189,8 +173,8 @@ class Dashboard_Employer {
 	 *
 	 * @return string Applied jobs section HTML.
 	 */
-	private function load_candidate_job_applied( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/job-applied', [
+	private function load_saved_candidate( WP_User $user ): string {
+		return Template_Loader::get_template_part( 'dashboard/employer/saved-candidate', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
@@ -203,8 +187,8 @@ class Dashboard_Employer {
 	 *
 	 * @return string Resume section HTML.
 	 */
-	private function load_resume( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/resume', [
+	private function load_jobs( WP_User $user ): string {
+		return Template_Loader::get_template_part( 'dashboard/employer/jobs', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );

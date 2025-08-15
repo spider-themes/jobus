@@ -32,12 +32,15 @@ class User {
 		add_action( 'admin_post_nopriv_register_employer', [ $this, 'employer_registration' ] );
 		add_action( 'admin_post_register_employer', [ $this, 'employer_registration' ] );
 
-		// Restrict admin menu items for users with the Candidate role
+		// Restrict admin menu items for users with the Candidate & Employer role
 		add_action( 'admin_menu', [ $this, 'restrict_candidate_menu' ] );
+		add_action( 'admin_menu', [ $this, 'restrict_employer_menu' ] );
 
-		// User-Candidate Synchronization
+		// User Candidate & Employer Synchronization
 		add_action( 'user_register', [ $this, 'create_candidate_post_for_user' ] );
 		add_action( 'profile_update', [ $this, 'create_candidate_post_for_user' ] );
+		add_action( 'user_register', [ $this, 'create_company_post_for_user' ] );
+		add_action( 'profile_update', [ $this, 'create_company_post_for_user' ] );
 	}
 
 	public function manage_user_roles(): void {
@@ -60,15 +63,20 @@ class User {
 		) );
 
 		add_role( 'jobus_employer', esc_html__( 'Employer (Jobus)', 'jobus' ), array(
-			'read'      => true,
-			'read_post' => true,
+			'read'                      => true,  // Only allow reading
+			'read_post'                 => true,  // Allow editing their own profile
+			'upload_files'              => true,  // Allow uploading files
+			'delete_attachments'        => true,
+			'delete_others_attachments' => true,
+			'edit_attachments'          => true,
+			'edit_others_attachments'   => true,
+			'unfiltered_upload'         => true,
+			'read_others_attachments'   => true,
 		) );
 	}
 
 	public function candidate_registration(): void {
-		if ( ! empty( $_POST['register_candidate_nonce'] )
-		     && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' )
-		) {
+		if ( ! empty( $_POST['register_candidate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' ) ) {
 
 			// Get form data
 			$candidate_username         = ! empty( $_POST['candidate_username'] ) ? sanitize_user( wp_unslash( $_POST['candidate_username'] ) ) : '';
@@ -107,9 +115,7 @@ class User {
 	}
 
 	public function employer_registration(): void {
-		if ( ! empty( $_POST['register_employer_nonce'] )
-		     && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action' )
-		) {
+		if ( ! empty( $_POST['register_employer_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_employer_nonce'] ) ), 'register_employer_action' ) ) {
 
 			// Get form data
 			$employer_username         = ! empty( $_POST['employer_username'] ) ? sanitize_user( wp_unslash( $_POST['employer_username'] ) ) : '';
@@ -166,11 +172,27 @@ class User {
 	}
 
 	/**
+	 * Restrict certain admin menu items for users with the Employer role.
+	 */
+	public function restrict_employer_menu(): void {
+		$user = wp_get_current_user();
+		if ( in_array( 'jobus_employer', (array) $user->roles ) ) {
+			// Remove unnecessary menus for employers
+			remove_menu_page( 'edit.php' ); // Posts
+			remove_menu_page( 'edit-comments.php' ); // Comments
+			remove_menu_page( 'tools.php' ); // Tools
+			remove_menu_page( 'edit.php?post_type=jobus_job' ); // Job
+			remove_menu_page( 'edit.php?post_type=jobus_candidate' ); // Candidate
+			remove_menu_page( 'edit.php?post_type=elementor_library' ); // elementor_library
+		}
+	}
+
+	/**
 	 * Create a Candidate post for users with the 'jobus_candidate' role.
 	 *
 	 * @param int $user_id The user ID
 	 */
-	public function create_candidate_post_for_user( $user_id ) {
+	public function create_candidate_post_for_user( int $user_id ) {
 		$user = get_userdata( $user_id );
 		if ( ! $user || ! in_array( 'jobus_candidate', (array) $user->roles ) ) {
 			return;
@@ -199,6 +221,45 @@ class User {
 
 				// Allow other code to hook into this event
 				do_action( 'jobus_candidate_post_created', $post_id, $user_id );
+			}
+		}
+	}
+
+	/**
+	 * Create a Company post for users with the 'jobus_employer' role.
+	 *
+	 * @param int $user_id The user ID
+	 */
+	public function create_company_post_for_user( int $user_id ) {
+
+		$user = get_userdata( $user_id );
+		if ( ! $user || ! in_array( 'jobus_employer', (array) $user->roles ) ) {
+			return;
+		}
+
+		// Check if a company post already exists for this user
+		$existing = get_posts( [
+			'post_type'   => 'jobus_company',
+			'author'      => $user_id,
+			'post_status' => 'any',
+			'numberposts' => 1,
+		] );
+
+		if ( empty( $existing ) ) {
+			// Create a new company post
+			$post_id = wp_insert_post( [
+				'post_type'   => 'jobus_company',
+				'post_title'  => $user->display_name,
+				'post_status' => 'publish',
+				'post_author' => $user_id,
+			] );
+
+			if ( ! is_wp_error( $post_id ) ) {
+				// Add user ID as post-meta for extra linkage
+				update_post_meta( $post_id, 'jobus_company_id', $user_id );
+
+				// Allow other code to hook into this event
+				do_action( 'jobus_company_post_created', $post_id, $user_id );
 			}
 		}
 	}

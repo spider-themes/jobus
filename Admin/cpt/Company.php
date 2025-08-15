@@ -13,10 +13,6 @@ class Company {
 	public function __construct() {
 		// Register the posttype
 		add_action( 'init', [ $this, 'register_post_types_company' ] );
-
-		// Admin Columns
-		add_filter( 'manage_company_posts_columns', [ $this, 'company_columns' ] );
-		add_action( 'manage_company_posts_custom_column', [ $this, 'company_custom_columns' ], 10, 2 );
 	}
 
 
@@ -58,9 +54,8 @@ class Company {
 			'item_reverted_to_draft'   => esc_html__( 'Company reverted to draft.', 'jobus' ),
 			'item_scheduled'           => esc_html__( 'Company scheduled.', 'jobus' ),
 			'item_updated'             => esc_html__( 'Company updated.', 'jobus' ),
+			'menu_name'                => esc_html__( 'Company', 'jobus' ),
 		);
-
-		$supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author', 'custom-fields', 'publicize' ];
 
 		$args = array(
 			'labels'             => $labels,
@@ -76,14 +71,31 @@ class Company {
 			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
-			'hierarchical'       => true,
+			'hierarchical'       => false,
 			'map_meta_cap'       => true,
-			'taxonomies'         => array(),
+			'taxonomies'         => array( 'jobus_company_cat', 'jobus_company_location' ),
+			'supports'           => [
+				'title',
+				'editor',
+				'thumbnail',
+				'excerpt',
+				'author',
+				'revisions',
+				'custom-fields'
+			],
 			'menu_position'      => 8,
-			'supports'           => $supports,
-			'yarpp_support'      => true,
 			'menu_icon'          => 'dashicons-plus-alt',
-			'show_admin_column'  => true,
+			'capabilities'       => array(
+				'edit_post'              => 'edit_post',
+				'read_post'              => 'read_post',
+				'delete_post'            => 'delete_post',
+				'edit_posts'             => 'edit_posts',
+				'edit_others_posts'      => 'edit_others_posts',
+				'publish_posts'          => 'publish_posts',
+				'read_private_posts'     => 'read_private_posts',
+				'create_posts'           => false // Set too false to remove add new button
+			),
+			'rest_base'          => 'companies',
 		);
 
 		register_post_type( 'jobus_company', $args ); // Register the post-type `company`
@@ -105,6 +117,7 @@ class Company {
 			]
 		) );
 
+		// Register post taxonomies Location
 		register_taxonomy( 'jobus_company_location', 'jobus_company', array(
 			'public'            => true,
 			'hierarchical'      => true,
@@ -116,36 +129,10 @@ class Company {
 				'slug'       => 'company-location',
 				'with_front' => false,
 			),
-			'labels'            => [
-				'name' => esc_html__( 'Location', 'jobus' ),
-			]
+			'labels'            => array(
+				'name'         => esc_html__( 'Location', 'jobus' ),
+				'add_new_item' => esc_html__( 'Add New Location', 'jobus' ),
+			)
 		) );
-	}
-
-	// Admin Columns
-	public function company_columns( $columns ) {
-		if ( empty( $columns ) && ! is_array( $columns ) ) {
-			$columns = [];
-		}
-
-		unset( $columns['cb'], $columns['title'], $columns['date'], $columns['author'], $columns['taxonomy-company_cat'] );
-
-		$show_columns                         = [];
-		$show_columns['cb']                   = '<input type="checkbox" />';
-		$show_columns['title']                = esc_html__( 'Title', 'jobus' );
-		$show_columns['taxonomy-company_cat'] = esc_html__( 'Categories', 'jobus' );
-		$show_columns['author']               = esc_html__( 'Author', 'jobus' );
-		$show_columns['date']                 = esc_html__( 'Date', 'jobus' );
-
-		return array_merge( $show_columns, $columns );
-	}
-
-	// Custom Columns Content
-	public function company_custom_columns( $column, $post_id ) {
-		switch ( $column ) {
-			case 'taxonomy-company_cat':
-				echo get_the_term_list( $post_id, 'jobus_company_cat', '', ', ', '' );
-				break;
-		}
 	}
 }
