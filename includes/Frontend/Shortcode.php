@@ -189,56 +189,65 @@ class Shortcode {
 	 *
 	 * @return string Logout form HTML.
 	 */
-	public function logout_form_shortcode(): string {
-		ob_start();
+    public function logout_form_shortcode(): string {
+        ob_start();
 
-		if ( is_user_logged_in() ) {
-			$current_user = wp_get_current_user();
+        if ( is_user_logged_in() ) {
+            $current_user = wp_get_current_user();
+            $page_url     = home_url('/');
 
-			// Get candidate dashboard page URL
-			$page_url = home_url('/');
-			$dashboard_page = get_posts([
-				'post_type'      => 'page',
-				'posts_per_page' => 1,
-				'post_status'    => 'publish',
-				'fields'         => 'ids', // Only get IDs for better performance
-				's'              => '[jobus_candidate_dashboard]'
-			]);
+            // Map role to shortcode
+            $role_shortcode_map = [
+                'jobus_candidate' => '[jobus_candidate_dashboard]',
+                'jobus_employer'  => '[jobus_employer_dashboard]',
+            ];
 
-			if ( !empty($dashboard_page)) {
-				$page_url = trailingslashit(get_permalink($dashboard_page[0]));
-			}
-			?>
+            foreach ( $role_shortcode_map as $role => $shortcode ) {
+                if ( in_array( $role, (array) $current_user->roles, true ) ) {
+                    $dashboard_page = get_posts([
+                        'post_type'      => 'page',
+                        'posts_per_page' => 1,
+                        'post_status'    => 'publish',
+                        'fields'         => 'ids',
+                        's'              => $shortcode,
+                    ]);
+
+                    if ( ! empty( $dashboard_page ) ) {
+                        $page_url = trailingslashit( get_permalink( $dashboard_page[0] ) );
+                    }
+                    break;
+                }
+            }
+            ?>
             <div class="text-center">
                 <h2 class="name">
-					<?php
-					echo sprintf(
-					// translators: %s is the display name of the current user
-						esc_html__( 'Welcome, %s!', 'jobus' ),
-						esc_html( $current_user->display_name )
-					);
-					?>
+                    <?php
+                    echo sprintf(
+                            esc_html__( 'Welcome, %s!', 'jobus' ),
+                            esc_html( $current_user->display_name )
+                    );
+                    ?>
                 </h2>
                 <p><?php esc_html_e( 'You are currently logged in to your account.', 'jobus' ); ?></p>
                 <p><?php esc_html_e( 'If you wish to log out, please click the button below.', 'jobus' ); ?></p>
                 <div class="user-action-buttons">
                     <a href="<?php echo esc_url( wp_logout_url( home_url( '/' ) ) ) ?>" class="btn-three">
-						<?php esc_html_e( 'Logout', 'jobus' ) ?>
+                        <?php esc_html_e( 'Logout', 'jobus' ) ?>
                     </a>
                     <a href="<?php echo esc_url( $page_url ) ?>" class="btn-four">
-						<?php esc_html_e( 'Dashboard', 'jobus' ) ?>
+                        <?php esc_html_e( 'Dashboard', 'jobus' ) ?>
                     </a>
                 </div>
                 <p class="mt-3">
-					<?php esc_html_e( 'Or return to the', 'jobus' ); ?>
+                    <?php esc_html_e( 'Or return to the', 'jobus' ); ?>
                     <a href="<?php echo esc_url( home_url( '/' ) ) ?>"> <?php esc_html_e( 'Homepage', 'jobus' ) ?> </a>
                 </p>
             </div>
-			<?php
-		}
+            <?php
+        }
 
-		return ob_get_clean();
-	}
+        return ob_get_clean();
+    }
 
 	/**
 	 * Displays the job archive page layout.

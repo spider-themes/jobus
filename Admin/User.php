@@ -161,7 +161,7 @@ class User {
 		$user = wp_get_current_user();
 		if ( in_array( 'jobus_candidate', (array) $user->roles ) ) {
 
-			// Remove unnecessary menus
+			// Remove unnecessary menus for candidates
 			remove_menu_page( 'edit.php' ); // Posts
 			remove_menu_page( 'edit-comments.php' ); // Comments
 			remove_menu_page( 'tools.php' ); // Tools

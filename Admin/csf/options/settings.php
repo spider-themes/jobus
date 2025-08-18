@@ -23,19 +23,19 @@ if ( class_exists( 'CSF' ) ) {
 	/**
 	 * Include files
 	 */
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_general.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_dashboard.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_job-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_job-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_job-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_company-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_company-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_company-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_candidate-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_social_icons.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_register.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_smtp.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/opt_backup.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/general.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/dashboard.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/job-specifications.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/job-archive.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/job-details.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/company-specifications.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/company-archive.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/company-details.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/candidate-specifications.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/candidate-archive.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/candidate-details.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/social_icons.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/login-form.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/smtp.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/backup.php';
 }

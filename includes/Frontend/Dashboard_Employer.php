@@ -49,6 +49,7 @@ class Dashboard_Employer {
 		add_rewrite_endpoint( 'dashboard', EP_PAGES );
 		add_rewrite_endpoint( 'profile', EP_PAGES );
 		add_rewrite_endpoint( 'jobs', EP_PAGES );
+		add_rewrite_endpoint( 'submit-job', EP_PAGES );
 		add_rewrite_endpoint( 'saved-candidate', EP_PAGES );
 		add_rewrite_endpoint( 'change-password', EP_PAGES );
 	}
@@ -62,11 +63,12 @@ class Dashboard_Employer {
 	 */
 	public static function get_nav_items(): array {
 		return [
-			'dashboard'        => [ 'label' => esc_html__( 'Dashboard', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/dashboard.svg' ],
-			'profile'           => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
-			'jobs'          => [ 'label' => esc_html__( 'My Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
-			'saved-candidate'     => [ 'label' => esc_html__( 'Saved Candidate', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
-			'change-password'  => [ 'label' => esc_html__( 'Change Password', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/password.svg' ],
+			'dashboard'       => [ 'label' => esc_html__( 'Dashboard', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/dashboard.svg' ],
+			'profile'         => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
+			'jobs'            => [ 'label' => esc_html__( 'My Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
+			'submit-job'      => [ 'label' => esc_html__( 'Submit Job', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
+			'saved-candidate' => [ 'label' => esc_html__( 'Saved Candidate', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/saved-job.svg' ],
+			'change-password' => [ 'label' => esc_html__( 'Change Password', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/password.svg' ],
 		];
 	}
 
@@ -105,7 +107,7 @@ class Dashboard_Employer {
 		echo '<div class="dashboard-wrapper ffff">';
 		echo '<aside class="dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-		echo $this->load_sidebar_menu($active, $nav_items);
+		echo $this->load_sidebar_menu( $active, $nav_items );
 		echo '</aside>';
 		echo '<main class="dashboard-body">';
 
@@ -219,9 +221,9 @@ class Dashboard_Employer {
 	 * @return string Rendered sidebar menu HTML.
 	 */
 	private function load_sidebar_menu( string $active, array $nav_items = [] ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/sidebar-menu', [
+		return Template_Loader::get_template_part( 'dashboard/global/sidebar-menu', [
 			'active_endpoint' => $active,
-			'menu_items' => $nav_items ?: self::get_nav_items(),
+			'menu_items'      => $nav_items ?: self::get_nav_items(),
 		] );
 	}
 }

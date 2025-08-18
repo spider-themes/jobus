@@ -3,6 +3,30 @@ CSF::createSection($settings_prefix, array(
     'title'     => esc_html__( 'Register', 'jobus' ),
     'id'        => 'opt_register',
     'icon'      => 'fas fa-user-plus',
+    'fields'        => array(
+
+	    // Create a Heading for a login form
+	    array(
+		    'type'    => 'heading',
+		    'content' => esc_html__( 'Login Form', 'jobus' ),
+	    ),
+
+	    // Create a text field for a login form
+	    array(
+		    'id'        => 'login_signup_btn_label',
+		    'type'      => 'text',
+		    'title'     => esc_html__( 'Signup Button Label', 'jobus' ),
+		    'default'   => 'Sign up',
+	    ),
+
+	    // Create a text field for a login form
+	    array(
+		    'id'        => 'login_signup_btn_url',
+		    'type'      => 'text',
+		    'title'     => esc_html__( 'Signup Button URL', 'jobus' ),
+		    'default'   => '#',
+	    ),
+    )
 ));
 
 /**
