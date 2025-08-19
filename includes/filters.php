@@ -44,3 +44,50 @@ function jobus_candidate_upload_mimes($mimes) {
     return $mimes;
 }
 add_filter('upload_mimes', 'jobus_candidate_upload_mimes');
+
+
+
+/**
+ * Redirect user after login based on their role
+ */
+function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
+
+	// If no user object, fallback
+	if ( ! $user || ! is_a( $user, 'WP_User' ) ) {
+		return $redirect_to;
+	}
+
+	// Get user role
+	$user_role = reset( $user->roles );
+
+	// Custom redirect logic
+	if ( jobus_opt( 'enable_custom_redirects' ) ) {
+		if ( $user_role === 'jobus_candidate' ) {
+			$page_id = jobus_opt( 'candidate_redirect_page' );
+			if ( $page_id ) {
+				return get_permalink( $page_id );
+			}
+		}
+		if ( $user_role === 'jobus_employer' ) {
+			$page_id = jobus_opt( 'employer_redirect_page' );
+			if ( $page_id ) {
+				return get_permalink( $page_id );
+			}
+		}
+	}
+
+	// Default redirect
+	return admin_url();
+}
+add_filter( 'login_redirect', 'jobus_login_redirect_by_role', 10, 3 );
+
+
+/**
+ * Hide admin bar for candidates and employers
+ */
+function jobus_hide_admin_bar_for_roles() {
+	if ( current_user_can( 'jobus_candidate' ) || current_user_can( 'jobus_employer' ) ) {
+		show_admin_bar( false );
+	}
+}
+add_action( 'init', 'jobus_hide_admin_bar_for_roles' );
