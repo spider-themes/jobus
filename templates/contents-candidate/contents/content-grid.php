@@ -22,25 +22,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
 			$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
 			$column               = sanitize_html_class( jobus_opt( 'candidate_archive_grid_column' ) );
+            $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 			?>
             <div class="col-lg-<?php echo esc_attr( $column ) ?> col-sm-6 d-flex">
 
                 <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> text-center grid-layout mb-25 <?php echo esc_attr( $is_popup_border_none ) ?>">
-
-					<?php if ( has_post_thumbnail() ) : ?>
+                    <?php
+                    if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
+                        jobus_render_post_save_button( [
+                            'post_id'    => $save_candidate_status['post_id'],
+                            'post_type'  => 'jobus_candidate',
+                            'meta_key'   => 'jobus_saved_candidates',
+                            'is_saved'   => $save_candidate_status['is_saved'],
+                            'button_title' => !empty($save_candidate_status['is_saved']) ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus'),
+                            'class' => 'save-btn text-center rounded-circle tran3s jobus-saved-post'
+                        ] );
+                    }
+                    if ( has_post_thumbnail() ) { ?>
                         <div class="candidate-avatar online position-relative d-block m-auto">
                             <a href="<?php the_permalink() ?>" class="rounded-circle">
 								<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ) ?>
                             </a>
                         </div>
-					<?php endif ?>
-
+					    <?php
+                    }
+                    ?>
                     <h4 class="candidate-name mt-15 mb-0">
                         <a href="<?php the_permalink() ?>" class="tran3s">
 							<?php the_title() ?>
                         </a>
                     </h4>
-
 					<?php
 					if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) {
 						?>

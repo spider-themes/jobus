@@ -60,19 +60,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="col-lg-2 col-md-4">
 					<div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
 						<?php
-                        if ( is_array($save_job_status) ) {
-                            $is_saved = !empty($save_job_status['is_saved']);
-                            $button_title = $is_saved ? esc_html__('Saved', 'jobus') : esc_html__('Save Job', 'jobus');
-                            ?>
-                            <a href="javascript:void(0);"
-                               class="save-btn text-center rounded-circle tran3s me-3 jobus-saved-post"
-                               data-post_id="<?php echo esc_attr( $save_job_status['post_id'] ); ?>"
-                               data-post_type="jobus_job"
-                               data-meta_key="jobus_saved_jobs"
-                               title="<?php echo esc_attr( $button_title ); ?>">
-                                <i class="bi <?php echo esc_attr( $is_saved ? 'bi-bookmark-check-fill text-primary' : 'bi-bookmark-dash' ); ?>"></i>
-                            </a>
-                            <?php
+                        if ( is_array($save_job_status) && isset($save_job_status['post_id']) ) {
+                            jobus_render_post_save_button( [
+                                'post_id'    => $save_job_status['post_id'],
+                                'post_type'  => 'jobus_job',
+                                'meta_key'   => 'jobus_saved_jobs',
+                                'is_saved'   => $save_job_status['is_saved'],
+                                'button_title' => !empty($save_job_status['is_saved']) ? esc_html__('Saved Job', 'jobus') : esc_html__('Save Job', 'jobus'),
+                                'class' => 'save-btn text-center rounded-circle tran3s me-3 jobus-saved-post'
+                            ] );
                         }
 						?>
                         <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">

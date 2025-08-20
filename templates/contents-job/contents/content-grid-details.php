@@ -24,19 +24,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="job-list-three d-flex h-100 w-100">
                     <div class="main-wrapper h-100 w-100">
 	                    <?php
-                        if ( is_array($save_job_status) ) {
-                            $is_saved = !empty($save_job_status['is_saved']);
-                            $button_title = $is_saved ? esc_html__('Saved', 'jobus') : esc_html__('Save Job', 'jobus');
-                            ?>
-                            <a href="javascript:void(0);"
-                               class="save-btn text-center rounded-circle tran3s jobus-saved-post"
-                               data-post_id="<?php echo esc_attr( $save_job_status['post_id'] ); ?>"
-                               data-post_type="jobus_job"
-                               data-meta_key="jobus_saved_jobs"
-                               title="<?php echo esc_attr( $button_title ); ?>">
-                                <i class="bi <?php echo esc_attr( $is_saved ? 'bi-bookmark-check-fill text-primary' : 'bi-bookmark-dash' ); ?>"></i>
-                            </a>
-                            <?php
+                        if ( is_array( $save_job_status ) && isset( $save_job_status['post_id'] ) ) {
+                            jobus_render_post_save_button( [
+                                'post_id'      => $save_job_status['post_id'],
+                                'post_type'    => 'jobus_job',
+                                'meta_key'     => 'jobus_saved_jobs',
+                                'is_saved'     => $save_job_status['is_saved'],
+                                'button_title' => ! empty( $save_job_status['is_saved'] ) ? esc_html__( 'Saved Job', 'jobus' ) : esc_html__( 'Save Job', 'jobus' ),
+                                'class'        => 'save-btn text-center rounded-circle tran3s jobus-saved-post'
+                            ] );
                         }
 	                    ?>
                         <div class="list-header d-flex align-items-center">

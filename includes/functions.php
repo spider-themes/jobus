@@ -957,3 +957,24 @@ if ( !function_exists('recursive_sanitize_text_field') ) {
 		return sanitize_text_field(wp_unslash($data));
 	}
 }
+
+if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
+    function jobus_render_post_save_button( $args ) {
+        $post_id      = $args['post_id'] ?? '';
+        $post_type    = $args['post_type'] ?? '';
+        $meta_key     = $args['meta_key'] ?? '';
+        $is_saved     = ! empty( $args['is_saved'] ) ? 'bi bi-bookmark-check-fill text-primary' : 'bi bi-bookmark-dash';
+        $button_title = $args['button_title'] ?? '';
+        $class = $args['class'] ?? '';
+        ?>
+        <a href="javascript:void(0);"
+           class="<?php echo esc_attr( $class ); ?>"
+           data-post_id="<?php echo esc_attr( $post_id ); ?>"
+           data-post_type="<?php echo esc_attr( $post_type ); ?>"
+           data-meta_key="<?php echo esc_attr( $meta_key ); ?>"
+           title="<?php echo esc_attr( $button_title ); ?>">
+            <i class="<?php echo esc_attr($is_saved); ?>"></i>
+        </a>
+        <?php
+    }
+}

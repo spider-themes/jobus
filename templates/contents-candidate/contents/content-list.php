@@ -12,8 +12,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
-require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
 ?>
 <div class="accordion-box list-style">
 	<?php
@@ -21,8 +19,6 @@ require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
 		$meta           = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 		$post_favourite = $meta['post_favorite'] ?? '';
 		$is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
-
-        // Use the correct meta key for saved candidates
         $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 		?>
         <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout mb-25">
@@ -112,16 +108,14 @@ require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
                             <div class="d-flex justify-content-lg-end">
                                 <?php
                                 if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
-                                    $is_saved = !empty($save_candidate_status['is_saved']);
-                                    $button_title = $is_saved ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus');
-                                    jobus_render_save_button([
-                                        'post_id' => $save_candidate_status['post_id'],
-                                        'post_type' => 'jobus_candidate',
-                                        'meta_key' => 'jobus_saved_candidates',
-                                        'is_saved' => $is_saved,
-                                        'button_title' => $button_title,
-                                        'extra_classes' => 'mt-10',
-                                    ]);
+                                    jobus_render_post_save_button( [
+                                        'post_id'    => $save_candidate_status['post_id'],
+                                        'post_type'  => 'jobus_candidate',
+                                        'meta_key'   => 'jobus_saved_candidates',
+                                        'is_saved'   => $save_candidate_status['is_saved'],
+                                        'button_title' => !empty($save_candidate_status['is_saved']) ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus'),
+                                        'class' => 'save-btn text-center rounded-circle tran3s mt-10 jobus-saved-post'
+                                    ] );
                                 }
                                 ?>
                                 <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">

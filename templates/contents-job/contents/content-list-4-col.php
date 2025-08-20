@@ -12,8 +12,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
-require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
 ?>
 
 <div class="accordion-box list-style">
@@ -65,16 +63,14 @@ require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
                     <div class="btn-group d-flex align-items-center justify-content-sm-end xs-mt-20">
                         <?php
                         if ( is_array($save_job_status) && isset($save_job_status['post_id']) ) {
-                            $is_saved = !empty($save_job_status['is_saved']);
-                            $button_title = $is_saved ? esc_html__('Saved', 'jobus') : esc_html__('Save Job', 'jobus');
-                            jobus_render_save_button([
-                                'post_id' => $save_job_status['post_id'],
-                                'post_type' => 'jobus_job',
-                                'meta_key' => 'jobus_saved_jobs',
-                                'is_saved' => $is_saved,
-                                'button_title' => $button_title,
-                                'extra_classes' => 'me-3',
-                            ]);
+                            jobus_render_post_save_button( [
+                                'post_id'    => $save_job_status['post_id'],
+                                'post_type'  => 'jobus_job',
+                                'meta_key'   => 'jobus_saved_jobs',
+                                'is_saved'   => $save_job_status['is_saved'],
+                                'button_title' => !empty($save_job_status['is_saved']) ? esc_html__('Saved Job', 'jobus') : esc_html__('Save Job', 'jobus'),
+                                'class' => 'save-btn text-center rounded-circle tran3s me-3 jobus-saved-post'
+                            ] );
                         }
                         ?>
                         <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
