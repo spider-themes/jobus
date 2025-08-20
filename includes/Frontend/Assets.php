@@ -51,7 +51,7 @@ class Assets {
 		wp_enqueue_script( 'jobus-public-ajax-actions', esc_url( JOBUS_JS . '/public-ajax-actions.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_localize_script( 'jobus-public-ajax-actions', 'jobus_public_obj', [
 			'ajax_url' => $ajax_url,
-			'save_job_nonce' => wp_create_nonce( 'jobus_candidate_saved_job' ), // Nonce for saving job
+			'save_post_nonce' => wp_create_nonce( 'jobus_saved_post' ), // nonce for saving job/candidate
 			'job_application_nonce' => wp_create_nonce( 'jobus_job_application' ), // Nonce for job application
 			'job_id'  => get_the_ID(), // Current job ID for job application
 			'candidate_email_nonce' => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form

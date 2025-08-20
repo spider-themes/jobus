@@ -21,47 +21,52 @@
 
     const JobusAjaxActions = {
         init: function () {
-            this.jobSave(); // Initialize candidate job saving feature by clicking the save button
+            this.savePost(); // save for job and candidate posts
             this.jobApplicationForm(); // Initialize job application form submission by candidates
             this.emailFormToCandidate(); // Initialize email form to candidate
         },
 
         /**
-         * Handles saving or unsaving a job by a candidate.
+         * Unified handler for saving/unsaving jobs or candidates.
          */
-        jobSave: function () {
-            $(document).on('click', '.jobus-candidate-saved-job', function (e) {
+        savePost: function () {
+            $(document).on('click', '.jobus-saved-post[data-post_id][data-post_type][data-meta_key]', function (e) {
                 e.preventDefault();
-
                 const btn = $(this);
-                const jobId = btn.data('job_id');
-                const job_nonce = jobus_public_obj.save_job_nonce;
+                const postId = btn.data('post_id');
+                const postType = btn.data('post_type');
+                const metaKey = btn.data('meta_key');
+                const nonce = jobus_public_obj.save_post_nonce;
                 const icon = btn.find('i');
-                if (!jobId || !job_nonce || btn.hasClass('disabled')) return;
-
+                if (!postId || !postType || !metaKey || !nonce || btn.hasClass('disabled')) return;
                 const originalIcon = icon.attr('class');
-
-                // Show loading spinner
                 icon.attr('class', 'spinner-border spinner-border-sm align-middle');
                 btn.addClass('loading disabled');
-
                 $.ajax({
                     url: jobus_public_obj.ajax_url,
                     type: 'POST',
                     data: {
-                        action: 'jobus_candidate_saved_job',
-                        job_id: jobId,
-                        nonce: job_nonce
+                        action: 'jobus_saved_post',
+                        post_id: postId,
+                        post_type: postType,
+                        meta_key: metaKey,
+                        nonce: nonce
                     },
                     success: function (res) {
                         btn.removeClass('loading disabled');
-
-                        if (res.success) {
-                            const saved = !btn.hasClass('saved');
-                            btn.toggleClass('saved');
-                            icon.attr('class', saved ? 'bi bi-bookmark-check-fill text-primary' : 'bi bi-bookmark-dash');
-                            // Update title attribute
-                            btn.attr('title', saved ? 'Saved' : 'Save Job');
+                        if (res.success && res.data && typeof res.data.status !== 'undefined') {
+                            // Debug: log action and button
+                            console.log('AJAX success:', res.data.status, 'for post', postId, 'type', postType);
+                            // Always update button state
+                            if (res.data.status === 'added') {
+                                btn.addClass('saved');
+                                icon.attr('class', 'bi bi-bookmark-check-fill text-primary');
+                                btn.attr('title', postType === 'jobus_job' ? 'Saved' : postType === 'jobus_candidate' ? 'Saved Candidate' : 'Saved');
+                            } else if (res.data.status === 'removed') {
+                                btn.removeClass('saved');
+                                icon.attr('class', 'bi bi-bookmark-dash');
+                                btn.attr('title', postType === 'jobus_job' ? 'Save Job' : postType === 'jobus_candidate' ? 'Save Candidate' : 'Save');
+                            }
                         } else {
                             icon.attr('class', originalIcon);
                         }

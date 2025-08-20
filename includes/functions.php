@@ -924,26 +924,26 @@ function jobus_count_candidate_views( int $candidate_id ): void {
 
 
 /**
- * Get the save status of a job for the current user.
+ * Get the save status of a post (job or candidate) for the current user.
  *
- * Returns an array with job ID, user ID, saved jobs, and whether the job is saved.
+ * @param int|string $post_id  The post ID to check. Defaults to current post ID if empty.
+ * @param string     $meta_key The user meta key to use. Defaults to 'jobus_saved_jobs'.
  *
- * @param int|string $job_id The job ID to check. Defaults to current post ID if empty.
- * @return array Status information about the saved job.
+ * @return array Status information about the saved post.
  */
-function jobus_get_job_save_status( $job_id = '' ): array {
-	if ( ! $job_id ) {
-		$job_id = get_the_ID();
+function jobus_get_save_status( $post_id = '', string $meta_key = 'jobus_saved_jobs' ): array {
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
 	}
 
 	$user_id = get_current_user_id();
-	$saved_jobs = is_user_logged_in() ? (array) get_user_meta( $user_id, 'jobus_saved_jobs', true ) : [];
-	$is_saved = in_array( $job_id, $saved_jobs );
+	$saved_items = is_user_logged_in() ? (array) get_user_meta( $user_id, $meta_key, true ) : [];
+	$is_saved = in_array( $post_id, $saved_items );
 
 	return [
-		'job_id' => $job_id,
+		'post_id' => $post_id,
 		'user_id' => $user_id,
-		'saved_jobs' => $saved_jobs,
+		'saved_items' => $saved_items,
 		'is_saved' => $is_saved
 	];
 }

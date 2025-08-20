@@ -26,45 +26,46 @@ class Ajax_Actions {
 		add_action( 'wp_ajax_jobus_job_application', [ $this, 'job_application_form' ] );
 		add_action( 'wp_ajax_nopriv_jobus_job_application', [ $this, 'job_application_form' ] );
 
-		// Candidate Saved Job for Dashboard
-		add_action( 'wp_ajax_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
-		add_action( 'wp_ajax_nopriv_jobus_candidate_saved_job', [ $this, 'candidate_saved_job' ] );
-
 		// Remove Job Application
 		add_action( 'wp_ajax_remove_job_application', [ $this, 'remove_job_application' ] );
 		add_action( 'wp_ajax_nopriv_remove_job_application', [ $this, 'remove_job_application' ] );
+
+		// Save/Unsave Jobs for Candidates and Candidates for Employers
+		add_action( 'wp_ajax_jobus_saved_post', [ $this, 'saved_post' ] );
+		add_action( 'wp_ajax_nopriv_jobus_saved_post', [ $this, 'saved_post' ] );
 	}
 
 
-	public function candidate_saved_job() {
+    /**
+     * Common handler for saving/unsaving jobs or candidates.
+     */
+    private function handle_save_action( $args ) {
+        check_ajax_referer( $args['nonce_action'], $args['nonce_field'] );
 
-		check_ajax_referer( 'jobus_candidate_saved_job', 'nonce' );
+        if ( ! is_user_logged_in() ) {
+            wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in.', 'jobus' ) ] );
+        }
 
-		if ( ! is_user_logged_in() ) {
-			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in.', 'jobus' ) ] );
-		}
+        $user_id = get_current_user_id();
+        $user    = get_userdata( $user_id );
+        if ( empty( $user ) || ! in_array( $args['role'], (array) $user->roles, true ) ) {
+            wp_send_json_error( [ 'message' => esc_html( $args['error_message'], 'jobus' ) ] );
+        }
 
-		$user_id = get_current_user_id();
-		$user    = get_userdata( $user_id );
-		if ( empty( $user ) || ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
-			wp_send_json_error( [ 'message' => esc_html__( 'Only candidates can save jobs.', 'jobus' ) ] );
-		}
+        $post_id     = isset( $_POST[$args['post_id_key']] ) ? absint( $_POST[$args['post_id_key']] ) : 0;
+        $saved_items = (array) get_user_meta( $user_id, $args['meta_key'], true );
 
-		$job_id     = isset( $_POST['job_id'] ) ? absint( $_POST['job_id'] ) : 0;
-		$saved_jobs = (array) get_user_meta( $user_id, 'jobus_saved_jobs', true );
+        if ( in_array( $post_id, $saved_items ) ) {
+            $saved_items = array_diff( $saved_items, [ $post_id ] );
+            $action     = 'removed';
+        } else {
+            $saved_items[] = $post_id;
+            $action       = 'added';
+        }
 
-		if ( in_array( $job_id, $saved_jobs ) ) {
-			$saved_jobs = array_diff( $saved_jobs, [ $job_id ] );
-			$action     = 'removed';
-		} else {
-			$saved_jobs[] = $job_id;
-			$action       = 'added';
-		}
-
-		update_user_meta( $user_id, 'jobus_saved_jobs', array_values( $saved_jobs ) );
-		wp_send_json_success( [ 'status' => $action ] ); // Only send back the action status
-	}
-
+        update_user_meta( $user_id, $args['meta_key'], array_values( $saved_items ) );
+        wp_send_json_success( [ 'status' => $action ] );
+    }
 
 	public function ajax_send_contact_email(): void {
 
@@ -211,5 +212,50 @@ class Ajax_Actions {
 		}
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Unified handler for saving/unsaving jobs or candidates.
+	 */
+	public function saved_post(): void {
+		$nonce_action = 'jobus_saved_post';
+		check_ajax_referer( $nonce_action, 'nonce' );
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in.', 'jobus' ) ] );
+		}
+
+		$user_id   = get_current_user_id();
+		$user      = get_userdata( $user_id );
+		$post_id   = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : '';
+		$meta_key  = isset( $_POST['meta_key'] ) ? sanitize_text_field( $_POST['meta_key'] ) : '';
+
+		// Validate post type, meta key, and user role
+		$role_map = [
+			'jobus_job'      => [ 'role' => 'jobus_candidate', 'meta_key' => 'jobus_saved_jobs' ],
+			'jobus_candidate'=> [ 'role' => 'jobus_employer',  'meta_key' => 'jobus_saved_candidates' ],
+		];
+
+		if ( ! isset( $role_map[$post_type] ) || $meta_key !== $role_map[$post_type]['meta_key'] ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid post type or meta key.', 'jobus' ) ] );
+		}
+
+		if ( empty( $user ) || ! in_array( $role_map[$post_type]['role'], (array) $user->roles, true ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to save this post.', 'jobus' ) ] );
+		}
+
+		$saved_items = (array) get_user_meta( $user_id, $meta_key, true );
+
+		if ( in_array( $post_id, $saved_items ) ) {
+			$saved_items = array_diff( $saved_items, [ $post_id ] );
+			$action      = 'removed';
+		} else {
+			$saved_items[] = $post_id;
+			$action        = 'added';
+		}
+
+		update_user_meta( $user_id, $meta_key, array_values( $saved_items ) );
+		wp_send_json_success( [ 'status' => $action ] );
 	}
 }

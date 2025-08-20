@@ -12,6 +12,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+require_once( dirname( __FILE__, 5 ) . '/includes/Helpers/Button.php' );
 ?>
 <div class="accordion-box list-style">
 	<?php
@@ -19,6 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$meta           = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 		$post_favourite = $meta['post_favorite'] ?? '';
 		$is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
+
+        // Use the correct meta key for saved candidates
+        $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 		?>
         <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout mb-25">
             <div class="d-flex">
@@ -29,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </div>
                 <div class="right-side">
                     <div class="row gx-1 align-items-center">
-                        <div class="col-xl-4">
+                        <div class="col-lg-3">
                             <div class="position-relative">
                                 <h4 class="candidate-name mb-0">
                                     <a href="<?php the_permalink() ?>" class="tran3s">
@@ -81,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
 						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
 							?>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="candidate-info">
                                     <span><?php echo esc_html( jobus_meta_candidate_spec_name( 2 ) ); ?></span>
                                     <div class="text-capitalize">
@@ -92,7 +97,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="candidate-info">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                     <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>">
@@ -103,8 +108,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						?>
-                        <div class="col-xl-2 col-md-4">
+                        <div class="col-lg-3 col-md-4">
                             <div class="d-flex justify-content-lg-end">
+                                <?php
+                                if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
+                                    $is_saved = !empty($save_candidate_status['is_saved']);
+                                    $button_title = $is_saved ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus');
+                                    jobus_render_save_button([
+                                        'post_id' => $save_candidate_status['post_id'],
+                                        'post_type' => 'jobus_candidate',
+                                        'meta_key' => 'jobus_saved_candidates',
+                                        'is_saved' => $is_saved,
+                                        'button_title' => $button_title,
+                                        'extra_classes' => 'mt-10',
+                                    ]);
+                                }
+                                ?>
                                 <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">
 									<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                                 </a>
