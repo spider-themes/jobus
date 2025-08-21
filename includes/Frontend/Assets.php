@@ -74,10 +74,6 @@ class Assets {
 				'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
 			]);
 
-		}
-
-		if ( $post && has_shortcode($post->post_content, 'jobus_candidate_dashboard')) {
-
 			// Scripts for candidate dashboard
 			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [

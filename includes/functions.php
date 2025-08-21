@@ -873,15 +873,16 @@ function jobus_get_sanitized_query_param( string $param, $default = '', string $
 
 
 /**
- * Tracks and increments the view count for a specific candidate. Uses cookies for guests and user meta for logged-in users
- * to ensure unique views are counted. Also differentiates between general views and employer-specific views.
+ * Tracks and increments the view count for a specific post (job or candidate).
+ * Uses cookies for guests and user meta for logged-in users to ensure unique views are counted.
+ * Differentiates between general views and employer-specific views.
  *
- * @param int $candidate_id The ID of the candidate whose views are being tracked.
+ * @param int    $post_id The ID of the post whose views are being tracked.
+ * @param string $type    The type of post: 'job' or 'candidate'.
  *
  * @return void
  */
-function jobus_count_candidate_views( int $candidate_id ): void {
-	// Use cookies for guests, user meta for logged-in users
+function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
 	$is_logged_in = is_user_logged_in();
 	$user_id = 0;
 	if ( $is_logged_in ) {
@@ -889,36 +890,34 @@ function jobus_count_candidate_views( int $candidate_id ): void {
 		$user_id = $user->ID;
 	}
 
-	// Unique key for this user/guest and candidate
+	// Unique key for this user/guest and post
 	if ( $is_logged_in ) {
-		$user_viewed_key = 'jobus_user_viewed_' . $user_id . '_' . $candidate_id;
+		$user_viewed_key = 'jobus_user_viewed_' . $type . '_' . $user_id . '_' . $post_id;
 		if ( get_user_meta( $user_id, $user_viewed_key, true ) ) {
 			return; // Already counted for this user
 		}
-		// Mark as viewed for this user
 		update_user_meta( $user_id, $user_viewed_key, '1' );
 	} else {
-		$cookie_key = 'jobus_guest_viewed_' . $candidate_id;
+		$cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
 		if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
 			return; // Already counted for this guest (browser)
 		}
-		// Set cookie for 30 days
 		setcookie( $cookie_key, '1', time() + 60 * 60 * 24 * 30, COOKIEPATH, COOKIE_DOMAIN );
 		$_COOKIE[ $cookie_key ] = '1';
 	}
 
 	// Increment total visitor count
-	$all_user_view_count = get_post_meta( $candidate_id, 'all_user_view_count', true );
+	$all_user_view_count = get_post_meta( $post_id, 'all_user_view_count', true );
 	$all_user_view_count = empty( $all_user_view_count ) ? 0 : intval( $all_user_view_count );
 	$all_user_view_count ++;
-	update_post_meta( $candidate_id, 'all_user_view_count', $all_user_view_count );
+	update_post_meta( $post_id, 'all_user_view_count', $all_user_view_count );
 
 	// Increment employer-specific count for logged-in employers only
 	if ( $is_logged_in && in_array( 'jobus_employer', (array) $user->roles ) ) {
-		$employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
+		$employer_view_count = get_post_meta( $post_id, 'employer_view_count', true );
 		$employer_view_count = empty( $employer_view_count ) ? 0 : intval( $employer_view_count );
 		$employer_view_count ++;
-		update_post_meta( $candidate_id, 'employer_view_count', $employer_view_count );
+		update_post_meta( $post_id, 'employer_view_count', $employer_view_count );
 	}
 }
 

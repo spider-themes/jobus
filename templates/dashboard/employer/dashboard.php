@@ -18,6 +18,7 @@ $user = wp_get_current_user();
 // Initialize variables
 $employers   = [];
 $employer_id = 0;
+$total_applications = 0;
 
 // Get employer data
 $employers = get_posts( [
@@ -38,16 +39,36 @@ $jobs = get_posts( [
 
 $total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
 
+// Calculate total job views for all jobs posted by employer
+$total_job_views = 0;
+foreach ( $jobs as $job_id ) {
+    $views = get_post_meta( $job_id, 'all_user_view_count', true );
+    $total_job_views += !empty($views) ? intval($views) : 0;
+}
+
+// Get total applications for all jobs posted by employer
+$applications = get_posts([
+    'post_type'      => 'jobus_applicant',
+    'post_status'    => 'publish',
+    'meta_query'     => [
+        [
+            'key'     => 'job_applied_for_id',
+            'value'   => $jobs,
+            'compare' => 'IN'
+        ]
+    ],
+    'fields'         => 'ids',
+    'posts_per_page' => -1
+]);
+$total_applications = count($applications);
+
 // Get saved candidates for the current employer
 $saved_candidates = get_user_meta( $user->ID, 'jobus_saved_candidates', true );
 $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates) : ( $saved_candidates ? count((array)$saved_candidates) : 0 );
 ?>
 <div class="position-relative">
-
     <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
-
     <div class="row">
-
         <div class="col-lg-3 col-6">
             <div class="dash-card-one bg-white border-30 position-relative mb-15">
                 <div class="d-sm-flex align-items-center justify-content-between">
@@ -65,26 +86,12 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
         <div class="col-lg-3 col-6">
             <div class="dash-card-one bg-white border-30 position-relative mb-15">
                 <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1"><img src="../images/lazy.svg"
-                                                                                                                      data-src="images/icon/icon_13.svg" alt=""
-                                                                                                                      class="lazy-img"></div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500">03</div>
-                        <span>Shortlisted</span>
+                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ) ?>" alt="<?php esc_attr_e( 'Application', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1"><img src="../images/lazy.svg"
-                                                                                                                      data-src="images/icon/icon_14.svg" alt=""
-                                                                                                                      class="lazy-img"></div>
                     <div class="order-sm-0">
-                        <div class="value fw-500">1.7k</div>
-                        <span>Application</span>
+                        <div class="value fw-500"><?php echo esc_html($total_applications); ?></div>
+                        <span><?php esc_html_e( 'Application', 'jobus' ); ?></span>
                     </div>
                 </div>
             </div>
@@ -103,10 +110,23 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="dash-card-one bg-white border-30 position-relative mb-15">
+                <div class="d-sm-flex align-items-center justify-content-between">
+                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ) ?>" alt="<?php esc_attr_e( 'Job Views', 'jobus' ); ?>" class="lazy-img">
+                    </div>
+                    <div class="order-sm-0">
+                        <div class="value fw-500"><?php echo esc_html($total_job_views); ?></div>
+                        <span><?php esc_html_e( 'Job Views', 'jobus' ); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row d-flex pt-50 lg-pt-10">
-
         <div class="col-lg-7">
             <div class="saved-job-tab bg-white border-20">
                 <div class="saved-jobs-header">

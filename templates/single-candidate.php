@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 get_header();
 
 // Call the function to track views
-jobus_count_candidate_views( get_the_ID() );
+jobus_count_post_views( get_the_ID(), 'candidate' );
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 

@@ -88,7 +88,7 @@ class Dashboard_Employer {
 
 		$user = wp_get_current_user();
 		if ( ! in_array( 'jobus_employer', (array) $user->roles, true ) ) {
-			// If not a employer, show the logout form (prevent dashboard access for other roles)
+			// If not an employer, show the logout form (prevent dashboard access for other roles)
 			return Template_Loader::get_template_part( 'dashboard/logout-form' );
 		}
 
@@ -119,6 +119,10 @@ class Dashboard_Employer {
 			case 'jobs':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_jobs( $user );
+				break;
+			case 'submit-job':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_submit_job( $user );
 				break;
 			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
@@ -162,18 +166,17 @@ class Dashboard_Employer {
 	 * @return string Change password section HTML.
 	 */
 	private function load_change_password( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/change-password', [
+		return Template_Loader::get_template_part( 'dashboard/global/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );
 	}
 
 	/**
-	 * Load the applied jobs section template.
+	 * Loads the saved candidates section for the employer dashboard.
 	 *
-	 * @param WP_User $user The current user.
-	 *
-	 * @return string Applied jobs section HTML.
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the saved candidates section.
 	 */
 	private function load_saved_candidate( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/saved-candidate', [
@@ -183,14 +186,26 @@ class Dashboard_Employer {
 	}
 
 	/**
-	 * Load the resume section template.
+	 * Loads the jobs section for the employer dashboard.
 	 *
-	 * @param WP_User $user The current user.
-	 *
-	 * @return string Resume section HTML.
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the jobs section.
 	 */
 	private function load_jobs( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/jobs', [
+			'user_id'  => $user->ID,
+			'username' => $user->user_login,
+		] );
+	}
+
+	/**
+	 * Loads the submit job section for the employer dashboard.
+	 *
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the submit job section.
+	 */
+	private function load_submit_job( WP_User $user ): string {
+		return Template_Loader::get_template_part( 'dashboard/employer/submit-job', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );

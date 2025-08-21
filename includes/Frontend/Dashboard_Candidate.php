@@ -130,7 +130,7 @@ class Dashboard_Candidate {
 				break;
 			case 'change-password':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_candidate_change_password( $user );
+				echo $this->load_change_password( $user );
 				break;
 			default:
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
@@ -165,8 +165,8 @@ class Dashboard_Candidate {
 	 *
 	 * @return string Change password section HTML.
 	 */
-	private function load_candidate_change_password( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/candidate/change-password', [
+	private function load_change_password( WP_User $user ): string {
+		return Template_Loader::get_template_part( 'dashboard/global/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		] );

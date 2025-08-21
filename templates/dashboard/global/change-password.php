@@ -1,6 +1,8 @@
 <?php
 /**
- * Template for the candidate change password page.
+ * Template for the change password page (candidate & employer).
+ *
+ * Allows users with 'jobus_candidate' or 'jobus_employer' roles to update their password.
  *
  * @package jobus
  */
@@ -8,9 +10,9 @@
 // Get current user
 $user = wp_get_current_user();
 
-// Check if the logged-in user has the 'jobus_candidate' role
-$is_candidate = in_array( 'jobus_candidate', (array) $user->roles, true );
-if ( ! $is_candidate ) {
+// Check if the logged-in user has the 'jobus_candidate' or 'jobus_employer' role
+$is_allowed = array_intersect( ['jobus_candidate', 'jobus_employer'], (array) $user->roles );
+if ( empty( $is_allowed ) ) {
     wp_die( esc_html__( 'You do not have permission to access this page.', 'jobus' ) );
 }
 
@@ -20,9 +22,9 @@ $error_message = '';
 $do_redirect = false;
 
 // Handle form submission
-if ( isset( $_POST['update_candidate_password'] ) ) {
+if ( isset( $_POST['update_user_password'] ) ) {
     // Verify nonce
-    if ( isset( $_POST['update_candidate_password_nonce'] ) && wp_verify_nonce( sanitize_key(wp_unslash($_POST['update_candidate_password_nonce'])), 'update_candidate_password' ) ) {
+    if ( isset( $_POST['update_user_password_nonce'] ) && wp_verify_nonce( sanitize_key(wp_unslash($_POST['update_user_password_nonce'])), 'update_user_password' ) ) {
 
         // Get password values - sanitize and unslash inputs
         $old_password = isset($_POST['old_password']) ? sanitize_text_field(wp_unslash($_POST['old_password'])) : '';
@@ -39,11 +41,7 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
         } else {
             // All validations passed, update the password
             wp_set_password( $new_password, $user->ID );
-
-            // Update the auth cookie to keep user logged in
             wp_set_auth_cookie($user->ID, true, is_ssl());
-
-            // Set success message
             $success_message = esc_html__( 'Password updated successfully!', 'jobus' );
             $do_redirect = true;
         }
@@ -75,11 +73,9 @@ if ( isset( $_POST['update_candidate_password'] ) ) {
             </div>
         <?php endif; ?>
 
-        <form action="#" id="candidate-password-form" method="post" enctype="multipart/form-data" autocomplete="off">
-
-            <?php wp_nonce_field( 'update_candidate_password', 'update_candidate_password_nonce' ); ?>
-            <input type="hidden" name="update_candidate_password" value="1">
-
+        <form action="#" id="user-password-form" method="post" enctype="multipart/form-data" autocomplete="off">
+            <?php wp_nonce_field( 'update_user_password', 'update_user_password_nonce' ); ?>
+            <input type="hidden" name="update_user_password" value="1">
             <div class="row">
                 <div class="col-12">
                     <div class="dash-input-wrapper position-relative mb-20">

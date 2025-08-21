@@ -2,6 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+// Track job post views
+jobus_count_post_views( get_the_ID(), 'job' );
+
 wp_enqueue_script( 'jobus-job-application-form' );
 get_header();
 
@@ -98,5 +102,3 @@ get_footer();
         </div>
     </div>
 </div>
-
-

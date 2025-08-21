@@ -47,7 +47,7 @@
                 dataAttr: 'skill-id'
             });
 
-            this.CandidatePassword();
+            this.UserPassword();
             this.checkPasswordRedirect();
         },
 
@@ -958,14 +958,13 @@
 
 
         /**
-         * Handles candidate password management in the dashboard.
+         * Handles user password management in the dashboard (candidate & employer).
          * Provides functionality for checking password strength, matching new passwords,
          * showing/hiding password fields, and updating the UI accordingly.
-         * @function CandidatePassword
-         * @constructor
+         * @function UserPassword
          */
-        CandidatePassword:function () {
-            const $form = $('#candidate-password-form');
+        UserPassword:function () {
+            const $form = $('#user-password-form');
             const $currentPassword = $('#current_password');
             const $newPassword = $('#new_password');
             const $confirmPassword = $('#confirm_password');
