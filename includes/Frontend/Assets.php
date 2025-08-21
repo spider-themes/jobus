@@ -67,6 +67,13 @@ class Assets {
 			// Enqueue media uploader for candidate dashboard
 			wp_enqueue_media();
 
+			// Script's ajax actions for candidate & employer dashboard
+			wp_enqueue_script('jobus-dashboard-ajax-actions', esc_url(JOBUS_JS . '/dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
+			wp_localize_script('jobus-dashboard-ajax-actions', 'jobus_dashboard_obj', [
+				'ajax_url' => $ajax_url,
+				'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
+			]);
+
 		}
 
 		if ( $post && has_shortcode($post->post_content, 'jobus_candidate_dashboard')) {
@@ -89,12 +96,6 @@ class Assets {
 					'clear_portfolio' => esc_html__('Clear', 'jobus'),
 					'confirm_clear_gallery' => esc_html__('Are you sure you want to clear the entire gallery?', 'jobus')
 				]
-			]);
-
-			wp_enqueue_script('jobus-candidate-dashboard-ajax-actions', esc_url(JOBUS_JS . '/candidate-dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
-			wp_localize_script('jobus-candidate-dashboard-ajax-actions', 'jobus_candidate_dashboard_obj', [
-				'ajax_url' => $ajax_url,
-				'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
 			]);
 
 		}

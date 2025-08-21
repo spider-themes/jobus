@@ -104,7 +104,7 @@ class Dashboard_Employer {
 
 		ob_start();
 
-		echo '<div class="dashboard-wrapper ffff">';
+		echo '<div class="dashboard-wrapper">';
 		echo '<aside class="dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo $this->load_sidebar_menu( $active, $nav_items );

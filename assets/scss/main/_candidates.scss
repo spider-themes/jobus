@@ -176,22 +176,6 @@ img {
       width: calc(100% - 80px);
       padding-left: 30px;
     }
-
-    .save-btn {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border: 1px solid #E4E4E4;
-      font-weight: 900;
-      color: $color-five;
-      font-size: 18px;
-
-      &:hover {
-        color: #fff;
-        background: $color-five;
-        border-color: $color-five;
-      }
-    }
   }
 }
 
@@ -507,18 +491,6 @@ img {
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    .save-btn {
-      color: #b9b9b9;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-
-      &:hover {
-        color: $color-three;
-      }
-    }
   }
 
   &.favourite::before {
@@ -643,22 +615,6 @@ img {
     .right-side {
       width: calc(100% - 80px);
       padding-left: 30px;
-    }
-
-    .save-btn {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border: 1px solid #E4E4E4;
-      font-weight: 900;
-      color: $color-five;
-      font-size: 18px;
-
-      &:hover {
-        color: #fff;
-        background: $color-five;
-        border-color: $color-five;
-      }
     }
   }
 }

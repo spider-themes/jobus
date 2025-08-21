@@ -19,26 +19,28 @@
 
     'use strict';
 
-    const JobusAjaxActions = {
+    const JobusDashboardAjaxActions = {
         init: function () {
-            this.removeSavedJob();
+            this.removeSavedPost(); // unified remove for job/candidate
             this.removeApplication();
         },
 
         /**
-         * Handles removing a saved job from candidate's dashboard
+         * Handles removing a saved job or candidate from dashboard
          */
-        removeSavedJob: function () {
-            $(document).on('click', '.jobus-candidate-remove-saved-job', function (e) {
+        removeSavedPost: function () {
+            $(document).on('click', '.jobus-dashboard-remove-saved-post', function (e) {
                 e.preventDefault();
 
                 const btn = $(this);
-                const jobId = btn.data('job_id');
+                const postId = btn.data('post_id');
+                const postType = btn.data('post_type');
                 const nonce = btn.data('nonce');
-                const jobItem = btn.closest('.job-list-one');
-                const icon = btn.find('i'); // Get the icon element
+                // Find the item container
+                const item = btn.closest('.job-list-one, .candidate-profile-card');
+                const icon = btn.find('i');
 
-                if (!jobId || !nonce || btn.hasClass('disabled')) return;
+                if (!postId || !postType || !nonce || btn.hasClass('disabled')) return;
 
                 // Store original icon class
                 const originalIcon = icon.attr('class');
@@ -47,37 +49,53 @@
                 icon.attr('class', 'spinner-border spinner-border-sm align-middle');
                 btn.addClass('loading disabled');
 
+                // Determine AJAX action and data key
+                let ajaxAction = '';
+                let dataKey = '';
+                if (postType === 'jobus_job') {
+                    ajaxAction = 'jobus_candidate_saved_job';
+                    dataKey = 'job_id';
+                } else if (postType === 'jobus_candidate') {
+                    ajaxAction = 'jobus_employer_saved_candidate';
+                    dataKey = 'post_id';
+                } else {
+                    btn.removeClass('loading disabled');
+                    icon.attr('class', originalIcon);
+                    alert('Unknown post type');
+                    return;
+                }
+
+                // Prepare AJAX data
+                let ajaxData = {
+                    action: ajaxAction,
+                    nonce: nonce
+                };
+                ajaxData[dataKey] = postId;
+
                 $.ajax({
-                    url: jobus_candidate_dashboard_obj.ajax_url,
+                    url: jobus_dashboard_obj.ajax_url,
                     type: 'POST',
-                    data: {
-                        action: 'jobus_candidate_saved_job',
-                        job_id: jobId,
-                        nonce: nonce
-                    },
+                    data: ajaxData,
                     success: function (res) {
                         if (res.success) {
-                            // Fade out and remove the job item from the list
-                            jobItem.fadeOut(300, function() {
+                            // Fade out and remove the item from the list
+                            item.fadeOut(300, function() {
                                 $(this).remove();
-
-                                // Check if there are any jobs left
-                                if ($('.job-list-one').length === 0) {
-                                    $('.wrapper').html('<div class="no-jobs-found">No saved jobs found.</div>');
+                                // Check if there are any items left
+                                if ($('.job-list-one, .candidate-profile-card').length === 0) {
+                                    $('.wrapper').html('<div class="no-jobs-found">No saved items found.</div>');
                                 }
                             });
                         } else {
-                            // Restore original icon and state if there's an error
                             btn.removeClass('loading disabled');
                             icon.attr('class', originalIcon);
-                            alert(res.data.message || 'Error removing job');
+                            alert(res.data && res.data.message ? res.data.message : 'Error removing item');
                         }
                     },
                     error: function () {
-                        // Restore original icon and state on error
                         btn.removeClass('loading disabled');
                         icon.attr('class', originalIcon);
-                        alert('Error removing job. Please try again.');
+                        alert('Error removing item. Please try again.');
                     }
                 });
             });
@@ -106,7 +124,7 @@
                 btn.addClass('loading disabled');
 
                 $.ajax({
-                    url: jobus_candidate_dashboard_obj.ajax_url,
+                    url: jobus_dashboard_obj.ajax_url,
                     type: 'POST',
                     data: {
                         action: 'remove_job_application',
@@ -137,7 +155,7 @@
 
     // Initialize when DOM is ready
     $(document).ready(function () {
-        JobusAjaxActions.init();
+        JobusDashboardAjaxActions.init();
     });
 
 })(jQuery);

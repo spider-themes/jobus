@@ -37,6 +37,10 @@ $jobs = get_posts( [
 ] );
 
 $total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
+
+// Get saved candidates for the current employer
+$saved_candidates = get_user_meta( $user->ID, 'jobus_saved_candidates', true );
+$saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates) : ( $saved_candidates ? count((array)$saved_candidates) : 0 );
 ?>
 <div class="position-relative">
 
@@ -90,10 +94,10 @@ $total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
             <div class="dash-card-one bg-white border-30 position-relative mb-15">
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
-                        <img src="../images/lazy.svg" data-src="images/icon/icon_15.svg" alt="" class="lazy-img">
+                        <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Saved Job', 'jobus' ); ?>" class="lazy-img">
                     </div>
                     <div class="order-sm-0">
-                        <div class="value fw-500">04</div>
+                        <div class="value fw-500"><?php echo esc_html($saved_candidates_count); ?></div>
                         <span><?php esc_html_e( 'Save Candidate', 'jobus' ); ?></span>
                     </div>
                 </div>
@@ -102,26 +106,61 @@ $total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
     </div>
 
     <div class="row d-flex pt-50 lg-pt-10">
-        <div class="col-xl-7 col-lg-6 d-flex flex-column">
-            <div class="user-activity-chart bg-white border-20 mt-30 h-100">
-                <h4 class="dash-title-two">Job Views</h4>
-                <div class="d-sm-flex align-items-center job-list">
-                    <div class="fw-500 pe-3">Jobs:</div>
-                    <div class="flex-fill xs-mt-10">
-                        <select class="nice-select">
-                            <option>Web & Mobile Prototype designer....</option>
-                            <option>Document Writer</option>
-                            <option>Outbound Call Service</option>
-                            <option>Product Designer</option>
-                        </select>
-                    </div>
+
+        <div class="col-lg-7">
+            <div class="saved-job-tab bg-white border-20">
+                <div class="saved-jobs-header">
+                    <h4 class="title"><?php esc_html_e( 'Saved Candidate', 'jobus' ); ?></h4>
+                    <?php
+                    // Get total saved jobs count
+                    $user_id    = get_current_user_id();
+                    $saved_candidates = get_user_meta( $user_id, 'jobus_saved_candidates', true );
+                    if ( ! is_array( $saved_candidates ) ) {
+                        $saved_candidates = ! empty( $saved_candidates ) ? [ $saved_candidates ] : [];
+                    }
+                    $saved_candidates = array_filter( array_map( 'intval', $saved_candidates ) );
+                    $total_candidate = count( $saved_candidates );
+                    $limit      = 4; // Same limit as in candidate-saved-job.php
+
+                    // Show "View More" button only if there are more jobs than the limit
+                    if ( $total_candidate > $limit ) {
+                        // Get the dashboard page URL
+                        $saved_candidate_url = home_url( '/saved-candidate/' ); // Default fallback
+
+                        // Find the page with employer dashboard shortcode
+                        $dashboard_page = get_posts( [
+                                'post_type'      => 'page',
+                                'posts_per_page' => 1,
+                                'post_status'    => 'publish',
+                                'fields'         => 'ids',
+                                's'              => '[jobus_employer_dashboard]'
+                        ] );
+
+                        // Build URL if dashboard page exists
+                        if ( ! empty( $dashboard_page ) ) {
+                            $saved_candidate_url = trailingslashit( get_permalink( $dashboard_page[0] ) ) . 'saved-candidate';
+                        }
+                        ?>
+                        <a href="<?php echo esc_url( $saved_candidate_url ); ?>" class="view-more-btn">
+                            <?php esc_html_e( 'View All', 'jobus' ); ?>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 </div>
-                <div class="ps-5 pe-5 mt-50"><img src="../images/lazy.svg" data-src="images/main-graph.png" alt="" class="lazy-img m-auto"></div>
+                <?php
+                // Load the saved candidate template
+                jobus_get_template_part( 'dashboard/employer/saved-candidate', [
+                    'is_dashboard' => true,
+                    'limit'        => $limit
+                ] );
+                ?>
             </div>
         </div>
 
-        <div class="col-xl-5 col-lg-6 d-flex">
-            <div class="recent-job-tab bg-white border-20 mt-30 w-100">
+        <div class="col-lg-5">
+            <div class="recent-job-tab bg-white border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Posted Job', 'jobus' ); ?></h4>
                 <div class="wrapper">
                     <?php
@@ -165,7 +204,5 @@ $total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

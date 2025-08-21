@@ -73,15 +73,16 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
                     <div class="col-lg-2 xs-mt-10">
                         <div class="action-button">
                             <a href="javascript:void(0)"
-                               class="save-btn text-center rounded-circle tran3s jobus-candidate-remove-saved-job"
-                               data-job_id="<?php echo esc_attr( $job_id ); ?>"
+                               class="save-btn text-center rounded-circle tran3s jobus-dashboard-remove-saved-post"
+                               data-post_id="<?php echo esc_attr( $job_id ); ?>"
+                               data-post_type="jobus_job"
                                data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_candidate_saved_job' ) ); ?>"
                                title="<?php esc_attr_e( 'Remove', 'jobus' ); ?>">
                                 <i class="bi bi-x-circle-fill"></i>
                             </a>
                             <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>"
                                target="_blank"
-                               class="save-btn text-center rounded-circle tran3s"
+                               class="jobus-dashboard-post-view-more text-center rounded-circle tran3s"
                                title="<?php esc_attr_e( 'View Job', 'jobus' ); ?>">
                                 <i class="bi bi-eye-fill"></i>
                             </a>
@@ -91,8 +92,6 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
             </div>
 			<?php
 		}
-
-
 	} else {
 		echo '<div class="no-jobs-found">' . esc_html__( 'No saved jobs found.', 'jobus' ) . '</div>';
 	}

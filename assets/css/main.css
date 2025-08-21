@@ -3532,20 +3532,6 @@ img {
   width: calc(100% - 80px);
   padding-left: 30px;
 }
-.candidate-profile-card.list-layout .save-btn {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border: 1px solid #E4E4E4;
-  font-weight: 900;
-  color: #31795A;
-  font-size: 18px;
-}
-.candidate-profile-card.list-layout .save-btn:hover {
-  color: #fff;
-  background: #31795A;
-  border-color: #31795A;
-}
 
 .candidates-profile-details {
   position: relative;
@@ -3809,16 +3795,6 @@ img {
   flex-direction: column;
   width: 100%;
 }
-.candidate-profile-card.grid-layout .save-btn {
-  color: #b9b9b9;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 18px;
-}
-.candidate-profile-card.grid-layout .save-btn:hover {
-  color: #00BF58;
-}
 .candidate-profile-card.favourite::before {
   content: "";
   position: absolute;
@@ -3925,20 +3901,6 @@ img {
 .candidate-profile-card.list-layout .right-side {
   width: calc(100% - 80px);
   padding-left: 30px;
-}
-.candidate-profile-card.list-layout .save-btn {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  border: 1px solid #E4E4E4;
-  font-weight: 900;
-  color: #31795A;
-  font-size: 18px;
-}
-.candidate-profile-card.list-layout .save-btn:hover {
-  color: #fff;
-  background: #31795A;
-  border-color: #31795A;
 }
 
 .candidates-profile-details-2 {
@@ -5957,18 +5919,6 @@ img {
 .job-list-one .job-salary .expertise {
   text-transform: capitalize;
 }
-.job-list-one .save-btn {
-  width: 35px;
-  height: 35px;
-  line-height: 32px;
-  border: 1px solid #D6D6D6;
-  color: #CBCBCB;
-}
-.job-list-one .save-btn:hover {
-  background: #E7F6EF;
-  border-color: #E7F6EF;
-  color: #005025;
-}
 .job-list-one .apply-btn {
   width: 85px;
   line-height: 35px;
@@ -6714,6 +6664,20 @@ img {
   align-items: center;
   justify-content: center;
   gap: 12px;
+}
+
+/**===== Saved Candidate and Job ======*/
+.jobus-saved-post, .jobus-dashboard-remove-saved-post, .jobus-dashboard-post-view-more {
+  width: 35px;
+  height: 35px;
+  line-height: 32px;
+  border: 1px solid #D6D6D6;
+  color: #CBCBCB;
+}
+.jobus-saved-post:hover, .jobus-dashboard-remove-saved-post:hover, .jobus-dashboard-post-view-more:hover {
+  background: #E7F6EF;
+  border-color: #E7F6EF;
+  color: #005025;
 }
 
 /*# sourceMappingURL=main.css.map */

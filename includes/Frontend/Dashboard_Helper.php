@@ -20,6 +20,10 @@ class Dashboard_Helper {
 		// Add taxonomy suggestion handler
 		add_action('wp_ajax_jobus_suggest_taxonomy_terms', [$this, 'suggest_taxonomy_terms']);
 		add_action('wp_ajax_nopriv_jobus_suggest_taxonomy_terms', [$this, 'suggest_taxonomy_terms']);
+
+		// Register AJAX handlers for removing saved jobs/candidates
+		add_action('wp_ajax_jobus_candidate_saved_job', [ $this, 'remove_saved_job' ]);
+		add_action('wp_ajax_jobus_employer_saved_candidate', [ $this, 'remove_saved_candidate' ]);
 	}
 
 
@@ -141,5 +145,66 @@ class Dashboard_Helper {
 		}, $terms);
 
 		wp_send_json_success($suggestions);
+	}
+
+
+	/**
+	 * AJAX handler to remove a saved job from candidate dashboard
+	 */
+	public function remove_saved_job() {
+		if (!check_ajax_referer('jobus_candidate_saved_job', 'nonce', false)) {
+			wp_send_json_error(['message' => __('Security check failed.', 'jobus')]);
+		}
+		$user_id = get_current_user_id();
+		if (!$user_id) {
+			wp_send_json_error(['message' => __('You must be logged in.', 'jobus')]);
+		}
+		$job_id = isset($_POST['job_id']) ? intval($_POST['job_id']) : 0;
+		if (!$job_id) {
+			wp_send_json_error(['message' => __('Invalid job.', 'jobus')]);
+		}
+		$saved_jobs = get_user_meta($user_id, 'jobus_saved_jobs', true);
+		if (!is_array($saved_jobs)) {
+			$saved_jobs = !empty($saved_jobs) ? [ $saved_jobs ] : [];
+		}
+		$saved_jobs = array_map('intval', $saved_jobs);
+		$key = array_search($job_id, $saved_jobs);
+		if ($key !== false) {
+			unset($saved_jobs[$key]);
+			update_user_meta($user_id, 'jobus_saved_jobs', array_values($saved_jobs));
+			wp_send_json_success(['message' => __('Job removed.', 'jobus')]);
+		} else {
+			wp_send_json_error(['message' => __('Job not found.', 'jobus')]);
+		}
+	}
+
+	/**
+	 * AJAX handler to remove a saved candidate from employer dashboard
+	 */
+	public function remove_saved_candidate() {
+		if (!check_ajax_referer('jobus_employer_saved_candidate', 'nonce', false)) {
+			wp_send_json_error(['message' => __('Security check failed.', 'jobus')]);
+		}
+		$user_id = get_current_user_id();
+		if (!$user_id) {
+			wp_send_json_error(['message' => __('You must be logged in.', 'jobus')]);
+		}
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		if (!$post_id) {
+			wp_send_json_error(['message' => __('Invalid candidate.', 'jobus')]);
+		}
+		$saved_candidates = get_user_meta($user_id, 'jobus_saved_candidates', true);
+		if (!is_array($saved_candidates)) {
+			$saved_candidates = !empty($saved_candidates) ? [ $saved_candidates ] : [];
+		}
+		$saved_candidates = array_map('intval', $saved_candidates);
+		$key = array_search($post_id, $saved_candidates);
+		if ($key !== false) {
+			unset($saved_candidates[$key]);
+			update_user_meta($user_id, 'jobus_saved_candidates', array_values($saved_candidates));
+			wp_send_json_success(['message' => __('Candidate removed.', 'jobus')]);
+		} else {
+			wp_send_json_error(['message' => __('Candidate not found.', 'jobus')]);
+		}
 	}
 }
