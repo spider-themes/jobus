@@ -1770,4 +1770,10 @@ Table of Contents:
   transform: translateY(-50%);
 }
 
+.job-alert-table .action-btn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

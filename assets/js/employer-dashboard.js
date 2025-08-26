@@ -53,5 +53,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     // Initialize handlers
-    jobusDeleteJobHandler();
+    //jobusDeleteJobHandler();
 });

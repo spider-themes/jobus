@@ -31,6 +31,22 @@ $applicants = get_posts( [
         ]
     ]
 ] );
+
+// Find the page with employer dashboard shortcode
+$dashboard_page = get_posts( [
+        'post_type'      => 'page',
+        'posts_per_page' => 1,
+        'post_status'    => 'publish',
+        'fields'         => 'ids',
+        's'              => '[jobus_employer_dashboard]'
+] );
+
+// Build URL if dashboard page exists
+$edit_job_url = '#';
+if ( ! empty( $dashboard_page ) ) {
+    $edit_job_url = trailingslashit( get_permalink( $dashboard_page[0] ) ) . 'submit-job';
+}
+
 ?>
 
 <div class="position-relative">
@@ -54,7 +70,8 @@ $applicants = get_posts( [
                 <tbody class="border-0">
                 <?php
                 if ( ! empty( $jobs ) ) {
-                    foreach ( $jobs as $job_id ) {
+                    foreach ( $jobs as $job ) {
+                        $job_id  = $job->ID;
                         $status   = get_post_status( $job_id );
                         ?>
                         <tr class="<?php echo esc_attr( $status ); ?>">
@@ -66,21 +83,28 @@ $applicants = get_posts( [
                             <td><?php echo esc_html( count( $applicants ) ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', count( $applicants ), 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo ucfirst( esc_html( $status ) ); ?></div></td>
                             <td>
-                                <a href="<?php echo esc_url( get_edit_post_link( $job_id ) ); ?>" class="btn btn-primary btn-sm"><?php esc_html_e( 'Edit', 'jobus' ); ?></a>
-                                <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="btn btn-secondary btn-sm" target="_blank"><?php esc_html_e( 'View', 'jobus' ); ?></a>
-                                <a href="#" class="btn btn-danger btn-sm jobus-delete-job" data-job-id="<?php echo esc_attr( $job_id ); ?>" data-delete-url="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>">
-                                    <?php esc_html_e( 'Delete', 'jobus' ); ?>
-                                </a>
+                                <div class="action-btn">
+                                    <a href="<?php echo esc_url( add_query_arg( 'job_id', $job_id, $edit_job_url ) ); ?>" class="btn btn-primary btn-sm">
+                                        <?php esc_html_e( 'Edit', 'jobus' ); ?>
+                                    </a>
+                                    <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="btn btn-secondary btn-sm" target="_blank">
+                                        <?php esc_html_e( 'View', 'jobus' ); ?>
+                                    </a>
+                                    <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="btn btn-danger btn-sm">
+                                        <?php esc_html_e( 'Delete', 'jobus' ); ?>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         <?php
                     }
-                } else {
-                    ?>
+                } else { ?>
                     <tr>
                         <td colspan="5"><?php esc_html_e( 'No jobs found.', 'jobus' ); ?></td>
                     </tr>
-                <?php } ?>
+                    <?php
+                } 
+                ?>
                 </tbody>
             </table>
         </div>

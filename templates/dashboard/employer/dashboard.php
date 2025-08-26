@@ -149,11 +149,11 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
 
                         // Find the page with employer dashboard shortcode
                         $dashboard_page = get_posts( [
-                                'post_type'      => 'page',
-                                'posts_per_page' => 1,
-                                'post_status'    => 'publish',
-                                'fields'         => 'ids',
-                                's'              => '[jobus_employer_dashboard]'
+                            'post_type'      => 'page',
+                            'posts_per_page' => 1,
+                            'post_status'    => 'publish',
+                            'fields'         => 'ids',
+                            's'              => '[jobus_employer_dashboard]'
                         ] );
 
                         // Build URL if dashboard page exists
