@@ -103,7 +103,7 @@ if ( ! empty( $dashboard_page ) ) {
                         <td colspan="5"><?php esc_html_e( 'No jobs found.', 'jobus' ); ?></td>
                     </tr>
                     <?php
-                } 
+                }
                 ?>
                 </tbody>
             </table>
