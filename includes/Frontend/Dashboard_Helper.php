@@ -76,7 +76,10 @@ class Dashboard_Helper {
 		$term_name = isset($_POST['term_name']) ? sanitize_text_field(wp_unslash($_POST['term_name'])) : '';
 		$taxonomy = isset($_POST['taxonomy']) ? sanitize_key($_POST['taxonomy']) : '';
 
-		$allowed_taxonomies = ['jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'];
+		$allowed_taxonomies = [
+			'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill',
+			'jobus_job_cat', 'jobus_job_location', 'jobus_job_tag'
+		];
 		if (!$term_name || !$taxonomy || !in_array($taxonomy, $allowed_taxonomies)) {
 			wp_send_json_error(['message' => esc_html__('Invalid taxonomy or term.', 'jobus')]);
 		}
@@ -94,7 +97,7 @@ class Dashboard_Helper {
 			$term_id = $result['term_id'];
 		}
 
-		// Do NOT assign term to candidate post here. Assignment happens on form submit.
+		// Do NOT assign term to candidate/job post here. Assignment happens on form submit.
 		wp_send_json_success([
 			'term_id' => $term_id,
 			'term_name' => $term_name
@@ -119,7 +122,10 @@ class Dashboard_Helper {
 		}
 
 		// Verify taxonomy is allowed
-		$allowed_taxonomies = ['jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'];
+		$allowed_taxonomies = [
+			'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill',
+			'jobus_job_cat', 'jobus_job_location', 'jobus_job_tag'
+		];
 		if (!in_array($taxonomy, $allowed_taxonomies)) {
 			wp_send_json_error(['message' => esc_html__('Invalid taxonomy.', 'jobus')]);
 		}

@@ -17,39 +17,37 @@ $user = wp_get_current_user();
 
 // Called the helper functions
 $job_form = new jobus\includes\Classes\submission\Job_Form_Submission();
-$company_id   = $job_form->get_company_id( $user->ID );
+$job_id   = $job_form->get_employer_job_id( $user->ID );
 
 // Get job ID from URL if editing
-$job_id = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0;
-$editing_job    = $job_id ? get_post( $job_id ) : null;
+$editing_job_id = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0;
+$editing_job    = $editing_job_id ? get_post( $editing_job_id ) : null;
 
 // Use job post for editing, blank for new
-$title           = $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__( 'Submit New Job', 'jobus' );
 $job_title       = $editing_job ? $editing_job->post_title : '';
 $job_description = $editing_job ? $editing_job->post_content : '';
 
-// Handle form submission for taxonomies [categories]
+// Variable to store which post ID to save
+$save_post_id = $editing_job_id ?: $job_id;
+
+
+// Handle form submission for taxonomies [categories, locations, skills]
 if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
     if ( isset( $_POST['job_categories'] ) ) {
         $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );
-        wp_set_object_terms( $company_id, $cat_ids, 'jobus_job_cat' );
+        wp_set_object_terms( $job_id, $cat_ids, 'jobus_candidate_cat' );
     }
 }
-
-echo '<pre>';
-print_r($company_id);
-echo '</pre>';
 ?>
 
 <div class="position-relative">
-    <h2 class="main-title"><?php echo esc_html($title); ?></h2>
+    <h2 class="main-title"><?php echo $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__( 'Submit New Job', 'jobus' ); ?></h2>
 
     <form action="" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
-
         <?php wp_nonce_field( 'employer_submit_job', 'employer_submit_job_nonce' ); ?>
         <input type="hidden" name="employer_submit_job_form" value="1">
-        <input type="hidden" name="job_id" value="<?php echo esc_attr( $job_id ); ?>">
+        <input type="hidden" name="job_id" value="<?php echo esc_attr( $editing_job_id ); ?>">
 
         <div class="bg-white card-box border-20">
             <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
@@ -86,21 +84,23 @@ echo '</pre>';
                 </div>
             </div>
 
-            <div id="job-taxonomy">
+            <div class="bg-white card-box border-20 mt-40" id="candidate-taxonomy">
                 <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
                 <!-- Add Categories -->
                 <div class="dash-input-wrapper mb-40 mt-20">
-                    <label for="job-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
+                    <label for="candidate-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
                         $current_categories = array();
-                        if ( isset( $job_id ) && $job_id ) {
-                            $current_categories = wp_get_object_terms( $job_id, 'jobus_job_cat' );
+                        if ( isset( $candidate_id ) && $candidate_id ) {
+                            $current_categories = wp_get_object_terms( $candidate_id, 'jobus_candidate_cat' );
                         }
+
+                        // To store category IDs
                         $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-category-list" class="style-none d-flex flex-wrap align-items-center">
+                        <ul id="candidate-category-list" class="style-none d-flex flex-wrap align-items-center">
                             <?php if ( ! empty( $current_categories ) ): ?>
                                 <?php foreach ( $current_categories as $cat ): ?>
                                     <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -116,6 +116,39 @@ echo '</pre>';
                     </div>
                 </div>
 
+            </div>
+
+
+            <div id="job-taxonomy">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
+                <?php
+                // Categories
+                $taxonomy_name = 'jobus_job_cat';
+                $input_name = 'job_categories';
+                $list_id = 'job-category-list';
+                $label_text = esc_html__( 'Categories', 'jobus' );
+                $data_attr = 'category-id';
+                $object_id = $save_post_id;
+                include __DIR__ . '/../template-part/taxonomy.php';
+
+                // Locations
+                $taxonomy_name = 'jobus_job_location';
+                $input_name = 'job_locations';
+                $list_id = 'job-location-list';
+                $label_text = esc_html__( 'Locations', 'jobus' );
+                $data_attr = 'location-id';
+                $object_id = $save_post_id;
+                include __DIR__ . '/../template-part/taxonomy.php';
+
+                // Tags
+                $taxonomy_name = 'jobus_job_tag';
+                $input_name = 'job_tags';
+                $list_id = 'job-tag-list';
+                $label_text = esc_html__( 'Tags', 'jobus' );
+                $data_attr = 'tag-id';
+                $object_id = $save_post_id;
+                include __DIR__ . '/../template-part/taxonomy.php';
+                ?>
             </div>
 
         </div>

@@ -35,15 +35,19 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 	}
 
 	if ( isset( $_POST['candidate_locations'] ) ) {
-		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_location' );
+		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
+		wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
 	}
 
 	if ( isset( $_POST['candidate_skills'] ) ) {
-		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_skill' );
+		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
+		wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
 	}
 }
+
+echo '<pre>';
+print_r($candidate_id);
+echo '</pre>';
 
 ?>
 <div class="position-relative">

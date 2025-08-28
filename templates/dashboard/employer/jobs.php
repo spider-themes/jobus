@@ -83,16 +83,30 @@ if ( ! empty( $dashboard_page ) ) {
                             <td><?php echo esc_html( count( $applicants ) ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', count( $applicants ), 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo ucfirst( esc_html( $status ) ); ?></div></td>
                             <td>
-                                <div class="action-btn">
-                                    <a href="<?php echo esc_url( add_query_arg( 'job_id', $job_id, $edit_job_url ) ); ?>" class="btn btn-primary btn-sm">
-                                        <?php esc_html_e( 'Edit', 'jobus' ); ?>
-                                    </a>
-                                    <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="btn btn-secondary btn-sm" target="_blank">
-                                        <?php esc_html_e( 'View', 'jobus' ); ?>
-                                    </a>
-                                    <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="btn btn-danger btn-sm">
-                                        <?php esc_html_e( 'Delete', 'jobus' ); ?>
-                                    </a>
+                                <div class="action-dots float-end">
+                                    <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="dropdown-item">
+                                                <img src="../images/lazy.svg" data-src="images/icon/icon_18.svg" alt="" class="lazy-img">
+                                                <?php esc_html_e( 'View', 'jobus' ); ?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo esc_url( add_query_arg( 'job_id', $job_id, $edit_job_url ) ); ?>" class="dropdown-item">
+                                                <img src="../images/lazy.svg" data-src="images/icon/icon_20.svg" alt="" class="lazy-img">
+                                                <?php esc_html_e( 'Edit', 'jobus' ); ?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="dropdown-item" >
+                                                <img src="images/icon/icon_21.svg" alt="" class="lazy-img">
+                                                <?php esc_html_e( 'Delete', 'jobus' ); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>

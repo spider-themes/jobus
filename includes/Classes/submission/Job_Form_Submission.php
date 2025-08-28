@@ -36,9 +36,72 @@ class Job_Form_Submission {
 	}
 
 	/**
-	 * Get employer's company post ID
+	 * Save Job Data (Create or Update)
 	 */
-	public static function get_employer_company_id( int $user_id = null ) {
+	public function save_job_data( int $company_id, array $post_data, \WP_User $user ) {
+		$job_title       = sanitize_text_field( $post_data['job_title'] ?? '' );
+		$job_description = wp_kses_post( $post_data['job_description'] ?? '' );
+		$job_id          = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
+
+		// Validation
+		if ( empty( $job_title ) ) {
+			wp_die( __( 'Job title is required.', 'jobus' ) );
+		}
+		if ( empty( $job_description ) ) {
+			wp_die( __( 'Job description is required.', 'jobus' ) );
+		}
+
+		// ====== Update existing job ======
+		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
+			$job_post = get_post( $job_id );
+
+			if ( ! $job_post ) {
+				wp_die( __( 'Invalid job post.', 'jobus' ) );
+			}
+
+			// Author check
+			if ( (int) $job_post->post_author !== (int) $user->ID ) {
+				wp_die( __( 'You are not allowed to edit this job.', 'jobus' ) );
+			}
+
+			wp_update_post( [
+				'ID'           => $job_id,
+				'post_title'   => $job_title,
+				'post_content' => $job_description,
+			] );
+
+		} else {
+			// ====== Create new job ======
+			$job_id = wp_insert_post( [
+				'post_type'    => 'jobus_job',
+				'post_title'   => $job_title,
+				'post_content' => $job_description,
+				'post_status'  => 'publish',
+				'post_author'  => $user->ID,
+			] );
+
+			if ( is_wp_error( $job_id ) ) {
+				wp_die( __( 'Failed to create job post.', 'jobus' ) );
+			}
+		}
+
+		// Link job to company
+		update_post_meta( $job_id, '_jobus_company_id', $company_id );
+
+		// ====== Redirect after save ======
+		$base_url = strtok($_SERVER['REQUEST_URI'], '?'); // Get current page path without query
+		$redirect_url = add_query_arg(
+			array(
+				'job_status' => $job_id && ! empty( $post_data['job_id'] ) ? 'updated' : 'created',
+				'job_id' => $job_id
+			),
+			$base_url
+		);
+		wp_safe_redirect( $redirect_url );
+		exit;
+	}
+
+	public static function get_company_id(int $user_id = null) {
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
 		}
@@ -50,86 +113,8 @@ class Job_Form_Submission {
 			'fields'         => 'ids',
 		];
 
-		$query = new \WP_Query( $args );
-
-		return ! empty( $query->posts ) ? $query->posts[0] : false;
-	}
-
-	/**
-	 * Save Job Data (Create or Update)
-	 */
-	public function save_job_content( int $company_id, array $post_data, \WP_User $user ) {
-		$job_title       = sanitize_text_field( $post_data['job_title'] ?? '' );
-		$job_description = wp_kses_post( $post_data['job_description'] ?? '' );
-		$job_id          = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
-
-		if ( empty( $job_title ) ) {
-			wp_die( esc_html__( 'Job title is required.', 'jobus' ) );
-		}
-
-		// --- Update Existing Job ---
-		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
-
-			wp_update_post([
-				'ID'         => $job_id,
-				'post_title' => $job_title,
-				'post_content' => $job_description,
-			]);
-
-			// Meta update (ensure correct company linked)
-			update_post_meta( $job_id, '_jobus_company_id', $company_id );
-
-			wp_redirect( add_query_arg( 'job_updated', '1', $_SERVER['REQUEST_URI'] ) );
-			exit;
-
-		} else {
-			// --- Create New Job ---
-			$post_id = wp_insert_post([
-				'post_type'   => 'jobus_job',
-				'post_title'  => $job_title,
-				'post_content' => $job_description,
-				'post_status' => 'publish',
-				'post_author' => $user->ID,
-			]);
-
-			if ( is_wp_error( $post_id ) ) {
-				wp_die( esc_html__( 'Failed to create job post.', 'jobus' ) );
-			}
-
-			// Link job with employer company
-			update_post_meta( $post_id, '_jobus_company_id', $company_id );
-
-			wp_redirect( add_query_arg( 'job_posted', '1', $_SERVER['REQUEST_URI'] ) );
-			exit;
-		}
-	}
-
-	/**
-	 * Get job data by job ID (for edit form pre-fill)
-	 *
-	 * @param int $job_id
-	 * @return array
-	 */
-	public static function get_job_content( int $job_id ): array {
-		if ( ! $job_id || get_post_type( $job_id ) !== 'jobus_job' ) {
-			return [];
-		}
-
-		$job_post = get_post( $job_id );
-
-		if ( ! $job_post ) {
-			return [];
-		}
-
-		// Collect job data
-		return [
-			'ID'          => $job_post->ID,
-			'title'       => $job_post->post_title,
-			'description' => $job_post->post_content,
-			'status'      => $job_post->post_status,
-			'author'      => $job_post->post_author,
-			'company_id'  => get_post_meta( $job_post->ID, '_jobus_company_id', true ),
-		];
+		$query = new \WP_Query($args);
+		return ! empty($query->posts) ? $query->posts[0] : false;
 	}
 
 	/**
@@ -138,15 +123,15 @@ class Job_Form_Submission {
 	private function handle_form_submission( \WP_User $user ) {
 		$post_data = recursive_sanitize_text_field( $_POST );
 
-		// Get company ID
-		$company_id = $this->get_employer_company_id( $user->ID );
+		// Get company ID for the employer
+		$company_id = $this->get_company_id($user->ID);
 		if ( ! $company_id ) {
-			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
+			wp_die(__('Company profile not found.', 'jobus'));
 		}
 
 		// Handle job content save (create or update)
 		if ( isset( $post_data['job_title'] ) ) {
-			$this->save_job_content( $company_id, $post_data, $user );
+			$this->save_job_data( $company_id, $post_data, $user );
 		}
 	}
 }

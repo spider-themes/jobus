@@ -18,10 +18,9 @@
 ;(function ($) {
     'use strict';
 
-    const JobusCandidateDashboard = {
+    const JobusEmployerDashboard = {
 
         init: function () {
-            
 
         },
 

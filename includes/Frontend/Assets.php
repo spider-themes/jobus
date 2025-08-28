@@ -59,6 +59,8 @@ class Assets {
 
 		$post = get_post();
 
+
+
 		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
 
 			// Style's for candidate dashboard
@@ -74,16 +76,24 @@ class Assets {
 				'remove_application_nonce' => wp_create_nonce('jobus_remove_application_nonce'), // Nonce for removing job application
 			]);
 
-			// Scripts for candidate dashboard
-			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
-				'ajax_url' => admin_url('admin-ajax.php'),
+			wp_enqueue_script('jobus-dashboard-taxonomy', esc_url(JOBUS_JS . '/dashboard-taxonomy.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
+			wp_localize_script('jobus-dashboard-taxonomy', 'jobus_dashboard_tax_params', [
+				'ajax_url' => $ajax_url,
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
 				'suggest_taxonomy_nonce' => wp_create_nonce('jobus_suggest_taxonomy_terms'),
 				'create_taxonomy_nonce' => wp_create_nonce('jobus_create_taxonomy_term'),
 				'texts' => [
 					'taxonomy_create_error' => esc_html__('Error creating term. Please try again.', 'jobus'),
 					'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus'),
+				]
+			]);
+
+			// Scripts for candidate dashboard
+			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+				'texts' => [
 					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
 					'portfolio_select_text' => esc_html__('Add Selected Images', 'jobus'),
 					'remove' => esc_html__('Remove', 'jobus'),
