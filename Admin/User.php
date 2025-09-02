@@ -192,7 +192,7 @@ class User {
 	 *
 	 * @param int $user_id The user ID
 	 */
-	public function create_candidate_post_for_user( int $user_id ) {
+	public function create_candidate_post_for_user( int $user_id ): void {
 		$user = get_userdata( $user_id );
 		if ( ! $user || ! in_array( 'jobus_candidate', (array) $user->roles ) ) {
 			return;

@@ -21,7 +21,6 @@
     const JobusCandidateDashboard = {
 
         init: function () {
-            this.updateProfilePicturePreview();
             this.SocialLinksRepeater();
             this.CandidateSpecificationsRepeater();
             this.EducationRepeater();
@@ -30,73 +29,6 @@
             this.UserPassword();
             this.checkPasswordRedirect();
         },
-
-        /**
-         * Updates the profile picture preview and handles media library selection.
-         * This function initializes the media uploader and sets up the
-         */
-        updateProfilePicturePreview: function () {
-            const imgPreview = $('#candidate_avatar');
-            const profilePictureAction = $('#profile_picture_action');
-            const mediaBtn = $('#candidate_profile_picture_upload');
-            const hiddenId = $('#candidate_profile_picture_id');
-            const originalAvatarUrl = imgPreview.attr('src');  // Store the original avatar URL
-            let tempImageUrl = null;  // Store temporary image URL for preview
-            const defaultAvatarUrl = jobus_dashboard_params && jobus_dashboard_params.default_avatar_url ? 
-                jobus_dashboard_params.default_avatar_url : 
-                'https://secure.gravatar.com/avatar/?s=96&d=mm&r=g'; // Fallback to WordPress default avatar
-
-            // Ensure the media library is functional
-            if (!mediaBtn.length || !window.wp || !window.wp.media) return;
-
-            // Open media library on button click
-            mediaBtn.on('click', function(e) {
-                e.preventDefault();
-                let mediaUploader = wp.media({
-                    title: 'Select Profile Picture',
-                    button: { text: 'Use this image' },
-                    multiple: false
-                });
-
-                mediaUploader.on('select', function() {
-                    const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    tempImageUrl = attachment.url;  // Store temporary URL
-                    imgPreview.attr('src', tempImageUrl);  // Update preview
-                    hiddenId.val(attachment.id);  // Store the new image ID
-                    profilePictureAction.val('upload');  // Mark the action as 'upload'
-                });
-
-                mediaUploader.open();
-            });
-
-            // Delete the avatar (revert to default avatar)
-            $('#delete_profile_picture').on('click', function(e) {
-                e.preventDefault();
-                
-                // Set the image to default avatar or original avatar if available
-                imgPreview.attr('src', defaultAvatarUrl);
-                
-                // Clear the image ID
-                hiddenId.val('');
-                
-                // Mark the action as 'delete'
-                profilePictureAction.val('delete');
-                
-                // Clear temporary URL
-                tempImageUrl = null;
-            });
-
-            // Handle form reset/cancel - revert to original image
-            $('#candidate-profile-form').on('reset', function() {
-                if (tempImageUrl) {
-                    imgPreview.attr('src', originalAvatarUrl);
-                    hiddenId.val('');
-                    profilePictureAction.val('');
-                    tempImageUrl = null;
-                }
-            });
-        },
-
 
         /**
          * Handles background image selection using the WordPress media uploader.

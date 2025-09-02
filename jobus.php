@@ -95,7 +95,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			//Classes
 			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
 			require_once __DIR__ . '/includes/Classes/Candidate_Form_Submission.php';
-			//require_once __DIR__ . '/includes/Classes/Employer_Form_Submission.php';
+			require_once __DIR__ . '/includes/Classes/submission/Employer_Form_Submission.php';
 			require_once __DIR__ . '/includes/Classes/submission/Job_Form_Submission.php';
 
 			// Frontend UI
@@ -131,10 +131,9 @@ if ( ! class_exists( 'Jobus' ) ) {
 			// Classes
 			new \Jobus\includes\Classes\Ajax_Actions();
 			new \Jobus\includes\Classes\Candidate_Form_Submission();
-			//new \Jobus\includes\Classes\Employer_Form_Submission();
 
 			// Submission Classes
-
+			new \Jobus\includes\Classes\submission\Employer_Form_Submission();
 			new \jobus\includes\Classes\submission\Job_Form_Submission();
 
 			//Admin UI

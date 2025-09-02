@@ -57,10 +57,8 @@ class Assets {
 			'candidate_email_nonce' => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form
 		] );
 
+		// Enqueue scripts & styles only if dashboard shortcode is present
 		$post = get_post();
-
-
-
 		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
 
 			// Style's for candidate dashboard
@@ -91,7 +89,7 @@ class Assets {
 			// Scripts for candidate dashboard
 			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
-				'ajax_url' => admin_url('admin-ajax.php'),
+				'ajax_url' => $ajax_url,
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
 				'texts' => [
 					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
@@ -104,10 +102,15 @@ class Assets {
 				]
 			]);
 
-
 			wp_enqueue_script( 'jobus-employer-dashboard', esc_url( JOBUS_JS . '/employer-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
-		}
+			// Common scripts for candidate & employer dashboard
+			wp_enqueue_script('jobus-frontend-dashboard', esc_url(JOBUS_JS . '/frontend-dashboard.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
+			wp_localize_script('jobus-frontend-dashboard', 'jobus_frontend_dashboard_params', [
+				'ajax_url' => $ajax_url,
+				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+			]);
 
+		}
 	}
 }

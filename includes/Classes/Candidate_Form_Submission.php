@@ -62,7 +62,7 @@ class Candidate_Form_Submission {
 	 *
 	 * @return int|false Candidate ID or false if not found
 	 */
-	public static function get_candidate_id( int $user_id = null ) {
+	public static function get_candidate_id( int $user_id = null ): false|int {
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
 		}
@@ -793,7 +793,7 @@ class Candidate_Form_Submission {
 	/**
 	 * Handle the actual form submission
 	 */
-	private function handle_form_submission() {
+	private function handle_form_submission(): void {
 		$user = wp_get_current_user();
 
 		$post_data = recursive_sanitize_text_field( $_POST );

@@ -45,7 +45,7 @@ echo '</pre>';
 <div class="position-relative">
     <h2 class="main-title"><?php echo esc_html($title); ?></h2>
 
-    <form action="" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
         <?php wp_nonce_field( 'employer_submit_job', 'employer_submit_job_nonce' ); ?>
         <input type="hidden" name="employer_submit_job_form" value="1">
