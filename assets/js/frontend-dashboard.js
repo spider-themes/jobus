@@ -25,7 +25,7 @@
                 this.initProfilePictureUpload({
                     avatarSelector: '#employer-avatar-preview',
                     uploadBtnSelector: '#employer-profile-picture-upload',
-                    hiddenIdSelector: '#employer-profile-picture-attachment',
+                    hiddenIdSelector: '#employer-profile-picture',
                     deleteBtnSelector: '#employer-delete-profile-picture',
                     actionSelector: '#employer-profile-picture-temp',
                     formSelector: '#employer-profile-form'
