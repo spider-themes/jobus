@@ -34,7 +34,6 @@ if ( class_exists( 'CSF' ) ) {
 	require_once JOBUS_PATH . '/Admin/csf/options/candidate-specifications.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/candidate-archive.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/candidate-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/social_icons.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/login-form.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/smtp.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/backup.php';

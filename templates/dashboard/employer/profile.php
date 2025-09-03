@@ -17,17 +17,17 @@ $employer_form = new jobus\includes\Classes\submission\Employer_Form_Submission(
 
 // Get current user
 $user               = wp_get_current_user();
-$employer_id        = $employer_form->get_employer_id( $user->ID );
-$content_data       = $employer_form->get_employer_content( $employer_id );
+$company_id        = $employer_form->get_company_id( $user->ID );
+$content_data       = $employer_form->get_employer_content( $company_id );
 $profile_picture_id = $content_data['employer_profile_picture'];
 $avatar_url         = $profile_picture_id ? wp_get_attachment_url( $profile_picture_id ) : get_avatar_url( $user->ID );
 $description        = $content_data['employer_description'];
 
-$specs                    = $employer_form->get_company_specifications( $employer_id );
+$specs                    = $employer_form->get_company_specifications( $company_id );
 $company_specifications   = $specs['specifications'];
 $company_dynamic_fields   = $specs['dynamic_fields'];
-
-$company_website = $employer_form::get_company_website( $employer_id );
+$user_social_links = $employer_form->get_social_icons( $company_id );
+$company_website = $employer_form::get_company_website( $company_id );
 $company_website_url = $company_website['url'];
 $company_website_title = $company_website['title'];
 $company_website_target = $company_website['target'];
@@ -150,6 +150,99 @@ $company_website_target = $company_website['target'];
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="bg-white card-box border-20 mt-40" id="employer-social-icons">
+            <h4 class="dash-title-three">
+                <?php esc_html_e( 'Social Media', 'jobus' ); ?>
+            </h4>
+            <?php
+            // Get available icons from meta options (fallback to default set)
+            $default_icons = [
+                'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
+                'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
+                'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
+                'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
+                'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
+                'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
+                'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
+                'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
+                'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
+                'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
+            ];
+            $available_icons = $default_icons;
+            // Get saved social links from meta
+            if ( ! is_array( $user_social_links ) ) {
+                $user_social_links = [];
+            }
+            ?>
+            <div class="accordion dash-accordion-one" id="social-links-repeater">
+                <?php foreach ( $user_social_links as $index => $item ) :
+                    $accordion_id = 'social-link-' . esc_attr( $index );
+                    $icon_label = $available_icons[ $item['icon'] ] ?? esc_html__( 'Social Network', 'jobus' );
+                ?>
+                <div class="accordion-item social-link-item">
+                    <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
+                        <button class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                aria-expanded="false"
+                                aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
+                            <?php echo esc_html( $icon_label ); ?>
+                        </button>
+                    </div>
+                    <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                         aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
+                         data-bs-parent="#social-links-repeater">
+                        <div class="accordion-body">
+                            <div class="row mb-3">
+                                <div class="col-lg-2">
+                                    <div class="dash-input-wrapper mb-10">
+                                        <label for="social_<?php echo esc_attr($index); ?>_icon">
+                                            <?php esc_html_e( 'Icon', 'jobus' ); ?>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="dash-input-wrapper mb-10">
+                                        <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
+                                            <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
+                                                <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
+                                                    <?php echo esc_html( $icon_label ); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-2">
+                                    <div class="dash-input-wrapper mb-10">
+                                        <label for="social_<?php echo esc_attr($index); ?>_url">
+                                            <?php esc_html_e( 'URL', 'jobus' ); ?>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="dash-input-wrapper mb-10">
+                                        <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                    <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-social-link">
+                <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
+            </a>
         </div>
 
         <div class="button-group d-inline-flex align-items-center mt-30">

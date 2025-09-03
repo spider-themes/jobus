@@ -13,6 +13,7 @@ $website        = $meta['company_website'] ?? [];
 $website_url    = $website['url'] ?? '';
 $website_text   = $website['title'] ?? '';
 $website_target = $website['target'] ?? '_self';
+$social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons']) ? $meta['social_icons'] : '';
 ?>
 
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -38,9 +39,7 @@ $website_target = $website['target'] ?? '_self';
 
                         <div class="border-top mt-35 lg-mt-20 pt-25">
                             <ul class="job-meta-data row style-none">
-
                                 <?php
-
                                 if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
                                     <li>
                                         <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
@@ -96,8 +95,8 @@ $website_target = $website['target'] ?? '_self';
 
                                 }
 
-                                $terms = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
-                                if ( is_array( $terms ) ) {
+                                $cats = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
+                                if ( is_array( $cats ) ) {
                                     ?>
                                     <li>
                                         <span>
@@ -108,16 +107,14 @@ $website_target = $website['target'] ?? '_self';
                                         </span>
                                         <div>
                                             <?php
-                                            $terms_list = implode( ', ', $terms );
+                                            $terms_list = implode( ', ', $cats );
                                             echo esc_html( $terms_list );
                                             ?>
                                         </div>
                                     </li>
                                     <?php
                                 }
-
-                                $social_icons = jobus_opt( 'jobus_social_icons' );
-                                if ( is_array( $social_icons ) ) {
+                                if ( $social_icons ) {
                                     ?>
                                     <li>
                                         <span><?php esc_html_e( 'Social: ', 'jobus' ); ?></span>

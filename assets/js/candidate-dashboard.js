@@ -21,7 +21,6 @@
     const JobusCandidateDashboard = {
 
         init: function () {
-            this.SocialLinksRepeater();
             this.CandidateSpecificationsRepeater();
             this.EducationRepeater();
             this.ExperienceRepeater();
@@ -104,124 +103,6 @@
                 mediaUploader.open();
             });
         },
-
-
-        /**
-         * Manages the dynamic addition and removal of social media links in the candidate dashboard form.
-         * Handles UI updates and re-indexing of social link items.
-         *
-         * @function SocialLinksRepeater
-         * @returns {void}
-         */
-        SocialLinksRepeater: function () {
-            const icons = [
-                { value: 'bi bi-facebook', label: 'Facebook' },
-                { value: 'bi bi-instagram', label: 'Instagram' },
-                { value: 'bi bi-twitter', label: 'Twitter' },
-                { value: 'bi bi-linkedin', label: 'LinkedIn' },
-                { value: 'bi bi-github', label: 'GitHub' },
-                { value: 'bi bi-youtube', label: 'YouTube' },
-                { value: 'bi bi-dribbble', label: 'Dribbble' },
-                { value: 'bi bi-behance', label: 'Behance' },
-                { value: 'bi bi-pinterest', label: 'Pinterest' },
-                { value: 'bi bi-tiktok', label: 'TikTok' }
-            ];
-
-            const iconOptions = icons.map(icon =>
-                `<option value="${icon.value}">${icon.label}</option>`
-            ).join('');
-
-            const repeater = $('#social-links-repeater');
-            let index = repeater.children('.social-link-item').length;
-
-            $('#add-social-link').on('click', function (e) {
-                e.preventDefault();
-
-                const accordionId = `social-link-${index}`;
-                const newItem = $(`
-                    <div class="accordion-item social-link-item">
-                        <div class="accordion-header" id="heading-${index}">
-                            <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#${accordionId}"
-                                    aria-expanded="false"
-                                    aria-controls="${accordionId}">
-                                Social Network #${index + 1}
-                            </button>
-                        </div>
-                        <div id="${accordionId}" class="accordion-collapse collapse"
-                             aria-labelledby="heading-${index}"
-                             data-bs-parent="#social-links-repeater">
-                            <div class="accordion-body">
-                                <div class="row mb-3">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
-                                            <label for="social_${index}_icon">Icon</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
-                                            <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
-                                                ${iconOptions}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="row mb-3">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
-                                            <label for="social_${index}_url">URL</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
-                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="form-control" value="">
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
-                                        <i class="bi bi-x"></i> Remove
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `);
-
-                repeater.append(newItem);
-                index++;
-            });
-
-            repeater.on('click', '.remove-social-link', function () {
-                $(this).closest('.social-link-item').remove();
-
-                // Re-index all fields
-                repeater.children('.social-link-item').each(function (i, el) {
-                    const accordionId = `social-link-${i}`;
-                    const $el = $(el);
-
-                    $el.find('.accordion-header').attr('id', `heading-${i}`);
-                    $el.find('.accordion-button')
-                        .attr('data-bs-target', `#${accordionId}`)
-                        .attr('aria-controls', accordionId)
-                        .text(`Social Network #${i + 1}`);
-
-                    $el.find('.accordion-collapse')
-                        .attr('id', accordionId)
-                        .attr('aria-labelledby', `heading-${i}`);
-
-                    $el.find('select').attr('name', `social_icons[${i}][icon]`).attr('id', `social_${i}_icon`);
-                    $el.find('input[name$="[title]"]').attr('name', `social_icons[${i}][title]`).attr('id', `social_${i}_title`);
-                    $el.find('input[name$="[url]"]').attr('name', `social_icons[${i}][url]`).attr('id', `social_${i}_url`);
-                });
-
-                index = repeater.children('.social-link-item').length;
-            });
-        },
-
 
         /**
          * Handles the dynamic addition and removal of candidate specification fields.
