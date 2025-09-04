@@ -45,10 +45,6 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 	}
 }
 
-echo '<pre>';
-print_r($candidate_id);
-echo '</pre>';
-
 ?>
 <div class="position-relative">
     <h2 class="main-title"><?php esc_html_e( 'My Resume', 'jobus' ); ?></h2>
@@ -87,17 +83,17 @@ echo '</pre>';
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
             <div class="intro-video-form position-relative mt-20 w-100">
                 <div class="dash-input-wrapper mb-15">
-                    <label for="video_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
-                    <input type="text" id="video_title" name="video_title" value="<?php echo esc_attr( $video_data['video_title'] ); ?>"
+                    <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
+                    <input type="text" id="video-title" name="video_title" value="<?php echo esc_attr( $video_data['video_title'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
                 </div>
                 <div class="dash-input-wrapper mb-15">
-                    <label for="video_url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
-                    <input type="text" id="video_url" name="video_url" value="<?php echo esc_attr( $video_data['video_url'] ); ?>"
+                    <label for="video-url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
+                    <input type="text" id="video-url" name="video_url" value="<?php echo esc_attr( $video_data['video_url'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
                 </div>
                 <div class="dash-input-wrapper mb-15">
-                    <label for="video_bg_img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
+                    <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
 
                     <!-- Image Preview Section -->
                     <div id="bg-img-preview" class="preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
@@ -110,16 +106,13 @@ echo '</pre>';
                     <div id="bg-img-upload-btn-wrapper" class="<?php echo ! empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
                         <div class="dash-btn-one d-inline-block position-relative me-3">
                             <i class="bi bi-plus"></i>
-							<?php esc_html_e( 'Upload Image', 'jobus' ); ?>
-                            <button type="button" id="video_bg_img_upload_btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                            <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
+                            <button type="button" id="video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
                         </div>
                     </div>
-                    <!-- Hidden fields for image data -->
-                    <input type="hidden" id="video_bg_img_id" name="video_bg_img[id]"
-                           value="<?php echo esc_attr( $video_data['video_bg_img']['id'] ?? '' ); ?>">
-                    <input type="hidden" id="video_bg_img_url" name="video_bg_img[url]"
-                           value="<?php echo esc_attr( $video_data['video_bg_img']['url'] ?? '' ); ?>">
-                    <input type="hidden" id="video_bg_img_action" name="video_bg_img_action" value="">
+                    <!-- Hidden field for image ID -->
+                    <input type="hidden" id="video-bg-img" name="video_bg_img" value="<?php echo esc_attr( $video_data['video_bg_img']['id'] ?? '' ); ?>">
+                    <input type="hidden" id="video-bg-img-action" name="video_bg_img_action" value="">
                 </div>
             </div>
         </div>

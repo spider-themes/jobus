@@ -8,6 +8,10 @@ get_header();
 $user_id = get_post_field( 'post_author', get_the_ID() );
 $employer_mail = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
 
+$video_bg_img = get_post_meta( get_the_ID(), 'company_video_bg_img', true );
+$video_title = get_post_meta( get_the_ID(), 'company_video_title', true );
+$video_url = get_post_meta( get_the_ID(), 'company_video_url', true );
+
 $meta           = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 $website        = $meta['company_website'] ?? [];
 $website_url    = $website['url'] ?? '';
@@ -148,7 +152,23 @@ $social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons
                 <div class="col-xxl-9 col-xl-8 order-xl-first">
                     <div class="details-post-data me-xxl-5 pe-xxl-4">
 
-                        <?php the_content(); ?>
+                        <?php
+                        the_content();
+
+                        if ( !empty( $video_title ) ) { ?>
+                            <h3><?php echo esc_html($video_title) ?></h3>
+                            <?php
+                        }
+                        if ( $video_url ) {
+                            ?>
+                            <div class="video-post d-flex align-items-center justify-content-center mb-50" style="background-image: url(<?php echo wp_get_attachment_url( $video_bg_img ) ?>)">
+                                <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
+                                    <i class="bi bi-play-fill"></i>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                        ?>
 
                         <nav class="share-option mt-60">
                             <?php jobus_social_share_icons() ?>

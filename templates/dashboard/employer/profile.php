@@ -13,72 +13,73 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Called the helper functions
-$employer_form = new jobus\includes\Classes\submission\Employer_Form_Submission();
+$company_form = new jobus\includes\Classes\submission\Employer_Form_Submission();
 
 // Get current user
-$user               = wp_get_current_user();
-$company_id        = $employer_form->get_company_id( $user->ID );
-$content_data       = $employer_form->get_employer_content( $company_id );
-$profile_picture_id = $content_data['employer_profile_picture'];
-$avatar_url         = $profile_picture_id ? wp_get_attachment_url( $profile_picture_id ) : get_avatar_url( $user->ID );
-$description        = $content_data['employer_description'];
-
-$specs                    = $employer_form->get_company_specifications( $company_id );
-$company_specifications   = $specs['specifications'];
-$company_dynamic_fields   = $specs['dynamic_fields'];
-$user_social_links = $employer_form->get_social_icons( $company_id );
-$company_website = $employer_form::get_company_website( $company_id );
-$company_website_url = $company_website['url'];
-$company_website_title = $company_website['title'];
+$user                   = wp_get_current_user();
+$company_id             = $company_form->get_company_id( $user->ID );
+$content_data           = $company_form->get_company_content( $company_id );
+$profile_picture_id     = $content_data['company_profile_picture'];
+$avatar_url             = $profile_picture_id ? wp_get_attachment_url( $profile_picture_id ) : get_avatar_url( $user->ID );
+$description            = $content_data['company_description'];
+$specs                  = $company_form->get_company_specifications( $company_id );
+$company_specifications = $specs['specifications'];
+$company_dynamic_fields = $specs['dynamic_fields'];
+$user_social_links      = $company_form->get_company_social_icons( $company_id );
+$company_website        = $company_form::get_company_website( $company_id );
+$company_website_url    = $company_website['url'];
+$company_website_title  = $company_website['title'];
 $company_website_target = $company_website['target'];
+$video_data             = $company_form->get_company_video( $company_id );
 ?>
 <div class="position-relative">
 
     <h2 class="main-title"><?php esc_html_e( 'Profile', 'jobus' ); ?></h2>
 
-    <form action="#" id="employer-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form action="#" id="company-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
-        <?php wp_nonce_field( 'employer_profile_update', 'employer_profile_nonce' ); ?>
-        <input type="hidden" name="employer_profile_form_submit" value="1"/>
+        <?php wp_nonce_field( 'company_profile_update', 'company_profile_nonce' ); ?>
+        <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="bg-white card-box border-20">
             <div class="user-avatar-setting d-flex align-items-center mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
-                     id="employer-avatar-preview">
-                <button type="button" class="upload-btn position-relative tran3s ms-4 me-3" id="employer-profile-picture-upload">
+                     id="company-avatar-preview">
+                <button type="button" class="upload-btn position-relative tran3s ms-4 me-3" id="company-profile-picture-upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                 </button>
-                <button type="button" name="employer_delete_profile_picture" class="delete-btn tran3s" id="employer-delete-profile-picture">
+                <button type="button" name="company_delete_profile_picture" class="delete-btn tran3s" id="company-delete-profile-picture">
                     <?php esc_html_e( 'Delete', 'jobus' ); ?>
                 </button>
-                <input type="hidden" name="employer_profile_picture" id="employer-profile-picture"
-                       value="<?php echo esc_attr( $content_data['employer_profile_picture'] ); ?>">
-                <input type="hidden" name="employer_profile_picture_temp" id="employer-profile-picture-temp" value="">
+                <input type="hidden" name="company_profile_picture" id="company-profile-picture"
+                       value="<?php echo esc_attr( $content_data['company_profile_picture'] ); ?>">
+                <input type="hidden" name="company_profile_picture_temp" id="company-profile-picture-temp" value="">
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="dash-input-wrapper mb-30">
-                        <label for="employer-name"><?php esc_html_e( 'Employer Name*', 'jobus' ); ?></label>
-                        <input type="text" id="employer-name" name="employer_name" placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>"
-                               value="<?php echo esc_attr( $content_data['employer_name'] ); ?>">
+                        <label for="company-name"><?php esc_html_e( 'Company Name*', 'jobus' ); ?></label>
+                        <input type="text" id="company-name" name="company_name" placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>"
+                               value="<?php echo esc_attr( $content_data['company_name'] ); ?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="dash-input-wrapper mb-30">
-                        <label for="employer-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
-                        <input type="email" id="employer-email" name="employer_mail" placeholder="<?php esc_attr_e( 'companyinc@gmail.com', 'jobus' ); ?>" value="<?php echo esc_attr( $user->user_email ); ?>">
+                        <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
+                        <input type="email" id="company-email" name="company_mail" placeholder="<?php esc_attr_e( 'companyinc@gmail.com', 'jobus' ); ?>"
+                               value="<?php echo esc_attr( $user->user_email ); ?>">
                     </div>
                 </div>
             </div>
             <div class="dash-input-wrapper">
-                <label for="employer_description"><?php esc_html_e( 'Description', 'jobus' ); ?></label>
+                <label for="company_description"><?php esc_html_e( 'Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
                     wp_editor(
                             $description,
-                            'employer_description',
+                            'company_description',
                             array(
-                                    'textarea_name' => 'employer_description',
+                                    'textarea_name' => 'company_description',
                                     'textarea_rows' => 8,
                                     'media_buttons' => true,
                                     'teeny'         => false, // Use full toolbar
@@ -135,11 +136,13 @@ $company_website_target = $company_website['target'];
                 <div class="col-md-12">
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
-                        <input type="url" id="company-website-url" name="company_website[url]" placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
+                        <input type="url" id="company-website-url" name="company_website[url]"
+                               placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-title"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
-                        <input type="text" id="company-website-title" name="company_website[title]" placeholder="<?php esc_attr_e( 'Visit our website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_title ); ?>">
+                        <input type="text" id="company-website-title" name="company_website[title]"
+                               placeholder="<?php esc_attr_e( 'Visit our website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_title ); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-target"><?php esc_html_e( 'Link Target', 'jobus' ); ?></label>
@@ -152,24 +155,23 @@ $company_website_target = $company_website['target'];
             </div>
         </div>
 
-        <!-- Social Media Section -->
-        <div class="bg-white card-box border-20 mt-40" id="employer-social-icons">
+        <div class="bg-white card-box border-20 mt-40" id="company-social-icons">
             <h4 class="dash-title-three">
                 <?php esc_html_e( 'Social Media', 'jobus' ); ?>
             </h4>
             <?php
             // Get available icons from meta options (fallback to default set)
-            $default_icons = [
-                'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
-                'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
-                'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
-                'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
-                'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
-                'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
-                'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
-                'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
-                'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
-                'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
+            $default_icons   = [
+                    'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
+                    'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
+                    'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
+                    'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
+                    'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
+                    'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
+                    'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
+                    'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
+                    'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
+                    'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
             ];
             $available_icons = $default_icons;
             // Get saved social links from meta
@@ -181,68 +183,110 @@ $company_website_target = $company_website['target'];
                 <?php foreach ( $user_social_links as $index => $item ) :
                     $accordion_id = 'social-link-' . esc_attr( $index );
                     $icon_label = $available_icons[ $item['icon'] ] ?? esc_html__( 'Social Network', 'jobus' );
-                ?>
-                <div class="accordion-item social-link-item">
-                    <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
-                                aria-expanded="false"
-                                aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
-                            <?php echo esc_html( $icon_label ); ?>
-                        </button>
-                    </div>
-                    <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
-                         aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
-                         data-bs-parent="#social-links-repeater">
-                        <div class="accordion-body">
-                            <div class="row mb-3">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-10">
-                                        <label for="social_<?php echo esc_attr($index); ?>_icon">
-                                            <?php esc_html_e( 'Icon', 'jobus' ); ?>
-                                        </label>
+                    ?>
+                    <div class="accordion-item social-link-item">
+                        <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    aria-expanded="false"
+                                    aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
+                                <?php echo esc_html( $icon_label ); ?>
+                            </button>
+                        </div>
+                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                             aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
+                             data-bs-parent="#social-links-repeater">
+                            <div class="accordion-body">
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_<?php echo esc_attr( $index ); ?>_icon">
+                                                <?php esc_html_e( 'Icon', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]"
+                                                    id="social_<?php echo esc_attr( $index ); ?>_icon" class="nice-select">
+                                                <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
+                                                    <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
+                                                        <?php echo esc_html( $icon_label ); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-10">
-                                        <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
-                                            <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
-                                                <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
-                                                    <?php echo esc_html( $icon_label ); ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_<?php echo esc_attr( $index ); ?>_url">
+                                                <?php esc_html_e( 'URL', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]"
+                                                   id="social_<?php echo esc_attr( $index ); ?>_url" class="form-control"
+                                                   value="<?php echo esc_attr( $item['url'] ); ?>">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-lg-2">
-                                    <div class="dash-input-wrapper mb-10">
-                                        <label for="social_<?php echo esc_attr($index); ?>_url">
-                                            <?php esc_html_e( 'URL', 'jobus' ); ?>
-                                        </label>
-                                    </div>
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2"
+                                            title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
+                                        <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
+                                    </button>
                                 </div>
-                                <div class="col-lg-10">
-                                    <div class="dash-input-wrapper mb-10">
-                                        <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
-                                    <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
-                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
             <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-social-link">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
             </a>
+        </div>
+
+        <div class="bg-white card-box border-20 mt-40" id="company-video">
+            <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
+            <div class="intro-video-form position-relative mt-20 w-100">
+                <div class="dash-input-wrapper mb-15">
+                    <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
+                    <input type="text" id="video-title" name="company_video_title" value="<?php echo esc_attr( $video_data['company_video_title'] ); ?>"
+                           placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
+                </div>
+                <div class="dash-input-wrapper mb-15">
+                    <label for="video-url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
+                    <input type="text" id="video-url" name="company_video_url" value="<?php echo esc_attr( $video_data['company_video_url'] ); ?>"
+                           placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
+                </div>
+                <div class="dash-input-wrapper mb-15">
+                    <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
+
+                    <!-- Image Preview Section -->
+                    <div id="bg-img-preview" class="preview <?php echo empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
+                        <div class="attached-file d-flex align-items-center justify-content-between">
+                            <span id="video-bg-image-uploaded-filename"><?php echo esc_html( $video_data['company_video_bg_img']['url'] ); ?></span>
+                            <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
+                        </div>
+                    </div>
+
+                    <div id="bg-img-upload-btn-wrapper" class="<?php echo ! empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
+                        <div class="dash-btn-one d-inline-block position-relative me-3">
+                            <i class="bi bi-plus"></i>
+                            <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
+                            <button type="button" id="video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                        </div>
+                    </div>
+                    <!-- Hidden field for image ID -->
+                    <input type="hidden" id="video-bg-img" name="company_video_bg_img" value="<?php echo esc_attr( $video_data['company_video_bg_img']['id'] ?? '' ); ?>">
+                    <input type="hidden" id="video-bg-img-action" name="video_bg_img_action" value="">
+                </div>
+            </div>
         </div>
 
         <div class="button-group d-inline-flex align-items-center mt-30">

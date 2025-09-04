@@ -20,15 +20,15 @@
 
     const JobusCandidateDashboard = {
         init: function () {
-            // Unified logic for both employer and candidate profile image upload
-            if ($('#employer-profile-form').length) {
+            // Unified logic for both company and candidate profile image upload
+            if ($('#company-profile-form').length) {
                 this.initProfilePictureUpload({
-                    avatarSelector: '#employer-avatar-preview',
-                    uploadBtnSelector: '#employer-profile-picture-upload',
-                    hiddenIdSelector: '#employer-profile-picture',
-                    deleteBtnSelector: '#employer-delete-profile-picture',
-                    actionSelector: '#employer-profile-picture-temp',
-                    formSelector: '#employer-profile-form'
+                    avatarSelector: '#company-avatar-preview',
+                    uploadBtnSelector: '#company-profile-picture-upload',
+                    hiddenIdSelector: '#company-profile-picture',
+                    deleteBtnSelector: '#company-delete-profile-picture',
+                    actionSelector: '#company-profile-picture-temp',
+                    formSelector: '#company-profile-form'
                 });
             }
             if ($('#candidate-profile-form').length) {
@@ -43,6 +43,7 @@
             }
 
             this.SocialIcon();
+            this.VideoBgImage();
 
         },
 
@@ -213,6 +214,59 @@
                 });
 
                 index = repeater.children('.social-link-item').length;
+            });
+        },
+
+        /**
+         * Handles background image selection using the WordPress media uploader.
+         * Allows users to select an image from the media library and set it as background.
+         *
+         * @function VideoBgImage
+         * @returns {void}
+         */
+        VideoBgImage: function () {
+            const uploadBtn = $('#video-bg-img-upload-btn');
+            const preview = $('#bg-img-preview');
+            const previewFilename = $('#video-bg-image-uploaded-filename');
+            const uploadBtnWrapper = $('#bg-img-upload-btn-wrapper');
+            const imgIdInput = $('#video-bg-img');
+            const actionInput = $('#video-bg-img-action');
+            const removeBtn = $('#remove-uploaded-bg-img');
+
+            if (!window.wp || !window.wp.media) return;
+
+            // Handle remove button click
+            removeBtn.on('click', function(e) {
+                e.preventDefault();
+                actionInput.val('delete');
+                imgIdInput.val('');
+                previewFilename.text('');
+                preview.addClass('hidden');
+                uploadBtnWrapper.removeClass('hidden');
+            });
+
+            // Handle WordPress media uploader
+            uploadBtn.on('click', function(e) {
+                e.preventDefault();
+                const mediaUploader = wp.media({
+                    title: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_upload_title || 'Select Background Image',
+                    button: {
+                        text: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_select_text || 'Use this image'
+                    },
+                    multiple: false,
+                    library: {
+                        type: 'image'
+                    }
+                });
+                mediaUploader.on('select', function() {
+                    const attachment = mediaUploader.state().get('selection').first().toJSON();
+                    actionInput.val('upload');
+                    imgIdInput.val(attachment.id); // FIXED: use correct field
+                    previewFilename.text(attachment.url);
+                    preview.removeClass('hidden');
+                    uploadBtnWrapper.addClass('hidden');
+                });
+                mediaUploader.open();
             });
         },
     }
