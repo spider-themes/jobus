@@ -181,20 +181,20 @@ $video_data             = $company_form->get_company_video( $company_id );
             ?>
             <div class="accordion dash-accordion-one" id="social-links-repeater">
                 <?php foreach ( $user_social_links as $index => $item ) :
-                    $accordion_id = 'social-link-' . esc_attr( $index );
+                    $social_icon_id = 'social-link-' . esc_attr( $index );
                     $icon_label = $available_icons[ $item['icon'] ] ?? esc_html__( 'Social Network', 'jobus' );
                     ?>
                     <div class="accordion-item social-link-item">
                         <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
                             <button class="accordion-button collapsed" type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-bs-target="#<?php echo esc_attr( $social_icon_id ); ?>"
                                     aria-expanded="false"
-                                    aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
+                                    aria-controls="<?php echo esc_attr( $social_icon_id ); ?>">
                                 <?php echo esc_html( $icon_label ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $social_icon_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
                              data-bs-parent="#social-links-repeater">
                             <div class="accordion-body">
@@ -289,7 +289,7 @@ $video_data             = $company_form->get_company_video( $company_id );
             </div>
         </div>
 
-        <div class="bg-white card-box border-20 mt-40" id="company-testimonial-section">
+        <div class="bg-white card-box border-20 mt-40" id="company-testimonials">
             <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
             <?php
             $testimonials = $company_form->get_company_testimonials( $company_id );
@@ -313,19 +313,19 @@ $video_data             = $company_form->get_company_video( $company_id );
                     );
                 }
                 foreach ( $testimonials as $key => $testimonial ) {
-                    $accordion_id = 'company-testimonial-' . esc_attr( $key );
+                    $testimonial_id = 'company-testimonial-' . esc_attr( $key );
                     ?>
                     <div class="accordion-item company-testimonial-item">
                         <div class="accordion-header" id="company-testimonial-heading-<?php echo esc_attr( $key ); ?>">
                             <button class="accordion-button collapsed" type="button"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-bs-target="#<?php echo esc_attr( $testimonial_id ); ?>"
                                     aria-expanded="false"
-                                    aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
+                                    aria-controls="<?php echo esc_attr( $testimonial_id ); ?>">
                                 <?php echo esc_html( $testimonial['author_name'] ?? esc_html__( 'Testimonial', 'jobus' ) ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $testimonial_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="company-testimonial-heading-<?php echo esc_attr( $key ); ?>"
                              data-bs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
@@ -387,10 +387,13 @@ $video_data             = $company_form->get_company_video( $company_id );
                                     </div>
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <input type="number" min="0" max="5" step="0.1"
-                                                   name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control"
-                                                   value="<?php echo esc_attr( $testimonial['rating'] ?? '' ); ?>">
+                                            <select name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
+                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control">
+                                                <option value="">--</option>
+                                                <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+                                                    <option value="<?php echo $i; ?>" <?php selected( (int) ( $testimonial['rating'] ?? 0 ), $i ); ?>><?php echo $i; ?></option>
+                                                <?php endfor; ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -404,10 +407,22 @@ $video_data             = $company_form->get_company_video( $company_id );
                                     </div>
                                     <div class="col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="form-control"
-                                                   value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
-                                            <!-- You may want to add a media uploader for images here in future -->
+                                            <!-- Hidden field for image ID -->
+                                            <input type="hidden" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-id" value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
+                                            <!-- Upload button for WP media -->
+                                            <button type="button" class="btn btn-secondary testimonial-image-upload-btn" data-index="<?php echo esc_attr( $key ); ?>">
+                                                <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
+                                            </button>
+                                            <!-- Preview area (always present) -->
+                                            <div class="testimonial-image-preview mt-2 mb-2" id="testimonial-image-preview-<?php echo esc_attr( $key ); ?>">
+                                                <?php
+                                                $image_id = $testimonial['image'] ?? '';
+                                                $image_url = $image_id ? wp_get_attachment_url( $image_id ) : '';
+                                                if ( ! empty( $image_url ) ) : ?>
+                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Author Image', 'jobus' ); ?>" style="max-width: 100px; max-height: 100px;">
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

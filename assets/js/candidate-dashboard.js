@@ -25,8 +25,6 @@
             this.EducationRepeater();
             this.ExperienceRepeater();
             this.VideoBgImage();
-            this.UserPassword();
-            this.checkPasswordRedirect();
         },
 
         /**
@@ -436,103 +434,6 @@
 
                 index = repeater.children('.experience-item').length;
             });
-        },
-
-
-        /**
-         * Handles user password management in the dashboard (candidate & employer).
-         * Provides functionality for checking password strength, matching new passwords,
-         * showing/hiding password fields, and updating the UI accordingly.
-         * @function UserPassword
-         */
-        UserPassword:function () {
-            const $form = $('#user-password-form');
-            const $currentPassword = $('#current_password');
-            const $newPassword = $('#new_password');
-            const $confirmPassword = $('#confirm_password');
-            const $passwordStrength = $('#password-strength');
-            const $passwordMatchStatus = $('#password-match-status');
-
-            // Check password strength
-            function checkPasswordStrength() {
-                const password = $newPassword.val().trim();
-                if (!password) {
-                    $passwordStrength.removeClass('text-success text-warning text-danger').empty();
-                    return;
-                }
-
-                // Simple password strength indicator
-                let strength = 0;
-                if (password.length >= 8) strength += 1;
-                if (/[A-Z]/.test(password)) strength += 1;
-                if (/[a-z]/.test(password)) strength += 1;
-                if (/[0-9]/.test(password)) strength += 1;
-                if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-
-                // Display strength indicator
-                if (strength < 3) {
-                    $passwordStrength.removeClass('text-success text-warning').addClass('text-danger')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_weak || 'Weak password');
-                } else if (strength < 5) {
-                    $passwordStrength.removeClass('text-success text-danger').addClass('text-warning')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_medium || 'Medium strength password');
-                } else {
-                    $passwordStrength.removeClass('text-warning text-danger').addClass('text-success')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_strong || 'Strong password');
-                }
-            }
-
-            // Check if passwords match
-            function checkPasswordsMatch() {
-                const newPass = $newPassword.val().trim();
-                const confirmPass = $confirmPassword.val().trim();
-
-                if (!confirmPass) {
-                    $passwordMatchStatus.removeClass('text-success text-danger').empty();
-                    return;
-                }
-
-                if (newPass === confirmPass) {
-                    $passwordMatchStatus.removeClass('text-danger').addClass('text-success')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.passwords_match || 'Passwords match');
-                } else {
-                    $passwordMatchStatus.removeClass('text-success').addClass('text-danger')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.passwords_mismatch || 'Passwords do not match');
-                }
-            }
-
-            // Show/hide password toggle
-            $form.find('.passVicon').on('click', function() {
-                const $input = $(this).closest('.dash-input-wrapper').find('input');
-                const type = $input.attr('type') === 'password' ? 'text' : 'password';
-                $input.attr('type', type);
-            });
-
-            // Attach input event listeners
-            $currentPassword.on('input', checkPasswordsMatch);
-            $newPassword.on('input', function() {
-                checkPasswordStrength();
-                checkPasswordsMatch();
-            });
-            $confirmPassword.on('input', function() {
-                checkPasswordsMatch();
-            });
-        },
-
-        /**
-         * Checks for password change success and triggers redirect if needed
-         */
-        checkPasswordRedirect: function() {
-
-            let $passwordChange = $('#password-change-success');
-            if ( $passwordChange.length ) {
-                const $redirectUrl = $passwordChange.data('redirect-url');
-                if ($redirectUrl) {
-                    setTimeout(function() {
-                        window.location.href = $redirectUrl;
-                    }, 1000);
-                }
-            }
         },
 
     };
