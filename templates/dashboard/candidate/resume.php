@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user = wp_get_current_user();
 
 // Called the helper functions
-$candidate_form = new jobus\includes\Classes\Candidate_Form_Submission();
+$candidate_form = new \jobus\includes\Classes\submission\Candidate_Form_Submission();
 
 // Get candidate data
 $candidate_id    = $candidate_form->get_candidate_id( $user->ID );

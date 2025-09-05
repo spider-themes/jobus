@@ -28,6 +28,15 @@ $title           = $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__
 $job_title       = $editing_job ? $editing_job->post_title : '';
 $job_description = $editing_job ? $editing_job->post_content : '';
 
+$specs                  = $job_form->get_job_specifications( $company_id );
+$dynamic_fields = $specs['dynamic_fields'];
+
+$company_website        = $job_form::get_company_website( $company_id );
+$company_website_url    = $company_website['url'];
+$company_website_title  = $company_website['title'];
+$company_website_target = $company_website['target'];
+$is_company_website     = $company_website['is_company_website'] ?? 'default';
+
 // Handle form submission for taxonomies [categories]
 if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
@@ -38,14 +47,14 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
 }
 
 echo '<pre>';
-print_r($company_id);
+print_r($job_id);
 echo '</pre>';
 ?>
 
 <div class="position-relative">
     <h2 class="main-title"><?php echo esc_html($title); ?></h2>
 
-    <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form action="" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
         <?php wp_nonce_field( 'employer_submit_job', 'employer_submit_job_nonce' ); ?>
         <input type="hidden" name="employer_submit_job_form" value="1">
@@ -115,7 +124,70 @@ echo '</pre>';
                         <input type="hidden" name="job_categories" id="job_categories_input" value="<?php echo esc_attr( $category_ids ); ?>">
                     </div>
                 </div>
+            </div>
 
+            <div id="job-specifications">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Specifications', 'jobus' ); ?></h4>
+                <div class="row">
+                    <?php
+                    // Dynamic fields for candidate specifications
+                    if ( function_exists( 'jobus_opt' ) ) {
+                        $job_spec_fields = jobus_opt( 'job_specifications' );
+                        if ( ! empty( $job_spec_fields ) ) {
+                            foreach ( $job_spec_fields as $field ) {
+                                $meta_key    = $field['meta_key'] ?? '';
+                                $meta_name   = $field['meta_name'] ?? '';
+                                $meta_value  = isset($dynamic_fields[ $meta_key ]) ? (array) $dynamic_fields[ $meta_key ] : array();
+                                $meta_values = $field['meta_values_group'] ?? array();
+                                echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
+                                echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
+                                echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
+                                foreach ( $meta_values as $option ) {
+                                    $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ) );
+                                    $selected = in_array( $val, $meta_value, true ) ? 'selected' : '';
+                                    echo '<option value="' . esc_attr( $val ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $option['meta_values'] )
+                                         . '</option>';
+                                }
+                                echo '</select></div></div>';
+                            }
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+
+            <div id="company-website">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="dash-input-wrapper mb-30">
+                            <label for="is_company_website"><?php esc_html_e('Company Website Option', 'jobus'); ?></label>
+                            <select id="is_company_website" name="is_company_website" class="nice-select">
+                                <option value="default" <?php selected($is_company_website, 'default'); ?>><?php esc_html_e('Default', 'jobus'); ?></option>
+                                <option value="custom" <?php selected($is_company_website, 'custom'); ?>><?php esc_html_e('Custom', 'jobus'); ?></option>
+                            </select>
+                        </div>
+                        <div id="company-website-fields" style="display:<?php echo ($is_company_website === 'custom') ? 'block' : 'none'; ?>;">
+                            <div class="dash-input-wrapper mb-30">
+                                <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
+                                <input type="url" id="company-website-url" name="company_website[url]"
+                                       placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
+                            </div>
+                            <div class="dash-input-wrapper mb-30">
+                                <label for="company-website-title"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
+                                <input type="text" id="company-website-title" name="company_website[title]"
+                                       placeholder="<?php esc_attr_e( 'Visit our website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_title ); ?>">
+                            </div>
+                            <div class="dash-input-wrapper mb-30">
+                                <label for="company-website-target"><?php esc_html_e( 'Link Target', 'jobus' ); ?></label>
+                                <select id="company-website-target" name="company_website[target]" class="nice-select">
+                                    <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
+                                    <option value="_blank" <?php selected( $company_website_target, '_blank' ); ?>><?php esc_html_e( 'New Tab', 'jobus' ); ?></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

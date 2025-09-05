@@ -3,7 +3,7 @@
  * Use namespace to avoid conflict
  */
 
-namespace jobus\includes\Classes;
+namespace jobus\includes\Classes\submission;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -27,7 +27,7 @@ class Candidate_Form_Submission {
 	/**
 	 * Check if we should handle form submission
 	 */
-	public function candidate_form_submission() {
+	public function candidate_form_submission(): void {
 
 		if ( ! ( isset( $_POST['candidate_profile_form_submit'] ) || isset( $_POST['candidate_resume_form_submit'] ) ) ) {
 			return;

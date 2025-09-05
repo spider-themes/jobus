@@ -23,8 +23,7 @@ $profile_picture_id     = $content_data['company_profile_picture'];
 $avatar_url             = $profile_picture_id ? wp_get_attachment_url( $profile_picture_id ) : get_avatar_url( $user->ID );
 $description            = $content_data['company_description'];
 $specs                  = $company_form->get_company_specifications( $company_id );
-$company_specifications = $specs['specifications'];
-$company_dynamic_fields = $specs['dynamic_fields'];
+$dynamic_fields         = $specs['dynamic_fields'];
 $user_social_links      = $company_form->get_company_social_icons( $company_id );
 $company_website        = $company_form::get_company_website( $company_id );
 $company_website_url    = $company_website['url'];
@@ -106,12 +105,12 @@ $video_data             = $company_form->get_company_video( $company_id );
                 <?php
                 // Dynamic fields for candidate specifications
                 if ( function_exists( 'jobus_opt' ) ) {
-                    $company_spec_fields = jobus_opt( 'company_specifications' );
-                    if ( ! empty( $company_spec_fields ) ) {
-                        foreach ( $company_spec_fields as $field ) {
+                    $spec_fields = jobus_opt( 'company_specifications' );
+                    if ( ! empty( $spec_fields ) ) {
+                        foreach ( $spec_fields as $field ) {
                             $meta_key    = $field['meta_key'] ?? '';
                             $meta_name   = $field['meta_name'] ?? '';
-                            $meta_value  = $company_dynamic_fields[ $meta_key ] ?? '';
+                            $meta_value  = $dynamic_fields[ $meta_key ] ?? '';
                             $meta_values = $field['meta_values_group'] ?? array();
                             echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
                             echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';

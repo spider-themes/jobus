@@ -22,6 +22,7 @@
 
         init: function () {
             this.Testimonials();
+            this.CompanyWebsiteToggle();
         },
 
 
@@ -229,6 +230,28 @@
                 });
                 index = repeater.children('.company-testimonial-item').length;
             });
+        },
+
+
+        /**
+         * Handles toggling the company website fields based on radio selection.
+         */
+        CompanyWebsiteToggle: function () {
+            const $select = $('#is_company_website');
+            const $fields = $('#company-website-fields');
+            $select.on('change', function () {
+                if ($(this).val() === 'custom') {
+                    $fields.show();
+                } else {
+                    $fields.hide();
+                }
+            });
+            // Initial state (in case of dynamic content)
+            if ($select.val() === 'custom') {
+                $fields.show();
+            } else {
+                $fields.hide();
+            }
         }
 
     };

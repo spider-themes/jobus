@@ -19,41 +19,40 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     <?php
                     $website = $meta[ 'company_website' ] ?? '';
                     $website_target = $website[ 'target' ] ?? '_self';
-                    $select_company = $meta[ 'select_company' ] ?? '';
-                    $select_company_ids = array_map('absint', (array) $select_company);
 
-                    $args = [];
-                    if (!empty($select_company)) {
-                        $args = array(
-                            'post_type' => 'jobus_company',
-                            'post__in' => $select_company_ids,
-                        );
-                    }
+                    // Get employer user ID (author of current job post)
+                    $employer_id = get_post_field('post_author', get_the_ID());
+                    $company_args = array(
+                        'post_type'      => 'jobus_company',
+                        'author'         => $employer_id,
+                        'posts_per_page' => 1,
+                    );
+                    $company_query = new WP_Query($company_args);
 
-                    $company_query = new WP_Query($args);
-
-                    while ( $company_query->have_posts() ) {
+                    if ( $company_query->have_posts() ) {
                         $company_query->the_post();
-                        if (has_post_thumbnail()) {
+                        if ( has_post_thumbnail() ) {
                             the_post_thumbnail('full', array( 'class' => 'lazy-img m-auto logo' ));
-                            ?>
-                            <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
-                            <?php
                         }
+                        ?>
+                        <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
+                        <?php
+                        // Website button logic
                         if ($meta[ 'is_company_website' ] == 'custom' && !empty($website[ 'url' ])) { ?>
                             <a href="<?php echo esc_url($website[ 'url' ]) ?>"
                                target="<?php echo esc_attr($website_target) ?>" class="website-btn tran3s">
                                 <?php echo esc_html($website[ 'text' ]) ?>
                             </a>
                             <?php
-                        } else { ?>
+                        } else {
+                            ?>
                             <a href="<?php the_permalink(); ?>" class="website-btn tran3s">
                                 <?php esc_html_e('Company Profile', 'jobus'); ?>
                             </a>
                             <?php
                         }
+                        wp_reset_postdata();
                     }
-                    wp_reset_postdata();
                     ?>
                     <div class="border-top mt-40 pt-40">
                         <?php
