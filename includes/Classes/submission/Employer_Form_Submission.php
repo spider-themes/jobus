@@ -407,6 +407,46 @@ class Employer_Form_Submission {
 
 
 	/**
+	 * Get company testimonials data
+	 *
+	 * @param int $company_id The company post ID
+	 * @return array Array of testimonials
+	 */
+	public static function get_company_testimonials( int $company_id ): array {
+		$testimonials = get_post_meta( $company_id, 'company_testimonials', true );
+		if ( ! is_array( $testimonials ) ) {
+			$testimonials = array();
+		}
+		return $testimonials;
+	}
+
+	/**
+	 * Save company testimonials data
+	 *
+	 * @param int $company_id The company post ID
+	 * @param array $post_data POST data from the form submission
+	 */
+	private function save_company_testimonials( int $company_id, array $post_data ): void {
+		if ( isset( $post_data['company_testimonial_title'] ) ) {
+			update_post_meta( $company_id, 'company_testimonial_title', sanitize_text_field( $post_data['company_testimonial_title'] ) );
+		}
+		if ( isset( $post_data['company_testimonials'] ) && is_array( $post_data['company_testimonials'] ) ) {
+			$sanitized = array();
+			foreach ( $post_data['company_testimonials'] as $item ) {
+				$sanitized[] = array(
+					'author_name'    => isset($item['author_name']) ? sanitize_text_field($item['author_name']) : '',
+					'location'       => isset($item['location']) ? sanitize_text_field($item['location']) : '',
+					'review_content' => isset($item['review_content']) ? sanitize_textarea_field($item['review_content']) : '',
+					'rating'         => isset($item['rating']) ? floatval($item['rating']) : '',
+					'image'          => isset($item['image']) ? absint($item['image']) : '',
+				);
+			}
+			update_post_meta( $company_id, 'company_testimonials', $sanitized );
+		}
+	}
+
+
+	/**
 	 * Handle the actual form submission
 	 */
 	private function handle_form_submission(): void {
@@ -437,6 +477,11 @@ class Employer_Form_Submission {
 		// Handle company video if present
 		if ( isset( $post_data['company_video_title'] ) || isset( $post_data['company_video_url'] ) || isset( $post_data['video_bg_img_action'] ) || isset( $post_data['video_bg_img'] ) ) {
 			$this->save_company_video( $company_id, $post_data );
+		}
+
+		// Handle company testimonials if present
+		if ( isset( $post_data['company_testimonials'] ) || isset( $post_data['company_testimonial_title'] ) ) {
+			$this->save_company_testimonials( $company_id, $post_data );
 		}
 	}
 }

@@ -5,19 +5,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$user_id = get_post_field( 'post_author', get_the_ID() );
+$user_id       = get_post_field( 'post_author', get_the_ID() );
 $employer_mail = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
 
 $video_bg_img = get_post_meta( get_the_ID(), 'company_video_bg_img', true );
-$video_title = get_post_meta( get_the_ID(), 'company_video_title', true );
-$video_url = get_post_meta( get_the_ID(), 'company_video_url', true );
+$video_title  = get_post_meta( get_the_ID(), 'company_video_title', true );
+$video_url    = get_post_meta( get_the_ID(), 'company_video_url', true );
 
 $meta           = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 $website        = $meta['company_website'] ?? [];
 $website_url    = $website['url'] ?? '';
 $website_text   = $website['title'] ?? '';
 $website_target = $website['target'] ?? '_self';
-$social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons']) ? $meta['social_icons'] : '';
+$social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_icons'] ) ? $meta['social_icons'] : '';
 ?>
 
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -47,7 +47,7 @@ $social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons
                                 if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
                                     <li>
                                         <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
-                                        <div><?php echo esc_html(jobus_get_first_taxonomy_name( 'jobus_company_location' )) ?></div>
+                                        <div><?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_company_location' ) ) ?></div>
                                     </li>
                                     <?php
                                 }
@@ -155,20 +155,77 @@ $social_icons = ! empty( $meta['social_icons'] ) && is_array($meta['social_icons
                         <?php
                         the_content();
 
-                        if ( !empty( $video_title ) ) { ?>
-                            <h3><?php echo esc_html($video_title) ?></h3>
+                        if ( ! empty( $video_title ) ) { ?>
+                            <h3><?php echo esc_html( $video_title ) ?></h3>
                             <?php
                         }
                         if ( $video_url ) {
                             ?>
-                            <div class="video-post d-flex align-items-center justify-content-center mb-50" style="background-image: url(<?php echo wp_get_attachment_url( $video_bg_img ) ?>)">
+                            <div class="video-post d-flex align-items-center justify-content-center mb-50"
+                                 style="background-image: url(<?php echo wp_get_attachment_url( $video_bg_img ) ?>)">
                                 <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
                                     <i class="bi bi-play-fill"></i>
                                 </a>
                             </div>
                             <?php
                         }
+
+                        $testimonials = get_post_meta( get_the_ID(), 'company_testimonials', true );
+                        $testimonial_title = get_post_meta( get_the_ID(), 'company_testimonial_title', true );
+                        if ( ! empty( $testimonials ) ) {
+                            ?>
+                            <div class="position-relative">
+                                <h3><?php echo esc_html( $testimonial_title ); ?></h3>
+                                <div class="company-review-slider">
+                                    <?php
+                                    foreach ( $testimonials as $testimonial ) {
+                                        $author_name = $testimonial['author_name'] ?? '';
+                                        $location = $testimonial['location'] ?? '';
+                                        $review_content = $testimonial['review_content'] ?? '';
+                                        $rating = isset($testimonial['rating']) ? floatval($testimonial['rating']) : 0;
+                                        $author_img_id = $testimonial['image'] ?? '';
+                                        $author_img_url = $author_img_id ? wp_get_attachment_url($author_img_id) : get_template_directory_uri() . '/images/assets/img_14.jpg';
+                                        ?>
+                                        <div class="item">
+                                            <div class="feedback-block-four">
+                                                <div class="d-flex align-items-center">
+                                                    <ul class="style-none d-flex rating">
+                                                        <?php
+                                                        $full_stars = floor($rating);
+                                                        $half_star = ($rating - $full_stars) >= 0.5 ? 1 : 0;
+                                                        $empty_stars = 5 - $full_stars - $half_star;
+                                                        for ($i = 0; $i < $full_stars; $i++) {
+                                                            echo '<li><a href="#" tabindex="0"><i class="bi bi-star-fill"></i></a></li>';
+                                                        }
+                                                        if ($half_star) {
+                                                            echo '<li><a href="#" tabindex="0"><i class="bi bi-star-half"></i></a></li>';
+                                                        }
+                                                        for ($i = 0; $i < $empty_stars; $i++) {
+                                                            echo '<li><a href="#" tabindex="0"><i class="bi bi-star"></i></a></li>';
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                    <div class="review-score"><span class="fw-500 text-dark"><?php echo esc_html( number_format($rating, 1) ); ?></span> out of 5</div>
+                                                </div>
+                                                <blockquote><?php echo esc_html( $review_content ); ?></blockquote>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<?php echo esc_url( $author_img_url ); ?>" alt="<?php echo esc_attr( $author_name ); ?>" class="author-img rounded-circle">
+                                                    <div class="ms-3">
+                                                        <div class="name fw-500 text-dark"><?php echo esc_html( $author_name ); ?></div>
+                                                        <span class="opacity-50"><?php echo esc_html( $location ); ?></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
                         ?>
+
 
                         <nav class="share-option mt-60">
                             <?php jobus_social_share_icons() ?>

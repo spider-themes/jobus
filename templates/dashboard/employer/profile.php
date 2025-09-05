@@ -289,6 +289,146 @@ $video_data             = $company_form->get_company_video( $company_id );
             </div>
         </div>
 
+        <div class="bg-white card-box border-20 mt-40" id="company-testimonial-section">
+            <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
+            <?php
+            $testimonials = $company_form->get_company_testimonials( $company_id );
+            $testimonial_title = get_post_meta( $company_id, 'company_testimonial_title', true );
+            ?>
+            <div class="dash-input-wrapper mb-15">
+                <label for="company-testimonial-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
+                <input type="text" id="company-testimonial-title" name="company_testimonial_title"
+                       value="<?php echo esc_attr( $testimonial_title ); ?>"
+                       placeholder="<?php esc_attr_e( 'Testimonials', 'jobus' ); ?>">
+            </div>
+            <div class="accordion dash-accordion-one" id="company-testimonial-repeater">
+                <?php
+                if ( empty( $testimonials ) ) {
+                    $testimonials[] = array(
+                        'author_name'    => '',
+                        'location'       => '',
+                        'review_content' => '',
+                        'rating'         => '',
+                        'image'          => '',
+                    );
+                }
+                foreach ( $testimonials as $key => $testimonial ) {
+                    $accordion_id = 'company-testimonial-' . esc_attr( $key );
+                    ?>
+                    <div class="accordion-item company-testimonial-item">
+                        <div class="accordion-header" id="company-testimonial-heading-<?php echo esc_attr( $key ); ?>">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    aria-expanded="false"
+                                    aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
+                                <?php echo esc_html( $testimonial['author_name'] ?? esc_html__( 'Testimonial', 'jobus' ) ); ?>
+                            </button>
+                        </div>
+                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                             aria-labelledby="company-testimonial-heading-<?php echo esc_attr( $key ); ?>"
+                             data-bs-parent="#company-testimonial-repeater">
+                            <div class="accordion-body">
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name">
+                                                <?php esc_html_e( 'Author Name', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][author_name]"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name" class="form-control"
+                                                   value="<?php echo esc_attr( $testimonial['author_name'] ?? '' ); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-location">
+                                                <?php esc_html_e( 'Location', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][location]"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-location" class="form-control"
+                                                   value="<?php echo esc_attr( $testimonial['location'] ?? '' ); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content">
+                                                <?php esc_html_e( 'Review', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <textarea name="company_testimonials[<?php echo esc_attr( $key ); ?>][review_content]"
+                                                      id="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content" class="form-control"
+                                                      rows="3"><?php echo esc_textarea( $testimonial['review_content'] ?? '' ); ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-rating">
+                                                <?php esc_html_e( 'Rating', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="number" min="0" max="5" step="0.1"
+                                                   name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control"
+                                                   value="<?php echo esc_attr( $testimonial['rating'] ?? '' ); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-image">
+                                                <?php esc_html_e( 'Author Image', 'jobus' ); ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="form-control"
+                                                   value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
+                                            <!-- You may want to add a media uploader for images here in future -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-company-testimonial mt-2 mb-2"
+                                            title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
+                                        <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-company-testimonial">
+                <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Testimonial', 'jobus' ); ?>
+            </a>
+        </div>
+
         <div class="button-group d-inline-flex align-items-center mt-30">
             <button type="submit" class="dash-btn-two tran3s me-3 rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
