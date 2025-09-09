@@ -222,6 +222,7 @@ class Shortcode {
             <div class="text-center">
                 <h2 class="name">
                     <?php
+                    // translators: %s: user display name
                     echo sprintf(
                             esc_html__( 'Welcome, %s!', 'jobus' ),
                             esc_html( $current_user->display_name )

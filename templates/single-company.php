@@ -162,7 +162,7 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                         if ( $video_url ) {
                             ?>
                             <div class="video-post d-flex align-items-center justify-content-center mb-50"
-                                 style="background-image: url(<?php echo wp_get_attachment_url( $video_bg_img ) ?>)">
+                                 style="background-image: url(<?php echo esc_url( wp_get_attachment_url( $video_bg_img ) ); ?>)">
                                 <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
                                     <i class="bi bi-play-fill"></i>
                                 </a>

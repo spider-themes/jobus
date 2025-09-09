@@ -26,10 +26,27 @@ $specs                  = $company_form->get_company_specifications( $company_id
 $dynamic_fields         = $specs['dynamic_fields'];
 $user_social_links      = $company_form->get_company_social_icons( $company_id );
 $company_website        = $company_form::get_company_website( $company_id );
-$company_website_url    = $company_website['url'];
-$company_website_title  = $company_website['title'];
-$company_website_target = $company_website['target'];
+$company_website_url    = $company_website['url'] ?? '';
+$company_website_title  = $company_website['title'] ?? '';
+$company_website_target = $company_website['target'] ?? '_self';
 $video_data             = $company_form->get_company_video( $company_id );
+$testimonials           = $company_form->get_company_testimonials( $company_id );
+$testimonial_title      = get_post_meta( $company_id, 'company_testimonial_title', true );
+
+
+// Handle form submission for taxonomies [categories, locations, tags]
+if ( isset( $_POST['company_profile_form_submit'] ) ) {
+
+    if ( isset( $_POST['company_categories'] ) ) {
+        $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_categories'] ) ) ) );
+        wp_set_object_terms( $company_id, $cat_ids, 'jobus_company_cat' );
+    }
+
+    if ( isset( $_POST['company_locations'] ) ) {
+        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_locations'] ) ) ) );
+        wp_set_object_terms( $company_id, $location_ids, 'jobus_company_location' );
+    }
+}
 ?>
 <div class="position-relative">
 
@@ -95,6 +112,64 @@ $video_data             = $company_form->get_company_video( $company_id );
                 </div>
                 <div class="alert-text">
                     <?php esc_html_e( 'Brief description for your profile. URLs are hyperlinked.', 'jobus' ); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white card-box border-20 mt-40" id="job-taxonomy">
+            <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
+
+            <!-- Add Categories -->
+            <div class="dash-input-wrapper mb-40 mt-20">
+                <label for="company-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
+                <div class="skills-wrapper">
+                    <?php
+                    $current_categories = array();
+                    if ( isset( $company_id ) && $company_id ) {
+                        $current_categories = wp_get_object_terms( $company_id, 'jobus_company_cat' );
+                    }
+                    $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
+                    ?>
+                    <ul id="company-category-list" class="style-none d-flex flex-wrap align-items-center">
+                        <?php if ( ! empty( $current_categories ) ): ?>
+                            <?php foreach ( $current_categories as $cat ): ?>
+                                <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
+                                    <button type="button"><?php echo esc_html( $cat->name ); ?> <i class="bi bi-x"></i></button>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <li class="more_tag">
+                            <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
+                        </li>
+                    </ul>
+                    <input type="hidden" name="company_categories" id="company_categories_input" value="<?php echo esc_attr( $category_ids ); ?>">
+                </div>
+            </div>
+
+            <!-- Add Locations -->
+            <div class="dash-input-wrapper mb-40 mt-20">
+                <label for="company-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
+                <div class="skills-wrapper">
+                    <?php
+                    $current_locations = array();
+                    if ( isset( $company_id ) && $company_id ) {
+                        $current_locations = wp_get_object_terms( $company_id, 'jobus_company_location' );
+                    }
+                    $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
+                    ?>
+                    <ul id="company-location-list" class="style-none d-flex flex-wrap align-items-center">
+                        <?php if ( ! empty( $current_locations ) ): ?>
+                            <?php foreach ( $current_locations as $loc ): ?>
+                                <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
+                                    <button type="button"><?php echo esc_html( $loc->name ); ?> <i class="bi bi-x"></i></button>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <li class="more_tag">
+                            <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
+                        </li>
+                    </ul>
+                    <input type="hidden" name="company_locations" id="company_locations_input" value="<?php echo esc_attr( $location_ids ); ?>">
                 </div>
             </div>
         </div>
@@ -282,7 +357,8 @@ $video_data             = $company_form->get_company_video( $company_id );
                         </div>
                     </div>
                     <!-- Hidden field for image ID -->
-                    <input type="hidden" id="video-bg-img" name="company_video_bg_img" value="<?php echo esc_attr( $video_data['company_video_bg_img']['id'] ?? '' ); ?>">
+                    <input type="hidden" id="video-bg-img" name="company_video_bg_img"
+                           value="<?php echo esc_attr( $video_data['company_video_bg_img']['id'] ?? '' ); ?>">
                     <input type="hidden" id="video-bg-img-action" name="video_bg_img_action" value="">
                 </div>
             </div>
@@ -290,10 +366,6 @@ $video_data             = $company_form->get_company_video( $company_id );
 
         <div class="bg-white card-box border-20 mt-40" id="company-testimonials">
             <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
-            <?php
-            $testimonials = $company_form->get_company_testimonials( $company_id );
-            $testimonial_title = get_post_meta( $company_id, 'company_testimonial_title', true );
-            ?>
             <div class="dash-input-wrapper mb-15">
                 <label for="company-testimonial-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text" id="company-testimonial-title" name="company_testimonial_title"
@@ -304,11 +376,11 @@ $video_data             = $company_form->get_company_video( $company_id );
                 <?php
                 if ( empty( $testimonials ) ) {
                     $testimonials[] = array(
-                        'author_name'    => '',
-                        'location'       => '',
-                        'review_content' => '',
-                        'rating'         => '',
-                        'image'          => '',
+                            'author_name'    => '',
+                            'location'       => '',
+                            'review_content' => '',
+                            'rating'         => '',
+                            'image'          => '',
                     );
                 }
                 foreach ( $testimonials as $key => $testimonial ) {
@@ -389,8 +461,8 @@ $video_data             = $company_form->get_company_video( $company_id );
                                             <select name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
                                                     id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control">
                                                 <option value="">--</option>
-                                                <?php for ( $i = 1; $i <= 5; $i++ ) : ?>
-                                                    <option value="<?php echo $i; ?>" <?php selected( (int) ( $testimonial['rating'] ?? 0 ), $i ); ?>><?php echo $i; ?></option>
+                                                <?php for ( $i = 1; $i <= 5; $i ++ ) : ?>
+                                                    <option value="<?php echo esc_attr( $i ); ?>" <?php selected( (int) ( $testimonial['rating'] ?? 0 ), $i ); ?>><?php echo esc_html( $i ); ?></option>
                                                 <?php endfor; ?>
                                             </select>
                                         </div>
@@ -408,18 +480,21 @@ $video_data             = $company_form->get_company_video( $company_id );
                                         <div class="dash-input-wrapper mb-10">
                                             <!-- Hidden field for image ID -->
                                             <input type="hidden" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-id" value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-id"
+                                                   value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
                                             <!-- Upload button for WP media -->
-                                            <button type="button" class="btn btn-secondary testimonial-image-upload-btn" data-index="<?php echo esc_attr( $key ); ?>">
+                                            <button type="button" class="btn btn-secondary testimonial-image-upload-btn"
+                                                    data-index="<?php echo esc_attr( $key ); ?>">
                                                 <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
                                             </button>
                                             <!-- Preview area (always present) -->
                                             <div class="testimonial-image-preview mt-2 mb-2" id="testimonial-image-preview-<?php echo esc_attr( $key ); ?>">
                                                 <?php
-                                                $image_id = $testimonial['image'] ?? '';
+                                                $image_id  = $testimonial['image'] ?? '';
                                                 $image_url = $image_id ? wp_get_attachment_url( $image_id ) : '';
                                                 if ( ! empty( $image_url ) ) : ?>
-                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Author Image', 'jobus' ); ?>" style="max-width: 100px; max-height: 100px;">
+                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Author Image', 'jobus' ); ?>"
+                                                         style="max-width: 100px; max-height: 100px;">
                                                 <?php endif; ?>
                                             </div>
                                         </div>

@@ -103,16 +103,16 @@ class Job_Form_Submission {
 		$job_description = isset( $post_data['job_description'] ) ? wp_kses_post( $post_data['job_description'] ) : '';
 
 		if ( empty( $job_title ) ) {
-			wp_die( __( 'Job title is required.', 'jobus' ) );
+			wp_die( esc_html__( 'Job title is required.', 'jobus' ) );
 		}
 
 		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
 			$job_post = get_post( $job_id );
 			if ( ! $job_post ) {
-				wp_die( __( 'Invalid job post.', 'jobus' ) );
+				wp_die( esc_html__( 'Invalid job post.', 'jobus' ) );
 			}
 			if ( (int) $job_post->post_author !== (int) $user->ID ) {
-				wp_die( __( 'You are not allowed to edit this job.', 'jobus' ) );
+				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
 			}
 			wp_update_post( array(
 				'ID'           => $job_id,
@@ -128,7 +128,7 @@ class Job_Form_Submission {
 				'post_author'  => $user->ID,
 			) );
 			if ( is_wp_error( $job_id ) ) {
-				wp_die( __( 'Failed to create job post.', 'jobus' ) );
+				wp_die( esc_html__( 'Failed to create job post.', 'jobus' ) );
 			}
 			// Link job to company
 			update_post_meta( $job_id, '_jobus_company_id', $company_id );

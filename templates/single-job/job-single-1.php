@@ -95,7 +95,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                     ?>
                                     <li class="col-xl-6 col-md-4 col-sm-6">
                                         <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
-                                        <div><?php echo jobus_get_first_taxonomy_name( 'jobus_job_location' ) ?></div>
+                                        <div><?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_job_location' ) ); ?></div>
                                     </li>
                                     <?php
                                 }

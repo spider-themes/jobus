@@ -51,6 +51,20 @@
                 taxonomy: 'jobus_job_tag',
                 dataAttr: 'tag-id'
             });
+
+            // Company taxonomies
+            this.TaxonomyManager({
+                listSelector: '#company-location-list',
+                inputSelector: '#company_locations_input',
+                taxonomy: 'jobus_company_location',
+                dataAttr: 'location-id'
+            });
+            this.TaxonomyManager({
+                listSelector: '#company-category-list',
+                inputSelector: '#company_categories_input',
+                taxonomy: 'jobus_company_cat',
+                dataAttr: 'category-id'
+            });
         },
 
         /**
@@ -152,11 +166,6 @@
                         value: JSON.stringify(finalTerms)
                     }).appendTo($form);
                 }
-
-                // Debug only
-                console.log('[DEBUG] Submitting', taxonomy.taxonomy, 'IDs:', finalIds);
-                $('#debug-output').text('Submitting ' + taxonomy.taxonomy + ' IDs: ' + finalIds.join(','));
-                console.log('Final Job Categories:', $('#job_categories_input').val());
 
             });
 
