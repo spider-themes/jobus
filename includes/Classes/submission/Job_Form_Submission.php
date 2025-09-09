@@ -7,6 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Job_Form_Submission {
 
+	/**
+	 * Initialize the class
+	 */
 	public function __construct() {
 		add_action( 'init', [ $this, 'job_form_submission' ] );
 	}
@@ -31,68 +34,41 @@ class Job_Form_Submission {
 			wp_die( esc_html__( 'Access denied. You must be an employer to post a job.', 'jobus' ) );
 		}
 
-		// Process the form
-		$this->handle_form_submission( $user );
+		$this->handle_form_submission();
 	}
 
 	/**
-	 * Save Job Data (Create or Update)
-	 *
-	 * @return int The job post ID
+	 * Handle the actual form submission (create/update job post)
 	 */
-	public function save_job_data( int $company_id, array $post_data, \WP_User $user ): int {
-		$job_title       = sanitize_text_field( $post_data['job_title'] ?? '' );
-		$job_description = wp_kses_post( $post_data['job_description'] ?? '' );
-		$job_id          = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
-
-		// Validation
-		if ( empty( $job_title ) ) {
-			wp_die( __( 'Job title is required.', 'jobus' ) );
+	private function handle_form_submission(): void {
+		$user = wp_get_current_user();
+		$post_data = recursive_sanitize_text_field( $_POST );
+		$company_id = $this->get_company_id( $user->ID );
+		if ( ! $company_id ) {
+			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
 		}
-		if ( empty( $job_description ) ) {
-			wp_die( __( 'Job description is required.', 'jobus' ) );
-		}
+		$job_id = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
 
-		// ====== Update existing job ======
-		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
-			$job_post = get_post( $job_id );
-
-			if ( ! $job_post ) {
-				wp_die( __( 'Invalid job post.', 'jobus' ) );
-			}
-
-			// Author check
-			if ( (int) $job_post->post_author !== (int) $user->ID ) {
-				wp_die( __( 'You are not allowed to edit this job.', 'jobus' ) );
-			}
-
-			wp_update_post( [
-				'ID'           => $job_id,
-				'post_title'   => $job_title,
-				'post_content' => $job_description,
-			] );
-
-		} else {
-			// ====== Create new job ======
-			$job_id = wp_insert_post( [
-				'post_type'    => 'jobus_job',
-				'post_title'   => $job_title,
-				'post_content' => $job_description,
-				'post_status'  => 'publish',
-				'post_author'  => $user->ID,
-			] );
-
-			if ( is_wp_error( $job_id ) ) {
-				wp_die( __( 'Failed to create job post.', 'jobus' ) );
-			}
+		// Save job content (title/content)
+		if ( isset( $post_data['job_title'] ) || isset( $post_data['job_description'] ) ) {
+			$job_id = $this->save_job_content( $job_id, $post_data, $company_id );
 		}
 
-		// Link job to company
-		update_post_meta( $job_id, '_jobus_company_id', $company_id );
+		// Save job specifications
+		$this->save_job_specifications( $job_id, $post_data );
 
-		return $job_id;
+		// Save company website
+		if ( isset( $post_data['company_website'] ) ) {
+			$this->save_company_website( $job_id, $post_data );
+		}
 	}
 
+	/**
+	 * Get the company ID associated with a user
+	 *
+	 * @param int|null $user_id The user ID. If null, uses current user.
+	 * @return int|false Company post ID or false if not found
+	 */
 	public static function get_company_id(int $user_id = null) {
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
@@ -109,39 +85,103 @@ class Job_Form_Submission {
 		return ! empty($query->posts) ? $query->posts[0] : false;
 	}
 
+	/**
+	 * Save job content data (create or update post)
+	 *
+	 * @param int   $job_id      The job post ID (0 for new post, or existing ID for update)
+	 * @param array $post_data   The full form data (title, content, etc)
+	 * @param int   $company_id  The company to associate with the job (used only when creating a new job)
+	 *
+	 * @return int Job post ID
+	 *
+	 * Note: $company_id is required here because when creating a new job, we must link it to a company.
+	 *       For updates, the company link is not changed, but the parameter is still required for consistency.
+	 */
+	public function save_job_content( int $job_id, array $post_data, int $company_id ): int {
+		$user = wp_get_current_user();
+		$job_title = isset( $post_data['job_title'] ) ? sanitize_text_field( $post_data['job_title'] ) : '';
+		$job_description = isset( $post_data['job_description'] ) ? wp_kses_post( $post_data['job_description'] ) : '';
+
+		if ( empty( $job_title ) ) {
+			wp_die( __( 'Job title is required.', 'jobus' ) );
+		}
+
+		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
+			$job_post = get_post( $job_id );
+			if ( ! $job_post ) {
+				wp_die( __( 'Invalid job post.', 'jobus' ) );
+			}
+			if ( (int) $job_post->post_author !== (int) $user->ID ) {
+				wp_die( __( 'You are not allowed to edit this job.', 'jobus' ) );
+			}
+			wp_update_post( array(
+				'ID'           => $job_id,
+				'post_title'   => $job_title,
+				'post_content' => $job_description,
+			) );
+		} else {
+			$job_id = wp_insert_post( array(
+				'post_type'    => 'jobus_job',
+				'post_title'   => $job_title,
+				'post_content' => $job_description,
+				'post_status'  => 'publish',
+				'post_author'  => $user->ID,
+			) );
+			if ( is_wp_error( $job_id ) ) {
+				wp_die( __( 'Failed to create job post.', 'jobus' ) );
+			}
+			// Link job to company
+			update_post_meta( $job_id, '_jobus_company_id', $company_id );
+		}
+		return $job_id;
+	}
+
 
 	/**
-	 * Get job content data
+	 * Get job content data and apply status for current user
 	 *
 	 * @param int $job_id The job post ID
-	 *
 	 * @return array
 	 */
 	public static function get_job_content( int $job_id ): array {
+		$job_title       = get_post_field( 'post_title', $job_id ) ?? '';
+		$job_description = get_post_field( 'post_content', $job_id ) ?? '';
+		$author_id       = get_post_field( 'post_author', $job_id ) ?? '';
+		$has_applied     = false;
+
+		if ( is_user_logged_in() ) {
+			$user = wp_get_current_user();
+			$applicant_posts = get_posts([
+				'post_type'   => 'jobus_applicant',
+				'post_status' => 'publish',
+				'meta_query'  => [
+					[
+						'key'     => 'job_applied_for_id',
+						'value'   => $job_id,
+						'compare' => '='
+					],
+					[
+						'key'     => 'candidate_email',
+						'value'   => $user->user_email,
+						'compare' => '='
+					]
+				],
+				'fields' => 'ids',
+				'numberposts' => 1
+			]);
+			if ( !empty($applicant_posts) ) {
+				$has_applied = true;
+			}
+		}
+
 		return array(
-			'job_title'       => get_post_field( 'post_title', $job_id ) ?? '',
-			'job_description' => get_post_field( 'post_content', $job_id ) ?? '',
-			'author_id'       => get_post_field( 'post_author', $job_id ) ?? '',
+			'job_title'       => $job_title,
+			'job_description' => $job_description,
+			'author_id'       => $author_id,
+			'has_applied'     => $has_applied,
 		);
 	}
 
-	/**
-	 * Save job content data
-	 *
-	 * @param int   $job_id
-	 * @param array $post_data
-	 *
-	 * @return bool
-	 */
-	public function save_job_content( int $job_id, array $post_data ): bool {
-		if ( empty( $post_data['job_title'] ) ) return false;
-		wp_update_post( array(
-			'ID'           => $job_id,
-			'post_title'   => sanitize_text_field( $post_data['job_title'] ),
-			'post_content' => wp_kses_post( $post_data['job_description'] ?? '' ),
-		) );
-		return true;
-	}
 
 	/**
 	 * Get job specifications data
@@ -174,9 +214,13 @@ class Job_Form_Submission {
 	/**
 	 * Save job specifications data
 	 *
-	 * @param int $job_id
-	 * @param array $post_data
-	 * @return bool
+	 * @param int $job_id     The job post ID (must already exist)
+	 * @param array $post_data The form data (only specification fields are used)
+	 *
+	 * @return bool True on success, false on failure
+	 *
+	 * Note: $company_id is NOT needed here because specifications are only meta fields for the job post,
+	 *       and do not affect the company relationship. Only $job_id and $post_data are required.
 	 */
 	public function save_job_specifications( int $job_id, array $post_data ): bool {
 		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
@@ -208,15 +252,15 @@ class Job_Form_Submission {
 			'url' => '',
 			'text' => '',
 			'target' => '_self',
-			'is_job_website' => 'default',
+			'is_company_website' => 'default',
 		];
 		if ( isset( $meta['company_website'] ) && is_array( $meta['company_website'] ) ) {
 			$website['url'] = $meta['company_website']['url'] ?? '';
 			$website['text'] = $meta['company_website']['text'] ?? '';
 			$website['target'] = $meta['company_website']['target'] ?? '_self';
 		}
-		if ( isset( $meta['is_job_website'] ) ) {
-			$website['is_job_website'] = $meta['is_job_website'];
+		if ( isset( $meta['is_company_website'] ) ) {
+			$website['is_company_website'] = $meta['is_company_website'];
 		}
 		return $website;
 	}
@@ -239,25 +283,9 @@ class Job_Form_Submission {
 			);
 			$meta['company_website'] = $website_data;
 		}
-		if ( isset( $post_data['is_job_website'] ) ) {
-			$meta['is_job_website'] = sanitize_text_field( $post_data['is_job_website'] );
+		if ( isset( $post_data['is_company_website'] ) ) {
+			$meta['is_company_website'] = sanitize_text_field( $post_data['is_company_website'] );
 		}
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
-	}
-
-	/**
-	 * Handle the actual form submission
-	 */
-	private function handle_form_submission( \WP_User $user ): void {
-		$post_data = recursive_sanitize_text_field( $_POST );
-		$company_id = $this->get_company_id($user->ID);
-		if ( ! $company_id ) {
-			wp_die(__('Company profile not found.', 'jobus'));
-		}
-		$job_id = isset($post_data['job_id']) ? absint($post_data['job_id']) : 0;
-
-		$job_id = $this->save_job_content( $job_id, $post_data );
-		$this->save_job_specifications( $job_id, $post_data );
-		$this->save_company_website( $job_id, $post_data );
 	}
 }

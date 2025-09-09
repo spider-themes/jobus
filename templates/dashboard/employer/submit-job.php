@@ -16,24 +16,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user = wp_get_current_user();
 
 // Called the helper functions
-$job_form = new jobus\includes\Classes\submission\Job_Form_Submission();
-$company_id   = $job_form->get_company_id( $user->ID );
-
-// Get job ID from URL if editing
-$job_id = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0;
-$editing_job    = $job_id ? get_post( $job_id ) : null;
-
-// Use job post for editing, blank for new
-$title           = $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__( 'Submit New Job', 'jobus' );
-$job_title       = $editing_job ? $editing_job->post_title : '';
-$job_description = $editing_job ? $editing_job->post_content : '';
-
-$specs = $editing_job ? $job_form->get_job_specifications( $job_id ) : $job_form->get_job_specifications( $company_id );
-$dynamic_fields = $specs['dynamic_fields'];
-
-$company_website = $editing_job ? $job_form::get_company_website( $job_id ) : $job_form::get_company_website( $company_id );
+$job_form               = new jobus\includes\Classes\submission\Job_Form_Submission();
+$company_id             = $job_form->get_company_id( $user->ID );
+$job_id                 = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0; // Get job ID from URL if editing
+$editing_job            = $job_id ? get_post( $job_id ) : null;
+$sec_title              = $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__( 'Submit New Job', 'jobus' );
+$job_content            = $job_id ? $job_form::get_job_content( $job_id ) : [];
+$job_title              = $job_content['job_title'] ?? '';
+$job_description        = $job_content['job_description'] ?? '';
+$specs                  = $editing_job ? $job_form->get_job_specifications( $job_id ) : $job_form->get_job_specifications( $company_id );
+$dynamic_fields         = $specs['dynamic_fields'];
+$company_website        = $editing_job ? $job_form::get_company_website( $job_id ) : $job_form::get_company_website( $company_id );
 $company_website_url    = $company_website['url'];
-$company_website_title  = $company_website['text'];
 $company_website_text   = $company_website['text'];
 $company_website_target = $company_website['target'];
 $is_company_website     = $company_website['is_company_website'] ?? 'default';
@@ -43,17 +37,17 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
     if ( isset( $_POST['job_categories'] ) ) {
         $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );
-        wp_set_object_terms( $company_id, $cat_ids, 'jobus_job_cat' );
+        wp_set_object_terms( $job_id, $cat_ids, 'jobus_job_cat' );
     }
 }
 
 echo '<pre>';
-print_r($editing_job);
+print_r( $editing_job );
 echo '</pre>';
 ?>
 
 <div class="position-relative">
-    <h2 class="main-title"><?php echo esc_html($title); ?></h2>
+    <h2 class="main-title"><?php echo esc_html( $sec_title ); ?></h2>
 
     <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
@@ -76,21 +70,21 @@ echo '</pre>';
                 <div class="editor-wrapper">
                     <?php
                     wp_editor(
-                        $job_description,
-                        'job_description',
-                        array(
-                            'textarea_name' => 'job_description',
-                            'textarea_rows' => 8,
-                            'media_buttons' => true,
-                            'teeny'         => false,
-                            'quicktags'     => true,
-                            'editor_class'  => 'size-lg',
-                            'tinymce'       => array(
-                                'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
-                                'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
-                                'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
-                            ),
-                        )
+                            $job_description,
+                            'job_description',
+                            array(
+                                    'textarea_name' => 'job_description',
+                                    'textarea_rows' => 8,
+                                    'media_buttons' => true,
+                                    'teeny'         => false,
+                                    'quicktags'     => true,
+                                    'editor_class'  => 'size-lg',
+                                    'tinymce'       => array(
+                                            'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                                            'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
+                                            'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
+                                    ),
+                            )
                     );
                     ?>
                 </div>
@@ -138,7 +132,7 @@ echo '</pre>';
                             foreach ( $job_spec_fields as $field ) {
                                 $meta_key    = $field['meta_key'] ?? '';
                                 $meta_name   = $field['meta_name'] ?? '';
-                                $meta_value  = isset($dynamic_fields[ $meta_key ]) ? (array) $dynamic_fields[ $meta_key ] : array();
+                                $meta_value  = isset( $dynamic_fields[ $meta_key ] ) ? (array) $dynamic_fields[ $meta_key ] : array();
                                 $meta_values = $field['meta_values_group'] ?? array();
                                 echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
@@ -160,32 +154,34 @@ echo '</pre>';
             <div id="company-website">
                 <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
                 <div class="row">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="dash-input-wrapper mb-30">
-                            <select id="is_company_website" name="is_company_website" class="nice-select">
-                                <option value="default" <?php selected($is_company_website, 'default'); ?>><?php esc_html_e('Default', 'jobus'); ?></option>
-                                <option value="custom" <?php selected($is_company_website, 'custom'); ?>><?php esc_html_e('Custom', 'jobus'); ?></option>
-                            </select>
-                            </select>
-                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="dash-input-wrapper mb-30">
-                            <div class="dash-input-wrapper mb-30">
-                                <input type="url" id="company-website-url" name="company_website[url]"
-                                       placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
-                            </div>
-                            </div>
-                            <div class="dash-input-wrapper mb-30">
-                                <label for="job-website-text"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
-                                <input type="text" id="job-website-text" name="job_website[text]"
-                                       placeholder="<?php esc_attr_e( 'Visit job website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_text ); ?>">
-                            </div>
-                            <div class="dash-input-wrapper mb-30">
-                                <select id="company-website-target" name="company_website[target]" class="nice-select">
-                                    <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
-                                    <option value="_blank" <?php selected( $company_website_target, '_blank' ); ?>><?php esc_html_e( 'New Tab', 'jobus' ); ?></option>
+                                <select id="is_company_website" name="is_company_website" class="nice-select">
+                                    <option value="default" <?php selected( $is_company_website, 'default' ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
+                                    <option value="custom" <?php selected( $is_company_website, 'custom' ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
                                 </select>
-                                </select>
+                            </div>
+                            <div id="company-website-fields">
+                                <div class="dash-input-wrapper mb-30">
+                                    <label for="company-website-text"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
+                                    <input type="text" id="company-website-text" name="company_website[text]"
+                                           placeholder="<?php esc_attr_e( 'Visit job website', 'jobus' ); ?>"
+                                           value="<?php echo esc_attr( $company_website_text ); ?>">
+                                </div>
+                                <div class="dash-input-wrapper mb-30">
+                                    <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
+                                    <input type="url" id="company-website-url" name="company_website[url]"
+                                           placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>"
+                                           value="<?php echo esc_attr( $company_website_url ); ?>">
+                                </div>
+                                <div class="dash-input-wrapper mb-30">
+                                    <label for="company-website-target"><?php esc_html_e( 'Website Target', 'jobus' ); ?></label>
+                                    <select id="company-website-target" name="company_website[target]" class="nice-select">
+                                        <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
+                                        <option value="_blank" <?php selected( $company_website_target, '_blank' ); ?>><?php esc_html_e( 'New Tab', 'jobus' ); ?></option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
