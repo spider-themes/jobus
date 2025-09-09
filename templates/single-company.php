@@ -170,55 +170,61 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                             <?php
                         }
 
-                        $testimonials = get_post_meta( get_the_ID(), 'company_testimonials', true );
+                        $testimonials      = get_post_meta( get_the_ID(), 'company_testimonials', true );
                         $testimonial_title = get_post_meta( get_the_ID(), 'company_testimonial_title', true );
-                        if ( is_array($testimonials) && count($testimonials) > 0 ) {
+                        if ( is_array( $testimonials ) && count( $testimonials ) > 0 ) {
                             ?>
                             <div class="position-relative">
                                 <h3><?php echo esc_html( $testimonial_title ); ?></h3>
                                 <div class="company-review-slider">
                                     <?php
                                     foreach ( $testimonials as $testimonial ) {
-                                        $author_name = !empty($testimonial['author_name']) ? $testimonial['author_name'] : '';
-                                        $location = !empty($testimonial['location']) ? $testimonial['location'] : '';
-                                        $review_content = !empty($testimonial['review_content']) ? $testimonial['review_content'] : '';
-                                        $rating = isset($testimonial['rating']) && is_numeric($testimonial['rating']) ? floatval($testimonial['rating']) : false;
-                                        $author_img_id = !empty($testimonial['image']) ? $testimonial['image'] : '';
-                                        $author_img_url = $author_img_id ? wp_get_attachment_url($author_img_id) : get_template_directory_uri() . '/images/assets/img_14.jpg';
+                                        $author_name    = ! empty( $testimonial['author_name'] ) ? $testimonial['author_name'] : '';
+                                        $location       = ! empty( $testimonial['location'] ) ? $testimonial['location'] : '';
+                                        $review_content = ! empty( $testimonial['review_content'] ) ? $testimonial['review_content'] : '';
+                                        $rating         = isset( $testimonial['rating'] ) && is_numeric( $testimonial['rating'] )
+                                                ? floatval( $testimonial['rating'] ) : false;
+                                        $author_img_id  = ! empty( $testimonial['image'] ) ? $testimonial['image'] : '';
+                                        $author_img_url = $author_img_id
+                                                ? wp_get_attachment_url( $author_img_id )
+                                                : get_template_directory_uri() . '/images/assets/img_14.jpg';
                                         ?>
                                         <div class="item">
                                             <div class="feedback-block-four">
                                                 <div class="d-flex align-items-center">
-                                                    <?php if ($rating !== false) : ?>
+                                                    <?php if ( $rating !== false ) : ?>
                                                         <ul class="style-none d-flex rating">
                                                             <?php
-                                                            $full_stars = floor($rating);
-                                                            $half_star = ($rating - $full_stars) >= 0.5 ? 1 : 0;
+                                                            $full_stars  = floor( $rating );
+                                                            $half_star   = ( $rating - $full_stars ) >= 0.5 ? 1 : 0;
                                                             $empty_stars = 5 - $full_stars - $half_star;
-                                                            for ($i = 0; $i < $full_stars; $i++) {
+                                                            for ( $i = 0; $i < $full_stars; $i ++ ) {
                                                                 echo '<li><a href="#" tabindex="0"><i class="bi bi-star-fill"></i></a></li>';
                                                             }
-                                                            if ($half_star) {
+                                                            if ( $half_star ) {
                                                                 echo '<li><a href="#" tabindex="0"><i class="bi bi-star-half"></i></a></li>';
                                                             }
-                                                            for ($i = 0; $i < $empty_stars; $i++) {
+                                                            for ( $i = 0; $i < $empty_stars; $i ++ ) {
                                                                 echo '<li><a href="#" tabindex="0"><i class="bi bi-star"></i></a></li>';
                                                             }
                                                             ?>
                                                         </ul>
-                                                        <div class="review-score"><span class="fw-500 text-dark"><?php echo esc_html( number_format($rating, 1) ); ?></span> out of 5</div>
+                                                        <div class="review-score"><span class="fw-500 text-dark"><?php echo esc_html( number_format( $rating,
+                                                                        1 ) ); ?></span> out of 5
+                                                        </div>
                                                     <?php endif; ?>
                                                 </div>
-                                                <?php if ($review_content) : ?>
+                                                <?php if ( $review_content ) : ?>
                                                     <blockquote><?php echo esc_html( $review_content ); ?></blockquote>
                                                 <?php endif; ?>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?php echo esc_url( $author_img_url ); ?>" alt="<?php echo esc_attr( $author_name ); ?>" class="author-img rounded-circle">
+                                                    <img src="<?php echo esc_url( $author_img_url ); ?>" alt="<?php echo esc_attr( $author_name ); ?>"
+                                                         class="author-img rounded-circle">
                                                     <div class="ms-3">
-                                                        <?php if ($author_name) : ?>
+                                                        <?php if ( $author_name ) : ?>
                                                             <div class="name fw-500 text-dark"><?php echo esc_html( $author_name ); ?></div>
                                                         <?php endif; ?>
-                                                        <?php if ($location) : ?>
+                                                        <?php if ( $location ) : ?>
                                                             <span class="opacity-50"><?php echo esc_html( $location ); ?></span>
                                                         <?php endif; ?>
                                                     </div>
@@ -233,12 +239,9 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                             <?php
                         }
                         ?>
-
-
                         <nav class="share-option mt-60">
                             <?php jobus_social_share_icons() ?>
                         </nav>
-
                     </div>
                 </div>
             </div>
