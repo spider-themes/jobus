@@ -32,18 +32,24 @@ $company_website_text   = $company_website['text'];
 $company_website_target = $company_website['target'];
 $is_company_website     = $company_website['is_company_website'] ?? 'default';
 
-// Handle form submission for taxonomies [categories]
+// Handle form submission for taxonomies [categories, locations, tags]
 if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
     if ( isset( $_POST['job_categories'] ) ) {
         $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );
         wp_set_object_terms( $job_id, $cat_ids, 'jobus_job_cat' );
     }
-}
 
-echo '<pre>';
-print_r( $editing_job );
-echo '</pre>';
+    if ( isset( $_POST['job_locations'] ) ) {
+        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_locations'] ) ) ) );
+        wp_set_object_terms( $job_id, $location_ids, 'jobus_job_location' );
+    }
+
+    if ( isset( $_POST['job_tags'] ) ) {
+        $skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_tags'] ) ) ) );
+        wp_set_object_terms( $job_id, $skill_ids, 'jobus_job_tag' );
+    }
+}
 ?>
 
 <div class="position-relative">
@@ -117,6 +123,60 @@ echo '</pre>';
                             </li>
                         </ul>
                         <input type="hidden" name="job_categories" id="job_categories_input" value="<?php echo esc_attr( $category_ids ); ?>">
+                    </div>
+                </div>
+
+                <!-- Add Locations -->
+                <div class="dash-input-wrapper mb-40 mt-20">
+                    <label for="job-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
+                    <div class="skills-wrapper">
+                        <?php
+                        $current_locations = array();
+                        if ( isset( $job_id ) && $job_id ) {
+                            $current_locations = wp_get_object_terms( $job_id, 'jobus_job_location' );
+                        }
+                        $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
+                        ?>
+                        <ul id="job-location-list" class="style-none d-flex flex-wrap align-items-center">
+                            <?php if ( ! empty( $current_locations ) ): ?>
+                                <?php foreach ( $current_locations as $loc ): ?>
+                                    <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
+                                        <button type="button"><?php echo esc_html( $loc->name ); ?> <i class="bi bi-x"></i></button>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <li class="more_tag">
+                                <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="job_locations" id="job_locations_input" value="<?php echo esc_attr( $location_ids ); ?>">
+                    </div>
+                </div>
+
+                <!-- Add Tags -->
+                <div class="dash-input-wrapper mb-40 mt-20">
+                    <label for="job-tag-list"><?php esc_html_e( 'Tags', 'jobus' ); ?></label>
+                    <div class="skills-wrapper">
+                        <?php
+                        $current_tags = array();
+                        if ( isset( $job_id ) && $job_id ) {
+                            $current_tags = wp_get_object_terms( $job_id, 'jobus_job_tag' );
+                        }
+                        $tag_ids = ! empty( $current_tags ) ? implode( ',', wp_list_pluck( $current_tags, 'term_id' ) ) : '';
+                        ?>
+                        <ul id="job-tag-list" class="style-none d-flex flex-wrap align-items-center">
+                            <?php if ( ! empty( $current_tags ) ): ?>
+                                <?php foreach ( $current_tags as $tag ): ?>
+                                    <li class="is_tag" data-tag-id="<?php echo esc_attr( $tag->term_id ); ?>">
+                                        <button type="button"><?php echo esc_html( $tag->name ); ?> <i class="bi bi-x"></i></button>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <li class="more_tag">
+                                <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
+                            </li>
+                        </ul>
+                        <input type="hidden" name="job_tags" id="job_tags_input" value="<?php echo esc_attr( $tag_ids ); ?>">
                     </div>
                 </div>
             </div>
