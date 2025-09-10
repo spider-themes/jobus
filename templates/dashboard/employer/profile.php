@@ -82,7 +82,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <div class="col-md-6">
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
-                        <input type="email" id="company-email" name="company_mail" placeholder="<?php esc_attr_e( 'companyinc@gmail.com', 'jobus' ); ?>"
+                        <input type="email" id="company-email" name="company_mail" placeholder="you@example.com"
                                value="<?php echo esc_attr( $user->user_email ); ?>">
                     </div>
                 </div>
@@ -211,7 +211,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                         <input type="url" id="company-website-url" name="company_website[url]"
-                               placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
+                               placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
                     </div>
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-title"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>

@@ -1,8 +1,14 @@
 <?php
 /**
- * Use namespace to avoid conflict
+ * User Management for Jobus Plugin
+ *
+ * Defines and manages Candidate & Employer roles securely.
+ * Handles safe registration and synchronization with custom post types.
+ *
+ * @package Jobus\Admin
  */
 
+// Use namespace to avoid conflict
 namespace jobus\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,57 +27,52 @@ class User {
 		// Add Manage Custom User Roles
 		add_action( 'init', [ $this, 'manage_user_roles' ] );
 
-		// Add Manage Custom User Roles
+		// Ensure roles are created on activation
 		register_activation_hook( __FILE__, [ $this, 'add_user_roles' ] );
 
-		// Handle Candidate Registration for non-logged and logged-in in users
+		// Candidate Registration
 		add_action( 'admin_post_nopriv_register_candidate', [ $this, 'candidate_registration' ] );
 		add_action( 'admin_post_register_candidate', [ $this, 'candidate_registration' ] );
 
-		// Handle Employer Registration for non-logged and logged-in in users
+		// Employer Registration
 		add_action( 'admin_post_nopriv_register_employer', [ $this, 'employer_registration' ] );
 		add_action( 'admin_post_register_employer', [ $this, 'employer_registration' ] );
 
-		// Restrict admin menu items for users with the Candidate & Employer role
+		// Restrict menu items for Candidate & Employer roles
 		add_action( 'admin_menu', [ $this, 'restrict_candidate_menu' ] );
 		add_action( 'admin_menu', [ $this, 'restrict_employer_menu' ] );
 
-		// User Candidate & Employer Synchronization
+		// Synchronization user with custom post types
 		add_action( 'user_register', [ $this, 'create_candidate_post_for_user' ] );
 		add_action( 'profile_update', [ $this, 'create_candidate_post_for_user' ] );
 		add_action( 'user_register', [ $this, 'create_company_post_for_user' ] );
 		add_action( 'profile_update', [ $this, 'create_company_post_for_user' ] );
 	}
 
+	/**
+	 * Ensure user roles are always created
+	 */
 	public function manage_user_roles(): void {
 		$this->add_user_roles();
 	}
 
+	/**
+	 * Add secure Candidate & Employer roles
+	 *
+	 * Both roles only get `read` + `upload_files`.
+	 * No risky capabilities like `unfiltered_upload` or `edit_others_posts`.
+	 */
 	public function add_user_roles(): void {
 
 		// Add custom user roles for Jobus
 		add_role( 'jobus_candidate', esc_html__( 'Candidate (Jobus)', 'jobus' ), array(
 			'read'                      => true,  // Only allow reading
-			'read_post'                 => true,  // Allow editing their own profile
-			'upload_files'              => true,  // Allow uploading files
-			'delete_attachments'        => true,
-			'delete_others_attachments' => true,
-			'edit_attachments'          => true,
-			'edit_others_attachments'   => true,
-			'unfiltered_upload'         => true,
-			'read_others_attachments'   => true,
+			'upload_files'              => true, // Allow safe uploads only
 		) );
 
 		add_role( 'jobus_employer', esc_html__( 'Employer (Jobus)', 'jobus' ), array(
 			'read'                      => true,  // Only allow reading
-			'read_post'                 => true,  // Allow editing their own profile
-			'upload_files'              => true,  // Allow uploading files
-			'delete_attachments'        => true,
-			'delete_others_attachments' => true,
-			'edit_attachments'          => true,
-			'edit_others_attachments'   => true,
-			'unfiltered_upload'         => true,
-			'read_others_attachments'   => true,
+			'upload_files'              => true, // Allow safe uploads only
 		) );
 	}
 
@@ -82,8 +83,7 @@ class User {
 			$candidate_username         = ! empty( $_POST['candidate_username'] ) ? sanitize_user( wp_unslash( $_POST['candidate_username'] ) ) : '';
 			$candidate_email            = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
 			$candidate_password         = ! empty( $_POST['candidate_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_pass'] ) ) : '';
-			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) )
-				: '';
+			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) ) : '';
 
 			if ( $candidate_password !== $candidate_confirm_password ) {
 				wp_send_json_error( esc_html__( 'Passwords do not match', 'jobus' ) );
@@ -97,7 +97,7 @@ class User {
 				'user_login' => $candidate_username,
 				'user_pass'  => $candidate_password,
 				'user_email' => $candidate_email,
-				'role'       => 'jobus_candidate',
+				'role'       => 'jobus_candidate', // Force safe role
 			];
 
 			$candidate_id = wp_insert_user( $user_data );
@@ -136,7 +136,7 @@ class User {
 				'user_login' => $employer_username,
 				'user_pass'  => $employer_password,
 				'user_email' => $employer_email,
-				'role'       => 'jobus_employer',
+				'role'       => 'jobus_employer', // Force safe role
 			];
 
 			$employer_id = wp_insert_user( $user_data );
@@ -167,7 +167,7 @@ class User {
 			remove_menu_page( 'tools.php' ); // Tools
 			remove_menu_page( 'edit.php?post_type=jobus_job' ); // Job
 			remove_menu_page( 'edit.php?post_type=jobus_company' ); // Company
-			remove_menu_page( 'edit.php?post_type=elementor_library' ); // elementor_library
+			remove_menu_page( 'edit.php?post_type=elementor_library' ); // Elementor Library
 		}
 	}
 
@@ -183,7 +183,7 @@ class User {
 			remove_menu_page( 'tools.php' ); // Tools
 			remove_menu_page( 'edit.php?post_type=jobus_job' ); // Job
 			remove_menu_page( 'edit.php?post_type=jobus_candidate' ); // Candidate
-			remove_menu_page( 'edit.php?post_type=elementor_library' ); // elementor_library
+			remove_menu_page( 'edit.php?post_type=elementor_library' ); // Elementor Library
 		}
 	}
 
@@ -263,5 +263,4 @@ class User {
 			}
 		}
 	}
-
 }

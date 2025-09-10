@@ -222,11 +222,8 @@ class Shortcode {
             <div class="text-center">
                 <h2 class="name">
                     <?php
-                    // translators: %s: user display name
-                    echo sprintf(
-                            esc_html__( 'Welcome, %s!', 'jobus' ),
-                            esc_html( $current_user->display_name )
-                    );
+                    /* translators: %s: user display name */
+                    echo esc_html( sprintf( esc_html__( 'Welcome, %s!', 'jobus' ), esc_html( $current_user->display_name ) ) );
                     ?>
                 </h2>
                 <p><?php esc_html_e( 'You are currently logged in to your account.', 'jobus' ); ?></p>

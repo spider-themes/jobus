@@ -84,7 +84,7 @@ class Blocks {
 	 *
 	 * @return bool|string Rendered block content.
 	 */
-	public function register_form_block_render( array $attributes, string $content ): bool|string {
+	public function register_form_block_render( array $attributes, string $content ) {
 		ob_start();
 		$nonce = wp_create_nonce( 'jobus_register_form_nonce' );
 

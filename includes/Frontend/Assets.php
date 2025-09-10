@@ -59,15 +59,41 @@ class Assets {
 
 		// Enqueue scripts & styles only if dashboard shortcode is present
 		$post = get_post();
+
+		// Employer Dashboard Scripts
+		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) ) ) {
+			wp_enqueue_script( 'jobus-employer-dashboard', esc_url( JOBUS_JS . '/employer-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		}
+
+		// Candidate Dashboard Scripts
+		if ( $post && ( has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
+			// Scripts for candidate dashboard
+			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
+				'ajax_url' => $ajax_url,
+				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+				'texts' => [
+					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
+					'portfolio_select_text' => esc_html__('Add Selected Images', 'jobus'),
+					'remove' => esc_html__('Remove', 'jobus'),
+					'confirm_remove_text' => esc_html__('Are you sure you want to remove this image?', 'jobus'),
+					'edit_portfolio' => esc_html__('Edit Gallery', 'jobus'),
+					'clear_portfolio' => esc_html__('Clear', 'jobus'),
+					'confirm_clear_gallery' => esc_html__('Are you sure you want to clear the entire gallery?', 'jobus')
+				]
+			]);
+		}
+
+		// Common scripts & styles for candidate & employer dashboard
 		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
 
 			// Style's for candidate dashboard
 			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
 
-			// Enqueue media uploader for candidate dashboard
+			// Enqueue media uploader for frontend dashboard
 			wp_enqueue_media();
 
-			// Script's ajax actions for candidate & employer dashboard
+			// Script's ajax actions
 			wp_enqueue_script('jobus-dashboard-ajax-actions', esc_url(JOBUS_JS . '/dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
 			wp_localize_script('jobus-dashboard-ajax-actions', 'jobus_dashboard_obj', [
 				'ajax_url' => $ajax_url,
@@ -85,24 +111,6 @@ class Assets {
 					'taxonomy_suggest_error' => esc_html__('Error fetching suggestions. Please try again.', 'jobus'),
 				]
 			]);
-
-			// Scripts for candidate dashboard
-			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
-				'ajax_url' => $ajax_url,
-				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
-				'texts' => [
-					'portfolio_upload_title' => esc_html__('Select Portfolio Images', 'jobus'),
-					'portfolio_select_text' => esc_html__('Add Selected Images', 'jobus'),
-					'remove' => esc_html__('Remove', 'jobus'),
-					'confirm_remove_text' => esc_html__('Are you sure you want to remove this image?', 'jobus'),
-					'edit_portfolio' => esc_html__('Edit Gallery', 'jobus'),
-					'clear_portfolio' => esc_html__('Clear', 'jobus'),
-					'confirm_clear_gallery' => esc_html__('Are you sure you want to clear the entire gallery?', 'jobus')
-				]
-			]);
-
-			wp_enqueue_script( 'jobus-employer-dashboard', esc_url( JOBUS_JS . '/employer-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
 			// Common scripts for candidate & employer dashboard
 			wp_enqueue_script('jobus-frontend-dashboard', esc_url(JOBUS_JS . '/frontend-dashboard.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);

@@ -232,7 +232,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                                 <div class="dash-input-wrapper mb-30">
                                     <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                                     <input type="url" id="company-website-url" name="company_website[url]"
-                                           placeholder="<?php esc_attr_e( 'https://yourcompany.com', 'jobus' ); ?>"
+                                           placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_url ); ?>">
                                 </div>
                                 <div class="dash-input-wrapper mb-30">
