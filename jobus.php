@@ -17,6 +17,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+if ( ! function_exists( 'jbus_fs' ) ) {
+	// Create a helper function for easy SDK access.
+	function jbus_fs() {
+		global $jbus_fs;
+
+		if ( ! isset( $jbus_fs ) ) {
+			// Include Freemius SDK.
+			require_once dirname( __FILE__ ) . '/vendor/fs/start.php';
+			$jbus_fs = fs_dynamic_init( array(
+				'id'                  => '20775',
+				'slug'                => 'jobus',
+				'premium_slug'        => 'pro',
+				'type'                => 'plugin',
+				'public_key'          => 'pk_6a0f17605a633bbd71c8f387b2678',
+				'is_premium'          => true,
+				'premium_suffix'      => 'Pro',
+				// If your plugin is a serviceware, set this option to false.
+				'has_premium_version' => true,
+				'has_addons'          => false,
+				'has_paid_plans'      => true,
+				// Automatically removed in the free version. If you're not using the
+				// auto-generated free version, delete this line before uploading to wp.org.
+				'wp_org_gatekeeper'   => 'OA7#BoRiBNqdf52FvzEf!!074aRLPs8fspif$7K1#4u4Csys1fQlCecVcUTOs2mcpeVHi#C2j9d09fOTvbC0HloPT7fFee5WdS3G',
+				'trial'               => array(
+					'days'               => 14,
+					'is_require_payment' => true,
+				),
+				'menu'                => array(
+					'slug'           => 'edit.php?post_type=jobus_job',
+					'contact'        => false,
+					'support'        => false,
+				),
+			) );
+		}
+
+		return $jbus_fs;
+	}
+
+	// Init Freemius.
+	jbus_fs();
+	// Signal that SDK was initiated.
+	do_action( 'jbus_fs_loaded' );
+}
+
 // Make sure the same class is not loaded.
 if ( ! class_exists( 'Jobus' ) ) {
 	/**
