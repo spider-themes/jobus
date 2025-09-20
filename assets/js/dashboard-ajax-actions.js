@@ -127,7 +127,7 @@
                     url: jobus_dashboard_obj.ajax_url,
                     type: 'POST',
                     data: {
-                        action: 'remove_job_application',
+                        action: 'jobus_remove_job_application',
                         job_id: jobId,
                         nonce: nonce
                     },

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 CSF::createSection($settings_prefix, array(
     'title'     => esc_html__( 'Login From', 'jobus' ),
     'id'        => 'opt_register',

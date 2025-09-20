@@ -11,8 +11,8 @@ class Dashboard_Helper {
 	public function __construct() {
 
 		// Register AJAX handlers
-		add_action( 'wp_ajax_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
-		add_action( 'wp_ajax_nopriv_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
+		add_action( 'wp_ajax_jobus_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
+		add_action( 'wp_ajax_nopriv_jobus_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
 
 		// Register AJAX handler for dynamic taxonomy creation
 		add_action( 'wp_ajax_jobus_create_taxonomy_term', [ $this, 'jobus_create_taxonomy_term' ] );

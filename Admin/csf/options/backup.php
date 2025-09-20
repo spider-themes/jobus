@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // Backup Options
 CSF::createSection( $settings_prefix, array(
 	'title'  => esc_html__( 'Backup', 'jobus' ),

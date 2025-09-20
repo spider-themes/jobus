@@ -1,6 +1,27 @@
 <?php
 /**
- * Template for displaying the "Submit Job" section in the employer dashboard.
+ * Template for displayi// Handle form submission for taxonomies [categories, locations, tags]
+if ( isset( $_POST['employer_submit_job_form'] ) ) {
+    $nonce = isset( $_POST['employer_submit_job_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_submit_job_nonce'] ) ) : '';
+    if ( ! $nonce || ! wp_verify_nonce( $nonce, 'employer_submit_job' ) ) {
+        wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
+    }
+
+    if ( isset( $_POST['job_categories'] ) ) {
+        $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );
+        wp_set_object_terms( $job_id, $cat_ids, 'jobus_job_cat' );
+    }
+
+    if ( isset( $_POST['job_locations'] ) ) {
+        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_locations'] ) ) );
+        wp_set_object_terms( $job_id, $location_ids, 'jobus_job_location' );
+    }
+
+    if ( isset( $_POST['job_tags'] ) ) {
+        $skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_tags'] ) ) );
+        wp_set_object_terms( $job_id, $skill_ids, 'jobus_job_tag' );
+    }
+}" section in the employer dashboard.
  *
  * This template is used to show the job submission form for employers in their dashboard.
  *
@@ -19,6 +40,12 @@ $user = wp_get_current_user();
 $job_form               = new jobus\includes\Classes\submission\Job_Form_Submission();
 $company_id             = $job_form->get_company_id( $user->ID );
 $job_id                 = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0; // Get job ID from URL if editing
+if ( $job_id ) {
+    $job_post = get_post( $job_id );
+    if ( ! $job_post || $job_post->post_type !== 'jobus_job' || (int) $job_post->post_author !== (int) $user->ID ) {
+        wp_die( esc_html__( 'Access denied.', 'jobus' ) );
+    }
+}
 $editing_job            = $job_id ? get_post( $job_id ) : null;
 $sec_title              = $editing_job ? esc_html__( 'Edit Job', 'jobus' ) : esc_html__( 'Submit New Job', 'jobus' );
 $job_content            = $job_id ? $job_form::get_job_content( $job_id ) : [];

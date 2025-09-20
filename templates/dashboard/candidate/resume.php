@@ -1,6 +1,27 @@
 <?php
 /**
- * Template for the candidate profile page.
+ * Template for th// Handle form submission for taxonomies [categories, locations, skills]
+if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
+	$nonce = isset( $_POST['candidate_resume_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_resume_nonce'] ) ) : '';
+	if ( ! $nonce || ! wp_verify_nonce( $nonce, 'candidate_resume_update' ) ) {
+		wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
+	}
+
+	if ( isset( $_POST['candidate_categories'] ) ) {
+		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
+		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_cat' );
+	}
+
+	if ( isset( $_POST['candidate_locations'] ) ) {
+		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) );
+		wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
+	}
+
+	if ( isset( $_POST['candidate_skills'] ) ) {
+		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) );
+		wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
+	}
+}e page.
  *
  * @package    Jobus
  * @subpackage Templates

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // SMTP Settings
 CSF::createSection( $settings_prefix, array(
 	'id'     => 'jobus_smtp', // Set a unique slug-like ID

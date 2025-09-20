@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // Candidate Archive Page Settings
 CSF::createSection( $settings_prefix, array(
 	'id'    => 'jobus_candidate_archive', // Set a unique slug-like ID

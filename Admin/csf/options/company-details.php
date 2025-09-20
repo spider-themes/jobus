@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // Company Details Page Settings
 CSF::createSection( $settings_prefix, array(
 	'id'    => 'jobus_company_details', // Set a unique slug-like ID

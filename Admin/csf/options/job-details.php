@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // Job Details Page Settings
 CSF::createSection( $settings_prefix, array(
 	'id'    => 'jobus_job_details', // Set a unique slug-like ID
