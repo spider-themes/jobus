@@ -55,7 +55,7 @@ if (is_user_logged_in()) {
                         </p>
                     </div>
                     <?php
-                    if ( empty($jobus_nonce) || wp_verify_nonce($jobus_nonce, 'jobus_login_action')) {
+                    if ( ! empty($jobus_nonce) && wp_verify_nonce($jobus_nonce, 'jobus_login_action') ) {
                         ?>
                         <div class="form-wrapper m-auto">
                             <form action="<?php echo esc_url(home_url('/')) ?>wp-login.php" class="mt-10" name="loginform" id="loginform" method="post">

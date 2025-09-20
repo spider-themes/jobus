@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /**
  * Use namespace to avoid conflict
  */
@@ -19,16 +22,16 @@ class Ajax_Actions {
 	public function __construct() {
 
 		// Candidate Single Page-> Contact Form
-		add_action( 'wp_ajax_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
-		add_action( 'wp_ajax_nopriv_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
+		add_action( 'wp_ajax_jobus_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
+		add_action( 'wp_ajax_nopriv_jobus_candidate_send_mail_form', [ $this, 'ajax_send_contact_email' ] );
 
 		// Job Single Page-> Job Application Form
 		add_action( 'wp_ajax_jobus_job_application', [ $this, 'job_application_form' ] );
 		add_action( 'wp_ajax_nopriv_jobus_job_application', [ $this, 'job_application_form' ] );
 
 		// Remove Job Application
-		add_action( 'wp_ajax_remove_job_application', [ $this, 'remove_job_application' ] );
-		add_action( 'wp_ajax_nopriv_remove_job_application', [ $this, 'remove_job_application' ] );
+		add_action( 'wp_ajax_jobus_remove_job_application', [ $this, 'remove_job_application' ] );
+		add_action( 'wp_ajax_nopriv_jobus_remove_job_application', [ $this, 'remove_job_application' ] );
 
 		// Save/Unsave Jobs for Candidates and Candidates for Employers
 		add_action( 'wp_ajax_jobus_saved_post', [ $this, 'saved_post' ] );

@@ -133,7 +133,7 @@
                 $.ajax({
                     url: jobus_public_obj.ajax_url, // WordPress AJAX URL
                     type: 'POST',
-                    data: formData + '&action=candidate_send_mail_form&security=' + jobus_public_obj.nonce + '&candidate_id=' + candidateId,
+                    data: formData + '&action=jobus_candidate_send_mail_form&security=' + jobus_public_obj.nonce + '&candidate_id=' + candidateId,
                     success: function(response) {
                         messageContainer.removeClass('success error'); // Clear any previous messages
 

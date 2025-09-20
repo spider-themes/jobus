@@ -1,6 +1,22 @@
 <?php
 /**
- * Template for displaying the "Profile" section in the employer dashboard.
+ * Template for displaying// Handle form submission for taxonomies [categories, locations, tags]
+if ( isset( $_POST['company_profile_form_submit'] ) ) {
+    $nonce = isset( $_POST['company_profile_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['company_profile_nonce'] ) ) : '';
+    if ( ! $nonce || ! wp_verify_nonce( $nonce, 'company_profile_update' ) ) {
+        wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
+    }
+
+    if ( isset( $_POST['company_categories'] ) ) {
+        $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_categories'] ) ) ) );
+        wp_set_object_terms( $company_id, $cat_ids, 'jobus_company_cat' );
+    }
+
+    if ( isset( $_POST['company_locations'] ) ) {
+        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_locations'] ) ) ) );
+        wp_set_object_terms( $company_id, $location_ids, 'jobus_company_location' );
+    }
+}" section in the employer dashboard.
  *
  * This template is used to show the profile information of the employer in their dashboard.
  *
