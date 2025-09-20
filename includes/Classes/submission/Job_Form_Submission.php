@@ -41,8 +41,19 @@ class Job_Form_Submission {
 	 * Handle the actual form submission (create/update job post)
 	 */
 	private function handle_form_submission(): void {
+		// Define expected fields to sanitize
+		$expected_fields = [
+			'job_id', 'job_title', 'job_description', 'company_website', 'is_company_website'
+		];
+
+		$post_data = [];
+		foreach ( $expected_fields as $field ) {
+			if ( isset( $_POST[ $field ] ) ) {
+				$post_data[ $field ] = recursive_sanitize_text_field( $_POST[ $field ] );
+			}
+		}
+
 		$user = wp_get_current_user();
-		$post_data = recursive_sanitize_text_field( $_POST );
 		$company_id = $this->get_company_id( $user->ID );
 		if ( ! $company_id ) {
 			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );

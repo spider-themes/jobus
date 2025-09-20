@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 // Candidate Specifications
 CSF::createSection( $settings_prefix, array(
 	'title'  => esc_html__( 'Candidate Specifications', 'jobus' ),

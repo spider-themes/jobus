@@ -450,6 +450,12 @@ class Candidate_Form_Submission {
 			return;
 		}
 
+		// Nonce check for file upload
+		$nonce = isset( $_POST['candidate_resume_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_resume_nonce'] ) ) : '';
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'candidate_resume_update' ) ) {
+			return;
+		}
+
 		$meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
 		if ( ! is_array( $meta ) ) {
 			$meta = array();
@@ -796,7 +802,23 @@ class Candidate_Form_Submission {
 	private function handle_form_submission(): void {
 		$user = wp_get_current_user();
 
-		$post_data = recursive_sanitize_text_field( $_POST );
+		// Define expected fields to sanitize
+		$expected_fields = [
+			'candidate_name', 'candidate_description', 'candidate_age', 'candidate_mail', 'candidate_specifications',
+			'candidate_location_address', 'candidate_location_lat', 'candidate_location_lng', 'candidate_location_zoom',
+			'profile_picture_action', 'candidate_profile_picture_id', 'social_icons',
+			'cv_attachment', 'cv_attachment_id', 'profile_cv_action',
+			'video_title', 'video_url', 'video_bg_img', 'video_bg_img_action',
+			'education_title', 'education', 'experience_title', 'experience',
+			'portfolio_title', 'portfolio'
+		];
+
+		$post_data = [];
+		foreach ( $expected_fields as $field ) {
+			if ( isset( $_POST[ $field ] ) ) {
+				$post_data[ $field ] = recursive_sanitize_text_field( $_POST[ $field ] );
+			}
+		}
 
 		// Get candidate ID
 		$candidate_id = $this->get_candidate_id( $user->ID );

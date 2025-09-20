@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 $jobus_nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
 
-if ( empty( $jobus_nonce ) || wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) :
+if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) :
     ?>
     <div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">

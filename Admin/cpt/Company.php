@@ -1,5 +1,4 @@
 <?php
-
 namespace jobus\Admin\cpt;
 
 

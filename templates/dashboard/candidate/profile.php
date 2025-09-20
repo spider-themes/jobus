@@ -1,14 +1,13 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /**
  * Template for the candidate profile page.
  *
  * @package Jobus
  * @subpackage Templates
  */
-
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
-}
 
 // Called the helper functions
 $candidate_form = new \jobus\includes\Classes\submission\Candidate_Form_Submission();

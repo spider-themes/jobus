@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 /**
  * The template for displaying archive pages
  *
@@ -6,10 +9,6 @@
  *
  * @package jobus
  */
-
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
-}
 
 get_header();
 

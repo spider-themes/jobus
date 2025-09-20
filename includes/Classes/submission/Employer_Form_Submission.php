@@ -450,8 +450,29 @@ class Employer_Form_Submission {
 	 * Handle the actual form submission
 	 */
 	private function handle_form_submission(): void {
+		// Nonce check
+		$nonce = isset( $_POST['company_profile_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['company_profile_nonce'] ) ) : '';
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'company_profile_update' ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
+		}
+
+		// Define expected fields to sanitize
+		$expected_fields = [
+			'company_name', 'company_description', 'company_mail', 'company_profile_picture',
+			'company_delete_profile_picture', 'social_icons',
+			'company_website', 'company_video_title', 'company_video_url', 'company_video_bg_img',
+			'video_bg_img', 'video_bg_img_action',
+			'company_testimonial_title', 'company_testimonials'
+		];
+
+		$post_data = [];
+		foreach ( $expected_fields as $field ) {
+			if ( isset( $_POST[ $field ] ) ) {
+				$post_data[ $field ] = recursive_sanitize_text_field( $_POST[ $field ] );
+			}
+		}
+
 		$user = wp_get_current_user();
-		$post_data = recursive_sanitize_text_field( $_POST );
 		$company_id = $this->get_company_id( $user->ID );
 		if ( ! $company_id ) {
 			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );

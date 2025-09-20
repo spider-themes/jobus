@@ -94,7 +94,7 @@ class Shortcode {
 	public function login_form_shortcode( array $atts = [] ): string {
 		// Verify nonce on form submission
 		if ( isset( $_POST['jobus_login_nonce'] ) ) {
-			if ( ! wp_verify_nonce( wp_unslash( $_POST['jobus_login_nonce'] ), 'jobus_login_action' ) ) {
+			if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['jobus_login_nonce'] ) ), 'jobus_login_action' ) ) {
 				wp_die( esc_html__( 'Security check failed!', 'jobus' ) );
 			}
 		}
