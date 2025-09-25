@@ -22,7 +22,7 @@ class Job_Application {
 		add_action( 'edit_form_top', array( $this, 'admin_single_subtitle' ) );
 		add_action( 'add_meta_boxes', [ $this, 'admin_single_contents' ] );
 
-        // Save post meta data
+        // Save post metadata
         add_action( 'save_post_jobus_applicant', [ $this, 'save_application_status' ], 10, 3 );
 	}
 
@@ -72,10 +72,10 @@ class Job_Application {
 	public function render_single_job_status( $post ): void {
 		if ( $post->post_type === 'jobus_applicant' ) {
 			// Process form submission directly (maintaining current functionality)
-			if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) && 
-				isset( $_POST['job_application_status_nonce'] ) && 
+			if ( isset( $_POST['save_application_status'] ) && isset( $_POST['application_status'] ) &&
+				isset( $_POST['job_application_status_nonce'] ) &&
 				wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
-				
+
 				$new_status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
 				update_post_meta( $post->ID, 'application_status', $new_status );
 			}

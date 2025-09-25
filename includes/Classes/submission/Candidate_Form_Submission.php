@@ -537,13 +537,29 @@ class Candidate_Form_Submission {
 	public static function get_candidate_video( int $candidate_id ): array {
 		$meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
 
+		$video_bg_img = $meta['video_bg_img'] ?? array( 'id' => '', 'url' => '' );
+
+		// Ensure we have proper URL from ID (similar to employer implementation)
+		if ( ! empty( $video_bg_img['id'] ) ) {
+			// Always regenerate URL from ID to ensure it's current
+			$attachment_url = wp_get_attachment_url( absint( $video_bg_img['id'] ) );
+			if ( $attachment_url ) {
+				$video_bg_img['url'] = $attachment_url;
+			}
+		}
+
+		// If no ID but we have a URL, keep it
+		if ( empty( $video_bg_img['id'] ) && ! empty( $video_bg_img['url'] ) ) {
+			// Validate existing URL
+			if ( ! filter_var( $video_bg_img['url'], FILTER_VALIDATE_URL ) ) {
+				$video_bg_img['url'] = '';
+			}
+		}
+
 		return array(
 			'video_title'  => $meta['video_title'] ?? '',
 			'video_url'    => $meta['video_url'] ?? '',
-			'video_bg_img' => $meta['video_bg_img'] ?? array(
-					'id'  => '',
-					'url' => ''
-				)
+			'video_bg_img' => $video_bg_img
 		);
 	}
 
@@ -576,26 +592,61 @@ class Candidate_Form_Submission {
 				'url' => '',
 				'id'  => 0
 			);
-		} elseif ( $bg_img_action === 'upload' && ! empty( $post_data['video_bg_img'] ) ) {
-			// Handle background image using the correct field name 'video_bg_img'
+		} elseif ( ! empty( $post_data['video_bg_img'] ) ) {
+			// Handle background image - extract proper ID from media uploader
 			$bg_img = $post_data['video_bg_img'];
-
-			// CSF framework media field returns array with 'url' and 'id' keys
-			if ( is_array( $bg_img ) ) {
+			
+			// Check if this is just an attachment ID (numeric)
+			if ( is_numeric( $bg_img ) ) {
+				$attachment_id = absint( $bg_img );
+				$attachment_url = wp_get_attachment_url( $attachment_id );
+				
 				$meta['video_bg_img'] = array(
-					'url' => esc_url_raw( $bg_img['url'] ?? '' ),
-					'id'  => absint( $bg_img['id'] ?? 0 )
+					'id'  => $attachment_id,
+					'url' => $attachment_url ? $attachment_url : ''
 				);
-			} // Handle string input (URL only)
-			else {
+			}
+			// Handle CSF framework array format
+			elseif ( is_array( $bg_img ) && isset( $bg_img['id'] ) ) {
+				$attachment_id = absint( $bg_img['id'] );
+				$attachment_url = wp_get_attachment_url( $attachment_id );
+				
 				$meta['video_bg_img'] = array(
-					'url' => esc_url_raw( $bg_img ),
-					'id'  => 0
+					'id'  => $attachment_id,
+					'url' => $attachment_url ? $attachment_url : ''
+				);
+			}
+			// Handle direct URL (fallback)
+			elseif ( is_string( $bg_img ) && filter_var( $bg_img, FILTER_VALIDATE_URL ) ) {
+				$meta['video_bg_img'] = array(
+					'id'  => 0,
+					'url' => esc_url_raw( $bg_img )
+				);
+			}
+			// Handle malformed data like 'http://7537' - extract the ID
+			elseif ( is_string( $bg_img ) && preg_match('/^https?:\/\/(\d+)$/', $bg_img, $matches) ) {
+				$attachment_id = absint( $matches[1] );
+				$attachment_url = wp_get_attachment_url( $attachment_id );
+				
+				$meta['video_bg_img'] = array(
+					'id'  => $attachment_id,
+					'url' => $attachment_url ? $attachment_url : ''
+				);
+			}
+			else {
+				// Clear invalid data
+				$meta['video_bg_img'] = array(
+					'id'  => 0,
+					'url' => ''
 				);
 			}
 		}
 
 		update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
+		
+		// Clear post cache to ensure fresh data on next load
+		clean_post_cache( $candidate_id );
+		wp_cache_delete( $candidate_id, 'posts' );
 	}
 
 	/**

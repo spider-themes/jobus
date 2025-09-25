@@ -493,6 +493,9 @@ Table of Contents:
 .dashboard-body .recent-job-tab .wrapper {
   padding: 0 25px 8px 30px;
 }
+.dashboard-body .recent-job-tab .wrapper .no-jobs-message {
+  padding: 16px 0 8px;
+}
 .dashboard-body .recent-job-tab .wrapper .job-item-list {
   position: relative;
   padding-right: 25px;
@@ -1768,6 +1771,11 @@ Table of Contents:
   top: 50%;
   margin: 0 auto;
   transform: translateY(-50%);
+}
+
+.no-jobs-found {
+  padding: 24px 35px;
+  border-top: 1px solid #E3F0EB;
 }
 
 /*# sourceMappingURL=dashboard.css.map */

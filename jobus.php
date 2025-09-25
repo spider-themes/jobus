@@ -97,6 +97,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/includes/Classes/submission/Candidate_Form_Submission.php';
 			require_once __DIR__ . '/includes/Classes/submission/Employer_Form_Submission.php';
 			require_once __DIR__ . '/includes/Classes/submission/Job_Form_Submission.php';
+			require_once __DIR__ . '/includes/Classes/submission/Password_Handler.php';
 
 			// Frontend UI
 			require_once __DIR__ . '/includes/Frontend/Assets.php';
@@ -135,6 +136,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\includes\Classes\submission\Candidate_Form_Submission();
 			new \Jobus\includes\Classes\submission\Employer_Form_Submission();
 			new \jobus\includes\Classes\submission\Job_Form_Submission();
+			new \jobus\includes\Classes\submission\Password_Handler();
 
 			//Admin UI
 			if ( is_admin() ) {

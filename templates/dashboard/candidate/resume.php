@@ -119,7 +119,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                     <!-- Image Preview Section -->
                     <div id="bg-img-preview" class="preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
                         <div class="attached-file d-flex align-items-center justify-content-between">
-                            <span id="video-bg-image-uploaded-filename"><?php echo esc_html( $video_data['video_bg_img']['url'] ); ?></span>
+                            <span id="video-bg-image-uploaded-filename"><?php echo esc_url( $video_data['video_bg_img']['url'] ); ?></span>
                             <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
                         </div>
                     </div>

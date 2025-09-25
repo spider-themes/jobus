@@ -548,6 +548,9 @@
   .recent-job-tab .wrapper {
     padding: 0 25px 8px 30px;
 
+    .no-jobs-message {
+      padding: 16px 0 8px;
+    }
     .job-item-list {
       position: relative;
       padding-right: 25px;

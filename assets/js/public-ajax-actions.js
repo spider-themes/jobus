@@ -121,11 +121,11 @@
          */
         emailFormToCandidate: function () {
 
-            $('#candidate_email_from').on('submit', function(event) {
+            $('#candidate-email-from').on('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission
 
                 let formData = $(this).serialize(); // Serialize form data
-                let candidateId = $('#candidate_id').val(); // Get candidate ID
+                let candidateId = $('#candidate-id').val(); // Get candidate ID
 
                 // Add class to the message container on submit button click
                 let messageContainer = $('#email-form-message');
@@ -133,20 +133,31 @@
                 $.ajax({
                     url: jobus_public_obj.ajax_url, // WordPress AJAX URL
                     type: 'POST',
-                    data: formData + '&action=jobus_candidate_send_mail_form&security=' + jobus_public_obj.nonce + '&candidate_id=' + candidateId,
+                    data: formData + '&action=jobus_candidate_send_mail_form&security=' + jobus_public_obj.candidate_email_nonce + '&candidate_id=' + candidateId,
                     success: function(response) {
                         messageContainer.removeClass('success error'); // Clear any previous messages
 
                         if (response.success) {
-                            messageContainer.addClass('success').text(response.data);
-                            $('#candidate_email_from')[0].reset(); // Clear the form fields
+                            // For success responses, data is a string
+                            let successMessage = typeof response.data === 'string' ? response.data : 'Message sent successfully!';
+                            messageContainer.addClass('success').text(successMessage);
+                            $('#candidate-email-from')[0].reset(); // Clear the form fields
 
                             // Remove the message after 10 seconds
                             setTimeout(function() {
                                 messageContainer.removeClass('success').text('');
                             }, 10000); // 10000 milliseconds = 10 seconds
                         } else {
-                            messageContainer.addClass('error').text(response.data);
+                            // For error responses, data might be an object with 'message' property
+                            let errorMessage = '';
+                            if (typeof response.data === 'object' && response.data.message) {
+                                errorMessage = response.data.message;
+                            } else if (typeof response.data === 'string') {
+                                errorMessage = response.data;
+                            } else {
+                                errorMessage = 'An error occurred. Please try again.';
+                            }
+                            messageContainer.addClass('error').text(errorMessage);
                         }
                     },
                     error: function() {

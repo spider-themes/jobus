@@ -262,8 +262,21 @@
                 mediaUploader.on('select', function() {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
                     actionInput.val('upload');
-                    imgIdInput.val(attachment.id); // FIXED: use correct field
-                    previewFilename.text(attachment.url);
+                    imgIdInput.val(attachment.id);
+
+                    // Display the full image URL, fallback to filename if URL is invalid
+                    let displayText = attachment.url || attachment.filename || 'Selected Image';
+
+                    // Ensure we have a proper URL format
+                    if (attachment.url && attachment.url.indexOf('http') === 0) {
+                        displayText = attachment.url;
+                    } else if (attachment.filename) {
+                        displayText = attachment.filename;
+                    } else {
+                        displayText = 'Image ID: ' + attachment.id;
+                    }
+
+                    previewFilename.text(displayText);
                     preview.removeClass('hidden');
                     uploadBtnWrapper.addClass('hidden');
                 });
@@ -280,9 +293,9 @@
          */
         UserPassword:function () {
             const $form = $('#user-password-form');
-            const $currentPassword = $('#current_password');
-            const $newPassword = $('#new_password');
-            const $confirmPassword = $('#confirm_password');
+            const $currentPassword = $('#current-password');
+            const $newPassword = $('#new-password');
+            const $confirmPassword = $('#confirm-password');
             const $passwordStrength = $('#password-strength');
             const $passwordMatchStatus = $('#password-match-status');
 
@@ -336,6 +349,7 @@
 
             // Show/hide password toggle
             $form.find('.passVicon').on('click', function() {
+                $(this).toggleClass("eye-slash");
                 const $input = $(this).closest('.dash-input-wrapper').find('input');
                 const type = $input.attr('type') === 'password' ? 'text' : 'password';
                 $input.attr('type', type);
