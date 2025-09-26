@@ -18,6 +18,9 @@ $website_url    = $website['url'] ?? '';
 $website_text   = $website['title'] ?? '';
 $website_target = $website['target'] ?? '_self';
 $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_icons'] ) ? $meta['social_icons'] : '';
+
+$location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
+$cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -44,10 +47,10 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                         <div class="border-top mt-35 lg-mt-20 pt-25">
                             <ul class="job-meta-data row style-none">
                                 <?php
-                                if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
+                                if ( ! empty( $location ) ) { ?>
                                     <li>
                                         <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
-                                        <div><?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_company_location' ) ) ?></div>
+                                        <div><?php echo esc_html( $location ) ?></div>
                                     </li>
                                     <?php
                                 }
@@ -98,8 +101,6 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                                     }
 
                                 }
-
-                                $cats = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
                                 if ( is_array( $cats ) ) {
                                     ?>
                                     <li>

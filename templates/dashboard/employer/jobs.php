@@ -19,19 +19,6 @@ $jobs = get_posts([
     'posts_per_page' => -1,
 ]);
 
-$applicants = get_posts( [
-    'post_type'      => 'jobus_applicant',
-    'post_status'    => 'publish',
-    'posts_per_page' => -1,
-    'meta_query'     => [
-        [
-            'key'     => 'candidate_email',
-            'value'   => wp_get_current_user()->user_email,
-            'compare' => '='
-        ]
-    ]
-] );
-
 // Find the page with employer dashboard shortcode
 $dashboard_page = get_posts( [
         'post_type'      => 'page',
@@ -46,7 +33,6 @@ $edit_job_url = '#';
 if ( ! empty( $dashboard_page ) ) {
     $edit_job_url = trailingslashit( get_permalink( $dashboard_page[0] ) ) . 'submit-job';
 }
-
 ?>
 
 <div class="position-relative">
@@ -73,6 +59,22 @@ if ( ! empty( $dashboard_page ) ) {
                     foreach ( $jobs as $job ) {
                         $job_id  = $job->ID;
                         $status   = get_post_status( $job_id );
+
+                        // Get applicants for this job
+                        $job_applicants = get_posts([
+                            'post_type'      => 'jobus_applicant',
+                            'post_status'    => 'publish',
+                            'meta_query'     => [
+                                [
+                                    'key'     => 'job_applied_for_id',
+                                    'value'   => $job_id,
+                                    'compare' => '='
+                                ]
+                            ],
+                            'fields'         => 'ids',
+                            'posts_per_page' => -1
+                        ]);
+                        $job_applicants_count = count($job_applicants);
                         ?>
                         <tr class="<?php echo esc_attr( $status ); ?>">
                             <td>
@@ -80,7 +82,7 @@ if ( ! empty( $dashboard_page ) ) {
                                 <div class="info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
-                            <td><?php echo esc_html( count( $applicants ) ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', count( $applicants ), 'jobus' ) ); ?></td>
+                            <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
                                 <div class="action-dots float-end">

@@ -71,41 +71,16 @@ class Ajax_Actions {
 
 		// Check nonce for security
 		if ( ! check_ajax_referer( 'jobus_candidate_contact_mail_form', 'security', false ) ) {
-			wp_send_json_error( esc_html__( 'Nonce verification failed.', 'jobus' ) );
+			wp_send_json_error( array( 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ) );
 			wp_die();
 		}
 
 		// Get candidate ID
 		$candidate_id = ! empty( $_POST['candidate_id'] ) ? intval( $_POST['candidate_id'] ) : '';
 
-		if ( empty( $candidate_id ) ) {
-			wp_send_json_error( esc_html__( 'Invalid candidate ID.', 'jobus' ) );
-			wp_die();
-		}
-
-		// Retrieve candidate email with multiple fallback options
-		$meta = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
-		$candidate_mail = '';
-
-		// Try different possible email field names in the meta
-		if ( ! empty( $meta['candidate_mail'] ) ) {
-			$candidate_mail = sanitize_email( $meta['candidate_mail'] );
-		} elseif ( ! empty( $meta['email'] ) ) {
-			$candidate_mail = sanitize_email( $meta['email'] );
-		} elseif ( ! empty( $meta['candidate_email'] ) ) {
-			$candidate_mail = sanitize_email( $meta['candidate_email'] );
-		}
-
-		// If still no email, try to get from post author
-		if ( empty( $candidate_mail ) ) {
-			$post_author_id = get_post_field( 'post_author', $candidate_id );
-			if ( $post_author_id ) {
-				$author_data = get_userdata( $post_author_id );
-				if ( $author_data && ! empty( $author_data->user_email ) ) {
-					$candidate_mail = sanitize_email( $author_data->user_email );
-				}
-			}
-		}
+		// Retrieve candidate email
+		$meta           = get_post_meta( $candidate_id, 'jobus_meta_candidate_options', true );
+		$candidate_mail = ! empty( $meta['candidate_mail'] ) ? sanitize_email( $meta['candidate_mail'] ) : '';
 
 		// Sanitize and get form data
 		$sender_name    = ! empty( $_POST['sender_name'] ) ? sanitize_text_field( wp_unslash( $_POST['sender_name'] ) ) : '';
@@ -113,105 +88,24 @@ class Ajax_Actions {
 		$sender_subject = ! empty( $_POST['sender_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['sender_subject'] ) ) : '';
 		$message        = ! empty( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
 
-		// Validate user input fields first
-		if ( empty( $sender_name ) || empty( $sender_email ) || empty( $message ) ) {
-			wp_send_json_error( esc_html__( 'Please fill in all required fields.', 'jobus' ) );
+		// Validate required fields
+		if ( empty( $sender_name ) || empty( $sender_email ) || empty( $message ) || empty( $candidate_mail ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Please fill in all required fields.', 'jobus' ) ) );
 			wp_die();
 		}
 
-		// Validate email format
-		if ( ! is_email( $sender_email ) ) {
-			wp_send_json_error( esc_html__( 'Please enter a valid email address.', 'jobus' ) );
-			wp_die();
-		}
+		// Set email subject
+		$subject   = ! empty( $sender_subject ) ? $sender_subject : esc_html__( 'New Message', 'jobus' );
+		$headers[] = "From: $sender_name <$sender_email>";
+		$headers[] = "Reply-To: $sender_email";
 
-		// Check if we have the candidate's email
-		if ( empty( $candidate_mail ) ) {
-			wp_send_json_error( esc_html__( 'Unable to send message: candidate contact information not available.', 'jobus' ) );
-			wp_die();
-		}
-
-		// Validate candidate email format
-		if ( ! is_email( $candidate_mail ) ) {
-			wp_send_json_error( esc_html__( 'Invalid candidate email address found.', 'jobus' ) );
-			wp_die();
-		}
-
-		// Set email subject with better formatting
-		$subject = ! empty( $sender_subject ) ? $sender_subject : sprintf(
-			esc_html__( 'New Message from %s via Job Portal', 'jobus' ),
-			$sender_name
-		);
-
-		// Prepare email headers with better formatting
-		$headers = array();
-		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		$headers[] = sprintf( 'From: %s <%s>', $sender_name, $sender_email );
-		$headers[] = sprintf( 'Reply-To: %s', $sender_email );
-
-		// Create a well-formatted HTML email body
-		$email_body = sprintf(
-			'<html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-			<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-				<h2 style="color: #2c3e50;">%s</h2>
-				<div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
-					<p><strong>%s:</strong> %s</p>
-					<p><strong>%s:</strong> %s</p>
-					<p><strong>%s:</strong> %s</p>
-				</div>
-				<div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-					<h3 style="margin-top: 0; color: #34495e;">%s:</h3>
-					<p>%s</p>
-				</div>
-				<hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
-				<p style="font-size: 12px; color: #666;">%s</p>
-			</div></body></html>',
-			esc_html__( 'New Message from Job Portal', 'jobus' ),
-			esc_html__( 'From', 'jobus' ),
-			esc_html( $sender_name ),
-			esc_html__( 'Email', 'jobus' ),
-			esc_html( $sender_email ),
-			esc_html__( 'Subject', 'jobus' ),
-			esc_html( $subject ),
-			esc_html__( 'Message', 'jobus' ),
-			nl2br( esc_html( $message ) ),
-			esc_html__( 'This message was sent through your job portal contact form.', 'jobus' )
-		);
-
-		// Add error logging for debugging
-		$mail_error = '';
-
-		// Hook to capture wp_mail errors
-		add_action( 'wp_mail_failed', function( $wp_error ) use ( &$mail_error ) {
-			$mail_error = $wp_error->get_error_message();
-		});
-
-		// Send email with error handling
-		$success = wp_mail( $candidate_mail, $subject, $email_body, $headers );
-
-		// Log the attempt for debugging (remove in production)
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			error_log( sprintf(
-				'Email attempt: To=%s, Subject=%s, Success=%s, Error=%s',
-				$candidate_mail,
-				$subject,
-				$success ? 'YES' : 'NO',
-				$mail_error ?: 'None'
-			) );
-		}
+		// Send email
+		$success = wp_mail( $candidate_mail, $subject, $message, $headers );
 
 		if ( $success ) {
-			wp_send_json_success( esc_html__( 'Your message has been sent successfully!', 'jobus' ) );
+			wp_send_json_success( esc_html__( 'Your message has been sent successfully!', 'jobus' ) ); // This will be displayed in green
 		} else {
-			// Provide more specific error message
-			$error_message = esc_html__( 'Unable to send email at this time. Please try again later or contact us directly.', 'jobus' );
-
-			// If we have specific mail error and debug is on, include it
-			if ( ! empty( $mail_error ) && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				$error_message .= ' Debug: ' . $mail_error;
-			}
-
-			wp_send_json_error( $error_message );
+			wp_send_json_error( esc_html__( 'There was a problem sending your message. Please try again.', 'jobus' ) ); // This will be displayed in red
 		}
 
 		wp_die(); // Always terminate AJAX calls

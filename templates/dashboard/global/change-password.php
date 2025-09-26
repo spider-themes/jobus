@@ -98,7 +98,6 @@ if ( $error_message ) {
                 <div class="col-12">
                     <div class="button-group d-inline-flex align-items-center mt-30">
                         <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Update Password', 'jobus' ); ?></button>
-                        <button type="button" class="dash-cancel-btn tran3s"><?php esc_html_e( 'Cancel', 'jobus' ); ?></button>
                     </div>
                 </div>
             </div>

@@ -28,6 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+// Ensure media library is available for frontend uploader
+if ( function_exists( 'wp_enqueue_media' ) ) {
+    wp_enqueue_media();
+}
+
 // Called the helper functions
 $company_form = new jobus\includes\Classes\submission\Employer_Form_Submission();
 
@@ -74,7 +79,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="bg-white card-box border-20">
-            <div class="user-avatar-setting d-flex align-items-center mb-30">
+            <div class="user-avatar-setting d-flex align-items-center mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
                 <button type="button" class="upload-btn position-relative tran3s ms-4 me-3" id="company-profile-picture-upload">
@@ -358,24 +363,23 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
 
                     <!-- Image Preview Section -->
-                    <div id="bg-img-preview" class="preview <?php echo empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
+                    <div id="company-bg-img-preview" class="preview bg-img-preview <?php echo empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
                         <div class="attached-file d-flex align-items-center justify-content-between">
-                            <span id="video-bg-image-uploaded-filename"><?php echo esc_html( $video_data['company_video_bg_img']['url'] ); ?></span>
-                            <a href="#" id="remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
+                            <span id="company-video-bg-image-uploaded-filename"><?php echo esc_html( $video_data['company_video_bg_img']['url'] ); ?></span>
+                            <a href="#" id="company-remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
                         </div>
                     </div>
 
-                    <div id="bg-img-upload-btn-wrapper" class="<?php echo ! empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
+                    <div id="company-bg-img-upload-btn-wrapper" class="<?php echo ! empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
                         <div class="dash-btn-one d-inline-block position-relative me-3">
                             <i class="bi bi-plus"></i>
                             <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
-                            <button type="button" id="video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                            <button type="button" id="company-video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
                         </div>
                     </div>
                     <!-- Hidden field for image ID -->
-                    <input type="hidden" id="video-bg-img" name="company_video_bg_img"
-                           value="<?php echo esc_attr( $video_data['company_video_bg_img']['id'] ?? '' ); ?>">
-                    <input type="hidden" id="video-bg-img-action" name="video_bg_img_action" value="">
+                    <input type="hidden" id="company-video-bg-img" name="company_video_bg_img" value="<?php echo esc_attr( $video_data['company_video_bg_img']['id'] ?? '' ); ?>">
+                    <input type="hidden" id="company-video-bg-img-action" name="video_bg_img_action" value="">
                 </div>
             </div>
         </div>
