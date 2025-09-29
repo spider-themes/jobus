@@ -140,7 +140,19 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 			<?php
 		}
 	} else {
-		echo '<div class="no-jobs-found">' . esc_html__( 'No saved candidate found.', 'jobus' ) . '</div>';
+
+        ?>
+        <div class="bg-white card-box border-20 text-center p-5">
+            <div class="no-applications-found">
+                <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
+                <h4><?php esc_html_e( 'No saved candidates', 'jobus' ); ?></h4>
+                <p class="text-muted"><?php esc_html_e( 'You haven\'t saved any candidates yet.', 'jobus' ); ?></p>
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="btn btn-sm btn-primary" target="_blank">
+                    <?php esc_html_e( 'Browse Candidates', 'jobus' ); ?>
+                </a>
+            </div>
+        </div>
+        <?php
 	}
 
 	?>
