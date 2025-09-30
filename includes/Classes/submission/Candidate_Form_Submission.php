@@ -62,7 +62,7 @@ class Candidate_Form_Submission {
 	 *
 	 * @return int|false Candidate ID or false if not found
 	 */
-	public static function get_candidate_id( int $user_id = null ): false|int {
+	public static function get_candidate_id( $user_id = null ) {
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
 		}

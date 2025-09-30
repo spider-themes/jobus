@@ -54,11 +54,11 @@ class Employer_Form_Submission {
 	/**
 	 * Get company post ID for a user
 	 *
-	 * @param int|null $user_id User ID (optional, will use current user if not provided)
+	 * @param $user_id (optional, will use current user if not provided)
 	 *
 	 * @return int|false Company ID or false if not found
 	 */
-	public static function get_company_id( int $user_id = null ) {
+	public static function get_company_id( $user_id = null ) {
 
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();

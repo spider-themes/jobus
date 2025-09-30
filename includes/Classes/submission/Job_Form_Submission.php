@@ -1,4 +1,5 @@
 <?php
+
 namespace jobus\includes\Classes\submission;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -43,7 +44,11 @@ class Job_Form_Submission {
 	private function handle_form_submission(): void {
 		// Define expected fields to sanitize
 		$expected_fields = [
-			'job_id', 'job_title', 'job_description', 'company_website', 'is_company_website'
+			'job_id',
+			'job_title',
+			'job_description',
+			'company_website',
+			'is_company_website'
 		];
 
 		$post_data = [];
@@ -53,7 +58,7 @@ class Job_Form_Submission {
 			}
 		}
 
-		$user = wp_get_current_user();
+		$user       = wp_get_current_user();
 		$company_id = $this->get_company_id( $user->ID );
 		if ( ! $company_id ) {
 			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
@@ -77,10 +82,11 @@ class Job_Form_Submission {
 	/**
 	 * Get the company ID associated with a user
 	 *
-	 * @param int|null $user_id The user ID. If null, uses current user.
+	 * @param $user_id. If null, uses current user.
+	 *
 	 * @return int|false Company post ID or false if not found
 	 */
-	public static function get_company_id(int $user_id = null) {
+	public static function get_company_id( $user_id = null ) {
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
 		}
@@ -92,16 +98,17 @@ class Job_Form_Submission {
 			'fields'         => 'ids',
 		];
 
-		$query = new \WP_Query($args);
-		return ! empty($query->posts) ? $query->posts[0] : false;
+		$query = new \WP_Query( $args );
+
+		return ! empty( $query->posts ) ? $query->posts[0] : false;
 	}
 
 	/**
 	 * Save job content data (create or update post)
 	 *
-	 * @param int   $job_id      The job post ID (0 for new post, or existing ID for update)
-	 * @param array $post_data   The full form data (title, content, etc)
-	 * @param int   $company_id  The company to associate with the job (used only when creating a new job)
+	 * @param int   $job_id     The job post ID (0 for new post, or existing ID for update)
+	 * @param array $post_data  The full form data (title, content, etc)
+	 * @param int   $company_id The company to associate with the job (used only when creating a new job)
 	 *
 	 * @return int Job post ID
 	 *
@@ -109,8 +116,8 @@ class Job_Form_Submission {
 	 *       For updates, the company link is not changed, but the parameter is still required for consistency.
 	 */
 	public function save_job_content( int $job_id, array $post_data, int $company_id ): int {
-		$user = wp_get_current_user();
-		$job_title = isset( $post_data['job_title'] ) ? sanitize_text_field( $post_data['job_title'] ) : '';
+		$user            = wp_get_current_user();
+		$job_title       = isset( $post_data['job_title'] ) ? sanitize_text_field( $post_data['job_title'] ) : '';
 		$job_description = isset( $post_data['job_description'] ) ? wp_kses_post( $post_data['job_description'] ) : '';
 
 		if ( empty( $job_title ) ) {
@@ -144,6 +151,7 @@ class Job_Form_Submission {
 			// Link job to company
 			update_post_meta( $job_id, '_jobus_company_id', $company_id );
 		}
+
 		return $job_id;
 	}
 
@@ -152,6 +160,7 @@ class Job_Form_Submission {
 	 * Get job content data and apply status for current user
 	 *
 	 * @param int $job_id The job post ID
+	 *
 	 * @return array
 	 */
 	public static function get_job_content( int $job_id ): array {
@@ -161,8 +170,8 @@ class Job_Form_Submission {
 		$has_applied     = false;
 
 		if ( is_user_logged_in() ) {
-			$user = wp_get_current_user();
-			$applicant_posts = get_posts([
+			$user            = wp_get_current_user();
+			$applicant_posts = get_posts( [
 				'post_type'   => 'jobus_applicant',
 				'post_status' => 'publish',
 				'meta_query'  => [
@@ -177,10 +186,10 @@ class Job_Form_Submission {
 						'compare' => '='
 					]
 				],
-				'fields' => 'ids',
+				'fields'      => 'ids',
 				'numberposts' => 1
-			]);
-			if ( !empty($applicant_posts) ) {
+			] );
+			if ( ! empty( $applicant_posts ) ) {
 				$has_applied = true;
 			}
 		}
@@ -198,11 +207,14 @@ class Job_Form_Submission {
 	 * Get job specifications data
 	 *
 	 * @param int $job_id
+	 *
 	 * @return array
 	 */
 	public static function get_job_specifications( int $job_id ): array {
 		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
-		if ( ! is_array( $meta ) ) $meta = array();
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
 		$specs = array(
 			'specifications' => $meta['job_specifications'] ?? array(),
 			'dynamic_fields' => array()
@@ -213,19 +225,20 @@ class Job_Form_Submission {
 				foreach ( $fields as $field ) {
 					$meta_key = $field['meta_key'] ?? '';
 					if ( $meta_key ) {
-						$val = $meta[ $meta_key ] ?? array();
-						$specs['dynamic_fields'][ $meta_key ] = is_array($val) ? $val : ( $val !== '' ? array($val) : array() );
+						$val                                  = $meta[ $meta_key ] ?? array();
+						$specs['dynamic_fields'][ $meta_key ] = is_array( $val ) ? $val : ( $val !== '' ? array( $val ) : array() );
 					}
 				}
 			}
 		}
+
 		return $specs;
 	}
 
 	/**
 	 * Save job specifications data
 	 *
-	 * @param int $job_id     The job post ID (must already exist)
+	 * @param int   $job_id    The job post ID (must already exist)
 	 * @param array $post_data The form data (only specification fields are used)
 	 *
 	 * @return bool True on success, false on failure
@@ -235,19 +248,24 @@ class Job_Form_Submission {
 	 */
 	public function save_job_specifications( int $job_id, array $post_data ): bool {
 		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
-		if ( ! is_array( $meta ) ) $meta = array();
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
 		if ( function_exists( 'jobus_opt' ) ) {
 			$fields = jobus_opt( 'job_specifications' );
 			if ( ! empty( $fields ) ) {
 				foreach ( $fields as $field ) {
 					$meta_key = $field['meta_key'] ?? '';
 					if ( $meta_key && isset( $post_data[ $meta_key ] ) ) {
-						$val = $post_data[ $meta_key ];
-						$meta[ $meta_key ] = is_array( $val ) ? array_map( 'sanitize_text_field', wp_unslash( $val ) ) : ( $val !== '' ? array( sanitize_text_field( wp_unslash( $val ) ) ) : array() );
+						$val               = $post_data[ $meta_key ];
+						$meta[ $meta_key ] = is_array( $val )
+							? array_map( 'sanitize_text_field', wp_unslash( $val ) )
+							: ( $val !== '' ? array( sanitize_text_field( wp_unslash( $val ) ) ) : array() );
 					}
 				}
 			}
 		}
+
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
 	}
 
@@ -255,41 +273,46 @@ class Job_Form_Submission {
 	 * Get company website data
 	 *
 	 * @param int $job_id
+	 *
 	 * @return array
 	 */
 	public static function get_company_website( int $job_id ): array {
-		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
+		$meta    = get_post_meta( $job_id, 'jobus_meta_options', true );
 		$website = [
-			'url' => '',
-			'text' => '',
-			'target' => '_self',
+			'url'                => '',
+			'text'               => '',
+			'target'             => '_self',
 			'is_company_website' => 'default',
 		];
 		if ( isset( $meta['company_website'] ) && is_array( $meta['company_website'] ) ) {
-			$website['url'] = $meta['company_website']['url'] ?? '';
-			$website['text'] = $meta['company_website']['text'] ?? '';
+			$website['url']    = $meta['company_website']['url'] ?? '';
+			$website['text']   = $meta['company_website']['text'] ?? '';
 			$website['target'] = $meta['company_website']['target'] ?? '_self';
 		}
 		if ( isset( $meta['is_company_website'] ) ) {
 			$website['is_company_website'] = $meta['is_company_website'];
 		}
+
 		return $website;
 	}
 
 	/**
 	 * Save company website data
 	 *
-	 * @param int $job_id
+	 * @param int   $job_id
 	 * @param array $post_data
+	 *
 	 * @return bool
 	 */
 	public function save_company_website( int $job_id, array $post_data ): bool {
 		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
-		if ( ! is_array( $meta ) ) $meta = array();
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
 		if ( isset( $post_data['company_website'] ) && is_array( $post_data['company_website'] ) ) {
-			$website_data = array(
-				'url'   => isset( $post_data['company_website']['url'] ) ? esc_url_raw( $post_data['company_website']['url'] ) : '',
-				'text' => isset( $post_data['company_website']['text'] ) ? sanitize_text_field( wp_unslash( $post_data['company_website']['text'] ) ) : '',
+			$website_data            = array(
+				'url'    => isset( $post_data['company_website']['url'] ) ? esc_url_raw( $post_data['company_website']['url'] ) : '',
+				'text'   => isset( $post_data['company_website']['text'] ) ? sanitize_text_field( wp_unslash( $post_data['company_website']['text'] ) ) : '',
 				'target' => isset( $post_data['company_website']['target'] ) ? sanitize_text_field( $post_data['company_website']['target'] ) : '_self',
 			);
 			$meta['company_website'] = $website_data;
@@ -297,6 +320,7 @@ class Job_Form_Submission {
 		if ( isset( $post_data['is_company_website'] ) ) {
 			$meta['is_company_website'] = sanitize_text_field( $post_data['is_company_website'] );
 		}
+
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
 	}
 }

@@ -62,9 +62,14 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 * @access public
 		 */
 		private function __construct() {
+
+			if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+				require_once __DIR__ . '/vendor/autoload.php';
+			}
+
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			$this->define_constants(); // Define constants.
-			$this->core_includes(); //Include the required files.
+			//$this->core_includes(); //Include the required files.
 
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
@@ -130,11 +135,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 		public function init_plugin(): void {
 
 			// Classes
-			new \Jobus\includes\Classes\Ajax_Actions();
+			new \jobus\includes\Classes\Ajax_Actions();
 
 			// Submission Classes
 			new \jobus\includes\Classes\submission\Candidate_Form_Submission();
-			new \Jobus\includes\Classes\submission\Employer_Form_Submission();
+			new \jobus\includes\Classes\submission\Employer_Form_Submission();
 			new \jobus\includes\Classes\submission\Job_Form_Submission();
 			new \jobus\includes\Classes\submission\Password_Handler();
 
