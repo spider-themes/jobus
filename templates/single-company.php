@@ -18,6 +18,9 @@ $website_url    = $website['url'] ?? '';
 $website_text   = $website['title'] ?? '';
 $website_target = $website['target'] ?? '_self';
 $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_icons'] ) ? $meta['social_icons'] : '';
+
+$location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
+$cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
@@ -44,10 +47,10 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                         <div class="border-top mt-35 lg-mt-20 pt-25">
                             <ul class="job-meta-data row style-none">
                                 <?php
-                                if ( function_exists( 'jobus_get_first_taxonomy_name' ) ) { ?>
+                                if ( ! empty( $location ) ) { ?>
                                     <li>
                                         <span><?php esc_html_e( 'Location: ', 'jobus' ); ?></span>
-                                        <div><?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_company_location' ) ) ?></div>
+                                        <div><?php echo esc_html( $location ) ?></div>
                                     </li>
                                     <?php
                                 }
@@ -98,8 +101,6 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                                     }
 
                                 }
-
-                                $cats = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
                                 if ( is_array( $cats ) ) {
                                     ?>
                                     <li>
@@ -172,7 +173,8 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
 
                         $testimonials      = get_post_meta( get_the_ID(), 'company_testimonials', true );
                         $testimonial_title = get_post_meta( get_the_ID(), 'company_testimonial_title', true );
-                        if ( is_array( $testimonials ) && count( $testimonials ) > 0 ) {
+
+                        if ( ! empty( $testimonials ) && ! empty( $testimonial_title ) ) {
                             ?>
                             <div class="position-relative">
                                 <h3><?php echo esc_html( $testimonial_title ); ?></h3>
@@ -182,12 +184,9 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                                         $author_name    = ! empty( $testimonial['author_name'] ) ? $testimonial['author_name'] : '';
                                         $location       = ! empty( $testimonial['location'] ) ? $testimonial['location'] : '';
                                         $review_content = ! empty( $testimonial['review_content'] ) ? $testimonial['review_content'] : '';
-                                        $rating         = isset( $testimonial['rating'] ) && is_numeric( $testimonial['rating'] )
-                                                ? floatval( $testimonial['rating'] ) : false;
+                                        $rating         = isset( $testimonial['rating'] ) && is_numeric( $testimonial['rating'] ) ? floatval( $testimonial['rating'] ) : false;
                                         $author_img_id  = ! empty( $testimonial['image'] ) ? $testimonial['image'] : '';
-                                        $author_img_url = $author_img_id
-                                                ? wp_get_attachment_url( $author_img_id )
-                                                : get_template_directory_uri() . '/images/assets/img_14.jpg';
+                                        $author_img_url = $author_img_id ? wp_get_attachment_url( $author_img_id ) : get_template_directory_uri() . '/images/assets/img_14.jpg';
                                         ?>
                                         <div class="item">
                                             <div class="feedback-block-four">
@@ -209,8 +208,9 @@ $social_icons   = ! empty( $meta['social_icons'] ) && is_array( $meta['social_ic
                                                             }
                                                             ?>
                                                         </ul>
-                                                        <div class="review-score"><span class="fw-500 text-dark"><?php echo esc_html( number_format( $rating,
-                                                                        1 ) ); ?></span> out of 5
+                                                        <div class="review-score">
+                                                            <span class="fw-500 text-dark"><?php echo esc_html( number_format( $rating, 1 ) ); ?></span>
+                                                            <?php esc_html_e('out of 5', 'jobus'); ?>
                                                         </div>
                                                     <?php endif; ?>
                                                 </div>

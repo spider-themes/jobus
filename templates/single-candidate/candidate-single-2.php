@@ -389,10 +389,10 @@ wp_enqueue_script( 'lightbox' );
                     <div class="email-form bg-wrapper bg-color">
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
 
-                        <form action="javascript:void(0)" name="candidate_email_from" id="candidate_email_from" method="post">
+                        <form action="javascript:void(0)" name="candidate_email_from" id="candidate-email-from" method="post">
 
 							<?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
-                            <input type="hidden" id="candidate_id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
+                            <input type="hidden" id="candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 
                             <div class="d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
@@ -407,7 +407,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="d-sm-flex mb-25 xs-mb-10">
-                                <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>"></textarea>
+                                <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 
                             <div class="d-sm-flex">

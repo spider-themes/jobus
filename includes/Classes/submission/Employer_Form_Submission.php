@@ -57,11 +57,11 @@ class Employer_Form_Submission {
 	/**
 	 * Get company post ID for a user
 	 *
-	 * @param int|null $user_id User ID (optional, will use current user if not provided)
+	 * @param $user_id (optional, will use current user if not provided)
 	 *
 	 * @return int|false Company ID or false if not found
 	 */
-	public static function get_company_id( int $user_id = null ) {
+	public static function get_company_id( $user_id = null ) {
 
 		if ( null === $user_id ) {
 			$user_id = get_current_user_id();
@@ -153,12 +153,14 @@ class Employer_Form_Submission {
 		if ( isset( $post_data['company_delete_profile_picture'] ) && $post_data['company_delete_profile_picture'] === '1' ) {
 			delete_user_meta( $user_id, 'company_profile_picture' );
 			delete_post_thumbnail( $company_id );
+			$this->sync_user_avatar($user_id, null);
 			clean_post_cache( $company_id );
 			wp_cache_delete( $company_id, 'posts' );
 		} elseif ( ! empty( $post_data['company_profile_picture'] ) ) {
 			$image_id = absint( $post_data['company_profile_picture'] );
 			update_user_meta( $user_id, 'company_profile_picture', $image_id );
 			set_post_thumbnail( $company_id, $image_id );
+			$this->sync_user_avatar($user_id, $image_id);
 			clean_post_cache( $company_id );
 			wp_cache_delete( $company_id, 'posts' );
 		}
@@ -445,6 +447,24 @@ class Employer_Form_Submission {
 				);
 			}
 			update_post_meta( $company_id, 'company_testimonials', $sanitized );
+		}
+	}
+
+
+	/**
+	 * Sync user avatar with user meta for sidebar and other locations
+	 *
+	 * @param int             $user_id
+	 * @param int|string|null $profile_picture_id Attachment ID or empty/null
+	 */
+	public static function sync_user_avatar( int $user_id, $profile_picture_id) {
+		if ( $profile_picture_id ) {
+			$avatar_url = wp_get_attachment_url($profile_picture_id);
+			if ($avatar_url) {
+				update_user_meta($user_id, 'jobus_avatar', $avatar_url);
+			}
+		} else {
+			delete_user_meta($user_id, 'jobus_avatar');
 		}
 	}
 

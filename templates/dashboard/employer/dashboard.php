@@ -29,15 +29,18 @@ $employers = get_posts( [
 ] );
 $employer_id = ! empty( $employers ) ? $employers[0] : 0;
 
-// Get jobs data
-$jobs = get_posts( [
-	'post_type'      => 'jobus_job',
-	'author'         => $user->ID,
-	'posts_per_page' => -1,
-	'fields'         => 'ids',
-] );
+// Get total jobs posted by employer
+$jobs = get_posts([
+    'post_type'      => 'jobus_job',
+    'author'         => $user->ID,
+    'post_status'    => 'publish',
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+    'fields'         => 'ids',
+    'posts_per_page' => -1,
+]);
 
-$total_jobs = count( $jobs ) > 0 ? count( $jobs ) : 0;
+$total_jobs = count($jobs) ? count($jobs) : 0;
 
 // Calculate total job views for all jobs posted by employer
 $total_job_views = 0;
@@ -184,7 +187,10 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
                 <h4 class="dash-title-two"><?php esc_html_e( 'Posted Job', 'jobus' ); ?></h4>
                 <div class="wrapper">
                     <?php
-                    foreach ( $jobs as $job ) {
+                    // For recent-job-tab, get the latest 4 jobs from $jobs
+                    $latest_jobs = array_slice($jobs, 0, 4);
+
+                    foreach ( $latest_jobs as $job ) {
                         $job_cat      = get_the_terms( $job, 'jobus_job_cat' );
                         $job_location = get_the_terms( $job, 'jobus_job_location' );
                         ?>

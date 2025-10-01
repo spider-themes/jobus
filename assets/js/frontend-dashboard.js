@@ -20,6 +20,7 @@
 
     const JobusCandidateDashboard = {
         init: function () {
+
             // Unified logic for both company and candidate profile image upload
             if ($('#company-profile-form').length) {
                 this.initProfilePictureUpload({
@@ -29,6 +30,17 @@
                     deleteBtnSelector: '#company-delete-profile-picture',
                     actionSelector: '#company-profile-picture-temp',
                     formSelector: '#company-profile-form'
+                });
+
+                // Init company video bg image upload
+                this.initVideoBgImageUpload({
+                    uploadBtnSelector: '#company-video-bg-img-upload-btn',
+                    previewSelector: '#company-bg-img-preview',
+                    previewFilenameSelector: '#company-video-bg-image-uploaded-filename',
+                    uploadBtnWrapperSelector: '#company-bg-img-upload-btn-wrapper',
+                    imgIdInputSelector: '#company-video-bg-img',
+                    actionInputSelector: '#company-video-bg-img-action',
+                    removeBtnSelector: '#company-remove-uploaded-bg-img'
                 });
             }
             if ($('#candidate-profile-form').length) {
@@ -42,8 +54,20 @@
                 });
             }
 
+            // Init candidate resume video bg image upload
+            if ($('#candidate-resume-form').length) {
+                this.initVideoBgImageUpload({
+                    uploadBtnSelector: '#candidate-video-bg-img-upload-btn',
+                    previewSelector: '#candidate-bg-img-preview',
+                    previewFilenameSelector: '#candidate-video-bg-image-uploaded-filename',
+                    uploadBtnWrapperSelector: '#candidate-bg-img-upload-btn-wrapper',
+                    imgIdInputSelector: '#candidate-video-bg-img',
+                    actionInputSelector: '#candidate-video-bg-img-action',
+                    removeBtnSelector: '#candidate-remove-uploaded-bg-img'
+                });
+            }
+
             this.SocialIcon();
-            this.VideoBgImage();
             this.UserPassword();
             this.checkPasswordRedirect();
         },
@@ -219,53 +243,81 @@
         },
 
         /**
-         * Handles background image selection using the WordPress media uploader.
+         * Handles background image selection using the WordPress media uploader for candidate/employer.
          * Allows users to select an image from the media library and set it as background.
          *
-         * @function VideoBgImage
+         * @function initVideoBgImageUpload
+         * @param {Object} config
+         * @param {string} config.uploadBtnSelector
+         * @param {string} config.previewSelector
+         * @param {string} config.previewFilenameSelector
+         * @param {string} config.uploadBtnWrapperSelector
+         * @param {string} config.imgIdInputSelector
+         * @param {string} config.actionInputSelector
+         * @param {string} config.removeBtnSelector
          * @returns {void}
          */
-        VideoBgImage: function () {
-            const uploadBtn = $('#video-bg-img-upload-btn');
-            const preview = $('#bg-img-preview');
-            const previewFilename = $('#video-bg-image-uploaded-filename');
-            const uploadBtnWrapper = $('#bg-img-upload-btn-wrapper');
-            const imgIdInput = $('#video-bg-img');
-            const actionInput = $('#video-bg-img-action');
-            const removeBtn = $('#remove-uploaded-bg-img');
+        initVideoBgImageUpload: function (config) {
 
-            if (!window.wp || !window.wp.media) return;
+            const $uploadBtn = $(config.uploadBtnSelector);
+            const $preview = $(config.previewSelector);
+            const $previewFilename = $(config.previewFilenameSelector);
+            const $uploadBtnWrapper = $(config.uploadBtnWrapperSelector);
+            const $imgIdInput = $(config.imgIdInputSelector);
+            const $actionInput = $(config.actionInputSelector);
+            const $removeBtn = $(config.removeBtnSelector);
 
-            // Handle remove button click
-            removeBtn.on('click', function(e) {
+            if (!$uploadBtn.length) {
+                return;
+            }
+
+            const params = (typeof window.jobus_dashboard_params !== 'undefined' && window.jobus_dashboard_params)
+                || (typeof window.jobus_frontend_dashboard_params !== 'undefined' && window.jobus_frontend_dashboard_params)
+                || {};
+            const texts = (params && params.texts) ? params.texts : {};
+
+            // Remove handler
+            $removeBtn.on('click', function(e) {
                 e.preventDefault();
-                actionInput.val('delete');
-                imgIdInput.val('');
-                previewFilename.text('');
-                preview.addClass('hidden');
-                uploadBtnWrapper.removeClass('hidden');
+                $actionInput.val('delete');
+                $imgIdInput.val('');
+                $previewFilename.text('');
+                $preview.addClass('hidden');
+                $uploadBtnWrapper.removeClass('hidden');
             });
 
-            // Handle WordPress media uploader
-            uploadBtn.on('click', function(e) {
+            // Upload handler
+            $uploadBtn.on('click', function(e) {
                 e.preventDefault();
+
+                if (typeof wp === 'undefined' || typeof wp.media === 'undefined') {
+                    return;
+                }
+
                 const mediaUploader = wp.media({
-                    title: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_upload_title || 'Select Background Image',
-                    button: {
-                        text: jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.bg_select_text || 'Use this image'
-                    },
+                    title: texts.bg_upload_title || 'Select Background Image',
+                    button: { text: texts.bg_select_text || 'Use this image' },
                     multiple: false,
-                    library: {
-                        type: 'image'
-                    }
+                    library: { type: 'image' }
                 });
+
                 mediaUploader.on('select', function() {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    actionInput.val('upload');
-                    imgIdInput.val(attachment.id); // FIXED: use correct field
-                    previewFilename.text(attachment.url);
-                    preview.removeClass('hidden');
-                    uploadBtnWrapper.addClass('hidden');
+                    $actionInput.val('upload');
+                    $imgIdInput.val(attachment.id);
+
+                    let displayText = attachment.url || attachment.filename || 'Selected Image';
+                    if (attachment.url && attachment.url.indexOf('http') === 0) {
+                        displayText = attachment.url;
+                    } else if (attachment.filename) {
+                        displayText = attachment.filename;
+                    } else {
+                        displayText = 'Image ID: ' + attachment.id;
+                    }
+
+                    $previewFilename.text(displayText);
+                    $preview.removeClass('hidden');
+                    $uploadBtnWrapper.addClass('hidden');
                 });
                 mediaUploader.open();
             });
@@ -280,9 +332,9 @@
          */
         UserPassword:function () {
             const $form = $('#user-password-form');
-            const $currentPassword = $('#current_password');
-            const $newPassword = $('#new_password');
-            const $confirmPassword = $('#confirm_password');
+            const $currentPassword = $('#current-password');
+            const $newPassword = $('#new-password');
+            const $confirmPassword = $('#confirm-password');
             const $passwordStrength = $('#password-strength');
             const $passwordMatchStatus = $('#password-match-status');
 
@@ -336,6 +388,7 @@
 
             // Show/hide password toggle
             $form.find('.passVicon').on('click', function() {
+                $(this).toggleClass("eye-slash");
                 const $input = $(this).closest('.dash-input-wrapper').find('input');
                 const type = $input.attr('type') === 'password' ? 'text' : 'password';
                 $input.attr('type', type);

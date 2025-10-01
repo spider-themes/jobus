@@ -189,45 +189,49 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
             <div class="recent-job-tab bg-white border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                 <div class="wrapper">
-					<?php
-					foreach ( $applicants as $applicant ) {
-						$job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
-						$job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
-						$job_location = get_the_terms( $job_id, 'jobus_job_location' );
-						?>
-                        <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
-                            <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
-                            <div class="job-title">
-                                <h6 class="mb-5">
-                                    <a href="<?php echo esc_url( get_the_permalink( $job_id ) ); ?>">
-										<?php echo esc_html( get_the_title( $job_id ) ); ?>
-                                    </a>
-                                </h6>
-                                <div class="meta">
-									<?php
-									if ( $job_cat ) { ?>
-                                        <a href="<?php echo esc_url( get_term_link( $job_cat[0] ) ) ?>">
-                                            <span>
-                                            <?php echo esc_html( $job_cat[0]->name ); ?>
-                                        </span>
+                    <?php
+                    if ( ! empty( $applicants ) ) {
+                        foreach ( $applicants as $applicant ) {
+                            $job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
+                            $job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
+                            $job_location = get_the_terms( $job_id, 'jobus_job_location' );
+                            ?>
+                            <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
+                                <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
+                                <div class="job-title">
+                                    <h6 class="mb-5">
+                                        <a href="<?php echo esc_url( get_the_permalink( $job_id ) ); ?>">
+                                            <?php echo esc_html( get_the_title( $job_id ) ); ?>
                                         </a>
-										<?php
-									}
-									if ( $job_location ) { ?>
-                                        <a href="<?php echo esc_url( get_term_link( $job_location[0] ) ) ?>">
-                                            . <span>
-                                            <?php echo esc_html( $job_location[0]->name ); ?>
-                                        </span>
-                                        </a>
-										<?php
-									}
-									?>
+                                    </h6>
+                                    <div class="meta">
+                                        <?php
+                                        if ( $job_cat ) { ?>
+                                            <a href="<?php echo esc_url( get_term_link( $job_cat[0] ) ) ?>">
+                                                <span>
+                                                <?php echo esc_html( $job_cat[0]->name ); ?>
+                                            </span>
+                                            </a>
+                                            <?php
+                                        }
+                                        if ( $job_location ) { ?>
+                                            <a href="<?php echo esc_url( get_term_link( $job_location[0] ) ) ?>">
+                                                . <span>
+                                                <?php echo esc_html( $job_location[0]->name ); ?>
+                                            </span>
+                                            </a>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-						<?php
-					}
-					?>
+                            <?php
+                        }
+                    } else {
+                        echo '<div class="no-jobs-message">' . esc_html__( 'No recent job applications found.', 'jobus' ) . '</div>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

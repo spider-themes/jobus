@@ -33,7 +33,7 @@ $avatar_url = $description_data['avatar_url'];
 <div class="position-relative">
     <h2 class="main-title"><?php esc_html_e('My Profile', 'jobus'); ?></h2>
 
-    <form action="#" id="candidate-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
+    <form action="" id="candidate-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
         <?php wp_nonce_field('candidate_profile_update', 'candidate_profile_nonce'); ?>
         <input type="hidden" name="candidate_profile_form_submit" value="1" />

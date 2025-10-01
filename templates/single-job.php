@@ -28,7 +28,6 @@ get_footer();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <div class="container">
                     <?php
                     $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten text-white';
@@ -44,7 +43,6 @@ get_footer();
                     $candidate_lname = get_user_meta( $user->ID, 'last_name', true ) ?: '';
                     $candidate_email = $user->user_email;
                     ?>
-
                     <form action="#" name="job_application_form" class="job-application-form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
                         <div class="row g-4">
 

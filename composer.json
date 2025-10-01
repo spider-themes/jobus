@@ -1,0 +1,32 @@
+{
+  "name": "arifrahmanbb/jobus",
+  "description": "Jobus is a WordPress Plugin for project dependency management.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "arifrahmanbb",
+      "email": "arifbb79@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "jobus\\": [
+        ".",
+        "Admin/",
+        "includes/Classes/",
+        "includes/Elementor/",
+        "includes/Frontend/"
+      ]
+    },
+    "files": [
+      "includes/functions.php",
+      "includes/filters.php"
+    ]
+  },
+  "require": {
+    "php": ">=7.4"
+  }
+}

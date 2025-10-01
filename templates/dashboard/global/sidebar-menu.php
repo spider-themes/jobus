@@ -59,7 +59,14 @@ $logo = jobus_opt( 'dashboard_logo' );
 
     <div class="user-data">
         <div class="user-avatar online position-relative rounded-circle">
-            <?php echo get_avatar( $user->user_email, 75, '', $user->display_name, [ 'class' => 'lazy-img' ] ); ?>
+            <?php
+            $user_avatar = get_user_meta($user->ID, 'jobus_avatar', true);
+            if ($user_avatar && filter_var($user_avatar, FILTER_VALIDATE_URL)) {
+                echo '<img src="' . esc_url($user_avatar) . '" alt="' . esc_attr($user->display_name) . '" class="lazy-img user-avatar-img" width="75" height="75">';
+            } else {
+                echo get_avatar($user->user_email, 75, '', $user->display_name, [ 'class' => 'lazy-img user-avatar-img' ]);
+            }
+            ?>
         </div>
         <div class="user-name-data">
             <button class="user-name dropdown-toggle" type="button" id="profile-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside"
