@@ -3,7 +3,7 @@
  * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
- * Version: 0.1.2
+ * Version: 1.0.0
  * Requires at least: 6.0
  * Tested up to: 6.8
  * Requires PHP: 7.4
@@ -17,15 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'jbus_fs' ) ) {
+if ( ! function_exists( 'jobus_fs' ) ) {
 	// Create a helper function for easy SDK access.
-	function jbus_fs() {
-		global $jbus_fs;
+	function jobus_fs() {
+		global $jobus_fs;
 
-		if ( ! isset( $jbus_fs ) ) {
+		if ( ! isset( $jobus_fs ) ) {
 			// Include Freemius SDK.
 			require_once dirname( __FILE__ ) . '/vendor/fs/start.php';
-			$jbus_fs = fs_dynamic_init( array(
+			$jobus_fs = fs_dynamic_init( array(
 				'id'                  => '20775',
 				'slug'                => 'jobus',
 				'premium_slug'        => 'pro',
@@ -52,13 +52,13 @@ if ( ! function_exists( 'jbus_fs' ) ) {
 			) );
 		}
 
-		return $jbus_fs;
+		return $jobus_fs;
 	}
 
 	// Init Freemius.
-	jbus_fs();
+	jobus_fs();
 	// Signal that SDK was initiated.
-	do_action( 'jbus_fs_loaded' );
+	do_action( 'jobus_fs_loaded' );
 }
 
 // Make sure the same class is not loaded.
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 		 *
 		 * @var string The plugin version.
 		 */
-		const VERSION = '0.1.1';
+		const VERSION = '1.0.0';
 
 		/**
 		 * The plugin path
@@ -113,7 +113,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			$this->define_constants(); // Define constants.
-			//$this->core_includes(); //Include the required files.
 
 			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 			add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
@@ -129,46 +128,6 @@ if ( ! class_exists( 'Jobus' ) ) {
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-company.php';
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-candidate.php';
 			require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
-		}
-
-		/**
-		 * Include Files
-		 *
-		 * Load core files required to run the plugin.
-		 */
-		public function core_includes(): void {
-			// Functions
-			require_once __DIR__ . '/includes/functions.php';
-			require_once __DIR__ . '/includes/filters.php';
-
-			//Classes
-			require_once __DIR__ . '/includes/Classes/Ajax_Actions.php';
-			require_once __DIR__ . '/includes/Classes/submission/Candidate_Form_Submission.php';
-			require_once __DIR__ . '/includes/Classes/submission/Employer_Form_Submission.php';
-			require_once __DIR__ . '/includes/Classes/submission/Job_Form_Submission.php';
-			require_once __DIR__ . '/includes/Classes/submission/Password_Handler.php';
-
-			// Frontend UI
-			require_once __DIR__ . '/includes/Frontend/Assets.php';
-			require_once __DIR__ . '/includes/Frontend/Shortcode.php';
-			require_once __DIR__ . '/includes/Frontend/Template_Loader.php';
-			require_once __DIR__ . '/includes/Frontend/Dashboard_Candidate.php';
-			require_once __DIR__ . '/includes/Frontend/Dashboard_Employer.php';
-			require_once __DIR__ . '/includes/Frontend/Dashboard_Helper.php';
-
-			//Admin UI
-			require_once __DIR__ . '/Admin/User.php';
-			require_once __DIR__ . '/Admin/Assets.php';
-
-			//Post Type
-			require_once __DIR__ . '/Admin/cpt/Job_Application.php';
-			require_once __DIR__ . '/Admin/cpt/Candidate.php';
-			require_once __DIR__ . '/Admin/cpt/Job.php';
-			require_once __DIR__ . '/Admin/cpt/Company.php';
-
-			//Elementor & Blocks
-			require_once __DIR__ . '/includes/Elementor/Register_Widgets.php';
-			require_once __DIR__ . '/Blocks.php';
 		}
 
 		/**

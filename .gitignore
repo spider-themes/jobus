@@ -1,1 +1,11 @@
+/.github
+/.specify
 /node_modules
+/specs
+/tests
+/auth.json
+/jest.config.js
+/phpcs.xml.dist
+/.vscode
+/.idea
+.DS_Store

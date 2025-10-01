@@ -32,8 +32,10 @@ CSF::createSection( $settings_prefix, array(
 				'2' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-2.png' ),
 				'3' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-3.png' ),
 			),
-			'default'  => '1'
+			'default'  => '1',
+			'class'    => 'jobus-pro-notice',
 		),
+
 	)
 ) );
 

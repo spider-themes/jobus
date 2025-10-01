@@ -40,6 +40,40 @@
             });
             
         });
+
+
+        // Disable last input (only in free)
+        if (!$('body').hasClass('jobus-premium')) {
+            $('.jobus-pro-notice ul li:last-child label input').prop('disabled', true);
+        }
+
+        // jobus pro notice
+        function jobus_pro_notice() {
+            if ( $('body').hasClass('valid') ) {
+                $('body:not(.jobus-premium) .jobus-pro-notice:not(div[class*="active-theme"])').on('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Opps...',
+                        html: 'This is a Premium feature. You need to <a href="admin.php?page=jobus-pricing"><strong class="upgrade-link">Upgrade&nbsp;&nbsp;➤</strong></a> to the Premium plan to use this feature',
+                        icon: "warning",
+                        buttons: [false, "Close"],
+                        dangerMode: true,
+                    })
+                })
+            } else {
+                $('body:not(.jobus-premium) .jobus-pro-notice').on('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Opps...',
+                        html: 'This is a PRO feature. You need to <a href="admin.php?page=jobus-pricing"><strong class="upgrade-link">Upgrade&nbsp;&nbsp;➤</strong></a> to the Premium Version to use this feature',
+                        icon: "warning",
+                        buttons: [false, "Close"],
+                        dangerMode: true
+                    })
+                })
+            }
+        }
+        jobus_pro_notice();
         
     });
 
