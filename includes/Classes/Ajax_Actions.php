@@ -1,11 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Ajax_Actions
+ * AJAX Actions Class
  *
  * Handles AJAX actions for the Jobus plugin.
  */

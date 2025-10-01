@@ -1,7 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 /**
  * User Management for Jobus Plugin
  *
@@ -11,7 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Jobus\Admin
  */
 
-// Use namespace to avoid conflict
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -1,11 +1,7 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 /**
  * Use namespace to avoid conflict
  */
-
 namespace jobus\includes\Elementor\widgets;
 
 use Elementor\Group_Control_Background;

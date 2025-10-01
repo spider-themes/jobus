@@ -1,7 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 /**
  * Template Dashboard
  *
@@ -9,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author  spider-themes
  */
 
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Frontend;
 
 use WP_User;

@@ -1,11 +1,16 @@
 <?php
-
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\includes\Classes\submission;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+ * Class to handle job form submissions (create/update job posts)
+ */
 class Job_Form_Submission {
 
 	/**
@@ -82,7 +87,7 @@ class Job_Form_Submission {
 	/**
 	 * Get the company ID associated with a user
 	 *
-	 * @param $user_id. If null, uses current user.
+	 * @param $user_id . If null, uses current user.
 	 *
 	 * @return int|false Company post ID or false if not found
 	 */

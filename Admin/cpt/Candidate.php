@@ -1,4 +1,7 @@
 <?php
+/**
+ * Use namespace to avoid conflict
+ */
 namespace jobus\Admin\cpt;
 
 if ( ! defined( 'ABSPATH' ) ) {
