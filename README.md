@@ -11,9 +11,9 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Build a modern job board, career portal, or recruitment platform in WordPress with ease. Jobus makes it simple to manage jobs, companies, and candidates—all with a professional look and intuitive workflow.
 
 == Description ==
-**Jobus** is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
+**Jobus** is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process—no coding required.
 
-### 🎥 Video Overview (Showcased free and premium features)
+### 🎥 Video Overview (Showcasing free and premium features)
 [youtube https://youtu.be/123]
 
 ## 🔗 Useful Links
@@ -26,7 +26,7 @@ Build a modern job board, career portal, or recruitment platform in WordPress wi
 
 ---
 
-### ⭐ Reasons to Choose Jobus
+### ⭐ Why Choose Jobus?
 Jobus is designed to make job board management effortless for both employers and candidates. With a modern interface, advanced search and filtering, and flexible layouts, Jobus helps you build a professional recruitment platform in minutes.
 
 - **Easy Setup:** Quickly create a job listing page for your organization.
@@ -34,74 +34,39 @@ Jobus is designed to make job board management effortless for both employers and
 - **Application Management:** View and manage job applications easily.
 - **Flexible Layouts:** Elegant, customizable layouts for all job board needs.
 - **Advanced Search & Filters:** Help job seekers find the right jobs fast.
-- **Job Listing Schema:** Optimized for Google and search engines.
+- **SEO-Optimized Listings:** Job listing schema for better search engine visibility.
 - **Sidebar Widgets:** Enhance your job board with useful widgets.
 
 ---
 
 ### 🆓 Free Features
-Jobus gives you everything you need to launch a professional job board for free. All essential features are included, so you can start hiring and managing candidates right away.
+Everything you need to launch a professional job board for free. All essential features are included, so you can start hiring and managing candidates right away.
 
 #### Core Job Board Features
 - Unlimited job listings
 - Frontend job submission for employers
-- Powerful search & filters for job seekers
+- Powerful search & filters for jobseekers
 - Responsive, mobile-friendly design
-- Post Taxonomy [categories & tags etc.]
+- Post taxonomy (categories, tags, etc.)
 - Company profiles for employers
 - Candidate profiles & specifications
-- Custom user roles Employer & Candidate
-- Multiple layout options for jobs, companies, and candidates
+- Custom user roles: Employer & Candidate
 - SEO-friendly job listings
 - Related jobs section
 - Social sharing for job posts & companies
 
 #### Application & Resume Management
-- Job application management (apply via job post)
-- Applicant tracking (view applicants per job)
+- Job application management (apply via job post or email)
 - Resume management (upload, edit, delete)
 - Job application history (view past applications)
-- Job application via email
-- Job application reminders & status updates
-
-#### Dashboard & User Experience
-- Employer dashboard (manage listings, applications etc.)
-- Candidate dashboard (manage resumes, applications etc.)
-- Custom account pages for employers and candidates
-- Profile management (update details, change password)
-- Password reset functionality
-- Saved jobs/bookmarking
-- Activity log (track user actions)
-- Featured job & company options (highlight listings)
+- Job application reminders & status updates *(coming soon)*
 
 #### Customization & Integrations
 - Customizable appearance from settings
-- Google Maps integration for job locations
+- Google Maps integration for candidate locations
 - Company reviews & ratings
 - Company social media links
 - Intro video for companies and candidates
-
----
-
-### 🚀 Pro Features
-Upgrade to Jobus Pro for advanced tools and premium enhancements to supercharge your job board.
-
-#### Advanced Management & Monetization
-- Application management dashboard
-- Premium job listings (highlight jobs)
-- Resume database for candidates
-- Advanced filters (salary, job type, location, etc.)
-- Application Tracking System (ATS)
-- Analytics & reporting (track job views & applications)
-- Job application filters (filter applications by status, date)
-- Featured jobs & companies
-- Shortlist or reject applications
-
-#### Customization & Widgets
-- Custom widgets & shortcodes
-- Pre-made templates & layouts for careers, jobs, and companies
-- Job listing schema (optimized for Google and search engines)
-- Sidebar widgets
 
 ---
 
@@ -112,6 +77,39 @@ This plugin offers five widgets:
 - Job Tabs
 - Job Listing
 - Search Form
+
+---
+
+### 🚀 Pro Features
+Upgrade to Jobus Pro for advanced tools and premium enhancements to supercharge your job board.
+
+#### Advanced Management Features
+- Application management dashboard
+- Favorite jobs/bookmarking
+- Advanced filters (salary, job type, location, etc.)
+- Application Tracking System (ATS)
+- Analytics & reporting (track job views & applications)
+- Featured jobs & companies
+- Multiple layout options for jobs, companies, and candidates
+- Applicant tracking (view applicants per job)
+- Assign company to job post
+- Multiple archive and detail layout options for jobs, candidates, and companies
+- Custom job application form (upload custom link, e.g., Google Form)
+- SMTP settings (custom email sending)
+- Frontend login page
+
+#### Dashboard & User Experience
+- Employer dashboard (manage listings, applications, etc.)
+- Candidate dashboard (manage resumes, applications, etc.)
+- Custom account pages for employers and candidates
+- Profile management (update details, change password)
+- Password reset functionality
+- Activity log (track user actions)
+- Featured job & company options (highlight listings)
+
+#### Customization & Widgets
+- Custom widgets & shortcodes
+- Pre-made templates & layouts for careers, jobs, and companies
 
 ---
 
@@ -142,3 +140,5 @@ Minimum Requirements
 ## 📝 Changelog
 = 1.0.0 =
 * Initial release
+
+---

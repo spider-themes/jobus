@@ -42,6 +42,7 @@ CSF::createSection($settings_prefix, array(
 		    'text_off'      => esc_html__('No', 'jobus'),
 		    'text_width'    => 80,
 		    'default'       => false,
+		    'class'         => 'jobus-pro-notice',
 	    ),
 
 	    array(

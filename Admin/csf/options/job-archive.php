@@ -35,7 +35,6 @@ CSF::createSection( $settings_prefix, array(
 			'default'  => '1',
 			'class'    => 'jobus-pro-notice',
 		),
-
 	)
 ) );
 

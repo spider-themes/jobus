@@ -17,6 +17,7 @@ CSF::createSection( $settings_prefix, array(
 			'default' => array(
 				'url' => JOBUS_IMG . '/dashboard/logo/logo.png',
 			),
+			'class'    => 'jobus-pro-notice',
 		),
 	)
 ) );
