@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-09-10 16:45+0600\n"
+"POT-Creation-Date: 2025-10-06 14:20+0600\n"
 "PO-Revision-Date: 2022-04-05 15:26+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: esc_html__;esc_attr__;esc_html_e;esc_attr_e;_e;__;_x\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -129,9 +129,9 @@ msgid "Candidate updated."
 msgstr ""
 
 #: Admin/cpt/Candidate.php:113 Admin/cpt/Company.php:116 Admin/cpt/Job.php:99
-#: templates/dashboard/candidate/resume.php:393
-#: templates/dashboard/employer/profile.php:124
-#: templates/dashboard/employer/submit-job.php:104
+#: templates/dashboard/candidate/resume.php:424
+#: templates/dashboard/employer/profile.php:155
+#: templates/dashboard/employer/submit-job.php:115
 #: templates/loop/classic-tax-wrapper-start.php:47
 #: templates/loop/topbar-tax-wrapper-start.php:9
 msgid "Categories"
@@ -139,16 +139,16 @@ msgstr ""
 
 #: Admin/cpt/Candidate.php:130 Admin/cpt/Company.php:133 Admin/cpt/Job.php:116
 #: Admin/csf/meta/meta-options-candidate.php:213
-#: Admin/csf/options/candidate-archive.php:166
-#: Admin/csf/options/company-archive.php:142
-#: Admin/csf/options/job-archive.php:158
+#: Admin/csf/options/candidate-archive.php:169
+#: Admin/csf/options/company-archive.php:145
+#: Admin/csf/options/job-archive.php:161
 #: includes/Elementor/widgets/Search_Form.php:180
 #: src/testimonials-item/edit.js:40
 #: templates/contents-candidate/contents/content-grid.php:110
 #: templates/contents-candidate/contents/content-list.php:98
-#: templates/dashboard/employer/profile.php:423
+#: templates/dashboard/employer/profile.php:453
 #: templates/dashboard/employer/saved-candidate.php:109
-#: templates/single-candidate/candidate-single-1.php:348
+#: templates/single-candidate/candidate-single-1.php:345
 #: templates/single-candidate/candidate-single-2.php:378
 #: templates/single-job/job-single-1.php:97
 msgid "Location"
@@ -159,7 +159,7 @@ msgid "Add New Location"
 msgstr ""
 
 #: Admin/cpt/Candidate.php:148
-#: templates/single-candidate/candidate-single-1.php:123
+#: templates/single-candidate/candidate-single-1.php:119
 #: templates/single-candidate/candidate-single-2.php:179
 msgid "Skills"
 msgstr ""
@@ -263,7 +263,7 @@ msgstr ""
 msgid "Add New Job"
 msgstr ""
 
-#: Admin/cpt/Job.php:37 templates/dashboard/employer/submit-job.php:23
+#: Admin/cpt/Job.php:37 templates/dashboard/employer/submit-job.php:29
 msgid "Edit Job"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Job updated."
 msgstr ""
 
-#: Admin/cpt/Job.php:133 templates/dashboard/employer/submit-job.php:158
+#: Admin/cpt/Job.php:133 templates/dashboard/employer/submit-job.php:169
 #: templates/loop/classic-tax-wrapper-start.php:53
 #: templates/loop/topbar-tax-wrapper-start.php:15
 msgid "Tags"
@@ -365,8 +365,8 @@ msgid "Applications"
 msgstr ""
 
 #: Admin/cpt/Job_Application.php:117
-#: templates/dashboard/employer/dashboard.php:90
-#: templates/dashboard/employer/dashboard.php:94
+#: templates/dashboard/employer/dashboard.php:93
+#: templates/dashboard/employer/dashboard.php:97
 msgid "Application"
 msgstr ""
 
@@ -389,7 +389,7 @@ msgstr ""
 #: Admin/cpt/Job_Application.php:148 Admin/cpt/Job_Application.php:190
 #: templates/contents-candidate/contents/content-grid.php:124
 #: templates/contents-candidate/contents/content-list.php:122
-#: templates/dashboard/global/sidebar-menu.php:73
+#: templates/dashboard/global/sidebar-menu.php:80
 msgid "View Profile"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 
 #: Admin/cpt/Job_Application.php:150
 #: templates/dashboard/candidate/job-applied.php:41
-#: templates/dashboard/employer/jobs.php:66
+#: templates/dashboard/employer/jobs.php:52
 msgid "Status"
 msgstr ""
 
@@ -413,14 +413,13 @@ msgid "N/A"
 msgstr ""
 
 #: Admin/cpt/Job_Application.php:208 Admin/csf/meta/meta-options-job.php:64
-#: Admin/csf/meta/meta-options-job.php:92
-#: Admin/templates/meta/applicant-status.php:12 includes/functions.php:234
-#: templates/dashboard/employer/submit-job.php:221 templates/loop/sortby.php:43
+#: Admin/csf/meta/meta-options-job.php:92 includes/functions.php:234
+#: templates/dashboard/employer/submit-job.php:232 templates/loop/sortby.php:43
 msgid "Default"
 msgstr ""
 
 #: Admin/cpt/Job_Application.php:209
-#: Admin/templates/meta/applicant-status.php:13
+#: Admin/templates/meta/applicant-status.php:14
 msgid "Pending"
 msgstr ""
 
@@ -429,7 +428,7 @@ msgid "Approved"
 msgstr ""
 
 #: Admin/cpt/Job_Application.php:211
-#: Admin/templates/meta/applicant-status.php:15
+#: Admin/templates/meta/applicant-status.php:16
 msgid "Rejected"
 msgstr ""
 
@@ -439,27 +438,27 @@ msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:21
 #: Admin/csf/meta/meta-options-company.php:20
-#: Admin/csf/meta/meta-options-job.php:21 Admin/csf/options/general.php:5
+#: Admin/csf/meta/meta-options-job.php:21 Admin/csf/options/general.php:9
 msgid "General"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:29
 #: Admin/csf/meta/meta-options-job.php:29
-#: Admin/csf/options/candidate-details.php:19
+#: Admin/csf/options/candidate-details.php:22
 msgid "Single Post Layout"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:35
 #: Admin/csf/meta/meta-options-job.php:35
-#: Admin/csf/options/candidate-archive.php:26
-#: Admin/csf/options/candidate-details.php:25
-#: Admin/csf/options/company-archive.php:26
-#: Admin/csf/options/job-archive.php:25 Admin/csf/options/job-details.php:25
+#: Admin/csf/options/candidate-archive.php:29
+#: Admin/csf/options/candidate-details.php:28
+#: Admin/csf/options/company-archive.php:29
+#: Admin/csf/options/job-archive.php:28 Admin/csf/options/job-details.php:28
 msgid "Choose Layout"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:36
-#: Admin/csf/options/candidate-details.php:26
+#: Admin/csf/options/candidate-details.php:29
 msgid "Select the preferred layout for your candidate post for this page."
 msgstr ""
 
@@ -477,19 +476,19 @@ msgid "Add or Upload Files"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:56 includes/Frontend/Assets.php:78
-#: templates/dashboard/candidate/profile.php:174
-#: templates/dashboard/candidate/profile.php:240
-#: templates/dashboard/candidate/resume.php:232
-#: templates/dashboard/candidate/resume.php:373
+#: templates/dashboard/candidate/profile.php:177
+#: templates/dashboard/candidate/profile.php:243
+#: templates/dashboard/candidate/resume.php:263
+#: templates/dashboard/candidate/resume.php:404
 #: templates/dashboard/candidate/saved-job.php:80
-#: templates/dashboard/employer/profile.php:315
-#: templates/dashboard/employer/profile.php:506
+#: templates/dashboard/employer/profile.php:346
+#: templates/dashboard/employer/profile.php:536
 #: templates/dashboard/employer/saved-candidate.php:125
 msgid "Remove"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:97
-#: templates/dashboard/candidate/profile.php:194
+#: templates/dashboard/candidate/profile.php:197
 msgid "Date of Birth (Age)"
 msgstr ""
 
@@ -510,7 +509,7 @@ msgid "Input the Candidate Mail Address"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:118
-#: templates/dashboard/candidate/profile.php:231
+#: templates/dashboard/candidate/profile.php:234
 msgid "Additional Specifications"
 msgstr ""
 
@@ -518,9 +517,9 @@ msgstr ""
 #: Admin/csf/meta/meta-options-candidate.php:144
 #: Admin/csf/meta/meta-options-company.php:77
 #: Admin/csf/meta/meta-options-job.php:149
-#: templates/dashboard/candidate/profile.php:190
-#: templates/dashboard/employer/profile.php:178
-#: templates/dashboard/employer/submit-job.php:185
+#: templates/dashboard/candidate/profile.php:193
+#: templates/dashboard/employer/profile.php:209
+#: templates/dashboard/employer/submit-job.php:196
 msgid "Specifications"
 msgstr ""
 
@@ -529,7 +528,7 @@ msgid "Customize and manage your candidate specifications"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:126
-#: templates/dashboard/candidate/profile.php:248
+#: templates/dashboard/candidate/profile.php:251
 msgid "Add Specification"
 msgstr ""
 
@@ -541,16 +540,16 @@ msgstr ""
 #: Admin/csf/meta/meta-options-candidate.php:353
 #: Admin/csf/meta/meta-options-candidate.php:411
 #: includes/Elementor/widgets/Search_Form.php:291
-#: templates/dashboard/candidate/profile.php:238
-#: templates/dashboard/candidate/resume.php:86
-#: templates/dashboard/candidate/resume.php:124
-#: templates/dashboard/candidate/resume.php:180
-#: templates/dashboard/candidate/resume.php:250
-#: templates/dashboard/candidate/resume.php:308
-#: templates/dashboard/candidate/resume.php:482
-#: templates/dashboard/employer/jobs.php:63
-#: templates/dashboard/employer/profile.php:332
-#: templates/dashboard/employer/profile.php:370
+#: templates/dashboard/candidate/profile.php:241
+#: templates/dashboard/candidate/resume.php:117
+#: templates/dashboard/candidate/resume.php:155
+#: templates/dashboard/candidate/resume.php:211
+#: templates/dashboard/candidate/resume.php:281
+#: templates/dashboard/candidate/resume.php:339
+#: templates/dashboard/candidate/resume.php:513
+#: templates/dashboard/employer/jobs.php:49
+#: templates/dashboard/employer/profile.php:363
+#: templates/dashboard/employer/profile.php:400
 msgid "Title"
 msgstr ""
 
@@ -559,7 +558,7 @@ msgid "Enter specification title"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:137
-#: templates/dashboard/candidate/profile.php:239
+#: templates/dashboard/candidate/profile.php:242
 msgid "Value"
 msgstr ""
 
@@ -586,16 +585,16 @@ msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:170
 #: Admin/csf/meta/meta-options-company.php:102
-#: Admin/csf/options/job-specifications.php:57
-#: templates/dashboard/candidate/profile.php:140
-#: templates/dashboard/employer/profile.php:279
+#: Admin/csf/options/job-specifications.php:60
+#: templates/dashboard/candidate/profile.php:143
+#: templates/dashboard/employer/profile.php:310
 msgid "Icon"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:176
 #: Admin/csf/meta/meta-options-company.php:108
-#: templates/dashboard/candidate/profile.php:161
-#: templates/dashboard/employer/profile.php:300
+#: templates/dashboard/candidate/profile.php:164
+#: templates/dashboard/employer/profile.php:331
 msgid "URL"
 msgstr ""
 
@@ -604,26 +603,26 @@ msgid "Contact Information"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:233
-#: templates/dashboard/candidate/resume.php:83
-#: templates/dashboard/employer/profile.php:329
+#: templates/dashboard/candidate/resume.php:114
+#: templates/dashboard/employer/profile.php:360
 msgid "Intro Video"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:241
-#: templates/dashboard/candidate/resume.php:88
-#: templates/dashboard/employer/profile.php:334
+#: templates/dashboard/candidate/resume.php:119
+#: templates/dashboard/employer/profile.php:365
 msgid "Intro"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:247
-#: templates/dashboard/candidate/resume.php:96
-#: templates/dashboard/employer/profile.php:342
+#: templates/dashboard/candidate/resume.php:127
+#: templates/dashboard/employer/profile.php:373
 msgid "Background Image"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:253 src/video-popup/edit.js:52
-#: templates/dashboard/candidate/resume.php:91
-#: templates/dashboard/employer/profile.php:337
+#: templates/dashboard/candidate/resume.php:122
+#: templates/dashboard/employer/profile.php:368
 msgid "Video URL"
 msgstr ""
 
@@ -634,9 +633,9 @@ msgstr ""
 #: Admin/csf/meta/meta-options-candidate.php:263
 #: Admin/csf/meta/meta-options-candidate.php:271
 #: Admin/csf/meta/meta-options-candidate.php:277
-#: templates/dashboard/candidate/resume.php:121
-#: templates/dashboard/candidate/resume.php:127
-#: templates/dashboard/candidate/resume.php:151
+#: templates/dashboard/candidate/resume.php:152
+#: templates/dashboard/candidate/resume.php:158
+#: templates/dashboard/candidate/resume.php:182
 msgid "Education"
 msgstr ""
 
@@ -651,8 +650,8 @@ msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:284
 #: Admin/csf/meta/meta-options-candidate.php:347
-#: templates/dashboard/candidate/resume.php:162
-#: templates/dashboard/candidate/resume.php:289
+#: templates/dashboard/candidate/resume.php:193
+#: templates/dashboard/candidate/resume.php:320
 msgid "Serial Number"
 msgstr ""
 
@@ -669,7 +668,7 @@ msgid "Bachelor Degree of Design"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:296
-#: templates/dashboard/candidate/resume.php:197
+#: templates/dashboard/candidate/resume.php:228
 msgid "Academy"
 msgstr ""
 
@@ -680,10 +679,10 @@ msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:302
 #: Admin/csf/meta/meta-options-candidate.php:382
-#: templates/dashboard/candidate/profile.php:57
-#: templates/dashboard/candidate/resume.php:215
-#: templates/dashboard/candidate/resume.php:355
-#: templates/dashboard/employer/profile.php:91
+#: templates/dashboard/candidate/profile.php:60
+#: templates/dashboard/candidate/resume.php:246
+#: templates/dashboard/candidate/resume.php:386
+#: templates/dashboard/employer/profile.php:122
 msgid "Description"
 msgstr ""
 
@@ -700,14 +699,14 @@ msgid "2012-16"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:326
-#: templates/dashboard/candidate/resume.php:248
-#: templates/dashboard/candidate/resume.php:278
+#: templates/dashboard/candidate/resume.php:279
+#: templates/dashboard/candidate/resume.php:309
 msgid "Experience"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-candidate.php:334
 #: Admin/csf/meta/meta-options-candidate.php:340
-#: templates/dashboard/candidate/resume.php:253
+#: templates/dashboard/candidate/resume.php:284
 msgid "Work Experience"
 msgstr ""
 
@@ -735,7 +734,7 @@ msgstr ""
 #: Admin/csf/meta/meta-options-candidate.php:404
 #: Admin/csf/meta/meta-options-candidate.php:412
 #: Admin/csf/meta/meta-options-candidate.php:418
-#: templates/dashboard/candidate/resume.php:480
+#: templates/dashboard/candidate/resume.php:511
 msgid "Portfolio"
 msgstr ""
 
@@ -764,13 +763,13 @@ msgid "Select Company"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-job.php:62
-#: templates/dashboard/employer/profile.php:208
-#: templates/dashboard/employer/submit-job.php:215
+#: templates/dashboard/employer/profile.php:239
+#: templates/dashboard/employer/submit-job.php:226
 msgid "Company Website"
 msgstr ""
 
 #: Admin/csf/meta/meta-options-job.php:65
-#: templates/dashboard/employer/submit-job.php:222
+#: templates/dashboard/employer/submit-job.php:233
 msgid "Custom"
 msgstr ""
 
@@ -802,7 +801,7 @@ msgstr ""
 msgid "icon"
 msgstr ""
 
-#: Admin/csf/meta/taxonomy.php:29 Admin/csf/options/job-specifications.php:58
+#: Admin/csf/meta/taxonomy.php:29 Admin/csf/options/job-specifications.php:61
 msgid "Image"
 msgstr ""
 
@@ -826,197 +825,197 @@ msgstr ""
 msgid "Hover Border Color"
 msgstr ""
 
-#: Admin/csf/options/backup.php:4 Admin/csf/options/backup.php:11
+#: Admin/csf/options/backup.php:7 Admin/csf/options/backup.php:14
 msgid "Backup"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:5
+#: Admin/csf/options/candidate-archive.php:8
 msgid "Candidate Archive Page"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:13
-#: Admin/csf/options/company-archive.php:13
-#: Admin/csf/options/job-archive.php:12
+#: Admin/csf/options/candidate-archive.php:16
+#: Admin/csf/options/company-archive.php:16
+#: Admin/csf/options/job-archive.php:15
 msgid "Page Layout"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:20
+#: Admin/csf/options/candidate-archive.php:23
 msgid "Candidate Page Layout"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:27
+#: Admin/csf/options/candidate-archive.php:30
 msgid "Select the preferred layout for your candidate page across the entire website."
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:38
-#: Admin/csf/options/company-archive.php:38
-msgid "Select Column"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:39
-msgid "Select the number of columns to display in the candidate grid layout."
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:41
 #: Admin/csf/options/company-archive.php:41
-#: includes/Elementor/widgets/Search_Form.php:161
-msgid "Two Column"
+msgid "Select Column"
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:42
-#: Admin/csf/options/company-archive.php:42
-#: includes/Elementor/widgets/Search_Form.php:162
-msgid "Three Column"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:43
-#: Admin/csf/options/company-archive.php:43
-#: includes/Elementor/widgets/Search_Form.php:163
-msgid "Four Column"
+msgid "Select the number of columns to display in the candidate grid layout."
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:44
 #: Admin/csf/options/company-archive.php:44
+#: includes/Elementor/widgets/Search_Form.php:161
+msgid "Two Column"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:45
+#: Admin/csf/options/company-archive.php:45
+#: includes/Elementor/widgets/Search_Form.php:162
+msgid "Three Column"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:46
+#: Admin/csf/options/company-archive.php:46
+#: includes/Elementor/widgets/Search_Form.php:163
+msgid "Four Column"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:47
+#: Admin/csf/options/company-archive.php:47
 #: includes/Elementor/widgets/Search_Form.php:165
 msgid "Six Column"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:55
-#: Admin/csf/options/company-archive.php:55
-#: Admin/csf/options/job-archive.php:40
+#: Admin/csf/options/candidate-archive.php:58
+#: Admin/csf/options/company-archive.php:58
+#: Admin/csf/options/job-archive.php:43
 msgid "Archive"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:62
+#: Admin/csf/options/candidate-archive.php:65
 msgid "Candidate Attributes"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:68
-#: Admin/csf/options/company-archive.php:68
-#: Admin/csf/options/job-archive.php:53
-msgid "Content Layout"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:70
-#: Admin/csf/options/company-archive.php:70
-#: Admin/csf/options/job-archive.php:56
-msgid "Grid"
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:71
 #: Admin/csf/options/company-archive.php:71
-#: Admin/csf/options/job-archive.php:55
+#: Admin/csf/options/job-archive.php:56
+msgid "Content Layout"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:73
+#: Admin/csf/options/company-archive.php:73
+#: Admin/csf/options/job-archive.php:59
+msgid "Grid"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:74
+#: Admin/csf/options/company-archive.php:74
+#: Admin/csf/options/job-archive.php:58
 msgid "List"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:79
-#: Admin/csf/options/company-archive.php:79
-#: Admin/csf/options/company-details.php:25
-#: Admin/csf/options/job-archive.php:64 Admin/csf/options/job-details.php:53
+#: Admin/csf/options/candidate-archive.php:82
+#: Admin/csf/options/company-archive.php:82
+#: Admin/csf/options/company-details.php:28
+#: Admin/csf/options/job-archive.php:67 Admin/csf/options/job-details.php:56
 #: includes/Elementor/widgets/Companies.php:161
 #: includes/Elementor/widgets/Job_Tabs.php:174
 #: includes/Elementor/widgets/Jobs.php:168
 msgid "Attribute 01"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:87
-#: Admin/csf/options/company-details.php:32
-#: Admin/csf/options/job-archive.php:72 Admin/csf/options/job-details.php:60
+#: Admin/csf/options/candidate-archive.php:90
+#: Admin/csf/options/company-details.php:35
+#: Admin/csf/options/job-archive.php:75 Admin/csf/options/job-details.php:63
 #: includes/Elementor/widgets/Job_Tabs.php:182
 #: includes/Elementor/widgets/Jobs.php:176
 msgid "Attribute 02"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:99
-#: Admin/csf/options/company-archive.php:90
-#: Admin/csf/options/job-archive.php:92
+#: Admin/csf/options/candidate-archive.php:102
+#: Admin/csf/options/company-archive.php:93
+#: Admin/csf/options/job-archive.php:95
 msgid "Sidebar"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:105
-#: Admin/csf/options/company-archive.php:96
-#: Admin/csf/options/job-archive.php:98
+#: Admin/csf/options/candidate-archive.php:108
+#: Admin/csf/options/company-archive.php:99
+#: Admin/csf/options/job-archive.php:101
 msgid "Search filter Widgets"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:112
-#: Admin/csf/options/company-archive.php:103
-#: Admin/csf/options/job-archive.php:105
+#: Admin/csf/options/candidate-archive.php:115
+#: Admin/csf/options/company-archive.php:106
+#: Admin/csf/options/job-archive.php:108
 msgid "Meta Widgets"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:113
-#: Admin/csf/options/company-archive.php:104
-#: Admin/csf/options/job-archive.php:106
+#: Admin/csf/options/candidate-archive.php:116
+#: Admin/csf/options/company-archive.php:107
+#: Admin/csf/options/job-archive.php:109
 msgid "Widgets based on the Job meta data. Choose the layout style for displaying widget options:"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:114
-#: Admin/csf/options/company-archive.php:105
-#: Admin/csf/options/job-archive.php:107
+#: Admin/csf/options/candidate-archive.php:117
+#: Admin/csf/options/company-archive.php:108
+#: Admin/csf/options/job-archive.php:110
 msgid "Add Widget"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:120
-#: Admin/csf/options/company-archive.php:111
-#: Admin/csf/options/job-archive.php:112
+#: Admin/csf/options/candidate-archive.php:123
+#: Admin/csf/options/company-archive.php:114
+#: Admin/csf/options/job-archive.php:115
 msgid "Widget"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:128
-#: Admin/csf/options/company-archive.php:119
-#: Admin/csf/options/job-archive.php:120
-msgid "Widget Layout"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:130
-#: Admin/csf/options/company-archive.php:121
-#: Admin/csf/options/job-archive.php:122
-msgid "Dropdown"
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:131
 #: Admin/csf/options/company-archive.php:122
 #: Admin/csf/options/job-archive.php:123
-msgid "Checkbox"
-msgstr ""
-
-#: Admin/csf/options/candidate-archive.php:132
-#: Admin/csf/options/company-archive.php:123
-#: Admin/csf/options/job-archive.php:124
-msgid "Text"
+msgid "Widget Layout"
 msgstr ""
 
 #: Admin/csf/options/candidate-archive.php:133
+#: Admin/csf/options/company-archive.php:124
 #: Admin/csf/options/job-archive.php:125
+msgid "Dropdown"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:134
+#: Admin/csf/options/company-archive.php:125
+#: Admin/csf/options/job-archive.php:126
+msgid "Checkbox"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:135
+#: Admin/csf/options/company-archive.php:126
+#: Admin/csf/options/job-archive.php:127
+msgid "Text"
+msgstr ""
+
+#: Admin/csf/options/candidate-archive.php:136
+#: Admin/csf/options/job-archive.php:128
 msgid "Range Slider"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:141
-#: Admin/csf/options/job-archive.php:133
+#: Admin/csf/options/candidate-archive.php:144
+#: Admin/csf/options/job-archive.php:136
 msgid "Range Suffix"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:142
-#: Admin/csf/options/job-archive.php:134
+#: Admin/csf/options/candidate-archive.php:145
+#: Admin/csf/options/job-archive.php:137
 msgid "USD"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:152
-#: Admin/csf/options/company-archive.php:135
-#: Admin/csf/options/job-archive.php:144
+#: Admin/csf/options/candidate-archive.php:155
+#: Admin/csf/options/company-archive.php:138
+#: Admin/csf/options/job-archive.php:147
 msgid "Taxonomy Widgets"
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:153
-#: Admin/csf/options/company-archive.php:136
-#: Admin/csf/options/job-archive.php:145
+#: Admin/csf/options/candidate-archive.php:156
+#: Admin/csf/options/company-archive.php:139
+#: Admin/csf/options/job-archive.php:148
 msgid "Drag and drop to sort the order of the widgets."
 msgstr ""
 
-#: Admin/csf/options/candidate-archive.php:159
-#: Admin/csf/options/company-archive.php:149
-#: Admin/csf/options/job-archive.php:151
+#: Admin/csf/options/candidate-archive.php:162
+#: Admin/csf/options/company-archive.php:152
+#: Admin/csf/options/job-archive.php:154
 #: includes/Elementor/widgets/Categories.php:110
 #: includes/Elementor/widgets/Companies.php:103
 #: includes/Elementor/widgets/Job_Tabs.php:98
@@ -1025,287 +1024,287 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: Admin/csf/options/candidate-details.php:5
+#: Admin/csf/options/candidate-details.php:8
 msgid "Candidate Details Page"
 msgstr ""
 
-#: Admin/csf/options/candidate-details.php:12
-#: Admin/csf/options/job-details.php:12
+#: Admin/csf/options/candidate-details.php:15
+#: Admin/csf/options/job-details.php:15
 msgid "Layout Preset"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:4
-#: Admin/csf/options/candidate-specifications.php:12
+#: Admin/csf/options/candidate-specifications.php:7
+#: Admin/csf/options/candidate-specifications.php:15
 msgid "Candidate Specifications"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:13
+#: Admin/csf/options/candidate-specifications.php:16
 msgid "Manage Candidate Specifications"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:19
-#: Admin/csf/options/company-specifications.php:19
-#: Admin/csf/options/job-specifications.php:19
+#: Admin/csf/options/candidate-specifications.php:22
+#: Admin/csf/options/company-specifications.php:22
+#: Admin/csf/options/job-specifications.php:22
 #: Admin/templates/meta/applicant-single.php:63
 msgid "Name"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:20
-#: Admin/csf/options/company-specifications.php:20
-#: Admin/csf/options/job-specifications.php:20
+#: Admin/csf/options/candidate-specifications.php:23
+#: Admin/csf/options/company-specifications.php:23
+#: Admin/csf/options/job-specifications.php:23
 msgid "Enter a specification"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:21
-#: Admin/csf/options/company-specifications.php:21
-#: Admin/csf/options/job-specifications.php:21
+#: Admin/csf/options/candidate-specifications.php:24
+#: Admin/csf/options/company-specifications.php:24
+#: Admin/csf/options/job-specifications.php:24
 msgid "Insert a unique name"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:30
-#: Admin/csf/options/company-specifications.php:30
-#: Admin/csf/options/job-specifications.php:30
+#: Admin/csf/options/candidate-specifications.php:33
+#: Admin/csf/options/company-specifications.php:33
+#: Admin/csf/options/job-specifications.php:33
 msgid "Key"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:31
-#: Admin/csf/options/company-specifications.php:31
-#: Admin/csf/options/job-specifications.php:31
+#: Admin/csf/options/candidate-specifications.php:34
+#: Admin/csf/options/company-specifications.php:34
+#: Admin/csf/options/job-specifications.php:34
 msgid "Specification key"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:32
-#: Admin/csf/options/company-specifications.php:32
-#: Admin/csf/options/job-specifications.php:32
+#: Admin/csf/options/candidate-specifications.php:35
+#: Admin/csf/options/company-specifications.php:35
+#: Admin/csf/options/job-specifications.php:35
 msgid "Insert a unique key"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:41
-#: Admin/csf/options/company-specifications.php:41
-#: Admin/csf/options/job-specifications.php:41
+#: Admin/csf/options/candidate-specifications.php:44
+#: Admin/csf/options/company-specifications.php:44
+#: Admin/csf/options/job-specifications.php:44
 msgid "Options"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:42
-#: Admin/csf/options/company-specifications.php:42
-#: Admin/csf/options/job-specifications.php:42
+#: Admin/csf/options/candidate-specifications.php:45
+#: Admin/csf/options/company-specifications.php:45
+#: Admin/csf/options/job-specifications.php:45
 msgid "Add Option"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:55
-#: Admin/csf/options/company-specifications.php:55
-#: Admin/csf/options/job-specifications.php:66
+#: Admin/csf/options/candidate-specifications.php:58
+#: Admin/csf/options/company-specifications.php:58
+#: Admin/csf/options/job-specifications.php:69
 msgid "Icon (Optional)"
 msgstr ""
 
-#: Admin/csf/options/candidate-specifications.php:56
-#: Admin/csf/options/company-specifications.php:56
-#: Admin/csf/options/job-specifications.php:67
+#: Admin/csf/options/candidate-specifications.php:59
+#: Admin/csf/options/company-specifications.php:59
+#: Admin/csf/options/job-specifications.php:70
 msgid "Select icon"
 msgstr ""
 
-#: Admin/csf/options/company-archive.php:5
+#: Admin/csf/options/company-archive.php:8
 msgid "Company Archive Page"
 msgstr ""
 
-#: Admin/csf/options/company-archive.php:20
+#: Admin/csf/options/company-archive.php:23
 msgid "Company Page Layout"
 msgstr ""
 
-#: Admin/csf/options/company-archive.php:27
+#: Admin/csf/options/company-archive.php:30
 msgid "Select the preferred layout for your company page across the entire website."
 msgstr ""
 
-#: Admin/csf/options/company-archive.php:39
+#: Admin/csf/options/company-archive.php:42
 msgid "Select the number of columns to display in the company grid layout."
 msgstr ""
 
-#: Admin/csf/options/company-archive.php:62
+#: Admin/csf/options/company-archive.php:65
 #: includes/Elementor/widgets/Companies.php:155
 msgid "Company Attributes"
 msgstr ""
 
-#: Admin/csf/options/company-details.php:5
+#: Admin/csf/options/company-details.php:8
 msgid "Company Details Page"
 msgstr ""
 
-#: Admin/csf/options/company-details.php:12
+#: Admin/csf/options/company-details.php:15
 msgid "Open Job Position"
 msgstr ""
 
-#: Admin/csf/options/company-details.php:19
-#: Admin/csf/options/job-archive.php:47 Admin/csf/options/job-details.php:47
+#: Admin/csf/options/company-details.php:22
+#: Admin/csf/options/job-archive.php:50 Admin/csf/options/job-details.php:50
 #: includes/Elementor/widgets/Job_Tabs.php:168
 #: includes/Elementor/widgets/Jobs.php:162
 msgid "Job Attributes"
 msgstr ""
 
-#: Admin/csf/options/company-specifications.php:4
-#: Admin/csf/options/company-specifications.php:12
+#: Admin/csf/options/company-specifications.php:7
+#: Admin/csf/options/company-specifications.php:15
 msgid "Company Specifications"
 msgstr ""
 
-#: Admin/csf/options/company-specifications.php:13
+#: Admin/csf/options/company-specifications.php:16
 msgid "Manage Company Specifications"
 msgstr ""
 
-#: Admin/csf/options/dashboard.php:5
+#: Admin/csf/options/dashboard.php:8
 #: includes/Frontend/Dashboard_Candidate.php:66
 #: includes/Frontend/Dashboard_Employer.php:66
-#: includes/Frontend/Shortcode.php:239
+#: includes/Frontend/Shortcode.php:236
 #: templates/dashboard/candidate/dashboard.php:54
-#: templates/dashboard/employer/dashboard.php:70
+#: templates/dashboard/employer/dashboard.php:73
 msgid "Dashboard"
 msgstr ""
 
-#: Admin/csf/options/dashboard.php:12
+#: Admin/csf/options/dashboard.php:15
 msgid "Logo"
 msgstr ""
 
-#: Admin/csf/options/dashboard.php:13
+#: Admin/csf/options/dashboard.php:16
 msgid "Upload an logo for the dashboard"
 msgstr ""
 
-#: Admin/csf/options/general.php:12
+#: Admin/csf/options/general.php:16
 msgid "Posts Per Page (Job)"
 msgstr ""
 
-#: Admin/csf/options/general.php:14
+#: Admin/csf/options/general.php:18
 msgid "Set the value to '-1' to display all job posts."
 msgstr ""
 
-#: Admin/csf/options/general.php:20
+#: Admin/csf/options/general.php:24
 msgid "Posts Per Page (Company)"
 msgstr ""
 
-#: Admin/csf/options/general.php:22
+#: Admin/csf/options/general.php:26
 msgid "Set the value to '-1' to display all company posts."
 msgstr ""
 
-#: Admin/csf/options/general.php:28
+#: Admin/csf/options/general.php:32
 msgid "Posts Per Page (Candidate)"
 msgstr ""
 
-#: Admin/csf/options/general.php:30
+#: Admin/csf/options/general.php:34
 msgid "Set the value to '-1' to display all candidate posts."
 msgstr ""
 
-#: Admin/csf/options/job-archive.php:5
+#: Admin/csf/options/job-archive.php:8
 msgid "Job Archive Page"
 msgstr ""
 
-#: Admin/csf/options/job-archive.php:19
+#: Admin/csf/options/job-archive.php:22
 msgid "Job Page Layout"
 msgstr ""
 
-#: Admin/csf/options/job-archive.php:26
+#: Admin/csf/options/job-archive.php:29
 msgid "Select the preferred layout for your job page across the entire website."
 msgstr ""
 
-#: Admin/csf/options/job-archive.php:80
+#: Admin/csf/options/job-archive.php:83
 msgid ""
 "\n"
 "                Attribute 03"
 msgstr ""
 
-#: Admin/csf/options/job-archive.php:165
+#: Admin/csf/options/job-archive.php:168
 msgid "Tag"
 msgstr ""
 
-#: Admin/csf/options/job-details.php:5
+#: Admin/csf/options/job-details.php:8
 msgid "Job Details Page"
 msgstr ""
 
-#: Admin/csf/options/job-details.php:19
+#: Admin/csf/options/job-details.php:22
 msgid "Job Details Layout"
 msgstr ""
 
-#: Admin/csf/options/job-details.php:26
+#: Admin/csf/options/job-details.php:29
 msgid "Select the preferred layout for your job details page across the entire website."
 msgstr ""
 
-#: Admin/csf/options/job-details.php:40
+#: Admin/csf/options/job-details.php:43
 msgid "Related Posts"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:4
-#: Admin/csf/options/job-specifications.php:12
+#: Admin/csf/options/job-specifications.php:7
+#: Admin/csf/options/job-specifications.php:15
 msgid "Job Specifications"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:13
+#: Admin/csf/options/job-specifications.php:16
 msgid "Manage Job Specifications"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:47
+#: Admin/csf/options/job-specifications.php:50
 msgid "Meta Value"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:55
+#: Admin/csf/options/job-specifications.php:58
 msgid "Meta Options (Icon/Image)"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:74
+#: Admin/csf/options/job-specifications.php:77
 msgid "Image (Optional)"
 msgstr ""
 
-#: Admin/csf/options/job-specifications.php:75
+#: Admin/csf/options/job-specifications.php:78
 msgid "Upload a Image"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:3
+#: Admin/csf/options/login-form.php:6
 msgid "Login From"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:11
+#: Admin/csf/options/login-form.php:14
 msgid "Signup Button Settings"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:17
+#: Admin/csf/options/login-form.php:20
 msgid "Signup Button Label"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:24
+#: Admin/csf/options/login-form.php:27
 msgid "Signup Button URL"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:31
+#: Admin/csf/options/login-form.php:34
 msgid "Login Redirect Settings"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:35
+#: Admin/csf/options/login-form.php:38
 msgid "Enable Custom Redirects"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:38
+#: Admin/csf/options/login-form.php:41
 msgid "Yes"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:39
+#: Admin/csf/options/login-form.php:42
 msgid "No"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:45
+#: Admin/csf/options/login-form.php:48
 msgid "Candidate Redirect Page"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:46
+#: Admin/csf/options/login-form.php:49
 msgid "Select the page candidates will be redirected to after login."
 msgstr ""
 
-#: Admin/csf/options/login-form.php:56
+#: Admin/csf/options/login-form.php:59
 msgid "Choose candidate dashboard page"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:61
+#: Admin/csf/options/login-form.php:64
 msgid "Employer Redirect Page"
 msgstr ""
 
-#: Admin/csf/options/login-form.php:62
+#: Admin/csf/options/login-form.php:65
 msgid "Select the page employers will be redirected to after login."
 msgstr ""
 
-#: Admin/csf/options/login-form.php:72
+#: Admin/csf/options/login-form.php:75
 msgid "Choose employer dashboard page"
 msgstr ""
 
@@ -1313,103 +1312,103 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:5
+#: Admin/csf/options/smtp.php:8
 msgid "SMTP Configuration"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:12
+#: Admin/csf/options/smtp.php:15
 msgid "SMTP Configuration: Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:19
+#: Admin/csf/options/smtp.php:22
 msgid "SMTP (On/OFF)"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:20
+#: Admin/csf/options/smtp.php:23
 msgid "Enable or disable the SMTP server for sending emails"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:27
+#: Admin/csf/options/smtp.php:30
 msgid "SMTP Host"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:28
+#: Admin/csf/options/smtp.php:31
 msgid "The SMTP server which will be used to send email. For example: smtp.gmail.com"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:35
+#: Admin/csf/options/smtp.php:38
 msgid "SMTP Authentication"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:36
+#: Admin/csf/options/smtp.php:39
 msgid "Whether to use SMTP Authentication when sending an email (recommended: True)."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:38
+#: Admin/csf/options/smtp.php:41
 msgid "True"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:39
+#: Admin/csf/options/smtp.php:42
 msgid "False"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:48
+#: Admin/csf/options/smtp.php:51
 msgid "SMTP Username"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:49
+#: Admin/csf/options/smtp.php:52
 msgid "Your SMTP Username."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:56
+#: Admin/csf/options/smtp.php:59
 msgid "SMTP Password"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:57
+#: Admin/csf/options/smtp.php:60
 msgid "Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options)."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:65
+#: Admin/csf/options/smtp.php:68
 msgid "Type of Encryption"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:66
+#: Admin/csf/options/smtp.php:69
 msgid "The encryption which will be used when sending an email (recommended: TLS)."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:68
+#: Admin/csf/options/smtp.php:71
 msgid "TLS"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:69
+#: Admin/csf/options/smtp.php:72
 msgid "SSL"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:70
+#: Admin/csf/options/smtp.php:73
 msgid "No Encryption"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:79
+#: Admin/csf/options/smtp.php:82
 msgid "SMTP Port"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:80
+#: Admin/csf/options/smtp.php:83
 msgid "The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:88
+#: Admin/csf/options/smtp.php:91
 msgid "From Email Address"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:89
+#: Admin/csf/options/smtp.php:92
 msgid "The email address which will be used as the From Address if it is not supplied to the mail function."
 msgstr ""
 
-#: Admin/csf/options/smtp.php:96
+#: Admin/csf/options/smtp.php:99
 msgid "From Name"
 msgstr ""
 
-#: Admin/csf/options/smtp.php:97
+#: Admin/csf/options/smtp.php:100
 msgid "The name which will be used as the From Name if it is not supplied to the mail function."
 msgstr ""
 
@@ -1417,7 +1416,7 @@ msgstr ""
 msgid "Download Resume"
 msgstr ""
 
-#: Admin/templates/meta/applicant-single.php:69 templates/single-job.php:74
+#: Admin/templates/meta/applicant-single.php:69 templates/single-job.php:72
 msgid "Phone"
 msgstr ""
 
@@ -1430,11 +1429,11 @@ msgstr ""
 msgid "Cover Letter"
 msgstr ""
 
-#: Admin/templates/meta/applicant-status.php:14
+#: Admin/templates/meta/applicant-status.php:15
 msgid "Approve"
 msgstr ""
 
-#: Admin/templates/meta/applicant-status.php:19
+#: Admin/templates/meta/applicant-status.php:20
 msgid "Update Status"
 msgstr ""
 
@@ -1507,7 +1506,8 @@ msgstr ""
 #: includes/Classes/submission/Candidate_Form_Submission.php:45
 #: includes/Classes/submission/Candidate_Form_Submission.php:50
 #: includes/Classes/submission/Employer_Form_Submission.php:46
-#: includes/Classes/submission/Job_Form_Submission.php:28
+#: includes/Classes/submission/Employer_Form_Submission.php:476
+#: includes/Classes/submission/Job_Form_Submission.php:29
 #: includes/Frontend/Dashboard_Helper.php:38
 #: includes/Frontend/Dashboard_Helper.php:74
 #: includes/Frontend/Dashboard_Helper.php:121
@@ -1516,7 +1516,7 @@ msgstr ""
 msgid "Security check failed."
 msgstr ""
 
-#: includes/Classes/submission/Candidate_Form_Submission.php:804
+#: includes/Classes/submission/Candidate_Form_Submission.php:877
 msgid "Candidate profile not found."
 msgstr ""
 
@@ -1524,29 +1524,49 @@ msgstr ""
 msgid "Access denied. You must be a employer to update this profile."
 msgstr ""
 
-#: includes/Classes/submission/Employer_Form_Submission.php:457
-#: includes/Classes/submission/Job_Form_Submission.php:48
+#: includes/Classes/submission/Employer_Form_Submission.php:498
+#: includes/Classes/submission/Job_Form_Submission.php:64
 msgid "Company profile not found."
 msgstr ""
 
-#: includes/Classes/submission/Job_Form_Submission.php:34
+#: includes/Classes/submission/Job_Form_Submission.php:35
 msgid "Access denied. You must be an employer to post a job."
 msgstr ""
 
-#: includes/Classes/submission/Job_Form_Submission.php:106
+#: includes/Classes/submission/Job_Form_Submission.php:124
 msgid "Job title is required."
 msgstr ""
 
-#: includes/Classes/submission/Job_Form_Submission.php:112
+#: includes/Classes/submission/Job_Form_Submission.php:130
 msgid "Invalid job post."
 msgstr ""
 
-#: includes/Classes/submission/Job_Form_Submission.php:115
+#: includes/Classes/submission/Job_Form_Submission.php:133
 msgid "You are not allowed to edit this job."
 msgstr ""
 
-#: includes/Classes/submission/Job_Form_Submission.php:131
+#: includes/Classes/submission/Job_Form_Submission.php:149
 msgid "Failed to create job post."
+msgstr ""
+
+#: includes/Classes/submission/Password_Handler.php:35
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/Classes/submission/Password_Handler.php:40
+msgid "Security verification failed. Please try again."
+msgstr ""
+
+#: includes/Classes/submission/Password_Handler.php:52
+msgid "Please fill out all password fields."
+msgstr ""
+
+#: includes/Classes/submission/Password_Handler.php:58
+msgid "New passwords do not match."
+msgstr ""
+
+#: includes/Classes/submission/Password_Handler.php:64
+msgid "Your current password is incorrect."
 msgstr ""
 
 #: includes/Elementor/widgets/Categories.php:30
@@ -1692,7 +1712,7 @@ msgstr ""
 
 #: includes/Elementor/widgets/Categories.php:320
 #: templates/dashboard/candidate/job-applied.php:39
-#: templates/dashboard/employer/submit-job.php:69
+#: templates/dashboard/employer/submit-job.php:80
 msgid "Job Title"
 msgstr ""
 
@@ -2019,7 +2039,7 @@ msgstr ""
 
 #: includes/Frontend/Dashboard_Candidate.php:67
 #: includes/Frontend/Dashboard_Employer.php:67
-#: templates/dashboard/candidate/profile.php:31
+#: templates/dashboard/candidate/profile.php:34
 msgid "My Profile"
 msgstr ""
 
@@ -2039,12 +2059,12 @@ msgstr ""
 
 #: includes/Frontend/Dashboard_Candidate.php:71
 #: includes/Frontend/Dashboard_Employer.php:71
-#: templates/dashboard/global/change-password.php:56
+#: templates/dashboard/global/change-password.php:38
 msgid "Change Password"
 msgstr ""
 
 #: includes/Frontend/Dashboard_Employer.php:68
-#: templates/dashboard/employer/jobs.php:55
+#: templates/dashboard/employer/jobs.php:41
 msgid "My Jobs"
 msgstr ""
 
@@ -2055,7 +2075,7 @@ msgstr ""
 #: includes/Frontend/Dashboard_Employer.php:70
 #: templates/contents-candidate/contents/content-grid.php:37
 #: templates/contents-candidate/contents/content-list.php:116
-#: templates/dashboard/employer/dashboard.php:133
+#: templates/dashboard/employer/dashboard.php:136
 #: templates/dashboard/employer/saved-candidate.php:36
 msgid "Saved Candidate"
 msgstr ""
@@ -2154,30 +2174,30 @@ msgstr ""
 msgid "Forget Password?"
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:227
+#: includes/Frontend/Shortcode.php:226
 #, php-format
 msgid "Welcome, %s!"
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:232
+#: includes/Frontend/Shortcode.php:229
 msgid "You are currently logged in to your account."
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:233
+#: includes/Frontend/Shortcode.php:230
 msgid "If you wish to log out, please click the button below."
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:236
-#: templates/dashboard/global/sidebar-menu.php:105
-#: templates/dashboard/global/sidebar-menu.php:106
+#: includes/Frontend/Shortcode.php:233
+#: templates/dashboard/global/sidebar-menu.php:112
+#: templates/dashboard/global/sidebar-menu.php:113
 msgid "Logout"
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:243
+#: includes/Frontend/Shortcode.php:240
 msgid "Or return to the"
 msgstr ""
 
-#: includes/Frontend/Shortcode.php:244 src/register-form/login.php:30
+#: includes/Frontend/Shortcode.php:241 src/register-form/login.php:30
 msgid "Homepage"
 msgstr ""
 
@@ -2269,23 +2289,22 @@ msgstr ""
 
 #: src/register-form/edit.js:104 src/register-form/edit.js:162
 #: src/register-form/register.php:46 src/register-form/register.php:108
-#: templates/single-candidate/candidate-single-1.php:366
+#: templates/single-candidate/candidate-single-1.php:363
 #: templates/single-candidate/candidate-single-2.php:398
 msgid "Name*"
 msgstr ""
 
 #: src/register-form/edit.js:117 src/register-form/edit.js:175
 #: src/register-form/register.php:53 src/register-form/register.php:115
-#: templates/dashboard/employer/profile.php:84
-#: templates/single-candidate/candidate-single-1.php:370
+#: templates/dashboard/employer/profile.php:115
+#: templates/single-candidate/candidate-single-1.php:367
 #: templates/single-candidate/candidate-single-2.php:402
-#: templates/single-job.php:68
+#: templates/single-job.php:66
 msgid "Email*"
 msgstr ""
 
 #: src/register-form/edit.js:142 src/register-form/edit.js:200
 #: src/register-form/register.php:72
-#: templates/dashboard/global/change-password.php:108
 msgid "Confirm Password*"
 msgstr ""
 
@@ -2310,9 +2329,9 @@ msgid "Or navigate to the website"
 msgstr ""
 
 #: src/register-form/login.php:84
-#: templates/dashboard/global/change-password.php:86
-#: templates/dashboard/global/change-password.php:98
-#: templates/dashboard/global/change-password.php:112
+#: templates/dashboard/global/change-password.php:68
+#: templates/dashboard/global/change-password.php:80
+#: templates/dashboard/global/change-password.php:92
 msgid "eye-icon"
 msgstr ""
 
@@ -2380,7 +2399,7 @@ msgid "Job Archive Layout"
 msgstr ""
 
 #: src/testimonials-item/edit.js:32
-#: templates/dashboard/employer/profile.php:407
+#: templates/dashboard/employer/profile.php:437
 msgid "Author Name"
 msgstr ""
 
@@ -2389,11 +2408,11 @@ msgid "Review Contents"
 msgstr ""
 
 #: src/testimonials-item/edit.js:56
-#: templates/dashboard/employer/profile.php:455
+#: templates/dashboard/employer/profile.php:485
 msgid "Rating"
 msgstr ""
 
-#: src/testimonials-item/save.js:19
+#: src/testimonials-item/save.js:19 templates/single-company.php:213
 msgid "out of 5"
 msgstr ""
 
@@ -2406,35 +2425,35 @@ msgid "Remove Image"
 msgstr ""
 
 #: templates/archive-company.php:76 templates/archive-job.php:181
-#: templates/taxonomy-company.php:49 templates/taxonomy-job.php:58
+#: templates/taxonomy-company.php:52 templates/taxonomy-job.php:58
 msgid "arrow-left"
 msgstr ""
 
 #: templates/archive-company.php:76 templates/archive-job.php:181
-#: templates/taxonomy-company.php:49 templates/taxonomy-job.php:59
+#: templates/taxonomy-company.php:52 templates/taxonomy-job.php:59
 msgid "Prev"
 msgstr ""
 
 #: templates/archive-company.php:77 templates/archive-job.php:182
-#: templates/taxonomy-company.php:50 templates/taxonomy-job.php:60
+#: templates/taxonomy-company.php:53 templates/taxonomy-job.php:60
 msgid "Next"
 msgstr ""
 
 #: templates/archive-company.php:77 templates/archive-job.php:182
-#: templates/taxonomy-company.php:50 templates/taxonomy-job.php:60
+#: templates/taxonomy-company.php:53 templates/taxonomy-job.php:60
 msgid "arrow-right"
 msgstr ""
 
 #: templates/contents-candidate/contents/content-grid.php:37
 #: templates/contents-candidate/contents/content-list.php:116
-#: templates/dashboard/employer/dashboard.php:108
+#: templates/dashboard/employer/dashboard.php:111
 msgid "Save Candidate"
 msgstr ""
 
 #: templates/contents-candidate/contents/content-grid.php:129
-#: templates/single-candidate/candidate-single-1.php:380
+#: templates/single-candidate/candidate-single-1.php:376
 #: templates/single-candidate/candidate-single-2.php:410
-#: templates/single-job.php:79
+#: templates/single-job.php:77
 msgid "Message"
 msgstr ""
 
@@ -2463,7 +2482,7 @@ msgstr ""
 #: templates/contents-job/contents/content-list-4-col.php:71
 #: templates/contents-job/contents/content-list-5-col.php:69
 #: templates/dashboard/candidate/dashboard.php:138
-#: templates/dashboard/employer/dashboard.php:104
+#: templates/dashboard/employer/dashboard.php:107
 msgid "Saved Job"
 msgstr ""
 
@@ -2493,7 +2512,7 @@ msgid "Shortlisted"
 msgstr ""
 
 #: templates/dashboard/candidate/dashboard.php:104
-#: templates/dashboard/employer/jobs.php:93
+#: templates/dashboard/employer/jobs.php:95
 msgid "View"
 msgstr ""
 
@@ -2506,12 +2525,16 @@ msgid "Applied Job"
 msgstr ""
 
 #: templates/dashboard/candidate/dashboard.php:170
-#: templates/dashboard/employer/dashboard.php:165
+#: templates/dashboard/employer/dashboard.php:168
 msgid "View All"
 msgstr ""
 
 #: templates/dashboard/candidate/dashboard.php:190
 msgid "Recent Applied Job"
+msgstr ""
+
+#: templates/dashboard/candidate/dashboard.php:232
+msgid "No recent job applications found."
 msgstr ""
 
 #: templates/dashboard/candidate/job-applied.php:28
@@ -2550,223 +2573,229 @@ msgstr ""
 msgid "Browse Jobs"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:42
-#: templates/dashboard/employer/profile.php:65
+#: templates/dashboard/candidate/profile.php:45
+#: templates/dashboard/employer/profile.php:96
 msgid "Upload new photo"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:46
-#: templates/dashboard/employer/jobs.php:103
-#: templates/dashboard/employer/profile.php:68
+#: templates/dashboard/candidate/profile.php:49
+#: templates/dashboard/employer/jobs.php:105
+#: templates/dashboard/employer/profile.php:99
 msgid "Delete"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:52
+#: templates/dashboard/candidate/profile.php:55
 msgid "Full Name*"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:80
-#: templates/dashboard/employer/profile.php:114
+#: templates/dashboard/candidate/profile.php:83
+#: templates/dashboard/employer/profile.php:145
 msgid "Brief description for your profile. URLs are hyperlinked."
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:87
-#: templates/dashboard/employer/profile.php:234
+#: templates/dashboard/candidate/profile.php:90
+#: templates/dashboard/employer/profile.php:265
 msgid "Social Media"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:91
-#: templates/dashboard/employer/profile.php:239
+#: templates/dashboard/candidate/profile.php:94
+#: templates/dashboard/employer/profile.php:270
 msgid "Facebook"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:92
-#: templates/dashboard/employer/profile.php:240
+#: templates/dashboard/candidate/profile.php:95
+#: templates/dashboard/employer/profile.php:271
 msgid "Instagram"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:93
-#: templates/dashboard/employer/profile.php:241
+#: templates/dashboard/candidate/profile.php:96
+#: templates/dashboard/employer/profile.php:272
 msgid "Twitter"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:94
-#: templates/dashboard/employer/profile.php:242
+#: templates/dashboard/candidate/profile.php:97
+#: templates/dashboard/employer/profile.php:273
 msgid "LinkedIn"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:95
-#: templates/dashboard/employer/profile.php:243
+#: templates/dashboard/candidate/profile.php:98
+#: templates/dashboard/employer/profile.php:274
 msgid "GitHub"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:96
-#: templates/dashboard/employer/profile.php:244
+#: templates/dashboard/candidate/profile.php:99
+#: templates/dashboard/employer/profile.php:275
 msgid "YouTube"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:97
-#: templates/dashboard/employer/profile.php:245
+#: templates/dashboard/candidate/profile.php:100
+#: templates/dashboard/employer/profile.php:276
 msgid "Dribbble"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:98
-#: templates/dashboard/employer/profile.php:246
+#: templates/dashboard/candidate/profile.php:101
+#: templates/dashboard/employer/profile.php:277
 msgid "Behance"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:99
-#: templates/dashboard/employer/profile.php:247
+#: templates/dashboard/candidate/profile.php:102
+#: templates/dashboard/employer/profile.php:278
 msgid "Pinterest"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:100
-#: templates/dashboard/employer/profile.php:248
+#: templates/dashboard/candidate/profile.php:103
+#: templates/dashboard/employer/profile.php:279
 msgid "TikTok"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:118
-#: templates/dashboard/employer/profile.php:259
+#: templates/dashboard/candidate/profile.php:121
+#: templates/dashboard/employer/profile.php:290
 msgid "Social Network"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:173
-#: templates/dashboard/candidate/resume.php:231
-#: templates/dashboard/candidate/resume.php:372
-#: templates/dashboard/employer/profile.php:314
-#: templates/dashboard/employer/profile.php:505
+#: templates/dashboard/candidate/profile.php:176
+#: templates/dashboard/candidate/resume.php:262
+#: templates/dashboard/candidate/resume.php:403
+#: templates/dashboard/employer/profile.php:345
+#: templates/dashboard/employer/profile.php:535
 msgid "Remove Item"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:185
-#: templates/dashboard/employer/profile.php:324
+#: templates/dashboard/candidate/profile.php:188
+#: templates/dashboard/employer/profile.php:355
 msgid "Add Social Item"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:200
+#: templates/dashboard/candidate/profile.php:203
 msgid "Candidate Email"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:256
+#: templates/dashboard/candidate/profile.php:259
 msgid "Address & Location"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:260
+#: templates/dashboard/candidate/profile.php:263
 msgid "Map Location*"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:262
+#: templates/dashboard/candidate/profile.php:265
 msgid "XC23+6XC, Moiran, N105"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:266
+#: templates/dashboard/candidate/profile.php:269
 msgid "Latitude"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:269
+#: templates/dashboard/candidate/profile.php:272
 msgid "Longitude"
 msgstr ""
 
-#: templates/dashboard/candidate/profile.php:293
-#: templates/dashboard/candidate/resume.php:523
-#: templates/dashboard/employer/profile.php:522
-#: templates/dashboard/employer/submit-job.php:252
+#: templates/dashboard/candidate/profile.php:296
+#: templates/dashboard/candidate/resume.php:554
+#: templates/dashboard/employer/profile.php:552
+#: templates/dashboard/employer/submit-job.php:263
 msgid "Save Changes"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:50
+#: templates/dashboard/candidate/resume.php:60
+#: templates/dashboard/employer/profile.php:68
+#: templates/dashboard/employer/submit-job.php:46
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: templates/dashboard/candidate/resume.php:81
 msgid "My Resume"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:58
+#: templates/dashboard/candidate/resume.php:89
 msgid "Resume Attachment"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:60
+#: templates/dashboard/candidate/resume.php:91
 msgid "CV Attachment*"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:73
+#: templates/dashboard/candidate/resume.php:104
 msgid "Upload CV"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:78
+#: templates/dashboard/candidate/resume.php:109
 msgid "Upload file .pdf, .doc, .docx"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:93
-#: templates/dashboard/employer/profile.php:339
+#: templates/dashboard/candidate/resume.php:124
+#: templates/dashboard/employer/profile.php:370
 msgid "Enter your video URL"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:109
-#: templates/dashboard/employer/profile.php:355
-#: templates/dashboard/employer/profile.php:488
+#: templates/dashboard/candidate/resume.php:140
+#: templates/dashboard/employer/profile.php:386
+#: templates/dashboard/employer/profile.php:518
 msgid "Upload Image"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:207
+#: templates/dashboard/candidate/resume.php:238
 msgid "Google Arts College & University"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:224
+#: templates/dashboard/candidate/resume.php:255
 msgid "Description of your education"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:243
+#: templates/dashboard/candidate/resume.php:274
 msgid "Add Education Item"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:299
+#: templates/dashboard/candidate/resume.php:330
 msgid "Enter serial number"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:318
+#: templates/dashboard/candidate/resume.php:349
 msgid "Lead Product Designer"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:326
+#: templates/dashboard/candidate/resume.php:357
 msgid "Duration"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:364
+#: templates/dashboard/candidate/resume.php:395
 msgid "Describe your role and achievements"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:384
+#: templates/dashboard/candidate/resume.php:415
 msgid "Add Experience Item"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:389
-#: templates/dashboard/employer/profile.php:120
-#: templates/dashboard/employer/submit-job.php:100
+#: templates/dashboard/candidate/resume.php:420
+#: templates/dashboard/employer/profile.php:151
+#: templates/dashboard/employer/submit-job.php:111
 msgid "Taxonomies"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:413
-#: templates/dashboard/candidate/resume.php:442
-#: templates/dashboard/candidate/resume.php:471
-#: templates/dashboard/employer/profile.php:142
-#: templates/dashboard/employer/profile.php:169
-#: templates/dashboard/employer/submit-job.php:122
-#: templates/dashboard/employer/submit-job.php:149
-#: templates/dashboard/employer/submit-job.php:176
+#: templates/dashboard/candidate/resume.php:444
+#: templates/dashboard/candidate/resume.php:473
+#: templates/dashboard/candidate/resume.php:502
+#: templates/dashboard/employer/profile.php:173
+#: templates/dashboard/employer/profile.php:200
+#: templates/dashboard/employer/submit-job.php:133
+#: templates/dashboard/employer/submit-job.php:160
+#: templates/dashboard/employer/submit-job.php:187
 msgid "+"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:422
-#: templates/dashboard/employer/profile.php:151
-#: templates/dashboard/employer/submit-job.php:131
+#: templates/dashboard/candidate/resume.php:453
+#: templates/dashboard/employer/profile.php:182
+#: templates/dashboard/employer/submit-job.php:142
 #: templates/loop/classic-tax-wrapper-start.php:50
 #: templates/loop/topbar-tax-wrapper-start.php:12
 msgid "Locations"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:451
+#: templates/dashboard/candidate/resume.php:482
 msgid "Add Skills"
 msgstr ""
 
-#: templates/dashboard/candidate/resume.php:518
+#: templates/dashboard/candidate/resume.php:549
 msgid "Add Gallery"
 msgstr ""
 
@@ -2774,177 +2803,169 @@ msgstr ""
 msgid "No saved jobs found."
 msgstr ""
 
-#: templates/dashboard/employer/dashboard.php:76
-#: templates/dashboard/employer/dashboard.php:80
-#: templates/dashboard/employer/dashboard.php:184
+#: templates/dashboard/employer/dashboard.php:79
+#: templates/dashboard/employer/dashboard.php:83
+#: templates/dashboard/employer/dashboard.php:187
 msgid "Posted Job"
 msgstr ""
 
-#: templates/dashboard/employer/dashboard.php:118
-#: templates/dashboard/employer/dashboard.php:122
+#: templates/dashboard/employer/dashboard.php:121
+#: templates/dashboard/employer/dashboard.php:125
 msgid "Job Views"
 msgstr ""
 
-#: templates/dashboard/employer/jobs.php:64
+#: templates/dashboard/employer/jobs.php:50
 msgid "Job Created"
 msgstr ""
 
-#: templates/dashboard/employer/jobs.php:65
+#: templates/dashboard/employer/jobs.php:51
 msgid "Applicants"
 msgstr ""
 
-#: templates/dashboard/employer/jobs.php:67
+#: templates/dashboard/employer/jobs.php:53
 msgid "Action"
 msgstr ""
 
-#: templates/dashboard/employer/jobs.php:98
+#: templates/dashboard/employer/jobs.php:100
 msgid "Edit"
 msgstr ""
 
-#: templates/dashboard/employer/jobs.php:114
+#: templates/dashboard/employer/jobs.php:116
 msgid "No jobs found."
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:53
+#: templates/dashboard/employer/profile.php:84
 msgid "Profile"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:77
+#: templates/dashboard/employer/profile.php:108
 msgid "Company Name*"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:78
+#: templates/dashboard/employer/profile.php:109
 msgid "Company Name"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:212
-#: templates/dashboard/employer/submit-job.php:233
+#: templates/dashboard/employer/profile.php:243
+#: templates/dashboard/employer/submit-job.php:244
 msgid "Website URL"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:214
-#: templates/dashboard/employer/submit-job.php:235
+#: templates/dashboard/employer/profile.php:245
+#: templates/dashboard/employer/submit-job.php:246
 msgid "Enter Your Website URL"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:217
-#: templates/dashboard/employer/submit-job.php:227
+#: templates/dashboard/employer/profile.php:248
+#: templates/dashboard/employer/submit-job.php:238
 msgid "Website Text"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:219
+#: templates/dashboard/employer/profile.php:250
 msgid "Visit our website"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:222
+#: templates/dashboard/employer/profile.php:253
 msgid "Link Target"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:224
-#: templates/dashboard/employer/submit-job.php:241
+#: templates/dashboard/employer/profile.php:255
+#: templates/dashboard/employer/submit-job.php:252
 msgid "Self Tab"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:225
-#: templates/dashboard/employer/submit-job.php:242
+#: templates/dashboard/employer/profile.php:256
+#: templates/dashboard/employer/submit-job.php:253
 msgid "New Tab"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:368
-#: templates/dashboard/employer/profile.php:373
+#: templates/dashboard/employer/profile.php:398
+#: templates/dashboard/employer/profile.php:403
 msgid "Testimonials"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:396
+#: templates/dashboard/employer/profile.php:426
 msgid "Testimonial"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:439
+#: templates/dashboard/employer/profile.php:469
 msgid "Review"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:475
-#: templates/dashboard/employer/profile.php:496
+#: templates/dashboard/employer/profile.php:505
+#: templates/dashboard/employer/profile.php:526
 msgid "Author Image"
 msgstr ""
 
-#: templates/dashboard/employer/profile.php:517
+#: templates/dashboard/employer/profile.php:547
 msgid "Add Testimonial"
 msgstr ""
 
-#: templates/dashboard/employer/saved-candidate.php:143
-msgid "No saved candidate found."
+#: templates/dashboard/employer/saved-candidate.php:148
+msgid "No saved candidates"
 msgstr ""
 
-#: templates/dashboard/employer/submit-job.php:23
+#: templates/dashboard/employer/saved-candidate.php:149
+msgid "You haven't saved any candidates yet."
+msgstr ""
+
+#: templates/dashboard/employer/saved-candidate.php:151
+msgid "Browse Candidates"
+msgstr ""
+
+#: templates/dashboard/employer/submit-job.php:25
+msgid "Access denied."
+msgstr ""
+
+#: templates/dashboard/employer/submit-job.php:29
 msgid "Submit New Job"
 msgstr ""
 
-#: templates/dashboard/employer/submit-job.php:65
+#: templates/dashboard/employer/submit-job.php:76
 msgid "Job Details"
 msgstr ""
 
-#: templates/dashboard/employer/submit-job.php:75
+#: templates/dashboard/employer/submit-job.php:86
 msgid "Job Description"
 msgstr ""
 
-#: templates/dashboard/employer/submit-job.php:229
+#: templates/dashboard/employer/submit-job.php:240
 msgid "Visit job website"
 msgstr ""
 
-#: templates/dashboard/employer/submit-job.php:239
+#: templates/dashboard/employer/submit-job.php:250
 msgid "Website Target"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:16
-msgid "You do not have permission to access this page."
-msgstr ""
-
-#: templates/dashboard/global/change-password.php:36
-msgid "Please fill out all password fields."
-msgstr ""
-
-#: templates/dashboard/global/change-password.php:38
-msgid "New passwords do not match."
-msgstr ""
-
-#: templates/dashboard/global/change-password.php:40
-msgid "Your current password is incorrect."
-msgstr ""
-
-#: templates/dashboard/global/change-password.php:45
+#: templates/dashboard/global/change-password.php:23
 msgid "Password updated successfully!"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:49
-msgid "Security verification failed. Please try again."
-msgstr ""
-
-#: templates/dashboard/global/change-password.php:60
+#: templates/dashboard/global/change-password.php:42
 msgid "Edit & Update"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:65
+#: templates/dashboard/global/change-password.php:47
 msgid "Redirecting to homepage..."
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:82
+#: templates/dashboard/global/change-password.php:64
 msgid "Current Password*"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:94
+#: templates/dashboard/global/change-password.php:76
 msgid "New Password*"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:101
-msgid "Use a strong password with at least 8 characters including letters, numbers, and symbols."
+#: templates/dashboard/global/change-password.php:88
+msgid "Confirm New Password*"
 msgstr ""
 
-#: templates/dashboard/global/change-password.php:121
+#: templates/dashboard/global/change-password.php:100
 msgid "Update Password"
 msgstr ""
 
-#: templates/dashboard/global/sidebar-menu.php:72
+#: templates/dashboard/global/sidebar-menu.php:79
 msgid "Candidate Profile"
 msgstr ""
 
@@ -3004,58 +3025,58 @@ msgstr ""
 msgid "By"
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:216
+#: templates/single-candidate/candidate-single-1.php:214
 msgid "Invite"
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:224
+#: templates/single-candidate/candidate-single-1.php:222
 #: templates/single-candidate/candidate-single-2.php:267
-#: templates/single-company.php:49
+#: templates/single-company.php:52
 msgid "Location: "
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:232
+#: templates/single-candidate/candidate-single-1.php:229
 #: templates/single-candidate/candidate-single-2.php:275
 msgid "Age: "
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:252
+#: templates/single-candidate/candidate-single-1.php:249
 #: templates/single-candidate/candidate-single-2.php:292
-#: templates/single-company.php:57
+#: templates/single-company.php:60
 msgid "Email: "
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:307
+#: templates/single-candidate/candidate-single-1.php:304
 #: templates/single-candidate/candidate-single-2.php:347
-#: templates/single-company.php:124
+#: templates/single-company.php:125
 msgid "Social: "
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:332
+#: templates/single-candidate/candidate-single-1.php:329
 #: templates/single-candidate/candidate-single-2.php:96
 msgid "Download CV"
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:357
+#: templates/single-candidate/candidate-single-1.php:354
 msgid "Email to "
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:359
+#: templates/single-candidate/candidate-single-1.php:356
 #: templates/single-candidate/candidate-single-2.php:390
 msgid "Your email address & profile will be shown to the recipient."
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:375
+#: templates/single-candidate/candidate-single-1.php:372
 #: templates/single-candidate/candidate-single-2.php:406
 msgid "Subject"
 msgstr ""
 
-#: templates/single-candidate/candidate-single-1.php:386
+#: templates/single-candidate/candidate-single-1.php:382
 #: templates/single-candidate/candidate-single-2.php:415
 msgid "Send Message"
 msgstr ""
 
-#: templates/single-company.php:145
+#: templates/single-company.php:146
 msgid "Posted Jobs"
 msgstr ""
 
@@ -3071,23 +3092,23 @@ msgstr ""
 msgid "Apply for this Position"
 msgstr ""
 
-#: templates/single-job.php:56
+#: templates/single-job.php:54
 msgid "First Name*"
 msgstr ""
 
-#: templates/single-job.php:62
+#: templates/single-job.php:60
 msgid "Last Name"
 msgstr ""
 
-#: templates/single-job.php:84
+#: templates/single-job.php:82
 msgid "Upload CV (PDF or Word)"
 msgstr ""
 
-#: templates/single-job.php:89
+#: templates/single-job.php:87
 msgid "Submit Application"
 msgstr ""
 
-#: templates/single-job.php:96
+#: templates/single-job.php:94
 msgid "Your application has been submitted successfully."
 msgstr ""
 
