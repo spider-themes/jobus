@@ -321,6 +321,8 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
 
 			return $formatted_value;
 		}
+
+		return null;
 	}
 }
 
@@ -406,11 +408,13 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
 
 /**
  * Get the company count by post id and meta-value
- * @param $company_id
- * @return int
+ *
+ * @param int  $company_id The company ID to search for
+ * @param bool $link       Whether to return a link or just count
+ * @return int|string      Returns count as int or permalink/archive link as string
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
-	function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
+	function jobus_get_selected_company_count( $company_id, $link = true ) {
 		$args = array(
 			'post_type'      => 'jobus_job',
 			'posts_per_page' => - 1,
@@ -460,9 +464,9 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
  *
  * @param string $terms The name of the query parameter to retrieve.
  *
- * @return array|string The sanitized search terms.
+ * @return array The sanitized search terms.
  */
-function jobus_search_terms( string $terms ): array|string {
+function jobus_search_terms( string $terms ) {
 
     $result = [];
 	$jobus_nonce = !empty($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';
@@ -790,6 +794,8 @@ function jobus_meta_company_spec_name( $step = 1 ) {
 			}
 		}
 	}
+
+	return null;
 }
 
 
@@ -809,6 +815,8 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
 			}
 		}
 	}
+
+	return null;
 }
 
 
@@ -826,12 +834,6 @@ function jobus_phpmailer_init( $phpmailer ) {
 	$phpmailer->FromName   = jobus_opt( 'smtp_from_name' );
 
 	return $phpmailer;
-}
-
-if ( ! function_exists( 'jobus_rtl' ) ) {
-	function jobus_rtl(): string {
-		return is_rtl() ? 'true' : 'false';
-	}
 }
 
 

@@ -65,6 +65,17 @@ class Job_Form_Submission {
 		}
 		$job_id = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
 
+		// If editing an existing job, verify ownership
+		if ( $job_id ) {
+			$job_post = get_post( $job_id );
+			if ( ! $job_post || $job_post->post_type !== 'jobus_job' ) {
+				wp_die( esc_html__( 'Invalid job post.', 'jobus' ) );
+			}
+			if ( (int) $job_post->post_author !== (int) $user->ID ) {
+				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
+			}
+		}
+
 		// Save job content (title/content)
 		if ( isset( $post_data['job_title'] ) || isset( $post_data['job_description'] ) ) {
 			$job_id = $this->save_job_content( $job_id, $post_data, $company_id );
