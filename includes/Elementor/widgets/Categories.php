@@ -55,6 +55,42 @@ class Categories extends Widget_Base {
 	}
 
 	/**
+	 * Returns the available layout options for categories in the widget.
+	 *
+	 * @return array The array of layout options, including free and pro options.
+	 */
+	private function category_layout_option(): array {
+
+		$free_option = [
+			'1' => [
+				'title' => esc_html__( '01: Category', 'jobus' ),
+				'icon'  => 'category_1'
+			]
+		];
+
+		$pro_options = [
+			'2' => [
+				'title' => esc_html__( '02: Category', 'jobus' ),
+				'icon'  => 'category_2'
+			],
+			'3' => [
+				'title' => esc_html__( '03: Category', 'jobus' ),
+				'icon'  => 'category_3'
+			]
+		];
+
+		foreach ( $pro_options as $key => $option ) {
+			$icon_suffix = jobus_unlock_themes( 'jobi', 'jobi-child' ) ? '' : ' jobus-pro-widget';
+			$free_option[ $key ] = [
+				'title' => $option['title'],
+				'icon'  => $option['icon'] . $icon_suffix
+			];
+		}
+
+		return $free_option;
+	}
+
+	/**
 	 * Name: elementor_content_control()
 	 * Desc: Register the Content Tab output on the Elementor editor.
 	 * Params: no params
@@ -76,20 +112,7 @@ class Categories extends Widget_Base {
 			'layout', [
 				'label'   => esc_html__( 'Layout', 'jobus' ),
 				'type'    => Controls_Manager::CHOOSE,
-				'options' => [
-					'1' => [
-						'title' => esc_html__( '01: Category', 'jobus' ),
-						'icon'  => 'category1',
-					],
-					'2' => [
-						'title' => esc_html__( '02: Category', 'jobus' ),
-						'icon'  => 'category2',
-					],
-					'3' => [
-						'title' => esc_html__( '03: Category', 'jobus' ),
-						'icon'  => 'category3',
-					],
-				],
+				'options' => $this->category_layout_option(),
 				'default' => '1'
 			]
 		);
@@ -431,3 +454,4 @@ class Categories extends Widget_Base {
 
 	}
 }
+

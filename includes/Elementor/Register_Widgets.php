@@ -56,7 +56,11 @@ class Register_Widgets {
 	 * Register Elementor Preview Editor Scripts
 	 */
 	public function register_editor_styles(): void {
-		wp_enqueue_style( 'jobus-elementor-editor', esc_url( JOBUS_CSS . '/elementor-editor.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jobus-elementor-editor', esc_url( JOBUS_CSS . '/elementor/elementor-editor.css' ), [], JOBUS_VERSION );
+
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			wp_enqueue_style( 'jobus-elementor-pro-editor', esc_url( JOBUS_CSS . '/elementor/elementor-pro-editor.css' ), [], JOBUS_VERSION );
+		}
 	}
 
 	/**

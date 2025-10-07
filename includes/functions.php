@@ -12,12 +12,12 @@ function jobus_is_premium(): bool {
     return jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code();
 }
 
-function jobus_unlock_jobi_theme(): bool {
-    $theme       = wp_get_theme();
-    $theme_name  = $theme->get( 'Name' );
-    $jobi_themes = [ 'Jobi', 'jobi', 'Jobi Child', 'jobi-child' ];
+function jobus_unlock_themes( ...$themes ): bool {
 
-    return in_array( $theme_name, $jobi_themes, true ) || jobus_is_premium();
+    // Flatten and normalize
+    $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
+    $current_theme = strtolower( get_template() );
+    return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
 if ( ! function_exists( 'jobus_rtl' ) ) {

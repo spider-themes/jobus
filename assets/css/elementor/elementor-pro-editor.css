@@ -1,0 +1,36 @@
+/**
+ * Jobus Pro Elementor Editor Styles
+ * This file is loaded only when the user has a Pro license or uses the Jobi theme
+ * It hides the PRO badges from premium layouts and enables all options
+ */
+
+/** === Enable All Layout Options for Licensed Users === **/
+.elementor-control-layout .elementor-choices label {
+    pointer-events: all !important;
+}
+
+/** === Adjust Free Option Opacity === **/
+.category_1::before,
+.search_form_1::before {
+    opacity: .5 !important;
+}
+
+/** === Improve Hover and Active States === **/
+.elementor-control-layout .elementor-choices .elementor-choices-label:hover i::before,
+.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label i::before {
+    opacity: 1 !important;
+}
+
+.elementor-control-layout .elementor-choices .elementor-choices-label:hover i.search_form_1::before,
+.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label i.search_form_1::before,
+.elementor-control-layout .elementor-choices .elementor-choices-label:hover i.search_form_2::before,
+.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label i.search_form_2::before,
+.elementor-control-layout .elementor-choices .elementor-choices-label:hover i.search_form_3::before,
+.elementor-control-layout .elementor-choices input:checked+.elementor-choices-label i.search_form_3::before {
+    opacity: 1 !important;
+}
+
+/** === Hide Pro Label for Licensed Users === **/
+.jobus-pro-widget::after {
+    display: none !important;
+}

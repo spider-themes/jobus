@@ -53,6 +53,42 @@ class Search_Form extends Widget_Base {
 		$this->elementor_style_control();
 	}
 
+	/**
+	 * Returns the available layout options for the search form in the widget.
+	 *
+	 * @return array The array of layout options, including free and pro options.
+	 */
+	private function search_layout_option(): array {
+
+		$free_option = [
+			'1' => [
+				'title' => esc_html__( '01: Search Form', 'jobus' ),
+				'icon'  => 'search_form_1'
+			]
+		];
+
+		$pro_options = [
+			'2' => [
+				'title' => esc_html__( '02: Search Form', 'jobus' ),
+				'icon'  => 'search_form_2'
+			],
+			'3' => [
+				'title' => esc_html__( '03: Search Form', 'jobus' ),
+				'icon'  => 'search_form_3'
+			]
+		];
+
+		foreach ( $pro_options as $key => $option ) {
+			$icon_suffix = jobus_unlock_themes( 'jobi', 'jobi-child' ) ? '' : ' jobus-pro-widget';
+			$free_option[ $key ] = [
+				'title' => $option['title'],
+				'icon'  => $option['icon'] . $icon_suffix
+			];
+		}
+
+		return $free_option;
+	}
+
 
 	/**
 	 * Name: elementor_content_control()
@@ -75,20 +111,7 @@ class Search_Form extends Widget_Base {
 			'layout', [
 				'label'   => esc_html__( 'Layout', 'jobus' ),
 				'type'    => \Elementor\Controls_Manager::CHOOSE,
-				'options' => [
-					'1' => [
-						'title' => esc_html__( '01: Search Form', 'jobus' ),
-						'icon'  => 'search_form_1',
-					],
-					'2' => [
-						'title' => esc_html__( '02: Search Form', 'jobus' ),
-						'icon'  => 'search_form_2',
-					],
-					'3' => [
-						'title' => esc_html__( '03: Search Form', 'jobus' ),
-						'icon'  => 'search_form_3',
-					],
-				],
+				'options' => $this->search_layout_option(),
 				'default' => '1'
 			]
 		);
