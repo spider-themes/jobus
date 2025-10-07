@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "wp-scripts start",
-    "build": "wp-scripts build"
+    "build": "wp-scripts build",
+    "sass": "sass assets/scss:assets/css --watch"
   },
   "author": "",
   "license": "ISC",

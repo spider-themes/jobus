@@ -5310,11 +5310,11 @@ img {
   display: block;
 }
 
-.filter-area-tab {
-  position: relative;
-}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: #EFF6F3;
+}
+.filter-area-tab {
+  position: relative;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -6678,6 +6678,25 @@ img {
   background: #E7F6EF;
   border-color: #E7F6EF;
   color: #005025;
+}
+
+.inner-banner-one {
+  background: #244034;
+  padding: 200px 0 90px;
+  z-index: 9;
+  position: relative;
+}
+.inner-banner-one .blog-heading {
+  font-size: 64px;
+  line-height: 1.062em;
+  margin: 0;
+  word-break: break-all;
+}
+.inner-banner-one h1 {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*# sourceMappingURL=main.css.map */

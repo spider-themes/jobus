@@ -16,13 +16,12 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
-<div class="inner-banner-one position-relative jobi-single-banner">
-    <div class="container">
-        <div class="position-relative">
-            <div class="row">
-                <div class="col-xl-8 m-auto text-center">
+<div class="inner-banner-one jobi-single-banner">
+    <div class="jbs-container">
+            <div class="jbs-row">
+                <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
                     <h1 class="blog-heading"><?php the_title() ?></h1>
-                    <div class="blog-pubish-date text-white mt-30 lg-mt-20">
+                    <div class="blog-pubish-date jbs-text-white mt-30 lg-mt-20">
                         <?php
                         if ( has_category() ) {
                             echo wp_kses_post( get_the_category_list( ', ' ) ) . ' . ';
@@ -33,7 +32,6 @@ wp_enqueue_script( 'lightbox' );
                         <a href="<?php echo esc_url( get_author_posts_url( $post_author_id ) ) ?>">
                             <?php echo esc_html( get_the_author_meta( 'display_name', $post_author_id ) ) ?>
                         </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -51,20 +49,20 @@ wp_enqueue_script( 'lightbox' );
 </div>
 
 <section class="candidates-profile pt-100 lg-pt-70 pb-130 lg-pb-80">
-    <div class="container">
-        <div class="row">
+    <div class="jbs-container">
+        <div class="jbs-row">
 
-            <div class="col-xxl-9 col-lg-8">
-                <div class="candidates-profile-details me-xxl-5 pe-xxl-4">
+            <div class="jbs-col-xxl-9 jbs-col-lg-8">
+                <div class="candidates-profile-details jbs-me-xxl-5 jbs-pe-xxl-4">
                     <div class="inner-card border-style mb-65 lg-mb-40">
                         <?php the_content() ?>
                     </div>
                     <?php
                     if ( $video_url && $video_title && $video_bg_img ) { ?>
                         <h3 class="title"><?php echo esc_html( $video_title ) ?></h3>
-                        <div class="video-post d-flex align-items-center justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $video_bg_img ) ?>)">
-                            <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox=""
+                            <a class="fancybox jbs-rounded-circle video-icon tran3s text-center" data-fancybox=""
                                href="<?php echo esc_url( $video_url ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
@@ -81,14 +79,14 @@ wp_enqueue_script( 'lightbox' );
                                 <?php
                             }
                             ?>
-                            <div class="time-line-data position-relative pt-15">
+                            <div class="time-line-data jbs-position-relative pt-15">
                                 <?php
                                 foreach ( $educations as $item ) {
                                     ?>
-                                    <div class="info position-relative">
+                                    <div class="info jbs-position-relative">
                                         <?php
                                         if ( ! empty( $item['sl_num'] ) ) { ?>
-                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+                                            <div class="numb fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
                                             <?php
                                         }
                                         if ( ! empty( $item['title'] ) ) { ?>
@@ -117,7 +115,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="style-none skill-tags d-flex flex-wrap pb-25">
+                            <ul class="style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';
@@ -137,14 +135,14 @@ wp_enqueue_script( 'lightbox' );
                                 <?php
                             }
                             ?>
-                            <div class="time-line-data position-relative pt-15">
+                            <div class="time-line-data jbs-position-relative pt-15">
                                 <?php
                                 foreach ( $experience as $item ) {
                                     ?>
-                                    <div class="info position-relative">
+                                    <div class="info jbs-position-relative">
                                         <?php
                                         if ( ! empty( $item['sl_num'] ) ) { ?>
-                                            <div class="numb fw-500 rounded-circle d-flex align-items-center justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+                                            <div class="numb fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
                                             <?php
                                         }
                                         if ( ! empty( $item['start_date'] ) ) { ?>
@@ -197,19 +195,19 @@ wp_enqueue_script( 'lightbox' );
                 </div>
             </div>
 
-            <div class="col-xxl-3 col-lg-4">
+            <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
 
                     <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="pt-25">
-                                <div class="candidate-avatar m-auto">
-                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle w-100' ] ); ?>
+                                <div class="candidate-avatar jbs-m-auto">
+                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle w-100' ] ); ?>
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <h3 class="candidate-name text-center"><?php the_title() ?></h3>
-                        <div class="text-center pb-25">
+                        <h3 class="candidate-name jbs-text-center"><?php the_title() ?></h3>
+                        <div class="jbs-text-center pb-25">
                             <a href="#" class="invite-btn fw-500">
                                 <?php esc_html_e( 'Invite', 'jobus' ) ?>
                             </a>
@@ -325,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="btn-ten fw-500 text-white w-100 text-center tran3s mt-15" target="_blank">
+                               class="btn-ten fw-500 text-white w-100 jbs-text-center tran3s mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php

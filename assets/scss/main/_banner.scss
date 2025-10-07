@@ -1,0 +1,20 @@
+.inner-banner-one {
+    background: #244034;
+    padding: 200px 0 90px;
+    z-index: 9;
+    position: relative;
+
+    .blog-heading {
+        font-size: 64px;
+        line-height: 1.062em;
+        margin: 0;
+        word-break: break-all;
+    }
+    h1{
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+

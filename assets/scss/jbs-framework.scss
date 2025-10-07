@@ -1,0 +1,106 @@
+
+@use "jbs-framework/jbs-grid";
+// font css
+
+$inter: "Inter", sans-serif;
+$rob: "Roboto", sans-serif;
+
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+// container
+
+.jbs-container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.jbs-container {
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .jbs-container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .jbs-container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .jbs-container {
+        max-width: 1240px;
+    }
+}
+@media (min-width: 1400px) {
+    .jbs-container {
+        max-width: 1320px;
+    }
+}
+
+
+// utility css
+
+.jbs-list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.jbs-text-center {
+    text-align: center;
+}
+
+.jbs-text-white {
+    color: #fff !important;
+}
+
+.jbs-m-auto {
+    margin: auto !important;
+}
+
+.jbs-position-relative{
+    position: relative;
+}
+.jbs-rounded-circle {
+    border-radius: 50% !important;
+}
+
+.jbs-d-flex {
+    display: flex;
+}
+
+.jbs-align-items-center {
+    align-items: center !important;
+}
+.jbs-justify-content-center {
+    justify-content: center !important;
+}
+.jbs-colum-space-6 {
+    width: 50%;
+}
+
+.jbs-colum-space-4 {
+    flex: 1;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+}
