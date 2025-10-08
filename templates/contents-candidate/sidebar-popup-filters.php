@@ -7,12 +7,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="modal popUpModal login_from fade" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-        <div class="container">
+        <div class="jbs-container">
 
             <div class="filter-area-tab modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                <div class="position-relative">
+                <div class="jbs-position-relative">
                     <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
                     <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_candidate' ) ) ?>" role="search" method="get">
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <?php wp_nonce_field( 'jobus_search_filter', 'jobus_nonce' ); ?>
 
                         <div class="pt-25 pb-30 ps-4 pe-4">
-                            <div class="row">
+                            <div class="jbs-row">
                                 <?php
 
                                 // Widget for candidate meta data list
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         $candidate_specifications = jobus_get_specs_options( 'candidate_specifications' );
                                         $candidate_specifications = $candidate_specifications[ $widget_name ] ?? '';
                                         ?>
-                                        <div class="col-lg-3">
+                                        <div class="jbs-col-lg-3">
                                             <div class="filter-block pb-50 md-pb-20">
                                                 <div class="filter-title fw-500 text-dark"><?php echo esc_html( $widget_title ); ?></div>
                                                 <?php
@@ -81,9 +81,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 }
                                 ?>
                             </div>
-                            <div class="row">
-                                <div class="col-xl-2 m-auto">
-                                    <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s">
+                            <div class="jbs-row">
+                                <div class="jbs-col-xl-2 jbs-m-auto">
+                                    <button type="submit" class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
                                         <?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                                     </button>
                                 </div>

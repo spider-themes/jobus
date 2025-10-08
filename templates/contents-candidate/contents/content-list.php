@@ -22,16 +22,16 @@ if ( ! defined( 'ABSPATH' ) ) {
         $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 		?>
         <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout mb-25">
-            <div class="d-flex">
-                <div class="candidate-avatar online position-relative d-block me-auto ms-auto">
-                    <a href="<?php the_permalink() ?>" class="rounded-circle">
-						<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ) ?>
+            <div class="jbs-d-flex">
+                <div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
+                    <a href="<?php the_permalink() ?>" class="jbs-rounded-circle">
+						<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] ) ?>
                     </a>
                 </div>
                 <div class="right-side">
-                    <div class="row gx-1 align-items-center">
-                        <div class="col-lg-3">
-                            <div class="position-relative">
+                    <div class="jbs-row jbs-gx-1 jbs-align-items-center">
+                        <div class="jbs-col-lg-3">
+                            <div class="jbs-position-relative">
                                 <h4 class="candidate-name mb-0">
                                     <a href="<?php the_permalink() ?>" class="tran3s">
 										<?php the_title() ?>
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<?php
 								if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) {
 									?>
-                                    <div class="candidate-post text-capitalize">
+                                    <div class="candidate-post jbs-text-capitalize">
 										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) ?>
                                     </div>
 									<?php
@@ -56,9 +56,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 									// Display the first 2 skills
 									$displayed_skills = array_slice( $skills, 0, $max_skills );
-									echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+									echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
 									foreach ( $displayed_skills as $skill ) {
-										echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+										echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 									}
 
 									// Display the count of remaining skills
@@ -68,9 +68,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 								} else {
 									// Display all skills
 									if ( ! empty( $skills ) ) {
-										echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+										echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
 										foreach ( $skills as $skill ) {
-											echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+											echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 										}
 										echo '</ul>';
 									}
@@ -82,10 +82,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
 						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
 							?>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
                                 <div class="candidate-info">
                                     <span><?php echo esc_html( jobus_meta_candidate_spec_name( 2 ) ); ?></span>
-                                    <div class="text-capitalize">
+                                    <div class="jbs-text-capitalize">
 										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) ?>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
                                 <div class="candidate-info">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                     <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>">
@@ -104,8 +104,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						?>
-                        <div class="col-lg-3 col-md-4">
-                            <div class="d-flex justify-content-lg-end">
+                        <div class="jbs-col-lg-3 jbs-col-md-4">
+                            <div class="jbs-d-flex jbs-justify-content-lg-end">
                                 <?php
                                 if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
                                     jobus_render_post_save_button( [
@@ -114,11 +114,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         'meta_key'   => 'jobus_saved_candidates',
                                         'is_saved'   => $save_candidate_status['is_saved'],
                                         'button_title' => !empty($save_candidate_status['is_saved']) ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus'),
-                                        'class' => 'save-btn text-center rounded-circle tran3s mt-10 jobus-saved-post'
+                                        'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s mt-10 jobus-saved-post'
                                     ] );
                                 }
                                 ?>
-                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s ms-md-2 mt-10 sm-mt-20">
+                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-ms-md-2 mt-10 sm-mt-20">
 									<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                                 </a>
                             </div>

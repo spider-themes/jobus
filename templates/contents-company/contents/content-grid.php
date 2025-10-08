@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="accordion-box grid-style">
-    <div class="row">
+    <div class="jbs-row">
 		<?php
 		while ( $company_query->have_posts() ) : $company_query->the_post();
 			$company_count        = jobus_get_selected_company_count( get_the_ID(), false );
@@ -14,15 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
 			$column               = sanitize_html_class( jobus_opt( 'company_archive_grid_column' ) );
 			?>
-            <div class="col-lg-<?php echo esc_attr( $column ) ?> col-md-4 col-sm-6 d-flex">
+            <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
                 <div class="company-grid-layout mb-30<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
 					<?php if ( has_post_thumbnail() ) : ?>
                         <a href="<?php the_permalink(); ?>"
-                           class="company-logo me-auto ms-auto rounded-circle">
-							<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
+                           class="company-logo jbs-me-auto jbs-ms-auto jbs-rounded-circle">
+							<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] ); ?>
                         </a>
 					<?php endif; ?>
-                    <h5 class="text-center">
+                    <h5 class="jbs-text-center">
                         <a href="<?php the_permalink(); ?>" class="company-name tran3s">
 							<?php the_title(); ?>
                         </a>
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					if ( $company_count > 0 ) {
 						?>
-                        <div class="bottom-line d-flex">
+                        <div class="bottom-line jbs-d-flex">
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>">
 								<?php
 								/* translators: 1: Vacancy, 2: Vacancies */

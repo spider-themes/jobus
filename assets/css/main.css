@@ -3524,7 +3524,7 @@ img {
   padding: 27px 30px 38px;
 }
 .candidate-profile-card.list-layout .candidate-skills {
-  position: absolute;
+  position: static;
   left: 0;
   bottom: -45px;
 }
@@ -3894,7 +3894,7 @@ img {
   padding: 27px 30px 38px;
 }
 .candidate-profile-card.list-layout .candidate-skills {
-  position: absolute;
+  position: static;
   left: 0;
   bottom: -45px;
 }

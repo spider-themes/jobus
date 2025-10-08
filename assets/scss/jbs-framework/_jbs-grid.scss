@@ -8,6 +8,10 @@
     margin-left: calc(-.5 * var(--bs-gutter-x))
 }
 
+.jbs-gx-2 {
+    --bs-gutter-x: 0.5rem;
+}
+
 .jbs-row>* {
     flex-shrink: 0;
     width: 100%;

@@ -24,19 +24,19 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
 ?>
 
     <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
-        <div class="container">
-            <div class="row">
+        <div class="jbs-container">
+            <div class="jbs-row">
 
-                <div class="col-xxl-3 col-xl-4 order-xl-last">
-                    <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mb-50">
+                <div class="jbs-col-xxl-3 jbs-col-xl-4 order-xl-last">
+                    <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 lg-mb-50">
                         <?php
                         if ( has_post_thumbnail() ) {
-                            the_post_thumbnail( 'full', array( 'class' => 'lazy-img m-auto logo' ) );
+                            the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                         }
                         ?>
-                        <div class="text-md text-dark text-center mt-15 mb-20 lg-mb-10"><?php the_title() ?></div>
+                        <div class="text-md text-dark jbs-text-center mt-15 mb-20 lg-mb-10"><?php the_title() ?></div>
                         <?php if ( ! empty( $website_url ) ) : ?>
-                            <div class="text-center">
+                            <div class="jbs-text-center">
                                 <a href="<?php echo esc_url( $website_url ) ?>" class="website-btn-two tran3s"
                                    target="<?php echo esc_attr( $website_target ) ?>">
                                     <?php echo esc_html( $website_text ) ?>
@@ -45,7 +45,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         <?php endif; ?>
 
                         <div class="border-top mt-35 lg-mt-20 pt-25">
-                            <ul class="job-meta-data row style-none">
+                            <ul class="job-meta-data jbs-row style-none">
                                 <?php
                                 if ( ! empty( $location ) ) { ?>
                                     <li>
@@ -81,7 +81,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
 
                                         if ( isset( $meta_options[ $meta_key ] ) ) {
                                             ?>
-                                            <li class="col-12">
+                                            <li class="jbs-col-12">
                                                 <?php
                                                 if ( ! empty( $meta_options[ $meta_key ] ) ) {
                                                     echo '<span>' . esc_html( $meta_name ) . ':</span>';
@@ -127,7 +127,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                             <?php
                                             foreach ( $social_icons as $item ) {
                                                 if ( ! empty( $item['url'] ) ) { ?>
-                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="me-3">
+                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3">
                                                         <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                     </a>
                                                     <?php
@@ -142,7 +142,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </ul>
 
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>"
-                               class="btn-ten fw-500 text-white w-100 text-center tran3s mt-25">
+                               class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-25">
                                 <?php esc_html_e( 'Posted Jobs', 'jobus' ); ?>
                             </a>
                         </div>
@@ -150,8 +150,8 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                     <!-- /.job-company-info -->
                 </div>
 
-                <div class="col-xxl-9 col-xl-8 order-xl-first">
-                    <div class="details-post-data me-xxl-5 pe-xxl-4">
+                <div class="jbs-col-xxl-9 jbs-col-xl-8 order-xl-first">
+                    <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
 
                         <?php
                         the_content();
@@ -162,9 +162,9 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         }
                         if ( $video_url ) {
                             ?>
-                            <div class="video-post d-flex align-items-center justify-content-center mb-50"
+                            <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mb-50"
                                  style="background-image: url(<?php echo esc_url( wp_get_attachment_url( $video_bg_img ) ); ?>)">
-                                <a class="fancybox rounded-circle video-icon tran3s text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
+                                <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
                                     <i class="bi bi-play-fill"></i>
                                 </a>
                             </div>
@@ -176,7 +176,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
 
                         if ( ! empty( $testimonials ) && ! empty( $testimonial_title ) ) {
                             ?>
-                            <div class="position-relative">
+                            <div class="jbs-position-relative">
                                 <h3><?php echo esc_html( $testimonial_title ); ?></h3>
                                 <div class="company-review-slider">
                                     <?php
@@ -190,9 +190,9 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                         ?>
                                         <div class="item">
                                             <div class="feedback-block-four">
-                                                <div class="d-flex align-items-center">
+                                                <div class="jbs-d-flex jbs-align-items-center">
                                                     <?php if ( $rating !== false ) : ?>
-                                                        <ul class="style-none d-flex rating">
+                                                        <ul class="style-none jbs-d-flex rating">
                                                             <?php
                                                             $full_stars  = floor( $rating );
                                                             $half_star   = ( $rating - $full_stars ) >= 0.5 ? 1 : 0;
@@ -217,10 +217,10 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                 <?php if ( $review_content ) : ?>
                                                     <blockquote><?php echo esc_html( $review_content ); ?></blockquote>
                                                 <?php endif; ?>
-                                                <div class="d-flex align-items-center">
+                                                <div class="jbs-d-flex jbs-align-items-center">
                                                     <img src="<?php echo esc_url( $author_img_url ); ?>" alt="<?php echo esc_attr( $author_name ); ?>"
-                                                         class="author-img rounded-circle">
-                                                    <div class="ms-3">
+                                                         class="author-img jbs-rounded-circle">
+                                                    <div class="jbs-ms-3">
                                                         <?php if ( $author_name ) : ?>
                                                             <div class="name fw-500 text-dark"><?php echo esc_html( $author_name ); ?></div>
                                                         <?php endif; ?>
@@ -249,16 +249,16 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
     </section>
 
     <section class="company-open-position pt-80 lg-pt-60 pb-100 lg-pb-60">
-        <div class="container">
+        <div class="jbs-container">
 
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-6">
+            <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
+                <div class="jbs-col-lg-6">
                     <div class="title-two">
                         <h2><?php esc_html_e( 'Open Position', 'jobus' ); ?></h2>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="d-flex justify-content-lg-end">
+                <div class="jbs-col-lg-5">
+                    <div class="jbs-d-flex jbs-justify-content-lg-end">
                         <a href="<?php echo esc_url( get_post_type_archive_link( 'jobus_job' ) ) ?>" class="btn-six">
                             <?php esc_html_e( 'Explore More', 'jobus' ); ?>
                         </a>
@@ -288,19 +288,19 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                     $job_meta   = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                     $company_id = $job_meta['select_company'] ?? '';
                     ?>
-                    <div class="job-list-one style-two position-relative mb-20">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-xxl-3 col-lg-4">
-                                <div class="job-title d-flex align-items-center">
+                    <div class="job-list-one style-two jbs-position-relative mb-20">
+                        <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
+                            <div class="jbs-col-xxl-3 jbs-col-lg-4">
+                                <div class="job-title jbs-d-flex jbs-align-items-center">
                                     <a href="<?php the_permalink(); ?>" class="logo">
-                                        <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img m-auto' ] ); ?>
+                                        <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                                     </a>
                                     <a href="<?php the_permalink(); ?>" class="title fw-500 tran3s">
                                         <?php the_title( '<h3>', '</h3>' ) ?>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 ms-auto">
+                            <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-ms-auto">
                                 <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_1' ) ) : ?>
                                     <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
                                         <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_1' ) ) ?>
@@ -313,7 +313,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 ms-auto xs-mt-10">
+                            <div class="jbs-col-xxl-2 jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-ms-auto xs-mt-10">
                                 <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_2' ) ) : ?>
                                     <div class="job-location">
                                         <a href="<?php the_permalink(); ?>">
@@ -327,9 +327,9 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-4">
-                                <div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
-                                    <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
+                            <div class="jbs-col-lg-2 jbs-col-md-4">
+                                <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end sm-mt-20">
+                                    <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
                                         <?php esc_html_e( 'APPLY', 'jobus' ); ?>
                                     </a>
                                 </div>

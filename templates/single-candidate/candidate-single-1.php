@@ -62,7 +62,7 @@ wp_enqueue_script( 'lightbox' );
                         <h3 class="title"><?php echo esc_html( $video_title ) ?></h3>
                         <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $video_bg_img ) ?>)">
-                            <a class="fancybox jbs-rounded-circle video-icon tran3s text-center" data-fancybox=""
+                            <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $video_url ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
@@ -181,7 +181,7 @@ wp_enqueue_script( 'lightbox' );
                                 ?>
                                 <div class="item">
                                     <a href="<?php echo esc_url( $image_url ) ?> "
-                                       class="example-image-link w-100 d-blok" data-lightbox="example-set">
+                                       class="example-image-link jbs-w-100 jbs-d-block" data-lightbox="example-set">
                                         <?php echo wp_get_attachment_image( $item, 'jobus_280x268' ) ?>
                                     </a>
                                 </div>
@@ -196,13 +196,13 @@ wp_enqueue_script( 'lightbox' );
             </div>
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
-                <div class="candidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
+                <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
 
                     <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="pt-25">
                                 <div class="candidate-avatar jbs-m-auto">
-                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle w-100' ] ); ?>
+                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle jbs-w-100' ] ); ?>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -270,7 +270,7 @@ wp_enqueue_script( 'lightbox' );
                                                 echo '<span>' . esc_html( $meta_name ) . ':</span>';
                                             }
                                             if ( ! empty( is_array( $meta_options[ $meta_key ] ) ) ) {
-                                                echo '<div class="text-capitalize">';
+                                                echo '<div class="jbs-text-capitalize">';
                                                 foreach ( $meta_options[ $meta_key ] as $value ) {
                                                     $trim_value = str_replace( '@space@', ' ', $value );
                                                     echo esc_html( $trim_value );
@@ -304,7 +304,7 @@ wp_enqueue_script( 'lightbox' );
                                         <?php
                                         foreach ( $social_icons as $item ) {
                                             if ( ! empty( $item['url'] ) ) { ?>
-                                                <a href="<?php echo esc_url( $item['url'] ) ?>" class="me-3">
+                                                <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3">
                                                     <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                 </a>
                                                 <?php
@@ -323,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="btn-ten fw-500 text-white w-100 jbs-text-center tran3s mt-15" target="_blank">
+                               class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php
@@ -342,8 +342,8 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
                         <div class="map-area mb-60 md-mb-40">
-                            <div class="gmap_canvas h-100 w-100">
-                                <iframe class="gmap_iframe h-100 w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
+                            <div class="gmap_canvas jbs-h-100 jbs-w-100">
+                                <iframe class="gmap_iframe jbs-h-100 jbs-w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
                         <?php
@@ -356,27 +356,27 @@ wp_enqueue_script( 'lightbox' );
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 
-                            <div class="d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex mb-25">
                                 <input type="text" name="sender_name" id="sender-name" autocomplete="on"
                                        placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
-                            <div class="d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex mb-25">
                                 <input type="email" name="sender_email" id="sender-email"
                                        placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
-                            <div class="d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex mb-25">
                                 <input type="text" name="sender_subject" id="sender_subject"
                                        placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
-                            <div class="d-sm-flex mb-25 xs-mb-10">
+                            <div class="jbs-d-sm-flex mb-25 xs-mb-10">
                                 <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 
-                            <div class="d-sm-flex">
+                            <div class="jbs-d-sm-flex">
                                 <button type="submit" name="send_message" id="send_message"
-                                        class="btn-ten fw-500 text-white flex-fill text-center tran3s">
+                                        class="btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

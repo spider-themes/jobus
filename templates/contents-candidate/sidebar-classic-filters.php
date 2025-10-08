@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
-<div class="col-xl-3 col-lg-4">
-    <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40" data-bs-toggle="offcanvas"
+<div class="jbs-col-xl-3 jbs-col-lg-4">
+    <button type="button" class="filter-btn jbs-w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40" data-bs-toggle="offcanvas"
             data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e( 'Filter', 'jobus' ); ?>

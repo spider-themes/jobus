@@ -18,15 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <section class="jobus-candidate-classic candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
-    <div class="container">
-        <div class="row">
+    <div class="jbs-container">
+        <div class="jbs-row">
 
 			<?php jobus_get_template_part( 'contents-candidate/sidebar-classic-filters' ); ?>
 
-            <div class="col-xl-9 col-lg-8">
-                <div class="ms-xxl-5 ms-xl-3">
+            <div class="jbs-col-xl-9 jbs-col-lg-8">
+                <div class="jbs-ms-xxl-5 jbs-ms-xl-3">
 
-                    <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center mb-20">
 
 						<?php
                         // Display the total number of candidates found

@@ -4,15 +4,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
-<div class="col-xl-3 col-lg-4">
-    <button type="button" class="filter-btn w-100 pt-2 pb-2 h-auto fw-500 tran3s d-lg-none mb-40"
+<div class="jbs-col-xl-3 jbs-col-lg-4">
+    <button type="button" class="filter-btn jbs-w-100 pt-2 pb-2 jbs-h-auto fw-500 tran3s jbs-d-lg-none mb-40"
             data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
 		<?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>
 
     <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
-        <button type="button" class="btn-close text-reset d-lg-none" data-bs-dismiss="offcanvas"
+        <button type="button" class="btn-close text-reset jbs-d-lg-none" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
@@ -104,7 +104,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 					}
 				}
 				?>
-                <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30">
+                <button type="submit" class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30">
 					<?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                 </button>
             </form>
