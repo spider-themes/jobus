@@ -101,20 +101,41 @@
   padding: inherit;
 }
 
+/*
+ * CSS for Jobus Pro Feature Lock/Unlock
+ *
+ * This stylesheet manages the display and behavior of the "Pro" badge and lock effect for premium-only fields in the Jobus admin options panel.
+ *
+ * - By default, fields with the class `.jobus-pro-notice.csf-field` show a "Pro" badge and are visually locked (reduced opacity, pointer-events: none).
+ * - If the field also has the class `.active-theme-jobi` and the body has the class `jobi` (Jobi theme is active), the badge is hidden and the field is unlocked (full opacity, pointer-events: inherit).
+ * - This logic ensures that Jobi theme users get free access to pro features, while other themes see the lock and badge.
+ * - For future-proofing, add similar logic for child themes if needed.
+ *
+ * Usage:
+ *   - Add `jobus-pro-notice` to any field that should be locked for non-Jobi themes.
+ *   - Add `active-theme-jobi` to unlock for Jobi theme (done in PHP options logic).
+ */
 .jobus-pro-notice.csf-field {
   position: relative;
   cursor: pointer;
 }
-
-body:not(.jobus-premium) .jobus-pro-notice.csf-field:not([class*=active-theme])::before {
+.jobus-pro-notice.csf-field::before {
   content: "Pro";
   background-color: #f1bd6c;
   color: #000;
   padding: 3px 10px;
   border-radius: 3px;
   margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: bold;
+  pointer-events: none;
+  display: block;
 }
-body:not(.jobus-premium) .jobus-pro-notice.csf-field:not([class*=active-theme])::after {
+.jobus-pro-notice.csf-field::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -123,35 +144,21 @@ body:not(.jobus-premium) .jobus-pro-notice.csf-field:not([class*=active-theme]):
   left: 0;
   background-color: transparent;
   z-index: 2;
+  display: block;
 }
-body:not(.jobus-premium) .jobus-pro-notice:not([class*=active-theme]) .csf-title,
-body:not(.jobus-premium) .jobus-pro-notice:not([class*=active-theme]) .csf-fieldset {
+.jobus-pro-notice.csf-field .csf-title,
+.jobus-pro-notice.csf-field .csf-fieldset {
   opacity: 0.5;
   pointer-events: none;
 }
 
-body:not(.valid):not(.jobus-premium) .jobus-pro-notice.csf-field[class*=active-theme]::before {
-  content: "Pro";
-  background-color: #f1bd6c;
-  color: #000;
-  padding: 3px 10px;
-  border-radius: 3px;
-  margin-bottom: 10px;
+body.jobi .jobus-pro-notice.active-theme-jobi::before, body.jobi .jobus-pro-notice.active-theme-jobi::after {
+  display: none !important;
 }
-body:not(.valid):not(.jobus-premium) .jobus-pro-notice.csf-field[class*=active-theme]::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  z-index: 2;
-}
-body:not(.valid):not(.jobus-premium) .jobus-pro-notice[class*=active-theme] .csf-title,
-body:not(.valid):not(.jobus-premium) .jobus-pro-notice[class*=active-theme] .csf-fieldset {
-  opacity: 0.5;
-  pointer-events: none;
+body.jobi .jobus-pro-notice.active-theme-jobi .csf-title,
+body.jobi .jobus-pro-notice.active-theme-jobi .csf-fieldset {
+  opacity: 1 !important;
+  pointer-events: inherit !important;
 }
 
 /*# sourceMappingURL=admin.css.map */

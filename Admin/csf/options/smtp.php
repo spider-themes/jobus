@@ -22,7 +22,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'   => esc_html__( 'SMTP (On/OFF)', 'jobus' ),
 			'desc'    => esc_html__( 'Enable or disable the SMTP server for sending emails', 'jobus' ),
 			'default' => false,
-			'class'    => 'jobus-pro-notice',
+			'class'    => 'jobus-pro-notice' . $active_theme,
 		),
 
 		array(

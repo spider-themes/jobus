@@ -22,10 +22,6 @@ $video_url                = ! empty( $meta['video_url'] ) ? $meta['video_url'] :
 $video_title              = ! empty( $meta['video_title'] ) ? $meta['video_title'] : '';
 $video_bg_img             = ! empty( $meta['video_bg_img']['url'] ) ? $meta['video_bg_img']['url'] : '';
 
-echo '<pre>';
-print_r($meta['video_bg_img']);
-echo '</pre>';
-
 $portfolio_ids = [];
 if ( ! empty( $meta['portfolio'] ) ) {
 	$portfolio_ids = is_array( $meta['portfolio'] ) ? $meta['portfolio'] : explode( ',', $meta['portfolio'] );

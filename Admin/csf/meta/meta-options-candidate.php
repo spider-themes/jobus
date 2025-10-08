@@ -39,7 +39,7 @@ if ( class_exists( 'CSF' ) ) {
 					'2' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-2.png' ),
 				),
 				'default'  => '1',
-				'class'    => 'jobus-pro-notice',
+				'class'    => 'jobus-pro-notice' . $active_theme,
 			),
 
 			array(

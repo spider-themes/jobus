@@ -10,14 +10,14 @@ CSF::createSection( $settings_prefix, array(
 	'fields' => array(
 
 		array(
-			'id'      => 'dashboard_logo',
-			'type'    => 'media',
-			'title'   => esc_html__( 'Logo', 'jobus' ),
+			'id'       => 'dashboard_logo',
+			'type'     => 'media',
+			'title'    => esc_html__( 'Logo', 'jobus' ),
 			'subtitle' => esc_html__( 'Upload an logo for the dashboard', 'jobus' ),
-			'default' => array(
+			'default'  => array(
 				'url' => JOBUS_IMG . '/dashboard/logo/logo.png',
 			),
-			'class'    => 'jobus-pro-notice',
+			'class'    => 'jobus-pro-notice' . $active_theme,
 		),
 	)
 ) );

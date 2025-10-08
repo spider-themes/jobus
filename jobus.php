@@ -146,10 +146,11 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\includes\Classes\submission\Job_Form_Submission();
 			new \jobus\includes\Classes\submission\Password_Handler();
 
-			//Admin UI
+			// Admin UI
 			if ( is_admin() ) {
-				new \jobus\Admin\User();
+				new \jobus\Admin\Admin();
 				new \jobus\Admin\Assets();
+				new \jobus\Admin\User();
 			}
 
 			//Post Type

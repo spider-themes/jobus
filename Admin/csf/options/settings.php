@@ -20,6 +20,9 @@ if ( class_exists( 'CSF' ) ) {
 		'sticky_header'   => 'true',
 	) );
 
+	$active_theme = jobus_unlock_themes( 'jobi' );
+	$active_theme = ( $active_theme ) ? ' active-theme-jobi' : '';
+
 	/**
 	 * Include files
 	 */

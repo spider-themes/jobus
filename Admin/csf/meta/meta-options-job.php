@@ -39,7 +39,7 @@ if ( class_exists( 'CSF' ) ) {
 					'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-2.png' ),
 				),
 				'default'  => '1',
-				'class'    => 'jobus-pro-notice',
+				'class'    => 'jobus-pro-notice' . $active_theme
 			),
 
 			// Company Information
@@ -55,7 +55,7 @@ if ( class_exists( 'CSF' ) ) {
 				'options' => jobus_company_post_list(),
 				'chosen'  => true,
 				'default' => '',
-				'class'   => 'jobus-pro-notice',
+				'class'   => 'jobus-pro-notice' . $active_theme
 			),
 
 			array(
@@ -67,7 +67,7 @@ if ( class_exists( 'CSF' ) ) {
 					'custom'  => esc_html__( 'Custom', 'jobus' ),
 				),
 				'default' => 'default',
-				'class'   => 'jobus-pro-notice',
+				'class'   => 'jobus-pro-notice' . $active_theme,
 			),
 
 			array(
@@ -104,7 +104,7 @@ if ( class_exists( 'CSF' ) ) {
 				'title'      => esc_html__( 'Apply Link', 'jobus' ),
 				'default'    => '#',
 				'dependency' => array( 'is_apply_btn', '==', 'custom' ),
-				'class'   => 'jobus-pro-notice',
+				'class'   => 'jobus-pro-notice' . $active_theme,
 			),
 		)
 	) );
