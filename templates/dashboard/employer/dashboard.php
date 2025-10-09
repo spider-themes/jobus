@@ -69,59 +69,59 @@ $total_applications = count($applications);
 $saved_candidates = get_user_meta( $user->ID, 'jobus_saved_candidates', true );
 $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates) : ( $saved_candidates ? count((array)$saved_candidates) : 0 );
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+    <div class="jbs-row">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
 	                    <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/beg.svg' ) ?>" alt="<?php esc_attr_e( 'Posted Job', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500"><?php echo esc_html($total_jobs) ?></div>
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500"><?php echo esc_html($total_jobs) ?></div>
                         <span><?php esc_html_e( 'Posted Job', 'jobus' ); ?></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ) ?>" alt="<?php esc_attr_e( 'Application', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500"><?php echo esc_html($total_applications); ?></div>
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500"><?php echo esc_html($total_applications); ?></div>
                         <span><?php esc_html_e( 'Application', 'jobus' ); ?></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Saved Job', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500"><?php echo esc_html($saved_candidates_count); ?></div>
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500"><?php echo esc_html($saved_candidates_count); ?></div>
                         <span><?php esc_html_e( 'Save Candidate', 'jobus' ); ?></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ) ?>" alt="<?php esc_attr_e( 'Job Views', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500"><?php echo esc_html($total_job_views); ?></div>
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500"><?php echo esc_html($total_job_views); ?></div>
                         <span><?php esc_html_e( 'Job Views', 'jobus' ); ?></span>
                     </div>
                 </div>
@@ -129,8 +129,8 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
         </div>
     </div>
 
-    <div class="row d-flex pt-50 lg-pt-10">
-        <div class="col-lg-7">
+    <div class="jbs-row jbs-d-flex pt-50 lg-pt-10">
+        <div class="jbs-col-lg-7">
             <div class="saved-job-tab bg-white border-20">
                 <div class="saved-jobs-header">
                     <h4 class="title"><?php esc_html_e( 'Saved Candidate', 'jobus' ); ?></h4>

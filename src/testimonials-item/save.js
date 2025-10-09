@@ -10,19 +10,19 @@ function Save ({attributes}) {
         <div {...blockProps}>
 
             <div className="feedback-block-four">
-                <div className="d-flex align-items-center">
-                    <ul className="style-none d-flex rating">
+                <div className="jbs-d-flex jbs-align-items-center">
+                    <ul className="style-none jbs-d-flex rating">
                         {Array.from({length: rating}, (_, index) => (
                             <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
                         ))}
                     </ul>
-                    <div className="review-score"><span className="fw-500 text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
+                    <div className="review-score"><span className="fw-500 jbs-text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
                 </div>
                 <blockquote>{reviewContents}</blockquote>
-                <div className="d-flex align-items-center">
-                    {authorImage && <img src={authorImage} alt="Author" className="author-img rounded-circle"/>}
+                <div className="jbs-d-flex jbs-align-items-center">
+                    {authorImage && <img src={authorImage} alt="Author" className="author-img jbs-rounded-circle"/>}
                     <div className="ms-3">
-                        <div className="name fw-500 text-dark">{authorName}</div>
+                        <div className="name fw-500 jbs-text-dark">{authorName}</div>
                         <span className="opacity-50">{location}</span>
                     </div>
                 </div>

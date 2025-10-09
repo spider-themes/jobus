@@ -493,6 +493,11 @@
   color: #fff !important;
 }
 
+.jbs-text-reset {
+  --bs-text-opacity: 1;
+  color: inherit !important;
+}
+
 .jbs-m-auto {
   margin: auto !important;
 }
@@ -605,6 +610,145 @@
 
 .jbs-border-0 {
   border: 0 !important;
+}
+
+.jbs-border-bottom {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.jbs-border-top {
+  border-top: 1px solid #dee2e6 !important;
+}
+
+.jbs-mb-20 {
+  margin-bottom: 1.25rem !important;
+}
+
+.jbs-mb-30 {
+  margin-bottom: 1.875rem !important;
+}
+
+.jbs-mb-40 {
+  margin-bottom: 2.5rem !important;
+}
+
+.jbs-mb-25 {
+  margin-bottom: 1.5625rem !important;
+}
+
+.jbs-mt-auto {
+  margin-top: auto !important;
+}
+
+.jbs-mt-20 {
+  margin-top: 1.25rem !important;
+}
+
+.jbs-mt-30 {
+  margin-top: 1.875rem !important;
+}
+
+.jbs-mt-70 {
+  margin-top: 4.375rem !important;
+}
+
+.jbs-pt-2 {
+  padding-top: 0.5rem !important;
+}
+
+.jbs-pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+.jbs-pt-15 {
+  padding-top: 0.9375rem !important;
+}
+
+.jbs-pb-15 {
+  padding-bottom: 0.9375rem !important;
+}
+
+.jbs-pt-25 {
+  padding-top: 1.5625rem !important;
+}
+
+.jbs-pb-25 {
+  padding-bottom: 1.5625rem !important;
+}
+
+.jbs-pb-30 {
+  padding-bottom: 1.875rem !important;
+}
+
+.jbs-pb-50 {
+  padding-bottom: 3.125rem !important;
+}
+
+.jbs-ps-3 {
+  padding-left: 1rem !important;
+}
+
+.jbs-ps-4 {
+  padding-left: 1.5rem !important;
+}
+
+.jbs-pe-4 {
+  padding-right: 1.5rem !important;
+}
+
+.jbs-ms-2 {
+  margin-left: 0.5rem !important;
+}
+
+.jbs-text-dark {
+  color: #212529 !important;
+}
+
+.jbs-fw-500 {
+  font-weight: 500 !important;
+}
+
+@media (max-width: 575px) {
+  .jbs-xs-mt-20 {
+    margin-top: 1.25rem !important;
+  }
+}
+@media (min-width: 576px) {
+  .jbs-align-items-sm-center {
+    align-items: center !important;
+  }
+  .jbs-align-items-start {
+    align-items: flex-start !important;
+  }
+}
+@media (max-width: 991px) {
+  .jbs-lg-pb-20 {
+    padding-bottom: 1.25rem !important;
+  }
+  .jbs-lg-mt-40 {
+    margin-top: 2.5rem !important;
+  }
+  .jbs-md-mb-20 {
+    margin-bottom: 1.25rem !important;
+  }
+  .jbs-md-mt-10 {
+    margin-top: 0.625rem !important;
+  }
+}
+@media (min-width: 992px) {
+  .jbs-d-lg-none {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) {
+  .jbs-sm-mt-20 {
+    margin-top: 1.25rem !important;
+  }
+}
+@media (min-width: 1200px) {
+  .jbs-justify-content-xl-end {
+    justify-content: flex-end !important;
+  }
 }
 
 /*# sourceMappingURL=jbs-framework.css.map */

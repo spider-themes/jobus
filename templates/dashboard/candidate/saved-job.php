@@ -35,19 +35,19 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 			$location = get_the_terms( $job_id, 'jobus_job_location' );
 			$category = get_the_terms( $job_id, 'jobus_job_cat' );
 			?>
-            <div class="job-list-one style-two position-relative mb-20">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-lg-4">
-                        <div class="job-title d-flex align-items-center">
+            <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
+                <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
+                    <div class="jbs-col-lg-4">
+                        <div class="job-title jbs-d-flex jbs-align-items-center">
                             <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="logo">
-								<?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img m-auto' ] ); ?>
+								<?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                             </a>
-                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="title fw-500 tran3s">
+                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="title jbs-fw-500 tran3s">
 								<?php echo esc_html( get_the_title( $job_id ) ); ?>
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="jbs-col-lg-3">
 						<?php
 						if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
                             <div class="job-location">
@@ -67,13 +67,13 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 						}
 						?>
                     </div>
-                    <div class="col-lg-3 xs-mt-10">
-                        <span class="fw-500"><?php echo esc_html( get_the_date( get_option( 'date_format' ), $job_id ) ); ?></span>
+                    <div class="jbs-col-lg-3 xs-mt-10">
+                        <span class="jbs-fw-500"><?php echo esc_html( get_the_date( get_option( 'date_format' ), $job_id ) ); ?></span>
                     </div>
-                    <div class="col-lg-2 xs-mt-10">
+                    <div class="jbs-col-lg-2 xs-mt-10">
                         <div class="action-button">
                             <a href="javascript:void(0)"
-                               class="save-btn text-center rounded-circle tran3s jobus-dashboard-remove-saved-post"
+                               class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
                                data-post_id="<?php echo esc_attr( $job_id ); ?>"
                                data-post_type="jobus_job"
                                data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_candidate_saved_job' ) ); ?>"
@@ -82,7 +82,7 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
                             </a>
                             <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>"
                                target="_blank"
-                               class="jobus-dashboard-post-view-more text-center rounded-circle tran3s"
+                               class="jobus-dashboard-post-view-more jbs-text-center jbs-rounded-circle tran3s"
                                title="<?php esc_attr_e( 'View Job', 'jobus' ); ?>">
                                 <i class="bi bi-eye-fill"></i>
                             </a>

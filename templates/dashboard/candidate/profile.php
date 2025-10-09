@@ -30,7 +30,7 @@ $candidate_dynamic_fields = $specs['dynamic_fields'];
 $description = $description_data['description'];
 $avatar_url = $description_data['avatar_url'];
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title"><?php esc_html_e('My Profile', 'jobus'); ?></h2>
 
     <form action="" id="candidate-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -39,9 +39,9 @@ $avatar_url = $description_data['avatar_url'];
         <input type="hidden" name="candidate_profile_form_submit" value="1" />
 
         <div class="bg-white card-box border-20" id="candidate-profile-description">
-            <div class="user-avatar-setting d-flex align-items-center mb-30">
+            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
-                <div class="upload-btn position-relative tran3s ms-4 me-3" id="candidate_profile_picture_upload">
+                <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="candidate_profile_picture_upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                     <input type="hidden" id="candidate_profile_picture_id" name="candidate_profile_picture_id" value="<?php echo esc_attr( $description_data['profile_picture_id'] ); ?>">
                 </div>
@@ -51,7 +51,7 @@ $avatar_url = $description_data['avatar_url'];
                 <input type="hidden" name="profile_picture_action" id="profile_picture_action" value="">
             </div>
 
-            <div class="dash-input-wrapper mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="candidate_name"><?php esc_html_e( 'Full Name*', 'jobus' ); ?></label>
                 <input type="text" name="candidate_name" id="candidate_name" value="<?php echo esc_attr( $user->display_name ); ?>">
             </div>
@@ -137,15 +137,15 @@ $avatar_url = $description_data['avatar_url'];
                              data-bs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                    <div class="jbs-col-lg-2">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_icon">
                                                 <?php esc_html_e( 'Icon', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                    <div class="jbs-col-lg-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
                                                     <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
@@ -157,23 +157,23 @@ $avatar_url = $description_data['avatar_url'];
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                <div class="jbs-row jbs-mb-3">
+                                    <div class="jbs-col-lg-2">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_url">
                                                 <?php esc_html_e( 'URL', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                    <div class="jbs-col-lg-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                <div class="jbs-text-end">
+                                    <button type="button" class="btn btn-danger btn-sm remove-social-link jbs-mt-2 jbs-mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
                                     </button>
                                 </div>
@@ -184,22 +184,22 @@ $avatar_url = $description_data['avatar_url'];
                 }
                 ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-social-link">
+            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="bg-white card-box border-20 mt-40" id="candidate-profile-specifications">
+        <div class="bg-white card-box border-20 jbs-mt-40" id="candidate-profile-specifications">
             <h4 class="dash-title-three"><?php esc_html_e('Specifications', 'jobus'); ?></h4>
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="dash-input-wrapper mb-25">
+            <div class="jbs-row">
+                <div class="jbs-col-lg-3">
+                    <div class="dash-input-wrapper jbs-mb-25">
                         <label for="candidate_age"><?php esc_html_e('Date of Birth (Age)', 'jobus'); ?></label>
                         <input type="date" name="candidate_age" id="candidate_age" class="form-control" value="<?php echo esc_attr($candidate_age); ?>">
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="dash-input-wrapper mb-25">
+                <div class="jbs-col-lg-3">
+                    <div class="dash-input-wrapper jbs-mb-25">
                         <label for="candidate_mail"><?php esc_html_e('Candidate Email', 'jobus'); ?></label>
                         <input type="email" name="candidate_mail" id="candidate_mail" class="form-control" value="<?php echo esc_attr($candidate_mail); ?>">
                     </div>
@@ -214,7 +214,7 @@ $avatar_url = $description_data['avatar_url'];
                             $meta_name = $field['meta_name'] ?? '';
                             $meta_value = $candidate_dynamic_fields[ $meta_key ] ?? '';
                             $meta_values = $field['meta_values_group'] ?? array();
-                            echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
+                            echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                             echo '<label for="' . esc_attr($meta_key) . '">' . esc_html($meta_name) . '</label>';
                             echo '<select name="' . esc_attr($meta_key) . '[]" id="' . esc_attr($meta_key) . '" class="nice-select" multiple>';
                             foreach ($meta_values as $option) {
@@ -228,18 +228,18 @@ $avatar_url = $description_data['avatar_url'];
                 }
                 ?>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="dash-input-wrapper mb-25">
+            <div class="jbs-row">
+                <div class="jbs-col-12">
+                    <div class="dash-input-wrapper jbs-mb-25">
                         <label><?php esc_html_e('Additional Specifications', 'jobus'); ?></label>
                         <div id="specifications-repeater">
                             <?php
                             if (!empty($candidate_specifications)) {
                                 foreach ($candidate_specifications as $i => $spec) {
                                     ?>
-                                    <div class="dash-input-wrapper mb-20 specification-item d-flex align-items-center gap-2">
-                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][title]" class="form-control me-2" placeholder="<?php esc_attr_e('Title', 'jobus'); ?>" value="<?php echo esc_attr($spec['title']); ?>" style="min-width:180px">
-                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][value]" class="form-control me-2" placeholder="<?php esc_attr_e('Value', 'jobus'); ?>" value="<?php echo esc_attr($spec['value']); ?>" style="min-width:180px">
+                                    <div class="dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center gap-2">
+                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][title]" class="form-control jbs-me-2" placeholder="<?php esc_attr_e('Title', 'jobus'); ?>" value="<?php echo esc_attr($spec['title']); ?>" style="min-width:180px">
+                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][value]" class="form-control jbs-me-2" placeholder="<?php esc_attr_e('Value', 'jobus'); ?>" value="<?php echo esc_attr($spec['value']); ?>" style="min-width:180px">
                                         <button type="button" class="btn btn-danger remove-specification" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i></button>
                                     </div>
                                     <?php
@@ -255,20 +255,20 @@ $avatar_url = $description_data['avatar_url'];
             </div>
         </div>
 
-        <div class="bg-white card-box border-20 mt-40" id="candidate-profile-map">
+        <div class="bg-white card-box border-20 jbs-mt-40" id="candidate-profile-map">
             <h4 class="dash-title-three"><?php esc_html_e('Address & Location', 'jobus'); ?></h4>
-            <div class="row">
-                <div class="col-12">
-                    <div class="dash-input-wrapper mb-25">
+            <div class="jbs-row">
+                <div class="jbs-col-12">
+                    <div class="dash-input-wrapper jbs-mb-25">
                         <label for="candidate_location_address"><?php esc_html_e('Map Location*', 'jobus') ?></label>
-                        <div class="position-relative">
+                        <div class="jbs-position-relative">
                             <input type="text" name="candidate_location_address" id="candidate_location_address" placeholder="<?php esc_attr_e('XC23+6XC, Moiran, N105', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['address']); ?>">
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6 mb-2">
+                        <div class="jbs-row jbs-mt-2">
+                            <div class="jbs-col-md-6 jbs-mb-2">
                                 <input type="text" name="candidate_location_lat" id="candidate_location_lat" placeholder="<?php esc_attr_e('Latitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['latitude']); ?>">
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="jbs-col-md-6 jbs-mb-2">
                                 <input type="text" name="candidate_location_lng" id="candidate_location_lng" placeholder="<?php esc_attr_e('Longitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['longitude']); ?>">
                             </div>
                         </div>
@@ -279,8 +279,8 @@ $avatar_url = $description_data['avatar_url'];
                         $is_http = is_ssl() ? 'https://' : 'http://';
                         $iframe_url = $is_http . "maps.google.com/maps?q={$lat},{$lng}&z={$zoom}&output=embed";
                         ?>
-                        <div class="map-frame mt-30">
-                            <iframe class="gmap_iframe h-100 w-100"
+                        <div class="map-frame jbs-mt-30">
+                            <iframe class="gmap_iframe jbs-h-100 jbs-w-100"
                                     id="candidate_gmap_iframe"
                                     src="<?php echo esc_url($iframe_url); ?>"
                                     allowfullscreen=""
@@ -292,8 +292,8 @@ $avatar_url = $description_data['avatar_url'];
             </div>
         </div>
 
-        <div class="button-group d-inline-flex align-items-center mt-30">
-            <button type="submit" class="dash-btn-two tran3s me-3 rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+        <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3 rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
     </form>
 

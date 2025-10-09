@@ -3,7 +3,7 @@ import {useBlockProps} from "@wordpress/block-editor";
 function Save({attributes}) {
 
     const blockProps = useBlockProps.save({
-        className: 'video-post d-flex align-items-center justify-content-center mb-50',
+        className: 'video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mb-50',
         style: {
             backgroundImage: `url(${attributes.backgroundImage})`,
             backgroundRepeat: 'no-repeat',
@@ -14,7 +14,7 @@ function Save({attributes}) {
 
     return (
         <div {...blockProps}>
-            <a href={attributes.videoUrl} className="fancybox rounded-circle video-icon tran3s text-center" style={
+            <a href={attributes.videoUrl} className="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" style={
                 {
                     backgroundColor: attributes.icon_bg_color,
                 }

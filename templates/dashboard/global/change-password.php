@@ -33,7 +33,7 @@ if ( $error_message ) {
 }
 ?>
 
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title">
         <?php esc_html_e( 'Change Password', 'jobus' ); ?>
     </h2>
@@ -58,9 +58,9 @@ if ( $error_message ) {
         <form action="" id="user-password-form" method="post" enctype="multipart/form-data" autocomplete="off">
             <?php wp_nonce_field( 'update_user_password', 'update_user_password_nonce' ); ?>
             <input type="hidden" name="update_user_password" value="1">
-            <div class="row">
-                <div class="col-12">
-                    <div class="dash-input-wrapper position-relative mb-20">
+            <div class="jbs-row">
+                <div class="jbs-col-12">
+                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="current-password"><?php esc_html_e( 'Current Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="current-password" name="current_password" required>
                         <span class="placeholder_icon">
@@ -71,8 +71,8 @@ if ( $error_message ) {
                         <div class="invalid-feedback" id="current-password-error"></div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="dash-input-wrapper position-relative mb-20">
+                <div class="jbs-col-12">
+                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="new-password"><?php esc_html_e( 'New Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="new-password" name="new_password" required>
                         <span class="placeholder_icon">
@@ -83,8 +83,8 @@ if ( $error_message ) {
                         <div id="password-strength"></div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="dash-input-wrapper position-relative mb-20">
+                <div class="jbs-col-12">
+                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="confirm-password"><?php esc_html_e( 'Confirm New Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="confirm-password" name="confirm_password" required>
                         <span class="placeholder_icon">
@@ -95,9 +95,9 @@ if ( $error_message ) {
                         <div id="password-match-status"></div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="button-group d-inline-flex align-items-center mt-30">
-                        <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Update Password', 'jobus' ); ?></button>
+                <div class="jbs-col-12">
+                    <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
+                        <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Update Password', 'jobus' ); ?></button>
                     </div>
                 </div>
             </div>

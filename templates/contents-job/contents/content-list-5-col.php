@@ -18,34 +18,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	while ( $job_query->have_posts() ) : $job_query->the_post();
 		$save_job_status = jobus_get_save_status();
 		?>
-		<div class="job-list-one style-two position-relative border-style mb-20">
-			<div class="row justify-content-between align-items-center">
-				<div class="col-xl-4 col-lg-4">
-					<div class="job-title d-flex align-items-center">
-						<a href="<?php the_permalink(); ?>" class="logo md-mb-20">
-							<?php the_post_thumbnail('full', [ 'class' => 'lazy-img m-auto' ]); ?>
+		<div class="job-list-one style-two jbs-position-relative border-style jbs-mb-20">
+			<div class="jbs-row jbs-justify-content-between jbs-align-items-center">
+				<div class="jbs-col-xl-4 jbs-col-lg-4">
+					<div class="job-title jbs-d-flex jbs-align-items-center">
+						<a href="<?php the_permalink(); ?>" class="logo jbs-md-mb-20">
+							<?php the_post_thumbnail('full', [ 'class' => 'lazy-img jbs-m-auto' ]); ?>
 						</a>
-						<a href="<?php the_permalink(); ?>" class="title fw-500 tran3s ps-3 ps-lg-0">
+						<a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s jbs-ps-3 ps-lg-0">
 							<?php the_title('<h3>', '</h3>') ?>
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
 					<?php if (jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) : ?>
-						<a href="<?php the_permalink(); ?>" class="job-duration fw-500">
+						<a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
 							<?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1')) ?>
 						</a>
 					<?php endif; ?>
 					<div class="job-salary">
 						<?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) : ?>
-							<span class="fw-500 text-dark"><?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) ?></span>
+							<span class="jbs-fw-500 jbs-text-dark"><?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_2')) ?></span>
 						<?php endif; ?>
 						<?php if (jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) : ?>
 							<span class="expertise">. <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_archive_meta_3')) ?></span>
 						<?php endif; ?>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
                     <div class="job-location">
                         <a href="<?php echo esc_url( jobus_get_first_taxonomy_link('jobus_job_location') ) ?>">
 							<?php echo esc_html( jobus_get_first_taxonomy_name('jobus_job_location') ); ?>
@@ -57,8 +57,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-2 col-md-4">
-					<div class="btn-group d-flex align-items-center justify-content-md-end sm-mt-20">
+				<div class="jbs-col-lg-2 jbs-col-md-4">
+					<div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end jbs-sm-mt-20">
 						<?php
                         if ( is_array($save_job_status) && isset($save_job_status['post_id']) ) {
                             jobus_render_post_save_button( [
@@ -67,11 +67,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 'meta_key'   => 'jobus_saved_jobs',
                                 'is_saved'   => $save_job_status['is_saved'],
                                 'button_title' => !empty($save_job_status['is_saved']) ? esc_html__('Saved Job', 'jobus') : esc_html__('Save Job', 'jobus'),
-                                'class' => 'save-btn text-center rounded-circle tran3s me-3 jobus-saved-post'
+                                'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s jbs-me-3 jobus-saved-post'
                             ] );
                         }
 						?>
-                        <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
+                        <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
 							<?php esc_html_e('APPLY', 'jobus'); ?>
 						</a>
 					</div>

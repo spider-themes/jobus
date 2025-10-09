@@ -28,9 +28,9 @@ get_footer();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="container">
+                <div class="jbs-container">
                     <?php
-                    $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten text-white';
+                    $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten jbs-text-white';
 
                     // Get current user information
                     $user            = wp_get_current_user();
@@ -44,53 +44,53 @@ get_footer();
                     $candidate_email = $user->user_email;
                     ?>
                     <form action="#" name="job_application_form" class="job-application-form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
-                        <div class="row g-4">
+                        <div class="jbs-row g-4">
 
                             <input type="hidden" name="job_application_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <input type="hidden" name="job_application_title" value="<?php echo esc_attr( get_the_title( get_the_ID() ) ); ?>">
                             <input type="hidden" name="job_application_nonce" value="<?php echo esc_attr( wp_create_nonce( 'jobus_job_application' ) ); ?>">
 
-                            <div class="col-md-6">
+                            <div class="jbs-col-md-6">
                                 <label for="firstName" class="form-label"><?php esc_html_e( 'First Name*', 'jobus' ); ?></label>
                                 <input type="text" class="form-control" id="firstName" name="candidate_fname"
                                        value="<?php echo esc_attr( $candidate_fname ); ?>" required>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="jbs-col-md-6">
                                 <label for="lastName" class="form-label"><?php esc_html_e( 'Last Name', 'jobus' ); ?></label>
                                 <input type="text" class="form-control" id="lastName" name="candidate_lname"
                                        value="<?php echo esc_attr( $candidate_lname ); ?>">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="jbs-col-md-12">
                                 <label for="email" class="form-label"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                                 <input type="email" class="form-control" id="email" name="candidate_email"
                                        value="<?php echo esc_attr( $candidate_email ); ?>" required>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="jbs-col-md-12">
                                 <label for="phone" class="form-label"><?php esc_html_e( 'Phone', 'jobus' ); ?></label>
                                 <input type="tel" class="form-control" id="phone" name="candidate_phone">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="jbs-col-md-12">
                                 <label for="message" class="form-label"><?php esc_html_e( 'Message', 'jobus' ); ?></label>
                                 <textarea class="form-control" id="message" name="candidate_message" rows="4"></textarea>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="jbs-col-md-12">
                                 <label for="upload_cv" class="form-label"><?php esc_html_e( 'Upload CV (PDF or Word)', 'jobus' ); ?></label>
                                 <input type="file" class="form-control upload-cv" id="upload_cv" name="candidate_cv" accept=".pdf,.doc,.docx">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="jbs-col-md-12">
                                 <button type="submit" class="btn <?php echo esc_attr( $btn_class ) ?>"><?php esc_html_e( 'Submit Application',
                                         'jobus' ); ?></button>
                             </div>
                         </div>
                     </form>
 
-                    <div id="applicationSuccessMessage" style="display:none;" class="alert alert-success mt-3">
+                    <div id="applicationSuccessMessage" style="display:none;" class="alert alert-success jbs-mt-3">
                         <?php esc_html_e( 'Your application has been submitted successfully.', 'jobus' ); ?>
                     </div>
 

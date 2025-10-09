@@ -55,17 +55,17 @@ $result_count = $job_query;
 
 // Pagination
 $pagination_query = $job_query;
-$pagination_prev  = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="me-2" />'
+$pagination_prev  = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="jbs-me-2" />'
                     . esc_html__( 'Prev', 'jobus' );
 $pagination_next  = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' )
-                    . '" class="ms-2" />';
+                    . '" class="jbs-ms-2" />';
 ?>
 <section class="job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="jbs-container">
+        <div class="jbs-row">
+            <div class="jbs-col-lg-12">
                 <div class="job-post-item-wrapper">
-                    <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-20">
                         <?php
                         // Display the total number of candidates found
                         include( 'loop/result-count.php' );

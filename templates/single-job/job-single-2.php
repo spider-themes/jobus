@@ -6,17 +6,17 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 ?>
 
 <section class="job-details jobus_job_details_2 style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-xxl-9 col-xl-10 m-auto">
-                <div class="details-post-data ps-xxl-4 pe-xxl-4">
+    <div class="jbs-container">
+        <div class="jbs-row">
+            <div class="jbs-col-xxl-9 jbs-col-xl-10 jbs-m-auto">
+                <div class="details-post-data jbs-ps-xxl-4 jbs-pe-xxl-4">
                     <?php
 
                     // Retrieve the repeater field configurations from settings options
                     $specifications = jobus_opt('job_specifications');
                     if (is_array($specifications)) {
                         ?>
-                        <div class="job-meta-data-two d-flex flex-wrap justify-content-center justify-content-lg-between style-none">
+                        <div class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between style-none">
                             <?php
                             foreach ($specifications as $field) {
 
@@ -34,7 +34,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                         if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
                                             echo '<i class="' . esc_attr($field['meta_icon']) . '"></i>';
                                         } elseif ($field['is_meta_icon'] == 'meta_image' && !empty($field['meta_image']['id'])) {
-                                            echo wp_get_attachment_image($field['meta_image']['id'], 'full', false, ['class' => 'lazy-img m-auto icon']);
+                                            echo wp_get_attachment_image($field['meta_image']['id'], 'full', false, ['class' => 'lazy-img jbs-m-auto icon']);
                                         }
 
                                         // Meta Name
@@ -92,18 +92,18 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         // If the user has already applied, show "Applied the Job" button
                         if (!empty($has_applied)) {
                             ?>
-                            <a href="javascript:void(0)" class="btn-one mt-25 disabled">
+                            <a href="javascript:void(0)" class="btn-one jbs-mt-25 disabled">
                                 <?php esc_html_e('Already Applied', 'jobus'); ?>
                             </a>
                             <?php
                         } else {
                             // Show the apply button if the user has not applied yet
                             if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25">
+                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25">
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="#" class="btn-one mt-25" data-bs-toggle="modal"
+                                <a href="#" class="btn-one jbs-mt-25" data-bs-toggle="modal"
                                    data-bs-target="#applyJobModal">
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
@@ -111,12 +111,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         }
                     } else {
                         if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25">
+                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="btn-one mt-25" data-bs-toggle="modal"
+                            <a href="#" class="btn-one jbs-mt-25" data-bs-toggle="modal"
                                data-bs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>

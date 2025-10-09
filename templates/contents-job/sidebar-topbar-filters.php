@@ -5,21 +5,21 @@ if (!defined('ABSPATH')) {
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 ?>
-<div class="col-12">
+<div class="jbs-col-12">
     <div class="filter-area-tab">
-        <div class="light-bg border-20 ps-4 pe-4">
+        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4">
 
-            <a class="filter-header border-20 d-block collapsed" data-bs-toggle="collapse" href="#collapseFilterHeader" role="button" aria-expanded="false">
-                <span class="main-title fw-500 text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
+            <a class="filter-header border-20 jbs-d-block collapsed" data-bs-toggle="collapse" href="#collapseFilterHeader" role="button" aria-expanded="false">
+                <span class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
             </a>
 
-            <div class="collapse border-top" id="collapseFilterHeader">
-                <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30" role="search" method="get">
+            <div class="collapse jbs-border-top" id="collapseFilterHeader">
+                <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-pt-25 jbs-pb-30" role="search" method="get">
 
                     <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
                     <input type="hidden" name="post_type" value="jobus_job"/>
 
-                    <div class="row">
+                    <div class="jbs-row">
                         <?php
                         $filter_widgets = jobus_opt('job_sidebar_widgets');
 
@@ -36,9 +36,9 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 $job_specifications = jobus_get_specs_options();
                                 $job_specifications = $job_specifications[ $widget_name ] ?? '';
                                 ?>
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="filter-block pb-50 lg-pb-20">
-                                        <div class="filter-title fw-500 text-dark"><?php echo esc_html($widget_title) ?></div>
+                                <div class="jbs-col-lg-3 jbs-col-sm-6">
+                                    <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
+                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
                                         <?php
                                         // Include the appropriate widget layout file based on the widget type
                                         $specifications_data = $job_specifications;
@@ -87,9 +87,9 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         ?>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xl-2 m-auto">
-                            <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30 md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
+                    <div class="jbs-row">
+                        <div class="jbs-col-xl-2 jbs-m-auto">
+                            <button type="submit" class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
                         </div>
                     </div>
                 </form>

@@ -5,17 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
     <section class="job-details jobus_job_details pt-100 lg-pt-80 pb-130 lg-pb-80">
-        <div class="container">
-            <div class="row">
+        <div class="jbs-container">
+            <div class="jbs-row">
 
-                <div class="col-xxl-9 col-xl-8">
-                    <div class="details-post-data me-xxl-5 pe-xxl-4">
+                <div class="jbs-col-xxl-9 jbs-col-xl-8">
+                    <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
                         <?php the_content(); ?>
                     </div>
                 </div>
 
-                <div class="col-xxl-3 col-xl-4">
-                    <div class="job-company-info ms-xl-5 ms-xxl-0 lg-mt-50">
+                <div class="jbs-col-xxl-3 jbs-col-xl-4">
+                    <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 lg-mt-50">
                         <?php
                         $website        = $meta['company_website'] ?? '';
                         $website_target = $website['target'] ?? '_self';
@@ -32,10 +32,10 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                         if ( $company_query->have_posts() ) {
                             $company_query->the_post();
                             if ( has_post_thumbnail() ) {
-                                the_post_thumbnail( 'full', array( 'class' => 'lazy-img m-auto logo' ) );
+                                the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                             }
                             ?>
-                            <div class="text-md text-dark text-center mt-15 mb-20"><?php the_title() ?></div>
+                            <div class="text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20"><?php the_title() ?></div>
                             <?php
                             // Website button logic
                             if ( $meta['is_company_website'] == 'custom' && ! empty( $website['url'] ) ) { ?>
@@ -54,8 +54,8 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                             wp_reset_postdata();
                         }
                         ?>
-                        <div class="border-top mt-40 pt-40">
-                            <ul class="job-meta-data row style-none">
+                        <div class="jbs-border-top jbs-mt-40 jbs-pt-40">
+                            <ul class="job-meta-data jbs-row style-none">
                                 <?php
                                 // Retrieve the repeater field configurations from settings options
                                 $specifications = jobus_opt( 'job_specifications' );
@@ -70,7 +70,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 
                                         if ( isset( $meta_options[ $meta_key ] ) ) {
                                             ?>
-                                            <li class="col-xl-6 col-md-4 col-sm-6">
+                                            <li class="jbs-col-xl-6 jbs-col-md-4 jbs-col-sm-6">
                                                 <?php
                                                 if ( ! empty( $meta_options[ $meta_key ] ) ) {
                                                     echo '<span>' . esc_html( $meta_name ) . '</span>';
@@ -93,21 +93,21 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                 }
                                 if ( jobus_get_first_taxonomy_name( 'jobus_job_location' ) ) {
                                     ?>
-                                    <li class="col-xl-6 col-md-4 col-sm-6">
+                                    <li class="jbs-col-xl-6 jbs-col-md-4 jbs-col-sm-6">
                                         <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                         <div><?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_job_location' ) ); ?></div>
                                     </li>
                                     <?php
                                 }
                                 ?>
-                                <li class="col-xl-6 col-md-4 col-sm-6">
+                                <li class="jbs-col-xl-6 jbs-col-md-4 jbs-col-sm-6">
                                     <span><?php esc_html_e( 'Date', 'jobus' ); ?></span>
                                     <div><?php echo esc_html( get_the_date( 'd M, Y' ) ); ?></div>
                                 </li>
                             </ul>
                             <?php
                             if ( jobus_get_tag_list() ) { ?>
-                                <div class="job-tags d-flex flex-wrap pt-15">
+                                <div class="job-tags jbs-d-flex jbs-flex-wrap jbs-pt-15">
                                     <?php echo wp_kses_post( jobus_get_tag_list() ) ?>
                                 </div>
                                 <?php
@@ -141,30 +141,30 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                 // If the user has already applied, show "Applied the Job" button
                                 if ( ! empty( $has_applied ) ) {
                                     ?>
-                                    <a href="javascript:void(0)" class="btn-one w-100 mt-25 disabled">
+                                    <a href="javascript:void(0)" class="btn-one jbs-w-100 jbs-mt-25 disabled">
                                         <?php esc_html_e( 'Already Applied', 'jobus' ); ?>
                                     </a>
                                     <?php
                                 } else {
                                     // Show the apply button if the user has not applied yet
                                     if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                                        <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one w-100 mt-25">
+                                        <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 jbs-mt-25">
                                             <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                         </a>
                                     <?php } else { ?>
-                                        <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                        <a href="#" class="btn-one jbs-w-100 jbs-mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
                                             <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                         </a>
                                     <?php }
                                 }
                             } else {
                                 if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                                    <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one w-100 mt-25">
+                                    <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 jbs-mt-25">
                                         <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                     </a>
                                     <?php
                                 } else { ?>
-                                    <a href="#" class="btn-one w-100 mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
+                                    <a href="#" class="btn-one jbs-w-100 jbs-mt-25" data-bs-toggle="modal" data-bs-target="#applyJobModal">
                                         <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                     </a>
                                     <?php

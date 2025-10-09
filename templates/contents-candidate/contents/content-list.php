@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </a>
                 </div>
                 <div class="right-side">
-                    <div class="jbs-row jbs-gx-1 jbs-align-items-center">
+                    <div class="jbs-row  jbs-align-items-center">
                         <div class="jbs-col-lg-3">
                             <div class="jbs-position-relative">
                                 <h4 class="candidate-name mb-0">

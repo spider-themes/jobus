@@ -4,14 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <section class="jobus-job-topbar job-listing-three pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
-    <div class="container">
-        <div class="row">
+    <div class="jbs-container">
+        <div class="jbs-row">
 
             <?php jobus_get_template_part('contents-job/sidebar-topbar-filters'); ?>
 
-            <div class="col-12">
+            <div class="jbs-col-12">
                 <div class="job-post-item-wrapper">
-                    <div class="upper-filter d-flex justify-content-between align-items-center mb-25 mt-70 lg-mt-40">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
 
 	                    <?php
 	                    // Display the total number of companies found

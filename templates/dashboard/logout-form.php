@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="jobus-logout-from dashboard-body">
     <div class="logout_from">
-        <div class="container">
+        <div class="jbs-container">
             <div class="user-data-form modal-content shadow-sm">
 	            <?php echo do_shortcode('[jobus_logout_form]'); ?>
             </div>

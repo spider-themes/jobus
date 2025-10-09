@@ -50,18 +50,18 @@ $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true
 $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
 
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+    <div class="jbs-row">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>"
                              alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500">
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500">
 							<?php echo esc_html( $all_user_view_count ); ?>
                         </div>
                         <span><?php esc_html_e( 'Total Visitor', 'jobus' ); ?></span>
@@ -70,15 +70,15 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Shortlist', 'jobus' ); ?>"
                              class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500">
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500">
 							<?php
 							// Count shortlisted applications directly in the markup
 							$shortlisted_count = 0;
@@ -97,30 +97,30 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>"
                              class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
                         <span><?php esc_html_e( 'Views', 'jobus' ); ?></span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-6">
-            <div class="dash-card-one bg-white border-30 position-relative mb-15">
-                <div class="d-sm-flex align-items-center justify-content-between">
-                    <div class="icon rounded-circle d-flex align-items-center justify-content-center order-sm-1">
+        <div class="jbs-col-lg-3 jbs-col-6">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+                <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+                    <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>"
                              alt="<?php esc_attr_e( 'Applied Jobs', 'jobus' ); ?>" class="lazy-img">
                     </div>
-                    <div class="order-sm-0">
-                        <div class="value fw-500">
+                    <div class="jbs-order-sm-0">
+                        <div class="value jbs-fw-500">
 							<?php echo esc_html( count( $applicants ) ); ?>
                         </div>
                         <span><?php esc_html_e( 'Applied Job', 'jobus' ); ?></span>
@@ -130,8 +130,8 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
         </div>
     </div>
 
-    <div class="row d-flex pt-50 lg-pt-10">
-        <div class="col-lg-7">
+    <div class="jbs-row jbs-d-flex pt-50 lg-pt-10">
+        <div class="jbs-col-lg-7">
             <div class="saved-job-tab bg-white border-20">
 
                 <div class="saved-jobs-header">

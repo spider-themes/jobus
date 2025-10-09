@@ -4,15 +4,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <section class="jobus-job-popup job-listing-three bg-color pt-90 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+    <div class="jbs-container">
+        <div class="jbs-row">
+            <div class="jbs-col-12">
                 <div class="job-post-item-wrapper">
 
-                    <div class="upper-filter d-flex justify-content-between align-items-start align-items-sm-center mb-30">
-                        <div class="d-sm-flex align-items-center">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-sm-center jbs-mb-30">
+                        <div class="jbs-d-sm-flex jbs-align-items-center">
 
-                            <button type="button" class="filter-btn fw-500 tran3s me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">
+                            <button type="button" class="filter-btn jbs-fw-500 tran3s jbs-me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
 								<?php esc_html_e( 'Filter', 'jobus' ); ?>
                             </button>

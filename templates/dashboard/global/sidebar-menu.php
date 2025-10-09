@@ -44,10 +44,10 @@ foreach ( $role_post_map as $role => $post_type ) {
 
 $logo = jobus_opt( 'dashboard_logo' );
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
     <?php
     if ( ! empty( $logo['url'] ) ) { ?>
-        <div class="logo text-md-center d-md-block d-flex align-items-center justify-content-between">
+        <div class="logo text-md-center d-md-block jbs-d-flex jbs-align-items-center jbs-justify-content-between">
             <a href="<?php esc_url( home_url( '/' ) ); ?>">
                 <img src="<?php echo esc_url( $logo['url'] ) ?>" alt="<?php get_bloginfo( 'name' ) ?>">
             </a>
@@ -58,7 +58,7 @@ $logo = jobus_opt( 'dashboard_logo' );
     ?>
 
     <div class="user-data">
-        <div class="user-avatar online position-relative rounded-circle">
+        <div class="user-avatar online jbs-position-relative jbs-rounded-circle">
             <?php
             $user_avatar = get_user_meta($user->ID, 'jobus_avatar', true);
             if ($user_avatar && filter_var($user_avatar, FILTER_VALIDATE_URL)) {
@@ -75,9 +75,9 @@ $logo = jobus_opt( 'dashboard_logo' );
             </button>
             <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                 <li>
-                    <a href="<?php echo esc_url($profile_url); ?>" class="dropdown-item d-flex align-items-center">
+                    <a href="<?php echo esc_url($profile_url); ?>" class="dropdown-item jbs-d-flex jbs-align-items-center">
                         <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/profile.svg') ?>" alt="<?php esc_attr_e( 'Candidate Profile', 'jobus' ); ?>" class="lazy-img">
-                        <span class="ms-2 ps-1"><?php esc_html_e( 'View Profile', 'jobus' ); ?></span>
+                        <span class="jbs-ms-2 ps-1"><?php esc_html_e( 'View Profile', 'jobus' ); ?></span>
                     </a>
                 </li>
             </ul>
@@ -90,7 +90,7 @@ $logo = jobus_opt( 'dashboard_logo' );
             foreach ( $menu_items as $endpoint => $item ) :
                 $url = trailingslashit( $dashboard_url ) . $endpoint . '/';
                 $is_active = $active_endpoint === $endpoint;
-                $align_class = 'd-flex w-100 align-items-center dashboard-navigation-link dashboard-navigation-link--' . $endpoint;
+                $align_class = 'jbs-d-flex jbs-w-100 jbs-align-items-center dashboard-navigation-link dashboard-navigation-link--' . $endpoint;
                 if ( $is_active ) {
                     $align_class .= ' active';
                 }

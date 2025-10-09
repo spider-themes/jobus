@@ -21,7 +21,7 @@ wp_enqueue_script( 'lightbox' );
             <div class="jbs-row">
                 <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
                     <h1 class="blog-heading"><?php the_title() ?></h1>
-                    <div class="blog-pubish-date jbs-text-white mt-30 lg-mt-20">
+                    <div class="blog-pubish-date jbs-text-white jbs-mt-30 lg-mt-20">
                         <?php
                         if ( has_category() ) {
                             echo wp_kses_post( get_the_category_list( ', ' ) ) . ' . ';
@@ -86,11 +86,11 @@ wp_enqueue_script( 'lightbox' );
                                     <div class="info jbs-position-relative">
                                         <?php
                                         if ( ! empty( $item['sl_num'] ) ) { ?>
-                                            <div class="numb fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+                                            <div class="numb jbs-fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
                                             <?php
                                         }
                                         if ( ! empty( $item['title'] ) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html( $item['title'] ) ?></div>
+                                            <div class="text_1 jbs-fw-500"><?php echo esc_html( $item['title'] ) ?></div>
                                             <?php
                                         }
                                         if ( ! empty( $item['academy'] ) ) { ?>
@@ -115,7 +115,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
+                            <ul class="style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';
@@ -142,11 +142,11 @@ wp_enqueue_script( 'lightbox' );
                                     <div class="info jbs-position-relative">
                                         <?php
                                         if ( ! empty( $item['sl_num'] ) ) { ?>
-                                            <div class="numb fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
+                                            <div class="numb jbs-fw-500 jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center"><?php echo esc_html( $item['sl_num'] ) ?></div>
                                             <?php
                                         }
                                         if ( ! empty( $item['start_date'] ) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html( $item['start_date'] ) ?>
+                                            <div class="text_1 jbs-fw-500"><?php echo esc_html( $item['start_date'] ) ?>
                                                 - <?php echo esc_html( $item['end_date'] ) ?></div>
                                             <?php
                                         }
@@ -207,8 +207,8 @@ wp_enqueue_script( 'lightbox' );
                             </div>
                         <?php endif; ?>
                         <h3 class="candidate-name jbs-text-center"><?php the_title() ?></h3>
-                        <div class="jbs-text-center pb-25">
-                            <a href="#" class="invite-btn fw-500">
+                        <div class="jbs-text-center jbs-pb-25">
+                            <a href="#" class="invite-btn jbs-fw-500">
                                 <?php esc_html_e( 'Invite', 'jobus' ) ?>
                             </a>
                         </div>
@@ -323,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
+                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php
@@ -376,7 +376,7 @@ wp_enqueue_script( 'lightbox' );
 
                             <div class="jbs-d-sm-flex">
                                 <button type="submit" name="send_message" id="send_message"
-                                        class="btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                        class="btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

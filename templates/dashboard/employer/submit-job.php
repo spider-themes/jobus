@@ -79,7 +79,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
 }
 ?>
 
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title"><?php echo esc_html( $sec_title ); ?></h2>
 
     <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -92,13 +92,13 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
             <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
 
             <!-- Job Title & Content -->
-            <div class="dash-input-wrapper mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="job_title"><?php esc_html_e( 'Job Title', 'jobus' ); ?></label>
                 <input type="text" name="job_title" id="job_title" value="<?php echo esc_attr( $job_title ); ?>" required>
             </div>
 
             <!-- Job Content -->
-            <div class="dash-input-wrapper mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="job_description"><?php esc_html_e( 'Job Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
@@ -127,7 +127,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
                 <!-- Add Categories -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -137,7 +137,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-category-list" class="style-none d-flex flex-wrap align-items-center">
+                        <ul id="job-category-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_categories ) ): ?>
                                 <?php foreach ( $current_categories as $cat ): ?>
                                     <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -154,7 +154,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Locations -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -164,7 +164,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-location-list" class="style-none d-flex flex-wrap align-items-center">
+                        <ul id="job-location-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_locations ) ): ?>
                                 <?php foreach ( $current_locations as $loc ): ?>
                                     <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
@@ -181,7 +181,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Tags -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-tag-list"><?php esc_html_e( 'Tags', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -191,7 +191,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $tag_ids = ! empty( $current_tags ) ? implode( ',', wp_list_pluck( $current_tags, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-tag-list" class="style-none d-flex flex-wrap align-items-center">
+                        <ul id="job-tag-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_tags ) ): ?>
                                 <?php foreach ( $current_tags as $tag ): ?>
                                     <li class="is_tag" data-tag-id="<?php echo esc_attr( $tag->term_id ); ?>">
@@ -210,7 +210,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
             <div id="job-specifications">
                 <h4 class="dash-title-three"><?php esc_html_e( 'Specifications', 'jobus' ); ?></h4>
-                <div class="row">
+                <div class="jbs-row">
                     <?php
                     // Dynamic fields for candidate specifications
                     if ( function_exists( 'jobus_opt' ) ) {
@@ -221,7 +221,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                                 $meta_name   = $field['meta_name'] ?? '';
                                 $meta_value  = isset( $dynamic_fields[ $meta_key ] ) ? (array) $dynamic_fields[ $meta_key ] : array();
                                 $meta_values = $field['meta_values_group'] ?? array();
-                                echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
+                                echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                                 echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
                                 foreach ( $meta_values as $option ) {
@@ -240,29 +240,29 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
 
             <div id="company-website">
                 <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
-                <div class="row">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="dash-input-wrapper mb-30">
+                <div class="jbs-row">
+                    <div class="jbs-row">
+                        <div class="jbs-col-md-12">
+                            <div class="dash-input-wrapper jbs-mb-30">
                                 <select id="is_company_website" name="is_company_website" class="nice-select">
                                     <option value="default" <?php selected( $is_company_website, 'default' ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
                                     <option value="custom" <?php selected( $is_company_website, 'custom' ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
                                 </select>
                             </div>
                             <div id="company-website-fields">
-                                <div class="dash-input-wrapper mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-text"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
                                     <input type="text" id="company-website-text" name="company_website[text]"
                                            placeholder="<?php esc_attr_e( 'Visit job website', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_text ); ?>">
                                 </div>
-                                <div class="dash-input-wrapper mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                                     <input type="url" id="company-website-url" name="company_website[url]"
                                            placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_url ); ?>">
                                 </div>
-                                <div class="dash-input-wrapper mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-target"><?php esc_html_e( 'Website Target', 'jobus' ); ?></label>
                                     <select id="company-website-target" name="company_website[target]" class="nice-select">
                                         <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
@@ -275,8 +275,8 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
             </div>
         </div>
-        <div class="button-group d-inline-flex align-items-center mt-30">
-            <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+        <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
     </form>
 </div>

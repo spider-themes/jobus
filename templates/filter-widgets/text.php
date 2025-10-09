@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div class="input-box position-relative">
+<div class="input-box jbs-position-relative">
     <input type="text" name="s" id="searchInput" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e( 'Search by Keywords', 'jobus' ); ?>">
     <button><i class="bi bi-search"></i></button>
 </div>

@@ -44,17 +44,17 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
             $designation = get_post_meta( $candidate_id, 'jobus_candidate_designation', true );
             $skills = get_the_terms( $candidate_id, 'jobus_candidate_skill' );
 			?>
-			<div class="candidate-profile-card list-layout border-0 mb-25">
-				<div class="d-flex">
-					<div class="candidate-avatar online position-relative d-block me-auto ms-auto">
+			<div class="candidate-profile-card list-layout border-0 jbs-mb-25">
+				<div class="jbs-d-flex">
+					<div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
                         <a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="rounded-circle">
                             <?php echo get_the_post_thumbnail( $candidate_id, 'full', [ 'class' => 'lazy-img rounded-circle' ] ); ?>
                         </a>
                     </div>
 					<div class="right-side">
-						<div class="row gx-1 align-items-center">
-							<div class="col-lg-4">
-								<div class="position-relative">
+						<div class="jbs-row gx-1 jbs-align-items-center">
+							<div class="jbs-col-lg-4">
+								<div class="jbs-position-relative">
 									<h4 class="candidate-name mb-0">
                                         <a href="<?php echo esc_url(get_the_permalink($candidate_id)) ?>" class="tran3s">
                                             <?php echo esc_html(get_the_title($candidate_id)) ?>
@@ -69,7 +69,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 
                                         // Display the first 2 skills
                                         $displayed_skills = array_slice( $skills, 0, $max_skills );
-                                        echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+                                        echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
                                         foreach ( $displayed_skills as $skill ) {
                                             echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                         }
@@ -81,7 +81,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                     } else {
                                         // Display all skills
                                         if ( ! empty( $skills ) ) {
-                                            echo '<ul class="candidate-skills style-none d-flex align-items-center">';
+                                            echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
                                             foreach ( $skills as $skill ) {
                                                 echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                             }
@@ -115,7 +115,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                 <?php
                             }
                             ?>
-                            <div class="col-lg-2 xs-mt-10">
+                            <div class="jbs-col-lg-2 xs-mt-10">
                                 <div class="action-button">
                                     <a href="javascript:void(0)"
                                        class="save-btn text-center rounded-circle tran3s jobus-dashboard-remove-saved-post"

@@ -38,16 +38,16 @@ if ( ! empty ( $all_values ) ) :
 
     <div class="salary-slider"
          data_widget="<?php echo esc_attr( $widget_name ); ?>[]">
-        <div class="price-input d-flex align-items-center pt-5">
-            <div class="field d-flex align-items-center">
+        <div class="price-input jbs-d-flex jbs-align-items-center jbs-pt-5">
+            <div class="field jbs-d-flex jbs-align-items-center">
                 <input type="number"
                        name="<?php echo esc_attr( $widget_name ); ?>[]"
                        class="input-min"
                        value="<?php echo esc_attr( $min_salary ); ?>"
                        readonly>
             </div>
-            <div class="pe-1 ps-1">-</div>
-            <div class="field d-flex align-items-center">
+            <div class="jbs-pe-1 jbs-ps-1">-</div>
+            <div class="field jbs-d-flex jbs-align-items-center">
                 <input type="number"
                        name="<?php echo esc_attr( $widget_name ); ?>[]"
                        class="input-max"
@@ -55,13 +55,13 @@ if ( ! empty ( $all_values ) ) :
                        readonly>
             </div>
 			<?php if ( ! empty( $range_suffix ) ) : ?>
-                <div class="currency ps-1"><?php echo esc_html( $range_suffix ); ?></div>
+                <div class="currency jbs-ps-1"><?php echo esc_html( $range_suffix ); ?></div>
 			<?php endif; ?>
         </div>
         <div class="slider">
             <div class="progress"></div>
         </div>
-        <div class="range-input mb-10">
+        <div class="range-input jbs-mb-10">
             <input type="range" class="range-min"
                    min="<?php echo esc_attr( $min_values ); ?>"
                    max="<?php echo esc_attr( $max_values ); ?>"

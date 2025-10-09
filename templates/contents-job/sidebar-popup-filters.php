@@ -10,19 +10,19 @@ if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_fil
     ?>
     <div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-            <div class="container">
+            <div class="jbs-container">
                 <div class="filter-area-tab modal-content">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="position-relative">
+                    <div class="jbs-position-relative">
 
-                        <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
+                        <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
 
-                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="pt-25 pb-30 ps-4 pe-4" role="search" method="get">
+                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4" role="search" method="get">
 
                             <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
                             <input type="hidden" name="post_type" value="jobus_job"/>
 
-                            <div class="row">
+                            <div class="jbs-row">
                                 <?php
                                 $filter_widgets = jobus_opt('job_sidebar_widgets');
 
@@ -39,9 +39,9 @@ if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_fil
                                         $job_specifications = $job_specifications[ $widget_name ] ?? '';
                                         ?>
 
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div class="filter-block pb-50 lg-pb-20">
-                                                <div class="filter-title fw-500 text-dark"><?php echo esc_html($widget_title) ?></div>
+                                        <div class="jbs-col-lg-3 jbs-col-sm-6">
+                                            <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
+                                                <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
 	                                            <?php
 	                                            // Include the appropriate widget layout file based on the widget type
 	                                            $specifications_data = $job_specifications;
@@ -91,9 +91,9 @@ if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_fil
                                 ?>
                             </div>
 
-                            <div class="row">
-                                <div class="col-xl-2 m-auto">
-                                    <button type="submit" class="btn-ten fw-500 text-white w-100 text-center tran3s mt-30 md-mt-10">
+                            <div class="jbs-row">
+                                <div class="jbs-col-xl-2 jbs-m-auto">
+                                    <button type="submit" class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10">
                                         <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                     </button>
                                 </div>

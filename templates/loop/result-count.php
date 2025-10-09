@@ -38,6 +38,6 @@ switch ( $post_type ) {
 ?>
 <div class="total-job-found">
 	<?php esc_html_e( 'All', 'jobus' ); ?>
-    <span class="fw-500"><?php echo esc_html( $found_posts ); ?></span>
+    <span class="jbs-fw-500"><?php echo esc_html( $found_posts ); ?></span>
 	<?php echo esc_html( $message ); ?>
 </div>

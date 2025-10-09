@@ -1,5 +1,8 @@
 .jobus_job_details {
   .details-post-data {
+    .is-layout-constrained > *{
+        max-width: 100% !important;
+    }
     .wp-block-group {
       border: 1px solid #000000;
       border-radius: 20px;

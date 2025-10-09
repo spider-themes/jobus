@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						}
 					}
 					?>
-                    <div class="jbs-row jbs-gx-1">
+                    <div class="jbs-row ">
 						<?php
 						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
 							?>

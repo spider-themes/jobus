@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $list_view_url = add_query_arg( 'view', 'list' );
 $grid_view_url = add_query_arg( 'view', 'grid' );
 ?>
-<div class="d-flex align-items-center">
-    <div class="short-filter d-flex align-items-center">
+<div class="jbs-d-flex jbs-align-items-center">
+    <div class="short-filter jbs-d-flex jbs-align-items-center">
 		<?php
 		$order_by = jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' );
 		$order    = jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' );
@@ -33,7 +33,7 @@ $grid_view_url = add_query_arg( 'view', 'grid' );
 		$selected_title_asc  = $order_by == 'title' && $order == 'asc' ? 'selected' : '';
 		$selected_title_desc = $order_by == 'title' && $order == 'desc' ? 'selected' : '';
 		?>
-        <div class="text-dark fw-500 me-2"><?php esc_html_e( 'Sort By:', 'jobus' ); ?></div>
+        <div class="jbs-text-dark jbs-fw-500 jbs-me-2"><?php esc_html_e( 'Sort By:', 'jobus' ); ?></div>
         <form action="" method="get">
 
 			<?php wp_nonce_field( 'jobus_sort_filter', 'jobus_nonce' ); ?>
@@ -72,12 +72,12 @@ $grid_view_url = add_query_arg( 'view', 'grid' );
 	if ( ! is_tax( $excluded_taxonomies ) ) {
 		?>
         <a href="<?php echo esc_url( $list_view_url ); ?>"
-           class="style-changer-btn rounded-circle tran3s ms-2 list-btn <?php echo esc_attr( $current_view === 'grid' ) ? ' active' : ''; ?>"
+           class="style-changer-btn jbs-rounded-circle tran3s jbs-ms-2 list-btn <?php echo esc_attr( $current_view === 'grid' ) ? ' active' : ''; ?>"
            title="<?php esc_attr_e( 'Active List', 'jobus' ); ?>">
             <i class="bi bi-list"></i>
         </a>
         <a href="<?php echo esc_url( $grid_view_url ); ?>"
-           class="style-changer-btn rounded-circle tran3s ms-2 grid-btn <?php echo esc_attr( $current_view === 'list' ) ? ' active' : ''; ?>"
+           class="style-changer-btn jbs-rounded-circle tran3s jbs-ms-2 grid-btn <?php echo esc_attr( $current_view === 'list' ) ? ' active' : ''; ?>"
            title="<?php esc_attr_e( 'Active Grid', 'jobus' ); ?>">
             <i class="bi bi-grid"></i>
         </a>

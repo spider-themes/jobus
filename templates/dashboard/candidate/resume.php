@@ -67,7 +67,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 }
 
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
     <h2 class="main-title"><?php esc_html_e( 'My Resume', 'jobus' ); ?></h2>
 
     <form action="" id="candidate-resume-form" method="post" enctype="multipart/form-data">
@@ -77,10 +77,10 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
         <div class="bg-white card-box border-20" id="candidate-resume">
             <h4 class="dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper mb-20">
+            <div class="dash-input-wrapper jbs-mb-20">
                 <label for="cv_attachment"><?php esc_html_e( 'CV Attachment*', 'jobus' ); ?></label>
                 <div id="cv-upload-preview" class="preview <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
-                    <div class="attached-file d-flex align-items-center justify-content-between">
+                    <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
                         <span id="cv-uploaded-filename"><?php echo esc_html( $cv_file_name ); ?></span>
                         <a href="#" id="remove-uploaded-cv" class="remove-btn"><i class="bi bi-x"></i></a>
                     </div>

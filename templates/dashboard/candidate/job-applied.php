@@ -23,8 +23,8 @@ $args = array(
 $applications = new \WP_Query( $args );
 ?>
 
-<div class="position-relative">
-    <div class="d-flex align-items-center justify-content-between mb-40 lg-mb-30">
+<div class="jbs-position-relative">
+    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 lg-mb-30">
         <h2 class="main-title m0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
     </div>
     <?php
@@ -68,13 +68,13 @@ $applications = new \WP_Query( $args );
                                         }
                                         $company_name = get_the_title( $company_id );
                                         ?>
-                                        <a href="<?php echo esc_url( $company_url ); ?>" class="company-link d-flex align-items-center gap-2">
+                                        <a href="<?php echo esc_url( $company_url ); ?>" class="company-link jbs-d-flex jbs-align-items-center gap-2">
                                             <?php
                                             if ( has_post_thumbnail( $company_id ) ) {
                                                 echo get_the_post_thumbnail( $company_id, [ 48, 48 ] );
                                             }
                                             ?>
-                                            <span class="fw-500"><?php echo esc_html( $company_name ); ?></span>
+                                            <span class="jbs-fw-500"><?php echo esc_html( $company_name ); ?></span>
                                         </a>
                                         <?php
                                     } else {
@@ -87,7 +87,7 @@ $applications = new \WP_Query( $args );
                                     ?>
                                 </td>
                                 <td class="job-title">
-                                    <a href="<?php echo esc_url( $job_link ); ?>" class="job-link fw-500 text-dark">
+                                    <a href="<?php echo esc_url( $job_link ); ?>" class="job-link jbs-fw-500 jbs-text-dark">
                                         <?php echo esc_html($job_title); ?>
                                     </a>
                                 </td>
@@ -102,7 +102,7 @@ $applications = new \WP_Query( $args );
                                 <td class="job-actions">
                                     <div class="action-button">
                                         <a href="javascript:void(0)"
-                                           class="save-btn text-center rounded-circle tran3s remove-application"
+                                           class="save-btn jbs-text-center jbs-rounded-circle tran3s remove-application"
                                            data-job_id="<?php echo esc_attr(get_the_ID()); ?>"
                                            data-nonce="<?php echo esc_attr(wp_create_nonce('jobus_remove_application_nonce')); ?>"
                                            title="<?php esc_attr_e('Remove Application', 'jobus'); ?>">
@@ -111,7 +111,7 @@ $applications = new \WP_Query( $args );
                                         <?php if ( $job_link && $job_link !== '#' ) : ?>
                                             <a href="<?php echo esc_url( $job_link ); ?>"
                                                target="_blank"
-                                               class="save-btn text-center rounded-circle tran3s"
+                                               class="save-btn jbs-text-center jbs-rounded-circle tran3s"
                                                title="<?php esc_attr_e( 'View Job Details', 'jobus' ); ?>">
                                                 <i class="bi bi-eye-fill"></i>
                                             </a>
@@ -130,9 +130,9 @@ $applications = new \WP_Query( $args );
         <?php
     else :
         ?>
-        <div class="bg-white card-box border-20 text-center p-5">
+        <div class="bg-white card-box border-20 jbs-text-center p-5">
             <div class="no-applications-found">
-                <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
+                <i class="bi bi-clipboard-x fs-1 jbs-mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>
                 <p class="text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
                 <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn btn-sm btn-primary" target="_blank">
