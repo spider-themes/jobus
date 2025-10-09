@@ -44,12 +44,12 @@
 
         // Disable last input (only in free)
         if (!$('body').hasClass('jobus-premium')) {
-            $('.jobus-pro-notice ul li:last-child label input').prop('disabled', true);
+            $('.jobus-pro-locked ul li:last-child label input').prop('disabled', true);
         }
 
         // jobus pro notice
         function jobus_pro_notice() {
-            $('body:not(.jobus-premium) .jobus-pro-notice').on('click', function (e) {
+            $('body:not(.jobus-premium) .jobus-pro-locked').on('click', function (e) {
                 if ($(this).hasClass('active-theme-jobi')) {
                     return; // skip alert if unlocked
                 }

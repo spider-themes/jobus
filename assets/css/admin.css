@@ -106,20 +106,20 @@
  *
  * This stylesheet manages the display and behavior of the "Pro" badge and lock effect for premium-only fields in the Jobus admin options panel.
  *
- * - By default, fields with the class `.jobus-pro-notice.csf-field` show a "Pro" badge and are visually locked (reduced opacity, pointer-events: none).
+ * - By default, fields with the class `.jobus-pro-locked.csf-field` show a "Pro" badge and are visually locked (reduced opacity, pointer-events: none).
  * - If the field also has the class `.active-theme-jobi` and the body has the class `jobi` (Jobi theme is active), the badge is hidden and the field is unlocked (full opacity, pointer-events: inherit).
  * - This logic ensures that Jobi theme users get free access to pro features, while other themes see the lock and badge.
  * - For future-proofing, add similar logic for child themes if needed.
  *
  * Usage:
- *   - Add `jobus-pro-notice` to any field that should be locked for non-Jobi themes.
+ *   - Add `jobus-pro-locked` to any field that should be locked for non-Jobi themes.
  *   - Add `active-theme-jobi` to unlock for Jobi theme (done in PHP options logic).
  */
-.jobus-pro-notice.csf-field {
+.jobus-pro-locked.csf-field {
   position: relative;
   cursor: pointer;
 }
-.jobus-pro-notice.csf-field::before {
+.jobus-pro-locked.csf-field::before {
   content: "Pro";
   background-color: #f1bd6c;
   color: #000;
@@ -135,7 +135,7 @@
   pointer-events: none;
   display: block;
 }
-.jobus-pro-notice.csf-field::after {
+.jobus-pro-locked.csf-field::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -146,17 +146,17 @@
   z-index: 2;
   display: block;
 }
-.jobus-pro-notice.csf-field .csf-title,
-.jobus-pro-notice.csf-field .csf-fieldset {
+.jobus-pro-locked.csf-field .csf-title,
+.jobus-pro-locked.csf-field .csf-fieldset {
   opacity: 0.5;
   pointer-events: none;
 }
 
-body.jobi .jobus-pro-notice.active-theme-jobi::before, body.jobi .jobus-pro-notice.active-theme-jobi::after {
+body.jobi .active-theme-jobi::before, body.jobi .active-theme-jobi::after {
   display: none !important;
 }
-body.jobi .jobus-pro-notice.active-theme-jobi .csf-title,
-body.jobi .jobus-pro-notice.active-theme-jobi .csf-fieldset {
+body.jobi .active-theme-jobi .csf-title,
+body.jobi .active-theme-jobi .csf-fieldset {
   opacity: 1 !important;
   pointer-events: inherit !important;
 }

@@ -42,7 +42,7 @@ CSF::createSection($settings_prefix, array(
 		    'text_off'      => esc_html__('No', 'jobus'),
 		    'text_width'    => 80,
 		    'default'       => false,
-		    'class'         => 'jobus-pro-notice' . $active_theme,
+		    'class'         => trim($pro_access_class . $active_theme_class)
 	    ),
 
 	    array(

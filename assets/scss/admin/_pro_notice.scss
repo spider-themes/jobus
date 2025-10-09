@@ -3,17 +3,17 @@
  *
  * This stylesheet manages the display and behavior of the "Pro" badge and lock effect for premium-only fields in the Jobus admin options panel.
  *
- * - By default, fields with the class `.jobus-pro-notice.csf-field` show a "Pro" badge and are visually locked (reduced opacity, pointer-events: none).
+ * - By default, fields with the class `.jobus-pro-locked.csf-field` show a "Pro" badge and are visually locked (reduced opacity, pointer-events: none).
  * - If the field also has the class `.active-theme-jobi` and the body has the class `jobi` (Jobi theme is active), the badge is hidden and the field is unlocked (full opacity, pointer-events: inherit).
  * - This logic ensures that Jobi theme users get free access to pro features, while other themes see the lock and badge.
  * - For future-proofing, add similar logic for child themes if needed.
  *
  * Usage:
- *   - Add `jobus-pro-notice` to any field that should be locked for non-Jobi themes.
+ *   - Add `jobus-pro-locked` to any field that should be locked for non-Jobi themes.
  *   - Add `active-theme-jobi` to unlock for Jobi theme (done in PHP options logic).
  */
 
-.jobus-pro-notice {
+.jobus-pro-locked {
   &.csf-field {
     position: relative;
     cursor: pointer;
@@ -57,8 +57,7 @@
 
 
 body.jobi {
-  .jobus-pro-notice {
-    &.active-theme-jobi {
+  .active-theme-jobi {
       &::before,
       &::after {
         display: none !important;
@@ -70,5 +69,5 @@ body.jobi {
         pointer-events: inherit !important;
       }
     }
-  }
+
 }

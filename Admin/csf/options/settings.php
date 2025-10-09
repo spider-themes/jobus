@@ -20,8 +20,13 @@ if ( class_exists( 'CSF' ) ) {
 		'sticky_header'   => 'true',
 	) );
 
-	$active_theme = jobus_unlock_themes( 'jobi' );
-	$active_theme = ( $active_theme ) ? ' active-theme-jobi' : '';
+	// Determine Pro features (license only)
+	$is_pro_access = function_exists('jobus_fs') && jobus_fs()->can_use_premium_code();
+	$pro_access_class = $is_pro_access ? ' jobus-pro-unlocked' : ' jobus-pro-locked';
+
+	// Set $active_theme_class if theme is active
+	$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
+	$active_theme_class = $is_active_theme_jobi ? ' active-theme-jobi' : '';
 
 	/**
 	 * Include files

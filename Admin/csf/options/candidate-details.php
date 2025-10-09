@@ -32,7 +32,7 @@ CSF::createSection( $settings_prefix, array(
 				'2' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-2.png' ),
 			),
 			'default'  => '1',
-			'class'    => 'jobus-pro-notice' . $active_theme,
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 	)
 ) );

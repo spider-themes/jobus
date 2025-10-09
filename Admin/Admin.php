@@ -43,4 +43,3 @@ class Admin {
 		return $classes;
 	}
 }
-
