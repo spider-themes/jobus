@@ -2,6 +2,8 @@
 .card-style-one .wrapper {
     display: block;
     background: #fff;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
     border-radius: 60px;
     padding: 50px 15px 30px;
     border: 1px solid rgba($color: #D1ECE7, $alpha: 0.8);
@@ -52,6 +54,8 @@
 }
 // Card Three
 .card-style-three .img-meta img {
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
     border-radius: 200px;
 }
 .card-style-three .name:hover {
@@ -62,9 +66,16 @@
 // Card Four
 .card-style-four {
     background: #FFFFFF;
+    -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+    -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
     box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
     border-radius: 10px;
     &:hover {
+        -webkit-transform: translateY(-5px);
+        -moz-transform: translateY(-5px);
+        -ms-transform: translateY(-5px);
         transform: translateY(-5px);
     }
     a {
@@ -73,7 +84,9 @@
     .icon {
         width: 72px;
         height: 72px;
-        border-radius: 50%;
+        -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
         border: 1px solid #F0F0F0;
     }
     &:hover .icon {
@@ -169,6 +182,9 @@
         left: 0;
         z-index: -1;
         position: absolute;
+        background: -webkit-linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+        background: -moz-linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+        background: -o-linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
         background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
         @include transition(0.2s);
     }
@@ -248,6 +264,8 @@
     border-radius: 50px;
     padding: 40px 20px 35px;
     &:hover {
+        -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+        -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
         box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
     }
     .open-job-btn {
@@ -333,6 +351,9 @@
             bottom: 0;
             left: 0;
             z-index: -1;
+            -webkit-transform: skew(25deg);
+            -moz-transform: skew(25deg);
+            -ms-transform: skew(25deg);
             transform: skew(25deg);
         }
         &::before {
@@ -344,6 +365,9 @@
             top: 0;
             left: 0;
             z-index: -1;
+            -webkit-transform: skew(-25deg);
+            -moz-transform: skew(-25deg);
+            -ms-transform: skew(-25deg);
             transform: skew(-25deg);
         }
     }
