@@ -77,7 +77,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
         <div class="bg-white card-box border-20" id="candidate-resume">
             <h4 class="dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper jbs-mb-20">
+            <div class="dash-input-wrapper mb-20">
                 <label for="cv_attachment"><?php esc_html_e( 'CV Attachment*', 'jobus' ); ?></label>
                 <div id="cv-upload-preview" class="preview <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
                     <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">

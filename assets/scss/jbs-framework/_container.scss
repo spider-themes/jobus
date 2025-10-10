@@ -1,0 +1,37 @@
+// ============================================
+// Container
+// ============================================
+
+@use "variables" as *;
+
+.jbs-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+@media (min-width: 992px) {
+    .jbs-container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .jbs-container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .jbs-container {
+        max-width: 1240px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .jbs-container {
+        max-width: 1320px;
+    }
+}

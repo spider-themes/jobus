@@ -5,18 +5,18 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="category-section-five">
-    <div class="card-wrapper-two d-flex flex-wrap jobus_cat_align">
+    <div class="card-wrapper-two jbs-d-flex jbs-flex-wrap jobus_cat_align">
         <?php
         if ( is_array($categories) ) {
             foreach ( $categories as $index => $category ) {
                 $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
                 ?>
 
-                <div class="card-style-seven bg-color text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
-                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="wrapper d-flex align-items-center">
+                <div class="card-style-seven bg-color jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="wrapper jbs-d-flex jbs-align-items-center">
                         <?php
                         if ( !empty($meta['cat_img']['id']) ) { ?>
-                            <div class="icon d-flex align-items-center justify-content-center">
+                            <div class="icon jbs-d-flex jbs-align-items-center jbs-justify-content-center">
                                 <?php echo wp_get_attachment_image( $meta['cat_img']['id'], 'full', '', ['class' => 'lazy-img'] ) ?>
                             </div>
                             <?php

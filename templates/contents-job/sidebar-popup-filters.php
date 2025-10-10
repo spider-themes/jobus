@@ -93,7 +93,7 @@ if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_fil
 
                             <div class="jbs-row">
                                 <div class="jbs-col-xl-2 jbs-m-auto">
-                                    <button type="submit" class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10">
+                                    <button type="submit" class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30 jbs-md-mt-10">
                                         <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                     </button>
                                 </div>

@@ -1,0 +1,55 @@
+// ============================================
+// Variables
+// ============================================
+
+// Font Families
+$inter: "Inter", sans-serif;
+$rob: "Roboto", sans-serif;
+
+// Container Max Widths
+$container-max-widths: (
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1240px,
+    xxxl: 1320px
+);
+
+// Breakpoints
+$breakpoints: (
+    xs: 575px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1300px,
+    xxxl: 1400px
+);
+
+// Spacing Scale
+$spacers: (
+    0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 1rem,
+    4: 1.5rem,
+    5: 3rem
+);
+
+// Custom Spacing (px based)
+$custom-spacers: (
+    10: 0.625rem,
+    15: 0.9375rem,
+    20: 1.25rem,
+    25: 1.5625rem,
+    30: 1.875rem,
+    40: 2.5rem,
+    50: 3.125rem,
+    70: 4.375rem
+);
+
+// Border Color
+$border-color: #dee2e6;
+
+// Text Colors
+$text-dark: #212529;
+$text-white: #fff;

@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 ?>
 
-<div class="job-search-one style-two position-relative">
+<div class="job-search-one style-two jbs-position-relative">
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" method="get" id="searchform">
         <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="  col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="  jbs-col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
 
@@ -74,8 +74,8 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="col-md-3 sm-mb-10 sm-mt-10">
-                <button type="submit" class="text-uppercase btn-five border6 tran3s m-auto"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+            <div class="jbs-col-md-3 sm-mb-10 sm-mt-10">
+                <button type="submit" class="jbs-text-uppercase btn-five border6 tran3s jbs-m-auto"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>
@@ -83,10 +83,10 @@ if (!defined('ABSPATH')) {
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="filter-tags d-flex flex-wrap style-none mt-25">
+        <ul class="filter-tags jbs-d-flex jbs-flex-wrap style-none mt-25">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
-                <li class="fw-500 text-dark me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <li class="fw-500 jbs-text-dark jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
                 <?php
             }
 

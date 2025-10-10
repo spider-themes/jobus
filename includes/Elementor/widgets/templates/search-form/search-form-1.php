@@ -4,11 +4,11 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="job-search-one position-relative">
+<div class="job-search-one jbs-position-relative">
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" role="search" method="post">
         <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 
-        <div class="row">
+        <div class="jbs-row">
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="jbs-col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
                             if (!empty($item[ 'attr_title' ])) { ?>
@@ -57,10 +57,11 @@ if (!defined('ABSPATH')) {
                                                 <?php
                                             }
                                         }
-                                        ?>
+                                    ?>
                                     </select>
                                     <?php
-                                } elseif ($item['layout_type'] == 'text' ) { ?>
+                                } elseif ($item['layout_type'] == 'text' ) {
+                                    ?>
                                     <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
                                     <?php
                                 }
@@ -72,18 +73,18 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="col-md-3 job-search-btn-wrapper">
-                <button type="submit" class="job-search-one-btn fw-500 text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+            <div class="jbs-col-md-3 job-search-btn-wrapper">
+                <button type="submit" class="job-search-one-btn fw-500 jbs-text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="tags d-flex flex-wrap style-none mt-20">
+        <ul class="tags jbs-d-flex jbs-flex-wrap style-none mt-20">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
-                <li class="fw-500 text-white me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <li class="fw-500 text-white jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
                 <?php
             }
             if (!empty($settings[ 'keywords' ])) {

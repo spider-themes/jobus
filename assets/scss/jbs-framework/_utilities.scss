@@ -1,0 +1,125 @@
+// ============================================
+// Utility Classes
+// ============================================
+
+@use "variables" as *;
+
+// Text Transform
+.jbs-text-capitalize {
+    text-transform: capitalize !important;
+}
+
+.jbs-text-uppercase {
+    text-transform: uppercase !important;
+}
+
+.jbs-text-lowercase {
+    text-transform: lowercase !important;
+}
+
+// Text Alignment
+.jbs-text-center {
+    text-align: center;
+}
+
+// Text Colors
+.jbs-text-white {
+    color: $text-white !important;
+}
+
+.jbs-text-dark {
+    color: $text-dark !important;
+}
+
+.jbs-text-reset {
+    --bs-text-opacity: 1;
+    color: inherit !important;
+}
+
+// Text Size
+.jbs-text-lgt {
+    font-size: 1.25rem !important;
+    line-height: 1.5rem !important;
+}
+
+// Font Weight
+.jbs-fw-500 {
+    font-weight: 500 !important;
+}
+
+// Width Classes
+.jbs-w-100 {
+    width: 100% !important;
+}
+
+.jbs-w-75 {
+    width: 75% !important;
+}
+
+.jbs-w-50 {
+    width: 50% !important;
+}
+
+.jbs-w-25 {
+    width: 25% !important;
+}
+
+// Height Classes
+.jbs-h-100 {
+    height: 100% !important;
+}
+
+.jbs-h-75 {
+    height: 75% !important;
+}
+
+.jbs-h-50 {
+    height: 50% !important;
+}
+
+.jbs-h-25 {
+    height: 25% !important;
+}
+
+.jbs-h-auto {
+    height: auto !important;
+}
+
+// Display Classes
+.jbs-d-block {
+    display: block !important;
+}
+
+@media (min-width: 992px) {
+    .jbs-d-lg-none {
+        display: none !important;
+    }
+}
+
+// Position
+.jbs-position-relative {
+    position: relative;
+}
+
+// Border Radius
+.jbs-rounded-circle {
+    border-radius: 50% !important;
+}
+
+// List Styles
+.jbs-list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+// Column Spacing (Custom)
+.jbs-colum-space-6 {
+    width: 50%;
+}
+
+.jbs-colum-space-4 {
+    flex: 1;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+}

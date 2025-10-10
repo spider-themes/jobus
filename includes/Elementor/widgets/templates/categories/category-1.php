@@ -5,18 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <section class="category-section-one">
-    <div class="card-wrapper-one row justify-content-center">
+    <div class="card-wrapper-one jbs-row jbs-justify-content-center">
 		<?php
 		if ( is_array( $categories ) ) {
 			foreach ( $categories as $index => $category ) {
 				$meta = get_term_meta( $category->term_id, 'jobus_taxonomy_cat', true );
 				?>
-                <div class="card-style-one text-center mt-20 wow fadeInUp">
+                <div class="card-style-one jbs-text-center mt-20 wow fadeInUp">
                     <a href="<?php echo esc_url( get_term_link( $category ) ) ?>"
                        class="bg wrapper">
 						<?php
 						if ( ! empty( $meta['cat_img']['id'] ) ) { ?>
-                            <div class="icon d-flex align-items-center justify-content-center">
+                            <div class="icon jbs-d-flex jbs-align-items-center jbs-justify-content-center">
 								<?php echo wp_get_attachment_image( $meta['cat_img']['id'], 'full', '', [ 'class' => 'lazy-img' ] ) ?>
                             </div>
 							<?php

@@ -21,7 +21,7 @@ wp_enqueue_script( 'lightbox' );
             <div class="jbs-row">
                 <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
                     <h1 class="blog-heading"><?php the_title() ?></h1>
-                    <div class="blog-pubish-date jbs-text-white jbs-mt-30 lg-mt-20">
+                    <div class="blog-pubish-date jbs-text-white mt-30 lg-mt-20">
                         <?php
                         if ( has_category() ) {
                             echo wp_kses_post( get_the_category_list( ', ' ) ) . ' . ';
@@ -323,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15" target="_blank">
+                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php

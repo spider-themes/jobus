@@ -35,7 +35,7 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 			$location = get_the_terms( $job_id, 'jobus_job_location' );
 			$category = get_the_terms( $job_id, 'jobus_job_cat' );
 			?>
-            <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
+            <div class="job-list-one style-two jbs-position-relative mb-20">
                 <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                     <div class="jbs-col-lg-4">
                         <div class="job-title jbs-d-flex jbs-align-items-center">

@@ -54,7 +54,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
     <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
     <div class="jbs-row">
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>"
@@ -71,7 +71,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Shortlist', 'jobus' ); ?>"
@@ -98,7 +98,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>"
@@ -113,7 +113,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>"

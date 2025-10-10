@@ -24,7 +24,7 @@ $applications = new \WP_Query( $args );
 ?>
 
 <div class="jbs-position-relative">
-    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 lg-mb-30">
+    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between mb-40 lg-mb-30">
         <h2 class="main-title m0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
     </div>
     <?php
@@ -132,7 +132,7 @@ $applications = new \WP_Query( $args );
         ?>
         <div class="bg-white card-box border-20 jbs-text-center p-5">
             <div class="no-applications-found">
-                <i class="bi bi-clipboard-x fs-1 jbs-mb-3 text-muted"></i>
+                <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>
                 <p class="text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
                 <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn btn-sm btn-primary" target="_blank">

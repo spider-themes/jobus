@@ -79,7 +79,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="bg-white card-box border-20">
-            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30" id="employer-profile">
+            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
                 <button type="button" class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="company-profile-picture-upload">
@@ -94,14 +94,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
             <div class="jbs-row">
                 <div class="jbs-col-md-6">
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="dash-input-wrapper mb-30">
                         <label for="company-name"><?php esc_html_e( 'Company Name*', 'jobus' ); ?></label>
                         <input type="text" id="company-name" name="company_name" placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>"
                                value="<?php echo esc_attr( $content_data['company_name'] ); ?>">
                     </div>
                 </div>
                 <div class="jbs-col-md-6">
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="dash-input-wrapper mb-30">
                         <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                         <input type="email" id="company-email" name="company_mail" placeholder="you@example.com"
                                value="<?php echo esc_attr( $user->user_email ); ?>">
@@ -137,11 +137,11 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="bg-white card-box border-20 jbs-mt-40" id="job-taxonomy">
+        <div class="bg-white card-box border-20 mt-40" id="job-taxonomy">
             <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
             <!-- Add Categories -->
-            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+            <div class="dash-input-wrapper mb-40 mt-20">
                 <label for="company-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
                     <?php
@@ -168,7 +168,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
 
             <!-- Add Locations -->
-            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+            <div class="dash-input-wrapper mb-40 mt-20">
                 <label for="company-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
                     <?php
@@ -225,21 +225,21 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="bg-white card-box border-20 jbs-mt-40">
+        <div class="bg-white card-box border-20 mt-40">
             <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
             <div class="jbs-row">
                 <div class="jbs-col-md-12">
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="dash-input-wrapper mb-30">
                         <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                         <input type="url" id="company-website-url" name="company_website[url]"
                                placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
                     </div>
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="dash-input-wrapper mb-30">
                         <label for="company-website-title"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
                         <input type="text" id="company-website-title" name="company_website[title]"
                                placeholder="<?php esc_attr_e( 'Visit our website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_title ); ?>">
                     </div>
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="dash-input-wrapper mb-30">
                         <label for="company-website-target"><?php esc_html_e( 'Link Target', 'jobus' ); ?></label>
                         <select id="company-website-target" name="company_website[target]" class="nice-select">
                             <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
@@ -346,20 +346,20 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </a>
         </div>
 
-        <div class="bg-white card-box border-20 jbs-mt-40" id="company-video">
+        <div class="bg-white card-box border-20 mt-40" id="company-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
-            <div class="intro-video-form jbs-position-relative jbs-mt-20 jbs-w-100">
-                <div class="dash-input-wrapper jbs-mb-15">
+            <div class="intro-video-form jbs-position-relative mt-20 jbs-w-100">
+                <div class="dash-input-wrapper mb-15">
                     <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                     <input type="text" id="video-title" name="company_video_title" value="<?php echo esc_attr( $video_data['company_video_title'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper jbs-mb-15">
+                <div class="dash-input-wrapper mb-15">
                     <label for="video-url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
                     <input type="text" id="video-url" name="company_video_url" value="<?php echo esc_attr( $video_data['company_video_url'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper jbs-mb-15">
+                <div class="dash-input-wrapper mb-15">
                     <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
 
                     <!-- Image Preview Section -->
@@ -384,9 +384,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="bg-white card-box border-20 jbs-mt-40" id="company-testimonials">
+        <div class="bg-white card-box border-20 mt-40" id="company-testimonials">
             <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper jbs-mb-15">
+            <div class="dash-input-wrapper mb-15">
                 <label for="company-testimonial-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text" id="company-testimonial-title" name="company_testimonial_title"
                        value="<?php echo esc_attr( $testimonial_title ); ?>"
@@ -533,12 +533,12 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 }
                 ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-company-testimonial">
+            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-company-testimonial">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Testimonial', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
+        <div class="button-group jbs-d-inline-flex jbs-align-items-center mt-30">
             <button type="submit" class="dash-btn-two tran3s jbs-me-3 rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
 

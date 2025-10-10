@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <section class="job-listing-two">
-    <ul class="style-none d-flex justify-content-lg-end flex-wrap isotop-menu-wrapper g-control-nav">
+    <ul class="style-none jbs-d-flex jbs-justify-content-lg-end jbs-flex-wrap isotop-menu-wrapper g-control-nav">
 		<?php
 		if ( ! empty( $settings['all_label'] ) ) { ?>
             <li class="is-checked" data-filter="*">
@@ -37,12 +37,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 			?>
             <div class="isotop-item <?php echo esc_attr( $cat_slug ) ?>">
-                <div class="job-list-two mt-40 lg-mt-20 position-relative">
+                <div class="job-list-two mt-40 lg-mt-20 jbs-position-relative">
 
 					<?php
 					if ( has_post_thumbnail() ) { ?>
                         <a href="<?php the_permalink(); ?>" class="logo">
-							<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img m-auto' ] ); ?>
+							<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                         </a>
 						<?php
 					}
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </a>
                     </div>
                     <div class="job-date"><?php the_time( get_option( 'date_format' ) ); ?></div>
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between">
 						<?php if ( ! empty( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_2'] ) ) ) : ?>
                             <div class="job-location">
                                 <a href="<?php the_permalink(); ?>">
@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 </a>
                             </div>
 						<?php endif ?>
-                        <a href="<?php the_permalink(); ?>" class="apply-btn text-center tran3s">
+                        <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
 							<?php esc_html_e( 'APPLY', 'jobus' ); ?>
                         </a>
                     </div>
@@ -86,11 +86,11 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="isotop-item">
                 <div class="card-style-four bg-color tran3s w-100 mt-40 lg-mt-20">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="d-block">
-                        <div class="title text-white"><?php echo esc_html( $formatted_count ) ?></div>
-                        <div class="text-lg text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>
-                        <div class="d-flex align-items-center justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">
+                        <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
+                        <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>
+                        <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end mt-140 lg-mt-120 xs-mt-60 mb-30">
                             <img src="<?php echo esc_url( JOBUS_IMG . '/icons/line.svg' ) ?>" alt="<?php esc_attr_e( 'Line Icon', 'jobus' ); ?>" class="lazy-img">
-                            <div class="icon tran3s d-flex align-items-center justify-content-center ms-5">
+                            <div class="icon tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
                                 <img src="<?php echo esc_url( JOBUS_IMG . '/icons/arrow_icon.svg' ) ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">
                             </div>
                         </div>

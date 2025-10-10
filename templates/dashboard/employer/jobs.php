@@ -37,7 +37,7 @@ if ( ! empty( $dashboard_page ) ) {
 
 <div class="jbs-position-relative">
 
-    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 lg-mb-30">
+    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between mb-40 lg-mb-30">
         <h2 class="main-title m0"><?php esc_html_e( 'My Jobs', 'jobus' ); ?></h2>
     </div>
 

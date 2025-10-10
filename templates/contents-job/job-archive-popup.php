@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="jbs-col-12">
                 <div class="job-post-item-wrapper">
 
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-sm-center jbs-mb-30">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-sm-center mb-30">
                         <div class="jbs-d-sm-flex jbs-align-items-center">
 
                             <button type="button" class="filter-btn jbs-fw-500 tran3s jbs-me-3" data-bs-toggle="modal" data-bs-target="#filterPopUp">

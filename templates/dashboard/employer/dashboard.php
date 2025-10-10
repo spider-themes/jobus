@@ -73,7 +73,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
     <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
     <div class="jbs-row">
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
 	                    <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/beg.svg' ) ?>" alt="<?php esc_attr_e( 'Posted Job', 'jobus' ); ?>" class="lazy-img">
@@ -87,7 +87,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ) ?>" alt="<?php esc_attr_e( 'Application', 'jobus' ); ?>" class="lazy-img">
@@ -101,7 +101,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Saved Job', 'jobus' ); ?>" class="lazy-img">
@@ -115,7 +115,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
         </div>
 
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one bg-white border-30 jbs-position-relative jbs-mb-15">
+            <div class="dash-card-one bg-white border-30 jbs-position-relative mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ) ?>" alt="<?php esc_attr_e( 'Job Views', 'jobus' ); ?>" class="lazy-img">

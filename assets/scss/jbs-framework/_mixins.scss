@@ -1,0 +1,47 @@
+// ============================================
+// Mixins
+// ============================================
+
+@use "variables" as *;
+
+// Placeholder Mixin
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+// Media Query Mixin
+@mixin respond-above($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        @media (min-width: $breakpoint-value) {
+            @content;
+        }
+    } @else {
+        @warn "Invalid breakpoint: #{$breakpoint}.";
+    }
+}
+
+@mixin respond-below($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        @media (max-width: $breakpoint-value) {
+            @content;
+        }
+    } @else {
+        @warn "Invalid breakpoint: #{$breakpoint}.";
+    }
+}

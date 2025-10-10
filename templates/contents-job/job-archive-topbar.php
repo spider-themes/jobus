@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <div class="jbs-col-12">
                 <div class="job-post-item-wrapper">
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center mb-25 mt-70 jbs-lg-mt-40">
 
 	                    <?php
 	                    // Display the total number of companies found

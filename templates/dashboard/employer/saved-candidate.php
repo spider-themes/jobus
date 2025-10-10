@@ -44,7 +44,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
             $designation = get_post_meta( $candidate_id, 'jobus_candidate_designation', true );
             $skills = get_the_terms( $candidate_id, 'jobus_candidate_skill' );
 			?>
-			<div class="candidate-profile-card list-layout border-0 jbs-mb-25">
+			<div class="candidate-profile-card list-layout border-0 mb-25">
 				<div class="jbs-d-flex">
 					<div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
                         <a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="rounded-circle">

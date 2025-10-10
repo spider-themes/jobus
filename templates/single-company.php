@@ -34,7 +34,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                         }
                         ?>
-                        <div class="text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20 lg-mb-10"><?php the_title() ?></div>
+                        <div class="text-md jbs-text-dark jbs-text-center mt-15 mb-20 lg-mb-10"><?php the_title() ?></div>
                         <?php if ( ! empty( $website_url ) ) : ?>
                             <div class="jbs-text-center">
                                 <a href="<?php echo esc_url( $website_url ) ?>" class="website-btn-two tran3s"
@@ -44,7 +44,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </div>
                         <?php endif; ?>
 
-                        <div class="jbs-border-top jbs-mt-35 lg-mt-20 jbs-pt-25">
+                        <div class="jbs-border-top mt-35 lg-mt-20 jbs-pt-25">
                             <ul class="job-meta-data jbs-row style-none">
                                 <?php
                                 if ( ! empty( $location ) ) { ?>
@@ -142,7 +142,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </ul>
 
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>"
-                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-25">
+                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-25">
                                 <?php esc_html_e( 'Posted Jobs', 'jobus' ); ?>
                             </a>
                         </div>
@@ -239,7 +239,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             <?php
                         }
                         ?>
-                        <nav class="share-option jbs-mt-60">
+                        <nav class="share-option mt-60">
                             <?php jobus_social_share_icons() ?>
                         </nav>
                     </div>
@@ -288,7 +288,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                     $job_meta   = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                     $company_id = $job_meta['select_company'] ?? '';
                     ?>
-                    <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
+                    <div class="job-list-one style-two jbs-position-relative mb-20">
                         <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                                 <div class="job-title jbs-d-flex jbs-align-items-center">
