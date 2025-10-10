@@ -341,9 +341,9 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
             $trim_value      = ! empty( $meta_value ) ? implode( ', ', $meta_value ) : '';
             $formatted_value = str_replace( '@space@', ' ', $trim_value );
 
-            return $formatted_value;
-        }
-    }
+			return $formatted_value;
+		}
+	}
 }
 
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
@@ -428,25 +428,23 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
 
 /**
  * Get the company count by post id and meta-value
- *
  * @param $company_id
- *
  * @return int
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
-    function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
-        $args = array(
-                'post_type'      => 'jobus_job',
-                'posts_per_page' => - 1,
-                'meta_query'     => array(
-                        'relation' => 'AND', // Optional, defaults to "AND
-                        array(
-                                'key'     => 'jobus_meta_options',
-                                'value'   => $company_id,
-                                'compare' => 'LIKE',
-                        ),
-                )
-        );
+	function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
+		$args = array(
+			'post_type'      => 'jobus_job',
+			'posts_per_page' => - 1,
+			'meta_query'     => array(
+				'relation' => 'AND', // Optional, defaults to "AND
+				array(
+					'key'     => 'jobus_meta_options',
+					'value'   => $company_id,
+					'compare' => 'LIKE',
+				),
+			)
+		);
 
         $job_posts = new \WP_Query( $args );
 
@@ -484,9 +482,9 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
  *
  * @param string $terms The name of the query parameter to retrieve.
  *
- * @return array|string The sanitized search terms.
+ * @return array The sanitized search terms.
  */
-function jobus_search_terms( string $terms ): array|string {
+function jobus_search_terms( string $terms ) {
 
     $result      = [];
     $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
@@ -807,13 +805,13 @@ function jobus_meta_company_spec_name( $step = 1 ) {
     $company_archive_meta   = $meta_options[ 'company_archive_meta_' . $step ];
     $company_specifications = $meta_options['company_specifications'];
 
-    if ( ! empty ( $company_specifications ) ) {
-        foreach ( $company_specifications as $company_specification ) {
-            if ( $company_archive_meta == $company_specification['meta_key'] ) {
-                return $company_specification['meta_name'];
-            }
-        }
-    }
+	if ( ! empty ( $company_specifications ) ) {
+		foreach ( $company_specifications as $company_specification ) {
+			if ( $company_archive_meta == $company_specification['meta_key'] ) {
+				return $company_specification['meta_name'];
+			}
+		}
+	}
 }
 
 
@@ -826,13 +824,13 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
     $candidate_archive_meta   = $meta_options[ 'candidate_archive_meta_' . $step ];
     $candidate_specifications = $meta_options['candidate_specifications'];
 
-    if ( ! empty ( $candidate_specifications ) ) {
-        foreach ( $candidate_specifications as $candidate_specification ) {
-            if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
-                return $candidate_specification['meta_name'];
-            }
-        }
-    }
+	if ( ! empty ( $candidate_specifications ) ) {
+		foreach ( $candidate_specifications as $candidate_specification ) {
+			if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
+				return $candidate_specification['meta_name'];
+			}
+		}
+	}
 }
 
 
@@ -853,9 +851,9 @@ function jobus_phpmailer_init( $phpmailer ) {
 }
 
 if ( ! function_exists( 'jobus_rtl' ) ) {
-    function jobus_rtl(): string {
-        return is_rtl() ? 'true' : 'false';
-    }
+	function jobus_rtl(): string {
+		return is_rtl() ? 'true' : 'false';
+	}
 }
 
 

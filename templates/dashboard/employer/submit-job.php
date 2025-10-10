@@ -1,27 +1,6 @@
 <?php
 /**
- * Template for displayi// Handle form submission for taxonomies [categories, locations, tags]
-if ( isset( $_POST['employer_submit_job_form'] ) ) {
-    $nonce = isset( $_POST['employer_submit_job_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_submit_job_nonce'] ) ) : '';
-    if ( ! $nonce || ! wp_verify_nonce( $nonce, 'employer_submit_job' ) ) {
-        wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
-    }
-
-    if ( isset( $_POST['job_categories'] ) ) {
-        $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );
-        wp_set_object_terms( $job_id, $cat_ids, 'jobus_job_cat' );
-    }
-
-    if ( isset( $_POST['job_locations'] ) ) {
-        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_locations'] ) ) );
-        wp_set_object_terms( $job_id, $location_ids, 'jobus_job_location' );
-    }
-
-    if ( isset( $_POST['job_tags'] ) ) {
-        $skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_tags'] ) ) );
-        wp_set_object_terms( $job_id, $skill_ids, 'jobus_job_tag' );
-    }
-}" section in the employer dashboard.
+ * Template for displaying "Submit Job" section in the employer dashboard.
  *
  * This template is used to show the job submission form for employers in their dashboard.
  *
@@ -61,6 +40,11 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
 
 // Handle form submission for taxonomies [categories, locations, tags]
 if ( isset( $_POST['employer_submit_job_form'] ) ) {
+
+    // Check user permissions
+    if ( ! is_user_logged_in() || ( $job_id && ! current_user_can( 'edit_post', $job_id ) ) ) {
+        wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
+    }
 
     if ( isset( $_POST['job_categories'] ) ) {
         $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['job_categories'] ) ) ) );

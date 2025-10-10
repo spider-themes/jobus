@@ -9,9 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * login redirects, and hides admin bar for low-privileged roles.
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit(); // Exit if accessed directly.
-}
 
 // Add custom image size for candidate profile
 add_image_size( 'jobus_280x268', 280, 268, true );

@@ -7,18 +7,23 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 		wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
 	}
 
+	// Check user permissions
+	if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
+		wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
+	}
+
 	if ( isset( $_POST['candidate_categories'] ) ) {
 		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
 		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_cat' );
 	}
 
 	if ( isset( $_POST['candidate_locations'] ) ) {
-		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) );
+		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
 		wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
 	}
 
 	if ( isset( $_POST['candidate_skills'] ) ) {
-		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) );
+		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
 		wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
 	}
 }e page.
@@ -49,6 +54,11 @@ $portfolio_data  = $candidate_form->get_candidate_portfolio( $candidate_id );
 
 // Handle form submission for taxonomies [categories, locations, skills]
 if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
+
+	// Check user permissions
+	if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
+		wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
+	}
 
 	if ( isset( $_POST['candidate_categories'] ) ) {
 		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
