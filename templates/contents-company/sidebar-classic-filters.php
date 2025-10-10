@@ -16,7 +16,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
                 aria-label="Close"></button>
         <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
-        <div class="light-bg border-20 ps-4 pe-4 pt-25 pb-30 mt-20">
+        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 pt-25 pb-30 mt-20">
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
 
 				<?php wp_nonce_field( 'jobus_search_filter', 'jobus_nonce' ); ?>
