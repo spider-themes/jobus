@@ -68,6 +68,12 @@
 .jbs-order-xl-4 {
     order: 4 !important;
 }
+.jbs-order-xl-first {
+    order: -1 !important;
+}
+.jbs-order-xl-last {
+    order: 6 !important;
+}
 
 // Gap
 .jbs-gx-1 {

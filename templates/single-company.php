@@ -27,7 +27,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
         <div class="jbs-container">
             <div class="jbs-row">
 
-                <div class="jbs-col-xxl-3 jbs-col-xl-4 order-xl-last">
+                <div class="jbs-col-xxl-3 jbs-col-xl-4 jbs-order-xl-last">
                     <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 lg-mb-50">
                         <?php
                         if ( has_post_thumbnail() ) {
@@ -150,7 +150,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                     <!-- /.job-company-info -->
                 </div>
 
-                <div class="jbs-col-xxl-9 jbs-col-xl-8 order-xl-first">
+                <div class="jbs-col-xxl-9 jbs-col-xl-8 jbs-order-xl-first">
                     <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
 
                         <?php
