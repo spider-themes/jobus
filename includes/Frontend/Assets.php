@@ -42,9 +42,10 @@ class Assets {
 
 		// Enqueue Scripts
 		wp_enqueue_script( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/jquery.nice-select.min.js' ), [ 'jquery' ], '1.0', [ 'strategy' => 'defer' ] );
-		wp_enqueue_script( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.js' ), [ 'jquery' ], '5.1.3', [ 'strategy' => 'defer' ] );
+		// wp_enqueue_script( 'bootstrap', esc_url( JOBUS_VEND . '/bootstrap/bootstrap.min.js' ), [ 'jquery' ], '5.1.3', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'slick', esc_url( JOBUS_VEND . '/slick/slick.min.js' ), [ 'jquery' ], '2.2.0', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-public', esc_url( JOBUS_JS . '/public.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'jobus-collapse', esc_url( JOBUS_JS . '/collapse.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
 		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 

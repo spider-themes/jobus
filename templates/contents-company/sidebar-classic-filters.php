@@ -6,12 +6,12 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
     <button type="button" class="filter-btn jbs-w-100 pt-2 pb-2 jbs-h-auto fw-500 tran3s jbs-d-lg-none mb-40"
-            data-bs-toggle="offcanvas" data-bs-target="#filteroffcanvas">
+            data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
 		<?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>
 
-    <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
+    <div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
         <button type="button" class="btn-close text-reset jbs-d-lg-none" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
         <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
@@ -28,8 +28,8 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 				if ( is_array( $filter_widgets ) ) {
 					foreach ( $filter_widgets as $index => $widget ) {
 						$tab_count         = $index + 1;
-						$is_collapsed      = $tab_count == 1 ? '' : ' collapsed';
-						$is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
+						$is_collapsed      = $tab_count == 1 ? '' : ' jbs-collapsed';
+						$is_collapsed_show = $tab_count == 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
 						$area_expanded     = $index == 1 ? 'true' : 'false';
 
 						$widget_name   = $widget['widget_name'] ?? '';
@@ -44,19 +44,19 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 
 						if ( $post_type == 'jobus_company' ) {
 							if ( ! empty ($widget_param) ) {
-								$is_collapsed_show = 'collapse show';
+								$is_collapsed_show = 'jbs-collapse jbs-show';
 								$area_expanded     = 'true';
 								$is_collapsed      = '';
 							} else {
-								$is_collapsed_show = 'collapse';
+								$is_collapsed_show = 'jbs-collapse';
 								$area_expanded     = 'false';
-								$is_collapsed      = ' collapsed';
+								$is_collapsed      = ' jbs-collapsed';
 							}
 						}
 						?>
                         <div class="filter-block bottom-line pb-25 mt-25">
                             <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
-                               data-bs-toggle="collapse"
+                              data-jbs-toggle="collapse"
                                href="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
                                aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
 								<?php echo esc_html( $widget_title ); ?>
@@ -111,3 +111,4 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
         </div>
     </div>
 </div>
+<div class="jbs-offcanvas-backdrop"></div>

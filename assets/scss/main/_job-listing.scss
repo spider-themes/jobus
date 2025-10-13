@@ -5,6 +5,24 @@
   }
 }
 
+@media (min-width: 992px) {
+  .filter-area-tab.jbs-offcanvas {
+    position: relative;
+    transform: none !important;
+    visibility: visible;
+    border: none;
+    z-index: 0;
+  }
+
+}
+
+@media (max-width: 991px) {
+    .filter-area-tab.jbs-offcanvas {
+        position: fixed;
+        overflow-y: auto;
+    }
+}
+
 .filter-area-tab {
 
   &.modal-content {
@@ -21,7 +39,7 @@
     border-radius: 20px;
   }
 
-  .btn-close {
+  .jbs-btn-close {
     position: absolute;
     right: 15px;
     top: 15px;
@@ -62,7 +80,7 @@
       background-color: #31795A;
     }
 
-    &:not(.collapsed):before {
+    &:not(.jbs-collapsed):before {
       transform: rotate(180deg);
     }
   }
@@ -88,7 +106,7 @@
     position: relative;
     display: block;
 
-    &:not(.collapsed) {
+    &:not(.jbs-collapsed) {
       margin-bottom: 10px;
     }
   }
@@ -112,7 +130,7 @@
       @include transition(0.2s);
     }
 
-    &:not(.collapsed):before {
+    &:not(.jbs-collapsed):before {
       content: "\f2ea";
     }
   }
@@ -539,8 +557,8 @@
 }
 
 // Modal Filter
-.popUpModal .modal-content {
-  border-radius: 15px;
+.popUpModal .jbs-modal-content {
+  border-radius: 15px !important;
 
   &.filter-area-tab .input-box input,
   &.filter-area-tab .nice-select {
@@ -552,7 +570,7 @@
     background: #EFEFEF;
   }
 
-  .btn-close {
+  .jbs-btn-close {
     position: absolute;
     right: 15px;
     top: 15px;

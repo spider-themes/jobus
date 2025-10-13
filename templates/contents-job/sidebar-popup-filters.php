@@ -8,11 +8,11 @@ $jobus_nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_G
 
 if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) :
     ?>
-    <div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+    <div class="jbs-modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
-                <div class="filter-area-tab modal-content">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="filter-area-tab jbs-modal-content">
+                    <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
                     <div class="jbs-position-relative">
 
                         <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>

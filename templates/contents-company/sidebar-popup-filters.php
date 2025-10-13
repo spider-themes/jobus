@@ -3,14 +3,14 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 ?>
-<div class="modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+<div class="jbs-modal popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
-            <div class="filter-area-tab modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="filter-area-tab jbs-modal-content">
+                <button type="button" class="jbs-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="jbs-position-relative">
-                    <div class="main-title fw-500 text-dark ps-4 pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
-                    <div class="pt-25 pb-30 ps-4 pe-4">
+                    <div class="main-title fw-500 text-dark jbs-ps-4 jbs-pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
+                    <div class="pt-25 pb-30 jbs-ps-4 jbs-pe-4">
 
                         <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get">
 

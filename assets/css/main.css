@@ -5334,6 +5334,21 @@ img {
   display: block;
 }
 
+@media (min-width: 992px) {
+  .filter-area-tab.jbs-offcanvas {
+    position: relative;
+    transform: none !important;
+    visibility: visible;
+    border: none;
+    z-index: 0;
+  }
+}
+@media (max-width: 991px) {
+  .filter-area-tab.jbs-offcanvas {
+    position: fixed;
+    overflow-y: auto;
+  }
+}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: #EFF6F3;
 }
@@ -5343,7 +5358,7 @@ img {
 .filter-area-tab .border-20 {
   border-radius: 20px;
 }
-.filter-area-tab .btn-close {
+.filter-area-tab .jbs-btn-close {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -5383,7 +5398,7 @@ img {
   color: #fff;
   background-color: #31795A;
 }
-.filter-area-tab .filter-header:not(.collapsed):before {
+.filter-area-tab .filter-header:not(.jbs-collapsed):before {
   transform: rotate(180deg);
 }
 .filter-area-tab .light-bg {
@@ -5403,7 +5418,7 @@ img {
   position: relative;
   display: block;
 }
-.filter-area-tab .filter-title:not(.collapsed) {
+.filter-area-tab .filter-title:not(.jbs-collapsed) {
   margin-bottom: 10px;
 }
 .filter-area-tab a.filter-title {
@@ -5428,7 +5443,7 @@ img {
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.filter-area-tab a.filter-title:not(.collapsed):before {
+.filter-area-tab a.filter-title:not(.jbs-collapsed):before {
   content: "\f2ea";
 }
 .filter-area-tab .nice-select {
@@ -5816,17 +5831,17 @@ img {
   border-color: #244034;
 }
 
-.popUpModal .modal-content {
-  border-radius: 15px;
+.popUpModal .jbs-modal-content {
+  border-radius: 15px !important;
 }
-.popUpModal .modal-content.filter-area-tab .input-box input, .popUpModal .modal-content.filter-area-tab .nice-select {
+.popUpModal .jbs-modal-content.filter-area-tab .input-box input, .popUpModal .jbs-modal-content.filter-area-tab .nice-select {
   background: #FAFAFA;
   border-color: #EDEDED;
 }
-.popUpModal .modal-content.filter-area-tab .salary-slider .slider {
+.popUpModal .jbs-modal-content.filter-area-tab .salary-slider .slider {
   background: #EFEFEF;
 }
-.popUpModal .modal-content .btn-close {
+.popUpModal .jbs-modal-content .jbs-btn-close {
   position: absolute;
   right: 15px;
   top: 15px;

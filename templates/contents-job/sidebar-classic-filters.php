@@ -8,14 +8,13 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
-    <button type="button" class="filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none mb-40" data-bs-toggle="offcanvas"
-            data-bs-target="#filteroffcanvas">
+    <button type="button" class="filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none mb-40" data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>
 
-    <div class="filter-area-tab offcanvas offcanvas-start" id="filteroffcanvas">
-        <button type="button" class="btn-close text-reset jbs-d-lg-none" data-bs-dismiss="offcanvas"
+    <div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+        <button type="button" class="jbs-btn-close text-reset jbs-d-lg-none jbs-offcanvas-close"
                 aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
         <div class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
         <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 pt-25 pb-30 mt-20">
@@ -31,8 +30,8 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
                     foreach ( $filter_widgets as $index => $widget ) {
 
                         $tab_count         = $index + 1;
-                        $is_collapsed      = $tab_count == 1 ? '' : ' collapsed';
-                        $is_collapsed_show = $tab_count == 1 ? 'collapse show' : 'collapse';
+                        $is_collapsed      = $tab_count == 1 ? '' : ' jbs-collapsed';
+                        $is_collapsed_show = $tab_count == 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
                         $area_expanded     = $index == 1 ? 'true' : 'false';
 
                         $widget_name   = $widget['widget_name'] ?? '';
@@ -48,19 +47,19 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 
                         if ( $post_type == 'jobus_job' ) {
                             if ( ! empty ( $widget_param ) ) {
-                                $is_collapsed_show = 'collapse show';
+                                $is_collapsed_show = 'jbs-collapse jbs-show';
                                 $area_expanded     = 'true';
                                 $is_collapsed      = '';
                             } else {
-                                $is_collapsed_show = 'collapse';
+                                $is_collapsed_show = 'jbs-collapse';
                                 $area_expanded     = 'false';
-                                $is_collapsed      = ' collapsed';
+                                $is_collapsed      = ' jbs-collapsed';
                             }
                         }
                         ?>
                         <div class="filter-block bottom-line jbs-pb-25">
 
-                            <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>" data-bs-toggle="collapse"
+                            <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>" data-jbs-toggle="collapse"
                                href="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
                                aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
                                 <?php echo esc_html( $widget_title ); ?>
@@ -125,3 +124,5 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
     </div>
 
 </div>
+
+<div class="jbs-offcanvas-backdrop"></div>
