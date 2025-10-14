@@ -3547,7 +3547,8 @@ img {
   border-radius: 15px;
   padding: 35px 35px 20px;
 }
-.candidates-profile-details .inner-card.border-style .title, .candidates-profile-details .inner-card.border-style > .wp-block-heading {
+.candidates-profile-details .inner-card.border-style .title,
+.candidates-profile-details .inner-card.border-style > .wp-block-heading {
   position: absolute;
   background: #fff;
   padding: 0 10px;
@@ -3916,7 +3917,8 @@ img {
   border-radius: 15px;
   padding: 35px 35px 20px;
 }
-.candidates-profile-details-2 .inner-card.border-style .title, .candidates-profile-details-2 .inner-card.border-style > .wp-block-heading {
+.candidates-profile-details-2 .inner-card.border-style .title,
+.candidates-profile-details-2 .inner-card.border-style > .wp-block-heading {
   background: transparent;
   position: unset;
   padding: 0;
@@ -6753,6 +6755,16 @@ img {
 }
 .btn-one:hover img {
   filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
+}
+
+.jbs-btn-ten {
+  line-height: 50px;
+  border-radius: 10px;
+  background: #000;
+  padding: 0 26px;
+}
+.jbs-btn-ten:hover {
+  background: #31795a;
 }
 
 .inner-banner-one {

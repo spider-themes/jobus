@@ -34,3 +34,13 @@
     }
   }
 }
+
+.jbs-btn-ten {
+  line-height: 50px;
+  border-radius: 10px;
+  background: #000;
+  padding: 0 26px;
+  &:hover {
+      background: #31795a;
+  }
+}

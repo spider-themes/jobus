@@ -31,12 +31,12 @@ if ( !empty($taxonomy) ) {
 
 
 // Initialize variables with default values
-$is_collapsed_show = 'collapse';
+$is_collapsed_show = 'jbs-collapse';
 $area_expanded     = 'false';
-$is_collapsed      = ' collapsed';
+$is_collapsed      = ' jbs-collapsed';
 
 if ( ! empty( $taxonomy_arr  ) ) {
-	$is_collapsed_show = 'collapse show';
+	$is_collapsed_show = 'jbs-collapse show';
 	$area_expanded     = 'true';
 	$is_collapsed      = '';
 }
@@ -55,7 +55,7 @@ if ( $taxonomy == 'jobus_job_tag' ) {
 ?>
 
 <div class="filter-block bottom-line jbs-pb-25">
-    <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ); ?>" data-bs-toggle="collapse"
+    <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ); ?>" data-jbs-toggle="collapse"
        href="#collapse-<?php echo esc_attr( $taxonomy ) ?>" role="button" aria-expanded="<?php echo esc_attr( $area_expanded ); ?>">
 		<?php echo esc_html( $taxonomy_text ); ?>
     </a>

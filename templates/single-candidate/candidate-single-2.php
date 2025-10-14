@@ -411,7 +411,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="jbs-d-sm-flex">
-                                <button type="submit" name="send_message" class="btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                <button type="submit" name="send_message" class="jbs-btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
 									<?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

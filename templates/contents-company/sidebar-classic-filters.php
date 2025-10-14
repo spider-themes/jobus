@@ -104,7 +104,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 					}
 				}
 				?>
-                <button type="submit" class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30">
+                <button type="submit" class="jbs-btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30">
 					<?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                 </button>
             </form>

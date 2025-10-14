@@ -30,7 +30,7 @@ get_footer();
             <div class="jbs-modal-body">
                 <div class="jbs-container">
                     <?php
-                    $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten jbs-text-white';
+                    $btn_class = $job_single_layout == '1' ? 'btn-one' : 'jbs-btn-ten jbs-text-white';
 
                     // Get current user information
                     $user            = wp_get_current_user();

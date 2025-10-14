@@ -323,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php
@@ -376,7 +376,7 @@ wp_enqueue_script( 'lightbox' );
 
                             <div class="jbs-d-sm-flex">
                                 <button type="submit" name="send_message" id="send_message"
-                                        class="btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                        class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

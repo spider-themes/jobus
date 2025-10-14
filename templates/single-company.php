@@ -142,7 +142,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </ul>
 
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>"
-                               class="btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-25">
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-25">
                                 <?php esc_html_e( 'Posted Jobs', 'jobus' ); ?>
                             </a>
                         </div>

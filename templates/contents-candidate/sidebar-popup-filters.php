@@ -87,7 +87,7 @@ if (!defined('ABSPATH')) {
                             <div class="jbs-row">
                                 <div class="jbs-col-xl-2 jbs-m-auto">
                                     <button type="submit"
-                                        class="btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
+                                        class="jbs-btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
                                         <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                     </button>
                                 </div>
