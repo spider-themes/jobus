@@ -9,11 +9,11 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
     <div class="filter-area-tab">
         <div class="light-bg border-20 jbs-ps-4 jbs-pe-4">
 
-            <a class="filter-header border-20 jbs-d-block collapsed" data-bs-toggle="collapse" href="#collapseFilterHeader" role="button" aria-expanded="false">
+            <a class="filter-header border-20 jbs-d-block jbs-collapsed" href="#collapseFilterHeader" role="button" aria-expanded="false">
                 <span class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
             </a>
 
-            <div class="collapse jbs-border-top" id="collapseFilterHeader">
+            <div class="jbs-collapse jbs-border-top" >
                 <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-pt-25 jbs-pb-30" role="search" method="get">
 
                     <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
@@ -38,7 +38,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
                                     <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
+                                        <div class="filter-title fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
                                         <?php
                                         // Include the appropriate widget layout file based on the widget type
                                         $specifications_data = $job_specifications;

@@ -28,7 +28,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                                 if (!empty($meta_options[$meta_key])) {
                                     ?>
-                                    <div class="bg-wrapper bg-white text-center">
+                                    <div class="bg-wrapper jbs-bg-white jbs-text-center">
                                         <?php
                                         // Check if the icon/image option is selected
                                         if ($field['is_meta_icon'] == 'meta_icon' && !empty($field['meta_icon'])) {
@@ -99,12 +99,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         } else {
                             // Show the apply button if the user has not applied yet
                             if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25">
+                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25 " >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="#" class="btn-one mt-25" data-bs-toggle="modal"
-                                   data-bs-target="#applyJobModal">
+                                <a href="#" class="btn-one mt-25 jbs-open-modal" data-target="#filterPopUp"
+                                  >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php }

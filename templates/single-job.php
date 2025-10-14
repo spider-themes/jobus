@@ -20,14 +20,14 @@ include 'single-job/job-single-' . $job_single_layout . '.php';
 
 get_footer();
 ?>
-<div class="modal fade job-application-wrapper" id="applyJobModal" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="applyJobModalLabel"><?php esc_html_e( 'Apply for this Position', 'jobus' ); ?></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="jbs-modal fade job-application-wrapper" id="filterPopUp" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
+    <div class="jbs-modal-dialog jbs-modal-dialog-centered">
+        <div class="jbs-modal-content">
+            <div class="jbs-modal-header">
+                <h5 class="jbs-modal-title" id="applyJobModalLabel"><?php esc_html_e( 'Apply for this Position', 'jobus' ); ?></h5>
+                <button type="button" class="jbs-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="jbs-modal-body">
                 <div class="jbs-container">
                     <?php
                     $btn_class = $job_single_layout == '1' ? 'btn-one' : 'btn-ten jbs-text-white';
@@ -51,36 +51,36 @@ get_footer();
                             <input type="hidden" name="job_application_nonce" value="<?php echo esc_attr( wp_create_nonce( 'jobus_job_application' ) ); ?>">
 
                             <div class="jbs-col-md-6">
-                                <label for="firstName" class="form-label"><?php esc_html_e( 'First Name*', 'jobus' ); ?></label>
-                                <input type="text" class="form-control" id="firstName" name="candidate_fname"
+                                <label for="firstName" class="jbs-form-label"><?php esc_html_e( 'First Name*', 'jobus' ); ?></label>
+                                <input type="text" class="jbs-form-control" id="firstName" name="candidate_fname"
                                        value="<?php echo esc_attr( $candidate_fname ); ?>" required>
                             </div>
 
                             <div class="jbs-col-md-6">
-                                <label for="lastName" class="form-label"><?php esc_html_e( 'Last Name', 'jobus' ); ?></label>
-                                <input type="text" class="form-control" id="lastName" name="candidate_lname"
+                                <label for="lastName" class="jbs-form-label"><?php esc_html_e( 'Last Name', 'jobus' ); ?></label>
+                                <input type="text" class="jbs-form-control" id="lastName" name="candidate_lname"
                                        value="<?php echo esc_attr( $candidate_lname ); ?>">
                             </div>
 
                             <div class="jbs-col-md-12">
-                                <label for="email" class="form-label"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
-                                <input type="email" class="form-control" id="email" name="candidate_email"
+                                <label for="email" class="jbs-form-label"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
+                                <input type="email" class="jbs-form-control" id="email" name="candidate_email"
                                        value="<?php echo esc_attr( $candidate_email ); ?>" required>
                             </div>
 
                             <div class="jbs-col-md-12">
-                                <label for="phone" class="form-label"><?php esc_html_e( 'Phone', 'jobus' ); ?></label>
-                                <input type="tel" class="form-control" id="phone" name="candidate_phone">
+                                <label for="phone" class="jbs-form-label"><?php esc_html_e( 'Phone', 'jobus' ); ?></label>
+                                <input type="tel" class="jbs-form-control" id="phone" name="candidate_phone">
                             </div>
 
                             <div class="jbs-col-md-12">
-                                <label for="message" class="form-label"><?php esc_html_e( 'Message', 'jobus' ); ?></label>
-                                <textarea class="form-control" id="message" name="candidate_message" rows="4"></textarea>
+                                <label for="message" class="jbs-form-label"><?php esc_html_e( 'Message', 'jobus' ); ?></label>
+                                <textarea class="jbs-form-control" id="message" name="candidate_message" rows="4"></textarea>
                             </div>
 
                             <div class="jbs-col-md-12">
-                                <label for="upload_cv" class="form-label"><?php esc_html_e( 'Upload CV (PDF or Word)', 'jobus' ); ?></label>
-                                <input type="file" class="form-control upload-cv" id="upload_cv" name="candidate_cv" accept=".pdf,.doc,.docx">
+                                <label for="upload_cv" class="jbs-form-label"><?php esc_html_e( 'Upload CV (PDF or Word)', 'jobus' ); ?></label>
+                                <input type="file" class="jbs-form-control upload-cv" id="upload_cv" name="candidate_cv" accept=".pdf,.doc,.docx">
                             </div>
 
                             <div class="jbs-col-md-12">

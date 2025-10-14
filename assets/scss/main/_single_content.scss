@@ -62,6 +62,12 @@
     .job-meta-data-two {
       margin-bottom: 50px;
     }
+    .has-global-padding{
+        padding: 0 !important;
+    }
+    .is-layout-constrained > *{
+        max-width: 100% !important;
+    }
 
     .wp-block-heading {
       font-size: 22px;

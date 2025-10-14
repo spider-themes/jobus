@@ -6496,10 +6496,10 @@ img {
 .job-application-wrapper {
   background: rgba(0, 0, 0, 0.8);
 }
-.job-application-wrapper .modal-dialog {
+.job-application-wrapper .jbs-modal-dialog {
   max-width: 700px;
 }
-.job-application-wrapper .modal-dialog .modal-content {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content {
   background: #EFF6F3;
   margin: 0;
   border: none;
@@ -6507,42 +6507,42 @@ img {
   padding: 40px;
 }
 @media (max-width: 480px) {
-  .job-application-wrapper .modal-dialog .modal-content {
+  .job-application-wrapper .jbs-modal-dialog .jbs-modal-content {
     padding: 15px;
   }
 }
-.job-application-wrapper .modal-dialog .modal-content .modal-header .modal-title {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .jbs-modal-header .jbs-modal-title {
   font-weight: 600;
   font-size: 20px;
   font-family: "gordita";
 }
-.job-application-wrapper .modal-dialog .modal-content .modal-body {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .jbs-modal-body {
   padding: 1rem 0;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form label {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form label {
   font-size: 14px;
   font-weight: 500;
   color: #31795A;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .jbs-form-control {
   border: 1px solid #e9e9e9;
   font-size: 14px;
   font-weight: 400;
   line-height: 2;
   padding-left: 20px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control:focus {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .jbs-form-control:focus {
   border-color: #31795A;
   box-shadow: none;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form .form-control.upload-cv {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .jbs-form-control.upload-cv {
   padding-left: 12px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form .btn {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .btn {
   margin-top: 10px;
   padding: 10px 40px;
 }
-.job-application-wrapper .modal-dialog .modal-content .job-application-form .btn:focus {
+.job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .btn:focus {
   box-shadow: none;
 }
 
@@ -6598,6 +6598,12 @@ img {
 
 .jobus_job_details_2 .details-post-data .job-meta-data-two {
   margin-bottom: 50px;
+}
+.jobus_job_details_2 .details-post-data .has-global-padding {
+  padding: 0 !important;
+}
+.jobus_job_details_2 .details-post-data .is-layout-constrained > * {
+  max-width: 100% !important;
 }
 .jobus_job_details_2 .details-post-data .wp-block-heading {
   font-size: 22px;
@@ -6720,6 +6726,33 @@ img {
   background: #E7F6EF;
   border-color: #E7F6EF;
   color: #005025;
+}
+
+.btn-one {
+  text-transform: capitalize;
+  font-weight: 500;
+  padding: 8px 26px;
+  text-align: center;
+  border-radius: 50px;
+  color: var(--heading_color);
+  background-color: #D2F34C;
+  border: 2px solid transparent;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -ms-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+.btn-one.lg {
+  padding: 8px 32px;
+}
+.btn-one:hover {
+  background-color: #244034;
+  color: #D2F34C;
+  border-color: #D2F34C;
+}
+.btn-one:hover img {
+  filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
 }
 
 .inner-banner-one {

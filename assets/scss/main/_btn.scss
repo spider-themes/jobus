@@ -11,3 +11,26 @@
     color: #005025;
   }
 }
+
+.btn-one {
+  text-transform: capitalize;
+  font-weight: 500;
+  padding: 8px 26px;
+  text-align: center;
+  border-radius: 50px;
+  color: var(--heading_color);
+  background-color: #D2F34C;
+  border:2px solid transparent;
+  @include transition(0.3s);
+  &.lg {
+    padding: 8px 32px;
+  }
+  &:hover {
+    background-color: $color-one;
+    color: #D2F34C;
+    border-color: #D2F34C;
+    img{
+      filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
+    }
+  }
+}

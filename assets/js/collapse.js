@@ -29,8 +29,6 @@ jQuery(document).ready(function ($) {
     }
   });
 
-
-  
   // Open offcanvas
   $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
     e.preventDefault();
@@ -50,30 +48,34 @@ jQuery(document).ready(function ($) {
     $(".jbs-offcanvas.show").removeClass("show");
     $(this).removeClass("show");
   });
- 
 
   // modal close on esc key press
- $('.jbs-open-modal').on('click', function(e){
-        e.preventDefault();
-        var target = $(this).data('target'); // Get target modal ID
-        $(target).fadeIn(300).addClass('show'); // fadeIn + show class
-    });
+  $(".jbs-open-modal").on("click", function (e) {
+    e.preventDefault();
+    var target = $(this).data("target"); 
+    $(target).fadeIn(300).addClass("show");
+  });
 
-    // -----------------------------
-    // Close Modal
-    // -----------------------------
-    $('.jbs-btn-close').on('click', function(){
-        var modal = $(this).closest('.jbs-modal');
-        modal.fadeOut(300).removeClass('show'); // fadeOut + remove show
-    });
+  // -----------------------------
+  // Close Modal
+  // -----------------------------
+  $(".jbs-btn-close").on("click", function () {
+    var modal = $(this).closest(".jbs-modal");
+    modal.fadeOut(300).removeClass("show"); // fadeOut + remove show
+  });
 
-    // -----------------------------
-    // Click Outside Modal Content
-    // -----------------------------
-    $('.jbs-modal').on('click', function(e){
-        if($(e.target).is('.jbs-modal')) { // only if click on backdrop
-            $(this).fadeOut(300).removeClass('show');
-        }
-    });
+  // -----------------------------
+  // Click Outside Modal Content
+  // -----------------------------
+  $(".jbs-modal").on("click", function (e) {
+    if ($(e.target).is(".jbs-modal")) {
+      // only if click on backdrop
+      $(this).fadeOut(300).removeClass("show");
+    }
+  });
 
+  $(".filter-header").on("click", function () {
+    $(this).toggleClass("jbs-collapsed");
+    $(".jbs-collapse").slideToggle(300);
+  });
 });
