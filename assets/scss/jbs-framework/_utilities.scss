@@ -215,6 +215,23 @@
     overflow: hidden !important;
 }
 
+// Fade Utility with Smooth Animation
+.jbs-fade {
+    transition: opacity 0.3s ease-in-out;
+    
+    &:not(.jbs-show) {
+        opacity: 0;
+    }
+    
+    &.jbs-show {
+        opacity: 1;
+    }
+}
+
+.jbs-show {
+    display: block !important;
+}
+
 // JBS Button
 .jbs-btn {
   display: inline-block;
@@ -237,3 +254,12 @@
   background-color: #dee2e6;
   color: #16181b;
 }
+
+.job-search-one{
+    .jbs-col-md-3,
+    .jbs-col-md-4,
+    .jbs-col-md-5{
+        margin-top: 0 !important;
+    }
+}
+

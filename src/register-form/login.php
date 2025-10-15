@@ -63,7 +63,7 @@ if (is_user_logged_in()) {
 			                    <?php wp_nonce_field('jobus_login_action', 'jobus_nonce'); ?>
 
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="jbs-col-12">
                                         <div class="input-group-meta position-relative mb-25">
                                             <label><?php esc_html_e('Username/Email*', 'jobus'); ?></label>
                                             <input type="text" name="user_input" id="user_input"
@@ -71,7 +71,7 @@ if (is_user_logged_in()) {
                                                    placeholder="<?php esc_attr_e('Enter username or email', 'jobus'); ?>">
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="jbs-col-12">
                                         <div class="input-group-meta position-relative mb-20">
                                             <label><?php esc_html_e('Password*', 'jobus') ?></label>
                                             <input type="password" name="pwd" id="password"
@@ -86,7 +86,7 @@ if (is_user_logged_in()) {
                                         </span>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="jbs-col-12">
                                         <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                             <div>
                                                 <input type="checkbox" id="remember">
@@ -97,7 +97,7 @@ if (is_user_logged_in()) {
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="jbs-col-12">
                                         <button class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e('Login', 'jobus'); ?></button>
                                     </div>
                                 </div>

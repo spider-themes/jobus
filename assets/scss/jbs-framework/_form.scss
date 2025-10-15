@@ -78,6 +78,17 @@ label{
     border-radius: .2rem;
 }
 
+.jbs-btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    
+    &:hover {
+        background-color: #5c636a;
+        border-color: #565e64;
+    }
+}
+
 // ============================================
 // Alerts
 // ============================================
@@ -94,4 +105,151 @@ label{
     color: #0f5132;
     background-color: #d1e7dd;
     border-color: #badbcc;
+}
+
+.jbs-alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.jbs-alert-warning {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+}
+
+.jbs-alert-info {
+    color: #055160;
+    background-color: #cff4fc;
+    border-color: #b6effb;
+}
+
+.jbs-alert-dismissible {
+    padding-right: 3rem;
+    
+    .jbs-btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        padding: 1.25rem 1rem;
+    }
+}
+
+// ============================================
+// Tables
+// ============================================
+
+.jbs-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    
+    th,
+    td {
+        padding: .5rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    thead {
+        vertical-align: bottom;
+    }
+    
+    tbody {
+        vertical-align: inherit;
+    }
+}
+
+.jbs-table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.jbs-table-bordered {
+    border: 1px solid #dee2e6;
+    
+    > :not(caption) > * {
+        border-width: 1px 0;
+    }
+    
+    > :not(caption) > * > * {
+        border-width: 0 1px;
+    }
+}
+
+// ============================================
+// Badges
+// ============================================
+
+.jbs-badge {
+    display: inline-block;
+    padding: .35em .65em;
+    font-size: .75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+
+.jbs-badge-primary {
+    background-color: #0d6efd;
+}
+
+.jbs-badge-secondary {
+    background-color: #6c757d;
+}
+
+.jbs-badge-success {
+    background-color: #198754;
+}
+
+.jbs-badge-danger {
+    background-color: #dc3545;
+}
+
+.jbs-badge-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.jbs-badge-info {
+    background-color: #0dcaf0;
+    color: #000;
+}
+
+// ============================================
+// Button Groups
+// ============================================
+
+.jbs-btn-group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    
+    > .jbs-btn {
+        position: relative;
+        flex: 1 1 auto;
+        
+        &:hover,
+        &:focus,
+        &:active {
+            z-index: 1;
+        }
+    }
+    
+    > .jbs-btn:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    > .jbs-btn:not(:first-child) {
+        margin-left: -1px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }

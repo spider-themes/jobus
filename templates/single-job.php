@@ -84,13 +84,13 @@ get_footer();
                             </div>
 
                             <div class="jbs-col-md-12">
-                                <button type="submit" class="btn <?php echo esc_attr( $btn_class ) ?>"><?php esc_html_e( 'Submit Application',
+                                <button type="submit" class="jbs-btn <?php echo esc_attr( $btn_class ) ?>"><?php esc_html_e( 'Submit Application',
                                         'jobus' ); ?></button>
                             </div>
                         </div>
                     </form>
 
-                    <div id="applicationSuccessMessage" style="display:none;" class="alert alert-success mt-3">
+                    <div id="applicationSuccessMessage" style="display:none;" class="jbs-alert jbs-alert-success mt-3">
                         <?php esc_html_e( 'Your application has been submitted successfully.', 'jobus' ); ?>
                     </div>
 

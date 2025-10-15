@@ -86,64 +86,64 @@
                              data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="education[${index}][sl_num]" 
                                                    id="education_${index}_sl_num" 
-                                                   class="form-control"
+                                                   class="jbs-form-control"
                                                    placeholder="Enter serial number" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_title">Title</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="education[${index}][title]" 
                                                    id="education_${index}_title" 
-                                                   class="form-control"
+                                                   class="jbs-form-control"
                                                    placeholder="Enter education title" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_academy">Academy</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="education[${index}][academy]" 
                                                    id="education_${index}_academy" 
-                                                   class="form-control"
+                                                   class="jbs-form-control"
                                                    placeholder="Enter academy name" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_description">Description</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <textarea name="education[${index}][description]" 
                                                       id="education_${index}_description" 
-                                                      class="form-control"
+                                                      class="jbs-form-control"
                                                       placeholder="Enter description" 
                                                       rows="4"></textarea>
                                         </div>
@@ -234,14 +234,14 @@
                              data-jbs-parent="#experience-repeater">
                             <div class="accordion-body">
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
-                                            <input type="text" class="form-control" 
+                                            <input type="text" class="jbs-form-control" 
                                                    name="experience[${index}][sl_num]" 
                                                    id="experience_${index}_sl_num"
                                                    placeholder="Enter serial number">
@@ -250,14 +250,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_title">Title</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="jbs-form-control"
                                                    name="experience[${index}][title]"
                                                    id="experience_${index}_title"
                                                    placeholder="Enter experience title">
@@ -266,23 +266,23 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="jbs-col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
-                                                    <input type="date" class="form-control"
+                                                    <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][start_date]"
                                                            id="experience_${index}_start_date">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="jbs-col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
-                                                    <input type="date" class="form-control"
+                                                    <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][end_date]"
                                                            id="experience_${index}_end_date">
                                                 </div>
@@ -292,14 +292,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_description">Description</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
-                                            <textarea class="form-control"
+                                            <textarea class="jbs-form-control"
                                                       name="experience[${index}][description]"
                                                       id="experience_${index}_description"
                                                       placeholder="Enter description"

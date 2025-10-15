@@ -41,9 +41,9 @@ if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'],
 
 // Display the notice if we have a message
 if ( ! empty( $message ) ) : ?>
-	<div class="alert alert-<?php echo esc_attr( $message_type ); ?> alert-dismissible fade show" role="alert">
+	<div class="jbs-alert jbs-alert-<?php echo esc_attr( $message_type ); ?> jbs-alert-dismissible jbs-fade jbs-show" role="alert">
 		<?php echo wp_kses_post( $message ); ?>
-		<button type="button" class="btn-close" data-jbs-dismiss="alert" aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
+		<button type="button" class="jbs-btn-close" data-jbs-dismiss="alert" aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
 	</div>
     <?php
 endif;

@@ -93,7 +93,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 							</div>
                             <?php
                             if ( ! empty( $category ) && count( $category ) > 0 ) { ?>
-                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
                                     <div class="candidate-info">
                                         <span><?php esc_html_e( 'Category', 'jobus' ); ?></span>
                                         <a href="<?php echo esc_url(get_term_link( $category[0]->term_id )) ?>">
@@ -104,7 +104,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                 <?php
                             }
                             if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
-                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
                                     <div class="candidate-info">
                                         <span><?php esc_html_e( 'Location', 'jobus' ) ?></span>
                                         <a href="<?php echo esc_url(get_term_link( $location[0]->term_id )) ?>">
@@ -115,7 +115,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                 <?php
                             }
                             ?>
-                            <div class="jbs-col-lg-2 xs-mt-10">
+                            <div class="jbs-col-lg-2 xs-mt-10">     
                                 <div class="action-button">
                                     <a href="javascript:void(0)"
                                        class="save-btn text-center rounded-circle tran3s jobus-dashboard-remove-saved-post"

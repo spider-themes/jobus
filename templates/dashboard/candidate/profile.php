@@ -167,13 +167,13 @@ $avatar_url = $description_data['avatar_url'];
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
+                                            <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="jbs-form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link mt-2 mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
                                     </button>
                                 </div>
@@ -195,13 +195,13 @@ $avatar_url = $description_data['avatar_url'];
                 <div class="jbs-col-lg-3">
                     <div class="dash-input-wrapper mb-25">
                         <label for="candidate_age"><?php esc_html_e('Date of Birth (Age)', 'jobus'); ?></label>
-                        <input type="date" name="candidate_age" id="candidate_age" class="form-control" value="<?php echo esc_attr($candidate_age); ?>">
+                        <input type="date" name="candidate_age" id="candidate_age" class="jbs-form-control" value="<?php echo esc_attr($candidate_age); ?>">
                     </div>
                 </div>
                 <div class="jbs-col-lg-3">
                     <div class="dash-input-wrapper mb-25">
                         <label for="candidate_mail"><?php esc_html_e('Candidate Email', 'jobus'); ?></label>
-                        <input type="email" name="candidate_mail" id="candidate_mail" class="form-control" value="<?php echo esc_attr($candidate_mail); ?>">
+                        <input type="email" name="candidate_mail" id="candidate_mail" class="jbs-form-control" value="<?php echo esc_attr($candidate_mail); ?>">
                     </div>
                 </div>
                 <?php
@@ -238,9 +238,9 @@ $avatar_url = $description_data['avatar_url'];
                                 foreach ($candidate_specifications as $i => $spec) {
                                     ?>
                                     <div class="dash-input-wrapper mb-20 specification-item jbs-d-flex jbs-align-items-center gap-2">
-                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][title]" class="form-control jbs-me-2" placeholder="<?php esc_attr_e('Title', 'jobus'); ?>" value="<?php echo esc_attr($spec['title']); ?>" style="min-width:180px">
-                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][value]" class="form-control jbs-me-2" placeholder="<?php esc_attr_e('Value', 'jobus'); ?>" value="<?php echo esc_attr($spec['value']); ?>" style="min-width:180px">
-                                        <button type="button" class="btn btn-danger remove-specification" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i></button>
+                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][title]" class="jbs-form-control jbs-me-2" placeholder="<?php esc_attr_e('Title', 'jobus'); ?>" value="<?php echo esc_attr($spec['title']); ?>" style="min-width:180px">
+                                        <input type="text" name="candidate_specifications[<?php echo esc_attr($i); ?>][value]" class="jbs-form-control jbs-me-2" placeholder="<?php esc_attr_e('Value', 'jobus'); ?>" value="<?php echo esc_attr($spec['value']); ?>" style="min-width:180px">
+                                        <button type="button" class="jbs-btn jbs-btn-danger remove-specification" title="<?php esc_attr_e('Remove', 'jobus'); ?>"><i class="bi bi-x"></i></button>
                                     </div>
                                     <?php
                                 }

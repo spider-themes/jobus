@@ -174,12 +174,12 @@
                              data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_${index}_icon">Icon</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
                                                 ${iconOptions}
@@ -189,14 +189,14 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_${index}_url">URL</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
-                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="form-control" value="">
+                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" value="">
                                         </div>
                                     </div>
                                 </div>

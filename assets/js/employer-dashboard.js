@@ -79,54 +79,54 @@
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-author-name">Author Name</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="company_testimonials[${index}][author_name]"
-                                                   id="company-testimonial-${index}-author-name" class="form-control" value="">
+                                                   id="company-testimonial-${index}-author-name" class="jbs-form-control" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-location">Location</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="company_testimonials[${index}][location]"
-                                                   id="company-testimonial-${index}-location" class="form-control" value="">
+                                                   id="company-testimonial-${index}-location" class="jbs-form-control" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-review-content">Review</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <textarea name="company_testimonials[${index}][review_content]"
-                                                      id="company-testimonial-${index}-review-content" class="form-control" rows="3"></textarea>
+                                                      id="company-testimonial-${index}-review-content" class="jbs-form-control" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-rating">Rating</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <select name="company_testimonials[${index}][rating]"
-                                                    id="company-testimonial-${index}-rating" class="form-control">
+                                                    id="company-testimonial-${index}-rating" class="jbs-form-control">
                                                 <option value="">--</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -138,12 +138,12 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-image">Author Image</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <!-- Hidden field for image ID -->
                                             <input type="hidden" name="company_testimonials[${index}][image]"

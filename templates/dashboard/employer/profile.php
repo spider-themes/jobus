@@ -82,14 +82,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <input type="hidden" name="company_profile_picture_temp" id="company-profile-picture-temp" value="">
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="jbs-col-md-6">
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-name"><?php esc_html_e( 'Company Name*', 'jobus' ); ?></label>
                         <input type="text" id="company-name" name="company_name" placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>"
                                value="<?php echo esc_attr( $content_data['company_name'] ); ?>">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="jbs-col-md-6">
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                         <input type="email" id="company-email" name="company_mail" placeholder="you@example.com"
@@ -197,7 +197,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                             $meta_name   = $field['meta_name'] ?? '';
                             $meta_value  = $dynamic_fields[ $meta_key ] ?? '';
                             $meta_values = $field['meta_values_group'] ?? array();
-                            echo '<div class="col-lg-3"><div class="dash-input-wrapper mb-25">';
+                            echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper mb-25">';
                             echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                             echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
                             foreach ( $meta_values as $option ) {
@@ -217,7 +217,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <div class="bg-white card-box border-20 mt-40">
             <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
             <div class="row">
-                <div class="col-md-12">
+                <div class="jbs-col-md-12">
                     <div class="dash-input-wrapper mb-30">
                         <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                         <input type="url" id="company-website-url" name="company_website[url]"
@@ -283,14 +283,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                              data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_icon">
                                                 <?php esc_html_e( 'Icon', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]"
                                                     id="social_<?php echo esc_attr( $index ); ?>_icon" class="nice-select">
@@ -304,14 +304,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_url">
                                                 <?php esc_html_e( 'URL', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]"
                                                    id="social_<?php echo esc_attr( $index ); ?>_url" class="form-control"
@@ -410,14 +410,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name">
                                                 <?php esc_html_e( 'Author Name', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][author_name]"
                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name" class="form-control"
@@ -426,14 +426,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-location">
                                                 <?php esc_html_e( 'Location', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][location]"
                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-location" class="form-control"
@@ -442,14 +442,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content">
                                                 <?php esc_html_e( 'Review', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <textarea name="company_testimonials[<?php echo esc_attr( $key ); ?>][review_content]"
                                                       id="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content" class="form-control"
@@ -458,14 +458,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-rating">
                                                 <?php esc_html_e( 'Rating', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <select name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
                                                     id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control">
@@ -478,14 +478,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-image">
                                                 <?php esc_html_e( 'Author Image', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-10">
                                             <!-- Hidden field for image ID -->
                                             <input type="hidden" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"

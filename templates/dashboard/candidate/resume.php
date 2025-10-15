@@ -187,14 +187,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                              data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_sl_num' ); ?>">
 												<?php esc_html_e( 'Serial Number', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text"
                                                    class="form-control"
@@ -205,14 +205,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_title' ); ?>">
 												<?php esc_html_e( 'Title', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
                                                    name="education[<?php echo esc_attr( $key ); ?>][title]"
@@ -222,14 +222,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_academy' ); ?>">
 												<?php esc_html_e( 'Academy', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
                                                    name="education[<?php echo esc_attr( $key ); ?>][academy]"
@@ -240,14 +240,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_description' ); ?>">
 												<?php esc_html_e( 'Description', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <textarea class="size-lg form-control"
                                                       name="education[<?php echo esc_attr( $key ); ?>][description]"
@@ -314,14 +314,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                              data-jbs-parent="#experience-repeater">
                             <div class="accordion-body">
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_sl_num">
 												<?php esc_html_e( 'Serial Number', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
                                                    name="experience[<?php echo esc_attr( $key ); ?>][sl_num]"
@@ -333,14 +333,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_title">
 												<?php esc_html_e( 'Title', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <input type="text" class="form-control"
                                                    name="experience[<?php echo esc_attr( $key ); ?>][title]"
@@ -352,14 +352,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label><?php esc_html_e( 'Duration', 'jobus' ); ?></label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="jbs-col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
                                                     <input type="date" class="form-control"
                                                            name="experience[<?php echo esc_attr( $key ); ?>][start_date]"
@@ -367,7 +367,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                                            value="<?php echo esc_attr( $value['start_date'] ?? '' ); ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="jbs-col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
                                                     <input type="date" class="form-control"
                                                            name="experience[<?php echo esc_attr( $key ); ?>][end_date]"
@@ -380,14 +380,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-2">
+                                    <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_description">
 												<?php esc_html_e( 'Description', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10">
+                                    <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper mb-30">
                                             <textarea class="form-control"
                                                       name="experience[<?php echo esc_attr( $key ); ?>][description]"

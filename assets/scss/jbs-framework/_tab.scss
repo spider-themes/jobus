@@ -93,23 +93,30 @@
 }
 
 .jbs-tab-content>.jbs-tab-pane {
-    display: none
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .jbs-tab-content>.active {
-    display: block
+    display: block;
+}
+
+.jbs-tab-content>.active.jbs-show {
+    opacity: 1;
 }
 
 .jbs-fade {
-    transition: opacity .15s linear
+    transition: opacity 0.3s ease-in-out;
 }
 
 @media (prefers-reduced-motion:reduce) {
     .jbs-fade {
-        transition: none
+        transition: none;
     }
 }
 
-.jbs-fade:not(.show) {
-    opacity: 0
+.jbs-fade:not(.jbs-show) {
+    opacity: 0;
 }
+

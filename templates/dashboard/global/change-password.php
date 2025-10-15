@@ -42,7 +42,7 @@ if ( $error_message ) {
         <h4 class="dash-title-three"><?php esc_html_e( 'Edit & Update', 'jobus' ); ?></h4>
 
         <?php if ( ! empty( $success_message ) ) : ?>
-            <div class="alert alert-success" role="alert">
+            <div class="jbs-alert jbs-alert-success" role="alert">
                 <?php echo esc_html( $success_message ); ?>
                 <p><?php esc_html_e('Redirecting to homepage...', 'jobus'); ?></p>
             </div>
@@ -50,7 +50,7 @@ if ( $error_message ) {
         <?php endif; ?>
 
         <?php if ( ! empty( $error_message ) ) : ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="jbs-alert jbs-alert-danger" role="alert">
                 <?php echo esc_html( $error_message ); ?>
             </div>
         <?php endif; ?>

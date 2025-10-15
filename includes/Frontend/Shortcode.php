@@ -134,14 +134,14 @@ class Shortcode {
             <div class="form-wrapper login-form-box m-auto">
                 <form name="jobus_login_form" id="jobus_login_form" action="<?php echo esc_url( wp_login_url() ); ?>" method="post" class="mt-10">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="jbs-col-12">
                             <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                 <label for="user_login"><?php echo esc_html( $atts['username_label'] ); ?></label>
                                 <input type="text" name="log" id="user_login" class="input" value=""
                                        placeholder="<?php echo esc_attr( $atts['username_placeholder'] ); ?>" autocomplete="username">
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="jbs-col-12">
                             <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                 <label for="user_pass"><?php echo esc_html( $atts['password_label'] ); ?></label>
                                 <input type="password" name="pwd" id="user_pass" class="input pass_log_id" value=""
@@ -154,7 +154,7 @@ class Shortcode {
                                 </span>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="jbs-col-12">
                             <div class="agreement-checkbox d-flex justify-content-between align-items-center">
                                 <div>
                                     <input name="rememberme" type="checkbox" id="rememberme" value="forever">
@@ -165,7 +165,7 @@ class Shortcode {
                                 </a>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="jbs-col-12">
                             <button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven fw-500 tran3s d-block mt-20">
 								<?php echo esc_html( $atts['submit_label'] ); ?>
                             </button>
