@@ -22,6 +22,11 @@ Table of Content:
 11/ job-listing
 12/ single_content
 =====================================================*/
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -4844,7 +4849,6 @@ img {
 .job-search-one form .input-box .nice-select .list {
   border-radius: 10px;
   overflow: auto;
-  width: max-content;
 }
 .job-search-one form .input-box .keyword {
   border: none;
@@ -4968,6 +4972,7 @@ img {
 .filter-tags li {
   position: relative;
   margin-right: 4px;
+  margin-top: 0 !important;
 }
 .filter-tags li:after {
   content: ",";
@@ -5312,14 +5317,14 @@ img {
   box-shadow: none;
   z-index: 1;
 }
-.user-data-form .nav {
+.user-data-form .jbs-nav {
   background: #F0F5F3;
   border-radius: 40px;
 }
-.user-data-form .nav .nav-item {
+.user-data-form .jbs-nav .jbs-nav-item {
   width: 50%;
 }
-.user-data-form .nav .nav-item .nav-link {
+.user-data-form .jbs-nav .jbs-nav-item .jbs-nav-link {
   display: block;
   width: 100%;
   border: 1px solid transparent;
@@ -5327,7 +5332,7 @@ img {
   font-size: 18px;
   color: rgba(0, 0, 0, 0.5);
 }
-.user-data-form .nav .nav-item .nav-link.active {
+.user-data-form .jbs-nav .jbs-nav-item .jbs-nav-link.active {
   color: #31795A;
   border-color: #31795A;
 }
@@ -5356,11 +5361,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab {
-  position: relative;
-}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: #EFF6F3;
+}
+.filter-area-tab {
+  position: relative;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -6544,6 +6549,7 @@ img {
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .jbs-form-control.upload-cv {
   padding-left: 12px;
+  padding: 0px;
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .btn {
   margin-top: 10px;
@@ -6644,6 +6650,7 @@ img {
   border-radius: 10px;
   color: #fff;
   background: #31795a;
+  width: 100%;
   padding: 0 26px;
 }
 .jobus_job_details_2 .details-post-data .btn-one:hover {
@@ -6772,6 +6779,21 @@ img {
   background: #31795a;
 }
 
+.btn-eleven {
+  height: 60px;
+  border-radius: 7px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.88px;
+  color: #fff;
+  background: #000;
+  width: 100%;
+}
+
+.btn-eleven:hover, .btn-eleven:focus {
+  background: #31795a;
+}
+
 .inner-banner-one {
   background: #244034;
   padding: 200px 0 90px;
@@ -6789,6 +6811,36 @@ img {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+.inner-banner-one .candidate-profile-card .candidate-post {
+  color: rgba(255, 255, 255, 0.4);
+}
+.inner-banner-one .candidate-profile-card .candidate-info span {
+  color: rgba(255, 255, 255, 0.6);
+}
+.inner-banner-one .candidate-profile-card .candidate-info div {
+  color: white;
+}
+.inner-banner-one .candidate-profile-card .cv-download-btn {
+  line-height: 38px;
+  border: 1px solid #fff;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: -0.5px;
+  padding: 0 20px;
+}
+.inner-banner-one .candidate-profile-card .cv-download-btn:hover {
+  background: #375749;
+  border-color: #375749;
+}
+.inner-banner-one .candidate-profile-card .candidate-skills li {
+  background: #375749;
+  color: rgba(255, 255, 255, 0.55);
+}
+.inner-banner-one .candidate-profile-card .candidate-skills li.more {
+  background: #d2f34c !important;
+  color: #000 !important;
 }
 
 .feedback-block-four {
@@ -6816,6 +6868,14 @@ img {
 }
 .feedback-block-four .name {
   font-size: 18px;
+}
+
+@media (max-width: 1199px) {
+  .filter-area-tab .main-title {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -24,12 +24,12 @@ class Assets {
 		wp_register_style( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.css' ), [], JOBUS_VERSION );
 
 		// Enqueue Style's
+		wp_enqueue_style( 'fbs-framework', esc_url( JOBUS_CSS . '/jbs-framework.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/nice-select.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'bootstrap-icons', esc_url( JOBUS_VEND . '/bootstrap-icons/font.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick', esc_url( JOBUS_VEND . '/slick/slick.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick-theme', esc_url( JOBUS_VEND . '/slick/slick-theme.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'jobus-main', esc_url( JOBUS_CSS . '/main.css' ), [], JOBUS_VERSION );
-		wp_enqueue_style( 'fbs-framework', esc_url( JOBUS_CSS . '/jbs-framework.css' ), [], JOBUS_VERSION );
 
 		if ( is_rtl() ) {
 			wp_enqueue_style( 'jobus-main-rtl', esc_url( JOBUS_CSS . '/main-rtl.css' ), [], JOBUS_VERSION );

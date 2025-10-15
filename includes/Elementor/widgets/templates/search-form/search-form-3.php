@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" method="get" id="searchform">
         <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 
-        <div class="row align-items-center jobus_srch_bor">
+        <div class="jbs-row jbs-align-items-center jobus_srch_bor">
             <?php
             if (!empty($settings[ 'job_search_form' ])) {
                 foreach ( $settings[ 'job_search_form' ] as $index => $item ) {
@@ -93,7 +93,7 @@ if (!defined('ABSPATH')) {
             if (!empty($settings[ 'keywords' ])) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     if ( !empty($keyword['title']) ) { ?>
-                        <li>
+                        <li class="jbs-mt-0">
                             <a <?php jobus_button_link($keyword['link']); ?>>
                                 <?php echo esc_html($keyword[ 'title' ]) ?>
                             </a>

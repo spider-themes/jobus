@@ -77,6 +77,11 @@
 .jbs-order-xl-last {
     order: 6 !important;
 }
+@media (min-width: 576px) {
+    .jbs-order-sm-last {
+        order: 6 !important;
+    }
+}
 
 // Gap
 .jbs-gx-1 {

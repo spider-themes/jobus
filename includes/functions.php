@@ -683,7 +683,7 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
      * @param WP_Query $query The current WP_Query object.
      * @param string   $class The CSS class for the paragraph element.
      */
-    function jobus_showing_post_result_count( WP_Query $query, string $class = 'm0 order-sm-last text-center text-sm-start xs-pb-20' ): void {
+    function jobus_showing_post_result_count( WP_Query $query, string $class = 'm0 jbs-order-sm-last jbs-text-center jbs-text-sm-start xs-pb-20' ): void {
         if ( ! $query->have_posts() ) {
             echo '<p class="' . esc_attr( $class ) . '">' . esc_html__( 'No results found', 'jobus' ) . '</p>';
 

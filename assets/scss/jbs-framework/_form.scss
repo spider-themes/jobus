@@ -5,7 +5,9 @@
 .jbs-form-label {
     margin-bottom: .5rem
 }
-
+label{
+    display: inline-block;
+}
 .jbs-form-control {
     display: block;
     width: 100%;

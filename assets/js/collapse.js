@@ -78,4 +78,22 @@ jQuery(document).ready(function ($) {
     $(this).toggleClass("jbs-collapsed");
     $(".jbs-collapse").slideToggle(300);
   });
+
+  // Tabs
+
+  $("[data-jbs-tab-target]").on("click", function () {
+    let target = $(this).data("jbs-tab-target");
+
+    // Active class remove from all tab button
+    $("[data-jbs-tab-target]").removeClass("active");
+
+    // Content fade out
+    $(".jbs-tab-pane").removeClass("active show").stop(true, true).fadeOut(200);
+
+    // Current tab active
+    $(this).addClass("active");
+
+    // Target content fade in
+    $(target).stop(true, true).fadeIn(300).addClass("active show");
+  });
 });

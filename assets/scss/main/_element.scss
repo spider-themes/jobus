@@ -30,7 +30,7 @@
                 .list {
                     border-radius: 10px;
                     overflow: auto;
-                    width: max-content;
+                    // width: max-content;
                 }
             }
 
@@ -167,6 +167,7 @@
 .filter-tags li {
     position: relative;
     margin-right: 4px;
+    margin-top: 0 !important;
     &:after {
         content: ',';
         color: #000;
@@ -494,12 +495,12 @@
         box-shadow: none;
         z-index: 1;
     }
-    .nav {
+    .jbs-nav {
         background: #F0F5F3;
         border-radius: 40px;
-        .nav-item {
+        .jbs-nav-item {
             width: 50%;
-            .nav-link {
+            .jbs-nav-link {
                 display: block;
                 width: 100%;
                 border: 1px solid transparent;

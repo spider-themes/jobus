@@ -161,18 +161,18 @@ Table of Content:
   box-shadow: none;
   z-index: 1;
 }
-.jobus-registration-section .user-data-form .nav {
+.jobus-registration-section .user-data-form .jbs-nav {
   background: #F0F5F3;
   border-radius: 40px;
   padding-left: 0;
   margin-top: 30px;
   margin-bottom: 40px;
 }
-.jobus-registration-section .user-data-form .nav .nav-item {
+.jobus-registration-section .user-data-form .jbs-nav .jbs-nav-item {
   width: 50%;
   list-style: none;
 }
-.jobus-registration-section .user-data-form .nav .nav-item .nav-link {
+.jobus-registration-section .user-data-form .jbs-nav .jbs-nav-item .jbs-nav-link {
   display: block;
   width: 100%;
   border: 1px solid transparent;
@@ -180,11 +180,11 @@ Table of Content:
   font-size: 18px;
   color: rgba(0, 0, 0, 0.5);
 }
-.jobus-registration-section .user-data-form .nav .nav-item .nav-link.active {
+.jobus-registration-section .user-data-form .jbs-nav .jbs-nav-item .jbs-nav-link.active {
   color: #31795A;
   border-color: #31795A;
 }
-.jobus-registration-section .user-data-form .tab-content .tab-pane form .input-group-meta {
+.jobus-registration-section .user-data-form .jbs-tab-content .jbs-tab-pane form .input-group-meta {
   margin-bottom: 25px;
 }
 

@@ -90,7 +90,7 @@ if (!defined('ABSPATH')) {
             if (!empty($settings[ 'keywords' ])) {
                 foreach ( $settings[ 'keywords' ] as $keyword ) {
                     if ( !empty($keyword['title']) ) { ?>
-                        <li>
+                        <li class="jbs-mt-0">
                             <a <?php jobus_button_link($keyword['link']); ?>>
                                 <?php echo esc_html($keyword[ 'title' ]) ?>
                             </a>
