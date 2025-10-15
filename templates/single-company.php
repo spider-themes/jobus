@@ -189,7 +189,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                         $author_img_url = $author_img_id ? wp_get_attachment_url( $author_img_id ) : get_template_directory_uri() . '/images/assets/img_14.jpg';
                                         ?>
                                         <div class="item">
-                                            <div class="feedback-block-four testf">
+                                            <div class="feedback-block-four ggggg">
                                                 <div class="jbs-d-flex jbs-align-items-center">
                                                     <?php if ( $rating !== false ) : ?>
                                                         <ul class="style-none jbs-d-flex rating">
@@ -225,7 +225,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                             <div class="name fw-500 text-dark"><?php echo esc_html( $author_name ); ?></div>
                                                         <?php endif; ?>
                                                         <?php if ( $location ) : ?>
-                                                            <span class="opacity-50"><?php echo esc_html( $location ); ?></span>
+                                                            <span class="jbs-opacity-50"><?php echo esc_html( $location ); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>

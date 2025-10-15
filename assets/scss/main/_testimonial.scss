@@ -1,0 +1,26 @@
+.feedback-block-four {
+  padding: 25px 40px;
+  border: 1px solid #E1E1E1;
+  border-radius: 10px;
+  .rating li a {
+    font-size: 16px;
+    color: #FFCC4A;
+    margin-right: 8px;
+  }
+  .review-score {
+    color: rgba($color: var(--heading_color), $alpha: .4);
+    margin: 0 0 0 10px;
+  }
+  blockquote {
+    font-size: 17px;
+    line-height: 1.882em;
+    margin: 17px 0 25px;
+  }
+  .author-img {
+    width: 45px;
+    height: 45px;
+  }
+  .name {
+    font-size: 18px;
+  }
+}

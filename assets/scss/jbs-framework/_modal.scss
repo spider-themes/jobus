@@ -1,110 +1,109 @@
 .jbs-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1055;
-    display: none;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    outline: 0
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1055;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0
 }
 
 .jbs-modal-dialog {
-    position: relative;
-    width: auto;
-    margin: .5rem;
-    pointer-events: none
+  position: relative;
+  width: auto;
+  margin: .5rem;
+  pointer-events: none
 }
 
 .jbs-modal.fade .jbs-modal-dialog {
-    transition: transform .3s ease-out;
-    transform: translate(0,-50px)
+  transition: transform .3s ease-out;
+  transform: translate(0, -50px)
 }
 
-@media (prefers-reduced-motion:reduce) {
-    .jbs-modal.fade .jbs-modal-dialog {
-        transition: none
-    }
+@media (prefers-reduced-motion: reduce) {
+  .jbs-modal.fade .jbs-modal-dialog {
+    transition: none
+  }
 }
 
 .jbs-modal.show .jbs-modal-dialog {
-    transform: none
+  transform: none
 }
 
 .jbs-modal.jbs-modal-static .jbs-modal-dialog {
-    transform: scale(1.02)
+  transform: scale(1.02)
 }
 
-
 .jbs-modal-dialog-centered {
-    display: flex;
-    align-items: center;
-    min-height: calc(100% - 1rem)
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem)
 }
 
 .jbs-modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    pointer-events: auto;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: .3rem;
-    outline: 0
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: .3rem;
+  outline: 0
 }
+
 .jbs-modal-header {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px)
-};
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px)
+}
+
 .jbs-modal-title {
-    margin-bottom: 0;
-    line-height: 1.5;
+  margin-bottom: 0;
+  line-height: 1.5;
 }
+
 .jbs-modal-body {
-    position: relative;
-    flex: 1 1 auto;
-    padding: 1rem;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
 }
+
 @media (min-width: 576px) {
-    .jbs-modal-dialog {
-        max-width:500px;
-        margin: 1.75rem auto
-    }
+  .jbs-modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto
+  }
 }
 
 .jbs-modal-fullscreen {
-    width: 100vw;
-    max-width: none;
-    height: 100%;
-    margin: 0
+  width: 100vw;
+  max-width: none;
+  height: 100%;
+  margin: 0
 }
 
 .jbs-modal-fullscreen .jbs-modal-content {
-    height: 100%;
-    border: 0;
-    border-radius: 0
+  height: 100%;
+  border: 0;
+  border-radius: 0
 }
 
-@media (max-width: 1199.98px) {
-    
-}
-
-.popUpModal {
-    background: rgba(0, 0, 0, 0.7411764706);
+.jbs-popUpModal {
+  background: rgba(0, 0, 0, 0.7411764706);
 }
 
 .jbs-modal .jbs-modal-dialog {
-    height: auto !important;
+  height: auto !important;
 }
 
 
@@ -121,159 +120,159 @@
 // offcanvas styles for sidebar filter (related to sidebar-classic-filters.php)
 /* Offcanvas container */
 .jbs-offcanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1045;
-    width: 400px; /* width for start/end */
-    max-width: 100%;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    visibility: hidden;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1045;
+  width: 400px; /* width for start/end */
+  max-width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
 }
 
 /* Show state */
 .jbs-offcanvas.show {
-    visibility: visible;
-    transform: translateX(0);
-    transition-delay: 0s;
+  visibility: visible;
+  transform: translateX(0);
+  transition-delay: 0s;
 }
 
 /* Offcanvas Header */
 .jbs-offcanvas-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 /* Close button */
 .jbs-offcanvas-close {
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Offcanvas body */
 .jbs-offcanvas-body {
-    flex-grow: 1;
-    padding: 1rem;
-    overflow-y: auto;
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 /* Backdrop */
 .jbs-offcanvas-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1040;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
 }
 
 .jbs-offcanvas-backdrop.show {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 /* Offcanvas start (left) */
 .jbs-offcanvas-start {
-    top: 0;
-    left: 0;
-    border-right: 1px solid rgba(0,0,0,.2);
-    transform: translateX(-100%);
+  top: 0;
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, .2);
+  transform: translateX(-100%);
 }
 
 /* Offcanvas end (right) */
 .jbs-offcanvas-end {
-    top: 0;
-    right: 0;
-    border-left: 1px solid rgba(0,0,0,.2);
-    transform: translateX(100%);
+  top: 0;
+  right: 0;
+  border-left: 1px solid rgba(0, 0, 0, .2);
+  transform: translateX(100%);
 }
 
 /* Offcanvas top */
 .jbs-offcanvas-top {
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 30vh;
-    max-height: 100%;
-    border-bottom: 1px solid rgba(0,0,0,.2);
-    transform: translateY(-100%);
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 30vh;
+  max-height: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  transform: translateY(-100%);
 }
 
 /* Offcanvas bottom */
 .jbs-offcanvas-bottom {
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 30vh;
-    max-height: 100%;
-    border-top: 1px solid rgba(0,0,0,.2);
-    transform: translateY(100%);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30vh;
+  max-height: 100%;
+  border-top: 1px solid rgba(0, 0, 0, .2);
+  transform: translateY(100%);
 }
 
 /* Show for top/bottom */
 .jbs-offcanvas-top.show,
 .jbs-offcanvas-bottom.show {
-    transform: translateY(0);
-    visibility: visible;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 /* Optional smooth transitions for prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-    .jbs-offcanvas,
-    .jbs-offcanvas-backdrop {
-        transition: none;
-    }
+  .jbs-offcanvas,
+  .jbs-offcanvas-backdrop {
+    transition: none;
+  }
 }
 
 
 // btnclose 
 
 .jbs-btn-close {
-    box-sizing: content-box;
-    width: 1em;
-    height: 1em;
-    padding: .25em .25em;
-    color: #000;
-    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
-    border: 0;
-    border-radius: .25rem;
-    opacity: .5
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: .25em .25em;
+  color: #000;
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  border: 0;
+  border-radius: .25rem;
+  opacity: .5
 }
 
 .jbs-btn-close:hover {
-    color: #000;
-    text-decoration: none;
-    opacity: .75
+  color: #000;
+  text-decoration: none;
+  opacity: .75
 }
 
 .jbs-btn-close:focus {
-    outline: 0;
-    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
-    opacity: 1
+  outline: 0;
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+  opacity: 1
 }
 
-.jbs-btn-close.disabled,.jbs-btn-close:disabled {
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    opacity: .25
+.jbs-btn-close.disabled, .jbs-btn-close:disabled {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  opacity: .25
 }
 
 .jbs-btn-close-white {
-    filter: invert(1) grayscale(100%) brightness(200%)
+  filter: invert(1) grayscale(100%) brightness(200%)
 }

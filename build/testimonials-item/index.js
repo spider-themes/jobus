@@ -141,7 +141,7 @@ function Save({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     ...blockProps,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "feedback-block-four",
+      className: "feedback-block-four ddddd",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "jbs-d-flex jbs-align-items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
@@ -160,7 +160,7 @@ function Save({
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "review-score",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "fw-500 jbs-text-dark",
+            className: "jbsfw-500 jbs-text-dark",
             children: rating
           }), " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('out of 5', 'jobus')]
         })]
@@ -175,10 +175,10 @@ function Save({
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "ms-3",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "name fw-500 jbs-text-dark",
+            className: "name jbs-fw-500 jbs-text-dark",
             children: authorName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            className: "opacity-50",
+            className: "jbs-opacity-50",
             children: location
           })]
         })]

@@ -726,7 +726,7 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
      *
      * @param string $class The CSS class for the paragraph element.
      */
-    function jobus_social_share_icons( string $class = 'style-none d-flex align-items-center' ): void {
+    function jobus_social_share_icons( string $class = 'style-none jbs-d-flex jbs-align-items-center' ): void {
         ?>
         <ul class="<?php echo esc_attr( $class ) ?>">
             <li class="fw-500 me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
