@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
         $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 		?>
-        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout mb-25">
+        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout jbs-mb-25">
             <div class="jbs-d-flex">
                 <div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
                     <a href="<?php the_permalink() ?>" class="jbs-rounded-circle">
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     ] );
                                 }
                                 ?>
-                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-ms-md-2 mt-10 sm-mt-20">
+                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-ms-md-2 jbs-mt-10 sm-mt-20">
 									<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                                 </a>
                             </div>

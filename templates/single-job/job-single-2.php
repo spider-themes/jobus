@@ -116,8 +116,8 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="btn-one mt-25" data-bs-toggle="modal"
-                               data-bs-target="#applyJobModal">
+                            <a href="#" class="btn-one mt-25" data-jbs-toggle="modal"
+                               data-jbs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php

@@ -62,14 +62,14 @@ Table of Contents:
   bottom: 10px;
   z-index: 1;
 }
-.dashboard-navbar .user-data .user-name-data .dropdown-menu {
+.dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu {
   width: 100%;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   padding: 12px 0;
 }
-.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item {
+.dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu .jbs-dropdown-item {
   text-transform: capitalize;
   line-height: 45px;
   padding: 0 5px 0 20px;
@@ -86,15 +86,15 @@ Table of Contents:
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item i {
+.dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu .jbs-dropdown-item i {
   font-weight: 700;
   font-size: 1.1em;
 }
-.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item:hover {
+.dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu .jbs-dropdown-item:hover {
   color: #31795A;
   background: rgba(0, 0, 0, 0.01);
 }
-.dashboard-navbar .user-data .user-name-data .dropdown-menu .dropdown-item img {
+.dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu .jbs-dropdown-item img {
   width: 20px;
 }
 .dashboard-navbar .user-data .user-name {
@@ -326,25 +326,25 @@ Table of Contents:
   top: 4px;
   right: -7px;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu {
   max-width: 325px;
   border: none;
   border-radius: 15px;
   box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.12);
   padding: 25px 18px 30px 22px;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu h4 {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu h4 {
   font-family: "gordita";
   font-size: 18px;
   margin-bottom: 20px;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li {
   position: relative;
   padding-right: 10px;
   cursor: pointer;
   margin-top: 17px;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li:before {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li:before {
   content: "";
   position: absolute;
   width: 8px;
@@ -354,10 +354,10 @@ Table of Contents:
   right: 0;
   top: 5px;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li.unread:before {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li.unread:before {
   background: #FF2730;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li h6 {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li h6 {
   font-family: "gordita";
   font-size: 15px;
   margin-bottom: 3px;
@@ -368,10 +368,10 @@ Table of Contents:
   overflow: hidden;
   white-space: nowrap;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li.unread h6 {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li.unread h6 {
   color: #000;
 }
-.dashboard-body .dashboard-header .profile-notification .dropdown-menu .notify-list li .time {
+.dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li .time {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -538,14 +538,14 @@ Table of Contents:
   top: 0;
   right: 0px;
 }
-.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .dropdown-menu {
+.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .jbs-dropdown-menu {
   min-width: 120px;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
 }
-.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .dropdown-menu .dropdown-item {
+.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .jbs-dropdown-menu .jbs-dropdown-item {
   font-weight: 500;
   font-size: 13px;
   padding: 5px 15px;
@@ -553,7 +553,7 @@ Table of Contents:
   color: rgba(37, 64, 53, 0.55);
   background: #fff;
 }
-.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .dropdown-menu li:last-child .dropdown-item {
+.dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .jbs-dropdown-menu li:last-child .jbs-dropdown-item {
   color: #ff5b5b;
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-action .action-btn {
@@ -967,26 +967,26 @@ Table of Contents:
 .dashboard-body .job-alert-table .expired .job-status:before {
   background: #FF5050;
 }
-.dashboard-body .action-dots .dropdown-menu {
+.dashboard-body .action-dots .jbs-dropdown-menu {
   min-width: 140px;
   border: 1px solid #F1F1F1;
   border-radius: 5px;
   box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
 }
-.dashboard-body .action-dots .dropdown-menu .dropdown-item {
+.dashboard-body .action-dots .jbs-dropdown-menu .jbs-dropdown-item {
   padding: 0 15px;
   line-height: 34px;
   font-size: 14px;
   color: #6a6a6a;
   background: #fff;
 }
-.dashboard-body .action-dots .dropdown-menu .dropdown-item img {
+.dashboard-body .action-dots .jbs-dropdown-menu .jbs-dropdown-item img {
   display: inline-block;
   vertical-align: -1px;
   margin-right: 5px;
 }
-.dashboard-body .action-dots .dropdown-menu li:last-child .dropdown-item:hover {
+.dashboard-body .action-dots .jbs-dropdown-menu li:last-child .jbs-dropdown-item:hover {
   color: #ff5b5b;
 }
 .dashboard-body .action-dots .action-btn {

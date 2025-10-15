@@ -7,9 +7,9 @@ if (!defined('ABSPATH')) {
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
             <div class="filter-area-tab jbs-modal-content">
-                <button type="button" class="jbs-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                 <div class="jbs-position-relative">
-                    <div class="main-title fw-500 text-dark jbs-ps-4 jbs-pe-4 pt-15 pb-15 border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
+                    <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <div class="pt-25 pb-30 jbs-ps-4 jbs-pe-4">
 
                         <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get">
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
                                         ?>
                                         <div class="jbs-col-lg-4">
                                             <div class="filter-block pb-25">
-                                                <div class="filter-title fw-500 text-dark mt-1"><?php echo esc_html($widget_title); ?></div>
+                                                <div class="filter-title jbs-fw-500 jbs-text-dark jbs-mt-10"><?php echo esc_html($widget_title); ?></div>
 	                                            <div class="main-body">
 		                                            <?php
 		                                            // Include the appropriate widget layout file based on the widget type

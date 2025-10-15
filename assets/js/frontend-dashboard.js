@@ -162,8 +162,8 @@
                     <div class="accordion-item social-link-item">
                         <div class="accordion-header" id="heading-${index}">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#${accordionId}"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#${accordionId}"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Social Network #${index + 1}
@@ -171,7 +171,7 @@
                         </div>
                         <div id="${accordionId}" class="accordion-collapse collapse"
                              aria-labelledby="heading-${index}"
-                             data-bs-parent="#social-links-repeater">
+                             data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
@@ -225,7 +225,7 @@
 
                     $el.find('.accordion-header').attr('id', `heading-${i}`);
                     $el.find('.accordion-button')
-                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Social Network #${i + 1}`);
 

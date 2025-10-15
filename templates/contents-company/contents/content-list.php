@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="jbs-d-flex jbs-align-items-center jbs-ps-xxl-5 lg-mt-20">
                             <div class="jbs-d-flex jbs-align-items-center">
                                 <div class="team-text jbs-text-capitalize">
-									<span class="text-md fw-500 text-dark jbs-d-block">
+									<span class="jbs-text-md jbs-fw-500 jbs-text-dark jbs-d-block">
 										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_company_options', 'company_archive_meta_1' ) ) ?>
 									</span>
 									<?php echo esc_html( jobus_meta_company_spec_name( 1 ) ) ?>
@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php
 						if ( $company_count > 0 ) { ?>
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>"
-                               class="open-job-btn jbs-text-center fw-500 tran3s jbs-me-2">
+                               class="open-job-btn jbs-text-center jbs-fw-500 tran3s jbs-me-2">
 								<?php
 								/* translators: 1: open job, 2: open jobs */
 								echo esc_html( sprintf( _n( '%d open job', '%d open jobs', $company_count, 'jobus' ), $company_count ) );

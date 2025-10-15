@@ -86,22 +86,22 @@ if ( ! empty( $dashboard_page ) ) {
                             <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
                                 <div class="action-dots float-end">
-                                    <button class="action-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
                                         <span></span>
                                     </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
+                                    <ul class="jbs-dropdown-menu jbs-dropdown-menu-end">
                                         <li>
-                                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="dropdown-item">
+                                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="jbs-dropdown-item">
                                                 <?php esc_html_e( 'View', 'jobus' ); ?>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo esc_url( add_query_arg( 'job_id', $job_id, $edit_job_url ) ); ?>" class="dropdown-item">
+                                            <a href="<?php echo esc_url( add_query_arg( 'job_id', $job_id, $edit_job_url ) ); ?>" class="jbs-dropdown-item">
                                                 <?php esc_html_e( 'Edit', 'jobus' ); ?>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="dropdown-item" >
+                                            <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="jbs-dropdown-item" >
                                                 <?php esc_html_e( 'Delete', 'jobus' ); ?>
                                             </a>
                                         </li>

@@ -92,7 +92,7 @@
                 $inputWrapper = $(`
                     <li class="taxonomy-input-wrapper" style="display:none;">
                         <input type="text" class="taxonomy-input" placeholder="Type and press Enter to add">
-                        <ul class="taxonomy-suggestions dropdown-menu"></ul>
+                        <ul class="taxonomy-suggestions jbs-dropdown-menu"></ul>
                     </li>
                 `);
                 $list.find('.more_tag').before($inputWrapper);
@@ -193,18 +193,18 @@
                         $suggestions.empty();
                         if (response.success && response.data && response.data.length) {
                             response.data.forEach(term => {
-                                $suggestions.append(`<li class="dropdown-item" data-term-id="${term.term_id}">${term.name}</li>`);
+                                $suggestions.append(`<li class="jbs-dropdown-item" data-term-id="${term.term_id}">${term.name}</li>`);
                             });
 
                             // Add "create new" option if not an exact match
                             const exactMatch = response.data.some(term => term.name.toLowerCase() === query.toLowerCase());
                             if (!exactMatch) {
-                                $suggestions.append(`<li class="dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                                $suggestions.append(`<li class="jbs-dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
                             }
                             $suggestions.show();
                         } else {
                             // No results → show create option
-                            $suggestions.append(`<li class="dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                            $suggestions.append(`<li class="jbs-dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
                             $suggestions.show();
                         }
                     },

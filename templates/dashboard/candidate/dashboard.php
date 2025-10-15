@@ -185,7 +185,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
             </div>
         </div>
 
-        <div class="col-lg-5">
+        <div class="jbs-col-lg-5">
             <div class="recent-job-tab bg-white border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                 <div class="wrapper">

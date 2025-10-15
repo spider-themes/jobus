@@ -5332,6 +5332,11 @@ img {
   border-color: #31795A;
 }
 
+.job-details p {
+  font-size: 17px;
+  margin-top: 20px;
+}
+
 .accordion-box.show {
   display: block;
 }

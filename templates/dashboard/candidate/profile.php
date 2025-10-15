@@ -123,8 +123,8 @@ $avatar_url = $description_data['avatar_url'];
                     <div class="accordion-item social-link-item">
                         <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
                                 <?php
@@ -134,7 +134,7 @@ $avatar_url = $description_data['avatar_url'];
                         </div>
                         <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
-                             data-bs-parent="#social-links-repeater">
+                             data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="jbs-col-lg-2">

@@ -14,7 +14,7 @@ if (is_user_logged_in()) {
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="container">
                 <div class="user-data-form modal-content shadow-sm">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center">
                         <h2><?php esc_html_e('Welcome ', 'jobus') ?><?php echo esc_html($current_user->display_name); ?></h2>
                         <p><?php esc_html_e('You are logged in', 'jobus') ?></p>
@@ -42,7 +42,7 @@ if (is_user_logged_in()) {
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="container">
                 <div class="user-data-form modal-content">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center">
                         <h2><?php esc_html_e('Hi, Welcome Back!', 'jobus') ?></h2>
                         <p>
@@ -98,7 +98,7 @@ if (is_user_logged_in()) {
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e('Login', 'jobus'); ?></button>
+                                        <button class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e('Login', 'jobus'); ?></button>
                                     </div>
                                 </div>
                             </form>

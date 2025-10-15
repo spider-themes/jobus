@@ -40,10 +40,10 @@
                 addBtn.addEventListener('click', function() {
                     let idx = repeater.querySelectorAll('.specification-item').length;
                     let div = document.createElement('div');
-                    div.className = 'dash-input-wrapper mb-20 specification-item d-flex align-items-center gap-2';
-                    div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="form-control me-2" placeholder="Title" style="min-width:180px">' +
-                        '<input type="text" name="candidate_specifications['+idx+'][value]" class="form-control me-2" placeholder="Value" style="min-width:180px">' +
-                        '<button type="button" class="btn btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';
+                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
+                    div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="jbs-form-control jbs-me-2" placeholder="Title" style="min-width:180px">' +
+                        '<input type="text" name="candidate_specifications['+idx+'][value]" class="jbs-form-control jbs-me-2" placeholder="Value" style="min-width:180px">' +
+                        '<button type="button" class="jbs-btn jbs-btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';
                     repeater.appendChild(div);
                 });
                 repeater.addEventListener('click', function(e) {
@@ -74,8 +74,8 @@
                     <div class="accordion-item education-item">
                         <div class="accordion-header" id="heading-${index}">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#${accordionId}"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#${accordionId}"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Education #${index + 1}
@@ -83,7 +83,7 @@
                         </div>
                         <div id="${accordionId}" class="accordion-collapse collapse"
                              aria-labelledby="heading-${index}"
-                             data-bs-parent="#education-repeater">
+                             data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
@@ -174,7 +174,7 @@
 
                     $el.find('.accordion-header').attr('id', `heading-${i}`);
                     $el.find('.accordion-button')
-                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Education #${i + 1}`);
 
@@ -222,8 +222,8 @@
                     <div class="accordion-item experience-item">
                         <div class="accordion-header" id="headingExp-${index}">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#${accordionId}"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#${accordionId}"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Experience #${index + 1}
@@ -231,7 +231,7 @@
                         </div>
                         <div id="${accordionId}" class="accordion-collapse collapse"
                              aria-labelledby="headingExp-${index}"
-                             data-bs-parent="#experience-repeater">
+                             data-jbs-parent="#experience-repeater">
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -332,7 +332,7 @@
 
                     $el.find('.accordion-header').attr('id', `headingExp-${i}`);
                     $el.find('.accordion-button')
-                        .attr('data-bs-target', `#${accordionId}`)
+                        .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Experience #${i + 1}`);
 

@@ -38,7 +38,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
                                     <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                        <div class="filter-title fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
+                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
                                         <?php
                                         // Include the appropriate widget layout file based on the widget type
                                         $specifications_data = $job_specifications;
@@ -89,7 +89,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 
                     <div class="jbs-row">
                         <div class="jbs-col-xl-2 jbs-m-auto">
-                            <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30 jbs-md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
+                            <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
                         </div>
                     </div>
                 </form>

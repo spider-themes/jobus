@@ -34,7 +34,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                         }
                         ?>
-                        <div class="text-md jbs-text-dark jbs-text-center mt-15 mb-20 lg-mb-10"><?php the_title() ?></div>
+                        <div class="jbs-text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20 lg-mb-10"><?php the_title() ?></div>
                         <?php if ( ! empty( $website_url ) ) : ?>
                             <div class="jbs-text-center">
                                 <a href="<?php echo esc_url( $website_url ) ?>" class="website-btn-two tran3s"
@@ -44,7 +44,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </div>
                         <?php endif; ?>
 
-                        <div class="jbs-border-top mt-35 lg-mt-20 jbs-pt-25">
+                        <div class="jbs-border-top jbs-mt-35 lg-mt-20 jbs-pt-25">
                             <ul class="job-meta-data jbs-row style-none">
                                 <?php
                                 if ( ! empty( $location ) ) { ?>
@@ -142,7 +142,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             </ul>
 
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>"
-                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-25">
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-25">
                                 <?php esc_html_e( 'Posted Jobs', 'jobus' ); ?>
                             </a>
                         </div>
@@ -209,7 +209,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                             ?>
                                                         </ul>
                                                         <div class="review-score">
-                                                            <span class="fw-500 text-dark"><?php echo esc_html( number_format( $rating, 1 ) ); ?></span>
+                                                            <span class="jbs-fw-500 jbs-text-dark"><?php echo esc_html( number_format( $rating, 1 ) ); ?></span>
                                                             <?php esc_html_e('out of 5', 'jobus'); ?>
                                                         </div>
                                                     <?php endif; ?>
@@ -222,7 +222,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                          class="author-img jbs-rounded-circle">
                                                     <div class="jbs-ms-3">
                                                         <?php if ( $author_name ) : ?>
-                                                            <div class="name fw-500 text-dark"><?php echo esc_html( $author_name ); ?></div>
+                                                            <div class="name jbs-fw-500 jbs-text-dark"><?php echo esc_html( $author_name ); ?></div>
                                                         <?php endif; ?>
                                                         <?php if ( $location ) : ?>
                                                             <span class="jbs-opacity-50"><?php echo esc_html( $location ); ?></span>

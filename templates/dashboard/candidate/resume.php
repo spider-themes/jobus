@@ -175,8 +175,8 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                     <div class="accordion-item education-item">
                         <div class="accordion-header" id="headingOne-<?php echo esc_attr( $key ); ?>">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
 								<?php echo esc_html( $value['title'] ?? esc_html__( 'Education', 'jobus' ) ); ?>
@@ -184,7 +184,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                         </div>
                         <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="headingOne-<?php echo esc_attr( $key ); ?>"
-                             data-bs-parent="#education-repeater">
+                             data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col-lg-2">
@@ -302,8 +302,8 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                     <div class="accordion-item experience-item">
                         <div class="accordion-header" id="headingExp-<?php echo esc_attr( $key ); ?>">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
 								<?php echo esc_html( $value['title'] ?? esc_html__( 'Experience', 'jobus' ) ); ?>
@@ -311,7 +311,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                         </div>
                         <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="headingExp-<?php echo esc_attr( $key ); ?>"
-                             data-bs-parent="#experience-repeater">
+                             data-jbs-parent="#experience-repeater">
                             <div class="accordion-body">
                                 <div class="row">
                                     <div class="col-lg-2">

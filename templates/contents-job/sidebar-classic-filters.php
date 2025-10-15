@@ -17,7 +17,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
         <button type="button" class="jbs-btn-close text-reset jbs-d-lg-none jbs-offcanvas-close"
                 aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
         <div class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
-        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 pt-25 pb-30 mt-20">
+        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_job' ) ) ?>" role="search" method="get">
 
                 <?php wp_nonce_field( 'jobus_search_filter', 'jobus_nonce' ); ?>
@@ -116,7 +116,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
                     }
                 }
                 ?>
-                <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-30">
+                <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30">
                     <?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                 </button>
             </form>

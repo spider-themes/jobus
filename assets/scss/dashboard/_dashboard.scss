@@ -53,14 +53,14 @@
       }
     }
 
-    .user-name-data .dropdown-menu {
+    .user-name-data .jbs-dropdown-menu {
       width: 100%;
       border: none;
       border-radius: 15px;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
       padding: 12px 0;
 
-      .dropdown-item {
+      .jbs-dropdown-item {
         text-transform: capitalize;
         line-height: 45px;
         padding: 0 5px 0 20px;
@@ -347,7 +347,7 @@
         }
       }
 
-      .dropdown-menu {
+      .jbs-dropdown-menu {
         max-width: 325px;
         border: none;
         border-radius: 15px;
@@ -595,14 +595,14 @@
         top: 0;
         right: 0px;
 
-        .dropdown-menu {
+        .jbs-dropdown-menu {
           min-width: 120px;
           border: none;
           border-radius: 10px;
           box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
           padding: 10px 0;
 
-          .dropdown-item {
+          .jbs-dropdown-item {
             font-weight: 500;
             font-size: 13px;
             padding: 5px 15px;
@@ -611,7 +611,7 @@
             background: #fff;
           }
 
-          li:last-child .dropdown-item {
+          li:last-child .jbs-dropdown-item {
             color: #ff5b5b;
           }
         }
@@ -1114,14 +1114,14 @@
 
 
   .action-dots {
-    .dropdown-menu {
+    .jbs-dropdown-menu {
       min-width: 140px;
       border: 1px solid #F1F1F1;
       border-radius: 5px;
       box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
       padding: 10px 0;
 
-      .dropdown-item {
+      .jbs-dropdown-item {
         padding: 0 15px;
         line-height: 34px;
         font-size: 14px;
@@ -1135,7 +1135,7 @@
         }
       }
 
-      li:last-child .dropdown-item:hover {
+      li:last-child .jbs-dropdown-item:hover {
         color: #ff5b5b;
       }
     }

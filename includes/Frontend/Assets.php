@@ -44,6 +44,7 @@ class Assets {
 		wp_enqueue_script( 'slick', esc_url( JOBUS_VEND . '/slick/slick.min.js' ), [ 'jquery' ], '2.2.0', [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-public', esc_url( JOBUS_JS . '/public.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-collapse', esc_url( JOBUS_JS . '/collapse.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'jobus-framework', esc_url( JOBUS_JS . '/jbs-framework.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 
 		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 

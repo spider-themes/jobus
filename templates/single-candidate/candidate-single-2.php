@@ -20,7 +20,7 @@ wp_enqueue_script( 'lightbox' );
                     <div class="jbs-row jbs-gx-1 jbs-align-items-center">
                         <div class="jbs-col-xl-2 jbs-order-xl-0">
                             <div class="jbs-position-relative">
-                                <h4 class="candidate-name jbs-text-white mb-0"><?php the_title() ?></h4>
+                                <h4 class="candidate-name jbs-text-white jbs-mb-0"><?php the_title() ?></h4>
                                 <div class="andidate-post"><?php esc_html( 'Intro' ) ?></div>
                                 <?php if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_1' ) ) : ?>
                                     <div class="candidate-post">
@@ -91,7 +91,7 @@ wp_enqueue_script( 'lightbox' );
                             ?>
                             <div class="jbs-col-xl-3 jbs-col-md-4 jbs-order-xl-4">
                                 <div class="jbs-d-flex jbs-justify-content-md-end">
-                                    <a href="<?php echo esc_url( $cv_attachment ) ?>" class="cv-download-btn fw-500 tran3s ms-md-3 sm-mt-20" target="_blank">
+                                    <a href="<?php echo esc_url( $cv_attachment ) ?>" class="cv-download-btn jbs-fw-500 tran3s jbs-ms-md-3 sm-mt-20" target="_blank">
                                         <?php esc_html_e( 'Download CV', 'jobus' ) ?>
                                     </a>
                                 </div>
@@ -126,7 +126,7 @@ wp_enqueue_script( 'lightbox' );
                             <?php
                         }
                         ?>
-                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 lg-mt-20 jbs-mb-75 lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $meta['video_bg_img']['url'] ) ?>)">
                             <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $meta['video_url'] ) ?>">
@@ -145,7 +145,7 @@ wp_enqueue_script( 'lightbox' );
                                 <?php
                             }
                             ?>
-                            <div class="time-line-data jbs-position-relative pt-15">
+                            <div class="time-line-data jbs-position-relative jbs-pt-15">
                                 <?php
                                 foreach ( $educations as $item ) {
                                     ?>
@@ -201,7 +201,7 @@ wp_enqueue_script( 'lightbox' );
                                 <?php
                             }
                             ?>
-                            <div class="time-line-data jbs-position-relative pt-15">
+                            <div class="time-line-data jbs-position-relative jbs-pt-15">
                                 <?php
                                 foreach ( $experience as $item ) {
                                     ?>
@@ -416,8 +416,8 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="jbs-d-sm-flex">
-                                <button type="submit" name="send_message" class="jbs-btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
-									<?php esc_html_e( 'Send Message', 'jobus' ) ?>
+                                <button type="submit" name="send_message" class="btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                    <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>
 

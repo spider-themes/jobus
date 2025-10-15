@@ -25,7 +25,7 @@ get_footer();
         <div class="jbs-modal-content">
             <div class="jbs-modal-header">
                 <h5 class="jbs-modal-title" id="applyJobModalLabel"><?php esc_html_e( 'Apply for this Position', 'jobus' ); ?></h5>
-                <button type="button" class="jbs-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="jbs-modal-body">
                 <div class="jbs-container">

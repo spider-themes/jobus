@@ -135,14 +135,14 @@ class Shortcode {
                 <form name="jobus_login_form" id="jobus_login_form" action="<?php echo esc_url( wp_login_url() ); ?>" method="post" class="mt-10">
                     <div class="row">
                         <div class="col-12">
-                            <div class="input-group-meta position-relative mb-25">
+                            <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                 <label for="user_login"><?php echo esc_html( $atts['username_label'] ); ?></label>
                                 <input type="text" name="log" id="user_login" class="input" value=""
                                        placeholder="<?php echo esc_attr( $atts['username_placeholder'] ); ?>" autocomplete="username">
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="input-group-meta position-relative mb-20">
+                            <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                 <label for="user_pass"><?php echo esc_html( $atts['password_label'] ); ?></label>
                                 <input type="password" name="pwd" id="user_pass" class="input pass_log_id" value=""
                                        placeholder="<?php echo esc_attr( $atts['password_placeholder'] ); ?>" autocomplete="current-password">

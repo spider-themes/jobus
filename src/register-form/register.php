@@ -24,12 +24,12 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
         <div class="form-wrapper m-auto">
             <ul class="nav nav-tabs border-0 w-100 mt-30" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#fc1" role="tab">
+                    <button class="nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
                         <?php esc_html_e( 'Candidates', 'jobus' ); ?>
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#fc2" role="tab">
+                    <button class="nav-link" data-jbs-toggle="tab" data-jbs-target="#fc2" role="tab">
                         <?php esc_html_e( 'Employer', 'jobus' ); ?>
                     </button>
                 </li>
@@ -91,7 +91,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20"><?php esc_html_e( 'Register', 'jobus' ); ?></button>
+                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Register', 'jobus' ); ?></button>
                             </div>
                         </div>
                     </form>
@@ -155,7 +155,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20">
+                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20">
                                     <?php esc_html_e( 'Register', 'jobus' ); ?>
                                 </button>
                             </div>
@@ -165,7 +165,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                 <!-- /.tab-pane -->
             </div>
             <p class="text-center mt-20 mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
-                <a href="javascript:void(0)" class="fw-500" data-bs-toggle="modal" data-bs-target="#loginModal"><?php esc_html_e( 'Sign In', 'jobus' ); ?></a>
+                <a href="javascript:void(0)" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#loginModal"><?php esc_html_e( 'Sign In', 'jobus' ); ?></a>
             </p>
         </div>
     </div>

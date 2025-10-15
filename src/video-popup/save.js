@@ -3,7 +3,7 @@ import {useBlockProps} from "@wordpress/block-editor";
 function Save({attributes}) {
 
     const blockProps = useBlockProps.save({
-        className: 'video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mb-50',
+        className: 'video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mb-50',
         style: {
             backgroundImage: `url(${attributes.backgroundImage})`,
             backgroundRepeat: 'no-repeat',

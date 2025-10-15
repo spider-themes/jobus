@@ -67,8 +67,8 @@
                     <div class="accordion-item company-testimonial-item">
                         <div class="accordion-header" id="company-testimonial-heading-${index}">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#${testimonialId}"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#${testimonialId}"
                                     aria-expanded="false"
                                     aria-controls="${testimonialId}">
                                 Testimonial #${index + 1}
@@ -76,7 +76,7 @@
                         </div>
                         <div id="${testimonialId}" class="accordion-collapse collapse"
                              aria-labelledby="company-testimonial-heading-${index}"
-                             data-bs-parent="#company-testimonial-repeater">
+                             data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
@@ -178,7 +178,7 @@
                     const $el = $(el);
                     $el.find('.accordion-header').attr('id', `company-testimonial-heading-${i}`);
                     $el.find('.accordion-button')
-                        .attr('data-bs-target', `#${testimonialId}`)
+                        .attr('data-jbs-target', `#${testimonialId}`)
                         .attr('aria-controls', testimonialId)
                         .text(`Testimonial #${i + 1}`);
                     $el.find('.accordion-collapse')

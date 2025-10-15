@@ -1,3 +1,7 @@
+// ============================================
+// Form Controls
+// ============================================
+
 .jbs-form-label {
     margin-bottom: .5rem
 }
@@ -18,4 +22,74 @@
     appearance: none;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+// ============================================
+// Buttons
+// ============================================
+
+.jbs-btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.jbs-btn-primary {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    
+    &:hover {
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+    }
+}
+
+.jbs-btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    
+    &:hover {
+        background-color: #bb2d3b;
+        border-color: #b02a37;
+    }
+}
+
+.jbs-btn-sm {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    border-radius: .2rem;
+}
+
+// ============================================
+// Alerts
+// ============================================
+
+.jbs-alert {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.jbs-alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
 }

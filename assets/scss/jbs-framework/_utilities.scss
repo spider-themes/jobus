@@ -21,6 +21,11 @@
 .jbs-text-center {
     text-align: center;
 }
+@media (min-width: 768px) {
+    .jbs-text-md-center {
+        text-align: center !important;
+    }
+}
 
 // Text Colors
 .jbs-text-white {
@@ -29,6 +34,10 @@
 
 .jbs-text-dark {
     color: $text-dark !important;
+}
+
+.jbs-text-muted {
+    color: #6c757d !important;
 }
 
 .jbs-text-reset {
@@ -42,9 +51,45 @@
     line-height: 1.5rem !important;
 }
 
+.jbs-text-sm {
+    font-size: 0.875rem !important;
+}
+
+.jbs-text-md {
+    font-size: 1rem !important;
+}
+
+.jbs-text-lg {
+    font-size: 1.125rem !important;
+}
+
+.jbs-text-xl {
+    font-size: 1.25rem !important;
+}
+
+.jbs-fs-1 {
+    font-size: calc(1.375rem + 1.5vw) !important;
+}
+
 // Font Weight
+.jbs-fw-normal {
+    font-weight: 400 !important;
+}
+
 .jbs-fw-500 {
     font-weight: 500 !important;
+}
+
+.jbs-fw-600 {
+    font-weight: 600 !important;
+}
+
+.jbs-fw-700 {
+    font-weight: 700 !important;
+}
+
+.jbs-fw-bold {
+    font-weight: 700 !important;
 }
 
 // Width Classes
@@ -90,6 +135,24 @@
     display: block !important;
 }
 
+.jbs-d-inline-block {
+    display: inline-block !important;
+}
+
+.jbs-d-inline-flex {
+    display: inline-flex !important;
+}
+
+@media (min-width: 768px) {
+  .jbs-d-md-block {
+    display: block !important;
+  }
+}
+@media (min-width: 768px) {
+  .jbs-d-md-none {
+    display: none !important;
+  }
+}
 @media (min-width: 992px) {
     .jbs-d-lg-none {
         display: none !important;
@@ -101,9 +164,17 @@
     position: relative;
 }
 
+.jbs-position-absolute {
+    position: absolute !important;
+}
+
 // Border Radius
 .jbs-rounded-circle {
     border-radius: 50% !important;
+}
+
+.jbs-rounded-3 {
+    border-radius: 0.375rem !important;
 }
 
 // Opacity
@@ -132,4 +203,37 @@
 .jbs-bg-white {
     opacity: 1;
     background-color: #ffffff !important;
+}
+
+// Gap Utility
+.jbs-gap-2 {
+    gap: 0.5rem !important;
+}
+
+// Overflow
+.jbs-overflow-hidden {
+    overflow: hidden !important;
+}
+
+// JBS Button
+.jbs-btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.jbs-btn:hover, .jbs-btn:focus {
+  background-color: #dee2e6;
+  color: #16181b;
 }

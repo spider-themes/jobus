@@ -271,8 +271,8 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     <div class="accordion-item social-link-item">
                         <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $social_icon_id ); ?>"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#<?php echo esc_attr( $social_icon_id ); ?>"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $social_icon_id ); ?>">
                                 <?php echo esc_html( $icon_label ); ?>
@@ -280,7 +280,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                         </div>
                         <div id="<?php echo esc_attr( $social_icon_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
-                             data-bs-parent="#social-links-repeater">
+                             data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="col-lg-2">
@@ -398,8 +398,8 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     <div class="accordion-item company-testimonial-item">
                         <div class="accordion-header" id="company-testimonial-heading-<?php echo esc_attr( $key ); ?>">
                             <button class="accordion-button collapsed" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#<?php echo esc_attr( $testimonial_id ); ?>"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#<?php echo esc_attr( $testimonial_id ); ?>"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $testimonial_id ); ?>">
                                 <?php echo esc_html( $testimonial['author_name'] ?? esc_html__( 'Testimonial', 'jobus' ) ); ?>
@@ -407,7 +407,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                         </div>
                         <div id="<?php echo esc_attr( $testimonial_id ); ?>" class="accordion-collapse collapse"
                              aria-labelledby="company-testimonial-heading-<?php echo esc_attr( $key ); ?>"
-                             data-bs-parent="#company-testimonial-repeater">
+                             data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
                                 <div class="row mb-3">
                                     <div class="col-lg-2">

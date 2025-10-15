@@ -30,6 +30,10 @@
   margin-left: 1rem !important;
 }
 
+.jbs-ms-4 {
+  margin-left: 1.5rem !important;
+}
+
 .jbs-ms-5 {
   margin-left: 3rem !important;
 }
@@ -63,6 +67,22 @@
 }
 
 // Margin Bottom (Custom px values)
+.jbs-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.jbs-mb-5 {
+  margin-bottom: 0.3125rem !important;
+}
+
+.jbs-mb-10 {
+  margin-bottom: 0.625rem !important;
+}
+
+.jbs-mb-15 {
+  margin-bottom: 0.9375rem !important;
+}
+
 .jbs-mb-20 {
   margin-bottom: 1.25rem !important;
 }
@@ -79,13 +99,57 @@
   margin-bottom: 2.5rem !important;
 }
 
+.jbs-mb-50 {
+  margin-bottom: 3.125rem !important;
+}
+
+.jbs-mb-60 {
+  margin-bottom: 3.75rem !important;
+}
+
+.jbs-mb-65 {
+  margin-bottom: 4.0625rem !important;
+}
+
+.jbs-mb-75 {
+  margin-bottom: 4.6875rem !important;
+}
+
 // Margin Top (Custom px values)
+.jbs-mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+.jbs-mt-3 {
+  margin-top: 0.75rem !important;
+}
+
+.jbs-mt-10 {
+  margin-top: 0.625rem !important;
+}
+
+.jbs-mt-15 {
+  margin-top: 0.9375rem !important;
+}
+
 .jbs-mt-20 {
   margin-top: 1.25rem !important;
 }
 
+.jbs-mt-25 {
+  margin-top: 1.5625rem !important;
+}
+
 .jbs-mt-30 {
   margin-top: 1.875rem !important;
+}
+
+.jbs-mt-35 {
+  margin-top: 2.1875rem !important;
+}
+
+.jbs-mt-40 {
+  margin-top: 2.5rem !important;
 }
 
 .jbs-mt-70 {
@@ -101,37 +165,33 @@
   padding-bottom: 0.5rem !important;
 }
 
-.jbs-ps-3 {
-  padding-left: 1rem !important;
-}
-
-.jbs-ps-4 {
-  padding-left: 1.5rem !important;
-}
-
-.jbs-pe-4 {
-  padding-right: 1.5rem !important;
-}
-
-.jbs-pe-xxl-4 {
-  padding-right: 1.5rem !important;
-}
-
-.jbs-ps-xxl-5 {
-  padding-left: 3rem !important;
-}
-
-// Padding (Custom px values)
+// Padding Custom Values
 .jbs-pt-15 {
   padding-top: 0.9375rem !important;
 }
 
-.jbs-pb-15 {
-  padding-bottom: 0.9375rem !important;
-}
-
 .jbs-pt-25 {
   padding-top: 1.5625rem !important;
+}
+
+.jbs-pt-50 {
+  padding-top: 3.125rem !important;
+}
+
+.jbs-pt-100 {
+  padding-top: 6.25rem !important;
+}
+
+.jbs-pt-110 {
+  padding-top: 6.875rem !important;
+}
+
+.jbs-pt-130 {
+  padding-top: 8.125rem !important;
+}
+
+.jbs-pb-15 {
+  padding-bottom: 0.9375rem !important;
 }
 
 .jbs-pb-25 {
@@ -146,33 +206,158 @@
   padding-bottom: 3.125rem !important;
 }
 
-// Responsive Spacing
-@media (max-width: 575px) {
-  .jbs-xs-mt-20 {
-    margin-top: 1.25rem !important;
+.jbs-pb-80 {
+  padding-bottom: 5rem !important;
+}
+
+.jbs-pb-130 {
+  padding-bottom: 8.125rem !important;
+}
+
+.jbs-pb-150 {
+  padding-bottom: 9.375rem !important;
+}
+
+.jbs-ps-4 {
+  padding-left: 1.5rem !important;
+}
+
+.jbs-pe-4 {
+  padding-right: 1.5rem !important;
+}
+
+.jbs-pe-xxl-4 {
+  padding-right: 1.5rem !important;
+}
+
+// Responsive Margin Start (Left)
+@media (min-width: 768px) {
+  .jbs-ms-md-2 {
+    margin-left: 0.5rem !important;
+  }
+  
+  .jbs-ms-md-3 {
+    margin-left: 1rem !important;
   }
 }
 
-@media (max-width: 767px) {
-  .jbs-sm-mt-20 {
-    margin-top: 1.25rem !important;
+// Responsive Margin Top
+.jbs-md-mt-10 {
+  @media (min-width: 768px) {
+    margin-top: 0.625rem !important;
   }
 }
 
-@media (max-width: 991px) {
-  .jbs-lg-pb-20 {
-    padding-bottom: 1.25rem !important;
-  }
-
-  .jbs-lg-mt-40 {
+.jbs-lg-mt-40 {
+  @media (max-width: 991px) {
     margin-top: 2.5rem !important;
   }
+}
 
-  .jbs-md-mb-20 {
-    margin-bottom: 1.25rem !important;
+.jbs-lg-mt-20 {
+  @media (max-width: 991px) {
+    margin-top: 1.25rem !important;
   }
+}
 
-  .jbs-md-mt-10 {
+// Responsive Spacing Classes
+@media (min-width: 768px) {
+  .jbs-align-items-md-center {
+    align-items: center !important;
+  }
+}
+
+// Small Responsive (xs) Spacing
+@media (max-width: 575px) {
+  .xs-mt-10 {
     margin-top: 0.625rem !important;
+  }
+  
+  .xs-mb-10 {
+    margin-bottom: 0.625rem !important;
+  }
+  
+  .xs-pb-20 {
+    padding-bottom: 1.25rem !important;
+  }
+}
+
+// Small Responsive (sm) Spacing  
+@media (max-width: 767px) {
+  .sm-mt-20 {
+    margin-top: 1.25rem !important;
+  }
+}
+
+// Medium Responsive (md) Spacing
+@media (max-width: 991px) {
+  .md-mt-10 {
+    margin-top: 0.625rem !important;
+  }
+  
+  .md-mt-60 {
+    margin-top: 3.75rem !important;
+  }
+  
+  .md-mb-10 {
+    margin-bottom: 0.625rem !important;
+  }
+  
+  .md-mb-40 {
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+// Large Responsive (lg) Spacing
+@media (max-width: 991px) {
+  .lg-pt-10 {
+    padding-top: 0.625rem !important;
+  }
+  
+  .lg-pt-70 {
+    padding-top: 4.375rem !important;
+  }
+  
+  .lg-pt-80 {
+    padding-top: 5rem !important;
+  }
+  
+  .lg-pb-20 {
+    padding-bottom: 1.25rem !important;
+  }
+  
+  .lg-pb-50 {
+    padding-bottom: 3.125rem !important;
+  }
+  
+  .lg-pb-80 {
+    padding-bottom: 5rem !important;
+  }
+  
+  .lg-mb-30 {
+    margin-bottom: 1.875rem !important;
+  }
+  
+  .lg-mb-40 {
+    margin-bottom: 2.5rem !important;
+  }
+  
+  .lg-mb-50 {
+    margin-bottom: 3.125rem !important;
+  }
+  
+  .lg-mt-20 {
+    margin-top: 1.25rem !important;
+  }
+  
+  .lg-mt-40 {
+    margin-top: 2.5rem !important;
+  }
+}
+
+// Extra Large Responsive (xl) Spacing
+@media (max-width: 1199px) {
+  .xl-pb-150 {
+    padding-bottom: 9.375rem !important;
   }
 }

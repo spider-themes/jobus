@@ -61,11 +61,11 @@ $pagination_next  = '<i class="bi bi-chevron-right"></i>';
 ?>
 
 <section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="jbs-container">
+        <div class="jbs-row">
+            <div class="jbs-col-lg-12">
 
-                <div class="upper-filter d-flex justify-content-between align-items-center mb-20">
+                <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-20">
                     <?php
                     // Display the total number of candidates found
                     include( 'loop/result-count.php' );
