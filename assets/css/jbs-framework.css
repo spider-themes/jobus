@@ -1336,6 +1336,15 @@
   margin-left: 0 !important;
 }
 
+.jbs-ms-xxl-5 {
+  margin-left: 3rem !important;
+}
+
+@media (min-width: 1200px) {
+  .jbs-ms-xl-3 {
+    margin-left: 1rem !important;
+  }
+}
 .jbs-mb-0 {
   margin-bottom: 0 !important;
 }

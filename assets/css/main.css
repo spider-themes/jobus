@@ -6174,7 +6174,8 @@ img {
 }
 
 @media (max-width: 767px) {
-  .company-profiles .upper-filter, .candidates-profile .upper-filter {
+  .company-profiles .upper-filter,
+  .candidates-profile .upper-filter {
     flex-wrap: wrap;
     gap: 24px;
   }
@@ -6557,6 +6558,19 @@ img {
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .btn:focus {
   box-shadow: none;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  background: #e9ecef;
+  border: 1px solid #e9ecef;
+  padding: 0.775rem 0.75rem;
+  margin-right: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 
 .jobus_job_details .details-post-data .is-layout-constrained > * {
