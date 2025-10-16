@@ -943,12 +943,15 @@
   }
 
   .dash-accordion-one {
-    .accordion-item {
+    .jbs-collapse.jbs-show {
+      padding-bottom: 20px;
+    }
+    .jbs-accordion-item {
       border: 1px solid #EAEAEA;
       border-radius: 15px;
       margin-bottom: 20px;
 
-      .accordion-button {
+      .jbs-accordion-button {
         font-size: 15px;
         font-weight: 500;
         color: #000;
@@ -963,7 +966,7 @@
         }
       }
 
-      .accordion-body {
+      .jbs-accordion-body {
         padding: 8px 25px 0;
       }
     }

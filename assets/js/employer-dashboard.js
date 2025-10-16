@@ -149,7 +149,7 @@
                                             <input type="hidden" name="company_testimonials[${index}][image]"
                                                    id="company-testimonial-${index}-image" class="testimonial-image-id" value="">
                                             <!-- Upload button for WP media -->
-                                            <button type="button" class="btn btn-secondary testimonial-image-upload-btn" data-index="${index}">
+                                            <button type="button" class="jbs-btn jbs-btn-secondary testimonial-image-upload-btn" data-index="${index}">
                                                 Upload Image
                                             </button>
                                             <!-- Preview area (always present) -->
@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-company-testimonial mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-company-testimonial mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>

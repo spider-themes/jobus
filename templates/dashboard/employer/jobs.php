@@ -85,7 +85,7 @@ if ( ! empty( $dashboard_page ) ) {
                             <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
-                                <div class="action-dots float-end">
+                                <div class="action-dots jbs-dropdown float-end">
                                     <button class="action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
                                         <span></span>
                                     </button>

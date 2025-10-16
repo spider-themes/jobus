@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 'meta_key'     => 'jobus_saved_jobs',
                                 'is_saved'     => $save_job_status['is_saved'],
                                 'button_title' => ! empty( $save_job_status['is_saved'] ) ? esc_html__( 'Saved Job', 'jobus' ) : esc_html__( 'Save Job', 'jobus' ),
-                                'class'        => 'save-btn text-center rounded-circle tran3s jobus-saved-post'
+                                'class'        => 'save-btn jbs-text-center jbs-rounded-circle tran3s jobus-saved-post'
                             ] );
                         }
 	                    ?>

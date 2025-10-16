@@ -22,6 +22,7 @@
 
         init: function () {
             this.CandidateSpecificationsRepeater();
+            this.SocialLinksRepeater();
             this.EducationRepeater();
             this.ExperienceRepeater();
         },
@@ -52,6 +53,147 @@
                     }
                 });
             }
+        },
+
+        /**
+         * Handles the dynamic addition and removal of social media links.
+         * Creates accordion items for each social network with JBS accordion classes.
+         *
+         * @function SocialLinksRepeater
+         * @returns {void}
+         */
+        SocialLinksRepeater: function () {
+            const $repeater = $('#social-links-repeater');
+            const $addBtn = $('#add-social-link');
+            let index = $repeater.children('.social-link-item').length;
+
+            const availableIcons = {
+                'bi bi-facebook': 'Facebook',
+                'bi bi-instagram': 'Instagram',
+                'bi bi-twitter': 'Twitter',
+                'bi bi-linkedin': 'LinkedIn',
+                'bi bi-github': 'GitHub',
+                'bi bi-youtube': 'YouTube',
+                'bi bi-dribbble': 'Dribbble',
+                'bi bi-behance': 'Behance',
+                'bi bi-pinterest': 'Pinterest',
+                'bi bi-tiktok': 'TikTok'
+            };
+
+            $addBtn.on('click', function (e) {
+                e.preventDefault();
+                const accordionId = `social-link-${index}`;
+                
+                let optionsHtml = '';
+                Object.entries(availableIcons).forEach(([iconClass, iconLabel]) => {
+                    optionsHtml += `<option value="${iconClass}">${iconLabel}</option>`;
+                });
+
+                const newItem = $(`
+                    <div class="jbs-accordion-item social-link-item">
+                        <div class="jbs-accordion-header" id="heading-${index}">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
+                                    data-jbs-toggle="collapse"
+                                    data-jbs-target="#${accordionId}"
+                                    data-jbs-parent="#social-links-repeater"
+                                    aria-expanded="false"
+                                    aria-controls="${accordionId}">
+                                Social Network #${index + 1}
+                            </button>
+                        </div>
+                        <div id="${accordionId}" class="jbs-accordion-collapse jbs-collapse"
+                             aria-labelledby="heading-${index}"
+                             data-jbs-parent="#social-links-repeater">
+                            <div class="jbs-accordion-body">
+                                <div class="jbs-row mb-3">
+                                    <div class="jbs-col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_${index}_icon">Icon</label>
+                                        </div>
+                                    </div>
+                                    <div class="jbs-col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
+                                                ${optionsHtml}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="jbs-row mb-3">
+                                    <div class="jbs-col-lg-2">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <label for="social_${index}_url">URL</label>
+                                        </div>
+                                    </div>
+                                    <div class="jbs-col-lg-10">
+                                        <div class="dash-input-wrapper mb-10">
+                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" placeholder="https://example.com">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="jbs-text-end">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
+                                        <i class="bi bi-x"></i> Remove
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                $repeater.append(newItem);
+                
+                // Reinitialize nice-select for the new select element
+                if (typeof $.fn.niceSelect === 'function') {
+                    newItem.find('.nice-select').niceSelect();
+                }
+                
+                index++;
+            });
+
+            $repeater.on('click', '.remove-social-link', function () {
+                $(this).closest('.social-link-item').remove();
+                
+                // Re-index all fields
+                $repeater.children('.social-link-item').each(function (i) {
+                    const accordionId = `social-link-${i}`;
+                    const $el = $(this);
+
+                    $el.find('.jbs-accordion-header').attr('id', `heading-${i}`);
+                    $el.find('.jbs-accordion-button')
+                        .attr('data-jbs-target', `#${accordionId}`)
+                        .attr('aria-controls', accordionId)
+                        .text(`Social Network #${i + 1}`);
+
+                    $el.find('.jbs-accordion-collapse')
+                        .attr('id', accordionId)
+                        .attr('aria-labelledby', `heading-${i}`);
+
+                    $el.find('input, select').each(function() {
+                        let name = $(this).attr('name');
+                        let id = $(this).attr('id');
+                        if (name) {
+                            name = name.replace(/social_icons\[\d+\]/, `social_icons[${i}]`);
+                            $(this).attr('name', name);
+                        }
+                        if (id) {
+                            id = id.replace(/social_\d+_/, `social_${i}_`);
+                            $(this).attr('id', id);
+                            // Update associated label
+                            $el.find(`label[for^="social_"]`).each(function() {
+                                const forAttr = $(this).attr('for');
+                                if (forAttr) {
+                                    $(this).attr('for', forAttr.replace(/social_\d+_/, `social_${i}_`));
+                                }
+                            });
+                        }
+                    });
+                });
+
+                index = $repeater.children('.social-link-item').length;
+            });
         },
 
 
@@ -151,7 +293,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-education mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-education mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>
@@ -309,7 +451,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-experience mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-experience mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>

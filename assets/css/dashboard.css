@@ -829,12 +829,15 @@ Table of Contents:
   left: 0;
   opacity: 0;
 }
-.dashboard-body .dash-accordion-one .accordion-item {
+.dashboard-body .dash-accordion-one .jbs-collapse.jbs-show {
+  padding-bottom: 20px;
+}
+.dashboard-body .dash-accordion-one .jbs-accordion-item {
   border: 1px solid #EAEAEA;
   border-radius: 15px;
   margin-bottom: 20px;
 }
-.dashboard-body .dash-accordion-one .accordion-item .accordion-button {
+.dashboard-body .dash-accordion-one .jbs-accordion-item .jbs-accordion-button {
   font-size: 15px;
   font-weight: 500;
   color: #000;
@@ -843,11 +846,11 @@ Table of Contents:
   padding: 17px 25px;
   box-shadow: none;
 }
-.dashboard-body .dash-accordion-one .accordion-item .accordion-button:after {
+.dashboard-body .dash-accordion-one .jbs-accordion-item .jbs-accordion-button:after {
   content: url(../images/dashboard/icons/arrow-icon.svg);
   background-image: none;
 }
-.dashboard-body .dash-accordion-one .accordion-item .accordion-body {
+.dashboard-body .dash-accordion-one .jbs-accordion-item .jbs-accordion-body {
   padding: 8px 25px 0;
 }
 .dashboard-body .remove-portfolio-item {

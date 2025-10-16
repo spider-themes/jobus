@@ -202,7 +202,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>

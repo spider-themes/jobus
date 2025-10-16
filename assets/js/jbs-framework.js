@@ -3,33 +3,51 @@
 
     $(document).ready(function () {
 
-        // first collapse show on page load
-
-        var $firstTrigger = $('[data-jbs-toggle="collapse"]').first();
-        var $firstTarget = $($firstTrigger.attr("href"));
-        $firstTarget.addClass("jbs-show").show();
-        $firstTrigger.attr("aria-expanded", "true").removeClass("jbs-collapsed");
-
-        // Collapse toggle
-
-        $('[data-jbs-toggle="collapse"]').on("click", function (e) {
+        // -----------------------------
+        // Accordion Functionality
+        // -----------------------------
+        $(document).on('click', '.jbs-accordion-button', function (e) {
             e.preventDefault();
+            
+            var $button = $(this);
+            var targetSelector = $button.data('jbs-target');
+            var $target = $(targetSelector);
+            var parentSelector = $button.data('jbs-parent');
+            var isExpanded = $button.attr('aria-expanded') === 'true';
 
-            var $this = $(this);
-            var $target = $($this.attr("href"));
-            var isExpanded = $this.attr("aria-expanded") === "true";
+            // If there's a parent accordion, close other items
+            if (parentSelector) {
+                var $parent = $(parentSelector);
+                if ($parent.length) {
+                    $parent.find('.jbs-accordion-collapse.jbs-show').each(function() {
+                        var $otherCollapse = $(this);
+                        if ($otherCollapse[0] !== $target[0]) {
+                            $otherCollapse.slideUp(300, function() {
+                                $otherCollapse.removeClass('jbs-show');
+                            });
+                            
+                            // Update the other button states
+                            var otherId = '#' + $otherCollapse.attr('id');
+                            var $otherButton = $parent.find('[data-jbs-target="' + otherId + '"]');
+                            $otherButton.addClass('jbs-collapsed').attr('aria-expanded', 'false');
+                        }
+                    });
+                }
+            }
 
+            // Toggle current item
             if (isExpanded) {
-                $target.slideUp(300, function () {
-                    $target.removeClass("jbs-show");
+                // Close
+                $target.slideUp(300, function() {
+                    $target.removeClass('jbs-show');
                 });
-
-                $this.attr("aria-expanded", "false");
-                $this.addClass("jbs-collapsed");
+                $button.addClass('jbs-collapsed').attr('aria-expanded', 'false');
             } else {
-                $target.hide().addClass("jbs-show").slideDown(300);
-                $this.attr("aria-expanded", "true");
-                $this.removeClass("jbs-collapsed");
+                // Open
+                $target.slideDown(300, function() {
+                    $target.addClass('jbs-show');
+                });
+                $button.removeClass('jbs-collapsed').attr('aria-expanded', 'true');
             }
         });
 
@@ -137,5 +155,3 @@
     });
 
 })(jQuery);
-
-

@@ -67,7 +67,7 @@ if ( ! empty( $logo['url'] ) ) { ?>
         }
         ?>
     </div>
-    <div class="user-name-data">
+    <div class="user-name-data jbs-dropdown">
         <button class="user-name jbs-dropdown-toggle" type="button" id="profile-dropdown" data-jbs-toggle="jbs-dropdown" data-jbs-auto-close="jbs-outside"
                 aria-expanded="false">
             <?php echo esc_html( $user->display_name ); ?>

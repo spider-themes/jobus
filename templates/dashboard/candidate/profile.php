@@ -114,17 +114,18 @@ $avatar_url = $description_data['avatar_url'];
                 $user_social_links = [];
             }
             ?>
-            <div class="accordion dash-accordion-one" id="social-links-repeater">
+            <div class="jbs-accordion dash-accordion-one" id="social-links-repeater">
                 <?php
                 foreach ( $user_social_links as $index => $item ) {
                     $accordion_id = 'social-link-' . esc_attr( $index );
                     $icon_label = $available_icons[ $item['icon'] ] ?? esc_html__( 'Social Network', 'jobus' );
                     ?>
-                    <div class="accordion-item social-link-item">
-                        <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item social-link-item">
+                        <div class="jbs-accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-parent="#social-links-repeater"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
                                 <?php
@@ -132,11 +133,11 @@ $avatar_url = $description_data['avatar_url'];
                                 ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
                              data-jbs-parent="#social-links-repeater">
-                            <div class="accordion-body">
-                                <div class="row mb-3">
+                            <div class="jbs-accordion-body">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_icon">

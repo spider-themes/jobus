@@ -215,6 +215,139 @@
     overflow: hidden !important;
 }
 
+// Order Utilities
+.jbs-order-0 {
+    order: 0 !important;
+}
+
+.jbs-order-1 {
+    order: 1 !important;
+}
+
+.jbs-order-2 {
+    order: 2 !important;
+}
+
+.jbs-order-3 {
+    order: 3 !important;
+}
+
+.jbs-order-4 {
+    order: 4 !important;
+}
+
+.jbs-order-5 {
+    order: 5 !important;
+}
+
+// Order - Small (sm) Breakpoint (≥576px)
+@media (min-width: 576px) {
+    .jbs-order-sm-0 {
+        order: 0 !important;
+    }
+
+    .jbs-order-sm-1 {
+        order: 1 !important;
+    }
+
+    .jbs-order-sm-2 {
+        order: 2 !important;
+    }
+
+    .jbs-order-sm-3 {
+        order: 3 !important;
+    }
+
+    .jbs-order-sm-4 {
+        order: 4 !important;
+    }
+
+    .jbs-order-sm-5 {
+        order: 5 !important;
+    }
+}
+
+// Order - Medium (md) Breakpoint (≥768px)
+@media (min-width: 768px) {
+    .jbs-order-md-0 {
+        order: 0 !important;
+    }
+
+    .jbs-order-md-1 {
+        order: 1 !important;
+    }
+
+    .jbs-order-md-2 {
+        order: 2 !important;
+    }
+
+    .jbs-order-md-3 {
+        order: 3 !important;
+    }
+
+    .jbs-order-md-4 {
+        order: 4 !important;
+    }
+
+    .jbs-order-md-5 {
+        order: 5 !important;
+    }
+}
+
+// Order - Large (lg) Breakpoint (≥992px)
+@media (min-width: 992px) {
+    .jbs-order-lg-0 {
+        order: 0 !important;
+    }
+
+    .jbs-order-lg-1 {
+        order: 1 !important;
+    }
+
+    .jbs-order-lg-2 {
+        order: 2 !important;
+    }
+
+    .jbs-order-lg-3 {
+        order: 3 !important;
+    }
+
+    .jbs-order-lg-4 {
+        order: 4 !important;
+    }
+
+    .jbs-order-lg-5 {
+        order: 5 !important;
+    }
+}
+
+// Order - Extra Large (xl) Breakpoint (≥1200px)
+@media (min-width: 1200px) {
+    .jbs-order-xl-0 {
+        order: 0 !important;
+    }
+
+    .jbs-order-xl-1 {
+        order: 1 !important;
+    }
+
+    .jbs-order-xl-2 {
+        order: 2 !important;
+    }
+
+    .jbs-order-xl-3 {
+        order: 3 !important;
+    }
+
+    .jbs-order-xl-4 {
+        order: 4 !important;
+    }
+
+    .jbs-order-xl-5 {
+        order: 5 !important;
+    }
+}
+
 // Fade Utility with Smooth Animation
 .jbs-fade {
     transition: opacity 0.3s ease-in-out;
