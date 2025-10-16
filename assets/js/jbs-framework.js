@@ -4,32 +4,34 @@
     $(document).ready(function () {
 
         // -----------------------------
-        // Accordion Functionality
+        // Collapse Toggle Functionality
         // -----------------------------
-        $(document).on('click', '.jbs-accordion-button', function (e) {
+        // Collapse toggle - supports both simple collapse and accordion behavior
+        $(document).on("click", '[data-jbs-toggle="collapse"]', function (e) {
             e.preventDefault();
-            
-            var $button = $(this);
-            var targetSelector = $button.data('jbs-target');
-            var $target = $(targetSelector);
-            var parentSelector = $button.data('jbs-parent');
-            var isExpanded = $button.attr('aria-expanded') === 'true';
 
-            // If there's a parent accordion, close other items
+            var $this = $(this);
+            var targetSelector = $this.attr("href") || $this.data("jbs-target");
+            var $target = $(targetSelector);
+            var parentSelector = $this.data("jbs-parent");
+            var isExpanded = $this.attr("aria-expanded") === "true";
+
+            // If there's a parent accordion, close other items (accordion behavior)
             if (parentSelector) {
                 var $parent = $(parentSelector);
                 if ($parent.length) {
-                    $parent.find('.jbs-accordion-collapse.jbs-show').each(function() {
+                    // Find all collapse items within the parent
+                    $parent.find('.jbs-collapse.jbs-show, .jbs-accordion-collapse.jbs-show, .collapse.show, .accordion-collapse.show').each(function() {
                         var $otherCollapse = $(this);
                         if ($otherCollapse[0] !== $target[0]) {
                             $otherCollapse.slideUp(300, function() {
-                                $otherCollapse.removeClass('jbs-show');
+                                $otherCollapse.removeClass('jbs-show show');
                             });
                             
                             // Update the other button states
                             var otherId = '#' + $otherCollapse.attr('id');
-                            var $otherButton = $parent.find('[data-jbs-target="' + otherId + '"]');
-                            $otherButton.addClass('jbs-collapsed').attr('aria-expanded', 'false');
+                            var $otherButton = $parent.find('[data-jbs-target="' + otherId + '"], [href="' + otherId + '"]');
+                            $otherButton.addClass('jbs-collapsed collapsed').attr('aria-expanded', 'false');
                         }
                     });
                 }
@@ -39,15 +41,15 @@
             if (isExpanded) {
                 // Close
                 $target.slideUp(300, function() {
-                    $target.removeClass('jbs-show');
+                    $target.removeClass('jbs-show show');
                 });
-                $button.addClass('jbs-collapsed').attr('aria-expanded', 'false');
+                $this.addClass('jbs-collapsed collapsed').attr('aria-expanded', 'false');
             } else {
                 // Open
                 $target.slideDown(300, function() {
-                    $target.addClass('jbs-show');
+                    $target.addClass('jbs-show show');
                 });
-                $button.removeClass('jbs-collapsed').attr('aria-expanded', 'true');
+                $this.removeClass('jbs-collapsed collapsed').attr('aria-expanded', 'true');
             }
         });
 

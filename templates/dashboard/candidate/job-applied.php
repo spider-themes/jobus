@@ -31,8 +31,8 @@ $applications = new \WP_Query( $args );
     if ( $applications->have_posts() ) :
         ?>
         <div class="jbs-bg-white card-box border-20">
-            <div class="table-responsive">
-                <table class="table job-alert-table">
+            <div class="jbs-table-responsive">
+                <table class="jbs-table job-alert-table">
                     <thead>
                         <tr>
                             <th scope="col" class="company-name"><?php esc_html_e( 'Company', 'jobus' ); ?></th>
@@ -42,7 +42,7 @@ $applications = new \WP_Query( $args );
                             <th scope="col" class="job-actions"><?php esc_html_e( 'Actions', 'jobus' ); ?></th>
                         </tr>
                     </thead>
-                    <tbody class="border-0">
+                    <tbody class="jbs-border-0">
                         <?php
                         while ( $applications->have_posts() ) : $applications->the_post();
                             $job_id    = get_post_meta( get_the_ID(), 'job_applied_for_id', true );
@@ -51,7 +51,7 @@ $applications = new \WP_Query( $args );
 
                             $status       = get_post_meta( get_the_ID(), 'application_status', true );
                             $status       = ! empty( $status ) ? $status : 'pending';
-                            $status_class = 'bg-' . ( $status === 'approved' ? 'success' : ( $status === 'rejected' ? 'danger' : 'warning' ) );
+                            $status_class = 'jbs-bg-' . ( $status === 'approved' ? 'success' : ( $status === 'rejected' ? 'danger' : 'warning' ) );
                             ?>
                             <tr>
                                 <td class="company-name">
@@ -95,7 +95,7 @@ $applications = new \WP_Query( $args );
                                     <?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>
                                 </td>
                                 <td class="job-status">
-                                        <span class="badge <?php echo esc_attr( $status_class ); ?>">
+                                        <span class="jbs-badge <?php echo esc_attr( $status_class ); ?>">
                                             <?php echo esc_html( ucfirst( $status )); ?>
                                         </span>
                                 </td>
@@ -130,12 +130,12 @@ $applications = new \WP_Query( $args );
         <?php
     else :
         ?>
-        <div class="jbs-bg-white card-box border-20 jbs-text-center p-5">
+        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
-                <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
+                <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>
-                <p class="text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn jbs-btn-sm btn-primary" target="_blank">
+                <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
                     <?php esc_html_e( 'Browse Jobs', 'jobus' ); ?>
                 </a>
             </div>

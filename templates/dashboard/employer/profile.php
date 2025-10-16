@@ -58,7 +58,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
     }
 }
 ?>
-<div class="position-relative">
+<div class="jbs-position-relative">
 
     <h2 class="main-title"><?php esc_html_e( 'Profile', 'jobus' ); ?></h2>
 
@@ -68,10 +68,10 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="jbs-bg-white card-box border-20">
-            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center mb-30" id="employer-profile">
+            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
-                <button type="button" class="upload-btn position-relative tran3s jbs-ms-4 jbs-me-3" id="company-profile-picture-upload">
+                <button type="button" class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="company-profile-picture-upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                 </button>
                 <button type="button" name="company_delete_profile_picture" class="delete-btn tran3s" id="company-delete-profile-picture">
@@ -83,14 +83,14 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
             <div class="jbs-row">
                 <div class="jbs-col-md-6">
-                    <div class="dash-input-wrapper mb-30">
+                    <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-name"><?php esc_html_e( 'Company Name*', 'jobus' ); ?></label>
                         <input type="text" id="company-name" name="company_name" placeholder="<?php esc_attr_e( 'Company Name', 'jobus' ); ?>"
                                value="<?php echo esc_attr( $content_data['company_name'] ); ?>">
                     </div>
                 </div>
                 <div class="jbs-col-md-6">
-                    <div class="dash-input-wrapper mb-30">
+                    <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                         <input type="email" id="company-email" name="company_mail" placeholder="you@example.com"
                                value="<?php echo esc_attr( $user->user_email ); ?>">
@@ -126,11 +126,11 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="job-taxonomy">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="job-taxonomy">
             <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
             <!-- Add Categories -->
-            <div class="dash-input-wrapper mb-40 mt-20">
+            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                 <label for="company-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
                     <?php
@@ -140,7 +140,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     }
                     $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
                     ?>
-                    <ul id="company-category-list" class="style-none d-flex flex-wrap align-items-center">
+                    <ul id="company-category-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
                         <?php if ( ! empty( $current_categories ) ): ?>
                             <?php foreach ( $current_categories as $cat ): ?>
                                 <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -157,7 +157,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
 
             <!-- Add Locations -->
-            <div class="dash-input-wrapper mb-40 mt-20">
+            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                 <label for="company-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
                     <?php
@@ -167,7 +167,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     }
                     $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
                     ?>
-                    <ul id="company-location-list" class="style-none d-flex flex-wrap align-items-center">
+                    <ul id="company-location-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
                         <?php if ( ! empty( $current_locations ) ): ?>
                             <?php foreach ( $current_locations as $loc ): ?>
                                 <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
@@ -184,7 +184,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="company-specifications">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-specifications">
             <h4 class="dash-title-three"><?php esc_html_e( 'Specifications', 'jobus' ); ?></h4>
             <div class="jbs-row">
                 <?php
@@ -197,7 +197,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                             $meta_name   = $field['meta_name'] ?? '';
                             $meta_value  = $dynamic_fields[ $meta_key ] ?? '';
                             $meta_values = $field['meta_values_group'] ?? array();
-                            echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper mb-25">';
+                            echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                             echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                             echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
                             foreach ( $meta_values as $option ) {
@@ -214,21 +214,21 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40">
             <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
             <div class="jbs-row">
                 <div class="jbs-col-md-12">
-                    <div class="dash-input-wrapper mb-30">
+                    <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                         <input type="url" id="company-website-url" name="company_website[url]"
                                placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_url ); ?>">
                     </div>
-                    <div class="dash-input-wrapper mb-30">
+                    <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-website-title"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
                         <input type="text" id="company-website-title" name="company_website[title]"
                                placeholder="<?php esc_attr_e( 'Visit our website', 'jobus' ); ?>" value="<?php echo esc_attr( $company_website_title ); ?>">
                     </div>
-                    <div class="dash-input-wrapper mb-30">
+                    <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-website-target"><?php esc_html_e( 'Link Target', 'jobus' ); ?></label>
                         <select id="company-website-target" name="company_website[target]" class="nice-select">
                             <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
@@ -239,7 +239,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="company-social-icons">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-social-icons">
             <h4 class="dash-title-three">
                 <?php esc_html_e( 'Social Media', 'jobus' ); ?>
             </h4>
@@ -268,9 +268,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     $social_icon_id = 'social-link-' . esc_attr( $index );
                     $icon_label = $available_icons[ $item['icon'] ] ?? esc_html__( 'Social Network', 'jobus' );
                     ?>
-                    <div class="accordion-item social-link-item">
-                        <div class="accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item social-link-item">
+                        <div class="jbs-accordion-header" id="heading-<?php echo esc_attr( $index ); ?>">
+                            <button class="jbs-accordion-button collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#<?php echo esc_attr( $social_icon_id ); ?>"
                                     aria-expanded="false"
@@ -278,20 +278,20 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                 <?php echo esc_html( $icon_label ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $social_icon_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $social_icon_id ); ?>" class="jbs-accordion-collapse collapse"
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
                              data-jbs-parent="#social-links-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_icon">
                                                 <?php esc_html_e( 'Icon', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]"
                                                     id="social_<?php echo esc_attr( $index ); ?>_icon" class="nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
@@ -305,22 +305,22 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_url">
                                                 <?php esc_html_e( 'URL', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]"
-                                                   id="social_<?php echo esc_attr( $index ); ?>_url" class="form-control"
+                                                   id="social_<?php echo esc_attr( $index ); ?>_url" class="jbs-form-control"
                                                    value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-social-link jbs-mt-2 jbs-mb-2"
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>
@@ -330,30 +330,30 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     </div>
                 <?php endforeach; ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-social-link">
+            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="company-video">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
-            <div class="intro-video-form position-relative mt-20 w-100">
-                <div class="dash-input-wrapper mb-15">
+            <div class="intro-video-form jbs-position-relative jbs-mt-20 w-100">
+                <div class="dash-input-wrapper jbs-mb-15">
                     <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                     <input type="text" id="video-title" name="company_video_title" value="<?php echo esc_attr( $video_data['company_video_title'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper mb-15">
+                <div class="dash-input-wrapper jbs-mb-15">
                     <label for="video-url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
                     <input type="text" id="video-url" name="company_video_url" value="<?php echo esc_attr( $video_data['company_video_url'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper mb-15">
+                <div class="dash-input-wrapper jbs-mb-15">
                     <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
 
                     <!-- Image Preview Section -->
                     <div id="company-bg-img-preview" class="preview bg-img-preview <?php echo empty( $video_data['company_video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
-                        <div class="attached-file d-flex align-items-center justify-content-between">
+                        <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
                             <span id="company-video-bg-image-uploaded-filename"><?php echo esc_html( $video_data['company_video_bg_img']['url'] ); ?></span>
                             <a href="#" id="company-remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
                         </div>
@@ -363,7 +363,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                         <div class="dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
                             <i class="bi bi-plus"></i>
                             <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
-                            <button type="button" id="company-video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                            <button type="button" id="company-video-bg-img-upload-btn" class="jbs-position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
                         </div>
                     </div>
                     <!-- Hidden field for image ID -->
@@ -373,9 +373,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="company-testimonials">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-testimonials">
             <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper mb-15">
+            <div class="dash-input-wrapper jbs-mb-15">
                 <label for="company-testimonial-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text" id="company-testimonial-title" name="company_testimonial_title"
                        value="<?php echo esc_attr( $testimonial_title ); ?>"
@@ -395,9 +395,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 foreach ( $testimonials as $key => $testimonial ) {
                     $testimonial_id = 'company-testimonial-' . esc_attr( $key );
                     ?>
-                    <div class="accordion-item company-testimonial-item">
-                        <div class="accordion-header" id="company-testimonial-heading-<?php echo esc_attr( $key ); ?>">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item company-testimonial-item">
+                        <div class="jbs-accordion-header" id="company-testimonial-heading-<?php echo esc_attr( $key ); ?>">
+                            <button class="jbs-accordion-button collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#<?php echo esc_attr( $testimonial_id ); ?>"
                                     aria-expanded="false"
@@ -405,70 +405,70 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                 <?php echo esc_html( $testimonial['author_name'] ?? esc_html__( 'Testimonial', 'jobus' ) ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $testimonial_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $testimonial_id ); ?>" class="jbs-accordion-collapse collapse"
                              aria-labelledby="company-testimonial-heading-<?php echo esc_attr( $key ); ?>"
                              data-jbs-parent="#company-testimonial-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name">
                                                 <?php esc_html_e( 'Author Name', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][author_name]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name" class="form-control"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name" class="jbs-form-control"
                                                    value="<?php echo esc_attr( $testimonial['author_name'] ?? '' ); ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-location">
                                                 <?php esc_html_e( 'Location', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][location]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-location" class="form-control"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-location" class="jbs-form-control"
                                                    value="<?php echo esc_attr( $testimonial['location'] ?? '' ); ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content">
                                                 <?php esc_html_e( 'Review', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <textarea name="company_testimonials[<?php echo esc_attr( $key ); ?>][review_content]"
-                                                      id="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content" class="form-control"
+                                                      id="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content" class="jbs-form-control"
                                                       rows="3"><?php echo esc_textarea( $testimonial['review_content'] ?? '' ); ?></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-rating">
                                                 <?php esc_html_e( 'Rating', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="company_testimonials[<?php echo esc_attr( $key ); ?>][rating]"
-                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="form-control">
+                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-rating" class="jbs-form-control">
                                                 <option value="">--</option>
                                                 <?php for ( $i = 1; $i <= 5; $i ++ ) : ?>
                                                     <option value="<?php echo esc_attr( $i ); ?>" <?php selected( (int) ( $testimonial['rating'] ?? 0 ), $i ); ?>><?php echo esc_html( $i ); ?></option>
@@ -479,20 +479,20 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-image">
                                                 <?php esc_html_e( 'Author Image', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <!-- Hidden field for image ID -->
                                             <input type="hidden" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-id"
                                                    value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
                                             <!-- Upload button for WP media -->
-                                            <button type="button" class="btn btn-secondary testimonial-image-upload-btn"
+                                            <button type="button" class="jbs-btn jbs-btn-secondary testimonial-image-upload-btn"
                                                     data-index="<?php echo esc_attr( $key ); ?>">
                                                 <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
                                             </button>
@@ -510,7 +510,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-company-testimonial jbs-mt-2 jbs-mb-2"
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-company-testimonial jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>
@@ -522,13 +522,13 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 }
                 ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-company-testimonial">
+            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-company-testimonial">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Testimonial', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="button-group d-inline-flex align-items-center mt-30">
-            <button type="submit" class="dash-btn-two tran3s me-3 jbs-rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+        <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
 
     </form>

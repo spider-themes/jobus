@@ -44,7 +44,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
             $designation = get_post_meta( $candidate_id, 'jobus_candidate_designation', true );
             $skills = get_the_terms( $candidate_id, 'jobus_candidate_skill' );
 			?>
-			<div class="candidate-profile-card list-layout border-0 mb-25">
+			<div class="candidate-profile-card list-layout jbs-border-0 jbs-mb-25">
 				<div class="jbs-d-flex">
 					<div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
                         <a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="rounded-circle">
@@ -55,7 +55,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 						<div class="jbs-row gx-1 jbs-align-items-center">
 							<div class="jbs-col-lg-4">
 								<div class="jbs-position-relative">
-									<h4 class="candidate-name mb-0">
+									<h4 class="candidate-name jbs-mb-0">
                                         <a href="<?php echo esc_url(get_the_permalink($candidate_id)) ?>" class="tran3s">
                                             <?php echo esc_html(get_the_title($candidate_id)) ?>
                                         </a>
@@ -71,7 +71,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                         $displayed_skills = array_slice( $skills, 0, $max_skills );
                                         echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
                                         foreach ( $displayed_skills as $skill ) {
-                                            echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+                                            echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                         }
 
                                         // Display the count of remaining skills
@@ -83,7 +83,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                         if ( ! empty( $skills ) ) {
                                             echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
                                             foreach ( $skills as $skill ) {
-                                                echo '<li class="text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+                                                echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                             }
                                             echo '</ul>';
                                         }
@@ -115,7 +115,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                 <?php
                             }
                             ?>
-                            <div class="jbs-col-lg-2 xs-mt-10">     
+                            <div class="jbs-col-lg-2 jbs-xs-mt-10">     
                                 <div class="action-button">
                                     <a href="javascript:void(0)"
                                        class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
@@ -141,12 +141,12 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 		}
 	} else {
         ?>
-        <div class="jbs-bg-white card-box border-20 text-center p-5">
+        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
-                <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
+                <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php esc_html_e( 'No saved candidates', 'jobus' ); ?></h4>
-                <p class="text-muted"><?php esc_html_e( 'You haven\'t saved any candidates yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="btn jbs-btn-sm btn-primary" target="_blank">
+                <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t saved any candidates yet.', 'jobus' ); ?></p>
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
                     <?php esc_html_e( 'Browse Candidates', 'jobus' ); ?>
                 </a>
             </div>

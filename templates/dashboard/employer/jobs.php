@@ -37,12 +37,12 @@ if ( ! empty( $dashboard_page ) ) {
 
 <div class="jbs-position-relative">
 
-    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between mb-40 lg-mb-30">
-        <h2 class="main-title m0"><?php esc_html_e( 'My Jobs', 'jobus' ); ?></h2>
+    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
+        <h2 class="main-title jbs-m-0"><?php esc_html_e( 'My Jobs', 'jobus' ); ?></h2>
     </div>
 
     <div class="jbs-bg-white card-box border-20">
-        <div class="table-responsive">
+        <div class="jbs-table-responsive">
             <table class="table job-alert-table">
                 <thead>
                     <tr>
@@ -53,7 +53,7 @@ if ( ! empty( $dashboard_page ) ) {
                         <th scope="col"><?php esc_html_e( 'Action', 'jobus' ); ?></th>
                     </tr>
                 </thead>
-                <tbody class="border-0">
+                <tbody class="jbs-border-0">
                 <?php
                 if ( ! empty( $jobs ) ) {
                     foreach ( $jobs as $job ) {
@@ -78,14 +78,14 @@ if ( ! empty( $dashboard_page ) ) {
                         ?>
                         <tr class="<?php echo esc_attr( $status ); ?>">
                             <td>
-                                <div class="job-name fw-500"><?php echo esc_html( get_the_title( $job_id ) ); ?></div>
+                                <div class="job-name jbs-fw-500"><?php echo esc_html( get_the_title( $job_id ) ); ?></div>
                                 <div class="info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
                             <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
-                                <div class="action-dots jbs-dropdown float-end">
+                                <div class="action-dots jbs-dropdown jbs-float-end">
                                     <button class="action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
                                         <span></span>
                                     </button>

@@ -314,13 +314,13 @@
                     const accordionId = `education-${i}`;
                     const $el = $(this);
 
-                    $el.find('.accordion-header').attr('id', `heading-${i}`);
-                    $el.find('.accordion-button')
+                    $el.find('.jbs-accordion-header').attr('id', `heading-${i}`);
+                    $el.find('.jbs-accordion-button')
                         .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Education #${i + 1}`);
 
-                    $el.find('.accordion-collapse')
+                    $el.find('.jbs-accordion-collapse')
                         .attr('id', accordionId)
                         .attr('aria-labelledby', `heading-${i}`);
 
@@ -472,13 +472,13 @@
                     const accordionId = `experience-${i}`;
                     const $el = $(this);
 
-                    $el.find('.accordion-header').attr('id', `headingExp-${i}`);
-                    $el.find('.accordion-button')
+                    $el.find('.jbs-accordion-header').attr('id', `headingExp-${i}`);
+                    $el.find('.jbs-accordion-button')
                         .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Experience #${i + 1}`);
 
-                    $el.find('.accordion-collapse')
+                    $el.find('.jbs-accordion-collapse')
                         .attr('id', accordionId)
                         .attr('aria-labelledby', `headingExp-${i}`);
 

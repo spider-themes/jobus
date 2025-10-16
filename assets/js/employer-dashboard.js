@@ -64,20 +64,21 @@
                 e.preventDefault();
                 const testimonialId = `company-testimonial-${index}`;
                 const newItem = $(`
-                    <div class="accordion-item company-testimonial-item">
-                        <div class="accordion-header" id="company-testimonial-heading-${index}">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item company-testimonial-item">
+                        <div class="jbs-accordion-header" id="company-testimonial-heading-${index}">
+                            <button class="jbs-accordion-button collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#${testimonialId}"
+                                    data-jbs-parent="#company-testimonial-repeater"
                                     aria-expanded="false"
                                     aria-controls="${testimonialId}">
                                 Testimonial #${index + 1}
                             </button>
                         </div>
-                        <div id="${testimonialId}" class="accordion-collapse collapse"
+                        <div id="${testimonialId}" class="jbs-accordion-collapse collapse"
                              aria-labelledby="company-testimonial-heading-${index}"
                              data-jbs-parent="#company-testimonial-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
@@ -176,12 +177,12 @@
                 repeater.children('.company-testimonial-item').each(function (i, el) {
                     const testimonialId = `company-testimonial-${i}`;
                     const $el = $(el);
-                    $el.find('.accordion-header').attr('id', `company-testimonial-heading-${i}`);
-                    $el.find('.accordion-button')
+                    $el.find('.jbs-accordion-header').attr('id', `company-testimonial-heading-${i}`);
+                    $el.find('.jbs-accordion-button')
                         .attr('data-jbs-target', `#${testimonialId}`)
                         .attr('aria-controls', testimonialId)
                         .text(`Testimonial #${i + 1}`);
-                    $el.find('.accordion-collapse')
+                    $el.find('.jbs-accordion-collapse')
                         .attr('id', testimonialId)
                         .attr('aria-labelledby', `company-testimonial-heading-${i}`);
                     $el.find('input[name^="company_testimonials"]').each(function() {

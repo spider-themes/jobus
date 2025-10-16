@@ -32,7 +32,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
                         $tab_count         = $index + 1;
                         $is_collapsed      = $tab_count == 1 ? '' : ' jbs-collapsed';
                         $is_collapsed_show = $tab_count == 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
-                        $area_expanded     = $index == 1 ? 'true' : 'false';
+                        $area_expanded     = $tab_count == 1 ? 'true' : 'false';
 
                         $widget_name   = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';

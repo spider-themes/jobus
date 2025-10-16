@@ -159,20 +159,21 @@
 
                 const accordionId = `social-link-${index}`;
                 const newItem = $(`
-                    <div class="accordion-item social-link-item">
-                        <div class="accordion-header" id="heading-${index}">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item social-link-item">
+                        <div class="jbs-accordion-header" id="heading-${index}">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#${accordionId}"
+                                    data-jbs-parent="#social-links-repeater"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Social Network #${index + 1}
                             </button>
                         </div>
-                        <div id="${accordionId}" class="accordion-collapse collapse"
+                        <div id="${accordionId}" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#social-links-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
@@ -223,13 +224,13 @@
                     const accordionId = `social-link-${i}`;
                     const $el = $(el);
 
-                    $el.find('.accordion-header').attr('id', `heading-${i}`);
-                    $el.find('.accordion-button')
+                    $el.find('.jbs-accordion-header').attr('id', `heading-${i}`);
+                    $el.find('.jbs-accordion-button')
                         .attr('data-jbs-target', `#${accordionId}`)
                         .attr('aria-controls', accordionId)
                         .text(`Social Network #${i + 1}`);
 
-                    $el.find('.accordion-collapse')
+                    $el.find('.jbs-accordion-collapse')
                         .attr('id', accordionId)
                         .attr('aria-labelledby', `heading-${i}`);
 

@@ -47,7 +47,7 @@ $post_type = jobus_get_sanitized_query_param('post_type');
                         $tab_count = $index + 1;
                         $is_collapsed = $tab_count == 1 ? '' : ' jbs-collapsed';
                         $is_collapsed_show = $tab_count == 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
-                        $area_expanded = $index == 1 ? 'true' : 'false';
+                        $area_expanded = $tab_count == 1 ? 'true' : 'false';
 
                         $widget_name = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';
@@ -60,21 +60,21 @@ $post_type = jobus_get_sanitized_query_param('post_type');
                         $candidate_specifications = $candidate_specifications[$widget_name] ?? '';
                         $widget_param = jobus_get_sanitized_query_param($widget_name, '', 'jobus_search_filter');
 
-                        if ($post_type == 'jobus_candidate') {
-                            if (!empty($widget_param)) {
+                        if ( $post_type == 'jobus_candidate' ) {
+                            if ( ! empty ( $widget_param ) ) {
                                 $is_collapsed_show = 'jbs-collapse jbs-show';
-                                $area_expanded = 'true';
-                                $is_collapsed = '';
+                                $area_expanded     = 'true';
+                                $is_collapsed      = '';
                             } else {
                                 $is_collapsed_show = 'jbs-collapse';
-                                $area_expanded = 'false';
-                                $is_collapsed = ' jbs-collapsed';
+                                $area_expanded     = 'false';
+                                $is_collapsed      = ' jbs-collapsed';
                             }
                         }
                         ?>
 
                         <div class="filter-block bottom-line pb-25">
-                            <a class="filter-title fw-500 jbs-text-dark <?php echo esc_attr($is_collapsed) ?>"
+                            <a class="filter-title jbs-fw-500 jbs-text-dark <?php echo esc_attr($is_collapsed) ?>"
                                 data-jbs-toggle="collapse" href="#collapse-<?php echo esc_attr($widget_name) ?>"
                                 aria-expanded="<?php echo esc_attr($area_expanded) ?>">
                                 <?php echo esc_html($widget_title); ?>

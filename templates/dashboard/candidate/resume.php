@@ -158,7 +158,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                        placeholder="<?php esc_attr_e( 'Education', 'jobus' ); ?>">
             </div>
 
-            <div class="accordion dash-accordion-one" id="education-repeater">
+            <div class="jbs-accordion dash-accordion-one" id="education-repeater">
 				<?php
 				$education = $education_data['education'];
 				if ( empty( $education ) ) {
@@ -172,20 +172,21 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				foreach ( $education as $key => $value ) {
 					$accordion_id = 'collapseOne-' . esc_attr( $key );
 					?>
-                    <div class="accordion-item education-item">
-                        <div class="accordion-header" id="headingOne-<?php echo esc_attr( $key ); ?>">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item education-item">
+                        <div class="jbs-accordion-header" id="headingOne-<?php echo esc_attr( $key ); ?>">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-parent="#education-repeater"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
 								<?php echo esc_html( $value['title'] ?? esc_html__( 'Education', 'jobus' ) ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="headingOne-<?php echo esc_attr( $key ); ?>"
                              data-jbs-parent="#education-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
@@ -284,7 +285,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                        placeholder="<?php esc_attr_e( 'Work Experience', 'jobus' ); ?>">
             </div>
 
-            <div class="accordion dash-accordion-one" id="experience-repeater">
+            <div class="jbs-accordion dash-accordion-one" id="experience-repeater">
 				<?php
 				$experience = $experience_data['experience'];
 				if ( empty( $experience ) ) {
@@ -299,20 +300,21 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				foreach ( $experience as $key => $value ) {
 					$accordion_id = 'experience-' . esc_attr( $key );
 					?>
-                    <div class="accordion-item experience-item">
-                        <div class="accordion-header" id="headingExp-<?php echo esc_attr( $key ); ?>">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item experience-item">
+                        <div class="jbs-accordion-header" id="headingExp-<?php echo esc_attr( $key ); ?>">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#<?php echo esc_attr( $accordion_id ); ?>"
+                                    data-jbs-parent="#experience-repeater"
                                     aria-expanded="false"
                                     aria-controls="<?php echo esc_attr( $accordion_id ); ?>">
 								<?php echo esc_html( $value['title'] ?? esc_html__( 'Experience', 'jobus' ) ); ?>
                             </button>
                         </div>
-                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="accordion-collapse collapse"
+                        <div id="<?php echo esc_attr( $accordion_id ); ?>" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="headingExp-<?php echo esc_attr( $key ); ?>"
                              data-jbs-parent="#experience-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">

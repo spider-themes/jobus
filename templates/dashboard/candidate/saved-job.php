@@ -11,7 +11,7 @@ $is_dashboard = $args['is_dashboard'] ?? true;
 $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no limit in full view
 
 ?>
-<div class="wrapper">
+<div class="jbs-position-relative">
     <?php
     if ( ! $is_dashboard ) { ?>
         <h2 class="main-title"><?php esc_html_e( 'Saved Jobs', 'jobus' ); ?></h2>
@@ -35,7 +35,7 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 			$location = get_the_terms( $job_id, 'jobus_job_location' );
 			$category = get_the_terms( $job_id, 'jobus_job_cat' );
 			?>
-            <div class="job-list-one style-two jbs-position-relative mb-20">
+            <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
                 <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                     <div class="jbs-col-lg-4">
                         <div class="job-title jbs-d-flex jbs-align-items-center">
@@ -67,10 +67,10 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 						}
 						?>
                     </div>
-                    <div class="jbs-col-lg-3 xs-mt-10">
+                    <div class="jbs-col-lg-3 jbs-xs-mt-10">
                         <span class="jbs-fw-500"><?php echo esc_html( get_the_date( get_option( 'date_format' ), $job_id ) ); ?></span>
                     </div>
-                    <div class="jbs-col-lg-2 xs-mt-10">
+                    <div class="jbs-col-lg-2 jbs-xs-mt-10">
                         <div class="action-button">
                             <a href="javascript:void(0)"
                                class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
@@ -93,7 +93,15 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 			<?php
 		}
 	} else {
-		echo '<div class="no-jobs-found">' . esc_html__( 'No saved jobs found.', 'jobus' ) . '</div>';
+		?>
+        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
+            <div class="no-jobs-found">
+                <i class="bi bi-bookmark-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
+                <h4><?php esc_html_e( 'No Saved Jobs', 'jobus' ); ?></h4>
+                <p class="jbs-text-muted"><?php esc_html__( 'You haven\'t saved any jobs yet.', 'jobus' ); ?></p>
+            </div>
+        </div>
+		<?php
 	}
 	?>
 </div>
