@@ -142,7 +142,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 	} else {
 
         ?>
-        <div class="bg-white card-box border-20 text-center p-5">
+        <div class="jbs-bg-white card-box border-20 text-center p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No saved candidates', 'jobus' ); ?></h4>

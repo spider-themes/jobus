@@ -65,7 +65,7 @@ $pagination_next  = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBU
         <div class="jbs-row">
             <div class="jbs-col-lg-12">
                 <div class="job-post-item-wrapper">
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center mb-20">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-20">
                         <?php
                         // Display the total number of candidates found
                         include( 'loop/result-count.php' );

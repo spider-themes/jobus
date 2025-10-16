@@ -41,7 +41,7 @@
                 addBtn.addEventListener('click', function() {
                     let idx = repeater.querySelectorAll('.specification-item').length;
                     let div = document.createElement('div');
-                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
+                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-jbs-gap-2';
                     div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="jbs-form-control jbs-me-2" placeholder="Title" style="min-width:180px">' +
                         '<input type="text" name="candidate_specifications['+idx+'][value]" class="jbs-form-control jbs-me-2" placeholder="Value" style="min-width:180px">' +
                         '<button type="button" class="jbs-btn jbs-btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';
@@ -227,7 +227,7 @@
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
@@ -243,7 +243,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_title">Title</label>
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_academy">Academy</label>
@@ -275,7 +275,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_description">Description</label>
@@ -292,7 +292,7 @@
                                     </div>
                                 </div>
 
-                                <div class="text-end">
+                                <div class="jbs-text-end">
                                     <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-education mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
@@ -375,7 +375,7 @@
                              aria-labelledby="headingExp-${index}"
                              data-jbs-parent="#experience-repeater">
                             <div class="accordion-body">
-                                <div class="row">
+                                <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_sl_num">Serial Number</label>
@@ -391,7 +391,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_title">Title</label>
@@ -407,14 +407,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="row">
+                                        <div class="jbs-row">
                                             <div class="jbs-col-sm-6">
                                                 <div class="dash-input-wrapper mb-30">
                                                     <input type="date" class="jbs-form-control"
@@ -433,7 +433,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-30 md-mb-10">
                                             <label for="experience_${index}_description">Description</label>
@@ -450,7 +450,7 @@
                                     </div>
                                 </div>
 
-                                <div class="text-end">
+                                <div class="jbs-text-end">
                                     <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-experience mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
@@ -621,7 +621,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create buttons container if it doesn't exist
             if (!buttonsContainer) {
                 buttonsContainer = document.createElement('div');
-                buttonsContainer.className = 'portfolio-buttons-container mt-3 d-flex gap-2';
+                buttonsContainer.className = 'portfolio-buttons-container mt-3 d-flex jbs-gap-2';
                 addButton.parentNode.insertBefore(buttonsContainer, addButton.nextSibling);
             }
 

@@ -30,7 +30,7 @@ $applications = new \WP_Query( $args );
     <?php
     if ( $applications->have_posts() ) :
         ?>
-        <div class="bg-white card-box border-20">
+        <div class="jbs-bg-white card-box border-20">
             <div class="table-responsive">
                 <table class="table job-alert-table">
                     <thead>
@@ -68,7 +68,7 @@ $applications = new \WP_Query( $args );
                                         }
                                         $company_name = get_the_title( $company_id );
                                         ?>
-                                        <a href="<?php echo esc_url( $company_url ); ?>" class="company-link jbs-d-flex jbs-align-items-center gap-2">
+                                        <a href="<?php echo esc_url( $company_url ); ?>" class="company-link jbs-d-flex jbs-align-items-center jbs-gap-2">
                                             <?php
                                             if ( has_post_thumbnail( $company_id ) ) {
                                                 echo get_the_post_thumbnail( $company_id, [ 48, 48 ] );
@@ -130,7 +130,7 @@ $applications = new \WP_Query( $args );
         <?php
     else :
         ?>
-        <div class="bg-white card-box border-20 jbs-text-center p-5">
+        <div class="jbs-bg-white card-box border-20 jbs-text-center p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>

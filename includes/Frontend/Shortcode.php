@@ -122,7 +122,7 @@ class Shortcode {
 		ob_start();
 		?>
         <div class="login-form-wrapper section-padding">
-            <div class="login-form-header text-center">
+            <div class="login-form-header jbs-text-center">
                 <h2 class="form-title"><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ); ?></h2>
                 <p class="form-subtitle">
 					<?php esc_html_e( 'Still don\'t have an account?', 'jobus' ); ?>
@@ -155,7 +155,7 @@ class Shortcode {
                             </div>
                         </div>
                         <div class="jbs-col-12">
-                            <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                            <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                 <div>
                                     <input name="rememberme" type="checkbox" id="rememberme" value="forever">
                                     <label for="rememberme"><?php echo esc_html( $atts['remember_label'] ); ?></label>
@@ -166,7 +166,7 @@ class Shortcode {
                             </div>
                         </div>
                         <div class="jbs-col-12">
-                            <button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven fw-500 tran3s d-block mt-20">
+                            <button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20">
 								<?php echo esc_html( $atts['submit_label'] ); ?>
                             </button>
                             <input type="hidden" name="redirect_to" value="<?php echo esc_url( $redirect_url ); ?>">

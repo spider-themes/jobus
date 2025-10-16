@@ -78,7 +78,7 @@
                              aria-labelledby="company-testimonial-heading-${index}"
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-author-name">Author Name</label>
@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-location">Location</label>
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-review-content">Review</label>
@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-rating">Rating</label>
@@ -137,7 +137,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-${index}-image">Author Image</label>
@@ -157,7 +157,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-end">
+                                <div class="jbs-text-end">
                                     <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-company-testimonial mt-2 mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>

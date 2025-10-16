@@ -196,7 +196,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                             $job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
                             $job_location = get_the_terms( $job_id, 'jobus_job_location' );
                             ?>
-                            <div class="job-item-list d-flex align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
+                            <div class="job-item-list jbs-d-flex jbs-align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
                                 <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                                 <div class="job-title">
                                     <h6 class="mb-5">
