@@ -118,7 +118,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                             <div class="jbs-col-lg-2 xs-mt-10">     
                                 <div class="action-button">
                                     <a href="javascript:void(0)"
-                                       class="save-btn text-center rounded-circle tran3s jobus-dashboard-remove-saved-post"
+                                       class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
                                        data-post_id="<?php echo esc_attr( $candidate_id ); ?>"
                                        data-post_type="jobus_candidate"
                                        data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_employer_saved_candidate' ) ); ?>"
@@ -127,7 +127,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                     </a>
                                     <a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>"
                                        target="_blank"
-                                       class="jobus-dashboard-post-view-more text-center rounded-circle tran3s"
+                                       class="jobus-dashboard-post-view-more jbs-text-center jbs-rounded-circle tran3s"
                                        title="<?php esc_attr_e( 'View Job', 'jobus' ); ?>">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
@@ -140,20 +140,18 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 			<?php
 		}
 	} else {
-
         ?>
         <div class="jbs-bg-white card-box border-20 text-center p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No saved candidates', 'jobus' ); ?></h4>
                 <p class="text-muted"><?php esc_html_e( 'You haven\'t saved any candidates yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="btn btn-sm btn-primary" target="_blank">
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="btn jbs-btn-sm btn-primary" target="_blank">
                     <?php esc_html_e( 'Browse Candidates', 'jobus' ); ?>
                 </a>
             </div>
         </div>
         <?php
 	}
-
 	?>
 </div>

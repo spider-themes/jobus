@@ -158,7 +158,7 @@ $avatar_url = $description_data['avatar_url'];
                                     </div>
                                 </div>
 
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_url">

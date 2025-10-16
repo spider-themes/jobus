@@ -68,10 +68,10 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="jbs-bg-white card-box border-20">
-            <div class="user-avatar-setting d-flex align-items-center mb-30" id="employer-profile">
+            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
-                <button type="button" class="upload-btn position-relative tran3s ms-4 me-3" id="company-profile-picture-upload">
+                <button type="button" class="upload-btn position-relative tran3s jbs-ms-4 jbs-me-3" id="company-profile-picture-upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                 </button>
                 <button type="button" name="company_delete_profile_picture" class="delete-btn tran3s" id="company-delete-profile-picture">
@@ -282,7 +282,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                              aria-labelledby="heading-<?php echo esc_attr( $index ); ?>"
                              data-jbs-parent="#social-links-repeater">
                             <div class="accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_icon">
@@ -303,7 +303,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_<?php echo esc_attr( $index ); ?>_url">
@@ -320,7 +320,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-social-link mt-2 mb-2"
+                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-social-link jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>
@@ -409,7 +409,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                              aria-labelledby="company-testimonial-heading-<?php echo esc_attr( $key ); ?>"
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name">
@@ -425,7 +425,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-location">
@@ -441,7 +441,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-review-content">
@@ -457,7 +457,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-rating">
@@ -477,7 +477,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="company-testimonial-<?php echo esc_attr( $key ); ?>-image">
@@ -497,7 +497,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                                 <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
                                             </button>
                                             <!-- Preview area (always present) -->
-                                            <div class="testimonial-image-preview mt-2 mb-2" id="testimonial-image-preview-<?php echo esc_attr( $key ); ?>">
+                                            <div class="testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-<?php echo esc_attr( $key ); ?>">
                                                 <?php
                                                 $image_id  = $testimonial['image'] ?? '';
                                                 $image_url = $image_id ? wp_get_attachment_url( $image_id ) : '';
@@ -510,7 +510,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-company-testimonial mt-2 mb-2"
+                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-company-testimonial jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>

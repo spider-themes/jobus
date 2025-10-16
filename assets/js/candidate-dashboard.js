@@ -105,7 +105,7 @@
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#social-links-repeater">
                             <div class="jbs-accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_${index}_icon">Icon</label>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
 
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="social_${index}_url">URL</label>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class="jbs-text-end">
-                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link jbs-mt-2 jbs-mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>
@@ -227,7 +227,7 @@
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#education-repeater">
                             <div class="accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
@@ -243,7 +243,7 @@
                                     </div>
                                 </div>
 
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_title">Title</label>
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
 
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_academy">Academy</label>
@@ -275,7 +275,7 @@
                                     </div>
                                 </div>
 
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper mb-10">
                                             <label for="education_${index}_description">Description</label>
@@ -293,7 +293,7 @@
                                 </div>
 
                                 <div class="jbs-text-end">
-                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-education mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-education jbs-mt-2 jbs-mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>
@@ -451,7 +451,7 @@
                                 </div>
 
                                 <div class="jbs-text-end">
-                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-experience mt-2 mb-2" title="Remove Item">
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-experience jbs-mt-2 jbs-mb-2" title="Remove Item">
                                         <i class="bi bi-x"></i> Remove
                                     </button>
                                 </div>

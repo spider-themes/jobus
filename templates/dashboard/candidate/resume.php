@@ -258,7 +258,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                     </div>
                                 </div>
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn btn-danger btn-sm remove-education mt-2 mb-2"
+                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-education jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>

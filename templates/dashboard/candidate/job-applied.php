@@ -135,7 +135,7 @@ $applications = new \WP_Query( $args );
                 <i class="bi bi-clipboard-x fs-1 mb-3 text-muted"></i>
                 <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>
                 <p class="text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn btn-sm btn-primary" target="_blank">
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="btn jbs-btn-sm btn-primary" target="_blank">
                     <?php esc_html_e( 'Browse Jobs', 'jobus' ); ?>
                 </a>
             </div>

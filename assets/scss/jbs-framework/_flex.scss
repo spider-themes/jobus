@@ -2,17 +2,7 @@
 // Flexbox Utilities
 // ============================================
 
-.jbs-d-flex {
-    display: flex !important;
-}
-
-.jbs-d-sm-flex {
-    display: flex !important;
-}
-.jbs-d-md-flex {
-    display: flex !important;
-}
-
+// Flexbox
 .jbs-flex-wrap {
     flex-wrap: wrap !important;
 }
@@ -34,6 +24,12 @@
     align-items: center !important;
 }
 
+@media (min-width: 576px) {
+    .jbs-align-items-sm-center {
+        align-items: center !important;
+    }
+}
+
 // Justify Content
 .jbs-justify-content-center {
     justify-content: center !important;
@@ -51,7 +47,21 @@
     justify-content: flex-end !important;
 }
 
+@media (min-width: 1200px) {
+    .jbs-justify-content-xl-end {
+        justify-content: flex-end !important;
+    }
+}
+
 // Flex Order
+.jbs-order-md-1 {
+    order: 1 !important;
+}
+
+.jbs-order-md-2 {
+    order: 2 !important;
+}
+
 .jbs-order-xl-0 {
     order: 0 !important;
 }
@@ -71,45 +81,28 @@
 .jbs-order-xl-4 {
     order: 4 !important;
 }
+
 .jbs-order-xl-first {
     order: -1 !important;
 }
+
 .jbs-order-xl-last {
     order: 6 !important;
 }
+
 @media (min-width: 576px) {
     .jbs-order-sm-last {
         order: 6 !important;
     }
 }
 
-// Gap
+// Gap (legacy, prefer .jbs-gap-* utilities)
 .jbs-gx-1 {
     gap: 0.25rem !important;
 }
 
-// Responsive Flexbox
-@media (min-width: 576px) {
-    .jbs-align-items-sm-center {
-        align-items: center !important;
-    }
-}
-
-@media (min-width: 1200px) {
-    .jbs-justify-content-xl-end {
-        justify-content: flex-end !important;
-    }
-}
-
+// Column Utility (if needed)
 .jbs-col-md-6 {
     flex: 0 0 50%;
     max-width: 50%;
-}
-
-.jbs-order-md-1 {
-    order: 1 !important;
-}
-
-.jbs-order-md-2 {
-    order: 2 !important;
 }
