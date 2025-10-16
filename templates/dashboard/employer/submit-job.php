@@ -72,7 +72,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
         <input type="hidden" name="employer_submit_job_form" value="1">
         <input type="hidden" name="job_id" value="<?php echo esc_attr( $job_id ); ?>">
 
-        <div class="bg-white card-box border-20">
+        <div class="jbs-bg-white card-box border-20">
             <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
 
             <!-- Job Title & Content -->

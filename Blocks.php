@@ -89,7 +89,7 @@ class Blocks {
 		$nonce = wp_create_nonce( 'jobus_register_form_nonce' );
 
 		if ( is_user_logged_in() ) {
-			echo '<p class="text-center mt-10">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</p>';
+			echo '<p class="jbs-text-center jbs-mt-10">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</p>';
 		} else {
 			include __DIR__ . '/src/register-form/register.php';
 			echo '<input type="hidden" name="jobus_nonce" value="' . esc_attr( $nonce ) . '">';

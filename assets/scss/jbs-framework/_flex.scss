@@ -100,3 +100,16 @@
         justify-content: flex-end !important;
     }
 }
+
+.jbs-col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.jbs-order-md-1 {
+    order: 1 !important;
+}
+
+.jbs-order-md-2 {
+    order: 2 !important;
+}

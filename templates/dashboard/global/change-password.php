@@ -38,7 +38,7 @@ if ( $error_message ) {
         <?php esc_html_e( 'Change Password', 'jobus' ); ?>
     </h2>
 
-    <div class="bg-white card-box border-20">
+    <div class="jbs-bg-white card-box border-20">
         <h4 class="dash-title-three"><?php esc_html_e( 'Edit & Update', 'jobus' ); ?></h4>
 
         <?php if ( ! empty( $success_message ) ) : ?>
@@ -96,7 +96,7 @@ if ( $error_message ) {
                     </div>
                 </div>
                 <div class="jbs-col-12">
-                    <div class="button-group jbs-d-inline-flex jbs-align-items-center mt-30">
+                    <div class="button-group jbs-d-inline-flex jbs-align-items-center">
                         <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Update Password', 'jobus' ); ?></button>
                     </div>
                 </div>

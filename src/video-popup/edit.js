@@ -25,7 +25,7 @@ function Edit({ attributes, setAttributes }) {
                     <div {...blockProps}>
 
                         <a href={attributes.videoUrl}
-                           className="fancybox rounded-circle video-icon tran3s text-center"
+                           className="fancybox rounded-circle video-icon tran3s jbs-text-center"
                            data-fancybox="" // Add your custom attribute here
                            style={{backgroundColor: attributes.icon_bg_color}}>
                             <i className="bi bi-play-fill" style={{color: attributes.icon_color}}></i>

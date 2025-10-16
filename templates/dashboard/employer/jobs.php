@@ -41,7 +41,7 @@ if ( ! empty( $dashboard_page ) ) {
         <h2 class="main-title m0"><?php esc_html_e( 'My Jobs', 'jobus' ); ?></h2>
     </div>
 
-    <div class="bg-white card-box border-20">
+    <div class="jbs-bg-white card-box border-20">
         <div class="table-responsive">
             <table class="table job-alert-table">
                 <thead>

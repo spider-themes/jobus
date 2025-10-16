@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<select class="nice-select bg-white" name="<?php echo esc_attr( $widget_name ); ?>[]">
+<select class="nice-select jbs-bg-white" name="<?php echo esc_attr( $widget_name ); ?>[]">
 	<?php
 	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
 		foreach ( $specifications_data as $key => $value ) {
