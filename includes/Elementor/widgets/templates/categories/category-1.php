@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ( $categories as $index => $category ) {
 				$meta = get_term_meta( $category->term_id, 'jobus_taxonomy_cat', true );
 				?>
-                <div class="card-style-one jbs-text-center mt-20 wow fadeInUp">
+                <div class="card-style-one jbs-text-center jbs-mt-20 wow fadeInUp">
                     <a href="<?php echo esc_url( get_term_link( $category ) ) ?>"
                        class="bg wrapper">
 						<?php
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						?>
-                        <div class="title fw-500"><?php echo esc_html( $category->name ) ?></div>
+                        <div class="title jbs-fw-500"><?php echo esc_html( $category->name ) ?></div>
                         <div class="total-job">
 							<?php
 							/* translators: 1: Job, 2: Jobs */

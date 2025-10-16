@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
                             <?php
                         }
                         ?>
-                        <div class="title fw-500">
+                        <div class="title jbs-fw-500">
                             <?php echo esc_html($category->name) ?>
                         </div>
                     </a>

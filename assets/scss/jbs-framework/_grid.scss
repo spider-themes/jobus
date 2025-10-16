@@ -18,6 +18,10 @@
   --bs-gutter-x: 0.5rem;
 }
 
+.jbs-gy-4 {
+  --bs-gutter-y: 1.5rem;
+}
+
 // Row Children
 .jbs-row > * {
   flex-shrink: 0;
