@@ -9,7 +9,9 @@
 .jbs-me-auto { margin-right: auto !important; }
 .jbs-ms-auto { margin-left: auto !important; }
 .jbs-mt-auto { margin-top: auto !important; }
-
+.jbs-ml-0{
+    margin-left: 0 !important;
+}
 // Margin Start (Left)
 .jbs-ms-1 { margin-left: 0.25rem !important; }
 .jbs-ms-2 { margin-left: 0.5rem !important; }
@@ -67,6 +69,9 @@
 .jbs-mb-100 { margin-bottom: 6.25rem !important; }
 
 // Padding Top
+.jbs-pl-0{
+    padding-left: 0 !important;
+}
 .jbs-pt-2 { padding-top: 0.5rem !important; }
 .jbs-pt-15 { padding-top: 0.9375rem !important; }
 .jbs-pt-25 { padding-top: 1.5625rem !important; }

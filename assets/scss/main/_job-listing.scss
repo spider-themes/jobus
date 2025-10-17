@@ -480,24 +480,17 @@
     }
 }
 
-.filter-btn {
-    font-size: 15px;
-    color: $color-one;
-    width: 86px;
-    height: 32px;
-    border: 2px solid $color-one;
-    border-radius: 6px;
-
-    i {
-        display: inline-block;
-        font-size: 1.08em;
-        vertical-align: -2px;
-        margin-right: 2px;
-    }
-
+.jbs-filter-btn {
+    font-size: 15px !important;
+    color: #244034 !important;
+    width: 86px !important;
+    height: 32px !important;
+    border: 2px solid #244034 !important;
+    border-radius: 6px !important;
     &:hover {
-        background: $color-one;
-        color: #fff;
+        background: #31795A !important;
+        border-color: #31795A !important;
+        color: #fff !important;
     }
 }
 

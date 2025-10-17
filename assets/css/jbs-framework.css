@@ -968,6 +968,10 @@
   border-color: #bd2130;
 }
 
+.jbs-pointer {
+  cursor: pointer !important;
+}
+
 .jbs-m-auto {
   margin: auto !important;
 }
@@ -982,6 +986,10 @@
 
 .jbs-mt-auto {
   margin-top: auto !important;
+}
+
+.jbs-ml-0 {
+  margin-left: 0 !important;
 }
 
 .jbs-ms-1 {
@@ -1174,6 +1182,10 @@
 
 .jbs-mb-100 {
   margin-bottom: 6.25rem !important;
+}
+
+.jbs-pl-0 {
+  padding-left: 0 !important;
 }
 
 .jbs-pt-2 {

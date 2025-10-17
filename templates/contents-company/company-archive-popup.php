@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                         <div class="jbs-d-md-flex jbs-align-items-center">
 
-                            <button type="button" class="filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal" data-target="#filterPopUp">
+                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal" data-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
                                 <?php esc_html_e('Filter', 'jobus'); ?>
                             </button>

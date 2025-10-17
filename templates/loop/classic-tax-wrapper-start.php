@@ -55,8 +55,8 @@ if ( $taxonomy == 'jobus_job_tag' ) {
 ?>
 
 <div class="filter-block bottom-line jbs-pb-25">
-    <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ); ?>" data-jbs-toggle="collapse"
-       href="#collapse-<?php echo esc_attr( $taxonomy ) ?>" role="button" aria-expanded="<?php echo esc_attr( $area_expanded ); ?>">
+    <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer <?php echo esc_attr( $is_collapsed ); ?>" data-jbs-toggle="collapse"
+       data-jbs-target="#collapse-<?php echo esc_attr( $taxonomy ) ?>" role="button" aria-expanded="<?php echo esc_attr( $area_expanded ); ?>">
 		<?php echo esc_html( $taxonomy_text ); ?>
     </a>
     <div class="<?php echo esc_attr( $is_collapsed_show ); ?>" id="collapse-<?php echo esc_attr( $taxonomy ); ?>">

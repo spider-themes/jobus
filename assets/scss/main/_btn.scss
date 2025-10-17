@@ -36,12 +36,13 @@
 }
 
 .jbs-btn-ten {
-  line-height: 50px;
-  border-radius: 10px;
-  background: #000;
-  padding: 0 26px;
+  line-height: 50px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  background: #31795A !important;
+  padding: 0 26px !important;
   &:hover {
-      background: #31795a;
+      background: #00BF58 !important;
   }
 }
 
@@ -58,4 +59,25 @@
 
 .btn-eleven:hover,.btn-eleven:focus {
     background: #31795a;
+}
+
+
+.jbs-btn-success {
+    font-weight: 500;
+    padding: 13px 26px;
+    min-width: 150px;
+    text-align: center;
+    color: #fff;
+    background-color: #00BF58;
+    border-color: #00BF58;
+ -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -ms-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    &:hover {
+        color:#fff;
+        background-color: #000000;
+        border-color: #000000;
+    }
 }
