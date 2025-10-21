@@ -2,6 +2,9 @@
   padding: 25px 40px;
   border: 1px solid #E1E1E1;
   border-radius: 10px;
+  ul{
+    margin-left: 0 !important;
+  }
   .rating li a {
     font-size: 16px;
     color: #FFCC4A;
@@ -15,6 +18,9 @@
     font-size: 17px;
     line-height: 1.882em;
     margin: 17px 0 25px;
+    border: none !important;
+    padding: 0 !important;
+
   }
   .author-img {
     width: 45px;

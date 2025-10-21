@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </a>
 					<?php endif; ?>
                     <h5 class="jbs-text-center">
-                        <a href="<?php the_permalink(); ?>" class="company-name tran3s">
+                        <a href="<?php the_permalink(); ?>" class="company-name tran3s jbs-text-black">
 							<?php the_title(); ?>
                         </a>
                     </h5>

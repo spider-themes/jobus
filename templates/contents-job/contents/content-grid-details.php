@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
 									<?php the_title() ?>
                                 </a>
-                                <ul class="style-none jbs-d-flex jbs-flex-wrap info-data">
+                                <ul class="style-none jbs-d-flex jbs-flex-wrap info-data jbs-pl-0">
 									<?php
 									if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) {
 										?>

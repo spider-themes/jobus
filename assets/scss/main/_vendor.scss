@@ -163,11 +163,11 @@
   height: 8px;
   border-radius: 50%;
   margin: 0 5px;
-  background: #E4E4E4;
+  background: #E4E4E4 !important;
   transition: all 0.3s ease-in-out;
 }
 .slick-dots .slick-active button {
-    background: $color-three;
+    background: #00BF58 !important;
 }
 .slick-list
 {

@@ -10,9 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php jobus_get_template_part('contents-company/sidebar-classic-filters'); ?>
 
             <div class="jbs-col-xl-9 jbs-col-lg-8">
-                <div class="jbs-ms-xxl-5 jbs-ms-xl-3">
+                <div class="jbs-ms-xl-3">
 
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center mb-20">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
 	                    <?php
 	                    // Display the total number of companies found
 	                    include __DIR__ . '/../loop/result-count.php';

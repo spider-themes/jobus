@@ -63,21 +63,21 @@
 
 
 .jbs-btn-success {
-    font-weight: 500;
-    padding: 13px 26px;
-    min-width: 150px;
-    text-align: center;
-    color: #fff;
-    background-color: #00BF58;
-    border-color: #00BF58;
+    font-weight: 500 !important;
+    padding: 13px 26px !important;
+    min-width: 150px !important;
+    text-align: center !important;
+    color: #fff !important;
+    background-color: #00BF58 !important;
+    border-color: #00BF58 !important;
  -webkit-transition: all 0.3s ease-in-out 0s;
     -moz-transition: all 0.3s ease-in-out 0s;
     -ms-transition: all 0.3s ease-in-out 0s;
     -o-transition: all 0.3s ease-in-out 0s;
     transition: all 0.3s ease-in-out 0s;
     &:hover {
-        color:#fff;
-        background-color: #000000;
-        border-color: #000000;
+        color:#fff !important;
+        background-color: #000000 !important;
+        border-color: #000000 !important;
     }
 }

@@ -266,7 +266,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                 </div>
             </div>
 
-            <div class="mt-50">
+            <div class="jbs-mt-50">
                 <?php
                 $args = array(
                         'post_type'      => 'jobus_job',

@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     ?>
                     <h4 class="candidate-name mt-15 mb-0">
-                        <a href="<?php the_permalink() ?>" class="tran3s">
+                        <a href="<?php the_permalink() ?>" class="jbs-text-black tran3s">
 							<?php the_title() ?>
                         </a>
                     </h4>
@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
 						echo '<ul class="candidate-skills style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center pt-30 sm-pt-20 pb-10">';
 						foreach ( $displayed_skills as $skill ) {
-							echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+							echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
 
 						// Display the count of remaining skills
@@ -120,12 +120,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="jbs-row jbs-gx-2 pt-25 sm-pt-10">
                         <div class="jbs-col-md-6">
-                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 mt-5">
+                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5">
 								<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                             </a>
                         </div>
                         <div class="jbs-col-md-6">
-                            <a href="javascript:void(0)" class="msg-btn tran3s jbs-w-100 mt-5">
+                            <a href="javascript:void(0)" class="msg-btn tran3s jbs-w-100 jbs-mt-5">
 								<?php esc_html_e( 'Message', 'jobus' ) ?>
                             </a>
                         </div>

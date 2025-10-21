@@ -128,56 +128,6 @@ img {
             text-transform: capitalize;
         }
     }
-
-    .profile-btn {
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: -0.5px;
-        line-height: 40px;
-        color: #fff;
-        background: $color-five;
-        text-align: center;
-        padding: 0 18px;
-        border-radius: 40px;
-
-        &:hover {
-            background: $color-three;
-        }
-    }
-
-    .msg-btn {
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: -0.5px;
-        line-height: 38px;
-        color: $color-five;
-        border: 1px solid $color-five;
-        text-align: center;
-        padding: 0 15px;
-        border-radius: 40px;
-
-        &:hover {
-            background: $color-three;
-            border-color: $color-three;
-            color: #fff;
-        }
-    }
-
-    &.list-layout {
-        padding: 27px 30px 38px;
-
-        .candidate-skills {
-            //   position: absolute;
-            position: static;
-            left: 0;
-            bottom: -45px;
-        }
-
-        .right-side {
-            width: calc(100% - 80px);
-            padding-left: 30px;
-        }
-    }
 }
 
 // Candidates Profile Details
@@ -572,7 +522,7 @@ img {
     }
 
     .profile-btn {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         letter-spacing: -0.5px;
         line-height: 40px;
@@ -588,7 +538,7 @@ img {
     }
 
     .msg-btn {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
         letter-spacing: -0.5px;
         line-height: 38px;

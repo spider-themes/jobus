@@ -1,5 +1,86 @@
 //Twenty Twenty-Four Theme Compatibility
 
-.is-layout-constrained > .wp-block-jobus-shortcode-job-archive {
+.wp-block-jobus-shortcode-job-archive {
     max-width: 100% !important;
+    background-color: #fff;
+    margin: 0 !important;
+
+    li {
+        margin-left: 0 !important;
+    }
+}
+
+.wp-block-jobus-shortcode-candidate-archive {
+    max-width: 100% !important;
+    background-color: #fff;
+    margin: 0 !important;
+}
+
+.wp-block-jobus-shortcode-company-archive {
+    max-width: 100% !important;
+}
+
+.jobus_job_details {
+    max-width: 100% !important;
+    background-color: #fff;
+    a{
+        text-decoration: none !important;
+    }
+    code {
+        background: none;
+    }
+}
+.jobus_job_details_2 {
+    a{
+        text-decoration: none !important;
+    }
+    ul{
+        margin-left: 0 !important;
+    }
+}
+.related-job-section a {
+    text-decoration: none !important;
+}
+
+.job-post-item-wrapper {
+    .wrapper {
+        ul{
+            margin-left: 0 !important;
+        }
+        li {
+            margin-top: 0 !important;
+        }
+    }
+}
+// Hello Elementor Theme Compatibility
+.site-main:has(.wp-block-jobus-shortcode-candidate-archive, .wp-block-jobus-shortcode-job-archive, .wp-block-jobus-shortcode-company-archive) {
+  max-width: 100% !important;
+}
+
+// Astra Theme Compatibility
+.single-jobus_company{
+    .ast-container{
+        display: block !important;
+        max-width: 100% !important;
+    }
+}
+
+.single-jobus_job{
+    .ast-container{
+        display: block !important;
+        max-width: 100% !important;
+    }
+}
+.single-jobus_candidate{
+    .ast-container{
+        display: block !important;
+        max-width: 100% !important;
+        padding: 0;
+    }
+}
+
+// kadence Theme Compatibility
+.site-container:has(.wp-block-jobus-shortcode-candidate-archive, .wp-block-jobus-shortcode-job-archive, .wp-block-jobus-shortcode-company-archive) {
+  max-width: 100% !important;
+  padding: 0 !important;
 }

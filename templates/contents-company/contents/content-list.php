@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
                         <div class="company-data">
                             <h5 class="m0">
-                                <a href="<?php the_permalink(); ?>" class="company-name tran3s">
+                                <a href="<?php the_permalink(); ?>" class="company-name tran3s jbs-text-black">
 									<?php the_title() ?>
                                 </a>
                             </h5>

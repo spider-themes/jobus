@@ -479,11 +479,13 @@
         }
     }
 }
+.jbs-w-84 {
+    width: 84px !important;
+}
 
 .jbs-filter-btn {
     font-size: 15px !important;
     color: #244034 !important;
-    width: 86px !important;
     height: 32px !important;
     border: 2px solid #244034 !important;
     border-radius: 6px !important;
@@ -491,6 +493,7 @@
         background: #31795A !important;
         border-color: #31795A !important;
         color: #fff !important;
+        text-decoration: none !important;
     }
 }
 
@@ -822,13 +825,13 @@
         font-size: 13px;
         color: $color-three;
         padding: 2px 12px;
-        background: #E7F6EF;
+        background: #E7F6EF !important;
         border-radius: 3px;
         margin: 54px 0 16px;
 
         &.part-time {
-            background: rgba($color: #FF5757, $alpha: 0.08);
-            color: #FF6060;
+            background: rgba($color: #FF5757, $alpha: 0.08) !important;
+            color: #FF6060 !important;
         }
     }
 
@@ -1108,6 +1111,7 @@
         color: #fff;
         background: $color-one;
         border-radius: 30px;
+        text-decoration: none !important;
 
         &:hover {
             background: $color-five;

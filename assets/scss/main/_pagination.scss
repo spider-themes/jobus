@@ -17,10 +17,14 @@
       position: relative;
       display: flex;
       padding-left: 0;
+      margin: 0;
       @media (max-width: 540px) {
         justify-content: center;
       }
-
+a{
+    border-color:none !important;
+    border: none !important;
+}
       .page-numbers {
         display: inline-block;
         width: 35px;
@@ -33,12 +37,14 @@
         color: #31795A;
 
         &:hover {
-          color: $color-three;
+          color: #00BF58;
+          border: none !important;
         }
 
         &.current {
-          background: #31795A;
+          background: #31795A ;
           color: #fff;
+          border: none !important;
         }
 
         &.prev, &.next {
@@ -84,6 +90,7 @@
 
         &.current, &:hover {
           background: rgba(49, 121, 90, 0.1);
+          border: none !important;
         }
 
         &:last-child {
