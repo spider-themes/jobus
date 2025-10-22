@@ -41,7 +41,7 @@
                 addBtn.addEventListener('click', function() {
                     let idx = repeater.querySelectorAll('.specification-item').length;
                     let div = document.createElement('div');
-                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-jbs-gap-2';
+                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
                     div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="jbs-form-control jbs-me-2" placeholder="Title" style="min-width:180px">' +
                         '<input type="text" name="candidate_specifications['+idx+'][value]" class="jbs-form-control jbs-me-2" placeholder="Value" style="min-width:180px">' +
                         '<button type="button" class="jbs-btn jbs-btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';

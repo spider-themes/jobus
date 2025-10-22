@@ -11,7 +11,7 @@ function Save ({attributes}) {
 
             <div className="feedback-block-four ddddd">
                 <div className="jbs-d-flex jbs-align-items-center">
-                    <ul className="style-none jbs-d-flex rating">
+                    <ul className="jbs-style-none jbs-d-flex rating">
                         {Array.from({length: rating}, (_, index) => (
                             <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
                         ))}

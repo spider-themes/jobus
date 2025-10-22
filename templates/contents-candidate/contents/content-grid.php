@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						// Display the first 2 skills
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
-						echo '<ul class="candidate-skills style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center pt-30 sm-pt-20 pb-10">';
+						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center pt-30 sm-pt-20 pb-10">';
 						foreach ( $displayed_skills as $skill ) {
 							echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					} else {
 						if ( ! empty( $skills ) ) {
 							// Display all skills
-							echo '<ul class="candidate-skills style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+							echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
 							foreach ( $skills as $skill ) {
 								echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 							}

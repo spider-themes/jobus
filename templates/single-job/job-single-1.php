@@ -54,8 +54,8 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                             wp_reset_postdata();
                         }
                         ?>
-                        <div class="jbs-border-top mt-40 pt-40">
-                            <ul class="job-meta-data jbs-row style-none">
+                        <div class="jbs-border-top jbs-mt-40 jbs-pt-40">
+                            <ul class="job-meta-data jbs-row jbs-style-none">
                                 <?php
                                 // Retrieve the repeater field configurations from settings options
                                 $specifications = jobus_opt( 'job_specifications' );
@@ -107,7 +107,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                             </ul>
                             <?php
                             if ( jobus_get_tag_list() ) { ?>
-                                <div class="job-tags jbs-d-flex jbs-flex-wrap pt-15">
+                                <div class="job-tags jbs-d-flex jbs-flex-wrap jbs-pt-15">
                                     <?php echo wp_kses_post( jobus_get_tag_list() ) ?>
                                 </div>
                                 <?php

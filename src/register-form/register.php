@@ -164,7 +164,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                 </div>
                 <!-- /.tab-pane -->
             </div>
-            <p class="jbs-text-center mt-20 mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
+            <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
                 <a href="javascript:void(0)" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#loginModal"><?php esc_html_e( 'Sign In', 'jobus' ); ?></a>
             </p>
         </div>

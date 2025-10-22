@@ -69,7 +69,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
 
                                         // Display the first 2 skills
                                         $displayed_skills = array_slice( $skills, 0, $max_skills );
-                                        echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
+                                        echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center">';
                                         foreach ( $displayed_skills as $skill ) {
                                             echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                         }
@@ -81,7 +81,7 @@ $display_candidates = $is_dashboard ? array_slice( $saved_candidates, 0, $limit 
                                     } else {
                                         // Display all skills
                                         if ( ! empty( $skills ) ) {
-                                            echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
+                                            echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center">';
                                             foreach ( $skills as $skill ) {
                                                 echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
                                             }

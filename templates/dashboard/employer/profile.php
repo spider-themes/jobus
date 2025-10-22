@@ -140,7 +140,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     }
                     $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
                     ?>
-                    <ul id="company-category-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="company-category-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
                         <?php if ( ! empty( $current_categories ) ): ?>
                             <?php foreach ( $current_categories as $cat ): ?>
                                 <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -167,7 +167,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     }
                     $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
                     ?>
-                    <ul id="company-location-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="company-location-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
                         <?php if ( ! empty( $current_locations ) ): ?>
                             <?php foreach ( $current_locations as $loc ): ?>
                                 <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">

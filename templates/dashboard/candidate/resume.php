@@ -434,7 +434,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-category-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-category-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_categories ) ): ?>
 							<?php foreach ( $current_categories as $cat ): ?>
                                 <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -463,7 +463,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$locations_ids = ! empty( $current_location ) ? implode( ',', wp_list_pluck( $current_location, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-location-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-location-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_location ) ) : ?>
 							<?php foreach ( $current_location as $location ): ?>
                                 <li class="is_tag" data-location-id="<?php echo esc_attr( $location->term_id ); ?>">
@@ -492,7 +492,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$skill_ids = ! empty( $current_skills ) ? implode( ',', wp_list_pluck( $current_skills, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-skills-list" class="style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-skills-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_skills ) ) : ?>
 							<?php foreach ( $current_skills as $skill ): ?>
                                 <li class="is_tag" data-skill-id="<?php echo esc_attr( $skill->term_id ); ?>">

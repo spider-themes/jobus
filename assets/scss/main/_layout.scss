@@ -435,27 +435,3 @@
         }
     }
 }
-// Error Page
-.error-page {
-    min-height: 100vh;
-    padding: 40px 0;
-    .error {
-        font-family: $sub-font;
-        font-size: 100px;
-        line-height: initial;
-        letter-spacing: 5px;
-        color: $color-five;
-    }
-    h2 {
-        font-size: 82px;
-        font-weight: normal;
-        margin: -10px 0 40px;
-    }
-    p {
-        line-height: 1.666em;
-    }
-    .btn-one {
-        font-size: 15px;
-        padding: 17px 26px;
-    }
-}

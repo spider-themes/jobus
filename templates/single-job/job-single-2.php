@@ -16,7 +16,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     $specifications = jobus_opt('job_specifications');
                     if (is_array($specifications)) {
                         ?>
-                        <div class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between style-none">
+                        <div class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between jbs-style-none">
                             <?php
                             foreach ($specifications as $field) {
 

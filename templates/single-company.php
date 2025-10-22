@@ -45,7 +45,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         <?php endif; ?>
 
                         <div class="jbs-border-top jbs-mt-35 lg-mt-20 jbs-pt-25">
-                            <ul class="job-meta-data jbs-row style-none">
+                            <ul class="job-meta-data jbs-row jbs-style-none">
                                 <?php
                                 if ( ! empty( $location ) ) { ?>
                                     <li>
@@ -192,7 +192,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                             <div class="feedback-block-four ggggg">
                                                 <div class="jbs-d-flex jbs-align-items-center">
                                                     <?php if ( $rating !== false ) : ?>
-                                                        <ul class="style-none jbs-d-flex rating">
+                                                        <ul class="jbs-style-none jbs-d-flex rating">
                                                             <?php
                                                             $full_stars  = floor( $rating );
                                                             $half_star   = ( $rating - $full_stars ) >= 0.5 ? 1 : 0;

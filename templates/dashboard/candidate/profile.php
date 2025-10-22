@@ -173,7 +173,7 @@ $avatar_url = $description_data['avatar_url'];
                                     </div>
                                 </div>
 
-                                <div class="jbs-jbs-text-end">
+                                <div class="jbs-text-end">
                                     <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-social-link jbs-mt-2 jbs-mb-2" title="<?php esc_attr_e('Remove Item', 'jobus'); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e('Remove', 'jobus'); ?>
                                     </button>
@@ -269,7 +269,7 @@ $avatar_url = $description_data['avatar_url'];
                             <div class="jbs-col-md-6 jbs-mb-2">
                                 <input type="text" name="candidate_location_lat" id="candidate_location_lat" placeholder="<?php esc_attr_e('Latitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['latitude']); ?>">
                             </div>
-                            <div class="jbs-col-md-6 jbs-jbs-mb-2">
+                            <div class="jbs-col-md-6 jbs-mb-2">
                                 <input type="text" name="candidate_location_lng" id="candidate_location_lng" placeholder="<?php esc_attr_e('Longitude', 'jobus'); ?>" value="<?php echo esc_attr($candidate_location['longitude']); ?>">
                             </div>
                         </div>

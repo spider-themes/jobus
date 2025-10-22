@@ -111,7 +111,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
                 <!-- Add Categories -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper mb-40 jbs-mt-20">
                     <label for="job-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -121,7 +121,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-category-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
+                        <ul id="job-category-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_categories ) ): ?>
                                 <?php foreach ( $current_categories as $cat ): ?>
                                     <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
@@ -138,7 +138,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Locations -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper mb-40 jbs-mt-20">
                     <label for="job-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -148,7 +148,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $location_ids = ! empty( $current_locations ) ? implode( ',', wp_list_pluck( $current_locations, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-location-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
+                        <ul id="job-location-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_locations ) ): ?>
                                 <?php foreach ( $current_locations as $loc ): ?>
                                     <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
@@ -165,7 +165,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Tags -->
-                <div class="dash-input-wrapper mb-40 mt-20">
+                <div class="dash-input-wrapper mb-40 jbs-mt-20">
                     <label for="job-tag-list"><?php esc_html_e( 'Tags', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -175,7 +175,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                         }
                         $tag_ids = ! empty( $current_tags ) ? implode( ',', wp_list_pluck( $current_tags, 'term_id' ) ) : '';
                         ?>
-                        <ul id="job-tag-list" class="style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
+                        <ul id="job-tag-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_tags ) ): ?>
                                 <?php foreach ( $current_tags as $tag ): ?>
                                     <li class="is_tag" data-tag-id="<?php echo esc_attr( $tag->term_id ); ?>">

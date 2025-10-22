@@ -84,7 +84,7 @@ if ( ! empty( $logo['url'] ) ) { ?>
 </div>
 
 <nav class="main-nav">
-    <ul class="style-none">
+    <ul class="jbs-style-none">
         <?php
         foreach ( $menu_items as $endpoint => $item ) :
             $url = trailingslashit( $dashboard_url ) . $endpoint . '/';

@@ -115,7 +115,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="inner-card border-style mb-75 lg-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
+                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';
@@ -213,7 +213,7 @@ wp_enqueue_script( 'lightbox' );
                             </a>
                         </div>
 
-                        <ul class="style-none">
+                        <ul class="jbs-style-none">
                             <?php
                             if ( ! empty( $location ) ) { ?>
                                 <li>

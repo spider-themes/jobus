@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<ul class="style-none filter-input jbs-ml-0 jbs-pl-0">
+<ul class="jbs-style-none filter-input jbs-ml-0 jbs-pl-0">
 	<?php
 	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
 		foreach ( $specifications_data as $value ) {

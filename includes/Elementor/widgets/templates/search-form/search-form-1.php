@@ -81,7 +81,7 @@ if (!defined('ABSPATH')) {
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="tags jbs-d-flex jbs-flex-wrap style-none mt-20">
+        <ul class="tags jbs-d-flex jbs-flex-wrap jbs-style-none mt-20">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
                 <li class="fw-500 jbs-text-white jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>

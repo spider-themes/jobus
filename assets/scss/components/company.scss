@@ -1,0 +1,57 @@
+// Company component styles moved from main/_company.scss
+// ...existing code from _company.scss...
+.company-profiles.bg-color {
+  background: $light-bg;
+}
+
+.company-grid-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 34px 15px 0;
+  border-radius: 30px;
+  background: #fff;
+  border: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+  &.favourite::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: $color-five;
+    top: -45px;
+    left: -45px;
+    transform: rotate(45deg);
+  }
+
+  &.favourite::after {
+    content: "\f586";
+    font-family: bootstrap-icons !important;
+    position: absolute;
+    color: #fff;
+    font-size: 15px;
+    top: 9px;
+    left: 14px;
+  }
+
+  .company-logo {
+    display: block;
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+  }
+
+  .location {
+    text-align: center;
+    margin-bottom: 0;
+
+    a {
+      font-size: 15px;
+      // ...rest of code from _company.scss...
+    }
+  }
+}
+// ...rest of code from _company.scss...
+

@@ -130,7 +130,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
         </div>
     </div>
 
-    <div class="jbs-row jbs-d-flex pt-50 lg-pt-10">
+    <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
         <div class="jbs-col-lg-7">
             <div class="saved-job-tab jbs-bg-white jbs-border-20">
 

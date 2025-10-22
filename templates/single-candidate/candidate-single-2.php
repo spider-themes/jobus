@@ -7,7 +7,7 @@ wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
 
-<div class="inner-banner-one">
+<div class="jbs-banner">
     <div class="jbs-container">
         <div class="candidate-profile-card candidate-profile-two list-layout">
             <div class="jbs-d-flex jbs-align-items-start jbs-align-items-xl-center">
@@ -39,7 +39,7 @@ wp_enqueue_script( 'lightbox' );
 
                                 // Display the first 2 skills
                                 $displayed_skills = array_slice( $skills, 0, $max_skills );
-                                echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
+                                echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center">';
                                 foreach ( $displayed_skills as $skill ) {
                                     echo '<li class="jbs-text-capitalize">' . esc_html( $skill->name ) . '</li>';
                                 }
@@ -51,7 +51,7 @@ wp_enqueue_script( 'lightbox' );
                             } else {
                                 // Display all skills
                                 if ( ! empty( $skills ) ) {
-                                    echo '<ul class="candidate-skills style-none jbs-d-flex jbs-align-items-center">';
+                                    echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center">';
                                     foreach ( $skills as $skill ) {
                                         echo '<li class="jbs-text-capitalize">' . esc_html( $skill->name ) . '</li>';
                                     }
@@ -114,7 +114,7 @@ wp_enqueue_script( 'lightbox' );
                     <?php
                     if ( ! empty( get_the_content() ) ) {
                         ?>
-                        <div class="inner-card border-style mb-65 lg-mb-40">
+                        <div class="inner-card border-style jbs-mb-65 lg-jbs-mb-40">
                             <?php the_content() ?>
                         </div>
                         <?php
@@ -138,7 +138,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $educations ) {
                         ?>
-                        <div class="inner-card border-style mb-75 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
                             <?php
                             if ( ! empty( $meta['education_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['education_title'] ) ?></h3>
@@ -179,9 +179,9 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( is_array( $skills ) ) {
                         ?>
-                        <div class="inner-card border-style mb-75 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
+                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';
@@ -194,7 +194,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $experience ) {
                         ?>
-                        <div class="inner-card border-style mb-60 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-60 lg-jbs-mb-50">
                             <?php
                             if ( ! empty( $meta['experience_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['experience_title'] ) ?></h3>
@@ -264,8 +264,8 @@ wp_enqueue_script( 'lightbox' );
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-2-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
-                    <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
-                        <ul class="style-none">
+                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 md-jbs-mb-40">
+                        <ul class="jbs-style-none">
                             <?php
                             if ( ! empty( $location ) ) { ?>
                                 <li class="jbs-border-0">
@@ -381,7 +381,7 @@ wp_enqueue_script( 'lightbox' );
                         $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
-                        <div class="map-area mb-60 md-mb-40">
+                        <div class="map-area jbs-mb-60 md-jbs-mb-40">
                             <div class="gmap_canvas jbs-h-100 jbs-w-100">
                                 <iframe class="gmap_iframe jbs-h-100 jbs-w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
@@ -399,19 +399,19 @@ wp_enqueue_script( 'lightbox' );
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25 xs-jbs-mb-10">
                                 <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
 
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25">
                                 <input type="email" name="sender_email" id="sender_email" placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25">
                                 <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
-                            <div class="jbs-d-sm-flex mb-25 xs-mb-10">
+                            <div class="jbs-d-sm-flex jbs-mb-25 xs-mb-10">
                                 <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 

@@ -1,61 +1,63 @@
-.inner-banner-one {
-    background: #244034;
-    padding: 200px 0 90px;
-    z-index: 1;
-    position: relative;
+.jbs-banner {
+  background: #244034;
+  padding: 200px 0 90px;
+  z-index: 1;
+  position: relative;
 
-    .blog-heading {
-        font-size: 64px;
-        line-height: 1.062em;
-        margin: 0;
-        word-break: break-all;
+  .blog-heading {
+    font-size: 64px;
+    line-height: 1.062em;
+    margin: 0;
+    word-break: break-all;
+  }
+
+  h1 {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .candidate-profile-card {
+    .candidate-post {
+      color: rgba(255, 255, 255, 0.4);
     }
 
-    h1 {
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+    .candidate-info {
+      span {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      div {
+        color: white;
+      }
     }
 
-    .candidate-profile-card {
-        .candidate-post {
-            color: rgba(255, 255, 255, 0.4);
-        }
+    .cv-download-btn {
+      line-height: 38px;
+      border: 1px solid #fff;
+      border-radius: 40px;
+      color: #fff;
+      font-size: 15px;
+      letter-spacing: -0.5px;
+      padding: 0 20px;
 
-        .candidate-info {
-            span {
-                color: rgba(255, 255, 255, 0.6);
-            }
-
-            div {
-                color: white;
-            }
-        }
-        .cv-download-btn {
-            line-height: 38px;
-            border: 1px solid #fff;
-            border-radius: 40px;
-            color: #fff;
-            font-size: 15px;
-            letter-spacing: -0.5px;
-            padding: 0 20px;
-            &:hover {
-                background: #375749;
-                border-color: #375749;
-            }
-        }
-
-        .candidate-skills {
-            li {
-                background: #375749;
-                color: rgba(255, 255, 255, .55);
-            }
-
-            li.more {
-                background: #d2f34c !important;
-                color: #000 !important;
-            }
-        }
+      &:hover {
+        background: #375749;
+        border-color: #375749;
+      }
     }
+
+    .candidate-skills {
+      li {
+        background: #375749;
+        color: rgba(255, 255, 255, .55);
+      }
+
+      li.more {
+        background: #d2f34c !important;
+        color: #000 !important;
+      }
+    }
+  }
 }
