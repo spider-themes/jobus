@@ -1,4 +1,4 @@
-=== Jobus ===
+=== Jobus – Complete Job Board & Hiring Platform that match your brand ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
 Stable tag: 1.0.0
@@ -14,20 +14,51 @@ A powerful job board plugin for WordPress that helps manage job listings, compan
 Jobus is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
 
 == Features ==
-* **Easy Setup and Use**: Simple and intuitive interface for quick setup.
-* **User-Friendly Design**: Clean, responsive, and accessible design.
-* **Unlimited Job Specifications**: Add and manage job details.
-* **WordPress UI Integration**: Manage job listings using the familiar WordPress interface.
-* **Location-Based Job Listings**: Add job locations to individual job postings.
-* **Job Application Management**: Job seekers can apply directly through the job application form on each job post.
-* **Applicant Tracking**: View a list of applicants who have applied for each job.
-* **User Account Pages**: Custom account pages for both employers and candidates.
-* **Custom User Roles**: Define custom roles for different user types.
-* **Featured Jobs**: Highlight special jobs with an attention-grabbing badge.
-* **Social Sharing**: Integrated social sharing options for job posts.
-* **Customizable Appearance**: Modify the plugin's look and feel from the settings page.
-* **Pre-made Templates**: Ready-to-use templates for careers, job listings, and company pages.
-* **Multiple Layouts**: Choose from various pre-made layout templates for candidates, jobs, and companies.
+
+* **Unlimited Job Posting:**
+  There’s no limit to how many jobs you can post. Create and manage unlimited job listings effortlessly.
+
+* **Unlimited Candidates & Applications:**
+  Handle unlimited candidate profiles and job applications with ease using a simple, intuitive interface.
+
+* **Unlimited Job Specifications:**
+  Add and manage detailed job specifications for each listing to help applicants understand requirements clearly.
+
+* **WordPress UI Integration:**
+  Manage job listings, candidates, and companies directly within the familiar WordPress dashboard environment.
+
+* **Location-Based Job Listings:**
+  Assign specific job locations to each post, allowing users to filter and find jobs by region or city.
+
+* **Job Application Management:**
+  Enable job seekers to apply directly from each job post using a built-in and user-friendly form.
+
+* **Applicant Tracking:**
+  Easily track and review all applications, view applicant details, and manage hiring in one centralized place.
+
+* **User Account Pages:**
+  Provide dedicated dashboards for employers and candidates to manage their profiles and listings conveniently.
+
+* **Custom User Roles:**
+  Define and assign specific user roles for employers, candidates, and administrators to ensure organized management.
+
+* **Featured Jobs:**
+  Highlight special job listings with a featured badge to attract more visibility and engagement.
+
+* **Social Sharing:**
+  Allow visitors to share job listings across multiple social media platforms with a single click.
+
+* **Customizable Appearance:**
+  Easily customize the look and feel of your job portal to perfectly match your website’s branding.
+
+* **Pre-Made Templates:**
+  Use ready-to-go templates for job listings, companies, and candidate pages to save time and design effort.
+
+* **Multiple Layouts:**
+  Choose from different pre-designed layouts for jobs, companies, and candidates to suit your preferred style.
+
+* **Custom Minimal Design:**
+  Enjoy a clean, modern, and minimal interface focused on usability and enhanced user experience.
 
 == Elementor Widgets ==
 
