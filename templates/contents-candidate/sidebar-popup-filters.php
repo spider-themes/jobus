@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 ?>
 
-<div class="jbs-modal jbs-popUpModal login_from fade" id="filterPopUp" tabindex="-1" aria-hidden="true">
+<div class="jbs-modal jbs-popUpModal login_from jbs-fade" id="filterPopUp" tabindex="-1" aria-hidden="true">
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
 

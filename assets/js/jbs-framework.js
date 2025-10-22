@@ -57,27 +57,27 @@
         $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
             e.preventDefault();
             var target = $(this).data("jbs-target");
-            $(target).addClass("show");
-            $(".jbs-offcanvas-backdrop").addClass("show");
+            $(target).addClass("jbs-show");
+            $(".jbs-offcanvas-backdrop").addClass("jbs-show");
         });
 
         // Close button
         $(document).on("click", ".jbs-offcanvas-close", function () {
-            $(this).closest(".jbs-offcanvas").removeClass("show");
-            $(".jbs-offcanvas-backdrop").removeClass("show");
+            $(this).closest(".jbs-offcanvas").removeClass("jbs-show");
+            $(".jbs-offcanvas-backdrop").removeClass("jbs-show");
         });
 
         // Click on backdrop
         $(document).on("click", ".jbs-offcanvas-backdrop", function () {
-            $(".jbs-offcanvas.show").removeClass("show");
-            $(this).removeClass("show");
+            $(".jbs-offcanvas.jbs-show").removeClass("jbs-show");
+            $(this).removeClass("jbs-show");
         });
 
         // modal close on esc key press
         $(".jbs-open-modal").on("click", function (e) {
             e.preventDefault();
             var target = $(this).data("target");
-            $(target).fadeIn(300).addClass("show");
+            $(target).fadeIn(300).addClass("jbs-show");
         });
 
         // -----------------------------
@@ -85,7 +85,7 @@
         // -----------------------------
         $(".jbs-btn-close").on("click", function () {
             var modal = $(this).closest(".jbs-modal");
-            modal.fadeOut(300).removeClass("show"); // fadeOut + remove show
+            modal.fadeOut(300).removeClass("jbs-show"); // fadeOut + remove jbs-show
         });
 
         // -----------------------------
@@ -94,7 +94,7 @@
         $(".jbs-modal").on("click", function (e) {
             if ($(e.target).is(".jbs-modal")) {
                 // only if click on backdrop
-                $(this).fadeOut(300).removeClass("show");
+                $(this).fadeOut(300).removeClass("jbs-show");
             }
         });
 
