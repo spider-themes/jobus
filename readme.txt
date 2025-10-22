@@ -1,7 +1,7 @@
 === Jobus ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 0.1.3
+Stable tag: 1.0.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -30,15 +30,23 @@ Jobus is a comprehensive and powerful tool for creating job, company, and candid
 * **Multiple Layouts**: Choose from various pre-made layout templates for candidates, jobs, and companies.
 
 == Elementor Widgets ==
-= This plugin offers five widgets =
+
 * **Categories**
 * **Companies**
 * **Job Tabs**
 * **Job Listing**
 * **Search Form**
 
+## 🔗 USEFUL LINKS ##
+
+- [Get Jobus Premium](https://jobus.spider-themes.net/)
+- [Frontend Demo](https://jobus.spider-themes.net/demos)
+- [Documentation](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/)
+- [Support Forum](https://wordpress.org/support/plugin/jobus/)
+
 == Development Notes ==
 This plugin uses npm for asset compilation. To rebuild the JavaScript and CSS:
+
 * Run `npm install`
 * Run `npm run build`
 
@@ -53,5 +61,31 @@ This plugin uses npm for asset compilation. To rebuild the JavaScript and CSS:
 * WordPress memory limit of 256 MB or higher
 
 = Installation Steps =
+
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the ‘Plugins’ screen in WordPress
+
+== Frequently Asked Questions ==
+
+= Does Jobus work with any theme? =
+Yes, the Jobus works with any standard WordPress theme.
+
+= What makes Jobus different from other job board plugins? =
+Jobus stands out for its simplicity, flexibility, and seamless integration with WordPress. It offers an all-in-one solution for managing jobs, companies, and candidates — all from a familiar WordPress interface. With built-in Elementor widgets and pre-made templates, you can design stunning job portals without any coding knowledge.
+
+= Can I use Jobus on a multisite network? =
+Yes, you can use Jobus on a multisite network.
+
+= Can I customize the layout of job listings and company pages? =
+Absolutely. Jobus provides multiple layout templates for job listings, companies, and candidate profiles. You can choose and customize layouts directly through Elementor or from the plugin settings page.
+
+
+== Screenshots ==
+1. Candidate Page with Filterable Sidebar
+2. Company Page with Filterable Sidebar
+3  Job listing Page with Filterable Sidebar
+
+== Changelog ==
+
+= 1.0.0 (22 October 2025) =
+ * Init: Initial release
