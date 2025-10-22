@@ -1,8 +1,8 @@
 // ============================================
-// JBS Framework - Dropdown Component
+// Dropdown Component
 // ============================================
-// Custom dropdown implementation replacing Bootstrap dropdowns
-// Version: 1.0.0
+
+@use "variables" as *;
 
 // Dropdown container
 .jbs-dropdown {
@@ -47,10 +47,10 @@
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: #212529;
+  color: $text-dark;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: $text-white;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -79,7 +79,7 @@
   padding: 0.25rem 1rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: $text-dark;
   text-align: inherit;
   text-decoration: none;
   white-space: nowrap;
@@ -95,13 +95,13 @@
   }
   
   &:active {
-    color: #fff;
+    color: $text-white;
     text-decoration: none;
     background-color: #0d6efd;
   }
   
   &.active {
-    color: #fff;
+    color: $text-white;
     text-decoration: none;
     background-color: #0d6efd;
   }
@@ -136,7 +136,7 @@
 .jbs-dropdown-text {
   display: block;
   padding: 0.25rem 1rem;
-  color: #212529;
+  color: $text-dark;
 }
 
 // Dark dropdown variant
@@ -150,12 +150,12 @@
     
     &:hover,
     &:focus {
-      color: #fff;
+      color: $text-white;
       background-color: rgba(255, 255, 255, 0.15);
     }
     
     &.active {
-      color: #fff;
+      color: $text-white;
       background-color: #0d6efd;
     }
     

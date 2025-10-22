@@ -3,33 +3,64 @@
 // ============================================
 // A lightweight, modular CSS framework
 // Version: 1.0.0
+//
+// Imports all framework partials from ./jbs-framework/
+// Each partial provides a specific set of styles or utilities.
+//
+// If you add a new partial to the framework folder, add an @use statement below.
+//
+// Current imported partials:
+// - variables
+// - mixins
+// - container
+// - grid
+// - flex
+// - dropdown
+// - accordion
+// - utilities
+// - spacing
+// - borders
+// - modal
+// - form
+// - tab
+// - display
+// - order
+// - sizing
+// - rounded
+// - shadow
+// - visibility
+// - position
+// - zindex
+// - gap
+// -buttons
 
 // 1. Configuration
-@use "jbs-framework/variables";
-@use "jbs-framework/mixins";
+@use "./jbs-framework/variables";
+@use "./jbs-framework/mixins";
 
 // 2. Layout
-@use "jbs-framework/container";
-@use "jbs-framework/grid";
+@use "./jbs-framework/container";
+@use "./jbs-framework/grid";
 
 // 3. Components
-@use "jbs-framework/flex";
-@use "jbs-framework/dropdown";
-@use "jbs-framework/accordion";
+@use "./jbs-framework/flex";
+@use "./jbs-framework/dropdown";
+@use "./jbs-framework/accordion";
 
 // 4. Utilities
-@use "jbs-framework/utilities";
-@use "jbs-framework/spacing";
-@use "jbs-framework/borders";
-@use "jbs-framework/modal";
-@use "jbs-framework/form";
-@use "jbs-framework/tab";
-@use "jbs-framework/display";
-@use "jbs-framework/order";
-@use "jbs-framework/sizing";
-@use "jbs-framework/rounded";
-@use "jbs-framework/shadow";
-@use "jbs-framework/visibility";
-@use "jbs-framework/position";
-@use "jbs-framework/zindex";
-@use "jbs-framework/gap";
+@use "./jbs-framework/utilities";
+@use "./jbs-framework/spacing";
+@use "./jbs-framework/borders";
+@use "./jbs-framework/modal";
+@use "./jbs-framework/form";
+@use "./jbs-framework/tab";
+@use "./jbs-framework/display";
+@use "./jbs-framework/order";
+@use "./jbs-framework/sizing";
+@use "./jbs-framework/rounded";
+@use "./jbs-framework/shadow";
+@use "./jbs-framework/visibility";
+@use "./jbs-framework/position";
+@use "./jbs-framework/zindex";
+@use "./jbs-framework/gap";
+@use "./jbs-framework/buttons";

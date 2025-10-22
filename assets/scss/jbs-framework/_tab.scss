@@ -1,116 +1,129 @@
+// ============================================
+// Tab Component
+// ============================================
 
+@use "variables" as *;
+
+// Nav
 .jbs-nav {
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
     margin-bottom: 0;
-    list-style: none
+    list-style: none;
 }
 
+// Nav Link
 .jbs-nav-link {
     display: block;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     color: #0d6efd;
     text-decoration: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out
+    transition: all 0.15s ease-in-out;
 }
 
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
     .jbs-nav-link {
-        transition: none
+        transition: none;
     }
 }
 
-.jbs-nav-link:focus,.jbs-nav-link:hover {
-    color: #0a58ca
+.jbs-nav-link:focus, .jbs-nav-link:hover {
+    color: #0a58ca;
 }
 
 .jbs-nav-link.disabled {
-    color: #6c757d;
+    color: $secondary-color;
     pointer-events: none;
-    cursor: default
+    cursor: default;
 }
 
+// Nav Tabs
 .jbs-nav-tabs {
-    border-bottom: 1px solid #dee2e6
+    border-bottom: 1px solid $border-color;
 }
 
 .jbs-nav-tabs .jbs-nav-link {
     margin-bottom: -1px;
     background: 0 0;
     border: 1px solid transparent;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
 }
 
-.jbs-nav-tabs .jbs-nav-link:focus,.jbs-nav-tabs .jbs-nav-link:hover {
-    border-color: #e9ecef #e9ecef #dee2e6;
-    isolation: isolate
+.jbs-nav-tabs .jbs-nav-link:focus, .jbs-nav-tabs .jbs-nav-link:hover {
+    border-color: #e9ecef #e9ecef $border-color;
+    isolation: isolate;
 }
 
 .jbs-nav-tabs .jbs-nav-link.disabled {
-    color: #6c757d;
+    color: $secondary-color;
     background-color: transparent;
-    border-color: transparent
+    border-color: transparent;
 }
 
-.jbs-nav-tabs .jbs-nav-item.show .jbs-nav-link,.jbs-nav-tabs .jbs-nav-link.active {
+.jbs-nav-tabs .jbs-nav-item.show .jbs-nav-link, .jbs-nav-tabs .jbs-nav-link.active {
     color: #495057;
-    background-color: #fff;
-    border-color: #dee2e6 #dee2e6 #fff
+    background-color: $text-white;
+    border-color: $border-color $border-color $text-white;
 }
 
 .jbs-nav-tabs .dropdown-menu {
     margin-top: -1px;
     border-top-left-radius: 0;
-    border-top-right-radius: 0
+    border-top-right-radius: 0;
 }
 
+// Nav Pills
 .jbs-nav-pills .jbs-nav-link {
     background: 0 0;
     border: 0;
-    border-radius: .25rem
+    border-radius: $border-radius;
 }
 
-.jbs-nav-pills .jbs-nav-link.active,.jbs-nav-pills .show>.jbs-nav-link {
-    color: #fff;
-    background-color: #0d6efd
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+    color: $text-white;
+    background-color: $primary-color;
 }
 
-.jbs-nav-fill .jbs-nav-item,.jbs-nav-fill>.jbs-nav-link {
+// Nav Fill
+.jbs-nav-fill .jbs-nav-item, .jbs-nav-fill > .jbs-nav-link {
     flex: 1 1 auto;
-    text-align: center
+    text-align: center;
 }
 
-.jbs-nav-justified .jbs-nav-item,.jbs-nav-justified>.jbs-nav-link {
+// Nav Justified
+.jbs-nav-justified .jbs-nav-item, .jbs-nav-justified > .jbs-nav-link {
     flex-basis: 0;
     flex-grow: 1;
-    text-align: center
+    text-align: center;
 }
 
-.jbs-nav-fill .jbs-nav-item .jbs-nav-link,.jbs-nav-justified .jbs-nav-item .jbs-nav-link {
-    width: 100%
+.jbs-nav-fill .jbs-nav-item .jbs-nav-link, .jbs-nav-justified .jbs-nav-item .jbs-nav-link {
+    width: 100%;
 }
 
-.jbs-tab-content>.jbs-tab-pane {
+// Tab Content
+.jbs-tab-content > .jbs-tab-pane {
     display: none;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s linear;
 }
 
-.jbs-tab-content>.active {
+.jbs-tab-content > .active {
     display: block;
 }
 
-.jbs-tab-content>.active.jbs-show {
+.jbs-tab-content > .active.jbs-show {
     opacity: 1;
 }
 
+// Fade
 .jbs-fade {
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s linear;
 }
 
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
     .jbs-fade {
         transition: none;
     }
@@ -119,4 +132,3 @@
 .jbs-fade:not(.jbs-show) {
     opacity: 0;
 }
-

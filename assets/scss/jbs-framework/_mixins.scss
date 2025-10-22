@@ -6,42 +6,72 @@
 
 // Placeholder Mixin
 @mixin placeholder {
-    &.placeholder {
-        @content;
-    }
+  &.placeholder {
+    @content;
+  }
 
-    &:-moz-placeholder {
-        @content;
-    }
+  &:-moz-placeholder {
+    @content;
+  }
 
-    &::-moz-placeholder {
-        @content;
-    }
+  &::-moz-placeholder {
+    @content;
+  }
 
-    &::-webkit-input-placeholder {
-        @content;
-    }
+  &::-webkit-input-placeholder {
+    @content;
+  }
 }
 
 // Media Query Mixin
 @mixin respond-above($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-        $breakpoint-value: map-get($breakpoints, $breakpoint);
-        @media (min-width: $breakpoint-value) {
-            @content;
-        }
-    } @else {
-        @warn "Invalid breakpoint: #{$breakpoint}.";
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $breakpoint-value) {
+      @content;
     }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}.";
+  }
 }
 
 @mixin respond-below($breakpoint) {
-    @if map-has-key($breakpoints, $breakpoint) {
-        $breakpoint-value: map-get($breakpoints, $breakpoint);
-        @media (max-width: $breakpoint-value) {
-            @content;
-        }
-    } @else {
-        @warn "Invalid breakpoint: #{$breakpoint}.";
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (max-width: $breakpoint-value) {
+      @content;
     }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}.";
+  }
+}
+
+// Transition Mixin
+@mixin transition($property: all, $duration: 0.3s, $ease: ease) {
+  transition: $property $duration $ease;
+}
+
+// Border Radius Mixin
+@mixin border-radius($radius: 0.25rem) {
+  border-radius: $radius;
+}
+
+// Box Shadow Mixin
+@mixin box-shadow($shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15)) {
+  box-shadow: $shadow;
+}
+
+// Flexbox Mixin
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Absolute Center Mixin
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

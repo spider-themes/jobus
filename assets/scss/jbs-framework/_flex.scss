@@ -2,107 +2,109 @@
 // Flexbox Utilities
 // ============================================
 
+@use "variables" as *;
+
 // Flexbox
 .jbs-flex-wrap {
-    flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
 }
 
 .jbs-flex-fill {
-    flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
 }
 
 // Align Items
 .jbs-align-items-start {
-    align-items: flex-start !important;
+  align-items: flex-start !important;
 }
 
 .jbs-align-items-center {
-    align-items: center !important;
+  align-items: center !important;
 }
 
 .jbs-align-items-xl-center {
-    align-items: center !important;
+  align-items: center !important;
 }
 
-@media (min-width: 576px) {
-    .jbs-align-items-sm-center {
-        align-items: center !important;
-    }
+@media (min-width: 768px) {
+  .jbs-align-items-sm-center {
+    align-items: center !important;
+  }
 }
 
 // Justify Content
 .jbs-justify-content-center {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 
 .jbs-justify-content-between {
-    justify-content: space-between !important;
+  justify-content: space-between !important;
 }
 
 .jbs-justify-content-md-end {
-    justify-content: flex-end !important;
+  justify-content: flex-end !important;
 }
 
 .jbs-justify-content-lg-end {
-    justify-content: flex-end !important;
+  justify-content: flex-end !important;
 }
 
 @media (min-width: 1200px) {
-    .jbs-justify-content-xl-end {
-        justify-content: flex-end !important;
-    }
+  .jbs-justify-content-xl-end {
+    justify-content: flex-end !important;
+  }
 }
 
 // Flex Order
 .jbs-order-md-1 {
-    order: 1 !important;
+  order: 1 !important;
 }
 
 .jbs-order-md-2 {
-    order: 2 !important;
+  order: 2 !important;
 }
 
 .jbs-order-xl-0 {
-    order: 0 !important;
+  order: 0 !important;
 }
 
 .jbs-order-xl-1 {
-    order: 1 !important;
+  order: 1 !important;
 }
 
 .jbs-order-xl-2 {
-    order: 2 !important;
+  order: 2 !important;
 }
 
 .jbs-order-xl-3 {
-    order: 3 !important;
+  order: 3 !important;
 }
 
 .jbs-order-xl-4 {
-    order: 4 !important;
+  order: 4 !important;
 }
 
 .jbs-order-xl-first {
-    order: -1 !important;
+  order: -1 !important;
 }
 
 .jbs-order-xl-last {
-    order: 6 !important;
+  order: 6 !important;
 }
 
 @media (min-width: 576px) {
-    .jbs-order-sm-last {
-        order: 6 !important;
-    }
+  .jbs-order-sm-last {
+    order: 6 !important;
+  }
 }
 
 // Gap (legacy, prefer .jbs-gap-* utilities)
 .jbs-gx-1 {
-    gap: 0.25rem !important;
+  gap: 0.25rem !important;
 }
 
 // Column Utility (if needed)
 .jbs-col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
 }

@@ -5351,11 +5351,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab.modal-content .tags.radio-filter label {
-  background: #EFF6F3;
-}
 .filter-area-tab {
   position: relative;
+}
+.filter-area-tab.modal-content .tags.radio-filter label {
+  background: #EFF6F3;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;

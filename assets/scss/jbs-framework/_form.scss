@@ -2,91 +2,42 @@
 // Form Controls
 // ============================================
 
-.jbs-form-label {
-    margin-bottom: .5rem
-}
-label{
+@use "variables" as *;
+
+// Form Controls
+.jbs-label {
+    margin-bottom: 0.5rem;
     display: inline-block;
 }
+
+.jbs-form-label {
+    margin-bottom: 0.5rem;
+}
+
 .jbs-form-control {
     display: block;
     width: 100%;
-    padding: .375rem .75rem;
+    padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
+    color: null;
+    background-color: $text-white;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid #dee2e6;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
-}
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.15s ease-in-out;
 
-// ============================================
-// Buttons
-// ============================================
-
-.jbs-btn {
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.jbs-btn-primary {
-    color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-    
-    &:hover {
-        background-color: #0b5ed7;
-        border-color: #0a58ca;
-    }
-}
-
-
-.jbs-btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-    
-    &:hover {
-        background-color: #bb2d3b;
-        border-color: #b02a37;
-    }
-}
-
-.jbs-btn-sm {
-    padding: .25rem .5rem;
-    font-size: .875rem;
-    border-radius: .2rem;
-}
-
-.jbs-btn-secondary {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-    
-    &:hover {
-        background-color: #5c636a;
-        border-color: #565e64;
+    &:focus {
+        color: null;
+        background-color: $text-white;
+        border-color: rgba(#0d6efd, 0.25);
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(#0d6efd, 0.25);
     }
 }
 
@@ -99,36 +50,60 @@ label{
     padding: 1rem 1rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
+}
+
+.jbs-alert-primary {
+    color: shade-color(#0d6efd, 40%);
+    background-color: tint-color(#0d6efd, -80%);
+    border-color: tint-color(#0d6efd, -70%);
+}
+
+.jbs-alert-secondary {
+    color: shade-color(#6c757d, 40%);
+    background-color: tint-color(#6c757d, -80%);
+    border-color: tint-color(#6c757d, -70%);
 }
 
 .jbs-alert-success {
-    color: #0f5132;
-    background-color: #d1e7dd;
-    border-color: #badbcc;
+    color: shade-color(#198754, 40%);
+    background-color: tint-color(#198754, -80%);
+    border-color: tint-color(#198754, -70%);
 }
 
 .jbs-alert-danger {
-    color: #842029;
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
+    color: shade-color(#dc3545, 40%);
+    background-color: tint-color(#dc3545, -80%);
+    border-color: tint-color(#dc3545, -70%);
 }
 
 .jbs-alert-warning {
-    color: #664d03;
-    background-color: #fff3cd;
-    border-color: #ffecb5;
+    color: shade-color(#ffc107, 40%);
+    background-color: tint-color(#ffc107, -80%);
+    border-color: tint-color(#ffc107, -70%);
 }
 
 .jbs-alert-info {
-    color: #055160;
-    background-color: #cff4fc;
-    border-color: #b6effb;
+    color: shade-color(#0dcaf0, 40%);
+    background-color: tint-color(#0dcaf0, -80%);
+    border-color: tint-color(#0dcaf0, -70%);
+}
+
+.jbs-alert-light {
+    color: shade-color(#f8f9fa, 40%);
+    background-color: tint-color(#f8f9fa, -80%);
+    border-color: tint-color(#f8f9fa, -70%);
+}
+
+.jbs-alert-dark {
+    color: shade-color(#212529, 40%);
+    background-color: tint-color(#212529, -80%);
+    border-color: tint-color(#212529, -70%);
 }
 
 .jbs-alert-dismissible {
     padding-right: 3rem;
-    
+
     .jbs-btn-close {
         position: absolute;
         top: 0;
@@ -145,36 +120,36 @@ label{
 .jbs-table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #212529;
+    color: $text-dark;
     vertical-align: top;
     border-color: #dee2e6;
-    
+
     th,
     td {
-        padding: .5rem;
+        padding: 0.5rem;
         border-bottom: 1px solid #dee2e6;
     }
-    
+
     thead {
         vertical-align: bottom;
     }
-    
+
     tbody {
         vertical-align: inherit;
     }
 }
 
 .jbs-table-striped > tbody > tr:nth-of-type(odd) > * {
-    background-color: rgba(0, 0, 0, .05);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .jbs-table-bordered {
     border: 1px solid #dee2e6;
-    
+
     > :not(caption) > * {
         border-width: 1px 0;
     }
-    
+
     > :not(caption) > * > * {
         border-width: 0 1px;
     }
@@ -186,15 +161,15 @@ label{
 
 .jbs-badge {
     display: inline-block;
-    padding: .35em .65em;
-    font-size: .75em;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
     font-weight: 700;
     line-height: 1;
-    color: #fff;
+    color: $text-white;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 
 .jbs-badge-primary {
@@ -223,34 +198,11 @@ label{
     color: #000;
 }
 
-// ============================================
-// Button Groups
-// ============================================
+.jbs-badge-light {
+    background-color: #f8f9fa;
+    color: #000;
+}
 
-.jbs-btn-group {
-    position: relative;
-    display: inline-flex;
-    vertical-align: middle;
-    
-    > .jbs-btn {
-        position: relative;
-        flex: 1 1 auto;
-        
-        &:hover,
-        &:focus,
-        &:active {
-            z-index: 1;
-        }
-    }
-    
-    > .jbs-btn:not(:last-child) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    
-    > .jbs-btn:not(:first-child) {
-        margin-left: -1px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
+.jbs-badge-dark {
+    background-color: $text-dark;
 }

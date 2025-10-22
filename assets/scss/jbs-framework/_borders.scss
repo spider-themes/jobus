@@ -4,6 +4,7 @@
 
 @use "variables" as *;
 
+// Borders
 .jbs-border-0 { border: 0 !important; }
 .jbs-border-bottom { border-bottom: 1px solid $border-color !important; }
 .jbs-border-top { border-top: 1px solid $border-color !important; }
