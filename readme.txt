@@ -83,7 +83,7 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 == Screenshots ==
 1. Candidate Page with Filterable Sidebar
 2. Company Page with Filterable Sidebar
-3  Job listing Page with Filterable Sidebar
+3. Job listing Page with Filterable Sidebar
 
 == Changelog ==
 
