@@ -6611,6 +6611,7 @@ input[type=file]::-webkit-file-upload-button {
   width: 100%;
   padding: 0 26px;
   display: inline-block;
+  box-sizing: border-box;
 }
 .jobus_job_details_2 .details-post-data .btn-one:hover {
   background: #00bf58;
@@ -6716,6 +6717,7 @@ input[type=file]::-webkit-file-upload-button {
   -o-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
   display: inline-block;
+  box-sizing: border-box;
 }
 .btn-one.lg {
   padding: 8px 32px;
@@ -7127,6 +7129,12 @@ input[type=file]::-webkit-file-upload-button {
     font-size: 20px;
     margin-top: 20px;
     text-align: center;
+  }
+}
+@media (max-width: 767px) {
+  .feedback-section-five .slider-arrows,
+  .related-job-section .slick-arrow-one {
+    position: static;
   }
 }
 

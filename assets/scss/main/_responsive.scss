@@ -5,3 +5,11 @@
         text-align: center;
     }
 }
+
+@media (max-width: 767px) {
+
+    .feedback-section-five .slider-arrows,
+    .related-job-section .slick-arrow-one {
+        position: static;
+    }
+}

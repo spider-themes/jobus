@@ -22,7 +22,8 @@
   background-color: #D2F34C;
   border:2px solid transparent;
   @include transition(0.3s);
-    display: inline-block;
+  display: inline-block;
+  box-sizing: border-box;
   &.lg {
     padding: 8px 32px;
   }

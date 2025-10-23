@@ -1744,6 +1744,14 @@
     padding-bottom: 3rem !important;
   }
 }
+@media (min-width: 1400px) {
+  .jbs-me-xxl-5 {
+    margin-right: 3rem !important;
+  }
+  .jbs-pe-xxl-4 {
+    padding-right: 1.5rem !important;
+  }
+}
 .jbs-border-0 {
   border: 0 !important;
 }

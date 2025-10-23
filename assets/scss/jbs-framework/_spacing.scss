@@ -24,6 +24,8 @@
 .jbs-me-4 { margin-right: 1.5rem !important; }
 .jbs-me-5 { margin-right: 3rem !important; }
 
+
+
 // Margin Top
 .jbs-mt-0 { margin-top: 0 !important; }
 .jbs-mt-1 { margin-top: 0.25rem !important; }
@@ -298,4 +300,13 @@
   .jbs-pb-xxl-3 { padding-bottom: 1rem !important; }
   .jbs-pb-xxl-4 { padding-bottom: 1.5rem !important; }
   .jbs-pb-xxl-5 { padding-bottom: 3rem !important; }
+}
+
+@media (min-width: 1400px) {
+  .jbs-me-xxl-5 {
+    margin-right: 3rem !important; 
+  }
+  .jbs-pe-xxl-4 {
+    padding-right: 1.5rem !important;
+  }
 }
