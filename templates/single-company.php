@@ -23,7 +23,7 @@ $location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
 $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
-    <section class="company-details pt-110 jbs-lg-pt-80 jbs-pb-160 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
+    <section class="company-details jbs-pt-110 jbs-lg-pt-80 jbs-pb-160 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
         <div class="jbs-container">
             <div class="jbs-row">
 
@@ -59,7 +59,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                     <li>
                                         <span><?php esc_html_e( 'Email: ', 'jobus' ); ?></span>
                                         <div>
-                                            <a class="jbs-text-black" href="mailto:<?php echo esc_attr( $employer_mail ) ?>">
+                                            <a class="jbs-text-dark" href="mailto:<?php echo esc_attr( $employer_mail ) ?>">
                                                 <?php echo esc_html( $employer_mail ) ?>
                                             </a>
                                         </div>
@@ -127,7 +127,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                             <?php
                                             foreach ( $social_icons as $item ) {
                                                 if ( ! empty( $item['url'] ) ) { ?>
-                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3 jbs-text-black">
+                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3 jbs-text-black jbs-text-primary">
                                                         <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                     </a>
                                                     <?php
@@ -162,7 +162,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         }
                         if ( $video_url ) {
                             ?>
-                            <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-centerjbs-mb-50"
+                            <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mb-50"
                                  style="background-image: url(<?php echo esc_url( wp_get_attachment_url( $video_bg_img ) ); ?>)">
                                 <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
                                     <i class="bi bi-play-fill"></i>
@@ -239,7 +239,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                             <?php
                         }
                         ?>
-                        <nav class="share-option mt-60">
+                        <nav class="share-option jbs-mt-60">
                             <?php jobus_social_share_icons() ?>
                         </nav>
                     </div>
@@ -248,7 +248,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
         </div>
     </section>
 
-    <section class="company-open-position pt-80 jbs-lg-pt-60 jbs-pb-100 jbs-lg-pb-60">
+    <section class="company-open-position jbs-pt-80 jbs-lg-pt-60 jbs-pb-100 jbs-lg-pb-60">
         <div class="jbs-container">
 
             <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
@@ -328,7 +328,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                 </div>
                             </div>
                             <div class="jbs-col-lg-2 jbs-col-md-4">
-                                <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end sm-mt-20">
+                                <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end jbs-sm-mt-20">
                                     <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
                                         <?php esc_html_e( 'APPLY', 'jobus' ); ?>
                                     </a>

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         while ( $job_query->have_posts() ) : $job_query->the_post();
             $save_job_status = jobus_get_save_status();
             ?>
-            <div class="jbs-col-sm-6jbs-mb-30">
+            <div class="jbs-col-sm-6 jbs-mb-30">
                 <div class="job-list-two style-two jbs-position-relative">
                     <?php
                     if ( has_post_thumbnail() ) { ?>

@@ -114,11 +114,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         'meta_key'   => 'jobus_saved_candidates',
                                         'is_saved'   => $save_candidate_status['is_saved'],
                                         'button_title' => !empty($save_candidate_status['is_saved']) ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus'),
-                                        'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s mt-10 jobus-saved-post'
+                                        'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s jbs-mt-10 jobus-saved-post'
                                     ] );
                                 }
                                 ?>
-                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-ms-md-2 jbs-mt-10 sm-mt-20">
+                                <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-ms-md-2 jbs-mt-10 jbs-sm-mt-20">
 									<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                                 </a>
                             </div>

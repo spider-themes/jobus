@@ -32,7 +32,7 @@ $post_type = jobus_get_sanitized_query_param('post_type');
             <?php esc_html_e('Filter By', 'jobus'); ?>
         </div>
 
-        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 pt-25 jbs-pb-30 jbs-mt20">
+        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt20">
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" role="search"
                 method="get">
 

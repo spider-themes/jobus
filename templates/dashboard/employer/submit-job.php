@@ -76,13 +76,13 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
             <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
 
             <!-- Job Title & Content -->
-            <div class="dash-input-wrapperjbs-mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="job_title"><?php esc_html_e( 'Job Title', 'jobus' ); ?></label>
                 <input type="text" name="job_title" id="job_title" value="<?php echo esc_attr( $job_title ); ?>" required>
             </div>
 
             <!-- Job Content -->
-            <div class="dash-input-wrapperjbs-mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="job_description"><?php esc_html_e( 'Job Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
@@ -111,7 +111,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
                 <!-- Add Categories -->
-                <div class="dash-input-wrapperjbs-mb-40 jbs-mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -138,7 +138,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Locations -->
-                <div class="dash-input-wrapperjbs-mb-40 jbs-mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -165,7 +165,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
 
                 <!-- Add Tags -->
-                <div class="dash-input-wrapperjbs-mb-40 jbs-mt-20">
+                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-tag-list"><?php esc_html_e( 'Tags', 'jobus' ); ?></label>
                     <div class="skills-wrapper">
                         <?php
@@ -227,26 +227,26 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 <div class="jbs-row">
                     <div class="jbs-row">
                         <div class="jbs-col-md-12">
-                            <div class="dash-input-wrapperjbs-mb-30">
+                            <div class="dash-input-wrapper jbs-mb-30">
                                 <select id="is_company_website" name="is_company_website" class="nice-select">
                                     <option value="default" <?php selected( $is_company_website, 'default' ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
                                     <option value="custom" <?php selected( $is_company_website, 'custom' ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
                                 </select>
                             </div>
                             <div id="company-website-fields">
-                                <div class="dash-input-wrapperjbs-mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-text"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
                                     <input type="text" id="company-website-text" name="company_website[text]"
                                            placeholder="<?php esc_attr_e( 'Visit job website', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_text ); ?>">
                                 </div>
-                                <div class="dash-input-wrapperjbs-mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                                     <input type="url" id="company-website-url" name="company_website[url]"
                                            placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_url ); ?>">
                                 </div>
-                                <div class="dash-input-wrapperjbs-mb-30">
+                                <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-target"><?php esc_html_e( 'Website Target', 'jobus' ); ?></label>
                                     <select id="company-website-target" name="company_website[target]" class="nice-select">
                                         <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>

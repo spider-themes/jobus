@@ -17,7 +17,7 @@ if ( ! empty( $term_tags ) ) {
 	$total_tags = count($term_tags);
 
 	?>
-    <ul class="jobus-tags-wrapper tags jbs-style-none jbs-d-flex jbs-flex-wrap justify-space-between radio-filter jbs-mb-5 jbs-pl-0">
+    <ul class="jobus-tags-wrapper tags jbs-style-none jbs-d-flex jbs-flex-wrap justify-space-between radio-filter jbs-pl-0">
 
 		<?php
 		$searched_opt = jobus_search_terms( $taxonomy );

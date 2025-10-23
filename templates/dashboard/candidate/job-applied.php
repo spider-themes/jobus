@@ -24,7 +24,7 @@ $applications = new \WP_Query( $args );
 ?>
 
 <div class="jbs-position-relative">
-    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between mb-40 jbs-lg-mb-30">
+    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
         <h2 class="main-title jbs-m0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
     </div>
     <?php

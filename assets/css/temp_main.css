@@ -1624,6 +1624,10 @@ iframe {
   font-size: 19px !important;
 }
 
+.jbs-text-primary {
+  color: #244034 !important;
+}
+
 .category-section-one.bg-color {
   background: #F2F9D8;
 }
@@ -3661,7 +3665,7 @@ img {
   color: #fff;
   background: #31795A;
   text-align: center;
-  padding: 0 18px;
+  padding: 10px 18px;
   border-radius: 40px;
 }
 .candidate-profile-card .profile-btn:hover {
@@ -3675,7 +3679,7 @@ img {
   color: #31795A;
   border: 1px solid #31795A;
   text-align: center;
-  padding: 0 15px;
+  padding: 10px 15px;
   border-radius: 40px;
 }
 .candidate-profile-card .msg-btn:hover {
@@ -5132,11 +5136,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab.modal-content .tags.radio-filter label {
-  background: #EFF6F3;
-}
 .filter-area-tab {
   position: relative;
+}
+.filter-area-tab.modal-content .tags.radio-filter label {
+  background: #EFF6F3;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -5548,7 +5552,6 @@ img {
 .jbs-filter-btn {
   font-size: 15px !important;
   color: #244034 !important;
-  height: 32px !important;
   border: 2px solid #244034 !important;
   border-radius: 6px !important;
 }
@@ -5704,6 +5707,7 @@ img {
   font-size: 15px;
   color: #00BF58;
   text-transform: capitalize;
+  display: inline-block;
 }
 .job-list-one .job-duration:hover {
   text-decoration: underline;
@@ -5846,6 +5850,7 @@ img {
   background: #E7F6EF !important;
   border-radius: 3px;
   margin: 54px 0 16px;
+  display: inline-block;
 }
 .job-list-two .job-duration.part-time {
   background: rgba(255, 87, 87, 0.08) !important;
@@ -5922,6 +5927,7 @@ img {
   background: #E7F6EF;
   text-transform: capitalize;
   color: #31795A;
+  display: inline-block;
 }
 .job-list-two.style-two .job-duration.part-time {
   background: rgba(255, 87, 87, 0.08);
@@ -5954,10 +5960,6 @@ img {
     flex-wrap: wrap;
     gap: 24px;
   }
-}
-
-.company-profiles {
-  background-color: #EFF6F3 !important;
 }
 
 .company-logo img {
@@ -6049,6 +6051,7 @@ img {
 .job-list-three .main-wrapper .job-duration {
   font-size: 14px;
   color: #00BF58;
+  display: inline-block;
 }
 .job-list-three .main-wrapper .job-duration:hover {
   text-decoration: underline;
@@ -6511,6 +6514,7 @@ input[type=file]::-webkit-file-upload-button {
   background: #31795a;
   width: 100%;
   padding: 0 26px;
+  display: inline-block;
 }
 .jobus_job_details_2 .details-post-data .btn-one:hover {
   background: #00bf58;
@@ -6609,6 +6613,7 @@ input[type=file]::-webkit-file-upload-button {
   color: var(--heading_color);
   background-color: #D2F34C;
   border: 2px solid transparent;
+  display: inline-block;
   -webkit-transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   -ms-transition: all 0.3s ease-in-out 0s;
@@ -6633,6 +6638,7 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 10px !important;
   background: #31795A !important;
   padding: 0 26px !important;
+  display: inline-block !important;
 }
 .jbs-btn-ten:hover {
   background: #00BF58 !important;

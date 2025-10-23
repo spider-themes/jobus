@@ -74,7 +74,7 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="jbs-col-md-3 sm-mb-10 sm-mt-10 jbs-mt-0">
+            <div class="jbs-col-md-3 sm-mb-10 jbs-sm-mt-10 jbs-mt-0">
                 <button type="submit" class="jbs-text-uppercase jbs-btn jbs-btn-success border6 tran3s jbs-m-auto"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>

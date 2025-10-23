@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<div class="accordion-box grid-style show jbs-mt-70">
+<div class="accordion-box grid-style show ">
     <div class="jbs-row">
 		<?php
 		while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						// Display the first 2 skills
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
-						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center pt-30 sm-pt-20 jbs-pb-10">';
+						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center jbs-pt-30 sm-pt-20 jbs-pb-10">';
 						foreach ( $displayed_skills as $skill ) {
 							echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					} else {
 						if ( ! empty( $skills ) ) {
 							// Display all skills
-							echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between pt-30 sm-pt-20 jbs-pb-10">';
+							echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between jbs-pt-30 sm-pt-20 jbs-pb-10">';
 							foreach ( $skills as $skill ) {
 								echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 							}
@@ -95,7 +95,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						if ( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) {
 							?>
                             <div class="jbs-col-md-6">
-                                <div class="candidate-info mt-10">
+                                <div class="candidate-info jbs-mt-10">
                                     <span> <?php echo esc_html( jobus_meta_candidate_spec_name( 2 ) ); ?> </span>
                                     <div class="jbs-text-capitalize">
 										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_candidate_options', 'candidate_archive_meta_2' ) ) ?>
@@ -106,7 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						}
 						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
                             <div class="jbs-col-md-6">
-                                <div class="candidate-info mt-10">
+                                <div class="candidate-info jbs-mt-10">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                     <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>" class="jbs-text-capitalize">
 										<?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ); ?>
@@ -120,7 +120,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="jbs-row jbs-gx-2 jbs-pt-25 sm-pt-10">
                         <div class="jbs-col-md-6">
-                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5">
+                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5 jbs-pt-10">
 								<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                             </a>
                         </div>

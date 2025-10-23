@@ -91,7 +91,7 @@ wp_enqueue_script( 'lightbox' );
                             ?>
                             <div class="jbs-col-xl-3 jbs-col-md-4 jbs-order-xl-4">
                                 <div class="jbs-d-flex jbs-justify-content-md-end">
-                                    <a href="<?php echo esc_url( $cv_attachment ) ?>" class="cv-download-btn jbs-fw-500 tran3s jbs-ms-md-3 sm-mt-20" target="_blank">
+                                    <a href="<?php echo esc_url( $cv_attachment ) ?>" class="cv-download-btn jbs-fw-500 tran3s jbs-ms-md-3 jbs-sm-mt-20" target="_blank">
                                         <?php esc_html_e( 'Download CV', 'jobus' ) ?>
                                     </a>
                                 </div>
@@ -106,7 +106,7 @@ wp_enqueue_script( 'lightbox' );
     </div>
 </div>
 
-<section class="candidates-profile-2 bg-color pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile-2 bg-color jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-lg-8">

@@ -39,7 +39,7 @@ $avatar_url = $description_data['avatar_url'];
         <input type="hidden" name="candidate_profile_form_submit" value="1" />
 
         <div class="jbs-bg-white card-box border-20" id="candidate-profile-description">
-            <div class="user-avatar-setting jbs-d-flex jbs-align-items-centerjbs-mb-30">
+            <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
                 <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="candidate_profile_picture_upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
@@ -51,7 +51,7 @@ $avatar_url = $description_data['avatar_url'];
                 <input type="hidden" name="profile_picture_action" id="profile_picture_action" value="">
             </div>
 
-            <div class="dash-input-wrapperjbs-mb-30">
+            <div class="dash-input-wrapper jbs-mb-30">
                 <label for="candidate_name"><?php esc_html_e( 'Full Name*', 'jobus' ); ?></label>
                 <input type="text" name="candidate_name" id="candidate_name" value="<?php echo esc_attr( $user->display_name ); ?>">
             </div>
@@ -139,14 +139,14 @@ $avatar_url = $description_data['avatar_url'];
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapperjbs-mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_icon">
                                                 <?php esc_html_e( 'Icon', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapperjbs-mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
                                                     <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
@@ -160,14 +160,14 @@ $avatar_url = $description_data['avatar_url'];
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapperjbs-mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="social_<?php echo esc_attr($index); ?>_url">
                                                 <?php esc_html_e( 'URL', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapperjbs-mb-10">
+                                        <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]" id="social_<?php echo esc_attr($index); ?>_url" class="jbs-form-control" value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>

@@ -934,6 +934,10 @@
   display: block !important;
 }
 
+.jbs-pointer {
+  cursor: pointer !important;
+}
+
 .jbs-m-auto {
   margin: auto !important;
 }

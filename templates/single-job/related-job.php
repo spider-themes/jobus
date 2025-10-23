@@ -21,10 +21,10 @@ $args = [
 
 $related_jobs = new WP_Query($args);
 ?>
-<section class="related-job-section pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
+<section class="related-job-section jbs-pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
     <div class="jbs-container">
         <div class="jbs-position-relative">
-            <div class="title-three jbs-text-center jbs-text-md-start mb-55 jbs-lg-mb-40">
+            <div class="title-three jbs-text-center jbs-text-md-start jbs-mb-55 jbs-lg-mb-40">
                 <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
             </div>
             <div class="related-job-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">
@@ -73,7 +73,7 @@ $related_jobs = new WP_Query($args);
                 wp_reset_postdata();
                 ?>
             </div>
-            <ul class="slider-arrows slick-arrow-one color-two jbs-d-flex jbs-justify-content-center jbs-style-none sm-mt-20">
+            <ul class="slider-arrows slick-arrow-one color-two jbs-d-flex jbs-justify-content-center jbs-style-none jbs-sm-mt-20">
                 <li class="prev_e slick-arrow"><i class="bi bi-arrow-left"></i></li>
                 <li class="next_e slick-arrow"><i class="bi bi-arrow-right"></i></li>
             </ul>

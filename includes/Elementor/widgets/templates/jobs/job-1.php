@@ -60,7 +60,7 @@ if (!defined('ABSPATH')) {
                     </div>
 
                     <div class="jod_list_btn_area">
-                        <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end sm-mt-20">
+                        <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end jbs-sm-mt-20">
                             <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
                                 <?php esc_html_e('APPLY', 'jobus'); ?>
                             </a>

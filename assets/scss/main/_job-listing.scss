@@ -488,7 +488,6 @@
 .jbs-filter-btn {
   font-size: 15px !important;
   color: #244034 !important;
-  height: 32px !important;
   border: 2px solid #244034 !important;
   border-radius: 6px !important;
 
@@ -679,7 +678,7 @@
     font-size: 15px;
     color: $color-three;
     text-transform: capitalize;
-
+    display: inline-block;
     &:hover {
       text-decoration: underline;
     }
@@ -836,6 +835,7 @@
     background: #E7F6EF !important;
     border-radius: 3px;
     margin: 54px 0 16px;
+    display: inline-block;
 
     &.part-time {
       background: rgba($color: #FF5757, $alpha: 0.08) !important;
@@ -925,6 +925,7 @@
       background: #E7F6EF;
       text-transform: capitalize;
       color: $color-five;
+      display: inline-block;
 
       &.part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
@@ -972,9 +973,9 @@
   }
 }
 
-.company-profiles {
-  background-color: #EFF6F3 !important;
-}
+// .company-profiles {
+//   background-color: #EFF6F3 !important;
+// }
 
 .company-logo {
   img {
@@ -1076,6 +1077,7 @@
     .job-duration {
       font-size: 14px;
       color: $color-three;
+      display: inline-block;
 
       &:hover {
         text-decoration: underline;

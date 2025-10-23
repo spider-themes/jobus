@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
-    <section class="job-details jobus_job_details pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
+    <section class="job-details jobus_job_details jbs-pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
         <div class="jbs-container">
             <div class="jbs-row">
 

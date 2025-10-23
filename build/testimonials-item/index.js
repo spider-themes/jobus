@@ -145,7 +145,7 @@ function Save({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "jbs-d-flex jbs-align-items-center",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-          className: "style-none jbs-d-flex rating",
+          className: "jbs-style-none jbs-d-flex rating",
           children: Array.from({
             length: rating
           }, (_, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
@@ -173,7 +173,7 @@ function Save({
           alt: "Author",
           className: "author-img jbs-rounded-circle"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "ms-3",
+          className: "jbs-ms-3",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "name jbs-fw-500 jbs-text-dark",
             children: authorName

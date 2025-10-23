@@ -16,7 +16,7 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
-<div class="inner-banner-one jobi-single-banner">
+<div class="jbs-banner jobi-single-banner">
     <div class="jbs-container">
             <div class="jbs-row">
                 <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
@@ -29,7 +29,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <?php the_time( get_option( 'date_format' ) ) ?> .
                         <?php esc_html_e( 'By', 'jobus' ); ?>
-                        <a href="<?php echo esc_url( get_author_posts_url( $post_author_id ) ) ?>">
+                        <a class="jbs-text-white" href="<?php echo esc_url( get_author_posts_url( $post_author_id ) ) ?>">
                             <?php echo esc_html( get_the_author_meta( 'display_name', $post_author_id ) ) ?>
                         </a>
                 </div>
@@ -48,7 +48,7 @@ wp_enqueue_script( 'lightbox' );
     ?>
 </div>
 
-<section class="candidates-profile pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
@@ -196,11 +196,11 @@ wp_enqueue_script( 'lightbox' );
             </div>
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
-                <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
+                <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 jbs-md-mt-60">
 
-                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 md-mb-40">
+                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 jbs-md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
-                            <div class="pt-25">
+                            <div class="jbs-pt-25">
                                 <div class="candidate-avatar jbs-m-auto">
                                     <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle jbs-w-100' ] ); ?>
                                 </div>
@@ -208,7 +208,7 @@ wp_enqueue_script( 'lightbox' );
                         <?php endif; ?>
                         <h3 class="candidate-name jbs-text-center"><?php the_title() ?></h3>
                         <div class="jbs-text-center jbs-pb-25">
-                            <a href="#" class="invite-btn jbs-fw-500">
+                            <a href="#" class="invite-btn jbs-fw-500 ">
                                 <?php esc_html_e( 'Invite', 'jobus' ) ?>
                             </a>
                         </div>
@@ -246,7 +246,7 @@ wp_enqueue_script( 'lightbox' );
                                 <li>
                                     <span><?php esc_html_e( 'Email: ', 'jobus' ); ?></span>
                                     <div>
-                                        <a href="mailto:<?php echo esc_attr( $meta['candidate_mail'] ) ?>">
+                                        <a class="jbs-text-dark" href="mailto:<?php echo esc_attr( $meta['candidate_mail'] ) ?>">
                                             <?php echo esc_html( $meta['candidate_mail'] ) ?>
                                         </a>
                                     </div>
@@ -304,7 +304,7 @@ wp_enqueue_script( 'lightbox' );
                                         <?php
                                         foreach ( $social_icons as $item ) {
                                             if ( ! empty( $item['url'] ) ) { ?>
-                                                <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3">
+                                                <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3 jbs-text-primary">
                                                     <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                 </a>
                                                 <?php
