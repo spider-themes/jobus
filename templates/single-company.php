@@ -23,7 +23,7 @@ $location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
 $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
-    <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80 jbs-bg-white">
+    <section class="company-details jbs-pt-110 lg-pt-80jbs-pb-160 xl-pb-150 lg-pb-80 jbs-bg-white">
         <div class="jbs-container">
             <div class="jbs-row">
 
@@ -162,7 +162,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         }
                         if ( $video_url ) {
                             ?>
-                            <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mb-50"
+                            <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-centerjbs-mb-50"
                                  style="background-image: url(<?php echo esc_url( wp_get_attachment_url( $video_bg_img ) ); ?>)">
                                 <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox href="<?php echo esc_url( $video_url ); ?>">
                                     <i class="bi bi-play-fill"></i>
@@ -248,7 +248,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
         </div>
     </section>
 
-    <section class="company-open-position pt-80 lg-pt-60 pb-100 lg-pb-60">
+    <section class="company-open-position jbs-pt-80 lg-pt-60jbs-pb-100 lg-pb-60">
         <div class="jbs-container">
 
             <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
@@ -288,7 +288,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                     $job_meta   = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                     $company_id = $job_meta['select_company'] ?? '';
                     ?>
-                    <div class="job-list-one style-two jbs-position-relative mb-20">
+                    <div class="job-list-one style-two jbs-position-relativejbs-mb-20">
                         <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                                 <div class="job-title jbs-d-flex jbs-align-items-center">

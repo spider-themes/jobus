@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_candidate_options', true );
 			$post_favourite       = $meta['post_favorite'] ?? '';
 			$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-			$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
+			$is_popup_border_none = $archive_layout == '2' ? ' jbs-border-0' : '';
 			$column               = sanitize_html_class( jobus_opt( 'candidate_archive_grid_column' ) );
             $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
 			?>
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					    <?php
                     }
                     ?>
-                    <h4 class="candidate-name mt-15 mb-0">
+                    <h4 class="candidate-name jbs-mt-15 jbs-mb-0">
                         <a href="<?php the_permalink() ?>" class="jbs-text-black tran3s">
 							<?php the_title() ?>
                         </a>
@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						// Display the first 2 skills
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
-						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center pt-30 sm-pt-20 pb-10">';
+						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center jbs-pt-30 sm-pt-20jbs-pb-10">';
 						foreach ( $displayed_skills as $skill ) {
 							echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					} else {
 						if ( ! empty( $skills ) ) {
 							// Display all skills
-							echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between pt-30 sm-pt-20 pb-10">';
+							echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center justify-content-md-between jbs-pt-30 sm-pt-20jbs-pb-10">';
 							foreach ( $skills as $skill ) {
 								echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 							}
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						?>
                     </div>
 
-                    <div class="jbs-row jbs-gx-2 pt-25 sm-pt-10">
+                    <div class="jbs-row jbs-gx-2 jbs-pt-25 sm-pt-10">
                         <div class="jbs-col-md-6">
                             <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5">
 								<?php esc_html_e( 'View Profile', 'jobus' ) ?>

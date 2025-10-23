@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 		$post_favourite       = $meta['post_favorite'] ?? '';
 		$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-		$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
+		$is_popup_border_none = $archive_layout == '2' ? ' jbs-border-0' : '';
 		?>
-        <div class="company-list-layout mb-20<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
+        <div class="company-list-layout jbs-mb-20<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
             <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                 <div class="jbs-col-xl-5">
                     <div class="jbs-d-flex jbs-align-items-xl-center">
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </a>
 						<?php endif; ?>
                         <div class="company-data">
-                            <h5 class="jbs-m0">
+                            <h5 class="jbs-m-0 jbs-mt-10">
                                 <a href="<?php the_permalink(); ?>" class="company-name tran3s jbs-text-black">
 									<?php the_title() ?>
                                 </a>

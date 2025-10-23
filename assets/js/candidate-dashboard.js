@@ -107,12 +107,12 @@
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="social_${index}_icon">Icon</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
                                                 ${optionsHtml}
                                             </select>
@@ -122,12 +122,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="social_${index}_url">URL</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" placeholder="https://example.com">
                                         </div>
                                     </div>
@@ -229,12 +229,12 @@
                             <div class="accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <input type="text" name="education[${index}][sl_num]" 
                                                    id="education_${index}_sl_num" 
                                                    class="jbs-form-control"
@@ -245,12 +245,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="education_${index}_title">Title</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <input type="text" name="education[${index}][title]" 
                                                    id="education_${index}_title" 
                                                    class="jbs-form-control"
@@ -261,12 +261,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="education_${index}_academy">Academy</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <input type="text" name="education[${index}][academy]" 
                                                    id="education_${index}_academy" 
                                                    class="jbs-form-control"
@@ -277,12 +277,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="education_${index}_description">Description</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <textarea name="education[${index}][description]" 
                                                       id="education_${index}_description" 
                                                       class="jbs-form-control"
@@ -377,12 +377,12 @@
                             <div class="accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-30">
+                                        <div class="dash-input-wrapperjbs-mb-30">
                                             <input type="text" class="jbs-form-control" 
                                                    name="experience[${index}][sl_num]" 
                                                    id="experience_${index}_sl_num"
@@ -393,12 +393,12 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_title">Title</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-30">
+                                        <div class="dash-input-wrapperjbs-mb-30">
                                             <input type="text" class="jbs-form-control"
                                                    name="experience[${index}][title]"
                                                    id="experience_${index}_title"
@@ -409,21 +409,21 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-30 md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="jbs-row">
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper mb-30">
+                                                <div class="dash-input-wrapperjbs-mb-30">
                                                     <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][start_date]"
                                                            id="experience_${index}_start_date">
                                                 </div>
                                             </div>
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper mb-30">
+                                                <div class="dash-input-wrapperjbs-mb-30">
                                                     <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][end_date]"
                                                            id="experience_${index}_end_date">
@@ -435,12 +435,12 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-30 md-mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_description">Description</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-30">
+                                        <div class="dash-input-wrapperjbs-mb-30">
                                             <textarea class="jbs-form-control"
                                                       name="experience[${index}][description]"
                                                       id="experience_${index}_description"

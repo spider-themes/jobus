@@ -13,7 +13,7 @@ function Edit({ attributes, setAttributes }) {
     };
 
     const blockProps = useBlockProps({
-        className: 'video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mb-50',
+        className: 'video-post jbs-d-flex jbs-align-items-center jbs-justify-content-centerjbs-mb-50',
         style: { backgroundImage: `url(${attributes.backgroundImage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center' },
     });
 

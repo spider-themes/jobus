@@ -60,7 +60,7 @@ if ( $error_message ) {
             <input type="hidden" name="update_user_password" value="1">
             <div class="jbs-row">
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative mb-20">
+                    <div class="dash-input-wrapper jbs-position-relativejbs-mb-20">
                         <label for="current-password"><?php esc_html_e( 'Current Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="current-password" name="current_password" required>
                         <span class="placeholder_icon">
@@ -72,7 +72,7 @@ if ( $error_message ) {
                     </div>
                 </div>
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative mb-20">
+                    <div class="dash-input-wrapper jbs-position-relativejbs-mb-20">
                         <label for="new-password"><?php esc_html_e( 'New Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="new-password" name="new_password" required>
                         <span class="placeholder_icon">
@@ -84,7 +84,7 @@ if ( $error_message ) {
                     </div>
                 </div>
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative mb-20">
+                    <div class="dash-input-wrapper jbs-position-relativejbs-mb-20">
                         <label for="confirm-password"><?php esc_html_e( 'Confirm New Password*', 'jobus' ); ?></label>
                         <input type="password" class="pass_log_id" id="confirm-password" name="confirm_password" required>
                         <span class="placeholder_icon">

@@ -14,7 +14,7 @@ $employer_placeholder_email        = $attributes['employer_email'] ?? '';
 $employer_placeholder_pass         = $attributes['employer_pass'] ?? '';
 $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
 ?>
-<section class="registration-section position-relative pt-100 lg-pt-80 pb-150 lg-pb-80">
+<section class="registration-section position-relative jbs-pt-100 lg-pt-80jbs-pb-150 lg-pb-80">
     <div class="user-data-form">
 
         <div class="jbs-text-center">
@@ -22,7 +22,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
         </div>
 
         <div class="form-wrapper m-auto">
-            <ul class="jbs-nav jbs-nav-tabs border-0 w-100 jbs-mt-30" role="tablist">
+            <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
                 <li class="jbs-nav-item" role="presentation">
                     <button class="jbs-nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
                         <?php esc_html_e( 'Candidates', 'jobus' ); ?>

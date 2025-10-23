@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="accordion-box grid-style jbs-mt-70">
+<div class="accordion-box grid-style">
     <div class="jbs-row">
 		<?php
 		while ( $company_query->have_posts() ) : $company_query->the_post();
@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 			$post_favourite       = $meta['post_favorite'] ?? '';
 			$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-			$is_popup_border_none = $archive_layout == '2' ? ' border-0' : '';
+			$is_popup_border_none = $archive_layout == '2' ? ' jbs-border-0' : '';
 			$column               = sanitize_html_class( jobus_opt( 'company_archive_grid_column' ) );
 			?>
             <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                <div class="company-grid-layout mb-30<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
+                <div class="company-grid-layout jbs-mb-30<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
 					<?php if ( has_post_thumbnail() ) : ?>
                         <a href="<?php the_permalink(); ?>"
                            class="company-logo jbs-me-auto jbs-ms-auto jbs-rounded-circle">

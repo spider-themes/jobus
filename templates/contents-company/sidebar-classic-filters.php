@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
-    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto fw-500 tran3s jbs-d-lg-none mb-40"
+    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto fw-500 tran3s jbs-d-lg-nonejbs-mb-40"
             data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
 		<?php esc_html_e( 'Filter', 'jobus' ); ?>
@@ -16,7 +16,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
                 aria-label="Close"></button>
         <div class="main-title fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
-        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 pt-25 pb-30 mt-20">
+        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
 
 				<?php wp_nonce_field( 'jobus_search_filter', 'jobus_nonce' ); ?>
@@ -54,7 +54,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 							}
 						}
 						?>
-                        <div class="filter-block bottom-line pb-25 mt-25">
+                        <div class="filter-block bottom-line jbs-pb-25 jbs-mt-25">
                             <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>"
                               data-jbs-toggle="collapse"
                                data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"

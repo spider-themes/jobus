@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
                 <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
 
                 <div class="jbs-position-relative">
-                    <div class="main-title fw-500 text-dark jbs-ps-4 jbs-pe-4 pt-15 pb-15 border-bottom">
+                    <div class="main-title fw-500 text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15jbs-pb-15 border-bottom">
                         <?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>"
                         role="search" method="get">
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
                         <input type="hidden" name="post_type" value="jobus_candidate" />
                         <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
 
-                        <div class="pt-25 pb-30 jbs-ps-4 jbs-pe-4">
+                        <div class="jbs-pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4">
                             <div class="jbs-row">
                                 <?php
 
@@ -41,7 +41,7 @@ if (!defined('ABSPATH')) {
                                         $candidate_specifications = $candidate_specifications[$widget_name] ?? '';
                                         ?>
                                         <div class="jbs-col-lg-3">
-                                            <div class="filter-block pb-50 md-pb-20">
+                                            <div class="filter-blockjbs-pb-50 md-pb-20">
                                                 <div class="filter-title jbs-fw-500 jbs-text-dark">
                                                     <?php echo esc_html($widget_title); ?></div>
                                                 <?php

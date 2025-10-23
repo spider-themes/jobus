@@ -106,7 +106,7 @@ wp_enqueue_script( 'lightbox' );
     </div>
 </div>
 
-<section class="candidates-profile-2 bg-color pt-100 lg-pt-70 pb-130 lg-pb-80">
+<section class="candidates-profile-2 bg-color jbs-pt-100 lg-pt-70jbs-pb-130 lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-lg-8">
@@ -181,7 +181,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
+                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrapjbs-pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';

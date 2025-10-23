@@ -1,7 +1,7 @@
 // Job Search One
-.job-search-one .jbs-col-md-3, .jbs-col-md-4, .jbs-col-md-5 {
-    margin-top: 0;
-}
+// .job-search-one .jbs-col-md-3, .jbs-col-md-4, .jbs-col-md-5 {
+//     margin-top: 0;
+// }
 .job-search-one {
     z-index: 9;
     form {
@@ -38,7 +38,7 @@
             }
 
             .keyword {
-                border: none;
+                border: none !important;
                 padding: 0 15px;
                 height: 35px;
                 font-size: 16px;
@@ -154,16 +154,16 @@
 .job-search-two form {
     height: 60px;
     input {
-        width: calc(100% - 165px);
-        height: 100%;
-        background: #fff;
-        border: none;
-        border-radius: 50px;
-        padding: 0 25px;
-        font-size: 15px;
+        width: calc(100% - 165px) !important;
+        height: 100% !important;
+        background: #fff !important;
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 0 25px !important;
+        font-size: 15px !important;
 
         &.bg-grey {
-            background: #F2F2F2;
+            background: #F2F2F2 !important;
         }
     }
 }

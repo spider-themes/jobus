@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
                     $job_specifications = jobus_get_specs_options();
                     $job_specifications = $job_specifications[ $select_job_attr ] ?? '';
                     ?>
-                    <div class="  jbs-col-md-<?php echo esc_attr($item[ 'column' ]) ?>">
+                    <div class="  jbs-col-md-<?php echo esc_attr($item[ 'column' ]) ?> jbs-mt-0">
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
 
@@ -74,7 +74,7 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="jbs-col-md-3 sm-mb-10 sm-mt-10">
+            <div class="jbs-col-md-3 sm-mb-10 sm-mt-10 jbs-mt-0">
                 <button type="submit" class="jbs-text-uppercase jbs-btn jbs-btn-success border6 tran3s jbs-m-auto"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
@@ -83,7 +83,7 @@ if (!defined('ABSPATH')) {
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="filter-tags jbs-d-flex jbs-flex-wrap jbs-style-none mt-25">
+        <ul class="filter-tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-25">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
                 <li class="fw-500 jbs-text-dark jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>

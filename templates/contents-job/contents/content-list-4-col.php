@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	while ( $job_query->have_posts() ) : $job_query->the_post();
 		$save_job_status = jobus_get_save_status();
 		?>
-        <div class="job-list-one style-two jbs-position-relative border-style mb-20">
+        <div class="job-list-one style-two jbs-position-relative border-style jbs-mb-20">
             <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
                 <div class="jbs-col-md-5">
                     <div class="job-title jbs-d-flex jbs-align-items-center">
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     </div>
                 </div>
-                <div class="jbs-col-md-4 jbs-col-sm-6">
+                <div class="jbs-col-md-4 jbs-col-sm-6 jbs-mt-sm-30">
                     <div class="job-location">
                         <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_job_location' ) ) ?>">
 							<?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_job_location' ) ); ?>

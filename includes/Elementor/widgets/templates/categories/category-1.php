@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
                 <div class="card-style-one jbs-text-center jbs-mt-20 wow fadeInUp">
                     <a href="<?php echo esc_url( get_term_link( $category ) ) ?>"
-                       class="bg wrapper">
+                       class="bg wrapper ">
 						<?php
 						if ( ! empty( $meta['cat_img']['id'] ) ) { ?>
                             <div class="icon jbs-d-flex jbs-align-items-center jbs-justify-content-center">

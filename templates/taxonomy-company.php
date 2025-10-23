@@ -57,7 +57,7 @@ $result_count = $company_query;
 
 $archive_layout = $company_archive_layout ?? jobus_opt( 'company_archive_layout' );
 ?>
-    <section class="company-profiles pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+    <section class="company-profiles jbs-pt-110 lg-pt-80jbs-pb-150 xl-pb-150 lg-pb-80">
         <div class="jbs-container">
             <div class="jbs-row">
 

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words( get_the_content(), 20 ); // Adjust the word count as needed
 			$save_job_status = jobus_get_save_status();
 			?>
-            <div class="jbs-col-lg-6 mb-30">
+            <div class="jbs-col-lg-6jbs-mb-30">
                 <div class="job-list-three jbs-d-flex jbs-h-100 jbs-w-100">
                     <div class="main-wrapper jbs-h-100 jbs-w-100">
 	                    <?php

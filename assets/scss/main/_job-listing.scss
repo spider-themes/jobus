@@ -488,7 +488,6 @@
 .jbs-filter-btn {
     font-size: 15px !important;
     color: #244034 !important;
-    height: 32px !important;
     border: 2px solid #244034 !important;
     border-radius: 6px !important;
 
@@ -600,6 +599,13 @@
     .job-list-one:last-child {
         border-bottom: none !important;
     }
+    .job-title{
+        a{
+            &:hover{
+                text-decoration: none !important;
+            }
+        }
+    }
 }
 
 .logo {
@@ -673,9 +679,9 @@
         font-size: 15px;
         color: $color-three;
         text-transform: capitalize;
-
+        display: block;
         &:hover {
-            text-decoration: underline;
+            text-decoration: underline !important;
         }
 
         &.part-time {
@@ -691,7 +697,7 @@
             color: #000;
 
             &:hover {
-                text-decoration: underline;
+                text-decoration: underline !important;
             }
         }
     }
@@ -711,7 +717,7 @@
         color: #000;
 
         &:hover {
-            text-decoration: underline;
+            text-decoration: underline !important;
         }
     }
 
@@ -830,11 +836,15 @@
         padding: 2px 12px;
         background: #E7F6EF !important;
         border-radius: 3px;
-        margin: 54px 0 16px;
+        margin: 54px 0 16px !important;
+        &:hover {
+            text-decoration: underline !important;
+        }
 
         &.part-time {
             background: rgba($color: #FF5757, $alpha: 0.08) !important;
             color: #FF6060 !important;
+
         }
     }
 
@@ -967,9 +977,9 @@
     }
 }
 
-.company-profiles {
-    background-color: #EFF6F3 !important;
-}
+// .company-profiles {
+//     background-color: #EFF6F3;
+// }
 
 .company-logo {
     img {
@@ -1435,6 +1445,7 @@ input[type="file"]::-webkit-file-upload-button {
   cursor: pointer;
   text-align: center;
   transition: background 0.3s ease;
+   text-decoration: none !important; 
 
   i {
     margin-right: 5px;
@@ -1442,6 +1453,7 @@ input[type="file"]::-webkit-file-upload-button {
 
   &:hover {
     background: $color-four;
+    text-decoration: none !important;
   }
 }
 

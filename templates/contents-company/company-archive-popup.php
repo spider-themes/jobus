@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jobus-company-classic company-profiles pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80 ">
+<section class="jobus-company-classic bg-color company-profiles jbs-pt-90 jbs-lg-pt-70 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 ">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">

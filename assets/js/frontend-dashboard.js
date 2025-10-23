@@ -176,12 +176,12 @@
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="social_${index}_icon">Icon</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
                                                 ${iconOptions}
                                             </select>
@@ -191,12 +191,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <label for="social_${index}_url">URL</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper mb-10">
+                                        <div class="dash-input-wrapperjbs-mb-10">
                                             <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" value="">
                                         </div>
                                     </div>

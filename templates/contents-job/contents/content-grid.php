@@ -13,13 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<div class="accordion-box grid-style jbs-mt-70">
+<div class="accordion-box grid-style">
     <div class="jbs-row">
         <?php
         while ( $job_query->have_posts() ) : $job_query->the_post();
             $save_job_status = jobus_get_save_status();
             ?>
-            <div class="jbs-col-sm-6 mb-30">
+            <div class="jbs-col-sm-6jbs-mb-30">
                 <div class="job-list-two style-two jbs-position-relative">
                     <?php
                     if ( has_post_thumbnail() ) { ?>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     }
                     if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) { ?>
                         <div>
-                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
+                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 ">
                                 <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) ?>
                             </a>
                         </div>

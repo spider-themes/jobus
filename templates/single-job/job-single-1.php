@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
-    <section class="job-details jobus_job_details pt-100 lg-pt-80 pb-130 lg-pb-80">
+    <section class="job-details jobus_job_details jbs-pt-100 lg-pt-80jbs-pb-130 lg-pb-80">
         <div class="jbs-container">
             <div class="jbs-row">
 
@@ -35,7 +35,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                 the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                             }
                             ?>
-                            <div class="text-md jbs-text-dark jbs-text-center mt-15 mb-20"><?php the_title() ?></div>
+                            <div class="text-md jbs-text-dark jbs-text-center mt-15jbs-mb-20"><?php the_title() ?></div>
                             <?php
                             // Website button logic
                             if ( $meta['is_company_website'] == 'custom' && ! empty( $website['url'] ) ) { ?>
