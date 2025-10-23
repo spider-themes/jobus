@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="accordion-box grid-style">
+<div class="accordion-box grid-style jbs-mt-70">
     <div class="jbs-row">
 		<?php
 		while ( $company_query->have_posts() ) : $company_query->the_post();
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 							foreach ( $locations as $location ) {
 								?>
-                                <a href="<?php echo esc_url(get_term_link($location)) ?>">
+                                <a class="jbs-text-dark" href="<?php echo esc_url(get_term_link($location)) ?>">
 									<?php echo esc_html( $location->name ); ?>
                                 </a>
 								<?php

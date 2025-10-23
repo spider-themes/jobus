@@ -20,7 +20,11 @@
     margin: 17px 0 25px;
     border: none !important;
     padding: 0 !important;
-
+    background-color: transparent !important;
+    box-shadow: none !important;
+    &:before, &:after {
+      content: none !important;
+    }
   }
   .author-img {
     width: 45px;

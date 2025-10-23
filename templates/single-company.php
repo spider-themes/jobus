@@ -23,7 +23,7 @@ $location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
 $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
-    <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80">
+    <section class="company-details pt-110 lg-pt-80 pb-160 xl-pb-150 lg-pb-80 jbs-bg-white">
         <div class="jbs-container">
             <div class="jbs-row">
 
@@ -59,7 +59,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                     <li>
                                         <span><?php esc_html_e( 'Email: ', 'jobus' ); ?></span>
                                         <div>
-                                            <a href="mailto:<?php echo esc_attr( $employer_mail ) ?>">
+                                            <a class="jbs-text-black" href="mailto:<?php echo esc_attr( $employer_mail ) ?>">
                                                 <?php echo esc_html( $employer_mail ) ?>
                                             </a>
                                         </div>
@@ -127,7 +127,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                             <?php
                                             foreach ( $social_icons as $item ) {
                                                 if ( ! empty( $item['url'] ) ) { ?>
-                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3">
+                                                    <a href="<?php echo esc_url( $item['url'] ) ?>" class="jbs-me-3 jbs-text-black">
                                                         <i class="<?php echo esc_attr( $item['icon'] ) ?>"></i>
                                                     </a>
                                                     <?php
@@ -296,7 +296,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                         <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                                     </a>
                                     <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
-                                        <?php the_title( '<h3>', '</h3>' ) ?>
+                                        <?php the_title( '<h3 class="font-size-19">', '</h3>' ) ?>
                                     </a>
                                 </div>
                             </div>

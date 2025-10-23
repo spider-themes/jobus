@@ -239,6 +239,7 @@
             line-height: 35px;
             padding-left: 28px;
             @include transition(0.1s);
+            color: rgba(0, 0, 0, .7);
 
             &::before {
                 content: '';
@@ -479,6 +480,7 @@
         }
     }
 }
+
 .jbs-w-84 {
     width: 84px !important;
 }
@@ -489,6 +491,7 @@
     height: 32px !important;
     border: 2px solid #244034 !important;
     border-radius: 6px !important;
+
     &:hover {
         background: #31795A !important;
         border-color: #31795A !important;
@@ -842,6 +845,7 @@
 
         &:hover {
             color: $color-three;
+            text-decoration: none;
         }
     }
 
@@ -963,6 +967,10 @@
     }
 }
 
+.company-profiles {
+    background-color: #EFF6F3 !important;
+}
+
 .company-logo {
     img {
         height: auto;
@@ -1052,6 +1060,7 @@
             font-size: 14px;
             line-height: 28px;
             margin-bottom: 25px;
+            color: #000;
         }
 
         .client-status {

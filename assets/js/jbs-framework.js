@@ -57,20 +57,20 @@
         $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
             e.preventDefault();
             var target = $(this).data("jbs-target");
-            $(target).addClass("jbs-show");
-            $(".jbs-offcanvas-backdrop").addClass("jbs-show");
+            $(target).addClass("show");
+            $(".jbs-offcanvas-backdrop").addClass("show");
         });
 
         // Close button
         $(document).on("click", ".jbs-offcanvas-close", function () {
-            $(this).closest(".jbs-offcanvas").removeClass("jbs-show");
-            $(".jbs-offcanvas-backdrop").removeClass("jbs-show");
+            $(this).closest(".jbs-offcanvas").removeClass("show");
+            $(".jbs-offcanvas-backdrop").removeClass("show");
         });
 
         // Click on backdrop
         $(document).on("click", ".jbs-offcanvas-backdrop", function () {
-            $(".jbs-offcanvas.jbs-show").removeClass("jbs-show");
-            $(this).removeClass("jbs-show");
+            $(".jbs-offcanvas.show").removeClass("show");
+            $(this).removeClass("show");
         });
 
         // modal close on esc key press

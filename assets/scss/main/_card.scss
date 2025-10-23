@@ -72,6 +72,7 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    
     &:hover {
         -webkit-transform: translateY(-5px);
         -moz-transform: translateY(-5px);
@@ -99,6 +100,7 @@
     }
     &:hover .title {
         color: $color-three;
+        
     }
     .total-job {
         transition: 0.3s;
@@ -116,6 +118,7 @@
             font-size: 72px;
             line-height: initial;
             margin: 0 0 5px;
+            
         }
         .icon {
             border-color: #fff;

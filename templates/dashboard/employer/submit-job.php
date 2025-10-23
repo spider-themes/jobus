@@ -205,7 +205,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                                 $meta_name   = $field['meta_name'] ?? '';
                                 $meta_value  = isset( $dynamic_fields[ $meta_key ] ) ? (array) $dynamic_fields[ $meta_key ] : array();
                                 $meta_values = $field['meta_values_group'] ?? array();
-                                echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper mb-25">';
+                                echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                                 echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
                                 foreach ( $meta_values as $option ) {

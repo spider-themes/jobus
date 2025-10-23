@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 ?>
-<div class="jbs-modal jbs-popUpModal fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="jbs-modal jbs-popUpModal jbs-fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
             <div class="filter-area-tab jbs-modal-content">

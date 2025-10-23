@@ -42,7 +42,7 @@ if (!defined('ABSPATH')) {
                                         ?>
                                         <div class="jbs-col-lg-3">
                                             <div class="filter-block pb-50 md-pb-20">
-                                                <div class="filter-title fw-500 text-dark">
+                                                <div class="filter-title jbs-fw-500 jbs-text-dark">
                                                     <?php echo esc_html($widget_title); ?></div>
                                                 <?php
                                                 // Include the appropriate widget layout file based on the widget type

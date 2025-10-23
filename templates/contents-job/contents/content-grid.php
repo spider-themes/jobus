@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<div class="accordion-box grid-style">
+<div class="accordion-box grid-style jbs-mt-70">
     <div class="jbs-row">
         <?php
         while ( $job_query->have_posts() ) : $job_query->the_post();

@@ -96,7 +96,7 @@ function Edit({attributes, setAttributes}) {
                         <div className="tab-content">
 
                             {/*============= Candidate Form ===================*/}
-                            <div className="tab-pane fade active show" role="tabpanel" id="fc1">
+                            <div className="tab-pane jbs-fade active show" role="tabpanel" id="fc1">
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">
@@ -154,7 +154,7 @@ function Edit({attributes, setAttributes}) {
                             </div>
 
                             {/*============= Employer Form ===================*/}
-                            <div className="tab-pane fade" role="tabpanel" id="fc2">
+                            <div className="tab-pane jbs-fade" role="tabpanel" id="fc2">
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">

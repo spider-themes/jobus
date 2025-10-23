@@ -55,9 +55,9 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 						}
 						?>
                         <div class="filter-block bottom-line pb-25 mt-25">
-                            <a class="filter-title fw-500 text-dark<?php echo esc_attr( $is_collapsed ) ?>"
+                            <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>"
                               data-jbs-toggle="collapse"
-                               href="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
+                               data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
                                aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
 								<?php echo esc_html( $widget_title ); ?>
                             </a>

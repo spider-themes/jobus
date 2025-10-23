@@ -38,7 +38,7 @@ $grid_view_url = add_query_arg( 'view', 'grid' );
 
 			<?php wp_nonce_field( 'jobus_sort_filter', 'jobus_nonce' ); ?>
 
-            <select class="nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
+            <select class="jbs-nice-select" name="orderby" onchange="document.location.href='?'+this.options[this.selectedIndex].value;">
                 <option <?php echo esc_attr( $default ); ?>>
 					<?php esc_html_e( 'Default', 'jobus' ); ?>
                 </option>

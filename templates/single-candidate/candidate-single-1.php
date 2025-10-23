@@ -356,21 +356,21 @@ wp_enqueue_script( 'lightbox' );
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
 
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25">
                                 <input type="text" name="sender_name" id="sender-name" autocomplete="on"
                                        placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25">
                                 <input type="email" name="sender_email" id="sender-email"
                                        placeholder="<?php esc_attr_e( 'Email*', 'jobus' ) ?>" required>
                             </div>
 
-                            <div class="jbs-d-sm-flex mb-25">
+                            <div class="jbs-d-sm-flex jbs-mb-25">
                                 <input type="text" name="sender_subject" id="sender_subject"
                                        placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
-                            <div class="jbs-d-sm-flex mb-25 xs-mb-10">
+                            <div class="jbs-d-sm-flex jbs-mb-25 xs-mb-10">
                                 <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 

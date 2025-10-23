@@ -10,7 +10,7 @@ $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( 
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
     ?>
-    <div class="modal fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="container">
                 <div class="user-data-form modal-content shadow-sm">
@@ -38,7 +38,7 @@ if ( is_user_logged_in() ) {
     <?php
 } else {
     ?>
-    <div class="modal fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="container">
                 <div class="user-data-form modal-content">

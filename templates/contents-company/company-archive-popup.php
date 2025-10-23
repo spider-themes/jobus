@@ -3,13 +3,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jobus-company-classic company-profiles pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80">
+<section class="jobus-company-classic company-profiles pt-90 lg-pt-70 pb-150 xl-pb-150 lg-pb-80 ">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">
                 <div class="wrapper">
 
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center mb-25">
+                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center jbs-mb-25">
 
                         <div class="jbs-d-md-flex jbs-align-items-center">
 

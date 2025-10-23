@@ -17,7 +17,7 @@
         }
 
         // Nice Select for search form
-        let niceSelect = $('.nice-select');
+        let niceSelect = $('.jbs-nice-select');
         if (niceSelect.length > 0) {
             niceSelect.niceSelect();
         }

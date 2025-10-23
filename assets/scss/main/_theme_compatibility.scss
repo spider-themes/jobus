@@ -84,3 +84,17 @@
   max-width: 100% !important;
   padding: 0 !important;
 }
+.content-area:has(.wp-block-jobus-shortcode-job-archive,
+                  .wp-block-jobus-shortcode-candidate-archive,
+                  .wp-block-jobus-shortcode-company-archive) {
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+
+// Docy Theme Compatibility
+.jbs-nice-select{
+    ul{
+        padding-left: 0px !important;
+    }
+}

@@ -108,3 +108,17 @@
     color: #fff;
   }
 }
+
+.btn-six {
+    font-weight: 500;
+    color: #00bf58;
+    position: relative;
+    padding-right: 12px;
+    border-bottom: 2px solid #00bf58;
+    transition: all .3s ease-in-out 0s;
+    &:hover {
+        color: #00bf58;
+        letter-spacing: 0.25px;
+        text-decoration: none !important;
+    }
+}

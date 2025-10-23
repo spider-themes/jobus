@@ -398,7 +398,6 @@ wp_enqueue_script( 'lightbox' );
 
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
-
                             <div class="jbs-d-sm-flex jbs-mb-25 xs-jbs-mb-10">
                                 <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
