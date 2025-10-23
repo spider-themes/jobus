@@ -10,47 +10,9 @@
   }
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-button {
-  border: none;
-  outline: none;
-  box-shadow: none;
-  display: block;
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
-  color: inherit;
-}
-
-button:focus {
-  outline: none;
-}
-
-input,
-textarea {
-  outline: none;
-  box-shadow: none;
-  transition: all 0.3s ease-in-out;
-}
-
-audio,
-video,
-canvas {
-  max-width: 100%;
-}
-
-iframe {
-  border: none;
-}
-
 .jbs-style-none {
   list-style: none;
   padding-left: 0;
-  margin: 0;
   li {
     list-style: none;
   }

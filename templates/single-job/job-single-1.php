@@ -6,7 +6,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
     <section class="job-details jobus_job_details jbs-pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
         <div class="jbs-container">
-            <div class="jbs-row">
+            <div class="jbs-row jbs-flex-nowrap">
 
                 <div class="jbs-col-xxl-9 jbs-col-xl-8">
                     <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">

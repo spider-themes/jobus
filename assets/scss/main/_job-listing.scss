@@ -1114,11 +1114,11 @@
 
   .logo {
     height: auto;
+    display: block;
   }
 
   .website-btn {
-    width: 160px;
-    line-height: 40px;
+    padding: 5px;
     text-align: center;
     display: block;
     margin: 0 auto;

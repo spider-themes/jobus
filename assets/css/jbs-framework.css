@@ -411,6 +411,10 @@
   flex-wrap: wrap !important;
 }
 
+.jbs-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+
 .jbs-flex-fill {
   flex: 1 1 auto !important;
 }

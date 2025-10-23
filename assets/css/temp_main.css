@@ -6,47 +6,9 @@
   transition: color 0.3s ease-in-out;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-button {
-  border: none;
-  outline: none;
-  box-shadow: none;
-  display: block;
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
-  color: inherit;
-}
-
-button:focus {
-  outline: none;
-}
-
-input,
-textarea {
-  outline: none;
-  box-shadow: none;
-  transition: all 0.3s ease-in-out;
-}
-
-audio,
-video,
-canvas {
-  max-width: 100%;
-}
-
-iframe {
-  border: none;
-}
-
 .jbs-style-none {
   list-style: none;
   padding-left: 0;
-  margin: 0;
 }
 .jbs-style-none li {
   list-style: none;
@@ -6081,10 +6043,10 @@ img {
 }
 .job-company-info .logo {
   height: auto;
+  display: block;
 }
 .job-company-info .website-btn {
-  width: 160px;
-  line-height: 40px;
+  padding: 5px;
   text-align: center;
   display: block;
   margin: 0 auto;
