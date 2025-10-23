@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </span>
                         </div>
                     <?php endif; ?>
-                    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between mt-auto">
+                    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
                         <div class="job-location">
                             <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_job_location' ) ) ?>">
                                 <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_job_location' ) ); ?>

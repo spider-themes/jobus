@@ -16,6 +16,6 @@ if ( $taxonomy === 'jobus_job_tag' ) {
 }
 ?>
 <div class="jbs-col-lg-3 jbs-col-sm-6">
-    <div class="filter-block jbs-pb-50 lg-pb-20">
+    <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
         <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($taxonomy_text) ?></div>
 

@@ -38,7 +38,7 @@ if ( ! empty ( $all_values ) ) :
 
     <div class="salary-slider"
          data_widget="<?php echo esc_attr( $widget_name ); ?>[]">
-        <div class="price-input jbs-d-flex jbs-align-items-center jbs-pt-5">
+        <div class="price-input jbs-d-flex jbs-align-items-center">
             <div class="field jbs-d-flex jbs-align-items-center">
                 <input type="number"
                        name="<?php echo esc_attr( $widget_name ); ?>[]"
@@ -61,7 +61,7 @@ if ( ! empty ( $all_values ) ) :
         <div class="slider">
             <div class="progress"></div>
         </div>
-        <div class="range-inputjbs-mb-10">
+        <div class="range-input jbs-mb-10">
             <input type="range" class="range-min"
                    min="<?php echo esc_attr( $min_values ); ?>"
                    max="<?php echo esc_attr( $max_values ); ?>"

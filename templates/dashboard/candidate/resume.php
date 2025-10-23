@@ -87,7 +87,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
         <div class="jbs-bg-white card-box border-20" id="candidate-resume">
             <h4 class="dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapperjbs-mb-20">
+            <div class="dash-input-wrapper jbs-mb-20">
                 <label for="cv_attachment"><?php esc_html_e( 'CV Attachment*', 'jobus' ); ?></label>
                 <div id="cv-upload-preview" class="preview <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
                     <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
@@ -110,10 +110,10 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="candidate-resume-video">
+        <div class="jbs-bg-white card-box border-20 jbs-mt40" id="candidate-resume-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
-            <div class="intro-video-form position-relative mt-20 w-100">
-                <div class="dash-input-wrapperjbs-mb-15">
+            <div class="intro-video-form position-relative jbs-mt20 w-100">
+                <div class="dash-input-wrapper mb-15">
                     <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                     <input type="text" id="video-title" name="video_title" value="<?php echo esc_attr( $video_data['video_title'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
@@ -148,7 +148,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="candidate-resume-education">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-education">
             <h4 class="dash-title-three"><?php esc_html_e( 'Education', 'jobus' ); ?></h4>
 
             <div class="dash-input-wrapperjbs-mb-15">
@@ -271,12 +271,12 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-education">
+            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-education">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Education Item', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="candidate-resume-experience">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-experience">
             <h4 class="dash-title-three"><?php esc_html_e( 'Experience', 'jobus' ); ?></h4>
             <div class="dash-input-wrapperjbs-mb-15">
                 <label for="experience_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
@@ -413,16 +413,16 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one mt-2" id="add-experience">
+            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-experience">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Experience Item', 'jobus' ); ?>
             </a>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="candidate-taxonomy">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-taxonomy">
             <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
             <!-- Add Categories -->
-            <div class="dash-input-wrapperjbs-mb-40 mt-20">
+            <div class="dash-input-wrapper mb-40 jbs-mt-20">
                 <label for="candidate-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
 					<?php
@@ -451,7 +451,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
 
             <!-- Add Locations -->
-            <div class="dash-input-wrapperjbs-mb-40 mt-20">
+            <div class="dash-input-wrapper mb-40 jbs-mt-20">
                 <label for="candidate-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
 					<?php
@@ -480,7 +480,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
 
             <!-- Add Skills -->
-            <div class="dash-input-wrapperjbs-mb-40 mt-20">
+            <div class="dash-input-wrapper mb-40 jbs-mt-20">
                 <label for="candidate-skills-list"><?php esc_html_e( 'Add Skills', 'jobus' ); ?></label>
                 <div class="skills-wrapper">
 					<?php
@@ -509,7 +509,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 mt-40" id="portfolio-section">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="portfolio-section">
             <h4 class="dash-title-three"><?php esc_html_e( 'Portfolio', 'jobus' ); ?></h4>
             <div class="dash-input-wrapperjbs-mb-30">
                 <label for="portfolio_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
@@ -547,12 +547,12 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
             <input type="hidden" name="portfolio[]" id="portfolio_ids"
                    value="<?php echo ! empty( $portfolio_data['portfolio'] ) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
-            <button type="button" id="add-portfolio-images" class="dash-btn-one mt-3">
+            <button type="button" id="add-portfolio-images" class="dash-btn-one jbs-mt-3">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>
         </div>
 
-        <div class="button-group d-inline-flex align-items-center mt-30">
+        <div class="button-group d-inline-flex align-items-center jbs-mt-30">
             <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
     </form>

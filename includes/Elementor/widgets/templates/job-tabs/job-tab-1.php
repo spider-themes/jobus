@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
     </ul>
 
-    <div id="isotop-gallery-wrapper" class="grid-3column jbs-pt-55 lg-pt-20">
+    <div id="isotop-gallery-wrapper" class="grid-3column jbs-pt-55 jbs-lg-pt-20">
         <div class="grid-sizer"></div>
 		<?php
 		while ( $job_posts->have_posts() ) : $job_posts->the_post();
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 			?>
             <div class="isotop-item <?php echo esc_attr( $cat_slug ) ?>">
-                <div class="job-list-two jbs-mt-40 lg-mt-20 jbs-position-relative">
+                <div class="job-list-two jbs-mt-40 jbs-lg-mt-20 jbs-position-relative">
 
 					<?php
 					if ( has_post_thumbnail() ) { ?>
@@ -84,7 +84,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( ! empty( $settings['view_all_btn_url']['url'] ) ) {
 			?>
             <div class="isotop-item">
-                <div class="card-style-four bg-color tran3s jbs-w-100 jbs-mt-40 lg-mt-20">
+                <div class="card-style-four bg-color tran3s jbs-w-100 jbs-mt-40 jbs-lg-mt-20">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>

@@ -14,7 +14,7 @@ $employer_placeholder_email        = $attributes['employer_email'] ?? '';
 $employer_placeholder_pass         = $attributes['employer_pass'] ?? '';
 $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
 ?>
-<section class="registration-section position-relative jbs-pt-100 lg-pt-80jbs-pb-150 lg-pb-80">
+<section class="registration-section position-relative pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
     <div class="user-data-form">
 
         <div class="jbs-text-center">

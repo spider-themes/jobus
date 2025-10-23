@@ -60,7 +60,7 @@ $pagination_prev  = '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '"
 $pagination_next  = esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' )
                     . '" class="jbs-ms-2" />';
 ?>
-<section class="job-listing-three jbs-pt-110 lg-pt-80jbs-pb-150 xl-pb-150 lg-pb-80">
+<section class="job-listing-three pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-lg-12">

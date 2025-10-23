@@ -73,8 +73,8 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="jbs-col-md-3 job-search-btn-wrapper jbs-mt-0">
-                <button type="submit" class="job-search-one-btn fw-500 jbs-text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+            <div class="jbs-col-md-3 job-search-btn-wrapper">
+                <button type="submit" class="job-search-one-btn jbs-fw-500 jbs-text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>
@@ -84,7 +84,7 @@ if (!defined('ABSPATH')) {
         <ul class="tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-20">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
-                <li class="fw-500 jbs-text-white jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <li class="jbs-fw-500 jbs-text-white jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
                 <?php
             }
             if (!empty($settings[ 'keywords' ])) {
