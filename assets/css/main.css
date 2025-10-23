@@ -2005,7 +2005,6 @@
   background: #EFF6F3;
 }
 .address-block-one .title {
-  font-family: "gordita";
   font-size: 24px;
   padding: 20px 0 5px;
 }
@@ -3385,7 +3384,6 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
-  font-family: "gordita";
   font-size: 18px;
 }
 .candidate-profile-card .candidate-name a:hover {
@@ -3451,13 +3449,11 @@ img {
 .candidates-profile-details .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .title {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .video-post {
@@ -3512,7 +3508,6 @@ img {
 }
 .candidates-profile-details .time-line-data .info h4 {
   font-size: 18px;
-  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details .skill-tags {
@@ -3571,7 +3566,6 @@ img {
   height: 80px;
 }
 .candidate-profile-sidebar .candidate-bio .candidate-name {
-  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
@@ -3600,7 +3594,6 @@ img {
   color: #244034;
 }
 .candidate-profile-sidebar .sidebar-title {
-  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -3726,7 +3719,6 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
-  font-family: "gordita";
   font-size: 18px;
 }
 .candidate-profile-card .candidate-name a:hover {
@@ -3818,13 +3810,11 @@ img {
 .candidates-profile-details-2 .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .title {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .video-post {
@@ -3879,7 +3869,6 @@ img {
 }
 .candidates-profile-details-2 .time-line-data .info h4 {
   font-size: 18px;
-  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details-2 .skill-tags {
@@ -3935,7 +3924,6 @@ img {
   height: 80px;
 }
 .candidate-profile-2-sidebar .candidate-bio .candidate-name {
-  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
@@ -3968,7 +3956,6 @@ img {
   color: #244034;
 }
 .candidate-profile-2-sidebar .sidebar-title {
-  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -4516,7 +4503,6 @@ img {
 }
 .company-grid-layout .company-name {
   font-size: 24px;
-  font-family: "gordita";
   margin: 22px 0 8px;
 }
 .company-grid-layout .company-name:hover {
@@ -4596,7 +4582,6 @@ img {
 }
 .company-list-layout .company-name {
   font-size: 24px;
-  font-family: "gordita";
 }
 .company-list-layout .company-name:hover {
   color: #31795A;
@@ -4623,7 +4608,6 @@ img {
   position: relative;
 }
 .company-details .details-post-data h3 {
-  font-family: "gordita";
   font-size: 28px;
   margin-bottom: 20px;
 }
@@ -5211,6 +5195,7 @@ img {
 .job-details p {
   font-size: 17px;
   margin-top: 20px;
+  line-height: 1.8;
 }
 
 .accordion-box.show {
@@ -6245,44 +6230,53 @@ img {
 
 .job-details {
   position: relative;
+  margin-top: 180px;
 }
 .job-details.style-two {
   background: #EFF6F3;
 }
 .job-details .post-date {
   color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
 }
 .job-details .post-date a:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
+}
+.job-details .job-head {
+  margin-bottom: 50px;
 }
 .job-details .post-title {
   font-size: 36px;
-  font-family: "gordita";
   margin: 10px 0 15px;
+  font-weight: 500;
 }
 .job-details .share-buttons li {
   margin-right: 8px;
 }
-.job-details .share-buttons li a {
+.job-details .share-buttons li .share-item {
   font-size: 14px;
   font-weight: 500;
   color: #244034;
-  line-height: 33px;
+  line-height: 1;
   border-radius: 5px;
-  padding: 0 15px;
-  margin-top: 5px;
+  padding: 8px 15px;
   background: rgba(49, 121, 90, 0.12);
+  border: none;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
   -webkit-transition: all 0.2s ease-in-out 0s;
   -moz-transition: all 0.2s ease-in-out 0s;
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.job-details .share-buttons li a i {
+.job-details .share-buttons li .share-item i {
   font-size: 13px;
   margin-right: 7px;
 }
-.job-details .share-buttons li a:hover {
+.job-details .share-buttons li .share-item:hover {
   background: #244034;
   color: #fff;
 }
@@ -6293,7 +6287,6 @@ img {
 }
 .job-details .block-title {
   font-size: 22px;
-  font-family: "gordita";
   margin: 0;
 }
 .job-details .block-numb {
@@ -6302,10 +6295,6 @@ img {
   line-height: 25px;
   font-size: 14px;
   background: #31795A;
-}
-.job-details p {
-  font-size: 17px;
-  margin-top: 20px;
 }
 .job-details p a {
   font-weight: 500;
@@ -6407,7 +6396,6 @@ img {
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .jbs-modal-header .jbs-modal-title {
   font-weight: 600;
   font-size: 20px;
-  font-family: "gordita";
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .jbs-modal-body {
   padding: 1rem 0;
@@ -6533,7 +6521,6 @@ input[type=file]::-webkit-file-upload-button {
   display: flex;
   align-items: center;
   font-size: 22px;
-  font-family: "gordita";
   margin: 0;
   color: #000 !important;
 }
@@ -6577,7 +6564,6 @@ input[type=file]::-webkit-file-upload-button {
 }
 .jobus_job_details_2 .details-post-data .wp-block-heading {
   font-size: 22px;
-  font-family: "gordita";
   margin: 0;
   color: #000 !important;
 }

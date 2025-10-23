@@ -203,13 +203,11 @@ Table of Contents:
   padding: 45px 60px 50px;
 }
 .dashboard-body .main-title {
-  font-family: "gordita";
   font-size: 36px;
   color: #244034;
   margin-bottom: 40px;
 }
 .dashboard-body .dash-title-two {
-  font-family: "gordita";
   font-size: 20px;
   color: #244034;
   border-bottom: 1px solid #E3F0EB;
@@ -217,7 +215,6 @@ Table of Contents:
   margin: 0;
 }
 .dashboard-body .dash-title-three {
-  font-family: "gordita";
   font-size: 24px;
   color: #31795A;
   margin: 0 0 30px;
@@ -334,7 +331,6 @@ Table of Contents:
   padding: 25px 18px 30px 22px;
 }
 .dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu h4 {
-  font-family: "gordita";
   font-size: 18px;
   margin-bottom: 20px;
 }
@@ -358,7 +354,6 @@ Table of Contents:
   background: #FF2730;
 }
 .dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li h6 {
-  font-family: "gordita";
   font-size: 15px;
   margin-bottom: 3px;
   letter-spacing: -0.2px;
@@ -512,7 +507,6 @@ Table of Contents:
   padding-left: 22px;
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-title h6 a {
-  font-family: "gordita";
   font-size: 16px;
   color: #244034;
   display: block;
@@ -1246,7 +1240,6 @@ Table of Contents:
   font-size: 15px;
 }
 .dashboard-body .message-wrapper .open-email-container .email-body h2 {
-  font-family: "gordita";
   font-size: 24px;
   margin-bottom: 25px;
 }
@@ -1257,7 +1250,6 @@ Table of Contents:
   padding-top: 20px;
 }
 .dashboard-body .message-wrapper .open-email-container .email-footer .attachments h6 {
-  font-family: "gordita";
   font-size: 15px;
 }
 .dashboard-body .message-wrapper .open-email-container .email-footer .attachments .all-download {
@@ -1303,7 +1295,6 @@ Table of Contents:
   border-left: 1px solid #254035;
 }
 .dashboard-body .membership-plan-wrapper h4 {
-  font-family: "gordita";
   font-size: 20px;
   color: #254035;
 }
@@ -1317,7 +1308,6 @@ Table of Contents:
   color: #31795A;
 }
 .dashboard-body .membership-plan-wrapper h6 {
-  font-family: "gordita";
   font-size: 18px;
   color: #31795A;
 }
@@ -1440,7 +1430,6 @@ Table of Contents:
   padding: 50px 20px;
 }
 .remove-account-popup h2 {
-  font-family: "gordita";
   font-size: 36px;
   color: #254035;
   margin: 20px 0;
@@ -1682,7 +1671,6 @@ Table of Contents:
   padding: 24px 30px;
 }
 .dashboard-body .saved-job-tab .saved-jobs-header .title, .dashboard-body .saved-job-tab .saved-jobs-header .view-more-btn {
-  font-family: "gordita", serif;
   font-size: 20px;
   color: #244034;
   font-weight: 500;
@@ -1730,7 +1718,6 @@ Table of Contents:
 }
 
 .candidate-delete-account-wrap .title {
-  font-family: "gordita";
   font-size: 24px;
   color: #31795A;
 }
