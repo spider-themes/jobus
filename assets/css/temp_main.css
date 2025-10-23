@@ -6577,7 +6577,6 @@ input[type=file]::-webkit-file-upload-button {
   gap: 12px;
 }
 
-/**===== Saved Candidate and Job ======*/
 .jobus-saved-post, .jobus-dashboard-remove-saved-post, .jobus-dashboard-post-view-more {
   width: 35px;
   height: 35px;
@@ -6631,78 +6630,6 @@ input[type=file]::-webkit-file-upload-button {
 
 .btn-eleven {
   height: 60px;
-  border-radius: 7px;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.88px;
-  color: #fff;
-  background: #000;
-  width: 100%;
-}
-
-.btn-eleven:hover, .btn-eleven:focus {
-  background: #31795a;
-}
-
-.jbs-btn-success {
-  font-weight: 500 !important;
-  padding: 13px 26px !important;
-  min-width: 150px !important;
-  text-align: center !important;
-  color: #fff !important;
-  background-color: #00BF58 !important;
-  border-color: #00BF58 !important;
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -moz-transition: all 0.3s ease-in-out 0s;
-  -ms-transition: all 0.3s ease-in-out 0s;
-  -o-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-}
-.jbs-btn-success:hover {
-  color: #fff !important;
-  background-color: #000000 !important;
-  border-color: #000000 !important;
-}
-
-.save-btn {
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  border: 1px solid #D6D6D6;
-  color: #CBCBCB;
-}
-.save-btn:hover {
-  background: #E7F6EF;
-  border-color: #E7F6EF;
-  color: #005025;
-}
-
-.open-job-btn {
-  width: 120px;
-  line-height: 31px;
-  font-size: 15px;
-  color: #00BF58;
-  border: 1px solid #00BF58;
-  background: #EAF9E9;
-  border-radius: 30px;
-}
-.open-job-btn:hover {
-  background: #00BF58;
-  color: #fff;
-}
-
-.btn-six {
-  font-weight: 500;
-  color: #00bf58;
-  position: relative;
-  padding-right: 12px;
-  border-bottom: 2px solid #00bf58;
-  transition: all 0.3s ease-in-out 0s;
-}
-.btn-six:hover {
-  color: #00bf58;
-  letter-spacing: 0.25px;
-  text-decoration: none !important;
 }
 
 .jbs-banner {
@@ -7017,4 +6944,4 @@ input[type=file]::-webkit-file-upload-button {
   }
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=temp_main.css.map */

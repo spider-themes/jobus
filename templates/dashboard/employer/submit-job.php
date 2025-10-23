@@ -259,7 +259,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                 </div>
             </div>
         </div>
-        <div class="button-group jbs-d-inline-flex jbs-align-items-center mt-30">
+        <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
             <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
         </div>
     </form>

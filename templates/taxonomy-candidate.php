@@ -60,7 +60,7 @@ $pagination_prev  = '<i class="bi bi-chevron-left"></i>';
 $pagination_next  = '<i class="bi bi-chevron-right"></i>';
 ?>
 
-<section class="candidates-profile pt-110 lg-pt-80 pb-150 xl-pb-150 lg-pb-80">
+<section class="candidates-profile pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-lg-12">

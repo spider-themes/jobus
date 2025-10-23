@@ -21,7 +21,7 @@ wp_enqueue_script( 'lightbox' );
             <div class="jbs-row">
                 <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
                     <h1 class="blog-heading"><?php the_title() ?></h1>
-                    <div class="blog-pubish-date jbs-text-white mt-30 lg-mt-20">
+                    <div class="blog-pubish-date jbs-text-white jbs-mt-30 jbs-lg-mt-20">
                         <?php
                         if ( has_category() ) {
                             echo wp_kses_post( get_the_category_list( ', ' ) ) . ' . ';
@@ -48,19 +48,19 @@ wp_enqueue_script( 'lightbox' );
     ?>
 </div>
 
-<section class="candidates-profile pt-100 lg-pt-70 pb-130 lg-pb-80">
+<section class="candidates-profile pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
             <div class="jbs-col-xxl-9 jbs-col-lg-8">
                 <div class="candidates-profile-details jbs-me-xxl-5 jbs-pe-xxl-4">
-                    <div class="inner-card border-style mb-65 lg-mb-40">
+                    <div class="inner-card border-style jbs-mb-65 jbs-lg-mb-40">
                         <?php the_content() ?>
                     </div>
                     <?php
                     if ( $video_url && $video_title && $video_bg_img ) { ?>
                         <h3 class="title"><?php echo esc_html( $video_title ) ?></h3>
-                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center mt-25 lg-mt-20 mb-75 lg-mb-50"
+                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 jbs-lg-mt-20 jbs-mb-75 jbs-lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $video_bg_img ) ?>)">
                             <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $video_url ) ?>">
@@ -72,7 +72,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $educations ) {
                         ?>
-                        <div class="inner-card border-style mb-75 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 jbs-lg-mb-50">
                             <?php
                             if ( ! empty( $meta['education_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['education_title'] ) ?></h3>
@@ -113,7 +113,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( is_array( $skills ) ) {
                         ?>
-                        <div class="inner-card border-style mb-75 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 jbs-lg-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
                             <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
                                 <?php
@@ -128,7 +128,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $experience ) {
                         ?>
-                        <div class="inner-card border-style mb-60 lg-mb-50">
+                        <div class="inner-card border-style jbs-mb-60 jbs-lg-mb-50">
                             <?php
                             if ( ! empty( $meta['experience_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['experience_title'] ) ?></h3>
@@ -198,7 +198,7 @@ wp_enqueue_script( 'lightbox' );
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
 
-                    <div class="candidate-bio bg-wrapper bg-color mb-60 md-mb-40">
+                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="pt-25">
                                 <div class="candidate-avatar jbs-m-auto">
@@ -323,7 +323,7 @@ wp_enqueue_script( 'lightbox' );
                             $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
                             ?>
                             <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s mt-15" target="_blank">
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15" target="_blank">
                                 <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                             </a>
                             <?php
@@ -341,7 +341,7 @@ wp_enqueue_script( 'lightbox' );
                         $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
-                        <div class="map-area mb-60 md-mb-40">
+                        <div class="map-area jbs-mb-60 md-mb-40">
                             <div class="gmap_canvas jbs-h-100 jbs-w-100">
                                 <iframe class="gmap_iframe jbs-h-100 jbs-w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>

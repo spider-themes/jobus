@@ -707,9 +707,9 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
             $show_results = sprintf(
             /* translators: 1: start range, 2: end range, 3: total number of posts */
                     __( 'Showing %1$s-%2$s of %3$s results', 'jobus' ),
-                    '<span class="text-dark fw-500">' . $start_range . '</span>',
-                    '<span class="text-dark fw-500">' . $end_range . '</span>',
-                    '<span class="text-dark fw-500">' . $total_posts . '</span>'
+                    '<span class="jbs-text-dark jbs-fw-500">' . $start_range . '</span>',
+                    '<span class="jbs-text-dark fw-500">' . $end_range . '</span>',
+                    '<span class="text-dark jbs-fw-500">' . $total_posts . '</span>'
             );
 
             echo wp_kses( $show_results, [ 'span' => [ 'class' => [] ] ] );
@@ -729,7 +729,7 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
     function jobus_social_share_icons( string $class = 'jbs-style-none jbs-d-flex jbs-align-items-center' ): void {
         ?>
         <ul class="<?php echo esc_attr( $class ) ?>">
-            <li class="fw-500 me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
+            <li class="jbs-fw-500 me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
             <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"
                    aria-label="<?php esc_attr_e( 'Share on Facebook', 'jobus' ); ?>"><i class="bi bi-facebook"></i></a></li>
             <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank"

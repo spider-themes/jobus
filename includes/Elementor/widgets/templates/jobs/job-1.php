@@ -25,14 +25,14 @@ if (!defined('ABSPATH')) {
                                 <?php the_post_thumbnail('full', [ 'class' => 'lazy-img jbs-m-auto' ]); ?>
                             </a>
                             <a href="<?php the_permalink(); ?>">
-                                <?php the_title('<h3 class="title fw-500 tran3s">', '</h3>') ?>
+                                <?php the_title('<h3 class="title jbs-fw-500 tran3s">', '</h3>') ?>
                             </a>
                         </div>
                     </div>
 
                     <div class="jod_list_meta_area">
                         <?php if ( !empty(jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1']))) : ?>
-                            <a href="<?php the_permalink(); ?>" class="job-duration fw-500">
+                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
                                 <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options', $settings['job_attr_meta_1'] )); ?>
                             </a>
                         <?php endif ?>

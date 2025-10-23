@@ -107,7 +107,7 @@ if ( ! empty( $logo['url'] ) ) { ?>
     </ul>
 </nav>
 
-<a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="jbs-d-flex jbs-w-100 jbs-align-items-center logout-btn mt-25">
+<a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="jbs-d-flex jbs-w-100 jbs-align-items-center logout-btn jbs-mt-25">
     <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/logout.svg') ?>" alt="<?php esc_attr_e('Logout', 'jobus'); ?>" class="lazy-img">
     <span><?php esc_html_e('Logout', 'jobus'); ?></span>
 </a>

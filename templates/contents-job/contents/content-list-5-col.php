@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	while ( $job_query->have_posts() ) : $job_query->the_post();
 		$save_job_status = jobus_get_save_status();
 		?>
-		<div class="job-list-one style-two jbs-position-relative border-style mb-20">
+		<div class="job-list-one style-two jbs-position-relative border-style jbs-mb-20">
 			<div class="jbs-row jbs-justify-content-between jbs-align-items-center">
 				<div class="jbs-col-xl-4 jbs-col-lg-4">
 					<div class="job-title jbs-d-flex jbs-align-items-center">

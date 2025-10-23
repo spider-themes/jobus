@@ -61,7 +61,7 @@ if ( ! empty ( $all_values ) ) :
         <div class="slider">
             <div class="progress"></div>
         </div>
-        <div class="range-input mb-10">
+        <div class="range-input jbs-mb-10">
             <input type="range" class="range-min"
                    min="<?php echo esc_attr( $min_values ); ?>"
                    max="<?php echo esc_attr( $max_values ); ?>"

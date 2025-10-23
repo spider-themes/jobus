@@ -90,7 +90,7 @@ get_footer();
                         </div>
                     </form>
 
-                    <div id="applicationSuccessMessage" style="display:none;" class="jbs-alert jbs-alert-success mt-3">
+                    <div id="applicationSuccessMessage" style="display:none;" class="jbs-alert jbs-alert-success jbs-mt-3">
                         <?php esc_html_e( 'Your application has been submitted successfully.', 'jobus' ); ?>
                     </div>
 

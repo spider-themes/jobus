@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
-    <section class="job-details jobus_job_details pt-100 lg-pt-80 pb-130 lg-pb-80">
+    <section class="job-details jobus_job_details pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
         <div class="jbs-container">
             <div class="jbs-row">
 
@@ -15,7 +15,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                 </div>
 
                 <div class="jbs-col-xxl-3 jbs-col-xl-4">
-                    <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 lg-mt-50">
+                    <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 jbs-lg-mt-50">
                         <?php
                         $website        = $meta['company_website'] ?? '';
                         $website_target = $website['target'] ?? '_self';
@@ -35,7 +35,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                 the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                             }
                             ?>
-                            <div class="text-md jbs-text-dark jbs-text-center mt-15 mb-20"><?php the_title() ?></div>
+                            <div class="text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20"><?php the_title() ?></div>
                             <?php
                             // Website button logic
                             if ( $meta['is_company_website'] == 'custom' && ! empty( $website['url'] ) ) { ?>
@@ -141,30 +141,30 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                                 // If the user has already applied, show "Applied the Job" button
                                 if ( ! empty( $has_applied ) ) {
                                     ?>
-                                    <a href="javascript:void(0)" class="btn-one jbs-w-100 mt-25 disabled">
+                                    <a href="javascript:void(0)" class="btn-one jbs-w-100 jbs-mt-25 disabled">
                                         <?php esc_html_e( 'Already Applied', 'jobus' ); ?>
                                     </a>
                                     <?php
                                 } else {
                                     // Show the apply button if the user has not applied yet
                                     if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                                        <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 mt-25 ">
+                                        <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 jbs-mt-25 ">
                                             <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                         </a>
                                     <?php } else { ?>
-                                        <a href="#" class="btn-one jbs-w-100 mt-25 jbs-open-modal" data-target="#filterPopUp">
+                                        <a href="#" class="btn-one jbs-w-100 jbs-mt-25 jbs-open-modal" data-target="#filterPopUp">
                                             <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                         </a>
                                     <?php }
                                 }
                             } else {
                                 if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                                    <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 mt-25">
+                                    <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="btn-one jbs-w-100 jbs-mt-25">
                                         <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                     </a>
                                     <?php
                                 } else { ?>
-                                    <a href="#" class="btn-one jbs-w-100 mt-25" data-jbs-toggle="modal" data-jbs-target="#applyJobModal">
+                                    <a href="#" class="btn-one jbs-w-100 jbs-mt-25" data-jbs-toggle="modal" data-jbs-target="#applyJobModal">
                                         <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                                     </a>
                                     <?php

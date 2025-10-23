@@ -25,11 +25,11 @@
 // - single_content
 // - tags
 // - user_form
-// - btn
 // - banner
 // - testimonial
 // - theme_compatibility
 // - responsive
+// And components/btn
 
 // 1. Configuration
 @import "main/variables";
@@ -52,7 +52,7 @@
 @import "main/single_content";
 @import "main/tags";
 @import "main/user_form";
-@import "main/btn";
+@import "components/btn";
 @import "main/banner";
 @import "main/testimonial";
 

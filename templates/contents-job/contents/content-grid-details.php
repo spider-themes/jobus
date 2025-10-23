@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </div>
                         </div>
 						<?php echo wp_kses_post( wpautop( $excerpt) ) ?>
-                        <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between mt-auto">
+                        <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
 							<?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) : ?>
                                 <div class="jbs-d-flex jbs-align-items-center">
                                     <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 jbs-text-capitalize">

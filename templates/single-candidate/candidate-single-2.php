@@ -106,7 +106,7 @@ wp_enqueue_script( 'lightbox' );
     </div>
 </div>
 
-<section class="candidates-profile-2 bg-color pt-100 lg-pt-70 pb-130 lg-pb-80">
+<section class="candidates-profile-2 bg-color pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-lg-8">
@@ -126,7 +126,7 @@ wp_enqueue_script( 'lightbox' );
                             <?php
                         }
                         ?>
-                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 lg-mt-20 jbs-mb-75 lg-mb-50"
+                        <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 jbs-lg-mt-20 jbs-mb-75 jbs-lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $meta['video_bg_img']['url'] ) ?>)">
                             <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $meta['video_url'] ) ?>">
@@ -181,7 +181,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
-                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap pb-25">
+                            <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
                                 <?php
                                 foreach ( $skills as $skill ) {
                                     echo '<li>' . esc_html( $skill->name ) . '</li>';
@@ -212,7 +212,7 @@ wp_enqueue_script( 'lightbox' );
                                             <?php
                                         }
                                         if ( ! empty( $item['start_date'] ) ) { ?>
-                                            <div class="text_1 fw-500"><?php echo esc_html( $item['start_date'] ) ?>
+                                            <div class="text_1 jbs-fw-500"><?php echo esc_html( $item['start_date'] ) ?>
                                                 - <?php echo esc_html( $item['end_date'] ) ?></div>
                                             <?php
                                         }
@@ -415,7 +415,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="jbs-d-sm-flex">
-                                <button type="submit" name="send_message" class="btn-ten fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                <button type="submit" name="send_message" class="btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

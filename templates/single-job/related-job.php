@@ -21,10 +21,10 @@ $args = [
 
 $related_jobs = new WP_Query($args);
 ?>
-<section class="related-job-section pt-90 lg-pt-70 pb-120 lg-pb-70">
+<section class="related-job-section pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
     <div class="jbs-container">
         <div class="jbs-position-relative">
-            <div class="title-three jbs-text-center jbs-text-md-start mb-55 lg-mb-40">
+            <div class="title-three jbs-text-center jbs-text-md-start mb-55 jbs-lg-mb-40">
                 <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
             </div>
             <div class="related-job-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">
@@ -38,7 +38,7 @@ $related_jobs = new WP_Query($args);
                             </a>
                             <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
-                                    <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
+                                    <a href="<?php the_permalink(); ?>" class="job-duration jbs-jbs-fw-500">
                                         <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) ?>
                                     </a>
                                 </div>
@@ -55,7 +55,7 @@ $related_jobs = new WP_Query($args);
                                     </span>
                                 </div>
                             <?php endif; ?>
-                            <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between mt-auto">
+                            <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
                                 <div class="job-location">
                                     <a href="<?php echo esc_url(jobus_get_first_taxonomy_link('jobus_job_location')) ?>">
                                         <?php echo esc_html(jobus_get_first_taxonomy_name('jobus_job_location')) ?>

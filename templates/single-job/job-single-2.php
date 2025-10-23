@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 ?>
 
-<section class="job-details jobus_job_details_2 style-two pt-100 lg-pt-80 pb-130 lg-pb-80">
+<section class="job-details jobus_job_details_2 style-two pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-xl-10 jbs-m-auto">
@@ -92,18 +92,18 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         // If the user has already applied, show "Applied the Job" button
                         if (!empty($has_applied)) {
                             ?>
-                            <a href="javascript:void(0)" class="btn-one mt-25 disabled">
+                            <a href="javascript:void(0)" class="btn-one jbs-mt-25 disabled">
                                 <?php esc_html_e('Already Applied', 'jobus'); ?>
                             </a>
                             <?php
                         } else {
                             // Show the apply button if the user has not applied yet
                             if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25 " >
+                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25 " >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="#" class="btn-one mt-25 jbs-open-modal" data-target="#filterPopUp"
+                                <a href="#" class="btn-one jbs-mt-25 jbs-open-modal" data-target="#filterPopUp"
                                   >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
@@ -111,12 +111,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         }
                     } else {
                         if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one mt-25">
+                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="btn-one mt-25" data-jbs-toggle="modal"
+                            <a href="#" class="btn-one jbs-mt-25" data-jbs-toggle="modal"
                                data-jbs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>

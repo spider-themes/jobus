@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
                 <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                 <div class="jbs-position-relative">
                     <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
-                    <div class="pt-25 pb-30 jbs-ps-4 jbs-pe-4">
+                    <div class="pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4">
 
                         <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get">
 
@@ -33,7 +33,7 @@ if (!defined('ABSPATH')) {
                                         $company_specifications = $company_specifications[$widget_name] ?? '';
                                         ?>
                                         <div class="jbs-col-lg-4">
-                                            <div class="filter-block pb-25">
+                                            <div class="filter-block jbs-pb-25">
                                                 <div class="filter-title jbs-fw-500 jbs-text-dark jbs-mt-10"><?php echo esc_html($widget_title); ?></div>
 	                                            <div class="main-body">
 		                                            <?php
@@ -78,7 +78,7 @@ if (!defined('ABSPATH')) {
                                 }
                                 ?>
                                 <div class="jbs-col-lg-4">
-                                    <button type="submit" class="jbs-btn-ten fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
+                                    <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
                                         <?php esc_html_e('Apply Filter', 'jobus'); ?>
                                     </button>
                                 </div>
