@@ -28,12 +28,16 @@
 }
 .jbs-row {
   --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 1.5rem;
+  --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+
+.jbs-gx-1 {
+  --bs-gutter-x: 0.25rem;
 }
 
 .jbs-gx-2 {
@@ -457,6 +461,11 @@
     justify-content: flex-end !important;
   }
 }
+@media (min-width: 576px) {
+  .jbs-justify-content-sm-end {
+    justify-content: flex-end !important;
+  }
+}
 .jbs-order-md-1 {
   order: 1 !important;
 }
@@ -498,10 +507,6 @@
     order: 6 !important;
   }
 }
-.jbs-gx-1 {
-  gap: 0.25rem !important;
-}
-
 .jbs-col-md-6 {
   flex: 0 0 50%;
   max-width: 50%;

@@ -5,7 +5,7 @@
 // Row
 .jbs-row {
   --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 1.5rem;
+  --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -14,6 +14,10 @@
 }
 
 // Gutter
+.jbs-gx-1 {
+  --bs-gutter-x: 0.25rem;
+}
+
 .jbs-gx-2 {
   --bs-gutter-x: 0.5rem;
 }

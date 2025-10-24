@@ -59,6 +59,12 @@
   }
 }
 
+@media (min-width: 576px) {
+  .jbs-justify-content-sm-end {
+    justify-content: flex-end !important;
+  }
+}
+
 // Flex Order
 .jbs-order-md-1 {
   order: 1 !important;
@@ -100,11 +106,6 @@
   .jbs-order-sm-last {
     order: 6 !important;
   }
-}
-
-// Gap (legacy, prefer .jbs-gap-* utilities)
-.jbs-gx-1 {
-  gap: 0.25rem !important;
 }
 
 // Column Utility (if needed)

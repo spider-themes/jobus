@@ -9,6 +9,7 @@
 .jbs-style-none {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 .jbs-style-none li {
   list-style: none;
@@ -3384,6 +3385,7 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
+  font-family: "gordita";
   font-size: 18px;
 }
 .candidate-profile-card .candidate-name a:hover {
@@ -3449,11 +3451,13 @@ img {
 .candidates-profile-details .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
+  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .title {
   font-size: 28px;
   font-weight: 500;
+  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .video-post {
@@ -3508,6 +3512,7 @@ img {
 }
 .candidates-profile-details .time-line-data .info h4 {
   font-size: 18px;
+  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details .skill-tags {
@@ -3566,6 +3571,7 @@ img {
   height: 80px;
 }
 .candidate-profile-sidebar .candidate-bio .candidate-name {
+  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
@@ -3594,6 +3600,7 @@ img {
   color: #244034;
 }
 .candidate-profile-sidebar .sidebar-title {
+  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -3719,7 +3726,11 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
+  font-family: "gordita";
   font-size: 18px;
+}
+.candidate-profile-card .candidate-name a {
+  color: #000;
 }
 .candidate-profile-card .candidate-name a:hover {
   color: #00BF58;
@@ -3727,9 +3738,6 @@ img {
 .candidate-profile-card .candidate-post {
   font-size: 15px;
   color: rgba(0, 0, 0, 0.4);
-}
-.candidate-profile-card .candidate-skills {
-  gap: 8px;
 }
 .candidate-profile-card .candidate-skills li {
   margin: 0 2px 5px;
@@ -3742,33 +3750,38 @@ img {
   background: rgba(49, 121, 90, 0.1);
 }
 .candidate-profile-card .candidate-skills li.more {
-  background: #d2f34c !important;
-  color: #000 !important;
+  background: #d2f34c;
+  color: #000;
+}
+.candidate-profile-card .candidate-skills li a {
+  color: inherit;
 }
 .candidate-profile-card .profile-btn {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.5px;
   line-height: 40px;
   color: #fff;
   background: #31795A;
   text-align: center;
-  padding: 10px 18px;
+  padding: 0 18px;
   border-radius: 40px;
+  display: inline-block;
 }
 .candidate-profile-card .profile-btn:hover {
   background: #00BF58;
 }
 .candidate-profile-card .msg-btn {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.5px;
   line-height: 38px;
   color: #31795A;
   border: 1px solid #31795A;
   text-align: center;
-  padding: 10px 15px;
+  padding: 0 15px;
   border-radius: 40px;
+  display: inline-block;
 }
 .candidate-profile-card .msg-btn:hover {
   background: #00BF58;
@@ -3779,7 +3792,7 @@ img {
   padding: 27px 30px 38px;
 }
 .candidate-profile-card.list-layout .candidate-skills {
-  position: static;
+  position: absolute;
   left: 0;
   bottom: -45px;
 }
@@ -3810,11 +3823,13 @@ img {
 .candidates-profile-details-2 .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
+  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .title {
   font-size: 28px;
   font-weight: 500;
+  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .video-post {
@@ -3869,6 +3884,7 @@ img {
 }
 .candidates-profile-details-2 .time-line-data .info h4 {
   font-size: 18px;
+  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details-2 .skill-tags {
@@ -3924,6 +3940,7 @@ img {
   height: 80px;
 }
 .candidate-profile-2-sidebar .candidate-bio .candidate-name {
+  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
@@ -3956,6 +3973,7 @@ img {
   color: #244034;
 }
 .candidate-profile-2-sidebar .sidebar-title {
+  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -4504,6 +4522,8 @@ img {
 .company-grid-layout .company-name {
   font-size: 24px;
   margin: 22px 0 8px;
+  display: inline-block;
+  color: #000;
 }
 .company-grid-layout .company-name:hover {
   color: #31795A;
@@ -5633,6 +5653,7 @@ img {
 .jbs-filter-btn {
   font-size: 15px !important;
   color: #244034 !important;
+  height: 32px !important;
   border: 2px solid #244034 !important;
   border-radius: 6px !important;
 }
@@ -5931,7 +5952,6 @@ img {
   background: #E7F6EF !important;
   border-radius: 3px;
   margin: 54px 0 16px;
-  display: inline-block;
 }
 .job-list-two .job-duration.part-time {
   background: rgba(255, 87, 87, 0.08) !important;
@@ -6008,7 +6028,6 @@ img {
   background: #E7F6EF;
   text-transform: capitalize;
   color: #31795A;
-  display: inline-block;
 }
 .job-list-two.style-two .job-duration.part-time {
   background: rgba(255, 87, 87, 0.08);
@@ -6041,6 +6060,10 @@ img {
     flex-wrap: wrap;
     gap: 24px;
   }
+}
+
+.company-profiles {
+  background-color: #EFF6F3 !important;
 }
 
 .company-logo img {
@@ -6132,7 +6155,6 @@ img {
 .job-list-three .main-wrapper .job-duration {
   font-size: 14px;
   color: #00BF58;
-  display: inline-block;
 }
 .job-list-three .main-wrapper .job-duration:hover {
   text-decoration: underline;
@@ -7078,19 +7100,17 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100% !important;
 }
 
-.single-jobus_company .ast-container {
-  display: block !important;
-  max-width: 100% !important;
-}
-
+.post-type-archive-jobus_job .ast-container,
+.post-type-archive-jobus_candidate .ast-container,
+.post-type-archive-jobus_company .ast-container,
+.single-jobus_company .ast-container,
+.single-jobus_candidate .ast-container,
 .single-jobus_job .ast-container {
   display: block !important;
   max-width: 100% !important;
 }
 
 .single-jobus_candidate .ast-container {
-  display: block !important;
-  max-width: 100% !important;
   padding: 0;
 }
 

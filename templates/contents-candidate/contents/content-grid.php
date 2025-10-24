@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<div class="accordion-box grid-style show ">
+<div class="accordion-box grid-style show">
     <div class="jbs-row">
 		<?php
 		while ( $candidate_query->have_posts() ) : $candidate_query->the_post();
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
             <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-sm-6 jbs-d-flex">
 
-                <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> jbs-text-center grid-layout jbs-mb-25 <?php echo esc_attr( $is_popup_border_none ) ?>">
+                <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> jbs-text-center grid-layout jbs-mb-25<?php echo esc_attr( $is_popup_border_none ) ?>">
                     <?php
                     if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
                         jobus_render_post_save_button( [
@@ -70,9 +70,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						// Display the first 2 skills
 						$displayed_skills = array_slice( $skills, 0, $max_skills );
-						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center jbs-pt-30 sm-pt-20 jbs-pb-10">';
+						echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center jbs-justify-content-center jbs-pt-30 jbs-sm-pt-20 jbs-pb-10">';
 						foreach ( $displayed_skills as $skill ) {
-							echo '<li class="jbs-text-capitalize"><a class="jbs-text-black" href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+							echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link($skill) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 						}
 
 						// Display the count of remaining skills

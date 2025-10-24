@@ -138,7 +138,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $educations ) {
                         ?>
-                        <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 jbs-lg-mb-50">
                             <?php
                             if ( ! empty( $meta['education_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['education_title'] ) ?></h3>
@@ -179,7 +179,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( is_array( $skills ) ) {
                         ?>
-                        <div class="inner-card border-style jbs-mb-75 lg-jbs-mb-50">
+                        <div class="inner-card border-style jbs-mb-75 jbs-lg-mb-50">
                             <h3 class="title"><?php esc_html_e( 'Skills', 'jobus' ) ?></h3>
                             <ul class="jbs-style-none skill-tags jbs-d-flex jbs-flex-wrap jbs-pb-25">
                                 <?php
@@ -194,7 +194,7 @@ wp_enqueue_script( 'lightbox' );
 
                     if ( $experience ) {
                         ?>
-                        <div class="inner-card border-style jbs-mb-60 lg-jbs-mb-50">
+                        <div class="inner-card border-style jbs-mb-60 jbs-lg-mb-50">
                             <?php
                             if ( ! empty( $meta['experience_title'] ) ) { ?>
                                 <h3 class="title"><?php echo esc_html( $meta['experience_title'] ) ?></h3>
@@ -264,7 +264,7 @@ wp_enqueue_script( 'lightbox' );
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-2-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
-                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 md-jbs-mb-40">
+                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 jbs-md-mb-40">
                         <ul class="jbs-style-none">
                             <?php
                             if ( ! empty( $location ) ) { ?>
