@@ -296,7 +296,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                         <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                                     </a>
                                     <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
-                                        <?php the_title( '<h3 class="font-size-19">', '</h3>' ) ?>
+                                        <?php the_title( '<h3>', '</h3>' ) ?>
                                     </a>
                                 </div>
                             </div>

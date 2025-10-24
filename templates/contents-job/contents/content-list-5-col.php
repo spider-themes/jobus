@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php the_post_thumbnail('full', [ 'class' => 'lazy-img jbs-m-auto' ]); ?>
 						</a>
 						<a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s jbs-ps-3 ps-lg-0">
-							<?php the_title('<h3 class="font-size-19 jbs-text-black">', '</h3>') ?>
+							<?php the_title('<h3 class="jbs-text-black">', '</h3>') ?>
 						</a>
 					</div>
 				</div>

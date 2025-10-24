@@ -45,7 +45,7 @@ $related_jobs = new WP_Query($args);
                             <?php endif; ?>
                             <div>
                                 <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s jbs-text-black" title="<?php the_title_attribute() ?>">
-                                    <?php the_title('<h3 class="font-size-19 ">', '</h3>'); ?>
+                                    <?php the_title('<h3>', '</h3>'); ?>
                                 </a>
                             </div>
                             <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_2') ) : ?>

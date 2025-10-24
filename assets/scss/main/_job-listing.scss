@@ -487,17 +487,18 @@
 }
 
 .jbs-filter-btn {
-  font-size: 15px !important;
+  font-size: 15px;
   color: #244034 !important;
-  height: 32px !important;
-  border: 2px solid #244034 !important;
-  border-radius: 6px !important;
-
+  width: 86px;
+  height: 32px;
+  border: 2px solid #244034;
+  border-radius: 6px;
+  background: transparent !important;
+  padding: inherit;
   &:hover {
-    background: #31795A !important;
-    border-color: #31795A !important;
+    background: #244034 !important;
     color: #fff !important;
-    text-decoration: none !important;
+    border-color: #244034;
   }
 }
 
@@ -671,7 +672,7 @@
     padding-left: 30px;
 
     .title {
-      width: 100%;
+      display: block;
       margin-left: 0;
     }
   }
@@ -926,7 +927,7 @@
       background: #E7F6EF;
       text-transform: capitalize;
       color: $color-five;
-
+      display: inline-block;
       &.part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
         color: #FF6060;
