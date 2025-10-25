@@ -41,7 +41,7 @@ $avatar_url = $description_data['avatar_url'];
         <div class="jbs-bg-white card-box border-20" id="candidate-profile-description">
             <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
-                <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="candidate_profile_picture_upload">
+                <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3 jbs-border-0" id="candidate_profile_picture_upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                     <input type="hidden" id="candidate_profile_picture_id" name="candidate_profile_picture_id" value="<?php echo esc_attr( $description_data['profile_picture_id'] ); ?>">
                 </div>
@@ -147,7 +147,7 @@ $avatar_url = $description_data['avatar_url'];
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
-                                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="nice-select">
+                                            <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]" id="social_<?php echo esc_attr($index); ?>_icon" class="jbs-nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
                                                     <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
                                                         <?php echo esc_html( $icon_label ); ?>
@@ -217,7 +217,7 @@ $avatar_url = $description_data['avatar_url'];
                             $meta_values = $field['meta_values_group'] ?? array();
                             echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                             echo '<label for="' . esc_attr($meta_key) . '">' . esc_html($meta_name) . '</label>';
-                            echo '<select name="' . esc_attr($meta_key) . '[]" id="' . esc_attr($meta_key) . '" class="nice-select" multiple>';
+                            echo '<select name="' . esc_attr($meta_key) . '[]" id="' . esc_attr($meta_key) . '" class="jbs-nice-select" multiple>';
                             foreach ($meta_values as $option) {
                                 $val = strtolower(preg_replace('/[\s,]+/', '@space@', $option['meta_values']));
                                 $selected = (is_array($meta_value) && in_array($val, $meta_value)) ? 'selected' : '';

@@ -207,7 +207,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                                 $meta_values = $field['meta_values_group'] ?? array();
                                 echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
-                                echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
+                                echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="jbs-nice-select" multiple>';
                                 foreach ( $meta_values as $option ) {
                                     $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ) );
                                     $selected = in_array( $val, $meta_value, true ) ? 'selected' : '';
@@ -228,7 +228,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                     <div class="jbs-row">
                         <div class="jbs-col-md-12">
                             <div class="dash-input-wrapper jbs-mb-30">
-                                <select id="is_company_website" name="is_company_website" class="nice-select">
+                                <select id="is_company_website" name="is_company_website" class="jbs-nice-select">
                                     <option value="default" <?php selected( $is_company_website, 'default' ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
                                     <option value="custom" <?php selected( $is_company_website, 'custom' ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
                                 </select>
@@ -248,7 +248,7 @@ if ( isset( $_POST['employer_submit_job_form'] ) ) {
                                 </div>
                                 <div class="dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-target"><?php esc_html_e( 'Website Target', 'jobus' ); ?></label>
-                                    <select id="company-website-target" name="company_website[target]" class="nice-select">
+                                    <select id="company-website-target" name="company_website[target]" class="jbs-nice-select">
                                         <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
                                         <option value="_blank" <?php selected( $company_website_target, '_blank' ); ?>><?php esc_html_e( 'New Tab', 'jobus' ); ?></option>
                                     </select>

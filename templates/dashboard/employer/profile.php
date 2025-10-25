@@ -71,7 +71,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
-                <button type="button" class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3" id="company-profile-picture-upload">
+                <button type="button" class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3 jbs-border-0" id="company-profile-picture-upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                 </button>
                 <button type="button" name="company_delete_profile_picture" class="delete-btn tran3s" id="company-delete-profile-picture">
@@ -199,7 +199,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                             $meta_values = $field['meta_values_group'] ?? array();
                             echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
                             echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
-                            echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="nice-select" multiple>';
+                            echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="jbs-nice-select" multiple>';
                             foreach ( $meta_values as $option ) {
                                 $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ) );
                                 $selected = ( is_array( $meta_value ) && in_array( $val, $meta_value ) ) ? 'selected' : '';
@@ -230,7 +230,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     </div>
                     <div class="dash-input-wrapper jbs-mb-30">
                         <label for="company-website-target"><?php esc_html_e( 'Link Target', 'jobus' ); ?></label>
-                        <select id="company-website-target" name="company_website[target]" class="nice-select">
+                        <select id="company-website-target" name="company_website[target]" class="jbs-nice-select">
                             <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
                             <option value="_blank" <?php selected( $company_website_target, '_blank' ); ?>><?php esc_html_e( 'New Tab', 'jobus' ); ?></option>
                         </select>
@@ -293,7 +293,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[<?php echo esc_attr( $index ); ?>][icon]"
-                                                    id="social_<?php echo esc_attr( $index ); ?>_icon" class="nice-select">
+                                                    id="social_<?php echo esc_attr( $index ); ?>_icon" class="jbs-nice-select">
                                                 <?php foreach ( $available_icons as $icon_class => $icon_label ) : ?>
                                                     <option value="<?php echo esc_attr( $icon_class ); ?>" <?php selected( $item['icon'], $icon_class ); ?>>
                                                         <?php echo esc_html( $icon_label ); ?>
@@ -363,7 +363,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                         <div class="dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
                             <i class="bi bi-plus"></i>
                             <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
-                            <button type="button" id="company-video-bg-img-upload-btn" class="jbs-position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                            <button type="button" id="company-video-bg-img-upload-btn" class="jbs-position-absolute jbs-w-100 jbs-h-100 jbs-start-0 jbs-top-0 jbs-opacity-0"></button>
                         </div>
                     </div>
                     <!-- Hidden field for image ID -->

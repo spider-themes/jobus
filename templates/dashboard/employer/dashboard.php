@@ -197,7 +197,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
                         <div class="job-item-list jbs-d-flex jbs-align-items-center">
                             <div><?php echo get_the_post_thumbnail( $job, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                             <div class="job-title">
-                                <h6 class="jbs-mb-5">
+                                <h6 class="job_title-mb">
                                     <a href="<?php echo esc_url( get_the_permalink( $job ) ); ?>">
                                         <?php echo esc_html(get_the_title( $job )) ?>
                                     </a>

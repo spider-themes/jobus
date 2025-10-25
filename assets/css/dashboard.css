@@ -32,6 +32,9 @@ Table of Contents:
   background: #fff;
   padding: 30px 20px 30px;
 }
+.dashboard-navbar a {
+  text-decoration: none !important;
+}
 .dashboard-navbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -56,7 +59,7 @@ Table of Contents:
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #29D259;
+  background: #29d259;
   border: 3px solid #fff;
   right: -3px;
   bottom: 10px;
@@ -127,7 +130,7 @@ Table of Contents:
   color: #3c8968;
 }
 .dashboard-navbar .main-nav li a.active {
-  background: #3F634D;
+  background: #3f634d;
   color: #fff;
 }
 .dashboard-navbar .main-nav li a img {
@@ -142,7 +145,7 @@ Table of Contents:
 .dashboard-navbar .profile-complete-status .progress-line {
   height: 5px;
   border-radius: 10px;
-  background: #3F634D;
+  background: #3f634d;
   overflow: hidden;
   margin: 9px 0 3px;
 }
@@ -151,7 +154,7 @@ Table of Contents:
   height: 100%;
   left: 0;
   top: 0;
-  background: #D3FA38;
+  background: #d3fa38;
 }
 .dashboard-navbar .profile-complete-status p {
   font-size: 11px;
@@ -185,10 +188,13 @@ Table of Contents:
 
 .dashboard-body {
   min-height: 100vh;
-  background: #F0F5F3;
+  background: #f0f5f3;
   margin-left: 260px;
   border-radius: 50px 0 0 50px;
   padding: 150px 55px 50px;
+}
+.dashboard-body a {
+  text-decoration: none;
 }
 .dashboard-body .border-15 {
   border-radius: 15px;
@@ -210,7 +216,7 @@ Table of Contents:
 .dashboard-body .dash-title-two {
   font-size: 20px;
   color: #244034;
-  border-bottom: 1px solid #E3F0EB;
+  border-bottom: 1px solid #e3f0eb;
   padding: 25px 0 25px 30px;
   margin: 0;
 }
@@ -226,7 +232,7 @@ Table of Contents:
   color: #31795A;
   border-radius: 7px;
   line-height: 40px;
-  padding: 0 15px;
+  padding: 12px 15px;
   min-width: 135px;
   text-align: center;
   background: rgba(63, 99, 77, 0.2);
@@ -235,6 +241,7 @@ Table of Contents:
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
+  cursor: pointer;
 }
 .dashboard-body .dash-btn-one i {
   font-size: 1.5em;
@@ -263,6 +270,8 @@ Table of Contents:
   line-height: 45px;
   border-radius: 50px;
   background: #244034;
+  border: none;
+  cursor: pointer;
 }
 .dashboard-body .dash-btn-two:hover {
   background: #D2F34C;
@@ -280,7 +289,7 @@ Table of Contents:
   top: 0;
   right: 55px;
   left: 315px;
-  background: #F0F5F3;
+  background: #f0f5f3;
   padding: 30px 0;
   z-index: 999;
 }
@@ -319,7 +328,7 @@ Table of Contents:
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #FF2730;
+  background: #ff2730;
   top: 4px;
   right: -7px;
 }
@@ -345,13 +354,13 @@ Table of Contents:
   position: absolute;
   width: 8px;
   height: 8px;
-  background: #D8D8D8;
+  background: #d8d8d8;
   border-radius: 50%;
   right: 0;
   top: 5px;
 }
 .dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li.unread:before {
-  background: #FF2730;
+  background: #ff2730;
 }
 .dashboard-body .dashboard-header .profile-notification .jbs-dropdown-menu .notify-list li h6 {
   font-size: 15px;
@@ -468,7 +477,7 @@ Table of Contents:
 .dashboard-body .user-activity-chart .nice-select {
   height: 50px;
   line-height: 46px;
-  border: 2px solid #3F634D;
+  border: 2px solid #3f634d;
   border-radius: 7px;
   font-size: 15px;
 }
@@ -505,6 +514,10 @@ Table of Contents:
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-title {
   width: calc(100% - 40px);
   padding-left: 22px;
+}
+.dashboard-body .recent-job-tab .wrapper .job-item-list .job-title .job_title-mb {
+  margin-bottom: 5px;
+  margin-top: 0;
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-title h6 a {
   font-size: 16px;
@@ -622,6 +635,8 @@ Table of Contents:
   letter-spacing: -0.15px;
   font-weight: 500;
   color: #244034;
+  border: none;
+  background: transparent;
 }
 .dashboard-body .user-avatar-setting .delete-btn:hover {
   color: #ff5b5b;
@@ -642,12 +657,12 @@ Table of Contents:
   width: 100%;
   height: 55px;
   letter-spacing: -0.16px;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   border-radius: 7px;
   padding: 0 20px;
 }
 .dashboard-body .dash-input-wrapper textarea {
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   border-radius: 7px;
   padding: 15px 20px;
   max-width: 100%;
@@ -662,7 +677,7 @@ Table of Contents:
   height: 55px;
   line-height: 55px;
   letter-spacing: -0.16px;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   border-radius: 7px;
   padding: 0 25px 0 20px;
 }
@@ -689,7 +704,7 @@ Table of Contents:
   height: 60px;
   width: 100%;
   border-radius: 10px;
-  background: #EDF2F7;
+  background: #edf2f7;
   padding: 0 20px;
 }
 .dashboard-body .dash-input-wrapper .attached-file span {
@@ -705,7 +720,7 @@ Table of Contents:
 }
 .dashboard-body .dash-input-wrapper .skills-wrapper {
   padding: 15px 20px 10px;
-  background: #F7F7F7;
+  background: #f7f7f7;
   border-radius: 15px;
 }
 .dashboard-body .dash-input-wrapper .skills-wrapper ul {
@@ -719,7 +734,7 @@ Table of Contents:
   color: #31795A;
   line-height: 42px;
   padding: 0 40px 0 22px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.0363735);
   border-radius: 30px;
   position: relative;
@@ -813,7 +828,7 @@ Table of Contents:
   right: 15px;
 }
 .dashboard-body .intro-video-post.empty {
-  border: 1px solid #E3E3E3;
+  border: 1px solid #e3e3e3;
 }
 .dashboard-body .intro-video-post input[type=file] {
   position: absolute;
@@ -827,7 +842,7 @@ Table of Contents:
   padding-bottom: 20px;
 }
 .dashboard-body .dash-accordion-one .jbs-accordion-item {
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   border-radius: 15px;
   margin-bottom: 20px;
 }
@@ -905,7 +920,7 @@ Table of Contents:
   font-size: 15px;
   font-weight: 500;
   color: #244034;
-  background: #F0F5F3;
+  background: #f0f5f3;
 }
 .dashboard-body .job-alert-table th:first-child {
   border-radius: 7px 0 0 7px;
@@ -927,10 +942,10 @@ Table of Contents:
   color: #244034;
 }
 .dashboard-body .job-alert-table td:nth-child(2) .job-type {
-  color: #00CB74;
+  color: #00cb74;
 }
 .dashboard-body .job-alert-table td:nth-child(2) .job-type.part-time {
-  color: #FF5757;
+  color: #ff5757;
 }
 .dashboard-body .job-alert-table td .info1 {
   font-size: 14px;
@@ -956,17 +971,17 @@ Table of Contents:
   border: none;
 }
 .dashboard-body .job-alert-table .active .job-status:before {
-  background: #28CC8B;
+  background: #28cc8b;
 }
 .dashboard-body .job-alert-table .pending .job-status:before {
-  background: #FAC715;
+  background: #fac715;
 }
 .dashboard-body .job-alert-table .expired .job-status:before {
-  background: #FF5050;
+  background: #ff5050;
 }
 .dashboard-body .action-dots .jbs-dropdown-menu {
   min-width: 140px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 5px;
   box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
@@ -1061,8 +1076,8 @@ Table of Contents:
   line-height: 45px;
   text-align: center;
   font-size: 28px;
-  color: #3F634D;
-  background: #D3FA38;
+  color: #3f634d;
+  background: #d3fa38;
 }
 .dashboard-body .message-pagination a {
   color: #000;
@@ -1073,7 +1088,7 @@ Table of Contents:
   margin: 0 8px;
 }
 .dashboard-body .message-wrapper .message-sidebar {
-  border-right: 1px solid #E3E1E1;
+  border-right: 1px solid #e3e1e1;
   height: 100%;
 }
 .dashboard-body .message-wrapper .message-sidebar .page-title {
@@ -1093,7 +1108,7 @@ Table of Contents:
   border-radius: 30px;
   position: relative;
   background: rgba(0, 0, 0, 0.04);
-  border: 1px solid #EFEFEF;
+  border: 1px solid #efefef;
 }
 .dashboard-body .message-wrapper .message-sidebar .search-form input {
   width: 100%;
@@ -1138,25 +1153,25 @@ Table of Contents:
   opacity: 0;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item {
-  border-top: 1px solid #F3F3F3;
+  border-top: 1px solid #f3f3f3;
   padding-top: 28px;
   padding-bottom: 28px;
   cursor: pointer;
   position: relative;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item.selected {
-  background: #F0F5F3;
-  border-left: 4px solid #779E86;
-  border-right: 4px solid #779E86;
+  background: #f0f5f3;
+  border-left: 4px solid #779e86;
+  border-right: 4px solid #779e86;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item.selected .email-short-preview .file {
   background: #fff;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item.read .email-short-preview:before {
-  background: #FF4545;
+  background: #ff4545;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item.primary .email-short-preview:before {
-  background: #52C1FF;
+  background: #52c1ff;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item .email-short-preview {
   padding-left: 24px;
@@ -1169,7 +1184,7 @@ Table of Contents:
   position: absolute;
   left: 0;
   top: 7px;
-  background: #3BDA84;
+  background: #3bda84;
 }
 .dashboard-body .message-wrapper .message-sidebar .email-list-item .email-short-preview .sender-name {
   font-size: 15px;
@@ -1205,10 +1220,10 @@ Table of Contents:
   font-size: 12px;
   letter-spacing: -0.3px;
   color: rgba(0, 0, 0, 0.5);
-  background: #F0F5F3;
+  background: #f0f5f3;
 }
 .dashboard-body .message-wrapper .open-email-container .divider {
-  border-bottom: 1px solid #EEEEEE;
+  border-bottom: 1px solid #eeeeee;
 }
 .dashboard-body .message-wrapper .open-email-container .email-header {
   padding-top: 30px;
@@ -1269,7 +1284,7 @@ Table of Contents:
 .dashboard-body .message-wrapper .open-email-container .email-footer .attachments .file .icon {
   width: 37px;
   height: 37px;
-  background: #F0F5F3;
+  background: #f0f5f3;
 }
 .dashboard-body .message-wrapper .open-email-container .email-footer .attachments .file .file-name {
   font-size: 15px;
@@ -1478,7 +1493,7 @@ Table of Contents:
 }
 .portfolio-preview-wrapper .portfolio-image-list li {
   list-style: none;
-  border: 1px solid #E3E3E3;
+  border: 1px solid #e3e3e3;
   border-radius: 10px;
   overflow: hidden;
 }

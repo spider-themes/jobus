@@ -16,6 +16,10 @@
   background: #fff;
   padding: 30px 20px 30px;
 
+  a {
+    text-decoration: none !important;
+  }
+
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -40,12 +44,12 @@
       }
 
       &.online:before {
-        content: '';
+        content: "";
         position: absolute;
         width: 15px;
         height: 15px;
         border-radius: 50%;
-        background: #29D259;
+        background: #29d259;
         border: 3px solid #fff;
         right: -3px;
         bottom: 10px;
@@ -120,7 +124,7 @@
     }
 
     &.active {
-      background: #3F634D;
+      background: #3f634d;
       color: #fff;
     }
 
@@ -139,7 +143,7 @@
     .progress-line {
       height: 5px;
       border-radius: 10px;
-      background: #3F634D;
+      background: #3f634d;
       overflow: hidden;
       margin: 9px 0 3px;
 
@@ -148,7 +152,7 @@
         height: 100%;
         left: 0;
         top: 0;
-        background: #D3FA38;
+        background: #d3fa38;
       }
     }
 
@@ -187,11 +191,14 @@
 // Dashboard Body
 .dashboard-body {
   min-height: 100vh;
-  background: #F0F5F3;
+  background: #f0f5f3;
   margin-left: 260px;
   border-radius: 50px 0 0 50px;
   padding: 150px 55px 50px;
 
+  a {
+    text-decoration: none;
+  }
   .border-15 {
     border-radius: 15px;
   }
@@ -217,7 +224,7 @@
   .dash-title-two {
     font-size: 20px;
     color: $color-one;
-    border-bottom: 1px solid #E3F0EB;
+    border-bottom: 1px solid #e3f0eb;
     padding: 25px 0 25px 30px;
     margin: 0;
   }
@@ -235,11 +242,12 @@
     color: $color-five;
     border-radius: 7px;
     line-height: 40px;
-    padding: 0 15px;
+    padding: 12px 15px;
     min-width: 135px;
     text-align: center;
-    background: rgba($color: #3F634D, $alpha: 0.2);
+    background: rgba($color: #3f634d, $alpha: 0.2);
     @include transition(0.2s);
+    cursor: pointer;
 
     i {
       font-size: 1.5em;
@@ -272,6 +280,8 @@
     line-height: 45px;
     border-radius: 50px;
     background: $color-one;
+    border: none;
+    cursor: pointer;
 
     &:hover {
       background: $color-two;
@@ -294,7 +304,7 @@
     top: 0;
     right: 55px;
     left: 315px;
-    background: #F0F5F3;
+    background: #f0f5f3;
     padding: 30px 0;
     z-index: 999;
 
@@ -338,7 +348,7 @@
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: #FF2730;
+          background: #ff2730;
           top: 4px;
           right: -7px;
         }
@@ -363,18 +373,18 @@
           margin-top: 17px;
 
           &:before {
-            content: '';
+            content: "";
             position: absolute;
             width: 8px;
             height: 8px;
-            background: #D8D8D8;
+            background: #d8d8d8;
             border-radius: 50%;
             right: 0;
             top: 5px;
           }
 
           &.unread:before {
-            background: #FF2730;
+            background: #ff2730;
           }
 
           h6 {
@@ -397,7 +407,6 @@
             color: rgba($color: #000, $alpha: 0.5);
           }
         }
-
       }
     }
 
@@ -425,7 +434,6 @@
       z-index: 99;
       border: none;
       border-radius: 5px;
-
     }
 
     .dash-mobile-nav-toggler:focus {
@@ -434,7 +442,7 @@
 
     .dash-mobile-nav-toggler::before,
     .dash-mobile-nav-toggler::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       left: 0;
@@ -479,7 +487,7 @@
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.02);
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: 12px;
       left: 12px;
@@ -517,7 +525,7 @@
     .nice-select {
       height: 50px;
       line-height: 46px;
-      border: 2px solid #3F634D;
+      border: 2px solid #3f634d;
       border-radius: 7px;
       font-size: 15px;
 
@@ -562,6 +570,11 @@
       .job-title {
         width: calc(100% - 40px);
         padding-left: 22px;
+
+        .job_title-mb {
+          margin-bottom: 5px;
+          margin-top: 0;
+        }
 
         h6 a {
           font-size: 16px;
@@ -619,10 +632,11 @@
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: rgba($color: #2B2B2B, $alpha: 0.35);
+            background: rgba($color: #2b2b2b, $alpha: 0.35);
 
-            &:before, &:after {
-              content: '';
+            &:before,
+            &:after {
+              content: "";
               position: absolute;
               top: 0;
               left: -7px;
@@ -632,7 +646,7 @@
               height: 4px;
               border: none;
               border-radius: 50%;
-              background: rgba($color: #2B2B2B, $alpha: 0.35);
+              background: rgba($color: #2b2b2b, $alpha: 0.35);
             }
 
             &:after {
@@ -648,7 +662,8 @@
           &:hover span {
             background: $color-three;
 
-            &:before, &:after {
+            &:before,
+            &:after {
               background: $color-three;
             }
           }
@@ -698,6 +713,8 @@
       letter-spacing: -0.15px;
       font-weight: 500;
       color: $color-one;
+      border: none;
+      background: transparent;
 
       &:hover {
         color: #ff5b5b;
@@ -725,13 +742,13 @@
       width: 100%;
       height: 55px;
       letter-spacing: -0.16px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #e5e5e5;
       border-radius: 7px;
       padding: 0 20px;
     }
 
     textarea {
-      border: 1px solid #E5E5E5;
+      border: 1px solid #e5e5e5;
       border-radius: 7px;
       padding: 15px 20px;
       max-width: 100%;
@@ -748,7 +765,7 @@
       height: 55px;
       line-height: 55px;
       letter-spacing: -0.16px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #e5e5e5;
       border-radius: 7px;
       padding: 0 25px 0 20px;
 
@@ -780,7 +797,7 @@
       height: 60px;
       width: 100%;
       border-radius: 10px;
-      background: #EDF2F7;
+      background: #edf2f7;
       padding: 0 20px;
 
       span {
@@ -800,7 +817,7 @@
 
     .skills-wrapper {
       padding: 15px 20px 10px;
-      background: #F7F7F7;
+      background: #f7f7f7;
       border-radius: 15px;
 
       ul {
@@ -814,7 +831,7 @@
             color: $color-five;
             line-height: 42px;
             padding: 0 40px 0 22px;
-            background: #FFFFFF;
+            background: #ffffff;
             box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.0363735);
             border-radius: 30px;
             position: relative;
@@ -872,7 +889,7 @@
         margin: 10px 3px 0;
         padding: 0 14px;
         height: 25px;
-        background: rgba($color: #31795A, $alpha: 0.1);
+        background: rgba($color: #31795a, $alpha: 0.1);
         border-radius: 30px;
         @include transition(0.2s);
 
@@ -923,7 +940,7 @@
     }
 
     &.empty {
-      border: 1px solid #E3E3E3;
+      border: 1px solid #e3e3e3;
     }
 
     input[type="file"] {
@@ -941,7 +958,7 @@
       padding-bottom: 20px;
     }
     .jbs-accordion-item {
-      border: 1px solid #EAEAEA;
+      border: 1px solid #eaeaea;
       border-radius: 15px;
       margin-bottom: 20px;
 
@@ -1035,7 +1052,7 @@
       font-size: 15px;
       font-weight: 500;
       color: #244034;
-      background: #F0F5F3;
+      background: #f0f5f3;
 
       &:first-child {
         border-radius: 7px 0 0 7px;
@@ -1061,10 +1078,10 @@
       }
 
       &:nth-child(2) .job-type {
-        color: #00CB74;
+        color: #00cb74;
 
         &.part-time {
-          color: #FF5757;
+          color: #ff5757;
         }
       }
 
@@ -1081,7 +1098,7 @@
         color: rgba($color: $color-one, $alpha: 0.9);
 
         &:before {
-          content: '';
+          content: "";
           position: absolute;
           width: 8px;
           height: 8px;
@@ -1097,23 +1114,22 @@
     }
 
     .active .job-status:before {
-      background: #28CC8B;
+      background: #28cc8b;
     }
 
     .pending .job-status:before {
-      background: #FAC715;
+      background: #fac715;
     }
 
     .expired .job-status:before {
-      background: #FF5050;
+      background: #ff5050;
     }
   }
-
 
   .action-dots {
     .jbs-dropdown-menu {
       min-width: 140px;
-      border: 1px solid #F1F1F1;
+      border: 1px solid #f1f1f1;
       border-radius: 5px;
       box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
       padding: 10px 0;
@@ -1146,10 +1162,11 @@
         width: 4px;
         height: 4px;
         border-radius: 50%;
-        background: rgba($color: #2B2B2B, $alpha: 0.35);
+        background: rgba($color: #2b2b2b, $alpha: 0.35);
 
-        &:before, &:after {
-          content: '';
+        &:before,
+        &:after {
+          content: "";
           position: absolute;
           top: -7px;
           left: 0;
@@ -1159,7 +1176,7 @@
           height: 4px;
           border: none;
           border-radius: 50%;
-          background: rgba($color: #2B2B2B, $alpha: 0.35);
+          background: rgba($color: #2b2b2b, $alpha: 0.35);
         }
 
         &:after {
@@ -1175,7 +1192,8 @@
       &:hover span {
         background: $color-three;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           background: $color-three;
         }
       }
@@ -1197,17 +1215,20 @@
       border-right: none;
       @include transition(0.2s);
 
-      &:hover, &.active {
+      &:hover,
+      &.active {
         background: $color-five;
         color: #fff;
       }
     }
 
-    &:nth-child(1) a, &:nth-child(5) a {
+    &:nth-child(1) a,
+    &:nth-child(5) a {
       border-radius: 5px 0 0 5px;
     }
 
-    &:nth-child(3) a, &:nth-child(6) a {
+    &:nth-child(3) a,
+    &:nth-child(6) a {
       border-radius: 0 5px 5px 0;
       border-right: 1px solid #626262;
     }
@@ -1223,8 +1244,8 @@
     line-height: 45px;
     text-align: center;
     font-size: 28px;
-    color: #3F634D;
-    background: #D3FA38;
+    color: #3f634d;
+    background: #d3fa38;
   }
 
   .message-pagination a {
@@ -1239,7 +1260,7 @@
 
   .message-wrapper {
     .message-sidebar {
-      border-right: 1px solid #E3E1E1;
+      border-right: 1px solid #e3e1e1;
       height: 100%;
 
       .page-title {
@@ -1249,7 +1270,8 @@
 
       .action-btn {
         span {
-          &:before, &:after {
+          &:before,
+          &:after {
             top: 0;
             left: -7px;
           }
@@ -1266,7 +1288,7 @@
         border-radius: 30px;
         position: relative;
         background: rgba($color: #000, $alpha: 0.04);
-        border: 1px solid #EFEFEF;
+        border: 1px solid #efefef;
 
         input {
           width: 100%;
@@ -1318,16 +1340,16 @@
       }
 
       .email-list-item {
-        border-top: 1px solid #F3F3F3;
+        border-top: 1px solid #f3f3f3;
         padding-top: 28px;
         padding-bottom: 28px;
         cursor: pointer;
         position: relative;
 
         &.selected {
-          background: #F0F5F3;
-          border-left: 4px solid #779E86;
-          border-right: 4px solid #779E86;
+          background: #f0f5f3;
+          border-left: 4px solid #779e86;
+          border-right: 4px solid #779e86;
 
           .email-short-preview .file {
             background: #fff;
@@ -1335,31 +1357,31 @@
         }
 
         &.read .email-short-preview:before {
-          background: #FF4545;
+          background: #ff4545;
         }
 
         &.primary .email-short-preview:before {
-          background: #52C1FF;
+          background: #52c1ff;
         }
 
         .email-short-preview {
           padding-left: 24px;
 
           &:before {
-            content: '';
+            content: "";
             width: 8px;
             height: 8px;
             border-radius: 50%;
             position: absolute;
             left: 0;
             top: 7px;
-            background: #3BDA84;
+            background: #3bda84;
           }
 
           .sender-name {
             font-size: 15px;
             font-weight: 500;
-            color: rgba($color: #3F634D, $alpha: 0.8);
+            color: rgba($color: #3f634d, $alpha: 0.8);
           }
 
           .date {
@@ -1394,7 +1416,7 @@
             font-size: 12px;
             letter-spacing: -0.3px;
             color: rgba($color: #000, $alpha: 0.5);
-            background: #F0F5F3;
+            background: #f0f5f3;
           }
         }
       }
@@ -1402,7 +1424,7 @@
 
     .open-email-container {
       .divider {
-        border-bottom: 1px solid #EEEEEE;
+        border-bottom: 1px solid #eeeeee;
       }
 
       .email-header {
@@ -1476,7 +1498,7 @@
             .icon {
               width: 37px;
               height: 37px;
-              background: #F0F5F3;
+              background: #f0f5f3;
             }
 
             .file-name {
@@ -1493,7 +1515,6 @@
           }
         }
       }
-
     }
   }
 
@@ -1555,7 +1576,6 @@
       }
     }
   }
-
 }
 
 // New Message Container
@@ -1650,7 +1670,7 @@
   background: #fff;
   padding: 50px 15px 15px;
   border-radius: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, .1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba($color: #000, $alpha: 0.04);
   display: none;
 
@@ -1737,7 +1757,7 @@
     flex-wrap: wrap;
     li {
       list-style: none;
-      border: 1px solid #E3E3E3;;
+      border: 1px solid #e3e3e3;
       border-radius: 10px;
       overflow: hidden;
       img {

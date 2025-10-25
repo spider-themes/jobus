@@ -30,7 +30,7 @@ if (!defined('ABSPATH')) {
 
                             if ($select_job_attr == 'jobus_job_cat' || $select_job_attr == 'jobus_job_location' || $select_job_attr == 'jobus_job_tag') {
                                 ?>
-                                <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                <select class="jbs-nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                     <?php
                                     $taxonomy_terms = get_terms($select_job_attr);
                                     foreach ($taxonomy_terms as $term) {
@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) {
 
                                 if ( $item['layout_type'] == 'dropdown' ) {
                                     ?>
-                                    <select class="nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                    <select class="jbs-nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                         <?php
                                         if ($job_specifications) {
                                             foreach ( $job_specifications as $job_spec_value ) {

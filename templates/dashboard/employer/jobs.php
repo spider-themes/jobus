@@ -43,7 +43,7 @@ if ( ! empty( $dashboard_page ) ) {
 
     <div class="jbs-bg-white card-box border-20">
         <div class="jbs-table-responsive">
-            <table class="table job-alert-table">
+            <table class="jbs-table job-alert-table">
                 <thead>
                     <tr>
                         <th scope="col"><?php esc_html_e( 'Title', 'jobus' ); ?></th>
