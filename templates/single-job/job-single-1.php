@@ -24,7 +24,7 @@ if ($company_query->have_posts()) {
 <section class="job-details jobus_job_details jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
-            <div class="jbs-col-xxl-9 jbs-col-xl-8 jbs-pl-0 jbs-pr-0">
+            <div class="jbs-col-xxl-9 jbs-col-xl-8 ">
                 <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
                     <div class="job-head">
                         <div class="post-date">
@@ -61,7 +61,7 @@ if ($company_query->have_posts()) {
                 </div>
             </div>
 
-            <div class="jbs-col-xxl-3 jbs-col-xl-4 jbs-pl-0 jbs-pr-0">
+            <div class="jbs-col-xxl-3 jbs-col-xl-4 ">
                 <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 jbs-lg-mt-50">
                     <?php
                     $website = $meta['company_website'] ?? '';
@@ -86,7 +86,7 @@ if ($company_query->have_posts()) {
                             <?php
                         } else {
                             ?>
-                            <a href="<?php the_permalink(); ?>" class="website-btn tran3s">
+                            <a href="<?php the_permalink(); ?>" class="website-btn tran3s jbs-w-160">
                                 <?php esc_html_e('Company Profile', 'jobus'); ?>
                             </a>
                             <?php

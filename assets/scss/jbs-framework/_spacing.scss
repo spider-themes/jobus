@@ -384,3 +384,13 @@
   .jbs-my-xxl-auto { margin-top: auto !important; margin-bottom: auto !important; }
   .jbs-m-xxl-auto { margin: auto !important; }
 }
+
+
+@media (min-width: 1400px) {
+    .jbs-pe-xxl-4 {
+        padding-right: 1.5rem !important;
+    }
+    .jbs-me-xxl-5 {
+        margin-right: 3rem !important;
+    }
+}

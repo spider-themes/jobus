@@ -281,7 +281,7 @@ $avatar_url = $description_data['avatar_url'];
                         $iframe_url = $is_http . "maps.google.com/maps?q={$lat},{$lng}&z={$zoom}&output=embed";
                         ?>
                         <div class="map-frame jbs-mt-30">
-                            <iframe class="gmap_iframe jbs-h-100 jbs-w-100"
+                            <iframe class="gmap_iframe jbs-h-100 jbs-w-100 jbs-border-0"
                                     id="candidate_gmap_iframe"
                                     src="<?php echo esc_url($iframe_url); ?>"
                                     allowfullscreen=""

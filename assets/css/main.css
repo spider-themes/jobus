@@ -1555,6 +1555,10 @@
   color: #244034 !important;
 }
 
+.tran3s {
+  transition: all 0.3s ease-in-out;
+}
+
 .category-section-one.bg-color {
   background: #F2F9D8;
 }
@@ -3538,6 +3542,7 @@ img {
   font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
+  font-weight: 500;
 }
 .candidate-profile-sidebar .candidate-bio .invite-btn {
   font-size: 15px;
@@ -3593,6 +3598,7 @@ img {
   background: #fff;
   padding: 0 15px;
   font-size: 13px;
+  outline: none;
 }
 .candidate-profile-sidebar .email-form textarea {
   width: 100%;
@@ -3604,6 +3610,7 @@ img {
   padding: 10px 15px;
   font-size: 13px;
   resize: none;
+  outline: none;
 }
 
 .email-form-message.success {
@@ -3966,6 +3973,7 @@ img {
   background: #fff;
   padding: 0 15px;
   font-size: 13px;
+  outline: none;
 }
 .candidate-profile-2-sidebar .email-form textarea {
   width: 100%;
@@ -3977,6 +3985,7 @@ img {
   padding: 10px 15px;
   font-size: 13px;
   resize: none;
+  outline: none;
 }
 
 .candidate-profile-two {
@@ -4643,6 +4652,7 @@ img {
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
+  display: inline-block;
 }
 .company-details .details-post-data .share-option li a:hover {
   background: #244034;
@@ -6163,7 +6173,7 @@ img {
   color: #fff;
   background: #244034;
   border-radius: 30px;
-  text-decoration: none !important;
+  line-height: 40px;
 }
 .job-company-info .website-btn:hover {
   background: #31795A;
@@ -7063,7 +7073,19 @@ input[type=file]::-webkit-file-upload-button {
   margin-top: 0 !important;
 }
 
-.site-main:has(.wp-block-jobus-shortcode-candidate-archive, .wp-block-jobus-shortcode-job-archive, .wp-block-jobus-shortcode-company-archive) {
+.wp-theme-twentytwentyfive .candidates-profile .wp-block-heading, .wp-theme-twentytwentyfive .candidates-profile .title {
+  top: -39px !important;
+}
+.wp-theme-twentytwentyfive .candidates-profile li div {
+  margin: 0 !important;
+}
+.wp-theme-twentytwentyfive .job-company-info .job-meta-data div {
+  margin: -6px 0 25px !important;
+}
+
+.site-main:has(.wp-block-jobus-shortcode-candidate-archive,
+.wp-block-jobus-shortcode-job-archive,
+.wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
 }
 
@@ -7081,7 +7103,9 @@ input[type=file]::-webkit-file-upload-button {
   padding: 0;
 }
 
-.site-container:has(.wp-block-jobus-shortcode-candidate-archive, .wp-block-jobus-shortcode-job-archive, .wp-block-jobus-shortcode-company-archive) {
+.site-container:has(.wp-block-jobus-shortcode-candidate-archive,
+.wp-block-jobus-shortcode-job-archive,
+.wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
   padding: 0 !important;
 }

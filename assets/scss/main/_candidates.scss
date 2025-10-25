@@ -313,6 +313,7 @@ img {
       font-family: $main-font;
       font-size: 20px;
       margin: 18px 0 20px;
+      font-weight: 500;
     }
 
     .invite-btn {
@@ -380,6 +381,7 @@ img {
       background: #fff;
       padding: 0 15px;
       font-size: 13px;
+      outline: none;
     }
 
     textarea {
@@ -392,6 +394,7 @@ img {
       padding: 10px 15px;
       font-size: 13px;
       resize: none;
+      outline: none;
     }
   }
 }
@@ -825,6 +828,7 @@ img {
       background: #fff;
       padding: 0 15px;
       font-size: 13px;
+      outline: none;
     }
 
     textarea {
@@ -837,6 +841,7 @@ img {
       padding: 10px 15px;
       font-size: 13px;
       resize: none;
+      outline: none;
     }
   }
 }

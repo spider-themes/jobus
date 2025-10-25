@@ -383,7 +383,7 @@ wp_enqueue_script( 'lightbox' );
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
                         <div class="map-area jbs-mb-60 md-jbs-mb-40">
                             <div class="gmap_canvas jbs-h-100 jbs-w-100">
-                                <iframe class="gmap_iframe jbs-h-100 jbs-w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
+                                <iframe class="gmap_iframe jbs-h-100 jbs-w-100 jbs-border-0" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
                         <?php
@@ -415,7 +415,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="jbs-d-sm-flex">
-                                <button type="submit" name="send_message" class="btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                <button type="submit" name="send_message" class="jbs-btn-ten jbs-pointer jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

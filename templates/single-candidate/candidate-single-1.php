@@ -343,7 +343,7 @@ wp_enqueue_script( 'lightbox' );
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
                         <div class="map-area jbs-mb-60 md-mb-40">
                             <div class="gmap_canvas jbs-h-100 jbs-w-100">
-                                <iframe class="gmap_iframe jbs-h-100 jbs-w-100" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
+                                <iframe class="gmap_iframe jbs-h-100 jbs-w-100 jbs-border-0" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
                         </div>
                         <?php

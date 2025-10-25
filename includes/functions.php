@@ -729,7 +729,7 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
     function jobus_social_share_icons( string $class = 'jbs-style-none jbs-d-flex jbs-align-items-center' ): void {
         ?>
         <ul class="<?php echo esc_attr( $class ) ?>">
-            <li class="jbs-fw-500 me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
+            <li class="jbs-fw-500 jbs-me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
             <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"
                    aria-label="<?php esc_attr_e( 'Share on Facebook', 'jobus' ); ?>"><i class="bi bi-facebook"></i></a></li>
             <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank"

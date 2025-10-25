@@ -25,7 +25,7 @@ get_footer();
         <div class="jbs-modal-content">
             <div class="jbs-modal-header">
                 <h5 class="jbs-modal-title" id="applyJobModalLabel"><?php esc_html_e( 'Apply for this Position', 'jobus' ); ?></h5>
-                <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="jbs-btn-close jbs-pointer" data-jbs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="jbs-modal-body">
                 <div class="jbs-container">
@@ -44,7 +44,7 @@ get_footer();
                     $candidate_email = $user->user_email;
                     ?>
                     <form action="#" name="job_application_form" class="job-application-form" id="jobApplicationForm" method="post" enctype="multipart/form-data">
-                        <div class="jbs-row g-4">
+                        <div class="jbs-row jbs-gy-4">
 
                             <input type="hidden" name="job_application_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <input type="hidden" name="job_application_title" value="<?php echo esc_attr( get_the_title( get_the_ID() ) ); ?>">
