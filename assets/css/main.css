@@ -4647,6 +4647,7 @@ img {
   border: 1px solid #EAEAEA;
   border-radius: 50%;
   margin-left: 6px;
+  display: inline-block;
   -webkit-transition: all 0.2s ease-in-out 0s;
   -moz-transition: all 0.2s ease-in-out 0s;
   -ms-transition: all 0.2s ease-in-out 0s;
@@ -5381,7 +5382,6 @@ img {
   cursor: pointer;
   pointer-events: auto;
   appearance: none;
-  -moz-appearance: none;
 }
 .filter-area-tab .filter-input li {
   position: relative;
@@ -5625,19 +5625,17 @@ img {
 }
 
 .jbs-filter-btn {
-  font-size: 15px;
+  font-size: 15px !important;
   color: #244034 !important;
-  width: 86px;
-  height: 32px;
-  border: 2px solid #244034;
-  border-radius: 6px;
-  background: transparent !important;
-  padding: inherit;
+  height: 32px !important;
+  border: 2px solid #244034 !important;
+  border-radius: 6px !important;
 }
 .jbs-filter-btn:hover {
-  background: #244034 !important;
+  background: #31795A !important;
+  border-color: #31795A !important;
   color: #fff !important;
-  border-color: #244034;
+  text-decoration: none !important;
 }
 
 .upper-filter {
@@ -5778,7 +5776,7 @@ img {
   padding-left: 30px;
 }
 .job-list-one .split-box1 .title {
-  display: block;
+  width: 100%;
   margin-left: 0;
 }
 .job-list-one .job-duration {
@@ -6004,7 +6002,6 @@ img {
   background: #E7F6EF;
   text-transform: capitalize;
   color: #31795A;
-  display: inline-block;
 }
 .job-list-two.style-two .job-duration.part-time {
   background: rgba(255, 87, 87, 0.08);
@@ -6173,7 +6170,7 @@ img {
   color: #fff;
   background: #244034;
   border-radius: 30px;
-  line-height: 40px;
+  text-decoration: none !important;
 }
 .job-company-info .website-btn:hover {
   background: #31795A;

@@ -2,19 +2,78 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-// Candidate Archive Page Settings
+// Candidate Specifications
 CSF::createSection( $settings_prefix, array(
-	'id'    => 'jobus_candidate_archive', // Set a unique slug-like ID
-	'title' => esc_html__( 'Candidate Archive Page', 'jobus' ),
-	'icon'  => 'fa fa-plus',
+	'title'  => esc_html__( 'Candidate Options', 'jobus' ),
+	'id'     => 'jobus_candidate',
+	'icon'   => 'fa fa-user',
+));
 
+// Candidate Specifications
+CSF::createSection( $settings_prefix, array(
+	'title'  => esc_html__( 'Candidate Specifications', 'jobus' ),
+	'parent' => 'jobus_candidate',
+	'id'     => 'candidate_specifications',
+	'fields' => array(
+		array(
+			'id'       => 'candidate_specifications',
+			'type'     => 'group',
+			'title'    => esc_html__( 'Candidate Specifications', 'jobus' ),
+			'subtitle' => esc_html__( 'Manage Candidate Specifications', 'jobus' ),
+			'fields'   => array(
+				array(
+					'id'          => 'meta_name',
+					'type'        => 'text',
+					'title'       => esc_html__( 'Name', 'jobus' ),
+					'placeholder' => esc_html__( 'Enter a specification', 'jobus' ),
+					'after'       => esc_html__( 'Insert a unique name', 'jobus' ),
+					'attributes'  => [
+						'style' => 'float:left;margin-right:10px;'
+					],
+				),
+
+				array(
+					'id'          => 'meta_key',
+					'type'        => 'text',
+					'title'       => esc_html__( 'Key', 'jobus' ),
+					'placeholder' => esc_html__( 'Specification key', 'jobus' ),
+					'after'       => esc_html__( 'Insert a unique key', 'jobus' ),
+					'attributes'  => [
+						'style' => 'float:left;margin-right:10px;'
+					],
+				),
+
+				array(
+					'id'           => 'meta_values_group',
+					'type'         => 'repeater',
+					'title'        => esc_html__( 'Options', 'jobus' ),
+					'button_title' => esc_html__( 'Add Option', 'jobus' ),
+					'fields'       => array(
+						array(
+							'id'    => 'meta_values',
+							'type'  => 'text',
+							'title' => null,
+						)
+					)
+				),
+
+				array(
+					'id'          => 'meta_icon',
+					'type'        => 'icon',
+					'title'       => esc_html__( 'Icon (Optional)', 'jobus' ),
+					'placeholder' => esc_html__( 'Select icon', 'jobus' ),
+				)
+			)
+		)// End job specifications
+	)
 ) );
+
 
 // Candidate Layout Settings
 CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_candidate_archive',
-	'title'  => esc_html__( 'Page Layout', 'jobus' ),
-	'id'     => 'jobus_candidate_archive',
+	'parent' => 'jobus_candidate',
+	'title'  => esc_html__( 'Candidate Archive Page', 'jobus' ),
+	'id'     => 'candidate_page_layout',
 	'fields' => array(
 
 		//Subheading field
@@ -37,6 +96,14 @@ CSF::createSection( $settings_prefix, array(
 		),
 
 		array(
+			'id'      => 'candidate_posts_per_page',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Posts Per Page (Candidate)', 'jobus' ),
+			'default' => - 1,
+			'desc'    => esc_html__( 'Set the value to \'-1\' to display all candidate posts.', 'jobus' ),
+		),
+
+		array(
 			'id'         => 'candidate_archive_grid_column',
 			'type'       => 'select',
 			'title'      => esc_html__( 'Select Column', 'jobus' ),
@@ -50,18 +117,8 @@ CSF::createSection( $settings_prefix, array(
 			'default'    => '4',
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
-	)
-) );
 
-
-// Candidate Archive Settings-> Archive Settings
-CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_candidate_archive',
-	'title'  => esc_html__( 'Archive', 'jobus' ),
-	'id'     => 'candidate_archive_settings',
-	'fields' => array(
-
-		//Subheading field
+		// Candidate Attributes
 		array(
 			'type'    => 'subheading',
 			'content' => esc_html__( 'Candidate Attributes', 'jobus' ),
@@ -94,20 +151,10 @@ CSF::createSection( $settings_prefix, array(
 			'dependency' => array( 'candidate_archive_attr_layout', '||', 'grid', 'list' ),
 		),
 
-	)
-) );
-
-
-// Candidate Archive Page Settings-> Sidebar Settings
-CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_candidate_archive',
-	'title'  => esc_html__( 'Sidebar', 'jobus' ),
-	'id'     => 'candidate_sidebar_settings',
-	'fields' => array(
-
+		// Sidebar Filters
 		array(
 			'type'    => 'subheading',
-			'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
+			'content' => esc_html__( 'Sidebar Filters', 'jobus' ),
 		),
 
 		// Meta Widgets
@@ -173,6 +220,32 @@ CSF::createSection( $settings_prefix, array(
 				),
 			),
 		),
+	)
+));
 
+// Candidate Details Layout Settings
+CSF::createSection( $settings_prefix, array(
+	'parent' => 'jobus_candidate',
+	'title'  => esc_html__( 'Candidate Details Page', 'jobus' ),
+	'id'     => 'candidate_details_layout',
+	'fields' => array(
+		// Single Post Layout
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Single Post Layout', 'jobus' ),
+		),
+
+		array(
+			'id'       => 'candidate_profile_layout',
+			'type'     => 'image_select',
+			'title'    => esc_html__( 'Choose Layout', 'jobus' ),
+			'subtitle' => esc_html__( 'Select the preferred layout for your candidate post for this page.', 'jobus' ),
+			'options'  => array(
+				'1' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-1.png' ),
+				'2' => esc_url( JOBUS_IMG . '/layout/candidate/candidate-profile-2.png' ),
+			),
+			'default'  => '1',
+			'class'    => trim($pro_access_class . $active_theme_class)
+		),
 	)
 ) );

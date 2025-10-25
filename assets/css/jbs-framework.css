@@ -6,14 +6,12 @@
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   font-size: 16px;
-  line-height: 2em;
 }
 .jbs-container a {
   text-decoration: none;
 }
-.jbs-container h1, .jbs-container h2, .jbs-container h3, .jbs-container h4, .jbs-container h5, .jbs-container h6, .jbs-container p {
-  font-size: 16px;
-  line-height: 2em;
+.jbs-container p {
+  line-height: 1.8;
 }
 
 @media (min-width: 992px) {

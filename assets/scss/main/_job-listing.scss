@@ -226,7 +226,6 @@
       cursor: pointer;
       pointer-events: auto;
       appearance: none;
-      -moz-appearance: none;
     }
   }
 
@@ -487,18 +486,17 @@
 }
 
 .jbs-filter-btn {
-  font-size: 15px;
+  font-size: 15px !important;
   color: #244034 !important;
-  width: 86px;
-  height: 32px;
-  border: 2px solid #244034;
-  border-radius: 6px;
-  background: transparent !important;
-  padding: inherit;
+  height: 32px !important;
+  border: 2px solid #244034 !important;
+  border-radius: 6px !important;
+
   &:hover {
-    background: #244034 !important;
+    background: #31795A !important;
+    border-color: #31795A !important;
     color: #fff !important;
-    border-color: #244034;
+    text-decoration: none !important;
   }
 }
 
@@ -672,7 +670,7 @@
     padding-left: 30px;
 
     .title {
-      display: block;
+      width: 100%;
       margin-left: 0;
     }
   }
@@ -927,7 +925,7 @@
       background: #E7F6EF;
       text-transform: capitalize;
       color: $color-five;
-      display: inline-block;
+
       &.part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
         color: #FF6060;
@@ -1127,7 +1125,7 @@
     color: #fff;
     background: $color-one;
     border-radius: 30px;
-    line-height: 40px;
+    text-decoration: none !important;
 
     &:hover {
       background: $color-five;

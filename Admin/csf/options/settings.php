@@ -18,7 +18,7 @@ if ( class_exists( 'CSF' ) ) {
 		'menu_parent'     => 'edit.php?post_type=jobus_job',
 		'theme'           => 'dark',
 		'sticky_header'   => 'true',
-	) );
+	));
 
 	// Determine Pro features (license only)
 	$is_pro_access = function_exists('jobus_fs') && jobus_fs()->can_use_premium_code();
@@ -33,15 +33,9 @@ if ( class_exists( 'CSF' ) ) {
 	 */
 	require_once JOBUS_PATH . '/Admin/csf/options/general.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/dashboard.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/job-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/job-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/job-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/company-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/company-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/company-details.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/candidate-specifications.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/candidate-archive.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/candidate-details.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/job_opt.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/company_opt.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/candidate_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/login-form.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/smtp.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/backup.php';

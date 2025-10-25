@@ -95,7 +95,7 @@ if ($company_query->have_posts()) {
                     }
                     ?>
                     <div class="jbs-border-top jbs-mt-40 jbs-pt-40">
-                        <ul class="job-meta-data jbs-row jbs-style-none">
+                        <ul class="job-meta-data jbs-row">
                             <?php
                             // Retrieve the repeater field configurations from settings options
                             $specifications = jobus_opt('job_specifications');

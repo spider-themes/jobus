@@ -2,18 +2,78 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-// Company Archive Page Settings
+
+// Company Specifications
 CSF::createSection( $settings_prefix, array(
-	'id'    => 'jobus_company_archive', // Set a unique slug-like ID
-	'title' => esc_html__( 'Company Archive Page', 'jobus' ),
-	'icon'  => 'fa fa-plus',
+	'title'  => esc_html__( 'Company Options', 'jobus' ),
+	'id'     => 'jobus_company',
+	'icon'   => 'fa fa-building',
+));
+
+// Company Specifications
+CSF::createSection( $settings_prefix, array(
+	'title'  => esc_html__( 'Company Specifications', 'jobus' ),
+	'parent' => 'jobus_company',
+	'id'     => 'company_specifications',
+	'fields' => array(
+		array(
+			'id'       => 'company_specifications',
+			'type'     => 'group',
+			'title'    => esc_html__( 'Company Specifications', 'jobus' ),
+			'subtitle' => esc_html__( 'Manage Company Specifications', 'jobus' ),
+			'fields'   => array(
+				array(
+					'id'          => 'meta_name',
+					'type'        => 'text',
+					'title'       => esc_html__( 'Name', 'jobus' ),
+					'placeholder' => esc_html__( 'Enter a specification', 'jobus' ),
+					'after'       => esc_html__( 'Insert a unique name', 'jobus' ),
+					'attributes'  => [
+						'style' => 'float:left;margin-right:10px;'
+					],
+				),
+
+				array(
+					'id'          => 'meta_key',
+					'type'        => 'text',
+					'title'       => esc_html__( 'Key', 'jobus' ),
+					'placeholder' => esc_html__( 'Specification key', 'jobus' ),
+					'after'       => esc_html__( 'Insert a unique key', 'jobus' ),
+					'attributes'  => [
+						'style' => 'float:left;margin-right:10px;'
+					],
+				),
+
+				array(
+					'id'           => 'meta_values_group',
+					'type'         => 'repeater',
+					'title'        => esc_html__( 'Options', 'jobus' ),
+					'button_title' => esc_html__( 'Add Option', 'jobus' ),
+					'fields'       => array(
+						array(
+							'id'    => 'meta_values',
+							'type'  => 'text',
+							'title' => null,
+						)
+					)
+				),
+
+				array(
+					'id'          => 'meta_icon',
+					'type'        => 'icon',
+					'title'       => esc_html__( 'Icon (Optional)', 'jobus' ),
+					'placeholder' => esc_html__( 'Select icon', 'jobus' ),
+				)
+			)
+		)// End company specifications
+	)
 ) );
 
 
-// Company Layout Settings
+// Company Archive Page Layout Settings
 CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_company_archive',
-	'title'  => esc_html__( 'Page Layout', 'jobus' ),
+	'parent' => 'jobus_company',
+	'title'  => esc_html__( 'Company Archive Page', 'jobus' ),
 	'id'     => 'company_page_layout',
 	'fields' => array(
 
@@ -37,6 +97,14 @@ CSF::createSection( $settings_prefix, array(
 		),
 
 		array(
+			'id'      => 'company_posts_per_page',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Posts Per Page', 'jobus' ),
+			'default' => - 1,
+			'desc'    => esc_html__( 'Set the value to \'-1\' to display all company posts.', 'jobus' ),
+		),
+
+		array(
 			'id'         => 'company_archive_grid_column',
 			'type'       => 'select',
 			'title'      => esc_html__( 'Select Column', 'jobus' ),
@@ -50,18 +118,8 @@ CSF::createSection( $settings_prefix, array(
 			'default'    => '4',
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
-	)
-) );
 
-
-// Company Archive Settings-> Archive Settings
-CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_company_archive',
-	'title'  => esc_html__( 'Archive', 'jobus' ),
-	'id'     => 'company_archive_settings',
-	'fields' => array(
-
-		//Subheading field
+		// Company Attributes
 		array(
 			'type'    => 'subheading',
 			'content' => esc_html__( 'Company Attributes', 'jobus' ),
@@ -85,20 +143,11 @@ CSF::createSection( $settings_prefix, array(
 			'options'    => jobus_get_specs( 'company_specifications' ),
 			'dependency' => array( 'company_archive_attr_layout', '==', 'list' ),
 		),
-	)
-) );
 
-
-// Company Archive Page Settings-> Sidebar Settings
-CSF::createSection( $settings_prefix, array(
-	'parent' => 'jobus_company_archive',
-	'title'  => esc_html__( 'Sidebar', 'jobus' ),
-	'id'     => 'company_sidebar_settings',
-	'fields' => array(
-
+		// Sidebar Filters
 		array(
 			'type'    => 'subheading',
-			'content' => esc_html__( 'Search filter Widgets', 'jobus' ),
+			'content' => esc_html__( 'Sidebar Filters', 'jobus' ),
 		),
 
 		// Meta Widgets
@@ -106,7 +155,7 @@ CSF::createSection( $settings_prefix, array(
 			'id'           => 'company_sidebar_widgets',
 			'type'         => 'repeater',
 			'title'        => esc_html__( 'Meta Widgets', 'jobus' ),
-			'subtitle'     => esc_html__( 'Widgets based on the Job meta data. Choose the layout style for displaying widget options:', 'jobus' ),
+			'subtitle'     => esc_html__( 'Widgets based on the Company meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 			'fields'       => array(
 
@@ -156,6 +205,34 @@ CSF::createSection( $settings_prefix, array(
 				),
 			),
 		),
+	)
+));
 
+// Company Details Layout Settings
+CSF::createSection( $settings_prefix, array(
+	'parent' => 'jobus_company',
+	'title'  => esc_html__( 'Company Details Page', 'jobus' ),
+	'id'     => 'company_details_layout',
+	'fields' => array(
+		// Open Job Position
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Open Jobs Section', 'jobus' ),
+		),
+
+		array(
+			'id'      => 'company_open_job_meta_1',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Attribute 01', 'jobus' ),
+			'options' => jobus_get_specs(),
+		),
+
+		array(
+			'id'      => 'company_open_job_meta_2',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Attribute 02', 'jobus' ),
+			'options' => jobus_get_specs(),
+		),
 	)
 ) );
+

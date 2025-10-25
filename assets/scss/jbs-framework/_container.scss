@@ -6,20 +6,20 @@
 
 // Container
 .jbs-container {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    a{
-        text-decoration: none;
-    }
-    h1, h2, h3, h4, h5, h6, p{
-        font-size: 16px;
-         line-height: 2em;
-    }
-    font-size: 16px;
-    line-height: 2em;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 16px;
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    line-height: 1.8;
+  }
 }
 
 // Responsive Container

@@ -45,7 +45,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         <?php endif; ?>
 
                         <div class="jbs-border-top jbs-mt-35 jbs-lg-mt-20 jbs-pt-25">
-                            <ul class="job-meta-data jbs-row jbs-style-none">
+                            <ul class="job-meta-data jbs-row">
                                 <?php
                                 if ( ! empty( $location ) ) { ?>
                                     <li>
@@ -79,7 +79,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                         // Get the stored meta-values
                                         $meta_options = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 
-                                        if ( isset( $meta_options[ $meta_key ] ) ) {
+                                        if ( !empty( $meta_options[ $meta_key ] ) ) {
                                             ?>
                                             <li class="jbs-col-12">
                                                 <?php
