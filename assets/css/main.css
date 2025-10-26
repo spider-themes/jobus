@@ -2027,11 +2027,7 @@
   text-transform: capitalize;
   position: relative;
   text-align: left !important;
-  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   white-space: nowrap;
   width: auto;
@@ -2048,13 +2044,7 @@
   position: absolute;
   right: 8px;
   top: 50%;
-  -webkit-transform-origin: 66% 66%;
-  -ms-transform-origin: 66% 66%;
-  transform-origin: 66% 66%;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   width: 7px;
 }
@@ -2119,7 +2109,7 @@
 
 .nice-select .list {
   background-color: #fff;
-  border-radius: 0 0 5px 5px;
+  border-radius: 10px;
   box-shadow: 0 13px 35px -12px rgba(35, 35, 35, 0.1);
   box-sizing: border-box;
   opacity: 0;
@@ -2132,13 +2122,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  -webkit-transform-origin: 50% 0;
-  -ms-transform-origin: 50% 0;
   transform-origin: 50% 0;
-  -webkit-transform: scale(0.75) translateY(-21px);
-  -ms-transform: scale(0.75) translateY(-21px);
   transform: scale(0.75) translateY(-21px);
-  -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
   transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
   z-index: 9;
 }
@@ -4653,7 +4638,6 @@ img {
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
-  display: inline-block;
 }
 .company-details .details-post-data .share-option li a:hover {
   background: #244034;
@@ -5193,6 +5177,10 @@ img {
   line-height: 1.8;
 }
 
+.candidates-profile {
+  margin-top: 180px;
+}
+
 .accordion-box.show {
   display: block;
 }
@@ -5266,6 +5254,7 @@ img {
 }
 .filter-area-tab .light-bg {
   background: #EFF6F3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 .filter-area-tab .main-title {
   font-size: 25px;
@@ -6185,6 +6174,10 @@ img {
 .job-company-info .website-btn-two:hover {
   color: #31795A;
 }
+.job-company-info .job-meta-data {
+  list-style: none;
+  padding: 0;
+}
 .job-company-info .job-meta-data span {
   font-size: 15px;
   color: rgba(36, 64, 52, 0.6);
@@ -6226,7 +6219,8 @@ img {
 
 .job-details {
   position: relative;
-  margin-top: 180px;
+  margin-top: 100px;
+  padding-top: 80px;
 }
 .job-details.style-two {
   background: #EFF6F3;
@@ -7115,7 +7109,9 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 .jbs-nice-select ul {
-  padding-left: 0px !important;
+  padding-left: 0 !important;
+  margin: 5px;
+  border-radius: 10px !important;
 }
 
 @media (max-width: 1199px) {

@@ -235,7 +235,6 @@
     margin-left: 6px;
     display: inline-block;
     @include transition(0.2s);
-    display: inline-block;
 
     &:hover {
       background: $color-one;

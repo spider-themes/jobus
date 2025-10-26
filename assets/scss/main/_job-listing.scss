@@ -6,6 +6,10 @@
   }
 }
 
+.candidates-profile {
+  margin-top: 180px;
+}
+
 // Filter Area
 .accordion-box {
   &.show {
@@ -96,6 +100,8 @@
 
   .light-bg {
     background: $light-bg;
+    // subtle shadow
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
 
   .main-title {
@@ -1144,21 +1150,26 @@
     }
   }
 
-  .job-meta-data span {
-    font-size: 15px;
-    color: rgba($color: $color-one, $alpha: 0.6);
-  }
+  .job-meta-data {
+    list-style: none;
+    padding: 0;
 
-  .job-meta-data div {
-    font-size: 15px;
-    font-weight: 500;
-    color: $color-one;
-    margin: 4px 0 25px;
-    text-transform: capitalize;
+    span {
+      font-size: 15px;
+      color: rgba($color: $color-one, $alpha: 0.6);
+    }
 
-    a:hover {
-      text-decoration: underline;
+    div {
+      font-size: 15px;
+      font-weight: 500;
       color: $color-one;
+      margin: 4px 0 25px;
+      text-transform: capitalize;
+
+      a:hover {
+        text-decoration: underline;
+        color: $color-one;
+      }
     }
   }
 
@@ -1187,7 +1198,8 @@
 
 .job-details {
   position: relative;
-  margin-top: 180px;
+  margin-top: 100px;
+  padding-top: 80px;
 
   &.style-two {
     background: $light-bg;

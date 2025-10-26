@@ -24,7 +24,7 @@ $related_jobs = new WP_Query($args);
 <section class="related-job-section jbs-pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
     <div class="jbs-container">
         <div class="jbs-position-relative">
-            <div class="title-three jbs-text-center jbs-text-md-start jbs-mb-55 jbs-lg-mb-40">
+            <div class="title-three jbs-mb-50">
                 <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
             </div>
             <div class="related-job-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">

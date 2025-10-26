@@ -924,7 +924,10 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
         if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
             return; // Already counted for this guest (browser)
         }
-        setcookie( $cookie_key, '1', time() + 60 * 60 * 24 * 30, COOKIEPATH, COOKIE_DOMAIN );
+        // Only set cookie if headers haven't been sent yet
+        if ( ! headers_sent() ) {
+            setcookie( $cookie_key, '1', time() + 60 * 60 * 24 * 30, COOKIEPATH, COOKIE_DOMAIN );
+        }
         $_COOKIE[ $cookie_key ] = '1';
     }
 
@@ -1000,4 +1003,3 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
         <?php
     }
 }
-

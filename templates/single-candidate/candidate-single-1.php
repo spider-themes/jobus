@@ -16,39 +16,8 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
-<div class="jbs-banner jobi-single-banner">
-    <div class="jbs-container">
-            <div class="jbs-row">
-                <div class="jbs-col-xl-8 jbs-m-auto jbs-text-center">
-                    <h1 class="blog-heading"><?php the_title() ?></h1>
-                    <div class="blog-pubish-date jbs-text-white jbs-mt-30 jbs-lg-mt-20">
-                        <?php
-                        if ( has_category() ) {
-                            echo wp_kses_post( get_the_category_list( ', ' ) ) . ' . ';
-                        }
-                        ?>
-                        <?php the_time( get_option( 'date_format' ) ) ?> .
-                        <?php esc_html_e( 'By', 'jobus' ); ?>
-                        <a class="jbs-text-white" href="<?php echo esc_url( get_author_posts_url( $post_author_id ) ) ?>">
-                            <?php echo esc_html( get_the_author_meta( 'display_name', $post_author_id ) ) ?>
-                        </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php
-    if ( jobus_opt( 'is_banner_shapes' ) ) {
-        if ( ! empty( $banner_shape_1['id'] ) ) {
-            echo wp_get_attachment_image( $banner_shape_1['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_01' ) );
-        }
-        if ( ! empty( $banner_shape_2['id'] ) ) {
-            echo wp_get_attachment_image( $banner_shape_2['id'], 'full', false, array( 'class' => 'lazy-img shapes shape_02' ) );
-        }
-    }
-    ?>
-</div>
 
-<section class="candidates-profile jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
