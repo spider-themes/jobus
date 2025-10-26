@@ -14,40 +14,40 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+    exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jobus-candidate-classic candidates-profile jbs-pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
+<section class="jbs jobus-candidate-classic candidates-profile jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
-			<?php jobus_get_template_part( 'contents-candidate/sidebar-classic-filters' ); ?>
+            <?php jobus_get_template_part( 'contents-candidate/sidebar-classic-filters' ); ?>
 
             <div class="jbs-col-xl-9 jbs-col-lg-8">
                 <div class="jbs-ms-xl-3">
 
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
 
-						<?php
+                        <?php
                         // Display the total number of candidates found
-						include (__DIR__ . '/../loop/result-count.php');
+                        include( __DIR__ . '/../loop/result-count.php' );
 
-						// Display the sort by dropdown
-						include __DIR__ . '/../loop/sortby.php';
+                        // Display the sort by dropdown
+                        include __DIR__ . '/../loop/sortby.php';
                         ?>
 
                     </div>
 
-					<?php
-					if ( $current_view == 'grid' ) {
-						include( 'contents/content-grid.php' );
-					} elseif ( $current_view == 'list' ) {
-						include( 'contents/content-list.php' );
-					}
+                    <?php
+                    if ( $current_view == 'grid' ) {
+                        include( 'contents/content-grid.php' );
+                    } elseif ( $current_view == 'list' ) {
+                        include( 'contents/content-list.php' );
+                    }
 
-					// Pagination
-					include (__DIR__ . '/../loop/pagination.php');
-					?>
+                    // Pagination
+                    include( __DIR__ . '/../loop/pagination.php' );
+                    ?>
                 </div>
             </div>
         </div>

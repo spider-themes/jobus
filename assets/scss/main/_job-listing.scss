@@ -663,7 +663,6 @@
     color: #000;
     line-height: 1.5em;
     margin-left: 30px;
-    font-family: 'gordita';
     margin-bottom: 0;
 
     &:hover {
@@ -674,6 +673,8 @@
   .split-box1 {
     width: calc(100% - 60px);
     padding-left: 30px;
+    display: flex;
+    flex-flow: column;
 
     .title {
       width: 100%;

@@ -1816,7 +1816,6 @@
   bottom: 23%;
 }
 .text-feature-four .bg-wrapper .brand span {
-  font-family: "EB Garamond", serif;
   font-size: 70px;
   color: #00EF6E;
   display: block;
@@ -3338,7 +3337,6 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
-  font-family: "gordita";
   font-size: 18px;
 }
 .candidate-profile-card .candidate-name a:hover {
@@ -3404,13 +3402,11 @@ img {
 .candidates-profile-details .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .title {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details .video-post {
@@ -3465,7 +3461,6 @@ img {
 }
 .candidates-profile-details .time-line-data .info h4 {
   font-size: 18px;
-  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details .skill-tags {
@@ -3524,7 +3519,6 @@ img {
   height: 80px;
 }
 .candidate-profile-sidebar .candidate-bio .candidate-name {
-  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
   font-weight: 500;
@@ -3554,7 +3548,6 @@ img {
   color: #244034;
 }
 .candidate-profile-sidebar .sidebar-title {
-  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -3682,7 +3675,6 @@ img {
   height: auto;
 }
 .candidate-profile-card .candidate-name {
-  font-family: "gordita";
   font-size: 18px;
 }
 .candidate-profile-card .candidate-name a {
@@ -3779,13 +3771,11 @@ img {
 .candidates-profile-details-2 .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .title {
   font-size: 28px;
   font-weight: 500;
-  font-family: "gordita";
   margin-bottom: 22px;
 }
 .candidates-profile-details-2 .video-post {
@@ -3840,7 +3830,6 @@ img {
 }
 .candidates-profile-details-2 .time-line-data .info h4 {
   font-size: 18px;
-  font-family: "gordita";
   margin: 5px 0 12px;
 }
 .candidates-profile-details-2 .skill-tags {
@@ -3896,7 +3885,6 @@ img {
   height: 80px;
 }
 .candidate-profile-2-sidebar .candidate-bio .candidate-name {
-  font-family: "gordita";
   font-size: 20px;
   margin: 18px 0 20px;
 }
@@ -3929,7 +3917,6 @@ img {
   color: #244034;
 }
 .candidate-profile-2-sidebar .sidebar-title {
-  font-family: "gordita";
   font-size: 20px;
   margin: 0 0 15px;
 }
@@ -4115,7 +4102,6 @@ img {
   padding: 10px 40px 20px;
 }
 .card-style-four.bg-color .title {
-  font-family: "EB Garamond", serif;
   font-size: 72px;
   line-height: initial;
   margin: 0 0 5px;
@@ -4322,7 +4308,6 @@ img {
   color: rgba(0, 0, 0, 0.35);
 }
 .pricing-card-one .price {
-  font-family: "EB Garamond", serif;
   font-size: 72px;
   letter-spacing: -1px;
   color: #31795A;
@@ -5754,7 +5739,6 @@ img {
   color: #000;
   line-height: 1.5em;
   margin-left: 30px;
-  font-family: "gordita";
   margin-bottom: 0;
 }
 .job-list-one .title:hover {
@@ -5763,6 +5747,8 @@ img {
 .job-list-one .split-box1 {
   width: calc(100% - 60px);
   padding-left: 30px;
+  display: flex;
+  flex-flow: column;
 }
 .job-list-one .split-box1 .title {
   width: 100%;
