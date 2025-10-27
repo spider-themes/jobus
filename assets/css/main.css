@@ -3187,15 +3187,21 @@ body.compensate-for-scrollbar {
   font-size: 17px;
   font-weight: 500;
   color: #31795A;
+  cursor: pointer;
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers:focus-visible {
+  outline-style: none;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-popup .pagination-wrap .pagination .page-numbers:hover,
 .jobus-company-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-company-popup .pagination-wrap .pagination .page-numbers:hover {
-  color: #00BF58;
   border: none !important;
-  background: none !important;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers.current,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers.current,
@@ -4458,6 +4464,7 @@ img {
 }
 .company-grid-layout .location a {
   font-size: 15px;
+  outline: none;
 }
 .company-grid-layout .location a:hover {
   color: #31795A;
@@ -4467,6 +4474,7 @@ img {
   margin: 22px 0 8px;
   display: inline-block;
   color: #000;
+  outline: none;
 }
 .company-grid-layout .company-name:hover {
   color: #31795A;
@@ -4676,6 +4684,7 @@ img {
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.7);
+  outline: none;
 }
 .job-search-one form .job-search-btn-wrapper {
   display: flex;
@@ -4693,6 +4702,8 @@ img {
   border-radius: 0 10px 10px 0;
   margin-left: auto;
   margin-right: -1px;
+  border: 2px;
+  cursor: pointer;
 }
 .job-search-one form .job-search-btn-wrapper .search-btn:hover {
   background: #00BF58 !important;
@@ -4729,6 +4740,7 @@ img {
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
+  font-size: 16px;
 }
 .job-search-one .tags li a:hover {
   color: #fff;
@@ -4807,6 +4819,7 @@ img {
   -ms-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
+  font-size: 16px;
 }
 .filter-tags li a:hover {
   text-decoration: underline;
@@ -5585,6 +5598,7 @@ img {
   border: 1px solid #EDEDED;
   border-radius: 7px;
   padding: 0 35px 0 15px;
+  outline: none;
 }
 .filter-area-tab .input-box button {
   width: 50px;
@@ -5592,6 +5606,8 @@ img {
   position: absolute;
   top: 0;
   right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 .jbs-w-84 {
@@ -5719,6 +5735,10 @@ img {
   flex-basis: 20%;
 }
 
+.job-listing-one a {
+  font-size: 16px;
+}
+
 .job-list-one {
   background: #fff;
   padding: 42px 35px;
@@ -5740,6 +5760,7 @@ img {
   line-height: 1.5em;
   margin-left: 30px;
   margin-bottom: 0;
+  margin-top: 0;
 }
 .job-list-one .title:hover {
   color: #00BF58;
@@ -6929,15 +6950,21 @@ input[type=file]::-webkit-file-upload-button {
   font-size: 17px;
   font-weight: 500;
   color: #31795A;
+  cursor: pointer;
+}
+.jobus-job-classic .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-job-topbar .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-job-popup .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-company-classic .pagination-wrap .pagination .page-numbers:focus-visible,
+.jobus-company-popup .pagination-wrap .pagination .page-numbers:focus-visible {
+  outline-style: none;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-popup .pagination-wrap .pagination .page-numbers:hover,
 .jobus-company-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-company-popup .pagination-wrap .pagination .page-numbers:hover {
-  color: #00BF58;
   border: none !important;
-  background: none !important;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers.current,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers.current,
@@ -7074,6 +7101,11 @@ input[type=file]::-webkit-file-upload-button {
 .single-jobus_job .ast-container {
   display: block !important;
   max-width: 100% !important;
+}
+
+.ast-container:has(.jbs-container) {
+  max-width: 100% !important;
+  padding: 0 !important;
 }
 
 .single-jobus_candidate .ast-container {

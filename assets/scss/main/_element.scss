@@ -44,6 +44,7 @@
                 font-size: 16px;
                 font-weight: 500;
                 color: rgba($color: #000000, $alpha: 0.7);
+                outline: none;
             }
         }
         .job-search-btn-wrapper {
@@ -61,6 +62,8 @@
                 border-radius: 0 10px 10px 0;
                 margin-left: auto;
                 margin-right: -1px;
+                border: 2px;
+                cursor: pointer;
                 &:hover {
                     background: $color-three !important;
                     color: #fff !important;
@@ -95,6 +98,7 @@
             a {
                 color: #6d8b7e;
                 @include transition(0.2s);
+                font-size: 16px;
                 &:hover {
                     color: #fff;
                 }
@@ -181,6 +185,7 @@
     a {
         color: #000;
         @include transition(0.2s);
+        font-size: 16px;
         &:hover {
             text-decoration: underline;
         }

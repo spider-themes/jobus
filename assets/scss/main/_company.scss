@@ -48,6 +48,7 @@
 
     a {
       font-size: 15px;
+      outline: none;
 
       &:hover {
         color: #31795A;
@@ -60,6 +61,7 @@
     margin: 22px 0 8px;
     display: inline-block;
     color: #000;
+    outline: none;
 
     &:hover {
       color: $color-five;

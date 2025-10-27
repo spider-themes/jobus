@@ -55,7 +55,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 						}
 						?>
                         <div class="filter-block bottom-line jbs-pb-25 jbs-mt25">
-                            <a class="filter-title jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>"
+                            <a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ) ?>"
                               data-jbs-toggle="collapse"
                                data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
                                aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
@@ -104,7 +104,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 					}
 				}
 				?>
-                <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt30">
+                <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt30 jbs-pointer">
 					<?php esc_html_e( 'Apply Filter', 'jobus' ); ?>
                 </button>
             </form>

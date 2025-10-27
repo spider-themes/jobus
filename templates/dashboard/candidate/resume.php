@@ -138,7 +138,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                         <div class="dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
                             <i class="bi bi-plus"></i>
                             <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
-                            <button type="button" id="candidate-video-bg-img-upload-btn" class="position-absolute w-100 h-100 start-0 top-0 opacity-0"></button>
+                            <button type="button" id="candidate-video-bg-img-upload-btn" class="jbs-position-absolute jbs-w-100 jbs-h-100 jbs-start-0 jbs-top-0 jbs-opacity-0 jbs-pointer"></button>
                         </div>
                     </div>
                     <!-- Hidden field for image ID -->

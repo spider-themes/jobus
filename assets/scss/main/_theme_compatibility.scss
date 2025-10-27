@@ -99,6 +99,11 @@
   }
 }
 
+.ast-container:has(.jbs-container){
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
 .single-jobus_candidate {
   .ast-container {
     padding: 0;

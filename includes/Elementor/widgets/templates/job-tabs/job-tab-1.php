@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					if ( ! empty( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_1'] ) ) ) { ?>
                         <div>
-                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
+                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 jbs-d-inline-block">
 								<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_1'] ) ) ?>
                             </a>
                         </div>

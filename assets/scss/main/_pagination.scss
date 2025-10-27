@@ -37,11 +37,12 @@
         font-size: 17px;
         font-weight: 500;
         color: #31795A;
-
+        cursor: pointer;
+        &:focus-visible{
+            outline-style: none !important;
+        }
         &:hover {
-          color: #00BF58;
           border: none !important;
-          background: none !important;
         }
 
         &.current {
