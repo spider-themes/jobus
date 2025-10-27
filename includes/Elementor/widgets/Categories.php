@@ -449,8 +449,13 @@ class Categories extends Widget_Base {
 			'slug'       => $cat_slugs,
 		));
 
+
 		//================= Template Parts =================//
-		include "templates/categories/category-{$settings['layout']}.php";
+		if ( jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code() || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			include "templates/categories/category-{$settings['layout']}.php";
+		} else {
+			include "templates/categories/category-1.php";
+		}
 
 	}
 }

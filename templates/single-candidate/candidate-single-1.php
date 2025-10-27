@@ -176,11 +176,6 @@ wp_enqueue_script( 'lightbox' );
                             </div>
                         <?php endif; ?>
                         <h3 class="candidate-name jbs-text-center"><?php the_title() ?></h3>
-                        <div class="jbs-text-center jbs-pb-25">
-                            <a href="#" class="invite-btn jbs-fw-500 ">
-                                <?php esc_html_e( 'Invite', 'jobus' ) ?>
-                            </a>
-                        </div>
 
                         <ul class="jbs-style-none">
                             <?php

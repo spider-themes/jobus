@@ -132,8 +132,8 @@
 }
 
 .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
-  color: $color-three;
-  background: rgba($color: $color-one, $alpha: 0.03);
+  color: var(--brand_color_4);
+  background: rgba($color: var(--brand_color_2), $alpha: 0.03);
 }
 
 .nice-select .option.disabled {
@@ -1029,7 +1029,7 @@ body.compensate-for-scrollbar {
 }
 
 .slick-dots .slick-active button {
-  background: #00BF58 !important;
+  background: var(--brand_color_4) !important;
 }
 
 .slick-list {

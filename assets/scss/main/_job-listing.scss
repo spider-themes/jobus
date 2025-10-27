@@ -77,12 +77,12 @@
       right: 25px;
       top: 27px;
       text-align: center;
-      color: $color-five;
+      color: var(--brand_color_1);
       @include transition(0.2s);
 
       &:hover {
         color: #fff;
-        background-color: #31795A;
+        background-color: var(--brand_color_1);
       }
     }
 
@@ -90,7 +90,7 @@
     &:active::before,
     &:hover::before {
       color: #fff;
-      background-color: #31795A;
+      background-color: var(--brand_color_1);
     }
 
     &:not(.jbs-collapsed):before {
@@ -109,7 +109,7 @@
   }
 
   .filter-block.bottom-line {
-    border-bottom: 1px solid rgba($color: #31795A, $alpha: 0.3);
+    border-bottom: 1px solid rgba($color: var(--brand_color_1), $alpha: 0.3);
 
     & + .filter-block {
       margin-top: 25px;
@@ -135,7 +135,7 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: $color-five;
+      background: var(--brand_color_1);
       position: absolute;
       right: 0;
       top: 3px;
@@ -197,11 +197,11 @@
   }
 
   .loccation-range-select {
-    color: $color-five;
+    color: var(--brand_color_1);
     font-size: 15px;
 
     input[type='range'] {
-      background: $color-five;
+      background: var(--brand_color_1);
       border-radius: 8px;
       height: 7px;
       width: 100%;
@@ -216,7 +216,7 @@
       width: 14px;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid $color-three;
+      border: 2px solid var(--brand_color_4);
       cursor: pointer;
       pointer-events: auto;
       appearance: none;
@@ -228,7 +228,7 @@
       width: 14px;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid $color-three;
+      border: 2px solid var(--brand_color_4);
       cursor: pointer;
       pointer-events: auto;
       appearance: none;
@@ -292,18 +292,18 @@
 
     input[type="checkbox"]:checked + label:before {
       content: "\f633";
-      background: $color-five;
+      background: var(--brand_color_1);
       color: #fff;
-      border-color: $color-five;
+      border-color: var(--brand_color_1);
     }
 
     input[type="checkbox"]:checked + label {
-      background: rgba($color: $color-five, $alpha: 0.02);
+      background: rgba($color: var(--brand_color_1), $alpha: 0.02);
     }
 
     &:hover label {
-      color: $color-five;
-      background: rgba($color: $color-five, $alpha: 0.02);
+      color: var(--brand_color_1);
+      background: rgba($color: var(--brand_color_1), $alpha: 0.02);
     }
   }
 
@@ -322,7 +322,7 @@
     line-height: 28px;
     font-weight: 500;
     cursor: pointer;
-    background: rgba($color: $color-one, $alpha: 0.6);
+    background: rgba($color: var(--brand_color_2), $alpha: 0.6);
     text-align: center;
     border-radius: 5px;
     @include transition(0.2s);
@@ -333,7 +333,7 @@
     }
 
     &:hover {
-      background: $color-three;
+      background: var(--brand_color_4);
       color: #fff;
     }
   }
@@ -382,7 +382,7 @@
       right: 0;
       position: absolute;
       border-radius: 7px;
-      background: $color-three;
+      background: var(--brand_color_4);
     }
 
     .range-input {
@@ -409,7 +409,7 @@
       width: 12px;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid $color-three;
+      border: 2px solid var(--brand_color_4);
       cursor: pointer;
       pointer-events: auto;
       appearance: none;
@@ -421,7 +421,7 @@
       width: 12px;
       border-radius: 50%;
       background: #fff;
-      border: 2px solid $color-three;
+      border: 2px solid var(--brand_color_4);
       cursor: pointer;
       pointer-events: auto;
       appearance: none;
@@ -440,7 +440,7 @@
       font-weight: 500;
       line-height: 20px;
       background: #fff;
-      color: $color-five;
+      color: var(--brand_color_1);
       border-radius: 30px;
       padding: 0 12px;
       @include transition(0.1s);
@@ -459,7 +459,7 @@
 
     input[type="radio"]:checked + label,
     input[type="checkbox"]:checked + label {
-      background: $color-five;
+      background: var(--brand_color_1);
       color: #fff;
     }
   }
@@ -496,14 +496,14 @@
 
 .jbs-filter-btn {
   font-size: 15px !important;
-  color: #244034 !important;
+  color: var(--brand_color_2) !important;
   height: 32px !important;
-  border: 2px solid #244034 !important;
+  border: 2px solid var(--brand_color_2) !important;
   border-radius: 6px !important;
 
   &:hover {
-    background: #31795A !important;
-    border-color: #31795A !important;
+    background: var(--brand_color_1) !important;
+    border-color: var(--brand_color_1) !important;
     color: #fff !important;
     text-decoration: none !important;
   }
@@ -551,8 +551,8 @@
 
     &:hover {
       color: #fff;
-      background: $color-five;
-      border-color: $color-five;
+      background: var(--brand_color_1);
+      border-color: var(--brand_color_1);
     }
 
     &.active {
@@ -565,11 +565,11 @@
 
 .bg-color .upper-filter .nice-select {
   background: transparent;
-  border-color: $color-one;
+  border-color: var(--brand_color_2);
 }
 
 .bg-color .upper-filter .style-changer-btn {
-  border-color: $color-one;
+  border-color: var(--brand_color_2);
 }
 
 // Modal Filter
@@ -675,7 +675,7 @@
     margin-top: 0;
 
     &:hover {
-      color: $color-three;
+      color: var(--brand_color_4);
     }
   }
 
@@ -693,7 +693,7 @@
 
   .job-duration {
     font-size: 15px;
-    color: $color-three;
+    color: var(--brand_color_4);
     text-transform: capitalize;
     display: inline-block;
     &:hover {
@@ -756,10 +756,10 @@
     color: #fff;
     text-transform: uppercase;
     border-radius: 17px;
-    background: $color-three;
+    background: var(--brand_color_4);
 
     &:hover {
-      background: $color-four;
+      background: var(--brand_color_5);
     }
   }
   &.style-two {
@@ -767,15 +767,15 @@
     padding-bottom: 35px;
 
     .apply-btn {
-      background: $color-five;
+      background: var(--brand_color_1);
 
       &:hover {
-        background: $color-three;
+        background: var(--brand_color_4);
       }
     }
 
     .title:hover {
-      color: $color-five;
+      color: var(--brand_color_1);
     }
   }
 
@@ -799,7 +799,7 @@
     height: 1px;
     left: 0;
     bottom: 0;
-    background: $color-three;
+    background: var(--brand_color_4);
     opacity: 0;
     @include transition(0.1s);
   }
@@ -809,7 +809,7 @@
   }
 
   &.is-checked {
-    color: $color-three;
+    color: var(--brand_color_4);
   }
 
   &:first-child {
@@ -847,7 +847,7 @@
 
   .job-duration {
     font-size: 13px;
-    color: $color-three;
+    color: var(--brand_color_4);
     padding: 2px 12px;
     background: #E7F6EF !important;
     border-radius: 3px;
@@ -865,7 +865,7 @@
     color: #000;
 
     &:hover {
-      color: $color-three;
+      color: var(--brand_color_4);
       text-decoration: none;
     }
   }
@@ -903,10 +903,10 @@
     color: #fff;
     text-transform: uppercase;
     border-radius: 17px;
-    background: $color-three;
+    background: var(--brand_color_4);
 
     &:hover {
-      background: $color-four;
+      background: var(--brand_color_5);
     }
   }
 
@@ -924,7 +924,7 @@
     &:hover {
       background: #E7F6EF;
       border-color: #E7F6EF;
-      color: $color-four;
+      color: var(--brand_color_5);
     }
   }
 
@@ -933,14 +933,14 @@
 
     &:hover {
       background: #F8FDE4;
-      border-color: $color-five;
+      border-color: var(--brand_color_1);
       box-shadow: none;
     }
 
     .job-duration {
       background: #E7F6EF;
       text-transform: capitalize;
-      color: $color-five;
+      color: var(--brand_color_1);
 
       &.part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
@@ -949,14 +949,14 @@
     }
 
     .title:hover {
-      color: $color-five;
+      color: var(--brand_color_1);
     }
 
     .apply-btn {
-      background: $color-five;
+      background: var(--brand_color_1);
 
       &:hover {
-        background: $color-three;
+        background: var(--brand_color_4);
       }
     }
   }
@@ -1032,14 +1032,14 @@
       margin-bottom: 7px;
 
       &:hover {
-        color: $color-five;
+        color: var(--brand_color_1);
       }
     }
 
     .info-data li {
       font-size: 14px;
       font-weight: 500;
-      color: rgba($color: #244034, $alpha: 0.7);
+      color: rgba($color: var(--brand_color_2), $alpha: 0.7);
       position: relative;
       margin-right: 20px;
 
@@ -1073,7 +1073,7 @@
       &:hover {
         background: #E7F6EF;
         border-color: #E7F6EF;
-        color: $color-four;
+        color: var(--brand_color_5);
       }
     }
 
@@ -1091,7 +1091,7 @@
 
     .job-duration {
       font-size: 14px;
-      color: $color-three;
+      color: var(--brand_color_4);
 
       &:hover {
         text-decoration: underline;
@@ -1111,10 +1111,10 @@
       color: #fff;
       text-transform: uppercase;
       border-radius: 17px;
-      background: $color-five;
+      background: var(--brand_color_1);
 
       &:hover {
-        background: $color-four;
+        background: var(--brand_color_5);
       }
     }
   }
@@ -1139,12 +1139,12 @@
     font-weight: 500;
     letter-spacing: -0.5px;
     color: #fff;
-    background: $color-one;
+    background: var(--brand_color_2);
     border-radius: 30px;
     text-decoration: none !important;
 
     &:hover {
-      background: $color-five;
+      background: var(--brand_color_1);
     }
   }
 
@@ -1156,7 +1156,7 @@
     color: #008FDF;
 
     &:hover {
-      color: $color-five;
+      color: var(--brand_color_1);
     }
   }
 
@@ -1174,13 +1174,13 @@
     div {
       font-size: 15px;
       font-weight: 500;
-      color: $color-one;
+      color: var(--brand_color_2);
       margin: 4px 0 25px;
       text-transform: capitalize;
 
       a:hover {
         text-decoration: underline;
-        color: $color-one;
+        color: var(--brand_color_2);
       }
     }
   }
@@ -1200,8 +1200,8 @@
       @include transition(0.2s);
 
       &:hover {
-        background: $color-one;
-        border-color: $color-one;
+        background: var(--brand_color_2);
+        border-color: var(--brand_color_2);
         color: #fff;
       }
     }
@@ -1242,7 +1242,7 @@
     .share-item {
       font-size: 14px;
       font-weight: 500;
-      color: #244034;
+      color: var(--brand_color_2);
       line-height: 1;
       border-radius: 5px;
       padding: 8px 15px;
@@ -1260,7 +1260,7 @@
       }
 
       &:hover {
-        background: $color-one;
+        background: var(--brand_color_2);
         color: #fff;
       }
     }
@@ -1282,7 +1282,7 @@
     height: 25px;
     line-height: 25px;
     font-size: 14px;
-    background: $color-five;
+    background: var(--brand_color_1);
   }
 
   p {
@@ -1293,7 +1293,7 @@
       @include transition(0.2s);
 
       &:hover {
-        color: $color-three;
+        color: var(--brand_color_4);
       }
     }
   }
@@ -1311,7 +1311,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      color: $color-five;
+      color: var(--brand_color_1);
     }
   }
 
@@ -1353,13 +1353,13 @@
         font-size: 15px;
         display: block;
         margin: 48px 0 4px;
-        color: rgba($color: $color-one, $alpha: 0.6);
+        color: rgba($color: var(--brand_color_2), $alpha: 0.6);
       }
 
       div {
         font-size: 15px;
         font-weight: 500;
-        color: $color-one;
+        color: var(--brand_color_2);
       }
     }
   }
@@ -1409,7 +1409,7 @@
         label {
           font-size: 14px;
           font-weight: 500;
-          color: #31795A;
+          color: var(--brand_color_1);
         }
 
         .jbs-form-control {
@@ -1420,7 +1420,7 @@
           padding-left: 20px;
 
           &:focus {
-            border-color: #31795A;
+            border-color: var(--brand_color_1);
             box-shadow: none;
           }
 
@@ -1463,7 +1463,7 @@ input[type="file"]::-webkit-file-upload-button {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  background: $color-three;
+  background: var(--brand_color_4);
   border: none;
   border-radius: 25px;
   cursor: pointer;
@@ -1476,7 +1476,7 @@ input[type="file"]::-webkit-file-upload-button {
   }
 
   &:hover {
-    background: $color-four;
+    background: var(--brand_color_5);
     text-decoration: none !important;
   }
 }
@@ -1496,7 +1496,7 @@ input[type="file"]::-webkit-file-upload-button {
 
     .icon {
       font-size: 24px;
-      color: $color-five;
+      color: var(--brand_color_1);
       margin-right: 10px;
     }
 
@@ -1512,7 +1512,7 @@ input[type="file"]::-webkit-file-upload-button {
     font-size: 16px;
     font-weight: 500;
     color: #fff;
-    background: $color-three;
+    background: var(--brand_color_4);
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -1520,7 +1520,7 @@ input[type="file"]::-webkit-file-upload-button {
     transition: background 0.3s ease;
 
     &:hover {
-      background: $color-four;
+      background: var(--brand_color_5);
     }
   }
 }

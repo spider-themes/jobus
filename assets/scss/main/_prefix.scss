@@ -4,7 +4,7 @@
     transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: #00bf58;
+      color: var(--brand_color_4);
       transition: color 0.3s ease-in-out;
     }
   }

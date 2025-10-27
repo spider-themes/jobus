@@ -698,16 +698,19 @@ class Search_Form extends Widget_Base {
 		extract( $settings ); //extract all settings array to variables converted to name of key
 
 		$search_result_form = ! empty( $settings['search_result_form'] ) ? $settings['search_result_form'] : '';
-
 		$categories = get_terms( array(
 			'taxonomy'   => 'jobus_job_cat',
 			'hide_empty' => true,
 
 		) );
 
-
 		//================= Template Parts =================//
-		include "templates/search-form/search-form-{$settings['layout']}.php";
+		if ( jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code() || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			include "templates/search-form/search-form-{$settings['layout']}.php";
+		} else {
+			include "templates/search-form/search-form-1.php";
+		}
+
 
 	}
 

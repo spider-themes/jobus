@@ -20,7 +20,7 @@
     position: absolute;
     width: 90px;
     height: 90px;
-    background: $color-five;
+    background: var(--brand_color_1);
     top: -45px;
     left: -45px;
     transform: rotate(45deg);

@@ -43,8 +43,8 @@ foreach ( $role_post_map as $role => $post_type ) {
 }
 
 $logo = jobus_opt( 'dashboard_logo' );
-?>
-<?php
+
+
 if ( ! empty( $logo['url'] ) ) { ?>
     <div class="logo jbs-text-md-center jbs-d-md-block jbs-d-flex jbs-align-items-center jbs-justify-content-between">
         <a href="<?php esc_url( home_url( '/' ) ); ?>">

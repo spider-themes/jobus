@@ -57,7 +57,7 @@
                 padding: 0 62px !important;
                 height: 100% !important;
                 letter-spacing: 0.8px !important;
-                background: $color-two !important;
+                background: var(--brand_color_3) !important;
                 color: #000 !important;
                 border-radius: 0 10px 10px 0;
                 margin-left: auto;
@@ -65,19 +65,19 @@
                 border: 2px;
                 cursor: pointer;
                 &:hover {
-                    background: $color-three !important;
+                    background: var(--brand_color_4) !important;
                     color: #fff !important;
                 }
             }
         }
         .search-btn-two {
-            background: $color-three;
+            background: var(--brand_color_4);
             color: #fff;
             border-radius: 0 10px 10px 0;
             margin-right: -1px;
             margin-left: auto;
             &:hover {
-                background: $color-four;
+                background: var(--brand_color_5);
                 color: #fff;
             }
         }
@@ -189,7 +189,7 @@
     position: relative;
     font-weight: 500;
     font-size: 18px;
-    color: $color-one;
+    color: var(--brand_color_2);
     padding-left: 35px;
     margin-top: 24px;
     &:before {
@@ -206,7 +206,7 @@
 }
 .counter-block-one h2.main-count {
     font-size: 70px;
-    color: $color-one;
+    color: var(--brand_color_2);
 }
 // Counter Block Two
 .counter-block-two .main-count {
@@ -239,7 +239,7 @@
     padding: 0 0 10px;
 }
 .accordion-style-one.color-two .accordion-button {
-    color: $color-four;
+    color: var(--brand_color_5);
 }
 .accordion-style-one.color-two .accordion-button::after {
     content: url(../images/icon/icon_40.svg);
@@ -275,7 +275,7 @@
     &:not(.collapsed):after {
         content: "-";
         font-size: 24px;
-        background: $color-three;
+        background: var(--brand_color_4);
         color: #fff;
     }
 }
@@ -363,10 +363,10 @@
     h2 {
         font-size: 50px;
         font-weight: normal;
-        color: $color-one;
+        color: var(--brand_color_2);
     }
     p a {
-        color: $color-five;
+        color: var(--brand_color_1);
         &:hover {
             text-decoration: underline;
         }
@@ -382,7 +382,7 @@
                 border-radius: 8px;
                 padding: 0 52px 0 20px;
                 color: #000;
-                background: rgba($color: #31795A, $alpha: 0.09);
+                background: rgba($color: var(--brand_color_1), $alpha: 0.09);
             }
             label {
                 font-size: 14px;
@@ -435,13 +435,13 @@
         position: relative;
         font-size: 15px;
         letter-spacing: -0.5px;
-        color: $color-one;
+        color: var(--brand_color_2);
         cursor: pointer;
         padding-left: 22px;
         transition: all 0.1s ease-in-out;
     }
     .agreement-checkbox label a {
-        color: $color-five;
+        color: var(--brand_color_1);
         text-decoration: underline;
     }
     .agreement-checkbox input[type="checkbox"] {display: none;}
@@ -473,7 +473,7 @@
     }
     .agreement-checkbox a:hover {
         text-decoration: underline; 
-        color: $color-five;
+        color: var(--brand_color_1);
     }
     .line {
         height: 1px;
@@ -510,8 +510,8 @@
                 font-size: 18px;
                 color: rgba($color: #000000, $alpha: 0.5);
                 &.active {
-                    color: $color-five;
-                    border-color: $color-five;
+                    color: var(--brand_color_1);
+                    border-color: var(--brand_color_1);
                 }
             }
         }

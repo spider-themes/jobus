@@ -1,10 +1,14 @@
+:root {
+  --heading_color: var(--jbs_heading_color, #254035);
+  --brand_color_1: var(--jbs_brand_color_1, #31795A);
+  --brand_color_2: var(--jbs_brand_color_2, #244034);
+  --brand_color_3: var(--jbs_brand_color_3, #D2F34C);
+  --brand_color_4: var(--jbs_brand_color_4, #00BF58);
+  --brand_color_5: var(--jbs_brand_color_5, #005025);
+}
+
+
 // Color Settings
 $text-color: rgba(0,0,0,0.7);
 $text-dark: #000;
-$heading: #254035;
 $light-bg: #EFF6F3;
-$color-one: #244034;
-$color-two: #D2F34C;
-$color-three: #00BF58;
-$color-four:#005025;
-$color-five: #31795A;
