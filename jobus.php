@@ -160,6 +160,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			new \jobus\Admin\cpt\Company();
 
 			// Frontend UI
+			new \jobus\includes\Frontend\Frontend();
 			new \jobus\includes\Frontend\Assets();
 			new \jobus\includes\Frontend\Shortcode();
 			new \jobus\includes\Frontend\Template_Loader();
