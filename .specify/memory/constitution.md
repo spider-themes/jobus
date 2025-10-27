@@ -1,15 +1,16 @@
 <!--
 Sync Impact Report:
-Version change: N/A → 1.0.0 (Initial version)
+Version change: 1.0.0 → 1.1.0 (MINOR: Added new principle)
 Added sections:
-- Core Principles (5 principles)
-- WordPress Development Standards
-- Quality Assurance Process
-- Governance
+- Principle VI: Code Deduplication & Reusability (new)
+Modified principles:
+- None renamed
+Removed sections:
+- None
 Templates requiring updates:
-✅ .specify/templates/plan-template.md
-✅ .specify/templates/spec-template.md
-✅ .specify/templates/tasks-template.md
+✅ .specify/templates/plan-template.md (added DRY to Constitution Check)
+✅ .specify/templates/spec-template.md (added reusability to requirements)
+✅ .specify/templates/tasks-template.md (added refactoring task category)
 Follow-up TODOs:
 - None
 -->
@@ -67,6 +68,16 @@ All code MUST follow WordPress security best practices:
 - Regular security audits and updates
 
 Rationale: Protects user data and maintains site security.
+
+### VI. Code Deduplication & Reusability
+All code MUST follow DRY (Don't Repeat Yourself) principles:
+- Duplicate code patterns MUST be extracted into reusable components
+- Template fragments MUST be consolidated into template parts
+- Repeated logic MUST be abstracted into utility functions or classes
+- Code duplication MUST be monitored and addressed within sprint cycles
+- Reusable components MUST be documented and discoverable
+
+Rationale: Reduces maintenance burden, prevents inconsistencies, improves code quality and performance.
 
 ## WordPress Development Standards
 
@@ -140,4 +151,4 @@ Rationale: Protects user data and maintains site security.
 
 This constitution governs all development work on the Jobus WordPress plugin. Exceptions require explicit approval and documentation.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-01 | **Last Amended**: 2025-10-01
+**Version**: 1.1.0 | **Ratified**: 2025-10-01 | **Last Amended**: 2025-10-27

@@ -32,65 +32,23 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 
 	if ( ! empty( $display_jobs ) ) {
 		foreach ( $display_jobs as $job_id ) {
-			$location = get_the_terms( $job_id, 'jobus_job_location' );
-			$category = get_the_terms( $job_id, 'jobus_job_cat' );
-			?>
-            <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
-                <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
-                    <div class="jbs-col-lg-4">
-                        <div class="job-title jbs-d-flex jbs-align-items-center">
-                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="logo">
-								<?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
-                            </a>
-                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>" class="title jbs-fw-500 tran3s">
-								<?php echo esc_html( get_the_title( $job_id ) ); ?>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="jbs-col-lg-3">
-						<?php
-						if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
-                            <div class="job-location">
-                                <a href="<?php echo esc_url( get_term_link( $location[0]->term_id ) ) ?>">
-									<?php echo esc_html( $location[0]->name ) ?>
-                                </a>
-                            </div>
-							<?php
-						}
-						if ( ! empty( $category ) && count( $category ) > 0 ) { ?>
-                            <div class="job-category">
-                                <a href="<?php echo esc_url( get_term_link( $category[0]->term_id ) ) ?>">
-									<?php echo esc_html( $category[0]->name ); ?>
-                                </a>
-                            </div>
-							<?php
-						}
-						?>
-                    </div>
-                    <div class="jbs-col-lg-3 jbs-xs-mt-10">
-                        <span class="jbs-fw-500"><?php echo esc_html( get_the_date( get_option( 'date_format' ), $job_id ) ); ?></span>
-                    </div>
-                    <div class="jbs-col-lg-2 jbs-xs-mt-10">
-                        <div class="action-button">
-                            <a href="javascript:void(0)"
-                               class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
-                               data-post_id="<?php echo esc_attr( $job_id ); ?>"
-                               data-post_type="jobus_job"
-                               data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_candidate_saved_job' ) ); ?>"
-                               title="<?php esc_attr_e( 'Remove', 'jobus' ); ?>">
-                                <i class="bi bi-x-circle-fill"></i>
-                            </a>
-                            <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>"
-                               target="_blank"
-                               class="jobus-dashboard-post-view-more jbs-text-center jbs-rounded-circle tran3s"
-                               title="<?php esc_attr_e( 'View Job', 'jobus' ); ?>">
-                                <i class="bi bi-eye-fill"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<?php
+			// Use reusable job list item template per Constitution VI: Code Deduplication & Reusability
+			jobus_get_template_part('loop/job-list-item', [
+				'layout' => 'dashboard',
+				'show_save_button' => false, // Custom dashboard actions
+				'show_apply_button' => false, // Custom dashboard actions
+				'show_date' => true,
+				'show_location' => true,
+				'show_category' => true,
+				'show_salary' => false,
+				'show_duration' => false,
+				'job_id' => $job_id,
+				'col_classes' => [
+					'title' => 'jbs-col-lg-4',
+					'meta' => 'jbs-col-lg-3',
+					'actions' => 'jbs-col-lg-2 jbs-xs-mt-10'
+				]
+			]);
 		}
 	} else {
 		?>

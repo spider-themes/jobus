@@ -10,6 +10,9 @@
 .jbs-container a {
   text-decoration: none !important;
 }
+.jbs-container a:hover {
+  color: #31795A;
+}
 .jbs-container p {
   line-height: 1.8;
 }

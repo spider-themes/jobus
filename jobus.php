@@ -180,6 +180,7 @@ if ( ! class_exists( 'Jobus' ) ) {
 			define( 'JOBUS_VERSION', self::VERSION );
 			define( 'JOBUS_FILE', __FILE__ );
 			define( 'JOBUS_PATH', __DIR__ );
+			define( 'JOBUS_DIR', plugin_dir_path(__FILE__) );
 			define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
 			define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
 			define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );

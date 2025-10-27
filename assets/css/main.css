@@ -1547,10 +1547,6 @@
     margin-bottom: 200px;
   }
 }
-.jbs a {
-  text-decoration: none;
-}
-
 .jbs-text-primary {
   color: #244034 !important;
 }
@@ -3194,7 +3190,7 @@ body.compensate-for-scrollbar {
 .jobus-job-popup .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-company-classic .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-company-popup .pagination-wrap .pagination .page-numbers:focus-visible {
-  outline-style: none;
+  outline-style: none !important;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:hover,
@@ -4639,6 +4635,10 @@ img {
 
 .company-open-position {
   background: #EFF6F3;
+}
+
+.title-two h2 {
+  margin: 0;
 }
 
 .job-search-one {
@@ -6188,6 +6188,8 @@ img {
 .job-company-info .job-meta-data span {
   font-size: 15px;
   color: rgba(36, 64, 52, 0.6);
+  margin-bottom: 8px;
+  display: block;
 }
 .job-company-info .job-meta-data div {
   font-size: 15px;
@@ -6957,7 +6959,7 @@ input[type=file]::-webkit-file-upload-button {
 .jobus-job-popup .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-company-classic .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-company-popup .pagination-wrap .pagination .page-numbers:focus-visible {
-  outline-style: none;
+  outline-style: none !important;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:hover,

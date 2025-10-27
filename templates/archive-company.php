@@ -40,4 +40,3 @@ $archive_layout = jobus_opt( 'company_archive_layout' );
 if ( $archive_layout == '2' ) {
 	jobus_get_template_part( 'contents-company/sidebar-popup-filters' );
 }
-

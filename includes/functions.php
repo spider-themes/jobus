@@ -12,18 +12,28 @@ function jobus_is_premium(): bool {
     return jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code();
 }
 
+/**
+ * Unlocks access to specific themes.
+ * Checks if the current theme is in the provided list of allowed themes or if premium access is enabled.
+ *
+ * @param mixed ...$themes Variadic list of theme names to allow access.
+ *
+ * @return bool Returns true if the current theme is allowed or premium access is enabled, otherwise false.
+ */
 function jobus_unlock_themes( ...$themes ): bool {
-
     // Flatten and normalize
     $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
     $current_theme = strtolower( get_template() );
     return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
-if ( ! function_exists( 'jobus_rtl' ) ) {
-    function jobus_rtl(): string {
-        return is_rtl() ? 'true' : 'false';
-    }
+/**
+ * Determines if the site is set to use a right-to-left (RTL) text direction.
+ *
+ * @return string Returns 'true' if the text direction is RTL, otherwise 'false'.
+ */
+function jobus_rtl(): string {
+    return is_rtl() ? 'true' : 'false';
 }
 
 // A Custom function for [ SETTINGS ]

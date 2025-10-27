@@ -47,6 +47,14 @@
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
+### Principles Validation
+- **I. WordPress Integration Standards**: Are WordPress conventions followed?
+- **II. Test-Driven Development**: Is TDD approach integrated?
+- **III. User Experience Consistency**: Are UI patterns consistent?
+- **IV. Performance First**: Are performance requirements identified?
+- **V. Security Best Practices**: Are security implications assessed?
+- **VI. Code Deduplication & Reusability**: Are duplicate patterns identified and consolidated?
+
 [Gates determined based on constitution file]
 
 ## Project Structure

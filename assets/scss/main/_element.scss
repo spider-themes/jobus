@@ -1,7 +1,7 @@
-// Job Search One
-// .job-search-one .jbs-col-md-3, .jbs-col-md-4, .jbs-col-md-5 {
-//     margin-top: 0;
-// }
+.title-two h2 {
+  margin: 0;
+}
+
 .job-search-one {
     z-index: 9;
     form {
@@ -146,13 +146,6 @@
         box-shadow: none;
     }
 }
-//.job-search-btn-wrapper {
-//    display: flex;
-//    align-items: center;
-//    .job-search-one-btn {
-//        height: 100%;
-//    }
-//}
 
 // Job Search Two
 .job-search-two form {
@@ -305,6 +298,7 @@
         font-size: 18px;
     }
 }
+
 // Contact Form
 .form-style-one {
     .input-group-meta  {

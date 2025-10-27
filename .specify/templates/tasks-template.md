@@ -17,6 +17,7 @@
    → Tests: contract tests, integration tests
    → Core: models, services, CLI commands
    → Integration: DB, middleware, logging
+   → Refactoring: deduplication, reusable components (per Constitution VI)
    → Polish: unit tests, performance, docs
 4. Apply task rules:
    → Different files = mark [P] for parallel
@@ -29,6 +30,7 @@
    → All contracts have tests?
    → All entities have models?
    → All endpoints implemented?
+   → Duplicate patterns identified and refactored?
 9. Return: SUCCESS (tasks ready for execution)
 ```
 
@@ -69,18 +71,24 @@
 - [ ] T017 Request/response logging
 - [ ] T018 CORS and security headers
 
-## Phase 3.5: Polish
-- [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
-- [ ] T020 Performance tests (<200ms)
-- [ ] T021 [P] Update docs/api.md
-- [ ] T022 Remove duplication
-- [ ] T023 Run manual-testing.md
+## Phase 3.5: Refactoring (Code Deduplication per Constitution VI)
+- [ ] T019 [P] Extract duplicate components in templates/
+- [ ] T020 [P] Create reusable template partials
+- [ ] T021 [P] Consolidate repeated logic into utility functions
+- [ ] T022 Verify no regressions after refactoring
+
+## Phase 3.6: Polish
+- [ ] T023 [P] Unit tests for validation in tests/unit/test_validation.py
+- [ ] T024 Performance tests (<200ms)
+- [ ] T025 [P] Update docs/api.md
+- [ ] T026 Run manual-testing.md
 
 ## Dependencies
 - Tests (T004-T007) before implementation (T008-T014)
 - T008 blocks T009, T015
 - T016 blocks T018
-- Implementation before polish (T019-T023)
+- Implementation (T008-T018) before refactoring (T019-T022)
+- Refactoring (T019-T022) before polish (T023-T026)
 
 ## Parallel Example
 ```
@@ -125,3 +133,5 @@ Task: "Integration test auth in tests/integration/test_auth.py"
 - [ ] Parallel tasks truly independent
 - [ ] Each task specifies exact file path
 - [ ] No task modifies same file as another [P] task
+- [ ] Duplicate patterns identified and refactoring tasks created
+- [ ] Refactoring tasks scheduled after implementation, before polish

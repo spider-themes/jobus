@@ -287,56 +287,25 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                 // Get the selected company ID
                 $job_meta   = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                 $company_id = $job_meta['select_company'] ?? '';
-                ?>
-                <div class="job-list-one style-two jbs-position-relative jbs-mb-20">
-                    <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
-                        <div class="jbs-col-lg-4">
-                            <div class="job-title jbs-d-flex jbs-align-items-center">
-                                <a href="<?php the_permalink(); ?>" class="logo">
-                                    <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
-                                </a>
-                                <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
-                                    <?php the_title( '<h3>', '</h3>' ) ?>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-ms-auto">
-                            <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_1' ) ) : ?>
-                                <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">
-                                    <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_1' ) ) ?>
-                                </a>
-                            <?php endif; ?>
-                            <div class="job-date">
-                                <?php echo esc_html( get_the_time( get_option( 'date_format' ) ) ) . esc_html_e( ' by', 'jobus' ) ?>
-                                <a href="<?php echo esc_url( get_permalink( $company_id ) ) ?>">
-                                    <?php echo esc_html( get_the_title( $company_id ) ) ?>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="jbs-col-xxl-2 jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-ms-auto xs-mt-10">
-                            <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_2' ) ) : ?>
-                                <div class="job-location">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'company_open_job_meta_2' ) ) ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                            <div class="job-category">
-                                <a href="<?php echo esc_url( jobus_get_first_taxonomy_link() ) ?>">
-                                    <?php echo esc_html( jobus_get_first_taxonomy_name() ); ?>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="jbs-col-lg-2 jbs-col-md-4">
-                            <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end jbs-sm-mt-20">
-                                <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
-                                    <?php esc_html_e( 'APPLY', 'jobus' ); ?>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
+
+                // Use reusable job list item template per Constitution VI: Code Deduplication & Reusability
+                jobus_get_template_part('loop/job-list-item', [
+                    'layout' => 'company-open',
+                    'show_save_button' => false,
+                    'show_apply_button' => true,
+                    'show_date' => true,
+                    'show_location' => true,
+                    'show_category' => true,
+                    'show_salary' => false,
+                    'show_duration' => true,
+                    'job_id' => get_the_ID(),
+                    'company_id' => $company_id,
+                    'col_classes' => [
+                        'title' => 'jbs-col-lg-4',
+                        'meta' => 'jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-ms-auto',
+                        'actions' => 'jbs-col-lg-2 jbs-col-md-4'
+                    ]
+                ]);
             endwhile;
             wp_reset_postdata();
             ?>

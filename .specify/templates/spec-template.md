@@ -82,6 +82,11 @@ When creating this spec from a user prompt:
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
+### Reusability Considerations *(mandatory per Constitution VI)*
+- **Reusable Components**: [List any UI/logic components that should be shared or extracted]
+- **Duplicate Pattern Identification**: [Identify known repeated patterns that should be consolidated]
+- **Integration Points**: [Where does this feature integrate with existing reusable components?]
+
 ---
 
 ## Review & Acceptance Checklist

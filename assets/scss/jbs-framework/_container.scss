@@ -15,6 +15,9 @@
 
   a {
     text-decoration: none !important;
+    &:hover {
+      color: #31795A;
+    }
   }
 
   p {
