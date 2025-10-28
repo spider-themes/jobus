@@ -66,7 +66,7 @@
                 const newItem = $(`
                     <div class="jbs-accordion-item company-testimonial-item">
                         <div class="jbs-accordion-header" id="company-testimonial-heading-${index}">
-                            <button class="jbs-accordion-button collapsed" type="button"
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#${testimonialId}"
                                     data-jbs-parent="#company-testimonial-repeater"
@@ -75,11 +75,11 @@
                                 Testimonial #${index + 1}
                             </button>
                         </div>
-                        <div id="${testimonialId}" class="jbs-accordion-collapse collapse"
+                        <div id="${testimonialId}" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="company-testimonial-heading-${index}"
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="jbs-accordion-body">
-                                <div class="jbs-row jbs-mb-3">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-author-name">Author Name</label>

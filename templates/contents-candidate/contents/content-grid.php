@@ -120,7 +120,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="jbs-row jbs-gx-2 jbs-pt-25 sm-pt-10">
                         <div class="jbs-col-md-6">
-                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5 jbs-pt-10">
+                            <a href="<?php the_permalink() ?>" class="profile-btn tran3s jbs-w-100 jbs-mt-5">
 								<?php esc_html_e( 'View Profile', 'jobus' ) ?>
                             </a>
                         </div>

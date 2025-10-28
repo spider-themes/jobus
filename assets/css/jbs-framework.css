@@ -2127,12 +2127,20 @@
     margin: auto !important;
   }
 }
+@media (min-width: 1200px) {
+  .jbs-ms-xl-3 {
+    margin-left: 1rem !important;
+  }
+}
 @media (min-width: 1400px) {
   .jbs-pe-xxl-4 {
     padding-right: 1.5rem !important;
   }
   .jbs-me-xxl-5 {
     margin-right: 3rem !important;
+  }
+  .jbs-ms-xxl-5 {
+    margin-left: 3rem !important;
   }
 }
 .jbs-border-0 {

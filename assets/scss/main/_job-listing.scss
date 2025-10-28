@@ -486,6 +486,7 @@
       right: 0;
       background-color: rgba(0,0,0,0);
       cursor: pointer;
+      color:rgb(0 0 0 / 70%);
     }
   }
 }
@@ -852,7 +853,7 @@
     background: #E7F6EF !important;
     border-radius: 3px;
     margin: 54px 0 16px;
-
+    display: inline-block;
     &.part-time {
       background: rgba($color: #FF5757, $alpha: 0.08) !important;
       color: #FF6060 !important;
@@ -941,7 +942,7 @@
       background: #E7F6EF;
       text-transform: capitalize;
       color: var(--brand_color_1);
-
+      display: inline-block;
       &.part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
         color: #FF6060;
@@ -1092,7 +1093,7 @@
     .job-duration {
       font-size: 14px;
       color: var(--brand_color_4);
-
+      display: inline-block;
       &:hover {
         text-decoration: underline;
       }

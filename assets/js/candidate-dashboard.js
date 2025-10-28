@@ -213,21 +213,22 @@
                 e.preventDefault();
                 const accordionId = `education-${index}`;
                 const newItem = $(`
-                    <div class="accordion-item education-item">
-                        <div class="accordion-header" id="heading-${index}">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item education-item">
+                        <div class="jbs-accordion-header" id="heading-${index}">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#${accordionId}"
+                                    data-jbs-parent="#education-repeater"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Education #${index + 1}
                             </button>
                         </div>
-                        <div id="${accordionId}" class="accordion-collapse collapse"
+                        <div id="${accordionId}" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#education-repeater">
-                            <div class="accordion-body">
-                                <div class="jbs-row jbs-mb-3">
+                            <div class="jbs-accordion-body">
+                                <div class="jbs-row mb-3">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
@@ -361,20 +362,21 @@
                 e.preventDefault();
                 const accordionId = `experience-${index}`;
                 const newItem = $(`
-                    <div class="accordion-item experience-item">
-                        <div class="accordion-header" id="headingExp-${index}">
-                            <button class="accordion-button collapsed" type="button"
+                    <div class="jbs-accordion-item experience-item">
+                        <div class="jbs-accordion-header" id="headingExp-${index}">
+                            <button class="jbs-accordion-button jbs-collapsed" type="button"
                                     data-jbs-toggle="collapse"
                                     data-jbs-target="#${accordionId}"
+                                    data-jbs-parent="#experience-repeater"
                                     aria-expanded="false"
                                     aria-controls="${accordionId}">
                                 Experience #${index + 1}
                             </button>
                         </div>
-                        <div id="${accordionId}" class="accordion-collapse collapse"
+                        <div id="${accordionId}" class="jbs-accordion-collapse jbs-collapse"
                              aria-labelledby="headingExp-${index}"
                              data-jbs-parent="#experience-repeater">
-                            <div class="accordion-body">
+                            <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
                                         <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
