@@ -264,7 +264,7 @@ wp_enqueue_script( 'lightbox' );
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-2-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
-                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 jbs-md-mb-40">
+                    <div class="candidate-bio bg-wrapper jbs-mb-60 jbs-md-mb-40">
                         <ul class="jbs-style-none">
                             <?php
                             if ( ! empty( $location ) ) { ?>

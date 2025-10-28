@@ -17,7 +17,7 @@ wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
 
-<section class="candidates-profile jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
@@ -167,7 +167,7 @@ wp_enqueue_script( 'lightbox' );
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
                 <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 jbs-md-mt-60">
 
-                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 jbs-md-mb-40">
+                    <div class="candidate-bio bg-wrapper jbs-mb-60 jbs-md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="jbs-pt-25">
                                 <div class="candidate-avatar jbs-m-auto">

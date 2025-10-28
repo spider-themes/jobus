@@ -41,6 +41,9 @@
         &:focus-visible{
             outline-style: none !important;
         }
+        &:focus {
+          outline-style: none !important;
+        }
         &:hover {
           border: none !important;
         }

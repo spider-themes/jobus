@@ -10,9 +10,6 @@
 .jbs-container a {
   text-decoration: none !important;
 }
-.jbs-container a:hover {
-  color: #31795A;
-}
 .jbs-container p {
   line-height: 1.8;
 }
@@ -2141,6 +2138,11 @@
   }
   .jbs-ms-xxl-5 {
     margin-left: 3rem !important;
+  }
+}
+@media (min-width: 768px) {
+  .jbs-ms-md-2 {
+    margin-left: 0.5rem !important;
   }
 }
 .jbs-border-0 {

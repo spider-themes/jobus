@@ -39,7 +39,7 @@ $category_terms = get_the_terms($job_id, 'jobus_job_cat');
 $save_job_status = $show_save_button ? jobus_get_save_status() : false;
 
 // Determine container classes based on layout
-$container_classes = 'job-list-one style-two jbs-position-relative jbs-mb-20';
+$container_classes = 'job-list-one style-two jbs-position-relative jbs-mb-20 border-style';
 if ($layout === 'company-open') {
     $container_classes .= ' border-style';
 }

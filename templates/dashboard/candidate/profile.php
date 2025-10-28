@@ -41,7 +41,7 @@ $avatar_url = $description_data['avatar_url'];
         <div class="jbs-bg-white card-box border-20" id="candidate-profile-description">
             <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
-                <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3 jbs-border-0" id="candidate_profile_picture_upload">
+                <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3 jbs-border-0 upload_btn-width" id="candidate_profile_picture_upload">
                     <?php esc_html_e( 'Upload new photo', 'jobus' ); ?>
                     <input type="hidden" id="candidate_profile_picture_id" name="candidate_profile_picture_id" value="<?php echo esc_attr( $description_data['profile_picture_id'] ); ?>">
                 </div>

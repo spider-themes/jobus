@@ -99,7 +99,7 @@
   }
 }
 
-.ast-container:has(.jbs-container){
+.ast-container:has(.jbs-container,.jobus-dashboard-template){
     max-width: 100% !important;
     padding: 0 !important;
     flex-direction: column !important;
@@ -109,6 +109,37 @@
   .ast-container {
     padding: 0;
   }
+}
+
+.ast-container {
+  .jobus-dashboard-template {
+    a{
+        &:focus{
+            outline: none !important;
+        }
+    }
+    button{
+        &:hover, &:focus {
+            background-color: transparent;
+        }
+    }
+  }
+}
+.ast-container {
+    a{
+        &:focus{
+            outline: none !important;
+        }
+    }
+    button{
+        &:hover, &:focus {
+            background-color: transparent;
+        }
+    }
+}
+.jobus-frontend.elementor-template-full-width  .ast-container {
+    max-width: 100%;
+    padding: 0;
 }
 
 // kadence Theme Compatibility

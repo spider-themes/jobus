@@ -428,7 +428,7 @@ img {
   background: #fff;
   border-radius: 10px;
   position: relative;
-  border: 1px solid rgba($color: var(--jbs-brand_color_2), $alpha: 0.1);
+  border: 1px solid rgb(36 64 52 / 10%);
   @include transition(0.2s);
 
   &:hover {
@@ -510,7 +510,7 @@ img {
       font-size: 12px;
       font-weight: 500;
       color: rgba($color: #000, $alpha: 0.55);
-      background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.1);
+      background: rgb(49 121 90 / 10%);
 
       &.more {
         background: var(--jbs-brand_color_3);
@@ -772,7 +772,9 @@ img {
           font-weight: 500;
           color: var(--jbs-brand_color_2);
           margin: 4px 0 0;
-
+         a{
+            color: #244034;
+         }
           a:hover {
             text-decoration: underline;
             color: var(--jbs-brand_color_2);

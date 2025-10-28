@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center jbs-mb-20">
                         <div class="jbs-d-md-flex jbs-justify-content-between jbs-align-items-center">
-                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal" data-target="#filterPopUp">
+                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal jbs_filter-transparent" data-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
 								<?php esc_html_e( 'Filter', 'jobus' ) ?>
                             </button>

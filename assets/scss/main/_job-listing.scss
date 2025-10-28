@@ -6,10 +6,6 @@
   }
 }
 
-.candidates-profile {
-  margin-top: 180px;
-}
-
 // Filter Area
 .accordion-box {
   &.show {
@@ -62,6 +58,7 @@
     background: $light-bg;
     padding-top: 25px;
     padding-bottom: 25px;
+    outline: none;
 
     &:before {
       content: "\f282";
@@ -109,7 +106,7 @@
   }
 
   .filter-block.bottom-line {
-    border-bottom: 1px solid rgba($color: var(--jbs-brand_color_1), $alpha: 0.3);
+    border-bottom: 1px solid rgb(49 121 90 / 30%);
 
     & + .filter-block {
       margin-top: 25px;
@@ -222,6 +219,7 @@
       appearance: none;
       -webkit-appearance: none;
     }
+    
 
     input[type="range"]::-moz-range-thumb {
       height: 14px;
@@ -322,7 +320,7 @@
     line-height: 28px;
     font-weight: 500;
     cursor: pointer;
-    background: rgba($color: var(--jbs-brand_color_2), $alpha: 0.6);
+    background: rgba(36, 64, 52, 0.6);
     text-align: center;
     border-radius: 5px;
     @include transition(0.2s);
@@ -404,7 +402,8 @@
       -moz-appearance: none;
     }
 
-    input[type="range"]::-webkit-slider-thumb {
+    input[type="range"]{
+    &::-webkit-slider-thumb {
       height: 12px;
       width: 12px;
       border-radius: 50%;
@@ -414,6 +413,10 @@
       pointer-events: auto;
       appearance: none;
       -webkit-appearance: none;
+    }
+    &::-webkit-slider-runnable-track {
+        box-shadow: none;
+}
     }
 
     input[type="range"]::-moz-range-thumb {
@@ -494,19 +497,22 @@
 .jbs-w-84 {
   width: 84px !important;
 }
-
+button{
+    &.jbs_filter-transparent{
+    background-color:transparent;
+}
+}
 .jbs-filter-btn {
-  font-size: 15px !important;
-  color: var(--jbs-brand_color_2) !important;
-  height: 32px !important;
-  border: 2px solid var(--jbs-brand_color_2) !important;
-  border-radius: 6px !important;
+  font-size: 15px ;
+  color: var(--jbs-brand_color_2);
+  border: 2px solid var(--jbs-brand_color_2);
+  border-radius: 6px;
 
-  &:hover {
-    background: var(--jbs-brand_color_1) !important;
-    border-color: var(--jbs-brand_color_1) !important;
-    color: #fff !important;
-    text-decoration: none !important;
+  &.jbs-open-modal:hover {
+    background: var(--jbs-brand_color_1) ;
+    border-color: var(--jbs-brand_color_1);
+    color: #fff;
+    text-decoration: none;
   }
 }
 
@@ -726,6 +732,7 @@
 
     &:hover {
       color: #000;
+        text-decoration: underline;
     }
   }
 
@@ -780,6 +787,15 @@
     }
   }
 
+}
+
+.jbs-container  .job-list-one,.job-list-two{
+    .apply-btn{
+        color: #fff;
+        &:hover{
+            color:#fff;
+        }
+    }
 }
 
 // Job Listing Two
@@ -989,9 +1005,6 @@
   }
 }
 
-.company-profiles {
-  background-color: #EFF6F3 !important;
-}
 
 .company-logo {
   img {

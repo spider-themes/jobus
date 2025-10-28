@@ -104,6 +104,12 @@
         vertical-align: 3px;
       }
     }
+    .user_name-btn{
+        box-shadow: none;
+        &:hover, &:focus {
+            background-color: transparent;
+        }
+    }
   }
 
   .main-nav li a {
@@ -594,6 +600,9 @@
         .meta {
           font-size: 14px;
           color: rgba($color: #244034, $alpha: 0.5);
+          a{
+            color: rgba($color: #244034, $alpha: 0.5);
+          }
         }
       }
 
@@ -684,8 +693,6 @@
       font-size: 15px;
       letter-spacing: -0.15px;
       font-weight: 500;
-      width: 175px;
-      line-height: 40px;
       height: 40px;
       text-align: center;
       border-radius: 7px;
@@ -707,7 +714,10 @@
         left: 0;
       }
     }
-
+    .upload_btn-width{
+        width: 175px;
+        line-height: 40px;
+      }
     .delete-btn {
       font-size: 15px;
       letter-spacing: -0.15px;

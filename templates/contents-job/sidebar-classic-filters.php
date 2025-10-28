@@ -8,7 +8,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
-    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none jbs-mb-40" data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
+    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none jbs-mb-40 jbs_filter-transparent" data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>

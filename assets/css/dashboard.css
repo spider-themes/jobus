@@ -110,6 +110,12 @@ Table of Contents:
 .dashboard-navbar .user-data .user-name:after {
   vertical-align: 3px;
 }
+.dashboard-navbar .user-data .user_name-btn {
+  box-shadow: none;
+}
+.dashboard-navbar .user-data .user_name-btn:hover, .dashboard-navbar .user-data .user_name-btn:focus {
+  background-color: transparent;
+}
 .dashboard-navbar .main-nav li a {
   font-size: 16px;
   font-weight: 500;
@@ -540,6 +546,9 @@ Table of Contents:
   font-size: 14px;
   color: rgba(36, 64, 52, 0.5);
 }
+.dashboard-body .recent-job-tab .wrapper .job-item-list .job-title .meta a {
+  color: rgba(36, 64, 52, 0.5);
+}
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-action {
   position: absolute;
   top: 0;
@@ -609,8 +618,6 @@ Table of Contents:
   font-size: 15px;
   letter-spacing: -0.15px;
   font-weight: 500;
-  width: 175px;
-  line-height: 40px;
   height: 40px;
   text-align: center;
   border-radius: 7px;
@@ -629,6 +636,10 @@ Table of Contents:
   height: 100%;
   top: 0;
   left: 0;
+}
+.dashboard-body .user-avatar-setting .upload_btn-width {
+  width: 175px;
+  line-height: 40px;
 }
 .dashboard-body .user-avatar-setting .delete-btn {
   font-size: 15px;
