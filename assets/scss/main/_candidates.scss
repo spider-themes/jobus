@@ -11,7 +11,7 @@ img {
   background: #fff;
   border-radius: 10px;
   position: relative;
-  border: 1px solid rgba($color: var(--brand_color_2), $alpha: 0.1);
+  border: 1px solid rgba($color: var(--jbs-brand_color_2), $alpha: 0.1);
   @include transition(0.2s);
 
   &:hover {
@@ -32,7 +32,7 @@ img {
       font-size: 18px;
 
       &:hover {
-        color: var(--brand_color_4);
+        color: var(--jbs-brand_color_4);
       }
     }
   }
@@ -42,7 +42,7 @@ img {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
     top: -30px;
     left: -30px;
     transform: rotate(45deg);
@@ -83,7 +83,7 @@ img {
     font-size: 18px;
 
     a:hover {
-      color: var(--brand_color_4);
+      color: var(--jbs-brand_color_4);
     }
   }
 
@@ -103,10 +103,10 @@ img {
       font-size: 12px;
       font-weight: 500;
       color: rgba($color: #000, $alpha: 0.55);
-      background: rgba($color: var(--brand_color_1), $alpha: 0.1);
+      background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.1);
 
       &.more {
-        background: var(--brand_color_3);
+        background: var(--jbs-brand_color_3);
         color: #000;
       }
     }
@@ -115,14 +115,14 @@ img {
   .candidate-info {
     span {
       font-size: 15px;
-      color: rgba($color: var(--brand_color_2), $alpha: 0.6);
+      color: rgba($color: var(--jbs-brand_color_2), $alpha: 0.6);
     }
 
     a {
       display: block;
       font-size: 15px;
       font-weight: 500;
-      color: var(--brand_color_2);
+      color: var(--jbs-brand_color_2);
       margin: 2px 0 0;
       text-transform: capitalize;
     }
@@ -177,14 +177,14 @@ img {
     .video-icon {
       width: 65px;
       height: 65px;
-      background: var(--brand_color_3);
+      background: var(--jbs-brand_color_3);
       color: #000;
       font-size: 45px;
       line-height: 65px;
       padding-left: 7px;
 
       &:hover {
-        background: var(--brand_color_4);
+        background: var(--jbs-brand_color_4);
         color: #fff;
       }
     }
@@ -214,8 +214,8 @@ img {
     .numb {
       width: 45px;
       height: 45px;
-      color: var(--brand_color_1);
-      border: 1px solid var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
+      border: 1px solid var(--jbs-brand_color_1);
       position: absolute;
       left: 0;
       top: 3px;
@@ -223,7 +223,7 @@ img {
 
     .text_1 {
       font-size: 14px;
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
     }
 
     h4 {
@@ -237,7 +237,7 @@ img {
 
     li {
       font-size: 16px;
-      color: var(--brand_color_5);
+      color: var(--jbs-brand_color_5);
       margin: 18px 8px 0;
       line-height: 45px;
       padding: 0 30px;
@@ -251,7 +251,7 @@ img {
         padding: 0;
         color: #000;
         text-align: center;
-        background: var(--brand_color_3);
+        background: var(--jbs-brand_color_3);
       }
     }
   }
@@ -324,18 +324,18 @@ img {
 
       span {
         font-size: 15px;
-        color: rgba($color: var(--brand_color_2), $alpha: 0.6);
+        color: rgba($color: var(--jbs-brand_color_2), $alpha: 0.6);
       }
 
       div {
         font-size: 15px;
         font-weight: 500;
-        color: var(--brand_color_2);
+        color: var(--jbs-brand_color_2);
         margin: 4px 0 0;
 
         a:hover {
           text-decoration: underline;
-          color: var(--brand_color_2);
+          color: var(--jbs-brand_color_2);
         }
       }
     }
@@ -362,7 +362,7 @@ img {
     label {
       font-size: 13px;
       font-weight: 500;
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
       width: 65px;
       display: inline;
     }
@@ -428,7 +428,7 @@ img {
   background: #fff;
   border-radius: 10px;
   position: relative;
-  border: 1px solid rgba($color: var(--brand_color_2), $alpha: 0.1);
+  border: 1px solid rgba($color: var(--jbs-brand_color_2), $alpha: 0.1);
   @include transition(0.2s);
 
   &:hover {
@@ -447,7 +447,7 @@ img {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
     top: -30px;
     left: -30px;
     transform: rotate(45deg);
@@ -491,7 +491,7 @@ img {
       color: #000;
 
       &:hover {
-        color: var(--brand_color_4);
+        color: var(--jbs-brand_color_4);
       }
     }
   }
@@ -510,10 +510,10 @@ img {
       font-size: 12px;
       font-weight: 500;
       color: rgba($color: #000, $alpha: 0.55);
-      background: rgba($color: var(--brand_color_1), $alpha: 0.1);
+      background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.1);
 
       &.more {
-        background: var(--brand_color_3);
+        background: var(--jbs-brand_color_3);
         color: #000;
       }
       a {
@@ -528,13 +528,13 @@ img {
     letter-spacing: -0.5px;
     line-height: 40px;
     color: #fff;
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
     text-align: center;
     padding: 0 18px;
     border-radius: 40px;
     display: inline-block;
     &:hover {
-      background: var(--brand_color_4);
+      background: var(--jbs-brand_color_4);
     }
   }
 
@@ -543,15 +543,15 @@ img {
     font-weight: 500;
     letter-spacing: -0.5px;
     line-height: 38px;
-    color: var(--brand_color_1);
-    border: 1px solid var(--brand_color_1);
+    color: var(--jbs-brand_color_1);
+    border: 1px solid var(--jbs-brand_color_1);
     text-align: center;
     padding: 0 15px;
     border-radius: 40px;
     display: inline-block;
     &:hover {
-      background: var(--brand_color_4);
-      border-color: var(--brand_color_4);
+      background: var(--jbs-brand_color_4);
+      border-color: var(--jbs-brand_color_4);
       color: #fff;
     }
   }
@@ -616,14 +616,14 @@ img {
     .video-icon {
       width: 65px;
       height: 65px;
-      background: var(--brand_color_3);
+      background: var(--jbs-brand_color_3);
       color: #000;
       font-size: 45px;
       line-height: 65px;
       padding-left: 7px;
 
       &:hover {
-        background: var(--brand_color_4);
+        background: var(--jbs-brand_color_4);
         color: #fff;
       }
     }
@@ -653,8 +653,8 @@ img {
     .numb {
       width: 45px;
       height: 45px;
-      color: var(--brand_color_1);
-      border: 1px solid var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
+      border: 1px solid var(--jbs-brand_color_1);
       position: absolute;
       left: 0;
       top: 3px;
@@ -662,7 +662,7 @@ img {
 
     .text_1 {
       font-size: 14px;
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
     }
 
     h4 {
@@ -676,7 +676,7 @@ img {
 
     li {
       font-size: 16px;
-      color: var(--brand_color_5);
+      color: var(--jbs-brand_color_5);
       margin: 18px 8px 0;
       line-height: 45px;
       padding: 0 30px;
@@ -690,7 +690,7 @@ img {
         padding: 0;
         color: #000;
         text-align: center;
-        background: var(--brand_color_3);
+        background: var(--jbs-brand_color_3);
       }
     }
   }
@@ -764,18 +764,18 @@ img {
 
         span {
           font-size: 15px;
-          color: rgba($color: var(--brand_color_2), $alpha: 0.6);
+          color: rgba($color: var(--jbs-brand_color_2), $alpha: 0.6);
         }
 
         div {
           font-size: 15px;
           font-weight: 500;
-          color: var(--brand_color_2);
+          color: var(--jbs-brand_color_2);
           margin: 4px 0 0;
 
           a:hover {
             text-decoration: underline;
-            color: var(--brand_color_2);
+            color: var(--jbs-brand_color_2);
           }
         }
       }
@@ -803,7 +803,7 @@ img {
     label {
       font-size: 13px;
       font-weight: 500;
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
       width: 80px;
       display: inline;
     }

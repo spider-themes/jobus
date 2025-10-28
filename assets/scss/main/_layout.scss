@@ -48,7 +48,7 @@
     @include transition(0.2s);
     &:hover {
         background: #F5F5F5;
-        color: var(--brand_color_5);
+        color: var(--jbs-brand_color_5);
     }
     .bi:before {
         font-weight: bold !important;
@@ -65,7 +65,7 @@
     margin-top: 15px;
     @include transition(0.2s);
     &:hover {
-        color: var(--brand_color_4);
+        color: var(--jbs-brand_color_4);
     }
 }
 // Categpry Section Five
@@ -117,14 +117,14 @@
         line-height: 120px;
         color: #fff;
         font-size: 70px;
-        background: var(--brand_color_4);
+        background: var(--jbs-brand_color_4);
         position: absolute;
         left: 40%;
         bottom: 29%;
         z-index: 1;
         &:hover {
-            background: var(--brand_color_3);
-            color: var(--brand_color_2);
+            background: var(--jbs-brand_color_3);
+            color: var(--jbs-brand_color_2);
         }
     }
 }
@@ -213,13 +213,13 @@
     .video-icon {
         width: 65px;
         height: 65px;
-        background: var(--brand_color_3);
+        background: var(--jbs-brand_color_3);
         color: #000;
         font-size: 45px;
         line-height: 65px;
         padding-left: 7px;
         &:hover {
-            background: var(--brand_color_4);
+            background: var(--jbs-brand_color_4);
             color: #fff;
         }
     }
@@ -291,7 +291,7 @@
 }
 // How It Works
 .how-it-works.bg-color {
-    background: var(--brand_color_2);
+    background: var(--jbs-brand_color_2);
     .shape_01 {
         top:0;
         left: 0;
@@ -323,11 +323,11 @@
         @include transition(0.2s);
 
         &:hover {
-            background: var(--brand_color_3);
+            background: var(--jbs-brand_color_3);
         }
     }
     &.color-two li:hover {
-        background: var(--brand_color_4);
+        background: var(--jbs-brand_color_4);
         color: #fff;
     }
 }
@@ -360,7 +360,7 @@
         font-size: 18px;
         letter-spacing: 1px;
         span {
-            color: var(--brand_color_4);
+            color: var(--jbs-brand_color_4);
         }
     }
     .logo {
@@ -406,7 +406,7 @@
         color: #878787;
         .call {
             font-size: 22px; 
-            color: var(--brand_color_1);
+            color: var(--jbs-brand_color_1);
             &:hover {text-decoration: underline;}
         }
         .webaddress {
@@ -428,8 +428,8 @@
         border: 0;
         background: transparent;
         &.active {
-            background: var(--brand_color_3);
-            color: var(--brand_color_2);
+            background: var(--jbs-brand_color_3);
+            color: var(--jbs-brand_color_2);
         }
     }
 }

@@ -8,7 +8,7 @@
   &:hover {
     background: #E7F6EF;
     border-color: #E7F6EF;
-    color: var(--brand_color_5);
+    color: var(--jbs-brand_color_5);
   }
 }
 
@@ -18,8 +18,8 @@
   padding: 8px 26px;
   text-align: center;
   border-radius: 50px;
-  color: var(--heading_color);
-  background-color: var(--brand_color_3);
+  color: var(--jbs-heading_color);
+  background-color: var(--jbs-brand_color_3);
   border:2px solid transparent;
   @include transition(0.3s);
   display: inline-block;
@@ -28,9 +28,9 @@
     padding: 8px 32px;
   }
   &:hover {
-    background-color: var(--brand_color_2);
-    color: var(--brand_color_3);
-    border-color: var(--brand_color_3);
+    background-color: var(--jbs-brand_color_2);
+    color: var(--jbs-brand_color_3);
+    border-color: var(--jbs-brand_color_3);
     img{
       filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
     }
@@ -41,12 +41,12 @@
   line-height: 50px !important;
   border: none !important;
   border-radius: 10px !important;
-  background: var(--brand_color_1) !important;
+  background: var(--jbs-brand_color_1) !important;
   padding: 0 26px !important;
   display: inline-block !important;
   text-decoration: none !important;
   &:hover {
-      background: var(--brand_color_4) !important;
+      background: var(--jbs-brand_color_4) !important;
   }
 }
 
@@ -62,7 +62,7 @@
 }
 
 .btn-eleven:hover,.btn-eleven:focus {
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
 }
 
 
@@ -72,8 +72,8 @@
     min-width: 150px !important;
     text-align: center !important;
     color: #fff !important;
-    background-color: var(--brand_color_4) !important;
-    border-color: var(--brand_color_4) !important;
+    background-color: var(--jbs-brand_color_4) !important;
+    border-color: var(--jbs-brand_color_4) !important;
  -webkit-transition: all 0.3s ease-in-out 0s;
     -moz-transition: all 0.3s ease-in-out 0s;
     -ms-transition: all 0.3s ease-in-out 0s;
@@ -95,19 +95,19 @@
   &:hover {
     background: #E7F6EF;
     border-color: #E7F6EF;
-    color: var(--brand_color_5);
+    color: var(--jbs-brand_color_5);
   }
 }
 
 .open-job-btn {
   line-height: 31px;
   font-size: 15px;
-  color: var(--brand_color_4);
-  border: 1px solid var(--brand_color_4);
+  color: var(--jbs-brand_color_4);
+  border: 1px solid var(--jbs-brand_color_4);
   background: #EAF9E9;
   border-radius: 30px;
   &:hover {
-    background: var(--brand_color_4);
+    background: var(--jbs-brand_color_4);
     color: #fff;
     text-decoration: none !important;
   }
@@ -115,13 +115,13 @@
 
 .btn-six {
     font-weight: 500;
-    color: var(--brand_color_4);
+    color: var(--jbs-brand_color_4);
     position: relative;
     padding-right: 12px;
-    border-bottom: 2px solid var(--brand_color_4);
+    border-bottom: 2px solid var(--jbs-brand_color_4);
     transition: all .3s ease-in-out 0s;
     &:hover {
-        color: var(--brand_color_4);
+        color: var(--jbs-brand_color_4);
         letter-spacing: 0.25px;
         text-decoration: none !important;
     }

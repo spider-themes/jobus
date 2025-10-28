@@ -1,5 +1,5 @@
 .jbs-banner {
-  background: var(--brand_color_2);
+  background: var(--jbs-brand_color_2);
   padding: 200px 0 90px;
   z-index: 1;
   position: relative;
@@ -55,7 +55,7 @@
       }
 
       li.more {
-        background: var(--brand_color_3) !important;
+        background: var(--jbs-brand_color_3) !important;
         color: #000 !important;
       }
     }

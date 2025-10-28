@@ -19,7 +19,7 @@
     position: absolute;
     width: 90px;
     height: 90px;
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
     top: -45px;
     left: -45px;
     transform: rotate(45deg);
@@ -51,7 +51,7 @@
       outline: none;
 
       &:hover {
-        color: var(--brand_color_1);
+        color: var(--jbs-brand_color_1);
       }
     }
   }
@@ -64,7 +64,7 @@
     outline: none;
 
     &:hover {
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
       text-decoration: none;
     }
   }
@@ -78,7 +78,7 @@
       width: 100%;
       font-size: 15px;
       font-weight: 500;
-      color: var(--brand_color_4);
+      color: var(--jbs-brand_color_4);
       text-align: center;
       padding: 18px 0;
       @include transition(0.2s);
@@ -89,7 +89,7 @@
       }
 
       &:hover {
-        background: var(--brand_color_4);
+        background: var(--jbs-brand_color_4);
         color: #fff;
       }
     }
@@ -110,7 +110,7 @@
     position: absolute;
     width: 60px;
     height: 60px;
-    background: var(--brand_color_1);
+    background: var(--jbs-brand_color_1);
     top: -30px;
     left: -30px;
     transform: rotate(45deg);
@@ -142,7 +142,7 @@
         font-size: 15px;
 
         &:hover {
-          color: var(--brand_color_1);
+          color: var(--jbs-brand_color_1);
         }
       }
     }
@@ -152,7 +152,7 @@
     font-size: 24px;
 
     &:hover {
-      color: var(--brand_color_1);
+      color: var(--jbs-brand_color_1);
       text-decoration: none;
     }
   }
@@ -227,7 +227,7 @@
 
   .share-option li a {
     font-size: 15px;
-    color: var(--brand_color_2);
+    color: var(--jbs-brand_color_2);
     width: 34px;
     height: 34px;
     text-align: center;
@@ -239,7 +239,7 @@
     @include transition(0.2s);
 
     &:hover {
-      background: var(--brand_color_2);
+      background: var(--jbs-brand_color_2);
       color: #fff;
     }
   }

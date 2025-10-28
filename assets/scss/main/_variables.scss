@@ -1,12 +1,11 @@
 :root {
-  --heading_color: var(--jbs_heading_color, #254035);
-  --brand_color_1: var(--jbs_brand_color_1, #31795A);
-  --brand_color_2: var(--jbs_brand_color_2, #244034);
-  --brand_color_3: var(--jbs_brand_color_3, #D2F34C);
-  --brand_color_4: var(--jbs_brand_color_4, #00BF58);
-  --brand_color_5: var(--jbs_brand_color_5, #005025);
+  --jbs-heading_color: var(--jbs_heading_color_opt, #254035);
+  --jbs-brand_color_1: var(--jbs_brand_color_1_opt, #31795A);
+  --jbs-brand_color_2: var(--jbs_brand_color_2_opt, #244034);
+  --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
+  --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
+  --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
 }
-
 
 // Color Settings
 $text-color: rgba(0,0,0,0.7);
