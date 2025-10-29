@@ -23,9 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *  - query_var_prefix: string for query var filtering (e.g., 'jobus_job', 'jobus_candidate')
  *  - default_view: string ('grid' or 'list')
  *  - pagination_labels: array with 'prev' and 'next' keys
+ *  - is_shortcode: boolean (optional) Set to true when called from shortcode to skip header/footer
  */
 function jobus_load_archive_template( $config ) {
-	get_header();
+	// Check if this is being called from a shortcode
+	$is_shortcode = isset( $config['is_shortcode'] ) && $config['is_shortcode'] === true;
+	
+	// Only load header if not in shortcode context
+	if ( ! $is_shortcode ) {
+		get_header();
+	}
 
 	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
@@ -87,7 +94,14 @@ function jobus_load_archive_template( $config ) {
 
 	// Select layout based on configuration
 	$archive_layout_key = $config['archive_layout_key'];
-	$archive_layout = jobus_opt( $archive_layout_key );
+	
+	// Use shortcode layout if provided, otherwise fall back to global setting
+	if ( isset( $config['shortcode_layout'] ) && ! empty( $config['shortcode_layout'] ) ) {
+		$archive_layout = $config['shortcode_layout'];
+	} else {
+		$archive_layout = jobus_opt( $archive_layout_key );
+	}
+	
 	$layout_base_path = $config['layout_base_path'];
 
 	if ( $archive_layout == '1' ) {
@@ -98,13 +112,14 @@ function jobus_load_archive_template( $config ) {
 		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-popup.php';
 	}
 
-	get_footer();
+	// Only load footer if not in shortcode context
+	if ( ! $is_shortcode ) {
+		get_footer();
+	}
 
-	// Load sidebar popup if needed
+	// Load sidebar popup filters if needed (after footer for modal)
 	if ( $archive_layout == '3' ) {
 		jobus_get_template_part( $config['sidebar_popup_path'] );
-	} elseif ( $archive_layout == '2' ) {
-		jobus_get_template_part( $config['sidebar_topbar_path'] );
 	}
 }
 

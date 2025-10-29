@@ -37,6 +37,10 @@ class Shortcode {
 	 * @return string          Generated HTML content.
 	 */
 	public function job_page_shortcode( array $atts, string $content = '' ): string {
+		// Parse shortcode attributes with defaults
+		$atts = shortcode_atts( array(
+			'job_layout' => '', // Empty means use global setting
+		), $atts, 'jobus_job_archive' );
 
 		ob_start();
 		self::job_page_layout( $atts );
@@ -56,6 +60,11 @@ class Shortcode {
 	 * @return string Generated HTML content.
 	 */
 	public function company_page_shortcode( array $atts, string $content = '' ): string {
+		// Parse shortcode attributes with defaults
+		$atts = shortcode_atts( array(
+			'company_layout' => '', // Empty means use global setting
+		), $atts, 'jobus_company_archive' );
+
 		ob_start();
 		self::company_page_layout( $atts );
 		$content .= ob_get_clean();
@@ -74,6 +83,11 @@ class Shortcode {
 	 * @return string Generated HTML content.
 	 */
 	public function candidate_page_shortcode( array $atts, string $content = '' ): string {
+		// Parse shortcode attributes with defaults
+		$atts = shortcode_atts( array(
+			'candidate_layout' => '', // Empty means use global setting
+		), $atts, 'jobus_candidate_archive' );
+
 		ob_start();
 		self::candidate_page_layout( $atts );
 		$content .= ob_get_clean();
@@ -257,6 +271,7 @@ class Shortcode {
 		if ( ! is_admin() ) {
 			jobus_get_template( 'archive-job.php', [
 				'jobus_job_archive_layout' => $args['job_layout'],
+				'is_shortcode'             => true, // Flag to prevent header/footer output
 			] );
 		}
 	}
@@ -272,6 +287,7 @@ class Shortcode {
 		if ( ! is_admin() ) {
 			jobus_get_template( 'archive-company.php', [
 				'jobus_company_archive_layout' => $args['company_layout'],
+				'is_shortcode'                 => true, // Flag to prevent header/footer output
 			] );
 		}
 	}
@@ -287,6 +303,7 @@ class Shortcode {
 		if ( ! is_admin() ) {
 			jobus_get_template( 'archive-candidate.php', [
 				'jobus_candidate_archive_layout' => $args['candidate_layout'],
+				'is_shortcode'                   => true, // Flag to prevent header/footer output
 			] );
 		}
 	}
