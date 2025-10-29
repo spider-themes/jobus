@@ -16,14 +16,12 @@ CSF::createSection( $settings_prefix, array(
 	'parent' => 'jobus_job',
 	'id'     => 'job_specifications',
 	'fields' => array(
-
 		array(
 			'id'       => 'job_specifications',
 			'type'     => 'group',
 			'title'    => esc_html__( 'Job Specifications', 'jobus' ),
 			'subtitle' => esc_html__( 'Manage Job Specifications', 'jobus' ),
 			'fields'   => array(
-
 				array(
 					'id'          => 'meta_name',
 					'type'        => 'text',

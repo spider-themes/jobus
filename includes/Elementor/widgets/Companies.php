@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package jobus\Widgets
  */
 class Companies extends Widget_Base {
-
 	public function get_name() {
 		return 'jobus_companies';
 	}

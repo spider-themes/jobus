@@ -269,16 +269,16 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
         <div class="jbs-mt-50">
             <?php
             $args = array(
-                    'post_type'      => 'jobus_job',
-                    'posts_per_page' => - 1,
-                    'meta_query'     => array(
-                            'relation' => 'AND', // Optional, defaults to "AND
-                            array(
-                                    'key'     => 'jobus_meta_options',
-                                    'value'   => get_the_ID(),
-                                    'compare' => 'LIKE',
-                            ),
+                'post_type'      => 'jobus_job',
+                'posts_per_page' => - 1,
+                'meta_query'     => array(
+                    'relation' => 'AND', // Optional, defaults to "AND
+                    array(
+                            'key'     => 'jobus_meta_options',
+                            'value'   => get_the_ID(),
+                            'compare' => 'LIKE',
                     ),
+                ),
             );
 
             $jobs = new WP_Query( $args );

@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 ?>
+
 <div class="jbs-col-12">
     <div class="filter-area-tab">
         <div class="light-bg border-20 jbs-ps-4 jbs-pe-4">
@@ -31,12 +32,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
                         <?php
                         $filter_widgets = jobus_opt('candidate_sidebar_widgets');
 
-                        if ( isset($filter_widgets) && is_array($filter_widgets) ) {
+                        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
                             foreach ( $filter_widgets as $index => $widget ) {
                                 $tab_count = $index + 1;
-                                $widget_name = $widget[ 'widget_name' ] ?? '';
-                                $widget_layout = $widget[ 'widget_layout' ] ?? '';
-                                $range_suffix = $widget[ 'range_suffix' ] ?? '';
+                                $widget_name = $widget['widget_name'] ?? '';
+                                $widget_layout = $widget['widget_layout'] ?? '';
+                                $range_suffix = $widget['range_suffix'] ?? '';
 
                                 $specifications = jobus_get_specs('candidate_specifications');
                                 $widget_title = $specifications[ $widget_name ] ?? '';
@@ -46,7 +47,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
                                     <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
+                                        <div class="filter-title jbs-fw-500 jbs-text-dark"> <?php echo esc_html($widget_title) ?> </div>
                                         <?php
                                         // Include the appropriate widget layout file based on the widget type
                                         $specifications_data = $candidate_specifications;
@@ -97,7 +98,9 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_candidate_options', true);
 
                     <div class="jbs-row">
                         <div class="jbs-col-xl-2 jbs-m-auto">
-                            <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10"><?php esc_html_e('Apply Filter', 'jobus'); ?></button>
+                            <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10">
+                                <?php esc_html_e('Apply Filter', 'jobus'); ?>
+                            </button>
                         </div>
                     </div>
                 </form>

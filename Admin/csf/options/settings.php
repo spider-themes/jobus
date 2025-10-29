@@ -28,14 +28,23 @@ if ( class_exists( 'CSF' ) ) {
 	$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
 	$active_theme_class = $is_active_theme_jobi ? ' active-theme-jobi' : '';
 
+	$options = get_option( 'jobus_opt', [] );
+	$enable_candidate = $options['enable_candidate'] ?? true;
+	$enable_company = $options['enable_company'] ?? true;
+
 	/**
 	 * Include files
 	 */
 	require_once JOBUS_PATH . '/Admin/csf/options/general.php';
+	require_once JOBUS_PATH . '/Admin/csf/options/appearance.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/dashboard.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/job_opt.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/company_opt.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/candidate_opt.php';
+	if ( $enable_candidate || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			require_once JOBUS_PATH . '/Admin/csf/options/candidate_opt.php';
+		}
+	if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+		require_once JOBUS_PATH . '/Admin/csf/options/company_opt.php';
+	}
 	require_once JOBUS_PATH . '/Admin/csf/options/login-form.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/smtp.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/backup.php';

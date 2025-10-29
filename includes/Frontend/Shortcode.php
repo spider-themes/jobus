@@ -19,9 +19,18 @@ class Shortcode {
 	 * Registers shortcodes for job and company archives.
 	 */
 	public function __construct() {
+		// Get feature toggle options
+		$options = get_option( 'jobus_opt', [] );
+		$enable_candidate = $options['enable_candidate'] ?? true;
+		$enable_company = $options['enable_company'] ?? true;
+
 		add_shortcode( 'jobus_job_archive', [ $this, 'job_page_shortcode' ] );
-		add_shortcode( 'jobus_company_archive', [ $this, 'company_page_shortcode' ] );
-		add_shortcode( 'jobus_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
+		if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			add_shortcode( 'jobus_company_archive', [ $this, 'company_page_shortcode' ] );
+		}
+		if ( $enable_candidate || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			add_shortcode( 'jobus_candidate_archive', [ $this, 'candidate_page_shortcode' ] );
+		}
 		add_shortcode( 'jobus_login_form', [ $this, 'login_form_shortcode' ] );
 		add_shortcode( 'jobus_logout_form', [ $this, 'logout_form_shortcode' ] );
 	}
