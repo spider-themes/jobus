@@ -203,8 +203,6 @@ class Categories extends Widget_Base {
 	 * Author: spider-themes
 	 */
 	public function elementor_style_control(): void {
-
-
 		//============================ Category Item Style ============================//
 		$this->start_controls_section(
 			'category_style', [
@@ -288,7 +286,6 @@ class Categories extends Widget_Base {
 				'types'    => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .card-style-one .wrapper.bg:hover,
 							   {{WRAPPER}} .card-style-seven a:hover',
-
 			]
 		);
 
@@ -449,14 +446,12 @@ class Categories extends Widget_Base {
 			'slug'       => $cat_slugs,
 		));
 
-
 		//================= Template Parts =================//
-		if ( jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code() || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			include "templates/categories/category-{$settings['layout']}.php";
 		} else {
 			include "templates/categories/category-1.php";
 		}
-
 	}
 }
 

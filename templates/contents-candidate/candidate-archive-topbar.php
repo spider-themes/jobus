@@ -26,7 +26,6 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="jbs-col-12">
                 <div class="candidate-profile-item-wrapper">
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
-
 	                    <?php
 	                    // Display the total number of candidates found
 	                    include __DIR__ . '/../loop/result-count.php';
@@ -34,7 +33,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	                    // Display the sort by dropdown
 	                    include __DIR__ . '/../loop/sortby.php';
 	                    ?>
-
                     </div>
 
                     <?php
@@ -49,9 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     include (__DIR__ . '/../loop/pagination.php');
                     ?>
                 </div>
-
             </div>
-
         </div>
     </div>
 </section>

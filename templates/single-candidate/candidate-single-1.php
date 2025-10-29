@@ -17,7 +17,7 @@ wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
 
-<section class="candidates-profile bg-color jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile bg-color jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 

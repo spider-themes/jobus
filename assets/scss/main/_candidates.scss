@@ -2,8 +2,11 @@ img {
   height: auto;
 }
 
-.candidates-profile.bg-color {
-  background: $light-bg;
+.candidates-profile {
+  padding-top: 180px;
+  &.bg-color {
+    background: $light-bg;
+  }
 }
 
 .candidate-profile-card {
@@ -152,6 +155,7 @@ img {
         top: -18px;
         left: 25px;
         z-index: 1;
+        border-radius: 10px;
       }
 
       > .wp-block-heading {

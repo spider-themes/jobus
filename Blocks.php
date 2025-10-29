@@ -61,14 +61,22 @@ class Blocks {
 	 * Initialize and register all Gutenberg blocks
 	 */
 	public function blocks_init(): void {
+		// Get feature toggle options
+		$options = get_option( 'jobus_opt', [] );
+		$enable_candidate = $options['enable_candidate'] ?? true;
+		$enable_company = $options['enable_company'] ?? true;
 
 		// Register individual blocks
 		$this->register_block( 'video-popup' );
 		$this->register_block( 'group-testimonials' );
 		$this->register_block( 'testimonials-item' );
 		$this->register_block( 'shortcode-job-archive' );
-		$this->register_block( 'shortcode-company-archive' );
-		$this->register_block( 'shortcode-candidate-archive' );
+		if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			$this->register_block( 'shortcode-company-archive' );
+		}
+		if ( $enable_candidate || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			$this->register_block( 'shortcode-candidate-archive' );
+		}
 
 		// Register a block with a render callback
 		$this->register_block( 'register-form', array(
