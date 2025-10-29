@@ -38,6 +38,8 @@
         font-weight: 500;
         color: var(--jbs-brand_color_1);
         cursor: pointer;
+        background: transparent;
+        
         &:focus-visible{
             outline-style: none !important;
         }

@@ -265,6 +265,7 @@
     &:hover {
       background: $color-five;
       color: #fff;
+      text-decoration: none !important;
     }
 
     input[type="file"] {
@@ -292,8 +293,21 @@
     &:hover {
       background: $color-two;
       color: $color-one;
+      text-decoration: none !important;
     }
   }
+  button#clear-portfolio-images {
+    font-weight: 500;
+    color: #fff;
+    min-width: 125px;
+    text-align: center;
+    padding: 0 15px;
+    line-height: 45px;
+    border-radius: 50px;
+    background: #fb0a0a;
+    border: none;
+    cursor: pointer;
+}
 
   .dash-cancel-btn {
     font-weight: 500;

@@ -17,7 +17,7 @@ wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
 
-<section class="candidates-profile jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
+<section class="candidates-profile bg-color jbs-pt-100 jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
@@ -314,7 +314,7 @@ wp_enqueue_script( 'lightbox' );
                     }
                     ?>
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobus' ) ?><?php the_title() ?></h4>
-                    <div class="email-form bg-wrapper bg-color">
+                    <div class="email-form bg-wrapper">
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate-email-from" method="post">
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>

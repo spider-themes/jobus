@@ -3193,6 +3193,7 @@ body.compensate-for-scrollbar {
   font-weight: 500;
   color: var(--jbs-brand_color_1);
   cursor: pointer;
+  background: transparent;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:focus-visible,
@@ -6989,6 +6990,7 @@ input[type=file]::-webkit-file-upload-button {
   font-weight: 500;
   color: var(--jbs-brand_color_1);
   cursor: pointer;
+  background: transparent;
 }
 .jobus-job-classic .pagination-wrap .pagination .page-numbers:focus-visible,
 .jobus-job-topbar .pagination-wrap .pagination .page-numbers:focus-visible,
@@ -7121,7 +7123,8 @@ input[type=file]::-webkit-file-upload-button {
   margin-top: 0 !important;
 }
 
-.wp-theme-twentytwentyfive .candidates-profile .wp-block-heading, .wp-theme-twentytwentyfive .candidates-profile .title {
+.wp-theme-twentytwentyfive .candidates-profile .wp-block-heading,
+.wp-theme-twentytwentyfive .candidates-profile .title {
   top: -39px !important;
 }
 .wp-theme-twentytwentyfive .candidates-profile li div {
@@ -7170,6 +7173,9 @@ input[type=file]::-webkit-file-upload-button {
 .ast-container button:hover, .ast-container button:focus {
   background-color: transparent;
 }
+.ast-container ul {
+  padding-left: 0 !important;
+}
 
 .jobus-frontend.elementor-template-full-width .ast-container {
   max-width: 100%;
@@ -7188,6 +7194,30 @@ input[type=file]::-webkit-file-upload-button {
 .wp-block-jobus-shortcode-company-archive) {
   width: 100% !important;
   padding: 0 !important;
+}
+
+.wp-theme-docy .container:has(.jbs-container) {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+.wp-theme-docy .jbs-container ul {
+  margin-left: 0 !important;
+}
+.wp-theme-docy .jbs-container ul.pagination {
+  padding-left: 0 !important;
+}
+.wp-theme-docy .pagination .page-numbers {
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+}
+.wp-theme-docy .candidate-profile-card div.right-side ul.candidate-skills {
+  padding-left: 0;
+}
+.wp-theme-docy .jbs-table thead,
+.wp-theme-docy .jbs-table tbody tr {
+  border: none;
+  background: none;
 }
 
 .jbs-nice-select ul {

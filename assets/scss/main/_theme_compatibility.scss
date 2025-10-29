@@ -1,89 +1,92 @@
 //Twenty Twenty-Four Theme Compatibility
 
 .wp-block-jobus-shortcode-job-archive {
-  max-width: 100% !important;
-  background-color: #fff;
-  margin: 0 !important;
+    max-width: 100% !important;
+    background-color: #fff;
+    margin: 0 !important;
 
-  li {
-    margin-left: 0 !important;
-  }
+    li {
+        margin-left: 0 !important;
+    }
 }
 
 .wp-block-jobus-shortcode-candidate-archive {
-  max-width: 100% !important;
-  background-color: #fff;
-  margin: 0 !important;
+    max-width: 100% !important;
+    background-color: #fff;
+    margin: 0 !important;
 }
 
 .wp-block-jobus-shortcode-company-archive {
-  max-width: 100% !important;
+    max-width: 100% !important;
 }
 
 .jobus_job_details {
-  max-width: 100% !important;
-  background-color: #fff;
+    max-width: 100% !important;
+    background-color: #fff;
 
-  a {
-    text-decoration: none !important;
-  }
+    a {
+        text-decoration: none !important;
+    }
 
-  code {
-    background: none;
-  }
+    code {
+        background: none;
+    }
 }
 
 .jobus_job_details_2 {
-  a {
-    text-decoration: none !important;
-  }
+    a {
+        text-decoration: none !important;
+    }
 
-  ul {
-    margin-left: 0 !important;
-  }
+    ul {
+        margin-left: 0 !important;
+    }
 }
 
 .related-job-section a {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .job-post-item-wrapper {
-  .wrapper {
-    ul {
-      margin-left: 0 !important;
-    }
+    .wrapper {
+        ul {
+            margin-left: 0 !important;
+        }
 
-    li {
-      margin-top: 0 !important;
+        li {
+            margin-top: 0 !important;
+        }
     }
-  }
 }
+
 // twenty twenty five Theme Compatibility
 .wp-theme-twentytwentyfive {
-  .candidates-profile {
-    .wp-block-heading, .title {
-      top: -39px !important;
+    .candidates-profile {
+
+        .wp-block-heading,
+        .title {
+            top: -39px !important;
+        }
+
+        li {
+            div {
+                margin: 0 !important;
+            }
+        }
     }
-    li{
-      div{
-        margin: 0 !important;
-      }
+
+    .job-company-info {
+        .job-meta-data div {
+            margin: -6px 0 25px !important;
+        }
     }
-  }
-  .job-company-info{
-    .job-meta-data div {
-    margin: -6px 0 25px !important;
-    }
-  }
 }
 
 // Hello Elementor Theme Compatibility
-.site-main:has(
-    .wp-block-jobus-shortcode-candidate-archive,
+.site-main:has(.wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive
-  ) {
-  max-width: 100% !important;
+    .wp-block-jobus-shortcode-company-archive) {
+    max-width: 100% !important;
 }
 
 // Astra Theme Compatibility
@@ -93,80 +96,131 @@
 .single-jobus_company,
 .single-jobus_candidate,
 .single-jobus_job {
-  .ast-container {
-    display: block !important;
-    max-width: 100% !important;
-  }
+    .ast-container {
+        display: block !important;
+        max-width: 100% !important;
+    }
 }
 
-.ast-container:has(.jbs-container,.jobus-dashboard-template){
+.ast-container:has(.jbs-container, .jobus-dashboard-template) {
     max-width: 100% !important;
     padding: 0 !important;
     flex-direction: column !important;
 }
 
 .single-jobus_candidate {
-  .ast-container {
-    padding: 0;
-  }
+    .ast-container {
+        padding: 0;
+    }
 }
 
 .ast-container {
-  .jobus-dashboard-template {
-    a{
-        &:focus{
-            outline: none !important;
+    .jobus-dashboard-template {
+        a {
+            &:focus {
+                outline: none !important;
+            }
+        }
+
+        button {
+
+            &:hover,
+            &:focus {
+                background-color: transparent;
+            }
         }
     }
-    button{
-        &:hover, &:focus {
-            background-color: transparent;
-        }
-    }
-  }
 }
+
 .ast-container {
-    a{
-        &:focus{
+    a {
+        &:focus {
             outline: none !important;
         }
     }
-    button{
-        &:hover, &:focus {
+
+    button {
+
+        &:hover,
+        &:focus {
             background-color: transparent;
         }
     }
+
+    ul {
+        padding-left: 0 !important;
+    }
 }
-.jobus-frontend.elementor-template-full-width  .ast-container {
+
+.jobus-frontend.elementor-template-full-width .ast-container {
     max-width: 100%;
     padding: 0;
 }
 
 // kadence Theme Compatibility
-.site-container:has(
-    .wp-block-jobus-shortcode-candidate-archive,
+.site-container:has(.wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive
-  ) {
-  max-width: 100% !important;
-  padding: 0 !important;
+    .wp-block-jobus-shortcode-company-archive) {
+    max-width: 100% !important;
+    padding: 0 !important;
 }
 
-.content-area:has(
-    .wp-block-jobus-shortcode-job-archive,
+.content-area:has(.wp-block-jobus-shortcode-job-archive,
     .wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-company-archive
-  ) {
-  width: 100% !important;
-  padding: 0 !important;
+    .wp-block-jobus-shortcode-company-archive) {
+    width: 100% !important;
+    padding: 0 !important;
 }
 
 // Docy Theme Compatibility
+.wp-theme-docy {
+    .container:has(.jbs-container) {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .jbs-container {
+        ul {
+            margin-left: 0 !important;
+
+            &.pagination {
+                padding-left: 0 !important;
+            }
+        }
+    }
+
+    .pagination {
+        .page-numbers {
+            border-left: none;
+            border-top: none;
+            border-bottom: none;
+        }
+    }
+
+    .candidate-profile-card div.right-side ul.candidate-skills {
+        padding-left: 0;
+    }
+
+    .jbs-table {
+
+        thead,
+        tbody tr {
+            border: none;
+            background: none;
+        }
+
+    }
+
+}
+
 .jbs-nice-select {
 
-  ul {
-    padding-left: 0 !important;
-    margin: 5px;
-    border-radius: 10px !important;
-  }
+    ul {
+        padding-left: 0 !important;
+        margin: 5px;
+        border-radius: 10px !important;
+    }
 }
+
+
+// GeneratePress Theme Compatibility

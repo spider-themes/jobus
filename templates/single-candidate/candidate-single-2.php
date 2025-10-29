@@ -391,7 +391,7 @@ wp_enqueue_script( 'lightbox' );
                     ?>
 
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email', 'jobus' ) ?><?php the_title() ?></h4>
-                    <div class="email-form bg-wrapper bg-color">
+                    <div class="email-form bg-wrapper">
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
 
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate-email-from" method="post">

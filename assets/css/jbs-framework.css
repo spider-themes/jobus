@@ -2215,7 +2215,7 @@
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #EFF6F3;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
@@ -3088,7 +3088,7 @@
 }
 .jbs-btn:hover {
   color: #212529;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .jbs-btn:focus {
   outline: 0;
