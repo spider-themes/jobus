@@ -9,10 +9,12 @@ function Edit( { attributes, setAttributes } ) {
     const { job_layout, preview } = attributes;
     const blockProps = useBlockProps();
 
+    const isProUnlocked = window.jobusProUnlocked;
+
     const layoutOptions = [
         { label: __('Layout 01', 'jobus'), value: '1' },
-        { label: __('Layout 02', 'jobus'), value: '2' },
-        { label: __('Layout 03', 'jobus'), value: '3' },
+        { label: isProUnlocked ? __('Layout 02', 'jobus') : __('Layout 02 (Pro)', 'jobus'), value: '2', disabled: !isProUnlocked },
+        { label: isProUnlocked ? __('Layout 03', 'jobus') : __('Layout 03 (Pro)', 'jobus'), value: '3', disabled: !isProUnlocked },
     ];
 
     // Preview image for this block
@@ -36,9 +38,9 @@ function Edit( { attributes, setAttributes } ) {
                         label={__('Job Archive Layout', 'jobus')}
                         value={job_layout}
                         options={layoutOptions}
+                        className={ job_layout > 1 ? 'jbs-block-pro' : '' }
                         onChange={(value) => setAttributes({ job_layout: value })}
                     />
-
                 </PanelBody>
             </InspectorControls>
 

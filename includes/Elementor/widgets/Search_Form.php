@@ -705,12 +705,11 @@ class Search_Form extends Widget_Base {
 		) );
 
 		//================= Template Parts =================//
-		if ( jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code() || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			include "templates/search-form/search-form-{$settings['layout']}.php";
 		} else {
 			include "templates/search-form/search-form-1.php";
 		}
-
 
 	}
 

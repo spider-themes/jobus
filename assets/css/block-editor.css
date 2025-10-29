@@ -188,4 +188,22 @@ Table of Content:
   margin-bottom: 25px;
 }
 
+.jbs-block-pro {
+  position: relative;
+}
+
+.jbs-block-pro::after {
+  content: "PRO";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b35;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 1;
+}
+
 /*# sourceMappingURL=block-editor.css.map */

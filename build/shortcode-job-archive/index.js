@@ -38,15 +38,18 @@ function Edit({
     preview
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  const isProUnlocked = window.jobusProUnlocked;
   const layoutOptions = [{
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 01', 'jobus'),
     value: '1'
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02', 'jobus'),
-    value: '2'
+    label: isProUnlocked ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02', 'jobus') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02 (Pro)', 'jobus'),
+    value: '2',
+    disabled: !isProUnlocked
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 03', 'jobus'),
-    value: '3'
+    label: isProUnlocked ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 03', 'jobus') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 03 (Pro)', 'jobus'),
+    value: '3',
+    disabled: !isProUnlocked
   }];
 
   // Preview image for this block
@@ -65,6 +68,7 @@ function Edit({
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Job Archive Layout', 'jobus'),
           value: job_layout,
           options: layoutOptions,
+          className: job_layout > 1 ? 'jbs-block-pro' : '',
           onChange: value => setAttributes({
             job_layout: value
           })

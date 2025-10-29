@@ -79,9 +79,11 @@ class Blocks {
 		}
 
 		// Register a block with a render callback
-		$this->register_block( 'register-form', array(
-			'render_callback' => [ $this, 'register_form_block_render' ],
-		) );
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' )  ) {
+			$this->register_block( 'register-form', array(
+				'render_callback' => [ $this, 'register_form_block_render' ],
+			) );
+		}
 	}
 
 	/**
@@ -130,6 +132,9 @@ class Blocks {
 
 		// Scripts
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
+
+		// Add pro unlocked flag
+		wp_add_inline_script( 'wp-blocks', 'window.jobusProUnlocked = ' . ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ? 'true' : 'false' ) . ';', 'before' );
 	}
 
 	/**
