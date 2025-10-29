@@ -224,3 +224,24 @@
 
 
 // GeneratePress Theme Compatibility
+
+.grid-container.hfeed:has(.company-profiles,.candidates-profile,.job-listing-three,.jobus_job_details_2,.jobus_job_details,.candidates-profile-2,.company-details,.jobus-dashboard-template){
+    max-width: 100%;
+    .site-content{
+        display: block;
+    }
+    .job-details{
+        margin-top: 0;
+    }
+    .dashboard-body .placeholder_icon span::before{
+        top:21px
+    }
+    table.jbs-table.job-alert-table{
+        border:none;
+    }
+}
+.jobus-frontend.elementor-template-full-width{
+    .grid-container.hfeed{
+        max-width: 100%;
+    }
+}

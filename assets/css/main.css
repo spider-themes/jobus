@@ -7230,6 +7230,26 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 10px !important;
 }
 
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) {
+  max-width: 100%;
+}
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .site-content {
+  display: block;
+}
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .job-details {
+  margin-top: 0;
+}
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .dashboard-body .placeholder_icon span::before {
+  top: 21px;
+}
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) table.jbs-table.job-alert-table {
+  border: none;
+}
+
+.jobus-frontend.elementor-template-full-width .grid-container.hfeed {
+  max-width: 100%;
+}
+
 @media (max-width: 1199px) {
   .filter-area-tab .main-title {
     font-size: 20px;
