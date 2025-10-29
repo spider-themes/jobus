@@ -154,7 +154,7 @@ CSF::createSection( $settings_prefix, array(
 		// Sidebar Filters
 		array(
 			'type'    => 'subheading',
-			'content' => esc_html__( 'Sidebar Filters', 'jobus' ),
+			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
 		// Meta Widgets

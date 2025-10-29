@@ -18,7 +18,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'heading_color',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Heading Color (H1–H2)', 'jobus' ),
 			'desc'        => esc_html__( 'Used for main headings (H1–H2) titles across the site', 'jobus' ),
 			'default'     => '#254035',
 			'output'      => ':root',
@@ -28,7 +27,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'brand_color_1',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Brand Color 1', 'jobus' ),
 			'desc'        => esc_html__( 'Primary brand color — used for main buttons, primary links, active navigation states, form highlights and key card/company accents.', 'jobus' ),
 			'default'     => '#31795A',
 			'output'      => ':root',
@@ -38,7 +36,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'brand_color_2',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Brand Color 2', 'jobus' ),
 			'desc'        => esc_html__( 'Secondary brand color — used for headings, card accents, lists, borders and supporting background areas.', 'jobus' ),
 			'default'     => '#244034',
 			'output'      => ':root',
@@ -48,7 +45,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'brand_color_3',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Brand Color 3', 'jobus' ),
 			'desc'        => esc_html__( 'Light accent color — used for primary button backgrounds, search buttons and subtle card/layout highlights.', 'jobus' ),
 			'default'     => '#D2F34C',
 			'output'      => ':root',
@@ -58,7 +54,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'brand_color_4',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Brand Color 4', 'jobus' ),
 			'desc'        => esc_html__( 'Bright accent — used for success/confirm buttons, CTA hover states, badges and important highlights.', 'jobus' ),
 			'default'     => '#00BF58',
 			'output'      => ':root',
@@ -68,7 +63,6 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'          => 'brand_color_5',
 			'type'        => 'color',
-			'title'       => esc_html__( 'Brand Color 5', 'jobus' ),
 			'desc'        => esc_html__( 'Contrast / fallback color — used for small accents, icon hover states, saved-post hovers and elements needing visibility on dark backgrounds.', 'jobus' ),
 			'default'     => '#005025',
 			'output'      => ':root',

@@ -3282,6 +3282,9 @@ img {
   height: auto;
 }
 
+.candidates-profile {
+  padding-top: 180px;
+}
 .candidates-profile.bg-color {
   background: #EFF6F3;
 }
@@ -3416,6 +3419,7 @@ img {
   top: -18px;
   left: 25px;
   z-index: 1;
+  border-radius: 10px;
 }
 .candidates-profile-details .inner-card.border-style > .wp-block-heading {
   font-size: 28px;
