@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/shortcode-job-archive/block.json":
+/*!**********************************************!*\
+  !*** ./src/shortcode-job-archive/block.json ***!
+  \**********************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-job-archive","title":"Job Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Job Archive job posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"job_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","job Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
 /***/ "./src/shortcode-job-archive/edit.js":
 /*!*******************************************!*\
   !*** ./src/shortcode-job-archive/edit.js ***!
@@ -20,9 +30,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./preview */ "./src/shortcode-job-archive/preview.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./preview */ "./src/shortcode-job-archive/preview.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -38,46 +51,138 @@ function Edit({
     preview
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
-  const isProUnlocked = window.jobusProUnlocked;
+  const pro_active = jobus_block_params.jobus_is_premium; // Check if Pro is active
+  const [activeProNotice, setActiveProNotice] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+  const [noticePosition, setNoticePosition] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)({
+    top: 0,
+    left: 0
+  });
+
+  // Refs for each layout option
+  const layoutRefs = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)({});
+
+  // Layout options
   const layoutOptions = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 01', 'jobus'),
-    value: '1'
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sidebar Filter Layout', 'jobus'),
+    value: '1',
+    img: jobus_block_params.jobus_image_dir + '/layout/job/archive-layout-1.png',
+    pro: false
   }, {
-    label: isProUnlocked ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02', 'jobus') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02 (Pro)', 'jobus'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('List Layout', 'jobus'),
     value: '2',
-    disabled: !isProUnlocked
+    img: jobus_block_params.jobus_image_dir + '/layout/job/archive-layout-2.png',
+    pro: true
   }, {
-    label: isProUnlocked ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 03', 'jobus') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 03 (Pro)', 'jobus'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grid Layout', 'jobus'),
     value: '3',
-    disabled: !isProUnlocked
+    img: jobus_block_params.jobus_image_dir + '/layout/job/archive-layout-3.png',
+    pro: true
   }];
 
-  // Preview image for this block
+  // Show preview if preview mode
   if (preview) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "block-preview",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_preview__WEBPACK_IMPORTED_MODULE_4__.Preview, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_preview__WEBPACK_IMPORTED_MODULE_5__.Preview, {})
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+
+  // Handle click on layout option
+  const handleProClick = option => {
+    if (option.pro && !pro_active) {
+      if (layoutRefs.current[option.value]) {
+        const rect = layoutRefs.current[option.value].getBoundingClientRect();
+        setNoticePosition({
+          top: rect.top,
+          left: rect.left - 280 // Adjust distance from layout block
+        });
+        setActiveProNotice(option.value);
+      }
+      return;
+    }
+    setAttributes({
+      job_layout: option.value
+    });
+    setActiveProNotice(null);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filters', 'jobus'),
         initialOpen: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Job Archive Layout', 'jobus'),
-          value: job_layout,
-          options: layoutOptions,
-          className: job_layout > 1 ? 'jbs-block-pro' : '',
-          onChange: value => setAttributes({
-            job_layout: value
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Layout', 'jobus'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "jbs-layout-options",
+            style: {
+              display: 'flex',
+              gap: '1rem',
+              position: 'relative'
+            },
+            children: layoutOptions.map(option => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              ref: el => layoutRefs.current[option.value] = el,
+              className: `layout-option ${job_layout === option.value ? 'active' : ''} ${option.pro && !pro_active ? 'locked' : ''}`,
+              onClick: () => handleProClick(option),
+              style: {
+                position: 'relative',
+                cursor: option.pro && !pro_active ? 'not-allowed' : 'pointer'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                src: option.img,
+                alt: option.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "layout-label",
+                children: option.label
+              })]
+            }, option.value))
           })
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       ...blockProps,
       children: "[jobus_job_archive]"
-    })]
+    }), activeProNotice && layoutRefs.current[activeProNotice] && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createPortal)(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      style: {
+        position: 'fixed',
+        top: noticePosition.top + 'px',
+        left: noticePosition.left + 'px',
+        width: '280px',
+        zIndex: 99999
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Notice, {
+        status: "info",
+        isDismissible: true,
+        onRemove: () => setActiveProNotice(null),
+        className: "jbs-pro-notice",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h4", {
+          style: {
+            margin: '0 0 0.5rem 0',
+            fontWeight: 'bold'
+          },
+          children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pro Feature', 'jobus'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "pro-lock",
+            style: {
+              marginLeft: '0.25rem'
+            },
+            children: "\uD83D\uDD12"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+          style: {
+            marginBottom: '0.5rem'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This layout is a Pro feature. Upgrade to Jobus Pro to unlock advanced layouts and premium styling options!', 'jobus')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          isPrimary: true,
+          href: jobus_block_params.jobus_upgrade_url,
+          target: "_blank",
+          style: {
+            marginTop: '0.25rem'
+          },
+          className: "jobus-upgrade-button",
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade Now', 'jobus')
+        })]
+      })
+    }), document.body)]
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -141,26 +246,6 @@ function Save(props) {
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = window["React"];
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -191,6 +276,16 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -201,13 +296,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/shortcode-job-archive/block.json":
-/*!**********************************************!*\
-  !*** ./src/shortcode-job-archive/block.json ***!
-  \**********************************************/
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-job-archive","title":"Job Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Job Archive job posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"job_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","job Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -280,7 +385,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcod
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!********************************************!*\
   !*** ./src/shortcode-job-archive/index.js ***!

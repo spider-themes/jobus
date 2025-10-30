@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/group-testimonials/block.json":
+/*!*******************************************!*\
+  !*** ./src/group-testimonials/block.json ***!
+  \*******************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/group-testimonials","version":"1.0.0","title":"Testimonials (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"uniqueId":{"type":"string"},"testimonials":{"type":"array","default":[{"author_name":"Arif Rahman","location":"Bangladesh","review_content":"","rating":5}]}},"textdomain":"jobus","keywords":["jobus","Testimonials","Review"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
 /***/ "./src/group-testimonials/edit.js":
 /*!****************************************!*\
   !*** ./src/group-testimonials/edit.js ***!
@@ -76,16 +86,6 @@ function Save({
 
 /***/ }),
 
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -116,13 +116,13 @@ module.exports = window["wp"]["element"];
 
 /***/ }),
 
-/***/ "./src/group-testimonials/block.json":
-/*!*******************************************!*\
-  !*** ./src/group-testimonials/block.json ***!
-  \*******************************************/
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/group-testimonials","version":"1.0.0","title":"Testimonials (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"uniqueId":{"type":"string"},"testimonials":{"type":"array","default":[{"author_name":"Arif Rahman","location":"Bangladesh","review_content":"","rating":5}]}},"textdomain":"jobus","keywords":["jobus","Testimonials","Review"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -195,7 +195,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/group-te
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!*****************************************!*\
   !*** ./src/group-testimonials/index.js ***!

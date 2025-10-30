@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/testimonials-item/block.json":
+/*!******************************************!*\
+  !*** ./src/testimonials-item/block.json ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/testimonials-item","parent":["jobus/group-testimonials"],"version":"1.0.0","title":"Testimonial Item (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"authorImage":{"type":"string","default":""},"authorName":{"type":"string","default":"Arif Rahman"},"location":{"type":"string","default":"Bangladesh"},"reviewContents":{"type":"string","default":""},"rating":{"type":"number","default":"5"}},"textdomain":"jobus","keywords":["jobus","Testimonials Item","Review Item"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css","style":"file:./style-index.css"}');
+
+/***/ }),
+
 /***/ "./src/testimonials-item/edit.js":
 /*!***************************************!*\
   !*** ./src/testimonials-item/edit.js ***!
@@ -190,16 +200,6 @@ function Save({
 
 /***/ }),
 
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -250,13 +250,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/testimonials-item/block.json":
-/*!******************************************!*\
-  !*** ./src/testimonials-item/block.json ***!
-  \******************************************/
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/testimonials-item","parent":["jobus/group-testimonials"],"version":"1.0.0","title":"Testimonial Item (Jobus)","description":"Jobus Testimonials. A block that allows you to add a client review to your page.","icon":"dashicons-testimonial","category":"jobus-blocks","supports":{"html":false,"anchor":true},"attributes":{"authorImage":{"type":"string","default":""},"authorName":{"type":"string","default":"Arif Rahman"},"location":{"type":"string","default":"Bangladesh"},"reviewContents":{"type":"string","default":""},"rating":{"type":"number","default":"5"}},"textdomain":"jobus","keywords":["jobus","Testimonials Item","Review Item"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css","style":"file:./style-index.css"}');
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -329,7 +329,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/testimon
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!****************************************!*\
   !*** ./src/testimonials-item/index.js ***!

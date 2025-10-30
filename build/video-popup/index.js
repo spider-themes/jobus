@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/video-popup/block.json":
+/*!************************************!*\
+  !*** ./src/video-popup/block.json ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/video-popup","title":"Jobus Video Popup","category":"jobus-blocks","icon":"video-alt3","description":"Jobus Video Popup. A block that allows you to add a video popup to your page.","supports":{"html":false,"anchor":true,"align":true},"attributes":{"icon_bg_color":{"type":"string","default":"#FF4646"},"icon_color":{"type":"string","default":"#ffffff"},"videoUrl":{"type":"string","default":"#"},"backgroundImage":{"type":"string","default":"#"}},"textdomain":"jobus","keywords":["jobus","video","popup","block","youtube"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
 /***/ "./src/video-popup/edit.js":
 /*!*********************************!*\
   !*** ./src/video-popup/edit.js ***!
@@ -157,26 +167,6 @@ function Save({
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = window["React"];
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -217,13 +207,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/video-popup/block.json":
-/*!************************************!*\
-  !*** ./src/video-popup/block.json ***!
-  \************************************/
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/video-popup","title":"Jobus Video Popup","category":"jobus-blocks","icon":"video-alt3","description":"Jobus Video Popup. A block that allows you to add a video popup to your page.","supports":{"html":false,"anchor":true,"align":true},"attributes":{"icon_bg_color":{"type":"string","default":"#FF4646"},"icon_color":{"type":"string","default":"#ffffff"},"videoUrl":{"type":"string","default":"#"},"backgroundImage":{"type":"string","default":"#"}},"textdomain":"jobus","keywords":["jobus","video","popup","block","youtube"],"editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -296,7 +296,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/video-po
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!**********************************!*\
   !*** ./src/video-popup/index.js ***!

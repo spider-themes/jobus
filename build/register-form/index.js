@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/register-form/block.json":
+/*!**************************************!*\
+  !*** ./src/register-form/block.json ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jobus/register-form","title":"Register Form (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"A custom registration form for candidates and employers.","supports":{"html":false,"anchor":true},"attributes":{"candidate_username":{"type":"string","default":"Enter Your Name"},"candidate_email":{"type":"string","default":"Enter Your Email"},"candidate_pass":{"type":"string","default":"Enter Your Password"},"candidate_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"employer_username":{"type":"string","default":"Enter Your Name"},"employer_email":{"type":"string","default":"Enter Your Email"},"employer_pass":{"type":"string","default":"Enter Your Password"},"employer_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"preview":{"type":"boolean","default":false}},"keywords":["jobus","Candidate Register","Employer Register","Register Form"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
 /***/ "./src/register-form/edit.js":
 /*!***********************************!*\
   !*** ./src/register-form/edit.js ***!
@@ -347,26 +357,6 @@ function Save({
 
 /***/ }),
 
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = window["React"];
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -407,13 +397,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/register-form/block.json":
-/*!**************************************!*\
-  !*** ./src/register-form/block.json ***!
-  \**************************************/
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"jobus/register-form","title":"Register Form (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"A custom registration form for candidates and employers.","supports":{"html":false,"anchor":true},"attributes":{"candidate_username":{"type":"string","default":"Enter Your Name"},"candidate_email":{"type":"string","default":"Enter Your Email"},"candidate_pass":{"type":"string","default":"Enter Your Password"},"candidate_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"employer_username":{"type":"string","default":"Enter Your Name"},"employer_email":{"type":"string","default":"Enter Your Email"},"employer_pass":{"type":"string","default":"Enter Your Password"},"employer_confirm_pass":{"type":"string","default":"Enter Your Confirm Password"},"preview":{"type":"boolean","default":false}},"keywords":["jobus","Candidate Register","Employer Register","Register Form"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -486,7 +486,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!************************************!*\
   !*** ./src/register-form/index.js ***!

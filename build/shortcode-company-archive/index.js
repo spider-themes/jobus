@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/shortcode-company-archive/block.json":
+/*!**************************************************!*\
+  !*** ./src/shortcode-company-archive/block.json ***!
+  \**************************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-company-archive","title":"Company Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Company Archive posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"company_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","Company Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
 /***/ "./src/shortcode-company-archive/edit.js":
 /*!***********************************************!*\
   !*** ./src/shortcode-company-archive/edit.js ***!
@@ -18,9 +28,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shortcode-job-archive/preview */ "./src/shortcode-job-archive/preview.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shortcode-job-archive/preview */ "./src/shortcode-job-archive/preview.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
 
 
 
@@ -35,39 +51,131 @@ function Edit({
     preview
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  const pro_active = jobus_block_params.jobus_is_premium; // Check if Pro is active
+  const [activeProNotice, setActiveProNotice] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+  const [noticePosition, setNoticePosition] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)({
+    top: 0,
+    left: 0
+  });
+
+  // Refs for each layout option
+  const layoutRefs = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)({});
+
+  // Company layout options
   const layoutOptions = [{
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 01', 'jobus'),
-    value: '1'
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sidebar Filter Layout', 'jobus'),
+    value: '1',
+    img: jobus_block_params.jobus_image_dir + '/layout/company/archive-layout-1.png',
+    pro: false
   }, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Layout 02', 'jobus'),
-    value: '2'
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grid Layout', 'jobus'),
+    value: '2',
+    img: jobus_block_params.jobus_image_dir + '/layout/company/archive-layout-2.png',
+    pro: true
   }];
 
-  // Preview image for this block
+  // Show preview if preview mode
   if (preview) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "block-preview",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_3__.Preview, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_shortcode_job_archive_preview__WEBPACK_IMPORTED_MODULE_5__.Preview, {})
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filters', 'jobus'),
+
+  // Handle layout click
+  const handleProClick = option => {
+    if (option.pro && !pro_active) {
+      if (layoutRefs.current[option.value]) {
+        const rect = layoutRefs.current[option.value].getBoundingClientRect();
+        setNoticePosition({
+          top: rect.top,
+          left: rect.left - 280 // Adjust distance from layout block
+        });
+        setActiveProNotice(option.value);
+      }
+      return;
+    }
+    setAttributes({
+      company_layout: option.value
+    });
+    setActiveProNotice(null);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Company Archive Layout', 'jobus'),
         initialOpen: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Company Archive Layout', 'jobus'),
-          value: company_layout,
-          options: layoutOptions,
-          onChange: value => setAttributes({
-            company_layout: value
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Layout', 'jobus'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "jbs-layout-options",
+            style: {
+              display: 'flex',
+              gap: '1rem',
+              position: 'relative'
+            },
+            children: layoutOptions.map(option => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              ref: el => layoutRefs.current[option.value] = el,
+              className: `layout-option ${company_layout === option.value ? 'active' : ''} ${option.pro && !pro_active ? 'locked' : ''}`,
+              onClick: () => handleProClick(option),
+              style: {
+                position: 'relative',
+                cursor: option.pro && !pro_active ? 'not-allowed' : 'pointer'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                src: option.img,
+                alt: option.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "layout-label",
+                style: {
+                  display: 'block',
+                  textAlign: 'center'
+                },
+                children: option.label
+              })]
+            }, option.value))
           })
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       ...blockProps,
       children: "[jobus_company_archive]"
-    })]
+    }), activeProNotice && layoutRefs.current[activeProNotice] && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createPortal)(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      style: {
+        position: 'fixed',
+        top: noticePosition.top + 'px',
+        left: noticePosition.left + 'px',
+        width: '280px',
+        zIndex: 99999
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Notice, {
+        status: "info",
+        isDismissible: true,
+        onRemove: () => setActiveProNotice(null),
+        className: "jbs-pro-notice",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h4", {
+          style: {
+            margin: '0 0 0.5rem 0',
+            fontWeight: 'bold'
+          },
+          children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pro Feature', 'jobus'), " \uD83D\uDD12"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+          style: {
+            marginBottom: '0.5rem'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This company layout is part of Jobus Pro. Unlock this design and advanced customization options by upgrading today!', 'jobus')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          isPrimary: true,
+          href: jobus_block_params.jobus_upgrade_url,
+          target: "_blank",
+          style: {
+            marginTop: '0.25rem'
+          },
+          className: "jobus-upgrade-button",
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade Now', 'jobus')
+        })]
+      })
+    }), document.body)]
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
@@ -130,16 +238,6 @@ const Preview = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
-
-/***/ }),
-
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -170,6 +268,16 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -180,13 +288,23 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/shortcode-company-archive/block.json":
-/*!**************************************************!*\
-  !*** ./src/shortcode-company-archive/block.json ***!
-  \**************************************************/
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-company-archive","title":"Company Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Company Archive posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"company_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","Company Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 
@@ -259,7 +377,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcod
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 /*!************************************************!*\
   !*** ./src/shortcode-company-archive/index.js ***!
