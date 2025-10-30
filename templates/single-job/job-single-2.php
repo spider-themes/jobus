@@ -103,7 +103,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
-                                <a href="#" class="btn-one jbs-mt-25 jbs-open-modal" data-target="#filterPopUp"
+                                <a href="#" class="jbs-btn-one jbs-mt-25 jbs-open-modal" data-target="#filterPopUp"
                                   >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>

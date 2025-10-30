@@ -45,8 +45,11 @@
   justify-content: space-between !important;
 }
 
-.jbs-justify-content-md-end {
-  justify-content: flex-end !important;
+
+@media (min-width: 768px) {
+    .jbs-justify-content-md-end {
+        justify-content: flex-end !important;
+    }
 }
 
 .jbs-justify-content-lg-end {
@@ -112,4 +115,8 @@
 .jbs-col-md-6 {
   flex: 0 0 50%;
   max-width: 50%;
+}
+
+.jbs-float-end {
+  float: right !important;
 }

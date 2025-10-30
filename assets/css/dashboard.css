@@ -106,6 +106,7 @@ Table of Contents:
   font-weight: 500;
   color: #244034;
   margin: 15px 0 45px;
+  border: none;
 }
 .dashboard-navbar .user-data .user-name:after {
   vertical-align: 3px;
@@ -201,6 +202,10 @@ Table of Contents:
 }
 .dashboard-body a {
   text-decoration: none;
+  color: #000;
+}
+.dashboard-body a:hover {
+  color: #000;
 }
 .dashboard-body .border-15 {
   border-radius: 15px;
@@ -267,6 +272,9 @@ Table of Contents:
   height: 100%;
   top: 0;
   left: 0;
+}
+.dashboard-body div.dash-btn-one {
+  line-height: 15px !important;
 }
 .dashboard-body .dash-btn-two {
   font-weight: 500;

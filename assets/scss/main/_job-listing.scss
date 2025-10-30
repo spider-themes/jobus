@@ -502,18 +502,23 @@ button{
     background-color:transparent;
 }
 }
-.jbs-filter-btn {
+button.jbs-filter-btn {
   font-size: 15px ;
   color: var(--jbs-brand_color_2);
   border: 2px solid var(--jbs-brand_color_2);
   border-radius: 6px;
 
-  &.jbs-open-modal:hover {
+  &.jbs-open-modal:hover, &.jbs-open-modal:focus {
     background: var(--jbs-brand_color_1) ;
     border-color: var(--jbs-brand_color_1);
     color: #fff;
     text-decoration: none;
   }
+}
+button.jbs_filter_btn-padding{
+    padding: 0;
+    width: 86px;
+    height: 32px;
 }
 
 .upper-filter {
@@ -1494,7 +1499,16 @@ input[type="file"]::-webkit-file-upload-button {
     text-decoration: none !important;
   }
 }
-
+.company-list-layout .open-job-btn {
+    width: 120px;
+    line-height: 31px;
+    font-size: 15px;
+    color: #00bf58;
+    border: 1px solid #00bf58;
+    background: #eaf9e9;
+    border-radius: 30px;
+    padding: 0;
+}
 .total-job {
   display: flex;
   justify-content: space-between;

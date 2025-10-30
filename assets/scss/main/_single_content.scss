@@ -113,6 +113,18 @@
         background: var(--jbs-brand_color_4);
       }
     }
+     .jbs-btn-one {
+      line-height: 50px;
+      border-radius: 10px;
+      color: #fff;
+      background: var(--jbs-brand_color_1);
+      padding: 0 26px;
+      display: inline-block;
+      box-sizing: border-box;   
+      &:hover {
+        background: var(--jbs-brand_color_4);
+      }
+    }
   }
 }
 

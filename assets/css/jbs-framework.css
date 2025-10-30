@@ -462,10 +462,11 @@
   justify-content: space-between !important;
 }
 
-.jbs-justify-content-md-end {
-  justify-content: flex-end !important;
+@media (min-width: 768px) {
+  .jbs-justify-content-md-end {
+    justify-content: flex-end !important;
+  }
 }
-
 .jbs-justify-content-lg-end {
   justify-content: flex-end !important;
 }
@@ -524,6 +525,10 @@
 .jbs-col-md-6 {
   flex: 0 0 50%;
   max-width: 50%;
+}
+
+.jbs-float-end {
+  float: right !important;
 }
 
 .jbs-dropdown {
@@ -936,6 +941,10 @@
 
 .jbs-bg-white {
   opacity: 1;
+  background-color: #fff !important;
+}
+
+.bg-white {
   background-color: #fff !important;
 }
 
@@ -2519,6 +2528,41 @@
   padding: 1.25rem 1rem;
 }
 
+.jbs-table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 575.98px) {
+  .jbs-table-responsive-sm {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (max-width: 767.98px) {
+  .jbs-table-responsive-md {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (max-width: 991.98px) {
+  .jbs-table-responsive-lg {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (max-width: 1199.98px) {
+  .jbs-table-responsive-xl {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (max-width: 1399.98px) {
+  .jbs-table-responsive-xxl {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
 .jbs-table {
   width: 100%;
   margin-bottom: 1rem;

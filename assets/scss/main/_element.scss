@@ -500,8 +500,10 @@
     .jbs-nav {
         background: #F0F5F3;
         border-radius: 40px;
+        padding-left: 0 !important;
         .jbs-nav-item {
             width: 50%;
+            list-style: none;
             .jbs-nav-link {
                 display: block;
                 width: 100%;

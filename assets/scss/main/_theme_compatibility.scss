@@ -89,6 +89,38 @@
     max-width: 100% !important;
 }
 
+.wp-theme-hello-elementor,.wp-theme-hello-biz.jobus-frontend {
+    .jobus-dashboard-template {
+        button {
+            border: none;
+        }
+    }
+
+    .jbs-accordion-button {
+        width: 100%;
+        display: flex;
+    }
+
+    table tbody tr>td {
+        background: none;
+    }
+
+    button.action-btn {
+        background: none;
+    }
+
+    table thead:first-child tr:first-child th {
+        border: none;
+    }
+
+    table.jbs-table.job-alert-table th {
+        text-align: left;
+    }
+    .dashboard-body .job-alert-table th:last-child {
+        text-align: right !important;
+    }
+}
+
 // Astra Theme Compatibility
 .post-type-archive-jobus_job,
 .post-type-archive-jobus_candidate,
@@ -158,6 +190,7 @@
 }
 
 // kadence Theme Compatibility
+
 .site-container:has(.wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-job-archive,
     .wp-block-jobus-shortcode-company-archive) {
@@ -225,23 +258,45 @@
 
 // GeneratePress Theme Compatibility
 
-.grid-container.hfeed:has(.company-profiles,.candidates-profile,.job-listing-three,.jobus_job_details_2,.jobus_job_details,.candidates-profile-2,.company-details,.jobus-dashboard-template){
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) {
     max-width: 100%;
-    .site-content{
+
+    .site-content {
         display: block;
     }
-    .job-details{
+
+    .job-details {
         margin-top: 0;
     }
-    .dashboard-body .placeholder_icon span::before{
-        top:21px
+
+    .dashboard-body .placeholder_icon span::before {
+        top: 21px
     }
-    table.jbs-table.job-alert-table{
-        border:none;
+
+    table.jbs-table.job-alert-table {
+        border: none;
     }
 }
-.jobus-frontend.elementor-template-full-width{
-    .grid-container.hfeed{
+
+.jobus-frontend.elementor-template-full-width {
+    .grid-container.hfeed {
         max-width: 100%;
+    }
+}
+
+.jobus-frontend {
+    img {
+        max-width: 100%;
+        display: block;
+    }
+}
+
+// Avada Theme Compatibility
+.fusion-row {
+    .page-numbers.current {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        margin: 0 !important;
     }
 }

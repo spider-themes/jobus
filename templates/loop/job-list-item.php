@@ -23,9 +23,9 @@ $args = wp_parse_args($args ?? [], [
     'company_id' => null,
     'extra_classes' => '',
     'col_classes' => [
-        'title' => 'jbs-col-lg-4',
-        'meta' => 'jbs-col-lg-3',
-        'actions' => 'jbs-col-lg-2'
+        'title' => 'jbs-col-md-5',
+        'meta' => 'jbs-col-md-4 jbs-col-sm-6',
+        'actions' => 'jbs-col-md-3 jbs-col-sm-6'
     ]
 ]);
 
@@ -72,7 +72,7 @@ $container_classes .= ' ' . $extra_classes;
         </div>
 
         <!-- Meta Information Column -->
-        <div class="<?php echo esc_attr($col_classes['meta']); ?> jbs-col-md-4 jbs-col-sm-6">
+        <div class="<?php echo esc_attr($col_classes['meta']); ?>">
             <?php if ($show_location && !empty($location_terms) && count($location_terms) > 0) : ?>
                 <div class="job-location">
                     <a href="<?php echo esc_url(get_term_link($location_terms[0]->term_id)); ?>">
@@ -125,7 +125,7 @@ $container_classes .= ' ' . $extra_classes;
 
         <!-- Actions Column -->
         <?php if ($show_save_button || $show_apply_button) : ?>
-            <div class="<?php echo esc_attr($col_classes['actions']); ?> jbs-col-md-4">
+            <div class="<?php echo esc_attr($col_classes['actions']); ?>">
                 <div class="btn-group jbs-d-flex jbs-align-items-center jbs-justify-content-md-end jbs-sm-mt-20">
                     <?php if ($show_save_button && is_array($save_job_status) && isset($save_job_status['post_id'])) : ?>
                         <?php jobus_render_post_save_button([

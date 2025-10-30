@@ -99,7 +99,7 @@
       font-weight: 500;
       color: $color-one;
       margin: 15px 0 45px;
-
+      border: none;
       &:after {
         vertical-align: 3px;
       }
@@ -204,6 +204,10 @@
 
   a {
     text-decoration: none;
+    color:#000;
+    &:hover {
+      color:#000;
+    }
   }
   .border-15 {
     border-radius: 15px;
@@ -277,7 +281,9 @@
       left: 0;
     }
   }
-
+div.dash-btn-one {
+    line-height: 15px !important;
+}
   .dash-btn-two {
     font-weight: 500;
     color: #fff;

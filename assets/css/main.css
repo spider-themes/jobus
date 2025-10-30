@@ -3758,6 +3758,9 @@ img {
   border-color: var(--jbs-brand_color_4);
   color: #fff;
 }
+.candidate-profile-card .profile_btn-mt {
+  margin-top: 5px;
+}
 .candidate-profile-card.list-layout {
   padding: 27px 30px 38px;
 }
@@ -4555,6 +4558,8 @@ img {
 }
 .company-list-layout .company-logo {
   display: block;
+  width: 70px;
+  height: 70px;
   overflow: hidden;
 }
 .company-list-layout .company-data {
@@ -5182,9 +5187,11 @@ img {
 .user-data-form .jbs-nav {
   background: #F0F5F3;
   border-radius: 40px;
+  padding-left: 0 !important;
 }
 .user-data-form .jbs-nav .jbs-nav-item {
   width: 50%;
+  list-style: none;
 }
 .user-data-form .jbs-nav .jbs-nav-item .jbs-nav-link {
   display: block;
@@ -5649,17 +5656,23 @@ button.jbs_filter-transparent {
   background-color: transparent;
 }
 
-.jbs-filter-btn {
+button.jbs-filter-btn {
   font-size: 15px;
   color: var(--jbs-brand_color_2);
   border: 2px solid var(--jbs-brand_color_2);
   border-radius: 6px;
 }
-.jbs-filter-btn.jbs-open-modal:hover {
+button.jbs-filter-btn.jbs-open-modal:hover, button.jbs-filter-btn.jbs-open-modal:focus {
   background: var(--jbs-brand_color_1);
   border-color: var(--jbs-brand_color_1);
   color: #fff;
   text-decoration: none;
+}
+
+button.jbs_filter_btn-padding {
+  padding: 0;
+  width: 86px;
+  height: 32px;
 }
 
 .upper-filter {
@@ -6504,6 +6517,17 @@ input[type=file]::-webkit-file-upload-button {
   text-decoration: none !important;
 }
 
+.company-list-layout .open-job-btn {
+  width: 120px;
+  line-height: 31px;
+  font-size: 15px;
+  color: #00bf58;
+  border: 1px solid #00bf58;
+  background: #eaf9e9;
+  border-radius: 30px;
+  padding: 0;
+}
+
 .total-job {
   display: flex;
   justify-content: space-between;
@@ -6642,6 +6666,18 @@ input[type=file]::-webkit-file-upload-button {
 .jobus_job_details_2 .details-post-data .btn-one:hover {
   background: var(--jbs-brand_color_4);
 }
+.jobus_job_details_2 .details-post-data .jbs-btn-one {
+  line-height: 50px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--jbs-brand_color_1);
+  padding: 0 26px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.jobus_job_details_2 .details-post-data .jbs-btn-one:hover {
+  background: var(--jbs-brand_color_4);
+}
 
 .category-section-two .card-wrapper {
   padding-top: 80px;
@@ -6777,12 +6813,13 @@ input[type=file]::-webkit-file-upload-button {
   text-transform: uppercase;
   letter-spacing: 0.88px;
   color: #fff;
-  background: #000;
+  background: #31795a;
   width: 100%;
+  border: none;
 }
 
 .btn-eleven:hover, .btn-eleven:focus {
-  background: var(--jbs-brand_color_1);
+  background: #00bf58;
 }
 
 .jbs-btn-success {
@@ -7144,6 +7181,29 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100% !important;
 }
 
+.wp-theme-hello-elementor .jobus-dashboard-template button, .wp-theme-hello-biz.jobus-frontend .jobus-dashboard-template button {
+  border: none;
+}
+.wp-theme-hello-elementor .jbs-accordion-button, .wp-theme-hello-biz.jobus-frontend .jbs-accordion-button {
+  width: 100%;
+  display: flex;
+}
+.wp-theme-hello-elementor table tbody tr > td, .wp-theme-hello-biz.jobus-frontend table tbody tr > td {
+  background: none;
+}
+.wp-theme-hello-elementor button.action-btn, .wp-theme-hello-biz.jobus-frontend button.action-btn {
+  background: none;
+}
+.wp-theme-hello-elementor table thead:first-child tr:first-child th, .wp-theme-hello-biz.jobus-frontend table thead:first-child tr:first-child th {
+  border: none;
+}
+.wp-theme-hello-elementor table.jbs-table.job-alert-table th, .wp-theme-hello-biz.jobus-frontend table.jbs-table.job-alert-table th {
+  text-align: left;
+}
+.wp-theme-hello-elementor .dashboard-body .job-alert-table th:last-child, .wp-theme-hello-biz.jobus-frontend .dashboard-body .job-alert-table th:last-child {
+  text-align: right !important;
+}
+
 .post-type-archive-jobus_job .ast-container,
 .post-type-archive-jobus_candidate .ast-container,
 .post-type-archive-jobus_company .ast-container,
@@ -7250,6 +7310,18 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100%;
 }
 
+.jobus-frontend img {
+  max-width: 100%;
+  display: block;
+}
+
+.fusion-row .page-numbers.current {
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  margin: 0 !important;
+}
+
 @media (max-width: 1199px) {
   .filter-area-tab .main-title {
     font-size: 20px;
@@ -7261,6 +7333,17 @@ input[type=file]::-webkit-file-upload-button {
   .feedback-section-five .slider-arrows,
   .related-job-section .slick-arrow-one {
     position: static;
+  }
+}
+@media (max-width: 767px) {
+  .dashboard-navbar {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  .dashboard-body {
+    margin-left: 0 !important;
   }
 }
 
