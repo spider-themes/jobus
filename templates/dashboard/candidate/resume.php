@@ -110,9 +110,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
         </div>
 
-        <div class="jbs-bg-white card-box border-20 jbs-mt40" id="candidate-resume-video">
+        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
-            <div class="intro-video-form position-relative jbs-mt20 w-100">
+            <div class="intro-video-form position-relative jbs-mt-20 w-100">
                 <div class="dash-input-wrapper jbs-mb-15">
                     <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                     <input type="text" id="video-title" name="video_title" value="<?php echo esc_attr( $video_data['video_title'] ); ?>"

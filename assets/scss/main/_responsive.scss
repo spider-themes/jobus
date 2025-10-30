@@ -13,3 +13,14 @@
         position: static;
     }
 }
+@media (max-width: 767px) {
+    .dashboard-navbar {
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    .dashboard-body{
+        margin-left: 0 !important;
+    }
+}

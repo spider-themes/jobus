@@ -57,12 +57,13 @@
     text-transform: uppercase;
     letter-spacing: .88px;
     color: #fff;
-    background: #000;
-    width: 100%
+    background: #31795a;
+    width: 100%;
+    border: none;
 }
 
 .btn-eleven:hover,.btn-eleven:focus {
-    background: var(--jbs-brand_color_1);
+    background: #00bf58;
 }
 
 

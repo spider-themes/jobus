@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jobus-job-popup job-listing-three jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
+<section class="jbs jobus-job-popup job-listing-three jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-sm-center jbs-mb-30">
                         <div class="jbs-d-sm-flex jbs-align-items-center">
 
-                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal jbs_filter-transparent" data-target="#filterPopUp">
+                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal jbs_filter-transparent jbs_filter_btn-padding jbs-pointer" data-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
 								<?php esc_html_e( 'Filter', 'jobus' ); ?>
                             </button>
