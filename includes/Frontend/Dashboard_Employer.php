@@ -154,7 +154,7 @@ class Dashboard_Employer {
 	 *
 	 * @return string Employer dashboard HTML.
 	 */
-	private function load_dashboard( WP_User $user ): string {
+	protected function load_dashboard( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/dashboard', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
@@ -168,7 +168,7 @@ class Dashboard_Employer {
 	 *
 	 * @return string Change password section HTML.
 	 */
-	private function load_change_password( WP_User $user ): string {
+	protected function load_change_password( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/global/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
@@ -181,11 +181,22 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the saved candidates section.
 	 */
-	private function load_saved_candidate( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/saved-candidate', [
-			'user_id'  => $user->ID,
-			'username' => $user->user_login,
-		] );
+	protected function load_saved_candidate( WP_User $user ): string {
+		if ( jobus_is_premium() ) {
+			return Template_Loader::get_template_part_pro( 'dashboard/employer/saved-candidate', [
+				'user_id'  => $user->ID,
+				'username' => $user->user_login,
+			] );
+		} else {
+			$image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png';
+			ob_start();
+			?>
+			<div class="jbs-dashboard-pro">
+				<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
+			</div>
+			<?php
+			return ob_get_clean();
+		}
 	}
 
 	/**
@@ -194,7 +205,7 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the jobs section.
 	 */
-	private function load_jobs( WP_User $user ): string {
+	protected function load_jobs( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/jobs', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
@@ -207,7 +218,7 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the submit job section.
 	 */
-	private function load_submit_job( WP_User $user ): string {
+	protected function load_submit_job( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/submit-job', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
@@ -221,7 +232,7 @@ class Dashboard_Employer {
 	 *
 	 * @return string Profile section HTML.
 	 */
-	private function load_profile( WP_User $user ): string {
+	protected function load_profile( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/profile', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
@@ -238,7 +249,7 @@ class Dashboard_Employer {
 	 *
 	 * @return string Rendered sidebar menu HTML.
 	 */
-	private function load_sidebar_menu( string $active, array $nav_items = [] ): string {
+	protected function load_sidebar_menu( string $active, array $nav_items = [] ): string {
 		return Template_Loader::get_template_part( 'dashboard/global/sidebar-menu', [
 			'active_endpoint' => $active,
 			'menu_items'      => $nav_items ?: self::get_nav_items(),

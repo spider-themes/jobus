@@ -146,6 +146,37 @@ class Template_Loader {
 		return ob_get_clean();
 	}
 
+
+	/**
+	 * Load template content from jobus-pro directory with optional variables (premium only)
+	 *
+	 * @param string $name
+	 * @param array  $args
+	 * @return string
+	 */
+	public static function get_template_part_pro( string $name, array $args = [] ): string {
+		if ( ! jobus_is_premium() ) {
+			return '';
+		}
+		// Define pro plugin path
+		if ( ! defined( 'JOBUS_PRO_PATH' ) ) {
+			$pro_path = WP_PLUGIN_DIR . '/jobus-pro';
+			if ( is_dir( $pro_path ) ) {
+				define( 'JOBUS_PRO_PATH', $pro_path );
+			}
+		}
+		$template = defined('JOBUS_PRO_PATH') ? JOBUS_PRO_PATH . "/templates/{$name}.php" : '';
+		if ( $template && file_exists( $template ) ) {
+			if ( ! empty( $args ) && is_array( $args ) ) {
+				extract( $args, EXTR_SKIP );
+			}
+			ob_start();
+			include $template;
+			return ob_get_clean();
+		}
+		return '';
+	}
+
 	/**
 	 * Locate template file
 	 *
@@ -154,7 +185,7 @@ class Template_Loader {
 	 *
 	 * @return string|false
 	 */
-	public static function locate( string $name, string $plugin_dir = JOBUS_PATH ) {
+	public static function locate( string $name, string $plugin_dir = JOBUS_PATH ): bool|string {
 		$theme_file = locate_template( [ "jobus/{$name}.php" ] );
 		if ( $theme_file ) {
 			return $theme_file;
