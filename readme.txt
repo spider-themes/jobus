@@ -1,7 +1,7 @@
 === Jobus – Complete Job Board & Hiring Platform that match your brand ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -117,6 +117,28 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 3. Job listing Page with Filterable Sidebar
 
 == Changelog ==
+
+= 1.1.0 (31 Oct 2025) =
+New: New Color Settings added in the General Settings panel
+New: Body class support for better theme styling control
+Fixed: Company dashboard and employment dashboard layout issues resolved
+Fixed: Job page CSS and single page layout issues fixed for consistent styling
+Fixed: PHP errors in templates resolved and templating system improved
+Fixed: Theme compatibility issues fixed across multiple themes (Astra, Docy, Twenty Twenty-Five)
+Fixed: Archive layout issue fixed for Astra theme
+Fixed: Dashboard employer lock issue fixed for candidate save functionality
+Improved: Job, Candidate & Company Single Pages redesigned for better readability and structure
+Improved: Templates refined and redundant fonts removed for cleaner performance
+Improved: Shortcode functionality enhanced with layout attributes and conditional loading for header/footer in archive templates
+Improved: Elementor widget lock and related UI refined for better editing experience
+Improved: Appearance and General Settings organization improved for easier configuration
+Improved: Subscribe field color adjusted for better visibility in dark mode
+Improved: Setup and color schema refined for a consistent user experience
+Compatibility: Astra theme compatibility improved for single and archive layouts
+Compatibility: GeneratePress theme compatibility added and tested
+Compatibility: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
+Compatibility: Docy theme compatibility refined for smoother integration
+Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
 
 = 1.0.0 (22 October 2025) =
  * Init: Initial release
