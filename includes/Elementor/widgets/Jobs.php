@@ -381,7 +381,7 @@ class Jobs extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Button Typography',
-				'name'     => 'job_date_typo',
+				'name'     => 'job_button_typo',
 				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
 			]
 		);

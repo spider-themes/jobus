@@ -199,7 +199,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                             <div class="job-item-list jbs-d-flex jbs-align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
                                 <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                                 <div class="job-title">
-                                    <h6 class="mb-5">
+                                    <h6>
                                         <a href="<?php echo esc_url( get_the_permalink( $job_id ) ); ?>">
                                             <?php echo esc_html( get_the_title( $job_id ) ); ?>
                                         </a>

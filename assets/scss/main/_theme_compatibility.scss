@@ -205,7 +205,17 @@
     padding: 0 !important;
 }
 
+.wp-theme-kadence.jobus-frontend{
+    ul{
+        padding-left: 0;
+    }
+}
+.candidate-profile-card .candidate-skills li{
+    white-space: nowrap;
+}
+
 // Docy Theme Compatibility
+
 .wp-theme-docy {
     .container:has(.jbs-container) {
         max-width: 100% !important;
@@ -216,13 +226,13 @@
         ul {
             margin-left: 0 !important;
 
-            &.pagination {
+            &.jbs-pagination {
                 padding-left: 0 !important;
             }
         }
     }
 
-    .pagination {
+    .jbs-pagination {
         .page-numbers {
             border-left: none;
             border-top: none;
@@ -292,11 +302,32 @@
 }
 
 // Avada Theme Compatibility
-.fusion-row {
+.wp-theme-Avada.jobus-frontend {
+    .clearfix {
+        padding: 0 !important;
+        .fusion-row:has(.jbs-container) {
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+    }
+   .fusion-row {
     .page-numbers.current {
         border-left: none;
         border-top: none;
         border-bottom: none;
         margin: 0 !important;
+    }
+}
+}
+
+
+
+// OceanWP Theme Compatibility
+
+.wp-theme-oceanwp.jobus-frontend{
+    a{
+        &:focus {
+            outline: none !important;
+        }
     }
 }

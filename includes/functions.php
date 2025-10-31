@@ -392,7 +392,7 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
      */
     function jobus_pagination( WP_Query $query, string $prev = '', string $next = '' ): void {
 
-        echo '<ul class="pagination">';
+        echo '<ul class="jbs-pagination">';
 
         $big              = 999999999; // need an unlikely integer
         $pagination_links = paginate_links( array(
