@@ -4606,6 +4606,9 @@ img {
   margin-left: 30px;
 }
 
+.company-details {
+  padding-top: 180px;
+}
 .company-details .details-post-data {
   position: relative;
 }
@@ -5682,7 +5685,7 @@ button.jbs_filter_btn-padding {
   color: rgba(0, 0, 0, 0.4);
 }
 .upper-filter .short-filter .nice-select {
-  min-width: 154px;
+  min-width: 165px;
   height: 32px;
   line-height: 30px;
   font-size: 13px;
