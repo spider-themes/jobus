@@ -6886,55 +6886,6 @@ input[type=file]::-webkit-file-upload-button {
   text-decoration: none !important;
 }
 
-.jbs-banner {
-  background: var(--jbs-brand_color_2);
-  padding: 200px 0 90px;
-  z-index: 1;
-  position: relative;
-}
-.jbs-banner .blog-heading {
-  font-size: 64px;
-  line-height: 1.062em;
-  margin: 0;
-  word-break: break-all;
-}
-.jbs-banner h1 {
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.jbs-banner .candidate-profile-card .candidate-post {
-  color: rgba(255, 255, 255, 0.4);
-}
-.jbs-banner .candidate-profile-card .candidate-info span {
-  color: rgba(255, 255, 255, 0.6);
-}
-.jbs-banner .candidate-profile-card .candidate-info div {
-  color: white;
-}
-.jbs-banner .candidate-profile-card .cv-download-btn {
-  line-height: 38px;
-  border: 1px solid #fff;
-  border-radius: 40px;
-  color: #fff;
-  font-size: 15px;
-  letter-spacing: -0.5px;
-  padding: 0 20px;
-}
-.jbs-banner .candidate-profile-card .cv-download-btn:hover {
-  background: #375749;
-  border-color: #375749;
-}
-.jbs-banner .candidate-profile-card .candidate-skills li {
-  background: #375749;
-  color: rgba(255, 255, 255, 0.55);
-}
-.jbs-banner .candidate-profile-card .candidate-skills li.more {
-  background: var(--jbs-brand_color_3) !important;
-  color: #000 !important;
-}
-
 .feedback-block-four {
   padding: 25px 40px;
   border: 1px solid #E1E1E1;
