@@ -12,10 +12,10 @@ Table of Content:
 01/ Register Form
 =====================================================*/
 .editor-styles-wrapper {
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
 }
 
-@import "block-editor/variables";
+@import "main/variables";
 @import "block-editor/register-from";
 
 // Pro badge for block controls

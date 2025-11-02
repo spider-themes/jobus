@@ -2225,7 +2225,7 @@
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #EFF6F3;
+  background-color: var(--jbs_box_bg_color_opt);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;

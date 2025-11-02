@@ -36,7 +36,7 @@
   &.modal-content {
     .tags.radio-filter {
       label {
-        background: #EFF6F3;
+        background: var(--jbs_box_bg_color_opt);
       }
     }
   }
@@ -55,7 +55,7 @@
   }
 
   .filter-header {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
     padding-top: 25px;
     padding-bottom: 25px;
     outline: none;
@@ -96,7 +96,7 @@
   }
 
   .light-bg {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
     // subtle shadow
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
@@ -841,7 +841,7 @@ button.jbs_filter_btn-padding{
 
 // Job Listing Two
 .job-listing-two {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 }
 
 .job-list-two {
@@ -986,7 +986,7 @@ button.jbs_filter_btn-padding{
 
 // Job Listing Three
 .job-listing-three.bg-color {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 }
 
 .job-listing-three {
@@ -1143,7 +1143,7 @@ button.jbs_filter_btn-padding{
 .job-company-info {
   border-radius: 20px;
   padding: 50px 20px 30px;
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 
   .logo {
     height: auto;
@@ -1233,7 +1233,7 @@ button.jbs_filter_btn-padding{
   padding-top: 80px;
 
   &.style-two {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
   }
 
   .post-date {
@@ -1265,7 +1265,7 @@ button.jbs_filter_btn-padding{
       line-height: 1;
       border-radius: 5px;
       padding: 8px 15px;
-      background: rgba(49, 121, 90, 0.12);
+      background: var(--jbs_box_bg_color_opt);
       border: none;
       margin: 0;
       display: flex;
@@ -1387,7 +1387,7 @@ button.jbs_filter_btn-padding{
 
 // Related Job Slider
 .related-job-section {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 
   .slick-arrow-one {
     position: absolute;
@@ -1403,7 +1403,7 @@ button.jbs_filter_btn-padding{
     max-width: 700px;
 
     .jbs-modal-content {
-      background: #EFF6F3;
+      background: var(--jbs_box_bg_color_opt);
       margin: 0;
       border: none;
       border-radius: 20px;

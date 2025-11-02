@@ -1,5 +1,5 @@
 .company-profiles.bg-color {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 }
 
 // Company Grid Layout
@@ -263,5 +263,5 @@
 
 // Company Open Position
 .company-open-position {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 }

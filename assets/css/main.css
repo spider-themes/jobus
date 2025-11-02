@@ -1,5 +1,6 @@
 :root {
   --jbs-heading_color: var(--jbs_heading_color_opt, #254035);
+  --jbs-box_bg_color: var(--jbs_box_bg_color_opt, #EFF6F3);
   --jbs-brand_color_1: var(--jbs_brand_color_1_opt, #31795A);
   --jbs-brand_color_2: var(--jbs_brand_color_2_opt, #244034);
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
@@ -1578,7 +1579,7 @@
 }
 
 .category-section-two.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .category-section-two:before {
@@ -1588,7 +1589,7 @@
   bottom: 0;
   height: 74%;
   width: 61%;
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
   z-index: -1;
 }
 
@@ -1763,7 +1764,7 @@
 }
 
 .text-feature-three .img-box {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
   height: 650px;
   padding: 20px;
 }
@@ -1955,7 +1956,7 @@
 }
 
 .faq-section .bg-wrapper {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
   border-radius: 30px;
   padding: 3px 60px 9px;
 }
@@ -1975,7 +1976,7 @@
 .address-block-one .icon {
   width: 80px;
   height: 80px;
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
 }
 .address-block-one .title {
   font-size: 24px;
@@ -3286,7 +3287,7 @@ img {
   padding-top: 180px;
 }
 .candidates-profile.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .candidate-profile-card {
@@ -3495,7 +3496,7 @@ img {
   line-height: 45px;
   padding: 0 30px;
   border-radius: 30px;
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
 }
 .candidates-profile-details .skill-tags li.more {
   width: 45px;
@@ -3534,7 +3535,7 @@ img {
   padding: 0 20px 25px;
 }
 .candidate-profile-sidebar .bg-wrapper.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 .candidate-profile-sidebar .candidate-bio .candidate-avatar {
   width: 80px;
@@ -3635,7 +3636,7 @@ img {
 }
 
 .candidates-profile-2 {
-  background: #eff6f3;
+  background: var(--jbs_box_bg_color_opt);
 }
 
 .candidate-profile-card {
@@ -3867,7 +3868,7 @@ img {
   line-height: 45px;
   padding: 0 30px;
   border-radius: 30px;
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
 }
 .candidates-profile-details-2 .skill-tags li.more {
   width: 45px;
@@ -4319,7 +4320,7 @@ img {
 }
 
 .pricing-section.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .pricing-card-one {
@@ -4441,7 +4442,7 @@ img {
 }
 
 .company-profiles.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .company-grid-layout {
@@ -4672,7 +4673,7 @@ img {
 }
 
 .company-open-position {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .title-two h2 {
@@ -5026,7 +5027,7 @@ img {
 }
 
 .registration-section {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .modal .modal-dialog {
@@ -5238,7 +5239,7 @@ img {
   position: relative;
 }
 .filter-area-tab.modal-content .tags.radio-filter label {
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -5250,7 +5251,7 @@ img {
   box-shadow: none;
 }
 .filter-area-tab .filter-header {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
   padding-top: 25px;
   padding-bottom: 25px;
   outline: none;
@@ -5288,7 +5289,7 @@ img {
   transform: rotate(180deg);
 }
 .filter-area-tab .light-bg {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 .filter-area-tab .main-title {
@@ -5946,7 +5947,7 @@ button.jbs_filter_btn-padding {
 }
 
 .job-listing-two {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 .job-list-two {
@@ -6074,7 +6075,7 @@ button.jbs_filter_btn-padding {
 }
 
 .job-listing-three.bg-color {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 
 @media (max-width: 767px) {
@@ -6207,7 +6208,7 @@ button.jbs_filter_btn-padding {
 .job-company-info {
   border-radius: 20px;
   padding: 50px 20px 30px;
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 .job-company-info .logo {
   height: auto;
@@ -6289,7 +6290,7 @@ button.jbs_filter_btn-padding {
   padding-top: 80px;
 }
 .job-details.style-two {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 .job-details .post-date {
   color: rgba(0, 0, 0, 0.5);
@@ -6316,7 +6317,7 @@ button.jbs_filter_btn-padding {
   line-height: 1;
   border-radius: 5px;
   padding: 8px 15px;
-  background: rgba(49, 121, 90, 0.12);
+  background: var(--jbs_box_bg_color_opt);
   border: none;
   margin: 0;
   display: flex;
@@ -6423,7 +6424,7 @@ button.jbs_filter_btn-padding {
 }
 
 .related-job-section {
-  background: #EFF6F3;
+  background: var(--jbs-box_bg_color);
 }
 .related-job-section .slick-arrow-one {
   position: absolute;
@@ -6438,7 +6439,7 @@ button.jbs_filter_btn-padding {
   max-width: 700px;
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content {
-  background: #EFF6F3;
+  background: var(--jbs_box_bg_color_opt);
   margin: 0;
   border: none;
   border-radius: 20px;

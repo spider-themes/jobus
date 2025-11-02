@@ -1,5 +1,6 @@
 :root {
   --jbs-heading_color: var(--jbs_heading_color_opt, #254035);
+  --jbs-box_bg_color: var(--jbs_box_bg_color_opt, #EFF6F3);
   --jbs-brand_color_1: var(--jbs_brand_color_1_opt, #31795A);
   --jbs-brand_color_2: var(--jbs_brand_color_2_opt, #244034);
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
@@ -10,4 +11,3 @@
 // Color Settings
 $text-color: rgba(0,0,0,0.7);
 $text-dark: #000;
-$light-bg: #EFF6F3;

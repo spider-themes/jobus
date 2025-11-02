@@ -14,7 +14,7 @@
 }
 // Categpry Section Two
 .category-section-two.bg-color {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
 }
 .category-section-two:before {
     content: '';
@@ -23,7 +23,7 @@
     bottom: 0;
     height: 74%;
     width: 61%;
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
     z-index: -1;
 }
 .category-section-two .shape_01 {
@@ -187,7 +187,7 @@
 }
 // Text Feature Three
 .text-feature-three .img-box {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
     height: 650px;
     padding: 20px;
     .screen_01 {
@@ -374,7 +374,7 @@
 }
 // FAQ Section
 .faq-section .bg-wrapper {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
     border-radius: 30px;
     padding: 3px 60px 9px;
 }
@@ -394,7 +394,7 @@
     .icon {
         width: 80px;
         height: 80px;
-        background: #EFF6F3;
+        background: var(--jbs_box_bg_color_opt);
     }
     .title {
         font-size: 24px;

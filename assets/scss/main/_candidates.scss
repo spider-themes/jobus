@@ -5,7 +5,7 @@ img {
 .candidates-profile {
   padding-top: 180px;
   &.bg-color {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
   }
 }
 
@@ -246,7 +246,7 @@ img {
       line-height: 45px;
       padding: 0 30px;
       border-radius: 30px;
-      background: #EFF6F3;
+      background: var(--jbs_box_bg_color_opt);
 
       &.more {
         width: 45px;
@@ -299,7 +299,7 @@ img {
     padding: 0 20px 25px;
 
     &.bg-color {
-      background: $light-bg;
+      background: var(--jbs-box_bg_color);
     }
   }
 
@@ -424,7 +424,7 @@ img {
 }
 
 .candidates-profile-2 {
-  background: #eff6f3;
+  background: var(--jbs_box_bg_color_opt);
 }
 
 .candidate-profile-card {
@@ -688,7 +688,7 @@ img {
       line-height: 45px;
       padding: 0 30px;
       border-radius: 30px;
-      background: #EFF6F3;
+      background: var(--jbs_box_bg_color_opt);
 
       &.more {
         width: 45px;

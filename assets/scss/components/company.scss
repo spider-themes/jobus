@@ -1,7 +1,7 @@
 // Company component styles moved from main/_company.scss
 // ...existing code from _company.scss...
 .company-profiles.bg-color {
-  background: $light-bg;
+  background: var(--jbs-box_bg_color);
 }
 
 .company-grid-layout {

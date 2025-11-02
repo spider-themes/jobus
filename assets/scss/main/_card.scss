@@ -292,7 +292,7 @@
 }
 // Pricing Card
 .pricing-section.bg-color {
-    background: $light-bg;
+    background: var(--jbs-box_bg_color);
 }
 .pricing-card-one {
     position: relative;

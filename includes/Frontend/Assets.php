@@ -35,6 +35,9 @@ class Assets {
 			wp_enqueue_style( 'jobus-main-rtl', esc_url( JOBUS_CSS . '/main-rtl.css' ), [], JOBUS_VERSION );
 		}
 
+		// Add color scheme CSS variables
+		self::enqueue_color_scheme_css();
+
 		// Register Scripts
 		wp_register_script( 'isotope', esc_url( JOBUS_VEND . '/isotope/isotope.pkgd.min.js' ), [ 'jquery' ], '3.0.6', [ 'strategy' => 'defer' ] );
 		wp_register_script( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.js' ), [ 'jquery' ], '2.11.4', [ 'strategy' => 'defer' ] );
@@ -123,5 +126,66 @@ class Assets {
 			]);
 
 		}
+	}
+
+	/**
+	 * Enqueue color scheme CSS variables based on selected scheme
+	 */
+	private static function enqueue_color_scheme_css(): void {
+		// Get the selected color scheme
+		$color_scheme = jobus_opt( 'color_scheme', 'scheme_default' );
+		
+		// Define color mappings for each scheme
+		$scheme_colors = [
+			'scheme_default' => [
+				'brand_color_1' => jobus_opt( 'brand_color_1', '#31795A' ),
+				'brand_color_2' => jobus_opt( 'brand_color_2', '#244034' ),
+				'brand_color_3' => jobus_opt( 'brand_color_3', '#D2F34C' ),
+				'brand_color_4' => jobus_opt( 'brand_color_4', '#00BF58' ),
+				'brand_color_5' => jobus_opt( 'brand_color_5', '#005025' ),
+				'box_bg_color'  => jobus_opt( 'box_bg_color', '#EFF6F3' ),
+			],
+			'scheme_lilac' => [
+				'brand_color_1' => jobus_opt( 'brand_color_1_lilac', '#7B1FA2' ),
+				'brand_color_2' => jobus_opt( 'brand_color_2_lilac', '#6A1B9A' ),
+				'brand_color_3' => jobus_opt( 'brand_color_3_lilac', '#E1BEE7' ),
+				'brand_color_4' => jobus_opt( 'brand_color_4_lilac', '#BA68C8' ),
+				'brand_color_5' => jobus_opt( 'brand_color_5_lilac', '#9C27B0' ),
+				'box_bg_color'  => jobus_opt( 'box_bg_color_lilac', '#F3E5F5' ),
+			],
+			'scheme_midnight' => [
+				'brand_color_1' => jobus_opt( 'brand_color_1_midnight', '#1976D2' ),
+				'brand_color_2' => jobus_opt( 'brand_color_2_midnight', '#1565C0' ),
+				'brand_color_3' => jobus_opt( 'brand_color_3_midnight', '#BBDEFB' ),
+				'brand_color_4' => jobus_opt( 'brand_color_4_midnight', '#42A5F5' ),
+				'brand_color_5' => jobus_opt( 'brand_color_5_midnight', '#0D47A1' ),
+				'box_bg_color'  => jobus_opt( 'box_bg_color_midnight', '#E3F2FD' ),
+			],
+			'scheme_sunset' => [
+				'brand_color_1' => jobus_opt( 'brand_color_1_sunset', '#F4511E' ),
+				'brand_color_2' => jobus_opt( 'brand_color_2_sunset', '#D84315' ),
+				'brand_color_3' => jobus_opt( 'brand_color_3_sunset', '#FFCCBC' ),
+				'brand_color_4' => jobus_opt( 'brand_color_4_sunset', '#FF7043' ),
+				'brand_color_5' => jobus_opt( 'brand_color_5_sunset', '#BF360C' ),
+				'box_bg_color'  => jobus_opt( 'box_bg_color_sunset', '#FBE9E7' ),
+			],
+		];
+		
+		// Get colors for the selected scheme
+		$colors = $scheme_colors[ $color_scheme ] ?? $scheme_colors['scheme_default'];
+		
+		// Generate CSS
+		$custom_css = ":root {
+			--jbs_heading_color_opt: {$colors['brand_color_2']};
+			--jbs_brand_color_1_opt: {$colors['brand_color_1']};
+			--jbs_brand_color_2_opt: {$colors['brand_color_2']};
+			--jbs_brand_color_3_opt: {$colors['brand_color_3']};
+			--jbs_brand_color_4_opt: {$colors['brand_color_4']};
+			--jbs_brand_color_5_opt: {$colors['brand_color_5']};
+			--jbs_box_bg_color_opt: {$colors['box_bg_color']};
+		}";
+		
+		// Add inline CSS to the main stylesheet
+		wp_add_inline_style( 'jobus-main', $custom_css );
 	}
 }
