@@ -8,6 +8,21 @@
   --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
 }
 
+// SCSS Variables (for backward compatibility and SCSS compilation)
+$brand-color-1: var(--jbs-brand_color_1);
+$brand-color-2: var(--jbs-brand_color_2);
+$brand-color-3: var(--jbs-brand_color_3);
+$brand-color-4: var(--jbs-brand_color_4);
+$brand-color-5: var(--jbs-brand_color_5);
+
+// Dashboard Color Variables (mapping to brand colors)
+$color-one: $brand-color-1;
+$color-two: $brand-color-2;
+$color-three: $brand-color-3;
+$color-four: $brand-color-4;
+$color-five: $brand-color-5;
+
 // Color Settings
 $text-color: rgba(0,0,0,0.7);
 $text-dark: #000;
+

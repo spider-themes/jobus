@@ -39,9 +39,10 @@ function jobus_rtl(): string {
 // A Custom function for [ SETTINGS ]
 if ( ! function_exists( 'jobus_opt' ) ) {
     function jobus_opt( $option = '', $default = null ) {
-        $options = get_option( 'jobus_opt' ); // Attention: Set your unique id of the framework
+        $options = get_option( 'jobus_opt' );
+        $value = $options[ $option ] ?? null;
 
-        return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+        return $value ?: $default;
     }
 }
 

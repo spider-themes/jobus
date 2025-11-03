@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta                 = get_post_meta( get_the_ID(), 'jobus_meta_company_options', true );
 			$post_favourite       = $meta['post_favorite'] ?? '';
 			$is_favourite         = ( $post_favourite == '1' ) ? ' favourite' : '';
-			$is_popup_border_none = $archive_layout == '2' ? ' jbs-border-0' : '';
+			$is_popup_border_none = $archive_layout == '2' ? ' ' : '';
 			$column               = sanitize_html_class( jobus_opt( 'company_archive_grid_column' ) );
 			?>
             <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">

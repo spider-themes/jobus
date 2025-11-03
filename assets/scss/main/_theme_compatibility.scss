@@ -305,7 +305,7 @@
 .wp-theme-Avada.jobus-frontend {
     .clearfix {
         padding: 0 !important;
-        .fusion-row:has(.jbs-container) {
+        .fusion-row:has(.jbs-container,.elementor-widget-jobus_companies,.elementor-widget-jobus_job_tabs) {
             max-width: 100% !important;
             padding: 0 !important;
         }

@@ -68,7 +68,7 @@
         text-transform: capitalize;
         line-height: 45px;
         padding: 0 5px 0 20px;
-        color: $heading;
+        color: $brand-color-3;
         font-size: 16px;
         font-weight: 500;
         letter-spacing: -0.16px;
@@ -527,7 +527,7 @@ div.dash-btn-one {
     .icon {
       width: 65px;
       height: 65px;
-      background: $color-two;
+      background: $color-three;
     }
 
     .value {
@@ -643,7 +643,7 @@ div.dash-btn-one {
             font-size: 13px;
             padding: 5px 15px;
             margin: 4px 0;
-            color: rgba($color: $heading, $alpha: 0.55);
+            color: rgba($color: $brand-color-2, $alpha: 0.55);
             background: #fff;
           }
 
@@ -758,7 +758,7 @@ div.dash-btn-one {
       display: block;
       font-size: 15px;
       font-weight: 500;
-      color: $heading;
+      color: $brand-color-2;
       margin-bottom: 10px;
     }
 
@@ -1039,7 +1039,7 @@ div.dash-btn-one {
       margin: 0 5px;
       font-size: 13px;
       font-weight: 500;
-      color: $heading;
+      color: $brand-color-2;
 
       &.active {
         background: $color-two;
@@ -1343,7 +1343,7 @@ div.dash-btn-one {
       .message_filter button {
         font-size: 15px;
         font-weight: 500;
-        color: $heading;
+        color: $brand-color-2;
         line-height: 28px;
         border-radius: 30px;
         padding: 0 12px;
@@ -1470,7 +1470,7 @@ div.dash-btn-one {
         .sender-name {
           font-size: 20px;
           font-weight: 500;
-          color: $heading;
+          color: $brand-color-2;
           margin-bottom: -4px;
         }
 
@@ -1534,7 +1534,7 @@ div.dash-btn-one {
             .file-name {
               font-size: 15px;
               letter-spacing: -0.3px;
-              color: $heading;
+              color: $brand-color-2;
             }
 
             .file-size {
@@ -1554,19 +1554,19 @@ div.dash-btn-one {
 
   .membership-plan-wrapper {
     border-radius: 10px;
-    border: 1px solid $heading;
+    border: 1px solid $brand-color-2;
 
     .column {
       padding: 38px 40px;
 
       &.border-left {
-        border-left: 1px solid $heading;
+        border-left: 1px solid $brand-color-2;
       }
     }
 
     h4 {
       font-size: 20px;
-      color: $heading;
+      color: $brand-color-2;
     }
 
     p {
@@ -1626,7 +1626,7 @@ div.dash-btn-one {
       a {
         font-size: 15px;
         padding: 2px;
-        color: $heading;
+        color: $brand-color-2;
         margin-left: 8px;
 
         &[aria-expanded="true"] {
@@ -1638,7 +1638,7 @@ div.dash-btn-one {
     .input-group {
       padding: 10px 0;
       font-size: 14px;
-      color: $heading;
+      color: $brand-color-2;
 
       input {
         border: none;
@@ -1726,7 +1726,7 @@ div.dash-btn-one {
 
   h2 {
     font-size: 36px;
-    color: $heading;
+    color: $brand-color-2;
     margin: 20px 0;
   }
 
