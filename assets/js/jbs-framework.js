@@ -1,159 +1,339 @@
+/**
+ * JBS Framework - Core UI Components
+ * Collapse | Offcanvas | Modal | Tabs
+ * 
+ * @package jobus
+ * @version 1.1.0
+ */
+
 ;(function ($) {
     'use strict';
 
     $(document).ready(function () {
 
-        // -----------------------------
-        // Collapse Toggle Functionality
-        // -----------------------------
-        // Collapse toggle - supports both simple collapse and accordion behavior
+        const ANIM_DURATION = 300;
+
+        // ============================
+        // Helper Functions
+        // ============================
+        const Helpers = {
+            toggleCollapse($trigger, $target, open) {
+                const action = open ? 'slideDown' : 'slideUp';
+                $target[action](ANIM_DURATION, function () {
+                    $target.toggleClass('jbs-show show', open);
+                });
+                $trigger
+                    .toggleClass('jbs-collapsed collapsed', !open)
+                    .attr('aria-expanded', open);
+            },
+
+            closeOffcanvas() {
+                $(".jbs-offcanvas.show").removeClass("show");
+                $(".jbs-offcanvas-backdrop").removeClass("show");
+            },
+
+            closeModal($modal) {
+                $modal.fadeOut(ANIM_DURATION).removeClass("jbs-show");
+            },
+
+            switchTab($trigger, $targetPane, fade) {
+                const $nav = $trigger.closest(".jbs-nav");
+                const $tabContainer = $targetPane.closest(".jbs-tab-content");
+                const $allPanes = $tabContainer.find(".jbs-tab-pane");
+                const $activePanes = $allPanes.filter(".active");
+
+                $nav.find(".jbs-nav-link").removeClass("active");
+                $trigger.addClass("active");
+
+                if (fade && $targetPane.hasClass("jbs-fade")) {
+                    $activePanes.removeClass("jbs-show");
+                    setTimeout(function () {
+                        $activePanes.removeClass("active");
+                        $targetPane.addClass("active");
+                        setTimeout(() => $targetPane.addClass("jbs-show"), 10);
+                    }, ANIM_DURATION);
+                } else {
+                    $allPanes.removeClass("jbs-show active");
+                    $targetPane.addClass("jbs-show active");
+                }
+            }
+        };
+
+        // ============================
+        // Collapse / Accordion
+        // ============================
         $(document).on("click", '[data-jbs-toggle="collapse"]', function (e) {
             e.preventDefault();
 
-            var $this = $(this);
-            var targetSelector = $this.attr("href") || $this.data("jbs-target");
-            var $target = $(targetSelector);
-            var parentSelector = $this.data("jbs-parent");
-            var isExpanded = $this.attr("aria-expanded") === "true";
+            const $this = $(this);
+            const targetSelector = $this.attr("href") || $this.data("jbs-target");
+            const $target = $(targetSelector);
+            const parentSelector = $this.data("jbs-parent");
+            const isExpanded = $this.attr("aria-expanded") === "true";
 
-            // If there's a parent accordion, close other items (accordion behavior)
+            // Accordion behavior
             if (parentSelector) {
-                var $parent = $(parentSelector);
+                const $parent = $(parentSelector);
                 if ($parent.length) {
-                    // Find all collapse items within the parent
-                    $parent.find('.jbs-collapse.jbs-show, .jbs-accordion-collapse.jbs-show, .collapse.show, .accordion-collapse.show').each(function() {
-                        var $otherCollapse = $(this);
-                        if ($otherCollapse[0] !== $target[0]) {
-                            $otherCollapse.slideUp(300, function() {
-                                $otherCollapse.removeClass('jbs-show show');
-                            });
-                            
-                            // Update the other button states
-                            var otherId = '#' + $otherCollapse.attr('id');
-                            var $otherButton = $parent.find('[data-jbs-target="' + otherId + '"], [href="' + otherId + '"]');
-                            $otherButton.addClass('jbs-collapsed collapsed').attr('aria-expanded', 'false');
-                        }
-                    });
+                    $parent.find('.jbs-collapse.jbs-show, .jbs-accordion-collapse.jbs-show, .collapse.show, .accordion-collapse.show')
+                        .each(function () {
+                            const $other = $(this);
+                            if ($other[0] !== $target[0]) {
+                                $other.slideUp(ANIM_DURATION, function () {
+                                    $other.removeClass('jbs-show show');
+                                });
+                                const otherId = '#' + $other.attr('id');
+                                $parent.find(`[data-jbs-target="${otherId}"], [href="${otherId}"]`)
+                                    .addClass('jbs-collapsed collapsed')
+                                    .attr('aria-expanded', 'false');
+                            }
+                        });
                 }
             }
 
             // Toggle current item
-            if (isExpanded) {
-                // Close
-                $target.slideUp(300, function() {
-                    $target.removeClass('jbs-show show');
-                });
-                $this.addClass('jbs-collapsed collapsed').attr('aria-expanded', 'false');
-            } else {
-                // Open
-                $target.slideDown(300, function() {
-                    $target.addClass('jbs-show show');
-                });
-                $this.removeClass('jbs-collapsed collapsed').attr('aria-expanded', 'true');
-            }
+            Helpers.toggleCollapse($this, $target, !isExpanded);
         });
 
-        // Open offcanvas
+        // ============================
+        // Offcanvas
+        // ============================
         $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
             e.preventDefault();
-            var target = $(this).data("jbs-target");
+            const target = $(this).data("jbs-target");
             $(target).addClass("show");
             $(".jbs-offcanvas-backdrop").addClass("show");
         });
 
-        // Close button
-        $(document).on("click", ".jbs-offcanvas-close", function () {
-            $(this).closest(".jbs-offcanvas").removeClass("show");
-            $(".jbs-offcanvas-backdrop").removeClass("show");
+        $(document).on("click", ".jbs-offcanvas-close, .jbs-offcanvas-backdrop", function () {
+            Helpers.closeOffcanvas();
         });
 
-        // Click on backdrop
-        $(document).on("click", ".jbs-offcanvas-backdrop", function () {
-            $(".jbs-offcanvas.show").removeClass("show");
-            $(this).removeClass("show");
-        });
-
-        // modal close on esc key press
-        $(".jbs-open-modal").on("click", function (e) {
+        // ============================
+        // Modal
+        // ============================
+        $(document).on("click", ".jbs-open-modal", function (e) {
             e.preventDefault();
-            var target = $(this).data("target");
-            $(target).fadeIn(300).addClass("jbs-show");
+            const target = $(this).data("target");
+            $(target).fadeIn(ANIM_DURATION).addClass("jbs-show");
         });
 
-        // -----------------------------
-        // Close Modal
-        // -----------------------------
-        $(".jbs-btn-close").on("click", function () {
-            var modal = $(this).closest(".jbs-modal");
-            modal.fadeOut(300).removeClass("jbs-show"); // fadeOut + remove jbs-show
+        $(document).on("click", ".jbs-btn-close", function () {
+            Helpers.closeModal($(this).closest(".jbs-modal"));
         });
 
-        // -----------------------------
-        // Click Outside Modal Content
-        // -----------------------------
-        $(".jbs-modal").on("click", function (e) {
+        $(document).on("click", ".jbs-modal", function (e) {
             if ($(e.target).is(".jbs-modal")) {
-                // only if click on backdrop
-                $(this).fadeOut(300).removeClass("jbs-show");
+                Helpers.closeModal($(this));
             }
         });
 
-        $(".filter-header").on("click", function () {
+        // ============================
+        // Filter Header Toggle
+        // ============================
+        $(document).on("click", ".filter-header", function () {
             $(this).toggleClass("jbs-collapsed");
-            $(".jbs-collapse").slideToggle(300);
+            $(".jbs-collapse").slideToggle(ANIM_DURATION);
         });
 
-        // -----------------------------
-        // Tab Functionality with Smooth Animation
-        // -----------------------------
-        $('[data-jbs-toggle="tab"]').on("click", function (e) {
+        // ============================
+        // Tabs
+        // ============================
+        $(document).on("click", '[data-jbs-toggle="tab"]', function (e) {
             e.preventDefault();
 
-            var $this = $(this);
-            var target = $this.data("jbs-target");
-            var $targetPane = $(target);
+            const $this = $(this);
+            const target = $this.data("jbs-target");
+            const $targetPane = $(target);
 
-            // Return if already active
-            if ($this.hasClass("active")) {
-                return;
-            }
+            if ($this.hasClass("active")) return;
 
-            // Remove active from all tabs in same nav
-            $this.closest(".jbs-nav").find(".jbs-nav-link").removeClass("active");
-            
-            // Add active to clicked tab
-            $this.addClass("active");
-
-            // Find all tab panes in the same tab-content container
-            var $tabContentContainer = $targetPane.closest(".jbs-tab-content");
-            var $allPanes = $tabContentContainer.find(".jbs-tab-pane");
-            
-            // Fade out currently active pane
-            var $activePanes = $allPanes.filter(".active");
-            
-            if ($activePanes.length > 0 && $targetPane.hasClass("jbs-fade")) {
-                // Smooth fade transition
-                $activePanes.removeClass("jbs-show");
-                
-                // Wait for fade out animation to complete (300ms as per CSS)
-                setTimeout(function() {
-                    $activePanes.removeClass("active");
-                    
-                    // Fade in target pane
-                    $targetPane.addClass("active");
-                    
-                    // Small delay to ensure the DOM updates before adding jbs-show
-                    setTimeout(function() {
-                        $targetPane.addClass("jbs-show");
-                    }, 10);
-                }, 300);
-            } else {
-                // No fade effect, instant switch
-                $allPanes.removeClass("jbs-show active");
-                $targetPane.addClass("jbs-show active");
-            }
+            Helpers.switchTab($this, $targetPane, true);
         });
 
     });
+
+    // ============================
+    // Dropdown Component
+    // ============================
+    const JBSDropdown = {
+        /**
+         * Initialize dropdown functionality
+         */
+        init() {
+            this.bindEvents();
+            this.closeOnOutsideClick();
+        },
+
+        /**
+         * Helper: Get toggle and menu from any dropdown element
+         */
+        getDropdownElements($element) {
+            const $dropdownMenu = $element.hasClass('jbs-dropdown-menu')
+                ? $element
+                : $element.siblings('.jbs-dropdown-menu');
+            const $toggle = $dropdownMenu.siblings('[data-jbs-toggle="jbs-dropdown"]');
+            return { $toggle, $dropdownMenu };
+        },
+
+        /**
+         * Helper: Set aria-expanded attribute
+         */
+        setAriaExpanded($toggle, state) {
+            $toggle.attr('aria-expanded', state ? 'true' : 'false');
+        },
+
+        /**
+         * Helper: Handle horizontal & vertical overflow
+         */
+        handleOverflow($dropdownMenu) {
+            const menuRect = $dropdownMenu[0].getBoundingClientRect();
+            const viewportWidth = $(window).width();
+            const viewportHeight = $(window).height();
+
+            // Horizontal overflow
+            if (menuRect.right > viewportWidth) {
+                $dropdownMenu.addClass('jbs-dropdown-menu-end');
+            }
+
+            // Vertical overflow
+            if (menuRect.bottom > viewportHeight) {
+                $dropdownMenu.css({ top: 'auto', bottom: '100%' });
+            }
+        },
+
+        /**
+         * Open dropdown
+         */
+        openDropdown($toggle, $dropdownMenu) {
+            $dropdownMenu.addClass('show');
+            this.setAriaExpanded($toggle, true);
+            this.handleOverflow($dropdownMenu);
+            $toggle.trigger('jbs-dropdown:show');
+        },
+
+        /**
+         * Close dropdown
+         */
+        closeDropdown($toggle, $dropdownMenu) {
+            $dropdownMenu.removeClass('show');
+            this.setAriaExpanded($toggle, false);
+            $toggle.trigger('jbs-dropdown:hide');
+        },
+
+        /**
+         * Close all dropdowns
+         */
+        closeAllDropdowns() {
+            $('.jbs-dropdown-menu.show').each(function () {
+                const { $toggle, $dropdownMenu } = JBSDropdown.getDropdownElements($(this));
+                JBSDropdown.closeDropdown($toggle, $dropdownMenu);
+            });
+        },
+
+        /**
+         * Event bindings
+         */
+        bindEvents() {
+            const self = this;
+
+            // Toggle click
+            $(document).on('click', '[data-jbs-toggle="jbs-dropdown"]', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const $toggle = $(this);
+                const { $dropdownMenu } = self.getDropdownElements($toggle);
+                const autoClose = $toggle.data('jbs-auto-close') || 'true';
+                const isOpen = $dropdownMenu.hasClass('show');
+
+                self.closeAllDropdowns();
+
+                if (!isOpen) {
+                    self.openDropdown($toggle, $dropdownMenu);
+                    $dropdownMenu.data('auto-close', autoClose);
+                } else {
+                    self.closeDropdown($toggle, $dropdownMenu);
+                }
+            });
+
+            // Dropdown item click
+            $(document).on('click', '.jbs-dropdown-menu .jbs-dropdown-item', function (e) {
+                const $item = $(this);
+                const { $toggle, $dropdownMenu } = self.getDropdownElements($item);
+                const autoClose = $dropdownMenu.data('auto-close') || 'true';
+
+                if ($item.hasClass('disabled') || $item.prop('disabled')) {
+                    e.preventDefault();
+                    return;
+                }
+
+                if (autoClose === 'true' || autoClose === true || autoClose === 'jbs-inside') {
+                    self.closeAllDropdowns();
+                }
+            });
+
+            // Keyboard navigation
+            $(document).on('keydown', '[data-jbs-toggle="jbs-dropdown"], .jbs-dropdown-menu', function (e) {
+                const $current = $(this);
+                const { $toggle, $dropdownMenu } = self.getDropdownElements($current);
+
+                switch (e.key) {
+                    case 'Escape':
+                        if ($dropdownMenu.hasClass('show')) {
+                            e.preventDefault();
+                            self.closeDropdown($toggle, $dropdownMenu);
+                            $toggle.focus();
+                        }
+                        break;
+
+                    case 'ArrowDown':
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        const $items = $dropdownMenu.find('.jbs-dropdown-item:not(.disabled):not(:disabled)');
+                        const currentIndex = $items.index($(document.activeElement));
+                        const nextIndex =
+                            e.key === 'ArrowDown'
+                                ? (currentIndex + 1) % $items.length
+                                : (currentIndex - 1 + $items.length) % $items.length;
+                        $items.eq(nextIndex).focus();
+                        break;
+
+                    case 'Enter':
+                    case ' ':
+                        if ($current.is('[data-jbs-toggle="jbs-dropdown"]') && !$dropdownMenu.hasClass('show')) {
+                            e.preventDefault();
+                            $current.click();
+                        }
+                        break;
+                }
+            });
+        },
+
+        /**
+         * Close dropdown when clicking outside
+         */
+        closeOnOutsideClick() {
+            const self = this;
+            $(document).on('click', function (e) {
+                const $target = $(e.target);
+                const $closestDropdown = $target.closest('.jbs-dropdown-menu');
+
+                if ($closestDropdown.length && $closestDropdown.data('auto-close') === 'jbs-outside') {
+                    return;
+                }
+
+                if (
+                    !$target.closest('[data-jbs-toggle="jbs-dropdown"]').length &&
+                    !$target.closest('.jbs-dropdown-menu').length
+                ) {
+                    self.closeAllDropdowns();
+                }
+            });
+        }
+    };
+
+    $(document).ready(() => JBSDropdown.init());
+    window.JBSDropdown = JBSDropdown;
 
 })(jQuery);

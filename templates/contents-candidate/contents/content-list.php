@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <div class="jbs-row jbs-gx-1 jbs-align-items-center">
                         <div class="jbs-col-lg-3">
                             <div class="jbs-position-relative">
-                                <h4 class="candidate-name jbs-mb-0 jbs-pt-0">
+                                <h4 class="candidate-name jbs-mb-0 jbs-pt-0 jbs-mt-0">
                                     <a href="<?php the_permalink() ?>" class="tran3s">
 										<?php the_title() ?>
                                     </a>

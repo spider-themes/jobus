@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
-                                            <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="nice-select">
+                                            <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="jbs-nice-select">
                                                 ${optionsHtml}
                                             </select>
                                         </div>

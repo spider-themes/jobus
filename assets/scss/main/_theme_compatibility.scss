@@ -318,6 +318,7 @@
         margin: 0 !important;
     }
 }
+
 }
 
 
@@ -328,6 +329,17 @@
     a{
         &:focus {
             outline: none !important;
+        }
+    }
+}
+
+
+// Eduacademy Theme Compatibility
+
+.jobus-frontend{
+    .jbs-container{
+        form{
+            margin-bottom: 0;
         }
     }
 }
