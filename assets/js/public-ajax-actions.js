@@ -40,7 +40,7 @@
                 const icon = btn.find('i');
                 if (!postId || !postType || !metaKey || !nonce || btn.hasClass('disabled')) return;
                 const originalIcon = icon.attr('class');
-                icon.attr('class', 'spinner-border spinner-border-sm align-middle');
+                icon.attr('class', 'jbs-spinner-border jbs-spinner-border-sm jbs-align-middle');
                 btn.addClass('loading disabled');
                 $.ajax({
                     url: jobus_public_obj.ajax_url,
@@ -60,7 +60,7 @@
                             // Always update button state
                             if (res.data.status === 'added') {
                                 btn.addClass('saved');
-                                icon.attr('class', 'bi bi-bookmark-check-fill text-primary');
+                                icon.attr('class', 'bi bi-bookmark-check-fill jbs-text-primary');
                                 btn.attr('title', postType === 'jobus_job' ? 'Saved' : postType === 'jobus_candidate' ? 'Saved Candidate' : 'Saved');
                             } else if (res.data.status === 'removed') {
                                 btn.removeClass('saved');

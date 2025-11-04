@@ -999,7 +999,7 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
         $post_id      = $args['post_id'] ?? '';
         $post_type    = $args['post_type'] ?? '';
         $meta_key     = $args['meta_key'] ?? '';
-        $is_saved     = ! empty( $args['is_saved'] ) ? 'bi bi-bookmark-check-fill text-primary' : 'bi bi-bookmark-dash';
+        $is_saved     = ! empty( $args['is_saved'] ) ? 'bi bi-bookmark-check-fill jbs-text-primary' : 'bi bi-bookmark-dash';
         $button_title = $args['button_title'] ?? '';
         $class        = $args['class'] ?? '';
         ?>

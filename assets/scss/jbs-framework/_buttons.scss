@@ -50,13 +50,13 @@
 
 // Button Variants
 .jbs-btn-primary {
-  color: $text-white;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  color: $text-white !important;
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
 
   &:hover {
-    color: $text-white;
-    background-color: #0b5ed7;
+    color: $text-white !important;
+    background-color: #0b5ed7 !important;
     border-color: #0a58ca;
   }
 
@@ -76,8 +76,8 @@
 
 .jbs-btn-secondary {
   color: $text-white;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
 
   &:hover {
     color: $text-white;
@@ -126,13 +126,13 @@
 
 .jbs-btn-danger {
   color: $text-white;
-  background-color: #dc3545;
+  background-color: #dc3545 ;
   border-color: #dc3545;
 
   &:hover {
     color: $text-white;
-    background-color: #bb2d3b;
-    border-color: #b02a37;
+    background-color: #bb2d3b !important;
+    border-color: #b02a37 !important;
   }
 
   &:focus {

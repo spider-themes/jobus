@@ -2067,6 +2067,13 @@
   -ms-transform: scale(1) translateY(0);
   transform: scale(1) translateY(0);
 }
+.nice-select.open .list::-webkit-scrollbar {
+  width: 4px;
+}
+.nice-select.open .list::-webkit-scrollbar-thumb {
+  background-color: var(--jbs-brand_color_3);
+  border-radius: 3px;
+}
 
 .nice-select.disabled {
   border-color: #ededed;
@@ -4677,6 +4684,9 @@ img {
 }
 
 .title-two h2 {
+  font-size: 64px;
+  line-height: 1.062em;
+  color: #254035;
   margin: 0;
 }
 
@@ -5370,6 +5380,13 @@ img {
   max-height: 250px;
   overflow-y: auto;
 }
+.filter-area-tab .nice-select .list::-webkit-scrollbar {
+  width: 4px;
+}
+.filter-area-tab .nice-select .list::-webkit-scrollbar-thumb {
+  background-color: var(--jbs-brand_color_3);
+  border-radius: 3px;
+}
 .filter-area-tab .nice-select.open .list {
   display: block;
 }
@@ -5606,7 +5623,7 @@ img {
   background: #fff;
   color: var(--jbs-brand_color_1);
   border-radius: 30px;
-  padding: 0 12px;
+  padding: 5px 12px;
   -webkit-transition: all 0.1s ease-in-out 0s;
   -moz-transition: all 0.1s ease-in-out 0s;
   -ms-transition: all 0.1s ease-in-out 0s;
@@ -5640,6 +5657,10 @@ img {
   border-radius: 7px;
   padding: 0 35px 0 15px;
   outline: none;
+  background-color: #fff;
+}
+.filter-area-tab .input-box input:focus {
+  border: 1px solid #EDEDED;
 }
 .filter-area-tab .input-box button {
   width: 50px;
@@ -5794,6 +5815,7 @@ button.jbs_filter_btn-padding {
   background: #fff;
   padding: 42px 35px;
   border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .job-list-one.bottom-border {
   border-bottom: 1px solid #DBE8E5;
@@ -5872,18 +5894,18 @@ button.jbs_filter_btn-padding {
 .job-list-one .job-salary .expertise {
   text-transform: capitalize;
 }
-.job-list-one .apply-btn {
+.job-list-one a.apply-btn {
   width: 85px;
   line-height: 35px;
   font-weight: 500;
   font-size: 12px;
   letter-spacing: 1px;
-  color: #fff;
+  color: #fff !important;
   text-transform: uppercase;
   border-radius: 17px;
   background: var(--jbs-brand_color_4);
 }
-.job-list-one .apply-btn:hover {
+.job-list-one a.apply-btn:hover {
   background: var(--jbs-brand_color_5);
 }
 .job-list-one.style-two {
@@ -6286,7 +6308,6 @@ button.jbs_filter_btn-padding {
 
 .job-details {
   position: relative;
-  margin-top: 100px;
   padding-top: 80px;
 }
 .job-details.style-two {
@@ -7136,26 +7157,33 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100% !important;
 }
 
-.wp-theme-hello-elementor .jobus-dashboard-template button, .wp-theme-hello-biz.jobus-frontend .jobus-dashboard-template button {
+.wp-theme-hello-elementor .jobus-dashboard-template button,
+.wp-theme-hello-biz.jobus-frontend .jobus-dashboard-template button {
   border: none;
 }
-.wp-theme-hello-elementor .jbs-accordion-button, .wp-theme-hello-biz.jobus-frontend .jbs-accordion-button {
+.wp-theme-hello-elementor .jbs-accordion-button,
+.wp-theme-hello-biz.jobus-frontend .jbs-accordion-button {
   width: 100%;
   display: flex;
 }
-.wp-theme-hello-elementor table tbody tr > td, .wp-theme-hello-biz.jobus-frontend table tbody tr > td {
+.wp-theme-hello-elementor table tbody tr > td,
+.wp-theme-hello-biz.jobus-frontend table tbody tr > td {
   background: none;
 }
-.wp-theme-hello-elementor button.action-btn, .wp-theme-hello-biz.jobus-frontend button.action-btn {
+.wp-theme-hello-elementor button.action-btn,
+.wp-theme-hello-biz.jobus-frontend button.action-btn {
   background: none;
 }
-.wp-theme-hello-elementor table thead:first-child tr:first-child th, .wp-theme-hello-biz.jobus-frontend table thead:first-child tr:first-child th {
+.wp-theme-hello-elementor table thead:first-child tr:first-child th,
+.wp-theme-hello-biz.jobus-frontend table thead:first-child tr:first-child th {
   border: none;
 }
-.wp-theme-hello-elementor table.jbs-table.job-alert-table th, .wp-theme-hello-biz.jobus-frontend table.jbs-table.job-alert-table th {
+.wp-theme-hello-elementor table.jbs-table.job-alert-table th,
+.wp-theme-hello-biz.jobus-frontend table.jbs-table.job-alert-table th {
   text-align: left;
 }
-.wp-theme-hello-elementor .dashboard-body .job-alert-table th:last-child, .wp-theme-hello-biz.jobus-frontend .dashboard-body .job-alert-table th:last-child {
+.wp-theme-hello-elementor .dashboard-body .job-alert-table th:last-child,
+.wp-theme-hello-biz.jobus-frontend .dashboard-body .job-alert-table th:last-child {
   text-align: right !important;
 }
 
@@ -7184,6 +7212,9 @@ input[type=file]::-webkit-file-upload-button {
 }
 .ast-container .jobus-dashboard-template button:hover, .ast-container .jobus-dashboard-template button:focus {
   background-color: transparent;
+}
+.ast-container table.jbs-table.job-alert-table {
+  border: none;
 }
 
 .ast-container a:focus {
@@ -7281,7 +7312,7 @@ input[type=file]::-webkit-file-upload-button {
 .wp-theme-Avada.jobus-frontend .clearfix {
   padding: 0 !important;
 }
-.wp-theme-Avada.jobus-frontend .clearfix .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs) {
+.wp-theme-Avada.jobus-frontend .clearfix .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jobus-dashboard-template) {
   max-width: 100% !important;
   padding: 0 !important;
 }
@@ -7291,6 +7322,9 @@ input[type=file]::-webkit-file-upload-button {
   border-bottom: none;
   margin: 0 !important;
 }
+.wp-theme-Avada.jobus-frontend .fusion-row h6.fusion-responsive-typography-calculated {
+  margin: 11px 0px;
+}
 
 .wp-theme-oceanwp.jobus-frontend a:focus {
   outline: none !important;
@@ -7298,6 +7332,17 @@ input[type=file]::-webkit-file-upload-button {
 
 .jobus-frontend .jbs-container form {
   margin-bottom: 0;
+}
+
+.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper a {
+  outline: none;
+}
+.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper a:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper .user-avatar-setting .upload-btn {
+  padding: 0px 10px !important;
 }
 
 @media (max-width: 1199px) {

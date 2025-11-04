@@ -89,7 +89,8 @@
     max-width: 100% !important;
 }
 
-.wp-theme-hello-elementor,.wp-theme-hello-biz.jobus-frontend {
+.wp-theme-hello-elementor,
+.wp-theme-hello-biz.jobus-frontend {
     .jobus-dashboard-template {
         button {
             border: none;
@@ -116,6 +117,7 @@
     table.jbs-table.job-alert-table th {
         text-align: left;
     }
+
     .dashboard-body .job-alert-table th:last-child {
         text-align: right !important;
     }
@@ -162,6 +164,10 @@
             }
         }
     }
+
+    table.jbs-table.job-alert-table {
+        border: none;
+    }
 }
 
 .ast-container {
@@ -205,12 +211,13 @@
     padding: 0 !important;
 }
 
-.wp-theme-kadence.jobus-frontend{
-    ul{
+.wp-theme-kadence.jobus-frontend {
+    ul {
         padding-left: 0;
     }
 }
-.candidate-profile-card .candidate-skills li{
+
+.candidate-profile-card .candidate-skills li {
     white-space: nowrap;
 }
 
@@ -305,19 +312,25 @@
 .wp-theme-Avada.jobus-frontend {
     .clearfix {
         padding: 0 !important;
-        .fusion-row:has(.jbs-container,.elementor-widget-jobus_companies,.elementor-widget-jobus_job_tabs) {
+
+        .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jobus-dashboard-template) {
             max-width: 100% !important;
             padding: 0 !important;
         }
     }
-   .fusion-row {
-    .page-numbers.current {
-        border-left: none;
-        border-top: none;
-        border-bottom: none;
-        margin: 0 !important;
+
+    .fusion-row {
+        .page-numbers.current {
+            border-left: none;
+            border-top: none;
+            border-bottom: none;
+            margin: 0 !important;
+        }
+
+        h6.fusion-responsive-typography-calculated {
+            margin: 11px 0px;
+        }
     }
-}
 
 }
 
@@ -325,8 +338,8 @@
 
 // OceanWP Theme Compatibility
 
-.wp-theme-oceanwp.jobus-frontend{
-    a{
+.wp-theme-oceanwp.jobus-frontend {
+    a {
         &:focus {
             outline: none !important;
         }
@@ -336,10 +349,31 @@
 
 // Eduacademy Theme Compatibility
 
-.jobus-frontend{
-    .jbs-container{
-        form{
+.jobus-frontend {
+    .jbs-container {
+        form {
             margin-bottom: 0;
+        }
+    }
+}
+
+// blocksy Theme Compatibility
+
+.wp-theme-blocksy.jobus-frontend{
+    .jobus-dashboard-template{
+        .dashboard-wrapper{
+            a{
+                outline: none;
+                &:focus{
+                    outline: none !important;
+                    box-shadow: none;
+                }
+            }
+            .user-avatar-setting{
+                .upload-btn{
+                        padding: 0px 10px !important;
+                }
+            }
         }
     }
 }

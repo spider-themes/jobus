@@ -186,6 +186,13 @@
       display: none;
       max-height: 250px;
       overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+        &::-webkit-scrollbar-thumb {
+            background-color: $brand-color-3;
+            border-radius: 3px;
+        }
     }
 
     &.open .list {
@@ -445,7 +452,7 @@
       background: #fff;
       color: var(--jbs-brand_color_1);
       border-radius: 30px;
-      padding: 0 12px;
+      padding: 5px 12px;
       @include transition(0.1s);
     }
 
@@ -479,6 +486,10 @@
       border-radius: 7px;
       padding: 0 35px 0 15px;
       outline: none;
+      background-color: #fff;
+      &:focus{
+        border: 1px solid #EDEDED;
+      }
     }
 
     button {
@@ -664,7 +675,7 @@ button.jbs_filter_btn-padding{
   background: #fff;
   padding: 42px 35px;
   border-radius: 10px;
-
+  border: 1px solid rgba(0, 0, 0, 0.1);
   &.bottom-border {
     border-bottom: 1px solid #DBE8E5;
     border-radius: 0;
@@ -760,13 +771,13 @@ button.jbs_filter_btn-padding{
     }
   }
 
-  .apply-btn {
+  a.apply-btn {
     width: 85px;
     line-height: 35px;
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #fff !important;
     text-transform: uppercase;
     border-radius: 17px;
     background: var(--jbs-brand_color_4);
@@ -1229,7 +1240,7 @@ button.jbs_filter_btn-padding{
 
 .job-details {
   position: relative;
-  margin-top: 100px;
+//   margin-top: 100px;
   padding-top: 80px;
 
   &.style-two {
