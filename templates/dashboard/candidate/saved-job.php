@@ -30,9 +30,21 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 	// If in dashboard mode, limit the jobs to display
 	$display_jobs = $is_dashboard ? array_slice( $saved_jobs, 0, $limit ) : $saved_jobs;
 
-	if ( ! empty( $display_jobs ) ) {
-		foreach ( $display_jobs as $job_id ) {
-			// Use reusable job list item template per Constitution VI: Code Deduplication & Reusability
+    $args = array(
+        'post_type'      => 'jobus_job',
+        'posts_per_page' => -1,
+    );
+
+    $jobs = new WP_Query( $args );
+
+    if ( ! empty( $display_jobs ) ) {
+        while ( $jobs->have_posts() ) : $jobs->the_post();
+
+
+            if ( ! in_array( get_the_ID(), $display_jobs, true ) ) {
+                continue;
+            }
+
 			jobus_get_template_part('loop/job-list-item', [
 				'layout' => 'dashboard',
 				'show_save_button' => false, // Custom dashboard actions
@@ -42,14 +54,15 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
 				'show_category' => true,
 				'show_salary' => false,
 				'show_duration' => false,
-				'job_id' => $job_id,
+				'job_id' => get_the_ID(),
 				'col_classes' => [
 					'title' => 'jbs-col-lg-4',
 					'meta' => 'jbs-col-lg-3',
 					'actions' => 'jbs-col-lg-2 jbs-xs-mt-10'
 				]
 			]);
-		}
+		endwhile;
+        wp_reset_postdata();
 	} else {
 		?>
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">

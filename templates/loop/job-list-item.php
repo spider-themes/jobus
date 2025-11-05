@@ -48,7 +48,7 @@ $container_classes .= ' ' . $extra_classes;
 
 <div class="<?php echo esc_attr($container_classes); ?>">
     <div class="jbs-row jbs-justify-content-between jbs-align-items-center">
-        <!-- Job Title Column -->
+        <!-- Job Title Column  -->
         <div class="<?php echo esc_attr($col_classes['title']); ?>">
             <div class="job-title jbs-d-flex jbs-align-items-center">
                 <?php if (has_post_thumbnail($job_id)) : ?>
@@ -65,7 +65,9 @@ $container_classes .= ' ' . $extra_classes;
                     <?php endif; ?>
 
                     <a href="<?php echo esc_url(get_permalink($job_id)); ?>" class="title jbs-fw-500 tran3s">
-                        <?php echo esc_html(get_the_title($job_id)); ?>
+                        <?php
+                        echo esc_html(get_the_title($job_id));
+                        ?>
                     </a>
                 </div>
             </div>

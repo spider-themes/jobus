@@ -56,9 +56,9 @@ $portfolio_data  = $candidate_form->get_candidate_portfolio( $candidate_id );
 if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
 	// Check user permissions
-	if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
-		wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
-	}
+	// if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
+	// 	wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
+	// }
 
 	if ( isset( $_POST['candidate_categories'] ) ) {
 		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );

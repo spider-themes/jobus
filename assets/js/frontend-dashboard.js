@@ -213,6 +213,10 @@
                 `);
 
                 repeater.append(newItem);
+                // Reinitialize nice-select for the new select element
+                if(typeof $.fn.niceSelect === 'function'){
+                    newItem.find('select.jbs-nice-select').niceSelect();
+                }
                 index++;
             });
 
