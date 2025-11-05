@@ -174,10 +174,22 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
                 </div>
                 <?php
                 // Load the saved candidate template
-                jobus_get_template_part( 'dashboard/employer/saved-candidate', [
-                    'is_dashboard' => true,
-                    'limit'        => $limit
-                ] );
+                if ( jobus_is_premium() ) {
+                    jobus_get_template_part( 'dashboard/employer/saved-candidate', [
+                        'is_dashboard' => true,
+                        'limit'        => $limit
+                    ] );
+                } else {
+                    $image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png';
+                    ?>
+                    <div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Pro Feature - Upgrade required', 'jobus' ); ?>">
+                        <div class="pro-image-wrap">
+                            <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
+                            <span class="pro-badge" aria-hidden="true"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
+                        </div>
+                    </div>
+                    <?php
+                }
                 ?>
             </div>
         </div>

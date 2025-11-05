@@ -96,6 +96,8 @@ class Assets {
 			// Enqueue media uploader for frontend dashboard
 			wp_enqueue_media();
 
+			wp_enqueue_script( 'sweetalert', esc_url( JOBUS_VEND . '/sweetalert/sweetalert.min.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+
 			// Script's ajax actions
 			wp_enqueue_script('jobus-dashboard-ajax-actions', esc_url(JOBUS_JS . '/dashboard-ajax-actions.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
 			wp_localize_script('jobus-dashboard-ajax-actions', 'jobus_dashboard_obj', [
