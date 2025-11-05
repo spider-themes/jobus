@@ -58,29 +58,46 @@ if ( ! function_exists( 'jobus_meta' ) ) {
 /**
  * Jobus Custom Template Part
  *
- * @return array
+ * @param       $template
+ * @param array $args
+ *
+ * @return void
  */
-if ( ! function_exists( 'jobus_get_template_part' ) ) {
-    function jobus_get_template_part( $template, $args = [] ): void {
+function jobus_get_template_part( $template, array $args = [] ): void {
 
-        // Get the slug
-        $template_slug = rtrim( $template );
-        $template      = $template_slug . '.php';
+    // Get the slug
+    $template_slug = rtrim( $template );
+    $template      = $template_slug . '.php';
+    $file = '';
 
-        // Check if a custom template exists in the theme folder, if not, load the plugin template file
-        if ( $theme_file = locate_template( array( 'jobus/' . $template ) ) ) {
+    // Check for pro plugin template first (if pro is active)
+    if ( jobus_is_premium() ) {
+        if ( $theme_file = locate_template( array( 'jobus-pro/' . $template ) ) ) {
             $file = $theme_file;
-        } else {
-            $file = JOBUS_PATH . "/templates/" . $template;
-        }
-        if ( $file ) {
-            if ( ! empty( $args ) && is_array( $args ) ) {
-                extract( $args );
-            }
-            load_template( $file, false );
+        } elseif ( defined( 'JOBUS_PRO_PATH' ) && file_exists( JOBUS_PRO_PATH . "/templates/" . $template ) ) {
+            $file = JOBUS_PRO_PATH . "/templates/" . $template;
         }
     }
+
+    // Fallback to free plugin template if pro template not found
+    if ( ! $file ) {
+        if ( $theme_file = locate_template( array( 'jobus/' . $template ) ) ) {
+            $file = $theme_file;
+        } elseif ( file_exists( JOBUS_PATH . "/templates/" . $template ) ) {
+            $file = JOBUS_PATH . "/templates/" . $template;
+        }
+    }
+
+    // Load the template if found
+    if ( $file ) {
+        if ( ! empty( $args ) && is_array( $args ) ) {
+            extract( $args );
+        }
+        load_template( $file, false );
+    }
 }
+
+
 
 /**
  * Get template part implementation for jobus.

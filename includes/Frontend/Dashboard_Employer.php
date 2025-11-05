@@ -191,9 +191,12 @@ class Dashboard_Employer {
 			$image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png';
 			ob_start();
 			?>
-			<div class="jbs-dashboard-pro">
-				<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
-			</div>
+            <div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Pro Feature - Upgrade required', 'jobus' ); ?>">
+                <div class="pro-image-wrap">
+                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
+                    <span class="pro-badge" aria-hidden="true"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
+                </div>
+            </div>
 			<?php
 			return ob_get_clean();
 		}

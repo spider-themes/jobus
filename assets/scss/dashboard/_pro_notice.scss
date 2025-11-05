@@ -1,0 +1,54 @@
+.jbs-dashboard-pro-notice {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  isolation: isolate;
+
+  .pro-image-wrap {
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    // overlay blur placed *under* badge
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(1px);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .pro-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #222;
+      background: linear-gradient(135deg, #ffde4d, #ff9f00);
+      border-radius: 999px;
+      pointer-events: auto;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ffb100;
+    outline-offset: 4px;
+  }
+}

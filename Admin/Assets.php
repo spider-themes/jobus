@@ -26,7 +26,7 @@ class Assets {
 		wp_enqueue_style( 'jobus-admin', esc_url( JOBUS_CSS . '/admin.css' ), [], JOBUS_VERSION );
 
 		// Enqueue Scripts
-		wp_enqueue_script( 'sweetalert', esc_url( JOBUS_VEND . '/admin/sweetalert.min.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_enqueue_script( 'sweetalert', esc_url( JOBUS_VEND . '/sweetalert/sweetalert.min.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-admin', esc_url( JOBUS_JS . '/admin.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 	}
 }

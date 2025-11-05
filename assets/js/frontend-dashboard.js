@@ -70,6 +70,7 @@
             this.SocialIcon();
             this.UserPassword();
             this.checkPasswordRedirect();
+            this.ProNotice();
         },
 
         initProfilePictureUpload: function (config) {
@@ -307,7 +308,7 @@
                     $actionInput.val('upload');
                     $imgIdInput.val(attachment.id);
 
-                    let displayText = attachment.url || attachment.filename || 'Selected Image';
+                    let displayText;
                     if (attachment.url && attachment.url.indexOf('http') === 0) {
                         displayText = attachment.url;
                     } else if (attachment.filename) {
@@ -422,6 +423,20 @@
                 }
             }
         },
+
+        ProNotice: function () {
+
+            $('.jbs-dashboard-pro-notice').on('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Opps...',
+                    html: 'This is a PRO feature. You need to <a href="admin.php?page=jobus-pricing"><strong class="upgrade-link">Upgrade&nbsp;&nbsp;➤</strong></a> to the Premium Version to use this feature',
+                    icon: "warning",
+                    buttons: [false, "Close"],
+                    dangerMode: true
+                })
+            });
+        }
 
     }
 
