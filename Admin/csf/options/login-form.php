@@ -28,7 +28,46 @@ CSF::createSection($settings_prefix, array(
 		    'default'   => '#',
 	    ),
 
-		// Create a Heading for a Login Redirect Settings
+        // Create Demo username and password
+        array(
+            'id'    => 'login_demo_subheading',
+            'type'  => 'subheading',
+            'title' => esc_html__( 'Login Demo Options', 'jobus' ),
+        ),
+
+        array(
+            'id'      => 'enable_demo_credentials',
+            'type'    => 'switcher',
+            'title'   => esc_html__( 'Enable Demo Credentials', 'jobus' ),
+            'default' => false,
+            'desc'    => esc_html__( 'Turn ON to show demo username & password fields', 'jobus' ),
+        ),
+
+        array(
+            'id'       => 'login_demo_candidate',
+            'type'     => 'text',
+            'title'    => esc_html__( 'Candidate Username', 'jobus' ),
+            'default'  => 'candidate',
+            'dependency' => array( 'enable_demo_credentials', '==', true ), // Show only if switcher is ON
+        ),
+
+        array(
+            'id'       => 'login_demo_employer',
+            'type'     => 'text',
+            'title'    => esc_html__( 'Employer Username', 'jobus' ),
+            'default'  => 'employer',
+            'dependency' => array( 'enable_demo_credentials', '==', true ),
+        ),
+
+        array(
+            'id'       => 'login_demo_password',
+            'type'     => 'text',
+            'title'    => esc_html__( 'Password', 'jobus' ),
+            'default'  => 'demo',
+            'dependency' => array( 'enable_demo_credentials', '==', true ),
+        ),
+
+        // Create a Heading for a Login Redirect Settings
 	    array(
 		    'type'  => 'heading',
 		    'content' => esc_html__('Login Redirect Settings', 'jobus'),

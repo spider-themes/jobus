@@ -522,3 +522,26 @@
         }
     }
 }
+
+// Demo Login Form
+.user-data-form {
+  .login-form-wrapper {
+    display: flex;
+    justify-content: center;
+    .login-form-demo {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #212529;
+      background: #eff6f3;
+      padding: 10px 18px;
+      margin-bottom: 30px !important;
+      border-radius: 10px;
+      max-width: 565px;
+      strong {
+        color: #254035;
+        font-size: 16px;
+      }
+    }
+  }
+}

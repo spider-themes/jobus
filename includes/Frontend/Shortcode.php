@@ -142,9 +142,35 @@ class Shortcode {
 		// Set redirect URL with fallback to admin URL
 		$redirect_url = ! empty( $atts['redirect'] ) ? esc_url_raw( $atts['redirect'] ) : admin_url();
 
-		ob_start();
-		?>
-        <div class="login-form-wrapper section-padding">
+        // Fetch plugin options
+        $plugin_options = get_option('jobus_opt', array());
+
+        // Check if demo credentials feature is enabled
+        $enable_demo = isset($plugin_options['enable_demo_credentials']) ? (bool)$plugin_options['enable_demo_credentials'] : false;
+
+        // Fetch demo credentials (empty by default)
+        $demo_candidate = isset($plugin_options['login_demo_candidate']) ? trim($plugin_options['login_demo_candidate']) : '';
+        $demo_employer = isset($plugin_options['login_demo_employer']) ? trim($plugin_options['login_demo_employer']) : '';
+        $demo_password = isset($plugin_options['login_demo_password']) ? trim($plugin_options['login_demo_password']) : '';
+
+        // Determine whether to show the demo block
+        $show_demo = $enable_demo && (!empty($demo_candidate) || !empty($demo_employer) || !empty($demo_password));
+
+            ob_start();
+            ?>
+            <div class="login-form-wrapper section-padding">
+                <?php if ($show_demo) : ?>
+                    <div class="login-form-demo jbs-text-start">
+                        <?php esc_html_e('Username', 'jobus'); ?>:
+                        <strong><?php echo esc_html($demo_candidate); ?></strong>
+                        <?php esc_html_e('or', 'jobus'); ?>
+                        <strong><?php echo esc_html($demo_employer); ?></strong><br>
+                        <?php esc_html_e('Password', 'jobus'); ?>:
+                        <strong><?php echo esc_html($demo_password); ?></strong>
+                    </div>
+                <?php endif; ?>
+            </div>
+
             <div class="login-form-header jbs-text-center">
                 <h2 class="form-title"><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ); ?></h2>
                 <p class="form-subtitle">
