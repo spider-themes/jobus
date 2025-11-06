@@ -329,6 +329,5 @@ wp_enqueue_script( 'lightbox' );
                 </div>
             </div>
         </div>
-        <!-- /.row -->
     </div>
 </section>

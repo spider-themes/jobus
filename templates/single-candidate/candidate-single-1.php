@@ -17,7 +17,7 @@ wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
 ?>
 
-<section class="candidates-profile jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80 bg-white">
+<section class="candidates-profile jbs-lg-pt-70 jbs-pb-130 jbs-lg-pb-80 jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
 
@@ -282,15 +282,21 @@ wp_enqueue_script( 'lightbox' );
                             ?>
                         </ul>
                         <?php
-                        if ( $cv_attachment ) {
-                            $attachment_url = wp_get_attachment_url( $cv_attachment );
-                            $clean_url      = preg_replace( '/\?.*/', '', $attachment_url );
-                            ?>
-                            <a href="<?php echo esc_url( $clean_url ); ?>"
-                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15" target="_blank">
-                                <?php esc_html_e( 'Download CV', 'jobus' ); ?>
-                            </a>
-                            <?php
+                        if ( ! empty( $cv_attachment ) ) {
+                            // Detect whether it's an attachment ID or a direct URL
+                            if ( is_numeric( $cv_attachment ) ) {
+                                $cv_url = wp_get_attachment_url( absint( $cv_attachment ) );
+                            } elseif ( filter_var( $cv_attachment, FILTER_VALIDATE_URL ) ) {
+                                $cv_url = $cv_attachment;
+                            }
+                            // Render the button if valid URL found
+                            if ( ! empty( $cv_url ) ) : ?>
+                                <a href="<?php echo esc_url( $cv_url ); ?>"
+                                   class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <?php esc_html_e( 'Download CV', 'jobus' ); ?>
+                                </a>
+                            <?php endif;
                         }
                         ?>
                     </div>

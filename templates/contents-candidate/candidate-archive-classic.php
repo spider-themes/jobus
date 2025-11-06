@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jobus-candidate-classic candidates-profile jbs-pt-110 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 bg-white">
+<section class="jbs jobus-candidate-classic candidates-profile jbs-pt-110 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
 
