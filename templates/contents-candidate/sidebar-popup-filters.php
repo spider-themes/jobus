@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
                 <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
 
                 <div class="jbs-position-relative">
-                    <div class="main-title jbs-fw-500 text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 border-bottom">
+                    <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 border-bottom">
                         <?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>"
                         role="search" method="get">

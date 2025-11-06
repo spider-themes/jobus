@@ -161,7 +161,7 @@
     width: 2rem;
     height: 2rem;
     vertical-align: -.125em;
-    border: .25em solid currentColor;
+    border: .25em solid var(--jbs-brand_color_2);
     border-right-color: transparent;
     border-radius: 50%;
     -webkit-animation: .75s linear infinite jbs-spinner-border;

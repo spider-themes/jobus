@@ -454,9 +454,12 @@
 .jbs-mb-auto {
     margin-bottom: auto !important;
 }
-
+.jbs-mt-sm-20 {
+    margin-top: 20px !important;
+}
 // Responsive Axis & All-sides utilities
 // Small Responsive (sm)
+
 @media (min-width: 576px) {
     .jbs-m-sm-0 {
         margin: 0 !important;
@@ -643,6 +646,9 @@
 
 // Medium Responsive (md)
 @media (min-width: 768px) {
+     .jbs-mt-sm-20 {
+        margin-top: 0 !important;
+    }
     .jbs-m-md-0 {
         margin: 0 !important;
     }

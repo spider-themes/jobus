@@ -737,7 +737,7 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
                     __( 'Showing %1$s-%2$s of %3$s results', 'jobus' ),
                     '<span class="jbs-text-dark jbs-fw-500">' . $start_range . '</span>',
                     '<span class="jbs-text-dark fw-500">' . $end_range . '</span>',
-                    '<span class="text-dark jbs-fw-500">' . $total_posts . '</span>'
+                    '<span class="jbs-text-dark jbs-fw-500">' . $total_posts . '</span>'
             );
 
             echo wp_kses( $show_results, [ 'span' => [ 'class' => [] ] ] );

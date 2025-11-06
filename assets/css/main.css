@@ -2143,7 +2143,7 @@
 .nice-select .option {
   font-size: 0.95em;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 400 !important;
   margin-top: 5px;
   list-style: none;
   outline: none;
@@ -3267,6 +3267,7 @@ body.compensate-for-scrollbar {
   list-style: none;
   border: 1px solid var(--jbs-brand_color_1);
   border-radius: 4px;
+  width: max-content;
 }
 .jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
   width: 35px;
@@ -5246,6 +5247,10 @@ img {
   line-height: 1.8;
 }
 
+.jobus-job-classic.job-listing-three .pagination-wrap p {
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .accordion-box.show {
   display: block;
 }
@@ -5453,6 +5458,7 @@ img {
   position: relative;
   font-size: 15px;
   line-height: 35px;
+  font-weight: 400;
   padding-left: 28px;
   -webkit-transition: all 0.1s ease-in-out 0s;
   -moz-transition: all 0.1s ease-in-out 0s;
@@ -5515,7 +5521,7 @@ img {
 }
 .filter-area-tab .filter-input li:hover label {
   color: var(--jbs-brand_color_1);
-  background: rgba(var(--jbs-brand_color_1), 0.02);
+  background: rgba(49, 121, 90, 0.02) !important;
 }
 .filter-area-tab .filter-input .hide {
   display: none;
@@ -5836,6 +5842,9 @@ button.jbs_filter_btn-padding {
   padding: 42px 35px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.job-list-one .expertise {
+  color: #aaaaaa;
 }
 .job-list-one.bottom-border {
   border-bottom: 1px solid #DBE8E5;
@@ -6815,7 +6824,7 @@ input[type=file]::-webkit-file-upload-button {
   padding: 8px 26px;
   text-align: center;
   border-radius: 50px;
-  color: var(--jbs-heading_color);
+  color: #000000 !important;
   background-color: var(--jbs-brand_color_3);
   border: 2px solid transparent;
   -webkit-transition: all 0.3s ease-in-out 0s;
@@ -6831,7 +6840,7 @@ input[type=file]::-webkit-file-upload-button {
 }
 .btn-one:hover {
   background-color: var(--jbs-brand_color_2);
-  color: var(--jbs-brand_color_3);
+  color: var(--jbs-brand_color_3) !important;
   border-color: var(--jbs-brand_color_3);
 }
 .btn-one:hover img {
@@ -6864,7 +6873,7 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 .btn-eleven:hover, .btn-eleven:focus {
-  background: #00bf58;
+  background: #00bf58 !important;
 }
 
 .jbs-btn-success {
@@ -6892,7 +6901,7 @@ input[type=file]::-webkit-file-upload-button {
   height: 35px;
   line-height: 35px;
   border: 1px solid #D6D6D6;
-  color: #CBCBCB;
+  color: #CBCBCB !important;
 }
 .save-btn:hover {
   background: #E7F6EF;
@@ -7093,6 +7102,7 @@ input[type=file]::-webkit-file-upload-button {
   list-style: none;
   border: 1px solid var(--jbs-brand_color_1);
   border-radius: 4px;
+  width: max-content;
 }
 .jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
   width: 35px;
@@ -7387,6 +7397,22 @@ input[type=file]::-webkit-file-upload-button {
   }
   .dashboard-body {
     margin-left: 0 !important;
+  }
+}
+@media (max-width: 1024px) {
+  .candidate-info.salary-info {
+    margin-top: 50px !important;
+  }
+  .candidate-info.location-info {
+    margin-top: 50px !important;
+  }
+}
+@media (max-width: 575px) {
+  .candidate-info.location-info {
+    margin-top: 20px !important;
+  }
+  .profile-btn {
+    margin-left: 10px !important;
   }
 }
 

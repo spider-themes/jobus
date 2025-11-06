@@ -24,3 +24,19 @@
         margin-left: 0 !important;
     }
 }
+@media (max-width: 1024px) {
+    .candidate-info.salary-info {
+        margin-top: 50px !important;
+    }
+    .candidate-info.location-info {
+        margin-top: 50px !important;
+    }
+}
+@media (max-width: 575px) {
+    .candidate-info.location-info {
+        margin-top: 20px !important;
+    }
+     .profile-btn{
+            margin-left: 10px !important;
+        }
+}

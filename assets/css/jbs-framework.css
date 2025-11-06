@@ -14,6 +14,14 @@
 .jbs-container p {
   line-height: 1.8;
 }
+.jbs-container h1,
+.jbs-container h2,
+.jbs-container h3,
+.jbs-container h4,
+.jbs-container h5,
+.jbs-container h6 {
+  margin-bottom: 0;
+}
 
 @media (min-width: 992px) {
   .jbs-container {
@@ -975,7 +983,7 @@
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  border: 0.25em solid currentColor;
+  border: 0.25em solid var(--jbs-brand_color_2);
   border-right-color: transparent;
   border-radius: 50%;
   -webkit-animation: 0.75s linear infinite jbs-spinner-border;
@@ -1436,6 +1444,10 @@
   margin-bottom: auto !important;
 }
 
+.jbs-mt-sm-20 {
+  margin-top: 20px !important;
+}
+
 @media (min-width: 576px) {
   .jbs-m-sm-0 {
     margin: 0 !important;
@@ -1582,6 +1594,9 @@
   }
 }
 @media (min-width: 768px) {
+  .jbs-mt-sm-20 {
+    margin-top: 0 !important;
+  }
   .jbs-m-md-0 {
     margin: 0 !important;
   }

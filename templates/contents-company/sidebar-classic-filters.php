@@ -14,7 +14,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
     <div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
         <button type="button" class="btn-close text-reset jbs-d-lg-none" data-jbs-dismiss="offcanvas"
                 aria-label="Close"></button>
-        <div class="main-title jbs-fw-500 text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
+        <div class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 
         <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">

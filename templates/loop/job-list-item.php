@@ -74,7 +74,7 @@ $container_classes .= ' ' . $extra_classes;
         </div>
 
         <!-- Meta Information Column -->
-        <div class="<?php echo esc_attr($col_classes['meta']); ?>">
+        <div class="<?php echo esc_attr($col_classes['meta']); ?> jbs-mt-sm-20">
             <?php if ($show_location && !empty($location_terms) && count($location_terms) > 0) : ?>
                 <div class="job-location">
                     <a href="<?php echo esc_url(get_term_link($location_terms[0]->term_id)); ?>">

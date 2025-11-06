@@ -137,7 +137,10 @@ wp_enqueue_script( 'lightbox' );
                         <?php
                     }
 
-                    if ( $portfolio_ids ) {
+                    ?>
+                    <div class="inner-card">
+                        <?php 
+                        if ( $portfolio_ids ) {
                         if ( ! empty( $meta['portfolio_title'] ) ) { ?>
                             <h3 class="title"><?php echo esc_html( $meta['portfolio_title'] ) ?></h3>
                             <?php
@@ -161,6 +164,7 @@ wp_enqueue_script( 'lightbox' );
                         <?php
                     }
                     ?>
+                    </div>
                 </div>
             </div>
 

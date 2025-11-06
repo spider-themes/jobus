@@ -18,18 +18,19 @@
   padding: 8px 26px;
   text-align: center;
   border-radius: 50px;
-  color: var(--jbs-heading_color);
-  background-color: var(--jbs-brand_color_3);
+  color: #000000 !important;
+  background-color: var(--jbs-brand_color_3) ;
   border:2px solid transparent;
   @include transition(0.3s);
   display: inline-block;
   box-sizing: border-box;
+
   &.lg {
     padding: 8px 32px;
   }
   &:hover {
     background-color: var(--jbs-brand_color_2);
-    color: var(--jbs-brand_color_3);
+    color: var(--jbs-brand_color_3) !important;
     border-color: var(--jbs-brand_color_3);
     img{
       filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
@@ -63,7 +64,7 @@
 }
 
 .btn-eleven:hover,.btn-eleven:focus {
-    background: #00bf58;
+    background: #00bf58 !important;
 }
 
 
@@ -92,7 +93,7 @@
   height: 35px;
   line-height: 35px;
   border: 1px solid #D6D6D6;
-  color: #CBCBCB;
+  color: #CBCBCB !important;
   &:hover {
     background: #E7F6EF;
     border-color: #E7F6EF;
