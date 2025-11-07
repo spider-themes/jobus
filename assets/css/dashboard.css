@@ -1606,6 +1606,10 @@ Table of Contents:
   height: 100px;
 }
 
+body.page-template-dashboard .site-header {
+  display: none;
+}
+
 .dashboard-body .preview {
   display: flex;
   margin-bottom: 1rem;

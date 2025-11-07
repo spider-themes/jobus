@@ -1806,3 +1806,12 @@ div.dash-btn-one {
     }
   }
 }
+
+// Dashboard Header
+body{
+  &.page-template-dashboard{
+    .site-header{
+      display: none;
+    }
+  }
+}

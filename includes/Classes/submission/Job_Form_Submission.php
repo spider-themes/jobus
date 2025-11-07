@@ -17,7 +17,7 @@ class Job_Form_Submission {
 	 * Initialize the class
 	 */
 	public function __construct() {
-		add_action( 'init', [ $this, 'job_form_submission' ] );
+		add_action( 'wp_loaded', [ $this, 'job_form_submission' ] );
 	}
 
 	/**
@@ -63,14 +63,45 @@ class Job_Form_Submission {
 			}
 		}
 
-		$user       = wp_get_current_user();
-		$company_id = $this->get_company_id( $user->ID );
-		if ( ! $company_id ) {
-			wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
+		// Collect job specifications dynamically from CSF options
+		if ( function_exists( 'jobus_opt' ) ) {
+			$specifications = jobus_opt('job_specifications');
+			if ( is_array($specifications) ) {
+				foreach ( $specifications as $field ) {
+					if ( empty($field['meta_key']) ) continue;
+					$meta_key = $field['meta_key'];
+					if ( isset( $_POST[$meta_key] ) ) {
+						$post_data[$meta_key] = $_POST[$meta_key]; // sanitized later
+					}
+				}
+			}
 		}
-		$job_id = isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
+		
+		// Collect taxonomy fields (IDs)
+		$tax_fields = ['job_categories', 'job_locations', 'job_tags'];
+		foreach ($tax_fields as $tax) {
+			if ( isset($_POST[$tax]) ) {
+				// normalize as array of IDs
+				$values = $_POST[$tax];
+				if ( is_string($values) ) {
+					$values = explode(',', $values);
+				}
+				$post_data[$tax] = array_map('intval', (array) $values);
+			}
+		}
 
+		// Get user and company
+		$user       = wp_get_current_user();
 		// If editing an existing job, verify ownership
+		$company_id = $this->get_company_id( $user->ID );
+		// if ( ! $company_id ) {
+		// 	wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
+		// }
+
+		$company_id = $this->get_company_id( $user->ID );
+		$job_id 	= isset( $post_data['job_id'] ) ? absint( $post_data['job_id'] ) : 0;
+
+		// Verify editing permissions
 		if ( $job_id ) {
 			$job_post = get_post( $job_id );
 			if ( ! $job_post || $job_post->post_type !== 'jobus_job' ) {
@@ -89,12 +120,57 @@ class Job_Form_Submission {
 		// Save job specifications
 		$this->save_job_specifications( $job_id, $post_data );
 
+		// Save job taxonomies
+		$this->save_job_taxonomies_by_id($job_id, $post_data);
+		
 		// Save company website
 		if ( isset( $post_data['company_website'] ) ) {
 			$this->save_company_website( $job_id, $post_data );
 		}
 	}
 
+	/**
+	 * Save taxonomies by IDs for a job post
+	 */	
+	private function save_job_taxonomies_by_id( int $job_id, array $post_data ): void {
+		if ( empty( $job_id ) ) return;
+
+		$taxonomy_map = [
+			'job_categories' => 'jobus_job_cat',
+			'job_locations'  => 'jobus_job_location',
+			'job_tags'       => 'jobus_job_tag',
+		];
+
+		foreach ( $taxonomy_map as $field => $taxonomy ) {
+			if ( ! isset( $post_data[ $field ] ) ) continue;
+			$raw 		= $post_data[$field];
+			$term_ids 	= [];
+
+			// Normalize input to array of integers
+			if ( is_string( $raw ) ) {
+				$term_ids = array_map( 'intval', explode( ',', $raw ) );
+			} elseif ( is_array( $raw ) ) {
+				foreach ( $raw as $value ) {
+					if ( is_string( $value ) && strpos( $value, ',' ) !== false ) {
+						$parts = explode( ',', $value );
+						foreach ( $parts as $p ) {
+							$term_ids[] = intval( trim( $p ) );
+						}
+					} elseif ( is_numeric( $value ) ) {
+						$term_ids[] = intval( $value );
+					}
+				}
+			}
+
+			$term_ids = array_filter( array_unique( $term_ids ) );
+
+			// Now save it safely
+			if ( ! empty( $term_ids ) ) {
+				wp_set_post_terms( $job_id, $term_ids, $taxonomy, false );
+			}
+		}
+	}
+		
 	/**
 	 * Get the company ID associated with a user
 	 *
@@ -170,7 +246,6 @@ class Job_Form_Submission {
 
 		return $job_id;
 	}
-
 
 	/**
 	 * Get job content data and apply status for current user
@@ -263,28 +338,105 @@ class Job_Form_Submission {
 	 *       and do not affect the company relationship. Only $job_id and $post_data are required.
 	 */
 	public function save_job_specifications( int $job_id, array $post_data ): bool {
+
+		// Load existing meta
 		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
 		if ( ! is_array( $meta ) ) {
-			$meta = array();
+			$meta = [];
 		}
+
+		// Load specification fields from CSF settings
 		if ( function_exists( 'jobus_opt' ) ) {
-			$fields = jobus_opt( 'job_specifications' );
-			if ( ! empty( $fields ) ) {
-				foreach ( $fields as $field ) {
-					$meta_key = $field['meta_key'] ?? '';
-					if ( $meta_key && isset( $post_data[ $meta_key ] ) ) {
-						$val               = $post_data[ $meta_key ];
-						$meta[ $meta_key ] = is_array( $val )
-							? array_map( 'sanitize_text_field', wp_unslash( $val ) )
-							: ( $val !== '' ? array( sanitize_text_field( wp_unslash( $val ) ) ) : array() );
+			$specifications = jobus_opt( 'job_specifications' );
+
+			if ( ! empty( $specifications ) && is_array( $specifications ) ) {
+
+				foreach ( $specifications as $field ) {
+
+					// Skip invalid meta keys
+					if ( empty( $field['meta_key'] ) ) {
+						continue;
+					}
+
+					$meta_key 		 = $field['meta_key'];
+					$meta[$meta_key] = [];
+
+					// If field value was submitted from form
+					if ( isset( $post_data[$meta_key] ) ) {
+
+						$value = $post_data[$meta_key];
+
+						// MULTIPLE select values
+						if ( is_array( $value ) ) {
+
+							$clean = array_map(
+								function( $v ) {
+									return sanitize_text_field( wp_unslash( $v ) );
+								},
+								$value
+							);
+
+							$meta[$meta_key] = $clean;
+
+						}
+						// SINGLE select value
+						else {
+
+							$clean = sanitize_text_field( wp_unslash( $value ) );
+
+							$meta[$meta_key] = $clean !== '' ? [ $clean ] : [];
+						}
 					}
 				}
 			}
 		}
 
+		// Save the final meta array back to database
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
 	}
+	
+	/**
+	 * Save job taxonomies (categories, locations, tags) by IDs
+	 */
+	public function save_job_taxonomies( int $job_id, array $post_data ): void {
 
+		// Normalize comma-separated strings or arrays into integer arrays
+		$normalize_ids = function($val) {
+			if ( is_array($val) ) {
+				return array_map('intval', $val);
+			}
+			if ( is_string($val) ) {
+				$val = explode(',', $val);
+				return array_map('intval', $val);
+			}
+			return [];
+		};
+
+		// Job Categories
+		if ( isset($post_data['job_categories']) ) {
+			$cats = $normalize_ids($post_data['job_categories']);
+			if ( ! empty($cats) ) {
+				wp_set_post_terms( $job_id, $cats, 'jobus_job_cat', false );
+			}
+		}
+		
+		// Job Locations
+		if ( isset($post_data['job_locations']) ) {
+			$locations = $normalize_ids($post_data['job_locations']);
+			if ( ! empty($locations) ) {
+				wp_set_post_terms( $job_id, $locations, 'jobus_job_location', false );
+			}
+		}
+		
+		// Job Tags
+		if ( isset($post_data['job_tag']) ) {
+			$tags = $normalize_ids($post_data['job_tag']);
+			if ( ! empty($tags) ) {
+				wp_set_post_terms( $job_id, $tags, 'jobus_job_tag', false );
+			}
+		}
+	}
+	
 	/**
 	 * Get company website data
 	 *
