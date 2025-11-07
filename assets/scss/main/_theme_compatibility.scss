@@ -147,7 +147,22 @@
         padding: 0;
     }
 }
-
+.card-box{
+    .user-avatar-setting{
+        .upload-btn{
+                padding-bottom: 30px;
+        }
+    }
+}
+.dashboard-body{
+    .jbs-table-responsive{
+        .action-btn{
+            &:hover,&:focus{
+                background-color: transparent;
+            }
+        }
+    }
+}
 .ast-container {
     .jobus-dashboard-template {
         a {
@@ -160,7 +175,7 @@
 
             &:hover,
             &:focus {
-                background-color: transparent;
+                // background-color: transparent;
             }
         }
     }
@@ -181,12 +196,19 @@
 
         &:hover,
         &:focus {
-            background-color: transparent;
+            // background-color: transparent;
         }
     }
 
     ul {
         padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+.registration-section{
+    ul{
+        padding-left: 0 !important;
+        margin-left: 0 !important;
     }
 }
 

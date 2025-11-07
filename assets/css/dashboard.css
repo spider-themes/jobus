@@ -280,7 +280,7 @@ Table of Contents:
 }
 .dashboard-body .main-title {
   font-size: 36px;
-  color: var(--jbs-brand_color_1);
+  color: var(--jbs-brand_color_2);
   margin-bottom: 40px;
 }
 .dashboard-body .dash-title-two {
@@ -551,7 +551,7 @@ Table of Contents:
 .dashboard-body .dash-card-one .value {
   font-size: 36px;
   letter-spacing: -0.36px;
-  color: var(--jbs-brand_color_1);
+  color: var(--jbs-brand_color_2);
 }
 .dashboard-body .dash-card-one span {
   color: rgba(0, 0, 0, 0.5);
@@ -608,7 +608,7 @@ Table of Contents:
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list .job-title h6 a {
   font-size: 16px;
-  color: var(--jbs-brand_color_1);
+  color: var(--jbs-brand_color_2);
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -754,6 +754,9 @@ Table of Contents:
   border-radius: 7px;
   padding: 0 20px;
 }
+.dashboard-body .dash-input-wrapper input:focus {
+  border-color: #e5e5e5;
+}
 .dashboard-body .dash-input-wrapper textarea {
   border: 1px solid #e5e5e5;
   border-radius: 7px;
@@ -823,7 +826,7 @@ Table of Contents:
   margin: 0 -5px;
 }
 .dashboard-body .dash-input-wrapper .skills-wrapper ul li {
-  padding: 0 5px 15px;
+  padding: 0 5px;
   background: none;
 }
 .dashboard-body .dash-input-wrapper .skills-wrapper ul li.is_tag button {

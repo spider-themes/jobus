@@ -92,14 +92,14 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         // If the user has already applied, show "Applied the Job" button
                         if (!empty($has_applied)) {
                             ?>
-                            <a href="javascript:void(0)" class="btn-one jbs-mt-25 disabled">
+                            <a href="javascript:void(0)" class="jbs-btn-one jbs-mt-25 disabled">
                                 <?php esc_html_e('Already Applied', 'jobus'); ?>
                             </a>
                             <?php
                         } else {
                             // Show the apply button if the user has not applied yet
                             if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25 " >
+                                <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="jbs-btn-one jbs-mt-25 " >
                                     <?php esc_html_e('Apply Now', 'jobus'); ?>
                                 </a>
                             <?php } else { ?>
@@ -111,12 +111,12 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         }
                     } else {
                         if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] == 'custom' && !empty($meta['apply_form_url'])) { ?>
-                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="btn-one jbs-mt-25">
+                            <a href="<?php echo esc_url($meta['apply_form_url']); ?>" class="jbs-btn-one jbs-mt-25">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="btn-one jbs-mt-25" data-jbs-toggle="modal"
+                            <a href="#" class="jbs-btn-one jbs-mt-25" data-jbs-toggle="modal"
                                data-jbs-target="#applyJobModal">
                                 <?php esc_html_e('Apply Now', 'jobus'); ?>
                             </a>

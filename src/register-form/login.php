@@ -57,14 +57,14 @@ if ( is_user_logged_in() ) {
                     <?php
                     if ( ! empty( $jobus_nonce ) && wp_verify_nonce( $jobus_nonce, 'jobus_login_action' ) ) {
                         ?>
-                        <div class="form-wrapper m-auto">
+                        <div class="form-wrapper jbs-m-auto">
                             <form action="<?php echo esc_url( home_url( '/' ) ) ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 
                                 <?php wp_nonce_field( 'jobus_login_action', 'jobus_nonce' ); ?>
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-12">
-                                        <div class="input-group-meta position-relative jbs-mb-25">
+                                        <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                             <label><?php esc_html_e( 'Username/Email*', 'jobus' ); ?></label>
                                             <input type="text" name="user_input" id="user_input"
                                                    value="<?php echo esc_attr( $user_input ) ?>"
@@ -72,7 +72,7 @@ if ( is_user_logged_in() ) {
                                         </div>
                                     </div>
                                     <div class="jbs-col-12">
-                                        <div class="input-group-meta position-relative jbs-mb-20">
+                                        <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                             <label><?php esc_html_e( 'Password*', 'jobus' ) ?></label>
                                             <input type="password" name="pwd" id="password"
                                                    value="<?php echo esc_attr( $password ) ?>"

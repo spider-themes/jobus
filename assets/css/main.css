@@ -7237,11 +7237,16 @@ input[type=file]::-webkit-file-upload-button {
   padding: 0;
 }
 
+.card-box .user-avatar-setting .upload-btn {
+  padding-bottom: 30px;
+}
+
+.dashboard-body .jbs-table-responsive .action-btn:hover, .dashboard-body .jbs-table-responsive .action-btn:focus {
+  background-color: transparent;
+}
+
 .ast-container .jobus-dashboard-template a:focus {
   outline: none !important;
-}
-.ast-container .jobus-dashboard-template button:hover, .ast-container .jobus-dashboard-template button:focus {
-  background-color: transparent;
 }
 .ast-container table.jbs-table.job-alert-table {
   border: none;
@@ -7250,11 +7255,14 @@ input[type=file]::-webkit-file-upload-button {
 .ast-container a:focus {
   outline: none !important;
 }
-.ast-container button:hover, .ast-container button:focus {
-  background-color: transparent;
-}
 .ast-container ul {
   padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.registration-section ul {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 .jobus-frontend.elementor-template-full-width .ast-container {

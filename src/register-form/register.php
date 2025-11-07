@@ -14,14 +14,14 @@ $employer_placeholder_email        = $attributes['employer_email'] ?? '';
 $employer_placeholder_pass         = $attributes['employer_pass'] ?? '';
 $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
 ?>
-<section class="registration-section position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
+<section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
     <div class="user-data-form">
 
         <div class="jbs-text-center">
             <h2><?php esc_html_e( 'Create Account', 'jobus' ); ?></h2>
         </div>
 
-        <div class="form-wrapper m-auto">
+        <div class="form-wrapper jbs-m-auto">
             <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
                 <li class="jbs-nav-item" role="presentation">
                     <button class="jbs-nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
@@ -42,21 +42,21 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                         <input type="hidden" name="action" value="register_candidate">
                         <div class="jbs-row">
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-25">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="candidate_username"><?php esc_html_e( 'Name*', 'jobus' ); ?></label>
                                     <input type="text" name="candidate_username" id="candidate_username"
                                            placeholder="<?php echo esc_attr( $candidate_placeholder_username ) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-25">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="candidate_email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                                     <input type="email" name="candidate_email" id="candidate_email"
                                            placeholder="<?php echo esc_attr( $candidate_placeholder_email ) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-20">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="candidate_pass"><?php esc_html_e( 'Password*', 'jobus' ); ?></label>
                                     <input type="password" name="candidate_pass" id="candidate_pass"
                                            placeholder="<?php echo esc_attr( $candidate_placeholder_pass ) ?>" class="pass_log_id" required>
@@ -68,7 +68,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-20">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="candidate_confirm_pass"><?php esc_html_e( 'Confirm Password*', 'jobus' ); ?></label>
                                     <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass"
                                            placeholder="<?php echo esc_attr( $candidate_placeholder_confirm_pass ) ?>" class="pass_log_id" required>
@@ -104,21 +104,21 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                         <input type="hidden" name="action" value="register_employer">
                         <div class="jbs-row">
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-25">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="employer_username"><?php esc_html_e( 'Name*', 'jobus' ); ?></label>
                                     <input type="text" name="employer_username" id="employer_username"
                                            placeholder="<?php echo esc_attr( $employer_placeholder_username ) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-25">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="employer_email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                                     <input type="email" name="employer_email" id="employer_email"
                                            placeholder="<?php echo esc_attr( $employer_placeholder_email ) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-20">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="employer_pass"><?php esc_html_e( 'Password*', 'jobus' ); ?></label>
                                     <input type="password" name="employer_pass" id="employer_pass"
                                            placeholder="<?php echo esc_attr( $employer_placeholder_pass ) ?>" class="pass_log_id" required>
@@ -130,7 +130,7 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta position-relative jbs-mb-20">
+                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="employer_confirm_pass">Confirm Password*</label>
                                     <input type="password" name="employer_confirm_pass" id="employer_confirm_pass"
                                            placeholder="<?php echo esc_attr( $employer_placeholder_confirm_pass ) ?>" class="pass_log_id" required>
@@ -144,8 +144,8 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                             <div class="jbs-col-12">
                                 <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                     <div>
-                                        <input type="checkbox" id="remember">
-                                        <label for="remember"><?php esc_html_e( 'By hitting the "Register" button, you agree to the', 'jobus' ); ?>
+                                        <input type="checkbox" id="remember2">
+                                        <label for="remember2"><?php esc_html_e( 'By hitting the "Register" button, you agree to the', 'jobus' ); ?>
                                             <a href="#">
                                                 <?php esc_html_e( 'Terms conditions', 'jobus' ); ?>
                                             </a> &

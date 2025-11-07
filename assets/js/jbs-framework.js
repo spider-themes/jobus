@@ -13,6 +13,15 @@
 
         const ANIM_DURATION = 300;
 
+        const $form = $('#jobus-candidate-registration-form,#jobus-employer-registration-form');
+
+        $form.find('.passVicon').on('click', function() {
+            $(this).toggleClass("eye-slash");
+            const $input = $(this).closest('.input-group-meta').find('input');
+            const type = $input.attr('type') === 'password' ? 'text' : 'password';
+            $input.attr('type', type);
+        });
+
         // ============================
         // Helper Functions
         // ============================
