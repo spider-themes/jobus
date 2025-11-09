@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header('empty');
 ?>
-	<div class="jobus-dashboard-template">
+	<div class="jbs-dashboard-template">
 		<?php
 		while ( have_posts() ) : the_post();
 			the_content();

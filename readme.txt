@@ -119,6 +119,9 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 == Changelog ==
 
 = 1.1.0 (31 Oct 2025) =
+New: demo.xml file added in the include/sample-data folder
+
+= 1.1.0 (31 Oct 2025) =
 New: New Color Settings added in the General Settings panel
 New: Body class support for better theme styling control
 Fixed: Company dashboard and employment dashboard layout issues resolved
