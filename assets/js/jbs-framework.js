@@ -13,7 +13,7 @@
 
         const ANIM_DURATION = 300;
 
-        const $form = $('#jobus-candidate-registration-form,#jobus-employer-registration-form');
+        const $form = $('#jobus-candidate-registration-form,#jobus-employer-registration-form,#jobus_login_form');
 
         $form.find('.passVicon').on('click', function() {
             $(this).toggleClass("eye-slash");
