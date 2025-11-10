@@ -325,9 +325,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                     </div>
                 <?php endforeach; ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
+            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
-            </a>
+            </button>
         </div>
 
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-video">
@@ -517,9 +517,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 }
                 ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-company-testimonial">
+            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-company-testimonial">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Testimonial', 'jobus' ); ?>
-            </a>
+            </button>
         </div>
 
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">

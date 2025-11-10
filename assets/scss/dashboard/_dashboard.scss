@@ -252,12 +252,13 @@
     color: $color-five;
     border-radius: 7px;
     line-height: 40px;
-    padding: 12px 15px;
+    padding: 0px 15px;
     min-width: 135px;
     text-align: center;
     background: rgba($color: #3f634d, $alpha: 0.2);
     @include transition(0.2s);
     cursor: pointer;
+    border: none;
 
     i {
       font-size: 1.5em;
@@ -281,9 +282,9 @@
       left: 0;
     }
   }
-div.dash-btn-one {
-    line-height: 15px !important;
-}
+// div.dash-btn-one {
+//     line-height: 15px !important;
+// }
   .dash-btn-two {
     font-weight: 500;
     color: #fff;
@@ -775,6 +776,7 @@ div.dash-btn-one {
       border: 1px solid #e5e5e5;
       border-radius: 7px;
       padding: 0 20px;
+      outline: none;
       &:focus {
         border-color: #e5e5e5;
       }

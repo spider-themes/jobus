@@ -271,9 +271,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-education">
+            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-education">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Education Item', 'jobus' ); ?>
-            </a>
+            </button>
         </div>
 
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-experience">
@@ -413,9 +413,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-experience">
+            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-experience">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Experience Item', 'jobus' ); ?>
-            </a>
+            </button>
         </div>
 
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-taxonomy">

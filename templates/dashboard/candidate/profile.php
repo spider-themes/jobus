@@ -185,9 +185,9 @@ $avatar_url = $description_data['avatar_url'];
                 }
                 ?>
             </div>
-            <a href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
+            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-social-link">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
-            </a>
+            </butt>
         </div>
 
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-profile-specifications">
@@ -248,9 +248,9 @@ $avatar_url = $description_data['avatar_url'];
                             }
                             ?>
                         </div>
-                        <a href="javascript:void(0)" class="dash-btn-one" id="add-specification">
+                        <button href="javascript:void(0)" class="dash-btn-one" id="add-specification">
                             <i class="bi bi-plus"></i> <?php esc_html_e('Add Specification', 'jobus'); ?>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

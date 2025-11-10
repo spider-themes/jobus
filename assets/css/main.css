@@ -6337,6 +6337,7 @@ button.jbs_filter_btn-padding {
 
 .job-details {
   position: relative;
+  margin-top: 100px;
   padding-top: 80px;
 }
 .job-details.style-two {
@@ -7238,7 +7239,7 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 .card-box .user-avatar-setting .upload-btn {
-  padding-bottom: 30px;
+  padding: 0px 10px;
 }
 
 .dashboard-body .jbs-table-responsive .action-btn:hover, .dashboard-body .jbs-table-responsive .action-btn:focus {

@@ -146,7 +146,7 @@
     transition: border-color 0.2s;
   }
 
-  .taxonomy-input:focus {
+  input.taxonomy-input:focus {
     border-color: #7B67FF;
     box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
   }
