@@ -70,6 +70,9 @@ $limit        = $is_dashboard ? 4 : - 1; // Limit to 4 items in dashboard, no li
                 <i class="bi bi-bookmark-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php esc_html_e( 'No Saved Jobs', 'jobus' ); ?></h4>
                 <p class="jbs-text-muted"><?php esc_html__( 'You haven\'t saved any jobs yet.', 'jobus' ); ?></p>
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
+                    <?php esc_html_e( 'Browse Jobs', 'jobus' ); ?>
+                </a>
             </div>
         </div>
 		<?php

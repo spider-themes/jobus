@@ -7188,8 +7188,8 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100% !important;
 }
 
-.wp-theme-hello-elementor .jobus-dashboard-template button,
-.wp-theme-hello-biz.jobus-frontend .jobus-dashboard-template button {
+.wp-theme-hello-elementor .jbs-dashboard-template button,
+.wp-theme-hello-biz.jobus-frontend .jbs-dashboard-template button {
   border: none;
 }
 .wp-theme-hello-elementor .jbs-accordion-button,
@@ -7228,7 +7228,7 @@ input[type=file]::-webkit-file-upload-button {
   max-width: 100% !important;
 }
 
-.ast-container:has(.jbs-container, .jobus-dashboard-template) {
+.ast-container:has(.jbs-container, .jbs-dashboard-template) {
   max-width: 100% !important;
   padding: 0 !important;
   flex-direction: column !important;
@@ -7246,7 +7246,7 @@ input[type=file]::-webkit-file-upload-button {
   background-color: transparent;
 }
 
-.ast-container .jobus-dashboard-template a:focus {
+.ast-container .jbs-dashboard-template a:focus {
   outline: none !important;
 }
 .ast-container table.jbs-table.job-alert-table {
@@ -7323,19 +7323,19 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 10px !important;
 }
 
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
   max-width: 100%;
 }
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .site-content {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) .site-content {
   display: block;
 }
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .job-details {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) .job-details {
   margin-top: 0;
 }
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) .dashboard-body .placeholder_icon span::before {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) .dashboard-body .placeholder_icon span::before {
   top: 21px;
 }
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) table.jbs-table.job-alert-table {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) table.jbs-table.job-alert-table {
   border: none;
 }
 
@@ -7351,7 +7351,7 @@ input[type=file]::-webkit-file-upload-button {
 .wp-theme-Avada.jobus-frontend .clearfix {
   padding: 0 !important;
 }
-.wp-theme-Avada.jobus-frontend .clearfix .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jobus-dashboard-template) {
+.wp-theme-Avada.jobus-frontend .clearfix .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jbs-dashboard-template) {
   max-width: 100% !important;
   padding: 0 !important;
 }
@@ -7373,14 +7373,14 @@ input[type=file]::-webkit-file-upload-button {
   margin-bottom: 0;
 }
 
-.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper a {
+.wp-theme-blocksy.jobus-frontend .jbs-dashboard-template .dashboard-wrapper a {
   outline: none;
 }
-.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper a:focus {
+.wp-theme-blocksy.jobus-frontend .jbs-dashboard-template .dashboard-wrapper a:focus {
   outline: none !important;
   box-shadow: none;
 }
-.wp-theme-blocksy.jobus-frontend .jobus-dashboard-template .dashboard-wrapper .user-avatar-setting .upload-btn {
+.wp-theme-blocksy.jobus-frontend .jbs-dashboard-template .dashboard-wrapper .user-avatar-setting .upload-btn {
   padding: 0px 10px !important;
 }
 

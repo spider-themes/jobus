@@ -1,126 +1,126 @@
 //Twenty Twenty-Four Theme Compatibility
 
 .wp-block-jobus-shortcode-job-archive {
-    max-width: 100% !important;
-    background-color: #fff;
-    margin: 0 !important;
+  max-width: 100% !important;
+  background-color: #fff;
+  margin: 0 !important;
 
-    li {
-        margin-left: 0 !important;
-    }
+  li {
+    margin-left: 0 !important;
+  }
 }
 
 .wp-block-jobus-shortcode-candidate-archive {
-    max-width: 100% !important;
-    background-color: #fff;
-    margin: 0 !important;
+  max-width: 100% !important;
+  background-color: #fff;
+  margin: 0 !important;
 }
 
 .wp-block-jobus-shortcode-company-archive {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 .jobus_job_details {
-    max-width: 100% !important;
-    background-color: #fff;
+  max-width: 100% !important;
+  background-color: #fff;
 
-    a {
-        text-decoration: none !important;
-    }
+  a {
+    text-decoration: none !important;
+  }
 
-    code {
-        background: none;
-    }
+  code {
+    background: none;
+  }
 }
 
 .jobus_job_details_2 {
-    a {
-        text-decoration: none !important;
-    }
+  a {
+    text-decoration: none !important;
+  }
 
-    ul {
-        margin-left: 0 !important;
-    }
+  ul {
+    margin-left: 0 !important;
+  }
 }
 
 .related-job-section a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .job-post-item-wrapper {
-    .wrapper {
-        ul {
-            margin-left: 0 !important;
-        }
-
-        li {
-            margin-top: 0 !important;
-        }
+  .wrapper {
+    ul {
+      margin-left: 0 !important;
     }
+
+    li {
+      margin-top: 0 !important;
+    }
+  }
 }
 
 // twenty twenty five Theme Compatibility
 .wp-theme-twentytwentyfive {
-    .candidates-profile {
+  .candidates-profile {
 
-        .wp-block-heading,
-        .title {
-            top: -39px !important;
-        }
-
-        li {
-            div {
-                margin: 0 !important;
-            }
-        }
+    .wp-block-heading,
+    .title {
+      top: -39px !important;
     }
 
-    .job-company-info {
-        .job-meta-data div {
-            margin: -6px 0 25px !important;
-        }
+    li {
+      div {
+        margin: 0 !important;
+      }
     }
+  }
+
+  .job-company-info {
+    .job-meta-data div {
+      margin: -6px 0 25px !important;
+    }
+  }
 }
 
 // Hello Elementor Theme Compatibility
 .site-main:has(.wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-job-archive,
     .wp-block-jobus-shortcode-company-archive) {
-    max-width: 100% !important;
+  max-width: 100% !important;
 }
 
 .wp-theme-hello-elementor,
 .wp-theme-hello-biz.jobus-frontend {
-    .jobus-dashboard-template {
-        button {
-            border: none;
-        }
+  .jbs-dashboard-template {
+    button {
+      border: none;
     }
+  }
 
-    .jbs-accordion-button {
-        width: 100%;
-        display: flex;
-    }
+  .jbs-accordion-button {
+    width: 100%;
+    display: flex;
+  }
 
-    table tbody tr>td {
-        background: none;
-    }
+  table tbody tr > td {
+    background: none;
+  }
 
-    button.action-btn {
-        background: none;
-    }
+  button.action-btn {
+    background: none;
+  }
 
-    table thead:first-child tr:first-child th {
-        border: none;
-    }
+  table thead:first-child tr:first-child th {
+    border: none;
+  }
 
-    table.jbs-table.job-alert-table th {
-        text-align: left;
-    }
+  table.jbs-table.job-alert-table th {
+    text-align: left;
+  }
 
-    .dashboard-body .job-alert-table th:last-child {
-        text-align: right !important;
-    }
+  .dashboard-body .job-alert-table th:last-child {
+    text-align: right !important;
+  }
 }
 
 // Astra Theme Compatibility
@@ -130,22 +130,22 @@
 .single-jobus_company,
 .single-jobus_candidate,
 .single-jobus_job {
-    .ast-container {
-        display: block !important;
-        max-width: 100% !important;
-    }
+  .ast-container {
+    display: block !important;
+    max-width: 100% !important;
+  }
 }
 
-.ast-container:has(.jbs-container, .jobus-dashboard-template) {
-    max-width: 100% !important;
-    padding: 0 !important;
-    flex-direction: column !important;
+.ast-container:has(.jbs-container, .jbs-dashboard-template) {
+  max-width: 100% !important;
+  padding: 0 !important;
+  flex-direction: column !important;
 }
 
 .single-jobus_candidate {
-    .ast-container {
-        padding: 0;
-    }
+  .ast-container {
+    padding: 0;
+  }
 }
 .card-box{
     .user-avatar-setting{
@@ -155,67 +155,71 @@
         }
     }
 }
-.dashboard-body{
-    .jbs-table-responsive{
-        .action-btn{
-            &:hover,&:focus{
-                background-color: transparent;
-            }
-        }
-    }
-}
-.ast-container {
-    .jobus-dashboard-template {
-        a {
-            &:focus {
-                outline: none !important;
-            }
-        }
 
-        button {
 
-            &:hover,
-            &:focus {
-                // background-color: transparent;
-            }
-        }
+.dashboard-body {
+  .jbs-table-responsive {
+    .action-btn {
+      &:hover, &:focus {
+        background-color: transparent;
+      }
     }
-
-    table.jbs-table.job-alert-table {
-        border: none;
-    }
+  }
 }
 
 .ast-container {
+  .jbs-dashboard-template {
     a {
-        &:focus {
-            outline: none !important;
-        }
+      &:focus {
+        outline: none !important;
+      }
     }
 
     button {
 
-        &:hover,
-        &:focus {
-            // background-color: transparent;
-        }
+      &:hover,
+      &:focus {
+        // background-color: transparent;
+      }
     }
+  }
 
-    ul {
-        padding-left: 0 !important;
-        margin-left: 0 !important;
-    }
+  table.jbs-table.job-alert-table {
+    border: none;
+  }
 }
-.registration-section{
-    ul{
-        padding-left: 0 !important;
-        margin-left: 0 !important;
+
+.ast-container {
+  a {
+    &:focus {
+      outline: none !important;
     }
+  }
+
+  button {
+
+    &:hover,
+    &:focus {
+      // background-color: transparent;
+    }
+  }
+
+  ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+.registration-section {
+  ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
 }
 
 .jobus-frontend.elementor-template-full-width .ast-container {
-    max-width: 100%;
-    padding: 0;
+  max-width: 100%;
+  padding: 0;
 }
 
 // kadence Theme Compatibility
@@ -223,180 +227,181 @@
 .site-container:has(.wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-job-archive,
     .wp-block-jobus-shortcode-company-archive) {
-    max-width: 100% !important;
-    padding: 0 !important;
+  max-width: 100% !important;
+  padding: 0 !important;
 }
 
 .content-area:has(.wp-block-jobus-shortcode-job-archive,
     .wp-block-jobus-shortcode-candidate-archive,
     .wp-block-jobus-shortcode-company-archive) {
-    width: 100% !important;
-    padding: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
 }
 
 .wp-theme-kadence.jobus-frontend {
-    ul {
-        padding-left: 0;
-    }
+  ul {
+    padding-left: 0;
+  }
 }
 
 .candidate-profile-card .candidate-skills li {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 // Docy Theme Compatibility
 
 .wp-theme-docy {
-    .container:has(.jbs-container) {
-        max-width: 100% !important;
-        padding: 0 !important;
+  .container:has(.jbs-container) {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .jbs-container {
+    ul {
+      margin-left: 0 !important;
+
+      &.jbs-pagination {
+        padding-left: 0 !important;
+      }
+    }
+  }
+
+  .jbs-pagination {
+    .page-numbers {
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+    }
+  }
+
+  .candidate-profile-card div.right-side ul.candidate-skills {
+    padding-left: 0;
+  }
+
+  .jbs-table {
+
+    thead,
+    tbody tr {
+      border: none;
+      background: none;
     }
 
-    .jbs-container {
-        ul {
-            margin-left: 0 !important;
-
-            &.jbs-pagination {
-                padding-left: 0 !important;
-            }
-        }
-    }
-
-    .jbs-pagination {
-        .page-numbers {
-            border-left: none;
-            border-top: none;
-            border-bottom: none;
-        }
-    }
-
-    .candidate-profile-card div.right-side ul.candidate-skills {
-        padding-left: 0;
-    }
-
-    .jbs-table {
-
-        thead,
-        tbody tr {
-            border: none;
-            background: none;
-        }
-
-    }
+  }
 
 }
 
 .jbs-nice-select {
 
-    ul {
-        padding-left: 0 !important;
-        margin: 5px;
-        border-radius: 10px !important;
-    }
+  ul {
+    padding-left: 0 !important;
+    margin: 5px;
+    border-radius: 10px !important;
+  }
 }
 
 
 // GeneratePress Theme Compatibility
 
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jobus-dashboard-template) {
-    max-width: 100%;
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
+  max-width: 100%;
 
-    .site-content {
-        display: block;
-    }
+  .site-content {
+    display: block;
+  }
 
-    .job-details {
-        margin-top: 0;
-    }
+  .job-details {
+    margin-top: 0;
+  }
 
-    .dashboard-body .placeholder_icon span::before {
-        top: 21px
-    }
+  .dashboard-body .placeholder_icon span::before {
+    top: 21px
+  }
 
-    table.jbs-table.job-alert-table {
-        border: none;
-    }
+  table.jbs-table.job-alert-table {
+    border: none;
+  }
 }
 
 .jobus-frontend.elementor-template-full-width {
-    .grid-container.hfeed {
-        max-width: 100%;
-    }
+  .grid-container.hfeed {
+    max-width: 100%;
+  }
 }
 
 .jobus-frontend {
-    img {
-        max-width: 100%;
-        display: block;
-    }
+  img {
+    max-width: 100%;
+    display: block;
+  }
 }
 
 // Avada Theme Compatibility
 .wp-theme-Avada.jobus-frontend {
-    .clearfix {
-        padding: 0 !important;
+  .clearfix {
+    padding: 0 !important;
 
-        .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jobus-dashboard-template) {
-            max-width: 100% !important;
-            padding: 0 !important;
-        }
+    .fusion-row:has(.jbs-container, .elementor-widget-jobus_companies, .elementor-widget-jobus_job_tabs, .jbs-dashboard-template) {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+  }
+
+  .fusion-row {
+    .page-numbers.current {
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+      margin: 0 !important;
     }
 
-    .fusion-row {
-        .page-numbers.current {
-            border-left: none;
-            border-top: none;
-            border-bottom: none;
-            margin: 0 !important;
-        }
-
-        h6.fusion-responsive-typography-calculated {
-            margin: 11px 0px;
-        }
+    h6.fusion-responsive-typography-calculated {
+      margin: 11px 0px;
     }
+  }
 
 }
-
 
 
 // OceanWP Theme Compatibility
 
 .wp-theme-oceanwp.jobus-frontend {
-    a {
-        &:focus {
-            outline: none !important;
-        }
+  a {
+    &:focus {
+      outline: none !important;
     }
+  }
 }
 
 
 // Eduacademy Theme Compatibility
 
 .jobus-frontend {
-    .jbs-container {
-        form {
-            margin-bottom: 0;
-        }
+  .jbs-container {
+    form {
+      margin-bottom: 0;
     }
+  }
 }
 
 // blocksy Theme Compatibility
 
-.wp-theme-blocksy.jobus-frontend{
-    .jobus-dashboard-template{
-        .dashboard-wrapper{
-            a{
-                outline: none;
-                &:focus{
-                    outline: none !important;
-                    box-shadow: none;
-                }
-            }
-            .user-avatar-setting{
-                .upload-btn{
-                        padding: 0px 10px !important;
-                }
-            }
+.wp-theme-blocksy.jobus-frontend {
+  .jbs-dashboard-template {
+    .dashboard-wrapper {
+      a {
+        outline: none;
+
+        &:focus {
+          outline: none !important;
+          box-shadow: none;
         }
+      }
+
+      .user-avatar-setting {
+        .upload-btn {
+          padding: 0px 10px !important;
+        }
+      }
     }
+  }
 }
