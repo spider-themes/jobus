@@ -75,6 +75,7 @@ class User {
 		add_role( 'jobus_employer', esc_html__( 'Employer (Jobus)', 'jobus' ), array(
 			'read'                      => true,  // Only allow reading
 			'upload_files'              => true, // Allow safe uploads only
+			'edit_posts'                => true
 		) );
 	}
 
