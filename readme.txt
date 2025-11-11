@@ -60,6 +60,40 @@ Jobus is a comprehensive and powerful tool for creating job, company, and candid
 * **Custom Minimal Design:**
   Enjoy a clean, modern, and minimal interface focused on usability and enhanced user experience.
 
+
+###  Pro Features
+Upgrade to Jobus Pro for advanced tools and premium enhancements to supercharge your job board.
+
+#### Advanced Management Features
+- Application management dashboard
+- Favorite jobs/bookmarking
+- Advanced filters (salary, job type, location, etc.)
+- Application Tracking System (ATS)
+- Analytics & reporting (track job views & applications)
+- Featured jobs & companies
+- Multiple layout options for jobs, companies, and candidates
+- Applicant tracking (view applicants per job)
+- Assign company to job post
+- Multiple archive and detail layout options for jobs, candidates, and companies
+- Custom job application form (upload custom link, e.g., Google Form)
+- SMTP settings (custom email sending)
+- Frontend login page
+
+#### Dashboard & User Experience
+- Employer dashboard (manage listings, applications, etc.)
+- Candidate dashboard (manage resumes, applications, etc.)
+- Custom account pages for employers and candidates
+- Profile management (update details, change password)
+- Password reset functionality
+- Activity log (track user actions)
+- Featured job & company options (highlight listings)
+
+#### Customization & Widgets
+- Application management dashboard
+- Custom widgets, shortcodes & Gutenberg block 
+- Pre-made templates & layouts for careers, jobs, and companies
+
+
 == Elementor Widgets ==
 
 * **Categories**
@@ -144,4 +178,6 @@ Compatibility: Docy theme compatibility refined for smoother integration
 Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
 
 = 1.0.0 (22 October 2025) =
- * Init: Initial release
+* Init: Initial release
+
+[//]: # fs_free_only_end
