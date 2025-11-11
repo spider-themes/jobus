@@ -1,7 +1,7 @@
 === Jobus – Complete Job Board & Hiring Platform that match your brand ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -152,8 +152,35 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 
 == Changelog ==
 
-= 1.1.0 (31 Oct 2025) =
+= 1.2.0 (11 Nov 2025) =
+New: Predefined Color Schemes added in the General Settings panel for quick styling customization
+New: Custom scrollbar styles added for a smoother visual experience
+New: Spinner loading animation styles added for better user feedback
+New: Demo user and password field added in the login form for easier testing
 New: demo.xml file added in the include/sample-data folder
+Fixed: Candidate save and saved job list issues resolved
+Fixed: Duplicate social link issue on candidate dashboard fixed
+Fixed: CV upload and related dashboard issues resolved
+Fixed: Employer job posting and dashboard header conflicts fixed for block-based themes
+Fixed: Registration and login password visibility issues resolved
+Fixed: Astra theme CSS issues on single and dashboard layouts fixed
+Fixed: Company and candidate dashboard CSS inconsistencies resolved
+Fixed: Extra borders removed from job listings for a cleaner appearance
+Fixed: Minor theme compatibility and visual issues resolved
+Improved: Option retrieval simplified for better performance and cleaner code
+Improved: Pagination HTML updated and renamed to .jbs-pagination for consistency
+Improved: Theme compatibility enhanced for Kadence, Docy, Avada, Astra, and OceanWP
+Improved: Company and candidate archive templates adjusted for better styling and alignment
+Improved: Company details and job title markup refined in dashboard
+Improved: Job button typography control renamed for clarity
+Improved: Link color updated using rgba values for better visibility
+Improved: Candidate and Company menus moved under the main Jobus menu
+Improved: Flex utility classes added for easier alignment and layout control
+Compatibility: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
+Compatibility: Administrator access enabled for employer dashboard
+Compatibility: Employer role granted edit_posts capability for frontend image uploads
+Optimized: Unused CSS and old titlebar code removed for lighter performance
+Optimized: Color and typography refined across dashboard and listings for consistency
 
 = 1.1.0 (31 Oct 2025) =
 New: New Color Settings added in the General Settings panel
