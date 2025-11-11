@@ -232,15 +232,18 @@ class Ajax_Actions {
 
 		// Validate post type, meta key, and user role
 		$role_map = [
-			'jobus_job'      => [ 'role' => 'jobus_candidate', 'meta_key' => 'jobus_saved_jobs' ],
-			'jobus_candidate'=> [ 'role' => 'jobus_employer',  'meta_key' => 'jobus_saved_candidates' ],
+			'jobus_job'       => [ 'role' => 'jobus_candidate', 'meta_key' => 'jobus_saved_jobs' ],
+			'jobus_candidate' => [ 'role' => 'jobus_employer',  'meta_key' => 'jobus_saved_candidates' ],
 		];
 
 		if ( ! isset( $role_map[$post_type] ) || $meta_key !== $role_map[$post_type]['meta_key'] ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Invalid post type or meta key.', 'jobus' ) ] );
 		}
 
-		if ( empty( $user ) || ! in_array( $role_map[$post_type]['role'], (array) $user->roles, true ) ) {
+		// Allow admin OR required role
+		$required_role = $role_map[$post_type]['role'];
+
+		if ( empty( $user ) || ( ! in_array( 'administrator', (array) $user->roles, true ) && ! in_array( $required_role, (array) $user->roles, true ) ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to save this post.', 'jobus' ) ] );
 		}
 

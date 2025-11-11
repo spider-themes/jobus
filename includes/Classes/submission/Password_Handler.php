@@ -32,7 +32,7 @@ class Password_Handler {
 		$user = wp_get_current_user();
 
 		// Check if the logged-in user has the required role
-		$is_allowed = array_intersect( [ 'jobus_candidate', 'jobus_employer' ], (array) $user->roles );
+		$is_allowed = array_intersect( [ 'jobus_candidate', 'jobus_employer', 'administrator' ], (array) $user->roles );
 		if ( empty( $is_allowed ) ) {
 			wp_die( esc_html__( 'You do not have permission to access this page.', 'jobus' ) );
 		}

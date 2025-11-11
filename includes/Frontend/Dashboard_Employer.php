@@ -90,8 +90,8 @@ class Dashboard_Employer {
 		}
 
 		$user = wp_get_current_user();
-		if ( ! in_array( 'jobus_employer', (array) $user->roles, true ) ) {
-			// If not an employer, show the logout form (prevent dashboard access for other roles)
+		if ( ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+			// If not allowed, show the logout form
 			return Template_Loader::get_template_part( 'dashboard/logout-form' );
 		}
 

@@ -195,8 +195,9 @@ class User {
 	 * @param int $user_id The user ID
 	 */
 	public function create_candidate_post_for_user( int $user_id ): void {
+
 		$user = get_userdata( $user_id );
-		if ( ! $user || ! in_array( 'jobus_candidate', (array) $user->roles ) ) {
+		if ( ! $user || ! array_intersect( [ 'jobus_candidate', 'administrator' ], (array) $user->roles ) ) {
 			return;
 		}
 
@@ -235,7 +236,7 @@ class User {
 	public function create_company_post_for_user( int $user_id ) {
 
 		$user = get_userdata( $user_id );
-		if ( ! $user || ! in_array( 'jobus_employer', (array) $user->roles ) ) {
+		if ( ! $user || ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
 			return;
 		}
 

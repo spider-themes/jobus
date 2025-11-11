@@ -36,8 +36,9 @@ class Job_Form_Submission {
 
 		// Must be an employer
 		$user = wp_get_current_user();
-		if ( ! in_array( 'jobus_employer', $user->roles, true ) ) {
-			wp_die( esc_html__( 'Access denied. You must be an employer to post a job.', 'jobus' ) );
+		$allowed_roles = [ 'jobus_employer', 'administrator' ];
+		if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			wp_die( esc_html__( 'Access denied. You do not have permission to post a job.', 'jobus' ) );
 		}
 
 		$this->handle_form_submission();
