@@ -181,13 +181,11 @@ body.jobi .active-theme-jobi .csf-fieldset {
   pointer-events: inherit !important;
 }
 
-.wp-submenu li a[href*="has_jbs_divider=true"],
-.wp-submenu li a[href*="page=jobus-settings"] {
+.wp-submenu li a[href*="has_jbs_divider=true"] {
   position: relative;
   margin-top: 16px !important;
 }
-.wp-submenu li a[href*="has_jbs_divider=true"]::before,
-.wp-submenu li a[href*="page=jobus-settings"]::before {
+.wp-submenu li a[href*="has_jbs_divider=true"]::before {
   content: "";
   display: block;
   width: 100%;
@@ -195,6 +193,21 @@ body.jobi .active-theme-jobi .csf-fieldset {
   background-color: rgb(96, 96, 96);
   position: absolute;
   top: -8px;
+  left: 0;
+  z-index: 0;
+}
+.wp-submenu li a[href*="has_jbs_divider_bottom=true"] {
+  position: relative;
+  margin-bottom: 16px !important;
+}
+.wp-submenu li a[href*="has_jbs_divider_bottom=true"]::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(96, 96, 96);
+  position: absolute;
+  bottom: -8px;
   left: 0;
   z-index: 0;
 }

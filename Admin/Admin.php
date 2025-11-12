@@ -48,15 +48,22 @@ class Admin {
 
 	public function create_nested_submenus() {
 		// === COMPANY PAGES ===
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company', 'jobus' ), __( 'Company', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_company&has_jbs_divider=true' );
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_cat&post_type=jobus_company' );
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_location&post_type=jobus_company' );
+		if ( jobus_opt('enable_company') ) {
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company', 'jobus' ), __( 'Company', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_company&has_jbs_divider=true' );
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_cat&post_type=jobus_company' );
+			
+			// Add divider bottom if Candidate is not enabled
+			$divider_bottom = jobus_opt('enable_candidate') != true ? '&has_jbs_divider_bottom=true' : '';
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_location&post_type=jobus_company' . $divider_bottom );
+		}
 
 		// === CANDIDATE PAGES ===
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate', 'jobus' ), __( 'Candidate', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_candidate&has_jbs_divider=true' );
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_cat&post_type=jobus_candidate' );
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_location&post_type=jobus_candidate' );
-		add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Skills', 'jobus' ), '&nbsp; Skills', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_skill&post_type=jobus_candidate' );
+		if ( jobus_opt('enable_candidate') ) {
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate', 'jobus' ), __( 'Candidate', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_candidate&has_jbs_divider=true' );
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_cat&post_type=jobus_candidate' );
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_location&post_type=jobus_candidate' );
+			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Skills', 'jobus' ), '&nbsp; Skills', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_skill&post_type=jobus_candidate&has_jbs_divider_bottom=true' );
+		}
 	}
 
 	/**

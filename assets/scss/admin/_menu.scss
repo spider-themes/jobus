@@ -1,6 +1,5 @@
 .wp-submenu li {
-  a[href*="has_jbs_divider=true"],
-  a[href*="page=jobus-settings"] {
+  a[href*="has_jbs_divider=true"] {
     position: relative;
     margin-top: 16px !important;
     &::before {
@@ -11,6 +10,21 @@
       background-color: rgb(96 96 96);
       position: absolute;
       top: -8px;
+      left: 0;
+      z-index: 0;
+    }
+  }
+  a[href*="has_jbs_divider_bottom=true"] {
+    position: relative;
+    margin-bottom: 16px !important;
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgb(96 96 96);
+      position: absolute;
+      bottom: -8px;
       left: 0;
       z-index: 0;
     }
