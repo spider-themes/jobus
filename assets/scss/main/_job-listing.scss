@@ -1,11 +1,3 @@
-.job-details {
-  p {
-    font-size: 17px;
-    margin-top: 20px;
-    line-height: 1.8;
-  }
-}
-
 .jobus-job-classic{
     &.job-listing-three{
         .pagination-wrap{
@@ -1254,11 +1246,16 @@ button.jbs_filter_btn-padding{
 
 .job-details {
   position: relative;
-  margin-top: 100px;
-  padding-top: 80px;
+  padding-top: 130px;
 
   &.style-two {
     background: var(--jbs-box_bg_color);
+  }
+
+  p {
+    font-size: 17px;
+    margin-top: 20px;
+    line-height: 1.8;
   }
 
   .post-date {

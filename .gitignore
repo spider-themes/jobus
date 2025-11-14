@@ -9,3 +9,5 @@
 /.vscode
 /.idea
 .DS_Store
+/package-lock.json
+/composer.lock

@@ -18,33 +18,40 @@ if ( class_exists( 'CSF' ) ) {
 		'menu_parent'     => 'edit.php?post_type=jobus_job',
 		'theme'           => 'dark',
 		'sticky_header'   => 'true',
-	));
+		'show_bar_menu'   => false,
+	) );
 
 	// Determine Pro features (license only)
-	$is_pro_access = function_exists('jobus_fs') && jobus_fs()->can_use_premium_code();
+	$is_pro_access    = function_exists( 'jobus_fs' ) && jobus_fs()->can_use_premium_code();
 	$pro_access_class = $is_pro_access ? ' jobus-pro-unlocked' : ' jobus-pro-locked';
 
 	// Set $active_theme_class if theme is active
 	$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
-	$active_theme_class = $is_active_theme_jobi ? ' active-theme-jobi' : '';
+	$active_theme_class   = $is_active_theme_jobi ? ' active-theme-jobi' : '';
 
-	$options = get_option( 'jobus_opt', [] );
+	$options          = get_option( 'jobus_opt', [] );
 	$enable_candidate = $options['enable_candidate'] ?? true;
-	$enable_company = $options['enable_company'] ?? true;
+	$enable_company   = $options['enable_company'] ?? true;
 
 	/**
 	 * Include files
 	 */
 	require_once JOBUS_PATH . '/Admin/csf/options/general.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/appearance.php';
-	require_once JOBUS_PATH . '/Admin/csf/options/dashboard.php';
+
+	if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+		require_once JOBUS_PATH . '/Admin/csf/options/dashboard.php';
+	}
+
 	require_once JOBUS_PATH . '/Admin/csf/options/job_opt.php';
+
 	if ( $enable_candidate || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
-			require_once JOBUS_PATH . '/Admin/csf/options/candidate_opt.php';
-		}
+		require_once JOBUS_PATH . '/Admin/csf/options/candidate_opt.php';
+	}
 	if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 		require_once JOBUS_PATH . '/Admin/csf/options/company_opt.php';
 	}
+
 	require_once JOBUS_PATH . '/Admin/csf/options/login-form.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/smtp.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/backup.php';

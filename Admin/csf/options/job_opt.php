@@ -269,12 +269,7 @@ CSF::createSection( $settings_prefix, array(
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
-		// Related Jobs
-		array(
-			'type'    => 'subheading',
-			'content' => esc_html__( 'Related Posts', 'jobus' ),
-		),
-
+		// Job Attributes
 		array(
 			'type'    => 'subheading',
 			'content' => esc_html__( 'Job Attributes', 'jobus' ),
