@@ -146,7 +146,7 @@
   text-align: right !important;
 }
 
-.related-job-section .slick-arrow-one {
+.related-job-section .jbs-slick-arrow-one {
   right: initial;
   left: 0;
   padding-right: 0;
@@ -179,7 +179,7 @@
   text-align: right !important;
 }
 
-.card-style-one {
+.card-item {
   width: 16.66666% !important;
 }
 

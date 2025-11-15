@@ -73,7 +73,7 @@ $related_jobs = new WP_Query($args);
                 wp_reset_postdata();
                 ?>
             </div>
-            <ul class="slider-arrows slick-arrow-one color-two jbs-d-flex jbs-justify-content-center jbs-style-none jbs-sm-mt-20">
+            <ul class="slider-arrows jbs-slick-arrow-one color-two jbs-d-flex jbs-justify-content-center jbs-style-none jbs-sm-mt-20">
                 <li class="prev_e slick-arrow"><i class="bi bi-arrow-left"></i></li>
                 <li class="next_e slick-arrow"><i class="bi bi-arrow-right"></i></li>
             </ul>

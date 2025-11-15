@@ -856,11 +856,6 @@ button.jbs_filter_btn-padding{
   }
 }
 
-// Job Listing Two
-.job-listing-two {
-  background: var(--jbs-box_bg_color);
-}
-
 .job-list-two {
   padding: 35px 35px 30px;
   background: #FFFFFF;
@@ -1411,7 +1406,7 @@ button.jbs_filter_btn-padding{
 .related-job-section {
   background: var(--jbs-box_bg_color);
 
-  .slick-arrow-one {
+  .jbs-slick-arrow-one {
     position: absolute;
     right: 0;
     top: 17px;

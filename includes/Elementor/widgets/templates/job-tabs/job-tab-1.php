@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<section class="job-listing-two">
+<section class="jbs jbs-job-tabs-widget">
     <ul class="jbs-style-none jbs-d-flex jbs-justify-content-lg-end jbs-flex-wrap isotop-menu-wrapper g-control-nav">
 		<?php
 		if ( ! empty( $settings['all_label'] ) ) { ?>
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
     </ul>
 
-    <div id="isotop-gallery-wrapper" class="grid-3column jbs-pt-55 jbs-lg-pt-20">
+    <div id="isotop-gallery-wrapper" class="jbs-grid-column-3 jbs-pt-55 jbs-lg-pt-20">
         <div class="grid-sizer"></div>
 		<?php
 		while ( $job_posts->have_posts() ) : $job_posts->the_post();

@@ -4,16 +4,16 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="category-section-five">
-    <div class="card-wrapper-two jbs-d-flex jbs-flex-wrap jobus_cat_align">
+<div class="jbs-category-widget-two">
+    <div class="card-wrapper jbs-d-flex jbs-flex-wrap jobus_cat_align">
         <?php
         if ( is_array($categories) ) {
             foreach ( $categories as $index => $category ) {
                 $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
                 ?>
 
-                <div class="card-style-seven bg-color jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
-                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="wrapper jbs-d-flex jbs-align-items-center">
+                <div class="card-item jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info jbs-d-flex jbs-align-items-center">
                         <?php
                         if ( !empty($meta['cat_img']['id']) ) { ?>
                             <div class="icon jbs-d-flex jbs-align-items-center jbs-justify-content-center">

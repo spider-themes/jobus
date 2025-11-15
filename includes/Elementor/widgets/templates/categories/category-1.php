@@ -4,16 +4,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<section class="category-section-one">
-    <div class="card-wrapper-one jbs-row jbs-justify-content-center">
+<div class="jbs-category-widget-one">
+    <div class="card-wrapper jbs-row jbs-justify-content-center">
 		<?php
 		if ( is_array( $categories ) ) {
 			foreach ( $categories as $index => $category ) {
 				$meta = get_term_meta( $category->term_id, 'jobus_taxonomy_cat', true );
 				?>
-                <div class="card-style-one jbs-text-center jbs-mt-20 wow fadeInUp">
-                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>"
-                       class="bg wrapper card_style_one-item-center">
+                <div class="card-item jbs-text-center jbs-mt-20 wow fadeInUp">
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info">
 						<?php
 						if ( ! empty( $meta['cat_img']['id'] ) ) { ?>
                             <div class="icon jbs-d-flex jbs-align-items-center jbs-justify-content-center">
@@ -36,4 +35,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 		?>
     </div>
-</section>
+</div>
