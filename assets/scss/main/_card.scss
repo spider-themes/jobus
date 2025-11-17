@@ -45,6 +45,70 @@
 
 // Card Four
 
+.jbs-card-style {
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+    -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+    box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    
+    &:hover {
+        -webkit-transform: translateY(-5px);
+        -moz-transform: translateY(-5px);
+        -ms-transform: translateY(-5px);
+        transform: translateY(-5px);
+    }
+    a {
+        padding: 40px 38px 50px;
+        &:hover {
+            text-decoration: none !important;
+        }
+    }
+    .icon {
+        width: 72px;
+        height: 72px;
+        -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+        border: 1px solid #F0F0F0;
+    }
+    &:hover .icon {
+        background: var(--jbs-brand_color_3);
+        border-color: transparent;
+    }
+    .title {
+        color:var(--jbs-heading_color);
+        margin: 28px 0 25px;
+    }
+    &:hover .title {
+        color: var(--jbs-brand_color_4);
+        
+    }
+    .total-job {
+        transition: 0.3s;
+        font-size: 16px;
+        color: rgba($color: #09321C, $alpha: 0.4);
+    }
+    &.bg-color {
+        box-shadow: none;
+        background: var(--jbs-brand_color_4);
+        a {
+            padding: 10px 40px 20px;
+        }
+        .title {
+            font-size: 72px;
+            line-height: initial;
+            margin: 0 0 5px;
+            
+        }
+        .icon {
+            border-color: #fff;
+        }
+    }
+}
+
 
 // Card Five
 .card-style-five:before {

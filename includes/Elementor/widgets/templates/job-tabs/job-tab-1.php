@@ -84,7 +84,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( ! empty( $settings['view_all_btn_url']['url'] ) ) {
 			?>
             <div class="isotop-item">
-                <div class="card-style-four bg-color tran3s jbs-w-100 jbs-mt-40 jbs-lg-mt-20">
+                <div class="jbs-card-style bg-color tran3s jbs-w-100 jbs-mt-40 jbs-lg-mt-20">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>

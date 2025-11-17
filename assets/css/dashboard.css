@@ -1612,6 +1612,11 @@ body.page-template-dashboard .site-header {
   display: none;
 }
 
+@media (max-width: 767px) {
+  .dashboard-body {
+    padding: 0px;
+  }
+}
 .dashboard-body .preview {
   display: flex;
   margin-bottom: 1rem;

@@ -1569,3 +1569,38 @@ input[type="file"]::-webkit-file-upload-button {
     }
   }
 }
+.elementor-widget-container{
+    .job-listing-one{
+        .job-list-one {
+        padding-left: 20px !important;
+        }
+    }
+}
+@media (max-width:769px){
+    .job_specifications_area .jod_list_title_area {
+    padding: 0;
+}
+}
+@media (max-width: 575px) {
+  .job_specifications_area {
+  .jod_list_title_area {
+    flex-basis: 100%;
+  }
+
+  .jod_list_meta_area {
+    padding-top: 20px;
+    text-align: start;
+    flex-basis: 60%;
+  }
+
+  .jod_list_cat_area {
+    padding-top: 20px;
+    text-align: start;
+    flex-basis: 40%;
+  }
+
+  .jod_list_btn_area {
+    flex-basis: 20%;
+  }
+}
+}

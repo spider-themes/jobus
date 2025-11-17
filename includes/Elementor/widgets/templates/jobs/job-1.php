@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
             ?>
 
             <div class="job-list-one jbs-position-relative bottom-border">
-                <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center job_specifications_area">
+                <div class="jbs-row jbs-justify-content-between jbs-align-items-center job_specifications_area">
 
                     <div class="jod_list_title_area">
                         <div class="job-title jbs-d-flex jbs-align-items-center">

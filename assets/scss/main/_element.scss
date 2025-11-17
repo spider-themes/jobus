@@ -57,7 +57,7 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                padding: 0 62px !important;
+                padding: 0 62px ;
                 height: 100% !important;
                 letter-spacing: 0.8px !important;
                 background: var(--jbs-brand_color_3) !important;
@@ -544,3 +544,25 @@
     }
   }
 }
+
+@media (max-width: 767.98px) {
+    .job-search-one form{
+        // padding: 22px;
+    }
+    .job-search-one form .input-box.border-left {
+        border-left: none;
+        padding-top: 5px;
+        border-top: 1px solid #E6E6E6;
+    }
+    .job-search-one form .jobus_srch_bor button{
+        display: block;
+    }
+    .job-search-one form .search-btn, .job-search-one form .search-btn-two {
+    margin: 0 !important;
+    padding: 15px 0PX !important;
+    border-radius: 0 0 10px 10px !important;
+    width: 100% !important;
+}
+}
+
+
