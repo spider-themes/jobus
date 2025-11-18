@@ -6,14 +6,14 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 
     .feedback-section-five .slider-arrows,
     .related-job-section .jbs-slick-arrow-one {
         position: static;
     }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .dashboard-navbar {
         transform: translateX(-100%);
         opacity: 0;
@@ -22,6 +22,9 @@
     }
     .dashboard-body{
         margin-left: 0 !important;
+        .job-list-one{
+            padding-left: 12px !important;
+        }
     }
 }
 @media (max-width: 1024px) {
@@ -38,5 +41,9 @@
     }
      .profile-btn{
             margin-left: 10px !important;
+        }
+                   
+        .specification-item{
+            flex-wrap: wrap !important;
         }
 }

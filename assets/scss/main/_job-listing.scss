@@ -1576,10 +1576,17 @@ input[type="file"]::-webkit-file-upload-button {
         }
     }
 }
-@media (max-width:769px){
+@media (max-width:769px) {
     .job_specifications_area .jod_list_title_area {
-    padding: 0;
-}
+        padding: 0;
+    }
+    .job-post-item-wrapper{
+        .accordion-box{
+            .job-list-one{
+                padding-left:20px !important;
+            }
+        }
+    }
 }
 @media (max-width: 575px) {
   .job_specifications_area {

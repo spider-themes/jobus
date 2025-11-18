@@ -130,7 +130,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
     </div>
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
-        <div class="jbs-col-lg-7">
+        <div class="jbs-col-full jbs-col-lg-7">
             <div class="saved-job-tab jbs-bg-white jbs-border-20">
                 <div class="saved-jobs-header">
                     <h4 class="title"><?php esc_html_e( 'Saved Candidate', 'jobus' ); ?></h4>
@@ -194,7 +194,7 @@ $saved_candidates_count = is_array($saved_candidates) ? count($saved_candidates)
             </div>
         </div>
 
-        <div class="jbs-col-lg-5">
+        <div class="alsdfkjlaksdf jbs-col-full jbs-col-lg-5">
             <div class="recent-job-tab jbs-bg-white jbs-border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Posted Job', 'jobus' ); ?></h4>
                 <div class="wrapper">

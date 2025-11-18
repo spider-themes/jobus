@@ -1820,6 +1820,14 @@ body{
     }
   }
 }
+@media (max-width:1024px){
+    .dashboard-body {
+    padding: 150px 25px 50px;
+    }
+    .dashboard-body .card-box{
+        padding: 45px 20px 50px;
+    }
+}
 
 @media (max-width:767px){
     .dashboard-body{

@@ -131,7 +131,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
     </div>
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
-        <div class="jbs-col-lg-7">
+        <div class="jbs-col-full jbs-col-lg-7">
             <div class="saved-job-tab jbs-bg-white jbs-border-20">
 
                 <div class="saved-jobs-header">
@@ -185,7 +185,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
             </div>
         </div>
 
-        <div class="jbs-col-lg-5">
+        <div class="jbs-col-full jbs-col-lg-5">
             <div class="recent-job-tab jbs-bg-white jbs-border-20">
                 <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
                 <div class="wrapper">

@@ -12,7 +12,7 @@ $post_type   = jobus_get_sanitized_query_param( 'post_type' );
     </button>
 
     <div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
-        <button type="button" class="btn-close text-reset jbs-d-lg-none" data-jbs-dismiss="offcanvas"
+        <button type="button" class="jbs-btn-close text-reset jbs-d-lg-none jbs-offcanvas-close" data-jbs-dismiss="offcanvas"
                 aria-label="Close"></button>
         <div class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 

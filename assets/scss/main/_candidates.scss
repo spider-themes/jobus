@@ -848,3 +848,64 @@ img {
   background-size: cover !important;
   border: none;
 }
+@media (max-width:1440px){
+ .jbs-col-full {
+        width: 100% !important;
+    }
+}
+@media (max-width: 1024px) {
+   
+
+    .dashboard-body {
+        .candidate-profile-card.list-layout .right-side{
+            padding-left: 5px !important;
+        }
+        .candidate-profile-card.list-layout .candidate-skills{
+            bottom: -55px !important;
+        }
+        .candidate-profile-card {
+            .candidate-info.location-info {
+                margin-top: 0px !important;
+            }
+
+            .candidate-info.salary-info {
+                margin-top: 0px !important;
+            }
+        }
+    }
+     .dashboard-body .dash-card-one {
+    padding: 22px 10px 20px !important;
+}
+}
+
+@media (max-width: 768px) {
+    .candidate-profile-card {
+        .candidate-skills {
+            flex-wrap: wrap;
+        }
+        .candidate_profile-location {
+            margin-top: 10px;
+        }
+    }
+     .dashboard-body {
+        .candidate-profile-card {
+            .candidate-info.location-info {
+                margin-top: 20px !important;
+            }
+
+            .candidate-info.salary-info {
+                margin-top: 50px !important;
+            }
+        }
+    }
+    .dashboard-body .card-box {
+    padding: 45px 20px 50px !important;
+}
+    
+}
+// @media (max-width:425px){
+//     .dashboard-body .dash-card-one {
+//     padding: 22px 13px 20px !important;
+// }
+
+// }

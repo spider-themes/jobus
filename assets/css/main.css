@@ -3582,6 +3582,45 @@ img {
   border: none;
 }
 
+@media (max-width: 1440px) {
+  .jbs-col-full {
+    width: 100% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .dashboard-body .candidate-profile-card.list-layout .right-side {
+    padding-left: 5px !important;
+  }
+  .dashboard-body .candidate-profile-card.list-layout .candidate-skills {
+    bottom: -55px !important;
+  }
+  .dashboard-body .candidate-profile-card .candidate-info.location-info {
+    margin-top: 0px !important;
+  }
+  .dashboard-body .candidate-profile-card .candidate-info.salary-info {
+    margin-top: 0px !important;
+  }
+  .dashboard-body .dash-card-one {
+    padding: 22px 10px 20px !important;
+  }
+}
+@media (max-width: 768px) {
+  .candidate-profile-card .candidate-skills {
+    flex-wrap: wrap;
+  }
+  .candidate-profile-card .candidate_profile-location {
+    margin-top: 10px;
+  }
+  .dashboard-body .candidate-profile-card .candidate-info.location-info {
+    margin-top: 20px !important;
+  }
+  .dashboard-body .candidate-profile-card .candidate-info.salary-info {
+    margin-top: 50px !important;
+  }
+  .dashboard-body .card-box {
+    padding: 45px 20px 50px !important;
+  }
+}
 .card-style-two .icon {
   width: 80px;
   height: 80px;
@@ -6140,6 +6179,9 @@ input[type=file]::-webkit-file-upload-button {
   .job_specifications_area .jod_list_title_area {
     padding: 0;
   }
+  .job-post-item-wrapper .accordion-box .job-list-one {
+    padding-left: 20px !important;
+  }
 }
 @media (max-width: 575px) {
   .job_specifications_area .jod_list_title_area {
@@ -6671,17 +6713,6 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 /*========== Job Listing Widget ==========*/
-@media (max-width: 1199px) {
-  .job-list-one {
-    padding: 25px 20px;
-  }
-}
-@media (max-width: 991px) {
-  .job-list-one {
-    padding-left: 75px;
-  }
-}
-
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
 .jobus-job-classic .pagination-wrap,
@@ -7098,13 +7129,13 @@ input[type=file]::-webkit-file-upload-button {
     text-align: center;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .feedback-section-five .slider-arrows,
   .related-job-section .jbs-slick-arrow-one {
     position: static;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .dashboard-navbar {
     transform: translateX(-100%);
     opacity: 0;
@@ -7113,6 +7144,9 @@ input[type=file]::-webkit-file-upload-button {
   }
   .dashboard-body {
     margin-left: 0 !important;
+  }
+  .dashboard-body .job-list-one {
+    padding-left: 12px !important;
   }
 }
 @media (max-width: 1024px) {
@@ -7129,6 +7163,9 @@ input[type=file]::-webkit-file-upload-button {
   }
   .profile-btn {
     margin-left: 10px !important;
+  }
+  .specification-item {
+    flex-wrap: wrap !important;
   }
 }
 
