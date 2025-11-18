@@ -1,0 +1,154 @@
+body.body_dark {
+  --bs-white: #1d2027 !important;
+  /**=== Integration with Docy === **/
+}
+body.body_dark .jobus-job-classic {
+  background: var(--body_bg) !important;
+}
+body.body_dark .jobus-job-classic .filter-area-tab .light-bg {
+  background: var(--bs-white) !important;
+}
+body.body_dark .jobus-job-classic .filter-area-tab .filter-title {
+  color: var(--black_900) !important;
+}
+body.body_dark .jobus-job-classic .filter-area-tab .main-body ul li label {
+  color: var(--black_600) !important;
+  background: var(--bs-white) !important;
+}
+body.body_dark .jobus-job-classic .filter-area-tab .main-body .tags label {
+  background: var(--black_50) !important;
+  color: var(--black_400) !important;
+}
+body.body_dark .jobus-job-classic .filter-area-tab .main-body .tags label:hover {
+  background: var(--black_75) !important;
+  color: var(--black_100) !important;
+}
+body.body_dark .jobus-job-classic .main-title {
+  color: var(--black_900) !important;
+}
+body.body_dark .jobus-job-classic .upper-filter .total-job-found, body.body_dark .jobus-job-classic .upper-filter .jbs-text-dark {
+  color: var(--black_600) !important;
+}
+body.body_dark .jobus-job-classic .job-list-one,
+body.body_dark .jobus-job-classic .job-list-two {
+  background: var(--bs-white) !important;
+  border-color: var(--white_op10) !important;
+}
+body.body_dark .jobus-job-classic .job-list-one .title,
+body.body_dark .jobus-job-classic .job-list-two .title {
+  color: var(--black_100) !important;
+}
+body.body_dark .jobus-job-classic .job-list-one .job-location a,
+body.body_dark .jobus-job-classic .job-list-one .job-category a,
+body.body_dark .jobus-job-classic .job-list-two .job-location a,
+body.body_dark .jobus-job-classic .job-list-two .job-category a {
+  color: var(--black_400) !important;
+}
+body.body_dark .jobus-job-classic .job-list-one .jbs-text-dark,
+body.body_dark .jobus-job-classic .job-list-two .jbs-text-dark {
+  color: var(--p_color) !important;
+}
+body.body_dark .jobus-job-classic .job-list-one .save-btn,
+body.body_dark .jobus-job-classic .job-list-two .save-btn {
+  background: transparent !important;
+}
+body.body_dark .jobus-job-classic .job-list-one .save-btn:hover,
+body.body_dark .jobus-job-classic .job-list-two .save-btn:hover {
+  background: var(--black_50) !important;
+}
+body.body_dark .jobus-job-classic .jbs-nice-select::after {
+  border-bottom-color: var(--black_400) !important;
+  border-right-color: var(--black_400) !important;
+}
+body.body_dark .jobus-job-classic .style-changer-btn {
+  background: var(--bs-white) !important;
+  border-color: var(--white_op10) !important;
+}
+body.body_dark .jobus-job-classic .style-changer-btn i {
+  color: var(--black_400) !important;
+}
+body.body_dark .jobus-job-classic .pagination-wrap p, body.body_dark .jobus-job-classic .pagination-wrap .jbs-text-dark {
+  color: var(--black_600) !important;
+}
+body.body_dark .jobus_job_details .job-head .post-date, body.body_dark .jobus_job_details .job-head .jbs-text-dark {
+  color: var(--black_600) !important;
+}
+body.body_dark .jobus_job_details .wp-block-group {
+  background: var(--bs-white) !important;
+}
+body.body_dark .jobus_job_details .wp-block-group .wp-block-heading, body.body_dark .jobus_job_details .wp-block-group p a {
+  color: var(--black_100) !important;
+}
+body.body_dark .jobus_job_details .job-company-info {
+  background: var(--bs-white) !important;
+}
+body.body_dark .jobus_job_details .job-company-info ul li span {
+  color: var(--black_100) !important;
+}
+body.body_dark .jobus_job_details .job-company-info ul li div {
+  color: var(--black_400) !important;
+}
+body.body_dark .jobus_job_details .job-company-info .job-tags a {
+  background: var(--black_50) !important;
+  color: var(--black_400) !important;
+}
+body.body_dark .jobus_job_details .job-company-info .job-tags a:hover {
+  background: var(--black_75) !important;
+  color: var(--black_100) !important;
+}
+body.body_dark .related-job-section {
+  background: var(--body_bg) !important;
+}
+body.body_dark .related-job-section .related-job-slider .job-list-two {
+  background: var(--bs-white) !important;
+  border-color: var(--white_op10) !important;
+}
+body.body_dark .related-job-section .related-job-slider .job-list-two .jbs-text-dark {
+  color: var(--p_color) !important;
+}
+body.body_dark .related-job-section .related-job-slider .job-list-two .job-location a {
+  color: var(--black_400) !important;
+}
+body.body_dark .job-list-two,
+body.body_dark .job-listing-one .job-list-one,
+body.body_dark .big-circle .brand-icon {
+  background: var(--bs-white) !important;
+  border-color: var(--border_on_highlight) !important;
+}
+body.body_dark .job-list-two .job-duration {
+  background: var(--black_50) !important;
+  color: var(--black_400) !important;
+}
+body.body_dark .big-circle {
+  background: var(--bs-white) !important;
+}
+body.body_dark .job-listing-wrapper.border-wrapper {
+  border-color: var(--border_on_white) !important;
+}
+body.body_dark .job-listing-wrapper .job-date {
+  color: var(--black_400) !important;
+}
+body.body_dark .job-search-one form,
+body.body_dark .job-search-one .jbs-nice-select {
+  background: var(--bs-white) !important;
+}
+body.body_dark .job-search-one form .input-box .label {
+  color: var(--black_900) !important;
+}
+body.body_dark .job-search-one form .input-box input {
+  color: var(--black_100) !important;
+}
+body.body_dark .job-search-one form .jbs-nice-select .current {
+  color: var(--black_100) !important;
+}
+body.body_dark .expert-section-one .card-style-three .post {
+  color: var(--black_100) !important;
+}
+body.body_dark .feedback-block-one {
+  background: var(--bs-white) !important;
+}
+body.body_dark .feedback-block-one .review {
+  border-top-color: var(--border_on_highlight) !important;
+}
+
+/*# sourceMappingURL=dark-mode.css.map */

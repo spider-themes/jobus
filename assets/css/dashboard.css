@@ -20,6 +20,8 @@ Table of Contents:
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
   --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
   --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
+  --body_bg: #ffffff;
+  --bs-white: #fff;
 }
 
 .jbs-dashboard-pro-notice {
