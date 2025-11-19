@@ -63,14 +63,18 @@ class Assets {
 
 		// Enqueue scripts & styles only if dashboard shortcode is present
 		$post = get_post();
+		$has_unified_dashboard = $post && has_shortcode( $post->post_content, 'jobus_dashboard' );
+		$user = wp_get_current_user();
+		$is_candidate = in_array( 'jobus_candidate', (array) $user->roles, true );
+		$is_employer = array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles );
 
 		// Employer Dashboard Scripts
-		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) ) ) {
+		if ( ( $post && has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) ) || ( $has_unified_dashboard && $is_employer ) ) {
 			wp_enqueue_script( 'jobus-employer-dashboard', esc_url( JOBUS_JS . '/employer-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		}
 
 		// Candidate Dashboard Scripts
-		if ( $post && ( has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
+		if ( ( $post && has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) || ( $has_unified_dashboard && $is_candidate ) ) {
 			// Scripts for candidate dashboard
 			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
@@ -89,7 +93,7 @@ class Assets {
 		}
 
 		// Common scripts & styles for candidate & employer dashboard
-		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) ) {
+		if ( $post && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) || $has_unified_dashboard ) ) {
 
 			// Style's for candidate dashboard
 			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );

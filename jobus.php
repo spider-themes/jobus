@@ -185,11 +185,12 @@ final class Jobus {
 		new \jobus\includes\Frontend\Shortcode();
 		new \jobus\includes\Frontend\Template_Loader();
 		if ( $enable_candidate ) {
-			new \jobus\includes\Frontend\Dashboard_Candidate();
+			\jobus\includes\Frontend\Dashboard_Candidate::get_instance();
 		}
 		if ( $enable_company ) {
-			new \jobus\includes\Frontend\Dashboard_Employer();
+			\jobus\includes\Frontend\Dashboard_Employer::get_instance();
 		}
+		new \jobus\includes\Frontend\Dashboard();
 		new \jobus\includes\Frontend\Dashboard_Helper();
 
 		//Elementor & Blocks

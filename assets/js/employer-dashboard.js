@@ -38,26 +38,41 @@
             const addBtn = $('#add-company-testimonial');
             let index = repeater.children('.company-testimonial-item').length;
 
-            // Handle image upload for testimonials
+            // Handle image upload button click for testimonials
             repeater.on('click', '.testimonial-image-upload-btn', function (e) {
                 e.preventDefault();
                 const $btn = $(this);
-                const $container = $btn.closest('.dash-input-wrapper');
-                const $hiddenId = $container.find('.testimonial-image-id');
-                const $preview = $container.find('.testimonial-image-preview');
-                if (!window.wp || !window.wp.media) return;
-                const mediaUploader = wp.media({
-                    title: 'Select Author Image',
-                    button: { text: 'Use this image' },
-                    multiple: false,
-                    library: { type: 'image' }
-                });
-                mediaUploader.on('select', function() {
-                    const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    $hiddenId.val(attachment.id);
-                    $preview.html('<img src="' + attachment.url + '" alt="Author Image" style="max-width:100px;max-height:100px;">');
-                });
-                mediaUploader.open();
+                const dataIndex = $btn.data('index');
+                const $fileInput = $(`#company-testimonial-${dataIndex}-file-input`);
+                $fileInput.click();
+            });
+
+            // Handle file input change
+            repeater.on('change', '.testimonial-file-input', function (e) {
+                const file = this.files[0];
+                if (!file) return;
+
+                // Validate file type
+                const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                if (!validImageTypes.includes(file.type)) {
+                    alert('Please upload a valid image file (JPEG, PNG, GIF, or WebP)');
+                    return;
+                }
+
+                // Read file as data URL
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const dataUrl = event.target.result;
+                    const $container = $(this).closest('.dash-input-wrapper');
+                    const $hiddenData = $container.find('.testimonial-image-data');
+                    const $preview = $container.find('.testimonial-image-preview');
+
+                    // Store base64 data URL
+                    $hiddenData.val(dataUrl);
+                    // Display preview
+                    $preview.html('<img src="' + dataUrl + '" alt="Author Image" style="max-width:100px;max-height:100px;">');
+                }.bind(this);
+                reader.readAsDataURL(file);
             });
 
             addBtn.on('click', function (e) {
@@ -146,10 +161,14 @@
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
-                                            <!-- Hidden field for image ID -->
+                                            <!-- Hidden field for image data URL -->
                                             <input type="hidden" name="company_testimonials[${index}][image]"
-                                                   id="company-testimonial-${index}-image" class="testimonial-image-id" value="">
-                                            <!-- Upload button for WP media -->
+                                                   id="company-testimonial-${index}-image" class="testimonial-image-data" value="">
+                                            <!-- Hidden file input -->
+                                            <input type="file" id="company-testimonial-${index}-file-input"
+                                                   class="testimonial-file-input" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+                                                   style="display: none;">
+                                            <!-- Upload button -->
                                             <button type="button" class="jbs-btn jbs-btn-secondary testimonial-image-upload-btn" data-index="${index}">
                                                 Upload Image
                                             </button>

@@ -246,24 +246,26 @@ class Shortcode {
 
             // Map role to shortcode
             $role_shortcode_map = [
-                'jobus_candidate' => '[jobus_candidate_dashboard]',
-                'jobus_employer'  => '[jobus_employer_dashboard]',
+                'jobus_candidate' => [ '[jobus_dashboard]', '[jobus_candidate_dashboard]' ],
+                'jobus_employer'  => [ '[jobus_dashboard]', '[jobus_employer_dashboard]' ],
             ];
 
-            foreach ( $role_shortcode_map as $role => $shortcode ) {
+            foreach ( $role_shortcode_map as $role => $shortcodes ) {
                 if ( in_array( $role, (array) $current_user->roles, true ) ) {
-                    $dashboard_page = get_posts([
-                        'post_type'      => 'page',
-                        'posts_per_page' => 1,
-                        'post_status'    => 'publish',
-                        'fields'         => 'ids',
-                        's'              => $shortcode,
-                    ]);
+                    foreach ( $shortcodes as $shortcode ) {
+                        $dashboard_page = get_posts([
+                            'post_type'      => 'page',
+                            'posts_per_page' => 1,
+                            'post_status'    => 'publish',
+                            'fields'         => 'ids',
+                            's'              => $shortcode,
+                        ]);
 
-                    if ( ! empty( $dashboard_page ) ) {
-                        $page_url = trailingslashit( get_permalink( $dashboard_page[0] ) );
+                        if ( ! empty( $dashboard_page ) ) {
+                            $page_url = trailingslashit( get_permalink( $dashboard_page[0] ) );
+                            break 2;
+                        }
                     }
-                    break;
                 }
             }
             ?>

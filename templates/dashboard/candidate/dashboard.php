@@ -150,21 +150,8 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
 					// Show "View More" button only if there are more jobs than the limit
 					if ( $total_jobs > $limit ) {
 						// Get the dashboard page URL
-						$saved_jobs_url = home_url( '/saved-jobs/' ); // Default fallback
-
-						// Find the page with candidate dashboard shortcode
-						$dashboard_page = get_posts( [
-							'post_type'      => 'page',
-							'posts_per_page' => 1,
-							'post_status'    => 'publish',
-							'fields'         => 'ids', // Only get ID for better performance
-							's'              => '[jobus_candidate_dashboard]'
-						] );
-
-						// Build URL if dashboard page exists
-						if ( ! empty( $dashboard_page ) ) {
-							$saved_jobs_url = trailingslashit( get_permalink( $dashboard_page[0] ) ) . 'saved-jobs';
-						}
+						$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+						$saved_jobs_url = trailingslashit( $dashboard_url ) . 'saved-jobs';
 						?>
                         <a href="<?php echo esc_url( $saved_jobs_url ); ?>" class="view-more-btn">
 							<?php esc_html_e( 'View All', 'jobus' ); ?>

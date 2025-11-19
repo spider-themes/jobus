@@ -20,18 +20,12 @@ $jobs = get_posts([
 ]);
 
 // Find the page with employer dashboard shortcode
-$dashboard_page = get_posts( [
-        'post_type'      => 'page',
-        'posts_per_page' => 1,
-        'post_status'    => 'publish',
-        'fields'         => 'ids',
-        's'              => '[jobus_employer_dashboard]'
-] );
+$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 
 // Build URL if dashboard page exists
 $edit_job_url = '#';
-if ( ! empty( $dashboard_page ) ) {
-    $edit_job_url = trailingslashit( get_permalink( $dashboard_page[0] ) ) . 'submit-job';
+if ( $dashboard_url ) {
+    $edit_job_url = trailingslashit( $dashboard_url ) . 'submit-job';
 }
 ?>
 

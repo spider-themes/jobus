@@ -241,16 +241,16 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             <?php
             // Get available icons from meta options (fallback to default set)
             $default_icons   = [
-                    'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
-                    'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
-                    'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
-                    'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
-                    'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
-                    'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
-                    'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
-                    'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
-                    'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
-                    'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
+                'bi bi-facebook'  => esc_html__( 'Facebook', 'jobus' ),
+                'bi bi-instagram' => esc_html__( 'Instagram', 'jobus' ),
+                'bi bi-twitter'   => esc_html__( 'Twitter', 'jobus' ),
+                'bi bi-linkedin'  => esc_html__( 'LinkedIn', 'jobus' ),
+                'bi bi-github'    => esc_html__( 'GitHub', 'jobus' ),
+                'bi bi-youtube'   => esc_html__( 'YouTube', 'jobus' ),
+                'bi bi-dribbble'  => esc_html__( 'Dribbble', 'jobus' ),
+                'bi bi-behance'   => esc_html__( 'Behance', 'jobus' ),
+                'bi bi-pinterest' => esc_html__( 'Pinterest', 'jobus' ),
+                'bi bi-tiktok'    => esc_html__( 'TikTok', 'jobus' ),
             ];
             $available_icons = $default_icons;
             // Get saved social links from meta
@@ -482,11 +482,15 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
-                                            <!-- Hidden field for image ID -->
+                                            <!-- Hidden field for image data URL -->
                                             <input type="hidden" name="company_testimonials[<?php echo esc_attr( $key ); ?>][image]"
-                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-id"
+                                                   id="company-testimonial-<?php echo esc_attr( $key ); ?>-image" class="testimonial-image-data"
                                                    value="<?php echo esc_attr( $testimonial['image'] ?? '' ); ?>">
-                                            <!-- Upload button for WP media -->
+                                            <!-- Hidden file input -->
+                                            <input type="file" id="company-testimonial-<?php echo esc_attr( $key ); ?>-file-input"
+                                                   class="testimonial-file-input" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+                                                   style="display: none;">
+                                            <!-- Upload button -->
                                             <button type="button" class="jbs-btn jbs-btn-secondary testimonial-image-upload-btn"
                                                     data-index="<?php echo esc_attr( $key ); ?>">
                                                 <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
@@ -494,10 +498,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                             <!-- Preview area (always present) -->
                                             <div class="testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-<?php echo esc_attr( $key ); ?>">
                                                 <?php
-                                                $image_id  = $testimonial['image'] ?? '';
-                                                $image_url = $image_id ? wp_get_attachment_url( $image_id ) : '';
-                                                if ( ! empty( $image_url ) ) : ?>
-                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Author Image', 'jobus' ); ?>"
+                                                $image_data = $testimonial['image'] ?? '';
+                                                if ( ! empty( $image_data ) && strpos( $image_data, 'data:image' ) === 0 ) : ?>
+                                                    <img src="<?php echo esc_attr( $image_data ); ?>" alt="<?php esc_attr_e( 'Author Image', 'jobus' ); ?>"
                                                          style="max-width: 100px; max-height: 100px;">
                                                 <?php endif; ?>
                                             </div>

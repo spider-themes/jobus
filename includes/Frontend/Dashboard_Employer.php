@@ -30,14 +30,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Dashboard_Employer {
 
 	/**
+	 * Instance of this class.
+	 *
+	 * @var object
+	 */
+	private static $instance = null;
+
+	/**
+	 * Get instance of this class.
+	 *
+	 * @return Dashboard_Employer
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Dashboard constructor.
 	 *
 	 * Registers shortcode and dashboard endpoints.
 	 */
 	public function __construct() {
-		// Register a single shortcode for the employer dashboard
-		add_shortcode( 'jobus_employer_dashboard', [ $this, 'employer_dashboard' ] );
-
 		// Register endpoints for each dashboard section
 		add_action( 'init', [ $this, 'register_dashboard_endpoints' ] );
 	}
