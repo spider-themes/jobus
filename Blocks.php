@@ -141,7 +141,6 @@ class Blocks {
 	 * Enqueue block frontend assets
 	 */
 	public function register_block_assets(): void {
-
 		// Style's
 		wp_enqueue_style( 'jobus-block-frontend', esc_url( JOBUS_CSS . '/block-frontend.css' ), [], JOBUS_VERSION );
 
@@ -154,6 +153,6 @@ class Blocks {
 			'jobus_image_dir'  	=> JOBUS_IMG,
 			'jobus_is_premium' 	=> jobus_is_premium(),
 			'jobus_upgrade_url' => admin_url('edit.php?post_type=jobus_job&page=jobus-pricing'),
-		] );
+		]);
 	}
 }

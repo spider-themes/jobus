@@ -1,8 +1,9 @@
 .jobus_job_details {
   .details-post-data {
-    .is-layout-constrained > *{
-        max-width: 100% !important;
+    .is-layout-constrained > * {
+      max-width: 100% !important;
     }
+
     .wp-block-group {
       border: 1px solid #000000;
       border-radius: 20px;
@@ -11,12 +12,14 @@
       @media (max-width: 540px) {
         padding: 32px 24px 16px
       }
+
       .wp-block-heading {
         display: flex;
         align-items: center;
         font-size: 22px;
         margin: 0;
-        color:#000 !important;
+        color: #000 !important;
+
         code {
           mark {
             font-size: 14px;
@@ -58,21 +61,34 @@
 
 
 .jobus_job_details_2 {
-  .details-post-data {
-    .job-meta-data-two {
-      margin-bottom: 50px;
+  .share-buttons li .share-item {
+    background-color: var(--jbs_brand_color_3_opt);
+  }
+
+  .job-meta-data-two {
+    margin-bottom: 50px;
+
+    i {
+      color: var(--jbs-brand_color_1);
+      font-size: 24px;
     }
-    .has-global-padding{
-        padding: 0 !important;
+  }
+
+  .jbs-job-content {
+
+    .has-global-padding {
+      padding: 0 !important;
     }
-    .is-layout-constrained > *{
-        max-width: 100% !important;
+
+    .is-layout-constrained > * {
+      max-width: 100% !important;
     }
 
     .wp-block-heading {
       font-size: 22px;
       margin: 0;
-      color:#000 !important;
+      padding-top: 20px;
+
       code {
         display: none;
       }
@@ -108,22 +124,25 @@
       width: 100%;
       padding: 0 26px;
       display: inline-block;
-      box-sizing: border-box;   
+      box-sizing: border-box;
+
       &:hover {
         background: var(--jbs-brand_color_4);
       }
     }
-     .jbs-btn-one {
-      line-height: 50px;
-      border-radius: 10px;
-      color: #fff;
-      background: var(--jbs-brand_color_1);
-      padding: 0 26px;
-      display: inline-block;
-      box-sizing: border-box;   
-      &:hover {
-        background: var(--jbs-brand_color_4);
-      }
+  }
+
+  .jbs-btn-one {
+    line-height: 50px;
+    border-radius: 10px;
+    color: #fff;
+    background: var(--jbs-brand_color_1);
+    padding: 0 26px;
+    display: inline-block;
+    box-sizing: border-box;
+
+    &:hover {
+      background: var(--jbs-brand_color_4);
     }
   }
 }

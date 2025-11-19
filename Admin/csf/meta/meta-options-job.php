@@ -112,7 +112,7 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Retrieve the repeater field configurations from settings options
 	$specifications = jobus_opt( 'job_specifications' );
-	if ( is_array( $specifications ) ) {
+	if ( is_array( $specifications ) && ! empty( $specifications ) ) {
 		foreach ( $specifications as $field ) {
 
 			$meta_value = $field['meta_values_group'] ?? [];
@@ -153,6 +153,28 @@ if ( class_exists( 'CSF' ) ) {
 		CSF::createSection( $meta_prefix, array(
 			'title'  => esc_html__( 'Specifications', 'jobus' ),
 			'fields' => $fields,
+			'icon'   => 'fas fa-cogs',
+			'id'     => 'jobus_meta_specifications',
+		) );
+	} else {
+		// Display message when no specifications are configured
+		$settings_url = admin_url( 'edit.php?post_type=jobus_job&page=jobus-settings#tab=job-options' );
+		CSF::createSection( $meta_prefix, array(
+			'title'  => esc_html__( 'Specifications', 'jobus' ),
+			'fields' => array(
+				array(
+					'type'    => 'content',
+					'content' => '<div style="padding: 20px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; color: #666;">' .
+					             '<p style="margin: 0;">' . esc_html__( 'No Job Specifications configured yet.', 'jobus' ) . '</p>' .
+					             '<p style="margin: 8px 0 0 0;">' .
+					             sprintf(
+						             esc_html__( 'Please add the specifications from %s.', 'jobus' ),
+						             '<a href="' . esc_url( $settings_url ) . '" target="_blank" style="color: #0073aa; text-decoration: none; font-weight: 500;">Settings > Job Options > Specifications</a>'
+					             ) .
+					             '</p>' .
+					             '</div>',
+				),
+			),
 			'icon'   => 'fas fa-cogs',
 			'id'     => 'jobus_meta_specifications',
 		) );

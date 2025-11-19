@@ -6,6 +6,8 @@
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
   --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
   --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
+  --body_bg: #ffffff;
+  --bs-white: #fff;
 }
 
 .jbs-text-black .jbs-lg-mt-130 {
@@ -4623,6 +4625,10 @@ img {
   color: #000;
   background: rgba(var(--jbs-brand_color_1), 0.09);
 }
+.user-data-form .form-wrapper .input-group-meta input:focus {
+  border-color: var(--jbs-brand_color_1);
+  box-shadow: 0 0 0 0.2rem rgba(var(--jbs-brand_color_1_rgb), 0.25);
+}
 .user-data-form .form-wrapper .input-group-meta label {
   font-size: 14px;
   font-weight: normal;
@@ -4795,6 +4801,9 @@ img {
     border-radius: 0 0 10px 10px !important;
     width: 100% !important;
   }
+}
+.jobus-job-classic {
+  background-color: #ffffff;
 }
 .jobus-job-classic.job-listing-three .pagination-wrap p {
   color: rgba(0, 0, 0, 0.7);
@@ -6251,35 +6260,42 @@ input[type=file]::-webkit-file-upload-button {
   color: var(--jbs-brand_color_1);
 }
 
-.jobus_job_details_2 .details-post-data .job-meta-data-two {
+.jobus_job_details_2 .share-buttons li .share-item {
+  background-color: var(--jbs_brand_color_3_opt);
+}
+.jobus_job_details_2 .job-meta-data-two {
   margin-bottom: 50px;
 }
-.jobus_job_details_2 .details-post-data .has-global-padding {
+.jobus_job_details_2 .job-meta-data-two i {
+  color: var(--jbs-brand_color_1);
+  font-size: 24px;
+}
+.jobus_job_details_2 .jbs-job-content .has-global-padding {
   padding: 0 !important;
 }
-.jobus_job_details_2 .details-post-data .is-layout-constrained > * {
+.jobus_job_details_2 .jbs-job-content .is-layout-constrained > * {
   max-width: 100% !important;
 }
-.jobus_job_details_2 .details-post-data .wp-block-heading {
+.jobus_job_details_2 .jbs-job-content .wp-block-heading {
   font-size: 22px;
   margin: 0;
-  color: #000 !important;
+  padding-top: 20px;
 }
-.jobus_job_details_2 .details-post-data .wp-block-heading code {
+.jobus_job_details_2 .jbs-job-content .wp-block-heading code {
   display: none;
 }
-.jobus_job_details_2 .details-post-data ul {
+.jobus_job_details_2 .jbs-job-content ul {
   padding-left: 0;
   list-style: none;
 }
-.jobus_job_details_2 .details-post-data ul li {
+.jobus_job_details_2 .jbs-job-content ul li {
   position: relative;
   font-size: 17px;
   margin-top: 20px;
   padding-left: 30px;
   line-height: 1.882em;
 }
-.jobus_job_details_2 .details-post-data ul li::before {
+.jobus_job_details_2 .jbs-job-content ul li::before {
   content: "\f26a";
   font-family: bootstrap-icons;
   position: absolute;
@@ -6287,7 +6303,7 @@ input[type=file]::-webkit-file-upload-button {
   top: 0;
   color: var(--jbs-brand_color_1);
 }
-.jobus_job_details_2 .details-post-data .btn-one {
+.jobus_job_details_2 .jbs-job-content .btn-one {
   line-height: 50px;
   border-radius: 10px;
   color: #fff;
@@ -6297,10 +6313,10 @@ input[type=file]::-webkit-file-upload-button {
   display: inline-block;
   box-sizing: border-box;
 }
-.jobus_job_details_2 .details-post-data .btn-one:hover {
+.jobus_job_details_2 .jbs-job-content .btn-one:hover {
   background: var(--jbs-brand_color_4);
 }
-.jobus_job_details_2 .details-post-data .jbs-btn-one {
+.jobus_job_details_2 .jbs-btn-one {
   line-height: 50px;
   border-radius: 10px;
   color: #fff;
@@ -6309,7 +6325,7 @@ input[type=file]::-webkit-file-upload-button {
   display: inline-block;
   box-sizing: border-box;
 }
-.jobus_job_details_2 .details-post-data .jbs-btn-one:hover {
+.jobus_job_details_2 .jbs-btn-one:hover {
   background: var(--jbs-brand_color_4);
 }
 
@@ -6882,7 +6898,7 @@ input[type=file]::-webkit-file-upload-button {
 
 .jobus_job_details {
   max-width: 100% !important;
-  background-color: #fff;
+  background-color: var(--body_bg);
 }
 .jobus_job_details a {
   text-decoration: none !important;
