@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\includes\Classes\submission;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -84,15 +86,16 @@ class Employer_Form_Submission {
 	 * @return array Array containing profile content data
 	 */
 	public static function get_company_content( $company_id ) {
-		$description = get_post_field( 'post_content', $company_id );
-		$name        = get_post_field( 'post_title', $company_id );
-		$user_id     = get_post_field( 'post_author', $company_id );
+		$description     = get_post_field( 'post_content', $company_id );
+		$name            = get_post_field( 'post_title', $company_id );
+		$user_id         = get_post_field( 'post_author', $company_id );
 		$profile_picture = get_user_meta( $user_id, 'company_profile_picture', true );
-		$email = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
+		$email           = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
+
 		return array(
-			'company_description'   => $description ?? '',
-			'company_name'          => $name ?? '',
-			'company_mail'          => $email ?? '',
+			'company_description'     => $description ?? '',
+			'company_name'            => $name ?? '',
+			'company_mail'            => $email ?? '',
 			'company_profile_picture' => $profile_picture ?? ''
 		);
 	}
@@ -149,17 +152,18 @@ class Employer_Form_Submission {
 		if ( isset( $post_data['company_delete_profile_picture'] ) && $post_data['company_delete_profile_picture'] === '1' ) {
 			delete_user_meta( $user_id, 'company_profile_picture' );
 			delete_post_thumbnail( $company_id );
-			$this->sync_user_avatar($user_id, null);
+			$this->sync_user_avatar( $user_id, null );
 			clean_post_cache( $company_id );
 			wp_cache_delete( $company_id, 'posts' );
 		} elseif ( ! empty( $post_data['company_profile_picture'] ) ) {
 			$image_id = absint( $post_data['company_profile_picture'] );
 			update_user_meta( $user_id, 'company_profile_picture', $image_id );
 			set_post_thumbnail( $company_id, $image_id );
-			$this->sync_user_avatar($user_id, $image_id);
+			$this->sync_user_avatar( $user_id, $image_id );
 			clean_post_cache( $company_id );
 			wp_cache_delete( $company_id, 'posts' );
 		}
+
 		return true;
 	}
 
@@ -186,7 +190,8 @@ class Employer_Form_Submission {
 		}
 
 		$specifications = array(
-			'specifications' => isset( $meta['company_specifications'] ) && is_array( $meta['company_specifications'] ) ? $meta['company_specifications'] : array(),
+			'specifications' => isset( $meta['company_specifications'] ) && is_array( $meta['company_specifications'] ) ? $meta['company_specifications']
+				: array(),
 			'mail'           => $meta['candidate_mail'] ?? '',
 			'dynamic_fields' => array()
 		);
@@ -211,7 +216,7 @@ class Employer_Form_Submission {
 	 * Save candidate specification data
 	 *
 	 * @param int   $company_id The candidate post ID
-	 * @param array $post_data    POST data from the form submission
+	 * @param array $post_data  POST data from the form submission
 	 *
 	 * @return bool True on success, false on failure
 	 */
@@ -253,7 +258,7 @@ class Employer_Form_Submission {
 	 * Save company website data
 	 *
 	 * @param int   $company_id The candidate post ID
-	 * @param array $post_data    POST data from the form submission
+	 * @param array $post_data  POST data from the form submission
 	 *
 	 * @return bool True on success, false on failure
 	 */
@@ -268,9 +273,9 @@ class Employer_Form_Submission {
 		}
 
 		if ( isset( $post_data['company_website'] ) && is_array( $post_data['company_website'] ) ) {
-			$website_data = array(
-				'url'   => isset( $post_data['company_website']['url'] ) ? esc_url_raw( $post_data['company_website']['url'] ) : '',
-				'title' => isset( $post_data['company_website']['title'] ) ? sanitize_text_field( wp_unslash( $post_data['company_website']['title'] ) ) : '',
+			$website_data            = array(
+				'url'    => isset( $post_data['company_website']['url'] ) ? esc_url_raw( $post_data['company_website']['url'] ) : '',
+				'title'  => isset( $post_data['company_website']['title'] ) ? sanitize_text_field( wp_unslash( $post_data['company_website']['title'] ) ) : '',
 				'target' => isset( $post_data['company_website']['target'] ) ? sanitize_text_field( $post_data['company_website']['target'] ) : '_self',
 			);
 			$meta['company_website'] = $website_data;
@@ -288,17 +293,18 @@ class Employer_Form_Submission {
 	 * @return array Array containing company website data
 	 */
 	public static function get_company_website( int $company_id ): array {
-		$meta = get_post_meta( $company_id, 'jobus_meta_company_options', true );
+		$meta            = get_post_meta( $company_id, 'jobus_meta_company_options', true );
 		$company_website = [
-			'url' => '',
-			'title' => '',
+			'url'    => '',
+			'title'  => '',
 			'target' => '_self',
 		];
 		if ( isset( $meta['company_website'] ) && is_array( $meta['company_website'] ) ) {
-			$company_website['url'] = $meta['company_website']['url'] ?? '';
-			$company_website['title'] = $meta['company_website']['title'] ?? '';
+			$company_website['url']    = $meta['company_website']['url'] ?? '';
+			$company_website['title']  = $meta['company_website']['title'] ?? '';
 			$company_website['target'] = $meta['company_website']['target'] ?? '_self';
 		}
+
 		return $company_website;
 	}
 
@@ -311,16 +317,17 @@ class Employer_Form_Submission {
 	 * @return array Array of social icons with subfields
 	 */
 	public static function get_company_social_icons( int $company_id ): array {
-		$meta = get_post_meta( $company_id, 'jobus_meta_company_options', true );
+		$meta  = get_post_meta( $company_id, 'jobus_meta_company_options', true );
 		$icons = [];
 		if ( isset( $meta['social_icons'] ) && is_array( $meta['social_icons'] ) ) {
 			foreach ( $meta['social_icons'] as $item ) {
 				$icons[] = [
-					'icon' => isset($item['icon']) ? sanitize_text_field($item['icon']) : 'bi bi-facebook',
-					'url'  => isset($item['url']) ? esc_url($item['url']) : '#',
+					'icon' => isset( $item['icon'] ) ? sanitize_text_field( $item['icon'] ) : 'bi bi-facebook',
+					'url'  => isset( $item['url'] ) ? esc_url( $item['url'] ) : '#',
 				];
 			}
 		}
+
 		return $icons;
 	}
 
@@ -372,8 +379,9 @@ class Employer_Form_Submission {
 	 * @return array Array containing video data
 	 */
 	public static function get_company_video( int $company_id ): array {
-		$id = get_post_meta( $company_id, 'company_video_bg_img', true );
+		$id  = get_post_meta( $company_id, 'company_video_bg_img', true );
 		$url = $id ? wp_get_attachment_url( $id ) : '';
+
 		return array(
 			'company_video_title'  => get_post_meta( $company_id, 'company_video_title', true ),
 			'company_video_url'    => get_post_meta( $company_id, 'company_video_url', true ),
@@ -411,6 +419,7 @@ class Employer_Form_Submission {
 	 * Get company testimonials data
 	 *
 	 * @param int $company_id The company post ID
+	 *
 	 * @return array Array of testimonials
 	 */
 	public static function get_company_testimonials( int $company_id ): array {
@@ -418,14 +427,15 @@ class Employer_Form_Submission {
 		if ( ! is_array( $testimonials ) ) {
 			$testimonials = array();
 		}
+
 		return $testimonials;
 	}
 
 	/**
 	 * Save company testimonials data
 	 *
-	 * @param int $company_id The company post ID
-	 * @param array $post_data POST data from the form submission
+	 * @param int   $company_id The company post ID
+	 * @param array $post_data  POST data from the form submission
 	 */
 	private function save_company_testimonials( int $company_id, array $post_data ): void {
 		if ( isset( $post_data['company_testimonial_title'] ) ) {
@@ -434,12 +444,18 @@ class Employer_Form_Submission {
 		if ( isset( $post_data['company_testimonials'] ) && is_array( $post_data['company_testimonials'] ) ) {
 			$sanitized = array();
 			foreach ( $post_data['company_testimonials'] as $item ) {
+				$image_value = '';
+
+				if ( ! empty( $item['image'] ) ) {
+					$image_value = $item['image'];
+				}
+
 				$sanitized[] = array(
-					'author_name'    => isset($item['author_name']) ? sanitize_text_field($item['author_name']) : '',
-					'location'       => isset($item['location']) ? sanitize_text_field($item['location']) : '',
-					'review_content' => isset($item['review_content']) ? sanitize_textarea_field($item['review_content']) : '',
-					'rating'         => isset($item['rating']) ? floatval($item['rating']) : '',
-					'image'          => isset($item['image']) ? absint($item['image']) : '',
+					'author_name'    => isset( $item['author_name'] ) ? sanitize_text_field( $item['author_name'] ) : '',
+					'location'       => isset( $item['location'] ) ? sanitize_text_field( $item['location'] ) : '',
+					'review_content' => isset( $item['review_content'] ) ? sanitize_textarea_field( $item['review_content'] ) : '',
+					'rating'         => isset( $item['rating'] ) ? floatval( $item['rating'] ) : '',
+					'image'          => $image_value,
 				);
 			}
 			update_post_meta( $company_id, 'company_testimonials', $sanitized );
@@ -453,14 +469,37 @@ class Employer_Form_Submission {
 	 * @param int             $user_id
 	 * @param int|string|null $profile_picture_id Attachment ID or empty/null
 	 */
-	public static function sync_user_avatar( int $user_id, $profile_picture_id) {
+	public static function sync_user_avatar( int $user_id, $profile_picture_id ) {
 		if ( $profile_picture_id ) {
-			$avatar_url = wp_get_attachment_url($profile_picture_id);
-			if ($avatar_url) {
-				update_user_meta($user_id, 'jobus_avatar', $avatar_url);
+			$avatar_url = wp_get_attachment_url( $profile_picture_id );
+			if ( $avatar_url ) {
+				update_user_meta( $user_id, 'jobus_avatar', $avatar_url );
 			}
 		} else {
-			delete_user_meta($user_id, 'jobus_avatar');
+			delete_user_meta( $user_id, 'jobus_avatar' );
+		}
+	}
+
+
+	/**
+	 * Save company taxonomies (categories and locations)
+	 *
+	 * @param int   $company_id The company post ID
+	 * @param array $post_data  POST data from the form submission
+	 *
+	 * @return void
+	 */
+	private function save_company_taxonomies( int $company_id, array $post_data ): void {
+		// Save categories
+		if ( isset( $post_data['company_categories'] ) ) {
+			$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $post_data['company_categories'] ) ) ) );
+			wp_set_object_terms( $company_id, $cat_ids, 'jobus_company_cat' );
+		}
+
+		// Save locations
+		if ( isset( $post_data['company_locations'] ) ) {
+			$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $post_data['company_locations'] ) ) ) );
+			wp_set_object_terms( $company_id, $location_ids, 'jobus_company_location' );
 		}
 	}
 
@@ -477,12 +516,36 @@ class Employer_Form_Submission {
 
 		// Define expected fields to sanitize
 		$expected_fields = [
-			'company_name', 'company_description', 'company_mail', 'company_profile_picture',
-			'company_delete_profile_picture', 'social_icons',
-			'company_website', 'company_video_title', 'company_video_url', 'company_video_bg_img',
-			'video_bg_img', 'video_bg_img_action',
-			'company_testimonial_title', 'company_testimonials'
+			'company_name',
+			'company_description',
+			'company_mail',
+			'company_profile_picture',
+			'company_delete_profile_picture',
+			'social_icons',
+			'company_website',
+			'company_video_title',
+			'company_video_url',
+			'company_video_bg_img',
+			'video_bg_img',
+			'video_bg_img_action',
+			'company_testimonial_title',
+			'company_testimonials',
+			'company_categories',
+			'company_locations'
 		];
+
+		// Add dynamic specification fields to expected fields
+		if ( function_exists( 'jobus_opt' ) ) {
+			$spec_fields = jobus_opt( 'company_specifications' );
+			if ( ! empty( $spec_fields ) ) {
+				foreach ( $spec_fields as $field ) {
+					$meta_key = $field['meta_key'] ?? '';
+					if ( $meta_key ) {
+						$expected_fields[] = $meta_key;
+					}
+				}
+			}
+		}
 
 		$post_data = [];
 		foreach ( $expected_fields as $field ) {
@@ -491,18 +554,26 @@ class Employer_Form_Submission {
 			}
 		}
 
-		$user = wp_get_current_user();
-		$company_id = 1;
-		// if ( ! $company_id ) {
-		// 	wp_die( esc_html__( 'Company profile not found.', 'jobus' ) );
-		// }
+		$user       = wp_get_current_user();
+		$company_id = self::get_company_id( $user->ID );
+
+		// Bail if no company found
+		if ( ! $company_id ) {
+			wp_die( esc_html__( 'Company profile not found. Please contact support.', 'jobus' ) );
+		}
+
 		// Handle company content if present
-		if ( isset( $post_data['company_name'] ) || isset( $post_data['company_description'] ) || isset( $post_data['company_profile_picture'] ) || isset( $post_data['company_mail']) ) {
+		if ( isset( $post_data['company_name'] ) || isset( $post_data['company_description'] ) || isset( $post_data['company_profile_picture'] )
+		     || isset( $post_data['company_mail'] )
+		) {
 			$this->save_company_content( $company_id, $post_data );
 		}
 
 		// Handle company specifications if present
 		$this->save_company_specifications( $company_id, $post_data );
+
+		// Handle taxonomies if present
+		$this->save_company_taxonomies( $company_id, $post_data );
 
 		// Handle company website if present
 		if ( isset( $post_data['company_website'] ) ) {
@@ -515,7 +586,9 @@ class Employer_Form_Submission {
 		}
 
 		// Handle company video if present
-		if ( isset( $post_data['company_video_title'] ) || isset( $post_data['company_video_url'] ) || isset( $post_data['video_bg_img_action'] ) || isset( $post_data['video_bg_img'] ) ) {
+		if ( isset( $post_data['company_video_title'] ) || isset( $post_data['company_video_url'] ) || isset( $post_data['video_bg_img_action'] )
+		     || isset( $post_data['video_bg_img'] )
+		) {
 			$this->save_company_video( $company_id, $post_data );
 		}
 
