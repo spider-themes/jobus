@@ -38,7 +38,8 @@
             let repeater = document.getElementById('specifications-repeater');
             let addBtn = document.getElementById('add-specification');
             if (repeater && addBtn) {
-                addBtn.addEventListener('click', function() {
+                addBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
                     let idx = repeater.querySelectorAll('.specification-item').length;
                     let div = document.createElement('div');
                     div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
@@ -49,6 +50,7 @@
                 });
                 repeater.addEventListener('click', function(e) {
                     if (e.target.closest('.remove-specification')) {
+                        e.preventDefault();
                         e.target.closest('.specification-item').remove();
                     }
                 });
@@ -143,11 +145,10 @@
                     </div>
                 `);
  
-                // $repeater.append(newItem);
-                
+                $repeater.append(newItem);
+
                 // Reinitialize nice-select for the new select element
                 if (typeof $.fn.niceSelect === 'function') {
-                    
                     newItem.find('.jbs-nice-select').niceSelect();
                 }
                 

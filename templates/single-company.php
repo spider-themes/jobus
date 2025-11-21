@@ -184,12 +184,11 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                     $author_name    = ! empty( $testimonial['author_name'] ) ? $testimonial['author_name'] : '';
                                     $location       = ! empty( $testimonial['location'] ) ? $testimonial['location'] : '';
                                     $review_content = ! empty( $testimonial['review_content'] ) ? $testimonial['review_content'] : '';
-                                    $rating         = isset( $testimonial['rating'] ) && is_numeric( $testimonial['rating'] ) ? floatval( $testimonial['rating'] ) : false;
+                                    $rating         = ! empty( $testimonial['rating'] ) && is_numeric( $testimonial['rating'] ) ? floatval( $testimonial['rating'] ) : false;
                                     $author_img_id  = ! empty( $testimonial['image'] ) ? $testimonial['image'] : '';
-                                    $author_img_url = $author_img_id ? wp_get_attachment_url( $author_img_id ) : get_template_directory_uri() . '/images/assets/img_14.jpg';
                                     ?>
                                     <div class="item">
-                                        <div class="feedback-block-four ggggg">
+                                        <div class="feedback-block-four">
                                             <div class="jbs-d-flex jbs-align-items-center">
                                                 <?php if ( $rating !== false ) : ?>
                                                     <ul class="jbs-style-none jbs-d-flex rating">
@@ -218,8 +217,10 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                 <blockquote><?php echo esc_html( $review_content ); ?></blockquote>
                                             <?php endif; ?>
                                             <div class="jbs-d-flex jbs-align-items-center">
-                                                <img src="<?php echo esc_url( $author_img_url ); ?>" alt="<?php echo esc_attr( $author_name ); ?>"
+                                                <?php if ( $author_img_id ) : ?>
+                                                <img src="<?php echo esc_attr($author_img_id); ?>" data-src="<?php echo esc_attr($author_img_id) ?>" alt="<?php echo esc_attr( $author_name ); ?>"
                                                      class="author-img jbs-rounded-circle">
+                                                <?php endif; ?>
                                                 <div class="jbs-ms-3">
                                                     <?php if ( $author_name ) : ?>
                                                         <div class="name jbs-fw-500 jbs-text-dark"><?php echo esc_html( $author_name ); ?></div>

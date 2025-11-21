@@ -870,6 +870,19 @@ class Candidate_Form_Submission {
 			}
 		}
 
+		// Add dynamic specification fields to post_data
+		if ( function_exists( 'jobus_opt' ) ) {
+			$candidate_spec_fields = jobus_opt( 'candidate_specifications' );
+			if ( ! empty( $candidate_spec_fields ) ) {
+				foreach ( $candidate_spec_fields as $field ) {
+					$meta_key = $field['meta_key'] ?? '';
+					if ( $meta_key && isset( $_POST[ $meta_key ] ) ) {
+						$post_data[ $meta_key ] = recursive_sanitize_text_field( $_POST[ $meta_key ] );
+					}
+				}
+			}
+		}
+
 		// Get candidate ID
 		$candidate_id = $this->get_candidate_id( $user->ID );
 		if ( ! $candidate_id ) {
