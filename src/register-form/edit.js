@@ -5,16 +5,21 @@ import {__} from '@wordpress/i18n';
 
 function Edit({attributes, setAttributes}) {
     const blockProps = useBlockProps({className: 'jobus-registration-section'});
-    const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass} = attributes;
+    const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass, candidate_tab_title, employer_tab_title} = attributes;
     const {employer_username, employer_email, employer_pass, employer_confirm_pass} = attributes;
 
     return (
         <Fragment>
 
             <InspectorControls>
-
                 {/*================ Candidate Form ============== */}
                 <PanelBody title={__('Candidate Form', 'jobus')} initialOpen={true}>
+                    <TextControl
+                        label={__('Tab Title', 'jobus')}
+                        value={candidate_tab_title}
+                        placeholder={__('Candidate Title', 'jobus')}
+                        onChange={(value) => setAttributes({candidate_tab_title: value})}
+                    />
                     <TextControl
                         label={__('Placeholder Username', 'jobus')}
                         value={candidate_username}
@@ -44,6 +49,12 @@ function Edit({attributes, setAttributes}) {
 
                 {/*================ Employer Form ============== */}
                 <PanelBody title={__('Employer Form', 'jobus')} initialOpen={false}>
+                    <TextControl
+                        label={__('Tab Title', 'jobus')}
+                        value={employer_tab_title}
+                        placeholder={__('Employer Title', 'jobus')}
+                        onChange={(value) => setAttributes({employer_tab_title: value})}
+                    />
                     <TextControl
                         label={__('Placeholder Username', 'jobus')}
                         type="text"
@@ -84,23 +95,23 @@ function Edit({attributes, setAttributes}) {
 
                     <div className="form-wrapper jbs-m-auto">
 
-                        <ul className="nav nav-tabs jbs-border-0 jbs-w-100" role="tablist">
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab" aria-selected="false">{__('Candidates', 'jobus')}</button>
+                        <ul className="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
+                            <li className="jbs-nav-item" role="presentation">
+                                <button className="jbs-nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab" aria-selected="false">{candidate_tab_title}</button>
                             </li>
-                            <li className="nav-item" role="presentation">
-                                <button className="nav-link" data-jbs-toggle="tab" data-jbs-target="#fc2" role="tab" aria-selected="true">{__('Employer', 'jobus')}</button>
+                            <li className="jbs-nav-item" role="presentation">
+                                <button className="jbs-nav-link" data-jbs-toggle="tab" data-jbs-target="#fc2" role="tab" aria-selected="true">{employer_tab_title}</button>
                             </li>
                         </ul>
 
-                        <div className="tab-content">
+                        <div className="jbs-tab-content jbs-mt-40">
 
                             {/*============= Candidate Form ===================*/}
-                            <div className="tab-pane jbs-fade active show" role="tabpanel" id="fc1">
+                            <div className="jbs-tab-pane jbs-fade jbs-show active" role="tabpanel" id="fc1">
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
@@ -113,7 +124,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
@@ -126,7 +137,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_pass"
@@ -138,7 +149,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_confirm_pass"
@@ -154,11 +165,11 @@ function Edit({attributes, setAttributes}) {
                             </div>
 
                             {/*============= Employer Form ===================*/}
-                            <div className="tab-pane jbs-fade" role="tabpanel" id="fc2">
+                            <div className="jbs-tab-pane jbs-fade" role="tabpanel" id="fc2">
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
@@ -171,7 +182,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
@@ -184,7 +195,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_pass"
@@ -196,7 +207,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative">
+                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_confirm_pass"

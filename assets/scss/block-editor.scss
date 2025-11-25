@@ -16,6 +16,7 @@ Table of Content:
 }
 
 @import "main/variables";
+@import "jbs-framework/variables";
 @import "block-editor/register-from";
 
 // Pro badge for block controls
@@ -147,4 +148,135 @@ Table of Content:
       max-width: 20px !important;
       height: 17px;
   }
+}
+
+
+
+// Nav
+.jbs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+// Nav Link
+.jbs-nav-link {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: #0d6efd;
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jbs-nav-link {
+        transition: none;
+    }
+}
+
+.jbs-nav-link:focus, .jbs-nav-link:hover {
+    color: #0a58ca;
+}
+
+.jbs-nav-link.disabled {
+    color: $secondary-color;
+    pointer-events: none;
+    cursor: default;
+}
+
+// Nav Tabs
+.jbs-nav-tabs {
+    border-bottom: 1px solid $border-color;
+}
+
+.jbs-nav-tabs .jbs-nav-link {
+    margin-bottom: -1px;
+    background: 0 0;
+    border: 1px solid transparent;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+.jbs-nav-tabs .jbs-nav-link:focus, .jbs-nav-tabs .jbs-nav-link:hover {
+    border-color: #e9ecef #e9ecef $border-color;
+    isolation: isolate;
+}
+
+.jbs-nav-tabs .jbs-nav-link.disabled {
+    color: $secondary-color;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.jbs-nav-tabs .jbs-nav-item.show .jbs-nav-link, .jbs-nav-tabs .jbs-nav-link.active {
+    color: #495057;
+    background-color: $text-white;
+    border-color: $border-color $border-color $text-white;
+}
+
+.jbs-nav-tabs .dropdown-menu {
+    margin-top: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+// Nav Pills
+.jbs-nav-pills .jbs-nav-link {
+    background: 0 0;
+    border: 0;
+    border-radius: $border-radius;
+}
+
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+    color: $text-white;
+    background-color: $primary-color;
+}
+
+// Nav Fill
+.jbs-nav-fill .jbs-nav-item, .jbs-nav-fill > .jbs-nav-link {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+// Nav Justified
+.jbs-nav-justified .jbs-nav-item, .jbs-nav-justified > .jbs-nav-link {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.jbs-nav-fill .jbs-nav-item .jbs-nav-link, .jbs-nav-justified .jbs-nav-item .jbs-nav-link {
+    width: 100%;
+}
+
+// Tab Content
+.jbs-tab-content > .jbs-tab-pane {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.15s linear;
+}
+
+.jbs-tab-content > .active {
+    display: block;
+}
+
+.jbs-tab-content > .active.jbs-show {
+    opacity: 1;
+}
+
+// Fade
+.jbs-fade {
+    transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jbs-fade {
+        transition: none;
+    }
+}
+
+.jbs-fade:not(.jbs-show) {
+    opacity: 0;
 }

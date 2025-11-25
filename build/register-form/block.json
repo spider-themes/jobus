@@ -15,6 +15,14 @@
       "type": "string",
       "default": "Enter Your Name"
     },
+    "candidate_tab_title": {
+      "type": "string",
+      "default": "Candidates"
+    },
+    "employer_tab_title": {
+      "type": "string",
+      "default": "Employer"
+    },
     "candidate_email": {
       "type": "string",
       "default": "Enter Your Email"

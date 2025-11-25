@@ -1,1 +1,412 @@
-(()=>{"use strict";const e=window.wp.blocks,t=JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-candidate-archive","title":"Candidate Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Candidate Archive candidate posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"candidate_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","candidate Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}'),o=window.wp.i18n,a=window.wp.blockEditor,i=window.wp.components,s=window.React,l=window.wp.element,r=window.ReactJSXRuntime,n=()=>(0,r.jsxs)("h3",{children:["Here is a set of ",(0,r.jsx)("strong",{children:"candidate archive layout"})," shortcodes for your block widgets. These shortcodes are designed specifically to display candidate archive layouts"]});(0,e.registerBlockType)(t,{edit:function({attributes:e,setAttributes:t}){const{candidate_layout:d,preview:c}=e,u=(0,a.useBlockProps)(),p=jobus_block_params.jobus_is_premium,[b,h]=(0,s.useState)(null),[j,m]=(0,s.useState)({top:0,left:0}),y=(0,s.useRef)({}),_=[{label:(0,o.__)("Sidebar Filter Layout","jobus"),value:"1",img:jobus_block_params.jobus_image_dir+"/layout/candidate/archive-layout-1.png",pro:!1},{label:(0,o.__)("Grid Layout","jobus"),value:"2",img:jobus_block_params.jobus_image_dir+"/layout/candidate/archive-layout-2.png",pro:!0}];return c?(0,r.jsx)("div",{className:"block-preview",children:(0,r.jsx)(n,{})}):(0,r.jsxs)(s.Fragment,{children:[(0,r.jsx)(a.InspectorControls,{children:(0,r.jsx)(i.PanelBody,{title:(0,o.__)("Candidate Archive Layout","jobus"),initialOpen:!0,children:(0,r.jsx)(i.BaseControl,{label:(0,o.__)("Select Layout","jobus"),children:(0,r.jsx)("div",{className:"jbs-layout-options",style:{display:"flex",gap:"1rem",position:"relative"},children:_.map((e=>(0,r.jsxs)("div",{ref:t=>y.current[e.value]=t,className:`layout-option ${d===e.value?"active":""} ${e.pro&&!p?"locked":""}`,onClick:()=>(e=>{if(!e.pro||p)t({candidate_layout:e.value}),h(null);else if(y.current[e.value]){const t=y.current[e.value].getBoundingClientRect();m({top:t.top,left:t.left-280}),h(e.value)}})(e),style:{position:"relative",cursor:e.pro&&!p?"not-allowed":"pointer"},children:[(0,r.jsx)("img",{src:e.img,alt:e.label}),(0,r.jsx)("span",{className:"layout-label",style:{display:"block",textAlign:"center"},children:e.label})]},e.value)))})})})}),(0,r.jsx)("div",{...u,children:"[jobus_candidate_archive]"}),b&&y.current[b]&&(0,l.createPortal)((0,r.jsx)("div",{style:{position:"fixed",top:j.top+"px",left:j.left+"px",width:"280px",zIndex:99999},children:(0,r.jsxs)(i.Notice,{status:"info",isDismissible:!0,onRemove:()=>h(null),className:"jbs-pro-notice",children:[(0,r.jsxs)("h4",{style:{margin:"0 0 0.5rem 0",fontWeight:"bold"},children:[(0,o.__)("Pro Feature","jobus")," 🔒"]}),(0,r.jsx)("p",{style:{marginBottom:"0.5rem"},children:(0,o.__)("This candidate layout is part of Jobus Pro. Upgrade today to unlock premium layouts and advanced customization options!","jobus")}),(0,r.jsx)(i.Button,{isPrimary:!0,href:jobus_block_params.jobus_upgrade_url,target:"_blank",style:{marginTop:"0.25rem"},className:"jobus-upgrade-button",children:(0,o.__)("Upgrade Now","jobus")})]})}),document.body)]})},save:function(e){const{candidate_layout:t}=e.attributes,o=a.useBlockProps.save(),i=`[jobus_candidate_archive candidate_layout="${t}"]`;return(0,r.jsx)(s.Fragment,{children:(0,r.jsx)("div",{...o,children:i})})}})})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/shortcode-candidate-archive/block.json":
+/*!****************************************************!*\
+  !*** ./src/shortcode-candidate-archive/block.json ***!
+  \****************************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"apiVersion":3,"name":"jobus/shortcode-candidate-archive","title":"Candidate Archive Shortcode (Jobus)","category":"jobus-blocks","icon":"dashicons dashicons-shortcode","description":"Display the Candidate Archive candidate posts on the website frontend","supports":{"html":false,"anchor":true},"attributes":{"candidate_layout":{"type":"string","default":"1"},"preview":{"type":"boolean","default":false}},"example":{"attributes":{"preview":true}},"keywords":["jobus","Shortcode","candidate Archive"],"textdomain":"jobus","editorScript":"file:./index.js","editorStyle":"file:./editor.css"}');
+
+/***/ }),
+
+/***/ "./src/shortcode-candidate-archive/edit.js":
+/*!*************************************************!*\
+  !*** ./src/shortcode-candidate-archive/edit.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./preview */ "./src/shortcode-candidate-archive/preview.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    candidate_layout,
+    preview
+  } = attributes;
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
+  const pro_active = jobus_block_params.jobus_is_premium; // Check if Pro is active
+  const [activeProNotice, setActiveProNotice] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+  const [noticePosition, setNoticePosition] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)({
+    top: 0,
+    left: 0
+  });
+
+  // Refs for each layout option
+  const layoutRefs = (0,react__WEBPACK_IMPORTED_MODULE_3__.useRef)({});
+
+  // Layout options
+  const layoutOptions = [{
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sidebar Filter Layout', 'jobus'),
+    value: '1',
+    img: jobus_block_params.jobus_image_dir + '/layout/candidate/archive-layout-1.png',
+    pro: false
+  }, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Grid Layout', 'jobus'),
+    value: '2',
+    img: jobus_block_params.jobus_image_dir + '/layout/candidate/archive-layout-2.png',
+    pro: true
+  }];
+
+  // Show preview if preview mode
+  if (preview) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "block-preview",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_preview__WEBPACK_IMPORTED_MODULE_5__.Preview, {})
+    });
+  }
+
+  // Handle layout click
+  const handleProClick = option => {
+    if (option.pro && !pro_active) {
+      if (layoutRefs.current[option.value]) {
+        const rect = layoutRefs.current[option.value].getBoundingClientRect();
+        setNoticePosition({
+          top: rect.top,
+          left: rect.left - 280 // Adjust distance from layout block
+        });
+        setActiveProNotice(option.value);
+      }
+      return;
+    }
+    setAttributes({
+      candidate_layout: option.value
+    });
+    setActiveProNotice(null);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Candidate Archive Layout', 'jobus'),
+        initialOpen: true,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Layout', 'jobus'),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "jbs-layout-options",
+            style: {
+              display: 'flex',
+              gap: '1rem',
+              position: 'relative'
+            },
+            children: layoutOptions.map(option => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              ref: el => layoutRefs.current[option.value] = el,
+              className: `layout-option ${candidate_layout === option.value ? 'active' : ''} ${option.pro && !pro_active ? 'locked' : ''}`,
+              onClick: () => handleProClick(option),
+              style: {
+                position: 'relative',
+                cursor: option.pro && !pro_active ? 'not-allowed' : 'pointer'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                src: option.img,
+                alt: option.label
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "layout-label",
+                style: {
+                  display: 'block',
+                  textAlign: 'center'
+                },
+                children: option.label
+              })]
+            }, option.value))
+          })
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      ...blockProps,
+      children: "[jobus_candidate_archive]"
+    }), activeProNotice && layoutRefs.current[activeProNotice] && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createPortal)(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      style: {
+        position: 'fixed',
+        top: noticePosition.top + 'px',
+        left: noticePosition.left + 'px',
+        width: '280px',
+        zIndex: 99999
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Notice, {
+        status: "info",
+        isDismissible: true,
+        onRemove: () => setActiveProNotice(null),
+        className: "jbs-pro-notice",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h4", {
+          style: {
+            margin: '0 0 0.5rem 0',
+            fontWeight: 'bold'
+          },
+          children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pro Feature', 'jobus'), " \uD83D\uDD12"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+          style: {
+            marginBottom: '0.5rem'
+          },
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This candidate layout is part of Jobus Pro. Upgrade today to unlock premium layouts and advanced customization options!', 'jobus')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          isPrimary: true,
+          href: jobus_block_params.jobus_upgrade_url,
+          target: "_blank",
+          style: {
+            marginTop: '0.25rem'
+          },
+          className: "jobus-upgrade-button",
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade Now', 'jobus')
+        })]
+      })
+    }), document.body)]
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ }),
+
+/***/ "./src/shortcode-candidate-archive/preview.jsx":
+/*!*****************************************************!*\
+  !*** ./src/shortcode-candidate-archive/preview.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Preview: () => (/* binding */ Preview)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const Preview = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h3", {
+  children: ["Here is a set of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {
+    children: "candidate archive layout"
+  }), " shortcodes for your block widgets. These shortcodes are designed specifically to display candidate archive layouts"]
+});
+
+/***/ }),
+
+/***/ "./src/shortcode-candidate-archive/save.js":
+/*!*************************************************!*\
+  !*** ./src/shortcode-candidate-archive/save.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+function Save(props) {
+  const {
+    candidate_layout
+  } = props.attributes;
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
+  const shortcode = `[jobus_candidate_archive candidate_layout="${candidate_layout}"]`;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      ...blockProps,
+      children: shortcode
+    })
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Save);
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!**************************************************!*\
+  !*** ./src/shortcode-candidate-archive/index.js ***!
+  \**************************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/shortcode-candidate-archive/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/shortcode-candidate-archive/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/shortcode-candidate-archive/save.js");
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+/**
+ * Block Registration
+ */
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_1__, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

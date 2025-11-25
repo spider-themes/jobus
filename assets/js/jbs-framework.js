@@ -157,7 +157,7 @@
 
             if ($this.hasClass("active")) return;
 
-            Helpers.switchTab($this, $targetPane, true);
+            Helpers.switchTab($this, $targetPane, true);    
         });
 
     });

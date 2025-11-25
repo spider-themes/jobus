@@ -212,4 +212,45 @@ body.jobi .active-theme-jobi .csf-fieldset {
   z-index: 0;
 }
 
+.editor-styles-wrapper.post-type-jobus_job .wp-block-group {
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 35px 40px 20px;
+  margin-bottom: 30px;
+}
+.editor-styles-wrapper.post-type-jobus_job .wp-block-group .wp-block-heading code mark {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 50px;
+  margin-right: 0.5rem;
+}
+.editor-styles-wrapper.post-type-jobus_job .wp-block-group .wp-block-heading {
+  color: #000;
+}
+.editor-styles-wrapper.post-type-jobus_job .wp-block-group .wp-block-paragraph,
+.editor-styles-wrapper.post-type-jobus_job .wp-block-group .block-editor-rich-text__editable.rich-text {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.editor-styles-wrapper.post-type-jobus_company .wp-block-heading {
+  font-family: system-ui;
+  font-weight: 500;
+  color: #000;
+}
+
+.editor-styles-wrapper.post-type-page .jbs-text-center {
+  text-align: center;
+}
+.editor-styles-wrapper.post-type-page .jbs-m-auto {
+  margin: auto;
+}
+.editor-styles-wrapper.post-type-page .user-data-form .form-wrapper .input-group-meta input {
+  color: rgba(0, 0, 0, 0.5);
+  background: rgba(var(--jbs-brand_color_1), 0.09);
+}
+.editor-styles-wrapper.post-type-page ul.jbs-nav.jbs-nav-tabs > .jbs-nav-item > .jbs-nav-link {
+  height: 100%;
+}
+
 /*# sourceMappingURL=admin.css.map */

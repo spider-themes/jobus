@@ -1,0 +1,46 @@
+.editor-styles-wrapper.post-type-jobus_job {
+    .wp-block-group{
+        border: 1px solid #000;
+        border-radius: 20px;
+        padding: 35px 40px 20px;
+        margin-bottom: 30px;
+        .wp-block-heading code mark{
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 50px;
+            margin-right: 0.5rem;
+        }
+        .wp-block-heading{
+            color: #000;
+        }
+        .wp-block-paragraph,
+        .block-editor-rich-text__editable.rich-text{
+            font-size: 17px;
+            line-height: 1.8;
+        }
+    }
+}
+
+.editor-styles-wrapper.post-type-jobus_company {
+    .wp-block-heading{
+        font-family: system-ui;
+        font-weight: 500;
+        color: #000;
+    }
+}
+
+.editor-styles-wrapper.post-type-page {
+    .jbs-text-center {
+        text-align: center;
+    }
+    .jbs-m-auto {
+        margin: auto;
+    }
+    .user-data-form .form-wrapper .input-group-meta input{
+        color:rgba(0, 0, 0, 0.5);
+        background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.09);
+    }
+    ul.jbs-nav.jbs-nav-tabs > .jbs-nav-item > .jbs-nav-link {
+        height: 100%;
+    }
+}
