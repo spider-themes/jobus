@@ -6,39 +6,37 @@
 
 // Form Controls
 .jbs-label {
-    margin-bottom: 0.5rem;
-    display: inline-block;
+  margin-bottom: 0.5rem;
+  display: inline-block;
 }
 
 .jbs-form-label {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .jbs-form-control {
-    display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: null;
-    background-color: $text-white;
-    background-clip: padding-box;
-    border: 1px solid #dee2e6;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.25rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    transition: all 0.15s ease-in-out;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--bs-white, #fff);
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: all 0.15s ease-in-out;
 
-    &:focus {
-        color: null;
-        background-color: $text-white;
-        border-color: rgba(#0d6efd, 0.25);
-        outline: 0;
-        // box-shadow: 0 0 0 0.2rem rgba(#0d6efd, 0.25);
-    }
+  &:focus {
+    background-color: var(--bs-white, #fff);
+    border-color: rgba(#0d6efd, 0.25);
+    outline: 0;
+    // box-shadow: 0 0 0 0.2rem rgba(#0d6efd, 0.25);
+  }
 }
 
 // ============================================
@@ -46,153 +44,154 @@
 // ============================================
 
 .jbs-alert {
-    position: relative;
-    padding: 1rem 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
 }
 
 .jbs-alert-primary {
-    color: shade-color(#0d6efd, 40%);
-    background-color: tint-color(#0d6efd, -80%);
-    border-color: tint-color(#0d6efd, -70%);
+  color: shade-color(#0d6efd, 40%);
+  background-color: tint-color(#0d6efd, -80%);
+  border-color: tint-color(#0d6efd, -70%);
 }
 
 .jbs-alert-secondary {
-    color: shade-color(#6c757d, 40%);
-    background-color: tint-color(#6c757d, -80%);
-    border-color: tint-color(#6c757d, -70%);
+  color: shade-color(#6c757d, 40%);
+  background-color: tint-color(#6c757d, -80%);
+  border-color: tint-color(#6c757d, -70%);
 }
 
 .jbs-alert-success {
-    color: shade-color(#198754, 40%);
-    background-color: tint-color(#198754, -80%);
-    border-color: tint-color(#198754, -70%);
+  color: shade-color(#198754, 40%);
+  background-color: tint-color(#198754, -80%);
+  border-color: tint-color(#198754, -70%);
 }
 
 .jbs-alert-danger {
-    color: shade-color(#dc3545, 40%);
-    background-color: tint-color(#dc3545, -80%);
-    border-color: tint-color(#dc3545, -70%);
+  color: shade-color(#dc3545, 40%);
+  background-color: tint-color(#dc3545, -80%);
+  border-color: tint-color(#dc3545, -70%);
 }
 
 .jbs-alert-warning {
-    color: shade-color(#ffc107, 40%);
-    background-color: tint-color(#ffc107, -80%);
-    border-color: tint-color(#ffc107, -70%);
+  color: shade-color(#ffc107, 40%);
+  background-color: tint-color(#ffc107, -80%);
+  border-color: tint-color(#ffc107, -70%);
 }
 
 .jbs-alert-info {
-    color: shade-color(#0dcaf0, 40%);
-    background-color: tint-color(#0dcaf0, -80%);
-    border-color: tint-color(#0dcaf0, -70%);
+  color: shade-color(#0dcaf0, 40%);
+  background-color: tint-color(#0dcaf0, -80%);
+  border-color: tint-color(#0dcaf0, -70%);
 }
 
 .jbs-alert-light {
-    color: shade-color(#f8f9fa, 40%);
-    background-color: tint-color(#f8f9fa, -80%);
-    border-color: tint-color(#f8f9fa, -70%);
+  color: shade-color(#f8f9fa, 40%);
+  background-color: tint-color(#f8f9fa, -80%);
+  border-color: tint-color(#f8f9fa, -70%);
 }
 
 .jbs-alert-dark {
-    color: shade-color(#212529, 40%);
-    background-color: tint-color(#212529, -80%);
-    border-color: tint-color(#212529, -70%);
+  color: shade-color(#212529, 40%);
+  background-color: tint-color(#212529, -80%);
+  border-color: tint-color(#212529, -70%);
 }
 
 .jbs-alert-dismissible {
-    padding-right: 3rem;
+  padding-right: 3rem;
 
-    .jbs-btn-close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 2;
-        padding: 1.25rem 1rem;
-    }
+  .jbs-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem;
+  }
 }
 
 // ============================================
 // Tables
 // ============================================
 .jbs-table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch
 }
 
 @media (max-width: 575.98px) {
-    .jbs-table-responsive-sm {
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch
-    }
+  .jbs-table-responsive-sm {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch
+  }
 }
 
 @media (max-width: 767.98px) {
-    .jbs-table-responsive-md {
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch
-    }
+  .jbs-table-responsive-md {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch
+  }
 }
 
 @media (max-width: 991.98px) {
-    .jbs-table-responsive-lg {
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch
-    }
+  .jbs-table-responsive-lg {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch
+  }
 }
 
 @media (max-width: 1199.98px) {
-    .jbs-table-responsive-xl {
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch
-    }
+  .jbs-table-responsive-xl {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch
+  }
 }
 
 @media (max-width: 1399.98px) {
-    .jbs-table-responsive-xxl {
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch
-    }
+  .jbs-table-responsive-xxl {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch
+  }
 }
 
 
 .jbs-table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: $text-dark;
-    vertical-align: top;
-    border-color: #dee2e6;
-    border: none;
-    th,
-    td {
-        padding: 0.5rem;
-        border-bottom: 1px solid #dee2e6;
-    }
+  width: 100%;
+  margin-bottom: 1rem;
+  color: $text-dark;
+  vertical-align: top;
+  border-color: #dee2e6;
+  border: none;
 
-    thead {
-        vertical-align: bottom;
-    }
+  th,
+  td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #dee2e6;
+  }
 
-    tbody {
-        vertical-align: inherit;
-    }
+  thead {
+    vertical-align: bottom;
+  }
+
+  tbody {
+    vertical-align: inherit;
+  }
 }
 
 .jbs-table-striped > tbody > tr:nth-of-type(odd) > * {
-    background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .jbs-table-bordered {
-    border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6;
 
-    > :not(caption) > * {
-        border-width: 1px 0;
-    }
+  > :not(caption) > * {
+    border-width: 1px 0;
+  }
 
-    > :not(caption) > * > * {
-        border-width: 0 1px;
-    }
+  > :not(caption) > * > * {
+    border-width: 0 1px;
+  }
 }
 
 // ============================================
@@ -200,49 +199,49 @@
 // ============================================
 
 .jbs-badge {
-    display: inline-block;
-    padding: 0.35em 0.65em;
-    font-size: 0.75em;
-    font-weight: 700;
-    line-height: 1;
-    color: $text-white;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: $text-white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
 }
 
 .jbs-badge-primary {
-    background-color: #0d6efd;
+  background-color: #0d6efd;
 }
 
 .jbs-badge-secondary {
-    background-color: #6c757d;
+  background-color: #6c757d;
 }
 
 .jbs-badge-success {
-    background-color: #198754;
+  background-color: #198754;
 }
 
 .jbs-badge-danger {
-    background-color: #dc3545;
+  background-color: #dc3545;
 }
 
 .jbs-badge-warning {
-    background-color: #ffc107;
-    color: #000;
+  background-color: #ffc107;
+  color: #000;
 }
 
 .jbs-badge-info {
-    background-color: #0dcaf0;
-    color: #000;
+  background-color: #0dcaf0;
+  color: #000;
 }
 
 .jbs-badge-light {
-    background-color: #f8f9fa;
-    color: #000;
+  background-color: #f8f9fa;
+  color: #000;
 }
 
 .jbs-badge-dark {
-    background-color: $text-dark;
+  background-color: $text-dark;
 }

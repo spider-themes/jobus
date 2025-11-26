@@ -75,8 +75,8 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem;
-  border-bottom: 1px solid $border-color;
+  padding: 1rem;
+  border-bottom: 1px solid var(--black_100, #dee2e6);
   border-top-left-radius: calc($border-radius-xl - 1px);
   border-top-right-radius: calc($border-radius-xl - 1px);
 }
@@ -135,7 +135,6 @@
 }
 
 // Offcanvas Styles for Sidebar Filter
-// Offcanvas Container
 .jbs-offcanvas {
   position: fixed;
   top: 0;

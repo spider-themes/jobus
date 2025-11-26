@@ -1,46 +1,808 @@
+.editor-styles-wrapper {
+  background: var(--jbs_box_bg_color_opt);
+}
+
 .editor-styles-wrapper.post-type-jobus_job {
-    .wp-block-group{
-        border: 1px solid #000;
-        border-radius: 20px;
-        padding: 35px 40px 20px;
-        margin-bottom: 30px;
-        .wp-block-heading code mark{
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 50px;
-            margin-right: 0.5rem;
-        }
-        .wp-block-heading{
-            color: #000;
-        }
-        .wp-block-paragraph,
-        .block-editor-rich-text__editable.rich-text{
-            font-size: 17px;
-            line-height: 1.8;
-        }
+  .wp-block-group {
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 35px 40px 20px;
+    margin-bottom: 30px;
+
+    .wp-block-heading code mark {
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 50px;
+      margin-right: 0.5rem;
     }
+
+    .wp-block-heading {
+      color: #000;
+    }
+
+    .wp-block-paragraph,
+    .block-editor-rich-text__editable.rich-text {
+      font-size: 17px;
+      line-height: 1.8;
+    }
+  }
 }
 
 .editor-styles-wrapper.post-type-jobus_company {
-    .wp-block-heading{
-        font-family: system-ui;
-        font-weight: 500;
-        color: #000;
-    }
+  .wp-block-heading {
+    font-family: system-ui;
+    font-weight: 500;
+    color: #000;
+  }
 }
 
 .editor-styles-wrapper.post-type-page {
-    .jbs-text-center {
-        text-align: center;
+  .jbs-text-center {
+    text-align: center;
+  }
+
+  .jbs-m-auto {
+    margin: auto;
+  }
+
+  .user-data-form .form-wrapper .input-group-meta input {
+    color: rgba(0, 0, 0, 0.5);
+    background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.09);
+  }
+
+  ul.jbs-nav.jbs-nav-tabs > .jbs-nav-item > .jbs-nav-link {
+    height: 100%;
+  }
+}
+
+
+// Nav
+.jbs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+// Nav Link
+.jbs-nav-link {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jbs-nav-link {
+    transition: none;
+  }
+}
+
+.jbs-nav-link:focus, .jbs-nav-link:hover {
+  color: #0a58ca;
+}
+
+.jbs-nav-link.disabled {
+  color: $secondary-color;
+  pointer-events: none;
+  cursor: default;
+}
+
+// Nav Tabs
+.jbs-nav-tabs {
+  border-bottom: 1px solid $border-color;
+}
+
+.jbs-nav-tabs .jbs-nav-link {
+  margin-bottom: -1px;
+  background: 0 0;
+  border: 1px solid transparent;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+.jbs-nav-tabs .jbs-nav-link:focus, .jbs-nav-tabs .jbs-nav-link:hover {
+  border-color: #e9ecef #e9ecef $border-color;
+  isolation: isolate;
+}
+
+.jbs-nav-tabs .jbs-nav-link.disabled {
+  color: $secondary-color;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.jbs-nav-tabs .jbs-nav-item.show .jbs-nav-link, .jbs-nav-tabs .jbs-nav-link.active {
+  color: #495057;
+  background-color: $text-white;
+  border-color: $border-color $border-color $text-white;
+}
+
+.jbs-nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+// Nav Pills
+.jbs-nav-pills .jbs-nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: $border-radius;
+}
+
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+  color: $text-white;
+  background-color: $primary-color;
+}
+
+// Nav Fill
+.jbs-nav-fill .jbs-nav-item, .jbs-nav-fill > .jbs-nav-link {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+// Nav Justified
+.jbs-nav-justified .jbs-nav-item, .jbs-nav-justified > .jbs-nav-link {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.jbs-nav-fill .jbs-nav-item .jbs-nav-link, .jbs-nav-justified .jbs-nav-item .jbs-nav-link {
+  width: 100%;
+}
+
+// Tab Content
+.jbs-tab-content > .jbs-tab-pane {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.jbs-tab-content > .active {
+  display: block;
+}
+
+.jbs-tab-content > .active.jbs-show {
+  opacity: 1;
+}
+
+// Fade
+.jbs-fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jbs-fade {
+    transition: none;
+  }
+}
+
+.jbs-fade:not(.jbs-show) {
+  opacity: 0;
+}
+
+
+// Pro badge for block controls
+.jbs-block-pro {
+  position: relative;
+}
+
+.jbs-block-pro::after {
+  content: "PRO";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b35;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+// Archive block styles
+.jbs-layout-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+
+  .layout-option {
+    border: 1px solid #16151517;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s ease;
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: -5px;
     }
-    .jbs-m-auto {
-        margin: auto;
+
+    .layout-label {
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
     }
-    .user-data-form .form-wrapper .input-group-meta input{
-        color:rgba(0, 0, 0, 0.5);
-        background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.09);
+
+    &.active {
+      border-color: #007cba;
+
+      .layout-label {
+        background: #fffffc;
+      }
+
     }
-    ul.jbs-nav.jbs-nav-tabs > .jbs-nav-item > .jbs-nav-link {
-        height: 100%;
+
+    &.locked {
+      cursor: not-allowed;
+
+      img {
+        filter: contrast(0.85);
+      }
+
+      &::after {
+        content: "Pro";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: #ffcc00cc;
+        color: #000;
+        font-size: 10px;
+        padding: 4px 8px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border-bottom-right-radius: 4px;
+      }
+
+      .layout-label {
+        background: #ebebeb;
+      }
     }
+  }
+}
+
+.jbs-pro-notice {
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 0px 12px 0px #cdcdcd;
+  border-radius: 6px;
+  padding: 0;
+
+  .components-notice__content {
+    margin: 4px 0;
+
+    .jobus-upgrade-button.is-primary {
+      font-size: 13px;
+      background-color: rgb(147, 0, 63);
+      border-radius: 3px;
+      color: #fff;
+      font-weight: 500;
+      outline: none;
+      padding: 7px 16px;
+      transition: all 0.3s;
+      margin: 0px 12px 8px;
+      height: auto;
+      text-transform: capitalize;
+    }
+
+    h4 {
+      border-bottom: 1px solid #e1e1e1;
+      line-height: 35px;
+      padding-left: 12px;
+      font-size: 17px;
+
+      .pro-lock {
+        margin-left: 0.25rem;
+        font-size: 13px;
+      }
+    }
+
+    p {
+      padding: 0 12px;
+      font-size: 14px;
+      margin: 0;
+    }
+
+  }
+
+  button.components-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    min-width: 20px !important;
+    max-width: 20px !important;
+    height: 17px;
+  }
+}
+
+
+.jobus-registration-section {
+  .user-data-form {
+    background: #fff;
+    margin: 0 auto;
+    max-width: 720px;
+    border-radius: 20px !important;
+    padding: 50px 15px 50px;
+
+    h2 {
+      font-size: 50px;
+      font-weight: normal;
+      color: $color-one;
+    }
+
+    p a {
+      color: $color-five;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .form-wrapper {
+      max-width: 565px;
+
+      .input-group-meta {
+        input {
+          width: 100%;
+          height: 55px;
+          font-size: 16px;
+          border: 1px solid rgba($color: #000000, $alpha: 0.06);
+          border-radius: 8px;
+          padding: 0 52px 0 20px;
+          color: #000;
+          background: rgba($color: #31795A, $alpha: 0.09);
+        }
+
+        label {
+          font-size: 14px;
+          font-weight: normal;
+          color: rgba(0, 0, 0, 0.5);
+          display: block;
+          margin-bottom: 6px;
+        }
+
+        .placeholder_icon {
+          position: absolute;
+          height: 55px;
+          top: 27px;
+          right: 0;
+          bottom: 0;
+          width: 50px;
+          text-align: center;
+          z-index: 1;
+          color: rgba(0, 0, 0, 0.45);
+          font-size: 17px;
+        }
+
+        .placeholder_icon img {
+          position: relative;
+          top: 50%;
+          margin: 0 auto;
+          transform: translateY(-50%);
+        }
+
+        .placeholder_icon span {
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          display: block;
+          position: relative;
+        }
+
+        .placeholder_icon span:before {
+          content: '';
+          width: 2px;
+          height: 26px;
+          background: #000;
+          position: absolute;
+          top: 14px;
+          left: 24px;
+          transform: rotate(45deg);
+          z-index: 5;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .placeholder_icon span.eye-slash:before {
+          opacity: 0;
+        }
+      }
+    }
+
+    .agreement-checkbox label {
+      position: relative;
+      font-size: 15px;
+      letter-spacing: -0.5px;
+      color: $color-one;
+      cursor: pointer;
+      padding-left: 22px;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .agreement-checkbox label a {
+      color: $color-five;
+      text-decoration: underline;
+    }
+
+    .agreement-checkbox input[type="checkbox"] {
+      display: none;
+    }
+
+    .agreement-checkbox label:before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      line-height: 11px;
+      border-radius: 2px;
+      border: 2px solid #B3B3B3;
+      font-size: 12px;
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 4px;
+      transition: all 0.1s ease-in-out;
+    }
+
+    .agreement-checkbox input[type="checkbox"]:checked + label:before {
+      content: "\f633";
+      font-family: bootstrap-icons !important;
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    .agreement-checkbox a {
+      position: relative;
+      font-size: 15px;
+      color: #1E1E1E;
+    }
+
+    .agreement-checkbox a:hover {
+      text-decoration: underline;
+      color: $color-five;
+    }
+
+    .line {
+      height: 1px;
+      width: 100%;
+      background: rgba($color: #000000, $alpha: 0.2);
+    }
+
+    .social-use-btn {
+      font-size: 15px;
+      color: #000;
+      height: 55px;
+      border: 1px solid #E5E5E5;
+      border-radius: 7px;
+
+      &:hover {
+        background: rgba($color: #000000, $alpha: 0.06);
+      }
+    }
+
+    .btn-close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      box-shadow: none;
+      z-index: 1;
+    }
+
+    .jbs-nav {
+      background: #F0F5F3;
+      border-radius: 40px;
+      padding-left: 0;
+      margin-top: 30px;
+      margin-bottom: 40px;
+
+      .jbs-nav-item {
+        width: 50%;
+        list-style: none;
+
+        .jbs-nav-link {
+          display: block;
+          width: 100%;
+          border: 1px solid transparent;
+          border-radius: 40px;
+          font-size: 18px;
+          color: rgba($color: #000000, $alpha: 0.5);
+
+          &.active {
+            color: $color-five;
+            border-color: $color-five;
+          }
+        }
+      }
+    }
+
+    .jbs-tab-content {
+      .jbs-tab-pane {
+        form {
+          .input-group-meta {
+            margin-bottom: 25px;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+// Pro badge for block controls
+.jbs-block-pro {
+  position: relative;
+}
+
+.jbs-block-pro::after {
+  content: "PRO";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6b35;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+// Archive block styles
+.jbs-layout-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+
+  .layout-option {
+    border: 1px solid #16151517;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s ease;
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: -5px;
+    }
+
+    .layout-label {
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+
+    &.active {
+      border-color: #007cba;
+
+      .layout-label {
+        background: #fffffc;
+      }
+
+    }
+
+    &.locked {
+      cursor: not-allowed;
+
+      img {
+        filter: contrast(0.85);
+      }
+
+      &::after {
+        content: "Pro";
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: #ffcc00cc;
+        color: #000;
+        font-size: 10px;
+        padding: 4px 8px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border-bottom-right-radius: 4px;
+      }
+
+      .layout-label {
+        background: #ebebeb;
+      }
+    }
+  }
+}
+
+.jbs-pro-notice {
+  border: none;
+  background: #ffffff;
+  box-shadow: 0px 0px 12px 0px #cdcdcd;
+  border-radius: 6px;
+  padding: 0;
+
+  .components-notice__content {
+    margin: 4px 0;
+
+    .jobus-upgrade-button.is-primary {
+      font-size: 13px;
+      background-color: rgb(147, 0, 63);
+      border-radius: 3px;
+      color: #fff;
+      font-weight: 500;
+      outline: none;
+      padding: 7px 16px;
+      transition: all 0.3s;
+      margin: 0px 12px 8px;
+      height: auto;
+      text-transform: capitalize;
+    }
+
+    h4 {
+      border-bottom: 1px solid #e1e1e1;
+      line-height: 35px;
+      padding-left: 12px;
+      font-size: 17px;
+
+      .pro-lock {
+        margin-left: 0.25rem;
+        font-size: 13px;
+      }
+    }
+
+    p {
+      padding: 0 12px;
+      font-size: 14px;
+      margin: 0;
+    }
+
+  }
+
+  button.components-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    min-width: 20px !important;
+    max-width: 20px !important;
+    height: 17px;
+  }
+}
+
+
+// Nav
+.jbs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+// Nav Link
+.jbs-nav-link {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jbs-nav-link {
+    transition: none;
+  }
+}
+
+.jbs-nav-link:focus, .jbs-nav-link:hover {
+  color: #0a58ca;
+}
+
+.jbs-nav-link.disabled {
+  color: $secondary-color;
+  pointer-events: none;
+  cursor: default;
+}
+
+// Nav Tabs
+.jbs-nav-tabs {
+  border-bottom: 1px solid $border-color;
+}
+
+.jbs-nav-tabs .jbs-nav-link {
+  margin-bottom: -1px;
+  background: 0 0;
+  border: 1px solid transparent;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+.jbs-nav-tabs .jbs-nav-link:focus, .jbs-nav-tabs .jbs-nav-link:hover {
+  border-color: #e9ecef #e9ecef $border-color;
+  isolation: isolate;
+}
+
+.jbs-nav-tabs .jbs-nav-link.disabled {
+  color: $secondary-color;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.jbs-nav-tabs .jbs-nav-item.show .jbs-nav-link, .jbs-nav-tabs .jbs-nav-link.active {
+  color: #495057;
+  background-color: $text-white;
+  border-color: $border-color $border-color $text-white;
+}
+
+.jbs-nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+// Nav Pills
+.jbs-nav-pills .jbs-nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: $border-radius;
+}
+
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+  color: $text-white;
+  background-color: $primary-color;
+}
+
+// Nav Fill
+.jbs-nav-fill .jbs-nav-item, .jbs-nav-fill > .jbs-nav-link {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+// Nav Justified
+.jbs-nav-justified .jbs-nav-item, .jbs-nav-justified > .jbs-nav-link {
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.jbs-nav-fill .jbs-nav-item .jbs-nav-link, .jbs-nav-justified .jbs-nav-item .jbs-nav-link {
+  width: 100%;
+}
+
+// Tab Content
+.jbs-tab-content > .jbs-tab-pane {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+}
+
+.jbs-tab-content > .active {
+  display: block;
+}
+
+.jbs-tab-content > .active.jbs-show {
+  opacity: 1;
+}
+
+// Fade
+.jbs-fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jbs-fade {
+    transition: none;
+  }
+}
+
+.jbs-fade:not(.jbs-show) {
+  opacity: 0;
 }

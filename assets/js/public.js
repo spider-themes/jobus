@@ -38,7 +38,7 @@
         // Related Job Post slider
         function relatedPost() {
 
-            let relatedJobSlider = $('.related-job-slider');
+            let relatedJobSlider = $('.jbs-related-job-slider');
             let dataRtlrelated = relatedJobSlider.data("rtl");
             if (relatedJobSlider.length > 0) {
                 relatedJobSlider.slick({

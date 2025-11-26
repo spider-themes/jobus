@@ -6,8 +6,26 @@
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
   --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
   --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
+  --border_on_white: #e6edf0;
+  --border_on_highlight: #e6edf0;
   --body_bg: #ffffff;
   --bs-white: #fff;
+  --white_op20: rgba(255, 255, 255, 0.2);
+  --black_25: #f9f9f9;
+  --black_50: #f2f2f2;
+  --black_75: #eeeeee;
+  --black_100: #d6d9dc;
+  --black_150: #c8ccd0;
+  --black_200: #bbc0c4;
+  --black_300: #9fa6ad;
+  --black_350: #9199a1;
+  --black_400: #848d95;
+  --black_500: #6a737c;
+  --black_600: #535a60;
+  --black_700: #3c4146;
+  --black_750: #2f3337;
+  --black_800: #242729;
+  --black_900: #0c0d0e;
 }
 
 .jbs-text-black .jbs-lg-mt-130 {
@@ -1597,7 +1615,7 @@
 
 .nice-select {
   -webkit-tap-highlight-color: transparent;
-  background-color: #fff;
+  background-color: var(--bs-white);
   border-radius: 5px;
   box-sizing: border-box;
   clear: both;
@@ -2722,7 +2740,7 @@ body.compensate-for-scrollbar {
 
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.jobus-job-classic .pagination-wrap,
+.jbs-job-classic .pagination-wrap,
 .jobus-job-topbar .pagination-wrap,
 .jobus-job-popup .pagination-wrap,
 .jobus-company-classic .pagination-wrap,
@@ -2730,7 +2748,7 @@ body.compensate-for-scrollbar {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jobus-job-classic .pagination-wrap,
+  .jbs-job-classic .pagination-wrap,
   .jobus-job-topbar .pagination-wrap,
   .jobus-job-popup .pagination-wrap,
   .jobus-company-classic .pagination-wrap,
@@ -2740,7 +2758,7 @@ body.compensate-for-scrollbar {
     align-items: center;
   }
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination,
+.jbs-job-classic .pagination-wrap .jbs-pagination,
 .jobus-job-topbar .pagination-wrap .jbs-pagination,
 .jobus-job-popup .pagination-wrap .jbs-pagination,
 .jobus-company-classic .pagination-wrap .jbs-pagination,
@@ -2752,7 +2770,7 @@ body.compensate-for-scrollbar {
   border: none;
 }
 @media (max-width: 540px) {
-  .jobus-job-classic .pagination-wrap .jbs-pagination,
+  .jbs-job-classic .pagination-wrap .jbs-pagination,
   .jobus-job-topbar .pagination-wrap .jbs-pagination,
   .jobus-job-popup .pagination-wrap .jbs-pagination,
   .jobus-company-classic .pagination-wrap .jbs-pagination,
@@ -2760,14 +2778,14 @@ body.compensate-for-scrollbar {
     justify-content: center;
   }
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination a,
+.jbs-job-classic .pagination-wrap .jbs-pagination a,
 .jobus-job-topbar .pagination-wrap .jbs-pagination a,
 .jobus-job-popup .pagination-wrap .jbs-pagination a,
 .jobus-company-classic .pagination-wrap .jbs-pagination a,
 .jobus-company-popup .pagination-wrap .jbs-pagination a {
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers,
@@ -2784,28 +2802,28 @@ body.compensate-for-scrollbar {
   cursor: pointer;
   background: transparent;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible {
   outline-style: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus {
   outline-style: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.current,
@@ -2814,7 +2832,7 @@ body.compensate-for-scrollbar {
   color: #fff;
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.prev,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.next,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
@@ -2831,17 +2849,17 @@ body.compensate-for-scrollbar {
 }
 
 /**=== Candidate Classic and Popup Pagination ===**/
-.jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+.jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+  .jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
   display: flex;
   padding: 0;
   margin: 0;
@@ -2850,7 +2868,7 @@ body.compensate-for-scrollbar {
   border-radius: 4px;
   width: max-content;
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -2861,15 +2879,15 @@ body.compensate-for-scrollbar {
   border-right: 1px solid var(--jbs-brand_color_1);
   border-radius: 0;
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
   background: rgba(49, 121, 90, 0.1);
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
   border: none;
 }
 
-img {
-  height: auto;
+.jbs-candidate-classic {
+  background: var(--bs-white, #ffffff);
 }
 
 .candidates-profile {
@@ -4828,11 +4846,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab.modal-content .tags.radio-filter label {
-  background: var(--jbs_box_bg_color_opt);
-}
 .filter-area-tab {
   position: relative;
+}
+.filter-area-tab.modal-content .tags.radio-filter label {
+  background: var(--jbs_box_bg_color_opt);
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -4932,7 +4950,7 @@ img {
   line-height: 45px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.65);
-  border: 1px solid #EDEDED;
+  border: 1px solid var(--black_75);
   border-radius: 7px;
   outline: none;
   box-shadow: none;
@@ -5031,8 +5049,8 @@ img {
   height: 16px;
   line-height: 14px;
   border-radius: 3px;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bs-white);
+  border: 1px solid var(--black_100);
   font-size: 12px;
   text-align: center;
   position: absolute;
@@ -5120,7 +5138,7 @@ img {
 }
 .filter-area-tab .salary-slider .price-input .currency {
   font-size: 11px;
-  color: #000;
+  color: var(--black_900);
 }
 .filter-area-tab .salary-slider .price-input input {
   width: 91px;
@@ -5128,9 +5146,9 @@ img {
   outline: none;
   font-size: 11px;
   text-align: center;
-  color: #000;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--black_900);
+  background: var(--bs-white);
+  border: 1px solid var(--black_100);
   border-radius: 2px;
 }
 .filter-area-tab .salary-slider input[type=number]::-webkit-outer-spin-button,
@@ -5310,21 +5328,21 @@ button.jbs_filter_btn-padding {
 .upper-filter .short-filter .nice-select .option {
   font-size: 1em;
 }
-.upper-filter .style-changer-btn {
+.upper-filter .jbs-layout-changer-btn {
   width: 35px;
   height: 35px;
   line-height: 15px;
-  color: #000;
+  color: var(--black_400, #848d95);
   font-size: 18px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--black_400, #848d95);
   display: none;
 }
-.upper-filter .style-changer-btn:hover {
+.upper-filter .jbs-layout-changer-btn:hover {
   color: #fff;
   background: var(--jbs-brand_color_1);
   border-color: var(--jbs-brand_color_1);
 }
-.upper-filter .style-changer-btn.active {
+.upper-filter .jbs-layout-changer-btn.active {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5335,8 +5353,9 @@ button.jbs_filter_btn-padding {
   border-color: var(--jbs-brand_color_2);
 }
 
-.bg-color .upper-filter .style-changer-btn {
+.bg-color .upper-filter .jbs-layout-changer-btn {
   border-color: var(--jbs-brand_color_2);
+  background: var(--bs-white, #fff);
 }
 
 .jbs-popUpModal .jbs-modal-content {
@@ -5396,7 +5415,7 @@ button.jbs_filter_btn-padding {
 }
 
 .job-list-one {
-  background: #fff;
+  background: var(--bs-white);
   padding: 42px 35px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -6032,10 +6051,10 @@ button.jbs_filter_btn-padding {
   color: var(--jbs-brand_color_2);
 }
 
-.related-job-section {
+.jbs-related-job {
   background: var(--jbs-box_bg_color);
 }
-.related-job-section .jbs-slick-arrow-one {
+.jbs-related-job .jbs-slick-arrow-one {
   position: absolute;
   right: 0;
   top: 17px;
@@ -6072,7 +6091,7 @@ button.jbs_filter_btn-padding {
   color: var(--jbs-brand_color_1);
 }
 .job-application-wrapper .jbs-modal-dialog .jbs-modal-content .job-application-form .jbs-form-control {
-  border: 1px solid #e9e9e9;
+  border: 1px solid var(--black_75, #e9e9e9);
   font-size: 14px;
   font-weight: 400;
   line-height: 2;
@@ -6218,6 +6237,7 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 20px;
   padding: 35px 40px 20px;
   margin-bottom: 30px;
+  background: var(--bs-white, #fff);
 }
 @media (max-width: 540px) {
   .jobus_job_details .details-post-data .wp-block-group {
@@ -6577,12 +6597,12 @@ input[type=file]::-webkit-file-upload-button {
 }
 .jbs-category-widget-one .card-item .box-info {
   display: block;
-  background: #fff;
+  background: var(--bs-white);
   -webkit-border-radius: 60px;
   -moz-border-radius: 60px;
   border-radius: 60px;
   padding: 50px 15px 30px;
-  border: 1px solid rgba(209, 236, 231, 0.8);
+  border: 1px solid var(--border_on_white);
   -webkit-transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   -ms-transition: all 0.3s ease-in-out 0s;
@@ -6731,7 +6751,7 @@ input[type=file]::-webkit-file-upload-button {
 /*========== Job Listing Widget ==========*/
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.jobus-job-classic .pagination-wrap,
+.jbs-job-classic .pagination-wrap,
 .jobus-job-topbar .pagination-wrap,
 .jobus-job-popup .pagination-wrap,
 .jobus-company-classic .pagination-wrap,
@@ -6739,7 +6759,7 @@ input[type=file]::-webkit-file-upload-button {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jobus-job-classic .pagination-wrap,
+  .jbs-job-classic .pagination-wrap,
   .jobus-job-topbar .pagination-wrap,
   .jobus-job-popup .pagination-wrap,
   .jobus-company-classic .pagination-wrap,
@@ -6749,7 +6769,7 @@ input[type=file]::-webkit-file-upload-button {
     align-items: center;
   }
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination,
+.jbs-job-classic .pagination-wrap .jbs-pagination,
 .jobus-job-topbar .pagination-wrap .jbs-pagination,
 .jobus-job-popup .pagination-wrap .jbs-pagination,
 .jobus-company-classic .pagination-wrap .jbs-pagination,
@@ -6761,7 +6781,7 @@ input[type=file]::-webkit-file-upload-button {
   border: none;
 }
 @media (max-width: 540px) {
-  .jobus-job-classic .pagination-wrap .jbs-pagination,
+  .jbs-job-classic .pagination-wrap .jbs-pagination,
   .jobus-job-topbar .pagination-wrap .jbs-pagination,
   .jobus-job-popup .pagination-wrap .jbs-pagination,
   .jobus-company-classic .pagination-wrap .jbs-pagination,
@@ -6769,14 +6789,14 @@ input[type=file]::-webkit-file-upload-button {
     justify-content: center;
   }
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination a,
+.jbs-job-classic .pagination-wrap .jbs-pagination a,
 .jobus-job-topbar .pagination-wrap .jbs-pagination a,
 .jobus-job-popup .pagination-wrap .jbs-pagination a,
 .jobus-company-classic .pagination-wrap .jbs-pagination a,
 .jobus-company-popup .pagination-wrap .jbs-pagination a {
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers,
@@ -6793,28 +6813,28 @@ input[type=file]::-webkit-file-upload-button {
   cursor: pointer;
   background: transparent;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible {
   outline-style: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus {
   outline-style: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
 .jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.current,
 .jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.current,
@@ -6823,7 +6843,7 @@ input[type=file]::-webkit-file-upload-button {
   color: #fff;
   border: none !important;
 }
-.jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jobus-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
+.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.prev,
 .jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.next,
 .jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
@@ -6840,17 +6860,17 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 /**=== Candidate Classic and Popup Pagination ===**/
-.jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+.jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jobus-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
+  .jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
   display: flex;
   padding: 0;
   margin: 0;
@@ -6859,7 +6879,7 @@ input[type=file]::-webkit-file-upload-button {
   border-radius: 4px;
   width: max-content;
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
   width: 35px;
   height: 35px;
   text-align: center;
@@ -6870,10 +6890,10 @@ input[type=file]::-webkit-file-upload-button {
   border-right: 1px solid var(--jbs-brand_color_1);
   border-radius: 0;
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
   background: rgba(49, 121, 90, 0.1);
 }
-.jobus-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
   border: none;
 }
 
@@ -6914,7 +6934,7 @@ input[type=file]::-webkit-file-upload-button {
   margin-left: 0 !important;
 }
 
-.related-job-section a {
+.jbs-related-job a {
   text-decoration: none !important;
 }
 
@@ -7147,7 +7167,7 @@ input[type=file]::-webkit-file-upload-button {
 }
 @media (max-width: 768px) {
   .feedback-section-five .slider-arrows,
-  .related-job-section .jbs-slick-arrow-one {
+  .jbs-related-job .jbs-slick-arrow-one {
     position: static;
   }
 }

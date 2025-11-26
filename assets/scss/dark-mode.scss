@@ -1,31 +1,7 @@
 body.body_dark {
 
-  // Brand & Base Colors
-  --bs-white: #1d2027 !important;
-
-  // Opacity & Special Colors
-  //--white_op20: rgba(0, 0, 0, 0.5) !important;
-
-  // Grayscale Palette
-  //--black_900: #f1f1f1 !important;
-  //--black_800: #e9e9e9 !important;
-  //--black_700: #e1e1e1 !important;
-  //--black_600: #bebebe !important;
-  //--black_500: #b9b9b9 !important;
-  //--black_400: #a2a2a2 !important;
-  //--black_200: #757474 !important;
-  //--black_150: #646464 !important;
-  //--black_100: #d4d4d4 !important;
-  //--black_75: #535353 !important;
-  //--black_50: #3b3b3b !important;
-  //--black_25: #2e2d2d !important;
-
-  // Border Colors
-  //--border_on_highlight: #393e4b !important;
-  //--border_on_white: #2c303a !important;
-
   /**=== Integration with Docy === **/
-  .jobus-job-classic {
+  .jbs-job-classic {
     background: var(--body_bg) !important;
 
     .filter-area-tab {
@@ -73,9 +49,6 @@ body.body_dark {
 
     .job-list-one,
     .job-list-two {
-      background: var(--bs-white) !important;
-      border-color: var(--white_op10) !important;
-
       .title {
         color: var(--black_100) !important;
       }
@@ -107,15 +80,6 @@ body.body_dark {
       }
     }
 
-    .style-changer-btn {
-      background: var(--bs-white) !important;
-      border-color: var(--white_op10) !important;
-
-      i {
-        color: var(--black_400) !important;
-      }
-    }
-
     .pagination-wrap {
       p, .jbs-text-dark {
         color: var(--black_600) !important;
@@ -133,8 +97,6 @@ body.body_dark {
     }
 
     .wp-block-group {
-      background: var(--bs-white) !important;
-
       .wp-block-heading, p a {
         color: var(--black_100) !important;
       }
@@ -169,10 +131,10 @@ body.body_dark {
     }
   }
 
-  .related-job-section {
+  .jbs-related-job {
     background: var(--body_bg) !important;
 
-    .related-job-slider {
+    .jbs-related-job-slider {
       .job-list-two {
         background: var(--bs-white) !important;
         border-color: var(--white_op10) !important;
@@ -234,11 +196,11 @@ body.body_dark {
           color: var(--black_100) !important;
         }
       }
-
-      .jbs-nice-select .current {
-        color: var(--black_100) !important;
-      }
     }
+  }
+
+  .jbs-nice-select .current {
+    color: var(--black_100) !important;
   }
 
   // Expert & Feedback Sections
@@ -253,6 +215,38 @@ body.body_dark {
 
     .review {
       border-top-color: var(--border_on_highlight) !important;
+    }
+  }
+
+  .jbs-modal {
+    .jbs-modal-content {
+        background: var(--bs-white) !important;
+    }
+  }
+
+  .jbs-category-widget-one {
+    .card-wrapper {
+      .card-item {
+        .box-info {
+          .title, .total-job {
+            color: var(--black_100) !important;
+          }
+          &:hover {
+            .title, .total-job {
+              color: var(--jbs-heading_color) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .spel-accordion {
+    h2, h3, h4, h5, h6 {
+      color: #ffffff !important;
+    }
+    .accordion_btn_link, .card-body p {
+      color: var(--black_100) !important;
     }
   }
 

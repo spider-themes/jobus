@@ -15,12 +15,12 @@
 
     .box-info {
       display: block;
-      background: #fff;
+      background: var(--bs-white);
       -webkit-border-radius: 60px;
       -moz-border-radius: 60px;
       border-radius: 60px;
       padding: 50px 15px 30px;
-      border: 1px solid rgba($color: #D1ECE7, $alpha: 0.8);
+      border: 1px solid var(--border_on_white);
       @include transition(0.3s);
 
       &:hover {

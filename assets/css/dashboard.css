@@ -20,8 +20,26 @@ Table of Contents:
   --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
   --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
   --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
+  --border_on_white: #e6edf0;
+  --border_on_highlight: #e6edf0;
   --body_bg: #ffffff;
   --bs-white: #fff;
+  --white_op20: rgba(255, 255, 255, 0.2);
+  --black_25: #f9f9f9;
+  --black_50: #f2f2f2;
+  --black_75: #eeeeee;
+  --black_100: #d6d9dc;
+  --black_150: #c8ccd0;
+  --black_200: #bbc0c4;
+  --black_300: #9fa6ad;
+  --black_350: #9199a1;
+  --black_400: #848d95;
+  --black_500: #6a737c;
+  --black_600: #535a60;
+  --black_700: #3c4146;
+  --black_750: #2f3337;
+  --black_800: #242729;
+  --black_900: #0c0d0e;
 }
 
 .jbs-dashboard-pro-notice {

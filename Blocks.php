@@ -127,9 +127,6 @@ class Blocks {
 	 * Enqueue block editor assets
 	 */
 	public function register_block_editor_assets(): void {
-		// Style's
-		wp_enqueue_style( 'jobus-block-editor', esc_url( JOBUS_CSS . '/block-editor.css' ), [], JOBUS_VERSION );
-
 		// Scripts
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
 
