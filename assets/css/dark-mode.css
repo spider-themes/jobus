@@ -54,6 +54,9 @@ body.body_dark .jbs-job-classic .jbs-nice-select::after {
   border-bottom-color: var(--black_400) !important;
   border-right-color: var(--black_400) !important;
 }
+body.body_dark .jbs-job-classic .jbs-nice-select::before {
+  filter: invert(1);
+}
 body.body_dark .jbs-job-classic .pagination-wrap p, body.body_dark .jbs-job-classic .pagination-wrap .jbs-text-dark {
   color: var(--black_600) !important;
 }
@@ -116,11 +119,19 @@ body.body_dark .job-search-one form,
 body.body_dark .job-search-one .jbs-nice-select {
   background: var(--bs-white) !important;
 }
+body.body_dark .job-search-one form::after,
+body.body_dark .job-search-one .jbs-nice-select::after {
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+}
 body.body_dark .job-search-one form .input-box .label {
   color: var(--black_900) !important;
 }
 body.body_dark .job-search-one form .input-box input {
   color: var(--black_100) !important;
+}
+body.body_dark .job-search-one .tags .jbs-text-white {
+  color: var(--black_900);
 }
 body.body_dark .jbs-nice-select .current {
   color: var(--black_100) !important;
@@ -137,6 +148,9 @@ body.body_dark .feedback-block-one .review {
 body.body_dark .jbs-modal .jbs-modal-content {
   background: var(--bs-white) !important;
 }
+body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info .icon img {
+  filter: invert(1);
+}
 body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info .title, body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info .total-job {
   color: var(--black_100) !important;
 }
@@ -148,6 +162,12 @@ body.body_dark .spel-accordion h2, body.body_dark .spel-accordion h3, body.body_
 }
 body.body_dark .spel-accordion .accordion_btn_link, body.body_dark .spel-accordion .card-body p {
   color: var(--black_100) !important;
+}
+body.body_dark .jbs-related-job .jbs-slick-arrow-one .slick-arrow .bi-arrow-left {
+  color: #fff;
+}
+body.body_dark .jbs-related-job .jbs-slick-arrow-one .slick-arrow .bi-arrow-right {
+  color: #fff;
 }
 
 /*# sourceMappingURL=dark-mode.css.map */

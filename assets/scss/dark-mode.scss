@@ -78,6 +78,9 @@ body.body_dark {
         border-bottom-color: var(--black_400) !important;
         border-right-color: var(--black_400) !important;
       }
+      &::before {
+        filter: invert(1);
+      }
     }
 
     .pagination-wrap {
@@ -184,6 +187,10 @@ body.body_dark {
     form,
     .jbs-nice-select {
       background: var(--bs-white) !important;
+      &::after {
+        border-bottom: 1px solid #fff;
+        border-right: 1px solid #fff;
+      }
     }
 
     form {
@@ -195,6 +202,11 @@ body.body_dark {
         input {
           color: var(--black_100) !important;
         }
+      }
+    }
+    .tags {
+      .jbs-text-white {
+        color: var(--black_900);
       }
     }
   }
@@ -228,6 +240,11 @@ body.body_dark {
     .card-wrapper {
       .card-item {
         .box-info {
+          .icon {
+            img {
+              filter: invert(1);
+            }
+          }
           .title, .total-job {
             color: var(--black_100) !important;
           }
@@ -249,5 +266,19 @@ body.body_dark {
       color: var(--black_100) !important;
     }
   }
+
+
+    .jbs-related-job {
+      .jbs-slick-arrow-one {
+        .slick-arrow {
+          .bi-arrow-left {
+            color: #fff;
+          }
+          .bi-arrow-right {
+            color: #fff;
+          }
+        }
+      }
+    }
 
 }
