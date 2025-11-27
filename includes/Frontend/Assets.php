@@ -70,14 +70,14 @@ class Assets {
 
 		// Employer Dashboard Scripts
 		if ( ( $post && has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) ) || ( $has_unified_dashboard && $is_employer ) ) {
-			wp_enqueue_script( 'jobus-employer-dashboard', esc_url( JOBUS_JS . '/employer-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_enqueue_script( 'jobus-dashboard-employer', esc_url( JOBUS_JS . '/dashboard-employer.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		}
 
 		// Candidate Dashboard Scripts
 		if ( ( $post && has_shortcode( $post->post_content, 'jobus_candidate_dashboard' ) ) || ( $has_unified_dashboard && $is_candidate ) ) {
 			// Scripts for candidate dashboard
-			wp_enqueue_script( 'jobus-candidate-dashboard', esc_url( JOBUS_JS . '/candidate-dashboard.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
-			wp_localize_script('jobus-candidate-dashboard', 'jobus_dashboard_params', [
+			wp_enqueue_script( 'jobus-dashboard-candidate', esc_url( JOBUS_JS . '/dashboard-candidate.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+			wp_localize_script('jobus-dashboard-candidate', 'jobus_dashboard_params', [
 				'ajax_url' => $ajax_url,
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
 				'texts' => [
@@ -123,8 +123,8 @@ class Assets {
 			]);
 
 			// Common scripts for candidate & employer dashboard
-			wp_enqueue_script('jobus-frontend-dashboard', esc_url(JOBUS_JS . '/frontend-dashboard.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
-			wp_localize_script('jobus-frontend-dashboard', 'jobus_frontend_dashboard_params', [
+			wp_enqueue_script('jobus-dashboard-frontend', esc_url(JOBUS_JS . '/dashboard-frontend.js'), ['jquery'], JOBUS_VERSION, ['strategy' => 'defer']);
+			wp_localize_script('jobus-dashboard-frontend', 'jobus_frontend_dashboard_params', [
 				'ajax_url' => $ajax_url,
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
 			]);

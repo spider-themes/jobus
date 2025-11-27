@@ -67,7 +67,7 @@
                 });
             }
 
-            this.SocialIcon();
+            this.SocialLinks();
             this.UserPassword();
             this.checkPasswordRedirect();
             this.ProNotice();
@@ -128,37 +128,39 @@
         },
 
         /**
-         * Manages the dynamic addition and removal of social media links in the candidate dashboard form.
-         * Handles UI updates and re-indexing of social link items.
+         * Handles the dynamic addition and removal of social media links.
+         * Creates accordion items for each social network with JBS accordion classes.
          *
-         * @function SocialIcon
+         * @function SocialLinks
          * @returns {void}
          */
-        SocialIcon: function () {
-            const icons = [
-                { value: 'bi bi-facebook', label: 'Facebook' },
-                { value: 'bi bi-instagram', label: 'Instagram' },
-                { value: 'bi bi-twitter', label: 'Twitter' },
-                { value: 'bi bi-linkedin', label: 'LinkedIn' },
-                { value: 'bi bi-github', label: 'GitHub' },
-                { value: 'bi bi-youtube', label: 'YouTube' },
-                { value: 'bi bi-dribbble', label: 'Dribbble' },
-                { value: 'bi bi-behance', label: 'Behance' },
-                { value: 'bi bi-pinterest', label: 'Pinterest' },
-                { value: 'bi bi-tiktok', label: 'TikTok' }
-            ];
+        SocialLinks: function () {
+            const $repeater = $('#social-links-repeater');
+            const $addBtn = $('#add-social-link');
+            let index = $repeater.children('.social-link-item').length;
 
-            const iconOptions = icons.map(icon =>
-                `<option value="${icon.value}">${icon.label}</option>`
-            ).join('');
+            const availableIcons = {
+                'bi bi-facebook': 'Facebook',
+                'bi bi-instagram': 'Instagram',
+                'bi bi-twitter': 'Twitter',
+                'bi bi-linkedin': 'LinkedIn',
+                'bi bi-github': 'GitHub',
+                'bi bi-youtube': 'YouTube',
+                'bi bi-dribbble': 'Dribbble',
+                'bi bi-behance': 'Behance',
+                'bi bi-pinterest': 'Pinterest',
+                'bi bi-tiktok': 'TikTok'
+            };
 
-            const repeater = $('#social-links-repeater');
-            let index = repeater.children('.social-link-item').length;
-
-            $('#add-social-link').on('click', function (e) {
+            $addBtn.on('click', function (e) {
                 e.preventDefault();
-
                 const accordionId = `social-link-${index}`;
+
+                let optionsHtml = '';
+                Object.entries(availableIcons).forEach(([iconClass, iconLabel]) => {
+                    optionsHtml += `<option value="${iconClass}">${iconLabel}</option>`;
+                });
+
                 const newItem = $(`
                     <div class="jbs-accordion-item social-link-item">
                         <div class="jbs-accordion-header" id="heading-${index}">
@@ -184,7 +186,7 @@
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="jbs-nice-select">
-                                                ${iconOptions}
+                                                ${optionsHtml}
                                             </select>
                                         </div>
                                     </div>
@@ -198,7 +200,7 @@
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="dash-input-wrapper jbs-mb-10">
-                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" value="">
+                                            <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" placeholder="https://example.com">
                                         </div>
                                     </div>
                                 </div>
@@ -213,21 +215,23 @@
                     </div>
                 `);
 
-                repeater.append(newItem);
+                $repeater.append(newItem);
+
                 // Reinitialize nice-select for the new select element
-                if(typeof $.fn.niceSelect === 'function'){
-                    newItem.find('select.jbs-nice-select').niceSelect();
+                if (typeof $.fn.niceSelect === 'function') {
+                    newItem.find('.jbs-nice-select').niceSelect();
                 }
+
                 index++;
             });
 
-            repeater.on('click', '.remove-social-link', function () {
+            $repeater.on('click', '.remove-social-link', function () {
                 $(this).closest('.social-link-item').remove();
 
                 // Re-index all fields
-                repeater.children('.social-link-item').each(function (i, el) {
+                $repeater.children('.social-link-item').each(function (i) {
                     const accordionId = `social-link-${i}`;
-                    const $el = $(el);
+                    const $el = $(this);
 
                     $el.find('.jbs-accordion-header').attr('id', `heading-${i}`);
                     $el.find('.jbs-accordion-button')
@@ -239,12 +243,28 @@
                         .attr('id', accordionId)
                         .attr('aria-labelledby', `heading-${i}`);
 
-                    $el.find('select').attr('name', `social_icons[${i}][icon]`).attr('id', `social_${i}_icon`);
-                    $el.find('input[name$="[title]"]').attr('name', `social_icons[${i}][title]`).attr('id', `social_${i}_title`);
-                    $el.find('input[name$="[url]"]').attr('name', `social_icons[${i}][url]`).attr('id', `social_${i}_url`);
+                    $el.find('input, select').each(function() {
+                        let name = $(this).attr('name');
+                        let id = $(this).attr('id');
+                        if (name) {
+                            name = name.replace(/social_icons\[\d+\]/, `social_icons[${i}]`);
+                            $(this).attr('name', name);
+                        }
+                        if (id) {
+                            id = id.replace(/social_\d+_/, `social_${i}_`);
+                            $(this).attr('id', id);
+                            // Update associated label
+                            $el.find(`label[for^="social_"]`).each(function() {
+                                const forAttr = $(this).attr('for');
+                                if (forAttr) {
+                                    $(this).attr('for', forAttr.replace(/social_\d+_/, `social_${i}_`));
+                                }
+                            });
+                        }
+                    });
                 });
 
-                index = repeater.children('.social-link-item').length;
+                index = $repeater.children('.social-link-item').length;
             });
         },
 
