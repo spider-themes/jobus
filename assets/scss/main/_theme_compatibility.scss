@@ -147,13 +147,14 @@
     padding: 0;
   }
 }
-.card-box{
-    .user-avatar-setting{
-        .upload-btn{
-                // padding-bottom: 30px;
-                padding: 0px 10px;
-        }
+
+.card-box {
+  .user-avatar-setting {
+    .upload-btn {
+      // padding-bottom: 30px;
+      padding: 0px 10px;
     }
+  }
 }
 
 
@@ -249,49 +250,47 @@
 }
 
 // Docy Theme Compatibility
+body {
+  &.docy {
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .container:has(.jbs-container) {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .jbs-container {
+      ul {
+        margin-left: 0 !important;
 
-.wp-theme-docy {
-  .container:has(.jbs-container) {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-
-  .jbs-container {
-    ul {
-      margin-left: 0 !important;
-
-      &.jbs-pagination {
-        padding-left: 0 !important;
+        &.jbs-pagination {
+          padding-left: 0 !important;
+        }
+      }
+    }
+    .jbs-pagination {
+      .page-numbers {
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+      }
+    }
+    .candidate-profile-card div.right-side ul.candidate-skills {
+      padding-left: 0;
+    }
+    .jbs-table {
+      thead,
+      tbody tr {
+        border: none;
+        background: none;
       }
     }
   }
-
-  .jbs-pagination {
-    .page-numbers {
-      border-left: none;
-      border-top: none;
-      border-bottom: none;
-    }
-  }
-
-  .candidate-profile-card div.right-side ul.candidate-skills {
-    padding-left: 0;
-  }
-
-  .jbs-table {
-
-    thead,
-    tbody tr {
-      border: none;
-      background: none;
-    }
-
-  }
-
 }
 
 .jbs-nice-select {
-
   ul {
     padding-left: 0 !important;
     margin: 5px;
@@ -301,7 +300,6 @@
 
 
 // GeneratePress Theme Compatibility
-
 .grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
   max-width: 100%;
 

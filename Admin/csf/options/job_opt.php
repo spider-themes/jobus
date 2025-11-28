@@ -269,23 +269,41 @@ CSF::createSection( $settings_prefix, array(
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
+
+		array(
+			'type'    => 'heading',
+			'content' => esc_html__( 'Related Job Posts', 'jobus' ),
+		),
+
+		//show hide related posts
+		array(
+			'id'      => 'is_job_related_posts',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Display Related Jobs', 'jobus' ),
+			'label'   => esc_html__( 'Do you want activate it ?', 'jobus' ),
+			'subtitle' => esc_html__( 'Show similar job listings below the job details to help candidates discover other opportunities.', 'jobus' ),
+			'default' => true,
+		),
+
 		// Job Attributes
 		array(
 			'type'    => 'subheading',
-			'content' => esc_html__( 'Job Attributes', 'jobus' ),
+			'content' => esc_html__( 'Comparison Attributes', 'jobus' ),
 		),
 
 		array(
 			'id'      => 'job_related_post_meta_1',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Attribute 01', 'jobus' ),
+			'title'   => esc_html__( 'Primary Comparison Field', 'jobus' ),
+			'subtitle' => esc_html__( 'Select the first attribute to match related jobs (e.g., Experience Level).', 'jobus' ),
 			'options' => jobus_get_specs(),
 		),
 
 		array(
 			'id'      => 'job_related_post_meta_2',
 			'type'    => 'select',
-			'title'   => esc_html__( 'Attribute 02', 'jobus' ),
+			'title'   => esc_html__( 'Secondary Comparison Field', 'jobus' ),
+			'subtitle' => esc_html__( 'Select the second attribute to refine related job suggestions. (e.g, Job Type).', 'jobus' ),
 			'options' => jobus_get_specs(),
 		),
 	)

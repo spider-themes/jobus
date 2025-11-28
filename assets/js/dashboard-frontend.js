@@ -69,7 +69,6 @@
 
             this.SocialLinks();
             this.UserPassword();
-            this.checkPasswordRedirect();
             this.ProNotice();
         },
 
@@ -364,6 +363,11 @@
             const $passwordStrength = $('#password-strength');
             const $passwordMatchStatus = $('#password-match-status');
 
+            const params = (typeof window.jobus_dashboard_params !== 'undefined' && window.jobus_dashboard_params)
+                || (typeof window.jobus_frontend_dashboard_params !== 'undefined' && window.jobus_frontend_dashboard_params)
+                || {};
+            const texts = (params && params.texts) ? params.texts : {};
+
             // Check password strength
             function checkPasswordStrength() {
                 const password = $newPassword.val().trim();
@@ -383,13 +387,13 @@
                 // Display strength indicator
                 if (strength < 3) {
                     $passwordStrength.removeClass('text-success text-warning').addClass('text-danger')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_weak || 'Weak password');
+                        .text(texts.password_weak || 'Weak password');
                 } else if (strength < 5) {
                     $passwordStrength.removeClass('text-success text-danger').addClass('text-warning')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_medium || 'Medium strength password');
+                        .text(texts.password_medium || 'Medium strength password');
                 } else {
                     $passwordStrength.removeClass('text-warning text-danger').addClass('text-success')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.password_strong || 'Strong password');
+                        .text(texts.password_strong || 'Strong password');
                 }
             }
 
@@ -405,10 +409,10 @@
 
                 if (newPass === confirmPass) {
                     $passwordMatchStatus.removeClass('text-danger').addClass('text-success')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.passwords_match || 'Passwords match');
+                        .text(texts.passwords_match || 'Passwords match');
                 } else {
                     $passwordMatchStatus.removeClass('text-success').addClass('text-danger')
-                        .text(jobus_dashboard_params && jobus_dashboard_params.texts && jobus_dashboard_params.texts.passwords_mismatch || 'Passwords do not match');
+                        .text(texts.passwords_mismatch || 'Passwords do not match');
                 }
             }
 
@@ -431,22 +435,6 @@
             });
         },
 
-
-        /**
-         * Checks for password change success and triggers redirect if needed
-         */
-        checkPasswordRedirect: function() {
-
-            let $passwordChange = $('#password-change-success');
-            if ( $passwordChange.length ) {
-                const $redirectUrl = $passwordChange.data('redirect-url');
-                if ($redirectUrl) {
-                    setTimeout(function() {
-                        window.location.href = $redirectUrl;
-                    }, 1000);
-                }
-            }
-        },
 
         ProNotice: function () {
 

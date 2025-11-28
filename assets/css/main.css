@@ -3304,15 +3304,6 @@ img {
 .candidate-profile-card .candidate-avatar img {
   height: auto;
 }
-.candidate-profile-card .candidate-name {
-  font-size: 18px;
-}
-.candidate-profile-card .candidate-name a {
-  color: #000;
-}
-.candidate-profile-card .candidate-name a:hover {
-  color: var(--jbs-brand_color_4);
-}
 .candidate-profile-card .candidate-post {
   font-size: 15px;
   color: rgba(0, 0, 0, 0.4);
@@ -7067,26 +7058,29 @@ input[type=file]::-webkit-file-upload-button {
   white-space: nowrap;
 }
 
-.wp-theme-docy .container:has(.jbs-container) {
+body.docy a:hover {
+  text-decoration: none;
+}
+body.docy .container:has(.jbs-container) {
   max-width: 100% !important;
   padding: 0 !important;
 }
-.wp-theme-docy .jbs-container ul {
+body.docy .jbs-container ul {
   margin-left: 0 !important;
 }
-.wp-theme-docy .jbs-container ul.jbs-pagination {
+body.docy .jbs-container ul.jbs-pagination {
   padding-left: 0 !important;
 }
-.wp-theme-docy .jbs-pagination .page-numbers {
+body.docy .jbs-pagination .page-numbers {
   border-left: none;
   border-top: none;
   border-bottom: none;
 }
-.wp-theme-docy .candidate-profile-card div.right-side ul.candidate-skills {
+body.docy .candidate-profile-card div.right-side ul.candidate-skills {
   padding-left: 0;
 }
-.wp-theme-docy .jbs-table thead,
-.wp-theme-docy .jbs-table tbody tr {
+body.docy .jbs-table thead,
+body.docy .jbs-table tbody tr {
   border: none;
   background: none;
 }

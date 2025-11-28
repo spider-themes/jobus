@@ -8,23 +8,60 @@ CSF::createSection($settings_prefix, array(
     'icon'      => 'fas fa-user-plus',
     'fields'        => array(
 
-	    // Create a Heading for a Signup Button Settings
+
+	    // Create a Heading for a Sign In Button Settings
 	    array(
 		    'type'    => 'heading',
-		    'content' => esc_html__( 'Signup Button Settings', 'jobus' ),
+		    'content' => esc_html__( 'Sign In Button Settings', 'jobus' ),
+	    ),
+
+	    // Short helper line to explain the group
+	    array(
+		    'type'    => 'subheading',
+		    'title'   => esc_html__( 'Controls the label and destination URL for the Sign In button shown to users.', 'jobus' ),
+	    ),
+
+	    array(
+		    'id'        => 'signin_btn_label',
+		    'type'      => 'text',
+		    'title'     => esc_html__( 'Sign In Button Label', 'jobus' ),
+		    'subtitle'  => esc_html__( 'The short text that appears on the Sign In button (e.g. "Sign In", "Log In").', 'jobus' ),
+		    'default'   => 'Sign In',
+	    ),
+
+	    array(
+		    'id'        => 'signin_btn_url',
+		    'type'      => 'text',
+		    'title'     => esc_html__( 'Sign In Button URL', 'jobus' ),
+		    'subtitle'  => esc_html__( 'Full URL where the Sign In button should send the user. Include https:// if needed.', 'jobus' ),
+		    'default'   => '#',
+	    ),
+
+	    // Create a Heading for the Sign-Up Button Settings
+	    array(
+		    'type'    => 'heading',
+		    'content' => esc_html__( 'Sign Up Button Settings', 'jobus' ),
+	    ),
+
+	    array(
+		    'id'      => 'signup_btn_group_help',
+		    'type'    => 'subheading',
+		    'title'   => esc_html__( 'Controls the label and destination URL for the Sign Up / Register button.', 'jobus' ),
 	    ),
 
 	    array(
 		    'id'        => 'login_signup_btn_label',
 		    'type'      => 'text',
-		    'title'     => esc_html__( 'Signup Button Label', 'jobus' ),
+		    'title'     => esc_html__( 'Sign Up Button Label', 'jobus' ),
+		    'subtitle'  => esc_html__( 'The text shown on the Sign Up button (e.g. "Sign Up", "Create Account").', 'jobus' ),
 		    'default'   => 'Sign up',
 	    ),
 
 	    array(
 		    'id'        => 'login_signup_btn_url',
 		    'type'      => 'text',
-		    'title'     => esc_html__( 'Signup Button URL', 'jobus' ),
+		    'title'     => esc_html__( 'Sign Up Button URL', 'jobus' ),
+		    'subtitle'  => esc_html__( 'Full URL where new users are taken to register.', 'jobus' ),
 		    'default'   => '#',
 	    ),
 

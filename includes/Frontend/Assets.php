@@ -127,6 +127,14 @@ class Assets {
 			wp_localize_script('jobus-dashboard-frontend', 'jobus_frontend_dashboard_params', [
 				'ajax_url' => $ajax_url,
 				'nonce' => wp_create_nonce('jobus_dashboard_nonce'),
+				'texts' => [
+					'password_weak' => esc_html__('Weak password', 'jobus'),
+					'password_medium' => esc_html__('Medium strength password', 'jobus'),
+					'password_strong' => esc_html__('Strong password', 'jobus'),
+					'passwords_match' => esc_html__('Passwords match', 'jobus'),
+					'passwords_mismatch' => esc_html__('Passwords do not match', 'jobus'),
+					'password_weak_error' => esc_html__('Password is too weak. Please choose a stronger password.', 'jobus'),
+				]
 			]);
 
 		}
@@ -193,3 +201,4 @@ class Assets {
 		wp_add_inline_style( 'jobus-main', $custom_css );
 	}
 }
+

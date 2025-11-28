@@ -128,6 +128,58 @@
   background-color: $text-white !important;
 }
 
+// ============================================
+// Alerts
+// ============================================
+
+.jbs-alert {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+.jbs-alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.jbs-alert-danger {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.jbs-alert-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+.jbs-alert-info {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+
+
+.jbs-alert-dismissible {
+  padding-right: 3rem;
+
+  .jbs-btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem;
+  }
+}
+
+
 // Overflow
 .jbs-overflow-hidden {
   overflow: hidden !important;

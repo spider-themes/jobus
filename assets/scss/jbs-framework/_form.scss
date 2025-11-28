@@ -35,81 +35,9 @@
     background-color: var(--bs-white, #fff);
     border-color: rgba(#0d6efd, 0.25);
     outline: 0;
-    // box-shadow: 0 0 0 0.2rem rgba(#0d6efd, 0.25);
   }
 }
 
-// ============================================
-// Alerts
-// ============================================
-
-.jbs-alert {
-  position: relative;
-  padding: 1rem 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-}
-
-.jbs-alert-primary {
-  color: shade-color(#0d6efd, 40%);
-  background-color: tint-color(#0d6efd, -80%);
-  border-color: tint-color(#0d6efd, -70%);
-}
-
-.jbs-alert-secondary {
-  color: shade-color(#6c757d, 40%);
-  background-color: tint-color(#6c757d, -80%);
-  border-color: tint-color(#6c757d, -70%);
-}
-
-.jbs-alert-success {
-  color: shade-color(#198754, 40%);
-  background-color: tint-color(#198754, -80%);
-  border-color: tint-color(#198754, -70%);
-}
-
-.jbs-alert-danger {
-  color: shade-color(#dc3545, 40%);
-  background-color: tint-color(#dc3545, -80%);
-  border-color: tint-color(#dc3545, -70%);
-}
-
-.jbs-alert-warning {
-  color: shade-color(#ffc107, 40%);
-  background-color: tint-color(#ffc107, -80%);
-  border-color: tint-color(#ffc107, -70%);
-}
-
-.jbs-alert-info {
-  color: shade-color(#0dcaf0, 40%);
-  background-color: tint-color(#0dcaf0, -80%);
-  border-color: tint-color(#0dcaf0, -70%);
-}
-
-.jbs-alert-light {
-  color: shade-color(#f8f9fa, 40%);
-  background-color: tint-color(#f8f9fa, -80%);
-  border-color: tint-color(#f8f9fa, -70%);
-}
-
-.jbs-alert-dark {
-  color: shade-color(#212529, 40%);
-  background-color: tint-color(#212529, -80%);
-  border-color: tint-color(#212529, -70%);
-}
-
-.jbs-alert-dismissible {
-  padding-right: 3rem;
-
-  .jbs-btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    padding: 1.25rem 1rem;
-  }
-}
 
 // ============================================
 // Tables

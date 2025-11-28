@@ -13,6 +13,9 @@ $employer_placeholder_username     = $attributes['employer_username'] ?? '';
 $employer_placeholder_email        = $attributes['employer_email'] ?? '';
 $employer_placeholder_pass         = $attributes['employer_pass'] ?? '';
 $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
+
+$singin_btn_label = jobus_opt( 'signin_btn_label' );
+$singin_btn_url   = jobus_opt( 'signin_btn_url' );
 ?>
 <section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
     <div class="user-data-form">
@@ -91,7 +94,8 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="jbs-col-12">
-                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Register', 'jobus' ); ?></button>
+                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Register',
+                                            'jobus' ); ?></button>
                             </div>
                         </div>
                     </form>
@@ -164,9 +168,13 @@ $employer_placeholder_confirm_pass = $attributes['employer_confirm_pass'] ?? '';
                 </div>
                 <!-- /.tab-pane -->
             </div>
-            <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
-                <a href="javascript:void(0)" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#loginModal"><?php esc_html_e( 'Sign In', 'jobus' ); ?></a>
-            </p>
+            <?php if ( ! empty( $singin_btn_label ) && ( $singin_btn_url ) ) : ?>
+                <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
+                    <a href="<?php echo esc_url( $singin_btn_url ) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#loginModal">
+                        <?php echo esc_html( $singin_btn_label ); ?>
+                    </a>
+                </p>
+            <?php endif; ?>
         </div>
     </div>
 </section>

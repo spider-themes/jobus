@@ -20,7 +20,7 @@ $error_message = '';
 // Check for success message from user meta
 $success_timestamp = get_user_meta( $user->ID, '_password_change_success', true );
 if ( $success_timestamp && ( time() - $success_timestamp ) < 10 ) { // Show message for 10 seconds
-    $success_message = esc_html__( 'Password updated successfully!', 'jobus' );
+    $success_message = esc_html__( 'Your password has been successfully updated. Keep it secure!', 'jobus' );
     // Clean up the temporary meta
     delete_user_meta( $user->ID, '_password_change_success' );
 }
@@ -43,15 +43,13 @@ if ( $error_message ) {
 
         <?php if ( ! empty( $success_message ) ) : ?>
             <div class="jbs-alert jbs-alert-success" role="alert">
-                <?php echo esc_html( $success_message ); ?>
-                <p><?php esc_html_e('Redirecting to homepage...', 'jobus'); ?></p>
+                <i class="bi bi-check-circle"></i> <?php echo esc_html( $success_message ); ?>
             </div>
-            <div id="password-change-success" data-redirect-url="<?php echo esc_url(home_url('/')); ?>"></div>
         <?php endif; ?>
 
         <?php if ( ! empty( $error_message ) ) : ?>
             <div class="jbs-alert jbs-alert-danger" role="alert">
-                <?php echo esc_html( $error_message ); ?>
+                <i class="bi bi-exclamation-circle"></i> <?php echo esc_html( $error_message ); ?>
             </div>
         <?php endif; ?>
 

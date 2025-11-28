@@ -72,12 +72,7 @@ class Password_Handler {
 		wp_set_password( $new_password, $user->ID );
 		wp_set_auth_cookie( $user->ID, true, is_ssl() );
 
-		// Set success message
+		// Set success message in user meta
 		update_user_meta( $user->ID, '_password_change_success', time() );
-
-		// Clean redirect - remove form data from URL
-		$redirect_url = remove_query_arg( array( 'update_user_password', 'update_user_password_nonce' ) );
-		wp_safe_redirect( $redirect_url );
-		exit;
 	}
 }

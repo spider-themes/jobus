@@ -3,9 +3,10 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+$is_related_posts = jobus_opt('is_job_related_posts');
+
 // Get the current post ID
 $current_post_id = get_the_ID();
-
 $args = [
     'post_type' => 'jobus_job',
     'posts_per_page' => 4, // Adjust the number of related jobs to display
@@ -20,6 +21,8 @@ $args = [
 ];
 
 $related_jobs = new WP_Query($args);
+
+if ( $is_related_posts == 'yes') :
 ?>
 <section class="jbs-related-job jbs-pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
     <div class="jbs-container">
@@ -80,4 +83,6 @@ $related_jobs = new WP_Query($args);
         </div>
     </div>
 </section>
+<?php
+endif;
 
