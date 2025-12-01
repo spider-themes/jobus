@@ -201,4 +201,3 @@ class Assets {
 		wp_add_inline_style( 'jobus-main', $custom_css );
 	}
 }
-

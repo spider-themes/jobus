@@ -62,6 +62,7 @@ class Password_Handler {
 			return;
 		}
 
+
 		if ( ! wp_check_password( $current_password, $user->user_pass, $user->ID ) ) {
 			update_user_meta( $user->ID, '_password_change_error', esc_html__( 'Your current password is incorrect.', 'jobus' ) );
 

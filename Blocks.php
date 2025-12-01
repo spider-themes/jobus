@@ -94,18 +94,14 @@ class Blocks {
 	 *
 	 * @return bool|string Rendered block content.
 	 */
-	public function register_form_block_render( array $attributes, string $content ) {
-		ob_start();
+	public function register_form_block_render( array $attributes, string $content ): bool|string {
+
+		// Prepare template variables
 		$nonce = wp_create_nonce( 'jobus_register_form_nonce' );
+		$args = array_merge( $attributes, [ 'nonce' => $nonce ] );
 
-		if ( is_user_logged_in() ) {
-			echo '<p class="jbs-text-center jbs-mt-10">' . esc_html__( 'You are already logged in.', 'jobus' ) . '</p>';
-		} else {
-			include __DIR__ . '/src/register-form/register.php';
-			echo '<input type="hidden" name="jobus_nonce" value="' . esc_attr( $nonce ) . '">';
-		}
-
-		return ob_get_clean();
+		// Load register form template with theme override support
+		return \jobus\includes\Frontend\Template_Loader::get_template_part( 'register-form/register', $args );
 	}
 
 	/**

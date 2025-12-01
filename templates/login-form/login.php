@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+// Template variables passed from block/template loader
 $user_input  = ! empty( $_POST['user_input'] ) ? sanitize_text_field( wp_unslash( $_POST['user_input'] ) ) : '';
 $password    = ! empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash( $_POST['user_pwd'] ) ) : '';
 $jobus_nonce = isset( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
@@ -112,3 +113,4 @@ if ( is_user_logged_in() ) {
     </div>
     <?php
 }
+

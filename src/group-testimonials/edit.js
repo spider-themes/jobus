@@ -8,15 +8,12 @@ function Edit({attributes, setAttributes}) {
     return (
         <Fragment>
             <div {...blockProps}>
-
-
                 <InnerBlocks
                     allowedBlocks={['jobus/testimonials-item']}
                     template={[
                         ['jobus/testimonials-item'],
                     ]}
                 />
-
             </div>
         </Fragment>
     );
