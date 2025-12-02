@@ -866,7 +866,7 @@ class Candidate_Form_Submission {
 		$post_data = [];
 		foreach ( $expected_fields as $field ) {
 			if ( isset( $_POST[ $field ] ) ) {
-				$post_data[ $field ] = recursive_sanitize_text_field( $_POST[ $field ] );
+				$post_data[ $field ] = jobus_recursive_sanitize_text_field( $_POST[ $field ] );
 			}
 		}
 
@@ -877,7 +877,7 @@ class Candidate_Form_Submission {
 				foreach ( $candidate_spec_fields as $field ) {
 					$meta_key = $field['meta_key'] ?? '';
 					if ( $meta_key && isset( $_POST[ $meta_key ] ) ) {
-						$post_data[ $meta_key ] = recursive_sanitize_text_field( $_POST[ $meta_key ] );
+						$post_data[ $meta_key ] = jobus_recursive_sanitize_text_field( $_POST[ $meta_key ] );
 					}
 				}
 			}

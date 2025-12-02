@@ -36,7 +36,13 @@ function jobus_rtl(): string {
     return is_rtl() ? 'true' : 'false';
 }
 
-// A Custom function for [ SETTINGS ]
+/**
+ * Get plugin option value
+ *
+ * @param string $option Option key
+ * @param mixed  $default Default value
+ * @return mixed
+ */
 if ( ! function_exists( 'jobus_opt' ) ) {
     function jobus_opt( $option = '', $default = null ) {
         $options = get_option( 'jobus_opt' );
@@ -46,7 +52,13 @@ if ( ! function_exists( 'jobus_opt' ) ) {
     }
 }
 
-// Custom function for [ META ]
+/**
+ * Get post meta value
+ *
+ * @param string $option Meta key
+ * @param mixed  $default Default value
+ * @return mixed
+ */
 if ( ! function_exists( 'jobus_meta' ) ) {
     function jobus_meta( $option = '', $default = null ) {
         $options = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
@@ -56,14 +68,13 @@ if ( ! function_exists( 'jobus_meta' ) ) {
 }
 
 /**
- * Jobus Custom Template Part
+ * Load custom template file
  *
- * @param       $template
- * @param array $args
- *
+ * @param string $template Template name
+ * @param array  $args     Variables to extract
  * @return void
  */
-function jobus_get_template_part( $template, array $args = [] ): void {
+function jobus_get_template_part( string $template, array $args = [] ): void {
 
     // Get the slug
     $template_slug = rtrim( $template );
@@ -100,13 +111,13 @@ function jobus_get_template_part( $template, array $args = [] ): void {
 
 
 /**
- * Get template part implementation for jobus.
- * Looks at the theme directory first
+ * Load plugin template
  *
- * @param       $template_name
- * @param array $args
+ * @param string $template_name Template name
+ * @param array  $args         Variables
+ * @return void
  */
-function jobus_get_template( $template_name, array $args = [] ): void {
+function jobus_get_template( string $template_name, array $args = [] ): void {
 
     $jobus_obj = Jobus::init();
     if ( $args && is_array( $args ) ) {
@@ -122,9 +133,9 @@ function jobus_get_template( $template_name, array $args = [] ): void {
 }
 
 /**
- * @param $term
+ * Get first taxonomy term name
  *
- * @get the first taxonomy
+ * @param string $term Taxonomy name
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
@@ -136,9 +147,9 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
 }
 
 /**
- * @param $term
+ * Get first taxonomy term link
  *
- * @get the first taxonomy url
+ * @param string $term Taxonomy name
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
@@ -150,9 +161,9 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
 }
 
 /**
- * @param $term
+ * Get taxonomy term list as HTML
  *
- * @get the tag list of job_tag
+ * @param string $term Taxonomy name
  * @return string
  */
 if ( ! function_exists( 'jobus_get_tag_list' ) ) {
@@ -196,13 +207,15 @@ if ( ! function_exists( 'jobus_get_categories' ) ) {
 }
 
 /**
- * Get title excerpt length
+ * Display trimmed post title based on excerpt length settings.
  *
- * @param     $settings
- * @param     $settings_key
- * @param int $default
+ * Retrieves and displays the post title trimmed to a specified word count.
  *
- * @return string|void
+ * @param array  $settings     The settings array containing configuration.
+ * @param string $settings_key The settings key to retrieve the title length from.
+ * @param int    $default      Default title length in words. Defaults to 10.
+ *
+ * @return void
  */
 if ( ! function_exists( 'jobus_title_length' ) ) {
     function jobus_title_length( $settings, $settings_key, $default = 10 ): void {
@@ -213,13 +226,16 @@ if ( ! function_exists( 'jobus_title_length' ) ) {
 }
 
 /**
- * Get post excerpt length
+ * Display trimmed post excerpt based on excerpt length settings.
  *
- * @param     $settings
- * @param     $settings_key
- * @param int $default
+ * Retrieves and displays the post excerpt trimmed to a specified word count.
+ * Falls back to post content if excerpt is not available.
  *
- * @return string
+ * @param array  $settings     The settings array containing configuration.
+ * @param string $settings_key The settings key to retrieve the excerpt length from.
+ * @param int    $default      Default excerpt length in words. Defaults to 10.
+ *
+ * @return void
  */
 if ( ! function_exists( 'jobus_excerpt_length' ) ) {
     function jobus_excerpt_length( $settings, $settings_key, $default = 10 ): void {
@@ -232,10 +248,13 @@ if ( ! function_exists( 'jobus_excerpt_length' ) ) {
 }
 
 /**
- * @param $settings_key
- * @param $is_echo
+ * Output button link attributes based on settings.
  *
- * The button link
+ * Echoes HTML attributes for anchor links including URL, target, rel, and custom attributes.
+ * Used for rendering dynamic button/link attributes in templates.
+ *
+ * @param array $settings_key The settings array containing URL, external flag, nofollow flag, and custom attributes.
+ * @param bool  $is_echo      Whether to echo the output or just return. Defaults to true.
  *
  * @return void
  */
@@ -262,9 +281,12 @@ if ( ! function_exists( 'jobus_button_link' ) ) {
 }
 
 /**
- * @return string
+ * Get company post page data list.
  *
- * Company post page data list
+ * Retrieves all published company posts and returns them as an associative array
+ * suitable for use in select dropdowns and option lists.
+ *
+ * @return array Associative array of company posts with post ID as key and post title as value.
  */
 if ( ! function_exists( 'jobus_company_post_list' ) ) {
     function jobus_company_post_list(): array {
@@ -290,7 +312,17 @@ if ( ! function_exists( 'jobus_company_post_list' ) ) {
     }
 }
 
-function jobus_get_specs( $settings_id = 'job_specifications' ): array {
+/**
+ * Get specifications array from plugin settings.
+ *
+ * Retrieves specifications and taxonomies for job and company post types.
+ * Combines meta specifications with taxonomy names into a single array.
+ *
+ * @param string $settings_id The settings identifier to retrieve the specifications. Defaults to 'job_specifications'.
+ *
+ * @return array An associative array of specifications with meta-keys/taxonomy-slugs as keys and names as values.
+ */
+function jobus_get_specs( string $settings_id = 'job_specifications' ): array {
     $specifications = jobus_opt( $settings_id );
 
     $specs = [];
@@ -350,7 +382,11 @@ if ( ! function_exists( 'jobus_get_specs_options' ) ) {
 /**
  * Retrieve and format job attributes based on the specified meta key.
  *
- * @param string $settings_key The settings key for the job attribute.
+ * Fetches post meta values and formats them as a comma-separated string.
+ * Supports both direct meta key lookups and option-based lookups.
+ *
+ * @param string $meta_parent_id The parent meta key containing the attributes.
+ * @param string $settings_key   The settings key for the job attribute.
  *
  * @return string The formatted and sanitized job attribute value.
  */
@@ -374,6 +410,17 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
 	}
 }
 
+/**
+ * Count the number of posts using a specific meta key and value.
+ *
+ * Queries all posts of a given type and counts how many have the specified meta value.
+ *
+ * @param string $post_type  The post type to query. Defaults to 'jobus_job'.
+ * @param string $meta_key   The meta key to search for.
+ * @param string $meta_value The meta value to search for (partial match).
+ *
+ * @return int The number of posts matching the criteria.
+ */
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         $args = array(
@@ -432,7 +479,14 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
 }
 
 /**
- * Jobus pagination
+ * Modify main query for job, company, and candidate archive pages.
+ *
+ * Adjusts the posts per page for each post type archive based on plugin settings.
+ * Hooked to 'pre_get_posts' action.
+ *
+ * @param WP_Query $query The current query object.
+ *
+ * @return void
  */
 if ( ! function_exists( 'jobus_job_archive_query' ) ) {
     function jobus_job_archive_query( $query ): void {
@@ -455,9 +509,15 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
 }
 
 /**
- * Get the company count by post id and meta-value
- * @param $company_id
- * @return int
+ * Get the company count by post id and meta-value.
+ *
+ * Retrieves the number of jobs associated with a company ID.
+ * Can return either a count or a link to the jobs.
+ *
+ * @param int|string $company_id The company post ID to query.
+ * @param bool       $link       Whether to return a link or just the count. Defaults to true.
+ *
+ * @return int|string The job count or a link to the company's jobs.
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
 	function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
@@ -535,9 +595,18 @@ function jobus_search_terms( string $terms ) {
 }
 
 /**
- * Jobus search meta
+ * Build search meta query for filtering posts.
+ *
+ * Constructs a meta query array from search filters based on widget configurations.
+ * Handles both single and range-type search widgets.
+ *
+ * @param string $meta_page_id      The meta key to search. Defaults to 'jobus_meta_options'.
+ * @param string $sidebar_widget_id The option ID for sidebar widgets. Defaults to 'job_sidebar_widgets'.
+ * @param array  $widgets           The widgets to include in the search. Defaults to ['location'].
+ *
+ * @return array The constructed meta query for WP_Query.
  */
-function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_widget_id = 'job_sidebar_widgets', $widgets = [ 'location' ] ): array {
+function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets', array $widgets = [ 'location' ] ): array {
 
     $sidebar_widgets = jobus_opt( $sidebar_widget_id );
     if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
@@ -600,7 +669,16 @@ function jobus_all_search_meta( $meta_page_id = 'jobus_meta_options', $sidebar_w
 }
 
 /**
- * Jobus meta & taxonomy arguments
+ * Build WP_Query arguments for meta or taxonomy filtering.
+ *
+ * Constructs query arguments based on whether filtering by taxonomy or custom meta fields.
+ *
+ * @param string $data       The type of query: 'taxonomy' or 'meta'. Defaults to empty string.
+ * @param string $post_type  The post type to query. Defaults to 'jobus_job'.
+ * @param string $taxonomy   The taxonomy name if data is 'taxonomy'. Defaults to empty string.
+ * @param array  $terms      The terms/meta values to filter by. Defaults to empty array.
+ *
+ * @return array The constructed query arguments for WP_Query.
  */
 function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [] ) {
     $data_args = [];
@@ -628,7 +706,13 @@ function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxon
 }
 
 /**
- * jobus search meta & taxonomy queries merge
+ * Merge multiple query results and return unique post IDs.
+ *
+ * Combines results from multiple WP_Query queries and returns a deduplicated array of post IDs.
+ *
+ * @param mixed ...$queries Variadic arguments containing query arrays with 'args' key for WP_Query parameters.
+ *
+ * @return array Array of unique post IDs from all merged queries.
  */
 function jobus_merge_queries_and_get_ids( ...$queries ): array {
     $combined_post_ids = array();
@@ -654,7 +738,12 @@ function jobus_merge_queries_and_get_ids( ...$queries ): array {
 }
 
 /**
- * Get the post-IDs of all the range fields
+ * Get the post-IDs of all posts with range field values.
+ *
+ * Retrieves all job posts and extracts range field values (like salary ranges).
+ * Nonce-verified to ensure secure access.
+ *
+ * @return array Associative array with widget names as keys and post IDs with their values.
  */
 function jobus_all_range_field_value(): array {
     // All the post-IDs of the 'jobus_job' post-type
@@ -771,7 +860,14 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
 
 
 /**
- * Get custom icon [Elegant Icons]
+ * Add Bootstrap icons to the icon picker options.
+ *
+ * Registers Bootstrap icons for use in custom icon fields throughout the plugin.
+ * Moves custom icons to the top of the icon list in the picker UI.
+ *
+ * @param array $icons Existing array of icon groups from the filter.
+ *
+ * @return array Modified array with Bootstrap icons added and reversed.
  */
 if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
@@ -816,6 +912,15 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 }
 
 
+/**
+ * Get the count of published posts for a post type.
+ *
+ * Returns the total number of published posts of the specified post type.
+ *
+ * @param string $post_type The post type to count posts for.
+ *
+ * @return string Formatted count of published posts.
+ */
 function jobus_posts_count( $post_type ): string {
 
     $total_posts = wp_count_posts( $post_type );
@@ -825,7 +930,13 @@ function jobus_posts_count( $post_type ): string {
 }
 
 /**
- * Retrieve archive meta-name based on the selected specification key.
+ * Retrieve the company specification meta name for an archive step.
+ *
+ * Gets the display name of a company specification based on the step number.
+ *
+ * @param int $step The step number for the archive meta key. Defaults to 1.
+ *
+ * @return string|null The specification name, or null if not found.
  */
 function jobus_meta_company_spec_name( $step = 1 ) {
 
@@ -844,7 +955,13 @@ function jobus_meta_company_spec_name( $step = 1 ) {
 
 
 /**
- * Retrieve archive meta-name based on the selected specification key.
+ * Retrieve the candidate specification meta name for an archive step.
+ *
+ * Gets the display name of a candidate specification based on the step number.
+ *
+ * @param int $step The step number for the archive meta key. Defaults to 1.
+ *
+ * @return string|null The specification name, or null if not found.
  */
 function jobus_meta_candidate_spec_name( $step = 1 ) {
 
@@ -862,6 +979,16 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
 }
 
 
+/**
+ * Configure PHPMailer with SMTP settings from plugin options.
+ *
+ * Hooks into phpmailer_init to configure SMTP server credentials and settings
+ * for WordPress email delivery.
+ *
+ * @param PHPMailer\PHPMailer\PHPMailer $phpmailer The PHPMailer instance.
+ *
+ * @return PHPMailer\PHPMailer\PHPMailer The configured PHPMailer instance.
+ */
 add_action( 'phpmailer_init', 'jobus_phpmailer_init' );
 function jobus_phpmailer_init( $phpmailer ) {
     $phpmailer->isSMTP();
@@ -983,7 +1110,7 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
  *
  * @return array Status information about the saved post.
  */
-function jobus_get_save_status( $post_id = '', string $meta_key = 'jobus_saved_jobs' ): array {
+function jobus_get_save_status( int|string $post_id = '', string $meta_key = 'jobus_saved_jobs' ): array {
     if ( ! $post_id ) {
         $post_id = get_the_ID();
     }
@@ -1001,16 +1128,45 @@ function jobus_get_save_status( $post_id = '', string $meta_key = 'jobus_saved_j
 }
 
 
-if ( ! function_exists( 'recursive_sanitize_text_field' ) ) {
-    function recursive_sanitize_text_field( $data ) {
+/**
+ * Recursively sanitize text data including arrays.
+ *
+ * Applies sanitize_text_field to all elements in an array recursively,
+ * handling nested arrays appropriately.
+ *
+ * @param array|mixed $data The data to sanitize, can be an array or scalar value.
+ *
+ * @return array|string Sanitized data in the same structure as input.
+ */
+if ( ! function_exists( 'jobus_recursive_sanitize_text_field' ) ) {
+    function jobus_recursive_sanitize_text_field( $data ) {
         if ( is_array( $data ) ) {
-            return array_map( 'recursive_sanitize_text_field', wp_unslash( $data ) );
+            return array_map( 'jobus_recursive_sanitize_text_field', wp_unslash( $data ) );
         }
 
         return sanitize_text_field( wp_unslash( $data ) );
     }
 }
 
+/**
+ * Render the save/bookmark button for posts.
+ *
+ * Outputs an anchor element with data attributes for saving/bookmarking jobs or candidates.
+ * The button uses Bootstrap icons to display the save state.
+ *
+ * @param array $args {
+ *     Optional. Array of arguments for the save button.
+ *
+ *     @type int|string $post_id     The post ID to save/bookmark.
+ *     @type string     $post_type    The post type (e.g., 'jobus_job', 'jobus_candidate').
+ *     @type string     $meta_key     The user meta key for saving posts.
+ *     @type bool       $is_saved     Whether the post is already saved by the user.
+ *     @type string     $button_title The title/tooltip for the button.
+ *     @type string     $class        CSS classes for the button element.
+ * }
+ *
+ * @return void
+ */
 if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
     function jobus_render_post_save_button( $args ) {
         $post_id      = $args['post_id'] ?? '';

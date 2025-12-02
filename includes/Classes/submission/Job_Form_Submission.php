@@ -60,7 +60,7 @@ class Job_Form_Submission {
 		$post_data = [];
 		foreach ( $expected_fields as $field ) {
 			if ( isset( $_POST[ $field ] ) ) {
-				$post_data[ $field ] = recursive_sanitize_text_field( $_POST[ $field ] );
+				$post_data[ $field ] = jobus_recursive_sanitize_text_field( $_POST[ $field ] );
 			}
 		}
 

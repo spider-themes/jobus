@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="jobus-login-from dashboard-body">
-
     <div class="login_from">
         <div class="jbs-container">
             <div class="user-data-form">
