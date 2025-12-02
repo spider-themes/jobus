@@ -200,8 +200,9 @@ class Dashboard_Employer {
 	protected function load_saved_candidate( WP_User $user ): string {
 		if ( jobus_is_premium() ) {
 			return Template_Loader::get_template_part_pro( 'dashboard/employer/saved-candidate', [
-				'user_id'  => $user->ID,
-				'username' => $user->user_login,
+				'user_id'      => $user->ID,
+				'username'     => $user->user_login,
+				'is_dashboard' => false, // Set to false for full view with pagination
 			] );
 		} else {
 			$image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png';
@@ -226,8 +227,9 @@ class Dashboard_Employer {
 	 */
 	protected function load_jobs( WP_User $user ): string {
 		return Template_Loader::get_template_part( 'dashboard/employer/jobs', [
-			'user_id'  => $user->ID,
-			'username' => $user->user_login,
+			'user_id'      => $user->ID,
+			'username'     => $user->user_login,
+			'is_dashboard' => false
 		] );
 	}
 

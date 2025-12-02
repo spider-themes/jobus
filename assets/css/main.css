@@ -2741,29 +2741,17 @@ body.compensate-for-scrollbar {
 
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.jbs-job-classic .pagination-wrap,
-.jobus-job-topbar .pagination-wrap,
-.jobus-job-popup .pagination-wrap,
-.jobus-company-classic .pagination-wrap,
-.jobus-company-popup .pagination-wrap {
+.pagination-wrap {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jbs-job-classic .pagination-wrap,
-  .jobus-job-topbar .pagination-wrap,
-  .jobus-job-popup .pagination-wrap,
-  .jobus-company-classic .pagination-wrap,
-  .jobus-company-popup .pagination-wrap {
+  .pagination-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination,
-.jobus-job-topbar .pagination-wrap .jbs-pagination,
-.jobus-job-popup .pagination-wrap .jbs-pagination,
-.jobus-company-classic .pagination-wrap .jbs-pagination,
-.jobus-company-popup .pagination-wrap .jbs-pagination {
+.pagination-wrap .jbs-pagination {
   position: relative;
   display: flex;
   padding: 0;
@@ -2771,26 +2759,14 @@ body.compensate-for-scrollbar {
   border: none;
 }
 @media (max-width: 540px) {
-  .jbs-job-classic .pagination-wrap .jbs-pagination,
-  .jobus-job-topbar .pagination-wrap .jbs-pagination,
-  .jobus-job-popup .pagination-wrap .jbs-pagination,
-  .jobus-company-classic .pagination-wrap .jbs-pagination,
-  .jobus-company-popup .pagination-wrap .jbs-pagination {
+  .pagination-wrap .jbs-pagination {
     justify-content: center;
   }
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination a,
-.jobus-job-topbar .pagination-wrap .jbs-pagination a,
-.jobus-job-popup .pagination-wrap .jbs-pagination a,
-.jobus-company-classic .pagination-wrap .jbs-pagination a,
-.jobus-company-popup .pagination-wrap .jbs-pagination a {
+.pagination-wrap .jbs-pagination a {
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers {
+.pagination-wrap .jbs-pagination .page-numbers {
   display: inline-block;
   width: 35px;
   height: 35px;
@@ -2803,45 +2779,21 @@ body.compensate-for-scrollbar {
   cursor: pointer;
   background: transparent;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible {
+.pagination-wrap .jbs-pagination .page-numbers:focus-visible {
   outline-style: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus {
+.pagination-wrap .jbs-pagination .page-numbers:focus {
   outline-style: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
+.pagination-wrap .jbs-pagination .page-numbers:hover {
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.current {
+.pagination-wrap .jbs-pagination .page-numbers.current {
   background: var(--jbs-brand_color_1);
   color: #fff;
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.next {
+.pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
   height: auto;
   width: auto;
   display: flex;
@@ -7081,29 +7033,17 @@ input[type=file]::-webkit-file-upload-button {
 /*========== Job Listing Widget ==========*/
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.jbs-job-classic .pagination-wrap,
-.jobus-job-topbar .pagination-wrap,
-.jobus-job-popup .pagination-wrap,
-.jobus-company-classic .pagination-wrap,
-.jobus-company-popup .pagination-wrap {
+.pagination-wrap {
   padding-top: 30px;
 }
 @media (width > 540px) {
-  .jbs-job-classic .pagination-wrap,
-  .jobus-job-topbar .pagination-wrap,
-  .jobus-job-popup .pagination-wrap,
-  .jobus-company-classic .pagination-wrap,
-  .jobus-company-popup .pagination-wrap {
+  .pagination-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination,
-.jobus-job-topbar .pagination-wrap .jbs-pagination,
-.jobus-job-popup .pagination-wrap .jbs-pagination,
-.jobus-company-classic .pagination-wrap .jbs-pagination,
-.jobus-company-popup .pagination-wrap .jbs-pagination {
+.pagination-wrap .jbs-pagination {
   position: relative;
   display: flex;
   padding: 0;
@@ -7111,26 +7051,14 @@ input[type=file]::-webkit-file-upload-button {
   border: none;
 }
 @media (max-width: 540px) {
-  .jbs-job-classic .pagination-wrap .jbs-pagination,
-  .jobus-job-topbar .pagination-wrap .jbs-pagination,
-  .jobus-job-popup .pagination-wrap .jbs-pagination,
-  .jobus-company-classic .pagination-wrap .jbs-pagination,
-  .jobus-company-popup .pagination-wrap .jbs-pagination {
+  .pagination-wrap .jbs-pagination {
     justify-content: center;
   }
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination a,
-.jobus-job-topbar .pagination-wrap .jbs-pagination a,
-.jobus-job-popup .pagination-wrap .jbs-pagination a,
-.jobus-company-classic .pagination-wrap .jbs-pagination a,
-.jobus-company-popup .pagination-wrap .jbs-pagination a {
+.pagination-wrap .jbs-pagination a {
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers {
+.pagination-wrap .jbs-pagination .page-numbers {
   display: inline-block;
   width: 35px;
   height: 35px;
@@ -7143,45 +7071,21 @@ input[type=file]::-webkit-file-upload-button {
   cursor: pointer;
   background: transparent;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus-visible,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus-visible {
+.pagination-wrap .jbs-pagination .page-numbers:focus-visible {
   outline-style: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:focus,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:focus {
+.pagination-wrap .jbs-pagination .page-numbers:focus {
   outline-style: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers:hover,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
+.pagination-wrap .jbs-pagination .page-numbers:hover {
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.current,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.current {
+.pagination-wrap .jbs-pagination .page-numbers.current {
   background: var(--jbs-brand_color_1);
   color: #fff;
   border: none !important;
 }
-.jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.prev, .jbs-job-classic .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-job-topbar .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-job-popup .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-company-classic .pagination-wrap .jbs-pagination .page-numbers.next,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.prev,
-.jobus-company-popup .pagination-wrap .jbs-pagination .page-numbers.next {
+.pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
   height: auto;
   width: auto;
   display: flex;

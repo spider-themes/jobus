@@ -7,10 +7,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user       = wp_get_current_user();
 $user_email = $user->user_email;
 
+// Check if this is the dashboard view or full view
+$is_dashboard = $args['is_dashboard'] ?? true;
+$per_page     = $is_dashboard ? 4 : 6; // 4 in dashboard widget, 6 in full view
+
+// Get current page number - check multiple sources
+$current_page = 1;
+
+// First check query parameters
+if ( isset( $_GET['paged'] ) && intval( $_GET['paged'] ) > 0 ) {
+	$current_page = intval( $_GET['paged'] );
+} elseif ( isset( $_GET['page'] ) && intval( $_GET['page'] ) > 0 ) {
+	$current_page = intval( $_GET['page'] );
+}
+// Then check query vars
+elseif ( get_query_var( 'paged' ) ) {
+	$current_page = get_query_var( 'paged' );
+} elseif ( get_query_var( 'page' ) ) {
+	$current_page = get_query_var( 'page' );
+}
+// Finally check the URL path for /page/N/ pattern
+else {
+	$request_uri = $_SERVER['REQUEST_URI'];
+	if ( preg_match( '#/page/(\d+)/?#', $request_uri, $matches ) ) {
+		$current_page = intval( $matches[1] );
+	}
+}
+
 // Query applications for the current user based on their email
 $args = array(
 	'post_type'      => 'jobus_applicant',
-	'posts_per_page' => -1,
+	'posts_per_page' => $per_page,
+	'paged'          => $current_page,
 	'meta_query'     => array(
 		array(
 			'key'     => 'candidate_email',
@@ -95,9 +123,9 @@ $applications = new \WP_Query( $args );
                                     <?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>
                                 </td>
                                 <td class="job-status">
-                                        <span class="jbs-badge <?php echo esc_attr( $status_class ); ?>">
-                                            <?php echo esc_html( ucfirst( $status )); ?>
-                                        </span>
+                                    <span class="jbs-badge <?php echo esc_attr( $status_class ); ?>">
+                                        <?php echo esc_html( ucfirst( $status )); ?>
+                                    </span>
                                 </td>
                                 <td class="job-actions">
                                     <div class="action-button">
@@ -121,19 +149,39 @@ $applications = new \WP_Query( $args );
                             </tr>
                         <?php
                         endwhile;
-                        wp_reset_postdata();
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
+		<?php
+		// Display pagination if not in dashboard mode
+		if ( ! $is_dashboard && $applications->max_num_pages > 1 ) {
+			// Temporarily override the global query var for pagination
+			$original_paged = get_query_var( 'paged' );
+			set_query_var( 'paged', $current_page );
+
+			echo '<div class="pagination-wrap">';
+			jobus_pagination(
+				$applications,
+				'<i class="bi bi-chevron-left"></i>',
+				'<i class="bi bi-chevron-right"></i>'
+			);
+			echo '</div>';
+
+			// Restore original query var
+			set_query_var( 'paged', $original_paged );
+		}
+
+        wp_reset_postdata();
+        ?>
         <?php
     else :
         ?>
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
-                <h4><?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?></h4>
+                <h4> <?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?> </h4>
                 <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
                 <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
                     <?php esc_html_e( 'Browse Jobs', 'jobus' ); ?>

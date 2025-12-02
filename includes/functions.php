@@ -449,13 +449,13 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
      * Generates and outputs a pagination control as an unordered list.
      * Supports customization of "previous" and "next" text.
      *
-     * @param WP_Query $query Query object containing pagination data.
-     * @param string   $prev  Custom text for the "previous" pagination link. Default is an empty string.
-     * @param string   $next  Custom text for the "next" pagination link. Default is an empty string.
+     * @param WP_Query|stdClass $query Query object containing pagination data.
+     * @param string            $prev  Custom text for the "previous" pagination link. Default is an empty string.
+     * @param string            $next  Custom text for the "next" pagination link. Default is an empty string.
      *
      * @return void
      */
-    function jobus_pagination( WP_Query $query, string $prev = '', string $next = '' ): void {
+    function jobus_pagination( $query, string $prev = '', string $next = '' ): void {
 
         echo '<ul class="jbs-pagination">';
 
@@ -800,7 +800,7 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
      * @param WP_Query $query The current WP_Query object.
      * @param string   $class The CSS class for the paragraph element.
      */
-    function jobus_showing_post_result_count( WP_Query $query, string $class = 'm0 jbs-order-sm-last jbs-text-center jbs-text-sm-start xs-pb-20' ): void {
+    function jobus_showing_post_result_count( WP_Query $query, string $class = 'jbs-order-sm-last jbs-text-center jbs-text-sm-start xs-pb-20' ): void {
         if ( ! $query->have_posts() ) {
             echo '<p class="' . esc_attr( $class ) . '">' . esc_html__( 'No results found', 'jobus' ) . '</p>';
 

@@ -1,11 +1,6 @@
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.jbs-job-classic,
-.jobus-job-topbar,
-.jobus-job-popup,
-.jobus-company-classic,
-.jobus-company-popup {
-  .pagination-wrap {
+.pagination-wrap {
     padding-top: 30px;
     @media (width > 540px) {
       display: flex;
@@ -66,7 +61,6 @@
       }
     }
   }
-}
 
 /**=== Candidate Classic and Popup Pagination ===**/
 .jbs-candidate-classic, .jobus-candidate-popup {
