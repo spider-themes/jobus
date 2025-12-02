@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "title": "Testimonial Item (Jobus)",
   "description": "Jobus Testimonials. A block that allows you to add a client review to your page.",
-  "icon": "dashicons-testimonial",
+  "icon": "dashicons dashicons-testimonial",
   "category": "jobus-blocks",
   "supports": {
     "html": false,

@@ -1,7 +1,7 @@
 {
   "apiVersion": 3,
   "name": "jobus/video-popup",
-  "title": "Jobus Video Popup",
+  "title": "Video Popup (Jobus)",
   "category": "jobus-blocks",
   "icon": "video-alt3",
   "description": "Jobus Video Popup. A block that allows you to add a video popup to your page.",
