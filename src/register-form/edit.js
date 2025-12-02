@@ -6,7 +6,7 @@ import {__} from '@wordpress/i18n';
 function Edit({attributes, setAttributes}) {
     const blockProps = useBlockProps({className: 'jobus-registration-section'});
     const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass, candidate_tab_title, employer_tab_title} = attributes;
-    const {employer_username, employer_email, employer_pass, employer_confirm_pass} = attributes;
+    const {employer_username, employer_email, employer_pass, employer_confirm_pass, redirect_url} = attributes;
 
     return (
         <Fragment>
@@ -80,6 +80,18 @@ function Edit({attributes, setAttributes}) {
                         value={employer_confirm_pass}
                         placeholder={__('demo', 'jobus')}
                         onChange={(value) => setAttributes({employer_confirm_pass: value})}
+                    />
+                </PanelBody>
+
+                {/*================ Redirect Settings ============== */}
+                <PanelBody title={__('Redirect Settings', 'jobus')} initialOpen={false}>
+                    <TextControl
+                        label={__('Redirect URL after Login', 'jobus')}
+                        type="url"
+                        value={redirect_url}
+                        placeholder={__('https://example.com/dashboard', 'jobus')}
+                        help={__('Enter the URL where users should be redirected after successful registration/login', 'jobus')}
+                        onChange={(value) => setAttributes({redirect_url: value})}
                     />
                 </PanelBody>
 

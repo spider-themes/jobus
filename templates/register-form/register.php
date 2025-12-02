@@ -17,6 +17,7 @@ $employer_placeholder_confirm_pass = $employer_confirm_pass ?? 'Enter Your Confi
 
 $singin_btn_label = jobus_opt( 'signin_btn_label' );
 $singin_btn_url   = jobus_opt( 'signin_btn_url' );
+$redirect_url     = ! empty( $redirect_url ) ? esc_url_raw( $redirect_url ) : '';
 ?>
     <section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
         <div class="user-data-form">
@@ -44,6 +45,9 @@ $singin_btn_url   = jobus_opt( 'signin_btn_url' );
                               id="jobus-candidate-registration-form" method="post">
 							<?php wp_nonce_field( 'register_candidate_action', 'register_candidate_nonce' ); ?>
                             <input type="hidden" name="action" value="register_candidate">
+                            <?php if ( ! empty( $redirect_url ) ) : ?>
+                                <input type="hidden" name="redirect_url" value="<?php echo esc_attr( $redirect_url ); ?>">
+                            <?php endif; ?>
                             <div class="jbs-row">
                                 <div class="jbs-col-12">
                                     <div class="input-group-meta jbs-position-relative jbs-mb-25">
@@ -107,6 +111,9 @@ $singin_btn_url   = jobus_opt( 'signin_btn_url' );
                               id="jobus-employer-registration-form" method="post">
 							<?php wp_nonce_field( 'register_employer_action', 'register_employer_nonce' ); ?>
                             <input type="hidden" name="action" value="register_employer">
+                            <?php if ( ! empty( $redirect_url ) ) : ?>
+                                <input type="hidden" name="redirect_url" value="<?php echo esc_attr( $redirect_url ); ?>">
+                            <?php endif; ?>
                             <div class="jbs-row">
                                 <div class="jbs-col-12">
                                     <div class="input-group-meta jbs-position-relative jbs-mb-25">

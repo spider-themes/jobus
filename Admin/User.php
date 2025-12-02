@@ -87,6 +87,7 @@ class User {
 			$candidate_email            = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
 			$candidate_password         = ! empty( $_POST['candidate_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_pass'] ) ) : '';
 			$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) ) : '';
+			$redirect_url               = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
 
 			if ( $candidate_password !== $candidate_confirm_password ) {
 				wp_send_json_error( esc_html__( 'Passwords do not match', 'jobus' ) );
@@ -112,8 +113,12 @@ class User {
 			wp_signon( [ 'user_login' => $candidate_username, 'user_password' => $candidate_password ], false );
 			do_action( 'wp_login', $candidate_username, new \WP_User( $candidate_id ) );
 
-			wp_safe_redirect( home_url() );
+			// Redirect to custom URL if provided, otherwise to home
+			$final_redirect = ! empty( $redirect_url ) ? $redirect_url : home_url();
+			wp_redirect( esc_url( $final_redirect ) );
 			exit;
+		} else {
+			error_log( '[Jobus Register] Nonce verification failed' );
 		}
 	}
 
@@ -125,7 +130,7 @@ class User {
 			$employer_email            = ! empty( $_POST['employer_email'] ) ? sanitize_email( wp_unslash( $_POST['employer_email'] ) ) : '';
 			$employer_password         = ! empty( $_POST['employer_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_pass'] ) ) : '';
 			$employer_confirm_password = ! empty( $_POST['employer_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_confirm_pass'] ) ) : '';
-
+			$redirect_url              = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
 
 			if ( $employer_password !== $employer_confirm_password ) {
 				wp_send_json_error( esc_html__( 'Passwords do not match', 'jobus' ) );
@@ -152,8 +157,12 @@ class User {
 			wp_signon( [ 'user_login' => $employer_username, 'user_password' => $employer_password ], false );
 			do_action( 'wp_login', $employer_username, new \WP_User( $employer_id ) );
 
-			wp_safe_redirect( home_url() );
+			// Redirect to custom URL if provided, otherwise to home
+			$final_redirect = ! empty( $redirect_url ) ? $redirect_url : home_url();
+			wp_redirect( esc_url( $final_redirect ) );
 			exit;
+		} else {
+			error_log( '[Jobus Register] Nonce verification failed' );
 		}
 	}
 

@@ -54,6 +54,10 @@
     "preview": {
       "type": "boolean",
       "default": false
+    },
+    "redirect_url": {
+      "type": "string",
+      "default": ""
     }
   },
   "keywords": [

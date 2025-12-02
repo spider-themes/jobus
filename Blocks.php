@@ -30,6 +30,9 @@ class Blocks {
 		// Register Block Editor and Frontend Assets
 		add_action( 'enqueue_block_editor_assets', [ $this, 'register_block_editor_assets' ] );
 		add_action( 'enqueue_block_assets', [ $this, 'register_block_assets' ] );
+
+		// Handle redirect for logged-in users visiting register form pages
+		add_action( 'template_redirect', [ $this, 'handle_logged_in_user_redirect' ] );
 	}
 
 	/**
@@ -101,6 +104,74 @@ class Blocks {
 
 		// Load register form template with theme override support
 		return \jobus\includes\Frontend\Template_Loader::get_template_part( 'register-form/register', $args );
+	}
+
+	/**
+	 * Handle redirect for logged-in users visiting pages with register form blocks
+	 */
+	public function handle_logged_in_user_redirect(): void {
+		// Only proceed if user is logged in
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
+		// Only proceed on singular pages/posts
+		if ( ! is_singular() ) {
+			return;
+		}
+
+		$post_id = get_the_ID();
+		if ( ! $post_id ) {
+			return;
+		}
+
+		// Check if the post content contains the register form block
+		$post_content = get_post_field( 'post_content', $post_id );
+		if ( ! str_contains( $post_content, '<!-- wp:jobus/register-form' ) ) {
+			return;
+		}
+
+		error_log( '[Jobus Register] Found register form block on page ID: ' . $post_id );
+
+		// Parse the block content to find the redirect URL
+		$blocks = parse_blocks( $post_content );
+		$redirect_url = $this->find_register_form_redirect_url( $blocks );
+
+		if ( ! empty( $redirect_url ) ) {
+			error_log( '[Jobus Register] User already logged in. Redirecting to: ' . $redirect_url );
+			wp_safe_redirect( $redirect_url );
+			exit;
+		} else {
+			error_log( '[Jobus Register] No redirect URL found in block attributes' );
+		}
+	}
+
+	/**
+	 * Recursively search for register form block and extract redirect URL
+	 *
+	 * @param array $blocks Array of parsed blocks
+	 * @return string|null Redirect URL if found
+	 */
+	private function find_register_form_redirect_url( array $blocks ): ?string {
+		foreach ( $blocks as $block ) {
+			// Check if this is the register form block
+			if ( isset( $block['blockName'] ) && $block['blockName'] === 'jobus/register-form' ) {
+				$attributes = $block['attrs'] ?? [];
+				if ( ! empty( $attributes['redirect_url'] ) ) {
+					return esc_url_raw( $attributes['redirect_url'] );
+				}
+			}
+
+			// Recursively check inner blocks
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$redirect_url = $this->find_register_form_redirect_url( $block['innerBlocks'] );
+				if ( $redirect_url ) {
+					return $redirect_url;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	/**
