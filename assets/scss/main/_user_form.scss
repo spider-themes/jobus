@@ -29,6 +29,387 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 12px
+  }
+}
+
+/*========== Login Modal Popup Styling ===========*/
+#loginModal {
+  &.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0);
+    padding-top: 50px;
+    overflow-y: auto;
+
+    &.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+
+      .modal-dialog {
+        animation: modalFadeIn 0.3s ease-in-out forwards;
+      }
+    }
+
+    &.jbs-fade {
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
+
+  .modal-dialog {
+    position: relative;
+    width: auto;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+
+    &.modal-fullscreen {
+      max-width: 90%;
+      
+      @media (max-width: 768px) {
+        max-width: 95%;
+        padding: 10px;
+      }
+    }
+
+    &.modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+    }
+  }
+
+  .container {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 50px 40px;
+    animation: slideUp 0.4s ease-out forwards;
+
+    @media (max-width: 576px) {
+      padding: 30px 20px;
+    }
+
+    &.shadow-sm {
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .jbs-btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #000;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: "×";
+      font-size: 32px;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+      outline: none;
+    }
+  }
+
+  .jbs-text-center {
+    text-align: center;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--jbs-heading_color, #254035);
+      margin-bottom: 10px;
+      line-height: 1.3;
+
+      @media (max-width: 576px) {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      font-size: 15px;
+      color: #6a737c;
+      margin-bottom: 12px;
+      line-height: 1.6;
+
+      a {
+        color: var(--jbs-brand_color_1, #31795A);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: var(--jbs-brand_color_2, #244034);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .form-wrapper {
+    max-width: 100%;
+    margin-top: 30px;
+
+    form {
+      &.jbs-mt-10 {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .jbs-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+
+  .jbs-col-12 {
+    flex: 0 0 100%;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .input-group-meta {
+    position: relative;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    &.jbs-mb-25 {
+      margin-bottom: 25px;
+    }
+
+    &.jbs-mb-20 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--jbs-heading_color, #254035);
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 14px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background-color: #f8f9fa;
+      color: #000;
+      transition: all 0.3s ease;
+      font-family: inherit;
+
+      &:focus {
+        outline: none;
+        background-color: #fff;
+        border-color: var(--jbs-brand_color_1, #31795A);
+        box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.1);
+      }
+
+      &::placeholder {
+        color: #9fa6ad;
+      }
+
+      &.pass_log_id {
+        padding-right: 45px;
+      }
+    }
+  }
+
+  .placeholder_icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+
+    .passVicon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .agreement-checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin: 0;
+    gap: 15px;
+
+    &.jbs-d-flex {
+      display: flex;
+    }
+
+    &.jbs-justify-content-between {
+      justify-content: space-between;
+    }
+
+    &.jbs-align-items-center {
+      align-items: center;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      cursor: pointer;
+      accent-color: var(--jbs-brand_color_1, #31795A);
+    }
+
+    label {
+      margin: 0;
+      font-size: 14px;
+      color: #6a737c;
+      font-weight: 400;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    a {
+      font-size: 14px;
+      color: var(--jbs-brand_color_1, #31795A);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+
+      &:hover {
+        color: var(--jbs-brand_color_2, #244034);
+        text-decoration: underline;
+      }
+    }
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .btn-eleven {
+    width: 100%;
+    padding: 12px 24px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--jbs-brand_color_1, #31795A);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    text-align: center;
+    line-height: 26px;
+
+    &.jbs-jbs-fw-500 {
+      font-weight: 500;
+    }
+
+    &.tran3s {
+      transition: all 0.3s ease;
+    }
+
+    &.jbs-d-block {
+      display: block;
+    }
+
+    &.jbs-mt-20 {
+      margin-top: 20px;
+    }
+
+    &:hover {
+      background-color: var(--jbs-brand_color_2, #244034);
+      box-shadow: 0 6px 20px rgba(49, 121, 90, 0.3);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(49, 121, 90, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+}
+
+/* Modal Animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

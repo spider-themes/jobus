@@ -82,7 +82,7 @@ class Blocks {
 		if ( jobus_unlock_themes( 'jobi', 'jobi-child' )  ) {
 			$this->register_block( 'register-form', array(
 				'render_callback' => [ $this, 'register_form_block_render' ],
-			) );
+			));
 		}
 	}
 
@@ -95,7 +95,6 @@ class Blocks {
 	 * @return bool|string Rendered block content.
 	 */
 	public function register_form_block_render( array $attributes, string $content ): bool|string {
-
 		// Prepare template variables
 		$nonce = wp_create_nonce( 'jobus_register_form_nonce' );
 		$args = array_merge( $attributes, [ 'nonce' => $nonce ] );

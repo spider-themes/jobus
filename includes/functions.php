@@ -1021,7 +1021,7 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
         $class        = $args['class'] ?? '';
         ?>
         <a href="javascript:void(0);"
-           class="<?php echo esc_attr( $class ); ?>"
+           class="save_post_btn <?php echo esc_attr( $class ); ?>"
            data-post_id="<?php echo esc_attr( $post_id ); ?>"
            data-post_type="<?php echo esc_attr( $post_type ); ?>"
            data-meta_key="<?php echo esc_attr( $meta_key ); ?>"

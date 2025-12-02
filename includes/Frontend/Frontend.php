@@ -23,6 +23,7 @@ class Frontend {
 	function __construct() {
 
 		add_filter( 'body_class', [ $this, 'body_class' ] );
+		add_action( 'wp_footer', [ $this, 'output_login_modal' ] );
 	}
 
 	/**
@@ -42,5 +43,15 @@ class Frontend {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Output login modal template in footer
+	 *
+	 * @return void
+	 */
+	public function output_login_modal(): void {
+		// Output the login popup modal template
+		Template_Loader::get_template_part( 'login-form/login-popup' );
 	}
 }

@@ -252,7 +252,98 @@
 
         tagsFilter(); // end tagsFilter
 
+        /**
+         * Login Modal Handler for Save Post Button
+         */
+        function initLoginModal() {
+            // Open login modal when clicking save button if user is not logged in
+            $(document).on('click', '.save_post_btn', function (e) {
+                console.log('Save post button clicked!');
+                
+                // Check if jobus_public_obj exists
+                if (typeof jobus_public_obj === 'undefined') {
+                    console.error('jobus_public_obj is not defined');
+                    return;
+                }
+                
+                console.log('is_user_logged_in:', jobus_public_obj.is_user_logged_in);
+                
+                // Check if user is logged in
+                const isLoggedIn = jobus_public_obj.is_user_logged_in === true || 
+                                 jobus_public_obj.is_user_logged_in === 1 || 
+                                 jobus_public_obj.is_user_logged_in === '1';
+                
+                if (!isLoggedIn) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const loginModal = document.getElementById('loginModal');
+                    console.log('Login modal element:', loginModal);
+                    
+                    if (loginModal) {
+                        // Show the modal
+                        loginModal.style.display = 'block';
+                        loginModal.classList.add('show');
+                        loginModal.setAttribute('aria-hidden', 'false');
+                        document.body.classList.add('modal-open');
+                        
+                        // Add fade-in effect
+                        setTimeout(function() {
+                            loginModal.style.opacity = '1';
+                        }, 10);
+                        
+                        console.log('Login modal opened');
+                    } else {
+                        console.error('Login modal not found in DOM');
+                    }
+                    
+                    return false;
+                }
+            });
+
+            // Close modal when clicking close button
+            $(document).on('click', '#loginModal .jbs-btn-close, #loginModal [data-jbs-dismiss="modal"]', function (e) {
+                e.preventDefault();
+                closeLoginModal();
+            });
+
+            // Close modal when clicking outside the modal content
+            $(document).on('click', '#loginModal', function (e) {
+                if (e.target === this) {
+                    closeLoginModal();
+                }
+            });
+            
+            // Close with ESC key
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' || e.keyCode === 27) {
+                    const loginModal = document.getElementById('loginModal');
+                    if (loginModal && loginModal.classList.contains('show')) {
+                        closeLoginModal();
+                    }
+                }
+            });
+        }
+
+        /**
+         * Close login modal
+         */
+        function closeLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.style.opacity = '0';
+                setTimeout(function() {
+                    loginModal.style.display = 'none';
+                    loginModal.classList.remove('show');
+                    loginModal.setAttribute('aria-hidden', 'true');
+                    document.body.classList.remove('modal-open');
+                }, 300);
+            }
+        }
+
+        // Initialize login modal handlers
+        initLoginModal();
+
     });
 
 })(jQuery);
-

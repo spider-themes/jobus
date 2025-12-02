@@ -30,8 +30,15 @@
          * Unified handler for saving/unsaving jobs or candidates.
          */
         savePost: function () {
-            $(document).on('click', '.jobus-saved-post[data-post_id][data-post_type][data-meta_key]', function (e) {
+            $(document).on('click', '.save_post_btn', function (e) {
                 e.preventDefault();
+
+                // Skip if user is not logged in (handled by public.js)
+                const isLoggedIn = jobus_public_obj.is_user_logged_in === true || jobus_public_obj.is_user_logged_in === '1';
+                if (!isLoggedIn) {
+                    return;
+                }
+
                 const btn = $(this);
                 const postId = btn.data('post_id');
                 const postType = btn.data('post_type');
