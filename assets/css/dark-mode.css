@@ -157,6 +157,9 @@ body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info .titl
 body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info:hover .title, body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info:hover .total-job {
   color: var(--jbs-heading_color) !important;
 }
+body.body_dark .jbs-category-widget-one .card-wrapper .card-item .box-info:hover .icon img {
+  filter: invert(0);
+}
 body.body_dark .spel-accordion h2, body.body_dark .spel-accordion h3, body.body_dark .spel-accordion h4, body.body_dark .spel-accordion h5, body.body_dark .spel-accordion h6 {
   color: #ffffff !important;
 }

@@ -253,6 +253,9 @@ body.body_dark {
               color: var(--jbs-heading_color) !important;
             }
           }
+          &:hover .icon img {
+            filter: invert(0);
+          }
         }
       }
     }

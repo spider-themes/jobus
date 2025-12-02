@@ -1,7 +1,7 @@
 === Jobus – Complete Job Board & Hiring Platform that match your brand ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -151,6 +151,21 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 3. Job listing Page with Filterable Sidebar
 
 == Changelog ==
+
+= 1.3.0 (02 Dec 2025) =
+New: Added Job Title display to Job Single Layout 2
+New: New: Introduced the unified [jobus_dashboard] shortcode, allowing both Candidate and Employer dashboards to run from a single page. Previously, two separate shortcodes were required for two different pages
+Fixed: Category layout responsiveness issue resolved
+Fixed: Resolved responsive issues in Jobus Elementor widgets
+Fixed: Jobus dashboard layout and responsive issues fixed
+Fixed: Company Dashboard “Specifications” and “Company Website” data handling corrected
+Fixed: Candidate Dashboard and Testimonial submission issues resolved
+Fixed: Candidate Dashboard social icon issue fixed
+Fixed: Number count issue in dashboards and related posts loading fixed
+Tweaked: Updated job options and refined Job Details page styling
+Tweaked: Improved Job Single 2 layout design for better readability
+Tweaked: Dark mode compatibility added for seamless integration with Docy themes
+Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
 
 = 1.2.0 (11 Nov 2025) =
 New: Predefined Color Schemes added in the General Settings panel for quick styling customization
