@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 $meta = get_term_meta( $category->term_id, 'jobus_taxonomy_cat', true );
                 ?>
                 <div class="jbs-col-lg-<?php echo esc_attr( $column ); ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                    <div class="card-item tran3s jbs-w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr( $delay_time ) ?>s">
+                    <div class="jbs-card-item tran3s jbs-w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr( $delay_time ) ?>s">
                         <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="jbs-d-block">
                             <?php if ( ! empty( $meta['cat_img']['id'] ) ) { ?>
                                 <div class="icon tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center">
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         if ( ! empty( $settings['view_all_btn_url'] ) ) {
             ?>
             <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                <div class="card-item bg-color tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="jbs-card-item bg-color tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ) ?></div>

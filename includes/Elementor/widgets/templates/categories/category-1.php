@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			foreach ( $categories as $index => $category ) {
 				$meta = get_term_meta( $category->term_id, 'jobus_taxonomy_cat', true );
 				?>
-                <div class="card-item jbs-text-center jbs-mt-20 wow fadeInUp">
+                <div class="jbs-card-item jbs-text-center jbs-mt-20 wow fadeInUp">
                     <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info">
 						<?php
 						if ( ! empty( $meta['cat_img']['id'] ) ) { ?>

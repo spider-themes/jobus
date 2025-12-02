@@ -217,9 +217,9 @@ class Categories extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-item .wrapper,
-					{{WRAPPER}} .card-style-seven a,
-					{{WRAPPER}} .card-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper,
+					{{WRAPPER}} .jbs-card-style-seven a,
+					{{WRAPPER}} .jbs-card-item a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -228,9 +228,9 @@ class Categories extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'category_border',
-				'selector' => '{{WRAPPER}} .card-item .wrapper,
-							   {{WRAPPER}} .card-style-seven a,
-				               {{WRAPPER}} .card-item',
+				'selector' => '{{WRAPPER}} .jbs-card-item .wrapper,
+							   {{WRAPPER}} .jbs-card-style-seven a,
+				               {{WRAPPER}} .jbs-card-item',
 			]
 		);
 
@@ -241,9 +241,9 @@ class Categories extends Widget_Base {
 				'size_units' => [ 'px', '%' ],
 				'separator'  => 'after',
 				'selectors'  => [
-					'{{WRAPPER}} .card-item .wrapper,
-					{{WRAPPER}} .card-style-seven a,
-					{{WRAPPER}} .card-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper,
+					{{WRAPPER}} .jbs-card-style-seven a,
+					{{WRAPPER}} .jbs-card-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -263,9 +263,9 @@ class Categories extends Widget_Base {
 			Group_Control_Background::get_type(), [
 				'name'     => 'cat_bg_color',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .card-item .wrapper,
-							   {{WRAPPER}} .card-style-seven a,
-				               {{WRAPPER}} .card-item',
+				'selector' => '{{WRAPPER}} .jbs-card-item .wrapper,
+							   {{WRAPPER}} .jbs-card-style-seven a,
+				               {{WRAPPER}} .jbs-card-item',
 			]
 		);
 
@@ -284,8 +284,8 @@ class Categories extends Widget_Base {
 			[
 				'name'     => 'cat_bg_hover',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .card-item a:hover,
-							   {{WRAPPER}} .card-style-seven a:hover',
+				'selector' => '{{WRAPPER}} .jbs-card-item a:hover,
+							   {{WRAPPER}} .jbs-card-style-seven a:hover',
 			]
 		);
 
@@ -294,9 +294,9 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-item .wrapper:hover .title, {{WRAPPER}} .card-item .wrapper:hover .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-style-seven .wrapper:hover .title '                                                     => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-item:hover a .title, {{WRAPPER}} .card-item:hover a .total-job'             => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper:hover .title, {{WRAPPER}} .jbs-card-item .wrapper:hover .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-seven .wrapper:hover .title '                                                     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item:hover a .title, {{WRAPPER}} .jbs-card-item:hover a .total-job'             => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -306,9 +306,9 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-item a:hover' => 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-style-seven a:hover'         => 'border-color: {{VALUE}}',
-					'{{WRAPPER}} .card-item:hover'            => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .jbs-card-item a:hover' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .jbs-card-style-seven a:hover'         => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .jbs-card-item:hover'            => 'border-color: {{VALUE}}',
 				],
 			]
 		);
@@ -318,7 +318,7 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Icon Background', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-item:hover .icon' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item:hover .icon' => 'background: {{VALUE}};',
 				],
 				'condition' => [
 					'layout'  => [ '3' ],
@@ -347,10 +347,10 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-item .wrapper .title,
-					{{WRAPPER}} .card-style-seven a .title,
-					{{WRAPPER}} .card-item .title,
-					{{WRAPPER}} .card-style-six .text .title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper .title,
+					{{WRAPPER}} .jbs-card-style-seven a .title,
+					{{WRAPPER}} .jbs-card-item .title,
+					{{WRAPPER}} .jbs-card-style-six .text .title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -358,9 +358,9 @@ class Categories extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
 				'name'     => 'category_title_typo',
-				'selector' => '{{WRAPPER}} .card-item .wrapper .title,
-							   {{WRAPPER}} .card-item .title,
-							   {{WRAPPER}} .card-style-six .text .title',
+				'selector' => '{{WRAPPER}} .jbs-card-item .wrapper .title,
+							   {{WRAPPER}} .jbs-card-item .title,
+							   {{WRAPPER}} .jbs-card-style-six .text .title',
 			]
 		);
 		$this->add_responsive_control(
@@ -369,10 +369,10 @@ class Categories extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-item .wrapper .title,
-					{{WRAPPER}} .card-style-seven a .title,
-					{{WRAPPER}} .card-item .title,
-					{{WRAPPER}} .card-style-six .text .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper .title,
+					{{WRAPPER}} .jbs-card-style-seven a .title,
+					{{WRAPPER}} .jbs-card-item .title,
+					{{WRAPPER}} .jbs-card-style-six .text .title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -395,8 +395,8 @@ class Categories extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-item .wrapper .total-job' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .card-item .total-job'         => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item .wrapper .total-job' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-item .total-job'         => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -404,8 +404,8 @@ class Categories extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Typography::get_type(), [
 				'name'     => 'category_job_typo',
-				'selector' => '{{WRAPPER}} .card-item .wrapper .total-job,
-							   {{WRAPPER}} .card-item .total-job',
+				'selector' => '{{WRAPPER}} .jbs-card-item .wrapper .total-job,
+							   {{WRAPPER}} .jbs-card-item .total-job',
 			]
 		);
 

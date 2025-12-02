@@ -1,6 +1,6 @@
 /*========== Category Widget One ==========*/
 .jbs-category-widget-one {
-  .card-item {
+  .jbs-card-item {
     flex: 0 0 auto;
     width: 16.66666%;
     @media (max-width: 1024px) {
@@ -61,7 +61,7 @@
     column-gap: 15px;
     margin: 0 -5px;
 
-    .card-item {
+    .jbs-card-item {
 
       .box-info {
         padding: 16px 38px;
@@ -98,7 +98,7 @@
     row-gap: 30px;
   }
 
-  .card-item {
+  .jbs-card-item {
     background: #FFFFFF;
     -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
     -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);

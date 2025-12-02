@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
                 $meta = get_term_meta($category->term_id, 'jobus_taxonomy_cat', true);
                 ?>
 
-                <div class="card-item jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
+                <div class="jbs-card-item jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
                     <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info jbs-d-flex jbs-align-items-center">
                         <?php
                         if ( !empty($meta['cat_img']['id']) ) { ?>

@@ -1633,3 +1633,20 @@ input[type="file"]::-webkit-file-upload-button {
   }
 }
 }
+
+.wp-block-jobus-shortcode-candidate-archive{
+    .jobus-candidate-classic{
+        .candidate-profile-card{
+            .right-side{
+                @media (min-width:1200px){
+                    .jbs-col-xl-4{
+                        width: 25%;
+                    }
+                    .jbs-col-xl-2{
+                        width:25%;
+                    }
+                }
+            }
+        }
+    }
+}
