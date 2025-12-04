@@ -1,5 +1,14 @@
-.jobus-job-classic {
-  background-color: #ffffff;
+.post-type-archive-jobus_job {
+  .jbs-job-classic {
+    padding: 110px 0 140px;
+    @media (max-width: 768px) {
+      padding: 80px 0 100px;
+    }
+  }
+}
+
+
+.jbs-job-classic {
   &.job-listing-three {
     .pagination-wrap {
       p {
@@ -680,7 +689,7 @@ button.jbs_filter_btn-padding {
   }
 }
 
-.job-listing-one {
+.jbs-job-listing-widget {
   a {
     font-size: 16px;
   }
@@ -690,7 +699,6 @@ button.jbs_filter_btn-padding {
   background: var(--bs-white);
   padding: 42px 35px;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
 
   .expertise {
     color: #aaaaaa;
@@ -811,6 +819,7 @@ button.jbs_filter_btn-padding {
   &.style-two {
     padding-top: 35px;
     padding-bottom: 35px;
+    border: 1px solid #DBE8E5;
 
     .apply-btn {
       background: var(--jbs-brand_color_1);
@@ -1021,6 +1030,7 @@ button.jbs_filter_btn-padding {
 }
 
 .job-listing-three {
+  background: var(--body_bg);
   .job-post-item-wrapper {
     .upper-filter {
       @media(max-width: 767px) {
@@ -1259,7 +1269,7 @@ button.jbs_filter_btn-padding {
   }
 }
 
-.job-details {
+.jbs-job-details {
   position: relative;
   padding-top: 130px;
 
@@ -1591,62 +1601,65 @@ input[type="file"]::-webkit-file-upload-button {
     }
   }
 }
-.elementor-widget-container{
-    .job-listing-one{
-        .job-list-one {
+
+.elementor-widget-container {
+  .jbs-job-listing-widget {
+    .job-list-one {
+      padding-left: 20px !important;
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .job_specifications_area .jod_list_title_area {
+    padding: 0;
+  }
+  .job-post-item-wrapper {
+    .accordion-box {
+      .job-list-one {
         padding-left: 20px !important;
-        }
+      }
     }
+  }
 }
-@media (max-width:769px) {
-    .job_specifications_area .jod_list_title_area {
-        padding: 0;
-    }
-    .job-post-item-wrapper{
-        .accordion-box{
-            .job-list-one{
-                padding-left:20px !important;
-            }
-        }
-    }
-}
+
 @media (max-width: 575px) {
   .job_specifications_area {
-  .jod_list_title_area {
-    flex-basis: 100%;
-  }
-
-  .jod_list_meta_area {
-    padding-top: 20px;
-    text-align: start;
-    flex-basis: 60%;
-  }
-
-  .jod_list_cat_area {
-    padding-top: 20px;
-    text-align: start;
-    flex-basis: 40%;
-  }
-
-  .jod_list_btn_area {
-    flex-basis: 20%;
-  }
-}
-}
-
-.wp-block-jobus-shortcode-candidate-archive{
-    .jbs-candidate-classic{
-        .candidate-profile-card{
-            .right-side{
-                @media (min-width:1200px){
-                    .jbs-col-xl-4{
-                        width: 25%;
-                    }
-                    .jbs-col-xl-2{
-                        width:26%;
-                    }
-                }
-            }
-        }
+    .jod_list_title_area {
+      flex-basis: 100%;
     }
+
+    .jod_list_meta_area {
+      padding-top: 20px;
+      text-align: start;
+      flex-basis: 60%;
+    }
+
+    .jod_list_cat_area {
+      padding-top: 20px;
+      text-align: start;
+      flex-basis: 40%;
+    }
+
+    .jod_list_btn_area {
+      flex-basis: 20%;
+    }
+  }
+}
+
+.wp-block-jobus-shortcode-candidate-archive {
+  .jbs-candidate-classic {
+    .candidate-profile-card {
+      .right-side {
+        @media (min-width: 1200px) {
+          .jbs-col-xl-4 {
+            width: 25%;
+          }
+          .jbs-col-xl-2 {
+            width: 26%;
+          }
+        }
+      }
+    }
+  }
 }

@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 ?>
 
-<div class="job-search-one style-two jbs-position-relative">
+<div class="jbs-search-form-widget-one style-two jbs-position-relative">
     <form action="<?php echo esc_url(get_post_type_archive_link($search_result_form)) ?>" method="get" id="searchform">
         <input type="hidden" name="post_type" value="<?php echo esc_attr($search_result_form) ?>"/>
 

@@ -1,4 +1,16 @@
-.jobus_job_details {
+body {
+  &.wp-theme-docly {
+    .jbs-job-details {
+      padding-top: 180px;
+      padding-bottom: 130px;
+      @media (max-width: 768px) {
+        padding-top: 160px;
+      }
+    }
+  }
+}
+
+.jbs-job-details {
   .details-post-data {
     .is-layout-constrained > * {
       max-width: 100% !important;
@@ -61,7 +73,7 @@
 }
 
 
-.jobus_job_details_2 {
+.jbs-job-details-two {
   .share-buttons li .share-item {
     background-color: var(--jbs_brand_color_3_opt);
   }

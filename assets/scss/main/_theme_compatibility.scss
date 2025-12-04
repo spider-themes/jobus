@@ -1,5 +1,4 @@
 //Twenty Twenty-Four Theme Compatibility
-
 .wp-block-jobus-shortcode-job-archive {
   max-width: 100% !important;
   background-color: #fff;
@@ -20,7 +19,7 @@
   max-width: 100% !important;
 }
 
-.jobus_job_details {
+.jbs-job-details {
   max-width: 100% !important;
   background-color: var(--body_bg);
 
@@ -33,7 +32,7 @@
   }
 }
 
-.jobus_job_details_2 {
+.jbs-job-details-two {
   a {
     text-decoration: none !important;
   }
@@ -300,14 +299,14 @@ body {
 
 
 // GeneratePress Theme Compatibility
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jobus_job_details_2, .jobus_job_details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
+.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jbs-job-details-two, .jbs-job-details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
   max-width: 100%;
 
   .site-content {
     display: block;
   }
 
-  .job-details {
+  .jbs-job-details {
     margin-top: 0;
   }
 
@@ -323,13 +322,6 @@ body {
 .jobus-frontend.elementor-template-full-width {
   .grid-container.hfeed {
     max-width: 100%;
-  }
-}
-
-.jobus-frontend {
-  img {
-    max-width: 100%;
-    display: block;
   }
 }
 

@@ -60,26 +60,26 @@ body.body_dark .jbs-job-classic .jbs-nice-select::before {
 body.body_dark .jbs-job-classic .pagination-wrap p, body.body_dark .jbs-job-classic .pagination-wrap .jbs-text-dark {
   color: var(--black_600) !important;
 }
-body.body_dark .jobus_job_details .job-head .post-date, body.body_dark .jobus_job_details .job-head .jbs-text-dark {
+body.body_dark .jbs-job-details .job-head .post-date, body.body_dark .jbs-job-details .job-head .jbs-text-dark {
   color: var(--black_600) !important;
 }
-body.body_dark .jobus_job_details .wp-block-group .wp-block-heading, body.body_dark .jobus_job_details .wp-block-group p a {
+body.body_dark .jbs-job-details .wp-block-group .wp-block-heading, body.body_dark .jbs-job-details .wp-block-group p a {
   color: var(--black_100) !important;
 }
-body.body_dark .jobus_job_details .job-company-info {
+body.body_dark .jbs-job-details .job-company-info {
   background: var(--bs-white) !important;
 }
-body.body_dark .jobus_job_details .job-company-info ul li span {
+body.body_dark .jbs-job-details .job-company-info ul li span {
   color: var(--black_100) !important;
 }
-body.body_dark .jobus_job_details .job-company-info ul li div {
+body.body_dark .jbs-job-details .job-company-info ul li div {
   color: var(--black_400) !important;
 }
-body.body_dark .jobus_job_details .job-company-info .job-tags a {
+body.body_dark .jbs-job-details .job-company-info .job-tags a {
   background: var(--black_50) !important;
   color: var(--black_400) !important;
 }
-body.body_dark .jobus_job_details .job-company-info .job-tags a:hover {
+body.body_dark .jbs-job-details .job-company-info .job-tags a:hover {
   background: var(--black_75) !important;
   color: var(--black_100) !important;
 }
@@ -97,7 +97,7 @@ body.body_dark .jbs-related-job .jbs-related-job-slider .job-list-two .job-locat
   color: var(--black_400) !important;
 }
 body.body_dark .job-list-two,
-body.body_dark .job-listing-one .job-list-one,
+body.body_dark .jbs-job-listing-widget .job-list-one,
 body.body_dark .big-circle .brand-icon {
   background: var(--bs-white) !important;
   border-color: var(--border_on_highlight) !important;
@@ -115,22 +115,22 @@ body.body_dark .job-listing-wrapper.border-wrapper {
 body.body_dark .job-listing-wrapper .job-date {
   color: var(--black_400) !important;
 }
-body.body_dark .job-search-one form,
-body.body_dark .job-search-one .jbs-nice-select {
+body.body_dark .jbs-search-form-widget-one form,
+body.body_dark .jbs-search-form-widget-one .jbs-nice-select {
   background: var(--bs-white) !important;
 }
-body.body_dark .job-search-one form::after,
-body.body_dark .job-search-one .jbs-nice-select::after {
+body.body_dark .jbs-search-form-widget-one form::after,
+body.body_dark .jbs-search-form-widget-one .jbs-nice-select::after {
   border-bottom: 1px solid #fff;
   border-right: 1px solid #fff;
 }
-body.body_dark .job-search-one form .input-box .label {
+body.body_dark .jbs-search-form-widget-one form .input-box .label {
   color: var(--black_900) !important;
 }
-body.body_dark .job-search-one form .input-box input {
+body.body_dark .jbs-search-form-widget-one form .input-box input {
   color: var(--black_100) !important;
 }
-body.body_dark .job-search-one .tags .jbs-text-white {
+body.body_dark .jbs-search-form-widget-one .tags .jbs-text-white {
   color: var(--black_900);
 }
 body.body_dark .jbs-nice-select .current {

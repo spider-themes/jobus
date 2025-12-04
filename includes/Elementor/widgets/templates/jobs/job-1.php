@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 ?>
 
-<section class="job-listing-one">
+<div class="jbs-job-listing-widget">
     <div class="job-listing-wrapper border-wrapper wow fadeInUp">
         <?php
         while ($posts->have_posts()) : $posts->the_post();
@@ -13,12 +13,9 @@ if (!defined('ABSPATH')) {
             // Get the selected company ID
             $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
             $company_id = $meta[ 'select_company' ] ?? '';
-
             ?>
-
             <div class="job-list-one jbs-position-relative bottom-border">
                 <div class="jbs-row jbs-justify-content-between jbs-align-items-center job_specifications_area">
-
                     <div class="jod_list_title_area">
                         <div class="job-title jbs-d-flex jbs-align-items-center">
                             <a href="<?php the_permalink(); ?>" class="logo">
@@ -66,7 +63,6 @@ if (!defined('ABSPATH')) {
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         <?php
@@ -74,4 +70,4 @@ if (!defined('ABSPATH')) {
         wp_reset_postdata();
         ?>
     </div>
-</section>
+</div>

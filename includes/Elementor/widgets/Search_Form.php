@@ -39,7 +39,6 @@ class Search_Form extends Widget_Base {
 		return [ 'jobus-elements' ];
 	}
 
-
 	/**
 	 * Name: register_controls()
 	 * Desc: Register controls for these widgets
@@ -48,7 +47,7 @@ class Search_Form extends Widget_Base {
 	 * Package: @jobus
 	 * Author: spider-themes
 	 */
-	protected function register_controls() {
+	protected function register_controls(): void {
 		$this->elementor_content_control();
 		$this->elementor_style_control();
 	}
@@ -378,7 +377,7 @@ class Search_Form extends Widget_Base {
 				'name'      => 'accordion_title_bg_color',
 				'types'     => [ 'classic', 'gradient' ],
 				'exclude'   => [ 'image' ],
-				'selector'  => '{{WRAPPER}} .job-search-two form input',
+				'selector'  => '{{WRAPPER}} .jbs-search-form-widget-two form input',
 				'condition' => [
 					'layout'  => [ '2' ],
 					'layout!' => [ '1', '3' ]
@@ -392,7 +391,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Search Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} #searchInput::placeholder, .job-search-two form input' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #searchInput::placeholder, .jbs-search-form-widget-two form input' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'layout'  => [ '2' ],
@@ -407,7 +406,7 @@ class Search_Form extends Widget_Base {
 				'name'      => 'search_border',
 				'label'     => esc_html__( 'Border', 'jobus' ),
 				'selector'  => '{{WRAPPER}} #searchform,
-							    {{WRAPPER}} .job-search-one form',
+							    {{WRAPPER}} .jbs-search-form-widget-one form',
 				'condition' => [
 					'layout'  => [ '1', '3' ],
 					'layout!' => [ '2' ]
@@ -422,7 +421,7 @@ class Search_Form extends Widget_Base {
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
 					'{{WRAPPER}} #searchform'          => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-					'{{WRAPPER}} .job-search-one form' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout'  => [ '1', '3' ],
@@ -434,7 +433,7 @@ class Search_Form extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(), [
 				'name'     => 'search_box_shadow',
-				'selector' => '{{WRAPPER}} .job-search-one form',
+				'selector' => '{{WRAPPER}} .jbs-search-form-widget-one form',
 			]
 		);
 
@@ -463,7 +462,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Label Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-search-one .tags li' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .jbs-search-form-widget-one .tags li' => 'color: {{VALUE}} !important;',
 					'{{WRAPPER}} .filter-tags li'          => 'color: {{VALUE}} !important;',
 				],
 			]
@@ -475,7 +474,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Keyword Color ', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-search-one .tags li a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one .tags li a' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .filter-tags li a'          => 'color: {{VALUE}};',
 				],
 			]
@@ -496,7 +495,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Keyword Color ', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-search-one .tags li a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one .tags li a:hover' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .filter-tags li a:hover'          => 'color: {{VALUE}};',
 				],
 			]
@@ -536,7 +535,7 @@ class Search_Form extends Widget_Base {
 				'name'     => 'search_bg',
 				'types'    => [ 'classic', 'gradient' ],
 				'exclude'  => [ 'image' ],
-				'selector' => '{{WRAPPER}} .job-search-one form .search-btn,
+				'selector' => '{{WRAPPER}} .jbs-search-form-widget-one form .search-btn,
 			                   {{WRAPPER}} .btn-five.border6,
 			                   {{WRAPPER}} .btn-five',
 			]
@@ -548,7 +547,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-search-one form .search-btn' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .search-btn' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .btn-five.border6'                => 'color: {{VALUE}};',
 					'{{WRAPPER}} .btn-five'                        => 'color: {{VALUE}};',
 				],
@@ -570,7 +569,7 @@ class Search_Form extends Widget_Base {
 				'name'     => 'search2_hover_bg',
 				'types'    => [ 'classic', 'gradient' ],
 				'exclude'  => [ 'image' ],
-				'selector' => '{{WRAPPER}} .job-search-one form .search-btn:hover,
+				'selector' => '{{WRAPPER}} .jbs-search-form-widget-one form .search-btn:hover,
 	                           {{WRAPPER}} .btn-five.border6:hover,
 	                           {{WRAPPER}} .btn-five:hover',
 			]
@@ -582,7 +581,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-search-one form .search-btn:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .search-btn:hover' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .btn-five.border6:hover'                => 'color: {{VALUE}};',
 					'{{WRAPPER}} .btn-five:hover'                        => 'color: {{VALUE}};',
 				],
@@ -612,7 +611,7 @@ class Search_Form extends Widget_Base {
 					'size' => 10,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .job-search-btn-wrapper .search-btn' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
 				],
 				'condition'  => [
 					'layout'  => [ '1' ],
@@ -628,7 +627,7 @@ class Search_Form extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .job-search-btn-wrapper .search-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout'  => [ '1' ],
@@ -644,7 +643,7 @@ class Search_Form extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-search-one form .job-search-btn-wrapper .search-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .job-search-btn-wrapper .search-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout'  => [ '1' ],
@@ -670,7 +669,7 @@ class Search_Form extends Widget_Base {
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .job-search-one form .search-btn' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-search-form-widget-one form .search-btn' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout'  => [ '1' ],

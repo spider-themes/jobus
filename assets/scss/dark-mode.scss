@@ -91,7 +91,7 @@ body.body_dark {
 
   }
 
-  .jobus_job_details {
+  .jbs-job-details {
 
     .job-head {
       .post-date, .jbs-text-dark {
@@ -157,7 +157,7 @@ body.body_dark {
 
   // Job List & Wrapper Styles
   .job-list-two,
-  .job-listing-one .job-list-one,
+  .jbs-job-listing-widget .job-list-one,
   .big-circle .brand-icon {
     background: var(--bs-white) !important;
     border-color: var(--border_on_highlight) !important;
@@ -183,7 +183,7 @@ body.body_dark {
   }
 
   // Job Search Form
-  .job-search-one {
+  .jbs-search-form-widget-one {
     form,
     .jbs-nice-select {
       background: var(--bs-white) !important;
