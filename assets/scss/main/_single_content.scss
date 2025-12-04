@@ -12,6 +12,7 @@ body {
 
 .jbs-job-details {
   .details-post-data {
+    margin-bottom: 50px;
     .is-layout-constrained > * {
       max-width: 100% !important;
     }
@@ -79,7 +80,7 @@ body {
   }
 
   .job-meta-data-two {
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 
     i {
       color: var(--jbs-brand_color_1);

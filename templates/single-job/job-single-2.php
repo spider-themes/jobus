@@ -114,13 +114,21 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                             <?php }
                         }
                     } else {
+                        // Check if guest applications are allowed
+                        $allow_guest_application = function_exists('jobus_opt') ? jobus_opt('allow_guest_application', false) : false;
+                        
                         if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                            <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="jbs-btn-one jbs-mt-25">
+                            <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="jbs-job-apply jbs-btn-one jbs-mt-25">
+                                <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
+                            </a>
+                            <?php
+                        } elseif ($allow_guest_application) { ?>
+                            <a href="#" class="jbs-job-apply jbs-btn-one jbs-mt-25 jbs-open-modal" data-target="#filterPopUp">
                                 <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                             </a>
                             <?php
                         } else { ?>
-                            <a href="#" class="jbs-btn-one jbs-mt-25" data-jbs-toggle="modal"
+                            <a href="#" class="jbs-job-apply jbs-btn-one jbs-mt-25" data-jbs-toggle="modal"
                                data-jbs-target="#applyJobModal">
                                 <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                             </a>

@@ -4793,11 +4793,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab {
-  position: relative;
-}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: var(--jbs_box_bg_color_opt);
+}
+.filter-area-tab {
+  position: relative;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -6198,6 +6198,9 @@ body.wp-theme-docly .jbs-job-details {
   }
 }
 
+.jbs-job-details .details-post-data {
+  margin-bottom: 50px;
+}
 .jbs-job-details .details-post-data .is-layout-constrained > * {
   max-width: 100% !important;
 }
@@ -6253,7 +6256,7 @@ body.wp-theme-docly .jbs-job-details {
   background-color: var(--jbs_brand_color_3_opt);
 }
 .jbs-job-details-two .job-meta-data-two {
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 }
 .jbs-job-details-two .job-meta-data-two i {
   color: var(--jbs-brand_color_1);

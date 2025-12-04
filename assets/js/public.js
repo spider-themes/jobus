@@ -253,32 +253,37 @@
         tagsFilter(); // end tagsFilter
 
         /**
-         * Login Modal Handler for Save Post Button
+         * Login Modal Handler for Save Post Button and Apply Now Button
          */
         function initLoginModal() {
-            // Open login modal when clicking save button if user is not logged in
-            $(document).on('click', '.save_post_btn', function (e) {
-                console.log('Save post button clicked!');
-                
+            // Open login modal when clicking save button or apply now button if user is not logged in
+            $(document).on('click', '.save_post_btn, .jbs-job-apply', function (e) {
                 // Check if jobus_public_obj exists
                 if (typeof jobus_public_obj === 'undefined') {
-                    console.error('jobus_public_obj is not defined');
                     return;
                 }
-                
-                console.log('is_user_logged_in:', jobus_public_obj.is_user_logged_in);
                 
                 // Check if user is logged in
                 const isLoggedIn = jobus_public_obj.is_user_logged_in === true || 
                                  jobus_public_obj.is_user_logged_in === 1 || 
                                  jobus_public_obj.is_user_logged_in === '1';
                 
+                // Check if guest applications are allowed (only for job apply button)
+                const isApplyButton = $(this).hasClass('jbs-job-apply');
+                const allowGuestApplication = jobus_public_obj.allow_guest_application === true || 
+                                              jobus_public_obj.allow_guest_application === 1 || 
+                                              jobus_public_obj.allow_guest_application === '1';
+                
+                // If guest applications are allowed and this is the apply button, let the default action proceed
+                if (isApplyButton && allowGuestApplication) {
+                    return; // Allow the application form popup to show
+                }
+                
                 if (!isLoggedIn) {
                     e.preventDefault();
                     e.stopPropagation();
                     
                     const loginModal = document.getElementById('loginModal');
-                    console.log('Login modal element:', loginModal);
                     
                     if (loginModal) {
                         // Show the modal
@@ -291,10 +296,6 @@
                         setTimeout(function() {
                             loginModal.style.opacity = '1';
                         }, 10);
-                        
-                        console.log('Login modal opened');
-                    } else {
-                        console.error('Login modal not found in DOM');
                     }
                     
                     return false;

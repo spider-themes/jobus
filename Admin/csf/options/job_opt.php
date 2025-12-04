@@ -269,6 +269,21 @@ CSF::createSection( $settings_prefix, array(
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
+		// Job Application Settings
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Job Application Settings', 'jobus' ),
+		),
+
+		array(
+			'id'       => 'allow_guest_application',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Allow Guest Applications', 'jobus' ),
+			'subtitle' => esc_html__( 'Enable this option to allow visitors to apply for jobs without logging in. The application form will appear directly when clicking "Apply Now".', 'jobus' ),
+			'label'    => esc_html__( 'Allow users to apply for jobs without login', 'jobus' ),
+			'default'  => false,
+		),
+
 
 		array(
 			'type'    => 'heading',

@@ -51,7 +51,11 @@ class Frontend {
 	 * @return void
 	 */
 	public function output_login_modal(): void {
+		// Only output the login popup modal on single job pages
+		if ( ! is_singular( 'jobus_job' ) ) {
+			return;
+		}
 		// Output the login popup modal template
-		Template_Loader::get_template_part( 'login-form/login-popup' );
+		echo Template_Loader::get_template_part( 'login-form/login-popup' );
 	}
 }

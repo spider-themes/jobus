@@ -2,45 +2,85 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-// SMTP Settings
+// Email Settings
 CSF::createSection( $settings_prefix, array(
-	'id'     => 'jobus_smtp', // Set a unique slug-like ID
-	'title'  => esc_html__( 'SMTP Configuration', 'jobus' ),
-	'icon'   => 'fa fa-hashtag',
+	'id'     => 'jobus_smtp',
+	'title'  => esc_html__( 'Email Settings', 'jobus' ),
+	'icon'   => 'fa fa-envelope',
 	'fields' => array(
 
 		array(
 			'type'    => 'notice',
 			'style'   => 'info',
-			'content' => esc_html__( 'SMTP Configuration: Please fill in all fields with your SMTP configuration details. If you are already using an SMTP configuration via a third-party plugin, you can skip this section.',
-				'jobus' )
+			'content' => esc_html__( 'Configure SMTP to ensure reliable email delivery for job applications, notifications, and password resets. Skip this section if you already use an SMTP plugin like WP Mail SMTP.', 'jobus' )
 		),
 
 		array(
 			'id'      => 'is_smtp',
 			'type'    => 'switcher',
-			'title'   => esc_html__( 'SMTP (On/OFF)', 'jobus' ),
-			'desc'    => esc_html__( 'Enable or disable the SMTP server for sending emails', 'jobus' ),
+			'title'   => esc_html__( 'Enable SMTP', 'jobus' ),
+			'subtitle' => esc_html__( 'Use a custom mail server instead of PHP mail().', 'jobus' ),
+			'desc'    => esc_html__( 'Recommended for better email deliverability and fewer spam issues.', 'jobus' ),
 			'default' => false,
 			'class'    => trim($pro_access_class . $active_theme_class)
+		),
+
+		// Server Settings
+		array(
+			'type'    => 'heading',
+			'content' => esc_html__( 'Server Configuration', 'jobus' ),
+			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
 		array(
 			'id'         => 'smtp_host',
 			'type'       => 'text',
 			'title'      => esc_html__( 'SMTP Host', 'jobus' ),
-			'desc'       => esc_html__( 'The SMTP server which will be used to send email. For example: smtp.gmail.com', 'jobus' ),
+			'subtitle'   => esc_html__( 'Your mail server address.', 'jobus' ),
+			'desc'       => esc_html__( 'Examples: smtp.gmail.com, smtp.mailgun.org, smtp.sendgrid.net', 'jobus' ),
+			'dependency' => array( 'is_smtp', '==', 'true' ),
+		),
+
+		array(
+			'id'         => 'smtp_port',
+			'type'       => 'number',
+			'title'      => esc_html__( 'SMTP Port', 'jobus' ),
+			'subtitle'   => esc_html__( 'Port number for the mail server.', 'jobus' ),
+			'desc'       => esc_html__( 'Common ports: 587 (TLS), 465 (SSL), 25 (unencrypted - not recommended)', 'jobus' ),
+			'dependency' => array( 'is_smtp', '==', 'true' ),
+		),
+
+		array(
+			'id'         => 'smtp_encryption',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Encryption Type', 'jobus' ),
+			'subtitle'   => esc_html__( 'Security protocol for the connection.', 'jobus' ),
+			'desc'       => esc_html__( 'TLS is recommended for port 587. Use SSL for port 465.', 'jobus' ),
+			'options'    => array(
+				'tls'  => esc_html__( 'TLS (Recommended)', 'jobus' ),
+				'ssl'  => esc_html__( 'SSL', 'jobus' ),
+				'none' => esc_html__( 'None (Not Secure)', 'jobus' ),
+			),
+			'default'    => 'ssl',
+			'dependency' => array( 'is_smtp', '==', 'true' ),
+		),
+
+		// Authentication
+		array(
+			'type'    => 'heading',
+			'content' => esc_html__( 'Authentication', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
 		array(
 			'id'         => 'smtp_authentication',
 			'type'       => 'select',
-			'title'      => esc_html__( 'SMTP Authentication', 'jobus' ),
-			'desc'       => esc_html__( 'Whether to use SMTP Authentication when sending an email (recommended: True).', 'jobus' ),
+			'title'      => esc_html__( 'Require Authentication', 'jobus' ),
+			'subtitle'   => esc_html__( 'Most SMTP servers require login credentials.', 'jobus' ),
+			'desc'       => esc_html__( 'Keep enabled unless your server explicitly allows anonymous sending.', 'jobus' ),
 			'options'    => array(
-				'true'  => esc_html__( 'True', 'jobus' ),
-				'false' => esc_html__( 'False', 'jobus' ),
+				'true'  => esc_html__( 'Yes (Recommended)', 'jobus' ),
+				'false' => esc_html__( 'No', 'jobus' ),
 			),
 			'default'    => 'true',
 			'dependency' => array( 'is_smtp', '==', 'true' ),
@@ -49,40 +89,25 @@ CSF::createSection( $settings_prefix, array(
 		array(
 			'id'         => 'smtp_username',
 			'type'       => 'text',
-			'title'      => esc_html__( 'SMTP Username', 'jobus' ),
-			'desc'       => esc_html__( 'Your SMTP Username.', 'jobus' ),
+			'title'      => esc_html__( 'Username', 'jobus' ),
+			'subtitle'   => esc_html__( 'Your SMTP account username.', 'jobus' ),
+			'desc'       => esc_html__( 'Usually your email address or API key.', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
 		array(
 			'id'         => 'smtp_password',
 			'type'       => 'text',
-			'title'      => esc_html__( 'SMTP Password', 'jobus' ),
-			'desc'       => esc_html__( 'Your SMTP Password (The saved password is not shown for security reasons. If you do not want to update the saved password, you can leave this field empty when updating other options).',
-				'jobus' ),
+			'title'      => esc_html__( 'Password', 'jobus' ),
+			'subtitle'   => esc_html__( 'Your SMTP account password or app-specific password.', 'jobus' ),
+			'desc'       => esc_html__( 'For security, the saved password is not displayed. Leave empty to keep the current password.', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
+		// Sender Settings
 		array(
-			'id'         => 'smtp_encryption',
-			'type'       => 'select',
-			'title'      => esc_html__( 'Type of Encryption', 'jobus' ),
-			'desc'       => esc_html__( 'The encryption which will be used when sending an email (recommended: TLS).', 'jobus' ),
-			'options'    => array(
-				'tls'  => esc_html__( 'TLS', 'jobus' ),
-				'ssl'  => esc_html__( 'SSL', 'jobus' ),
-				'none' => esc_html__( 'No Encryption', 'jobus' ),
-			),
-			'default'    => 'ssl',
-			'dependency' => array( 'is_smtp', '==', 'true' ),
-		),
-
-		array(
-			'id'         => 'smtp_port',
-			'type'       => 'number',
-			'title'      => esc_html__( 'SMTP Port', 'jobus' ),
-			'desc'       => esc_html__( 'The port which will be used when sending an email (587/465/25). If you choose TLS it should be set to 587. For SSL use port 465 instead.',
-				'jobus' ),
+			'type'    => 'heading',
+			'content' => esc_html__( 'Sender Information', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
@@ -90,7 +115,8 @@ CSF::createSection( $settings_prefix, array(
 			'id'         => 'smtp_from_mail_address',
 			'type'       => 'text',
 			'title'      => esc_html__( 'From Email Address', 'jobus' ),
-			'desc'       => esc_html__( 'The email address which will be used as the From Address if it is not supplied to the mail function.', 'jobus' ),
+			'subtitle'   => esc_html__( 'Email address shown as the sender.', 'jobus' ),
+			'desc'       => esc_html__( 'Must be a valid email address on your SMTP account or domain.', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
 
@@ -98,9 +124,9 @@ CSF::createSection( $settings_prefix, array(
 			'id'         => 'smtp_from_name',
 			'type'       => 'text',
 			'title'      => esc_html__( 'From Name', 'jobus' ),
-			'desc'       => esc_html__( 'The name which will be used as the From Name if it is not supplied to the mail function.', 'jobus' ),
+			'subtitle'   => esc_html__( 'Name displayed as the sender.', 'jobus' ),
+			'desc'       => esc_html__( 'Example: "Your Company Name" or "Job Board Notifications"', 'jobus' ),
 			'dependency' => array( 'is_smtp', '==', 'true' ),
 		),
-
 	)
 ) );
