@@ -457,7 +457,7 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
      */
     function jobus_pagination( $query, string $prev = '', string $next = '' ): void {
 
-        echo '<ul class="jbs-pagination">';
+        echo '<div class="pagination-wrap"> <ul class="jbs-pagination">';
 
         $big              = 999999999; // need an unlikely integer
         $pagination_links = paginate_links( array(
@@ -474,7 +474,7 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
             echo wp_kses_post( $pagination_links );
         }
 
-        echo '</ul>';
+        echo '</ul></div>';
     }
 }
 

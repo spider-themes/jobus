@@ -403,3 +403,10 @@ body {
     }
   }
 }
+
+// jobi Theme Compatibility
+.wp-theme-jobi{
+    .job-details {
+        padding-top: 180px !important;
+    }
+}

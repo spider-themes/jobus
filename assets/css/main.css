@@ -4790,11 +4790,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab {
-  position: relative;
-}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: var(--jbs_box_bg_color_opt);
+}
+.filter-area-tab {
+  position: relative;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -7393,6 +7393,10 @@ body.docy .jbs-table tbody tr {
 }
 .wp-theme-blocksy.jobus-frontend .jbs-dashboard-template .dashboard-wrapper .user-avatar-setting .upload-btn {
   padding: 0px 10px !important;
+}
+
+.wp-theme-jobi .job-details {
+  padding-top: 180px !important;
 }
 
 @media (max-width: 1199px) {
