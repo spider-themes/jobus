@@ -114,7 +114,7 @@ if ( ! $is_dashboard ) {
                 <i class="bi bi-bookmark-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php echo esc_html( $empty_title ); ?></h4>
                 <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-primary" target="_blank">
                     <?php echo esc_html( $browse_jobs_label ); ?>
                 </a>
             </div>

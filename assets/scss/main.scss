@@ -9,27 +9,6 @@
 //
 // If you add a new partial to the main folder, add an @import statement below.
 //
-// Current imported partials:
-// - variables
-// - mixins
-// - prefix
-// - predefine
-// - layout
-// - vendor
-// - pagination
-// - candidates
-// - card
-// - company
-// - element
-// - job-listing
-// - single_content
-// - tags
-// - user_form
-// - btn
-// - banner
-// - testimonial
-// - theme_compatibility
-// - responsive
 
 // 1. Configuration
 @import "main/variables";
@@ -60,6 +39,5 @@
 @import "main/elementor-widgets";
 
 // 5. Utilities
-@import "main/pagination";
 @import "main/theme_compatibility";
 @import "main/responsive";

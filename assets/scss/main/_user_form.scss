@@ -265,18 +265,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 
     .passVicon {
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
+      padding: 6px;
+      border-radius: 3px;
 
       img {
         width: 18px;
         height: 18px;
         object-fit: contain;
+        filter: brightness(0.7);
+        transition: filter 0.3s ease;
+      }
+
+      &:hover img {
+        filter: brightness(1);
+      }
+
+      &.eye-slash img {
+        filter: brightness(0.7);
       }
     }
   }

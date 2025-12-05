@@ -192,7 +192,7 @@ $show_applied_jobs = jobus_opt( 'candidate_stat_applied_jobs', true );
 
         <div class="jbs-col-full jbs-col-lg-5">
             <div class="recent-job-tab jbs-bg-white jbs-border-20">
-                <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Job', 'jobus' ); ?></h4>
+                <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Jobs', 'jobus' ); ?></h4>
                 <div class="wrapper">
                     <?php
                     if ( ! empty( $applicants ) ) {

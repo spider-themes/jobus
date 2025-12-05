@@ -148,8 +148,9 @@ Table of Contents:
   width: 100%;
   border: none;
   border-radius: 15px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   padding: 12px 0;
+  top: 35px;
 }
 .dashboard-navbar .user-data .user-name-data .jbs-dropdown-menu .jbs-dropdown-item {
   text-transform: capitalize;
@@ -158,7 +159,6 @@ Table of Contents:
   color: var(--jbs-heading_color);
   font-size: 16px;
   font-weight: 500;
-  letter-spacing: -0.16px;
   background: transparent;
   position: relative;
   letter-spacing: -0.1px;
@@ -1670,106 +1670,6 @@ body.page-template-dashboard .site-header {
     padding: 0px;
   }
 }
-/**=== Job Classic, Topbar and Popup Pagination ===**/
-/**=== Company Classic and Popup Pagination ===**/
-.pagination-wrap {
-  padding-top: 30px;
-}
-@media (width > 540px) {
-  .pagination-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.pagination-wrap .jbs-pagination {
-  position: relative;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-@media (max-width: 540px) {
-  .pagination-wrap .jbs-pagination {
-    justify-content: center;
-  }
-}
-.pagination-wrap .jbs-pagination a {
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--jbs-brand_color_1);
-  cursor: pointer;
-  background: transparent;
-}
-.pagination-wrap .jbs-pagination .page-numbers:focus-visible {
-  outline-style: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers:focus {
-  outline-style: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers:hover {
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers.current {
-  background: var(--jbs-brand_color_1);
-  color: #fff;
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
-  height: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/**=== Candidate Classic and Popup Pagination ===**/
-.jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
-  padding-top: 30px;
-}
-@media (width > 540px) {
-  .jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border: 1px solid var(--jbs-brand_color_1);
-  border-radius: 4px;
-  width: max-content;
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--jbs-brand_color_1);
-  border-right: 1px solid var(--jbs-brand_color_1);
-  border-radius: 0;
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
-  background: rgba(49, 121, 90, 0.1);
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
-  border: none;
-}
-
 .dashboard-body .preview {
   display: flex;
   margin-bottom: 1rem;
@@ -2043,7 +1943,7 @@ body.page-template-dashboard .site-header {
 }
 .dashboard-body .placeholder_icon span img {
   position: relative;
-  top: 50%;
+  top: 40%;
   margin: 0 auto;
   transform: translateY(-50%);
 }

@@ -2757,6 +2757,7 @@ body.compensate-for-scrollbar {
   padding: 0;
   margin: 0;
   border: none;
+  gap: 5px;
 }
 @media (max-width: 540px) {
   .pagination-wrap .jbs-pagination {
@@ -2778,6 +2779,7 @@ body.compensate-for-scrollbar {
   color: var(--jbs-brand_color_1);
   cursor: pointer;
   background: transparent;
+  transition: all 0.3s ease;
 }
 .pagination-wrap .jbs-pagination .page-numbers:focus-visible {
   outline-style: none !important;
@@ -2785,7 +2787,8 @@ body.compensate-for-scrollbar {
 .pagination-wrap .jbs-pagination .page-numbers:focus {
   outline-style: none !important;
 }
-.pagination-wrap .jbs-pagination .page-numbers:hover {
+.pagination-wrap .jbs-pagination .page-numbers:hover:not(.current) {
+  background: rgba(49, 121, 90, 0.1);
   border: none !important;
 }
 .pagination-wrap .jbs-pagination .page-numbers.current {
@@ -2796,6 +2799,7 @@ body.compensate-for-scrollbar {
 .pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
   height: auto;
   width: auto;
+  padding: 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2831,8 +2835,12 @@ body.compensate-for-scrollbar {
   color: var(--jbs-brand_color_1);
   border-right: 1px solid var(--jbs-brand_color_1);
   border-radius: 0;
+  transition: all 0.3s ease;
 }
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current {
+  background: rgba(49, 121, 90, 0.1);
+}
+.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover:not(.current), .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover:not(.current) {
   background: rgba(49, 121, 90, 0.1);
 }
 .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
@@ -6600,18 +6608,31 @@ body.wp-theme-docly .jbs-job-details {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 #loginModal .placeholder_icon .passVicon {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  padding: 6px;
+  border-radius: 3px;
 }
 #loginModal .placeholder_icon .passVicon img {
   width: 18px;
   height: 18px;
   object-fit: contain;
+  filter: brightness(0.7);
+  transition: filter 0.3s ease;
+}
+#loginModal .placeholder_icon .passVicon:hover img {
+  filter: brightness(1);
+}
+#loginModal .placeholder_icon .passVicon.eye-slash img {
+  filter: brightness(0.7);
 }
 #loginModal .agreement-checkbox {
   display: flex;
@@ -7070,106 +7091,6 @@ body.wp-theme-docly .jbs-job-details {
   .jbs-job-tabs-widget .jbs-grid-column-3 .grid-sizer, .jbs-job-tabs-widget .jbs-grid-column-3 .isotop-item {
     width: 100%;
   }
-}
-
-/**=== Job Classic, Topbar and Popup Pagination ===**/
-/**=== Company Classic and Popup Pagination ===**/
-.pagination-wrap {
-  padding-top: 30px;
-}
-@media (width > 540px) {
-  .pagination-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.pagination-wrap .jbs-pagination {
-  position: relative;
-  display: flex;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-@media (max-width: 540px) {
-  .pagination-wrap .jbs-pagination {
-    justify-content: center;
-  }
-}
-.pagination-wrap .jbs-pagination a {
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--jbs-brand_color_1);
-  cursor: pointer;
-  background: transparent;
-}
-.pagination-wrap .jbs-pagination .page-numbers:focus-visible {
-  outline-style: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers:focus {
-  outline-style: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers:hover {
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers.current {
-  background: var(--jbs-brand_color_1);
-  color: #fff;
-  border: none !important;
-}
-.pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
-  height: auto;
-  width: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/**=== Candidate Classic and Popup Pagination ===**/
-.jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
-  padding-top: 30px;
-}
-@media (width > 540px) {
-  .jbs-candidate-classic .pagination-wrap, .jobus-candidate-popup .pagination-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination, .jobus-candidate-popup .pagination-wrap .jbs-pagination {
-  display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border: 1px solid var(--jbs-brand_color_1);
-  border-radius: 4px;
-  width: max-content;
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers {
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  line-height: 35px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--jbs-brand_color_1);
-  border-right: 1px solid var(--jbs-brand_color_1);
-  border-radius: 0;
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers.current, .jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:hover, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers.current, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:hover {
-  background: rgba(49, 121, 90, 0.1);
-}
-.jbs-candidate-classic .pagination-wrap .jbs-pagination .page-numbers:last-child, .jobus-candidate-popup .pagination-wrap .jbs-pagination .page-numbers:last-child {
-  border: none;
 }
 
 .wp-block-jobus-shortcode-job-archive {

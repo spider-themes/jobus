@@ -113,7 +113,7 @@ if ( ! function_exists( 'jobus_render_stat_card' ) ) {
             jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/beg.svg', $total_jobs, 'Posted Job', true, $jobs_link );
         }
         if ( $show_applications ) {
-            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applied_job.svg', $total_applications, 'Application', true, $applications_link );
+            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applications.svg', $total_applications, 'Application', true, $applications_link );
         }
         if ( $show_saved_candidates ) {
             jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/shortlist.svg', $saved_candidates_count, 'Saved Candidate', true, $saved_candidate_link );
