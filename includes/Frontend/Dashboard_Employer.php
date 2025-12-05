@@ -69,6 +69,7 @@ class Dashboard_Employer {
 		add_rewrite_endpoint( 'profile', EP_PAGES );
 		add_rewrite_endpoint( 'jobs', EP_PAGES );
 		add_rewrite_endpoint( 'submit-job', EP_PAGES );
+		add_rewrite_endpoint( 'applications', EP_PAGES );
 		add_rewrite_endpoint( 'saved-candidate', EP_PAGES );
 		add_rewrite_endpoint( 'change-password', EP_PAGES );
 	}
@@ -86,6 +87,7 @@ class Dashboard_Employer {
 			'profile'         => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
 			'jobs'            => [ 'label' => esc_html__( 'My Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
 			'submit-job'      => [ 'label' => esc_html__( 'Submit Job', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
+			'applications'    => [ 'label' => esc_html__( 'Applications', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applications.svg' ],
 			'saved-candidate' => [ 'label' => esc_html__( 'Saved Candidate', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/saved-job.svg' ],
 			'change-password' => [ 'label' => esc_html__( 'Change Password', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/password.svg' ],
 		];
@@ -143,6 +145,10 @@ class Dashboard_Employer {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_submit_job( $user );
 				break;
+			case 'applications':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_applications( $user );
+				break;
 			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_saved_candidate( $user );
@@ -188,6 +194,20 @@ class Dashboard_Employer {
 		return Template_Loader::get_template_part( 'dashboard/global/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
+		] );
+	}
+
+	/**
+	 * Loads the applications section for the employer dashboard.
+	 *
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the applications section.
+	 */
+	protected function load_applications( WP_User $user ): string {
+		return Template_Loader::get_template_part( 'dashboard/employer/applications', [
+			'user_id'      => $user->ID,
+			'username'     => $user->user_login,
+			'is_dashboard' => false,
 		] );
 	}
 

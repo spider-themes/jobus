@@ -27,6 +27,9 @@ class Dashboard_Helper {
 		// Register AJAX handlers for removing saved jobs/candidates
 		add_action( 'wp_ajax_jobus_candidate_saved_job', [ $this, 'remove_saved_job' ] );
 		add_action( 'wp_ajax_jobus_employer_saved_candidate', [ $this, 'remove_saved_candidate' ] );
+
+		// Register AJAX handler for updating application status
+		add_action( 'wp_ajax_jobus_update_application_status', [ $this, 'update_application_status' ] );
 	}
 
 
@@ -226,6 +229,60 @@ class Dashboard_Helper {
 			wp_send_json_success( [ 'message' => __( 'Candidate removed.', 'jobus' ) ] );
 		} else {
 			wp_send_json_error( [ 'message' => __( 'Candidate not found.', 'jobus' ) ] );
+		}
+	}
+
+	/**
+	 * AJAX handler to update application status from employer dashboard
+	 */
+	public function update_application_status() {
+		if ( ! check_ajax_referer( 'jobus_dashboard_nonce', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => __( 'Security check failed.', 'jobus' ) ] );
+		}
+
+		$user_id = get_current_user_id();
+		if ( ! $user_id ) {
+			wp_send_json_error( [ 'message' => __( 'You must be logged in.', 'jobus' ) ] );
+		}
+
+		// Check if user is an employer
+		$user = get_user_by( 'id', $user_id );
+		if ( ! $user || ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+			wp_send_json_error( [ 'message' => __( 'You do not have permission to perform this action.', 'jobus' ) ] );
+		}
+
+		$application_id = isset( $_POST['application_id'] ) ? intval( $_POST['application_id'] ) : 0;
+		$new_status     = isset( $_POST['status'] ) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : '';
+
+		if ( ! $application_id ) {
+			wp_send_json_error( [ 'message' => __( 'Invalid application.', 'jobus' ) ] );
+		}
+
+		// Validate status
+		$allowed_statuses = [ 'pending', 'approved', 'rejected' ];
+		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
+			wp_send_json_error( [ 'message' => __( 'Invalid status.', 'jobus' ) ] );
+		}
+
+		// Verify the application belongs to a job owned by this employer
+		$job_id = get_post_meta( $application_id, 'job_applied_for_id', true );
+		if ( $job_id ) {
+			$job = get_post( $job_id );
+			if ( ! $job || ( (int) $job->post_author !== $user_id && ! current_user_can( 'administrator' ) ) ) {
+				wp_send_json_error( [ 'message' => __( 'You do not have permission to update this application.', 'jobus' ) ] );
+			}
+		}
+
+		// Update the application status
+		$updated = update_post_meta( $application_id, 'application_status', $new_status );
+
+		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
+			wp_send_json_success( [
+				'message' => __( 'Application status updated successfully.', 'jobus' ),
+				'status'  => $new_status,
+			] );
+		} else {
+			wp_send_json_error( [ 'message' => __( 'Failed to update application status.', 'jobus' ) ] );
 		}
 	}
 }

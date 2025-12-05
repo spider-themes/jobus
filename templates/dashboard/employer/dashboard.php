@@ -93,10 +93,11 @@ function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link 
 
         // Generate links for each stat card
         $jobs_link = trailingslashit( $dashboard_url ) . 'jobs';
+        $applications_link = trailingslashit( $dashboard_url ) . 'applications';
         $saved_candidate_link = trailingslashit( $dashboard_url ) . 'saved-candidate';
 
         jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/beg.svg', $total_jobs, 'Posted Job', true, $jobs_link );
-        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applied_job.svg', $total_applications, 'Application', true, $jobs_link );
+        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applied_job.svg', $total_applications, 'Application', true, $applications_link );
         jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/shortlist.svg', $saved_candidates_count, 'Saved Candidate', true, $saved_candidate_link );
         jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/view.svg', $total_job_views, 'Job Views', null, $jobs_link );
         ?>

@@ -1116,7 +1116,6 @@
 
       &:last-child {
         border-radius: 0 7px 7px 0;
-        text-align: right;
       }
     }
 
@@ -1170,6 +1169,14 @@
       border: none;
     }
 
+    tbody tr {
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(#f0f5f3, 0.6);
+      }
+    }
+
     .active .job-status:before {
       background: #28cc8b;
     }
@@ -1189,7 +1196,7 @@
       border: 1px solid #f1f1f1;
       border-radius: 5px;
       box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
-      padding: 10px 0;
+      padding: 5px 0;
 
       .jbs-dropdown-item {
         padding: 0 15px;
@@ -1197,6 +1204,15 @@
         font-size: 14px;
         color: #6a6a6a;
         background: #fff;
+        transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        &:hover {
+          background-color: #f0f5f3;
+          color: #244034;
+        }
 
         img {
           display: inline-block;

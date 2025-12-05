@@ -102,7 +102,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                             <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
                             <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
-                                <div class="action-dots jbs-dropdown jbs-float-end">
+                                <div class="action-dots jbs-dropdown">
                                     <button class="action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
                                         <span></span>
                                     </button>

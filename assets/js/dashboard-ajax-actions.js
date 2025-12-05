@@ -23,6 +23,7 @@
         init: function () {
             this.removeSavedPost(); // unified remove for job/candidate
             this.removeApplication();
+            this.updateApplicationStatus();
         },
 
         /**
@@ -147,6 +148,86 @@
                     error: function() {
                         btn.removeClass('loading disabled');
                         icon.attr('class', originalIcon);
+                    }
+                });
+            });
+        },
+
+        /**
+         * Handles updating application status from employer dashboard
+         */
+        updateApplicationStatus: function () {
+            $(document).on('click', '.jobus-update-status', function (e) {
+                e.preventDefault();
+
+                const btn = $(this);
+                const applicationId = btn.data('application-id');
+                const newStatus = btn.data('status');
+                const row = btn.closest('tr');
+                const statusBadge = row.find('.status-badge');
+
+                if (!applicationId || !newStatus || btn.hasClass('disabled')) return;
+
+                btn.addClass('disabled');
+
+                $.ajax({
+                    url: jobus_dashboard_obj.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'jobus_update_application_status',
+                        application_id: applicationId,
+                        status: newStatus,
+                        nonce: jobus_dashboard_obj.nonce
+                    },
+                    success: function(response) {
+                        btn.removeClass('disabled');
+                        if (response.success) {
+                            // Update the status badge
+                            let statusClass = 'jbs-bg-warning';
+                            if (newStatus === 'approved') {
+                                statusClass = 'jbs-bg-success';
+                            } else if (newStatus === 'rejected') {
+                                statusClass = 'jbs-bg-danger';
+                            }
+                            
+                            statusBadge
+                                .removeClass('jbs-bg-warning jbs-bg-success jbs-bg-danger')
+                                .addClass(statusClass)
+                                .text(newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
+
+                            // Show success notification if SweetAlert is available
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.data.message,
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+                        } else {
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.data && response.data.message ? response.data.message : 'Error updating status'
+                                });
+                            } else {
+                                alert(response.data && response.data.message ? response.data.message : 'Error updating status');
+                            }
+                        }
+                    },
+                    error: function() {
+                        btn.removeClass('disabled');
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Error updating status. Please try again.'
+                            });
+                        } else {
+                            alert('Error updating status. Please try again.');
+                        }
                     }
                 });
             });

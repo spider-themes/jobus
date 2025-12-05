@@ -1065,7 +1065,6 @@ Table of Contents:
 }
 .dashboard-body .job-alert-table th:last-child {
   border-radius: 0 7px 7px 0;
-  text-align: right;
 }
 .dashboard-body .job-alert-table td {
   font-size: 15px;
@@ -1108,6 +1107,12 @@ Table of Contents:
 .dashboard-body .job-alert-table tbody tr:last-child td {
   border: none;
 }
+.dashboard-body .job-alert-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+.dashboard-body .job-alert-table tbody tr:hover {
+  background-color: rgba(240, 245, 243, 0.6);
+}
 .dashboard-body .job-alert-table .active .job-status:before {
   background: #28cc8b;
 }
@@ -1122,7 +1127,7 @@ Table of Contents:
   border: 1px solid #f1f1f1;
   border-radius: 5px;
   box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
+  padding: 5px 0;
 }
 .dashboard-body .action-dots .jbs-dropdown-menu .jbs-dropdown-item {
   padding: 0 15px;
@@ -1130,6 +1135,14 @@ Table of Contents:
   font-size: 14px;
   color: #6a6a6a;
   background: #fff;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dashboard-body .action-dots .jbs-dropdown-menu .jbs-dropdown-item:hover {
+  background-color: #f0f5f3;
+  color: #244034;
 }
 .dashboard-body .action-dots .jbs-dropdown-menu .jbs-dropdown-item img {
   display: inline-block;
