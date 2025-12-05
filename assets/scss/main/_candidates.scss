@@ -4,6 +4,7 @@
 }
 
 .candidates-profile {
+  padding: 100px 0 80px;
   &.bg-color {
     background: var(--jbs-box_bg_color);
   }
@@ -242,7 +243,7 @@
     li {
       font-size: 16px;
       color: var(--jbs-brand_color_5);
-      margin: 18px 8px 0;
+      margin: 18px 5px 0;
       line-height: 45px;
       padding: 0 30px;
       border-radius: 30px;
@@ -380,6 +381,12 @@
       padding: 0 15px;
       font-size: 13px;
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: var(--jbs-brand_color_1, #244034);
+        box-shadow: 0 0 0 3px rgba(36, 64, 52, 0.1);
+      }
     }
 
     textarea {
@@ -393,6 +400,12 @@
       font-size: 13px;
       resize: none;
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: var(--jbs-brand_color_1, #244034);
+        box-shadow: 0 0 0 3px rgba(36, 64, 52, 0.1);
+      }
     }
   }
 }
@@ -813,6 +826,12 @@ img {
       padding: 0 15px;
       font-size: 13px;
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: var(--jbs-brand_color_1, #244034);
+        box-shadow: 0 0 0 3px rgba(36, 64, 52, 0.1);
+      }
     }
 
     textarea {
@@ -826,6 +845,12 @@ img {
       font-size: 13px;
       resize: none;
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: var(--jbs-brand_color_1, #244034);
+        box-shadow: 0 0 0 3px rgba(36, 64, 52, 0.1);
+      }
     }
   }
 }
