@@ -37,10 +37,19 @@ $company_website_url    = $company_website['url'];
 $company_website_text   = $company_website['text'];
 $company_website_target = $company_website['target'];
 $is_company_website     = $company_website['is_company_website'] ?? 'default';
+$dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+$my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . 'jobs' : '#';
 ?>
 
 <div class="jbs-position-relative">
-    <h2 class="main-title"><?php echo esc_html( $sec_title ); ?></h2>
+
+    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
+        <h2 class="main-title jbs-m-0"> <?php echo esc_html( $sec_title ); ?> </h2>
+        <a href="<?php echo esc_url( $my_jobs_url ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0">
+            <i class="bi bi-arrow-left"></i>
+            <?php esc_html_e( 'Back to Jobs', 'jobus' ); ?>
+        </a>
+    </div>
 
     <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
@@ -54,7 +63,7 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
             <!-- Job Title & Content -->
             <div class="dash-input-wrapper jbs-mb-30">
                 <label for="job_title"><?php esc_html_e( 'Job Title', 'jobus' ); ?></label>
-                <input type="text" name="job_title" id="job_title" value="<?php echo esc_attr( $job_title ); ?>" required>
+                <input type="text" name="job_title" id="job_title" placeholder="<?php esc_attr_e( 'Enter job title', 'jobus' ); ?>" value="<?php echo esc_attr( $job_title ); ?>" required>
             </div>
 
             <!-- Job Content -->
@@ -63,21 +72,21 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
                 <div class="editor-wrapper">
                     <?php
                     wp_editor(
-                            $job_description,
-                            'job_description',
-                            array(
-                                    'textarea_name' => 'job_description',
-                                    'textarea_rows' => 8,
-                                    'media_buttons' => true,
-                                    'teeny'         => false,
-                                    'quicktags'     => true,
-                                    'editor_class'  => 'size-lg',
-                                    'tinymce'       => array(
-                                            'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
-                                            'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
-                                            'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
-                                    ),
-                            )
+                        $job_description,
+                        'job_description',
+                        array(
+                            'textarea_name' => 'job_description',
+                            'textarea_rows' => 8,
+                            'media_buttons' => true,
+                            'teeny'         => false,
+                            'quicktags'     => true,
+                            'editor_class'  => 'size-lg',
+                            'tinymce'       => array(
+                                'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                                'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
+                                'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
+                            ),
+                        )
                     );
                     ?>
                 </div>
@@ -199,7 +208,9 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
             </div>
 
             <div id="company-website">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Company Website', 'jobus' ); ?></h4>
+                <label class="jbs-mb-10 jbs-d-block" for="is_company_website">
+                    <?php esc_html_e( 'Company Website', 'jobus' ); ?>
+                </label>
                 <div class="jbs-row">
                     <div class="jbs-row">
                         <div class="jbs-col-md-12">
@@ -236,7 +247,9 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
             </div>
         </div>
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3">
+                <?php esc_html_e( 'Post Job', 'jobus' ); ?>
+            </button>
         </div>
     </form>
 </div>

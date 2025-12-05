@@ -278,6 +278,7 @@ Table of Contents:
   margin-left: 260px;
   border-radius: 50px 0 0 50px;
   padding: 150px 55px 50px;
+  margin-bottom: 50px;
 }
 .dashboard-body a {
   text-decoration: none;
@@ -358,7 +359,7 @@ Table of Contents:
   color: #fff;
   min-width: 125px;
   text-align: center;
-  padding: 0 15px;
+  padding: 0 20px;
   line-height: 45px;
   border-radius: 50px;
   background: var(--jbs-brand_color_1);
@@ -549,6 +550,7 @@ Table of Contents:
   padding: 22px 35px 34px;
   z-index: 1;
   box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
 }
 .dashboard-body .dash-card-one:before {
   content: "";
@@ -573,6 +575,10 @@ Table of Contents:
 }
 .dashboard-body .dash-card-one span {
   color: rgba(0, 0, 0, 0.5);
+}
+.dashboard-body a .dash-card-one:hover {
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
 }
 .dashboard-body .user-activity-chart .job-list {
   padding: 25px 20px;
@@ -607,11 +613,17 @@ Table of Contents:
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list {
   position: relative;
-  padding-right: 25px;
-  margin: 40px 0;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  padding: 20px 0;
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list:first-child {
-  margin-top: 30px;
+  margin-top: 10px;
+}
+.dashboard-body .recent-job-tab .wrapper .job-item-list:hover {
+  background-color: rgba(63, 99, 77, 0.04);
+  padding-left: 15px;
+  border-radius: 8px;
 }
 .dashboard-body .recent-job-tab .wrapper .job-item-list .logo {
   width: 40px;
@@ -1939,9 +1951,11 @@ body.page-template-dashboard .site-header {
   align-items: center;
   gap: 6px;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 .dashboard-body .saved-job-tab .saved-jobs-header .view-more-btn:hover {
   color: #3F634D;
+  transform: translateX(5px);
 }
 .dashboard-body .saved-job-tab .job-list-one {
   border-top: 1px solid #E3F0EB;

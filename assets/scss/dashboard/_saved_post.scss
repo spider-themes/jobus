@@ -27,9 +27,11 @@
         align-items: center;
         gap: 6px;
         font-size: 14px;
+        transition: all 0.3s ease;
 
         &:hover {
           color: #3F634D;
+          transform: translateX(5px);
         }
       }
     }

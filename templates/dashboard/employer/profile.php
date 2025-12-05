@@ -55,7 +55,13 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
 ?>
 <div class="jbs-position-relative">
 
-    <h2 class="main-title"><?php esc_html_e( 'Profile', 'jobus' ); ?></h2>
+    <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
+    <h2 class="main-title jbs-mb-0"> <?php esc_html_e( 'Profile', 'jobus' ); ?> </h2>
+        <!-- View My Profile -->
+        <a href="<?php echo esc_url( get_permalink( $company_id ) ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0" target="_blank">
+            <i class="bi bi-eye"></i> <?php esc_html_e( 'View My Profile', 'jobus' ); ?>
+        </a>
+    </div>
 
     <form action="#" id="company-profile-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
@@ -97,21 +103,21 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <div class="editor-wrapper">
                     <?php
                     wp_editor(
-                            $description,
-                            'company_description',
-                            array(
-                                    'textarea_name' => 'company_description',
-                                    'textarea_rows' => 8,
-                                    'media_buttons' => true,
-                                    'teeny'         => false, // Use full toolbar
-                                    'quicktags'     => true,
-                                    'editor_class'  => 'size-lg',
-                                    'tinymce'       => array(
-                                            'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
-                                            'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
-                                            'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
-                                    ),
-                            )
+                        $description,
+                        'company_description',
+                        array(
+                            'textarea_name' => 'company_description',
+                            'textarea_rows' => 8,
+                            'media_buttons' => true,
+                            'teeny'         => false, // Use full toolbar
+                            'quicktags'     => true,
+                            'editor_class'  => 'size-lg',
+                            'tinymce'       => array(
+                                'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                                'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
+                                'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
+                            ),
+                        )
                     );
                     ?>
                 </div>
@@ -310,6 +316,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="social_icons[<?php echo esc_attr( $index ); ?>][url]"
                                                    id="social_<?php echo esc_attr( $index ); ?>_url" class="jbs-form-control"
+                                                   placeholder="<?php esc_attr_e( 'Enter social media URL', 'jobus' ); ?>"
                                                    value="<?php echo esc_attr( $item['url'] ); ?>">
                                         </div>
                                     </div>
@@ -380,11 +387,11 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <?php
                 if ( empty( $testimonials ) ) {
                     $testimonials[] = array(
-                            'author_name'    => '',
-                            'location'       => '',
-                            'review_content' => '',
-                            'rating'         => '',
-                            'image'          => '',
+                        'author_name'    => '',
+                        'location'       => '',
+                        'review_content' => '',
+                        'rating'         => '',
+                        'image'          => '',
                     );
                 }
                 foreach ( $testimonials as $key => $testimonial ) {
@@ -416,6 +423,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][author_name]"
                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-author-name" class="jbs-form-control"
+                                                   placeholder="<?php esc_attr_e( 'Enter author name', 'jobus' ); ?>"
                                                    value="<?php echo esc_attr( $testimonial['author_name'] ?? '' ); ?>">
                                         </div>
                                     </div>
@@ -432,6 +440,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                                         <div class="dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[<?php echo esc_attr( $key ); ?>][location]"
                                                    id="company-testimonial-<?php echo esc_attr( $key ); ?>-location" class="jbs-form-control"
+                                                   placeholder="<?php esc_attr_e( 'Enter location', 'jobus' ); ?>"
                                                    value="<?php echo esc_attr( $testimonial['location'] ?? '' ); ?>">
                                         </div>
                                     </div>

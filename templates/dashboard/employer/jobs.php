@@ -12,69 +12,44 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// Check if this is the dashboard view or full view
 $is_dashboard = $args['is_dashboard'] ?? true;
-$per_page     = $is_dashboard ? 4 : 6; // 4 in dashboard widget, 6 in full view
+$per_page     = $is_dashboard ? 4 : 6;
 
-// Get current page number - check multiple sources
-$current_page = 1;
-
-// First check query parameters
-if ( isset( $_GET['paged'] ) && intval( $_GET['paged'] ) > 0 ) {
-	$current_page = intval( $_GET['paged'] );
-} elseif ( isset( $_GET['page'] ) && intval( $_GET['page'] ) > 0 ) {
-	$current_page = intval( $_GET['page'] );
-}
-// Then check query vars
-elseif ( get_query_var( 'paged' ) ) {
-	$current_page = get_query_var( 'paged' );
-} elseif ( get_query_var( 'page' ) ) {
-	$current_page = get_query_var( 'page' );
-}
-// Finally check the URL path for /page/N/ pattern
-else {
-	$request_uri = $_SERVER['REQUEST_URI'];
-	if ( preg_match( '#/page/(\d+)/?#', $request_uri, $matches ) ) {
-		$current_page = intval( $matches[1] );
-	}
-}
+// Get current page number from multiple sources
+$current_page = max(
+	intval( $_GET['paged'] ?? $_GET['page'] ?? 0 ),
+	intval( get_query_var( 'paged' ) ?: get_query_var( 'page' ) ?: 0 ),
+	preg_match( '#/page/(\d+)/?#', $_SERVER['REQUEST_URI'] ?? '', $m ) ? intval( $m[1] ) : 0
+);
+$current_page = max( 1, $current_page );
 
 // Get jobs for current user
 $all_jobs = get_posts([
-    'post_type'      => 'jobus_job',
-    'author'         => get_current_user_id(),
-    'post_status'    => [ 'publish', 'pending', 'draft', 'expired' ],
-    'posts_per_page' => -1,
+	'post_type'      => 'jobus_job',
+	'author'         => get_current_user_id(),
+	'post_status'    => [ 'publish', 'pending', 'draft', 'expired' ],
+	'posts_per_page' => -1,
 ]);
 
 $total_jobs = count( $all_jobs );
 $total_pages = ceil( $total_jobs / $per_page );
-
-// Calculate offset
 $offset = ( $current_page - 1 ) * $per_page;
 
-// If in dashboard mode, limit the jobs to display
-if ( $is_dashboard ) {
-	$jobs = array_slice( $all_jobs, 0, $per_page );
-} else {
-	// For full view, apply pagination
-	$jobs = array_slice( $all_jobs, $offset, $per_page );
-}
+// Get jobs for display
+$jobs = array_slice( $all_jobs, $is_dashboard ? 0 : $offset, $per_page );
 
-// Find the page with employer dashboard shortcode
+// Get dashboard URL for edit job link
 $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
-
-// Build URL if dashboard page exists
-$edit_job_url = '#';
-if ( $dashboard_url ) {
-    $edit_job_url = trailingslashit( $dashboard_url ) . 'submit-job';
-}
+$edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job' : '#';
 ?>
 
 <div class="jbs-position-relative">
 
     <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
-        <h2 class="main-title jbs-m-0"><?php esc_html_e( 'My Jobs', 'jobus' ); ?></h2>
+        <h2 class="main-title jbs-m-0"> <?php esc_html_e( 'My Jobs', 'jobus' ); ?> </h2>
+        <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0">
+            <i class="bi bi-plus-lg"></i> <?php esc_html_e( 'Post a Job', 'jobus' ); ?>
+        </a>
     </div>
 
     <?php
@@ -116,7 +91,11 @@ if ( $dashboard_url ) {
                         ?>
                         <tr class="<?php echo esc_attr( $status ); ?>">
                             <td>
-                                <div class="job-name jbs-fw-500"><?php echo esc_html( get_the_title( $job_id ) ); ?></div>
+                                <div class="job-name jbs-fw-500">
+                                    <a href="<?php echo esc_url( get_permalink( $job_id ) ); ?>">
+                                        <?php echo esc_html( get_the_title( $job_id ) ); ?>
+                                    </a>
+                                </div>
                                 <div class="info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
@@ -152,18 +131,14 @@ if ( $dashboard_url ) {
                     ?>
                     </tbody>
                 </table>
-            </div>
         </div>
         <?php
-        // Display pagination if not in dashboard mode and there are more jobs than the limit
         if ( ! $is_dashboard && $total_jobs > $per_page ) {
-            // Create a mock WP_Query object for pagination
             $mock_query = new stdClass();
             $mock_query->max_num_pages = $total_pages;
             $mock_query->found_posts = $total_jobs;
             $mock_query->query_vars = [ 'paged' => $current_page ];
 
-            // Temporarily override the global query var for pagination
             $original_paged = get_query_var( 'paged' );
             set_query_var( 'paged', $current_page );
 
@@ -175,11 +150,8 @@ if ( $dashboard_url ) {
             );
             echo '</div>';
 
-            // Restore original query var
             set_query_var( 'paged', $original_paged );
         }
-        ?>
-    <?php
     } else {
         ?>
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
@@ -192,7 +164,7 @@ if ( $dashboard_url ) {
                 </a>
             </div>
         </div>
-    <?php
+        <?php
     }
     ?>
 </div>
