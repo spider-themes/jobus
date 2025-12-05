@@ -13,7 +13,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $is_dashboard = $args['is_dashboard'] ?? true;
-$per_page     = $is_dashboard ? 4 : 10;
+
+// Get pagination settings from options
+$items_per_page = absint( jobus_opt( 'dashboard_items_per_page', 10 ) );
+$widget_items = absint( jobus_opt( 'dashboard_widget_items', 4 ) );
+$per_page = $is_dashboard ? $widget_items : $items_per_page;
+
+// Get empty state messages
+$empty_title = jobus_opt( 'empty_applications_title', esc_html__( 'No Applications', 'jobus' ) );
+$empty_desc = jobus_opt( 'empty_applications_desc', esc_html__( 'You haven\'t received any job applications yet.', 'jobus' ) );
+
+// Application management settings
+$can_download_cv = jobus_opt( 'employer_download_cv', true );
+$can_view_profile = jobus_opt( 'employer_view_candidate_profile', true );
+$can_approve_reject = jobus_opt( 'employer_approve_reject', true );
 
 // Get current page number from multiple sources
 $current_page = max(
@@ -154,7 +167,7 @@ $applications = new \WP_Query( $applications_args );
                                             <span></span>
                                         </button>
                                         <ul class="jbs-dropdown-menu jbs-dropdown-menu-end">
-                                            <?php if ( $candidate_profile_url !== '#' ) : ?>
+                                            <?php if ( $can_view_profile && $candidate_profile_url !== '#' ) : ?>
                                                 <li>
                                                     <a href="<?php echo esc_url( $candidate_profile_url ); ?>" class="jbs-dropdown-item" target="_blank">
                                                         <i class="bi bi-person"></i> <?php esc_html_e( 'View Profile', 'jobus' ); ?>
@@ -170,7 +183,7 @@ $applications = new \WP_Query( $applications_args );
                                             // Get resume/CV if available
                                             $resume_id  = get_post_meta( $application_id, 'candidate_resume', true );
                                             $resume_url = $resume_id ? wp_get_attachment_url( $resume_id ) : '';
-                                            if ( $resume_url ) :
+                                            if ( $can_download_cv && $resume_url ) :
                                                 ?>
                                                 <li>
                                                     <a href="<?php echo esc_url( $resume_url ); ?>" class="jbs-dropdown-item" target="_blank" download>
@@ -178,6 +191,7 @@ $applications = new \WP_Query( $applications_args );
                                                     </a>
                                                 </li>
                                             <?php endif; ?>
+                                            <?php if ( $can_approve_reject ) : ?>
                                             <li><hr class="jbs-dropdown-divider"></li>
                                             <li>
                                                 <a href="#" class="jbs-dropdown-item jobus-update-status" 
@@ -188,11 +202,11 @@ $applications = new \WP_Query( $applications_args );
                                             </li>
                                             <li>
                                                 <a href="#" class="jbs-dropdown-item jobus-update-status" 
-                                                   data-application-id="<?php echo esc_attr( $application_id ); ?>" 
-                                                   data-status="rejected">
+                                                   data-application-id="<?php echo esc_attr( $application_id ); ?>" data-status="rejected">
                                                     <i class="bi bi-x-circle text-danger"></i> <?php esc_html_e( 'Reject', 'jobus' ); ?>
                                                 </a>
                                             </li>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                 </td>
@@ -227,13 +241,13 @@ $applications = new \WP_Query( $applications_args );
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
-                <h4><?php esc_html_e( 'No Applications Yet', 'jobus' ); ?></h4>
-                <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t received any job applications yet.', 'jobus' ); ?></p>
+                <h4><?php echo esc_html( $empty_title ); ?></h4>
+                <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>
                 <?php
                 $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
                 $jobs_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'jobs' : '#';
                 ?>
-                <a href="<?php echo esc_url( $jobs_url ); ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary">
+                <a href="<?php echo esc_url( $jobs_url ); ?>" class="jbs-btn jbs-btn-primary">
                     <?php esc_html_e( 'View My Jobs', 'jobus' ); ?>
                 </a>
             </div>

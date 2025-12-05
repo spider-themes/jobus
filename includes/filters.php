@@ -62,6 +62,7 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	$user_role = reset( $user->roles );
 
+	// Check for custom redirect settings first
 	if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
 		if ( $user_role === 'jobus_candidate' ) {
 			$page_id = jobus_opt( 'candidate_redirect_page' );
@@ -77,7 +78,23 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 		}
 	}
 
-	return admin_url();
+	// Default: redirect to role-specific dashboard
+	if ( class_exists( '\jobus\includes\Frontend\Dashboard' ) ) {
+		if ( $user_role === 'jobus_candidate' ) {
+			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
+				return $dashboard_url;
+			}
+		}
+		if ( $user_role === 'jobus_employer' ) {
+			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
+				return $dashboard_url;
+			}
+		}
+	}
+
+	return $redirect_to;
 }
 add_filter( 'login_redirect', 'jobus_login_redirect_by_role', 10, 3 );
 

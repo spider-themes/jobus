@@ -157,8 +157,17 @@ class Shortcode {
 			'password_placeholder' => esc_attr__( 'Enter Password', 'jobus' ),
 		), $atts );
 
-		// Set redirect URL with fallback to admin URL
-		$redirect_url = ! empty( $atts['redirect'] ) ? esc_url_raw( $atts['redirect'] ) : admin_url();
+		// Set redirect URL with fallback to dashboard or admin URL
+		if ( ! empty( $atts['redirect'] ) ) {
+			$redirect_url = esc_url_raw( $atts['redirect'] );
+		} else {
+			// Try to get the generic dashboard page URL as default redirect
+			$redirect_url = Dashboard::get_dashboard_page_url();
+			// Fallback to admin URL if no dashboard page found
+			if ( empty( $redirect_url ) || $redirect_url === home_url( '/' ) ) {
+				$redirect_url = admin_url();
+			}
+		}
 
         // Fetch plugin options
         $plugin_options = get_option('jobus_opt', array());

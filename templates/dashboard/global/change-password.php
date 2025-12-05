@@ -31,6 +31,9 @@ if ( $error_message ) {
     // Clean up the temporary meta
     delete_user_meta( $user->ID, '_password_change_error' );
 }
+
+// Get dynamic button label
+$update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update Password', 'jobus' ) );
 ?>
 
 <div class="jbs-position-relative">
@@ -95,7 +98,7 @@ if ( $error_message ) {
                 </div>
                 <div class="jbs-col-12">
                     <div class="button-group jbs-d-inline-flex jbs-align-items-center">
-                        <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php esc_html_e( 'Update Password', 'jobus' ); ?></button>
+                        <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php echo esc_html( $update_password_label ); ?></button>
                     </div>
                 </div>
             </div>

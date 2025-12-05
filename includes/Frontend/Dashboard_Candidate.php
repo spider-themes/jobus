@@ -76,19 +76,62 @@ class Dashboard_Candidate {
 	/**
 	 * Get dashboard navigation items (single source of truth).
 	 *
-	 * Returns an array of navigation items for the sidebar menu.
+	 * Returns an array of navigation items for the sidebar menu based on settings.
 	 *
 	 * @return array Navigation items with label and icon.
 	 */
 	public static function get_nav_items(): array {
-		return [
-			'dashboard'        => [ 'label' => esc_html__( 'Dashboard', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/dashboard.svg' ],
-			'profile'          => [ 'label' => esc_html__( 'My Profile', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/profile.svg' ],
-			'resume'           => [ 'label' => esc_html__( 'Resume', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/resume.svg' ],
-			'applied-jobs'     => [ 'label' => esc_html__( 'Applied Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/applied_job.svg' ],
-			'saved-jobs'       => [ 'label' => esc_html__( 'Saved Jobs', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/saved-job.svg' ],
-			'change-password'  => [ 'label' => esc_html__( 'Change Password', 'jobus' ), 'icon' => JOBUS_IMG . '/dashboard/icons/password.svg' ],
-		];
+		$nav_items = [];
+
+		// Dashboard
+		if ( jobus_opt( 'candidate_menu_dashboard', true ) ) {
+			$nav_items['dashboard'] = [
+				'label' => jobus_opt( 'label_candidate_dashboard', esc_html__( 'Dashboard', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/dashboard.svg'
+			];
+		}
+
+		// My Profile
+		if ( jobus_opt( 'candidate_menu_profile', true ) ) {
+			$nav_items['profile'] = [
+				'label' => jobus_opt( 'label_candidate_profile', esc_html__( 'My Profile', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/profile.svg'
+			];
+		}
+
+		// Resume
+		if ( jobus_opt( 'candidate_menu_resume', true ) ) {
+			$nav_items['resume'] = [
+				'label' => jobus_opt( 'label_candidate_resume', esc_html__( 'Resume', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/resume.svg'
+			];
+		}
+
+		// Applied Jobs
+		if ( jobus_opt( 'candidate_menu_applied_jobs', true ) ) {
+			$nav_items['applied-jobs'] = [
+				'label' => jobus_opt( 'label_candidate_applied_jobs', esc_html__( 'Applied Jobs', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/applied_job.svg'
+			];
+		}
+
+		// Saved Jobs
+		if ( jobus_opt( 'candidate_menu_saved_jobs', true ) ) {
+			$nav_items['saved-jobs'] = [
+				'label' => jobus_opt( 'label_candidate_saved_jobs', esc_html__( 'Saved Jobs', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/saved-job.svg'
+			];
+		}
+
+		// Change Password
+		if ( jobus_opt( 'candidate_menu_change_password', true ) ) {
+			$nav_items['change-password'] = [
+				'label' => jobus_opt( 'label_change_password', esc_html__( 'Change Password', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/password.svg'
+			];
+		}
+
+		return $nav_items;
 	}
 
 	/**

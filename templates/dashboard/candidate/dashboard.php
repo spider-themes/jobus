@@ -49,10 +49,22 @@ $all_user_view_count = ! empty( $all_user_view_count ) ? intval( $all_user_view_
 $employer_view_count = get_post_meta( $candidate_id, 'employer_view_count', true );
 $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_count ) : 0;
 
+// Get dashboard settings
+$dashboard_title = jobus_opt( 'dashboard_page_title', esc_html__( 'Dashboard', 'jobus' ) );
+$widget_items_count = absint( jobus_opt( 'dashboard_widget_items', 4 ) );
+$view_all_label = jobus_opt( 'label_view_all', esc_html__( 'View All', 'jobus' ) );
+
+// Stat card visibility settings
+$show_total_visitor = jobus_opt( 'candidate_stat_total_visitor', true );
+$show_shortlisted = jobus_opt( 'candidate_stat_shortlisted', true );
+$show_views = jobus_opt( 'candidate_stat_views', true );
+$show_applied_jobs = jobus_opt( 'candidate_stat_applied_jobs', true );
+
 ?>
 <div class="jbs-position-relative">
-    <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
+    <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
     <div class="jbs-row">
+        <?php if ( $show_total_visitor ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
             <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
@@ -69,7 +81,9 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_shortlisted ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
             <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
@@ -96,7 +110,9 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_views ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
             <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
@@ -111,7 +127,9 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_applied_jobs ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
             <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
@@ -128,6 +146,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
@@ -145,16 +164,15 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
 					}
 					$saved_jobs = array_filter( array_map( 'intval', $saved_jobs ) );
 					$total_jobs = count( $saved_jobs );
-					$limit      = 4; // Same limit as in candidate-saved-job.php
 
 					// Show "View More" button only if there are more jobs than the limit
-					if ( $total_jobs > $limit ) {
+					if ( $total_jobs > $widget_items_count ) {
 						// Get the dashboard page URL
 						$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 						$saved_jobs_url = trailingslashit( $dashboard_url ) . 'saved-jobs';
 						?>
                         <a href="<?php echo esc_url( $saved_jobs_url ); ?>" class="view-more-btn">
-							<?php esc_html_e( 'View All', 'jobus' ); ?>
+							<?php echo esc_html( $view_all_label ); ?>
                             <i class="bi bi-arrow-right"></i>
                         </a>
 						<?php
@@ -166,7 +184,7 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
 				// Load the saved jobs template
 				jobus_get_template_part( 'dashboard/candidate/saved-job', [
 					'is_dashboard' => true,
-					'limit'        => $limit
+					'limit'        => $widget_items_count
 				] );
 				?>
             </div>
@@ -178,7 +196,8 @@ $employer_view_count = ! empty( $employer_view_count ) ? intval( $employer_view_
                 <div class="wrapper">
                     <?php
                     if ( ! empty( $applicants ) ) {
-                        foreach ( $applicants as $applicant ) {
+                        $recent_applicants = array_slice( $applicants, 0, $widget_items_count );
+                        foreach ( $recent_applicants as $applicant ) {
                             $job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
                             $job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
                             $job_location = get_the_terms( $job_id, 'jobus_job_location' );

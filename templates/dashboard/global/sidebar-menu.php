@@ -74,9 +74,10 @@ if ( ! empty( $logo['url'] ) ) { ?>
         </button>
         <ul class="jbs-dropdown-menu" aria-labelledby="profile-dropdown">
             <li>
+                <?php $view_profile_label = jobus_opt( 'label_view_profile', esc_html__( 'View Profile', 'jobus' ) ); ?>
                 <a href="<?php echo esc_url($profile_url); ?>" class="jbs-dropdown-item jbs-d-flex jbs-align-items-center">
-                    <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/profile.svg') ?>" alt="<?php esc_attr_e( 'Candidate Profile', 'jobus' ); ?>" class="lazy-img">
-                    <span class="jbs-ms-2 ps-1"><?php esc_html_e( 'View Profile', 'jobus' ); ?></span>
+                    <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/profile.svg') ?>" alt="<?php echo esc_attr( $view_profile_label ); ?>" class="lazy-img">
+                    <span class="jbs-ms-2 ps-1"><?php echo esc_html( $view_profile_label ); ?></span>
                 </a>
             </li>
         </ul>
@@ -107,7 +108,10 @@ if ( ! empty( $logo['url'] ) ) { ?>
     </ul>
 </nav>
 
+<?php
+$logout_label = jobus_opt( 'label_logout', esc_html__( 'Logout', 'jobus' ) );
+?>
 <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="jbs-d-flex jbs-w-100 jbs-align-items-center logout-btn jbs-mt-25">
-    <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/logout.svg') ?>" alt="<?php esc_attr_e('Logout', 'jobus'); ?>" class="lazy-img">
-    <span><?php esc_html_e('Logout', 'jobus'); ?></span>
+    <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/logout.svg') ?>" alt="<?php echo esc_attr( $logout_label ); ?>" class="lazy-img">
+    <span><?php echo esc_html( $logout_label ); ?></span>
 </a>

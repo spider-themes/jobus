@@ -52,6 +52,15 @@ $education_data  = $candidate_form->get_candidate_education( $candidate_id );
 $experience_data = $candidate_form->get_candidate_experience( $candidate_id );
 $portfolio_data  = $candidate_form->get_candidate_portfolio( $candidate_id );
 
+// Get resume settings
+$show_cv_upload = jobus_opt( 'candidate_cv_upload', true );
+$show_intro_video = jobus_opt( 'candidate_intro_video', true );
+$show_education = jobus_opt( 'candidate_education', true );
+$show_experience = jobus_opt( 'candidate_experience', true );
+$show_portfolio = jobus_opt( 'candidate_portfolio', true );
+$show_skills = jobus_opt( 'candidate_skills', true );
+$save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
+
 // Handle form submission for taxonomies [categories, locations, skills]
 if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
@@ -85,6 +94,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 		<?php wp_nonce_field( 'candidate_resume_update', 'candidate_resume_nonce' ); ?>
         <input type="hidden" name="candidate_resume_form_submit" value="1">
 
+        <?php if ( $show_cv_upload ) : ?>
         <div class="jbs-bg-white card-box border-20" id="candidate-resume">
             <h4 class="dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
             <div class="dash-input-wrapper jbs-mb-20">
@@ -109,7 +119,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 <small><?php esc_html_e( 'Upload file .pdf, .doc, .docx', 'jobus' ); ?></small>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_intro_video ) : ?>
         <div class="jbs-bg-white card-box jbs-border-20 jbs-mt-40" id="candidate-resume-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
             <div class="intro-video-form jbs-position-relative jbs-mt-20 w-100">
@@ -147,7 +159,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_education ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-education">
             <h4 class="dash-title-three"><?php esc_html_e( 'Education', 'jobus' ); ?></h4>
 
@@ -275,7 +289,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Education Item', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_experience ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-experience">
             <h4 class="dash-title-three"><?php esc_html_e( 'Experience', 'jobus' ); ?></h4>
             <div class="dash-input-wrapper jbs-mb-15">
@@ -417,6 +433,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Experience Item', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-taxonomy">
             <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
@@ -509,6 +526,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
         </div>
 
+        <?php if ( $show_portfolio ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="portfolio-section">
             <h4 class="dash-title-three"><?php esc_html_e( 'Portfolio', 'jobus' ); ?></h4>
             <div class="dash-input-wrapper jbs-mb-30">
@@ -551,9 +569,10 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
         <div class="button-group d-inline-flex align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s me-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+            <button type="submit" class="dash-btn-two tran3s me-3"><?php echo esc_html( $save_changes_label ); ?></button>
         </div>
     </form>
 </div>

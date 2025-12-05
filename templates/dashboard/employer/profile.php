@@ -38,6 +38,14 @@ $video_data             = $company_form->get_company_video( $company_id );
 $testimonials           = $company_form->get_company_testimonials( $company_id );
 $testimonial_title      = get_post_meta( $company_id, 'company_testimonial_title', true );
 
+// Get profile settings
+$show_profile_photo = jobus_opt( 'employer_profile_photo_upload', true );
+$show_social_links = jobus_opt( 'employer_social_links', true );
+$show_rich_editor = jobus_opt( 'employer_description_editor', true );
+$show_intro_video = jobus_opt( 'employer_intro_video', true );
+$show_testimonials = jobus_opt( 'employer_testimonials', true );
+$save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
+
 
 // Handle form submission for taxonomies [categories, locations, tags]
 if ( isset( $_POST['company_profile_form_submit'] ) ) {
@@ -69,6 +77,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         <input type="hidden" name="company_profile_form_submit" value="1"/>
 
         <div class="jbs-bg-white card-box border-20">
+            <?php if ( $show_profile_photo ) : ?>
             <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30" id="employer-profile">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img"
                      id="company-avatar-preview">
@@ -82,6 +91,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                        value="<?php echo esc_attr( $content_data['company_profile_picture'] ); ?>">
                 <input type="hidden" name="company_profile_picture_temp" id="company-profile-picture-temp" value="">
             </div>
+            <?php endif; ?>
             <div class="jbs-row">
                 <div class="jbs-col-md-6">
                     <div class="dash-input-wrapper jbs-mb-30">
@@ -102,23 +112,27 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <label for="company_description"><?php esc_html_e( 'Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
-                    wp_editor(
-                        $description,
-                        'company_description',
-                        array(
-                            'textarea_name' => 'company_description',
-                            'textarea_rows' => 8,
-                            'media_buttons' => true,
-                            'teeny'         => false, // Use full toolbar
-                            'quicktags'     => true,
-                            'editor_class'  => 'size-lg',
-                            'tinymce'       => array(
-                                'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
-                                'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
-                                'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
-                            ),
-                        )
-                    );
+                    if ( $show_rich_editor ) {
+                        wp_editor(
+                            $description,
+                            'company_description',
+                            array(
+                                'textarea_name' => 'company_description',
+                                'textarea_rows' => 8,
+                                'media_buttons' => true,
+                                'teeny'         => false, // Use full toolbar
+                                'quicktags'     => true,
+                                'editor_class'  => 'size-lg',
+                                'tinymce'       => array(
+                                    'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                                    'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
+                                    'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
+                                ),
+                            )
+                        );
+                    } else {
+                        echo '<textarea name="company_description" id="company_description" rows="8" class="jbs-form-control size-lg">' . esc_textarea( $description ) . '</textarea>';
+                    }
                     ?>
                 </div>
                 <div class="alert-text">
@@ -240,6 +254,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
             </div>
         </div>
 
+        <?php if ( $show_social_links ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-social-icons">
             <h4 class="dash-title-three">
                 <?php esc_html_e( 'Social Media', 'jobus' ); ?>
@@ -336,7 +351,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_intro_video ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-video">
             <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
             <div class="intro-video-form jbs-position-relative jbs-mt-20 w-100">
@@ -374,7 +391,9 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_testimonials ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="company-testimonials">
             <h4 class="dash-title-three"><?php esc_html_e( 'Testimonials', 'jobus' ); ?></h4>
             <div class="dash-input-wrapper jbs-mb-15">
@@ -533,9 +552,10 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Testimonial', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php echo esc_html( $save_changes_label ); ?></button>
         </div>
 
     </form>

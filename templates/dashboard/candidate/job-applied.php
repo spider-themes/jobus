@@ -9,7 +9,16 @@ $user_email = $user->user_email;
 
 // Check if this is the dashboard view or full view
 $is_dashboard = $args['is_dashboard'] ?? true;
-$per_page     = $is_dashboard ? 4 : 6; // 4 in dashboard widget, 6 in full view
+
+// Get pagination settings from options
+$items_per_page = absint( jobus_opt( 'dashboard_items_per_page', 6 ) );
+$widget_items = absint( jobus_opt( 'dashboard_widget_items', 4 ) );
+$per_page = $is_dashboard ? $widget_items : $items_per_page;
+
+// Get empty state messages
+$empty_title = jobus_opt( 'empty_applied_jobs_title', esc_html__( 'No Applied Jobs', 'jobus' ) );
+$empty_desc = jobus_opt( 'empty_applied_jobs_desc', esc_html__( 'You haven\'t applied for any jobs yet.', 'jobus' ) );
+$browse_jobs_label = jobus_opt( 'label_browse_jobs', esc_html__( 'Browse Jobs', 'jobus' ) );
 
 // Get current page number - check multiple sources
 $current_page = 1;
@@ -181,10 +190,10 @@ $applications = new \WP_Query( $args );
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
-                <h4> <?php esc_html_e( 'No Applied Jobs', 'jobus' ); ?> </h4>
-                <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t applied for any jobs yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary" target="_blank">
-                    <?php esc_html_e( 'Browse Jobs', 'jobus' ); ?>
+                <h4><?php echo esc_html( $empty_title ); ?></h4>
+                <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>
+                <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-btn jbs-btn-primary" target="_blank">
+                    <?php echo esc_html( $browse_jobs_label ); ?>
                 </a>
             </div>
         </div>

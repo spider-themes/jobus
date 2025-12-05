@@ -13,7 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $is_dashboard = $args['is_dashboard'] ?? true;
-$per_page     = $is_dashboard ? 4 : 6;
+
+// Get pagination settings from options
+$items_per_page = absint( jobus_opt( 'dashboard_items_per_page', 6 ) );
+$widget_items = absint( jobus_opt( 'dashboard_widget_items', 4 ) );
+$per_page = $is_dashboard ? $widget_items : $items_per_page;
+
+// Get empty state messages
+$empty_title = jobus_opt( 'empty_posted_jobs_title', esc_html__( 'No Jobs Posted', 'jobus' ) );
+$empty_desc = jobus_opt( 'empty_posted_jobs_desc', esc_html__( 'You haven\'t posted any jobs yet.', 'jobus' ) );
+$post_job_label = jobus_opt( 'label_post_job', esc_html__( 'Post a Job', 'jobus' ) );
 
 // Get current page number from multiple sources
 $current_page = max(
@@ -48,7 +57,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
     <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
         <h2 class="main-title jbs-m-0"> <?php esc_html_e( 'My Jobs', 'jobus' ); ?> </h2>
         <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0">
-            <i class="bi bi-plus-lg"></i> <?php esc_html_e( 'Post a Job', 'jobus' ); ?>
+            <i class="bi bi-plus-lg"></i> <?php echo esc_html( $post_job_label ); ?>
         </a>
     </div>
 
@@ -157,10 +166,10 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
         <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
             <div class="no-jobs-found">
                 <i class="bi bi-briefcase-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
-                <h4><?php esc_html_e( 'No Jobs Posted', 'jobus' ); ?></h4>
-                <p class="jbs-text-muted"><?php esc_html_e( 'You haven\'t posted any jobs yet.', 'jobus' ); ?></p>
-                <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn jbs-btn-sm jbs-btn-primary">
-                    <?php esc_html_e( 'Post a Job', 'jobus' ); ?>
+                <h4><?php echo esc_html( $empty_title ); ?></h4>
+                <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>
+                <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn jbs-btn-primary">
+                    <?php echo esc_html( $post_job_label ); ?>
                 </a>
             </div>
         </div>

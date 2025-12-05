@@ -16,6 +16,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user = wp_get_current_user();
 $user_id = $user->ID;
 
+// Get dashboard settings
+$dashboard_title = jobus_opt( 'dashboard_page_title', esc_html__( 'Dashboard', 'jobus' ) );
+$widget_items_count = absint( jobus_opt( 'dashboard_widget_items', 4 ) );
+$view_all_label = jobus_opt( 'label_view_all', esc_html__( 'View All', 'jobus' ) );
+
+// Stat card visibility settings
+$show_posted_jobs = jobus_opt( 'employer_stat_posted_jobs', true );
+$show_applications = jobus_opt( 'employer_stat_applications', true );
+$show_saved_candidates = jobus_opt( 'employer_stat_saved_candidates', true );
+$show_job_views = jobus_opt( 'employer_stat_job_views', true );
+
 // Get employer jobs (published only, ordered by date DESC)
 $jobs = get_posts([
 	'post_type'      => 'jobus_job',
@@ -57,35 +68,37 @@ $saved_candidates = is_array( $saved_candidates ) ? $saved_candidates : ( $saved
 $saved_candidates_count = count( $saved_candidates );
 
 // Helper function to render dashboard stat cards
-function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link = '' ) {
-	// Handle pluralization for labels like "Posted Job"
-	if ( $singular && $value !== 1 ) {
-		// Simple pluralization: add 's' to the end
-		$label = $label . 's';
-	}
+if ( ! function_exists( 'jobus_render_stat_card' ) ) {
+	function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link = '' ) {
+		// Handle pluralization for labels like "Posted Job"
+		if ( $singular && $value !== 1 ) {
+			// Simple pluralization: add 's' to the end
+			$label = $label . 's';
+		}
 
-	$card_html = '
-	<div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
-		<div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
-			<div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
-				<img src="' . esc_url( $icon ) . '" alt="' . esc_attr__( $label, 'jobus' ) . '" class="lazy-img">
+		$card_html = '
+		<div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
+			<div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
+				<div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
+					<img src="' . esc_url( $icon ) . '" alt="' . esc_attr__( $label, 'jobus' ) . '" class="lazy-img">
+				</div>
+				<div class="jbs-order-sm-0">
+					<div class="value jbs-fw-500">' . esc_html( $value ) . '</div>
+					<span>' . esc_html__( $label, 'jobus' ) . '</span>
+				</div>
 			</div>
-			<div class="jbs-order-sm-0">
-				<div class="value jbs-fw-500">' . esc_html( $value ) . '</div>
-				<span>' . esc_html__( $label, 'jobus' ) . '</span>
-			</div>
-		</div>
-	</div>';
+		</div>';
 
-	if ( ! empty( $link ) ) {
-		echo '<a href="' . esc_url( $link ) . '" class="jbs-col-lg-3 jbs-col-6 jbs-text-decoration-none">' . $card_html . '</a>';
-	} else {
-		echo '<div class="jbs-col-lg-3 jbs-col-6">' . $card_html . '</div>';
+		if ( ! empty( $link ) ) {
+			echo '<a href="' . esc_url( $link ) . '" class="jbs-col-lg-3 jbs-col-6 jbs-text-decoration-none">' . $card_html . '</a>';
+		} else {
+			echo '<div class="jbs-col-lg-3 jbs-col-6">' . $card_html . '</div>';
+		}
 	}
 }
 ?>
 <div class="jbs-position-relative">
-    <h2 class="main-title"><?php esc_html_e( 'Dashboard', 'jobus' ); ?></h2>
+    <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
     <div class="jbs-row">
         <?php
         // Get dashboard base URL
@@ -96,10 +109,18 @@ function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link 
         $applications_link = trailingslashit( $dashboard_url ) . 'applications';
         $saved_candidate_link = trailingslashit( $dashboard_url ) . 'saved-candidate';
 
-        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/beg.svg', $total_jobs, 'Posted Job', true, $jobs_link );
-        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applied_job.svg', $total_applications, 'Application', true, $applications_link );
-        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/shortlist.svg', $saved_candidates_count, 'Saved Candidate', true, $saved_candidate_link );
-        jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/view.svg', $total_job_views, 'Job Views', null, $jobs_link );
+        if ( $show_posted_jobs ) {
+            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/beg.svg', $total_jobs, 'Posted Job', true, $jobs_link );
+        }
+        if ( $show_applications ) {
+            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/applied_job.svg', $total_applications, 'Application', true, $applications_link );
+        }
+        if ( $show_saved_candidates ) {
+            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/shortlist.svg', $saved_candidates_count, 'Saved Candidate', true, $saved_candidate_link );
+        }
+        if ( $show_job_views ) {
+            jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/view.svg', $total_job_views, 'Job Views', null, $jobs_link );
+        }
         ?>
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
@@ -108,13 +129,12 @@ function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link 
                 <div class="saved-jobs-header">
                     <h4 class="title"><?php esc_html_e( 'Saved Candidate', 'jobus' ); ?></h4>
                     <?php
-                    $limit = 4;
-                    if ( count( $saved_candidates ) > $limit ) {
+                    if ( count( $saved_candidates ) > $widget_items_count ) {
                         $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
                         $saved_candidate_url = trailingslashit( $dashboard_url ) . 'saved-candidate';
                         ?>
                         <a href="<?php echo esc_url( $saved_candidate_url ); ?>" class="view-more-btn">
-                            <?php esc_html_e( 'View All', 'jobus' ); ?>
+                            <?php echo esc_html( $view_all_label ); ?>
                             <i class="bi bi-arrow-right"></i>
                         </a>
                         <?php
@@ -125,7 +145,7 @@ function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link 
                 if ( jobus_is_premium() ) {
                     jobus_get_template_part( 'dashboard/employer/saved-candidate', [
                         'is_dashboard' => true,
-                        'limit'        => $limit
+                        'limit'        => $widget_items_count
                     ] );
                 } else {
                     ?>
@@ -146,8 +166,8 @@ function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link 
                 <h4 class="dash-title-two"> <?php esc_html_e( 'Posted Job', 'jobus' ); ?> </h4>
                 <div class="wrapper">
                     <?php
-                    // For recent-job-tab, get the latest 4 jobs from $jobs
-                    $latest_jobs = array_slice($jobs, 0, 4);
+                    // For recent-job-tab, get the latest jobs from $jobs based on widget count
+                    $latest_jobs = array_slice($jobs, 0, $widget_items_count);
 
                     foreach ( $latest_jobs as $job ) {
                         $job_cat      = get_the_terms( $job, 'jobus_job_cat' );

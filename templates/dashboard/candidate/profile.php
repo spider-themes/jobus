@@ -29,6 +29,14 @@ $candidate_specifications = $specs['specifications'];
 $candidate_dynamic_fields = $specs['dynamic_fields'];
 $description = $description_data['description'];
 $avatar_url = $description_data['avatar_url'];
+
+// Get profile settings
+$show_profile_photo = jobus_opt( 'candidate_profile_photo_upload', true );
+$show_social_links = jobus_opt( 'candidate_social_links', true );
+$show_rich_editor = jobus_opt( 'candidate_description_editor', true );
+$show_specifications = jobus_opt( 'candidate_profile_specifications', true );
+$show_location = jobus_opt( 'candidate_profile_location', true );
+$save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
 ?>
 <div class="jbs-position-relative">
     <h2 class="main-title"><?php esc_html_e('My Profile', 'jobus'); ?></h2>
@@ -39,6 +47,7 @@ $avatar_url = $description_data['avatar_url'];
         <input type="hidden" name="candidate_profile_form_submit" value="1" />
 
         <div class="jbs-bg-white card-box border-20" id="candidate-profile-description">
+            <?php if ( $show_profile_photo ) : ?>
             <div class="user-avatar-setting jbs-d-flex jbs-align-items-center jbs-mb-30">
                 <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $user->display_name ); ?>" class="lazy-img user-img" id="candidate_avatar">
                 <div class="upload-btn jbs-position-relative tran3s jbs-ms-4 jbs-me-3 jbs-border-0 upload_btn-width" id="candidate_profile_picture_upload">
@@ -50,6 +59,7 @@ $avatar_url = $description_data['avatar_url'];
                 </button>
                 <input type="hidden" name="profile_picture_action" id="profile_picture_action" value="">
             </div>
+            <?php endif; ?>
 
             <div class="dash-input-wrapper jbs-mb-30">
                 <label for="candidate_name"><?php esc_html_e( 'Full Name*', 'jobus' ); ?></label>
@@ -60,23 +70,27 @@ $avatar_url = $description_data['avatar_url'];
                 <label for="candidate_description"><?php esc_html_e( 'Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
-                    wp_editor(
-                        $description,
-                        'candidate_description',
-                        array(
-                            'textarea_name' => 'candidate_description',
-                            'textarea_rows' => 8,
-                            'media_buttons' => true,
-                            'teeny'         => false, // Use full toolbar
-                            'quicktags'     => true,
-                            'editor_class'  => 'size-lg',
-                            'tinymce'       => array(
-                                'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
-                                'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
-                                'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
-                            ),
-                        )
-                    );
+                    if ( $show_rich_editor ) {
+                        wp_editor(
+                            $description,
+                            'candidate_description',
+                            array(
+                                'textarea_name' => 'candidate_description',
+                                'textarea_rows' => 8,
+                                'media_buttons' => true,
+                                'teeny'         => false, // Use full toolbar
+                                'quicktags'     => true,
+                                'editor_class'  => 'size-lg',
+                                'tinymce'       => array(
+                                    'block_formats' => 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6',
+                                    'toolbar1'      => 'formatselect bold italic underline bullist numlist blockquote alignleft aligncenter alignright link unlink undo redo wp_adv',
+                                    'toolbar2'      => 'strikethrough hr forecolor pastetext removeformat charmap outdent indent',
+                                ),
+                            )
+                        );
+                    } else {
+                        echo '<textarea name="candidate_description" id="candidate_description" rows="8" class="jbs-form-control size-lg">' . esc_textarea( $description ) . '</textarea>';
+                    }
                     ?>
                 </div>
                 <div class="alert-text">
@@ -85,6 +99,7 @@ $avatar_url = $description_data['avatar_url'];
             </div>
         </div>
 
+        <?php if ( $show_social_links ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-profile-social-icons">
             <h4 class="dash-title-three">
                 <?php esc_html_e( 'Social Media', 'jobus' ); ?>
@@ -189,7 +204,9 @@ $avatar_url = $description_data['avatar_url'];
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Social Item', 'jobus' ); ?>
             </button>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_specifications ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-profile-specifications">
             <h4 class="dash-title-three"><?php esc_html_e('Specifications', 'jobus'); ?></h4>
             <div class="jbs-row">
@@ -255,7 +272,9 @@ $avatar_url = $description_data['avatar_url'];
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ( $show_location ) : ?>
         <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-profile-map">
             <h4 class="dash-title-three"><?php esc_html_e('Address & Location', 'jobus'); ?></h4>
             <div class="jbs-row">
@@ -292,9 +311,10 @@ $avatar_url = $description_data['avatar_url'];
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php esc_html_e( 'Save Changes', 'jobus' ); ?></button>
+            <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php echo esc_html( $save_changes_label ); ?></button>
         </div>
     </form>
 

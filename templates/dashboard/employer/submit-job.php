@@ -39,6 +39,11 @@ $company_website_target = $company_website['target'];
 $is_company_website     = $company_website['is_company_website'] ?? 'default';
 $dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 $my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . 'jobs' : '#';
+
+// Get dynamic labels
+$post_job_label = jobus_opt( 'label_post_job', esc_html__( 'Post Job', 'jobus' ) );
+$update_job_label = jobus_opt( 'label_update_job', esc_html__( 'Update Job', 'jobus' ) );
+$submit_button_label = $editing_job ? $update_job_label : $post_job_label;
 ?>
 
 <div class="jbs-position-relative">
@@ -248,7 +253,7 @@ $my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . '
         </div>
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
             <button type="submit" class="dash-btn-two tran3s jbs-me-3">
-                <?php esc_html_e( 'Post Job', 'jobus' ); ?>
+                <?php echo esc_html( $submit_button_label ); ?>
             </button>
         </div>
     </form>
