@@ -21,6 +21,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post_type_current = jobus_get_sanitized_query_param( 'post_type' );
+
+// Check if there are any filter widgets or taxonomy widgets configured
+$has_filter_widgets = false;
+$filter_widgets = jobus_opt( $widgets_option_key );
+if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter_widgets ) ) {
+	$has_filter_widgets = true;
+}
+
+$taxonomy_widgets = jobus_opt( $taxonomy_widgets_key );
+if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+	foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
+		if ( $is_enabled && isset( $taxonomy_mapping[ $option_key ] ) ) {
+			$has_filter_widgets = true;
+			break;
+		}
+	}
+}
+
+// Only show filter button if there are filter items
+if ( ! $has_filter_widgets ) {
+	return; // Exit early if no filters are configured
+}
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 

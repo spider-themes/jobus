@@ -302,6 +302,19 @@ wp_enqueue_script( 'lightbox' );
                                 </a>
                             <?php endif;
                         }
+                        
+                        // Show Edit Profile button if current user is the post author
+                        $current_user_id = get_current_user_id();
+                        if ( $current_user_id > 0 && $current_user_id === (int) $post_author_id ) {
+                            $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+                            $edit_profile_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'profile/' : '#';
+                            ?>
+                            <a href="<?php echo esc_url( $edit_profile_url ); ?>"
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15">
+                                <?php esc_html_e( 'Edit Profile', 'jobus' ); ?>
+                            </a>
+                            <?php
+                        }
                         ?>
                     </div>
                     <?php

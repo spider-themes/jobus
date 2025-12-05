@@ -5,6 +5,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $meta        = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 $post_type   = jobus_get_sanitized_query_param( 'post_type' );
+
+// Check if there are any filter widgets (meta or taxonomy) configured
+$has_filter_widgets = false;
+
+// Check meta widgets
+$filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter_widgets ) ) {
+	$has_filter_widgets = true;
+}
+
+// Check taxonomy widgets if meta widgets not found
+if ( ! $has_filter_widgets ) {
+	$taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
+	if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+		foreach ( $taxonomy_widgets as $is_enabled ) {
+			if ( $is_enabled ) {
+				$has_filter_widgets = true;
+				break;
+			}
+		}
+	}
+}
+
+// Only render filter button if filters exist
+if ( ! $has_filter_widgets ) {
+	// Return empty div structure to maintain layout
+	?>
+	<div class="jbs-col-xl-3 jbs-col-lg-4"></div>
+	<?php
+	return;
+}
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
