@@ -167,7 +167,7 @@ class Ajax_Actions {
 				if ( is_wp_error( $uploaded ) ) {
 					wp_send_json_error( array( 'message' => esc_html__( 'CV upload failed.', 'jobus' ) ) );
 				} else {
-					update_post_meta( $application_id, 'candidate_cv', $uploaded );
+					update_post_meta( $application_id, 'candidate_resume', $uploaded );
 				}
 			}
 			wp_send_json_success( array( 'message' => esc_html__( 'Application submitted successfully.', 'jobus' ) ) );

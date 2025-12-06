@@ -207,7 +207,19 @@ class User {
 	public function create_candidate_post_for_user( int $user_id ): void {
 
 		$user = get_userdata( $user_id );
-		if ( ! $user || ! array_intersect( [ 'jobus_candidate', 'administrator' ], (array) $user->roles ) ) {
+		// Only create candidate post for users with jobus_candidate role (not administrators)
+		if ( ! $user || ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
+			// If user is not a candidate, delete any existing candidate post
+			$existing_candidate = get_posts( [
+				'post_type'   => 'jobus_candidate',
+				'author'      => $user_id,
+				'post_status' => 'any',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			] );
+			if ( ! empty( $existing_candidate ) ) {
+				wp_delete_post( $existing_candidate[0], true );
+			}
 			return;
 		}
 
@@ -220,6 +232,18 @@ class User {
 		] );
 
 		if ( empty( $existing ) ) {
+			// Delete any existing company post (in case role changed from employer to candidate)
+			$existing_company = get_posts( [
+				'post_type'   => 'jobus_company',
+				'author'      => $user_id,
+				'post_status' => 'any',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			] );
+			if ( ! empty( $existing_company ) ) {
+				wp_delete_post( $existing_company[0], true );
+			}
+
 			// Create a new candidate post
 			$post_id = wp_insert_post( [
 				'post_type'   => 'jobus_candidate',
@@ -246,7 +270,19 @@ class User {
 	public function create_company_post_for_user( int $user_id ) {
 
 		$user = get_userdata( $user_id );
-		if ( ! $user || ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+		// Only create company post for users with jobus_employer role (not administrators)
+		if ( ! $user || ! in_array( 'jobus_employer', (array) $user->roles, true ) ) {
+			// If user is not an employer, delete any existing company post
+			$existing_company = get_posts( [
+				'post_type'   => 'jobus_company',
+				'author'      => $user_id,
+				'post_status' => 'any',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			] );
+			if ( ! empty( $existing_company ) ) {
+				wp_delete_post( $existing_company[0], true );
+			}
 			return;
 		}
 
@@ -259,6 +295,18 @@ class User {
 		] );
 
 		if ( empty( $existing ) ) {
+			// Delete any existing candidate post (in case role changed from candidate to employer)
+			$existing_candidate = get_posts( [
+				'post_type'   => 'jobus_candidate',
+				'author'      => $user_id,
+				'post_status' => 'any',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+			] );
+			if ( ! empty( $existing_candidate ) ) {
+				wp_delete_post( $existing_candidate[0], true );
+			}
+
 			// Create a new company post
 			$post_id = wp_insert_post( [
 				'post_type'   => 'jobus_company',
