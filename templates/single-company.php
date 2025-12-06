@@ -153,6 +153,23 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
             <div class="jbs-col-xxl-9 jbs-col-xl-8 jbs-order-xl-first">
                 <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
 
+                    <div class="company-head jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2 jbs-mb-30">
+                        <h1 class="post-title"><?php the_title(); ?></h1>
+                        <?php
+                        // Check if current user is the company author (employer)
+                        if ( is_user_logged_in() && get_current_user_id() === (int) $user_id ) {
+                            $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+                            $edit_company_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'profile' : '#';
+                            ?>
+                            <a href="<?php echo esc_url( $edit_company_url ); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s" style="display: inline-flex !important; align-items: center; gap: 8px;">
+                                <i class="bi bi-pencil-square"></i>
+                                <?php esc_html_e( 'Edit Profile', 'jobus' ); ?>
+                            </a>
+                            <?php
+                        }
+                        ?>
+                    </div>
+
                     <?php
                     the_content();
 

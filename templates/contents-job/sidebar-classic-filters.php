@@ -5,25 +5,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $post_type = jobus_get_sanitized_query_param( 'post_type' );
 
-// Check if there are any filter widgets (meta or taxonomy) configured
+// Get filter widgets configuration
 $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-$has_filter_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+$taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
 
-// Check taxonomy widgets if meta widgets not found
-if ( ! $has_filter_widgets ) {
-	$taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
-	if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
-		foreach ( $taxonomy_widgets as $is_enabled ) {
-			if ( $is_enabled ) {
-				$has_filter_widgets = true;
-				break;
-			}
+// Check if any filter widgets are configured
+$has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+$has_taxonomy_widgets = false;
+
+if ( ! $has_meta_widgets && ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+	foreach ( $taxonomy_widgets as $is_enabled ) {
+		if ( $is_enabled ) {
+			$has_taxonomy_widgets = true;
+			break;
 		}
 	}
 }
 
 // Only render filter button if filters exist
-if ( ! $has_filter_widgets ) {
+if ( ! $has_meta_widgets && ! $has_taxonomy_widgets ) {
 	// Show admin notice if in admin area
 	if ( current_user_can( 'manage_options' ) ) {
 		$settings_url = admin_url( 'edit.php?post_type=jobus_job&page=jobus-settings#tab=job-options/job-archive-page' );
@@ -35,6 +35,7 @@ if ( ! $has_filter_widgets ) {
 				</p>
 				<p style="margin: 0; font-size: 13px;">
 					<?php 
+					/* translators: %s: settings page link */
 					printf(
 						esc_html__( 'Please configure filter widgets from %s to display filters on the job archive page.', 'jobus' ),
 						'<a href="' . esc_url( $settings_url ) . '" style="color: #663c00; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Archive Page</a>'
@@ -52,6 +53,11 @@ if ( ! $has_filter_widgets ) {
 	}
 	return;
 }
+
+// Setup helper variables
+$meta_opt_parent_key = 'jobus_meta_options';
+$specifications = jobus_get_specs();
+$specs_options = jobus_get_specs_options();
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
@@ -72,9 +78,8 @@ if ( ! $has_filter_widgets ) {
                 <input type="hidden" name="post_type" value="jobus_job"/>
 
                 <?php
-                // Widget for candidate meta data list
-                $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-                if ( ! empty( $filter_widgets ) && is_array( $filter_widgets ) ) {
+                // Render meta widgets
+                if ( $has_meta_widgets ) {
                     foreach ( $filter_widgets as $index => $widget ) {
                         $widget_name = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';
@@ -83,11 +88,8 @@ if ( ! $has_filter_widgets ) {
                         $is_active = ! empty( $widget_param );
                         $is_collapsed = ( $is_first && ! $is_active ) || ( ! $is_first && ! $is_active );
                         
-                        $specifications = jobus_get_specs();
                         $widget_title = $specifications[ $widget_name ] ?? '';
-                        
-                        $job_specifications = jobus_get_specs_options();
-                        $specifications_data = $job_specifications[ $widget_name ] ?? '';
+                        $specifications_data = $specs_options[ $widget_name ] ?? '';
                         ?>
                         <div class="filter-block bottom-line jbs-pb-25">
                             <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_collapsed ? ' jbs-collapsed' : ''; ?>" 
@@ -101,11 +103,7 @@ if ( ! $has_filter_widgets ) {
                             <div class="<?php echo $is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>"
                                  id="collapse-<?php echo esc_attr( $widget_name ); ?>">
                                 <div class="main-body">
-                                    <?php
-                                    $meta_opt_parent_key = 'jobus_meta_options';
-                                    $post_type = 'jobus_job';
-                                    include __DIR__ . "/../filter-widgets/{$widget_layout}.php";
-                                    ?>
+                                    <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
                                 </div>
                             </div>
                         </div>
@@ -113,17 +111,14 @@ if ( ! $has_filter_widgets ) {
                     }
                 }
 
-                /**
-                 * Taxonomy Filter Widgets
-                 */
-                $taxonomy_mapping = [
-                    'is_job_widget_cat'      => [ 'jobus_job_cat', 'categories.php' ],
-                    'is_job_widget_location' => [ 'jobus_job_location', 'locations.php' ],
-                    'is_job_widget_tag'      => [ 'jobus_job_tag', 'tags.php' ],
-                ];
-                
-                $taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
-                if ( ! empty( $taxonomy_widgets ) ) {
+                // Render taxonomy widgets
+                if ( $has_taxonomy_widgets ) {
+                    $taxonomy_mapping = [
+                        'is_job_widget_cat'      => [ 'jobus_job_cat', 'categories.php' ],
+                        'is_job_widget_location' => [ 'jobus_job_location', 'locations.php' ],
+                        'is_job_widget_tag'      => [ 'jobus_job_tag', 'tags.php' ],
+                    ];
+
                     foreach ( $taxonomy_mapping as $widget_key => $tax_config ) {
                         if ( isset( $taxonomy_widgets[ $widget_key ] ) && $taxonomy_widgets[ $widget_key ] ) {
                             list( $taxonomy, $filter_file ) = $tax_config;

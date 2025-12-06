@@ -223,7 +223,25 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                             }
                             echo '</select></div></div>';
                         }
+                    } else {
+                        ?>
+                        <div class="jbs-col-12">
+                            <div class="jbs-alert jbs-alert-info jbs-mb-0">
+                                <i class="bi bi-info-circle"></i>
+                                <?php esc_html_e( 'No specifications found. Please configure company specifications in the admin settings.', 'jobus' ); ?>
+                            </div>
+                        </div>
+                        <?php
                     }
+                } else {
+                    ?>
+                    <div class="jbs-col-12">
+                        <div class="jbs-alert jbs-alert-info jbs-mb-0">
+                            <i class="bi bi-info-circle"></i>
+                            <?php esc_html_e( 'No specifications found. Please configure company specifications in the admin settings.', 'jobus' ); ?>
+                        </div>
+                    </div>
+                    <?php
                 }
                 ?>
             </div>

@@ -16,14 +16,31 @@ if ( $company_query->have_posts() ) {
 ?>
 
 <div class="job-head">
-    <div class="post-date">
-		<?php echo get_the_date( 'd M, Y' ) . ', '; ?>
-		<?php esc_html_e( 'by', 'jobus' ) ?>
-        <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
-			<?php echo esc_html( $company_name ); ?>
-        </a>
+    <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2">
+        <div>
+            <div class="post-date">
+                <?php echo get_the_date( 'd M, Y' ) . ', '; ?>
+                <?php esc_html_e( 'by', 'jobus' ) ?>
+                <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
+                    <?php echo esc_html( $company_name ); ?>
+                </a>
+            </div>
+            <?php the_title( '<h1 class="post-title">', '</h1>' ) ?>
+        </div>
+        <?php
+        // Check if current user is the job author (employer)
+        if ( is_user_logged_in() && get_current_user_id() === (int) $employer_id ) {
+            $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+            $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job?job_id=' . get_the_ID() : '#';
+            ?>
+            <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s" style="padding: 8px 16px; font-size: 0.875rem; white-space: nowrap;">
+                <i class="bi bi-pencil-square"></i>
+                <?php esc_html_e( 'Edit Job', 'jobus' ); ?>
+            </a>
+            <?php
+        }
+        ?>
     </div>
-	<?php the_title( '<h1 class="post-title">', '</h1>' ) ?>
     <ul class="share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">
         <li>
             <a class="share-item" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ); ?>" target="_blank">

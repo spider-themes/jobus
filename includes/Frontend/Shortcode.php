@@ -56,7 +56,7 @@ class Shortcode {
 		
 		// Output login modal if user is not logged in
 		if ( ! is_user_logged_in() ) {
-			echo Template_Loader::get_template_part( 'login-form/login-popup' );
+			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
 		}
 		
 		$content .= ob_get_clean();
@@ -85,7 +85,7 @@ class Shortcode {
 		
 		// Output login modal if user is not logged in
 		if ( ! is_user_logged_in() ) {
-			echo Template_Loader::get_template_part( 'login-form/login-popup' );
+			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
 		}
 		
 		$content .= ob_get_clean();
@@ -114,7 +114,7 @@ class Shortcode {
 		
 		// Output login modal if user is not logged in
 		if ( ! is_user_logged_in() ) {
-			echo Template_Loader::get_template_part( 'login-form/login-popup' );
+			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
 		}
 		
 		$content .= ob_get_clean();

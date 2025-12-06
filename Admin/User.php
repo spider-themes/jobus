@@ -117,8 +117,6 @@ class User {
 			$final_redirect = ! empty( $redirect_url ) ? $redirect_url : home_url();
 			wp_redirect( esc_url( $final_redirect ) );
 			exit;
-		} else {
-			error_log( '[Jobus Register] Nonce verification failed' );
 		}
 	}
 
@@ -161,8 +159,6 @@ class User {
 			$final_redirect = ! empty( $redirect_url ) ? $redirect_url : home_url();
 			wp_redirect( esc_url( $final_redirect ) );
 			exit;
-		} else {
-			error_log( '[Jobus Register] Nonce verification failed' );
 		}
 	}
 

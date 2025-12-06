@@ -69,7 +69,7 @@ $applications = new \WP_Query( $args );
         ?>
         <div class="jbs-bg-white card-box border-20">
             <div class="jbs-table-responsive">
-                <table class="jbs-table job-alert-table">
+                <table class="jbs-table job-alert-table applied-jobs">
                     <thead>
                         <tr>
                             <th scope="col" class="company-name"><?php esc_html_e( 'Company', 'jobus' ); ?></th>

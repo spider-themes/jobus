@@ -172,6 +172,7 @@ if ( class_exists( 'CSF' ) ) {
 					             '<p style="margin: 0;">' . esc_html__( 'No Job Specifications configured yet.', 'jobus' ) . '</p>' .
 					             '<p style="margin: 8px 0 0 0;">' .
 					             sprintf(
+						             /* translators: %s: settings page link */
 						             esc_html__( 'Please add the specifications from %s.', 'jobus' ),
 						             '<a href="' . esc_url( $settings_url ) . '" target="_blank" style="color: #0073aa; text-decoration: none; font-weight: 500;">Settings > Job Options > Specifications</a>'
 					             ) .

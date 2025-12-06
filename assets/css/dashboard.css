@@ -1953,4 +1953,8 @@ body.page-template-dashboard .site-header {
   border-top: 1px solid #E3F0EB;
 }
 
+.dashboard-body table.applied-jobs th:last-child {
+  text-align: right;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

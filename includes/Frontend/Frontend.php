@@ -56,6 +56,6 @@ class Frontend {
 			return;
 		}
 		// Output the login popup modal template
-		echo Template_Loader::get_template_part( 'login-form/login-popup' );
+		echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
 	}
 }

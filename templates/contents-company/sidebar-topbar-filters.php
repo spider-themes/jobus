@@ -13,27 +13,31 @@ if (!defined('ABSPATH')) {
 
 // Check if there are any filter widgets (meta or taxonomy) configured
 $filter_widgets = jobus_opt( 'company_sidebar_widgets' );
-$has_filter_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+$taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
 
-// Check taxonomy widgets if meta widgets not found
-if ( ! $has_filter_widgets ) {
-    $taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
-    if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
-        foreach ( $taxonomy_widgets as $is_enabled ) {
-            if ( $is_enabled ) {
-                $has_filter_widgets = true;
-                break;
-            }
+// Check if any filter widgets are configured
+$has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+$has_taxonomy_widgets = false;
+
+if ( ! $has_meta_widgets && ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+    foreach ( $taxonomy_widgets as $is_enabled ) {
+        if ( $is_enabled ) {
+            $has_taxonomy_widgets = true;
+            break;
         }
     }
 }
 
-// Only render filter area if filters exist
-if ( ! $has_filter_widgets ) {
+// Return early if no filters configured
+if ( ! $has_meta_widgets && ! $has_taxonomy_widgets ) {
     return;
 }
 
-$meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
+// Setup helper variables
+$post_type = 'jobus_company';
+$meta_opt_parent_key = 'jobus_meta_company_options';
+$specifications = jobus_get_specs( 'company_specifications' );
+$specs_options = jobus_get_specs_options( 'company_specifications' );
 ?>
 <div class="jbs-col-12">
     <div class="filter-area-tab">
@@ -51,58 +55,37 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_company_options', true);
 
                     <div class="jbs-row">
                         <?php
-                        $filter_widgets = jobus_opt('company_sidebar_widgets');
-
-                        if ( isset($filter_widgets) && is_array($filter_widgets) ) {
-                            foreach ( $filter_widgets as $index => $widget ) {
-                                $tab_count = $index + 1;
-                                $widget_name = $widget[ 'widget_name' ] ?? '';
-                                $widget_layout = $widget[ 'widget_layout' ] ?? '';
-                                $range_suffix = $widget[ 'range_suffix' ] ?? '';
-
-                                $specifications = jobus_get_specs('company_specifications');
+                        // Render meta widgets
+                        if ( $has_meta_widgets ) {
+                            foreach ( $filter_widgets as $widget ) {
+                                $widget_name = $widget['widget_name'] ?? '';
+                                $widget_layout = $widget['widget_layout'] ?? '';
                                 $widget_title = $specifications[ $widget_name ] ?? '';
-
-                                $company_specifications = jobus_get_specs_options('company_specifications');
-                                $company_specifications = $company_specifications[ $widget_name ] ?? '';
+                                $specifications_data = $specs_options[ $widget_name ] ?? '';
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
                                     <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html($widget_title) ?></div>
-                                        <?php
-                                        // Include the appropriate widget layout file based on the widget type
-                                        $specifications_data = $company_specifications;
-                                        $post_type = 'jobus_company';
-                                        $meta_opt_parent_key = 'jobus_meta_company_options';
-                                        include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
-                                        ?>
+                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html( $widget_title ); ?></div>
+                                        <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
                                     </div>
                                 </div>
                                 <?php
                             }
                         }
 
-                        /**
-                         * Taxonomy Filter Widgets
-                         */
-                        $taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
-                        // Check if the sortable field value is not empty
-                        if ( ! empty( $taxonomy_widgets ) ) {
-                            foreach ( $taxonomy_widgets as $key => $value ) {
+                        // Render taxonomy widgets
+                        if ( $has_taxonomy_widgets ) {
+                            $taxonomy_mapping = [
+                                'is_company_widget_cat'      => [ 'jobus_company_cat', 'categories.php' ],
+                                'is_company_widget_location' => [ 'jobus_company_location', 'locations.php' ],
+                            ];
 
-                                if ( $key === 'is_company_widget_cat' && $value ) {
-                                    $taxonomy = 'jobus_company_cat';
-                                    include ( __DIR__ . '/../loop/topbar-tax-wrapper-start.php' );
-                                    include ( __DIR__ . '/../filter-widgets/categories.php' );
-                                    include ( __DIR__ . '/../loop/topbar-tax-wrapper-end.php' );
-                                }
-
-                                // Widget Locations
-                                if ( $key === 'is_company_widget_location' && $value ) {
-                                    $taxonomy = 'jobus_company_location';
-                                    include ( __DIR__ . '/../loop/topbar-tax-wrapper-start.php' );
-                                    include ( __DIR__ . '/../filter-widgets/locations.php' );
-                                    include ( __DIR__ . '/../loop/topbar-tax-wrapper-end.php' );
+                            foreach ( $taxonomy_mapping as $widget_key => $config ) {
+                                if ( isset( $taxonomy_widgets[ $widget_key ] ) && $taxonomy_widgets[ $widget_key ] ) {
+                                    list( $taxonomy, $filter_file ) = $config;
+                                    include __DIR__ . '/../loop/topbar-tax-wrapper-start.php';
+                                    include __DIR__ . "/../filter-widgets/{$filter_file}";
+                                    include __DIR__ . '/../loop/topbar-tax-wrapper-end.php';
                                 }
                             }
                         }

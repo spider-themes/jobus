@@ -128,21 +128,16 @@ class Blocks {
 		// Check if the post content contains the register form block
 		$post_content = get_post_field( 'post_content', $post_id );
 		if ( ! str_contains( $post_content, '<!-- wp:jobus/register-form' ) ) {
-			return;
-		}
-
-		error_log( '[Jobus Register] Found register form block on page ID: ' . $post_id );
+		return;
+	}
 
 		// Parse the block content to find the redirect URL
 		$blocks = parse_blocks( $post_content );
 		$redirect_url = $this->find_register_form_redirect_url( $blocks );
 
 		if ( ! empty( $redirect_url ) ) {
-			error_log( '[Jobus Register] User already logged in. Redirecting to: ' . $redirect_url );
 			wp_safe_redirect( $redirect_url );
 			exit;
-		} else {
-			error_log( '[Jobus Register] No redirect URL found in block attributes' );
 		}
 	}
 

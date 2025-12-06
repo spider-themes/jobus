@@ -44,6 +44,7 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Retrieve the repeater field configurations from settings options
 	$company_specifications = jobus_opt( 'company_specifications' );
+	$company_fields         = [];
 
 	if ( ! empty( $company_specifications ) ) {
 		foreach ( $company_specifications as $field ) {

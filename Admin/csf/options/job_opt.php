@@ -184,6 +184,7 @@ CSF::createSection( $settings_prefix, array(
 					             '</p>' .
 					             '<p style="margin: 0; font-size: 13px;">' .
 					             sprintf(
+						             /* translators: %s: settings page link */
 						             esc_html__( 'Please add Job Specifications from %s before creating filter widgets.', 'jobus' ),
 						             '<a href="' . esc_url( $settings_url ) . '" style="color: #856404; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Specifications</a>'
 					             ) .
