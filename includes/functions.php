@@ -455,7 +455,7 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
      *
      * @return void
      */
-    function jobus_pagination( $query, string $prev = '', string $next = '' ): void {
+    function jobus_pagination( $query ): void {
 
         echo '<ul class="jbs-pagination">';
 
@@ -465,8 +465,8 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
                 'format'    => '?paged=%#%',
                 'current'   => max( 1, get_query_var( 'paged' ) ),
                 'total'     => $query->max_num_pages,
-                'prev_text' => $prev,
-                'next_text' => $next,
+                'prev_text' => '<i class="bi bi-chevron-left"></i>',
+                'next_text' => '<i class="bi bi-chevron-right"></i>',
         ) );
 
         // Output pagination links with escaping

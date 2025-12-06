@@ -3,6 +3,27 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+// Check if there are any filter widgets (meta or taxonomy) configured
+$filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+$has_filter_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+
+// Check taxonomy widgets if meta widgets not found
+if ( ! $has_filter_widgets ) {
+    $taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
+    if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+        foreach ( $taxonomy_widgets as $is_enabled ) {
+            if ( $is_enabled ) {
+                $has_filter_widgets = true;
+                break;
+            }
+        }
+    }
+}
+
+// Only render filter area if filters exist
+if ( ! $has_filter_widgets ) {
+    return;
+}
 
 $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
 $jobus_nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field( wp_unslash($_GET['jobus_nonce']) ) : '';

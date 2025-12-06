@@ -3,17 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$meta        = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
-$post_type   = jobus_get_sanitized_query_param( 'post_type' );
+$post_type = jobus_get_sanitized_query_param( 'post_type' );
 
 // Check if there are any filter widgets (meta or taxonomy) configured
-$has_filter_widgets = false;
-
-// Check meta widgets
 $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter_widgets ) ) {
-	$has_filter_widgets = true;
-}
+$has_filter_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
 
 // Check taxonomy widgets if meta widgets not found
 if ( ! $has_filter_widgets ) {
@@ -30,16 +24,39 @@ if ( ! $has_filter_widgets ) {
 
 // Only render filter button if filters exist
 if ( ! $has_filter_widgets ) {
-	// Return empty div structure to maintain layout
-	?>
-	<div class="jbs-col-xl-3 jbs-col-lg-4"></div>
-	<?php
+	// Show admin notice if in admin area
+	if ( current_user_can( 'manage_options' ) ) {
+		$settings_url = admin_url( 'edit.php?post_type=jobus_job&page=jobus-settings#tab=job-options/job-archive-page' );
+		?>
+		<div class="jbs-col-xl-3 jbs-col-lg-4">
+			<div style="padding: 15px; background-color: #fff8e5; border: 1px solid #ffe58f; border-radius: 4px; color: #663c00; margin-bottom: 20px;">
+				<p style="margin: 0 0 8px 0; font-weight: 500;">
+					<?php esc_html_e( 'No Job Filter Widgets Configured', 'jobus' ); ?>
+				</p>
+				<p style="margin: 0; font-size: 13px;">
+					<?php 
+					printf(
+						esc_html__( 'Please configure filter widgets from %s to display filters on the job archive page.', 'jobus' ),
+						'<a href="' . esc_url( $settings_url ) . '" style="color: #663c00; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Archive Page</a>'
+					); 
+					?>
+				</p>
+			</div>
+		</div>
+		<?php
+	} else {
+		// Return empty div structure to maintain layout for non-admin users
+		?>
+		<div class="jbs-col-xl-3 jbs-col-lg-4"></div>
+		<?php
+	}
 	return;
 }
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
-    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none jbs-mb-40 jbs_filter-transparent" data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
+    <button type="button" class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none jbs-mb-40 jbs_filter-transparent" 
+        data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e( 'Filter', 'jobus' ); ?>
     </button>
@@ -57,54 +74,37 @@ if ( ! $has_filter_widgets ) {
                 <?php
                 // Widget for candidate meta data list
                 $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-                if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+                if ( ! empty( $filter_widgets ) && is_array( $filter_widgets ) ) {
                     foreach ( $filter_widgets as $index => $widget ) {
-
-                        $tab_count         = $index + 1;
-                        $is_collapsed      = $tab_count == 1 ? '' : ' jbs-collapsed';
-                        $is_collapsed_show = $tab_count == 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
-                        $area_expanded     = $tab_count == 1 ? 'true' : 'false';
-
-                        $widget_name   = $widget['widget_name'] ?? '';
+                        $widget_name = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';
-                        $range_suffix  = $widget['range_suffix'] ?? '';
-
+                        $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
+                        $is_first = 0 === $index;
+                        $is_active = ! empty( $widget_param );
+                        $is_collapsed = ( $is_first && ! $is_active ) || ( ! $is_first && ! $is_active );
+                        
                         $specifications = jobus_get_specs();
-                        $widget_title   = $specifications[ $widget_name ] ?? '';
-
+                        $widget_title = $specifications[ $widget_name ] ?? '';
+                        
                         $job_specifications = jobus_get_specs_options();
-                        $job_specifications = $job_specifications[ $widget_name ] ?? '';
-	                    $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
-
-                        if ( $post_type == 'jobus_job' ) {
-                            if ( ! empty ( $widget_param ) ) {
-                                $is_collapsed_show = 'jbs-collapse jbs-show';
-                                $area_expanded     = 'true';
-                                $is_collapsed      = '';
-                            } else {
-                                $is_collapsed_show = 'jbs-collapse';
-                                $area_expanded     = 'false';
-                                $is_collapsed      = ' jbs-collapsed';
-                            }
-                        }
+                        $specifications_data = $job_specifications[ $widget_name ] ?? '';
                         ?>
                         <div class="filter-block bottom-line jbs-pb-25">
-
-                            <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ) ?>" data-jbs-toggle="collapse"
-                               data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ) ?>" role="button"
-                               aria-expanded="<?php echo esc_attr( $area_expanded ) ?>">
+                            <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_collapsed ? ' jbs-collapsed' : ''; ?>" 
+                               data-jbs-toggle="collapse"
+                               data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>" 
+                               role="button"
+                               aria-expanded="<?php echo $is_active || $is_first ? 'true' : 'false'; ?>">
                                 <?php echo esc_html( $widget_title ); ?>
                             </a>
 
-                            <div class="<?php echo esc_attr( $is_collapsed_show ) ?>"
-                                 id="collapse-<?php echo esc_attr( $widget_name ) ?>">
+                            <div class="<?php echo $is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>"
+                                 id="collapse-<?php echo esc_attr( $widget_name ); ?>">
                                 <div class="main-body">
                                     <?php
-                                    // Include the appropriate widget layout file based on the widget type
-                                    $specifications_data = $job_specifications;
-                                    $post_type = 'jobus_job';
                                     $meta_opt_parent_key = 'jobus_meta_options';
-                                    include ( __DIR__ . "/../filter-widgets/$widget_layout.php" );
+                                    $post_type = 'jobus_job';
+                                    include __DIR__ . "/../filter-widgets/{$widget_layout}.php";
                                     ?>
                                 </div>
                             </div>
@@ -116,33 +116,20 @@ if ( ! $has_filter_widgets ) {
                 /**
                  * Taxonomy Filter Widgets
                  */
+                $taxonomy_mapping = [
+                    'is_job_widget_cat'      => [ 'jobus_job_cat', 'categories.php' ],
+                    'is_job_widget_location' => [ 'jobus_job_location', 'locations.php' ],
+                    'is_job_widget_tag'      => [ 'jobus_job_tag', 'tags.php' ],
+                ];
+                
                 $taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
-                // Check if the sortable field value is not empty
                 if ( ! empty( $taxonomy_widgets ) ) {
-                    foreach ( $taxonomy_widgets as $key => $value ) {
-
-                        // Widget Categories
-                        if ( $key === 'is_job_widget_cat' && $value ) {
-                            $taxonomy = 'jobus_job_cat';
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
-                            include ( __DIR__ . '/../filter-widgets/categories.php' );
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
-                        }
-
-                        // Widget Locations
-                        if ( $key === 'is_job_widget_location' && $value ) {
-                            $taxonomy = 'jobus_job_location';
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
-                            include ( __DIR__ . '/../filter-widgets/locations.php' );
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
-                        }
-
-                        // Widget Tag
-                        if ( $key === 'is_job_widget_tag' && $value ) {
-                            $taxonomy = 'jobus_job_tag';
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-start.php' );
-                            include ( __DIR__ . '/../filter-widgets/tags.php' );
-                            include ( __DIR__ . '/../loop/classic-tax-wrapper-end.php' );
+                    foreach ( $taxonomy_mapping as $widget_key => $tax_config ) {
+                        if ( isset( $taxonomy_widgets[ $widget_key ] ) && $taxonomy_widgets[ $widget_key ] ) {
+                            list( $taxonomy, $filter_file ) = $tax_config;
+                            include __DIR__ . '/../loop/classic-tax-wrapper-start.php';
+                            include __DIR__ . "/../filter-widgets/{$filter_file}";
+                            include __DIR__ . '/../loop/classic-tax-wrapper-end.php';
                         }
                     }
                 }

@@ -140,7 +140,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                     ?>
                     </tbody>
                 </table>
-        </div>
+            </div>
         <?php
         if ( ! $is_dashboard && $total_jobs > $per_page ) {
             $mock_query = new stdClass();
@@ -152,11 +152,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
             set_query_var( 'paged', $current_page );
 
             echo '<div class="pagination-wrap">';
-            jobus_pagination(
-                $mock_query,
-                '<i class="bi bi-chevron-left"></i>',
-                '<i class="bi bi-chevron-right"></i>'
-            );
+            jobus_pagination( $mock_query );
             echo '</div>';
 
             set_query_var( 'paged', $original_paged );

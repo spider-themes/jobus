@@ -1,70 +1,76 @@
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
 .pagination-wrap {
-    padding-top: 30px;
-    @media (width > 540px) {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  padding-top: 30px;
+  @media (width > 540px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .jbs-pagination {
+    position: relative;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    border: none;
+    gap: 5px;
+    @media (max-width: 540px) {
+      justify-content: center;
     }
 
-    .jbs-pagination {
-      position: relative;
-      display: flex;
-      padding: 0;
-      margin: 0;
-      border: none;
-      gap: 5px;
-      @media (max-width: 540px) {
-        justify-content: center;
+    a {
+      border: none !important;
+    }
+
+    .page-numbers {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+      border-radius: 50%;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--jbs-brand_color_1);
+      cursor: pointer;
+      background: transparent;
+      transition: all 0.3s ease;
+
+      &:focus-visible {
+        outline-style: none !important;
       }
 
-      a {
+      &:focus {
+        outline-style: none !important;
+      }
+
+      &:hover:not(.current) {
+        background: rgba(49, 121, 90, 0.1);
         border: none !important;
       }
 
-      .page-numbers {
-        display: inline-block;
-        width: 35px;
-        height: 35px;
-        text-align: center;
-        line-height: 35px;
-        border-radius: 50%;
-        font-size: 17px;
-        font-weight: 500;
-        color: var(--jbs-brand_color_1);
-        cursor: pointer;
-        background: transparent;
-        transition: all 0.3s ease;
-        
-        &:focus-visible{
-            outline-style: none !important;
-        }
-        &:focus {
-          outline-style: none !important;
-        }
-        &:hover:not(.current) {
-          background: rgba(49, 121, 90, 0.1);
-          border: none !important;
-        }
+      &.current {
+        background: var(--jbs-brand_color_1);
+        color: #fff;
+        border: none !important;
+      }
 
-        &.current {
-          background: var(--jbs-brand_color_1);
-          color: #fff;
-          border: none !important;
-        }
-
-        &.prev, &.next {
-          height: auto;
-          width: auto;
-          padding: 0 5px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+      &.prev, &.next {
+        height: auto;
+        width: auto;
+        padding: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
+}
 
 /**=== Candidate Classic and Popup Pagination ===**/
 .jbs-candidate-classic, .jobus-candidate-popup {
@@ -83,7 +89,8 @@
       list-style: none;
       border: 1px solid var(--jbs-brand_color_1);
       border-radius: 4px;
-       width: max-content;
+      width: max-content;
+
       .page-numbers {
         width: 35px;
         height: 35px;

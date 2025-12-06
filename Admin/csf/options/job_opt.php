@@ -171,12 +171,35 @@ CSF::createSection( $settings_prefix, array(
 			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
+		// Notice for missing Job Specifications
+		(function() {
+			$specifications = jobus_opt( 'job_specifications' );
+			if ( empty( $specifications ) || ! is_array( $specifications ) ) {
+				$settings_url = admin_url( 'admin.php?page=jobus-settings&tab=jobus_job&section=job_specifications#tab=job-options/job-specifications' );
+				return array(
+					'type'    => 'content',
+					'content' => '<div style="padding: 15px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; color: #856404; margin-bottom: 20px;">' .
+					             '<p style="margin: 0 0 8px 0; font-weight: 500;">' .
+					             esc_html__( 'No Job Specifications Configured', 'jobus' ) .
+					             '</p>' .
+					             '<p style="margin: 0; font-size: 13px;">' .
+					             sprintf(
+						             esc_html__( 'Please add Job Specifications from %s before creating filter widgets.', 'jobus' ),
+						             '<a href="' . esc_url( $settings_url ) . '" style="color: #856404; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Specifications</a>'
+					             ) .
+					             '</p>' .
+					             '</div>',
+				);
+			}
+			return null;
+		})(),
+
 		// Meta Widgets
 		array(
 			'id'           => 'job_sidebar_widgets',
 			'type'         => 'repeater',
-			'title'        => esc_html__( 'Meta Widgets', 'jobus' ),
-			'subtitle'     => esc_html__( 'Widgets based on the Job meta data. Choose the layout style for displaying widget options:', 'jobus' ),
+			'title'        => esc_html__( 'Specification Widgets', 'jobus' ),
+			'subtitle'     => esc_html__( 'Widgets based on the Job Specification data. Choose the Widget Layout for displaying the selected widgets in various styles:', 'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 			'fields'       => array(
 				array(

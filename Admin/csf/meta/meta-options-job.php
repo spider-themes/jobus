@@ -112,6 +112,8 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Retrieve the repeater field configurations from settings options
 	$specifications = jobus_opt( 'job_specifications' );
+	$fields = [];
+	
 	if ( is_array( $specifications ) && ! empty( $specifications ) ) {
 		foreach ( $specifications as $field ) {
 
@@ -149,7 +151,9 @@ if ( class_exists( 'CSF' ) ) {
 				];
 			}
 		}
+	}
 
+	if ( ! empty( $fields ) ) {
 		CSF::createSection( $meta_prefix, array(
 			'title'  => esc_html__( 'Specifications', 'jobus' ),
 			'fields' => $fields,

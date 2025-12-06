@@ -2751,6 +2751,9 @@ body.compensate-for-scrollbar {
     align-items: center;
   }
 }
+.pagination-wrap p {
+  margin: 0;
+}
 .pagination-wrap .jbs-pagination {
   position: relative;
   display: flex;
@@ -4803,6 +4806,7 @@ img {
 
 .jbs-job-classic.job-listing-three .pagination-wrap p {
   color: rgba(0, 0, 0, 0.7);
+  margin: 0;
 }
 
 .accordion-box.show {

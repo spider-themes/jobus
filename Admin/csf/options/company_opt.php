@@ -150,11 +150,34 @@ CSF::createSection( $settings_prefix, array(
 			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
+		// Notice for missing Company Specifications
+		(function() {
+			$specifications = jobus_opt( 'company_specifications' );
+			if ( empty( $specifications ) || ! is_array( $specifications ) ) {
+				$settings_url = admin_url( 'admin.php?page=jobus-settings&tab=jobus_job&section=job_specifications#tab=company-options/company-specifications' );
+				return array(
+					'type'    => 'content',
+					'content' => '<div style="padding: 15px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; color: #856404; margin-bottom: 20px;">' .
+					             '<p style="margin: 0 0 8px 0; font-weight: 500;">' .
+					             esc_html__( 'No Company Specifications Configured', 'jobus' ) .
+					             '</p>' .
+					             '<p style="margin: 0; font-size: 13px;">' .
+					             sprintf(
+						             esc_html__( 'Please add Company Specifications from %s before creating filter widgets.', 'jobus' ),
+						             '<a href="' . esc_url( $settings_url ) . '" style="color: #856404; text-decoration: underline; font-weight: 500;">Settings > Company Options > Company Specifications</a>'
+					             ) .
+					             '</p>' .
+					             '</div>',
+				);
+			}
+			return null;
+		})(),
+
 		// Meta Widgets
 		array(
 			'id'           => 'company_sidebar_widgets',
 			'type'         => 'repeater',
-			'title'        => esc_html__( 'Meta Widgets', 'jobus' ),
+			'title'        => esc_html__( 'Specification Widgets', 'jobus' ),
 			'subtitle'     => esc_html__( 'Widgets based on the Company meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 			'fields'       => array(

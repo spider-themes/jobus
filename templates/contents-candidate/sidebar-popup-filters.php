@@ -3,6 +3,27 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+// Check if there are any filter widgets (meta or taxonomy) configured
+$filter_widgets = jobus_opt( 'candidate_sidebar_widgets' );
+$has_filter_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
+
+// Check taxonomy widgets if meta widgets not found
+if ( ! $has_filter_widgets ) {
+    $taxonomy_widgets = jobus_opt( 'candidate_taxonomy_widgets' );
+    if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+        foreach ( $taxonomy_widgets as $is_enabled ) {
+            if ( $is_enabled ) {
+                $has_filter_widgets = true;
+                break;
+            }
+        }
+    }
+}
+
+// Only render filter area if filters exist
+if ( ! $has_filter_widgets ) {
+    return;
+}
 ?>
 
 <div class="jbs-modal jbs-popUpModal login_from jbs-fade" id="filterPopUp" tabindex="-1" aria-hidden="true">
