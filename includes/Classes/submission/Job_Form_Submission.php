@@ -128,6 +128,18 @@ class Job_Form_Submission {
 		if ( isset( $post_data['company_website'] ) ) {
 			$this->save_company_website( $job_id, $post_data );
 		}
+
+		// Save company logo (featured image)
+		if ( isset( $_POST['job_company_logo_id'] ) ) {
+			$logo_id = absint( $_POST['job_company_logo_id'] );
+			if ( $logo_id > 0 ) {
+				// Set as featured image
+				set_post_thumbnail( $job_id, $logo_id );
+			} else {
+				// Remove featured image if logo ID is empty
+				delete_post_thumbnail( $job_id );
+			}
+		}
 	}
 
 	/**

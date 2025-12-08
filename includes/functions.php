@@ -1187,3 +1187,23 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
         <?php
     }
 }
+/**
+ * Get default company logo URL
+ *
+ * Returns the custom default company logo from settings, or falls back to the default image.
+ *
+ * @return string URL of the default company logo
+ */
+if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
+	function jobus_get_default_company_logo() {
+		// Try to get custom logo from settings
+		$custom_logo = jobus_opt( 'default_company_logo' );
+		
+		if ( ! empty( $custom_logo ) && isset( $custom_logo['url'] ) ) {
+			return esc_url( $custom_logo['url'] );
+		}
+		
+		// Fallback to default logo
+		return plugins_url( 'jobus/assets/images/default-company.png' );
+	}
+}

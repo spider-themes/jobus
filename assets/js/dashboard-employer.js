@@ -23,6 +23,7 @@
         init: function () {
             this.Testimonials();
             this.CompanyWebsiteToggle();
+            this.JobLogoUpload();
         },
 
 
@@ -272,6 +273,74 @@
             } else {
                 $fields.hide();
             }
+        },
+
+        /**
+         * Handles job company logo upload using WordPress media uploader.
+         * Allows users to upload, preview, and remove company logos.
+         */
+        JobLogoUpload: function () {
+            let mediaUploader;
+
+            // Upload button click
+            $('#upload_logo_button').on('click', function (e) {
+                e.preventDefault();
+
+                // If the uploader object has already been created, reopen the dialog
+                if (mediaUploader) {
+                    mediaUploader.open();
+                    return;
+                }
+
+                // Extend the wp.media object
+                mediaUploader = wp.media({
+                    title: 'Choose Company Logo',
+                    button: {
+                        text: 'Use this logo'
+                    },
+                    multiple: false,
+                    library: {
+                        type: 'image'
+                    }
+                });
+
+                // When an image is selected, run a callback
+                mediaUploader.on('select', function () {
+                    const attachment = mediaUploader.state().get('selection').first().toJSON();
+                    
+                    // Set the hidden input value to the attachment ID
+                    $('#job_company_logo_id').val(attachment.id);
+                    
+                    // Display the preview image
+                    $('.logo-preview').attr('src', attachment.url).show();
+                    
+                    // Update button text
+                    $('#upload_logo_button').html('<i class="bi bi-upload"></i> Change Logo');
+                    
+                    // Show remove button
+                    $('#remove_logo_button').show();
+                });
+
+                // Open the uploader dialog
+                mediaUploader.open();
+            });
+
+            // Remove button click
+            $('#remove_logo_button').on('click', function (e) {
+                e.preventDefault();
+
+                // Clear the hidden input
+                $('#job_company_logo_id').val('');
+                
+                // Hide the preview image
+                $('.logo-preview').attr('src', '').hide();
+                
+                // Update button text
+                $('#upload_logo_button').html('<i class="bi bi-upload"></i> Upload Logo');
+                
+                // Hide remove button
+                $(this).hide();
+            });
         }
 
     };

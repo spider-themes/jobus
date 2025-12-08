@@ -890,7 +890,7 @@ button.jbs_filter_btn-padding {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
   @include transition(0.2s);
 
   &:hover {
@@ -912,7 +912,6 @@ button.jbs_filter_btn-padding {
     padding: 2px 12px;
     background: #E7F6EF !important;
     border-radius: 3px;
-    margin: 54px 0 16px;
     display: inline-block;
 
     &.part-time {
@@ -941,7 +940,7 @@ button.jbs_filter_btn-padding {
   .job-salary {
     font-size: 16px;
     color: #AAAAAA;
-    margin: 18px 0 65px;
+    // margin: 18px 0 65px;
     text-transform: capitalize;
   }
 
@@ -973,9 +972,9 @@ button.jbs_filter_btn-padding {
   }
 
   .save-btn {
-    position: absolute;
-    right: 35px;
-    top: 35px;
+    // position: absolute;
+    // right: 35px;
+    // top: 35px;
     width: 35px;
     height: 35px;
     line-height: 32px;
@@ -1610,7 +1609,26 @@ input[type="file"]::-webkit-file-upload-button {
     }
   }
 }
+.job-list-two{
+    .jbs-logo-area {
+        margin-bottom: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .logo{
+        margin-right: auto;
+    }
+    .jbs-job-title {
+        margin-bottom: 65px;
+        margin-top: 16px;
+        .title{
+            margin-bottom: 18px;
+        }
+    }
+}
 
+// Responsive
 @media (max-width: 769px) {
   .job_specifications_area .jod_list_title_area {
     padding: 0;

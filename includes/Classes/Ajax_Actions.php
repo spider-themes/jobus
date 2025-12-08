@@ -32,6 +32,9 @@ class Ajax_Actions {
 		// Save/Unsave Jobs for Candidates and Candidates for Employers
 		add_action( 'wp_ajax_jobus_saved_post', [ $this, 'saved_post' ] );
 		add_action( 'wp_ajax_nopriv_jobus_saved_post', [ $this, 'saved_post' ] );
+
+		// Delete Job
+		add_action( 'wp_ajax_jobus_delete_job', [ $this, 'delete_job' ] );
 	}
 
 
@@ -259,5 +262,46 @@ class Ajax_Actions {
 
 		update_user_meta( $user_id, $meta_key, array_values( $saved_items ) );
 		wp_send_json_success( [ 'status' => $action ] );
+	}
+
+	/**
+	 * Handle deleting a job post.
+	 */
+	public function delete_job() {
+		// Verify nonce
+		if ( ! check_ajax_referer( 'jobus_delete_job_nonce', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ] );
+		}
+
+		// Check if user is logged in
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in.', 'jobus' ) ] );
+		}
+
+		// Get job ID
+		$job_id = isset( $_POST['job_id'] ) ? absint( $_POST['job_id'] ) : 0;
+		if ( ! $job_id ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid job ID.', 'jobus' ) ] );
+		}
+
+		// Get the job post
+		$job = get_post( $job_id );
+		if ( ! $job || $job->post_type !== 'jobus_job' ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Job not found.', 'jobus' ) ] );
+		}
+
+		// Verify the current user is the author
+		$current_user_id = get_current_user_id();
+		if ( $job->post_author != $current_user_id ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to delete this job.', 'jobus' ) ] );
+		}
+
+		// Delete the job
+		$result = wp_delete_post( $job_id, true );
+		if ( ! $result ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Failed to delete job.', 'jobus' ) ] );
+		}
+
+		wp_send_json_success( [ 'message' => esc_html__( 'Job deleted successfully.', 'jobus' ) ] );
 	}
 }

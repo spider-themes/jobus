@@ -5563,7 +5563,7 @@ button.jbs_filter_btn-padding {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 100%;
   -webkit-transition: all 0.2s ease-in-out 0s;
   -moz-transition: all 0.2s ease-in-out 0s;
   -ms-transition: all 0.2s ease-in-out 0s;
@@ -5586,7 +5586,6 @@ button.jbs_filter_btn-padding {
   padding: 2px 12px;
   background: #E7F6EF !important;
   border-radius: 3px;
-  margin: 54px 0 16px;
   display: inline-block;
 }
 .job-list-two .job-duration.part-time {
@@ -5610,7 +5609,6 @@ button.jbs_filter_btn-padding {
 .job-list-two .job-salary {
   font-size: 16px;
   color: #AAAAAA;
-  margin: 18px 0 65px;
   text-transform: capitalize;
 }
 .job-list-two .job-location a {
@@ -5637,9 +5635,6 @@ button.jbs_filter_btn-padding {
   background: var(--jbs-brand_color_5);
 }
 .job-list-two .save-btn {
-  position: absolute;
-  right: 35px;
-  top: 35px;
   width: 35px;
   height: 35px;
   line-height: 32px;
@@ -6186,6 +6181,23 @@ input[type=file]::-webkit-file-upload-button {
 
 .elementor-widget-container .jbs-job-listing-widget .job-list-one {
   padding-left: 20px !important;
+}
+
+.job-list-two .jbs-logo-area {
+  margin-bottom: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.job-list-two .logo {
+  margin-right: auto;
+}
+.job-list-two .jbs-job-title {
+  margin-bottom: 65px;
+  margin-top: 16px;
+}
+.job-list-two .jbs-job-title .title {
+  margin-bottom: 18px;
 }
 
 @media (max-width: 769px) {
@@ -7356,7 +7368,7 @@ body.docy .jbs-table tbody tr {
   padding: 0px 10px !important;
 }
 
-.wp-theme-jobi .job-details {
+.wp-theme-jobi .job-details, .wp-theme-jobi .jbs-job-details, .wp-theme-jobi .candidates-profile {
   padding-top: 180px !important;
 }
 

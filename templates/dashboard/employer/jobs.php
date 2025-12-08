@@ -127,7 +127,9 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo esc_url( get_delete_post_link( $job_id ) ); ?>" class="jbs-dropdown-item" >
+                                            <a href="#" class="jbs-dropdown-item jobus-delete-job" 
+                                               data-job-id="<?php echo esc_attr( $job_id ); ?>"
+                                               data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_delete_job_nonce' ) ); ?>">
                                                 <?php esc_html_e( 'Delete', 'jobus' ); ?>
                                             </a>
                                         </li>
@@ -173,3 +175,118 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
     }
     ?>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div class="jbs-modal jbs-fade" id="deleteJobModal" tabindex="-1" aria-labelledby="deleteJobModalLabel" aria-hidden="true">
+    <div class="jbs-modal-dialog jbs-modal-dialog-centered" style="max-width: 450px;">
+        <div class="jbs-modal-content" style="background-color: #ffffff; border-radius: 12px; padding: 40px 30px 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);">
+            <div class="jbs-modal-body jbs-text-center jbs-p-0">
+                <!-- Icon Circle -->
+                <div class="jbs-d-flex jbs-justify-content-center jbs-mb-4">
+                    <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-rounded-circle" 
+                         style="width: 70px; height: 70px; background-color: rgba(220, 53, 69, 0.1); border: 2px solid rgba(220, 53, 69, 0.2);">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 32px; color: #dc3545;"></i>
+                    </div>
+                </div>
+                
+                <!-- Title -->
+                <h4 class="jbs-fw-bold jbs-mb-3" id="deleteJobModalLabel" style="color: #212529; font-size: 24px;">
+                    <?php esc_html_e( 'Delete Job', 'jobus' ); ?>
+                </h4>
+                
+                <!-- Message -->
+                <p class="jbs-mb-4" style="color: #6c757d; font-size: 15px; line-height: 1.6;">
+                    <?php esc_html_e( 'Are you sure you want to delete this job? This action cannot be undone.', 'jobus' ); ?>
+                </p>
+                
+                <!-- Buttons -->
+                <div class="jbs-d-flex jbs-gap-3 jbs-justify-content-center">
+                    <button type="button" class="jbs-btn jbs-btn-light" data-jbs-dismiss="modal" 
+                            style="min-width: 120px; padding: 10px 24px; border-radius: 6px;">
+                        <?php esc_html_e( 'Cancel', 'jobus' ); ?>
+                    </button>
+                    <button type="button" class="jbs-btn jbs-btn-danger" id="confirmDeleteJob"
+                            style="min-width: 120px; padding: 10px 24px; border-radius: 6px; background-color: #dc3545;">
+                        <?php esc_html_e( 'Delete', 'jobus' ); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+jQuery(document).ready(function($) {
+    let currentJobId = null;
+    let currentNonce = null;
+    let current$Btn = null;
+    let current$Row = null;
+
+    // Handle delete job button click
+    $(document).on('click', '.jobus-delete-job', function(e) {
+        e.preventDefault();
+        
+        current$Btn = $(this);
+        currentJobId = current$Btn.data('job-id');
+        currentNonce = current$Btn.data('nonce');
+        current$Row = current$Btn.closest('tr');
+        
+        // Show the modal using JBS framework
+        $('#deleteJobModal').fadeIn(300).addClass('jbs-show');
+    });
+
+    // Handle confirm delete button in modal
+    $('#confirmDeleteJob').on('click', function() {
+        const $confirmBtn = $(this);
+        const originalHtml = $confirmBtn.html();
+        
+        // Disable button and show loading state
+        $confirmBtn.prop('disabled', true)
+                   .html('<span class="spinner-border spinner-border-sm jbs-me-2" role="status" aria-hidden="true"></span><?php echo esc_js( __( 'Deleting...', 'jobus' ) ); ?>');
+        
+        // Send AJAX request
+        $.ajax({
+            url: '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>',
+            type: 'POST',
+            data: {
+                action: 'jobus_delete_job',
+                job_id: currentJobId,
+                nonce: currentNonce
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Hide modal using JBS framework
+                    $('#deleteJobModal').fadeOut(300).removeClass('jbs-show');
+                    
+                    // Remove the table row with fade effect
+                    current$Row.fadeOut(300, function() {
+                        $(this).remove();
+                        
+                        // Check if table is empty
+                        if ($('.job-alert-table tbody tr').length === 0) {
+                            location.reload(); // Reload to show empty state
+                        }
+                    });
+                } else {
+                    alert(response.data.message || '<?php echo esc_js( __( 'Failed to delete job.', 'jobus' ) ); ?>');
+                    $confirmBtn.prop('disabled', false).html(originalHtml);
+                }
+            },
+            error: function() {
+                alert('<?php echo esc_js( __( 'An error occurred. Please try again.', 'jobus' ) ); ?>');
+                $confirmBtn.prop('disabled', false).html(originalHtml);
+            }
+        });
+    });
+
+    // Reset button state when modal is hidden
+    $('#deleteJobModal').on('hidden.bs.modal', function() {
+        $('#confirmDeleteJob').prop('disabled', false).html('<i class="bi bi-trash jbs-me-1"></i><?php echo esc_js( __( 'Delete Job', 'jobus' ) ); ?>');
+    });
+
+    // Handle cancel button click
+    $(document).on('click', '#deleteJobModal [data-jbs-dismiss="modal"]', function() {
+        $('#deleteJobModal').fadeOut(300).removeClass('jbs-show');
+    });
+});
+</script>

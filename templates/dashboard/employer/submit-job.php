@@ -97,6 +97,59 @@ $submit_button_label = $editing_job ? $update_job_label : $post_job_label;
                 </div>
             </div>
 
+            <!-- Company Logo Upload -->
+            <div id="company-logo-section">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Company Logo', 'jobus' ); ?></h4>
+                
+                <div class="dash-input-wrapper jbs-mb-30">
+                    <label for="job_company_logo"><?php esc_html_e( 'Upload Company Logo', 'jobus' ); ?></label>
+                    <div class="logo-upload-wrapper">
+                        <?php
+                        // Get current logo if editing
+                        $current_logo_id = '';
+                        $current_logo_url = '';
+                        if ( $job_id ) {
+                            $current_logo_id = get_post_thumbnail_id( $job_id );
+                            if ( $current_logo_id ) {
+                                $current_logo_url = wp_get_attachment_image_url( $current_logo_id, 'thumbnail' );
+                            }
+                        }
+                        ?>
+                        
+                        <div class="logo-preview-container" style="margin-bottom: 15px;">
+                            <?php if ( $current_logo_url ) : ?>
+                                <img src="<?php echo esc_url( $current_logo_url ); ?>" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="logo-preview" style="max-width: 150px; max-height: 150px; display: block; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                            <?php else : ?>
+                                <img src="" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="logo-preview" style="max-width: 150px; max-height: 150px; display: none; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="logo-upload-controls">
+                            <input type="hidden" name="job_company_logo_id" id="job_company_logo_id" value="<?php echo esc_attr( $current_logo_id ); ?>">
+                            <button type="button" class="jbs-btn jbs-btn-primary" id="upload_logo_button">
+                                <i class="bi bi-upload"></i>
+                                <?php echo $current_logo_url ? esc_html__( 'Change Logo', 'jobus' ) : esc_html__( 'Upload Logo', 'jobus' ); ?>
+                            </button>
+                            <?php if ( $current_logo_url ) : ?>
+                                <button type="button" class="jbs-btn jbs-btn-secondary jbs-ms-2" id="remove_logo_button">
+                                    <i class="bi bi-trash"></i>
+                                    <?php esc_html_e( 'Remove Logo', 'jobus' ); ?>
+                                </button>
+                            <?php else : ?>
+                                <button type="button" class="jbs-btn jbs-btn-secondary jbs-ms-2" id="remove_logo_button" style="display: none;">
+                                    <i class="bi bi-trash"></i>
+                                    <?php esc_html_e( 'Remove Logo', 'jobus' ); ?>
+                                </button>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <p class="jbs-text-muted jbs-mt-2" style="font-size: 13px;">
+                            <?php esc_html_e( 'Recommended size: 150x150px. Accepted formats: JPG, PNG, GIF', 'jobus' ); ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div id="job-taxonomy">
                 <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 

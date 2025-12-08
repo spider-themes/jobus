@@ -42,6 +42,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
                                 </a>
 								<?php
+							} else {
+								// Show dummy logo when no company logo is available
+								$dummy_logo_url = jobus_get_default_company_logo();
+								?>
+								<a href="<?php the_permalink(); ?>" class="logo">
+									<img src="<?php echo esc_url( $dummy_logo_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="lazy-img jbs-m-auto">
+								</a>
+								<?php
 							}
 							?>
                             <div class="info-wrapper">

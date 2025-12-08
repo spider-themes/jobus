@@ -123,7 +123,16 @@ CSF::createSection( $settings_prefix, array(
 			'default' => - 1,
 			'desc'    => esc_html__( 'Set the value to \'-1\' to display all job posts.', 'jobus' ),
 		),
-
+        array(
+			'id'       => 'default_company_logo',
+			'type'     => 'media',
+			'title'    => esc_html__( 'Default Company Logo', 'jobus' ),
+			'subtitle' => esc_html__( 'Upload a default logo to display when job listings don\'t have a company logo.', 'jobus' ),
+			'library'  => 'image',
+			'default'  => array(
+				'url' => JOBUS_IMG . '/default-company.png',
+			),
+		),
 		// Job Attributes
 		array(
 			'type'    => 'subheading',
@@ -308,8 +317,55 @@ CSF::createSection( $settings_prefix, array(
 			'default'  => false,
 		),
 
+	array(
+		'id'      => 'required_first_name',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'First Name Required', 'jobus' ),
+		'label'   => esc_html__( 'Make first name field required', 'jobus' ),
+		'default' => true,
+	),
 
-		array(
+	array(
+		'id'      => 'required_last_name',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'Last Name Required', 'jobus' ),
+		'label'   => esc_html__( 'Make last name field required', 'jobus' ),
+		'default' => false,
+	),
+
+	array(
+		'id'      => 'required_email',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'Email Required', 'jobus' ),
+		'label'   => esc_html__( 'Make email field required', 'jobus' ),
+		'default' => true,
+	),
+
+	array(
+		'id'      => 'required_phone',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'Phone Required', 'jobus' ),
+		'label'   => esc_html__( 'Make phone field required', 'jobus' ),
+		'default' => false,
+	),
+
+	array(
+		'id'      => 'required_message',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'Message Required', 'jobus' ),
+		'label'   => esc_html__( 'Make message/cover letter field required', 'jobus' ),
+		'default' => false,
+	),
+
+	array(
+		'id'      => 'required_cv',
+		'type'    => 'switcher',
+		'title'   => esc_html__( 'CV Upload Required', 'jobus' ),
+		'label'   => esc_html__( 'Make CV upload field required', 'jobus' ),
+		'default' => false,
+	),
+
+	array(
 			'type'    => 'heading',
 			'content' => esc_html__( 'Related Job Posts', 'jobus' ),
 		),

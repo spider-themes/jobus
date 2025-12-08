@@ -51,11 +51,18 @@ $container_classes .= ' ' . $extra_classes;
         <!-- Job Title Column  -->
         <div class="<?php echo esc_attr($col_classes['title']); ?>">
             <div class="job-title jbs-d-flex jbs-align-items-center">
-                <?php if (has_post_thumbnail($job_id)) : ?>
+                <?php if (has_post_thumbnail($job_id)) { ?>
                     <a href="<?php echo esc_url(get_permalink($job_id)); ?>" class="logo">
                         <?php echo get_the_post_thumbnail($job_id, 'full', ['class' => 'lazy-img jbs-m-auto']); ?>
                     </a>
-                <?php endif; ?>
+                <?php } else { ?>
+                    <?php
+                    $dummy_logo_url = jobus_get_default_company_logo();
+                    ?>
+                    <a href="<?php echo esc_url(get_permalink($job_id)); ?>" class="logo">
+                        <img src="<?php echo esc_url($dummy_logo_url); ?>" alt="<?php echo esc_attr(get_the_title($job_id)); ?>" class="lazy-img jbs-m-auto">
+                    </a>
+                <?php } ?>
 
                 <div class="split-box1">
                     <?php if ($show_duration && jobus_get_meta_attributes('jobus_meta_options', 'job_archive_meta_1', $job_id)) : ?>

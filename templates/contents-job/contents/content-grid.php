@@ -21,10 +21,19 @@ if ( ! defined( 'ABSPATH' ) ) {
             ?>
             <div class="jbs-col-sm-6 jbs-mb-30">
                 <div class="job-list-two style-two jbs-position-relative">
+                    <div class="jbs-logo-area">
                     <?php
                     if ( has_post_thumbnail() ) { ?>
                         <a href="<?php the_permalink(); ?>" class="logo">
                             <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-m-auto' ] ); ?>
+                        </a>
+                        <?php
+                    } else {
+                        // Show dummy logo when no company logo is available
+                        $dummy_logo_url = jobus_get_default_company_logo();
+                        ?>
+                        <a href="<?php the_permalink(); ?>" class="logo">
+                            <img src="<?php echo esc_url( $dummy_logo_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="lazy-img jbs-m-auto">
                         </a>
                         <?php
                     }
@@ -38,6 +47,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                             'class'        => 'save-btn jbs-text-center jbs-rounded-circle tran3s jobus-saved-post'
                         ] );
                     }
+                    ?>
+                    </div>
+                    <?php
                     if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) { ?>
                         <div>
                             <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 ">
@@ -45,18 +57,32 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </a>
                         </div>
                         <?php
+                    }else{  
+                        ?>
+                        <div>
+                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500">Full Time</a>
+                        </div>
+                        <?php
                     }
                     ?>
-                    <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
+                   <div class="jbs-job-title">
+                     <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
                         <?php the_title( '<h3>', '</h3>' ) ?>
                     </a>
-                    <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) : ?>
+                    <?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) { ?>
                         <div class="job-salary">
                             <span class="jbs-fw-500 jbs-text-dark">
                                 <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) ?>
                             </span>
                         </div>
-                    <?php endif; ?>
+                    <?php } else{ ?>
+                        <div class="job-salary">
+                            <span class="jbs-fw-500 jbs-text-dark">
+                                <?php echo esc_html( 'Negotiable' ) ?>
+                            </span>
+                        </div>
+                    <?php } ?>
+                   </div>
                     <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
                         <div class="job-location">
                             <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_job_location' ) ) ?>">
