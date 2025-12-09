@@ -11,7 +11,8 @@ $taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
 $has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
 $has_taxonomy_widgets = false;
 
-if ( ! $has_meta_widgets && ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+// Check for taxonomy widgets independently
+if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
     foreach ( $taxonomy_widgets as $is_enabled ) {
         if ( $is_enabled ) {
             $has_taxonomy_widgets = true;

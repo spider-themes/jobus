@@ -33,15 +33,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                         $has_filter_widgets = true;
                     }
                     
-                    // Check taxonomy widgets if meta widgets not found
-                    if ( ! $has_filter_widgets ) {
-                        $taxonomy_widgets = jobus_opt( 'candidate_taxonomy_widgets' );
-                        if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
-                            foreach ( $taxonomy_widgets as $is_enabled ) {
-                                if ( $is_enabled ) {
-                                    $has_filter_widgets = true;
-                                    break;
-                                }
+                    // Check taxonomy widgets independently
+                    $taxonomy_widgets = jobus_opt( 'candidate_taxonomy_widgets' );
+                    if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+                        foreach ( $taxonomy_widgets as $is_enabled ) {
+                            if ( $is_enabled ) {
+                                $has_filter_widgets = true;
+                                break;
                             }
                         }
                     }
