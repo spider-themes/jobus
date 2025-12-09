@@ -68,6 +68,7 @@ class Candidate_Form_Submission {
 
 		$args = array(
 			'post_type'      => 'jobus_candidate',
+			'post_status'    => 'publish',
 			'author'         => $user_id,
 			'posts_per_page' => 1,
 			'fields'         => 'ids'

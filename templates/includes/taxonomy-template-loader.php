@@ -41,6 +41,18 @@ function jobus_load_taxonomy_template( $config ) {
 	if ( ! empty( $tax_query ) ) {
 		$args['tax_query'] = $tax_query;
 	}
+	
+	// For candidate and company archives, exclude orphaned posts (where author/user was deleted)
+	if ( in_array( $config['post_type'], array( 'jobus_candidate', 'jobus_company' ), true ) ) {
+		// Include the archive-template-loader if not already loaded
+		if ( ! function_exists( 'jobus_get_orphaned_post_ids' ) ) {
+			require_once dirname( __FILE__ ) . '/archive-template-loader.php';
+		}
+		$orphaned_post_ids = jobus_get_orphaned_post_ids( $config['post_type'] );
+		if ( ! empty( $orphaned_post_ids ) ) {
+			$args['post__not_in'] = $orphaned_post_ids;
+		}
+	}
 
 	// Create query with post-type-specific variable name
 	$query = new WP_Query( $args );

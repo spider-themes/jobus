@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			?>
             <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-sm-6 jbs-d-flex">
 
-                <div class="candidate-profile-card niloy <?php echo esc_attr( $is_favourite ) ?> jbs-text-center grid-layout jbs-mb-25<?php echo esc_attr( $is_popup_border_none ) ?>">
+                <div class="candidate-profile-card <?php echo esc_attr( $is_favourite ) ?> jbs-text-center grid-layout jbs-mb-25<?php echo esc_attr( $is_popup_border_none ) ?>">
                     <?php
                     if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {
                         jobus_render_post_save_button( [

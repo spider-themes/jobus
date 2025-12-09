@@ -70,6 +70,23 @@ function jobus_load_archive_template( $config ) {
 		}
 	}
 
+	// For candidate and company archives, exclude orphaned posts (where author/user was deleted)
+	// This must be done AFTER post__in is set, and we need to filter the post__in if it exists
+	if ( in_array( $config['post_type'], array( 'jobus_candidate', 'jobus_company' ), true ) ) {
+		$orphaned_post_ids = jobus_get_orphaned_post_ids( $config['post_type'] );
+		if ( ! empty( $orphaned_post_ids ) ) {
+			if ( ! empty( $args['post__in'] ) ) {
+				// If post__in is set, remove orphaned IDs from it
+				$args['post__in'] = array_diff( $args['post__in'], $orphaned_post_ids );
+			} else {
+				// Otherwise, use post__not_in
+				$args['post__not_in'] = isset( $args['post__not_in'] ) 
+					? array_merge( $args['post__not_in'], $orphaned_post_ids ) 
+					: $orphaned_post_ids;
+			}
+		}
+	}
+
 	// Create query with post-type-specific variable name
 	$query = new WP_Query( $args );
 
@@ -133,7 +150,7 @@ function jobus_load_archive_template( $config ) {
  * @return array
  */
 function jobus_build_archive_query_args( $post_type, $posts_per_page_key, $query_var_prefix, $paged = 1 ) {
-	return array(
+	$args = array(
 		'post_type'      => $post_type,
 		'post_status'    => 'publish',
 		'posts_per_page' => jobus_opt( $posts_per_page_key ),
@@ -141,6 +158,29 @@ function jobus_build_archive_query_args( $post_type, $posts_per_page_key, $query
 		'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
 		'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' ),
 	);
+	
+	return $args;
+}
+
+/**
+ * Get IDs of posts whose authors no longer exist
+ *
+ * @param string $post_type
+ * @return array Array of orphaned post IDs
+ */
+function jobus_get_orphaned_post_ids( $post_type ) {
+	global $wpdb;
+	
+	$orphaned_ids = $wpdb->get_col( $wpdb->prepare(
+		"SELECT p.ID FROM {$wpdb->posts} p 
+		LEFT JOIN {$wpdb->users} u ON p.post_author = u.ID 
+		WHERE p.post_type = %s 
+		AND p.post_status = 'publish'
+		AND u.ID IS NULL",
+		$post_type
+	) );
+	
+	return array_map( 'absint', $orphaned_ids );
 }
 
 /**

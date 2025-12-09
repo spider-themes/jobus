@@ -2,7 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-$post_type   = jobus_get_sanitized_query_param( 'post_type' );
+
+// Hardcode post type to ensure filters work on initial page load
+$post_type = 'jobus_company';
 
 // Get filter widgets configuration
 $filter_widgets = jobus_opt( 'company_sidebar_widgets' );
