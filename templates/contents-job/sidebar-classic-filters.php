@@ -88,7 +88,8 @@ $specs_options = jobus_get_specs_options();
                         $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
                         $is_first = 0 === $index;
                         $is_active = ! empty( $widget_param );
-                        $is_collapsed = ( $is_first && ! $is_active ) || ( ! $is_first && ! $is_active );
+                        // First item should be open, others collapsed unless active
+                        $is_collapsed = ! $is_first && ! $is_active;
                         
                         $widget_title = $specifications[ $widget_name ] ?? '';
                         $specifications_data = $specs_options[ $widget_name ] ?? '';
@@ -98,12 +99,13 @@ $specs_options = jobus_get_specs_options();
                                data-jbs-toggle="collapse"
                                data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>" 
                                role="button"
-                               aria-expanded="<?php echo $is_active || $is_first ? 'true' : 'false'; ?>">
+                               aria-expanded="<?php echo ! $is_collapsed ? 'true' : 'false'; ?>">
                                 <?php echo esc_html( $widget_title ); ?>
                             </a>
 
                             <div class="<?php echo $is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>"
-                                 id="collapse-<?php echo esc_attr( $widget_name ); ?>">
+                                 id="collapse-<?php echo esc_attr( $widget_name ); ?>"
+                                 style="<?php echo ! $is_collapsed ? 'display: block;' : ''; ?>">
                                 <div class="main-body">
                                     <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
                                 </div>

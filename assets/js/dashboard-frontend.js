@@ -216,9 +216,9 @@
 
                 $repeater.append(newItem);
 
-                // Reinitialize nice-select for the new select element
-                if (typeof $.fn.niceSelect === 'function') {
-                    newItem.find('.jbs-nice-select').niceSelect();
+                // Reinitialize jbs-nice-select for the new select element
+                if (typeof $.fn.jbsNiceSelect === 'function') {
+                    newItem.find('.jbs-nice-select').jbsNiceSelect();
                 }
 
                 index++;

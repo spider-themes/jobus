@@ -20,7 +20,14 @@ add_image_size( 'jobus_280x268', 280, 268, true );
  * - Optional SVG with sanitizer
  */
 function jobus_dashboard_upload_mimes( $mimes ) {
-	if ( current_user_can( 'jobus_candidate' ) || current_user_can( 'jobus_employer' ) ) {
+	if ( ! is_user_logged_in() ) {
+		return $mimes;
+	}
+	
+	$user = wp_get_current_user();
+	$user_roles = (array) $user->roles;
+	
+	if ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) {
 		return [
 			'jpg|jpeg|jpe' => 'image/jpeg',
 			'gif'          => 'image/gif',
@@ -101,12 +108,50 @@ add_filter( 'login_redirect', 'jobus_login_redirect_by_role', 10, 3 );
 /**
  * Hide admin bar for candidates and employers
  */
-function jobus_hide_admin_bar_for_roles(): void {
-	if ( current_user_can( 'jobus_candidate' ) || current_user_can( 'jobus_employer' ) ) {
-		show_admin_bar( false );
+function jobus_hide_admin_bar_for_roles( $show ) {
+	if ( ! is_user_logged_in() ) {
+		return $show;
+	}
+	
+	$user = wp_get_current_user();
+	$user_roles = (array) $user->roles;
+	
+	// Hide admin bar if user has candidate or employer role
+	if ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) {
+		return false;
+	}
+	
+	return $show;
+}
+add_filter( 'show_admin_bar', 'jobus_hide_admin_bar_for_roles' );
+
+/**
+ * Restrict admin panel access for candidates and employers
+ */
+function jobus_restrict_admin_access(): void {
+	if ( ! is_user_logged_in() || wp_doing_ajax() ) {
+		return;
+	}
+	
+	$user = wp_get_current_user();
+	$user_roles = (array) $user->roles;
+	
+	// Block admin access for candidate and employer roles
+	if ( is_admin() && ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) ) {
+		// Redirect to home page or dashboard
+		if ( class_exists( '\jobus\includes\Frontend\Dashboard' ) ) {
+			$role = in_array( 'jobus_candidate', $user_roles, true ) ? 'jobus_candidate' : 'jobus_employer';
+			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( $role );
+			if ( ! empty( $dashboard_url ) ) {
+				wp_safe_redirect( $dashboard_url );
+				exit;
+			}
+		}
+		wp_safe_redirect( home_url() );
+		exit;
 	}
 }
-add_action( 'init', 'jobus_hide_admin_bar_for_roles' );
+add_action( 'admin_init', 'jobus_restrict_admin_access' );
 
 /**
  * Clear object cache when jobus post types are trashed, deleted or status changes

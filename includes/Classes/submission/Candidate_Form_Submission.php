@@ -385,6 +385,9 @@ class Candidate_Form_Submission {
 				// Also delete the featured image if exists
 				delete_post_thumbnail( $candidate_id );
 
+				// Sync user avatar for sidebar
+				self::sync_user_avatar( $user_id, null );
+
 				// Clear caches immediately to ensure changes are visible
 				clean_post_cache( $candidate_id );
 				wp_cache_delete( $candidate_id, 'posts' );
@@ -397,6 +400,9 @@ class Candidate_Form_Submission {
 
 				// Also set as featured image (this is the key part for synchronization)
 				set_post_thumbnail( $candidate_id, $image_id );
+
+				// Sync user avatar for sidebar
+				self::sync_user_avatar( $user_id, $image_id );
 
 				// Clear caches immediately to ensure changes are visible
 				clean_post_cache( $candidate_id );
@@ -935,6 +941,23 @@ class Candidate_Form_Submission {
 		// Handle portfolio data if present
 		if ( isset( $post_data['portfolio_title'] ) || isset( $post_data['portfolio'] ) ) {
 			$this->save_candidate_portfolio( $candidate_id, $post_data );
+		}
+	}
+
+	/**
+	 * Sync user avatar with user meta for sidebar and other locations
+	 *
+	 * @param int             $user_id
+	 * @param int|string|null $profile_picture_id Attachment ID or empty/null
+	 */
+	public static function sync_user_avatar( int $user_id, $profile_picture_id ) {
+		if ( $profile_picture_id ) {
+			$avatar_url = wp_get_attachment_url( $profile_picture_id );
+			if ( $avatar_url ) {
+				update_user_meta( $user_id, 'jobus_avatar', $avatar_url );
+			}
+		} else {
+			delete_user_meta( $user_id, 'jobus_avatar' );
 		}
 	}
 }

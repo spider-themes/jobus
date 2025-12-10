@@ -1,4 +1,4 @@
-.nice-select {
+.jbs-nice-select {
   -webkit-tap-highlight-color: transparent;
   background-color: #fff;
   border-radius: 5px;
@@ -25,11 +25,11 @@
           user-select: none;
   white-space: nowrap;
   width: auto; }
-  .nice-select:hover {
+  .jbs-nice-select:hover {
     border-color: #dbdbdb; }
-  .nice-select:active, .nice-select.open, .nice-select:focus {
+  .jbs-nice-select:active, .jbs-nice-select.open, .jbs-nice-select:focus {
     border-color: #999; }
-  .nice-select:after {
+  .jbs-nice-select:after {
     border-bottom: 2px solid #999;
     border-right: 2px solid #999;
     content: '';
@@ -49,43 +49,43 @@
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
     width: 5px; }
-  .nice-select.open:after {
+  .jbs-nice-select.open:after {
     -webkit-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
             transform: rotate(-135deg); }
-  .nice-select.open .list {
+  .jbs-nice-select.open .list {
     opacity: 1;
     pointer-events: auto;
     -webkit-transform: scale(1) translateY(0);
         -ms-transform: scale(1) translateY(0);
             transform: scale(1) translateY(0); }
-  .nice-select.disabled {
+  .jbs-nice-select.disabled {
     border-color: #ededed;
     color: #999;
     pointer-events: none; }
-    .nice-select.disabled:after {
+    .jbs-nice-select.disabled:after {
       border-color: #cccccc; }
-  .nice-select.wide {
+  .jbs-nice-select.wide {
     width: 100%; }
-    .nice-select.wide .list {
+    .jbs-nice-select.wide .list {
       left: 0 !important;
       right: 0 !important; }
-  .nice-select.right {
+  .jbs-nice-select.right {
     float: right; }
-    .nice-select.right .list {
+    .jbs-nice-select.right .list {
       left: auto;
       right: 0; }
-  .nice-select.small {
+  .jbs-nice-select.small {
     font-size: 12px;
     height: 36px;
     line-height: 34px; }
-    .nice-select.small:after {
+    .jbs-nice-select.small:after {
       height: 4px;
       width: 4px; }
-    .nice-select.small .option {
+    .jbs-nice-select.small .option {
       line-height: 34px;
       min-height: 34px; }
-  .nice-select .list {
+  .jbs-nice-select .list {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(68, 68, 68, 0.11);
@@ -108,9 +108,9 @@
     -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
     transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
     z-index: 9; }
-    .nice-select .list:hover .option:not(:hover) {
+    .jbs-nice-select .list:hover .option:not(:hover) {
       background-color: transparent !important; }
-  .nice-select .option {
+  .jbs-nice-select .option {
     font-size: 0.85em;
     cursor: pointer;
     font-weight: 400;
@@ -123,17 +123,17 @@
     text-align: left;
     -webkit-transition: all 0.2s;
     transition: all 0.2s; }
-    .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+    .jbs-nice-select .option:hover, .jbs-nice-select .option.focus, .jbs-nice-select .option.selected.focus {
       background-color: #f6f6f6; }
-    .nice-select .option.selected {
+    .jbs-nice-select .option.selected {
       font-weight: bold; }
-    .nice-select .option.disabled {
+    .jbs-nice-select .option.disabled {
       background-color: transparent;
       color: #999;
       cursor: default; }
 
-.no-csspointerevents .nice-select .list {
+.no-csspointerevents .jbs-nice-select .list {
   display: none; }
 
-.no-csspointerevents .nice-select.open .list {
+.no-csspointerevents .jbs-nice-select.open .list {
   display: block; }

@@ -18,6 +18,11 @@ $employer_placeholder_confirm_pass = $employer_confirm_pass ?? 'Enter Your Confi
 $singin_btn_label = jobus_opt( 'signin_btn_label' );
 $singin_btn_url   = jobus_opt( 'signin_btn_url' );
 $redirect_url     = ! empty( $redirect_url ) ? esc_url_raw( $redirect_url ) : '';
+
+// Get error message and tab from URL
+$jobus_error = ! empty( $_GET['jobus_error'] ) ? sanitize_text_field( urldecode( $_GET['jobus_error'] ) ) : '';
+$jobus_tab   = ! empty( $_GET['jobus_tab'] ) ? sanitize_text_field( $_GET['jobus_tab'] ) : 'candidate';
+$is_employer_tab = ( $jobus_tab === 'employer' );
 ?>
     <section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
         <div class="user-data-form">
@@ -27,20 +32,25 @@ $redirect_url     = ! empty( $redirect_url ) ? esc_url_raw( $redirect_url ) : ''
             </div>
 
             <div class="form-wrapper jbs-m-auto">
+				<?php if ( ! empty( $jobus_error ) ) : ?>
+                    <div class="jobus-registration-error jbs-alert jbs-alert-danger jbs-mt-20" role="alert">
+						<?php echo esc_html( $jobus_error ); ?>
+                    </div>
+				<?php endif; ?>
                 <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
                     <li class="jbs-nav-item" role="presentation">
-                        <button class="jbs-nav-link active" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
+                        <button class="jbs-nav-link <?php echo ! $is_employer_tab ? 'active' : ''; ?>" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
 							<?php esc_html_e( 'Candidates', 'jobus' ); ?>
                         </button>
                     </li>
                     <li class="jbs-nav-item" role="presentation">
-                        <button class="jbs-nav-link" data-jbs-toggle="tab" data-jbs-target="#fc2" role="tab">
+                        <button class="jbs-nav-link <?php echo $is_employer_tab ? 'active' : ''; ?>" data-jbs-toggle="tab" data-jbs-target="#fc2" role="tab">
 							<?php esc_html_e( 'Employer', 'jobus' ); ?>
                         </button>
                     </li>
                 </ul>
                 <div class="jbs-tab-content jbs-mt-40">
-                    <div class="jbs-tab-pane jbs-fade jbs-show active" role="tabpanel" id="fc1">
+                    <div class="jbs-tab-pane jbs-fade <?php echo ! $is_employer_tab ? 'jbs-show active' : ''; ?>" role="tabpanel" id="fc1">
                         <form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" name="jobus-candidate-registration-form"
                               id="jobus-candidate-registration-form" method="post">
 							<?php wp_nonce_field( 'register_candidate_action', 'register_candidate_nonce' ); ?>
@@ -106,7 +116,7 @@ $redirect_url     = ! empty( $redirect_url ) ? esc_url_raw( $redirect_url ) : ''
                         </form>
                     </div>
                     <!-- /.tab-pane -->
-                    <div class="jbs-tab-pane jbs-fade" role="tabpanel" id="fc2">
+                    <div class="jbs-tab-pane jbs-fade <?php echo $is_employer_tab ? 'jbs-show active' : ''; ?>" role="tabpanel" id="fc2">
                         <form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" name="jobus-employer-registration-form"
                               id="jobus-employer-registration-form" method="post">
 							<?php wp_nonce_field( 'register_employer_action', 'register_employer_nonce' ); ?>

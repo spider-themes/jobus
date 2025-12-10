@@ -27,7 +27,7 @@ class Assets {
 		// Enqueue Style's
 		wp_enqueue_style( 'jobus-dark-mode', esc_url( JOBUS_CSS . '/dark-mode.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'jobus-framework', esc_url( JOBUS_CSS . '/jbs-framework.css' ), [], JOBUS_VERSION );
-		wp_enqueue_style( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/nice-select.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jbs-nice-select', esc_url( JOBUS_VEND . '/jbs-nice-select/jbs-nice-select.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'bootstrap-icons', esc_url( JOBUS_VEND . '/bootstrap-icons/font.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick', esc_url( JOBUS_VEND . '/slick/slick.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick-theme', esc_url( JOBUS_VEND . '/slick/slick-theme.css' ), [], JOBUS_VERSION );
@@ -45,7 +45,7 @@ class Assets {
 		wp_register_script( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.js' ), [ 'jquery' ], '2.11.4', true );
 
 		// Enqueue Scripts
-		wp_enqueue_script( 'nice-select', esc_url( JOBUS_VEND . '/nice-select/jquery.nice-select.min.js' ), [ 'jquery' ], '1.0', true );
+		wp_enqueue_script( 'jbs-nice-select', esc_url( JOBUS_VEND . '/jbs-nice-select/jquery.jbs-nice-select.min.js' ), [ 'jquery' ], '1.0', true );
 		wp_enqueue_script( 'slick', esc_url( JOBUS_VEND . '/slick/slick.min.js' ), [ 'jquery' ], '2.2.0', true );
 		wp_enqueue_script( 'jobus-public', esc_url( JOBUS_JS . '/public.js' ), [ 'jquery' ], JOBUS_VERSION, true );
 		wp_enqueue_script( 'jobus-framework', esc_url( JOBUS_JS . '/jbs-framework.js' ), [ 'jquery' ], JOBUS_VERSION, true );

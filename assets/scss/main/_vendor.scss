@@ -1,4 +1,4 @@
-.nice-select {
+.jbs-nice-select {
   -webkit-tap-highlight-color: transparent;
   background-color: var(--bs-white);
   border-radius: 5px;
@@ -22,7 +22,7 @@
   width: auto;
 }
 
-.nice-select:after {
+.jbs-nice-select:after {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;
   content: '';
@@ -38,13 +38,13 @@
   width: 7px;
 }
 
-.nice-select.open:after {
+.jbs-nice-select.open:after {
   -webkit-transform: rotate(-135deg);
   -ms-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
 
-.nice-select.open .list {
+.jbs-nice-select.open .list {
   opacity: 1;
   pointer-events: auto;
   -webkit-transform: scale(1) translateY(0);
@@ -59,52 +59,52 @@
     }
 }
 
-.nice-select.disabled {
+.jbs-nice-select.disabled {
   border-color: #ededed;
   color: #999;
   pointer-events: none;
 }
 
-.nice-select.disabled:after {
+.jbs-nice-select.disabled:after {
   border-color: #cccccc;
 }
 
-.nice-select.wide {
+.jbs-nice-select.wide {
   width: 100%;
 }
 
-.nice-select.wide .list {
+.jbs-nice-select.wide .list {
   left: 0 !important;
   right: 0 !important;
 }
 
-.nice-select.right {
+.jbs-nice-select.right {
   float: right;
 }
 
-.nice-select.right .list {
+.jbs-nice-select.right .list {
   left: auto;
   right: 0;
 }
 
-.nice-select.small {
+.jbs-nice-select.small {
   font-size: 12px;
   height: 36px;
   line-height: 34px;
 }
 
-.nice-select.small:after {
+.jbs-nice-select.small:after {
   height: 4px;
   width: 4px;
 }
 
-.nice-select.small .option {
+.jbs-nice-select.small .option {
   line-height: 34px;
   min-height: 34px;
 }
 
 
-.nice-select .list {
+.jbs-nice-select .list {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 13px 35px -12px rgb(35 35 35 / 10%);
@@ -125,7 +125,7 @@
   z-index: 9;
 }
 
-.nice-select .option {
+.jbs-nice-select .option {
   font-size: 0.95em;
   cursor: pointer;
   font-weight: 400 !important;
@@ -138,22 +138,22 @@
   transition: all 0.2s;
 }
 
-.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+.jbs-nice-select .option:hover, .jbs-nice-select .option.focus, .jbs-nice-select .option.selected.focus {
   color: var(--jbs-brand_color_4);
   background: rgba($color: var(--jbs-brand_color_2), $alpha: 0.03);
 }
 
-.nice-select .option.disabled {
+.jbs-nice-select .option.disabled {
   background-color: transparent;
   color: #999;
   cursor: default;
 }
 
-.no-csspointerevents .nice-select .list {
+.no-csspointerevents .jbs-nice-select .list {
   display: none;
 }
 
-.no-csspointerevents .nice-select.open .list {
+.no-csspointerevents .jbs-nice-select.open .list {
   display: block;
 }
 

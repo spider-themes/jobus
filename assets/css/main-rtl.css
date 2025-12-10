@@ -1,12 +1,12 @@
-.filter-area-tab .nice-select {
+.filter-area-tab .jbs-nice-select {
   text-align: right !important;
 }
-.filter-area-tab .nice-select:before {
+.filter-area-tab .jbs-nice-select:before {
   right: initial;
   left: 10px;
 }
 
-.filter-area-tab .nice-select .option {
+.filter-area-tab .jbs-nice-select .option {
   text-align: right;
 }
 
@@ -91,7 +91,7 @@
   margin-left: 0 !important;
 }
 
-.upper-filter .short-filter .nice-select .option {
+.upper-filter .short-filter .jbs-nice-select .option {
   text-align: right;
 }
 

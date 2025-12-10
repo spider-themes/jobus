@@ -48,7 +48,12 @@ if ( ! function_exists( 'jobus_opt' ) ) {
         $options = get_option( 'jobus_opt' );
         $value = $options[ $option ] ?? null;
 
-        return $value ?? $default;
+        // Return default if value is null or empty string
+        if ( $value === null || $value === '' ) {
+            return $default;
+        }
+
+        return $value;
     }
 }
 

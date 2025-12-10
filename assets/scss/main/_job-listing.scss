@@ -160,7 +160,7 @@
     }
   }
 
-  .nice-select {
+  .jbs-nice-select {
     height: 45px;
     line-height: 45px;
     font-size: 14px;
@@ -560,7 +560,7 @@ button.jbs_filter_btn-padding {
     color: rgba($color: #000000, $alpha: 0.4);
   }
 
-  .short-filter .nice-select {
+  .short-filter .jbs-nice-select {
     min-width: 165px;
     height: 32px;
     line-height: 30px;
@@ -607,7 +607,7 @@ button.jbs_filter_btn-padding {
   }
 }
 
-.bg-color .upper-filter .nice-select {
+.bg-color .upper-filter .jbs-nice-select {
   background: transparent;
   border-color: var(--jbs-brand_color_2);
 }
@@ -622,7 +622,7 @@ button.jbs_filter_btn-padding {
   border-radius: 15px !important;
 
   &.filter-area-tab .input-box input,
-  &.filter-area-tab .nice-select {
+  &.filter-area-tab .jbs-nice-select {
     background: #FAFAFA;
     border-color: #EDEDED;
   }

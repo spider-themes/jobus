@@ -79,6 +79,25 @@ class User {
 		) );
 	}
 
+	/**
+	 * Redirect back to registration form with error message
+	 */
+	private function redirect_with_error( string $error_message, string $tab = 'candidate' ): void {
+		$referer = wp_get_referer();
+		if ( ! $referer ) {
+			$referer = home_url();
+		}
+		// Remove any existing error params
+		$referer = remove_query_arg( [ 'jobus_error', 'jobus_tab' ], $referer );
+		// Add error message and tab
+		$redirect_url = add_query_arg( [
+			'jobus_error' => urlencode( $error_message ),
+			'jobus_tab'   => $tab,
+		], $referer );
+		wp_redirect( esc_url_raw( $redirect_url ) );
+		exit;
+	}
+
 	public function candidate_registration(): void {
 		if ( ! empty( $_POST['register_candidate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['register_candidate_nonce'] ) ), 'register_candidate_action' ) ) {
 
@@ -90,11 +109,11 @@ class User {
 			$redirect_url               = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
 
 			if ( $candidate_password !== $candidate_confirm_password ) {
-				wp_send_json_error( esc_html__( 'Passwords do not match', 'jobus' ) );
+				$this->redirect_with_error( esc_html__( 'Passwords do not match', 'jobus' ), 'candidate' );
 			}
 
 			if ( username_exists( $candidate_username ) || email_exists( $candidate_email ) ) {
-				wp_send_json_error( esc_html__( 'Username or email already exists', 'jobus' ) );
+				$this->redirect_with_error( esc_html__( 'Username or email already exists', 'jobus' ), 'candidate' );
 			}
 
 			$user_data = [
@@ -106,7 +125,7 @@ class User {
 
 			$candidate_id = wp_insert_user( $user_data );
 			if ( is_wp_error( $candidate_id ) ) {
-				wp_send_json_error( esc_html__( 'Candidate registration failed: ', 'jobus' ) . esc_html( $candidate_id->get_error_message() ) );
+				$this->redirect_with_error( esc_html__( 'Candidate registration failed: ', 'jobus' ) . esc_html( $candidate_id->get_error_message() ), 'candidate' );
 			}
 
 			wp_set_current_user( $candidate_id );
@@ -131,11 +150,11 @@ class User {
 			$redirect_url              = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
 
 			if ( $employer_password !== $employer_confirm_password ) {
-				wp_send_json_error( esc_html__( 'Passwords do not match', 'jobus' ) );
+				$this->redirect_with_error( esc_html__( 'Passwords do not match', 'jobus' ), 'employer' );
 			}
 
 			if ( username_exists( $employer_username ) || email_exists( $employer_email ) ) {
-				wp_send_json_error( esc_html__( 'Username or email already exists', 'jobus' ) );
+				$this->redirect_with_error( esc_html__( 'Username or email already exists', 'jobus' ), 'employer' );
 			}
 
 			$user_data = [
@@ -148,7 +167,7 @@ class User {
 			$employer_id = wp_insert_user( $user_data );
 
 			if ( is_wp_error( $employer_id ) ) {
-				wp_send_json_error( esc_html__( 'Employer registration failed: ', 'jobus' ) . esc_html( $employer_id->get_error_message() ) );
+				$this->redirect_with_error( esc_html__( 'Employer registration failed: ', 'jobus' ) . esc_html( $employer_id->get_error_message() ), 'employer' );
 			}
 
 			wp_set_current_user( $employer_id );

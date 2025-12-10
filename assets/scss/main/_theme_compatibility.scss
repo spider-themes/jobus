@@ -288,6 +288,25 @@ body {
     }
   }
 }
+.wp-theme-docy {
+  .user-data-form .form-wrapper .input-group-meta .placeholder_icon span:before {
+    top: 24px;
+  }
+  .dashboard-body .placeholder_icon span::before {
+    top: 20px;
+  }
+  .dashboard-body a{
+    &:hover{
+      text-decoration: none !important;
+    }
+  }
+  .dashboard-body{
+    table thead, .table_shortcode thead {
+    background: none;
+    border: none;
+    }
+  }
+}
 
 .jbs-nice-select {
   ul {
@@ -401,4 +420,23 @@ body {
     .job-details,.jbs-job-details,.candidates-profile {
         padding-top: 180px !important;
     }
+    .dashboard-body{
+      .passVicon{
+        img{
+          display: inline-block;
+        }
+      }
+    }
+    .login-form-box{
+      
+    }
+    // .login-form-box{
+    //   form{
+    //     .passVicon{
+    //       img{
+    //         display: inline-block;
+    //       }
+    //     }
+    //   }
+    // }
 }

@@ -1614,7 +1614,7 @@
   color: #fff;
 }
 
-.nice-select {
+.jbs-nice-select {
   -webkit-tap-highlight-color: transparent;
   background-color: var(--bs-white);
   border-radius: 5px;
@@ -1638,7 +1638,7 @@
   width: auto;
 }
 
-.nice-select:after {
+.jbs-nice-select:after {
   border-bottom: 1px solid #000;
   border-right: 1px solid #000;
   content: "";
@@ -1654,72 +1654,72 @@
   width: 7px;
 }
 
-.nice-select.open:after {
+.jbs-nice-select.open:after {
   -webkit-transform: rotate(-135deg);
   -ms-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
 
-.nice-select.open .list {
+.jbs-nice-select.open .list {
   opacity: 1;
   pointer-events: auto;
   -webkit-transform: scale(1) translateY(0);
   -ms-transform: scale(1) translateY(0);
   transform: scale(1) translateY(0);
 }
-.nice-select.open .list::-webkit-scrollbar {
+.jbs-nice-select.open .list::-webkit-scrollbar {
   width: 4px;
 }
-.nice-select.open .list::-webkit-scrollbar-thumb {
+.jbs-nice-select.open .list::-webkit-scrollbar-thumb {
   background-color: var(--jbs-brand_color_3);
   border-radius: 3px;
 }
 
-.nice-select.disabled {
+.jbs-nice-select.disabled {
   border-color: #ededed;
   color: #999;
   pointer-events: none;
 }
 
-.nice-select.disabled:after {
+.jbs-nice-select.disabled:after {
   border-color: #cccccc;
 }
 
-.nice-select.wide {
+.jbs-nice-select.wide {
   width: 100%;
 }
 
-.nice-select.wide .list {
+.jbs-nice-select.wide .list {
   left: 0 !important;
   right: 0 !important;
 }
 
-.nice-select.right {
+.jbs-nice-select.right {
   float: right;
 }
 
-.nice-select.right .list {
+.jbs-nice-select.right .list {
   left: auto;
   right: 0;
 }
 
-.nice-select.small {
+.jbs-nice-select.small {
   font-size: 12px;
   height: 36px;
   line-height: 34px;
 }
 
-.nice-select.small:after {
+.jbs-nice-select.small:after {
   height: 4px;
   width: 4px;
 }
 
-.nice-select.small .option {
+.jbs-nice-select.small .option {
   line-height: 34px;
   min-height: 34px;
 }
 
-.nice-select .list {
+.jbs-nice-select .list {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 13px 35px -12px rgba(35, 35, 35, 0.1);
@@ -1740,7 +1740,7 @@
   z-index: 9;
 }
 
-.nice-select .option {
+.jbs-nice-select .option {
   font-size: 0.95em;
   cursor: pointer;
   font-weight: 400 !important;
@@ -1753,22 +1753,22 @@
   transition: all 0.2s;
 }
 
-.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+.jbs-nice-select .option:hover, .jbs-nice-select .option.focus, .jbs-nice-select .option.selected.focus {
   color: var(--jbs-brand_color_4);
   background: rgba(var(--jbs-brand_color_2), 0.03);
 }
 
-.nice-select .option.disabled {
+.jbs-nice-select .option.disabled {
   background-color: transparent;
   color: #999;
   cursor: default;
 }
 
-.no-csspointerevents .nice-select .list {
+.no-csspointerevents .jbs-nice-select .list {
   display: none;
 }
 
-.no-csspointerevents .nice-select.open .list {
+.no-csspointerevents .jbs-nice-select.open .list {
   display: block;
 }
 
@@ -4250,17 +4250,17 @@ img {
   padding-left: 15px;
   margin-bottom: 4px;
 }
-.jbs-search-form-widget-one form .input-box .nice-select {
+.jbs-search-form-widget-one form .input-box .jbs-nice-select {
   padding: 0 15px;
   font-size: 20px;
   color: #000;
   border: none;
 }
-.jbs-search-form-widget-one form .input-box .nice-select .option {
+.jbs-search-form-widget-one form .input-box .jbs-nice-select .option {
   font-size: 15px;
   padding-left: 15px;
 }
-.jbs-search-form-widget-one form .input-box .nice-select .list {
+.jbs-search-form-widget-one form .input-box .jbs-nice-select .list {
   border-radius: 10px;
   overflow: auto;
 }
@@ -4335,7 +4335,7 @@ img {
 .jbs-search-form-widget-one.style-two .input-box {
   margin: 18px 0;
 }
-.jbs-search-form-widget-one.style-two .input-box .nice-select {
+.jbs-search-form-widget-one.style-two .input-box .jbs-nice-select {
   font-size: 16px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.7);
@@ -4927,7 +4927,7 @@ img {
 .filter-area-tab a.filter-title:not(.jbs-collapsed):before {
   content: "\f2ea";
 }
-.filter-area-tab .nice-select {
+.filter-area-tab .jbs-nice-select {
   height: 45px;
   line-height: 45px;
   font-size: 14px;
@@ -4938,7 +4938,7 @@ img {
   box-shadow: none;
   padding: 0 15px 0 15px;
 }
-.filter-area-tab .nice-select:before {
+.filter-area-tab .jbs-nice-select:before {
   content: url(../images/icons/arrow-down.svg);
   position: absolute;
   right: 10px;
@@ -4946,31 +4946,31 @@ img {
   line-height: initial;
   transform: none;
 }
-.filter-area-tab .nice-select.open:before {
+.filter-area-tab .jbs-nice-select.open:before {
   transform: rotate(180deg);
   top: 17px;
 }
-.filter-area-tab .nice-select:after {
+.filter-area-tab .jbs-nice-select:after {
   display: none;
 }
-.filter-area-tab .nice-select .option {
+.filter-area-tab .jbs-nice-select .option {
   font-size: 1em;
   line-height: 32px;
 }
-.filter-area-tab .nice-select .list {
+.filter-area-tab .jbs-nice-select .list {
   padding: 5px 0;
   display: none;
   max-height: 250px;
   overflow-y: auto;
 }
-.filter-area-tab .nice-select .list::-webkit-scrollbar {
+.filter-area-tab .jbs-nice-select .list::-webkit-scrollbar {
   width: 4px;
 }
-.filter-area-tab .nice-select .list::-webkit-scrollbar-thumb {
+.filter-area-tab .jbs-nice-select .list::-webkit-scrollbar-thumb {
   background-color: var(--jbs-brand_color_3);
   border-radius: 3px;
 }
-.filter-area-tab .nice-select.open .list {
+.filter-area-tab .jbs-nice-select.open .list {
   display: block;
 }
 .filter-area-tab .loccation-range-select {
@@ -5290,7 +5290,7 @@ button.jbs_filter_btn-padding {
 .upper-filter .total-job-found {
   color: rgba(0, 0, 0, 0.4);
 }
-.upper-filter .short-filter .nice-select {
+.upper-filter .short-filter .jbs-nice-select {
   min-width: 165px;
   height: 32px;
   line-height: 30px;
@@ -5301,13 +5301,13 @@ button.jbs_filter_btn-padding {
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 30px;
 }
-.upper-filter .short-filter .nice-select:after {
+.upper-filter .short-filter .jbs-nice-select:after {
   right: 14px;
 }
-.upper-filter .short-filter .nice-select .list {
+.upper-filter .short-filter .jbs-nice-select .list {
   padding: 0;
 }
-.upper-filter .short-filter .nice-select .option {
+.upper-filter .short-filter .jbs-nice-select .option {
   font-size: 1em;
 }
 .upper-filter .jbs-layout-changer-btn {
@@ -5330,7 +5330,7 @@ button.jbs_filter_btn-padding {
   align-items: center;
 }
 
-.bg-color .upper-filter .nice-select {
+.bg-color .upper-filter .jbs-nice-select {
   background: transparent;
   border-color: var(--jbs-brand_color_2);
 }
@@ -5343,7 +5343,7 @@ button.jbs_filter_btn-padding {
 .jbs-popUpModal .jbs-modal-content {
   border-radius: 15px !important;
 }
-.jbs-popUpModal .jbs-modal-content.filter-area-tab .input-box input, .jbs-popUpModal .jbs-modal-content.filter-area-tab .nice-select {
+.jbs-popUpModal .jbs-modal-content.filter-area-tab .input-box input, .jbs-popUpModal .jbs-modal-content.filter-area-tab .jbs-nice-select {
   background: #FAFAFA;
   border-color: #EDEDED;
 }
@@ -6617,32 +6617,29 @@ body.wp-theme-docly .jbs-job-details {
 }
 #loginModal .placeholder_icon {
   position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  height: 55px;
+  top: 27px;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  text-align: center;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 17px;
 }
 #loginModal .placeholder_icon .passVicon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  padding: 6px;
-  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
+  position: relative;
 }
 #loginModal .placeholder_icon .passVicon img {
   width: 18px;
-  height: 18px;
-  object-fit: contain;
-  filter: brightness(0.7);
-  transition: filter 0.3s ease;
+  position: relative;
+  top: 50%;
+  margin: 0 auto;
+  transform: translateY(-50%);
 }
 #loginModal .placeholder_icon .passVicon:hover img {
   filter: brightness(1);
@@ -7306,6 +7303,20 @@ body.docy .jbs-table tbody tr {
   background: none;
 }
 
+.wp-theme-docy .user-data-form .form-wrapper .input-group-meta .placeholder_icon span:before {
+  top: 24px;
+}
+.wp-theme-docy .dashboard-body .placeholder_icon span::before {
+  top: 20px;
+}
+.wp-theme-docy .dashboard-body a:hover {
+  text-decoration: none !important;
+}
+.wp-theme-docy .dashboard-body table thead, .wp-theme-docy .dashboard-body .table_shortcode thead {
+  background: none;
+  border: none;
+}
+
 .jbs-nice-select ul {
   padding-left: 0 !important;
   margin: 5px;
@@ -7371,7 +7382,9 @@ body.docy .jbs-table tbody tr {
 .wp-theme-jobi .job-details, .wp-theme-jobi .jbs-job-details, .wp-theme-jobi .candidates-profile {
   padding-top: 180px !important;
 }
-
+.wp-theme-jobi .dashboard-body .passVicon img {
+  display: inline-block;
+}
 @media (max-width: 1199px) {
   .filter-area-tab .main-title {
     font-size: 20px;

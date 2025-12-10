@@ -585,20 +585,20 @@ Table of Contents:
   max-width: 700px;
   margin: 0 auto;
 }
-.dashboard-body .user-activity-chart .nice-select {
+.dashboard-body .user-activity-chart .jbs-nice-select {
   height: 50px;
   line-height: 46px;
   border: 2px solid #3f634d;
   border-radius: 7px;
   font-size: 15px;
 }
-.dashboard-body .user-activity-chart .nice-select:after {
+.dashboard-body .user-activity-chart .jbs-nice-select:after {
   right: 12px;
 }
-.dashboard-body .user-activity-chart .nice-select .option {
+.dashboard-body .user-activity-chart .jbs-nice-select .option {
   line-height: 40px;
 }
-.dashboard-body .user-activity-chart .nice-select .current {
+.dashboard-body .user-activity-chart .jbs-nice-select .current {
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -800,7 +800,7 @@ Table of Contents:
   height: 230px;
   max-height: 200px;
 }
-.dashboard-body .dash-input-wrapper .nice-select {
+.dashboard-body .dash-input-wrapper .jbs-nice-select {
   height: 55px;
   line-height: 55px;
   letter-spacing: -0.16px;
@@ -808,10 +808,10 @@ Table of Contents:
   border-radius: 7px;
   padding: 0 25px 0 20px;
 }
-.dashboard-body .dash-input-wrapper .nice-select .option {
+.dashboard-body .dash-input-wrapper .jbs-nice-select .option {
   line-height: 38px;
 }
-.dashboard-body .dash-input-wrapper .nice-select .list {
+.dashboard-body .dash-input-wrapper .jbs-nice-select .list {
   border-radius: 7px;
 }
 .dashboard-body .dash-input-wrapper .map-frame {
@@ -1031,7 +1031,7 @@ Table of Contents:
 .dashboard-body .short-filter {
   font-size: 15px;
 }
-.dashboard-body .short-filter .nice-select {
+.dashboard-body .short-filter .jbs-nice-select {
   min-width: 154px;
   height: 32px;
   line-height: 30px;
@@ -1042,13 +1042,13 @@ Table of Contents:
   border: 1px solid #000;
   border-radius: 30px;
 }
-.dashboard-body .short-filter .nice-select:after {
+.dashboard-body .short-filter .jbs-nice-select:after {
   right: 14px;
 }
-.dashboard-body .short-filter .nice-select .list {
+.dashboard-body .short-filter .jbs-nice-select .list {
   padding: 0;
 }
-.dashboard-body .short-filter .nice-select .option {
+.dashboard-body .short-filter .jbs-nice-select .option {
   font-size: 1em;
 }
 .dashboard-body .job-alert-table th {

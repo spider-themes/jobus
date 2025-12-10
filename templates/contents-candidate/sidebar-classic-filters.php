@@ -81,7 +81,7 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                         $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
                         $is_first = 0 === $index;
                         $is_active = ! empty( $widget_param );
-                        $is_collapsed = ( $is_first && ! $is_active ) || ( ! $is_first && ! $is_active );
+                        $is_collapsed =  ! $is_first && ! $is_active ;
 
                         $widget_title = $specifications[ $widget_name ] ?? '';
                         $specifications_data = $specs_options[ $widget_name ] ?? '';
@@ -90,7 +90,7 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                         <div class="filter-block bottom-line jbs-pb-25">
                             <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer <?php echo esc_attr($is_collapsed ? 'jbs-collapsed' : ''); ?>"
                                 data-jbs-toggle="collapse" data-jbs-target="#collapse-<?php echo esc_attr($widget_name) ?>"
-                                aria-expanded="<?php echo esc_attr($is_active || $is_first ? 'true' : 'false') ?>">
+                                aria-expanded="<?php echo ! $is_collapsed ? 'true' : 'false'; ?>">
                                 <?php echo esc_html($widget_title); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show') ?>"
