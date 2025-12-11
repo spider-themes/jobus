@@ -1720,7 +1720,7 @@
 }
 
 .jbs-nice-select .list {
-  background-color: #fff;
+  background-color: var(--bs-white);
   border-radius: 10px;
   box-shadow: 0 13px 35px -12px rgba(35, 35, 35, 0.1);
   box-sizing: border-box;
@@ -4828,11 +4828,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab.modal-content .tags.radio-filter label {
-  background: var(--jbs_box_bg_color_opt);
-}
 .filter-area-tab {
   position: relative;
+}
+.filter-area-tab.modal-content .tags.radio-filter label {
+  background: var(--jbs_box_bg_color_opt);
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -6235,12 +6235,12 @@ input[type=file]::-webkit-file-upload-button {
   }
 }
 
-body.wp-theme-docly .jbs-job-details {
-  padding-top: 180px;
+body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
+  padding-top: 200px;
   padding-bottom: 130px;
 }
 @media (max-width: 768px) {
-  body.wp-theme-docly .jbs-job-details {
+  body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
     padding-top: 160px;
   }
 }
@@ -7376,7 +7376,7 @@ body.docy .jbs-table tbody tr {
   box-shadow: none;
 }
 .wp-theme-blocksy.jobus-frontend .jbs-dashboard-template .dashboard-wrapper .user-avatar-setting .upload-btn {
-  padding: 0px 10px !important;
+  padding: 0 10px !important;
 }
 
 .wp-theme-jobi .job-details, .wp-theme-jobi .jbs-job-details, .wp-theme-jobi .candidates-profile {
@@ -7385,6 +7385,7 @@ body.docy .jbs-table tbody tr {
 .wp-theme-jobi .dashboard-body .passVicon img {
   display: inline-block;
 }
+
 @media (max-width: 1199px) {
   .filter-area-tab .main-title {
     font-size: 20px;

@@ -1,7 +1,8 @@
 body {
-  &.wp-theme-docly {
+  &.wp-theme-docly,
+  &.wp-theme-banca {
     .jbs-job-details {
-      padding-top: 180px;
+      padding-top: 200px;
       padding-bottom: 130px;
       @media (max-width: 768px) {
         padding-top: 160px;
