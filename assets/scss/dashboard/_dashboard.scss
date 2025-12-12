@@ -4,6 +4,19 @@
     margin-top: 32px;
   }
 }
+
+// Hide site footer on dashboard pages
+.page-template-page-template-dashboard,
+.jbs-dashboard-template {
+  .site-footer,
+  footer.site-footer,
+  footer#colophon,
+  .footer,
+  #footer {
+    display: none !important;
+  }
+}
+
 .dashboard-navbar {
   position: fixed;
   z-index: 1000;

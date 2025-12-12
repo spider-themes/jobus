@@ -109,6 +109,7 @@ $applications = new \WP_Query( $applications_args );
                             // Get candidate profile if exists
                             $candidate_user = get_user_by( 'email', $candidate_email );
                             $candidate_profile_url = '#';
+                            $candidate_post_id = null;
                             
                             // Get display name from user if available
                             if ( $candidate_user ) {
@@ -123,7 +124,8 @@ $applications = new \WP_Query( $applications_args );
                                     'fields'         => 'ids',
                                 ]);
                                 if ( ! empty( $candidate_posts ) ) {
-                                    $candidate_profile_url = get_permalink( $candidate_posts[0] );
+                                    $candidate_post_id = $candidate_posts[0];
+                                    $candidate_profile_url = get_permalink( $candidate_post_id );
                                 }
                             }
 
@@ -135,7 +137,33 @@ $applications = new \WP_Query( $applications_args );
                             <tr>
                                 <td class="applicant-name">
                                     <div class="applicant-info jbs-d-flex jbs-align-items-center jbs-gap-2">
-                                        <?php echo get_avatar( $candidate_email, 40, '', '', [ 'class' => 'jbs-rounded-circle' ] ); ?>
+                                        <?php 
+                                        // Get candidate avatar - check multiple sources
+                                        $candidate_avatar = '';
+                                        
+                                        // 1. Check for user meta avatar
+                                        if ( $candidate_user ) {
+                                            $avatar_id = get_user_meta( $candidate_user->ID, 'jobus_avatar', true );
+                                            if ( $avatar_id ) {
+                                                $candidate_avatar = wp_get_attachment_image_url( $avatar_id, 'thumbnail' );
+                                            }
+                                        }
+                                        
+                                        // 2. Check for candidate post featured image
+                                        if ( empty( $candidate_avatar ) && $candidate_post_id ) {
+                                            $thumbnail_id = get_post_thumbnail_id( $candidate_post_id );
+                                            if ( $thumbnail_id ) {
+                                                $candidate_avatar = wp_get_attachment_image_url( $thumbnail_id, 'thumbnail' );
+                                            }
+                                        }
+                                        
+                                        // 3. Display image or fallback to gravatar
+                                        if ( $candidate_avatar ) {
+                                            echo '<img src="' . esc_url( $candidate_avatar ) . '" alt="' . esc_attr( $candidate_name ) . '" class="jbs-rounded-circle" width="40" height="40" style="object-fit: cover;">';
+                                        } else {
+                                            echo get_avatar( $candidate_email, 40, '', '', [ 'class' => 'jbs-rounded-circle' ] );
+                                        }
+                                        ?>
                                         <div>
                                             <?php if ( $candidate_profile_url !== '#' ) : ?>
                                                 <a href="<?php echo esc_url( $candidate_profile_url ); ?>" class="jbs-fw-500 jbs-text-dark">

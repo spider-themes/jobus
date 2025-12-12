@@ -108,7 +108,7 @@ class Job_Tabs extends Widget_Base {
 			'show_count', [
 				'label'   => esc_html__( 'Show Posts Count', 'jobus' ),
 				'type'    => Controls_Manager::NUMBER,
-				'default' => 3
+				'default' => 5
 			]
 		);
 

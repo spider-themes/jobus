@@ -111,7 +111,8 @@
   .light-bg {
     background: var(--jbs-box_bg_color);
     // subtle shadow
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--bs_sm);
   }
 
   .main-title {
