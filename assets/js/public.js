@@ -283,7 +283,7 @@
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    const loginModal = document.getElementById('loginModal');
+                    const loginModal = document.getElementById('jobusLoginModal');
                     
                     if (loginModal) {
                         // Show the modal
@@ -303,13 +303,13 @@
             });
 
             // Close modal when clicking close button
-            $(document).on('click', '#loginModal .jbs-btn-close, #loginModal [data-jbs-dismiss="modal"]', function (e) {
+            $(document).on('click', '#jobusLoginModal .jbs-btn-close, #jobusLoginModal [data-jbs-dismiss="modal"]', function (e) {
                 e.preventDefault();
                 closeLoginModal();
             });
 
             // Close modal when clicking outside the modal content
-            $(document).on('click', '#loginModal', function (e) {
+            $(document).on('click', '#jobusLoginModal', function (e) {
                 if (e.target === this) {
                     closeLoginModal();
                 }
@@ -318,7 +318,7 @@
             // Close with ESC key
             $(document).on('keydown', function(e) {
                 if (e.key === 'Escape' || e.keyCode === 27) {
-                    const loginModal = document.getElementById('loginModal');
+                    const loginModal = document.getElementById('jobusLoginModal');
                     if (loginModal && loginModal.classList.contains('show')) {
                         closeLoginModal();
                     }
@@ -330,7 +330,7 @@
          * Close login modal
          */
         function closeLoginModal() {
-            const loginModal = document.getElementById('loginModal');
+            const loginModal = document.getElementById('jobusLoginModal');
             if (loginModal) {
                 loginModal.style.opacity = '0';
                 setTimeout(function() {

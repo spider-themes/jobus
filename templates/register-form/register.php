@@ -188,7 +188,7 @@ $is_employer_tab = ( $jobus_tab === 'employer' );
                 </div>
 				<?php if ( ! empty( $singin_btn_label ) && ( $singin_btn_url ) ) : ?>
                     <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e( 'Have an account?', 'jobus' ); ?>
-                        <a href="<?php echo esc_url( $singin_btn_url ) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#loginModal">
+                        <a href="<?php echo esc_url( $singin_btn_url ) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#jobusLoginModal">
 							<?php echo esc_html( $singin_btn_label ); ?>
                         </a>
                     </p>

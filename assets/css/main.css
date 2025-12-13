@@ -6404,6 +6404,10 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
 }
 
 /*========== Login Form Styling ===========*/
+#jobusLoginModal.jbs-modal.show {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .jobus-login-from.dashboard-body, .jobus-logout-from.dashboard-body {
   margin-left: 0;
 }
@@ -6428,7 +6432,7 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
 }
 
 /*========== Login Modal Popup Styling ===========*/
-#loginModal.modal {
+#jobusLoginModal.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -6440,49 +6444,49 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   padding-top: 50px;
   overflow-y: auto;
 }
-#loginModal.modal.show {
+#jobusLoginModal.modal.show {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
-#loginModal.modal.show .modal-dialog {
+#jobusLoginModal.modal.show .modal-dialog {
   animation: modalFadeIn 0.3s ease-in-out forwards;
 }
-#loginModal.modal.jbs-fade {
+#jobusLoginModal.modal.jbs-fade {
   transition: opacity 0.3s ease-in-out;
   opacity: 0;
 }
-#loginModal.modal.jbs-fade.show {
+#jobusLoginModal.modal.jbs-fade.show {
   opacity: 1;
 }
-#loginModal .modal-dialog {
+#jobusLoginModal .modal-dialog {
   position: relative;
   width: auto;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
-#loginModal .modal-dialog.modal-fullscreen {
+#jobusLoginModal .modal-dialog.modal-fullscreen {
   max-width: 90%;
 }
 @media (max-width: 768px) {
-  #loginModal .modal-dialog.modal-fullscreen {
+  #jobusLoginModal .modal-dialog.modal-fullscreen {
     max-width: 95%;
     padding: 10px;
   }
 }
-#loginModal .modal-dialog.modal-dialog-centered {
+#jobusLoginModal .modal-dialog.modal-dialog-centered {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100%;
 }
-#loginModal .container {
+#jobusLoginModal .container {
   width: 100%;
   max-width: 600px;
 }
-#loginModal .modal-content {
+#jobusLoginModal .modal-content {
   position: relative;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -6492,14 +6496,14 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   animation: slideUp 0.4s ease-out forwards;
 }
 @media (max-width: 576px) {
-  #loginModal .modal-content {
+  #jobusLoginModal .modal-content {
     padding: 30px 20px;
   }
 }
-#loginModal .modal-content.shadow-sm {
+#jobusLoginModal .modal-content.shadow-sm {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
-#loginModal .jbs-btn-close {
+#jobusLoginModal .jbs-btn-close {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -6518,18 +6522,18 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   align-items: center;
   justify-content: center;
 }
-#loginModal .jbs-btn-close::before {
+#jobusLoginModal .jbs-btn-close::before {
   content: "×";
   font-size: 32px;
 }
-#loginModal .jbs-btn-close:hover, #loginModal .jbs-btn-close:focus {
+#jobusLoginModal .jbs-btn-close:hover, #jobusLoginModal .jbs-btn-close:focus {
   opacity: 1;
   outline: none;
 }
-#loginModal .jbs-text-center {
+#jobusLoginModal .jbs-text-center {
   text-align: center;
 }
-#loginModal .jbs-text-center h2 {
+#jobusLoginModal .jbs-text-center h2 {
   font-size: 28px;
   font-weight: 600;
   color: var(--jbs-heading_color, #254035);
@@ -6537,57 +6541,57 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   line-height: 1.3;
 }
 @media (max-width: 576px) {
-  #loginModal .jbs-text-center h2 {
+  #jobusLoginModal .jbs-text-center h2 {
     font-size: 22px;
   }
 }
-#loginModal .jbs-text-center p {
+#jobusLoginModal .jbs-text-center p {
   font-size: 15px;
   color: #6a737c;
   margin-bottom: 12px;
   line-height: 1.6;
 }
-#loginModal .jbs-text-center p a {
+#jobusLoginModal .jbs-text-center p a {
   color: var(--jbs-brand_color_1, #31795A);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
-#loginModal .jbs-text-center p a:hover {
+#jobusLoginModal .jbs-text-center p a:hover {
   color: var(--jbs-brand_color_2, #244034);
   text-decoration: underline;
 }
-#loginModal .form-wrapper {
+#jobusLoginModal .form-wrapper {
   max-width: 100%;
   margin-top: 30px;
 }
-#loginModal .form-wrapper form.jbs-mt-10 {
+#jobusLoginModal .form-wrapper form.jbs-mt-10 {
   margin-top: 10px;
 }
-#loginModal .jbs-row {
+#jobusLoginModal .jbs-row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -12px;
   margin-left: -12px;
 }
-#loginModal .jbs-col-12 {
+#jobusLoginModal .jbs-col-12 {
   flex: 0 0 100%;
   padding-right: 12px;
   padding-left: 12px;
 }
-#loginModal .input-group-meta {
+#jobusLoginModal .input-group-meta {
   position: relative;
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
 }
-#loginModal .input-group-meta.jbs-mb-25 {
+#jobusLoginModal .input-group-meta.jbs-mb-25 {
   margin-bottom: 25px;
 }
-#loginModal .input-group-meta.jbs-mb-20 {
+#jobusLoginModal .input-group-meta.jbs-mb-20 {
   margin-bottom: 20px;
 }
-#loginModal .input-group-meta label {
+#jobusLoginModal .input-group-meta label {
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
@@ -6595,7 +6599,7 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   color: var(--jbs-heading_color, #254035);
   text-align: left;
 }
-#loginModal .input-group-meta input {
+#jobusLoginModal .input-group-meta input {
   width: 100%;
   padding: 12px 15px;
   font-size: 14px;
@@ -6606,19 +6610,19 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   transition: all 0.3s ease;
   font-family: inherit;
 }
-#loginModal .input-group-meta input:focus {
+#jobusLoginModal .input-group-meta input:focus {
   outline: none;
   background-color: #fff;
   border-color: var(--jbs-brand_color_1, #31795A);
   box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.1);
 }
-#loginModal .input-group-meta input::placeholder {
+#jobusLoginModal .input-group-meta input::placeholder {
   color: #9fa6ad;
 }
-#loginModal .input-group-meta input.pass_log_id {
+#jobusLoginModal .input-group-meta input.pass_log_id {
   padding-right: 45px;
 }
-#loginModal .placeholder_icon {
+#jobusLoginModal .placeholder_icon {
   position: absolute;
   height: 55px;
   top: 27px;
@@ -6630,27 +6634,27 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   color: rgba(0, 0, 0, 0.45);
   font-size: 17px;
 }
-#loginModal .placeholder_icon .passVicon {
+#jobusLoginModal .placeholder_icon .passVicon {
   width: 100%;
   height: 100%;
   cursor: pointer;
   display: block;
   position: relative;
 }
-#loginModal .placeholder_icon .passVicon img {
+#jobusLoginModal .placeholder_icon .passVicon img {
   width: 18px;
   position: relative;
   top: 50%;
   margin: 0 auto;
   transform: translateY(-50%);
 }
-#loginModal .placeholder_icon .passVicon:hover img {
+#jobusLoginModal .placeholder_icon .passVicon:hover img {
   filter: brightness(1);
 }
-#loginModal .placeholder_icon .passVicon.eye-slash img {
+#jobusLoginModal .placeholder_icon .passVicon.eye-slash img {
   filter: brightness(0.7);
 }
-#loginModal .agreement-checkbox {
+#jobusLoginModal .agreement-checkbox {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6658,23 +6662,23 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   margin: 0;
   gap: 15px;
 }
-#loginModal .agreement-checkbox.jbs-d-flex {
+#jobusLoginModal .agreement-checkbox.jbs-d-flex {
   display: flex;
 }
-#loginModal .agreement-checkbox.jbs-justify-content-between {
+#jobusLoginModal .agreement-checkbox.jbs-justify-content-between {
   justify-content: space-between;
 }
-#loginModal .agreement-checkbox.jbs-align-items-center {
+#jobusLoginModal .agreement-checkbox.jbs-align-items-center {
   align-items: center;
 }
-#loginModal .agreement-checkbox input[type=checkbox] {
+#jobusLoginModal .agreement-checkbox input[type=checkbox] {
   width: 18px;
   height: 18px;
   margin-right: 8px;
   cursor: pointer;
   accent-color: var(--jbs-brand_color_1, #31795A);
 }
-#loginModal .agreement-checkbox label {
+#jobusLoginModal .agreement-checkbox label {
   margin: 0;
   font-size: 14px;
   color: #6a737c;
@@ -6684,7 +6688,7 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   align-items: center;
   line-height: 1;
 }
-#loginModal .agreement-checkbox a {
+#jobusLoginModal .agreement-checkbox a {
   font-size: 14px;
   color: var(--jbs-brand_color_1, #31795A);
   text-decoration: none;
@@ -6692,17 +6696,17 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   transition: color 0.3s ease;
   white-space: nowrap;
 }
-#loginModal .agreement-checkbox a:hover {
+#jobusLoginModal .agreement-checkbox a:hover {
   color: var(--jbs-brand_color_2, #244034);
   text-decoration: underline;
 }
 @media (max-width: 576px) {
-  #loginModal .agreement-checkbox {
+  #jobusLoginModal .agreement-checkbox {
     flex-direction: column;
     align-items: flex-start;
   }
 }
-#loginModal .btn-eleven {
+#jobusLoginModal .btn-eleven {
   width: 100%;
   padding: 12px 24px;
   height: 50px;
@@ -6718,28 +6722,28 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   text-align: center;
   line-height: 26px;
 }
-#loginModal .btn-eleven.jbs-jbs-fw-500 {
+#jobusLoginModal .btn-eleven.jbs-jbs-fw-500 {
   font-weight: 500;
 }
-#loginModal .btn-eleven.tran3s {
+#jobusLoginModal .btn-eleven.tran3s {
   transition: all 0.3s ease;
 }
-#loginModal .btn-eleven.jbs-d-block {
+#jobusLoginModal .btn-eleven.jbs-d-block {
   display: block;
 }
-#loginModal .btn-eleven.jbs-mt-20 {
+#jobusLoginModal .btn-eleven.jbs-mt-20 {
   margin-top: 20px;
 }
-#loginModal .btn-eleven:hover {
+#jobusLoginModal .btn-eleven:hover {
   background-color: var(--jbs-brand_color_2, #244034);
   box-shadow: 0 6px 20px rgba(49, 121, 90, 0.3);
   transform: translateY(-2px);
 }
-#loginModal .btn-eleven:active {
+#jobusLoginModal .btn-eleven:active {
   transform: translateY(0);
   box-shadow: 0 3px 10px rgba(49, 121, 90, 0.2);
 }
-#loginModal .btn-eleven:disabled {
+#jobusLoginModal .btn-eleven:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -7204,7 +7208,7 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   text-align: right !important;
 }
 
-.wp-theme-astra #loginModal .placeholder_icon .passVicon img {
+.wp-theme-astra #jobusLoginModal .placeholder_icon .passVicon img {
   top: 16px;
 }
 .wp-theme-astra .user-data-form .form-wrapper .input-group-meta .placeholder_icon img {

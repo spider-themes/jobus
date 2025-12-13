@@ -10,7 +10,7 @@ $password    = ! empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash( 
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
     ?>
-    <div class="jbs-modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="jbs-modal jbs-fade login_from" id="jobusLoginModal" tabindex="-1" aria-hidden="true">
         <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
                 <div class="user-data-form jbs-modal-content jbs-shadow-sm">
@@ -38,7 +38,7 @@ if ( is_user_logged_in() ) {
     <?php
 } else {
     ?>
-    <div class="jbs-modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="jbs-modal jbs-fade login_from" id="jobusLoginModal" tabindex="-1" aria-hidden="true">
         <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
                 <div class="user-data-form jbs-modal-content">

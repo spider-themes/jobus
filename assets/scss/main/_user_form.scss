@@ -1,10 +1,14 @@
 /*========== Login Form Styling ===========*/
+#jobusLoginModal.jbs-modal.show{
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .jobus-login-from, .jobus-logout-from {
   &.dashboard-body {
     margin-left: 0;
 
     .login_from {
       background-color: transparent;
+     
     }
   }
 
@@ -34,7 +38,7 @@
 }
 
 /*========== Login Modal Popup Styling ===========*/
-#loginModal {
+#jobusLoginModal {
   &.modal {
     position: fixed;
     top: 0;
