@@ -1,7 +1,7 @@
 === Jobus – Complete Job Board & Hiring Platform that match your brand ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job listing, recruitment, job portal, hiring
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -146,11 +146,39 @@ Absolutely. Jobus provides multiple layout templates for job listings, companies
 
 
 == Screenshots ==
-1. Candidate Page with Filterable Sidebar
-2. Company Page with Filterable Sidebar
-3. Job listing Page with Filterable Sidebar
+1. Job with Sidebar — Clean job layout with sidebar filters
+2. Candidate Single — Detailed candidate profile with essentials
+3. Job Specifications — Configure job requirement fields
+4. Job Archive — Manage job listing layout
+5. Job Details — Adjust single job view settings
+6. Appearance — Customize overall visual styling
+7. Authentication — Control login and access rules
+8. Job Tabs — Display jobs in tab layout
+9. Company List — Showcase companies elegantly
+10. Candidate List — Display candidates with filters
+11. Job Category — Show jobs by categorized sections
 
 == Changelog ==
+
+= 1.4.0 (13 Dec 2025) =
+New: Added candidate pagination style and job status styling
+New: Allow job applications without login (configurable from settings)
+New: Applications page added to the Candidate Dashboard
+New: Dashboard customization options added to the Settings page
+New: Default company logo option added for missing logos
+Fixed: Job list delete button issue resolved
+Fixed: Candidate and employer user role issues fixed
+Fixed: Jobus Elementor widgets issues corrected
+Tweaked: Reorganized several settings for improved clarity
+Tweaked: Dashboard layout spacing and button padding refined for a more consistent UI
+Tweaked: Candidate Single Page improved for better readability
+Tweaked: Dashboard login form now auto-redirects to the frontend dashboard
+Tweaked: Filter button made conditional—only appears if filter widgets are set
+Tweaked: Improved filter validation to match filter widget availability
+Tweaked: Unified pagination styling across the entire plugin
+Tweaked: Edit button added to Company and Job single pages
+Tweaked: Improved the Candidate Single Page
+Tweaked: Various code sections simplified and optimized for better performance
 
 = 1.3.0 (02 Dec 2025) =
 New: Added Job Title display to Job Single Layout 2
