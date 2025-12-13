@@ -7204,6 +7204,26 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   text-align: right !important;
 }
 
+.wp-theme-astra #loginModal .placeholder_icon .passVicon img {
+  top: 16px;
+}
+.wp-theme-astra .user-data-form .form-wrapper .input-group-meta .placeholder_icon img {
+  top: 22%;
+  transform: translateY(-22%);
+}
+.wp-theme-astra .btn-one:focus {
+  color: #000000 !important;
+  background-color: var(--jbs-brand_color_3);
+  border: 2px solid transparent;
+}
+.wp-theme-astra .jbs-btn-close:focus, .wp-theme-astra .jbs-btn-close:hover {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+  opacity: 1 !important;
+  background: none !important;
+  border: none !important;
+}
+
 .post-type-archive-jobus_job .ast-container,
 .post-type-archive-jobus_candidate .ast-container,
 .post-type-archive-jobus_company .ast-container,

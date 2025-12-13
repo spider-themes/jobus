@@ -10,10 +10,10 @@ $password    = ! empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash( 
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
     ?>
-    <div class="modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-            <div class="container">
-                <div class="user-data-form modal-content shadow-sm">
+    <div class="jbs-modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
+            <div class="jbs-container">
+                <div class="user-data-form jbs-modal-content jbs-shadow-sm">
                     <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="jbs-text-center">
                         <h2><?php esc_html_e( 'Welcome ', 'jobus' ) ?><?php echo esc_html( $current_user->display_name ); ?></h2>
@@ -38,10 +38,10 @@ if ( is_user_logged_in() ) {
     <?php
 } else {
     ?>
-    <div class="modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-            <div class="container">
-                <div class="user-data-form modal-content">
+    <div class="jbs-modal jbs-fade login_from" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
+            <div class="jbs-container">
+                <div class="user-data-form jbs-modal-content">
                     <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="jbs-text-center">
                         <h2><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ) ?></h2>
@@ -55,7 +55,7 @@ if ( is_user_logged_in() ) {
                         </p>
                     </div>
                     <div class="form-wrapper jbs-m-auto">
-                        <form action="<?php echo esc_url( home_url( '/' ) ) ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
+                        <form action="<?php echo esc_url( home_url( '/' ) ); ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 
                             <?php wp_nonce_field( 'jobus_login_action', 'jobus_nonce' ); ?>
 
@@ -63,21 +63,16 @@ if ( is_user_logged_in() ) {
                                 <div class="jbs-col-12">
                                     <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                         <label><?php esc_html_e( 'Username/Email*', 'jobus' ); ?></label>
-                                        <input type="text" name="user_input" id="user_input" value="<?php echo esc_attr( $user_input ) ?>"
-                                               placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>">
+                                        <input type="text" name="user_input" id="user_input" value="<?php echo esc_attr( $user_input ); ?>" placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>" autocomplete="username" required>
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
                                     <div class="input-group-meta jbs-position-relative jbs-mb-20">
-                                        <label><?php esc_html_e( 'Password*', 'jobus' ) ?></label>
-                                        <input type="password" name="pwd" id="password"
-                                               value="<?php echo esc_attr( $password ) ?>"
-                                               placeholder="<?php esc_attr_e( 'Enter Password', 'jobus' ); ?>"
-                                               class="pass_log_id">
+                                        <label><?php esc_html_e( 'Password*', 'jobus' ); ?></label>
+                                        <input type="password" name="pwd" id="password" value="<?php echo esc_attr( $password ); ?>" placeholder="<?php esc_attr_e( 'Enter Password', 'jobus' ); ?>" class="pass_log_id" autocomplete="current-password" required>
                                         <span class="placeholder_icon">
                                         <span class="passVicon">
-                                            <img src="<?php echo esc_url( JOBUS_IMG . '/icons/icon-eye.svg' ) ?>"
-                                                 alt="<?php esc_attr_e( 'eye-icon', 'jobus' ); ?>">
+                                            <img src="<?php echo esc_url( JOBUS_IMG . '/icons/icon-eye.svg' ); ?>" alt="<?php esc_attr_e( 'eye-icon', 'jobus' ); ?>">
                                         </span>
                                     </span>
                                     </div>

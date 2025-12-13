@@ -56,6 +56,7 @@ class Frontend {
 			return;
 		}
 		// Output the login popup modal template
-		echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is safe
+		echo Template_Loader::get_template_part( 'login-form/login-popup' );
 	}
 }

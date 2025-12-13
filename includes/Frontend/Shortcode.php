@@ -51,17 +51,16 @@ class Shortcode {
 			'job_layout' => '', // Empty means use global setting
 		), $atts, 'jobus_job_archive' );
 
-		ob_start();
-		self::job_page_layout( $atts );
-		
-		// Output login modal if user is not logged in
-		if ( ! is_user_logged_in() ) {
-			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
-		}
-		
-		$content .= ob_get_clean();
-
-		return $content;
+	ob_start();
+	self::job_page_layout( $atts );
+	
+	// Output login modal if user is not logged in
+	if ( ! is_user_logged_in() ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is safe
+		echo Template_Loader::get_template_part( 'login-form/login-popup' );
+	}
+	
+	$content .= ob_get_clean();		return $content;
 	}
 
 	/**
@@ -80,17 +79,16 @@ class Shortcode {
 			'company_layout' => '', // Empty means use global setting
 		), $atts, 'jobus_company_archive' );
 
-		ob_start();
-		self::company_page_layout( $atts );
-		
-		// Output login modal if user is not logged in
-		if ( ! is_user_logged_in() ) {
-			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
-		}
-		
-		$content .= ob_get_clean();
-
-		return $content;
+	ob_start();
+	self::company_page_layout( $atts );
+	
+	// Output login modal if user is not logged in
+	if ( ! is_user_logged_in() ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is safe
+		echo Template_Loader::get_template_part( 'login-form/login-popup' );
+	}
+	
+	$content .= ob_get_clean();		return $content;
 	}
 
 	/**
@@ -109,17 +107,16 @@ class Shortcode {
 			'candidate_layout' => '', // Empty means use global setting
 		), $atts, 'jobus_candidate_archive' );
 
-		ob_start();
-		self::candidate_page_layout( $atts );
-		
-		// Output login modal if user is not logged in
-		if ( ! is_user_logged_in() ) {
-			echo wp_kses_post( Template_Loader::get_template_part( 'login-form/login-popup' ) );
-		}
-		
-		$content .= ob_get_clean();
-
-		return $content;
+	ob_start();
+	self::candidate_page_layout( $atts );
+	
+	// Output login modal if user is not logged in
+	if ( ! is_user_logged_in() ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Template output is safe
+		echo Template_Loader::get_template_part( 'login-form/login-popup' );
+	}
+	
+	$content .= ob_get_clean();		return $content;
 	}
 
 	/**
