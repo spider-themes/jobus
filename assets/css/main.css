@@ -1744,12 +1744,9 @@
 }
 
 .jbs-nice-select .option {
+  color: var(--black_500);
   font-size: 0.95em;
-  cursor: pointer;
-  font-weight: 400 !important;
   margin-top: 5px;
-  list-style: none;
-  outline: none;
   padding: 0 10px;
   text-align: left;
   -webkit-transition: all 0.2s;
@@ -5053,7 +5050,6 @@ img {
   font-size: 11px;
   font-weight: 500;
   text-align: center;
-  color: #000;
   line-height: 20px;
   width: 20px;
   height: 20px;
@@ -5501,7 +5497,7 @@ button.jbs_filter_btn-padding {
 .job-list-one.style-two {
   padding-top: 35px;
   padding-bottom: 35px;
-  border: 1px solid #DBE8E5;
+  border: 1px solid var(--black_50);
 }
 .job-list-one.style-two .apply-btn {
   background: var(--jbs-brand_color_1);
@@ -5561,7 +5557,7 @@ button.jbs_filter_btn-padding {
 
 .job-list-two {
   padding: 35px 35px 30px;
-  background: #FFFFFF;
+  background: var(--bs-white);
   border: 1px solid #fff;
   border-radius: 10px;
   display: flex;
@@ -5574,7 +5570,7 @@ button.jbs_filter_btn-padding {
   transition: all 0.2s ease-in-out 0s;
 }
 .job-list-two:hover {
-  box-shadow: 0px 20px 40px rgba(22, 105, 70, 0.08);
+  box-shadow: 0 20px 40px rgba(22, 105, 70, 0.08);
 }
 .job-list-two .logo {
   height: auto;
@@ -5651,7 +5647,7 @@ button.jbs_filter_btn-padding {
   color: var(--jbs-brand_color_5);
 }
 .job-list-two.style-two {
-  border: 1px solid #EBEBEB;
+  border: 1px solid var(--black_50);
 }
 .job-list-two.style-two:hover {
   background: #F8FDE4;

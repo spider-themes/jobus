@@ -96,11 +96,13 @@ body.body_dark .jbs-related-job .jbs-related-job-slider .job-list-two .jbs-text-
 body.body_dark .jbs-related-job .jbs-related-job-slider .job-list-two .job-location a {
   color: var(--black_400) !important;
 }
-body.body_dark .job-list-two,
 body.body_dark .jbs-job-listing-widget .job-list-one,
 body.body_dark .big-circle .brand-icon {
   background: var(--bs-white) !important;
   border-color: var(--border_on_highlight) !important;
+}
+body.body_dark .job-list-two.style-two:hover {
+  background: var(--bs-white) !important;
 }
 body.body_dark .job-list-two .job-duration {
   background: var(--black_50) !important;
@@ -121,8 +123,8 @@ body.body_dark .jbs-search-form-widget-one .jbs-nice-select {
 }
 body.body_dark .jbs-search-form-widget-one form::after,
 body.body_dark .jbs-search-form-widget-one .jbs-nice-select::after {
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
 }
 body.body_dark .jbs-search-form-widget-one form .input-box .label {
   color: var(--black_900) !important;
@@ -167,16 +169,17 @@ body.body_dark .spel-accordion .accordion_btn_link, body.body_dark .spel-accordi
   color: var(--black_100) !important;
 }
 body.body_dark .jbs-related-job .jbs-slick-arrow-one .slick-arrow .bi-arrow-left {
-  color: #fff;
+  color: #fff !important;
 }
 body.body_dark .jbs-related-job .jbs-slick-arrow-one .slick-arrow .bi-arrow-right {
-  color: #fff;
+  color: #fff !important;
 }
 body.body_dark .jbs-job-details .share-buttons li .share-item {
   background-color: var(--black_50) !important;
+  color: #fff !important;
 }
 body.body_dark .jbs-job-details .share-buttons li .share-item i {
-  color: #fff;
+  color: #fff !important;
 }
 
 /*# sourceMappingURL=dark-mode.css.map */

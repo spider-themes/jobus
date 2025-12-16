@@ -126,12 +126,9 @@
 }
 
 .jbs-nice-select .option {
+  color: var(--black_500);
   font-size: 0.95em;
-  cursor: pointer;
-  font-weight: 400 !important;
   margin-top: 5px;
-  list-style: none;
-  outline: none;
   padding: 0 10px;
   text-align: left;
   -webkit-transition: all 0.2s;

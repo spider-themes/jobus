@@ -157,11 +157,14 @@ body.body_dark {
   }
 
   // Job List & Wrapper Styles
-  .job-list-two,
   .jbs-job-listing-widget .job-list-one,
   .big-circle .brand-icon {
     background: var(--bs-white) !important;
     border-color: var(--border_on_highlight) !important;
+  }
+
+  .job-list-two.style-two:hover {
+    background: var(--bs-white) !important;
   }
 
   .job-list-two .job-duration {
@@ -190,8 +193,8 @@ body.body_dark {
       background: var(--bs-white) !important;
 
       &::after {
-        border-bottom: 1px solid #fff;
-        border-right: 1px solid #fff;
+        border-bottom: 1px solid #fff !important;
+        border-right: 1px solid #fff !important;
       }
     }
 
@@ -282,11 +285,11 @@ body.body_dark {
     .jbs-slick-arrow-one {
       .slick-arrow {
         .bi-arrow-left {
-          color: #fff;
+          color: #fff !important;
         }
 
         .bi-arrow-right {
-          color: #fff;
+          color: #fff !important;
         }
       }
     }
@@ -294,8 +297,9 @@ body.body_dark {
 
   .jbs-job-details .share-buttons li .share-item {
     background-color: var(--black_50) !important;
+    color: #fff !important;
     i {
-      color: #fff;
+      color: #fff !important;
     }
   }
 
