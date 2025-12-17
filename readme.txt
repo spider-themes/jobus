@@ -1,6 +1,6 @@
-=== Jobus – Complete Job Board & Hiring Platform that match your brand ===
+=== Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
-Tags: job board, job listing, recruitment, job portal, hiring
+Tags: job board, job portal, hiring, jobs, careers
 Stable tag: 1.4.0
 Requires at least: 6.0
 Tested up to: 6.8
@@ -8,246 +8,196 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A powerful job board plugin for WordPress that helps manage job listings, companies, and candidates.
+The ultimate WordPress Job Board plugin. Create a professional recruitment website with unlimited job listings, candidate profiles, and company pages.
 
 == Description ==
-Jobus is a comprehensive and powerful tool for creating job, company, and candidate listing pages on your WordPress website. With its user-friendly interface and robust features, Jobus simplifies the process for candidates and employers to sign up and become members of your website. The plugin offers an intuitive way to manage the entire hiring process without requiring any coding skills.
 
-== Features ==
+**Jobus** is a modern, lightweight, and powerful WordPress plugin designed to transform your website into a fully functional **Job Board**, **Recruitment Portal**, or **Hiring Platform**. 
 
-* **Unlimited Job Posting:**
-  There’s no limit to how many jobs you can post. Create and manage unlimited job listings effortlessly.
+Whether you are running a niche job board, a company career page, or a large-scale recruitment site, Jobus provides everything you need to manage jobs, employers, and candidates efficiently—**without writing a single line of code**.
 
-* **Unlimited Candidates & Applications:**
-  Handle unlimited candidate profiles and job applications with ease using a simple, intuitive interface.
+Built with usability and SEO in mind, Jobus integrates seamlessly with your theme and offers native **Elementor** support, allowing you to design stunning job layouts with drag-and-drop ease.
 
-* **Unlimited Job Specifications:**
-  Add and manage detailed job specifications for each listing to help applicants understand requirements clearly.
+### 🚀 Why Choose Jobus?
 
-* **WordPress UI Integration:**
-  Manage job listings, candidates, and companies directly within the familiar WordPress dashboard environment.
+*   **Zero Coding Required:** Set up a complete job board in minutes.
+*   **Elementor Ready:** Includes custom Elementor widgets for Jobs, Search, and Categories.
+*   **Modern & Responsive:** Looks great on all devices (Mobile, Tablet, Desktop).
+*   **Developer Friendly:** Clean code, hooks, and filters for customization.
+*   **SEO Optimized:** Structured data and clean URLs to help your jobs rank in Google for Jobs.
 
-* **Location-Based Job Listings:**
-  Assign specific job locations to each post, allowing users to filter and find jobs by region or city.
+### ✨ Key Features (Free Version)
 
-* **Job Application Management:**
-  Enable job seekers to apply directly from each job post using a built-in and user-friendly form.
+**👨‍💼 For Employers & Companies**
+*   **Unlimited Job Postings:** Create and manage as many job listings as you need.
+*   **Company Profiles:** Dedicated pages for companies with logos, descriptions, and active jobs.
+*   **Job Specifications:** Add detailed requirements (Salary, Experience, Job Type, etc.).
+*   **Location-Based Listings:** Assign locations to jobs for easy filtering.
+*   **Employer Dashboard:** A frontend dashboard to manage listings and profile details.
 
-* **Applicant Tracking:**
-  Easily track and review all applications, view applicant details, and manage hiring in one centralized place.
+**👨‍💻 For Candidates & Job Seekers**
+*   **Candidate Profiles:** Users can create professional profiles / resumes.
+*   **Easy Application:** Apply to jobs directly via a built-in form.
+*   **Candidate Dashboard:** Manage applications and profile settings.
+*   **Job Search & Filters:** Find jobs by keyword, location, and category.
 
-* **User Account Pages:**
-  Provide dedicated dashboards for employers and candidates to manage their profiles and listings conveniently.
+**⚙️ Powerful Management Tools**
+*   **Frontend Dashboards:** Separate dashboards for Employers and Candidates.
+*   **Application Tracking:** View and manage job applications from the backend.
+*   **Custom User Roles:** Automatically assigns Employer and Candidate roles.
+*   **Social Sharing:** Built-in social share buttons for job posts.
+*   **Featured Jobs:** Highlight premium listings to boost visibility.
 
-* **Custom User Roles:**
-  Define and assign specific user roles for employers, candidates, and administrators to ensure organized management.
+### 🎨 Design & Customization
+*   **Pre-made Templates:** Includes ready-to-use templates for Job Lists, Single Jobs, and Company pages.
+*   **Elementor Widgets:** Drag-and-drop widgets for Job Listings, Search Forms, Categories, and more.
+*   **Customizable Appearance:** Control colors, layouts, and styles via settings.
 
-* **Featured Jobs:**
-  Highlight special job listings with a featured badge to attract more visibility and engagement.
+---
 
-* **Social Sharing:**
-  Allow visitors to share job listings across multiple social media platforms with a single click.
+### 🔥 Upgrade to Jobus Pro
+Unlock the full potential of your job board with **Jobus Pro**. Get advanced features to monetize and automate your recruitment business.
 
-* **Customizable Appearance:**
-  Easily customize the look and feel of your job portal to perfectly match your website’s branding.
+**Pro Features Include:**
+*   **Advanced Frontend Dashboards:** Full control for Employers & Candidates on the frontend.
+*   **Application Tracking System (ATS):** Manage application status (Pending, Interview, Hired, Rejected).
+*   **Advanced Filters:** Filter by Salary, Job Type, Experience, and more.
+*   **Job Alerts & Bookmarks:** Allow candidates to save jobs and get alerts.
+*   **Custom Email Notifications:** SMTP settings and email templates.
+*   **Custom Application Forms:** Link to external forms (e.g., Google Forms, LinkedIn).
+*   **Analytics & Reporting:** Track views, clicks, and application stats.
+*   **Premium Support:** Priority assistance from our team.
 
-* **Pre-Made Templates:**
-  Use ready-to-go templates for job listings, companies, and candidate pages to save time and design effort.
+👉 **[Get Jobus Pro Now](https://jobus.spider-themes.net/)** | **[View Live Demo](https://jobus.spider-themes.net/demos)**
 
-* **Multiple Layouts:**
-  Choose from different pre-designed layouts for jobs, companies, and candidates to suit your preferred style.
-
-* **Custom Minimal Design:**
-  Enjoy a clean, modern, and minimal interface focused on usability and enhanced user experience.
-
-
-###  Pro Features
-Upgrade to Jobus Pro for advanced tools and premium enhancements to supercharge your job board.
-
-#### Advanced Management Features
-- Application management dashboard
-- Favorite jobs/bookmarking
-- Advanced filters (salary, job type, location, etc.)
-- Application Tracking System (ATS)
-- Analytics & reporting (track job views & applications)
-- Featured jobs & companies
-- Multiple layout options for jobs, companies, and candidates
-- Applicant tracking (view applicants per job)
-- Assign company to job post
-- Multiple archive and detail layout options for jobs, candidates, and companies
-- Custom job application form (upload custom link, e.g., Google Form)
-- SMTP settings (custom email sending)
-- Frontend login page
-
-#### Dashboard & User Experience
-- Employer dashboard (manage listings, applications, etc.)
-- Candidate dashboard (manage resumes, applications, etc.)
-- Custom account pages for employers and candidates
-- Profile management (update details, change password)
-- Password reset functionality
-- Activity log (track user actions)
-- Featured job & company options (highlight listings)
-
-#### Customization & Widgets
-- Application management dashboard
-- Custom widgets, shortcodes & Gutenberg block 
-- Pre-made templates & layouts for careers, jobs, and companies
-
-
-== Elementor Widgets ==
-
-* **Categories**
-* **Companies**
-* **Job Tabs**
-* **Job Listing**
-* **Search Form**
-
-## 🔗 USEFUL LINKS ##
-
-- [Get Jobus Premium](https://jobus.spider-themes.net/)
-- [Frontend Demo](https://jobus.spider-themes.net/demos)
-- [Documentation](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/)
-- [Support Forum](https://wordpress.org/support/plugin/jobus/)
-
-== Development Notes ==
-This plugin uses npm for asset compilation. To rebuild the JavaScript and CSS:
-
-* Run `npm install`
-* Run `npm run build`
 
 == Installation ==
-= Minimum Requirements =
-* WordPress 6.0 or greater
-* PHP 7.4 or greater
-* MySQL 8.0 or greater OR MariaDB 10.5 or greater
-* HTTPS support
 
-= Recommended Hosting Setup =
-* WordPress memory limit of 256 MB or higher
-
-= Installation Steps =
-
-1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the ‘Plugins’ screen in WordPress
+1.  Go to your WordPress Dashboard > **Plugins** > **Add New**.
+2.  Search for "**Jobus**".
+3.  Click **Install Now** and then **Activate**.
+4.  Navigate to the **Jobus** menu in the sidebar to configure settings.
+5.  Use the shortcodes or Elementor widgets to display jobs on your pages.
 
 == Frequently Asked Questions ==
 
-= Does Jobus work with any theme? =
-Yes, the Jobus works with any standard WordPress theme.
+= Is Jobus compatible with Elementor? =
+Yes! Jobus comes with dedicated Elementor widgets, making it easy to design your job board pages using the drag-and-drop builder.
 
-= What makes Jobus different from other job board plugins? =
-Jobus stands out for its simplicity, flexibility, and seamless integration with WordPress. It offers an all-in-one solution for managing jobs, companies, and candidates — all from a familiar WordPress interface. With built-in Elementor widgets and pre-made templates, you can design stunning job portals without any coding knowledge.
+= Can I use Jobus with any WordPress theme? =
+Absolutely. Jobus is designed to work with any standard WordPress theme. It inherits your theme's styling for a seamless look.
 
-= Can I use Jobus on a multisite network? =
-Yes, you can use Jobus on a multisite network.
+= Does it support Google for Jobs? =
+Yes, Jobus uses structured data (Schema.org) to help your job listings appear in Google for Jobs search results.
 
-= Can I customize the layout of job listings and company pages? =
-Absolutely. Jobus provides multiple layout templates for job listings, companies, and candidate profiles. You can choose and customize layouts directly through Elementor or from the plugin settings page.
+= Can I translate the plugin into my language? =
+Yes, Jobus is fully translation-ready. You can use plugins like Loco Translate or WPML to translate it into your preferred language.
 
+= Where can I get support? =
+For free support, please post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/).
 
 == Screenshots ==
-1. Job with Sidebar — Clean job layout with sidebar filters
-2. Candidate Single — Detailed candidate profile with essentials
-3. Job Specifications — Configure job requirement fields
-4. Job Archive — Manage job listing layout
-5. Job Details — Adjust single job view settings
-6. Appearance — Customize overall visual styling
-7. Authentication — Control login and access rules
-8. Job Tabs — Display jobs in tab layout
-9. Company List — Showcase companies elegantly
-10. Candidate List — Display candidates with filters
-11. Job Category — Show jobs by categorized sections
+
+1.  **Job Listing with Sidebar** – Clean and professional job list layout with filters.
+2.  **Candidate Profile** – Detailed candidate resume and profile view.
+3.  **Job Specifications** – Easy-to-manage job attributes and requirements.
+4.  **Job Archive** – Grid and List views for job archives.
+5.  **Job Details Page** – Comprehensive single job page with application form.
+6.  **Plugin Settings** – Intuitive settings panel for full control.
+7.  **Login & Registration** – Secure frontend authentication forms.
+8.  **Job Tabs Element** – Display jobs in a tabbed layout.
+9.  **Company Directory** – Showcase hiring companies elegantly.
+10. **Candidate Directory** – Searchable list of candidate profiles.
+11. **Job Categories** – Browse jobs by industry or category.
 
 == Changelog ==
 
 = 1.4.0 (13 Dec 2025) =
-New: Added candidate pagination style and job status styling
-New: Allow job applications without login (configurable from settings)
-New: Applications page added to the Candidate Dashboard
-New: Dashboard customization options added to the Settings page
-New: Default company logo option added for missing logos
-Fixed: Job list delete button issue resolved
-Fixed: Candidate and employer user role issues fixed
-Fixed: Jobus Elementor widgets issues corrected
-Tweaked: Reorganized several settings for improved clarity
-Tweaked: Dashboard layout spacing and button padding refined for a more consistent UI
-Tweaked: Candidate Single Page improved for better readability
-Tweaked: Dashboard login form now auto-redirects to the frontend dashboard
-Tweaked: Filter button made conditional—only appears if filter widgets are set
-Tweaked: Improved filter validation to match filter widget availability
-Tweaked: Unified pagination styling across the entire plugin
-Tweaked: Edit button added to Company and Job single pages
-Tweaked: Improved the Candidate Single Page
-Tweaked: Various code sections simplified and optimized for better performance
+*   New: Added candidate pagination style and job status styling
+*   New: Allow job applications without login (configurable from settings)
+*   New: Applications page added to the Candidate Dashboard
+*   New: Dashboard customization options added to the Settings page
+*   New: Default company logo option added for missing logos
+*   Fixed: Job list delete button issue resolved
+*   Fixed: Candidate and employer user role issues fixed
+*   Fixed: Jobus Elementor widgets issues corrected
+*   Tweaked: Reorganized several settings for improved clarity
+*   Tweaked: Dashboard layout spacing and button padding refined for a more consistent UI
+*   Tweaked: Candidate Single Page improved for better readability
+*   Tweaked: Dashboard login form now auto-redirects to the frontend dashboard
+*   Tweaked: Filter button made conditional—only appears if filter widgets are set
+*   Tweaked: Improved filter validation to match filter widget availability
+*   Tweaked: Unified pagination styling across the entire plugin
+*   Tweaked: Edit button added to Company and Job single pages
+*   Tweaked: Improved the Candidate Single Page
+*   Tweaked: Various code sections simplified and optimized for better performance
 
 = 1.3.0 (02 Dec 2025) =
-New: Added Job Title display to Job Single Layout 2
-New: New: Introduced the unified [jobus_dashboard] shortcode, allowing both Candidate and Employer dashboards to run from a single page. Previously, two separate shortcodes were required for two different pages
-Fixed: Category layout responsiveness issue resolved
-Fixed: Resolved responsive issues in Jobus Elementor widgets
-Fixed: Jobus dashboard layout and responsive issues fixed
-Fixed: Company Dashboard “Specifications” and “Company Website” data handling corrected
-Fixed: Candidate Dashboard and Testimonial submission issues resolved
-Fixed: Candidate Dashboard social icon issue fixed
-Fixed: Number count issue in dashboards and related posts loading fixed
-Tweaked: Updated job options and refined Job Details page styling
-Tweaked: Improved Job Single 2 layout design for better readability
-Tweaked: Dark mode compatibility added for seamless integration with Docy themes
-Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
+*   New: Added Job Title display to Job Single Layout 2
+*   New: Introduced the unified [jobus_dashboard] shortcode, allowing both Candidate and Employer dashboards to run from a single page.
+*   Fixed: Category layout responsiveness issue resolved
+*   Fixed: Resolved responsive issues in Jobus Elementor widgets
+*   Fixed: Jobus dashboard layout and responsive issues fixed
+*   Fixed: Company Dashboard “Specifications” and “Company Website” data handling corrected
+*   Fixed: Candidate Dashboard and Testimonial submission issues resolved
+*   Fixed: Candidate Dashboard social icon issue fixed
+*   Fixed: Number count issue in dashboards and related posts loading fixed
+*   Tweaked: Updated job options and refined Job Details page styling
+*   Tweaked: Improved Job Single 2 layout design for better readability
+*   Tweaked: Dark mode compatibility added for seamless integration with Docy themes
+*   Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
 
 = 1.2.0 (11 Nov 2025) =
-New: Predefined Color Schemes added in the General Settings panel for quick styling customization
-New: Custom scrollbar styles added for a smoother visual experience
-New: Spinner loading animation styles added for better user feedback
-New: Demo user and password field added in the login form for easier testing
-New: demo.xml file added in the include/sample-data folder
-Fixed: Candidate save and saved job list issues resolved
-Fixed: Duplicate social link issue on candidate dashboard fixed
-Fixed: CV upload and related dashboard issues resolved
-Fixed: Employer job posting and dashboard header conflicts fixed for block-based themes
-Fixed: Registration and login password visibility issues resolved
-Fixed: Astra theme CSS issues on single and dashboard layouts fixed
-Fixed: Company and candidate dashboard CSS inconsistencies resolved
-Fixed: Extra borders removed from job listings for a cleaner appearance
-Fixed: Minor theme compatibility and visual issues resolved
-Improved: Option retrieval simplified for better performance and cleaner code
-Improved: Pagination HTML updated and renamed to .jbs-pagination for consistency
-Improved: Theme compatibility enhanced for Kadence, Docy, Avada, Astra, and OceanWP
-Improved: Company and candidate archive templates adjusted for better styling and alignment
-Improved: Company details and job title markup refined in dashboard
-Improved: Job button typography control renamed for clarity
-Improved: Link color updated using rgba values for better visibility
-Improved: Candidate and Company menus moved under the main Jobus menu
-Improved: Flex utility classes added for easier alignment and layout control
-Compatibility: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
-Compatibility: Administrator access enabled for employer dashboard
-Compatibility: Employer role granted edit_posts capability for frontend image uploads
-Optimized: Unused CSS and old titlebar code removed for lighter performance
-Optimized: Color and typography refined across dashboard and listings for consistency
+*   New: Predefined Color Schemes added in the General Settings panel for quick styling customization
+*   New: Custom scrollbar styles added for a smoother visual experience
+*   New: Spinner loading animation styles added for better user feedback
+*   New: Demo user and password field added in the login form for easier testing
+*   New: demo.xml file added in the include/sample-data folder
+*   Fixed: Candidate save and saved job list issues resolved
+*   Fixed: Duplicate social link issue on candidate dashboard fixed
+*   Fixed: CV upload and related dashboard issues resolved
+*   Fixed: Employer job posting and dashboard header conflicts fixed for block-based themes
+*   Fixed: Registration and login password visibility issues resolved
+*   Fixed: Astra theme CSS issues on single and dashboard layouts fixed
+*   Fixed: Company and candidate dashboard CSS inconsistencies resolved
+*   Fixed: Extra borders removed from job listings for a cleaner appearance
+*   Fixed: Minor theme compatibility and visual issues resolved
+*   Improved: Option retrieval simplified for better performance and cleaner code
+*   Improved: Pagination HTML updated and renamed to .jbs-pagination for consistency
+*   Improved: Theme compatibility enhanced for Kadence, Docy, Avada, Astra, and OceanWP
+*   Improved: Company and candidate archive templates adjusted for better styling and alignment
+*   Improved: Company details and job title markup refined in dashboard
+*   Improved: Job button typography control renamed for clarity
+*   Improved: Link color updated using rgba values for better visibility
+*   Improved: Candidate and Company menus moved under the main Jobus menu
+*   Improved: Flex utility classes added for easier alignment and layout control
+*   Compatibility: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
+*   Compatibility: Administrator access enabled for employer dashboard
+*   Compatibility: Employer role granted edit_posts capability for frontend image uploads
+*   Optimized: Unused CSS and old titlebar code removed for lighter performance
+*   Optimized: Color and typography refined across dashboard and listings for consistency
 
 = 1.1.0 (31 Oct 2025) =
-New: New Color Settings added in the General Settings panel
-New: Body class support for better theme styling control
-Fixed: Company dashboard and employment dashboard layout issues resolved
-Fixed: Job page CSS and single page layout issues fixed for consistent styling
-Fixed: PHP errors in templates resolved and templating system improved
-Fixed: Theme compatibility issues fixed across multiple themes (Astra, Docy, Twenty Twenty-Five)
-Fixed: Archive layout issue fixed for Astra theme
-Fixed: Dashboard employer lock issue fixed for candidate save functionality
-Improved: Job, Candidate & Company Single Pages redesigned for better readability and structure
-Improved: Templates refined and redundant fonts removed for cleaner performance
-Improved: Shortcode functionality enhanced with layout attributes and conditional loading for header/footer in archive templates
-Improved: Elementor widget lock and related UI refined for better editing experience
-Improved: Appearance and General Settings organization improved for easier configuration
-Improved: Subscribe field color adjusted for better visibility in dark mode
-Improved: Setup and color schema refined for a consistent user experience
-Compatibility: Astra theme compatibility improved for single and archive layouts
-Compatibility: GeneratePress theme compatibility added and tested
-Compatibility: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
-Compatibility: Docy theme compatibility refined for smoother integration
-Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
+*   New: New Color Settings added in the General Settings panel
+*   New: Body class support for better theme styling control
+*   Fixed: Company dashboard and employment dashboard layout issues resolved
+*   Fixed: Job page CSS and single page layout issues fixed for consistent styling
+*   Fixed: PHP errors in templates resolved and templating system improved
+*   Fixed: Theme compatibility issues fixed across multiple themes (Astra, Docy, Twenty Twenty-Five)
+*   Fixed: Archive layout issue fixed for Astra theme
+*   Fixed: Dashboard employer lock issue fixed for candidate save functionality
+*   Improved: Job, Candidate & Company Single Pages redesigned for better readability and structure
+*   Improved: Templates refined and redundant fonts removed for cleaner performance
+*   Improved: Shortcode functionality enhanced with layout attributes and conditional loading for header/footer in archive templates
+*   Improved: Elementor widget lock and related UI refined for better editing experience
+*   Improved: Appearance and General Settings organization improved for easier configuration
+*   Improved: Subscribe field color adjusted for better visibility in dark mode
+*   Improved: Setup and color schema refined for a consistent user experience
+*   Compatibility: Astra theme compatibility improved for single and archive layouts
+*   Compatibility: GeneratePress theme compatibility added and tested
+*   Compatibility: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
+*   Compatibility: Docy theme compatibility refined for smoother integration
+*   Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
 
 = 1.0.0 (22 October 2025) =
-* Init: Initial release
-
-[//]: # fs_free_only_end
+*   Init: Initial release

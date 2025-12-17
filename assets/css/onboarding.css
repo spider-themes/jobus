@@ -1,0 +1,765 @@
+/**
+ * Jobus Onboarding Wizard Styles
+ *
+ * Full-screen wizard UI for plugin setup.
+ *
+ * @package Jobus
+ * @since   1.5.0
+ */
+
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+
+.jobus-onboarding-page {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #f8faf9 0%, #e8f0ed 100%);
+  min-height: 100vh;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.jobus-onboarding-page *,
+.jobus-onboarding-page *::before,
+.jobus-onboarding-page *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.jobus-onboarding-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.jobus-onboarding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.jobus-logo svg {
+  display: block;
+}
+
+.jobus-skip-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.jobus-skip-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+/* ==========================================================================
+   Progress Steps
+   ========================================================================== */
+
+.jobus-onboarding-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.jobus-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.jobus-progress-step:hover {
+  opacity: 0.7;
+}
+
+.jobus-progress-step.active,
+.jobus-progress-step.completed {
+  opacity: 1;
+}
+
+.jobus-progress-step .step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.jobus-progress-step.active .step-number {
+  background: #31795a;
+  color: #fff;
+}
+
+.jobus-progress-step.completed .step-number {
+  background: #31795a;
+  color: #fff;
+}
+
+.jobus-progress-step .step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.jobus-progress-step.active .step-label {
+  color: #1a1a1a;
+}
+
+.jobus-progress-line {
+  width: 40px;
+  height: 2px;
+  background: #e0e0e0;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Content Area
+   ========================================================================== */
+
+.jobus-onboarding-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.jobus-step {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.jobus-step.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jobus-step-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.jobus-step-content h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+}
+
+.jobus-step-description {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 32px 0;
+  max-width: 560px;
+}
+
+/* ==========================================================================
+   Features Grid (Step 1)
+   ========================================================================== */
+
+.jobus-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.jobus-feature-item {
+  background: #f8faf9;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.jobus-feature-item .feature-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.jobus-feature-item h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+}
+
+.jobus-feature-item p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.jobus-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.jobus-btn-primary {
+  background: #31795a;
+  color: #fff;
+}
+
+.jobus-btn-primary:hover {
+  background: #286a4d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(49, 121, 90, 0.3);
+  color: #fff;
+}
+
+.jobus-btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.jobus-btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.jobus-btn .btn-arrow {
+  font-size: 16px;
+}
+
+.jobus-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.jobus-step-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+/* ==========================================================================
+   Form Styles (Step 2)
+   ========================================================================== */
+
+.jobus-onboarding-form {
+  margin-bottom: 0;
+}
+
+.jobus-form-section {
+  margin-bottom: 32px;
+}
+
+.jobus-form-section:last-child {
+  margin-bottom: 0;
+}
+
+.jobus-form-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+}
+
+.jobus-form-section .section-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+/* Toggle Switches */
+.jobus-toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jobus-toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #f8faf9;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jobus-toggle-item:hover {
+  background: #f0f5f2;
+}
+
+.toggle-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toggle-icon {
+  font-size: 24px;
+}
+
+.toggle-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.toggle-text span {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  border-radius: 28px;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: #31795a;
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
+
+/* Select Dropdown */
+.jobus-select {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  min-width: 180px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jobus-select:hover {
+  border-color: #31795a;
+}
+
+.jobus-select:focus {
+  outline: none;
+  border-color: #31795a;
+  box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.1);
+}
+
+/* Select Group */
+.jobus-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.jobus-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #f8faf9;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jobus-select-item:hover {
+  background: #f0f5f2;
+}
+
+.select-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.select-icon {
+  font-size: 24px;
+}
+
+.select-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.select-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.select-text span {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Info Box */
+.jobus-info-box {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f8f5 0%, #e8f4f0 100%);
+  border: 1px solid #d0e8dd;
+  border-radius: 12px;
+}
+
+.jobus-info-box .info-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.jobus-info-box .info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.jobus-info-box .info-content strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.jobus-info-box .info-content p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.jobus-info-box .info-link {
+  font-size: 14px;
+  color: #31795a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.jobus-info-box .info-link:hover {
+  color: #286a4d;
+  text-decoration: underline;
+}
+
+/* Color Scheme Selector */
+.jobus-color-schemes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.jobus-color-scheme-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f8faf9;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jobus-color-scheme-item:hover {
+  background: #f0f5f2;
+}
+
+.jobus-color-scheme-item input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.jobus-color-scheme-item input:checked + .scheme-preview {
+  box-shadow: 0 2px 8px rgba(49, 121, 90, 0.2);
+}
+
+.jobus-color-scheme-item:has(input:checked) {
+  border-color: #31795a;
+  background: #f0f8f5;
+}
+
+.scheme-preview {
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.scheme-color {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.scheme-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* ==========================================================================
+   Success Step (Step 3)
+   ========================================================================== */
+
+.jobus-step-success {
+  text-align: center;
+}
+
+.success-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.success-icon svg {
+  display: block;
+}
+
+.jobus-step-success h1 {
+  margin-bottom: 12px;
+}
+
+.jobus-step-success .jobus-step-description {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.jobus-next-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 32px 0;
+  text-align: left;
+}
+
+.jobus-next-step-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #f8faf9;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.jobus-next-step-item:hover {
+  background: #f0f5f2;
+  transform: translateX(4px);
+}
+
+.jobus-next-step-item .step-icon {
+  font-size: 24px;
+}
+
+.jobus-next-step-item .step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jobus-next-step-item .step-info strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.jobus-next-step-item .step-info span {
+  font-size: 13px;
+  color: #666;
+}
+
+.jobus-finish-setup {
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.jobus-onboarding-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.jobus-onboarding-footer p {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+}
+
+.jobus-onboarding-footer a {
+  color: #31795a;
+  text-decoration: none;
+}
+
+.jobus-onboarding-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Loading State
+   ========================================================================== */
+
+.jobus-btn.is-loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.jobus-btn.is-loading .btn-arrow {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .jobus-onboarding-wrapper {
+    padding: 24px 16px;
+  }
+
+  .jobus-step-content {
+    padding: 32px 24px;
+  }
+
+  .jobus-step-content h1 {
+    font-size: 24px;
+  }
+
+  .jobus-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jobus-color-schemes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jobus-progress-step .step-label {
+    display: none;
+  }
+
+  .jobus-step-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .jobus-step-actions .jobus-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .jobus-onboarding-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .jobus-color-schemes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
