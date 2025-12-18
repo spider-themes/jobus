@@ -7,16 +7,13 @@
         const ANIM_DURATION = 300;
 
         // Video Popup with FancyBox
-        var fancy = $ (".fancybox");
+        let fancy = $ (".fancybox");
         if(fancy.length) {
             fancy.fancybox({
                 arrows: true,
                 buttons: [
                     "zoom",
-                    //"share",
                     "slideShow",
-                    //"fullScreen",
-                    //"download",
                     "thumbs",
                     "close"
                 ],
@@ -24,7 +21,6 @@
                 transitionEffect: "zoom-in-out",
             });
         }
-
 
         // Start Company Details page testimonials slider
         function companyTestimonialsSlider() {
@@ -51,7 +47,6 @@
                 });
             }
         }
-
         companyTestimonialsSlider(); // End Company Details page testimonials slider
 
         $(document).on("click", '[data-jbs-toggle="tab"]', function (e) {
@@ -63,7 +58,6 @@
 
             if ($this.hasClass("active")) return;
 
-            
             function switchTab($trigger, $targetPane, fade) {
                 const $nav = $trigger.closest(".jbs-nav");
                 const $tabContainer = $targetPane.closest(".jbs-tab-content");
@@ -85,12 +79,9 @@
                     $targetPane.addClass("jbs-show active");
                 }
             };
-
-            
             switchTab($this, $targetPane, true);
         });
 
     });
-
 
 })(jQuery);

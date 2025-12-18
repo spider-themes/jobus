@@ -9,6 +9,7 @@ $post_type = 'jobus_job';
 // Get filter widgets configuration
 $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
 $taxonomy_widgets = jobus_opt( 'job_taxonomy_widgets' );
+$show_search_form = jobus_opt( 'job_show_search_form', true );
 
 // Check if any filter widgets are configured
 $has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
@@ -24,8 +25,8 @@ if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
 	}
 }
 
-// Only render filter button if filters exist
-if ( ! $has_meta_widgets && ! $has_taxonomy_widgets ) {
+// Only render filter button if filters exist or search form is enabled
+if ( ! $has_meta_widgets && ! $has_taxonomy_widgets && ! $show_search_form ) {
 	// Show admin notice if in admin area
 	if ( current_user_can( 'manage_options' ) ) {
 		$settings_url = admin_url( 'edit.php?post_type=jobus_job&page=jobus-settings#tab=job-options/job-archive-page' );
@@ -80,13 +81,38 @@ $specs_options = jobus_get_specs_options();
                 <input type="hidden" name="post_type" value="jobus_job"/>
 
                 <?php
+                // Render search form at the top with same structure as meta widgets
+                if ( $show_search_form ) {
+                    $search_query = get_search_query();
+                    $is_search_active = ! empty( $search_query );
+                    $is_search_collapsed = ! $is_search_active;
+                    ?>
+                    <div class="filter-block bottom-line jbs-pb-25">
+                        <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>" 
+                           data-jbs-toggle="collapse"
+                           data-jbs-target="#collapse-search-form" 
+                           role="button"
+                           aria-expanded="<?php echo ! $is_search_collapsed ? 'true' : 'false'; ?>">
+                            <?php esc_html_e( 'Keyword Search', 'jobus' ); ?>
+                        </a>
+
+                        <div class="<?php echo $is_search_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>" id="collapse-search-form" style="<?php echo ! $is_search_collapsed ? 'display: block;' : ''; ?>">
+                            <div class="main-body">
+                                <?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                }
+
                 // Render meta widgets
                 if ( $has_meta_widgets ) {
                     foreach ( $filter_widgets as $index => $widget ) {
                         $widget_name = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';
                         $widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
-                        $is_first = 0 === $index;
+                        // If search form is shown, first meta widget should consider that
+                        $is_first = ! $show_search_form && 0 === $index;
                         $is_active = ! empty( $widget_param );
                         // First item should be open, others collapsed unless active
                         $is_collapsed = ! $is_first && ! $is_active;

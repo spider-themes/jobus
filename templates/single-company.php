@@ -257,9 +257,14 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         <?php
                     }
                     ?>
-                    <nav class="share-option jbs-mt-60">
-                        <?php jobus_social_share_icons() ?>
-                    </nav>
+                    <?php
+                    // Check if social share icons should be displayed
+                    $enable_social_share = jobus_opt( 'enable_company_social_share', true );
+                    if ( $enable_social_share ) : ?>
+                        <nav class="share-option jbs-mt-60">
+                            <?php jobus_social_share_icons() ?>
+                        </nav>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

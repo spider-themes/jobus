@@ -238,6 +238,20 @@ CSF::createSection( $settings_prefix, array(
 	'title'  => esc_html__( 'Company Details Page', 'jobus' ),
 	'id'     => 'company_details_layout',
 	'fields' => array(
+		// Social Share Options
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Social Media Sharing', 'jobus' ),
+		),
+
+		array(
+			'id'      => 'enable_company_social_share',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Social Share Buttons', 'jobus' ),
+			'subtitle' => esc_html__( 'Show or hide social media sharing buttons on company detail pages.', 'jobus' ),
+			'default' => true,
+		),
+
 		// Open Job Position
 		array(
 			'type'    => 'subheading',
