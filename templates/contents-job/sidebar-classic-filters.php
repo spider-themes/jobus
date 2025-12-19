@@ -81,7 +81,7 @@ $specs_options = jobus_get_specs_options();
                 <input type="hidden" name="post_type" value="jobus_job"/>
 
                 <?php
-                // Render search form at the top with same structure as meta widgets
+                // Render search form
                 if ( $show_search_form ) {
                     $search_query = get_search_query();
                     $is_search_active = ! empty( $search_query );
@@ -93,7 +93,7 @@ $specs_options = jobus_get_specs_options();
                            data-jbs-target="#collapse-search-form" 
                            role="button"
                            aria-expanded="<?php echo ! $is_search_collapsed ? 'true' : 'false'; ?>">
-                            <?php esc_html_e( 'Keyword Search', 'jobus' ); ?>
+                            <?php esc_html_e( 'Job Search', 'jobus' ); ?>
                         </a>
 
                         <div class="<?php echo $is_search_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>" id="collapse-search-form" style="<?php echo ! $is_search_collapsed ? 'display: block;' : ''; ?>">

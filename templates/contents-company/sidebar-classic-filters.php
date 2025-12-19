@@ -9,6 +9,7 @@ $post_type = 'jobus_company';
 // Get filter widgets configuration
 $filter_widgets = jobus_opt( 'company_sidebar_widgets' );
 $taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
+$show_search_form = jobus_opt( 'company_show_search_form', true );
 
 // Check if any filter widgets are configured
 $has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
@@ -24,8 +25,8 @@ if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
 	}
 }
 
-// Only render filter button if filters exist
-if ( ! $has_meta_widgets && ! $has_taxonomy_widgets ) {
+// Only render the filter button if filters exist or a search form enabled
+if ( ! $has_meta_widgets && ! $has_taxonomy_widgets && ! $show_search_form ) {
 	// Return empty div structure to maintain layout
 	?>
 	<div class="jbs-col-xl-3 jbs-col-lg-4"></div>
@@ -54,9 +55,31 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
             <form action="<?php echo esc_url( get_post_type_archive_link( 'jobus_company' ) ) ?>" role="search" method="get">
 
 				<?php wp_nonce_field( 'jobus_search_filter', 'jobus_nonce' ); ?>
-                <input type="hidden" name="post_type" value="jobus_company"/>
+				<input type="hidden" name="post_type" value="jobus_company"/>
 
 			<?php
+			// Render search form
+			if ( $show_search_form ) {
+				$search_query = get_search_query();
+				$is_search_active = ! empty( $search_query );
+				$is_search_collapsed = ! $is_search_active;
+				?>
+				<div class="filter-block bottom-line jbs-pb-25 jbs-mt25">
+					<a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_search_collapsed ? ' jbs-collapsed' : '' ); ?>"
+					  data-jbs-toggle="collapse"
+					   data-jbs-target="#collapse-search-form" role="button"
+					   aria-expanded="<?php echo ! $is_search_collapsed ? 'true' : 'false'; ?>">
+						<?php esc_html_e( 'Keyword Search', 'jobus' ); ?>
+					</a>
+					<div class="<?php echo esc_attr( $is_search_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show' ); ?>" id="collapse-search-form">
+						<div class="main-body">
+							<?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
+
 			// Render meta widgets
 			if ( $has_meta_widgets ) {
 				foreach ( $filter_widgets as $index => $widget ) {

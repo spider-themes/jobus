@@ -49,7 +49,7 @@ $specs_options = jobus_get_specs_options();
 
                     <div class="jbs-row">
                         <?php
-                        // Render search form at the top
+                        // Render search form
                         if ( $show_search_form ) {
                             ?>
                             <div class="jbs-col-lg-3 jbs-col-sm-6">

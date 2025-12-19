@@ -150,6 +150,15 @@ CSF::createSection( $settings_prefix, array(
 			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
+		// Search Form
+		array(
+			'id'      => 'company_show_search_form',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
+			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick company searches.', 'jobus' ),
+			'default' => true,
+		),
+
 		// Notice for missing Company Specifications
 		(function() {
 			$specifications = jobus_opt( 'company_specifications' );
@@ -198,7 +207,6 @@ CSF::createSection( $settings_prefix, array(
 					'options' => array(
 						'dropdown' => esc_html__( 'Dropdown', 'jobus' ),
 						'checkbox' => esc_html__( 'Checkbox', 'jobus' ),
-						'text'     => esc_html__( 'Text', 'jobus' ),
 					),
 					'default' => 'checkbox',
 				),

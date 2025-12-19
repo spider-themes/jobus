@@ -180,12 +180,12 @@ CSF::createSection( $settings_prefix, array(
 			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
-		// Search Form Control
+		// Search Form
 		array(
 			'id'      => 'job_show_search_form',
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
-			'subtitle' => esc_html__( 'Display a keyword search box at the top of the filter sidebar.', 'jobus' ),
+			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick job searches.', 'jobus' ),
 			'default' => true,
 		),
 

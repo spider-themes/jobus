@@ -7,13 +7,14 @@
  * @package Jobus\Templates
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
 // Check if there are any filter widgets (meta or taxonomy) configured
 $filter_widgets = jobus_opt( 'company_sidebar_widgets' );
 $taxonomy_widgets = jobus_opt( 'company_taxonomy_widgets' );
+$show_search_form = jobus_opt( 'company_show_search_form', true );
 
 // Check if any filter widgets are configured
 $has_meta_widgets = ! empty( $filter_widgets ) && is_array( $filter_widgets );
@@ -29,8 +30,8 @@ if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
     }
 }
 
-// Return early if no filters configured
-if ( ! $has_meta_widgets && ! $has_taxonomy_widgets ) {
+// Return early if no filters configured and search form disabled
+if ( ! $has_meta_widgets && ! $has_taxonomy_widgets && ! $show_search_form ) {
     return;
 }
 
@@ -56,6 +57,18 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
 
                     <div class="jbs-row">
                         <?php
+                        // Render search form at the top
+                        if ( $show_search_form ) {
+                            ?>
+                            <div class="jbs-col-lg-3 jbs-col-sm-6">
+                                <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
+                                    <div class="filter-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Keyword Search', 'jobus' ); ?></div>
+                                    <?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
                         // Render meta widgets
                         if ( $has_meta_widgets ) {
                             foreach ( $filter_widgets as $widget ) {

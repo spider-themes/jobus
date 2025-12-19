@@ -157,6 +157,15 @@ CSF::createSection( $settings_prefix, array(
 			'content' => esc_html__( 'Filters', 'jobus' ),
 		),
 
+		// Search Form
+		array(
+			'id'      => 'candidate_show_search_form',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
+			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick candidate profiles searches.', 'jobus' ),
+			'default' => true,
+		),
+
 		// Notice for missing Candidate Specifications
 		(function() {
 			$specifications = jobus_opt( 'candidate_specifications' );
@@ -205,7 +214,6 @@ CSF::createSection( $settings_prefix, array(
 					'options' => array(
 						'dropdown' => esc_html__( 'Dropdown', 'jobus' ),
 						'checkbox' => esc_html__( 'Checkbox', 'jobus' ),
-						'text'     => esc_html__( 'Text', 'jobus' ),
 						'range'    => esc_html__( 'Range Slider', 'jobus' ),
 					),
 					'default' => 'checkbox',
