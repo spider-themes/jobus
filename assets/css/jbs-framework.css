@@ -471,6 +471,14 @@
   justify-content: space-between !important;
 }
 
+.jbs-justify-content-start {
+  justify-content: flex-start !important;
+}
+
+.jbs-justify-content-end {
+  justify-content: flex-end !important;
+}
+
 .jbs-align-middle {
   vertical-align: middle !important;
 }

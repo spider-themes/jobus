@@ -23,7 +23,8 @@ function jobus_is_premium(): bool {
 function jobus_unlock_themes( ...$themes ): bool {
     // Flatten and normalize
     $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
-    $current_theme = strtolower( get_template() );
+    $current_theme  = strtolower( get_template() );
+
     return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
@@ -39,14 +40,15 @@ function jobus_rtl(): string {
 /**
  * Get plugin option value
  *
- * @param string $option Option key
+ * @param string $option  Option key
  * @param mixed  $default Default value
+ *
  * @return mixed
  */
 if ( ! function_exists( 'jobus_opt' ) ) {
     function jobus_opt( $option = '', $default = null ) {
         $options = get_option( 'jobus_opt' );
-        $value = $options[ $option ] ?? null;
+        $value   = $options[ $option ] ?? null;
 
         // Return default if value is null or empty string
         if ( $value === null || $value === '' ) {
@@ -60,8 +62,9 @@ if ( ! function_exists( 'jobus_opt' ) ) {
 /**
  * Get post meta value
  *
- * @param string $option Meta key
+ * @param string $option  Meta key
  * @param mixed  $default Default value
+ *
  * @return mixed
  */
 if ( ! function_exists( 'jobus_meta' ) ) {
@@ -77,6 +80,7 @@ if ( ! function_exists( 'jobus_meta' ) ) {
  *
  * @param string $template Template name
  * @param array  $args     Variables to extract
+ *
  * @return void
  */
 function jobus_get_template_part( string $template, array $args = [] ): void {
@@ -84,7 +88,7 @@ function jobus_get_template_part( string $template, array $args = [] ): void {
     // Get the slug
     $template_slug = rtrim( $template );
     $template      = $template_slug . '.php';
-    $file = '';
+    $file          = '';
 
     // Check for pro plugin template first (if pro is active)
     if ( jobus_is_premium() ) {
@@ -114,12 +118,12 @@ function jobus_get_template_part( string $template, array $args = [] ): void {
 }
 
 
-
 /**
  * Load plugin template
  *
  * @param string $template_name Template name
- * @param array  $args         Variables
+ * @param array  $args          Variables
+ *
  * @return void
  */
 function jobus_get_template( string $template_name, array $args = [] ): void {
@@ -141,6 +145,7 @@ function jobus_get_template( string $template_name, array $args = [] ): void {
  * Get first taxonomy term name
  *
  * @param string $term Taxonomy name
+ *
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
@@ -155,6 +160,7 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
  * Get first taxonomy term link
  *
  * @param string $term Taxonomy name
+ *
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
@@ -169,6 +175,7 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
  * Get taxonomy term list as HTML
  *
  * @param string $term Taxonomy name
+ *
  * @return string
  */
 if ( ! function_exists( 'jobus_get_tag_list' ) ) {
@@ -410,9 +417,9 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
             $trim_value      = ! empty( $meta_value ) ? implode( ', ', $meta_value ) : '';
             $formatted_value = str_replace( '@space@', ' ', $trim_value );
 
-			return $formatted_value;
-		}
-	}
+            return $formatted_value;
+        }
+    }
 }
 
 /**
@@ -526,19 +533,19 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
  * @return int|string The job count or a link to the company's jobs.
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
-	function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
-		$args = array(
-			'post_type'      => 'jobus_job',
-			'posts_per_page' => - 1,
-			'meta_query'     => array(
-				'relation' => 'AND', // Optional, defaults to "AND
-				array(
-					'key'     => 'jobus_meta_options',
-					'value'   => $company_id,
-					'compare' => 'LIKE',
-				),
-			)
-		);
+    function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
+        $args = array(
+                'post_type'      => 'jobus_job',
+                'posts_per_page' => - 1,
+                'meta_query'     => array(
+                        'relation' => 'AND', // Optional, defaults to "AND
+                        array(
+                                'key'     => 'jobus_meta_options',
+                                'value'   => $company_id,
+                                'compare' => 'LIKE',
+                        ),
+                )
+        );
 
         $job_posts = new \WP_Query( $args );
 
@@ -612,7 +619,8 @@ function jobus_search_terms( string $terms ) {
  *
  * @return array The constructed meta query for WP_Query.
  */
-function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets', array $widgets = [ 'location' ] ): array {
+function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets', array $widgets = [ 'location' ]
+): array {
 
     $sidebar_widgets = jobus_opt( $sidebar_widget_id );
     if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
@@ -679,10 +687,10 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
  *
  * Constructs query arguments based on whether filtering by taxonomy or custom meta fields.
  *
- * @param string $data       The type of query: 'taxonomy' or 'meta'. Defaults to empty string.
- * @param string $post_type  The post type to query. Defaults to 'jobus_job'.
- * @param string $taxonomy   The taxonomy name if data is 'taxonomy'. Defaults to empty string.
- * @param array  $terms      The terms/meta values to filter by. Defaults to empty array.
+ * @param string $data      The type of query: 'taxonomy' or 'meta'. Defaults to empty string.
+ * @param string $post_type The post type to query. Defaults to 'jobus_job'.
+ * @param string $taxonomy  The taxonomy name if data is 'taxonomy'. Defaults to empty string.
+ * @param array  $terms     The terms/meta values to filter by. Defaults to empty array.
  *
  * @return array The constructed query arguments for WP_Query.
  */
@@ -853,12 +861,22 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
         ?>
         <ul class="<?php echo esc_attr( $class ) ?>">
             <li class="jbs-fw-500 jbs-me-2"><?php esc_html_e( 'Share:', 'jobus' ); ?></li>
-            <li><a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"
-                   aria-label="<?php esc_attr_e( 'Share on Facebook', 'jobus' ); ?>"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank"
-                   aria-label="<?php esc_attr_e( 'Share on Linkedin', 'jobus' ); ?>"><i class="bi bi-linkedin"></i></a></li>
-            <li><a href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>" target="_blank"
-                   aria-label="<?php esc_attr_e( 'Share on Twitter', 'jobus' ); ?>"><i class="bi bi-twitter"></i></a></li>
+            <li>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"
+                   aria-label="<?php esc_attr_e( 'Share on Facebook', 'jobus' ); ?>"><i class="bi bi-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/share?url=<?php the_permalink(); ?>" target="_blank"
+                   aria-label="<?php esc_attr_e( 'Share on Linkedin', 'jobus' ); ?>"><i class="bi bi-linkedin"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://x.com/intent/tweet?url=<?php the_permalink(); ?>" target="_blank"
+                   aria-label="<?php esc_attr_e( 'Share on X', 'jobus' ); ?>">
+                    <i class="bi bi-x"></i>
+                </a>
+            </li>
         </ul>
         <?php
     }
@@ -950,13 +968,13 @@ function jobus_meta_company_spec_name( $step = 1 ) {
     $company_archive_meta   = $meta_options[ 'company_archive_meta_' . $step ];
     $company_specifications = $meta_options['company_specifications'];
 
-	if ( ! empty ( $company_specifications ) ) {
-		foreach ( $company_specifications as $company_specification ) {
-			if ( $company_archive_meta == $company_specification['meta_key'] ) {
-				return $company_specification['meta_name'];
-			}
-		}
-	}
+    if ( ! empty ( $company_specifications ) ) {
+        foreach ( $company_specifications as $company_specification ) {
+            if ( $company_archive_meta == $company_specification['meta_key'] ) {
+                return $company_specification['meta_name'];
+            }
+        }
+    }
 }
 
 
@@ -975,13 +993,13 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
     $candidate_archive_meta   = $meta_options[ 'candidate_archive_meta_' . $step ];
     $candidate_specifications = $meta_options['candidate_specifications'];
 
-	if ( ! empty ( $candidate_specifications ) ) {
-		foreach ( $candidate_specifications as $candidate_specification ) {
-			if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
-				return $candidate_specification['meta_name'];
-			}
-		}
-	}
+    if ( ! empty ( $candidate_specifications ) ) {
+        foreach ( $candidate_specifications as $candidate_specification ) {
+            if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
+                return $candidate_specification['meta_name'];
+            }
+        }
+    }
 }
 
 
@@ -1012,9 +1030,9 @@ function jobus_phpmailer_init( $phpmailer ) {
 }
 
 if ( ! function_exists( 'jobus_rtl' ) ) {
-	function jobus_rtl(): string {
-		return is_rtl() ? 'true' : 'false';
-	}
+    function jobus_rtl(): string {
+        return is_rtl() ? 'true' : 'false';
+    }
 }
 
 
@@ -1160,16 +1178,16 @@ if ( ! function_exists( 'jobus_recursive_sanitize_text_field' ) ) {
  * Outputs an anchor element with data attributes for saving/bookmarking jobs or candidates.
  * The button uses Bootstrap icons to display the save state.
  *
- * @param array $args {
- *     Optional. Array of arguments for the save button.
+ * @param array     $args         {
+ *                                Optional. Array of arguments for the save button.
  *
- *     @type int|string $post_id     The post ID to save/bookmark.
- *     @type string     $post_type    The post type (e.g., 'jobus_job', 'jobus_candidate').
- *     @type string     $meta_key     The user meta key for saving posts.
- *     @type bool       $is_saved     Whether the post is already saved by the user.
- *     @type string     $button_title The title/tooltip for the button.
- *     @type string     $class        CSS classes for the button element.
- * }
+ * @type int|string $post_id      The post ID to save/bookmark.
+ * @type string     $post_type    The post type (e.g., 'jobus_job', 'jobus_candidate').
+ * @type string     $meta_key     The user meta key for saving posts.
+ * @type bool       $is_saved     Whether the post is already saved by the user.
+ * @type string     $button_title The title/tooltip for the button.
+ * @type string     $class        CSS classes for the button element.
+ *                                }
  *
  * @return void
  */
@@ -1201,15 +1219,15 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
  * @return string URL of the default company logo
  */
 if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
-	function jobus_get_default_company_logo() {
-		// Try to get custom logo from settings
-		$custom_logo = jobus_opt( 'default_company_logo' );
-		
-		if ( ! empty( $custom_logo ) && isset( $custom_logo['url'] ) ) {
-			return esc_url( $custom_logo['url'] );
-		}
-		
-		// Fallback to default logo
-		return plugins_url( 'jobus/assets/images/default-company.png' );
-	}
+    function jobus_get_default_company_logo() {
+        // Try to get custom logo from settings
+        $custom_logo = jobus_opt( 'default_company_logo' );
+
+        if ( ! empty( $custom_logo ) && isset( $custom_logo['url'] ) ) {
+            return esc_url( $custom_logo['url'] );
+        }
+
+        // Fallback to default logo
+        return plugins_url( 'jobus/assets/images/default-company.png' );
+    }
 }

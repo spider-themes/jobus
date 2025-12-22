@@ -159,6 +159,31 @@ class Job_Tabs extends Widget_Base {
 			]
 		);
 
+		// Categories alignment option
+		$this->add_control(
+			'cat_alignment',
+			[
+				'label'   => esc_html__( 'Categories Alignment', 'jobus' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => [
+					'left'   => [
+						'title' => esc_html__( 'Left', 'jobus' ),
+						'icon'  => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'jobus' ),
+						'icon'  => 'eicon-h-align-center',
+					],
+					'right'  => [
+						'title' => esc_html__( 'Right', 'jobus' ),
+						'icon'  => 'eicon-h-align-right',
+					],
+				],
+				'default' => 'right',
+				'toggle'  => false,
+			]
+		);
+
 		$this->end_controls_section(); // End Filter Options
 
 
@@ -214,7 +239,22 @@ class Job_Tabs extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		extract( $settings ); //extract all settings array to variables converted to name of key
+		extract( $settings ); //
+
+		$cat_alignment_class = '';
+		if ( isset( $cat_alignment ) ) {
+			switch ( $cat_alignment ) {
+				case 'left':
+					$cat_alignment_class = ' jbs-justify-content-start';
+					break;
+				case 'center':
+					$cat_alignment_class = ' jbs-justify-content-center';
+					break;
+				case 'right':
+					$cat_alignment_class = ' jbs-justify-content-end';
+					break;
+			}
+		}
 
 		// Get the post count for the 'jobus_job' post type
 		$post_count = wp_count_posts( 'jobus_job' );
@@ -266,3 +306,4 @@ class Job_Tabs extends Widget_Base {
 	}
 
 }
+

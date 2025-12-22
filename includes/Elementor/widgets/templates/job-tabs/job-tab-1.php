@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <section class="jbs jbs-job-tabs-widget">
-    <ul class="jbs-style-none jbs-d-flex jbs-justify-content-lg-end jbs-flex-wrap isotop-menu-wrapper g-control-nav">
+    <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap isotop-menu-wrapper g-control-nav <?php echo esc_attr( $cat_alignment_class ?? '' ); ?>">
 		<?php
 		if ( ! empty( $settings['all_label'] ) ) { ?>
             <li class="is-checked" data-filter="*">
