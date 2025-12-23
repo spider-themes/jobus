@@ -5,7 +5,7 @@
 
         let wrapperDataFieldId = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"] .csf-cloneable-item, .csf-cloneable-wrapper[data-field-id="[company_specifications]"] .csf-cloneable-item, .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"] .csf-cloneable-item');
 
-        // Disabled already exist key field [ Job Specifications ]
+        // Disabled already exist key field [ Job, company, candidate Specifications ]
         $(wrapperDataFieldId).each(function() {
             var metaKey     = $(this).find('input[data-depend-id="meta_key"]').val();
             var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"], .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"]');
@@ -24,21 +24,43 @@
 
         });
         
-        // Meta-key automatically inserts [ Job Specifications ]
-        $('.csf-cloneable-add').on('click', function () {
-            var $container  = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"], .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"]');
-            var $lastItem   = $container.find('.csf-cloneable-item').last();
-            
-            // Index is zero-based, so we add 1 for the next index
-            var newIndex    = $lastItem.index() + 1; 
+        // Meta-key automatically inserts [ Job, company, candidate Specifications ]
+        var $containers = $('.csf-cloneable-wrapper[data-field-id="[job_specifications]"], .csf-cloneable-wrapper[data-field-id="[company_specifications]"], .csf-cloneable-wrapper[data-field-id="[candidate_specifications]"]');
 
-            // Index is used as attribute
-            $lastItem.attr('cloned-item-id', newIndex);
-            
-            $container.find('.csf-cloneable-item[cloned-item-id='+newIndex+'] input[data-depend-id="meta_name"]').keyup(function(){
-                $container.find('.csf-cloneable-item[cloned-item-id='+newIndex+'] input[data-depend-id="meta_key"]').val($(this).val().replace(/\s+/g, '-').toLowerCase());
-            });
-            
+        // Delegate keyup on meta_name to always work for newly added items
+        $containers.on('keyup', '.csf-cloneable-item input[data-depend-id="meta_name"]', function () {
+            var $item = $(this).closest('.csf-cloneable-item');
+            var key = $(this).val().replace(/\s+/g, '-').toLowerCase();
+            $item.find('input[data-depend-id="meta_key"]').val(key);
+        });
+
+        // When a meta_key input receives a value, make it readonly to prevent accidental edits
+        $containers.on('change', '.csf-cloneable-item input[data-depend-id="meta_key"]', function () {
+            var $this = $(this);
+            if ($this.val()) {
+                $this.prop('readonly', true);
+            }
+        });
+
+        // After clicking add, re-index items so cloned-item-id is correct and ensure readonly is applied
+        $('.csf-cloneable-add').on('click', function () {
+            // We wait a tick for the clone operation (CSF may append synchronously but reindexing is safe)
+            setTimeout(function () {
+                $containers.each(function () {
+                    var $container = $(this);
+                    $container.find('.csf-cloneable-item').each(function (i) {
+                        var $it = $(this);
+                        var idx = i + 1;
+                        $it.attr('cloned-item-id', idx);
+
+                        // If meta_key already has a value, lock it readonly
+                        var $metaKey = $it.find('input[data-depend-id="meta_key"]');
+                        if ($metaKey.length && $metaKey.val()) {
+                            $metaKey.prop('readonly', true);
+                        }
+                    });
+                });
+            }, 50);
         });
 
 
