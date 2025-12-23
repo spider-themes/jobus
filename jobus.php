@@ -237,7 +237,93 @@ final class Jobus
 		if (!get_option('jobus_onboarding_complete')) {
 			set_transient('jobus_activation_redirect', '1', 60);
 		}
+
+		// Create default frontend pages depending on theme / premium status
+		$this->plugin_default_pages_exist();
 	}
+
+	/**
+	 * Create default pages used by the plugin (if they don't already exist).
+	 *
+	 * Rules:
+	 * - If the active theme is `jobi` or `jobi-child`, or Freemius indicates a pro license,
+	 *   create Dashboard, Register Form, Job Archive, Candidate Archive and Company Archive.
+	 * - Otherwise (free theme), create only the Job Archive page.
+	 *
+	 * Created page IDs are stored in the `jobus_pages` option as an associative array.
+	 *
+	 * @return void
+	 */
+	private function plugin_default_pages_exist(): void
+	{
+		// Avoid running in contexts without WP functions available.
+		if ( !function_exists('get_template') || !function_exists('wp_insert_post')) {
+			return;
+		}
+
+		// Determine unlocked state (theme match or premium license).
+		$theme = strtolower(get_template());
+		$is_unlocked = in_array($theme, array('jobi', 'jobi-child'), true);
+
+
+		$pages_to_create = [];
+		if ( $is_unlocked ) {
+			$pages_to_create = array(
+				'dashboard' => array('title' => 'Dashboard', 'slug' => 'jobus-dashboard', 'content' => '[jobus_dashboard]'),
+				'register'  => array('title' => 'Register Form', 'slug' => 'jobus-register', 'content' => '<!-- wp:jobus/register-form /-->'),
+				'job_archive' => array('title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]'),
+				'candidate_archive' => array('title' => 'Candidate Archive', 'slug' => 'jobus-candidate-archive', 'content' => '[jobus_candidate_archive]'),
+				'company_archive' => array('title' => 'Company Archive', 'slug' => 'jobus-company-archive', 'content' => '[jobus_company_archive]'),
+			);
+		} else {
+			// Free theme only
+			$pages_to_create = array(
+				'job_archive' => array('title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]'),
+			);
+		}
+
+		$created = get_option('jobus_pages', array());
+
+		foreach ($pages_to_create as $key => $args) {
+			// If a page with the desired slug already exists, record and skip.
+			$existing = get_page_by_path($args['slug']);
+			if ($existing) {
+				$created[$key] = $existing->ID;
+				continue;
+			}
+
+			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
+			if (!empty($args['content'])) {
+				$found = get_posts(array(
+					'post_type' => 'page',
+					'posts_per_page' => 1,
+					'post_status' => 'publish',
+					'fields' => 'ids',
+					's' => trim(strip_tags($args['content'])),
+				));
+				if (!empty($found)) {
+					$created[$key] = $found[0];
+					continue;
+				}
+			}
+			// Keep the stored post title plain text to avoid HTML-escaping issues in themes.
+			$post = array(
+				'post_title'   => wp_strip_all_tags( $args['title'] ),
+				'post_name'    => $args['slug'],
+				'post_content' => $args['content'],
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+			);
+
+			$post_id = wp_insert_post($post);
+			if ($post_id && !is_wp_error($post_id)) {
+				$created[$key] = $post_id;
+			}
+		}
+
+		update_option('jobus_pages', $created);
+	}
+
 
 	/**
 	 * Get the plugin path.
