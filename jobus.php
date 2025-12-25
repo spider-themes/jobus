@@ -152,6 +152,7 @@ final class Jobus
 	 */
 	public function init_plugin(): void
 	{
+
 		// Get feature toggle options
 		$options = get_option('jobus_opt', []);
 		$enable_candidate = $options['enable_candidate'] ?? true;
@@ -197,8 +198,11 @@ final class Jobus
 		if ($enable_company) {
 			\jobus\includes\Frontend\Dashboard_Employer::get_instance();
 		}
-		new \jobus\includes\Frontend\Dashboard();
-		new \jobus\includes\Frontend\Dashboard_Helper();
+
+		if ( jobus_unlock_themes('jobi', 'jobi-child') ) {
+			new \jobus\includes\Frontend\Dashboard();
+			new \jobus\includes\Frontend\Dashboard_Helper();
+		}
 
 		//Elementor & Blocks
 		new \jobus\Blocks();
@@ -264,7 +268,6 @@ final class Jobus
 		// Determine unlocked state (theme match or premium license).
 		$theme = strtolower(get_template());
 		$is_unlocked = in_array($theme, array('jobi', 'jobi-child'), true);
-
 
 		$pages_to_create = [];
 		if ( $is_unlocked ) {

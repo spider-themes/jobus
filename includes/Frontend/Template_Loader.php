@@ -74,28 +74,31 @@ class Template_Loader {
 			return $this->locate_template( 'single-job', $template );
 		}
 
-		if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location') ) {
-			return $this->locate_template( 'taxonomy-company', $template );
-		}
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 
-		if ( is_post_type_archive( 'jobus_company' ) ) {
-			return $this->locate_template( 'archive-company', $template );
-		}
+			if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location') ) {
+				return $this->locate_template( 'taxonomy-company', $template );
+			}
 
-		if ( is_singular( 'jobus_company' ) ) {
-			return $this->locate_template( 'single-company', $template );
-		}
+			if ( is_post_type_archive( 'jobus_company' ) ) {
+				return $this->locate_template( 'archive-company', $template );
+			}
 
-		if ( is_tax( 'jobus_candidate_cat' ) || is_tax( 'jobus_candidate_location' ) || is_tax( 'jobus_candidate_skill' ) ) {
-			return $this->locate_template( 'taxonomy-candidate', $template );
-		}
+			if ( is_singular( 'jobus_company' ) ) {
+				return $this->locate_template( 'single-company', $template );
+			}
 
-		if ( is_post_type_archive( 'jobus_candidate' ) ) {
-			return $this->locate_template( 'archive-candidate', $template );
-		}
+			if ( is_tax( 'jobus_candidate_cat' ) || is_tax( 'jobus_candidate_location' ) || is_tax( 'jobus_candidate_skill' ) ) {
+				return $this->locate_template( 'taxonomy-candidate', $template );
+			}
 
-		if ( is_singular( 'jobus_candidate' ) ) {
-			return $this->locate_template( 'single-candidate', $template );
+			if ( is_post_type_archive( 'jobus_candidate' ) ) {
+				return $this->locate_template( 'archive-candidate', $template );
+			}
+
+			if ( is_singular( 'jobus_candidate' ) ) {
+				return $this->locate_template( 'single-candidate', $template );
+			}
 		}
 
 		return $template;

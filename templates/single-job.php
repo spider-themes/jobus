@@ -18,6 +18,12 @@ $job_single_layout      = ! empty( $job_single_layout_page ) ? $job_single_layou
 //================ Select Layout =======================//
 include 'single-job/job-single-' . $job_single_layout . '.php';
 
+if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+	include 'single-job/job-single-' . $job_single_layout . '.php';
+} else {
+	include 'single-job/job-single-1.php';
+}
+
 get_footer();
 
 // if user logged in and guest application is enabled, include the modal form
