@@ -5,10 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Job Specifications
 CSF::createSection( $settings_prefix, array(
-	'title'  => esc_html__( 'Job Options', 'jobus' ),
-	'id'     => 'jobus_job',
-	'icon'   => 'fa fa-briefcase',
-));
+	'title' => esc_html__( 'Job Options', 'jobus' ),
+	'id'    => 'jobus_job',
+	'icon'  => 'fa fa-briefcase',
+) );
 
 // Job Specifications
 CSF::createSection( $settings_prefix, array(
@@ -86,7 +86,7 @@ CSF::createSection( $settings_prefix, array(
 			)
 		)// End job specifications
 	)
-));
+) );
 
 
 // Job Archive Page Layout Settings
@@ -113,7 +113,7 @@ CSF::createSection( $settings_prefix, array(
 				'3' => esc_url( JOBUS_IMG . '/layout/job/archive-layout-3.png' ),
 			),
 			'default'  => '1',
-			'class'    => trim($pro_access_class . $active_theme_class)
+			'class'    => trim( $pro_access_class . $active_theme_class )
 		),
 
 		array(
@@ -123,7 +123,7 @@ CSF::createSection( $settings_prefix, array(
 			'default' => - 1,
 			'desc'    => esc_html__( 'Set the value to \'-1\' to display all job posts.', 'jobus' ),
 		),
-        array(
+		array(
 			'id'       => 'default_company_logo',
 			'type'     => 'media',
 			'title'    => esc_html__( 'Default Company Logo', 'jobus' ),
@@ -182,43 +182,48 @@ CSF::createSection( $settings_prefix, array(
 
 		// Search Form
 		array(
-			'id'      => 'job_show_search_form',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
+			'id'       => 'job_show_search_form',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Show Search Form', 'jobus' ),
 			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick job searches.', 'jobus' ),
-			'default' => true,
+			'default'  => true,
 		),
 
 		// Notice for missing Job Specifications
-		(function() {
+		( function () {
 			$specifications = jobus_opt( 'job_specifications' );
 			if ( empty( $specifications ) || ! is_array( $specifications ) ) {
 				$settings_url = admin_url( 'admin.php?page=jobus-settings&tab=jobus_job&section=job_specifications#tab=job-options/job-specifications' );
+
 				return array(
 					'type'    => 'content',
-					'content' => '<div style="padding: 15px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; color: #856404; margin-bottom: 20px;">' .
+					'content' => '<div style="padding: 15px; background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; color: #856404; margin-bottom: 20px;">'
+					             .
 					             '<p style="margin: 0 0 8px 0; font-weight: 500;">' .
 					             esc_html__( 'No Job Specifications Configured', 'jobus' ) .
 					             '</p>' .
 					             '<p style="margin: 0; font-size: 13px;">' .
 					             sprintf(
-						             /* translators: %s: settings page link */
+					             /* translators: %s: settings page link */
 						             esc_html__( 'Please add Job Specifications from %s before creating filter widgets.', 'jobus' ),
-						             '<a href="' . esc_url( $settings_url ) . '" style="color: #856404; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Specifications</a>'
+						             '<a href="' . esc_url( $settings_url )
+						             . '" style="color: #856404; text-decoration: underline; font-weight: 500;">Settings > Job Options > Job Specifications</a>'
 					             ) .
 					             '</p>' .
 					             '</div>',
 				);
 			}
+
 			return null;
-		})(),
+		} )(),
 
 		// Meta Widgets
 		array(
 			'id'           => 'job_sidebar_widgets',
 			'type'         => 'repeater',
 			'title'        => esc_html__( 'Specification Widgets', 'jobus' ),
-			'subtitle'     => esc_html__( 'Widgets based on the Job Specification data. Choose the Widget Layout for displaying the selected widgets in various styles:', 'jobus' ),
+			'subtitle'     => esc_html__( 'Widgets based on the Job Specification data. Choose the Widget Layout for displaying the selected widgets in various styles:',
+				'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
 			'fields'       => array(
 				array(
@@ -228,6 +233,8 @@ CSF::createSection( $settings_prefix, array(
 					'options' => jobus_get_specs(),
 					'default' => false,
 				),
+
+
 
 				array(
 					'id'      => 'widget_layout',
@@ -282,7 +289,7 @@ CSF::createSection( $settings_prefix, array(
 			),
 		),
 	)
-));
+) );
 
 // Job Details Layout Settings
 CSF::createSection( $settings_prefix, array(
@@ -307,8 +314,58 @@ CSF::createSection( $settings_prefix, array(
 				'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-2.png' ),
 			),
 			'default'  => '1',
-			'class'    => trim($pro_access_class . $active_theme_class)
+			'class'    => trim( $pro_access_class . $active_theme_class )
 		),
+
+		// Job Details Display Options
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Job Details Display Options', 'jobus' ),
+		),
+
+		array(
+			'id'      => 'is_job_title',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Title', 'jobus' ),
+			'label'   => esc_html__( 'Display the job title on the single job page', 'jobus' ),
+			'default' => true,
+		),
+
+		array(
+			'id'      => 'is_job_meta',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Meta Data', 'jobus' ),
+			'label'   => esc_html__( 'Display job meta information such as posting date, user name on the single job page.', 'jobus' ),
+			'default' => true,
+		),
+
+		array(
+			'id'      => 'is_job_share_media',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Social Share Buttons', 'jobus' ),
+			'label'   => esc_html__( 'Display social media share buttons for the job post on the single job page.', 'jobus' ),
+			'default' => true,
+		),
+
+		array(
+			'id'      => 'is_job_edit_button',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Edit Job Button', 'jobus' ),
+			'label'   => esc_html__( 'Display the Edit Job button at the top of the content area.', 'jobus' ),
+			'default' => true,
+		),
+
+
+
+		array(
+			'id'       => 'job_page_padding',
+			'type'     => 'spacing',
+			'title'    => esc_html__( 'Page Padding', 'jobus' ),
+			'subtitle' => esc_html__( 'Control the top, right, bottom and left padding of the single job page.', 'jobus' ),
+			'output'   => '.jbs-job-details',
+			'output_mode' => 'padding', // or margin, relative
+		),
+
 
 		// Job Application Settings
 		array(
@@ -320,73 +377,75 @@ CSF::createSection( $settings_prefix, array(
 			'id'       => 'allow_guest_application',
 			'type'     => 'switcher',
 			'title'    => esc_html__( 'Allow Guest Applications', 'jobus' ),
-			'subtitle' => esc_html__( 'Enable this option to allow visitors to apply for jobs without logging in. The application form will appear directly when clicking "Apply Now".', 'jobus' ),
+			'subtitle' => esc_html__( 'Enable this option to allow visitors to apply for jobs without logging in. The application form will appear directly when clicking "Apply Now".',
+				'jobus' ),
 			'label'    => esc_html__( 'Allow users to apply for jobs without login', 'jobus' ),
 			'default'  => false,
 		),
 
-	array(
-		'id'      => 'required_first_name',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'First Name Required', 'jobus' ),
-		'label'   => esc_html__( 'Make first name field required', 'jobus' ),
-		'default' => true,
-	),
+		array(
+			'id'      => 'required_first_name',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'First Name Required', 'jobus' ),
+			'label'   => esc_html__( 'Make first name field required', 'jobus' ),
+			'default' => true,
+		),
 
-	array(
-		'id'      => 'required_last_name',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'Last Name Required', 'jobus' ),
-		'label'   => esc_html__( 'Make last name field required', 'jobus' ),
-		'default' => false,
-	),
+		array(
+			'id'      => 'required_last_name',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Last Name Required', 'jobus' ),
+			'label'   => esc_html__( 'Make last name field required', 'jobus' ),
+			'default' => false,
+		),
 
-	array(
-		'id'      => 'required_email',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'Email Required', 'jobus' ),
-		'label'   => esc_html__( 'Make email field required', 'jobus' ),
-		'default' => true,
-	),
+		array(
+			'id'      => 'required_email',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Email Required', 'jobus' ),
+			'label'   => esc_html__( 'Make email field required', 'jobus' ),
+			'default' => true,
+		),
 
-	array(
-		'id'      => 'required_phone',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'Phone Required', 'jobus' ),
-		'label'   => esc_html__( 'Make phone field required', 'jobus' ),
-		'default' => false,
-	),
+		array(
+			'id'      => 'required_phone',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Phone Required', 'jobus' ),
+			'label'   => esc_html__( 'Make phone field required', 'jobus' ),
+			'default' => false,
+		),
 
-	array(
-		'id'      => 'required_message',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'Message Required', 'jobus' ),
-		'label'   => esc_html__( 'Make message/cover letter field required', 'jobus' ),
-		'default' => false,
-	),
+		array(
+			'id'      => 'required_message',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Message Required', 'jobus' ),
+			'label'   => esc_html__( 'Make message/cover letter field required', 'jobus' ),
+			'default' => false,
+		),
 
-	array(
-		'id'      => 'required_cv',
-		'type'    => 'switcher',
-		'title'   => esc_html__( 'CV Upload Required', 'jobus' ),
-		'label'   => esc_html__( 'Make CV upload field required', 'jobus' ),
-		'default' => false,
-	),
+		array(
+			'id'      => 'required_cv',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'CV Upload Required', 'jobus' ),
+			'label'   => esc_html__( 'Make CV upload field required', 'jobus' ),
+			'default' => false,
+		),
 
-	array(
-			'type'    => 'heading',
+		// Related Job Posts
+		array(
+			'type'    => 'subheading',
 			'content' => esc_html__( 'Related Job Posts', 'jobus' ),
 		),
 
-		//show hide related posts
 		array(
-			'id'      => 'is_job_related_posts',
-			'type'    => 'switcher',
-			'title'   => esc_html__( 'Display Related Jobs', 'jobus' ),
-			'label'   => esc_html__( 'Do you want activate it ?', 'jobus' ),
+			'id'       => 'is_job_related_posts',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Display Related Jobs', 'jobus' ),
+			'label'    => esc_html__( 'Do you want activate it ?', 'jobus' ),
 			'subtitle' => esc_html__( 'Show similar job listings below the job details to help candidates discover other opportunities.', 'jobus' ),
-			'default' => true,
+			'default'  => true,
 		),
+
 
 		// Job Attributes
 		array(
@@ -395,19 +454,19 @@ CSF::createSection( $settings_prefix, array(
 		),
 
 		array(
-			'id'      => 'job_related_post_meta_1',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Primary Comparison Field', 'jobus' ),
+			'id'       => 'job_related_post_meta_1',
+			'type'     => 'select',
+			'title'    => esc_html__( 'Primary Comparison Field', 'jobus' ),
 			'subtitle' => esc_html__( 'Select the first attribute to match related jobs (e.g., Experience Level).', 'jobus' ),
-			'options' => jobus_get_specs(),
+			'options'  => jobus_get_specs(),
 		),
 
 		array(
-			'id'      => 'job_related_post_meta_2',
-			'type'    => 'select',
-			'title'   => esc_html__( 'Secondary Comparison Field', 'jobus' ),
+			'id'       => 'job_related_post_meta_2',
+			'type'     => 'select',
+			'title'    => esc_html__( 'Secondary Comparison Field', 'jobus' ),
 			'subtitle' => esc_html__( 'Select the second attribute to refine related job suggestions. (e.g, Job Type).', 'jobus' ),
-			'options' => jobus_get_specs(),
+			'options'  => jobus_get_specs(),
 		),
 	)
 ) );

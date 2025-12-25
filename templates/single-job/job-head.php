@@ -2,66 +2,88 @@
 // Get employer user ID (author of current job post)
 $employer_id   = get_post_field( 'post_author', get_the_ID() );
 $company_args  = array(
-	'post_type'      => 'jobus_company',
-	'author'         => $employer_id,
-	'posts_per_page' => 1,
+        'post_type'      => 'jobus_company',
+        'author'         => $employer_id,
+        'posts_per_page' => 1,
 );
 $company_query = new WP_Query( $company_args );
 $company_name  = '';
 $company_url   = '';
 if ( $company_query->have_posts() ) {
-	$company_name = $company_query->posts[0]->post_title;
-	$company_url  = get_permalink( $company_query->posts[0]->ID );
+    $company_name = $company_query->posts[0]->post_title;
+    $company_url  = get_permalink( $company_query->posts[0]->ID );
+}
+
+// Get display options
+$show_job_title = jobus_opt( 'is_job_title', true );
+$show_job_meta  = jobus_opt( 'is_job_meta', true );
+$show_job_share = jobus_opt( 'is_job_share_media', true );
+$show_job_edit  = jobus_opt( 'is_job_edit_button', true );
+$show_job_edit  = $show_job_edit && is_user_logged_in(); // Only show edit button if user is logged in
+
+if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
+    ?>
+    <div class="job-head">
+        <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2">
+            <div>
+                <?php if ( $show_job_meta ) : ?>
+                    <div class="post-date">
+                        <?php echo get_the_date( 'd M, Y' ) . ', '; ?>
+                        <?php esc_html_e( 'by', 'jobus' ) ?>
+                        <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
+                            <?php echo esc_html( $company_name ); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <?php if ( $show_job_title ) : ?>
+                    <?php the_title( '<h1 class="post-title">', '</h1>' ) ?>
+                <?php endif; ?>
+            </div>
+            <?php if ( $show_job_edit ) : ?>
+                <?php
+                // Check if current user is the job author (employer)
+                if ( is_user_logged_in() && get_current_user_id() === (int) $employer_id ) {
+                    $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+                    $edit_job_url  = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job?job_id=' . get_the_ID() : '#';
+                    ?>
+                    <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s"
+                       style="padding: 8px 16px; font-size: 0.875rem; white-space: nowrap;">
+                        <i class="bi bi-pencil-square"></i>
+                        <?php esc_html_e( 'Edit Job', 'jobus' ); ?>
+                    </a>
+                    <?php
+                }
+                ?>
+            <?php endif; ?>
+        </div>
+        <?php if ( $show_job_share ) : ?>
+            <ul class="share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">
+                <li>
+                    <a class="share-item" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ); ?>" target="_blank">
+                        <i class="bi bi-facebook"></i>
+                        <span><?php esc_html_e( 'Facebook', 'jobus' ); ?></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="share-item"
+                       href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ); ?>&text=<?php echo urlencode( get_the_title() ); ?>"
+                       target="_blank">
+                        <i class="bi bi-x"></i>
+                        <span><?php esc_html_e( 'X', 'jobus' ); ?></span>
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="share-item share-copy-btn" data-copy-url="<?php echo esc_url( get_permalink() ); ?>">
+                        <i class="bi bi-link-45deg"></i>
+                        <span class="copy-text"> <?php esc_html_e( 'Copy', 'jobus' ) ?> </span>
+                    </button>
+                </li>
+            </ul>
+        <?php endif; ?>
+    </div>
+    <?php
 }
 ?>
-
-<div class="job-head">
-    <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2">
-        <div>
-            <div class="post-date">
-                <?php echo get_the_date( 'd M, Y' ) . ', '; ?>
-                <?php esc_html_e( 'by', 'jobus' ) ?>
-                <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
-                    <?php echo esc_html( $company_name ); ?>
-                </a>
-            </div>
-            <?php the_title( '<h1 class="post-title">', '</h1>' ) ?>
-        </div>
-        <?php
-        // Check if current user is the job author (employer)
-        if ( is_user_logged_in() && get_current_user_id() === (int) $employer_id ) {
-            $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
-            $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job?job_id=' . get_the_ID() : '#';
-            ?>
-            <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s" style="padding: 8px 16px; font-size: 0.875rem; white-space: nowrap;">
-                <i class="bi bi-pencil-square"></i>
-                <?php esc_html_e( 'Edit Job', 'jobus' ); ?>
-            </a>
-            <?php
-        }
-        ?>
-    </div>
-    <ul class="share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">
-        <li>
-            <a class="share-item" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ); ?>" target="_blank">
-                <i class="bi bi-facebook"></i>
-                <span>Facebook</span>
-            </a>
-        </li>
-        <li>
-            <a class="share-item" href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ); ?>&text=<?php echo urlencode( get_the_title() ); ?>" target="_blank">
-                <i class="bi bi-twitter"></i>
-                <span>Twitter</span>
-            </a>
-        </li>
-        <li>
-            <button type="button" class="share-item share-copy-btn" data-copy-url="<?php echo esc_url( get_permalink() ); ?>">
-                <i class="bi bi-link-45deg"></i>
-                <span class="copy-text"> <?php esc_html_e( 'Copy', 'jobus' ) ?> </span>
-            </button>
-        </li>
-    </ul>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

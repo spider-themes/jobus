@@ -18,7 +18,8 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                     $specifications = jobus_opt( 'job_specifications' );
                     if ( is_array( $specifications ) ) {
                         ?>
-                        <div class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between jbs-style-none">
+                        <div
+                                class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between jbs-style-none">
                             <?php
                             foreach ( $specifications as $field ) {
 
@@ -78,21 +79,21 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 
                         // Check if the user has already applied for this job
                         $has_applied = get_posts( array(
-                            'post_type'   => 'jobus_applicant',
-                            'post_status' => 'publish',
-                            'meta_query'  => array(
-                                array(
-                                        'key'     => 'job_applied_for_id', // Meta key for the job ID in the application post
-                                        'value'   => $job_id,
-                                        'compare' => '='
-                                ),
-                                array(
-                                        'key'     => 'candidate_email', // Meta key for user email
-                                        'value'   => $user->user_email, // Compare with logged-in user's email
-                                        'compare' => '='
+                                'post_type'   => 'jobus_applicant',
+                                'post_status' => 'publish',
+                                'meta_query'  => array(
+                                        array(
+                                                'key'     => 'job_applied_for_id', // Meta key for the job ID in the application post
+                                                'value'   => $job_id,
+                                                'compare' => '='
+                                        ),
+                                        array(
+                                                'key'     => 'candidate_email', // Meta key for user email
+                                                'value'   => $user->user_email, // Compare with logged-in user's email
+                                                'compare' => '='
+                                        )
                                 )
-                            )
-                        ));
+                        ) );
 
                         // If the user has already applied, show "Applied the Job" button
                         if ( ! empty( $has_applied ) ) {
@@ -115,14 +116,15 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                         }
                     } else {
                         // Check if guest applications are allowed
-                        $allow_guest_application = function_exists('jobus_opt') ? jobus_opt('allow_guest_application', false) : false;
-                        
+                        $allow_guest_application = function_exists( 'jobus_opt' ) ? jobus_opt( 'allow_guest_application', false ) : false;
+
                         if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] == 'custom' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                            <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>" class="jbs-job-apply jbs-btn-one jbs-mt-25">
+                            <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>"
+                               class="jbs-job-apply jbs-btn-one jbs-mt-25">
                                 <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                             </a>
                             <?php
-                        } elseif ($allow_guest_application) { ?>
+                        } elseif ( $allow_guest_application ) { ?>
                             <a href="#" class="jbs-job-apply jbs-btn-one jbs-mt-25 jbs-open-modal" data-target="#filterPopUp">
                                 <?php esc_html_e( 'Apply Now', 'jobus' ); ?>
                             </a>
