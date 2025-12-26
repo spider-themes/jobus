@@ -84,7 +84,6 @@ if ( ! $is_dashboard ) {
     if ( ! empty( $display_jobs ) ) {
         while ( $jobs->have_posts() ) : $jobs->the_post();
 
-
             if ( ! in_array( get_the_ID(), $display_jobs, true ) ) {
                 continue;
             }

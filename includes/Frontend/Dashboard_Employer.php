@@ -254,11 +254,26 @@ class Dashboard_Employer {
 	 * @return string HTML for the applications section.
 	 */
 	protected function load_applications( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/applications', [
-			'user_id'      => $user->ID,
-			'username'     => $user->user_login,
-			'is_dashboard' => false,
-		] );
+
+        if ( jobus_is_premium() ) {
+            return Template_Loader::get_template_part_pro( 'dashboard/employer/applications', [
+                    'user_id'      => $user->ID,
+                    'username'     => $user->user_login,
+                    'is_dashboard' => false, // Set to false for full view with pagination
+            ] );
+        } else {
+            $image_url = JOBUS_IMG . '/dashboard/pro-features/application-tracking.png';
+            ob_start();
+            ?>
+            <div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Pro Feature - Upgrade required', 'jobus' ); ?>">
+                <div class="pro-image-wrap">
+                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
+                    <span class="pro-badge" aria-hidden="true"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
+                </div>
+            </div>
+            <?php
+            return ob_get_clean();
+        }
 	}
 
 	/**

@@ -442,7 +442,7 @@
                 e.preventDefault();
                 Swal.fire({
                     title: 'Opps...',
-                    html: 'This is a PRO feature. You need to <a href="admin.php?page=jobus-pricing"><strong class="upgrade-link">Upgrade&nbsp;&nbsp;➤</strong></a> to the Premium Version to use this feature',
+                    html: 'This is a PRO feature. You need to <a href="https://jobus.spider-themes.net/pricing/" target="_blank"><strong class="upgrade-link">Upgrade&nbsp;&nbsp;➤</strong></a> to the Premium Version to use this feature',
                     icon: "warning",
                     buttons: [false, "Close"],
                     dangerMode: true

@@ -60,6 +60,9 @@ $show_shortlisted = jobus_opt( 'candidate_stat_shortlisted', true );
 $show_views = jobus_opt( 'candidate_stat_views', true );
 $show_applied_jobs = jobus_opt( 'candidate_stat_applied_jobs', true );
 
+// Get dashboard base URL
+$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+$jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 ?>
 <div class="jbs-position-relative">
     <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
@@ -130,7 +133,7 @@ $show_applied_jobs = jobus_opt( 'candidate_stat_applied_jobs', true );
         <?php endif; ?>
 
         <?php if ( $show_applied_jobs ) : ?>
-        <div class="jbs-col-lg-3 jbs-col-6">
+        <a href="<?php echo esc_url($jobs_applied_link) ?>" class="jbs-col-lg-3 jbs-col-6">
             <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
@@ -145,7 +148,7 @@ $show_applied_jobs = jobus_opt( 'candidate_stat_applied_jobs', true );
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
         <?php endif; ?>
     </div>
 
