@@ -1,24 +1,29 @@
 <?php
+
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\Admin\cpt;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;// Exit if accessed directly
+if (! defined('ABSPATH')) {
+	exit; // Exit if accessed directly
 }
 
-class Job {
+class Job
+{
 	private static $instance = null;
 
-	public function __construct() {
+	public function __construct()
+	{
 
 		// Register the post type
-		add_action( 'init', [ $this, 'register_post_types_job' ] );
+		add_action('init', [$this, 'register_post_types_job']);
 	}
 
-	public static function init() {
-		if ( is_null( self::$instance ) ) {
+	public static function init()
+	{
+		if (is_null(self::$instance)) {
 			self::$instance = new self();
 		}
 
@@ -26,38 +31,39 @@ class Job {
 	}
 
 	// Register the post type Job.
-	public function register_post_types_job(): void {
+	public function register_post_types_job(): void
+	{
 
-		if ( post_type_exists( 'jobus_job' ) ) {
+		if (post_type_exists('jobus_job')) {
 			return;
 		}
 
 		$labels = array(
-			'name'                     => esc_html__( 'Jobs', 'jobus' ),
-			'singular_name'            => esc_html__( 'Job', 'jobus' ),
-			'add_new'                  => esc_html__( 'Add New', 'jobus' ),
-			'add_new_item'             => esc_html__( 'Add New Job', 'jobus' ),
-			'edit_item'                => esc_html__( 'Edit Job', 'jobus' ),
-			'new_item'                 => esc_html__( 'New Job', 'jobus' ),
-			'new_item_name'            => esc_html__( 'New Job Name', 'jobus' ),
-			'all_items'                => esc_html__( 'All Jobs', 'jobus' ),
-			'view_item'                => esc_html__( 'View Job', 'jobus' ),
-			'view_items'               => esc_html__( 'View Jobs', 'jobus' ),
-			'search_items'             => esc_html__( 'Search Jobs', 'jobus' ),
-			'not_found'                => esc_html__( 'No jobs found', 'jobus' ),
-			'not_found_in_trash'       => esc_html__( 'No jobs found in Trash', 'jobus' ),
-			'parent_item'              => esc_html__( 'Parent Job', 'jobus' ),
-			'parent_item_colon'        => esc_html__( 'Parent Job:', 'jobus' ),
-			'update_item'              => esc_html__( 'Update Job', 'jobus' ),
-			'menu_name'                => esc_html__( 'Jobus', 'jobus' ),
-			'item_published'           => esc_html__( 'Job published.', 'jobus' ),
-			'item_published_privately' => esc_html__( 'Job published privately.', 'jobus' ),
-			'item_reverted_to_draft'   => esc_html__( 'Job reverted to draft.', 'jobus' ),
-			'item_scheduled'           => esc_html__( 'Job scheduled.', 'jobus' ),
-			'item_updated'             => esc_html__( 'Job updated.', 'jobus' ),
+			'name'                     => esc_html__('Jobs', 'jobus'),
+			'singular_name'            => esc_html__('Job', 'jobus'),
+			'add_new'                  => esc_html__('Add New', 'jobus'),
+			'add_new_item'             => esc_html__('Add New Job', 'jobus'),
+			'edit_item'                => esc_html__('Edit Job', 'jobus'),
+			'new_item'                 => esc_html__('New Job', 'jobus'),
+			'new_item_name'            => esc_html__('New Job Name', 'jobus'),
+			'all_items'                => esc_html__('All Jobs', 'jobus'),
+			'view_item'                => esc_html__('View Job', 'jobus'),
+			'view_items'               => esc_html__('View Jobs', 'jobus'),
+			'search_items'             => esc_html__('Search Jobs', 'jobus'),
+			'not_found'                => esc_html__('No jobs found', 'jobus'),
+			'not_found_in_trash'       => esc_html__('No jobs found in Trash', 'jobus'),
+			'parent_item'              => esc_html__('Parent Job', 'jobus'),
+			'parent_item_colon'        => esc_html__('Parent Job:', 'jobus'),
+			'update_item'              => esc_html__('Update Job', 'jobus'),
+			'menu_name'                => esc_html__('Jobus', 'jobus'),
+			'item_published'           => esc_html__('Job published.', 'jobus'),
+			'item_published_privately' => esc_html__('Job published privately.', 'jobus'),
+			'item_reverted_to_draft'   => esc_html__('Job reverted to draft.', 'jobus'),
+			'item_scheduled'           => esc_html__('Job scheduled.', 'jobus'),
+			'item_updated'             => esc_html__('Job updated.', 'jobus'),
 		);
 
-		$supports = [ 'title', 'thumbnail', 'editor', 'excerpt', 'author' ];
+		$supports = ['title', 'thumbnail', 'editor', 'excerpt', 'author'];
 
 		$args = array(
 			'labels'             => $labels,
@@ -83,11 +89,11 @@ class Job {
 			'show_admin_column'  => true
 		);
 
-		register_post_type( 'jobus_job', $args ); // Register the posttype `job`
+		register_post_type('jobus_job', $args); // Register the posttype `job`
 
 
 		// Register post taxonomies Category
-		register_taxonomy( 'jobus_job_cat', 'jobus_job', array(
+		register_taxonomy('jobus_job_cat', 'jobus_job', array(
 			'public'            => true,
 			'hierarchical'      => true,
 			'show_ui'           => true,
@@ -99,12 +105,12 @@ class Job {
 				'with_front' => false,
 			),
 			'labels'            => array(
-				'name' => esc_html__( 'Categories', 'jobus' ),
+				'name' => esc_html__('Categories', 'jobus'),
 			)
-		) );
+		));
 
 		// Register post taxonomies location
-		register_taxonomy( 'jobus_job_location', 'jobus_job', array(
+		register_taxonomy('jobus_job_location', 'jobus_job', array(
 			'public'            => true,
 			'hierarchical'      => true,
 			'show_ui'           => true,
@@ -116,12 +122,20 @@ class Job {
 				'with_front' => false,
 			),
 			'labels'            => array(
-				'name' => esc_html__( 'Location', 'jobus' ),
+				'name' => esc_html__('Location', 'jobus'),
+				'singular_name' => esc_html__('Location', 'jobus'),
+				'search_items' => esc_html__('Search Locations', 'jobus'),
+				'all_items' => esc_html__('All Locations', 'jobus'),
+				'edit_item' => esc_html__('Edit Location', 'jobus'),
+				'update_item' => esc_html__('Update Location', 'jobus'),
+				'add_new_item' => esc_html__('Add New Location', 'jobus'),
+				'new_item_name' => esc_html__('New Location Name', 'jobus'),
+				'menu_name' => esc_html__('Locations', 'jobus'),
 			)
-		) );
+		));
 
 		// Register post taxonomies Tags
-		register_taxonomy( 'jobus_job_tag', 'jobus_job', array(
+		register_taxonomy('jobus_job_tag', 'jobus_job', array(
 			'public'            => true,
 			'hierarchical'      => true,
 			'show_ui'           => true,
@@ -133,8 +147,16 @@ class Job {
 				'with_front' => false,
 			),
 			'labels'            => array(
-				'name' => esc_html__( 'Tags', 'jobus' ),
+				'name' => esc_html__('Tags', 'jobus'),
+				'singular_name' => esc_html__('Tag', 'jobus'),
+				'search_items' => esc_html__('Search Tags', 'jobus'),
+				'all_items' => esc_html__('All Tags', 'jobus'),
+				'edit_item' => esc_html__('Edit Tag', 'jobus'),
+				'update_item' => esc_html__('Update Tag', 'jobus'),
+				'add_new_item' => esc_html__('Add New Tag', 'jobus'),
+				'new_item_name' => esc_html__('New Tag Name', 'jobus'),
+				'menu_name' => esc_html__('Tags', 'jobus'),
 			)
-		) );
+		));
 	}
 }

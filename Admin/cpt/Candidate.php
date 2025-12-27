@@ -117,7 +117,7 @@ class Candidate {
 			]
 		) );
 
-		// Register post taxonomies Tags
+		// Register post taxonomies Location
 		register_taxonomy( 'jobus_candidate_location', 'jobus_candidate', array(
 			'public'            => true,
 			'hierarchical'      => true,
@@ -132,6 +132,9 @@ class Candidate {
 			'labels'            => array(
 				'name'         => esc_html__( 'Location', 'jobus' ),
 				'add_new_item' => esc_html__( 'Add New Location', 'jobus' ),
+				'edit_item'   => esc_html__( 'Edit Location', 'jobus' ),
+				'new_item_name' => esc_html__( 'New Location Name', 'jobus' ),
+				'menu_name'   => esc_html__( 'Locations', 'jobus' ),
 			)
 		) );
 
@@ -150,6 +153,9 @@ class Candidate {
 			'labels'            => array(
 				'name'         => esc_html__( 'Skills', 'jobus' ),
 				'add_new_item' => esc_html__( 'Add New Skill', 'jobus' ),
+				'edit_item'   => esc_html__( 'Edit Skill', 'jobus' ),
+				'new_item_name' => esc_html__( 'New Skill Name', 'jobus' ),
+				'menu_name'   => esc_html__( 'Skills', 'jobus' ),
 			)
 		) );
 	}

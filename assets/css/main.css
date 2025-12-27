@@ -4828,11 +4828,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab {
-  position: relative;
-}
 .filter-area-tab.modal-content .tags.radio-filter label {
   background: var(--jbs_box_bg_color_opt);
+}
+.filter-area-tab {
+  position: relative;
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;

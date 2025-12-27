@@ -134,6 +134,9 @@ class Company {
 			'labels'            => array(
 				'name'         => esc_html__( 'Location', 'jobus' ),
 				'add_new_item' => esc_html__( 'Add New Location', 'jobus' ),
+				'edit_item'   => esc_html__( 'Edit Location', 'jobus' ),
+				'new_item_name' => esc_html__( 'New Location Name', 'jobus' ),
+				'menu_name'   => esc_html__( 'Locations', 'jobus' ),
 			)
 		) );
 	}
