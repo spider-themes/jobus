@@ -39,22 +39,30 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
                     <?php the_title( '<h1 class="post-title">', '</h1>' ) ?>
                 <?php endif; ?>
             </div>
-            <?php if ( $show_job_edit ) : ?>
-                <?php
-                // Check if current user is the job author (employer)
-                if ( is_user_logged_in() && get_current_user_id() === (int) $employer_id ) {
-                    $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
-                    $edit_job_url  = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job?job_id=' . get_the_ID() : '#';
-                    ?>
-                    <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s"
-                       style="padding: 8px 16px; font-size: 0.875rem; white-space: nowrap;">
-                        <i class="bi bi-pencil-square"></i>
-                        <?php esc_html_e( 'Edit Job', 'jobus' ); ?>
-                    </a>
-                    <?php
+            <?php
+            if ($show_job_edit) {
+                if (is_user_logged_in()) {
+                    $current_user_id = get_current_user_id();
+                    $is_admin        = current_user_can('administrator');
+                    $is_author       = $current_user_id === (int) $employer_id;
+
+                    if ($is_admin || $is_author) {
+                        if ($is_admin) {
+                            $edit_job_url = get_edit_post_link(get_the_ID());
+                        } else {
+                            $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url('jobus_employer');
+                            $edit_job_url  = $dashboard_url ? trailingslashit($dashboard_url) . 'submit-job?job_id=' . get_the_ID() : '#';
+                        }
+                        ?>
+                        <a href="<?php echo esc_url($edit_job_url); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s">
+                            <i class="bi bi-pencil-square"></i>
+                            <?php esc_html_e('Edit Job', 'jobus'); ?>
+                        </a>
+                        <?php
+                    }
                 }
-                ?>
-            <?php endif; ?>
+            }
+            ?>
         </div>
         <?php if ( $show_job_share ) : ?>
             <ul class="share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">

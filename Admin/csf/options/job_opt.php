@@ -353,9 +353,8 @@ CSF::createSection( $settings_prefix, array(
 			'title'   => esc_html__( 'Edit Job Button', 'jobus' ),
 			'label'   => esc_html__( 'Display the Edit Job button at the top of the content area.', 'jobus' ),
 			'default' => true,
+			'class'    => trim($pro_access_class)
 		),
-
-
 
 		array(
 			'id'       => 'job_page_padding',
@@ -365,7 +364,6 @@ CSF::createSection( $settings_prefix, array(
 			'output'   => '.jbs-job-details',
 			'output_mode' => 'padding', // or margin, relative
 		),
-
 
 		// Job Application Settings
 		array(
@@ -445,7 +443,6 @@ CSF::createSection( $settings_prefix, array(
 			'subtitle' => esc_html__( 'Show similar job listings below the job details to help candidates discover other opportunities.', 'jobus' ),
 			'default'  => true,
 		),
-
 
 		// Job Attributes
 		array(
