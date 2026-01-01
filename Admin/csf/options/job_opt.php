@@ -352,7 +352,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Edit Job Button', 'jobus' ),
 			'label'   => esc_html__( 'Display the Edit Job button at the top of the content area.', 'jobus' ),
-			'default' => true,
+			'default' => false,
 			'class'    => trim($pro_access_class)
 		),
 

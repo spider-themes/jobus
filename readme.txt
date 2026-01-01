@@ -1,7 +1,7 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -26,7 +26,7 @@ Built with usability and SEO in mind, Jobus integrates seamlessly with your them
 *   **Developer Friendly:** Clean code, hooks, and filters for customization.
 *   **SEO Optimized:** Structured data and clean URLs to help your jobs rank in Google for Jobs.
 
-### ✨ Key Features (Free Version)
+### Key Features (Free Version)
 
 **👨‍💼 For Employers & Companies**
 *   **Unlimited Job Postings:** Create and manage as many job listings as you need.
@@ -112,7 +112,18 @@ For free support, please post in the [WordPress Support Forum](https://wordpress
 
 == Changelog ==
 
-= 1.4.0 (13 Dec 2025) =
+= 1.5.0 (01 January 2026) =
+*   New: Setup Wizard added for faster and easier initial configuration
+*   New: Automatic page creation feature added to generate required Jobus pages
+*   New: Search form and social share options added across Jobus layouts
+*   New: Keyword search form added to filter sidebars for Job, Company, and Candidate post types
+*   New: Display options added in Settings to customize Job Details layouts
+*   Fixed: Dark mode compatibility updated for the AMA theme
+*   Fixed: Jobus tab widget and social share icon issues resolved
+*   Fixed: Auto-generate key issue for Specifications corrected
+*   Tweaked: Frontend options file naming improved and theme lock system updated for better stability
+
+= 1.4.0 (13 December 2025) =
 *   New: Added candidate pagination style and job status styling
 *   New: Allow job applications without login (configurable from settings)
 *   New: Applications page added to the Candidate Dashboard
@@ -132,7 +143,7 @@ For free support, please post in the [WordPress Support Forum](https://wordpress
 *   Tweaked: Improved the Candidate Single Page
 *   Tweaked: Various code sections simplified and optimized for better performance
 
-= 1.3.0 (02 Dec 2025) =
+= 1.3.0 (02 December 2025) =
 *   New: Added Job Title display to Job Single Layout 2
 *   New: Introduced the unified [jobus_dashboard] shortcode, allowing both Candidate and Employer dashboards to run from a single page.
 *   Fixed: Category layout responsiveness issue resolved
@@ -147,7 +158,7 @@ For free support, please post in the [WordPress Support Forum](https://wordpress
 *   Tweaked: Dark mode compatibility added for seamless integration with Docy themes
 *   Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
 
-= 1.2.0 (11 Nov 2025) =
+= 1.2.0 (11 November 2025) =
 *   New: Predefined Color Schemes added in the General Settings panel for quick styling customization
 *   New: Custom scrollbar styles added for a smoother visual experience
 *   New: Spinner loading animation styles added for better user feedback
@@ -177,7 +188,7 @@ For free support, please post in the [WordPress Support Forum](https://wordpress
 *   Optimized: Unused CSS and old titlebar code removed for lighter performance
 *   Optimized: Color and typography refined across dashboard and listings for consistency
 
-= 1.1.0 (31 Oct 2025) =
+= 1.1.0 (31 October 2025) =
 *   New: New Color Settings added in the General Settings panel
 *   New: Body class support for better theme styling control
 *   Fixed: Company dashboard and employment dashboard layout issues resolved
