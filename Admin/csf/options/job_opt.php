@@ -344,7 +344,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Social Share Buttons', 'jobus' ),
 			'label'   => esc_html__( 'Display social media share buttons for the job post on the single job page.', 'jobus' ),
-			'default' => true,
+			'default' => false,
 		),
 
 		array(

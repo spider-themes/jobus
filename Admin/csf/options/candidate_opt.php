@@ -20,6 +20,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'     => 'group',
 			'title'    => esc_html__( 'Candidate Specifications', 'jobus' ),
 			'subtitle' => esc_html__( 'Manage Candidate Specifications', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'   => array(
 				array(
 					'id'          => 'meta_name',
@@ -101,6 +102,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'   => esc_html__( 'Posts Per Page (Candidate)', 'jobus' ),
 			'default' => - 1,
 			'desc'    => esc_html__( 'Set the value to \'-1\' to display all candidate posts.', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
 		array(
@@ -132,7 +134,8 @@ CSF::createSection( $settings_prefix, array(
 				'grid' => esc_html__( 'Grid', 'jobus' ),
 				'list' => esc_html__( 'List', 'jobus' ),
 			),
-			'default' => 'grid'
+			'default' => 'grid',
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
 		array(
@@ -141,6 +144,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'      => esc_html__( 'Attribute 01', 'jobus' ),
 			'options'    => jobus_get_specs( 'candidate_specifications' ),
 			'dependency' => array( 'candidate_archive_attr_layout', '||', 'grid', 'list' ),
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
 		array(
@@ -149,6 +153,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'      => esc_html__( 'Attribute 02', 'jobus' ),
 			'options'    => jobus_get_specs( 'candidate_specifications' ),
 			'dependency' => array( 'candidate_archive_attr_layout', '||', 'grid', 'list' ),
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
 		// Sidebar Filters
@@ -163,7 +168,8 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
 			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick candidate profiles searches.', 'jobus' ),
-			'default' => true,
+			'default' => false,
+			'class'    => trim($pro_access_class . $active_theme_class)
 		),
 
 		// Notice for missing Candidate Specifications
@@ -197,6 +203,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'        => esc_html__( 'Specification Widgets', 'jobus' ),
 			'subtitle'     => esc_html__( 'Widgets based on the Job meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'       => array(
 
 				array(
@@ -235,6 +242,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'     => 'sortable',
 			'title'    => esc_html__( 'Taxonomy Widgets', 'jobus' ),
 			'subtitle' => esc_html__( 'Drag and drop to sort the order of the widgets.', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'   => array(
 
 				array(
