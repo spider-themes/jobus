@@ -73,10 +73,21 @@ class Onboarding
 	 */
 	public function register_onboarding_page(): void
 	{
+		// Visible submenu under Jobs
 		add_submenu_page(
 			'edit.php?post_type=jobus_job', // Parent slug (Jobus Jobs menu).
 			esc_html__('Setup Wizard', 'jobus'),
 			esc_html__('Setup Wizard', 'jobus'),
+			'manage_options',
+			self::PAGE_SLUG,
+			array($this, 'render_onboarding_page')
+		);
+
+		// Hidden alias so admin.php?page=jobus-onboarding also works
+		add_submenu_page(
+			'options.php', // hidden parent
+			esc_html__('Setup Wizard', 'jobus'),
+			'',
 			'manage_options',
 			self::PAGE_SLUG,
 			array($this, 'render_onboarding_page')
@@ -140,7 +151,8 @@ class Onboarding
 	{
 		// Only load on our onboarding page.
 		// For submenus under CPT, the format is: {post_type}_page_{page_slug}
-		if ('jobus_job_page_' . self::PAGE_SLUG !== $hook_suffix) {
+		// Also check for options_page_ prefix (hidden alias)
+		if ('jobus_job_page_' . self::PAGE_SLUG !== $hook_suffix && 'settings_page_' . self::PAGE_SLUG !== $hook_suffix) {
 			return;
 		}
 
@@ -193,10 +205,42 @@ class Onboarding
 		$color_scheme = isset($options['color_scheme']) ? $options['color_scheme'] : 'scheme_default';
 
 		// Job configuration settings.
-		$job_specifications = isset($options['job_specifications']) ? $options['job_specifications'] : array();
 		$allow_guest_application = isset($options['allow_guest_application']) ? $options['allow_guest_application'] : false;
 		$is_job_related_posts = isset($options['is_job_related_posts']) ? $options['is_job_related_posts'] : true;
 		$job_submission_status = isset($options['job_submission_status']) ? $options['job_submission_status'] : 'publish';
+
+		// Manually enqueue assets for standalone page (since we exit early, admin_enqueue_scripts won't help)
+		wp_enqueue_style(
+			'jobus-onboarding',
+			JOBUS_CSS . '/onboarding.css',
+			array(),
+			JOBUS_VERSION
+		);
+
+		wp_enqueue_script(
+			'jobus-onboarding',
+			JOBUS_JS . '/onboarding.js',
+			array('jquery'),
+			JOBUS_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'jobus-onboarding',
+			'jobusOnboarding',
+			array(
+				'ajaxUrl' => admin_url('admin-ajax.php'),
+				'saveNonce' => wp_create_nonce('jobus_save_onboarding'),
+				'skipNonce' => wp_create_nonce('jobus_skip_onboarding'),
+				'dashboardUrl' => admin_url('edit.php?post_type=jobus_job'),
+				'settingsUrl' => admin_url('edit.php?post_type=jobus_job&page=jobus-settings'),
+				'strings' => array(
+					'saving' => esc_html__('Saving...', 'jobus'),
+					'success' => esc_html__('Settings saved!', 'jobus'),
+					'error' => esc_html__('An error occurred. Please try again.', 'jobus'),
+				),
+			)
+		);
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
