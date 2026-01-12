@@ -3,7 +3,7 @@ Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
 Stable tag: 1.5.0
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -95,6 +95,22 @@ Yes, Jobus is fully translation-ready. You can use plugins like Loco Translate o
 
 = Where can I get support? =
 For free support, please post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/).
+
+## WHAT’S NEXT? 
+
+If you like Jobus, then consider checking out our other WordPress Plugins: 
+
+[EazyDocs](https://wordpress.org/plugins/eazydocs) – Powerful knowledge base plugin to easily create and manage professional documentation, wikis, and helpdesk sections.
+
+[Antimanual](https://wordpress.org/plugins/antimanual) – AI-powered assistant that automates content creation, documentation, and support, transforming static sites into dynamic experiences.
+
+[Advanced Accordion Block](https://wordpress.org/plugins/advanced-accordion-block) – Lightweight Gutenberg block for creating visually appealing, organized accordion sections with extensive styling options.
+
+[Changeloger](https://wordpress.org/plugins/changeloger) – Transform plain text changelogs into visually stunning, organized representations with pagination and version links.
+
+[Forumax](https://wordpress.org/plugins/bbp-core) – Standalone, feature-rich community forum plugin with voting, private replies, and Elementor integration.
+
+[Spider Elements](https://wordpress.org/plugins/spider-elements) – Versatile library of 20+ creative widgets to enhance Elementor and build professional websites.
 
 == Screenshots ==
 
