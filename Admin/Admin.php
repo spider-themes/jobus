@@ -25,6 +25,7 @@ class Admin {
 		add_action( 'admin_menu', [ $this, 'create_nested_submenus' ] );
 		add_filter( 'parent_file', [ $this, 'active_top_level_menu' ] );
 		add_filter( 'submenu_file', [ $this, 'active_sub_menus' ] );
+		add_filter( 'plugin_row_meta', [ $this, 'add_meta_links' ], 10, 2 );
 	}
 
 	/**
@@ -129,4 +130,25 @@ class Admin {
 
 		return $submenu_file;
 	}
+
+
+	/**
+	 * Add custom meta links to the plugin row in the plugins list.
+	 *
+	 * @param array  $links Existing plugin row meta links.
+	 * @param string $file  The plugin file path.
+	 *
+	 * @return array Modified plugin row meta links.
+	 */
+	public function add_meta_links( array $links, string $file ): array {
+
+		if ( JOBUS_PLUGIN_BASENAME !== $file ) {
+			return $links;
+		}
+
+		$links[] = '<a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank">'.esc_html__( 'Docs & FAQs', 'jobus' ).'</a>';
+
+		return $links;
+	}
+
 }

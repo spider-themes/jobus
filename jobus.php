@@ -3,6 +3,7 @@
  * Plugin Name: Jobus
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
+ * Author URI: https://spider-themes.com/
  * Version: 1.5.0
  * Requires at least: 6.0
  * Tested up to: 6.8
@@ -223,6 +224,7 @@ final class Jobus
 		define('JOBUS_JS', JOBUS_URL . '/assets/js');
 		define('JOBUS_IMG', JOBUS_URL . '/assets/images');
 		define('JOBUS_VEND', JOBUS_URL . '/assets/vendors');
+		define('JOBUS_PLUGIN_BASENAME', plugin_basename( JOBUS_FILE ) );
 	}
 
 	/**
