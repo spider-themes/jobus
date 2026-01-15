@@ -176,6 +176,7 @@ final class Jobus
 			new \jobus\Admin\Assets();
 			new \jobus\Admin\User();
 			new \jobus\Admin\Onboarding();
+			new \jobus\Admin\Dashboard();
 		}
 
 		//Post Type

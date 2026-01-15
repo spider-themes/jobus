@@ -164,7 +164,12 @@ class Job_Application {
 				$job_id    = get_post_meta( $post_id, 'job_applied_for_id', true );
 				$job_title = get_post_meta( $post_id, 'job_applied_for_title', true );
 				if ( $job_id && $job_title ) {
-					echo '<a href="' . esc_url( get_edit_post_link( $job_id ) ) . '">' . esc_html( $job_title ) . '</a>';
+					$edit_link = get_edit_post_link( $job_id );
+					if ( $edit_link ) {
+						echo '<a href="' . esc_url( $edit_link ) . '">' . esc_html( $job_title ) . '</a>';
+					} else {
+						echo esc_html( $job_title );
+					}
 				} else {
 					echo esc_html__( 'N/A', 'jobus' );
 				}
