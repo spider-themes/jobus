@@ -293,7 +293,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
             <?php
             $args = array(
                 'post_type'      => 'jobus_job',
-                'posts_per_page' => - 1,
+                'posts_per_page' => 20,
                 'meta_query'     => array(
                     'relation' => 'AND', // Optional, defaults to "AND
                     array(
