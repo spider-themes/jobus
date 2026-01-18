@@ -536,7 +536,8 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
     function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
         $args = array(
                 'post_type'      => 'jobus_job',
-                'posts_per_page' => - 1,
+                'posts_per_page' => $link ? - 1 : 1,
+                'fields'         => 'ids',
                 'meta_query'     => array(
                         'relation' => 'AND', // Optional, defaults to "AND
                         array(
@@ -554,17 +555,7 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
             return $job_posts->found_posts;
         } else {
 
-            $company_ids_arr = array();
-
-            // Loop through the query results and populate the array
-            if ( $job_posts->have_posts() ) {
-                while ( $job_posts->have_posts() ) {
-                    $job_posts->the_post();
-                    $company_ids_arr[] = get_the_ID();
-                }
-                wp_reset_postdata();
-            }
-
+            $company_ids_arr   = $job_posts->posts;
             $company_ids_array = implode( ',', $company_ids_arr );
 
             // if post counts 1 then return a post-link
