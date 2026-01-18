@@ -760,43 +760,51 @@ function jobus_merge_queries_and_get_ids( ...$queries ): array {
  * @return array Associative array with widget names as keys and post IDs with their values.
  */
 function jobus_all_range_field_value(): array {
-    // All the post-IDs of the 'jobus_job' post-type
-    $args = array(
-            'post_type'      => 'jobus_job',
-            'posts_per_page' => - 1,
-            'post_status'    => 'publish',
-    );
+    global $wpdb;
 
-    $posts       = get_posts( $args );
     $post_ids    = [];
     $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
 
     if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
-        if ( ! empty( $posts ) ) {
 
-            foreach ( $posts as $post ) {
-                $meta = get_post_meta( $post->ID, 'jobus_meta_options', true );
+        $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+        $search_widgets = [];
 
-                $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-                $search_widgets = [];
-
-                if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-                    foreach ( $filter_widgets as $widget ) {
-                        if ( $widget['widget_layout'] == 'range' ) {
-                            // if you get value in search bar
-                            $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                            if ( $widget_name ) {
-                                $search_widgets[] = $widget_name;
-                            }
-                        }
+        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+            foreach ( $filter_widgets as $widget ) {
+                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
+                    // if you get value in search bar
+                    $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
+                    if ( $widget_name ) {
+                        $search_widgets[] = $widget_name;
                     }
                 }
+            }
+        }
 
-                foreach ( $search_widgets as $serial => $input ) {
-                    $meta_salary = $meta[ $input ] ?? '';
-                    if ( ! empty( $meta_salary ) ) {
-                        $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
-                        $post_ids[ $input ][ $post->ID ] = $value;
+        if ( ! empty( $search_widgets ) ) {
+            // Fetch only necessary data directly from DB
+            $results = $wpdb->get_results( "
+                SELECT p.ID, pm.meta_value
+                FROM {$wpdb->posts} p
+                INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+                WHERE p.post_type = 'jobus_job'
+                AND p.post_status = 'publish'
+                AND pm.meta_key = 'jobus_meta_options'
+            " );
+
+            if ( $results ) {
+                foreach ( $results as $row ) {
+                    $meta = maybe_unserialize( $row->meta_value );
+
+                    if ( is_array( $meta ) ) {
+                        foreach ( $search_widgets as $serial => $input ) {
+                            $meta_salary = $meta[ $input ] ?? '';
+                            if ( ! empty( $meta_salary ) ) {
+                                $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
+                                $post_ids[ $input ][ $row->ID ] = $value;
+                            }
+                        }
                     }
                 }
             }
