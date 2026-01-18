@@ -71,6 +71,13 @@ class Dashboard {
 	 * @return string Dashboard URL or home URL if not found.
 	 */
 	public static function get_dashboard_page_url( $role = '' ): string {
+		$cache_key = 'jobus_dashboard_url_' . md5( $role );
+		$url       = get_transient( $cache_key );
+
+		if ( false !== $url ) {
+			return $url;
+		}
+
 		$shortcodes = [ '[jobus_dashboard]' ];
 		
 		if ( 'jobus_candidate' === $role ) {
@@ -92,10 +99,15 @@ class Dashboard {
 			]);
 
 			if ( ! empty( $dashboard_page ) ) {
-				return get_permalink( $dashboard_page[0] );
+				$url = get_permalink( $dashboard_page[0] );
+				set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+				return $url;
 			}
 		}
 
-		return home_url( '/' );
+		$url = home_url( '/' );
+		set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+
+		return $url;
 	}
 }
