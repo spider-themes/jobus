@@ -40,6 +40,11 @@ $jobs = get_posts([
 
 $total_jobs = count( $jobs );
 
+// Optimize: Prime the meta cache to avoid N+1 queries in the loop
+if ( ! empty( $jobs ) ) {
+	update_postmeta_cache( $jobs );
+}
+
 // Calculate total job views
 $total_job_views = array_sum( array_map( function( $job_id ) {
 	return (int) get_post_meta( $job_id, 'all_user_view_count', true );
