@@ -41,26 +41,42 @@ $jobs = get_posts([
 $total_jobs = count( $jobs );
 
 // Calculate total job views
-$total_job_views = array_sum( array_map( function( $job_id ) {
-	return (int) get_post_meta( $job_id, 'all_user_view_count', true );
-}, $jobs ) );
+// ⚡ Bolt: Optimized N+1 query. Used direct SQL sum instead of looping get_post_meta.
+global $wpdb;
+$total_job_views = 0;
+if ( ! empty( $jobs ) ) {
+    $job_ids_placeholder = implode( ',', array_fill( 0, count( $jobs ), '%d' ) );
+    // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Prepared placeholders are used.
+    $total_job_views = (int) $wpdb->get_var( $wpdb->prepare(
+        "SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'all_user_view_count' AND post_id IN ($job_ids_placeholder)",
+        $jobs
+    ) );
+    // phpcs:enable
+}
 
 // Get total applications
-$applications = ! empty( $jobs ) ? get_posts([
-	'post_type'      => 'jobus_applicant',
-	'post_status'    => 'publish',
-	'meta_query'     => [
-		[
-			'key'     => 'job_applied_for_id',
-			'value'   => $jobs,
-			'compare' => 'IN'
-		]
-	],
-	'fields'         => 'ids',
-	'posts_per_page' => -1
-]) : [];
-
-$total_applications = count( $applications );
+// ⚡ Bolt: Optimized application count query to only fetch IDs and use WP_Query for caching potential.
+$total_applications = 0;
+if ( ! empty( $jobs ) ) {
+    $applications_query = new WP_Query([
+        'post_type'      => 'jobus_applicant',
+        'post_status'    => 'publish',
+        'meta_query'     => [
+            [
+                'key'     => 'job_applied_for_id',
+                'value'   => $jobs,
+                'compare' => 'IN'
+            ]
+        ],
+        'fields'         => 'ids',
+        'posts_per_page' => -1, // We still need count, but lighter query
+        'no_found_rows'  => true, // Optimization since we count the array
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false,
+        'suppress_filters' => true, // Maintain original behavior of get_posts
+    ]);
+    $total_applications = $applications_query->post_count;
+}
 
 // Get saved candidates count
 $saved_candidates = get_user_meta( $user_id, 'jobus_saved_candidates', true );
