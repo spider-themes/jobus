@@ -64,7 +64,7 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
 				$is_search_active = ! empty( $search_query );
 				$is_search_collapsed = ! $is_search_active;
 				?>
-				<div class="filter-block bottom-line jbs-pb-25 jbs-mt25">
+				<div class="filter-block jbs-bottom-line jbs-pb-25 jbs-mt25">
 					<a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_search_collapsed ? ' jbs-collapsed' : '' ); ?>"
 					  data-jbs-toggle="collapse"
 					   data-jbs-target="#collapse-search-form" role="button"
@@ -93,7 +93,7 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
 					$widget_title = $specifications[ $widget_name ] ?? '';
 					$specifications_data = $specs_options[ $widget_name ] ?? '';
 					?>
-                    <div class="filter-block bottom-line jbs-pb-25 jbs-mt25">
+                    <div class="filter-block jbs-bottom-line jbs-pb-25 jbs-mt25">
                         <a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr( $is_collapsed ? ' jbs-collapsed' : '' ); ?>"
                           data-jbs-toggle="collapse"
                            data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>" role="button"

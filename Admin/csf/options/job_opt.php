@@ -120,9 +120,10 @@ CSF::createSection( $settings_prefix, array(
 			'id'      => 'job_posts_per_page',
 			'type'    => 'number',
 			'title'   => esc_html__( 'Posts Per Page', 'jobus' ),
-			'default' => - 1,
+			'default' => 8,
 			'desc'    => esc_html__( 'Set the value to \'-1\' to display all job posts.', 'jobus' ),
 		),
+
 		array(
 			'id'       => 'default_company_logo',
 			'type'     => 'media',
@@ -133,6 +134,16 @@ CSF::createSection( $settings_prefix, array(
 				'url' => JOBUS_IMG . '/default-company.png',
 			),
 		),
+
+		array(
+			'id'       => 'job_page_padding',
+			'type'     => 'spacing',
+			'title'    => esc_html__( 'Page Padding', 'jobus' ),
+			'subtitle' => esc_html__( 'Control the top, right, bottom and left padding of the Job archive page.', 'jobus' ),
+			'output'   => '.post-type-archive-jobus_job .jbs-job-classic',
+			'output_mode' => 'padding', // or margin, relative
+		),
+
 		// Job Attributes
 		array(
 			'type'    => 'subheading',
@@ -357,7 +368,7 @@ CSF::createSection( $settings_prefix, array(
 		),
 
 		array(
-			'id'       => 'job_page_padding',
+			'id'       => 'job_single_page_padding',
 			'type'     => 'spacing',
 			'title'    => esc_html__( 'Page Padding', 'jobus' ),
 			'subtitle' => esc_html__( 'Control the top, right, bottom and left padding of the single job page.', 'jobus' ),

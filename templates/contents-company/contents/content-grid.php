@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					if ( $company_count > 0 ) {
 						?>
-                        <div class="bottom-line jbs-d-flex">
+                        <div class="jbs-bottom-line jbs-d-flex">
                             <a href="<?php echo esc_url( jobus_get_selected_company_count( get_the_ID() ) ); ?>">
 								<?php
 								/* translators: 1: Vacancy, 2: Vacancies */

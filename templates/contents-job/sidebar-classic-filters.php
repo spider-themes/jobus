@@ -87,7 +87,7 @@ $specs_options = jobus_get_specs_options();
                     $is_search_active = ! empty( $search_query );
                     $is_search_collapsed = ! $is_search_active;
                     ?>
-                    <div class="filter-block bottom-line jbs-pb-25">
+                    <div class="filter-block jbs-bottom-line jbs-pb-25">
                         <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>" 
                            data-jbs-toggle="collapse"
                            data-jbs-target="#collapse-search-form" 
@@ -120,7 +120,7 @@ $specs_options = jobus_get_specs_options();
                         $widget_title = $specifications[ $widget_name ] ?? '';
                         $specifications_data = $specs_options[ $widget_name ] ?? '';
                         ?>
-                        <div class="filter-block bottom-line jbs-pb-25">
+                        <div class="filter-block jbs-bottom-line jbs-pb-25">
                             <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_collapsed ? ' jbs-collapsed' : ''; ?>" 
                                data-jbs-toggle="collapse"
                                data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>" 

@@ -133,7 +133,7 @@
   color: #fff;
 }
 .jobus-quick-action.jobus-quick-action-primary:hover {
-  background: rgb(37.24, 91.96, 68.4);
+  background: #255c44;
   color: #fff;
 }
 .jobus-quick-action.jobus-quick-action-secondary {
@@ -415,7 +415,7 @@
   font-weight: 500;
 }
 .jobus-card-link:hover {
-  color: rgb(34.3, 84.7, 63);
+  color: #22553f;
 }
 .jobus-card-link .dashicons {
   font-size: 16px;
@@ -487,15 +487,15 @@
 }
 .jobus-badge.jobus-badge-pending {
   background: rgba(245, 158, 11, 0.1);
-  color: rgb(196.9291338583, 126.7125984252, 8.0708661417);
+  color: #c57f08;
 }
 .jobus-badge.jobus-badge-approved {
   background: rgba(34, 197, 94, 0.1);
-  color: rgb(26.4935064935, 153.5064935065, 73.2467532468);
+  color: #1a9a49;
 }
 .jobus-badge.jobus-badge-rejected {
   background: rgba(239, 68, 68, 0.1);
-  color: rgb(234.9802955665, 21.0197044335, 21.0197044335);
+  color: #eb1515;
 }
 
 .jobus-list {
@@ -545,7 +545,7 @@
 }
 .jobus-list-badge.jobus-list-badge-warning {
   background: rgba(245, 158, 11, 0.1);
-  color: rgb(196.9291338583, 126.7125984252, 8.0708661417);
+  color: #c57f08;
 }
 
 .jobus-empty-state {
@@ -617,7 +617,7 @@
   color: #D2F34C;
 }
 .jobus-resource-list .jobus-upgrade-link:hover {
-  color: rgb(34.3, 84.7, 63);
+  color: #22553f;
 }
 
 @media screen and (max-width: 1200px) {
@@ -668,3 +668,5 @@
     font-size: 24px;
   }
 }
+
+/*# sourceMappingURL=admin-dashboard.css.map */

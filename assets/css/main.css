@@ -2800,9 +2800,6 @@ body.compensate-for-scrollbar {
   border: none !important;
 }
 .pagination-wrap .jbs-pagination .page-numbers.prev, .pagination-wrap .jbs-pagination .page-numbers.next {
-  height: auto;
-  width: auto;
-  padding: 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4048,11 +4045,11 @@ img {
   color: var(--jbs-brand_color_1);
   text-decoration: none;
 }
-.company-grid-layout .bottom-line {
+.company-grid-layout .jbs-bottom-line {
   border-top: 1px solid rgba(49, 121, 90, 0.3);
   margin: 50px -15px 0;
 }
-.company-grid-layout .bottom-line a {
+.company-grid-layout .jbs-bottom-line a {
   display: block;
   width: 100%;
   font-size: 15px;
@@ -4066,11 +4063,11 @@ img {
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.company-grid-layout .bottom-line a i {
+.company-grid-layout .jbs-bottom-line a i {
   vertical-align: -1px;
   margin-right: 2px;
 }
-.company-grid-layout .bottom-line a:hover {
+.company-grid-layout .jbs-bottom-line a:hover {
   background: var(--jbs-brand_color_4);
   color: #fff;
 }
@@ -4828,11 +4825,11 @@ img {
     overflow-y: auto;
   }
 }
-.filter-area-tab.modal-content .tags.radio-filter label {
-  background: var(--jbs_box_bg_color_opt);
-}
 .filter-area-tab {
   position: relative;
+}
+.filter-area-tab.modal-content .tags.radio-filter label {
+  background: var(--jbs_box_bg_color_opt);
 }
 .filter-area-tab .border-20 {
   border-radius: 20px;
@@ -4888,24 +4885,22 @@ img {
 .filter-area-tab .main-title {
   font-size: 25px;
 }
-.filter-area-tab .filter-block.bottom-line {
+.filter-area-tab .filter-block.jbs-bottom-line {
   border-bottom: 1px solid rgba(49, 121, 90, 0.3);
 }
-.filter-area-tab .filter-block.bottom-line + .filter-block {
+.filter-area-tab .filter-block.jbs-bottom-line + .filter-block {
   margin-top: 25px;
 }
 .filter-area-tab .filter-title {
   font-size: 1em;
   position: relative;
   display: block;
+  padding-right: 22px;
 }
 .filter-area-tab .filter-title:not(.jbs-collapsed) {
   margin-bottom: 10px;
 }
-.filter-area-tab a.filter-title {
-  padding-right: 22px;
-}
-.filter-area-tab a.filter-title:before {
+.filter-area-tab .filter-title::before {
   content: "\f4fe";
   font-family: "bootstrap-icons";
   width: 20px;
@@ -4924,7 +4919,7 @@ img {
   -o-transition: all 0.2s ease-in-out 0s;
   transition: all 0.2s ease-in-out 0s;
 }
-.filter-area-tab a.filter-title:not(.jbs-collapsed):before {
+.filter-area-tab .filter-title:not(.jbs-collapsed):before {
   content: "\f2ea";
 }
 .filter-area-tab .jbs-nice-select {
