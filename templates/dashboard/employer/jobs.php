@@ -33,19 +33,17 @@ $current_page = max(
 $current_page = max( 1, $current_page );
 
 // Get jobs for current user
-$all_jobs = get_posts([
+$query = new WP_Query([
 	'post_type'      => 'jobus_job',
 	'author'         => get_current_user_id(),
 	'post_status'    => [ 'publish', 'pending', 'draft', 'expired' ],
-	'posts_per_page' => -1,
+	'posts_per_page' => $per_page,
+	'paged'          => $is_dashboard ? 1 : $current_page,
 ]);
 
-$total_jobs = count( $all_jobs );
-$total_pages = ceil( $total_jobs / $per_page );
-$offset = ( $current_page - 1 ) * $per_page;
-
-// Get jobs for display
-$jobs = array_slice( $all_jobs, $is_dashboard ? 0 : $offset, $per_page );
+$jobs        = $query->posts;
+$total_jobs  = $query->found_posts;
+$total_pages = $query->max_num_pages;
 
 // Get dashboard URL for edit job link
 $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
@@ -144,17 +142,12 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                 </table>
             </div>
         <?php
-        if ( ! $is_dashboard && $total_jobs > $per_page ) {
-            $mock_query = new stdClass();
-            $mock_query->max_num_pages = $total_pages;
-            $mock_query->found_posts = $total_jobs;
-            $mock_query->query_vars = [ 'paged' => $current_page ];
-
+        if ( ! $is_dashboard && $total_pages > 1 ) {
             $original_paged = get_query_var( 'paged' );
             set_query_var( 'paged', $current_page );
 
             echo '<div class="pagination-wrap">';
-            jobus_pagination( $mock_query );
+            jobus_pagination( $query );
             echo '</div>';
 
             set_query_var( 'paged', $original_paged );
