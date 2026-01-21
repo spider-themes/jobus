@@ -435,22 +435,30 @@ if ( ! function_exists( 'jobus_get_meta_attributes' ) ) {
  */
 if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
-        $args = array(
-                'post_type'      => $post_type,
-                'post_status'    => 'publish',
-                'posts_per_page' => - 1,
-                'meta_query'     => array(
-                        array(
-                                'key'     => $meta_key,
-                                'value'   => $meta_value,
-                                'compare' => 'LIKE',
-                        ),
-                ),
-        );
+        global $wpdb;
 
-        $query = new WP_Query( $args );
+        // Use direct SQL for performance
+        $query = "
+            SELECT COUNT(DISTINCT p.ID)
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)
+            WHERE p.post_type = %s
+            AND p.post_status = 'publish'
+            AND pm.meta_key = %s
+            AND pm.meta_value LIKE %s
+        ";
 
-        return $query->found_posts;
+        // Add wildcards for LIKE comparison
+        $like_value = '%' . $wpdb->esc_like( $meta_value ) . '%';
+
+        $count = $wpdb->get_var( $wpdb->prepare(
+            $query,
+            $post_type,
+            $meta_key,
+            $like_value
+        ) );
+
+        return (int) $count;
     }
 }
 
