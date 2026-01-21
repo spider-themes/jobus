@@ -79,14 +79,12 @@ if ( ! $is_dashboard ) {
         'posts_per_page' => -1,
     );
 
-    $jobs = new WP_Query( $args );
-
     if ( ! empty( $display_jobs ) ) {
-        while ( $jobs->have_posts() ) : $jobs->the_post();
+        // Optimization: Only query the specific jobs we need to display
+        $args['post__in'] = $display_jobs;
+        $jobs = new WP_Query( $args );
 
-            if ( ! in_array( get_the_ID(), $display_jobs, true ) ) {
-                continue;
-            }
+        while ( $jobs->have_posts() ) : $jobs->the_post();
 
 			jobus_get_template_part('loop/job-list-item', [
 				'layout' => 'dashboard',
