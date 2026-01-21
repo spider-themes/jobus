@@ -39,6 +39,14 @@ class Ajax_Actions
 
 		// Delete Job
 		add_action('wp_ajax_jobus_delete_job', [$this, 'delete_job']);
+
+		// Candidate Registration
+		add_action('wp_ajax_nopriv_jobus_register_candidate', [$this, 'ajax_register_candidate']);
+		add_action('wp_ajax_jobus_register_candidate', [$this, 'ajax_register_candidate']);
+
+		// Employer Registration
+		add_action('wp_ajax_nopriv_jobus_register_employer', [$this, 'ajax_register_employer']);
+		add_action('wp_ajax_jobus_register_employer', [$this, 'ajax_register_employer']);
 	}
 
 	public function ajax_send_contact_email(): void
@@ -298,5 +306,103 @@ class Ajax_Actions
 		}
 
 		wp_send_json_success(['message' => esc_html__('Job deleted successfully.', 'jobus')]);
+	}
+
+	/**
+	 * Handle candidate registration via AJAX.
+	 */
+	public function ajax_register_candidate(): void
+	{
+		check_ajax_referer('register_candidate_action', 'nonce');
+
+		$candidate_username         = ! empty($_POST['candidate_username']) ? sanitize_user(wp_unslash($_POST['candidate_username'])) : '';
+		$candidate_email            = ! empty($_POST['candidate_email']) ? sanitize_email(wp_unslash($_POST['candidate_email'])) : '';
+		$candidate_password         = ! empty($_POST['candidate_pass']) ? sanitize_text_field(wp_unslash($_POST['candidate_pass'])) : '';
+		$candidate_confirm_password = ! empty($_POST['candidate_confirm_pass']) ? sanitize_text_field(wp_unslash($_POST['candidate_confirm_pass'])) : '';
+
+		if (empty($candidate_username) || empty($candidate_email) || empty($candidate_password)) {
+			wp_send_json_error(['message' => esc_html__('Please fill in all required fields.', 'jobus')]);
+		}
+
+		if ($candidate_password !== $candidate_confirm_password) {
+			wp_send_json_error(['message' => esc_html__('Passwords do not match.', 'jobus')]);
+		}
+
+		if (username_exists($candidate_username) || email_exists($candidate_email)) {
+			wp_send_json_error(['message' => esc_html__('Username or email already exists.', 'jobus')]);
+		}
+
+		$user_data = [
+			'user_login' => $candidate_username,
+			'user_pass'  => $candidate_password,
+			'user_email' => $candidate_email,
+			'role'       => 'jobus_candidate',
+		];
+
+		$candidate_id = wp_insert_user($user_data);
+		if (is_wp_error($candidate_id)) {
+			wp_send_json_error(['message' => $candidate_id->get_error_message()]);
+		}
+
+		wp_set_current_user($candidate_id);
+		wp_signon(['user_login' => $candidate_username, 'user_password' => $candidate_password], false);
+		do_action('wp_login', $candidate_username, new \WP_User($candidate_id));
+
+		$redirect_url_from_form = ! empty($_POST['redirect_url']) ? esc_url_raw(wp_unslash($_POST['redirect_url'])) : '';
+		$redirect_url           = ! empty($redirect_url_from_form) && $redirect_url_from_form !== home_url('/') ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url('jobus_candidate');
+
+		wp_send_json_success([
+			'message'      => esc_html__('Registration successful! Redirecting to dashboard...', 'jobus'),
+			'redirect_url' => $redirect_url
+		]);
+	}
+
+	/**
+	 * Handle employer registration via AJAX.
+	 */
+	public function ajax_register_employer(): void
+	{
+		check_ajax_referer('register_employer_action', 'nonce');
+
+		$employer_username         = ! empty($_POST['employer_username']) ? sanitize_user(wp_unslash($_POST['employer_username'])) : '';
+		$employer_email            = ! empty($_POST['employer_email']) ? sanitize_email(wp_unslash($_POST['employer_email'])) : '';
+		$employer_password         = ! empty($_POST['employer_pass']) ? sanitize_text_field(wp_unslash($_POST['employer_pass'])) : '';
+		$employer_confirm_password = ! empty($_POST['employer_confirm_pass']) ? sanitize_text_field(wp_unslash($_POST['employer_confirm_pass'])) : '';
+
+		if (empty($employer_username) || empty($employer_email) || empty($employer_password)) {
+			wp_send_json_error(['message' => esc_html__('Please fill in all required fields.', 'jobus')]);
+		}
+
+		if ($employer_password !== $employer_confirm_password) {
+			wp_send_json_error(['message' => esc_html__('Passwords do not match.', 'jobus')]);
+		}
+
+		if (username_exists($employer_username) || email_exists($employer_email)) {
+			wp_send_json_error(['message' => esc_html__('Username or email already exists.', 'jobus')]);
+		}
+
+		$user_data = [
+			'user_login' => $employer_username,
+			'user_pass'  => $employer_password,
+			'user_email' => $employer_email,
+			'role'       => 'jobus_employer',
+		];
+
+		$employer_id = wp_insert_user($user_data);
+		if (is_wp_error($employer_id)) {
+			wp_send_json_error(['message' => $employer_id->get_error_message()]);
+		}
+
+		wp_set_current_user($employer_id);
+		wp_signon(['user_login' => $employer_username, 'user_password' => $employer_password], false);
+		do_action('wp_login', $employer_username, new \WP_User($employer_id));
+
+		$redirect_url_from_form = ! empty($_POST['redirect_url']) ? esc_url_raw(wp_unslash($_POST['redirect_url'])) : '';
+		$redirect_url           = ! empty($redirect_url_from_form) && $redirect_url_from_form !== home_url('/') ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url('jobus_employer');
+
+		wp_send_json_success([
+			'message'      => esc_html__('Registration successful! Redirecting to dashboard...', 'jobus'),
+			'redirect_url' => $redirect_url
+		]);
 	}
 }

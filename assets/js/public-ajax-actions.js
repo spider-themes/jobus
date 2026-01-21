@@ -15,7 +15,7 @@
  * @link      https://developer.wordpress.org/plugins/javascript/ajax/
  */
 
-;(function ($) {
+; (function ($) {
 
     'use strict';
 
@@ -24,6 +24,7 @@
             this.savePost(); // save for job and candidate posts
             this.jobApplicationForm(); // Initialize job application form submission by candidates
             this.emailFormToCandidate(); // Initialize email form to candidate
+            this.registerForm(); // Initialize registration form
         },
 
         /**
@@ -128,7 +129,7 @@
          */
         emailFormToCandidate: function () {
 
-            $('#candidate-email-from').on('submit', function(event) {
+            $('#candidate-email-from').on('submit', function (event) {
                 event.preventDefault(); // Prevent default form submission
 
                 let formData = $(this).serialize(); // Serialize form data
@@ -141,7 +142,7 @@
                     url: jobus_public_obj.ajax_url, // WordPress AJAX URL
                     type: 'POST',
                     data: formData + '&action=jobus_candidate_send_mail_form&security=' + jobus_public_obj.candidate_email_nonce + '&candidate_id=' + candidateId,
-                    success: function(response) {
+                    success: function (response) {
                         messageContainer.removeClass('success error'); // Clear any previous messages
 
                         if (response.success) {
@@ -151,7 +152,7 @@
                             $('#candidate-email-from')[0].reset(); // Clear the form fields
 
                             // Remove the message after 10 seconds
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 messageContainer.removeClass('success').text('');
                             }, 10000); // 10000 milliseconds = 10 seconds
                         } else {
@@ -167,11 +168,66 @@
                             messageContainer.addClass('error').text(errorMessage);
                         }
                     },
-                    error: function() {
+                    error: function () {
                         messageContainer.addClass('error').text('There was an error with the AJAX request.');
                     }
                 });
             });
+        },
+
+
+        /**
+         * Handles registration form submission.
+         */
+        registerForm: function () {
+            const self = this;
+            const messageContainer = $('#registration-message');
+
+            const handleRegistration = function (formSelector, actionName, nonceName) {
+                $(formSelector).on('submit', function (e) {
+                    e.preventDefault();
+
+                    const form = $(this);
+                    const btn = form.find('button[type="submit"]');
+                    const originalBtnText = btn.text();
+
+                    btn.prop('disabled', true).text('Processing...');
+                    messageContainer.removeClass('jbs-alert jbs-alert-success jbs-alert-danger').hide();
+
+                    const formData = new FormData(this);
+                    formData.append('action', actionName);
+                    formData.append('nonce', form.find('input[name="' + nonceName + '"]').val());
+
+                    $.ajax({
+                        url: jobus_public_obj.ajax_url,
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res.success) {
+                                messageContainer.addClass('jbs-alert jbs-alert-success').html(res.data.message).fadeIn();
+                                form.find('input:not([type="hidden"])').val(''); // Clear form
+
+                                // Redirect after 2 seconds
+                                setTimeout(function () {
+                                    window.location.href = res.data.redirect_url;
+                                }, 2000);
+                            } else {
+                                messageContainer.addClass('jbs-alert jbs-alert-danger').html(res.data.message).fadeIn();
+                                btn.prop('disabled', false).text(originalBtnText);
+                            }
+                        },
+                        error: function () {
+                            messageContainer.addClass('jbs-alert jbs-alert-danger').text('An error occurred. Please try again.').fadeIn();
+                            btn.prop('disabled', false).text(originalBtnText);
+                        }
+                    });
+                });
+            };
+
+            handleRegistration('#jobus-candidate-registration-form', 'jobus_register_candidate', 'register_candidate_nonce');
+            handleRegistration('#jobus-employer-registration-form', 'jobus_register_employer', 'register_employer_nonce');
         }
 
     };

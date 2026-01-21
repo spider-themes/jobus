@@ -9257,3 +9257,15 @@ msgstr ""
 #: templates/single-job/related-job.php:28
 msgid "Related Jobs"
 msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:336 includes/Classes/Ajax_Actions.php:376
+msgid "Registration successful! Redirecting to dashboard..."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:316 includes/Classes/Ajax_Actions.php:356
+msgid "Please fill in all required fields."
+msgstr ""
+
+#: assets/js/public-ajax-actions.js:218
+msgid "An error occurred. Please try again."
+msgstr ""

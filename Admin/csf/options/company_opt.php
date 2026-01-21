@@ -21,6 +21,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'     => 'group',
 			'title'    => esc_html__( 'Company Specifications', 'jobus' ),
 			'subtitle' => esc_html__( 'Manage Company Specifications', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'   => array(
 				array(
 					'id'          => 'meta_name',
@@ -102,6 +103,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'   => esc_html__( 'Posts Per Page', 'jobus' ),
 			'default' => - 1,
 			'desc'    => esc_html__( 'Set the value to \'-1\' to display all company posts.', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		array(
@@ -133,7 +135,8 @@ CSF::createSection( $settings_prefix, array(
 				'grid' => esc_html__( 'Grid', 'jobus' ),
 				'list' => esc_html__( 'List', 'jobus' ),
 			),
-			'default' => 'grid'
+			'default' => 'grid',
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		array(
@@ -142,6 +145,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'      => esc_html__( 'Attribute 01', 'jobus' ),
 			'options'    => jobus_get_specs( 'company_specifications' ),
 			'dependency' => array( 'company_archive_attr_layout', '==', 'list' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		// Sidebar Filters
@@ -156,7 +160,8 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Show Search Form', 'jobus' ),
 			'subtitle' => esc_html__( 'Display a keyword search at the top of the filters sidebar for quick company searches.', 'jobus' ),
-			'default' => true,
+			'default' => false,
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		// Notice for missing Company Specifications
@@ -190,6 +195,7 @@ CSF::createSection( $settings_prefix, array(
 			'title'        => esc_html__( 'Specification Widgets', 'jobus' ),
 			'subtitle'     => esc_html__( 'Widgets based on the Company meta data. Choose the layout style for displaying widget options:', 'jobus' ),
 			'button_title' => esc_html__( 'Add Widget', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'       => array(
 
 				array(
@@ -220,6 +226,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'     => 'sortable',
 			'title'    => esc_html__( 'Taxonomy Widgets', 'jobus' ),
 			'subtitle' => esc_html__( 'Drag and drop to sort the order of the widgets.', 'jobus' ),
+			'class'    => trim($pro_access_class . $active_theme_class),
 			'fields'   => array(
 
 				array(
@@ -246,6 +253,7 @@ CSF::createSection( $settings_prefix, array(
 	'title'  => esc_html__( 'Company Details Page', 'jobus' ),
 	'id'     => 'company_details_layout',
 	'fields' => array(
+
 		// Social Share Options
 		array(
 			'type'    => 'subheading',
@@ -257,7 +265,8 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'switcher',
 			'title'   => esc_html__( 'Social Share Buttons', 'jobus' ),
 			'subtitle' => esc_html__( 'Show or hide social media sharing buttons on company detail pages.', 'jobus' ),
-			'default' => true,
+			'default' => false,
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		// Open Job Position
@@ -271,6 +280,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Attribute 01', 'jobus' ),
 			'options' => jobus_get_specs(),
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 
 		array(
@@ -278,6 +288,7 @@ CSF::createSection( $settings_prefix, array(
 			'type'    => 'select',
 			'title'   => esc_html__( 'Attribute 02', 'jobus' ),
 			'options' => jobus_get_specs(),
+			'class'    => trim($pro_access_class . $active_theme_class),
 		),
 	)
 ) );

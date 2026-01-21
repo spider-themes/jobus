@@ -109,7 +109,8 @@
         color: #6d8b7e;
       }
 
-      &:first-child:after, &:last-child:after {
+      &:first-child:after,
+      &:last-child:after {
         display: none;
       }
 
@@ -201,7 +202,8 @@
     color: #000;
   }
 
-  &:first-child:after, &:last-child:after {
+  &:first-child:after,
+  &:last-child:after {
     display: none;
   }
 
@@ -363,7 +365,8 @@
       font-weight: 500;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       max-width: 100%;
       border: none;
@@ -478,7 +481,7 @@
 
       .placeholder_icon img {
         position: relative;
-        top: 50%;
+        top: 45%;
         margin: 0 auto;
         transform: translateY(-50%);
       }
@@ -544,7 +547,7 @@
     transition: all 0.1s ease-in-out;
   }
 
-  .agreement-checkbox input[type="checkbox"]:checked + label:before {
+  .agreement-checkbox input[type="checkbox"]:checked+label:before {
     content: "\f633";
     font-family: bootstrap-icons !important;
     background: #000;
@@ -644,20 +647,22 @@
   .jbs-search-form-widget-one form {
     // padding: 22px;
   }
+
   .jbs-search-form-widget-one form .input-box.border-left {
     border-left: none;
     padding-top: 5px;
     border-top: 1px solid #E6E6E6;
   }
+
   .jbs-search-form-widget-one form .jobus_srch_bor button {
     display: block;
   }
-  .jbs-search-form-widget-one form .search-btn, .jbs-search-form-widget-one form .search-btn-two {
+
+  .jbs-search-form-widget-one form .search-btn,
+  .jbs-search-form-widget-one form .search-btn-two {
     margin: 0 !important;
     padding: 15px 0PX !important;
     border-radius: 0 0 10px 10px !important;
     width: 100% !important;
   }
 }
-
-
