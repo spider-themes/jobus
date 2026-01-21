@@ -40,6 +40,11 @@ $jobs = get_posts([
 
 $total_jobs = count( $jobs );
 
+// Optimize: Prime the meta cache to avoid N+1 queries in the loop
+if ( ! empty( $jobs ) ) {
+	update_postmeta_cache( $jobs );
+}
+
 // Calculate total job views
 // ⚡ Bolt: Optimized N+1 query. Used direct SQL sum instead of looping get_post_meta.
 global $wpdb;
