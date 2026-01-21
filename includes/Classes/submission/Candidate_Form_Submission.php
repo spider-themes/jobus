@@ -501,8 +501,20 @@ class Candidate_Form_Submission {
 						require_once ABSPATH . 'wp-admin/includes/image.php';
 						require_once ABSPATH . 'wp-admin/includes/media.php';
 
+						// Define allowed MIME types for CV
+						$allowed_mimes = array(
+							'pdf'  => 'application/pdf',
+							'doc'  => 'application/msword',
+							'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+							'rtf'  => 'application/rtf',
+							'txt'  => 'text/plain',
+						);
+
 						// Handle the upload with WordPress functions
-						$uploaded_file = wp_handle_upload( $file_data, array( 'test_form' => false ) );
+						$uploaded_file = wp_handle_upload( $file_data, array(
+							'test_form' => false,
+							'mimes'     => $allowed_mimes,
+						) );
 
 						if ( ! isset( $uploaded_file['error'] ) ) {
 							$filename = sanitize_file_name( basename( $uploaded_file['file'] ) );
