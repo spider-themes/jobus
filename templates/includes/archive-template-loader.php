@@ -284,6 +284,28 @@ function jobus_process_range_filters( $filter_widgets ) {
 		return $result_ids;
 	}
 
+	// ⚡ Bolt: Check if any range widget is actually in use before fetching expensive data
+	// $search_widgets is populated above from $filter_widgets
+	$has_active_range = false;
+	if ( isset( $search_widgets ) && is_array( $search_widgets ) ) {
+		foreach ( $search_widgets as $input ) {
+			// Get search terms for this widget (handles sanitization and checks $_GET)
+			$terms = jobus_search_terms( $input );
+
+			// Check if we have any non-empty terms
+			foreach ( $terms as $term ) {
+				if ( $term !== '' ) {
+					$has_active_range = true;
+					break 2;
+				}
+			}
+		}
+	}
+
+	if ( ! $has_active_range ) {
+		return isset( $result_ids ) ? $result_ids : array();
+	}
+
 	$all_slider_values = jobus_all_range_field_value();
 	if ( empty( $all_slider_values ) ) {
 		return $result_ids;
