@@ -764,7 +764,7 @@ function jobus_all_range_field_value(): array {
     $post_ids    = [];
     $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
 
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
+    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) {
 
         $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
         $search_widgets = [];

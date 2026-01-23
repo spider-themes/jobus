@@ -284,17 +284,29 @@ function jobus_process_range_filters( $filter_widgets ) {
 		return $result_ids;
 	}
 
-	$all_slider_values = jobus_all_range_field_value();
-	if ( empty( $all_slider_values ) ) {
-		return $result_ids;
-	}
-
-	// Process range matching logic
+	// Bolt Optimization: Check if any range widgets actually have active input before fetching all values
+	// This prevents the heavy jobus_all_range_field_value query on default archive loads
+	$has_active_range_filter = false;
 	$price_ranged = array();
+
 	foreach ( $search_widgets as $input ) {
 		$min_price = jobus_search_terms( $input )[0] ?? '';
 		$max_price = jobus_search_terms( $input )[1] ?? '';
+
+		if ( '' !== $min_price || '' !== $max_price ) {
+			$has_active_range_filter = true;
+		}
+
 		$price_ranged[ $input ] = array( $min_price, $max_price );
+	}
+
+	if ( ! $has_active_range_filter ) {
+		return $result_ids;
+	}
+
+	$all_slider_values = jobus_all_range_field_value();
+	if ( empty( $all_slider_values ) ) {
+		return $result_ids;
 	}
 
 	$formatted_price_ranged = array();
