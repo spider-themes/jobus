@@ -14,21 +14,20 @@
  * Domain Path: /languages
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if (!function_exists('jobus_fs')) {
+if ( ! function_exists( 'jobus_fs' ) ) {
 	// Create a helper function for easy SDK access.
-	function jobus_fs()
-	{
+	function jobus_fs() {
 		global $jobus_fs;
 
-		if (!isset($jobus_fs)) {
+		if ( ! isset( $jobus_fs ) ) {
 			// Include Freemius SDK.
-			require_once dirname(__FILE__) . '/vendor/fs/start.php';
+			require_once __DIR__ . '/vendor/fs/start.php';
 
-			$jobus_fs = fs_dynamic_init(array(
+			$jobus_fs = fs_dynamic_init( [
 				'id' => '20775',
 				'slug' => 'jobus',
 				'premium_slug' => 'jobus-pro',
@@ -40,20 +39,20 @@ if (!function_exists('jobus_fs')) {
 				'has_premium_version' => true,
 				'has_addons' => false,
 				'has_paid_plans' => true,
-				'trial' => array(
+				'trial' => [
 					'days' => 14,
 					'is_require_payment' => true,
-				),
-				'menu' => array(
+				],
+				'menu' => [
 					'slug' => 'edit.php?post_type=jobus_job',
 					'contact' => false,
 					'support' => false,
-				),
-				'parallel_activation' => array(
+				],
+				'parallel_activation' => [
 					'enabled' => true,
 					'premium_version_basename' => 'jobus-pro/jobus.php',
-				),
-			));
+				],
+			] );
 		}
 
 		return $jobus_fs;
@@ -62,7 +61,7 @@ if (!function_exists('jobus_fs')) {
 	// Init Freemius.
 	jobus_fs();
 	// Signal that SDK was initiated.
-	do_action('jobus_fs_loaded');
+	do_action( 'jobus_fs_loaded' );
 }
 
 
@@ -73,8 +72,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Class jobus
  */
-final class Jobus
-{
+final class Jobus {
 
 	/**
 	 * Jobus Version
@@ -97,10 +95,9 @@ final class Jobus
 	 *
 	 * @return false|Jobus
 	 */
-	public static function init()
-	{
+	public static function init() {
 		static $instance = false;
-		if (!$instance) {
+		if ( false === $instance ) {
 			$instance = new self();
 		}
 
@@ -114,33 +111,31 @@ final class Jobus
 	 *
 	 * @access public
 	 */
-	private function __construct()
-	{
-		register_activation_hook(__FILE__, [$this, 'activate']);
+	private function __construct() {
+		register_activation_hook( __FILE__, [ $this, 'activate' ] );
 		$this->define_constants(); // Define constants.
 
-		add_action('plugins_loaded', [$this, 'init_plugin']);
-		add_action('after_setup_theme', [$this, 'load_csf_files'], 20);
+		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 	}
 
 	/**
 	 * Load CSF files
 	 */
-	public function load_csf_files(): void
-	{
+	public function load_csf_files(): void {
 		require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
 		require_once __DIR__ . '/Admin/csf/options/settings.php';
 
 		// Get feature toggle options
-		$options = get_option('jobus_opt', []);
+		$options = get_option( 'jobus_opt', [] );
 		$enable_candidate = $options['enable_candidate'] ?? true;
 		$enable_company = $options['enable_company'] ?? true;
 
 		require_once __DIR__ . '/Admin/csf/meta/meta-options-job.php';
-		if ($enable_candidate || jobus_unlock_themes('jobi', 'jobi-child')) {
+		if ( $enable_candidate || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-candidate.php';
 		}
-		if ($enable_company || jobus_unlock_themes('jobi', 'jobi-child')) {
+		if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-company.php';
 		}
 		require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
@@ -151,11 +146,10 @@ final class Jobus
 	 *
 	 * @return void
 	 */
-	public function init_plugin(): void
-	{
+	public function init_plugin(): void {
 
 		// Get feature toggle options
-		$options = get_option('jobus_opt', []);
+		$options = get_option( 'jobus_opt', [] );
 		$enable_candidate = $options['enable_candidate'] ?? true;
 		$enable_company = $options['enable_company'] ?? true;
 
@@ -163,7 +157,7 @@ final class Jobus
 		new \jobus\includes\Classes\Ajax_Actions();
 
 		// Submission Classes
-		if ($enable_candidate) {
+		if ( $enable_candidate ) {
 			new \jobus\includes\Classes\submission\Candidate_Form_Submission();
 		}
 		new \jobus\includes\Classes\submission\Employer_Form_Submission();
@@ -171,7 +165,7 @@ final class Jobus
 		new \jobus\includes\Classes\submission\Password_Handler();
 
 		// Admin UI
-		if (is_admin()) {
+		if ( is_admin() ) {
 			new \jobus\Admin\Admin();
 			new \jobus\Admin\Assets();
 			new \jobus\Admin\User();
@@ -181,11 +175,11 @@ final class Jobus
 
 		//Post Type
 		new \jobus\Admin\cpt\Job_Application();
-		if ($enable_candidate) {
+		if ( $enable_candidate ) {
 			new \jobus\Admin\cpt\Candidate();
 		}
 		new \jobus\Admin\cpt\Job();
-		if ($enable_company) {
+		if ( $enable_company ) {
 			new \jobus\Admin\cpt\Company();
 		}
 
@@ -194,14 +188,14 @@ final class Jobus
 		new \jobus\includes\Frontend\Assets();
 		new \jobus\includes\Frontend\Shortcode();
 		new \jobus\includes\Frontend\Template_Loader();
-		if ($enable_candidate) {
+		if ( $enable_candidate ) {
 			\jobus\includes\Frontend\Dashboard_Candidate::get_instance();
 		}
-		if ($enable_company) {
+		if ( $enable_company ) {
 			\jobus\includes\Frontend\Dashboard_Employer::get_instance();
 		}
 
-		if ( jobus_unlock_themes('jobi', 'jobi-child') ) {
+		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			new \jobus\includes\Frontend\Dashboard();
 			new \jobus\includes\Frontend\Dashboard_Helper();
 		}
@@ -214,35 +208,33 @@ final class Jobus
 	/**
 	 * Define constants
 	 */
-	public function define_constants(): void
-	{
-		define('JOBUS_VERSION', self::VERSION);
-		define('JOBUS_FILE', __FILE__);
-		define('JOBUS_PATH', __DIR__);
-		define('JOBUS_DIR', plugin_dir_path(__FILE__));
-		define('JOBUS_URL', plugins_url('', JOBUS_FILE));
-		define('JOBUS_CSS', JOBUS_URL . '/assets/css');
-		define('JOBUS_JS', JOBUS_URL . '/assets/js');
-		define('JOBUS_IMG', JOBUS_URL . '/assets/images');
-		define('JOBUS_VEND', JOBUS_URL . '/assets/vendors');
-		define('JOBUS_PLUGIN_BASENAME', plugin_basename( JOBUS_FILE ) );
+	public function define_constants(): void {
+		define( 'JOBUS_VERSION', self::VERSION );
+		define( 'JOBUS_FILE', __FILE__ );
+		define( 'JOBUS_PATH', __DIR__ );
+		define( 'JOBUS_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
+		define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
+		define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
+		define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
+		define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
+		define( 'JOBUS_PLUGIN_BASENAME', plugin_basename( JOBUS_FILE ) );
 	}
 
 	/**
 	 * Do stuff upon plugin activation
 	 */
-	public function activate(): void
-	{
+	public function activate(): void {
 		// Insert the installation time into the database.
-		$installed = get_option('jobus_installed');
-		if (!$installed) {
-			update_option('jobus_installed', time());
+		$installed = get_option( 'jobus_installed' );
+		if ( ! $installed ) {
+			update_option( 'jobus_installed', time() );
 		}
-		update_option('jobus_version', JOBUS_VERSION);
+		update_option( 'jobus_version', JOBUS_VERSION );
 
 		// Set activation redirect flag only for fresh installs (onboarding not yet complete).
-		if (!get_option('jobus_onboarding_complete')) {
-			set_transient('jobus_activation_redirect', '1', 60);
+		if ( ! get_option( 'jobus_onboarding_complete' ) ) {
+			set_transient( 'jobus_activation_redirect', '1', 60 );
 		}
 
 		// Create default frontend pages depending on theme / premium status
@@ -261,73 +253,72 @@ final class Jobus
 	 *
 	 * @return void
 	 */
-	private function plugin_default_pages_exist(): void
-	{
+	private function plugin_default_pages_exist(): void {
 		// Avoid running in contexts without WP functions available.
-		if ( !function_exists('get_template') || !function_exists('wp_insert_post')) {
+		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
 			return;
 		}
 
 		// Determine unlocked state (theme match or premium license).
-		$theme = strtolower(get_template());
-		$is_unlocked = in_array($theme, array('jobi', 'jobi-child'), true);
+		$theme = strtolower( get_template() );
+		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true );
 
 		$pages_to_create = [];
 		if ( $is_unlocked ) {
-			$pages_to_create = array(
-				'dashboard' => array('title' => 'Dashboard', 'slug' => 'jobus-dashboard', 'content' => '[jobus_dashboard]'),
-				'register'  => array('title' => 'Register Form', 'slug' => 'jobus-register', 'content' => '<!-- wp:jobus/register-form /-->'),
-				'job_archive' => array('title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]'),
-				'candidate_archive' => array('title' => 'Candidate Archive', 'slug' => 'jobus-candidate-archive', 'content' => '[jobus_candidate_archive]'),
-				'company_archive' => array('title' => 'Company Archive', 'slug' => 'jobus-company-archive', 'content' => '[jobus_company_archive]'),
-			);
+			$pages_to_create = [
+				'dashboard' => [ 'title' => 'Dashboard', 'slug' => 'jobus-dashboard', 'content' => '[jobus_dashboard]' ],
+				'register'  => [ 'title' => 'Register Form', 'slug' => 'jobus-register', 'content' => '<!-- wp:jobus/register-form /-->' ],
+				'job_archive' => [ 'title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]' ],
+				'candidate_archive' => [ 'title' => 'Candidate Archive', 'slug' => 'jobus-candidate-archive', 'content' => '[jobus_candidate_archive]' ],
+				'company_archive' => [ 'title' => 'Company Archive', 'slug' => 'jobus-company-archive', 'content' => '[jobus_company_archive]' ],
+			];
 		} else {
 			// Free theme only
-			$pages_to_create = array(
-				'job_archive' => array('title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]'),
-			);
+			$pages_to_create = [
+				'job_archive' => [ 'title' => 'Job Archive', 'slug' => 'jobus-job-archive', 'content' => '[jobus_job_archive]' ],
+			];
 		}
 
-		$created = get_option('jobus_pages', array());
+		$created = get_option( 'jobus_pages', [] );
 
-		foreach ($pages_to_create as $key => $args) {
+		foreach ( $pages_to_create as $key => $args ) {
 			// If a page with the desired slug already exists, record and skip.
-			$existing = get_page_by_path($args['slug']);
-			if ($existing) {
+			$existing = get_page_by_path( $args['slug'] );
+			if ( $existing ) {
 				$created[$key] = $existing->ID;
 				continue;
 			}
 
 			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
-			if (!empty($args['content'])) {
-				$found = get_posts(array(
+			if ( ! empty( $args['content'] ) ) {
+				$found = get_posts( [
 					'post_type' => 'page',
 					'posts_per_page' => 1,
 					'post_status' => 'publish',
 					'fields' => 'ids',
-					's' => trim(strip_tags($args['content'])),
-				));
-				if (!empty($found)) {
+					's' => trim( strip_tags( $args['content'] ) ),
+				] );
+				if ( ! empty( $found ) ) {
 					$created[$key] = $found[0];
 					continue;
 				}
 			}
 			// Keep the stored post title plain text to avoid HTML-escaping issues in themes.
-			$post = array(
+			$post = [
 				'post_title'   => wp_strip_all_tags( $args['title'] ),
 				'post_name'    => $args['slug'],
 				'post_content' => $args['content'],
 				'post_status'  => 'publish',
 				'post_type'    => 'page',
-			);
+			];
 
-			$post_id = wp_insert_post($post);
-			if ($post_id && !is_wp_error($post_id)) {
+			$post_id = wp_insert_post( $post );
+			if ( $post_id && ! is_wp_error( $post_id ) ) {
 				$created[$key] = $post_id;
 			}
 		}
 
-		update_option('jobus_pages', $created);
+		update_option( 'jobus_pages', $created );
 	}
 
 
@@ -336,13 +327,12 @@ final class Jobus
 	 *
 	 * @return string
 	 */
-	public function plugin_path(): string
-	{
-		if ($this->plugin_path) {
+	public function plugin_path(): string {
+		if ( $this->plugin_path ) {
 			return $this->plugin_path;
 		}
 
-		return $this->plugin_path = untrailingslashit(plugin_dir_path(__FILE__));
+		return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
 	}
 }
 
@@ -350,14 +340,13 @@ final class Jobus
 /**
  * @return Jobus|false
  */
-if (!function_exists('jobus')) {
+if ( ! function_exists( 'jobus' ) ) {
 	/**
 	 * Load jobus
 	 *
 	 * Main instance of jobus
 	 */
-	function jobus()
-	{
+	function jobus() {
 		return Jobus::init();
 	}
 

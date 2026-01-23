@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function jobus_load_archive_template( $config ) {
 	// Check if this is being called from a shortcode
-	$is_shortcode = isset( $config['is_shortcode'] ) && $config['is_shortcode'] === true;
+	$is_shortcode = isset( $config['is_shortcode'] ) && true === $config['is_shortcode'];
 	
 	// Only load header if not in shortcode context
 	if ( ! $is_shortcode ) {
@@ -62,7 +62,7 @@ function jobus_load_archive_template( $config ) {
 
 	// Handle company search
 	$search_type = jobus_get_sanitized_query_param( 'search_type', '', 'jobus_sort_filter' );
-	if ( $search_type === 'company_search' ) {
+	if ( 'company_search' === $search_type ) {
 		$company_ids_raw = jobus_get_sanitized_query_param( 'company_ids', '', 'jobus_sort_filter' );
 		$company_ids = ! empty( $company_ids_raw ) ? array_map( 'absint', explode( ',', $company_ids_raw ) ) : [];
 		if ( ! empty( $company_ids ) ) {
@@ -72,7 +72,7 @@ function jobus_load_archive_template( $config ) {
 
 	// For candidate and company archives, exclude orphaned posts (where author/user was deleted)
 	// This must be done AFTER post__in is set, and we need to filter the post__in if it exists
-	if ( in_array( $config['post_type'], array( 'jobus_candidate', 'jobus_company' ), true ) ) {
+	if ( in_array( $config['post_type'], [ 'jobus_candidate', 'jobus_company' ], true ) ) {
 		$orphaned_post_ids = jobus_get_orphaned_post_ids( $config['post_type'] );
 		if ( ! empty( $orphaned_post_ids ) ) {
 			if ( ! empty( $args['post__in'] ) ) {
@@ -91,11 +91,11 @@ function jobus_load_archive_template( $config ) {
 	$query = new WP_Query( $args );
 
 	// Set post-type-specific query variables for backward compatibility
-	if ( $config['post_type'] === 'jobus_job' ) {
+	if ( 'jobus_job' === $config['post_type'] ) {
 		$job_query = $query;
-	} elseif ( $config['post_type'] === 'jobus_candidate' ) {
+	} elseif ( 'jobus_candidate' === $config['post_type'] ) {
 		$candidate_query = $query;
-	} elseif ( $config['post_type'] === 'jobus_company' ) {
+	} elseif ( 'jobus_company' === $config['post_type'] ) {
 		$company_query = $query;
 	}
 
@@ -121,12 +121,12 @@ function jobus_load_archive_template( $config ) {
 	
 	$layout_base_path = $config['layout_base_path'];
 
-	if ( $archive_layout == '1' ) {
-		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-classic.php';
-	} elseif ( $archive_layout == '2' ) {
-		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-topbar.php';
-	} elseif ( $archive_layout == '3' ) {
-		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-popup.php';
+	if ( '1' === $archive_layout ) {
+		include __DIR__ . '/../' . $layout_base_path . '-classic.php';
+	} elseif ( '2' === $archive_layout ) {
+		include __DIR__ . '/../' . $layout_base_path . '-topbar.php';
+	} elseif ( '3' === $archive_layout ) {
+		include __DIR__ . '/../' . $layout_base_path . '-popup.php';
 	}
 
 	// Only load footer if not in shortcode context
@@ -135,7 +135,7 @@ function jobus_load_archive_template( $config ) {
 	}
 
 	// Load sidebar popup filters if needed (after footer for modal)
-	if ( $archive_layout == '3' ) {
+	if ( '3' === $archive_layout ) {
 		jobus_get_template_part( $config['sidebar_popup_path'] );
 	}
 }
@@ -150,14 +150,14 @@ function jobus_load_archive_template( $config ) {
  * @return array
  */
 function jobus_build_archive_query_args( $post_type, $posts_per_page_key, $query_var_prefix, $paged = 1 ) {
-	$args = array(
+	$args = [
 		'post_type'      => $post_type,
 		'post_status'    => 'publish',
 		'posts_per_page' => jobus_opt( $posts_per_page_key ),
 		'paged'          => $paged,
 		'order'          => jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' ),
 		'orderby'        => jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' ),
-	);
+	];
 	
 	return $args;
 }
@@ -192,55 +192,55 @@ function jobus_get_orphaned_post_ids( $post_type ) {
  * @return array
  */
 function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_widgets_key ) {
-	$result_ids = array();
+	$result_ids = [];
 
 	// Determine meta options key from post type
-	$meta_key_map = array(
+	$meta_key_map = [
 		'jobus_job'       => 'jobus_meta_options',
 		'jobus_candidate' => 'jobus_meta_candidate_options',
 		'jobus_company'   => 'jobus_meta_company_options',
-	);
+	];
 	$meta_key = $meta_key_map[ $post_type ] ?? '';
 
 	// Get meta and taxonomy arguments
-	$meta_args = array(
+	$meta_args = [
 		'args' => jobus_meta_taxo_arguments(
 			'meta',
 			$post_type,
 			'',
 			jobus_all_search_meta( $meta_key, $sidebar_widgets_key )
 		)
-	);
+	];
 
 	// Determine taxonomy keys from post type
-	$taxonomy_map = array(
-		'jobus_job' => array(
+	$taxonomy_map = [
+		'jobus_job' => [
 			$query_var_prefix . '_cat',
 			$query_var_prefix . '_location',
 			$query_var_prefix . '_tag',
-		),
-		'jobus_candidate' => array(
+		],
+		'jobus_candidate' => [
 			$query_var_prefix . '_cat',
 			$query_var_prefix . '_location',
-		),
-		'jobus_company' => array(
+		],
+		'jobus_company' => [
 			$query_var_prefix . '_cat',
 			$query_var_prefix . '_location',
-		),
-	);
+		],
+	];
 
-	$taxonomies = $taxonomy_map[ $post_type ] ?? array();
-	$taxonomy_args_array = array();
+	$taxonomies = $taxonomy_map[ $post_type ] ?? [];
+	$taxonomy_args_array = [];
 
 	foreach ( $taxonomies as $taxonomy ) {
-		$taxonomy_args_array[] = array(
+		$taxonomy_args_array[] = [
 			'args' => jobus_meta_taxo_arguments(
 				'taxonomy',
 				$post_type,
 				$taxonomy,
 				jobus_search_terms( $taxonomy )
 			)
-		);
+		];
 	}
 
 	// Merge queries
@@ -267,15 +267,15 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
  * @return array
  */
 function jobus_process_range_filters( $filter_widgets ) {
-	$result_ids = array();
+	$result_ids = [];
 
 	if ( ! isset( $filter_widgets ) || ! is_array( $filter_widgets ) ) {
 		return $result_ids;
 	}
 
-	$search_widgets = array();
+	$search_widgets = [];
 	foreach ( $filter_widgets as $widget ) {
-		if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] === 'range' && isset( $widget['widget_name'] ) ) {
+		if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] && isset( $widget['widget_name'] ) ) {
 			$search_widgets[] = $widget['widget_name'];
 		}
 	}
@@ -290,14 +290,14 @@ function jobus_process_range_filters( $filter_widgets ) {
 	}
 
 	// Process range matching logic
-	$price_ranged = array();
+	$price_ranged = [];
 	foreach ( $search_widgets as $input ) {
 		$min_price = jobus_search_terms( $input )[0] ?? '';
 		$max_price = jobus_search_terms( $input )[1] ?? '';
-		$price_ranged[ $input ] = array( $min_price, $max_price );
+		$price_ranged[ $input ] = [ $min_price, $max_price ];
 	}
 
-	$formatted_price_ranged = array();
+	$formatted_price_ranged = [];
 	foreach ( $price_ranged as $key => $values ) {
 		$formatted_price_ranged[ $key ][] = implode( '-', array_map( function ( $value ) {
 			return is_numeric( $value ) ? $value : preg_replace( '/[^0-9.k]/', '', $value );
@@ -305,11 +305,11 @@ function jobus_process_range_filters( $filter_widgets ) {
 	}
 
 	// Find matching IDs based on ranges
-	$matched_ids = array();
+	$matched_ids = [];
 	foreach ( $formatted_price_ranged as $key => $values ) {
-		foreach ( $all_slider_values[ $key ] ?? array() as $id => $range ) {
+		foreach ( $all_slider_values[ $key ] ?? [] as $id => $range ) {
 			$range_values = explode( '-', $range );
-			list( $range_min, $range_max ) = $range_values + array( null, -1 );
+			list( $range_min, $range_max ) = $range_values + [ null, -1 ];
 
 			foreach ( $values as $formatted_range ) {
 				list( $formatted_min, $formatted_max ) = explode( '-', $formatted_range );
@@ -333,4 +333,3 @@ function jobus_process_range_filters( $filter_widgets ) {
 
 	return $result_ids;
 }
-
