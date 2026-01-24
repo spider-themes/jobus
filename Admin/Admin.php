@@ -40,26 +40,33 @@ class Admin {
 		$classes      .= ' ' . $current_theme;
 
 		// Example: Add premium/pro class if needed for Jobus (update logic as needed)
-		if ( function_exists('jobus_fs') && jobus_fs()->is_paying_or_trial() ) {
+		if ( function_exists( 'jobus_fs' ) && jobus_fs()->is_paying_or_trial() ) {
 			$classes .= ' jobus-premium';
 		}
 
 		return $classes;
 	}
 
+	/**
+	 * Create nested submenus.
+	 *
+	 * Adds submenus for Company and Candidate post types.
+	 *
+	 * @return void
+	 */
 	public function create_nested_submenus() {
 		// === COMPANY PAGES ===
-		if ( jobus_opt('enable_company') ) {
+		if ( jobus_opt( 'enable_company' ) ) {
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company', 'jobus' ), __( 'Company', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_company&has_jbs_divider=true' );
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_cat&post_type=jobus_company' );
-			
+
 			// Add divider bottom if Candidate is not enabled
-			$divider_bottom = jobus_opt('enable_candidate') != true ? '&has_jbs_divider_bottom=true' : '';
+			$divider_bottom = jobus_opt( 'enable_candidate' ) != true ? '&has_jbs_divider_bottom=true' : '';
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Company - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_company_location&post_type=jobus_company' . $divider_bottom );
 		}
 
 		// === CANDIDATE PAGES ===
-		if ( jobus_opt('enable_candidate') ) {
+		if ( jobus_opt( 'enable_candidate' ) ) {
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate', 'jobus' ), __( 'Candidate', 'jobus' ), 'manage_options', 'edit.php?post_type=jobus_candidate&has_jbs_divider=true' );
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Categories', 'jobus' ), '&nbsp; Categories', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_cat&post_type=jobus_candidate' );
 			add_submenu_page( 'edit.php?post_type=jobus_job', __( 'Candidate - Location', 'jobus' ), '&nbsp; Location', 'manage_options', 'edit-tags.php?taxonomy=jobus_candidate_location&post_type=jobus_candidate' );
@@ -75,15 +82,17 @@ class Admin {
 	 */
 	public function active_top_level_menu( $parent_file ) {
 		$screen = get_current_screen();
-		if ( ! $screen ) return $parent_file;
+		if ( ! $screen ) {
+			return $parent_file;
+		}
 
 		// Always expand the Jobus top menu
 		if (
 			in_array( $screen->post_type, [ 'jobus_job', 'jobus_company', 'jobus_candidate' ] ) ||
 			in_array( $screen->taxonomy, [
 				'jobus_company_cat', 'jobus_company_location',
-				'jobus_candidate_cat','jobus_candidate_location','jobus_candidate_skill'
-			])
+				'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill'
+			] )
 		) {
 			$parent_file = 'edit.php?post_type=jobus_job';
 		}
@@ -99,13 +108,15 @@ class Admin {
 	 */
 	public function active_sub_menus( $submenu_file ) {
 		$screen = get_current_screen();
-		if ( ! $screen ) return $submenu_file;
+		if ( ! $screen ) {
+			return $submenu_file;
+		}
 
 		$post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( $_GET['post_type'] ) : '';
 		$taxonomy  = isset( $_GET['taxonomy'] ) ? sanitize_text_field( $_GET['taxonomy'] ) : '';
 
 		// ===== Company menu =====
-		if ( $post_type === 'jobus_company' || in_array( $taxonomy, ['jobus_company_cat','jobus_company_location'] ) ) {
+		if ( $post_type === 'jobus_company' || in_array( $taxonomy, [ 'jobus_company_cat', 'jobus_company_location' ] ) ) {
 			if ( $taxonomy === 'jobus_company_cat' ) {
 				$submenu_file = 'edit-tags.php?taxonomy=jobus_company_cat&post_type=jobus_company';
 			} elseif ( $taxonomy === 'jobus_company_location' ) {
@@ -116,7 +127,7 @@ class Admin {
 		}
 
 		// ===== Candidate menu =====
-		if ( $post_type === 'jobus_candidate' || in_array( $taxonomy, ['jobus_candidate_cat','jobus_candidate_location','jobus_candidate_skill'] ) ) {
+		if ( $post_type === 'jobus_candidate' || in_array( $taxonomy, [ 'jobus_candidate_cat', 'jobus_candidate_location', 'jobus_candidate_skill' ] ) ) {
 			if ( $taxonomy === 'jobus_candidate_cat' ) {
 				$submenu_file = 'edit-tags.php?taxonomy=jobus_candidate_cat&post_type=jobus_candidate';
 			} elseif ( $taxonomy === 'jobus_candidate_location' ) {
@@ -146,7 +157,7 @@ class Admin {
 			return $links;
 		}
 
-		$links[] = '<a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank">'.esc_html__( 'Docs & FAQs', 'jobus' ).'</a>';
+		$links[] = '<a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank">' . esc_html__( 'Docs & FAQs', 'jobus' ) . '</a>';
 
 		return $links;
 	}
