@@ -58,6 +58,20 @@ class Ajax_Actions
 			wp_die();
 		}
 
+		// Rate Limiting
+		$ip_address = $_SERVER['REMOTE_ADDR'] ?? '';
+		if ($ip_address) {
+			$transient_key = 'jobus_contact_limit_' . md5($ip_address);
+			$attempt_count = (int) get_transient($transient_key);
+
+			if ($attempt_count >= 5) {
+				wp_send_json_error(array('message' => esc_html__('Too many requests. Please try again later.', 'jobus')));
+				wp_die();
+			}
+
+			set_transient($transient_key, $attempt_count + 1, HOUR_IN_SECONDS);
+		}
+
 		// Get candidate ID
 		$candidate_id = ! empty($_POST['candidate_id']) ? intval($_POST['candidate_id']) : '';
 
@@ -79,8 +93,13 @@ class Ajax_Actions
 
 		// Set email subject
 		$subject   = ! empty($sender_subject) ? $sender_subject : esc_html__('New Message', 'jobus');
-		$headers[] = "From: $sender_name <$sender_email>";
-		$headers[] = "Reply-To: $sender_email";
+
+		// Use site email for "From" to prevent spoofing
+		$site_name   = get_bloginfo('name');
+		$admin_email = get_option('admin_email');
+
+		$headers[] = "From: $site_name <$admin_email>";
+		$headers[] = "Reply-To: $sender_name <$sender_email>";
 
 		// Send email
 		$success = wp_mail((string) $candidate_mail, (string) $subject, (string) $message, $headers);
