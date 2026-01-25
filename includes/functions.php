@@ -766,6 +766,14 @@ function jobus_all_range_field_value(): array {
 
     if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
 
+        // Check for cached results
+        $cache_key      = 'jobus_range_field_values';
+        $cached_results = get_transient( $cache_key );
+
+        if ( false !== $cached_results ) {
+            return $cached_results;
+        }
+
         $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
         $search_widgets = [];
 
@@ -808,6 +816,9 @@ function jobus_all_range_field_value(): array {
                 }
             }
         }
+
+        // Cache the results for 24 hours
+        set_transient( $cache_key, $post_ids, 24 * HOUR_IN_SECONDS );
     }
 
     return $post_ids;
@@ -1238,3 +1249,23 @@ if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
         return plugins_url( 'jobus/assets/images/default-company.png' );
     }
 }
+
+/**
+ * Flush the range field value cache when a job is saved or options are updated.
+ *
+ * @param int|mixed  The post ID or option value.
+ *
+ * @return void
+ */
+function jobus_flush_range_field_cache( $post_id = null ): void {
+    // Check if triggered by save_post
+    if ( is_int( $post_id ) || is_string( $post_id ) ) {
+        if ( 'jobus_job' !== get_post_type( $post_id ) ) {
+            return;
+        }
+    }
+    // If we are here, it's either a jobus_job update or an option update or direct call
+    delete_transient( 'jobus_range_field_values' );
+}
+add_action( 'save_post', 'jobus_flush_range_field_cache' );
+add_action( 'update_option_jobus_opt', 'jobus_flush_range_field_cache' );
