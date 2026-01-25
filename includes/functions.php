@@ -764,7 +764,7 @@ function jobus_all_range_field_value(): array {
     $post_ids    = [];
     $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
 
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
+    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) {
 
         $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
         $search_widgets = [];
@@ -774,7 +774,8 @@ function jobus_all_range_field_value(): array {
                 if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
                     // if you get value in search bar
                     $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                    if ( $widget_name ) {
+                    // Only process this range filter if the user has actively selected values for it
+                    if ( $widget_name && ! empty( jobus_search_terms( $widget_name ) ) ) {
                         $search_widgets[] = $widget_name;
                     }
                 }
