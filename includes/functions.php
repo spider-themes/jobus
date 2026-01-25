@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+	exit; // Exit if accessed directly
 }
 
 /**
@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function jobus_is_premium(): bool {
-    return jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code();
+	return jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code();
 }
 
 /**
@@ -21,11 +21,11 @@ function jobus_is_premium(): bool {
  * @return bool Returns true if the current theme is allowed or premium access is enabled, otherwise false.
  */
 function jobus_unlock_themes( ...$themes ): bool {
-    // Flatten and normalize
-    $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
-    $current_theme  = strtolower( get_template() );
+	// Flatten and normalize
+	$allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
+	$current_theme  = strtolower( get_template() );
 
-    return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
+	return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
 /**
@@ -34,7 +34,7 @@ function jobus_unlock_themes( ...$themes ): bool {
  * @return string Returns 'true' if the text direction is RTL, otherwise 'false'.
  */
 function jobus_rtl(): string {
-    return is_rtl() ? 'true' : 'false';
+	return is_rtl() ? 'true' : 'false';
 }
 
 /**
@@ -46,17 +46,17 @@ function jobus_rtl(): string {
  * @return mixed
  */
 if ( ! function_exists( 'jobus_opt' ) ) {
-    function jobus_opt( $option = '', $default = null ) {
-        $options = get_option( 'jobus_opt' );
-        $value   = $options[ $option ] ?? null;
+	function jobus_opt( $option = '', $default = null ) {
+		$options = get_option( 'jobus_opt' );
+		$value   = $options[ $option ] ?? null;
 
-        // Return default if value is null or empty string
-        if ( $value === null || $value === '' ) {
-            return $default;
-        }
+		// Return default if value is null or empty string
+		if ( null === $value || '' === $value ) {
+			return $default;
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 }
 
 /**
@@ -68,11 +68,11 @@ if ( ! function_exists( 'jobus_opt' ) ) {
  * @return mixed
  */
 if ( ! function_exists( 'jobus_meta' ) ) {
-    function jobus_meta( $option = '', $default = null ) {
-        $options = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
+	function jobus_meta( $option = '', $default = null ) {
+		$options = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 
-        return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
-    }
+		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+	}
 }
 
 /**
@@ -85,36 +85,36 @@ if ( ! function_exists( 'jobus_meta' ) ) {
  */
 function jobus_get_template_part( string $template, array $args = [] ): void {
 
-    // Get the slug
-    $template_slug = rtrim( $template );
-    $template      = $template_slug . '.php';
-    $file          = '';
+	// Get the slug
+	$template_slug = rtrim( $template );
+	$template      = $template_slug . '.php';
+	$file          = '';
 
-    // Check for pro plugin template first (if pro is active)
-    if ( jobus_is_premium() ) {
-        if ( $theme_file = locate_template( array( 'jobus-pro/' . $template ) ) ) {
-            $file = $theme_file;
-        } elseif ( defined( 'JOBUS_PRO_PATH' ) && file_exists( JOBUS_PRO_PATH . "/templates/" . $template ) ) {
-            $file = JOBUS_PRO_PATH . "/templates/" . $template;
-        }
-    }
+	// Check for pro plugin template first (if pro is active)
+	if ( jobus_is_premium() ) {
+		if ( $theme_file = locate_template( [ 'jobus-pro/' . $template ] ) ) {
+			$file = $theme_file;
+		} elseif ( defined( 'JOBUS_PRO_PATH' ) && file_exists( JOBUS_PRO_PATH . '/templates/' . $template ) ) {
+			$file = JOBUS_PRO_PATH . '/templates/' . $template;
+		}
+	}
 
-    // Fallback to free plugin template if pro template not found
-    if ( ! $file ) {
-        if ( $theme_file = locate_template( array( 'jobus/' . $template ) ) ) {
-            $file = $theme_file;
-        } elseif ( file_exists( JOBUS_PATH . "/templates/" . $template ) ) {
-            $file = JOBUS_PATH . "/templates/" . $template;
-        }
-    }
+	// Fallback to free plugin template if pro template not found
+	if ( ! $file ) {
+		if ( $theme_file = locate_template( [ 'jobus/' . $template ] ) ) {
+			$file = $theme_file;
+		} elseif ( file_exists( JOBUS_PATH . '/templates/' . $template ) ) {
+			$file = JOBUS_PATH . '/templates/' . $template;
+		}
+	}
 
-    // Load the template if found
-    if ( $file ) {
-        if ( ! empty( $args ) && is_array( $args ) ) {
-            extract( $args );
-        }
-        load_template( $file, false );
-    }
+	// Load the template if found
+	if ( $file ) {
+		if ( ! empty( $args ) && is_array( $args ) ) {
+			extract( $args );
+		}
+		load_template( $file, false );
+	}
 }
 
 
@@ -128,17 +128,17 @@ function jobus_get_template_part( string $template, array $args = [] ): void {
  */
 function jobus_get_template( string $template_name, array $args = [] ): void {
 
-    $jobus_obj = Jobus::init();
-    if ( $args && is_array( $args ) ) {
-        extract( $args );
-    }
+	$jobus_obj = Jobus::init();
+	if ( $args && is_array( $args ) ) {
+		extract( $args );
+	}
 
-    // Construct the template path manually
-    $template_path = trailingslashit( $jobus_obj->plugin_path() ) . 'templates/' . $template_name;
+	// Construct the template path manually
+	$template_path = trailingslashit( $jobus_obj->plugin_path() ) . 'templates/' . $template_name;
 
-    if ( file_exists( $template_path ) ) {
-        include $template_path;
-    }
+	if ( file_exists( $template_path ) ) {
+		include $template_path;
+	}
 }
 
 /**
@@ -149,11 +149,11 @@ function jobus_get_template( string $template_name, array $args = [] ): void {
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
-    function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat' ): string {
-        $terms = get_the_terms( get_the_ID(), $term );
+	function jobus_get_first_taxonomy_name( $term = 'jobus_job_cat' ): string {
+		$terms = get_the_terms( get_the_ID(), $term );
 
-        return is_array( $terms ) ? $terms[0]->name : '';
-    }
+		return is_array( $terms ) ? $terms[0]->name : '';
+	}
 }
 
 /**
@@ -164,11 +164,11 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_name' ) ) {
  * @return string
  */
 if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
-    function jobus_get_first_taxonomy_link( $term = 'jobus_job_cat' ): string {
-        $terms = get_the_terms( get_the_ID(), $term );
+	function jobus_get_first_taxonomy_link( $term = 'jobus_job_cat' ): string {
+		$terms = get_the_terms( get_the_ID(), $term );
 
-        return is_array( $terms ) ? get_category_link( $terms[0]->term_id ) : '';
-    }
+		return is_array( $terms ) ? get_category_link( $terms[0]->term_id ) : '';
+	}
 }
 
 /**
@@ -179,20 +179,20 @@ if ( ! function_exists( 'jobus_get_first_taxonomy_link' ) ) {
  * @return string
  */
 if ( ! function_exists( 'jobus_get_tag_list' ) ) {
-    function jobus_get_tag_list( $term = 'jobus_job_tag' ): string {
+	function jobus_get_tag_list( $term = 'jobus_job_tag' ): string {
 
-        $terms = get_the_terms( get_the_ID(), $term );
-        $term  = is_array( $terms ) ? $terms : '';
+		$terms = get_the_terms( get_the_ID(), $term );
+		$term  = is_array( $terms ) ? $terms : '';
 
-        $tag_list = '';
-        if ( ! empty( $term ) ) {
-            foreach ( $term as $tag ) {
-                $tag_list .= '<a href="' . esc_url( get_category_link( $tag->term_id ) ) . '">' . esc_html( $tag->name ) . '</a>';
-            }
-        }
+		$tag_list = '';
+		if ( ! empty( $term ) ) {
+			foreach ( $term as $tag ) {
+				$tag_list .= '<a href="' . esc_url( get_category_link( $tag->term_id ) ) . '">' . esc_html( $tag->name ) . '</a>';
+			}
+		}
 
-        return $tag_list;
-    }
+		return $tag_list;
+	}
 }
 
 /**
@@ -203,19 +203,19 @@ if ( ! function_exists( 'jobus_get_tag_list' ) ) {
  * @return array
  */
 if ( ! function_exists( 'jobus_get_categories' ) ) {
-    function jobus_get_categories( $term = 'jobus_job_cat' ): array {
-        $cats = get_terms( array(
-                'taxonomy'   => $term,
-                'hide_empty' => true,
-        ) );
+	function jobus_get_categories( $term = 'jobus_job_cat' ): array {
+		$cats = get_terms( [
+			'taxonomy'   => $term,
+			'hide_empty' => true,
+		] );
 
-        $cat_array = [];
-        foreach ( $cats as $cat ) {
-            $cat_array[ $cat->slug ] = $cat->name; // Use slug as the key
-        }
+		$cat_array = [];
+		foreach ( $cats as $cat ) {
+			$cat_array[ $cat->slug ] = $cat->name; // Use slug as the key
+		}
 
-        return $cat_array;
-    }
+		return $cat_array;
+	}
 }
 
 /**
@@ -230,11 +230,11 @@ if ( ! function_exists( 'jobus_get_categories' ) ) {
  * @return void
  */
 if ( ! function_exists( 'jobus_title_length' ) ) {
-    function jobus_title_length( $settings, $settings_key, $default = 10 ): void {
-        $title_length = ! empty( $settings[ $settings_key ] ) ? $settings[ $settings_key ] : $default;
-        $title        = get_the_title() ? wp_trim_words( get_the_title(), $title_length, '' ) : the_title();
-        echo esc_html( $title );
-    }
+	function jobus_title_length( $settings, $settings_key, $default = 10 ): void {
+		$title_length = ! empty( $settings[ $settings_key ] ) ? $settings[ $settings_key ] : $default;
+		$title        = get_the_title() ? wp_trim_words( get_the_title(), $title_length, '' ) : the_title();
+		echo esc_html( $title );
+	}
 }
 
 /**
@@ -250,13 +250,13 @@ if ( ! function_exists( 'jobus_title_length' ) ) {
  * @return void
  */
 if ( ! function_exists( 'jobus_excerpt_length' ) ) {
-    function jobus_excerpt_length( $settings, $settings_key, $default = 10 ): void {
-        $excerpt_length = ! empty( $settings[ $settings_key ] ) ? $settings[ $settings_key ] : $default;
-        $excerpt        = get_the_excerpt()
-                ? wp_trim_words( get_the_excerpt(), $excerpt_length, '...' )
-                : wp_trim_words( get_the_content(), $excerpt_length, '...' );
-        echo wp_kses_post( $excerpt );
-    }
+	function jobus_excerpt_length( $settings, $settings_key, $default = 10 ): void {
+		$excerpt_length = ! empty( $settings[ $settings_key ] ) ? $settings[ $settings_key ] : $default;
+		$excerpt        = get_the_excerpt()
+				? wp_trim_words( get_the_excerpt(), $excerpt_length, '...' )
+				: wp_trim_words( get_the_content(), $excerpt_length, '...' );
+		echo wp_kses_post( $excerpt );
+	}
 }
 
 /**
@@ -271,25 +271,25 @@ if ( ! function_exists( 'jobus_excerpt_length' ) ) {
  * @return void
  */
 if ( ! function_exists( 'jobus_button_link' ) ) {
-    function jobus_button_link( $settings_key, $is_echo = true ): void {
+	function jobus_button_link( $settings_key, $is_echo = true ): void {
 
-        if ( $is_echo ) {
-            echo ! empty( $settings_key['url'] ) ? 'href="' . esc_url( $settings_key['url'] ) . '"' : '';
-            echo $settings_key['is_external'] ? ' target="_blank"' : '';
-            echo $settings_key['nofollow'] ? ' rel="nofollow"' : '';
+		if ( $is_echo ) {
+			echo ! empty( $settings_key['url'] ) ? 'href="' . esc_url( $settings_key['url'] ) . '"' : '';
+			echo $settings_key['is_external'] ? ' target="_blank"' : '';
+			echo $settings_key['nofollow'] ? ' rel="nofollow"' : '';
 
-            if ( ! empty( $settings_key['custom_attributes'] ) ) {
-                $attrs = explode( ',', $settings_key['custom_attributes'] );
+			if ( ! empty( $settings_key['custom_attributes'] ) ) {
+				$attrs = explode( ',', $settings_key['custom_attributes'] );
 
-                if ( is_array( $attrs ) ) {
-                    foreach ( $attrs as $data ) {
-                        $data_attrs = explode( '|', $data );
-                        echo ' ' . esc_attr( $data_attrs[0] ) . '="' . esc_attr( $data_attrs[1] ) . '"';
-                    }
-                }
-            }
-        }
-    }
+				if ( is_array( $attrs ) ) {
+					foreach ( $attrs as $data ) {
+						$data_attrs = explode( '|', $data );
+						echo ' ' . esc_attr( $data_attrs[0] ) . '="' . esc_attr( $data_attrs[1] ) . '"';
+					}
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -621,64 +621,64 @@ function jobus_search_terms( string $terms ) {
 function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets', array $widgets = [ 'location' ]
 ): array {
 
-    $sidebar_widgets = jobus_opt( $sidebar_widget_id );
-    if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
-        foreach ( $sidebar_widgets as $widget ) {
-            if ( isset( $widget['widget_name'] ) ) {
-                $widgets[] = $widget['widget_name'];
-            }
-        }
-    }
+	$sidebar_widgets = jobus_opt( $sidebar_widget_id );
+	if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
+		foreach ( $sidebar_widgets as $widget ) {
+			if ( isset( $widget['widget_name'] ) ) {
+				$widgets[] = $widget['widget_name'];
+			}
+		}
+	}
 
-    $job_meta_query = array();
+	$job_meta_query = [];
 
-    if ( is_array( $widgets ) ) {
+	if ( is_array( $widgets ) ) {
 
-        $filter_widgets = jobus_opt( $sidebar_widget_id );
-        $search_widgets = [];
+		$filter_widgets = jobus_opt( $sidebar_widget_id );
+		$search_widgets = [];
 
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
-                    $search_widgets[] = $widget['widget_name'];
-                }
-            }
-        }
+		if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+			foreach ( $filter_widgets as $widget ) {
+				if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] && isset( $widget['widget_name'] ) ) {
+					$search_widgets[] = $widget['widget_name'];
+				}
+			}
+		}
 
-        foreach ( $widgets as $item => $job_value ) {
+		foreach ( $widgets as $item => $job_value ) {
 
-            if ( ! in_array( $job_value, $search_widgets ) ) {
-                $job_type_meta = jobus_search_terms( $job_value );
+			if ( ! in_array( $job_value, $search_widgets ) ) {
+				$job_type_meta = jobus_search_terms( $job_value );
 
-                foreach ( $job_type_meta as $key => $value ) {
+				foreach ( $job_type_meta as $key => $value ) {
 
-                    if ( $item > 0 || $key > 0 ) {
-                        $job_meta_query['relation'] = 'OR';
-                    }
+					if ( $item > 0 || $key > 0 ) {
+						$job_meta_query['relation'] = 'OR';
+					}
 
-                    if ( $key < 1 ) {
-                        $job_meta_query[ $item ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
-                    }
+					if ( $key < 1 ) {
+						$job_meta_query[ $item ] = [
+							'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
+							'value'   => $value,
+							'compare' => 'LIKE',
+						];
+					}
 
-                    if ( $item < 1 ) {
-                        $job_meta_query[ $key ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
-                    }
-                }
-            }
-        }
+					if ( $item < 1 ) {
+						$job_meta_query[ $key ] = [
+							'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
+							'value'   => $value,
+							'compare' => 'LIKE',
+						];
+					}
+				}
+			}
+		}
 
-        return $job_meta_query;
-    }
+		return $job_meta_query;
+	}
 
-    return $job_meta_query;
+	return $job_meta_query;
 }
 
 /**
@@ -694,28 +694,28 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
  * @return array The constructed query arguments for WP_Query.
  */
 function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [] ) {
-    $data_args = [];
-    if ( $data == 'taxonomy' ) {
-        $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'tax_query'   => array(
-                        array(
-                                'taxonomy' => $taxonomy,
-                                'field'    => 'slug',
-                                'terms'    => $terms,
-                        ),
-                )
-        ];
-    } else {
-        $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'meta_query'  => $terms,
-        ];
-    }
+	$data_args = [];
+	if ( 'taxonomy' === $data ) {
+		$data_args = [
+			'post_type'   => $post_type,
+			'post_status' => 'publish',
+			'tax_query'   => [
+				[
+					'taxonomy' => $taxonomy,
+					'field'    => 'slug',
+					'terms'    => $terms,
+				],
+			],
+		];
+	} else {
+		$data_args = [
+			'post_type'   => $post_type,
+			'post_status' => 'publish',
+			'meta_query'  => $terms,
+		];
+	}
 
-    return $data_args;
+	return $data_args;
 }
 
 /**
@@ -728,26 +728,26 @@ function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxon
  * @return array Array of unique post IDs from all merged queries.
  */
 function jobus_merge_queries_and_get_ids( ...$queries ): array {
-    $combined_post_ids = array();
+	$combined_post_ids = [];
 
-    foreach ( $queries as $query ) {
-        if ( empty( $query['args'] ) || ! is_array( $query['args'] ) ) {
-            continue; // Skip invalid or empty queries
-        }
+	foreach ( $queries as $query ) {
+		if ( empty( $query['args'] ) || ! is_array( $query['args'] ) ) {
+			continue; // Skip invalid or empty queries
+		}
 
-        $wp_query = new \WP_Query( $query['args'] );
-        $post_ids = wp_list_pluck( $wp_query->posts, 'ID' );
+		$wp_query = new \WP_Query( $query['args'] );
+		$post_ids = wp_list_pluck( $wp_query->posts, 'ID' );
 
-        if ( ! empty( $post_ids ) ) {
-            $combined_post_ids = array_merge( $combined_post_ids, $post_ids );
-        }
-    }
+		if ( ! empty( $post_ids ) ) {
+			$combined_post_ids = array_merge( $combined_post_ids, $post_ids );
+		}
+	}
 
-    // Ensure unique values in the combined array
-    $combined_post_ids = array_unique( $combined_post_ids );
+	// Ensure unique values in the combined array
+	$combined_post_ids = array_unique( $combined_post_ids );
 
-    // If at least two queries have IDs, return the merged array, otherwise return as is
-    return count( $queries ) >= 2 ? $combined_post_ids : $combined_post_ids;
+	// If at least two queries have IDs, return the merged array, otherwise return as is
+	return count( $queries ) >= 2 ? $combined_post_ids : $combined_post_ids;
 }
 
 /**
@@ -759,31 +759,31 @@ function jobus_merge_queries_and_get_ids( ...$queries ): array {
  * @return array Associative array with widget names as keys and post IDs with their values.
  */
 function jobus_all_range_field_value(): array {
-    global $wpdb;
+	global $wpdb;
 
-    $post_ids    = [];
-    $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+	$post_ids    = [];
+	$jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
 
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
+	if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
 
-        $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-        $search_widgets = [];
+		$filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+		$search_widgets = [];
 
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
-                    // if you get value in search bar
-                    $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                    if ( $widget_name ) {
-                        $search_widgets[] = $widget_name;
-                    }
-                }
-            }
-        }
+		if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+			foreach ( $filter_widgets as $widget ) {
+				if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
+					// if you get value in search bar
+					$widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
+					if ( $widget_name ) {
+						$search_widgets[] = $widget_name;
+					}
+				}
+			}
+		}
 
-        if ( ! empty( $search_widgets ) ) {
-            // Fetch only necessary data directly from DB
-            $results = $wpdb->get_results( "
+		if ( ! empty( $search_widgets ) ) {
+			// Fetch only necessary data directly from DB
+			$results = $wpdb->get_results( "
                 SELECT p.ID, pm.meta_value
                 FROM {$wpdb->posts} p
                 INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
@@ -792,25 +792,25 @@ function jobus_all_range_field_value(): array {
                 AND pm.meta_key = 'jobus_meta_options'
             " );
 
-            if ( $results ) {
-                foreach ( $results as $row ) {
-                    $meta = maybe_unserialize( $row->meta_value );
+			if ( $results ) {
+				foreach ( $results as $row ) {
+					$meta = maybe_unserialize( $row->meta_value );
 
-                    if ( is_array( $meta ) ) {
-                        foreach ( $search_widgets as $serial => $input ) {
-                            $meta_salary = $meta[ $input ] ?? '';
-                            if ( ! empty( $meta_salary ) ) {
-                                $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
-                                $post_ids[ $input ][ $row->ID ] = $value;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+					if ( is_array( $meta ) ) {
+						foreach ( $search_widgets as $serial => $input ) {
+							$meta_salary = $meta[ $input ] ?? '';
+							if ( ! empty( $meta_salary ) ) {
+								$value                          = preg_replace( '/[^0-9-k]/', '', $meta_salary );
+								$post_ids[ $input ][ $row->ID ] = $value;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
-    return $post_ids;
+	return $post_ids;
 }
 
 
@@ -902,42 +902,42 @@ if ( ! function_exists( 'jobus_social_share_icons' ) ) {
  */
 if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
-    function jobus_cs_bootstrap_icons( $icons = [] ) {
-        // Adding new icons
-        $icons[] = array(
-                'title' => esc_html__( 'Bootstrap Icons', 'jobus' ),
-                'icons' => array(
-                        'bi bi-facebook',
-                        'bi bi-twitter',
-                        'bi bi-instagram',
-                        'bi bi-linkedin',
-                        'bi bi-youtube',
-                        'bi bi-github',
-                        'bi bi-dribbble',
-                        'bi bi-behance',
-                        'bi bi-pinterest',
-                        'bi bi-skype',
-                        'bi bi-vimeo',
-                        'bi bi-google',
-                        'bi bi-reddit',
-                        'bi bi-whatsapp',
-                        'bi bi-spotify',
-                        'bi bi-twitch',
-                        'bi bi-telegram',
-                        'bi bi-snapchat',
-                        'bi bi-slack',
-                        'bi bi-quora',
-                        'bi bi-paypal',
-                        'bi bi-medium',
-                        'bi bi-link',
-                        'bi bi-link-45deg',
-                        'bi bi-linkedin',
-                )
-        );
+	function jobus_cs_bootstrap_icons( $icons = [] ) {
+		// Adding new icons
+		$icons[] = [
+			'title' => esc_html__( 'Bootstrap Icons', 'jobus' ),
+			'icons' => [
+				'bi bi-facebook',
+				'bi bi-twitter',
+				'bi bi-instagram',
+				'bi bi-linkedin',
+				'bi bi-youtube',
+				'bi bi-github',
+				'bi bi-dribbble',
+				'bi bi-behance',
+				'bi bi-pinterest',
+				'bi bi-skype',
+				'bi bi-vimeo',
+				'bi bi-google',
+				'bi bi-reddit',
+				'bi bi-whatsapp',
+				'bi bi-spotify',
+				'bi bi-twitch',
+				'bi bi-telegram',
+				'bi bi-snapchat',
+				'bi bi-slack',
+				'bi bi-quora',
+				'bi bi-paypal',
+				'bi bi-medium',
+				'bi bi-link',
+				'bi bi-link-45deg',
+				'bi bi-linkedin',
+			],
+		];
 
-        // Move custom icons to the top of the list.
-        return array_reverse( $icons );
-    }
+		// Move custom icons to the top of the list.
+		return array_reverse( $icons );
+	}
 
     add_filter( 'csf_field_icon_add_icons', 'jobus_cs_bootstrap_icons' );
 }
@@ -1022,18 +1022,18 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
  */
 add_action( 'phpmailer_init', 'jobus_phpmailer_init' );
 function jobus_phpmailer_init( $phpmailer ) {
-    $phpmailer->isSMTP();
-    $phpmailer->Host       = jobus_opt( 'smtp_host' ); // your SMTP server
-    $phpmailer->Port       = jobus_opt( 'smtp_port' ); // SSL
-    $phpmailer->CharSet    = "utf-8";
-    $phpmailer->SMTPAuth   = jobus_opt( 'smtp_authentication' );
-    $phpmailer->Username   = jobus_opt( 'smtp_username' );
-    $phpmailer->Password   = jobus_opt( 'smtp_password' );
-    $phpmailer->SMTPSecure = jobus_opt( 'smtp_encryption' );
-    $phpmailer->From       = jobus_opt( 'smtp_from_mail_address' );
-    $phpmailer->FromName   = jobus_opt( 'smtp_from_name' );
+	$phpmailer->isSMTP();
+	$phpmailer->Host       = jobus_opt( 'smtp_host' ); // your SMTP server
+	$phpmailer->Port       = jobus_opt( 'smtp_port' ); // SSL
+	$phpmailer->CharSet    = 'utf-8';
+	$phpmailer->SMTPAuth   = jobus_opt( 'smtp_authentication' );
+	$phpmailer->Username   = jobus_opt( 'smtp_username' );
+	$phpmailer->Password   = jobus_opt( 'smtp_password' );
+	$phpmailer->SMTPSecure = jobus_opt( 'smtp_encryption' );
+	$phpmailer->From       = jobus_opt( 'smtp_from_mail_address' );
+	$phpmailer->FromName   = jobus_opt( 'smtp_from_name' );
 
-    return $phpmailer;
+	return $phpmailer;
 }
 
 if ( ! function_exists( 'jobus_rtl' ) ) {
@@ -1056,27 +1056,27 @@ if ( ! function_exists( 'jobus_rtl' ) ) {
  */
 function jobus_get_sanitized_query_param( string $param, $default = '', string $nonce_action = '' ) {
 
-    if ( ! isset( $_GET[ $param ] ) ) {
-        return $default;
-    }
+	if ( ! isset( $_GET[ $param ] ) ) {
+		return $default;
+	}
 
-    $value = sanitize_text_field( wp_unslash( $_GET[ $param ] ) );
+	$value = sanitize_text_field( wp_unslash( $_GET[ $param ] ) );
 
-    // If nonce validation is requested
-    if ( $nonce_action ) {
-        $nonce = sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ?? '' ) );
+	// If nonce validation is requested
+	if ( $nonce_action ) {
+		$nonce = sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ?? '' ) );
 
-        // No nonce? Allow fallback unless strict security is needed
-        if ( empty( $nonce ) ) {
-            return $value;
-        }
+		// No nonce? Allow fallback unless strict security is needed
+		if ( empty( $nonce ) ) {
+			return $value;
+		}
 
-        if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
-            return $default;
-        }
-    }
+		if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
+			return $default;
+		}
+	}
 
-    return $value ? $value : $default;
+	return $value ?: $default;
 }
 
 
@@ -1091,45 +1091,45 @@ function jobus_get_sanitized_query_param( string $param, $default = '', string $
  * @return void
  */
 function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
-    $is_logged_in = is_user_logged_in();
-    $user_id      = 0;
-    if ( $is_logged_in ) {
-        $user    = wp_get_current_user();
-        $user_id = $user->ID;
-    }
+	$is_logged_in = is_user_logged_in();
+	$user_id      = 0;
+	if ( $is_logged_in ) {
+		$user    = wp_get_current_user();
+		$user_id = $user->ID;
+	}
 
-    // Unique key for this user/guest and post
-    if ( $is_logged_in ) {
-        $user_viewed_key = 'jobus_user_viewed_' . $type . '_' . $user_id . '_' . $post_id;
-        if ( get_user_meta( $user_id, $user_viewed_key, true ) ) {
-            return; // Already counted for this user
-        }
-        update_user_meta( $user_id, $user_viewed_key, '1' );
-    } else {
-        $cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
-        if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
-            return; // Already counted for this guest (browser)
-        }
-        // Only set cookie if headers haven't been sent yet
-        if ( ! headers_sent() ) {
-            setcookie( $cookie_key, '1', time() + 60 * 60 * 24 * 30, COOKIEPATH, COOKIE_DOMAIN );
-        }
-        $_COOKIE[ $cookie_key ] = '1';
-    }
+	// Unique key for this user/guest and post
+	if ( $is_logged_in ) {
+		$user_viewed_key = 'jobus_user_viewed_' . $type . '_' . $user_id . '_' . $post_id;
+		if ( get_user_meta( $user_id, $user_viewed_key, true ) ) {
+			return; // Already counted for this user
+		}
+		update_user_meta( $user_id, $user_viewed_key, '1' );
+	} else {
+		$cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
+		if ( isset( $_COOKIE[ $cookie_key ] ) && '1' === $_COOKIE[ $cookie_key ] ) {
+			return; // Already counted for this guest (browser)
+		}
+		// Only set cookie if headers haven't been sent yet
+		if ( ! headers_sent() ) {
+			setcookie( $cookie_key, '1', time() + 60 * 60 * 24 * 30, COOKIEPATH, COOKIE_DOMAIN );
+		}
+		$_COOKIE[ $cookie_key ] = '1';
+	}
 
-    // Increment total visitor count
-    $all_user_view_count = get_post_meta( $post_id, 'all_user_view_count', true );
-    $all_user_view_count = empty( $all_user_view_count ) ? 0 : intval( $all_user_view_count );
-    $all_user_view_count ++;
-    update_post_meta( $post_id, 'all_user_view_count', $all_user_view_count );
+	// Increment total visitor count
+	$all_user_view_count = get_post_meta( $post_id, 'all_user_view_count', true );
+	$all_user_view_count = empty( $all_user_view_count ) ? 0 : intval( $all_user_view_count );
+	$all_user_view_count ++;
+	update_post_meta( $post_id, 'all_user_view_count', $all_user_view_count );
 
-    // Increment employer-specific count for logged-in employers only
-    if ( $is_logged_in && in_array( 'jobus_employer', (array) $user->roles ) ) {
-        $employer_view_count = get_post_meta( $post_id, 'employer_view_count', true );
-        $employer_view_count = empty( $employer_view_count ) ? 0 : intval( $employer_view_count );
-        $employer_view_count ++;
-        update_post_meta( $post_id, 'employer_view_count', $employer_view_count );
-    }
+	// Increment employer-specific count for logged-in employers only
+	if ( $is_logged_in && in_array( 'jobus_employer', (array) $user->roles, true ) ) {
+		$employer_view_count = get_post_meta( $post_id, 'employer_view_count', true );
+		$employer_view_count = empty( $employer_view_count ) ? 0 : intval( $employer_view_count );
+		$employer_view_count ++;
+		update_post_meta( $post_id, 'employer_view_count', $employer_view_count );
+	}
 }
 
 
@@ -1142,20 +1142,20 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
  * @return array Status information about the saved post.
  */
 function jobus_get_save_status( int|string $post_id = '', string $meta_key = 'jobus_saved_jobs' ): array {
-    if ( ! $post_id ) {
-        $post_id = get_the_ID();
-    }
+	if ( ! $post_id ) {
+		$post_id = get_the_ID();
+	}
 
-    $user_id     = get_current_user_id();
-    $saved_items = is_user_logged_in() ? (array) get_user_meta( $user_id, $meta_key, true ) : [];
-    $is_saved    = in_array( $post_id, $saved_items );
+	$user_id     = get_current_user_id();
+	$saved_items = is_user_logged_in() ? (array) get_user_meta( $user_id, $meta_key, true ) : [];
+	$is_saved    = in_array( $post_id, $saved_items, true );
 
-    return [
-            'post_id'     => $post_id,
-            'user_id'     => $user_id,
-            'saved_items' => $saved_items,
-            'is_saved'    => $is_saved
-    ];
+	return [
+		'post_id'     => $post_id,
+		'user_id'     => $user_id,
+		'saved_items' => $saved_items,
+		'is_saved'    => $is_saved,
+	];
 }
 
 
@@ -1170,13 +1170,13 @@ function jobus_get_save_status( int|string $post_id = '', string $meta_key = 'jo
  * @return array|string Sanitized data in the same structure as input.
  */
 if ( ! function_exists( 'jobus_recursive_sanitize_text_field' ) ) {
-    function jobus_recursive_sanitize_text_field( $data ) {
-        if ( is_array( $data ) ) {
-            return array_map( 'jobus_recursive_sanitize_text_field', wp_unslash( $data ) );
-        }
+	function jobus_recursive_sanitize_text_field( $data ) {
+		if ( is_array( $data ) ) {
+			return array_map( 'jobus_recursive_sanitize_text_field', wp_unslash( $data ) );
+		}
 
-        return sanitize_text_field( wp_unslash( $data ) );
-    }
+		return sanitize_text_field( wp_unslash( $data ) );
+	}
 }
 
 /**
@@ -1199,24 +1199,24 @@ if ( ! function_exists( 'jobus_recursive_sanitize_text_field' ) ) {
  * @return void
  */
 if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
-    function jobus_render_post_save_button( $args ) {
-        $post_id      = $args['post_id'] ?? '';
-        $post_type    = $args['post_type'] ?? '';
-        $meta_key     = $args['meta_key'] ?? '';
-        $is_saved     = ! empty( $args['is_saved'] ) ? 'bi bi-bookmark-check-fill jbs-text-primary' : 'bi bi-bookmark-dash';
-        $button_title = $args['button_title'] ?? '';
-        $class        = $args['class'] ?? '';
-        ?>
-        <a href="javascript:void(0);"
-           class="save_post_btn <?php echo esc_attr( $class ); ?>"
-           data-post_id="<?php echo esc_attr( $post_id ); ?>"
-           data-post_type="<?php echo esc_attr( $post_type ); ?>"
-           data-meta_key="<?php echo esc_attr( $meta_key ); ?>"
-           title="<?php echo esc_attr( $button_title ); ?>">
-            <i class="<?php echo esc_attr( $is_saved ); ?>"></i>
-        </a>
-        <?php
-    }
+	function jobus_render_post_save_button( $args ) {
+		$post_id      = $args['post_id'] ?? '';
+		$post_type    = $args['post_type'] ?? '';
+		$meta_key     = $args['meta_key'] ?? '';
+		$is_saved     = ! empty( $args['is_saved'] ) ? 'bi bi-bookmark-check-fill jbs-text-primary' : 'bi bi-bookmark-dash';
+		$button_title = $args['button_title'] ?? '';
+		$class        = $args['class'] ?? '';
+		?>
+		<a href="javascript:void(0);"
+		   class="save_post_btn <?php echo esc_attr( $class ); ?>"
+		   data-post_id="<?php echo esc_attr( $post_id ); ?>"
+		   data-post_type="<?php echo esc_attr( $post_type ); ?>"
+		   data-meta_key="<?php echo esc_attr( $meta_key ); ?>"
+		   title="<?php echo esc_attr( $button_title ); ?>">
+			<i class="<?php echo esc_attr( $is_saved ); ?>"></i>
+		</a>
+		<?php
+	}
 }
 /**
  * Get default company logo URL
@@ -1226,15 +1226,15 @@ if ( ! function_exists( 'jobus_render_post_save_button' ) ) {
  * @return string URL of the default company logo
  */
 if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
-    function jobus_get_default_company_logo() {
-        // Try to get custom logo from settings
-        $custom_logo = jobus_opt( 'default_company_logo' );
+	function jobus_get_default_company_logo() {
+		// Try to get custom logo from settings
+		$custom_logo = jobus_opt( 'default_company_logo' );
 
-        if ( ! empty( $custom_logo ) && isset( $custom_logo['url'] ) ) {
-            return esc_url( $custom_logo['url'] );
-        }
+		if ( ! empty( $custom_logo ) && isset( $custom_logo['url'] ) ) {
+			return esc_url( $custom_logo['url'] );
+		}
 
-        // Fallback to default logo
-        return plugins_url( 'jobus/assets/images/default-company.png' );
-    }
+		// Fallback to default logo
+		return plugins_url( 'jobus/assets/images/default-company.png' );
+	}
 }
