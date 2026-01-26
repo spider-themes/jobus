@@ -158,8 +158,8 @@ add_action( 'admin_init', 'jobus_restrict_admin_access' );
  * This ensures trashed/deleted candidates, jobs, companies don't appear in archives
  */
 function jobus_clear_cache_on_post_status_change( $new_status, $old_status, $post ) {
-	$jobus_post_types = array( 'jobus_candidate', 'jobus_job', 'jobus_company' );
-	
+	$jobus_post_types = [ 'jobus_candidate', 'jobus_job', 'jobus_company' ];
+
 	if ( ! in_array( $post->post_type, $jobus_post_types, true ) ) {
 		return;
 	}
@@ -181,9 +181,9 @@ function jobus_clear_cache_on_trash( $post_id ) {
 	if ( ! $post ) {
 		return;
 	}
-	
-	$jobus_post_types = array( 'jobus_candidate', 'jobus_job', 'jobus_company' );
-	
+
+	$jobus_post_types = [ 'jobus_candidate', 'jobus_job', 'jobus_company' ];
+
 	if ( in_array( $post->post_type, $jobus_post_types, true ) ) {
 		wp_cache_delete( $post_id, 'posts' );
 		wp_cache_delete( $post_id, 'post_meta' );
@@ -243,39 +243,39 @@ add_action( 'remove_user_from_blog', 'jobus_delete_user_posts_on_wpmu_delete' );
  */
 function jobus_delete_user_on_post_delete( $post_id ) {
 	// Prevent running multiple times
-	static $processed_posts = array();
+	static $processed_posts = [];
 	if ( isset( $processed_posts[ $post_id ] ) ) {
 		return;
 	}
 	$processed_posts[ $post_id ] = true;
-	
+
 	$post = get_post( $post_id );
-	
+
 	if ( ! $post ) {
 		return;
 	}
-	
+
 	// Only process candidate and company post types
-	if ( ! in_array( $post->post_type, array( 'jobus_candidate', 'jobus_company' ), true ) ) {
+	if ( ! in_array( $post->post_type, [ 'jobus_candidate', 'jobus_company' ], true ) ) {
 		return;
 	}
-	
+
 	$user_id = $post->post_author;
-	
+
 	// Make sure user exists and is valid
 	if ( ! $user_id || $user_id <= 0 ) {
 		return;
 	}
-	
+
 	$user = get_user_by( 'id', $user_id );
 	if ( ! $user ) {
 		return;
 	}
-	
+
 	// Only delete users with candidate or employer roles (don't delete admins!)
 	$user_roles = $user->roles;
-	$allowed_roles = array( 'jobus_candidate', 'jobus_employer' );
-	
+	$allowed_roles = [ 'jobus_candidate', 'jobus_employer' ];
+
 	$can_delete = false;
 	foreach ( $user_roles as $role ) {
 		if ( in_array( $role, $allowed_roles, true ) ) {
