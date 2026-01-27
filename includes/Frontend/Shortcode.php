@@ -276,19 +276,10 @@ class Shortcode {
 
             foreach ( $role_shortcode_map as $role => $shortcodes ) {
                 if ( in_array( $role, (array) $current_user->roles, true ) ) {
-                    foreach ( $shortcodes as $shortcode ) {
-                        $dashboard_page = get_posts([
-                            'post_type'      => 'page',
-                            'posts_per_page' => 1,
-                            'post_status'    => 'publish',
-                            'fields'         => 'ids',
-                            's'              => $shortcode,
-                        ]);
-
-                        if ( ! empty( $dashboard_page ) ) {
-                            $page_url = trailingslashit( get_permalink( $dashboard_page[0] ) );
-                            break 2;
-                        }
+                    $dashboard_url = Dashboard::get_dashboard_page_url( $role );
+                    if ( $dashboard_url && $dashboard_url !== home_url( '/' ) ) {
+                        $page_url = trailingslashit( $dashboard_url );
+                        break;
                     }
                 }
             }

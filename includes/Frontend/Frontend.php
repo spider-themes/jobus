@@ -20,7 +20,7 @@ class Frontend {
 	 * Frontend constructor.
 	 * Adds the body_class filter for frontend area.
 	 */
-	function __construct() {
+	public function __construct() {
 
 		add_filter( 'body_class', [ $this, 'body_class' ] );
 		add_action( 'wp_footer', [ $this, 'output_login_modal' ] );
@@ -38,7 +38,7 @@ class Frontend {
 		$classes[] = 'jobus-frontend';
 
 		// Add premium class if pro version is active
-		if ( function_exists('jobus_fs') && jobus_fs()->is_paying_or_trial() ) {
+		if ( function_exists( 'jobus_fs' ) && jobus_fs()->is_paying_or_trial() ) {
 			$classes[] = 'jobus-premium';
 		}
 
