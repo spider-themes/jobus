@@ -62,7 +62,7 @@ function jobus_load_archive_template( $config ) {
 
 	// Handle company search
 	$search_type = jobus_get_sanitized_query_param( 'search_type', '', 'jobus_sort_filter' );
-	if ( $search_type === 'company_search' ) {
+	if ( 'company_search' === $search_type ) {
 		$company_ids_raw = jobus_get_sanitized_query_param( 'company_ids', '', 'jobus_sort_filter' );
 		$company_ids = ! empty( $company_ids_raw ) ? array_map( 'absint', explode( ',', $company_ids_raw ) ) : [];
 		if ( ! empty( $company_ids ) ) {
@@ -91,11 +91,11 @@ function jobus_load_archive_template( $config ) {
 	$query = new WP_Query( $args );
 
 	// Set post-type-specific query variables for backward compatibility
-	if ( $config['post_type'] === 'jobus_job' ) {
+	if ( 'jobus_job' === $config['post_type'] ) {
 		$job_query = $query;
-	} elseif ( $config['post_type'] === 'jobus_candidate' ) {
+	} elseif ( 'jobus_candidate' === $config['post_type'] ) {
 		$candidate_query = $query;
-	} elseif ( $config['post_type'] === 'jobus_company' ) {
+	} elseif ( 'jobus_company' === $config['post_type'] ) {
 		$company_query = $query;
 	}
 
@@ -121,11 +121,11 @@ function jobus_load_archive_template( $config ) {
 	
 	$layout_base_path = $config['layout_base_path'];
 
-	if ( $archive_layout == '1' ) {
+	if ( '1' === $archive_layout ) {
 		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-classic.php';
-	} elseif ( $archive_layout == '2' ) {
+	} elseif ( '2' === $archive_layout ) {
 		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-topbar.php';
-	} elseif ( $archive_layout == '3' ) {
+	} elseif ( '3' === $archive_layout ) {
 		include dirname( __FILE__ ) . '/../' . $layout_base_path . '-popup.php';
 	}
 
@@ -135,7 +135,7 @@ function jobus_load_archive_template( $config ) {
 	}
 
 	// Load sidebar popup filters if needed (after footer for modal)
-	if ( $archive_layout == '3' ) {
+	if ( '3' === $archive_layout ) {
 		jobus_get_template_part( $config['sidebar_popup_path'] );
 	}
 }

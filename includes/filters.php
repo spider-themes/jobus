@@ -71,13 +71,13 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	// Check for custom redirect settings first
 	if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
-		if ( $user_role === 'jobus_candidate' ) {
+		if ( 'jobus_candidate' === $user_role ) {
 			$page_id = jobus_opt( 'candidate_redirect_page' );
 			if ( $page_id ) {
 				return get_permalink( $page_id );
 			}
 		}
-		if ( $user_role === 'jobus_employer' ) {
+		if ( 'jobus_employer' === $user_role ) {
 			$page_id = jobus_opt( 'employer_redirect_page' );
 			if ( $page_id ) {
 				return get_permalink( $page_id );
@@ -87,13 +87,13 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	// Default: redirect to role-specific dashboard
 	if ( class_exists( '\jobus\includes\Frontend\Dashboard' ) ) {
-		if ( $user_role === 'jobus_candidate' ) {
+		if ( 'jobus_candidate' === $user_role ) {
 			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
 				return $dashboard_url;
 			}
 		}
-		if ( $user_role === 'jobus_employer' ) {
+		if ( 'jobus_employer' === $user_role ) {
 			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
 				return $dashboard_url;
