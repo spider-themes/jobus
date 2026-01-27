@@ -78,6 +78,16 @@ class Dashboard {
 			return $url;
 		}
 
+		// Check jobus_pages option first
+		$pages = get_option( 'jobus_pages', [] );
+		if ( ! empty( $pages['dashboard'] ) ) {
+			$url = get_permalink( $pages['dashboard'] );
+			if ( $url ) {
+				set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+				return $url;
+			}
+		}
+
 		$shortcodes = [ '[jobus_dashboard]' ];
 		
 		if ( 'jobus_candidate' === $role ) {
