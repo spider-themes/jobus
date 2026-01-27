@@ -284,6 +284,21 @@ function jobus_process_range_filters( $filter_widgets ) {
 		return $result_ids;
 	}
 
+	// Optimization: Skip heavy DB query if no range filters are active
+	$has_active_range_filter = false;
+	foreach ( $filter_widgets as $widget ) {
+		if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] === 'range' && isset( $widget['widget_name'] ) ) {
+			if ( ! empty( $_GET[ $widget['widget_name'] ] ) ) {
+				$has_active_range_filter = true;
+				break;
+			}
+		}
+	}
+
+	if ( ! $has_active_range_filter ) {
+		return $result_ids;
+	}
+
 	$all_slider_values = jobus_all_range_field_value();
 	if ( empty( $all_slider_values ) ) {
 		return $result_ids;
