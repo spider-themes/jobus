@@ -365,7 +365,7 @@ class Ajax_Actions {
 		do_action( 'wp_login', $candidate_username, new \WP_User( $candidate_id ) );
 
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && $redirect_url_from_form !== home_url( '/' ) ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),
@@ -416,7 +416,7 @@ class Ajax_Actions {
 		do_action( 'wp_login', $employer_username, new \WP_User( $employer_id ) );
 
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && $redirect_url_from_form !== home_url( '/' ) ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),
