@@ -117,6 +117,7 @@ final class Jobus {
 	 */
 	private function __construct() {
 		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 		$this->define_constants(); // Define constants.
 
 		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
@@ -230,6 +231,11 @@ final class Jobus {
 	/**
 	 * Do stuff upon plugin activation
 	 */
+	/**
+	 * Create default frontend pages depending on theme / premium status
+	 *
+	 * @return void
+	 */
 	public function activate(): void {
 		// Insert the installation time into the database.
 		$installed = get_option( 'jobus_installed' );
@@ -245,6 +251,24 @@ final class Jobus {
 
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
+	}
+
+	/**
+	 * Do stuff upon plugin deactivation
+	 *
+	 * @return void
+	 */
+	public function deactivate(): void {
+		// If premium is NOT active, we might want to clean up.
+		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
+		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
+			$pages = get_option( 'jobus_pages', [] );
+			if ( ! empty( $pages['dashboard'] ) ) {
+				wp_delete_post( $pages['dashboard'], true );
+				unset( $pages['dashboard'] );
+				update_option( 'jobus_pages', $pages );
+			}
+		}
 	}
 
 	/**
@@ -267,7 +291,7 @@ final class Jobus {
 
 		// Determine unlocked state (theme match or premium license).
 		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true );
+		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
 
 		$pages_to_create = [];
 		if ( $is_unlocked ) {
@@ -349,6 +373,16 @@ final class Jobus {
 		}
 
 		update_option( 'jobus_pages', $created );
+
+		// Automatically set the default dashboard redirect page in settings if not already set.
+		if ( ! empty( $created['dashboard'] ) ) {
+			$jobus_opt = get_option( 'jobus_opt', [] );
+			if ( empty( $jobus_opt['dashboard_redirect_page'] ) ) {
+				$jobus_opt['dashboard_redirect_page'] = $created['dashboard'];
+				$jobus_opt['enable_custom_redirects'] = '1';
+				update_option( 'jobus_opt', $jobus_opt );
+			}
+		}
 	}
 
 
