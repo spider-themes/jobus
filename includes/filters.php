@@ -23,10 +23,10 @@ function jobus_dashboard_upload_mimes( $mimes ) {
 	if ( ! is_user_logged_in() ) {
 		return $mimes;
 	}
-	
-	$user = wp_get_current_user();
+
+	$user       = wp_get_current_user();
 	$user_roles = (array) $user->roles;
-	
+
 	if ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) {
 		return [
 			'jpg|jpeg|jpe' => 'image/jpeg',
@@ -39,6 +39,7 @@ function jobus_dashboard_upload_mimes( $mimes ) {
 			'svg|svgz'     => 'image/svg+xml', // Will be sanitized below
 		];
 	}
+
 	return $mimes;
 }
 add_filter( 'upload_mimes', 'jobus_dashboard_upload_mimes' );
@@ -47,7 +48,7 @@ add_filter( 'upload_mimes', 'jobus_dashboard_upload_mimes' );
  * Sanitize uploaded SVG files before saving
  */
 function jobus_sanitize_svg( $file ) {
-	if ( isset( $file['type'] ) && $file['type'] === 'image/svg+xml' ) {
+	if ( isset( $file['type'] ) && 'image/svg+xml' === $file['type'] ) {
 		if ( file_exists( $file['tmp_name'] ) && is_readable( $file['tmp_name'] ) ) {
 			$dirty_svg = file_get_contents( $file['tmp_name'] );
 			// Very simple sanitizer (strip script tags)
@@ -55,6 +56,7 @@ function jobus_sanitize_svg( $file ) {
 			file_put_contents( $file['tmp_name'], $clean_svg );
 		}
 	}
+
 	return $file;
 }
 add_filter( 'wp_handle_upload_prefilter', 'jobus_sanitize_svg' );
@@ -71,13 +73,13 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	// Check for custom redirect settings first
 	if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
-		if ( $user_role === 'jobus_candidate' ) {
+		if ( 'jobus_candidate' === $user_role ) {
 			$page_id = jobus_opt( 'candidate_redirect_page' );
 			if ( $page_id ) {
 				return get_permalink( $page_id );
 			}
 		}
-		if ( $user_role === 'jobus_employer' ) {
+		if ( 'jobus_employer' === $user_role ) {
 			$page_id = jobus_opt( 'employer_redirect_page' );
 			if ( $page_id ) {
 				return get_permalink( $page_id );
@@ -87,13 +89,13 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	// Default: redirect to role-specific dashboard
 	if ( class_exists( '\jobus\includes\Frontend\Dashboard' ) ) {
-		if ( $user_role === 'jobus_candidate' ) {
+		if ( 'jobus_candidate' === $user_role ) {
 			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
 				return $dashboard_url;
 			}
 		}
-		if ( $user_role === 'jobus_employer' ) {
+		if ( 'jobus_employer' === $user_role ) {
 			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 			if ( ! empty( $dashboard_url ) && $dashboard_url !== home_url( '/' ) ) {
 				return $dashboard_url;
@@ -112,15 +114,15 @@ function jobus_hide_admin_bar_for_roles( $show ) {
 	if ( ! is_user_logged_in() ) {
 		return $show;
 	}
-	
-	$user = wp_get_current_user();
+
+	$user       = wp_get_current_user();
 	$user_roles = (array) $user->roles;
-	
+
 	// Hide admin bar if user has candidate or employer role
 	if ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) {
 		return false;
 	}
-	
+
 	return $show;
 }
 add_filter( 'show_admin_bar', 'jobus_hide_admin_bar_for_roles' );
@@ -132,15 +134,15 @@ function jobus_restrict_admin_access(): void {
 	if ( ! is_user_logged_in() || wp_doing_ajax() ) {
 		return;
 	}
-	
-	$user = wp_get_current_user();
+
+	$user       = wp_get_current_user();
 	$user_roles = (array) $user->roles;
-	
+
 	// Block admin access for candidate and employer roles
 	if ( is_admin() && ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) ) {
 		// Redirect to home page or dashboard
 		if ( class_exists( '\jobus\includes\Frontend\Dashboard' ) ) {
-			$role = in_array( 'jobus_candidate', $user_roles, true ) ? 'jobus_candidate' : 'jobus_employer';
+			$role          = in_array( 'jobus_candidate', $user_roles, true ) ? 'jobus_candidate' : 'jobus_employer';
 			$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( $role );
 			if ( ! empty( $dashboard_url ) ) {
 				wp_safe_redirect( $dashboard_url );
@@ -158,16 +160,16 @@ add_action( 'admin_init', 'jobus_restrict_admin_access' );
  * This ensures trashed/deleted candidates, jobs, companies don't appear in archives
  */
 function jobus_clear_cache_on_post_status_change( $new_status, $old_status, $post ) {
-	$jobus_post_types = array( 'jobus_candidate', 'jobus_job', 'jobus_company' );
-	
+	$jobus_post_types = [ 'jobus_candidate', 'jobus_job', 'jobus_company' ];
+
 	if ( ! in_array( $post->post_type, $jobus_post_types, true ) ) {
 		return;
 	}
-	
+
 	// Clear object cache for the post
 	wp_cache_delete( $post->ID, 'posts' );
 	wp_cache_delete( $post->ID, 'post_meta' );
-	
+
 	// Clear any related term caches
 	clean_post_cache( $post->ID );
 }
@@ -181,9 +183,9 @@ function jobus_clear_cache_on_trash( $post_id ) {
 	if ( ! $post ) {
 		return;
 	}
-	
-	$jobus_post_types = array( 'jobus_candidate', 'jobus_job', 'jobus_company' );
-	
+
+	$jobus_post_types = [ 'jobus_candidate', 'jobus_job', 'jobus_company' ];
+
 	if ( in_array( $post->post_type, $jobus_post_types, true ) ) {
 		wp_cache_delete( $post_id, 'posts' );
 		wp_cache_delete( $post_id, 'post_meta' );
@@ -206,11 +208,11 @@ function jobus_delete_user_posts_on_user_delete( $user_id, $reassign, $user ) {
 		'numberposts' => -1,
 		'fields'      => 'ids',
 	] );
-	
+
 	foreach ( $candidate_posts as $post_id ) {
 		wp_delete_post( $post_id, true ); // Force delete (bypass trash)
 	}
-	
+
 	// Delete company post if user was an employer
 	$company_posts = get_posts( [
 		'post_type'   => 'jobus_company',
@@ -219,7 +221,7 @@ function jobus_delete_user_posts_on_user_delete( $user_id, $reassign, $user ) {
 		'numberposts' => -1,
 		'fields'      => 'ids',
 	] );
-	
+
 	foreach ( $company_posts as $post_id ) {
 		wp_delete_post( $post_id, true ); // Force delete (bypass trash)
 	}
@@ -238,44 +240,44 @@ add_action( 'remove_user_from_blog', 'jobus_delete_user_posts_on_wpmu_delete' );
 /**
  * Delete associated user when a candidate or company post is deleted
  * This ensures user is removed when their profile post is deleted from admin
- * 
+ *
  * NOTE: This function handles both trash and permanent delete actions
  */
 function jobus_delete_user_on_post_delete( $post_id ) {
 	// Prevent running multiple times
-	static $processed_posts = array();
+	static $processed_posts = [];
 	if ( isset( $processed_posts[ $post_id ] ) ) {
 		return;
 	}
 	$processed_posts[ $post_id ] = true;
-	
+
 	$post = get_post( $post_id );
-	
+
 	if ( ! $post ) {
 		return;
 	}
-	
+
 	// Only process candidate and company post types
-	if ( ! in_array( $post->post_type, array( 'jobus_candidate', 'jobus_company' ), true ) ) {
+	if ( ! in_array( $post->post_type, [ 'jobus_candidate', 'jobus_company' ], true ) ) {
 		return;
 	}
-	
+
 	$user_id = $post->post_author;
-	
+
 	// Make sure user exists and is valid
 	if ( ! $user_id || $user_id <= 0 ) {
 		return;
 	}
-	
+
 	$user = get_user_by( 'id', $user_id );
 	if ( ! $user ) {
 		return;
 	}
-	
+
 	// Only delete users with candidate or employer roles (don't delete admins!)
-	$user_roles = $user->roles;
-	$allowed_roles = array( 'jobus_candidate', 'jobus_employer' );
-	
+	$user_roles    = $user->roles;
+	$allowed_roles = [ 'jobus_candidate', 'jobus_employer' ];
+
 	$can_delete = false;
 	foreach ( $user_roles as $role ) {
 		if ( in_array( $role, $allowed_roles, true ) ) {
@@ -283,20 +285,20 @@ function jobus_delete_user_on_post_delete( $post_id ) {
 			break;
 		}
 	}
-	
+
 	if ( ! $can_delete ) {
 		return;
 	}
-	
+
 	// Prevent infinite loop - temporarily remove the user deletion hook
 	remove_action( 'delete_user', 'jobus_delete_user_posts_on_user_delete', 10 );
-	
+
 	// Delete the user (requires user management capability check)
 	if ( current_user_can( 'delete_users' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/user.php';
 		wp_delete_user( $user_id );
 	}
-	
+
 	// Re-add the hook
 	add_action( 'delete_user', 'jobus_delete_user_posts_on_user_delete', 10, 3 );
 }
