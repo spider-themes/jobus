@@ -122,6 +122,8 @@ final class Jobus {
 
 		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
+		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
+		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
 	}
 
 	/**
@@ -283,7 +285,7 @@ final class Jobus {
 	 *
 	 * @return void
 	 */
-	private function plugin_default_pages_exist(): void {
+	public function plugin_default_pages_exist(): void {
 		// Avoid running in contexts without WP functions available.
 		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
 			return;
@@ -334,6 +336,19 @@ final class Jobus {
 		}
 
 		$created = get_option( 'jobus_pages', [] );
+
+		// Optimization: Check if all desired pages for the current state (free vs pro) are already recorded.
+		$all_exist = true;
+		foreach ( array_keys( $pages_to_create ) as $key ) {
+			if ( empty( $created[ $key ] ) ) {
+				$all_exist = false;
+				break;
+			}
+		}
+
+		if ( $all_exist ) {
+			return;
+		}
 
 		foreach ( $pages_to_create as $key => $args ) {
 			// If a page with the desired slug already exists, record and skip.
