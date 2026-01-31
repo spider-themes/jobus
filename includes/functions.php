@@ -751,10 +751,33 @@ function jobus_merge_queries_and_get_ids( ...$queries ): array {
 }
 
 /**
+ * Get the list of range widget names from settings.
+ *
+ * @return array List of widget names.
+ */
+function jobus_get_range_widget_names(): array {
+    $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+    $search_widgets = [];
+
+    if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+        foreach ( $filter_widgets as $widget ) {
+            if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
+                $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
+                if ( $widget_name ) {
+                    $search_widgets[] = $widget_name;
+                }
+            }
+        }
+    }
+    return $search_widgets;
+}
+
+/**
  * Get the post-IDs of all posts with range field values.
  *
  * Retrieves all job posts and extracts range field values (like salary ranges).
  * Nonce-verified to ensure secure access.
+ * Cache enabled for performance.
  *
  * @return array Associative array with widget names as keys and post IDs with their values.
  */
@@ -766,22 +789,17 @@ function jobus_all_range_field_value(): array {
 
     if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
 
-        $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-        $search_widgets = [];
-
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
-                    // if you get value in search bar
-                    $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                    if ( $widget_name ) {
-                        $search_widgets[] = $widget_name;
-                    }
-                }
-            }
-        }
+        $search_widgets = jobus_get_range_widget_names();
 
         if ( ! empty( $search_widgets ) ) {
+
+            // Check transient cache
+            $cache_key = 'jobus_range_values_' . md5( serialize( $search_widgets ) );
+            $cached_values = get_transient( $cache_key );
+            if ( false !== $cached_values ) {
+                return $cached_values;
+            }
+
             // Fetch only necessary data directly from DB
             $results = $wpdb->get_results( "
                 SELECT p.ID, pm.meta_value
@@ -807,6 +825,9 @@ function jobus_all_range_field_value(): array {
                     }
                 }
             }
+
+            // Set transient cache (24 hours)
+            set_transient( $cache_key, $post_ids, 24 * HOUR_IN_SECONDS );
         }
     }
 
@@ -1236,5 +1257,39 @@ if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
 
         // Fallback to default logo
         return plugins_url( 'jobus/assets/images/default-company.png' );
+    }
+}
+
+/**
+ * Flush the range values cache.
+ *
+ * @return void
+ */
+if ( ! function_exists( 'jobus_flush_range_values_cache' ) ) {
+    function jobus_flush_range_values_cache(): void {
+        $search_widgets = jobus_get_range_widget_names();
+        if ( ! empty( $search_widgets ) ) {
+            $cache_key = 'jobus_range_values_' . md5( serialize( $search_widgets ) );
+            delete_transient( $cache_key );
+        }
+    }
+}
+add_action( 'save_post_jobus_job', 'jobus_flush_range_values_cache' );
+add_action( 'updated_option', 'jobus_clear_range_values_on_option_update', 10, 3 );
+
+/**
+ * Clear range values cache when options are updated.
+ *
+ * @param string $option    Option name.
+ * @param mixed  $old_value Old option value.
+ * @param mixed  $value     New option value.
+ *
+ * @return void
+ */
+if ( ! function_exists( 'jobus_clear_range_values_on_option_update' ) ) {
+    function jobus_clear_range_values_on_option_update( $option, $old_value, $value ) {
+        if ( 'jobus_opt' === $option ) {
+            jobus_flush_range_values_cache();
+        }
     }
 }
