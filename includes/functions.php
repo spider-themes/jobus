@@ -51,7 +51,7 @@ if ( ! function_exists( 'jobus_opt' ) ) {
         $value   = $options[ $option ] ?? null;
 
         // Return default if value is null or empty string
-        if ( $value === null || $value === '' ) {
+        if ( null === $value || '' === $value ) {
             return $default;
         }
 
@@ -92,7 +92,7 @@ function jobus_get_template_part( string $template, array $args = [] ): void {
 
     // Check for pro plugin template first (if pro is active)
     if ( jobus_is_premium() ) {
-        if ( $theme_file = locate_template( array( 'jobus-pro/' . $template ) ) ) {
+        if ( $theme_file = locate_template( [ 'jobus-pro/' . $template ] ) ) {
             $file = $theme_file;
         } elseif ( defined( 'JOBUS_PRO_PATH' ) && file_exists( JOBUS_PRO_PATH . "/templates/" . $template ) ) {
             $file = JOBUS_PRO_PATH . "/templates/" . $template;
@@ -101,7 +101,7 @@ function jobus_get_template_part( string $template, array $args = [] ): void {
 
     // Fallback to free plugin template if pro template not found
     if ( ! $file ) {
-        if ( $theme_file = locate_template( array( 'jobus/' . $template ) ) ) {
+        if ( $theme_file = locate_template( [ 'jobus/' . $template ] ) ) {
             $file = $theme_file;
         } elseif ( file_exists( JOBUS_PATH . "/templates/" . $template ) ) {
             $file = JOBUS_PATH . "/templates/" . $template;
@@ -204,10 +204,10 @@ if ( ! function_exists( 'jobus_get_tag_list' ) ) {
  */
 if ( ! function_exists( 'jobus_get_categories' ) ) {
     function jobus_get_categories( $term = 'jobus_job_cat' ): array {
-        $cats = get_terms( array(
-                'taxonomy'   => $term,
-                'hide_empty' => true,
-        ) );
+        $cats = get_terms( [
+            'taxonomy'   => $term,
+            'hide_empty' => true,
+        ] );
 
         $cat_array = [];
         foreach ( $cats as $cat ) {
@@ -304,14 +304,14 @@ if ( ! function_exists( 'jobus_company_post_list' ) ) {
     function jobus_company_post_list(): array {
 
         // Get all the Company posts
-        $args = array(
-                'post_type'      => 'jobus_company',
-                'posts_per_page' => - 1,
-                'post_status'    => 'publish',
-        );
+        $args = [
+            'post_type'      => 'jobus_company',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+        ];
 
         $posts   = get_posts( $args );
-        $options = array();
+        $options = [];
 
         if ( ! empty( $posts ) ) {
             foreach ( $posts as $post ) {
@@ -481,14 +481,14 @@ if ( ! function_exists( 'jobus_pagination' ) ) {
         echo '<ul class="jbs-pagination">';
 
         $big              = 999999999; // need an unlikely integer
-        $pagination_links = paginate_links( array(
-                'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                'format'    => '?paged=%#%',
-                'current'   => max( 1, get_query_var( 'paged' ) ),
-                'total'     => $query->max_num_pages,
-                'prev_text' => '<i class="bi bi-chevron-left"></i>',
-                'next_text' => '<i class="bi bi-chevron-right"></i>',
-        ) );
+        $pagination_links = paginate_links( [
+            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format'    => '?paged=%#%',
+            'current'   => max( 1, get_query_var( 'paged' ) ),
+            'total'     => $query->max_num_pages,
+            'prev_text' => '<i class="bi bi-chevron-left"></i>',
+            'next_text' => '<i class="bi bi-chevron-right"></i>',
+        ] );
 
         // Output pagination links with escaping
         if ( $pagination_links ) {
@@ -542,19 +542,19 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
     function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
-        $args = array(
-                'post_type'      => 'jobus_job',
-                'posts_per_page' => $link ? - 1 : 1,
-                'fields'         => 'ids',
-                'meta_query'     => array(
-                        'relation' => 'AND', // Optional, defaults to "AND
-                        array(
-                                'key'     => 'jobus_meta_options',
-                                'value'   => $company_id,
-                                'compare' => 'LIKE',
-                        ),
-                )
-        );
+        $args = [
+            'post_type'      => 'jobus_job',
+            'posts_per_page' => $link ? -1 : 1,
+            'fields'         => 'ids',
+            'meta_query'     => [
+                'relation' => 'AND', // Optional, defaults to "AND"
+                [
+                    'key'     => 'jobus_meta_options',
+                    'value'   => $company_id,
+                    'compare' => 'LIKE',
+                ],
+            ]
+        ];
 
         $job_posts = new \WP_Query( $args );
 
@@ -567,7 +567,7 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
             $company_ids_array = implode( ',', $company_ids_arr );
 
             // if post counts 1 then return a post-link
-            if ( $job_posts->found_posts == 1 ) {
+            if ( 1 === $job_posts->found_posts ) {
                 return get_permalink( $company_ids_array );
             } else {
                 return get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array;
@@ -630,7 +630,7 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
         }
     }
 
-    $job_meta_query = array();
+    $job_meta_query = [];
 
     if ( is_array( $widgets ) ) {
 
@@ -639,7 +639,7 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
 
         if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
             foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
+                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] && isset( $widget['widget_name'] ) ) {
                     $search_widgets[] = $widget['widget_name'];
                 }
             }
@@ -647,7 +647,7 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
 
         foreach ( $widgets as $item => $job_value ) {
 
-            if ( ! in_array( $job_value, $search_widgets ) ) {
+            if ( ! in_array( $job_value, $search_widgets, true ) ) {
                 $job_type_meta = jobus_search_terms( $job_value );
 
                 foreach ( $job_type_meta as $key => $value ) {
@@ -657,19 +657,19 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
                     }
 
                     if ( $key < 1 ) {
-                        $job_meta_query[ $item ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
+                        $job_meta_query[ $item ] = [
+                            'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
+                            'value'   => $value,
+                            'compare' => 'LIKE',
+                        ];
                     }
 
                     if ( $item < 1 ) {
-                        $job_meta_query[ $key ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
+                        $job_meta_query[ $key ] = [
+                            'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
+                            'value'   => $value,
+                            'compare' => 'LIKE',
+                        ];
                     }
                 }
             }
@@ -695,23 +695,23 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
  */
 function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [] ) {
     $data_args = [];
-    if ( $data == 'taxonomy' ) {
+    if ( 'taxonomy' === $data ) {
         $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'tax_query'   => array(
-                        array(
-                                'taxonomy' => $taxonomy,
-                                'field'    => 'slug',
-                                'terms'    => $terms,
-                        ),
-                )
+            'post_type'   => $post_type,
+            'post_status' => 'publish',
+            'tax_query'   => [
+                [
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'slug',
+                    'terms'    => $terms,
+                ],
+            ]
         ];
     } else {
         $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'meta_query'  => $terms,
+            'post_type'   => $post_type,
+            'post_status' => 'publish',
+            'meta_query'  => $terms,
         ];
     }
 
@@ -728,7 +728,7 @@ function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxon
  * @return array Array of unique post IDs from all merged queries.
  */
 function jobus_merge_queries_and_get_ids( ...$queries ): array {
-    $combined_post_ids = array();
+    $combined_post_ids = [];
 
     foreach ( $queries as $query ) {
         if ( empty( $query['args'] ) || ! is_array( $query['args'] ) ) {
@@ -771,7 +771,7 @@ function jobus_all_range_field_value(): array {
 
         if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
             foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
+                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
                     // if you get value in search bar
                     $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
                     if ( $widget_name ) {
@@ -800,7 +800,7 @@ function jobus_all_range_field_value(): array {
                         foreach ( $search_widgets as $serial => $input ) {
                             $meta_salary = $meta[ $input ] ?? '';
                             if ( ! empty( $meta_salary ) ) {
-                                $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
+                                $value                           = preg_replace( '/[^0-9-k]/', '', $meta_salary );
                                 $post_ids[ $input ][ $row->ID ] = $value;
                             }
                         }
@@ -904,11 +904,11 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
 
     function jobus_cs_bootstrap_icons( $icons = [] ) {
         // Adding new icons
-        $icons[] = array(
-                'title' => esc_html__( 'Bootstrap Icons', 'jobus' ),
-                'icons' => array(
-                        'bi bi-facebook',
-                        'bi bi-twitter',
+        $icons[] = [
+            'title' => esc_html__( 'Bootstrap Icons', 'jobus' ),
+            'icons' => [
+                'bi bi-facebook',
+                'bi bi-twitter',
                         'bi bi-instagram',
                         'bi bi-linkedin',
                         'bi bi-youtube',
@@ -931,9 +931,9 @@ if ( ! function_exists( 'jobus_cs_bootstrap_icons' ) ) {
                         'bi bi-medium',
                         'bi bi-link',
                         'bi bi-link-45deg',
-                        'bi bi-linkedin',
-                )
-        );
+                'bi bi-linkedin',
+            ]
+        ];
 
         // Move custom icons to the top of the list.
         return array_reverse( $icons );
@@ -975,9 +975,9 @@ function jobus_meta_company_spec_name( $step = 1 ) {
     $company_archive_meta   = $meta_options[ 'company_archive_meta_' . $step ];
     $company_specifications = $meta_options['company_specifications'];
 
-    if ( ! empty ( $company_specifications ) ) {
+    if ( ! empty( $company_specifications ) ) {
         foreach ( $company_specifications as $company_specification ) {
-            if ( $company_archive_meta == $company_specification['meta_key'] ) {
+            if ( $company_archive_meta === $company_specification['meta_key'] ) {
                 return $company_specification['meta_name'];
             }
         }
@@ -1000,9 +1000,9 @@ function jobus_meta_candidate_spec_name( $step = 1 ) {
     $candidate_archive_meta   = $meta_options[ 'candidate_archive_meta_' . $step ];
     $candidate_specifications = $meta_options['candidate_specifications'];
 
-    if ( ! empty ( $candidate_specifications ) ) {
+    if ( ! empty( $candidate_specifications ) ) {
         foreach ( $candidate_specifications as $candidate_specification ) {
-            if ( $candidate_archive_meta == $candidate_specification['meta_key'] ) {
+            if ( $candidate_archive_meta === $candidate_specification['meta_key'] ) {
                 return $candidate_specification['meta_name'];
             }
         }
@@ -1025,7 +1025,7 @@ function jobus_phpmailer_init( $phpmailer ) {
     $phpmailer->isSMTP();
     $phpmailer->Host       = jobus_opt( 'smtp_host' ); // your SMTP server
     $phpmailer->Port       = jobus_opt( 'smtp_port' ); // SSL
-    $phpmailer->CharSet    = "utf-8";
+    $phpmailer->CharSet    = 'utf-8';
     $phpmailer->SMTPAuth   = jobus_opt( 'smtp_authentication' );
     $phpmailer->Username   = jobus_opt( 'smtp_username' );
     $phpmailer->Password   = jobus_opt( 'smtp_password' );
@@ -1035,13 +1035,6 @@ function jobus_phpmailer_init( $phpmailer ) {
 
     return $phpmailer;
 }
-
-if ( ! function_exists( 'jobus_rtl' ) ) {
-    function jobus_rtl(): string {
-        return is_rtl() ? 'true' : 'false';
-    }
-}
-
 
 /**
  * Retrieve a sanitized query parameter with optional nonce verification.
@@ -1107,7 +1100,7 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
         update_user_meta( $user_id, $user_viewed_key, '1' );
     } else {
         $cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
-        if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
+        if ( isset( $_COOKIE[ $cookie_key ] ) && '1' === $_COOKIE[ $cookie_key ] ) {
             return; // Already counted for this guest (browser)
         }
         // Only set cookie if headers haven't been sent yet
