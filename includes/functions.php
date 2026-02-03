@@ -787,6 +787,16 @@ function jobus_all_range_field_value(): array {
         }
 
         if ( ! empty( $search_widgets ) ) {
+
+            // Check cache
+            $cache_key    = 'jobus_range_values';
+            $cached       = get_transient( $cache_key );
+            $current_hash = md5( serialize( $search_widgets ) );
+
+            if ( $cached && is_array( $cached ) && isset( $cached['hash'] ) && $cached['hash'] === $current_hash ) {
+                return $cached['data'];
+            }
+
             // Fetch only necessary data directly from DB
             $results = $wpdb->get_results( "
                 SELECT p.ID, pm.meta_value
@@ -812,11 +822,29 @@ function jobus_all_range_field_value(): array {
                     }
                 }
             }
+
+            // Set cache
+            set_transient( $cache_key, [
+                    'hash' => $current_hash,
+                    'data' => $post_ids
+            ], 24 * HOUR_IN_SECONDS );
         }
     }
 
     return $post_ids;
 }
+
+/**
+ * Clear the range values cache.
+ *
+ * @return void
+ */
+function jobus_clear_range_values_cache() {
+    delete_transient( 'jobus_range_values' );
+}
+
+add_action( 'save_post_jobus_job', 'jobus_clear_range_values_cache' );
+add_action( 'update_option_jobus_opt', 'jobus_clear_range_values_cache' );
 
 
 if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
