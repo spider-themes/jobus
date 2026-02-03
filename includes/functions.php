@@ -25,6 +25,11 @@ function jobus_unlock_themes( ...$themes ): bool {
     $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
     $current_theme  = strtolower( get_template() );
 
+    // Always allow administrators to access locked features
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
     return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
