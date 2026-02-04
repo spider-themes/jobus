@@ -5,3 +5,7 @@
 ## 2026-01-17 - [Hidden Heavy Query in Archive Loader]
 **Learning:** `jobus_all_range_field_value()` fetches and unserializes `jobus_meta_options` for *all* published jobs/candidates whenever range widgets are present in the sidebar, even if no search is actually performed by the user. This causes massive overhead on simple archive page views.
 **Action:** Always check if the user has provided input for a filter before running expensive queries to fetch data for that filter. In `jobus_process_range_filters`, skip the heavy DB call if no range filter inputs are present in `$_GET`.
+
+## 2026-01-17 - [Testing Pitfall: Redeclaring PHP built-ins]
+**Learning:** When writing standalone verification scripts, ensure that standard PHP functions (e.g., `is_array`, `headers_sent`, `setcookie`) are not redeclared as mocks, as this causes fatal errors.
+**Action:** Check if a function exists or is a built-in before mocking it, or rely on namespaced mocks if possible.
