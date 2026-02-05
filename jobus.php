@@ -299,27 +299,27 @@ final class Jobus {
 		if ( $is_unlocked ) {
 			$pages_to_create = [
 				'dashboard'         => [
-					'title'   => 'Dashboard',
+					'title'   => esc_html__( 'Dashboard', 'jobus' ),
 					'slug'    => 'jobus-dashboard',
 					'content' => '[jobus_dashboard]',
 				],
 				'register'          => [
-					'title'   => 'Register Form',
+					'title'   => esc_html__( 'Register Form', 'jobus' ),
 					'slug'    => 'jobus-register',
 					'content' => '<!-- wp:jobus/register-form /-->',
 				],
 				'job_archive'       => [
-					'title'   => 'Job Archive',
+					'title'   => esc_html__( 'Job Archive', 'jobus' ),
 					'slug'    => 'jobus-job-archive',
 					'content' => '[jobus_job_archive]',
 				],
 				'candidate_archive' => [
-					'title'   => 'Candidate Archive',
+					'title'   => esc_html__( 'Candidate Archive', 'jobus' ),
 					'slug'    => 'jobus-candidate-archive',
 					'content' => '[jobus_candidate_archive]',
 				],
 				'company_archive'   => [
-					'title'   => 'Company Archive',
+					'title'   => esc_html__( 'Company Archive', 'jobus' ),
 					'slug'    => 'jobus-company-archive',
 					'content' => '[jobus_company_archive]',
 				],
@@ -328,7 +328,7 @@ final class Jobus {
 			// Free theme only
 			$pages_to_create = [
 				'job_archive' => [
-					'title'   => 'Job Archive',
+					'title'   => esc_html__( 'Job Archive', 'jobus' ),
 					'slug'    => 'jobus-job-archive',
 					'content' => '[jobus_job_archive]',
 				],
