@@ -5,3 +5,7 @@
 ## 2026-01-17 - [Hidden Heavy Query in Archive Loader]
 **Learning:** `jobus_all_range_field_value()` fetches and unserializes `jobus_meta_options` for *all* published jobs/candidates whenever range widgets are present in the sidebar, even if no search is actually performed by the user. This causes massive overhead on simple archive page views.
 **Action:** Always check if the user has provided input for a filter before running expensive queries to fetch data for that filter. In `jobus_process_range_filters`, skip the heavy DB call if no range filter inputs are present in `$_GET`.
+
+## 2026-01-17 - [Transient Caching for Faceted Search Counts]
+**Learning:** `jobus_count_meta_key_usage` runs a direct SQL query for every filter option in the sidebar (N+1 query issue). This causes significant database load on archive pages.
+**Action:** Wrap these expensive count queries in `get_transient` / `set_transient` with a unique key based on the query arguments. This reduces N queries to 0 (after cache warmup) on subsequent page loads.

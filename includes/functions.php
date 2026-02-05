@@ -442,6 +442,15 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         global $wpdb;
 
+        // Create a unique cache key
+        $cache_key = 'jobus_mk_cnt_' . md5( $post_type . '|' . $meta_key . '|' . $meta_value );
+
+        // Check for cached value
+        $cached_count = get_transient( $cache_key );
+        if ( false !== $cached_count ) {
+            return (int) $cached_count;
+        }
+
         // Use direct SQL for performance
         $query = "
             SELECT COUNT(DISTINCT p.ID)
@@ -462,6 +471,9 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
             $meta_key,
             $like_value
         ) );
+
+        // Cache the result for 1 hour
+        set_transient( $cache_key, $count, HOUR_IN_SECONDS );
 
         return (int) $count;
     }
