@@ -18,8 +18,9 @@ if ( $company_query->have_posts() ) {
 $show_job_title = jobus_opt( 'is_job_title', true );
 $show_job_meta  = jobus_opt( 'is_job_meta', true );
 $show_job_share = jobus_opt( 'is_job_share_media', true );
-$show_job_edit  = jobus_opt( 'is_job_edit_button', true );
-$show_job_edit  = $show_job_edit && is_user_logged_in(); // Only show edit button if user is logged in
+$show_job_edit  = jobus_opt( 'is_job_edit_button', false ); // Default false for premium feature
+$show_job_edit  = $show_job_edit && jobus_is_premium(); // Only available with Jobus Pro active license
+$show_job_edit  = $show_job_edit && is_user_logged_in(); // Only show if user is logged in
 
 if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
     ?>
