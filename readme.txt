@@ -121,17 +121,18 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 
 == Screenshots ==
 
-1.  **Job Listing with Sidebar** – Clean and professional job list layout with filters.
-2.  **Candidate Profile** – Detailed candidate resume and profile view.
-3.  **Job Specifications** – Easy-to-manage job attributes and requirements.
-4.  **Job Archive** – Grid and List views for job archives.
-5.  **Job Details Page** – Comprehensive single job page with application form.
-6.  **Plugin Settings** – Intuitive settings panel for full control.
-7.  **Login & Registration** – Secure frontend authentication forms.
-8.  **Job Tabs Element** – Display jobs in a tabbed layout.
-9.  **Company Directory** – Showcase hiring companies elegantly.
-10. **Candidate Directory** – Searchable list of candidate profiles.
-11. **Job Categories** – Browse jobs by industry or category.
+1.  **Jobus Dashboard** – Centralized dashboard to manage jobs, applications, companies, and candidates efficiently.
+2.  **Job Listing with Sidebar** – Clean and professional job list layout with filters.
+3.  **Candidate Profile** – Detailed candidate resume and profile view.
+4.  **Job Specifications** – Easy-to-manage job attributes and requirements.
+5.  **Job Archive** – Grid and List views for job archives.
+6.  **Job Details Page** – Comprehensive single job page with application form.
+7.  **Plugin Settings** – Intuitive settings panel for full control.
+8.  **Login & Registration** – Secure frontend authentication forms.
+9.  **Job Tabs Element** – Display jobs in a tabbed layout.
+10. **Company Directory** – Showcase hiring companies elegantly.
+11. **Candidate Directory** – Searchable list of candidate profiles.
+12. **Job Categories** – Browse jobs by industry or category.
 
 == Changelog ==
 
