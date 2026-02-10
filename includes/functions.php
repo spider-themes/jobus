@@ -56,7 +56,7 @@ if ( ! function_exists( 'jobus_opt' ) ) {
         $value   = $options[ $option ] ?? null;
 
         // Return default if value is null or empty string
-        if ( $value === null || $value === '' ) {
+        if ( null === $value || '' === $value ) {
             return $default;
         }
 
@@ -588,7 +588,7 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
             $company_ids_array = implode( ',', $company_ids_arr );
 
             // if post counts 1 then return a post-link
-            if ( $cached_data['count'] == 1 ) {
+            if ( 1 === $job_posts->found_posts ) {
                 return get_permalink( $company_ids_array );
             } else {
                 return get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array;
@@ -660,7 +660,7 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
 
         if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
             foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
+                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] && isset( $widget['widget_name'] ) ) {
                     $search_widgets[] = $widget['widget_name'];
                 }
             }
@@ -716,7 +716,7 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
  */
 function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [] ) {
     $data_args = [];
-    if ( $data == 'taxonomy' ) {
+    if ( 'taxonomy' === $data ) {
         $data_args = [
                 'post_type'   => $post_type,
                 'post_status' => 'publish',
@@ -792,7 +792,7 @@ function jobus_all_range_field_value(): array {
 
         if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
             foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
+                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
                     // if you get value in search bar
                     $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
                     if ( $widget_name ) {
@@ -1128,7 +1128,7 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
         update_user_meta( $user_id, $user_viewed_key, '1' );
     } else {
         $cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
-        if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
+        if ( isset( $_COOKIE[ $cookie_key ] ) && '1' === $_COOKIE[ $cookie_key ] ) {
             return; // Already counted for this guest (browser)
         }
         // Only set cookie if headers haven't been sent yet
