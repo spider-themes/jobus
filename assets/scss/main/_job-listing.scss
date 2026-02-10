@@ -1,4 +1,4 @@
-.post-type-archive-jobus_job {
+.post-type-archive-jobus_job, .tax-jobus_job_cat {
   .jbs-job-classic {
     padding: 110px 0 140px;
     @media (max-width: 768px) {
@@ -1673,6 +1673,20 @@ input[type="file"]::-webkit-file-upload-button {
             width: 25%;
           }
         }
+      }
+    }
+  }
+}
+
+.elementor-widget-container, .jbs-related-job{
+  .jbs-job-tabs-widget, .jbs-related-job-slider{
+    .job-list-two{
+      a.logo{
+        margin-bottom: 25px;
+      }
+      a.title{
+        margin-top: 10px;
+        display: block;
       }
     }
   }

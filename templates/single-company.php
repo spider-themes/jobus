@@ -153,7 +153,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
             <div class="jbs-col-xxl-9 jbs-col-xl-8 jbs-order-xl-first">
                 <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
 
-                    <div class="company-head jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2 jbs-mb-30">
+                    <div class="company-head jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2 jbs-mb-50">
                         <h1 class="post-title"><?php the_title(); ?></h1>
                         <?php
                         // Check if current user is the company author (employer)

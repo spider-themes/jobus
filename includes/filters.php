@@ -71,17 +71,9 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 
 	// Check for custom redirect settings first
 	if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
-		if ( $user_role === 'jobus_candidate' ) {
-			$page_id = jobus_opt( 'candidate_redirect_page' );
-			if ( $page_id ) {
-				return get_permalink( $page_id );
-			}
-		}
-		if ( $user_role === 'jobus_employer' ) {
-			$page_id = jobus_opt( 'employer_redirect_page' );
-			if ( $page_id ) {
-				return get_permalink( $page_id );
-			}
+		$page_id = jobus_opt( 'dashboard_redirect_page' );
+		if ( $page_id ) {
+			return get_permalink( $page_id );
 		}
 	}
 

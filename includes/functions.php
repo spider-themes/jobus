@@ -25,6 +25,11 @@ function jobus_unlock_themes( ...$themes ): bool {
     $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
     $current_theme  = strtolower( get_template() );
 
+    // Always allow administrators to access locked features
+    if (current_user_can('manage_options')) {
+        return true;
+    }
+
     return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
@@ -542,28 +547,44 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
     function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
-        $args = array(
-                'post_type'      => 'jobus_job',
-                'posts_per_page' => $link ? - 1 : 1,
-                'fields'         => 'ids',
-                'meta_query'     => array(
-                        'relation' => 'AND', // Optional, defaults to "AND
-                        array(
-                                'key'     => 'jobus_meta_options',
-                                'value'   => $company_id,
-                                'compare' => 'LIKE',
-                        ),
-                )
-        );
+        $transient_key = 'jobus_company_job_data_' . $company_id;
+        $cached_data   = get_transient( $transient_key );
 
-        $job_posts = new \WP_Query( $args );
+        // If cache is missing, or if link is requested but IDs are missing (though we always fetch IDs now)
+        if ( false === $cached_data || ( $link && ! isset( $cached_data['ids'] ) ) ) {
+            $args = array(
+                    'post_type'              => 'jobus_job',
+                    'posts_per_page'         => - 1,
+                    'fields'                 => 'ids',
+                    'no_found_rows'          => true,
+                    'update_post_meta_cache' => false,
+                    'update_post_term_cache' => false,
+                    'meta_query'             => array(
+                            'relation' => 'AND', // Optional, defaults to "AND
+                            array(
+                                    'key'     => 'jobus_meta_options',
+                                    'value'   => $company_id,
+                                    'compare' => 'LIKE',
+                            ),
+                    )
+            );
+
+            $job_posts = new \WP_Query( $args );
+
+            $cached_data = array(
+                    'count' => count( $job_posts->posts ),
+                    'ids'   => $job_posts->posts
+            );
+
+            set_transient( $transient_key, $cached_data, HOUR_IN_SECONDS );
+        }
 
         // if a link false, then return only count
         if ( ! $link ) {
-            return $job_posts->found_posts;
+            return $cached_data['count'];
         } else {
 
-            $company_ids_arr   = $job_posts->posts;
+            $company_ids_arr   = $cached_data['ids'];
             $company_ids_array = implode( ',', $company_ids_arr );
 
             // if post counts 1 then return a post-link

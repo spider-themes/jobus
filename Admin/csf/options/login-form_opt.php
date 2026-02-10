@@ -137,27 +137,10 @@ CSF::createSection($settings_prefix, array(
 	    ),
 
 	    array(
-		    'title'         => esc_html__( 'Candidate Dashboard', 'jobus' ),
-		    'subtitle'      => esc_html__( 'Page where candidates land after logging in.', 'jobus' ),
-		    'desc'          => esc_html__( 'Choose the main dashboard page for job seekers.', 'jobus' ),
-		    'id'            => 'candidate_redirect_page',
-		    'type'          => 'select',
-		    'options'       => 'posts',
-		    'query_args'    => array(
-			    'post_type'      => 'page',
-			    'posts_per_page' => -1,
-			    'orderby'        => 'title',
-			    'order'          => 'ASC',
-		    ),
-		    'placeholder'   => esc_html__( 'Select a page...', 'jobus' ),
-		    'dependency'    => array( 'enable_custom_redirects', '==', '1' ),
-	    ),
-
-	    array(
-		    'title'         => esc_html__( 'Employer Dashboard', 'jobus' ),
-		    'subtitle'      => esc_html__( 'Page where employers land after logging in.', 'jobus' ),
-		    'desc'          => esc_html__( 'Choose the main dashboard page for recruiters and hiring managers.', 'jobus' ),
-		    'id'            => 'employer_redirect_page',
+		    'title'         => esc_html__( 'Dashboard Redirect Page', 'jobus' ),
+		    'subtitle'      => esc_html__( 'The page where users land after logging in.', 'jobus' ),
+		    'desc'          => esc_html__( 'Choose the main dashboard page for all users (candidates and employers).', 'jobus' ),
+		    'id'            => 'dashboard_redirect_page',
 		    'type'          => 'select',
 		    'options'       => 'posts',
 		    'query_args'    => array(

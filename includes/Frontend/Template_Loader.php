@@ -17,18 +17,6 @@ class Template_Loader {
 
 	public function __construct() {
 		add_filter( 'template_include', [ $this, 'handle_template_include' ] );
-		add_filter( 'theme_page_templates', [ $this, 'register_dashboard_template' ] );
-	}
-
-	/**
-	 * Registers the dashboard page template in the page template dropdown.
-	 *
-	 * @param array $templates Existing templates.
-	 * @return array Modified templates.
-	 */
-	public function register_dashboard_template( array $templates ): array {
-		$templates['dashboard/page-template-dashboard.php'] = esc_html__( 'Jobus Dashboard', 'jobus' );
-		return $templates;
 	}
 
 
@@ -42,8 +30,20 @@ class Template_Loader {
 
 		// Handle custom dashboard template
 		if ( is_page() ) {
-			$selected_template = get_page_template_slug( get_queried_object_id() );
-			if ( $selected_template === 'dashboard/page-template-dashboard.php' ) {
+			$post_content = get_post_field( 'post_content', get_the_ID() );
+			
+			// Detect dashboard page by shortcode or by selected option
+			$is_dashboard_page = false;
+			if ( has_shortcode( $post_content, 'jobus_dashboard' ) ) {
+				$is_dashboard_page = true;
+			} elseif ( function_exists( 'jobus_opt' ) ) {
+				$dashboard_page_id = jobus_opt( 'dashboard_redirect_page' );
+				if ( $dashboard_page_id && (int) $dashboard_page_id === (int) get_the_ID() ) {
+					$is_dashboard_page = true;
+				}
+			}
+
+			if ( $is_dashboard_page ) {
 				$plugin_template = JOBUS_PATH . '/templates/dashboard/page-template-dashboard.php';
 				if ( file_exists( $plugin_template ) ) {
 					return $plugin_template;

@@ -4,9 +4,9 @@
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
  * Author URI: https://spider-themes.com/
- * Version: 1.5.0
+ * Version: 1.6.0
  * Requires at least: 6.0
- * Tested up to: 6.8
+ * Tested up to: 6.9
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -85,7 +85,7 @@ final class Jobus {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.5.0';
+	const VERSION = '1.6.0';
 
 	/**
 	 * The plugin path
@@ -117,10 +117,13 @@ final class Jobus {
 	 */
 	private function __construct() {
 		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 		$this->define_constants(); // Define constants.
 
 		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
+		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
+		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
 	}
 
 	/**
@@ -230,6 +233,11 @@ final class Jobus {
 	/**
 	 * Do stuff upon plugin activation
 	 */
+	/**
+	 * Create default frontend pages depending on theme / premium status
+	 *
+	 * @return void
+	 */
 	public function activate(): void {
 		// Insert the installation time into the database.
 		$installed = get_option( 'jobus_installed' );
@@ -248,6 +256,24 @@ final class Jobus {
 	}
 
 	/**
+	 * Do stuff upon plugin deactivation
+	 *
+	 * @return void
+	 */
+	public function deactivate(): void {
+		// If premium is NOT active, we might want to clean up.
+		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
+		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
+			$pages = get_option( 'jobus_pages', [] );
+			if ( ! empty( $pages['dashboard'] ) ) {
+				wp_delete_post( $pages['dashboard'], true );
+				unset( $pages['dashboard'] );
+				update_option( 'jobus_pages', $pages );
+			}
+		}
+	}
+
+	/**
 	 * Create default pages used by the plugin (if they don't already exist).
 	 *
 	 * Rules:
@@ -259,7 +285,7 @@ final class Jobus {
 	 *
 	 * @return void
 	 */
-	private function plugin_default_pages_exist(): void {
+	public function plugin_default_pages_exist(): void {
 		// Avoid running in contexts without WP functions available.
 		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
 			return;
@@ -267,7 +293,7 @@ final class Jobus {
 
 		// Determine unlocked state (theme match or premium license).
 		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true );
+		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
 
 		$pages_to_create = [];
 		if ( $is_unlocked ) {
@@ -311,6 +337,19 @@ final class Jobus {
 
 		$created = get_option( 'jobus_pages', [] );
 
+		// Optimization: Check if all desired pages for the current state (free vs pro) are already recorded.
+		$all_exist = true;
+		foreach ( array_keys( $pages_to_create ) as $key ) {
+			if ( empty( $created[ $key ] ) ) {
+				$all_exist = false;
+				break;
+			}
+		}
+
+		if ( $all_exist ) {
+			return;
+		}
+
 		foreach ( $pages_to_create as $key => $args ) {
 			// If a page with the desired slug already exists, record and skip.
 			$existing = get_page_by_path( $args['slug'] );
@@ -349,6 +388,16 @@ final class Jobus {
 		}
 
 		update_option( 'jobus_pages', $created );
+
+		// Automatically set the default dashboard redirect page in settings if not already set.
+		if ( ! empty( $created['dashboard'] ) ) {
+			$jobus_opt = get_option( 'jobus_opt', [] );
+			if ( empty( $jobus_opt['dashboard_redirect_page'] ) ) {
+				$jobus_opt['dashboard_redirect_page'] = $created['dashboard'];
+				$jobus_opt['enable_custom_redirects'] = '1';
+				update_option( 'jobus_opt', $jobus_opt );
+			}
+		}
 	}
 
 

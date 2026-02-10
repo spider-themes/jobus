@@ -26,7 +26,7 @@ class Dashboard {
 	 */
 	public function __construct() {
 		add_shortcode( 'jobus_dashboard', [ $this, 'render_dashboard' ] );
-		
+
 		// Keep old shortcodes working by mapping them to the unified dashboard
 		add_shortcode( 'jobus_candidate_dashboard', [ $this, 'render_dashboard' ] );
 		add_shortcode( 'jobus_employer_dashboard', [ $this, 'render_dashboard' ] );
@@ -46,17 +46,19 @@ class Dashboard {
 		$roles = (array) $user->roles;
 
 		// Check if candidate dashboard is enabled and user is a candidate
-		$options = get_option( 'jobus_opt', [] );
-		$enable_candidate = $options['enable_candidate'] ?? true;
-		
-		if ( $enable_candidate && in_array( 'jobus_candidate', $roles, true ) ) {
+		// administrators are checked after candidates to allow them to test candidate features if they have the role
+		$enable_candidate = function_exists('jobus_opt') ? jobus_opt('enable_candidate', true) : true;
+
+		if ($enable_candidate && in_array('jobus_candidate', $roles, true)) {
 			return Dashboard_Candidate::get_instance()->candidate_dashboard();
-		} 
-		
+		}
+
 		// Check if employer dashboard is enabled and user is an employer or admin
-		$enable_company = $options['enable_company'] ?? true;
-		
-		if ( $enable_company && array_intersect( [ 'jobus_employer', 'administrator' ], $roles ) ) {
+		// Administrators always get access to the employer dashboard as a fallback/management area
+		$enable_company = function_exists('jobus_opt') ? jobus_opt('enable_company', true) : true;
+		$is_admin       = in_array('administrator', $roles, true) || current_user_can('manage_options');
+
+		if (($enable_company && in_array('jobus_employer', $roles, true)) || $is_admin) {
 			return Dashboard_Employer::get_instance()->employer_dashboard();
 		}
 
@@ -78,18 +80,29 @@ class Dashboard {
 			return $url;
 		}
 
-		// Check jobus_pages option first
-		$pages = get_option( 'jobus_pages', [] );
-		if ( ! empty( $pages['dashboard'] ) ) {
-			$url = get_permalink( $pages['dashboard'] );
-			if ( $url ) {
-				set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+		// 1. Check jobus_opt for custom dashboard page first (user preference)
+		$dashboard_id = function_exists('jobus_opt') ? jobus_opt('dashboard_redirect_page') : '';
+		if ($dashboard_id) {
+			$url = get_permalink($dashboard_id);
+			if ($url) {
+				set_transient($cache_key, $url, 12 * HOUR_IN_SECONDS);
 				return $url;
 			}
 		}
 
-		$shortcodes = [ '[jobus_dashboard]' ];
-		
+		// 2. Check jobus_pages option (plugin default)
+		$pages = get_option('jobus_pages', []);
+		if (! empty($pages['dashboard'])) {
+			$url = get_permalink($pages['dashboard']);
+			if ($url) {
+				set_transient($cache_key, $url, 12 * HOUR_IN_SECONDS);
+				return $url;
+			}
+		}
+
+		// 3. Search for shortcodes in pages
+		$shortcodes = ['[jobus_dashboard]'];
+
 		if ( 'jobus_candidate' === $role ) {
 			$shortcodes[] = '[jobus_candidate_dashboard]';
 		} elseif ( 'jobus_employer' === $role ) {
@@ -115,9 +128,7 @@ class Dashboard {
 			}
 		}
 
-		$url = home_url( '/' );
-		set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
-
-		return $url;
+		// Fallback to home URL but don't cache it as "the dashboard"
+		return home_url('/');
 	}
 }
