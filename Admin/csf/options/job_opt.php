@@ -89,6 +89,26 @@ CSF::createSection( $settings_prefix, array(
 ) );
 
 
+// Job Expiration Settings
+CSF::createSection( $settings_prefix, array(
+	'parent' => 'jobus_job',
+	'title'  => esc_html__( 'Job Expiration', 'jobus' ),
+	'id'     => 'job_expiration',
+	'fields' => array(
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Auto Expiration', 'jobus' ),
+		),
+		array(
+			'id'       => 'enable_auto_expire',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Enable Auto-Expire', 'jobus' ),
+			'subtitle' => esc_html__( 'Automatically change job status to "draft" when the "Job Deadline" date has passed.', 'jobus' ),
+			'default'  => false,
+		),
+	)
+) );
+
 // Job Archive Page Layout Settings
 CSF::createSection( $settings_prefix, array(
 	'parent' => 'jobus_job',

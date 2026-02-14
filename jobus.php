@@ -163,6 +163,7 @@ final class Jobus {
 		$enable_company   = $options['enable_company'] ?? true;
 
 		// Classes
+		\jobus\includes\Classes\Cron_Manager::init();
 		new \jobus\includes\Classes\Ajax_Actions();
 
 		// Submission Classes
@@ -253,6 +254,9 @@ final class Jobus {
 
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
+
+		// Register cron events
+		\jobus\includes\Classes\Cron_Manager::register_events();
 	}
 
 	/**
@@ -261,6 +265,9 @@ final class Jobus {
 	 * @return void
 	 */
 	public function deactivate(): void {
+		// Clear cron events
+		\jobus\includes\Classes\Cron_Manager::clear_events();
+
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
