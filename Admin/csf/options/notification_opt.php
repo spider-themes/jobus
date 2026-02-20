@@ -65,5 +65,43 @@ CSF::createSection($settings_prefix, array(
             'subtitle' => esc_html__('Available: {employer_name}, {candidate_name}, {job_title}, {site_name}', 'jobus-pro'),
             'default' => "Dear {employer_name},\n\nYou have received a new application for your job posting: \"{job_title}\".\n\nCandidate Name: {candidate_name}\n\nYou can review this application in your dashboard.\n\nBest regards,\n{site_name}",
         ),
+
+        // Candidate Notification: Approved
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Candidate: Application Approved', 'jobus'),
+        ),
+        array(
+            'id'      => 'candidate_approved_subject',
+            'type'    => 'text',
+            'title'   => esc_html__('Email Subject', 'jobus'),
+            'default' => esc_html__('Congratulations! Application Approved: {job_title}', 'jobus'),
+        ),
+        array(
+            'id'      => 'candidate_approved_body',
+            'type'    => 'wp_editor',
+            'title'   => esc_html__('Message Content', 'jobus'),
+            'subtitle' => esc_html__('Available: {candidate_name}, {job_title}, {site_name}, {status}', 'jobus'),
+            'default' => "Dear {candidate_name},\n\nWe are pleased to inform you that your application for the \"{job_title}\" position has been approved.\n\nOur team will be in touch with you shortly regarding the next steps.\n\nBest regards,\n{site_name}",
+        ),
+
+        // Candidate Notification: Rejected
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Candidate: Application Rejected', 'jobus'),
+        ),
+        array(
+            'id'      => 'candidate_rejected_subject',
+            'type'    => 'text',
+            'title'   => esc_html__('Email Subject', 'jobus'),
+            'default' => esc_html__('Application Update: {job_title}', 'jobus'),
+        ),
+        array(
+            'id'      => 'candidate_rejected_body',
+            'type'    => 'wp_editor',
+            'title'   => esc_html__('Message Content', 'jobus'),
+            'subtitle' => esc_html__('Available: {candidate_name}, {job_title}, {site_name}, {status}', 'jobus'),
+            'default' => "Dear {candidate_name},\n\nThank you for your interest in the \"{job_title}\" position.\n\nAfter careful consideration, we regret to inform you that we will not be moving forward with your application at this time.\n\nWe wish you the best in your job search.\n\nBest regards,\n{site_name}",
+        ),
     )
 ));

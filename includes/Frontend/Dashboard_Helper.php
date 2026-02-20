@@ -273,8 +273,15 @@ class Dashboard_Helper {
 			}
 		}
 
+		// Get old status
+		$old_status = get_post_meta( $application_id, 'application_status', true );
+
 		// Update the application status
 		$updated = update_post_meta( $application_id, 'application_status', $new_status );
+
+		if ( $updated ) {
+			do_action( 'jobus_application_status_changed', $application_id, $old_status, $new_status );
+		}
 
 		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
 			wp_send_json_success( [
