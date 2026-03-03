@@ -273,10 +273,26 @@ class Dashboard_Helper {
 			}
 		}
 
+		// Get old status to check for changes
+		$old_status = get_post_meta( $application_id, 'application_status', true );
+
 		// Update the application status
 		$updated = update_post_meta( $application_id, 'application_status', $new_status );
 
 		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
+
+			// Fire hook if status has actually changed
+			if ( $old_status !== $new_status ) {
+				/**
+				 * Fires after an application's status is updated via employer dashboard.
+				 *
+				 * @param int    $application_id The ID of the application post.
+				 * @param string $old_status     The previous status of the application.
+				 * @param string $new_status     The new status of the application.
+				 */
+				do_action( 'jobus_application_status_changed', $application_id, $old_status, $new_status );
+			}
+
 			wp_send_json_success( [
 				'message' => __( 'Application status updated successfully.', 'jobus' ),
 				'status'  => $new_status,
