@@ -253,6 +253,11 @@ final class Jobus {
 
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
+
+		// Schedule cron events
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
 	}
 
 	/**
@@ -261,6 +266,9 @@ final class Jobus {
 	 * @return void
 	 */
 	public function deactivate(): void {
+		// Clean up cron events
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {

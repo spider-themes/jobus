@@ -127,6 +127,28 @@ class Ajax_Actions {
 			wp_die();
 		}
 
+		// Check for existing application to prevent duplicates
+		$existing_application = get_posts( [
+			'post_type'      => 'jobus_applicant',
+			'post_status'    => 'any',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'meta_query'     => [
+				[
+					'key'     => 'candidate_email',
+					'value'   => $candidate_email,
+				],
+				[
+					'key'     => 'job_applied_for_id',
+					'value'   => $job_application_id,
+				],
+			],
+		] );
+
+		if ( ! empty( $existing_application ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You have already applied for this job.', 'jobus' ) ] );
+		}
+
 		// Save the application as a new post
 		$post_title     = trim( $candidate_fname . ( ! empty( $candidate_lname ) ? ' ' . $candidate_lname : '' ) );
 		$application_id = wp_insert_post( [

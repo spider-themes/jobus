@@ -65,6 +65,63 @@ if ( ! function_exists( 'jobus_opt' ) ) {
 }
 
 /**
+ * Automatically expire jobs past their deadline via cron.
+ *
+ * @since 1.6.0
+ */
+add_action( 'jobus_daily_maintenance', 'jobus_auto_expire_jobs' );
+function jobus_auto_expire_jobs() {
+	// Allow site admins to disable this automation
+	if ( ! apply_filters( 'jobus_enable_auto_expire_jobs', true ) ) {
+		return;
+	}
+
+	$batch_size = apply_filters( 'jobus_cron_batch_size', 50 );
+
+	$expired_jobs = get_posts( [
+		'post_type'      => 'jobus_job',
+		'post_status'    => 'publish',
+		'posts_per_page' => $batch_size, // Process in batches
+		'meta_query'     => [
+			[
+				'key'     => 'job_deadline',
+				'value'   => current_time( 'Y-m-d' ),
+				'compare' => '<',
+				'type'    => 'DATE',
+			],
+		],
+		'fields' => 'ids',
+	] );
+
+	foreach ( $expired_jobs as $job_id ) {
+		wp_update_post( [
+			'ID'          => $job_id,
+			'post_status' => 'draft',
+		] );
+
+		/**
+		 * Fires when a job is auto-expired by the daily cron.
+		 *
+		 * @since 1.6.0
+		 * @param int $job_id The ID of the expired job.
+		 */
+		do_action( 'jobus_job_auto_expired', $job_id );
+	}
+
+	// Re-schedule batch continuation if needed
+	if ( count( $expired_jobs ) === $batch_size ) {
+		wp_schedule_single_event( time() + 60, 'jobus_auto_expire_jobs_batch_continue' );
+	}
+}
+
+/**
+ * Handle batch continuation for auto-expiring jobs.
+ *
+ * @since 1.6.0
+ */
+add_action( 'jobus_auto_expire_jobs_batch_continue', 'jobus_auto_expire_jobs' );
+
+/**
  * Get post meta value
  *
  * @param string $option  Meta key
