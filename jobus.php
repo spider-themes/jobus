@@ -164,6 +164,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Cron_Tasks();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
@@ -251,6 +252,11 @@ final class Jobus {
 			set_transient( 'jobus_activation_redirect', '1', 60 );
 		}
 
+		// Schedule daily maintenance cron
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
+
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
 	}
@@ -263,6 +269,9 @@ final class Jobus {
 	public function deactivate(): void {
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
+		// Clear cron events on deactivation
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
 			$pages = get_option( 'jobus_pages', [] );
 			if ( ! empty( $pages['dashboard'] ) ) {
