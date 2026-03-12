@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Dashboard
  *
@@ -9,11 +10,12 @@
 /**
  * Use namespace to avoid conflict
  */
+
 namespace jobus\includes\Frontend;
 
 use WP_User;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
@@ -27,7 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package Jobus\Includes\Frontend
  */
-class Dashboard_Employer {
+class Dashboard_Employer
+{
 
 	/**
 	 * Instance of this class.
@@ -41,8 +44,9 @@ class Dashboard_Employer {
 	 *
 	 * @return Dashboard_Employer
 	 */
-	public static function get_instance() {
-		if ( null === self::$instance ) {
+	public static function get_instance()
+	{
+		if (null === self::$instance) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -53,9 +57,10 @@ class Dashboard_Employer {
 	 *
 	 * Registers shortcode and dashboard endpoints.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		// Register endpoints for each dashboard section
-		add_action( 'init', [ $this, 'register_dashboard_endpoints' ] );
+		add_action('init', [$this, 'register_dashboard_endpoints']);
 	}
 
 	/**
@@ -64,14 +69,16 @@ class Dashboard_Employer {
 	 * Adds endpoints for each dashboard section (e.g., profile, resume, etc.).
 	 * This enables pretty URLs for each section.
 	 */
-	public function register_dashboard_endpoints(): void {
-		add_rewrite_endpoint( 'dashboard', EP_PAGES );
-		add_rewrite_endpoint( 'profile', EP_PAGES );
-		add_rewrite_endpoint( 'jobs', EP_PAGES );
-		add_rewrite_endpoint( 'submit-job', EP_PAGES );
-		add_rewrite_endpoint( 'applications', EP_PAGES );
-		add_rewrite_endpoint( 'saved-candidate', EP_PAGES );
-		add_rewrite_endpoint( 'change-password', EP_PAGES );
+	public function register_dashboard_endpoints(): void
+	{
+		add_rewrite_endpoint('dashboard', EP_PAGES);
+		add_rewrite_endpoint('profile', EP_PAGES);
+		add_rewrite_endpoint('jobs', EP_PAGES);
+		add_rewrite_endpoint('submit-job', EP_PAGES);
+		add_rewrite_endpoint('applications', EP_PAGES);
+		add_rewrite_endpoint('saved-candidate', EP_PAGES);
+		add_rewrite_endpoint('membership', EP_PAGES);
+		add_rewrite_endpoint('change-password', EP_PAGES);
 	}
 
 	/**
@@ -81,61 +88,70 @@ class Dashboard_Employer {
 	 *
 	 * @return array Navigation items with label and icon.
 	 */
-	public static function get_nav_items(): array {
+	public static function get_nav_items(): array
+	{
 		$nav_items = [];
 
 		// Dashboard
-		if ( jobus_opt( 'employer_menu_dashboard', true ) ) {
+		if (jobus_opt('employer_menu_dashboard', true)) {
 			$nav_items['dashboard'] = [
-				'label' => jobus_opt( 'label_employer_dashboard', esc_html__( 'Dashboard', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_dashboard', esc_html__('Dashboard', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/dashboard.svg'
 			];
 		}
 
 		// My Profile
-		if ( jobus_opt( 'employer_menu_profile', true ) ) {
+		if (jobus_opt('employer_menu_profile', true)) {
 			$nav_items['profile'] = [
-				'label' => jobus_opt( 'label_employer_profile', esc_html__( 'My Profile', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_profile', esc_html__('My Profile', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/profile.svg'
 			];
 		}
 
 		// My Jobs
-		if ( jobus_opt( 'employer_menu_jobs', true ) ) {
+		if (jobus_opt('employer_menu_jobs', true)) {
 			$nav_items['jobs'] = [
-				'label' => jobus_opt( 'label_employer_jobs', esc_html__( 'My Jobs', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_jobs', esc_html__('My Jobs', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/resume.svg'
 			];
 		}
 
 		// Submit Job
-		if ( jobus_opt( 'employer_menu_submit_job', true ) ) {
+		if (jobus_opt('employer_menu_submit_job', true)) {
 			$nav_items['submit-job'] = [
-				'label' => jobus_opt( 'label_employer_submit_job', esc_html__( 'Submit Job', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_submit_job', esc_html__('Submit Job', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/applied_job.svg'
 			];
 		}
 
 		// Applications
-		if ( jobus_opt( 'employer_menu_applications', true ) ) {
+		if (jobus_opt('employer_menu_applications', true)) {
 			$nav_items['applications'] = [
-				'label' => jobus_opt( 'label_employer_applications', esc_html__( 'Applications', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_applications', esc_html__('Applications', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/applications.svg'
 			];
 		}
 
 		// Saved Candidates
-		if ( jobus_opt( 'employer_menu_saved_candidate', true ) ) {
+		if (jobus_opt('employer_menu_saved_candidate', true)) {
 			$nav_items['saved-candidate'] = [
-				'label' => jobus_opt( 'label_employer_saved_candidate', esc_html__( 'Saved Candidate', 'jobus' ) ),
+				'label' => jobus_opt('label_employer_saved_candidate', esc_html__('Saved Candidate', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/saved-job.svg'
 			];
 		}
 
+		// Membership
+		if (jobus_opt('enable_job_packages', false)) {
+			$nav_items['membership'] = [
+				'label' => jobus_opt('label_employer_membership', esc_html__('Membership', 'jobus')),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/save.svg'
+			];
+		}
+
 		// Change Password
-		if ( jobus_opt( 'employer_menu_change_password', true ) ) {
+		if (jobus_opt('employer_menu_change_password', true)) {
 			$nav_items['change-password'] = [
-				'label' => jobus_opt( 'label_change_password', esc_html__( 'Change Password', 'jobus' ) ),
+				'label' => jobus_opt('label_change_password', esc_html__('Change Password', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/password.svg'
 			];
 		}
@@ -150,24 +166,25 @@ class Dashboard_Employer {
 	 *
 	 * @return string Dashboard HTML output.
 	 */
-	public function employer_dashboard(): string {
+	public function employer_dashboard(): string
+	{
 
-		if ( ! is_user_logged_in() ) {
+		if (! is_user_logged_in()) {
 			// Show the login form if user is not logged in
-			return Template_Loader::get_template_part( 'dashboard/login-form' );
+			return Template_Loader::get_template_part('dashboard/login-form');
 		}
 
 		$user = wp_get_current_user();
-		if ( ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+		if (! array_intersect(['jobus_employer', 'administrator'], (array) $user->roles)) {
 			// If not allowed, show the logout form
-			return Template_Loader::get_template_part( 'dashboard/logout-form' );
+			return Template_Loader::get_template_part('dashboard/logout-form');
 		}
 
 		$nav_items = self::get_nav_items();
 
 		$active = 'dashboard';
-		foreach ( $nav_items as $endpoint => $item ) {
-			if ( isset( $GLOBALS['wp_query']->query_vars[ $endpoint ] ) ) {
+		foreach ($nav_items as $endpoint => $item) {
+			if (isset($GLOBALS['wp_query']->query_vars[$endpoint])) {
 				$active = $endpoint;
 				break;
 			}
@@ -178,38 +195,42 @@ class Dashboard_Employer {
 		echo '<div class="dashboard-wrapper">';
 		echo '<aside class="dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-		echo $this->load_sidebar_menu( $active, $nav_items );
+		echo $this->load_sidebar_menu($active, $nav_items);
 		echo '</aside>';
 		echo '<main class="dashboard-body">';
 
-		switch ( $active ) {
+		switch ($active) {
 			case 'profile':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_profile( $user );
+				echo $this->load_profile($user);
 				break;
 			case 'jobs':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_jobs( $user );
+				echo $this->load_jobs($user);
 				break;
 			case 'submit-job':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_submit_job( $user );
+				echo $this->load_submit_job($user);
 				break;
 			case 'applications':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_applications( $user );
+				echo $this->load_applications($user);
 				break;
 			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_saved_candidate( $user );
+				echo $this->load_saved_candidate($user);
+				break;
+			case 'membership':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_membership($user);
 				break;
 			case 'change-password':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_change_password( $user );
+				echo $this->load_change_password($user);
 				break;
 			default:
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
-				echo $this->load_dashboard( $user );
+				echo $this->load_dashboard($user);
 				break;
 		}
 
@@ -226,11 +247,12 @@ class Dashboard_Employer {
 	 *
 	 * @return string Employer dashboard HTML.
 	 */
-	protected function load_dashboard( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/dashboard', [
+	protected function load_dashboard(WP_User $user): string
+	{
+		return Template_Loader::get_template_part('dashboard/employer/dashboard', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
-		] );
+		]);
 	}
 
 	/**
@@ -240,11 +262,12 @@ class Dashboard_Employer {
 	 *
 	 * @return string Change password section HTML.
 	 */
-	protected function load_change_password( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/global/change-password', [
+	protected function load_change_password(WP_User $user): string
+	{
+		return Template_Loader::get_template_part('dashboard/global/change-password', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
-		] );
+		]);
 	}
 
 	/**
@@ -253,27 +276,28 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the applications section.
 	 */
-	protected function load_applications( WP_User $user ): string {
+	protected function load_applications(WP_User $user): string
+	{
 
-        if ( jobus_is_premium() ) {
-            return Template_Loader::get_template_part_pro( 'dashboard/employer/applications', [
-                    'user_id'      => $user->ID,
-                    'username'     => $user->user_login,
-                    'is_dashboard' => false, // Set to false for full view with pagination
-            ] );
-        } else {
-            $image_url = JOBUS_IMG . '/dashboard/pro-features/application-tracking.png';
-            ob_start();
-            ?>
-            <div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Pro Feature - Upgrade required', 'jobus' ); ?>">
-                <div class="pro-image-wrap">
-                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
-                    <span class="pro-badge" aria-hidden="true"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
-                </div>
-            </div>
-            <?php
-            return ob_get_clean();
-        }
+		if (jobus_is_premium()) {
+			return Template_Loader::get_template_part_pro('dashboard/employer/applications', [
+				'user_id'      => $user->ID,
+				'username'     => $user->user_login,
+				'is_dashboard' => false, // Set to false for full view with pagination
+			]);
+		} else {
+			$image_url = JOBUS_IMG . '/dashboard/pro-features/application-tracking.png';
+			ob_start();
+?>
+			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
+				<div class="pro-image-wrap">
+					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
+					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
+				</div>
+			</div>
+		<?php
+			return ob_get_clean();
+		}
 	}
 
 	/**
@@ -282,24 +306,25 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the saved candidates section.
 	 */
-	protected function load_saved_candidate( WP_User $user ): string {
-		if ( jobus_is_premium() ) {
-			return Template_Loader::get_template_part_pro( 'dashboard/employer/saved-candidate', [
+	protected function load_saved_candidate(WP_User $user): string
+	{
+		if (jobus_is_premium()) {
+			return Template_Loader::get_template_part_pro('dashboard/employer/saved-candidate', [
 				'user_id'      => $user->ID,
 				'username'     => $user->user_login,
 				'is_dashboard' => false, // Set to false for full view with pagination
-			] );
+			]);
 		} else {
 			$image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png';
 			ob_start();
-			?>
-            <div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Pro Feature - Upgrade required', 'jobus' ); ?>">
-                <div class="pro-image-wrap">
-                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_attr_e( 'Pro Feature', 'jobus' ); ?>" />
-                    <span class="pro-badge" aria-hidden="true"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
-                </div>
-            </div>
-			<?php
+		?>
+			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
+				<div class="pro-image-wrap">
+					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
+					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
+				</div>
+			</div>
+		<?php
 			return ob_get_clean();
 		}
 	}
@@ -310,12 +335,13 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the jobs section.
 	 */
-	protected function load_jobs( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/jobs', [
+	protected function load_jobs(WP_User $user): string
+	{
+		return Template_Loader::get_template_part('dashboard/employer/jobs', [
 			'user_id'      => $user->ID,
 			'username'     => $user->user_login,
 			'is_dashboard' => false
-		] );
+		]);
 	}
 
 	/**
@@ -324,11 +350,12 @@ class Dashboard_Employer {
 	 * @param WP_User $user The current user (employer).
 	 * @return string HTML for the submit job section.
 	 */
-	protected function load_submit_job( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/submit-job', [
+	protected function load_submit_job(WP_User $user): string
+	{
+		return Template_Loader::get_template_part('dashboard/employer/submit-job', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
-		] );
+		]);
 	}
 
 	/**
@@ -338,11 +365,40 @@ class Dashboard_Employer {
 	 *
 	 * @return string Profile section HTML.
 	 */
-	protected function load_profile( WP_User $user ): string {
-		return Template_Loader::get_template_part( 'dashboard/employer/profile', [
+	protected function load_profile(WP_User $user): string
+	{
+		return Template_Loader::get_template_part('dashboard/employer/profile', [
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
-		] );
+		]);
+	}
+
+	/**
+	 * Loads the membership section for the employer dashboard.
+	 *
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the membership section.
+	 */
+	protected function load_membership(WP_User $user): string
+	{
+		if (jobus_is_premium() && class_exists('WooCommerce') && jobus_opt('enable_job_packages', false)) {
+			return Template_Loader::get_template_part_pro('dashboard/employer/membership', [
+				'user_id'  => $user->ID,
+				'username' => $user->user_login,
+			]);
+		} else {
+			$image_url = JOBUS_IMG . '/dashboard/pro-features/save-candidate.png'; // Use appropriate image
+			ob_start();
+		?>
+			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
+				<div class="pro-image-wrap">
+					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
+					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
+				</div>
+			</div>
+<?php
+			return ob_get_clean();
+		}
 	}
 
 	/**
@@ -355,10 +411,11 @@ class Dashboard_Employer {
 	 *
 	 * @return string Rendered sidebar menu HTML.
 	 */
-	protected function load_sidebar_menu( string $active, array $nav_items = [] ): string {
-		return Template_Loader::get_template_part( 'dashboard/global/sidebar-menu', [
+	protected function load_sidebar_menu(string $active, array $nav_items = []): string
+	{
+		return Template_Loader::get_template_part('dashboard/global/sidebar-menu', [
 			'active_endpoint' => $active,
 			'menu_items'      => $nav_items ?: self::get_nav_items(),
-		] );
+		]);
 	}
 }
