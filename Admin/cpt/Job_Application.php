@@ -79,7 +79,12 @@ class Job_Application {
 				wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
 
 				$new_status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
-				update_post_meta( $post->ID, 'application_status', $new_status );
+				$old_status = get_post_meta( $post->ID, 'application_status', true ) ?: 'pending';
+				$updated    = update_post_meta( $post->ID, 'application_status', $new_status );
+
+				if ( $old_status !== $new_status ) {
+					do_action( 'jobus_application_status_changed', $post->ID, $old_status, $new_status );
+				}
 			}
 
 			// Include the template file
@@ -101,8 +106,16 @@ class Job_Application {
 		
 		// Check if our custom status is set
 		if ( isset( $_POST['application_status'] ) ) {
-			$status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
-			update_post_meta( $post_id, 'application_status', $status );
+			$new_status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
+			$old_status = get_post_meta( $post_id, 'application_status', true ) ?: 'pending';
+
+			// update_post_meta returns true if successful or false if nothing changed,
+			// but we can just update it then check if it changed to fire action.
+			$updated = update_post_meta( $post_id, 'application_status', $new_status );
+
+			if ( $old_status !== $new_status ) {
+				do_action( 'jobus_application_status_changed', $post_id, $old_status, $new_status );
+			}
 		}
 	}
 
