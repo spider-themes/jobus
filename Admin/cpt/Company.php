@@ -73,7 +73,7 @@ class Company {
 			],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
-			'hierarchical'       => false,
+			'hierarchical'       => true,
 			'map_meta_cap'       => true,
 			'taxonomies'         => array( 'jobus_company_cat', 'jobus_company_location' ),
 			'supports'           => [
@@ -87,16 +87,6 @@ class Company {
 			],
 			'menu_position'      => 8,
 			'menu_icon'          => 'dashicons-plus-alt',
-			'capabilities'       => array(
-				'edit_post'              => 'edit_post',
-				'read_post'              => 'read_post',
-				'delete_post'            => 'delete_post',
-				'edit_posts'             => 'edit_posts',
-				'edit_others_posts'      => 'edit_others_posts',
-				'publish_posts'          => 'publish_posts',
-				'read_private_posts'     => 'read_private_posts',
-				'create_posts'           => false // Set too false to remove add new button
-			),
 			'rest_base'          => 'companies',
 		);
 

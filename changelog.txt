@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.7.0 (13 March 2026) =
+New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
+New: Company Profiles – Enabled support for nested company entries and restored standard profile creation for better management
+Improved: User Experience – Streamlined profile settings to make it easier for companies and candidates to manage their presence
+
 = 1.6.0 (06 February 2026) =
 New: Introduced Jobus > Dashboard page inside the WordPress admin area
 Improved: Employer dashboard pagination optimized using WP_Query for faster loading

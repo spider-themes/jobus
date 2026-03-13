@@ -1,7 +1,7 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -135,6 +135,11 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 12. **Job Categories** – Browse jobs by industry or category.
 
 == Changelog ==
+
+= 1.7.0 (13 March 2026) =
+*   Improved: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
+*   Improved: Company Profiles – Enabled support for nested company entries and restored standard profile creation for better management
+*   Improved: User Experience – Streamlined profile settings to make it easier for companies and candidates to manage their presence
 
 = 1.6.0 (06 February 2026) =
 *   New: Introduced Jobus > Dashboard page inside the WordPress admin area
