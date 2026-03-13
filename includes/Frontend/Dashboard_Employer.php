@@ -144,7 +144,7 @@ class Dashboard_Employer
 		if (jobus_opt('enable_job_packages', false)) {
 			$nav_items['membership'] = [
 				'label' => jobus_opt('label_employer_membership', esc_html__('Membership', 'jobus')),
-				'icon'  => JOBUS_IMG . '/dashboard/icons/save.svg'
+				'icon'  => JOBUS_IMG . '/dashboard/icons/membership.svg'
 			];
 		}
 

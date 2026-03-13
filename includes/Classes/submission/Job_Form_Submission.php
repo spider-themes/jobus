@@ -111,7 +111,13 @@ class Job_Form_Submission {
 			if ( (int) $job_post->post_author !== (int) $user->ID ) {
 				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
 			}
-		}
+		} else {
+            // New job submission check
+            $can_post = apply_filters('jobus_user_can_post_job', true, $user->ID, $post_data);
+            if ( ! $can_post ) {
+                wp_die( esc_html__( 'You cannot post a job. Please check your packages or purchase a new one.', 'jobus' ) );
+            }
+        }
 
 		// Save job content (title/content)
 		if ( isset( $post_data['job_title'] ) || isset( $post_data['job_description'] ) ) {
@@ -140,6 +146,13 @@ class Job_Form_Submission {
 				delete_post_thumbnail( $job_id );
 			}
 		}
+
+        // Fire hooks after everything is saved
+        if ( isset( $post_data['job_id'] ) && ! empty( $post_data['job_id'] ) ) {
+            do_action( 'jobus_job_updated', $job_id, $post_data );
+        } else {
+            do_action( 'jobus_job_submitted', $job_id, $post_data );
+        }
 	}
 
 	/**

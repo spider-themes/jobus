@@ -125,6 +125,10 @@ function jobus_restrict_admin_access(): void {
 		return;
 	}
 	
+	if ( current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	
 	$user = wp_get_current_user();
 	$user_roles = (array) $user->roles;
 	

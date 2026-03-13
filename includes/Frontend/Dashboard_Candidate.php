@@ -149,8 +149,7 @@ class Dashboard_Candidate {
 		}
 
 		$user = wp_get_current_user();
-		if ( ! in_array( 'jobus_candidate', (array) $user->roles, true ) ) {
-			// If not a candidate, show the logout form (prevent dashboard access for other roles)
+		if ( ! array_intersect( ['jobus_candidate', 'administrator'], (array) $user->roles ) ) {
 			return Template_Loader::get_template_part( 'dashboard/logout-form' );
 		}
 

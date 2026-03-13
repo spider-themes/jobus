@@ -56,11 +56,24 @@ $submit_button_label = $editing_job ? $update_job_label : $post_job_label;
         </a>
     </div>
 
+<?php
+$is_editing = (bool) $job_id;
+$can_submit = $is_editing ? true : apply_filters( 'jobus_user_can_post_job', true, $user->ID );
+
+if ( ! $can_submit ) {
+    do_action( 'jobus_employer_no_packages_message', $user->ID );
+    echo '</div>'; // close jbs-position-relative
+    return;
+}
+?>
+
     <form action="#" id="employer-submit-job-form" method="post" enctype="multipart/form-data" autocomplete="off">
 
         <?php wp_nonce_field( 'employer_submit_job', 'employer_submit_job_nonce' ); ?>
         <input type="hidden" name="employer_submit_job_form" value="1">
         <input type="hidden" name="job_id" value="<?php echo esc_attr( $job_id ); ?>">
+
+        <?php do_action('jobus_submit_job_form_fields_start', $job_id); ?>
 
         <div class="jbs-bg-white card-box border-20">
             <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>

@@ -159,8 +159,8 @@ final class Jobus {
 
 		// Get feature toggle options
 		$options          = get_option( 'jobus_opt', [] );
-		$enable_candidate = $options['enable_candidate'] ?? true;
-		$enable_company   = $options['enable_company'] ?? true;
+		$enable_candidate = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();

@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../scss/block-frontend.scss","../scss/block-frontend/_testimonials.scss"],"names":[],"mappings":"AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;AAOA;AAAA;AAAA;AAAA;AAAA;AAAA;ACLI;EACE","file":"block-frontend.css"}
+{"version":3,"sources":["../scss/block-frontend/_testimonials.scss"],"names":[],"mappings":"AAEI,gDACE,UAAA","file":"block-frontend.css"}
