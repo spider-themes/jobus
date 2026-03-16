@@ -9269,3 +9269,111 @@ msgstr ""
 #: assets/js/public-ajax-actions.js:218
 msgid "An error occurred. Please try again."
 msgstr ""
+
+#: templates/dashboard/global/messages.php:12
+msgid "Messages"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:13
+msgid "Inbox"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:14
+msgid "Search contacts"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:15
+msgid "Search here.."
+msgstr ""
+
+#: templates/dashboard/global/messages.php:16
+msgid "New Message"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:17
+msgid "All"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:18
+msgid "Read"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:19
+msgid "Unread"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:20
+msgid "Primary"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:21
+msgid "Attachments"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:22
+msgid "Download All"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:23
+msgid "Reply"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:61
+msgid "Previous"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:62
+msgid "of"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:63
+msgid "Next"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:73 templates/dashboard/global/messages.php:135
+msgid "More options"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:130
+msgid "hours ago"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:132
+msgid "Delete"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:147
+msgid "Hello, greetings from Uber. Hope you are doing great. We are approaching you because we need a great and talented account manager."
+msgstr ""
+
+#: templates/dashboard/global/messages.php:148
+msgid "What we need from you to start:"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:150
+msgid "Your CV"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:151
+msgid "Verified ID"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:153
+msgid "After that, we need to redesign our landing page because the current one does not carry any information. If you have any questions, do not hesitate to contact us."
+msgstr ""
+
+#: templates/dashboard/global/messages.php:154
+msgid "Our Telegram"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:155
+msgid "Thank you!"
+msgstr ""
+
+#: templates/dashboard/global/messages.php:188
+msgid "Write your message..."
+msgstr ""
+
+#: templates/dashboard/global/messages.php:193
+msgid "Attach file"
+msgstr ""

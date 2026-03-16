@@ -77,6 +77,7 @@ class Dashboard_Employer
 		add_rewrite_endpoint('submit-job', EP_PAGES);
 		add_rewrite_endpoint('applications', EP_PAGES);
 		add_rewrite_endpoint('saved-candidate', EP_PAGES);
+		add_rewrite_endpoint('messages', EP_PAGES);
 		add_rewrite_endpoint('membership', EP_PAGES);
 		add_rewrite_endpoint('change-password', EP_PAGES);
 	}
@@ -137,6 +138,14 @@ class Dashboard_Employer
 			$nav_items['saved-candidate'] = [
 				'label' => jobus_opt('label_employer_saved_candidate', esc_html__('Saved Candidate', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/saved-job.svg'
+			];
+		}
+
+		// Messages
+		if (jobus_opt('employer_menu_messages', true)) {
+			$nav_items['messages'] = [
+				'label' => jobus_opt('label_messages', esc_html__('Messages', 'jobus')),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/messages.svg'
 			];
 		}
 
@@ -219,6 +228,10 @@ class Dashboard_Employer
 			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_saved_candidate($user);
+				break;
+			case 'messages':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_messages($user);
 				break;
 			case 'membership':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
@@ -371,6 +384,35 @@ class Dashboard_Employer
 			'user_id'  => $user->ID,
 			'username' => $user->user_login,
 		]);
+	}
+
+	/**
+	 * Load the messages section template.
+	 *
+	 * @param WP_User $user The current user.
+	 *
+	 * @return string Messages section HTML.
+	 */
+	protected function load_messages(WP_User $user): string
+	{
+		if (jobus_is_premium()) {
+			return Template_Loader::get_template_part_pro('dashboard/global/messages', [
+				'user_id'  => $user->ID,
+				'username' => $user->user_login,
+			]);
+		} else {
+			$image_url = JOBUS_IMG . '/dashboard/pro-features/messages.png';
+			ob_start();
+		?>
+			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
+				<div class="pro-image-wrap">
+					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
+					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
+				</div>
+			</div>
+		<?php
+			return ob_get_clean();
+		}
 	}
 
 	/**
