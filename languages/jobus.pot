@@ -18,6 +18,346 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: assets\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
+#: Admin/Messaging.php:95
+msgid "Messaging"
+msgstr ""
+
+#: Admin/Messaging.php:150
+msgid "Pro Feature"
+msgstr ""
+
+#: Admin/Messaging.php:153
+msgid "Direct Messaging Between Employers &amp; Candidates"
+msgstr ""
+
+#: Admin/Messaging.php:158
+msgid "Enable seamless, real-time communication on your job board. Let employers reach out to candidates and discuss applications — all within a beautiful, secure inbox."
+msgstr ""
+
+#: Admin/Messaging.php:163
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: Admin/Messaging.php:167
+msgid "30-day money-back guarantee"
+msgstr ""
+
+#: Admin/Messaging.php:179
+msgid "Messages"
+msgstr ""
+
+#: Admin/Messaging.php:189
+msgid "of"
+msgstr ""
+
+#: Admin/Messaging.php:197
+msgid "Inbox"
+msgstr ""
+
+#: Admin/Messaging.php:210
+msgid "Search contacts"
+msgstr ""
+
+#: Admin/Messaging.php:219
+msgid "All"
+msgstr ""
+
+#: Admin/Messaging.php:221
+msgid "Read"
+msgstr ""
+
+#: Admin/Messaging.php:223
+msgid "Unread"
+msgstr ""
+
+#: Admin/Messaging.php:232
+msgid "Jenny Rio."
+msgstr ""
+
+#: Admin/Messaging.php:233
+msgid "Aug 22"
+msgstr ""
+
+#: Admin/Messaging.php:235
+msgid "Work inquiry from google."
+msgstr ""
+
+#: Admin/Messaging.php:236
+msgid "Hello, This is Jenny from google. We'r the largest online platform offer..."
+msgstr ""
+
+#: Admin/Messaging.php:238
+msgid "details.pdf"
+msgstr ""
+
+#: Admin/Messaging.php:247
+msgid "Hasan Islam."
+msgstr ""
+
+#: Admin/Messaging.php:248
+msgid "May 22"
+msgstr ""
+
+#: Admin/Messaging.php:250
+msgid "Account Manager"
+msgstr ""
+
+#: Admin/Messaging.php:251
+msgid "Hello, Greeting from Uber. Hope you doing great. I am approcing to you for.."
+msgstr ""
+
+#: Admin/Messaging.php:265
+msgid "Jannatul Ferdaus."
+msgstr ""
+
+#: Admin/Messaging.php:266
+msgid "Jun 22"
+msgstr ""
+
+#: Admin/Messaging.php:268
+msgid "Product Designer Opportunities"
+msgstr ""
+
+#: Admin/Messaging.php:269
+msgid "Hello, This is Jannat from HuntX. We offer business solution to our client.."
+msgstr ""
+
+#: Admin/Messaging.php:277
+msgid "Jakie Chan"
+msgstr ""
+
+#: Admin/Messaging.php:278
+msgid "NOV 22"
+msgstr ""
+
+#: Admin/Messaging.php:280
+msgid "Hunting Marketing Specialist"
+msgstr ""
+
+#: Admin/Messaging.php:281
+msgid "Hello, We'r the well known Real Estate Inc provide best interior/exterior solut..."
+msgstr ""
+
+#: Admin/Messaging.php:295
+msgid "Payoneer"
+msgstr ""
+
+#: Admin/Messaging.php:301
+msgid "4:45AM (3 hours ago)"
+msgstr ""
+
+#: Admin/Messaging.php:305
+msgid "Delete"
+msgstr ""
+
+#: Admin/Messaging.php:309
+msgid "Reply"
+msgstr ""
+
+#: Admin/Messaging.php:313
+msgid "More"
+msgstr ""
+
+#: Admin/Messaging.php:319
+msgid "Account Manager."
+msgstr ""
+
+#: Admin/Messaging.php:320
+msgid "Hello, Greeting from Uber. Hope you doing great. I am approaching to you as our company need a great &amp; talented account manager."
+msgstr ""
+
+#: Admin/Messaging.php:321
+msgid "What we need from you to start:"
+msgstr ""
+
+#: Admin/Messaging.php:323
+msgid "– Your CV"
+msgstr ""
+
+#: Admin/Messaging.php:324
+msgid "– Verified Gov ID"
+msgstr ""
+
+#: Admin/Messaging.php:326
+msgid "After that we need to redesign our landing page because the current one doesn't carry any information."
+msgstr ""
+
+#: Admin/Messaging.php:329
+msgid "Our Telegram"
+msgstr ""
+
+#: Admin/Messaging.php:331
+msgid "Thank you!"
+msgstr ""
+
+#: Admin/Messaging.php:337
+msgid "2 Attachments"
+msgstr ""
+
+#: Admin/Messaging.php:338
+msgid "Download All"
+msgstr ""
+
+#: Admin/Messaging.php:343
+msgid "project-details.pdf"
+msgstr ""
+
+#: Admin/Messaging.php:350
+msgid "form.pdf"
+msgstr ""
+
+#: Admin/Messaging.php:357
+msgid "To"
+msgstr ""
+
+#: Admin/Messaging.php:361
+msgid "Cc"
+msgstr ""
+
+#: Admin/Messaging.php:362
+msgid "Bcc"
+msgstr ""
+
+#: Admin/Messaging.php:366
+msgid "Hi, Mary Cooper!\n\nThanks for your invitation for the account manager position for your company. I will get back to you soon with all the required documents."
+msgstr ""
+
+#: Admin/Messaging.php:371
+msgid "Attach File"
+msgstr ""
+
+#: Admin/Messaging.php:375
+msgid "Emoji"
+msgstr ""
+
+#: Admin/Messaging.php:379
+msgid "Insert Image"
+msgstr ""
+
+#: Admin/Messaging.php:383
+msgid "Discard"
+msgstr ""
+
+#: Admin/Messaging.php:387
+msgid "Unlock Full Messaging"
+msgstr ""
+
+#: Admin/Messaging.php:396
+msgid "Everything You Need for Seamless Recruitment Communication"
+msgstr ""
+
+#: Admin/Messaging.php:397
+msgid "A complete messaging solution built specifically for job boards"
+msgstr ""
+
+#: Admin/Messaging.php:401
+msgid "Split-Pane Inbox"
+msgstr ""
+
+#: Admin/Messaging.php:402
+msgid "Thread list on the left, full email view on the right — a clean, distraction-free experience users expect."
+msgstr ""
+
+#: Admin/Messaging.php:408
+msgid "Secure &amp; Private"
+msgstr ""
+
+#: Admin/Messaging.php:409
+msgid "Each thread is isolated. Users can only read their own messages — never threads between other parties."
+msgstr ""
+
+#: Admin/Messaging.php:415
+msgid "Real-Time Notifications"
+msgstr ""
+
+#: Admin/Messaging.php:416
+msgid "WordPress Heartbeat API powers live alerts without heavy CPU usage."
+msgstr ""
+
+#: Admin/Messaging.php:422
+msgid "Email Notifications"
+msgstr ""
+
+#: Admin/Messaging.php:423
+msgid "Automatically email users when a new message arrives while they are offline."
+msgstr ""
+
+#: Admin/Messaging.php:429
+msgid "Job Context in Chat"
+msgstr ""
+
+#: Admin/Messaging.php:430
+msgid "Job title and application status shown at the top of every thread — keeping conversations in context."
+msgstr ""
+
+#: Admin/Messaging.php:436
+msgid "Read Receipts"
+msgstr ""
+
+#: Admin/Messaging.php:437
+msgid "Seen / Unread indicators improve response rates and reduce follow-up emails."
+msgstr ""
+
+#: Admin/Messaging.php:443
+msgid "How the Messaging System Works"
+msgstr ""
+
+#: Admin/Messaging.php:444
+msgid "Secure, performant, and easy to use — built on WordPress REST API standards"
+msgstr ""
+
+#: Admin/Messaging.php:448
+msgid "Candidate Applies"
+msgstr ""
+
+#: Admin/Messaging.php:449
+msgid "A unique conversation thread is automatically created and linked to the job application."
+msgstr ""
+
+#: Admin/Messaging.php:455
+msgid "Employer Responds"
+msgstr ""
+
+#: Admin/Messaging.php:456
+msgid "Employers can reply directly from their dashboard using quick-reply templates."
+msgstr ""
+
+#: Admin/Messaging.php:462
+msgid "Real-Time Updates"
+msgstr ""
+
+#: Admin/Messaging.php:463
+msgid "Both parties receive on-screen notifications and email alerts — no third-party services needed."
+msgstr ""
+
+#: Admin/Messaging.php:469
+msgid "Happy Customers"
+msgstr ""
+
+#: Admin/Messaging.php:473
+msgid "Customer Rating"
+msgstr ""
+
+#: Admin/Messaging.php:477
+msgid "Premium Support"
+msgstr ""
+
+#: Admin/Messaging.php:483
+msgid "Ready to Connect Employers &amp; Candidates?"
+msgstr ""
+
+#: Admin/Messaging.php:484
+msgid "Unlock the Messaging system and every other Pro feature with a single upgrade."
+msgstr ""
+
+#: Admin/Messaging.php:488
+msgid "Get Jobus Pro Now"
+msgstr ""
+
+#: Admin/Messaging.php:492
+msgid "Secure payment · Instant access · Cancel anytime"
+msgstr ""
+
 #: Admin/User.php:70
 msgid "Candidate (Jobus)"
 msgstr ""

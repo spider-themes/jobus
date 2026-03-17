@@ -1,0 +1,786 @@
+/**
+ * Messaging Teaser – Inbox-Specific Styles
+ *
+ * This file contains ONLY styles that are unique to the Messaging teaser page.
+ * All shared styles (design tokens, hero, features grid, CTA, buttons, responsive
+ * foundations) are inherited from analytics-teaser.css which is enqueued first
+ * as a WordPress dependency.
+ *
+ * @package Jobus
+ * @since   1.8.0
+ */
+
+/* ── Hero column ratio override (messaging has wider visual) ── */
+.jobus-msg-hero {
+	grid-template-columns: 1fr 1.35fr;
+}
+
+/* ── Wrapper for the inbox preview + unlock overlay ── */
+.jobus-msg-hero-visual {
+	position: relative;
+}
+
+/* ─── INBOX PREVIEW MOCK ────────────────────────────────────────────────── */
+.jobus-msg-inbox-preview {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+	transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+	transition: transform 0.4s ease;
+}
+
+.jobus-msg-inbox-preview:hover {
+	transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+/* Top bar */
+.jobus-msg-topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 18px;
+	border-bottom: 1px solid var(--jobus-gray-200);
+	background: var(--jobus-gray-50);
+}
+
+.jobus-msg-topbar-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.jobus-msg-inbox-title {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--jobus-gray-900);
+}
+
+.jobus-msg-compose-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: var(--jobus-primary);
+	color: #fff;
+	border-radius: 50%;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1;
+	cursor: default;
+}
+
+.jobus-msg-topbar-right {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.jobus-msg-pager-arrow {
+	display: flex;
+	align-items: center;
+	color: var(--jobus-gray-400);
+}
+
+.jobus-msg-pager-arrow .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+}
+
+.jobus-msg-pager-info {
+	font-size: 11px;
+	color: var(--jobus-gray-600);
+}
+
+/* Body: sidebar + open email */
+.jobus-msg-body {
+	display: grid;
+	grid-template-columns: 210px 1fr;
+	max-height: 440px;
+	overflow: hidden;
+}
+
+/* ── Thread sidebar ── */
+.jobus-msg-sidebar {
+	border-right: 1px solid var(--jobus-gray-200);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.jobus-msg-sidebar-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 13px;
+	border-bottom: 1px solid var(--jobus-gray-100);
+}
+
+.jobus-msg-sidebar-title {
+	font-size: 11px;
+	font-weight: 700;
+	color: var(--jobus-gray-800);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.jobus-msg-sidebar-dots {
+	color: var(--jobus-gray-400);
+	font-size: 16px;
+	cursor: default;
+}
+
+/* Search */
+.jobus-msg-search {
+	position: relative;
+	padding: 8px 13px;
+	border-bottom: 1px solid var(--jobus-gray-100);
+}
+
+.jobus-msg-search input {
+	width: 100%;
+	padding: 5px 28px 5px 9px;
+	border: 1px solid var(--jobus-gray-200);
+	border-radius: 6px;
+	font-size: 11px;
+	background: var(--jobus-gray-50);
+	color: var(--jobus-gray-500);
+	box-sizing: border-box;
+	cursor: default;
+}
+
+.jobus-msg-search .dashicons {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 13px;
+	width: 13px;
+	height: 13px;
+	color: var(--jobus-gray-400);
+}
+
+/* Filter chips */
+.jobus-msg-filters {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px 13px;
+	border-bottom: 1px solid var(--jobus-gray-100);
+	flex-wrap: wrap;
+}
+
+.jobus-msg-filter-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 7px;
+	border: 1px solid var(--jobus-gray-200);
+	border-radius: 20px;
+	font-size: 10px;
+	font-weight: 500;
+	color: var(--jobus-gray-600);
+	background: #fff;
+	cursor: default;
+}
+
+.jobus-msg-filter-btn em {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	font-style: normal;
+}
+
+.jobus-msg-filter-active {
+	background: var(--jobus-primary);
+	color: #fff;
+	border-color: var(--jobus-primary);
+}
+
+/* Thread list */
+.jobus-msg-thread-list {
+	flex: 1;
+	overflow-y: auto;
+}
+
+.jobus-msg-thread {
+	border-bottom: 1px solid var(--jobus-gray-100);
+}
+
+.jobus-msg-thread-inner {
+	padding: 9px 13px;
+}
+
+.jobus-msg-thread-read {
+	background: var(--jobus-gray-50);
+}
+
+.jobus-msg-thread-primary {
+	border-left: 3px solid var(--jobus-info);
+}
+
+.jobus-msg-thread-selected {
+	background: rgba(49, 121, 90, 0.07);
+	border-left: 3px solid var(--jobus-primary);
+}
+
+.jobus-msg-thread-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 3px;
+}
+
+.jobus-msg-thread-sender {
+	font-size: 11px;
+	font-weight: 700;
+	color: var(--jobus-gray-900);
+}
+
+.jobus-msg-thread-date {
+	font-size: 9px;
+	color: var(--jobus-gray-400);
+}
+
+.jobus-msg-thread-subject {
+	margin: 0 0 2px;
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--jobus-gray-700);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.jobus-msg-thread-preview {
+	margin: 0;
+	font-size: 10px;
+	color: var(--jobus-gray-500);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 1.4;
+}
+
+.jobus-msg-thread-attachments {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	margin-top: 4px;
+}
+
+.jobus-msg-thread-attachment {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 9px;
+	color: var(--jobus-gray-500);
+	margin-top: 4px;
+}
+
+.jobus-msg-thread-attachment .dashicons {
+	font-size: 11px;
+	width: 11px;
+	height: 11px;
+}
+
+/* ── Open email panel ── */
+.jobus-msg-open-email {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.jobus-msg-divider {
+	border-bottom: 1px solid var(--jobus-gray-200);
+}
+
+.jobus-msg-email-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+}
+
+.jobus-msg-sender-info {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.jobus-msg-sender-avatar {
+	flex-shrink: 0;
+	width: 32px;
+	height: 32px;
+	background: linear-gradient(135deg, var(--jobus-primary) 0%, var(--jobus-primary-light) 100%);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 700;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.jobus-msg-sender-details {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.jobus-msg-sender-name {
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--jobus-gray-900);
+}
+
+.jobus-msg-sender-email {
+	font-size: 10px;
+	color: var(--jobus-gray-500);
+}
+
+.jobus-msg-email-actions {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 5px;
+}
+
+.jobus-msg-email-time {
+	font-size: 10px;
+	color: var(--jobus-gray-500);
+}
+
+.jobus-msg-action-buttons {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.jobus-msg-action-ico {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border: none;
+	background: var(--jobus-gray-50);
+	border-radius: 5px;
+	cursor: default;
+	color: var(--jobus-gray-500);
+}
+
+.jobus-msg-action-ico .dashicons {
+	font-size: 13px;
+	width: 13px;
+	height: 13px;
+}
+
+/* Email body */
+.jobus-msg-email-body {
+	padding: 14px 16px;
+	overflow-y: auto;
+	flex: 1;
+}
+
+.jobus-msg-email-body h3 {
+	margin: 0 0 8px;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--jobus-gray-900);
+}
+
+.jobus-msg-email-body p {
+	margin: 0 0 8px;
+	font-size: 12px;
+	color: var(--jobus-gray-600);
+	line-height: 1.6;
+}
+
+.jobus-msg-email-list {
+	margin: 0 0 8px;
+	padding: 0;
+	list-style: none;
+}
+
+.jobus-msg-email-list li {
+	font-size: 12px;
+	color: var(--jobus-gray-600);
+	padding: 2px 0;
+}
+
+/* Email footer */
+.jobus-msg-email-footer {
+	padding: 12px 16px;
+}
+
+/* Attachments */
+.jobus-msg-attachments {
+	margin-bottom: 12px;
+}
+
+.jobus-msg-attachments-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 7px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--jobus-gray-700);
+}
+
+.jobus-msg-download-all {
+	font-size: 10px;
+	color: var(--jobus-primary);
+	text-decoration: none;
+}
+
+.jobus-msg-attachment-files {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.jobus-msg-attach-file {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	padding: 6px 10px;
+	background: var(--jobus-gray-50);
+	border: 1px solid var(--jobus-gray-200);
+	border-radius: 6px;
+}
+
+.jobus-msg-attach-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: rgba(49, 121, 90, 0.10);
+	border-radius: 50%;
+	color: var(--jobus-primary);
+}
+
+.jobus-msg-attach-icon .dashicons {
+	font-size: 12px;
+	width: 12px;
+	height: 12px;
+}
+
+.jobus-msg-attach-info {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+.jobus-msg-attach-name {
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--jobus-gray-800);
+}
+
+.jobus-msg-attach-size {
+	font-size: 9px;
+	color: var(--jobus-gray-400);
+}
+
+/* Compose box */
+.jobus-msg-compose-box {
+	border: 1px solid var(--jobus-gray-200);
+	border-radius: var(--jobus-radius);
+	overflow: hidden;
+}
+
+.jobus-msg-compose-fields {
+	border-bottom: 1px solid var(--jobus-gray-200);
+}
+
+.jobus-msg-compose-field-row {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--jobus-gray-100);
+}
+
+.jobus-msg-compose-label {
+	flex-shrink: 0;
+	width: 44px;
+	text-align: center;
+	font-size: 11px;
+	color: var(--jobus-gray-500);
+	padding: 7px 0;
+}
+
+.jobus-msg-compose-input {
+	flex: 1;
+	border: none;
+	outline: none;
+	font-size: 11px;
+	color: var(--jobus-gray-700);
+	background: #fff;
+	padding: 7px 8px;
+	cursor: default;
+}
+
+.jobus-msg-compose-toggles {
+	display: flex;
+	gap: 10px;
+	padding: 5px 12px;
+}
+
+.jobus-msg-compose-toggles span {
+	font-size: 10px;
+	color: var(--jobus-primary);
+	cursor: default;
+	font-weight: 500;
+}
+
+.jobus-msg-compose-body {
+	border-bottom: 1px solid var(--jobus-gray-200);
+}
+
+.jobus-msg-compose-textarea {
+	width: 100%;
+	height: 62px;
+	padding: 8px 12px;
+	border: none;
+	outline: none;
+	font-size: 11px;
+	color: var(--jobus-gray-600);
+	background: #fff;
+	resize: none;
+	box-sizing: border-box;
+	font-family: inherit;
+	cursor: default;
+	line-height: 1.6;
+}
+
+.jobus-msg-compose-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 7px 10px;
+	background: var(--jobus-gray-50);
+}
+
+.jobus-msg-compose-tools {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
+.jobus-msg-tool-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border: none;
+	background: none;
+	border-radius: 5px;
+	color: var(--jobus-gray-500);
+	cursor: default;
+}
+
+.jobus-msg-tool-btn .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+}
+
+.jobus-msg-compose-send {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.jobus-msg-delete-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 26px;
+	border: none;
+	background: none;
+	color: var(--jobus-gray-400);
+	cursor: default;
+}
+
+.jobus-msg-delete-btn .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+}
+
+.jobus-msg-reply-btn {
+	padding: 5px 14px;
+	border-radius: 5px;
+	background: var(--jobus-primary);
+	color: #fff !important;
+	font-size: 11px;
+	font-weight: 700;
+	text-decoration: none !important;
+	transition: background 0.2s;
+}
+
+.jobus-msg-reply-btn:hover {
+	background: var(--jobus-primary-dark);
+	color: #fff !important;
+}
+
+/* ── Upgrade overlay ── */
+.jobus-msg-preview-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 85px;
+	background: linear-gradient(to top, rgba(37, 90, 68, 0.96) 0%, rgba(37, 90, 68, 0) 100%);
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 16px;
+	border-radius: 0 0 12px 12px;
+	pointer-events: none;
+}
+
+.jobus-msg-preview-unlock {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 9px 20px;
+	background: #fff;
+	color: var(--jobus-primary) !important;
+	font-size: 12px;
+	font-weight: 700;
+	border-radius: 50px;
+	text-decoration: none !important;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.20);
+	pointer-events: all;
+	transition: all 0.3s ease;
+}
+
+.jobus-msg-preview-unlock .dashicons {
+	font-size: 15px;
+	width: 15px;
+	height: 15px;
+}
+
+.jobus-msg-preview-unlock:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+	color: var(--jobus-primary) !important;
+}
+
+/* ─── HOW IT WORKS (messaging-specific, Analytics has tabs instead) ────── */
+.jobus-msg-workflow-section {
+	margin-bottom: 60px;
+}
+
+.jobus-msg-workflow-steps {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.jobus-msg-step {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	background: #fff;
+	border-radius: var(--jobus-radius);
+	padding: 24px 20px;
+	box-shadow: var(--jobus-shadow-md);
+	border: 1px solid var(--jobus-gray-100);
+	flex: 1;
+	min-width: 180px;
+	max-width: 260px;
+	transition: all 0.3s ease;
+}
+
+.jobus-msg-step:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--jobus-shadow-lg);
+}
+
+.jobus-msg-step-number {
+	flex-shrink: 0;
+	width: 36px;
+	height: 36px;
+	background: linear-gradient(135deg, var(--jobus-primary) 0%, var(--jobus-primary-light) 100%);
+	color: #fff;
+	font-size: 15px;
+	font-weight: 800;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.jobus-msg-step-body h4 {
+	margin: 0 0 6px;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--jobus-gray-900);
+}
+
+.jobus-msg-step-body p {
+	margin: 0;
+	font-size: 13px;
+	color: var(--jobus-gray-500);
+	line-height: 1.6;
+}
+
+.jobus-msg-step-arrow {
+	flex-shrink: 0;
+	color: var(--jobus-gray-300);
+}
+
+.jobus-msg-step-arrow .dashicons {
+	font-size: 26px;
+	width: 26px;
+	height: 26px;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+	.jobus-msg-hero {
+		grid-template-columns: 1fr;
+	}
+
+	.jobus-msg-inbox-preview {
+		transform: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.jobus-msg-body {
+		grid-template-columns: 1fr;
+	}
+
+	.jobus-msg-sidebar {
+		border-right: none;
+		border-bottom: 1px solid var(--jobus-gray-200);
+		max-height: 200px;
+	}
+
+	.jobus-msg-workflow-steps {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.jobus-msg-step-arrow {
+		transform: rotate(90deg);
+		text-align: center;
+	}
+
+	.jobus-msg-step {
+		max-width: 100%;
+	}
+}
