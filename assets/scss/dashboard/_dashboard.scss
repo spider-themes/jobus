@@ -1462,27 +1462,8 @@
           }
         }
 
-        &.read .email-short-preview:before {
-          background: #ff4545;
-        }
-
-        &.primary .email-short-preview:before {
-          background: #52c1ff;
-        }
-
         .email-short-preview {
           padding-left: 24px;
-
-          &:before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            position: absolute;
-            left: 0;
-            top: 7px;
-            background: #3bda84;
-          }
 
           .sender-name {
             font-size: 15px;
@@ -1492,7 +1473,6 @@
 
           .date {
             font-size: 12px;
-            text-transform: uppercase;
             color: rgba($color: #000, $alpha: 0.5);
           }
 
@@ -1905,4 +1885,4 @@ body {
   .dashboard-body {
     padding: 0px;
   }
-}
+}
