@@ -7,6 +7,9 @@
 	background-color: #ffffff;
 	overflow-y: auto;
 	height: 100%;
+	@media (max-width: 480px) {
+		padding: 0 4px 0 0;
+	}
 }
 
 // Chat Message Row
@@ -296,4 +299,47 @@
 	overflow-y: auto;
 	background: #ffffff;
 	max-height: 600px;
+}
+
+// Thread List Classes
+.jbs-chat-thread-avatar {
+	width: 45px;
+	height: 45px;
+	flex-shrink: 0;
+	object-fit: cover;
+}
+
+.jbs-chat-thread-info {
+	min-width: 0;
+}
+
+// Chat Component Initial States
+.jobus-messaging__history {
+	display: none;
+}
+
+.jbs-chat-empty-state {
+	display: none;
+	min-height: 400px;
+	align-items: center;
+	justify-content: center;
+	
+	// Map jQuery's block restoration dynamically back to flex 
+	&[style*="display: block"] {
+		display: flex !important;
+	}
+}
+
+// Chat Header Overrides
+.jbs-chat-header-avatar {
+	width: 50px;
+	height: 50px;
+	flex-shrink: 0;
+	
+	img {
+		width: 100%;
+		height: 100%;
+		display: none;
+		object-fit: cover;
+	}
 }
