@@ -122,6 +122,10 @@ final class Jobus {
 
 		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
+
+		// Scheduled cron events
+		add_action( 'jobus_daily_maintenance', [ $this, 'auto_expire_jobs' ] );
+		add_action( 'jobus_auto_expire_jobs_batch_continue', [ $this, 'auto_expire_jobs' ] );
 		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
 		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
 	}
@@ -148,6 +152,57 @@ final class Jobus {
 			require_once __DIR__ . '/Admin/csf/meta/meta-options-company.php';
 		}
 		require_once __DIR__ . '/Admin/csf/meta/taxonomy.php';
+	}
+
+	/**
+	 * Automatically expires jobs that have passed their deadline.
+	 * Runs on a daily cron schedule and processes in batches to prevent timeouts.
+	 *
+	 * @return void
+	 */
+	public function auto_expire_jobs(): void {
+		if ( ! apply_filters( 'jobus_enable_auto_expire_jobs', true ) ) {
+			return;
+		}
+
+		$expired_jobs = get_posts( [
+			'post_type'      => 'jobus_job',
+			'post_status'    => 'publish',
+			'posts_per_page' => 50, // Process in batches
+			'fields'         => 'ids',
+			'meta_query'     => [
+				[
+					'key'     => 'job_deadline',
+					'value'   => current_time( 'Y-m-d' ),
+					'compare' => '<',
+					'type'    => 'DATE',
+				],
+			],
+		] );
+
+		if ( empty( $expired_jobs ) ) {
+			return;
+		}
+
+		foreach ( $expired_jobs as $job_id ) {
+			wp_update_post( [
+				'ID'          => $job_id,
+				'post_status' => 'draft',
+			] );
+
+			/**
+			 * Fires after a job has been automatically expired via cron.
+			 *
+			 * @since 1.0.0
+			 * @param int $job_id The ID of the expired job.
+			 */
+			do_action( 'jobus_job_auto_expired', $job_id );
+		}
+
+		// If there are more jobs to process, schedule a continuation event
+		if ( count( $expired_jobs ) === 50 ) {
+			wp_schedule_single_event( time() + 60, 'jobus_auto_expire_jobs_batch_continue' );
+		}
 	}
 
 	/**
@@ -253,6 +308,10 @@ final class Jobus {
 			set_transient( 'jobus_activation_redirect', '1', 60 );
 		}
 
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
+
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
 	}
@@ -263,6 +322,9 @@ final class Jobus {
 	 * @return void
 	 */
 	public function deactivate(): void {
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+		wp_clear_scheduled_hook( 'jobus_auto_expire_jobs_batch_continue' );
+
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
