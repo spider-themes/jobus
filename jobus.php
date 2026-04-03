@@ -120,10 +120,11 @@ final class Jobus {
 		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 		$this->define_constants(); // Define constants.
 
-		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+		add_action( 'plugins_loaded', [ $this, 'loaded_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
 		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
+		add_action( 'init', [ $this, 'init_plugin' ], 9999 );
 	}
 
 	/**
@@ -155,7 +156,7 @@ final class Jobus {
 	 *
 	 * @return void
 	 */
-	public function init_plugin(): void {
+	public function loaded_plugin(): void {
 
 		// Get feature toggle options
 		$options          = get_option( 'jobus_opt', [] );
@@ -245,8 +246,19 @@ final class Jobus {
 	}
 
 	/**
-	 * Do stuff upon plugin activation
+	 * Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
+	 *
+	 * @return void
 	 */
+	public function init_plugin(): void {
+
+		// Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
+		if ( get_option( 'jobus_flush_rewrite_rules_flag' ) ) {
+			flush_rewrite_rules( false );
+			delete_option( 'jobus_flush_rewrite_rules_flag' );
+		}
+	}
+
 	/**
 	 * Create default frontend pages depending on theme / premium status
 	 *
@@ -259,6 +271,9 @@ final class Jobus {
 			update_option( 'jobus_installed', time() );
 		}
 		update_option( 'jobus_version', JOBUS_VERSION );
+
+		// Flag to flush rewrite rules safely during init
+		update_option( 'jobus_flush_rewrite_rules_flag', true );
 
 		// Set activation redirect flag only for fresh installs (onboarding not yet complete).
 		if ( ! get_option( 'jobus_onboarding_complete' ) ) {

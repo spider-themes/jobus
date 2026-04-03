@@ -1259,3 +1259,36 @@ if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
         return plugins_url( 'jobus/assets/images/default-company.png' );
     }
 }
+
+/**
+ * Get endpoint URL for dashboard navigation.
+ *
+ * Handles both plain and pretty permalink structures and ensures the 'dashboard'
+ * item points to the main dashboard page.
+ *
+ * @param string $endpoint      The endpoint slug (e.g., 'profile', 'jobs').
+ * @param string $dashboard_url The base URL of the dashboard page.
+ *
+ * @return string The correctly formatted URL for the endpoint.
+ */
+if ( ! function_exists( 'jobus_get_dashboard_endpoint_url' ) ) {
+    function jobus_get_dashboard_endpoint_url( string $endpoint, string $dashboard_url ): string {
+        // Special case: the main dashboard doesn't need an endpoint appended
+        if ( 'dashboard' === $endpoint ) {
+            return $dashboard_url;
+        }
+
+        if ( get_option( 'permalink_structure' ) ) {
+            if ( strpos( $dashboard_url, '?' ) !== false ) {
+                $query_string = '?' . wp_parse_url( $dashboard_url, PHP_URL_QUERY );
+                $dashboard_url = current( explode( '?', $dashboard_url ) );
+            } else {
+                $query_string = '';
+            }
+
+            return trailingslashit( $dashboard_url ) . $endpoint . '/' . $query_string;
+        }
+
+        return add_query_arg( $endpoint, '', $dashboard_url );
+    }
+}
