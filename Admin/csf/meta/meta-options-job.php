@@ -184,4 +184,22 @@ if ( class_exists( 'CSF' ) ) {
 			'id'     => 'jobus_meta_specifications',
 		) );
 	}
+
+	// Job Deadline Metabox
+	CSF::createMetabox( 'job_deadline_meta', array(
+		'title'        => esc_html__( 'Job Deadline', 'jobus' ),
+		'post_type'    => 'jobus_job',
+		'context'      => 'side',
+		'data_type'    => 'unserialize',
+		'fields'       => array(
+			array(
+				'id'       => 'job_deadline',
+				'type'     => 'date',
+				'title'    => esc_html__( 'Application Deadline', 'jobus' ),
+				'settings' => array(
+					'dateFormat' => 'Y-m-d',
+				),
+			),
+		),
+	) );
 }
