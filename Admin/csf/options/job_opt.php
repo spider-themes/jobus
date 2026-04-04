@@ -89,6 +89,30 @@ CSF::createSection( $settings_prefix, array(
 ) );
 
 
+// Job Expiration Settings
+CSF::createSection( $settings_prefix, array(
+	'parent' => 'jobus_job',
+	'title'  => esc_html__( 'Job Expiration', 'jobus' ),
+	'id'     => 'jobus_job_expiration',
+	'fields' => array(
+		array(
+			'id'       => 'enable_auto_expire',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Auto-expire Jobs', 'jobus' ),
+			'subtitle' => esc_html__( 'Automatically set jobs to "Draft" status when they pass their expiration date.', 'jobus' ),
+			'default'  => true,
+		),
+		array(
+			'id'         => 'auto_expire_batch_size',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Batch Size', 'jobus' ),
+			'subtitle'   => esc_html__( 'Number of jobs to process per cron run (prevent timeouts).', 'jobus' ),
+			'default'    => 50,
+			'dependency' => array( 'enable_auto_expire', '==', true ),
+		),
+	)
+) );
+
 // Job Archive Page Layout Settings
 CSF::createSection( $settings_prefix, array(
 	'parent' => 'jobus_job',
