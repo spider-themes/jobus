@@ -164,6 +164,7 @@ final class Jobus {
 		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
 
 		// Classes
+		new \jobus\includes\Classes\Cron_Manager();
 		new \jobus\includes\Classes\Ajax_Actions();
 
 		// Submission Classes
@@ -265,6 +266,8 @@ final class Jobus {
 	 * @return void
 	 */
 	public function activate(): void {
+		\jobus\includes\Classes\Cron_Manager::register_events();
+
 		// Insert the installation time into the database.
 		$installed = get_option( 'jobus_installed' );
 		if ( ! $installed ) {
@@ -290,6 +293,8 @@ final class Jobus {
 	 * @return void
 	 */
 	public function deactivate(): void {
+		\jobus\includes\Classes\Cron_Manager::clear_events();
+
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
