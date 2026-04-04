@@ -158,5 +158,15 @@ class Job
 				'menu_name' => esc_html__('Tags', 'jobus'),
 			)
 		));
+
+		// Register custom post status 'expired'
+		register_post_status( 'expired', array(
+			'label'                     => _x( 'Expired', 'post status', 'jobus' ),
+			'public'                    => true,
+			'exclude_from_search'       => false,
+			'show_in_admin_all_list'    => true,
+			'show_in_admin_status_list' => true,
+			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'jobus' ),
+		) );
 	}
 }
