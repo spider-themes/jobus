@@ -165,6 +165,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Cron_Manager();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
@@ -282,6 +283,9 @@ final class Jobus {
 
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
+
+		// Schedule daily cron
+		\jobus\includes\Classes\Cron_Manager::register_events();
 	}
 
 	/**
@@ -300,6 +304,9 @@ final class Jobus {
 				update_option( 'jobus_pages', $pages );
 			}
 		}
+
+		// Clear scheduled cron
+		\jobus\includes\Classes\Cron_Manager::clear_events();
 	}
 
 	/**
