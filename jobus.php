@@ -165,6 +165,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Cron\Job_Expirator();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
@@ -280,6 +281,10 @@ final class Jobus {
 			set_transient( 'jobus_activation_redirect', '1', 60 );
 		}
 
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
+
 		// Create default frontend pages depending on theme / premium status
 		$this->plugin_default_pages_exist();
 	}
@@ -300,6 +305,9 @@ final class Jobus {
 				update_option( 'jobus_pages', $pages );
 			}
 		}
+
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+		wp_clear_scheduled_hook( 'jobus_auto_expire_jobs_batch_continue' );
 	}
 
 	/**
