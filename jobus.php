@@ -165,6 +165,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Notifications();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
