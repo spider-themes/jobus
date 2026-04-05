@@ -165,6 +165,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Cron\Job_Expirator();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
@@ -265,6 +266,10 @@ final class Jobus {
 	 * @return void
 	 */
 	public function activate(): void {
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
+
 		// Insert the installation time into the database.
 		$installed = get_option( 'jobus_installed' );
 		if ( ! $installed ) {
@@ -290,6 +295,8 @@ final class Jobus {
 	 * @return void
 	 */
 	public function deactivate(): void {
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+
 		// If premium is NOT active, we might want to clean up.
 		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
 		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
