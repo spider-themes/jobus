@@ -54,6 +54,29 @@ class Dashboard {
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_dashboard_menu' ], 5 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
+		add_action( 'current_screen', [ $this, 'suppress_notices' ] );
+	}
+
+	/**
+	 * Remove all admin notices on the Jobus Dashboard page.
+	 *
+	 * Prevents notices from other plugins and WordPress core from
+	 * appearing inside the Jobus dashboard header area.
+	 *
+	 * @return void
+	 */
+	public function suppress_notices(): void {
+		$screen = get_current_screen();
+
+		if ( ! $screen || 'jobus_job_page_' . self::PAGE_SLUG !== $screen->id ) {
+			return;
+		}
+
+		// Remove all admin notices on the Jobus dashboard page.
+		remove_all_actions( 'admin_notices' );
+		remove_all_actions( 'all_admin_notices' );
+		remove_all_actions( 'network_admin_notices' );
+		remove_all_actions( 'user_admin_notices' );
 	}
 
 	/**

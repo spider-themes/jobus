@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.8.0 (06 April 2026) =
+Improved: General enhancements and minor fixes applied across the block for better stability
+
 = 1.7.0 (13 March 2026) =
 New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
 New: Company Profiles – Enabled support for nested company entries and restored standard profile creation for better management
