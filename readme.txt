@@ -139,6 +139,7 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 
 = 1.8.0 (06 April 2026) =
 * Improved: General enhancements and minor fixes applied across the block for better stability
+Updated: Freemius SDK updated to 2.13.1
 
 = 1.7.0 (13 March 2026) =
 * New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
