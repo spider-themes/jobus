@@ -80,12 +80,14 @@ class Dashboard {
 		}
 
 		// 1. Check jobus_opt for custom dashboard page first (user preference)
-		$dashboard_id = function_exists('jobus_opt') ? jobus_opt('dashboard_redirect_page') : '';
-		if ($dashboard_id) {
-			$url = get_permalink($dashboard_id);
-			if ($url) {
-				set_transient($cache_key, $url, 12 * HOUR_IN_SECONDS);
-				return $url;
+		if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
+			$dashboard_id = jobus_opt( 'dashboard_redirect_page' );
+			if ( ! empty( $dashboard_id ) ) {
+				$url = get_permalink( $dashboard_id );
+				if ( $url ) {
+					set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+					return $url;
+				}
 			}
 		}
 

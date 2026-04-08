@@ -113,44 +113,48 @@ CSF::createSection($settings_prefix, array(
             'dependency' => array( 'enable_demo_credentials', '==', true ),
         ),
 
-        // Login Redirect Section
+	    // Login Redirect Section
 	    array(
 		    'type'  => 'heading',
 		    'content' => esc_html__( 'Login Redirects', 'jobus' ),
 	    ),
 
 	    array(
-		    'type'    => 'subheading',
-		    'content' => esc_html__( 'Control where users are redirected after successfully logging in.', 'jobus' ),
-	    ),
-
-	    array(
 		    'title'         => esc_html__( 'Enable Custom Redirects', 'jobus' ),
-		    'subtitle'      => esc_html__( 'Override default WordPress login redirect behavior.', 'jobus' ),
+		    'subtitle'      => esc_html__( 'Override the default role-based redirect behavior.', 'jobus' ),
+		    'desc'          => esc_html__( 'Enable this option if you want to force all users to land on a single, specific page after logging in.', 'jobus' ),
 		    'id'            => 'enable_custom_redirects',
 		    'type'          => 'switcher',
 		    'text_on'       => esc_html__( 'Yes', 'jobus' ),
 		    'text_off'      => esc_html__( 'No', 'jobus' ),
 		    'text_width'    => 80,
 		    'default'       => false,
-		    'class'         => trim($pro_access_class . $active_theme_class)
+		    'class'         => trim($pro_access_class . ' ' . $active_theme_class)
 	    ),
 
 	    array(
-		    'title'         => esc_html__( 'Dashboard Redirect Page', 'jobus' ),
-		    'subtitle'      => esc_html__( 'The page where users land after logging in.', 'jobus' ),
-		    'desc'          => esc_html__( 'Choose the main dashboard page for all users (candidates and employers).', 'jobus' ),
+		    'type'       => 'notice',
+		    'style'      => 'info',
+		    'content'    => esc_html__( 'Currently, candidates and employers are automatically securely redirected to their specific account dashboards. No further action is needed.', 'jobus' ),
+		    'dependency' => array( 'enable_custom_redirects', '==', 'false' ),
+	    ),
+
+	    array(
+		    'type'       => 'notice',
+		    'style'      => 'warning',
+		    'content'    => esc_html__( 'Custom Redirects are active! The default role-based routing is disabled. All users will now be sent to the page selected below.', 'jobus' ),
+		    'dependency' => array( 'enable_custom_redirects', '==', 'true' ),
+	    ),
+
+	    array(
+		    'title'         => esc_html__( 'Global Redirect Page', 'jobus' ),
+		    'subtitle'      => esc_html__( 'Where should users land after they log in?', 'jobus' ),
+		    'desc'          => esc_html__( 'Select the specific page. Note: This completely overrides individual role dashboards.', 'jobus' ),
 		    'id'            => 'dashboard_redirect_page',
 		    'type'          => 'select',
-		    'options'       => 'posts',
-		    'query_args'    => array(
-			    'post_type'      => 'page',
-			    'posts_per_page' => -1,
-			    'orderby'        => 'title',
-			    'order'          => 'ASC',
-		    ),
+		    'options'       => 'pages',
 		    'placeholder'   => esc_html__( 'Select a page...', 'jobus' ),
-		    'dependency'    => array( 'enable_custom_redirects', '==', '1' ),
+		    'dependency'    => array( 'enable_custom_redirects', '==', 'true' ),
 	    ),
 
     )

@@ -151,7 +151,7 @@ class Lifecycle {
 			$jobus_opt = get_option( 'jobus_opt', [] );
 			if ( empty( $jobus_opt['dashboard_redirect_page'] ) ) {
 				$jobus_opt['dashboard_redirect_page'] = $created['dashboard'];
-				$jobus_opt['enable_custom_redirects'] = '1';
+				$jobus_opt['enable_custom_redirects'] = true;
 				update_option( 'jobus_opt', $jobus_opt );
 			}
 		}
