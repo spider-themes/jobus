@@ -30,5 +30,13 @@ CSF::createSection($settings_prefix, array(
 			'desc'    => esc_html__('When disabled, all company profiles, archives, and employer features will be hidden from your site.', 'jobus'),
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
+		array(
+			'id'       => 'delete_data_on_uninstall',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Delete Data on Uninstall', 'jobus' ),
+			'subtitle' => esc_html__( 'Enable this to wipe all Jobus data when the plugin is deleted.', 'jobus' ),
+			'desc'     => esc_html__( 'Warning: This will permanently remove all jobs, candidates, companies, and settings from your database upon uninstallation.', 'jobus' ),
+			'default'  => false,
+		),
 	)
-));
+) );

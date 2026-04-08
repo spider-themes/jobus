@@ -116,14 +116,12 @@ final class Jobus {
 	 * @access public
 	 */
 	private function __construct() {
-		register_activation_hook( __FILE__, [ $this, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
-		$this->define_constants(); // Define constants.
+		$this->define_constants();
 
 		add_action( 'plugins_loaded', [ $this, 'loaded_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
-		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
-		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
+		add_action( 'admin_init', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
+		add_action( 'after_switch_theme', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
 		add_action( 'init', [ $this, 'init_plugin' ], 9999 );
 	}
 
@@ -159,7 +157,7 @@ final class Jobus {
 	public function loaded_plugin(): void {
 
 		// Get feature toggle options
-		$options          = get_option( 'jobus_opt', [] );
+		$options           = get_option( 'jobus_opt', [] );
 		$enable_candidate  = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
 		$enable_company    = ! isset( $options['enable_company'] ) || $options['enable_company'];
 		$enable_job_expiry = ! isset( $options['enable_job_expiry'] ) || $options['enable_job_expiry'];
@@ -268,176 +266,6 @@ final class Jobus {
 		}
 	}
 
-	/**
-	 * Create default frontend pages depending on theme / premium status
-	 *
-	 * @return void
-	 */
-	public function activate(): void {
-		// Insert the installation time into the database.
-		$installed = get_option( 'jobus_installed' );
-		if ( ! $installed ) {
-			update_option( 'jobus_installed', time() );
-		}
-		update_option( 'jobus_version', JOBUS_VERSION );
-
-		// Flag to flush rewrite rules safely during init
-		update_option( 'jobus_flush_rewrite_rules_flag', true );
-
-		// Set activation redirect flag only for fresh installs (onboarding not yet complete).
-		if ( ! get_option( 'jobus_onboarding_complete' ) ) {
-			set_transient( 'jobus_activation_redirect', '1', 60 );
-		}
-
-		// Create default frontend pages depending on theme / premium status
-		$this->plugin_default_pages_exist();
-	}
-
-	/**
-	 * Do stuff upon plugin deactivation
-	 *
-	 * @return void
-	 */
-	public function deactivate(): void {
-		// If premium is NOT active, we might want to clean up.
-		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
-		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
-			$pages = get_option( 'jobus_pages', [] );
-			if ( ! empty( $pages['dashboard'] ) ) {
-				wp_delete_post( $pages['dashboard'], true );
-				unset( $pages['dashboard'] );
-				update_option( 'jobus_pages', $pages );
-			}
-		}
-	}
-
-	/**
-	 * Create default pages used by the plugin (if they don't already exist).
-	 *
-	 * Rules:
-	 * - If the active theme is `jobi` or `jobi-child`, or Freemius indicates a pro license,
-	 *   create Dashboard, Register Form, Job Archive, Candidate Archive and Company Archive.
-	 * - Otherwise (free theme), create only the Job Archive page.
-	 *
-	 * Created page IDs are stored in the `jobus_pages` option as an associative array.
-	 *
-	 * @return void
-	 */
-	public function plugin_default_pages_exist(): void {
-		// Avoid running in contexts without WP functions available.
-		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
-			return;
-		}
-
-		// Determine unlocked state (theme match or premium license).
-		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
-
-		$pages_to_create = [];
-		if ( $is_unlocked ) {
-			$pages_to_create = [
-				'dashboard'         => [
-					'title'   => 'Dashboard',
-					'slug'    => 'jobus-dashboard',
-					'content' => '[jobus_dashboard]',
-				],
-				'register'          => [
-					'title'   => 'Register Form',
-					'slug'    => 'jobus-register',
-					'content' => '<!-- wp:jobus/register-form /-->',
-				],
-				'job_archive'       => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-				'candidate_archive' => [
-					'title'   => 'Candidate Archive',
-					'slug'    => 'jobus-candidate-archive',
-					'content' => '[jobus_candidate_archive]',
-				],
-				'company_archive'   => [
-					'title'   => 'Company Archive',
-					'slug'    => 'jobus-company-archive',
-					'content' => '[jobus_company_archive]',
-				],
-			];
-		} else {
-			// Free theme only
-			$pages_to_create = [
-				'job_archive' => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-			];
-		}
-
-		$created = get_option( 'jobus_pages', [] );
-
-		// Optimization: Check if all desired pages for the current state (free vs pro) are already recorded.
-		$all_exist = true;
-		foreach ( array_keys( $pages_to_create ) as $key ) {
-			if ( empty( $created[ $key ] ) ) {
-				$all_exist = false;
-				break;
-			}
-		}
-
-		if ( $all_exist ) {
-			return;
-		}
-
-		foreach ( $pages_to_create as $key => $args ) {
-			// If a page with the desired slug already exists, record and skip.
-			$existing = get_page_by_path( $args['slug'] );
-			if ( $existing ) {
-				$created[ $key ] = $existing->ID;
-				continue;
-			}
-
-			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
-			if ( ! empty( $args['content'] ) ) {
-				$found = get_posts( [
-					'post_type'      => 'page',
-					'posts_per_page' => 1,
-					'post_status'    => 'publish',
-					'fields'         => 'ids',
-					's'              => trim( strip_tags( $args['content'] ) ),
-				] );
-				if ( ! empty( $found ) ) {
-					$created[ $key ] = $found[0];
-					continue;
-				}
-			}
-			// Keep the stored post title plain text to avoid HTML-escaping issues in themes.
-			$post = [
-				'post_title'   => wp_strip_all_tags( $args['title'] ),
-				'post_name'    => $args['slug'],
-				'post_content' => $args['content'],
-				'post_status'  => 'publish',
-				'post_type'    => 'page',
-			];
-
-			$post_id = wp_insert_post( $post );
-			if ( $post_id && ! is_wp_error( $post_id ) ) {
-				$created[ $key ] = $post_id;
-			}
-		}
-
-		update_option( 'jobus_pages', $created );
-
-		// Automatically set the default dashboard redirect page in settings if not already set.
-		if ( ! empty( $created['dashboard'] ) ) {
-			$jobus_opt = get_option( 'jobus_opt', [] );
-			if ( empty( $jobus_opt['dashboard_redirect_page'] ) ) {
-				$jobus_opt['dashboard_redirect_page'] = $created['dashboard'];
-				$jobus_opt['enable_custom_redirects'] = '1';
-				update_option( 'jobus_opt', $jobus_opt );
-			}
-		}
-	}
-
 
 	/**
 	 * Get the plugin path.
@@ -459,14 +287,20 @@ final class Jobus {
  */
 if ( ! function_exists( 'jobus' ) ) {
 	/**
-	 * Load jobus
+	 * Returns the main Jobus instance
 	 *
-	 * Main instance of jobus
+	 * @return Jobus|false
 	 */
 	function jobus() {
 		return Jobus::init();
 	}
 
-	// Kick of the plugin
+	// Register lifecycle hooks at the file level — the WooCommerce pattern.
+	// Must be called from the plugin's root file scope so WordPress can
+	// correctly resolve the plugin path from the call stack.
+	register_activation_hook( __FILE__, [ \jobus\includes\Classes\Lifecycle::class, 'activate' ] );
+	register_deactivation_hook( __FILE__, [ \jobus\includes\Classes\Lifecycle::class, 'deactivate' ] );
+
+	// Kick off the plugin
 	jobus();
 }
