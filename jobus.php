@@ -160,8 +160,9 @@ final class Jobus {
 
 		// Get feature toggle options
 		$options          = get_option( 'jobus_opt', [] );
-		$enable_candidate = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
-		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
+		$enable_candidate  = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company    = ! isset( $options['enable_company'] ) || $options['enable_company'];
+		$enable_job_expiry = ! isset( $options['enable_job_expiry'] ) || $options['enable_job_expiry'];
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
@@ -173,6 +174,14 @@ final class Jobus {
 		new \jobus\includes\Classes\submission\Employer_Form_Submission();
 		new \jobus\includes\Classes\submission\Job_Form_Submission();
 		new \jobus\includes\Classes\submission\Password_Handler();
+		
+		if ( $enable_job_expiry ) {
+			new \jobus\includes\Classes\Job_Expiry();
+		} else {
+			if ( wp_next_scheduled( 'jobus_daily_job_expiry_check' ) ) {
+				wp_clear_scheduled_hook( 'jobus_daily_job_expiry_check' );
+			}
+		}
 
 		// Admin UI
 		if ( is_admin() ) {

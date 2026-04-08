@@ -10,6 +10,34 @@ CSF::createSection( $settings_prefix, array(
 	'icon'  => 'fa fa-briefcase',
 ) );
 
+// Job Specifications Group
+CSF::createSection( $settings_prefix, array(
+	'title'  => esc_html__( 'General', 'jobus' ),
+	'parent' => 'jobus_job',
+	'id'     => 'job_general_settings',
+	'fields' => array(
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Automated Job Expiry', 'jobus' ),
+		),
+		array(
+			'id'       => 'enable_job_expiry',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Enable Automated Expiry', 'jobus' ),
+			'subtitle' => esc_html__( 'Automatically expire jobs after a certain number of days.', 'jobus' ),
+			'default'  => true,
+		),
+		array(
+			'id'         => 'job_expiry_days',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Expiry Days', 'jobus' ),
+			'subtitle'   => esc_html__( 'Number of days before a new job automatically expires.', 'jobus' ),
+			'default'    => 30,
+			'dependency' => array( 'enable_job_expiry', '==', 'true' ),
+		),
+	)
+) );
+
 // Job Specifications
 CSF::createSection( $settings_prefix, array(
 	'title'  => esc_html__( 'Job Specifications', 'jobus' ),

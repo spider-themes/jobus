@@ -268,6 +268,16 @@ class Job_Form_Submission {
 			}
 			// Link job to company
 			update_post_meta( $job_id, '_jobus_company_id', $company_id );
+
+			// Check CSF options for Auto Expiry
+			$jobus_opt         = get_option( 'jobus_opt', [] );
+			$enable_job_expiry = ! isset( $jobus_opt['enable_job_expiry'] ) || $jobus_opt['enable_job_expiry'];
+
+			if ( $enable_job_expiry ) {
+				$expiry_days = ! empty( $jobus_opt['job_expiry_days'] ) ? (int) $jobus_opt['job_expiry_days'] : 30;
+				update_post_meta( $job_id, '_jobus_expiration_date', current_time( 'Y-m-d H:i:s', strtotime( '+' . $expiry_days . ' days', current_time( 'timestamp' ) ) ) );
+			}
+
 		}
 
 		return $job_id;
