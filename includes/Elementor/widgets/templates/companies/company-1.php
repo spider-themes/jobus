@@ -13,7 +13,10 @@ if (!defined('ABSPATH')) {
             <div class="jbs-col-lg-3 jbs-col-sm-6">
                 <div class="card-style-ten jbs-text-center tran3s wow fadeInUp">
                     <?php the_post_thumbnail('full', ['class' => 'lazy-img jbs-m-auto']); ?>
-                    <h4 class="jbs_widget-title jbs-mt-15 jbs-mb-30"><?php the_title() ?></h4>
+                    <h4 class="jbs_widget-title jbs-mt-15 jbs-mb-30">
+                        <?php the_title(); ?>
+                        <?php echo jobus_get_company_verification_badge( get_the_ID() ); ?>
+                    </h4>
                     <?php if ( !empty( $company_attr_meta_1 ) ) : ?>
                         <p class="jbs-mb-20 jbs-company-meta"><?php echo esc_html($company_attr_meta_1) ?></p>
                     <?php endif; ?>

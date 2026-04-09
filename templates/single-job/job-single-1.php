@@ -31,7 +31,8 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                             }
                             ?>
                     <div class="text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20">
-                        <?php the_title() ?>
+                        <?php the_title(); ?>
+                        <?php echo jobus_get_company_verification_badge( get_the_ID() ); ?>
                     </div>
                     <?php
                             // Website button logic

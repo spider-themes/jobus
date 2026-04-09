@@ -46,7 +46,7 @@
 *   **Free vs Pro Decision:** Split 
 *   **Reason (User + Market + Profit):** Basic chat hooks engagement; Pro keeps advanced routing and attachments.
 
-#### F02.2 – Automated Job Expiry
+#### F02.2 – Automated Job Expiry - Done ***
 *   **Status:** Misplaced
 *   **Current Behavior:** Expiry scripts restricted to Pro solely.
 *   **Issue / Gap:** Free boards fill with stale, outdated jobs, ruining candidate trust.
@@ -61,8 +61,8 @@
 *   **Required Action:** Provide frontend "Total Job Views" metric in Free.
 *   **Free vs Pro Decision:** Split
 *   **Reason (User + Market + Profit):** Motivates Free users to upgrade for advanced funnel tracking.
-
-#### F02.4 – Company Verification & Trust Badges
+ 
+#### F02.4 – Company Verification & Trust Badges - Done ***
 *   **Status:** Missing
 *   **Current Behavior:** No differentiation between standard and reputable companies.
 *   **Issue / Gap:** Platform is susceptible to scams, hurting candidate trust.

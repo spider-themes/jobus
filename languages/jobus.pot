@@ -9717,3 +9717,7 @@ msgstr ""
 #: templates/dashboard/global/messages.php:193
 msgid "Attach file"
 msgstr ""
+
+#: includes/functions.php:97
+msgid "Verified Company"
+msgstr ""

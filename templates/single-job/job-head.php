@@ -34,6 +34,11 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
                         <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
                             <?php echo esc_html( $company_name ); ?>
                         </a>
+                        <?php
+                        if ( isset( $company_query->posts[0] ) ) {
+                            echo jobus_get_company_verification_badge( $company_query->posts[0]->ID );
+                        }
+                        ?>
                     </div>
                 <?php endif; ?>
                 <?php if ( $show_job_title ) : ?>

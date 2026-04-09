@@ -80,6 +80,26 @@ if ( ! function_exists( 'jobus_meta' ) ) {
     }
 }
 
+if ( ! function_exists( 'jobus_get_company_verification_badge' ) ) {
+    /**
+     * Get the verification badge for a company if verified.
+     *
+     * @param int|string $company_id The company ID.
+     *
+     * @return string The verification badge HTML.
+     */
+    function jobus_get_company_verification_badge( $company_id ): string {
+        if ( ! $company_id ) {
+            return '';
+        }
+        $meta = get_post_meta( $company_id, 'jobus_meta_company_options', true );
+        if ( ! empty( $meta['company_verified'] ) ) {
+            return '<span class="company-verification-badge jbs-ms-1" title="' . esc_attr__( 'Verified Company', 'jobus' ) . '"><i class="bi bi-patch-check-fill"></i></span>';
+        }
+        return '';
+    }
+}
+
 /**
  * Load custom template file
  *

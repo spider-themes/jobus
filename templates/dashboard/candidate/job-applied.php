@@ -112,6 +112,7 @@ $applications = new \WP_Query( $args );
                                             }
                                             ?>
                                             <span class="jbs-fw-500"><?php echo esc_html( $company_name ); ?></span>
+                                            <?php echo jobus_get_company_verification_badge( $company_id ); ?>
                                         </a>
                                         <?php
                                     } else {
