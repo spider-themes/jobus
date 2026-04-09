@@ -64,6 +64,25 @@ if ( $candidate_cv_url ) {
                     <span> <?php echo esc_html( $candidate_fname . ' ' . $candidate_lname ) ?> </span>
                 </li>
 			<?php endif; ?>
+			
+			<?php 
+			// Determine Account Type
+			$is_guest = get_post_meta( $post->ID, 'jobus_is_guest_application', true ) === 'yes'; 
+			?>
+			<li>
+				<label> <?php esc_html_e( 'Account Type', 'jobus' ); ?> </label>
+				<span> 
+					<?php if ( $is_guest ) : ?>
+						<span class="jbs-badge jbs-badge-secondary">
+							<?php esc_html_e( 'Guest (Auto-Registered)', 'jobus' ); ?>
+						</span>
+					<?php else : ?>
+						<span class="jbs-badge jbs-bg-primary jbs-text-white">
+							<?php esc_html_e( 'Registered User', 'jobus' ); ?>
+						</span>
+					<?php endif; ?>
+				</span>
+			</li>
 			<?php if ( ! empty( $candidate_phone ) ) : ?>
                 <li>
                     <label><?php esc_html_e( 'Phone', 'jobus' ); ?></label>

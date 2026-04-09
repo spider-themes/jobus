@@ -203,8 +203,16 @@ class Job_Application {
 					if ( $author ) {
 						echo esc_html( $author->display_name );
 					} else {
-						echo '—';
+						echo esc_html__( 'N/A', 'jobus' );
 					}
+				} else {
+					echo esc_html__( 'N/A', 'jobus' );
+				}
+				$is_guest = get_post_meta( $post_id, 'jobus_is_guest_application', true ) === 'yes';
+				if ( $is_guest ) {
+					echo '<br><span class="jbs-badge jbs-badge-secondary">' . esc_html__( 'Guest (Auto-Registered)', 'jobus' ) . '</span>';
+				} else {
+					echo '<br><span class="jbs-badge jbs-bg-primary jbs-text-white">' . esc_html__( 'Registered User', 'jobus' ) . '</span>';
 				}
 				break;
             case 'job_status':

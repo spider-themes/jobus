@@ -109,7 +109,8 @@
                     contentType: false,
                     success: function (response) {
                         if (response.success) {
-                            $('#applicationSuccessMessage').fadeIn().delay(3000).fadeOut();
+                            $('#jbs-apply-form-panel').hide();
+                            $('#applicationSuccessMessage').fadeIn();
                             jobApplication[0].reset();
                         } else {
                             alert(response.data && response.data.message ? response.data.message : 'Submission failed.');
