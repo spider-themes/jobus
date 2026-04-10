@@ -60,7 +60,7 @@
 
 // twenty twenty five Theme Compatibility
 .wp-theme-twentytwentyfive {
-  .candidates-profile {
+  .jbs-candidates-profile {
 
     .wp-block-heading,
     .title {
@@ -339,7 +339,7 @@ body {
 
 
 // GeneratePress Theme Compatibility
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jbs-job-details-two, .jbs-job-details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
+.grid-container.hfeed:has(.jbs-company-profiles, .jbs-candidates-profile, .job-listing-three, .jbs-job-details-two, .jbs-job-details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
   max-width: 100%;
 
   .site-content {
@@ -438,7 +438,7 @@ body {
 
 // jobi Theme Compatibility
 .wp-theme-jobi {
-    .job-details,.jbs-job-details,.candidates-profile {
+    .job-details,.jbs-job-details,.jbs-candidates-profile {
         padding-top: 180px !important;
     }
     .dashboard-body{

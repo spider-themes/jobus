@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         if ( ! empty( $settings['view_all_btn_url'] ) ) {
             ?>
             <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                <div class="jbs-card-item bg-color tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="jbs-card-item jbs-bg-color tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ) ?></div>

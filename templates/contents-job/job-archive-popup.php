@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<section class="jbs jobus-job-popup job-listing-three jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
+<section class="jbs jbs-job-popup job-listing-three jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">
