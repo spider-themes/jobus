@@ -88,7 +88,7 @@ class Ajax_Actions {
 		$headers[] = "Reply-To: $sender_email";
 
 		// Send email
-		$success = wp_mail( (string) $candidate_mail, (string) $subject, (string) $message, $headers );
+		$success = \jobus\includes\Classes\Emails\Mailer::send( (string) $candidate_mail, (string) $subject, (string) $message, $headers );
 
 		if ( $success ) {
 			wp_send_json_success( esc_html__( 'Your message has been sent successfully!', 'jobus' ) ); // This will be displayed in green
@@ -244,7 +244,7 @@ class Ajax_Actions {
 							$candidate_email,
 							$site_name
 						);
-						wp_mail( $employer_email, $subject, $message );
+						\jobus\includes\Classes\Emails\Mailer::send( $employer_email, $subject, $message );
 					}
 				}
 			}

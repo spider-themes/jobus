@@ -12,13 +12,13 @@
 *   **Free vs Pro Decision:** Keep in Free
 *   **Reason (User + Market + Profit):** Radius searching is a baseline expectation. A job board without it fails core usability for Free users.
 
-#### F01.2 – Guest Application Pipeline
+#### F01.2 – Guest Application Pipeline - Done ***
 *   **Status:** Missing
 *   **Current Behavior:** Candidates are forced to register completely before applying.
 *   **Issue / Gap:** High bounce rates; blocks spontaneous applications.
 *   **Required Action:** Provide a guest apply pipeline.
 *   **Free vs Pro Decision:** Keep in Free
-*   **Reason (User + Market + Profit):** Essential for user adoption and initial traffic generation.
+*   **Reason (User + Market + Profit):** Essential for user adoption and initial traffic generation.    
 
 #### F01.3 – External Application URL Redirects
 *   **Status:** Missing
