@@ -102,12 +102,13 @@ jobus/
 │   ├── dashboard/         # Dashboard templates
 │   └── loop/              # Loop templates
 ├── assets/                # Static assets
-│   ├── css/              # Compiled CSS
-│   ├── scss/             # SCSS source files
 │   ├── js/               # JavaScript files
 │   └── images/           # Image assets
-├── build/                 # Compiled Gutenberg blocks
+├── build/                 # Generated assets and block builds
+│   └── css/              # Generated frontend/admin CSS
 ├── src/                   # Gutenberg block source files
+├── assets/                # Static assets and SCSS sources
+│   ├── scss/             # Tracked SCSS source files
 ├── languages/             # Translation files
 └── vendor/                # Composer dependencies
 ```
@@ -137,8 +138,7 @@ npm install
 | Command         | Description                               |
 | --------------- | ----------------------------------------- |
 | `npm run start` | Start development mode with hot reloading |
-| `npm run build` | Build production-ready assets             |
-| `npm run sass`  | Watch and compile SCSS files              |
+| `npm run build` | Build Gutenberg blocks and generated CSS  |
 
 ### Building Blocks
 

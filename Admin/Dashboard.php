@@ -110,7 +110,7 @@ class Dashboard {
 		// Enqueue dashboard styles.
 		wp_enqueue_style(
 			'jobus-admin-dashboard',
-			JOBUS_CSS . '/admin-dashboard.css',
+			JOBUS_BUILD_CSS . '/admin-dashboard.css',
 			[],
 			JOBUS_VERSION
 		);

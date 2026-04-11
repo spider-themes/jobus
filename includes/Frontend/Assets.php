@@ -25,16 +25,16 @@ class Assets {
 		wp_register_style( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.css' ), [], JOBUS_VERSION );
 
 		// Enqueue Style's
-		wp_enqueue_style( 'jobus-dark-mode', esc_url( JOBUS_CSS . '/dark-mode.css' ), [], JOBUS_VERSION );
-		wp_enqueue_style( 'jobus-framework', esc_url( JOBUS_CSS . '/jbs-framework.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jobus-dark-mode', esc_url( JOBUS_BUILD_CSS . '/dark-mode.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jobus-framework', esc_url( JOBUS_BUILD_CSS . '/jbs-framework.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'jbs-nice-select', esc_url( JOBUS_VEND . '/jbs-nice-select/jbs-nice-select.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'bootstrap-icons', esc_url( JOBUS_VEND . '/bootstrap-icons/font.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick', esc_url( JOBUS_VEND . '/slick/slick.css' ), [], JOBUS_VERSION );
 		wp_enqueue_style( 'slick-theme', esc_url( JOBUS_VEND . '/slick/slick-theme.css' ), [], JOBUS_VERSION );
-		wp_enqueue_style( 'jobus-main', esc_url( JOBUS_CSS . '/main.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jobus-main', esc_url( JOBUS_BUILD_CSS . '/main.css' ), [], JOBUS_VERSION );
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( 'jobus-main-rtl', esc_url( JOBUS_CSS . '/main-rtl.css' ), [], JOBUS_VERSION );
+			wp_enqueue_style( 'jobus-main-rtl', esc_url( JOBUS_BUILD_CSS . '/main-rtl.css' ), [], JOBUS_VERSION );
 		}
 
 		// Add color scheme CSS variables
@@ -101,7 +101,7 @@ class Assets {
 		          || $has_unified_dashboard )
 		) {
 			// Style's for candidate dashboard
-			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
+			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_BUILD_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
 
 			// Enqueue media uploader for frontend dashboard
 			wp_enqueue_media();

@@ -18,6 +18,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Show an admin notice when local/plugin dependencies are missing.
+ *
+ * @param string $message Notice message.
+ * @return void
+ */
+function jobus_missing_dependency_notice( $message ) {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	add_action(
+		'admin_notices',
+		static function () use ( $message ) {
+			printf(
+				'<div class="notice notice-error"><p>%s</p></div>',
+				esc_html( $message )
+			);
+		}
+	);
+}
+
+/**
+ * Load required plugin dependencies.
+ *
+ * @return bool
+ */
+function jobus_load_dependencies() {
+	$autoload_file = __DIR__ . '/vendor/autoload.php';
+
+	if ( ! file_exists( $autoload_file ) ) {
+		jobus_missing_dependency_notice( 'Jobus dependencies are missing. Run composer install to restore the Composer vendor directory.' );
+		return false;
+	}
+
+	require_once $autoload_file;
+
+	return true;
+}
+
+if ( ! jobus_load_dependencies() ) {
+	return;
+}
+
 if ( ! function_exists( 'jobus_fs' ) ) {
 	/**
 	 * Create a helper function for easy SDK access.
@@ -29,7 +73,13 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 
 		if ( ! isset( $jobus_fs ) ) {
 			// Include Freemius SDK.
-			require_once dirname( __FILE__ ) . '/vendor/fs/start.php';
+			$freemius_start = dirname( __FILE__ ) . '/vendor/freemius/wordpress-sdk/start.php';
+			if ( ! file_exists( $freemius_start ) ) {
+				jobus_missing_dependency_notice( 'Jobus Freemius SDK is missing. Run composer install to restore the required dependencies.' );
+				return null;
+			}
+
+			require_once $freemius_start;
 
 			$jobus_fs = fs_dynamic_init( [
 				'id'                  => '20775',
@@ -63,14 +113,11 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 	}
 
 	// Init Freemius.
-	jobus_fs();
-	// Signal that SDK was initiated.
-	do_action( 'jobus_fs_loaded' );
+	if ( jobus_fs() ) {
+		// Signal that SDK was initiated.
+		do_action( 'jobus_fs_loaded' );
+	}
 }
-
-
-// Autoload vendors
-require_once __DIR__ . '/vendor/autoload.php';
 
 
 /**
@@ -131,7 +178,13 @@ final class Jobus {
 	 * @return void
 	 */
 	public function load_csf_files(): void {
-		require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+		$csf_bootstrap = __DIR__ . '/lib/csf/codestar-framework.php';
+		if ( ! file_exists( $csf_bootstrap ) ) {
+			jobus_missing_dependency_notice( 'Jobus Codestar Framework files are missing from lib/csf.' );
+			return;
+		}
+
+		require_once $csf_bootstrap;
 		require_once __DIR__ . '/Admin/csf/options/settings.php';
 
 		// Get feature toggle options
@@ -246,6 +299,7 @@ final class Jobus {
 		define( 'JOBUS_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
 		define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
+		define( 'JOBUS_BUILD_CSS', JOBUS_URL . '/build/css' );
 		define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
 		define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
 		define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
