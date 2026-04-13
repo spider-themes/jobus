@@ -228,7 +228,7 @@
   margin-top: 24px;
 
   &:before {
-    content: url(../images/icon/icon_07.svg);
+    /* content: url(../images/icon/icon_07.svg); */
     position: absolute;
     left: 0;
     top: 0;
@@ -271,7 +271,7 @@
 }
 
 .accordion-style-one .accordion-button::after {
-  content: url(../images/icon/icon_20.svg);
+  /* content: url(../images/icon/icon_20.svg); */
   background-image: none;
   width: auto;
   height: auto;
@@ -286,7 +286,7 @@
 }
 
 .accordion-style-one.color-two .accordion-button::after {
-  content: url(../images/icon/icon_40.svg);
+  /* content: url(../images/icon/icon_40.svg); */
 }
 
 .accordion-style-one.color-two .accordion-item {

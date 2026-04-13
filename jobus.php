@@ -241,6 +241,7 @@ final class Jobus {
 			new \jobus\Admin\User();
 			new \jobus\Admin\Onboarding();
 			new \jobus\Admin\Dashboard();
+			new \jobus\Admin\Demo_Importer();
 			\jobus\Admin\Analytics::get_instance();
 			\jobus\Admin\Messaging::get_instance();
 		}
