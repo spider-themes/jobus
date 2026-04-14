@@ -23,8 +23,9 @@ $redirect_url     = ! empty($redirect_url) ? esc_url_raw($redirect_url) : '';
 $jobus_error = ! empty($_GET['jobus_error']) ? sanitize_text_field(urldecode($_GET['jobus_error'])) : '';
 $jobus_tab   = ! empty($_GET['jobus_tab']) ? sanitize_text_field($_GET['jobus_tab']) : 'candidate';
 $is_employer_tab = ($jobus_tab === 'employer');
+$align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
 ?>
-<section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
+<section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80 <?php echo esc_attr($align_class); ?>">
     <div class="user-data-form">
 
         <div class="jbs-text-center">

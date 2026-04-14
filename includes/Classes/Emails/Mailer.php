@@ -24,6 +24,9 @@ class Mailer {
 	 * @return bool Whether the email contents were sent successfully.
 	 */
 	public static function send( $to, $subject, $message, $headers = '', $attachments = [] ) {
+		// Ensure subject is a string to avoid PHPMailer deprecation warnings on PHP 8.1+
+		$subject = (string) $subject;
+
 		// Retrieve Jobus opt settings.
 		$options = get_option( 'jobus_opt', [] );
 		
