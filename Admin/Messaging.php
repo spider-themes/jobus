@@ -3,8 +3,7 @@
  * Messaging Teaser Page for Free Users
  *
  * Displays a pro feature presentation to encourage free users to upgrade.
- * Reuses the same CSS design system as Analytics.php via analytics-teaser.css.
- * Only messaging-specific inbox preview styles live in messaging-teaser.css.
+ * All styles are loaded from a single dedicated file (messaging-teaser.css).
  *
  * @package Jobus
  * @subpackage Admin
@@ -20,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Messaging
  *
- * Manages the Messaging teaser page in the admin for free users.
- * Follows the same singleton pattern as Analytics.php.
+ * Manages the Messaging page in the admin for both free users (teaser)
+ * and Pro users (unlocks the messaging UI).
  */
 class Messaging {
 
@@ -78,19 +77,18 @@ class Messaging {
 
 	/**
 	 * Register the Messaging submenu under the Jobus menu.
-	 * Skipped automatically when the Pro plugin registers its own real Messaging page.
 	 *
 	 * @return void
 	 */
 	public function register_messaging_menu() {
-		if ( $this->is_pro_messaging_active() ) {
-			return;
-		}
+		$menu_title = $this->is_pro_messaging_active() 
+			? __( 'Messaging', 'jobus' ) 
+			: __( 'Messaging', 'jobus' ) . ' <span class="jbs-pro-badge">Pro</span>';
 
 		$this->page_hook = add_submenu_page(
 			'edit.php?post_type=jobus_job',
 			__( 'Messaging', 'jobus' ),
-			__( 'Messaging', 'jobus' ) . ' <span class="jobus-pro-badge">Pro</span>',
+			$menu_title,
 			'manage_options',
 			'jobus-messaging',
 			array( $this, 'render_messaging_page' )
@@ -98,19 +96,16 @@ class Messaging {
 	}
 
 	/**
-	 * Check if jobus-pro already provides a real Messaging class.
+	 * Check if jobus-pro messaging module is active.
 	 *
 	 * @return bool
 	 */
 	private function is_pro_messaging_active() {
-		return class_exists( '\\Jobus_Pro\\Admin\\Messaging' );
+		return class_exists( '\\Jobus_Pro\\Messaging\\Init' );
 	}
 
 	/**
-	 * Enqueue stylesheets for the teaser page.
-	 * Depends on analytics-teaser.css so all shared design tokens and
-	 * section styles (hero, features grid, CTA, etc.) are inherited —
-	 * messaging-teaser.css only adds the inbox-specific UI styles.
+	 * Enqueue stylesheets or scripts for the page.
 	 *
 	 * @param string $hook The current admin page hook.
 	 * @return void
@@ -120,59 +115,170 @@ class Messaging {
 			return;
 		}
 
-		// Shared base styles (design tokens, hero, features, CTA).
-		wp_enqueue_style(
-			'jobus-analytics-teaser',
-			JOBUS_URL . '/assets/css/analytics-teaser.css',
-			array(),
-			JOBUS_VERSION
-		);
+		if ( $this->is_pro_messaging_active() && defined( 'JOBUS_PRO_URL' ) ) {
+			// Use the existing standard Pro Analytics format for seamless UI integration.
+			wp_enqueue_style(
+				'jobus-pro-analytics',
+				JOBUS_PRO_URL . '/assets/css/analytics.css',
+				array(),
+				JOBUS_PRO_VERSION
+			);
+			return;
+		}
 
-		// Messaging-specific styles only (inbox preview, compose area, workflow steps).
+		// Single dedicated file for the free teaser layout.
 		wp_enqueue_style(
 			'jobus-messaging-teaser',
 			JOBUS_URL . '/assets/css/messaging-teaser.css',
-			array( 'jobus-analytics-teaser' ),
+			array(),
 			JOBUS_VERSION
 		);
 	}
 
 	/**
-	 * Render the messaging teaser / upgrade page.
-	 *
-	 * HTML class names deliberately mirror Analytics.php so the shared
-	 * analytics-teaser.css rules apply without any duplication.
-	 * Only inbox-specific elements use the jobus-msg-* prefix.
+	 * Render the messaging page.
 	 *
 	 * @return void
 	 */
 	public function render_messaging_page() {
+		if ( $this->is_pro_messaging_active() ) {
+			global $wpdb;
+			$table_name     = $wpdb->prefix . 'jobus_messages';
+			
+			$total_messages = 0;
+			$active_threads = 0;
+			$messages_today = 0;
+
+			// Verify the messaging table actually exists to prevent SQL errors in case of partial installations.
+			if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) === $table_name ) {
+				$total_messages = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
+				
+				// Calculate distinct threads (Job ID + specific pair of users)
+				$active_threads = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT job_id, LEAST(sender_id, receiver_id), GREATEST(sender_id, receiver_id)) FROM {$table_name}" );
+				
+				// Calculate engagement depth (Average messages per thread)
+				$avg_per_thread = $active_threads > 0 ? round( $total_messages / $active_threads, 1 ) : 0;
+
+				// Calculate adoption (Total unique users sending or receiving messages)
+				$unique_users = (int) $wpdb->get_var( "SELECT COUNT(DISTINCT user_id) FROM (SELECT sender_id AS user_id FROM {$table_name} UNION SELECT receiver_id AS user_id FROM {$table_name}) as users" );
+			}
+
+			?>
+			<div class="wrap jobus-analytics-wrap">
+				<!-- Standard Header Section -->
+				<div class="jobus-analytics-header">
+					<div class="jobus-analytics-header-content">
+						<h1 class="jobus-analytics-title">
+							<span class="jobus-analytics-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+								</svg>
+							</span>
+							<?php esc_html_e( 'Messaging Activity', 'jobus' ); ?>
+						</h1>
+						<p class="jobus-analytics-subtitle">
+							<?php esc_html_e( 'Monitor conversations between candidates and employers across your platform.', 'jobus' ); ?>
+						</p>
+					</div>
+					<div class="jobus-analytics-header-meta">
+						<span class="jobus-analytics-date">
+							<span class="dashicons dashicons-calendar-alt"></span>
+							<?php echo esc_html( wp_date( 'F j, Y' ) ); ?>
+						</span>
+					</div>
+				</div>
+				
+				<!-- Main Analytics Content (Full width, no sidebar) -->
+				<div class="jobus-analytics-content">
+					
+					<!-- Metrics Grid -->
+					<div class="jobus-analytics-stats-grid">
+						
+						<div class="jobus-stat-card jobus-stat-jobs">
+							<div class="jobus-stat-card-icon">
+								<span class="dashicons dashicons-format-chat"></span>
+							</div>
+							<div class="jobus-stat-card-content">
+								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $total_messages ) ); ?></span>
+								<span class="jobus-stat-label"><?php esc_html_e( 'Total Messages Sent', 'jobus' ); ?></span>
+							</div>
+						</div>
+
+						<div class="jobus-stat-card jobus-stat-applications">
+							<div class="jobus-stat-card-icon">
+								<span class="dashicons dashicons-networking"></span>
+							</div>
+							<div class="jobus-stat-card-content">
+								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $active_threads ) ); ?></span>
+								<span class="jobus-stat-label"><?php esc_html_e( 'Active Conversations', 'jobus' ); ?></span>
+							</div>
+						</div>
+
+						<div class="jobus-stat-card jobus-stat-companies">
+							<div class="jobus-stat-card-icon">
+								<span class="dashicons dashicons-update-alt"></span>
+							</div>
+							<div class="jobus-stat-card-content">
+								<span class="jobus-stat-value"><?php echo esc_html( $avg_per_thread ); ?></span>
+								<span class="jobus-stat-label"><?php esc_html_e( 'Msgs Per Thread', 'jobus' ); ?></span>
+							</div>
+						</div>
+
+						<div class="jobus-stat-card jobus-stat-candidates">
+							<div class="jobus-stat-card-icon">
+								<span class="dashicons dashicons-groups"></span>
+							</div>
+							<div class="jobus-stat-card-content">
+								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $unique_users ) ); ?></span>
+								<span class="jobus-stat-label"><?php esc_html_e( 'Unique Users', 'jobus' ); ?></span>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Information Notice -->
+					<div class="jobus-alert-card jobus-alert-info">
+						<div class="jobus-alert-icon"><span class="dashicons dashicons-info-outline"></span></div>
+						<div class="jobus-alert-content">
+							<strong><?php esc_html_e( 'Frontend Capability Active', 'jobus' ); ?></strong>
+							<p>
+								<?php esc_html_e( 'The actual messaging interface is fully functional and naturally integrated into your site\'s frontend dashboard for Employers and Candidates. To protect user privacy and respect direct communications, the chat UI has been deactivated here in the WordPress Admin area. Use this data panel to securely track overall platform engagement.', 'jobus' ); ?>
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<?php
+			return;
+		}
+
 		$upgrade_url = $this->get_upgrade_url();
 		?>
-		<div class="wrap jobus-analytics-wrap">
-			<div class="jobus-analytics-presentation">
+		<div class="wrap jbs-analytics-wrap">
+			<div class="jbs-analytics-presentation">
 
 				<!-- ===== HERO ===== -->
-				<div class="jobus-presentation-hero jobus-msg-hero">
+				<div class="jbs-presentation-hero jbs-msg-hero">
 
 					<!-- Left: Copy & CTA -->
-					<div class="jobus-hero-content">
-						<span class="jobus-hero-badge">
+					<div class="jbs-hero-content">
+						<span class="jbs-hero-badge">
 							<span class="dashicons dashicons-email-alt"></span>
 							<?php esc_html_e( 'Pro Feature', 'jobus' ); ?>
 						</span>
-						<h1 class="jobus-hero-title">
-							<?php esc_html_e( 'Direct Messaging Between Employers & Candidates', 'jobus' ); ?>
+						<h1 class="jbs-hero-title">
+							<?php esc_html_e( 'Track Messaging Activity & Engagement', 'jobus' ); ?>
 						</h1>
-						<p class="jobus-hero-subtitle">
-							<?php esc_html_e( 'Enable seamless, real-time communication on your job board. Let employers reach out to candidates and discuss applications — all within a beautiful, secure inbox.', 'jobus' ); ?>
+						<p class="jbs-hero-subtitle">
+							<?php esc_html_e( 'Unlock powerful insights into how employers and candidates communicate. View total messages, active threads, and engagement trends — all from an intuitive admin dashboard.', 'jobus' ); ?>
 						</p>
-						<div class="jobus-hero-cta">
-							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-btn-primary jobus-btn-lg">
+						<div class="jbs-hero-cta">
+							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-btn-primary jbs-btn-lg">
 								<span class="dashicons dashicons-unlock"></span>
 								<?php esc_html_e( 'Upgrade to Pro', 'jobus' ); ?>
 							</a>
-							<span class="jobus-hero-guarantee">
+							<span class="jbs-hero-guarantee">
 								<span class="dashicons dashicons-shield"></span>
 								<?php esc_html_e( '30-day money-back guarantee', 'jobus' ); ?>
 							</span>
@@ -180,347 +286,201 @@ class Messaging {
 					</div>
 
 					<!-- Right: Inbox UI Preview Mock -->
-					<div class="jobus-hero-visual jobus-msg-hero-visual">
-						<div class="jobus-msg-inbox-preview">
-
-							<!-- Top bar: title + pagination -->
-							<div class="jobus-msg-topbar">
-								<div class="jobus-msg-topbar-left">
-									<h2 class="jobus-msg-inbox-title">
-										<?php esc_html_e( 'Messages', 'jobus' ); ?>
-									</h2>
-									<span class="jobus-msg-compose-btn">+</span>
+					<div class="jbs-hero-visual jbs-msg-hero-visual">
+ 						<div class="jbs-dashboard-preview jbs-flat-preview">
+							<!-- Mock Dashboard Stats -->
+							<div class="jbs-preview-stats">
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value"><?php echo esc_html( number_format_i18n( 12450 ) ); ?></span>
+									<span class="jbs-preview-stat-label">
+										<?php esc_html_e( 'Total Messages', 'jobus' ); ?>
+									</span>
+									<span class="jbs-preview-stat-trend jbs-stat-trend-primary"><?php printf( esc_html__( '+%d%%', 'jobus' ), 14 ); ?></span>
 								</div>
-								<div class="jobus-msg-topbar-right">
-									<span class="jobus-msg-pager-arrow"><span class="dashicons dashicons-arrow-left-alt2"></span></span>
-									<span class="jobus-msg-pager-info">1–5 <?php esc_html_e( 'of', 'jobus' ); ?> 120</span>
-									<span class="jobus-msg-pager-arrow"><span class="dashicons dashicons-arrow-right-alt2"></span></span>
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value"><?php echo esc_html( number_format_i18n( 842 ) ); ?></span>
+									<span class="jbs-preview-stat-label">
+										<?php esc_html_e( 'Active Threads', 'jobus' ); ?>
+									</span>
+									<span class="jbs-preview-stat-trend jbs-stat-trend-primary"><?php printf( esc_html__( '+%d%%', 'jobus' ), 5 ); ?></span>
+								</div>
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value"><?php printf( /* translators: %s: number of hours */ esc_html__( '%sh', 'jobus' ), '1.2' ); ?></span>
+									<span class="jbs-preview-stat-label">
+										<?php esc_html_e( 'Avg. Response Time', 'jobus' ); ?>
+									</span>
+									<span class="jbs-preview-stat-trend jbs-stat-trend-success"><?php printf( esc_html__( '-%d%%', 'jobus' ), 12 ); ?></span>
 								</div>
 							</div>
-
-							<!-- Inbox body -->
-							<div class="jobus-msg-body">
-
-								<!-- ── Left: thread list ── -->
-								<div class="jobus-msg-sidebar">
-									<div class="jobus-msg-sidebar-head">
-										<span class="jobus-msg-sidebar-title"><?php esc_html_e( 'Inbox', 'jobus' ); ?></span>
-										<span class="jobus-msg-sidebar-dots">&#8942;</span>
-									</div>
-
-									<div class="jobus-msg-search">
-										<input type="text" placeholder="<?php esc_attr_e( 'Search contacts', 'jobus' ); ?>" disabled>
-										<span class="dashicons dashicons-search"></span>
-									</div>
-
-									<div class="jobus-msg-filters">
-										<button class="jobus-msg-filter-btn jobus-msg-filter-active"><?php esc_html_e( 'All', 'jobus' ); ?></button>
-										<button class="jobus-msg-filter-btn"><em style="background:#FF4545;"></em> <?php esc_html_e( 'Read', 'jobus' ); ?></button>
-										<button class="jobus-msg-filter-btn"><em style="background:#3BDA84;"></em> <?php esc_html_e( 'Unread', 'jobus' ); ?></button>
-									</div>
-
-									<div class="jobus-msg-thread-list">
-
-										<div class="jobus-msg-thread jobus-msg-thread-read">
-											<div class="jobus-msg-thread-inner">
-												<div class="jobus-msg-thread-meta">
-													<span class="jobus-msg-thread-sender"><?php esc_html_e( 'Jenny Rio.', 'jobus' ); ?></span>
-													<span class="jobus-msg-thread-date"><?php esc_html_e( 'Aug 22', 'jobus' ); ?></span>
-												</div>
-												<p class="jobus-msg-thread-subject"><?php esc_html_e( 'Work inquiry from google.', 'jobus' ); ?></p>
-												<p class="jobus-msg-thread-preview"><?php esc_html_e( "Hello, This is Jenny from google. We'r the largest online platform offer...", 'jobus' ); ?></p>
-												<span class="jobus-msg-thread-attachment"><span class="dashicons dashicons-paperclip"></span> <?php esc_html_e( 'details.pdf', 'jobus' ); ?></span>
-											</div>
-										</div>
-
-										<div class="jobus-msg-thread jobus-msg-thread-primary jobus-msg-thread-selected">
-											<div class="jobus-msg-thread-inner">
-												<div class="jobus-msg-thread-meta">
-													<span class="jobus-msg-thread-sender"><?php esc_html_e( 'Hasan Islam.', 'jobus' ); ?></span>
-													<span class="jobus-msg-thread-date"><?php esc_html_e( 'May 22', 'jobus' ); ?></span>
-												</div>
-												<p class="jobus-msg-thread-subject"><?php esc_html_e( 'Account Manager', 'jobus' ); ?></p>
-												<p class="jobus-msg-thread-preview"><?php esc_html_e( 'Hello, Greeting from Uber. Hope you doing great. I am approcing to you for..', 'jobus' ); ?></p>
-												<div class="jobus-msg-thread-attachments">
-													<span class="jobus-msg-thread-attachment"><span class="dashicons dashicons-paperclip"></span> <?php esc_html_e( 'details.pdf', 'jobus' ); ?></span>
-													<span class="jobus-msg-thread-attachment"><span class="dashicons dashicons-paperclip"></span> <?php esc_html_e( 'form.pdf', 'jobus' ); ?></span>
-												</div>
-											</div>
-										</div>
-
-										<div class="jobus-msg-thread">
-											<div class="jobus-msg-thread-inner">
-												<div class="jobus-msg-thread-meta">
-													<span class="jobus-msg-thread-sender"><?php esc_html_e( 'Jannatul Ferdaus.', 'jobus' ); ?></span>
-													<span class="jobus-msg-thread-date"><?php esc_html_e( 'Jun 22', 'jobus' ); ?></span>
-												</div>
-												<p class="jobus-msg-thread-subject"><?php esc_html_e( 'Product Designer Opportunities', 'jobus' ); ?></p>
-												<p class="jobus-msg-thread-preview"><?php esc_html_e( 'Hello, This is Jannat from HuntX. We offer business solution to our client..', 'jobus' ); ?></p>
-											</div>
-										</div>
-
-										<div class="jobus-msg-thread jobus-msg-thread-read">
-											<div class="jobus-msg-thread-inner">
-												<div class="jobus-msg-thread-meta">
-													<span class="jobus-msg-thread-sender"><?php esc_html_e( 'Jakie Chan', 'jobus' ); ?></span>
-													<span class="jobus-msg-thread-date"><?php esc_html_e( 'NOV 22', 'jobus' ); ?></span>
-												</div>
-												<p class="jobus-msg-thread-subject"><?php esc_html_e( 'Hunting Marketing Specialist', 'jobus' ); ?></p>
-												<p class="jobus-msg-thread-preview"><?php esc_html_e( "Hello, We'r the well known Real Estate Inc provide best interior/exterior solut...", 'jobus' ); ?></p>
-											</div>
-										</div>
-
-									</div>
-									<!-- /.jobus-msg-thread-list -->
+							<!-- Mock Chart -->
+							<div class="jbs-preview-chart">
+								<div class="jbs-chart-header">
+									<span class="jbs-chart-title">
+										<?php esc_html_e( 'Messaging Activity', 'jobus' ); ?>
+									</span>
+									<span class="jbs-chart-badge">
+										<?php esc_html_e( 'Last 30 Days', 'jobus' ); ?>
+									</span>
 								</div>
-								<!-- /.jobus-msg-sidebar -->
-
-								<!-- ── Right: open email ── -->
-								<div class="jobus-msg-open-email">
-
-									<div class="jobus-msg-email-header jobus-msg-divider">
-										<div class="jobus-msg-sender-info">
-											<div class="jobus-msg-sender-avatar">P</div>
-											<div class="jobus-msg-sender-details">
-												<span class="jobus-msg-sender-name"><?php esc_html_e( 'Payoneer', 'jobus' ); ?></span>
-												<span class="jobus-msg-sender-email">payoneer@inquiry.com</span>
-											</div>
-										</div>
-										<div class="jobus-msg-email-actions">
-											<span class="jobus-msg-email-time"><?php esc_html_e( '4:45AM (3 hours ago)', 'jobus' ); ?></span>
-											<div class="jobus-msg-action-buttons">
-												<button class="jobus-msg-action-ico"><span class="dashicons dashicons-trash"></span></button>
-												<button class="jobus-msg-action-ico"><span class="dashicons dashicons-controls-repeat"></span></button>
-												<button class="jobus-msg-action-ico"><span class="dashicons dashicons-ellipsis"></span></button>
-											</div>
-										</div>
-									</div>
-
-									<div class="jobus-msg-email-body jobus-msg-divider">
-										<h3><?php esc_html_e( 'Account Manager.', 'jobus' ); ?></h3>
-										<p><?php esc_html_e( 'Hello, Greeting from Uber. Hope you doing great. I am approaching to you as our company need a great & talented account manager.', 'jobus' ); ?></p>
-										<p><?php esc_html_e( 'What we need from you to start:', 'jobus' ); ?></p>
-										<ul class="jobus-msg-email-list">
-											<li><?php esc_html_e( '– Your CV', 'jobus' ); ?></li>
-											<li><?php esc_html_e( '– Verified Gov ID', 'jobus' ); ?></li>
-										</ul>
-										<p>
-											<?php esc_html_e( 'Our Telegram', 'jobus' ); ?> <strong>@payoneer</strong><br>
-											<?php esc_html_e( 'Thank you!', 'jobus' ); ?>
-										</p>
-									</div>
-
-									<div class="jobus-msg-email-footer">
-										<div class="jobus-msg-attachments">
-											<div class="jobus-msg-attachments-head">
-												<span><?php esc_html_e( '2 Attachments', 'jobus' ); ?></span>
-												<a href="#" class="jobus-msg-download-all"><?php esc_html_e( 'Download All', 'jobus' ); ?></a>
-											</div>
-											<div class="jobus-msg-attachment-files">
-												<div class="jobus-msg-attach-file">
-													<span class="jobus-msg-attach-icon"><span class="dashicons dashicons-media-document"></span></span>
-													<div class="jobus-msg-attach-info">
-														<span class="jobus-msg-attach-name"><?php esc_html_e( 'project-details.pdf', 'jobus' ); ?></span>
-														<span class="jobus-msg-attach-size">2.3mb</span>
-													</div>
-												</div>
-												<div class="jobus-msg-attach-file">
-													<span class="jobus-msg-attach-icon"><span class="dashicons dashicons-media-document"></span></span>
-													<div class="jobus-msg-attach-info">
-														<span class="jobus-msg-attach-name"><?php esc_html_e( 'form.pdf', 'jobus' ); ?></span>
-														<span class="jobus-msg-attach-size">1.3mb</span>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="jobus-msg-compose-box">
-											<div class="jobus-msg-compose-fields">
-												<div class="jobus-msg-compose-field-row">
-													<span class="jobus-msg-compose-label"><?php esc_html_e( 'To', 'jobus' ); ?></span>
-													<input type="email" class="jobus-msg-compose-input" placeholder="payoneer@inquiry.com" disabled>
-												</div>
-												<div class="jobus-msg-compose-toggles">
-													<span><?php esc_html_e( 'Cc', 'jobus' ); ?></span>
-													<span><?php esc_html_e( 'Bcc', 'jobus' ); ?></span>
-												</div>
-											</div>
-											<div class="jobus-msg-compose-body">
-												<textarea class="jobus-msg-compose-textarea" disabled><?php esc_html_e( "Hi, Mary Cooper!\n\nThanks for your invitation for the account manager position for your company. I will get back to you soon with all the required documents.", 'jobus' ); ?></textarea>
-											</div>
-											<div class="jobus-msg-compose-footer">
-												<div class="jobus-msg-compose-tools">
-													<button class="jobus-msg-tool-btn"><span class="dashicons dashicons-paperclip"></span></button>
-													<button class="jobus-msg-tool-btn"><span class="dashicons dashicons-smiley"></span></button>
-													<button class="jobus-msg-tool-btn"><span class="dashicons dashicons-format-image"></span></button>
-												</div>
-												<div class="jobus-msg-compose-send">
-													<button class="jobus-msg-delete-btn"><span class="dashicons dashicons-trash"></span></button>
-													<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-msg-reply-btn">
-														<?php esc_html_e( 'Reply', 'jobus' ); ?>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /.jobus-msg-email-footer -->
-
+								<div class="jbs-chart-bars">
+									<div class="jbs-bar jbs-bar-1"><span><?php echo esc_html_x( 'M', 'Monday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-2"><span><?php echo esc_html_x( 'T', 'Tuesday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-3"><span><?php echo esc_html_x( 'W', 'Wednesday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-4"><span><?php echo esc_html_x( 'T', 'Thursday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-5"><span><?php echo esc_html_x( 'F', 'Friday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-6"><span><?php echo esc_html_x( 'S', 'Saturday abbreviation', 'jobus' ); ?></span></div>
+									<div class="jbs-bar jbs-bar-active jbs-bar-7"><span><?php echo esc_html_x( 'S', 'Sunday abbreviation', 'jobus' ); ?></span></div>
 								</div>
-								<!-- /.jobus-msg-open-email -->
-
 							</div>
-							<!-- /.jobus-msg-body -->
-
 						</div>
-						<!-- /.jobus-msg-inbox-preview -->
+						<!-- /.jbs-msg-inbox-preview -->
 
 						<!-- Upgrade overlay -->
-						<div class="jobus-msg-preview-overlay">
-							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-msg-preview-unlock">
+						<div class="jbs-msg-preview-overlay">
+							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-msg-preview-unlock">
 								<span class="dashicons dashicons-lock"></span>
 								<?php esc_html_e( 'Unlock Full Messaging', 'jobus' ); ?>
 							</a>
 						</div>
 
 					</div>
-					<!-- /.jobus-hero-visual -->
+					<!-- /.jbs-hero-visual -->
 
 				</div>
-				<!-- /.jobus-presentation-hero -->
+				<!-- /.jbs-presentation-hero -->
 
 
 				<!-- ===== FEATURES GRID ===== -->
-				<!-- Reuses: .jobus-features-section, .jobus-section-header, .jobus-features-grid, .jobus-feature-card -->
-				<div class="jobus-features-section">
-					<div class="jobus-section-header">
+				<div class="jbs-features-section">
+					<div class="jbs-section-header">
 						<h2><?php esc_html_e( 'Everything You Need for Seamless Recruitment Communication', 'jobus' ); ?></h2>
 						<p><?php esc_html_e( 'A complete messaging solution built specifically for job boards', 'jobus' ); ?></p>
 					</div>
-					<div class="jobus-features-grid">
+					<div class="jbs-features-grid">
 
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-primary">
-								<span class="dashicons dashicons-format-chat"></span>
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-primary">
+								<span class="dashicons dashicons-chart-bar"></span>
 							</div>
-							<h3><?php esc_html_e( 'Split-Pane Inbox', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'Thread list on the left, full email view on the right — a clean, distraction-free experience users expect.', 'jobus' ); ?></p>
+							<h3><?php esc_html_e( 'Message Volume Tracking', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'Monitor the total number of messages sent across your platform to track hiring seasons and peak engagement days.', 'jobus' ); ?></p>
 						</div>
 
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-success">
-								<span class="dashicons dashicons-lock"></span>
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-success">
+								<span class="dashicons dashicons-groups"></span>
 							</div>
-							<h3><?php esc_html_e( 'Secure & Private', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'Each thread is isolated. Users can only read their own messages — never threads between other parties.', 'jobus' ); ?></p>
+							<h3><?php esc_html_e( 'Active Conversations', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'See exactly how many active threads are currently open, indicating real-time communication between users.', 'jobus' ); ?></p>
 						</div>
 
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-warning">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-warning">
+								<span class="dashicons dashicons-clock"></span>
+							</div>
+							<h3><?php esc_html_e( 'Response Time Metrics', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'Ensure a great candidate experience by monitoring the average time it takes for employers to reply to inquiries.', 'jobus' ); ?></p>
+						</div>
+
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-info">
+								<span class="dashicons dashicons-admin-users"></span>
+							</div>
+							<h3><?php esc_html_e( 'Top Responders', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'Identify the most active employers and highly engaged candidates driving communications on your board.', 'jobus' ); ?></p>
+						</div>
+
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-danger">
+								<span class="dashicons dashicons-shield"></span>
+							</div>
+							<h3><?php esc_html_e( 'Activity Monitoring', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'View safe backend logs of conversational activity without violating the privacy of individual chat contents.', 'jobus' ); ?></p>
+						</div>
+
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-purple">
 								<span class="dashicons dashicons-bell"></span>
 							</div>
-							<h3><?php esc_html_e( 'Real-Time Notifications', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'WordPress Heartbeat API powers live alerts without heavy CPU usage — no third-party services needed.', 'jobus' ); ?></p>
-						</div>
-
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-info">
-								<span class="dashicons dashicons-email"></span>
-							</div>
-							<h3><?php esc_html_e( 'Email Notifications', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'Automatically email users when a new message arrives while they are offline, so no opportunity is missed.', 'jobus' ); ?></p>
-						</div>
-
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-danger">
-								<span class="dashicons dashicons-portfolio"></span>
-							</div>
-							<h3><?php esc_html_e( 'Job Context in Chat', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'Job title and application status shown at the top of every thread — keeping conversations in context.', 'jobus' ); ?></p>
-						</div>
-
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-purple">
-								<span class="dashicons dashicons-yes-alt"></span>
-							</div>
-							<h3><?php esc_html_e( 'Read Receipts', 'jobus' ); ?></h3>
-							<p><?php esc_html_e( 'Seen / Unread indicators improve response rates and reduce follow-up emails between employers and candidates.', 'jobus' ); ?></p>
+							<h3><?php esc_html_e( 'Frontend Messaging Activation', 'jobus' ); ?></h3>
+							<p><?php esc_html_e( 'Activating Pro instantly unlocks the complete split-pane messaging capability for candidates and employers.', 'jobus' ); ?></p>
 						</div>
 
 					</div>
 				</div>
-				<!-- /.jobus-features-section -->
+				<!-- /.jbs-features-section -->
 
 
 				<!-- ===== HOW IT WORKS (messaging-specific) ===== -->
-				<div class="jobus-msg-workflow-section">
-					<div class="jobus-section-header">
+				<div class="jbs-msg-workflow-section">
+					<div class="jbs-section-header">
 						<h2><?php esc_html_e( 'How the Messaging System Works', 'jobus' ); ?></h2>
 						<p><?php esc_html_e( 'Secure, performant, and built on WordPress REST API standards', 'jobus' ); ?></p>
 					</div>
-					<div class="jobus-msg-workflow-steps">
+					<div class="jbs-msg-workflow-steps">
 
-						<div class="jobus-msg-step">
-							<div class="jobus-msg-step-number">1</div>
-							<div class="jobus-msg-step-body">
-								<h4><?php esc_html_e( 'Candidate Applies', 'jobus' ); ?></h4>
-								<p><?php esc_html_e( 'A unique conversation thread is automatically created and linked to the job application.', 'jobus' ); ?></p>
+						<div class="jbs-msg-step">
+							<div class="jbs-msg-step-number">1</div>
+							<div class="jbs-msg-step-body">
+								<h4><?php esc_html_e( 'Immediate Connection', 'jobus' ); ?></h4>
+								<p><?php esc_html_e( 'A candidate asks a question about a job listing. A private chat thread is instantly created, directly linking them to the employer.', 'jobus' ); ?></p>
 							</div>
 						</div>
 
-						<div class="jobus-msg-step-arrow">
+						<div class="jbs-msg-step-arrow">
 							<span class="dashicons dashicons-arrow-right-alt"></span>
 						</div>
 
-						<div class="jobus-msg-step">
-							<div class="jobus-msg-step-number">2</div>
-							<div class="jobus-msg-step-body">
-								<h4><?php esc_html_e( 'Employer Responds', 'jobus' ); ?></h4>
-								<p><?php esc_html_e( 'Employers reply directly from their dashboard using quick-reply templates.', 'jobus' ); ?></p>
+						<div class="jbs-msg-step">
+							<div class="jbs-msg-step-number">2</div>
+							<div class="jbs-msg-step-body">
+								<h4><?php esc_html_e( 'Seamless Response', 'jobus' ); ?></h4>
+								<p><?php esc_html_e( 'The employer gets notified in their dashboard and replies confidently—without ever needing to expose their personal email address.', 'jobus' ); ?></p>
 							</div>
 						</div>
 
-						<div class="jobus-msg-step-arrow">
+						<div class="jbs-msg-step-arrow">
 							<span class="dashicons dashicons-arrow-right-alt"></span>
 						</div>
 
-						<div class="jobus-msg-step">
-							<div class="jobus-msg-step-number">3</div>
-							<div class="jobus-msg-step-body">
-								<h4><?php esc_html_e( 'Real-Time Updates', 'jobus' ); ?></h4>
-								<p><?php esc_html_e( 'Both parties receive on-screen alerts and email notifications instantly.', 'jobus' ); ?></p>
+						<div class="jbs-msg-step">
+							<div class="jbs-msg-step-number">3</div>
+							<div class="jbs-msg-step-body">
+								<h4><?php esc_html_e( 'Close the Hire', 'jobus' ); ?></h4>
+								<p><?php esc_html_e( 'The conversation flows effortlessly from an initial quick question all the way to a final job offer, keeping users engaged on your site.', 'jobus' ); ?></p>
 							</div>
 						</div>
 
 					</div>
 				</div>
-				<!-- /.jobus-msg-workflow-section -->
+				<!-- /.jbs-msg-workflow-section -->
 
 
-				<!-- ===== FINAL CTA — reuses analytics-teaser.css classes ===== -->
-				<div class="jobus-final-cta-section">
-					<div class="jobus-cta-card">
-						<div class="jobus-cta-content">
+				<!-- ===== FINAL CTA ===== -->
+				<div class="jbs-final-cta-section">
+					<div class="jbs-cta-card">
+						<div class="jbs-cta-content">
 							<h2><?php esc_html_e( 'Ready to Connect Employers & Candidates?', 'jobus' ); ?></h2>
 							<p><?php esc_html_e( 'Unlock Messaging and every other Pro feature with a single upgrade.', 'jobus' ); ?></p>
-							<div class="jobus-cta-buttons">
-								<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-btn-primary jobus-btn-lg">
+							<div class="jbs-cta-buttons">
+								<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-btn-primary jbs-btn-lg">
 									<span class="dashicons dashicons-unlock"></span>
 									<?php esc_html_e( 'Get Jobus Pro Now', 'jobus' ); ?>
 								</a>
 							</div>
-							<p class="jobus-cta-note">
+							<p class="jbs-cta-note">
 								<span class="dashicons dashicons-shield-alt"></span>
 								<?php esc_html_e( 'Secure payment • Instant access • Cancel anytime', 'jobus' ); ?>
 							</p>
 						</div>
 					</div>
 				</div>
-				<!-- /.jobus-final-cta-section -->
+				<!-- /.jbs-final-cta-section -->
 
 			</div>
-			<!-- /.jobus-analytics-presentation -->
+			<!-- /.jbs-analytics-presentation -->
 		</div>
-		<!-- /.jobus-analytics-wrap -->
+		<!-- /.jbs-analytics-wrap -->
 		<?php
 	}
 

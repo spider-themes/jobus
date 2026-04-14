@@ -6172,3 +6172,83 @@ msgstr ""
 
 msgid "Understanding Sidebar Filters: Enable "Sidebar Keyword Search" for keyword searches. Use "Custom Specification Widgets" to add custom attribute filters (like Team Size or Founded Year) after defining them in Company Specifications. Use "Built-in Taxonomy Widgets" to toggle default filters like Category or Location."
 msgstr ""
+
+#: Admin/Messaging.php:177
+msgid "Messaging Activity"
+msgstr ""
+
+#: Admin/Messaging.php:180
+msgid "Monitor conversations between candidates and employers across your platform."
+msgstr ""
+
+#: Admin/Messaging.php:203
+msgid "Total Messages Sent"
+msgstr ""
+
+#: Admin/Messaging.php:213
+msgid "Active Conversations"
+msgstr ""
+
+#: Admin/Messaging.php:223
+msgid "Msgs Per Thread"
+msgstr ""
+
+#: Admin/Messaging.php:233
+msgid "Unique Users"
+msgstr ""
+
+#: Admin/Messaging.php:243
+msgid "Frontend Capability Active"
+msgstr ""
+
+#: Admin/Messaging.php:245
+msgid "The actual messaging interface is fully functional and naturally integrated into your site's frontend dashboard for Employers and Candidates. To protect user privacy and respect direct communications, the chat UI has been deactivated here in the WordPress Admin area. Use this data panel to securely track overall platform engagement."
+msgstr ""
+
+#: Admin/Messaging.php:298
+msgid "+%d%%"
+msgstr ""
+
+#: Admin/Messaging.php:312
+msgid "-%d%%"
+msgstr ""
+
+#: Admin/Messaging.php:308
+# translators: %s: number of hours
+msgid "%sh"
+msgstr ""
+
+#: Admin/Messaging.php:325
+msgctxt "Monday abbreviation"
+msgid "M"
+msgstr ""
+
+#: Admin/Messaging.php:326
+msgctxt "Tuesday abbreviation"
+msgid "T"
+msgstr ""
+
+#: Admin/Messaging.php:327
+msgctxt "Wednesday abbreviation"
+msgid "W"
+msgstr ""
+
+#: Admin/Messaging.php:328
+msgctxt "Thursday abbreviation"
+msgid "T"
+msgstr ""
+
+#: Admin/Messaging.php:329
+msgctxt "Friday abbreviation"
+msgid "F"
+msgstr ""
+
+#: Admin/Messaging.php:330
+msgctxt "Saturday abbreviation"
+msgid "S"
+msgstr ""
+
+#: Admin/Messaging.php:331
+msgctxt "Sunday abbreviation"
+msgid "S"
+msgstr ""
