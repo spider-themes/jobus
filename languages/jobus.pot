@@ -6031,3 +6031,144 @@ msgstr ""
 #: templates/single-job/job-application-form-modal.php
 msgid "Want to see if the employer views your resume? Create a free account now."
 msgstr ""
+
+msgid "Display a keyword search box at the top of the archive sidebar."
+msgstr ""
+
+msgid "Enabling this allows users to quickly search for Jobs by keywords or titles."
+msgstr ""
+
+msgid "Build your custom sidebar filter by adding specification widgets."
+msgstr ""
+
+msgid "Widgets added here will appear in the Job Archive sidebar, allowing users to filter jobs dynamically based on your custom Job Specifications (e.g., Job Type, Experience). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Enable and manage built-in taxonomy filters for the sidebar."
+msgstr ""
+
+msgid "Use the toggle to enable/disable specific taxonomies (like Category, Location, Tag). Drag and drop to change their display order in the frontend sidebar filter."
+msgstr ""
+
+msgid "Enabling this allows users to quickly search for Candidate profiles by keywords or names."
+msgstr ""
+
+msgid "Widgets added here will appear in the Candidate Archive sidebar, allowing users to filter candidates dynamically based on your custom Candidate Specifications (e.g., Experience, Skill Level). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Use the toggle to enable/disable specific taxonomies (like Category, Location). Drag and drop to change their display order in the frontend sidebar filter."
+msgstr ""
+
+msgid "Enabling this allows users to quickly search for Companies by keywords or names."
+msgstr ""
+
+msgid "Widgets added here will appear in the Company Archive sidebar, allowing users to filter companies dynamically based on your custom Company Specifications (e.g., Company Size, Founded Year). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Sidebar Search & Filters"
+msgstr ""
+
+msgid "Sidebar Search & Filter Options"
+msgstr ""
+
+msgid "📖 Understanding Sidebar Filters:"
+msgstr ""
+
+msgid "Search Form:"
+msgstr ""
+
+msgid "Displays a keyword search box at the top of the sidebar."
+msgstr ""
+
+msgid "Specification Widgets:"
+msgstr ""
+
+msgid "Let users filter Jobs by custom attributes (e.g., Salary, Experience). Note: You must create Job Specifications first."
+msgstr ""
+
+msgid "Taxonomy Widgets:"
+msgstr ""
+
+msgid "Enable and sort standard category and location filters."
+msgstr ""
+
+msgid "Let users filter Candidates by custom attributes (e.g., Skills, Education). Note: You must create Candidate Specifications first."
+msgstr ""
+
+msgid "Let users filter Companies by custom attributes (e.g., Team Size, Founded Year). Note: You must create Company Specifications first."
+msgstr ""
+
+msgid "Specification Filters:"
+msgstr ""
+
+msgid "Taxonomy Filters:"
+msgstr ""
+
+msgid "Specification Filters"
+msgstr ""
+
+msgid "Taxonomy Filters"
+msgstr ""
+
+msgid "Build your custom sidebar filter by adding specification filters."
+msgstr ""
+
+msgid "Filters added here will appear in the Job Archive sidebar, allowing users to filter jobs dynamically based on your custom Job Specifications (e.g., Job Type, Experience). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Filters added here will appear in the Candidate Archive sidebar, allowing users to filter candidates dynamically based on your custom Candidate Specifications (e.g., Experience, Skill Level). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Filters added here will appear in the Company Archive sidebar, allowing users to filter companies dynamically based on your custom Company Specifications (e.g., Company Size, Founded Year). Ensure you have created Specifications first."
+msgstr ""
+
+msgid "Add Filter"
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Show Search Form" for keyword searches. Use "Specification Widgets" to add custom attribute filters (like Salary or Experience) after defining them in Job Specifications. Use "Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Show Search Form" for keyword searches. Use "Specification Widgets" to add custom attribute filters (like Skills or Education) after defining them in Candidate Specifications. Use "Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Show Search Form" for keyword searches. Use "Specification Widgets" to add custom attribute filters (like Team Size or Founded Year) after defining them in Company Specifications. Use "Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
+
+msgid "Enable keyword search to allow users to quickly find jobs by specific terms."
+msgstr ""
+
+msgid "Sidebar Keyword Search"
+msgstr ""
+
+msgid "Build custom filters using properties you created in "Job Specifications" (e.g., Salary, Experience). These will appear as interactive filters in the sidebar."
+msgstr ""
+
+msgid "Custom Specification Widgets"
+msgstr ""
+
+msgid "Enable and organize standard WordPress filters (like Category or Location). Drag and drop them to change the display order."
+msgstr ""
+
+msgid "Built-in Taxonomy Widgets"
+msgstr ""
+
+msgid "Enable keyword search to allow users to quickly find candidates by specific terms."
+msgstr ""
+
+msgid "Build custom filters using properties you created in "Candidate Specifications" (e.g., Skills, Education). These will appear as interactive filters in the sidebar."
+msgstr ""
+
+msgid "Enable keyword search to allow users to quickly find companies by specific terms."
+msgstr ""
+
+msgid "Build custom filters using properties you created in "Company Specifications" (e.g., Team Size, Founded Year). These will appear as interactive filters in the sidebar."
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Sidebar Keyword Search" for keyword searches. Use "Custom Specification Widgets" to add custom attribute filters (like Salary or Experience) after defining them in Job Specifications. Use "Built-in Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Sidebar Keyword Search" for keyword searches. Use "Custom Specification Widgets" to add custom attribute filters (like Skills or Education) after defining them in Candidate Specifications. Use "Built-in Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
+
+msgid "Understanding Sidebar Filters: Enable "Sidebar Keyword Search" for keyword searches. Use "Custom Specification Widgets" to add custom attribute filters (like Team Size or Founded Year) after defining them in Company Specifications. Use "Built-in Taxonomy Widgets" to toggle default filters like Category or Location."
+msgstr ""
