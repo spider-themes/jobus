@@ -104,11 +104,11 @@ if ( class_exists( 'CSF' ) ) {
 	$general_fields[] = array(
 		'id'      => 'is_apply_btn',
 		'type'    => 'button_set',
-		'title'   => esc_html__( 'Choose Option', 'jobus' ),
-		'desc'    => esc_html__( 'Choose the Apply button for job post.', 'jobus' ),
+		'title'   => esc_html__( 'Application Method', 'jobus' ),
+		'desc'    => esc_html__( 'Select the primary method candidates will use to submit their application.', 'jobus' ),
 		'options' => array(
-			'default' => esc_html__( 'Default', 'jobus' ),
-			'custom'  => esc_html__( 'Custom with Link', 'jobus' ),
+			'default'  => esc_html__( 'Internal Form (Default)', 'jobus' ),
+			'external' => esc_html__( 'External Apply Link', 'jobus' ),
 		),
 		'default' => 'default',
 	);
@@ -116,10 +116,10 @@ if ( class_exists( 'CSF' ) ) {
 	$general_fields[] = array(
 		'id'         => 'apply_form_url',
 		'type'       => 'text',
-		'title'      => esc_html__( 'Apply Link', 'jobus' ),
+		'title'      => esc_html__( 'External Apply Link', 'jobus' ),
+		'desc'       => esc_html__( 'Provide the complete URL (including https://) where candidates should be directed to complete their application. Ideal for third-party Applicant Tracking Systems (ATS) or corporate portals.', 'jobus' ),
 		'default'    => '#',
-		'dependency' => array( 'is_apply_btn', '==', 'custom' ),
-		'class'      => trim( $pro_access_class . $active_theme_class ),
+		'dependency' => array( 'is_apply_btn', '==', 'external' ),
 	);
 
 	// Company Info Meta Options

@@ -54,7 +54,9 @@ class Job_Form_Submission {
 			'job_title',
 			'job_description',
 			'company_website',
-			'is_company_website'
+			'is_company_website',
+			'apply_form_url',
+			'is_apply_btn'
 		];
 
 		$post_data = [];
@@ -133,6 +135,11 @@ class Job_Form_Submission {
 		// Save company website
 		if ( isset( $post_data['company_website'] ) ) {
 			$this->save_company_website( $job_id, $post_data );
+		}
+
+		// Save external application URL
+		if ( isset( $post_data['apply_form_url'] ) || isset( $post_data['is_apply_btn'] ) ) {
+			$this->save_application_method( $job_id, $post_data );
 		}
 
 		// Save company logo (featured image)
@@ -523,6 +530,33 @@ class Job_Form_Submission {
 		}
 		if ( isset( $post_data['is_company_website'] ) ) {
 			$meta['is_company_website'] = sanitize_text_field( $post_data['is_company_website'] );
+		}
+
+		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
+	}
+
+	/**
+	 * Save application method (default form, custom URL, or external redirect)
+	 *
+	 * @param int   $job_id
+	 * @param array $post_data
+	 *
+	 * @return bool
+	 */
+	public function save_application_method( int $job_id, array $post_data ): bool {
+		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
+		
+		// Save application method type (default, custom, external)
+		if ( isset( $post_data['is_apply_btn'] ) ) {
+			$meta['is_apply_btn'] = sanitize_text_field( $post_data['is_apply_btn'] );
+		}
+		
+		// Save application URL
+		if ( isset( $post_data['apply_form_url'] ) ) {
+			$meta['apply_form_url'] = esc_url_raw( $post_data['apply_form_url'] );
 		}
 
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );

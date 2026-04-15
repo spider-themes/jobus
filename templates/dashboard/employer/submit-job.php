@@ -37,6 +37,12 @@ $company_website_url    = $company_website['url'];
 $company_website_text   = $company_website['text'];
 $company_website_target = $company_website['target'];
 $is_company_website     = $company_website['is_company_website'] ?? 'default';
+
+// Get external application URL settings
+$job_meta               = $editing_job ? get_post_meta( $job_id, 'jobus_meta_options', true ) : [];
+$is_apply_btn           = $job_meta['is_apply_btn'] ?? 'default';
+$apply_form_url         = $job_meta['apply_form_url'] ?? '#';
+
 $dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 $my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . 'jobs' : '#';
 
@@ -129,7 +135,7 @@ if ( ! $can_submit ) {
                         }
                         ?>
                         
-                        <div class="logo-preview-container" style="margin-bottom: 15px;">
+                        <div class="logo-preview-container">
                             <?php if ( $current_logo_url ) : ?>
                                 <img src="<?php echo esc_url( $current_logo_url ); ?>" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="logo-preview" style="max-width: 150px; max-height: 150px; display: block; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
                             <?php else : ?>
@@ -156,7 +162,7 @@ if ( ! $can_submit ) {
                             <?php endif; ?>
                         </div>
                         
-                        <p class="jbs-text-muted jbs-mt-2" style="font-size: 13px;">
+                        <p class="jbs-text-muted jbs-mt-2">
                             <?php esc_html_e( 'Recommended size: 150x150px. Accepted formats: JPG, PNG, GIF', 'jobus' ); ?>
                         </p>
                     </div>
@@ -313,6 +319,31 @@ if ( ! $can_submit ) {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Application URL -->
+            <div id="external-application-url">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Application Method', 'jobus' ); ?></h4>
+                <div class="dash-input-wrapper jbs-mb-30">
+                    <select id="is_apply_btn" name="is_apply_btn" class="jbs-nice-select">
+                        <option value="default" <?php selected( $is_apply_btn, 'default' ); ?>><?php esc_html_e( 'Internal Application Form (Default)', 'jobus' ); ?></option>
+                        <option value="external" <?php selected( $is_apply_btn, 'external' ); ?>><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></option>
+                    </select>
+                    <p class="jbs-text-muted jbs-mt-2">
+                        <?php esc_html_e( 'Select the primary method candidates will use to submit their application.', 'jobus' ); ?>
+                    </p>
+                </div>
+                <div id="application-url-fields" class="<?php echo $is_apply_btn === 'external' ? '' : 'jbs-d-none'; ?>">
+                    <div class="dash-input-wrapper jbs-mb-30">
+                        <label for="apply-form-url"><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></label>
+                        <input type="url" id="apply-form-url" name="apply_form_url"
+                               placeholder="<?php esc_attr_e( 'https://careers.yourcompany.com/apply/12345', 'jobus' ); ?>"
+                               value="<?php echo esc_attr( $apply_form_url ); ?>">
+                        <p class="jbs-text-muted jbs-mt-2">
+                            <?php esc_html_e( 'Provide the complete URL (including https://) where candidates should be directed to complete their application. Ideal for third-party Applicant Tracking Systems (ATS) or external corporate portals.', 'jobus' ); ?>
+                        </p>
                     </div>
                 </div>
             </div>

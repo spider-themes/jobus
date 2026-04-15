@@ -1,5 +1,17 @@
 == Changelog ==
 
+= 1.9.0 (15 April 2026 (Upcoming)) =
+New: Demo Data Importer One click demo import added for quick setup with sample jobs
+New: Guest Application Non logged in users can now apply to jobs with options to Sign In, Register, or continue as Guest
+New: Company Verified Badge Added verified badge option for companies to improve trust
+New: Sidebar Layouts Redesigned sidebar sections for Candidate, Job, and Company single pages
+New: External Application URL Redirects
+New: External Application URL Redirects Added option for employers to redirect candidates to external ATS or affiliate apply links instead of internal form
+Improved: Post Type Templates Styles and templates updated across all post types for better consistency
+Improved: Applicant Meta View Enhanced admin applicant meta box for improved readability
+Fixed: User Redirect Fixed incorrect redirect after login and registration
+Fixed: Registration Form Fixed validation and applicant submission issues
+
 = 1.8.0 (06 April 2026) =
 Improved: General enhancements and minor fixes applied across the block for better stability
 Updated: Freemius SDK updated to 2.13.1
