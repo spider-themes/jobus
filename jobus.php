@@ -261,6 +261,7 @@ final class Jobus {
 		new \jobus\includes\Frontend\Assets();
 		new \jobus\includes\Frontend\Shortcode();
 		new \jobus\includes\Frontend\Template_Loader();
+		new \jobus\includes\Classes\Job_Schema();
 		if ( $enable_candidate ) {
 			\jobus\includes\Frontend\Dashboard_Candidate::get_instance();
 		}

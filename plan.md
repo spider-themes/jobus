@@ -22,7 +22,7 @@
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Essential for user adoption and initial traffic generation.
 
-#### F01.3 – External Application URL Redirects
+#### F01.3 – External Application URL Redirects - Done ***
 
 * **Status:** Missing
 * **Current Behavior:** No external ATS redirect exists; applications must be internal.
