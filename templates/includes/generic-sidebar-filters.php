@@ -31,7 +31,9 @@ if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter
 
 $taxonomy_widgets = jobus_opt( $taxonomy_widgets_key );
 if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
-	foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
+	$active_taxes = array_filter($taxonomy_widgets);
+					foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
+						$is_last = ($option_key === array_key_last($active_taxes));
 		if ( $is_enabled && isset( $taxonomy_mapping[ $option_key ] ) ) {
 			$has_filter_widgets = true;
 			break;
@@ -66,13 +68,15 @@ if ( ! $has_filter_widgets ) {
 				$filter_widgets = jobus_opt( $widgets_option_key );
 				if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
 					foreach ( $filter_widgets as $index => $widget ) {
+						$is_last = ($index === array_key_last($filter_widgets) && empty($taxonomy_widgets));
 						jobus_render_sidebar_filter_widget(
 							$widget,
 							$index,
 							$post_type,
 							$specifications_option_key,
 							$specifications_options_key,
-							$meta_opt_key
+							$meta_opt_key,
+							$is_last
 						);
 					}
 				}
@@ -80,10 +84,12 @@ if ( ! $has_filter_widgets ) {
 				// Taxonomy Widget Filters
 				$taxonomy_widgets = jobus_opt( $taxonomy_widgets_key );
 				if ( ! empty( $taxonomy_widgets ) ) {
+					$active_taxes = array_filter($taxonomy_widgets);
 					foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
+						$is_last = ($option_key === array_key_last($active_taxes));
 						if ( $is_enabled && isset( $taxonomy_mapping[ $option_key ] ) ) {
 							$taxonomy = $taxonomy_mapping[ $option_key ];
-							jobus_render_taxonomy_filter_widget( $taxonomy );
+							jobus_render_taxonomy_filter_widget( $taxonomy, $is_last );
 						}
 					}
 				}
@@ -111,7 +117,7 @@ if ( ! $has_filter_widgets ) {
  * @param string $specifications_options_key Spec options key
  * @param string $meta_opt_key Meta option key
  */
-function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $specifications_option_key, $specifications_options_key, $meta_opt_key ) {
+function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $specifications_option_key, $specifications_options_key, $meta_opt_key, $is_last = false ) {
 	$tab_count = $index + 1;
 	$is_collapsed = $tab_count === 1 ? '' : ' jbs-collapsed';
 	$is_collapsed_show = $tab_count === 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
@@ -135,7 +141,8 @@ function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $speci
 		$is_collapsed = '';
 	}
 	?>
-	<div class="filter-block jbs-bottom-line jbs-pb-25">
+	<?php $bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25"; ?>
+	<div class="filter-block<?php echo $bottom_class; ?>">
 		<a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ); ?>"
 		   data-jbs-toggle="collapse"
 		   data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>"
@@ -162,10 +169,12 @@ function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $speci
  *
  * @param string $taxonomy Taxonomy name
  */
-function jobus_render_taxonomy_filter_widget( $taxonomy ) {
+function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 	?>
-	<div class="filter-block jbs-bottom-line jbs-pb-25">
+	<?php $bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25"; ?>
+	<div class="filter-block<?php echo $bottom_class; ?>">
 		<?php
+		$bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25";
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-start.php';
 		include dirname( __FILE__ ) . '/../filter-widgets/categories.php';
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-end.php';

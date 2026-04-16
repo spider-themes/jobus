@@ -87,6 +87,11 @@ function jobus_load_archive_template( $config ) {
 		}
 	}
 
+	// Allow extensions to modify query arguments before execution
+	if ( $config['post_type'] === 'jobus_job' ) {
+		$args = apply_filters( 'jobus_job_query_args', $args, $_GET );
+	}
+
 	// Create query with post-type-specific variable name
 	$query = new WP_Query( $args );
 
@@ -323,16 +328,19 @@ function jobus_process_range_filters( $filter_widgets ) {
 	$matched_ids = array();
 	foreach ( $formatted_price_ranged as $key => $values ) {
 		foreach ( $all_slider_values[ $key ] ?? array() as $id => $range ) {
-			$range_values = explode( '-', $range );
-			list( $range_min, $range_max ) = $range_values + array( null, -1 );
+			$range_values = is_array( $range ) ? array_values( $range ) : explode( '-', $range );
+			
+			// Extract min and max values safely
+			$range_min = isset( $range_values[0] ) ? floatval( preg_replace('/[^0-9.]/', '', $range_values[0]) ) : 0;
+			$range_max = isset( $range_values[1] ) ? floatval( preg_replace('/[^0-9.]/', '', $range_values[1]) ) : $range_min;
 
 			foreach ( $values as $formatted_range ) {
-				list( $formatted_min, $formatted_max ) = explode( '-', $formatted_range );
-				if ( empty( $formatted_max ) ) {
-					$formatted_max = $formatted_min;
-				}
+				$formatted_range_parts = explode( '-', $formatted_range );
+				$formatted_min = isset( $formatted_range_parts[0] ) ? floatval( preg_replace('/[^0-9.]/', '', $formatted_range_parts[0]) ) : 0;
+				$formatted_max = isset( $formatted_range_parts[1] ) ? floatval( preg_replace('/[^0-9.]/', '', $formatted_range_parts[1]) ) : $formatted_min;
 
-				if ( $formatted_min <= $range_min && $formatted_max >= $range_max ) {
+				// Proper Overlap Logic (Search matches if the candidate's budget touches the job's salary range)
+				if ( $formatted_min <= $range_max && $formatted_max >= $range_min ) {
 					$matched_ids[ $key ][] = $id;
 					break;
 				}

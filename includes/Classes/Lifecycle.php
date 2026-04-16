@@ -37,6 +37,9 @@ class Lifecycle {
 
 		// Ensure default pages exist.
 		self::create_default_pages();
+
+		// Create required custom tables.
+		self::create_tables();
 	}
 
 	/**
@@ -156,4 +159,31 @@ class Lifecycle {
 			}
 		}
 	}
+
+	/**
+	 * Create required custom database tables.
+	 *
+	 * @return void
+	 */
+	public static function create_tables(): void {
+		global $wpdb;
+
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$table_name = $wpdb->prefix . 'jobus_search_index';
+
+		$sql = "CREATE TABLE $table_name (
+			id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+			post_id bigint(20) unsigned NOT NULL,
+			lat decimal(10,8) NOT NULL,
+			lng decimal(11,8) NOT NULL,
+			PRIMARY KEY  (id),
+			KEY post_id (post_id),
+			KEY lat_lng (lat, lng)
+		) $charset_collate;";
+
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		dbDelta( $sql );
+	}
 }
+

@@ -235,6 +235,9 @@ final class Jobus {
 			}
 		}
 
+		// Radius / Geolocation engine
+		new \jobus\includes\Classes\Geolocation();
+
 		// Admin UI
 		if ( is_admin() ) {
 			new \jobus\Admin\Admin();

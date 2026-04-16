@@ -26,6 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta_value       = $value['meta_values'] ?? '';
 			$modifiedSelect   = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 			$modifiedVal      = strtolower( $modifiedSelect );
+            // Format correctly for browser URLs seamlessly decoded from internal logic
+            $beautiful_val    = str_replace( '@space@', ' ', $modifiedVal );
 			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $modifiedVal );
 
 			if ( $meta_value_count > 0 ) {
@@ -33,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$selected_val = $searched_val[0] ?? $modifiedVal;
 				$selected_val = $modifiedVal == $selected_val ? ' selected' : '';
 				?>
-                <option value="<?php echo esc_attr( $modifiedVal ); ?>" <?php echo esc_attr( $selected_val ); ?>>
+                <option value="<?php echo esc_attr( $beautiful_val ); ?>" <?php echo esc_attr( $selected_val ); ?>>
 					<?php echo esc_html( $meta_value ); ?>
                 </option>
 				<?php

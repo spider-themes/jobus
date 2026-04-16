@@ -28,6 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			$modifiedValues = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 			$opt_val        = strtolower( $modifiedValues );
+			
+			// Format correctly for browser URLs seamlessly decoded from internal logic
+			$beautiful_val  = str_replace( '@space@', ' ', $opt_val );
 
 			// Get the count for the current meta value
 			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val );
@@ -37,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$check_status = $check_status !== false ? ' checked' : '';
 				?>
                 <li>
-                    <input type="checkbox" name="<?php echo esc_attr( $widget_name ); ?>[]" value="<?php echo esc_attr( $opt_val ); ?>" <?php echo esc_attr( $check_status ) ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $widget_name ); ?>[]" value="<?php echo esc_attr( $beautiful_val ); ?>" <?php echo esc_attr( $check_status ) ?>>
                     <label>
 						<?php echo esc_html( $meta_value ); ?>
                         <span><?php echo esc_html( $meta_value_count ); ?></span>

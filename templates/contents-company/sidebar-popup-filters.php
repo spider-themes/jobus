@@ -100,11 +100,7 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
                                     }
                                 }
                                 ?>
-                                <div class="jbs-col-lg-4">
-                                    <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s">
-                                        <?php esc_html_e('Apply Filter', 'jobus'); ?>
-                                    </button>
-                                </div>
+                                
                             </div>
                         </form>
                     </div>

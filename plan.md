@@ -40,6 +40,15 @@
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Boosts core user acquisition immediately.
 
+#### F01.5 – Modern AJAX Filter Engine
+
+* **Status:** Planned
+* **Current Behavior:** Filters rely on legacy `<form method="get">` full-page reloads and regex parsed parameters.
+* **Issue / Gap:** High friction UX, slow perceived performance, and non-standard URL outputs (e.g. `@space@` slugs).
+* **Required Action:** Implement a `window.fetch` backed PJAX (PushState AJAX) architecture. Intercept JS events (clicks/changes), fetch filtered archive quietly, extract the grid HTML, hot-swap the DOM, and update the URL silently, preserving the existing theme UI classes perfectly.
+* **Free vs Pro Decision:** Keep in Free
+* **Reason (User + Market + Profit):** Candidate expectation for UX is set by Airbnb/LinkedIn. Slow filtering equals high bounce rate.
+
 ### 🔹 CHAPTER F02: Communication & Retention
 
 #### F02.1 – Basic Messaging System

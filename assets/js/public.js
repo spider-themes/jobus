@@ -345,6 +345,234 @@
         // Initialize login modal handlers
         initLoginModal();
 
+        //============== Modern AJAX Filter Engine (PJAX) ================//
+        function initAjaxFilters() {
+            const filterForm = document.querySelector('#filteroffcanvas form');
+            const resultWrapper = document.querySelector('.job-post-item-wrapper');
+            
+            // Validate that we are on an archive page with proper wrappers
+            if (!filterForm || !resultWrapper) return;
+
+            /**
+             * Hot-swaps the DOM efficiently with skeleton loading state
+             */
+            async function triggerAjaxSearch(targetUrl) {
+                // Determine the correct URL for the server fetch
+                const url = new URL(targetUrl || filterForm.action);
+                
+                // The beautiful URL specifically for the browser URL bar
+                const cleanUrl = new URL(url.href);
+
+                if (!targetUrl) {
+                    
+                    // SMART OPTIMIZATION: Filter out un-touched Default Range sliders
+                    const rangeSliders = filterForm.querySelectorAll('.salary-slider');
+                    rangeSliders.forEach(slider => {
+                        const minInput = slider.querySelector('.input-min');
+                        const maxInput = slider.querySelector('.input-max');
+                        const rangeMin = slider.querySelector('.range-min');
+                        const rangeMax = slider.querySelector('.range-max');
+                        
+                        if (minInput && maxInput && rangeMin && rangeMax) {
+                            // If they exactly match their outer limit, they haven't been touched by the user. Disable them temporarily so FormData skips them.
+                            if (minInput.value == rangeMin.min && maxInput.value == rangeMax.max) {
+                                minInput.disabled = true;
+                                maxInput.disabled = true;
+                            }
+                        }
+                    });
+
+                    const formData = new FormData(filterForm);
+                    
+                    // RESTORE Range Sliders immediately so the UI doesn't break
+                    rangeSliders.forEach(slider => {
+                        const minInput = slider.querySelector('.input-min');
+                        const maxInput = slider.querySelector('.input-max');
+                        if (minInput) minInput.disabled = false;
+                        if (maxInput) maxInput.disabled = false;
+                    });
+                    
+                    const searchParams = new URLSearchParams();
+                    const cleanParams = new URLSearchParams(); 
+                    
+                    // Group multiple values for the same key to construct clean URLs
+                    const cleanGroups = {};
+
+                    for (const [key, value] of formData.entries()) {
+                        if (value) { 
+                            searchParams.append(key, value);
+                            
+                            // Hide mechanical backend variables from the beautiful UI URL
+                            if (key !== 'jobus_nonce' && key !== '_wp_http_referer' && key !== 'post_type') {
+                                // Remove array brackets for clean view e.g., 'salary[]' -> 'salary'
+                                const cleanKey = key.replace(/\[\]$/, '');
+                                if (!cleanGroups[cleanKey]) {
+                                    cleanGroups[cleanKey] = [];
+                                }
+                                cleanGroups[cleanKey].push(value);
+                            }
+                        }
+                    }
+                    url.search = searchParams.toString();
+                    
+                    for (const key in cleanGroups) {
+                        cleanParams.append(key, cleanGroups[key].join(','));
+                    }
+                    cleanUrl.search = cleanParams.toString();
+                    
+                } else {
+                    // For pagination links that might contain nonces
+                    const tempParams = new URLSearchParams(cleanUrl.search);
+                    tempParams.delete('jobus_nonce');
+                    tempParams.delete('_wp_http_referer');
+                    tempParams.delete('post_type');
+                    // Ensure brackets are stripped in paginations too
+                    const paginationCleaned = new URLSearchParams();
+                    for (const [key, value] of tempParams.entries()) {
+                        paginationCleaned.append(key.replace(/\[\]$/, ''), value);
+                    }
+                    cleanUrl.search = paginationCleaned.toString();
+                }
+
+                // Push history state using the flawlessly cleaned URL object
+                window.history.pushState({ path: url.href }, '', cleanUrl.href);
+
+                // Toggle "Clear All" button visibility instantly
+                const clearAllBtn = document.getElementById('jobus-clear-all-filters');
+                if (clearAllBtn) {
+                    let hasActiveFilters = false;
+                    const paramsToCheck = cleanUrl.searchParams;
+                    for (const key of paramsToCheck.keys()) {
+                        if (key !== 'post_type' && key !== 'jobus_nonce' && key !== '_wp_http_referer') {
+                            hasActiveFilters = true;
+                            break;
+                        }
+                    }
+                    clearAllBtn.style.display = hasActiveFilters ? 'inline-block' : 'none';
+                }
+
+                // Build World-Class Loading Overlay (LinkedIn/Indeed Style)
+                resultWrapper.style.position = 'relative';
+                resultWrapper.style.pointerEvents = 'none';
+                
+                let loaderOverlay = document.getElementById('jbs-premium-ajax-loader');
+                if (!loaderOverlay) {
+                    loaderOverlay = document.createElement('div');
+                    loaderOverlay.id = 'jbs-premium-ajax-loader';
+                    
+                    // Use the native framework spinner matching the Save Post AJAX logic
+                    loaderOverlay.innerHTML = '<div class="jbs-spinner-border jbs-text-primary" style="width: 3.5rem; height: 3.5rem; border-width: 0.25em;" role="status"><span class="jbs-visually-hidden"></span></div>';
+                    
+                    Object.assign(loaderOverlay.style, {
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                        backdropFilter: 'blur(3px)',
+                        WebkitBackdropFilter: 'blur(3px)',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'flex-start',
+                        paddingTop: '150px',
+                        zIndex: '99',
+                        borderRadius: '10px'
+                    });
+                    
+                    resultWrapper.appendChild(loaderOverlay);
+                } else {
+                    loaderOverlay.style.display = 'flex';
+                }
+
+                try {
+                    const response = await fetch(url.href);
+                    const htmlText = await response.text();
+                    
+                    // Parse the new HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(htmlText, 'text/html');
+                    
+                    const newResultWrapper = doc.querySelector('.job-post-item-wrapper');
+                    if (newResultWrapper) {
+                        // Hot swap the DOM securely
+                        resultWrapper.innerHTML = newResultWrapper.innerHTML;
+                        
+                        // Re-initialize frontend behaviors inside the new DOM
+                        if (typeof $.fn.niceSelect === 'function') {
+                            $(resultWrapper).find('.jbs-nice-select').niceSelect();
+                        }
+                    }
+                } catch (err) {
+                    console.error("Jobus AJAX Filter Error:", err);
+                } finally {
+                    // Restore styling smoothly
+                    resultWrapper.style.opacity = '1';
+                    resultWrapper.style.pointerEvents = 'auto';
+                    
+                    // Auto-scroll to top of results on mobile
+                    if(window.innerWidth < 992) {
+                        resultWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+
+            // 2. Intercept Checkboxes and Toggles
+            $(filterForm).on('change', 'input[type="checkbox"], input[type="radio"], select', function() {
+                triggerAjaxSearch();
+            });
+
+            // 3. Intercept Sliders (Range changes)
+            $(filterForm).on('change', 'input[type="range"]', function() {
+                triggerAjaxSearch();
+            });
+
+            // 4. Intercept Text Inputs (Keywords & Location) with a Debounce (Like Google)
+            let typingTimer;
+            $(filterForm).on('input', 'input[type="text"]', function() {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(function() {
+                    triggerAjaxSearch();
+                }, 550); // Wait 550ms after user stops typing before fetching
+            });
+
+            // 5. Intercept Click on Magnifying Glass Buttons (If they don't want to type and just click)
+            $(filterForm).on('click', '.search-form-widget button', function(e) {
+                // If the button clicked is the geolocation crosshair, don't trigger form submit
+                if(this.id === 'jbs_get_my_location') return; 
+                e.preventDefault();
+                triggerAjaxSearch();
+            });
+
+            // 6. Intercept Form submit (if user hits "Enter" aggressively)
+            $(filterForm).on('submit', function(e) {
+                e.preventDefault();
+                triggerAjaxSearch();
+            });
+
+            // 4. Intercept Pagination links inside the wrapper
+            $(document).on('click', '.job-post-item-wrapper .jbs-pagination a', function(e) {
+                e.preventDefault();
+                const url = $(this).attr('href');
+                if (url) {
+                    triggerAjaxSearch(url);
+                    // Scroll to top of section for pagination
+                    window.scrollTo({ top: resultWrapper.offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+
+            // 5. Handle standard Browser Back/Forward buttons smoothly
+            window.addEventListener('popstate', function(e) {
+                if (e.state && e.state.path) {
+                    triggerAjaxSearch(e.state.path);
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+
+        initAjaxFilters(); // Start the engine
+
     });
 
 })(jQuery);

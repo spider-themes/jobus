@@ -530,28 +530,37 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         global $wpdb;
 
-        // Use direct SQL for performance
-        $query = "
-            SELECT COUNT(DISTINCT p.ID)
-            FROM {$wpdb->posts} p
-            INNER JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)
-            WHERE p.post_type = %s
-            AND p.post_status = 'publish'
-            AND pm.meta_key = %s
-            AND pm.meta_value LIKE %s
-        ";
+        // Generate a strict cache key based on query parameters
+        $cache_key = 'jobus_cnt_' . md5( $post_type . $meta_key . $meta_value );
+        $count = get_transient( $cache_key );
 
-        // Add wildcards for LIKE comparison
-        $like_value = '%' . $wpdb->esc_like( $meta_value ) . '%';
+        if ( false === $count ) {
+            // Use direct SQL for performance
+            $query = "
+                SELECT COUNT(DISTINCT p.ID)
+                FROM {$wpdb->posts} p
+                INNER JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)
+                WHERE p.post_type = %s
+                AND p.post_status = 'publish'
+                AND pm.meta_key = %s
+                AND pm.meta_value LIKE %s
+            ";
 
-        $count = $wpdb->get_var( $wpdb->prepare(
-            $query,
-            $post_type,
-            $meta_key,
-            $like_value
-        ) );
+            // Add wildcards for LIKE comparison
+            $like_value = '%' . $wpdb->esc_like( $meta_value ) . '%';
 
-        return (int) $count;
+            $count = (int) $wpdb->get_var( $wpdb->prepare(
+                $query,
+                $post_type,
+                $meta_key,
+                $like_value
+            ) );
+
+            // Cache for 6 hours to drastically reduce database load on sidebar filters
+            set_transient( $cache_key, $count, 6 * HOUR_IN_SECONDS );
+        }
+
+        return $count;
     }
 }
 
@@ -695,21 +704,31 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
  */
 function jobus_search_terms( string $terms ) {
 
-    $result      = [];
-    $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+    $result = [];
 
-    // Verify the nonce before processing the request
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) {
-
-        // Check if the parameter is set in the URL and sanitize the input
-        if ( isset( $_GET[ $terms ] ) ) {
-            // If it's an array, sanitize each element, otherwise sanitize the single value
-            if ( is_array( $_GET[ $terms ] ) ) {
-                $result = array_map( 'sanitize_text_field', wp_unslash( $_GET[ $terms ] ) );
+    // Check if the parameter is set in the URL and sanitize the input
+    if ( isset( $_GET[ $terms ] ) ) {
+        // Handle native form arrays
+        if ( is_array( $_GET[ $terms ] ) ) {
+            $result = array_map( 'sanitize_text_field', wp_unslash( $_GET[ $terms ] ) );
+        } else {
+            $safe_value = sanitize_text_field( wp_unslash( $_GET[ $terms ] ) );
+            // Parse modern clean URLs (comma-separated), excluding main keyword search 's'
+            if ( strpos( $safe_value, ',' ) !== false && $terms !== 's' ) {
+                $result = explode( ',', $safe_value );
+                $result = array_map( 'trim', $result );
             } else {
-                $result = [ sanitize_text_field( wp_unslash( $_GET[ $terms ] ) ) ];
+                $result = [ $safe_value ];
             }
         }
+    }
+
+    // Isolate search operations from internal plugin DB formatting mechanics
+    if ( ! empty( $result ) && $terms !== 's' && strpos( $terms, 'radius' ) === false ) {
+        $result = array_map( function( $val ) {
+            // Re-encode modern spaces back into legacy @space@ for exact DB matching
+            return preg_replace( '/\s+/', '@space@', $val );
+        }, $result );
     }
 
     return $result;
@@ -871,47 +890,42 @@ function jobus_all_range_field_value(): array {
     global $wpdb;
 
     $post_ids    = [];
-    $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+    $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
+    $search_widgets = [];
 
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
-
-        $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-        $search_widgets = [];
-
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
-                    // if you get value in search bar
-                    $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                    if ( $widget_name ) {
-                        $search_widgets[] = $widget_name;
-                    }
+    if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+        foreach ( $filter_widgets as $widget ) {
+            if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
+                // if you get value in search bar
+                $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
+                if ( $widget_name ) {
+                    $search_widgets[] = $widget_name;
                 }
             }
         }
+    }
 
-        if ( ! empty( $search_widgets ) ) {
-            // Fetch only necessary data directly from DB
-            $results = $wpdb->get_results( "
-                SELECT p.ID, pm.meta_value
-                FROM {$wpdb->posts} p
-                INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-                WHERE p.post_type = 'jobus_job'
-                AND p.post_status = 'publish'
-                AND pm.meta_key = 'jobus_meta_options'
-            " );
+    if ( ! empty( $search_widgets ) ) {
+        // Fetch only necessary data directly from DB
+        $results = $wpdb->get_results( "
+            SELECT p.ID, pm.meta_value
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+            WHERE p.post_type = 'jobus_job'
+            AND p.post_status = 'publish'
+            AND pm.meta_key = 'jobus_meta_options'
+        " );
 
-            if ( $results ) {
-                foreach ( $results as $row ) {
-                    $meta = maybe_unserialize( $row->meta_value );
+        if ( $results ) {
+            foreach ( $results as $row ) {
+                $meta = maybe_unserialize( $row->meta_value );
 
-                    if ( is_array( $meta ) ) {
-                        foreach ( $search_widgets as $serial => $input ) {
-                            $meta_salary = $meta[ $input ] ?? '';
-                            if ( ! empty( $meta_salary ) ) {
-                                $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
-                                $post_ids[ $input ][ $row->ID ] = $value;
-                            }
+                if ( is_array( $meta ) ) {
+                    foreach ( $search_widgets as $serial => $input ) {
+                        $meta_salary = $meta[ $input ] ?? '';
+                        if ( ! empty( $meta_salary ) ) {
+                            $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
+                            $post_ids[ $input ][ $row->ID ] = $value;
                         }
                     }
                 }
