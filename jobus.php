@@ -214,6 +214,7 @@ final class Jobus {
 		$enable_candidate  = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
 		$enable_company    = ! isset( $options['enable_company'] ) || $options['enable_company'];
 		$enable_job_expiry = ! isset( $options['enable_job_expiry'] ) || $options['enable_job_expiry'];
+		$enable_job_schema = isset( $options['enable_job_schema'] ) ? $options['enable_job_schema'] : false;
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
@@ -261,7 +262,10 @@ final class Jobus {
 		new \jobus\includes\Frontend\Assets();
 		new \jobus\includes\Frontend\Shortcode();
 		new \jobus\includes\Frontend\Template_Loader();
-		new \jobus\includes\Classes\Job_Schema();
+		
+		if ( $enable_job_schema ) {
+			new \jobus\includes\Classes\Job_Schema();
+		}
 		if ( $enable_candidate ) {
 			\jobus\includes\Frontend\Dashboard_Candidate::get_instance();
 		}

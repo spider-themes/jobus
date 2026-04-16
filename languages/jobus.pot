@@ -6252,3 +6252,125 @@ msgstr ""
 msgctxt "Sunday abbreviation"
 msgid "S"
 msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "SEO Schema"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Google Jobs Schema"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Schema structured data helps your job listings appear in Google Jobs search results. Disable this if you use a separate SEO plugin (Yoast, Rank Math) that already handles JobPosting schema to avoid duplicates."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Enable Schema Output"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Inject JSON-LD structured data on single job pages."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Currency"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Default Currency"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "ISO 4217 currency code used in salary schema data. Auto-detected from salary symbols when possible."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+#. translators: %s: WooCommerce currency code
+msgid "WooCommerce detected — automatically using %s. Override here only if job salaries use a different currency."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Expiry Handling"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Fallback Expiry Days"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "If a job has no explicit expiration date, use this many days after posting as the validThrough date. Set to 0 to skip."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Hide Expired Jobs From Schema"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Suppress schema output for jobs past their expiration date. Prevents Google penalties for stale listings."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Data Requirements"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "When a requirement is enabled, jobs missing that data will NOT have schema output. This keeps your structured data clean and avoids Google warnings for incomplete listings."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Require Location"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Only output schema when the job has a location assigned. Remote jobs are always allowed."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Require Salary"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Only output schema when salary data is present and parseable."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Require Company"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Only output schema when a company is linked to the job."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Require Description"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Only output schema when the job post has content/description."
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Require Expiry Date"
+msgstr ""
+
+#: Admin/csf/options/job_opt.php
+msgid "Only output schema when a valid expiry date exists (explicit or fallback)."
+msgstr ""
+
+#: Admin/csf/options/general_opt.php
+msgid "Localization"
+msgstr ""
+
+#: Admin/csf/options/general_opt.php
+msgid "Global Currency"
+msgstr ""
+
+#: Admin/csf/options/general_opt.php
+msgid "Set the default currency used across the site for salaries and payments."
+msgstr ""
+
+#: Admin/csf/options/general_opt.php
+msgid "Advanced Data Management"
+msgstr ""
+

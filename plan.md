@@ -98,7 +98,7 @@
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Essential for maintaining a professional appearance externally.
 
-#### F03.3 – Job Schema Injection (JSON-LD)
+#### F03.3 – Job Schema Injection (JSON-LD) - Done ***
 
 * **Status:** Misplaced
 * **Current Behavior:** Absent from Free; No structured schema limits SEO.

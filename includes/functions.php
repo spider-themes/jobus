@@ -64,6 +64,74 @@ if ( ! function_exists( 'jobus_opt' ) ) {
     }
 }
 
+if ( ! function_exists( 'jobus_get_currencies' ) ) {
+    /**
+     * Get list of all available currencies in the system.
+     * 
+     * @return array Currency code => Name/Symbol mapping
+     */
+    function jobus_get_currencies(): array {
+        return [
+            'USD' => 'USD ($)',
+            'EUR' => 'EUR (€)',
+            'GBP' => 'GBP (£)',
+            'INR' => 'INR (₹)',
+            'JPY' => 'JPY (¥)',
+            'CNY' => 'CNY (¥)',
+            'KRW' => 'KRW (₩)',
+            'AUD' => 'AUD (A$)',
+            'CAD' => 'CAD (C$)',
+            'CHF' => 'CHF (Fr)',
+            'SEK' => 'SEK (kr)',
+            'NOK' => 'NOK (kr)',
+            'DKK' => 'DKK (kr)',
+            'NZD' => 'NZD ($)',
+            'SGD' => 'SGD ($)',
+            'HKD' => 'HKD ($)',
+            'MYR' => 'MYR (RM)',
+            'PHP' => 'PHP (₱)',
+            'THB' => 'THB (฿)',
+            'IDR' => 'IDR (Rp)',
+            'BDT' => 'BDT (৳)',
+            'PKR' => 'PKR (₨)',
+            'AED' => 'AED (د.إ)',
+            'SAR' => 'SAR (﷼)',
+            'ZAR' => 'ZAR (R)',
+            'BRL' => 'BRL (R$)',
+            'MXN' => 'MXN ($)',
+            'TRY' => 'TRY (₺)',
+            'PLN' => 'PLN (zł)',
+            'CZK' => 'CZK (Kč)',
+            'HUF' => 'HUF (Ft)',
+            'RON' => 'RON (lei)',
+            'NGN' => 'NGN (₦)',
+            'EGP' => 'EGP (E£)',
+            'KES' => 'KES (KSh)',
+            'GHS' => 'GHS (₵)',
+            'VND' => 'VND (₫)',
+            'CLP' => 'CLP ($)',
+            'COP' => 'COP ($)',
+            'ARS' => 'ARS ($)',
+            'PEN' => 'PEN (S/)',
+        ];
+    }
+}
+
+if ( ! function_exists( 'jobus_get_currency' ) ) {
+    /**
+     * Get the global default currency set by the admin.
+     * Optionally falls back to WooCommerce currency if enabled for compatibility.
+     *
+     * @return string ISO 4217 Currency Code
+     */
+    function jobus_get_currency(): string {
+        $currency = jobus_opt( 'jobus_default_currency' );
+        
+        return $currency ? sanitize_text_field( $currency ) : 'USD';
+    }
+}
+
+
 /**
  * Get post meta value
  *
