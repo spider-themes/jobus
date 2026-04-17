@@ -22,18 +22,7 @@
             niceSelect.jbsNiceSelect();
         }
 
-        /**
-         * Search Keywords
-         */
-        $('.keywords_search_form ul li a').on('click', function (event) {
-            event.preventDefault();
-            var content = $(this).text();
 
-            console.log(content);
-
-            $('#searchInput').val(content).focus();
-            fetchResults();
-        });
 
         // Related Job Post slider
         function relatedPost() {
@@ -147,25 +136,7 @@
 
         salaryRangeSlider(".salary-slider");
 
-        // Job Category Show More Items
-        function jobCategoryShowMoreItems() {
 
-            let moreBtn = $(".more-btn");
-
-            if (moreBtn.length > 0) {
-                moreBtn.on("click", function () {
-                    let showMore = $(this).siblings('ul').toggleClass("show");
-
-                    if (showMore.hasClass('show')) {
-                        $(this).html('<i class="bi bi-dash"></i> Show Less');
-                    } else {
-                        $(this).html('<i class="bi bi-plus"></i> Show More');
-                    }
-                });
-            }
-        }
-
-        jobCategoryShowMoreItems(); // end jobCategoryShowMoreItems
 
 
         // Copy URL to clipboard
@@ -438,17 +409,22 @@
                 window.history.pushState({ path: url.href }, '', cleanUrl.href);
 
                 // Toggle "Clear All" button visibility instantly
-                const clearAllBtn = document.getElementById('jobus-clear-all-filters');
+                const clearAllBtn = document.getElementById('jbs-clear-all-filters');
                 if (clearAllBtn) {
                     let hasActiveFilters = false;
                     const paramsToCheck = cleanUrl.searchParams;
-                    for (const key of paramsToCheck.keys()) {
-                        if (key !== 'post_type' && key !== 'jobus_nonce' && key !== '_wp_http_referer') {
+                    for (const [key, value] of paramsToCheck.entries()) {
+                        if (value && key !== 'post_type' && key !== 'jobus_nonce' && key !== '_wp_http_referer') {
                             hasActiveFilters = true;
                             break;
                         }
                     }
-                    clearAllBtn.style.display = hasActiveFilters ? 'inline-block' : 'none';
+                    
+                    if (hasActiveFilters) {
+                        clearAllBtn.classList.remove('jbs-d-none');
+                    } else {
+                        clearAllBtn.classList.add('jbs-d-none');
+                    }
                 }
 
                 // Build World-Class Loading Overlay (LinkedIn/Indeed Style)

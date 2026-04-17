@@ -75,8 +75,7 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
             }
             ?>
             <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')); ?>"
-                id="jobus-clear-all-filters" class="jbs-text-danger jbs-fs-14 jbs-fw-500 jbs-float-end"
-                style="text-decoration: underline; <?php echo $has_active_filters ? '' : 'display: none;'; ?>">
+                id="jbs-clear-all-filters" class="jbs-clear-all-btn jbs-fs-13 jbs-fw-500 jbs-float-end tran3s <?php echo $has_active_filters ? '' : 'jbs-d-none'; ?>">
                 <?php esc_html_e('Clear All', 'jobus'); ?>
             </a>
         </div>
@@ -97,7 +96,7 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
 
 
                     ?>
-                    <div class="filter-block jbs-bottom-line jbs-pb-25">
+                    <div class="filter-block jbs-bottom-line jbs-pb-25 dddd">
                         <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>"
                             data-jbs-toggle="collapse" data-jbs-target="#collapse-search-form" role="button"
                             aria-expanded="<?php echo !$is_search_collapsed ? 'true' : 'false'; ?>">
@@ -138,7 +137,11 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
                             <div class="<?php echo esc_attr($is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show') ?>"
                                 id="collapse-<?php echo esc_attr($widget_name) ?>">
                                 <div class="main-body">
-                                    <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
+                                    <?php 
+                                    if ( ! empty( $widget_layout ) ) {
+                                        include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; 
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

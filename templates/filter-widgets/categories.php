@@ -21,10 +21,10 @@ $term_cats = get_terms( array(
 
 if ( ! empty( $term_cats ) ) {
 	?>
+    <?php $searched_opt = jobus_search_terms($taxonomy); ?>
     <select class="jbs-nice-select" name="<?php echo esc_attr($taxonomy) ?>[]">
-        <option value="" disabled selected> <?php esc_html_e( 'Select Category', 'jobus' ); ?> </option>
+        <option value="" <?php echo empty( $searched_opt ) ? 'selected' : ''; ?>> <?php esc_html_e( 'Select Category', 'jobus' ); ?> </option>
 		<?php
-		$searched_opt = jobus_search_terms($taxonomy);
 		foreach ( $term_cats as $term ) {
 			$selected = ( in_array( $term->slug, $searched_opt ) ) ? ' selected' : '';
 			echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';

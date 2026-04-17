@@ -9,21 +9,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-$salary_value_list = $specifications_data;
+// Fetch dynamic range values extracted directly from actual published posts of this particular post_type.
+// Variables $post_type, $meta_opt_key, and $widgets_option_key are injected by the generic-sidebar-filters.php template loader.
+$dynamic_job_values = jobus_all_range_field_value( $post_type ?? 'jobus_job', $meta_opt_key ?? 'jobus_meta_options', $widgets_option_key ?? 'job_sidebar_widgets' );
 
 // Initialize an array to store all numeric values
-$all_values     = [];
+$all_values = [];
 
-// Extract numeric values from meta_values
-foreach ( $salary_value_list as $item ) {
+// Method A: Dynamic scan from actual database (highly accurate, scales automatically)
+if ( ! empty( $dynamic_job_values[ $widget_name ] ) ) {
+	foreach ( $dynamic_job_values[ $widget_name ] as $raw_meta_string ) {
+		// Bulletproof check to handle cases where database stores meta as an array
+		$subject = is_array( $raw_meta_string ) ? implode( '-', $raw_meta_string ) : (string) $raw_meta_string;
 
-	// Extract numbers and check for 'k'
-	preg_match_all( '/(\d+)(k)?/i', $item['meta_values'], $matches );
-	foreach ( $matches[1] as $key => $value ) {
-		// If 'k' is present, multiply the number by 1000
-		$value = isset( $matches[2][ $key ] ) && strtolower( $matches[2][ $key ] ) == 'k' ? $value * 1000 : $value;
+		preg_match_all( '/(\d+)(k)?/i', $subject, $matches );
+		foreach ( $matches[1] as $key => $value ) {
+			// If 'k' is present, multiply the number by 1000
+			$value = isset( $matches[2][ $key ] ) && strtolower( $matches[2][ $key ] ) == 'k' ? $value * 1000 : $value;
+			$all_values[] = $value;
+		}
+	}
+}
 
-		$all_values[] = $value;
+// Method B: Fallback to static admin plugin settings if no jobs have this field populated yet
+if ( empty( $all_values ) && ! empty( $specifications_data ) ) {
+	foreach ( $specifications_data as $item ) {
+		// Bulletproof check for admin config arrays
+		$subject = is_array( $item['meta_values'] ) ? implode( '-', $item['meta_values'] ) : (string) $item['meta_values'];
+
+		preg_match_all( '/(\d+)(k)?/i', $subject, $matches );
+		foreach ( $matches[1] as $key => $value ) {
+			$value = isset( $matches[2][ $key ] ) && strtolower( $matches[2][ $key ] ) == 'k' ? $value * 1000 : $value;
+			$all_values[] = $value;
+		}
 	}
 }
 

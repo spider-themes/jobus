@@ -141,8 +141,7 @@ function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $speci
 		$is_collapsed = '';
 	}
 	?>
-	<?php $bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25"; ?>
-	<div class="filter-block<?php echo $bottom_class; ?>">
+	<div class="filter-block jbs-bottom-line jbs-pb-25">
 		<a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ); ?>"
 		   data-jbs-toggle="collapse"
 		   data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>"
@@ -171,10 +170,8 @@ function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $speci
  */
 function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 	?>
-	<?php $bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25"; ?>
-	<div class="filter-block<?php echo $bottom_class; ?>">
+	<div class="filter-block jbs-bottom-line jbs-pb-25">
 		<?php
-		$bottom_class = $is_last ? " jbs-pb-25" : " jbs-bottom-line jbs-pb-25";
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-start.php';
 		include dirname( __FILE__ ) . '/../filter-widgets/categories.php';
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-end.php';

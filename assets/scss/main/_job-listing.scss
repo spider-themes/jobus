@@ -121,12 +121,15 @@
     font-size: 25px;
   }
 
-  .filter-block.jbs-bottom-line {
-    border-bottom: 1px solid rgb(49 121 90 / 30%);
-
+  .filter-block {
     &+.filter-block {
       margin-top: 25px;
     }
+
+    &.jbs-bottom-line:not(:last-child) {
+      border-bottom: 1px solid rgb(49 121 90 / 30%);
+    }
+
   }
 
   .filter-title {
@@ -355,6 +358,16 @@
     &:hover {
       background: var(--jbs-brand_color_4);
       color: #fff;
+    }
+  }
+
+  .jbs-clear-all-btn {
+    text-decoration: none;
+    color: var(--black_400, #848d95); // Subtle default color
+    @include transition(0.2s);
+
+    &:hover {
+      color: var(--jbs-brand_color_1); // Hover with primary product color
     }
   }
 

@@ -90,9 +90,8 @@ $specs_options = jobus_get_specs_options();
                 }
             }
             ?>
-            <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')); ?>" id="jobus-clear-all-filters"
-                class="jbs-text-danger jbs-fs-14 jbs-fw-500"
-                style="text-decoration: underline; <?php echo $has_active_filters ? '' : 'display: none;'; ?>">
+            <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')); ?>" id="jbs-clear-all-filters"
+                class="jbs-clear-all-btn jbs-fs-13 jbs-fw-500 tran3s <?php echo $has_active_filters ? '' : 'jbs-d-none'; ?>">
                 <?php esc_html_e('Clear All', 'jobus'); ?>
             </a>
         </div>

@@ -13,24 +13,6 @@
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Radius searching is a baseline expectation. A job board without it fails core usability for Free users.
 
-#### F01.2 – Guest Application Pipeline - Done ***
-
-* **Status:** Missing
-* **Current Behavior:** Candidates are forced to register completely before applying.
-* **Issue / Gap:** High bounce rates; blocks spontaneous applications.
-* **Required Action:** Provide a guest apply pipeline.
-* **Free vs Pro Decision:** Keep in Free
-* **Reason (User + Market + Profit):** Essential for user adoption and initial traffic generation.
-
-#### F01.3 – External Application URL Redirects - Done ***
-
-* **Status:** Missing
-* **Current Behavior:** No external ATS redirect exists; applications must be internal.
-* **Issue / Gap:** Blocks larger employers or affiliate boards that require external parsing.
-* **Required Action:** Add an "Apply Externally URL" field to forward candidate traffic.
-* **Free vs Pro Decision:** Keep in Free
-* **Reason (User + Market + Profit):** Critical for aggregator boards to earn via affiliate redirects.
-
 #### F01.4 – Social Login (Google / LinkedIn)
 
 * **Status:** Missing
@@ -60,15 +42,6 @@
 * **Free vs Pro Decision:** Split
 * **Reason (User + Market + Profit):** Basic chat hooks engagement; Pro keeps advanced routing and attachments.
 
-#### F02.2 – Automated Job Expiry - Done ***
-
-* **Status:** Misplaced
-* **Current Behavior:** Expiry scripts restricted to Pro solely.
-* **Issue / Gap:** Free boards fill with stale, outdated jobs, ruining candidate trust.
-* **Required Action:** Provide baseline 30-day auto-expiry engine in Free.
-* **Free vs Pro Decision:** Split
-* **Reason (User + Market + Profit):** Automates board maintenance; allows upsells for "Permanent" Pro listings.
-
 #### F02.3 – Basic Job Analytics
 
 * **Status:** Misplaced
@@ -77,15 +50,6 @@
 * **Required Action:** Provide frontend "Total Job Views" metric in Free.
 * **Free vs Pro Decision:** Split
 * **Reason (User + Market + Profit):** Motivates Free users to upgrade for advanced funnel tracking.
-
-#### F02.4 – Company Verification & Trust Badges - Done ***
-
-* **Status:** Missing
-* **Current Behavior:** No differentiation between standard and reputable companies.
-* **Issue / Gap:** Platform is susceptible to scams, hurting candidate trust.
-* **Required Action:** Add manual "Verified" toggle with trust badge UI.
-* **Free vs Pro Decision:** Keep in Free
-* **Reason (User + Market + Profit):** Fundamental moderation and quality-control feature.
 
 ### 🔹 CHAPTER F03: Global Settings & Formatting
 
@@ -106,15 +70,6 @@
 * **Required Action:** Dedicated email templater UI interface.
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Essential for maintaining a professional appearance externally.
-
-#### F03.3 – Job Schema Injection (JSON-LD) - Done ***
-
-* **Status:** Misplaced
-* **Current Behavior:** Absent from Free; No structured schema limits SEO.
-* **Issue / Gap:** Loss of organic Google Jobs SEO pipeline.
-* **Required Action:** Inject JSON-LD semantic data directly into single job views.
-* **Free vs Pro Decision:** Move to Free
-* **Reason (User + Market + Profit):** Drives the actual traffic to the site; absolutely critical for platform survival.
 
 ---
 
