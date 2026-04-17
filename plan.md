@@ -6,7 +6,7 @@
 
 #### F01.1 – Geolocation & Radius Search Engine
 
-* **Status:** Missing
+* **Status:** Completed
 * **Current Behavior:** Only geographic taxonomies/terms exist for locations.
 * **Issue / Gap:** Users cannot search by dynamically calculated radius around their zip code/city (e.g., "within 20 miles").
 * **Required Action:** Implement a latitude/longitude based radius query engine with basic API mapping integration.
@@ -205,13 +205,13 @@
 
 ### A02: Custom Search Index Table Implementation
 
-* **Status:** Critical
+* **Status:** Completed
 * **Issue:** Standard native `$wpdb->prepare` loops traversing `wp_postmeta` completely collapse site performance when queries map over >10k individual job posts.
 * **Required Fix:** Offload searchable data integers and text loops into a deeply flattened custom flat index table (`wp_jobus_search_index`).
 
 ### A03: Geometric Proximity Engine (Radius Backend)
 
-* **Status:** Critical
+* **Status:** Completed
 * **Issue:** Currently impossible to execute geometric lookups safely via standard WP tables.
 * **Required Fix:** Implement raw database SQL Haversine calculations applied directly against the index table.
 

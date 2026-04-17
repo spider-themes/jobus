@@ -29,22 +29,43 @@ class Geolocation {
 			return;
 		}
 
-		// Look for location taxonomy as string
-		$address = '';
-		$locations = wp_get_post_terms( $post_id, 'jobus_job_location', [ 'fields' => 'names' ] );
-		if ( ! empty( $locations ) && ! is_wp_error( $locations ) ) {
-			$address = implode( ', ', $locations );
+		$coords = false;
+
+		// 1. Check if the taxonomy term has explicit Lat/Lng override configured via CSF
+		$terms = wp_get_post_terms( $post_id, 'jobus_job_location' );
+		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			$term_id = $terms[0]->term_id; // Use primary location term
+			$term_meta = get_term_meta( $term_id, 'jobus_taxonomy_location', true );
+			
+			if ( isset( $term_meta['location_map']['latitude'] ) && isset( $term_meta['location_map']['longitude'] ) ) {
+				$lat = (float) $term_meta['location_map']['latitude'];
+				$lng = (float) $term_meta['location_map']['longitude'];
+				// Ignore if map was saved without ever being touched (default 20, 0)
+				if ( ! ( $lat == 20 && $lng == 0 ) ) {
+					$coords = [
+						'lat' => $lat,
+						'lng' => $lng,
+					];
+				}
+			}
 		}
-		
-		// If custom location exists in meta, we could prioritize that.
-		// For now we use the taxonomy name.
 
-		if ( empty( $address ) ) {
-			return;
+		// 2. Fallback to API geocoding of taxonomy strings if manual overrides don't exist
+		if ( ! $coords ) {
+			$address = '';
+			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+				$names = wp_list_pluck( $terms, 'name' );
+				$address = implode( ', ', $names );
+			}
+
+			if ( empty( $address ) ) {
+				return;
+			}
+
+			$coords = $this->geocode_address( $address );
 		}
 
-		$coords = $this->geocode_address( $address );
-
+		// 3. Save resolved coordinates into Custom Index
 		if ( $coords ) {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'jobus_search_index';
@@ -142,6 +163,11 @@ class Geolocation {
 	 * @return array
 	 */
 	public function apply_radius_filter( $args, $params = [] ) {
+		$options = get_option( 'jobus_opt', [] );
+		if ( isset( $options['enable_radius_search'] ) && empty( $options['enable_radius_search'] ) ) {
+			return $args;
+		}
+
 		// Use native $_GET or fallback to custom params matching `radius_location` and `radius_distance`
 		$location = isset( $_GET['radius_location'] ) ? sanitize_text_field( $_GET['radius_location'] ) : ( $params['radius_location'] ?? '' );
 		$distance = isset( $_GET['radius_distance'] ) ? absint( $_GET['radius_distance'] ) : ( $params['radius_distance'] ?? 0 );

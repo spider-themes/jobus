@@ -58,4 +58,35 @@ if ( class_exists( 'CSF' ) ) {
             ),
         )
     ) );
+
+	/**
+	 * Jobus Location Taxonomy
+	 * Adds explicit Latitude and Longitude fields for manual coordinate control.
+	 */
+    $meta_location = 'jobus_taxonomy_location';
+
+    CSF::createTaxonomyOptions( $meta_location, array(
+        'taxonomy'  => 'jobus_job_location', // Hook into the location taxonomy
+        'data_type' => 'serialize', 
+    ) );
+
+    CSF::createSection( $meta_location, array(
+        'fields' => array(
+            array(
+                'type'    => 'subheading',
+                'content' => esc_html__('Geolocation Coordinates', 'jobus'),
+            ),
+			array(
+				'type'    => 'content',
+				'content' => '<p>' . esc_html__('Setting coordinates here overrides the automatic geocoding. This guarantees 100% precision for Radius Searches.', 'jobus') . '</p>',
+			),
+            array(
+                'id'      => 'location_map',
+                'type'    => 'map',
+                'title'   => esc_html__('Interactive Map', 'jobus'),
+                'desc'    => esc_html__('Search for an address or drag the map to set exact coordinates.', 'jobus'),
+            ),
+        )
+    ) );
+
 }

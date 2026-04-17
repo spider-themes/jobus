@@ -40,6 +40,7 @@ $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 
         </button>
     </div>
 
+    <?php if ( ! empty( $jobus_opt['enable_radius_search'] ) || ! isset( $jobus_opt['enable_radius_search'] ) ) : ?>
     <!-- Geolocation Radius Search -->
     <div class="radius-search-wrapper jbs-p-20 jbs-rounded" style="background: rgba(0,0,0,0.02); border: 1px dashed #e2e2e2; padding-top: 16px;">
         <label for="radius_location" class="jbs-fw-500 jbs-mb-10 jbs-d-block jbs-fs-14"><?php esc_html_e( 'Location Radius', 'jobus' ); ?></label>
@@ -73,6 +74,7 @@ $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 
             <div class="jbs-clearfix"></div>
         </div>
     </div>
+    <?php endif; ?>
 </div>
 
 <script>
