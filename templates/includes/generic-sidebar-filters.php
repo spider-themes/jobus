@@ -31,9 +31,9 @@ if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter
 
 $taxonomy_widgets = jobus_opt( $taxonomy_widgets_key );
 if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
-	$active_taxes = array_filter($taxonomy_widgets);
-					foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
-						$is_last = ($option_key === array_key_last($active_taxes));
+	$active_taxes = array_filter( $taxonomy_widgets );
+	foreach ( $taxonomy_widgets as $option_key => $is_enabled ) {
+		$is_last = ( $option_key === array_key_last( $active_taxes ) );
 		if ( $is_enabled && isset( $taxonomy_mapping[ $option_key ] ) ) {
 			$has_filter_widgets = true;
 			break;
@@ -117,7 +117,8 @@ if ( ! $has_filter_widgets ) {
  * @param string $specifications_options_key Spec options key
  * @param string $meta_opt_key Meta option key
  */
-function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $specifications_option_key, $specifications_options_key, $meta_opt_key, $is_last = false ) {
+if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
+	function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $specifications_option_key, $specifications_options_key, $meta_opt_key, $is_last = false ) {
 	$tab_count = $index + 1;
 	$is_collapsed = $tab_count === 1 ? '' : ' jbs-collapsed';
 	$is_collapsed_show = $tab_count === 1 ? 'jbs-collapse jbs-show' : 'jbs-collapse';
@@ -168,7 +169,8 @@ function jobus_render_sidebar_filter_widget( $widget, $index, $post_type, $speci
  *
  * @param string $taxonomy Taxonomy name
  */
-function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
+if ( ! function_exists( 'jobus_render_taxonomy_filter_widget' ) ) {
+	function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 	?>
 	<div class="filter-block jbs-bottom-line jbs-pb-25">
 		<?php
@@ -178,6 +180,7 @@ function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 		?>
 	</div>
 	<?php
+	}
 }
 ?>
 

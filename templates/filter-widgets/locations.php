@@ -17,11 +17,15 @@ if ( ! empty( $term_location ) ) {
 	?>
     <?php $searched_opt = jobus_search_terms( $taxonomy ); ?>
     <select class="jbs-nice-select" name="<?php echo esc_attr($taxonomy) ?>[]">
-        <option value="" <?php echo empty( $searched_opt ) ? 'selected' : ''; ?>><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
+        <option value="" <?php selected( empty( $searched_opt ), true ); ?>><?php esc_html_e( 'Select Location', 'jobus' ); ?></option>
 		<?php
 		foreach ( $term_location as $term ) {
-			$selected = ( in_array( $term->slug, $searched_opt ) ) ? ' selected' : '';
-			echo '<option value="' . esc_attr($term->slug) . '"' . esc_attr($selected) . '>' . esc_html($term->name) . '</option>';
+			$is_selected = in_array( $term->slug, $searched_opt, true );
+			?>
+			<option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $is_selected, true ); ?>>
+				<?php echo esc_html( $term->name ); ?>
+			</option>
+			<?php
 		}
 		?>
     </select>

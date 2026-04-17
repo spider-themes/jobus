@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php jobus_get_template_part('contents-company/sidebar-classic-filters'); ?>
 
             <div class="jbs-col-xl-9 jbs-col-lg-8">
-                <div class="jbs-ms-xl-3">
+                <div class="jbs-ms-xl-3" data-jbs-filter-results="true">
 
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
 	                    <?php

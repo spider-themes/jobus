@@ -67,13 +67,15 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
             <?php esc_html_e('Filter By', 'jobus'); ?>
             <?php
             $has_active_filters = false;
-            if (!empty($_GET)) {
-                $temp_get = $_GET;
-                unset($temp_get['post_type'], $temp_get['jobus_nonce'], $temp_get['_wp_http_referer']);
-                if (count($temp_get) > 0)
-                    $has_active_filters = true;
-            }
-            ?>
+            $ignored_keys = array( 'post_type', 'jobus_nonce', '_wp_http_referer' );
+            if ( ! empty( $_GET ) ) {
+                foreach ( $_GET as $key => $value ) {
+                    if ( ! in_array( $key, $ignored_keys, true ) && ! empty( $value ) ) {
+                        $has_active_filters = true;
+                        break;
+                    }
+                }
+            }?>
             <a href="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')); ?>"
                 id="jbs-clear-all-filters" class="jbs-clear-all-btn jbs-fs-13 jbs-fw-500 jbs-float-end tran3s <?php echo $has_active_filters ? '' : 'jbs-d-none'; ?>">
                 <?php esc_html_e('Clear All', 'jobus'); ?>

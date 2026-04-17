@@ -319,7 +319,7 @@
         //============== Modern AJAX Filter Engine (PJAX) ================//
         function initAjaxFilters() {
             const filterForm = document.querySelector('#filteroffcanvas form');
-            const resultWrapper = document.querySelector('.job-post-item-wrapper');
+            const resultWrapper = document.querySelector('[data-jbs-filter-results="true"]');
             
             // Validate that we are on an archive page with proper wrappers
             if (!filterForm || !resultWrapper) return;
@@ -469,7 +469,7 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(htmlText, 'text/html');
                     
-                    const newResultWrapper = doc.querySelector('.job-post-item-wrapper');
+                    const newResultWrapper = doc.querySelector('[data-jbs-filter-results="true"]');
                     if (newResultWrapper) {
                         // Hot swap the DOM securely
                         resultWrapper.innerHTML = newResultWrapper.innerHTML;
@@ -527,7 +527,7 @@
             });
 
             // 4. Intercept Pagination links inside the wrapper
-            $(document).on('click', '.job-post-item-wrapper .jbs-pagination a', function(e) {
+            $(document).on('click', '[data-jbs-filter-results="true"] .jbs-pagination a', function(e) {
                 e.preventDefault();
                 const url = $(this).attr('href');
                 if (url) {

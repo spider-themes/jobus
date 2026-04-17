@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php jobus_get_template_part('contents-candidate/sidebar-topbar-filters'); ?>
 
             <div class="jbs-col-12">
-                <div class="candidate-profile-item-wrapper">
+                <div class="candidate-profile-item-wrapper" data-jbs-filter-results="true">
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
 	                    <?php
 	                    // Display the total number of candidates found

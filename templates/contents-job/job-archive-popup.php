@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">
-                <div class="job-post-item-wrapper">
+                <div class="job-post-item-wrapper" data-jbs-filter-results="true">
 
                     <?php
                     // Check if there are any filter widgets (meta or taxonomy) configured

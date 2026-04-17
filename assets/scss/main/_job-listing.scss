@@ -363,11 +363,12 @@
 
   .jbs-clear-all-btn {
     text-decoration: none;
-    color: var(--black_400, #848d95); // Subtle default color
+    color: var(--black_400, #848d95);
+    font-size: 14px;
     @include transition(0.2s);
 
     &:hover {
-      color: var(--jbs-brand_color_1); // Hover with primary product color
+      color: var(--jbs-brand_color_1);
     }
   }
 
