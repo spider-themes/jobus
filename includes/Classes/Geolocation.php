@@ -89,6 +89,22 @@ class Geolocation {
 	 * @return array|false Returns ['lat' => float, 'lng' => float] or false on failure.
 	 */
 	public function geocode_address( $address ) {
+		// 1. Check if the address matches a jobus_job_location term exactly to use precise meta overrides
+		$term = get_term_by( 'name', $address, 'jobus_job_location' );
+		if ( $term ) {
+			$term_meta = get_term_meta( $term->term_id, 'jobus_taxonomy_location', true );
+			if ( isset( $term_meta['location_map']['latitude'] ) && isset( $term_meta['location_map']['longitude'] ) ) {
+				$lat = (float) $term_meta['location_map']['latitude'];
+				$lng = (float) $term_meta['location_map']['longitude'];
+				if ( ! ( $lat == 20 && $lng == 0 ) ) {
+					return [
+						'lat' => $lat,
+						'lng' => $lng,
+					];
+				}
+			}
+		}
+
 		$options  = get_option( 'jobus_opt', [] );
 		$provider = $options['geolocation_provider'] ?? 'nominatim';
 
@@ -170,20 +186,18 @@ class Geolocation {
 
 		// Use native $_GET or fallback to custom params matching `radius_location` and `radius_distance`
 		$location = isset( $_GET['radius_location'] ) ? sanitize_text_field( $_GET['radius_location'] ) : ( $params['radius_location'] ?? '' );
-		$distance = isset( $_GET['radius_distance'] ) ? absint( $_GET['radius_distance'] ) : ( $params['radius_distance'] ?? 0 );
+		$distance_raw = isset( $_GET['radius_distance'] ) ? $_GET['radius_distance'] : ( $params['radius_distance'] ?? '' );
 		$lat_input = isset( $_GET['radius_lat'] ) ? (float) $_GET['radius_lat'] : ( $params['radius_lat'] ?? 0 );
 		$lng_input = isset( $_GET['radius_lng'] ) ? (float) $_GET['radius_lng'] : ( $params['radius_lng'] ?? 0 );
 
-		if ( empty( $distance ) ) {
+		if ( empty( $location ) && ! $lat_input ) {
+			// They did not provide a location point. Even if they selected a distance, 
+			// it makes no geographical sense to restrict it. Gracefully bypass radius.
 			return $args;
 		}
 
-		if ( empty( $location ) && ! $lat_input ) {
-			// They want to restrict by distance but provided no location point.
-			// Force return 0 jobs because the query makes no geographical sense.
-			$args['post__in'] = [ 0 ];
-			return $args;
-		}
+		$distance = absint( $distance_raw ); // '' or 0 corresponds to Exact Location Only
+
 
 		if ( $lat_input && $lng_input ) {
 			$center = [ 'lat' => $lat_input, 'lng' => $lng_input ];
@@ -208,17 +222,19 @@ class Geolocation {
 		$lat = (float) $center['lat'];
 		$lng = (float) $center['lng'];
 
+		$distance_float = max( 0.001, (float) $distance );
+
 		$sql = $wpdb->prepare(
 			"SELECT post_id, 
 			( %d * acos( cos( radians(%f) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(%f) ) + sin( radians(%f) ) * sin( radians( lat ) ) ) ) AS distance 
 			FROM $table_name 
-			HAVING distance <= %d 
+			HAVING distance <= %f 
 			ORDER BY distance ASC",
 			$earth_radius,
 			$lat,
 			$lng,
 			$lat,
-			$distance
+			$distance_float
 		);
 
 		$results = $wpdb->get_col( $sql );

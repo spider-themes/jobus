@@ -22,105 +22,76 @@ $radius_lng      = isset( $_GET['radius_lng'] ) ? sanitize_text_field( $_GET['ra
 $jobus_opt      = get_option( 'jobus_opt', [] );
 $radius_unit    = $jobus_opt['radius_unit'] ?? 'mi';
 $default_radius = $jobus_opt['default_radius'] ?? 50;
+$max_radius     = $jobus_opt['max_radius'] ?? 250;
 
 $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 'miles', 'jobus' );
 ?>
 <div class="search-form-widget">
+    <label for="searchInput" class="search-widget-label"><?php esc_html_e( 'Keyword', 'jobus' ); ?></label>
     <div class="input-box jbs-position-relative jbs-mb-20">
-        <label for="searchInput" class="jbs-fw-500 jbs-mb-2 jbs-d-block jbs-fs-14"><?php esc_html_e( 'Keyword', 'jobus' ); ?></label>
         <input type="text"
                name="s"
                id="searchInput"
                value="<?php echo esc_attr( get_search_query() ); ?>"
                placeholder="<?php esc_attr_e( 'Job title, keywords...', 'jobus' ); ?>"
                aria-label="<?php esc_attr_e( 'Search', 'jobus' ); ?>"
-               class="jbs-w-100 jbs-rounded" style="height: 45px; padding-left: 15px; border: 1px solid #e5e5e5;">
-        <button type="button" class="jbs-border-0 jbs-position-absolute" style="right: 15px; top: 38px; background: transparent; color: #a0a0a0;">
+               class="jbs-w-100 jbs-rounded">
+        <button type="button" class="jbs-border-0 jbs-position-absolute search-submit-btn">
             <i class="bi bi-search"></i>
         </button>
     </div>
 
     <?php if ( ! empty( $jobus_opt['enable_radius_search'] ) || ! isset( $jobus_opt['enable_radius_search'] ) ) : ?>
     <!-- Geolocation Radius Search -->
-    <div class="radius-search-wrapper jbs-p-20 jbs-rounded" style="background: rgba(0,0,0,0.02); border: 1px dashed #e2e2e2; padding-top: 16px;">
-        <label for="radius_location" class="jbs-fw-500 jbs-mb-10 jbs-d-block jbs-fs-14"><?php esc_html_e( 'Location Radius', 'jobus' ); ?></label>
+    <div class="radius-search-wrapper jbs-p-20 jbs-rounded"
+         data-text-my-loc="<?php esc_attr_e( 'My Current Location', 'jobus' ); ?>"
+         data-text-err-loc="<?php esc_attr_e( 'Unable to retrieve your location.', 'jobus' ); ?>"
+         data-text-err-sup="<?php esc_attr_e( 'Geolocation is not supported by your browser.', 'jobus' ); ?>"
+         data-text-exact="<?php esc_attr_e( 'Exact', 'jobus' ); ?>"
+         data-default-radius="<?php echo esc_attr( $default_radius ); ?>">
+        <label for="radius_location" class="search-widget-label"><?php esc_html_e( 'Location Radius', 'jobus' ); ?></label>
         <div class="input-box jbs-mb-15 jbs-position-relative">
             <input type="text"
                    name="radius_location"
                    id="radius_location"
                    value="<?php echo esc_attr( $radius_location ); ?>"
-                   placeholder="<?php esc_attr_e( 'City or Zip Code', 'jobus' ); ?>"
-                   class="jbs-w-100 jbs-rounded" style="height: 40px; padding-left: 35px; padding-right: 35px; border: 1px solid #e5e5e5;">
-            <i class="bi bi-geo-alt jbs-position-absolute" style="left: 12px; top: 10px; color: #a0a0a0;"></i>
+                   placeholder="<?php esc_attr_e( 'City, State, or Country', 'jobus' ); ?>"
+                   class="jbs-w-100 jbs-rounded radius-location-input">
+            <i class="bi bi-geo-alt jbs-position-absolute location-icon"></i>
             
             <input type="hidden" name="radius_lat" id="radius_lat" value="<?php echo esc_attr( $radius_lat ); ?>">
             <input type="hidden" name="radius_lng" id="radius_lng" value="<?php echo esc_attr( $radius_lng ); ?>">
             
-            <button type="button" id="jbs_get_my_location" class="jbs-border-0 jbs-position-absolute jbs-p-0" style="right: 12px; top: 10px; background: transparent; color: #28a745;" title="<?php esc_attr_e( 'Use My Location', 'jobus' ); ?>">
+            <button type="button" id="jbs_get_my_location" class="jbs-border-0 jbs-position-absolute jbs-p-0" title="<?php esc_attr_e( 'Use My Location', 'jobus' ); ?>">
                 <i class="bi bi-crosshair"></i>
             </button>
         </div>
-        <div class="input-box">
-            <select name="radius_distance" id="radius_distance" class="jbs-nice-select jbs-w-100">
-                <option value=""><?php esc_html_e( 'Exact Location Only', 'jobus' ); ?></option>
-                <?php
-                $distances = [ 5, 10, 25, 50, 100, 250 ];
-                foreach ( $distances as $dist ) {
-                    $selected = selected( $radius_distance, $dist, false );
-                    echo '<option value="' . esc_attr( $dist ) . '" ' . $selected . '>' . sprintf( esc_html__( 'Within %d %s', 'jobus' ), $dist, $unit_label ) . '</option>';
-                }
+        <div class="input-box jbs-mt-20">
+            <div class="jbs-d-flex jbs-justify-content-between jbs-mb-10">
+                <label for="radius_distance" class="search-widget-label jbs-mb-0"><?php esc_html_e( 'Max Distance', 'jobus' ); ?></label>
+                <div class="radius-value-display jbs-fw-500">
+                    <span id="radius_val_text"><?php echo esc_html( empty($radius_distance) ? esc_html__( 'Exact', 'jobus' ) : $radius_distance ); ?></span>
+                    <span id="radius_val_unit" style="display: <?php echo empty($radius_distance) ? 'none' : 'inline'; ?>"><?php echo esc_html( $unit_label ); ?></span>
+                </div>
+            </div>
+            <div class="radius-distance-slider jbs-mt-10 jbs-mb-5">
+                <?php 
+                $max_dist = absint($max_radius);
+                $current_dist = empty($radius_distance) ? 0 : absint($radius_distance);
+                $percentage = ($current_dist / $max_dist) * 100;
                 ?>
-            </select>
+                <input type="range" 
+                       name="radius_distance" 
+                       id="radius_distance" 
+                       class="jbs-w-100" 
+                       min="0" 
+                       max="<?php echo esc_attr($max_dist); ?>" 
+                       step="5" 
+                       data-percentage="<?php echo esc_attr($percentage); ?>"
+                       value="<?php echo esc_attr( $current_dist ); ?>">
+            </div>
             <div class="jbs-clearfix"></div>
         </div>
     </div>
     <?php endif; ?>
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const btn = document.getElementById('jbs_get_my_location');
-    if(btn) {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const icon = btn.querySelector('i');
-            icon.className = 'bi bi-arrow-repeat jbs-spin'; // Add spinner interaction
-            
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    document.getElementById('radius_lat').value = position.coords.latitude;
-                    document.getElementById('radius_lng').value = position.coords.longitude;
-                    document.getElementById('radius_location').value = "<?php esc_html_e( 'My Current Location', 'jobus' ); ?>";
-                    
-                    // If no distance select is previously chosen, set it to 50 magically.
-                    const distSelect = document.getElementById('radius_distance');
-                    if(distSelect && distSelect.value === "") {
-                        distSelect.value = "<?php echo esc_js( $default_radius ); ?>";
-                        if(window.jQuery) {
-                            jQuery(distSelect).niceSelect('update');
-                        }
-                    }
-                    
-                    icon.className = 'bi bi-check-circle';
-                    icon.style.color = '#28a745';
-                    
-                }, function(error) {
-                    alert("<?php esc_html_e( 'Unable to retrieve your location.', 'jobus' ); ?>");
-                    icon.className = 'bi bi-crosshair';
-                });
-            } else {
-                alert("<?php esc_html_e( 'Geolocation is not supported by your browser.', 'jobus' ); ?>");
-                icon.className = 'bi bi-crosshair';
-            }
-        });
-        
-        // Ensure lat/lng are cleared if user types a new custom location
-        document.getElementById('radius_location').addEventListener('input', function() {
-            if (this.value !== "<?php esc_html_e( 'My Current Location', 'jobus' ); ?>") {
-                document.getElementById('radius_lat').value = '';
-                document.getElementById('radius_lng').value = '';
-            }
-        });
-    }
-});
-</script>

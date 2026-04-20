@@ -316,6 +316,102 @@
         // Initialize login modal handlers
         initLoginModal();
 
+        //============== Radius Distance Slider & Geolocation ================//
+        function initRadiusGeolocation() {
+            const radiusWrapper = document.querySelector('.radius-search-wrapper');
+            if(!radiusWrapper) return;
+
+            const slider = radiusWrapper.querySelector('#radius_distance');
+            const valText = radiusWrapper.querySelector('#radius_val_text');
+            const valUnit = radiusWrapper.querySelector('#radius_val_unit');
+            const textExact = radiusWrapper.getAttribute('data-text-exact');
+
+            function updateSliderVisuals(sliderEl) {
+                const val = parseInt(sliderEl.value);
+                if(valText) valText.innerText = (val === 0) ? textExact : val;
+                if(valUnit) valUnit.style.display = (val === 0) ? 'none' : 'inline';
+                
+                const max = parseInt(sliderEl.max) || 250;
+                const percentage = (val / max) * 100;
+                sliderEl.style.background = 'linear-gradient(to right, var(--jbs-brand_color_1) ' + percentage + '%, #e2e2e2 ' + percentage + '%)';
+            }
+
+            if(slider) {
+                // Initialize visuals gracefully on load (taking percentage if rendered server-side)
+                if(slider.getAttribute('data-percentage')) {
+                   const pct = slider.getAttribute('data-percentage');
+                   slider.style.background = 'linear-gradient(to right, var(--jbs-brand_color_1) ' + pct + '%, #e2e2e2 ' + pct + '%)';
+                } else {
+                   updateSliderVisuals(slider);
+                }
+
+                // Update visuals instantly on drag
+                slider.addEventListener('input', function() {
+                    updateSliderVisuals(this);
+                });
+            }
+
+            const locationBtn = radiusWrapper.querySelector('#jbs_get_my_location');
+            if(locationBtn) {
+                locationBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const icon = locationBtn.querySelector('i');
+                    icon.className = 'bi bi-arrow-repeat jbs-spin';
+                    
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            const latInput = radiusWrapper.querySelector('#radius_lat');
+                            const lngInput = radiusWrapper.querySelector('#radius_lng');
+                            const locInput = radiusWrapper.querySelector('#radius_location');
+
+                            if(latInput) latInput.value = position.coords.latitude;
+                            if(lngInput) lngInput.value = position.coords.longitude;
+                            if(locInput) locInput.value = radiusWrapper.getAttribute('data-text-my-loc');
+                            
+                            // If they clicked target but slider was Exact (0), snap it magically to default radius
+                            if(slider && parseInt(slider.value) === 0) {
+                                slider.value = radiusWrapper.getAttribute('data-default-radius');
+                                updateSliderVisuals(slider);
+                                
+                                // Auto-trigger AJAX filter since we forcefully moved the value programmatically
+                                slider.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            
+                            icon.className = 'bi bi-check-circle';
+                            icon.style.color = '#28a745';
+                            
+                        }, function(error) {
+                            alert(radiusWrapper.getAttribute('data-text-err-loc'));
+                            icon.className = 'bi bi-crosshair';
+                        });
+                    } else {
+                        alert(radiusWrapper.getAttribute('data-text-err-sup'));
+                        icon.className = 'bi bi-crosshair';
+                    }
+                });
+            }
+
+            // Remove coordinates immediately if they tamper with "My Location" string
+            const locInput = radiusWrapper.querySelector('#radius_location');
+            if(locInput) {
+                locInput.addEventListener('input', function() {
+                    if (this.value !== radiusWrapper.getAttribute('data-text-my-loc')) {
+                        const latInput = radiusWrapper.querySelector('#radius_lat');
+                        const lngInput = radiusWrapper.querySelector('#radius_lng');
+                        if(latInput) latInput.value = '';
+                        if(lngInput) lngInput.value = '';
+                        
+                        const icon = radiusWrapper.querySelector('#jbs_get_my_location i');
+                        if(icon && icon.className.includes('bi-check-circle')) {
+                            icon.className = 'bi bi-crosshair';
+                            icon.style.color = '';
+                        }
+                    }
+                });
+            }
+        }
+        initRadiusGeolocation();
+
         //============== Modern AJAX Filter Engine (PJAX) ================//
         function initAjaxFilters() {
             const filterForm = document.querySelector('#filteroffcanvas form');

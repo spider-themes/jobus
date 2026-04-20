@@ -1,0 +1,97 @@
+// Search Form Widget Styles (Sidebar)
+.search-form-widget {
+  .search-widget-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .input-box {
+    &>input[name="s"] {
+      height: 45px;
+      padding-left: 15px;
+      border: 1px solid #e5e5e5;
+    }
+
+    .search-submit-btn {
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      color: #a0a0a0;
+      padding: 0;
+    }
+  }
+
+  // Geolocation Radius Search Wrapper
+  .radius-search-wrapper {
+    .input-box {
+      position: relative;
+
+      .radius-location-input {
+        background: #FAFAFA;
+        border: 1px solid #EDEDED;
+        height: 40px;
+        padding-left: 35px;
+        padding-right: 35px;
+      }
+
+      .location-icon {
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0a0a0;
+      }
+
+      #jbs_get_my_location {
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        color: #28a745;
+        padding: 0;
+      }
+    }
+
+    .radius-value-display {
+      font-size: 13px;
+      color: var(--jbs-brand_color_1);
+    }
+
+    .radius-distance-slider {
+      input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 6px;
+        border-radius: 5px;
+        outline: none;
+        padding: 0;
+        margin: 10px 0;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: var(--jbs-brand_color_1);
+          cursor: pointer;
+          border: 2px solid #fff;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+          transition: transform 0.1s, box-shadow 0.1s;
+
+          &:hover {
+            transform: scale(1.15);
+          }
+
+          &:active {
+            box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06);
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

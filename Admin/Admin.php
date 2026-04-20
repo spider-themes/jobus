@@ -27,6 +27,7 @@ class Admin {
 		add_filter( 'submenu_file', [ $this, 'active_sub_menus' ] );
 		add_filter( 'plugin_row_meta', [ $this, 'add_meta_links' ], 10, 2 );
 		add_action( 'admin_init', [ $this, 'setup_radius_engine' ] );
+		add_action( 'admin_notices', [ $this, 'radius_sync_notice' ] );
 	}
 
 	/**
@@ -93,16 +94,29 @@ class Admin {
 				}
 			}
 
-			// Output success and halt securely
-			wp_die( 
-				sprintf( 
-					/* translators: %d: number of jobs synced */
-					esc_html__( 'Radius Search Setup Complete. Database Table created and synced %d jobs with geolocation coordinates.', 'jobus' ), 
-					absint( $synced_count ) 
-				), 
-				esc_html__( 'Setup Complete', 'jobus' ), 
-				[ 'response' => 200 ] 
+			update_option( 'jobus_radius_setup_completed', true );
+			
+			// Output success and redirect securely
+			$redirect_url = remove_query_arg( [ 'jobus_setup_radius', '_wpnonce' ] );
+			$redirect_url = add_query_arg( [ 'jobus_radius_synced' => $synced_count ], $redirect_url );
+			
+			wp_safe_redirect( $redirect_url );
+			exit;
+		}
+	}
+
+	/**
+	 * Flash an admin notice upon successful radius search setup.
+	 */
+	public function radius_sync_notice(): void {
+		if ( isset( $_GET['jobus_radius_synced'] ) && current_user_can( 'manage_options' ) ) {
+			$count   = absint( $_GET['jobus_radius_synced'] );
+			$message = sprintf( 
+				/* translators: %d: number of jobs synced */
+				esc_html__( 'Radius Search Setup Complete. Database Table created and synced %d jobs with geolocation coordinates.', 'jobus' ), 
+				$count 
 			);
+			echo '<div class="notice notice-success is-dismissible"><p>' . $message . '</p></div>';
 		}
 	}
 

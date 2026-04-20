@@ -4,15 +4,6 @@
 
 ### 🔹 CHAPTER F01: Job Search & Application
 
-#### F01.1 – Geolocation & Radius Search Engine
-
-* **Status:** Completed
-* **Current Behavior:** Only geographic taxonomies/terms exist for locations.
-* **Issue / Gap:** Users cannot search by dynamically calculated radius around their zip code/city (e.g., "within 20 miles").
-* **Required Action:** Implement a latitude/longitude based radius query engine with basic API mapping integration.
-* **Free vs Pro Decision:** Keep in Free
-* **Reason (User + Market + Profit):** Radius searching is a baseline expectation. A job board without it fails core usability for Free users.
-
 #### F01.4 – Social Login (Google / LinkedIn)
 
 * **Status:** Missing
@@ -21,15 +12,6 @@
 * **Required Action:** Integrate Google/LinkedIn OAuth handlers.
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Boosts core user acquisition immediately.
-
-#### F01.5 – Modern AJAX Filter Engine
-
-* **Status:** Planned
-* **Current Behavior:** Filters rely on legacy `<form method="get">` full-page reloads and regex parsed parameters.
-* **Issue / Gap:** High friction UX, slow perceived performance, and non-standard URL outputs (e.g. `@space@` slugs).
-* **Required Action:** Implement a `window.fetch` backed PJAX (PushState AJAX) architecture. Intercept JS events (clicks/changes), fetch filtered archive quietly, extract the grid HTML, hot-swap the DOM, and update the URL silently, preserving the existing theme UI classes perfectly.
-* **Free vs Pro Decision:** Keep in Free
-* **Reason (User + Market + Profit):** Candidate expectation for UX is set by Airbnb/LinkedIn. Slow filtering equals high bounce rate.
 
 ### 🔹 CHAPTER F02: Communication & Retention
 
@@ -208,12 +190,6 @@
 * **Status:** Completed
 * **Issue:** Standard native `$wpdb->prepare` loops traversing `wp_postmeta` completely collapse site performance when queries map over >10k individual job posts.
 * **Required Fix:** Offload searchable data integers and text loops into a deeply flattened custom flat index table (`wp_jobus_search_index`).
-
-### A03: Geometric Proximity Engine (Radius Backend)
-
-* **Status:** Completed
-* **Issue:** Currently impossible to execute geometric lookups safely via standard WP tables.
-* **Required Fix:** Implement raw database SQL Haversine calculations applied directly against the index table.
 
 ### A04: Template Modularization Map
 
