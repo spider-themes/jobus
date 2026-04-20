@@ -39,7 +39,25 @@ $align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
                 </div>
             <?php endif; ?>
             <div id="registration-message" class="jbs-mt-20"></div>
-            <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
+
+            <?php
+            // Render social login buttons dynamically from all enabled providers.
+            if ( class_exists( '\\jobus\\includes\\Classes\\OAuth\\Provider_Manager' ) ) {
+                $enabled_providers = \jobus\includes\Classes\OAuth\Provider_Manager::instance()->get_enabled();
+                if ( ! empty( $enabled_providers ) ) :
+            ?>
+            <div class="jobus-social-login">
+                <?php foreach ( $enabled_providers as $provider ) : ?>
+                    <?php echo $provider->render_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render_button() escapes all output internally ?>
+                <?php endforeach; ?>
+            </div>
+            <p class="jobus-social-divider"><span><?php esc_html_e( 'or register with email', 'jobus' ); ?></span></p>
+            <?php
+                endif;
+            }
+            ?>
+
+            <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-10" role="tablist">
                 <li class="jbs-nav-item" role="presentation">
                     <button class="jbs-nav-link <?php echo ! $is_employer_tab ? 'active' : ''; ?>" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
                         <?php esc_html_e('Candidates', 'jobus'); ?>

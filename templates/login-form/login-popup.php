@@ -55,6 +55,23 @@ if ( is_user_logged_in() ) {
                         </p>
                     </div>
                     <div class="form-wrapper jbs-m-auto">
+                        <?php
+                        // Render social login buttons dynamically from all enabled providers.
+                        if ( class_exists( '\\jobus\\includes\\Classes\\OAuth\\Provider_Manager' ) ) {
+                            $enabled_providers = \jobus\includes\Classes\OAuth\Provider_Manager::instance()->get_enabled();
+                            if ( ! empty( $enabled_providers ) ) :
+                        ?>
+                        <div class="jobus-social-login">
+                            <?php foreach ( $enabled_providers as $provider ) : ?>
+                                <?php echo $provider->render_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render_button() escapes all output internally ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <p class="jobus-social-divider"><span><?php esc_html_e( 'or continue with email', 'jobus' ); ?></span></p>
+                        <?php
+                            endif;
+                        }
+                        ?>
+
                         <form action="<?php echo esc_url( home_url( '/' ) ); ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 
                             <?php wp_nonce_field( 'jobus_login_action', 'jobus_nonce' ); ?>

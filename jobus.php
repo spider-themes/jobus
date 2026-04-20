@@ -238,6 +238,9 @@ final class Jobus {
 		// Radius / Geolocation engine
 		new \jobus\includes\Classes\Geolocation();
 
+		// Social Login engine
+		new \jobus\includes\Classes\Social_Auth();
+
 		// Admin UI
 		if ( is_admin() ) {
 			new \jobus\Admin\Admin();
@@ -246,6 +249,7 @@ final class Jobus {
 			new \jobus\Admin\Onboarding();
 			new \jobus\Admin\Dashboard();
 			new \jobus\Admin\Demo_Importer();
+			new \jobus\Admin\Social_Login_Page();
 			\jobus\Admin\Analytics::get_instance();
 			\jobus\Admin\Messaging::get_instance();
 		}

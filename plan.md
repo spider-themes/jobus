@@ -4,12 +4,12 @@
 
 ### 🔹 CHAPTER F01: Job Search & Application
 
-#### F01.4 – Social Login (Google / LinkedIn)
+#### F01.4 – Social Login (Google / Facebook / LinkedIn)
 
 * **Status:** Missing
 * **Current Behavior:** Standard email-based registration only.
 * **Issue / Gap:** Onboarding friction reduces candidate sign-ups.
-* **Required Action:** Integrate Google/LinkedIn OAuth handlers.
+* **Required Action:** Integrate Google, Facebook, and LinkedIn OAuth handlers.
 * **Free vs Pro Decision:** Keep in Free
 * **Reason (User + Market + Profit):** Boosts core user acquisition immediately.
 

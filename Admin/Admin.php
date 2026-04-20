@@ -150,13 +150,14 @@ class Admin {
 		$screen = get_current_screen();
 		if ( ! $screen ) return $parent_file;
 
-		// Always expand the Jobus top menu
+		// Keep the Jobus top menu expanded for all Jobus post types and taxonomies.
 		if (
 			in_array( $screen->post_type, [ 'jobus_job', 'jobus_company', 'jobus_candidate' ] ) ||
 			in_array( $screen->taxonomy, [
 				'jobus_company_cat', 'jobus_company_location',
 				'jobus_candidate_cat','jobus_candidate_location','jobus_candidate_skill'
-			])
+			]) ||
+			( isset( $_GET['page'] ) && sanitize_key( $_GET['page'] ) === 'jobus-social-login' )
 		) {
 			$parent_file = 'edit.php?post_type=jobus_job';
 		}
