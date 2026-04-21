@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 /**
  * Class Assets
  *
@@ -49,6 +51,12 @@ class Assets {
 		wp_enqueue_script( 'slick', esc_url( JOBUS_VEND . '/slick/slick.min.js' ), [ 'jquery' ], '2.2.0', true );
 		wp_enqueue_script( 'jobus-public', esc_url( JOBUS_JS . '/public.js' ), [ 'jquery' ], JOBUS_VERSION, true );
 		wp_enqueue_script( 'jobus-framework', esc_url( JOBUS_JS . '/jbs-framework.js' ), [ 'jquery' ], JOBUS_VERSION, true );
+		if ( jobus_opt( 'enable_social_login', false ) ) {
+			wp_localize_script( 'jobus-public', 'jbsSocialLogin', [
+				'selectors' => Social_Login_Config::frontend_selectors(),
+				'loading'   => esc_html__( 'Connecting...', 'jobus' ),
+			] );
+		}
 
 		$ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
 

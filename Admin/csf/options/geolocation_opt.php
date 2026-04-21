@@ -4,7 +4,6 @@ if (! defined('ABSPATH')) {
 }
 
 CSF::createSection($settings_prefix, array(
-	'parent' => 'jobus_general',
 	'id'     => 'jobus_geolocation',
 	'title'  => esc_html__('Geolocation', 'jobus'),
 	'icon'   => 'fas fa-map-marker-alt',

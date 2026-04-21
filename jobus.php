@@ -239,7 +239,9 @@ final class Jobus {
 		new \jobus\includes\Classes\Geolocation();
 
 		// Social Login engine
-		new \jobus\includes\Classes\Social_Auth();
+		if ( ! empty( $options['enable_social_login'] ) ) {
+			new \jobus\includes\Classes\OAuth\Social_Auth();
+		}
 
 		// Admin UI
 		if ( is_admin() ) {
@@ -249,7 +251,11 @@ final class Jobus {
 			new \jobus\Admin\Onboarding();
 			new \jobus\Admin\Dashboard();
 			new \jobus\Admin\Demo_Importer();
-			new \jobus\Admin\Social_Login_Page();
+			
+			if ( ! empty( $options['enable_social_login'] ) ) {
+				new \jobus\Admin\Social_Login_Page();
+			}
+			
 			\jobus\Admin\Analytics::get_instance();
 			\jobus\Admin\Messaging::get_instance();
 		}

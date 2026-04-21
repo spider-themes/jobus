@@ -93,7 +93,13 @@ abstract class Abstract_Provider {
 	 * @return bool
 	 */
 	public function is_enabled(): bool {
-		$options = get_option( 'jobus_opt', [] );
+		$options = get_option( Social_Login_Config::OPTION_KEY, [] );
+
+		// Master switch kill-switch.
+		if ( empty( $options['enable_social_login'] ) ) {
+			return false;
+		}
+
 		return ! empty( $options[ 'enable_social_login_' . $this->get_id() ] );
 	}
 
@@ -103,16 +109,18 @@ abstract class Abstract_Provider {
 	 * @return string
 	 */
 	public function get_callback_url(): string {
-		return rest_url( 'jobus/v1/oauth/' . $this->get_id() . '/callback' );
+		return Social_Login_Config::get_callback_url( $this->get_id() );
 	}
 
 	/**
 	 * Get the REST API init URL for this provider (used on login buttons).
 	 *
+	 * @param string $context Render context.
+	 * @param string $redirect_to Preferred redirect target.
 	 * @return string
 	 */
-	public function get_init_url(): string {
-		return rest_url( 'jobus/v1/oauth/' . $this->get_id() . '/init' );
+	public function get_init_url( string $context = Social_Login_Config::CONTEXT_LOGIN, string $redirect_to = '' ): string {
+		return Social_Login_Config::get_init_url( $this->get_id(), $context, $redirect_to );
 	}
 
 	/**
@@ -122,29 +130,38 @@ abstract class Abstract_Provider {
 	 * @return string
 	 */
 	protected function get_option( string $key ): string {
-		$options = get_option( 'jobus_opt', [] );
+		$options = get_option( Social_Login_Config::OPTION_KEY, [] );
 		return (string) ( $options[ $this->get_id() . '_' . $key ] ?? '' );
 	}
 
 	/**
 	 * Render the login button HTML for this provider.
 	 *
+	 * @param string $context Render context.
+	 * @param string $redirect_to Preferred redirect target.
 	 * @return string HTML anchor tag.
 	 */
-	public function render_button(): string {
+	public function render_button( string $context = Social_Login_Config::CONTEXT_LOGIN, string $redirect_to = '' ): string {
+		$selectors = Social_Login_Config::frontend_selectors();
+		$label = $this->get_label();
+
 		return sprintf(
-			'<a href="%1$s" id="jobus-social-btn-%2$s" class="jobus-social-btn" style="--provider-color:%3$s;" aria-label="%4$s">
-				<span class="jobus-social-btn__icon">%5$s</span>
-				<span class="jobus-social-btn__label">%6$s</span>
+			'<a href="%1$s" id="jbs-social-auth-%2$s" class="%3$s" style="--jbs-social-provider-color:%4$s;" aria-label="%5$s" data-provider="%2$s" data-context="%6$s">
+				<span class="%7$s">%8$s</span>
+				<span class="%9$s">%10$s</span>
+				<span class="%11$s" aria-hidden="true"></span>
 			</a>',
-			esc_url( $this->get_init_url() ),
+			esc_url( $this->get_init_url( $context, $redirect_to ) ),
 			esc_attr( $this->get_id() ),
+			esc_attr( $selectors['button'] ),
 			esc_attr( $this->get_color() ),
-			/* translators: %s = provider label e.g. "Google" */
-			esc_attr( sprintf( __( 'Continue with %s', 'jobus' ), $this->get_label() ) ),
+			esc_attr( $label ),
+			esc_attr( Social_Login_Config::normalize_context( $context ) ),
+			esc_attr( $selectors['buttonIcon'] ),
 			$this->get_icon_svg(),
-			/* translators: %s = provider label e.g. "Google" */
-			esc_html( sprintf( __( 'Continue with %s', 'jobus' ), $this->get_label() ) )
+			esc_attr( $selectors['buttonLabel'] ),
+			esc_html( $label ),
+			esc_attr( $selectors['buttonSpinner'] )
 		);
 	}
 }

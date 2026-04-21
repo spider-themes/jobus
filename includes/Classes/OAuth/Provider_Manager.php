@@ -116,4 +116,14 @@ class Provider_Manager {
 	public function get_enabled(): array {
 		return array_filter( $this->providers, fn( $p ) => $p->is_enabled() );
 	}
+
+	/**
+	 * Check whether at least one provider is enabled.
+	 *
+	 * @return bool
+	 */
+	public function has_enabled(): bool {
+		return ! empty( $this->get_enabled() );
+	}
+
 }

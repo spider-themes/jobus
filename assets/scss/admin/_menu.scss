@@ -1,4 +1,19 @@
 .wp-submenu li {
+  a[href*="page=jobus-social-login"] {
+    position: relative;
+    margin-top: 16px !important;
+    &::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgb(96 96 96);
+      position: absolute;
+      top: -8px;
+      left: 0;
+      z-index: 0;
+    }
+  }
   a[href*="has_jbs_divider=true"] {
     position: relative;
     margin-top: 16px !important;

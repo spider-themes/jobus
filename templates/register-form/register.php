@@ -3,6 +3,9 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Provider_Manager;
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 // Template variables passed from Blocks::register_form_block_render()
 $nonce                              = $nonce ?? wp_create_nonce('jobus_register_form_nonce');
 $candidate_placeholder_username     = $candidate_username ?? 'Enter Your Name';
@@ -20,10 +23,18 @@ $singin_btn_url   = jobus_opt('signin_btn_url');
 $redirect_url     = ! empty($redirect_url) ? esc_url_raw($redirect_url) : '';
 
 // Get error message and tab from URL
-$jobus_error = ! empty($_GET['jobus_error']) ? sanitize_text_field(urldecode($_GET['jobus_error'])) : '';
 $jobus_tab   = ! empty($_GET['jobus_tab']) ? sanitize_text_field($_GET['jobus_tab']) : 'candidate';
 $is_employer_tab = ($jobus_tab === 'employer');
 $align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
+
+// Shared error message used by both the registration form and social login notices.
+$form_error = sanitize_text_field( urldecode( wp_unslash( $_GET['jobus_error'] ?? '' ) ) );
+
+// Social login feedback query args.
+$social_status   = sanitize_key( wp_unslash( $_GET['jobus_social_status'] ?? '' ) );
+$social_provider = sanitize_key( wp_unslash( $_GET['jobus_social_provider'] ?? '' ) );
+$social_manager  = class_exists( Provider_Manager::class ) ? Provider_Manager::instance() : null;
+$social_buttons  = $social_manager ? $social_manager->get_enabled() : [];
 ?>
 <section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80 <?php echo esc_attr($align_class); ?>">
     <div class="user-data-form">
@@ -33,29 +44,12 @@ $align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
         </div>
 
         <div class="form-wrapper jbs-m-auto">
-            <?php if (! empty($jobus_error)) : ?>
-                <div class="jobus-registration-error jbs-alert jbs-alert-danger jbs-mt-20" role="alert">
-                    <?php echo esc_html($jobus_error); ?>
+            <?php if ( ! empty( $form_error ) && Social_Login_Config::STATUS_ERROR !== $social_status ) : ?>
+                <div class="jbs-registration-error jbs-alert jbs-alert-danger jbs-mt-20" role="alert">
+                    <?php echo esc_html($form_error); ?>
                 </div>
             <?php endif; ?>
             <div id="registration-message" class="jbs-mt-20"></div>
-
-            <?php
-            // Render social login buttons dynamically from all enabled providers.
-            if ( class_exists( '\\jobus\\includes\\Classes\\OAuth\\Provider_Manager' ) ) {
-                $enabled_providers = \jobus\includes\Classes\OAuth\Provider_Manager::instance()->get_enabled();
-                if ( ! empty( $enabled_providers ) ) :
-            ?>
-            <div class="jobus-social-login">
-                <?php foreach ( $enabled_providers as $provider ) : ?>
-                    <?php echo $provider->render_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render_button() escapes all output internally ?>
-                <?php endforeach; ?>
-            </div>
-            <p class="jobus-social-divider"><span><?php esc_html_e( 'or register with email', 'jobus' ); ?></span></p>
-            <?php
-                endif;
-            }
-            ?>
 
             <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-10" role="tablist">
                 <li class="jbs-nav-item" role="presentation">
@@ -208,6 +202,39 @@ $align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
                 </div>
                 <!-- /.tab-pane -->
             </div>
+            <?php if ( ! empty( $social_buttons ) ) : ?>
+                <div class="jbs-social-auth" data-jbs-social-auth data-context="<?php echo esc_attr( Social_Login_Config::CONTEXT_REGISTER ); ?>">
+                    <?php if ( Social_Login_Config::STATUS_ERROR === $social_status && ! empty( $form_error ) ) : ?>
+                        <div class="jbs-social-auth__notice jbs-alert jbs-alert-danger jbs-mb-20" role="alert">
+                            <?php echo esc_html( $form_error ); ?>
+                        </div>
+                    <?php elseif ( Social_Login_Config::STATUS_SUCCESS === $social_status ) : ?>
+                        <div class="jbs-social-auth__notice jbs-alert jbs-alert-success jbs-mb-20" role="status">
+                            <?php
+                            printf(
+                                /* translators: %s: provider name */
+                                esc_html__( 'Signed in successfully with %s.', 'jobus' ),
+                                esc_html( ucfirst( $social_provider ?: 'social' ) )
+                            );
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <p class="jbs-social-auth__divider"><span><?php esc_html_e( 'OR', 'jobus' ); ?></span></p>
+
+                    <div class="jbs-social-auth__buttons">
+                        <?php foreach ( $social_buttons as $provider ) : ?>
+                            <?php
+                            echo $provider->render_button(
+                                Social_Login_Config::CONTEXT_REGISTER,
+                                ! empty( $redirect_url ) ? $redirect_url : home_url( add_query_arg( [] ) )
+                            ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if (! empty($singin_btn_label) && ($singin_btn_url)) : ?>
                 <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e('Have an account?', 'jobus'); ?>
                     <a href="<?php echo esc_url($singin_btn_url) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#jobusLoginModal">

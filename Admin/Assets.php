@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 /**
  * Class Assets
  *
@@ -28,5 +30,13 @@ class Assets {
 		// Enqueue Scripts
 		wp_enqueue_script( 'sweetalert', esc_url( JOBUS_VEND . '/sweetalert/sweetalert.min.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
 		wp_enqueue_script( 'jobus-admin', esc_url( JOBUS_JS . '/admin.js' ), [ 'jquery' ], JOBUS_VERSION, [ 'strategy' => 'defer' ] );
+		wp_localize_script( 'jobus-admin', 'jobusAdminConfig', [
+			'socialLogin' => [
+				'pageSlug'  => Social_Login_Config::ADMIN_PAGE_SLUG,
+				'selectors' => Social_Login_Config::admin_selectors(),
+				'copied'    => esc_html__( 'Copied', 'jobus' ),
+				'copy'      => esc_html__( 'Copy', 'jobus' ),
+			],
+		] );
 	}
 }

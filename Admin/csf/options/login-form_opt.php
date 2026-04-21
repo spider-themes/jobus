@@ -8,6 +8,34 @@ CSF::createSection($settings_prefix, array(
     'icon'      => 'fas fa-sign-in-alt',
     'fields'        => array(
 
+	    // Social Login Engine Section
+	    array(
+		    'type'    => 'heading',
+		    'content' => esc_html__( 'Social Login Engine', 'jobus' ),
+	    ),
+	    array(
+		    'type'    => 'subheading',
+		    'content' => esc_html__( 'Activate the 1-Click login engine for Google, Facebook, and LinkedIn.', 'jobus' ),
+	    ),
+	    array(
+		    'id'       => 'enable_social_login',
+		    'type'     => 'switcher',
+		    'title'    => esc_html__( 'Enable Social Login', 'jobus' ),
+		    'subtitle' => esc_html__( 'Turning this ON will reveal a new dedicated "Social Login" configuration submenu in the sidebar where you can manage App Keys and settings.', 'jobus' ),
+		    'default'  => false,
+	    ),
+	    array(
+		    'type'       => 'content',
+		    'content'    => sprintf(
+			    '<div class="jbs-social-login-settings-link"><p><strong>%1$s</strong><br>%2$s</p><a class="jbs-social-login-settings-link__icon" href="%3$s" aria-label="%4$s" title="%4$s"><i class="bi bi-sliders" aria-hidden="true"></i></a></div>',
+			    esc_html__( 'Provider setup', 'jobus' ),
+			    esc_html__( 'After enabling the social login engine, open the dedicated provider settings page to add Google, Facebook, and LinkedIn credentials.', 'jobus' ),
+			    esc_url( admin_url( 'edit.php?post_type=jobus_job&page=jobus-social-login' ) ),
+			    esc_attr__( 'Open Social Login Settings', 'jobus' )
+		    ),
+		    'dependency' => array( 'enable_social_login', '==', true ),
+	    ),
+
 	    // Sign In Button Section
 	    array(
 		    'type'    => 'heading',

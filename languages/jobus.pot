@@ -6374,3 +6374,123 @@ msgstr ""
 msgid "Advanced Data Management"
 msgstr ""
 
+
+#: Admin/Social_Login_Page.php Admin/csf/options/login-form_opt.php
+msgid "Social Login"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Social Login — Jobus"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Enable 1-Click login via popular social platforms. Click a provider card to configure its credentials."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Active"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "✓ Configured"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Click to configure"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "OAuth 2.0 Configuration"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Authorized Redirect URI"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "You MUST copy and place this exact URL into your developer application to securely link the accounts."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Copy"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "App ID"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Client ID"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Obtain from: "
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Google Cloud Console ↗"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Meta for Developers ↗"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "LinkedIn Developer Portal ↗"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "App Secret"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Client Secret"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Your secret is stored securely and never exposed on the frontend."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Your Facebook App must be set to Live mode (not Development) for public users to log in. A Privacy Policy URL is also required."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Enable %s Login on Frontend"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Turn this ON to inject the button into your login forms."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Save Settings"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Back to providers"
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "settings saved successfully."
+msgstr ""
+
+#: Admin/Social_Login_Page.php
+msgid "Insufficient permissions."
+msgstr ""
+
+#: Admin/csf/options/login-form_opt.php
+msgid "Social Login Engine"
+msgstr ""
+
+#: Admin/csf/options/login-form_opt.php
+msgid "Activate the 1-Click login engine for Google, Facebook, and LinkedIn."
+msgstr ""
+
+#: Admin/csf/options/login-form_opt.php
+msgid "Enable Social Login"
+msgstr ""
+
+#: Admin/csf/options/login-form_opt.php
+msgid "Master Switch. Turning this ON will reveal a new dedicated \"Social Login\" configuration submenu in the sidebar where you can manage App Keys and settings."
+msgstr ""

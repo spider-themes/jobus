@@ -3,19 +3,6 @@
 
     $(document).ready(function () {
 
-        /**
-         * Copy URL to clipboard
-         * @param text
-         */
-        function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        }
-
         // Nice Select for search form
         let niceSelect = $('.jbs-nice-select');
         if (niceSelect.length > 0) {
@@ -137,26 +124,6 @@
         salaryRangeSlider(".salary-slider");
 
 
-
-
-        // Copy URL to clipboard
-        function copyButton() {
-            let copyBtn = document.querySelectorAll('.copy-url');
-            if (copyBtn.length > 0) {
-                copyBtn.addEventListener('click', function (event) {
-                    event.preventDefault();
-
-                    // Get the current page's URL
-                    const currentPageURL = window.location.href;
-
-                    // Copy the URL to the clipboard
-                    copyToClipboard(currentPageURL);
-
-                });
-            }
-        }
-
-        copyButton(); // end copyButton click event
 
 
         //============== Candidate Portfolio Slider ================//
@@ -616,13 +583,13 @@
                 triggerAjaxSearch();
             });
 
-            // 6. Intercept Form submit (if user hits "Enter" aggressively)
+            // 5b. Intercept Form submit (if user hits "Enter" aggressively)
             $(filterForm).on('submit', function(e) {
                 e.preventDefault();
                 triggerAjaxSearch();
             });
 
-            // 4. Intercept Pagination links inside the wrapper
+            // 6. Intercept Pagination links inside the wrapper
             $(document).on('click', '[data-jbs-filter-results="true"] .jbs-pagination a', function(e) {
                 e.preventDefault();
                 const url = $(this).attr('href');
@@ -633,7 +600,7 @@
                 }
             });
 
-            // 5. Handle standard Browser Back/Forward buttons smoothly
+            // 7. Handle standard Browser Back/Forward buttons smoothly
             window.addEventListener('popstate', function(e) {
                 if (e.state && e.state.path) {
                     triggerAjaxSearch(e.state.path);
@@ -643,6 +610,42 @@
             });
         }
 
+        function initSocialAuthButtons() {
+            const config = window.jbsSocialLogin || {};
+            const selectors = config.selectors || {};
+            const buttonClass = selectors.button || 'jbs-social-auth__button';
+            const labelClass = selectors.buttonLabel || 'jbs-social-auth__button-label';
+            const loadingText = config.loading || 'Connecting...';
+
+            $(document).on('click', '.' + buttonClass, function (event) {
+                if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.which === 2) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const button = this;
+                const label = button.querySelector('.' + labelClass);
+
+                if (button.classList.contains('is-loading')) {
+                    return;
+                }
+
+                button.classList.add('is-loading');
+                button.setAttribute('aria-busy', 'true');
+
+                if (label) {
+                    label.dataset.originalLabel = label.textContent;
+                    label.textContent = loadingText;
+                }
+
+                window.setTimeout(function () {
+                    window.location.assign(button.href);
+                }, 80);
+            });
+        }
+
+        initSocialAuthButtons();
         initAjaxFilters(); // Start the engine
 
     });
