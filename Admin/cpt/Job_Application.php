@@ -79,7 +79,20 @@ class Job_Application {
 				wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
 
 				$new_status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
-				update_post_meta( $post->ID, 'application_status', $new_status );
+				$old_status = get_post_meta( $post->ID, 'application_status', true ) ?: 'pending';
+
+				$updated = update_post_meta( $post->ID, 'application_status', $new_status );
+				if ( $updated && $old_status !== $new_status ) {
+					/**
+					 * Fires after an application status is successfully updated.
+					 *
+					 * @since 1.0.0
+					 * @param int    $application_id The ID of the application post.
+					 * @param string $old_status     The previous status.
+					 * @param string $new_status     The new status.
+					 */
+					do_action( 'jobus_application_status_changed', $post->ID, $old_status, $new_status );
+				}
 			}
 
 			// Include the template file
@@ -101,8 +114,21 @@ class Job_Application {
 		
 		// Check if our custom status is set
 		if ( isset( $_POST['application_status'] ) ) {
-			$status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
-			update_post_meta( $post_id, 'application_status', $status );
+			$status     = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
+			$old_status = get_post_meta( $post_id, 'application_status', true ) ?: 'pending';
+
+			$updated = update_post_meta( $post_id, 'application_status', $status );
+			if ( $updated && $old_status !== $status ) {
+				/**
+				 * Fires after an application status is successfully updated.
+				 *
+				 * @since 1.0.0
+				 * @param int    $application_id The ID of the application post.
+				 * @param string $old_status     The previous status.
+				 * @param string $new_status     The new status.
+				 */
+				do_action( 'jobus_application_status_changed', $post_id, $old_status, $status );
+			}
 		}
 	}
 

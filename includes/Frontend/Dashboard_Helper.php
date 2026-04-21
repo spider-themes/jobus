@@ -273,10 +273,24 @@ class Dashboard_Helper {
 			}
 		}
 
+		$old_status = get_post_meta( $application_id, 'application_status', true ) ?: 'pending';
+
 		// Update the application status
 		$updated = update_post_meta( $application_id, 'application_status', $new_status );
 
-		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
+		if ( $updated || $old_status === $new_status ) {
+			if ( $updated && $old_status !== $new_status ) {
+				/**
+				 * Fires after an application status is successfully updated.
+				 *
+				 * @since 1.0.0
+				 * @param int    $application_id The ID of the application post.
+				 * @param string $old_status     The previous status.
+				 * @param string $new_status     The new status.
+				 */
+				do_action( 'jobus_application_status_changed', $application_id, $old_status, $new_status );
+			}
+
 			wp_send_json_success( [
 				'message' => __( 'Application status updated successfully.', 'jobus' ),
 				'status'  => $new_status,
