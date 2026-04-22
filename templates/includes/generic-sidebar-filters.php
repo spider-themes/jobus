@@ -142,7 +142,7 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 		$is_collapsed = '';
 	}
 	?>
-	<div class="filter-block jbs-bottom-line jbs-pb-25">
+	<div class="filter-block jbs-bottom-line">
 		<a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ); ?>"
 		   data-jbs-toggle="collapse"
 		   data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>"
@@ -172,7 +172,7 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 if ( ! function_exists( 'jobus_render_taxonomy_filter_widget' ) ) {
 	function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 	?>
-	<div class="filter-block jbs-bottom-line jbs-pb-25">
+	<div class="filter-block jbs-bottom-line">
 		<?php
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-start.php';
 		include dirname( __FILE__ ) . '/../filter-widgets/categories.php';

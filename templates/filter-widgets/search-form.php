@@ -36,7 +36,7 @@ $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 
                placeholder="<?php esc_attr_e( 'Job title, keywords...', 'jobus' ); ?>"
                aria-label="<?php esc_attr_e( 'Search', 'jobus' ); ?>"
                class="jbs-w-100 jbs-rounded">
-        <button type="button" class="jbs-border-0 jbs-position-absolute search-submit-btn">
+        <button type="button" class="jbs-border-0 search-submit-btn">
             <i class="bi bi-search"></i>
         </button>
     </div>
@@ -50,7 +50,7 @@ $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 
          data-text-exact="<?php esc_attr_e( 'Exact', 'jobus' ); ?>"
          data-default-radius="<?php echo esc_attr( $default_radius ); ?>">
         <label for="radius_location" class="search-widget-label"><?php esc_html_e( 'Location Radius', 'jobus' ); ?></label>
-        <div class="input-box jbs-mb-15 jbs-position-relative">
+        <div class="input-box jbs-position-relative">
             <input type="text"
                    name="radius_location"
                    id="radius_location"

@@ -8,34 +8,13 @@
     display: block;
   }
 
-  .input-box {
-    &>input[name="s"] {
-      height: 45px;
-      padding-left: 15px;
-      border: 1px solid #e5e5e5;
-    }
-
-    .search-submit-btn {
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      color: #a0a0a0;
-      padding: 0;
-    }
-  }
-
   // Geolocation Radius Search Wrapper
   .radius-search-wrapper {
     .input-box {
       position: relative;
 
       .radius-location-input {
-        background: #FAFAFA;
-        border: 1px solid #EDEDED;
-        height: 40px;
-        padding-left: 35px;
-        padding-right: 35px;
+        padding: 0 12px 0 32px;
       }
 
       .location-icon {
@@ -43,15 +22,7 @@
         top: 50%;
         transform: translateY(-50%);
         color: #a0a0a0;
-      }
-
-      #jbs_get_my_location {
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        color: #28a745;
-        padding: 0;
+        font-size: 14px;
       }
     }
 
