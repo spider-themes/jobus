@@ -1,10 +1,16 @@
 /**===== Saved Candidate and Job ======*/
-.jobus-saved-post, .jobus-dashboard-remove-saved-post, .jobus-dashboard-post-view-more {
+.jobus-saved-post,
+.jobus-dashboard-remove-saved-post,
+.jobus-dashboard-post-view-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 35px;
   height: 35px;
   line-height: 32px;
   border: 1px solid #D6D6D6;
   color: #CBCBCB;
+
   &:hover {
     background: #E7F6EF;
     border-color: #E7F6EF;
@@ -19,8 +25,8 @@
   text-align: center;
   border-radius: 50px;
   color: #000000 !important;
-  background-color: var(--jbs-brand_color_3) ;
-  border:2px solid transparent;
+  background-color: var(--jbs-brand_color_3);
+  border: 2px solid transparent;
   @include transition(0.3s);
   display: inline-block;
   box-sizing: border-box;
@@ -28,11 +34,13 @@
   &.lg {
     padding: 8px 32px;
   }
+
   &:hover {
     background-color: var(--jbs-brand_color_2);
     color: var(--jbs-brand_color_3) !important;
     border-color: var(--jbs-brand_color_3);
-    img{
+
+    img {
       filter: invert(79%) sepia(72%) saturate(392%) hue-rotate(19deg) brightness(103%) contrast(96%);
     }
   }
@@ -46,58 +54,48 @@
   padding: 0 26px !important;
   display: inline-block !important;
   text-decoration: none !important;
+
   &:hover {
-      background: var(--jbs-brand_color_4) !important;
+    background: var(--jbs-brand_color_4) !important;
   }
 }
 
 .btn-eleven {
-    height: 60px;
-    border-radius: 7px;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: .88px;
-    color: #fff;
-    background: #31795a;
-    width: 100%;
-    border: none;
+  height: 60px;
+  border-radius: 7px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .88px;
+  color: #fff;
+  background: #31795a;
+  width: 100%;
+  border: none;
 }
 
-.btn-eleven:hover,.btn-eleven:focus {
-    background: #00bf58 !important;
+.btn-eleven:hover,
+.btn-eleven:focus {
+  background: #00bf58 !important;
 }
 
 
 .jbs-btn-success {
-    font-weight: 500 !important;
-    padding: 13px 26px !important;
-    min-width: 150px !important;
-    text-align: center !important;
-    color: #fff !important;
-    background-color: var(--jbs-brand_color_4) !important;
-    border-color: var(--jbs-brand_color_4) !important;
- -webkit-transition: all 0.3s ease-in-out 0s;
-    -moz-transition: all 0.3s ease-in-out 0s;
-    -ms-transition: all 0.3s ease-in-out 0s;
-    -o-transition: all 0.3s ease-in-out 0s;
-    transition: all 0.3s ease-in-out 0s;
-    &:hover {
-        color:#fff !important;
-        background-color: #000000 !important;
-        border-color: #000000 !important;
-    }
-}
+  font-weight: 500 !important;
+  padding: 13px 26px !important;
+  min-width: 150px !important;
+  text-align: center !important;
+  color: #fff !important;
+  background-color: var(--jbs-brand_color_4) !important;
+  border-color: var(--jbs-brand_color_4) !important;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -ms-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
 
-.save-btn {
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  border: 1px solid #D6D6D6;
-  color: #CBCBCB !important;
   &:hover {
-    background: #E7F6EF;
-    border-color: #E7F6EF;
-    color: var(--jbs-brand_color_5);
+    color: #fff !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
   }
 }
 
@@ -108,6 +106,7 @@
   border: 1px solid var(--jbs-brand_color_4);
   background: #EAF9E9;
   border-radius: 30px;
+
   &:hover {
     background: var(--jbs-brand_color_4);
     color: #fff;
@@ -116,15 +115,16 @@
 }
 
 .btn-six {
-    font-weight: 500;
+  font-weight: 500;
+  color: var(--jbs-brand_color_4);
+  position: relative;
+  padding-right: 12px;
+  border-bottom: 2px solid var(--jbs-brand_color_4);
+  transition: all .3s ease-in-out 0s;
+
+  &:hover {
     color: var(--jbs-brand_color_4);
-    position: relative;
-    padding-right: 12px;
-    border-bottom: 2px solid var(--jbs-brand_color_4);
-    transition: all .3s ease-in-out 0s;
-    &:hover {
-        color: var(--jbs-brand_color_4);
-        letter-spacing: 0.25px;
-        text-decoration: none !important;
-    }
+    letter-spacing: 0.25px;
+    text-decoration: none !important;
+  }
 }

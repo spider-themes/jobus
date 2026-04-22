@@ -111,7 +111,7 @@ $specs_options = jobus_get_specs_options();
 
 
                     ?>
-                    <div class="filter-block jbs-bottom-line jbs-pb-25">
+                    <div class="filter-block jbs-bottom-line">
                         <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>"
                             data-jbs-toggle="collapse" data-jbs-target="#collapse-search-form" role="button"
                             aria-expanded="<?php echo !$is_search_collapsed ? 'true' : 'false'; ?>">
@@ -146,7 +146,7 @@ $specs_options = jobus_get_specs_options();
 
 
                         ?>
-                        <div class="filter-block jbs-bottom-line jbs-pb-25">
+                        <div class="filter-block jbs-bottom-line">
                             <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_collapsed ? ' jbs-collapsed' : ''; ?>"
                                 data-jbs-toggle="collapse" data-jbs-target="#collapse-<?php echo esc_attr($widget_name); ?>"
                                 role="button" aria-expanded="<?php echo !$is_collapsed ? 'true' : 'false'; ?>">
