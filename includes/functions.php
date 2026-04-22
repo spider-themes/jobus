@@ -530,37 +530,39 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         global $wpdb;
 
-        // Generate a strict cache key based on query parameters
-        $cache_key = 'jobus_cnt_' . md5( $post_type . $meta_key . $meta_value );
-        $count = get_transient( $cache_key );
+        // Create a unique cache key for this query
+        $cache_key = 'jobus_count_' . md5( $post_type . $meta_key . $meta_value );
+        $cached    = get_transient( $cache_key );
 
-        if ( false === $count ) {
-            // Use direct SQL for performance
-            $query = "
-                SELECT COUNT(DISTINCT p.ID)
-                FROM {$wpdb->posts} p
-                INNER JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)
-                WHERE p.post_type = %s
-                AND p.post_status = 'publish'
-                AND pm.meta_key = %s
-                AND pm.meta_value LIKE %s
-            ";
-
-            // Add wildcards for LIKE comparison
-            $like_value = '%' . $wpdb->esc_like( $meta_value ) . '%';
-
-            $count = (int) $wpdb->get_var( $wpdb->prepare(
-                $query,
-                $post_type,
-                $meta_key,
-                $like_value
-            ) );
-
-            // Cache for 6 hours to drastically reduce database load on sidebar filters
-            set_transient( $cache_key, $count, 6 * HOUR_IN_SECONDS );
+        if ( false !== $cached ) {
+            return (int) $cached;
         }
 
-        return $count;
+        // Use direct SQL for performance
+        $query = "
+            SELECT COUNT(DISTINCT p.ID)
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON (p.ID = pm.post_id)
+            WHERE p.post_type = %s
+            AND p.post_status = 'publish'
+            AND pm.meta_key = %s
+            AND pm.meta_value LIKE %s
+        ";
+
+        // Add wildcards for LIKE comparison
+        $like_value = '%' . $wpdb->esc_like( $meta_value ) . '%';
+
+        $count = $wpdb->get_var( $wpdb->prepare(
+            $query,
+            $post_type,
+            $meta_key,
+            $like_value
+        ) );
+
+        // Cache the result for 1 hour to prevent N+1 queries in loops
+        set_transient( $cache_key, $count, HOUR_IN_SECONDS );
+
+        return (int) $count;
     }
 }
 
