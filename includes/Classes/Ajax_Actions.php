@@ -280,9 +280,10 @@ class Ajax_Actions {
 			wp_send_json_error();
 		}
 
-		$user              = wp_get_current_user();
-		$application_email = get_post_meta( $application_id, 'candidate_email', true );
-		if ( $user->user_email !== $application_email ) {
+		$user = wp_get_current_user();
+		// Security Fix: Verify ownership by post author instead of email matching to prevent IDOR.
+		// Also allow administrators to delete.
+		if ( (int) $application->post_author !== $user->ID && ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
 		}
 
