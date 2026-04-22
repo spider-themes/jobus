@@ -141,109 +141,18 @@
                                 </div>
                             </div>
                         </form>
+
+                        <div id="jbs-application-inline-success" style="display:none;" class="jbs-mt-3">
+                            <div class="jbs-alert jbs-alert-success jbs-d-flex jbs-align-items-center jbs-gap-2">
+                                <i class="bi bi-check-circle-fill jbs-text-success jbs-fs-5"></i>
+                                <span><?php esc_html_e( 'Application submitted successfully!', 'jobus' ); ?></span>
+                            </div>
+                        </div>
                     </div>
                     <!-- ===== END PANEL 2 ===== -->
-
-                    <!-- ===== PANEL 3: Success Message ===== -->
-                    <div id="applicationSuccessMessage" style="display:none;" class="jbs-mt-3">
-                        <div class="jbs-alert jbs-alert-success">
-                            <h6 class="jbs-mb-2 jbs-d-flex jbs-align-items-center">
-                                <i class="bi bi-check-circle-fill jbs-text-success jbs-me-2"></i>
-                                <?php esc_html_e( 'Application Submitted Successfully!', 'jobus' ); ?>
-                            </h6>
-                            <p class="jbs-mb-0 jbs-fs-sm">
-                                <?php esc_html_e( 'Your resume has been sent to the employer.', 'jobus' ); ?>
-                            </p>
-                        </div>
-
-                        <?php if ( ! is_user_logged_in() ) : ?>
-                            <div class="jbs-alert jbs-alert-warning jbs-p-15 jbs-rounded jbs-text-dark jbs-mt-3">
-                                <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-flex-wrap jbs-gap-3">
-                                    <div>
-                                        <h6 class="jbs-fw-bold jbs-mb-1"><?php esc_html_e( 'Track Your Application', 'jobus' ); ?></h6>
-                                        <p class="jbs-mb-0 jbs-fs-sm">
-                                            <?php esc_html_e( 'Want to see if the employer views your resume? Create a free account now.', 'jobus' ); ?>
-                                        </p>
-                                    </div>
-                                    <a href="<?php echo esc_url( $register_url ); ?>" class="jbs-btn jbs-btn-dark jbs-btn-sm jbs-text-white jbs-text-nowrap">
-                                        <?php echo esc_html( $register_label ); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <!-- ===== END PANEL 3 ===== -->
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<script>
-jQuery(document).ready(function($) {
-
-    // ── Choice Gate Panel Switch ──────────────────────────────
-    $('#jbs-continue-as-guest').on('click', function () {
-        $('#jbs-apply-gate-panel').hide();
-        $('#jbs-apply-form-panel').show();
-    });
-
-    // ── Form Validation ───────────────────────────────────────
-    const form = document.getElementById('jobApplicationForm');
-    if (form) {
-        const firstName = document.getElementById('firstName');
-        if (firstName && firstName.hasAttribute('required')) {
-            firstName.addEventListener('invalid', function() {
-                this.setCustomValidity('<?php echo esc_js( __( 'Please enter your first name', 'jobus' ) ); ?>');
-            });
-            firstName.addEventListener('input', function() { this.setCustomValidity(''); });
-        }
-        
-        const lastName = document.getElementById('lastName');
-        if (lastName && lastName.hasAttribute('required')) {
-            lastName.addEventListener('invalid', function() {
-                this.setCustomValidity('<?php echo esc_js( __( 'Please enter your last name', 'jobus' ) ); ?>');
-            });
-            lastName.addEventListener('input', function() { this.setCustomValidity(''); });
-        }
-        
-        const email = document.getElementById('email');
-        if (email && email.hasAttribute('required')) {
-            email.addEventListener('invalid', function() {
-                if (this.validity.valueMissing) {
-                    this.setCustomValidity('<?php echo esc_js( __( 'Please enter your email address', 'jobus' ) ); ?>');
-                } else if (this.validity.typeMismatch) {
-                    this.setCustomValidity('<?php echo esc_js( __( 'Please enter a valid email address', 'jobus' ) ); ?>');
-                }
-            });
-            email.addEventListener('input', function() { this.setCustomValidity(''); });
-        }
-        
-        const phone = document.getElementById('phone');
-        if (phone && phone.hasAttribute('required')) {
-            phone.addEventListener('invalid', function() {
-                this.setCustomValidity('<?php echo esc_js( __( 'Please enter your phone number', 'jobus' ) ); ?>');
-            });
-            phone.addEventListener('input', function() { this.setCustomValidity(''); });
-        }
-        
-        const message = document.getElementById('message');
-        if (message && message.hasAttribute('required')) {
-            message.addEventListener('invalid', function() {
-                this.setCustomValidity('<?php echo esc_js( __( 'Please enter your message or cover letter', 'jobus' ) ); ?>');
-            });
-            message.addEventListener('input', function() { this.setCustomValidity(''); });
-        }
-        
-        const uploadCv = document.getElementById('upload_cv');
-        if (uploadCv && uploadCv.hasAttribute('required')) {
-            uploadCv.addEventListener('invalid', function() {
-                this.setCustomValidity('<?php echo esc_js( __( 'Please upload your CV', 'jobus' ) ); ?>');
-            });
-            uploadCv.addEventListener('change', function() { this.setCustomValidity(''); });
-        }
-    }
-});
-</script>

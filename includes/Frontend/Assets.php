@@ -64,12 +64,21 @@ class Assets {
 		wp_enqueue_script( 'jobus-public-ajax-actions', esc_url( JOBUS_JS . '/public-ajax-actions.js' ), [ 'jquery' ], JOBUS_VERSION, true );
 		wp_localize_script( 'jobus-public-ajax-actions', 'jobus_public_obj', [
 			'ajax_url'                => $ajax_url,
-			'is_user_logged_in'       => is_user_logged_in(), // Check if user is logged in
-			'allow_guest_application' => function_exists( 'jobus_opt' ) ? jobus_opt( 'allow_guest_application', false ) : false, // Allow guest job applications
-			'save_post_nonce'         => wp_create_nonce( 'jobus_saved_post' ), // nonce for saving job/candidate
-			'job_application_nonce'   => wp_create_nonce( 'jobus_job_application' ), // Nonce for job application
-			'job_id'                  => get_the_ID(), // Current job ID for job application
-			'candidate_email_nonce'   => wp_create_nonce( 'jobus_candidate_contact_mail_form' ), // Nonce for candidate email form
+			'is_user_logged_in'       => is_user_logged_in(),
+			'allow_guest_application' => function_exists( 'jobus_opt' ) ? jobus_opt( 'allow_guest_application', false ) : false,
+			'save_post_nonce'         => wp_create_nonce( 'jobus_saved_post' ),
+			'job_application_nonce'   => wp_create_nonce( 'jobus_job_application' ),
+			'job_id'                  => get_the_ID(),
+			'candidate_email_nonce'   => wp_create_nonce( 'jobus_candidate_contact_mail_form' ),
+			'i18n'                    => [
+				'first_name_required' => esc_html__( 'Please enter your first name', 'jobus' ),
+				'last_name_required'  => esc_html__( 'Please enter your last name', 'jobus' ),
+				'email_required'      => esc_html__( 'Please enter your email address', 'jobus' ),
+				'email_invalid'       => esc_html__( 'Please enter a valid email address', 'jobus' ),
+				'phone_required'      => esc_html__( 'Please enter your phone number', 'jobus' ),
+				'message_required'    => esc_html__( 'Please enter your message or cover letter', 'jobus' ),
+				'cv_required'         => esc_html__( 'Please upload your CV', 'jobus' ),
+			],
 		] );
 
 		// Enqueue scripts & styles only if dashboard shortcode is present

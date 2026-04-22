@@ -23,6 +23,7 @@
         init: function () {
             this.savePost(); // save for job and candidate posts
             this.jobApplicationForm(); // Initialize job application form submission by candidates
+            this.applicationFormUI(); // Guest gate panel switch + field validation messages
             this.emailFormToCandidate(); // Initialize email form to candidate
             this.registerForm(); // Initialize registration form
         },
@@ -98,9 +99,15 @@
             jobApplication.on('submit', function (event) {
                 event.preventDefault();
 
+                // Collect FormData before reset
                 const formData = new FormData(this);
                 formData.append('action', 'jobus_job_application');
 
+                // Show success instantly and clear the form
+                jobApplication[0].reset();
+                $('#jbs-application-inline-success').fadeIn();
+
+                // Save to server in background
                 $.ajax({
                     url: jobus_public_obj.ajax_url,
                     type: 'POST',
@@ -108,19 +115,59 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        if (response.success) {
-                            $('#jbs-apply-form-panel').hide();
-                            $('#applicationSuccessMessage').fadeIn();
-                            jobApplication[0].reset();
-                        } else {
+                        if (!response.success) {
+                            $('#jbs-application-inline-success').hide();
                             alert(response.data && response.data.message ? response.data.message : 'Submission failed.');
                         }
                     },
                     error: function (xhr, status, error) {
+                        $('#jbs-application-inline-success').hide();
                         console.error(error);
                         alert('Error submitting application. Please try again.');
                     }
                 });
+            });
+        },
+
+
+        /**
+         * Guest gate panel switch and custom HTML5 validation messages for the application form.
+         */
+        applicationFormUI: function () {
+
+            $(document).on('click', '#jbs-continue-as-guest', function () {
+                $('#jbs-apply-gate-panel').hide();
+                $('#jbs-apply-form-panel').show();
+            });
+
+            var i18n = (typeof jobus_public_obj !== 'undefined' && jobus_public_obj.i18n) ? jobus_public_obj.i18n : {};
+
+            // 'invalid' does not bubble — use capture phase to handle all fields in the form
+            document.addEventListener('invalid', function (e) {
+                var el = e.target;
+                if (!el.form || el.form.id !== 'jobApplicationForm') return;
+
+                if (el.id === 'email') {
+                    if (el.validity.valueMissing) {
+                        el.setCustomValidity(i18n.email_required || '');
+                    } else if (el.validity.typeMismatch) {
+                        el.setCustomValidity(i18n.email_invalid || '');
+                    }
+                } else {
+                    var msgMap = {
+                        firstName: i18n.first_name_required,
+                        lastName:  i18n.last_name_required,
+                        phone:     i18n.phone_required,
+                        message:   i18n.message_required,
+                        upload_cv: i18n.cv_required,
+                    };
+                    if (msgMap[el.id]) el.setCustomValidity(msgMap[el.id]);
+                }
+            }, true);
+
+            // Reset custom validity on input/change so re-validation runs cleanly
+            $(document).on('input change', '#jobApplicationForm input, #jobApplicationForm textarea', function () {
+                this.setCustomValidity('');
             });
         },
 

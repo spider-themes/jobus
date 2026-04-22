@@ -15,6 +15,7 @@ Improved: Post Type Templates updated for better design consistency across all p
 Improved: Applicant Meta View enhanced for better admin readability
 Improved: Search Filter optimized for faster and more accurate results
 Fixed: Registration Form validation and applicant submission issues
+Fixed: Job Application Submission popup model styling and functionality
 
 = 1.8.0 (06 April 2026) =
 Improved: General enhancements and minor fixes applied across the block for better stability
