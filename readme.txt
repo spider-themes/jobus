@@ -1,7 +1,7 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 Requires at least: 6.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
@@ -122,24 +122,41 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 
 == Screenshots ==
 
-1.  **Jobus Dashboard** – Central hub to manage jobs, applications, and candidates.
-2.  **Job Listing** – Professional job list layout with sidebar filters enabled.
-3.  **Candidate Profile** – Detailed candidate resume with skills and experience overview.
-4.  **Job Specifications** – Manage job attributes like salary, type, and requirements.
-5.  **Job Archive** – Grid and list views for browsing all job listings.
-6.  **Job Details** – Single job page with full details and application form.
-7.  **Plugin Settings** – Intuitive settings panel for complete plugin configuration control.
-8.  **Login & Registration** – Secure frontend login and registration forms for users.
-9.  **Job Tabs** – Display job listings organized in a clean tabbed layout.
+1. **Jobus Dashboard** – Central hub to manage jobs, applications, and candidates.
+2. **Job Listing** – Professional job list layout with sidebar filters enabled.
+3. **Candidate Profile** – Detailed candidate resume with skills and experience overview.
+4. **Job Specifications** – Manage job attributes like salary, type, and requirements.
+5. **Job Archive** – Grid and list views for browsing all job listings.
+6. **Job Details** – Single job page with full details and application form.
+7. **Plugin Settings** – Intuitive settings panel for complete plugin configuration control.
+8. **Login & Registration** – Secure frontend login and registration forms for users.
+9. **Job Tabs** – Display job listings organized in a clean tabbed layout.
 10. **Company Directory** – Showcase all hiring companies with profiles and active jobs.
 11. **Candidate Directory** – Browse and search candidate profiles with filtering options.
 12. **Job Categories** – Explore job listings organized by industry and category.
 
 == Changelog ==
 
+= 1.9.0 (22 April 2026) =
+* New: Social Login Register ability via (Google / Facebook / LinkedIn)
+* New: Radius Search Engine with latitude/longitude-based radius query and API mapping integration
+* New: Demo Data Importer with one-click setup for sample jobs
+* New: Guest Application allowing non-logged-in users to apply with Sign In, Register, or Guest options
+* New: Company Verified Badge to improve trust and credibility
+* New: Redesigned Sidebar Layouts for Candidate, Job, and Company single pages
+* New: External Application URL Redirects enabling employers to send users to external ATS or affiliate links
+* New: Job Schema Injection (JSON-LD) for improved Google Jobs search visibility
+* New: Standard Messaging UI with a consistent internal messaging interface
+* Enhanced: AJAX Filter Engine to fetch filtered archives silently, swap grid HTML dynamically, and update URL without breaking UI
+* Improved: Post Type Templates updated for better design consistency across all post types
+* Improved: Applicant Meta View enhanced for better admin readability
+* Improved: Search Filter optimized for faster and more accurate results
+* Fixed: Registration Form validation and applicant submission issues
+* Fixed: Job Application Submission popup model styling and functionality
+
 = 1.8.0 (06 April 2026) =
 * Improved: General enhancements and minor fixes applied across the block for better stability
-Updated: Freemius SDK updated to 2.13.1
+* Updated: Freemius SDK updated to 2.13.1
 
 = 1.7.0 (13 March 2026) =
 * New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
@@ -185,19 +202,5 @@ Updated: Freemius SDK updated to 2.13.1
 * Tweaked: Edit button added to Company and Job single pages
 * Tweaked: Improved the Candidate Single Page
 * Tweaked: Various code sections simplified and optimized for better performance
-
-= 1.3.0 (02 December 2025) =
-* New: Added Job Title display to Job Single Layout 2
-* Fixed: Category layout responsiveness issue resolved
-* Fixed: Resolved responsive issues in Jobus Elementor widgets
-* Fixed: Jobus dashboard layout and responsive issues fixed
-* Fixed: Company Dashboard “Specifications” and “Company Website” data handling corrected
-* Fixed: Candidate Dashboard and Testimonial submission issues resolved
-* Fixed: Candidate Dashboard social icon issue fixed
-* Fixed: Number count issue in dashboards and related posts loading fixed
-* Tweaked: Updated job options and refined Job Details page styling
-* Tweaked: Improved Job Single 2 layout design for better readability
-* Tweaked: Dark mode compatibility added for seamless integration with Docy themes
-* Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
 
 **[See changelog for all versions](https://jobus.spider-themes.net/changelog/)**

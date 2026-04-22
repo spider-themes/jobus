@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 1.9.0 (15 April 2026 (Upcoming)) =
+= 1.9.0 (22 April 2026) =
 New: Social Login Register ability via (Google / Facebook / LinkedIn)
 New: Radius Search Engine with latitude/longitude-based radius query and API mapping integration
 New: Demo Data Importer with one-click setup for sample jobs
