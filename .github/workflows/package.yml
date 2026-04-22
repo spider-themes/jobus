@@ -1,0 +1,21 @@
+name: Package
+
+on:
+  push:
+    branches: "*"
+    tags: "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: spider-themes/package@v1
+        with:
+          slug: ${{ vars.SLUG }}
+          prod_files: ${{ vars.PROD_FILES }}
+          gdrive_token: ${{ secrets.GDRIVE_TOKEN }}
+          svn_username: ${{ secrets.SVN_USERNAME }}
+          svn_password: ${{ secrets.SVN_PASSWORD }}

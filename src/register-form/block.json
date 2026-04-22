@@ -8,7 +8,8 @@
   "description": "A custom registration form for candidates and employers.",
   "supports": {
     "html": false,
-    "anchor": true
+    "anchor": true,
+    "align": ["wide", "full"]
   },
   "attributes": {
     "candidate_username": {

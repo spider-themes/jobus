@@ -54,7 +54,9 @@ class Job_Form_Submission {
 			'job_title',
 			'job_description',
 			'company_website',
-			'is_company_website'
+			'is_company_website',
+			'apply_form_url',
+			'is_apply_btn'
 		];
 
 		$post_data = [];
@@ -111,7 +113,13 @@ class Job_Form_Submission {
 			if ( (int) $job_post->post_author !== (int) $user->ID ) {
 				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
 			}
-		}
+		} else {
+            // New job submission check
+            $can_post = apply_filters('jobus_user_can_post_job', true, $user->ID, $post_data);
+            if ( ! $can_post ) {
+                wp_die( esc_html__( 'You cannot post a job. Please check your packages or purchase a new one.', 'jobus' ) );
+            }
+        }
 
 		// Save job content (title/content)
 		if ( isset( $post_data['job_title'] ) || isset( $post_data['job_description'] ) ) {
@@ -129,6 +137,11 @@ class Job_Form_Submission {
 			$this->save_company_website( $job_id, $post_data );
 		}
 
+		// Save external application URL
+		if ( isset( $post_data['apply_form_url'] ) || isset( $post_data['is_apply_btn'] ) ) {
+			$this->save_application_method( $job_id, $post_data );
+		}
+
 		// Save company logo (featured image)
 		if ( isset( $_POST['job_company_logo_id'] ) ) {
 			$logo_id = absint( $_POST['job_company_logo_id'] );
@@ -140,6 +153,13 @@ class Job_Form_Submission {
 				delete_post_thumbnail( $job_id );
 			}
 		}
+
+        // Fire hooks after everything is saved
+        if ( isset( $post_data['job_id'] ) && ! empty( $post_data['job_id'] ) ) {
+            do_action( 'jobus_job_updated', $job_id, $post_data );
+        } else {
+            do_action( 'jobus_job_submitted', $job_id, $post_data );
+        }
 	}
 
 	/**
@@ -255,6 +275,16 @@ class Job_Form_Submission {
 			}
 			// Link job to company
 			update_post_meta( $job_id, '_jobus_company_id', $company_id );
+
+			// Check CSF options for Auto Expiry
+			$jobus_opt         = get_option( 'jobus_opt', [] );
+			$enable_job_expiry = ! isset( $jobus_opt['enable_job_expiry'] ) || $jobus_opt['enable_job_expiry'];
+
+			if ( $enable_job_expiry ) {
+				$expiry_days = ! empty( $jobus_opt['job_expiry_days'] ) ? (int) $jobus_opt['job_expiry_days'] : 30;
+				update_post_meta( $job_id, '_jobus_expiration_date', current_time( 'Y-m-d H:i:s', strtotime( '+' . $expiry_days . ' days', current_time( 'timestamp' ) ) ) );
+			}
+
 		}
 
 		return $job_id;
@@ -500,6 +530,33 @@ class Job_Form_Submission {
 		}
 		if ( isset( $post_data['is_company_website'] ) ) {
 			$meta['is_company_website'] = sanitize_text_field( $post_data['is_company_website'] );
+		}
+
+		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
+	}
+
+	/**
+	 * Save application method (default form, custom URL, or external redirect)
+	 *
+	 * @param int   $job_id
+	 * @param array $post_data
+	 *
+	 * @return bool
+	 */
+	public function save_application_method( int $job_id, array $post_data ): bool {
+		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
+		
+		// Save application method type (default, custom, external)
+		if ( isset( $post_data['is_apply_btn'] ) ) {
+			$meta['is_apply_btn'] = sanitize_text_field( $post_data['is_apply_btn'] );
+		}
+		
+		// Save application URL
+		if ( isset( $post_data['apply_form_url'] ) ) {
+			$meta['apply_form_url'] = esc_url_raw( $post_data['apply_form_url'] );
 		}
 
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );

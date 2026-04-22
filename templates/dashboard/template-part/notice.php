@@ -39,6 +39,18 @@ if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'],
     }
 }
 
+$social_status = sanitize_key( wp_unslash( $_GET['jobus_social_status'] ?? '' ) );
+
+if ( empty( $message ) && 'success' === $social_status ) {
+	$provider = sanitize_key( wp_unslash( $_GET['jobus_social_provider'] ?? '' ) );
+	$message_type = 'success';
+	$message = sprintf(
+		/* translators: %s: provider name */
+		esc_html__( 'Signed in successfully with %s.', 'jobus' ),
+		esc_html( ucfirst( $provider ?: __( 'your social account', 'jobus' ) ) )
+	);
+}
+
 // Display the notice if we have a message
 if ( ! empty( $message ) ) : ?>
 	<div class="jbs-alert jbs-alert-<?php echo esc_attr( $message_type ); ?> jbs-alert-dismissible jbs-fade jbs-show" role="alert">

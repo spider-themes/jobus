@@ -34,7 +34,12 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                         the_post_thumbnail( 'full', array( 'class' => 'lazy-img jbs-m-auto logo' ) );
                     }
                     ?>
-                    <div class="jbs-text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20 jbs-lg-mb-10"><?php the_title() ?></div>
+                    <div class="jbs-text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20 jbs-lg-mb-10">
+                        <?php
+                        the_title();
+                        echo jobus_get_company_verification_badge( get_the_ID() );
+                        ?>
+                    </div>
                     <?php if ( ! empty( $website_url ) ) : ?>
                         <div class="jbs-text-center">
                             <a href="<?php echo esc_url( $website_url ) ?>" class="website-btn-two tran3s"
@@ -153,8 +158,11 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
             <div class="jbs-col-xxl-9 jbs-col-xl-8 jbs-order-xl-first">
                 <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
 
-                    <div class="company-head jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2 jbs-mb-30">
-                        <h1 class="post-title"><?php the_title(); ?></h1>
+                    <div class="company-head jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2 jbs-mb-50">
+                        <h1 class="post-title">
+                            <?php the_title(); ?>
+                            <?php echo jobus_get_company_verification_badge( get_the_ID() ); ?>
+                        </h1>
                         <?php
                         // Check if current user is the company author (employer)
                         if ( is_user_logged_in() && get_current_user_id() === (int) $user_id ) {

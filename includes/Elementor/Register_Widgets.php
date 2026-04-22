@@ -129,13 +129,22 @@ class Register_Widgets {
 		require_once( __DIR__ . '/widgets/Search_Form.php' );
 		require_once( __DIR__ . '/widgets/Jobs.php' );
 		require_once( __DIR__ . '/widgets/Job_Tabs.php' );
-		require_once( __DIR__ . '/widgets/Companies.php' );
 
 		// Register Widgets Classes
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Categories() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Search_Form() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Jobs() );
 		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Job_Tabs() );
-		$widgets_manager->register( new \jobus\includes\Elementor\widgets\Companies() );
+
+		// Companies widget - Premium feature
+		// Available if: Jobi theme is active OR Jobus Pro is active with valid license
+		$current_theme = strtolower( get_template() );
+		$is_jobi_theme = in_array( $current_theme, [ 'jobi', 'jobi-child' ], true );
+		$has_jobus_pro = jobus_is_premium();
+		
+		if ( $is_jobi_theme || $has_jobus_pro ) {
+			require_once( __DIR__ . '/widgets/Companies.php' );
+			$widgets_manager->register( new \jobus\includes\Elementor\widgets\Companies() );
+		}
 	}
 }

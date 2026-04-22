@@ -58,10 +58,44 @@ class Onboarding
 		add_action('admin_menu', array($this, 'register_onboarding_page'));
 		add_action('admin_init', array($this, 'redirect_to_onboarding'));
 		add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+		add_action('current_screen', array($this, 'suppress_notices'));
 
 		// AJAX handlers.
 		add_action('wp_ajax_jobus_save_onboarding_settings', array($this, 'ajax_save_settings'));
 		add_action('wp_ajax_jobus_skip_onboarding', array($this, 'ajax_skip_onboarding'));
+	}
+
+	/**
+	 * Remove all admin notices on the Jobus Onboarding/Setup Wizard page.
+	 *
+	 * Checks both the visible submenu screen ID and the hidden alias screen ID
+	 * to ensure notices are suppressed regardless of how the page is accessed.
+	 *
+	 * @return void
+	 */
+	public function suppress_notices(): void
+	{
+		$screen = get_current_screen();
+
+		if ( ! $screen ) {
+			return;
+		}
+
+		// Cover both: visible submenu and hidden alias (admin.php?page=jobus-onboarding).
+		$onboarding_screens = array(
+			'jobus_job_page_' . self::PAGE_SLUG,
+			'settings_page_' . self::PAGE_SLUG,
+		);
+
+		if ( ! in_array( $screen->id, $onboarding_screens, true ) ) {
+			return;
+		}
+
+		// Remove all admin notices on the Jobus onboarding page.
+		remove_all_actions( 'admin_notices' );
+		remove_all_actions( 'all_admin_notices' );
+		remove_all_actions( 'network_admin_notices' );
+		remove_all_actions( 'user_admin_notices' );
 	}
 
 	/**

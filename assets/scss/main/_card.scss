@@ -16,7 +16,7 @@
 
 .card-style-two.arrow:before,
 .card-style-two.arrow:after {
-  content: url(../images/shape/arrow_01.svg);
+  /* content: url(../images/shape/arrow_01.svg); */
   position: absolute;
   top: 25px;
   left: -150px;
@@ -46,67 +46,78 @@
 // Card Four
 
 .jbs-card-style {
-    background: #FFFFFF;
-    -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
-    -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
-    box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+  -moz-box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+  box-shadow: 0px 20px 50px rgba(1, 20, 44, 0.0356);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  &:hover {
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+
+  a {
+    padding: 40px 38px 50px;
+
     &:hover {
-        -webkit-transform: translateY(-5px);
-        -moz-transform: translateY(-5px);
-        -ms-transform: translateY(-5px);
-        transform: translateY(-5px);
+      text-decoration: none !important;
     }
-    a {
-        padding: 40px 38px 50px;
-        &:hover {
-            text-decoration: none !important;
-        }
-    }
-    .icon {
-        width: 72px;
-        height: 72px;
-        -webkit-border-radius: 50%;
+  }
+
+  .icon {
+    width: 72px;
+    height: 72px;
+    -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-        border: 1px solid #F0F0F0;
+    border: 1px solid #F0F0F0;
+  }
+
+  &:hover .icon {
+    background: var(--jbs-brand_color_3);
+    border-color: transparent;
+  }
+
+  .title {
+    color: var(--jbs-heading_color);
+    margin: 28px 0 25px;
+  }
+
+  &:hover .title {
+    color: var(--jbs-brand_color_4);
+
+  }
+
+  .total-job {
+    transition: 0.3s;
+    font-size: 16px;
+    color: rgba($color: #09321C, $alpha: 0.4);
+  }
+
+  &.jbs-bg-color {
+    box-shadow: none;
+    background: var(--jbs-brand_color_4);
+
+    a {
+      padding: 10px 40px 20px;
     }
-    &:hover .icon {
-        background: var(--jbs-brand_color_3);
-        border-color: transparent;
-    }
+
     .title {
-        color:var(--jbs-heading_color);
-        margin: 28px 0 25px;
+      font-size: 72px;
+      line-height: initial;
+      margin: 0 0 5px;
+
     }
-    &:hover .title {
-        color: var(--jbs-brand_color_4);
-        
+
+    .icon {
+      border-color: #fff;
     }
-    .total-job {
-        transition: 0.3s;
-        font-size: 16px;
-        color: rgba($color: #09321C, $alpha: 0.4);
-    }
-    &.bg-color {
-        box-shadow: none;
-        background: var(--jbs-brand_color_4);
-        a {
-            padding: 10px 40px 20px;
-        }
-        .title {
-            font-size: 72px;
-            line-height: initial;
-            margin: 0 0 5px;
-            
-        }
-        .icon {
-            border-color: #fff;
-        }
-    }
+  }
 }
 
 
@@ -129,7 +140,7 @@
 
 .card-style-five.arrow-style:before,
 .card-style-five.arrow-style:after {
-  content: url(../images/shape/arrow_02.svg);
+  /* content: url(../images/shape/arrow_02.svg); */
   position: absolute;
   top: 7%;
   bottom: auto;
@@ -273,7 +284,7 @@
 }
 
 // Pricing Card
-.pricing-section.bg-color {
+.pricing-section.jbs-bg-color {
   background: var(--jbs-box_bg_color);
 }
 
@@ -323,6 +334,7 @@
     letter-spacing: -0.36px;
     color: #fff;
     max-width: 270px;
+    display: inline-block;
 
     &:hover {
       background: var(--jbs-brand_color_3);

@@ -123,6 +123,7 @@ $container_classes .= ' ' . $extra_classes;
                         <a href="<?php echo esc_url(get_permalink($company_id)); ?>">
                             <?php echo esc_html(get_the_title($company_id)); ?>
                         </a>
+                        <?php echo jobus_get_company_verification_badge($company_id); ?>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>

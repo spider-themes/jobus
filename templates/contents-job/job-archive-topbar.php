@@ -3,14 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jobus-job-topbar job-listing-three jbs-pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
+<section class="jbs jbs-job-topbar job-listing-three jbs-pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
 
             <?php jobus_get_template_part('contents-job/sidebar-topbar-filters'); ?>
 
             <div class="jbs-col-12">
-                <div class="job-post-item-wrapper">
+                <div class="job-post-item-wrapper" data-jbs-filter-results="true">
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
 
 	                    <?php

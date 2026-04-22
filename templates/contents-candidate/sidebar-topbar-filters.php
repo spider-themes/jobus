@@ -109,11 +109,7 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                     </div>
 
                     <div class="jbs-row">
-                        <div class="jbs-col-xl-2 jbs-m-auto">
-                            <button type="submit" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-30 jbs-md-mt-10">
-                                <?php esc_html_e('Apply Filter', 'jobus'); ?>
-                            </button>
-                        </div>
+                        
                     </div>
                 </form>
             </div>

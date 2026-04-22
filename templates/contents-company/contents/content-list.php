@@ -25,8 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="company-data">
                             <h5 class="jbs-m-0 jbs-mt-10">
                                 <a href="<?php the_permalink(); ?>" class="company-name tran3s jbs-text-black">
-									<?php the_title() ?>
+									<?php the_title(); ?>
                                 </a>
+                                <?php echo jobus_get_company_verification_badge( get_the_ID() ); ?>
                             </h5>
 							<?php
 							$locations = get_the_terms( get_the_ID(), 'jobus_company_location' );

@@ -278,9 +278,6 @@ $plugin_version     = $data['plugin_version'] ?? '1.0.0';
 						<div class="jobus-empty-state">
 							<span class="dashicons dashicons-format-aside"></span>
 							<p><?php esc_html_e( 'No applications received yet.', 'jobus' ); ?></p>
-							<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=jobus_job' ) ); ?>" class="button button-primary">
-								<?php esc_html_e( 'Post Your First Job', 'jobus' ); ?>
-							</a>
 						</div>
 					<?php endif; ?>
 				</div>

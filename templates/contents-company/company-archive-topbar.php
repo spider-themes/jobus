@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jobus-company-topbar jbs-bg-white jobus-company-classic company-profiles jbs-pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
+<section class="jbs jbs-company-topbar jbs-bg-white jbs-company-classic jbs-company-profiles jbs-pt-110 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
 
             <?php jobus_get_template_part('contents-company/sidebar-topbar-filters'); ?>
 
             <div class="jbs-col-12">
-                <div class="company-profile-item-wrapper">
+                <div class="company-profile-item-wrapper" data-jbs-filter-results="true">
                     <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
 
 	                    <?php

@@ -26,6 +26,8 @@ class Admin {
 		add_filter( 'parent_file', [ $this, 'active_top_level_menu' ] );
 		add_filter( 'submenu_file', [ $this, 'active_sub_menus' ] );
 		add_filter( 'plugin_row_meta', [ $this, 'add_meta_links' ], 10, 2 );
+		add_action( 'admin_init', [ $this, 'setup_radius_engine' ] );
+		add_action( 'admin_notices', [ $this, 'radius_sync_notice' ] );
 	}
 
 	/**
@@ -45,6 +47,77 @@ class Admin {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Setup Utility: Force Database Table Creation & Backfill Locations.
+	 * Triggered by navigating to wp-admin/edit.php?post_type=jobus_job&jobus_setup_radius=true
+	 *
+	 * @return void
+	 */
+	public function setup_radius_engine(): void {
+		if ( ! isset( $_GET['jobus_setup_radius'] ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Verify nonce for security.
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'jobus_setup_radius_action' ) ) {
+			wp_die( esc_html__( 'Security check failed. Please try again.', 'jobus' ) );
+		}
+
+		// Force Setup the required structural DB table
+		if ( class_exists( '\jobus\includes\Classes\Lifecycle' ) ) {
+			\jobus\includes\Classes\Lifecycle::create_tables();
+		}
+
+		// Setup / Backfill all existing Jobs with Coordinates
+		if ( class_exists( '\jobus\includes\Classes\Geolocation' ) ) {
+			$geo_engine = new \jobus\includes\Classes\Geolocation();
+
+			$jobs = get_posts(
+				[
+					'post_type'      => 'jobus_job',
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					'fields'         => 'ids',
+				]
+			);
+
+			$synced_count = 0;
+			if ( ! empty( $jobs ) && ! is_wp_error( $jobs ) ) {
+				foreach ( $jobs as $job_id ) {
+					$post = get_post( $job_id );
+					if ( $post ) {
+						$geo_engine->sync_job_location( $job_id, $post );
+						$synced_count++;
+					}
+				}
+			}
+
+			update_option( 'jobus_radius_setup_completed', true );
+			
+			// Output success and redirect securely
+			$redirect_url = remove_query_arg( [ 'jobus_setup_radius', '_wpnonce' ] );
+			$redirect_url = add_query_arg( [ 'jobus_radius_synced' => $synced_count ], $redirect_url );
+			
+			wp_safe_redirect( $redirect_url );
+			exit;
+		}
+	}
+
+	/**
+	 * Flash an admin notice upon successful radius search setup.
+	 */
+	public function radius_sync_notice(): void {
+		if ( isset( $_GET['jobus_radius_synced'] ) && current_user_can( 'manage_options' ) ) {
+			$count   = absint( $_GET['jobus_radius_synced'] );
+			$message = sprintf( 
+				/* translators: %d: number of jobs synced */
+				esc_html__( 'Radius Search Setup Complete. Database Table created and synced %d jobs with geolocation coordinates.', 'jobus' ), 
+				$count 
+			);
+			echo '<div class="notice notice-success is-dismissible"><p>' . $message . '</p></div>';
+		}
 	}
 
 	public function create_nested_submenus() {
@@ -77,13 +150,14 @@ class Admin {
 		$screen = get_current_screen();
 		if ( ! $screen ) return $parent_file;
 
-		// Always expand the Jobus top menu
+		// Keep the Jobus top menu expanded for all Jobus post types and taxonomies.
 		if (
 			in_array( $screen->post_type, [ 'jobus_job', 'jobus_company', 'jobus_candidate' ] ) ||
 			in_array( $screen->taxonomy, [
 				'jobus_company_cat', 'jobus_company_location',
 				'jobus_candidate_cat','jobus_candidate_location','jobus_candidate_skill'
-			])
+			]) ||
+			( isset( $_GET['page'] ) && sanitize_key( $_GET['page'] ) === 'jobus-social-login' )
 		) {
 			$parent_file = 'edit.php?post_type=jobus_job';
 		}

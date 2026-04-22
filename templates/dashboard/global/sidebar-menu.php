@@ -88,7 +88,11 @@ if ( ! empty( $logo['url'] ) ) { ?>
     <ul class="jbs-style-none">
         <?php
         foreach ( $menu_items as $endpoint => $item ) :
-            $url = trailingslashit( $dashboard_url ) . $endpoint . '/';
+            if ( function_exists( 'jobus_get_dashboard_endpoint_url' ) ) {
+                $url = jobus_get_dashboard_endpoint_url( $endpoint, $dashboard_url );
+            } else {
+                $url = trailingslashit( $dashboard_url ) . $endpoint . '/';
+            }
             $is_active = $active_endpoint === $endpoint;
             $align_class = 'jbs-d-flex jbs-w-100 jbs-align-items-center dashboard-navigation-link dashboard-navigation-link--' . $endpoint;
             if ( $is_active ) {

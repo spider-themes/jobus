@@ -15,7 +15,7 @@
  * @link      https://developer.wordpress.org/plugins/javascript/ajax/
  */
 
-;(function ($) {
+; (function ($) {
     'use strict';
 
     const JobusEmployerDashboard = {
@@ -24,6 +24,7 @@
             this.Testimonials();
             this.CompanyWebsiteToggle();
             this.JobLogoUpload();
+            this.ExternalApplicationUrlToggle();
         },
 
 
@@ -205,7 +206,7 @@
                     $el.find('.jbs-accordion-collapse')
                         .attr('id', testimonialId)
                         .attr('aria-labelledby', `company-testimonial-heading-${i}`);
-                    $el.find('input[name^="company_testimonials"]').each(function() {
+                    $el.find('input[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -217,7 +218,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('textarea[name^="company_testimonials"]').each(function() {
+                    $el.find('textarea[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -229,7 +230,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('select[name^="company_testimonials"]').each(function() {
+                    $el.find('select[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -241,7 +242,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('label[for^="company-testimonial-"]').each(function() {
+                    $el.find('label[for^="company-testimonial-"]').each(function () {
                         let htmlFor = $(this).attr('for');
                         if (htmlFor) {
                             htmlFor = htmlFor.replace(/company-testimonial-\d+(-[a-z-]+)/, `company-testimonial-${i}$1`);
@@ -307,16 +308,16 @@
                 // When an image is selected, run a callback
                 mediaUploader.on('select', function () {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    
+
                     // Set the hidden input value to the attachment ID
                     $('#job_company_logo_id').val(attachment.id);
-                    
+
                     // Display the preview image
                     $('.logo-preview').attr('src', attachment.url).show();
-                    
+
                     // Update button text
                     $('#upload_logo_button').html('<i class="bi bi-upload"></i> Change Logo');
-                    
+
                     // Show remove button
                     $('#remove_logo_button').show();
                 });
@@ -331,16 +332,43 @@
 
                 // Clear the hidden input
                 $('#job_company_logo_id').val('');
-                
+
                 // Hide the preview image
                 $('.logo-preview').attr('src', '').hide();
-                
+
                 // Update button text
                 $('#upload_logo_button').html('<i class="bi bi-upload"></i> Upload Logo');
-                
+
                 // Hide remove button
                 $(this).hide();
             });
+        },
+
+        /**
+         * Handles toggling the external application URL fields based on selection.
+         */
+        ExternalApplicationUrlToggle: function () {
+            const $select = $('#is_apply_btn');
+            const $fields = $('#application-url-fields');
+
+            $select.on('change', function () {
+                const value = $(this).val();
+                if (value === 'external') {
+                    $fields.hide().removeClass('jbs-d-none').slideDown(200);
+                } else {
+                    $fields.slideUp(200, function() {
+                        $(this).addClass('jbs-d-none').show();
+                    });
+                }
+            });
+
+            // Initial state (in case of editing)
+            const initialValue = $select.val();
+            if (initialValue === 'external') {
+                $fields.removeClass('jbs-d-none').show();
+            } else {
+                $fields.addClass('jbs-d-none');
+            }
         }
 
     };

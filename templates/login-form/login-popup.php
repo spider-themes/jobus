@@ -3,9 +3,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Provider_Manager;
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 // Template variables passed from block/template loader
 $user_input  = ! empty( $_POST['user_input'] ) ? sanitize_text_field( wp_unslash( $_POST['user_input'] ) ) : '';
 $password    = ! empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash( $_POST['user_pwd'] ) ) : '';
+
+$social_status   = sanitize_key( wp_unslash( $_GET['jobus_social_status'] ?? '' ) );
+$social_error    = sanitize_text_field( urldecode( wp_unslash( $_GET['jobus_error'] ?? '' ) ) );
+$social_manager  = class_exists( Provider_Manager::class ) ? Provider_Manager::instance() : null;
+$social_buttons  = $social_manager ? $social_manager->get_enabled() : [];
 
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
@@ -55,6 +63,26 @@ if ( is_user_logged_in() ) {
                         </p>
                     </div>
                     <div class="form-wrapper jbs-m-auto">
+                        <?php if ( ! empty( $social_buttons ) ) : ?>
+                            <div class="jbs-social-auth" data-jbs-social-auth data-context="<?php echo esc_attr( Social_Login_Config::CONTEXT_LOGIN ); ?>">
+                                <?php if ( Social_Login_Config::STATUS_ERROR === $social_status && ! empty( $social_error ) ) : ?>
+                                    <div class="jbs-social-auth__notice jbs-alert jbs-alert-danger jbs-mb-20" role="alert">
+                                        <?php echo esc_html( $social_error ); ?>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="jbs-social-auth__buttons">
+                                    <?php foreach ( $social_buttons as $provider ) : ?>
+                                        <?php
+                                        echo $provider->render_button(
+                                            Social_Login_Config::CONTEXT_LOGIN,
+                                            home_url( add_query_arg( [] ) )
+                                        ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <p class="jbs-social-auth__divider"><span><?php esc_html_e( 'or sign in with email', 'jobus' ); ?></span></p>
+                            </div>
+                        <?php endif; ?>
                         <form action="<?php echo esc_url( home_url( '/' ) ); ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 
                             <?php wp_nonce_field( 'jobus_login_action', 'jobus_nonce' ); ?>
@@ -100,4 +128,3 @@ if ( is_user_logged_in() ) {
     </div>
     <?php
 }
-
