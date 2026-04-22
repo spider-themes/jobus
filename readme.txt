@@ -153,6 +153,7 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 * Improved: Search Filter optimized for faster and more accurate results
 * Fixed: Registration Form validation and applicant submission issues
 * Fixed: Job Application Submission popup model styling and functionality
+* Fixed: Sidebar and preloder save design issue
 
 = 1.8.0 (06 April 2026) =
 * Improved: General enhancements and minor fixes applied across the block for better stability
