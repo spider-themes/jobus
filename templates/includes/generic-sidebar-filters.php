@@ -163,6 +163,7 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 	</div>
 	<?php
 }
+}
 
 /**
  * Render taxonomy filter widget
