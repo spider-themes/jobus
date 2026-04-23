@@ -83,8 +83,8 @@
 
 // Hello Elementor Theme Compatibility
 .site-main:has(.wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-job-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
 }
 
@@ -101,7 +101,7 @@
     display: flex;
   }
 
-  table tbody tr > td {
+  table tbody tr>td {
     background: none;
   }
 
@@ -123,27 +123,32 @@
 }
 
 // Astra Theme Compatibility
-.wp-theme-astra{
-  #jobusLoginModal .placeholder_icon .passVicon img{
+.wp-theme-astra {
+  #jobusLoginModal .placeholder_icon .passVicon img {
     top: 16px;
   }
+
   .user-data-form .form-wrapper .input-group-meta .placeholder_icon img {
     top: 22%;
     transform: translateY(-22%);
-}
-.btn-one:focus {
+  }
+
+  .btn-one:focus {
     color: #000000 !important;
     background-color: var(--jbs-brand_color_3);
     border: 2px solid transparent;
-}
-.jbs-btn-close:focus,.jbs-btn-close:hover {
+  }
+
+  .jbs-btn-close:focus,
+  .jbs-btn-close:hover {
     outline: 0 !important;
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
     opacity: 1 !important;
     background: none !important;
     border: none !important;
+  }
 }
-}
+
 .post-type-archive-jobus_job,
 .post-type-archive-jobus_candidate,
 .post-type-archive-jobus_company,
@@ -181,7 +186,9 @@
 .dashboard-body {
   .jbs-table-responsive {
     .action-btn {
-      &:hover, &:focus {
+
+      &:hover,
+      &:focus {
         background-color: transparent;
       }
     }
@@ -246,15 +253,15 @@
 // kadence Theme Compatibility
 
 .site-container:has(.wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-job-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
   padding: 0 !important;
 }
 
 .content-area:has(.wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-candidate-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   width: 100% !important;
   padding: 0 !important;
 }
@@ -277,10 +284,12 @@ body {
         text-decoration: none;
       }
     }
+
     .container:has(.jbs-container) {
       max-width: 100% !important;
       padding: 0 !important;
     }
+
     .jbs-container {
       ul {
         margin-left: 0 !important;
@@ -290,6 +299,7 @@ body {
         }
       }
     }
+
     .jbs-pagination {
       .page-numbers {
         border-left: none;
@@ -297,10 +307,13 @@ body {
         border-bottom: none;
       }
     }
+
     .candidate-profile-card div.right-side ul.candidate-skills {
       padding-left: 0;
     }
+
     .jbs-table {
+
       thead,
       tbody tr {
         border: none;
@@ -309,22 +322,28 @@ body {
     }
   }
 }
+
 .wp-theme-docy {
   .user-data-form .form-wrapper .input-group-meta .placeholder_icon span:before {
     top: 24px;
   }
+
   .dashboard-body .placeholder_icon span::before {
     top: 20px;
   }
-  .dashboard-body a{
-    &:hover{
+
+  .dashboard-body a {
+    &:hover {
       text-decoration: none !important;
     }
   }
-  .dashboard-body{
-    table thead, .table_shortcode thead {
-    background: none;
-    border: none;
+
+  .dashboard-body {
+
+    table thead,
+    .table_shortcode thead {
+      background: none;
+      border: none;
     }
   }
 }
@@ -438,14 +457,128 @@ body {
 
 // jobi Theme Compatibility
 .wp-theme-jobi {
-    .job-details,.jbs-job-details,.jbs-candidates-profile {
-        padding-top: 180px !important;
-    }
-    .dashboard-body{
-      .passVicon{
-        img{
-          display: inline-block;
-        }
+
+  .job-details,
+  .jbs-job-details,
+  .jbs-candidates-profile {
+    padding-top: 180px !important;
+  }
+
+  .dashboard-body {
+    .passVicon {
+      img {
+        display: inline-block;
       }
     }
+  }
+}
+
+// WordPress Default Themes (Twenty Twenty – Twenty Twenty Five) Compatibility
+.jobus-frontend {
+
+  &.wp-theme-twentytwenty,
+  &.wp-theme-twentytwentyone,
+  &.wp-theme-twentytwentytwo,
+  &.wp-theme-twentytwentythree,
+  &.wp-theme-twentytwentyfour,
+  &.wp-theme-twentytwentyfive {
+    .wp-site-blocks,
+    .wp-site-blocks > main,
+    main,
+    article,
+    .entry-content,
+    .wp-block-post-content,
+    .wp-block-post-template,
+    .wp-block-query,
+    .wp-block-group,
+    .is-layout-constrained,
+    .is-layout-flow,
+    .site,
+    .site-content,
+    #primary,
+    #main,
+    .site-main,
+    .content-area {
+      &:has(> .jbs-container,
+            > section.jbs,
+            > .wp-block-jobus-shortcode-job-archive,
+            > .wp-block-jobus-shortcode-candidate-archive,
+            > .wp-block-jobus-shortcode-company-archive,
+            .jbs-container,
+            section.jbs,
+            .wp-block-jobus-shortcode-job-archive,
+            .wp-block-jobus-shortcode-candidate-archive,
+            .wp-block-jobus-shortcode-company-archive) {
+        max-width: none !important;
+        width: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+    :is(.is-layout-constrained, .entry-content, .wp-block-post-content) > :is(
+      section.jbs,
+      .jbs-container,
+      .wp-block-jobus-shortcode-job-archive,
+      .wp-block-jobus-shortcode-candidate-archive,
+      .wp-block-jobus-shortcode-company-archive
+    ),
+    :is(.is-layout-constrained, .entry-content, .wp-block-post-content) > *:has(
+      section.jbs,
+      .jbs-container,
+      .wp-block-jobus-shortcode-job-archive,
+      .wp-block-jobus-shortcode-candidate-archive,
+      .wp-block-jobus-shortcode-company-archive
+    ) {
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    // Shortcode block wrappers themselves (Gutenberg-block delivery).
+    .wp-block-jobus-shortcode-job-archive,
+    .wp-block-jobus-shortcode-candidate-archive,
+    .wp-block-jobus-shortcode-company-archive {
+      max-width: none !important;
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    // Hide default-theme page furniture only on archive pages — scoped via
+    // `:has()` so normal pages keep their title / nav / meta.
+    &:has(.jbs-container,
+          section.jbs,
+          .wp-block-jobus-shortcode-job-archive,
+          .wp-block-jobus-shortcode-candidate-archive,
+          .wp-block-jobus-shortcode-company-archive) {
+
+      // `.has-global-padding` adds horizontal padding via CSS vars on
+      // constrained groups — zero it out so the shortcode reaches edge-to-edge.
+      .has-global-padding {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .entry-header,
+      .wp-block-post-title,
+      .wp-block-post-featured-image,
+      .wp-block-post-date,
+      .wp-block-post-author,
+      .entry-meta,
+      .entry-footer,
+      .post-navigation,
+      .wp-block-post-navigation-link,
+      nav.post-navigation {
+        display: none !important;
+      }
+
+      .wp-site-blocks > main {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+    }
+  }
 }
