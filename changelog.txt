@@ -1,22 +1,23 @@
 == Changelog ==
 
-= 1.9.0 (22 April 2026) =
-New: Social Login Register ability via (Google / Facebook / LinkedIn)
-New: Radius Search Engine with latitude/longitude-based radius query and API mapping integration
-New: Demo Data Importer with one-click setup for sample jobs
-New: Guest Application allowing non-logged-in users to apply with Sign In, Register, or Guest options
-New: Company Verified Badge to improve trust and credibility
-New: Redesigned Sidebar Layouts for Candidate, Job, and Company single pages
-New: External Application URL Redirects enabling employers to send users to external ATS or affiliate links
-New: Job Schema Injection (JSON-LD) for improved Google Jobs search visibility
-New: Standard Messaging UI with a consistent internal messaging interface
-Enhanced: AJAX Filter Engine to fetch filtered archives silently, swap grid HTML dynamically, and update URL without breaking UI
-Improved: Post Type Templates updated for better design consistency across all post types
-Improved: Applicant Meta View enhanced for better admin readability
-Improved: Search Filter optimized for faster and more accurate results
-Fixed: Registration Form validation and applicant submission issues
-Fixed: Job Application Submission popup model styling and functionality
-Fixed: Sidebar and preloder save design issue
+= 1.9.0 (24 April 2026) =
+New: Easy login and signup using Google, Facebook, and LinkedIn  
+New: Find jobs based on your nearby location  
+New: One-click demo setup with sample jobs  
+New: Apply for jobs without creating an account (Sign In / Register / Guest options)  
+New: Verified badge added for trusted companies  
+New: Option to redirect users to external websites for job applications  
+New: Improved visibility on Google Jobs search  
+New: Simple and consistent messaging system  
+Enhanced: Improved sidebar design for Candidate, Job, and Company pages  
+Enhanced: Faster and smoother job filtering experience  
+Enhanced: More consistent design across all pages  
+Enhanced: Easier-to-read applicant details in admin panel  
+Enhanced: Faster and more accurate search results  
+Fixed: Fixed issues with registration and job application process  
+Fixed: Fixed job application popup design and functionality  
+Fixed: Fixed sidebar and loading design saving issue  
+Fixed: Fixed popup search results for jobs, candidates, and companies  
 
 = 1.8.0 (06 April 2026) =
 Improved: General enhancements and minor fixes applied across the block for better stability
