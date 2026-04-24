@@ -1,5 +1,5 @@
 // jobus candidates rtl css ********
-.filter-area-tab .jbs-nice-select {
+.jbs-filter-area-tab .jbs-nice-select {
   text-align: right !important;
 
   &:before {
@@ -8,7 +8,7 @@
   }
 }
 
-.filter-area-tab .jbs-nice-select .option {
+.jbs-filter-area-tab .jbs-nice-select .option {
   text-align: right;
 }
 
@@ -117,7 +117,7 @@
   text-align: right;
 }
 
-.filter-area-tab .filter-input {
+.jbs-filter-area-tab .jbs-filter-input {
   padding-right: 0;
 
   li {
@@ -137,7 +137,7 @@
   }
 }
 
-.filter-area-tab .input-box button {
+.jbs-filter-area-tab .jbs-input-box button {
   left: 0;
   right: initial;
 }
@@ -226,7 +226,7 @@
   margin-right: 12px;
 }
 
-.filter-area-tab .filter-header:before {
+.jbs-filter-area-tab .jbs-filter-header:before {
   right: initial;
   left: 25px;
 }

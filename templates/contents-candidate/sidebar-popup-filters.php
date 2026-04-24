@@ -38,11 +38,11 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
 
-            <div class="filter-area-tab jbs-modal-content">
+            <div class="jbs-filter-area-tab jbs-modal-content">
                 <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
 
                 <div class="jbs-position-relative">
-                    <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 border-bottom">
+                    <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom">
                         <?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>"
                         role="search" method="get" data-jbs-filter-form="true">
@@ -50,7 +50,7 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                         <input type="hidden" name="post_type" value="jobus_candidate" />
                         <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
 
-                        <div class="pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4">
+                        <div class="jbs-pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4">
                             <div class="jbs-row">
                                 <?php
 
@@ -58,8 +58,8 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                                 if ( $show_search_form ) {
                                     ?>
                                     <div class="jbs-col-lg-3">
-                                        <div class="filter-block jbs-pb-50 md-pb-20">
-                                            <div class="filter-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Candidate Search', 'jobus' ); ?></div>
+                                        <div class="jbs-filter-block jbs-pb-50 jbs-md-pb-20">
+                                            <div class="jbs-filter-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Candidate Search', 'jobus' ); ?></div>
                                             <?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
                                         </div>
                                     </div>
@@ -75,8 +75,8 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                                         $specifications_data = $specs_options[ $widget_name ] ?? '';
                                         ?>
                                         <div class="jbs-col-lg-3">
-                                            <div class="filter-block jbs-pb-50 md-pb-20">
-                                                <div class="filter-title jbs-fw-500 jbs-text-dark">
+                                            <div class="jbs-filter-block jbs-pb-50 jbs-md-pb-20">
+                                                <div class="jbs-filter-title jbs-fw-500 jbs-text-dark">
                                                     <?php echo esc_html( $widget_title ); ?></div>
                                                 <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
                                             </div>

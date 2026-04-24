@@ -53,10 +53,10 @@ if ( ! $has_filter_widgets ) {
 		<?php esc_html_e( 'Filter', 'jobus' ); ?>
 	</button>
 
-	<div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+	<div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
 		<button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
 		        aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
-		<div class="main-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
+		<div class="jbs-filter-heading jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Filter By', 'jobus' ); ?></div>
 		<div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
 			<form action="<?php echo esc_url( get_post_type_archive_link( $archive_link_post_type ) ); ?>" role="search" method="get">
 
@@ -142,8 +142,8 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 		$is_collapsed = '';
 	}
 	?>
-	<div class="filter-block jbs-bottom-line">
-		<a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ); ?>"
+	<div class="jbs-filter-block jbs-bottom-line">
+		<a class="jbs-filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo esc_attr( $is_collapsed ); ?>"
 		   data-jbs-toggle="collapse"
 		   data-jbs-target="#collapse-<?php echo esc_attr( $widget_name ); ?>"
 		   role="button"
@@ -153,7 +153,7 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 
 		<div class="<?php echo esc_attr( $is_collapsed_show ); ?>"
 		     id="collapse-<?php echo esc_attr( $widget_name ); ?>">
-			<div class="main-body">
+			<div class="jbs-main-body">
 				<?php
 				$meta_opt_parent_key = $meta_opt_key;
 				include dirname( __FILE__ ) . '/../filter-widgets/' . $widget_layout . '.php';
@@ -173,7 +173,7 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 if ( ! function_exists( 'jobus_render_taxonomy_filter_widget' ) ) {
 	function jobus_render_taxonomy_filter_widget( $taxonomy, $is_last = false ) {
 	?>
-	<div class="filter-block jbs-bottom-line">
+	<div class="jbs-filter-block jbs-bottom-line">
 		<?php
 		include dirname( __FILE__ ) . '/../loop/classic-tax-wrapper-start.php';
 		include dirname( __FILE__ ) . '/../filter-widgets/categories.php';

@@ -1,6 +1,6 @@
 <?php
 /*
- * Range slider filter widget for job specifications.
+ * Range jbs-slider filter widget for job specifications.
  *
  * @package Jobus
  */
@@ -54,13 +54,13 @@ if ( ! empty ( $all_values ) ) :
 	$max_salary = jobus_search_terms( $widget_name )[1] ?? $max_values;
 	?>
 
-    <div class="salary-slider"
+    <div class="jbs-salary-slider"
          data_widget="<?php echo esc_attr( $widget_name ); ?>[]">
-        <div class="price-input jbs-d-flex jbs-align-items-center">
+        <div class="jbs-price-input jbs-d-flex jbs-align-items-center">
             <div class="field jbs-d-flex jbs-align-items-center">
                 <input type="number"
                        name="<?php echo esc_attr( $widget_name ); ?>[]"
-                       class="input-min"
+                       class="jbs-input-min"
                        value="<?php echo esc_attr( $min_salary ); ?>"
                        readonly>
             </div>
@@ -68,7 +68,7 @@ if ( ! empty ( $all_values ) ) :
             <div class="field jbs-d-flex jbs-align-items-center">
                 <input type="number"
                        name="<?php echo esc_attr( $widget_name ); ?>[]"
-                       class="input-max"
+                       class="jbs-input-max"
                        value="<?php echo esc_attr( $max_salary ); ?>"
                        readonly>
             </div>
@@ -76,15 +76,15 @@ if ( ! empty ( $all_values ) ) :
                 <div class="currency jbs-ps-1"><?php echo esc_html( $range_suffix ); ?></div>
 			<?php endif; ?>
         </div>
-        <div class="slider">
-            <div class="progress"></div>
+        <div class="jbs-slider">
+            <div class="jbs-progress"></div>
         </div>
-        <div class="range-input">
-            <input type="range" class="range-min"
+        <div class="jbs-range-input">
+            <input type="range" class="jbs-range-min"
                    min="<?php echo esc_attr( $min_values ); ?>"
                    max="<?php echo esc_attr( $max_values ); ?>"
                    value="<?php echo esc_attr( $min_salary ); ?>" step="1">
-            <input type="range" class="range-max"
+            <input type="range" class="jbs-range-max"
                    min="<?php echo esc_attr( $min_values ); ?>"
                    max="<?php echo esc_attr( $max_values ); ?>"
                    value="<?php echo esc_attr( $max_salary ); ?>" step="1">

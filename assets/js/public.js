@@ -77,9 +77,9 @@
             const sliderElements = document.querySelectorAll(selector);
 
             sliderElements.forEach((sliderElement) => {
-                const rangeInput = sliderElement.querySelectorAll(".range-input input"),
-                    priceInput = sliderElement.querySelectorAll(".price-input input"),
-                    range = sliderElement.querySelector(".slider .progress");
+                const rangeInput = sliderElement.querySelectorAll(".jbs-range-input input"),
+                    priceInput = sliderElement.querySelectorAll(".jbs-price-input input"),
+                    range = sliderElement.querySelector(".jbs-slider .jbs-progress");
                 let priceGap = 1;
 
                 priceInput.forEach((input) => {
@@ -88,7 +88,7 @@
                             maxPrice = parseInt(priceInput[1].value);
 
                         if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-                            if (e.target.className === "input-min") {
+                            if (e.target.className === "jbs-input-min") {
                                 rangeInput[0].value = minPrice;
                                 range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
                             } else {
@@ -105,7 +105,7 @@
                             maxVal = parseInt(rangeInput[1].value);
 
                         if (maxVal - minVal < priceGap) {
-                            if (e.target.className === "range-min") {
+                            if (e.target.className === "jbs-range-min") {
                                 rangeInput[0].value = maxVal - priceGap;
                             } else {
                                 rangeInput[1].value = minVal + priceGap;
@@ -121,7 +121,7 @@
             });
         }
 
-        salaryRangeSlider(".salary-slider");
+        salaryRangeSlider(".jbs-salary-slider");
 
 
 
@@ -285,7 +285,7 @@
 
         //============== Radius Distance Slider & Geolocation ================//
         function initRadiusGeolocation() {
-            const radiusWrapper = document.querySelector('.radius-search-wrapper');
+            const radiusWrapper = document.querySelector('.jbs-radius-search-wrapper');
             if(!radiusWrapper) return;
 
             const slider = radiusWrapper.querySelector('#radius_distance');
@@ -404,12 +404,12 @@
                 if (!targetUrl) {
 
                     // SMART OPTIMIZATION: Filter out un-touched Default Range sliders
-                    const rangeSliders = sourceForm.querySelectorAll('.salary-slider');
+                    const rangeSliders = sourceForm.querySelectorAll('.jbs-salary-slider');
                     rangeSliders.forEach(slider => {
-                        const minInput = slider.querySelector('.input-min');
-                        const maxInput = slider.querySelector('.input-max');
-                        const rangeMin = slider.querySelector('.range-min');
-                        const rangeMax = slider.querySelector('.range-max');
+                        const minInput = slider.querySelector('.jbs-input-min');
+                        const maxInput = slider.querySelector('.jbs-input-max');
+                        const rangeMin = slider.querySelector('.jbs-range-min');
+                        const rangeMax = slider.querySelector('.jbs-range-max');
 
                         if (minInput && maxInput && rangeMin && rangeMax) {
                             // If they exactly match their outer limit, they haven't been touched by the user. Disable them temporarily so FormData skips them.
@@ -421,11 +421,11 @@
                     });
 
                     const formData = new FormData(sourceForm);
-                    
+
                     // RESTORE Range Sliders immediately so the UI doesn't break
                     rangeSliders.forEach(slider => {
-                        const minInput = slider.querySelector('.input-min');
-                        const maxInput = slider.querySelector('.input-max');
+                        const minInput = slider.querySelector('.jbs-input-min');
+                        const maxInput = slider.querySelector('.jbs-input-max');
                         if (minInput) minInput.disabled = false;
                         if (maxInput) maxInput.disabled = false;
                     });
@@ -586,7 +586,7 @@
                 });
 
                 // 5. Intercept Click on Magnifying Glass Buttons (If they don't want to type and just click)
-                $form.on('click', '.search-form-widget button', function(e) {
+                $form.on('click', '.jbs-search-form-widget button', function(e) {
                     // If the button clicked is the geolocation crosshair, don't trigger form submit
                     if(this.id === 'jbs_get_my_location') return;
                     e.preventDefault();

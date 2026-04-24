@@ -60,10 +60,10 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
         <i class="bi bi-funnel"></i>
         <?php esc_html_e('Filter', 'jobus'); ?>
     </button>
-    <div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+    <div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
         <button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
             aria-label="Close"></button>
-        <div class="main-title jbs-fw-500 jbs-text-dark">
+        <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark">
             <?php esc_html_e('Filter By', 'jobus'); ?>
             <?php
             $has_active_filters = false;
@@ -98,8 +98,8 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
 
 
                     ?>
-                    <div class="filter-block jbs-bottom-line">
-                        <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>"
+                    <div class="jbs-filter-block jbs-bottom-line">
+                        <a class="jbs-filter-title jbs-fw-500 jbs-text-dark jbs-pointer<?php echo $is_search_collapsed ? ' jbs-collapsed' : ''; ?>"
                             data-jbs-toggle="collapse" data-jbs-target="#collapse-search-form" role="button"
                             aria-expanded="<?php echo !$is_search_collapsed ? 'true' : 'false'; ?>">
                             <?php esc_html_e('Keyword Search', 'jobus'); ?>
@@ -107,7 +107,7 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
 
                         <div class="<?php echo $is_search_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'; ?>"
                             id="collapse-search-form">
-                            <div class="main-body">
+                            <div class="jbs-main-body">
                                 <?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
                             </div>
                         </div>
@@ -130,15 +130,15 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
 
 
                         ?>
-                        <div class="filter-block jbs-bottom-line">
-                            <a class="filter-title jbs-fw-500 jbs-text-dark jbs-pointer <?php echo esc_attr($is_collapsed ? 'jbs-collapsed' : ''); ?>"
+                        <div class="jbs-filter-block jbs-bottom-line">
+                            <a class="jbs-filter-title jbs-fw-500 jbs-text-dark jbs-pointer <?php echo esc_attr($is_collapsed ? 'jbs-collapsed' : ''); ?>"
                                 data-jbs-toggle="collapse" data-jbs-target="#collapse-<?php echo esc_attr($widget_name) ?>"
                                 aria-expanded="<?php echo !$is_collapsed ? 'true' : 'false'; ?>">
                                 <?php echo esc_html($widget_title); ?>
                             </a>
                             <div class="<?php echo esc_attr($is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show') ?>"
                                 id="collapse-<?php echo esc_attr($widget_name) ?>">
-                                <div class="main-body">
+                                <div class="jbs-main-body">
                                     <?php 
                                     if ( ! empty( $widget_layout ) ) {
                                         include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; 

@@ -47,10 +47,10 @@ $specs_options = jobus_get_specs_options('company_specifications');
 		<?php esc_html_e('Filter', 'jobus'); ?>
 	</button>
 
-	<div class="filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
-		<button type="button" class="jbs-btn-close text-reset jbs-d-lg-none jbs-offcanvas-close"
+	<div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+		<button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
 			data-jbs-dismiss="offcanvas" aria-label="Close"></button>
-		<div class="main-title jbs-fw-500 jbs-text-dark">
+		<div class="jbs-filter-heading jbs-fw-500 jbs-text-dark">
 			<?php esc_html_e('Filter By', 'jobus'); ?>
 			<?php
 			$has_active_filters = false;
@@ -83,15 +83,15 @@ $specs_options = jobus_get_specs_options('company_specifications');
 					$is_search_active = !empty($search_query);
 					$is_search_collapsed = !$is_search_active;
 					?>
-					<div class="filter-block jbs-bottom-line jbs-mt25">
-						<a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr($is_search_collapsed ? ' jbs-collapsed' : ''); ?>"
+					<div class="jbs-filter-block jbs-bottom-line jbs-mt25">
+						<a class="jbs-filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr($is_search_collapsed ? ' jbs-collapsed' : ''); ?>"
 							data-jbs-toggle="collapse" data-jbs-target="#collapse-search-form" role="button"
 							aria-expanded="<?php echo !$is_search_collapsed ? 'true' : 'false'; ?>">
 							<?php esc_html_e('Keyword Search', 'jobus'); ?>
 						</a>
 						<div class="<?php echo esc_attr($is_search_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'); ?>"
 							id="collapse-search-form">
-							<div class="main-body">
+							<div class="jbs-main-body">
 								<?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
 							</div>
 						</div>
@@ -112,15 +112,15 @@ $specs_options = jobus_get_specs_options('company_specifications');
 						$widget_title = $specifications[$widget_name] ?? '';
 						$specifications_data = $specs_options[$widget_name] ?? '';
 						?>
-						<div class="filter-block jbs-bottom-line jbs-mt25">
-							<a class="filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr($is_collapsed ? ' jbs-collapsed' : ''); ?>"
+						<div class="jbs-filter-block jbs-bottom-line jbs-mt25">
+							<a class="jbs-filter-title jbs-pointer jbs-fw-500 jbs-text-dark<?php echo esc_attr($is_collapsed ? ' jbs-collapsed' : ''); ?>"
 								data-jbs-toggle="collapse" data-jbs-target="#collapse-<?php echo esc_attr($widget_name); ?>"
 								role="button" aria-expanded="<?php echo !$is_collapsed ? 'true' : 'false'; ?>">
 								<?php echo esc_html($widget_title); ?>
 							</a>
 							<div class="<?php echo esc_attr($is_collapsed ? 'jbs-collapse' : 'jbs-collapse jbs-show'); ?>"
 								id="collapse-<?php echo esc_attr($widget_name); ?>">
-								<div class="main-body">
+								<div class="jbs-main-body">
 									<?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
 								</div>
 							</div>

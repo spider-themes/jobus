@@ -147,6 +147,74 @@
     background: none !important;
     border: none !important;
   }
+
+  // Sidebar range sliders — Astra's generic `input` reset ships
+  // `padding`, `border`, `line-height`, and `min-height` that
+  // inflate our 4px / 6px range inputs and float the thumb off
+  // the visual track. `!important` is required because Astra's
+  // rules load after our main stylesheet and rely on the same
+  // `input[type=range]` tag specificity.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"],
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    padding: 0 !important;
+    border: 0 !important;
+    line-height: 1 !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
+  }
+
+  // Salary dual-range stays transparent (track is the sibling .jbs-slider)
+  // and must keep the -6px offset so both thumbs sit on the progress bar.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"] {
+    height: 4px !important;
+    top: -6px !important;
+    background: transparent !important;
+  }
+
+  // Max-Distance single-range keeps the JS-painted gradient background.
+  // `background-color: transparent` would wipe the JS gradient, so we
+  // only reset the specific properties Astra injects.
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    height: 6px !important;
+  }
+
+  // Thumb pseudo-elements. Astra ships its own
+  // `::-webkit-slider-thumb` / `::-moz-range-thumb` rules that strip
+  // our soft drop shadow and occasionally resize the thumb. Pin every
+  // visual property so Max-Distance and Salary thumbs look identical
+  // to how they render on Hello / Blocksy / default themes.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"],
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      border: 2px solid var(--jbs-brand_color_1) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15) !important;
+      cursor: pointer !important;
+    }
+
+    &::-moz-range-thumb {
+      -moz-appearance: none !important;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      border: 2px solid var(--jbs-brand_color_1) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15) !important;
+      cursor: pointer !important;
+    }
+  }
+
+  // Max-Distance single-range needs the Chrome-only thumb offset so
+  // it centres on the 6 px track. Without this override Astra's
+  // reset can shift the thumb a few pixels upward.
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"]::-webkit-slider-thumb {
+    margin-top: -5px !important;
+  }
 }
 
 .post-type-archive-jobus_job,

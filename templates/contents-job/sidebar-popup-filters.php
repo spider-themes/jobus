@@ -37,11 +37,11 @@ $specs_options = jobus_get_specs_options();
 <div class="jbs-modal jbs-popUpModal jbs-fade login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
-            <div class="filter-area-tab jbs-modal-content">
+            <div class="jbs-filter-area-tab jbs-modal-content">
                 <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
                 <div class="jbs-position-relative">
 
-                    <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom">
+                    <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom">
                         <?php esc_html_e('Filter By', 'jobus'); ?>
                     </div>
 
@@ -56,8 +56,8 @@ $specs_options = jobus_get_specs_options();
                             if ( $show_search_form ) {
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
-                                    <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                        <div class="filter-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Keyword Search', 'jobus' ); ?></div>
+                                    <div class="jbs-filter-block jbs-pb-50 jbs-lg-pb-20">
+                                        <div class="jbs-filter-title jbs-fw-500 jbs-text-dark"><?php esc_html_e( 'Keyword Search', 'jobus' ); ?></div>
                                         <?php include __DIR__ . '/../filter-widgets/search-form.php'; ?>
                                     </div>
                                 </div>
@@ -74,8 +74,8 @@ $specs_options = jobus_get_specs_options();
                                     ?>
 
                                     <div class="jbs-col-lg-3 jbs-col-sm-6">
-                                        <div class="filter-block jbs-pb-50 jbs-lg-pb-20">
-                                            <div class="filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html( $widget_title ); ?></div>
+                                        <div class="jbs-filter-block jbs-pb-50 jbs-lg-pb-20">
+                                            <div class="jbs-filter-title jbs-fw-500 jbs-text-dark"><?php echo esc_html( $widget_title ); ?></div>
                                             <?php include __DIR__ . "/../filter-widgets/{$widget_layout}.php"; ?>
                                         </div>
                                     </div>
