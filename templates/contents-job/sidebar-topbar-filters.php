@@ -42,7 +42,7 @@ $specs_options = jobus_get_specs_options();
             </a>
 
             <div class="jbs-collapse jbs-border-top" >
-                <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-pt-25 jbs-pb-30" role="search" method="get">
+                <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" class="jbs-pt-25 jbs-pb-30" role="search" method="get" data-jbs-filter-form="true">
 
                     <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
                     <input type="hidden" name="post_type" value="jobus_job"/>

@@ -381,32 +381,36 @@
 
         //============== Modern AJAX Filter Engine (PJAX) ================//
         function initAjaxFilters() {
-            const filterForm = document.querySelector('#filteroffcanvas form');
+            // Match every sidebar filter form across the three layouts (classic / popup / topbar).
+            const filterForms = document.querySelectorAll('form[data-jbs-filter-form="true"]');
             const resultWrapper = document.querySelector('[data-jbs-filter-results="true"]');
-            
+
             // Validate that we are on an archive page with proper wrappers
-            if (!filterForm || !resultWrapper) return;
+            if (!filterForms.length || !resultWrapper) return;
 
             /**
              * Hot-swaps the DOM efficiently with skeleton loading state
              */
-            async function triggerAjaxSearch(targetUrl) {
+            async function triggerAjaxSearch(targetUrl, sourceForm) {
+                // Fall back to the first form on the page for its action URL when no source is given.
+                sourceForm = sourceForm || filterForms[0];
+
                 // Determine the correct URL for the server fetch
-                const url = new URL(targetUrl || filterForm.action);
-                
+                const url = new URL(targetUrl || sourceForm.action);
+
                 // The beautiful URL specifically for the browser URL bar
                 const cleanUrl = new URL(url.href);
 
                 if (!targetUrl) {
-                    
+
                     // SMART OPTIMIZATION: Filter out un-touched Default Range sliders
-                    const rangeSliders = filterForm.querySelectorAll('.salary-slider');
+                    const rangeSliders = sourceForm.querySelectorAll('.salary-slider');
                     rangeSliders.forEach(slider => {
                         const minInput = slider.querySelector('.input-min');
                         const maxInput = slider.querySelector('.input-max');
                         const rangeMin = slider.querySelector('.range-min');
                         const rangeMax = slider.querySelector('.range-max');
-                        
+
                         if (minInput && maxInput && rangeMin && rangeMax) {
                             // If they exactly match their outer limit, they haven't been touched by the user. Disable them temporarily so FormData skips them.
                             if (minInput.value == rangeMin.min && maxInput.value == rangeMax.max) {
@@ -416,7 +420,7 @@
                         }
                     });
 
-                    const formData = new FormData(filterForm);
+                    const formData = new FormData(sourceForm);
                     
                     // RESTORE Range Sliders immediately so the UI doesn't break
                     rangeSliders.forEach(slider => {
@@ -556,37 +560,44 @@
                 }
             }
 
-            // 2. Intercept Checkboxes and Toggles
-            $(filterForm).on('change', 'input[type="checkbox"], input[type="radio"], select', function() {
-                triggerAjaxSearch();
-            });
+            // Bind input / submit listeners to every filter form on the page
+            // (classic offcanvas, popup modal, topbar collapse) so any layout
+            // produces the same AJAX-based filtering behavior.
+            filterForms.forEach(function (filterForm) {
+                const $form = $(filterForm);
 
-            // 3. Intercept Sliders (Range changes)
-            $(filterForm).on('change', 'input[type="range"]', function() {
-                triggerAjaxSearch();
-            });
+                // 2. Intercept Checkboxes and Toggles
+                $form.on('change', 'input[type="checkbox"], input[type="radio"], select', function() {
+                    triggerAjaxSearch(undefined, filterForm);
+                });
 
-            // 4. Intercept Text Inputs (Keywords & Location) with a Debounce (Like Google)
-            let typingTimer;
-            $(filterForm).on('input', 'input[type="text"]', function() {
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(function() {
-                    triggerAjaxSearch();
-                }, 550); // Wait 550ms after user stops typing before fetching
-            });
+                // 3. Intercept Sliders (Range changes)
+                $form.on('change', 'input[type="range"]', function() {
+                    triggerAjaxSearch(undefined, filterForm);
+                });
 
-            // 5. Intercept Click on Magnifying Glass Buttons (If they don't want to type and just click)
-            $(filterForm).on('click', '.search-form-widget button', function(e) {
-                // If the button clicked is the geolocation crosshair, don't trigger form submit
-                if(this.id === 'jbs_get_my_location') return; 
-                e.preventDefault();
-                triggerAjaxSearch();
-            });
+                // 4. Intercept Text Inputs (Keywords & Location) with a Debounce (Like Google)
+                let typingTimer;
+                $form.on('input', 'input[type="text"]', function() {
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(function() {
+                        triggerAjaxSearch(undefined, filterForm);
+                    }, 550); // Wait 550ms after user stops typing before fetching
+                });
 
-            // 5b. Intercept Form submit (if user hits "Enter" aggressively)
-            $(filterForm).on('submit', function(e) {
-                e.preventDefault();
-                triggerAjaxSearch();
+                // 5. Intercept Click on Magnifying Glass Buttons (If they don't want to type and just click)
+                $form.on('click', '.search-form-widget button', function(e) {
+                    // If the button clicked is the geolocation crosshair, don't trigger form submit
+                    if(this.id === 'jbs_get_my_location') return;
+                    e.preventDefault();
+                    triggerAjaxSearch(undefined, filterForm);
+                });
+
+                // 5b. Intercept Form submit (if user hits "Enter" aggressively)
+                $form.on('submit', function(e) {
+                    e.preventDefault();
+                    triggerAjaxSearch(undefined, filterForm);
+                });
             });
 
             // 6. Intercept Pagination links inside the wrapper

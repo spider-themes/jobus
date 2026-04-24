@@ -42,7 +42,7 @@ $specs_options = jobus_get_specs_options( 'company_specifications' );
                     <div class="main-title jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom"><?php esc_html_e('Filter By', 'jobus'); ?></div>
                     <div class="pt-25 jbs-pb-30 jbs-ps-4 jbs-pe-4">
 
-                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get">
+                        <form action="<?php echo esc_url(get_post_type_archive_link('jobus_company')) ?>" role="search" method="get" data-jbs-filter-form="true">
 
                             <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
                             <input type="hidden" name="post_type" value="jobus_company"/>
