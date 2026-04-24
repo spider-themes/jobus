@@ -26,9 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta_key   = $meta['meta_key'] ?? '';
 			$meta_value = $value['meta_values'] ?? '';
 
+			// Skip entries with an empty label so we don't render an "orphan" row with only a count.
+			if ( '' === trim( (string) $meta_value ) ) {
+				continue;
+			}
+
 			$modifiedValues = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 			$opt_val        = strtolower( $modifiedValues );
-			
+
 			// Format correctly for browser URLs seamlessly decoded from internal logic
 			$beautiful_val  = str_replace( '@space@', ' ', $opt_val );
 

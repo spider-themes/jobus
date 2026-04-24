@@ -79,9 +79,6 @@
       right: 8px;
     }
 
-    img {
-      height: auto;
-    }
   }
 
   .candidate-name {
@@ -497,10 +494,6 @@ img {
       top: 5px;
       right: 8px;
     }
-
-    img {
-      height: auto;
-    }
   }
 
   .candidate-post {
@@ -571,7 +564,7 @@ img {
   }
 
   &.list-layout {
-    padding: 27px 30px 38px;
+    padding: 28px 30px 28px;
 
     .candidate-skills {
       position: absolute;
@@ -582,6 +575,16 @@ img {
     .right-side {
       width: calc(100% - 80px);
       padding-left: 30px;
+    }
+
+    &.no-avatar .right-side {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    &.no-avatar .candidate-skills {
+      position: static;
+      margin-top: 8px;
     }
   }
 }
