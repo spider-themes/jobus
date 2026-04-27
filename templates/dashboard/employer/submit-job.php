@@ -41,7 +41,7 @@ $is_company_website     = $company_website['is_company_website'] ?? 'default';
 // Get external application URL settings
 $job_meta               = $editing_job ? get_post_meta( $job_id, 'jobus_meta_options', true ) : [];
 $is_apply_btn           = $job_meta['is_apply_btn'] ?? 'default';
-$apply_form_url         = $job_meta['apply_form_url'] ?? '#';
+$apply_form_url         = $job_meta['apply_form_url'] ?? '';
 
 $dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 $my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . 'jobs' : '#';
@@ -64,7 +64,9 @@ $submit_button_label = $editing_job ? $update_job_label : $post_job_label;
 
 <?php
 $is_editing = (bool) $job_id;
-$can_submit = $is_editing ? true : apply_filters( 'jobus_user_can_post_job', true, $user->ID );
+$packages_enabled = function_exists( 'jobus_opt' ) && jobus_opt( 'enable_job_packages', false );
+$monetization_active = $packages_enabled && class_exists( 'WooCommerce' ) && jobus_is_premium();
+$can_submit = $is_editing ? true : ( ! $monetization_active || apply_filters( 'jobus_user_can_post_job', true, $user->ID ) );
 
 if ( ! $can_submit ) {
     do_action( 'jobus_employer_no_packages_message', $user->ID );
@@ -340,7 +342,8 @@ if ( ! $can_submit ) {
                         <label for="apply-form-url"><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></label>
                         <input type="url" id="apply-form-url" name="apply_form_url"
                                placeholder="<?php esc_attr_e( 'https://careers.yourcompany.com/apply/12345', 'jobus' ); ?>"
-                               value="<?php echo esc_attr( $apply_form_url ); ?>">
+                               value="<?php echo esc_attr( $apply_form_url ); ?>"
+                               <?php disabled( $is_apply_btn !== 'external' ); ?>>
                         <p class="jbs-text-muted jbs-mt-2">
                             <?php esc_html_e( 'Provide the complete URL (including https://) where candidates should be directed to complete their application. Ideal for third-party Applicant Tracking Systems (ATS) or external corporate portals.', 'jobus' ); ?>
                         </p>

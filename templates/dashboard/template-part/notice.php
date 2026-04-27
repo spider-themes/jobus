@@ -18,7 +18,7 @@ $message = '';
 $nonce_verified = isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_GET['_wpnonce'])), 'jobus_dashboard_action');
 
 // Only process messages if nonce is verified or if it's a safe message type
-if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'], ['profile_updated', 'error'], true))) {
+if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'], ['profile_updated', 'job_created', 'job_updated', 'error'], true))) {
     // Sanitize the message type
     $message_key = sanitize_text_field(wp_unslash($_GET['message']));
 
@@ -26,6 +26,14 @@ if ( isset( $_GET['message'] ) && ($nonce_verified || in_array($_GET['message'],
         case 'profile_updated':
             $message_type = 'success';
             $message = esc_html__( 'Profile updated successfully.', 'jobus' );
+            break;
+        case 'job_created':
+            $message_type = 'success';
+            $message = esc_html__( 'Job posted successfully.', 'jobus' );
+            break;
+        case 'job_updated':
+            $message_type = 'success';
+            $message = esc_html__( 'Job updated successfully.', 'jobus' );
             break;
         case 'error':
             $message_type = 'danger';

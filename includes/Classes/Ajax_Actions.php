@@ -41,6 +41,9 @@ class Ajax_Actions {
 		// Delete Job
 		add_action( 'wp_ajax_jobus_delete_job', [ $this, 'delete_job' ] );
 
+		// Submit Job
+		add_action( 'wp_ajax_jobus_submit_job', [ $this, 'submit_job' ] );
+
 		// Candidate Registration
 		add_action( 'wp_ajax_nopriv_jobus_register_candidate', [ $this, 'ajax_register_candidate' ] );
 		add_action( 'wp_ajax_jobus_register_candidate', [ $this, 'ajax_register_candidate' ] );
@@ -388,6 +391,53 @@ class Ajax_Actions {
 		}
 
 		wp_send_json_success( [ 'message' => esc_html__( 'Job deleted successfully.', 'jobus' ) ] );
+	}
+
+	/**
+	 * Handle employer job creation and update via AJAX.
+	 *
+	 * @return void
+	 */
+	public function submit_job(): void {
+		$nonce = isset( $_POST['employer_submit_job_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_submit_job_nonce'] ) ) : '';
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'employer_submit_job' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ] );
+		}
+
+		$user = wp_get_current_user();
+		if ( ! $user || ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Access denied. You do not have permission to post a job.', 'jobus' ) ] );
+		}
+
+		$submission = new \jobus\includes\Classes\submission\Job_Form_Submission();
+		$result     = $submission->process_submission();
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( [ 'message' => $result->get_error_message() ] );
+		}
+
+		$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		$redirect_url  = $dashboard_url
+			? jobus_get_dashboard_endpoint_url( 'jobs', $dashboard_url )
+			: get_permalink( (int) $result['job_id'] );
+
+		$redirect_url = add_query_arg(
+			[
+				'message'  => ! empty( $result['is_update'] ) ? 'job_updated' : 'job_created',
+				'job_id'   => (int) $result['job_id'],
+				'_wpnonce' => wp_create_nonce( 'jobus_dashboard_action' ),
+			],
+			$redirect_url
+		);
+
+		wp_send_json_success( [
+			'message'      => ! empty( $result['is_update'] )
+				? esc_html__( 'Job updated successfully.', 'jobus' )
+				: esc_html__( 'Job posted successfully.', 'jobus' ),
+			'job_id'       => (int) $result['job_id'],
+			'is_update'    => ! empty( $result['is_update'] ),
+			'redirect_url' => $redirect_url,
+		] );
 	}
 
 	/**

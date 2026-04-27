@@ -150,7 +150,7 @@ class Dashboard_Employer
 		}
 
 		// Membership
-		if (jobus_opt('enable_job_packages', false)) {
+		if ( jobus_opt('enable_job_packages', false) && class_exists('WooCommerce') && jobus_is_premium() ) {
 			$nav_items['membership'] = [
 				'label' => jobus_opt('label_employer_membership', esc_html__('Membership', 'jobus')),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/membership.svg'
@@ -207,6 +207,8 @@ class Dashboard_Employer
 		echo $this->load_sidebar_menu($active, $nav_items);
 		echo '</aside>';
 		echo '<main class="dashboard-body">';
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+		echo Template_Loader::get_template_part( 'dashboard/template-part/notice' );
 
 		switch ($active) {
 			case 'profile':
@@ -423,7 +425,7 @@ class Dashboard_Employer
 	 */
 	protected function load_membership(WP_User $user): string
 	{
-		if (jobus_is_premium() && class_exists('WooCommerce') && jobus_opt('enable_job_packages', false)) {
+		if (jobus_opt('enable_job_packages', false) && class_exists('WooCommerce') && jobus_is_premium() ) {
 			return Template_Loader::get_template_part_pro('dashboard/employer/membership', [
 				'user_id'  => $user->ID,
 				'username' => $user->user_login,
