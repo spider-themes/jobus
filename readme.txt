@@ -32,29 +32,37 @@ Built with usability and SEO in mind, Jobus integrates seamlessly with your them
 
 *   **Unlimited Job Postings:** Create and manage as many job listings as you need.
 *   **Company Profiles:** Dedicated pages for companies with logos, descriptions, and active jobs.
+*   **Verified Badges:** Highlight trusted companies with verified badges.
 *   **Job Specifications:** Add detailed requirements (Salary, Experience, Job Type, etc.).
 *   **Location-Based Listings:** Assign locations to jobs for easy filtering.
+*   **External Applications:** Redirect candidates to external websites for job applications.
 *   **Employer Dashboard:** A frontend dashboard to manage listings and profile details.
 
 ***For Candidates & Job Seekers***
 
 *   **Candidate Profiles:** Users can create professional profiles / resumes.
-*   **Easy Application:** Apply to jobs directly via a built-in form.
+*   **Easy Application:** Apply to jobs directly via a built-in form, or apply as a guest without creating an account.
 *   **Candidate Dashboard:** Manage applications and profile settings.
-*   **Job Search & Filters:** Find jobs by keyword, location, and category.
+*   **Job Search & Filters:** Fast, accurate, and smooth job filtering by keyword, location, and category.
+*   **Radius Search:** Find jobs based on your nearby location using geolocation.
 
 ***Powerful Management Tools***
 
 *   **Frontend Dashboards:** Separate dashboards for Employers and Candidates.
-*   **Application Tracking:** View and manage job applications from the backend.
+*   **Social Login:** Easy login and signup using Google, Facebook, and LinkedIn.
+*   **Messaging System:** Built-in simple and consistent messaging system.
+*   **Application Tracking:** View and manage job applications with easy-to-read applicant details from the backend.
 *   **Custom User Roles:** Automatically assigns Employer and Candidate roles.
 *   **Social Sharing:** Built-in social share buttons for job posts.
 *   **Featured Jobs:** Highlight premium listings to boost visibility.
+*   **Google Jobs Integration:** Improved visibility with built-in Schema for Google Jobs search.
+*   **Demo Importer:** One-click demo setup with sample jobs to get started instantly.
 
 ### Design & Customization
 *   **Pre-made Templates:** Includes ready-to-use templates for Job Lists, Single Jobs, and Company pages.
 *   **Elementor Widgets:** Drag-and-drop widgets for Job Listings, Search Forms, Categories, and more.
 *   **Customizable Appearance:** Control colors, layouts, and styles via settings.
+*   **Modern Design & Layouts:** Enjoy improved sidebars and a consistent, modern design across Candidate, Job, and Company pages.
 
 ---
 
