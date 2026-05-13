@@ -128,9 +128,11 @@ class Assets {
 			// Script's ajax actions
 			wp_enqueue_script( 'jobus-dashboard-ajax-actions', esc_url( JOBUS_JS . '/dashboard-ajax-actions.js' ), [ 'jquery' ], JOBUS_VERSION, true );
 			wp_localize_script( 'jobus-dashboard-ajax-actions', 'jobus_dashboard_obj', [
-				'ajax_url'                 => $ajax_url,
-				'nonce'                    => wp_create_nonce( 'jobus_dashboard_nonce' ),
-				'remove_application_nonce' => wp_create_nonce( 'jobus_remove_application_nonce' ), // Nonce for removing job application
+				'ajax_url'                    => $ajax_url,
+				'nonce'                       => wp_create_nonce( 'jobus_dashboard_nonce' ),
+				'remove_application_nonce'    => wp_create_nonce( 'jobus_remove_application_nonce' ),
+				'search_candidates_nonce'     => wp_create_nonce( 'jobus_search_saved_candidates' ),
+				'candidate_archive_url'       => get_post_type_archive_link( 'jobus_candidate' ),
 			] );
 
 			wp_enqueue_script( 'jobus-dashboard-taxonomy', esc_url( JOBUS_JS . '/dashboard-taxonomy.js' ), [ 'jquery' ], JOBUS_VERSION, true );

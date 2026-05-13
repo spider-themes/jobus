@@ -1,4 +1,168 @@
 /*==== Saved Job ======*/
+
+/* Count badge — sits inline inside h2 */
+.jbs-saved-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 20px;
+  background: var(--jbs_brand_color_3_opt, #d2f34c);
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+  top: -8px;
+}
+
+/* Right-side toolbar: two separate pills with gap */
+.jbs-saved-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: 575px) {
+    flex-wrap: wrap;
+    gap: 8px;
+
+  }
+
+  /* Browse button */
+  .jbs-browse-candidates-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    padding: 10px 16px;
+
+    i {
+      font-size: 14px;
+    }
+  }
+}
+
+.candidate-avatar {
+  img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+/* Search pill — standalone */
+.jbs-saved-candidate-search {
+  display: flex;
+  align-items: center;
+
+  .jbs-input-box {
+    position: relative;
+
+    input[type=text] {
+      height: 42px;
+      padding: 0 42px 0 18px;
+      border: 1.5px solid #E3F0EB;
+      border-radius: 50px;
+      font-size: 14px;
+      width: 220px;
+      background: #fff;
+      color: #444;
+      outline: none;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: #3F634D;
+      }
+
+      &::placeholder {
+        color: #aaa;
+      }
+
+      @media (max-width: 575px) {
+        width: 100%;
+      }
+    }
+
+    .jbs-search-submit-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: #3F634D;
+      font-size: 15px;
+      line-height: 1;
+
+      &:hover {
+        color: #244034;
+      }
+    }
+  }
+}
+
+/* Empty state card */
+.jbs-empty-state-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 60px 30px;
+  text-align: center;
+}
+
+.jbs-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #244034;
+    margin: 0;
+  }
+
+  p {
+    color: #6c757d;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .jbs-btn {
+    margin-top: 8px;
+    gap: 8px;
+  }
+}
+
+.jbs-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #f0faf5;
+  margin-bottom: 4px;
+
+  i {
+    font-size: 32px;
+    color: var(--jbs_brand_color_4_opt, #00BF58);
+  }
+}
+
+/* Search spinner inside input */
+.jbs-search-loading {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .dashboard-body {
   .action-button {
     display: flex;
@@ -15,7 +179,8 @@
       justify-content: space-between;
       padding: 24px 30px;
 
-      .title, .view-more-btn {
+      .title,
+      .view-more-btn {
         font-size: 20px;
         color: #244034;
         font-weight: 500;
