@@ -405,8 +405,8 @@ class Dashboard_Helper {
 			wp_send_json_error( [ 'message' => __( 'Invalid application.', 'jobus' ) ] );
 		}
 
-		// Validate status
-		$allowed_statuses = [ 'pending', 'approved', 'rejected' ];
+		// Validate status against the canonical list (jobus_get_application_statuses()).
+		$allowed_statuses = array_keys( jobus_get_application_statuses() );
 		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
 			wp_send_json_error( [ 'message' => __( 'Invalid status.', 'jobus' ) ] );
 		}
@@ -424,9 +424,19 @@ class Dashboard_Helper {
 		$updated = update_post_meta( $application_id, 'application_status', $new_status );
 
 		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
+			$statuses        = jobus_get_application_statuses();
+			$status_meta     = $statuses[ $new_status ];
+			$all_badge_class = implode( ' ', array_map(
+				static fn( $s ) => $s['badge_class'],
+				$statuses
+			) );
+
 			wp_send_json_success( [
-				'message' => __( 'Application status updated successfully.', 'jobus' ),
-				'status'  => $new_status,
+				'message'         => __( 'Application status updated successfully.', 'jobus' ),
+				'status'          => $new_status,
+				'status_label'    => $status_meta['label'],
+				'badge_class'     => $status_meta['badge_class'],
+				'all_badge_class' => $all_badge_class,
 			] );
 		} else {
 			wp_send_json_error( [ 'message' => __( 'Failed to update application status.', 'jobus' ) ] );

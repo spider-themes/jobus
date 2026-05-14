@@ -26,7 +26,48 @@
             this.removeSavedPost();
             this.removeApplication();
             this.updateApplicationStatus();
+            this.statusSelector();
             this.searchSavedCandidates();
+        },
+
+        /**
+         * Status selector dropdown on the Application Details page.
+         *
+         * Each option is a `.jobus-update-status` button so the existing AJAX
+         * handler picks the click up — we only manage open/close state here,
+         * plus sync the trigger label/swatch after a successful save so the
+         * picker reflects the new "current" status without a page reload.
+         */
+        statusSelector: function () {
+            const $doc = $(document);
+            const triggerSelector = '.jbs-app-status-select-trigger';
+            const menuSelector    = '.jbs-app-status-select-menu';
+            const rootSelector    = '.jbs-app-status-select';
+
+            const closeAllSelectors = function () {
+                $(triggerSelector + '[aria-expanded="true"]').attr('aria-expanded', 'false');
+                $(menuSelector + '.is-open').removeClass('is-open');
+            };
+
+            $doc.on('click', triggerSelector, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const $trigger = $(this);
+                const wasOpen = $trigger.attr('aria-expanded') === 'true';
+                closeAllSelectors();
+                if (!wasOpen) {
+                    $trigger.attr('aria-expanded', 'true');
+                    $trigger.siblings(menuSelector).addClass('is-open');
+                }
+            });
+
+            $doc.on('click', function (e) {
+                if (!$(e.target).closest(rootSelector).length) closeAllSelectors();
+            });
+
+            $doc.on('keydown', function (e) {
+                if (e.key === 'Escape') closeAllSelectors();
+            });
         },
 
         /**
@@ -272,18 +313,34 @@
                     success: function(response) {
                         btn.removeClass('disabled');
                         if (response.success) {
-                            // Update the status badge
-                            let statusClass = 'jbs-bg-warning';
-                            if (newStatus === 'approved') {
-                                statusClass = 'jbs-bg-success';
-                            } else if (newStatus === 'rejected') {
-                                statusClass = 'jbs-bg-danger';
+                            // Server is the source of truth for badge class + label.
+                            // Fall back to a sane default so older payloads still work.
+                            const data = response.data || {};
+                            const allClasses = data.all_badge_class || 'jbs-bg-warning jbs-bg-info jbs-bg-success jbs-bg-danger';
+                            const newClass = data.badge_class || 'jbs-bg-warning';
+                            const newLabel = data.status_label || (newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
+
+                            // Update every status badge tied to this application (table row + detail page).
+                            $('[data-application-id="' + applicationId + '"]')
+                                .closest('tr, .jbs-application-details')
+                                .find('.status-badge')
+                                .removeClass(allClasses)
+                                .addClass(newClass)
+                                .text(newLabel);
+
+                            // Sync the Application Details status selector: update trigger
+                            // swatch + label, close the menu, and re-hide the now-current option.
+                            const $selector = $('.jbs-app-status-select[data-application-id="' + applicationId + '"]');
+                            if ($selector.length) {
+                                const $trigger = $selector.find('.jbs-app-status-select-trigger');
+                                $trigger.find('.jbs-app-status-select-label').text(newLabel);
+                                $trigger.find('.jbs-app-status-swatch')
+                                    .attr('class', 'jbs-app-status-swatch jbs-app-status-swatch--' + newStatus);
+                                $trigger.attr('aria-expanded', 'false');
+                                $selector.find('.jbs-app-status-select-menu').removeClass('is-open');
+                                $selector.find('.jbs-app-status-select-option').show()
+                                    .filter('[data-status="' + newStatus + '"]').hide();
                             }
-                            
-                            statusBadge
-                                .removeClass('jbs-bg-warning jbs-bg-success jbs-bg-danger')
-                                .addClass(statusClass)
-                                .text(newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
 
                             // Show success notification if SweetAlert is available
                             if (typeof Swal !== 'undefined') {

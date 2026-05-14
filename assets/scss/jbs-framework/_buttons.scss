@@ -183,6 +183,60 @@
   }
 }
 
+// Outline variants — used by surfaces that need lower-emphasis CTAs without losing
+// the semantic color (e.g. the Application Details "Shortlist" button).
+.jbs-btn-outline-primary {
+  color: var(--jbs_brand_color_4_opt) !important;
+  background-color: transparent;
+  border: 1px solid var(--jbs_brand_color_4_opt);
+  box-shadow: none;
+
+  &:hover {
+    color: $text-white !important;
+    background-color: var(--jbs_brand_color_4_opt);
+    border-color: var(--jbs_brand_color_4_opt);
+  }
+}
+
+.jbs-btn-outline-info {
+  color: #0aa8c8 !important;
+  background-color: transparent;
+  border: 1px solid #0dcaf0;
+  box-shadow: none;
+
+  &:hover {
+    color: #000 !important;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+}
+
+.jbs-btn-outline-warning {
+  color: #b88600 !important;
+  background-color: transparent;
+  border: 1px solid #ffc107;
+  box-shadow: none;
+
+  &:hover {
+    color: #000 !important;
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+}
+
+.jbs-btn-outline-danger {
+  color: #b02a37 !important;
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  box-shadow: none;
+
+  &:hover {
+    color: $text-white !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+}
+
 .jbs-btn-info {
   color: #000;
   background-color: #0dcaf0;

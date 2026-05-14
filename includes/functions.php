@@ -1376,3 +1376,62 @@ if ( ! function_exists( 'jobus_get_dashboard_endpoint_url' ) ) {
         return add_query_arg( $endpoint, '', $dashboard_url );
     }
 }
+
+if ( ! function_exists( 'jobus_get_application_statuses' ) ) {
+    /**
+     * Single source of truth for job application statuses.
+     *
+     * Add a status here once and it cascades to the admin metabox dropdown,
+     * the employer status selector, the AJAX validator and analytics counts.
+     *
+     * @return array<string, array<string, string>>
+     */
+    function jobus_get_application_statuses(): array {
+        // Labels are returned unescaped; callers escape at output (esc_html / esc_attr).
+        $statuses = [
+            'pending'     => [
+                'label'        => __( 'Pending', 'jobus' ),
+                'badge_class'  => 'jbs-bg-warning',
+                'icon'         => 'bi-hourglass-split',
+                'action_label' => __( 'Mark Pending', 'jobus' ),
+            ],
+            'shortlisted' => [
+                'label'        => __( 'Shortlisted', 'jobus' ),
+                'badge_class'  => 'jbs-bg-info',
+                'icon'         => 'bi-star',
+                'action_label' => __( 'Shortlist', 'jobus' ),
+            ],
+            'approved'    => [
+                'label'        => __( 'Approved', 'jobus' ),
+                'badge_class'  => 'jbs-bg-success',
+                'icon'         => 'bi-check-circle',
+                'action_label' => __( 'Approve', 'jobus' ),
+            ],
+            'rejected'    => [
+                'label'        => __( 'Rejected', 'jobus' ),
+                'badge_class'  => 'jbs-bg-danger',
+                'icon'         => 'bi-x-circle',
+                'action_label' => __( 'Reject', 'jobus' ),
+            ],
+        ];
+
+        return (array) apply_filters( 'jobus_application_statuses', $statuses );
+    }
+}
+
+if ( ! function_exists( 'jobus_get_application_status' ) ) {
+    /**
+     * Resolve a single application's normalized status meta to its descriptor.
+     *
+     * @param int    $application_id Application post ID.
+     * @param string $fallback       Status key to use when meta is missing/unknown.
+     * @return array{key:string,label:string,badge_class:string,icon:string,action_label:string}
+     */
+    function jobus_get_application_status( int $application_id, string $fallback = 'pending' ): array {
+        $statuses = jobus_get_application_statuses();
+        $raw      = (string) get_post_meta( $application_id, 'application_status', true );
+        $key      = isset( $statuses[ $raw ] ) ? $raw : ( isset( $statuses[ $fallback ] ) ? $fallback : 'pending' );
+
+        return array_merge( [ 'key' => $key ], $statuses[ $key ] );
+    }
+}

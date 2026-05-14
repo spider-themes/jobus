@@ -1,0 +1,469 @@
+// =========================================================================
+// Application Details (Pro)
+// Used by jobus-pro/templates/dashboard/employer/application-details.php.
+// All selectors are prefixed `jbs-app-details-*` / `jbs-app-status-*` to
+// avoid collisions with other plugins and themes.
+// =========================================================================
+
+.jbs-application-details {
+
+	// Header row ----------------------------------------------------------
+	.jbs-app-details-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		flex-wrap: wrap;
+		padding-bottom: 20px;
+		margin-bottom: 24px;
+		border-bottom: 1px solid #e5e7eb;
+	}
+
+	.jbs-app-details-header-left {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		flex-wrap: nowrap;
+	}
+
+	.jbs-app-details-back {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		color: #374151;
+		transition: all 0.2s ease;
+		flex-shrink: 0;
+
+		&:hover {
+			background: #f3f4f6;
+			color: #111827;
+			border-color: #d1d5db;
+		}
+
+		i { font-size: 16px; }
+	}
+
+	.main-title {
+		margin: 0;
+		font-size: 24px;
+		font-weight: 700;
+		color: #111827;
+	}
+
+	.status-badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px 16px;
+		border-radius: 999px;
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 1;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+		// Re-align the global `.jbs-bg-*::before` dot inside the rounded pill.
+		// (The global rule nudges it down 2px for flat table rows.)
+		&::before {
+			top: 0 !important;
+			margin-right: 8px !important;
+		}
+	}
+
+	// Applicant summary card ---------------------------------------------
+	.jbs-app-details-summary {
+		padding: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		flex-wrap: wrap;
+	}
+
+	.jbs-app-details-summary-identity {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.jbs-app-details-summary-avatar {
+		width: 72px;
+		height: 72px;
+		border-radius: 50%;
+		object-fit: cover;
+		flex-shrink: 0;
+		border: 3px solid #fff;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	}
+
+	.jbs-app-details-summary-name {
+		font-size: 20px;
+		font-weight: 700;
+		margin: 0 0 6px;
+		color: #111827;
+		line-height: 1.2;
+	}
+
+	.jbs-app-details-summary-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+		color: #6b7280;
+		font-size: 13px;
+		line-height: 1;
+
+		> * {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			line-height: 1;
+		}
+
+		i {
+			font-size: 14px;
+			line-height: 1;
+			display: inline-flex;
+		}
+
+		a {
+			color: #6b7280;
+			text-decoration: none;
+
+			&:hover { color: #111827; }
+		}
+	}
+
+	.jbs-app-details-summary-divider {
+		width: 3px;
+		height: 3px;
+		background: #d1d5db;
+		border-radius: 50%;
+		display: inline-block;
+		flex: 0 0 auto;
+	}
+
+	.jbs-app-details-summary-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	// Section card --------------------------------------------------------
+	.jbs-app-details-card {
+		padding: 24px;
+	}
+
+	.jbs-app-details-card-head {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 18px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid #f3f4f6;
+
+		h5 {
+			margin: 0;
+			font-size: 15px;
+			font-weight: 600;
+			color: #111827;
+		}
+	}
+
+	.jbs-app-details-card-icon {
+		width: 32px;
+		height: 32px;
+		border-radius: 8px;
+		background: rgba(13, 110, 253, 0.08);
+		color: var(--jbs_brand_color_4_opt, #0d6efd);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 16px;
+	}
+
+	// Contact information rows -------------------------------------------
+	.jbs-application-meta {
+		li {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 12px 0;
+			border-bottom: 1px solid #f3f4f6;
+			gap: 16px;
+
+			&:last-child { border-bottom: 0; padding-bottom: 0; }
+			&:first-child { padding-top: 0; }
+		}
+	}
+
+	.jbs-app-details-info-label {
+		color: #6b7280;
+		font-size: 13px;
+		font-weight: 500;
+	}
+
+	.jbs-app-details-info-value {
+		color: #111827;
+		font-size: 14px;
+		font-weight: 600;
+		text-align: right;
+		word-break: break-word;
+
+		a { color: var(--jbs_brand_color_4_opt, #0d6efd); }
+	}
+
+	// Cover message -------------------------------------------------------
+	.jbs-application-message {
+		background: #f9fafb;
+		border-left: 3px solid var(--jbs_brand_color_4_opt, #0d6efd);
+		border-radius: 0 8px 8px 0;
+		padding: 14px 18px;
+		color: #374151;
+		font-size: 14px;
+		line-height: 1.65;
+
+		p { margin: 0 0 8px; &:last-child { margin: 0; } }
+	}
+
+	.jbs-application-message--empty {
+		background: #f9fafb;
+		border-radius: 8px;
+		padding: 14px 18px;
+		color: #9ca3af;
+		font-style: italic;
+		font-size: 14px;
+	}
+
+	// CV card -------------------------------------------------------------
+	.jbs-app-details-cv-row {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 14px;
+		background: #f9fafb;
+		border: 1px solid #f3f4f6;
+		border-radius: 10px;
+		margin-bottom: 14px;
+	}
+
+	.jbs-app-details-cv-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 10px;
+		background: linear-gradient(135deg, #ef4444, #dc2626);
+		color: #fff;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 22px;
+		flex-shrink: 0;
+	}
+
+	.jbs-app-details-cv-info {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.jbs-app-details-cv-name {
+		font-weight: 600;
+		font-size: 14px;
+		color: #111827;
+		word-break: break-all;
+		line-height: 1.3;
+		margin-bottom: 4px;
+	}
+
+	.jbs-app-details-cv-meta {
+		font-size: 12px;
+		color: #6b7280;
+		display: flex;
+		gap: 8px;
+		align-items: center;
+	}
+
+	.jbs-app-details-cv-ext {
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 4px;
+		padding: 2px 6px;
+		font-weight: 600;
+		color: #374151;
+		text-transform: uppercase;
+		font-size: 10px;
+		letter-spacing: 0.04em;
+	}
+
+	.jbs-app-details-cv-empty {
+		text-align: center;
+		padding: 28px 16px;
+		background: #f9fafb;
+		border-radius: 10px;
+		color: #9ca3af;
+
+		i { font-size: 32px; display: block; margin-bottom: 8px; }
+	}
+
+	.jbs-app-details-cv-actions {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+
+		.jbs-btn {
+			justify-content: center;
+			padding: 10px 12px;
+			font-size: 13px;
+		}
+	}
+
+	// Decision card + status selector ------------------------------------
+	// Pattern: status-selector dropdown (Linear / Greenhouse / GitHub style).
+	// The trigger shows the current status; the menu lists transitions.
+	.jbs-app-details-decision-help {
+		color: #6b7280;
+		font-size: 13px;
+		margin: 0 0 14px;
+	}
+
+	.jbs-app-status-select {
+		position: relative;
+	}
+
+	.jbs-app-status-select-trigger {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 12px 14px;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 10px;
+		cursor: pointer;
+		transition: all 0.15s ease;
+		font-size: 14px;
+		color: #111827;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+
+		&:hover {
+			border-color: #d1d5db;
+			background: #fafafa;
+		}
+
+		&[aria-expanded="true"] {
+			border-color: var(--jbs_brand_color_4_opt, #0d6efd);
+			box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+		}
+
+		&[aria-expanded="true"] .jbs-app-status-select-chevron {
+			transform: rotate(180deg);
+		}
+	}
+
+	.jbs-app-status-select-current {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		min-width: 0;
+	}
+
+	.jbs-app-status-select-chevron {
+		color: #9ca3af;
+		font-size: 14px;
+		transition: transform 0.2s ease;
+	}
+
+	.jbs-app-status-select-menu {
+		position: absolute;
+		top: calc(100% + 6px);
+		left: 0;
+		right: 0;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 10px;
+		padding: 6px;
+		box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
+		z-index: 20;
+		display: none;
+		animation: jbs-app-details-fade-down 0.12s ease;
+
+		&.is-open { display: block; }
+	}
+
+	.jbs-app-status-select-option {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		width: 100%;
+		padding: 10px 12px;
+		background: transparent;
+		border: 0;
+		border-radius: 8px;
+		cursor: pointer;
+		font-size: 14px;
+		color: #111827;
+		text-align: left;
+		transition: background 0.12s ease;
+
+		&:hover { background: #f3f4f6; }
+	}
+
+	.jbs-app-status-select-opt-label { flex: 1; min-width: 0; }
+	.jbs-app-status-select-opt-icon  { color: #9ca3af; font-size: 13px; }
+
+	// Status swatch (the colored dot) mirrors the badge dot palette.
+	.jbs-app-status-swatch {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		flex-shrink: 0;
+		display: inline-block;
+
+		&--pending     { background: #ffc107; }
+		&--shortlisted { background: #0dcaf0; }
+		&--approved    { background: #198754; }
+		&--rejected    { background: #dc3545; }
+	}
+
+	// Three-dot actions menu — mirrors the table row pattern.
+	.action-dots .action-btn {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		border: 1px solid #e5e7eb;
+		background: #fff;
+		color: #6b7280;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background: #f3f4f6;
+			color: #111827;
+		}
+
+		span {
+			display: inline-block;
+			width: 4px;
+			height: 4px;
+			background: currentColor;
+			border-radius: 50%;
+			box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+		}
+	}
+}
+
+@keyframes jbs-app-details-fade-down {
+	from { opacity: 0; transform: translateY(-4px); }
+	to   { opacity: 1; transform: translateY(0); }
+}

@@ -300,19 +300,142 @@ class Dashboard_Employer
 				'username'     => $user->user_login,
 				'is_dashboard' => false, // Set to false for full view with pagination
 			]);
-		} else {
-			$image_url = JOBUS_IMG . '/dashboard/pro-features/application-tracking.png';
-			ob_start();
-?>
-			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
-				<div class="pro-image-wrap">
-					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
-					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
+		}
+
+		return Template_Loader::get_template_part('dashboard/template-part/pro-feature-lock', [
+			'title'       => __('Application Tracking', 'jobus'),
+			'description' => __('See every applicant, their CV, contact info and cover message in one place. Shortlist, approve, or reject candidates with a single click.', 'jobus'),
+			'features'    => [
+				__('Detailed application view with phone, email, message and CV', 'jobus'),
+				__('Shortlist, approve and reject candidates', 'jobus'),
+				__('Email notifications with full applicant data', 'jobus'),
+				__('Pipeline analytics in the admin dashboard', 'jobus'),
+			],
+			'preview'     => $this->render_applications_preview(),
+			'upgrade_url' => function_exists('jobus_fs') ? jobus_fs()->get_upgrade_url() : admin_url('admin.php?page=jobus-pricing'),
+		]);
+	}
+
+	/**
+	 * Build a static HTML preview of the Applications table for the Pro upsell.
+	 *
+	 * Mirrors the structure of dashboard/employer/applications.php so the
+	 * blurred screenshot stays visually consistent with the real Pro feature
+	 * without exposing any actual applicant data.
+	 *
+	 * @return string Preview HTML.
+	 */
+	protected function render_applications_preview(): string
+	{
+		// Sample rows — values escaped at output, not in this array.
+		$rows = [
+			[
+				'name'   => 'Sarah Johnson',
+				'email'  => 'sarah.j@example.com',
+				'job'    => 'Senior Product Designer',
+				'date'   => '29 Apr, 2026',
+				'status' => __('Shortlisted', 'jobus'),
+				'badge'  => 'jbs-bg-info',
+				'type'   => 'Registered',
+			],
+			[
+				'name'   => 'Michael Chen',
+				'email'  => 'm.chen@example.com',
+				'job'    => 'Frontend Engineer',
+				'date'   => '27 Apr, 2026',
+				'status' => __('Approved', 'jobus'),
+				'badge'  => 'jbs-bg-success',
+				'type'   => 'Registered',
+			],
+			[
+				'name'   => 'Priya Patel',
+				'email'  => 'priya.p@example.com',
+				'job'    => 'Marketing Specialist',
+				'date'   => '24 Apr, 2026',
+				'status' => __('Pending', 'jobus'),
+				'badge'  => 'jbs-bg-warning',
+				'type'   => 'Guest',
+			],
+			[
+				'name'   => 'Daniel Garcia',
+				'email'  => 'd.garcia@example.com',
+				'job'    => 'Customer Support Lead',
+				'date'   => '22 Apr, 2026',
+				'status' => __('Rejected', 'jobus'),
+				'badge'  => 'jbs-bg-danger',
+				'type'   => 'Registered',
+			],
+		];
+
+		ob_start();
+		?>
+		<div class="jbs-position-relative">
+			<div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
+				<h2 class="main-title jbs-m-0"><?php esc_html_e('Job Applications', 'jobus'); ?></h2>
+			</div>
+			<div class="jbs-bg-white card-box border-20">
+				<div class="jbs-table-responsive">
+					<table class="jbs-table job-alert-table">
+						<thead>
+							<tr>
+								<th><?php esc_html_e('Applicant', 'jobus'); ?></th>
+								<th><?php esc_html_e('Job Title', 'jobus'); ?></th>
+								<th><?php esc_html_e('Applied On', 'jobus'); ?></th>
+								<th><?php esc_html_e('Status', 'jobus'); ?></th>
+								<th><?php esc_html_e('Actions', 'jobus'); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							foreach ( $rows as $row ) :
+										$type_badge_class = 'Guest' === $row['type']
+											? 'jbs-badge-secondary'
+											: 'jbs-bg-primary jbs-text-white';
+										?>
+								<tr>
+									<td>
+										<div class="applicant-info jbs-d-flex jbs-align-items-center jbs-gap-2">
+											<?php
+											echo get_avatar(
+												$row['email'],
+												40,
+												'',
+												'',
+												array( 'class' => 'jbs-rounded-circle' )
+											); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_avatar returns safe HTML.
+											?>
+											<div>
+												<span class="jbs-fw-500"><?php echo esc_html( $row['name'] ); ?></span>
+												<div class="jbs-mt-1">
+													<span class="jbs-badge <?php echo esc_attr( $type_badge_class ); ?>">
+														<?php echo esc_html( $row['type'] ); ?>
+													</span>
+												</div>
+												<div class="jbs-text-muted jbs-fs-sm"><?php echo esc_html( $row['email'] ); ?></div>
+											</div>
+										</div>
+									</td>
+									<td><span class="jbs-fw-500"><?php echo esc_html( $row['job'] ); ?></span></td>
+									<td><?php echo esc_html( $row['date'] ); ?></td>
+									<td>
+										<span class="status-badge <?php echo esc_attr( $row['badge'] ); ?>">
+											<?php echo esc_html( $row['status'] ); ?>
+										</span>
+									</td>
+									<td>
+										<div class="action-dots">
+											<button class="action-btn" type="button" aria-hidden="true"><span></span></button>
+										</div>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
 				</div>
 			</div>
+		</div>
 		<?php
-			return ob_get_clean();
-		}
+		return (string) ob_get_clean();
 	}
 
 	/**
