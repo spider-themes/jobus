@@ -299,8 +299,8 @@ final class Jobus {
 		// Remote Notice Integration
 		require_once JOBUS_PATH . '/includes/remote-notices/class-remote-notice-client.php';
 
-		if ( class_exists( 'Remote_Notice_Client' ) ) {
-			Remote_Notice_Client::init( 'Jobus', [
+		if ( class_exists( 'Noticepilot_Remote_Notice_Client' ) ) {
+			Noticepilot_Remote_Notice_Client::init( 'Jobus', [
 				'api_url'        => 'https://manage.spider-themes.net/wp-json/noticepilot/v1/content/jobus',
 				'plugin_version' => JOBUS_VERSION,
 				'is_pro'         => jobus_is_premium(),
