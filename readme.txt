@@ -3,7 +3,7 @@ Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
 Stable tag: 1.10.0
 Requires at least: 6.0
-Tested up to: 6.9.4
+Tested up to: 7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -145,7 +145,7 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 
 == Changelog ==
 
-= 1.10.0 (1 May 2026) =
+= 1.10.0 (June 1, 2026) =
 New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
 Enhanced: Improved avatar display and styling for Candidates and Companies
 Enhanced: Added AJAX loader for job submission in Employer Dashboard

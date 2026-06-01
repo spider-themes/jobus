@@ -273,7 +273,7 @@ Contributions are welcome! Please follow these steps:
 
 ## 📄 Changelog
 
-### 1.10.0 (1 May 2026)
+### 1.10.0 (June 1, 2026)
 
 - **New:** Application Details page added to Employer Dashboard with comprehensive candidate information and application status
 - **Enhanced:** Improved avatar display and styling for Candidates and Companies
