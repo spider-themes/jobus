@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-1.9.0-orange.svg)](https://github.com/spider-themes/jobus)
+[![Version](https://img.shields.io/badge/Version-1.10.0-orange.svg)](https://github.com/spider-themes/jobus)
 
 **Jobus** is a modern, lightweight, and powerful WordPress plugin designed to transform your website into a fully functional **Job Board**, **Recruitment Portal**, or **Hiring Platform**.
 
@@ -272,6 +272,16 @@ Contributions are welcome! Please follow these steps:
 ---
 
 ## 📄 Changelog
+
+### 1.10.0 (1 May 2026)
+
+- **New:** Application Details page added to Employer Dashboard with comprehensive candidate information and application status
+- **Enhanced:** Improved avatar display and styling for Candidates and Companies
+- **Enhanced:** Added AJAX loader for job submission in Employer Dashboard
+- **Enhanced:** Improved Saved Candidates page with AJAX search, smart empty state, and better layout
+- **Enhanced:** Improved candidate management experience in Saved Candidates section
+- **Fixed:** Fixed job status handling (Draft, Pending, Publish) based on admin settings
+- **Fixed:** Ensured proper submission behavior according to monetization and job approval rules
 
 ### 1.9.0 (24 April 2026)
 
