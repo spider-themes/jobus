@@ -1,4 +1,3 @@
-== Changelog ==
 
 = 1.10.0 (June 1, 2026) =
 New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
@@ -115,9 +114,9 @@ Improved: Job button typography control renamed for clarity
 Improved: Link color updated using rgba values for better visibility
 Improved: Candidate and Company menus moved under the main Jobus menu
 Improved: Flex utility classes added for easier alignment and layout control
-Compatibility: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
-Compatibility: Administrator access enabled for employer dashboard
-Compatibility: Employer role granted edit_posts capability for frontend image uploads
+Improved: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
+Improved: Administrator access enabled for employer dashboard
+Improved: Employer role granted edit_posts capability for frontend image uploads
 Optimized: Unused CSS and old titlebar code removed for lighter performance
 Optimized: Color and typography refined across dashboard and listings for consistency
 
@@ -136,11 +135,11 @@ Improved: Elementor widget lock and related UI refined for better editing experi
 Improved: Appearance and General Settings organization improved for easier configuration
 Improved: Subscribe field color adjusted for better visibility in dark mode
 Improved: Setup and color schema refined for a consistent user experience
-Compatibility: Astra theme compatibility improved for single and archive layouts
-Compatibility: GeneratePress theme compatibility added and tested
-Compatibility: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
-Compatibility: Docy theme compatibility refined for smoother integration
+Improved: Astra theme compatibility improved for single and archive layouts
+Improved: GeneratePress theme compatibility added and tested
+Improved: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
+Improved: Docy theme compatibility refined for smoother integration
 Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
 
 = 1.0.0 (22 October 2025) =
-Init: Initial release
+New: Initial release
