@@ -200,7 +200,7 @@ class Blocks {
 	 */
 	public function register_block_assets(): void {
 		// Style's
-		wp_enqueue_style( 'jobus-block-frontend', esc_url( JOBUS_CSS . '/block-frontend.css' ), [], JOBUS_VERSION );
+		wp_enqueue_style( 'jobus-block-frontend', esc_url( JOBUS_BUILD_CSS . '/block-frontend.css' ), [], JOBUS_VERSION );
 
 		// Script's
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );

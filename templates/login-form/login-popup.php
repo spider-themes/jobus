@@ -3,9 +3,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Provider_Manager;
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 // Template variables passed from block/template loader
-$user_input  = ! empty( $_POST['user_input'] ) ? sanitize_text_field( wp_unslash( $_POST['user_input'] ) ) : '';
-$password    = ! empty( $_POST['user_pwd'] ) ? sanitize_text_field( wp_unslash( $_POST['user_pwd'] ) ) : '';
+$user_input  = ! empty( $_POST['log'] ) ? sanitize_text_field( wp_unslash( $_POST['log'] ) ) : '';
+$password    = ! empty( $_POST['pwd'] ) ? sanitize_text_field( wp_unslash( $_POST['pwd'] ) ) : '';
+
+$social_status   = sanitize_key( wp_unslash( $_GET['jobus_social_status'] ?? '' ) );
+$social_error    = sanitize_text_field( urldecode( wp_unslash( $_GET['jobus_error'] ?? '' ) ) );
+$social_manager  = class_exists( Provider_Manager::class ) ? Provider_Manager::instance() : null;
+$social_buttons  = $social_manager ? $social_manager->get_enabled() : [];
 
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
@@ -63,7 +71,7 @@ if ( is_user_logged_in() ) {
                                 <div class="jbs-col-12">
                                     <div class="input-group-meta jbs-position-relative jbs-mb-25">
                                         <label><?php esc_html_e( 'Username/Email*', 'jobus' ); ?></label>
-                                        <input type="text" name="user_input" id="user_input" value="<?php echo esc_attr( $user_input ); ?>" placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>" autocomplete="username" required>
+                                        <input type="text" name="log" id="user_input" value="<?php echo esc_attr( $user_input ); ?>" placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>" autocomplete="username" required>
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
@@ -80,7 +88,7 @@ if ( is_user_logged_in() ) {
                                 <div class="jbs-col-12">
                                     <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                         <div>
-                                            <input type="checkbox" id="remember">
+                                            <input type="checkbox" name="rememberme" id="remember" value="forever">
                                             <label for="remember"><?php esc_html_e( 'Keep me logged in', 'jobus' ); ?></label>
                                         </div>
                                         <a href="<?php echo esc_url( home_url( '/' ) ) . '/wp-login.php?action=lostpassword'; ?>">
@@ -93,6 +101,29 @@ if ( is_user_logged_in() ) {
                                 </div>
                             </div>
                         </form>
+
+                        <?php if ( ! empty( $social_buttons ) ) : ?>
+                            <div class="jbs-social-auth" data-jbs-social-auth data-context="<?php echo esc_attr( Social_Login_Config::CONTEXT_LOGIN ); ?>">
+                                <?php if ( Social_Login_Config::STATUS_ERROR === $social_status && ! empty( $social_error ) ) : ?>
+                                    <div class="jbs-social-auth__notice jbs-alert jbs-alert-danger jbs-mb-20" role="alert">
+                                        <?php echo esc_html( $social_error ); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <p class="jbs-social-auth__divider"><span><?php esc_html_e( 'OR', 'jobus' ); ?></span></p>
+
+                                <div class="jbs-social-auth__buttons">
+                                    <?php foreach ( $social_buttons as $provider ) : ?>
+                                        <?php
+                                        echo $provider->render_button(
+                                            Social_Login_Config::CONTEXT_LOGIN,
+                                            home_url( add_query_arg( [] ) )
+                                        ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                        ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -100,4 +131,3 @@ if ( is_user_logged_in() ) {
     </div>
     <?php
 }
-

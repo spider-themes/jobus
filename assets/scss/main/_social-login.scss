@@ -1,0 +1,137 @@
+.jbs-social-auth {
+  --jbs-social-border: rgba(17, 24, 39, 0.12);
+  --jbs-social-muted: #6b7280;
+  --jbs-social-surface: #ffffff;
+  --jbs-social-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+
+  margin-top: 20px;
+
+  &__notice {
+    border-radius: 12px;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  &__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 140px;
+    min-height: 56px;
+    padding: 14px 18px;
+    border: 1px solid var(--jbs-social-border);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.98)),
+      linear-gradient(120deg, rgba(49, 121, 90, 0.04), rgba(49, 121, 90, 0.01));
+    color: #1f2937;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+    overflow: hidden;
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: var(--jbs-social-shadow);
+      border-color: rgba(49, 121, 90, 0.24);
+      outline: none;
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.12), var(--jbs-social-shadow);
+    }
+
+    &.is-loading {
+      pointer-events: none;
+      opacity: 0.92;
+    }
+  }
+
+  &__button-icon,
+  &__button-spinner {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__button-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__button-label {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  &__button-spinner {
+    width: 18px;
+    height: 18px;
+    opacity: 0;
+    transform: scale(.85);
+    transition: opacity .18s ease, transform .18s ease;
+
+    &::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      animation: jbsSocialSpin .7s linear infinite;
+    }
+  }
+
+  &__button.is-loading &__button-spinner {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &__button.is-loading &__button-icon {
+    opacity: 0.35;
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    margin: 0 0 14px;
+    color: var(--jbs-social-muted);
+    font-size: 13px;
+    letter-spacing: .01em;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      border-top: 1px solid rgba(17, 24, 39, 0.1);
+    }
+
+    span {
+      padding: 0 14px;
+      white-space: nowrap;
+    }
+  }
+}
+
+
+@keyframes jbsSocialSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

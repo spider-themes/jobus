@@ -59,6 +59,7 @@ function jobus_sanitize_svg( $file ) {
 }
 add_filter( 'wp_handle_upload_prefilter', 'jobus_sanitize_svg' );
 
+
 /**
  * Redirect user after login based on their role
  */
@@ -67,13 +68,23 @@ function jobus_login_redirect_by_role( $redirect_to, $request, $user ) {
 		return $redirect_to;
 	}
 
-	$user_role = reset( $user->roles );
+	$user_roles = (array) $user->roles;
+
+	// Never force redirect administrators (allow them to access wp-admin naturally)
+	if ( in_array( 'administrator', $user_roles, true ) || user_can( $user, 'manage_options' ) ) {
+		return $redirect_to;
+	}
+
+	$user_role = reset( $user_roles );
 
 	// Check for custom redirect settings first
 	if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
-		$page_id = jobus_opt( 'dashboard_redirect_page' );
-		if ( $page_id ) {
-			return get_permalink( $page_id );
+		$page_id = absint( jobus_opt( 'dashboard_redirect_page' ) );
+		if ( $page_id > 0 ) {
+			$url = get_permalink( $page_id );
+			if ( ! empty( $url ) ) {
+				return esc_url_raw( $url );
+			}
 		}
 	}
 
@@ -122,6 +133,10 @@ add_filter( 'show_admin_bar', 'jobus_hide_admin_bar_for_roles' );
  */
 function jobus_restrict_admin_access(): void {
 	if ( ! is_user_logged_in() || wp_doing_ajax() ) {
+		return;
+	}
+	
+	if ( current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	

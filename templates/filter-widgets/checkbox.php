@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<ul class="jbs-style-none filter-input jbs-ml-0 jbs-pl-0">
+<ul class="jbs-style-none jbs-filter-input jbs-ml-0 jbs-pl-0">
 	<?php
 	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
 		foreach ( $specifications_data as $value ) {
@@ -26,8 +26,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$meta_key   = $meta['meta_key'] ?? '';
 			$meta_value = $value['meta_values'] ?? '';
 
+			// Skip entries with an empty label so we don't render an "orphan" row with only a count.
+			if ( '' === trim( (string) $meta_value ) ) {
+				continue;
+			}
+
 			$modifiedValues = preg_replace( '/[,\s]+/', '@space@', $meta_value );
 			$opt_val        = strtolower( $modifiedValues );
+
+			// Format correctly for browser URLs seamlessly decoded from internal logic
+			$beautiful_val  = str_replace( '@space@', ' ', $opt_val );
 
 			// Get the count for the current meta value
 			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val );
@@ -37,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$check_status = $check_status !== false ? ' checked' : '';
 				?>
                 <li>
-                    <input type="checkbox" name="<?php echo esc_attr( $widget_name ); ?>[]" value="<?php echo esc_attr( $opt_val ); ?>" <?php echo esc_attr( $check_status ) ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $widget_name ); ?>[]" value="<?php echo esc_attr( $beautiful_val ); ?>" <?php echo esc_attr( $check_status ) ?>>
                     <label>
 						<?php echo esc_html( $meta_value ); ?>
                         <span><?php echo esc_html( $meta_value_count ); ?></span>

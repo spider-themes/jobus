@@ -38,10 +38,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                             'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s jobus-saved-post'
                         ] );
                     }
-                    if ( has_post_thumbnail() ) { ?>
+                    $candidate_thumbnail = get_the_post_thumbnail( get_the_ID(), 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] );
+                    if ( ! empty( $candidate_thumbnail ) ) { ?>
                         <div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-m-auto">
                             <a href="<?php the_permalink() ?>" class="jbs-rounded-circle">
-								<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] ) ?>
+								<?php echo $candidate_thumbnail; ?>
                             </a>
                         </div>
 					    <?php

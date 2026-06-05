@@ -20,10 +20,130 @@
     'use strict';
 
     const JobusDashboardAjaxActions = {
+        _searchTimer: null,
+
         init: function () {
-            this.removeSavedPost(); // unified remove for job/candidate
+            this.removeSavedPost();
             this.removeApplication();
             this.updateApplicationStatus();
+            this.statusSelector();
+            this.searchSavedCandidates();
+        },
+
+        /**
+         * Status selector dropdown on the Application Details page.
+         *
+         * Each option is a `.jobus-update-status` button so the existing AJAX
+         * handler picks the click up — we only manage open/close state here,
+         * plus sync the trigger label/swatch after a successful save so the
+         * picker reflects the new "current" status without a page reload.
+         */
+        statusSelector: function () {
+            const $doc = $(document);
+            const triggerSelector = '.jbs-app-status-select-trigger';
+            const menuSelector    = '.jbs-app-status-select-menu';
+            const rootSelector    = '.jbs-app-status-select';
+
+            const closeAllSelectors = function () {
+                $(triggerSelector + '[aria-expanded="true"]').attr('aria-expanded', 'false');
+                $(menuSelector + '.is-open').removeClass('is-open');
+            };
+
+            $doc.on('click', triggerSelector, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const $trigger = $(this);
+                const wasOpen = $trigger.attr('aria-expanded') === 'true';
+                closeAllSelectors();
+                if (!wasOpen) {
+                    $trigger.attr('aria-expanded', 'true');
+                    $trigger.siblings(menuSelector).addClass('is-open');
+                }
+            });
+
+            $doc.on('click', function (e) {
+                if (!$(e.target).closest(rootSelector).length) closeAllSelectors();
+            });
+
+            $doc.on('keydown', function (e) {
+                if (e.key === 'Escape') closeAllSelectors();
+            });
+        },
+
+        /**
+         * AJAX search within saved candidates — debounced, filters without page reload.
+         * Efficient toggle: input is always present; search icon clears on X click.
+         */
+        searchSavedCandidates: function () {
+            const self = this;
+            const $form = $('#jbs-saved-candidate-search-form');
+            if (!$form.length) return;
+
+            const $input = $('#jbs-saved-candidate-search-input');
+            const $list = $('#jbs-saved-candidates-list');
+            const $pagination = $('#jbs-saved-candidates-pagination');
+            const $loading = $form.find('.jbs-search-loading');
+            const $searchIcon = $form.find('.jbs-search-toggle-btn i');
+            const nonce = $form.data('nonce');
+
+            // Cache original content to restore when search is cleared
+            const originalListHtml = $list.html();
+            const paginationWasVisible = $pagination.length > 0;
+
+            $form.on('submit', function (e) { e.preventDefault(); });
+
+            $input.on('input', function () {
+                const term = $(this).val().trim();
+
+                // Toggle icon: X when text present, magnifier when empty
+                if (term.length > 0) {
+                    $searchIcon.removeClass('bi-search').addClass('bi-x-lg');
+                } else {
+                    $searchIcon.removeClass('bi-x-lg').addClass('bi-search');
+                }
+
+                clearTimeout(self._searchTimer);
+                self._searchTimer = setTimeout(function () {
+                    if (term.length === 0) {
+                        // Restore original state instantly from cache
+                        $list.html(originalListHtml);
+                        if (paginationWasVisible) $pagination.show();
+                        return;
+                    }
+                    self._doSearchSavedCandidates(term, nonce, $list, $pagination, $loading);
+                }, 300);
+            });
+
+            // Clicking X icon clears the search
+            $form.find('.jbs-search-toggle-btn').on('click', function () {
+                if ($searchIcon.hasClass('bi-x-lg')) {
+                    $input.val('').trigger('input').trigger('focus');
+                }
+            });
+        },
+
+        _doSearchSavedCandidates: function (term, nonce, $list, $pagination, $loading) {
+            $loading.removeClass('jbs-d-none');
+
+            $.ajax({
+                url: jobus_dashboard_obj.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'jobus_search_saved_candidates',
+                    nonce: nonce,
+                    search: term
+                },
+                success: function (res) {
+                    $loading.addClass('jbs-d-none');
+                    if (!res.success) return;
+
+                    $list.html(res.data.html || '<div class="jbs-text-center jbs-p-4 jbs-text-muted"><p>No candidates found.</p></div>');
+                    $pagination.hide();
+                },
+                error: function () {
+                    $loading.addClass('jbs-d-none');
+                }
+            });
         },
 
         /**
@@ -79,12 +199,23 @@
                     data: ajaxData,
                     success: function (res) {
                         if (res.success) {
-                            // Fade out and remove the item from the list
                             item.fadeOut(300, function() {
                                 $(this).remove();
-                                // Check if there are any items left
-                                if ($('.job-list-one, .candidate-profile-card').length === 0) {
-                                    $('.wrapper').html('<div class="no-jobs-found">No saved items found.</div>');
+                                const $list = $('#jbs-saved-candidates-list');
+                                const remaining = $list.find('.candidate-profile-card').length
+                                    + $('.job-list-one').length;
+                                if (remaining === 0) {
+                                    const archiveUrl = (typeof jobus_dashboard_obj !== 'undefined' && jobus_dashboard_obj.candidate_archive_url)
+                                        ? jobus_dashboard_obj.candidate_archive_url : '#';
+                                    $('.wrapper').html(
+                                        '<div id="jbs-saved-candidates-list" class="jbs-empty-state-wrap">' +
+                                        '<div class="jbs-empty-state">' +
+                                        '<span class="jbs-empty-icon"><i class="bi bi-people"></i></span>' +
+                                        '<h4>No saved candidates yet</h4>' +
+                                        '<p>Start building your talent pool by browsing candidates and saving the ones that match your needs.</p>' +
+                                        '<a href="' + archiveUrl + '" class="jbs-btn jbs-btn-primary jbs-browse-candidates-btn" target="_blank"><i class="bi bi-people"></i> Browse Candidates</a>' +
+                                        '</div></div>'
+                                    );
                                 }
                             });
                         } else {
@@ -182,18 +313,34 @@
                     success: function(response) {
                         btn.removeClass('disabled');
                         if (response.success) {
-                            // Update the status badge
-                            let statusClass = 'jbs-bg-warning';
-                            if (newStatus === 'approved') {
-                                statusClass = 'jbs-bg-success';
-                            } else if (newStatus === 'rejected') {
-                                statusClass = 'jbs-bg-danger';
+                            // Server is the source of truth for badge class + label.
+                            // Fall back to a sane default so older payloads still work.
+                            const data = response.data || {};
+                            const allClasses = data.all_badge_class || 'jbs-bg-warning jbs-bg-info jbs-bg-success jbs-bg-danger';
+                            const newClass = data.badge_class || 'jbs-bg-warning';
+                            const newLabel = data.status_label || (newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
+
+                            // Update every status badge tied to this application (table row + detail page).
+                            $('[data-application-id="' + applicationId + '"]')
+                                .closest('tr, .jbs-application-details')
+                                .find('.status-badge')
+                                .removeClass(allClasses)
+                                .addClass(newClass)
+                                .text(newLabel);
+
+                            // Sync the Application Details status selector: update trigger
+                            // swatch + label, close the menu, and re-hide the now-current option.
+                            const $selector = $('.jbs-app-status-select[data-application-id="' + applicationId + '"]');
+                            if ($selector.length) {
+                                const $trigger = $selector.find('.jbs-app-status-select-trigger');
+                                $trigger.find('.jbs-app-status-select-label').text(newLabel);
+                                $trigger.find('.jbs-app-status-swatch')
+                                    .attr('class', 'jbs-app-status-swatch jbs-app-status-swatch--' + newStatus);
+                                $trigger.attr('aria-expanded', 'false');
+                                $selector.find('.jbs-app-status-select-menu').removeClass('is-open');
+                                $selector.find('.jbs-app-status-select-option').show()
+                                    .filter('[data-status="' + newStatus + '"]').hide();
                             }
-                            
-                            statusBadge
-                                .removeClass('jbs-bg-warning jbs-bg-success jbs-bg-danger')
-                                .addClass(statusClass)
-                                .text(newStatus.charAt(0).toUpperCase() + newStatus.slice(1));
 
                             // Show success notification if SweetAlert is available
                             if (typeof Swal !== 'undefined') {

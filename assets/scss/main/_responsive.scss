@@ -1,10 +1,6 @@
-@media (max-width: 1199px) {
-    .filter-area-tab .main-title {
-        font-size: 20px;
-        margin-top: 20px;
-        text-align: center;
-    }
-}
+// NOTE: Sidebar filter responsive rules (e.g. `.filter-area-tab
+// .main-title`) now live in `main/_sidebar.scss`. Keep new sidebar
+// filter media queries there alongside the base widget styles.
 
 @media (max-width: 768px) {
 

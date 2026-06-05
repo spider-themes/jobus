@@ -101,7 +101,7 @@ function Edit({attributes, setAttributes}) {
             <div {...blockProps}>
                 <div className="user-data-form">
 
-                    <div className="jbs-text-center">
+                        <div className="jbs-text-center">
                         <h2>{__('Create Account', 'jobus')}</h2>
                     </div>
 
