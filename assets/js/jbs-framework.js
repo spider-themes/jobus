@@ -13,9 +13,7 @@
 
         const ANIM_DURATION = 300;
 
-        const $form = $('#jobus-candidate-registration-form,#jobus-employer-registration-form,#jobus_login_form');
-
-        $form.find('.passVicon').on('click', function() {
+        $(document).on('click', '.passVicon', function() {
             $(this).toggleClass("eye-slash");
             const $input = $(this).closest('.input-group-meta').find('input');
             const type = $input.attr('type') === 'password' ? 'text' : 'password';

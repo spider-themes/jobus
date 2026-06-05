@@ -38,8 +38,19 @@ if ( class_exists( 'CSF' ) ) {
 				),
 			),
 
+			array(
+				'id'      => 'company_verified',
+				'type'    => 'switcher',
+				'title'   => esc_html__( 'Verified Company', 'jobus' ),
+				'text_on' => esc_html__( 'Yes', 'jobus' ),
+				'text_off' => esc_html__( 'No', 'jobus' ),
+				'desc'    => esc_html__( 'Toggle to display a verified trust badge for this company.', 'jobus' ),
+				'default' => false,
+			),
+
 		)
 	) );
+
 
 
 	// Retrieve the repeater field configurations from settings options

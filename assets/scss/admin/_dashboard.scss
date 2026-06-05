@@ -5,6 +5,8 @@
  * @since 1.5.0
  */
 
+@use "sass:color";
+
 // Variables
 $jobus-primary: #31795A;
 $jobus-primary-light: #e8f5f0;
@@ -32,8 +34,8 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 
 // Dashboard Wrapper
 .jobus-dashboard-wrap {
-	margin: 20px 20px 20px 0;
-	max-width: 1400px;
+	margin: 20px auto;
+	max-width: 1600px;
 }
 
 // Dashboard Header
@@ -158,7 +160,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		color: #fff;
 		
 		&:hover {
-			background: darken($jobus-primary, 8%);
+			background: color.adjust($jobus-primary, $lightness: -8%);
 			color: #fff;
 		}
 	}
@@ -464,7 +466,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	font-weight: 500;
 	
 	&:hover {
-		color: darken($jobus-primary, 10%);
+		color: color.adjust($jobus-primary, $lightness: -10%);
 	}
 	
 	.dashicons {
@@ -548,17 +550,17 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	
 	&.jobus-badge-pending {
 		background: rgba($jobus-warning, 0.1);
-		color: darken($jobus-warning, 10%);
+		color: color.adjust($jobus-warning, $lightness: -10%);
 	}
 	
 	&.jobus-badge-approved {
 		background: rgba($jobus-success, 0.1);
-		color: darken($jobus-success, 10%);
+		color: color.adjust($jobus-success, $lightness: -10%);
 	}
 	
 	&.jobus-badge-rejected {
 		background: rgba($jobus-danger, 0.1);
-		color: darken($jobus-danger, 10%);
+		color: color.adjust($jobus-danger, $lightness: -10%);
 	}
 }
 
@@ -613,7 +615,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	
 	&.jobus-list-badge-warning {
 		background: rgba($jobus-warning, 0.1);
-		color: darken($jobus-warning, 10%);
+		color: color.adjust($jobus-warning, $lightness: -10%);
 	}
 }
 
@@ -700,7 +702,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		}
 		
 		&:hover {
-			color: darken($jobus-primary, 10%);
+			color: color.adjust($jobus-primary, $lightness: -10%);
 		}
 	}
 }

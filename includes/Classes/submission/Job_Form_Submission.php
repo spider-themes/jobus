@@ -28,6 +28,10 @@ class Job_Form_Submission {
 			return;
 		}
 
+		if ( wp_doing_ajax() ) {
+			return;
+		}
+
 		// Nonce check
 		$nonce = isset( $_POST['employer_submit_job_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_submit_job_nonce'] ) ) : '';
 		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'employer_submit_job' ) ) {
@@ -41,20 +45,29 @@ class Job_Form_Submission {
 			wp_die( esc_html__( 'Access denied. You do not have permission to post a job.', 'jobus' ) );
 		}
 
-		$this->handle_form_submission();
+		$result = $this->process_submission();
+		if ( is_wp_error( $result ) ) {
+			wp_die( esc_html( $result->get_error_message() ) );
+		}
+
+		$this->redirect_after_submission( (int) $result['job_id'], (bool) $result['is_update'] );
 	}
 
 	/**
-	 * Handle the actual form submission (create/update job post)
+	 * Process the actual form submission (create/update job post).
+	 *
+	 * @return array|\WP_Error
 	 */
-	private function handle_form_submission(): void {
+	public function process_submission() {
 		// Define expected fields to sanitize
 		$expected_fields = [
 			'job_id',
 			'job_title',
 			'job_description',
 			'company_website',
-			'is_company_website'
+			'is_company_website',
+			'apply_form_url',
+			'is_apply_btn'
 		];
 
 		$post_data = [];
@@ -93,6 +106,9 @@ class Job_Form_Submission {
 
 		// Get user and company
 		$user       = wp_get_current_user();
+		if ( ! $user || ! $user->ID ) {
+			return new \WP_Error( 'jobus_job_submit_auth', esc_html__( 'You must be logged in to post a job.', 'jobus' ) );
+		}
 		// If editing an existing job, verify ownership
 		$company_id = $this->get_company_id( $user->ID );
 		// if ( ! $company_id ) {
@@ -106,16 +122,27 @@ class Job_Form_Submission {
 		if ( $job_id ) {
 			$job_post = get_post( $job_id );
 			if ( ! $job_post || $job_post->post_type !== 'jobus_job' ) {
-				wp_die( esc_html__( 'Invalid job post.', 'jobus' ) );
+				return new \WP_Error( 'jobus_job_invalid', esc_html__( 'Invalid job post.', 'jobus' ) );
 			}
 			if ( (int) $job_post->post_author !== (int) $user->ID ) {
-				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
+				return new \WP_Error( 'jobus_job_edit_forbidden', esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
 			}
-		}
+		} else {
+            // New job submission check
+            $packages_enabled = function_exists( 'jobus_opt' ) && jobus_opt( 'enable_job_packages', false );
+            $monetization_active = $packages_enabled && class_exists( 'WooCommerce' ) && jobus_is_premium();
+            $can_post = ! $monetization_active || apply_filters( 'jobus_user_can_post_job', true, $user->ID, $post_data );
+            if ( ! $can_post ) {
+                return new \WP_Error( 'jobus_job_package_required', esc_html__( 'You cannot post a job. Please check your packages or purchase a new one.', 'jobus' ) );
+            }
+        }
 
 		// Save job content (title/content)
 		if ( isset( $post_data['job_title'] ) || isset( $post_data['job_description'] ) ) {
 			$job_id = $this->save_job_content( $job_id, $post_data, $company_id );
+			if ( is_wp_error( $job_id ) ) {
+				return $job_id;
+			}
 		}
 
 		// Save job specifications
@@ -129,6 +156,11 @@ class Job_Form_Submission {
 			$this->save_company_website( $job_id, $post_data );
 		}
 
+		// Save external application URL
+		if ( isset( $post_data['apply_form_url'] ) || isset( $post_data['is_apply_btn'] ) ) {
+			$this->save_application_method( $job_id, $post_data );
+		}
+
 		// Save company logo (featured image)
 		if ( isset( $_POST['job_company_logo_id'] ) ) {
 			$logo_id = absint( $_POST['job_company_logo_id'] );
@@ -140,6 +172,47 @@ class Job_Form_Submission {
 				delete_post_thumbnail( $job_id );
 			}
 		}
+
+        // Fire hooks after everything is saved
+        if ( isset( $post_data['job_id'] ) && ! empty( $post_data['job_id'] ) ) {
+            do_action( 'jobus_job_updated', $job_id, $post_data );
+        } else {
+            do_action( 'jobus_job_submitted', $job_id, $post_data );
+        }
+
+		return [
+			'job_id'    => $job_id,
+			'is_update' => ! empty( $post_data['job_id'] ),
+		];
+	}
+
+	/**
+	 * Redirect to the employer dashboard after a successful submission.
+	 *
+	 * Prevents duplicate posts on refresh and surfaces a success notice.
+	 *
+	 * @param int  $job_id     Saved job ID.
+	 * @param bool $is_update  Whether the submission updated an existing job.
+	 *
+	 * @return void
+	 */
+	private function redirect_after_submission( int $job_id, bool $is_update ): void {
+		$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		$redirect_url  = $dashboard_url
+			? jobus_get_dashboard_endpoint_url( 'jobs', $dashboard_url )
+			: get_permalink( $job_id );
+
+		$redirect_url = add_query_arg(
+			[
+				'message'  => $is_update ? 'job_updated' : 'job_created',
+				'job_id'   => $job_id,
+				'_wpnonce' => wp_create_nonce( 'jobus_dashboard_action' ),
+			],
+			$redirect_url
+		);
+
+		wp_safe_redirect( $redirect_url );
+		exit;
 	}
 
 	/**
@@ -220,22 +293,22 @@ class Job_Form_Submission {
 	 * Note: $company_id is required here because when creating a new job, we must link it to a company.
 	 *       For updates, the company link is not changed, but the parameter is still required for consistency.
 	 */
-	public function save_job_content( int $job_id, array $post_data, int $company_id ): int {
+	public function save_job_content( int $job_id, array $post_data, int $company_id ) {
 		$user            = wp_get_current_user();
 		$job_title       = isset( $post_data['job_title'] ) ? sanitize_text_field( $post_data['job_title'] ) : '';
 		$job_description = isset( $post_data['job_description'] ) ? wp_kses_post( $post_data['job_description'] ) : '';
 
 		if ( empty( $job_title ) ) {
-			wp_die( esc_html__( 'Job title is required.', 'jobus' ) );
+			return new \WP_Error( 'jobus_job_title_required', esc_html__( 'Job title is required.', 'jobus' ) );
 		}
 
 		if ( $job_id && get_post_type( $job_id ) === 'jobus_job' ) {
 			$job_post = get_post( $job_id );
 			if ( ! $job_post ) {
-				wp_die( esc_html__( 'Invalid job post.', 'jobus' ) );
+				return new \WP_Error( 'jobus_job_invalid', esc_html__( 'Invalid job post.', 'jobus' ) );
 			}
 			if ( (int) $job_post->post_author !== (int) $user->ID ) {
-				wp_die( esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
+				return new \WP_Error( 'jobus_job_edit_forbidden', esc_html__( 'You are not allowed to edit this job.', 'jobus' ) );
 			}
 			wp_update_post( array(
 				'ID'           => $job_id,
@@ -243,18 +316,39 @@ class Job_Form_Submission {
 				'post_content' => $job_description,
 			) );
 		} else {
+			$submission_status  = 'publish';
+			$valid_statuses     = [ 'publish', 'pending', 'draft' ];
+			if ( function_exists( 'jobus_opt' ) ) {
+				$configured = jobus_opt( 'job_submission_status' );
+				if ( ! empty( $configured ) && in_array( $configured, $valid_statuses, true ) ) {
+					$submission_status = $configured;
+				}
+			}
+
 			$job_id = wp_insert_post( array(
 				'post_type'    => 'jobus_job',
 				'post_title'   => $job_title,
 				'post_content' => $job_description,
-				'post_status'  => 'publish',
+				'post_status'  => $submission_status,
 				'post_author'  => $user->ID,
 			) );
 			if ( is_wp_error( $job_id ) ) {
-				wp_die( esc_html__( 'Failed to create job post.', 'jobus' ) );
+				return new \WP_Error( 'jobus_job_create_failed', esc_html__( 'Failed to create job post.', 'jobus' ) );
 			}
 			// Link job to company
-			update_post_meta( $job_id, '_jobus_company_id', $company_id );
+			if ( ! empty( $company_id ) ) {
+				update_post_meta( $job_id, '_jobus_company_id', $company_id );
+			}
+
+			// Check CSF options for Auto Expiry
+			$jobus_opt         = get_option( 'jobus_opt', [] );
+			$enable_job_expiry = ! isset( $jobus_opt['enable_job_expiry'] ) || $jobus_opt['enable_job_expiry'];
+
+			if ( $enable_job_expiry ) {
+				$expiry_days = ! empty( $jobus_opt['job_expiry_days'] ) ? (int) $jobus_opt['job_expiry_days'] : 30;
+				update_post_meta( $job_id, '_jobus_expiration_date', current_time( 'Y-m-d H:i:s', strtotime( '+' . $expiry_days . ' days', current_time( 'timestamp' ) ) ) );
+			}
+
 		}
 
 		return $job_id;
@@ -500,6 +594,33 @@ class Job_Form_Submission {
 		}
 		if ( isset( $post_data['is_company_website'] ) ) {
 			$meta['is_company_website'] = sanitize_text_field( $post_data['is_company_website'] );
+		}
+
+		return update_post_meta( $job_id, 'jobus_meta_options', $meta );
+	}
+
+	/**
+	 * Save application method (default form, custom URL, or external redirect)
+	 *
+	 * @param int   $job_id
+	 * @param array $post_data
+	 *
+	 * @return bool
+	 */
+	public function save_application_method( int $job_id, array $post_data ): bool {
+		$meta = get_post_meta( $job_id, 'jobus_meta_options', true );
+		if ( ! is_array( $meta ) ) {
+			$meta = array();
+		}
+		
+		// Save application method type (default, custom, external)
+		if ( isset( $post_data['is_apply_btn'] ) ) {
+			$meta['is_apply_btn'] = sanitize_text_field( $post_data['is_apply_btn'] );
+		}
+		
+		// Save application URL
+		if ( isset( $post_data['apply_form_url'] ) ) {
+			$meta['apply_form_url'] = esc_url_raw( $post_data['apply_form_url'] );
 		}
 
 		return update_post_meta( $job_id, 'jobus_meta_options', $meta );

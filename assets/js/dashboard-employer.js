@@ -15,7 +15,7 @@
  * @link      https://developer.wordpress.org/plugins/javascript/ajax/
  */
 
-;(function ($) {
+; (function ($) {
     'use strict';
 
     const JobusEmployerDashboard = {
@@ -24,6 +24,8 @@
             this.Testimonials();
             this.CompanyWebsiteToggle();
             this.JobLogoUpload();
+            this.ExternalApplicationUrlToggle();
+            this.SubmitJobForm();
         },
 
 
@@ -205,7 +207,7 @@
                     $el.find('.jbs-accordion-collapse')
                         .attr('id', testimonialId)
                         .attr('aria-labelledby', `company-testimonial-heading-${i}`);
-                    $el.find('input[name^="company_testimonials"]').each(function() {
+                    $el.find('input[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -217,7 +219,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('textarea[name^="company_testimonials"]').each(function() {
+                    $el.find('textarea[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -229,7 +231,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('select[name^="company_testimonials"]').each(function() {
+                    $el.find('select[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -241,7 +243,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('label[for^="company-testimonial-"]').each(function() {
+                    $el.find('label[for^="company-testimonial-"]').each(function () {
                         let htmlFor = $(this).attr('for');
                         if (htmlFor) {
                             htmlFor = htmlFor.replace(/company-testimonial-\d+(-[a-z-]+)/, `company-testimonial-${i}$1`);
@@ -307,16 +309,16 @@
                 // When an image is selected, run a callback
                 mediaUploader.on('select', function () {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    
+
                     // Set the hidden input value to the attachment ID
                     $('#job_company_logo_id').val(attachment.id);
-                    
+
                     // Display the preview image
                     $('.logo-preview').attr('src', attachment.url).show();
-                    
+
                     // Update button text
                     $('#upload_logo_button').html('<i class="bi bi-upload"></i> Change Logo');
-                    
+
                     // Show remove button
                     $('#remove_logo_button').show();
                 });
@@ -331,16 +333,156 @@
 
                 // Clear the hidden input
                 $('#job_company_logo_id').val('');
-                
+
                 // Hide the preview image
                 $('.logo-preview').attr('src', '').hide();
-                
+
                 // Update button text
                 $('#upload_logo_button').html('<i class="bi bi-upload"></i> Upload Logo');
-                
+
                 // Hide remove button
                 $(this).hide();
             });
+        },
+
+        /**
+         * Handles toggling the external application URL fields based on selection.
+         */
+        ExternalApplicationUrlToggle: function () {
+            const $select = $('#is_apply_btn');
+            const $fields = $('#application-url-fields');
+            const $input = $('#apply-form-url');
+
+            const updateState = function (value) {
+                if (value === 'external') {
+                    $input.prop('disabled', false);
+                    $fields.hide().removeClass('jbs-d-none').slideDown(200);
+                } else {
+                    $input.prop('disabled', true).val('');
+                    $fields.slideUp(200, function() {
+                        $(this).addClass('jbs-d-none').show();
+                    });
+                }
+            };
+
+            $select.on('change', function () {
+                updateState($(this).val());
+            });
+
+            // Initial state (in case of editing)
+            const initialValue = $select.val();
+            if (initialValue === 'external') {
+                $input.prop('disabled', false);
+                $fields.removeClass('jbs-d-none').show();
+            } else {
+                $input.prop('disabled', true);
+                $fields.addClass('jbs-d-none');
+            }
+        },
+
+        /**
+         * Handles AJAX job submission from the employer dashboard.
+         */
+        SubmitJobForm: function () {
+            const $form = $('#employer-submit-job-form');
+            if (!$form.length) {
+                return;
+            }
+
+            const self = this;
+
+            $form.on('submit', function (e) {
+                e.preventDefault();
+
+                if (typeof window.tinyMCE !== 'undefined') {
+                    window.tinyMCE.triggerSave();
+                }
+
+                const $submitButton = $form.find('button[type="submit"]').first();
+                const originalHtml = $submitButton.html();
+                const formData = new FormData($form[0]);
+
+                self.clearSubmitNotice($form);
+
+                $submitButton.prop('disabled', true).html(
+                    '<span class="jbs-spinner-border jbs-spinner-border-sm jbs-me-2" role="status" aria-hidden="true"></span>' +
+                    originalHtml
+                );
+
+                formData.append('action', 'jobus_submit_job');
+
+                $.ajax({
+                    url: jobus_dashboard_obj.ajax_url,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            const message = response.data && response.data.message ? response.data.message : 'Job posted successfully.';
+                            self.renderSubmitNotice($form, 'success', message);
+
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: message,
+                                    timer: 1800,
+                                    showConfirmButton: false
+                                });
+                            }
+
+                            if (response.data && response.data.redirect_url) {
+                                window.setTimeout(function () {
+                                    window.location.href = response.data.redirect_url;
+                                }, 1200);
+                            }
+                        } else {
+                            const message = response.data && response.data.message ? response.data.message : 'Submission failed. Please try again.';
+                            self.renderSubmitNotice($form, 'danger', message);
+
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: message
+                                });
+                            }
+                        }
+                    },
+                    error: function () {
+                        const message = 'Submission failed. Please try again.';
+                        self.renderSubmitNotice($form, 'danger', message);
+
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: message
+                            });
+                        }
+                    },
+                    complete: function () {
+                        $submitButton.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            });
+        },
+
+        renderSubmitNotice: function ($form, type, message) {
+            const $notice = $(
+                '<div class="jbs-alert jbs-alert-' + type + ' jbs-alert-dismissible jbs-fade jbs-show jbs-mb-20" role="alert">' +
+                    $('<div>').text(message).html() +
+                    '<button type="button" class="jbs-btn-close" data-jbs-dismiss="alert" aria-label="Close"></button>' +
+                '</div>'
+            );
+
+            $form.before($notice);
+            $('html, body').animate({ scrollTop: $notice.offset().top - 40 }, 250);
+        },
+
+        clearSubmitNotice: function ($form) {
+            $form.prev('.jbs-alert').remove();
         }
 
     };

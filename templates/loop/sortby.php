@@ -26,7 +26,7 @@ $grid_view_url = add_query_arg( 'view', 'grid' );
 		<?php
 		$order_by     = jobus_get_sanitized_query_param( 'orderby', 'date', 'jobus_sort_filter' );
 		$order        = jobus_get_sanitized_query_param( 'order', 'desc', 'jobus_sort_filter' );
-		$current_view = jobus_get_sanitized_query_param( 'view', 'grid', 'jobus_sort_filter' );
+		$current_view = isset( $current_view ) ? jobus_get_sanitized_query_param( 'view', $current_view, 'jobus_sort_filter' ) : jobus_get_sanitized_query_param( 'view', 'grid', 'jobus_sort_filter' );
 		$default      = empty( $order_by ) ? 'selected' : '';
 
 		$selected_new_to_old = $order_by == 'date' && $order == 'desc' ? 'selected' : '';

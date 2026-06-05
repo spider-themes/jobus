@@ -4,16 +4,16 @@ body.body_dark {
   .jbs-job-classic {
     background: var(--body_bg) !important;
 
-    .filter-area-tab {
+    .jbs-filter-area-tab {
       .light-bg {
         background: var(--bs-white) !important;
       }
 
-      .filter-title {
+      .jbs-filter-title {
         color: var(--black_900) !important;
       }
 
-      .main-body {
+      .jbs-main-body {
         ul {
           li {
             label {
@@ -37,7 +37,7 @@ body.body_dark {
       }
     }
 
-    .main-title {
+    .jbs-filter-heading {
       color: var(--black_900) !important;
     }
 
@@ -199,7 +199,7 @@ body.body_dark {
     }
 
     form {
-      .input-box {
+      .jbs-input-box {
         .label {
           color: var(--black_900) !important;
         }

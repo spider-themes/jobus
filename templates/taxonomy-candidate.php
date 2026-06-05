@@ -22,7 +22,7 @@ $taxonomy_config = array(
 	'layout_base_path'     => 'contents-candidate/candidate-archive',
 	'sidebar_popup_path'   => 'contents-candidate/sidebar-popup-filters',
 	'sidebar_topbar_path'  => 'contents-candidate/sidebar-topbar-filters',
-	'default_view'         => 'grid',
+	'default_view'         => jobus_opt( 'candidate_archive_attr_layout', 'grid' ),
 	'pagination_labels'    => array(
 		'prev' => '<i class="bi bi-chevron-left"></i>',
 		'next' => '<i class="bi bi-chevron-right"></i>',

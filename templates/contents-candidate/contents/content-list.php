@@ -20,14 +20,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$post_favourite = $meta['post_favorite'] ?? '';
 		$is_favourite   = ( $post_favourite == '1' ) ? ' favourite' : '';
         $save_candidate_status = jobus_get_save_status('', 'jobus_saved_candidates');
+        $candidate_thumbnail   = get_the_post_thumbnail( get_the_ID(), 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] );
+        $no_avatar_class       = empty( $candidate_thumbnail ) ? ' no-avatar' : '';
 		?>
-        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout jbs-mb-25">
+        <div class="candidate-profile-card<?php echo esc_attr( $is_favourite ) ?> list-layout jbs-mb-25<?php echo esc_attr( $no_avatar_class ) ?>">
             <div class="jbs-d-flex">
-                <div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
-                    <a href="<?php the_permalink() ?>" class="jbs-rounded-circle">
-						<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] ) ?>
-                    </a>
-                </div>
+                <?php if ( ! empty( $candidate_thumbnail ) ) : ?>
+					<div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
+						<a href="<?php the_permalink() ?>" class="jbs-rounded-circle">
+							<?php echo $candidate_thumbnail; ?>
+						</a>
+					</div>
+                <?php endif; ?>
                 <div class="right-side">
                     <div class="jbs-row jbs-gx-1 jbs-align-items-center">
                         <div class="jbs-col-xl-4">
@@ -93,7 +97,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
-                            <div class="jbs-col-xl-3 jbs-col-md-4 jbs-col-sm-6">
+                            <div class="jbs-col-xl-2 jbs-col-md-4 jbs-col-sm-6">
                                 <div class="candidate-info location-info">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                     <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>">
@@ -104,7 +108,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php
 						}
 						?>
-                        <div class="jbs-col-xl-2 jbs-col-md-4">
+                        <div class="jbs-col-xl-3 jbs-col-md-4">
                             <div class="jbs-d-flex jbs-justify-content-lg-end jbs-align-items-center">
                                 <?php
                                 if ( is_array($save_candidate_status) && isset($save_candidate_status['post_id']) ) {

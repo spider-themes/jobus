@@ -1,0 +1,97 @@
+// ============================================
+// Badges
+// ============================================
+
+@use "variables" as *;
+
+// Base badge -----------------------------------------------------------------
+.jbs-badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: $text-white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+// Dot-prefixed status pills --------------------------------------------------
+// Used by the application status badge in admin, dashboard tables and
+// the application details header.
+%jbs-status-dot {
+  color: rgba(36, 64, 52, 0.9);
+  font-weight: 500;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+.jbs-bg-warning {
+  @extend %jbs-status-dot;
+  &::before { background-color: #ffc107; }
+}
+
+.jbs-bg-shortlisted,
+.jbs-bg-info {
+  @extend %jbs-status-dot;
+  &::before { background-color: #0dcaf0; }
+}
+
+.jbs-bg-approved,
+.jbs-bg-success {
+  @extend %jbs-status-dot;
+  &::before { background-color: #198754; }
+}
+
+.jbs-bg-rejected,
+.jbs-bg-danger {
+  @extend %jbs-status-dot;
+  &::before { background-color: #dc3545; }
+}
+
+// Solid badge variants -------------------------------------------------------
+.jbs-badge-primary {
+  background-color: #0d6efd;
+}
+
+.jbs-badge-secondary {
+  background-color: #6c757d;
+}
+
+.jbs-badge-success {
+  background-color: #198754;
+}
+
+.jbs-badge-danger {
+  background-color: #dc3545;
+}
+
+.jbs-badge-warning {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.jbs-badge-info {
+  background-color: #0dcaf0;
+  color: #000;
+}
+
+.jbs-badge-light {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+.jbs-badge-dark {
+  background-color: $text-dark;
+}

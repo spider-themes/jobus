@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -o \"jobus-frontend\\\\.wp-theme-twentytwentyfive[^,{]*\" build/css/main.css)"
+    ]
+  }
+}

@@ -27,6 +27,6 @@
     ]
   },
   "require": {
-    "php": ">=7.4"
+    "freemius/wordpress-sdk": "^2.13"
   }
 }

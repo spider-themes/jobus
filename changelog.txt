@@ -1,0 +1,145 @@
+
+= 1.10.0 (June 1, 2026) =
+New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
+Enhanced: Improved avatar display and styling for Candidates and Companies
+Enhanced: Added AJAX loader for job submission in Employer Dashboard
+Enhanced: Improved Saved Candidates page with AJAX search, smart empty state, and better layout
+Enhanced: Improved candidate management experience in Saved Candidates section
+Fixed: Fixed job status handling (Draft, Pending, Publish) based on admin settings
+Fixed: Ensured proper submission behavior according to monetization and job approval rules
+
+
+= 1.9.0 (24 April 2026) =
+New: Easy login and signup using Google, Facebook, and LinkedIn  
+New: Find jobs based on your nearby location  
+New: One-click demo setup with sample jobs  
+New: Apply for jobs without creating an account (Sign In / Register / Guest options)  
+New: Verified badge added for trusted companies  
+New: Option to redirect users to external websites for job applications  
+New: Improved visibility on Google Jobs search  
+New: Simple and consistent messaging system  
+Enhanced: Improved sidebar design for Candidate, Job, and Company pages  
+Enhanced: Faster and smoother job filtering experience  
+Enhanced: More consistent design across all pages  
+Enhanced: Easier-to-read applicant details in admin panel  
+Enhanced: Faster and more accurate search results  
+Fixed: Fixed issues with registration and job application process  
+Fixed: Fixed job application popup design and functionality  
+Fixed: Fixed sidebar and loading design saving issue  
+Fixed: Fixed popup search results for jobs, candidates, and companies  
+
+= 1.8.0 (06 April 2026) =
+Improved: General enhancements and minor fixes applied across the block for better stability
+Updated: Freemius SDK updated to 2.13.1
+
+= 1.7.0 (13 March 2026) =
+New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
+New: Company Profiles – Enabled support for nested company entries and restored standard profile creation for better management
+Improved: User Experience – Streamlined profile settings to make it easier for companies and candidates to manage their presence
+
+= 1.6.0 (06 February 2026) =
+New: Introduced Jobus > Dashboard page inside the WordPress admin area
+Improved: Employer dashboard pagination optimized using WP_Query for faster loading
+Improved: Company job counting optimized to avoid loading full post objects
+Improved: Job range field value handling optimized by replacing loop-based logic with a single direct database query
+Improved: Dashboard page search optimized using transient caching to avoid repeated expensive queries
+Improved: Dashboard redirect logic consolidated and template handling streamlined
+Improved: User registration now redirects directly to the dashboard with company settings lock applied
+Improved: Analytics promo presentation added to highlight advanced insights
+Fixed: Dashboard redirect issues that caused incorrect navigation
+Updated: Compatibility added for the Zoomy theme
+Updated: Freemius SDK updated to 2.13.0
+
+= 1.5.0 (01 January 2026) =
+New: Setup Wizard added for faster and easier initial configuration
+New: Automatic page creation feature added to generate required Jobus pages
+New: Search form and social share options added across Jobus layouts
+Fixed: Dark mode compatibility updated for the AMA theme
+Fixed: Jobus tab widget and social share icon issues resolved
+Fixed: Auto-generate key issue for Specifications corrected
+Tweaked: Frontend options file naming improved and theme lock system updated for better stability
+
+= 1.4.0 (13 December 2025) =
+New: Added candidate pagination style and job status styling
+New: Allow job applications without login (configurable from settings)
+New: Default company logo option added for missing logos
+Fixed: Job list delete button issue resolved
+Fixed: Candidate and employer user role issues fixed
+Fixed: Jobus Elementor widgets issues corrected
+Tweaked: Reorganized several settings for improved clarity
+Tweaked: Dashboard layout spacing and button padding refined for a more consistent UI
+Tweaked: Candidate Single Page improved for better readability
+Tweaked: Dashboard login form now auto-redirects to the frontend dashboard
+Tweaked: Filter button made conditional—only appears if filter widgets are set
+Tweaked: Improved filter validation to match filter widget availability
+Tweaked: Unified pagination styling across the entire plugin
+Tweaked: Edit button added to Company and Job single pages
+Tweaked: Improved the Candidate Single Page
+Tweaked: Various code sections simplified and optimized for better performance
+
+= 1.3.0 (02 December 2025) =
+New: Added Job Title display to Job Single Layout 2
+Fixed: Category layout responsiveness issue resolved
+Fixed: Resolved responsive issues in Jobus Elementor widgets
+Fixed: Jobus dashboard layout and responsive issues fixed
+Fixed: Company Dashboard “Specifications” and “Company Website” data handling corrected
+Fixed: Candidate Dashboard and Testimonial submission issues resolved
+Fixed: Candidate Dashboard social icon issue fixed
+Fixed: Number count issue in dashboards and related posts loading fixed
+Tweaked: Updated job options and refined Job Details page styling
+Tweaked: Improved Job Single 2 layout design for better readability
+Tweaked: Dark mode compatibility added for seamless integration with Docy themes
+Tweaked: Added logic to show/hide Candidate and Company menus based on module settings
+
+= 1.2.0 (11 November 2025) =
+New: Predefined Color Schemes added in the General Settings panel for quick styling customization
+New: Custom scrollbar styles added for a smoother visual experience
+New: Spinner loading animation styles added for better user feedback
+New: Demo user and password field added in the login form for easier testing
+New: demo.xml file added in the include/sample-data folder
+
+Fixed: CV upload and related dashboard issues resolved
+Fixed: Employer job posting and dashboard header conflicts fixed for block-based themes
+Fixed: Registration and login password visibility issues resolved
+Fixed: Astra theme CSS issues on single and dashboard layouts fixed
+Fixed: Company and candidate dashboard CSS inconsistencies resolved
+Fixed: Extra borders removed from job listings for a cleaner appearance
+Fixed: Minor theme compatibility and visual issues resolved
+Improved: Option retrieval simplified for better performance and cleaner code
+Improved: Pagination HTML updated and renamed to .jbs-pagination for consistency
+Improved: Theme compatibility enhanced for Kadence, Docy, Avada, Astra, and OceanWP
+Improved: Company and candidate archive templates adjusted for better styling and alignment
+Improved: Company details and job title markup refined in dashboard
+Improved: Job button typography control renamed for clarity
+Improved: Link color updated using rgba values for better visibility
+Improved: Candidate and Company menus moved under the main Jobus menu
+Improved: Flex utility classes added for easier alignment and layout control
+Improved: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
+Improved: Administrator access enabled for employer dashboard
+Improved: Employer role granted edit_posts capability for frontend image uploads
+Optimized: Unused CSS and old titlebar code removed for lighter performance
+Optimized: Color and typography refined across dashboard and listings for consistency
+
+= 1.1.0 (31 October 2025) =
+New: New Color Settings added in the General Settings panel
+New: Body class support for better theme styling control
+Fixed: Company dashboard and employment dashboard layout issues resolved
+Fixed: Job page CSS and single page layout issues fixed for consistent styling
+Fixed: PHP errors in templates resolved and templating system improved
+Fixed: Theme compatibility issues fixed across multiple themes (Astra, Docy, Twenty Twenty-Five)
+Fixed: Archive layout issue fixed for Astra theme
+Improved: Job, Candidate & Company Single Pages redesigned for better readability and structure
+Improved: Templates refined and redundant fonts removed for cleaner performance
+Improved: Shortcode functionality enhanced with layout attributes and conditional loading for header/footer in archive templates
+Improved: Elementor widget lock and related UI refined for better editing experience
+Improved: Appearance and General Settings organization improved for easier configuration
+Improved: Subscribe field color adjusted for better visibility in dark mode
+Improved: Setup and color schema refined for a consistent user experience
+Improved: Astra theme compatibility improved for single and archive layouts
+Improved: GeneratePress theme compatibility added and tested
+Improved: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
+Improved: Docy theme compatibility refined for smoother integration
+Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
+
+= 1.0.0 (22 October 2025) =
+New: Initial release

@@ -1,5 +1,12 @@
-.company-profiles.bg-color {
+.jbs-company-profiles.jbs-bg-color {
   background: var(--jbs-box_bg_color);
+}
+
+.company-verification-badge,
+.company-verification-badge i {
+  color: #1877F2 !important;
+  font-size: 16px;
+  /* Facebook Verified Blue */
 }
 
 // Company Grid Layout
@@ -212,7 +219,7 @@
     }
 
     .video-post {
-      background: url(../images/assets/img_45.jpg) no-repeat center;
+      /* background: url(../images/assets/img_45.jpg) no-repeat center; */
       background-size: cover;
       height: 440px;
       border-radius: 10px;

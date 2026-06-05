@@ -128,11 +128,12 @@
 
 .jbs-btn-danger {
   color: $text-white;
-  background-color: #dc3545 ;
+  background-color: #dc3545;
   border-color: #dc3545;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+
   &:hover {
     color: $text-white;
     background-color: #bb2d3b !important;
@@ -151,7 +152,8 @@
     background-color: #bb2d3b;
     border-color: #b02a37;
   }
-  i{
+
+  i {
     display: inline-flex;
   }
 }
@@ -178,6 +180,60 @@
     color: #000;
     background-color: #ffca2c;
     border-color: #ffc720;
+  }
+}
+
+// Outline variants — used by surfaces that need lower-emphasis CTAs without losing
+// the semantic color (e.g. the Application Details "Shortlist" button).
+.jbs-btn-outline-primary {
+  color: var(--jbs_brand_color_4_opt) !important;
+  background-color: transparent;
+  border: 1px solid var(--jbs_brand_color_4_opt);
+  box-shadow: none;
+
+  &:hover {
+    color: $text-white !important;
+    background-color: var(--jbs_brand_color_4_opt);
+    border-color: var(--jbs_brand_color_4_opt);
+  }
+}
+
+.jbs-btn-outline-info {
+  color: #0aa8c8 !important;
+  background-color: transparent;
+  border: 1px solid #0dcaf0;
+  box-shadow: none;
+
+  &:hover {
+    color: #000 !important;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+  }
+}
+
+.jbs-btn-outline-warning {
+  color: #b88600 !important;
+  background-color: transparent;
+  border: 1px solid #ffc107;
+  box-shadow: none;
+
+  &:hover {
+    color: #000 !important;
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+}
+
+.jbs-btn-outline-danger {
+  color: #b02a37 !important;
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  box-shadow: none;
+
+  &:hover {
+    color: $text-white !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
   }
 }
 
@@ -311,4 +367,57 @@
 
 .jbs-btn-close-white {
   filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+
+// Choice Gate: Register button (Priority 2 - Solid Dark Green / White Text)
+.jbs-btn-register {
+  color: #ffffff !important;
+  background-color: var(--jbs_brand_color_2_opt, #244034);
+  border-color: var(--jbs_brand_color_2_opt, #244034);
+  justify-content: center;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #1a2f26;
+    border-color: #1a2f26;
+  }
+
+  &:focus {
+    color: #ffffff;
+    background-color: #1a2f26;
+    border-color: #1a2f26;
+    box-shadow: 0 0 0 0.2rem rgba(36, 64, 52, 0.25);
+  }
+
+  &:active {
+    color: #ffffff;
+    background-color: #15241d;
+  }
+}
+
+// Choice Gate: Continue as Guest button (Priority 3 - Custom Grey Palette)
+.jbs-btn-guest {
+  background-color: #bbc0c4;
+  color: #212529;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background-color: #a8adb2;
+  }
+
+  &:focus {
+    color: #5f6368;
+    background-color: #e8eaed;
+    box-shadow: 0 0 0 0.2rem rgba(189, 193, 198, 0.5);
+  }
+
+  &:active {
+    color: #3c4043;
+    background-color: #e0e3e6;
+  }
 }

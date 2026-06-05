@@ -26,7 +26,7 @@ class Dashboard {
 	 */
 	public function __construct() {
 		add_shortcode( 'jobus_dashboard', [ $this, 'render_dashboard' ] );
-		
+
 		// Keep old shortcodes working by mapping them to the unified dashboard
 		add_shortcode( 'jobus_candidate_dashboard', [ $this, 'render_dashboard' ] );
 		add_shortcode( 'jobus_employer_dashboard', [ $this, 'render_dashboard' ] );
@@ -35,9 +35,13 @@ class Dashboard {
 	/**
 	 * Render the dashboard.
 	 *
+	 * @param array|string $atts Shortcode attributes.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag Shortcode tag.
+	 *
 	 * @return string Dashboard HTML output.
 	 */
-	public function render_dashboard(): string {
+	public function render_dashboard($atts = [], $content = '', $tag = 'jobus_dashboard'): string {
 		if ( ! is_user_logged_in() ) {
 			return Template_Loader::get_template_part( 'dashboard/login-form' );
 		}
@@ -45,22 +49,19 @@ class Dashboard {
 		$user = wp_get_current_user();
 		$roles = (array) $user->roles;
 
-		// Check if candidate dashboard is enabled and user is a candidate
-		$options = get_option( 'jobus_opt', [] );
-		$enable_candidate = $options['enable_candidate'] ?? true;
-		
-		if ( $enable_candidate && in_array( 'jobus_candidate', $roles, true ) ) {
+		$enable_candidate = function_exists('jobus_opt') ? jobus_opt('enable_candidate', true) : true;
+
+		if ($enable_candidate && (in_array('jobus_candidate', $roles, true) || $tag === 'jobus_candidate_dashboard')) {
 			return Dashboard_Candidate::get_instance()->candidate_dashboard();
-		} 
-		
-		// Check if employer dashboard is enabled and user is an employer or admin
-		$enable_company = $options['enable_company'] ?? true;
-		
-		if ( $enable_company && array_intersect( [ 'jobus_employer', 'administrator' ], $roles ) ) {
+		}
+
+		$enable_company = function_exists('jobus_opt') ? jobus_opt('enable_company', true) : true;
+		$is_admin       = in_array('administrator', $roles, true) || current_user_can('manage_options');
+
+		if (($enable_company && in_array('jobus_employer', $roles, true)) || $is_admin || $tag === 'jobus_employer_dashboard') {
 			return Dashboard_Employer::get_instance()->employer_dashboard();
 		}
 
-		// If no role matches or features disabled
 		return Template_Loader::get_template_part( 'dashboard/logout-form' );
 	}
 
@@ -78,18 +79,31 @@ class Dashboard {
 			return $url;
 		}
 
-		// Check jobus_pages option first
-		$pages = get_option( 'jobus_pages', [] );
-		if ( ! empty( $pages['dashboard'] ) ) {
-			$url = get_permalink( $pages['dashboard'] );
-			if ( $url ) {
-				set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+		// 1. Check jobus_opt for custom dashboard page first (user preference)
+		if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
+			$dashboard_id = jobus_opt( 'dashboard_redirect_page' );
+			if ( ! empty( $dashboard_id ) ) {
+				$url = get_permalink( $dashboard_id );
+				if ( $url ) {
+					set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+					return $url;
+				}
+			}
+		}
+
+		// 2. Check jobus_pages option (plugin default)
+		$pages = get_option('jobus_pages', []);
+		if (! empty($pages['dashboard'])) {
+			$url = get_permalink($pages['dashboard']);
+			if ($url) {
+				set_transient($cache_key, $url, 12 * HOUR_IN_SECONDS);
 				return $url;
 			}
 		}
 
-		$shortcodes = [ '[jobus_dashboard]' ];
-		
+		// 3. Search for shortcodes in pages
+		$shortcodes = ['[jobus_dashboard]'];
+
 		if ( 'jobus_candidate' === $role ) {
 			$shortcodes[] = '[jobus_candidate_dashboard]';
 		} elseif ( 'jobus_employer' === $role ) {
@@ -115,9 +129,7 @@ class Dashboard {
 			}
 		}
 
-		$url = home_url( '/' );
-		set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
-
-		return $url;
+		// Fallback to home URL but don't cache it as "the dashboard"
+		return home_url('/');
 	}
 }
