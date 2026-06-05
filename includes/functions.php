@@ -530,10 +530,10 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         global $wpdb;
 
-        // Generate a unique cache key
+        // Generate a unique cache key based on the function arguments
         $cache_key = 'jobus_mk_cnt_' . md5( $post_type . $meta_key . $meta_value );
 
-        // Check for cached value
+        // Try to get the count from the transient cache
         $cached_count = get_transient( $cache_key );
         if ( false !== $cached_count ) {
             return (int) $cached_count;

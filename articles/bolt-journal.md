@@ -6,6 +6,6 @@
 **Learning:** `jobus_all_range_field_value()` fetches and unserializes `jobus_meta_options` for *all* published jobs/candidates whenever range widgets are present in the sidebar, even if no search is actually performed by the user. This causes massive overhead on simple archive page views.
 **Action:** Always check if the user has provided input for a filter before running expensive queries to fetch data for that filter. In `jobus_process_range_filters`, skip the heavy DB call if no range filter inputs are present in `$_GET`.
 
-## 2026-01-20 - [N+1 Queries in Filter Widgets]
-**Learning:** Functions like `jobus_count_meta_key_usage` are often called inside loops (e.g., rendering checkbox lists for filters). Without caching, this triggers a database query for every single filter option, causing an N+1 problem that scales with the number of filter options.
-**Action:** Wrap these "count" functions with `get_transient` / `set_transient` using a unique hash of the parameters as the key. A 1-hour cache duration is usually a good balance for filter counts.
+## 2026-01-17 - Trust Code Over Memory
+**Learning:** The memory bank stated `jobus_count_meta_key_usage` was optimized with transient caching, but code analysis revealed it performed raw SQL queries on every call. This created an N+1 bottleneck in search filters.
+**Action:** Always verify "known facts" in memory against the actual codebase before assuming optimization status.
