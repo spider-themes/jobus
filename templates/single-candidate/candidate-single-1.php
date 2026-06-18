@@ -15,9 +15,14 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
+
+$top_padding = '';
+if ( function_exists( 'docy_opt' ) && '1' === docy_opt( 'is_top_header' ) ) {
+    $top_padding = 'padding-top: 170px;';
+}
 ?>
 
-<section class="jbs-candidates-profile jbs-bg-white">
+<section class="jbs-candidates-profile jbs-bg-white" <?php if ( ! empty( $top_padding ) ) echo 'style="' . esc_attr( $top_padding ) . '"'; ?>>
     <div class="jbs-container">
         <div class="jbs-row">
 
