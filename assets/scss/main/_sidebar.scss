@@ -354,6 +354,7 @@
 
   // "Show more" button in checkbox filters.
   .more-btn {
+    width: 112px !important;
     margin-top: 10px;
     color: #fff;
     font-size: 12px;
@@ -686,7 +687,7 @@ button.jbs_filter_btn-padding {
   .jbs-search-widget-label {
     font-size: 13px;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--black_900);
     margin-bottom: 8px;
     display: block;
   }

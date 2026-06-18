@@ -46,11 +46,11 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
     <div class="jbs-filter-area-tab">
         <div class="light-bg border-20 jbs-ps-4 jbs-pe-4">
 
-            <a class="jbs-filter-header border-20 jbs-d-block jbs-collapsed" href="#collapseFilterHeader" role="button" aria-expanded="false">
+            <a class="jbs-filter-header border-20 jbs-d-block jbs-collapsed" href="#collapseFilterHeader" role="button" aria-expanded="false" data-jbs-toggle="collapse">
                 <span class="jbs-filter-heading jbs-fw-500 jbs-text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
             </a>
 
-            <div class="jbs-collapse jbs-border-top" >
+            <div class="jbs-collapse jbs-border-top" id="collapseFilterHeader">
                 <form action="<?php echo esc_url(get_post_type_archive_link('jobus_candidate')) ?>" class="jbs-pt-25 jbs-pb-30" role="search" method="get" data-jbs-filter-form="true">
 
                     <?php wp_nonce_field('jobus_search_filter', 'jobus_nonce'); ?>
