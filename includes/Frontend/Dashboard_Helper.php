@@ -12,17 +12,16 @@ class Dashboard_Helper {
 
 	public function __construct() {
 
-		// Register AJAX handlers
+		// Register AJAX handlers. These are dashboard-only (logged-in) actions, so they are
+		// intentionally NOT registered for nopriv — an unauthenticated visitor must never be
+		// able to create taxonomy terms, enumerate them, or touch user meta.
 		add_action( 'wp_ajax_jobus_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
-		add_action( 'wp_ajax_nopriv_jobus_delete_candidate_profile_picture', [ $this, 'delete_candidate_profile_picture' ] );
 
 		// Register AJAX handler for dynamic taxonomy creation
 		add_action( 'wp_ajax_jobus_create_taxonomy_term', [ $this, 'jobus_create_taxonomy_term' ] );
-		add_action( 'wp_ajax_nopriv_jobus_create_taxonomy_term', [ $this, 'jobus_create_taxonomy_term' ] );
 
 		// Add taxonomy suggestion handler
 		add_action( 'wp_ajax_jobus_suggest_taxonomy_terms', [ $this, 'suggest_taxonomy_terms' ] );
-		add_action( 'wp_ajax_nopriv_jobus_suggest_taxonomy_terms', [ $this, 'suggest_taxonomy_terms' ] );
 
 		// Register AJAX handlers for removing saved jobs/candidates
 		add_action( 'wp_ajax_jobus_candidate_saved_job', [ $this, 'remove_saved_job' ] );
@@ -33,6 +32,83 @@ class Dashboard_Helper {
 
 		// Register AJAX handler for searching within saved candidates
 		add_action( 'wp_ajax_jobus_search_saved_candidates', [ $this, 'search_saved_candidates' ] );
+
+		// Authenticated CV/resume download proxy (no nopriv — never expose CVs to guests).
+		add_action( 'wp_ajax_jobus_download_cv', [ $this, 'download_cv' ] );
+	}
+
+	/**
+	 * Stream a CV/resume attachment to authorized users only.
+	 *
+	 * Authorized = an admin, the user who uploaded it (their own resume), the candidate who
+	 * submitted the application, or the employer who owns the job the application is for.
+	 * Reads the existing file in place — no files are moved or modified.
+	 *
+	 * @return void
+	 */
+	public function download_cv(): void {
+		$attachment_id  = isset( $_GET['attachment_id'] ) ? absint( $_GET['attachment_id'] ) : 0;
+		$application_id = isset( $_GET['application_id'] ) ? absint( $_GET['application_id'] ) : 0;
+
+		if ( ! $attachment_id || ! check_admin_referer( 'jobus_download_cv_' . $attachment_id ) ) {
+			wp_die( esc_html__( 'Invalid or expired download link.', 'jobus' ), '', [ 'response' => 403 ] );
+		}
+
+		if ( ! is_user_logged_in() ) {
+			wp_die( esc_html__( 'You must be logged in to download this file.', 'jobus' ), '', [ 'response' => 403 ] );
+		}
+
+		if ( 'attachment' !== get_post_type( $attachment_id ) ) {
+			wp_die( esc_html__( 'File not found.', 'jobus' ), '', [ 'response' => 404 ] );
+		}
+
+		$user_id    = get_current_user_id();
+		$authorized = false;
+
+		if ( current_user_can( 'manage_options' ) ) {
+			$authorized = true;
+		} elseif ( (int) get_post_field( 'post_author', $attachment_id ) === $user_id ) {
+			// The user uploaded this file (their own resume CV).
+			$authorized = true;
+		} elseif ( $application_id && 'jobus_applicant' === get_post_type( $application_id ) ) {
+			// Confirm the attachment actually belongs to this application. Accept the legacy
+			// `candidate_resume` meta key too, so CVs on older applications stay downloadable.
+			$app_cv = (int) get_post_meta( $application_id, 'candidate_cv', true );
+			if ( ! $app_cv ) {
+				$app_cv = (int) get_post_meta( $application_id, 'candidate_resume', true );
+			}
+			if ( $app_cv === $attachment_id ) {
+				if ( (int) get_post_field( 'post_author', $application_id ) === $user_id ) {
+					// Candidate who submitted the application.
+					$authorized = true;
+				} else {
+					// Employer who owns the job this application targets.
+					$job_id = (int) get_post_meta( $application_id, 'job_applied_for_id', true );
+					if ( $job_id && (int) get_post_field( 'post_author', $job_id ) === $user_id ) {
+						$authorized = true;
+					}
+				}
+			}
+		}
+
+		if ( ! $authorized ) {
+			wp_die( esc_html__( 'You do not have permission to download this file.', 'jobus' ), '', [ 'response' => 403 ] );
+		}
+
+		$file = get_attached_file( $attachment_id );
+		if ( ! $file || ! file_exists( $file ) ) {
+			wp_die( esc_html__( 'File not found.', 'jobus' ), '', [ 'response' => 404 ] );
+		}
+
+		nocache_headers();
+		$mime = get_post_mime_type( $attachment_id );
+		header( 'Content-Type: ' . ( $mime ? $mime : 'application/octet-stream' ) );
+		header( 'Content-Disposition: attachment; filename="' . basename( $file ) . '"' );
+		header( 'Content-Length: ' . filesize( $file ) );
+		header( 'X-Content-Type-Options: nosniff' );
+
+		readfile( $file );
+		exit;
 	}
 
 
@@ -82,6 +158,12 @@ class Dashboard_Helper {
 			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ] );
 		}
 
+		// Must be logged in. A nonce is not an authentication check, and term creation is a
+		// dashboard-only action — this prevents anonymous taxonomy/DB pollution.
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to perform this action.', 'jobus' ) ] );
+		}
+
 		$term_name = isset( $_POST['term_name'] ) ? sanitize_text_field( wp_unslash( $_POST['term_name'] ) ) : '';
 		$taxonomy  = isset( $_POST['taxonomy'] ) ? sanitize_key( $_POST['taxonomy'] ) : '';
 
@@ -127,6 +209,11 @@ class Dashboard_Helper {
 		// Verify nonce
 		if ( ! check_ajax_referer( 'jobus_suggest_taxonomy_terms', 'security', false ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ] );
+		}
+
+		// Dashboard-only typeahead; require authentication.
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to perform this action.', 'jobus' ) ] );
 		}
 
 		$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_key( $_POST['taxonomy'] ) : '';

@@ -70,36 +70,16 @@ class Admin {
 			\jobus\includes\Classes\Lifecycle::create_tables();
 		}
 
-		// Setup / Backfill all existing Jobs with Coordinates
+		// Queue the coordinate backfill to run in the background so this admin request
+		// returns immediately instead of geocoding every job inline (which timed out
+		// on large sites). The cron batch primes caches and reschedules until done.
 		if ( class_exists( '\jobus\includes\Classes\Geolocation' ) ) {
-			$geo_engine = new \jobus\includes\Classes\Geolocation();
+			$queued_count = \jobus\includes\Classes\Geolocation::start_backfill();
 
-			$jobs = get_posts(
-				[
-					'post_type'      => 'jobus_job',
-					'posts_per_page' => -1,
-					'post_status'    => 'publish',
-					'fields'         => 'ids',
-				]
-			);
-
-			$synced_count = 0;
-			if ( ! empty( $jobs ) && ! is_wp_error( $jobs ) ) {
-				foreach ( $jobs as $job_id ) {
-					$post = get_post( $job_id );
-					if ( $post ) {
-						$geo_engine->sync_job_location( $job_id, $post );
-						$synced_count++;
-					}
-				}
-			}
-
-			update_option( 'jobus_radius_setup_completed', true );
-			
 			// Output success and redirect securely
 			$redirect_url = remove_query_arg( [ 'jobus_setup_radius', '_wpnonce' ] );
-			$redirect_url = add_query_arg( [ 'jobus_radius_synced' => $synced_count ], $redirect_url );
-			
+			$redirect_url = add_query_arg( [ 'jobus_radius_synced' => $queued_count ], $redirect_url );
+
 			wp_safe_redirect( $redirect_url );
 			exit;
 		}
@@ -111,10 +91,10 @@ class Admin {
 	public function radius_sync_notice(): void {
 		if ( isset( $_GET['jobus_radius_synced'] ) && current_user_can( 'manage_options' ) ) {
 			$count   = absint( $_GET['jobus_radius_synced'] );
-			$message = sprintf( 
-				/* translators: %d: number of jobs synced */
-				esc_html__( 'Radius Search Setup Complete. Database Table created and synced %d jobs with geolocation coordinates.', 'jobus' ), 
-				$count 
+			$message = sprintf(
+				/* translators: %d: number of jobs queued */
+				esc_html__( 'Radius Search Setup started. Database table is ready and %d jobs are being geocoded in the background. This may take a few minutes to complete.', 'jobus' ),
+				$count
 			);
 			echo '<div class="notice notice-success is-dismissible"><p>' . $message . '</p></div>';
 		}

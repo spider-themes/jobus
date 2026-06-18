@@ -43,3 +43,26 @@
 // 5. Utilities
 @import "main/theme_compatibility";
 @import "main/responsive";
+
+// 6. Dashboard (merged from the former standalone dashboard.scss / dashboard.css).
+// Dashboard mixins must load at root before the scoped block below.
+@import "dashboard/mixins";
+
+// All dashboard UI is scoped under `.dashboard-wrapper` — the element the dashboard
+// shortcode always emits (Dashboard_Candidate/Employer) — so these styles never leak
+// onto other pages. Genuinely root-level rules inside these partials (the `body`
+// header rule and @keyframes) are hoisted back to root via @at-root.
+.dashboard-wrapper {
+    @import "dashboard/pro_notice";
+    @import "dashboard/sidebar_menu";
+    @import "dashboard/dashboard";
+    @import "dashboard/candidate_resume";
+    @import "dashboard/saved_post";
+    @import "dashboard/candidate_job_applied";
+    @import "dashboard/candidate_delete_account";
+    @import "dashboard/password";
+    @import "dashboard/jobs";
+    @import "dashboard/message";
+    @import "dashboard/application_details";
+    @import "dashboard/ux_improvements";
+}

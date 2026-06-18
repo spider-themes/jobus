@@ -11,11 +11,89 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Geolocation {
 
 	/**
+	 * Cron hook that drives the background coordinate backfill.
+	 */
+	const BACKFILL_HOOK = 'jobus_geo_backfill_batch';
+
+	/**
+	 * Number of jobs geocoded per background batch.
+	 */
+	const BACKFILL_BATCH = 25;
+
+	/**
 	 * Init
 	 */
 	public function __construct() {
 		add_action( 'save_post_jobus_job', [ $this, 'sync_job_location' ], 20, 2 );
 		add_filter( 'jobus_job_query_args', [ $this, 'apply_radius_filter' ], 10, 2 );
+		add_action( self::BACKFILL_HOOK, [ $this, 'run_backfill_batch' ] );
+	}
+
+	/**
+	 * Queue a full coordinate backfill to run in the background.
+	 *
+	 * Replaces the old synchronous loop that loaded and geocoded every job inside a
+	 * single admin request (an N+1 of get_post() + meta reads + remote geocode calls
+	 * that timed out on large sites). Returns the number of jobs queued.
+	 *
+	 * @return int Total published jobs scheduled for backfill.
+	 */
+	public static function start_backfill(): int {
+		$count_query = new \WP_Query( [
+			'post_type'              => 'jobus_job',
+			'post_status'            => 'publish',
+			'posts_per_page'         => 1,
+			'fields'                 => 'ids',
+			'no_found_rows'          => false,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		] );
+
+		update_option( 'jobus_geo_backfill_offset', 0, false );
+
+		if ( ! wp_next_scheduled( self::BACKFILL_HOOK ) ) {
+			wp_schedule_single_event( time() + 5, self::BACKFILL_HOOK );
+		}
+
+		return (int) $count_query->found_posts;
+	}
+
+	/**
+	 * Process one background backfill batch and reschedule until the queue drains.
+	 *
+	 * @return void
+	 */
+	public function run_backfill_batch(): void {
+		$offset = (int) get_option( 'jobus_geo_backfill_offset', 0 );
+
+		// get_posts() returns full WP_Post objects and primes the post cache for the
+		// batch, so sync_job_location() needs no per-id get_post() lookup.
+		$jobs = get_posts( [
+			'post_type'              => 'jobus_job',
+			'post_status'            => 'publish',
+			'posts_per_page'         => self::BACKFILL_BATCH,
+			'offset'                 => $offset,
+			'orderby'                => 'ID',
+			'order'                  => 'ASC',
+			'no_found_rows'          => true,
+			'update_post_term_cache' => true,
+		] );
+
+		if ( empty( $jobs ) ) {
+			delete_option( 'jobus_geo_backfill_offset' );
+			update_option( 'jobus_radius_setup_completed', true, false );
+			return;
+		}
+
+		// Prime the meta cache for the whole batch in one query.
+		update_postmeta_cache( wp_list_pluck( $jobs, 'ID' ) );
+
+		foreach ( $jobs as $post ) {
+			$this->sync_job_location( $post->ID, $post );
+		}
+
+		update_option( 'jobus_geo_backfill_offset', $offset + count( $jobs ), false );
+		wp_schedule_single_event( time() + MINUTE_IN_SECONDS, self::BACKFILL_HOOK );
 	}
 
 	/**
@@ -70,7 +148,7 @@ class Geolocation {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'jobus_search_index';
 
-			$wpdb->replace(
+			$result = $wpdb->replace(
 				$table_name,
 				[
 					'post_id' => $post_id,
@@ -79,7 +157,62 @@ class Geolocation {
 				],
 				[ '%d', '%f', '%f' ]
 			);
+
+			// A false return means the write failed (e.g. the unique-index migration
+			// hasn't run yet on a freshly-updated site, so REPLACE silently degrades
+			// to INSERT and re-creates duplicate rows). Surface it instead of leaving
+			// the job silently absent from / duplicated in radius search.
+			if ( false === $result ) {
+				$this->log_geo_error( sprintf( 'Failed to write search index for post %d: %s', $post_id, $wpdb->last_error ) );
+			}
 		}
+	}
+
+	/**
+	 * Log a geolocation failure when debugging is enabled.
+	 *
+	 * Geocoding/index failures used to be swallowed entirely, so a job would
+	 * silently never appear in radius search with no diagnostic trail.
+	 *
+	 * @param string $message
+	 * @return void
+	 */
+	private function log_geo_error( string $message ): void {
+		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			error_log( '[Jobus Geolocation] ' . $message );
+		}
+	}
+
+	/**
+	 * Perform a geocoding HTTP request and return decoded JSON, or null on failure.
+	 *
+	 * Centralises the error handling the provider branches previously skipped:
+	 * a WP_Error transport failure (DNS, timeout, no API key host) or a non-2xx
+	 * response now returns null and is logged, instead of being silently fed into
+	 * json_decode('') => null and treated as "no result".
+	 *
+	 * @param string $url  Request URL.
+	 * @param array  $args Optional wp_remote_get() args.
+	 * @return array|null
+	 */
+	private function remote_geocode_json( string $url, array $args = [] ) {
+		$args = wp_parse_args( $args, [ 'timeout' => 5 ] );
+		$res  = wp_remote_get( $url, $args );
+
+		if ( is_wp_error( $res ) ) {
+			$this->log_geo_error( 'Geocode request failed: ' . $res->get_error_message() );
+			return null;
+		}
+
+		$code = (int) wp_remote_retrieve_response_code( $res );
+		if ( $code < 200 || $code >= 300 ) {
+			$this->log_geo_error( sprintf( 'Geocode request returned HTTP %d for %s', $code, $url ) );
+			return null;
+		}
+
+		$data = json_decode( wp_remote_retrieve_body( $res ), true );
+
+		return is_array( $data ) ? $data : null;
 	}
 
 	/**
@@ -121,10 +254,8 @@ class Geolocation {
 			$api_key = $options['google_maps_api_key'] ?? '';
 			if ( $api_key ) {
 				$url  = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode( $address ) . '&key=' . $api_key;
-				$res  = wp_remote_get( $url );
-				$body = wp_remote_retrieve_body( $res );
-				$data = json_decode( $body, true );
-				if ( 'OK' === ( $data['status'] ?? '' ) && ! empty( $data['results'][0]['geometry']['location'] ) ) {
+				$data = $this->remote_geocode_json( $url );
+				if ( null !== $data && 'OK' === ( $data['status'] ?? '' ) && ! empty( $data['results'][0]['geometry']['location'] ) ) {
 					$coords = [
 						'lat' => $data['results'][0]['geometry']['location']['lat'],
 						'lng' => $data['results'][0]['geometry']['location']['lng'],
@@ -135,10 +266,8 @@ class Geolocation {
 			$api_key = $options['mapbox_api_key'] ?? '';
 			if ( $api_key ) {
 				$url  = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' . urlencode( $address ) . '.json?access_token=' . $api_key;
-				$res  = wp_remote_get( $url );
-				$body = wp_remote_retrieve_body( $res );
-				$data = json_decode( $body, true );
-				if ( ! empty( $data['features'][0]['center'] ) ) {
+				$data = $this->remote_geocode_json( $url );
+				if ( null !== $data && ! empty( $data['features'][0]['center'] ) ) {
 					$coords = [
 						// Mapbox returns [longitude, latitude]
 						'lng' => $data['features'][0]['center'][0],
@@ -149,14 +278,12 @@ class Geolocation {
 		} else {
 			// Nominatim (Free openstreetmap)
 			$url  = 'https://nominatim.openstreetmap.org/search?q=' . urlencode( $address ) . '&format=json&limit=1';
-			$res  = wp_remote_get( $url, [
+			$data = $this->remote_geocode_json( $url, [
 				'headers' => [
 					'User-Agent' => 'Jobus WordPress Plugin (spider-themes)',
-				]
+				],
 			] );
-			$body = wp_remote_retrieve_body( $res );
-			$data = json_decode( $body, true );
-			if ( ! empty( $data[0]['lat'] ) && ! empty( $data[0]['lon'] ) ) {
+			if ( null !== $data && ! empty( $data[0]['lat'] ) && ! empty( $data[0]['lon'] ) ) {
 				$coords = [
 					'lat' => (float) $data[0]['lat'],
 					'lng' => (float) $data[0]['lon'],
@@ -166,6 +293,12 @@ class Geolocation {
 
 		if ( $coords ) {
 			set_transient( $cache_key, $coords, WEEK_IN_SECONDS * 4 );
+		} else {
+			// Negative-cache failures briefly so a bad address or a throttled/down
+			// provider doesn't trigger a fresh remote call on every page load. An
+			// empty array is the sentinel (get_transient can't distinguish a stored
+			// `false` from "not cached"); it is still falsy for callers.
+			set_transient( $cache_key, [], HOUR_IN_SECONDS );
 		}
 
 		return $coords;
@@ -185,8 +318,8 @@ class Geolocation {
 		}
 
 		// Use native $_GET or fallback to custom params matching `radius_location` and `radius_distance`
-		$location = isset( $_GET['radius_location'] ) ? sanitize_text_field( $_GET['radius_location'] ) : ( $params['radius_location'] ?? '' );
-		$distance_raw = isset( $_GET['radius_distance'] ) ? $_GET['radius_distance'] : ( $params['radius_distance'] ?? '' );
+		$location = isset( $_GET['radius_location'] ) ? sanitize_text_field( wp_unslash( $_GET['radius_location'] ) ) : ( $params['radius_location'] ?? '' );
+		$distance_raw = isset( $_GET['radius_distance'] ) ? wp_unslash( $_GET['radius_distance'] ) : ( $params['radius_distance'] ?? '' );
 		$lat_input = isset( $_GET['radius_lat'] ) ? (float) $_GET['radius_lat'] : ( $params['radius_lat'] ?? 0 );
 		$lng_input = isset( $_GET['radius_lng'] ) ? (float) $_GET['radius_lng'] : ( $params['radius_lng'] ?? 0 );
 
@@ -224,16 +357,34 @@ class Geolocation {
 
 		$distance_float = max( 0.001, (float) $distance );
 
+		// Bounding-box prefilter: derive a lat/lng window from the search radius so the
+		// composite (lat, lng) index can prune rows in the WHERE clause before the much
+		// more expensive haversine distance is computed. Without this the query full-scans
+		// the entire index on every radius search.
+		$lat_delta = rad2deg( $distance_float / $earth_radius );
+		$cos_lat   = cos( deg2rad( $lat ) );
+		$lng_delta = abs( $cos_lat ) < 1e-9 ? 180.0 : rad2deg( $distance_float / ( $earth_radius * abs( $cos_lat ) ) );
+
+		$min_lat = $lat - $lat_delta;
+		$max_lat = $lat + $lat_delta;
+		$min_lng = $lng - $lng_delta;
+		$max_lng = $lng + $lng_delta;
+
 		$sql = $wpdb->prepare(
-			"SELECT post_id, 
-			( %d * acos( cos( radians(%f) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(%f) ) + sin( radians(%f) ) * sin( radians( lat ) ) ) ) AS distance 
-			FROM $table_name 
-			HAVING distance <= %f 
+			"SELECT post_id,
+			( %d * acos( cos( radians(%f) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(%f) ) + sin( radians(%f) ) * sin( radians( lat ) ) ) ) AS distance
+			FROM $table_name
+			WHERE lat BETWEEN %f AND %f AND lng BETWEEN %f AND %f
+			HAVING distance <= %f
 			ORDER BY distance ASC",
 			$earth_radius,
 			$lat,
 			$lng,
 			$lat,
+			$min_lat,
+			$max_lat,
+			$min_lng,
+			$max_lng,
 			$distance_float
 		);
 

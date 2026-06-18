@@ -94,11 +94,15 @@ class Google_Provider extends Abstract_Provider {
 		}
 
 		return [
-			'uid'        => sanitize_text_field( $data['id'] ?? '' ),
-			'email'      => sanitize_email( $data['email'] ),
-			'first_name' => sanitize_text_field( $data['given_name'] ?? '' ),
-			'last_name'  => sanitize_text_field( $data['family_name'] ?? '' ),
-			'avatar_url' => esc_url_raw( $data['picture'] ?? '' ),
+			'uid'            => sanitize_text_field( $data['id'] ?? '' ),
+			'email'          => sanitize_email( $data['email'] ),
+			// Google v2 userinfo exposes `verified_email`; treat anything other than an
+			// explicit `true` as unverified so an unconfirmed Google address can never
+			// be used to claim an existing WordPress account.
+			'email_verified' => filter_var( $data['verified_email'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+			'first_name'     => sanitize_text_field( $data['given_name'] ?? '' ),
+			'last_name'      => sanitize_text_field( $data['family_name'] ?? '' ),
+			'avatar_url'     => esc_url_raw( $data['picture'] ?? '' ),
 		];
 	}
 }

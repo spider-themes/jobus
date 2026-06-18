@@ -395,18 +395,22 @@ class Candidate_Form_Submission {
 				// If there's a new image ID, update the user meta with the new image
 				$image_id = absint( $post_data['candidate_profile_picture_id'] );
 
-				// Update user meta
-				update_user_meta( $user_id, 'candidate_profile_picture_id', $image_id );
+				// Only accept attachment IDs the user actually owns (IDOR guard);
+				// silently ignore a forged ID rather than attaching someone else's media.
+				if ( \jobus_user_owns_attachment( $image_id, (int) $user_id ) ) {
+					// Update user meta
+					update_user_meta( $user_id, 'candidate_profile_picture_id', $image_id );
 
-				// Also set as featured image (this is the key part for synchronization)
-				set_post_thumbnail( $candidate_id, $image_id );
+					// Also set as featured image (this is the key part for synchronization)
+					set_post_thumbnail( $candidate_id, $image_id );
 
-				// Sync user avatar for sidebar
-				self::sync_user_avatar( $user_id, $image_id );
+					// Sync user avatar for sidebar
+					self::sync_user_avatar( $user_id, $image_id );
 
-				// Clear caches immediately to ensure changes are visible
-				clean_post_cache( $candidate_id );
-				wp_cache_delete( $candidate_id, 'posts' );
+					// Clear caches immediately to ensure changes are visible
+					clean_post_cache( $candidate_id );
+					wp_cache_delete( $candidate_id, 'posts' );
+				}
 			}
 		}
 
@@ -477,8 +481,13 @@ class Candidate_Form_Submission {
 		} elseif ( $action === 'upload' ) {
 			// Check if this is a media library selection
 			if ( ! empty( $post_data['cv_attachment_id'] ) ) {
-				// Media library selection - just store the attachment ID
-				$meta['cv_attachment'] = absint( $post_data['cv_attachment_id'] );
+				// Media library selection - store the ID only if the candidate owns it
+				// (IDOR guard: otherwise any attachment ID on the site could be linked).
+				$cv_id    = absint( $post_data['cv_attachment_id'] );
+				$owner_id = (int) get_post_field( 'post_author', $candidate_id );
+				if ( \jobus_user_owns_attachment( $cv_id, $owner_id ) ) {
+					$meta['cv_attachment'] = $cv_id;
+				}
 			} elseif ( isset( $_FILES['cv_attachment'] ) && ! empty( $_FILES['cv_attachment']['name'] ) ) {
 				// Direct file upload - create a properly validated and sanitized file data variable
 				$file_data = $_FILES['cv_attachment'] ?? null;
@@ -658,10 +667,21 @@ class Candidate_Form_Submission {
 					'url' => ''
 				);
 			}
+
+			// IDOR guard: if a background-image attachment ID was resolved, only keep
+			// it when the candidate owns that attachment; otherwise drop the ID and
+			// fall back to whatever URL (if any) was supplied.
+			if ( ! empty( $meta['video_bg_img']['id'] ) ) {
+				$owner_id = (int) get_post_field( 'post_author', $candidate_id );
+				if ( ! \jobus_user_owns_attachment( (int) $meta['video_bg_img']['id'], $owner_id ) ) {
+					$meta['video_bg_img']['id']  = 0;
+					$meta['video_bg_img']['url'] = '';
+				}
+			}
 		}
 
 		update_post_meta( $candidate_id, 'jobus_meta_candidate_options', $meta );
-		
+
 		// Clear post cache to ensure fresh data on next load
 		clean_post_cache( $candidate_id );
 		wp_cache_delete( $candidate_id, 'posts' );
@@ -859,6 +879,16 @@ class Candidate_Form_Submission {
 					fn( $id ) => is_numeric( $id ) && intval( $id ) > 0
 				);
 				$meta['portfolio'] = array_map( 'intval', $portfolio_ids );
+			}
+
+			// Keep only attachments the candidate owns (IDOR guard) so a forged ID
+			// list can't surface another user's media on this profile.
+			if ( ! empty( $meta['portfolio'] ) ) {
+				$owner_id          = (int) get_post_field( 'post_author', $candidate_id );
+				$meta['portfolio'] = array_values( array_filter(
+					$meta['portfolio'],
+					fn( $id ) => \jobus_user_owns_attachment( (int) $id, $owner_id )
+				) );
 			}
 		}
 

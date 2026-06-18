@@ -3,8 +3,8 @@ Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
 Stable tag: 1.10.0
 Requires at least: 6.0
-Tested up to: 7.0
-Requires PHP: 7.4
+Tested up to: 6.9
+Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

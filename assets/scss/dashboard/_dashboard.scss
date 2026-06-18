@@ -1863,8 +1863,10 @@
   }
 }
 
-// Dashboard Header
-body {
+// Dashboard Header — @at-root keeps this `body` rule at the stylesheet root even when
+// this partial is imported nested under .dashboard-wrapper (a body selector cannot be a
+// descendant of the wrapper). No-op when imported at root.
+@at-root body {
   &.page-template-dashboard {
     .site-header {
       display: none;

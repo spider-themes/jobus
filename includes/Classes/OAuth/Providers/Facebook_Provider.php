@@ -88,8 +88,55 @@ class Facebook_Provider extends Abstract_Provider {
 		return $body['access_token'];
 	}
 
+	/**
+	 * Validate that the access token was issued for THIS application.
+	 *
+	 * Without this check a token minted for an attacker-controlled Facebook app
+	 * can be replayed against our /me endpoint (access-token substitution / the
+	 * "confused deputy" attack). We confirm the token's app_id matches our
+	 * configured client_id before trusting any profile data derived from it.
+	 *
+	 * @param string $access_token User access token returned by exchange_code().
+	 * @return true|\WP_Error True when the token belongs to this app.
+	 */
+	private function validate_token_audience( string $access_token ) {
+		$client_id     = (string) $this->get_option( 'client_id' );
+		$client_secret = (string) $this->get_option( 'client_secret' );
+
+		if ( '' === $client_id || '' === $client_secret ) {
+			return new \WP_Error( 'facebook_config_missing', __( 'Facebook login is not fully configured.', 'jobus' ) );
+		}
+
+		$response = wp_remote_get(
+			'https://graph.facebook.com/' . self::GRAPH_VERSION . '/debug_token?' . http_build_query( [
+				'input_token'  => $access_token,
+				'access_token' => $client_id . '|' . $client_secret,
+			] ),
+			[ 'timeout' => 30 ]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return new \WP_Error( 'facebook_token_verify_error', __( 'Could not verify the Facebook login session.', 'jobus' ) );
+		}
+
+		$debug = json_decode( wp_remote_retrieve_body( $response ), true );
+		$data  = $debug['data'] ?? [];
+
+		if ( empty( $data['is_valid'] ) || (string) ( $data['app_id'] ?? '' ) !== $client_id ) {
+			return new \WP_Error( 'facebook_token_audience', __( 'The Facebook login session could not be verified for this site.', 'jobus' ) );
+		}
+
+		return true;
+	}
+
 	/** @inheritDoc */
 	public function get_user_data( string $access_token ) {
+		// Reject tokens that were not issued for this exact app before trusting profile data.
+		$audience = $this->validate_token_audience( $access_token );
+		if ( is_wp_error( $audience ) ) {
+			return $audience;
+		}
+
 		$response = wp_remote_get(
 			'https://graph.facebook.com/' . self::GRAPH_VERSION . '/me?' . http_build_query( [
 				'fields'       => 'id,name,email,first_name,last_name,picture.type(large)',
@@ -118,11 +165,14 @@ class Facebook_Provider extends Abstract_Provider {
 		$avatar_url = $data['picture']['data']['url'] ?? '';
 
 		return [
-			'uid'        => sanitize_text_field( $data['id'] ?? '' ),
-			'email'      => sanitize_email( $data['email'] ),
-			'first_name' => sanitize_text_field( $data['first_name'] ?? '' ),
-			'last_name'  => sanitize_text_field( $data['last_name'] ?? '' ),
-			'avatar_url' => esc_url_raw( $avatar_url ),
+			'uid'            => sanitize_text_field( $data['id'] ?? '' ),
+			'email'          => sanitize_email( $data['email'] ),
+			// Meta only returns an email on /me once the user has confirmed it, and we
+			// have already validated the token audience above, so the address is trusted.
+			'email_verified' => true,
+			'first_name'     => sanitize_text_field( $data['first_name'] ?? '' ),
+			'last_name'      => sanitize_text_field( $data['last_name'] ?? '' ),
+			'avatar_url'     => esc_url_raw( $avatar_url ),
 		];
 	}
 }

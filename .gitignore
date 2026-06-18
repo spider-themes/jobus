@@ -12,3 +12,12 @@
 /composer.lock
 build/
 vendor/
+
+# Build/dev artifacts and tooling — should never ship in the distributed plugin.
+*.log
+/articles/
+/plan.md
+/roadmaps.md
+/.agent/
+/.qwen/
+/.warden/

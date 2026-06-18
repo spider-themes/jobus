@@ -1,32 +1,6 @@
 <?php
 /**
- * Template for th// Handle form submission for taxonomies [categories, locations, skills]
-if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
-	$nonce = isset( $_POST['candidate_resume_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_resume_nonce'] ) ) : '';
-	if ( ! $nonce || ! wp_verify_nonce( $nonce, 'candidate_resume_update' ) ) {
-		wp_die( esc_html__( 'Security check failed.', 'jobus' ) );
-	}
-
-	// Check user permissions
-	if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
-		wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
-	}
-
-	if ( isset( $_POST['candidate_categories'] ) ) {
-		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_cat' );
-	}
-
-	if ( isset( $_POST['candidate_locations'] ) ) {
-		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
-	}
-
-	if ( isset( $_POST['candidate_skills'] ) ) {
-		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
-	}
-}e page.
+ * Candidate Resume dashboard template.
  *
  * @package    Jobus
  * @subpackage Templates
@@ -34,6 +8,12 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
+}
+
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_candidate' ) ) {
+	return;
 }
 
 // Get current user
@@ -61,27 +41,32 @@ $show_portfolio = jobus_opt( 'candidate_portfolio', true );
 $show_skills = jobus_opt( 'candidate_skills', true );
 $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
 
-// Handle form submission for taxonomies [categories, locations, skills]
+// Handle form submission for taxonomies [categories, locations, skills].
 if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
-	// Check user permissions
-	// if ( ! is_user_logged_in() || ! current_user_can( 'edit_post', $candidate_id ) ) {
-	// 	wp_die( esc_html__( 'You do not have permission to perform this action.', 'jobus' ) );
-	// }
+	$resume_nonce = isset( $_POST['candidate_resume_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_resume_nonce'] ) ) : '';
 
-	if ( isset( $_POST['candidate_categories'] ) ) {
-		$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_cat' );
-	}
+	// CSRF + auth guard. We do NOT add an extra capability check here on purpose: the
+	// candidate post is resolved server-side from the logged-in user (get_candidate_id),
+	// so every write is scoped to the user's own resume regardless of their post caps.
+	// An invalid/stale nonce simply skips the term update instead of killing the page,
+	// so an expired session never white-screens a returning candidate.
+	if ( is_user_logged_in() && $candidate_id && $resume_nonce && wp_verify_nonce( $resume_nonce, 'candidate_resume_update' ) ) {
 
-	if ( isset( $_POST['candidate_locations'] ) ) {
-		$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
-	}
+		if ( isset( $_POST['candidate_categories'] ) ) {
+			$cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_categories'] ) ) ) );
+			wp_set_object_terms( $candidate_id, $cat_ids, 'jobus_candidate_cat' );
+		}
 
-	if ( isset( $_POST['candidate_skills'] ) ) {
-		$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
-		wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
+		if ( isset( $_POST['candidate_locations'] ) ) {
+			$location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_locations'] ) ) ) );
+			wp_set_object_terms( $candidate_id, $location_ids, 'jobus_candidate_location' );
+		}
+
+		if ( isset( $_POST['candidate_skills'] ) ) {
+			$skill_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['candidate_skills'] ) ) ) );
+			wp_set_object_terms( $candidate_id, $skill_ids, 'jobus_candidate_skill' );
+		}
 	}
 }
 

@@ -3,6 +3,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_candidate' ) ) {
+	return;
+}
+
 // Get the current user
 $user       = wp_get_current_user();
 $user_email = $user->user_email;
@@ -37,7 +43,7 @@ elseif ( get_query_var( 'paged' ) ) {
 }
 // Finally check the URL path for /page/N/ pattern
 else {
-	$request_uri = $_SERVER['REQUEST_URI'];
+	$request_uri = $_SERVER['REQUEST_URI'] ?? '';
 	if ( preg_match( '#/page/(\d+)/?#', $request_uri, $matches ) ) {
 		$current_page = intval( $matches[1] );
 	}
@@ -89,9 +95,23 @@ $applications = new \WP_Query( $args );
                             $status       = get_post_meta( get_the_ID(), 'application_status', true );
                             $status       = ! empty( $status ) ? $status : 'pending';
                             $status_class = 'jbs-bg-' . ( $status === 'approved' ? 'success' : ( $status === 'rejected' ? 'danger' : 'warning' ) );
+
+                            // Candidate-facing wording: internally the meta value is "approved",
+                            // but at this stage the employer action means a shortlist — "Approved"
+                            // reads as "you got the job" and sets the wrong expectation.
+                            $status_labels = apply_filters( 'jobus_candidate_application_status_labels', [
+                                'pending'  => __( 'Pending', 'jobus' ),
+                                'approved' => __( 'Shortlisted', 'jobus' ),
+                                'rejected' => __( 'Not Selected', 'jobus' ),
+                            ] );
+                            $status_label = $status_labels[ $status ] ?? ucfirst( $status );
+
+                            // Stamped by the employer application-details view (Pro). Absent on
+                            // free installs, so the indicator simply never renders there.
+                            $viewed_at = get_post_meta( get_the_ID(), 'application_viewed_at', true );
                             ?>
                             <tr>
-                                <td class="company-name">
+                                <td class="company-name" data-label="<?php esc_attr_e( 'Company', 'jobus' ); ?>">
                                     <?php
                                     $job_meta   = get_post_meta( $job_id, 'jobus_meta_options', true );
                                     $company_id = ! empty( $job_meta['select_company'] ) ? $job_meta['select_company'] : '';
@@ -124,20 +144,25 @@ $applications = new \WP_Query( $args );
                                     }
                                     ?>
                                 </td>
-                                <td class="job-title">
+                                <td class="job-title" data-label="<?php esc_attr_e( 'Job Title', 'jobus' ); ?>">
                                     <a href="<?php echo esc_url( $job_link ); ?>" class="job-link jbs-fw-500 jbs-text-dark">
                                         <?php echo esc_html($job_title); ?>
                                     </a>
                                 </td>
-                                <td class="job-date">
+                                <td class="job-date" data-label="<?php esc_attr_e( 'Applied On', 'jobus' ); ?>">
                                     <?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>
                                 </td>
-                                <td class="job-status">
+                                <td class="job-status" data-label="<?php esc_attr_e( 'Status', 'jobus' ); ?>">
                                     <span class="jbs-badge <?php echo esc_attr( $status_class ); ?>">
-                                        <?php echo esc_html( ucfirst( $status )); ?>
+                                        <?php echo esc_html( $status_label ); ?>
                                     </span>
+                                    <?php if ( $viewed_at ) : ?>
+                                        <span class="jbs-app-seen" title="<?php echo esc_attr( sprintf( /* translators: %s: date the employer first opened the application. */ __( 'Seen by employer on %s', 'jobus' ), mysql2date( get_option( 'date_format' ), $viewed_at ) ) ); ?>">
+                                            <i class="bi bi-eye" aria-hidden="true"></i> <?php esc_html_e( 'Seen', 'jobus' ); ?>
+                                        </span>
+                                    <?php endif; ?>
                                 </td>
-                                <td class="job-actions">
+                                <td class="job-actions" data-label="<?php esc_attr_e( 'Actions', 'jobus' ); ?>">
                                     <div class="action-button">
                                         <a href="javascript:void(0)"
                                            class="save-btn jbs-text-center jbs-rounded-circle tran3s remove-application"

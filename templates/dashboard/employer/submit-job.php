@@ -12,6 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_employer' ) ) {
+    return;
+}
+
 // Get current user
 $user = wp_get_current_user();
 
@@ -273,7 +279,7 @@ if ( ! $can_submit ) {
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                                 echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="jbs-nice-select" multiple>';
                                 foreach ( $meta_values as $option ) {
-                                    $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ) );
+                                    $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ?? '' ) );
                                     $selected = in_array( $val, $meta_value, true ) ? 'selected' : '';
                                     echo '<option value="' . esc_attr( $val ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $option['meta_values'] )
                                          . '</option>';

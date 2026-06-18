@@ -11,8 +11,8 @@ $candidate_phone   = get_post_meta( $post->ID, 'candidate_phone', true );
 $candidate_message = get_post_meta( $post->ID, 'candidate_message', true );
 $candidate_cv      = get_post_meta( $post->ID, 'candidate_cv', true );
 
-// Get the URL of the CV file
-$candidate_cv_url = $candidate_cv ? wp_get_attachment_url( $candidate_cv ) : '';
+// Authenticated download URL (ownership-checked) instead of the raw public uploads URL.
+$candidate_cv_url = $candidate_cv ? jobus_get_cv_download_url( (int) $candidate_cv, (int) $post->ID ) : '';
 
 // Function to format file size
 function jobus_job_application_format_size_units( $bytes ): string {

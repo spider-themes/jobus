@@ -19,6 +19,7 @@ class Social_Login_Config {
 	public const CONTEXT_LOGIN     = 'login';
 	public const CONTEXT_REGISTER  = 'register';
 	public const CONTEXT_SHORTCODE = 'shortcode';
+	public const CONTEXT_LINK      = 'link';
 
 	public static function frontend_selectors(): array {
 		return [
@@ -49,6 +50,7 @@ class Social_Login_Config {
 			self::CONTEXT_LOGIN,
 			self::CONTEXT_REGISTER,
 			self::CONTEXT_SHORTCODE,
+			self::CONTEXT_LINK,
 		];
 
 		return in_array( $context, $allowed, true ) ? $context : self::CONTEXT_LOGIN;

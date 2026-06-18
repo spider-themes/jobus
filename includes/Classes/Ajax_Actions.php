@@ -54,6 +54,86 @@ class Ajax_Actions {
 	}
 
 	/**
+	 * Simple IP-based rate limiter for abuse-prone public endpoints.
+	 *
+	 * A nonce printed on a public page is not an authentication control, so the
+	 * unauthenticated contact/application/registration endpoints also need a
+	 * throttle to prevent mail-bombing, spam-account creation, and content floods.
+	 *
+	 * @param string $bucket Unique key for the action being throttled.
+	 * @param int    $max    Maximum allowed attempts within the window.
+	 * @param int    $window Window length in seconds.
+	 * @return bool True when the caller has exceeded the allowed rate.
+	 */
+	private function is_rate_limited( string $bucket, int $max = 5, int $window = MINUTE_IN_SECONDS ): bool {
+		$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+		$key = 'jobus_rl_' . md5( $bucket . '|' . $ip );
+
+		/*
+		 * A plain get_transient()/set_transient() pair is a check-then-set race:
+		 * N concurrent requests all read the same count before any write lands and
+		 * all slip through, defeating the throttle under exactly the parallel-flood
+		 * abuse it exists to stop. When a persistent object cache is available use an
+		 * atomic add()+incr() counter; otherwise fall back to the best-effort transient.
+		 */
+		if ( wp_using_ext_object_cache() ) {
+			// Seed the counter (and its TTL) once, then atomically increment it.
+			wp_cache_add( $key, 0, 'jobus_rl', $window );
+			$hits = wp_cache_incr( $key, 1, 'jobus_rl' );
+			if ( false === $hits ) {
+				// Key expired between add and incr — reseed for a fresh window.
+				wp_cache_set( $key, 1, 'jobus_rl', $window );
+				$hits = 1;
+			}
+			return $hits > $max;
+		}
+
+		$hits = (int) get_transient( $key );
+		if ( $hits >= $max ) {
+			return true;
+		}
+
+		set_transient( $key, $hits + 1, $window );
+		return false;
+	}
+
+	/**
+	 * Validate an uploaded CV by its real file contents, not the client filename.
+	 *
+	 * `wp_check_filetype()` only inspects the extension and the browser-supplied MIME,
+	 * both attacker-controlled. `wp_check_filetype_and_ext()` sniffs the actual temp
+	 * file so a renamed/forged document is rejected before it is ever stored.
+	 *
+	 * @return true|\WP_Error True when the file is an allowed document type.
+	 */
+	private function validate_cv_upload() {
+		$file = $_FILES['candidate_cv'] ?? null;
+
+		if ( empty( $file['name'] ) || empty( $file['tmp_name'] ) ) {
+			return true;
+		}
+
+		if ( ! empty( $file['error'] ) || ! is_uploaded_file( $file['tmp_name'] ) ) {
+			return new \WP_Error( 'jobus_cv_upload', esc_html__( 'The CV could not be uploaded. Please try again.', 'jobus' ) );
+		}
+
+		$allowed = [
+			'pdf'  => 'application/pdf',
+			'doc'  => 'application/msword',
+			'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+		];
+
+		$file_name = sanitize_file_name( $file['name'] );
+		$check     = wp_check_filetype_and_ext( $file['tmp_name'], $file_name, $allowed );
+
+		if ( empty( $check['type'] ) || ! in_array( $check['type'], $allowed, true ) ) {
+			return new \WP_Error( 'jobus_cv_type', esc_html__( 'Invalid file type. Only PDF and Word documents are allowed.', 'jobus' ) );
+		}
+
+		return true;
+	}
+
+	/**
 	 * Send contact email.
 	 *
 	 * @return void
@@ -63,6 +143,12 @@ class Ajax_Actions {
 		// Check nonce for security
 		if ( ! check_ajax_referer( 'jobus_candidate_contact_mail_form', 'security', false ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Nonce verification failed.', 'jobus' ) ] );
+			wp_die();
+		}
+
+		// Throttle: this nopriv endpoint can otherwise be abused to mail-bomb candidates.
+		if ( $this->is_rate_limited( 'contact_email', 5, MINUTE_IN_SECONDS ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Too many requests. Please wait a moment and try again.', 'jobus' ) ] );
 			wp_die();
 		}
 
@@ -85,10 +171,19 @@ class Ajax_Actions {
 			wp_die();
 		}
 
-		// Set email subject
+		// Reject anything that is not a real email so it can never reach a mail header.
+		if ( ! is_email( $sender_email ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Please provide a valid email address.', 'jobus' ) ] );
+			wp_die();
+		}
+
+		// Set email subject. Send FROM a site-owned address (prevents using this
+		// endpoint as an open relay to spoof arbitrary "From" identities) and expose
+		// the visitor only via Reply-To after validation.
 		$subject   = ! empty( $sender_subject ) ? $sender_subject : esc_html__( 'New Message', 'jobus' );
-		$headers[] = "From: $sender_name <$sender_email>";
-		$headers[] = "Reply-To: $sender_email";
+		$from_email = sanitize_email( get_option( 'admin_email' ) );
+		$headers[] = sprintf( 'From: %s <%s>', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $from_email );
+		$headers[] = sprintf( 'Reply-To: %s <%s>', $sender_name, $sender_email );
 
 		// Send email
 		$success = \jobus\includes\Classes\Emails\Mailer::send( (string) $candidate_mail, (string) $subject, (string) $message, $headers );
@@ -115,6 +210,12 @@ class Ajax_Actions {
 			wp_die();
 		}
 
+		// Throttle to prevent unauthenticated application flooding / employer mail-bombing.
+		if ( $this->is_rate_limited( 'job_application', 10, MINUTE_IN_SECONDS ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Too many requests. Please wait a moment and try again.', 'jobus' ) ] );
+			wp_die();
+		}
+
 		// Get form data
 		$candidate_fname       = ! empty( $_POST['candidate_fname'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_fname'] ) ) : '';
 		$candidate_lname       = ! empty( $_POST['candidate_lname'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_lname'] ) ) : '';
@@ -128,6 +229,23 @@ class Ajax_Actions {
 		if ( ! is_email( $candidate_email ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Invalid email address.', 'jobus' ) ] );
 			wp_die();
+		}
+
+		// The application must target a real, published job (prevents IDOR/spam where an
+		// arbitrary post ID is used to look up and email any user-authored post's author).
+		if ( ! $job_application_id || 'jobus_job' !== get_post_type( $job_application_id ) || 'publish' !== get_post_status( $job_application_id ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid or unavailable job posting.', 'jobus' ) ] );
+			wp_die();
+		}
+
+		// Validate the uploaded CV by its real contents BEFORE creating any post, so a
+		// bad upload never leaves an orphan application or fires downstream listeners.
+		if ( ! empty( $_FILES['candidate_cv']['name'] ) ) {
+			$cv_error = $this->validate_cv_upload();
+			if ( is_wp_error( $cv_error ) ) {
+				wp_send_json_error( [ 'message' => $cv_error->get_error_message() ] );
+				wp_die();
+			}
 		}
 
 		$candidate_id = get_current_user_id();
@@ -163,12 +281,27 @@ class Ajax_Actions {
 			$application_args['post_author'] = $candidate_id;
 		}
 
-		$application_id = wp_insert_post( $application_args );
+		// wp_insert_post() returns a WP_Error on failure, which is TRUTHY — a bare
+		// `if ( $application_id )` would treat that error object as a post ID and
+		// write meta against nothing. Reject failures explicitly and loudly instead
+		// of silently producing an orphaned, half-populated application.
+		$application_id = wp_insert_post( $application_args, true );
+
+		if ( is_wp_error( $application_id ) || ! $application_id ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Your application could not be saved. Please try again.', 'jobus' ) ] );
+			wp_die();
+		}
 
 		if ( $application_id ) {
 			update_post_meta( $application_id, 'candidate_fname', $candidate_fname );
 			update_post_meta( $application_id, 'candidate_lname', $candidate_lname );
 			update_post_meta( $application_id, 'candidate_email', $candidate_email );
+
+			// Key the application to the account, not just the (mutable) email address,
+			// so dashboards can resolve ownership even after a user changes their email.
+			if ( $candidate_id ) {
+				update_post_meta( $application_id, 'candidate_user_id', $candidate_id );
+			}
 			update_post_meta( $application_id, 'candidate_phone', $candidate_phone );
 			update_post_meta( $application_id, 'candidate_message', $candidate_message );
 			update_post_meta( $application_id, 'job_applied_for_id', $job_application_id );
@@ -178,8 +311,30 @@ class Ajax_Actions {
 				update_post_meta( $application_id, 'jobus_is_guest_application', 'yes' );
 			}
 
+			// Attach the CV. It was already content-validated above; media_handle_upload
+			// re-checks against WP's allowed mime list as defence in depth.
+			if ( ! empty( $_FILES['candidate_cv']['name'] ) ) {
+				if ( ! function_exists( 'media_handle_upload' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+				}
+
+				$uploaded = media_handle_upload( 'candidate_cv', $application_id );
+
+				if ( is_wp_error( $uploaded ) ) {
+					// Cleanup partial application post
+					wp_delete_post( $application_id, true );
+					wp_send_json_error( [ 'message' => $uploaded->get_error_message() ] );
+					wp_die();
+				}
+
+				update_post_meta( $application_id, 'candidate_cv', $uploaded );
+			}
+
 			/**
-			 * Fires after a job application is successfully submitted and saved.
+			 * Fires after a job application is successfully submitted, saved, and the CV
+			 * (if any) has been validated and attached.
 			 *
 			 * @since 1.0.0
 			 * @param int    $application_id        The ID of the newly created application post.
@@ -194,41 +349,6 @@ class Ajax_Actions {
 				'job_id'            => $job_application_id,
 				'job_title'         => $job_application_title,
 			] );
-
-			if ( ! empty( $_FILES['candidate_cv']['name'] ) ) {
-				$allowed_file_types = [
-					'application/pdf',
-					'application/msword',
-					'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				];
-
-				$file_name    = sanitize_file_name( $_FILES['candidate_cv']['name'] );
-				$file_type    = wp_check_filetype( $file_name );
-				
-				if ( ! in_array( $file_type['type'], $allowed_file_types, true ) ) {
-					// Cleanup partial application post
-					wp_delete_post( $application_id, true );
-					wp_send_json_error( [ 'message' => esc_html__( 'Invalid file type. Only PDF and Word documents are allowed.', 'jobus' ) ] );
-					wp_die();
-				}
-
-				if ( ! function_exists( 'wp_handle_upload' ) ) {
-					require_once ABSPATH . 'wp-admin/includes/file.php';
-					require_once ABSPATH . 'wp-admin/includes/image.php';
-					require_once ABSPATH . 'wp-admin/includes/media.php';
-				}
-
-				$uploaded = media_handle_upload( 'candidate_cv', $application_id );
-				
-				if ( is_wp_error( $uploaded ) ) {
-					// Cleanup partial application post
-					wp_delete_post( $application_id, true );
-					wp_send_json_error( [ 'message' => $uploaded->get_error_message() ] );
-					wp_die();
-				} else {
-					update_post_meta( $application_id, 'candidate_cv', $uploaded );
-				}
-			}
 
 			// Notify Employer of the new application
 			if ( ! empty( $job_application_id ) ) {
@@ -266,36 +386,36 @@ class Ajax_Actions {
 	 */
 	public function remove_job_application() {
 		if ( ! check_ajax_referer( 'jobus_remove_application_nonce', 'nonce', false ) ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed. Please refresh the page and try again.', 'jobus' ) ] );
 		}
 
 		if ( ! is_user_logged_in() ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to remove an application.', 'jobus' ) ] );
 		}
 
 		$application_id = isset( $_POST['job_id'] ) ? absint( $_POST['job_id'] ) : 0;
 		if ( ! $application_id ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid application.', 'jobus' ) ] );
 		}
 
 		$application = get_post( $application_id );
 		if ( ! $application || 'jobus_applicant' !== $application->post_type ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'Application not found.', 'jobus' ) ] );
 		}
 
 		$user = wp_get_current_user();
 		// Security Fix: Verify ownership by post author instead of email matching to prevent IDOR.
 		// Also allow administrators to delete.
 		if ( (int) $application->post_author !== $user->ID && ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to remove this application.', 'jobus' ) ] );
 		}
 
 		$result = wp_delete_post( $application_id, true );
 		if ( ! $result ) {
-			wp_send_json_error();
+			wp_send_json_error( [ 'message' => esc_html__( 'Failed to remove the application. Please try again.', 'jobus' ) ] );
 		}
 
-		wp_send_json_success();
+		wp_send_json_success( [ 'message' => esc_html__( 'Application removed successfully.', 'jobus' ) ] );
 	}
 
 	/**
@@ -331,11 +451,25 @@ class Ajax_Actions {
 			wp_send_json_error( [ 'message' => esc_html__( 'Invalid post type or meta key.', 'jobus' ) ] );
 		}
 
+		// Ensure the target actually exists and is of the declared type before storing it,
+		// so the saved list can't be seeded with arbitrary or mismatched post IDs.
+		if ( ! $post_id || get_post_type( $post_id ) !== $post_type ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid item.', 'jobus' ) ] );
+		}
+
 		// Allow admin OR required role
 		$required_role = $role_map[ $post_type ]['role'];
 
 		if ( empty( $user ) || ( ! in_array( 'administrator', (array) $user->roles, true ) && ! in_array( $required_role, (array) $user->roles, true ) ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to save this post.', 'jobus' ) ] );
+		}
+
+		// Serialize the read-modify-write so a double-click (two near-simultaneous
+		// AJAX calls) can't both read the same list and clobber each other, leaving
+		// the saved state wrong. The lock self-expires, so a crash can't wedge it.
+		$lock_key = 'saved_toggle_' . $user_id . '_' . $meta_key;
+		if ( ! \jobus_acquire_cache_lock( $lock_key, 10 ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Please wait a moment and try again.', 'jobus' ) ] );
 		}
 
 		$saved_items = (array) get_user_meta( $user_id, $meta_key, true );
@@ -349,6 +483,7 @@ class Ajax_Actions {
 		}
 
 		update_user_meta( $user_id, $meta_key, array_values( $saved_items ) );
+		\jobus_release_cache_lock( $lock_key );
 		wp_send_json_success( [ 'status' => $action ] );
 	}
 
@@ -446,10 +581,17 @@ class Ajax_Actions {
 	public function ajax_register_candidate(): void {
 		check_ajax_referer( 'register_candidate_action', 'nonce' );
 
+		// Throttle automated mass-registration on this public endpoint.
+		if ( $this->is_rate_limited( 'register_candidate', 5, 10 * MINUTE_IN_SECONDS ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Too many registration attempts. Please try again later.', 'jobus' ) ] );
+		}
+
+		// Passwords are deliberately NOT run through sanitize_text_field, which would
+		// strip characters and silently mangle otherwise-valid passwords.
 		$candidate_username         = ! empty( $_POST['candidate_username'] ) ? sanitize_user( wp_unslash( $_POST['candidate_username'] ) ) : '';
 		$candidate_email            = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
-		$candidate_password         = ! empty( $_POST['candidate_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_pass'] ) ) : '';
-		$candidate_confirm_password = ! empty( $_POST['candidate_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_confirm_pass'] ) ) : '';
+		$candidate_password         = isset( $_POST['candidate_pass'] ) ? (string) wp_unslash( $_POST['candidate_pass'] ) : '';
+		$candidate_confirm_password = isset( $_POST['candidate_confirm_pass'] ) ? (string) wp_unslash( $_POST['candidate_confirm_pass'] ) : '';
 
 		if ( empty( $candidate_username ) || empty( $candidate_email ) || empty( $candidate_password ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Please fill in all required fields.', 'jobus' ) ] );
@@ -475,15 +617,26 @@ class Ajax_Actions {
 			wp_send_json_error( [ 'message' => $candidate_id->get_error_message() ] );
 		}
 
-		wp_set_current_user( $candidate_id );
-		wp_signon( [
+		// wp_signon() already sets the current user AND fires the `wp_login` action,
+		// so we must NOT call wp_set_current_user() before it or fire `wp_login`
+		// again afterwards — doing so double-counts in every login listener
+		// (analytics, security logs, Pro notifications). Only fall back to a manual
+		// session if signon itself fails (e.g. a security plugin blocked it).
+		$signon = wp_signon( [
 			'user_login'    => $candidate_username,
 			'user_password' => $candidate_password,
-		], false );
-		do_action( 'wp_login', $candidate_username, new \WP_User( $candidate_id ) );
+		], is_ssl() );
 
+		if ( is_wp_error( $signon ) ) {
+			wp_set_current_user( $candidate_id );
+			wp_set_auth_cookie( $candidate_id );
+			do_action( 'wp_login', $candidate_username, get_userdata( $candidate_id ) );
+		}
+
+		$dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+		// Constrain the post-login redirect to this site to avoid an open-redirect phishing vector.
+		$redirect_url           = $redirect_url_from_form ? wp_validate_redirect( $redirect_url_from_form, $dashboard_url ) : $dashboard_url;
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),
@@ -497,10 +650,16 @@ class Ajax_Actions {
 	public function ajax_register_employer(): void {
 		check_ajax_referer( 'register_employer_action', 'nonce' );
 
+		// Throttle automated mass-registration on this public endpoint.
+		if ( $this->is_rate_limited( 'register_employer', 5, 10 * MINUTE_IN_SECONDS ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Too many registration attempts. Please try again later.', 'jobus' ) ] );
+		}
+
+		// Passwords are deliberately NOT sanitized with sanitize_text_field (it mangles valid passwords).
 		$employer_username         = ! empty( $_POST['employer_username'] ) ? sanitize_user( wp_unslash( $_POST['employer_username'] ) ) : '';
 		$employer_email            = ! empty( $_POST['employer_email'] ) ? sanitize_email( wp_unslash( $_POST['employer_email'] ) ) : '';
-		$employer_password         = ! empty( $_POST['employer_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_pass'] ) ) : '';
-		$employer_confirm_password = ! empty( $_POST['employer_confirm_pass'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_confirm_pass'] ) ) : '';
+		$employer_password         = isset( $_POST['employer_pass'] ) ? (string) wp_unslash( $_POST['employer_pass'] ) : '';
+		$employer_confirm_password = isset( $_POST['employer_confirm_pass'] ) ? (string) wp_unslash( $_POST['employer_confirm_pass'] ) : '';
 
 		if ( empty( $employer_username ) || empty( $employer_email ) || empty( $employer_password ) ) {
 			wp_send_json_error( [ 'message' => esc_html__( 'Please fill in all required fields.', 'jobus' ) ] );
@@ -526,15 +685,24 @@ class Ajax_Actions {
 			wp_send_json_error( [ 'message' => $employer_id->get_error_message() ] );
 		}
 
-		wp_set_current_user( $employer_id );
-		wp_signon( [
+		// See the candidate branch: wp_signon() already establishes the session and
+		// fires `wp_login`. Avoid the redundant wp_set_current_user()/manual
+		// `wp_login` that double-fired login listeners; only fall back on failure.
+		$signon = wp_signon( [
 			'user_login'    => $employer_username,
 			'user_password' => $employer_password,
-		], false );
-		do_action( 'wp_login', $employer_username, new \WP_User( $employer_id ) );
+		], is_ssl() );
 
+		if ( is_wp_error( $signon ) ) {
+			wp_set_current_user( $employer_id );
+			wp_set_auth_cookie( $employer_id );
+			do_action( 'wp_login', $employer_username, get_userdata( $employer_id ) );
+		}
+
+		$dashboard_url          = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		// Constrain the post-login redirect to this site to avoid an open-redirect phishing vector.
+		$redirect_url           = $redirect_url_from_form ? wp_validate_redirect( $redirect_url_from_form, $dashboard_url ) : $dashboard_url;
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),

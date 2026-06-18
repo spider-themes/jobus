@@ -94,14 +94,29 @@ class Job_Application {
 	 */
 	public function save_application_status( int $post_id ): void {
 		// Verify nonce for security
-		if ( !isset( $_POST['job_application_status_nonce'] ) || 
+		if ( !isset( $_POST['job_application_status_nonce'] ) ||
 			!wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['job_application_status_nonce'] ) ), 'job_application_status_action' ) ) {
 			return;
 		}
-		
-		// Check if our custom status is set
+
+		// Authorization: only someone who can actually edit this application may change its
+		// status. The frontend AJAX path already checks employer ownership; this guards the
+		// admin save_post path, which previously trusted the nonce alone.
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		// Validate the submitted status against the canonical allow-list.
 		if ( isset( $_POST['application_status'] ) ) {
 			$status = sanitize_text_field( wp_unslash( $_POST['application_status'] ) );
+
+			if ( function_exists( 'jobus_get_application_statuses' ) ) {
+				$allowed = array_keys( jobus_get_application_statuses() );
+				if ( ! in_array( $status, $allowed, true ) ) {
+					return;
+				}
+			}
+
 			update_post_meta( $post_id, 'application_status', $status );
 		}
 	}

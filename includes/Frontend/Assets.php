@@ -23,6 +23,15 @@ class Assets {
 	}
 
 	public static function enqueue_scripts(): void {
+		// Don't ship the full Jobus bundle (icon font, slick, nice-select, framework,
+		// 4 nonces) on pages that have nothing to do with Jobus — that was loading on
+		// 100% of front-end views (home, blog, WooCommerce, etc.). The gate is
+		// conservative and filterable so it never strips assets from a page that
+		// actually renders Jobus content.
+		if ( ! self::should_load_assets() ) {
+			return;
+		}
+
 		// Register Style's
 		wp_register_style( 'lightbox', esc_url( JOBUS_VEND . '/lightbox/lightbox.min.css' ), [], JOBUS_VERSION );
 
@@ -117,8 +126,8 @@ class Assets {
 		     && ( has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) || has_shortcode( $post->post_content, 'jobus_candidate_dashboard' )
 		          || $has_unified_dashboard )
 		) {
-			// Style's for candidate dashboard
-			wp_enqueue_style( 'jobus-dashboard', esc_url( JOBUS_BUILD_CSS . '/dashboard.css' ), [], JOBUS_VERSION );
+			// Dashboard styles are now merged into main.css (scoped under .dashboard-wrapper),
+			// which is already enqueued site-wide above — no separate dashboard.css needed.
 
 			// Enqueue media uploader for frontend dashboard
 			wp_enqueue_media();
@@ -162,6 +171,51 @@ class Assets {
 				]
 			] );
 		}
+	}
+
+	/**
+	 * Decide whether the Jobus front-end bundle should load on the current view.
+	 *
+	 * Returns true for unambiguous Jobus contexts (its CPT singular/archive/taxonomy
+	 * pages) and for any page whose content embeds a Jobus shortcode, block, or
+	 * Elementor widget. The result is filterable via `jobus_load_frontend_assets`
+	 * so a site that surfaces Jobus markup in an undetectable place (a PHP template
+	 * part, a third-party builder) can force-load without patching the plugin.
+	 *
+	 * @return bool
+	 */
+	private static function should_load_assets(): bool {
+		$jobus_post_types  = [ 'jobus_job', 'jobus_candidate', 'jobus_company' ];
+		$jobus_taxonomies  = get_object_taxonomies( $jobus_post_types );
+
+		$should = is_singular( $jobus_post_types )
+			|| is_post_type_archive( $jobus_post_types )
+			|| ( ! empty( $jobus_taxonomies ) && is_tax( $jobus_taxonomies ) );
+
+		if ( ! $should ) {
+			$post = get_post();
+			if ( $post instanceof \WP_Post ) {
+				$content = (string) $post->post_content;
+				// Any Jobus shortcode ([jobus...]) or block (wp:jobus...) in content.
+				if ( false !== strpos( $content, '[jobus' ) || false !== strpos( $content, 'wp:jobus' ) ) {
+					$should = true;
+				} elseif ( defined( 'ELEMENTOR_VERSION' ) ) {
+					// Elementor stores its layout in postmeta, not post_content; a
+					// quick substring check on that data catches embedded Jobus widgets.
+					$elementor_data = get_post_meta( $post->ID, '_elementor_data', true );
+					if ( is_string( $elementor_data ) && false !== strpos( $elementor_data, 'jobus' ) ) {
+						$should = true;
+					}
+				}
+			}
+		}
+
+		/**
+		 * Filter whether to enqueue the Jobus front-end assets on this request.
+		 *
+		 * @param bool $should Whether the assets are about to load.
+		 */
+		return (bool) apply_filters( 'jobus_load_frontend_assets', $should );
 	}
 
 	/**

@@ -28,6 +28,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</option>
 	<?php
 	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
+
+		// Precompute every option's count in ONE query instead of the old per-option
+		// N+1 LIKE scan; fall back to per-option counting for any missing value.
+		$jobus_bulk_counts = [];
+		if ( function_exists( 'jobus_count_meta_key_usage_bulk' ) ) {
+			$jobus_bulk_values = [];
+			foreach ( $specifications_data as $bulk_value ) {
+				$bulk_mv = $bulk_value['meta_values'] ?? '';
+				if ( '' === trim( (string) $bulk_mv ) ) {
+					continue;
+				}
+				$jobus_bulk_values[] = strtolower( preg_replace( '/[,\s]+/', '@space@', $bulk_mv ) );
+			}
+			$jobus_bulk_counts = jobus_count_meta_key_usage_bulk( $post_type, $meta_opt_parent_key, $jobus_bulk_values );
+		}
+
 		foreach ( $specifications_data as $key => $value ) {
 
 			$meta_value       = $value['meta_values'] ?? '';
@@ -35,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$modifiedVal      = strtolower( $modifiedSelect );
             // Format correctly for browser URLs seamlessly decoded from internal logic
             $beautiful_val    = str_replace( '@space@', ' ', $modifiedVal );
-			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $modifiedVal );
+			$meta_value_count = $jobus_bulk_counts[ $modifiedVal ] ?? jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $modifiedVal );
 
 			if ( $meta_value_count > 0 ) {
 				$is_selected = in_array( $modifiedVal, $searched_val, true ) || in_array( $beautiful_val, $searched_val, true );

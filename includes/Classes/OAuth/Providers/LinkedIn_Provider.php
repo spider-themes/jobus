@@ -100,11 +100,13 @@ class LinkedIn_Provider extends Abstract_Provider {
 		}
 
 		return [
-			'uid'        => sanitize_text_field( $data['sub'] ?? '' ),
-			'email'      => sanitize_email( $data['email'] ),
-			'first_name' => sanitize_text_field( $data['given_name'] ?? '' ),
-			'last_name'  => sanitize_text_field( $data['family_name'] ?? '' ),
-			'avatar_url' => esc_url_raw( $data['picture'] ?? '' ),
+			'uid'            => sanitize_text_field( $data['sub'] ?? '' ),
+			'email'          => sanitize_email( $data['email'] ),
+			// LinkedIn OpenID Connect returns `email_verified` (boolean or "true"/"false").
+			'email_verified' => filter_var( $data['email_verified'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+			'first_name'     => sanitize_text_field( $data['given_name'] ?? '' ),
+			'last_name'      => sanitize_text_field( $data['family_name'] ?? '' ),
+			'avatar_url'     => esc_url_raw( $data['picture'] ?? '' ),
 		];
 	}
 }

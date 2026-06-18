@@ -51,6 +51,7 @@ function jobus_uninstall_plugin(): void {
 
 	// 6. Clear scheduled hooks.
 	wp_clear_scheduled_hook( 'jobus_daily_job_expiry_check' );
+	wp_clear_scheduled_hook( 'jobus_job_expiry_drain' );
 }
 
 jobus_uninstall_plugin();

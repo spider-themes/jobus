@@ -12,6 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_employer' ) ) {
+    return;
+}
+
 // Ensure media library is available for frontend uploader
 if ( function_exists( 'wp_enqueue_media' ) ) {
     wp_enqueue_media();
@@ -47,17 +53,25 @@ $show_testimonials = jobus_opt( 'employer_testimonials', true );
 $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
 
 
-// Handle form submission for taxonomies [categories, locations, tags]
+// Handle form submission for taxonomies [categories, locations, tags].
 if ( isset( $_POST['company_profile_form_submit'] ) ) {
 
-    if ( isset( $_POST['company_categories'] ) ) {
-        $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_categories'] ) ) ) );
-        wp_set_object_terms( $company_id, $cat_ids, 'jobus_company_cat' );
-    }
+    $company_profile_nonce = isset( $_POST['company_profile_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['company_profile_nonce'] ) ) : '';
 
-    if ( isset( $_POST['company_locations'] ) ) {
-        $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_locations'] ) ) ) );
-        wp_set_object_terms( $company_id, $location_ids, 'jobus_company_location' );
+    // CSRF + auth guard. $company_id is resolved server-side from the logged-in user
+    // (get_company_id), so writes are scoped to the user's own company. An invalid nonce
+    // skips the term update rather than killing the page.
+    if ( is_user_logged_in() && $company_id && $company_profile_nonce && wp_verify_nonce( $company_profile_nonce, 'company_profile_update' ) ) {
+
+        if ( isset( $_POST['company_categories'] ) ) {
+            $cat_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_categories'] ) ) ) );
+            wp_set_object_terms( $company_id, $cat_ids, 'jobus_company_cat' );
+        }
+
+        if ( isset( $_POST['company_locations'] ) ) {
+            $location_ids = array_filter( array_map( 'intval', explode( ',', sanitize_text_field( $_POST['company_locations'] ) ) ) );
+            wp_set_object_terms( $company_id, $location_ids, 'jobus_company_location' );
+        }
     }
 }
 ?>
@@ -216,7 +230,7 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                             echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                             echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="jbs-nice-select" multiple>';
                             foreach ( $meta_values as $option ) {
-                                $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ) );
+                                $val      = strtolower( preg_replace( '/[\s,]+/', '@space@', $option['meta_values'] ?? '' ) );
                                 $selected = ( is_array( $meta_value ) && in_array( $val, $meta_value ) ) ? 'selected' : '';
                                 echo '<option value="' . esc_attr( $val ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $option['meta_values'] )
                                      . '</option>';
@@ -577,4 +591,6 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
         </div>
 
     </form>
+
+    <?php \jobus\includes\Classes\OAuth\Social_Auth::render_account_connections(); ?>
 </div>

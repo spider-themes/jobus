@@ -165,8 +165,12 @@ class Job_Form_Submission {
 		if ( isset( $_POST['job_company_logo_id'] ) ) {
 			$logo_id = absint( $_POST['job_company_logo_id'] );
 			if ( $logo_id > 0 ) {
-				// Set as featured image
-				set_post_thumbnail( $job_id, $logo_id );
+				// Only accept a logo attachment the job's author owns (IDOR guard);
+				// ignore a forged ID rather than attaching someone else's media.
+				$logo_owner = (int) get_post_field( 'post_author', $job_id );
+				if ( \jobus_user_owns_attachment( $logo_id, $logo_owner ) ) {
+					set_post_thumbnail( $job_id, $logo_id );
+				}
 			} else {
 				// Remove featured image if logo ID is empty
 				delete_post_thumbnail( $job_id );
@@ -346,7 +350,16 @@ class Job_Form_Submission {
 
 			if ( $enable_job_expiry ) {
 				$expiry_days = ! empty( $jobus_opt['job_expiry_days'] ) ? (int) $jobus_opt['job_expiry_days'] : 30;
-				update_post_meta( $job_id, '_jobus_expiration_date', current_time( 'Y-m-d H:i:s', strtotime( '+' . $expiry_days . ' days', current_time( 'timestamp' ) ) ) );
+				/*
+				 * current_time()'s second argument is the $gmt flag, NOT a timestamp.
+				 * Passing a timestamp there silently discards the "+N days" offset and
+				 * stores "now". Build the future timestamp first, then format it with
+				 * gmdate(): current_time('timestamp') is already site-local-shifted, so
+				 * gmdate() formats it without re-applying the offset, matching the basis
+				 * used by the expiry cron's current_time('Y-m-d H:i:s') comparison.
+				 */
+				$expiry_timestamp = strtotime( '+' . $expiry_days . ' days', current_time( 'timestamp' ) );
+				update_post_meta( $job_id, '_jobus_expiration_date', gmdate( 'Y-m-d H:i:s', $expiry_timestamp ) );
 			}
 
 		}

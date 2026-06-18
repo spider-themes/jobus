@@ -28,6 +28,13 @@ function jobus_dashboard_upload_mimes( $mimes ) {
 	$user_roles = (array) $user->roles;
 	
 	if ( in_array( 'jobus_candidate', $user_roles, true ) || in_array( 'jobus_employer', $user_roles, true ) ) {
+		/*
+		 * SVG is intentionally NOT allowed. SVG is an active document (it can carry
+		 * <script>, on* handlers, javascript: URIs, <foreignObject>, etc.) and a job
+		 * board has no need for user-uploaded vector images. Allowing it for
+		 * unprivileged candidate/employer roles is a stored-XSS vector that fires in
+		 * the browser of any admin reviewing the profile. Raster + documents only.
+		 */
 		return [
 			'jpg|jpeg|jpe' => 'image/jpeg',
 			'gif'          => 'image/gif',
@@ -36,7 +43,6 @@ function jobus_dashboard_upload_mimes( $mimes ) {
 			'pdf'          => 'application/pdf',
 			'doc'          => 'application/msword',
 			'docx'         => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			'svg|svgz'     => 'image/svg+xml', // Will be sanitized below
 		];
 	}
 	return $mimes;
@@ -44,20 +50,103 @@ function jobus_dashboard_upload_mimes( $mimes ) {
 add_filter( 'upload_mimes', 'jobus_dashboard_upload_mimes' );
 
 /**
- * Sanitize uploaded SVG files before saving
+ * Sanitize uploaded SVG files before saving.
+ *
+ * Defense in depth: Jobus does not allow SVG for its own roles (see
+ * jobus_dashboard_upload_mimes()), but a theme or another plugin may enable SVG
+ * uploads site-wide. If an SVG does reach the upload pipeline, neutralise the
+ * active-content vectors with an allowlist DOM pass instead of a naive regex,
+ * which cannot reliably catch event handlers, javascript: URIs or entities.
+ *
+ * @param array $file Upload data from wp_handle_upload_prefilter.
+ * @return array
  */
 function jobus_sanitize_svg( $file ) {
-	if ( isset( $file['type'] ) && $file['type'] === 'image/svg+xml' ) {
-		if ( file_exists( $file['tmp_name'] ) && is_readable( $file['tmp_name'] ) ) {
-			$dirty_svg = file_get_contents( $file['tmp_name'] );
-			// Very simple sanitizer (strip script tags)
-			$clean_svg = preg_replace( '/<script.*?<\/script>/is', '', $dirty_svg );
-			file_put_contents( $file['tmp_name'], $clean_svg );
-		}
+	if ( empty( $file['type'] ) || 'image/svg+xml' !== $file['type'] ) {
+		return $file;
 	}
+
+	if ( empty( $file['tmp_name'] ) || ! is_readable( $file['tmp_name'] ) || ! class_exists( 'DOMDocument' ) ) {
+		// Cannot safely inspect it — reject rather than store an unscanned SVG.
+		$file['error'] = esc_html__( 'SVG files could not be processed and were rejected for security reasons.', 'jobus' );
+		return $file;
+	}
+
+	$dirty = file_get_contents( $file['tmp_name'] );
+	if ( false === $dirty || '' === trim( (string) $dirty ) ) {
+		$file['error'] = esc_html__( 'The uploaded SVG file is empty or unreadable.', 'jobus' );
+		return $file;
+	}
+
+	$clean = jobus_clean_svg_markup( (string) $dirty );
+	if ( null === $clean ) {
+		$file['error'] = esc_html__( 'The uploaded SVG file is malformed and was rejected.', 'jobus' );
+		return $file;
+	}
+
+	file_put_contents( $file['tmp_name'], $clean );
 	return $file;
 }
 add_filter( 'wp_handle_upload_prefilter', 'jobus_sanitize_svg' );
+
+/**
+ * Strip active content from SVG markup using a DOM allowlist.
+ *
+ * Removes script/foreignObject elements, all on* event-handler attributes, and
+ * any href/xlink:href whose scheme is not safe (blocks javascript: and data:).
+ * Also disables external entity loading to prevent XXE.
+ *
+ * @param string $svg Raw SVG markup.
+ * @return string|null Sanitised markup, or null if it cannot be parsed.
+ */
+function jobus_clean_svg_markup( string $svg ) {
+	// Drop DOCTYPE/ENTITY declarations outright (XXE / entity-expansion vectors).
+	$svg = preg_replace( '/<!DOCTYPE.*?>/is', '', $svg );
+	$svg = preg_replace( '/<!ENTITY.*?>/is', '', $svg );
+
+	$dom                      = new DOMDocument();
+	$dom->preserveWhiteSpace  = false;
+	$previous                 = libxml_use_internal_errors( true );
+	$loaded                   = $dom->loadXML( $svg, LIBXML_NONET | LIBXML_NOENT | LIBXML_NOERROR | LIBXML_NOWARNING );
+	libxml_clear_errors();
+	libxml_use_internal_errors( $previous );
+
+	if ( ! $loaded ) {
+		return null;
+	}
+
+	$blocked_elements = [ 'script', 'foreignObject', 'iframe', 'embed', 'object', 'audio', 'video', 'animate', 'animatetransform', 'animatemotion', 'set', 'handler', 'use' ];
+
+	$xpath = new DOMXPath( $dom );
+	// Remove disallowed elements.
+	foreach ( $xpath->query( '//*' ) as $node ) {
+		if ( in_array( strtolower( $node->nodeName ), $blocked_elements, true ) ) {
+			$node->parentNode->removeChild( $node );
+			continue;
+		}
+		if ( ! $node->hasAttributes() ) {
+			continue;
+		}
+		// Iterate over a static list because we mutate the attribute set.
+		$attributes = [];
+		foreach ( $node->attributes as $attr ) {
+			$attributes[] = $attr;
+		}
+		foreach ( $attributes as $attr ) {
+			$name  = strtolower( $attr->nodeName );
+			$value = preg_replace( '/\s+/', '', strtolower( $attr->nodeValue ) );
+			// Strip event handlers and unsafe URI schemes.
+			if ( 0 === strpos( $name, 'on' )
+				|| ( in_array( $name, [ 'href', 'xlink:href', 'src' ], true )
+					&& ( 0 === strpos( $value, 'javascript:' ) || 0 === strpos( $value, 'data:' ) ) ) ) {
+				$node->removeAttribute( $attr->nodeName );
+			}
+		}
+	}
+
+	$output = $dom->saveXML( $dom->documentElement );
+	return ( false === $output ) ? null : $output;
+}
 
 
 /**
@@ -310,3 +399,61 @@ function jobus_delete_user_on_post_delete( $post_id ) {
 // Hook into BOTH trash and permanent delete actions
 add_action( 'wp_trash_post', 'jobus_delete_user_on_post_delete' );       // When post is trashed
 add_action( 'before_delete_post', 'jobus_delete_user_on_post_delete' );  // When post is permanently deleted
+
+/**
+ * Remove a permanently deleted job/candidate from every user's saved list.
+ *
+ * Saved jobs (candidates' `jobus_saved_jobs`) and saved candidates (employers'
+ * `jobus_saved_candidates`) are stored as serialized ID arrays in user meta, so
+ * nothing cleans them up automatically and deleted posts would otherwise inflate
+ * saved counts and pagination forever.
+ *
+ * Runs on permanent delete only — a trashed post can be restored, so its saved
+ * entries are kept (front-end queries already filter out non-publish posts).
+ */
+function jobus_cleanup_saved_lists_on_post_delete( $post_id ) {
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return;
+	}
+
+	$meta_keys_by_post_type = array(
+		'jobus_job'       => 'jobus_saved_jobs',
+		'jobus_candidate' => 'jobus_saved_candidates',
+	);
+
+	if ( ! isset( $meta_keys_by_post_type[ $post->post_type ] ) ) {
+		return;
+	}
+
+	global $wpdb;
+	$meta_key = $meta_keys_by_post_type[ $post->post_type ];
+	$post_id  = (int) $post_id;
+
+	// LIKE on the serialized integer narrows the scan to users that plausibly saved
+	// this post (it can false-positive on array keys, which the re-filter below
+	// handles); the authoritative removal happens through the meta API per user.
+	$user_ids = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value LIKE %s",
+			$meta_key,
+			'%' . $wpdb->esc_like( 'i:' . $post_id . ';' ) . '%'
+		)
+	);
+
+	foreach ( $user_ids as $user_id ) {
+		$saved = get_user_meta( $user_id, $meta_key, true );
+		if ( ! is_array( $saved ) ) {
+			continue;
+		}
+
+		$filtered = array_values( array_filter( array_map( 'intval', $saved ), static function ( $saved_id ) use ( $post_id ) {
+			return $saved_id !== $post_id;
+		} ) );
+
+		if ( count( $filtered ) !== count( $saved ) ) {
+			update_user_meta( $user_id, $meta_key, $filtered );
+		}
+	}
+}
+add_action( 'before_delete_post', 'jobus_cleanup_saved_lists_on_post_delete' );

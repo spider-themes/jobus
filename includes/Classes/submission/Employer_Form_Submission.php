@@ -157,11 +157,14 @@ class Employer_Form_Submission {
 			wp_cache_delete( $company_id, 'posts' );
 		} elseif ( ! empty( $post_data['company_profile_picture'] ) ) {
 			$image_id = absint( $post_data['company_profile_picture'] );
-			update_user_meta( $user_id, 'company_profile_picture', $image_id );
-			set_post_thumbnail( $company_id, $image_id );
-			$this->sync_user_avatar( $user_id, $image_id );
-			clean_post_cache( $company_id );
-			wp_cache_delete( $company_id, 'posts' );
+			// Only accept attachments the employer owns (IDOR guard); ignore forged IDs.
+			if ( \jobus_user_owns_attachment( $image_id, (int) $user_id ) ) {
+				update_user_meta( $user_id, 'company_profile_picture', $image_id );
+				set_post_thumbnail( $company_id, $image_id );
+				$this->sync_user_avatar( $user_id, $image_id );
+				clean_post_cache( $company_id );
+				wp_cache_delete( $company_id, 'posts' );
+			}
 		}
 
 		return true;
@@ -409,8 +412,12 @@ class Employer_Form_Submission {
 		if ( $bg_img_action === 'delete' ) {
 			delete_post_meta( $company_id, 'company_video_bg_img' );
 		} else if ( ! empty( $post_data['company_video_bg_img'] ) ) {
-			// Always update image ID if present
-			update_post_meta( $company_id, 'company_video_bg_img', absint( $post_data['company_video_bg_img'] ) );
+			// Update the image ID only if the employer owns the attachment (IDOR guard).
+			$bg_id    = absint( $post_data['company_video_bg_img'] );
+			$owner_id = (int) get_post_field( 'post_author', $company_id );
+			if ( \jobus_user_owns_attachment( $bg_id, $owner_id ) ) {
+				update_post_meta( $company_id, 'company_video_bg_img', $bg_id );
+			}
 		}
 	}
 

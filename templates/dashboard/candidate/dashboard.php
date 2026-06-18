@@ -8,6 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_candidate' ) ) {
+	return;
+}
+
 // Check if the logged-in user has the 'jobus_candidate' role
 $user = wp_get_current_user();
 
@@ -33,6 +39,7 @@ if ( $candidate_id ) {
 		'post_type'      => 'jobus_applicant',
 		'post_status'    => 'publish',
 		'posts_per_page' => - 1,
+		'fields'         => 'ids',
 		'meta_query'     => [
 			[
 				'key'     => 'candidate_email',
@@ -41,6 +48,12 @@ if ( $candidate_id ) {
 			]
 		]
 	] );
+
+	// One round-trip for every applicant's meta instead of a get_post_meta() query
+	// per row in the stat-card and recent-jobs loops below.
+	if ( ! empty( $applicants ) ) {
+		update_postmeta_cache( $applicants );
+	}
 }
 
 // Get view counts with default fallback
@@ -66,6 +79,47 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 ?>
 <div class="jbs-position-relative">
     <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
+
+    <?php
+    // Guided checklist: turns the empty first session into a journey. Hidden once
+    // the profile is complete, so established users keep a clean dashboard.
+    $completeness = jobus_get_candidate_completeness( (int) $user->ID, (int) $candidate_id, ! empty( $applicants ) );
+    if ( $completeness['percent'] < 100 ) :
+        ?>
+        <div class="jbs-completeness-card jbs-bg-white jbs-border-20 jbs-mb-30">
+            <div class="jbs-completeness-head jbs-d-flex jbs-align-items-center jbs-justify-content-between">
+                <h4 class="jbs-m-0"><?php esc_html_e( 'Complete your profile to get hired faster', 'jobus' ); ?></h4>
+                <span class="jbs-completeness-percent">
+                    <?php
+                    /* translators: %d: profile completeness percentage. */
+                    printf( esc_html__( '%d%% complete', 'jobus' ), (int) $completeness['percent'] );
+                    ?>
+                </span>
+            </div>
+            <div class="jbs-completeness-bar" role="progressbar"
+                 aria-valuenow="<?php echo esc_attr( $completeness['percent'] ); ?>" aria-valuemin="0" aria-valuemax="100">
+                <span style="width: <?php echo esc_attr( $completeness['percent'] ); ?>%"></span>
+            </div>
+            <ul class="jbs-completeness-steps">
+                <?php foreach ( $completeness['steps'] as $step ) :
+                    $step_url = ! empty( $step['endpoint'] )
+                        ? trailingslashit( $dashboard_url ) . $step['endpoint'] . '/'
+                        : get_post_type_archive_link( 'jobus_job' );
+                    ?>
+                    <li class="<?php echo ! empty( $step['done'] ) ? 'is-done' : ''; ?>">
+                        <?php if ( ! empty( $step['done'] ) ) : ?>
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                            <span><?php echo esc_html( $step['label'] ); ?></span>
+                        <?php else : ?>
+                            <i class="bi bi-circle" aria-hidden="true"></i>
+                            <a href="<?php echo esc_url( $step_url ); ?>"><?php echo esc_html( $step['label'] ); ?></a>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
     <div class="jbs-row">
         <?php if ( $show_total_visitor ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
@@ -99,8 +153,8 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 							<?php
 							// Count shortlisted applications directly in the markup
 							$shortlisted_count = 0;
-							foreach ( $applicants as $applicant ) {
-								$status = get_post_meta( $applicant->ID, 'application_status', true );
+							foreach ( $applicants as $applicant_id ) {
+								$status = get_post_meta( $applicant_id, 'application_status', true );
 								if ( $status === 'approved' ) {
 									$shortlisted_count ++;
 								}
@@ -200,8 +254,8 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
                     <?php
                     if ( ! empty( $applicants ) ) {
                         $recent_applicants = array_slice( $applicants, 0, $widget_items_count );
-                        foreach ( $recent_applicants as $applicant ) {
-                            $job_id       = get_post_meta( $applicant->ID, 'job_applied_for_id', true );
+                        foreach ( $recent_applicants as $applicant_id ) {
+                            $job_id       = get_post_meta( $applicant_id, 'job_applied_for_id', true );
                             $job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
                             $job_location = get_the_terms( $job_id, 'jobus_job_location' );
                             ?>

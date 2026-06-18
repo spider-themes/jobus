@@ -3,6 +3,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_candidate' ) ) {
+	return;
+}
+
 // Get the current user
 $user = wp_get_current_user();
 
@@ -38,7 +44,7 @@ if ( ! $is_dashboard ) {
 	}
 	// Finally check the URL path for /page/N/ pattern
 	else {
-		$request_uri = $_SERVER['REQUEST_URI'];
+		$request_uri = $_SERVER['REQUEST_URI'] ?? '';
 		if ( preg_match( '#/page/(\d+)/?#', $request_uri, $matches ) ) {
 			$current_page = intval( $matches[1] );
 		}

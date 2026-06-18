@@ -1,7 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
 /**
  * Template for the candidate profile page.
  *
@@ -11,6 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
+}
+
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_candidate' ) ) {
+    return;
 }
 
 // Called the helper functions
@@ -236,7 +239,7 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
                             echo '<label for="' . esc_attr($meta_key) . '">' . esc_html($meta_name) . '</label>';
                             echo '<select name="' . esc_attr($meta_key) . '[]" id="' . esc_attr($meta_key) . '" class="jbs-nice-select" multiple>';
                             foreach ($meta_values as $option) {
-                                $val = strtolower(preg_replace('/[\s,]+/', '@space@', $option['meta_values']));
+                                $val = strtolower(preg_replace('/[\s,]+/', '@space@', $option['meta_values'] ?? ''));
                                 $selected = (is_array($meta_value) && in_array($val, $meta_value)) ? 'selected' : '';
                                 echo '<option value="' . esc_attr($val) . '" ' . esc_attr($selected) . '>' . esc_html($option['meta_values']) . '</option>';
                             }
@@ -317,5 +320,7 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
             <button type="submit" class="dash-btn-two tran3s jbs-me-3 jbs-rounded-3"><?php echo esc_html( $save_changes_label ); ?></button>
         </div>
     </form>
+
+    <?php \jobus\includes\Classes\OAuth\Social_Auth::render_account_connections(); ?>
 
 </div>

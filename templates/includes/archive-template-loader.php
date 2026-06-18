@@ -283,11 +283,20 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
 	 * – Lets MySQL do the join/filter in one optimised execution plan.
 	 * – Is consistent with how LinkedIn, Indeed, and all major job boards work.
 	 */
+	/*
+	 * Bound the candidate set pulled into PHP. Range-slider filters require PHP-side
+	 * arithmetic, so the matching IDs must be pre-fetched and intersected here — but an
+	 * unbounded `-1` would load the entire matching posts table into memory on large
+	 * sites. This filterable cap keeps memory predictable; raise it via the filter if a
+	 * site legitimately needs a larger working set.
+	 */
+	$max_filter_results = (int) apply_filters( 'jobus_max_filter_results', 5000, $post_type );
+
 	$combined_args = array(
 		'post_type'              => $post_type,
 		'post_status'            => 'publish',
 		'fields'                 => 'ids',
-		'posts_per_page'         => -1, // We only fetch IDs; pagination is done on final query.
+		'posts_per_page'         => $max_filter_results, // Bounded; final query handles display pagination.
 		'no_found_rows'          => true,
 		'update_post_meta_cache' => false,
 		'update_post_term_cache' => false,

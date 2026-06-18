@@ -63,8 +63,14 @@ class Social_Login_Page {
 		$fields = [
 			'enable_social_login_' . $provider => isset( $_POST['enable_social_login_' . $provider] ),
 			$provider . '_client_id'           => sanitize_text_field( $_POST[ $provider . '_client_id' ] ?? '' ),
-			$provider . '_client_secret'       => sanitize_text_field( $_POST[ $provider . '_client_secret' ] ?? '' ),
 		];
+
+		// The secret field is never pre-filled in the UI, so a blank submission means
+		// "leave unchanged" — only overwrite the stored secret when a new value is sent.
+		$submitted_secret = sanitize_text_field( $_POST[ $provider . '_client_secret' ] ?? '' );
+		if ( '' !== $submitted_secret ) {
+			$fields[ $provider . '_client_secret' ] = $submitted_secret;
+		}
 
 		$options = array_merge( $options, $fields );
 		update_option( Social_Login_Config::OPTION_KEY, $options );
@@ -201,7 +207,8 @@ class Social_Login_Page {
 		$id            = $provider->get_id();
 		$is_enabled    = ! empty( $options[ 'enable_social_login_' . $id ] );
 		$client_id     = esc_attr( $options[ $id . '_client_id' ] ?? '' );
-		$client_secret = esc_attr( $options[ $id . '_client_secret' ] ?? '' );
+		// Never reflect the stored secret back into the DOM; only signal whether one is set.
+		$has_secret    = ! empty( $options[ $id . '_client_secret' ] );
 		$callback_url  = Social_Login_Config::get_callback_url( $id );
 		$field_labels  = 'facebook' === $id
 			? [
@@ -241,8 +248,14 @@ class Social_Login_Page {
 
 				<div class="<?php echo esc_attr( $selectors['root'] ); ?>__field">
 					<label for="<?php echo esc_attr( $id ); ?>_client_secret"><?php echo esc_html( $field_labels['secret'] ); ?></label>
-					<input type="password" id="<?php echo esc_attr( $id ); ?>_client_secret" name="<?php echo esc_attr( $id ); ?>_client_secret" value="<?php echo $client_secret; ?>" autocomplete="new-password">
-					<p><?php esc_html_e( 'Secrets stay in the plugin options and are never rendered on the frontend.', 'jobus' ); ?></p>
+					<input type="password" id="<?php echo esc_attr( $id ); ?>_client_secret" name="<?php echo esc_attr( $id ); ?>_client_secret" value="" autocomplete="new-password" placeholder="<?php echo $has_secret ? esc_attr__( '•••••••• (saved — leave blank to keep)', 'jobus' ) : ''; ?>">
+					<p>
+						<?php
+						echo $has_secret
+							? esc_html__( 'A secret is saved. Leave this field blank to keep it, or enter a new value to replace it.', 'jobus' )
+							: esc_html__( 'Secrets stay in the plugin options and are never rendered on the frontend.', 'jobus' );
+						?>
+					</p>
 				</div>
 
 				<div class="<?php echo esc_attr( $selectors['root'] ); ?>__toggle">

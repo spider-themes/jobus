@@ -6,8 +6,8 @@
  * Author URI: https://spider-themes.com/
  * Version: 1.10.0
  * Requires at least: 6.0
- * Tested up to: 6.9.4
- * Requires PHP: 7.4
+ * Tested up to: 6.9
+ * Requires PHP: 8.0
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: jobus
@@ -168,6 +168,8 @@ final class Jobus {
 		add_action( 'plugins_loaded', [ $this, 'loaded_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
 		add_action( 'admin_init', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
+		add_action( 'admin_init', [ \jobus\includes\Classes\Lifecycle::class, 'maybe_upgrade' ] );
+		add_action( 'wp_initialize_site', [ \jobus\includes\Classes\Lifecycle::class, 'on_new_site' ], 20 );
 		add_action( 'after_switch_theme', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
 		add_action( 'init', [ $this, 'init_plugin' ], 9999 );
 	}
@@ -233,6 +235,7 @@ final class Jobus {
 			if ( wp_next_scheduled( 'jobus_daily_job_expiry_check' ) ) {
 				wp_clear_scheduled_hook( 'jobus_daily_job_expiry_check' );
 			}
+			wp_clear_scheduled_hook( 'jobus_job_expiry_drain' );
 		}
 
 		// Radius / Geolocation engine

@@ -21,6 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 <ul class="jbs-style-none jbs-filter-input jbs-ml-0 jbs-pl-0">
 	<?php
 	if ( isset( $specifications_data ) && is_array( $specifications_data ) ) {
+
+		// Precompute every option's count in ONE query instead of one leading-wildcard
+		// scan per option (the old N+1). Falls back to per-option counting for any
+		// value missing from the map.
+		$jobus_bulk_counts = [];
+		if ( function_exists( 'jobus_count_meta_key_usage_bulk' ) ) {
+			$jobus_bulk_values = [];
+			foreach ( $specifications_data as $bulk_value ) {
+				$bulk_mv = $bulk_value['meta_values'] ?? '';
+				if ( '' === trim( (string) $bulk_mv ) ) {
+					continue;
+				}
+				$jobus_bulk_values[] = strtolower( preg_replace( '/[,\s]+/', '@space@', $bulk_mv ) );
+			}
+			$jobus_bulk_counts = jobus_count_meta_key_usage_bulk( $post_type, $meta_opt_parent_key, $jobus_bulk_values );
+		}
+
 		foreach ( $specifications_data as $value ) {
 
 			$meta_key   = $meta['meta_key'] ?? '';
@@ -37,8 +54,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			// Format correctly for browser URLs seamlessly decoded from internal logic
 			$beautiful_val  = str_replace( '@space@', ' ', $opt_val );
 
-			// Get the count for the current meta value
-			$meta_value_count = jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val );
+			// Get the count for the current meta value (bulk map, with safe fallback).
+			$meta_value_count = $jobus_bulk_counts[ $opt_val ] ?? jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val );
 			if ( $meta_value_count > 0 ) {
 				$searched_opt = jobus_search_terms( $widget_name );
 				$check_status = in_array( $opt_val, $searched_opt );

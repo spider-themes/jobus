@@ -13,6 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Defence in depth: the dashboard router gates by role before including this
+// template, but bail here too in case it is loaded through another path.
+if ( ! jobus_user_can_view_dashboard( 'jobus_employer' ) ) {
+	return;
+}
+
 $user = wp_get_current_user();
 $user_id = $user->ID;
 
@@ -88,6 +94,27 @@ $saved_candidates = get_user_meta( $user_id, 'jobus_saved_candidates', true );
 $saved_candidates = is_array( $saved_candidates ) ? $saved_candidates : ( $saved_candidates ? [ $saved_candidates ] : [] );
 $saved_candidates_count = count( $saved_candidates );
 
+// Applications received since the employer last opened the My Jobs list (the
+// list view stamps `jobus_applicants_last_seen`). No marker yet = first visit,
+// so don't flag the whole backlog as new.
+$new_applications     = 0;
+$applicants_last_seen = get_user_meta( $user_id, 'jobus_applicants_last_seen', true );
+if ( ! empty( $jobs ) && $applicants_last_seen ) {
+	// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Prepared placeholders are used.
+	$new_applications = (int) $wpdb->get_var( $wpdb->prepare(
+		"SELECT COUNT(*)
+		 FROM {$wpdb->postmeta} pm
+		 INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+		 WHERE pm.meta_key = 'job_applied_for_id'
+		   AND p.post_type = 'jobus_applicant'
+		   AND p.post_status = 'publish'
+		   AND p.post_date > %s
+		   AND pm.meta_value IN ($job_ids_placeholder)",
+		array_merge( [ $applicants_last_seen ], $jobs )
+	) );
+	// phpcs:enable
+}
+
 // Helper function to render dashboard stat cards
 if ( ! function_exists( 'jobus_render_stat_card' ) ) {
 	function jobus_render_stat_card( $icon, $value, $label, $singular = null, $link = '' ) {
@@ -120,6 +147,24 @@ if ( ! function_exists( 'jobus_render_stat_card' ) ) {
 ?>
 <div class="jbs-position-relative">
     <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
+
+    <?php if ( $new_applications > 0 ) : ?>
+        <a href="<?php echo esc_url( trailingslashit( \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' ) ) . 'jobs/' ); ?>"
+           class="jbs-new-activity-banner jbs-d-flex jbs-align-items-center jbs-gap-2 jbs-mb-30">
+            <i class="bi bi-person-plus-fill" aria-hidden="true"></i>
+            <span>
+                <?php
+                printf(
+                    /* translators: %d: applications received since the employer's last visit. */
+                    esc_html( _n( 'You have %d new applicant since your last visit.', 'You have %d new applicants since your last visit.', $new_applications, 'jobus' ) ),
+                    (int) $new_applications
+                );
+                ?>
+            </span>
+            <i class="bi bi-arrow-right jbs-ms-auto" aria-hidden="true"></i>
+        </a>
+    <?php endif; ?>
+
     <div class="jbs-row">
         <?php
         // Get dashboard base URL

@@ -1,0 +1,198 @@
+/*----------------------------------------------------
+Dashboard UX improvements:
+- Card-style layout for dashboard tables on small screens
+- Candidate profile completeness checklist
+- Employer "new applicants" banner & badges
+- Candidate "seen by employer" indicator
+- Job status filter tabs
+----------------------------------------------------*/
+
+/* ---- Mobile: dashboard tables collapse into stacked cards ---- */
+@media (max-width: 767.98px) {
+  .dashboard-body .jbs-table-responsive {
+    overflow-x: visible;
+  }
+
+  .dashboard-body table.job-alert-table {
+    border: 0;
+
+    thead {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    tr {
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border_on_white, #e6edf0);
+      border-radius: 14px;
+      background: var(--bs-white, #fff);
+      box-shadow: var(--bs_sm);
+    }
+
+    td {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      border: 0;
+      text-align: right;
+
+      &::before {
+        content: attr(data-label);
+        flex-shrink: 0;
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--black_500, #6a737c);
+        text-align: left;
+      }
+
+      &:not([data-label])::before,
+      &[data-label='']::before {
+        content: none;
+      }
+    }
+
+    td:last-child {
+      border-top: 1px solid var(--black_50, #f2f2f2);
+      margin-top: 6px;
+      padding-top: 12px;
+    }
+  }
+}
+
+/* ---- Candidate: profile completeness checklist ---- */
+.jbs-completeness-card {
+  padding: 25px 30px;
+
+  .jbs-completeness-head {
+    gap: 12px;
+    flex-wrap: wrap;
+
+    h4 {
+      font-size: 18px;
+      color: var(--jbs-heading_color);
+    }
+  }
+
+  .jbs-completeness-percent {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--jbs-brand_color_1);
+    white-space: nowrap;
+  }
+
+  .jbs-completeness-bar {
+    height: 8px;
+    margin: 14px 0 18px;
+    border-radius: 99px;
+    background: var(--black_50, #f2f2f2);
+    overflow: hidden;
+
+    span {
+      display: block;
+      height: 100%;
+      border-radius: 99px;
+      background: var(--jbs-brand_color_4, #00bf58);
+      transition: width 0.4s ease;
+    }
+  }
+
+  .jbs-completeness-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+
+      i {
+        color: var(--black_300, #9fa6ad);
+      }
+
+      a {
+        color: var(--jbs-heading_color);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &:hover {
+          color: var(--jbs-brand_color_1);
+        }
+      }
+
+      &.is-done {
+        i {
+          color: var(--jbs-brand_color_4, #00bf58);
+        }
+
+        span {
+          color: var(--black_400, #848d95);
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
+
+/* ---- Employer: new applicants banner & badge ---- */
+.jbs-new-activity-banner {
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--jbs-box_bg_color, #eff6f3);
+  border: 1px solid var(--border_on_white, #e6edf0);
+  color: var(--jbs-heading_color);
+  font-weight: 500;
+  text-decoration: none;
+
+  > i:first-child {
+    color: var(--jbs-brand_color_1);
+    font-size: 18px;
+  }
+
+  &:hover {
+    border-color: var(--jbs-brand_color_1);
+    color: var(--jbs-brand_color_1);
+  }
+}
+
+.jbs-new-applicants {
+  margin-left: 6px;
+  font-size: 11px;
+  vertical-align: middle;
+}
+
+/* ---- Candidate: "seen by employer" indicator ---- */
+.jbs-app-seen {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--black_400, #848d95);
+  white-space: nowrap;
+
+  i {
+    font-size: 13px;
+  }
+}
+
+/* ---- Employer: job status filter tabs ---- */
+.jobus-status-filter {
+  .jbs-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+}
