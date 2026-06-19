@@ -273,6 +273,12 @@ Contributions are welcome! Please follow these steps:
 
 ## 📄 Changelog
 
+### 1.10.1 (June 19, 2026)
+
+- **Enhanced:** Improved filter performance with optimized meta key usage count caching.
+- **Enhanced:** Reduced database queries in filter calculations for better archive page performance.
+- **Fixed:** Resolved filter issues.
+
 ### 1.10.0 (June 1, 2026)
 
 - **New:** Application Details page added to Employer Dashboard with comprehensive candidate information and application status
