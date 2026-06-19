@@ -146,14 +146,13 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 == Changelog ==
 
 = 1.10.0 (June 1, 2026) =
-New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
-Enhanced: Improved avatar display and styling for Candidates and Companies
-Enhanced: Added AJAX loader for job submission in Employer Dashboard
-Enhanced: Improved Saved Candidates page with AJAX search, smart empty state, and better layout
-Enhanced: Improved candidate management experience in Saved Candidates section
-Fixed: Fixed job status handling (Draft, Pending, Publish) based on admin settings
-Fixed: Ensured proper submission behavior according to monetization and job approval rules
-
+* New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
+* Enhanced: Improved avatar display and styling for Candidates and Companies
+* Enhanced: Added AJAX loader for job submission in Employer Dashboard
+* Enhanced: Improved Saved Candidates page with AJAX search, smart empty state, and better layout
+* Enhanced: Improved candidate management experience in Saved Candidates section
+* Fixed: Fixed job status handling (Draft, Pending, Publish) based on admin settings
+* Fixed: Ensured proper submission behavior according to monetization and job approval rules
 
 = 1.9.0 (24 April 2026) =
 * New: Easy login and signup using Google, Facebook, and LinkedIn  
