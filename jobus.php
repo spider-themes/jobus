@@ -299,12 +299,98 @@ final class Jobus {
 		// Remote Notice Integration
 		require_once JOBUS_PATH . '/includes/remote-notices/class-remote-notice-client.php';
 
+		/**
+		 * NoticePilot — remote admin-notice campaigns (SDK v1.6.1).
+		 *
+		 * Product id ..... 'Jobus' (used for every SDK call below — keep consistent).
+		 * Hub endpoint ... manage.spider-themes.net → /content/jobus
+		 *
+		 * loaded_plugin() runs on plugins_loaded, so init() is called directly and
+		 * the admin_init hooks below register before admin_init fires.
+		 * jobus_is_premium() reports whether the Pro plan is active.
+		 */
 		if ( class_exists( 'Noticepilot_Remote_Notice_Client' ) ) {
 			Noticepilot_Remote_Notice_Client::init( 'Jobus', [
-				'api_url'        => 'https://manage.spider-themes.net/wp-json/noticepilot/v1/content/jobus',
-				'plugin_version' => JOBUS_VERSION,
-				'is_pro'         => jobus_is_premium(),
+				'api_url'          => 'https://manage.spider-themes.net/wp-json/noticepilot/v1/content/jobus',
+
+				// How often to pull campaigns, and who may see them.
+				'schedule'         => 'daily',            // hourly | twicedaily | daily
+				'capability'       => 'manage_options',
+
+				// Audience targeting: campaigns can target by version rule + free/Pro.
+				'plugin_version'   => JOBUS_VERSION,
+				'is_pro'           => jobus_is_premium(),
+
+				// Frequency / dismissal behaviour (keeps notices tasteful — wp.org guideline 11).
+				'max_notices'      => 2,                  // never stack more than 2 at once
+				'dismiss_duration' => WEEK_IN_SECONDS,    // a dismissal sticks for a week
+				'snooze_duration'  => WEEK_IN_SECONDS,    // "Remind me later" cooldown
+
+				// Analytics consent (wp.org guideline 7): keep beacons OFF until the
+				// user opts in. We reuse Jobus' existing Freemius tracking opt-in as
+				// the consent signal (synced below), so there is no second prompt.
+				'require_consent'  => true,
+
+				// Deactivation feedback is intentionally left OFF: Freemius already
+				// shows its own deactivation survey, so enabling the SDK prompt too
+				// would give the user a duplicate modal on deactivate.
+				// 'deactivation_feedback' => true,
+				// 'plugin_file'           => 'jobus/jobus.php',
 			]);
+
+			/**
+			 * Keep NoticePilot analytics consent in sync with the user's Freemius
+			 * tracking choice. With require_consent => true, no beacon fires until
+			 * this grants consent.
+			 */
+			add_action( 'admin_init', function() {
+				if ( ! function_exists( 'jobus_fs' ) ) {
+					return;
+				}
+				if ( method_exists( jobus_fs(), 'is_tracking_allowed' ) && jobus_fs()->is_tracking_allowed() ) {
+					Noticepilot_Remote_Notice_Client::grant_consent( 'Jobus' );
+				} else {
+					Noticepilot_Remote_Notice_Client::revoke_consent( 'Jobus' );
+				}
+			} );
+
+			/**
+			 * Conversion goal: report the Pro upgrade once, attributed to the
+			 * campaign/variant that most recently drove it — real conversion rate,
+			 * not just clicks.
+			 */
+			add_action( 'admin_init', function() {
+				if ( ! function_exists( 'jobus_is_premium' ) ) {
+					return;
+				}
+				if ( jobus_is_premium() && ! get_option( 'jobus_np_goal_upgraded' ) ) {
+					// Mark recorded only when the beacon actually fired (consent
+					// granted + a campaign was seen), so a later opt-in still counts.
+					if ( Noticepilot_Remote_Notice_Client::track_goal( 'Jobus', 'upgraded_to_pro' ) ) {
+						update_option( 'jobus_np_goal_upgraded', 1, false );
+					}
+				}
+			} );
+
+			/**
+			 * Smart-trigger metric: report the live number of published job listings
+			 * (the jobus_job CPT). NoticePilot only stores the number — WE do the
+			 * counting. On the hub you can then trigger a campaign at a milestone
+			 * (e.g. nudge for Pro once "jobs_created" >= 5).
+			 *
+			 * Fires wherever a job is saved (admin or front-end submission).
+			 * Reporting the current total is idempotent, so re-saves re-report it.
+			 */
+			add_action( 'save_post_jobus_job', function( $post_id, $post ) {
+				if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+					return;
+				}
+				if ( 'publish' !== $post->post_status ) {
+					return;
+				}
+				$count = (int) wp_count_posts( 'jobus_job' )->publish;
+				Noticepilot_Remote_Notice_Client::set_metric( 'Jobus', 'jobs_created', $count );
+			}, 10, 2 );
 		}
 	}
 
