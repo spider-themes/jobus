@@ -344,7 +344,9 @@ final class Jobus {
 			 * this grants consent.
 			 */
 			add_action( 'admin_init', function() {
-				if ( ! function_exists( 'jobus_fs' ) ) {
+				// A sibling plugin may have loaded an older copy of the shared SDK
+				// class first; guard the newer method so we never fatal.
+				if ( ! function_exists( 'jobus_fs' ) || ! method_exists( 'Noticepilot_Remote_Notice_Client', 'grant_consent' ) ) {
 					return;
 				}
 				if ( method_exists( jobus_fs(), 'is_tracking_allowed' ) && jobus_fs()->is_tracking_allowed() ) {
@@ -360,7 +362,7 @@ final class Jobus {
 			 * not just clicks.
 			 */
 			add_action( 'admin_init', function() {
-				if ( ! function_exists( 'jobus_is_premium' ) ) {
+				if ( ! function_exists( 'jobus_is_premium' ) || ! method_exists( 'Noticepilot_Remote_Notice_Client', 'track_goal' ) ) {
 					return;
 				}
 				if ( jobus_is_premium() && ! get_option( 'jobus_np_goal_upgraded' ) ) {
@@ -382,6 +384,9 @@ final class Jobus {
 			 * Reporting the current total is idempotent, so re-saves re-report it.
 			 */
 			add_action( 'save_post_jobus_job', function( $post_id, $post ) {
+				if ( ! method_exists( 'Noticepilot_Remote_Notice_Client', 'set_metric' ) ) {
+					return;
+				}
 				if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
 					return;
 				}
