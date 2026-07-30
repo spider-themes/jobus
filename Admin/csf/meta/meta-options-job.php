@@ -41,6 +41,20 @@ if ( class_exists( 'CSF' ) ) {
 			'class'    => trim( $pro_access_class . $active_theme_class ),
 		),
 
+		array(
+			'id'       => 'job_single_sec_pad',
+			'type'     => 'spacing',
+			'title'    => esc_html__( 'Page Section Padding', 'jobus' ),
+			'subtitle' => esc_html__( 'Top/bottom padding for this Job\'s details page. Leave empty to use the global default.', 'jobus' ),
+			'top'      => true,
+			'bottom'   => true,
+			'left'     => false,
+			'right'    => false,
+			'output'   => '.jbs-job-details',
+			'output_mode' => 'padding',
+			'output_important' => true,
+		),
+
 		// Company Information
 		array(
 			'type'    => 'subheading',

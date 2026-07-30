@@ -296,5 +296,18 @@ CSF::createSection($settings_prefix, array(
 			'default' => '1',
 			'class' => trim($pro_access_class . $active_theme_class)
 		),
+
+		array(
+			'id' => 'candidate_single_sec_pad',
+			'type' => 'spacing',
+			'title' => esc_html__('Page Section Padding', 'jobus'),
+			'subtitle' => esc_html__('Sitewide default top/bottom padding for the Candidate details page. Can be overridden per post.', 'jobus'),
+			'top' => true,
+			'bottom' => true,
+			'left' => false,
+			'right' => false,
+			'output' => array('.jbs-candidates-profile', '.candidates-profile-2'),
+			'output_mode' => 'padding',
+		),
 	)
 ));

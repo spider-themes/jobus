@@ -263,6 +263,25 @@ CSF::createSection($settings_prefix, array(
 	'id' => 'company_details_layout',
 	'fields' => array(
 
+		// Single Post Layout
+		array(
+			'type' => 'subheading',
+			'content' => esc_html__('Single Post Layout', 'jobus'),
+		),
+
+		array(
+			'id' => 'company_single_sec_pad',
+			'type' => 'spacing',
+			'title' => esc_html__('Page Section Padding', 'jobus'),
+			'subtitle' => esc_html__('Sitewide default top/bottom padding for the Company details page. Can be overridden per post.', 'jobus'),
+			'top' => true,
+			'bottom' => true,
+			'left' => false,
+			'right' => false,
+			'output' => '.company-details',
+			'output_mode' => 'padding',
+		),
+
 		// Social Share Options
 		array(
 			'type' => 'subheading',

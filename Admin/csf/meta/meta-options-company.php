@@ -22,6 +22,26 @@ if ( class_exists( 'CSF' ) ) {
 		'icon'   => 'fas fa-home',
 		'fields' => array(
 
+			// Single Post Layout
+			array(
+				'type'    => 'subheading',
+				'content' => esc_html__( 'Single Post Layout', 'jobus' ),
+			),
+
+			array(
+				'id'       => 'company_single_sec_pad',
+				'type'     => 'spacing',
+				'title'    => esc_html__( 'Page Section Padding', 'jobus' ),
+				'subtitle' => esc_html__( 'Top/bottom padding for this Company\'s details page. Leave empty to use the global default.', 'jobus' ),
+				'top'      => true,
+				'bottom'   => true,
+				'left'     => false,
+				'right'    => false,
+				'output'   => '.company-details',
+				'output_mode' => 'padding',
+				'output_important' => true,
+			),
+
 			array(
 				'id'      => 'post_favorite',
 				'type'    => 'checkbox',

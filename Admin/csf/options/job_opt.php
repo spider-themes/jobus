@@ -305,6 +305,18 @@ CSF::createSection($settings_prefix, array(
 			'default' => '1',
 			'class' => trim($pro_access_class . $active_theme_class)
 		),
+		array(
+			'id' => 'job_single_sec_pad',
+			'type' => 'spacing',
+			'title' => esc_html__('Page Section Padding', 'jobus'),
+			'subtitle' => esc_html__('Sitewide default top/bottom padding for the Job details page. Can be overridden per post.', 'jobus'),
+			'top' => true,
+			'bottom' => true,
+			'left' => false,
+			'right' => false,
+			'output' => '.jbs-job-details',
+			'output_mode' => 'padding',
+		),
 
 		// Job Details Display Options
 		array(
@@ -339,14 +351,6 @@ CSF::createSection($settings_prefix, array(
 			'label' => esc_html__('Display the Edit Job button at the top of the content area.', 'jobus'),
 			'default' => false,
 			'class' => trim($pro_access_class)
-		),
-		array(
-			'id' => 'job_single_page_padding',
-			'type' => 'spacing',
-			'title' => esc_html__('Page Padding', 'jobus'),
-			'subtitle' => esc_html__('Control the top, right, bottom and left padding of the single job page.', 'jobus'),
-			'output' => '.jbs-job-details',
-			'output_mode' => 'padding',
 		),
 
 		// Job Application Settings
