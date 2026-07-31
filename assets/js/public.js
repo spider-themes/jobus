@@ -129,7 +129,7 @@
         //============== Candidate Portfolio Slider ================//
         function candidatePortfolio() {
 
-            let portfolioSlider = $('.candidate-portfolio-slider');
+            let portfolioSlider = $('.candidate-portfolio-slider, .jbs-candidate-portfolio-slider');
             let dataRtlprofile = portfolioSlider.data("rtl");
             if (portfolioSlider.length) {
                 portfolioSlider.slick({

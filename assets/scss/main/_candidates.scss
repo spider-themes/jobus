@@ -408,7 +408,8 @@
   }
 }
 
-.email-form-message {
+.email-form-message,
+.jbs-email-form-message {
   &.success {
     background-color: #d4edda;
     color: #155724;
@@ -435,7 +436,7 @@ img {
   max-width: 100%;
 }
 
-.candidates-profile-2 {
+.jbs-candidates-profile-2 {
   background: var(--jbs_box_bg_color_opt);
 }
 
@@ -590,20 +591,20 @@ img {
 }
 
 // Candidates Profile Details
-.candidates-profile-details-2 {
+.jbs-candidates-profile-details-2 {
   position: relative;
 
-  .inner-card {
+  .jbs-inner-card {
     background: #fff;
     border-radius: 10px;
     padding: 25px 35px 20px;
 
-    &.border-style {
+    &.jbs-border-style {
       border: none;
       border-radius: 15px;
       padding: 35px 35px 20px;
 
-      .title,
+      .jbs-title,
       >.wp-block-heading {
         background: transparent;
         position: unset;
@@ -618,19 +619,19 @@ img {
     }
   }
 
-  .title {
+  .jbs-title {
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 22px;
   }
 
-  .video-post {
+  .jbs-video-post {
     // background: url(../images/candidates/img_10.jpg) no-repeat center;
     background-size: cover;
     height: 430px;
     border-radius: 15px;
 
-    .video-icon {
+    .jbs-video-icon {
       width: 65px;
       height: 65px;
       background: var(--jbs-brand_color_3);
@@ -646,7 +647,7 @@ img {
     }
   }
 
-  .time-line-data .info {
+  .jbs-time-line-data .jbs-info {
     padding: 0 0 45px 65px;
 
     &:before {
@@ -667,7 +668,7 @@ img {
       }
     }
 
-    .numb {
+    .jbs-numb {
       width: 45px;
       height: 45px;
       color: var(--jbs-brand_color_1);
@@ -677,7 +678,7 @@ img {
       top: 3px;
     }
 
-    .text_1 {
+    .jbs-text_1 {
       font-size: 14px;
       color: var(--jbs-brand_color_1);
     }
@@ -688,7 +689,7 @@ img {
     }
   }
 
-  .skill-tags {
+  .jbs-skill-tags {
     margin: 0 -8px;
 
     li {
@@ -712,8 +713,8 @@ img {
     }
   }
 
-  .candidate-portfolio-slider {
-    .item {
+  .jbs-candidate-portfolio-slider {
+    .jbs-item {
       a {
         img {
           height: auto;
@@ -744,14 +745,14 @@ img {
   }
 }
 
-.candidate-profile-2-sidebar {
-  .bg-wrapper {
+.jbs-candidate-profile-2-sidebar {
+  .jbs-bg-wrapper {
     background: #fff;
     border-radius: 15px;
     padding: 0 20px 25px;
   }
 
-  .candidate-bio {
+  .jbs-candidate-bio {
     .candidate-avatar {
       width: 80px;
       height: 80px;
@@ -803,18 +804,18 @@ img {
     }
   }
 
-  .sidebar-title {
+  .jbs-sidebar-title {
     font-size: 20px;
     margin: 0 0 15px;
   }
 
-  .map-area {
+  .jbs-map-area {
     height: 235px;
     border-radius: 10px;
     overflow: hidden;
   }
 
-  .email-form {
+  .jbs-email-form {
     p {
       font-size: 14px;
       line-height: 22px;

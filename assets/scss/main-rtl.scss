@@ -70,16 +70,16 @@
   padding-right: 0;
 }
 
-.candidate-profile-2-sidebar .email-form input {
+.jbs-candidate-profile-2-sidebar .jbs-email-form input {
   text-align: right;
 }
 
-.candidates-profile-details-2 {
-  .skill-tags {
+.jbs-candidates-profile-details-2 {
+  .jbs-skill-tags {
     padding-right: 0;
   }
 
-  .time-line-data .info {
+  .jbs-time-line-data .jbs-info {
     padding: 0 65px 45px 0;
 
     &:before {
@@ -87,7 +87,7 @@
       right: 22px;
     }
 
-    .numb {
+    .jbs-numb {
       right: 0;
       left: initial;
     }

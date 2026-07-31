@@ -306,7 +306,7 @@ CSF::createSection($settings_prefix, array(
 			'bottom' => true,
 			'left' => false,
 			'right' => false,
-			'output' => array('.jbs-candidates-profile', '.candidates-profile-2'),
+			'output' => array('.jbs-candidates-profile', '.jbs-candidates-profile-2'),
 			'output_mode' => 'padding',
 		),
 	)

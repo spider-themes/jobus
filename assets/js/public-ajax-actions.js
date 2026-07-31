@@ -177,14 +177,14 @@
          */
         emailFormToCandidate: function () {
 
-            $('#candidate-email-from').on('submit', function (event) {
+            $('#candidate-email-from, #jbs-candidate-email-from').on('submit', function (event) {
                 event.preventDefault(); // Prevent default form submission
 
                 let formData = $(this).serialize(); // Serialize form data
-                let candidateId = $('#candidate-id').val(); // Get candidate ID
+                let candidateId = $(this).find('#candidate-id, #jbs-candidate-id').val(); // Get candidate ID
 
                 // Add class to the message container on submit button click
-                let messageContainer = $('#email-form-message');
+                let messageContainer = $(this).find('#email-form-message, #jbs-email-form-message');
 
                 $.ajax({
                     url: jobus_public_obj.ajax_url, // WordPress AJAX URL
@@ -197,7 +197,7 @@
                             // For success responses, data is a string
                             let successMessage = typeof response.data === 'string' ? response.data : 'Message sent successfully!';
                             messageContainer.addClass('success').text(successMessage);
-                            $('#candidate-email-from')[0].reset(); // Clear the form fields
+                            event.target.reset(); // Clear the form fields
 
                             // Remove the message after 10 seconds
                             setTimeout(function () {
