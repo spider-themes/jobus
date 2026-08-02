@@ -53,7 +53,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
 <div class="jbs-position-relative">
 
     <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
-        <h2 class="main-title jbs-m-0"> <?php esc_html_e( 'My Jobs', 'jobus' ); ?> </h2>
+        <h2 class="jbs-main-title jbs-m-0"> <?php esc_html_e( 'My Jobs', 'jobus' ); ?> </h2>
         <a href="<?php echo esc_url( $edit_job_url ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0">
             <i class="bi bi-plus-lg"></i> <?php echo esc_html( $post_job_label ); ?>
         </a>
@@ -62,9 +62,9 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
     <?php
     if ( ! empty( $jobs ) ) {
         ?>
-        <div class="jbs-bg-white card-box border-20">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20">
             <div class="jbs-table-responsive">
-                <table class="jbs-table job-alert-table">
+                <table class="jbs-table jbs-job-alert-table">
                     <thead>
                         <tr>
                             <th scope="col"><?php esc_html_e( 'Title', 'jobus' ); ?></th>
@@ -103,14 +103,14 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                                         <?php echo esc_html( get_the_title( $job_id ) ); ?>
                                     </a>
                                 </div>
-                                <div class="info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
+                                <div class="jbs-info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
                             <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
-                            <td><div class="job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
+                            <td><div class="jbs-job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
-                                <div class="action-dots jbs-dropdown">
-                                    <button class="action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
+                                <div class="jbs-action-dots jbs-dropdown">
+                                    <button class="jbs-action-btn jbs-dropdown-toggle" type="button" data-jbs-toggle="jbs-dropdown" aria-expanded="false">
                                         <span></span>
                                     </button>
                                     <ul class="jbs-dropdown-menu jbs-dropdown-menu-end">
@@ -125,7 +125,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="jbs-dropdown-item jobus-delete-job" 
+                                            <a href="#" class="jbs-dropdown-item jbs-delete-job" 
                                                data-job-id="<?php echo esc_attr( $job_id ); ?>"
                                                data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_delete_job_nonce' ) ); ?>">
                                                 <?php esc_html_e( 'Delete', 'jobus' ); ?>
@@ -146,7 +146,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
             $original_paged = get_query_var( 'paged' );
             set_query_var( 'paged', $current_page );
 
-            echo '<div class="pagination-wrap">';
+            echo '<div class="jbs-pagination-wrap">';
             jobus_pagination( $query );
             echo '</div>';
 
@@ -154,8 +154,8 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
         }
     } else {
         ?>
-        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
-            <div class="no-jobs-found">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-text-center jbs-p-5">
+            <div class="jbs-no-jobs-found">
                 <i class="bi bi-briefcase-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php echo esc_html( $empty_title ); ?></h4>
                 <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>
@@ -216,7 +216,7 @@ jQuery(document).ready(function($) {
     let current$Row = null;
 
     // Handle delete job button click
-    $(document).on('click', '.jobus-delete-job', function(e) {
+    $(document).on('click', '.jbs-delete-job', function(e) {
         e.preventDefault();
         
         current$Btn = $(this);
@@ -235,7 +235,7 @@ jQuery(document).ready(function($) {
         
         // Disable button and show loading state
         $confirmBtn.prop('disabled', true)
-                   .html('<span class="spinner-border spinner-border-sm jbs-me-2" role="status" aria-hidden="true"></span><?php echo esc_js( __( 'Deleting...', 'jobus' ) ); ?>');
+                   .html('<span class="jbs-spinner-border jbs-spinner-border-sm jbs-me-2" role="status" aria-hidden="true"></span><?php echo esc_js( __( 'Deleting...', 'jobus' ) ); ?>');
         
         // Send AJAX request
         $.ajax({

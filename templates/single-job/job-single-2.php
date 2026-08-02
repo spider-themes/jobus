@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 ?>
 
-<section class="jbs-job-details jbs-job-details-two style-two jbs-pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
+<section class="jbs-job-details jbs-job-details-two jbs-style-two jbs-pt-100 jbs-lg-pt-80 jbs-pb-130 jbs-lg-pb-80">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-xl-10 jbs-m-auto">
-                <div class="details-post-data jbs-ps-xxl-4 jbs-pe-xxl-4">
+                <div class="jbs-details-post-data jbs-ps-xxl-4 jbs-pe-xxl-4">
                     <?php include( JOBUS_PATH . '/templates/single-job/job-head.php' ); ?>
 
                     <?php
@@ -19,7 +19,7 @@ $meta = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
                     if ( is_array( $specifications ) ) {
                         ?>
                         <div
-                                class="job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between jbs-style-none">
+                                class="jbs-job-meta-data-two jbs-d-flex jbs-flex-wrap jbs-justify-content-center jbs-justify-content-lg-between jbs-style-none">
                             <?php
                             foreach ( $specifications as $field ) {
 

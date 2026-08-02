@@ -174,12 +174,12 @@ class Dashboard_Candidate {
 
 		ob_start();
 
-		echo '<div class="dashboard-wrapper">';
-		echo '<aside class="dashboard-navbar">';
+		echo '<div class="jbs-dashboard-wrapper">';
+		echo '<aside class="jbs-dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo $this->load_sidebar_menu($active, $nav_items);
 		echo '</aside>';
-		echo '<main class="dashboard-body">';
+		echo '<main class="jbs-dashboard-body">';
 
 		switch ( $active ) {
 			case 'profile':
@@ -322,7 +322,7 @@ class Dashboard_Candidate {
 			ob_start();
 		?>
 			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
-				<div class="pro-image-wrap">
+				<div class="jbs-pro-image-wrap">
 					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
 					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
 				</div>

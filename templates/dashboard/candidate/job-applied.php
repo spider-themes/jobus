@@ -62,21 +62,21 @@ $applications = new \WP_Query( $args );
 
 <div class="jbs-position-relative">
     <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
-        <h2 class="main-title jbs-m-0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
+        <h2 class="jbs-main-title jbs-m-0"><?php esc_html_e( 'Job Applied', 'jobus' ); ?></h2>
     </div>
     <?php
     if ( $applications->have_posts() ) :
         ?>
-        <div class="jbs-bg-white card-box border-20">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20">
             <div class="jbs-table-responsive">
-                <table class="jbs-table job-alert-table applied-jobs">
+                <table class="jbs-table jbs-job-alert-table jbs-applied-jobs">
                     <thead>
                         <tr>
-                            <th scope="col" class="company-name"><?php esc_html_e( 'Company', 'jobus' ); ?></th>
+                            <th scope="col" class="jbs-company-name"><?php esc_html_e( 'Company', 'jobus' ); ?></th>
                             <th scope="col" class="job-title"><?php esc_html_e( 'Job Title', 'jobus' ); ?></th>
-                            <th scope="col" class="job-date"><?php esc_html_e( 'Applied On', 'jobus' ); ?></th>
-                            <th scope="col" class="job-status"><?php esc_html_e( 'Status', 'jobus' ); ?></th>
-                            <th scope="col" class="job-actions"><?php esc_html_e( 'Actions', 'jobus' ); ?></th>
+                            <th scope="col" class="jbs-job-date"><?php esc_html_e( 'Applied On', 'jobus' ); ?></th>
+                            <th scope="col" class="jbs-job-status"><?php esc_html_e( 'Status', 'jobus' ); ?></th>
+                            <th scope="col" class="jbs-job-actions"><?php esc_html_e( 'Actions', 'jobus' ); ?></th>
                         </tr>
                     </thead>
                     <tbody class="jbs-border-0">
@@ -91,7 +91,7 @@ $applications = new \WP_Query( $args );
                             $status_class = 'jbs-bg-' . ( $status === 'approved' ? 'success' : ( $status === 'rejected' ? 'danger' : 'warning' ) );
                             ?>
                             <tr>
-                                <td class="company-name">
+                                <td class="jbs-company-name">
                                     <?php
                                     $job_meta   = get_post_meta( $job_id, 'jobus_meta_options', true );
                                     $company_id = ! empty( $job_meta['select_company'] ) ? $job_meta['select_company'] : '';
@@ -117,7 +117,7 @@ $applications = new \WP_Query( $args );
                                         <?php
                                     } else {
                                         ?>
-                                        <div class="company-placeholder">
+                                        <div class="jbs-company-placeholder">
                                             <span><?php esc_html_e( ' N/A', 'jobus' ); ?></span>
                                         </div>
                                         <?php
@@ -129,18 +129,18 @@ $applications = new \WP_Query( $args );
                                         <?php echo esc_html($job_title); ?>
                                     </a>
                                 </td>
-                                <td class="job-date">
+                                <td class="jbs-job-date">
                                     <?php echo esc_html( get_the_date( get_option( 'date_format' ) ) ); ?>
                                 </td>
-                                <td class="job-status">
+                                <td class="jbs-job-status">
                                     <span class="jbs-badge <?php echo esc_attr( $status_class ); ?>">
                                         <?php echo esc_html( ucfirst( $status )); ?>
                                     </span>
                                 </td>
-                                <td class="job-actions">
-                                    <div class="action-button">
+                                <td class="jbs-job-actions">
+                                    <div class="jbs-action-button">
                                         <a href="javascript:void(0)"
-                                           class="save-btn jbs-text-center jbs-rounded-circle tran3s remove-application"
+                                           class="jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s remove-application"
                                            data-job_id="<?php echo esc_attr(get_the_ID()); ?>"
                                            data-nonce="<?php echo esc_attr(wp_create_nonce('jobus_remove_application_nonce')); ?>"
                                            title="<?php esc_attr_e('Remove Application', 'jobus'); ?>">
@@ -149,7 +149,7 @@ $applications = new \WP_Query( $args );
                                         <?php if ( $job_link && $job_link !== '#' ) : ?>
                                             <a href="<?php echo esc_url( $job_link ); ?>"
                                                target="_blank"
-                                               class="save-btn jbs-text-center jbs-rounded-circle tran3s"
+                                               class="jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s"
                                                title="<?php esc_attr_e( 'View Job Details', 'jobus' ); ?>">
                                                 <i class="bi bi-eye-fill"></i>
                                             </a>
@@ -171,7 +171,7 @@ $applications = new \WP_Query( $args );
 			$original_paged = get_query_var( 'paged' );
 			set_query_var( 'paged', $current_page );
 
-			echo '<div class="pagination-wrap">';
+			echo '<div class="jbs-pagination-wrap">';
 			jobus_pagination(
 				$applications,
 				'<i class="bi bi-chevron-left"></i>',
@@ -188,7 +188,7 @@ $applications = new \WP_Query( $args );
         <?php
     else :
         ?>
-        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-text-center jbs-p-5">
             <div class="no-applications-found">
                 <i class="bi bi-clipboard-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php echo esc_html( $empty_title ); ?></h4>

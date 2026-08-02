@@ -162,7 +162,7 @@ if ( ! function_exists( 'jobus_get_company_verification_badge' ) ) {
         }
         $meta = get_post_meta( $company_id, 'jobus_meta_company_options', true );
         if ( ! empty( $meta['company_verified'] ) ) {
-            return '<span class="company-verification-badge jbs-ms-1" title="' . esc_attr__( 'Verified Company', 'jobus' ) . '"><i class="bi bi-patch-check-fill"></i></span>';
+            return '<span class="jbs-company-verification-badge jbs-ms-1" title="' . esc_attr__( 'Verified Company', 'jobus' ) . '"><i class="bi bi-patch-check-fill"></i></span>';
         }
         return '';
     }
@@ -952,7 +952,7 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
             /* translators: 1: start range, 2: end range, 3: total number of posts */
                     __( 'Showing %1$s-%2$s of %3$s results', 'jobus' ),
                     '<span class="jbs-text-dark jbs-fw-500">' . $start_range . '</span>',
-                    '<span class="jbs-text-dark fw-500">' . $end_range . '</span>',
+                    '<span class="jbs-text-dark jbs-fw-500">' . $end_range . '</span>',
                     '<span class="jbs-text-dark jbs-fw-500">' . $total_posts . '</span>'
             );
 

@@ -290,21 +290,21 @@ class Dashboard_Helper {
 			$max_skills   = 2;
 			$avatar_img   = get_the_post_thumbnail( $candidate_id, 'full', [ 'class' => 'lazy-img rounded-circle' ] );
 			?>
-			<div class="candidate-profile-card list-layout jbs-border-0 jbs-mb-25<?php echo empty( $avatar_img ) ? ' no-avatar' : ''; ?>">
+			<div class="jbs-candidate-profile-card jbs-list-layout jbs-border-0 jbs-mb-25<?php echo empty( $avatar_img ) ? ' jbs-no-avatar' : ''; ?>">
 				<div class="jbs-d-flex">
 					<?php if ( ! empty( $avatar_img ) ) { ?>
-					<div class="candidate-avatar online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
-						<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="rounded-circle">
+					<div class="jbs-candidate-avatar jbs-online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
+						<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="jbs-rounded-circle">
 							<?php echo $avatar_img; ?>
 						</a>
 					</div>
 					<?php } ?>
-					<div class="right-side">
-						<div class="jbs-row gx-1 jbs-align-items-center">
+					<div class="jbs-right-side">
+						<div class="jbs-row jbs-gx-1 jbs-align-items-center">
 							<div class="jbs-col-lg-4">
 								<div class="jbs-position-relative">
-									<h4 class="candidate-name jbs-mb-0">
-										<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="tran3s">
+									<h4 class="jbs-candidate-name jbs-mb-0">
+										<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="jbs-tran3s">
 											<?php echo esc_html( get_the_title( $candidate_id ) ); ?>
 										</a>
 									</h4>
@@ -312,15 +312,15 @@ class Dashboard_Helper {
 									if ( $skills && count( $skills ) > $max_skills ) {
 										shuffle( $skills );
 										$displayed_skills = array_slice( $skills, 0, $max_skills );
-										echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
+										echo '<ul class="jbs-candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
 										foreach ( $displayed_skills as $skill ) {
 											echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link( $skill ) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 										}
 										$remaining_count = count( $skills ) - $max_skills;
-										echo '<li class="more">' . esc_html( $remaining_count ) . '+</li>';
+										echo '<li class="jbs-more">' . esc_html( $remaining_count ) . '+</li>';
 										echo '</ul>';
 									} elseif ( ! empty( $skills ) ) {
-										echo '<ul class="candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
+										echo '<ul class="jbs-candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
 										foreach ( $skills as $skill ) {
 											echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link( $skill ) ) . '">' . esc_html( $skill->name ) . '</a></li>';
 										}
@@ -331,7 +331,7 @@ class Dashboard_Helper {
 							</div>
 							<?php if ( ! empty( $category ) && count( $category ) > 0 ) { ?>
 								<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
-									<div class="candidate-info salary-info">
+									<div class="jbs-candidate-info jbs-salary-info">
 										<span><?php esc_html_e( 'Category', 'jobus' ); ?></span>
 										<a href="<?php echo esc_url( get_term_link( $category[0]->term_id ) ); ?>">
 											<?php echo esc_html( $category[0]->name ); ?>
@@ -341,7 +341,7 @@ class Dashboard_Helper {
 							<?php } ?>
 							<?php if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
 								<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
-									<div class="candidate-info location-info">
+									<div class="jbs-candidate-info location-info">
 										<span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
 										<a href="<?php echo esc_url( get_term_link( $location[0]->term_id ) ); ?>">
 											<?php echo esc_html( $location[0]->name ); ?>
@@ -350,9 +350,9 @@ class Dashboard_Helper {
 								</div>
 							<?php } ?>
 							<div class="jbs-col-lg-2 jbs-xs-mt-10">
-								<div class="action-button">
+								<div class="jbs-action-button">
 									<a href="javascript:void(0)"
-									   class="save-btn jbs-text-center jbs-rounded-circle tran3s jobus-dashboard-remove-saved-post"
+									   class="jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s jbs-dashboard-remove-saved-post"
 									   data-post_id="<?php echo esc_attr( $candidate_id ); ?>"
 									   data-post_type="jobus_candidate"
 									   data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_employer_saved_candidate' ) ); ?>"
@@ -361,7 +361,7 @@ class Dashboard_Helper {
 									</a>
 									<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>"
 									   target="_blank"
-									   class="jobus-dashboard-post-view-more jbs-text-center jbs-rounded-circle tran3s"
+									   class="jbs-dashboard-post-view-more jbs-text-center jbs-rounded-circle jbs-tran3s"
 									   title="<?php esc_attr_e( 'View Candidate', 'jobus' ); ?>">
 										<i class="bi bi-eye-fill"></i>
 									</a>

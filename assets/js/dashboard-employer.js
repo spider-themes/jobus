@@ -67,8 +67,8 @@
                 reader.onload = function (event) {
                     const dataUrl = event.target.result;
                     const $container = $(this).closest('.dash-input-wrapper');
-                    const $hiddenData = $container.find('.testimonial-image-data');
-                    const $preview = $container.find('.testimonial-image-preview');
+                    const $hiddenData = $container.find('.jbs-testimonial-image-data');
+                    const $preview = $container.find('.jbs-testimonial-image-preview');
 
                     // Store base64 data URL
                     $hiddenData.val(dataUrl);
@@ -97,14 +97,14 @@
                              aria-labelledby="company-testimonial-heading-${index}"
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="jbs-accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-author-name">Author Name</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[${index}][author_name]"
                                                    id="company-testimonial-${index}-author-name" class="jbs-form-control" value="">
                                         </div>
@@ -112,12 +112,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-location">Location</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[${index}][location]"
                                                    id="company-testimonial-${index}-location" class="jbs-form-control" value="">
                                         </div>
@@ -125,12 +125,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-review-content">Review</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <textarea name="company_testimonials[${index}][review_content]"
                                                       id="company-testimonial-${index}-review-content" class="jbs-form-control" rows="3"></textarea>
                                         </div>
@@ -138,12 +138,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-rating">Rating</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <select name="company_testimonials[${index}][rating]"
                                                     id="company-testimonial-${index}-rating" class="jbs-form-control">
                                                 <option value="">--</option>
@@ -158,15 +158,15 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-image">Author Image</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <!-- Hidden field for image data URL -->
                                             <input type="hidden" name="company_testimonials[${index}][image]"
-                                                   id="company-testimonial-${index}-image" class="testimonial-image-data" value="">
+                                                   id="company-testimonial-${index}-image" class="jbs-testimonial-image-data" value="">
                                             <!-- Hidden file input -->
                                             <input type="file" id="company-testimonial-${index}-file-input"
                                                    class="testimonial-file-input" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
@@ -176,7 +176,7 @@
                                                 Upload Image
                                             </button>
                                             <!-- Preview area (always present) -->
-                                            <div class="testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-${index}"></div>
+                                            <div class="jbs-testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-${index}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@
                     $('#job_company_logo_id').val(attachment.id);
 
                     // Display the preview image
-                    $('.logo-preview').attr('src', attachment.url).show();
+                    $('.jbs-logo-preview').attr('src', attachment.url).show();
 
                     // Update button text
                     $('#upload_logo_button').html('<i class="bi bi-upload"></i> Change Logo');
@@ -335,7 +335,7 @@
                 $('#job_company_logo_id').val('');
 
                 // Hide the preview image
-                $('.logo-preview').attr('src', '').hide();
+                $('.jbs-logo-preview').attr('src', '').hide();
 
                 // Update button text
                 $('#upload_logo_button').html('<i class="bi bi-upload"></i> Upload Logo');

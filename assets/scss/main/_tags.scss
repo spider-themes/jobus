@@ -1,6 +1,6 @@
-.jobus-tags-wrapper {
+.jbs-tags-wrapper {
 
-  .tag-item {
+  .jbs-tag-item {
     margin-bottom: 12px;
 
     &.hide {
@@ -8,7 +8,7 @@
     }
   }
 
-  .more-btn {
+  .jbs-more-btn {
     color: var(--jbs-brand_color_1);
     cursor: pointer;
     font-size: 14px;
@@ -28,7 +28,7 @@
       transition: transform 0.3s ease;
     }
 
-    &.showing-all {
+    &.jbs-showing-all {
       i {
         transform: rotate(180deg);
       }

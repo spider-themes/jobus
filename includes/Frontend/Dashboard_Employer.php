@@ -201,12 +201,12 @@ class Dashboard_Employer
 
 		ob_start();
 
-		echo '<div class="dashboard-wrapper">';
-		echo '<aside class="dashboard-navbar">';
+		echo '<div class="jbs-dashboard-wrapper">';
+		echo '<aside class="jbs-dashboard-navbar">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo $this->load_sidebar_menu($active, $nav_items);
 		echo '</aside>';
-		echo '<main class="dashboard-body">';
+		echo '<main class="jbs-dashboard-body">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 		echo Template_Loader::get_template_part( 'dashboard/template-part/notice' );
 
@@ -371,11 +371,11 @@ class Dashboard_Employer
 		?>
 		<div class="jbs-position-relative">
 			<div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
-				<h2 class="main-title jbs-m-0"><?php esc_html_e('Job Applications', 'jobus'); ?></h2>
+				<h2 class="jbs-main-title jbs-m-0"><?php esc_html_e('Job Applications', 'jobus'); ?></h2>
 			</div>
-			<div class="jbs-bg-white card-box border-20">
+			<div class="jbs-bg-white jbs-card-box jbs-border-20">
 				<div class="jbs-table-responsive">
-					<table class="jbs-table job-alert-table">
+					<table class="jbs-table jbs-job-alert-table">
 						<thead>
 							<tr>
 								<th><?php esc_html_e('Applicant', 'jobus'); ?></th>
@@ -423,8 +423,8 @@ class Dashboard_Employer
 										</span>
 									</td>
 									<td>
-										<div class="action-dots">
-											<button class="action-btn" type="button" aria-hidden="true"><span></span></button>
+										<div class="jbs-action-dots">
+											<button class="jbs-action-btn" type="button" aria-hidden="true"><span></span></button>
 										</div>
 									</td>
 								</tr>
@@ -457,7 +457,7 @@ class Dashboard_Employer
 			ob_start();
 		?>
 			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
-				<div class="pro-image-wrap">
+				<div class="jbs-pro-image-wrap">
 					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
 					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
 				</div>
@@ -530,7 +530,7 @@ class Dashboard_Employer
 			ob_start();
 		?>
 			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
-				<div class="pro-image-wrap">
+				<div class="jbs-pro-image-wrap">
 					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
 					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
 				</div>
@@ -558,7 +558,7 @@ class Dashboard_Employer
 			ob_start();
 		?>
 			<div class="jbs-dashboard-pro-notice" role="button" tabindex="0" aria-label="<?php esc_attr_e('Pro Feature - Upgrade required', 'jobus'); ?>">
-				<div class="pro-image-wrap">
+				<div class="jbs-pro-image-wrap">
 					<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_attr_e('Pro Feature', 'jobus'); ?>" />
 					<span class="pro-badge" aria-hidden="true"><?php esc_html_e('Pro', 'jobus'); ?></span>
 				</div>

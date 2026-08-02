@@ -19,11 +19,11 @@
 	width: 100%;
 	margin-bottom: 2px;
 
-	&.group-end {
+	&.jbs-group-end {
 		margin-bottom: 12px;
 	}
 
-	&.message-out {
+	&.jbs-message-out {
 		justify-content: flex-end;
 
 		.jbs-chat-inner {
@@ -31,7 +31,7 @@
 		}
 	}
 
-	&.message-in {
+	&.jbs-message-in {
 		justify-content: flex-start;
 
 		.jbs-chat-inner {
@@ -77,29 +77,29 @@
 	min-width: 80px; 
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 	
-	&.is-sender {
+	&.jbs-is-sender {
 		background-color: var(--jbs-brand_color_1, #31795A);
 		color: #ffffff;
 		border-radius: 18px 18px 4px 18px;
 		
-		&.continues-prev {
+		&.jbs-continues-prev {
 			border-top-right-radius: 4px;
 		}
-		&.continues-next {
+		&.jbs-continues-next {
 			border-bottom-right-radius: 4px;
 		}
 	}
 	
-	&.is-receiver {
+	&.jbs-is-receiver {
 		background-color: #f0f2f5;
 		color: #1d1f23;
 		border-radius: 18px 18px 18px 4px; 
 		border: 1px solid rgba(0,0,0,0.03);
 		
-		&.continues-prev {
+		&.jbs-continues-prev {
 			border-top-left-radius: 4px;
 		}
-		&.continues-next {
+		&.jbs-continues-next {
 			border-bottom-left-radius: 4px;
 		}
 	}
@@ -119,11 +119,11 @@
 	opacity: 0.8;
 	line-height: 1;
 
-	.is-sender & {
+	.jbs-is-sender & {
 		color: rgba(255, 255, 255, 0.85);
 	}
 
-	.is-receiver & {
+	.jbs-is-receiver & {
 		color: #8c939d;
 	}
 }
@@ -280,7 +280,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	
-	.reply-email {
+	.jbs-reply-email {
 		background: transparent;
 		border: none;
 		padding: 0;
@@ -314,7 +314,7 @@
 }
 
 // Chat Component Initial States
-.jobus-messaging__history {
+.jbs-messaging__history {
 	display: none;
 }
 

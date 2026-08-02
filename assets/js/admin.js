@@ -65,14 +65,14 @@
 
 
         // Disable last input (only in free)
-        if (!$('body').hasClass('jobus-premium')) {
-            $('.jobus-pro-locked ul li:last-child label input').prop('disabled', true);
+        if (!$('body').hasClass('jbs-premium')) {
+            $('.jbs-pro-locked ul li:last-child label input').prop('disabled', true);
         }
 
         // jobus pro notice
         function jobus_pro_notice() {
-            $('body:not(.jobus-premium) .jobus-pro-locked').on('click', function (e) {
-                if ($(this).hasClass('active-theme-jobi')) {
+            $('body:not(.jbs-premium) .jbs-pro-locked').on('click', function (e) {
+                if ($(this).hasClass('jbs-active-theme-jobi')) {
                     return; // skip alert if unlocked
                 }
                 e.preventDefault();

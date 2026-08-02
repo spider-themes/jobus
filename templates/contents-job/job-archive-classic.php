@@ -14,16 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jbs-job-classic job-listing-three">
+<section class="jbs-jbs jbs-job-classic jbs-job-listing-three">
     <div class="jbs-container">
         <div class="jbs-row">
 
             <?php jobus_get_template_part('contents-job/sidebar-classic-filters'); ?>
 
             <div class="jbs-col-xl-9 jbs-col-lg-8">
-                <div class="job-post-item-wrapper jbs-ms-xl-3" data-jbs-filter-results="true">
+                <div class="jbs-job-post-item-wrapper jbs-ms-xl-3" data-jbs-filter-results="true">
 
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
+                    <div class="jbs-upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
 
                         <?php
                         // Display the total number of companies found

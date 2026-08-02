@@ -34,14 +34,14 @@
          * @returns {void}
          */
         CandidateSpecificationsRepeater: function () {
-            let repeater = document.getElementById('specifications-repeater');
-            let addBtn = document.getElementById('add-specification');
+            let repeater = document.getElementById('jbs-specifications-repeater');
+            let addBtn = document.getElementById('jbs-add-specification');
             if (repeater && addBtn) {
                 addBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    let idx = repeater.querySelectorAll('.specification-item').length;
+                    let idx = repeater.querySelectorAll('.jbs-specification-item').length;
                     let div = document.createElement('div');
-                    div.className = 'dash-input-wrapper jbs-mb-20 specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
+                    div.className = 'jbs-dash-input-wrapper jbs-mb-20 jbs-specification-item jbs-d-flex jbs-align-items-center jbs-gap-2';
                     div.innerHTML = '<input type="text" name="candidate_specifications['+idx+'][title]" class="jbs-form-control jbs-me-2" placeholder="Title" style="min-width:180px">' +
                         '<input type="text" name="candidate_specifications['+idx+'][value]" class="jbs-form-control jbs-me-2" placeholder="Value" style="min-width:180px">' +
                         '<button type="button" class="jbs-btn jbs-btn-danger remove-specification" title="Remove"><i class="bi bi-x"></i></button>';
@@ -88,14 +88,14 @@
                              aria-labelledby="heading-${index}"
                              data-jbs-parent="#education-repeater">
                             <div class="jbs-accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="education_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="education[${index}][sl_num]" 
                                                    id="education_${index}_sl_num" 
                                                    class="jbs-form-control"
@@ -106,12 +106,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="education_${index}_title">Title</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="education[${index}][title]" 
                                                    id="education_${index}_title" 
                                                    class="jbs-form-control"
@@ -122,12 +122,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="education_${index}_academy">Academy</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="education[${index}][academy]" 
                                                    id="education_${index}_academy" 
                                                    class="jbs-form-control"
@@ -138,12 +138,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="education_${index}_description">Description</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <textarea name="education[${index}][description]" 
                                                       id="education_${index}_description" 
                                                       class="jbs-form-control"
@@ -239,12 +239,12 @@
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
                                             <input type="text" class="jbs-form-control" 
                                                    name="experience[${index}][sl_num]" 
                                                    id="experience_${index}_sl_num"
@@ -255,12 +255,12 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_title">Title</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
                                             <input type="text" class="jbs-form-control"
                                                    name="experience[${index}][title]"
                                                    id="experience_${index}_title"
@@ -271,21 +271,21 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="jbs-row">
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper jbs-mb-30">
+                                                <div class="jbs-dash-input-wrapper jbs-mb-30">
                                                     <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][start_date]"
                                                            id="experience_${index}_start_date">
                                                 </div>
                                             </div>
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper jbs-mb-30">
+                                                <div class="jbs-dash-input-wrapper jbs-mb-30">
                                                     <input type="date" class="jbs-form-control"
                                                            name="experience[${index}][end_date]"
                                                            id="experience_${index}_end_date">
@@ -297,12 +297,12 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_${index}_description">Description</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
                                             <textarea class="jbs-form-control"
                                                       name="experience[${index}][description]"
                                                       id="experience_${index}_description"
@@ -380,13 +380,13 @@ document.addEventListener('DOMContentLoaded', function() {
      * Handles file selection, preview display, and removal
      */
     function cvUploadHandler() {
-        let preview = document.getElementById('cv-upload-preview');
-        let filenameSpan = document.getElementById('cv-uploaded-filename');
-        let removeBtn = document.getElementById('remove-uploaded-cv');
-        let uploadBtnWrapper = document.getElementById('cv-upload-btn-wrapper');
-        let fileInfo = document.getElementById('cv-file-info');
-        let cvActionField = document.getElementById('profile_cv_action');
-        let uploadBtn = document.getElementById('upload_cv_button');
+        let preview = document.getElementById('jbs-cv-upload-preview');
+        let filenameSpan = document.getElementById('jbs-cv-uploaded-filename');
+        let removeBtn = document.getElementById('jbs-remove-uploaded-cv');
+        let uploadBtnWrapper = document.getElementById('jbs-cv-upload-btn-wrapper');
+        let fileInfo = document.getElementById('jbs-cv-file-info');
+        let cvActionField = document.getElementById('jbs-profile-cv-action');
+        let uploadBtn = document.getElementById('jbs-upload-cv-button');
         let cvAttachmentId = document.getElementById('cv_attachment_id');
 
         if (uploadBtn && window.wp && window.wp.media) {
@@ -468,9 +468,9 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function PortfolioGallery() {
         // Basic DOM elements
-        const portfolioContainer = document.getElementById('portfolio-items');
-        const portfolioIdsField = document.getElementById('portfolio_ids');
-        const addButton = document.getElementById('add-portfolio-images');
+        const portfolioContainer = document.getElementById('jbs-portfolio-items');
+        const portfolioIdsField = document.getElementById('jbs-portfolio-ids');
+        const addButton = document.getElementById('jbs-add-portfolio-images');
         let buttonsContainer;
 
         // Exit if required elements don't exist
@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create buttons container if it doesn't exist
             if (!buttonsContainer) {
                 buttonsContainer = document.createElement('div');
-                buttonsContainer.className = 'portfolio-buttons-container jbs-mt-3 d-flex jbs-gap-2';
+                buttonsContainer.className = 'portfolio-buttons-container jbs-mt-3 jbs-d-flex jbs-gap-2';
                 addButton.parentNode.insertBefore(buttonsContainer, addButton.nextSibling);
             }
 
@@ -494,17 +494,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Clear the container and add the edit and clear buttons
                 buttonsContainer.innerHTML = `
-                    <button type="button" id="edit-portfolio-images" class="dash-btn-two">
+                    <button type="button" id="jbs-edit-portfolio-images" class="jbs-dash-btn-two">
                         <i class="bi bi-pencil"></i> ${jobus_dashboard_params?.texts?.edit_portfolio || 'Edit Gallery'}
                     </button>
-                    <button type="button" id="clear-portfolio-images" class="dash-btn-danger">
+                    <button type="button" id="jbs-clear-portfolio-images" class="dash-btn-danger">
                         <i class="bi bi-trash"></i> ${jobus_dashboard_params?.texts?.clear_portfolio || 'Clear'}
                     </button>
                 `;
 
                 // Add event listeners to the new buttons
-                document.getElementById('edit-portfolio-images').addEventListener('click', openMediaGallery);
-                document.getElementById('clear-portfolio-images').addEventListener('click', clearGallery);
+                document.getElementById('jbs-edit-portfolio-images').addEventListener('click', openMediaGallery);
+                document.getElementById('jbs-clear-portfolio-images').addEventListener('click', clearGallery);
             } else {
                 // Show Add Gallery, hide Edit and Clear buttons
                 addButton.style.display = '';
@@ -615,7 +615,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!listContainer) {
                 // Create a list container if it doesn't exist
                 listContainer = document.createElement('ul');
-                listContainer.className = 'portfolio-image-list';
+                listContainer.className = 'jbs-portfolio-image-list';
                 portfolioContainer.innerHTML = ''; // Clear existing content
                 portfolioContainer.appendChild(listContainer);
             }

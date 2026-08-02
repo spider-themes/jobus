@@ -43,7 +43,7 @@ class Admin {
 
 		// Example: Add premium/pro class if needed for Jobus (update logic as needed)
 		if ( function_exists('jobus_fs') && jobus_fs()->is_paying_or_trial() ) {
-			$classes .= ' jobus-premium';
+			$classes .= ' jbs-premium';
 		}
 
 		return $classes;

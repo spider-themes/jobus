@@ -17,16 +17,16 @@
   right: initial;
 }
 
-.candidate-profile-sidebar .email-form input {
+.jbs-candidate-profile-sidebar .email-form input {
   text-align: right;
 }
 
-.candidates-profile-details .inner-card.border-style > .wp-block-heading {
+.jbs-candidates-profile-details .inner-card.border-style > .wp-block-heading {
   right: 25px;
   left: initial;
 }
 
-.candidates-profile-details {
+.jbs-candidates-profile-details {
   .skill-tags {
     padding-right: 0;
   }
@@ -38,7 +38,7 @@
   }
 }
 
-.candidates-profile-details .time-line-data .info {
+.jbs-candidates-profile-details .time-line-data .info {
   padding: 0 65px 45px 0;
 
   &:before {
@@ -52,21 +52,21 @@
   }
 }
 
-.candidate-profile-card {
-  .profile-btn {
+.jbs-candidate-profile-card {
+  .jbs-profile-btn {
     margin: 10px 0 0 !important;
   }
-  .candidate-avatar.online:before {
+  .jbs-candidate-avatar.online:before {
     right: 60px;
   }
 }
 
-.list-layout .right-side {
+.jbs-list-layout .jbs-right-side {
   padding-left: 0;
   padding-right: 30px;
 }
 
-.list-layout.no-avatar .right-side {
+.jbs-list-layout.no-avatar .jbs-right-side {
   padding-right: 0;
 }
 
@@ -94,12 +94,12 @@
   }
 }
 
-.candidates-profile-details .candidate-portfolio-slider .slick-dots {
+.jbs-candidates-profile-details .candidate-portfolio-slider .slick-dots {
   right: initial;
   left: 10px;
 }
 
-.candidate-profile-card.list-layout .candidate-skills {
+.jbs-candidate-profile-card.list-layout .jbs-candidate-skills {
   width: max-content;
   right: 0;
   padding-right: 0;
@@ -113,7 +113,7 @@
 
 
 //jobus company rtl css ********
-.upper-filter .short-filter .jbs-nice-select .option {
+.jbs-upper-filter .jbs-short-filter .jbs-nice-select .option {
   text-align: right;
 }
 
@@ -142,23 +142,23 @@
   right: initial;
 }
 
-.company-list-layout .company-data {
+.jbs-company-list-layout .jbs-company-data {
   padding-left: 0;
   padding-right: 29px;
 }
 
-.job-company-info .job-meta-data div {
+.jbs-job-company-info .jbs-job-meta-data div {
   a {
     margin-right: 0 !important;
   }
 }
 
-.company-details .details-post-data .slick-dots {
+.jbs-company-details .jbs-details-post-data .slick-dots {
   right: initial;
   left: 10px;
 }
 
-.company-details .details-post-data .share-option {
+.jbs-company-details .jbs-details-post-data .jbs-share-option {
   ul {
     padding-right: 0;
 
@@ -169,12 +169,12 @@
   }
 }
 
-.jbs-job-details .details-post-data .wp-block-group .wp-block-heading code mark {
+.jbs-job-details .jbs-details-post-data .wp-block-group .wp-block-heading code mark {
   margin-right: 0;
   margin-left: 8px;
 }
 
-.title-three h2.main-font {
+.jbs-title-three h2.main-font {
   text-align: right !important;
 }
 
@@ -193,7 +193,7 @@
 }
 
 //jobus job rtl css ********
-.jbs-job-details .details-post-data .wp-block-group ul {
+.jbs-job-details .jbs-details-post-data .wp-block-group ul {
   padding-right: 0;
 
   li {
@@ -207,12 +207,12 @@
   }
 }
 
-.user-data-form .form-wrapper {
-  .row {
+.jbs-user-data-form .jbs-form-wrapper {
+  .jbs-row {
     text-align: right !important;
   }
 
-  .input-group-meta input {
+  .jbs-input-group-meta input {
     text-align: right !important;
   }
 }
@@ -231,8 +231,8 @@
   left: 25px;
 }
 
-.job-list-one {
-  .split-box1 {
+.jbs-job-list-one {
+  .jbs-split-box1 {
     padding-left: 0 !important;
     padding-right: 30px;
   }

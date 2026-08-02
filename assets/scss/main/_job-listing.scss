@@ -11,8 +11,8 @@
 
 
 .jbs-job-classic {
-  &.job-listing-three {
-    .pagination-wrap {
+  &.jbs-job-listing-three {
+    .jbs-pagination-wrap {
       p {
         color: rgb(0 0 0 / 70%);
         margin: 0;
@@ -22,8 +22,8 @@
 }
 
 // Filter Area
-.accordion-box {
-  &.show {
+.jbs-accordion-box {
+  &.jbs-show {
     display: block;
   }
 }
@@ -38,14 +38,14 @@
   width: 84px !important;
 }
 
-.upper-filter {
+.jbs-upper-filter {
   position: relative;
 
-  .total-job-found {
+  .jbs-total-job-found {
     color: rgba($color: #000000, $alpha: 0.4);
   }
 
-  .short-filter .jbs-nice-select {
+  .jbs-short-filter .jbs-nice-select {
     min-width: 165px;
     height: 32px;
     line-height: 30px;
@@ -92,27 +92,27 @@
   }
 }
 
-.jbs-bg-color .upper-filter .jbs-nice-select {
+.jbs-bg-color .jbs-upper-filter .jbs-nice-select {
   background: transparent;
   border-color: var(--jbs-brand_color_2);
 }
 
-.jbs-bg-color .upper-filter .jbs-layout-changer-btn {
+.jbs-bg-color .jbs-upper-filter .jbs-layout-changer-btn {
   border-color: var(--jbs-brand_color_2);
   background: var(--bs-white, #fff);
 }
 
 // Job Listing One
-.job-listing-wrapper {
+.jbs-job-listing-wrapper {
   position: relative;
 
-  &.border-wrapper {
+  &.jbs-border-wrapper {
     border: 1px solid #DBE8E5;
     border-radius: 10px;
     overflow: hidden;
   }
 
-  .job-list-one:last-child {
+  .jbs-job-list-one:last-child {
     border-bottom: none !important;
   }
 
@@ -125,22 +125,22 @@
   }
 }
 
-.job_specifications_area {
-  .jod_list_title_area {
+.jbs-job_specifications_area {
+  .jbs-jod_list_title_area {
     flex-basis: 30%;
   }
 
-  .jod_list_meta_area {
+  .jbs-jod_list_meta_area {
     text-align: center;
     flex-basis: 30%;
   }
 
-  .jod_list_cat_area {
+  .jbs-jod_list_cat_area {
     text-align: center;
     flex-basis: 20%;
   }
 
-  .jod_list_btn_area {
+  .jbs-jod_list_btn_area {
     flex-basis: 20%;
   }
 }
@@ -151,16 +151,16 @@
   }
 }
 
-.job-list-one {
+.jbs-job-list-one {
   background: var(--bs-white);
   padding: 42px 35px;
   border-radius: 10px;
 
-  .expertise {
+  .jbs-expertise {
     color: #aaaaaa;
   }
 
-  &.bottom-border {
+  &.jbs-bottom-border {
     border-bottom: 1px solid #DBE8E5;
     border-radius: 0;
   }
@@ -186,7 +186,7 @@
     }
   }
 
-  .split-box1 {
+  .jbs-split-box1 {
     width: calc(100% - 60px);
     padding-left: 30px;
     display: flex;
@@ -198,7 +198,7 @@
     }
   }
 
-  .job-duration {
+  .jbs-job-duration {
     font-size: 15px;
     color: var(--jbs-brand_color_4);
     text-transform: capitalize;
@@ -208,12 +208,12 @@
       text-decoration: underline;
     }
 
-    &.part-time {
+    &.jbs-part-time {
       color: #FF6060;
     }
   }
 
-  .job-date {
+  .jbs-job-date {
     color: rgba($color: #000000, $alpha: 0.5);
 
     a {
@@ -226,7 +226,7 @@
     }
   }
 
-  .job-location a {
+  .jbs-job-location a {
     font-size: 15px;
     text-transform: capitalize;
     color: rgba($color: #000000, $alpha: 0.7);
@@ -237,7 +237,7 @@
     }
   }
 
-  .job-category a {
+  .jbs-job-category a {
     font-weight: 500;
     color: #000;
 
@@ -246,12 +246,12 @@
     }
   }
 
-  .job-salary {
+  .jbs-job-salary {
     font-size: 15px;
     color: #AAAAAA;
     margin: 2px 0 0;
 
-    .expertise {
+    .jbs-expertise {
       text-transform: capitalize;
     }
   }
@@ -272,12 +272,12 @@
     }
   }
 
-  &.style-two {
+  &.jbs-style-two {
     padding-top: 35px;
     padding-bottom: 35px;
     border: 1px solid var(--black_50);
 
-    .apply-btn {
+    .jbs-apply-btn {
       background: var(--jbs-brand_color_1);
 
       &:hover {
@@ -292,9 +292,9 @@
 
 }
 
-.jbs-container .job-list-one,
-.job-list-two {
-  .apply-btn {
+.jbs-container .jbs-job-list-one,
+.jbs-job-list-two {
+  .jbs-apply-btn {
     color: #fff;
 
     &:hover {
@@ -304,7 +304,7 @@
 }
 
 // Job Listing Two
-.g-control-nav li {
+.jbs-g-control-nav li {
   font-size: 17px;
   font-weight: 500;
   color: #000;
@@ -326,11 +326,11 @@
     @include transition(0.1s);
   }
 
-  &.is-checked:before {
+  &.jbs-is-checked:before {
     opacity: 1;
   }
 
-  &.is-checked {
+  &.jbs-is-checked {
     color: var(--jbs-brand_color_4);
   }
 
@@ -339,7 +339,7 @@
   }
 }
 
-.job-list-two {
+.jbs-job-list-two {
   padding: 35px 35px 30px;
   background: var(--bs-white);
   border: 1px solid #fff;
@@ -358,7 +358,7 @@
     max-width: 45px;
   }
 
-  .job-duration {
+  .jbs-job-duration {
     font-size: 13px;
     color: var(--jbs-brand_color_4);
     padding: 2px 12px;
@@ -366,7 +366,7 @@
     border-radius: 3px;
     display: inline-block;
 
-    &.part-time {
+    &.jbs-part-time {
       background: rgba($color: #FF5757, $alpha: 0.08) !important;
       color: #FF6060 !important;
     }
@@ -383,20 +383,20 @@
     }
   }
 
-  .job-date {
+  .jbs-job-date {
     font-size: 16px;
     color: #AAAAAA;
     margin: 18px 0 65px;
   }
 
-  .job-salary {
+  .jbs-job-salary {
     font-size: 16px;
     color: #AAAAAA;
     // margin: 18px 0 65px;
     text-transform: capitalize;
   }
 
-  .job-location a {
+  .jbs-job-location a {
     font-size: 16px;
     font-weight: 500;
     color: #000;
@@ -407,7 +407,7 @@
     }
   }
 
-  .apply-btn {
+  .jbs-apply-btn {
     width: 80px;
     line-height: 27px;
     font-weight: 500;
@@ -423,7 +423,7 @@
     }
   }
 
-  .save-btn {
+  .jbs-save-btn {
     // position: absolute;
     // right: 35px;
     // top: 35px;
@@ -441,7 +441,7 @@
     }
   }
 
-  &.style-two {
+  &.jbs-style-two {
     border: 1px solid var(--black_50);
 
     &:hover {
@@ -450,13 +450,13 @@
       box-shadow: none;
     }
 
-    .job-duration {
+    .jbs-job-duration {
       background: #E7F6EF;
       text-transform: capitalize;
       color: var(--jbs-brand_color_1);
       display: inline-block;
 
-      &.part-time {
+      &.jbs-part-time {
         background: rgba($color: #FF5757, $alpha: 0.08);
         color: #FF6060;
       }
@@ -466,7 +466,7 @@
       color: var(--jbs-brand_color_1);
     }
 
-    .apply-btn {
+    .jbs-apply-btn {
       background: var(--jbs-brand_color_1);
 
       &:hover {
@@ -477,15 +477,15 @@
 }
 
 // Job Listing Three
-.job-listing-three.jbs-bg-color {
+.jbs-job-listing-three.jbs-bg-color {
   background: var(--jbs-box_bg_color);
 }
 
-.job-listing-three {
+.jbs-job-listing-three {
   background: var(--body_bg);
 
-  .job-post-item-wrapper {
-    .upper-filter {
+  .jbs-job-post-item-wrapper {
+    .jbs-upper-filter {
       @media(max-width: 767px) {
         flex-wrap: wrap;
         gap: 24px;
@@ -496,7 +496,7 @@
 
 .jbs-company-profiles,
 .jbs-candidates-profile {
-  .upper-filter {
+  .jbs-upper-filter {
     @media(max-width: 767px) {
       flex-wrap: wrap;
       gap: 24px;
@@ -505,13 +505,13 @@
 }
 
 
-.company-logo {
+.jbs-company-logo {
   img {
     height: auto;
   }
 }
 
-.job-list-three {
+.jbs-job-list-three {
   background: #fff;
   border: 1px solid #EBEBEB;
   border-radius: 10px;
@@ -526,18 +526,18 @@
     max-width: 45px;
   }
 
-  .main-wrapper {
+  .jbs-main-wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
 
-    .list-header {
+    .jbs-list-header {
       border-bottom: 1px solid #EAEAEA;
       padding-bottom: 30px;
       margin-bottom: 25px;
     }
 
-    .info-wrapper {
+    .jbs-info-wrapper {
       width: calc(100% - 50px);
       padding-left: 22px;
       padding-right: 37px;
@@ -553,7 +553,7 @@
       }
     }
 
-    .info-data li {
+    .jbs-info-data li {
       font-size: 14px;
       font-weight: 500;
       color: rgba($color: var(--jbs-brand_color_2), $alpha: 0.7);
@@ -576,7 +576,7 @@
       }
     }
 
-    .save-btn {
+    .jbs-save-btn {
       position: absolute;
       right: 0;
       top: 0;
@@ -601,12 +601,12 @@
       color: #000;
     }
 
-    .client-status {
+    .jbs-client-status {
       font-size: 14px;
       margin: 0px 10px 0 7px;
     }
 
-    .job-duration {
+    .jbs-job-duration {
       font-size: 14px;
       color: var(--jbs-brand_color_4);
       display: inline-block;
@@ -615,12 +615,12 @@
         text-decoration: underline;
       }
 
-      &.part-time {
+      &.jbs-part-time {
         color: #FF6060;
       }
     }
 
-    .apply-btn {
+    .jbs-apply-btn {
       width: 80px;
       line-height: 30px;
       font-weight: 500;
@@ -639,7 +639,7 @@
 }
 
 // Job Details
-.job-company-info {
+.jbs-job-company-info {
   border-radius: 20px;
   padding: 50px 20px 30px;
   background: var(--jbs-box_bg_color);
@@ -649,7 +649,7 @@
     display: block;
   }
 
-  .website-btn {
+  .jbs-website-btn {
     padding: 5px;
     text-align: center;
     display: block;
@@ -666,7 +666,7 @@
     }
   }
 
-  .website-btn-two {
+  .jbs-website-btn-two {
     font-weight: 500;
     letter-spacing: -0.5px;
     font-size: 15px;
@@ -678,7 +678,7 @@
     }
   }
 
-  .job-meta-data {
+  .jbs-job-meta-data {
     list-style: none;
     padding: 0;
 
@@ -703,7 +703,7 @@
     }
   }
 
-  .job-tags {
+  .jbs-job-tags {
     margin: 0 -4px;
 
     a {
@@ -730,7 +730,7 @@
   position: relative;
   padding-top: 130px;
 
-  &.style-two {
+  &.jbs-style-two {
     background: var(--jbs-box_bg_color);
   }
 
@@ -749,7 +749,7 @@
     }
   }
 
-  .job-head {
+  .jbs-job-head {
     margin-bottom: 50px;
   }
 
@@ -759,10 +759,10 @@
     font-weight: 500;
   }
 
-  .share-buttons li {
+  .jbs-share-buttons li {
     margin-right: 8px;
 
-    .share-item {
+    .jbs-share-item {
       font-size: 14px;
       font-weight: 500;
       color: var(--jbs-brand_color_2);
@@ -795,12 +795,12 @@
     padding: 35px 40px 20px;
   }
 
-  .block-title {
+  .jbs-block-title {
     font-size: 22px;
     margin: 0;
   }
 
-  .block-numb {
+  .jbs-block-numb {
     width: 25px;
     height: 25px;
     line-height: 25px;
@@ -821,7 +821,7 @@
     }
   }
 
-  .list-type-one li {
+  .jbs-list-type-one li {
     position: relative;
     font-size: 17px;
     margin-top: 20px;
@@ -838,11 +838,11 @@
     }
   }
 
-  .border-style .list-type-one li:before {
+  .border-style .jbs-list-type-one li:before {
     content: "\f633";
   }
 
-  .list-type-two li {
+  .jbs-list-type-two li {
     position: relative;
     font-size: 17px;
     margin-top: 25px;
@@ -860,7 +860,7 @@
     }
   }
 
-  .job-meta-data-two {
+  .jbs-job-meta-data-two {
     margin: 0 -10px;
 
     .bg-wrapper {
@@ -900,7 +900,7 @@
   }
 }
 
-.job-application-wrapper {
+.jbs-job-application-wrapper {
   background: rgb(0 0 0 / 80%);
 
   .jbs-modal-dialog {
@@ -928,7 +928,7 @@
         padding: 1rem 0;
       }
 
-      .job-application-form {
+      .jbs-job-application-form {
         label {
           display: inline-block;
           font-size: 14px;
@@ -951,13 +951,13 @@
           // input filed type file style
 
 
-          &.upload-cv {
+          &.jbs-upload-cv {
             padding-left: 12px;
             padding: 0px;
           }
         }
 
-        .btn {
+        .jbs-btn {
           margin-top: 10px;
           padding: 10px 40px;
 
@@ -982,7 +982,7 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 // Moved from _card.scss, _btn.scss:
-.open-job-btn {
+.jbs-open-job-btn {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -1007,7 +1007,7 @@ input[type="file"]::-webkit-file-upload-button {
   }
 }
 
-.company-list-layout .open-job-btn {
+.jbs-company-list-layout .jbs-open-job-btn {
   width: 120px;
   line-height: 31px;
   font-size: 15px;
@@ -1018,14 +1018,14 @@ input[type="file"]::-webkit-file-upload-button {
   padding: 0;
 }
 
-.total-job {
+.jbs-total-job {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   margin: 0 -10px;
 
-  .short-info {
+  .jbs-short-info {
     flex: 1 1 200px;
     display: flex;
     align-items: center;
@@ -1037,13 +1037,13 @@ input[type="file"]::-webkit-file-upload-button {
       margin-right: 10px;
     }
 
-    .text {
+    .jbs-text {
       font-size: 16px;
       color: rgba($color: #000000, $alpha: 0.65);
     }
   }
 
-  .view-all-btn {
+  .jbs-view-all-btn {
     margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -1064,13 +1064,13 @@ input[type="file"]::-webkit-file-upload-button {
 
 .elementor-widget-container {
   .jbs-job-listing-widget {
-    .job-list-one {
+    .jbs-job-list-one {
       padding-left: 20px !important;
     }
   }
 }
 
-.job-list-two {
+.jbs-job-list-two {
   .jbs-logo-area {
     margin-bottom: 54px;
     display: flex;
@@ -1094,13 +1094,13 @@ input[type="file"]::-webkit-file-upload-button {
 
 // Responsive
 @media (max-width: 769px) {
-  .job_specifications_area .jod_list_title_area {
+  .jbs-job_specifications_area .jbs-jod_list_title_area {
     padding: 0;
   }
 
-  .job-post-item-wrapper {
-    .accordion-box {
-      .job-list-one {
+  .jbs-job-post-item-wrapper {
+    .jbs-accordion-box {
+      .jbs-job-list-one {
         padding-left: 20px !important;
       }
     }
@@ -1108,24 +1108,24 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 @media (max-width: 575px) {
-  .job_specifications_area {
-    .jod_list_title_area {
+  .jbs-job_specifications_area {
+    .jbs-jod_list_title_area {
       flex-basis: 100%;
     }
 
-    .jod_list_meta_area {
+    .jbs-jod_list_meta_area {
       padding-top: 20px;
       text-align: start;
       flex-basis: 60%;
     }
 
-    .jod_list_cat_area {
+    .jbs-jod_list_cat_area {
       padding-top: 20px;
       text-align: start;
       flex-basis: 40%;
     }
 
-    .jod_list_btn_area {
+    .jbs-jod_list_btn_area {
       flex-basis: 20%;
     }
   }
@@ -1133,8 +1133,8 @@ input[type="file"]::-webkit-file-upload-button {
 
 .wp-block-jobus-shortcode-candidate-archive {
   .jbs-candidate-classic {
-    .candidate-profile-card {
-      .right-side {
+    .jbs-candidate-profile-card {
+      .jbs-right-side {
         @media (min-width: 1200px) {
           .jbs-col-xl-4 {
             width: 25%;
@@ -1154,7 +1154,7 @@ input[type="file"]::-webkit-file-upload-button {
 
   .jbs-job-tabs-widget,
   .jbs-related-job-slider {
-    .job-list-two {
+    .jbs-job-list-two {
       a.logo {
         margin-bottom: 25px;
       }

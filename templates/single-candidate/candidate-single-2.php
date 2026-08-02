@@ -29,7 +29,7 @@ wp_enqueue_script( 'lightbox' );
                         ?>
                         <div class="jbs-video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 jbs-lg-mt-20 jbs-mb-75 jbs-lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $meta['video_bg_img']['url'] ) ?>)">
-                            <a class="fancybox jbs-rounded-circle jbs-video-icon tran3s jbs-text-center" data-fancybox=""
+                            <a class="fancybox jbs-rounded-circle jbs-video-icon jbs-tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $meta['video_url'] ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
@@ -282,7 +282,7 @@ wp_enqueue_script( 'lightbox' );
                         $edit_profile_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'profile/' : '#';
                         ?>
                         <a href="<?php echo esc_url( $edit_profile_url ); ?>"
-                           class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mb-60 jbs-md-mb-40">
+                           class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mb-60 jbs-md-mb-40">
                             <?php esc_html_e( 'Edit Profile', 'jobus' ); ?>
                         </a>
                         <?php
@@ -335,7 +335,7 @@ wp_enqueue_script( 'lightbox' );
                             </div>
 
                             <div class="jbs-d-sm-flex">
-                                <button type="submit" name="send_message" class="jbs-btn-ten jbs-pointer jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                <button type="submit" name="send_message" class="jbs-btn-ten jbs-pointer jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center jbs-tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

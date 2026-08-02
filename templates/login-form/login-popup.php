@@ -18,10 +18,10 @@ $social_buttons  = $social_manager ? $social_manager->get_enabled() : [];
 if ( is_user_logged_in() ) {
     $current_user = wp_get_current_user();
     ?>
-    <div class="jbs-modal jbs-fade login_from" id="jobusLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="jbs-modal jbs-fade jbs-login_from" id="jbsLoginModal" tabindex="-1" aria-hidden="true">
         <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
-                <div class="user-data-form jbs-modal-content jbs-shadow-sm">
+                <div class="jbs-user-data-form jbs-modal-content jbs-shadow-sm">
                     <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="jbs-text-center">
                         <h2><?php esc_html_e( 'Welcome ', 'jobus' ) ?><?php echo esc_html( $current_user->display_name ); ?></h2>
@@ -46,10 +46,10 @@ if ( is_user_logged_in() ) {
     <?php
 } else {
     ?>
-    <div class="jbs-modal jbs-fade login_from" id="jobusLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="jbs-modal jbs-fade jbs-login_from" id="jbsLoginModal" tabindex="-1" aria-hidden="true">
         <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
-                <div class="user-data-form jbs-modal-content">
+                <div class="jbs-user-data-form jbs-modal-content">
                     <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
                     <div class="jbs-text-center">
                         <h2><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ) ?></h2>
@@ -62,31 +62,31 @@ if ( is_user_logged_in() ) {
                             <?php endif; ?>
                         </p>
                     </div>
-                    <div class="form-wrapper jbs-m-auto">
+                    <div class="jbs-form-wrapper jbs-m-auto">
                         <form action="<?php echo esc_url( home_url( '/' ) ); ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 
                             <?php wp_nonce_field( 'jobus_login_action', 'jobus_nonce' ); ?>
 
                             <div class="jbs-row">
                                 <div class="jbs-col-12">
-                                    <div class="input-group-meta jbs-position-relative jbs-mb-25">
+                                    <div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                         <label><?php esc_html_e( 'Username/Email*', 'jobus' ); ?></label>
                                         <input type="text" name="log" id="user_input" value="<?php echo esc_attr( $user_input ); ?>" placeholder="<?php esc_attr_e( 'Enter username or email', 'jobus' ); ?>" autocomplete="username" required>
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
-                                    <div class="input-group-meta jbs-position-relative jbs-mb-20">
+                                    <div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
                                         <label><?php esc_html_e( 'Password*', 'jobus' ); ?></label>
-                                        <input type="password" name="pwd" id="password" value="<?php echo esc_attr( $password ); ?>" placeholder="<?php esc_attr_e( 'Enter Password', 'jobus' ); ?>" class="pass_log_id" autocomplete="current-password" required>
-                                        <span class="placeholder_icon">
-                                        <span class="passVicon">
+                                        <input type="password" name="pwd" id="password" value="<?php echo esc_attr( $password ); ?>" placeholder="<?php esc_attr_e( 'Enter Password', 'jobus' ); ?>" class="jbs-pass_log_id" autocomplete="current-password" required>
+                                        <span class="jbs-placeholder_icon">
+                                        <span class="jbs-passVicon">
                                             <img src="<?php echo esc_url( JOBUS_IMG . '/icons/icon-eye.svg' ); ?>" alt="<?php esc_attr_e( 'eye-icon', 'jobus' ); ?>">
                                         </span>
                                     </span>
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
-                                    <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
+                                    <div class="jbs-agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                         <div>
                                             <input type="checkbox" name="rememberme" id="remember" value="forever">
                                             <label for="remember"><?php esc_html_e( 'Keep me logged in', 'jobus' ); ?></label>
@@ -97,7 +97,7 @@ if ( is_user_logged_in() ) {
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
-                                    <button class="btn-eleven jbs-jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Login', 'jobus' ); ?></button>
+                                    <button class="jbs-btn-eleven jbs-jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Login', 'jobus' ); ?></button>
                                 </div>
                             </div>
                         </form>

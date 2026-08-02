@@ -33,7 +33,7 @@
         /**
          * Status selector dropdown on the Application Details page.
          *
-         * Each option is a `.jobus-update-status` button so the existing AJAX
+         * Each option is a `.jbs-update-status` button so the existing AJAX
          * handler picks the click up — we only manage open/close state here,
          * plus sync the trigger label/swatch after a successful save so the
          * picker reflects the new "current" status without a page reload.
@@ -46,7 +46,7 @@
 
             const closeAllSelectors = function () {
                 $(triggerSelector + '[aria-expanded="true"]').attr('aria-expanded', 'false');
-                $(menuSelector + '.is-open').removeClass('is-open');
+                $(menuSelector + '.is-open').removeClass('jbs-is-open');
             };
 
             $doc.on('click', triggerSelector, function (e) {
@@ -57,7 +57,7 @@
                 closeAllSelectors();
                 if (!wasOpen) {
                     $trigger.attr('aria-expanded', 'true');
-                    $trigger.siblings(menuSelector).addClass('is-open');
+                    $trigger.siblings(menuSelector).addClass('jbs-is-open');
                 }
             });
 
@@ -150,7 +150,7 @@
          * Handles removing a saved job or candidate from dashboard
          */
         removeSavedPost: function () {
-            $(document).on('click', '.jobus-dashboard-remove-saved-post', function (e) {
+            $(document).on('click', '.jbs-dashboard-remove-saved-post', function (e) {
                 e.preventDefault();
 
                 const btn = $(this);
@@ -202,12 +202,12 @@
                             item.fadeOut(300, function() {
                                 $(this).remove();
                                 const $list = $('#jbs-saved-candidates-list');
-                                const remaining = $list.find('.candidate-profile-card').length
-                                    + $('.job-list-one').length;
+                                const remaining = $list.find('.jbs-candidate-profile-card').length
+                                    + $('.jbs-job-list-one').length;
                                 if (remaining === 0) {
                                     const archiveUrl = (typeof jobus_dashboard_obj !== 'undefined' && jobus_dashboard_obj.candidate_archive_url)
                                         ? jobus_dashboard_obj.candidate_archive_url : '#';
-                                    $('.wrapper').html(
+                                    $('.jbs-wrapper').html(
                                         '<div id="jbs-saved-candidates-list" class="jbs-empty-state-wrap">' +
                                         '<div class="jbs-empty-state">' +
                                         '<span class="jbs-empty-icon"><i class="bi bi-people"></i></span>' +
@@ -267,8 +267,8 @@
                         if (response.success) {
                             row.fadeOut(300, function() {
                                 $(this).remove();
-                                if ($('.job-alert-table tbody tr').length === 0) {
-                                    $('.job-alert-table').empty();
+                                if ($('.jbs-job-alert-table tbody tr').length === 0) {
+                                    $('.jbs-job-alert-table').empty();
                                 }
                             });
                         } else {
@@ -288,7 +288,7 @@
          * Handles updating application status from employer dashboard
          */
         updateApplicationStatus: function () {
-            $(document).on('click', '.jobus-update-status', function (e) {
+            $(document).on('click', '.jbs-update-status', function (e) {
                 e.preventDefault();
 
                 const btn = $(this);
@@ -337,7 +337,7 @@
                                 $trigger.find('.jbs-app-status-swatch')
                                     .attr('class', 'jbs-app-status-swatch jbs-app-status-swatch--' + newStatus);
                                 $trigger.attr('aria-expanded', 'false');
-                                $selector.find('.jbs-app-status-select-menu').removeClass('is-open');
+                                $selector.find('.jbs-app-status-select-menu').removeClass('jbs-is-open');
                                 $selector.find('.jbs-app-status-select-option').show()
                                     .filter('[data-status="' + newStatus + '"]').hide();
                             }

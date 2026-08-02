@@ -50,14 +50,14 @@ if ( ! empty( $logo['url'] ) ) { ?>
         <a href="<?php esc_url( home_url( '/' ) ); ?>">
             <img src="<?php echo esc_url( $logo['url'] ) ?>" alt="<?php get_bloginfo( 'name' ) ?>">
         </a>
-        <button class="close-btn jbs-d-block jbs-d-md-none"><i class="bi bi-x-lg"></i></button>
+        <button class="jbs-close-btn jbs-d-block jbs-d-md-none"><i class="bi bi-x-lg"></i></button>
     </div>
     <?php
 }
 ?>
 
-<div class="user-data">
-    <div class="user-avatar online jbs-position-relative jbs-rounded-circle">
+<div class="jbs-user-data">
+    <div class="jbs-user-avatar jbs-online jbs-position-relative jbs-rounded-circle">
         <?php
         $user_avatar = get_user_meta($user->ID, 'jobus_avatar', true);
         if ($user_avatar && filter_var($user_avatar, FILTER_VALIDATE_URL)) {
@@ -67,8 +67,8 @@ if ( ! empty( $logo['url'] ) ) { ?>
         }
         ?>
     </div>
-    <div class="user-name-data jbs-dropdown">
-        <button class="user-name jbs-dropdown-toggle user_name-btn" type="button" id="profile-dropdown" data-jbs-toggle="jbs-dropdown" data-jbs-auto-close="jbs-outside"
+    <div class="jbs-user-name-data jbs-dropdown">
+        <button class="jbs-user-name jbs-dropdown-toggle jbs-user_name-btn" type="button" id="profile-dropdown" data-jbs-toggle="jbs-dropdown" data-jbs-auto-close="jbs-outside"
                 aria-expanded="false">
             <?php echo esc_html( $user->display_name ); ?>
         </button>
@@ -77,14 +77,14 @@ if ( ! empty( $logo['url'] ) ) { ?>
                 <?php $view_profile_label = jobus_opt( 'label_view_profile', esc_html__( 'View Profile', 'jobus' ) ); ?>
                 <a href="<?php echo esc_url($profile_url); ?>" class="jbs-dropdown-item jbs-d-flex jbs-align-items-center">
                     <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/profile.svg') ?>" alt="<?php echo esc_attr( $view_profile_label ); ?>" class="lazy-img">
-                    <span class="jbs-ms-2 ps-1"><?php echo esc_html( $view_profile_label ); ?></span>
+                    <span class="jbs-ms-2 jbs-ps-1"><?php echo esc_html( $view_profile_label ); ?></span>
                 </a>
             </li>
         </ul>
     </div>
 </div>
 
-<nav class="main-nav">
+<nav class="jbs-main-nav">
     <ul class="jbs-style-none">
         <?php
         foreach ( $menu_items as $endpoint => $item ) :
@@ -115,7 +115,7 @@ if ( ! empty( $logo['url'] ) ) { ?>
 <?php
 $logout_label = jobus_opt( 'label_logout', esc_html__( 'Logout', 'jobus' ) );
 ?>
-<a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="jbs-d-flex jbs-w-100 jbs-align-items-center logout-btn jbs-mt-25">
+<a href="<?php echo esc_url(wp_logout_url(home_url())); ?>" class="jbs-d-flex jbs-w-100 jbs-align-items-center jbs-logout-btn jbs-mt-25">
     <img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/logout.svg') ?>" alt="<?php echo esc_attr( $logout_label ); ?>" class="lazy-img">
     <span><?php echo esc_html( $logout_label ); ?></span>
 </a>

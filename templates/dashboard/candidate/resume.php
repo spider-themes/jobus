@@ -87,7 +87,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
 ?>
 <div class="jbs-position-relative">
-    <h2 class="main-title"><?php esc_html_e( 'My Resume', 'jobus' ); ?></h2>
+    <h2 class="jbs-main-title"><?php esc_html_e( 'My Resume', 'jobus' ); ?></h2>
 
     <form action="" id="candidate-resume-form" method="post" enctype="multipart/form-data">
 
@@ -95,59 +95,59 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
         <input type="hidden" name="candidate_resume_form_submit" value="1">
 
         <?php if ( $show_cv_upload ) : ?>
-        <div class="jbs-bg-white card-box border-20" id="candidate-resume">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper jbs-mb-20">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20" id="candidate-resume">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Resume Attachment', 'jobus' ); ?></h4>
+            <div class="jbs-dash-input-wrapper jbs-mb-20">
                 <label for="cv_attachment"><?php esc_html_e( 'CV Attachment*', 'jobus' ); ?></label>
-                <div id="cv-upload-preview" class="preview <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
-                    <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
-                        <span id="cv-uploaded-filename"><?php echo esc_html( $cv_file_name ); ?></span>
-                        <a href="#" id="remove-uploaded-cv" class="remove-btn"><i class="bi bi-x"></i></a>
+                <div id="jbs-cv-upload-preview" class="jbs-preview <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
+                    <div class="jbs-attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
+                        <span id="jbs-cv-uploaded-filename"><?php echo esc_html( $cv_file_name ); ?></span>
+                        <a href="#" id="jbs-remove-uploaded-cv" class="jbs-remove-btn"><i class="bi bi-x"></i></a>
                     </div>
                 </div>
-                <input type="hidden" name="profile_cv_action" id="profile_cv_action" value="">
+                <input type="hidden" name="profile_cv_action" id="jbs-profile-cv-action" value="">
                 <input type="hidden" name="cv_attachment_id" id="cv_attachment_id" value="<?php echo esc_attr( $cv_attachment ); ?>">
             </div>
-            <div id="cv-upload-btn-wrapper" class="<?php echo ! empty( $cv_attachment ) ? 'hidden' : ''; ?>">
-                <div class="dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
+            <div id="jbs-cv-upload-btn-wrapper" class="<?php echo ! empty( $cv_attachment ) ? 'hidden' : ''; ?>">
+                <div class="jbs-dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
                     <i class="bi bi-plus"></i>
 					<?php esc_html_e( 'Upload CV', 'jobus' ); ?>
-                    <input type="file" id="upload_cv_button" name="upload_cv_button">
+                    <input type="file" id="jbs-upload-cv-button" name="upload_cv_button">
                 </div>
             </div>
-            <div id="cv-file-info" class="file-info <?php echo ! empty( $cv_attachment ) ? 'hidden' : ''; ?>">
+            <div id="jbs-cv-file-info" class="jbs-file-info <?php echo ! empty( $cv_attachment ) ? 'hidden' : ''; ?>">
                 <small><?php esc_html_e( 'Upload file .pdf, .doc, .docx', 'jobus' ); ?></small>
             </div>
         </div>
         <?php endif; ?>
 
         <?php if ( $show_intro_video ) : ?>
-        <div class="jbs-bg-white card-box jbs-border-20 jbs-mt-40" id="candidate-resume-video">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
-            <div class="intro-video-form jbs-position-relative jbs-mt-20 w-100">
-                <div class="dash-input-wrapper jbs-mb-15">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-resume-video">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Intro Video', 'jobus' ); ?></h4>
+            <div class="intro-video-form jbs-position-relative jbs-mt-20 jbs-w-100">
+                <div class="jbs-dash-input-wrapper jbs-mb-15">
                     <label for="video-title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                     <input type="text" id="video-title" name="video_title" value="<?php echo esc_attr( $video_data['video_title'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Intro', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper jbs-mb-15">
+                <div class="jbs-dash-input-wrapper jbs-mb-15">
                     <label for="video-url"><?php esc_html_e( 'Video URL', 'jobus' ); ?></label>
                     <input type="text" id="video-url" name="video_url" value="<?php echo esc_attr( $video_data['video_url'] ); ?>"
                            placeholder="<?php esc_attr_e( 'Enter your video URL', 'jobus' ); ?>">
                 </div>
-                <div class="dash-input-wrapper jbs-mb-15">
+                <div class="jbs-dash-input-wrapper jbs-mb-15">
                     <label for="video-bg-img"><?php esc_html_e( 'Background Image', 'jobus' ); ?></label>
 
                     <!-- Image Preview Section -->
-                    <div id="candidate-bg-img-preview" class="preview bg-img-preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
-                        <div class="attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
+                    <div id="candidate-bg-img-preview" class="jbs-preview jbs-bg-img-preview <?php echo empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
+                        <div class="jbs-attached-file jbs-d-flex jbs-align-items-center jbs-justify-content-between">
                             <span id="candidate-video-bg-image-uploaded-filename"><?php echo esc_url( $video_data['video_bg_img']['url'] ); ?></span>
-                            <a href="#" id="candidate-remove-uploaded-bg-img" class="remove-btn"><i class="bi bi-x"></i></a>
+                            <a href="#" id="candidate-remove-uploaded-bg-img" class="jbs-remove-btn"><i class="bi bi-x"></i></a>
                         </div>
                     </div>
 
                     <div id="candidate-bg-img-upload-btn-wrapper" class="<?php echo ! empty( $video_data['video_bg_img']['url'] ) ? 'hidden' : ''; ?>">
-                        <div class="dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
+                        <div class="jbs-dash-btn-one jbs-d-inline-block jbs-position-relative jbs-me-3">
                             <i class="bi bi-plus"></i>
                             <?php esc_html_e( 'Upload Image', 'jobus' ); ?>
                             <button type="button" id="candidate-video-bg-img-upload-btn" class="jbs-position-absolute jbs-w-100 jbs-h-100 jbs-start-0 jbs-top-0 jbs-opacity-0 jbs-pointer"></button>
@@ -162,17 +162,17 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
         <?php endif; ?>
 
         <?php if ( $show_education ) : ?>
-        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-education">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Education', 'jobus' ); ?></h4>
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-resume-education">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Education', 'jobus' ); ?></h4>
 
-            <div class="dash-input-wrapper jbs-mb-15">
+            <div class="jbs-dash-input-wrapper jbs-mb-15">
                 <label for="education_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text" id="education_title" name="education_title"
                        value="<?php echo esc_attr( $education_data['education_title'] ); ?>"
                        placeholder="<?php esc_attr_e( 'Education', 'jobus' ); ?>">
             </div>
 
-            <div class="jbs-accordion dash-accordion-one" id="education-repeater">
+            <div class="jbs-accordion jbs-dash-accordion-one" id="education-repeater">
 				<?php
 				$education = $education_data['education'];
 				if ( empty( $education ) ) {
@@ -203,16 +203,16 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_sl_num' ); ?>">
 												<?php esc_html_e( 'Serial Number', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
                                             <input type="text"
-                                                   class="form-control"
+                                                   class="jbs-form-control"
                                                    name="<?php echo esc_attr( 'education[' . $key . '][sl_num]' ); ?>"
                                                    id="<?php echo esc_attr( 'education_' . $key . '_sl_num' ); ?>"
                                                    value="<?php echo esc_attr( $value['sl_num'] ?? '' ); ?>">
@@ -221,15 +221,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_title' ); ?>">
 												<?php esc_html_e( 'Title', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <input type="text" class="form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <input type="text" class="jbs-form-control"
                                                    name="education[<?php echo esc_attr( $key ); ?>][title]"
                                                    id="education_<?php echo esc_attr( $key ); ?>_title"
                                                    value="<?php echo esc_attr( $value['title'] ?? '' ); ?>">
@@ -238,15 +238,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_academy' ); ?>">
 												<?php esc_html_e( 'Academy', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <input type="text" class="form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <input type="text" class="jbs-form-control"
                                                    name="education[<?php echo esc_attr( $key ); ?>][academy]"
                                                    id="education_<?php echo esc_attr( $key ); ?>_academy"
                                                    value="<?php echo esc_attr( $value['academy'] ?? '' ); ?>"
@@ -256,15 +256,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="<?php echo esc_attr( 'education_' . $key . '_description' ); ?>">
 												<?php esc_html_e( 'Description', 'jobus' ); ?>*
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <textarea class="size-lg form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <textarea class="jbs-size-lg jbs-form-control"
                                                       name="education[<?php echo esc_attr( $key ); ?>][description]"
                                                       id="education_<?php echo esc_attr( $key ); ?>_description"
                                                       placeholder="<?php esc_attr_e( 'Description of your education',
@@ -285,23 +285,23 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-education">
+            <button href="javascript:void(0)" class="jbs-dash-btn-one jbs-mt-2" id="add-education">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Education Item', 'jobus' ); ?>
             </button>
         </div>
         <?php endif; ?>
 
         <?php if ( $show_experience ) : ?>
-        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-resume-experience">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Experience', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper jbs-mb-15">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-resume-experience">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Experience', 'jobus' ); ?></h4>
+            <div class="jbs-dash-input-wrapper jbs-mb-15">
                 <label for="experience_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text" id="experience_title" name="experience_title"
                        value="<?php echo esc_attr( $experience_data['experience_title'] ); ?>"
                        placeholder="<?php esc_attr_e( 'Work Experience', 'jobus' ); ?>">
             </div>
 
-            <div class="jbs-accordion dash-accordion-one" id="experience-repeater">
+            <div class="jbs-accordion jbs-dash-accordion-one" id="experience-repeater">
 				<?php
 				$experience = $experience_data['experience'];
 				if ( empty( $experience ) ) {
@@ -333,15 +333,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_sl_num">
 												<?php esc_html_e( 'Serial Number', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <input type="text" class="form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <input type="text" class="jbs-form-control"
                                                    name="experience[<?php echo esc_attr( $key ); ?>][sl_num]"
                                                    id="experience_<?php echo esc_attr( $key ); ?>_sl_num"
                                                    value="<?php echo esc_attr( $value['sl_num'] ?? '' ); ?>"
@@ -352,15 +352,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_title">
 												<?php esc_html_e( 'Title', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <input type="text" class="form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <input type="text" class="jbs-form-control"
                                                    name="experience[<?php echo esc_attr( $key ); ?>][title]"
                                                    id="experience_<?php echo esc_attr( $key ); ?>_title"
                                                    value="<?php echo esc_attr( $value['title'] ?? '' ); ?>"
@@ -371,23 +371,23 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label><?php esc_html_e( 'Duration', 'jobus' ); ?></label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
                                         <div class="jbs-row">
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper jbs-mb-30">
-                                                    <input type="date" class="form-control"
+                                                <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                                    <input type="date" class="jbs-form-control"
                                                            name="experience[<?php echo esc_attr( $key ); ?>][start_date]"
                                                            id="experience_<?php echo esc_attr( $key ); ?>_start_date"
                                                            value="<?php echo esc_attr( $value['start_date'] ?? '' ); ?>">
                                                 </div>
                                             </div>
                                             <div class="jbs-col-sm-6">
-                                                <div class="dash-input-wrapper jbs-mb-30">
-                                                    <input type="date" class="form-control"
+                                                <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                                    <input type="date" class="jbs-form-control"
                                                            name="experience[<?php echo esc_attr( $key ); ?>][end_date]"
                                                            id="experience_<?php echo esc_attr( $key ); ?>_end_date"
                                                            value="<?php echo esc_attr( $value['end_date'] ?? '' ); ?>">
@@ -399,15 +399,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
                                             <label for="experience_<?php echo esc_attr( $key ); ?>_description">
 												<?php esc_html_e( 'Description', 'jobus' ); ?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-30">
-                                            <textarea class="form-control"
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30">
+                                            <textarea class="jbs-form-control"
                                                       name="experience[<?php echo esc_attr( $key ); ?>][description]"
                                                       id="experience_<?php echo esc_attr( $key ); ?>_description"
                                                       placeholder="<?php esc_attr_e( 'Describe your role and achievements', 'jobus' ); ?>"
@@ -417,7 +417,7 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                                 </div>
 
                                 <div class="jbs-text-end">
-                                    <button type="button" class="btn jbs-btn-danger jbs-btn-sm remove-experience jbs-mt-2 jbs-mb-2"
+                                    <button type="button" class="jbs-btn jbs-btn-danger jbs-btn-sm remove-experience jbs-mt-2 jbs-mb-2"
                                             title="<?php esc_attr_e( 'Remove Item', 'jobus' ); ?>">
                                         <i class="bi bi-x"></i> <?php esc_html_e( 'Remove', 'jobus' ); ?>
                                     </button>
@@ -429,19 +429,19 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 				}
 				?>
             </div>
-            <button href="javascript:void(0)" class="dash-btn-one jbs-mt-2" id="add-experience">
+            <button href="javascript:void(0)" class="jbs-dash-btn-one jbs-mt-2" id="add-experience">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Experience Item', 'jobus' ); ?>
             </button>
         </div>
         <?php endif; ?>
 
-        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="candidate-taxonomy">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-taxonomy">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
             <!-- Add Categories -->
-            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+            <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                 <label for="candidate-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
-                <div class="skills-wrapper">
+                <div class="jbs-skills-wrapper">
 					<?php
 					$current_categories = array();
 					if ( isset( $candidate_id ) && $candidate_id ) {
@@ -451,15 +451,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$category_ids = ! empty( $current_categories ) ? implode( ',', wp_list_pluck( $current_categories, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-category-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-category-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_categories ) ): ?>
 							<?php foreach ( $current_categories as $cat ): ?>
-                                <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
+                                <li class="jbs-is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
                                     <button type="button"><?php echo esc_html( $cat->name ); ?> <i class="bi bi-x"></i></button>
                                 </li>
 							<?php endforeach; ?>
 						<?php endif; ?>
-                        <li class="more_tag">
+                        <li class="jbs-more_tag">
                             <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                         </li>
                     </ul>
@@ -468,9 +468,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
 
             <!-- Add Locations -->
-            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+            <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                 <label for="candidate-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
-                <div class="skills-wrapper">
+                <div class="jbs-skills-wrapper">
 					<?php
 					$current_location = array();
 					if ( isset( $candidate_id ) && $candidate_id ) {
@@ -480,15 +480,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$locations_ids = ! empty( $current_location ) ? implode( ',', wp_list_pluck( $current_location, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-location-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-location-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_location ) ) : ?>
 							<?php foreach ( $current_location as $location ): ?>
-                                <li class="is_tag" data-location-id="<?php echo esc_attr( $location->term_id ); ?>">
+                                <li class="jbs-is_tag" data-location-id="<?php echo esc_attr( $location->term_id ); ?>">
                                     <button type="button"><?php echo esc_html( $location->name ); ?> <i class="bi bi-x"></i></button>
                                 </li>
 							<?php endforeach; ?>
 						<?php endif; ?>
-                        <li class="more_tag">
+                        <li class="jbs-more_tag">
                             <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                         </li>
                     </ul>
@@ -497,9 +497,9 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             </div>
 
             <!-- Add Skills -->
-            <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+            <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                 <label for="candidate-skills-list"><?php esc_html_e( 'Add Skills', 'jobus' ); ?></label>
-                <div class="skills-wrapper">
+                <div class="jbs-skills-wrapper">
 					<?php
 					$current_skills = array();
 					if ( isset( $candidate_id ) && $candidate_id ) {
@@ -509,15 +509,15 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
 					// To store category IDs
 					$skill_ids = ! empty( $current_skills ) ? implode( ',', wp_list_pluck( $current_skills, 'term_id' ) ) : '';
 					?>
-                    <ul id="candidate-skills-list" class="jbs-style-none jbs-d-flex flex-wrap jbs-align-items-center">
+                    <ul id="candidate-skills-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
 						<?php if ( ! empty( $current_skills ) ) : ?>
 							<?php foreach ( $current_skills as $skill ): ?>
-                                <li class="is_tag" data-skill-id="<?php echo esc_attr( $skill->term_id ); ?>">
+                                <li class="jbs-is_tag" data-skill-id="<?php echo esc_attr( $skill->term_id ); ?>">
                                     <button type="button"><?php echo esc_html( $skill->name ); ?> <i class="bi bi-x"></i></button>
                                 </li>
 							<?php endforeach; ?>
 						<?php endif; ?>
-                        <li class="more_tag">
+                        <li class="jbs-more_tag">
                             <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                         </li>
                     </ul>
@@ -527,24 +527,24 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
         </div>
 
         <?php if ( $show_portfolio ) : ?>
-        <div class="jbs-bg-white card-box border-20 jbs-mt-40" id="portfolio-section">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Portfolio', 'jobus' ); ?></h4>
-            <div class="dash-input-wrapper jbs-mb-30">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="portfolio-section">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Portfolio', 'jobus' ); ?></h4>
+            <div class="jbs-dash-input-wrapper jbs-mb-30">
                 <label for="portfolio_title"><?php esc_html_e( 'Title', 'jobus' ); ?></label>
                 <input type="text"
                        id="portfolio_title"
                        name="portfolio_title"
                        value="<?php echo esc_attr( $portfolio_data['portfolio_title'] ); ?>"
-                       class="form-control">
+                       class="jbs-form-control">
             </div>
 
             <!-- Portfolio Preview Gallery -->
-            <div class="portfolio-preview-wrapper jbs-mb-4">
-                <div id="portfolio-items">
+            <div class="jbs-portfolio-preview-wrapper jbs-mb-4">
+                <div id="jbs-portfolio-items">
 					<?php
 					if ( ! empty( $portfolio_data['portfolio'] ) ) {
                         ?>
-                        <ul class="portfolio-image-list">
+                        <ul class="jbs-portfolio-image-list">
 							<?php
                             foreach ( $portfolio_data['portfolio'] as $image_id ) {
 								$image_url = wp_get_attachment_image_url( $image_id );
@@ -563,16 +563,16 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
                 </div>
             </div>
 
-            <input type="hidden" name="portfolio[]" id="portfolio_ids"
+            <input type="hidden" name="portfolio[]" id="jbs-portfolio-ids"
                    value="<?php echo ! empty( $portfolio_data['portfolio'] ) ? esc_attr( implode( ',', $portfolio_data['portfolio'] ) ) : ''; ?>">
-            <button type="button" id="add-portfolio-images" class="dash-btn-one jbs-mt-3">
+            <button type="button" id="jbs-add-portfolio-images" class="jbs-dash-btn-one jbs-mt-3">
                 <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Gallery', 'jobus' ); ?>
             </button>
         </div>
         <?php endif; ?>
 
-        <div class="button-group d-inline-flex align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s me-3"><?php echo esc_html( $save_changes_label ); ?></button>
+        <div class="button-group d-inline-flex jbs-align-items-center jbs-mt-30">
+            <button type="submit" class="jbs-dash-btn-two jbs-tran3s jbs-me-3"><?php echo esc_html( $save_changes_label ); ?></button>
         </div>
     </form>
 </div>

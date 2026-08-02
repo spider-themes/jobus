@@ -35,9 +35,9 @@ $specs_options = jobus_get_specs_options();
 ?>
 <div class="jbs-col-12">
     <div class="jbs-filter-area-tab">
-        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4">
+        <div class="jbs-light-bg jbs-border-20 jbs-ps-4 jbs-pe-4">
 
-            <a class="jbs-filter-header border-20 jbs-d-block jbs-collapsed" href="#collapseFilterHeader" role="button" aria-expanded="false" data-jbs-toggle="collapse">
+            <a class="jbs-filter-header jbs-border-20 jbs-d-block jbs-collapsed" href="#collapseFilterHeader" role="button" aria-expanded="false" data-jbs-toggle="collapse">
                 <span class="jbs-filter-heading jbs-fw-500 jbs-text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></span>
             </a>
 

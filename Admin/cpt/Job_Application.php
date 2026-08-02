@@ -40,10 +40,10 @@ class Job_Application {
 		if ( $post->post_type === 'jobus_applicant' ) {
 			$candidate_ip = get_post_meta( $post->ID, 'candidate_ip', true );
 			?>
-            <p class="jobus-application-submission-info">
-                <span class="jobus-application-submission-date">
+            <p class="jbs-application-submission-info">
+                <span class="jbs-application-submission-date">
                     <?php esc_html_e( 'Submitted On ', 'jobus' ); ?><?php echo esc_html( get_the_time( get_option( 'date_format' ) ) ) ?></span>
-                <span class="jobus-applicant-ip"><?php esc_html_e( 'from IP', 'jobus' ); ?><?php echo esc_html( $candidate_ip ); ?></span>
+                <span class="jbs-applicant-ip"><?php esc_html_e( 'from IP', 'jobus' ); ?><?php echo esc_html( $candidate_ip ); ?></span>
             </p>
 			<?php
 		}
@@ -226,11 +226,11 @@ class Job_Application {
                     'rejected' => esc_html__( 'Rejected', 'jobus' ),
                 ];
 
-                $status_class = 'jobus-status-' . $status;
+                $status_class = 'jbs-status-' . $status;
                 // Use the status label if it exists, otherwise use 'Default'
                 $status_text = $status_labels[ $status ] ?? $status_labels[''];
 
-                echo '<span class="button button-small jobus-application-status ' . esc_attr( $status_class ) . '">' .
+                echo '<span class="button button-small jbs-application-status ' . esc_attr( $status_class ) . '">' .
                      esc_html( $status_text ) . '</span>';
                 break;
 			case 'submission_time':

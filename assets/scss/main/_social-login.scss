@@ -50,7 +50,7 @@
       box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.12), var(--jbs-social-shadow);
     }
 
-    &.is-loading {
+    &.jbs-is-loading {
       pointer-events: none;
       opacity: 0.92;
     }

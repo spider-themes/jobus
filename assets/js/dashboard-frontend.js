@@ -178,12 +178,12 @@
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="social_${index}_icon">Icon</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <select name="social_icons[${index}][icon]" id="social_${index}_icon" class="jbs-nice-select">
                                                 ${optionsHtml}
                                             </select>
@@ -193,12 +193,12 @@
 
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="social_${index}_url">URL</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="social_icons[${index}][url]" id="social_${index}_url" class="jbs-form-control" placeholder="https://example.com">
                                         </div>
                                     </div>
@@ -372,7 +372,7 @@
             function checkPasswordStrength() {
                 const password = $newPassword.val().trim();
                 if (!password) {
-                    $passwordStrength.removeClass('text-success text-warning text-danger').empty();
+                    $passwordStrength.removeClass('text-success jbs-text-warning jbs-text-danger').empty();
                     return;
                 }
 
@@ -386,13 +386,13 @@
 
                 // Display strength indicator
                 if (strength < 3) {
-                    $passwordStrength.removeClass('text-success text-warning').addClass('text-danger')
+                    $passwordStrength.removeClass('text-success jbs-text-warning').addClass('jbs-text-danger')
                         .text(texts.password_weak || 'Weak password');
                 } else if (strength < 5) {
-                    $passwordStrength.removeClass('text-success text-danger').addClass('text-warning')
+                    $passwordStrength.removeClass('text-success jbs-text-danger').addClass('jbs-text-warning')
                         .text(texts.password_medium || 'Medium strength password');
                 } else {
-                    $passwordStrength.removeClass('text-warning text-danger').addClass('text-success')
+                    $passwordStrength.removeClass('jbs-text-warning jbs-text-danger').addClass('text-success')
                         .text(texts.password_strong || 'Strong password');
                 }
             }
@@ -403,22 +403,22 @@
                 const confirmPass = $confirmPassword.val().trim();
 
                 if (!confirmPass) {
-                    $passwordMatchStatus.removeClass('text-success text-danger').empty();
+                    $passwordMatchStatus.removeClass('text-success jbs-text-danger').empty();
                     return;
                 }
 
                 if (newPass === confirmPass) {
-                    $passwordMatchStatus.removeClass('text-danger').addClass('text-success')
+                    $passwordMatchStatus.removeClass('jbs-text-danger').addClass('text-success')
                         .text(texts.passwords_match || 'Passwords match');
                 } else {
-                    $passwordMatchStatus.removeClass('text-success').addClass('text-danger')
+                    $passwordMatchStatus.removeClass('text-success').addClass('jbs-text-danger')
                         .text(texts.passwords_mismatch || 'Passwords do not match');
                 }
             }
 
             // Show/hide password toggle
-            $form.find('.passVicon').on('click', function() {
-                $(this).toggleClass("eye-slash");
+            $form.find('.jbs-passVicon').on('click', function() {
+                $(this).toggleClass("jbs-eye-slash");
                 const $input = $(this).closest('.dash-input-wrapper').find('input');
                 const type = $input.attr('type') === 'password' ? 'text' : 'password';
                 $input.attr('type', type);

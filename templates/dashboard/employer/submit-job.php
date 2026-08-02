@@ -55,7 +55,7 @@ $submit_button_label = $editing_job ? $update_job_label : $post_job_label;
 <div class="jbs-position-relative">
 
     <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mb-40 jbs-lg-mb-30">
-        <h2 class="main-title jbs-m-0"> <?php echo esc_html( $sec_title ); ?> </h2>
+        <h2 class="jbs-main-title jbs-m-0"> <?php echo esc_html( $sec_title ); ?> </h2>
         <a href="<?php echo esc_url( $my_jobs_url ); ?>" class="jbs-btn jbs-btn-primary jbs-mt-3 jbs-mt-sm-0">
             <i class="bi bi-arrow-left"></i>
             <?php esc_html_e( 'Back to Jobs', 'jobus' ); ?>
@@ -83,17 +83,17 @@ if ( ! $can_submit ) {
 
         <?php do_action('jobus_submit_job_form_fields_start', $job_id); ?>
 
-        <div class="jbs-bg-white card-box border-20">
-            <h4 class="dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
+        <div class="jbs-bg-white jbs-card-box jbs-border-20">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Job Details', 'jobus' ); ?></h4>
 
             <!-- Job Title & Content -->
-            <div class="dash-input-wrapper jbs-mb-30">
+            <div class="jbs-dash-input-wrapper jbs-mb-30">
                 <label for="job_title"><?php esc_html_e( 'Job Title', 'jobus' ); ?></label>
                 <input type="text" name="job_title" id="job_title" placeholder="<?php esc_attr_e( 'Enter job title', 'jobus' ); ?>" value="<?php echo esc_attr( $job_title ); ?>" required>
             </div>
 
             <!-- Job Content -->
-            <div class="dash-input-wrapper jbs-mb-30">
+            <div class="jbs-dash-input-wrapper jbs-mb-30">
                 <label for="job_description"><?php esc_html_e( 'Job Description', 'jobus' ); ?></label>
                 <div class="editor-wrapper">
                     <?php
@@ -120,9 +120,9 @@ if ( ! $can_submit ) {
 
             <!-- Company Logo Upload -->
             <div id="company-logo-section">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Company Logo', 'jobus' ); ?></h4>
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Company Logo', 'jobus' ); ?></h4>
                 
-                <div class="dash-input-wrapper jbs-mb-30">
+                <div class="jbs-dash-input-wrapper jbs-mb-30">
                     <label for="job_company_logo"><?php esc_html_e( 'Upload Company Logo', 'jobus' ); ?></label>
                     <div class="logo-upload-wrapper">
                         <?php
@@ -139,9 +139,9 @@ if ( ! $can_submit ) {
                         
                         <div class="logo-preview-container">
                             <?php if ( $current_logo_url ) : ?>
-                                <img src="<?php echo esc_url( $current_logo_url ); ?>" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="logo-preview" style="max-width: 150px; max-height: 150px; display: block; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                                <img src="<?php echo esc_url( $current_logo_url ); ?>" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="jbs-logo-preview" style="max-width: 150px; max-height: 150px; display: block; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
                             <?php else : ?>
-                                <img src="" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="logo-preview" style="max-width: 150px; max-height: 150px; display: none; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                                <img src="" alt="<?php esc_attr_e( 'Company Logo Preview', 'jobus' ); ?>" class="jbs-logo-preview" style="max-width: 150px; max-height: 150px; display: none; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
                             <?php endif; ?>
                         </div>
                         
@@ -172,12 +172,12 @@ if ( ! $can_submit ) {
             </div>
 
             <div id="job-taxonomy">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Taxonomies', 'jobus' ); ?></h4>
 
                 <!-- Add Categories -->
-                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+                <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-category-list"><?php esc_html_e( 'Categories', 'jobus' ); ?></label>
-                    <div class="skills-wrapper">
+                    <div class="jbs-skills-wrapper">
                         <?php
                         $current_categories = array();
                         if ( isset( $job_id ) && $job_id ) {
@@ -188,12 +188,12 @@ if ( ! $can_submit ) {
                         <ul id="job-category-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_categories ) ): ?>
                                 <?php foreach ( $current_categories as $cat ): ?>
-                                    <li class="is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
+                                    <li class="jbs-is_tag" data-category-id="<?php echo esc_attr( $cat->term_id ); ?>">
                                         <button type="button"><?php echo esc_html( $cat->name ); ?> <i class="bi bi-x"></i></button>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <li class="more_tag">
+                            <li class="jbs-more_tag">
                                 <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                             </li>
                         </ul>
@@ -202,9 +202,9 @@ if ( ! $can_submit ) {
                 </div>
 
                 <!-- Add Locations -->
-                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+                <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-location-list"><?php esc_html_e( 'Locations', 'jobus' ); ?></label>
-                    <div class="skills-wrapper">
+                    <div class="jbs-skills-wrapper">
                         <?php
                         $current_locations = array();
                         if ( isset( $job_id ) && $job_id ) {
@@ -215,12 +215,12 @@ if ( ! $can_submit ) {
                         <ul id="job-location-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_locations ) ): ?>
                                 <?php foreach ( $current_locations as $loc ): ?>
-                                    <li class="is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
+                                    <li class="jbs-is_tag" data-location-id="<?php echo esc_attr( $loc->term_id ); ?>">
                                         <button type="button"><?php echo esc_html( $loc->name ); ?> <i class="bi bi-x"></i></button>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <li class="more_tag">
+                            <li class="jbs-more_tag">
                                 <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                             </li>
                         </ul>
@@ -229,9 +229,9 @@ if ( ! $can_submit ) {
                 </div>
 
                 <!-- Add Tags -->
-                <div class="dash-input-wrapper jbs-mb-40 jbs-mt-20">
+                <div class="jbs-dash-input-wrapper jbs-mb-40 jbs-mt-20">
                     <label for="job-tag-list"><?php esc_html_e( 'Tags', 'jobus' ); ?></label>
-                    <div class="skills-wrapper">
+                    <div class="jbs-skills-wrapper">
                         <?php
                         $current_tags = array();
                         if ( isset( $job_id ) && $job_id ) {
@@ -242,12 +242,12 @@ if ( ! $can_submit ) {
                         <ul id="job-tag-list" class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-align-items-center">
                             <?php if ( ! empty( $current_tags ) ): ?>
                                 <?php foreach ( $current_tags as $tag ): ?>
-                                    <li class="is_tag" data-tag-id="<?php echo esc_attr( $tag->term_id ); ?>">
+                                    <li class="jbs-is_tag" data-tag-id="<?php echo esc_attr( $tag->term_id ); ?>">
                                         <button type="button"><?php echo esc_html( $tag->name ); ?> <i class="bi bi-x"></i></button>
                                     </li>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <li class="more_tag">
+                            <li class="jbs-more_tag">
                                 <button type="button"><?php esc_html_e( '+', 'jobus' ); ?></button>
                             </li>
                         </ul>
@@ -257,7 +257,7 @@ if ( ! $can_submit ) {
             </div>
 
             <div id="job-specifications">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Specifications', 'jobus' ); ?></h4>
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Specifications', 'jobus' ); ?></h4>
                 <div class="jbs-row">
                     <?php
                     // Dynamic fields for candidate specifications
@@ -269,7 +269,7 @@ if ( ! $can_submit ) {
                                 $meta_name   = $field['meta_name'] ?? '';
                                 $meta_value  = isset( $dynamic_fields[ $meta_key ] ) ? (array) $dynamic_fields[ $meta_key ] : array();
                                 $meta_values = $field['meta_values_group'] ?? array();
-                                echo '<div class="jbs-col-lg-3"><div class="dash-input-wrapper jbs-mb-25">';
+                                echo '<div class="jbs-col-lg-3"><div class="jbs-dash-input-wrapper jbs-mb-25">';
                                 echo '<label for="' . esc_attr( $meta_key ) . '">' . esc_html( $meta_name ) . '</label>';
                                 echo '<select name="' . esc_attr( $meta_key ) . '[]" id="' . esc_attr( $meta_key ) . '" class="jbs-nice-select" multiple>';
                                 foreach ( $meta_values as $option ) {
@@ -293,26 +293,26 @@ if ( ! $can_submit ) {
                 <div class="jbs-row">
                     <div class="jbs-row">
                         <div class="jbs-col-md-12">
-                            <div class="dash-input-wrapper jbs-mb-30">
+                            <div class="jbs-dash-input-wrapper jbs-mb-30">
                                 <select id="is_company_website" name="is_company_website" class="jbs-nice-select">
                                     <option value="default" <?php selected( $is_company_website, 'default' ); ?>><?php esc_html_e( 'Default', 'jobus' ); ?></option>
                                     <option value="custom" <?php selected( $is_company_website, 'custom' ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
                                 </select>
                             </div>
                             <div id="company-website-fields">
-                                <div class="dash-input-wrapper jbs-mb-30">
+                                <div class="jbs-dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-text"><?php esc_html_e( 'Website Text', 'jobus' ); ?></label>
                                     <input type="text" id="company-website-text" name="company_website[text]"
                                            placeholder="<?php esc_attr_e( 'Visit job website', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_text ); ?>">
                                 </div>
-                                <div class="dash-input-wrapper jbs-mb-30">
+                                <div class="jbs-dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-url"><?php esc_html_e( 'Website URL', 'jobus' ); ?></label>
                                     <input type="url" id="company-website-url" name="company_website[url]"
                                            placeholder="<?php esc_attr_e( 'Enter Your Website URL', 'jobus' ); ?>"
                                            value="<?php echo esc_attr( $company_website_url ); ?>">
                                 </div>
-                                <div class="dash-input-wrapper jbs-mb-30">
+                                <div class="jbs-dash-input-wrapper jbs-mb-30">
                                     <label for="company-website-target"><?php esc_html_e( 'Website Target', 'jobus' ); ?></label>
                                     <select id="company-website-target" name="company_website[target]" class="jbs-nice-select">
                                         <option value="_self" <?php selected( $company_website_target, '_self' ); ?>><?php esc_html_e( 'Self Tab', 'jobus' ); ?></option>
@@ -327,8 +327,8 @@ if ( ! $can_submit ) {
 
             <!-- External Application URL -->
             <div id="external-application-url">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Application Method', 'jobus' ); ?></h4>
-                <div class="dash-input-wrapper jbs-mb-30">
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Application Method', 'jobus' ); ?></h4>
+                <div class="jbs-dash-input-wrapper jbs-mb-30">
                     <select id="is_apply_btn" name="is_apply_btn" class="jbs-nice-select">
                         <option value="default" <?php selected( $is_apply_btn, 'default' ); ?>><?php esc_html_e( 'Internal Application Form (Default)', 'jobus' ); ?></option>
                         <option value="external" <?php selected( $is_apply_btn, 'external' ); ?>><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></option>
@@ -338,7 +338,7 @@ if ( ! $can_submit ) {
                     </p>
                 </div>
                 <div id="application-url-fields" class="<?php echo $is_apply_btn === 'external' ? '' : 'jbs-d-none'; ?>">
-                    <div class="dash-input-wrapper jbs-mb-30">
+                    <div class="jbs-dash-input-wrapper jbs-mb-30">
                         <label for="apply-form-url"><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></label>
                         <input type="url" id="apply-form-url" name="apply_form_url"
                                placeholder="<?php esc_attr_e( 'https://careers.yourcompany.com/apply/12345', 'jobus' ); ?>"
@@ -352,7 +352,7 @@ if ( ! $can_submit ) {
             </div>
         </div>
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
-            <button type="submit" class="dash-btn-two tran3s jbs-me-3">
+            <button type="submit" class="jbs-dash-btn-two jbs-tran3s jbs-me-3">
                 <?php echo esc_html( $submit_button_label ); ?>
             </button>
         </div>

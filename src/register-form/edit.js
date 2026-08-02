@@ -4,7 +4,7 @@ import {Fragment} from 'react';
 import {__} from '@wordpress/i18n';
 
 function Edit({attributes, setAttributes}) {
-    const blockProps = useBlockProps({className: 'jobus-registration-section'});
+    const blockProps = useBlockProps({className: 'jbs-registration-section'});
     const {candidate_username, candidate_email, candidate_pass, candidate_confirm_pass, candidate_tab_title, employer_tab_title} = attributes;
     const {employer_username, employer_email, employer_pass, employer_confirm_pass, redirect_url} = attributes;
 
@@ -99,13 +99,13 @@ function Edit({attributes, setAttributes}) {
 
 
             <div {...blockProps}>
-                <div className="user-data-form">
+                <div className="jbs-user-data-form">
 
                         <div className="jbs-text-center">
                         <h2>{__('Create Account', 'jobus')}</h2>
                     </div>
 
-                    <div className="form-wrapper jbs-m-auto">
+                    <div className="jbs-form-wrapper jbs-m-auto">
 
                         <ul className="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
                             <li className="jbs-nav-item" role="presentation">
@@ -123,7 +123,7 @@ function Edit({attributes, setAttributes}) {
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
@@ -136,7 +136,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
@@ -149,7 +149,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_pass"
@@ -161,7 +161,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="candidate_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="candidate_confirm_pass"
@@ -181,7 +181,7 @@ function Edit({attributes, setAttributes}) {
                                 <form method="post">
                                     <div className="jbs-row">
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_username">{__('Name*', 'jobus')}</label>
                                                 <input
                                                     type="text"
@@ -194,7 +194,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_email">{__('Email*', 'jobus')}</label>
                                                 <input
                                                     type="email"
@@ -207,7 +207,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_pass">{__('Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_pass"
@@ -219,7 +219,7 @@ function Edit({attributes, setAttributes}) {
                                             </div>
                                         </div>
                                         <div className="jbs-col-12">
-                                            <div className="input-group-meta jbs-position-relative jbs-mb-25">
+                                            <div className="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                                 <label htmlFor="employer_confirm_pass">{__('Confirm Password*', 'jobus')}</label>
                                                 <input
                                                     name="employer_confirm_pass"

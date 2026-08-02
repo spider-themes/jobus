@@ -67,7 +67,7 @@ $specs_options = jobus_get_specs_options();
 <div class="jbs-col-xl-3 jbs-col-lg-4">
 
     <button type="button"
-        class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 tran3s jbs-d-lg-none jbs-mb-40 jbs_filter-transparent"
+        class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 jbs-tran3s jbs-d-lg-none jbs-mb-40 jbs-jbs_filter-transparent"
         data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e('Filter', 'jobus'); ?>
@@ -91,11 +91,11 @@ $specs_options = jobus_get_specs_options();
             }
             ?>
             <a href="<?php echo esc_url(get_post_type_archive_link('jobus_job')); ?>" id="jbs-clear-all-filters"
-                class="jbs-clear-all-btn jbs-fs-13 jbs-fw-500 tran3s <?php echo $has_active_filters ? '' : 'jbs-d-none'; ?>">
+                class="jbs-clear-all-btn jbs-fs-13 jbs-fw-500 jbs-tran3s <?php echo $has_active_filters ? '' : 'jbs-d-none'; ?>">
                 <?php esc_html_e('Clear All', 'jobus'); ?>
             </a>
         </div>
-        <div class="light-bg border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
+        <div class="jbs-light-bg jbs-border-20 jbs-ps-4 jbs-pe-4 jbs-pt-25 jbs-pb-30 jbs-mt-20">
             <form action="<?php echo esc_url(get_post_type_archive_link('jobus_job')) ?>" role="search"
                 method="get" data-jbs-filter-form="true">
 

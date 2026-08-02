@@ -164,24 +164,24 @@ class Messaging {
 			}
 
 			?>
-			<div class="wrap jobus-analytics-wrap">
+			<div class="wrap jbs-analytics-wrap">
 				<!-- Standard Header Section -->
-				<div class="jobus-analytics-header">
-					<div class="jobus-analytics-header-content">
-						<h1 class="jobus-analytics-title">
-							<span class="jobus-analytics-icon">
+				<div class="jbs-analytics-header">
+					<div class="jbs-analytics-header-content">
+						<h1 class="jbs-analytics-title">
+							<span class="jbs-analytics-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 									<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
 								</svg>
 							</span>
 							<?php esc_html_e( 'Messaging Activity', 'jobus' ); ?>
 						</h1>
-						<p class="jobus-analytics-subtitle">
+						<p class="jbs-analytics-subtitle">
 							<?php esc_html_e( 'Monitor conversations between candidates and employers across your platform.', 'jobus' ); ?>
 						</p>
 					</div>
-					<div class="jobus-analytics-header-meta">
-						<span class="jobus-analytics-date">
+					<div class="jbs-analytics-header-meta">
+						<span class="jbs-analytics-date">
 							<span class="dashicons dashicons-calendar-alt"></span>
 							<?php echo esc_html( wp_date( 'F j, Y' ) ); ?>
 						</span>
@@ -189,57 +189,57 @@ class Messaging {
 				</div>
 				
 				<!-- Main Analytics Content (Full width, no sidebar) -->
-				<div class="jobus-analytics-content">
+				<div class="jbs-analytics-content">
 					
 					<!-- Metrics Grid -->
-					<div class="jobus-analytics-stats-grid">
+					<div class="jbs-analytics-stats-grid">
 						
-						<div class="jobus-stat-card jobus-stat-jobs">
-							<div class="jobus-stat-card-icon">
+						<div class="jbs-stat-card jbs-stat-jobs">
+							<div class="jbs-stat-card-icon">
 								<span class="dashicons dashicons-format-chat"></span>
 							</div>
-							<div class="jobus-stat-card-content">
-								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $total_messages ) ); ?></span>
-								<span class="jobus-stat-label"><?php esc_html_e( 'Total Messages Sent', 'jobus' ); ?></span>
+							<div class="jbs-stat-card-content">
+								<span class="jbs-stat-value"><?php echo esc_html( number_format_i18n( $total_messages ) ); ?></span>
+								<span class="jbs-stat-label"><?php esc_html_e( 'Total Messages Sent', 'jobus' ); ?></span>
 							</div>
 						</div>
 
-						<div class="jobus-stat-card jobus-stat-applications">
-							<div class="jobus-stat-card-icon">
+						<div class="jbs-stat-card jbs-stat-applications">
+							<div class="jbs-stat-card-icon">
 								<span class="dashicons dashicons-networking"></span>
 							</div>
-							<div class="jobus-stat-card-content">
-								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $active_threads ) ); ?></span>
-								<span class="jobus-stat-label"><?php esc_html_e( 'Active Conversations', 'jobus' ); ?></span>
+							<div class="jbs-stat-card-content">
+								<span class="jbs-stat-value"><?php echo esc_html( number_format_i18n( $active_threads ) ); ?></span>
+								<span class="jbs-stat-label"><?php esc_html_e( 'Active Conversations', 'jobus' ); ?></span>
 							</div>
 						</div>
 
-						<div class="jobus-stat-card jobus-stat-companies">
-							<div class="jobus-stat-card-icon">
+						<div class="jbs-stat-card jbs-stat-companies">
+							<div class="jbs-stat-card-icon">
 								<span class="dashicons dashicons-update-alt"></span>
 							</div>
-							<div class="jobus-stat-card-content">
-								<span class="jobus-stat-value"><?php echo esc_html( $avg_per_thread ); ?></span>
-								<span class="jobus-stat-label"><?php esc_html_e( 'Msgs Per Thread', 'jobus' ); ?></span>
+							<div class="jbs-stat-card-content">
+								<span class="jbs-stat-value"><?php echo esc_html( $avg_per_thread ); ?></span>
+								<span class="jbs-stat-label"><?php esc_html_e( 'Msgs Per Thread', 'jobus' ); ?></span>
 							</div>
 						</div>
 
-						<div class="jobus-stat-card jobus-stat-candidates">
-							<div class="jobus-stat-card-icon">
+						<div class="jbs-stat-card jbs-stat-candidates">
+							<div class="jbs-stat-card-icon">
 								<span class="dashicons dashicons-groups"></span>
 							</div>
-							<div class="jobus-stat-card-content">
-								<span class="jobus-stat-value"><?php echo esc_html( number_format_i18n( $unique_users ) ); ?></span>
-								<span class="jobus-stat-label"><?php esc_html_e( 'Unique Users', 'jobus' ); ?></span>
+							<div class="jbs-stat-card-content">
+								<span class="jbs-stat-value"><?php echo esc_html( number_format_i18n( $unique_users ) ); ?></span>
+								<span class="jbs-stat-label"><?php esc_html_e( 'Unique Users', 'jobus' ); ?></span>
 							</div>
 						</div>
 
 					</div>
 
 					<!-- Information Notice -->
-					<div class="jobus-alert-card jobus-alert-info">
-						<div class="jobus-alert-icon"><span class="dashicons dashicons-info-outline"></span></div>
-						<div class="jobus-alert-content">
+					<div class="jbs-alert-card jbs-analytics-alert-info">
+						<div class="jbs-alert-icon"><span class="dashicons dashicons-info-outline"></span></div>
+						<div class="jbs-alert-content">
 							<strong><?php esc_html_e( 'Frontend Capability Active', 'jobus' ); ?></strong>
 							<p>
 								<?php esc_html_e( 'The actual messaging interface is fully functional and naturally integrated into your site\'s frontend dashboard for Employers and Candidates. To protect user privacy and respect direct communications, the chat UI has been deactivated here in the WordPress Admin area. Use this data panel to securely track overall platform engagement.', 'jobus' ); ?>

@@ -287,12 +287,12 @@ class Onboarding
     <?php wp_print_scripts('jobus-onboarding'); ?>
 </head>
 
-<body class="jobus-onboarding-page">
+<body class="jbs-onboarding-page">
 
-    <div class="jobus-onboarding-wrapper">
+    <div class="jbs-onboarding-wrapper">
         <!-- Header -->
-        <div class="jobus-onboarding-header">
-            <div class="jobus-logo">
+        <div class="jbs-onboarding-header">
+            <div class="jbs-logo">
                 <svg width="120" height="32" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="32" height="32" rx="8" fill="#31795A" />
                     <path d="M10 22V12H14V22C14 23.1 13.1 24 12 24C10.9 24 10 23.1 10 22Z" fill="white" />
@@ -304,59 +304,59 @@ class Onboarding
                         font-weight="700" fill="#1a1a1a">Jobus</text>
                 </svg>
             </div>
-            <a href="<?php echo esc_url(admin_url('edit.php?post_type=jobus_job')); ?>" class="jobus-skip-link">
+            <a href="<?php echo esc_url(admin_url('edit.php?post_type=jobus_job')); ?>" class="jbs-skip-link">
                 <?php esc_html_e('Skip Setup', 'jobus'); ?>
             </a>
         </div>
 
         <!-- Progress Steps -->
-        <div class="jobus-onboarding-progress">
-            <div class="jobus-progress-step active" data-step="1">
-                <span class="step-number">1</span>
-                <span class="step-label"><?php esc_html_e('Welcome', 'jobus'); ?></span>
+        <div class="jbs-onboarding-progress">
+            <div class="jbs-progress-step active" data-step="1">
+                <span class="jbs-step-number">1</span>
+                <span class="jbs-step-label"><?php esc_html_e('Welcome', 'jobus'); ?></span>
             </div>
-            <div class="jobus-progress-line"></div>
-            <div class="jobus-progress-step" data-step="2">
-                <span class="step-number">2</span>
-                <span class="step-label"><?php esc_html_e('General', 'jobus'); ?></span>
+            <div class="jbs-progress-line"></div>
+            <div class="jbs-progress-step" data-step="2">
+                <span class="jbs-step-number">2</span>
+                <span class="jbs-step-label"><?php esc_html_e('General', 'jobus'); ?></span>
             </div>
-            <div class="jobus-progress-line"></div>
-            <div class="jobus-progress-step" data-step="3">
-                <span class="step-number">3</span>
-                <span class="step-label"><?php esc_html_e('Jobs', 'jobus'); ?></span>
+            <div class="jbs-progress-line"></div>
+            <div class="jbs-progress-step" data-step="3">
+                <span class="jbs-step-number">3</span>
+                <span class="jbs-step-label"><?php esc_html_e('Jobs', 'jobus'); ?></span>
             </div>
-            <div class="jobus-progress-line"></div>
-            <div class="jobus-progress-step" data-step="4">
-                <span class="step-number">4</span>
-                <span class="step-label"><?php esc_html_e('Ready!', 'jobus'); ?></span>
+            <div class="jbs-progress-line"></div>
+            <div class="jbs-progress-step" data-step="4">
+                <span class="jbs-step-number">4</span>
+                <span class="jbs-step-label"><?php esc_html_e('Ready!', 'jobus'); ?></span>
             </div>
         </div>
 
         <!-- Wizard Content -->
-        <div class="jobus-onboarding-content">
+        <div class="jbs-onboarding-content">
 
             <!-- Step 1: Welcome -->
-            <div class="jobus-step active" data-step="1">
-                <div class="jobus-step-content">
+            <div class="jbs-step active" data-step="1">
+                <div class="jbs-step-content">
                     <h1><?php esc_html_e('Welcome to Jobus! 🎉', 'jobus'); ?></h1>
-                    <p class="jobus-step-description">
+                    <p class="jbs-step-description">
                         <?php esc_html_e('Thank you for choosing Jobus - the powerful recruitment and job listing solution for WordPress. Let\'s get your job board set up in just a few steps.', 'jobus'); ?>
                     </p>
 
-                    <div class="jobus-features-grid">
-                        <div class="jobus-feature-item">
+                    <div class="jbs-features-grid">
+                        <div class="jbs-feature-item">
                             <span class="feature-icon">👥</span>
                             <h3><?php esc_html_e('Candidate Profiles', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Allow job seekers to create profiles, upload resumes, and apply for jobs.', 'jobus'); ?>
                             </p>
                         </div>
-                        <div class="jobus-feature-item">
+                        <div class="jbs-feature-item">
                             <span class="feature-icon">🏢</span>
                             <h3><?php esc_html_e('Company Listings', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Employers can create company profiles and post job listings.', 'jobus'); ?>
                             </p>
                         </div>
-                        <div class="jobus-feature-item">
+                        <div class="jbs-feature-item">
                             <span class="feature-icon">📋</span>
                             <h3><?php esc_html_e('Job Management', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Powerful job listing features with custom specifications and filters.', 'jobus'); ?>
@@ -364,166 +364,166 @@ class Onboarding
                         </div>
                     </div>
 
-                    <button type="button" class="jobus-btn jobus-btn-primary jobus-next-step">
+                    <button type="button" class="jbs-analytics-btn jbs-analytics-btn-primary jbs-next-step">
                         <?php esc_html_e('Start Setup', 'jobus'); ?>
-                        <span class="btn-arrow">→</span>
+                        <span class="jbs-btn-arrow">→</span>
                     </button>
                 </div>
             </div>
 
             <!-- Step 2: Configuration -->
-            <div class="jobus-step" data-step="2">
-                <div class="jobus-step-content">
+            <div class="jbs-step" data-step="2">
+                <div class="jbs-step-content">
                     <h1><?php esc_html_e('Configure Your Job Board', 'jobus'); ?></h1>
-                    <p class="jobus-step-description">
+                    <p class="jbs-step-description">
                         <?php esc_html_e('Choose which features to enable and customize the appearance of your job board.', 'jobus'); ?>
                     </p>
 
-                    <form id="jobus-onboarding-form" class="jobus-onboarding-form">
+                    <form id="jbs-onboarding-form" class="jbs-onboarding-form">
                         <?php wp_nonce_field('jobus_save_onboarding', 'jobus_onboarding_nonce'); ?>
 
                         <!-- Module Toggles -->
-                        <div class="jobus-form-section">
+                        <div class="jbs-form-section">
                             <h2><?php esc_html_e('Core Modules', 'jobus'); ?></h2>
-                            <p class="section-description">
+                            <p class="jbs-section-description">
                                 <?php esc_html_e('Enable the modules you need. You can always change these later in Settings.', 'jobus'); ?>
                             </p>
 
                             <?php $is_pro = function_exists('jobus_is_premium') && jobus_is_premium(); ?>
-                            <div class="jobus-toggle-group">
-                                <label class="jobus-toggle-item<?php echo $is_pro ? '' : ' jobus-pro-locked'; ?>"
+                            <div class="jbs-toggle-group">
+                                <label class="jbs-toggle-item<?php echo $is_pro ? '' : ' jbs-pro-locked'; ?>"
                                     <?php echo $is_pro ? '' : ' title="Pro feature"'; ?>>
-                                    <div class="toggle-info">
-                                        <span class="toggle-icon">👤</span>
-                                        <div class="toggle-text">
+                                    <div class="jbs-toggle-info">
+                                        <span class="jbs-toggle-icon">👤</span>
+                                        <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Candidate Module', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Allow job seekers to create profiles and apply for jobs.', 'jobus'); ?></span>
                                         </div>
-                                        <?php if (!$is_pro): ?><span class="jobus-pro-badge">Pro</span><?php endif; ?>
+                                        <?php if (!$is_pro): ?><span class="jbs-pro-badge">Pro</span><?php endif; ?>
                                     </div>
-                                    <div class="toggle-switch">
+                                    <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_candidate" id="enable_candidate" value="1"
                                             <?php checked($enable_candidate, true); echo $is_pro ? '' : ' disabled'; ?>>
-                                        <span class="toggle-slider"></span>
+                                        <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
 
-                                <label class="jobus-toggle-item<?php echo $is_pro ? '' : ' jobus-pro-locked'; ?>"
+                                <label class="jbs-toggle-item<?php echo $is_pro ? '' : ' jbs-pro-locked'; ?>"
                                     <?php echo $is_pro ? '' : ' title="Pro feature"'; ?>>
-                                    <div class="toggle-info">
-                                        <span class="toggle-icon">🏢</span>
-                                        <div class="toggle-text">
+                                    <div class="jbs-toggle-info">
+                                        <span class="jbs-toggle-icon">🏢</span>
+                                        <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Company Module', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Allow employers to create company profiles and post jobs.', 'jobus'); ?></span>
                                         </div>
-                                        <?php if (!$is_pro): ?><span class="jobus-pro-badge">Pro</span><?php endif; ?>
+                                        <?php if (!$is_pro): ?><span class="jbs-pro-badge">Pro</span><?php endif; ?>
                                     </div>
-                                    <div class="toggle-switch">
+                                    <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_company" id="enable_company" value="1"
                                             <?php checked($enable_company, true); echo $is_pro ? '' : ' disabled'; ?>>
-                                        <span class="toggle-slider"></span>
+                                        <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Color Scheme -->
-                        <div class="jobus-form-section">
+                        <div class="jbs-form-section">
                             <h2><?php esc_html_e('Color Scheme', 'jobus'); ?></h2>
-                            <p class="section-description">
+                            <p class="jbs-section-description">
                                 <?php esc_html_e('Choose a color scheme that matches your brand.', 'jobus'); ?>
                             </p>
 
-                            <div class="jobus-color-schemes">
-                                <label class="jobus-color-scheme-item">
+                            <div class="jbs-color-schemes">
+                                <label class="jbs-color-scheme-item">
                                     <input type="radio" name="color_scheme" value="scheme_default"
                                         <?php checked($color_scheme, 'scheme_default'); ?>>
-                                    <div class="scheme-preview scheme-default">
-                                        <span class="scheme-color" style="background: #31795A;"></span>
-                                        <span class="scheme-color" style="background: #D2F34C;"></span>
-                                        <span class="scheme-color" style="background: #244034;"></span>
+                                    <div class="jbs-scheme-preview scheme-default">
+                                        <span class="jbs-scheme-color" style="background: #31795A;"></span>
+                                        <span class="jbs-scheme-color" style="background: #D2F34C;"></span>
+                                        <span class="jbs-scheme-color" style="background: #244034;"></span>
                                     </div>
-                                    <span class="scheme-name"><?php esc_html_e('Default', 'jobus'); ?></span>
+                                    <span class="jbs-scheme-name"><?php esc_html_e('Default', 'jobus'); ?></span>
                                 </label>
 
-                                <label class="jobus-color-scheme-item">
+                                <label class="jbs-color-scheme-item">
                                     <input type="radio" name="color_scheme" value="scheme_lilac"
                                         <?php checked($color_scheme, 'scheme_lilac'); ?>>
-                                    <div class="scheme-preview scheme-lilac">
-                                        <span class="scheme-color" style="background: #7B1FA2;"></span>
-                                        <span class="scheme-color" style="background: #E1BEE7;"></span>
-                                        <span class="scheme-color" style="background: #6A1B9A;"></span>
+                                    <div class="jbs-scheme-preview scheme-lilac">
+                                        <span class="jbs-scheme-color" style="background: #7B1FA2;"></span>
+                                        <span class="jbs-scheme-color" style="background: #E1BEE7;"></span>
+                                        <span class="jbs-scheme-color" style="background: #6A1B9A;"></span>
                                     </div>
-                                    <span class="scheme-name"><?php esc_html_e('Lilac', 'jobus'); ?></span>
+                                    <span class="jbs-scheme-name"><?php esc_html_e('Lilac', 'jobus'); ?></span>
                                 </label>
 
-                                <label class="jobus-color-scheme-item">
+                                <label class="jbs-color-scheme-item">
                                     <input type="radio" name="color_scheme" value="scheme_midnight"
                                         <?php checked($color_scheme, 'scheme_midnight'); ?>>
-                                    <div class="scheme-preview scheme-midnight">
-                                        <span class="scheme-color" style="background: #1976D2;"></span>
-                                        <span class="scheme-color" style="background: #BBDEFB;"></span>
-                                        <span class="scheme-color" style="background: #1565C0;"></span>
+                                    <div class="jbs-scheme-preview scheme-midnight">
+                                        <span class="jbs-scheme-color" style="background: #1976D2;"></span>
+                                        <span class="jbs-scheme-color" style="background: #BBDEFB;"></span>
+                                        <span class="jbs-scheme-color" style="background: #1565C0;"></span>
                                     </div>
-                                    <span class="scheme-name"><?php esc_html_e('Midnight', 'jobus'); ?></span>
+                                    <span class="jbs-scheme-name"><?php esc_html_e('Midnight', 'jobus'); ?></span>
                                 </label>
 
-                                <label class="jobus-color-scheme-item">
+                                <label class="jbs-color-scheme-item">
                                     <input type="radio" name="color_scheme" value="scheme_sunset"
                                         <?php checked($color_scheme, 'scheme_sunset'); ?>>
-                                    <div class="scheme-preview scheme-sunset">
-                                        <span class="scheme-color" style="background: #F4511E;"></span>
-                                        <span class="scheme-color" style="background: #FFCCBC;"></span>
-                                        <span class="scheme-color" style="background: #D84315;"></span>
+                                    <div class="jbs-scheme-preview scheme-sunset">
+                                        <span class="jbs-scheme-color" style="background: #F4511E;"></span>
+                                        <span class="jbs-scheme-color" style="background: #FFCCBC;"></span>
+                                        <span class="jbs-scheme-color" style="background: #D84315;"></span>
                                     </div>
-                                    <span class="scheme-name"><?php esc_html_e('Sunset', 'jobus'); ?></span>
+                                    <span class="jbs-scheme-name"><?php esc_html_e('Sunset', 'jobus'); ?></span>
                                 </label>
                             </div>
                         </div>
                     </form>
 
-                    <div class="jobus-step-actions">
-                        <button type="button" class="jobus-btn jobus-btn-secondary jobus-prev-step">
-                            <span class="btn-arrow">←</span>
+                    <div class="jbs-step-actions">
+                        <button type="button" class="jbs-analytics-btn jbs-analytics-btn-secondary jbs-prev-step">
+                            <span class="jbs-btn-arrow">←</span>
                             <?php esc_html_e('Back', 'jobus'); ?>
                         </button>
-                        <button type="button" class="jobus-btn jobus-btn-primary jobus-next-step">
+                        <button type="button" class="jbs-analytics-btn jbs-analytics-btn-primary jbs-next-step">
                             <?php esc_html_e('Continue', 'jobus'); ?>
-                            <span class="btn-arrow">→</span>
+                            <span class="jbs-btn-arrow">→</span>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Step 3: Job Configuration -->
-            <div class="jobus-step" data-step="3">
-                <div class="jobus-step-content">
+            <div class="jbs-step" data-step="3">
+                <div class="jbs-step-content">
                     <h1><?php esc_html_e('Job Configuration', 'jobus'); ?></h1>
-                    <p class="jobus-step-description">
+                    <p class="jbs-step-description">
                         <?php esc_html_e('Configure how job listings behave on your site.', 'jobus'); ?>
                     </p>
 
-                    <form id="jobus-job-config-form" class="jobus-onboarding-form">
+                    <form id="jbs-job-config-form" class="jbs-onboarding-form">
                         <?php wp_nonce_field('jobus_save_onboarding', 'jobus_job_config_nonce'); ?>
 
                         <!-- Job Submission Settings -->
-                        <div class="jobus-form-section">
+                        <div class="jbs-form-section">
                             <h2><?php esc_html_e('Job Submission', 'jobus'); ?></h2>
-                            <p class="section-description">
+                            <p class="jbs-section-description">
                                 <?php esc_html_e('Control how new job submissions are handled.', 'jobus'); ?>
                             </p>
 
-                            <div class="jobus-select-group">
-                                <label class="jobus-select-item">
-                                    <div class="select-info">
-                                        <span class="select-icon">📝</span>
-                                        <div class="select-text">
+                            <div class="jbs-select-group">
+                                <label class="jbs-select-item">
+                                    <div class="jbs-select-info">
+                                        <span class="jbs-select-icon">📝</span>
+                                        <div class="jbs-select-text">
                                             <strong><?php esc_html_e('Default Job Status', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Status for newly submitted jobs by employers.', 'jobus'); ?></span>
                                         </div>
                                     </div>
                                     <select name="job_submission_status" id="job_submission_status"
-                                        class="jobus-select">
+                                        class="jbs-select">
                                         <option value="publish" <?php selected($job_submission_status, 'publish'); ?>>
                                             <?php esc_html_e('Published (Immediate)', 'jobus'); ?>
                                         </option>
@@ -539,57 +539,57 @@ class Onboarding
                         </div>
 
                         <!-- Job Details Settings -->
-                        <div class="jobus-form-section">
+                        <div class="jbs-form-section">
                             <h2><?php esc_html_e('Job Details Page', 'jobus'); ?></h2>
-                            <p class="section-description">
+                            <p class="jbs-section-description">
                                 <?php esc_html_e('Configure the single job page behavior.', 'jobus'); ?>
                             </p>
 
-                            <div class="jobus-toggle-group">
-                                <label class="jobus-toggle-item">
-                                    <div class="toggle-info">
-                                        <span class="toggle-icon">👤</span>
-                                        <div class="toggle-text">
+                            <div class="jbs-toggle-group">
+                                <label class="jbs-toggle-item">
+                                    <div class="jbs-toggle-info">
+                                        <span class="jbs-toggle-icon">👤</span>
+                                        <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Allow Guest Applications', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Allow visitors to apply for jobs without logging in.', 'jobus'); ?></span>
                                         </div>
                                     </div>
-                                    <div class="toggle-switch">
+                                    <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="allow_guest_application"
                                             id="allow_guest_application" value="1"
                                             <?php checked($allow_guest_application, true); ?>>
-                                        <span class="toggle-slider"></span>
+                                        <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
 
-                                <label class="jobus-toggle-item">
-                                    <div class="toggle-info">
-                                        <span class="toggle-icon">🔗</span>
-                                        <div class="toggle-text">
+                                <label class="jbs-toggle-item">
+                                    <div class="jbs-toggle-info">
+                                        <span class="jbs-toggle-icon">🔗</span>
+                                        <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Display Related Jobs', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Show similar job listings below the job details.', 'jobus'); ?></span>
                                         </div>
                                     </div>
-                                    <div class="toggle-switch">
+                                    <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="is_job_related_posts" id="is_job_related_posts"
                                             value="1" <?php checked($is_job_related_posts, true); ?>>
-                                        <span class="toggle-slider"></span>
+                                        <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Job Specifications Notice -->
-                        <div class="jobus-form-section">
+                        <div class="jbs-form-section">
                             <h2><?php esc_html_e('Job Specifications', 'jobus'); ?></h2>
-                            <div class="jobus-info-box">
-                                <span class="info-icon">💡</span>
-                                <div class="info-content">
+                            <div class="jbs-info-box">
+                                <span class="jbs-info-icon">💡</span>
+                                <div class="jbs-info-content">
                                     <strong><?php esc_html_e('Advanced Configuration', 'jobus'); ?></strong>
                                     <p><?php esc_html_e('Job specifications (salary, experience, job type, etc.) can be configured in the full Settings panel after completing this wizard.', 'jobus'); ?>
                                     </p>
                                     <a href="<?php echo esc_url(admin_url('edit.php?post_type=jobus_job&page=jobus-settings#tab=job-options/job-specifications')); ?>"
-                                        target="_blank" class="info-link">
+                                        target="_blank" class="jbs-info-link">
                                         <?php esc_html_e('View Job Specifications Settings →', 'jobus'); ?>
                                     </a>
                                 </div>
@@ -597,23 +597,23 @@ class Onboarding
                         </div>
                     </form>
 
-                    <div class="jobus-step-actions">
-                        <button type="button" class="jobus-btn jobus-btn-secondary jobus-prev-step">
-                            <span class="btn-arrow">←</span>
+                    <div class="jbs-step-actions">
+                        <button type="button" class="jbs-analytics-btn jbs-analytics-btn-secondary jbs-prev-step">
+                            <span class="jbs-btn-arrow">←</span>
                             <?php esc_html_e('Back', 'jobus'); ?>
                         </button>
-                        <button type="button" class="jobus-btn jobus-btn-primary jobus-save-continue">
+                        <button type="button" class="jbs-analytics-btn jbs-analytics-btn-primary jbs-save-continue">
                             <?php esc_html_e('Save & Finish', 'jobus'); ?>
-                            <span class="btn-arrow">→</span>
+                            <span class="jbs-btn-arrow">→</span>
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Step 4: Success -->
-            <div class="jobus-step" data-step="4">
-                <div class="jobus-step-content jobus-step-success">
-                    <div class="success-icon">
+            <div class="jbs-step" data-step="4">
+                <div class="jbs-step-content jbs-step-success">
+                    <div class="jbs-success-icon">
                         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="40" cy="40" r="40" fill="#31795A" />
                             <path d="M56 28L34 50L24 40" stroke="white" stroke-width="5" stroke-linecap="round"
@@ -621,33 +621,33 @@ class Onboarding
                         </svg>
                     </div>
                     <h1><?php esc_html_e('You\'re All Set!', 'jobus'); ?></h1>
-                    <p class="jobus-step-description">
+                    <p class="jbs-step-description">
                         <?php esc_html_e('Congratulations! Your job board is ready to go. Here\'s what you can do next:', 'jobus'); ?>
                     </p>
 
-                    <div class="jobus-next-steps">
+                    <div class="jbs-next-steps">
                         <a href="<?php echo esc_url(admin_url('post-new.php?post_type=jobus_job')); ?>"
-                            class="jobus-next-step-item">
-                            <span class="step-icon">➕</span>
-                            <div class="step-info">
+                            class="jbs-next-step-item">
+                            <span class="jbs-step-icon">➕</span>
+                            <div class="jbs-step-info">
                                 <strong><?php esc_html_e('Add Your First Job', 'jobus'); ?></strong>
                                 <span><?php esc_html_e('Create a job listing to get started.', 'jobus'); ?></span>
                             </div>
                         </a>
 
                         <a href="<?php echo esc_url(admin_url('edit.php?post_type=jobus_job&page=jobus-settings')); ?>"
-                            class="jobus-next-step-item">
-                            <span class="step-icon">⚙️</span>
-                            <div class="step-info">
+                            class="jbs-next-step-item">
+                            <span class="jbs-step-icon">⚙️</span>
+                            <div class="jbs-step-info">
                                 <strong><?php esc_html_e('Configure Settings', 'jobus'); ?></strong>
                                 <span><?php esc_html_e('Fine-tune job specifications and other options.', 'jobus'); ?></span>
                             </div>
                         </a>
 
                         <a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank"
-                            rel="noopener noreferrer" class="jobus-next-step-item">
-                            <span class="step-icon">📚</span>
-                            <div class="step-info">
+                            rel="noopener noreferrer" class="jbs-next-step-item">
+                            <span class="jbs-step-icon">📚</span>
+                            <div class="jbs-step-info">
                                 <strong><?php esc_html_e('Read Documentation', 'jobus'); ?></strong>
                                 <span><?php esc_html_e('Learn how to make the most of Jobus.', 'jobus'); ?></span>
                             </div>
@@ -655,9 +655,9 @@ class Onboarding
                     </div>
 
                     <a href="<?php echo esc_url(admin_url('edit.php?post_type=jobus_job')); ?>"
-                        class="jobus-btn jobus-btn-primary jobus-finish-setup">
+                        class="jbs-analytics-btn jbs-analytics-btn-primary jbs-finish-setup">
                         <?php esc_html_e('Go to Dashboard', 'jobus'); ?>
-                        <span class="btn-arrow">→</span>
+                        <span class="jbs-btn-arrow">→</span>
                     </a>
                 </div>
             </div>
@@ -665,7 +665,7 @@ class Onboarding
         </div>
 
         <!-- Footer -->
-        <div class="jobus-onboarding-footer">
+        <div class="jbs-onboarding-footer">
             <p>
                 <?php
 						printf(

@@ -48,7 +48,7 @@
 		i { font-size: 16px; }
 	}
 
-	.main-title {
+	.jbs-main-title {
 		margin: 0;
 		font-size: 24px;
 		font-weight: 700;
@@ -395,7 +395,7 @@
 		display: none;
 		animation: jbs-app-details-fade-down 0.12s ease;
 
-		&.is-open { display: block; }
+		&.jbs-is-open { display: block; }
 	}
 
 	.jbs-app-status-select-option {
@@ -434,7 +434,7 @@
 	}
 
 	// Three-dot actions menu — mirrors the table row pattern.
-	.action-dots .action-btn {
+	.jbs-action-dots .jbs-action-btn {
 		width: 36px;
 		height: 36px;
 		border-radius: 50%;

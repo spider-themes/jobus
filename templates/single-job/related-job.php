@@ -27,45 +27,45 @@ if ( $is_related_posts == 'yes') :
 <section class="jbs-related-job jbs-pt-90 jbs-lg-pt-70 jbs-pb-120 jbs-lg-pb-70">
     <div class="jbs-container">
         <div class="jbs-position-relative">
-            <div class="title-three jbs-mb-50">
-                <h2 class="main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
+            <div class="jbs-title-three jbs-mb-50">
+                <h2 class="jbs-main-font"><?php esc_html_e('Related Jobs', 'jobus'); ?></h2>
             </div>
             <div class="jbs-related-job-slider" data-rtl="<?php echo esc_attr(jobus_rtl()) ?>">
                 <?php
                 while ( $related_jobs->have_posts() ) : $related_jobs->the_post();
                     ?>
                     <div class="item">
-                        <div class="job-list-two style-two jbs-position-relative">
+                        <div class="jbs-job-list-two jbs-style-two jbs-position-relative">
                             <a href="<?php the_permalink(); ?>" class="logo">
                                 <?php the_post_thumbnail('full', [ 'class' => 'jbs-m-auto' ]); ?>
                             </a>
                             <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
-                                    <a href="<?php the_permalink(); ?>" class="job-duration jbs-jbs-fw-500">
+                                    <a href="<?php the_permalink(); ?>" class="jbs-job-duration jbs-jbs-fw-500">
                                         <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) ?>
                                     </a>
                                 </div>
                             <?php endif; ?>
                             <div>
-                                <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s jbs-text-black" title="<?php the_title_attribute() ?>">
+                                <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 jbs-tran3s jbs-text-black" title="<?php the_title_attribute() ?>">
                                     <?php the_title('<h3>', '</h3>'); ?>
                                 </a>
                             </div>
                             <?php if ( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_2') ) : ?>
-                                <div class="job-salary">
+                                <div class="jbs-job-salary">
                                     <span class="jbs-fw-500 jbs-text-dark">
                                         <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_2')) ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
                             <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
-                                <div class="job-location">
+                                <div class="jbs-job-location">
                                     <a href="<?php echo esc_url(jobus_get_first_taxonomy_link('jobus_job_location')) ?>">
                                         <?php echo esc_html(jobus_get_first_taxonomy_name('jobus_job_location')) ?>
                                     </a>
                                 </div>
 
-                                <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
+                                <a href="<?php the_permalink(); ?>" class="jbs-apply-btn jbs-text-center jbs-tran3s">
                                     <?php esc_html_e('APPLY', 'jobus'); ?>
                                 </a>
                             </div>
@@ -76,9 +76,9 @@ if ( $is_related_posts == 'yes') :
                 wp_reset_postdata();
                 ?>
             </div>
-            <ul class="slider-arrows jbs-slick-arrow-one color-two jbs-d-flex jbs-justify-content-center jbs-style-none jbs-sm-mt-20">
-                <li class="prev_e slick-arrow"><i class="bi bi-arrow-left"></i></li>
-                <li class="next_e slick-arrow"><i class="bi bi-arrow-right"></i></li>
+            <ul class="jbs-slider-arrows jbs-slick-arrow-one jbs-color-two jbs-d-flex jbs-justify-content-center jbs-style-none jbs-sm-mt-20">
+                <li class="jbs-prev_e slick-arrow"><i class="bi bi-arrow-left"></i></li>
+                <li class="jbs-next_e slick-arrow"><i class="bi bi-arrow-right"></i></li>
             </ul>
         </div>
     </div>

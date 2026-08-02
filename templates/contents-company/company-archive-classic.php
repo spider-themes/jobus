@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jbs-company-classic jbs-company-profiles jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
+<section class="jbs-jbs jbs-company-classic jbs-company-profiles jbs-pt-90 jbs-lg-pt-80 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="jbs-col-xl-9 jbs-col-lg-8">
                 <div class="jbs-ms-xl-3" data-jbs-filter-results="true">
 
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
+                    <div class="jbs-upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-30">
 	                    <?php
 	                    // Display the total number of companies found
 	                    include __DIR__ . '/../loop/result-count.php';

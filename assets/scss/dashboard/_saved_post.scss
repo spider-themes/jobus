@@ -42,7 +42,7 @@
   }
 }
 
-.candidate-avatar {
+.jbs-candidate-avatar {
   img {
     width: 80px;
     height: 80px;
@@ -163,31 +163,31 @@
   transform: translateY(-50%);
 }
 
-.dashboard-body {
-  .action-button {
+.jbs-dashboard-body {
+  .jbs-action-button {
     display: flex;
     align-items: center;
     justify-content: end;
     gap: 12px;
   }
 
-  .saved-job-tab {
+  .jbs-saved-job-tab {
 
-    .saved-jobs-header {
+    .jbs-saved-jobs-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 24px 30px;
 
       .title,
-      .view-more-btn {
+      .jbs-view-more-btn {
         font-size: 20px;
         color: #244034;
         font-weight: 500;
         margin: 0
       }
 
-      .view-more-btn {
+      .jbs-view-more-btn {
         display: flex;
         align-items: center;
         gap: 6px;
@@ -202,7 +202,7 @@
     }
 
 
-    .job-list-one {
+    .jbs-job-list-one {
       border-top: 1px solid #E3F0EB;
       border-radius: 0;
       margin-bottom: 0;

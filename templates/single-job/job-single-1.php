@@ -10,14 +10,14 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-xxl-9 jbs-col-xl-8 ">
-                <div class="details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
+                <div class="jbs-details-post-data jbs-me-xxl-5 jbs-pe-xxl-4">
                     <?php include(JOBUS_PATH . '/templates/single-job/job-head.php'); ?>
                     <?php the_content(); ?>
                 </div>
             </div>
 
             <div class="jbs-col-xxl-3 jbs-col-xl-4 ">
-                <div class="job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 jbs-lg-mt-50">
+                <div class="jbs-job-company-info jbs-ms-xl-5 jbs-ms-xxl-0 jbs-lg-mt-50">
                     <?php
                     $website = $meta['company_website'] ?? '';
                     $website_target = $website['target'] ?? '_self';
@@ -30,7 +30,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                             the_post_thumbnail('full', array('class' => 'lazy-img jbs-m-auto logo'));
                         }
                         ?>
-                        <div class="text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20">
+                        <div class="jbs-text-md jbs-text-dark jbs-text-center jbs-mt-15 jbs-mb-20">
                             <?php the_title(); ?>
                             <?php echo jobus_get_company_verification_badge(get_the_ID()); ?>
                         </div>
@@ -38,13 +38,13 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         // Website button logic
                         if ($meta['is_company_website'] == 'custom' && !empty($website['url'])) { ?>
                             <a href="<?php echo esc_url($website['url']) ?>"
-                                target="<?php echo esc_attr($website_target) ?>" class="website-btn tran3s">
+                                target="<?php echo esc_attr($website_target) ?>" class="jbs-website-btn jbs-tran3s">
                                 <?php echo esc_html($website['text']) ?>
                             </a>
                             <?php
                         } else {
                             ?>
-                            <a href="<?php the_permalink(); ?>" class="website-btn tran3s jbs-w-160">
+                            <a href="<?php the_permalink(); ?>" class="jbs-website-btn jbs-tran3s jbs-w-160">
                                 <?php esc_html_e('Company Profile', 'jobus'); ?>
                             </a>
                             <?php
@@ -53,7 +53,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                     }
                     ?>
                     <div class="<?php echo esc_attr($has_post_thumb) ?>">
-                        <ul class="job-meta-data jbs-row">
+                        <ul class="jbs-job-meta-data jbs-row">
                             <?php
                             // Retrieve the repeater field configurations from settings options
                             $specifications = jobus_opt('job_specifications');
@@ -106,7 +106,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                         </ul>
                         <?php
                         if (jobus_get_tag_list()) { ?>
-                            <div class="job-tags jbs-d-flex jbs-flex-wrap jbs-pt-15">
+                            <div class="jbs-job-tags jbs-d-flex jbs-flex-wrap jbs-pt-15">
                                 <?php echo wp_kses_post(jobus_get_tag_list()) ?>
                             </div>
                             <?php

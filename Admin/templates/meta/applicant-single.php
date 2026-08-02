@@ -40,14 +40,14 @@ if ( $candidate_cv_url ) {
 }
 ?>
 
-<div class="jobus-application-container jobus-clearfix">
+<div class="jbs-application-container jbs-clearfix">
 
-    <div class="applicant-image-details">
-        <div class="applicant-image">
+    <div class="jbs-applicant-image-details">
+        <div class="jbs-applicant-image">
 			<?php echo get_avatar( $candidate_email, 150, '', $candidate_fname ) ?>
         </div>
 		<?php if ( $candidate_cv_url ) : ?>
-            <a href="<?php echo esc_url( $candidate_cv_url ); ?>" class="button applicant-resume-btn" rel="nofollow" target="_blank">
+            <a href="<?php echo esc_url( $candidate_cv_url ); ?>" class="button jbs-applicant-resume-btn" rel="nofollow" target="_blank">
                 <strong><?php esc_html_e( 'Download Resume', 'jobus' ); ?></strong>
 				<?php if ( $file_size ) : ?>
                     <span><?php echo 'PDF(' . esc_html( $file_size ) . ')'; ?></span>
@@ -56,8 +56,8 @@ if ( $candidate_cv_url ) {
 		<?php endif; ?>
     </div>
 
-    <div class="applicant-content-details">
-        <ul class="details-list">
+    <div class="jbs-applicant-content-details">
+        <ul class="jbs-details-list">
 			<?php if ( ! empty( $candidate_fname ) && ! empty( $candidate_lname ) ) : ?>
                 <li>
                     <label> <?php esc_html_e( 'Name', 'jobus' ); ?> </label>

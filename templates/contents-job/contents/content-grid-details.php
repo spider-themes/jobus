@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 ?>
-<div class="wrapper">
+<div class="jbs-wrapper">
     <div class="jbs-row">
 		<?php
 		while ( $job_query->have_posts() ) : $job_query->the_post();
@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$save_job_status = jobus_get_save_status();
 			?>
             <div class="jbs-col-lg-6 jbs-mb-30">
-                <div class="job-list-three jbs-d-flex jbs-h-100 jbs-w-100">
-                    <div class="main-wrapper jbs-h-100 jbs-w-100">
+                <div class="jbs-job-list-three jbs-d-flex jbs-h-100 jbs-w-100">
+                    <div class="jbs-main-wrapper jbs-h-100 jbs-w-100">
 	                    <?php
                         if ( is_array( $save_job_status ) && isset( $save_job_status['post_id'] ) ) {
                             jobus_render_post_save_button( [
@@ -31,11 +31,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 'meta_key'     => 'jobus_saved_jobs',
                                 'is_saved'     => $save_job_status['is_saved'],
                                 'button_title' => ! empty( $save_job_status['is_saved'] ) ? esc_html__( 'Saved Job', 'jobus' ) : esc_html__( 'Save Job', 'jobus' ),
-                                'class'        => 'save-btn jbs-text-center jbs-rounded-circle tran3s jobus-saved-post'
+                                'class'        => 'save-btn jbs-text-center jbs-rounded-circle tran3s jbs-saved-post'
                             ] );
                         }
 	                    ?>
-                        <div class="list-header jbs-d-flex jbs-align-items-center">
+                        <div class="jbs-list-header jbs-d-flex jbs-align-items-center">
 							<?php
 							if ( has_post_thumbnail() ) { ?>
                                 <a href="<?php the_permalink(); ?>" class="logo">
@@ -52,11 +52,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<?php
 							}
 							?>
-                            <div class="info-wrapper">
-                                <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
+                            <div class="jbs-info-wrapper">
+                                <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 jbs-tran3s">
 									<?php the_title() ?>
                                 </a>
-                                <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap info-data jbs-pl-0">
+                                <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-info-data jbs-pl-0">
 									<?php
 									if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_2' ) ) {
 										?>
@@ -83,12 +83,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between jbs-mt-auto">
 							<?php if ( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) : ?>
                                 <div class="jbs-d-flex jbs-align-items-center">
-                                    <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 jbs-text-capitalize">
+                                    <a href="<?php the_permalink(); ?>" class="jbs-job-duration jbs-fw-500 jbs-text-capitalize">
 										<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', 'job_archive_meta_1' ) ) ?>
                                     </a>
                                 </div>
 							<?php endif; ?>
-                            <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s jbs-xs-mt-20">
+                            <a href="<?php the_permalink(); ?>" class="jbs-apply-btn jbs-text-center jbs-tran3s jbs-xs-mt-20">
 								<?php esc_html_e( 'APPLY', 'jobus' ); ?>
                             </a>
                         </div>

@@ -11,7 +11,7 @@
   }
 }
 
-.candidate-profile-card {
+.jbs-candidate-profile-card {
   overflow: hidden;
   background: #fff;
   border-radius: 10px;
@@ -23,13 +23,13 @@
     box-shadow: 0px 20px 35px rgba(22, 105, 70, 0.05);
   }
 
-  &.grid-layout {
+  &.jbs-grid-layout {
     padding: 27px 18px 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
 
-    .save-btn {
+    .jbs-save-btn {
       color: #b9b9b9;
       position: absolute;
       top: 10px;
@@ -42,7 +42,7 @@
     }
   }
 
-  &.favourite::before {
+  &.jbs-favourite::before {
     content: '';
     position: absolute;
     width: 60px;
@@ -53,7 +53,7 @@
     transform: rotate(45deg);
   }
 
-  &.favourite::after {
+  &.jbs-favourite::after {
     content: "\f586";
     font-family: bootstrap-icons !important;
     position: absolute;
@@ -63,12 +63,12 @@
     left: 7px;
   }
 
-  .candidate-avatar {
+  .jbs-candidate-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
 
-    &.online:before {
+    &.jbs-online:before {
       content: '';
       position: absolute;
       width: 11px;
@@ -81,7 +81,7 @@
 
   }
 
-  .candidate-name {
+  .jbs-candidate-name {
     font-size: 18px;
 
     a:hover {
@@ -89,12 +89,12 @@
     }
   }
 
-  .candidate-post {
+  .jbs-candidate-post {
     font-size: 15px;
     color: rgba($color: #000, $alpha: 0.4);
   }
 
-  .candidate-skills {
+  .jbs-candidate-skills {
     margin: 0 -2px;
 
     li {
@@ -107,14 +107,14 @@
       color: rgba($color: #000, $alpha: 0.55);
       background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.1);
 
-      &.more {
+      &.jbs-more {
         background: var(--jbs-brand_color_3);
         color: #000;
       }
     }
   }
 
-  .candidate-info {
+  .jbs-candidate-info {
     span {
       font-size: 15px;
       color: rgba($color: var(--jbs-brand_color_2), $alpha: 0.6);
@@ -132,7 +132,7 @@
 }
 
 // Candidates Profile Details
-.candidates-profile-details {
+.jbs-candidates-profile-details {
   position: relative;
 
   .inner-card {
@@ -247,7 +247,7 @@
       border-radius: 30px;
       background: var(--jbs_box_bg_color_opt);
 
-      &.more {
+      &.jbs-more {
         width: 45px;
         height: 45px;
         border-radius: 50%;
@@ -291,7 +291,7 @@
   }
 }
 
-.candidate-profile-sidebar {
+.jbs-candidate-profile-sidebar {
   .bg-wrapper {
     background: #fff;
     border-radius: 15px;
@@ -303,18 +303,18 @@
   }
 
   .candidate-bio {
-    .candidate-avatar {
+    .jbs-candidate-avatar {
       width: 80px;
       height: 80px;
     }
 
-    .candidate-name {
+    .jbs-candidate-name {
       font-size: 20px;
       margin: 18px 0 20px;
       font-weight: 500;
     }
 
-    .invite-btn {
+    .jbs-invite-btn {
       font-size: 15px;
       letter-spacing: -0.5px;
       color: #008FDF;
@@ -440,7 +440,7 @@ img {
   background: var(--jbs_box_bg_color_opt);
 }
 
-.candidate-profile-card {
+.jbs-candidate-profile-card {
   overflow: hidden;
   background: #fff;
   border-radius: 10px;
@@ -452,14 +452,14 @@ img {
     box-shadow: 0px 20px 35px rgba(22, 105, 70, 0.05);
   }
 
-  &.grid-layout {
+  &.jbs-grid-layout {
     padding: 27px 18px 30px;
     display: flex;
     flex-direction: column;
     width: 100%;
   }
 
-  &.favourite::before {
+  &.jbs-favourite::before {
     content: '';
     position: absolute;
     width: 60px;
@@ -470,7 +470,7 @@ img {
     transform: rotate(45deg);
   }
 
-  &.favourite::after {
+  &.jbs-favourite::after {
     content: "\f586";
     font-family: bootstrap-icons !important;
     position: absolute;
@@ -480,12 +480,12 @@ img {
     left: 7px;
   }
 
-  .candidate-avatar {
+  .jbs-candidate-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
 
-    &.online:before {
+    &.jbs-online:before {
       content: '';
       position: absolute;
       width: 11px;
@@ -497,12 +497,12 @@ img {
     }
   }
 
-  .candidate-post {
+  .jbs-candidate-post {
     font-size: 15px;
     color: rgba($color: #000, $alpha: 0.4);
   }
 
-  .candidate-skills {
+  .jbs-candidate-skills {
     li {
       margin: 0 2px 5px;
       line-height: 25px;
@@ -513,7 +513,7 @@ img {
       color: rgba($color: #000, $alpha: 0.55);
       background: rgb(49 121 90 / 10%);
 
-      &.more {
+      &.jbs-more {
         background: var(--jbs-brand_color_3);
         color: #000;
       }
@@ -524,7 +524,7 @@ img {
     }
   }
 
-  .profile-btn {
+  .jbs-profile-btn {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.5px;
@@ -541,7 +541,7 @@ img {
     }
   }
 
-  .msg-btn {
+  .jbs-msg-btn {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.5px;
@@ -560,30 +560,30 @@ img {
     }
   }
 
-  .profile_btn-mt {
+  .jbs-profile_btn-mt {
     margin-top: 5px;
   }
 
-  &.list-layout {
+  &.jbs-list-layout {
     padding: 28px 30px 28px;
 
-    .candidate-skills {
+    .jbs-candidate-skills {
       position: absolute;
       left: 0;
       bottom: -45px;
     }
 
-    .right-side {
+    .jbs-right-side {
       width: calc(100% - 80px);
       padding-left: 30px;
     }
 
-    &.no-avatar .right-side {
+    &.jbs-no-avatar .jbs-right-side {
       width: 100%;
       padding-left: 0;
     }
 
-    &.no-avatar .candidate-skills {
+    &.jbs-no-avatar .jbs-candidate-skills {
       position: static;
       margin-top: 8px;
     }
@@ -701,7 +701,7 @@ img {
       border-radius: 30px;
       background: var(--jbs_box_bg_color_opt);
 
-      &.more {
+      &.jbs-more {
         width: 45px;
         height: 45px;
         border-radius: 50%;
@@ -753,17 +753,17 @@ img {
   }
 
   .jbs-candidate-bio {
-    .candidate-avatar {
+    .jbs-candidate-avatar {
       width: 80px;
       height: 80px;
     }
 
-    .candidate-name {
+    .jbs-candidate-name {
       font-size: 20px;
       margin: 18px 0 20px;
     }
 
-    .invite-btn {
+    .jbs-invite-btn {
       font-size: 15px;
       letter-spacing: -0.5px;
       color: #008FDF;
@@ -868,7 +868,7 @@ img {
   }
 }
 
-.candidate-profile-two {
+.jbs-candidate-profile-two {
   background: url(../images/layout/candidate/candidate-shape-2.svg) !important;
   background-size: cover !important;
   border: none;
@@ -883,62 +883,62 @@ img {
 @media (max-width: 1024px) {
 
 
-  .dashboard-body {
-    .candidate-profile-card.list-layout .right-side {
+  .jbs-dashboard-body {
+    .jbs-candidate-profile-card.list-layout .jbs-right-side {
       padding-left: 5px !important;
     }
 
-    .candidate-profile-card.list-layout .candidate-skills {
+    .jbs-candidate-profile-card.list-layout .jbs-candidate-skills {
       bottom: -55px !important;
     }
 
-    .candidate-profile-card {
-      .candidate-info.location-info {
+    .jbs-candidate-profile-card {
+      .jbs-candidate-info.location-info {
         margin-top: 0px !important;
       }
 
-      .candidate-info.salary-info {
+      .jbs-candidate-info.salary-info {
         margin-top: 0px !important;
       }
     }
   }
 
-  .dashboard-body .dash-card-one {
+  .jbs-dashboard-body .jbs-dash-card-one {
     padding: 22px 10px 20px !important;
   }
 }
 
 @media (max-width: 768px) {
-  .candidate-profile-card {
-    .candidate-skills {
+  .jbs-candidate-profile-card {
+    .jbs-candidate-skills {
       flex-wrap: wrap;
     }
 
-    .candidate_profile-location {
+    .jbs-candidate_profile-location {
       margin-top: 10px;
     }
   }
 
-  .dashboard-body {
-    .candidate-profile-card {
-      .candidate-info.location-info {
+  .jbs-dashboard-body {
+    .jbs-candidate-profile-card {
+      .jbs-candidate-info.location-info {
         margin-top: 20px !important;
       }
 
-      .candidate-info.salary-info {
+      .jbs-candidate-info.salary-info {
         margin-top: 50px !important;
       }
     }
   }
 
-  .dashboard-body .card-box {
+  .jbs-dashboard-body .jbs-card-box {
     padding: 45px 20px 50px !important;
   }
 
 }
 
 // @media (max-width:425px){
-//     .dashboard-body .dash-card-one {
+//     .jbs-dashboard-body .jbs-dash-card-one {
 //     padding: 22px 13px 20px !important;
 // }
 

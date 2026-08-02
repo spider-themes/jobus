@@ -73,7 +73,7 @@ if ( ! empty ( $all_values ) ) :
                        readonly>
             </div>
 			<?php if ( ! empty( $range_suffix ) ) : ?>
-                <div class="currency jbs-ps-1"><?php echo esc_html( $range_suffix ); ?></div>
+                <div class="jbs-currency jbs-ps-1"><?php echo esc_html( $range_suffix ); ?></div>
 			<?php endif; ?>
         </div>
         <div class="jbs-slider">

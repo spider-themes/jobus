@@ -49,7 +49,7 @@ if ( ! $is_dashboard ) {
 <div class="jbs-position-relative">
     <?php
     if ( ! $is_dashboard ) { ?>
-        <h2 class="main-title"><?php esc_html_e( 'Saved Jobs', 'jobus' ); ?></h2>
+        <h2 class="jbs-main-title"><?php esc_html_e( 'Saved Jobs', 'jobus' ); ?></h2>
         <?php
     }
 
@@ -106,8 +106,8 @@ if ( ! $is_dashboard ) {
         wp_reset_postdata();
 	} else {
 		?>
-        <div class="jbs-bg-white card-box border-20 jbs-text-center jbs-p-5">
-            <div class="no-jobs-found">
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-text-center jbs-p-5">
+            <div class="jbs-no-jobs-found">
                 <i class="bi bi-bookmark-x jbs-fs-1 jbs-mb-3 jbs-text-muted"></i>
                 <h4><?php echo esc_html( $empty_title ); ?></h4>
                 <p class="jbs-text-muted"><?php echo esc_html( $empty_desc ); ?></p>

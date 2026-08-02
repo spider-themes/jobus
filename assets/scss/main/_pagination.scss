@@ -1,6 +1,6 @@
 /**=== Job Classic, Topbar and Popup Pagination ===**/
 /**=== Company Classic and Popup Pagination ===**/
-.pagination-wrap {
+.jbs-pagination-wrap {
   padding-top: 30px;
   @media (width > 540px) {
     display: flex;
@@ -60,7 +60,7 @@
         border: none !important;
       }
 
-      &.prev, &.next {
+      &.jbs-prev, &.jbs-next {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -71,7 +71,7 @@
 
 /**=== Candidate Classic and Popup Pagination ===**/
 .jbs-candidate-classic, .jbs-candidate-popup {
-  .pagination-wrap {
+  .jbs-pagination-wrap {
     padding-top: 30px;
     @media (width > 540px) {
       display: flex;

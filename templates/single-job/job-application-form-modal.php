@@ -4,7 +4,7 @@
  * Implements: Choice Gate (guest only) → Application Form → Post-Submit Upsell
  */
 ?>
-<div class="jbs-modal jbs-fade job-application-wrapper" id="filterPopUp" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
+<div class="jbs-modal jbs-fade jbs-job-application-wrapper" id="filterPopUp" tabindex="-1" aria-labelledby="applyJobModalLabel" aria-hidden="true">
     <div class="jbs-modal-dialog jbs-modal-dialog-centered">
         <div class="jbs-modal-content">
             <div class="jbs-modal-header">
@@ -64,7 +64,7 @@
 
                     <!-- ===== PANEL 2: Application Form ===== -->
                     <div id="jbs-apply-form-panel"<?php if ( ! is_user_logged_in() ) : ?> style="display:none;"<?php endif; ?>>
-                        <form action="#" name="job_application_form" class="job-application-form" id="jobApplicationForm" method="post"
+                        <form action="#" name="job_application_form" class="jbs-job-application-form" id="jobApplicationForm" method="post"
                               enctype="multipart/form-data">
                             <div class="jbs-row jbs-gy-4">
                                 <input type="hidden" name="job_application_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
@@ -129,7 +129,7 @@
                                         <?php esc_html_e( 'Upload CV (PDF or Word)', 'jobus' ); ?>
                                         <?php if ( jobus_is_field_required( 'cv' ) ) echo '*'; ?>
                                     </label>
-                                    <input type="file" class="jbs-form-control upload-cv" id="upload_cv" name="candidate_cv"
+                                    <input type="file" class="jbs-form-control jbs-upload-cv" id="upload_cv" name="candidate_cv"
                                            accept=".pdf,.doc,.docx"
                                            <?php echo jobus_is_field_required( 'cv' ) ? 'required' : ''; ?>>
                                 </div>

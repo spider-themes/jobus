@@ -9,7 +9,7 @@
 // (`.jbs-filter-area-tab`, `.jbs-filter-btn`, `.jbs-popUpModal`, or
 // `.jbs-filter-area-tab .jbs-search-form-widget`) so nothing here leaks
 // into theme-level forms elsewhere on the page. Generic-sounding
-// child class names (`.jbs-input-box`, `.jbs-filter-block`, `.more-btn`,
+// child class names (`.jbs-input-box`, `.jbs-filter-block`, `.jbs-more-btn`,
 // `.jbs-slider`, `.jbs-progress`, etc.) are safely nested under one of
 // those wrappers — no standalone top-level styling exists.
 //
@@ -62,7 +62,7 @@
     }
   }
 
-  .border-20 {
+  .jbs-border-20 {
     border-radius: 20px;
   }
 
@@ -74,13 +74,13 @@
     box-shadow: none;
   }
 
-  .light-bg {
+  .jbs-light-bg {
     background: var(--jbs-box_bg_color);
     box-shadow: var(--bs_sm);
   }
 
   // "Filter By" heading. Namespaced as `.jbs-filter-heading`
-  // because `.main-title` is used elsewhere in the plugin
+  // because `.jbs-main-title` is used elsewhere in the plugin
   // (dashboard pages) and by countless themes — too generic
   // for a plugin-owned class.
   .jbs-filter-heading {
@@ -353,7 +353,7 @@
   }
 
   // "Show more" button in checkbox filters.
-  .more-btn {
+  .jbs-more-btn {
     width: 112px !important;
     margin-top: 10px;
     color: #fff;
@@ -401,7 +401,7 @@
       width: 100%;
       margin: 0 0 10px;
 
-      .currency {
+      .jbs-currency {
         font-size: 11px;
         color: var(--black_900);
       }
@@ -610,7 +610,7 @@ button.jbs-filter-btn {
   border: 2px solid var(--jbs-brand_color_2);
   border-radius: 6px;
 
-  &.jbs_filter-transparent {
+  &.jbs-jbs_filter-transparent {
     background-color: transparent;
   }
 
@@ -669,7 +669,7 @@ button.jbs_filter_btn-padding {
       margin-bottom: 10px;
     }
 
-    .more-btn {
+    .jbs-more-btn {
       display: inline-block;
       width: auto;
     }

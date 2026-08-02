@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <div class="jbs-category-widget-two">
-    <div class="card-wrapper jbs-d-flex jbs-flex-wrap jobus_cat_align">
+    <div class="jbs-card-wrapper jbs-d-flex jbs-flex-wrap jobus_cat_align">
         <?php
         if ( is_array($categories) ) {
             foreach ( $categories as $index => $category ) {
@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) {
                 ?>
 
                 <div class="jbs-card-item jbs-text-center wow fadeInUp category-<?php echo esc_attr($category->slug); ?>"">
-                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info jbs-d-flex jbs-align-items-center" style="<?php echo esc_attr( $bg_style ); ?>"
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="jbs-box-info jbs-d-flex jbs-align-items-center" style="<?php echo esc_attr( $bg_style ); ?>"
                        <?php if ( $hover_bg_color || $hover_border_color ) : ?>
                            onmouseover="this.style.backgroundColor='<?php echo esc_js( $hover_bg_color ); ?>'; this.style.borderColor='<?php echo esc_js( $hover_border_color ); ?>';"
                            onmouseout="this.style.backgroundColor='<?php echo esc_js( $bg_color ); ?>'; this.style.borderColor='';"

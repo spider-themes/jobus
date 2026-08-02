@@ -68,11 +68,11 @@
                             console.log('AJAX success:', res.data.status, 'for post', postId, 'type', postType);
                             // Always update button state
                             if (res.data.status === 'added') {
-                                btn.addClass('saved');
+                                btn.addClass('jbs-saved');
                                 icon.attr('class', 'bi bi-bookmark-check-fill jbs-text-primary');
                                 btn.attr('title', postType === 'jobus_job' ? 'Saved' : postType === 'jobus_candidate' ? 'Saved Candidate' : 'Saved');
                             } else if (res.data.status === 'removed') {
-                                btn.removeClass('saved');
+                                btn.removeClass('jbs-saved');
                                 icon.attr('class', 'bi bi-bookmark-dash');
                                 btn.attr('title', postType === 'jobus_job' ? 'Save Job' : postType === 'jobus_candidate' ? 'Save Candidate' : 'Save');
                             }
@@ -274,8 +274,8 @@
                 });
             };
 
-            handleRegistration('#jobus-candidate-registration-form', 'jobus_register_candidate', 'register_candidate_nonce');
-            handleRegistration('#jobus-employer-registration-form', 'jobus_register_employer', 'register_employer_nonce');
+            handleRegistration('#jbs-candidate-registration-form', 'jobus_register_candidate', 'register_candidate_nonce');
+            handleRegistration('#jbs-employer-registration-form', 'jobus_register_employer', 'register_employer_nonce');
         }
 
     };

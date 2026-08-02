@@ -2,15 +2,15 @@
   background: var(--jbs-box_bg_color);
 }
 
-.company-verification-badge,
-.company-verification-badge i {
+.jbs-company-verification-badge,
+.jbs-company-verification-badge i {
   color: #1877F2 !important;
   font-size: 16px;
   /* Facebook Verified Blue */
 }
 
 // Company Grid Layout
-.company-grid-layout {
+.jbs-company-grid-layout {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,7 +21,7 @@
   background: #fff;
   border: 1px solid rgba($color: #000000, $alpha: 0.1);
 
-  &.favourite::before {
+  &.jbs-favourite::before {
     content: '';
     position: absolute;
     width: 90px;
@@ -32,7 +32,7 @@
     transform: rotate(45deg);
   }
 
-  &.favourite::after {
+  &.jbs-favourite::after {
     content: "\f586";
     font-family: bootstrap-icons !important;
     position: absolute;
@@ -42,7 +42,7 @@
     left: 14px;
   }
 
-  .company-logo {
+  .jbs-company-logo {
     display: block;
     width: 85px;
     height: 85px;
@@ -63,7 +63,7 @@
     }
   }
 
-  .company-name {
+  .jbs-company-name {
     font-size: 24px;
     margin: 22px 0 8px;
     display: inline-block;
@@ -104,7 +104,7 @@
 }
 
 // Company List Layout
-.company-list-layout {
+.jbs-company-list-layout {
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
@@ -112,7 +112,7 @@
   position: relative;
   border: 1px solid rgba($color: #000000, $alpha: 0.1);
 
-  &.favourite::before {
+  &.jbs-favourite::before {
     content: '';
     position: absolute;
     width: 60px;
@@ -123,7 +123,7 @@
     transform: rotate(45deg);
   }
 
-  &.favourite::after {
+  &.jbs-favourite::after {
     content: "\f586";
     font-family: bootstrap-icons !important;
     position: absolute;
@@ -133,7 +133,7 @@
     left: 7px;
   }
 
-  .company-logo {
+  .jbs-company-logo {
     display: block;
     width: 70px;
     height: 70px;
@@ -141,7 +141,7 @@
 
   }
 
-  .company-data {
+  .jbs-company-data {
     width: calc(100% - 70px);
     padding-left: 20px;
 
@@ -167,7 +167,7 @@
     }
   }
 
-  .company-name {
+  .jbs-company-name {
     font-size: 24px;
 
     &:hover {
@@ -181,14 +181,14 @@
     margin: 3px 0 0;
   }
 
-  .team-img {
+  .jbs-team-img {
     width: 55px;
     height: 55px;
     border: 6px solid #fff;
     margin-right: -18px;
   }
 
-  .team-text {
+  .jbs-team-text {
     font-size: 15px;
     line-height: 20px;
     color: rgba($color: #000000, $alpha: 0.4);
@@ -197,13 +197,13 @@
 }
 
 // Company Details
-.company-details {
+.jbs-company-details {
   padding-top: 180px;
 
-  .details-post-data {
+  .jbs-details-post-data {
     position: relative;
 
-    .company-head {
+    .jbs-company-head {
       .post-title {
         font-size: 52px;
       }
@@ -253,7 +253,7 @@
       }
     }
 
-    .share-option li a {
+    .jbs-share-option li a {
       font-size: 15px;
       color: var(--jbs-brand_color_2);
       width: 34px;
@@ -275,6 +275,6 @@
 }
 
 // Company Open Position
-.company-open-position {
+.jbs-company-open-position {
   background: var(--jbs-box_bg_color);
 }

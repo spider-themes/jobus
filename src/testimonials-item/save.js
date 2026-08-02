@@ -9,18 +9,18 @@ function Save ({attributes}) {
     return (
         <div {...blockProps}>
 
-            <div className="feedback-block-four ddddd">
+            <div className="jbs-feedback-block-four">
                 <div className="jbs-d-flex jbs-align-items-center">
-                    <ul className="jbs-style-none jbs-d-flex rating">
+                    <ul className="jbs-style-none jbs-d-flex jbs-rating">
                         {Array.from({length: rating}, (_, index) => (
                             <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
                         ))}
                     </ul>
-                    <div className="review-score"><span className="jbsfw-500 jbs-text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
+                    <div className="jbs-review-score"><span className="jbsfw-500 jbs-text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
                 </div>
                 <blockquote>{reviewContents}</blockquote>
                 <div className="jbs-d-flex jbs-align-items-center">
-                    {authorImage && <img src={authorImage} alt="Author" className="author-img jbs-rounded-circle"/>}
+                    {authorImage && <img src={authorImage} alt="Author" className="jbs-author-img jbs-rounded-circle"/>}
                     <div className="jbs-ms-3">
                         <div className="name jbs-fw-500 jbs-text-dark">{authorName}</div>
                         <span className="jbs-opacity-50">{location}</span>

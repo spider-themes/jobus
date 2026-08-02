@@ -1,6 +1,6 @@
 // Upload Preview Section
-.dashboard-body {
-  .preview {
+.jbs-dashboard-body {
+  .jbs-preview {
     display: flex;
     margin-bottom: 1rem;
 
@@ -8,7 +8,7 @@
       display: none;
     }
 
-    .attached-file {
+    .jbs-attached-file {
       width: 100%;
       padding: 0.75rem 1rem;
       background-color: #f8f9fa;
@@ -22,7 +22,7 @@
         word-break: break-word;
       }
 
-      .remove-btn {
+      .jbs-remove-btn {
         color: #dc3545;
         transition: all 0.3s ease;
 
@@ -35,7 +35,7 @@
   }
 
   // CV Upload Button Wrapper
-  #cv-upload-btn-wrapper {
+  #jbs-cv-upload-btn-wrapper {
     margin-bottom: 0.5rem;
 
     &.hidden {
@@ -54,7 +54,7 @@
   }
 
   // CV File Info Text
-  .file-info {
+  .jbs-file-info {
     display: block;
     margin-top: 0.5rem;
 
@@ -69,7 +69,7 @@
   }
 
   // Video Background Image Upload Preview Section
-  .bg-img-preview {
+  .jbs-bg-img-preview {
     display: flex;
     margin-bottom: 1rem;
 
@@ -77,7 +77,7 @@
       display: none;
     }
 
-    .attached-file {
+    .jbs-attached-file {
       width: 100%;
       padding: 0.75rem 1rem;
       background-color: #f8f9fa;
@@ -94,7 +94,7 @@
         text-overflow: ellipsis;
       }
 
-      .remove-btn {
+      .jbs-remove-btn {
         color: #dc3545;
         transition: all 0.3s ease;
 
@@ -129,13 +129,13 @@
 
 
   // Dynamic Taxonomy Input & Tag Styles
-  .taxonomy-input-wrapper {
+  .jbs-taxonomy-input-wrapper {
     position: relative;
     margin: 0 5px 5px 0;
     display: inline-block;
   }
 
-  .taxonomy-input {
+  .jbs-taxonomy-input {
     border: 1px solid #e9ecef;
     border-radius: 4px;
     padding: 8px 12px;
@@ -151,7 +151,7 @@
     box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
   }
 
-  .is_tag {
+  .jbs-is_tag {
     background: #F6F4FF;
     border-radius: 4px;
     padding: 5px 12px;
@@ -162,7 +162,7 @@
     font-weight: 500;
   }
 
-  .is_tag button {
+  .jbs-is_tag button {
     background: none;
     border: none;
     color: #7B67FF;
@@ -174,21 +174,21 @@
     cursor: pointer;
   }
 
-  .is_tag button i {
+  .jbs-is_tag button i {
     font-size: 12px;
     opacity: 0.7;
   }
 
-  .is_tag button:hover i {
+  .jbs-is_tag button:hover i {
     opacity: 1;
   }
 
-  .more_tag {
+  .jbs-more_tag {
     margin-left: 5px;
     display: inline-block;
   }
 
-  .more_tag button {
+  .jbs-more_tag button {
     background: #F6F4FF;
     border: none;
     color: #7B67FF;
@@ -202,7 +202,7 @@
     transition: background 0.2s, color 0.2s;
   }
 
-  .more_tag button:hover {
+  .jbs-more_tag button:hover {
     background: #7B67FF;
     color: #fff;
   }

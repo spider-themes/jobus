@@ -111,7 +111,7 @@
 
     &:hover,
     &:focus-visible,
-    &.is-active {
+    &.jbs-is-active {
       border-color: rgba(49, 121, 90, 0.3);
       background: #fff;
       box-shadow: 0 16px 24px rgba(19, 43, 34, 0.08);
@@ -119,7 +119,7 @@
       outline: none;
     }
 
-    &.is-enabled {
+    &.jbs-is-enabled {
       border-color: rgba(49, 121, 90, 0.18);
       background: #fff;
     }
@@ -183,7 +183,7 @@
     display: none;
     padding: 28px 32px;
 
-    &.is-active {
+    &.jbs-is-active {
       display: block;
     }
   }

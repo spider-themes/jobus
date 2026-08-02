@@ -81,7 +81,7 @@
     border-radius: $border-radius;
 }
 
-.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .jbs-show > .jbs-nav-link {
     color: $text-white;
     background-color: $primary-color;
 }

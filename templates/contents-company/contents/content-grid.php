@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<div class="accordion-box grid-style">
+<div class="jbs-accordion-box grid-style">
     <div class="jbs-row">
 		<?php
 		while ( $company_query->have_posts() ) : $company_query->the_post();
@@ -15,15 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$column               = sanitize_html_class( jobus_opt( 'company_archive_grid_column' ) );
 			?>
             <div class="jbs-col-lg-<?php echo esc_attr( $column ) ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                <div class="company-grid-layout jbs-mb-30<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
+                <div class="jbs-company-grid-layout jbs-mb-30<?php echo esc_attr( $is_favourite . $is_popup_border_none ) ?>">
 					<?php if ( has_post_thumbnail() ) : ?>
                         <a href="<?php the_permalink(); ?>"
-                           class="company-logo jbs-me-auto jbs-ms-auto jbs-rounded-circle">
+                           class="jbs-company-logo jbs-me-auto jbs-ms-auto jbs-rounded-circle">
 							<?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] ); ?>
                         </a>
 					<?php endif; ?>
                     <h5 class="jbs-text-center">
-                        <a href="<?php the_permalink(); ?>" class="company-name tran3s jbs-text-black">
+                        <a href="<?php the_permalink(); ?>" class="jbs-company-name jbs-tran3s jbs-text-black">
 							<?php the_title(); ?>
                         </a>
                         <?php echo jobus_get_company_verification_badge( get_the_ID() ); ?>

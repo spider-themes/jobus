@@ -22,8 +22,8 @@
                     dots: false,
                     arrows: true,
                     lazyLoad: 'ondemand',
-                    prevArrow: $('.prev_e'),
-                    nextArrow: $('.next_e'),
+                    prevArrow: $('.jbs-prev_e'),
+                    nextArrow: $('.jbs-next_e'),
                     centerPadding: '0px',
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -48,7 +48,7 @@
         // Testimonial slider
         function testimonialSlider() {
 
-            let reviewSlider = $('.company-review-slider');
+            let reviewSlider = $('.jbs-company-review-slider');
             let dataRtlreview = reviewSlider.data("rtl");
             if (reviewSlider.length > 0) {
                 reviewSlider.slick({
@@ -165,23 +165,23 @@
 
         //==== Tags Filter ====//
         function tagsFilter() {
-            const moreBtn = $('.more-btn');
-            const filterInput = $('.jobus-tags-wrapper');
+            const moreBtn = $('.jbs-more-btn');
+            const filterInput = $('.jbs-tags-wrapper');
 
             if (moreBtn.length) {
                 moreBtn.on('click', function () {
                     const $this = $(this);
                     const hiddenItems = filterInput.find('li.tag-item.hide');
 
-                    if ($this.hasClass('showing-all')) {
+                    if ($this.hasClass('jbs-showing-all')) {
                         // Hide items after initial limit
                         hiddenItems.slideUp(300);
-                        $this.removeClass('showing-all')
+                        $this.removeClass('jbs-showing-all')
                             .html('<i class="bi bi-plus"></i> Show More');
                     } else {
                         // Show all hidden items
                         hiddenItems.slideDown(300);
-                        $this.addClass('showing-all')
+                        $this.addClass('jbs-showing-all')
                             .html('<i class="bi bi-dash"></i> Show Less');
                     }
                 });
@@ -221,12 +221,12 @@
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    const loginModal = document.getElementById('jobusLoginModal');
+                    const loginModal = document.getElementById('jbsLoginModal');
                     
                     if (loginModal) {
                         // Show the modal
                         loginModal.style.display = 'block';
-                        loginModal.classList.add('show');
+                        loginModal.classList.add('jbs-show');
                         loginModal.setAttribute('aria-hidden', 'false');
                         document.body.classList.add('modal-open');
                         
@@ -241,13 +241,13 @@
             });
 
             // Close modal when clicking close button
-            $(document).on('click', '#jobusLoginModal .jbs-btn-close, #jobusLoginModal [data-jbs-dismiss="modal"]', function (e) {
+            $(document).on('click', '#jbsLoginModal .jbs-btn-close, #jbsLoginModal [data-jbs-dismiss="modal"]', function (e) {
                 e.preventDefault();
                 closeLoginModal();
             });
 
             // Close modal when clicking outside the modal content
-            $(document).on('click', '#jobusLoginModal', function (e) {
+            $(document).on('click', '#jbsLoginModal', function (e) {
                 if (e.target === this) {
                     closeLoginModal();
                 }
@@ -256,8 +256,8 @@
             // Close with ESC key
             $(document).on('keydown', function(e) {
                 if (e.key === 'Escape' || e.keyCode === 27) {
-                    const loginModal = document.getElementById('jobusLoginModal');
-                    if (loginModal && loginModal.classList.contains('show')) {
+                    const loginModal = document.getElementById('jbsLoginModal');
+                    if (loginModal && loginModal.classList.contains('jbs-show')) {
                         closeLoginModal();
                     }
                 }
@@ -268,12 +268,12 @@
          * Close login modal
          */
         function closeLoginModal() {
-            const loginModal = document.getElementById('jobusLoginModal');
+            const loginModal = document.getElementById('jbsLoginModal');
             if (loginModal) {
                 loginModal.style.opacity = '0';
                 setTimeout(function() {
                     loginModal.style.display = 'none';
-                    loginModal.classList.remove('show');
+                    loginModal.classList.remove('jbs-show');
                     loginModal.setAttribute('aria-hidden', 'true');
                     document.body.classList.remove('modal-open');
                 }, 300);
@@ -638,11 +638,11 @@
                 const button = this;
                 const label = button.querySelector('.' + labelClass);
 
-                if (button.classList.contains('is-loading')) {
+                if (button.classList.contains('jbs-is-loading')) {
                     return;
                 }
 
-                button.classList.add('is-loading');
+                button.classList.add('jbs-is-loading');
                 button.setAttribute('aria-busy', 'true');
 
                 if (label) {

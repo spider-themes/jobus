@@ -1,7 +1,7 @@
 /**===== Saved Candidate and Job ======*/
-.jobus-saved-post,
-.jobus-dashboard-remove-saved-post,
-.jobus-dashboard-post-view-more {
+.jbs-saved-post,
+.jbs-dashboard-remove-saved-post,
+.jbs-dashboard-post-view-more {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
   display: inline-block;
   box-sizing: border-box;
 
-  &.lg {
+  &.jbs-lg {
     padding: 8px 32px;
   }
 
@@ -60,7 +60,7 @@
   }
 }
 
-.btn-eleven {
+.jbs-btn-eleven {
   height: 60px;
   border-radius: 7px;
   font-size: 14px;
@@ -72,8 +72,8 @@
   border: none;
 }
 
-.btn-eleven:hover,
-.btn-eleven:focus {
+.jbs-btn-eleven:hover,
+.jbs-btn-eleven:focus {
   background: #00bf58 !important;
 }
 
@@ -99,7 +99,7 @@
   }
 }
 
-.open-job-btn {
+.jbs-open-job-btn {
   line-height: 31px;
   font-size: 15px;
   color: var(--jbs-brand_color_4);
@@ -114,7 +114,7 @@
   }
 }
 
-.btn-six {
+.jbs-btn-six {
   font-weight: 500;
   color: var(--jbs-brand_color_4);
   position: relative;
