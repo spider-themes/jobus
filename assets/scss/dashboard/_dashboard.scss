@@ -1,6 +1,6 @@
 //Admin Dashboard
 .admin-bar {
-  .dashboard-navbar {
+  .jbs-dashboard-navbar {
     margin-top: 32px;
   }
 }
@@ -8,16 +8,17 @@
 // Hide site footer on dashboard pages
 .page-template-page-template-dashboard,
 .jbs-dashboard-template {
+
   .site-footer,
   footer.site-footer,
   footer#colophon,
-  .footer,
+  .jbs-footer,
   #footer {
     display: none !important;
   }
 }
 
-.dashboard-navbar {
+.jbs-dashboard-navbar {
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -46,8 +47,8 @@
     border-radius: 0;
   }
 
-  .user-data {
-    .user-avatar {
+  .jbs-user-data {
+    .jbs-user-avatar {
       width: 75px;
       height: 75px;
       margin: 40px auto 0;
@@ -56,7 +57,7 @@
         border-radius: 50%;
       }
 
-      &.online:before {
+      &.jbs-online:before {
         content: "";
         position: absolute;
         width: 15px;
@@ -70,7 +71,7 @@
       }
     }
 
-    .user-name-data .jbs-dropdown-menu {
+    .jbs-user-name-data .jbs-dropdown-menu {
       width: 100%;
       border: none;
       border-radius: 15px;
@@ -106,26 +107,30 @@
       }
     }
 
-    .user-name {
+    .jbs-user-name {
       width: 100%;
       font-size: 18px;
       font-weight: 500;
       color: $color-two;
       margin: 15px 0 45px;
       border: none;
+
       &:after {
         vertical-align: 3px;
       }
     }
-    .user_name-btn{
-        box-shadow: none;
-        &:hover, &:focus {
-            background-color: transparent;
-        }
+
+    .jbs-user_name-btn {
+      box-shadow: none;
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
     }
   }
 
-  .main-nav li a {
+  .jbs-main-nav li a {
     font-size: 16px;
     font-weight: 500;
     letter-spacing: -0.16px;
@@ -152,10 +157,10 @@
     }
   }
 
-  .profile-complete-status {
+  .jbs-profile-complete-status {
     margin: 60px 0 75px 20px;
 
-    .progress-value {
+    .jbs-progress-value {
       color: $color-one;
     }
 
@@ -166,7 +171,7 @@
       overflow: hidden;
       margin: 9px 0 3px;
 
-      .inner-line {
+      .jbs-inner-line {
         position: absolute;
         height: 100%;
         left: 0;
@@ -183,7 +188,7 @@
     }
   }
 
-  .logout-btn {
+  .jbs-logout-btn {
     font-size: 16px;
     font-weight: 500;
     letter-spacing: -0.16px;
@@ -200,7 +205,7 @@
     }
   }
 
-  .close-btn {
+  .jbs-close-btn {
     font-size: 22px;
     font-weight: bold;
     color: $color-one;
@@ -208,7 +213,7 @@
 }
 
 // Dashboard Body
-.dashboard-body {
+.jbs-dashboard-body {
   min-height: 100vh;
   background: #f0f5f3;
   margin-left: 260px;
@@ -218,16 +223,18 @@
 
   a {
     text-decoration: none;
-    color:#000;
+    color: #000;
+
     &:hover {
-      color:#000;
+      color: #000;
     }
   }
-  .border-15 {
+
+  .jbs-border-15 {
     border-radius: 15px;
   }
 
-  .border-20 {
+  .jbs-border-20 {
     border-radius: 20px;
   }
 
@@ -235,17 +242,17 @@
     border-radius: 30px;
   }
 
-  .card-box {
+  .jbs-card-box {
     padding: 45px 60px 50px;
   }
 
-  .main-title {
+  .jbs-main-title {
     font-size: 36px;
     color: $color-two;
     margin-bottom: 40px;
   }
 
-  .dash-title-two {
+  .jbs-dash-title-two {
     font-size: 20px;
     color: $color-two;
     border-bottom: 1px solid #e3f0eb;
@@ -253,13 +260,13 @@
     margin: 0;
   }
 
-  .dash-title-three {
+  .jbs-dash-title-three {
     font-size: 24px;
     color: $color-five;
     margin: 0 0 30px;
   }
 
-  .dash-btn-one {
+  .jbs-dash-btn-one {
     font-size: 15px;
     font-weight: 500;
     letter-spacing: -0.15px;
@@ -297,7 +304,7 @@
     }
   }
 
-  .dash-btn-two {
+  .jbs-dash-btn-two {
     font-weight: 500;
     color: #fff;
     min-width: 125px;
@@ -308,6 +315,7 @@
     background: $color-one;
     border: none;
     cursor: pointer;
+    display: inline-block;
 
     &:hover {
       background: $color-three !important;
@@ -315,7 +323,8 @@
       text-decoration: none !important;
     }
   }
-  button#clear-portfolio-images {
+
+  button#jbs-clear-portfolio-images {
     font-weight: 500;
     color: #fff;
     min-width: 125px;
@@ -326,9 +335,9 @@
     background: #fb0a0a;
     border: none;
     cursor: pointer;
-}
+  }
 
-  .dash-cancel-btn {
+  .jbs-dash-cancel-btn {
     font-weight: 500;
     color: $color-five;
 
@@ -347,7 +356,7 @@
     padding: 30px 0;
     z-index: 999;
 
-    .search-form {
+    .jbs-search-form {
       position: relative;
       height: 45px;
       width: 318px;
@@ -373,8 +382,8 @@
       }
     }
 
-    .profile-notification {
-      .noti-btn {
+    .jbs-profile-notification {
+      .jbs-noti-btn {
         height: 45px;
         position: relative;
 
@@ -405,7 +414,7 @@
           margin-bottom: 20px;
         }
 
-        .notify-list li {
+        .jbs-notify-list li {
           position: relative;
           padding-right: 10px;
           cursor: pointer;
@@ -422,7 +431,7 @@
             top: 5px;
           }
 
-          &.unread:before {
+          &.jbs-unread:before {
             background: #ff2730;
           }
 
@@ -437,11 +446,11 @@
             white-space: nowrap;
           }
 
-          &.unread h6 {
+          &.jbs-unread h6 {
             color: #000;
           }
 
-          .time {
+          .jbs-time {
             font-size: 14px;
             color: rgba($color: #000, $alpha: 0.5);
           }
@@ -449,7 +458,7 @@
       }
     }
 
-    .job-post-btn {
+    .jbs-job-post-btn {
       font-weight: 500;
       color: #fff;
       text-align: center;
@@ -464,7 +473,7 @@
       }
     }
 
-    .dash-mobile-nav-toggler {
+    .jbs-dash-mobile-nav-toggler {
       width: 44px;
       height: 38px;
       padding: 0;
@@ -475,12 +484,12 @@
       border-radius: 5px;
     }
 
-    .dash-mobile-nav-toggler:focus {
+    .jbs-dash-mobile-nav-toggler:focus {
       box-shadow: none;
     }
 
-    .dash-mobile-nav-toggler::before,
-    .dash-mobile-nav-toggler::after {
+    .jbs-dash-mobile-nav-toggler::before,
+    .jbs-dash-mobile-nav-toggler::after {
       content: "";
       position: absolute;
       top: 50%;
@@ -495,7 +504,7 @@
       background: $color-one;
     }
 
-    .dash-mobile-nav-toggler span {
+    .jbs-dash-mobile-nav-toggler span {
       position: absolute;
       left: 0;
       overflow: hidden;
@@ -508,19 +517,19 @@
       background: $color-one;
     }
 
-    .dash-mobile-nav-toggler::before {
+    .jbs-dash-mobile-nav-toggler::before {
       -webkit-transform: translate3d(0, -9px, 0) scale3d(1, 1, 1);
       transform: translate3d(0, -9px, 0) scale3d(1, 1, 1);
     }
 
-    .dash-mobile-nav-toggler::after {
+    .jbs-dash-mobile-nav-toggler::after {
       -webkit-transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
       transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
     }
   }
 
   // Card One
-  .dash-card-one {
+  .jbs-dash-card-one {
     padding: 22px 35px 34px;
     z-index: 1;
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.02);
@@ -544,7 +553,7 @@
       background: $color-three;
     }
 
-    .value {
+    .jbs-value {
       font-size: 36px;
       letter-spacing: -0.36px;
       color: $color-two;
@@ -555,13 +564,13 @@
     }
   }
 
-  a .dash-card-one:hover {
+  a .jbs-dash-card-one:hover {
     box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.08);
     transform: translateY(-5px);
   }
 
-  .user-activity-chart {
-    .job-list {
+  .jbs-user-activity-chart {
+    .jbs-job-list {
       padding: 25px 20px;
       max-width: 700px;
       margin: 0 auto;
@@ -593,13 +602,14 @@
   }
 
   // Recent Job Tab
-  .recent-job-tab .wrapper {
+  .jbs-recent-job-tab .jbs-wrapper {
     padding: 0 25px 8px 30px;
 
-    .no-jobs-message {
+    .jbs-no-jobs-message {
       padding: 16px 0 8px;
     }
-    .job-item-list {
+
+    .jbs-job-item-list {
       position: relative;
       margin: 5px 0;
       transition: all 0.3s ease;
@@ -623,7 +633,7 @@
         width: calc(100% - 40px);
         padding-left: 22px;
 
-        .job_title-mb {
+        .jbs-job_title-mb {
           margin-bottom: 5px;
           margin-top: 0;
         }
@@ -643,16 +653,17 @@
           }
         }
 
-        .meta {
+        .jbs-meta {
           font-size: 14px;
           color: rgba($color: #244034, $alpha: 0.5);
-          a{
+
+          a {
             color: rgba($color: #244034, $alpha: 0.5);
           }
         }
       }
 
-      .job-action {
+      .jbs-job-action {
         position: absolute;
         top: 0;
         right: 0px;
@@ -678,7 +689,7 @@
           }
         }
 
-        .action-btn {
+        .jbs-action-btn {
           padding: 8px;
 
           span {
@@ -728,14 +739,14 @@
   }
 
   // User Avatar
-  .user-avatar-setting {
-    .user-img {
+  .jbs-user-avatar-setting {
+    .jbs-user-img {
       width: 68px;
       height: 68px;
       border-radius: 50%;
     }
 
-    .upload-btn {
+    .jbs-upload-btn {
       font-size: 15px;
       letter-spacing: -0.15px;
       font-weight: 500;
@@ -760,11 +771,13 @@
         left: 0;
       }
     }
-    .upload_btn-width{
-        width: 175px;
-        line-height: 40px;
-      }
-    .delete-btn {
+
+    .jbs-upload_btn-width {
+      width: 175px;
+      line-height: 40px;
+    }
+
+    .jbs-delete-btn {
       font-size: 15px;
       letter-spacing: -0.15px;
       font-weight: 500;
@@ -772,6 +785,7 @@
       border: none;
       background: transparent;
       box-shadow: none;
+
       &:hover {
         color: #ff5b5b;
       }
@@ -779,7 +793,7 @@
   }
 
   // Input Style
-  .dash-input-wrapper {
+  .jbs-dash-input-wrapper {
     label {
       display: block;
       font-size: 15px;
@@ -788,7 +802,7 @@
       margin-bottom: 10px;
     }
 
-    .alert-text {
+    .jbs-alert-text {
       font-size: 14px;
       letter-spacing: -0.14px;
       color: rgba($color: #000, $alpha: 0.5);
@@ -802,6 +816,7 @@
       border-radius: 7px;
       padding: 0 20px;
       outline: none;
+
       &:focus {
         border-color: var(--jbs-brand_color_1);
       }
@@ -815,7 +830,7 @@
       width: 100%;
       resize: none;
 
-      &.size-lg {
+      &.jbs-size-lg {
         height: 230px;
         max-height: 200px;
       }
@@ -828,16 +843,17 @@
       border: 1px solid #e5e5e5;
       border-radius: 7px;
       padding: 0 25px 0 20px;
-      
+
       .option {
         line-height: 38px;
       }
-      .list{
+
+      .list {
         border-radius: 7px;
       }
     }
 
-    .map-frame {
+    .jbs-map-frame {
       height: 290px;
       border-radius: 8px;
       overflow: hidden;
@@ -856,7 +872,7 @@
       }
     }
 
-    .attached-file {
+    .jbs-attached-file {
       height: 60px;
       width: 100%;
       border-radius: 10px;
@@ -867,7 +883,7 @@
         font-size: 14px;
       }
 
-      .remove-btn {
+      .jbs-remove-btn {
         font-size: 22px;
         font-weight: 700;
         color: $color-five;
@@ -878,7 +894,7 @@
       }
     }
 
-    .skills-wrapper {
+    .jbs-skills-wrapper {
       padding: 15px 20px 10px;
       background: #f7f7f7;
       border-radius: 15px;
@@ -889,7 +905,8 @@
         li {
           padding: 0 5px;
           background: none;
-          &.is_tag button {
+
+          &.jbs-is_tag button {
             font-size: 15px;
             color: $color-five;
             line-height: 42px;
@@ -911,7 +928,7 @@
             }
           }
 
-          &.more_tag button {
+          &.jbs-more_tag button {
             font-size: 21px;
             width: 42px;
             height: 42px;
@@ -928,7 +945,7 @@
       }
     }
 
-    .info-text {
+    .jbs-info-text {
       font-size: 14px;
 
       p {
@@ -943,13 +960,13 @@
         }
       }
 
-      .chng-pass {
+      .jbs-chng-pass {
         color: $color-five;
         text-decoration: underline;
       }
     }
 
-    .skill-input-data {
+    .jbs-skill-input-data {
       margin: 0 -3px;
 
       button {
@@ -970,7 +987,7 @@
     }
   }
 
-  .intro-video-post {
+  .jbs-intro-video-post {
     height: 350px;
     width: 100%;
     border-radius: 20px;
@@ -1022,10 +1039,11 @@
     }
   }
 
-  .dash-accordion-one {
+  .jbs-dash-accordion-one {
     .jbs-collapse.jbs-show {
       padding-bottom: 20px;
     }
+
     .jbs-accordion-item {
       border: 1px solid #eaeaea;
       border-radius: 15px;
@@ -1052,7 +1070,7 @@
     }
   }
 
-  .remove-portfolio-item {
+  .jbs-remove-portfolio-item {
     width: 30px;
     height: 30px;
     background: rgba($color: #000, $alpha: 0.1);
@@ -1067,7 +1085,7 @@
     }
   }
 
-  .tab-filter-btn {
+  .jbs-tab-filter-btn {
     border: none;
 
     .nav-link {
@@ -1086,7 +1104,7 @@
     }
   }
 
-  .short-filter {
+  .jbs-short-filter {
     font-size: 15px;
 
     .jbs-nice-select {
@@ -1114,7 +1132,7 @@
     }
   }
 
-  .job-alert-table {
+  .jbs-job-alert-table {
     th {
       border: 0;
       padding: 12px 15px;
@@ -1122,7 +1140,8 @@
       font-weight: 500;
       color: #244034;
       background: #f0f5f3;
-     text-align: left;
+      text-align: left;
+
       &:first-child {
         border-radius: 7px 0 0 7px;
       }
@@ -1146,22 +1165,22 @@
         color: #244034;
       }
 
-      &:nth-child(2) .job-type {
+      &:nth-child(2) .jbs-job-type {
         color: #00cb74;
 
-        &.part-time {
+        &.jbs-part-time {
           color: #ff5757;
         }
       }
 
-      .info1 {
+      .jbs-info1 {
         font-size: 14px;
         font-weight: normal;
         color: rgba($color: $color-one, $alpha: 0.7);
         margin-top: 2px;
       }
 
-      .job-status {
+      .jbs-job-status {
         position: relative;
         padding-left: 18px;
         color: rgba($color: $color-one, $alpha: 0.9);
@@ -1184,26 +1203,26 @@
 
     tbody tr {
       transition: background-color 0.2s ease;
-      
+
       &:hover {
         background-color: rgba(#f0f5f3, 0.6);
       }
     }
 
-    .active .job-status:before {
+    .active .jbs-job-status:before {
       background: #28cc8b;
     }
 
-    .pending .job-status:before {
+    .jbs-pending .jbs-job-status:before {
       background: #fac715;
     }
 
-    .expired .job-status:before {
+    .jbs-expired .jbs-job-status:before {
       background: #ff5050;
     }
   }
 
-  .action-dots {
+  .jbs-action-dots {
     .jbs-dropdown-menu {
       min-width: 140px;
       border: 1px solid #f1f1f1;
@@ -1239,7 +1258,7 @@
       }
     }
 
-    .action-btn {
+    .jbs-action-btn {
       padding: 8px;
 
       span {
@@ -1286,7 +1305,7 @@
     }
   }
 
-  .dash-pagination li {
+  .jbs-dash-pagination li {
     font-size: 16px;
     color: #000;
     height: 38px;
@@ -1325,7 +1344,7 @@
   }
 
   // Meassage Page
-  .new-message-compose {
+  .jbs-new-message-compose {
     width: 45px;
     line-height: 45px;
     text-align: center;
@@ -1334,28 +1353,29 @@
     background: #d3fa38;
   }
 
-  .message-pagination a {
+  .jbs-message-pagination a {
     color: #000;
   }
 
-  .message-pagination span {
+  .jbs-message-pagination span {
     color: #000;
     font-size: 14px;
     margin: 0 8px;
   }
 
-  .message-wrapper {
-    .message-sidebar {
+  .jbs-message-wrapper {
+    .jbs-message-sidebar {
       border-right: 1px solid #e3e1e1;
       height: 100%;
 
-      .page-title {
+      .jbs-page-title {
         font-size: 18px;
         color: #000;
       }
 
-      .action-btn {
+      .jbs-action-btn {
         span {
+
           &:before,
           &:after {
             top: 0;
@@ -1369,7 +1389,7 @@
         }
       }
 
-      .search-form {
+      .jbs-search-form {
         height: 50px;
         border-radius: 30px;
         position: relative;
@@ -1393,10 +1413,11 @@
           bottom: 0;
           width: 50px;
           border-radius: 30px 0 0 30px;
+          transform: none;
         }
       }
 
-      .message_filter button {
+      .jbs-message_filter button {
         font-size: 15px;
         font-weight: 500;
         color: $brand-color-2;
@@ -1425,7 +1446,7 @@
         }
       }
 
-      .email-list-item {
+      .jbs-email-list-item {
         border-top: 1px solid #f3f3f3;
         padding-top: 28px;
         padding-bottom: 28px;
@@ -1437,34 +1458,15 @@
           border-left: 4px solid #779e86;
           border-right: 4px solid #779e86;
 
-          .email-short-preview .file {
+          .jbs-email-short-preview .jbs-file {
             background: #fff;
           }
         }
 
-        &.read .email-short-preview:before {
-          background: #ff4545;
-        }
-
-        &.primary .email-short-preview:before {
-          background: #52c1ff;
-        }
-
-        .email-short-preview {
+        .jbs-email-short-preview {
           padding-left: 24px;
 
-          &:before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            position: absolute;
-            left: 0;
-            top: 7px;
-            background: #3bda84;
-          }
-
-          .sender-name {
+          .jbs-sender-name {
             font-size: 15px;
             font-weight: 500;
             color: rgba($color: #3f634d, $alpha: 0.8);
@@ -1472,11 +1474,10 @@
 
           .date {
             font-size: 12px;
-            text-transform: uppercase;
             color: rgba($color: #000, $alpha: 0.5);
           }
 
-          .mail-sub {
+          .jbs-mail-sub {
             font-weight: 500;
             font-size: 16px;
             color: #000;
@@ -1486,7 +1487,7 @@
             white-space: nowrap;
           }
 
-          .mail-text {
+          .jbs-mail-text {
             font-size: 15px;
             line-height: 25px;
             color: rgba($color: #000, $alpha: 0.5);
@@ -1496,7 +1497,7 @@
             -webkit-box-orient: vertical;
           }
 
-          .file {
+          .jbs-file {
             padding: 3px 10px;
             border-radius: 4px;
             font-size: 12px;
@@ -1508,12 +1509,12 @@
       }
     }
 
-    .open-email-container {
+    .jbs-open-email-container {
       .divider {
         border-bottom: 1px solid #eeeeee;
       }
 
-      .email-header {
+      .jbs-email-header {
         padding-top: 30px;
         padding-bottom: 30px;
 
@@ -1523,26 +1524,26 @@
           border-radius: 50%;
         }
 
-        .sender-name {
+        .jbs-sender-name {
           font-size: 20px;
           font-weight: 500;
           color: $brand-color-2;
           margin-bottom: -4px;
         }
 
-        .sender-email {
+        .jbs-sender-email {
           font-size: 17px;
           color: rgba($color: #000, $alpha: 0.4);
         }
 
-        .time {
+        .jbs-time {
           font-size: 13px;
           color: rgba($color: #244034, $alpha: 0.6);
           margin-bottom: 15px;
         }
       }
 
-      .email-body {
+      .jbs-email-body {
         padding-top: 35px;
         padding-bottom: 15px;
         font-size: 15px;
@@ -1557,21 +1558,21 @@
         }
       }
 
-      .email-footer {
+      .jbs-email-footer {
         padding-top: 20px;
 
-        .attachments {
+        .jbs-attachments {
           h6 {
             font-size: 15px;
           }
 
-          .all-download {
+          .jbs-all-download {
             font-size: 14px;
             font-weight: 500;
             color: $color-five;
           }
 
-          .file {
+          .jbs-file {
             padding: 9px 15px;
             border: 1px solid rgba($color: #000000, $alpha: 0.1);
             border-radius: 10px;
@@ -1587,13 +1588,13 @@
               background: #f0f5f3;
             }
 
-            .file-name {
+            .jbs-file-name {
               font-size: 15px;
               letter-spacing: -0.3px;
               color: $brand-color-2;
             }
 
-            .file-size {
+            .jbs-file-size {
               font-size: 13px;
               letter-spacing: -0.3px;
               color: rgba($color: $color-one, $alpha: 0.5);
@@ -1604,15 +1605,15 @@
     }
   }
 
-  .candidate-profile-card {
+  .jbs-candidate-profile-card {
     overflow: visible;
   }
 
-  .membership-plan-wrapper {
+  .jbs-membership-plan-wrapper {
     border-radius: 10px;
     border: 1px solid $brand-color-2;
 
-    .column {
+    .jbs-column {
       padding: 38px 40px;
 
       &.border-left {
@@ -1622,7 +1623,9 @@
 
     h4 {
       font-size: 20px;
-      color: $brand-color-2;
+      color: rgb(37, 64, 53);
+      margin: 0 0 .5rem 0;
+      font-weight: 500;
     }
 
     p {
@@ -1631,27 +1634,31 @@
       margin: 0;
     }
 
+    h3,
+    h6 {
+      color: $color-five;
+      margin: 0;
+    }
+
     h3 {
       font-size: 60px;
-      color: $color-five;
     }
 
     h6 {
       font-size: 18px;
-      color: $color-five;
+      margin-bottom: 0.5rem;
     }
 
-    .text1 {
+    .jbs-text1 {
       font-size: 14px;
       letter-spacing: -0.14px;
-      margin: -4px 0 22px;
 
       span {
         color: #000;
       }
     }
 
-    .cancel-plan {
+    .jbs-cancel-plan {
       font-size: 15px;
       font-weight: 500;
       color: $color-five;
@@ -1665,12 +1672,12 @@
 }
 
 // New Message Container
-.compose-new-email-container {
+.jbs-compose-new-email-container {
   border: 1px solid rgba($color: #000, $alpha: 0.1);
   border-radius: 10px;
   background: #fff;
 
-  .new-email-header {
+  .jbs-new-email-header {
     border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
 
     .btn-group {
@@ -1703,7 +1710,7 @@
     }
   }
 
-  .compose-body textarea {
+  .jbs-compose-body textarea {
     width: 100%;
     max-width: 100%;
     height: 125px;
@@ -1713,10 +1720,10 @@
     padding: 15px 22px;
   }
 
-  .compose-email-footer {
+  .jbs-compose-email-footer {
     padding: 15px 22px;
 
-    .insert-file {
+    .jbs-insert-file {
       position: relative;
       cursor: pointer;
 
@@ -1731,7 +1738,7 @@
     }
   }
 
-  .reply-btn {
+  .jbs-reply-btn {
     font-size: 14px;
     font-weight: 500;
     color: #fff;
@@ -1749,7 +1756,7 @@
   }
 }
 
-.compose-mail-offcanvas {
+.jbs-compose-mail-offcanvas {
   right: 55px;
   bottom: 0;
   max-width: 700px;
@@ -1760,7 +1767,7 @@
   border: 1px solid rgba($color: #000, $alpha: 0.04);
   display: none;
 
-  &.show {
+  &.jbs-show {
     display: block;
   }
 
@@ -1773,7 +1780,7 @@
 }
 
 // Account Delete Popup
-.remove-account-popup {
+.jbs-remove-account-popup {
   background: #fff;
   margin: 0 auto;
   max-width: 630px;
@@ -1786,7 +1793,7 @@
     margin: 20px 0;
   }
 
-  .confirm-btn {
+  .jbs-confirm-btn {
     width: 80px;
     line-height: 40px;
     border-radius: 6px;
@@ -1816,8 +1823,8 @@
 /*========== Editor Markup Styling ===========*/
 #candidate-profile-form {
   .wp-editor-container {
-    .quicktags-toolbar {
-      .ed_button {
+    .jbs-quicktags-toolbar {
+      .jbs-ed_button {
         width: auto;
         height: auto;
       }
@@ -1825,9 +1832,9 @@
   }
 }
 
-.media-frame-toolbar {
-  .media-toolbar-primary {
-    .media-button {
+.jbs-media-frame-toolbar {
+  .jbs-media-toolbar-primary {
+    .jbs-media-button {
       position: unset;
       transform: none;
     }
@@ -1835,17 +1842,19 @@
 }
 
 /*========== Portfolio Styling ===========*/
-.portfolio-preview-wrapper {
-  .portfolio-image-list {
+.jbs-portfolio-preview-wrapper {
+  .jbs-portfolio-image-list {
     padding: 0;
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+
     li {
       list-style: none;
       border: 1px solid #e3e3e3;
       border-radius: 10px;
       overflow: hidden;
+
       img {
         width: 100px;
         height: 100px;
@@ -1855,24 +1864,26 @@
 }
 
 // Dashboard Header
-body{
-  &.page-template-dashboard{
-    .site-header{
+body {
+  &.page-template-dashboard {
+    .site-header {
       display: none;
     }
   }
 }
-@media (max-width:1024px){
-    .dashboard-body {
+
+@media (max-width:1024px) {
+  .jbs-dashboard-body {
     padding: 150px 25px 50px;
-    }
-    .dashboard-body .card-box{
-        padding: 45px 20px 50px;
-    }
+  }
+
+  .jbs-dashboard-body .jbs-card-box {
+    padding: 45px 20px 50px;
+  }
 }
 
-@media (max-width:767px){
-    .dashboard-body{
-        padding: 0px;
-    }
+@media (max-width:767px) {
+  .jbs-dashboard-body {
+    padding: 0px;
+  }
 }

@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<section class="jbs jbs-job-tabs-widget">
-    <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap isotop-menu-wrapper g-control-nav <?php echo esc_attr( $cat_alignment_class ?? '' ); ?>">
+<section class="jbs-jbs jbs-job-tabs-widget">
+    <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-isotop-menu-wrapper jbs-g-control-nav <?php echo esc_attr( $cat_alignment_class ?? '' ); ?>">
 		<?php
 		if ( ! empty( $settings['all_label'] ) ) { ?>
-            <li class="is-checked" data-filter="*">
+            <li class="jbs-is-checked" data-filter="*">
 				<?php echo esc_html( $settings['all_label'] ); ?>
             </li>
 			<?php
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </ul>
 
     <div id="isotop-gallery-wrapper" class="jbs-grid-column-3 jbs-pt-55 jbs-lg-pt-20">
-        <div class="grid-sizer"></div>
+        <div class="jbs-grid-sizer"></div>
 		<?php
 		while ( $job_posts->have_posts() ) : $job_posts->the_post();
 
@@ -36,8 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$cat_slug .= $cat->slug . ' ';
 			}
 			?>
-            <div class="isotop-item <?php echo esc_attr( $cat_slug ) ?>">
-                <div class="job-list-two jbs-mt-40 jbs-lg-mt-20 jbs-position-relative">
+            <div class="jbs-isotop-item <?php echo esc_attr( $cat_slug ) ?>">
+                <div class="jbs-job-list-two jbs-mt-40 jbs-lg-mt-20 jbs-position-relative">
 
 					<?php
 					if ( has_post_thumbnail() ) { ?>
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					if ( ! empty( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_1'] ) ) ) { ?>
                         <div>
-                            <a href="<?php the_permalink(); ?>" class="job-duration jbs-fw-500 jbs-d-inline-block">
+                            <a href="<?php the_permalink(); ?>" class="jbs-job-duration jbs-fw-500 jbs-d-inline-block">
 								<?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_1'] ) ) ?>
                             </a>
                         </div>
@@ -57,20 +57,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 					?>
                     <div>
-                        <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 tran3s">
+                        <a href="<?php the_permalink(); ?>" class="title jbs-fw-500 jbs-tran3s">
 							<?php jobus_title_length( $settings, 'title_length' ) ?>
                         </a>
                     </div>
-                    <div class="job-date"><?php the_time( get_option( 'date_format' ) ); ?></div>
+                    <div class="jbs-job-date"><?php the_time( get_option( 'date_format' ) ); ?></div>
                     <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-between">
 						<?php if ( ! empty( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_2'] ) ) ) : ?>
-                            <div class="job-location">
+                            <div class="jbs-job-location">
                                 <a href="<?php the_permalink(); ?>">
                                     <?php echo esc_html( jobus_get_meta_attributes( 'jobus_meta_options', $settings['job_attr_meta_2'] )) ?>
                                 </a>
                             </div>
 						<?php endif ?>
-                        <a href="<?php the_permalink(); ?>" class="apply-btn jbs-text-center tran3s">
+                        <a href="<?php the_permalink(); ?>" class="jbs-apply-btn jbs-text-center jbs-tran3s">
 							<?php esc_html_e( 'APPLY', 'jobus' ); ?>
                         </a>
                     </div>
@@ -83,14 +83,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		// Count total post box
 		if ( ! empty( $settings['view_all_btn_url']['url'] ) ) {
 			?>
-            <div class="isotop-item">
-                <div class="jbs-card-style bg-color tran3s jbs-w-100 jbs-mt-40 jbs-lg-mt-20">
+            <div class="jbs-isotop-item">
+                <div class="jbs-card-style jbs-bg-color jbs-tran3s jbs-w-100 jbs-mt-40 jbs-lg-mt-20">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>
                         <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end jbs-mt-140 lg-mt-120 xs-mt-60 jbs-mb-30">
                             <img src="<?php echo esc_url( JOBUS_IMG . '/icons/line.svg' ) ?>" alt="<?php esc_attr_e( 'Line Icon', 'jobus' ); ?>" class="lazy-img">
-                            <div class="icon tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
+                            <div class="icon jbs-tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
                                 <img src="<?php echo esc_url( JOBUS_IMG . '/icons/arrow_icon.svg' ) ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">
                             </div>
                         </div>

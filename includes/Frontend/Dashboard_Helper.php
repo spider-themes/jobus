@@ -30,6 +30,9 @@ class Dashboard_Helper {
 
 		// Register AJAX handler for updating application status
 		add_action( 'wp_ajax_jobus_update_application_status', [ $this, 'update_application_status' ] );
+
+		// Register AJAX handler for searching within saved candidates
+		add_action( 'wp_ajax_jobus_search_saved_candidates', [ $this, 'search_saved_candidates' ] );
 	}
 
 
@@ -233,6 +236,150 @@ class Dashboard_Helper {
 	}
 
 	/**
+	 * AJAX handler to search within employer's saved candidates
+	 */
+	public function search_saved_candidates() {
+		if ( ! check_ajax_referer( 'jobus_search_saved_candidates', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => __( 'Security check failed.', 'jobus' ) ] );
+		}
+		$user_id = get_current_user_id();
+		if ( ! $user_id ) {
+			wp_send_json_error( [ 'message' => __( 'You must be logged in.', 'jobus' ) ] );
+		}
+
+		$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : '';
+
+		$saved_candidates = get_user_meta( $user_id, 'jobus_saved_candidates', true );
+		if ( ! is_array( $saved_candidates ) ) {
+			$saved_candidates = ! empty( $saved_candidates ) ? [ $saved_candidates ] : [];
+		}
+		$saved_candidates = array_filter( array_map( 'intval', $saved_candidates ) );
+
+		if ( empty( $saved_candidates ) ) {
+			wp_send_json_success( [ 'html' => '', 'count' => 0 ] );
+			return;
+		}
+
+		$query_args = [
+			'post_type'      => 'jobus_candidate',
+			'post__in'       => array_values( $saved_candidates ),
+			'posts_per_page' => -1,
+			'post_status'    => 'publish',
+			'orderby'        => 'post__in',
+		];
+
+		if ( ! empty( $search ) ) {
+			$query_args['s'] = $search;
+		}
+
+		$query = new \WP_Query( $query_args );
+
+		if ( ! $query->have_posts() ) {
+			$html = '<div class="jbs-text-center jbs-p-4 jbs-text-muted"><p>' . esc_html__( 'No candidates found matching your search.', 'jobus' ) . '</p></div>';
+			wp_send_json_success( [ 'html' => $html, 'count' => 0 ] );
+			return;
+		}
+
+		ob_start();
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			$candidate_id = get_the_ID();
+			$category     = get_the_terms( $candidate_id, 'jobus_candidate_cat' );
+			$location     = get_the_terms( $candidate_id, 'jobus_candidate_location' );
+			$skills       = get_the_terms( $candidate_id, 'jobus_candidate_skill' );
+			$max_skills   = 2;
+			$avatar_img   = get_the_post_thumbnail( $candidate_id, 'full', [ 'class' => 'lazy-img rounded-circle' ] );
+			?>
+			<div class="jbs-candidate-profile-card jbs-list-layout jbs-border-0 jbs-mb-25<?php echo empty( $avatar_img ) ? ' jbs-no-avatar' : ''; ?>">
+				<div class="jbs-d-flex">
+					<?php if ( ! empty( $avatar_img ) ) { ?>
+					<div class="jbs-candidate-avatar jbs-online jbs-position-relative jbs-d-block jbs-me-auto jbs-ms-auto">
+						<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="jbs-rounded-circle">
+							<?php echo $avatar_img; ?>
+						</a>
+					</div>
+					<?php } ?>
+					<div class="jbs-right-side">
+						<div class="jbs-row jbs-gx-1 jbs-align-items-center">
+							<div class="jbs-col-lg-4">
+								<div class="jbs-position-relative">
+									<h4 class="jbs-candidate-name jbs-mb-0">
+										<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>" class="jbs-tran3s">
+											<?php echo esc_html( get_the_title( $candidate_id ) ); ?>
+										</a>
+									</h4>
+									<?php
+									if ( $skills && count( $skills ) > $max_skills ) {
+										shuffle( $skills );
+										$displayed_skills = array_slice( $skills, 0, $max_skills );
+										echo '<ul class="jbs-candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
+										foreach ( $displayed_skills as $skill ) {
+											echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link( $skill ) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+										}
+										$remaining_count = count( $skills ) - $max_skills;
+										echo '<li class="jbs-more">' . esc_html( $remaining_count ) . '+</li>';
+										echo '</ul>';
+									} elseif ( ! empty( $skills ) ) {
+										echo '<ul class="jbs-candidate-skills jbs-style-none jbs-d-flex jbs-align-items-center jbs-d-wrap">';
+										foreach ( $skills as $skill ) {
+											echo '<li class="jbs-text-capitalize"><a href="' . esc_url( get_term_link( $skill ) ) . '">' . esc_html( $skill->name ) . '</a></li>';
+										}
+										echo '</ul>';
+									}
+									?>
+								</div>
+							</div>
+							<?php if ( ! empty( $category ) && count( $category ) > 0 ) { ?>
+								<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
+									<div class="jbs-candidate-info jbs-salary-info">
+										<span><?php esc_html_e( 'Category', 'jobus' ); ?></span>
+										<a href="<?php echo esc_url( get_term_link( $category[0]->term_id ) ); ?>">
+											<?php echo esc_html( $category[0]->name ); ?>
+										</a>
+									</div>
+								</div>
+							<?php } ?>
+							<?php if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
+								<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
+									<div class="jbs-candidate-info location-info">
+										<span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
+										<a href="<?php echo esc_url( get_term_link( $location[0]->term_id ) ); ?>">
+											<?php echo esc_html( $location[0]->name ); ?>
+										</a>
+									</div>
+								</div>
+							<?php } ?>
+							<div class="jbs-col-lg-2 jbs-xs-mt-10">
+								<div class="jbs-action-button">
+									<a href="javascript:void(0)"
+									   class="jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s jbs-dashboard-remove-saved-post"
+									   data-post_id="<?php echo esc_attr( $candidate_id ); ?>"
+									   data-post_type="jobus_candidate"
+									   data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_employer_saved_candidate' ) ); ?>"
+									   title="<?php esc_attr_e( 'Remove', 'jobus' ); ?>">
+										<i class="bi bi-x-circle-fill"></i>
+									</a>
+									<a href="<?php echo esc_url( get_permalink( $candidate_id ) ); ?>"
+									   target="_blank"
+									   class="jbs-dashboard-post-view-more jbs-text-center jbs-rounded-circle jbs-tran3s"
+									   title="<?php esc_attr_e( 'View Candidate', 'jobus' ); ?>">
+										<i class="bi bi-eye-fill"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+		wp_reset_postdata();
+		$html = ob_get_clean();
+
+		wp_send_json_success( [ 'html' => $html, 'count' => $query->found_posts ] );
+	}
+
+	/**
 	 * AJAX handler to update application status from employer dashboard
 	 */
 	public function update_application_status() {
@@ -258,8 +405,8 @@ class Dashboard_Helper {
 			wp_send_json_error( [ 'message' => __( 'Invalid application.', 'jobus' ) ] );
 		}
 
-		// Validate status
-		$allowed_statuses = [ 'pending', 'approved', 'rejected' ];
+		// Validate status against the canonical list (jobus_get_application_statuses()).
+		$allowed_statuses = array_keys( jobus_get_application_statuses() );
 		if ( ! in_array( $new_status, $allowed_statuses, true ) ) {
 			wp_send_json_error( [ 'message' => __( 'Invalid status.', 'jobus' ) ] );
 		}
@@ -277,9 +424,19 @@ class Dashboard_Helper {
 		$updated = update_post_meta( $application_id, 'application_status', $new_status );
 
 		if ( $updated || get_post_meta( $application_id, 'application_status', true ) === $new_status ) {
+			$statuses        = jobus_get_application_statuses();
+			$status_meta     = $statuses[ $new_status ];
+			$all_badge_class = implode( ' ', array_map(
+				static fn( $s ) => $s['badge_class'],
+				$statuses
+			) );
+
 			wp_send_json_success( [
-				'message' => __( 'Application status updated successfully.', 'jobus' ),
-				'status'  => $new_status,
+				'message'         => __( 'Application status updated successfully.', 'jobus' ),
+				'status'          => $new_status,
+				'status_label'    => $status_meta['label'],
+				'badge_class'     => $status_meta['badge_class'],
+				'all_badge_class' => $all_badge_class,
 			] );
 		} else {
 			wp_send_json_error( [ 'message' => __( 'Failed to update application status.', 'jobus' ) ] );

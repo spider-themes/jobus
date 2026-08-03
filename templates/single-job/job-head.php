@@ -24,7 +24,7 @@ $show_job_edit  = $show_job_edit && is_user_logged_in(); // Only show if user is
 
 if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
     ?>
-    <div class="job-head">
+    <div class="jbs-job-head">
         <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-flex-wrap jbs-gap-2">
             <div>
                 <?php if ( $show_job_meta ) : ?>
@@ -34,6 +34,11 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
                         <a href="<?php echo esc_url( $company_url ) ?>" class="jbs-fw-500 jbs-text-dark">
                             <?php echo esc_html( $company_name ); ?>
                         </a>
+                        <?php
+                        if ( isset( $company_query->posts[0] ) ) {
+                            echo jobus_get_company_verification_badge( $company_query->posts[0]->ID );
+                        }
+                        ?>
                     </div>
                 <?php endif; ?>
                 <?php if ( $show_job_title ) : ?>
@@ -55,7 +60,7 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
                             $edit_job_url  = $dashboard_url ? trailingslashit($dashboard_url) . 'submit-job?job_id=' . get_the_ID() : '#';
                         }
                         ?>
-                        <a href="<?php echo esc_url($edit_job_url); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white tran3s">
+                        <a href="<?php echo esc_url($edit_job_url); ?>" class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-tran3s">
                             <i class="bi bi-pencil-square"></i>
                             <?php esc_html_e('Edit Job', 'jobus'); ?>
                         </a>
@@ -66,15 +71,15 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
             ?>
         </div>
         <?php if ( $show_job_share ) : ?>
-            <ul class="share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">
+            <ul class="jbs-share-buttons jbs-d-flex jbs-flex-wrap jbs-style-none">
                 <li>
-                    <a class="share-item" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ); ?>" target="_blank">
+                    <a class="jbs-share-item" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( get_permalink() ); ?>" target="_blank">
                         <i class="bi bi-facebook"></i>
                         <span><?php esc_html_e( 'Facebook', 'jobus' ); ?></span>
                     </a>
                 </li>
                 <li>
-                    <a class="share-item"
+                    <a class="jbs-share-item"
                        href="https://twitter.com/intent/tweet?url=<?php echo urlencode( get_permalink() ); ?>&text=<?php echo urlencode( get_the_title() ); ?>"
                        target="_blank">
                         <i class="bi bi-x"></i>
@@ -82,7 +87,7 @@ if ( $show_job_title || $show_job_meta || $show_job_share || $show_job_edit ) {
                     </a>
                 </li>
                 <li>
-                    <button type="button" class="share-item share-copy-btn" data-copy-url="<?php echo esc_url( get_permalink() ); ?>">
+                    <button type="button" class="jbs-share-item share-copy-btn" data-copy-url="<?php echo esc_url( get_permalink() ); ?>">
                         <i class="bi bi-link-45deg"></i>
                         <span class="copy-text"> <?php esc_html_e( 'Copy', 'jobus' ) ?> </span>
                     </button>

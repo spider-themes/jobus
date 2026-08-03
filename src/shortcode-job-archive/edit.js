@@ -82,7 +82,7 @@ function Edit({ attributes, setAttributes }) {
                                     style={{ position: 'relative', cursor: option.pro && !pro_active ? 'not-allowed' : 'pointer' }}
                                 >
                                     <img src={option.img} alt={option.label} />
-                                    <span className="layout-label">
+                                    <span className="jbs-layout-label">
                                         {option.label}
                                     </span>
                                 </div>
@@ -114,7 +114,7 @@ function Edit({ attributes, setAttributes }) {
                         
                         <h4 style={{ margin: '0 0 0.5rem 0', fontWeight: 'bold' }}>
                             {__('Pro Feature', 'jobus')}
-                            <span className="pro-lock" style={{ marginLeft: '0.25rem' }}>🔒</span>
+                            <span className="jbs-pro-lock" style={{ marginLeft: '0.25rem' }}>🔒</span>
                         </h4>
 
                         <p style={{ marginBottom: '0.5rem' }}>
@@ -125,7 +125,7 @@ function Edit({ attributes, setAttributes }) {
                             href={ jobus_block_params.jobus_upgrade_url }
                             target="_blank"
                             style={{ marginTop: '0.25rem' }}
-                            className="jobus-upgrade-button"
+                            className="jbs-upgrade-button"
                         >
                             {__('Upgrade Now', 'jobus')}
                         </Button>

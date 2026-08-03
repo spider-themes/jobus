@@ -1,20 +1,20 @@
 /*========== Login Form Styling ===========*/
-#jobusLoginModal.jbs-modal.show{
+#jbsLoginModal.jbs-modal.show{
   background-color: rgba(0, 0, 0, 0.5);
 }
-.jobus-login-from, .jobus-logout-from {
-  &.dashboard-body {
+.jbs-login-from, .jbs-logout-from {
+  &.jbs-dashboard-body {
     margin-left: 0;
 
-    .login_from {
+    .jbs-login_from {
       background-color: transparent;
      
     }
   }
 
-  .logout_from {
-    .user-data-form {
-      .btn {
+  .jbs-logout_from {
+    .jbs-user-data-form {
+      .jbs-btn {
         line-height: 52px;
         max-width: 50%;
         margin: 0 auto;
@@ -24,12 +24,12 @@
   }
 }
 
-.user-data-form {
+.jbs-user-data-form {
   .name {
     text-transform: capitalize;
   }
 
-  .user-action-buttons {
+  .jbs-user-action-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +38,7 @@
 }
 
 /*========== Login Modal Popup Styling ===========*/
-#jobusLoginModal {
+#jbsLoginModal {
   &.modal {
     position: fixed;
     top: 0;
@@ -51,7 +51,7 @@
     padding-top: 50px;
     overflow-y: auto;
 
-    &.show {
+    &.jbs-show {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -66,7 +66,7 @@
       transition: opacity 0.3s ease-in-out;
       opacity: 0;
 
-      &.show {
+      &.jbs-show {
         opacity: 1;
       }
     }
@@ -185,7 +185,7 @@
     }
   }
 
-  .form-wrapper {
+  .jbs-form-wrapper {
     max-width: 100%;
     margin-top: 30px;
 
@@ -209,7 +209,7 @@
     padding-left: 12px;
   }
 
-  .input-group-meta {
+  .jbs-input-group-meta {
     position: relative;
     margin-bottom: 0;
     display: flex;
@@ -254,13 +254,13 @@
         color: #9fa6ad;
       }
 
-      &.pass_log_id {
+      &.jbs-pass_log_id {
         padding-right: 45px;
       }
     }
   }
 
-  .placeholder_icon {
+  .jbs-placeholder_icon {
       position: absolute;
       height: 55px;
       top: 27px;
@@ -272,7 +272,7 @@
       color: rgba(0, 0, 0, 0.45);
       font-size: 17px;
 
-    .passVicon {
+    .jbs-passVicon {
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -291,13 +291,13 @@
         filter: brightness(1);
       }
 
-      &.eye-slash img {
+      &.jbs-eye-slash img {
         filter: brightness(0.7);
       }
     }
   }
 
-  .agreement-checkbox {
+  .jbs-agreement-checkbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -356,7 +356,7 @@
     }
   }
 
-  .btn-eleven {
+  .jbs-btn-eleven {
     width: 100%;
     padding: 12px 24px;
     height: 50px;
@@ -376,7 +376,7 @@
       font-weight: 500;
     }
 
-    &.tran3s {
+    &.jbs-tran3s {
       transition: all 0.3s ease;
     }
 
@@ -429,3 +429,4 @@
     transform: translateY(0);
   }
 }
+

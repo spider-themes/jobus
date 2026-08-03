@@ -15,6 +15,13 @@ $job_single_layout_page = $meta['job_details_layout'] ?? ''; // Individual page 
 $job_single_layout_opt  = jobus_opt('job_details_layout', '1'); // Default layout for the entire website
 $job_single_layout      = ! empty($job_single_layout_page) ? $job_single_layout_page : $job_single_layout_opt;
 
+// Guest application settings
+$allow_guest_application = jobus_opt('allow_guest_application', false);
+$signin_url              = jobus_opt('signin_btn_url', wp_login_url(get_permalink()));
+$signin_label            = jobus_opt('signin_btn_label', __('Sign In', 'jobus'));
+$register_url            = jobus_opt('login_signup_btn_url', wp_registration_url());
+$register_label          = jobus_opt('login_signup_btn_label', __('Register', 'jobus'));
+
 //================ Select Layout =======================//
 if (jobus_unlock_themes('jobi', 'jobi-child')) {
 	include 'single-job/job-single-' . $job_single_layout . '.php';

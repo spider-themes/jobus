@@ -1,4 +1,4 @@
-.title-two h2 {
+.jbs-title-two h2 {
   font-size: 64px;
   line-height: 1.062em;
   color: #254035;
@@ -21,7 +21,7 @@
         border-left: 1px solid #E6E6E6;
       }
 
-      .label {
+      .jbs-label {
         font-size: 13px;
         font-weight: 500;
         color: rgba($color: #000000, $alpha: 0.4);
@@ -47,7 +47,7 @@
         }
       }
 
-      .keyword {
+      .jbs-keyword {
         border: none !important;
         padding: 0 15px;
         height: 35px;
@@ -58,11 +58,11 @@
       }
     }
 
-    .job-search-btn-wrapper {
+    .jbs-job-search-btn-wrapper {
       display: flex;
       align-items: center;
 
-      .search-btn {
+      .jbs-search-btn {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -84,7 +84,7 @@
       }
     }
 
-    .search-btn-two {
+    .jbs-search-btn-two {
       background: var(--jbs-brand_color_4);
       color: #fff;
       border-radius: 0 10px 10px 0;
@@ -98,7 +98,7 @@
     }
   }
 
-  .tags {
+  .jbs-tags {
     gap: 4px;
 
     li {
@@ -126,7 +126,7 @@
     }
   }
 
-  &.style-two .input-box {
+  &.jbs-style-two .input-box {
     margin: 18px 0;
 
     .jbs-nice-select {
@@ -135,12 +135,12 @@
       color: rgba($color: #000000, $alpha: 0.7);
     }
 
-    .label {
+    .jbs-label {
       margin-bottom: 0;
     }
   }
 
-  .upload-btn {
+  .jbs-upload-btn {
     width: 145px;
     margin: 25px auto 0;
     border-bottom: 2px solid #000;
@@ -186,13 +186,13 @@
     padding: 0 25px !important;
     font-size: 15px !important;
 
-    &.bg-grey {
+    &.jbs-bg-grey {
       background: #F2F2F2 !important;
     }
   }
 }
 
-.filter-tags li {
+.jbs-filter-tags li {
   position: relative;
   margin-right: 4px;
   margin-top: 0 !important;
@@ -219,7 +219,7 @@
 }
 
 // List Style One
-.list-style-one li {
+.jbs-list-style-one li {
   position: relative;
   font-weight: 500;
   font-size: 18px;
@@ -228,7 +228,7 @@
   margin-top: 24px;
 
   &:before {
-    content: url(../images/icon/icon_07.svg);
+    /* content: url(../images/icon/icon_07.svg); */
     position: absolute;
     left: 0;
     top: 0;
@@ -236,30 +236,30 @@
 }
 
 // Counter Block One
-.counter-block-one .main-count {
+.jbs-counter-block-one .jbs-main-count {
   font-size: 52px;
   margin-bottom: 5px;
 }
 
-.counter-block-one h2.main-count {
+.jbs-counter-block-one h2.main-count {
   font-size: 70px;
   color: var(--jbs-brand_color_2);
 }
 
 // Counter Block Two
-.counter-block-two .main-count {
+.jbs-counter-block-two .jbs-main-count {
   font-size: 32px;
   margin-bottom: 5px;
 }
 
 // Accordion One
-.accordion-style-one .accordion-item {
+.jbs-accordion-style-one .accordion-item {
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #000;
 }
 
-.accordion-style-one .accordion-button {
+.jbs-accordion-style-one .accordion-button {
   background: #fff;
   padding: 20px 0;
   border: none;
@@ -270,35 +270,35 @@
   color: #000;
 }
 
-.accordion-style-one .accordion-button::after {
-  content: url(../images/icon/icon_20.svg);
+.jbs-accordion-style-one .accordion-button::after {
+  /* content: url(../images/icon/icon_20.svg); */
   background-image: none;
   width: auto;
   height: auto;
 }
 
-.accordion-style-one .accordion-body {
+.jbs-accordion-style-one .accordion-body {
   padding: 0 0 10px;
 }
 
-.accordion-style-one.color-two .accordion-button {
+.jbs-accordion-style-one.color-two .accordion-button {
   color: var(--jbs-brand_color_5);
 }
 
-.accordion-style-one.color-two .accordion-button::after {
-  content: url(../images/icon/icon_40.svg);
+.jbs-accordion-style-one.color-two .accordion-button::after {
+  /* content: url(../images/icon/icon_40.svg); */
 }
 
-.accordion-style-one.color-two .accordion-item {
+.jbs-accordion-style-one.color-two .accordion-item {
   border-bottom: 1px solid #DEDEDE;
 }
 
-.accordion-style-one.color-two .accordion-item:last-child {
+.jbs-accordion-style-one.color-two .accordion-item:last-child {
   border: none;
 }
 
 // Accordion Two
-.accordion-style-two .accordion-item {
+.jbs-accordion-style-two .accordion-item {
   border: none;
   border-radius: 0;
   background: transparent;
@@ -309,7 +309,7 @@
   }
 }
 
-.accordion-style-two .accordion-button {
+.jbs-accordion-style-two .accordion-button {
   background: transparent;
   padding: 36px 0;
   border: none;
@@ -319,11 +319,11 @@
   font-weight: 500;
   color: #000;
 
-  &:not(.collapsed) {
+  &:not(.jbs-collapsed) {
     padding-bottom: 20px;
   }
 
-  &:not(.collapsed):after {
+  &:not(.jbs-collapsed):after {
     content: "-";
     font-size: 24px;
     background: var(--jbs-brand_color_4);
@@ -331,7 +331,7 @@
   }
 }
 
-.accordion-style-two .accordion-button::after {
+.jbs-accordion-style-two .accordion-button::after {
   content: "+";
   background-image: none;
   width: 30px;
@@ -344,7 +344,7 @@
   line-height: 30px;
 }
 
-.accordion-style-two .accordion-body {
+.jbs-accordion-style-two .accordion-body {
   padding: 0 0 20px;
   width: 80%;
 
@@ -354,8 +354,8 @@
 }
 
 // Contact Form
-.form-style-one {
-  .input-group-meta {
+.jbs-form-style-one {
+  .jbs-input-group-meta {
     position: relative;
 
     label {
@@ -388,7 +388,7 @@
 }
 
 #contact-form {
-  .help-block {
+  .jbs-help-block {
     position: absolute;
     left: 0;
     bottom: -18px;
@@ -415,7 +415,7 @@
   }
 }
 
-.user-data-form {
+.jbs-user-data-form {
   background: #fff;
   margin: 0 auto;
   max-width: 720px;
@@ -440,8 +440,8 @@
     }
   }
 
-  .form-wrapper {
-    .input-group-meta {
+  .jbs-form-wrapper {
+    .jbs-input-group-meta {
       input {
         width: 100%;
         height: 55px;
@@ -466,54 +466,57 @@
         font-weight: 500;
       }
 
-      .placeholder_icon {
+      .jbs-placeholder_icon {
         position: absolute;
-        height: 55px;
-        top: 27px;
         right: 0;
         bottom: 0;
+        top: auto;
         width: 50px;
-        text-align: center;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         z-index: 1;
+        cursor: pointer;
         color: rgba(0, 0, 0, 0.45);
-        font-size: 17px;
       }
 
-      .placeholder_icon img {
-        position: relative;
-        top: 45%;
-        margin: 0 auto;
-        transform: translateY(-50%);
+      .jbs-placeholder_icon img {
+        width: 18px;
+        height: auto;
+        display: block;
       }
 
-      .placeholder_icon span {
+      .jbs-placeholder_icon span {
         width: 100%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        display: block;
         position: relative;
       }
 
-      .placeholder_icon span:before {
+      .jbs-placeholder_icon span:before {
         content: '';
         width: 2px;
-        height: 26px;
+        height: 22px;
         background: #000;
         position: absolute;
-        top: 14px;
-        left: 24px;
-        transform: rotate(45deg);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
         z-index: 5;
-        transition: all 0.2s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
       }
 
-      .placeholder_icon span.eye-slash:before {
+      .jbs-placeholder_icon span.eye-slash:before {
         opacity: 0;
       }
     }
   }
 
-  .agreement-checkbox label {
+  .jbs-agreement-checkbox label {
     position: relative;
     font-size: 15px;
     letter-spacing: -0.5px;
@@ -523,16 +526,16 @@
     transition: all 0.1s ease-in-out;
   }
 
-  .agreement-checkbox label a {
+  .jbs-agreement-checkbox label a {
     color: var(--jbs-brand_color_1);
     text-decoration: underline;
   }
 
-  .agreement-checkbox input[type="checkbox"] {
+  .jbs-agreement-checkbox input[type="checkbox"] {
     display: none;
   }
 
-  .agreement-checkbox label:before {
+  .jbs-agreement-checkbox label:before {
     content: '';
     width: 14px;
     height: 14px;
@@ -547,7 +550,7 @@
     transition: all 0.1s ease-in-out;
   }
 
-  .agreement-checkbox input[type="checkbox"]:checked+label:before {
+  .jbs-agreement-checkbox input[type="checkbox"]:checked+label:before {
     content: "\f633";
     font-family: bootstrap-icons !important;
     background: #000;
@@ -555,24 +558,24 @@
     border-color: #000;
   }
 
-  .agreement-checkbox a {
+  .jbs-agreement-checkbox a {
     position: relative;
     font-size: 15px;
     color: #1E1E1E;
   }
 
-  .agreement-checkbox a:hover {
+  .jbs-agreement-checkbox a:hover {
     text-decoration: underline;
     color: var(--jbs-brand_color_1);
   }
 
-  .line {
+  .jbs-line {
     height: 1px;
     width: 100%;
     background: rgba($color: #000000, $alpha: 0.2);
   }
 
-  .social-use-btn {
+  .jbs-social-use-btn {
     font-size: 15px;
     color: #000;
     height: 55px;
@@ -619,12 +622,12 @@
 }
 
 // Demo Login Form
-.user-data-form {
-  .login-form-wrapper {
+.jbs-user-data-form {
+  .jbs-login-form-wrapper {
     display: flex;
     justify-content: center;
 
-    .login-form-demo {
+    .jbs-login-form-demo {
       display: inline-block;
       font-size: 14px;
       line-height: 1.7;
@@ -654,12 +657,12 @@
     border-top: 1px solid #E6E6E6;
   }
 
-  .jbs-search-form-widget-one form .jobus_srch_bor button {
+  .jbs-search-form-widget-one form .jbs-jobus_srch_bor button {
     display: block;
   }
 
-  .jbs-search-form-widget-one form .search-btn,
-  .jbs-search-form-widget-one form .search-btn-two {
+  .jbs-search-form-widget-one form .jbs-search-btn,
+  .jbs-search-form-widget-one form .jbs-search-btn-two {
     margin: 0 !important;
     padding: 15px 0PX !important;
     border-radius: 0 0 10px 10px !important;

@@ -30,5 +30,30 @@ CSF::createSection($settings_prefix, array(
 			'desc'    => esc_html__('When disabled, all company profiles, archives, and employer features will be hidden from your site.', 'jobus'),
 			'class'    => trim($pro_access_class . $active_theme_class)
 		),
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Localization', 'jobus' ),
+		),
+		array(
+			'id'       => 'jobus_default_currency',
+			'type'     => 'select',
+			'title'    => esc_html__( 'Global Currency', 'jobus' ),
+			'subtitle' => esc_html__( 'Set the default currency used across the site for salaries and payments.', 'jobus' ),
+			'options'  => function_exists( 'jobus_get_currencies' ) ? jobus_get_currencies() : [],
+			'default'  => 'USD',
+			'chosen'   => true,
+		),
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Advanced Data Management', 'jobus' ),
+		),
+		array(
+			'id'       => 'delete_data_on_uninstall',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Delete Data on Uninstall', 'jobus' ),
+			'subtitle' => esc_html__( 'Enable this to wipe all Jobus data when the plugin is deleted.', 'jobus' ),
+			'desc'     => esc_html__( 'Warning: This will permanently remove all jobs, candidates, companies, and settings from your database upon uninstallation.', 'jobus' ),
+			'default'  => false,
+		),
 	)
-));
+) );

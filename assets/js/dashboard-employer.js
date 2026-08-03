@@ -15,7 +15,7 @@
  * @link      https://developer.wordpress.org/plugins/javascript/ajax/
  */
 
-;(function ($) {
+; (function ($) {
     'use strict';
 
     const JobusEmployerDashboard = {
@@ -24,6 +24,8 @@
             this.Testimonials();
             this.CompanyWebsiteToggle();
             this.JobLogoUpload();
+            this.ExternalApplicationUrlToggle();
+            this.SubmitJobForm();
         },
 
 
@@ -65,8 +67,8 @@
                 reader.onload = function (event) {
                     const dataUrl = event.target.result;
                     const $container = $(this).closest('.dash-input-wrapper');
-                    const $hiddenData = $container.find('.testimonial-image-data');
-                    const $preview = $container.find('.testimonial-image-preview');
+                    const $hiddenData = $container.find('.jbs-testimonial-image-data');
+                    const $preview = $container.find('.jbs-testimonial-image-preview');
 
                     // Store base64 data URL
                     $hiddenData.val(dataUrl);
@@ -95,14 +97,14 @@
                              aria-labelledby="company-testimonial-heading-${index}"
                              data-jbs-parent="#company-testimonial-repeater">
                             <div class="jbs-accordion-body">
-                                <div class="jbs-row mb-3">
+                                <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-author-name">Author Name</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[${index}][author_name]"
                                                    id="company-testimonial-${index}-author-name" class="jbs-form-control" value="">
                                         </div>
@@ -110,12 +112,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-location">Location</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <input type="text" name="company_testimonials[${index}][location]"
                                                    id="company-testimonial-${index}-location" class="jbs-form-control" value="">
                                         </div>
@@ -123,12 +125,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-review-content">Review</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <textarea name="company_testimonials[${index}][review_content]"
                                                       id="company-testimonial-${index}-review-content" class="jbs-form-control" rows="3"></textarea>
                                         </div>
@@ -136,12 +138,12 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-rating">Rating</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <select name="company_testimonials[${index}][rating]"
                                                     id="company-testimonial-${index}-rating" class="jbs-form-control">
                                                 <option value="">--</option>
@@ -156,15 +158,15 @@
                                 </div>
                                 <div class="jbs-row jbs-mb-3">
                                     <div class="jbs-col-lg-2">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <label for="company-testimonial-${index}-image">Author Image</label>
                                         </div>
                                     </div>
                                     <div class="jbs-col-lg-10">
-                                        <div class="dash-input-wrapper jbs-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-10">
                                             <!-- Hidden field for image data URL -->
                                             <input type="hidden" name="company_testimonials[${index}][image]"
-                                                   id="company-testimonial-${index}-image" class="testimonial-image-data" value="">
+                                                   id="company-testimonial-${index}-image" class="jbs-testimonial-image-data" value="">
                                             <!-- Hidden file input -->
                                             <input type="file" id="company-testimonial-${index}-file-input"
                                                    class="testimonial-file-input" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
@@ -174,7 +176,7 @@
                                                 Upload Image
                                             </button>
                                             <!-- Preview area (always present) -->
-                                            <div class="testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-${index}"></div>
+                                            <div class="jbs-testimonial-image-preview jbs-mt-2 jbs-mb-2" id="testimonial-image-preview-${index}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +207,7 @@
                     $el.find('.jbs-accordion-collapse')
                         .attr('id', testimonialId)
                         .attr('aria-labelledby', `company-testimonial-heading-${i}`);
-                    $el.find('input[name^="company_testimonials"]').each(function() {
+                    $el.find('input[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -217,7 +219,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('textarea[name^="company_testimonials"]').each(function() {
+                    $el.find('textarea[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -229,7 +231,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('select[name^="company_testimonials"]').each(function() {
+                    $el.find('select[name^="company_testimonials"]').each(function () {
                         let name = $(this).attr('name');
                         let id = $(this).attr('id');
                         if (name) {
@@ -241,7 +243,7 @@
                             $(this).attr('id', id);
                         }
                     });
-                    $el.find('label[for^="company-testimonial-"]').each(function() {
+                    $el.find('label[for^="company-testimonial-"]').each(function () {
                         let htmlFor = $(this).attr('for');
                         if (htmlFor) {
                             htmlFor = htmlFor.replace(/company-testimonial-\d+(-[a-z-]+)/, `company-testimonial-${i}$1`);
@@ -307,16 +309,16 @@
                 // When an image is selected, run a callback
                 mediaUploader.on('select', function () {
                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                    
+
                     // Set the hidden input value to the attachment ID
                     $('#job_company_logo_id').val(attachment.id);
-                    
+
                     // Display the preview image
-                    $('.logo-preview').attr('src', attachment.url).show();
-                    
+                    $('.jbs-logo-preview').attr('src', attachment.url).show();
+
                     // Update button text
                     $('#upload_logo_button').html('<i class="bi bi-upload"></i> Change Logo');
-                    
+
                     // Show remove button
                     $('#remove_logo_button').show();
                 });
@@ -331,16 +333,156 @@
 
                 // Clear the hidden input
                 $('#job_company_logo_id').val('');
-                
+
                 // Hide the preview image
-                $('.logo-preview').attr('src', '').hide();
-                
+                $('.jbs-logo-preview').attr('src', '').hide();
+
                 // Update button text
                 $('#upload_logo_button').html('<i class="bi bi-upload"></i> Upload Logo');
-                
+
                 // Hide remove button
                 $(this).hide();
             });
+        },
+
+        /**
+         * Handles toggling the external application URL fields based on selection.
+         */
+        ExternalApplicationUrlToggle: function () {
+            const $select = $('#is_apply_btn');
+            const $fields = $('#application-url-fields');
+            const $input = $('#apply-form-url');
+
+            const updateState = function (value) {
+                if (value === 'external') {
+                    $input.prop('disabled', false);
+                    $fields.hide().removeClass('jbs-d-none').slideDown(200);
+                } else {
+                    $input.prop('disabled', true).val('');
+                    $fields.slideUp(200, function() {
+                        $(this).addClass('jbs-d-none').show();
+                    });
+                }
+            };
+
+            $select.on('change', function () {
+                updateState($(this).val());
+            });
+
+            // Initial state (in case of editing)
+            const initialValue = $select.val();
+            if (initialValue === 'external') {
+                $input.prop('disabled', false);
+                $fields.removeClass('jbs-d-none').show();
+            } else {
+                $input.prop('disabled', true);
+                $fields.addClass('jbs-d-none');
+            }
+        },
+
+        /**
+         * Handles AJAX job submission from the employer dashboard.
+         */
+        SubmitJobForm: function () {
+            const $form = $('#employer-submit-job-form');
+            if (!$form.length) {
+                return;
+            }
+
+            const self = this;
+
+            $form.on('submit', function (e) {
+                e.preventDefault();
+
+                if (typeof window.tinyMCE !== 'undefined') {
+                    window.tinyMCE.triggerSave();
+                }
+
+                const $submitButton = $form.find('button[type="submit"]').first();
+                const originalHtml = $submitButton.html();
+                const formData = new FormData($form[0]);
+
+                self.clearSubmitNotice($form);
+
+                $submitButton.prop('disabled', true).html(
+                    '<span class="jbs-spinner-border jbs-spinner-border-sm jbs-me-2" role="status" aria-hidden="true"></span>' +
+                    originalHtml
+                );
+
+                formData.append('action', 'jobus_submit_job');
+
+                $.ajax({
+                    url: jobus_dashboard_obj.ajax_url,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.success) {
+                            const message = response.data && response.data.message ? response.data.message : 'Job posted successfully.';
+                            self.renderSubmitNotice($form, 'success', message);
+
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: message,
+                                    timer: 1800,
+                                    showConfirmButton: false
+                                });
+                            }
+
+                            if (response.data && response.data.redirect_url) {
+                                window.setTimeout(function () {
+                                    window.location.href = response.data.redirect_url;
+                                }, 1200);
+                            }
+                        } else {
+                            const message = response.data && response.data.message ? response.data.message : 'Submission failed. Please try again.';
+                            self.renderSubmitNotice($form, 'danger', message);
+
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: message
+                                });
+                            }
+                        }
+                    },
+                    error: function () {
+                        const message = 'Submission failed. Please try again.';
+                        self.renderSubmitNotice($form, 'danger', message);
+
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: message
+                            });
+                        }
+                    },
+                    complete: function () {
+                        $submitButton.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            });
+        },
+
+        renderSubmitNotice: function ($form, type, message) {
+            const $notice = $(
+                '<div class="jbs-alert jbs-alert-' + type + ' jbs-alert-dismissible jbs-fade jbs-show jbs-mb-20" role="alert">' +
+                    $('<div>').text(message).html() +
+                    '<button type="button" class="jbs-btn-close" data-jbs-dismiss="alert" aria-label="Close"></button>' +
+                '</div>'
+            );
+
+            $form.before($notice);
+            $('html, body').animate({ scrollTop: $notice.offset().top - 40 }, 250);
+        },
+
+        clearSubmitNotice: function ($form) {
+            $form.prev('.jbs-alert').remove();
         }
 
     };

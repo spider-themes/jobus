@@ -5,47 +5,49 @@
  * @since 1.5.0
  */
 
+@use "sass:color";
+
 // Variables
-$jobus-primary: #31795A;
-$jobus-primary-light: #e8f5f0;
-$jobus-primary-dark: #244034;
-$jobus-secondary: #D2F34C;
-$jobus-success: #22c55e;
-$jobus-warning: #f59e0b;
-$jobus-danger: #ef4444;
-$jobus-info: #3b82f6;
-$jobus-gray-50: #f9fafb;
-$jobus-gray-100: #f3f4f6;
-$jobus-gray-200: #e5e7eb;
-$jobus-gray-300: #d1d5db;
-$jobus-gray-400: #9ca3af;
-$jobus-gray-500: #6b7280;
-$jobus-gray-600: #4b5563;
-$jobus-gray-700: #374151;
-$jobus-gray-800: #1f2937;
-$jobus-gray-900: #111827;
-$jobus-border-radius: 12px;
-$jobus-border-radius-sm: 8px;
-$jobus-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$jobus-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-$jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$jbs-primary: #31795A;
+$jbs-primary-light: #e8f5f0;
+$jbs-primary-dark: #244034;
+$jbs-secondary: #D2F34C;
+$jbs-success: #22c55e;
+$jbs-warning: #f59e0b;
+$jbs-danger: #ef4444;
+$jbs-admin-info: #3b82f6;
+$jbs-gray-50: #f9fafb;
+$jbs-gray-100: #f3f4f6;
+$jbs-gray-200: #e5e7eb;
+$jbs-gray-300: #d1d5db;
+$jbs-gray-400: #9ca3af;
+$jbs-gray-500: #6b7280;
+$jbs-gray-600: #4b5563;
+$jbs-gray-700: #374151;
+$jbs-gray-800: #1f2937;
+$jbs-gray-900: #111827;
+$jbs-border-radius: 12px;
+$jbs-border-radius-sm: 8px;
+$jbs-admin-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$jbs-admin-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$jbs-admin-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
 // Dashboard Wrapper
-.jobus-dashboard-wrap {
+.jbs-dashboard-wrap {
 	margin: 20px auto;
 	max-width: 1600px;
 }
 
 // Dashboard Header
-.jobus-dashboard-header {
-	background: linear-gradient(135deg, $jobus-primary 0%, $jobus-primary-dark 100%);
-	border-radius: $jobus-border-radius;
+.jbs-dashboard-header {
+	background: linear-gradient(135deg, $jbs-primary 0%, $jbs-primary-dark 100%);
+	border-radius: $jbs-border-radius;
 	padding: 28px 32px;
 	margin-bottom: 24px;
 	color: #fff;
 }
 
-.jobus-dashboard-header-content {
+.jbs-dashboard-header-content {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -53,27 +55,27 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	gap: 16px;
 }
 
-.jobus-dashboard-title {
+.jbs-dashboard-title {
 	display: flex;
 	align-items: center;
 	gap: 16px;
 }
 
-.jobus-dashboard-icon {
+.jbs-dashboard-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 56px;
 	height: 56px;
 	background: rgba(255, 255, 255, 0.15);
-	border-radius: $jobus-border-radius-sm;
+	border-radius: $jbs-border-radius-sm;
 	
 	svg {
 		stroke: #fff;
 	}
 }
 
-.jobus-dashboard-title-text {
+.jbs-dashboard-title-text {
 	h1 {
 		margin: 0;
 		font-size: 26px;
@@ -83,19 +85,19 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	}
 }
 
-.jobus-dashboard-subtitle {
+.jbs-dashboard-subtitle {
 	margin: 4px 0 0;
 	font-size: 14px;
 	color: rgba(255, 255, 255, 0.8);
 }
 
-.jobus-dashboard-meta {
+.jbs-dashboard-meta {
 	display: flex;
 	align-items: center;
 	gap: 12px;
 }
 
-.jobus-dashboard-version {
+.jbs-dashboard-version {
 	padding: 4px 12px;
 	background: rgba(255, 255, 255, 0.15);
 	border-radius: 6px;
@@ -103,10 +105,10 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	font-weight: 600;
 }
 
-.jobus-pro-badge {
+.jbs-pro-badge {
 	padding: 4px 12px;
-	background: $jobus-secondary;
-	color: $jobus-gray-900;
+	background: $jbs-secondary;
+	color: $jbs-gray-900;
 	border-radius: 6px;
 	font-size: 11px;
 	font-weight: 700;
@@ -114,7 +116,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	letter-spacing: 0.5px;
 }
 
-.jobus-dashboard-date {
+.jbs-dashboard-date {
 	display: flex;
 	align-items: center;
 	gap: 6px;
@@ -129,19 +131,19 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 }
 
 // Quick Actions
-.jobus-quick-actions {
+.jbs-quick-actions {
 	display: flex;
 	gap: 12px;
 	margin-bottom: 24px;
 	flex-wrap: wrap;
 }
 
-.jobus-quick-action {
+.jbs-quick-action {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
 	padding: 10px 18px;
-	border-radius: $jobus-border-radius-sm;
+	border-radius: $jbs-border-radius-sm;
 	font-size: 14px;
 	font-weight: 500;
 	text-decoration: none;
@@ -153,63 +155,63 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		height: 18px;
 	}
 	
-	&.jobus-quick-action-primary {
-		background: $jobus-primary;
+	&.jbs-quick-action-primary {
+		background: $jbs-primary;
 		color: #fff;
 		
 		&:hover {
-			background: darken($jobus-primary, 8%);
+			background: color.adjust($jbs-primary, $lightness: -8%);
 			color: #fff;
 		}
 	}
 	
-	&.jobus-quick-action-secondary {
+	&.jbs-quick-action-secondary {
 		background: #fff;
-		color: $jobus-gray-700;
-		border: 1px solid $jobus-gray-200;
-		box-shadow: $jobus-shadow-sm;
+		color: $jbs-gray-700;
+		border: 1px solid $jbs-gray-200;
+		box-shadow: $jbs-admin-shadow-sm;
 		
 		&:hover {
-			border-color: $jobus-primary;
-			color: $jobus-primary;
+			border-color: $jbs-primary;
+			color: $jbs-primary;
 			background: #fff;
 		}
 	}
 }
 
 // Stats Grid
-.jobus-stats-grid {
+.jbs-stats-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	gap: 20px;
 	margin-bottom: 24px;
 }
 
-.jobus-stat-card {
+.jbs-stat-card {
 	background: #fff;
-	border-radius: $jobus-border-radius;
+	border-radius: $jbs-border-radius;
 	padding: 24px;
 	display: flex;
 	align-items: flex-start;
 	gap: 16px;
 	position: relative;
-	box-shadow: $jobus-shadow;
-	border: 1px solid $jobus-gray-100;
+	box-shadow: $jbs-admin-shadow;
+	border: 1px solid $jbs-gray-100;
 	transition: all 0.2s ease;
 	
 	&:hover {
-		box-shadow: $jobus-shadow-lg;
+		box-shadow: $jbs-admin-shadow-lg;
 		transform: translateY(-2px);
 	}
 }
 
-.jobus-stat-card-icon {
+.jbs-stat-card-icon {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 48px;
 	height: 48px;
-	border-radius: $jobus-border-radius-sm;
+	border-radius: $jbs-border-radius-sm;
 	flex-shrink: 0;
 	
 	svg {
@@ -218,31 +220,31 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	}
 }
 
-.jobus-stat-jobs .jobus-stat-card-icon {
-	background: rgba($jobus-primary, 0.1);
+.jbs-stat-jobs .jbs-stat-card-icon {
+	background: rgba($jbs-primary, 0.1);
 	
 	svg {
-		stroke: $jobus-primary;
+		stroke: $jbs-primary;
 	}
 }
 
-.jobus-stat-applications .jobus-stat-card-icon {
-	background: rgba($jobus-info, 0.1);
+.jbs-stat-applications .jbs-stat-card-icon {
+	background: rgba($jbs-admin-info, 0.1);
 	
 	svg {
-		stroke: $jobus-info;
+		stroke: $jbs-admin-info;
 	}
 }
 
-.jobus-stat-companies .jobus-stat-card-icon {
-	background: rgba($jobus-warning, 0.1);
+.jbs-stat-companies .jbs-stat-card-icon {
+	background: rgba($jbs-warning, 0.1);
 	
 	svg {
-		stroke: $jobus-warning;
+		stroke: $jbs-warning;
 	}
 }
 
-.jobus-stat-candidates .jobus-stat-card-icon {
+.jbs-stat-candidates .jbs-stat-card-icon {
 	background: rgba(#8b5cf6, 0.1);
 	
 	svg {
@@ -250,27 +252,27 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	}
 }
 
-.jobus-stat-card-content {
+.jbs-stat-card-content {
 	flex: 1;
 	min-width: 0;
 }
 
-.jobus-stat-value {
+.jbs-stat-value {
 	display: block;
 	font-size: 28px;
 	font-weight: 700;
-	color: $jobus-gray-900;
+	color: $jbs-gray-900;
 	line-height: 1.2;
 }
 
-.jobus-stat-label {
+.jbs-stat-label {
 	display: block;
 	font-size: 13px;
-	color: $jobus-gray-500;
+	color: $jbs-gray-500;
 	margin-top: 4px;
 }
 
-.jobus-stat-trend {
+.jbs-stat-trend {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
@@ -285,18 +287,18 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		height: 14px;
 	}
 	
-	&.jobus-stat-trend-up {
-		background: rgba($jobus-success, 0.1);
-		color: $jobus-success;
+	&.jbs-stat-trend-up {
+		background: rgba($jbs-success, 0.1);
+		color: $jbs-success;
 	}
 	
-	&.jobus-stat-trend-down {
-		background: rgba($jobus-danger, 0.1);
-		color: $jobus-danger;
+	&.jbs-stat-trend-down {
+		background: rgba($jbs-danger, 0.1);
+		color: $jbs-danger;
 	}
 }
 
-.jobus-stat-card-link {
+.jbs-stat-card-link {
 	position: absolute;
 	top: 16px;
 	right: 16px;
@@ -306,12 +308,12 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	color: $jobus-gray-400;
+	color: $jbs-gray-400;
 	transition: all 0.2s ease;
 	
 	&:hover {
-		background: $jobus-gray-100;
-		color: $jobus-primary;
+		background: $jbs-gray-100;
+		color: $jbs-primary;
 	}
 	
 	.dashicons {
@@ -322,25 +324,25 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 }
 
 // Status Row
-.jobus-status-row {
+.jbs-status-row {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 16px;
 	margin-bottom: 24px;
 }
 
-.jobus-status-card {
+.jbs-status-card {
 	background: #fff;
-	border-radius: $jobus-border-radius-sm;
+	border-radius: $jbs-border-radius-sm;
 	padding: 20px;
 	display: flex;
 	align-items: center;
 	gap: 14px;
-	box-shadow: $jobus-shadow-sm;
-	border: 1px solid $jobus-gray-100;
+	box-shadow: $jbs-admin-shadow-sm;
+	border: 1px solid $jbs-gray-100;
 }
 
-.jobus-status-icon {
+.jbs-status-icon {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
@@ -355,92 +357,92 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	}
 }
 
-.jobus-status-pending .jobus-status-icon {
-	background: rgba($jobus-warning, 0.1);
-	color: $jobus-warning;
+.jbs-status-pending .jbs-status-icon {
+	background: rgba($jbs-warning, 0.1);
+	color: $jbs-warning;
 }
 
-.jobus-status-approved .jobus-status-icon {
-	background: rgba($jobus-success, 0.1);
-	color: $jobus-success;
+.jbs-status-approved .jbs-status-icon {
+	background: rgba($jbs-success, 0.1);
+	color: $jbs-success;
 }
 
-.jobus-status-rejected .jobus-status-icon {
-	background: rgba($jobus-danger, 0.1);
-	color: $jobus-danger;
+.jbs-status-rejected .jbs-status-icon {
+	background: rgba($jbs-danger, 0.1);
+	color: $jbs-danger;
 }
 
-.jobus-status-content {
+.jbs-status-content {
 	flex: 1;
 }
 
-.jobus-status-value {
+.jbs-status-value {
 	display: block;
 	font-size: 22px;
 	font-weight: 700;
-	color: $jobus-gray-900;
+	color: $jbs-gray-900;
 	line-height: 1.2;
 }
 
-.jobus-status-label {
+.jbs-status-label {
 	display: block;
 	font-size: 12px;
-	color: $jobus-gray-500;
+	color: $jbs-gray-500;
 	margin-top: 2px;
 }
 
 // Dashboard Grid (Main Content + Sidebar)
-.jobus-dashboard-grid {
+.jbs-dashboard-grid {
 	display: grid;
 	grid-template-columns: 1fr 340px;
 	gap: 24px;
 }
 
-.jobus-dashboard-column-main {
+.jbs-dashboard-column-main {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
 }
 
-.jobus-dashboard-column-sidebar {
+.jbs-dashboard-column-sidebar {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
 // Cards
-.jobus-card {
+.jbs-card {
 	background: #fff;
-	border-radius: $jobus-border-radius;
-	box-shadow: $jobus-shadow;
-	border: 1px solid $jobus-gray-100;
+	border-radius: $jbs-border-radius;
+	box-shadow: $jbs-admin-shadow;
+	border: 1px solid $jbs-gray-100;
 	overflow: hidden;
 }
 
-.jobus-card-warning {
-	border-color: rgba($jobus-warning, 0.3);
+.jbs-card-warning {
+	border-color: rgba($jbs-warning, 0.3);
 	
-	.jobus-card-header {
-		background: rgba($jobus-warning, 0.05);
+	.jbs-card-header {
+		background: rgba($jbs-warning, 0.05);
 		
 		h2 .dashicons {
-			color: $jobus-warning;
+			color: $jbs-warning;
 		}
 	}
 }
 
-.jobus-card-header {
+.jbs-card-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 16px 20px;
-	border-bottom: 1px solid $jobus-gray-100;
+	border-bottom: 1px solid $jbs-gray-100;
 	
 	h2 {
 		margin: 0;
 		font-size: 15px;
 		font-weight: 600;
-		color: $jobus-gray-900;
+		color: $jbs-gray-900;
 		display: flex;
 		align-items: center;
 		gap: 8px;
@@ -449,22 +451,22 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 			font-size: 18px;
 			width: 18px;
 			height: 18px;
-			color: $jobus-gray-400;
+			color: $jbs-gray-400;
 		}
 	}
 }
 
-.jobus-card-link {
+.jbs-card-link {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
 	font-size: 13px;
-	color: $jobus-primary;
+	color: $jbs-primary;
 	text-decoration: none;
 	font-weight: 500;
 	
 	&:hover {
-		color: darken($jobus-primary, 10%);
+		color: color.adjust($jbs-primary, $lightness: -10%);
 	}
 	
 	.dashicons {
@@ -474,16 +476,16 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	}
 }
 
-.jobus-card-body {
+.jbs-card-body {
 	padding: 20px;
 }
 
-.jobus-card-list {
+.jbs-card-list {
 	padding: 12px 20px;
 }
 
 // Tables
-.jobus-table {
+.jbs-admin-table {
 	width: 100%;
 	border-collapse: collapse;
 	
@@ -491,25 +493,25 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		text-align: left;
 		font-size: 11px;
 		font-weight: 600;
-		color: $jobus-gray-500;
+		color: $jbs-gray-500;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 		padding: 8px 12px 12px;
-		border-bottom: 1px solid $jobus-gray-100;
+		border-bottom: 1px solid $jbs-gray-100;
 	}
 	
 	tbody td {
 		padding: 12px;
 		font-size: 13px;
-		color: $jobus-gray-700;
-		border-bottom: 1px solid $jobus-gray-50;
+		color: $jbs-gray-700;
+		border-bottom: 1px solid $jbs-gray-50;
 		
 		a {
-			color: $jobus-gray-900;
+			color: $jbs-gray-900;
 			text-decoration: none;
 			
 			&:hover {
-				color: $jobus-primary;
+				color: $jbs-primary;
 			}
 		}
 	}
@@ -518,16 +520,16 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		border-bottom: none;
 	}
 	
-	.jobus-table-center {
+	.jbs-table-center {
 		text-align: center;
 	}
 	
-	.jobus-table-right {
+	.jbs-table-right {
 		text-align: right;
 	}
 }
 
-.jobus-applicant-cell {
+.jbs-applicant-cell {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -538,7 +540,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 }
 
 // Badges
-.jobus-badge {
+.jbs-admin-badge {
 	display: inline-flex;
 	padding: 4px 10px;
 	border-radius: 20px;
@@ -546,31 +548,31 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	font-weight: 600;
 	text-transform: capitalize;
 	
-	&.jobus-badge-pending {
-		background: rgba($jobus-warning, 0.1);
-		color: darken($jobus-warning, 10%);
+	&.jbs-admin-badge-pending {
+		background: rgba($jbs-warning, 0.1);
+		color: color.adjust($jbs-warning, $lightness: -10%);
 	}
 	
-	&.jobus-badge-approved {
-		background: rgba($jobus-success, 0.1);
-		color: darken($jobus-success, 10%);
+	&.jbs-admin-badge-approved {
+		background: rgba($jbs-success, 0.1);
+		color: color.adjust($jbs-success, $lightness: -10%);
 	}
 	
-	&.jobus-badge-rejected {
-		background: rgba($jobus-danger, 0.1);
-		color: darken($jobus-danger, 10%);
+	&.jbs-admin-badge-rejected {
+		background: rgba($jbs-danger, 0.1);
+		color: color.adjust($jbs-danger, $lightness: -10%);
 	}
 }
 
 // Lists
-.jobus-list {
+.jbs-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.jobus-list-item {
-	border-bottom: 1px solid $jobus-gray-100;
+.jbs-list-item {
+	border-bottom: 1px solid $jbs-gray-100;
 	
 	&:last-child {
 		border-bottom: none;
@@ -582,16 +584,16 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		align-items: center;
 		padding: 12px 0;
 		text-decoration: none;
-		color: $jobus-gray-700;
+		color: $jbs-gray-700;
 		transition: color 0.2s ease;
 		
 		&:hover {
-			color: $jobus-primary;
+			color: $jbs-primary;
 		}
 	}
 }
 
-.jobus-list-title {
+.jbs-list-title {
 	font-size: 13px;
 	font-weight: 500;
 	flex: 1;
@@ -602,23 +604,23 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 	padding-right: 12px;
 }
 
-.jobus-list-badge {
+.jbs-list-badge {
 	padding: 4px 10px;
-	background: $jobus-gray-100;
+	background: $jbs-gray-100;
 	border-radius: 20px;
 	font-size: 11px;
 	font-weight: 600;
-	color: $jobus-gray-600;
+	color: $jbs-gray-600;
 	white-space: nowrap;
 	
-	&.jobus-list-badge-warning {
-		background: rgba($jobus-warning, 0.1);
-		color: darken($jobus-warning, 10%);
+	&.jbs-list-badge-warning {
+		background: rgba($jbs-warning, 0.1);
+		color: color.adjust($jbs-warning, $lightness: -10%);
 	}
 }
 
 // Empty State
-.jobus-empty-state {
+.jbs-analytics-empty-state {
 	text-align: center;
 	padding: 40px 20px;
 	
@@ -626,31 +628,31 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		font-size: 48px;
 		width: 48px;
 		height: 48px;
-		color: $jobus-gray-300;
+		color: $jbs-gray-300;
 		margin-bottom: 12px;
 	}
 	
 	p {
 		margin: 0 0 16px;
-		color: $jobus-gray-500;
+		color: $jbs-gray-500;
 		font-size: 14px;
 	}
 }
 
 // Resources Card
-.jobus-card-resources {
-	.jobus-card-body {
+.jbs-card-resources {
+	.jbs-card-body {
 		padding: 8px 20px;
 	}
 }
 
-.jobus-resource-list {
+.jbs-resource-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 	
 	li {
-		border-bottom: 1px solid $jobus-gray-100;
+		border-bottom: 1px solid $jbs-gray-100;
 		
 		&:last-child {
 			border-bottom: none;
@@ -663,7 +665,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 		gap: 10px;
 		padding: 14px 0;
 		text-decoration: none;
-		color: $jobus-gray-700;
+		color: $jbs-gray-700;
 		font-size: 13px;
 		font-weight: 500;
 		transition: color 0.2s ease;
@@ -672,7 +674,7 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 			font-size: 18px;
 			width: 18px;
 			height: 18px;
-			color: $jobus-gray-400;
+			color: $jbs-gray-400;
 		}
 		
 		.dashicons:last-child {
@@ -680,38 +682,38 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 			font-size: 14px;
 			width: 14px;
 			height: 14px;
-			color: $jobus-gray-400;
+			color: $jbs-gray-400;
 		}
 		
 		&:hover {
-			color: $jobus-primary;
+			color: $jbs-primary;
 			
 			.dashicons:first-child {
-				color: $jobus-primary;
+				color: $jbs-primary;
 			}
 		}
 	}
 	
-	.jobus-upgrade-link {
-		color: $jobus-primary;
+	.jbs-upgrade-link {
+		color: $jbs-primary;
 		
 		.dashicons:first-child {
-			color: $jobus-secondary;
+			color: $jbs-secondary;
 		}
 		
 		&:hover {
-			color: darken($jobus-primary, 10%);
+			color: color.adjust($jbs-primary, $lightness: -10%);
 		}
 	}
 }
 
 // Responsive
 @media screen and (max-width: 1200px) {
-	.jobus-dashboard-grid {
+	.jbs-dashboard-grid {
 		grid-template-columns: 1fr;
 	}
 	
-	.jobus-dashboard-column-sidebar {
+	.jbs-dashboard-column-sidebar {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 20px;
@@ -719,50 +721,50 @@ $jobus-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0,
 }
 
 @media screen and (max-width: 782px) {
-	.jobus-dashboard-wrap {
+	.jbs-dashboard-wrap {
 		margin: 10px 10px 10px 0;
 	}
 	
-	.jobus-dashboard-header {
+	.jbs-dashboard-header {
 		padding: 20px;
 	}
 	
-	.jobus-dashboard-header-content {
+	.jbs-dashboard-header-content {
 		flex-direction: column;
 		align-items: flex-start;
 	}
 	
-	.jobus-dashboard-meta {
+	.jbs-dashboard-meta {
 		flex-wrap: wrap;
 	}
 	
-	.jobus-stats-grid {
+	.jbs-stats-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
 	
-	.jobus-status-row {
+	.jbs-status-row {
 		grid-template-columns: 1fr;
 	}
 	
-	.jobus-dashboard-column-sidebar {
+	.jbs-dashboard-column-sidebar {
 		grid-template-columns: 1fr;
 	}
 	
-	.jobus-quick-actions {
+	.jbs-quick-actions {
 		flex-direction: column;
 	}
 	
-	.jobus-quick-action {
+	.jbs-quick-action {
 		justify-content: center;
 	}
 }
 
 @media screen and (max-width: 480px) {
-	.jobus-stats-grid {
+	.jbs-stats-grid {
 		grid-template-columns: 1fr;
 	}
 	
-	.jobus-stat-value {
+	.jbs-stat-value {
 		font-size: 24px;
 	}
 }

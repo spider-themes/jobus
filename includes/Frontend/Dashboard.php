@@ -35,9 +35,13 @@ class Dashboard {
 	/**
 	 * Render the dashboard.
 	 *
+	 * @param array|string $atts Shortcode attributes.
+	 * @param string       $content Shortcode content.
+	 * @param string       $tag Shortcode tag.
+	 *
 	 * @return string Dashboard HTML output.
 	 */
-	public function render_dashboard(): string {
+	public function render_dashboard($atts = [], $content = '', $tag = 'jobus_dashboard'): string {
 		if ( ! is_user_logged_in() ) {
 			return Template_Loader::get_template_part( 'dashboard/login-form' );
 		}
@@ -45,24 +49,19 @@ class Dashboard {
 		$user = wp_get_current_user();
 		$roles = (array) $user->roles;
 
-		// Check if candidate dashboard is enabled and user is a candidate
-		// administrators are checked after candidates to allow them to test candidate features if they have the role
 		$enable_candidate = function_exists('jobus_opt') ? jobus_opt('enable_candidate', true) : true;
 
-		if ($enable_candidate && in_array('jobus_candidate', $roles, true)) {
+		if ($enable_candidate && (in_array('jobus_candidate', $roles, true) || $tag === 'jobus_candidate_dashboard')) {
 			return Dashboard_Candidate::get_instance()->candidate_dashboard();
 		}
 
-		// Check if employer dashboard is enabled and user is an employer or admin
-		// Administrators always get access to the employer dashboard as a fallback/management area
 		$enable_company = function_exists('jobus_opt') ? jobus_opt('enable_company', true) : true;
 		$is_admin       = in_array('administrator', $roles, true) || current_user_can('manage_options');
 
-		if (($enable_company && in_array('jobus_employer', $roles, true)) || $is_admin) {
+		if (($enable_company && in_array('jobus_employer', $roles, true)) || $is_admin || $tag === 'jobus_employer_dashboard') {
 			return Dashboard_Employer::get_instance()->employer_dashboard();
 		}
 
-		// If no role matches or features disabled
 		return Template_Loader::get_template_part( 'dashboard/logout-form' );
 	}
 
@@ -81,12 +80,14 @@ class Dashboard {
 		}
 
 		// 1. Check jobus_opt for custom dashboard page first (user preference)
-		$dashboard_id = function_exists('jobus_opt') ? jobus_opt('dashboard_redirect_page') : '';
-		if ($dashboard_id) {
-			$url = get_permalink($dashboard_id);
-			if ($url) {
-				set_transient($cache_key, $url, 12 * HOUR_IN_SECONDS);
-				return $url;
+		if ( function_exists( 'jobus_opt' ) && jobus_opt( 'enable_custom_redirects' ) ) {
+			$dashboard_id = jobus_opt( 'dashboard_redirect_page' );
+			if ( ! empty( $dashboard_id ) ) {
+				$url = get_permalink( $dashboard_id );
+				if ( $url ) {
+					set_transient( $cache_key, $url, 12 * HOUR_IN_SECONDS );
+					return $url;
+				}
 			}
 		}
 

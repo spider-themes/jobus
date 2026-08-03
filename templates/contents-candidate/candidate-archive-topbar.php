@@ -17,15 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jbs jbs-candidate-topbar jbs-candidate-classic jbs-bg-white candidates-profile">
+<section class="jbs-jbs jbs-candidate-topbar jbs-candidate-classic jbs-bg-white jbs-candidates-profile">
     <div class="jbs-container">
         <div class="jbs-row">
 
             <?php jobus_get_template_part('contents-candidate/sidebar-topbar-filters'); ?>
 
             <div class="jbs-col-12">
-                <div class="candidate-profile-item-wrapper">
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
+                <div class="candidate-profile-item-wrapper" data-jbs-filter-results="true">
+                    <div class="jbs-upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-25 jbs-mt-70 jbs-lg-mt-40">
 	                    <?php
 	                    // Display the total number of candidates found
 	                    include __DIR__ . '/../loop/result-count.php';

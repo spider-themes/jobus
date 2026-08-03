@@ -12,9 +12,11 @@ $application_status = get_post_meta( $post->ID, 'application_status', true ) ?: 
         <input type="hidden" name="action" value="jobus_update_application_status" />
         <input type="hidden" name="post_id" value="<?php echo esc_attr( $post->ID ); ?>" />
         <select name="application_status" style="width:100%;margin-bottom:10px;">
-            <option value="pending" <?php selected($application_status, 'pending'); ?>><?php esc_html_e('Pending', 'jobus'); ?></option>
-            <option value="approved" <?php selected($application_status, 'approved'); ?>><?php esc_html_e('Approve', 'jobus'); ?></option>
-            <option value="rejected" <?php selected($application_status, 'rejected'); ?>><?php esc_html_e('Rejected', 'jobus'); ?></option>
+            <?php foreach ( jobus_get_application_statuses() as $status_key => $status_meta ) : ?>
+                <option value="<?php echo esc_attr( $status_key ); ?>" <?php selected( $application_status, $status_key ); ?>>
+                    <?php echo esc_html( $status_meta['label'] ); ?>
+                </option>
+            <?php endforeach; ?>
         </select>
         <button type="submit" name="save_application_status" class="button button-primary">
             <?php esc_html_e('Update Status', 'jobus'); ?>

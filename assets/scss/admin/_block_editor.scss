@@ -45,7 +45,7 @@
     margin: auto;
   }
 
-  .user-data-form .form-wrapper .input-group-meta input {
+  .jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta input {
     color: rgba(0, 0, 0, 0.5);
     background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.09);
   }
@@ -133,7 +133,7 @@
   border-radius: $border-radius;
 }
 
-.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .jbs-show > .jbs-nav-link {
   color: $text-white;
   background-color: $primary-color;
 }
@@ -212,7 +212,7 @@
   flex-wrap: wrap;
   margin-top: 10px;
 
-  .layout-option {
+  .jbs-layout-option {
     border: 1px solid #16151517;
     cursor: pointer;
     position: relative;
@@ -226,7 +226,7 @@
       margin-bottom: -5px;
     }
 
-    .layout-label {
+    .jbs-layout-label {
       display: block;
       padding: 10px;
       font-size: 16px;
@@ -237,13 +237,13 @@
     &.active {
       border-color: #007cba;
 
-      .layout-label {
+      .jbs-layout-label {
         background: #fffffc;
       }
 
     }
 
-    &.locked {
+    &.jbs-locked {
       cursor: not-allowed;
 
       img {
@@ -264,7 +264,7 @@
         border-bottom-right-radius: 4px;
       }
 
-      .layout-label {
+      .jbs-layout-label {
         background: #ebebeb;
       }
     }
@@ -281,7 +281,7 @@
   .components-notice__content {
     margin: 4px 0;
 
-    .jobus-upgrade-button.is-primary {
+    .jbs-upgrade-button.is-primary {
       font-size: 13px;
       background-color: rgb(147, 0, 63);
       border-radius: 3px;
@@ -301,7 +301,7 @@
       padding-left: 12px;
       font-size: 17px;
 
-      .pro-lock {
+      .jbs-pro-lock {
         margin-left: 0.25rem;
         font-size: 13px;
       }
@@ -326,8 +326,8 @@
 }
 
 
-.jobus-registration-section {
-  .user-data-form {
+.jbs-registration-section {
+  .jbs-user-data-form {
     background: #fff;
     margin: 0 auto;
     max-width: 720px;
@@ -348,10 +348,10 @@
       }
     }
 
-    .form-wrapper {
+    .jbs-form-wrapper {
       max-width: 565px;
 
-      .input-group-meta {
+      .jbs-input-group-meta {
         input {
           width: 100%;
           height: 55px;
@@ -371,7 +371,7 @@
           margin-bottom: 6px;
         }
 
-        .placeholder_icon {
+        .jbs-placeholder_icon {
           position: absolute;
           height: 55px;
           top: 27px;
@@ -384,14 +384,14 @@
           font-size: 17px;
         }
 
-        .placeholder_icon img {
+        .jbs-placeholder_icon img {
           position: relative;
           top: 50%;
           margin: 0 auto;
           transform: translateY(-50%);
         }
 
-        .placeholder_icon span {
+        .jbs-placeholder_icon span {
           width: 100%;
           height: 100%;
           cursor: pointer;
@@ -399,7 +399,7 @@
           position: relative;
         }
 
-        .placeholder_icon span:before {
+        .jbs-placeholder_icon span:before {
           content: '';
           width: 2px;
           height: 26px;
@@ -412,13 +412,13 @@
           transition: all 0.2s ease-in-out;
         }
 
-        .placeholder_icon span.eye-slash:before {
+        .jbs-placeholder_icon span.eye-slash:before {
           opacity: 0;
         }
       }
     }
 
-    .agreement-checkbox label {
+    .jbs-agreement-checkbox label {
       position: relative;
       font-size: 15px;
       letter-spacing: -0.5px;
@@ -428,16 +428,16 @@
       transition: all 0.1s ease-in-out;
     }
 
-    .agreement-checkbox label a {
+    .jbs-agreement-checkbox label a {
       color: $color-five;
       text-decoration: underline;
     }
 
-    .agreement-checkbox input[type="checkbox"] {
+    .jbs-agreement-checkbox input[type="checkbox"] {
       display: none;
     }
 
-    .agreement-checkbox label:before {
+    .jbs-agreement-checkbox label:before {
       content: '';
       width: 14px;
       height: 14px;
@@ -452,7 +452,7 @@
       transition: all 0.1s ease-in-out;
     }
 
-    .agreement-checkbox input[type="checkbox"]:checked + label:before {
+    .jbs-agreement-checkbox input[type="checkbox"]:checked + label:before {
       content: "\f633";
       font-family: bootstrap-icons !important;
       background: #000;
@@ -460,24 +460,24 @@
       border-color: #000;
     }
 
-    .agreement-checkbox a {
+    .jbs-agreement-checkbox a {
       position: relative;
       font-size: 15px;
       color: #1E1E1E;
     }
 
-    .agreement-checkbox a:hover {
+    .jbs-agreement-checkbox a:hover {
       text-decoration: underline;
       color: $color-five;
     }
 
-    .line {
+    .jbs-line {
       height: 1px;
       width: 100%;
       background: rgba($color: #000000, $alpha: 0.2);
     }
 
-    .social-use-btn {
+    .jbs-social-use-btn {
       font-size: 15px;
       color: #000;
       height: 55px;
@@ -527,7 +527,7 @@
     .jbs-tab-content {
       .jbs-tab-pane {
         form {
-          .input-group-meta {
+          .jbs-input-group-meta {
             margin-bottom: 25px;
           }
         }
@@ -564,7 +564,7 @@
   flex-wrap: wrap;
   margin-top: 10px;
 
-  .layout-option {
+  .jbs-layout-option {
     border: 1px solid #16151517;
     cursor: pointer;
     position: relative;
@@ -578,7 +578,7 @@
       margin-bottom: -5px;
     }
 
-    .layout-label {
+    .jbs-layout-label {
       display: block;
       padding: 10px;
       font-size: 16px;
@@ -589,13 +589,13 @@
     &.active {
       border-color: #007cba;
 
-      .layout-label {
+      .jbs-layout-label {
         background: #fffffc;
       }
 
     }
 
-    &.locked {
+    &.jbs-locked {
       cursor: not-allowed;
 
       img {
@@ -616,7 +616,7 @@
         border-bottom-right-radius: 4px;
       }
 
-      .layout-label {
+      .jbs-layout-label {
         background: #ebebeb;
       }
     }
@@ -633,7 +633,7 @@
   .components-notice__content {
     margin: 4px 0;
 
-    .jobus-upgrade-button.is-primary {
+    .jbs-upgrade-button.is-primary {
       font-size: 13px;
       background-color: rgb(147, 0, 63);
       border-radius: 3px;
@@ -653,7 +653,7 @@
       padding-left: 12px;
       font-size: 17px;
 
-      .pro-lock {
+      .jbs-pro-lock {
         margin-left: 0.25rem;
         font-size: 13px;
       }
@@ -755,7 +755,7 @@
   border-radius: $border-radius;
 }
 
-.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .show > .jbs-nav-link {
+.jbs-nav-pills .jbs-nav-link.active, .jbs-nav-pills .jbs-show > .jbs-nav-link {
   color: $text-white;
   background-color: $primary-color;
 }

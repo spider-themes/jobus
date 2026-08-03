@@ -43,6 +43,20 @@ if ( class_exists( 'CSF' ) ) {
 			),
 
 			array(
+				'id'       => 'candidate_single_sec_pad',
+				'type'     => 'spacing',
+				'title'    => esc_html__( 'Page Section Padding', 'jobus' ),
+				'subtitle' => esc_html__( 'Top/bottom padding for this Candidate\'s details page. Leave empty to use the global default.', 'jobus' ),
+				'top'      => true,
+				'bottom'   => true,
+				'left'     => false,
+				'right'    => false,
+				'output'   => array( '.jbs-candidates-profile', '.jbs-candidates-profile-2' ),
+				'output_mode' => 'padding',
+				'output_important' => true,
+			),
+
+			array(
 				'id'      => 'post_favorite',
 				'type'    => 'checkbox',
 				'title'   => esc_html__( 'Favorite', 'jobus' ),

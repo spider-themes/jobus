@@ -19,13 +19,13 @@ function Edit({ attributes, setAttributes }) {
 
     return (
         <Fragment>
-            <div className="company-details">
-                <div className="details-post-data">
+            <div className="jbs-company-details">
+                <div className="jbs-details-post-data">
 
                     <div {...blockProps}>
 
                         <a href={attributes.videoUrl}
-                           className="fancybox rounded-circle video-icon tran3s jbs-text-center"
+                           className="fancybox jbs-rounded-circle video-icon jbs-tran3s jbs-text-center"
                            data-fancybox="" // Add your custom attribute here
                            style={{backgroundColor: attributes.icon_bg_color}}>
                             <i className="bi bi-play-fill" style={{color: attributes.icon_color}}></i>

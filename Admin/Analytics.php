@@ -92,7 +92,7 @@ class Analytics {
 		$this->page_hook = add_submenu_page(
 			'edit.php?post_type=jobus_job',
 			__( 'Analytics', 'jobus' ),
-			__( 'Analytics', 'jobus' ) . ' <span class="jobus-pro-badge">Pro</span>',
+			__( 'Analytics', 'jobus' ) . ' <span class="jbs-pro-badge">Pro</span>',
 			'manage_options',
 			'jobus-analytics',
 			array( $this, 'render_analytics_page' )
@@ -136,76 +136,76 @@ class Analytics {
 	public function render_analytics_page() {
 		$upgrade_url = $this->get_upgrade_url();
 		?>
-		<div class="wrap jobus-analytics-wrap">
-			<div class="jobus-analytics-presentation">
+		<div class="wrap jbs-analytics-wrap">
+			<div class="jbs-analytics-presentation">
 				<!-- Hero Section -->
-				<div class="jobus-presentation-hero">
-					<div class="jobus-hero-content">
-						<span class="jobus-hero-badge">
+				<div class="jbs-presentation-hero">
+					<div class="jbs-hero-content">
+						<span class="jbs-hero-badge">
 							<span class="dashicons dashicons-chart-bar"></span>
 							<?php esc_html_e( 'Pro Feature', 'jobus' ); ?>
 						</span>
-						<h1 class="jobus-hero-title">
+						<h1 class="jbs-hero-title">
 							<?php esc_html_e( 'Unlock Powerful Analytics', 'jobus' ); ?>
 						</h1>
-						<p class="jobus-hero-subtitle">
+						<p class="jbs-hero-subtitle">
 							<?php esc_html_e( 'Get comprehensive insights into your job board performance. Track applications, discover trends, and make data-driven decisions.', 'jobus' ); ?>
 						</p>
-						<div class="jobus-hero-cta">
-							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-btn-primary">
+						<div class="jbs-hero-cta">
+							<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-analytics-btn-primary">
 								<span class="dashicons dashicons-unlock"></span>
 								<?php esc_html_e( 'Upgrade to Pro', 'jobus' ); ?>
 							</a>
-							<span class="jobus-hero-guarantee">
+							<span class="jbs-hero-guarantee">
 								<span class="dashicons dashicons-shield"></span>
 								<?php esc_html_e( '30-day money-back guarantee', 'jobus' ); ?>
 							</span>
 						</div>
 					</div>
-					<div class="jobus-hero-visual">
-						<div class="jobus-dashboard-preview">
+					<div class="jbs-hero-visual">
+						<div class="jbs-dashboard-preview">
 							<!-- Mock Dashboard Stats -->
-							<div class="jobus-preview-stats">
-								<div class="jobus-preview-stat">
-									<span class="jobus-preview-stat-value">2,847</span>
-									<span class="jobus-preview-stat-label">
+							<div class="jbs-preview-stats">
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value">2,847</span>
+									<span class="jbs-preview-stat-label">
 										<?php esc_html_e( 'Total Jobs', 'jobus' ); ?>
 									</span>
-									<span class="jobus-preview-stat-trend">+12%</span>
+									<span class="jbs-preview-stat-trend">+12%</span>
 								</div>
-								<div class="jobus-preview-stat">
-									<span class="jobus-preview-stat-value">18.5K</span>
-									<span class="jobus-preview-stat-label">
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value">18.5K</span>
+									<span class="jbs-preview-stat-label">
 										<?php esc_html_e( 'Applications', 'jobus' ); ?>
 									</span>
-									<span class="jobus-preview-stat-trend">+28%</span>
+									<span class="jbs-preview-stat-trend">+28%</span>
 								</div>
-								<div class="jobus-preview-stat">
-									<span class="jobus-preview-stat-value">74%</span>
-									<span class="jobus-preview-stat-label">
+								<div class="jbs-preview-stat">
+									<span class="jbs-preview-stat-value">74%</span>
+									<span class="jbs-preview-stat-label">
 										<?php esc_html_e( 'Approval Rate', 'jobus' ); ?>
 									</span>
-									<span class="jobus-preview-stat-trend">+5%</span>
+									<span class="jbs-preview-stat-trend">+5%</span>
 								</div>
 							</div>
 							<!-- Mock Chart -->
-							<div class="jobus-preview-chart">
-								<div class="jobus-chart-header">
-									<span class="jobus-chart-title">
+							<div class="jbs-preview-chart">
+								<div class="jbs-chart-header">
+									<span class="jbs-chart-title">
 										<?php esc_html_e( 'Applications Over Time', 'jobus' ); ?>
 									</span>
-									<span class="jobus-chart-badge">
+									<span class="jbs-chart-badge">
 										<?php esc_html_e( 'Last 30 Days', 'jobus' ); ?>
 									</span>
 								</div>
-								<div class="jobus-chart-bars">
-									<div class="jobus-bar" style="--height: 45%;"><span>M</span></div>
-									<div class="jobus-bar" style="--height: 60%;"><span>T</span></div>
-									<div class="jobus-bar" style="--height: 35%;"><span>W</span></div>
-									<div class="jobus-bar" style="--height: 80%;"><span>T</span></div>
-									<div class="jobus-bar" style="--height: 55%;"><span>F</span></div>
-									<div class="jobus-bar" style="--height: 70%;"><span>S</span></div>
-									<div class="jobus-bar jobus-bar-active" style="--height: 90%;"><span>S</span></div>
+								<div class="jbs-chart-bars">
+									<div class="jbs-bar" style="--height: 45%;"><span>M</span></div>
+									<div class="jbs-bar" style="--height: 60%;"><span>T</span></div>
+									<div class="jbs-bar" style="--height: 35%;"><span>W</span></div>
+									<div class="jbs-bar" style="--height: 80%;"><span>T</span></div>
+									<div class="jbs-bar" style="--height: 55%;"><span>F</span></div>
+									<div class="jbs-bar" style="--height: 70%;"><span>S</span></div>
+									<div class="jbs-bar jbs-bar-active" style="--height: 90%;"><span>S</span></div>
 								</div>
 							</div>
 						</div>
@@ -213,8 +213,8 @@ class Analytics {
 				</div>
 
 				<!-- Features Grid -->
-				<div class="jobus-features-section">
-					<div class="jobus-section-header">
+				<div class="jbs-features-section">
+					<div class="jbs-section-header">
 						<h2>
 							<?php esc_html_e( 'Everything You Need to Optimize Your Job Board', 'jobus' ); ?>
 						</h2>
@@ -222,9 +222,9 @@ class Analytics {
 							<?php esc_html_e( 'Comprehensive analytics tools designed for job board success', 'jobus' ); ?>
 						</p>
 					</div>
-					<div class="jobus-features-grid">
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-primary">
+					<div class="jbs-features-grid">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-primary">
 								<span class="dashicons dashicons-chart-line"></span>
 							</div>
 							<h3>
@@ -234,8 +234,8 @@ class Analytics {
 								<?php esc_html_e( 'Monitor job views, applications, and user engagement as they happen on your job board.', 'jobus' ); ?>
 							</p>
 						</div>
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-success">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-success">
 								<span class="dashicons dashicons-clock"></span>
 							</div>
 							<h3>
@@ -245,8 +245,8 @@ class Analytics {
 								<?php esc_html_e( 'Track approval rates, pending applications, and identify bottlenecks in your hiring pipeline.', 'jobus' ); ?>
 							</p>
 						</div>
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-warning">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-warning">
 								<span class="dashicons dashicons-category"></span>
 							</div>
 							<h3>
@@ -256,8 +256,8 @@ class Analytics {
 								<?php esc_html_e( 'See which job categories perform best and where to focus your recruitment efforts.', 'jobus' ); ?>
 							</p>
 						</div>
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-info">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-info">
 								<span class="dashicons dashicons-location-alt"></span>
 							</div>
 							<h3>
@@ -267,8 +267,8 @@ class Analytics {
 								<?php esc_html_e( 'Discover geographic patterns and optimize job placements based on location data.', 'jobus' ); ?>
 							</p>
 						</div>
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-danger">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-danger">
 								<span class="dashicons dashicons-warning"></span>
 							</div>
 							<h3>
@@ -278,8 +278,8 @@ class Analytics {
 								<?php esc_html_e( 'Identify underperforming jobs and take action to improve visibility and applications.', 'jobus' ); ?>
 							</p>
 						</div>
-						<div class="jobus-feature-card">
-							<div class="jobus-feature-icon jobus-feature-icon-purple">
+						<div class="jbs-feature-card">
+							<div class="jbs-feature-icon jbs-feature-icon-purple">
 								<span class="dashicons dashicons-chart-bar"></span>
 							</div>
 							<h3>
@@ -293,8 +293,8 @@ class Analytics {
 				</div>
 
 				<!-- Tabs Preview -->
-				<div class="jobus-tabs-preview-section">
-					<div class="jobus-section-header">
+				<div class="jbs-tabs-preview-section">
+					<div class="jbs-section-header">
 						<h2>
 							<?php esc_html_e( 'Comprehensive Dashboard Views', 'jobus' ); ?>
 						</h2>
@@ -302,60 +302,60 @@ class Analytics {
 							<?php esc_html_e( 'Seven powerful analytics tabs to track every aspect of your job board', 'jobus' ); ?>
 						</p>
 					</div>
-					<div class="jobus-tabs-preview">
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+					<div class="jbs-tabs-preview">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-chart-area"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Overview', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-portfolio"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Jobs', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-text-page"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Applications', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-visibility"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Views', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-category"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Categories', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-location-alt"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Locations', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-tab-preview-item">
-							<div class="jobus-tab-preview-icon">
+						<div class="jbs-tab-preview-item">
+							<div class="jbs-tab-preview-icon">
 								<span class="dashicons dashicons-search"></span>
 							</div>
-							<span class="jobus-tab-preview-name">
+							<span class="jbs-tab-preview-name">
 								<?php esc_html_e( 'Search', 'jobus' ); ?>
 							</span>
 						</div>
@@ -363,25 +363,25 @@ class Analytics {
 				</div>
 
 				<!-- Social Proof -->
-				<div class="jobus-social-proof-section">
-					<div class="jobus-proof-stats">
-						<div class="jobus-proof-stat">
-							<span class="jobus-proof-value">3,000+</span>
-							<span class="jobus-proof-label">
+				<div class="jbs-social-proof-section">
+					<div class="jbs-proof-stats">
+						<div class="jbs-proof-stat">
+							<span class="jbs-proof-value">3,000+</span>
+							<span class="jbs-proof-label">
 								<?php esc_html_e( 'Happy Customers', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-proof-divider"></div>
-						<div class="jobus-proof-stat">
-							<span class="jobus-proof-value">4.9/5</span>
-							<span class="jobus-proof-label">
+						<div class="jbs-proof-divider"></div>
+						<div class="jbs-proof-stat">
+							<span class="jbs-proof-value">4.9/5</span>
+							<span class="jbs-proof-label">
 								<?php esc_html_e( 'Customer Rating', 'jobus' ); ?>
 							</span>
 						</div>
-						<div class="jobus-proof-divider"></div>
-						<div class="jobus-proof-stat">
-							<span class="jobus-proof-value">24/7</span>
-							<span class="jobus-proof-label">
+						<div class="jbs-proof-divider"></div>
+						<div class="jbs-proof-stat">
+							<span class="jbs-proof-value">24/7</span>
+							<span class="jbs-proof-label">
 								<?php esc_html_e( 'Premium Support', 'jobus' ); ?>
 							</span>
 						</div>
@@ -389,22 +389,22 @@ class Analytics {
 				</div>
 
 				<!-- Final CTA -->
-				<div class="jobus-final-cta-section">
-					<div class="jobus-cta-card">
-						<div class="jobus-cta-content">
+				<div class="jbs-final-cta-section">
+					<div class="jbs-cta-card">
+						<div class="jbs-cta-content">
 							<h2>
 								<?php esc_html_e( 'Ready to Supercharge Your Job Board?', 'jobus' ); ?>
 							</h2>
 							<p>
 								<?php esc_html_e( 'Join thousands of successful job board owners using Jobus Pro Analytics.', 'jobus' ); ?>
 							</p>
-							<div class="jobus-cta-buttons">
-								<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jobus-btn-primary jobus-btn-lg">
+							<div class="jbs-cta-buttons">
+								<a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-analytics-btn-primary jbs-analytics-btn-lg">
 									<span class="dashicons dashicons-unlock"></span>
 									<?php esc_html_e( 'Get Jobus Pro Now', 'jobus' ); ?>
 								</a>
 							</div>
-							<p class="jobus-cta-note">
+							<p class="jbs-cta-note">
 								<span class="dashicons dashicons-shield-alt"></span>
 								<?php esc_html_e( 'Secure payment • Instant access • Cancel anytime', 'jobus' ); ?>
 							</p>

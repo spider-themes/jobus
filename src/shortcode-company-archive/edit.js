@@ -85,7 +85,7 @@ function Edit({ attributes, setAttributes }) {
                                         src={option.img}
                                         alt={option.label}
                                     />
-                                    <span className="layout-label" style={{ display: 'block', textAlign: 'center' }}>
+                                    <span className="jbs-layout-label" style={{ display: 'block', textAlign: 'center' }}>
                                         {option.label}
                                     </span>
                                 </div>
@@ -127,7 +127,7 @@ function Edit({ attributes, setAttributes }) {
                             href={jobus_block_params.jobus_upgrade_url}
                             target="_blank"
                             style={{ marginTop: '0.25rem' }}
-                            className="jobus-upgrade-button"
+                            className="jbs-upgrade-button"
                         >
                             {__('Upgrade Now', 'jobus')}
                         </Button>

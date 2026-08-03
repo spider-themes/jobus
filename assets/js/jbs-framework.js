@@ -13,10 +13,8 @@
 
         const ANIM_DURATION = 300;
 
-        const $form = $('#jobus-candidate-registration-form,#jobus-employer-registration-form,#jobus_login_form');
-
-        $form.find('.passVicon').on('click', function() {
-            $(this).toggleClass("eye-slash");
+        $(document).on('click', '.passVicon', function() {
+            $(this).toggleClass("jbs-eye-slash");
             const $input = $(this).closest('.input-group-meta').find('input');
             const type = $input.attr('type') === 'password' ? 'text' : 'password';
             $input.attr('type', type);
@@ -29,16 +27,16 @@
             toggleCollapse($trigger, $target, open) {
                 const action = open ? 'slideDown' : 'slideUp';
                 $target[action](ANIM_DURATION, function () {
-                    $target.toggleClass('jbs-show show', open);
+                    $target.toggleClass('jbs-show jbs-show', open);
                 });
                 $trigger
-                    .toggleClass('jbs-collapsed collapsed', !open)
+                    .toggleClass('jbs-collapsed jbs-collapsed', !open)
                     .attr('aria-expanded', open);
             },
 
             closeOffcanvas() {
-                $(".jbs-offcanvas.show").removeClass("show");
-                $(".jbs-offcanvas-backdrop").removeClass("show");
+                $(".jbs-offcanvas.show").removeClass("jbs-show");
+                $(".jbs-offcanvas-backdrop").removeClass("jbs-show");
             },
 
             closeModal($modal) {
@@ -89,11 +87,11 @@
                             const $other = $(this);
                             if ($other[0] !== $target[0]) {
                                 $other.slideUp(ANIM_DURATION, function () {
-                                    $other.removeClass('jbs-show show');
+                                    $other.removeClass('jbs-show jbs-show');
                                 });
                                 const otherId = '#' + $other.attr('id');
                                 $parent.find(`[data-jbs-target="${otherId}"], [href="${otherId}"]`)
-                                    .addClass('jbs-collapsed collapsed')
+                                    .addClass('jbs-collapsed jbs-collapsed')
                                     .attr('aria-expanded', 'false');
                             }
                         });
@@ -110,8 +108,8 @@
         $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
             e.preventDefault();
             const target = $(this).data("jbs-target");
-            $(target).addClass("show");
-            $(".jbs-offcanvas-backdrop").addClass("show");
+            $(target).addClass("jbs-show");
+            $(".jbs-offcanvas-backdrop").addClass("jbs-show");
         });
 
         $(document).on("click", ".jbs-offcanvas-close, .jbs-offcanvas-backdrop", function () {
@@ -215,7 +213,7 @@
          * Open dropdown
          */
         openDropdown($toggle, $dropdownMenu) {
-            $dropdownMenu.addClass('show');
+            $dropdownMenu.addClass('jbs-show');
             this.setAriaExpanded($toggle, true);
             this.handleOverflow($dropdownMenu);
             $toggle.trigger('jbs-dropdown:show');
@@ -225,7 +223,7 @@
          * Close dropdown
          */
         closeDropdown($toggle, $dropdownMenu) {
-            $dropdownMenu.removeClass('show');
+            $dropdownMenu.removeClass('jbs-show');
             this.setAriaExpanded($toggle, false);
             $toggle.trigger('jbs-dropdown:hide');
         },
@@ -254,7 +252,7 @@
                 const $toggle = $(this);
                 const { $dropdownMenu } = self.getDropdownElements($toggle);
                 const autoClose = $toggle.data('jbs-auto-close') || 'true';
-                const isOpen = $dropdownMenu.hasClass('show');
+                const isOpen = $dropdownMenu.hasClass('jbs-show');
 
                 self.closeAllDropdowns();
 
@@ -289,7 +287,7 @@
 
                 switch (e.key) {
                     case 'Escape':
-                        if ($dropdownMenu.hasClass('show')) {
+                        if ($dropdownMenu.hasClass('jbs-show')) {
                             e.preventDefault();
                             self.closeDropdown($toggle, $dropdownMenu);
                             $toggle.focus();
@@ -310,7 +308,7 @@
 
                     case 'Enter':
                     case ' ':
-                        if ($current.is('[data-jbs-toggle="jbs-dropdown"]') && !$dropdownMenu.hasClass('show')) {
+                        if ($current.is('[data-jbs-toggle="jbs-dropdown"]') && !$dropdownMenu.hasClass('jbs-show')) {
                             e.preventDefault();
                             $current.click();
                         }

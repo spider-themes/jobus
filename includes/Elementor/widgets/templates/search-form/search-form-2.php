@@ -15,10 +15,10 @@ if (!defined('ABSPATH')) {
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="filter-tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-25">
+        <ul class="jbs-filter-tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-25">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
-                <li class="jbs-fw-500 text-dark jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
+                <li class="jbs-fw-500 jbs-text-dark jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>
                 <?php
             }
 

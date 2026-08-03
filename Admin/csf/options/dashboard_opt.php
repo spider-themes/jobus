@@ -676,6 +676,14 @@ CSF::createSection( $settings_prefix, array(
 			'class'    => trim( $pro_access_class . $active_theme_class )
 		),
 
+		array(
+			'id'       => 'label_employer_membership',
+			'type'     => 'text',
+			'title'    => esc_html__( 'Membership Label', 'jobus' ),
+			'default'  => esc_html__( 'Membership', 'jobus' ),
+			'class'    => trim( $pro_access_class . $active_theme_class )
+		),
+
 		// Common Labels
 		array(
 			'type'    => 'heading',

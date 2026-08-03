@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<div class="pagination-wrap">
+<div class="jbs-pagination-wrap">
 
 	<?php jobus_showing_post_result_count($pagination_query) ?>
 

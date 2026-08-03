@@ -1,16 +1,16 @@
-.feedback-block-four {
+.jbs-feedback-block-four {
   padding: 25px 40px;
   border: 1px solid #E1E1E1;
   border-radius: 10px;
   ul{
     margin-left: 0 !important;
   }
-  .rating li a {
+  .jbs-rating li a {
     font-size: 16px;
     color: #FFCC4A;
     margin-right: 8px;
   }
-  .review-score {
+  .jbs-review-score {
     color: rgba($color: var(--jbs-heading_color), $alpha: .4);
     margin: 0 0 0 10px;
   }
@@ -26,7 +26,7 @@
       content: none !important;
     }
   }
-  .author-img {
+  .jbs-author-img {
     width: 45px;
     height: 45px;
   }

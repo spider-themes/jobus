@@ -6,7 +6,7 @@
 
 // Placeholder Mixin
 @mixin placeholder {
-  &.placeholder {
+  &.jbs-placeholder {
     @content;
   }
 

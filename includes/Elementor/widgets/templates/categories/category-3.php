@@ -29,21 +29,21 @@ if ( ! defined( 'ABSPATH' ) ) {
                 }
                 ?>
                 <div class="jbs-col-lg-<?php echo esc_attr( $column ); ?> jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                    <div class="jbs-card-item tran3s jbs-w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr( $delay_time ) ?>s">
+                    <div class="jbs-card-item jbs-tran3s jbs-w-100 wow fadeInUp" data-wow-delay="<?php echo esc_attr( $delay_time ) ?>s">
                         <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="jbs-d-block" style="<?php echo esc_attr( $bg_style ); ?>"
                            <?php if ( $hover_bg_color || $hover_border_color ) : ?>
                                onmouseover="this.parentElement.style.backgroundColor='<?php echo esc_js( $hover_bg_color ); ?>'; this.parentElement.style.borderColor='<?php echo esc_js( $hover_border_color ); ?>';"
                                onmouseout="this.parentElement.style.backgroundColor='<?php echo esc_js( $bg_color ); ?>'; this.parentElement.style.borderColor='';"
                            <?php endif; ?>>
                             <?php if ( ! empty( $meta['cat_img']['id'] ) ) { ?>
-                                <div class="icon tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center">
+                                <div class="icon jbs-tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center">
                                     <?php echo wp_get_attachment_image( $meta['cat_img']['id'], 'full', '', [ 'class' => 'lazy-img' ] ); ?>
                                 </div>
                             <?php } ?>
-                            <div class="title tran3s jbs-fw-500 jbs-text-lg" style="<?php echo esc_attr( $text_style ); ?>">
+                            <div class="title jbs-tran3s jbs-fw-500 jbs-text-lg" style="<?php echo esc_attr( $text_style ); ?>">
                                 <?php echo esc_html( ( $category->name ) ) ?>
                             </div>
-                            <div class="total-job" style="<?php echo esc_attr( $text_style ); ?>">
+                            <div class="jbs-total-job" style="<?php echo esc_attr( $text_style ); ?>">
                                 <?php echo esc_html( $category->count ) . ' ' . esc_html__( 'vacancy', 'jobus' ); ?>
                             </div>
                         </a>
@@ -57,13 +57,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         if ( ! empty( $settings['view_all_btn_url'] ) ) {
             ?>
             <div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6 jbs-d-flex">
-                <div class="jbs-card-item bg-color tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="jbs-card-item jbs-bg-color jbs-tran3s jbs-w-100 wow fadeInUp" data-wow-delay="0.1s">
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ) ?></div>
                         <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end jbs-mt-50">
                             <img src="<?php echo esc_url( JOBUS_IMG . '/icons/shape_22.svg' ) ?>" alt="<?php esc_attr_e( 'shape', 'jobus' ); ?>" class="lazy-img">
-                            <div class="icon tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
+                            <div class="icon jbs-tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
                                 <img src="<?php echo esc_url( JOBUS_IMG . '/icons/icon_19.svg' ) ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">
                             </div>
                         </div>

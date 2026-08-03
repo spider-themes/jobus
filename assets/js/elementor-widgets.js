@@ -20,15 +20,15 @@
 
         /*======= job listing slider css ========*/
         joblistSlider: function ($scope) {
-            let sliderWrapper = $scope.find(".category-slider-one");
+            let sliderWrapper = $scope.find(".jbs-category-slider-one");
             // ------------------------ Category Slider
             if (sliderWrapper.length) {
                 sliderWrapper.slick({
                     dots: false,
                     arrows: true,
                     lazyLoad: "ondemand",
-                    prevArrow: $(".prev_d"),
-                    nextArrow: $(".next_d"),
+                    prevArrow: $(".jbs-prev_d"),
+                    nextArrow: $(".jbs-next_d"),
                     centerPadding: "0px",
                     slidesToShow: 4,
                     slidesToScroll: 1,
@@ -62,7 +62,7 @@
         jobTabs: function ($scope) {
 
             let isotopeWrapper = $scope.find("#isotop-gallery-wrapper");
-            let isotopeMenuWrapper = $scope.find(".isotop-menu-wrapper");
+            let isotopeMenuWrapper = $scope.find(".jbs-isotop-menu-wrapper");
 
             if (isotopeWrapper.length > 0) {
                 var $grid = isotopeWrapper.isotope({
@@ -85,8 +85,8 @@
                 isotopeMenuWrapper.each(function (i, buttonGroup) {
                     var $buttonGroup = $(buttonGroup);
                     $buttonGroup.on("click", "li", function () {
-                        $buttonGroup.find(".is-checked").removeClass("is-checked");
-                        $(this).addClass("is-checked");
+                        $buttonGroup.find(".jbs-is-checked").removeClass("jbs-is-checked");
+                        $(this).addClass("jbs-is-checked");
                     });
                 });
             }

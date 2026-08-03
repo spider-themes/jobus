@@ -12,7 +12,7 @@ body {
 }
 
 .jbs-job-details {
-  .details-post-data {
+  .jbs-details-post-data {
     margin-bottom: 50px;
     .is-layout-constrained > * {
       max-width: 100% !important;
@@ -76,11 +76,11 @@ body {
 
 
 .jbs-job-details-two {
-  .share-buttons li .share-item {
+  .jbs-share-buttons li .jbs-share-item {
     background-color: var(--jbs_brand_color_3_opt);
   }
 
-  .job-meta-data-two {
+  .jbs-job-meta-data-two {
     margin-bottom: 80px;
 
     i {
@@ -162,6 +162,6 @@ body {
   }
 }
 
-.card-style-six .text {
+.card-style-six .jbs-text {
   padding: 20px;
 }

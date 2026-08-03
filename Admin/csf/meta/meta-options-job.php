@@ -16,97 +16,132 @@ if ( class_exists( 'CSF' ) ) {
 		'show_restore' => true,
 	) );
 
+	// Retrieve global job options
+	$jobus_opt         = get_option( 'jobus_opt', [] );
+	$enable_job_expiry = ! isset( $jobus_opt['enable_job_expiry'] ) || $jobus_opt['enable_job_expiry'];
+
+	// Construct General Meta Fields
+	$general_fields = array(
+		// Single Post Layout
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Single Post Layout', 'jobus' ),
+		),
+
+		array(
+			'id'       => 'job_details_layout',
+			'type'     => 'image_select',
+			'title'    => esc_html__( 'Choose Layout', 'jobus' ),
+			'subtitle' => esc_html__( 'Select the preferred layout for your job post for this page.', 'jobus' ),
+			'options'  => array(
+				'1' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
+				'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-2.png' ),
+			),
+			'default'  => '1',
+			'class'    => trim( $pro_access_class . $active_theme_class ),
+		),
+
+		array(
+			'id'       => 'job_single_sec_pad',
+			'type'     => 'spacing',
+			'title'    => esc_html__( 'Page Section Padding', 'jobus' ),
+			'subtitle' => esc_html__( 'Top/bottom padding for this Job\'s details page. Leave empty to use the global default.', 'jobus' ),
+			'top'      => true,
+			'bottom'   => true,
+			'left'     => false,
+			'right'    => false,
+			'output'   => '.jbs-job-details',
+			'output_mode' => 'padding',
+			'output_important' => true,
+		),
+
+		// Company Information
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Company Info', 'jobus' ),
+		),
+
+		array(
+			'id'      => 'select_company',
+			'type'    => 'select',
+			'title'   => esc_html__( 'Select Company', 'jobus' ),
+			'options' => jobus_company_post_list(),
+			'chosen'  => true,
+			'default' => '',
+			'class'   => trim( $pro_access_class . $active_theme_class ),
+		),
+
+		array(
+			'id'      => 'is_company_website',
+			'type'    => 'button_set',
+			'title'   => esc_html__( 'Company Website', 'jobus' ),
+			'options' => array(
+				'default' => esc_html__( 'Default', 'jobus' ),
+				'custom'  => esc_html__( 'Custom', 'jobus' ),
+			),
+			'default' => 'default',
+			'class'   => trim( $pro_access_class . $active_theme_class ),
+		),
+
+		array(
+			'id'         => 'company_website',
+			'type'       => 'link',
+			'title'      => esc_html__( 'Website Button', 'jobus' ),
+			'default'    => array(
+				'url' => '#',
+			),
+			'dependency' => array( 'is_company_website', '==', 'custom' ),
+		), // End company information
+
+		//====================== Job Information ======================//
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Job Information', 'jobus' ),
+		),
+	);
+
+	// Condition based show hide for boost performance
+	if ( $enable_job_expiry ) {
+		$general_fields[] = array(
+			'id'       => '_jobus_expiration_date',
+			'type'     => 'date',
+			'title'    => esc_html__( 'Expiration Date', 'jobus' ),
+			'subtitle' => esc_html__( 'Date when this job will automatically expire and be marked as Draft. If empty, the global default is used.', 'jobus' ),
+			'settings' => array(
+				'dateFormat' => 'Y-m-d H:i:s',
+				'enableTime' => true,
+				'time_24hr'  => true,
+			),
+		);
+	}
+
+	$general_fields[] = array(
+		'id'      => 'is_apply_btn',
+		'type'    => 'button_set',
+		'title'   => esc_html__( 'Application Method', 'jobus' ),
+		'desc'    => esc_html__( 'Select the primary method candidates will use to submit their application.', 'jobus' ),
+		'options' => array(
+			'default'  => esc_html__( 'Internal Form (Default)', 'jobus' ),
+			'external' => esc_html__( 'External Apply Link', 'jobus' ),
+		),
+		'default' => 'default',
+	);
+
+	$general_fields[] = array(
+		'id'         => 'apply_form_url',
+		'type'       => 'text',
+		'title'      => esc_html__( 'External Apply Link', 'jobus' ),
+		'desc'       => esc_html__( 'Provide the complete URL (including https://) where candidates should be directed to complete their application. Ideal for third-party Applicant Tracking Systems (ATS) or corporate portals.', 'jobus' ),
+		'default'    => '#',
+		'dependency' => array( 'is_apply_btn', '==', 'external' ),
+	);
+
 	// Company Info Meta Options
 	CSF::createSection( $meta_prefix, array(
 		'title'  => esc_html__( 'General', 'jobus' ),
 		'id'     => 'jobus_meta_general',
 		'icon'   => 'fas fa-home',
-		'fields' => array(
-
-			// Single Post Layout
-			array(
-				'type'    => 'subheading',
-				'content' => esc_html__( 'Single Post Layout', 'jobus' ),
-			),
-
-			array(
-				'id'       => 'job_details_layout',
-				'type'     => 'image_select',
-				'title'    => esc_html__( 'Choose Layout', 'jobus' ),
-				'subtitle' => esc_html__( 'Select the preferred layout for your job post for this page.', 'jobus' ),
-				'options'  => array(
-					'1' => esc_url( JOBUS_IMG . '/layout/job/single-layout-1.png' ),
-					'2' => esc_url( JOBUS_IMG . '/layout/job/single-layout-2.png' ),
-				),
-				'default'  => '1',
-				'class'    => trim($pro_access_class . $active_theme_class)
-			),
-
-			// Company Information
-			array(
-				'type'    => 'subheading',
-				'content' => esc_html__( 'Company Info', 'jobus' ),
-			),
-
-			array(
-				'id'      => 'select_company',
-				'type'    => 'select',
-				'title'   => esc_html__( 'Select Company', 'jobus' ),
-				'options' => jobus_company_post_list(),
-				'chosen'  => true,
-				'default' => '',
-				'class'   => trim($pro_access_class . $active_theme_class)
-			),
-
-			array(
-				'id'      => 'is_company_website',
-				'type'    => 'button_set',
-				'title'   => esc_html__( 'Company Website', 'jobus' ),
-				'options' => array(
-					'default' => esc_html__( 'Default', 'jobus' ),
-					'custom'  => esc_html__( 'Custom', 'jobus' ),
-				),
-				'default' => 'default',
-				'class'   => trim($pro_access_class . $active_theme_class)
-			),
-
-			array(
-				'id'         => 'company_website',
-				'type'       => 'link',
-				'title'      => esc_html__( 'Website Button', 'jobus' ),
-				'default'    => array(
-					'url' => '#',
-				),
-				'dependency' => array( 'is_company_website', '==', 'custom' ),
-			), // End company information
-
-			//====================== Job Information ======================//
-			array(
-				'type'    => 'subheading',
-				'content' => esc_html__( 'Job Information', 'jobus' ),
-			),
-
-			array(
-				'id'      => 'is_apply_btn',
-				'type'    => 'button_set',
-				'title'   => esc_html__( 'Choose Option', 'jobus' ),
-				'desc'    => esc_html__( 'Choose the Apply button for job post.', 'jobus' ),
-				'options' => array(
-					'default' => esc_html__( 'Default', 'jobus' ),
-					'custom'  => esc_html__( 'Custom with Link', 'jobus' ),
-				),
-				'default' => 'default',
-			),
-
-			array(
-				'id'         => 'apply_form_url',
-				'type'       => 'text',
-				'title'      => esc_html__( 'Apply Link', 'jobus' ),
-				'default'    => '#',
-				'dependency' => array( 'is_apply_btn', '==', 'custom' ),
-				'class'   => trim($pro_access_class . $active_theme_class)
-			),
-		)
+		'fields' => $general_fields,
 	) );
 
 
@@ -184,4 +219,5 @@ if ( class_exists( 'CSF' ) ) {
 			'id'     => 'jobus_meta_specifications',
 		) );
 	}
-}
+
+	}

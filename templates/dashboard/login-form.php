@@ -14,10 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 ?>
-<div class="jobus-login-from dashboard-body">
-    <div class="login_from">
+<div class="jbs-login-from jbs-dashboard-body">
+    <div class="jbs-login_from">
         <div class="jbs-container">
-            <div class="user-data-form">
+            <div class="jbs-user-data-form">
 	            <?php echo do_shortcode('[jobus_login_form]'); ?>
             </div>
         </div>

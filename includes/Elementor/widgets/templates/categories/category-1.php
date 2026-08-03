@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="jbs-category-widget-one">
-    <div class="card-wrapper jbs-row jbs-justify-content-center">
+    <div class="jbs-card-wrapper jbs-row jbs-justify-content-center">
 		<?php
 		if ( is_array( $categories ) ) {
 			foreach ( $categories as $index => $category ) {
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 				?>
                 <div class="jbs-card-item jbs-text-center jbs-mt-20 wow fadeInUp">
-                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="box-info" style="<?php echo esc_attr( $bg_style ); ?>" 
+                    <a href="<?php echo esc_url( get_term_link( $category ) ) ?>" class="jbs-box-info" style="<?php echo esc_attr( $bg_style ); ?>" 
                        <?php if ( $hover_bg_color || $hover_border_color ) : ?>
                            onmouseover="this.style.backgroundColor='<?php echo esc_js( $hover_bg_color ); ?>'; this.style.borderColor='<?php echo esc_js( $hover_border_color ); ?>';"
                            onmouseout="this.style.backgroundColor='<?php echo esc_js( $bg_color ); ?>'; this.style.borderColor='';"
@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						}
 						?>
                         <div class="title jbs-fw-500" style="<?php echo esc_attr( $text_style ); ?>"><?php echo esc_html( $category->name ) ?></div>
-                        <div class="total-job jbs-d-block" style="<?php echo esc_attr( $text_style ); ?>">
+                        <div class="jbs-total-job jbs-d-block" style="<?php echo esc_attr( $text_style ); ?>">
 							<?php
 							/* translators: 1: Job, 2: Jobs */
 							echo esc_html( sprintf( _n( '%s Job', '%s Jobs', $category->count, 'jobus' ), number_format_i18n( $category->count ) ) );
