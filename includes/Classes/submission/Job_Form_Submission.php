@@ -64,6 +64,7 @@ class Job_Form_Submission {
 			'job_id',
 			'job_title',
 			'job_description',
+			'job_deadline',
 			'company_website',
 			'is_company_website',
 			'apply_form_url',
@@ -142,6 +143,16 @@ class Job_Form_Submission {
 			$job_id = $this->save_job_content( $job_id, $post_data, $company_id );
 			if ( is_wp_error( $job_id ) ) {
 				return $job_id;
+			}
+		}
+
+		// Save job deadline
+		if ( isset( $post_data['job_deadline'] ) ) {
+			$deadline = sanitize_text_field( $post_data['job_deadline'] );
+			if ( empty( $deadline ) ) {
+				delete_post_meta( $job_id, 'job_deadline' );
+			} elseif ( \DateTime::createFromFormat( 'Y-m-d', $deadline ) ) {
+				update_post_meta( $job_id, 'job_deadline', $deadline );
 			}
 		}
 

@@ -418,11 +418,169 @@ final class Jobus {
 	}
 
 	/**
-	 * Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
+	 * Do stuff upon plugin activation
+	 */
+	/**
+	 * Create default frontend pages depending on theme / premium status
 	 *
 	 * @return void
 	 */
-	public function init_plugin(): void {
+	public function activate(): void {
+		// Insert the installation time into the database.
+		$installed = get_option( 'jobus_installed' );
+		if ( ! $installed ) {
+			update_option( 'jobus_installed', time() );
+		}
+		update_option( 'jobus_version', JOBUS_VERSION );
+
+		// Set activation redirect flag only for fresh installs (onboarding not yet complete).
+		if ( ! get_option( 'jobus_onboarding_complete' ) ) {
+			set_transient( 'jobus_activation_redirect', '1', 60 );
+		}
+
+		// Create default frontend pages depending on theme / premium status
+		$this->plugin_default_pages_exist();
+
+		// Schedule cron events
+		\jobus\includes\Classes\Cron_Manager::activate();
+	}
+
+	/**
+	 * Do stuff upon plugin deactivation
+	 *
+	 * @return void
+	 */
+	public function deactivate(): void {
+		// Clear cron events
+		\jobus\includes\Classes\Cron_Manager::deactivate();
+
+		// If premium is NOT active, we might want to clean up.
+		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
+		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
+			$pages = get_option( 'jobus_pages', [] );
+			if ( ! empty( $pages['dashboard'] ) ) {
+				wp_delete_post( $pages['dashboard'], true );
+				unset( $pages['dashboard'] );
+				update_option( 'jobus_pages', $pages );
+			}
+		}
+	}
+
+	/**
+	 * Create default pages used by the plugin (if they don't already exist).
+	 *
+	 * Rules:
+	 * - If the active theme is `jobi` or `jobi-child`, or Freemius indicates a pro license,
+	 *   create Dashboard, Register Form, Job Archive, Candidate Archive and Company Archive.
+	 * - Otherwise (free theme), create only the Job Archive page.
+	 *
+	 * Created page IDs are stored in the `jobus_pages` option as an associative array.
+	 *
+	 * @return void
+	 */
+	public function plugin_default_pages_exist(): void {
+		// Avoid running in contexts without WP functions available.
+		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
+			return;
+		}
+
+		// Determine unlocked state (theme match or premium license).
+		$theme       = strtolower( get_template() );
+		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
+
+		$pages_to_create = [];
+		if ( $is_unlocked ) {
+			$pages_to_create = [
+				'dashboard'         => [
+					'title'   => 'Dashboard',
+					'slug'    => 'jobus-dashboard',
+					'content' => '[jobus_dashboard]',
+				],
+				'register'          => [
+					'title'   => 'Register Form',
+					'slug'    => 'jobus-register',
+					'content' => '<!-- wp:jobus/register-form /-->',
+				],
+				'job_archive'       => [
+					'title'   => 'Job Archive',
+					'slug'    => 'jobus-job-archive',
+					'content' => '[jobus_job_archive]',
+				],
+				'candidate_archive' => [
+					'title'   => 'Candidate Archive',
+					'slug'    => 'jobus-candidate-archive',
+					'content' => '[jobus_candidate_archive]',
+				],
+				'company_archive'   => [
+					'title'   => 'Company Archive',
+					'slug'    => 'jobus-company-archive',
+					'content' => '[jobus_company_archive]',
+				],
+			];
+		} else {
+			// Free theme only
+			$pages_to_create = [
+				'job_archive' => [
+					'title'   => 'Job Archive',
+					'slug'    => 'jobus-job-archive',
+					'content' => '[jobus_job_archive]',
+				],
+			];
+		}
+
+		$created = get_option( 'jobus_pages', [] );
+
+		// Optimization: Check if all desired pages for the current state (free vs pro) are already recorded.
+		$all_exist = true;
+		foreach ( array_keys( $pages_to_create ) as $key ) {
+			if ( empty( $created[ $key ] ) ) {
+				$all_exist = false;
+				break;
+			}
+		}
+
+		if ( $all_exist ) {
+			return;
+		}
+
+		foreach ( $pages_to_create as $key => $args ) {
+			// If a page with the desired slug already exists, record and skip.
+			$existing = get_page_by_path( $args['slug'] );
+			if ( $existing ) {
+				$created[ $key ] = $existing->ID;
+				continue;
+			}
+
+			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
+			if ( ! empty( $args['content'] ) ) {
+				$found = get_posts( [
+					'post_type'      => 'page',
+					'posts_per_page' => 1,
+					'post_status'    => 'publish',
+					'fields'         => 'ids',
+					's'              => trim( strip_tags( $args['content'] ) ),
+				] );
+				if ( ! empty( $found ) ) {
+					$created[ $key ] = $found[0];
+					continue;
+				}
+			}
+			// Keep the stored post title plain text to avoid HTML-escaping issues in themes.
+			$post = [
+				'post_title'   => wp_strip_all_tags( $args['title'] ),
+				'post_name'    => $args['slug'],
+				'post_content' => $args['content'],
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+			];
+
+			$post_id = wp_insert_post( $post );
+			if ( $post_id && ! is_wp_error( $post_id ) ) {
+				$created[ $key ] = $post_id;
+			}
+		}
+
+		update_option( 'jobus_pages', $created );
 
 		// Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
 		if ( get_option( 'jobus_flush_rewrite_rules_flag' ) ) {

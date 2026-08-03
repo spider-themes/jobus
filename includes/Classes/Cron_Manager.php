@@ -1,17 +1,16 @@
 <?php
 /**
- * Cron Manager for Jobus Plugin.
+ * Cron Manager Class
  *
- * Handles scheduled tasks and cron events.
+ * Handles scheduled tasks for the Jobus plugin.
  *
- * @package Jobus
- * @since   1.0.0
+ * @package jobus
  */
 
 namespace jobus\includes\Classes;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit; // Exit if accessed directly
 }
 
 /**
@@ -23,64 +22,77 @@ class Cron_Manager {
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'jobus_daily_scheduled_events', [ $this, 'daily_events' ] );
+		add_action( 'jobus_daily_maintenance', [ $this, 'auto_expire_jobs' ] );
 	}
 
 	/**
-	 * Execute daily scheduled events.
-	 *
-	 * @return void
+	 * Schedule cron events on activation.
 	 */
-	public function daily_events(): void {
-		// Allow disabling the automation via filter.
-		if ( ! apply_filters( 'jobus_enable_auto_expire_jobs', true ) ) {
+	public static function activate() {
+		if ( ! wp_next_scheduled( 'jobus_daily_maintenance' ) ) {
+			wp_schedule_event( time(), 'daily', 'jobus_daily_maintenance' );
+		}
+	}
+
+	/**
+	 * Clear cron events on deactivation.
+	 */
+	public static function deactivate() {
+		wp_clear_scheduled_hook( 'jobus_daily_maintenance' );
+	}
+
+	/**
+	 * Auto expire jobs past deadline.
+	 */
+	public function auto_expire_jobs() {
+		// Get settings
+		$options    = get_option( 'jobus_opt', [] );
+		$enabled    = $options['enable_auto_expire'] ?? true;
+		$batch_size = isset( $options['auto_expire_batch_size'] ) ? (int) $options['auto_expire_batch_size'] : 50;
+
+		/**
+		 * Filters whether auto-expiration of jobs is enabled.
+		 *
+		 * @param bool $enabled Whether auto-expiration is enabled.
+		 */
+		if ( ! apply_filters( 'jobus_enable_auto_expire', $enabled ) ) {
 			return;
 		}
 
-		$this->auto_expire_jobs();
-	}
+		/**
+		 * Filters the number of jobs to process per batch.
+		 *
+		 * @param int $batch_size The number of jobs to process.
+		 */
+		$batch_size = apply_filters( 'jobus_auto_expire_batch_size', $batch_size );
 
-	/**
-	 * Auto-expire jobs that are past their deadline.
-	 *
-	 * Queries published jobs with a 'job_deadline' meta value less than today's date
-	 * and updates their status to 'draft'.
-	 *
-	 * @return void
-	 */
-	public function auto_expire_jobs(): void {
-		// Get today's date in Y-m-d format.
-		$today = current_time( 'Y-m-d' );
-
-		// Query for expired jobs.
+		// Get expired jobs
 		$expired_jobs = get_posts( [
 			'post_type'      => 'jobus_job',
 			'post_status'    => 'publish',
-			'posts_per_page' => 50, // Batch limit to prevent timeouts.
+			'posts_per_page' => $batch_size, // Process in batches
 			'meta_query'     => [
 				[
 					'key'     => 'job_deadline',
-					'value'   => $today,
+					'value'   => current_time( 'Y-m-d' ),
 					'compare' => '<',
 					'type'    => 'DATE',
 				],
 			],
-			'fields'         => 'ids', // Only need IDs.
+			'fields'         => 'ids',
 		] );
 
 		if ( ! empty( $expired_jobs ) ) {
 			foreach ( $expired_jobs as $job_id ) {
-				// Update post status to draft.
 				wp_update_post( [
 					'ID'          => $job_id,
 					'post_status' => 'draft',
 				] );
 
 				/**
-				 * Fires after a job has been auto-expired.
+				 * Fires after a job has automatically expired.
 				 *
-				 * @since 1.0.0
-				 * @param int $job_id The ID of the job that was expired.
+				 * @param int $job_id The ID of the expired job.
 				 */
 				do_action( 'jobus_job_auto_expired', $job_id );
 			}

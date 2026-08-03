@@ -579,3 +579,34 @@ CSF::createSection( $settings_prefix, array(
 		),
 	),
 ) );
+
+
+// Job Expiration Settings
+CSF::createSection( $settings_prefix, array(
+	'parent' => 'jobus_job',
+	'title'  => esc_html__( 'Job Expiration', 'jobus' ),
+	'id'     => 'job_expiration_settings',
+	'fields' => array(
+		array(
+			'type'    => 'subheading',
+			'content' => esc_html__( 'Job Expiration Automation', 'jobus' ),
+		),
+		array(
+			'id'      => 'enable_auto_expire',
+			'type'    => 'switcher',
+			'title'   => esc_html__( 'Enable Auto Expiration', 'jobus' ),
+			'label'   => esc_html__( 'Automatically set jobs to draft when they pass the application deadline.', 'jobus' ),
+			'default' => true,
+		),
+		array(
+			'id'      => 'auto_expire_batch_size',
+			'type'    => 'number',
+			'title'   => esc_html__( 'Batch Size', 'jobus' ),
+			'desc'    => esc_html__( 'Number of jobs to process per daily run.', 'jobus' ),
+			'default' => 50,
+			'min'     => 1,
+			'max'     => 500,
+			'dependency' => array( 'enable_auto_expire', '==', 'true' ),
+		),
+	)
+) );

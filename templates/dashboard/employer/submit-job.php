@@ -50,6 +50,7 @@ $my_jobs_url            = $dashboard_url ? trailingslashit( $dashboard_url ) . '
 $post_job_label = jobus_opt( 'label_post_job', esc_html__( 'Post Job', 'jobus' ) );
 $update_job_label = jobus_opt( 'label_update_job', esc_html__( 'Update Job', 'jobus' ) );
 $submit_button_label = $editing_job ? $update_job_label : $post_job_label;
+$job_deadline        = $job_id ? get_post_meta( $job_id, 'job_deadline', true ) : '';
 ?>
 
 <div class="jbs-position-relative">
@@ -325,29 +326,11 @@ if ( ! $can_submit ) {
                 </div>
             </div>
 
-            <!-- External Application URL -->
-            <div id="external-application-url">
-                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Application Method', 'jobus' ); ?></h4>
-                <div class="jbs-dash-input-wrapper jbs-mb-30">
-                    <select id="is_apply_btn" name="is_apply_btn" class="jbs-nice-select">
-                        <option value="default" <?php selected( $is_apply_btn, 'default' ); ?>><?php esc_html_e( 'Internal Application Form (Default)', 'jobus' ); ?></option>
-                        <option value="external" <?php selected( $is_apply_btn, 'external' ); ?>><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></option>
-                    </select>
-                    <p class="jbs-text-muted jbs-mt-2">
-                        <?php esc_html_e( 'Select the primary method candidates will use to submit their application.', 'jobus' ); ?>
-                    </p>
-                </div>
-                <div id="application-url-fields" class="<?php echo $is_apply_btn === 'external' ? '' : 'jbs-d-none'; ?>">
-                    <div class="jbs-dash-input-wrapper jbs-mb-30">
-                        <label for="apply-form-url"><?php esc_html_e( 'External Apply Link', 'jobus' ); ?></label>
-                        <input type="url" id="apply-form-url" name="apply_form_url"
-                               placeholder="<?php esc_attr_e( 'https://careers.yourcompany.com/apply/12345', 'jobus' ); ?>"
-                               value="<?php echo esc_attr( $apply_form_url ); ?>"
-                               <?php disabled( $is_apply_btn !== 'external' ); ?>>
-                        <p class="jbs-text-muted jbs-mt-2">
-                            <?php esc_html_e( 'Provide the complete URL (including https://) where candidates should be directed to complete their application. Ideal for third-party Applicant Tracking Systems (ATS) or external corporate portals.', 'jobus' ); ?>
-                        </p>
-                    </div>
+            <div id="job-deadline-section">
+                <h4 class="dash-title-three"><?php esc_html_e( 'Deadline', 'jobus' ); ?></h4>
+                <div class="dash-input-wrapper jbs-mb-30">
+                    <label for="job_deadline"><?php esc_html_e( 'Application Deadline', 'jobus' ); ?></label>
+                    <input type="date" name="job_deadline" id="job_deadline" value="<?php echo esc_attr( $job_deadline ); ?>" placeholder="YYYY-MM-DD">
                 </div>
             </div>
         </div>
