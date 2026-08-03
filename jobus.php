@@ -218,6 +218,7 @@ final class Jobus {
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
+		new \jobus\includes\Classes\Cron_Manager();
 
 		// Submission Classes
 		if ( $enable_candidate ) {
