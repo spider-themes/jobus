@@ -41,6 +41,9 @@ class Ajax_Actions {
 		// Delete Job
 		add_action( 'wp_ajax_jobus_delete_job', [ $this, 'delete_job' ] );
 
+		// Submit Job
+		add_action( 'wp_ajax_jobus_submit_job', [ $this, 'submit_job' ] );
+
 		// Candidate Registration
 		add_action( 'wp_ajax_nopriv_jobus_register_candidate', [ $this, 'ajax_register_candidate' ] );
 		add_action( 'wp_ajax_jobus_register_candidate', [ $this, 'ajax_register_candidate' ] );
@@ -88,7 +91,7 @@ class Ajax_Actions {
 		$headers[] = "Reply-To: $sender_email";
 
 		// Send email
-		$success = wp_mail( (string) $candidate_mail, (string) $subject, (string) $message, $headers );
+		$success = \jobus\includes\Classes\Emails\Mailer::send( (string) $candidate_mail, (string) $subject, (string) $message, $headers );
 
 		if ( $success ) {
 			wp_send_json_success( esc_html__( 'Your message has been sent successfully!', 'jobus' ) ); // This will be displayed in green
@@ -118,7 +121,7 @@ class Ajax_Actions {
 		$candidate_email       = ! empty( $_POST['candidate_email'] ) ? sanitize_email( wp_unslash( $_POST['candidate_email'] ) ) : '';
 		$candidate_phone       = ! empty( $_POST['candidate_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['candidate_phone'] ) ) : '';
 		$candidate_message     = ! empty( $_POST['candidate_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['candidate_message'] ) ) : '';
-		$job_application_id    = ! empty( $_POST['job_application_id'] ) ? sanitize_text_field( wp_unslash( $_POST['job_application_id'] ) ) : '';
+		$job_application_id    = ! empty( $_POST['job_application_id'] ) ? absint( $_POST['job_application_id'] ) : 0;
 		$job_application_title = ! empty( $_POST['job_application_title'] ) ? sanitize_text_field( wp_unslash( $_POST['job_application_title'] ) ) : '';
 
 		// Validate email
@@ -127,13 +130,40 @@ class Ajax_Actions {
 			wp_die();
 		}
 
+		$candidate_id = get_current_user_id();
+
+		// Guest Application Pipeline
+		if ( ! is_user_logged_in() ) {
+			$allow_guest = function_exists( 'jobus_opt' ) ? jobus_opt( 'allow_guest_application', false ) : false;
+			if ( ! $allow_guest ) {
+				wp_send_json_error( [ 'message' => esc_html__( 'Guest applications are not allowed. Please log in.', 'jobus' ) ] );
+				wp_die();
+			}
+
+			if ( ! is_user_logged_in() ) {
+				// Prevent users from applying as guests using an already registered email.
+				if ( email_exists( $candidate_email ) ) {
+					wp_send_json_error( [
+						'message' => esc_html__( 'This email is already registered. Please log in to apply.', 'jobus' )
+					] );
+					wp_die();
+				}
+			}
+		}
+
 		// Save the application as a new post
-		$post_title     = trim( $candidate_fname . ( ! empty( $candidate_lname ) ? ' ' . $candidate_lname : '' ) );
-		$application_id = wp_insert_post( [
+		$post_title       = trim( $candidate_fname . ( ! empty( $candidate_lname ) ? ' ' . $candidate_lname : '' ) );
+		$application_args = [
 			'post_type'   => 'jobus_applicant',
 			'post_status' => 'publish',
 			'post_title'  => $post_title,
-		] );
+		];
+
+		if ( $candidate_id ) {
+			$application_args['post_author'] = $candidate_id;
+		}
+
+		$application_id = wp_insert_post( $application_args );
 
 		if ( $application_id ) {
 			update_post_meta( $application_id, 'candidate_fname', $candidate_fname );
@@ -143,6 +173,10 @@ class Ajax_Actions {
 			update_post_meta( $application_id, 'candidate_message', $candidate_message );
 			update_post_meta( $application_id, 'job_applied_for_id', $job_application_id );
 			update_post_meta( $application_id, 'job_applied_for_title', $job_application_title );
+
+			if ( ! is_user_logged_in() ) {
+				update_post_meta( $application_id, 'jobus_is_guest_application', 'yes' );
+			}
 
 			/**
 			 * Fires after a job application is successfully submitted and saved.
@@ -168,20 +202,56 @@ class Ajax_Actions {
 					'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 				];
 
-				$file_name = sanitize_file_name( $_FILES['candidate_cv']['name'] );
-				$file_type = wp_check_filetype( $file_name );
+				$file_name    = sanitize_file_name( $_FILES['candidate_cv']['name'] );
+				$file_type    = wp_check_filetype( $file_name );
+				
 				if ( ! in_array( $file_type['type'], $allowed_file_types, true ) ) {
+					// Cleanup partial application post
+					wp_delete_post( $application_id, true );
 					wp_send_json_error( [ 'message' => esc_html__( 'Invalid file type. Only PDF and Word documents are allowed.', 'jobus' ) ] );
 					wp_die();
 				}
 
+				if ( ! function_exists( 'wp_handle_upload' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+					require_once ABSPATH . 'wp-admin/includes/image.php';
+					require_once ABSPATH . 'wp-admin/includes/media.php';
+				}
+
 				$uploaded = media_handle_upload( 'candidate_cv', $application_id );
+				
 				if ( is_wp_error( $uploaded ) ) {
-					wp_send_json_error( [ 'message' => esc_html__( 'CV upload failed.', 'jobus' ) ] );
+					// Cleanup partial application post
+					wp_delete_post( $application_id, true );
+					wp_send_json_error( [ 'message' => $uploaded->get_error_message() ] );
+					wp_die();
 				} else {
-					update_post_meta( $application_id, 'candidate_resume', $uploaded );
+					update_post_meta( $application_id, 'candidate_cv', $uploaded );
 				}
 			}
+
+			// Notify Employer of the new application
+			if ( ! empty( $job_application_id ) ) {
+				$employer_id = get_post_field( 'post_author', $job_application_id );
+				if ( $employer_id ) {
+					$employer = get_userdata( $employer_id );
+					if ( $employer ) {
+						$site_name      = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+						$employer_email = $employer->user_email;
+						$subject        = sprintf( __( 'New Application for "%s"', 'jobus' ), $job_application_title );
+						$message        = sprintf(
+							/* translators: 1: Job title, 2: Candidate name, 3: Candidate email, 4: Site name */
+							__( "Hello,\n\nYou have received a new job application for \"%1\$s\".\n\nCandidate Name: %2\$s\nCandidate Email: %3\$s\n\nPlease log in to your employer dashboard to view their full profile and attachments.\n\nBest Regards,\n%4\$s", 'jobus' ),
+							$job_application_title,
+							$post_title,
+							$candidate_email,
+							$site_name
+						);
+						\jobus\includes\Classes\Emails\Mailer::send( $employer_email, $subject, $message );
+					}
+				}
+			}
+
 			wp_send_json_success( [ 'message' => esc_html__( 'Application submitted successfully.', 'jobus' ) ] );
 		} else {
 			wp_send_json_error( [ 'message' => esc_html__( 'Failed to submit application.', 'jobus' ) ] );
@@ -213,9 +283,10 @@ class Ajax_Actions {
 			wp_send_json_error();
 		}
 
-		$user              = wp_get_current_user();
-		$application_email = get_post_meta( $application_id, 'candidate_email', true );
-		if ( $user->user_email !== $application_email ) {
+		$user = wp_get_current_user();
+		// Security Fix: Verify ownership by post author instead of email matching to prevent IDOR.
+		// Also allow administrators to delete.
+		if ( (int) $application->post_author !== $user->ID && ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error();
 		}
 
@@ -323,6 +394,53 @@ class Ajax_Actions {
 	}
 
 	/**
+	 * Handle employer job creation and update via AJAX.
+	 *
+	 * @return void
+	 */
+	public function submit_job(): void {
+		$nonce = isset( $_POST['employer_submit_job_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['employer_submit_job_nonce'] ) ) : '';
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'employer_submit_job' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ] );
+		}
+
+		$user = wp_get_current_user();
+		if ( ! $user || ! array_intersect( [ 'jobus_employer', 'administrator' ], (array) $user->roles ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Access denied. You do not have permission to post a job.', 'jobus' ) ] );
+		}
+
+		$submission = new \jobus\includes\Classes\submission\Job_Form_Submission();
+		$result     = $submission->process_submission();
+
+		if ( is_wp_error( $result ) ) {
+			wp_send_json_error( [ 'message' => $result->get_error_message() ] );
+		}
+
+		$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		$redirect_url  = $dashboard_url
+			? jobus_get_dashboard_endpoint_url( 'jobs', $dashboard_url )
+			: get_permalink( (int) $result['job_id'] );
+
+		$redirect_url = add_query_arg(
+			[
+				'message'  => ! empty( $result['is_update'] ) ? 'job_updated' : 'job_created',
+				'job_id'   => (int) $result['job_id'],
+				'_wpnonce' => wp_create_nonce( 'jobus_dashboard_action' ),
+			],
+			$redirect_url
+		);
+
+		wp_send_json_success( [
+			'message'      => ! empty( $result['is_update'] )
+				? esc_html__( 'Job updated successfully.', 'jobus' )
+				: esc_html__( 'Job posted successfully.', 'jobus' ),
+			'job_id'       => (int) $result['job_id'],
+			'is_update'    => ! empty( $result['is_update'] ),
+			'redirect_url' => $redirect_url,
+		] );
+	}
+
+	/**
 	 * Handle candidate registration via AJAX.
 	 */
 	public function ajax_register_candidate(): void {
@@ -365,7 +483,7 @@ class Ajax_Actions {
 		do_action( 'wp_login', $candidate_username, new \WP_User( $candidate_id ) );
 
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && $redirect_url_from_form !== home_url( '/' ) ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
+		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),
@@ -416,7 +534,7 @@ class Ajax_Actions {
 		do_action( 'wp_login', $employer_username, new \WP_User( $employer_id ) );
 
 		$redirect_url_from_form = ! empty( $_POST['redirect_url'] ) ? esc_url_raw( wp_unslash( $_POST['redirect_url'] ) ) : '';
-		$redirect_url           = ! empty( $redirect_url_from_form ) && $redirect_url_from_form !== home_url( '/' ) ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
+		$redirect_url           = ! empty( $redirect_url_from_form ) && home_url( '/' ) !== $redirect_url_from_form ? $redirect_url_from_form : \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_employer' );
 
 		wp_send_json_success( [
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),

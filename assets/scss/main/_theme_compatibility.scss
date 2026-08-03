@@ -46,8 +46,8 @@
   text-decoration: none !important;
 }
 
-.job-post-item-wrapper {
-  .wrapper {
+.jbs-job-post-item-wrapper {
+  .jbs-wrapper {
     ul {
       margin-left: 0 !important;
     }
@@ -60,7 +60,7 @@
 
 // twenty twenty five Theme Compatibility
 .wp-theme-twentytwentyfive {
-  .candidates-profile {
+  .jbs-candidates-profile {
 
     .wp-block-heading,
     .title {
@@ -74,8 +74,8 @@
     }
   }
 
-  .job-company-info {
-    .job-meta-data div {
+  .jbs-job-company-info {
+    .jbs-job-meta-data div {
       margin: -6px 0 25px !important;
     }
   }
@@ -83,13 +83,13 @@
 
 // Hello Elementor Theme Compatibility
 .site-main:has(.wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-job-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
 }
 
 .wp-theme-hello-elementor,
-.wp-theme-hello-biz.jobus-frontend {
+.wp-theme-hello-biz.jbs-frontend {
   .jbs-dashboard-template {
     button {
       border: none;
@@ -101,7 +101,7 @@
     display: flex;
   }
 
-  table tbody tr > td {
+  table tbody tr>td {
     background: none;
   }
 
@@ -117,33 +117,106 @@
     text-align: left;
   }
 
-  .dashboard-body .job-alert-table th:last-child {
+  .jbs-dashboard-body .jbs-job-alert-table th:last-child {
     text-align: right !important;
   }
 }
 
 // Astra Theme Compatibility
-.wp-theme-astra{
-  #jobusLoginModal .placeholder_icon .passVicon img{
+.wp-theme-astra {
+  #jbsLoginModal .jbs-placeholder_icon .jbs-passVicon img {
     top: 16px;
   }
-  .user-data-form .form-wrapper .input-group-meta .placeholder_icon img {
+
+  .jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta .jbs-placeholder_icon img {
     top: 22%;
     transform: translateY(-22%);
-}
-.btn-one:focus {
+  }
+
+  .btn-one:focus {
     color: #000000 !important;
     background-color: var(--jbs-brand_color_3);
     border: 2px solid transparent;
-}
-.jbs-btn-close:focus,.jbs-btn-close:hover {
+  }
+
+  .jbs-btn-close:focus,
+  .jbs-btn-close:hover {
     outline: 0 !important;
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
     opacity: 1 !important;
     background: none !important;
     border: none !important;
+  }
+
+  // Sidebar range sliders — Astra's generic `input` reset ships
+  // `padding`, `border`, `line-height`, and `min-height` that
+  // inflate our 4px / 6px range inputs and float the thumb off
+  // the visual track. `!important` is required because Astra's
+  // rules load after our main stylesheet and rely on the same
+  // `input[type=range]` tag specificity.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"],
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    padding: 0 !important;
+    border: 0 !important;
+    line-height: 1 !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
+  }
+
+  // Salary dual-range stays transparent (track is the sibling .jbs-slider)
+  // and must keep the -6px offset so both thumbs sit on the progress bar.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"] {
+    height: 4px !important;
+    top: -2px !important;
+    background: transparent !important;
+  }
+
+  // Max-Distance single-range keeps the JS-painted gradient background.
+  // `background-color: transparent` would wipe the JS gradient, so we
+  // only reset the specific properties Astra injects.
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    height: 6px !important;
+  }
+
+  // Thumb pseudo-elements. Astra ships its own
+  // `::-webkit-slider-thumb` / `::-moz-range-thumb` rules that strip
+  // our soft drop shadow and occasionally resize the thumb. Pin every
+  // visual property so Max-Distance and Salary thumbs look identical
+  // to how they render on Hello / Blocksy / default themes.
+  .jbs-filter-area-tab .jbs-salary-slider .jbs-range-input input[type="range"],
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"] {
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      border: 2px solid var(--jbs-brand_color_1) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15) !important;
+      cursor: pointer !important;
+    }
+
+    &::-moz-range-thumb {
+      -moz-appearance: none !important;
+      width: 16px !important;
+      height: 16px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      border: 2px solid var(--jbs-brand_color_1) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15) !important;
+      cursor: pointer !important;
+    }
+  }
+
+  // Max-Distance single-range needs the Chrome-only thumb offset so
+  // it centres on the 6 px track. Without this override Astra's
+  // reset can shift the thumb a few pixels upward.
+  .jbs-filter-area-tab .jbs-radius-search-wrapper .jbs-radius-distance-slider input[type="range"]::-webkit-slider-thumb {
+    margin-top: -5px !important;
+  }
 }
-}
+
 .post-type-archive-jobus_job,
 .post-type-archive-jobus_candidate,
 .post-type-archive-jobus_company,
@@ -168,9 +241,9 @@
   }
 }
 
-.card-box {
-  .user-avatar-setting {
-    .upload-btn {
+.jbs-card-box {
+  .jbs-user-avatar-setting {
+    .jbs-upload-btn {
       // padding-bottom: 30px;
       padding: 0px 10px;
     }
@@ -178,10 +251,12 @@
 }
 
 
-.dashboard-body {
+.jbs-dashboard-body {
   .jbs-table-responsive {
-    .action-btn {
-      &:hover, &:focus {
+    .jbs-action-btn {
+
+      &:hover,
+      &:focus {
         background-color: transparent;
       }
     }
@@ -238,7 +313,7 @@
   }
 }
 
-.jobus-frontend.elementor-template-full-width .ast-container {
+.jbs-frontend.elementor-template-full-width .ast-container {
   max-width: 100%;
   padding: 0;
 }
@@ -246,26 +321,26 @@
 // kadence Theme Compatibility
 
 .site-container:has(.wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-job-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   max-width: 100% !important;
   padding: 0 !important;
 }
 
 .content-area:has(.wp-block-jobus-shortcode-job-archive,
-    .wp-block-jobus-shortcode-candidate-archive,
-    .wp-block-jobus-shortcode-company-archive) {
+  .wp-block-jobus-shortcode-candidate-archive,
+  .wp-block-jobus-shortcode-company-archive) {
   width: 100% !important;
   padding: 0 !important;
 }
 
-.wp-theme-kadence.jobus-frontend {
+.wp-theme-kadence.jbs-frontend {
   ul {
     padding-left: 0;
   }
 }
 
-.candidate-profile-card .candidate-skills li {
+.jbs-candidate-profile-card .jbs-candidate-skills li {
   white-space: nowrap;
 }
 
@@ -277,10 +352,12 @@ body {
         text-decoration: none;
       }
     }
+
     .container:has(.jbs-container) {
       max-width: 100% !important;
       padding: 0 !important;
     }
+
     .jbs-container {
       ul {
         margin-left: 0 !important;
@@ -290,6 +367,7 @@ body {
         }
       }
     }
+
     .jbs-pagination {
       .page-numbers {
         border-left: none;
@@ -297,10 +375,13 @@ body {
         border-bottom: none;
       }
     }
-    .candidate-profile-card div.right-side ul.candidate-skills {
+
+    .jbs-candidate-profile-card div.right-side ul.candidate-skills {
       padding-left: 0;
     }
+
     .jbs-table {
+
       thead,
       tbody tr {
         border: none;
@@ -309,22 +390,28 @@ body {
     }
   }
 }
+
 .wp-theme-docy {
-  .user-data-form .form-wrapper .input-group-meta .placeholder_icon span:before {
+  .jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta .jbs-placeholder_icon span:before {
     top: 24px;
   }
-  .dashboard-body .placeholder_icon span::before {
+
+  .jbs-dashboard-body .jbs-placeholder_icon span::before {
     top: 20px;
   }
-  .dashboard-body a{
-    &:hover{
+
+  .jbs-dashboard-body a {
+    &:hover {
       text-decoration: none !important;
     }
   }
-  .dashboard-body{
-    table thead, .table_shortcode thead {
-    background: none;
-    border: none;
+
+  .jbs-dashboard-body {
+
+    table thead,
+    .jbs-table_shortcode thead {
+      background: none;
+      border: none;
     }
   }
 }
@@ -339,7 +426,7 @@ body {
 
 
 // GeneratePress Theme Compatibility
-.grid-container.hfeed:has(.company-profiles, .candidates-profile, .job-listing-three, .jbs-job-details-two, .jbs-job-details, .candidates-profile-2, .company-details, .jbs-dashboard-template) {
+.jbs-grid-container.hfeed:has(.jbs-company-profiles, .jbs-candidates-profile, .jbs-job-listing-three, .jbs-job-details-two, .jbs-job-details, .jbs-candidates-profile-2, .jbs-company-details, .jbs-dashboard-template) {
   max-width: 100%;
 
   .site-content {
@@ -350,7 +437,7 @@ body {
     margin-top: 0;
   }
 
-  .dashboard-body .placeholder_icon span::before {
+  .jbs-dashboard-body .jbs-placeholder_icon span::before {
     top: 21px
   }
 
@@ -359,14 +446,14 @@ body {
   }
 }
 
-.jobus-frontend.elementor-template-full-width {
-  .grid-container.hfeed {
+.jbs-frontend.elementor-template-full-width {
+  .jbs-grid-container.hfeed {
     max-width: 100%;
   }
 }
 
 // Avada Theme Compatibility
-.wp-theme-Avada.jobus-frontend {
+.wp-theme-Avada.jbs-frontend {
   .clearfix {
     padding: 0 !important;
 
@@ -394,7 +481,7 @@ body {
 
 // OceanWP Theme Compatibility
 
-.wp-theme-oceanwp.jobus-frontend {
+.wp-theme-oceanwp.jbs-frontend {
   a {
     &:focus {
       outline: none !important;
@@ -405,7 +492,7 @@ body {
 
 // Eduacademy Theme Compatibility
 
-.jobus-frontend {
+.jbs-frontend {
   .jbs-container {
     form {
       margin-bottom: 0;
@@ -415,9 +502,9 @@ body {
 
 // blocksy Theme Compatibility
 
-.wp-theme-blocksy.jobus-frontend {
+.wp-theme-blocksy.jbs-frontend {
   .jbs-dashboard-template {
-    .dashboard-wrapper {
+    .jbs-dashboard-wrapper {
       a {
         outline: none;
 
@@ -427,8 +514,8 @@ body {
         }
       }
 
-      .user-avatar-setting {
-        .upload-btn {
+      .jbs-user-avatar-setting {
+        .jbs-upload-btn {
           padding: 0 10px !important;
         }
       }
@@ -438,14 +525,128 @@ body {
 
 // jobi Theme Compatibility
 .wp-theme-jobi {
-    .job-details,.jbs-job-details,.candidates-profile {
-        padding-top: 180px !important;
-    }
-    .dashboard-body{
-      .passVicon{
-        img{
-          display: inline-block;
-        }
+
+  .job-details,
+  .jbs-job-details,
+  .jbs-candidates-profile {
+    padding-top: 180px !important;
+  }
+
+  .jbs-dashboard-body {
+    .jbs-passVicon {
+      img {
+        display: inline-block;
       }
     }
+  }
+}
+
+// WordPress Default Themes (Twenty Twenty – Twenty Twenty Five) Compatibility
+.jbs-frontend {
+
+  &.wp-theme-twentytwenty,
+  &.wp-theme-twentytwentyone,
+  &.wp-theme-twentytwentytwo,
+  &.wp-theme-twentytwentythree,
+  &.wp-theme-twentytwentyfour,
+  &.wp-theme-twentytwentyfive {
+    .wp-site-blocks,
+    .wp-site-blocks > main,
+    main,
+    article,
+    .entry-content,
+    .wp-block-post-content,
+    .wp-block-post-template,
+    .wp-block-query,
+    .wp-block-group,
+    .is-layout-constrained,
+    .is-layout-flow,
+    .jbs-site,
+    .site-content,
+    #primary,
+    #main,
+    .site-main,
+    .content-area {
+      &:has(> .jbs-container,
+            > section.jbs,
+            > .wp-block-jobus-shortcode-job-archive,
+            > .wp-block-jobus-shortcode-candidate-archive,
+            > .wp-block-jobus-shortcode-company-archive,
+            .jbs-container,
+            section.jbs,
+            .wp-block-jobus-shortcode-job-archive,
+            .wp-block-jobus-shortcode-candidate-archive,
+            .wp-block-jobus-shortcode-company-archive) {
+        max-width: none !important;
+        width: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+    :is(.is-layout-constrained, .entry-content, .wp-block-post-content) > :is(
+      section.jbs,
+      .jbs-container,
+      .wp-block-jobus-shortcode-job-archive,
+      .wp-block-jobus-shortcode-candidate-archive,
+      .wp-block-jobus-shortcode-company-archive
+    ),
+    :is(.is-layout-constrained, .entry-content, .wp-block-post-content) > *:has(
+      section.jbs,
+      .jbs-container,
+      .wp-block-jobus-shortcode-job-archive,
+      .wp-block-jobus-shortcode-candidate-archive,
+      .wp-block-jobus-shortcode-company-archive
+    ) {
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    // Shortcode block wrappers themselves (Gutenberg-block delivery).
+    .wp-block-jobus-shortcode-job-archive,
+    .wp-block-jobus-shortcode-candidate-archive,
+    .wp-block-jobus-shortcode-company-archive {
+      max-width: none !important;
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    // Hide default-theme page furniture only on archive pages — scoped via
+    // `:has()` so normal pages keep their title / nav / meta.
+    &:has(.jbs-container,
+          section.jbs,
+          .wp-block-jobus-shortcode-job-archive,
+          .wp-block-jobus-shortcode-candidate-archive,
+          .wp-block-jobus-shortcode-company-archive) {
+
+      // `.has-global-padding` adds horizontal padding via CSS vars on
+      // constrained groups — zero it out so the shortcode reaches edge-to-edge.
+      .has-global-padding {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      .entry-header,
+      .wp-block-post-title,
+      .wp-block-post-featured-image,
+      .wp-block-post-date,
+      .wp-block-post-author,
+      .entry-meta,
+      .entry-footer,
+      .post-navigation,
+      .wp-block-post-navigation-link,
+      nav.post-navigation {
+        display: none !important;
+      }
+
+      .wp-site-blocks > main {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+      }
+    }
+  }
 }

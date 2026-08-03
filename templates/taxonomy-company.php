@@ -22,7 +22,7 @@ $taxonomy_config = array(
 	'layout_base_path'     => 'contents-company/company-archive',
 	'sidebar_popup_path'   => 'contents-company/sidebar-popup-filters',
 	'sidebar_topbar_path'  => 'contents-company/sidebar-topbar-filters',
-	'default_view'         => 'grid',
+	'default_view'         => jobus_opt( 'company_archive_attr_layout', 'grid' ),
 	'pagination_labels'    => array(
 		'prev' => '<img src="' . esc_url( JOBUS_IMG . '/icons/prev.svg' ) . '" alt="' . esc_attr__( 'arrow-left', 'jobus' ) . '" class="jbs-me-2" />' . esc_html__( 'Prev', 'jobus' ),
 		'next' => esc_html__( 'Next', 'jobus' ) . '<img src="' . esc_url( JOBUS_IMG . '/icons/next.svg' ) . '" alt="' . esc_attr__( 'arrow-right', 'jobus' ) . '" class="jbs-ms-2" />',

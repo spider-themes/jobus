@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div class="accordion-box list-style">
+<div class="jbs-accordion-box list-style">
 	<?php
 	while ( $job_query->have_posts() ) : $job_query->the_post();
 		// Use reusable job list item template per Constitution VI: Code Deduplication & Reusability

@@ -75,7 +75,7 @@
         TaxonomyManager: function (taxonomy) {
             const $list = $(taxonomy.listSelector);
             const $input = $(taxonomy.inputSelector);
-            let $inputWrapper = $list.find('.taxonomy-input-wrapper');
+            let $inputWrapper = $list.find('.jbs-taxonomy-input-wrapper');
 
             // Track newly created terms
             const tempTerms = [];
@@ -90,16 +90,16 @@
             // If no input wrapper exists → create one
             if ($inputWrapper.length === 0) {
                 $inputWrapper = $(`
-                    <li class="taxonomy-input-wrapper" style="display:none;">
-                        <input type="text" class="taxonomy-input" placeholder="Type and press Enter to add">
-                        <ul class="taxonomy-suggestions jbs-dropdown-menu"></ul>
+                    <li class="jbs-taxonomy-input-wrapper" style="display:none;">
+                        <input type="text" class="jbs-taxonomy-input" placeholder="Type and press Enter to add">
+                        <ul class="jbs-taxonomy-suggestions jbs-dropdown-menu"></ul>
                     </li>
                 `);
-                $list.find('.more_tag').before($inputWrapper);
+                $list.find('.jbs-more_tag').before($inputWrapper);
             }
 
             const $textInput = $inputWrapper.find('input');
-            const $suggestions = $inputWrapper.find('.taxonomy-suggestions');
+            const $suggestions = $inputWrapper.find('.jbs-taxonomy-suggestions');
 
             /**
              * Show taxonomy input when "+" button clicked
@@ -123,7 +123,7 @@
 
                     // Update hidden input with remaining IDs
                     const remainingIds = [];
-                    $list.find('.is_tag').each(function () {
+                    $list.find('.jbs-is_tag').each(function () {
                         remainingIds.push($(this).data(taxonomy.dataAttr));
                     });
                     $input.val(remainingIds.join(','));
@@ -138,7 +138,7 @@
                 const finalIds = [];
                 const finalTerms = [];
 
-                $list.find('.is_tag').each(function () {
+                $list.find('.jbs-is_tag').each(function () {
                     const $tag = $(this);
                     const id = parseInt($tag.data(taxonomy.dataAttr));
                     const name = $tag.find('button')
@@ -199,12 +199,12 @@
                             // Add "create new" option if not an exact match
                             const exactMatch = response.data.some(term => term.name.toLowerCase() === query.toLowerCase());
                             if (!exactMatch) {
-                                $suggestions.append(`<li class="jbs-dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                                $suggestions.append(`<li class="jbs-dropdown-item jbs-create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
                             }
                             $suggestions.show();
                         } else {
                             // No results → show create option
-                            $suggestions.append(`<li class="jbs-dropdown-item create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
+                            $suggestions.append(`<li class="jbs-dropdown-item jbs-create-new-term" data-term-name="${query}"><strong>Create:</strong> "${query}"</li>`);
                             $suggestions.show();
                         }
                     },
@@ -218,7 +218,7 @@
              */
             $suggestions.on('click', 'li', function () {
                 const $item = $(this);
-                if ($item.hasClass('create-new-term')) {
+                if ($item.hasClass('jbs-create-new-term')) {
                     createTerm($item.data('term-name'));
                 } else {
                     addTerm($item.data('term-id'), $item.text());
@@ -262,7 +262,7 @@
             function createTerm(termName) {
                 // Check if already exists in current list
                 let alreadyExists = false;
-                $list.find('.is_tag').each(function () {
+                $list.find('.jbs-is_tag').each(function () {
                     const existingName = $(this).find('button').text().trim().replace(' ×', '');
                     if (existingName.toLowerCase() === termName.toLowerCase()) {
                         alreadyExists = true;
@@ -311,7 +311,7 @@
             function addTerm(termId, termName) {
                 // Prevent duplicates
                 let alreadyExists = false;
-                $list.find('.is_tag').each(function () {
+                $list.find('.jbs-is_tag').each(function () {
                     if ($(this).data(taxonomy.dataAttr) == termId) {
                         alreadyExists = true;
                         return false;
@@ -324,11 +324,11 @@
                 }
 
                 const newTag = $(`
-                    <li class="is_tag" data-${taxonomy.dataAttr}="${termId}">
+                    <li class="jbs-is_tag" data-${taxonomy.dataAttr}="${termId}">
                         <button type="button">${termName} <i class="bi bi-x"></i></button>
                     </li>
                 `);
-                $list.find('.more_tag').before(newTag);
+                $list.find('.jbs-more_tag').before(newTag);
 
                 // Update hidden input
                 let ids = $input.val() ? $input.val().split(',') : [];

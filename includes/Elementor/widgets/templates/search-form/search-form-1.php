@@ -22,14 +22,14 @@ if (!defined('ABSPATH')) {
                         <div class="input-box<?php echo esc_attr($border_left) ?>">
                             <?php
                             if (!empty($item[ 'attr_title' ])) { ?>
-                                <div class="label"><?php echo esc_html($item[ 'attr_title' ]) ?></div>
+                                <div class="jbs-label"><?php echo esc_html($item[ 'attr_title' ]) ?></div>
                                 <?php
                             }
 
                             // Select job category or job tag
                             if ($select_job_attr == 'jobus_job_cat' || $select_job_attr == 'jobus_job_location' || $select_job_attr == 'jobus_job_tag') {
                                 ?>
-                                <select class="jbs-nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>"
+                                <select class="jbs-nice-select jbs-lg" name="<?php echo esc_attr($select_job_attr) ?>"
                                         id="<?php echo esc_attr($select_job_attr) ?>">
                                     <?php
                                     $taxonomy_terms = get_terms($select_job_attr);
@@ -45,7 +45,7 @@ if (!defined('ABSPATH')) {
 
                                 if ( $item['layout_type'] == 'dropdown' ) {
                                     ?>
-                                    <select class="jbs-nice-select lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
+                                    <select class="jbs-nice-select jbs-lg" name="<?php echo esc_attr($select_job_attr) ?>" id="<?php echo esc_attr($select_job_attr) ?>">
                                         <?php
                                         if ($job_specifications) {
                                             foreach ( $job_specifications as $job_spec_value ) {
@@ -62,7 +62,7 @@ if (!defined('ABSPATH')) {
                                     <?php
                                 } elseif ($item['layout_type'] == 'text' ) {
                                     ?>
-                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="keyword">
+                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="jbs-keyword">
                                     <?php
                                 }
                             }
@@ -73,15 +73,15 @@ if (!defined('ABSPATH')) {
                 }
             }
             ?>
-            <div class="jbs-col-md-3 job-search-btn-wrapper">
-                <button type="submit" class="job-search-one-btn jbs-fw-500 jbs-text-uppercase tran3s search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
+            <div class="jbs-col-md-3 jbs-job-search-btn-wrapper">
+                <button type="submit" class="job-search-one-btn jbs-fw-500 jbs-text-uppercase jbs-tran3s jbs-search-btn"><?php echo esc_html($settings[ 'submit_btn' ]) ?></button>
             </div>
         </div>
     </form>
     <?php
     if ($settings[ 'is_keyword' ] == 'yes' ) {
         ?>
-        <ul class="tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-20">
+        <ul class="jbs-tags jbs-d-flex jbs-flex-wrap jbs-style-none jbs-mt-20">
             <?php
             if ( !empty($settings['keyword_label']) ) { ?>
                 <li class="jbs-fw-500 jbs-text-white jbs-me-1"><?php echo esc_html($settings[ 'keyword_label' ]) ?></li>

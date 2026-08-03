@@ -56,13 +56,81 @@ if ( ! function_exists( 'jobus_opt' ) ) {
         $value   = $options[ $option ] ?? null;
 
         // Return default if value is null or empty string
-        if ( $value === null || $value === '' ) {
+        if ( null === $value || '' === $value ) {
             return $default;
         }
 
         return $value;
     }
 }
+
+if ( ! function_exists( 'jobus_get_currencies' ) ) {
+    /**
+     * Get list of all available currencies in the system.
+     * 
+     * @return array Currency code => Name/Symbol mapping
+     */
+    function jobus_get_currencies(): array {
+        return [
+            'USD' => 'USD ($)',
+            'EUR' => 'EUR (€)',
+            'GBP' => 'GBP (£)',
+            'INR' => 'INR (₹)',
+            'JPY' => 'JPY (¥)',
+            'CNY' => 'CNY (¥)',
+            'KRW' => 'KRW (₩)',
+            'AUD' => 'AUD (A$)',
+            'CAD' => 'CAD (C$)',
+            'CHF' => 'CHF (Fr)',
+            'SEK' => 'SEK (kr)',
+            'NOK' => 'NOK (kr)',
+            'DKK' => 'DKK (kr)',
+            'NZD' => 'NZD ($)',
+            'SGD' => 'SGD ($)',
+            'HKD' => 'HKD ($)',
+            'MYR' => 'MYR (RM)',
+            'PHP' => 'PHP (₱)',
+            'THB' => 'THB (฿)',
+            'IDR' => 'IDR (Rp)',
+            'BDT' => 'BDT (৳)',
+            'PKR' => 'PKR (₨)',
+            'AED' => 'AED (د.إ)',
+            'SAR' => 'SAR (﷼)',
+            'ZAR' => 'ZAR (R)',
+            'BRL' => 'BRL (R$)',
+            'MXN' => 'MXN ($)',
+            'TRY' => 'TRY (₺)',
+            'PLN' => 'PLN (zł)',
+            'CZK' => 'CZK (Kč)',
+            'HUF' => 'HUF (Ft)',
+            'RON' => 'RON (lei)',
+            'NGN' => 'NGN (₦)',
+            'EGP' => 'EGP (E£)',
+            'KES' => 'KES (KSh)',
+            'GHS' => 'GHS (₵)',
+            'VND' => 'VND (₫)',
+            'CLP' => 'CLP ($)',
+            'COP' => 'COP ($)',
+            'ARS' => 'ARS ($)',
+            'PEN' => 'PEN (S/)',
+        ];
+    }
+}
+
+if ( ! function_exists( 'jobus_get_currency' ) ) {
+    /**
+     * Get the global default currency set by the admin.
+     * Optionally falls back to WooCommerce currency if enabled for compatibility.
+     *
+     * @return string ISO 4217 Currency Code
+     */
+    function jobus_get_currency(): string {
+        $currency = jobus_opt( 'jobus_default_currency' );
+        
+        return $currency ? sanitize_text_field( $currency ) : 'USD';
+    }
+}
+
 
 /**
  * Get post meta value
@@ -77,6 +145,26 @@ if ( ! function_exists( 'jobus_meta' ) ) {
         $options = get_post_meta( get_the_ID(), 'jobus_meta_options', true );
 
         return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
+    }
+}
+
+if ( ! function_exists( 'jobus_get_company_verification_badge' ) ) {
+    /**
+     * Get the verification badge for a company if verified.
+     *
+     * @param int|string $company_id The company ID.
+     *
+     * @return string The verification badge HTML.
+     */
+    function jobus_get_company_verification_badge( $company_id ): string {
+        if ( ! $company_id ) {
+            return '';
+        }
+        $meta = get_post_meta( $company_id, 'jobus_meta_company_options', true );
+        if ( ! empty( $meta['company_verified'] ) ) {
+            return '<span class="jbs-company-verification-badge jbs-ms-1" title="' . esc_attr__( 'Verified Company', 'jobus' ) . '"><i class="bi bi-patch-check-fill"></i></span>';
+        }
+        return '';
     }
 }
 
@@ -442,6 +530,15 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     function jobus_count_meta_key_usage( $post_type = 'jobus_job', $meta_key = '', $meta_value = '' ): int {
         global $wpdb;
 
+        // Generate a unique cache key based on the function arguments
+        $cache_key = 'jobus_mk_cnt_' . md5( $post_type . $meta_key . $meta_value );
+
+        // Try to get the count from the transient cache
+        $cached_count = get_transient( $cache_key );
+        if ( false !== $cached_count ) {
+            return (int) $cached_count;
+        }
+
         // Use direct SQL for performance
         $query = "
             SELECT COUNT(DISTINCT p.ID)
@@ -462,6 +559,9 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
             $meta_key,
             $like_value
         ) );
+
+        // Cache the result for 1 hour
+        set_transient( $cache_key, (int) $count, HOUR_IN_SECONDS );
 
         return (int) $count;
     }
@@ -547,33 +647,49 @@ if ( ! function_exists( 'jobus_job_archive_query' ) ) {
  */
 if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
     function jobus_get_selected_company_count( $company_id, $link = true ): int|string {
-        $args = array(
-                'post_type'      => 'jobus_job',
-                'posts_per_page' => $link ? - 1 : 1,
-                'fields'         => 'ids',
-                'meta_query'     => array(
-                        'relation' => 'AND', // Optional, defaults to "AND
-                        array(
-                                'key'     => 'jobus_meta_options',
-                                'value'   => $company_id,
-                                'compare' => 'LIKE',
-                        ),
-                )
-        );
+        $transient_key = 'jobus_company_job_data_' . $company_id;
+        $cached_data   = get_transient( $transient_key );
 
-        $job_posts = new \WP_Query( $args );
+        // If cache is missing, or if link is requested but IDs are missing (though we always fetch IDs now)
+        if ( false === $cached_data || ( $link && ! isset( $cached_data['ids'] ) ) ) {
+            $args = array(
+                    'post_type'              => 'jobus_job',
+                    'posts_per_page'         => - 1,
+                    'fields'                 => 'ids',
+                    'no_found_rows'          => true,
+                    'update_post_meta_cache' => false,
+                    'update_post_term_cache' => false,
+                    'meta_query'             => array(
+                            'relation' => 'AND', // Optional, defaults to "AND
+                            array(
+                                    'key'     => 'jobus_meta_options',
+                                    'value'   => $company_id,
+                                    'compare' => 'LIKE',
+                            ),
+                    )
+            );
+
+            $job_posts = new \WP_Query( $args );
+
+            $cached_data = array(
+                    'count' => count( $job_posts->posts ),
+                    'ids'   => $job_posts->posts
+            );
+
+            set_transient( $transient_key, $cached_data, HOUR_IN_SECONDS );
+        }
 
         // if a link false, then return only count
         if ( ! $link ) {
-            return $job_posts->found_posts;
+            return $cached_data['count'];
         } else {
 
-            $company_ids_arr   = $job_posts->posts;
+            $company_ids_arr   = $cached_data['ids'];
             $company_ids_array = implode( ',', $company_ids_arr );
 
-            // if post counts 1 then return a post-link
-            if ( $job_posts->found_posts == 1 ) {
-                return get_permalink( $company_ids_array );
+            // if post count is exactly 1 then return a direct post-link
+            if ( 1 === $cached_data['count'] && ! empty( $company_ids_arr[0] ) ) {
+                return get_permalink( $company_ids_arr[0] );
             } else {
                 return get_post_type_archive_link( 'jobus_job' ) . '?search_type=company_search&company_ids=' . $company_ids_array;
             }
@@ -591,21 +707,31 @@ if ( ! function_exists( 'jobus_get_selected_company_count' ) ) {
  */
 function jobus_search_terms( string $terms ) {
 
-    $result      = [];
-    $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+    $result = [];
 
-    // Verify the nonce before processing the request
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_filter' ) ) {
-
-        // Check if the parameter is set in the URL and sanitize the input
-        if ( isset( $_GET[ $terms ] ) ) {
-            // If it's an array, sanitize each element, otherwise sanitize the single value
-            if ( is_array( $_GET[ $terms ] ) ) {
-                $result = array_map( 'sanitize_text_field', wp_unslash( $_GET[ $terms ] ) );
+    // Check if the parameter is set in the URL and sanitize the input
+    if ( isset( $_GET[ $terms ] ) ) {
+        // Handle native form arrays
+        if ( is_array( $_GET[ $terms ] ) ) {
+            $result = array_map( 'sanitize_text_field', wp_unslash( $_GET[ $terms ] ) );
+        } else {
+            $safe_value = sanitize_text_field( wp_unslash( $_GET[ $terms ] ) );
+            // Parse modern clean URLs (comma-separated), excluding main keyword search 's'
+            if ( strpos( $safe_value, ',' ) !== false && $terms !== 's' ) {
+                $result = explode( ',', $safe_value );
+                $result = array_map( 'trim', $result );
             } else {
-                $result = [ sanitize_text_field( wp_unslash( $_GET[ $terms ] ) ) ];
+                $result = [ $safe_value ];
             }
         }
+    }
+
+    // Isolate search operations from internal plugin DB formatting mechanics
+    if ( ! empty( $result ) && $terms !== 's' && strpos( $terms, 'radius' ) === false ) {
+        $result = array_map( function( $val ) {
+            // Re-encode modern spaces back into legacy @space@ for exact DB matching
+            return preg_replace( '/\s+/', '@space@', $val );
+        }, $result );
     }
 
     return $result;
@@ -626,6 +752,7 @@ function jobus_search_terms( string $terms ) {
 function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets', array $widgets = [ 'location' ]
 ): array {
 
+    // Load sidebar widget configuration once.
     $sidebar_widgets = jobus_opt( $sidebar_widget_id );
     if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
         foreach ( $sidebar_widgets as $widget ) {
@@ -638,122 +765,50 @@ function jobus_all_search_meta( string $meta_page_id = 'jobus_meta_options', str
     $job_meta_query = array();
 
     if ( is_array( $widgets ) ) {
+        $widgets = array_unique( $widgets ); // Prevent duplicate processing
 
-        $filter_widgets = jobus_opt( $sidebar_widget_id );
-        $search_widgets = [];
-
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' && isset( $widget['widget_name'] ) ) {
-                    $search_widgets[] = $widget['widget_name'];
+        // Determine which widgets are range-type — they are handled separately.
+        $range_widgets = [];
+        if ( isset( $sidebar_widgets ) && is_array( $sidebar_widgets ) ) {
+            foreach ( $sidebar_widgets as $widget ) {
+                if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] && isset( $widget['widget_name'] ) ) {
+                    $range_widgets[] = $widget['widget_name'];
                 }
             }
         }
 
-        foreach ( $widgets as $item => $job_value ) {
+        foreach ( $widgets as $widget_name ) {
+            // Skip empty items and range widgets (which are handled strictly via ID intersections)
+            if ( empty( $widget_name ) || in_array( $widget_name, $range_widgets, true ) ) {
+                continue;
+            }
 
-            if ( ! in_array( $job_value, $search_widgets ) ) {
-                $job_type_meta = jobus_search_terms( $job_value );
+            // Get active filter values exactly matching this exact widget
+            $active_terms = jobus_search_terms( $widget_name );
+            $active_terms = array_filter( $active_terms );
+            
+            if ( ! empty( $active_terms ) ) {
+                // To allow a user to select BOTH "Full Time" AND "Part Time" and see jobs from BOTH,
+                // we must group their individual values with an "OR" logic for this widget scope only.
+                $widget_query = array( 'relation' => 'OR' );
 
-                foreach ( $job_type_meta as $key => $value ) {
-
-                    if ( $item > 0 || $key > 0 ) {
-                        $job_meta_query['relation'] = 'OR';
-                    }
-
-                    if ( $key < 1 ) {
-                        $job_meta_query[ $item ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
-                    }
-
-                    if ( $item < 1 ) {
-                        $job_meta_query[ $key ] = array(
-                                'key'     => $meta_page_id, // Replace it with your actual meta-key for a job-type
-                                'value'   => $value,
-                                'compare' => 'LIKE',
-                        );
-                    }
+                foreach ( $active_terms as $term ) {
+                    $widget_query[] = array(
+                        'key'     => $meta_page_id,
+                        'value'   => $term,
+                        'compare' => 'LIKE',
+                    );
                 }
+
+                $job_meta_query[] = $widget_query;
             }
         }
-
-        return $job_meta_query;
     }
 
     return $job_meta_query;
 }
 
-/**
- * Build WP_Query arguments for meta or taxonomy filtering.
- *
- * Constructs query arguments based on whether filtering by taxonomy or custom meta fields.
- *
- * @param string $data      The type of query: 'taxonomy' or 'meta'. Defaults to empty string.
- * @param string $post_type The post type to query. Defaults to 'jobus_job'.
- * @param string $taxonomy  The taxonomy name if data is 'taxonomy'. Defaults to empty string.
- * @param array  $terms     The terms/meta values to filter by. Defaults to empty array.
- *
- * @return array The constructed query arguments for WP_Query.
- */
-function jobus_meta_taxo_arguments( $data = '', $post_type = 'jobus_job', $taxonomy = '', $terms = [] ) {
-    $data_args = [];
-    if ( $data == 'taxonomy' ) {
-        $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'tax_query'   => array(
-                        array(
-                                'taxonomy' => $taxonomy,
-                                'field'    => 'slug',
-                                'terms'    => $terms,
-                        ),
-                )
-        ];
-    } else {
-        $data_args = [
-                'post_type'   => $post_type,
-                'post_status' => 'publish',
-                'meta_query'  => $terms,
-        ];
-    }
 
-    return $data_args;
-}
-
-/**
- * Merge multiple query results and return unique post IDs.
- *
- * Combines results from multiple WP_Query queries and returns a deduplicated array of post IDs.
- *
- * @param mixed ...$queries Variadic arguments containing query arrays with 'args' key for WP_Query parameters.
- *
- * @return array Array of unique post IDs from all merged queries.
- */
-function jobus_merge_queries_and_get_ids( ...$queries ): array {
-    $combined_post_ids = array();
-
-    foreach ( $queries as $query ) {
-        if ( empty( $query['args'] ) || ! is_array( $query['args'] ) ) {
-            continue; // Skip invalid or empty queries
-        }
-
-        $wp_query = new \WP_Query( $query['args'] );
-        $post_ids = wp_list_pluck( $wp_query->posts, 'ID' );
-
-        if ( ! empty( $post_ids ) ) {
-            $combined_post_ids = array_merge( $combined_post_ids, $post_ids );
-        }
-    }
-
-    // Ensure unique values in the combined array
-    $combined_post_ids = array_unique( $combined_post_ids );
-
-    // If at least two queries have IDs, return the merged array, otherwise return as is
-    return count( $queries ) >= 2 ? $combined_post_ids : $combined_post_ids;
-}
 
 /**
  * Get the post-IDs of all posts with range field values.
@@ -763,59 +818,105 @@ function jobus_merge_queries_and_get_ids( ...$queries ): array {
  *
  * @return array Associative array with widget names as keys and post IDs with their values.
  */
-function jobus_all_range_field_value(): array {
+function jobus_all_range_field_value( string $post_type = 'jobus_job', string $meta_key = 'jobus_meta_options', string $sidebar_widget_id = 'job_sidebar_widgets' ): array {
     global $wpdb;
 
-    $post_ids    = [];
-    $jobus_nonce = ! empty( $_GET['jobus_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['jobus_nonce'] ) ) : '';
+    $filter_widgets = jobus_opt( $sidebar_widget_id );
+    $search_widgets = [];
 
-    if ( $jobus_nonce && wp_verify_nonce( $jobus_nonce, 'jobus_search_nonce' ) ) {
-
-        $filter_widgets = jobus_opt( 'job_sidebar_widgets' );
-        $search_widgets = [];
-
-        if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
-            foreach ( $filter_widgets as $widget ) {
-                if ( isset( $widget['widget_layout'] ) && $widget['widget_layout'] == 'range' ) {
-                    // if you get value in search bar
-                    $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
-                    if ( $widget_name ) {
-                        $search_widgets[] = $widget_name;
-                    }
+    if ( isset( $filter_widgets ) && is_array( $filter_widgets ) ) {
+        foreach ( $filter_widgets as $widget ) {
+            if ( isset( $widget['widget_layout'] ) && 'range' === $widget['widget_layout'] ) {
+                $widget_name = ! empty( $widget['widget_name'] ) ? sanitize_text_field( wp_unslash( $widget['widget_name'] ) ) : '';
+                if ( $widget_name ) {
+                    $search_widgets[] = $widget_name;
                 }
             }
         }
+    }
 
-        if ( ! empty( $search_widgets ) ) {
-            // Fetch only necessary data directly from DB
-            $results = $wpdb->get_results( "
-                SELECT p.ID, pm.meta_value
-                FROM {$wpdb->posts} p
-                INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-                WHERE p.post_type = 'jobus_job'
-                AND p.post_status = 'publish'
-                AND pm.meta_key = 'jobus_meta_options'
-            " );
+    if ( empty( $search_widgets ) ) {
+        return [];
+    }
 
-            if ( $results ) {
-                foreach ( $results as $row ) {
-                    $meta = maybe_unserialize( $row->meta_value );
+    // Cache the heavy unbounded query for 2 hours.
+    // Invalidated on post save/delete via hooks below.
+    $cache_key = 'jobus_range_field_values_' . $post_type;
+    $post_ids  = get_transient( $cache_key );
 
-                    if ( is_array( $meta ) ) {
-                        foreach ( $search_widgets as $serial => $input ) {
-                            $meta_salary = $meta[ $input ] ?? '';
-                            if ( ! empty( $meta_salary ) ) {
-                                $value                           = preg_replace( "/[^0-9-k]/", "", $meta_salary );
-                                $post_ids[ $input ][ $row->ID ] = $value;
-                            }
-                        }
+    if ( false !== $post_ids ) {
+        return $post_ids;
+    }
+
+    $post_ids = [];
+
+    // Fetch only necessary data directly from DB
+    $results = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT p.ID, pm.meta_value
+             FROM {$wpdb->posts} p
+             INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+             WHERE p.post_type = %s
+             AND p.post_status = 'publish'
+             AND pm.meta_key = %s",
+            $post_type,
+            $meta_key
+        )
+    );
+
+    if ( $results ) {
+        foreach ( $results as $row ) {
+            $meta = maybe_unserialize( $row->meta_value );
+
+            if ( is_array( $meta ) ) {
+                foreach ( $search_widgets as $input ) {
+                    $meta_salary = $meta[ $input ] ?? '';
+                    if ( ! empty( $meta_salary ) ) {
+                        $value                         = preg_replace( "/[^0-9-k]/", '', $meta_salary );
+                        $post_ids[ $input ][ $row->ID ] = $value;
                     }
                 }
             }
         }
     }
 
+    set_transient( $cache_key, $post_ids, 2 * HOUR_IN_SECONDS );
+
     return $post_ids;
+}
+
+/**
+ * Invalidate the range field values cache when a job is saved or deleted.
+ *
+ * Ensures the cached salary/range data is never stale after job edits.
+ */
+add_action( 'save_post', function( $post_id ) {
+    $post_type = get_post_type( $post_id );
+    if ( in_array( $post_type, ['jobus_job', 'jobus_candidate', 'jobus_company'] ) ) {
+        delete_transient( 'jobus_range_field_values_' . $post_type );
+        jobus_clear_meta_count_caches();
+    }
+} );
+
+add_action( 'before_delete_post', function( $post_id ) {
+    $post_type = get_post_type( $post_id );
+    if ( in_array( $post_type, ['jobus_job', 'jobus_candidate', 'jobus_company'] ) ) {
+        delete_transient( 'jobus_range_field_values_' . $post_type );
+        jobus_clear_meta_count_caches();
+    }
+} );
+
+/**
+ * Helper: Clear all dynamically cached meta counts (used in sidebar checkboxes)
+ * since WordPress does not support deleting transients by prefix natively.
+ */
+function jobus_clear_meta_count_caches() {
+	global $wpdb;
+	$wpdb->query(
+		"DELETE FROM {$wpdb->options} 
+		 WHERE option_name LIKE '_transient_jobus_cnt_%' 
+		 OR option_name LIKE '_transient_timeout_jobus_cnt_%'"
+	);
 }
 
 
@@ -851,7 +952,7 @@ if ( ! function_exists( 'jobus_showing_post_result_count' ) ) {
             /* translators: 1: start range, 2: end range, 3: total number of posts */
                     __( 'Showing %1$s-%2$s of %3$s results', 'jobus' ),
                     '<span class="jbs-text-dark jbs-fw-500">' . $start_range . '</span>',
-                    '<span class="jbs-text-dark fw-500">' . $end_range . '</span>',
+                    '<span class="jbs-text-dark jbs-fw-500">' . $end_range . '</span>',
                     '<span class="jbs-text-dark jbs-fw-500">' . $total_posts . '</span>'
             );
 
@@ -1112,7 +1213,7 @@ function jobus_count_post_views( int $post_id, string $type = 'job' ): void {
         update_user_meta( $user_id, $user_viewed_key, '1' );
     } else {
         $cookie_key = 'jobus_guest_viewed_' . $type . '_' . $post_id;
-        if ( isset( $_COOKIE[ $cookie_key ] ) && $_COOKIE[ $cookie_key ] === '1' ) {
+        if ( isset( $_COOKIE[ $cookie_key ] ) && '1' === $_COOKIE[ $cookie_key ] ) {
             return; // Already counted for this guest (browser)
         }
         // Only set cookie if headers haven't been sent yet
@@ -1241,5 +1342,97 @@ if ( ! function_exists( 'jobus_get_default_company_logo' ) ) {
 
         // Fallback to default logo
         return plugins_url( 'jobus/assets/images/default-company.png' );
+    }
+}
+
+/**
+ * Get endpoint URL for dashboard navigation.
+ *
+ * Handles both plain and pretty permalink structures and ensures the 'dashboard'
+ * item points to the main dashboard page.
+ *
+ * @param string $endpoint      The endpoint slug (e.g., 'profile', 'jobs').
+ * @param string $dashboard_url The base URL of the dashboard page.
+ *
+ * @return string The correctly formatted URL for the endpoint.
+ */
+if ( ! function_exists( 'jobus_get_dashboard_endpoint_url' ) ) {
+    function jobus_get_dashboard_endpoint_url( string $endpoint, string $dashboard_url ): string {
+        // Special case: the main dashboard doesn't need an endpoint appended
+        if ( 'dashboard' === $endpoint ) {
+            return $dashboard_url;
+        }
+
+        if ( get_option( 'permalink_structure' ) ) {
+            if ( strpos( $dashboard_url, '?' ) !== false ) {
+                $query_string = '?' . wp_parse_url( $dashboard_url, PHP_URL_QUERY );
+                $dashboard_url = current( explode( '?', $dashboard_url ) );
+            } else {
+                $query_string = '';
+            }
+
+            return trailingslashit( $dashboard_url ) . $endpoint . '/' . $query_string;
+        }
+
+        return add_query_arg( $endpoint, '', $dashboard_url );
+    }
+}
+
+if ( ! function_exists( 'jobus_get_application_statuses' ) ) {
+    /**
+     * Single source of truth for job application statuses.
+     *
+     * Add a status here once and it cascades to the admin metabox dropdown,
+     * the employer status selector, the AJAX validator and analytics counts.
+     *
+     * @return array<string, array<string, string>>
+     */
+    function jobus_get_application_statuses(): array {
+        // Labels are returned unescaped; callers escape at output (esc_html / esc_attr).
+        $statuses = [
+            'pending'     => [
+                'label'        => __( 'Pending', 'jobus' ),
+                'badge_class'  => 'jbs-bg-warning',
+                'icon'         => 'bi-hourglass-split',
+                'action_label' => __( 'Mark Pending', 'jobus' ),
+            ],
+            'shortlisted' => [
+                'label'        => __( 'Shortlisted', 'jobus' ),
+                'badge_class'  => 'jbs-bg-info',
+                'icon'         => 'bi-star',
+                'action_label' => __( 'Shortlist', 'jobus' ),
+            ],
+            'approved'    => [
+                'label'        => __( 'Approved', 'jobus' ),
+                'badge_class'  => 'jbs-bg-success',
+                'icon'         => 'bi-check-circle',
+                'action_label' => __( 'Approve', 'jobus' ),
+            ],
+            'rejected'    => [
+                'label'        => __( 'Rejected', 'jobus' ),
+                'badge_class'  => 'jbs-bg-danger',
+                'icon'         => 'bi-x-circle',
+                'action_label' => __( 'Reject', 'jobus' ),
+            ],
+        ];
+
+        return (array) apply_filters( 'jobus_application_statuses', $statuses );
+    }
+}
+
+if ( ! function_exists( 'jobus_get_application_status' ) ) {
+    /**
+     * Resolve a single application's normalized status meta to its descriptor.
+     *
+     * @param int    $application_id Application post ID.
+     * @param string $fallback       Status key to use when meta is missing/unknown.
+     * @return array{key:string,label:string,badge_class:string,icon:string,action_label:string}
+     */
+    function jobus_get_application_status( int $application_id, string $fallback = 'pending' ): array {
+        $statuses = jobus_get_application_statuses();
+        $raw      = (string) get_post_meta( $application_id, 'application_status', true );
+        $key      = isset( $statuses[ $raw ] ) ? $raw : ( isset( $statuses[ $fallback ] ) ? $fallback : 'pending' );
+
+        return array_merge( [ 'key' => $key ], $statuses[ $key ] );
     }
 }

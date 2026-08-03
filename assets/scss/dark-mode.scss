@@ -4,16 +4,16 @@ body.body_dark {
   .jbs-job-classic {
     background: var(--body_bg) !important;
 
-    .filter-area-tab {
-      .light-bg {
+    .jbs-filter-area-tab {
+      .jbs-light-bg {
         background: var(--bs-white) !important;
       }
 
-      .filter-title {
+      .jbs-filter-title {
         color: var(--black_900) !important;
       }
 
-      .main-body {
+      .jbs-main-body {
         ul {
           li {
             label {
@@ -23,7 +23,7 @@ body.body_dark {
           }
         }
 
-        .tags {
+        .jbs-tags {
           label {
             background: var(--black_50) !important;
             color: var(--black_400) !important;
@@ -37,24 +37,24 @@ body.body_dark {
       }
     }
 
-    .main-title {
+    .jbs-filter-heading {
       color: var(--black_900) !important;
     }
 
-    .upper-filter {
-      .total-job-found, .jbs-text-dark {
+    .jbs-upper-filter {
+      .jbs-total-job-found, .jbs-text-dark {
         color: var(--black_600) !important;
       }
     }
 
-    .job-list-one,
-    .job-list-two {
+    .jbs-job-list-one,
+    .jbs-job-list-two {
       .title {
         color: var(--black_100) !important;
       }
 
-      .job-location,
-      .job-category {
+      .jbs-job-location,
+      .jbs-job-category {
         a {
           color: var(--black_400) !important;
         }
@@ -64,7 +64,7 @@ body.body_dark {
         color: var(--p_color) !important;
       }
 
-      .save-btn {
+      .jbs-save-btn {
         background: transparent !important;
 
         &:hover {
@@ -84,7 +84,7 @@ body.body_dark {
       }
     }
 
-    .pagination-wrap {
+    .jbs-pagination-wrap {
       p, .jbs-text-dark {
         color: var(--black_600) !important;
       }
@@ -94,7 +94,7 @@ body.body_dark {
 
   .jbs-job-details {
 
-    .job-head {
+    .jbs-job-head {
       .post-date, .jbs-text-dark {
         color: var(--black_600) !important;
       }
@@ -106,7 +106,7 @@ body.body_dark {
       }
     }
 
-    .job-company-info {
+    .jbs-job-company-info {
       background: var(--bs-white) !important;
 
       ul {
@@ -121,7 +121,7 @@ body.body_dark {
         }
       }
 
-      .job-tags {
+      .jbs-job-tags {
         a {
           background: var(--black_50) !important;
           color: var(--black_400) !important;
@@ -139,7 +139,7 @@ body.body_dark {
     background: var(--body_bg) !important;
 
     .jbs-related-job-slider {
-      .job-list-two {
+      .jbs-job-list-two {
         background: var(--bs-white) !important;
         border-color: var(--white_op10) !important;
 
@@ -147,7 +147,7 @@ body.body_dark {
           color: var(--p_color) !important;
         }
 
-        .job-location {
+        .jbs-job-location {
           a {
             color: var(--black_400) !important;
           }
@@ -157,31 +157,31 @@ body.body_dark {
   }
 
   // Job List & Wrapper Styles
-  .jbs-job-listing-widget .job-list-one,
-  .big-circle .brand-icon {
+  .jbs-job-listing-widget .jbs-job-list-one,
+  .jbs-big-circle .jbs-brand-icon {
     background: var(--bs-white) !important;
     border-color: var(--border_on_highlight) !important;
   }
 
-  .job-list-two.style-two:hover {
+  .jbs-job-list-two.style-two:hover {
     background: var(--bs-white) !important;
   }
 
-  .job-list-two .job-duration {
+  .jbs-job-list-two .jbs-job-duration {
     background: var(--black_50) !important;
     color: var(--black_400) !important;
   }
 
-  .big-circle {
+  .jbs-big-circle {
     background: var(--bs-white) !important;
   }
 
-  .job-listing-wrapper {
-    &.border-wrapper {
+  .jbs-job-listing-wrapper {
+    &.jbs-border-wrapper {
       border-color: var(--border_on_white) !important;
     }
 
-    .job-date {
+    .jbs-job-date {
       color: var(--black_400) !important;
     }
   }
@@ -199,8 +199,8 @@ body.body_dark {
     }
 
     form {
-      .input-box {
-        .label {
+      .jbs-input-box {
+        .jbs-label {
           color: var(--black_900) !important;
         }
 
@@ -210,7 +210,7 @@ body.body_dark {
       }
     }
 
-    .tags {
+    .jbs-tags {
       .jbs-text-white {
         color: var(--black_900);
       }
@@ -222,16 +222,16 @@ body.body_dark {
   }
 
   // Expert & Feedback Sections
-  .expert-section-one {
-    .card-style-three .post {
+  .jbs-expert-section-one {
+    .jbs-card-style-three .jbs-post {
       color: var(--black_100) !important;
     }
   }
 
-  .feedback-block-one {
+  .jbs-feedback-block-one {
     background: var(--bs-white) !important;
 
-    .review {
+    .jbs-review {
       border-top-color: var(--border_on_highlight) !important;
     }
   }
@@ -243,21 +243,21 @@ body.body_dark {
   }
 
   .jbs-category-widget-one {
-    .card-wrapper {
+    .jbs-card-wrapper {
       .card-item {
-        .box-info {
+        .jbs-box-info {
           .icon {
             img {
               filter: invert(1);
             }
           }
 
-          .title, .total-job {
+          .title, .jbs-total-job {
             color: var(--black_100) !important;
           }
 
           &:hover {
-            .title, .total-job {
+            .title, .jbs-total-job {
               color: var(--jbs-heading_color) !important;
             }
           }
@@ -270,12 +270,12 @@ body.body_dark {
     }
   }
 
-  .spel-accordion {
+  .jbs-spel-accordion {
     h2, h3, h4, h5, h6 {
       color: #ffffff !important;
     }
 
-    .accordion_btn_link, .card-body p {
+    .jbs-accordion_btn_link, .card-body p {
       color: var(--black_100) !important;
     }
   }
@@ -295,7 +295,7 @@ body.body_dark {
     }
   }
 
-  .jbs-job-details .share-buttons li .share-item {
+  .jbs-job-details .jbs-share-buttons li .jbs-share-item {
     background-color: var(--black_50) !important;
     color: #fff !important;
     i {

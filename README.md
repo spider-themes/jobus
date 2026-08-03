@@ -3,7 +3,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-1.4.0-orange.svg)](https://github.com/spider-themes/jobus)
+[![Version](https://img.shields.io/badge/Version-1.10.0-orange.svg)](https://github.com/spider-themes/jobus)
 
 **Jobus** is a modern, lightweight, and powerful WordPress plugin designed to transform your website into a fully functional **Job Board**, **Recruitment Portal**, or **Hiring Platform**.
 
@@ -17,24 +17,31 @@ Whether you are running a niche job board, a company career page, or a large-sca
 
 - **Unlimited Job Postings** – Create and manage as many job listings as you need
 - **Company Profiles** – Dedicated pages for companies with logos, descriptions, and active jobs
+- **Verified Badges** – Highlight trusted companies with verified badges
 - **Job Specifications** – Add detailed requirements (Salary, Experience, Job Type, etc.)
 - **Location-Based Listings** – Assign locations to jobs for easy filtering
+- **External Applications** – Redirect candidates to external websites for job applications
 - **Employer Dashboard** – A frontend dashboard to manage listings and profile details
 
 ### For Candidates & Job Seekers
 
 - **Candidate Profiles** – Users can create professional profiles/resumes
-- **Easy Application** – Apply to jobs directly via a built-in form
+- **Easy Application** – Apply to jobs directly via a built-in form, or apply as a guest without an account
 - **Candidate Dashboard** – Manage applications and profile settings
-- **Job Search & Filters** – Find jobs by keyword, location, and category
+- **Job Search & Filters** – Fast, accurate, and smooth job filtering by keyword, location, and category
+- **Radius Search** – Find jobs based on your nearby location using geolocation
 
 ### Powerful Management Tools
 
 - **Frontend Dashboards** – Separate dashboards for Employers and Candidates
-- **Application Tracking** – View and manage job applications from the backend
+- **Social Login** – Easy login and signup using Google, Facebook, and LinkedIn
+- **Messaging System** – Built-in messaging system for communication between employers and candidates
+- **Application Tracking** – View and manage job applications with easy-to-read applicant details from the backend
 - **Custom User Roles** – Automatically assigns Employer and Candidate roles
 - **Social Sharing** – Built-in social share buttons for job posts
 - **Featured Jobs** – Highlight premium listings to boost visibility
+- **Google Jobs Integration** – Built-in Schema markup for improved visibility on Google Jobs search
+- **Demo Importer** – One-click demo setup with sample jobs to get started instantly
 
 ### Design & Customization
 
@@ -42,6 +49,7 @@ Whether you are running a niche job board, a company career page, or a large-sca
 - **Elementor Widgets** – Drag-and-drop widgets for Job Listings, Search Forms, Categories, and more
 - **Gutenberg Blocks** – Native WordPress block support for modern editing
 - **Customizable Appearance** – Control colors, layouts, and styles via settings
+- **Modern Design & Layouts** – Enjoy improved sidebars and a consistent, modern design across Candidate, Job, and Company pages
 
 ---
 
@@ -102,12 +110,13 @@ jobus/
 │   ├── dashboard/         # Dashboard templates
 │   └── loop/              # Loop templates
 ├── assets/                # Static assets
-│   ├── css/              # Compiled CSS
-│   ├── scss/             # SCSS source files
 │   ├── js/               # JavaScript files
 │   └── images/           # Image assets
-├── build/                 # Compiled Gutenberg blocks
+├── build/                 # Generated assets and block builds
+│   └── css/              # Generated frontend/admin CSS
 ├── src/                   # Gutenberg block source files
+├── assets/                # Static assets and SCSS sources
+│   ├── scss/             # Tracked SCSS source files
 ├── languages/             # Translation files
 └── vendor/                # Composer dependencies
 ```
@@ -137,8 +146,7 @@ npm install
 | Command         | Description                               |
 | --------------- | ----------------------------------------- |
 | `npm run start` | Start development mode with hot reloading |
-| `npm run build` | Build production-ready assets             |
-| `npm run sass`  | Watch and compile SCSS files              |
+| `npm run build` | Build Gutenberg blocks and generated CSS  |
 
 ### Building Blocks
 
@@ -265,18 +273,43 @@ Contributions are welcome! Please follow these steps:
 
 ## 📄 Changelog
 
-### 1.4.0 (13 Dec 2025)
+### 1.10.1 (June 19, 2026)
 
-- **New:** Added candidate pagination style and job status styling
-- **New:** Allow job applications without login (configurable from settings)
-- **New:** Applications page added to the Candidate Dashboard
-- **New:** Dashboard customization options added to the Settings page
-- **New:** Default company logo option added for missing logos
-- **Fixed:** Job list delete button issue resolved
-- **Fixed:** Candidate and employer user role issues fixed
-- **Tweaked:** Dashboard layout spacing and button padding refined
+- **Enhanced:** Improved filter performance with optimized meta key usage count caching.
+- **Enhanced:** Reduced database queries in filter calculations for better archive page performance.
+- **Fixed:** Resolved filter issues.
 
-[View Full Changelog](CHANGELOG.md)
+### 1.10.0 (June 1, 2026)
+
+- **New:** Application Details page added to Employer Dashboard with comprehensive candidate information and application status
+- **Enhanced:** Improved avatar display and styling for Candidates and Companies
+- **Enhanced:** Added AJAX loader for job submission in Employer Dashboard
+- **Enhanced:** Improved Saved Candidates page with AJAX search, smart empty state, and better layout
+- **Enhanced:** Improved candidate management experience in Saved Candidates section
+- **Fixed:** Fixed job status handling (Draft, Pending, Publish) based on admin settings
+- **Fixed:** Ensured proper submission behavior according to monetization and job approval rules
+
+### 1.9.0 (24 April 2026)
+
+- **New:** Easy login and signup using Google, Facebook, and LinkedIn
+- **New:** Find jobs based on your nearby location
+- **New:** One-click demo setup with sample jobs
+- **New:** Apply for jobs without creating an account (Sign In / Register / Guest options)
+- **New:** Verified badge added for trusted companies
+- **New:** Option to redirect users to external websites for job applications
+- **New:** Improved visibility on Google Jobs search
+- **New:** Simple and consistent messaging system
+- **Enhanced:** Improved sidebar design for Candidate, Job, and Company pages
+- **Enhanced:** Faster and smoother job filtering experience
+- **Enhanced:** More consistent design across all pages
+- **Enhanced:** Easier-to-read applicant details in admin panel
+- **Enhanced:** Faster and more accurate search results
+- **Fixed:** Fixed issues with registration and job application process
+- **Fixed:** Fixed job application popup design and functionality
+- **Fixed:** Fixed sidebar and loading design saving issue
+- **Fixed:** Fixed popup search results for jobs, candidates, and companies
+
+[View Full Changelog](changelog.txt)
 
 ---
 

@@ -13,7 +13,7 @@
       width: 50%;
     }
 
-    .box-info {
+    .jbs-box-info {
       display: block;
       background: var(--bs-white);
       -webkit-border-radius: 60px;
@@ -44,7 +44,7 @@
         transition: 0.3s;
       }
 
-      .total-job {
+      .jbs-total-job {
         transition: 0.3s;
         font-size: 14px;
         color: rgba($color: #09321C, $alpha: 0.6);
@@ -56,14 +56,14 @@
 
 /*========== Category Widget Two ==========*/
 .jbs-category-widget-two {
-  .card-wrapper {
+  .jbs-card-wrapper {
     row-gap: 15px;
     column-gap: 15px;
     margin: 0 -5px;
 
     .jbs-card-item {
 
-      .box-info {
+      .jbs-box-info {
         padding: 16px 38px;
         border-radius: 60px;
         background: #F2F8F4;
@@ -146,13 +146,13 @@
 
     }
 
-    .total-job {
+    .jbs-total-job {
       transition: 0.3s;
       font-size: 16px;
       color: rgba($color: #09321C, $alpha: 0.4);
     }
 
-    &.bg-color {
+    &.jbs-bg-color {
       box-shadow: none;
       background: var(--jbs-brand_color_4);
 
@@ -180,7 +180,7 @@
   .jbs-grid-column-3 {
     margin: 0 -20px;
 
-    .grid-sizer, .isotop-item {
+    .jbs-grid-sizer, .jbs-isotop-item {
       width: 33.3333%;
       padding: 0 20px;
       @media (max-width: 992px) {

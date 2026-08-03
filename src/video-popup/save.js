@@ -14,7 +14,7 @@ function Save({attributes}) {
 
     return (
         <div {...blockProps}>
-            <a href={attributes.videoUrl} className="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" style={
+            <a href={attributes.videoUrl} className="fancybox jbs-rounded-circle video-icon jbs-tran3s jbs-text-center" style={
                 {
                     backgroundColor: attributes.icon_bg_color,
                 }

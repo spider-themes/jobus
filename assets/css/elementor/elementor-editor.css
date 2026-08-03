@@ -76,12 +76,12 @@
 }
 
 /* Set position relative for pro widget class */
-.jobus-pro-widget {
+.jbs-pro-widget {
     position: relative;
 }
 
 /* PRO badge overlay */
-.jobus-pro-widget::after {
+.jbs-pro-widget::after {
     content: "PRO";
     position: absolute;
     right: 0;
@@ -102,43 +102,43 @@
 
 
 /** === Categories === **/
-.category_1::before {
+.jbs-category_1::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/category_1.png") no-repeat top;
 }
-.category_2::before {
+.jbs-category_2::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/category_2.png") no-repeat top;
 }
-.category_3::before {
+.jbs-category_3::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/category_3.png") no-repeat top;
 }
 
 /** === Search From === **/
-.search_form_1::before {
+.jbs-search_form_1::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/search_form_1.jpg") no-repeat top;
 }
 
-.search_form_2::before {
+.jbs-search_form_2::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/search_form_2.jpg") no-repeat top;
 }
 
-.search_form_3::before {
+.jbs-search_form_3::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/search_form_3.jpg") no-repeat top;
 }
 
 /** === Job Listing === **/
-.job_1::before {
+.jbs-job_1::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/job_1.png") no-repeat top;
 }
 
 /** === Company Listing === **/
-.company_1::before {
+.jbs-company_1::before {
     background-size: cover;
     background: url("../../images/el-editor-preview/company_1.png") no-repeat top;
 }

@@ -23,6 +23,7 @@
         init: function () {
             this.savePost(); // save for job and candidate posts
             this.jobApplicationForm(); // Initialize job application form submission by candidates
+            this.applicationFormUI(); // Guest gate panel switch + field validation messages
             this.emailFormToCandidate(); // Initialize email form to candidate
             this.registerForm(); // Initialize registration form
         },
@@ -67,11 +68,11 @@
                             console.log('AJAX success:', res.data.status, 'for post', postId, 'type', postType);
                             // Always update button state
                             if (res.data.status === 'added') {
-                                btn.addClass('saved');
+                                btn.addClass('jbs-saved');
                                 icon.attr('class', 'bi bi-bookmark-check-fill jbs-text-primary');
                                 btn.attr('title', postType === 'jobus_job' ? 'Saved' : postType === 'jobus_candidate' ? 'Saved Candidate' : 'Saved');
                             } else if (res.data.status === 'removed') {
-                                btn.removeClass('saved');
+                                btn.removeClass('jbs-saved');
                                 icon.attr('class', 'bi bi-bookmark-dash');
                                 btn.attr('title', postType === 'jobus_job' ? 'Save Job' : postType === 'jobus_candidate' ? 'Save Candidate' : 'Save');
                             }
@@ -98,9 +99,15 @@
             jobApplication.on('submit', function (event) {
                 event.preventDefault();
 
+                // Collect FormData before reset
                 const formData = new FormData(this);
                 formData.append('action', 'jobus_job_application');
 
+                // Show success instantly and clear the form
+                jobApplication[0].reset();
+                $('#jbs-application-inline-success').fadeIn();
+
+                // Save to server in background
                 $.ajax({
                     url: jobus_public_obj.ajax_url,
                     type: 'POST',
@@ -108,14 +115,13 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        if (response.success) {
-                            $('#applicationSuccessMessage').fadeIn().delay(3000).fadeOut();
-                            jobApplication[0].reset();
-                        } else {
+                        if (!response.success) {
+                            $('#jbs-application-inline-success').hide();
                             alert(response.data && response.data.message ? response.data.message : 'Submission failed.');
                         }
                     },
                     error: function (xhr, status, error) {
+                        $('#jbs-application-inline-success').hide();
                         console.error(error);
                         alert('Error submitting application. Please try again.');
                     }
@@ -125,18 +131,60 @@
 
 
         /**
+         * Guest gate panel switch and custom HTML5 validation messages for the application form.
+         */
+        applicationFormUI: function () {
+
+            $(document).on('click', '#jbs-continue-as-guest', function () {
+                $('#jbs-apply-gate-panel').hide();
+                $('#jbs-apply-form-panel').show();
+            });
+
+            var i18n = (typeof jobus_public_obj !== 'undefined' && jobus_public_obj.i18n) ? jobus_public_obj.i18n : {};
+
+            // 'invalid' does not bubble — use capture phase to handle all fields in the form
+            document.addEventListener('invalid', function (e) {
+                var el = e.target;
+                if (!el.form || el.form.id !== 'jobApplicationForm') return;
+
+                if (el.id === 'email') {
+                    if (el.validity.valueMissing) {
+                        el.setCustomValidity(i18n.email_required || '');
+                    } else if (el.validity.typeMismatch) {
+                        el.setCustomValidity(i18n.email_invalid || '');
+                    }
+                } else {
+                    var msgMap = {
+                        firstName: i18n.first_name_required,
+                        lastName:  i18n.last_name_required,
+                        phone:     i18n.phone_required,
+                        message:   i18n.message_required,
+                        upload_cv: i18n.cv_required,
+                    };
+                    if (msgMap[el.id]) el.setCustomValidity(msgMap[el.id]);
+                }
+            }, true);
+
+            // Reset custom validity on input/change so re-validation runs cleanly
+            $(document).on('input change', '#jobApplicationForm input, #jobApplicationForm textarea', function () {
+                this.setCustomValidity('');
+            });
+        },
+
+
+        /**
          * Handles email form submission to candidate.
          */
         emailFormToCandidate: function () {
 
-            $('#candidate-email-from').on('submit', function (event) {
+            $('#candidate-email-from, #jbs-candidate-email-from').on('submit', function (event) {
                 event.preventDefault(); // Prevent default form submission
 
                 let formData = $(this).serialize(); // Serialize form data
-                let candidateId = $('#candidate-id').val(); // Get candidate ID
+                let candidateId = $(this).find('#candidate-id, #jbs-candidate-id').val(); // Get candidate ID
 
                 // Add class to the message container on submit button click
-                let messageContainer = $('#email-form-message');
+                let messageContainer = $(this).find('#email-form-message, #jbs-email-form-message');
 
                 $.ajax({
                     url: jobus_public_obj.ajax_url, // WordPress AJAX URL
@@ -149,7 +197,7 @@
                             // For success responses, data is a string
                             let successMessage = typeof response.data === 'string' ? response.data : 'Message sent successfully!';
                             messageContainer.addClass('success').text(successMessage);
-                            $('#candidate-email-from')[0].reset(); // Clear the form fields
+                            event.target.reset(); // Clear the form fields
 
                             // Remove the message after 10 seconds
                             setTimeout(function () {
@@ -226,8 +274,8 @@
                 });
             };
 
-            handleRegistration('#jobus-candidate-registration-form', 'jobus_register_candidate', 'register_candidate_nonce');
-            handleRegistration('#jobus-employer-registration-form', 'jobus_register_employer', 'register_employer_nonce');
+            handleRegistration('#jbs-candidate-registration-form', 'jobus_register_candidate', 'register_candidate_nonce');
+            handleRegistration('#jbs-employer-registration-form', 'jobus_register_employer', 'register_employer_nonce');
         }
 
     };

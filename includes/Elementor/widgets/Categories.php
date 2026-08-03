@@ -80,7 +80,7 @@ class Categories extends Widget_Base {
 		];
 
 		foreach ( $pro_options as $key => $option ) {
-			$icon_suffix = jobus_unlock_themes( 'jobi', 'jobi-child' ) ? '' : ' jobus-pro-widget';
+			$icon_suffix = jobus_unlock_themes( 'jobi', 'jobi-child' ) ? '' : ' jbs-pro-widget';
 			$free_option[ $key ] = [
 				'title' => $option['title'],
 				'icon'  => $option['icon'] . $icon_suffix

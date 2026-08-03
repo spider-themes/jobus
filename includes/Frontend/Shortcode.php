@@ -193,9 +193,9 @@ class Shortcode
 
 		ob_start();
 ?>
-		<div class="login-form-wrapper section-padding">
+		<div class="jbs-login-form-wrapper section-padding">
 			<?php if ($show_demo) : ?>
-				<div class="login-form-demo jbs-text-start">
+				<div class="jbs-login-form-demo jbs-text-start">
 					<?php esc_html_e('Username', 'jobus'); ?>:
 					<strong><?php echo esc_html($demo_candidate); ?></strong>
 					<?php esc_html_e('or', 'jobus'); ?>
@@ -215,23 +215,23 @@ class Shortcode
 				</a>
 			</p>
 		</div>
-		<div class="form-wrapper login-form-box m-auto">
+		<div class="jbs-form-wrapper login-form-box jbs-m-auto">
 			<form name="jobus_login_form" id="jobus_login_form" action="<?php echo esc_url(wp_login_url()); ?>" method="post" class="mt-10">
-				<div class="row">
+				<div class="jbs-row">
 					<div class="jbs-col-12">
-						<div class="input-group-meta jbs-position-relative jbs-mb-25">
+						<div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
 							<label for="user_login"><?php echo esc_html($atts['username_label']); ?></label>
 							<input type="text" name="log" id="user_login" class="input" value=""
 								placeholder="<?php echo esc_attr($atts['username_placeholder']); ?>" autocomplete="username">
 						</div>
 					</div>
 					<div class="jbs-col-12">
-						<div class="input-group-meta jbs-position-relative jbs-mb-20">
+						<div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
 							<label for="user_pass"><?php echo esc_html($atts['password_label']); ?></label>
-							<input type="password" name="pwd" id="user_pass" class="input pass_log_id" value=""
+							<input type="password" name="pwd" id="user_pass" class="input jbs-pass_log_id" value=""
 								placeholder="<?php echo esc_attr($atts['password_placeholder']); ?>" autocomplete="current-password">
-							<span class="placeholder_icon">
-								<span class="passVicon">
+							<span class="jbs-placeholder_icon">
+								<span class="jbs-passVicon">
 									<img src="<?php echo esc_url(JOBUS_IMG . '/dashboard/icons/view.svg'); ?>"
 										alt="<?php esc_attr_e('Toggle password visibility', 'jobus'); ?>" class="eye-icon">
 								</span>
@@ -239,7 +239,7 @@ class Shortcode
 						</div>
 					</div>
 					<div class="jbs-col-12">
-						<div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
+						<div class="jbs-agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
 							<div>
 								<input name="rememberme" type="checkbox" id="rememberme" value="forever">
 								<label for="rememberme"><?php echo esc_html($atts['remember_label']); ?></label>
@@ -250,7 +250,7 @@ class Shortcode
 						</div>
 					</div>
 					<div class="jbs-col-12">
-						<button type="submit" name="wp-submit" id="wp-submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20">
+						<button type="submit" name="wp-submit" id="wp-submit" class="jbs-btn-eleven jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20">
 							<?php echo esc_html($atts['submit_label']); ?>
 						</button>
 						<input type="hidden" name="redirect_to" value="<?php echo esc_url($redirect_url); ?>">
@@ -286,7 +286,7 @@ class Shortcode
 				$page_url = trailingslashit($page_url);
 			}
 		?>
-			<div class="text-center">
+			<div class="jbs-text-center">
 				<h2 class="name">
 					<?php
 					/* translators: %s: user display name */
@@ -295,7 +295,7 @@ class Shortcode
 				</h2>
 				<p><?php esc_html_e('You are currently logged in to your account.', 'jobus'); ?></p>
 				<p><?php esc_html_e('If you wish to log out, please click the button below.', 'jobus'); ?></p>
-				<div class="user-action-buttons">
+				<div class="jbs-user-action-buttons">
 					<a href="<?php echo esc_url(wp_logout_url(home_url('/'))) ?>" class="btn-three">
 						<?php esc_html_e('Logout', 'jobus') ?>
 					</a>
@@ -303,7 +303,7 @@ class Shortcode
 						<?php esc_html_e('Dashboard', 'jobus') ?>
 					</a>
 				</div>
-				<p class="mt-3">
+				<p class="jbs-mt-3">
 					<?php esc_html_e('Or return to the', 'jobus'); ?>
 					<a href="<?php echo esc_url(home_url('/')) ?>"> <?php esc_html_e('Homepage', 'jobus') ?> </a>
 				</p>

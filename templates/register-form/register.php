@@ -3,6 +3,9 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+use jobus\includes\Classes\OAuth\Provider_Manager;
+use jobus\includes\Classes\OAuth\Social_Login_Config;
+
 // Template variables passed from Blocks::register_form_block_render()
 $nonce                              = $nonce ?? wp_create_nonce('jobus_register_form_nonce');
 $candidate_placeholder_username     = $candidate_username ?? 'Enter Your Name';
@@ -20,25 +23,35 @@ $singin_btn_url   = jobus_opt('signin_btn_url');
 $redirect_url     = ! empty($redirect_url) ? esc_url_raw($redirect_url) : '';
 
 // Get error message and tab from URL
-$jobus_error = ! empty($_GET['jobus_error']) ? sanitize_text_field(urldecode($_GET['jobus_error'])) : '';
 $jobus_tab   = ! empty($_GET['jobus_tab']) ? sanitize_text_field($_GET['jobus_tab']) : 'candidate';
 $is_employer_tab = ($jobus_tab === 'employer');
+$align_class = ! empty($align) ? 'align' . esc_attr($align) : '';
+
+// Shared error message used by both the registration form and social login notices.
+$form_error = sanitize_text_field( urldecode( wp_unslash( $_GET['jobus_error'] ?? '' ) ) );
+
+// Social login feedback query args.
+$social_status   = sanitize_key( wp_unslash( $_GET['jobus_social_status'] ?? '' ) );
+$social_provider = sanitize_key( wp_unslash( $_GET['jobus_social_provider'] ?? '' ) );
+$social_manager  = class_exists( Provider_Manager::class ) ? Provider_Manager::instance() : null;
+$social_buttons  = $social_manager ? $social_manager->get_enabled() : [];
 ?>
-<section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80">
-    <div class="user-data-form">
+<section class="registration-section jbs-position-relative jbs-pt-100 jbs-lg-pt-80 jbs-pb-150 jbs-lg-pb-80 <?php echo esc_attr($align_class); ?>">
+    <div class="jbs-user-data-form">
 
         <div class="jbs-text-center">
             <h2><?php esc_html_e('Create Account', 'jobus'); ?></h2>
         </div>
 
-        <div class="form-wrapper jbs-m-auto">
-            <?php if (! empty($jobus_error)) : ?>
-                <div class="jobus-registration-error jbs-alert jbs-alert-danger jbs-mt-20" role="alert">
-                    <?php echo esc_html($jobus_error); ?>
+        <div class="jbs-form-wrapper jbs-m-auto">
+            <?php if ( ! empty( $form_error ) && Social_Login_Config::STATUS_ERROR !== $social_status ) : ?>
+                <div class="jbs-registration-error jbs-alert jbs-alert-danger jbs-mt-20" role="alert">
+                    <?php echo esc_html($form_error); ?>
                 </div>
             <?php endif; ?>
             <div id="registration-message" class="jbs-mt-20"></div>
-            <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-30" role="tablist">
+
+            <ul class="jbs-nav jbs-nav-tabs jbs-border-0 jbs-w-100 jbs-mt-10" role="tablist">
                 <li class="jbs-nav-item" role="presentation">
                     <button class="jbs-nav-link <?php echo ! $is_employer_tab ? 'active' : ''; ?>" data-jbs-toggle="tab" data-jbs-target="#fc1" role="tab">
                         <?php esc_html_e('Candidates', 'jobus'); ?>
@@ -52,8 +65,8 @@ $is_employer_tab = ($jobus_tab === 'employer');
             </ul>
             <div class="jbs-tab-content jbs-mt-40">
                 <div class="jbs-tab-pane jbs-fade <?php echo ! $is_employer_tab ? 'jbs-show active' : ''; ?>" role="tabpanel" id="fc1">
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobus-candidate-registration-form"
-                        id="jobus-candidate-registration-form" method="post">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jbs-candidate-registration-form"
+                        id="jbs-candidate-registration-form" method="post">
                         <?php wp_nonce_field('register_candidate_action', 'register_candidate_nonce'); ?>
                         <input type="hidden" name="action" value="register_candidate">
                         <?php if (! empty($redirect_url)) : ?>
@@ -61,45 +74,45 @@ $is_employer_tab = ($jobus_tab === 'employer');
                         <?php endif; ?>
                         <div class="jbs-row">
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="candidate_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="candidate_username" id="candidate_username"
                                         placeholder="<?php echo esc_attr($candidate_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="candidate_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="candidate_email" id="candidate_email"
                                         placeholder="<?php echo esc_attr($candidate_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="candidate_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_pass" id="candidate_pass"
-                                        placeholder="<?php echo esc_attr($candidate_placeholder_pass) ?>" class="pass_log_id" required>
-                                    <span class="placeholder_icon">
-                                        <span class="passVicon">
+                                        placeholder="<?php echo esc_attr($candidate_placeholder_pass) ?>" class="jbs-pass_log_id" required>
+                                    <span class="jbs-placeholder_icon">
+                                        <span class="jbs-passVicon">
                                             <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="candidate_confirm_pass"><?php esc_html_e('Confirm Password*', 'jobus'); ?></label>
                                     <input type="password" name="candidate_confirm_pass" id="candidate_confirm_pass"
-                                        placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="pass_log_id" required>
-                                    <span class="placeholder_icon">
-                                        <span class="passVicon">
+                                        placeholder="<?php echo esc_attr($candidate_placeholder_confirm_pass) ?>" class="jbs-pass_log_id" required>
+                                    <span class="jbs-placeholder_icon">
+                                        <span class="jbs-passVicon">
                                             <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
+                                <div class="jbs-agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember">
                                         <label for="remember"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
@@ -110,7 +123,7 @@ $is_employer_tab = ($jobus_tab === 'employer');
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="jbs-col-12">
-                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20"><?php esc_html_e(
+                                <button type="submit" class="jbs-btn-eleven jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20"><?php esc_html_e(
                                                                                                                         'Register',
                                                                                                                         'jobus'
                                                                                                                     ); ?></button>
@@ -120,8 +133,8 @@ $is_employer_tab = ($jobus_tab === 'employer');
                 </div>
                 <!-- /.tab-pane -->
                 <div class="jbs-tab-pane jbs-fade <?php echo $is_employer_tab ? 'jbs-show active' : ''; ?>" role="tabpanel" id="fc2">
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jobus-employer-registration-form"
-                        id="jobus-employer-registration-form" method="post">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" name="jbs-employer-registration-form"
+                        id="jbs-employer-registration-form" method="post">
                         <?php wp_nonce_field('register_employer_action', 'register_employer_nonce'); ?>
                         <input type="hidden" name="action" value="register_employer">
                         <?php if (! empty($redirect_url)) : ?>
@@ -129,45 +142,45 @@ $is_employer_tab = ($jobus_tab === 'employer');
                         <?php endif; ?>
                         <div class="jbs-row">
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="employer_username"><?php esc_html_e('Name*', 'jobus'); ?></label>
                                     <input type="text" name="employer_username" id="employer_username"
                                         placeholder="<?php echo esc_attr($employer_placeholder_username) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-25">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-25">
                                     <label for="employer_email"><?php esc_html_e('Email*', 'jobus'); ?></label>
                                     <input type="email" name="employer_email" id="employer_email"
                                         placeholder="<?php echo esc_attr($employer_placeholder_email) ?>" required>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="employer_pass"><?php esc_html_e('Password*', 'jobus'); ?></label>
                                     <input type="password" name="employer_pass" id="employer_pass"
-                                        placeholder="<?php echo esc_attr($employer_placeholder_pass) ?>" class="pass_log_id" required>
-                                    <span class="placeholder_icon">
-                                        <span class="passVicon">
+                                        placeholder="<?php echo esc_attr($employer_placeholder_pass) ?>" class="jbs-pass_log_id" required>
+                                    <span class="jbs-placeholder_icon">
+                                        <span class="jbs-passVicon">
                                             <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="input-group-meta jbs-position-relative jbs-mb-20">
+                                <div class="jbs-input-group-meta jbs-position-relative jbs-mb-20">
                                     <label for="employer_confirm_pass">Confirm Password*</label>
                                     <input type="password" name="employer_confirm_pass" id="employer_confirm_pass"
-                                        placeholder="<?php echo esc_attr($employer_placeholder_confirm_pass) ?>" class="pass_log_id" required>
-                                    <span class="placeholder_icon">
-                                        <span class="passVicon">
+                                        placeholder="<?php echo esc_attr($employer_placeholder_confirm_pass) ?>" class="jbs-pass_log_id" required>
+                                    <span class="jbs-placeholder_icon">
+                                        <span class="jbs-passVicon">
                                             <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye', 'jobus'); ?>">
                                         </span>
                                     </span>
                                 </div>
                             </div>
                             <div class="jbs-col-12">
-                                <div class="agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
+                                <div class="jbs-agreement-checkbox jbs-d-flex jbs-justify-content-between jbs-align-items-center">
                                     <div>
                                         <input type="checkbox" id="remember2">
                                         <label for="remember2"><?php esc_html_e('By hitting the "Register" button, you agree to the', 'jobus'); ?>
@@ -180,7 +193,7 @@ $is_employer_tab = ($jobus_tab === 'employer');
                                 </div> <!-- /.agreement-checkbox -->
                             </div>
                             <div class="jbs-col-12">
-                                <button type="submit" class="btn-eleven jbs-fw-500 tran3s jbs-d-block jbs-mt-20">
+                                <button type="submit" class="jbs-btn-eleven jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20">
                                     <?php esc_html_e('Register', 'jobus'); ?>
                                 </button>
                             </div>
@@ -189,9 +202,42 @@ $is_employer_tab = ($jobus_tab === 'employer');
                 </div>
                 <!-- /.tab-pane -->
             </div>
+            <?php if ( ! empty( $social_buttons ) ) : ?>
+                <div class="jbs-social-auth" data-jbs-social-auth data-context="<?php echo esc_attr( Social_Login_Config::CONTEXT_REGISTER ); ?>">
+                    <?php if ( Social_Login_Config::STATUS_ERROR === $social_status && ! empty( $form_error ) ) : ?>
+                        <div class="jbs-social-auth__notice jbs-alert jbs-alert-danger jbs-mb-20" role="alert">
+                            <?php echo esc_html( $form_error ); ?>
+                        </div>
+                    <?php elseif ( Social_Login_Config::STATUS_SUCCESS === $social_status ) : ?>
+                        <div class="jbs-social-auth__notice jbs-alert jbs-alert-success jbs-mb-20" role="status">
+                            <?php
+                            printf(
+                                /* translators: %s: provider name */
+                                esc_html__( 'Signed in successfully with %s.', 'jobus' ),
+                                esc_html( ucfirst( $social_provider ?: 'social' ) )
+                            );
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <p class="jbs-social-auth__divider"><span><?php esc_html_e( 'OR', 'jobus' ); ?></span></p>
+
+                    <div class="jbs-social-auth__buttons">
+                        <?php foreach ( $social_buttons as $provider ) : ?>
+                            <?php
+                            echo $provider->render_button(
+                                Social_Login_Config::CONTEXT_REGISTER,
+                                ! empty( $redirect_url ) ? $redirect_url : home_url( add_query_arg( [] ) )
+                            ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if (! empty($singin_btn_label) && ($singin_btn_url)) : ?>
                 <p class="jbs-text-center jbs-mt-20 jbs-mb-0"><?php esc_html_e('Have an account?', 'jobus'); ?>
-                    <a href="<?php echo esc_url($singin_btn_url) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#jobusLoginModal">
+                    <a href="<?php echo esc_url($singin_btn_url) ?>" class="jbs-fw-500" data-jbs-toggle="modal" data-jbs-target="#jbsLoginModal">
                         <?php echo esc_html($singin_btn_label); ?>
                     </a>
                 </p>

@@ -65,14 +65,14 @@
 
 
         // Disable last input (only in free)
-        if (!$('body').hasClass('jobus-premium')) {
-            $('.jobus-pro-locked ul li:last-child label input').prop('disabled', true);
+        if (!$('body').hasClass('jbs-premium')) {
+            $('.jbs-pro-locked ul li:last-child label input').prop('disabled', true);
         }
 
         // jobus pro notice
         function jobus_pro_notice() {
-            $('body:not(.jobus-premium) .jobus-pro-locked').on('click', function (e) {
-                if ($(this).hasClass('active-theme-jobi')) {
+            $('body:not(.jbs-premium) .jbs-pro-locked').on('click', function (e) {
+                if ($(this).hasClass('jbs-active-theme-jobi')) {
                     return; // skip alert if unlocked
                 }
                 e.preventDefault();
@@ -86,6 +86,89 @@
             });
         }
         jobus_pro_notice();
+
+        function initSocialLogin() {
+            const config = window.jobusAdminConfig && window.jobusAdminConfig.socialLogin;
+            const root = $('[data-jbs-social-login-admin]');
+
+            if (!config || !root.length) {
+                return;
+            }
+
+            const selectors = config.selectors || {};
+            const activeClass = selectors.isActive || 'is-active';
+            const cardSelector = '[data-jbs-social-login-card]';
+            const panelSelector = '[data-jbs-social-login-panel]';
+
+            function openPanel(providerId) {
+                root.find(cardSelector).removeClass(activeClass);
+                root.find(panelSelector).removeClass(activeClass);
+
+                const card = root.find(cardSelector + '[data-provider="' + providerId + '"]');
+                const targetPanel = root.find('[data-jbs-social-login-panel="' + providerId + '"]');
+
+                card.addClass(activeClass);
+                targetPanel.addClass(activeClass);
+            }
+
+            root.on('click', cardSelector, function () {
+                openPanel($(this).data('provider'));
+            });
+
+            root.on('click', '[data-jbs-social-login-back]', function () {
+                root.find(cardSelector).removeClass(activeClass);
+                root.find(panelSelector).removeClass(activeClass);
+            });
+
+            root.on('click', '.' + (selectors.copy || 'jbs-social-login-admin__copy'), function () {
+                const button = $(this);
+                const text = button.data('copyText');
+
+                if (!text) {
+                    return;
+                }
+
+                const onSuccess = function () {
+                    button.text(config.copied || 'Copied');
+                    window.setTimeout(function () {
+                        button.text(config.copy || 'Copy');
+                    }, 1800);
+                };
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(onSuccess);
+                    return;
+                }
+
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+
+                try {
+                    document.execCommand('copy');
+                    onSuccess();
+                } catch (error) {
+                    // Ignore copy fallback failures.
+                }
+
+                document.body.removeChild(textarea);
+            });
+
+            const defaultProvider = root.data('defaultProvider');
+            if (defaultProvider) {
+                openPanel(defaultProvider);
+            } else {
+                const firstCard = root.find(cardSelector).first();
+                if (firstCard.length) {
+                    openPanel(firstCard.data('provider'));
+                }
+            }
+        }
+        initSocialLogin();
         
     });
 

@@ -15,14 +15,19 @@ $banner_shape_2 = jobus_opt( 'banner_shape_2' );
 
 wp_enqueue_style( 'lightbox' );
 wp_enqueue_script( 'lightbox' );
+
+$top_padding = '';
+if ( function_exists( 'docy_opt' ) && '1' === docy_opt( 'is_top_header' ) ) {
+    $top_padding = 'padding-top: 170px;';
+}
 ?>
 
-<section class="candidates-profile jbs-bg-white">
+<section class="jbs-candidates-profile jbs-bg-white" <?php if ( ! empty( $top_padding ) ) echo 'style="' . esc_attr( $top_padding ) . '"'; ?>>
     <div class="jbs-container">
         <div class="jbs-row">
 
             <div class="jbs-col-xxl-9 jbs-col-lg-8">
-                <div class="candidates-profile-details jbs-me-xxl-5 jbs-pe-xxl-4">
+                <div class="jbs-candidates-profile-details jbs-me-xxl-5 jbs-pe-xxl-4">
                     <div class="inner-card border-style jbs-mb-65 jbs-lg-mb-40">
                         <?php the_content() ?>
                     </div>
@@ -31,7 +36,7 @@ wp_enqueue_script( 'lightbox' );
                         <h3 class="title"><?php echo esc_html( $video_title ) ?></h3>
                         <div class="video-post jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-mt-25 jbs-lg-mt-20 jbs-mb-75 jbs-lg-mb-50"
                              style="background-image: url(<?php echo esc_url( $video_bg_img ) ?>)">
-                            <a class="fancybox jbs-rounded-circle video-icon tran3s jbs-text-center" data-fancybox=""
+                            <a class="fancybox jbs-rounded-circle video-icon jbs-tran3s jbs-text-center" data-fancybox=""
                                href="<?php echo esc_url( $video_url ) ?>">
                                 <i class="bi bi-play"></i>
                             </a>
@@ -169,17 +174,17 @@ wp_enqueue_script( 'lightbox' );
             </div>
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
-                <div class="candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 jbs-md-mt-60">
+                <div class="jbs-candidate-profile-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 jbs-md-mt-60">
 
-                    <div class="candidate-bio bg-wrapper bg-color jbs-mb-60 jbs-md-mb-40">
+                    <div class="candidate-bio bg-wrapper jbs-bg-color jbs-mb-60 jbs-md-mb-40">
                         <?php if ( has_post_thumbnail() ) : ?>
                             <div class="jbs-pt-25">
-                                <div class="candidate-avatar jbs-m-auto">
+                                <div class="jbs-candidate-avatar jbs-m-auto">
                                     <?php the_post_thumbnail( 'full', [ 'class' => 'lazy-img jbs-rounded-circle jbs-w-100' ] ); ?>
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <h3 class="candidate-name jbs-text-center"><?php the_title() ?></h3>
+                        <h3 class="jbs-candidate-name jbs-text-center"><?php the_title() ?></h3>
 
                         <ul class="jbs-style-none">
                             <?php
@@ -296,7 +301,7 @@ wp_enqueue_script( 'lightbox' );
                             // Render the button if valid URL found
                             if ( ! empty( $cv_url ) ) : ?>
                                 <a href="<?php echo esc_url( $cv_url ); ?>"
-                                   class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15"
+                                   class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mt-15"
                                    target="_blank" rel="noopener noreferrer">
                                     <?php esc_html_e( 'Download CV', 'jobus' ); ?>
                                 </a>
@@ -310,7 +315,7 @@ wp_enqueue_script( 'lightbox' );
                             $edit_profile_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'profile/' : '#';
                             ?>
                             <a href="<?php echo esc_url( $edit_profile_url ); ?>"
-                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center tran3s jbs-mt-15">
+                               class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mt-15">
                                 <?php esc_html_e( 'Edit Profile', 'jobus' ); ?>
                             </a>
                             <?php
@@ -337,7 +342,7 @@ wp_enqueue_script( 'lightbox' );
                     }
                     ?>
                     <h4 class="sidebar-title"><?php esc_html_e( 'Email to ', 'jobus' ) ?><?php the_title() ?></h4>
-                    <div class="email-form bg-wrapper bg-color">
+                    <div class="email-form bg-wrapper jbs-bg-color">
                         <p><?php esc_html_e( 'Your email address & profile will be shown to the recipient.', 'jobus' ) ?></p>
                         <form action="javascript:void(0)" name="candidate_email_from" id="candidate-email-from" method="post">
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
@@ -363,7 +368,7 @@ wp_enqueue_script( 'lightbox' );
 
                             <div class="jbs-d-sm-flex">
                                 <button type="submit" name="send_message" id="send_message"
-                                        class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center tran3s">
+                                        class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-flex-fill jbs-text-center jbs-tran3s">
                                     <?php esc_html_e( 'Send Message', 'jobus' ) ?>
                                 </button>
                             </div>

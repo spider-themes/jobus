@@ -36,7 +36,7 @@ switch ( $post_type ) {
         break;
 }
 ?>
-<div class="total-job-found">
+<div class="jbs-total-job-found">
 	<?php esc_html_e( 'All', 'jobus' ); ?>
     <span class="jbs-text-dark jbs-fw-500"><?php echo esc_html( $found_posts ); ?></span>
 	<?php echo esc_html( $message ); ?>

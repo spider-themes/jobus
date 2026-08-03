@@ -105,31 +105,31 @@
       var self = this;
 
       // Next step button.
-      $(document).on("click", ".jobus-next-step", function (e) {
+      $(document).on("click", ".jbs-next-step", function (e) {
         e.preventDefault();
         self.goToStep(self.currentStep + 1);
       });
 
       // Previous step button.
-      $(document).on("click", ".jobus-prev-step", function (e) {
+      $(document).on("click", ".jbs-prev-step", function (e) {
         e.preventDefault();
         self.goToStep(self.currentStep - 1);
       });
 
       // Save & Continue button.
-      $(document).on("click", ".jobus-save-continue", function (e) {
+      $(document).on("click", ".jbs-save-continue", function (e) {
         e.preventDefault();
         self.saveSettings($(this));
       });
 
       // Skip setup link.
-      $(document).on("click", ".jobus-skip-link", function (e) {
+      $(document).on("click", ".jbs-skip-link", function (e) {
         e.preventDefault();
         self.skipOnboarding($(this));
       });
 
       // Progress step click (navigate to step).
-      $(document).on("click", ".jobus-progress-step", function (e) {
+      $(document).on("click", ".jbs-progress-step", function (e) {
         e.preventDefault();
         var stepNum = parseInt($(this).data("step"), 10);
         if (stepNum && stepNum !== self.currentStep) {
@@ -152,12 +152,12 @@
       }
 
       // Hide current step.
-      $('.jobus-step[data-step="' + this.currentStep + '"]').removeClass(
+      $('.jbs-step[data-step="' + this.currentStep + '"]').removeClass(
         "active"
       );
 
       // Show new step.
-      $('.jobus-step[data-step="' + stepNumber + '"]').addClass("active");
+      $('.jbs-step[data-step="' + stepNumber + '"]').addClass("active");
 
       // Update current step.
       this.currentStep = stepNumber;
@@ -178,15 +178,15 @@
     updateProgress: function () {
       var self = this;
 
-      $(".jobus-progress-step").each(function () {
+      $(".jbs-progress-step").each(function () {
         var stepNum = parseInt($(this).data("step"), 10);
 
-        $(this).removeClass("active completed");
+        $(this).removeClass("active jbs-completed");
 
         if (stepNum === self.currentStep) {
           $(this).addClass("active");
         } else if (stepNum < self.currentStep) {
-          $(this).addClass("completed");
+          $(this).addClass("jbs-completed");
         }
       });
     },
@@ -200,9 +200,9 @@
       var self = this;
 
       // Show loading state.
-      $button.addClass("is-loading");
+      $button.addClass("jbs-is-loading");
       $button.prop("disabled", true);
-      $button.find(".btn-arrow").text("⟳");
+      $button.find(".jbs-btn-arrow").text("⟳");
 
       // Collect form data from both forms.
       var formData = {
@@ -235,9 +235,9 @@
         },
         complete: function () {
           // Reset button state.
-          $button.removeClass("is-loading");
+          $button.removeClass("jbs-is-loading");
           $button.prop("disabled", false);
-          $button.find(".btn-arrow").text("→");
+          $button.find(".jbs-btn-arrow").text("→");
         },
       });
     },

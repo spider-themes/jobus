@@ -1,7 +1,7 @@
 /*============= Candidate Job Applied ================*/
-.dashboard-body {
-  .company-name {
-    .company-placeholder {
+.jbs-dashboard-body {
+  .jbs-company-name {
+    .jbs-company-placeholder {
       width: 48px;
       height: 48px;
       background: #CBCBCB;
@@ -12,9 +12,9 @@
     }
   }
 
-  .job-actions {
-    .action-button {
-      .save-btn {
+  .jbs-job-actions {
+    .jbs-action-button {
+      .jbs-save-btn {
         width: 35px;
         height: 35px;
         line-height: 32px;

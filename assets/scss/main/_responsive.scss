@@ -1,49 +1,45 @@
-@media (max-width: 1199px) {
-    .filter-area-tab .main-title {
-        font-size: 20px;
-        margin-top: 20px;
-        text-align: center;
-    }
-}
+// NOTE: Sidebar filter responsive rules (e.g. `.filter-area-tab
+// .jbs-main-title`) now live in `main/_sidebar.scss`. Keep new sidebar
+// filter media queries there alongside the base widget styles.
 
 @media (max-width: 768px) {
 
-    .feedback-section-five .slider-arrows,
+    .jbs-feedback-section-five .jbs-slider-arrows,
     .jbs-related-job .jbs-slick-arrow-one {
         position: static;
     }
 }
 @media (max-width: 768px) {
-    .dashboard-navbar {
+    .jbs-dashboard-navbar {
         transform: translateX(-100%);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
     }
-    .dashboard-body{
+    .jbs-dashboard-body{
         margin-left: 0 !important;
-        .job-list-one{
+        .jbs-job-list-one{
             padding-left: 12px !important;
         }
     }
 }
 @media (max-width: 1024px) {
-    .candidate-info.salary-info {
+    .jbs-candidate-info.salary-info {
         margin-top: 50px !important;
     }
-    .candidate-info.location-info {
+    .jbs-candidate-info.location-info {
         margin-top: 50px !important;
     }
 }
 @media (max-width: 575px) {
-    .candidate-info.location-info {
+    .jbs-candidate-info.location-info {
         margin-top: 20px !important;
     }
-     .profile-btn{
+     .jbs-profile-btn{
             margin-left: 10px !important;
         }
                    
-        .specification-item{
+        .jbs-specification-item{
             flex-wrap: wrap !important;
         }
 }

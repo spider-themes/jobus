@@ -1,0 +1,818 @@
+// ============================================================
+// Sidebar — Archive Filter Widgets
+// ------------------------------------------------------------
+// Single source of truth for the filter widgets used by every
+// archive layout (classic offcanvas, popup modal, topbar
+// collapse) across job / candidate / company post types.
+//
+// Every rule below hangs off a sidebar-only wrapper class
+// (`.jbs-filter-area-tab`, `.jbs-filter-btn`, `.jbs-popUpModal`, or
+// `.jbs-filter-area-tab .jbs-search-form-widget`) so nothing here leaks
+// into theme-level forms elsewhere on the page. Generic-sounding
+// child class names (`.jbs-input-box`, `.jbs-filter-block`, `.jbs-more-btn`,
+// `.jbs-slider`, `.jbs-progress`, etc.) are safely nested under one of
+// those wrappers — no standalone top-level styling exists.
+//
+// Selectors are written specific enough (attribute + class
+// chaining) to outrank common theme form resets like
+// `.ast-container input[type="text"]` without relying on
+// `!important`. Main.css loads after `jbs-framework.css`
+// (see `Frontend\Assets.php`), so tied-specificity rules
+// already win cascade-wise against framework defaults.
+//
+// `!important` is reserved for three narrow cases only:
+//   1. overriding a same-specificity theme rule that itself
+//      uses `!important` (native `<select>` forced visible);
+//   2. pre-existing flags on popup modal border-radius and
+//      the checkbox-row hover background;
+//   3. none other — prefer specificity over `!important`.
+//
+// Sub-areas (cascade order):
+//   1. Filter panel (.jbs-filter-area-tab) — base + nested
+//      responsive + sidebar-scoped widget hardening
+//   2. Filter toggle buttons (mobile / popup openers)
+//   3. Popup modal scope (.jbs-popUpModal)
+//   4. Keyword / location radius search widget
+// ============================================================
+
+
+// ------------------------------------------------------------
+// 1. Filter panel — .jbs-filter-area-tab
+// ------------------------------------------------------------
+.jbs-filter-area-tab {
+  position: relative;
+
+  // Offcanvas responsive behavior. `.jbs-offcanvas` in
+  // jbs-framework.css sets `transform: translateX(-100%)`
+  // (mobile drawer off-screen by default). On desktop we
+  // reveal it inline; specificity (0,2,0) beats the framework
+  // rule's (0,1,0) without needing `!important`.
+  &.jbs-offcanvas {
+    @media (min-width: 992px) {
+      transform: none;
+      visibility: visible;
+      border: none;
+      z-index: 0;
+      background: transparent;
+    }
+
+    @media (max-width: 991px) {
+      position: fixed;
+      overflow-y: auto;
+    }
+  }
+
+  .jbs-border-20 {
+    border-radius: 20px;
+  }
+
+  .jbs-btn-close,
+  .jbs-offcanvas-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    box-shadow: none;
+  }
+
+  .jbs-light-bg {
+    background: var(--jbs-box_bg_color);
+    box-shadow: var(--bs_sm);
+  }
+
+  // "Filter By" heading. Namespaced as `.jbs-filter-heading`
+  // because `.jbs-main-title` is used elsewhere in the plugin
+  // (dashboard pages) and by countless themes — too generic
+  // for a plugin-owned class.
+  .jbs-filter-heading {
+    font-size: 25px;
+
+    @media (max-width: 1199px) {
+      font-size: 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  }
+
+  .jbs-filter-header {
+    background: var(--jbs-box_bg_color);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    outline: none;
+
+    &:before {
+      content: "\f282";
+      font-family: "bootstrap-icons";
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid rgba($color: #000000, $alpha: 0.01);
+      position: absolute;
+      right: 25px;
+      top: 27px;
+      text-align: center;
+      color: var(--jbs-brand_color_1);
+      @include transition(0.2s);
+
+      &:hover {
+        color: #fff;
+        background-color: var(--jbs-brand_color_1);
+      }
+    }
+
+    &:active::before,
+    &:hover::before {
+      color: #fff;
+      background-color: var(--jbs-brand_color_1);
+    }
+
+    &:not(.jbs-collapsed):before {
+      transform: rotate(180deg);
+    }
+  }
+
+  .jbs-filter-block {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    &.jbs-bottom-line:not(:last-child) {
+      border-bottom: 1px solid rgb(49 121 90 / 30%);
+    }
+  }
+
+  .jbs-filter-title {
+    font-size: 1em;
+    position: relative;
+    display: block;
+    padding-right: 22px;
+    text-decoration: none;
+    background: transparent;
+    box-shadow: none;
+
+    &:not(.jbs-collapsed) {
+      margin-bottom: 10px;
+    }
+
+    &::before {
+      content: "\f4fe";
+      font-family: "bootstrap-icons";
+      display: block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 50%;
+      background: var(--jbs-brand_color_1);
+      position: absolute;
+      right: 0;
+      top: 3px;
+      text-align: center;
+      color: #fff;
+      @include transition(0.2s);
+    }
+
+    &:not(.jbs-collapsed):before {
+      content: "\f2ea";
+    }
+  }
+
+  // Native `<select>` is converted to `div.jbs-nice-select` by
+  // jbsNiceSelect. Keep it hidden defensively — `!important`
+  // defends against themes that force `select { display: block !important }`.
+  select.jbs-nice-select {
+    display: none !important;
+  }
+
+  // jbsNiceSelect-rendered dropdown wrapper.
+  .jbs-nice-select {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    color: rgba($color: #000000, $alpha: 0.65);
+    background-color: #fff;
+    background-image: none;          // wipe theme's native `<select>` chevron image
+    border: 1px solid var(--black_75);
+    border-radius: 7px;
+    outline: none;
+    box-shadow: none;
+    padding: 0 34px 0 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    // Explicit 10×10 chevron — `background-image` gives predictable
+    // sizing regardless of the SVG's intrinsic dimensions (the older
+    // `content: url()` approach rendered it at whatever the SVG
+    // declared, which read tiny in the archive UI).
+    &:before {
+      content: "";
+      position: absolute;
+      right: 12px;
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      background: url(../images/icons/arrow-down.svg) no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+    }
+
+    &.open:before {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    &:after {
+      display: none;
+    }
+
+    .option {
+      font-size: 1em;
+      line-height: 32px;
+      padding: 0 15px;
+      margin: 0;
+      list-style: none;
+      background-image: none;
+    }
+
+    .list {
+      padding: 5px 0;
+      margin: 0;
+      list-style: none;
+      display: none;
+      max-height: 250px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $brand-color-3;
+        border-radius: 3px;
+      }
+    }
+
+    &.open .list {
+      display: block;
+    }
+  }
+
+  // Checkbox filter list.
+  .jbs-filter-input {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+
+    li {
+      position: relative;
+      list-style: none;
+      margin-left: 0;
+
+      label {
+        display: block;
+        position: relative;
+        font-size: 15px;
+        line-height: 35px;
+        font-weight: 400;
+        padding-left: 28px;
+        color: rgba(0, 0, 0, .7);
+        @include transition(0.1s);
+
+        &::before {
+          content: '';
+          width: 16px;
+          height: 16px;
+          line-height: 14px;
+          border-radius: 3px;
+          background: var(--bs-white);
+          border: 1px solid var(--black_100);
+          font-size: 12px;
+          text-align: center;
+          position: absolute;
+          left: 0;
+          top: 9px;
+          font-family: "bootstrap-icons";
+          font-weight: 900;
+          @include transition(0.1s);
+        }
+
+        span {
+          font-size: 11px;
+          font-weight: 500;
+          text-align: center;
+          line-height: 20px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--body_bg);
+          float: right;
+          margin-top: 7px;
+        }
+      }
+
+      input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        cursor: pointer;
+      }
+
+      input[type="checkbox"]:checked + label:before {
+        content: "\f633";
+        background: var(--jbs-brand_color_1);
+        color: #fff;
+        border-color: var(--jbs-brand_color_1);
+      }
+
+      input[type="checkbox"]:checked + label {
+        background: rgba($color: var(--jbs-brand_color_1), $alpha: 0.02);
+      }
+
+      // Hover background uses `!important` to override the
+      // :checked background on the same element — this is the
+      // original project behavior, kept to preserve visual parity.
+      &:hover label {
+        color: var(--jbs-brand_color_1);
+        background: rgb(49 121 90 / 2%) !important;
+      }
+    }
+
+  }
+
+  // "Show more" button in checkbox filters.
+  .jbs-more-btn {
+    width: 112px !important;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 28px;
+    font-weight: 500;
+    cursor: pointer;
+    background: rgba(36, 64, 52, 0.6);
+    background-image: none;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: none;
+    text-decoration: none;
+    @include transition(0.2s);
+
+    i {
+      font-size: 18px;
+      vertical-align: -4px;
+    }
+
+    &:hover {
+      background: var(--jbs-brand_color_4);
+      color: #fff;
+    }
+  }
+
+  .jbs-clear-all-btn {
+    color: var(--black_400, #848d95);
+    font-size: 14px;
+    text-decoration: none;
+    background-image: none;
+    box-shadow: none;
+    @include transition(0.2s);
+
+    &:hover {
+      color: var(--jbs-brand_color_1);
+    }
+  }
+
+  // Salary / price dual-range jbs-slider.
+  .jbs-salary-slider {
+    position: relative;
+
+    .jbs-price-input {
+      width: 100%;
+      margin: 0 0 10px;
+
+      .jbs-currency {
+        font-size: 11px;
+        color: var(--black_900);
+      }
+
+      input[type="number"] {
+        width: 91px;
+        height: 30px;
+        padding: 0 6px;
+        margin: 0;
+        outline: none;
+        font-size: 11px;
+        line-height: 30px;
+        text-align: center;
+        color: var(--black_900);
+        background: var(--bs-white);
+        border: 1px solid var(--black_100);
+        border-radius: 2px;
+        box-shadow: none;
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          appearance: none;
+        }
+      }
+    }
+
+    .jbs-slider {
+      position: relative;
+      height: 4px;
+      background: #fff;
+      border-radius: 7px;
+
+      .jbs-progress {
+        height: 100%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        border-radius: 7px;
+        background: var(--jbs-brand_color_1);
+      }
+    }
+
+    .jbs-range-input {
+      position: relative;
+
+      input[type="range"] {
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        top: -4px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        box-shadow: none;
+        pointer-events: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        &::-webkit-slider-runnable-track {
+          background: transparent;
+          border: 0;
+          box-shadow: none;
+        }
+
+        &::-moz-range-track {
+          background: transparent;
+          border: 0;
+        }
+
+        // Unified thumb dimensions — identical size and treatment
+        // to the Max-Distance slider below so every range handle in
+        // the sidebar looks the same.
+        &::-webkit-slider-thumb {
+          pointer-events: auto;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #fff;
+          border: 2px solid var(--jbs-brand_color_1);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+          cursor: pointer;
+          -webkit-appearance: none;
+          appearance: none;
+        }
+
+        &::-moz-range-thumb {
+          pointer-events: auto;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #fff;
+          border: 2px solid var(--jbs-brand_color_1);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+          cursor: pointer;
+          -moz-appearance: none;
+        }
+      }
+    }
+  }
+
+  // Radio / tag-pill filter.
+  .jbs-radio-filter {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+
+    li {
+      position: relative;
+      width: auto;
+      margin: 0 2px 5px;
+      list-style: none;
+
+      label {
+        display: inline-block;
+        position: relative;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 20px;
+        background: #fff;
+        color: var(--jbs-brand_color_1);
+        border-radius: 30px;
+        padding: 5px 12px;
+        box-shadow: none;
+        @include transition(0.1s);
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        cursor: pointer;
+      }
+
+      input[type="radio"]:checked + label,
+      input[type="checkbox"]:checked + label {
+        background: var(--jbs-brand_color_1);
+        color: #fff;
+      }
+    }
+  }
+
+  // Keyword / location text-input row. Targeting
+  // `input[type="text"]` (0,3,1) beats common theme rules
+  // like `.ast-container input[type="text"]` (0,2,1).
+  .jbs-input-box {
+    position: relative;
+    height: 45px;
+
+    input[type="text"],
+    input[type="search"] {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0 12px 0 36px;
+      font-size: 14px;
+      line-height: normal;
+      color: rgba($color: #000000, $alpha: 0.65);
+      background-color: #fff;
+      border: 1px solid #EDEDED;
+      outline: none;
+      box-shadow: none;
+
+      &:focus {
+        border: 1px solid #EDEDED;
+        outline: none;
+      }
+    }
+
+    // Search submit / utility buttons sit absolutely inside
+    // the input. Specific button overrides (e.g. the
+    // `#jbs_get_my_location` crosshair on the right) live in
+    // the .jbs-search-form-widget block below.
+    button {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      background-image: none;
+      border: 0;
+      box-shadow: none;
+      color: #a0a0a0;
+      line-height: 1;
+      cursor: pointer;
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+// 2. Filter toggle buttons (mobile / popup openers)
+// ------------------------------------------------------------
+button.jbs-filter-btn {
+  font-size: 15px;
+  color: var(--jbs-brand_color_2);
+  border: 2px solid var(--jbs-brand_color_2);
+  border-radius: 6px;
+
+  &.jbs-jbs_filter-transparent {
+    background-color: transparent;
+  }
+
+  &.jbs-open-modal:hover,
+  &.jbs-open-modal:focus {
+    background: var(--jbs-brand_color_1);
+    border-color: var(--jbs-brand_color_1);
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+button.jbs_filter_btn-padding {
+  padding: 0;
+  width: 86px;
+  height: 32px;
+}
+
+
+// ------------------------------------------------------------
+// 3. Popup modal scope (.jbs-popUpModal)
+// ------------------------------------------------------------
+// Backdrop (moved from `jbs-framework/_modal.scss` — the class
+// is used exclusively by sidebar-popup-filter templates).
+.jbs-popUpModal {
+  background: rgba(0, 0, 0, 0.5);
+
+  .jbs-modal-content {
+    // `!important` is pre-existing; kept to preserve visual
+    // parity against the framework's default modal chrome.
+    border-radius: 15px !important;
+
+    &.jbs-filter-area-tab {
+      .jbs-input-box input,
+      .jbs-nice-select {
+        background: #FAFAFA;
+        border-color: #EDEDED;
+      }
+
+      .jbs-salary-slider .jbs-slider {
+        background: #EFEFEF;
+      }
+    }
+
+    .jbs-btn-close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      box-shadow: none;
+      z-index: 1;
+    }
+  }
+
+  .jbs-filter-area-tab {
+    .jbs-filter-block .jbs-filter-title {
+      margin-bottom: 10px;
+    }
+
+    .jbs-more-btn {
+      display: inline-block;
+      width: auto;
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+// 4. Keyword / location radius search widget
+// ------------------------------------------------------------
+// `.jbs-search-form-widget` is a generic class name; scoping it under
+// `.jbs-filter-area-tab` prevents any collision with third-party
+// search widgets that happen to use the same class name.
+.jbs-filter-area-tab .jbs-search-form-widget {
+  .jbs-search-widget-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--black_900);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .jbs-input-box {
+    position: relative;
+
+    .jbs-radius-location-input {
+      padding: 0 12px 0 32px;
+    }
+
+    .jbs-location-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0a0a0;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    button.jbs-search-submit-btn {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      right: auto;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      color: #a0a0a0;
+      line-height: 1;
+    }
+
+    // "Use my location" crosshair button — pinned right of radius input.
+    // ID selector keeps specificity high (1,2,0 inside this chain).
+    #jbs_get_my_location {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      left: auto;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  // Geolocation radius search wrapper.
+  .jbs-radius-search-wrapper {
+    .jbs-radius-value-display {
+      font-size: 13px;
+      color: var(--jbs-brand_color_1);
+    }
+
+    // Max-Distance jbs-slider. JS paints a `linear-gradient` onto
+    // `style.background` for jbs-progress; #e2e2e2 fallback keeps
+    // the track visible until the script runs.
+    .jbs-radius-distance-slider input[type="range"] {
+      width: 100%;
+      height: 6px;
+      padding: 0;
+      margin: 10px 0;
+      border: 0;
+      border-radius: 5px;
+      outline: none;
+      box-shadow: none;
+      background: #e2e2e2;
+      -webkit-appearance: none;
+      appearance: none;
+
+      &::-webkit-slider-runnable-track {
+        background: transparent;
+        border: 0;
+        height: 6px;
+        border-radius: 5px;
+      }
+
+      &::-moz-range-track {
+        background: transparent;
+        border: 0;
+        height: 6px;
+        border-radius: 5px;
+      }
+
+      // Unified thumb dimensions — matches `.jbs-salary-slider` thumbs
+      // so both range handles in the sidebar render identically.
+      &::-webkit-slider-thumb {
+        width: 16px;
+        height: 16px;
+        margin-top: -5px;           // centre a 16px thumb on a 6px track in Chrome
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--jbs-brand_color_1);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s;
+        -webkit-appearance: none;
+        appearance: none;
+
+        &:hover {
+          transform: scale(1.15);
+        }
+
+        &:active {
+          box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.06);
+          transform: scale(1.1);
+        }
+      }
+
+      &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--jbs-brand_color_1);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+      }
+    }
+  }
+}

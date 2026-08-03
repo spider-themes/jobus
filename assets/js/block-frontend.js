@@ -24,7 +24,7 @@
 
         // Start Company Details page testimonials slider
         function companyTestimonialsSlider() {
-            let testimonialSlider = $('.company-review-slider');
+            let testimonialSlider = $('.jbs-company-review-slider');
 
             if (testimonialSlider.length > 0 && $.fn.slick) {
                 testimonialSlider.slick({

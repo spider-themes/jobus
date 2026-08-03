@@ -11,7 +11,7 @@
    Base & Reset
    ========================================================================== */
 
-.jobus-onboarding-page {
+.jbs-onboarding-page {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -22,9 +22,9 @@
   line-height: 1.6;
 }
 
-.jobus-onboarding-page *,
-.jobus-onboarding-page *::before,
-.jobus-onboarding-page *::after {
+.jbs-onboarding-page *,
+.jbs-onboarding-page *::before,
+.jbs-onboarding-page *::after {
   box-sizing: border-box;
 }
 
@@ -32,7 +32,7 @@
    Layout
    ========================================================================== */
 
-.jobus-onboarding-wrapper {
+.jbs-onboarding-wrapper {
   max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -45,18 +45,18 @@
    Header
    ========================================================================== */
 
-.jobus-onboarding-header {
+.jbs-onboarding-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
 }
 
-.jobus-logo svg {
+.jbs-logo svg {
   display: block;
 }
 
-.jobus-skip-link {
+.jbs-skip-link {
   color: #666;
   text-decoration: none;
   font-size: 14px;
@@ -65,7 +65,7 @@
   transition: all 0.2s ease;
 }
 
-.jobus-skip-link:hover {
+.jbs-skip-link:hover {
   background: rgba(0, 0, 0, 0.05);
   color: #333;
 }
@@ -74,7 +74,7 @@
    Progress Steps
    ========================================================================== */
 
-.jobus-onboarding-progress {
+.jbs-onboarding-progress {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +82,7 @@
   margin-bottom: 48px;
 }
 
-.jobus-progress-step {
+.jbs-progress-step {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -91,16 +91,16 @@
   cursor: pointer;
 }
 
-.jobus-progress-step:hover {
+.jbs-progress-step:hover {
   opacity: 0.7;
 }
 
-.jobus-progress-step.active,
-.jobus-progress-step.completed {
+.jbs-progress-step.active,
+.jbs-progress-step.completed {
   opacity: 1;
 }
 
-.jobus-progress-step .step-number {
+.jbs-progress-step .jbs-step-number {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -114,27 +114,27 @@
   transition: all 0.3s ease;
 }
 
-.jobus-progress-step.active .step-number {
+.jbs-progress-step.active .jbs-step-number {
   background: #31795a;
   color: #fff;
 }
 
-.jobus-progress-step.completed .step-number {
+.jbs-progress-step.completed .jbs-step-number {
   background: #31795a;
   color: #fff;
 }
 
-.jobus-progress-step .step-label {
+.jbs-progress-step .jbs-step-label {
   font-size: 14px;
   font-weight: 500;
   color: #666;
 }
 
-.jobus-progress-step.active .step-label {
+.jbs-progress-step.active .jbs-step-label {
   color: #1a1a1a;
 }
 
-.jobus-progress-line {
+.jbs-progress-line {
   width: 40px;
   height: 2px;
   background: #e0e0e0;
@@ -145,18 +145,18 @@
    Content Area
    ========================================================================== */
 
-.jobus-onboarding-content {
+.jbs-onboarding-content {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.jobus-step {
+.jbs-step {
   display: none;
   animation: fadeIn 0.4s ease;
 }
 
-.jobus-step.active {
+.jbs-step.active {
   display: block;
 }
 
@@ -171,21 +171,21 @@
   }
 }
 
-.jobus-step-content {
+.jbs-step-content {
   background: #fff;
   border-radius: 16px;
   padding: 48px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
-.jobus-step-content h1 {
+.jbs-step-content h1 {
   font-size: 28px;
   font-weight: 700;
   margin: 0 0 16px 0;
   color: #1a1a1a;
 }
 
-.jobus-step-description {
+.jbs-step-description {
   font-size: 16px;
   color: #666;
   margin: 0 0 32px 0;
@@ -196,34 +196,34 @@
    Features Grid (Step 1)
    ========================================================================== */
 
-.jobus-features-grid {
+.jbs-features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 32px;
 }
 
-.jobus-feature-item {
+.jbs-feature-item {
   background: #f8faf9;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
 }
 
-.jobus-feature-item .feature-icon {
+.jbs-feature-item .feature-icon {
   font-size: 32px;
   display: block;
   margin-bottom: 12px;
 }
 
-.jobus-feature-item h3 {
+.jbs-feature-item h3 {
   font-size: 15px;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #1a1a1a;
 }
 
-.jobus-feature-item p {
+.jbs-feature-item p {
   font-size: 13px;
   color: #666;
   margin: 0;
@@ -234,7 +234,7 @@
    Buttons
    ========================================================================== */
 
-.jobus-btn {
+.jbs-analytics-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -248,37 +248,37 @@
   text-decoration: none;
 }
 
-.jobus-btn-primary {
+.jbs-analytics-btn-primary {
   background: #31795a;
   color: #fff;
 }
 
-.jobus-btn-primary:hover {
+.jbs-analytics-btn-primary:hover {
   background: #286a4d;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(49, 121, 90, 0.3);
   color: #fff;
 }
 
-.jobus-btn-secondary {
+.jbs-analytics-btn-secondary {
   background: #f0f0f0;
   color: #333;
 }
 
-.jobus-btn-secondary:hover {
+.jbs-analytics-btn-secondary:hover {
   background: #e0e0e0;
 }
 
-.jobus-btn .btn-arrow {
+.jbs-analytics-btn .jbs-btn-arrow {
   font-size: 16px;
 }
 
-.jobus-btn:disabled {
+.jbs-analytics-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.jobus-step-actions {
+.jbs-step-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
@@ -288,39 +288,39 @@
    Form Styles (Step 2)
    ========================================================================== */
 
-.jobus-onboarding-form {
+.jbs-onboarding-form {
   margin-bottom: 0;
 }
 
-.jobus-form-section {
+.jbs-form-section {
   margin-bottom: 32px;
 }
 
-.jobus-form-section:last-child {
+.jbs-form-section:last-child {
   margin-bottom: 0;
 }
 
-.jobus-form-section h2 {
+.jbs-form-section h2 {
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #1a1a1a;
 }
 
-.jobus-form-section .section-description {
+.jbs-form-section .jbs-section-description {
   font-size: 14px;
   color: #666;
   margin: 0 0 20px 0;
 }
 
 /* Toggle Switches */
-.jobus-toggle-group {
+.jbs-toggle-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.jobus-toggle-item {
+.jbs-toggle-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -331,20 +331,20 @@
   transition: all 0.2s ease;
 }
 
-.jobus-toggle-item:hover {
+.jbs-toggle-item:hover {
   background: #f0f5f2;
 }
 
-.jobus-pro-locked {
+.jbs-pro-locked {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.jobus-pro-locked .toggle-switch {
+.jbs-pro-locked .jbs-toggle-switch {
   pointer-events: none;
 }
 
-.jobus-pro-badge {
+.jbs-pro-badge {
   background: linear-gradient(135deg, #ff6b35, #f7931e);
   color: white;
   padding: 4px 8px;
@@ -357,47 +357,47 @@
   margin-right: 12px;
 }
 
-.toggle-info {
+.jbs-toggle-info {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.toggle-icon {
+.jbs-toggle-icon {
   font-size: 24px;
 }
 
-.toggle-text {
+.jbs-toggle-text {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.toggle-text strong {
+.jbs-toggle-text strong {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.toggle-text span {
+.jbs-toggle-text span {
   font-size: 13px;
   color: #666;
 }
 
 /* Toggle Switch */
-.toggle-switch {
+.jbs-toggle-switch {
   position: relative;
   width: 48px;
   height: 28px;
 }
 
-.toggle-switch input {
+.jbs-toggle-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.toggle-slider {
+.jbs-toggle-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -409,7 +409,7 @@
   transition: 0.3s;
 }
 
-.toggle-slider::before {
+.jbs-toggle-slider::before {
   position: absolute;
   content: "";
   height: 22px;
@@ -422,16 +422,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.toggle-switch input:checked + .toggle-slider {
+.jbs-toggle-switch input:checked + .jbs-toggle-slider {
   background: #31795a;
 }
 
-.toggle-switch input:checked + .toggle-slider::before {
+.jbs-toggle-switch input:checked + .jbs-toggle-slider::before {
   transform: translateX(20px);
 }
 
 /* Select Dropdown */
-.jobus-select {
+.jbs-select {
   padding: 10px 14px;
   font-size: 14px;
   border: 1px solid #ddd;
@@ -443,24 +443,24 @@
   transition: all 0.2s ease;
 }
 
-.jobus-select:hover {
+.jbs-select:hover {
   border-color: #31795a;
 }
 
-.jobus-select:focus {
+.jbs-select:focus {
   outline: none;
   border-color: #31795a;
   box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.1);
 }
 
 /* Select Group */
-.jobus-select-group {
+.jbs-select-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.jobus-select-item {
+.jbs-select-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -471,39 +471,39 @@
   transition: all 0.2s ease;
 }
 
-.jobus-select-item:hover {
+.jbs-select-item:hover {
   background: #f0f5f2;
 }
 
-.select-info {
+.jbs-select-info {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.select-icon {
+.jbs-select-icon {
   font-size: 24px;
 }
 
-.select-text {
+.jbs-select-text {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.select-text strong {
+.jbs-select-text strong {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.select-text span {
+.jbs-select-text span {
   font-size: 13px;
   color: #666;
 }
 
 /* Info Box */
-.jobus-info-box {
+.jbs-info-box {
   display: flex;
   gap: 16px;
   padding: 20px;
@@ -512,31 +512,31 @@
   border-radius: 12px;
 }
 
-.jobus-info-box .info-icon {
+.jbs-info-box .jbs-info-icon {
   font-size: 24px;
   flex-shrink: 0;
 }
 
-.jobus-info-box .info-content {
+.jbs-info-box .jbs-info-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.jobus-info-box .info-content strong {
+.jbs-info-box .jbs-info-content strong {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.jobus-info-box .info-content p {
+.jbs-info-box .jbs-info-content p {
   font-size: 14px;
   color: #555;
   margin: 0;
   line-height: 1.5;
 }
 
-.jobus-info-box .info-link {
+.jbs-info-box .jbs-info-link {
   font-size: 14px;
   color: #31795a;
   text-decoration: none;
@@ -544,19 +544,19 @@
   transition: color 0.2s ease;
 }
 
-.jobus-info-box .info-link:hover {
+.jbs-info-box .jbs-info-link:hover {
   color: #286a4d;
   text-decoration: underline;
 }
 
 /* Color Scheme Selector */
-.jobus-color-schemes {
+.jbs-color-schemes {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
-.jobus-color-scheme-item {
+.jbs-color-scheme-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -569,26 +569,26 @@
   transition: all 0.2s ease;
 }
 
-.jobus-color-scheme-item:hover {
+.jbs-color-scheme-item:hover {
   background: #f0f5f2;
 }
 
-.jobus-color-scheme-item input {
+.jbs-color-scheme-item input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-.jobus-color-scheme-item input:checked + .scheme-preview {
+.jbs-color-scheme-item input:checked + .jbs-scheme-preview {
   box-shadow: 0 2px 8px rgba(49, 121, 90, 0.2);
 }
 
-.jobus-color-scheme-item:has(input:checked) {
+.jbs-color-scheme-item:has(input:checked) {
   border-color: #31795a;
   background: #f0f8f5;
 }
 
-.scheme-preview {
+.jbs-scheme-preview {
   display: flex;
   gap: 4px;
   padding: 8px;
@@ -596,13 +596,13 @@
   border-radius: 8px;
 }
 
-.scheme-color {
+.jbs-scheme-color {
   width: 24px;
   height: 24px;
   border-radius: 50%;
 }
 
-.scheme-name {
+.jbs-scheme-name {
   font-size: 13px;
   font-weight: 500;
   color: #333;
@@ -612,32 +612,32 @@
    Success Step (Step 3)
    ========================================================================== */
 
-.jobus-step-success {
+.jbs-step-success {
   text-align: center;
 }
 
-.success-icon {
+.jbs-success-icon {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
 }
 
-.success-icon svg {
+.jbs-success-icon svg {
   display: block;
 }
 
-.jobus-step-success h1 {
+.jbs-step-success h1 {
   margin-bottom: 12px;
 }
 
-.jobus-step-success .jobus-step-description {
+.jbs-step-success .jbs-step-description {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.jobus-next-steps {
+.jbs-next-steps {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -645,7 +645,7 @@
   text-align: left;
 }
 
-.jobus-next-step-item {
+.jbs-next-step-item {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -657,33 +657,33 @@
   transition: all 0.2s ease;
 }
 
-.jobus-next-step-item:hover {
+.jbs-next-step-item:hover {
   background: #f0f5f2;
   transform: translateX(4px);
 }
 
-.jobus-next-step-item .step-icon {
+.jbs-next-step-item .jbs-step-icon {
   font-size: 24px;
 }
 
-.jobus-next-step-item .step-info {
+.jbs-next-step-item .jbs-step-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.jobus-next-step-item .step-info strong {
+.jbs-next-step-item .jbs-step-info strong {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.jobus-next-step-item .step-info span {
+.jbs-next-step-item .jbs-step-info span {
   font-size: 13px;
   color: #666;
 }
 
-.jobus-finish-setup {
+.jbs-finish-setup {
   margin-top: 16px;
 }
 
@@ -691,25 +691,25 @@
    Footer
    ========================================================================== */
 
-.jobus-onboarding-footer {
+.jbs-onboarding-footer {
   text-align: center;
   margin-top: 40px;
   padding-top: 24px;
   border-top: 1px solid #e0e0e0;
 }
 
-.jobus-onboarding-footer p {
+.jbs-onboarding-footer p {
   font-size: 13px;
   color: #999;
   margin: 0;
 }
 
-.jobus-onboarding-footer a {
+.jbs-onboarding-footer a {
   color: #31795a;
   text-decoration: none;
 }
 
-.jobus-onboarding-footer a:hover {
+.jbs-onboarding-footer a:hover {
   text-decoration: underline;
 }
 
@@ -717,12 +717,12 @@
    Loading State
    ========================================================================== */
 
-.jobus-btn.is-loading {
+.jbs-analytics-btn.is-loading {
   pointer-events: none;
   opacity: 0.7;
 }
 
-.jobus-btn.is-loading .btn-arrow {
+.jbs-analytics-btn.is-loading .jbs-btn-arrow {
   animation: spin 1s linear infinite;
 }
 
@@ -740,48 +740,48 @@
    ========================================================================== */
 
 @media (max-width: 768px) {
-  .jobus-onboarding-wrapper {
+  .jbs-onboarding-wrapper {
     padding: 24px 16px;
   }
 
-  .jobus-step-content {
+  .jbs-step-content {
     padding: 32px 24px;
   }
 
-  .jobus-step-content h1 {
+  .jbs-step-content h1 {
     font-size: 24px;
   }
 
-  .jobus-features-grid {
+  .jbs-features-grid {
     grid-template-columns: 1fr;
   }
 
-  .jobus-color-schemes {
+  .jbs-color-schemes {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .jobus-progress-step .step-label {
+  .jbs-progress-step .jbs-step-label {
     display: none;
   }
 
-  .jobus-step-actions {
+  .jbs-step-actions {
     flex-direction: column-reverse;
     gap: 12px;
   }
 
-  .jobus-step-actions .jobus-btn {
+  .jbs-step-actions .jbs-analytics-btn {
     width: 100%;
     justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  .jobus-onboarding-header {
+  .jbs-onboarding-header {
     flex-direction: column;
     gap: 16px;
   }
 
-  .jobus-color-schemes {
+  .jbs-color-schemes {
     grid-template-columns: 1fr 1fr;
   }
 }

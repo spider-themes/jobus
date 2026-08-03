@@ -1,4 +1,45 @@
-== Changelog ==
+
+= 1.10.1 (June 19, 2026) =
+Enhanced: Improved filter performance with optimized meta key usage count caching.
+Enhanced: Reduced database queries in filter calculations for better archive page performance.
+Fixed: Resolved filter issues.
+
+= 1.10.0 (June 1, 2026) =
+New: Application Details page added to Employer Dashboard with comprehensive candidate information and application status
+Enhanced: Improved avatar display and styling for Candidates and Companies
+Enhanced: Added AJAX loader for job submission in Employer Dashboard
+Enhanced: Improved Saved Candidates page with AJAX search, smart empty state, and better layout
+Enhanced: Improved candidate management experience in Saved Candidates section
+Fixed: Fixed job status handling (Draft, Pending, Publish) based on admin settings
+Fixed: Ensured proper submission behavior according to monetization and job approval rules
+
+= 1.9.0 (24 April 2026) =
+New: Easy login and signup using Google, Facebook, and LinkedIn  
+New: Find jobs based on your nearby location  
+New: One-click demo setup with sample jobs  
+New: Apply for jobs without creating an account (Sign In / Register / Guest options)  
+New: Verified badge added for trusted companies  
+New: Option to redirect users to external websites for job applications  
+New: Improved visibility on Google Jobs search  
+New: Simple and consistent messaging system  
+Enhanced: Improved sidebar design for Candidate, Job, and Company pages  
+Enhanced: Faster and smoother job filtering experience  
+Enhanced: More consistent design across all pages  
+Enhanced: Easier-to-read applicant details in admin panel  
+Enhanced: Faster and more accurate search results  
+Fixed: Fixed issues with registration and job application process  
+Fixed: Fixed job application popup design and functionality  
+Fixed: Fixed sidebar and loading design saving issue  
+Fixed: Fixed popup search results for jobs, candidates, and companies  
+
+= 1.8.0 (06 April 2026) =
+Improved: General enhancements and minor fixes applied across the block for better stability
+Updated: Freemius SDK updated to 2.13.1
+
+= 1.7.0 (13 March 2026) =
+New: Candidate Profiles – Enabled support for nested candidate entries and restored standard profile creation for better recruitment control
+New: Company Profiles – Enabled support for nested company entries and restored standard profile creation for better management
+Improved: User Experience – Streamlined profile settings to make it easier for companies and candidates to manage their presence
 
 = 1.6.0 (06 February 2026) =
 New: Introduced Jobus > Dashboard page inside the WordPress admin area
@@ -77,9 +118,9 @@ Improved: Job button typography control renamed for clarity
 Improved: Link color updated using rgba values for better visibility
 Improved: Candidate and Company menus moved under the main Jobus menu
 Improved: Flex utility classes added for easier alignment and layout control
-Compatibility: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
-Compatibility: Administrator access enabled for employer dashboard
-Compatibility: Employer role granted edit_posts capability for frontend image uploads
+Improved: Integration improved with Astra, Docy, Kadence, Avada, and OceanWP themes
+Improved: Administrator access enabled for employer dashboard
+Improved: Employer role granted edit_posts capability for frontend image uploads
 Optimized: Unused CSS and old titlebar code removed for lighter performance
 Optimized: Color and typography refined across dashboard and listings for consistency
 
@@ -98,11 +139,11 @@ Improved: Elementor widget lock and related UI refined for better editing experi
 Improved: Appearance and General Settings organization improved for easier configuration
 Improved: Subscribe field color adjusted for better visibility in dark mode
 Improved: Setup and color schema refined for a consistent user experience
-Compatibility: Astra theme compatibility improved for single and archive layouts
-Compatibility: GeneratePress theme compatibility added and tested
-Compatibility: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
-Compatibility: Docy theme compatibility refined for smoother integration
+Improved: Astra theme compatibility improved for single and archive layouts
+Improved: GeneratePress theme compatibility added and tested
+Improved: Twenty Twenty-Five theme compatibility improved across all single and dashboard pages
+Improved: Docy theme compatibility refined for smoother integration
 Optimized: Main CSS prefix optimized to avoid conflicts and improve code maintainability
 
 = 1.0.0 (22 October 2025) =
-Init: Initial release
+New: Initial release

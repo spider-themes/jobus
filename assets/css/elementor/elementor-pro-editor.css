@@ -10,8 +10,8 @@
 }
 
 /** === Adjust Free Option Opacity === **/
-.category_1::before,
-.search_form_1::before {
+.jbs-category_1::before,
+.jbs-search_form_1::before {
     opacity: .5 !important;
 }
 
@@ -31,6 +31,6 @@
 }
 
 /** === Hide Pro Label for Licensed Users === **/
-.jobus-pro-widget::after {
+.jbs-pro-widget::after {
     display: none !important;
 }

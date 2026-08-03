@@ -65,18 +65,18 @@ $dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jo
 $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 ?>
 <div class="jbs-position-relative">
-    <h2 class="main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
+    <h2 class="jbs-main-title"><?php echo esc_html( $dashboard_title ); ?></h2>
     <div class="jbs-row">
         <?php if ( $show_total_visitor ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
+            <div class="jbs-dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/total_visitor.svg' ); ?>"
                              alt="<?php esc_attr_e( 'Total Visitor', 'jobus' ); ?>" class="lazy-img">
                     </div>
                     <div class="jbs-order-sm-0">
-                        <div class="value jbs-fw-500">
+                        <div class="jbs-value jbs-fw-500">
 							<?php echo esc_html( $all_user_view_count ); ?>
                         </div>
                         <span><?php esc_html_e( 'Total Visitor', 'jobus' ); ?></span>
@@ -88,14 +88,14 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 
         <?php if ( $show_shortlisted ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
+            <div class="jbs-dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/shortlist.svg' ) ?>" alt="<?php esc_attr_e( 'Shortlist', 'jobus' ); ?>"
                              class="lazy-img">
                     </div>
                     <div class="jbs-order-sm-0">
-                        <div class="value jbs-fw-500">
+                        <div class="jbs-value jbs-fw-500">
 							<?php
 							// Count shortlisted applications directly in the markup
 							$shortlisted_count = 0;
@@ -117,14 +117,14 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 
         <?php if ( $show_views ) : ?>
         <div class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
+            <div class="jbs-dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/view.svg' ); ?>" alt="<?php esc_attr_e( 'View', 'jobus' ); ?>"
                              class="lazy-img">
                     </div>
                     <div class="jbs-order-sm-0">
-                        <div class="value jbs-fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
+                        <div class="jbs-value jbs-fw-500"><?php echo esc_html( $employer_view_count ); ?></div>
                         <span><?php esc_html_e( 'Views', 'jobus' ); ?></span>
                     </div>
                 </div>
@@ -134,14 +134,14 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 
         <?php if ( $show_applied_jobs ) : ?>
         <a href="<?php echo esc_url($jobs_applied_link) ?>" class="jbs-col-lg-3 jbs-col-6">
-            <div class="dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
+            <div class="jbs-dash-card-one jbs-bg-white jbs-border-30 jbs-position-relative jbs-mb-15">
                 <div class="jbs-d-sm-flex jbs-align-items-center jbs-justify-content-between">
                     <div class="icon jbs-rounded-circle jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-order-sm-1">
                         <img src="<?php echo esc_url( JOBUS_IMG . '/dashboard/icons/applied_job.svg' ); ?>"
                              alt="<?php esc_attr_e( 'Applied Jobs', 'jobus' ); ?>" class="lazy-img">
                     </div>
                     <div class="jbs-order-sm-0">
-                        <div class="value jbs-fw-500">
+                        <div class="jbs-value jbs-fw-500">
 							<?php echo esc_html( count( $applicants ) ); ?>
                         </div>
                         <span><?php esc_html_e( 'Applied Job', 'jobus' ); ?></span>
@@ -154,9 +154,9 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
         <div class="jbs-col-full jbs-col-lg-7">
-            <div class="saved-job-tab jbs-bg-white jbs-border-20">
+            <div class="jbs-saved-job-tab jbs-bg-white jbs-border-20">
 
-                <div class="saved-jobs-header">
+                <div class="jbs-saved-jobs-header">
                     <h4 class="title"><?php esc_html_e( 'Saved Job', 'jobus' ); ?></h4>
 					<?php
 					// Get total saved jobs count
@@ -174,7 +174,7 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
 						$dashboard_url = \jobus\includes\Frontend\Dashboard::get_dashboard_page_url( 'jobus_candidate' );
 						$saved_jobs_url = trailingslashit( $dashboard_url ) . 'saved-jobs';
 						?>
-                        <a href="<?php echo esc_url( $saved_jobs_url ); ?>" class="view-more-btn">
+                        <a href="<?php echo esc_url( $saved_jobs_url ); ?>" class="jbs-view-more-btn">
 							<?php echo esc_html( $view_all_label ); ?>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -194,9 +194,9 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
         </div>
 
         <div class="jbs-col-full jbs-col-lg-5">
-            <div class="recent-job-tab jbs-bg-white jbs-border-20">
-                <h4 class="dash-title-two"><?php esc_html_e( 'Recent Applied Jobs', 'jobus' ); ?></h4>
-                <div class="wrapper">
+            <div class="jbs-recent-job-tab jbs-bg-white jbs-border-20">
+                <h4 class="jbs-dash-title-two"><?php esc_html_e( 'Recent Applied Jobs', 'jobus' ); ?></h4>
+                <div class="jbs-wrapper">
                     <?php
                     if ( ! empty( $applicants ) ) {
                         $recent_applicants = array_slice( $applicants, 0, $widget_items_count );
@@ -205,7 +205,7 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
                             $job_cat      = get_the_terms( $job_id, 'jobus_job_cat' );
                             $job_location = get_the_terms( $job_id, 'jobus_job_location' );
                             ?>
-                            <div class="job-item-list jbs-d-flex jbs-align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
+                            <div class="jbs-job-item-list jbs-d-flex jbs-align-items-center" id="job-<?php echo esc_attr( $job_id ); ?>">
                                 <div><?php echo get_the_post_thumbnail( $job_id, 'full', [ 'class' => 'lazy-img logo' ] ); ?></div>
                                 <div class="job-title">
                                     <h6>
@@ -213,7 +213,7 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
                                             <?php echo esc_html( get_the_title( $job_id ) ); ?>
                                         </a>
                                     </h6>
-                                    <div class="meta">
+                                    <div class="jbs-meta">
                                         <?php
                                         if ( $job_cat ) { ?>
                                             <a href="<?php echo esc_url( get_term_link( $job_cat[0] ) ) ?>">
@@ -238,7 +238,7 @@ $jobs_applied_link = trailingslashit( $dashboard_url ) . 'applied-jobs';
                             <?php
                         }
                     } else {
-                        echo '<div class="no-jobs-message">' . esc_html__( 'No recent job applications found.', 'jobus' ) . '</div>';
+                        echo '<div class="jbs-no-jobs-message">' . esc_html__( 'No recent job applications found.', 'jobus' ) . '</div>';
                     }
                     ?>
                 </div>

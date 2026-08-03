@@ -4,9 +4,9 @@
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
  * Author URI: https://spider-themes.com/
- * Version: 1.6.0
+ * Version: 1.10.1
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 6.9.4
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,6 +16,50 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
+}
+
+/**
+ * Show an admin notice when local/plugin dependencies are missing.
+ *
+ * @param string $message Notice message.
+ * @return void
+ */
+function jobus_missing_dependency_notice( $message ) {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	add_action(
+		'admin_notices',
+		static function () use ( $message ) {
+			printf(
+				'<div class="notice notice-error"><p>%s</p></div>',
+				esc_html( $message )
+			);
+		}
+	);
+}
+
+/**
+ * Load required plugin dependencies.
+ *
+ * @return bool
+ */
+function jobus_load_dependencies() {
+	$autoload_file = __DIR__ . '/vendor/autoload.php';
+
+	if ( ! file_exists( $autoload_file ) ) {
+		jobus_missing_dependency_notice( 'Jobus dependencies are missing. Run composer install to restore the Composer vendor directory.' );
+		return false;
+	}
+
+	require_once $autoload_file;
+
+	return true;
+}
+
+if ( ! jobus_load_dependencies() ) {
+	return;
 }
 
 if ( ! function_exists( 'jobus_fs' ) ) {
@@ -29,7 +73,13 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 
 		if ( ! isset( $jobus_fs ) ) {
 			// Include Freemius SDK.
-			require_once dirname( __FILE__ ) . '/vendor/fs/start.php';
+			$freemius_start = dirname( __FILE__ ) . '/vendor/freemius/wordpress-sdk/start.php';
+			if ( ! file_exists( $freemius_start ) ) {
+				jobus_missing_dependency_notice( 'Jobus Freemius SDK is missing. Run composer install to restore the required dependencies.' );
+				return null;
+			}
+
+			require_once $freemius_start;
 
 			$jobus_fs = fs_dynamic_init( [
 				'id'                  => '20775',
@@ -63,14 +113,11 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 	}
 
 	// Init Freemius.
-	jobus_fs();
-	// Signal that SDK was initiated.
-	do_action( 'jobus_fs_loaded' );
+	if ( jobus_fs() ) {
+		// Signal that SDK was initiated.
+		do_action( 'jobus_fs_loaded' );
+	}
 }
-
-
-// Autoload vendors
-require_once __DIR__ . '/vendor/autoload.php';
 
 
 /**
@@ -85,7 +132,7 @@ final class Jobus {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.6.0';
+	const VERSION = '1.10.1';
 
 	/**
 	 * The plugin path
@@ -116,14 +163,13 @@ final class Jobus {
 	 * @access public
 	 */
 	private function __construct() {
-		register_activation_hook( __FILE__, [ $this, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
-		$this->define_constants(); // Define constants.
+		$this->define_constants();
 
-		add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+		add_action( 'plugins_loaded', [ $this, 'loaded_plugin' ] );
 		add_action( 'after_setup_theme', [ $this, 'load_csf_files' ], 20 );
-		add_action( 'admin_init', [ $this, 'plugin_default_pages_exist' ] );
-		add_action( 'after_switch_theme', [ $this, 'plugin_default_pages_exist' ] );
+		add_action( 'admin_init', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
+		add_action( 'after_switch_theme', [ \jobus\includes\Classes\Lifecycle::class, 'create_default_pages' ] );
+		add_action( 'init', [ $this, 'init_plugin' ], 9999 );
 	}
 
 	/**
@@ -132,7 +178,13 @@ final class Jobus {
 	 * @return void
 	 */
 	public function load_csf_files(): void {
-		require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+		$csf_bootstrap = __DIR__ . '/lib/csf/codestar-framework.php';
+		if ( ! file_exists( $csf_bootstrap ) ) {
+			jobus_missing_dependency_notice( 'Jobus Codestar Framework files are missing from lib/csf.' );
+			return;
+		}
+
+		require_once $csf_bootstrap;
 		require_once __DIR__ . '/Admin/csf/options/settings.php';
 
 		// Get feature toggle options
@@ -155,12 +207,14 @@ final class Jobus {
 	 *
 	 * @return void
 	 */
-	public function init_plugin(): void {
+	public function loaded_plugin(): void {
 
 		// Get feature toggle options
-		$options          = get_option( 'jobus_opt', [] );
-		$enable_candidate = $options['enable_candidate'] ?? true;
-		$enable_company   = $options['enable_company'] ?? true;
+		$options           = get_option( 'jobus_opt', [] );
+		$enable_candidate  = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company    = ! isset( $options['enable_company'] ) || $options['enable_company'];
+		$enable_job_expiry = ! isset( $options['enable_job_expiry'] ) || $options['enable_job_expiry'];
+		$enable_job_schema = isset( $options['enable_job_schema'] ) ? $options['enable_job_schema'] : false;
 
 		// Classes
 		new \jobus\includes\Classes\Ajax_Actions();
@@ -173,6 +227,22 @@ final class Jobus {
 		new \jobus\includes\Classes\submission\Employer_Form_Submission();
 		new \jobus\includes\Classes\submission\Job_Form_Submission();
 		new \jobus\includes\Classes\submission\Password_Handler();
+		
+		if ( $enable_job_expiry ) {
+			new \jobus\includes\Classes\Job_Expiry();
+		} else {
+			if ( wp_next_scheduled( 'jobus_daily_job_expiry_check' ) ) {
+				wp_clear_scheduled_hook( 'jobus_daily_job_expiry_check' );
+			}
+		}
+
+		// Radius / Geolocation engine
+		new \jobus\includes\Classes\Geolocation();
+
+		// Social Login engine
+		if ( ! empty( $options['enable_social_login'] ) ) {
+			new \jobus\includes\Classes\OAuth\Social_Auth();
+		}
 
 		// Admin UI
 		if ( is_admin() ) {
@@ -181,6 +251,14 @@ final class Jobus {
 			new \jobus\Admin\User();
 			new \jobus\Admin\Onboarding();
 			new \jobus\Admin\Dashboard();
+			new \jobus\Admin\Demo_Importer();
+			
+			if ( ! empty( $options['enable_social_login'] ) ) {
+				new \jobus\Admin\Social_Login_Page();
+			}
+			
+			\jobus\Admin\Analytics::get_instance();
+			\jobus\Admin\Messaging::get_instance();
 		}
 
 		// Post Type
@@ -198,6 +276,10 @@ final class Jobus {
 		new \jobus\includes\Frontend\Assets();
 		new \jobus\includes\Frontend\Shortcode();
 		new \jobus\includes\Frontend\Template_Loader();
+		
+		if ( $enable_job_schema ) {
+			new \jobus\includes\Classes\Job_Schema();
+		}
 		if ( $enable_candidate ) {
 			\jobus\includes\Frontend\Dashboard_Candidate::get_instance();
 		}
@@ -213,6 +295,109 @@ final class Jobus {
 		// Elementor & Blocks
 		new \jobus\Blocks();
 		new \jobus\includes\Elementor\Register_Widgets();
+
+
+		// Remote Notice Integration
+		require_once JOBUS_PATH . '/includes/remote-notices/class-remote-notice-client.php';
+
+		/**
+		 * NoticePilot — remote admin-notice campaigns (SDK v1.6.1).
+		 *
+		 * Product id ..... 'Jobus' (used for every SDK call below — keep consistent).
+		 * Hub endpoint ... manage.spider-themes.net → /content/jobus
+		 *
+		 * loaded_plugin() runs on plugins_loaded, so init() is called directly and
+		 * the admin_init hooks below register before admin_init fires.
+		 * jobus_is_premium() reports whether the Pro plan is active.
+		 */
+		if ( class_exists( 'Noticepilot_Remote_Notice_Client' ) ) {
+			Noticepilot_Remote_Notice_Client::init( 'Jobus', [
+				'api_url'          => 'https://manage.spider-themes.net/wp-json/noticepilot/v1/content/jobus',
+
+				// How often to pull campaigns, and who may see them.
+				'schedule'         => 'daily',            // hourly | twicedaily | daily
+				'capability'       => 'manage_options',
+
+				// Audience targeting: campaigns can target by version rule + free/Pro.
+				'plugin_version'   => JOBUS_VERSION,
+				'is_pro'           => jobus_is_premium(),
+
+				// Frequency / dismissal behaviour (keeps notices tasteful — wp.org guideline 11).
+				'max_notices'      => 2,                  // never stack more than 2 at once
+				'dismiss_duration' => WEEK_IN_SECONDS,    // a dismissal sticks for a week
+				'snooze_duration'  => WEEK_IN_SECONDS,    // "Remind me later" cooldown
+
+				// Analytics consent (wp.org guideline 7): keep beacons OFF until the
+				// user opts in. We reuse Jobus' existing Freemius tracking opt-in as
+				// the consent signal (synced below), so there is no second prompt.
+				'require_consent'  => true,
+
+				// Deactivation feedback is intentionally left OFF: Freemius already
+				// shows its own deactivation survey, so enabling the SDK prompt too
+				// would give the user a duplicate modal on deactivate.
+				// 'deactivation_feedback' => true,
+				// 'plugin_file'           => 'jobus/jobus.php',
+			]);
+
+			/**
+			 * Keep NoticePilot analytics consent in sync with the user's Freemius
+			 * tracking choice. With require_consent => true, no beacon fires until
+			 * this grants consent.
+			 */
+			add_action( 'admin_init', function() {
+				// A sibling plugin may have loaded an older copy of the shared SDK
+				// class first; guard the newer method so we never fatal.
+				if ( ! function_exists( 'jobus_fs' ) || ! method_exists( 'Noticepilot_Remote_Notice_Client', 'grant_consent' ) ) {
+					return;
+				}
+				if ( method_exists( jobus_fs(), 'is_tracking_allowed' ) && jobus_fs()->is_tracking_allowed() ) {
+					Noticepilot_Remote_Notice_Client::grant_consent( 'Jobus' );
+				} else {
+					Noticepilot_Remote_Notice_Client::revoke_consent( 'Jobus' );
+				}
+			} );
+
+			/**
+			 * Conversion goal: report the Pro upgrade once, attributed to the
+			 * campaign/variant that most recently drove it — real conversion rate,
+			 * not just clicks.
+			 */
+			add_action( 'admin_init', function() {
+				if ( ! function_exists( 'jobus_is_premium' ) || ! method_exists( 'Noticepilot_Remote_Notice_Client', 'track_goal' ) ) {
+					return;
+				}
+				if ( jobus_is_premium() && ! get_option( 'jobus_np_goal_upgraded' ) ) {
+					// Mark recorded only when the beacon actually fired (consent
+					// granted + a campaign was seen), so a later opt-in still counts.
+					if ( Noticepilot_Remote_Notice_Client::track_goal( 'Jobus', 'upgraded_to_pro' ) ) {
+						update_option( 'jobus_np_goal_upgraded', 1, false );
+					}
+				}
+			} );
+
+			/**
+			 * Smart-trigger metric: report the live number of published job listings
+			 * (the jobus_job CPT). NoticePilot only stores the number — WE do the
+			 * counting. On the hub you can then trigger a campaign at a milestone
+			 * (e.g. nudge for Pro once "jobs_created" >= 5).
+			 *
+			 * Fires wherever a job is saved (admin or front-end submission).
+			 * Reporting the current total is idempotent, so re-saves re-report it.
+			 */
+			add_action( 'save_post_jobus_job', function( $post_id, $post ) {
+				if ( ! method_exists( 'Noticepilot_Remote_Notice_Client', 'set_metric' ) ) {
+					return;
+				}
+				if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+					return;
+				}
+				if ( 'publish' !== $post->post_status ) {
+					return;
+				}
+				$count = (int) wp_count_posts( 'jobus_job' )->publish;
+				Noticepilot_Remote_Notice_Client::set_metric( 'Jobus', 'jobs_created', $count );
+			}, 10, 2 );
+		}
 	}
 
 	/**
@@ -225,6 +410,7 @@ final class Jobus {
 		define( 'JOBUS_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
 		define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
+		define( 'JOBUS_BUILD_CSS', JOBUS_URL . '/build/css' );
 		define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
 		define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
 		define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
@@ -232,180 +418,16 @@ final class Jobus {
 	}
 
 	/**
-	 * Do stuff upon plugin activation
-	 */
-	/**
-	 * Create default frontend pages depending on theme / premium status
+	 * Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
 	 *
 	 * @return void
 	 */
-	public function activate(): void {
-		// Insert the installation time into the database.
-		$installed = get_option( 'jobus_installed' );
-		if ( ! $installed ) {
-			update_option( 'jobus_installed', time() );
-		}
-		update_option( 'jobus_version', JOBUS_VERSION );
+	public function init_plugin(): void {
 
-		// Set activation redirect flag only for fresh installs (onboarding not yet complete).
-		if ( ! get_option( 'jobus_onboarding_complete' ) ) {
-			set_transient( 'jobus_activation_redirect', '1', 60 );
-		}
-
-		// Schedule daily cron event.
-		if ( ! wp_next_scheduled( 'jobus_daily_scheduled_events' ) ) {
-			wp_schedule_event( time(), 'daily', 'jobus_daily_scheduled_events' );
-		}
-
-		// Create default frontend pages depending on theme / premium status
-		$this->plugin_default_pages_exist();
-	}
-
-	/**
-	 * Do stuff upon plugin deactivation
-	 *
-	 * @return void
-	 */
-	public function deactivate(): void {
-		// Clear scheduled cron event.
-		wp_clear_scheduled_hook( 'jobus_daily_scheduled_events' );
-
-		// If premium is NOT active, we might want to clean up.
-		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
-		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
-			$pages = get_option( 'jobus_pages', [] );
-			if ( ! empty( $pages['dashboard'] ) ) {
-				wp_delete_post( $pages['dashboard'], true );
-				unset( $pages['dashboard'] );
-				update_option( 'jobus_pages', $pages );
-			}
-		}
-	}
-
-	/**
-	 * Create default pages used by the plugin (if they don't already exist).
-	 *
-	 * Rules:
-	 * - If the active theme is `jobi` or `jobi-child`, or Freemius indicates a pro license,
-	 *   create Dashboard, Register Form, Job Archive, Candidate Archive and Company Archive.
-	 * - Otherwise (free theme), create only the Job Archive page.
-	 *
-	 * Created page IDs are stored in the `jobus_pages` option as an associative array.
-	 *
-	 * @return void
-	 */
-	public function plugin_default_pages_exist(): void {
-		// Avoid running in contexts without WP functions available.
-		if ( ! function_exists( 'get_template' ) || ! function_exists( 'wp_insert_post' ) ) {
-			return;
-		}
-
-		// Determine unlocked state (theme match or premium license).
-		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
-
-		$pages_to_create = [];
-		if ( $is_unlocked ) {
-			$pages_to_create = [
-				'dashboard'         => [
-					'title'   => 'Dashboard',
-					'slug'    => 'jobus-dashboard',
-					'content' => '[jobus_dashboard]',
-				],
-				'register'          => [
-					'title'   => 'Register Form',
-					'slug'    => 'jobus-register',
-					'content' => '<!-- wp:jobus/register-form /-->',
-				],
-				'job_archive'       => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-				'candidate_archive' => [
-					'title'   => 'Candidate Archive',
-					'slug'    => 'jobus-candidate-archive',
-					'content' => '[jobus_candidate_archive]',
-				],
-				'company_archive'   => [
-					'title'   => 'Company Archive',
-					'slug'    => 'jobus-company-archive',
-					'content' => '[jobus_company_archive]',
-				],
-			];
-		} else {
-			// Free theme only
-			$pages_to_create = [
-				'job_archive' => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-			];
-		}
-
-		$created = get_option( 'jobus_pages', [] );
-
-		// Optimization: Check if all desired pages for the current state (free vs pro) are already recorded.
-		$all_exist = true;
-		foreach ( array_keys( $pages_to_create ) as $key ) {
-			if ( empty( $created[ $key ] ) ) {
-				$all_exist = false;
-				break;
-			}
-		}
-
-		if ( $all_exist ) {
-			return;
-		}
-
-		foreach ( $pages_to_create as $key => $args ) {
-			// If a page with the desired slug already exists, record and skip.
-			$existing = get_page_by_path( $args['slug'] );
-			if ( $existing ) {
-				$created[ $key ] = $existing->ID;
-				continue;
-			}
-
-			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
-			if ( ! empty( $args['content'] ) ) {
-				$found = get_posts( [
-					'post_type'      => 'page',
-					'posts_per_page' => 1,
-					'post_status'    => 'publish',
-					'fields'         => 'ids',
-					's'              => trim( strip_tags( $args['content'] ) ),
-				] );
-				if ( ! empty( $found ) ) {
-					$created[ $key ] = $found[0];
-					continue;
-				}
-			}
-			// Keep the stored post title plain text to avoid HTML-escaping issues in themes.
-			$post = [
-				'post_title'   => wp_strip_all_tags( $args['title'] ),
-				'post_name'    => $args['slug'],
-				'post_content' => $args['content'],
-				'post_status'  => 'publish',
-				'post_type'    => 'page',
-			];
-
-			$post_id = wp_insert_post( $post );
-			if ( $post_id && ! is_wp_error( $post_id ) ) {
-				$created[ $key ] = $post_id;
-			}
-		}
-
-		update_option( 'jobus_pages', $created );
-
-		// Automatically set the default dashboard redirect page in settings if not already set.
-		if ( ! empty( $created['dashboard'] ) ) {
-			$jobus_opt = get_option( 'jobus_opt', [] );
-			if ( empty( $jobus_opt['dashboard_redirect_page'] ) ) {
-				$jobus_opt['dashboard_redirect_page'] = $created['dashboard'];
-				$jobus_opt['enable_custom_redirects'] = '1';
-				update_option( 'jobus_opt', $jobus_opt );
-			}
+		// Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
+		if ( get_option( 'jobus_flush_rewrite_rules_flag' ) ) {
+			flush_rewrite_rules( false );
+			delete_option( 'jobus_flush_rewrite_rules_flag' );
 		}
 	}
 
@@ -430,14 +452,20 @@ final class Jobus {
  */
 if ( ! function_exists( 'jobus' ) ) {
 	/**
-	 * Load jobus
+	 * Returns the main Jobus instance
 	 *
-	 * Main instance of jobus
+	 * @return Jobus|false
 	 */
 	function jobus() {
 		return Jobus::init();
 	}
 
-	// Kick of the plugin
+	// Register lifecycle hooks at the file level — the WooCommerce pattern.
+	// Must be called from the plugin's root file scope so WordPress can
+	// correctly resolve the plugin path from the call stack.
+	register_activation_hook( __FILE__, [ \jobus\includes\Classes\Lifecycle::class, 'activate' ] );
+	register_deactivation_hook( __FILE__, [ \jobus\includes\Classes\Lifecycle::class, 'deactivate' ] );
+
+	// Kick off the plugin
 	jobus();
 }

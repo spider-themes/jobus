@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 ?>
-<section class="jobus-company-classic company-profiles jbs-pt-90 jbs-lg-pt-70 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 bg-color ">
+<section class="jbs-company-classic jbs-company-profiles jbs-pt-90 jbs-lg-pt-70 jbs-pb-150 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-color ">
     <div class="jbs-container">
         <div class="jbs-row">
             <div class="jbs-col-12">
-                <div class="wrapper">
+                <div class="jbs-wrapper" data-jbs-filter-results="true">
 
                     <?php
                     // Check if there are any filter widgets (meta or taxonomy) configured
@@ -30,12 +30,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                         }
                     }
                     ?>
-                    <div class="upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center jbs-mb-25">
+                    <div class="jbs-upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center jbs-mb-25">
 
                         <div class="jbs-d-md-flex jbs-align-items-center">
 
                             <?php if ( $has_filter_widgets ) : ?>
-                            <button type="button" class="jbs-filter-btn jbs-fw-500 tran3s jbs-me-3 jbs-open-modal jbs_filter-transparent jbs_filter_btn-padding jbs-pointer" data-target="#filterPopUp">
+                            <button type="button" class="jbs-filter-btn jbs-fw-500 jbs-tran3s jbs-me-3 jbs-open-modal jbs-jbs_filter-transparent jbs-jbs_filter_btn-padding jbs-pointer" data-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
                                 <?php esc_html_e('Filter', 'jobus'); ?>
                             </button>

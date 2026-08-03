@@ -37,12 +37,12 @@ $update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update
 ?>
 
 <div class="jbs-position-relative">
-    <h2 class="main-title">
+    <h2 class="jbs-main-title">
         <?php esc_html_e( 'Change Password', 'jobus' ); ?>
     </h2>
 
-    <div class="jbs-bg-white card-box border-20">
-        <h4 class="dash-title-three"> <?php esc_html_e( 'Edit & Update', 'jobus' ); ?> </h4>
+    <div class="jbs-bg-white jbs-card-box jbs-border-20">
+        <h4 class="jbs-dash-title-three"> <?php esc_html_e( 'Edit & Update', 'jobus' ); ?> </h4>
 
         <?php if ( ! empty( $success_message ) ) : ?>
             <div class="jbs-alert jbs-alert-success" role="alert">
@@ -61,11 +61,11 @@ $update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update
             <input type="hidden" name="update_user_password" value="1">
             <div class="jbs-row">
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
+                    <div class="jbs-dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="current-password"><?php esc_html_e( 'Current Password*', 'jobus' ); ?></label>
-                        <input type="password" class="pass_log_id" id="current-password" name="current_password" placeholder="<?php esc_attr_e( 'Enter your current password', 'jobus' ); ?>" required>
-                        <span class="placeholder_icon">
-                            <span class="passVicon">
+                        <input type="password" class="jbs-pass_log_id" id="current-password" name="current_password" placeholder="<?php esc_attr_e( 'Enter your current password', 'jobus' ); ?>" required>
+                        <span class="jbs-placeholder_icon">
+                            <span class="jbs-passVicon">
                                 <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye-icon', 'jobus'); ?>">
                             </span>
                         </span>
@@ -73,11 +73,11 @@ $update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update
                     </div>
                 </div>
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
+                    <div class="jbs-dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="new-password"><?php esc_html_e( 'New Password*', 'jobus' ); ?></label>
-                        <input type="password" class="pass_log_id" id="new-password" name="new_password" placeholder="<?php esc_attr_e( 'Enter your new password', 'jobus' ); ?>" required>
-                        <span class="placeholder_icon">
-                            <span class="passVicon">
+                        <input type="password" class="jbs-pass_log_id" id="new-password" name="new_password" placeholder="<?php esc_attr_e( 'Enter your new password', 'jobus' ); ?>" required>
+                        <span class="jbs-placeholder_icon">
+                            <span class="jbs-passVicon">
                                 <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye-icon', 'jobus'); ?>">
                             </span>
                         </span>
@@ -85,11 +85,11 @@ $update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update
                     </div>
                 </div>
                 <div class="jbs-col-12">
-                    <div class="dash-input-wrapper jbs-position-relative jbs-mb-20">
+                    <div class="jbs-dash-input-wrapper jbs-position-relative jbs-mb-20">
                         <label for="confirm-password"><?php esc_html_e( 'Confirm New Password*', 'jobus' ); ?></label>
-                        <input type="password" class="pass_log_id" id="confirm-password" name="confirm_password" placeholder="<?php esc_attr_e( 'Confirm your new password', 'jobus' ); ?>" required>
-                        <span class="placeholder_icon">
-                            <span class="passVicon">
+                        <input type="password" class="jbs-pass_log_id" id="confirm-password" name="confirm_password" placeholder="<?php esc_attr_e( 'Confirm your new password', 'jobus' ); ?>" required>
+                        <span class="jbs-placeholder_icon">
+                            <span class="jbs-passVicon">
                                 <img src="<?php echo esc_url(JOBUS_IMG . '/icons/icon-eye.svg') ?>" alt="<?php esc_attr_e('eye-icon', 'jobus'); ?>">
                             </span>
                         </span>
@@ -98,7 +98,7 @@ $update_password_label = jobus_opt( 'label_update_password', esc_html__( 'Update
                 </div>
                 <div class="jbs-col-12">
                     <div class="button-group jbs-d-inline-flex jbs-align-items-center">
-                        <button type="submit" class="dash-btn-two tran3s jbs-me-3"><?php echo esc_html( $update_password_label ); ?></button>
+                        <button type="submit" class="jbs-dash-btn-two jbs-tran3s jbs-me-3"><?php echo esc_html( $update_password_label ); ?></button>
                     </div>
                 </div>
             </div>
