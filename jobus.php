@@ -203,6 +203,19 @@ final class Jobus {
 	}
 
 	/**
+	 * Flush rewrite rules exactly once upon plugin activation or significant updates to avoid 404 errors.
+	 *
+	 * @return void
+	 */
+	public function init_plugin(): void {
+		if ( get_option( 'jobus_flush_rewrite_rules_flag' ) ) {
+			flush_rewrite_rules( false );
+			delete_option( 'jobus_flush_rewrite_rules_flag' );
+		}
+	}
+
+
+	/**
 	 * Initializes the plugin
 	 *
 	 * @return void
