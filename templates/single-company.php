@@ -5,6 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
+$is_block_theme = function_exists('wp_is_block_theme') && wp_is_block_theme();
+if ($is_block_theme) {
+    echo '<div class="wp-site-blocks"><main class="wp-block-group" id="wp--skip-link--target">';
+}
+
+while ( have_posts() ) :
+	the_post();
+
 $user_id       = get_post_field( 'post_author', get_the_ID() );
 $employer_mail = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
 
@@ -345,4 +353,10 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
 </section>
 
 <?php
+endwhile;
+
+if ($is_block_theme) {
+    echo '</main></div>';
+}
+
 get_footer();

@@ -5,6 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
+$is_block_theme = function_exists('wp_is_block_theme') && wp_is_block_theme();
+if ($is_block_theme) {
+    echo '<div class="wp-site-blocks"><main class="wp-block-group" id="wp--skip-link--target">';
+}
+
+while ( have_posts() ) :
+	the_post();
+
 // Call the function to track views
 jobus_count_post_views( get_the_ID(), 'candidate' );
 
@@ -45,6 +53,12 @@ if ( file_exists( $template_path ) ) {
 	include $template_file;
 } else {
 	include 'single-candidate/candidate-single-1.php';
+}
+
+endwhile;
+
+if ($is_block_theme) {
+    echo '</main></div>';
 }
 
 get_footer();
