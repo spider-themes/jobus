@@ -1,52 +1,5 @@
-// ============================================================
-// Sidebar — Archive Filter Widgets
-// ------------------------------------------------------------
-// Single source of truth for the filter widgets used by every
-// archive layout (classic offcanvas, popup modal, topbar
-// collapse) across job / candidate / company post types.
-//
-// Every rule below hangs off a sidebar-only wrapper class
-// (`.jbs-filter-area-tab`, `.jbs-filter-btn`, `.jbs-popUpModal`, or
-// `.jbs-filter-area-tab .jbs-search-form-widget`) so nothing here leaks
-// into theme-level forms elsewhere on the page. Generic-sounding
-// child class names (`.jbs-input-box`, `.jbs-filter-block`, `.jbs-more-btn`,
-// `.jbs-slider`, `.jbs-progress`, etc.) are safely nested under one of
-// those wrappers — no standalone top-level styling exists.
-//
-// Selectors are written specific enough (attribute + class
-// chaining) to outrank common theme form resets like
-// `.ast-container input[type="text"]` without relying on
-// `!important`. Main.css loads after `jbs-framework.css`
-// (see `Frontend\Assets.php`), so tied-specificity rules
-// already win cascade-wise against framework defaults.
-//
-// `!important` is reserved for three narrow cases only:
-//   1. overriding a same-specificity theme rule that itself
-//      uses `!important` (native `<select>` forced visible);
-//   2. pre-existing flags on popup modal border-radius and
-//      the checkbox-row hover background;
-//   3. none other — prefer specificity over `!important`.
-//
-// Sub-areas (cascade order):
-//   1. Filter panel (.jbs-filter-area-tab) — base + nested
-//      responsive + sidebar-scoped widget hardening
-//   2. Filter toggle buttons (mobile / popup openers)
-//   3. Popup modal scope (.jbs-popUpModal)
-//   4. Keyword / location radius search widget
-// ============================================================
-
-
-// ------------------------------------------------------------
-// 1. Filter panel — .jbs-filter-area-tab
-// ------------------------------------------------------------
 .jbs-filter-area-tab {
   position: relative;
-
-  // Offcanvas responsive behavior. `.jbs-offcanvas` in
-  // jbs-framework.css sets `transform: translateX(-100%)`
-  // (mobile drawer off-screen by default). On desktop we
-  // reveal it inline; specificity (0,2,0) beats the framework
-  // rule's (0,1,0) without needing `!important`.
   &.jbs-offcanvas {
     @media (min-width: 992px) {
       transform: none;
@@ -78,11 +31,6 @@
     background: var(--jbs-box_bg_color);
     box-shadow: var(--bs_sm);
   }
-
-  // "Filter By" heading. Namespaced as `.jbs-filter-heading`
-  // because `.jbs-main-title` is used elsewhere in the plugin
-  // (dashboard pages) and by countless themes — too generic
-  // for a plugin-owned class.
   .jbs-filter-heading {
     font-size: 25px;
 
@@ -191,28 +139,18 @@
 
   // jbsNiceSelect-rendered dropdown wrapper.
   .jbs-nice-select {
-    position: relative;
-    display: block;
     width: 100%;
     height: 45px;
     line-height: 45px;
     font-size: 14px;
     color: rgba($color: #000000, $alpha: 0.65);
-    background-color: #fff;
     background-image: none;          // wipe theme's native `<select>` chevron image
     border: 1px solid var(--black_75);
-    border-radius: 7px;
-    outline: none;
     box-shadow: none;
     padding: 0 34px 0 15px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    // Explicit 10×10 chevron — `background-image` gives predictable
-    // sizing regardless of the SVG's intrinsic dimensions (the older
-    // `content: url()` approach rendered it at whatever the SVG
-    // declared, which read tiny in the archive UI).
     &:before {
       content: "";
       position: absolute;
@@ -550,10 +488,6 @@
       }
     }
   }
-
-  // Keyword / location text-input row. Targeting
-  // `input[type="text"]` (0,3,1) beats common theme rules
-  // like `.ast-container input[type="text"]` (0,2,1).
   .jbs-input-box {
     position: relative;
     height: 45px;
@@ -566,8 +500,8 @@
       padding: 0 12px 0 36px;
       font-size: 14px;
       line-height: normal;
-      color: rgba($color: #000000, $alpha: 0.65);
-      background-color: #fff;
+      color: var(--black_600);
+      background-color: var(--bs-white);
       border: 1px solid #EDEDED;
       outline: none;
       box-shadow: none;
@@ -577,11 +511,6 @@
         outline: none;
       }
     }
-
-    // Search submit / utility buttons sit absolutely inside
-    // the input. Specific button overrides (e.g. the
-    // `#jbs_get_my_location` crosshair on the right) live in
-    // the .jbs-search-form-widget block below.
     button {
       position: absolute;
       top: 0;

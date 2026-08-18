@@ -62,7 +62,7 @@ if (!defined('ABSPATH')) {
                                     <?php
                                 } elseif ($item['layout_type'] == 'text' ) {
                                     ?>
-                                    <input type="text" name="s" id="searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="jbs-keyword">
+                                    <input type="text" name="s" id="jbs-searchInput" placeholder="<?php echo esc_attr($item['text_placeholder']); ?>" class="jbs-keyword">
                                     <?php
                                 }
                             }

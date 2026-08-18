@@ -391,7 +391,7 @@ class Search_Form extends Widget_Base {
 				'label'     => esc_html__( 'Search Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} #searchInput::placeholder, .jbs-search-form-widget-two form input' => 'color: {{VALUE}};',
+					'{{WRAPPER}} #jbs-searchInput::placeholder, .jbs-search-form-widget-two form input' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'layout'  => [ '2' ],

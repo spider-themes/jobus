@@ -1,39 +1,37 @@
 .jbs-tags-wrapper {
-
   .jbs-tag-item {
     margin-bottom: 12px;
 
-    &.hide {
+    &.jbs-hide {
       display: none;
     }
   }
+}
 
-  .jbs-more-btn {
-    color: var(--jbs-brand_color_1);
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 15px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.3s ease;
+.jbs-more-btn {
+  color: var(--jbs-brand_color_1);
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
 
-    &:hover {
-      color: #275c44;
-    }
-
-    i {
-      font-size: 18px;
-      line-height: 1;
-      transition: transform 0.3s ease;
-    }
-
-    &.jbs-showing-all {
-      i {
-        transform: rotate(180deg);
-      }
-    }
+  &:hover {
+    color: #275c44;
   }
 
+  i {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+
+  &.jbs-showing-all {
+    i {
+      transform: rotate(180deg);
+    }
+  }
 }
 

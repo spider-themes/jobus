@@ -27,11 +27,11 @@ $max_radius     = $jobus_opt['max_radius'] ?? 250;
 $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 'miles', 'jobus' );
 ?>
 <div class="jbs-search-form-widget">
-    <label for="searchInput" class="jbs-search-widget-label"><?php esc_html_e( 'Keyword', 'jobus' ); ?></label>
+    <label for="jbs-searchInput" class="jbs-search-widget-label"><?php esc_html_e( 'Keyword', 'jobus' ); ?></label>
     <div class="jbs-input-box jbs-position-relative jbs-mb-20">
         <input type="text"
                name="s"
-               id="searchInput"
+               id="jbs-searchInput"
                value="<?php echo esc_attr( get_search_query() ); ?>"
                placeholder="<?php esc_attr_e( 'Job title, keywords...', 'jobus' ); ?>"
                aria-label="<?php esc_attr_e( 'Search', 'jobus' ); ?>"

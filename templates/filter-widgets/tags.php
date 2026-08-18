@@ -23,7 +23,7 @@ if ( ! empty( $term_tags ) ) {
 		$searched_opt = jobus_search_terms( $taxonomy );
 		foreach ( $term_tags as $index => $term ) {
 			$selected = (in_array($term->slug, $searched_opt)) ? ' checked' : '';
-			$hidden_class = $index >= $initial_limit ? ' hide' : '';
+			$hidden_class = $index >= $initial_limit ? ' jbs-hide' : '';
 			?>
             <li class="jbs-tag-item<?php echo esc_attr($hidden_class); ?>">
                 <input type="checkbox" name="<?php echo esc_attr($taxonomy) ?>[]" value="<?php echo esc_attr( $term->slug ); ?>" <?php echo esc_attr($selected) ?>>

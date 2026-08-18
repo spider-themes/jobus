@@ -165,27 +165,29 @@
 
         //==== Tags Filter ====//
         function tagsFilter() {
-            const moreBtn = $('.jbs-more-btn');
-            const filterInput = $('.jbs-tags-wrapper');
+            $(document).on('click', '.jbs-more-btn', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-            if (moreBtn.length) {
-                moreBtn.on('click', function () {
-                    const $this = $(this);
-                    const hiddenItems = filterInput.find('li.tag-item.hide');
+                const $this = $(this);
+                const $wrapper = $this.parent().children('.jbs-tags-wrapper');
+                const limit = parseInt($this.data('limit'), 10) || 6;
+                const $extraItems = $wrapper.children('li.jbs-tag-item').slice(limit);
 
-                    if ($this.hasClass('jbs-showing-all')) {
-                        // Hide items after initial limit
-                        hiddenItems.slideUp(300);
-                        $this.removeClass('jbs-showing-all')
-                            .html('<i class="bi bi-plus"></i> Show More');
-                    } else {
-                        // Show all hidden items
-                        hiddenItems.slideDown(300);
-                        $this.addClass('jbs-showing-all')
-                            .html('<i class="bi bi-dash"></i> Show Less');
-                    }
-                });
-            }
+                if (!$extraItems.length) {
+                    return;
+                }
+
+                if ($this.hasClass('jbs-showing-all')) {
+                    $extraItems.addClass('jbs-hide');
+                    $this.removeClass('jbs-showing-all')
+                        .html('<i class="bi bi-plus"></i> Show More');
+                } else {
+                    $extraItems.removeClass('jbs-hide');
+                    $this.addClass('jbs-showing-all')
+                        .html('<i class="bi bi-dash"></i> Show Less');
+                }
+            });
         }
 
         tagsFilter(); // end tagsFilter
