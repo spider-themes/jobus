@@ -1,4 +1,11 @@
 
+= 1.10.2 (August 18, 2026) =
+New: Added page section padding options for Candidate, Job, and Company details pages.
+Enhanced: Prefixed Candidate Profile Layout 2 CSS classes with the `jbs-` namespace to prevent theme and plugin class conflicts.
+Enhanced: Added automatic daily job expiration based on the Application Deadline, reducing manual job management.
+New: Added Job Expiration settings, Application Deadline field, and extensibility hooks for automatic job expiration.
+Fixed: Resolved a WordPress critical error.
+
 = 1.10.1 (June 19, 2026) =
 Enhanced: Improved filter performance with optimized meta key usage count caching.
 Enhanced: Reduced database queries in filter calculations for better archive page performance.
