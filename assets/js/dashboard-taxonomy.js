@@ -104,7 +104,7 @@
             /**
              * Show taxonomy input when "+" button clicked
              */
-            $list.on('click', '.more_tag button', function (e) {
+            $list.on('click', '.jbs-more_tag button', function (e) {
                 e.preventDefault();
                 $inputWrapper.show();
                 $textInput.val('').focus();
@@ -114,9 +114,9 @@
             /**
              * Remove a selected tag
              */
-            $list.on('click', '.is_tag button', function (e) {
+            $list.on('click', '.jbs-is_tag button', function (e) {
                 e.preventDefault();
-                const $tag = $(this).closest('.is_tag');
+                const $tag = $(this).closest('.jbs-is_tag');
 
                 $tag.fadeOut(200, function () {
                     $(this).remove();

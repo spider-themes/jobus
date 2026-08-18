@@ -55,7 +55,7 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
 ?>
 <div class="jbs-col-xl-3 jbs-col-lg-4">
     <button type="button"
-        class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 jbs-tran3s jbs-d-lg-none jbs-mb-40 jbs-jbs_filter-transparent"
+        class="jbs-filter-btn jbs-w-100 jbs-pt-2 jbs-pb-2 jbs-h-auto jbs-fw-500 jbs-tran3s jbs-d-lg-none jbs-mb-40 jbs_filter-transparent"
         data-jbs-toggle="jbs-offcanvas" data-jbs-target="#filteroffcanvas">
         <i class="bi bi-funnel"></i>
         <?php esc_html_e('Filter', 'jobus'); ?>

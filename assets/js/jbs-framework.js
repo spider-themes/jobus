@@ -13,9 +13,9 @@
 
         const ANIM_DURATION = 300;
 
-        $(document).on('click', '.passVicon', function() {
+        $(document).on('click', '.jbs-passVicon', function() {
             $(this).toggleClass("jbs-eye-slash");
-            const $input = $(this).closest('.input-group-meta').find('input');
+            const $input = $(this).closest('.jbs-input-group-meta').find('input');
             const type = $input.attr('type') === 'password' ? 'text' : 'password';
             $input.attr('type', type);
         });
@@ -133,14 +133,6 @@
             if ($(e.target).is(".jbs-modal")) {
                 Helpers.closeModal($(this));
             }
-        });
-
-        // ============================
-        // Filter Header Toggle
-        // ============================
-        $(document).on("click", ".filter-header", function () {
-            $(this).toggleClass("jbs-collapsed");
-            $(".jbs-collapse").slideToggle(ANIM_DURATION);
         });
 
         // ============================

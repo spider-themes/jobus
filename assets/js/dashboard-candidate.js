@@ -50,7 +50,7 @@
                 repeater.addEventListener('click', function(e) {
                     if (e.target.closest('.remove-specification')) {
                         e.preventDefault();
-                        e.target.closest('.specification-item').remove();
+                        e.target.closest('.jbs-specification-item').remove();
                     }
                 });
             }
@@ -239,7 +239,7 @@
                             <div class="jbs-accordion-body">
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 jbs-md-mb-10">
                                             <label for="experience_${index}_sl_num">Serial Number</label>
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 jbs-md-mb-10">
                                             <label for="experience_${index}_title">Title</label>
                                         </div>
                                     </div>
@@ -271,7 +271,7 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 jbs-md-mb-10">
                                             <label>Duration</label>
                                         </div>
                                     </div>
@@ -297,7 +297,7 @@
 
                                 <div class="jbs-row">
                                     <div class="jbs-col-lg-2">
-                                        <div class="jbs-dash-input-wrapper jbs-mb-30 md-mb-10">
+                                        <div class="jbs-dash-input-wrapper jbs-mb-30 jbs-md-mb-10">
                                             <label for="experience_${index}_description">Description</label>
                                         </div>
                                     </div>
@@ -597,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     portfolioIdsField.value = allIds.join(',');
                     portfolioContainer.style.display = 'block';
-                    const previewWrapper = portfolioContainer.closest('.portfolio-preview-wrapper');
+                    const previewWrapper = portfolioContainer.closest('.jbs-portfolio-preview-wrapper');
                     if (previewWrapper) previewWrapper.style.display = 'block';
                 }
 

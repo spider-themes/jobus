@@ -67,11 +67,11 @@
             if (isotopeWrapper.length > 0) {
                 var $grid = isotopeWrapper.isotope({
                     // options
-                    itemSelector: ".isotop-item",
+                    itemSelector: ".jbs-isotop-item",
                     percentPosition: true,
                     masonry: {
                         // use element for option
-                        columnWidth: ".grid-sizer",
+                        columnWidth: ".jbs-grid-sizer",
                     },
                 });
 

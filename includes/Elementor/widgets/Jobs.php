@@ -207,7 +207,7 @@ class Jobs extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-list-one,{{WRAPPER}} .card-style-six .text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-job-list-one' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -216,7 +216,7 @@ class Jobs extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'list_inner_border',
-				'selector'  => '{{WRAPPER}} .job-listing-wrapper.border-wrapper',
+				'selector'  => '{{WRAPPER}} .jbs-job-listing-wrapper.jbs-border-wrapper',
 				'condition' => [
 					'layout' => [ '1' ],
 				],
@@ -229,7 +229,7 @@ class Jobs extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-listing-wrapper.border-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-job-listing-wrapper.jbs-border-wrapper' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout' => [ '1' ],
@@ -254,7 +254,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Job Title Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-job-list-one .title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -263,7 +263,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Job Title Hover Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .title:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-job-list-one .title:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -272,7 +272,7 @@ class Jobs extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Title Typography',
 				'name'     => 'job_title_typo',
-				'selector' => '{{WRAPPER}} .job-list-one .title',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .title',
 			]
 		);
 
@@ -280,7 +280,7 @@ class Jobs extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'list_border',
-				'selector'  => '{{WRAPPER}} .job-list-one.bottom-border',
+				'selector'  => '{{WRAPPER}} .jbs-job-list-one.jbs-bottom-border',
 				'condition' => [
 					'layout' => [ '1' ],
 				],
@@ -305,7 +305,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Job Date Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .job-date' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-job-date' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -314,7 +314,7 @@ class Jobs extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Date Typography',
 				'name'     => 'job_date_typo',
-				'selector' => '{{WRAPPER}} .job-list-one .job-date',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-job-date',
 			]
 		);
 
@@ -322,7 +322,7 @@ class Jobs extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Category Typography',
 				'name'     => 'job_category_typo',
-				'selector' => '{{WRAPPER}} .job-list-one .job-category a',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-job-category a',
 			]
 		);
 		$this->end_controls_section();
@@ -355,7 +355,7 @@ class Jobs extends Widget_Base {
 			[
 				'name'     => 'background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn',
 			]
 		);
 		$this->add_responsive_control(
@@ -364,7 +364,7 @@ class Jobs extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-list-one .apply-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -373,7 +373,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Button Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .apply-btn' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -382,14 +382,14 @@ class Jobs extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Button Typography',
 				'name'     => 'job_button_typo',
-				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn',
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'botton_border',
-				'selector' => '{{WRAPPER}} .job-list-one .apply-btn',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn',
 			]
 		);
 
@@ -400,7 +400,7 @@ class Jobs extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .job-list-one .apply-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -418,7 +418,7 @@ class Jobs extends Widget_Base {
 			[
 				'name'     => 'Button hover background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .job-list-one .apply-btn:hover',
+				'selector' => '{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn:hover',
 			]
 		);
 		$this->add_control(
@@ -426,7 +426,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Hover Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .apply-btn:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -435,7 +435,7 @@ class Jobs extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .job-list-one .apply-btn:hover' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .jbs-job-list-one .jbs-apply-btn:hover' => 'border-color: {{VALUE}}',
 				],
 			]
 		);

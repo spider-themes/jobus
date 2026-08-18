@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<section class="jbs-jbs jbs-job-tabs-widget">
+<section class="jbs jbs-job-tabs-widget">
     <ul class="jbs-style-none jbs-d-flex jbs-flex-wrap jbs-isotop-menu-wrapper jbs-g-control-nav <?php echo esc_attr( $cat_alignment_class ?? '' ); ?>">
 		<?php
 		if ( ! empty( $settings['all_label'] ) ) { ?>
@@ -88,7 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <a <?php jobus_button_link( $settings['view_all_btn_url'] ) ?> class="jbs-d-block">
                         <div class="title jbs-text-white"><?php echo esc_html( $formatted_count ) ?></div>
                         <div class="jbs-text-lg jbs-text-white"><?php esc_html_e( 'Job already posted', 'jobus' ); ?></div>
-                        <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end jbs-mt-140 lg-mt-120 xs-mt-60 jbs-mb-30">
+                        <div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end jbs-mt-140 jbs-lg-mt-120 jbs-xs-mt-60 jbs-mb-30">
                             <img src="<?php echo esc_url( JOBUS_IMG . '/icons/line.svg' ) ?>" alt="<?php esc_attr_e( 'Line Icon', 'jobus' ); ?>" class="lazy-img">
                             <div class="icon jbs-tran3s jbs-d-flex jbs-align-items-center jbs-justify-content-center jbs-ms-5">
                                 <img src="<?php echo esc_url( JOBUS_IMG . '/icons/arrow_icon.svg' ) ?>" alt="<?php esc_attr_e( 'Arrow Icon', 'jobus' ); ?>" class="lazy-img">

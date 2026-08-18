@@ -190,7 +190,7 @@ class Companies extends Widget_Base {
         [
             'name'     => 'company_background',
             'types'    => [ 'classic', 'gradient' ],
-            'selector' => '{{WRAPPER}} .card-style-ten',
+            'selector' => '{{WRAPPER}} .jbs-card-style-ten',
 
             'fields_options' => [
                 'background' => [
@@ -209,7 +209,7 @@ class Companies extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-style-ten,{{WRAPPER}} .card-style-six .text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-style-ten' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -218,7 +218,7 @@ class Companies extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name'      => 'list_inner_border',
-				'selector'  => '{{WRAPPER}} .card-style-ten',
+				'selector'  => '{{WRAPPER}} .jbs-card-style-ten',
 				'condition' => [
 					'layout' => [ '1' ],
 				],
@@ -231,7 +231,7 @@ class Companies extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-style-ten' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-style-ten' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'layout' => [ '1' ],
@@ -256,7 +256,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Job Title Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .jbs_widget-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs_widget-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -265,7 +265,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Job Title Hover Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .jbs_widget-title:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs_widget-title:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -274,7 +274,7 @@ class Companies extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Title Typography',
 				'name'     => 'job_title_typo',
-				'selector' => '{{WRAPPER}} .card-style-ten .jbs_widget-title',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs_widget-title',
 			]
 		);
 
@@ -296,7 +296,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Job Meta Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .jbs-company-meta' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-company-meta' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -305,7 +305,7 @@ class Companies extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Meta Typography',
 				'name'     => 'jobs_meta_typo',
-				'selector' => '{{WRAPPER}} .card-style-ten .jbs-company-meta',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs-company-meta',
 			]
 		);
 
@@ -339,7 +339,7 @@ class Companies extends Widget_Base {
 			[
 				'name'     => 'background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .card-style-ten .open-job-btn',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn',
 			]
 		);
 
@@ -349,7 +349,7 @@ class Companies extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-style-ten .open-job-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -359,7 +359,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Button Text Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .open-job-btn' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -368,14 +368,14 @@ class Companies extends Widget_Base {
 			Group_Control_Typography::get_type(), [
 				'label'    => 'Job Button Typography',
 				'name'     => 'job_date_typo',
-				'selector' => '{{WRAPPER}} .card-style-ten .open-job-btn',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn',
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'botton_border',
-				'selector' => '{{WRAPPER}} .card-style-ten .open-job-btn',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn',
 			]
 		);
 
@@ -386,7 +386,7 @@ class Companies extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
-					'{{WRAPPER}} .card-style-ten .open-job-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -404,7 +404,7 @@ class Companies extends Widget_Base {
 			[
 				'name'     => 'Button hover background',
 				'types'    => [ 'classic', 'gradient' ],
-				'selector' => '{{WRAPPER}} .card-style-ten .open-job-btn:hover',
+				'selector' => '{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn:hover',
 			]
 		);
 		$this->add_control(
@@ -412,7 +412,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Hover Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .open-job-btn:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -421,7 +421,7 @@ class Companies extends Widget_Base {
 				'label'     => esc_html__( 'Border Color', 'jobus' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .card-style-ten .open-job-btn:hover' => 'border-color: {{VALUE}}',
+					'{{WRAPPER}} .jbs-card-style-ten .jbs-open-job-btn:hover' => 'border-color: {{VALUE}}',
 				],
 			]
 		);

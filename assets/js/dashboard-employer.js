@@ -66,7 +66,7 @@
                 const reader = new FileReader();
                 reader.onload = function (event) {
                     const dataUrl = event.target.result;
-                    const $container = $(this).closest('.dash-input-wrapper');
+                    const $container = $(this).closest('.jbs-dash-input-wrapper');
                     const $hiddenData = $container.find('.jbs-testimonial-image-data');
                     const $preview = $container.find('.jbs-testimonial-image-preview');
 

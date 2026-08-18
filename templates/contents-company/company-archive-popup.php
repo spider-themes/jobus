@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="jbs-d-md-flex jbs-align-items-center">
 
                             <?php if ( $has_filter_widgets ) : ?>
-                            <button type="button" class="jbs-filter-btn jbs-fw-500 jbs-tran3s jbs-me-3 jbs-open-modal jbs-jbs_filter-transparent jbs-jbs_filter_btn-padding jbs-pointer" data-target="#filterPopUp">
+                            <button type="button" class="jbs-filter-btn jbs-fw-500 jbs-tran3s jbs-me-3 jbs-open-modal jbs_filter-transparent jbs_filter_btn-padding jbs-pointer" data-target="#filterPopUp">
                                 <i class="bi bi-funnel"></i>
                                 <?php esc_html_e('Filter', 'jobus'); ?>
                             </button>

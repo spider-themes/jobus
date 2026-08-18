@@ -15,7 +15,7 @@ wp_enqueue_script( 'lightbox' );
                     <?php
                     if ( ! empty( get_the_content() ) ) {
                         ?>
-                        <div class="jbs-inner-card jbs-border-style jbs-mb-65 lg-jbs-mb-40">
+                        <div class="jbs-inner-card jbs-border-style jbs-mb-65 jbs-lg-mb-40">
                             <?php the_content() ?>
                         </div>
                         <?php
@@ -167,7 +167,7 @@ wp_enqueue_script( 'lightbox' );
             <!-- /.candidates-profile-details -->
 
             <div class="jbs-col-xxl-3 jbs-col-lg-4">
-                <div class="jbs-candidate-profile-2-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 md-mt-60">
+                <div class="jbs-candidate-profile-2-sidebar jbs-ms-xl-5 jbs-ms-xxl-0 jbs-md-mt-60">
                     <div class="jbs-candidate-bio jbs-bg-wrapper jbs-mb-60 jbs-md-mb-40">
                         <ul class="jbs-style-none">
                             <?php
@@ -301,7 +301,7 @@ wp_enqueue_script( 'lightbox' );
                         $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
                         ?>
                         <h4 class="jbs-sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
-                        <div class="jbs-map-area jbs-mb-60 md-jbs-mb-40">
+                        <div class="jbs-map-area jbs-mb-60 jbs-md-mb-40">
                             <div class="jbs-gmap_canvas jbs-h-100 jbs-w-100">
                                 <iframe class="jbs-gmap_iframe jbs-h-100 jbs-w-100 jbs-border-0" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
@@ -318,7 +318,7 @@ wp_enqueue_script( 'lightbox' );
 
                             <?php wp_nonce_field( 'jobus_candidate_contact_mail_form', 'security' ); ?>
                             <input type="hidden" id="jbs-candidate-id" name="candidate_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
-                            <div class="jbs-d-sm-flex jbs-mb-25 xs-jbs-mb-10">
+                            <div class="jbs-d-sm-flex jbs-mb-25 jbs-xs-mb-10">
                                 <input type="text" name="sender_name" id="sender_name" placeholder="<?php esc_attr_e( 'Name*', 'jobus' ) ?>" required>
                             </div>
 
@@ -330,7 +330,7 @@ wp_enqueue_script( 'lightbox' );
                                 <input type="text" name="sender_subject" id="sender_subject" placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
-                            <div class="jbs-d-sm-flex jbs-mb-25 xs-mb-10">
+                            <div class="jbs-d-sm-flex jbs-mb-25 jbs-xs-mb-10">
                                 <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 

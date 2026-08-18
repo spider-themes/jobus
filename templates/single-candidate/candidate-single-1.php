@@ -333,7 +333,7 @@ if ( function_exists( 'docy_opt' ) && '1' === docy_opt( 'is_top_header' ) ) {
                         $iframe_url = "{$is_http}maps.google.com/maps?q={$address_encoded}, {$latitude}, {$longitude}&z=12&output=embed";
                         ?>
                         <h4 class="sidebar-title"><?php esc_html_e( 'Location', 'jobus' ) ?></h4>
-                        <div class="map-area jbs-mb-60 md-mb-40">
+                        <div class="map-area jbs-mb-60 jbs-md-mb-40">
                             <div class="gmap_canvas jbs-h-100 jbs-w-100">
                                 <iframe class="gmap_iframe jbs-h-100 jbs-w-100 jbs-border-0" src="<?php echo esc_url( $iframe_url ); ?>"></iframe>
                             </div>
@@ -362,7 +362,7 @@ if ( function_exists( 'docy_opt' ) && '1' === docy_opt( 'is_top_header' ) ) {
                                        placeholder="<?php esc_attr_e( 'Subject', 'jobus' ) ?>">
                             </div>
 
-                            <div class="jbs-d-sm-flex jbs-mb-25 xs-mb-10">
+                            <div class="jbs-d-sm-flex jbs-mb-25 jbs-xs-mb-10">
                                 <textarea name="message" id="message" placeholder="<?php esc_attr_e( 'Message', 'jobus' ) ?>" required></textarea>
                             </div>
 

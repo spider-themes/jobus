@@ -39,7 +39,7 @@ $category_terms = get_the_terms($job_id, 'jobus_job_cat');
 $save_job_status = $show_save_button ? jobus_get_save_status() : false;
 
 // Determine container classes based on layout
-$container_classes = 'job-list-one style-two jbs-position-relative jbs-mb-20';
+$container_classes = 'jbs-job-list-one jbs-style-two jbs-position-relative jbs-mb-20';
 if ($layout === 'company-open') {
     $container_classes .= ' border-style';
 }
@@ -144,7 +144,7 @@ $container_classes .= ' ' . $extra_classes;
                             'meta_key' => 'jobus_saved_jobs',
                             'is_saved' => $save_job_status['is_saved'],
                             'button_title' => !empty($save_job_status['is_saved']) ? esc_html__('Saved Job', 'jobus') : esc_html__('Save Job', 'jobus'),
-                            'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s jbs-me-3 jbs-saved-post'
+                            'class' => 'jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s jbs-me-3 jbs-saved-post'
                         ]); ?>
                     <?php endif; ?>
 

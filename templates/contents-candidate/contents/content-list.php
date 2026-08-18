@@ -98,7 +98,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						}
 						if ( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ) { ?>
                             <div class="jbs-col-xl-2 jbs-col-md-4 jbs-col-sm-6">
-                                <div class="jbs-candidate-info location-info">
+                                <div class="jbs-candidate-info jbs-location-info">
                                     <span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
                                     <a href="<?php echo esc_url( jobus_get_first_taxonomy_link( 'jobus_candidate_location' ) ) ?>">
 		                                <?php echo esc_html( jobus_get_first_taxonomy_name( 'jobus_candidate_location' ) ); ?>
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                         'meta_key'   => 'jobus_saved_candidates',
                                         'is_saved'   => $save_candidate_status['is_saved'],
                                         'button_title' => !empty($save_candidate_status['is_saved']) ? esc_html__('Saved Candidate', 'jobus') : esc_html__('Save Candidate', 'jobus'),
-                                        'class' => 'save-btn jbs-text-center jbs-rounded-circle tran3s jbs-saved-post'
+                                        'class' => 'jbs-save-btn jbs-text-center jbs-rounded-circle jbs-tran3s jbs-saved-post'
                                     ] );
                                 }
                                 ?>

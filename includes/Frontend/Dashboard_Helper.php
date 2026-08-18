@@ -288,7 +288,7 @@ class Dashboard_Helper {
 			$location     = get_the_terms( $candidate_id, 'jobus_candidate_location' );
 			$skills       = get_the_terms( $candidate_id, 'jobus_candidate_skill' );
 			$max_skills   = 2;
-			$avatar_img   = get_the_post_thumbnail( $candidate_id, 'full', [ 'class' => 'lazy-img rounded-circle' ] );
+			$avatar_img   = get_the_post_thumbnail( $candidate_id, 'full', [ 'class' => 'lazy-img jbs-rounded-circle' ] );
 			?>
 			<div class="jbs-candidate-profile-card jbs-list-layout jbs-border-0 jbs-mb-25<?php echo empty( $avatar_img ) ? ' jbs-no-avatar' : ''; ?>">
 				<div class="jbs-d-flex">
@@ -341,7 +341,7 @@ class Dashboard_Helper {
 							<?php } ?>
 							<?php if ( ! empty( $location ) && count( $location ) > 0 ) { ?>
 								<div class="jbs-col-lg-3 jbs-col-md-4 jbs-col-sm-6">
-									<div class="jbs-candidate-info location-info">
+									<div class="jbs-candidate-info jbs-location-info">
 										<span><?php esc_html_e( 'Location', 'jobus' ); ?></span>
 										<a href="<?php echo esc_url( get_term_link( $location[0]->term_id ) ); ?>">
 											<?php echo esc_html( $location[0]->name ); ?>

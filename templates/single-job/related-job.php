@@ -41,7 +41,7 @@ if ( $is_related_posts == 'yes') :
                             </a>
                             <?php if (jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) : ?>
                                 <div>
-                                    <a href="<?php the_permalink(); ?>" class="jbs-job-duration jbs-jbs-fw-500">
+                                    <a href="<?php the_permalink(); ?>" class="jbs-job-duration jbs-fw-500">
                                         <?php echo esc_html( jobus_get_meta_attributes('jobus_meta_options','job_related_post_meta_1')) ?>
                                     </a>
                                 </div>

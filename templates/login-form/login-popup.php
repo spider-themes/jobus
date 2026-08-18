@@ -97,7 +97,7 @@ if ( is_user_logged_in() ) {
                                     </div>
                                 </div>
                                 <div class="jbs-col-12">
-                                    <button class="jbs-btn-eleven jbs-jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Login', 'jobus' ); ?></button>
+                                    <button class="jbs-btn-eleven jbs-fw-500 jbs-tran3s jbs-d-block jbs-mt-20"><?php esc_html_e( 'Login', 'jobus' ); ?></button>
                                 </div>
                             </div>
                         </form>

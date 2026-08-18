@@ -419,7 +419,7 @@
             // Show/hide password toggle
             $form.find('.jbs-passVicon').on('click', function() {
                 $(this).toggleClass("jbs-eye-slash");
-                const $input = $(this).closest('.dash-input-wrapper').find('input');
+                const $input = $(this).closest('.jbs-dash-input-wrapper').find('input');
                 const type = $input.attr('type') === 'password' ? 'text' : 'password';
                 $input.attr('type', type);
             });

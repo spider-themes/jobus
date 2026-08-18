@@ -158,7 +158,7 @@
                 const postType = btn.data('post_type');
                 const nonce = btn.data('nonce');
                 // Find the item container
-                const item = btn.closest('.job-list-one, .candidate-profile-card');
+                const item = btn.closest('.jbs-job-list-one, .jbs-candidate-profile-card');
                 const icon = btn.find('i');
 
                 if (!postId || !postType || !nonce || btn.hasClass('disabled')) return;

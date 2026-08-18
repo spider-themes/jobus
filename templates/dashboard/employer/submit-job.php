@@ -327,8 +327,8 @@ if ( ! $can_submit ) {
             </div>
 
             <div id="job-deadline-section">
-                <h4 class="dash-title-three"><?php esc_html_e( 'Deadline', 'jobus' ); ?></h4>
-                <div class="dash-input-wrapper jbs-mb-30">
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Deadline', 'jobus' ); ?></h4>
+                <div class="jbs-dash-input-wrapper jbs-mb-30">
                     <label for="job_deadline"><?php esc_html_e( 'Application Deadline', 'jobus' ); ?></label>
                     <input type="date" name="job_deadline" id="job_deadline" value="<?php echo esc_attr( $job_deadline ); ?>" placeholder="YYYY-MM-DD">
                 </div>
