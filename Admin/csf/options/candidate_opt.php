@@ -75,7 +75,7 @@ CSF::createSection($settings_prefix, array(
 	'parent' => 'jobus_candidate',
 	'title' => esc_html__('Candidate Archive Page', 'jobus'),
 	'id' => 'candidate_page_layout',
-	'fields' => array(
+	'fields' => array_values( array_filter( array(
 
 		//Subheading field
 		array(
@@ -103,6 +103,15 @@ CSF::createSection($settings_prefix, array(
 			'default' => -1,
 			'desc' => esc_html__('Set the value to \'-1\' to display all candidate posts.', 'jobus'),
 			'class' => trim($pro_access_class . $active_theme_class)
+		),
+
+		array(
+			'id' => 'candidate_page_padding',
+			'type' => 'spacing',
+			'title' => esc_html__('Page Padding', 'jobus'),
+			'subtitle' => esc_html__('Control the top, right, bottom and left padding of the Candidate archive page.', 'jobus'),
+			'output' => array( '.jbs-candidate-classic', '.jbs-candidate-popup' ),
+			'output_mode' => 'padding',
 		),
 
 		array(
@@ -269,7 +278,8 @@ CSF::createSection($settings_prefix, array(
 				),
 			),
 		),
-	)
+	) ) ),
+
 ));
 
 // Candidate Details Layout Settings

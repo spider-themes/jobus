@@ -31,7 +31,7 @@ $location = jobus_get_first_taxonomy_name( 'jobus_company_location' );
 $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields' => 'names' ) );
 ?>
 
-<section class="jbs-company-details jbs-pb-160 jbs-xl-pb-150 jbs-lg-pb-80 jbs-bg-white">
+<section class="jbs-company-details jbs-bg-white">
     <div class="jbs-container">
         <div class="jbs-row">
 

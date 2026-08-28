@@ -94,7 +94,7 @@ CSF::createSection($settings_prefix, array(
 	'parent' => 'jobus_job',
 	'title' => esc_html__('Job Archive Page', 'jobus'),
 	'id' => 'job_page_layout',
-	'fields' => array(
+	'fields' => array_values( array_filter( array(
 
 		array(
 			'type' => 'subheading',
@@ -135,7 +135,7 @@ CSF::createSection($settings_prefix, array(
 			'type' => 'spacing',
 			'title' => esc_html__('Page Padding', 'jobus'),
 			'subtitle' => esc_html__('Control the top, right, bottom and left padding of the Job archive page.', 'jobus'),
-			'output' => '.post-type-archive-jobus_job .jbs-job-classic',
+			'output' => array( '.jbs-job-classic', '.jbs-job-topbar', '.jbs-job-popup' ),
 			'output_mode' => 'padding',
 		),
 
@@ -277,7 +277,8 @@ CSF::createSection($settings_prefix, array(
 				),
 			),
 		),
-	)
+	) ) ),
+
 ));
 
 // -----------------------------------------

@@ -1,0 +1,2939 @@
+@charset "UTF-8";
+/*----------------------------------------------------
+@File: Dashboard Frontend Styles
+
+This file contains the main SCSS imports and documentation for the Jobus frontend dashboard.
+Edit this file to change the look and feel of the dashboard UI.
+----------------------------------------------------*/
+/*====================================================
+@Template Name: Jobus
+@Dashboard Frontend Styles
+Table of Contents:
+01/ Variables
+02/ Mixins
+03/ Dashboard Layout & Components
+=====================================================*/
+:root {
+  --jbs-heading_color: var(--jbs_heading_color_opt, #254035);
+  --jbs-box_bg_color: var(--jbs_box_bg_color_opt, #EFF6F3);
+  --jbs-brand_color_1: var(--jbs_brand_color_1_opt, #31795A);
+  --jbs-brand_color_2: var(--jbs_brand_color_2_opt, #244034);
+  --jbs-brand_color_3: var(--jbs_brand_color_3_opt, #D2F34C);
+  --jbs-brand_color_4: var(--jbs_brand_color_4_opt, #00BF58);
+  --jbs-brand_color_5: var(--jbs_brand_color_5_opt, #005025);
+  --bs_sm: -1 1px 2px rgb(0 0 0 / 5%), 0 1px 4px rgb(0 0 0 / 5%), 0 2px 8px rgb(0 0 0 / 5%);
+  --bs_md: -1 1px 3px rgb(0 0 0 / 6%), 0 2px 6px rgb(0 0 0 / 6%), 0 3px 8px rgb(0 0 0 / 9%);
+  --bs_lg: -1 1px 4px rgb(0 0 0 / 9%), 0 3px 8px rgb(0 0 0 / 9%), 0 4px 13px rgb(0 0 0 / 13%);
+  --border_on_white: #e6edf0;
+  --border_on_highlight: #e6edf0;
+  --body_bg: #ffffff;
+  --bs-white: #fff;
+  --white_op20: rgba(255, 255, 255, 0.2);
+  --black_25: #f9f9f9;
+  --black_50: #f2f2f2;
+  --black_75: #eeeeee;
+  --black_100: #d6d9dc;
+  --black_150: #c8ccd0;
+  --black_200: #bbc0c4;
+  --black_300: #9fa6ad;
+  --black_350: #9199a1;
+  --black_400: #848d95;
+  --black_500: #6a737c;
+  --black_600: #535a60;
+  --black_700: #3c4146;
+  --black_750: #2f3337;
+  --black_800: #242729;
+  --black_900: #0c0d0e;
+}
+
+.jbs-dashboard-pro-notice {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+.jbs-dashboard-pro-notice .jbs-pro-image-wrap {
+  position: relative;
+}
+.jbs-dashboard-pro-notice .jbs-pro-image-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+.jbs-dashboard-pro-notice .jbs-pro-image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+.jbs-dashboard-pro-notice .jbs-pro-image-wrap .pro-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #222;
+  background: linear-gradient(135deg, #ffde4d, #ff9f00);
+  border-radius: 999px;
+  pointer-events: auto;
+}
+.jbs-dashboard-pro-notice:focus-visible {
+  outline: 2px solid #ffb100;
+  outline-offset: 4px;
+}
+
+.jbs-dashboard-pro-lock {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 520px;
+  background: #f5f7fb;
+}
+.jbs-dashboard-pro-lock__preview {
+  filter: blur(8px) saturate(0.85);
+  transform: scale(1.02);
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  opacity: 0.85;
+}
+.jbs-dashboard-pro-lock__preview > * {
+  pointer-events: none !important;
+}
+.jbs-dashboard-pro-lock__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(245, 247, 251, 0.65) 0%, rgba(245, 247, 251, 0.92) 60%, rgba(245, 247, 251, 0.98) 100%);
+  z-index: 2;
+}
+.jbs-dashboard-pro-lock__card {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 28px 32px;
+  box-shadow: 0 18px 50px rgba(17, 24, 39, 0.12);
+  position: relative;
+}
+.jbs-dashboard-pro-lock__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffde4d, #ff9f00);
+  color: #1f2937;
+  font-size: 28px;
+  box-shadow: 0 10px 24px rgba(255, 159, 0, 0.35);
+}
+.jbs-dashboard-pro-lock__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1f2937;
+  background: linear-gradient(135deg, #ffde4d, #ff9f00);
+  border-radius: 999px;
+}
+.jbs-dashboard-pro-lock__title {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+.jbs-dashboard-pro-lock__desc {
+  margin: 0 0 18px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.jbs-dashboard-pro-lock__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  text-align: left;
+  display: inline-block;
+}
+.jbs-dashboard-pro-lock__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  padding: 4px 0;
+}
+.jbs-dashboard-pro-lock__features li i {
+  color: #16a34a;
+  margin-top: 2px;
+}
+.jbs-dashboard-pro-lock__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jbs-dashboard-navbar .jbs-main-nav .active img {
+  filter: brightness(0) saturate(100%) invert(1);
+}
+
+.admin-bar .jbs-dashboard-navbar {
+  margin-top: 32px;
+}
+
+.page-template-page-template-dashboard .site-footer,
+.page-template-page-template-dashboard footer.site-footer,
+.page-template-page-template-dashboard footer#colophon,
+.page-template-page-template-dashboard .jbs-footer,
+.page-template-page-template-dashboard #footer,
+.jbs-dashboard-template .site-footer,
+.jbs-dashboard-template footer.site-footer,
+.jbs-dashboard-template footer#colophon,
+.jbs-dashboard-template .jbs-footer,
+.jbs-dashboard-template #footer {
+  display: none !important;
+}
+
+.jbs-dashboard-navbar {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  min-height: 100vh;
+  overflow-y: auto;
+  width: 260px;
+  background: #fff;
+  padding: 30px 20px 30px;
+}
+.jbs-dashboard-navbar a {
+  text-decoration: none !important;
+}
+.jbs-dashboard-navbar::-webkit-scrollbar {
+  width: 5px;
+}
+.jbs-dashboard-navbar::-webkit-scrollbar-track {
+  background: #fff;
+}
+.jbs-dashboard-navbar::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 0;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-avatar {
+  width: 75px;
+  height: 75px;
+  margin: 40px auto 0;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-avatar img {
+  border-radius: 50%;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-avatar.jbs-online:before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #29d259;
+  border: 3px solid #fff;
+  right: -3px;
+  bottom: 10px;
+  z-index: 1;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name-data .jbs-dropdown-menu {
+  width: 100%;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 12px 0;
+  top: 35px;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name-data .jbs-dropdown-menu .jbs-dropdown-item {
+  text-transform: capitalize;
+  line-height: 45px;
+  padding: 0 5px 0 20px;
+  color: var(--jbs-heading_color);
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  position: relative;
+  letter-spacing: -0.1px;
+  transition: all 0.2s ease-in-out 0s;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name-data .jbs-dropdown-menu .jbs-dropdown-item i {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name-data .jbs-dropdown-menu .jbs-dropdown-item:hover {
+  color: var(--jbs-brand_color_5);
+  background: rgba(0, 0, 0, 0.01);
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name-data .jbs-dropdown-menu .jbs-dropdown-item img {
+  width: 20px;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_2);
+  margin: 15px 0 45px;
+  border: none;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user-name:after {
+  vertical-align: 3px;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user_name-btn {
+  box-shadow: none;
+}
+.jbs-dashboard-navbar .jbs-user-data .jbs-user_name-btn:hover, .jbs-dashboard-navbar .jbs-user-data .jbs-user_name-btn:focus {
+  background-color: transparent;
+}
+.jbs-dashboard-navbar .jbs-main-nav li a {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  color: var(--jbs-brand_color_2);
+  padding: 20px 5px 20px 20px;
+  border-radius: 15px;
+  transition: all 0.25s ease-in-out 0s;
+}
+.jbs-dashboard-navbar .jbs-main-nav li a span {
+  padding-left: 10px;
+}
+.jbs-dashboard-navbar .jbs-main-nav li a:hover {
+  color: #3c8968;
+}
+.jbs-dashboard-navbar .jbs-main-nav li a.active {
+  background: #3f634d;
+  color: #fff;
+}
+.jbs-dashboard-navbar .jbs-main-nav li a img {
+  max-width: 20px;
+}
+.jbs-dashboard-navbar .jbs-profile-complete-status {
+  margin: 60px 0 75px 20px;
+}
+.jbs-dashboard-navbar .jbs-profile-complete-status .jbs-progress-value {
+  color: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-navbar .jbs-profile-complete-status .progress-line {
+  height: 5px;
+  border-radius: 10px;
+  background: #3f634d;
+  overflow: hidden;
+  margin: 9px 0 3px;
+}
+.jbs-dashboard-navbar .jbs-profile-complete-status .progress-line .jbs-inner-line {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #d3fa38;
+}
+.jbs-dashboard-navbar .jbs-profile-complete-status p {
+  font-size: 11px;
+  font-weight: 500;
+  margin: 0;
+  color: rgba(36, 64, 52, 0.5);
+}
+.jbs-dashboard-navbar .jbs-logout-btn {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  color: var(--jbs-brand_color_1);
+  margin-left: 20px;
+  transition: all 0.25s ease-in-out 0s;
+}
+.jbs-dashboard-navbar .jbs-logout-btn span {
+  padding-left: 10px;
+}
+.jbs-dashboard-navbar .jbs-logout-btn:hover {
+  color: #ff5656;
+}
+.jbs-dashboard-navbar .jbs-close-btn {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--jbs-brand_color_1);
+}
+
+.jbs-dashboard-body {
+  min-height: 100vh;
+  background: #f0f5f3;
+  margin-left: 260px;
+  border-radius: 50px 0 0 50px;
+  padding: 150px 55px 50px;
+  margin-bottom: 50px;
+}
+.jbs-dashboard-body a {
+  text-decoration: none;
+  color: #000;
+}
+.jbs-dashboard-body a:hover {
+  color: #000;
+}
+.jbs-dashboard-body .jbs-border-15 {
+  border-radius: 15px;
+}
+.jbs-dashboard-body .jbs-border-20 {
+  border-radius: 20px;
+}
+.jbs-dashboard-body .border-30 {
+  border-radius: 30px;
+}
+.jbs-dashboard-body .jbs-card-box {
+  padding: 45px 60px 50px;
+}
+.jbs-dashboard-body .jbs-main-title {
+  font-size: 36px;
+  color: var(--jbs-brand_color_2);
+  margin-bottom: 40px;
+}
+.jbs-dashboard-body .jbs-dash-title-two {
+  font-size: 20px;
+  color: var(--jbs-brand_color_2);
+  border-bottom: 1px solid #e3f0eb;
+  padding: 25px 0 25px 30px;
+  margin: 0;
+}
+.jbs-dashboard-body .jbs-dash-title-three {
+  font-size: 24px;
+  color: var(--jbs-brand_color_5);
+  margin: 0 0 30px;
+}
+.jbs-dashboard-body .jbs-dash-btn-one {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.15px;
+  color: var(--jbs-brand_color_5);
+  border-radius: 7px;
+  line-height: 40px;
+  padding: 0px 15px;
+  min-width: 135px;
+  text-align: center;
+  background: rgba(63, 99, 77, 0.2);
+  transition: all 0.2s ease-in-out 0s;
+  cursor: pointer;
+  border: none;
+}
+.jbs-dashboard-body .jbs-dash-btn-one i {
+  font-size: 1.5em;
+  font-weight: bold;
+  vertical-align: -5px;
+  margin-right: 2px;
+}
+.jbs-dashboard-body .jbs-dash-btn-one:hover {
+  background: var(--jbs-brand_color_5);
+  color: #fff;
+  text-decoration: none !important;
+}
+.jbs-dashboard-body .jbs-dash-btn-one input[type=file] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.jbs-dashboard-body .jbs-dash-btn-two {
+  font-weight: 500;
+  color: #fff;
+  min-width: 125px;
+  text-align: center;
+  padding: 0 20px;
+  line-height: 45px;
+  border-radius: 50px;
+  background: var(--jbs-brand_color_1);
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.jbs-dashboard-body .jbs-dash-btn-two:hover {
+  background: var(--jbs-brand_color_3) !important;
+  color: #000;
+  text-decoration: none !important;
+}
+.jbs-dashboard-body button#jbs-clear-portfolio-images {
+  font-weight: 500;
+  color: #fff;
+  min-width: 125px;
+  text-align: center;
+  padding: 0 15px;
+  line-height: 45px;
+  border-radius: 50px;
+  background: #fb0a0a;
+  border: none;
+  cursor: pointer;
+}
+.jbs-dashboard-body .jbs-dash-cancel-btn {
+  font-weight: 500;
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-dash-cancel-btn:hover {
+  color: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .dashboard-header {
+  position: fixed;
+  top: 0;
+  right: 55px;
+  left: 315px;
+  background: #f0f5f3;
+  padding: 30px 0;
+  z-index: 999;
+}
+.jbs-dashboard-body .dashboard-header .jbs-search-form {
+  position: relative;
+  height: 45px;
+  width: 318px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-search-form input {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 25px;
+  padding: 0 15px 0 45px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.jbs-dashboard-body .dashboard-header .jbs-search-form button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  border-radius: 25px 0 0 25px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-noti-btn {
+  height: 45px;
+  position: relative;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-noti-btn:after {
+  display: none;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-noti-btn .badge-pill {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff2730;
+  top: 4px;
+  right: -7px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu {
+  max-width: 325px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.12);
+  padding: 25px 18px 30px 22px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu h4 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li {
+  position: relative;
+  padding-right: 10px;
+  cursor: pointer;
+  margin-top: 17px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #d8d8d8;
+  border-radius: 50%;
+  right: 0;
+  top: 5px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li.jbs-unread:before {
+  background: #ff2730;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li h6 {
+  font-size: 15px;
+  margin-bottom: 3px;
+  letter-spacing: -0.2px;
+  color: rgba(0, 0, 0, 0.6);
+  width: 90%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li.jbs-unread h6 {
+  color: #000;
+}
+.jbs-dashboard-body .dashboard-header .jbs-profile-notification .jbs-dropdown-menu .jbs-notify-list li .jbs-time {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.jbs-dashboard-body .dashboard-header .jbs-job-post-btn {
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  width: 135px;
+  line-height: 45px;
+  border-radius: 50px;
+  background: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .dashboard-header .jbs-job-post-btn:hover {
+  background: var(--jbs-brand_color_2);
+  color: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler {
+  width: 44px;
+  height: 38px;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+  z-index: 99;
+  border: none;
+  border-radius: 5px;
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler:focus {
+  box-shadow: none;
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler::before,
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 26px;
+  height: 2px;
+  pointer-events: none;
+  transition: transform 0.25s;
+  transform-origin: 50% 50%;
+  background: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler span {
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  width: 26px;
+  height: 2px;
+  margin-top: -1px;
+  text-indent: 200%;
+  transition: opacity 0.25s;
+  background: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler::before {
+  transform: translate3d(0, -9px, 0) scale3d(1, 1, 1);
+}
+.jbs-dashboard-body .dashboard-header .jbs-dash-mobile-nav-toggler::after {
+  transform: translate3d(0, 8px, 0) scale3d(1, 1, 1);
+}
+.jbs-dashboard-body .jbs-dash-card-one {
+  padding: 22px 35px 34px;
+  z-index: 1;
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+.jbs-dashboard-body .jbs-dash-card-one:before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: -10px;
+  border-radius: 30px;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.6);
+}
+.jbs-dashboard-body .jbs-dash-card-one .icon {
+  width: 65px;
+  height: 65px;
+  background: var(--jbs-brand_color_3);
+}
+.jbs-dashboard-body .jbs-dash-card-one .jbs-value {
+  font-size: 36px;
+  letter-spacing: -0.36px;
+  color: var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-dash-card-one span {
+  color: rgba(0, 0, 0, 0.5);
+}
+.jbs-dashboard-body a .jbs-dash-card-one:hover {
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+.jbs-dashboard-body .jbs-user-activity-chart .jbs-job-list {
+  padding: 25px 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.jbs-dashboard-body .jbs-user-activity-chart .jbs-nice-select {
+  height: 50px;
+  line-height: 46px;
+  border: 2px solid #3f634d;
+  border-radius: 7px;
+  font-size: 15px;
+}
+.jbs-dashboard-body .jbs-user-activity-chart .jbs-nice-select:after {
+  right: 12px;
+}
+.jbs-dashboard-body .jbs-user-activity-chart .jbs-nice-select .option {
+  line-height: 40px;
+}
+.jbs-dashboard-body .jbs-user-activity-chart .jbs-nice-select .current {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 80%;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper {
+  padding: 0 25px 8px 30px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-no-jobs-message {
+  padding: 16px 0 8px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list {
+  position: relative;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  padding: 20px 0;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list:first-child {
+  margin-top: 10px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list:hover {
+  background-color: rgba(63, 99, 77, 0.04);
+  padding-left: 15px;
+  border-radius: 8px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .logo {
+  width: 40px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title {
+  width: calc(100% - 40px);
+  padding-left: 22px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title .jbs-job_title-mb {
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title h6 a {
+  font-size: 16px;
+  color: var(--jbs-brand_color_2);
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out 0s;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title h6 a:hover {
+  text-decoration: underline;
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title .jbs-meta {
+  font-size: 14px;
+  color: rgba(36, 64, 52, 0.5);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .job-title .jbs-meta a {
+  color: rgba(36, 64, 52, 0.5);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action {
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-dropdown-menu {
+  min-width: 120px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-dropdown-menu .jbs-dropdown-item {
+  font-weight: 500;
+  font-size: 13px;
+  padding: 5px 15px;
+  margin: 4px 0;
+  color: rgba(var(--jbs-brand_color_2), 0.55);
+  background: #fff;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-dropdown-menu li:last-child .jbs-dropdown-item {
+  color: #ff5b5b;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn {
+  padding: 8px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn span {
+  display: block;
+  position: relative;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(43, 43, 43, 0.35);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn span:before, .jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn span:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -7px;
+  margin: 0;
+  padding: 0;
+  width: 4px;
+  height: 4px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(43, 43, 43, 0.35);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn span:after {
+  left: auto;
+  right: -7px;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn:after {
+  display: none;
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn:hover span {
+  background: var(--jbs-brand_color_3);
+}
+.jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn:hover span:before, .jbs-dashboard-body .jbs-recent-job-tab .jbs-wrapper .jbs-job-item-list .jbs-job-action .jbs-action-btn:hover span:after {
+  background: var(--jbs-brand_color_3);
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-user-img {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-upload-btn {
+  font-size: 15px;
+  letter-spacing: -0.15px;
+  font-weight: 500;
+  height: 40px;
+  text-align: center;
+  border-radius: 7px;
+  color: var(--jbs-brand_color_2);
+  background: var(--jbs-brand_color_3);
+  cursor: pointer;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-upload-btn:hover {
+  background: var(--jbs-brand_color_1);
+  color: #fff;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-upload-btn input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-upload_btn-width {
+  width: 175px;
+  line-height: 40px;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-delete-btn {
+  font-size: 15px;
+  letter-spacing: -0.15px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_1);
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+.jbs-dashboard-body .jbs-user-avatar-setting .jbs-delete-btn:hover {
+  color: #ff5b5b;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper label {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_2);
+  margin-bottom: 10px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-alert-text {
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper input {
+  width: 100%;
+  height: 55px;
+  letter-spacing: -0.16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  padding: 0 20px;
+  outline: none;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper input:focus {
+  border-color: var(--jbs-brand_color_1);
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper textarea {
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  padding: 15px 20px;
+  max-width: 100%;
+  width: 100%;
+  resize: none;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper textarea.jbs-size-lg {
+  height: 230px;
+  max-height: 200px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-nice-select {
+  height: 55px;
+  line-height: 55px;
+  letter-spacing: -0.16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  padding: 0 25px 0 20px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-nice-select .option {
+  line-height: 38px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-nice-select .list {
+  border-radius: 7px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-map-frame {
+  height: 290px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .location-pin {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  opacity: 0.18;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .location-pin:hover {
+  opacity: 1;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-attached-file {
+  height: 60px;
+  width: 100%;
+  border-radius: 10px;
+  background: #edf2f7;
+  padding: 0 20px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-attached-file span {
+  font-size: 14px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-attached-file .jbs-remove-btn {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-attached-file .jbs-remove-btn:hover {
+  color: #ff5b5b;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper {
+  padding: 15px 20px 10px;
+  background: #f7f7f7;
+  border-radius: 15px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul {
+  margin: 0 -5px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul li {
+  padding: 0 5px;
+  background: none;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul li.jbs-is_tag button {
+  font-size: 15px;
+  color: var(--jbs-brand_color_5);
+  line-height: 42px;
+  padding: 0 40px 0 22px;
+  background: #ffffff;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.0363735);
+  border-radius: 30px;
+  position: relative;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul li.jbs-is_tag button i {
+  position: absolute;
+  font-size: 20px;
+  right: 10px;
+  top: 0;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul li.jbs-is_tag button i:hover {
+  color: #ff5b5b;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skills-wrapper ul li.jbs-more_tag button {
+  font-size: 21px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--jbs-brand_color_3);
+  color: #000;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  padding-bottom: 3px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-info-text {
+  font-size: 14px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-info-text p {
+  color: rgba(0, 0, 0, 0.5);
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-info-text p a {
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-info-text p a:hover {
+  text-decoration: underline;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-info-text .jbs-chng-pass {
+  color: var(--jbs-brand_color_5);
+  text-decoration: underline;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skill-input-data {
+  margin: 0 -3px;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skill-input-data button {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 10px 3px 0;
+  padding: 0 14px;
+  height: 25px;
+  background: rgba(49, 121, 90, 0.1);
+  border-radius: 30px;
+  transition: all 0.2s ease-in-out 0s;
+}
+.jbs-dashboard-body .jbs-dash-input-wrapper .jbs-skill-input-data button:hover {
+  background: var(--jbs-brand_color_1);
+  color: #fff;
+}
+.jbs-dashboard-body .jbs-intro-video-post {
+  height: 350px;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+.jbs-dashboard-body .jbs-intro-video-post .video-icon {
+  width: 65px;
+  height: 65px;
+  background: var(--jbs-brand_color_2);
+  color: #000;
+  font-size: 45px;
+  line-height: 65px;
+  padding-left: 7px;
+}
+.jbs-dashboard-body .jbs-intro-video-post .video-icon:hover {
+  background: var(--jbs-brand_color_3);
+  color: #fff;
+}
+.jbs-dashboard-body .jbs-intro-video-post .close {
+  color: #fff;
+  font-size: 35px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.jbs-dashboard-body .jbs-intro-video-post.empty {
+  border: 1px solid #e3e3e3;
+}
+.jbs-dashboard-body .jbs-intro-video-post input[type=file] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.jbs-dashboard-body .jbs-dash-accordion-one .jbs-collapse.jbs-show {
+  padding-bottom: 20px;
+}
+.jbs-dashboard-body .jbs-dash-accordion-one .jbs-accordion-item {
+  border: 1px solid #eaeaea;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+.jbs-dashboard-body .jbs-dash-accordion-one .jbs-accordion-item .jbs-accordion-button {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  background: transparent;
+  border-radius: 0;
+  padding: 17px 25px;
+  box-shadow: none;
+}
+.jbs-dashboard-body .jbs-dash-accordion-one .jbs-accordion-item .jbs-accordion-button:after {
+  content: url(../images/dashboard/icons/arrow-icon.svg);
+  background-image: none;
+}
+.jbs-dashboard-body .jbs-dash-accordion-one .jbs-accordion-item .jbs-accordion-body {
+  padding: 8px 25px 0;
+}
+.jbs-dashboard-body .jbs-remove-portfolio-item {
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 22px;
+  color: #000;
+}
+.jbs-dashboard-body .jbs-remove-portfolio-item:hover {
+  background: #fff;
+}
+.jbs-dashboard-body .jbs-tab-filter-btn {
+  border: none;
+}
+.jbs-dashboard-body .jbs-tab-filter-btn .nav-link {
+  line-height: 28px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 0 12px;
+  margin: 0 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-tab-filter-btn .nav-link.active {
+  background: var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-short-filter {
+  font-size: 15px;
+}
+.jbs-dashboard-body .jbs-short-filter .jbs-nice-select {
+  min-width: 154px;
+  height: 32px;
+  line-height: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 15px 0 15px;
+  background: transparent;
+  border: 1px solid #000;
+  border-radius: 30px;
+}
+.jbs-dashboard-body .jbs-short-filter .jbs-nice-select:after {
+  right: 14px;
+}
+.jbs-dashboard-body .jbs-short-filter .jbs-nice-select .list {
+  padding: 0;
+}
+.jbs-dashboard-body .jbs-short-filter .jbs-nice-select .option {
+  font-size: 1em;
+}
+.jbs-dashboard-body .jbs-job-alert-table th {
+  border: 0;
+  padding: 12px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #244034;
+  background: #f0f5f3;
+  text-align: left;
+}
+.jbs-dashboard-body .jbs-job-alert-table th:first-child {
+  border-radius: 7px 0 0 7px;
+}
+.jbs-dashboard-body .jbs-job-alert-table th:last-child {
+  border-radius: 0 7px 7px 0;
+}
+.jbs-dashboard-body .jbs-job-alert-table td {
+  font-size: 15px;
+  vertical-align: middle;
+  box-shadow: none;
+  padding: 25px 15px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.jbs-dashboard-body .jbs-job-alert-table td:nth-child(1) {
+  font-weight: 500;
+  color: #244034;
+}
+.jbs-dashboard-body .jbs-job-alert-table td:nth-child(2) .jbs-job-type {
+  color: #00cb74;
+}
+.jbs-dashboard-body .jbs-job-alert-table td:nth-child(2) .jbs-job-type.jbs-part-time {
+  color: #ff5757;
+}
+.jbs-dashboard-body .jbs-job-alert-table td .jbs-info1 {
+  font-size: 14px;
+  font-weight: normal;
+  color: rgba(var(--jbs-brand_color_1), 0.7);
+  margin-top: 2px;
+}
+.jbs-dashboard-body .jbs-job-alert-table td .jbs-job-status {
+  position: relative;
+  padding-left: 18px;
+  color: rgba(var(--jbs-brand_color_1), 0.9);
+}
+.jbs-dashboard-body .jbs-job-alert-table td .jbs-job-status:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  left: 0;
+  top: 7px;
+}
+.jbs-dashboard-body .jbs-job-alert-table tbody tr:last-child td {
+  border: none;
+}
+.jbs-dashboard-body .jbs-job-alert-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+.jbs-dashboard-body .jbs-job-alert-table tbody tr:hover {
+  background-color: rgba(240, 245, 243, 0.6);
+}
+.jbs-dashboard-body .jbs-job-alert-table .active .jbs-job-status:before {
+  background: #28cc8b;
+}
+.jbs-dashboard-body .jbs-job-alert-table .jbs-pending .jbs-job-status:before {
+  background: #fac715;
+}
+.jbs-dashboard-body .jbs-job-alert-table .jbs-expired .jbs-job-status:before {
+  background: #ff5050;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-dropdown-menu {
+  min-width: 140px;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-dropdown-menu .jbs-dropdown-item {
+  padding: 0 15px;
+  line-height: 34px;
+  font-size: 14px;
+  color: #6a6a6a;
+  background: #fff;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-dropdown-menu .jbs-dropdown-item:hover {
+  background-color: #f0f5f3;
+  color: #244034;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-dropdown-menu .jbs-dropdown-item img {
+  display: inline-block;
+  vertical-align: -1px;
+  margin-right: 5px;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-dropdown-menu li:last-child .jbs-dropdown-item:hover {
+  color: #ff5b5b;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn {
+  padding: 8px;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn span {
+  display: block;
+  position: relative;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(43, 43, 43, 0.35);
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn span:before, .jbs-dashboard-body .jbs-action-dots .jbs-action-btn span:after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 4px;
+  height: 4px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(43, 43, 43, 0.35);
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn span:after {
+  top: auto;
+  bottom: -7px;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn:after {
+  display: none;
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn:hover span {
+  background: var(--jbs-brand_color_3);
+}
+.jbs-dashboard-body .jbs-action-dots .jbs-action-btn:hover span:before, .jbs-dashboard-body .jbs-action-dots .jbs-action-btn:hover span:after {
+  background: var(--jbs-brand_color_3);
+}
+.jbs-dashboard-body .jbs-dash-pagination li {
+  font-size: 16px;
+  color: #000;
+  height: 38px;
+}
+.jbs-dashboard-body .jbs-dash-pagination li a {
+  width: 40px;
+  height: 40px;
+  color: #000;
+  text-align: center;
+  line-height: 38px;
+  border: 1px solid #626262;
+  border-right: none;
+  transition: all 0.2s ease-in-out 0s;
+}
+.jbs-dashboard-body .jbs-dash-pagination li a:hover, .jbs-dashboard-body .jbs-dash-pagination li a.active {
+  background: var(--jbs-brand_color_5);
+  color: #fff;
+}
+.jbs-dashboard-body .jbs-dash-pagination li:nth-child(1) a, .jbs-dashboard-body .jbs-dash-pagination li:nth-child(5) a {
+  border-radius: 5px 0 0 5px;
+}
+.jbs-dashboard-body .jbs-dash-pagination li:nth-child(3) a, .jbs-dashboard-body .jbs-dash-pagination li:nth-child(6) a {
+  border-radius: 0 5px 5px 0;
+  border-right: 1px solid #626262;
+}
+.jbs-dashboard-body .jbs-dash-pagination li:nth-child(4) {
+  margin: 0 10px;
+}
+.jbs-dashboard-body .jbs-new-message-compose {
+  width: 45px;
+  line-height: 45px;
+  text-align: center;
+  font-size: 28px;
+  color: #3f634d;
+  background: #d3fa38;
+}
+.jbs-dashboard-body .jbs-message-pagination a {
+  color: #000;
+}
+.jbs-dashboard-body .jbs-message-pagination span {
+  color: #000;
+  font-size: 14px;
+  margin: 0 8px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar {
+  border-right: 1px solid #e3e1e1;
+  height: 100%;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-page-title {
+  font-size: 18px;
+  color: #000;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-action-btn span:before, .jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-action-btn span:after {
+  top: 0;
+  left: -7px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-action-btn span:after {
+  left: auto;
+  right: -7px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-search-form {
+  height: 50px;
+  border-radius: 30px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid #efefef;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-search-form input {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: transparent;
+  border: none;
+  padding: 0 50px 0 15px;
+  font-size: 15px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-search-form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  border-radius: 30px 0 0 30px;
+  transform: none;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-message_filter button {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_2);
+  line-height: 28px;
+  border-radius: 30px;
+  padding: 0 12px;
+  margin: 0 2px;
+  position: relative;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-message_filter button span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  position: absolute;
+  left: -5px;
+  top: 10px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-message_filter button.active {
+  background: var(--jbs-brand_color_5);
+  color: #fff;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-message_filter button.active span {
+  opacity: 0;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item {
+  border-top: 1px solid #f3f3f3;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  cursor: pointer;
+  position: relative;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item.selected {
+  background: #f0f5f3;
+  border-left: 4px solid #779e86;
+  border-right: 4px solid #779e86;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item.selected .jbs-email-short-preview .jbs-file {
+  background: #fff;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview {
+  padding-left: 24px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview .jbs-sender-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(63, 99, 77, 0.8);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview .date {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview .jbs-mail-sub {
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+  margin: 7px 0 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview .jbs-mail-text {
+  font-size: 15px;
+  line-height: 25px;
+  color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-message-sidebar .jbs-email-list-item .jbs-email-short-preview .jbs-file {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: -0.3px;
+  color: rgba(0, 0, 0, 0.5);
+  background: #f0f5f3;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .divider {
+  border-bottom: 1px solid #eeeeee;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-header .logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-header .jbs-sender-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_2);
+  margin-bottom: -4px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-header .jbs-sender-email {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.4);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-header .jbs-time {
+  font-size: 13px;
+  color: rgba(36, 64, 52, 0.6);
+  margin-bottom: 15px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-body {
+  padding-top: 35px;
+  padding-bottom: 15px;
+  font-size: 15px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-body h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-body p a {
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer {
+  padding-top: 20px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments h6 {
+  font-size: 15px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-all-download {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_5);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-file {
+  padding: 9px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-right: 15px;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-file:hover {
+  background: rgba(var(--jbs-brand_color_5), 0.03);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-file .icon {
+  width: 37px;
+  height: 37px;
+  background: #f0f5f3;
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-file .jbs-file-name {
+  font-size: 15px;
+  letter-spacing: -0.3px;
+  color: var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-message-wrapper .jbs-open-email-container .jbs-email-footer .jbs-attachments .jbs-file .jbs-file-size {
+  font-size: 13px;
+  letter-spacing: -0.3px;
+  color: rgba(var(--jbs-brand_color_1), 0.5);
+}
+.jbs-dashboard-body .jbs-candidate-profile-card {
+  overflow: visible;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper {
+  border-radius: 10px;
+  border: 1px solid var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-column {
+  padding: 38px 40px;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-column.border-left {
+  border-left: 1px solid var(--jbs-brand_color_2);
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper h4 {
+  font-size: 20px;
+  color: rgb(37, 64, 53);
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper p {
+  letter-spacing: -0.17px;
+  line-height: 30px;
+  margin: 0;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper h3,
+.jbs-dashboard-body .jbs-membership-plan-wrapper h6 {
+  color: var(--jbs-brand_color_5);
+  margin: 0;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper h3 {
+  font-size: 60px;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper h6 {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-text1 {
+  font-size: 14px;
+  letter-spacing: -0.14px;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-text1 span {
+  color: #000;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-cancel-plan {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--jbs-brand_color_5);
+  text-decoration: underline;
+}
+.jbs-dashboard-body .jbs-membership-plan-wrapper .jbs-cancel-plan:hover {
+  color: #ff2730;
+}
+
+.jbs-compose-new-email-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fff;
+}
+.jbs-compose-new-email-container .jbs-new-email-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.jbs-compose-new-email-container .jbs-new-email-header .btn-group {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 1;
+}
+.jbs-compose-new-email-container .jbs-new-email-header .btn-group a {
+  font-size: 15px;
+  padding: 2px;
+  color: var(--jbs-brand_color_2);
+  margin-left: 8px;
+}
+.jbs-compose-new-email-container .jbs-new-email-header .btn-group a[aria-expanded=true] {
+  text-decoration: underline;
+}
+.jbs-compose-new-email-container .jbs-new-email-header .input-group {
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--jbs-brand_color_2);
+}
+.jbs-compose-new-email-container .jbs-new-email-header .input-group input {
+  border: none;
+  padding: 0 15px 0 0;
+}
+.jbs-compose-new-email-container .jbs-compose-body textarea {
+  width: 100%;
+  max-width: 100%;
+  height: 125px;
+  max-height: 125px;
+  border: none;
+  font-size: 15px;
+  padding: 15px 22px;
+}
+.jbs-compose-new-email-container .jbs-compose-email-footer {
+  padding: 15px 22px;
+}
+.jbs-compose-new-email-container .jbs-compose-email-footer .jbs-insert-file {
+  position: relative;
+  cursor: pointer;
+}
+.jbs-compose-new-email-container .jbs-compose-email-footer .jbs-insert-file input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.jbs-compose-new-email-container .jbs-reply-btn {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 90px;
+  text-align: center;
+  padding: 0 15px;
+  line-height: 35px;
+  border-radius: 50px;
+  background: var(--jbs-brand_color_1);
+}
+.jbs-compose-new-email-container .jbs-reply-btn:hover {
+  background: var(--jbs-brand_color_2);
+  color: var(--jbs-brand_color_1);
+}
+
+.jbs-compose-mail-offcanvas {
+  right: 55px;
+  bottom: 0;
+  max-width: 700px;
+  background: #fff;
+  padding: 50px 15px 15px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: none;
+}
+.jbs-compose-mail-offcanvas.jbs-show {
+  display: block;
+}
+.jbs-compose-mail-offcanvas .btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  box-shadow: none;
+}
+
+.jbs-remove-account-popup {
+  background: #fff;
+  margin: 0 auto;
+  max-width: 630px;
+  border-radius: 10px !important;
+  padding: 50px 20px;
+}
+.jbs-remove-account-popup h2 {
+  font-size: 36px;
+  color: var(--jbs-brand_color_2);
+  margin: 20px 0;
+}
+.jbs-remove-account-popup .jbs-confirm-btn {
+  width: 80px;
+  line-height: 40px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  background: var(--jbs-brand_color_5);
+}
+.jbs-remove-account-popup .jbs-confirm-btn:hover {
+  background: #ff5b5b;
+}
+.jbs-remove-account-popup .btn-close {
+  background: none;
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+  font-size: 16px;
+  color: #000;
+  opacity: 1;
+  box-shadow: none;
+}
+
+/*========== Editor Markup Styling ===========*/
+#candidate-profile-form .wp-editor-container .jbs-quicktags-toolbar .jbs-ed_button {
+  width: auto;
+  height: auto;
+}
+
+.jbs-media-frame-toolbar .jbs-media-toolbar-primary .jbs-media-button {
+  position: unset;
+  transform: none;
+}
+
+/*========== Portfolio Styling ===========*/
+.jbs-portfolio-preview-wrapper .jbs-portfolio-image-list {
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.jbs-portfolio-preview-wrapper .jbs-portfolio-image-list li {
+  list-style: none;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.jbs-portfolio-preview-wrapper .jbs-portfolio-image-list li img {
+  width: 100px;
+  height: 100px;
+}
+
+body.page-template-dashboard .site-header {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .jbs-dashboard-body {
+    padding: 150px 25px 50px;
+  }
+  .jbs-dashboard-body .jbs-card-box {
+    padding: 45px 20px 50px;
+  }
+}
+@media (max-width: 767px) {
+  .jbs-dashboard-body {
+    padding: 0px;
+  }
+}
+.jbs-dashboard-body .jbs-preview {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.jbs-dashboard-body .jbs-preview.hidden {
+  display: none;
+}
+.jbs-dashboard-body .jbs-preview .jbs-attached-file {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+.jbs-dashboard-body .jbs-preview .jbs-attached-file span {
+  font-size: 0.95rem;
+  color: #343a40;
+  font-weight: 500;
+  word-break: break-word;
+}
+.jbs-dashboard-body .jbs-preview .jbs-attached-file .jbs-remove-btn {
+  color: #dc3545;
+  transition: all 0.3s ease;
+}
+.jbs-dashboard-body .jbs-preview .jbs-attached-file .jbs-remove-btn:hover {
+  color: #bd2130;
+  transform: scale(1.1);
+}
+.jbs-dashboard-body #jbs-cv-upload-btn-wrapper {
+  margin-bottom: 0.5rem;
+}
+.jbs-dashboard-body #jbs-cv-upload-btn-wrapper.hidden {
+  display: none;
+}
+.jbs-dashboard-body #jbs-cv-upload-btn-wrapper input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.jbs-dashboard-body .jbs-file-info {
+  display: block;
+  margin-top: 0.5rem;
+}
+.jbs-dashboard-body .jbs-file-info.hidden {
+  display: none;
+}
+.jbs-dashboard-body .jbs-file-info small {
+  color: #6c757d;
+  font-style: italic;
+}
+.jbs-dashboard-body .jbs-bg-img-preview {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.jbs-dashboard-body .jbs-bg-img-preview.hidden {
+  display: none;
+}
+.jbs-dashboard-body .jbs-bg-img-preview .jbs-attached-file {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+.jbs-dashboard-body .jbs-bg-img-preview .jbs-attached-file span {
+  font-size: 0.95rem;
+  color: #343a40;
+  font-weight: 500;
+  word-break: break-word;
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.jbs-dashboard-body .jbs-bg-img-preview .jbs-attached-file .jbs-remove-btn {
+  color: #dc3545;
+  transition: all 0.3s ease;
+}
+.jbs-dashboard-body .jbs-bg-img-preview .jbs-attached-file .jbs-remove-btn:hover {
+  color: #bd2130;
+  transform: scale(1.1);
+}
+.jbs-dashboard-body #bg-img-upload-btn-wrapper {
+  margin-bottom: 0.5rem;
+}
+.jbs-dashboard-body #bg-img-upload-btn-wrapper.hidden {
+  display: none !important;
+}
+.jbs-dashboard-body #bg-img-upload-btn-wrapper #video_bg_img_upload_btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+.jbs-dashboard-body .jbs-taxonomy-input-wrapper {
+  position: relative;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+}
+.jbs-dashboard-body .jbs-taxonomy-input {
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-width: 150px;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.jbs-dashboard-body input.taxonomy-input:focus {
+  border-color: #7B67FF;
+  box-shadow: 0 0 0 0.2rem rgba(123, 103, 255, 0.08);
+}
+.jbs-dashboard-body .jbs-is_tag {
+  background: #F6F4FF;
+  border-radius: 4px;
+  padding: 5px 12px;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  font-size: 14px;
+  color: #7B67FF;
+  font-weight: 500;
+}
+.jbs-dashboard-body .jbs-is_tag button {
+  background: none;
+  border: none;
+  color: #7B67FF;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.jbs-dashboard-body .jbs-is_tag button i {
+  font-size: 12px;
+  opacity: 0.7;
+}
+.jbs-dashboard-body .jbs-is_tag button:hover i {
+  opacity: 1;
+}
+.jbs-dashboard-body .jbs-more_tag {
+  margin-left: 5px;
+  display: inline-block;
+}
+.jbs-dashboard-body .jbs-more_tag button {
+  background: #F6F4FF;
+  border: none;
+  color: #7B67FF;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background 0.2s, color 0.2s;
+}
+.jbs-dashboard-body .jbs-more_tag button:hover {
+  background: #7B67FF;
+  color: #fff;
+}
+
+/*==== Saved Job ======*/
+/* Count badge — sits inline inside h2 */
+.jbs-saved-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 20px;
+  background: var(--jbs_brand_color_3_opt, #d2f34c);
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+  top: -8px;
+}
+
+/* Right-side toolbar: two separate pills with gap */
+.jbs-saved-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (max-width: 575px) {
+  .jbs-saved-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+.jbs-saved-toolbar {
+  /* Browse button */
+}
+.jbs-saved-toolbar .jbs-browse-candidates-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 10px 16px;
+}
+.jbs-saved-toolbar .jbs-browse-candidates-btn i {
+  font-size: 14px;
+}
+
+.jbs-candidate-avatar img {
+  width: 80px;
+  height: 80px;
+}
+
+/* Search pill — standalone */
+.jbs-saved-candidate-search {
+  display: flex;
+  align-items: center;
+}
+.jbs-saved-candidate-search .jbs-input-box {
+  position: relative;
+}
+.jbs-saved-candidate-search .jbs-input-box input[type=text] {
+  height: 42px;
+  padding: 0 42px 0 18px;
+  border: 1.5px solid #E3F0EB;
+  border-radius: 50px;
+  font-size: 14px;
+  width: 220px;
+  background: #fff;
+  color: #444;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.jbs-saved-candidate-search .jbs-input-box input[type=text]:focus {
+  border-color: #3F634D;
+}
+.jbs-saved-candidate-search .jbs-input-box input[type=text]::-moz-placeholder {
+  color: #aaa;
+}
+.jbs-saved-candidate-search .jbs-input-box input[type=text]::placeholder {
+  color: #aaa;
+}
+@media (max-width: 575px) {
+  .jbs-saved-candidate-search .jbs-input-box input[type=text] {
+    width: 100%;
+  }
+}
+.jbs-saved-candidate-search .jbs-input-box .jbs-search-submit-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #3F634D;
+  font-size: 15px;
+  line-height: 1;
+}
+.jbs-saved-candidate-search .jbs-input-box .jbs-search-submit-btn:hover {
+  color: #244034;
+}
+
+/* Empty state card */
+.jbs-empty-state-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 60px 30px;
+  text-align: center;
+}
+
+.jbs-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.jbs-empty-state h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #244034;
+  margin: 0;
+}
+.jbs-empty-state p {
+  color: #6c757d;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.6;
+}
+.jbs-empty-state .jbs-btn {
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.jbs-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #f0faf5;
+  margin-bottom: 4px;
+}
+.jbs-empty-icon i {
+  font-size: 32px;
+  color: var(--jbs_brand_color_4_opt, #00BF58);
+}
+
+/* Search spinner inside input */
+.jbs-search-loading {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.jbs-dashboard-body .jbs-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-saved-jobs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 30px;
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-saved-jobs-header .title,
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-saved-jobs-header .jbs-view-more-btn {
+  font-size: 20px;
+  color: #244034;
+  font-weight: 500;
+  margin: 0;
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-saved-jobs-header .jbs-view-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-saved-jobs-header .jbs-view-more-btn:hover {
+  color: #3F634D;
+  transform: translateX(5px);
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-job-list-one {
+  border-top: 1px solid #E3F0EB;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.jbs-dashboard-body .jbs-saved-job-tab .jbs-job-list-one:last-child {
+  border-radius: 10px;
+}
+
+/*============= Candidate Job Applied ================*/
+.jbs-dashboard-body .jbs-company-name .jbs-company-placeholder {
+  width: 48px;
+  height: 48px;
+  background: #CBCBCB;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.jbs-dashboard-body .jbs-job-actions .jbs-action-button .jbs-save-btn {
+  width: 35px;
+  height: 35px;
+  line-height: 32px;
+  border: 1px solid #D6D6D6;
+  color: #CBCBCB;
+}
+.jbs-dashboard-body .jbs-job-actions .jbs-action-button .jbs-save-btn:hover {
+  background: #E7F6EF;
+  border-color: #E7F6EF;
+  color: #005025;
+}
+
+.jbs-candidate-delete-account-wrap .title {
+  font-size: 24px;
+  color: #31795A;
+}
+
+.jbs-dashboard-body .jbs-placeholder_icon {
+  position: absolute;
+  height: 60px;
+  top: 30px;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  text-align: center;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 17px;
+}
+.jbs-dashboard-body .jbs-placeholder_icon span {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
+  position: relative;
+}
+.jbs-dashboard-body .jbs-placeholder_icon span::before {
+  content: "";
+  width: 2px;
+  height: 26px;
+  background: #000;
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  transform: rotate(45deg);
+  z-index: 5;
+  transition: all 0.2s ease-in-out;
+}
+.jbs-dashboard-body .jbs-placeholder_icon span.jbs-eye-slash::before {
+  opacity: 0;
+}
+.jbs-dashboard-body .jbs-placeholder_icon span img {
+  position: relative;
+  top: 40%;
+  margin: 0 auto;
+  transform: translateY(-50%);
+}
+
+.jbs-no-jobs-found {
+  padding: 24px 35px;
+  border-top: 1px solid #E3F0EB;
+}
+
+.jbs-dashboard-body table.applied-jobs th:last-child {
+  text-align: right;
+}
+
+.jbs-chat-list {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 25px;
+  gap: 4px;
+  background-color: #ffffff;
+  overflow-y: auto;
+  height: 100%;
+}
+@media (max-width: 480px) {
+  .jbs-chat-list {
+    padding: 0 4px 0 0;
+  }
+}
+
+.jbs-chat-message {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 2px;
+}
+.jbs-chat-message.jbs-group-end {
+  margin-bottom: 12px;
+}
+.jbs-chat-message.jbs-message-out {
+  justify-content: flex-end;
+}
+.jbs-chat-message.jbs-message-out .jbs-chat-inner {
+  align-items: flex-end;
+}
+.jbs-chat-message.jbs-message-in {
+  justify-content: flex-start;
+}
+.jbs-chat-message.jbs-message-in .jbs-chat-inner {
+  align-items: flex-start;
+}
+
+.jbs-chat-date-divider {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+.jbs-chat-date-divider span {
+  background: rgba(0, 0, 0, 0.05);
+  color: #65676b;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.jbs-chat-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 70%;
+  min-width: 0;
+}
+
+.jbs-chat-bubble {
+  position: relative;
+  padding: 8px 12px;
+  font-size: 14.5px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.jbs-chat-bubble.jbs-is-sender {
+  background-color: var(--jbs-brand_color_1, #31795A);
+  color: #ffffff;
+  border-radius: 18px 18px 4px 18px;
+}
+.jbs-chat-bubble.jbs-is-sender.jbs-continues-prev {
+  border-top-right-radius: 4px;
+}
+.jbs-chat-bubble.jbs-is-sender.jbs-continues-next {
+  border-bottom-right-radius: 4px;
+}
+.jbs-chat-bubble.jbs-is-receiver {
+  background-color: #f0f2f5;
+  color: #1d1f23;
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+.jbs-chat-bubble.jbs-is-receiver.jbs-continues-prev {
+  border-top-left-radius: 4px;
+}
+.jbs-chat-bubble.jbs-is-receiver.jbs-continues-next {
+  border-bottom-left-radius: 4px;
+}
+
+.jbs-chat-text {
+  display: block;
+  color: inherit;
+}
+
+.jbs-chat-time {
+  font-size: 10px;
+  margin-top: 4px;
+  align-self: flex-end;
+  opacity: 0.8;
+  line-height: 1;
+}
+.jbs-is-sender .jbs-chat-time {
+  color: rgba(255, 255, 255, 0.85);
+}
+.jbs-is-receiver .jbs-chat-time {
+  color: #8c939d;
+}
+
+.jbs-chat-avatar-wrap {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.jbs-chat-avatar-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.jbs-chat-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #cbd5e1;
+  font-size: 11px;
+}
+
+.jbs-chat-footer {
+  background: #ffffff;
+  padding: 12px 20px;
+  border-top: 1px solid #f1f2f4;
+  flex-shrink: 0;
+}
+.jbs-chat-footer .jbs-chat-form {
+  width: 100%;
+  margin: 0;
+}
+.jbs-chat-footer .jbs-chat-composer-wrap {
+  width: 100%;
+}
+.jbs-chat-footer .jbs-chat-composer {
+  display: flex;
+  align-items: center;
+  background-color: #f0f2f5;
+  border-radius: 20px;
+  padding: 4px 6px 4px 16px;
+  transition: background-color 0.2s;
+}
+.jbs-chat-footer .jbs-chat-composer:focus-within {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #d1d5db;
+}
+.jbs-chat-footer input[type=text].jbs-chat-input {
+  font-size: 14px;
+  color: #1d1f23;
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  padding: 8px 0;
+  margin: 0;
+  height: 36px;
+}
+.jbs-chat-footer input[type=text].jbs-chat-input::-moz-placeholder {
+  color: #8e959f;
+}
+.jbs-chat-footer input[type=text].jbs-chat-input::placeholder {
+  color: #8e959f;
+}
+.jbs-chat-footer .jbs-chat-submit {
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--jbs-brand_color_1, #31795A);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.jbs-chat-footer .jbs-chat-submit:hover {
+  opacity: 0.9;
+}
+.jbs-chat-footer .jbs-chat-submit:active {
+  opacity: 0.8;
+}
+.jbs-chat-footer .jbs-chat-submit i {
+  font-size: 13px;
+  color: #ffffff;
+  margin-left: -2px;
+}
+
+.jbs-chat-history {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+
+.jbs-chat-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 25px;
+  border-bottom: 1px solid #f1f2f4;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.jbs-chat-sender-info {
+  display: flex;
+  align-items: center;
+}
+
+.jbs-chat-header-avatar {
+  margin-right: 12px;
+}
+
+.jbs-chat-header-name {
+  padding-left: 0;
+}
+
+.jbs-chat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.jbs-chat-read {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.jbs-chat-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.jbs-chat-actions .jbs-reply-email {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.jbs-chat-actions .jbs-reply-email img {
+  width: 24px;
+  height: 24px;
+}
+
+.jbs-chat-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: #ffffff;
+  max-height: 600px;
+}
+
+.jbs-chat-thread-avatar {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.jbs-chat-thread-info {
+  min-width: 0;
+}
+
+.jbs-messaging__history {
+  display: none;
+}
+
+.jbs-chat-empty-state {
+  display: none;
+  min-height: 400px;
+  align-items: center;
+  justify-content: center;
+}
+.jbs-chat-empty-state[style*="display: block"] {
+  display: flex !important;
+}
+
+.jbs-chat-header-avatar {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+.jbs-chat-header-avatar img {
+  width: 100%;
+  height: 100%;
+  display: none;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.jbs-application-details .jbs-app-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.jbs-application-details .jbs-app-details-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: nowrap;
+}
+.jbs-application-details .jbs-app-details-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.jbs-application-details .jbs-app-details-back:hover {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #d1d5db;
+}
+.jbs-application-details .jbs-app-details-back i {
+  font-size: 16px;
+}
+.jbs-application-details .jbs-main-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+.jbs-application-details .status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.jbs-application-details .status-badge::before {
+  top: 0 !important;
+  margin-right: 8px !important;
+}
+.jbs-application-details .jbs-app-details-summary {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.jbs-application-details .jbs-app-details-summary-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+.jbs-application-details .jbs-app-details-summary-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.jbs-application-details .jbs-app-details-summary-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #111827;
+  line-height: 1.2;
+}
+.jbs-application-details .jbs-app-details-summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1;
+}
+.jbs-application-details .jbs-app-details-summary-meta > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+.jbs-application-details .jbs-app-details-summary-meta i {
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+}
+.jbs-application-details .jbs-app-details-summary-meta a {
+  color: #6b7280;
+  text-decoration: none;
+}
+.jbs-application-details .jbs-app-details-summary-meta a:hover {
+  color: #111827;
+}
+.jbs-application-details .jbs-app-details-summary-divider {
+  width: 3px;
+  height: 3px;
+  background: #d1d5db;
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+.jbs-application-details .jbs-app-details-summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.jbs-application-details .jbs-app-details-card {
+  padding: 24px;
+}
+.jbs-application-details .jbs-app-details-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.jbs-application-details .jbs-app-details-card-head h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+.jbs-application-details .jbs-app-details-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(13, 110, 253, 0.08);
+  color: var(--jbs_brand_color_4_opt, #0d6efd);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.jbs-application-details .jbs-application-meta li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  gap: 16px;
+}
+.jbs-application-details .jbs-application-meta li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.jbs-application-details .jbs-application-meta li:first-child {
+  padding-top: 0;
+}
+.jbs-application-details .jbs-app-details-info-label {
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+}
+.jbs-application-details .jbs-app-details-info-value {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+.jbs-application-details .jbs-app-details-info-value a {
+  color: var(--jbs_brand_color_4_opt, #0d6efd);
+}
+.jbs-application-details .jbs-application-message {
+  background: #f9fafb;
+  border-left: 3px solid var(--jbs_brand_color_4_opt, #0d6efd);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.jbs-application-details .jbs-application-message p {
+  margin: 0 0 8px;
+}
+.jbs-application-details .jbs-application-message p:last-child {
+  margin: 0;
+}
+.jbs-application-details .jbs-application-message--empty {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 14px 18px;
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 14px;
+}
+.jbs-application-details .jbs-app-details-cv-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+.jbs-application-details .jbs-app-details-cv-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.jbs-application-details .jbs-app-details-cv-info {
+  flex: 1;
+  min-width: 0;
+}
+.jbs-application-details .jbs-app-details-cv-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+  word-break: break-all;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.jbs-application-details .jbs-app-details-cv-meta {
+  font-size: 12px;
+  color: #6b7280;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.jbs-application-details .jbs-app-details-cv-ext {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.jbs-application-details .jbs-app-details-cv-empty {
+  text-align: center;
+  padding: 28px 16px;
+  background: #f9fafb;
+  border-radius: 10px;
+  color: #9ca3af;
+}
+.jbs-application-details .jbs-app-details-cv-empty i {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+.jbs-application-details .jbs-app-details-cv-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.jbs-application-details .jbs-app-details-cv-actions .jbs-btn {
+  justify-content: center;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+.jbs-application-details .jbs-app-details-decision-help {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+.jbs-application-details .jbs-app-status-select {
+  position: relative;
+}
+.jbs-application-details .jbs-app-status-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+.jbs-application-details .jbs-app-status-select-trigger:hover {
+  border-color: #d1d5db;
+  background: #fafafa;
+}
+.jbs-application-details .jbs-app-status-select-trigger[aria-expanded=true] {
+  border-color: var(--jbs_brand_color_4_opt, #0d6efd);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+}
+.jbs-application-details .jbs-app-status-select-trigger[aria-expanded=true] .jbs-app-status-select-chevron {
+  transform: rotate(180deg);
+}
+.jbs-application-details .jbs-app-status-select-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.jbs-application-details .jbs-app-status-select-chevron {
+  color: #9ca3af;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.jbs-application-details .jbs-app-status-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
+  z-index: 20;
+  display: none;
+  animation: jbs-app-details-fade-down 0.12s ease;
+}
+.jbs-application-details .jbs-app-status-select-menu.jbs-is-open {
+  display: block;
+}
+.jbs-application-details .jbs-app-status-select-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #111827;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+.jbs-application-details .jbs-app-status-select-option:hover {
+  background: #f3f4f6;
+}
+.jbs-application-details .jbs-app-status-select-opt-label {
+  flex: 1;
+  min-width: 0;
+}
+.jbs-application-details .jbs-app-status-select-opt-icon {
+  color: #9ca3af;
+  font-size: 13px;
+}
+.jbs-application-details .jbs-app-status-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.jbs-application-details .jbs-app-status-swatch--pending {
+  background: #ffc107;
+}
+.jbs-application-details .jbs-app-status-swatch--shortlisted {
+  background: #0dcaf0;
+}
+.jbs-application-details .jbs-app-status-swatch--approved {
+  background: #198754;
+}
+.jbs-application-details .jbs-app-status-swatch--rejected {
+  background: #dc3545;
+}
+.jbs-application-details .jbs-action-dots .jbs-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.jbs-application-details .jbs-action-dots .jbs-action-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+.jbs-application-details .jbs-action-dots .jbs-action-btn span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+}
+
+@keyframes jbs-app-details-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

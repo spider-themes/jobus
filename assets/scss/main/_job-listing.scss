@@ -1,6 +1,8 @@
 .post-type-archive-jobus_job,
 .tax-jobus_job_cat {
-  .jbs-job-classic {
+  .jbs-job-classic,
+  .jbs-job-topbar,
+  .jbs-job-popup {
     padding: 110px 0 140px;
 
     @media (max-width: 768px) {

@@ -1,4 +1,15 @@
 //================== Candidate Classic =========================//
+.post-type-archive-jobus_candidate {
+  .jbs-candidate-classic,
+  .jbs-candidate-popup {
+    padding: 110px 0 140px;
+
+    @media (max-width: 768px) {
+      padding: 80px 0 100px;
+    }
+  }
+}
+
 .jbs-candidate-classic {
   background: var(--bs-white, #ffffff);
 }

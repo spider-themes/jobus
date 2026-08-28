@@ -1,3 +1,13 @@
+.post-type-archive-jobus_company {
+  .jbs-company-classic {
+    padding: 110px 0 140px;
+
+    @media (max-width: 768px) {
+      padding: 80px 0 100px;
+    }
+  }
+}
+
 .jbs-company-profiles.jbs-bg-color {
   background: var(--jbs-box_bg_color);
 }

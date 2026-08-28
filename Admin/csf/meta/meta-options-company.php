@@ -37,7 +37,7 @@ if ( class_exists( 'CSF' ) ) {
 				'bottom'   => true,
 				'left'     => false,
 				'right'    => false,
-				'output'   => '.company-details',
+				'output'   => '.jbs-company-details',
 				'output_mode' => 'padding',
 				'output_important' => true,
 			),

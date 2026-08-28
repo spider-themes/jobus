@@ -1,0 +1,208 @@
+.jbs-filter-area-tab .jbs-nice-select {
+  text-align: right !important;
+}
+.jbs-filter-area-tab .jbs-nice-select:before {
+  right: initial;
+  left: 10px;
+}
+
+.jbs-filter-area-tab .jbs-nice-select .option {
+  text-align: right;
+}
+
+.jbs-popUpModal .modal-content .btn-close {
+  left: 15px;
+  right: initial;
+}
+
+.jbs-candidate-profile-sidebar .email-form input {
+  text-align: right;
+}
+
+.jbs-candidates-profile-details .inner-card.border-style > .wp-block-heading {
+  right: 25px;
+  left: initial;
+}
+
+.jbs-candidates-profile-details .skill-tags {
+  padding-right: 0;
+}
+.jbs-candidates-profile-details .title {
+  right: 25px;
+  left: initial;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.jbs-candidates-profile-details .time-line-data .info {
+  padding: 0 65px 45px 0;
+}
+.jbs-candidates-profile-details .time-line-data .info:before {
+  left: inherit;
+  right: 22px;
+}
+.jbs-candidates-profile-details .time-line-data .info .numb {
+  right: 0;
+  left: initial;
+}
+
+.jbs-candidate-profile-card .jbs-profile-btn {
+  margin: 10px 0 0 !important;
+}
+.jbs-candidate-profile-card .jbs-candidate-avatar.online:before {
+  right: 60px;
+}
+
+.jbs-list-layout .jbs-right-side {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.jbs-list-layout.jbs-no-avatar .jbs-right-side {
+  padding-right: 0;
+}
+
+.jbs-candidate-profile-2-sidebar .jbs-email-form input {
+  text-align: right;
+}
+
+.jbs-candidates-profile-details-2 .jbs-skill-tags {
+  padding-right: 0;
+}
+.jbs-candidates-profile-details-2 .jbs-time-line-data .jbs-info {
+  padding: 0 65px 45px 0;
+}
+.jbs-candidates-profile-details-2 .jbs-time-line-data .jbs-info:before {
+  left: inherit;
+  right: 22px;
+}
+.jbs-candidates-profile-details-2 .jbs-time-line-data .jbs-info .jbs-numb {
+  right: 0;
+  left: initial;
+}
+
+.jbs-candidates-profile-details .candidate-portfolio-slider .slick-dots {
+  right: initial;
+  left: 10px;
+}
+
+.jbs-candidate-profile-card.jbs-list-layout .jbs-candidate-skills {
+  width: -moz-max-content;
+  width: max-content;
+  right: 0;
+  padding-right: 0;
+}
+
+.jbs-candidates-profile .ms-xxl-5 {
+  margin-left: 0 !important;
+}
+
+.jbs-upper-filter .jbs-short-filter .jbs-nice-select .option {
+  text-align: right;
+}
+
+.jbs-filter-area-tab .jbs-filter-input {
+  padding-right: 0;
+}
+.jbs-filter-area-tab .jbs-filter-input li label::before {
+  right: 0;
+  left: initial;
+}
+.jbs-filter-area-tab .jbs-filter-input li label {
+  padding-left: 0;
+  padding-right: 28px;
+}
+.jbs-filter-area-tab .jbs-filter-input li label span {
+  float: left;
+}
+
+.jbs-filter-area-tab .jbs-input-box button {
+  left: 0;
+  right: initial;
+}
+
+.jbs-company-list-layout .jbs-company-data {
+  padding-left: 0;
+  padding-right: 29px;
+}
+
+.jbs-job-company-info .jbs-job-meta-data div a {
+  margin-right: 0 !important;
+}
+
+.jbs-company-details .jbs-details-post-data .slick-dots {
+  right: initial;
+  left: 10px;
+}
+
+.jbs-company-details .jbs-details-post-data .jbs-share-option ul {
+  padding-right: 0;
+}
+.jbs-company-details .jbs-details-post-data .jbs-share-option ul li a {
+  margin-left: 0;
+  margin-right: 6px;
+}
+
+.jbs-job-details .jbs-details-post-data .wp-block-group .wp-block-heading code mark {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.jbs-title-three h2.main-font {
+  text-align: right !important;
+}
+
+.jbs-related-job .jbs-slick-arrow-one {
+  right: initial;
+  left: 0;
+  padding-right: 0;
+}
+
+.bi-arrow-left::before {
+  transform: rotate(180deg);
+}
+
+.bi-arrow-right::before {
+  transform: rotate(180deg);
+}
+
+.jbs-job-details .jbs-details-post-data .wp-block-group ul {
+  padding-right: 0;
+}
+.jbs-job-details .jbs-details-post-data .wp-block-group ul li {
+  padding-left: 0;
+  padding-right: 30px;
+}
+.jbs-job-details .jbs-details-post-data .wp-block-group ul li:before {
+  left: initial;
+  right: 0;
+}
+
+.jbs-user-data-form .jbs-form-wrapper .jbs-row {
+  text-align: right !important;
+}
+.jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta input {
+  text-align: right !important;
+}
+
+.jbs-card-item {
+  width: 16.66666% !important;
+}
+
+.card-style-seven a .title {
+  margin-left: 0;
+  margin-right: 12px;
+}
+
+.jbs-filter-area-tab .jbs-filter-header:before {
+  right: initial;
+  left: 25px;
+}
+
+.jbs-job-list-one .jbs-split-box1 {
+  padding-left: 0 !important;
+  padding-right: 30px;
+}
+.jbs-job-list-one .title {
+  margin-right: 0;
+}

@@ -76,7 +76,7 @@ CSF::createSection($settings_prefix, array(
 	'parent' => 'jobus_company',
 	'title' => esc_html__('Company Archive Page', 'jobus'),
 	'id' => 'company_page_layout',
-	'fields' => array(
+	'fields' => array_values( array_filter( array(
 
 		//Subheading field
 		array(
@@ -104,6 +104,15 @@ CSF::createSection($settings_prefix, array(
 			'default' => -1,
 			'desc' => esc_html__('Set the value to \'-1\' to display all company posts.', 'jobus'),
 			'class' => trim($pro_access_class . $active_theme_class),
+		),
+
+		array(
+			'id' => 'company_page_padding',
+			'type' => 'spacing',
+			'title' => esc_html__('Page Padding', 'jobus'),
+			'subtitle' => esc_html__('Control the top, right, bottom and left padding of the Company archive page.', 'jobus'),
+			'output' => '.jbs-company-classic',
+			'output_mode' => 'padding',
 		),
 
 		array(
@@ -253,7 +262,8 @@ CSF::createSection($settings_prefix, array(
 				),
 			),
 		),
-	)
+	) ) ),
+
 ));
 
 // Company Details Layout Settings
@@ -278,7 +288,7 @@ CSF::createSection($settings_prefix, array(
 			'bottom' => true,
 			'left' => false,
 			'right' => false,
-			'output' => '.company-details',
+			'output' => '.jbs-company-details',
 			'output_mode' => 'padding',
 		),
 
