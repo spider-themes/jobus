@@ -209,9 +209,8 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
 
                     if ( ! empty( $testimonials ) && ! empty( $testimonial_title ) ) {
                         ?>
-                        <div class="jbs-position-relative">
-                            <h3><?php echo esc_html( $testimonial_title ); ?></h3>
-                            <div class="jbs-company-review-slider">
+                        <h3><?php echo esc_html( $testimonial_title ); ?></h3>
+                        <div class="jbs-company-review-slider">
                                 <?php
                                 foreach ( $testimonials as $testimonial ) {
                                     $author_name    = ! empty( $testimonial['author_name'] ) ? $testimonial['author_name'] : '';
@@ -247,7 +246,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                                 <?php endif; ?>
                                             </div>
                                             <?php if ( $review_content ) : ?>
-                                                <blockquote><?php echo esc_html( $review_content ); ?></blockquote>
+                                                <p class="jbs-review-text"><?php echo esc_html( $review_content ); ?></p>
                                             <?php endif; ?>
                                             <div class="jbs-d-flex jbs-align-items-center">
                                                 <?php if ( $author_img_id ) : ?>
@@ -269,7 +268,6 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                 }
                                 ?>
                             </div>
-                        </div>
                         <?php
                     }
                     ?>

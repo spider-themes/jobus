@@ -47,25 +47,33 @@
 
         // Testimonial slider
         function testimonialSlider() {
+            const reviewSliders = $('.jbs-company-review-slider, .company-review-slider');
 
-            let reviewSlider = $('.jbs-company-review-slider');
-            let dataRtlreview = reviewSlider.data("rtl");
-            if (reviewSlider.length > 0) {
-                reviewSlider.slick({
-                    rtl: dataRtlreview,
-                    dots: true,
-                    arrows: false,
-                    lazyLoad: 'ondemand',
-                    centerPadding: '0px',
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 3000,
-                    responsive: [{
-                        breakpoint: 768, settings: {
-                            slidesToShow: 1
-                        }
-                    }]
+            if (reviewSliders.length > 0 && $.fn.slick) {
+                reviewSliders.each(function () {
+                    const $slider = $(this);
+
+                    if ($slider.hasClass('slick-initialized')) {
+                        return;
+                    }
+
+                    $slider.slick({
+                        rtl: $slider.data('rtl'),
+                        dots: true,
+                        arrows: false,
+                        lazyLoad: 'ondemand',
+                        centerPadding: '0px',
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 3000,
+                        responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }]
+                    });
                 });
             }
         }

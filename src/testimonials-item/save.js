@@ -16,9 +16,9 @@ function Save ({attributes}) {
                             <li key={index}><a href="#" tabIndex="0"><i className="bi bi-star-fill"></i></a></li>
                         ))}
                     </ul>
-                    <div className="jbs-review-score"><span className="jbsfw-500 jbs-text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
+                    <div className="jbs-review-score"><span className="jbs-fw-500 jbs-text-dark">{rating}</span> {__('out of 5', 'jobus')}</div>
                 </div>
-                <blockquote>{reviewContents}</blockquote>
+                <p className="jbs-review-text">{reviewContents}</p>
                 <div className="jbs-d-flex jbs-align-items-center">
                     {authorImage && <img src={authorImage} alt="Author" className="jbs-author-img jbs-rounded-circle"/>}
                     <div className="jbs-ms-3">

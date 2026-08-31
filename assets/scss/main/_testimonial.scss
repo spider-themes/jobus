@@ -1,36 +1,117 @@
-.jbs-feedback-block-four {
+@mixin jbs-feedback-block-four-styles {
   padding: 25px 40px;
   border: 1px solid #E1E1E1;
   border-radius: 10px;
-  ul{
+  background: #fff;
+  height: 100%;
+
+  ul {
+    margin: 0 !important;
     margin-left: 0 !important;
+    list-style: none !important;
+    padding: 0 !important;
+    padding-left: 0 !important;
   }
-  .jbs-rating li a {
-    font-size: 16px;
-    color: #FFCC4A;
-    margin-right: 8px;
+
+  .jbs-rating,
+  .rating {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+
+    li {
+      list-style: none !important;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-right: 8px;
+        line-height: 1;
+        text-decoration: none;
+
+        .bi-star-fill,
+        .bi-star-half {
+          color: #FFCC4A;
+        }
+
+        .bi-star {
+          color: #E1E1E1;
+        }
+      }
+    }
   }
-  .jbs-review-score {
-    color: rgba($color: var(--jbs-heading_color), $alpha: .4);
+
+  .jbs-review-score,
+  .review-score {
+    display: inline-flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.4);
     margin: 0 0 0 10px;
+    font-size: 15px;
+    line-height: 1;
   }
-  blockquote {
+
+  .jbs-review-text,
+  blockquote,
+  .wp-block-quote {
     font-size: 17px;
     line-height: 1.882em;
     margin: 17px 0 25px;
     border: none !important;
+    border-left: none !important;
     padding: 0 !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    &:before, &:after {
+    color: rgba(0, 0, 0, 0.65);
+
+    &:before,
+    &:after {
       content: none !important;
+      display: none !important;
     }
   }
-  .jbs-author-img {
+
+  .jbs-author-img,
+  .author-img {
     width: 45px;
     height: 45px;
+    object-fit: cover;
   }
+
   .name {
     font-size: 18px;
+  }
+}
+
+.jbs-feedback-block-four {
+  @include jbs-feedback-block-four-styles;
+}
+
+.jbs-company-details .jbs-details-post-data {
+  .jbs-feedback-block-four,
+  .feedback-block-four {
+    @include jbs-feedback-block-four-styles;
+  }
+
+  .jbs-company-review-slider,
+  .company-review-slider {
+    position: relative;
+
+    .slick-slide {
+      height: auto;
+
+      > div {
+        height: 100%;
+      }
+    }
+
+    .item {
+      height: 100%;
+    }
   }
 }

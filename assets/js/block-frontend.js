@@ -24,26 +24,34 @@
 
         // Start Company Details page testimonials slider
         function companyTestimonialsSlider() {
-            let testimonialSlider = $('.jbs-company-review-slider');
+            const testimonialSliders = $('.jbs-company-review-slider, .company-review-slider');
 
-            if (testimonialSlider.length > 0 && $.fn.slick) {
-                testimonialSlider.slick({
-                    dots: true,
-                    arrows: false,
-                    lazyLoad: 'ondemand',
-                    centerPadding: '0px',
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    autoplay: true,
-                    autoplaySpeed: 3000,
-                    responsive: [
-                        {
-                            breakpoint: 768,
-                            settings: {
-                                slidesToShow: 1
+            if (testimonialSliders.length > 0 && $.fn.slick) {
+                testimonialSliders.each(function () {
+                    const $slider = $(this);
+
+                    if ($slider.hasClass('slick-initialized')) {
+                        return;
+                    }
+
+                    $slider.slick({
+                        dots: true,
+                        arrows: false,
+                        lazyLoad: 'ondemand',
+                        centerPadding: '0px',
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 3000,
+                        responsive: [
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 1
+                                }
                             }
-                        }
-                    ]
+                        ]
+                    });
                 });
             }
         }

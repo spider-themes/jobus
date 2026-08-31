@@ -3,7 +3,7 @@ import {Fragment} from "@wordpress/element";
 
 function Edit({attributes, setAttributes}) {
 
-    const blockProps = useBlockProps({className: 'company-review-slider'});
+    const blockProps = useBlockProps({className: 'jbs-company-review-slider company-review-slider'});
 
     return (
         <Fragment>

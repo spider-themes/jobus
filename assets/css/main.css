@@ -4082,6 +4082,7 @@ img {
 
 .jbs-company-details {
   padding-top: 180px;
+  padding-bottom: 160px;
 }
 .jbs-company-details .jbs-details-post-data {
   position: relative;
@@ -6440,37 +6441,220 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   padding: 25px 40px;
   border: 1px solid #E1E1E1;
   border-radius: 10px;
+  background: #fff;
+  height: 100%;
 }
 .jbs-feedback-block-four ul {
+  margin: 0 !important;
   margin-left: 0 !important;
+  list-style: none !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
 }
-.jbs-feedback-block-four .jbs-rating li a {
+.jbs-feedback-block-four .jbs-rating,
+.jbs-feedback-block-four .rating {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+.jbs-feedback-block-four .jbs-rating li,
+.jbs-feedback-block-four .rating li {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+.jbs-feedback-block-four .jbs-rating li a,
+.jbs-feedback-block-four .rating li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
-  color: #FFCC4A;
   margin-right: 8px;
+  line-height: 1;
+  text-decoration: none;
 }
-.jbs-feedback-block-four .jbs-review-score {
-  color: rgba(var(--jbs-heading_color), 0.4);
+.jbs-feedback-block-four .jbs-rating li a .bi-star-fill,
+.jbs-feedback-block-four .jbs-rating li a .bi-star-half,
+.jbs-feedback-block-four .rating li a .bi-star-fill,
+.jbs-feedback-block-four .rating li a .bi-star-half {
+  color: #FFCC4A;
+}
+.jbs-feedback-block-four .jbs-rating li a .bi-star,
+.jbs-feedback-block-four .rating li a .bi-star {
+  color: #E1E1E1;
+}
+.jbs-feedback-block-four .jbs-review-score,
+.jbs-feedback-block-four .review-score {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
   margin: 0 0 0 10px;
+  font-size: 15px;
+  line-height: 1;
 }
-.jbs-feedback-block-four blockquote {
+.jbs-feedback-block-four .jbs-review-text,
+.jbs-feedback-block-four blockquote,
+.jbs-feedback-block-four .wp-block-quote {
   font-size: 17px;
   line-height: 1.882em;
   margin: 17px 0 25px;
   border: none !important;
+  border-left: none !important;
   padding: 0 !important;
   background-color: transparent !important;
   box-shadow: none !important;
+  color: rgba(0, 0, 0, 0.65);
 }
-.jbs-feedback-block-four blockquote:before, .jbs-feedback-block-four blockquote:after {
+.jbs-feedback-block-four .jbs-review-text:before, .jbs-feedback-block-four .jbs-review-text:after,
+.jbs-feedback-block-four blockquote:before,
+.jbs-feedback-block-four blockquote:after,
+.jbs-feedback-block-four .wp-block-quote:before,
+.jbs-feedback-block-four .wp-block-quote:after {
   content: none !important;
+  display: none !important;
 }
-.jbs-feedback-block-four .jbs-author-img {
+.jbs-feedback-block-four .jbs-author-img,
+.jbs-feedback-block-four .author-img {
   width: 45px;
   height: 45px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .jbs-feedback-block-four .name {
   font-size: 18px;
+}
+
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four,
+.jbs-company-details .jbs-details-post-data .feedback-block-four {
+  padding: 25px 40px;
+  border: 1px solid #E1E1E1;
+  border-radius: 10px;
+  background: #fff;
+  height: 100%;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four ul,
+.jbs-company-details .jbs-details-post-data .feedback-block-four ul {
+  margin: 0 !important;
+  margin-left: 0 !important;
+  list-style: none !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating li,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating li,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating li,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating li {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating li a,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating li a,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating li a,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-right: 8px;
+  line-height: 1;
+  text-decoration: none;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating li a .bi-star-fill,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating li a .bi-star-half,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating li a .bi-star-fill,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating li a .bi-star-half,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating li a .bi-star-fill,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating li a .bi-star-half,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating li a .bi-star-fill,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating li a .bi-star-half {
+  color: #FFCC4A;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-rating li a .bi-star,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .rating li a .bi-star,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-rating li a .bi-star,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .rating li a .bi-star {
+  color: #E1E1E1;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-review-score,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .review-score,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-review-score,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .review-score {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 0 0 0 10px;
+  font-size: 15px;
+  line-height: 1;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-review-text,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four blockquote,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .wp-block-quote,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-review-text,
+.jbs-company-details .jbs-details-post-data .feedback-block-four blockquote,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .wp-block-quote {
+  font-size: 17px;
+  line-height: 1.882em;
+  margin: 17px 0 25px;
+  border: none !important;
+  border-left: none !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: rgba(0, 0, 0, 0.65);
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-review-text:before, .jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-review-text:after,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four blockquote:before,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four blockquote:after,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .wp-block-quote:before,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .wp-block-quote:after,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-review-text:before,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-review-text:after,
+.jbs-company-details .jbs-details-post-data .feedback-block-four blockquote:before,
+.jbs-company-details .jbs-details-post-data .feedback-block-four blockquote:after,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .wp-block-quote:before,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .wp-block-quote:after {
+  content: none !important;
+  display: none !important;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .jbs-author-img,
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .author-img,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .jbs-author-img,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .author-img {
+  width: 45px;
+  height: 45px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.jbs-company-details .jbs-details-post-data .jbs-feedback-block-four .name,
+.jbs-company-details .jbs-details-post-data .feedback-block-four .name {
+  font-size: 18px;
+}
+.jbs-company-details .jbs-details-post-data .jbs-company-review-slider,
+.jbs-company-details .jbs-details-post-data .company-review-slider {
+  position: relative;
+}
+.jbs-company-details .jbs-details-post-data .jbs-company-review-slider .slick-slide,
+.jbs-company-details .jbs-details-post-data .company-review-slider .slick-slide {
+  height: auto;
+}
+.jbs-company-details .jbs-details-post-data .jbs-company-review-slider .slick-slide > div,
+.jbs-company-details .jbs-details-post-data .company-review-slider .slick-slide > div {
+  height: 100%;
+}
+.jbs-company-details .jbs-details-post-data .jbs-company-review-slider .item,
+.jbs-company-details .jbs-details-post-data .company-review-slider .item {
+  height: 100%;
 }
 
 .jbs-filter-area-tab {
