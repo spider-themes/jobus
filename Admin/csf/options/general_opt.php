@@ -45,6 +45,17 @@ CSF::createSection($settings_prefix, array(
 		),
 		array(
 			'type'    => 'subheading',
+			'content' => esc_html__( 'Support', 'jobus' ),
+		),
+		array(
+			'id'       => 'hide_support_assistant',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Hide Support Chat', 'jobus' ),
+			'subtitle' => esc_html__( 'Hide the documentation support chat button on Jobus admin pages.', 'jobus' ),
+			'default'  => false,
+		),
+		array(
+			'type'    => 'subheading',
 			'content' => esc_html__( 'Advanced Data Management', 'jobus' ),
 		),
 		array(

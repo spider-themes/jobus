@@ -114,6 +114,12 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 
 	// Init Freemius.
 	if ( jobus_fs() ) {
+		// Disclose that opting in also pre-fills the in-plugin support chat
+		// (see the Support Assistant class). The on-update screen falls back to this filter.
+		jobus_fs()->add_filter( 'connect_message', function ( $message ) {
+			return $message . '<br><br>' . esc_html__( 'Opting in also pre-fills your name and email in the Jobus support chat, so you can get help without typing them. They are only sent to our helpdesk when you open the chat.', 'jobus' );
+		} );
+
 		// Signal that SDK was initiated.
 		do_action( 'jobus_fs_loaded' );
 	}
@@ -272,6 +278,10 @@ final class Jobus {
 			
 			\jobus\Admin\Analytics::get_instance();
 			\jobus\Admin\Messaging::get_instance();
+
+			// Helpdesk docs assistant on Jobus admin pages.
+			require_once __DIR__ . '/Admin/class-support-assistant.php';
+			\Jobus_Support_Assistant::get_instance();
 		}
 
 		// Post Type
