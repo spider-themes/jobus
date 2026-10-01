@@ -14,8 +14,8 @@
   --border_on_white: #e6edf0;
   --border_on_highlight: #e6edf0;
 
-  --body_bg: #ffffff;
-  --bs-white: #fff;
+  --bs-white: #ffffff;
+  --body_bg: var(--bs-white);
   --white_op20: rgba(255, 255, 255, 0.2);
 
   // Grayscale Palette
