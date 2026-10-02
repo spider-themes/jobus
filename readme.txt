@@ -1,9 +1,9 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
-Stable tag: 1.10.2
+Stable tag: 1.11.0
 Requires at least: 6.0
-Tested up to: 7.0.4
+Tested up to: 7.1.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -157,11 +157,15 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 
 == Changelog ==
 
-= 1.10.2 (August 18, 2026) =
+= 1.11.0 (October 2, 2026) =
 * New: Added page section padding options for Candidate, Job, and Company details pages.
+* New: Added Job Expiration settings, Application Deadline field, and extensibility hooks for automatic job expiration.
+* New: Added Docs Support Chat to Jobus admin pages for easier access to documentation and support.
 * Enhanced: Prefixed Candidate Profile Layout 2 CSS classes with the `jbs-` namespace to prevent theme and plugin class conflicts.
 * Enhanced: Added automatic daily job expiration based on the Application Deadline, reducing manual job management.
-* New: Added Job Expiration settings, Application Deadline field, and extensibility hooks for automatic job expiration.
+* Fixed: Resolved the Job sidebar dark mode issue and filter search results issue.
+* Fixed: Resolved the Testimonials slider design breaking issue.
+* Fixed: Resolved dark mode issues.
 * Fixed: Resolved a WordPress critical error.
 
 = 1.10.1 (June 19, 2026) =
