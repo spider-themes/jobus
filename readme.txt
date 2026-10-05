@@ -157,7 +157,7 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 
 == Changelog ==
 
-= 1.11.0 (October 2, 2026) =
+= 1.11.0 (October 5, 2026) =
 * New: Added page section padding options for Candidate, Job, and Company details pages.
 * New: Added Job Expiration settings, Application Deadline field, and extensibility hooks for automatic job expiration.
 * New: Added Docs Support Chat to Jobus admin pages for easier access to documentation and support.
