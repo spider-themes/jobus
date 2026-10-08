@@ -26,6 +26,27 @@
       "includes/filters.php"
     ]
   },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "freemius/wordpress-sdk",
+        "version": "2.13.5",
+        "dist": {
+          "type": "zip",
+          "url": "packages/wordpress-sdk-2.13.5.zip"
+        },
+        "require": {
+          "php": ">=5.6"
+        },
+        "autoload": {
+          "files": [
+            "start.php"
+          ]
+        }
+      }
+    }
+  ],
   "require": {
     "freemius/wordpress-sdk": "^2.13"
   }
