@@ -234,7 +234,7 @@ Jobus is designed to work seamlessly with any standard WordPress theme. Tested a
 
 ## 🔥 Pro Features
 
-Unlock advanced functionality with **[Jobus Pro](https://jobus.spider-themes.net/)**:
+Unlock advanced functionality with **[Jobus Pro](https://jobus.spiderthemes.net/)**:
 
 - Advanced Frontend Dashboards
 - Application Tracking System (ATS)
@@ -249,7 +249,7 @@ Unlock advanced functionality with **[Jobus Pro](https://jobus.spider-themes.net
 
 ## 📚 Documentation
 
-For detailed documentation, visit our [Help Desk](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/).
+For detailed documentation, visit our [Help Desk](https://helpdesk.spiderthemes.net/docs/jobi-wordpress-theme/).
 
 ---
 
@@ -324,9 +324,9 @@ Contributions are welcome! Please follow these steps:
 ## 📞 Support
 
 - **Free Support:** [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/)
-- **Pro Support:** [Help Desk](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/)
-- **Website:** [jobus.spider-themes.net](https://jobus.spider-themes.net/)
-- **Demo:** [jobus.spider-themes.net/demos](https://jobus.spider-themes.net/demos)
+- **Pro Support:** [Help Desk](https://helpdesk.spiderthemes.net/docs/jobi-wordpress-theme/)
+- **Website:** [jobus.spiderthemes.net](https://jobus.spiderthemes.net/)
+- **Demo:** [jobus.spiderthemes.net/demos](https://jobus.spiderthemes.net/demos)
 
 ---
 
@@ -338,7 +338,7 @@ This plugin is licensed under the [GPLv2 or later](https://www.gnu.org/licenses/
 
 ## 👥 Contributors
 
-- [Spider Themes](https://spider-themes.net/)
+- [Spider Themes](https://spiderthemes.net/)
 - [mdjwel](https://github.com/mdjwel)
 - [arifrahman1](https://github.com/arifrahman1)
 - [delweratjk](https://github.com/delweratjk)
@@ -347,5 +347,5 @@ This plugin is licensed under the [GPLv2 or later](https://www.gnu.org/licenses/
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://spider-themes.net/">Spider Themes</a>
+  Made with ❤️ by <a href="https://spiderthemes.net/">Spider Themes</a>
 </p>

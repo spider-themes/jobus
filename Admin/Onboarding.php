@@ -644,7 +644,7 @@ class Onboarding
                             </div>
                         </a>
 
-                        <a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank"
+                        <a href="https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/" target="_blank"
                             rel="noopener noreferrer" class="jbs-next-step-item">
                             <span class="jbs-step-icon">📚</span>
                             <div class="jbs-step-info">

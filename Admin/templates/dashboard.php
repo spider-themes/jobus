@@ -450,7 +450,7 @@ $plugin_version     = $data['plugin_version'] ?? '1.0.0';
 				<div class="jbs-card-body">
 					<ul class="jbs-resource-list">
 						<li>
-							<a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank" rel="noopener">
+							<a href="https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/" target="_blank" rel="noopener">
 								<span class="dashicons dashicons-book"></span>
 								<?php esc_html_e( 'Documentation', 'jobus' ); ?>
 								<span class="dashicons dashicons-external"></span>

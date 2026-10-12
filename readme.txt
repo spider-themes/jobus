@@ -82,10 +82,10 @@ Unlock the full potential of your job board with **Jobus Pro**. Get advanced fea
 *   **WooCommerce Integration:** Monetize your job board by selling job packages via WooCommerce.
 
 ### Quick Links
-- [Full Documentation](https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/) – Complete guides and tutorials
+- [Full Documentation](https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/) – Complete guides and tutorials
 - [Get Support](https://wordpress.org/support/plugin/jobus/) – Get help from our team
-- [View Live Demos](https://jobus.spider-themes.net/job-list-width/) – See it in action
-- [Get Jobus Pro Now](https://jobus.spider-themes.net/) – Unlock advanced functionality
+- [View Live Demos](https://jobus.spiderthemes.net/job-list-width/) – See it in action
+- [Get Jobus Pro Now](https://jobus.spiderthemes.net/) – Unlock advanced functionality
 
 == Installation ==
 
@@ -110,7 +110,7 @@ Yes, Jobus uses structured data (Schema.org) to help your job listings appear in
 Yes, Jobus is fully translation-ready. You can use plugins like Loco Translate or WPML to translate it into your preferred language.
 
 = Where can I get support? =
-For free support, please post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spider-themes.net/docs/jobi-wordpress-theme/).
+For free support, please post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spiderthemes.net/docs/jobi-wordpress-theme/).
 
 ## WHAT’S NEXT? 
 
@@ -132,13 +132,13 @@ If you like Jobus, then consider checking out our other WordPress Plugins:
 
 = Spider Themes Helpdesk (support assistant) =
 
-Jobus admin pages show a chat button that opens the Jobus documentation assistant hosted on the Spider Themes helpdesk (helpdesk.spider-themes.net), so you can search the docs and ask questions without leaving WordPress.
+Jobus admin pages show a chat button that opens the Jobus documentation assistant hosted on the Spider Themes helpdesk (helpdesk.spiderthemes.net), so you can search the docs and ask questions without leaving WordPress.
 
-Nothing is loaded from the helpdesk until you press the chat button. Hovering over the button only opens a network connection to the helpdesk so the chat loads faster; no data is sent. When you open it, the assistant is loaded in an iframe from `https://helpdesk.spider-themes.net/iframe-assistant/`, and your browser sends the product name and the documentation section to show. If you opted in through the Freemius opt-in screen and you are the administrator who opted in, your name and email address are also sent so the support chat is pre-filled. Messages you type in the chat are sent to the helpdesk to be answered.
+Nothing is loaded from the helpdesk until you press the chat button. Hovering over the button only opens a network connection to the helpdesk so the chat loads faster; no data is sent. When you open it, the assistant is loaded in an iframe from `https://helpdesk.spiderthemes.net/iframe-assistant/`, and your browser sends the product name and the documentation section to show. If you opted in through the Freemius opt-in screen and you are the administrator who opted in, your name and email address are also sent so the support chat is pre-filled. Messages you type in the chat are sent to the helpdesk to be answered.
 
 You can turn the assistant off under Jobs → Settings → General → Hide Support Chat (or with `add_filter( 'jobus_support_assistant_enabled', '__return_false' );`).
 
-* [Spider Themes](https://spider-themes.net) — [Terms](https://spider-themes.net/terms) — [Privacy](https://spider-themes.net/privacy)
+* [Spider Themes](https://spiderthemes.net) — [Terms](https://spiderthemes.net/terms) — [Privacy](https://spiderthemes.net/privacy)
 
 == Screenshots ==
 
@@ -250,4 +250,4 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 * Tweaked: Improved the Candidate Single Page
 * Tweaked: Various code sections simplified and optimized for better performance
 
-**[See changelog for all versions](https://jobus.spider-themes.net/changelog/)**
+**[See changelog for all versions](https://jobus.spiderthemes.net/changelog/)**

@@ -220,7 +220,7 @@ class Admin {
 			return $links;
 		}
 
-		$links[] = '<a href="https://helpdesk.spider-themes.net/docs/jobus-wordpress-plugin/" target="_blank">'.esc_html__( 'Docs & FAQs', 'jobus' ).'</a>';
+		$links[] = '<a href="https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/" target="_blank">'.esc_html__( 'Docs & FAQs', 'jobus' ).'</a>';
 
 		return $links;
 	}

@@ -327,7 +327,7 @@ final class Jobus {
 		 * NoticePilot — remote admin-notice campaigns (SDK v1.6.1).
 		 *
 		 * Product id ..... 'Jobus' (used for every SDK call below — keep consistent).
-		 * Hub endpoint ... manage.spider-themes.net → /content/jobus
+		 * Hub endpoint ... manage.spiderthemes.net → /content/jobus
 		 *
 		 * loaded_plugin() runs on plugins_loaded, so init() is called directly and
 		 * the admin_init hooks below register before admin_init fires.
@@ -335,7 +335,7 @@ final class Jobus {
 		 */
 		if ( class_exists( 'Noticepilot_Remote_Notice_Client' ) ) {
 			Noticepilot_Remote_Notice_Client::init( 'Jobus', [
-				'api_url'          => 'https://manage.spider-themes.net/wp-json/noticepilot/v1/content/jobus',
+				'api_url'          => 'https://manage.spiderthemes.net/wp-json/noticepilot/v1/content/jobus',
 
 				// How often to pull campaigns, and who may see them.
 				'schedule'         => 'daily',            // hourly | twicedaily | daily

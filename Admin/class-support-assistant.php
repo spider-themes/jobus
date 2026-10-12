@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Jobus_Support_Assistant {
 
-	const IFRAME_URL  = 'https://helpdesk.spider-themes.net/iframe-assistant/';
+	const IFRAME_URL  = 'https://helpdesk.spiderthemes.net/iframe-assistant/';
 	const PRODUCT_CTX = 'Jobus';
 	const DOCS_SCOPE  = 9921;
 
