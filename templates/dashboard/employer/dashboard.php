@@ -143,6 +143,7 @@ if ( ! function_exists( 'jobus_render_stat_card' ) ) {
             jobus_render_stat_card( JOBUS_IMG . '/dashboard/icons/view.svg', $total_job_views, 'Job Views', null, $jobs_link );
         }
         ?>
+    </div>
 
     <div class="jbs-row jbs-d-flex jbs-pt-50 jbs-lg-pt-10">
         <div class="jbs-col-full jbs-col-lg-7">

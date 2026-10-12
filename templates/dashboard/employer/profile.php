@@ -45,6 +45,13 @@ $show_rich_editor = jobus_opt( 'employer_description_editor', true );
 $show_intro_video = jobus_opt( 'employer_intro_video', true );
 $show_testimonials = jobus_opt( 'employer_testimonials', true );
 $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes', 'jobus' ) );
+$show_company_email = true;
+if ( $company_id ) {
+    $stored_email_visibility = get_post_meta( $company_id, 'company_show_email', true );
+    if ( '0' === (string) $stored_email_visibility ) {
+        $show_company_email = false;
+    }
+}
 
 
 // Handle form submission for taxonomies [categories, locations, tags]
@@ -105,6 +112,18 @@ if ( isset( $_POST['company_profile_form_submit'] ) ) {
                         <label for="company-email"><?php esc_html_e( 'Email*', 'jobus' ); ?></label>
                         <input type="email" id="company-email" name="company_mail" placeholder="you@example.com"
                                value="<?php echo esc_attr( $user->user_email ); ?>">
+                    </div>
+                </div>
+                <div class="jbs-col-12">
+                    <div class="jbs-dash-input-wrapper jbs-dash-checkbox jbs-mb-30">
+                        <input type="hidden" name="company_show_email" value="0">
+                        <label for="company-show-email">
+                            <input type="checkbox" id="company-show-email" name="company_show_email" value="1" <?php checked( $show_company_email ); ?>>
+                            <?php esc_html_e( 'Show email on public profile', 'jobus' ); ?>
+                        </label>
+                        <div class="jbs-alert-text">
+                            <?php esc_html_e( 'Turn this off to hide your email on the public company page. It stays available in your dashboard.', 'jobus' ); ?>
+                        </div>
                     </div>
                 </div>
             </div>

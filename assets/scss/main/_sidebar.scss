@@ -99,7 +99,6 @@
     font-size: 1em;
     position: relative;
     display: block;
-    padding-right: 22px;
     text-decoration: none;
     background: transparent;
     box-shadow: none;
@@ -108,25 +107,31 @@
       margin-bottom: 10px;
     }
 
-    &::before {
-      content: "\f4fe";
-      font-family: "bootstrap-icons";
-      display: block;
-      width: 20px;
-      height: 20px;
-      line-height: 20px;
-      border-radius: 50%;
-      background: var(--jbs-brand_color_1);
-      position: absolute;
-      right: 0;
-      top: 3px;
-      text-align: center;
-      color: #fff;
-      @include transition(0.2s);
-    }
+    // Plus/minus glyph is only for classic sidebar titles that toggle.
+    // Topbar and popup titles are static labels and must not show it.
+    &[data-jbs-toggle="collapse"] {
+      padding-right: 22px;
 
-    &:not(.jbs-collapsed):before {
-      content: "\f2ea";
+      &::before {
+        content: "\f4fe";
+        font-family: "bootstrap-icons";
+        display: block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 50%;
+        background: var(--jbs-brand_color_1);
+        position: absolute;
+        right: 0;
+        top: 3px;
+        text-align: center;
+        color: #fff;
+        @include transition(0.2s);
+      }
+
+      &:not(.jbs-collapsed):before {
+        content: "\f2ea";
+      }
     }
   }
 

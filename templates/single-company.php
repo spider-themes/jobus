@@ -13,8 +13,10 @@ if ($is_block_theme) {
 while ( have_posts() ) :
 	the_post();
 
-$user_id       = get_post_field( 'post_author', get_the_ID() );
-$employer_mail = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
+$user_id            = get_post_field( 'post_author', get_the_ID() );
+$employer_mail      = get_userdata( $user_id ) ? get_userdata( $user_id )->user_email : '';
+$show_company_email = get_post_meta( get_the_ID(), 'company_show_email', true );
+$show_company_email = ( '' === (string) $show_company_email || '1' === (string) $show_company_email );
 
 $video_bg_img = get_post_meta( get_the_ID(), 'company_video_bg_img', true );
 $video_title  = get_post_meta( get_the_ID(), 'company_video_title', true );
@@ -68,7 +70,7 @@ $cats     = wp_get_post_terms( get_the_ID(), 'jobus_company_cat', array( 'fields
                                 <?php
                             }
 
-                            if ( $employer_mail ) { ?>
+                            if ( $employer_mail && $show_company_email ) { ?>
                                 <li>
                                     <span><?php esc_html_e( 'Email: ', 'jobus' ); ?></span>
                                     <div>

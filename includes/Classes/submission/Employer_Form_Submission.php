@@ -141,6 +141,9 @@ class Employer_Form_Submission {
 				wp_cache_delete( $user_id, 'users' );
 			}
 		}
+		if ( isset( $post_data['company_show_email'] ) ) {
+			update_post_meta( $company_id, 'company_show_email', '1' === (string) $post_data['company_show_email'] ? '1' : '0' );
+		}
 		// Update description
 		$description = isset( $post_data['company_description'] ) ? wp_kses_post( $post_data['company_description'] ) : '';
 		wp_update_post( array(
@@ -519,6 +522,7 @@ class Employer_Form_Submission {
 			'company_name',
 			'company_description',
 			'company_mail',
+			'company_show_email',
 			'company_profile_picture',
 			'company_delete_profile_picture',
 			'social_icons',

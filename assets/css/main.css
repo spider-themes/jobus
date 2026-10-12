@@ -6748,7 +6748,6 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   font-size: 1em;
   position: relative;
   display: block;
-  padding-right: 22px;
   text-decoration: none;
   background: transparent;
   box-shadow: none;
@@ -6756,7 +6755,10 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
 .jbs-filter-area-tab .jbs-filter-title:not(.jbs-collapsed) {
   margin-bottom: 10px;
 }
-.jbs-filter-area-tab .jbs-filter-title::before {
+.jbs-filter-area-tab .jbs-filter-title[data-jbs-toggle=collapse] {
+  padding-right: 22px;
+}
+.jbs-filter-area-tab .jbs-filter-title[data-jbs-toggle=collapse]::before {
   content: "\f4fe";
   font-family: "bootstrap-icons";
   display: block;
@@ -6772,7 +6774,7 @@ body.wp-theme-docly .jbs-job-details, body.wp-theme-banca .jbs-job-details {
   color: #fff;
   transition: all 0.2s ease-in-out 0s;
 }
-.jbs-filter-area-tab .jbs-filter-title:not(.jbs-collapsed):before {
+.jbs-filter-area-tab .jbs-filter-title[data-jbs-toggle=collapse]:not(.jbs-collapsed):before {
   content: "\f2ea";
 }
 .jbs-filter-area-tab select.jbs-nice-select {
