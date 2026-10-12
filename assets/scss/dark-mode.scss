@@ -303,4 +303,40 @@ body.body_dark {
     }
   }
 
+  .jbs-job-category-tabs {
+    border-color: rgba(255, 255, 255, 0.16);
+
+    &__item,
+    &__job {
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    &__toggle,
+    &__name,
+    &__job,
+    &__job:hover,
+    &__job:focus,
+    &__title,
+    &__location,
+    &__apply {
+      color: #f3f3f3 !important;
+    }
+
+    &__count {
+      color: #8d8d8d;
+    }
+
+    &__arrow {
+      color: #ee4b9b;
+    }
+
+    &__job:hover {
+      background: rgba(231, 246, 239, 0.12) !important;
+    }
+
+    &__job:hover &__apply {
+      color: var(--jbs-brand_color_4, #00BF58) !important;
+    }
+  }
+
 }

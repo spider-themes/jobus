@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jobus/job-category-tabs",
+  "title": "Job Category Tabs (Jobus)",
+  "category": "jobus-blocks",
+  "icon": "category",
+  "description": "Job categories as expandable tabs, with the open jobs listed inside each one.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "categories": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "keywords": [
+    "jobus",
+    "job categories",
+    "category tabs",
+    "jobs"
+  ],
+  "textdomain": "jobus",
+  "editorScript": "file:./index.js"
+}

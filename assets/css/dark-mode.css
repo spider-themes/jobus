@@ -181,3 +181,24 @@ body.body_dark .jbs-job-details .jbs-share-buttons li .jbs-share-item {
 body.body_dark .jbs-job-details .jbs-share-buttons li .jbs-share-item i {
   color: #fff !important;
 }
+body.body_dark .jbs-job-category-tabs {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+body.body_dark .jbs-job-category-tabs__item, body.body_dark .jbs-job-category-tabs__job {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+body.body_dark .jbs-job-category-tabs__toggle, body.body_dark .jbs-job-category-tabs__name, body.body_dark .jbs-job-category-tabs__job, body.body_dark .jbs-job-category-tabs__job:hover, body.body_dark .jbs-job-category-tabs__job:focus, body.body_dark .jbs-job-category-tabs__title, body.body_dark .jbs-job-category-tabs__location, body.body_dark .jbs-job-category-tabs__apply {
+  color: #f3f3f3 !important;
+}
+body.body_dark .jbs-job-category-tabs__count {
+  color: #8d8d8d;
+}
+body.body_dark .jbs-job-category-tabs__arrow {
+  color: #ee4b9b;
+}
+body.body_dark .jbs-job-category-tabs__job:hover {
+  background: rgba(231, 246, 239, 0.12) !important;
+}
+body.body_dark .jbs-job-category-tabs__job:hover body.body_dark .jbs-job-category-tabs__apply {
+  color: var(--jbs-brand_color_4, #00BF58) !important;
+}

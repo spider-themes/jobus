@@ -74,6 +74,9 @@ class Blocks {
 		$this->register_block( 'group-testimonials' );
 		$this->register_block( 'testimonials-item' );
 		$this->register_block( 'shortcode-job-archive' );
+		$this->register_block( 'job-category-tabs', [
+			'render_callback' => [ $this, 'job_category_tabs_block_render' ],
+		] );
 		if ( $enable_company || jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 			$this->register_block( 'shortcode-company-archive' );
 		}
@@ -104,6 +107,98 @@ class Blocks {
 
 		// Load register form template with theme override support
 		return \jobus\includes\Frontend\Template_Loader::get_template_part( 'register-form/register', $args );
+	}
+
+	/**
+	 * Render callback for the job-category-tabs block.
+	 *
+	 * @param array  $attributes Block attributes.
+	 * @param string $content    Block content.
+	 * @param mixed  $block      Parsed block instance.
+	 *
+	 * @return string
+	 */
+	public function job_category_tabs_block_render( array $attributes = [], string $content = '', $block = null ): string {
+		unset( $content, $block );
+
+		$selected = isset( $attributes['categories'] ) && is_array( $attributes['categories'] ) ? $attributes['categories'] : [];
+		$slugs    = array_values( array_filter( array_map( 'sanitize_title', $selected ) ) );
+		$args     = [
+			'taxonomy'   => 'jobus_job_cat',
+			'hide_empty' => true,
+		];
+
+		if ( ! empty( $slugs ) ) {
+			$args['slug'] = $slugs;
+		}
+
+		$terms = get_terms( $args );
+
+		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+			if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+				return '<p class="jbs-job-category-tabs__empty">' . esc_html__( 'No job categories to show.', 'jobus' ) . '</p>';
+			}
+
+			return '';
+		}
+
+		if ( ! empty( $slugs ) ) {
+			$order = array_flip( $slugs );
+			usort(
+				$terms,
+				static function ( $first, $second ) use ( $order ) {
+					$first_order  = $order[ $first->slug ] ?? 0;
+					$second_order = $order[ $second->slug ] ?? 0;
+
+					return $first_order <=> $second_order;
+				}
+			);
+		}
+
+		$list_id = wp_unique_id( 'jbs-job-category-tabs-' );
+		$rows    = [];
+
+		foreach ( $terms as $term ) {
+			$jobs_query = new \WP_Query( [
+				'post_type'              => 'jobus_job',
+				'post_status'            => 'publish',
+				'posts_per_page'         => -1,
+				'orderby'                => 'title',
+				'order'                  => 'ASC',
+				'no_found_rows'          => true,
+				'update_post_meta_cache' => false,
+				'tax_query'              => [
+					[
+						'taxonomy' => 'jobus_job_cat',
+						'field'    => 'term_id',
+						'terms'    => $term->term_id,
+					],
+				],
+			] );
+
+			$jobs = [];
+			while ( $jobs_query->have_posts() ) {
+				$jobs_query->the_post();
+				$jobs[] = [
+					'title'    => get_the_title(),
+					'url'      => get_permalink(),
+					'location' => function_exists( 'jobus_get_first_taxonomy_name' ) ? jobus_get_first_taxonomy_name( 'jobus_job_location' ) : '',
+				];
+			}
+			wp_reset_postdata();
+
+			$rows[] = [
+				'name'     => $term->name,
+				'count'    => sprintf( '%02d', (int) $term->count ),
+				'panel_id' => $list_id . '-' . $term->term_id,
+				'jobs'     => $jobs,
+			];
+		}
+
+		return \jobus\includes\Frontend\Template_Loader::get_template_part( 'job-category-tabs/job-category-tabs', [
+			'list_id' => $list_id,
+			'rows'    => $rows,
+		] );
 	}
 
 	/**
@@ -204,13 +299,24 @@ class Blocks {
 
 		// Script's
 		wp_enqueue_script( 'fancybox', esc_url( JOBUS_VEND . '/fancybox/fancybox.min.js' ), array( 'jquery' ), '3.3.5', [ 'strategy' => 'defer' ] );
+		if ( ! wp_script_is( 'jobus-framework', 'registered' ) ) {
+			wp_register_script( 'jobus-framework', esc_url( JOBUS_JS . '/jbs-framework.js' ), [ 'jquery' ], JOBUS_VERSION, true );
+		}
+		wp_enqueue_script( 'jobus-framework' );
 		wp_enqueue_script( 'jobus-block', esc_url( JOBUS_JS . '/block-frontend.js' ), [ 'jquery', 'wp-blocks', 'wp-element', 'wp-components', 'wp-i18n' ], filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/block-frontend.js' ), [ 'strategy' => 'defer' ] );
 
 		// localize script
-		wp_localize_script( 'jobus-block', 'jobus_block_params', [
+		$block_params = [
 			'jobus_image_dir'  	=> JOBUS_IMG,
 			'jobus_is_premium' 	=> jobus_is_premium(),
 			'jobus_upgrade_url' => admin_url('edit.php?post_type=jobus_job&page=jobus-pricing'),
-		]);
+		];
+
+		if ( is_admin() ) {
+			$job_categories = function_exists( 'jobus_get_categories' ) ? jobus_get_categories() : [];
+			$block_params['job_categories'] = is_array( $job_categories ) ? $job_categories : [];
+		}
+
+		wp_localize_script( 'jobus-block', 'jobus_block_params', $block_params );
 	}
 }

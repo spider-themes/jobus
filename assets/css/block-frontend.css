@@ -10,7 +10,212 @@ template.
 @Default Styles
 Table of Content:
 01/ Testimonials
+02/ Job Category Tabs
 =====================================================*/
 .jbs-company-details .jbs-details-post-data .slick-dots {
   width: auto;
+}
+
+.jbs-job-category-tabs {
+  border-top: 1px solid #e8e8e8;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+.jbs-job-category-tabs .jbs-collapse:not(.jbs-show) {
+  display: none;
+}
+.jbs-job-category-tabs .jbs-show {
+  display: block;
+}
+.jbs-job-category-tabs__item {
+  border-bottom: 1px solid #e8e8e8;
+}
+.jbs-job-category-tabs__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 2.15rem 0.15rem;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #111 !important;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none !important;
+  transition: background-color 0.2s ease;
+}
+.jbs-job-category-tabs__toggle:hover, .jbs-job-category-tabs__toggle:focus, .jbs-job-category-tabs__toggle:focus-visible, .jbs-job-category-tabs__toggle:active {
+  background: transparent !important;
+  color: #111 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__toggle {
+    gap: 1rem;
+    padding: 1.45rem 0;
+  }
+}
+.jbs-job-category-tabs__toggle:hover .jbs-job-category-tabs__icon {
+  transform: scale(1.06);
+}
+.jbs-job-category-tabs__toggle:not(.jbs-collapsed) .jbs-job-category-tabs__icon {
+  transform: rotate(45deg);
+}
+.jbs-job-category-tabs__toggle:not(.jbs-collapsed):hover .jbs-job-category-tabs__icon {
+  transform: rotate(45deg) scale(1.06);
+}
+.jbs-job-category-tabs__name {
+  font-size: clamp(2rem, 3.1vw, 2.85rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: #111;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__name {
+    font-size: 1.7rem;
+  }
+}
+.jbs-job-category-tabs__count {
+  display: inline-block;
+  margin-left: 0.22em;
+  color: #a6a6a6;
+  font-size: 0.46em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  vertical-align: 0.72em;
+}
+.jbs-job-category-tabs__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__icon {
+    width: 34px;
+    height: 34px;
+  }
+}
+.jbs-job-category-tabs__icon-svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__icon-svg {
+    width: 34px;
+    height: 34px;
+  }
+}
+.jbs-job-category-tabs__jobs {
+  margin: 0;
+  padding: 0;
+}
+.jbs-job-category-tabs__job {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 11.5rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1.45rem 0.15rem;
+  border-top: 1px solid #e8e8e8;
+  color: #161616 !important;
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  transition: background-color 0.2s ease;
+}
+.jbs-job-category-tabs__job:focus, .jbs-job-category-tabs__job:focus-visible, .jbs-job-category-tabs__job:active {
+  color: #161616 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+.jbs-job-category-tabs__job:hover {
+  background: #E7F6EF !important;
+  color: #161616 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__job {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.35rem 1rem;
+    padding: 1.15rem 0;
+  }
+}
+.jbs-job-category-tabs__location {
+  color: #2a2a2a;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+@media (max-width: 767px) {
+  .jbs-job-category-tabs__location {
+    grid-column: 1/-1;
+    font-size: 0.85rem;
+  }
+}
+.jbs-job-category-tabs__title {
+  color: #111;
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.jbs-job-category-tabs__apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #161616;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.jbs-job-category-tabs__arrow {
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #ee4b9b;
+  transition: transform 0.2s ease;
+}
+.jbs-job-category-tabs__job:hover .jbs-job-category-tabs__apply {
+  color: var(--jbs-brand_color_1, #31795A);
+}
+.jbs-job-category-tabs__job:hover .jbs-job-category-tabs__arrow {
+  transform: translate(3px, -3px);
+}
+.jbs-job-category-tabs__empty {
+  margin: 0;
+  color: #666;
 }

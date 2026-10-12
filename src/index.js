@@ -8,3 +8,4 @@ import './shortcode-job-archive/index';
 import './shortcode-company-archive/index';
 import './shortcode-candidate-archive/index';
 import './register-form/index';
+import './job-category-tabs/index';
