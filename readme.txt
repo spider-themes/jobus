@@ -1,9 +1,9 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, job portal, hiring, jobs, careers
-Stable tag: 1.11.0
+Stable tag: 1.12.0
 Requires at least: 6.0
-Tested up to: 7.1.2
+Tested up to: 7.1.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -156,6 +156,11 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 12. **Job Categories** – Explore job listings organized by industry and category.
 
 == Changelog ==
+
+= 1.12.0 (October 13, 2026) =
+* New: Added the Job Category Tabs block.
+* New: Added an option to show or hide the employer email address.
+* Updated: Updated Freemius SDK to the latest version.
 
 = 1.11.0 (October 5, 2026) =
 * New: Added page section padding options for Candidate, Job, and Company details pages.
