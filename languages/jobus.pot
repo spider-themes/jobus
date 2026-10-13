@@ -6494,3 +6494,35 @@ msgstr ""
 #: Admin/csf/options/login-form_opt.php
 msgid "Master Switch. Turning this ON will reveal a new dedicated \"Social Login\" configuration submenu in the sidebar where you can manage App Keys and settings."
 msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js
+#: src/shortcode-company-archive/edit.js
+#: src/shortcode-job-archive/edit.js
+msgid "Page Padding"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js
+#: src/shortcode-company-archive/edit.js
+#: src/shortcode-job-archive/edit.js
+msgid "Padding"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js
+#: src/shortcode-company-archive/edit.js
+#: src/shortcode-job-archive/edit.js
+msgid "Padding Top"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js
+#: src/shortcode-company-archive/edit.js
+#: src/shortcode-job-archive/edit.js
+msgid "Padding Bottom"
+msgstr ""
+
+#: src/shortcode-candidate-archive/edit.js
+#: src/shortcode-company-archive/edit.js
+#: src/shortcode-job-archive/edit.js
+msgid "Overrides global archive page padding."
+msgstr ""
+
+

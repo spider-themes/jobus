@@ -9,7 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function jobus_is_premium(): bool {
-    return jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code();
+    return ( function_exists( 'jobus_fs' ) && jobus_fs()->is_plan( 'pro' ) && jobus_fs()->can_use_premium_code() )
+        || defined( 'JOBUS_PRO_VERSION' );
 }
 
 /**

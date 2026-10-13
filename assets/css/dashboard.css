@@ -2189,12 +2189,6 @@ body.page-template-dashboard .site-header {
 .jbs-dashboard-body .jbs-placeholder_icon span.jbs-eye-slash::before {
   opacity: 0;
 }
-.jbs-dashboard-body .jbs-placeholder_icon span img {
-  position: relative;
-  top: 40%;
-  margin: 0 auto;
-  transform: translateY(-50%);
-}
 
 .jbs-no-jobs-found {
   padding: 24px 35px;

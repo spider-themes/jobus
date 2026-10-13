@@ -1,21 +1,39 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import { Fragment } from "react";
+
 function Save( props ) {
 
-    const { company_layout } = props.attributes;
-
+    const { company_layout, padding_top, padding_bottom } = props.attributes;
+    const currentLayout = company_layout || '1';
     const blockProps = useBlockProps.save();
 
-    // Use template literals to properly interpolate the job_layout value
-    const shortcode = `[jobus_company_archive company_layout="${company_layout}"]`;
+    const shortcode = `[jobus_company_archive company_layout="${currentLayout}"]`;
+
+    const formatPadding = (val) => {
+        if (!val && val !== 0) return '';
+        const str = String(val).trim();
+        return isNaN(Number(str)) ? str : `${str}px`;
+    };
+
+    const pt = formatPadding(padding_top);
+    const pb = formatPadding(padding_bottom);
+    const hasPadding = Boolean(pt || pb);
+
+    const customStyles = hasPadding ? `
+        .wp-block-jobus-shortcode-company-archive .jbs-company-classic {
+            ${pt ? `padding-top: ${pt} !important;` : ''}
+            ${pb ? `padding-bottom: ${pb} !important;` : ''}
+        }
+    ` : '';
 
     return (
-        <>
+        <Fragment>
             <div { ...blockProps }>
+                { hasPadding && <style dangerouslySetInnerHTML={{ __html: customStyles }} /> }
                 { shortcode }
             </div>
-        </>
+        </Fragment>
     );
 }
-
 
 export default Save;
