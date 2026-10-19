@@ -184,6 +184,13 @@ class Lifecycle {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		dbDelta( $sql );
+
+		/**
+		 * Pro creates candidate geo index + job matches tables.
+		 *
+		 * @see \Jobus_Pro\Matching\Schema::create_tables()
+		 */
+		do_action( 'jobus_create_matching_tables' );
 	}
 }
 

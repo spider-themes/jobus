@@ -258,6 +258,8 @@ final class Jobus {
 		// Radius / Geolocation engine
 		new \jobus\includes\Classes\Geolocation();
 
+		// Candidate matching engine lives in Jobus Pro (Jobus_Pro\Matching\Init).
+
 		// Social Login engine
 		if ( ! empty( $options['enable_social_login'] ) ) {
 			new \jobus\includes\Classes\OAuth\Social_Auth();

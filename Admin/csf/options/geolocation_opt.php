@@ -88,5 +88,14 @@ CSF::createSection($settings_prefix, array(
 						 '<a href="' . esc_url( wp_nonce_url( admin_url( 'edit.php?post_type=jobus_job&jobus_setup_radius=true' ), 'jobus_setup_radius_action' ) ) . '" class="button button-primary">' . esc_html__( 'Run Sync Sequence', 'jobus' ) . '</a>' .
 						 '</div>',
 		),
+		array(
+			'type'    => 'notice',
+			'style'   => 'info',
+			'content' => sprintf(
+				/* translators: %s: settings link */
+				esc_html__( 'Candidate-to-job travel matching also needs candidate location sync. Configure that under %s.', 'jobus' ),
+				'<a href="' . esc_url( admin_url( 'edit.php?post_type=jobus_job&page=jobus-settings#tab=jobus_matching' ) ) . '">' . esc_html__( 'Settings → Candidate Matching', 'jobus' ) . '</a>'
+			),
+		),
 	)
 ));

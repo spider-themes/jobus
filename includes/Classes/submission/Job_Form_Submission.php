@@ -68,7 +68,11 @@ class Job_Form_Submission {
 			'company_website',
 			'is_company_website',
 			'apply_form_url',
-			'is_apply_btn'
+			'is_apply_btn',
+			// Matching criteria (Candidate Matching feature)
+			'match_teaching_level',
+			'match_subjects',
+			'match_availability',
 		];
 
 		$post_data = [];
@@ -170,6 +174,13 @@ class Job_Form_Submission {
 		// Save external application URL
 		if ( isset( $post_data['apply_form_url'] ) || isset( $post_data['is_apply_btn'] ) ) {
 			$this->save_application_method( $job_id, $post_data );
+		}
+
+		// Save matching criteria fields (engine/classes provided by Jobus Pro).
+		if ( class_exists( '\Jobus_Pro\Matching\Match_Fields' )
+			&& ( array_key_exists( 'match_teaching_level', $post_data ) || array_key_exists( 'match_subjects', $post_data ) || array_key_exists( 'match_availability', $post_data ) )
+		) {
+			\Jobus_Pro\Matching\Match_Fields::save_job_from_request( (int) $job_id, $post_data );
 		}
 
 		// Save company logo (featured image)

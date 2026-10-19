@@ -434,4 +434,62 @@ if ( class_exists( 'CSF' ) ) {
 			)
 		)
 	) ); //End Portfolio
+
+	if ( jobus_opt( 'enable_candidate_matching', false ) && function_exists( 'jobus_is_premium' ) && jobus_is_premium() && class_exists( '\Jobus_Pro\Matching\Match_Fields' ) ) {
+		$match_subject_options = \Jobus_Pro\Matching\Match_Fields::subject_options();
+		$match_level_options   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
+		$match_avail_options   = \Jobus_Pro\Matching\Match_Fields::availability_options();
+		$radius_unit           = jobus_opt( 'radius_unit', 'mi' );
+
+		CSF::createSection( $meta_candidate_prefix, array(
+			'id'     => 'jobus_meta_matching',
+			'title'  => esc_html__( 'Matching Criteria', 'jobus' ),
+			'icon'   => 'fas fa-people-arrows',
+			'fields' => array(
+				array(
+					'type'    => 'notice',
+					'style'   => 'info',
+					'content' => esc_html__( 'Used to match this candidate to new jobs. Set map location for travel. Email alerts need Jobus Pro + opt-in.', 'jobus' ),
+				),
+				array(
+					'id'      => 'match_teaching_level',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Teaching Level', 'jobus' ),
+					'options' => array( '' => esc_html__( '— Select —', 'jobus' ) ) + $match_level_options,
+					'default' => '',
+				),
+				array(
+					'id'       => 'match_subjects',
+					'type'     => 'select',
+					'title'    => esc_html__( 'Subjects / Qualifications', 'jobus' ),
+					'options'  => $match_subject_options,
+					'multiple' => true,
+					'chosen'   => true,
+				),
+				array(
+					'id'       => 'match_availability',
+					'type'     => 'select',
+					'title'    => esc_html__( 'Availability', 'jobus' ),
+					'options'  => $match_avail_options,
+					'multiple' => true,
+					'chosen'   => true,
+				),
+				array(
+					'id'       => 'match_max_travel',
+					'type'     => 'number',
+					'title'    => esc_html__( 'Max Travel Distance', 'jobus' ),
+					/* translators: %s: distance unit (mi or km) */
+					'subtitle' => sprintf( esc_html__( 'Maximum distance willing to travel (%s).', 'jobus' ), esc_html( $radius_unit ) ),
+					'default'  => 25,
+				),
+				array(
+					'id'       => 'match_alerts_opt_in',
+					'type'     => 'switcher',
+					'title'    => esc_html__( 'Job Match Email Alerts', 'jobus' ),
+					'subtitle' => esc_html__( 'Receive emails when a newly posted job matches this profile (Jobus Pro).', 'jobus' ),
+					'default'  => true,
+				),
+			),
+		) );
+	}
 }

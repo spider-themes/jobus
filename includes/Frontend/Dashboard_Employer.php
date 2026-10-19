@@ -77,6 +77,7 @@ class Dashboard_Employer
 		add_rewrite_endpoint('submit-job', EP_PAGES);
 		add_rewrite_endpoint('applications', EP_PAGES);
 		add_rewrite_endpoint('saved-candidate', EP_PAGES);
+		add_rewrite_endpoint('matched-candidates', EP_PAGES);
 		add_rewrite_endpoint('messages', EP_PAGES);
 		add_rewrite_endpoint('membership', EP_PAGES);
 		add_rewrite_endpoint('change-password', EP_PAGES);
@@ -141,6 +142,14 @@ class Dashboard_Employer
 			];
 		}
 
+		// Matched Candidates (Pro page; free shows upgrade lock — same pattern as Applications)
+		if ( jobus_opt( 'enable_candidate_matching', false ) ) {
+			$nav_items['matched-candidates'] = [
+				'label' => jobus_opt( 'label_employer_matched_candidates', esc_html__( 'Matched Candidates', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/applications.svg',
+			];
+		}
+
 		// Messages
 		if (jobus_opt('employer_menu_messages', true)) {
 			$nav_items['messages'] = [
@@ -165,7 +174,12 @@ class Dashboard_Employer
 			];
 		}
 
-		return $nav_items;
+		/**
+		 * Filters employer dashboard navigation items.
+		 *
+		 * @param array $nav_items Navigation items keyed by endpoint.
+		 */
+		return apply_filters( 'jobus_employer_nav_items', $nav_items );
 	}
 
 	/**
@@ -230,6 +244,10 @@ class Dashboard_Employer
 			case 'saved-candidate':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_saved_candidate($user);
+				break;
+			case 'matched-candidates':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_matched_candidates($user);
 				break;
 			case 'messages':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
@@ -465,6 +483,40 @@ class Dashboard_Employer
 		<?php
 			return ob_get_clean();
 		}
+	}
+
+	/**
+	 * Loads matched candidates section (Pro template / free lock — same pattern as Applications).
+	 *
+	 * @param WP_User $user The current user (employer).
+	 * @return string HTML for the matched candidates section.
+	 */
+	protected function load_matched_candidates( WP_User $user ): string {
+		if ( jobus_is_premium() ) {
+			$job_id = isset( $_GET['job_id'] ) ? absint( $_GET['job_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return Template_Loader::get_template_part_pro(
+				'dashboard/employer/matched-candidates',
+				array(
+					'user_id' => $user->ID,
+					'job_id'  => $job_id,
+				)
+			);
+		}
+
+		return Template_Loader::get_template_part(
+			'dashboard/template-part/pro-feature-lock',
+			array(
+				'title'       => __( 'Matched Candidates', 'jobus' ),
+				'description' => __( 'See candidates automatically matched to your jobs by teaching level, subjects, travel distance, and availability.', 'jobus' ),
+				'features'    => array(
+					__( 'Automatic matching when you publish a job', 'jobus' ),
+					__( 'Distance-aware candidate shortlists', 'jobus' ),
+					__( 'Save matched candidates to your talent pool', 'jobus' ),
+					__( 'Email alerts to matching candidates', 'jobus' ),
+				),
+				'upgrade_url' => function_exists( 'jobus_fs' ) ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' ),
+			)
+		);
 	}
 
 	/**

@@ -108,5 +108,29 @@ CSF::createSection($settings_prefix, array(
             'subtitle' => esc_html__('Available: {employer_name}, {candidate_name}, {job_title}, {site_name}', 'jobus'),
             'default' => "Dear {employer_name},\n\nYou have received a new application for your job posting: \"{job_title}\".\n\nCandidate Name: {candidate_name}\n\nYou can review this application in your dashboard.\n\nBest regards,\n{site_name}",
         ),
+
+        // Candidate job match alert
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Candidate: Job Match Alert', 'jobus'),
+        ),
+        array(
+            'type'    => 'notice',
+            'style'   => 'info',
+            'content' => esc_html__('Sent when a newly published job matches a candidate profile (requires Jobus Pro and matching enabled).', 'jobus'),
+        ),
+        array(
+            'id'      => 'match_alert_subject',
+            'type'    => 'text',
+            'title'   => esc_html__('Email Subject', 'jobus'),
+            'default' => esc_html__('New job match: {job_title}', 'jobus'),
+        ),
+        array(
+            'id'       => 'match_alert_body',
+            'type'     => 'wp_editor',
+            'title'    => esc_html__('Message Content', 'jobus'),
+            'subtitle' => esc_html__('Available: {candidate_name}, {job_title}, {job_location}, {distance}, {job_url}, {site_name}', 'jobus'),
+            'default'  => "Dear {candidate_name},\n\nA newly posted job looks like a match for your profile:\n\nJob: {job_title}\nLocation: {job_location}\nDistance: {distance}\n\nView and apply here:\n{job_url}\n\nBest regards,\n{site_name}",
+        ),
     )
 ));

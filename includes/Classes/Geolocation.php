@@ -15,6 +15,7 @@ class Geolocation {
 	 */
 	public function __construct() {
 		add_action( 'save_post_jobus_job', [ $this, 'sync_job_location' ], 20, 2 );
+		add_action( 'save_post_jobus_candidate', [ $this, 'sync_candidate_location' ], 20, 2 );
 		add_filter( 'jobus_job_query_args', [ $this, 'apply_radius_filter' ], 10, 2 );
 	}
 
@@ -80,6 +81,37 @@ class Geolocation {
 				[ '%d', '%f', '%f' ]
 			);
 		}
+	}
+
+	/**
+	 * Sync candidate lat/lng meta into the candidate geo index (Jobus Pro matching).
+	 *
+	 * @param int      $post_id Candidate ID.
+	 * @param \WP_Post $post Post object.
+	 * @return bool True when coordinates were upserted.
+	 */
+	public function sync_candidate_location( $post_id, $post ) {
+		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+			return false;
+		}
+
+		if ( ! class_exists( '\Jobus_Pro\Matching\Candidate_Geo_Query' ) ) {
+			return false;
+		}
+
+		$meta = get_post_meta( $post_id, 'jobus_meta_candidate_options', true );
+		$meta = is_array( $meta ) ? $meta : [];
+
+		$lat = (float) ( $meta['candidate_location_lat'] ?? $meta['jobus_candidate_location']['latitude'] ?? 0 );
+		$lng = (float) ( $meta['candidate_location_lng'] ?? $meta['jobus_candidate_location']['longitude'] ?? 0 );
+
+		if ( ! $lat || ! $lng ) {
+			\Jobus_Pro\Matching\Candidate_Geo_Query::delete( (int) $post_id );
+			return false;
+		}
+
+		\Jobus_Pro\Matching\Candidate_Geo_Query::upsert( (int) $post_id, $lat, $lng );
+		return true;
 	}
 
 	/**

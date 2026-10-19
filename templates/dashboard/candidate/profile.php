@@ -274,6 +274,81 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
         </div>
         <?php endif; ?>
 
+        <?php if ( jobus_opt( 'enable_candidate_matching', false ) && function_exists( 'jobus_is_premium' ) && jobus_is_premium() && class_exists( '\Jobus_Pro\Matching\Match_Fields' ) ) :
+			$match_fields = $candidate_id ? \Jobus_Pro\Matching\Match_Fields::get_candidate( (int) $candidate_id ) : [
+				'teaching_level' => '',
+				'subjects'       => [],
+				'availability'   => [],
+				'max_travel'     => 25,
+				'match_alerts'   => true,
+			];
+			$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
+			$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
+			$avail_opts   = \Jobus_Pro\Matching\Match_Fields::availability_options();
+			$radius_unit  = jobus_opt( 'radius_unit', 'mi' );
+			?>
+        <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-matching-criteria">
+            <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Matching Criteria', 'jobus' ); ?></h4>
+            <p class="jbs-text-muted jbs-mb-20" style="font-size:14px;">
+				<?php esc_html_e( 'Helps match you to new jobs. Add your map location below for distance. Turn on email if you want alerts.', 'jobus' ); ?>
+			</p>
+            <div class="jbs-row">
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_teaching_level"><?php esc_html_e( 'Teaching Level', 'jobus' ); ?></label>
+                        <select name="match_teaching_level" id="match_teaching_level" class="jbs-nice-select">
+                            <option value=""><?php esc_html_e( '— Select —', 'jobus' ); ?></option>
+                            <?php foreach ( $level_opts as $value => $label ) : ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $match_fields['teaching_level'], $value ); ?>><?php echo esc_html( $label ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_max_travel"><?php
+                            printf(
+                                /* translators: %s: distance unit */
+                                esc_html__( 'Max Travel Distance (%s)', 'jobus' ),
+                                esc_html( $radius_unit )
+                            );
+                        ?></label>
+                        <input type="number" min="0" step="1" name="match_max_travel" id="match_max_travel" value="<?php echo esc_attr( (string) ( $match_fields['max_travel'] > 0 ? $match_fields['max_travel'] : 25 ) ); ?>">
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_subjects"><?php esc_html_e( 'Subjects / Qualifications', 'jobus' ); ?></label>
+                        <select name="match_subjects[]" id="match_subjects" class="jbs-nice-select" multiple>
+                            <?php foreach ( $subject_opts as $value => $label ) : ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php echo in_array( $value, $match_fields['subjects'], true ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_availability"><?php esc_html_e( 'Availability', 'jobus' ); ?></label>
+                        <select name="match_availability[]" id="match_availability" class="jbs-nice-select" multiple>
+                            <?php foreach ( $avail_opts as $value => $label ) : ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php echo in_array( $value, $match_fields['availability'], true ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="jbs-col-12">
+                    <div class="jbs-dash-input-wrapper jbs-dash-checkbox jbs-mb-25">
+                        <input type="hidden" name="match_alerts_opt_in" value="0">
+                        <label for="match_alerts_opt_in">
+                            <input type="checkbox" id="match_alerts_opt_in" name="match_alerts_opt_in" value="1" <?php checked( ! empty( $match_fields['match_alerts'] ) ); ?>>
+                            <?php esc_html_e( 'Email me when a new job matches my profile', 'jobus' ); ?>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <?php if ( $show_location ) : ?>
         <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-profile-map">
             <h4 class="jbs-dash-title-three"><?php esc_html_e('Address & Location', 'jobus'); ?></h4>

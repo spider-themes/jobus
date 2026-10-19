@@ -70,6 +70,12 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                             <th scope="col"><?php esc_html_e( 'Title', 'jobus' ); ?></th>
                             <th scope="col"><?php esc_html_e( 'Job Created', 'jobus' ); ?></th>
                             <th scope="col"><?php esc_html_e( 'Applicants', 'jobus' ); ?></th>
+                            <?php
+							/**
+							 * Fires after Applicants header (Jobus Pro adds Matches column).
+							 */
+							do_action( 'jobus_employer_jobs_table_head_after_applicants' );
+							?>
                             <th scope="col"><?php esc_html_e( 'Status', 'jobus' ); ?></th>
                             <th scope="col"><?php esc_html_e( 'Action', 'jobus' ); ?></th>
                         </tr>
@@ -107,6 +113,14 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
                             <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
+                            <?php
+							/**
+							 * Fires after Applicants cell (Jobus Pro adds Matches cell).
+							 *
+							 * @param int $job_id Job ID.
+							 */
+							do_action( 'jobus_employer_jobs_table_cell_after_applicants', (int) $job_id );
+							?>
                             <td><div class="jbs-job-status"><?php echo esc_html( ucfirst( $status ) ); ?></div></td>
                             <td>
                                 <div class="jbs-action-dots jbs-dropdown">
@@ -124,6 +138,14 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                                                 <?php esc_html_e( 'Edit', 'jobus' ); ?>
                                             </a>
                                         </li>
+                                        <?php
+										/**
+										 * Fires inside job row actions (Jobus Pro adds Matched Candidates link).
+										 *
+										 * @param int $job_id Job ID.
+										 */
+										do_action( 'jobus_employer_jobs_table_actions', (int) $job_id );
+										?>
                                         <li>
                                             <a href="#" class="jbs-dropdown-item jbs-delete-job" 
                                                data-job-id="<?php echo esc_attr( $job_id ); ?>"

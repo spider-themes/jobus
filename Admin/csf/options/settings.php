@@ -44,6 +44,8 @@ if (class_exists('CSF')) {
 	require_once JOBUS_PATH . '/Admin/csf/options/company_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/login-form_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/geolocation_opt.php';
+	// Own top-level tab (not under Candidate Options) — matching covers jobs + candidates + geo.
+	require_once JOBUS_PATH . '/Admin/csf/options/matching_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/notification_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/smtp_opt.php';
 	require_once JOBUS_PATH . '/Admin/csf/options/monetization_opt.php';

@@ -333,6 +333,59 @@ if ( ! $can_submit ) {
                     <input type="date" name="job_deadline" id="job_deadline" value="<?php echo esc_attr( $job_deadline ); ?>" placeholder="YYYY-MM-DD">
                 </div>
             </div>
+
+            <?php if ( jobus_opt( 'enable_candidate_matching', false ) && function_exists( 'jobus_is_premium' ) && jobus_is_premium() && class_exists( '\Jobus_Pro\Matching\Match_Fields' ) ) :
+				$match_fields = $job_id ? \Jobus_Pro\Matching\Match_Fields::get_job( $job_id ) : [
+					'teaching_level' => '',
+					'subjects'       => [],
+					'availability'   => [],
+				];
+				$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
+				$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
+				$avail_opts   = \Jobus_Pro\Matching\Match_Fields::availability_options();
+				$job_avail    = $match_fields['availability'][0] ?? '';
+				?>
+            <div id="job-matching-section">
+                <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Matching Criteria', 'jobus' ); ?></h4>
+                <p class="jbs-text-muted jbs-mb-20" style="font-size:14px;">
+					<?php esc_html_e( 'Used to find matching candidates after publish. Set a Job Location for distance. Empty fields are skipped.', 'jobus' ); ?>
+				</p>
+                <div class="jbs-row">
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_teaching_level"><?php esc_html_e( 'Teaching Level', 'jobus' ); ?></label>
+                            <select name="match_teaching_level" id="match_teaching_level" class="jbs-nice-select">
+                                <option value=""><?php esc_html_e( '— Select —', 'jobus' ); ?></option>
+                                <?php foreach ( $level_opts as $value => $label ) : ?>
+                                    <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $match_fields['teaching_level'], $value ); ?>><?php echo esc_html( $label ); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_subjects"><?php esc_html_e( 'Subjects / Qualifications', 'jobus' ); ?></label>
+                            <select name="match_subjects[]" id="match_subjects" class="jbs-nice-select" multiple>
+                                <?php foreach ( $subject_opts as $value => $label ) : ?>
+                                    <option value="<?php echo esc_attr( $value ); ?>" <?php echo in_array( $value, $match_fields['subjects'], true ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_availability"><?php esc_html_e( 'Required Availability', 'jobus' ); ?></label>
+                            <select name="match_availability" id="match_availability" class="jbs-nice-select">
+                                <option value=""><?php esc_html_e( '— Select —', 'jobus' ); ?></option>
+                                <?php foreach ( $avail_opts as $value => $label ) : ?>
+                                    <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $job_avail, $value ); ?>><?php echo esc_html( $label ); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
         <div class="button-group jbs-d-inline-flex jbs-align-items-center jbs-mt-30">
             <button type="submit" class="jbs-dash-btn-two jbs-tran3s jbs-me-3">

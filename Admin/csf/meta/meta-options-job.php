@@ -220,4 +220,45 @@ if ( class_exists( 'CSF' ) ) {
 		) );
 	}
 
+	if ( jobus_opt( 'enable_candidate_matching', false ) && function_exists( 'jobus_is_premium' ) && jobus_is_premium() && class_exists( '\Jobus_Pro\Matching\Match_Fields' ) ) {
+		$match_subject_options = \Jobus_Pro\Matching\Match_Fields::subject_options();
+		$match_level_options   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
+		$match_avail_options   = \Jobus_Pro\Matching\Match_Fields::availability_options();
+
+		CSF::createSection( $meta_prefix, array(
+			'title'  => esc_html__( 'Matching Criteria', 'jobus' ),
+			'icon'   => 'fas fa-people-arrows',
+			'id'     => 'jobus_meta_matching',
+			'fields' => array(
+				array(
+					'type'    => 'notice',
+					'style'   => 'info',
+					'content' => esc_html__( 'Used when this job is published. Rules: Settings → Candidate Matching. Set a job location for travel matching.', 'jobus' ),
+				),
+				array(
+					'id'      => 'match_teaching_level',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Teaching Level', 'jobus' ),
+					'options' => array( '' => esc_html__( '— Select —', 'jobus' ) ) + $match_level_options,
+					'default' => '',
+				),
+				array(
+					'id'       => 'match_subjects',
+					'type'     => 'select',
+					'title'    => esc_html__( 'Subjects / Qualifications', 'jobus' ),
+					'options'  => $match_subject_options,
+					'multiple' => true,
+					'chosen'   => true,
+				),
+				array(
+					'id'      => 'match_availability',
+					'type'    => 'select',
+					'title'   => esc_html__( 'Required Availability', 'jobus' ),
+					'options' => array( '' => esc_html__( '— Select —', 'jobus' ) ) + $match_avail_options,
+					'default' => '',
+				),
+			),
+		) );
+	}
+
 	}

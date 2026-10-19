@@ -879,7 +879,9 @@ class Candidate_Form_Submission {
 			'cv_attachment', 'cv_attachment_id', 'profile_cv_action',
 			'video_title', 'video_url', 'video_bg_img', 'video_bg_img_action',
 			'education_title', 'education', 'experience_title', 'experience',
-			'portfolio_title', 'portfolio'
+			'portfolio_title', 'portfolio',
+			// Matching criteria (Candidate Matching feature)
+			'match_teaching_level', 'match_subjects', 'match_availability', 'match_max_travel', 'match_alerts_opt_in',
 		];
 
 		$post_data = [];
@@ -928,6 +930,15 @@ class Candidate_Form_Submission {
 		     || isset( $post_data['candidate_location_lng'] )
 		) {
 			$this->save_candidate_location( $candidate_id, $post_data );
+		}
+
+		// Matching criteria (engine/classes provided by Jobus Pro).
+		if ( class_exists( '\Jobus_Pro\Matching\Match_Fields' )
+			&& ( isset( $post_data['match_teaching_level'] ) || isset( $post_data['match_subjects'] )
+				|| isset( $post_data['match_availability'] ) || isset( $post_data['match_max_travel'] )
+				|| isset( $post_data['match_alerts_opt_in'] ) )
+		) {
+			\Jobus_Pro\Matching\Match_Fields::save_candidate_from_request( (int) $candidate_id, $post_data );
 		}
 
 		// Handle CV if present

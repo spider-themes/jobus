@@ -27,7 +27,9 @@ class Admin {
 		add_filter( 'submenu_file', [ $this, 'active_sub_menus' ] );
 		add_filter( 'plugin_row_meta', [ $this, 'add_meta_links' ], 10, 2 );
 		add_action( 'admin_init', [ $this, 'setup_radius_engine' ] );
+		add_action( 'admin_init', [ $this, 'setup_matching_engine' ] );
 		add_action( 'admin_notices', [ $this, 'radius_sync_notice' ] );
+		add_action( 'admin_notices', [ $this, 'matching_sync_notice' ] );
 	}
 
 	/**
@@ -117,6 +119,88 @@ class Admin {
 				$count 
 			);
 			echo '<div class="notice notice-success is-dismissible"><p>' . $message . '</p></div>';
+		}
+	}
+
+	/**
+	 * Create matching tables and sync candidate coordinates (requires Jobus Pro).
+	 *
+	 * @return void
+	 */
+	public function setup_matching_engine(): void {
+		if ( ! isset( $_GET['jobus_setup_matching'] ) || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'jobus_setup_matching_action' ) ) {
+			wp_die( esc_html__( 'Security check failed. Please try again.', 'jobus' ) );
+		}
+
+		$redirect_url = remove_query_arg( array( 'jobus_setup_matching', '_wpnonce' ) );
+
+		if ( ! class_exists( '\Jobus_Pro\Matching\Candidate_Geo_Query' ) || ! class_exists( '\Jobus_Pro\Matching\Schema' ) ) {
+			$redirect_url = add_query_arg( array( 'jobus_matching_error' => 'pro_required' ), $redirect_url );
+			wp_safe_redirect( $redirect_url );
+			exit;
+		}
+
+		if ( class_exists( '\jobus\includes\Classes\Lifecycle' ) ) {
+			\jobus\includes\Classes\Lifecycle::create_tables();
+		}
+		\Jobus_Pro\Matching\Schema::create_tables();
+
+		$synced = 0;
+		if ( class_exists( '\jobus\includes\Classes\Geolocation' ) ) {
+			$geo = new \jobus\includes\Classes\Geolocation();
+			$candidates = get_posts(
+				array(
+					'post_type'      => 'jobus_candidate',
+					'posts_per_page' => -1,
+					'post_status'    => 'any',
+					'fields'         => 'ids',
+				)
+			);
+
+			foreach ( $candidates as $candidate_id ) {
+				$post = get_post( $candidate_id );
+				if ( $post && $geo->sync_candidate_location( $candidate_id, $post ) ) {
+					$synced++;
+				}
+			}
+		}
+
+		update_option( 'jobus_matching_setup_completed', true );
+
+		$redirect_url = add_query_arg( array( 'jobus_matching_synced' => $synced ), $redirect_url );
+		wp_safe_redirect( $redirect_url );
+		exit;
+	}
+
+	/**
+	 * Admin notice after matching setup.
+	 *
+	 * @return void
+	 */
+	public function matching_sync_notice(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( isset( $_GET['jobus_matching_error'] ) && 'pro_required' === $_GET['jobus_matching_error'] ) {
+			echo '<div class="notice notice-error is-dismissible"><p>'
+				. esc_html__( 'Candidate matching sync requires Jobus Pro. Activate Jobus Pro, then try again.', 'jobus' )
+				. '</p></div>';
+			return;
+		}
+
+		if ( isset( $_GET['jobus_matching_synced'] ) ) {
+			$count   = absint( $_GET['jobus_matching_synced'] );
+			$message = sprintf(
+				/* translators: %d: number of candidates synced */
+				esc_html__( 'Matching setup complete. Tables created and %d candidate locations synced.', 'jobus' ),
+				$count
+			);
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
 		}
 	}
 
