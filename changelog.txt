@@ -1,3 +1,8 @@
+= 1.13.0 (October 21, 2026) =
+New: Added padding controls for Job, Company, and Candidate archive blocks.
+New: Added Candidate Matching settings, form fields, and Pro dashboard integration.
+Improved: Enhanced premium feature detection with a fallback to the plugin version constant when the Freemius helper is unavailable.
+
 = 1.12.0 (October 13, 2026) =
 New: Added the Job Category Tabs block.
 New: Added an option to show or hide the employer email address.
