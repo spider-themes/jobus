@@ -218,7 +218,7 @@
   background: #f0f5f3;
   margin-left: 260px;
   border-radius: 50px 0 0 50px;
-  padding: 150px 55px 50px;
+  padding: 80px 50px 50px;
   margin-bottom: 50px;
 
   a {
@@ -838,6 +838,16 @@
         border-radius: 3px;
         accent-color: var(--jbs-brand_color_1);
         flex-shrink: 0;
+      }
+    }
+
+    // Max Travel Distance custom value (Candidate Matching)
+    .jbs-travel-custom {
+      clear: both;
+      margin-top: 12px;
+
+      &[hidden] {
+        display: none;
       }
     }
 

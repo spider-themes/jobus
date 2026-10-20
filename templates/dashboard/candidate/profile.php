@@ -279,13 +279,23 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
 				'teaching_level' => '',
 				'subjects'       => [],
 				'availability'   => [],
-				'max_travel'     => 25,
+				'max_travel'     => 0,
 				'match_alerts'   => true,
 			];
 			$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
 			$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
 			$avail_opts   = \Jobus_Pro\Matching\Match_Fields::availability_options();
 			$radius_unit  = jobus_opt( 'radius_unit', 'mi' );
+			// Travel distance: stored value wins, otherwise the admin default from Settings → Candidate Matching.
+			$default_travel   = (float) jobus_opt( 'matching_default_travel', 25 );
+			$default_travel   = $default_travel > 0 ? $default_travel : 25;
+			$max_travel_limit = (float) jobus_opt( 'max_radius', 250 );
+			$max_travel_limit = $max_travel_limit > 0 ? $max_travel_limit : 250;
+			$stored_travel    = (float) ( $match_fields['max_travel'] ?? 0 );
+			$current_travel   = $stored_travel > 0 ? $stored_travel : $default_travel;
+			$travel_presets   = [ 10, 20, 30, 50 ];
+			$is_preset_travel = in_array( (int) $current_travel, $travel_presets, true ) && (float) (int) $current_travel === $current_travel;
+			$has_map_location = '' !== trim( (string) ( $candidate_location['latitude'] ?? '' ) ) && '' !== trim( (string) ( $candidate_location['longitude'] ?? '' ) );
 			?>
         <div class="jbs-bg-white jbs-card-box jbs-border-20 jbs-mt-40" id="candidate-matching-criteria">
             <h4 class="jbs-dash-title-three"><?php esc_html_e( 'Matching Criteria', 'jobus' ); ?></h4>
@@ -306,14 +316,36 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
                 </div>
                 <div class="jbs-col-lg-6">
                     <div class="jbs-dash-input-wrapper jbs-mb-25">
-                        <label for="match_max_travel"><?php
+                        <label for="match_travel_preset"<?php echo ( $show_location && ! $has_map_location ) ? ' title="' . esc_attr__( 'Add your map location below so we can measure travel distance — without it, distance matching cannot include you.', 'jobus' ) . '"' : ''; ?>><?php
                             printf(
                                 /* translators: %s: distance unit */
                                 esc_html__( 'Max Travel Distance (%s)', 'jobus' ),
                                 esc_html( $radius_unit )
                             );
                         ?></label>
-                        <input type="number" min="0" step="1" name="match_max_travel" id="match_max_travel" value="<?php echo esc_attr( (string) ( $match_fields['max_travel'] > 0 ? $match_fields['max_travel'] : 25 ) ); ?>">
+                        <select name="match_travel_preset" id="match_travel_preset" class="jbs-nice-select">
+                            <?php foreach ( $travel_presets as $travel_preset ) : ?>
+                                <option value="<?php echo esc_attr( (string) $travel_preset ); ?>" <?php selected( $is_preset_travel && (int) $current_travel === $travel_preset ); ?>><?php echo esc_html( $travel_preset . ' ' . $radius_unit ); ?></option>
+                            <?php endforeach; ?>
+                            <option value="custom" <?php selected( ! $is_preset_travel ); ?>><?php esc_html_e( 'Custom', 'jobus' ); ?></option>
+                        </select>
+                        <div class="jbs-travel-custom" id="match_travel_custom_wrap" <?php echo $is_preset_travel ? 'hidden' : ''; ?>>
+                            <input type="number" min="1" max="<?php echo esc_attr( (string) (int) max( $max_travel_limit, $current_travel ) ); ?>" step="1" name="match_max_travel" id="match_max_travel" value="<?php echo esc_attr( (string) $current_travel ); ?>" aria-label="<?php esc_attr_e( 'Custom max travel distance', 'jobus' ); ?>">
+                        </div>
+                        <p class="jbs-alert-text jbs-mt-10">
+                            <?php if ( $stored_travel <= 0 ) : ?>
+                                <?php
+                                printf(
+                                    /* translators: 1: default distance, 2: distance unit */
+                                    esc_html__( 'Not set yet — the site default of %1$s %2$s will be used until you choose one.', 'jobus' ),
+                                    esc_html( (string) $default_travel ),
+                                    esc_html( $radius_unit )
+                                );
+                                ?>
+                            <?php else : ?>
+                                <?php esc_html_e( 'You will only be matched with jobs within this distance of your map location.', 'jobus' ); ?>
+                            <?php endif; ?>
+                        </p>
                     </div>
                 </div>
                 <div class="jbs-col-lg-6">

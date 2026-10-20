@@ -70,6 +70,30 @@
             this.SocialLinks();
             this.UserPassword();
             this.ProNotice();
+            this.TravelDistance();
+        },
+
+        // Max Travel Distance (Candidate Matching): preset select writes into
+        // the existing #match_max_travel input, "Custom" reveals it for a free value.
+        TravelDistance: function () {
+            const $presetSelect = $('#match_travel_preset');
+            const $customInput = $('#match_max_travel');
+            const $customWrap = $('#match_travel_custom_wrap');
+
+            if (!$presetSelect.length || !$customInput.length) return;
+
+            $presetSelect.on('change', function () {
+                const value = $(this).val();
+
+                if (value === 'custom') {
+                    $customWrap.prop('hidden', false);
+                    $customInput.trigger('focus').trigger('select');
+                    return;
+                }
+
+                $customInput.val(value);
+                $customWrap.prop('hidden', true);
+            });
         },
 
         initProfilePictureUpload: function (config) {

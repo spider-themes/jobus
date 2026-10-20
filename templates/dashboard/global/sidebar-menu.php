@@ -42,19 +42,10 @@ foreach ( $role_post_map as $role => $post_type ) {
     }
 }
 
-$logo = jobus_opt( 'dashboard_logo' );
-
-
-if ( ! empty( $logo['url'] ) ) { ?>
-    <div class="logo jbs-text-md-center jbs-d-md-block jbs-d-flex jbs-align-items-center jbs-justify-content-between">
-        <a href="<?php esc_url( home_url( '/' ) ); ?>">
-            <img src="<?php echo esc_url( $logo['url'] ) ?>" alt="<?php get_bloginfo( 'name' ) ?>">
-        </a>
-        <button class="jbs-close-btn jbs-d-block jbs-d-md-none"><i class="bi bi-x-lg"></i></button>
-    </div>
-    <?php
-}
 ?>
+<div class="jbs-d-flex jbs-align-items-center jbs-justify-content-end jbs-d-md-none">
+    <button type="button" class="jbs-close-btn"><i class="bi bi-x-lg"></i></button>
+</div>
 
 <div class="jbs-user-data">
     <div class="jbs-user-avatar jbs-online jbs-position-relative jbs-rounded-circle">

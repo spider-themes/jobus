@@ -440,6 +440,8 @@ if ( class_exists( 'CSF' ) ) {
 		$match_level_options   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
 		$match_avail_options   = \Jobus_Pro\Matching\Match_Fields::availability_options();
 		$radius_unit           = jobus_opt( 'radius_unit', 'mi' );
+		$match_default_travel  = (float) jobus_opt( 'matching_default_travel', 25 );
+		$match_default_travel  = $match_default_travel > 0 ? $match_default_travel : 25;
 
 		CSF::createSection( $meta_candidate_prefix, array(
 			'id'     => 'jobus_meta_matching',
@@ -480,7 +482,7 @@ if ( class_exists( 'CSF' ) ) {
 					'title'    => esc_html__( 'Max Travel Distance', 'jobus' ),
 					/* translators: %s: distance unit (mi or km) */
 					'subtitle' => sprintf( esc_html__( 'Maximum distance willing to travel (%s).', 'jobus' ), esc_html( $radius_unit ) ),
-					'default'  => 25,
+					'default'  => $match_default_travel,
 				),
 				array(
 					'id'       => 'match_alerts_opt_in',
