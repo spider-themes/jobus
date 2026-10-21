@@ -22,8 +22,37 @@
 
         init: function () {
             this.CandidateSpecificationsRepeater();
+            this.AvailableDatesRepeater();
             this.EducationRepeater();
             this.ExperienceRepeater();
+        },
+
+        /**
+         * Dynamic specific-date availability slots (Matching Criteria).
+         * Rows submit as match_available_dates[i][date|time_start|time_end].
+         */
+        AvailableDatesRepeater: function () {
+            let repeater = document.getElementById('jbs-available-dates-repeater');
+            let addBtn = document.getElementById('jbs-add-available-date');
+            if (repeater && addBtn) {
+                addBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let idx = repeater.querySelectorAll('.jbs-available-date-item').length;
+                    let div = document.createElement('div');
+                    div.className = 'jbs-available-date-item jbs-d-flex jbs-align-items-center jbs-gap-2 jbs-mb-10';
+                    div.innerHTML = '<input type="date" name="match_available_dates['+idx+'][date]" class="jbs-form-control" aria-label="Available date">' +
+                        '<input type="time" name="match_available_dates['+idx+'][time_start]" class="jbs-form-control" aria-label="Available from">' +
+                        '<input type="time" name="match_available_dates['+idx+'][time_end]" class="jbs-form-control" aria-label="Available until">' +
+                        '<button type="button" class="jbs-btn jbs-btn-danger remove-available-date" title="Remove"><i class="bi bi-x"></i></button>';
+                    repeater.appendChild(div);
+                });
+                repeater.addEventListener('click', function(e) {
+                    if (e.target.closest('.remove-available-date')) {
+                        e.preventDefault();
+                        e.target.closest('.jbs-available-date-item').remove();
+                    }
+                });
+            }
         },
 
         /**

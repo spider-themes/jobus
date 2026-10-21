@@ -508,6 +508,33 @@ if ( class_exists( 'CSF' ) ) {
 					'attributes' => array( 'placeholder' => '17:00' ),
 				),
 				array(
+					'id'           => 'match_available_dates',
+					'type'         => 'repeater',
+					'title'        => esc_html__( 'Specific Available Dates', 'jobus' ),
+					'subtitle'     => esc_html__( 'Exact dates this candidate can work. Leave times empty for all-day availability. A dated job only matches when a slot (or the weekly days above) fully covers the job date and time.', 'jobus' ),
+					'button_title' => esc_html__( 'Add Date', 'jobus' ),
+					'fields'       => array(
+						array(
+							'id'       => 'date',
+							'type'     => 'date',
+							'title'    => esc_html__( 'Date', 'jobus' ),
+							'settings' => array( 'dateFormat' => 'yy-mm-dd' ),
+						),
+						array(
+							'id'         => 'time_start',
+							'type'       => 'text',
+							'title'      => esc_html__( 'Available From', 'jobus' ),
+							'attributes' => array( 'placeholder' => '09:00' ),
+						),
+						array(
+							'id'         => 'time_end',
+							'type'       => 'text',
+							'title'      => esc_html__( 'Available Until', 'jobus' ),
+							'attributes' => array( 'placeholder' => '15:00' ),
+						),
+					),
+				),
+				array(
 					'id'       => 'match_alerts_opt_in',
 					'type'     => 'switcher',
 					'title'    => esc_html__( 'Job Match Email Alerts', 'jobus' ),

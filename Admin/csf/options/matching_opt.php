@@ -98,7 +98,7 @@ CSF::createSection( $settings_prefix, array(
 			'id'         => 'matching_require_job_date_time',
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Job Date & Time', 'jobus' ),
-			'subtitle'   => esc_html__( 'Match the job date/time against the candidate\'s available days and hours. Off by default.', 'jobus' ),
+			'subtitle'   => esc_html__( 'Match the job date/time against the candidate\'s specific available dates (or weekly available days) and hours. The candidate must be available for the full job date/time. Off by default.', 'jobus' ),
 			'default'    => false,
 			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
 		),

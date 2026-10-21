@@ -882,7 +882,7 @@ class Candidate_Form_Submission {
 			'portfolio_title', 'portfolio',
 			// Matching criteria (Candidate Matching feature)
 			'match_teaching_level', 'match_subjects', 'match_availability', 'match_max_travel', 'match_alerts_opt_in',
-			'match_available_days', 'match_available_time_start', 'match_available_time_end',
+			'match_available_days', 'match_available_time_start', 'match_available_time_end', 'match_available_dates',
 		];
 
 		$post_data = [];
@@ -938,7 +938,8 @@ class Candidate_Form_Submission {
 			&& ( isset( $post_data['match_teaching_level'] ) || isset( $post_data['match_subjects'] )
 				|| isset( $post_data['match_availability'] ) || isset( $post_data['match_max_travel'] )
 				|| isset( $post_data['match_alerts_opt_in'] ) || isset( $post_data['match_available_days'] )
-				|| isset( $post_data['match_available_time_start'] ) || isset( $post_data['match_available_time_end'] ) )
+				|| isset( $post_data['match_available_time_start'] ) || isset( $post_data['match_available_time_end'] )
+				|| isset( $post_data['match_available_dates'] ) )
 		) {
 			\Jobus_Pro\Matching\Match_Fields::save_candidate_from_request( (int) $candidate_id, $post_data );
 		}

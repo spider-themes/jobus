@@ -284,6 +284,7 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
 				'available_days'       => [],
 				'available_time_start' => '',
 				'available_time_end'   => '',
+				'available_dates'      => [],
 			];
 			$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
 			$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
@@ -392,6 +393,25 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
                     <div class="jbs-dash-input-wrapper jbs-mb-25">
                         <label for="match_available_time_end"><?php esc_html_e( 'Available Until', 'jobus' ); ?></label>
                         <input type="time" name="match_available_time_end" id="match_available_time_end" value="<?php echo esc_attr( $match_fields['available_time_end'] ?? '' ); ?>">
+                    </div>
+                </div>
+                <div class="jbs-col-12">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label><?php esc_html_e( 'Specific Available Dates', 'jobus' ); ?></label>
+                        <p class="jbs-alert-text jbs-mb-10"><?php esc_html_e( 'Add exact dates you can work, e.g. 21 August, 09:00–15:00. Leave the times empty if you are available all day. You will only be matched to a dated job when you are available for its full date and time.', 'jobus' ); ?></p>
+                        <div id="jbs-available-dates-repeater">
+                            <?php foreach ( (array) ( $match_fields['available_dates'] ?? [] ) as $slot_i => $slot ) : ?>
+                            <div class="jbs-available-date-item jbs-d-flex jbs-align-items-center jbs-gap-2 jbs-mb-10">
+                                <input type="date" name="match_available_dates[<?php echo esc_attr( (string) $slot_i ); ?>][date]" class="jbs-form-control" value="<?php echo esc_attr( $slot['date'] ?? '' ); ?>" aria-label="<?php esc_attr_e( 'Available date', 'jobus' ); ?>">
+                                <input type="time" name="match_available_dates[<?php echo esc_attr( (string) $slot_i ); ?>][time_start]" class="jbs-form-control" value="<?php echo esc_attr( $slot['time_start'] ?? '' ); ?>" aria-label="<?php esc_attr_e( 'Available from', 'jobus' ); ?>">
+                                <input type="time" name="match_available_dates[<?php echo esc_attr( (string) $slot_i ); ?>][time_end]" class="jbs-form-control" value="<?php echo esc_attr( $slot['time_end'] ?? '' ); ?>" aria-label="<?php esc_attr_e( 'Available until', 'jobus' ); ?>">
+                                <button type="button" class="jbs-btn jbs-btn-danger remove-available-date" title="<?php esc_attr_e( 'Remove', 'jobus' ); ?>"><i class="bi bi-x"></i></button>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="button" class="jbs-dash-btn-one" id="jbs-add-available-date">
+                            <i class="bi bi-plus"></i> <?php esc_html_e( 'Add Date', 'jobus' ); ?>
+                        </button>
                     </div>
                 </div>
                 <div class="jbs-col-12">

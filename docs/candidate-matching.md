@@ -22,7 +22,7 @@ Settings → Candidate Matching controls the engine without code:
 - **Enable/disable** each criterion: Teaching Level, Subjects, Travel Distance, Availability, and Job Date & Time (off by default).
 - **Mode per criterion** (`matching_mode_{id}`): `Required` (default) excludes candidates who fail; `Preferred` never excludes, only lowers their score — avoids empty shortlists.
 - **Weight per criterion** (`matching_weight_{id}`, 0-10, default 1): weighted ranking score in `Match_Engine`. All weights at 1 reproduces the original equal-weight average.
-- **Job Date & Time**: job sets `match_job_date` + start/end time; candidate sets available days (`mon`–`sun`) + available from/until. The job date's weekday must be an available day and the time windows must overlap. Empty job fields skip the rule.
+- **Job Date & Time**: job sets `match_job_date` + start/end time; candidate sets either specific available dates (`match_available_dates` slots: date + optional from/until, empty times = all day) and/or weekly available days (`mon`–`sun`) + available from/until. A dated job matches only when a slot exists for that exact date — or the job date's weekday is an available day — **and** the candidate's window for that date fully covers the job time (available 09:00–15:00 covers a 10:00–14:00 job; 09:00–12:00 does not). Candidates not available for the full date/time are excluded from matches and match-alert emails. Empty job fields skip the rule.
 
 New criteria are added by implementing `Criterion_Interface` (`id`/`is_enabled`/`matches`/`score`) and registering via the `jobus_matching_criteria` filter or `Criteria_Registry` — no engine changes needed. Mode/weight settings then work automatically via `matching_mode_{id}` / `matching_weight_{id}`.
 
