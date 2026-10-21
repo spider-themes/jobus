@@ -276,15 +276,19 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
 
         <?php if ( jobus_opt( 'enable_candidate_matching', false ) && function_exists( 'jobus_is_premium' ) && jobus_is_premium() && class_exists( '\Jobus_Pro\Matching\Match_Fields' ) ) :
 			$match_fields = $candidate_id ? \Jobus_Pro\Matching\Match_Fields::get_candidate( (int) $candidate_id ) : [
-				'teaching_level' => '',
-				'subjects'       => [],
-				'availability'   => [],
-				'max_travel'     => 0,
-				'match_alerts'   => true,
+				'teaching_level'       => '',
+				'subjects'             => [],
+				'availability'         => [],
+				'max_travel'           => 0,
+				'match_alerts'         => true,
+				'available_days'       => [],
+				'available_time_start' => '',
+				'available_time_end'   => '',
 			];
 			$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
 			$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
 			$avail_opts   = \Jobus_Pro\Matching\Match_Fields::availability_options();
+			$weekday_opts = \Jobus_Pro\Matching\Match_Fields::weekdays();
 			$radius_unit  = jobus_opt( 'radius_unit', 'mi' );
 			// Travel distance: stored value wins, otherwise the admin default from Settings → Candidate Matching.
 			$default_travel   = (float) jobus_opt( 'matching_default_travel', 25 );
@@ -366,6 +370,28 @@ $save_changes_label = jobus_opt( 'label_save_changes', esc_html__( 'Save Changes
                                 <option value="<?php echo esc_attr( $value ); ?>" <?php echo in_array( $value, $match_fields['availability'], true ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_available_days"><?php esc_html_e( 'Available Days', 'jobus' ); ?></label>
+                        <select name="match_available_days[]" id="match_available_days" class="jbs-nice-select" multiple>
+                            <?php foreach ( $weekday_opts as $value => $label ) : ?>
+                                <option value="<?php echo esc_attr( $value ); ?>" <?php echo in_array( $value, $match_fields['available_days'] ?? [], true ) ? 'selected' : ''; ?>><?php echo esc_html( $label ); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_available_time_start"><?php esc_html_e( 'Available From', 'jobus' ); ?></label>
+                        <input type="time" name="match_available_time_start" id="match_available_time_start" value="<?php echo esc_attr( $match_fields['available_time_start'] ?? '' ); ?>">
+                    </div>
+                </div>
+                <div class="jbs-col-lg-6">
+                    <div class="jbs-dash-input-wrapper jbs-mb-25">
+                        <label for="match_available_time_end"><?php esc_html_e( 'Available Until', 'jobus' ); ?></label>
+                        <input type="time" name="match_available_time_end" id="match_available_time_end" value="<?php echo esc_attr( $match_fields['available_time_end'] ?? '' ); ?>">
                     </div>
                 </div>
                 <div class="jbs-col-12">

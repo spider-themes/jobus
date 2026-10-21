@@ -339,6 +339,9 @@ if ( ! $can_submit ) {
 					'teaching_level' => '',
 					'subjects'       => [],
 					'availability'   => [],
+					'job_date'       => '',
+					'job_time_start' => '',
+					'job_time_end'   => '',
 				];
 				$level_opts   = \Jobus_Pro\Matching\Match_Fields::teaching_levels();
 				$subject_opts = \Jobus_Pro\Matching\Match_Fields::subject_options();
@@ -381,6 +384,24 @@ if ( ! $can_submit ) {
                                     <option value="<?php echo esc_attr( $value ); ?>" <?php selected( $job_avail, $value ); ?>><?php echo esc_html( $label ); ?></option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+                    </div>
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_job_date"><?php esc_html_e( 'Job Date', 'jobus' ); ?></label>
+                            <input type="date" name="match_job_date" id="match_job_date" value="<?php echo esc_attr( $match_fields['job_date'] ?? '' ); ?>">
+                        </div>
+                    </div>
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_job_time_start"><?php esc_html_e( 'Start Time', 'jobus' ); ?></label>
+                            <input type="time" name="match_job_time_start" id="match_job_time_start" value="<?php echo esc_attr( $match_fields['job_time_start'] ?? '' ); ?>">
+                        </div>
+                    </div>
+                    <div class="jbs-col-lg-4">
+                        <div class="jbs-dash-input-wrapper jbs-mb-25">
+                            <label for="match_job_time_end"><?php esc_html_e( 'End Time', 'jobus' ); ?></label>
+                            <input type="time" name="match_job_time_end" id="match_job_time_end" value="<?php echo esc_attr( $match_fields['job_time_end'] ?? '' ); ?>">
                         </div>
                     </div>
                 </div>

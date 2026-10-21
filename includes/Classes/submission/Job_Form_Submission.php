@@ -73,6 +73,9 @@ class Job_Form_Submission {
 			'match_teaching_level',
 			'match_subjects',
 			'match_availability',
+			'match_job_date',
+			'match_job_time_start',
+			'match_job_time_end',
 		];
 
 		$post_data = [];
@@ -178,7 +181,8 @@ class Job_Form_Submission {
 
 		// Save matching criteria fields (engine/classes provided by Jobus Pro).
 		if ( class_exists( '\Jobus_Pro\Matching\Match_Fields' )
-			&& ( array_key_exists( 'match_teaching_level', $post_data ) || array_key_exists( 'match_subjects', $post_data ) || array_key_exists( 'match_availability', $post_data ) )
+			&& ( array_key_exists( 'match_teaching_level', $post_data ) || array_key_exists( 'match_subjects', $post_data ) || array_key_exists( 'match_availability', $post_data )
+				|| array_key_exists( 'match_job_date', $post_data ) || array_key_exists( 'match_job_time_start', $post_data ) || array_key_exists( 'match_job_time_end', $post_data ) )
 		) {
 			\Jobus_Pro\Matching\Match_Fields::save_job_from_request( (int) $job_id, $post_data );
 		}

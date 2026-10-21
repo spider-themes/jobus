@@ -257,6 +257,27 @@ if ( class_exists( 'CSF' ) ) {
 					'options' => array( '' => esc_html__( '— Select —', 'jobus' ) ) + $match_avail_options,
 					'default' => '',
 				),
+				array(
+					'id'       => 'match_job_date',
+					'type'     => 'date',
+					'title'    => esc_html__( 'Job Date', 'jobus' ),
+					'subtitle' => esc_html__( 'Optional. Used by the Job Date & Time criterion when enabled in Settings.', 'jobus' ),
+					'settings' => array( 'dateFormat' => 'yy-mm-dd' ),
+				),
+				array(
+					'id'       => 'match_job_time_start',
+					'type'     => 'text',
+					'title'    => esc_html__( 'Job Start Time', 'jobus' ),
+					'subtitle' => esc_html__( 'Optional, 24h format e.g. 09:00.', 'jobus' ),
+					'attributes' => array( 'placeholder' => '09:00' ),
+				),
+				array(
+					'id'       => 'match_job_time_end',
+					'type'     => 'text',
+					'title'    => esc_html__( 'Job End Time', 'jobus' ),
+					'subtitle' => esc_html__( 'Optional, 24h format e.g. 17:00.', 'jobus' ),
+					'attributes' => array( 'placeholder' => '17:00' ),
+				),
 			),
 		) );
 	}

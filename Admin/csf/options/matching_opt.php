@@ -8,7 +8,7 @@ $sync_url = wp_nonce_url( admin_url( 'edit.php?post_type=jobus_job&jobus_setup_m
 
 $guide = '<div style="background:#f8f9fa;padding:16px 18px;border-radius:6px;border:1px solid #dcdcde;margin:0 0 4px;font-size:13px;line-height:1.65;color:#1d2327;">'
 	. '<p style="margin:0 0 10px;"><strong>' . esc_html__( 'How it works', 'jobus' ) . '</strong> — '
-	. esc_html__( 'When a job is published, Jobus Pro matches candidates by teaching level, subjects, travel distance, and availability. Requires Jobus Pro.', 'jobus' )
+	. esc_html__( 'When a job is published, Jobus Pro matches candidates by the criteria enabled below (teaching level, subjects, travel distance, availability, and optionally job date/time). Each criterion can be Required or Preferred, with a ranking weight. Requires Jobus Pro.', 'jobus' )
 	. '</p>'
 	. '<p style="margin:0 0 6px;"><strong>' . esc_html__( 'Setup', 'jobus' ) . '</strong></p>'
 	. '<ol style="margin:0 0 10px 18px;padding:0;">'
@@ -92,6 +92,100 @@ CSF::createSection( $settings_prefix, array(
 			'type'       => 'switcher',
 			'title'      => esc_html__( 'Availability', 'jobus' ),
 			'default'    => true,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_require_job_date_time',
+			'type'       => 'switcher',
+			'title'      => esc_html__( 'Job Date & Time', 'jobus' ),
+			'subtitle'   => esc_html__( 'Match the job date/time against the candidate\'s available days and hours. Off by default.', 'jobus' ),
+			'default'    => false,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'type'       => 'subheading',
+			'content'    => esc_html__( 'Criterion mode & weight', 'jobus' ),
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'type'       => 'notice',
+			'style'      => 'normal',
+			'content'    => esc_html__( 'Required = candidate must pass or is excluded. Preferred = never excludes, only lowers the match score. Weight (0-10) controls how much a criterion affects ranking; 1 for all = equal ranking, as before.', 'jobus' ),
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_mode_teaching_level',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Teaching Level Mode', 'jobus' ),
+			'options'    => array( 'required' => esc_html__( 'Required', 'jobus' ), 'preferred' => esc_html__( 'Preferred', 'jobus' ) ),
+			'default'    => 'required',
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_weight_teaching_level',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Teaching Level Weight', 'jobus' ),
+			'default'    => 1,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_mode_subjects',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Subjects Mode', 'jobus' ),
+			'options'    => array( 'required' => esc_html__( 'Required', 'jobus' ), 'preferred' => esc_html__( 'Preferred', 'jobus' ) ),
+			'default'    => 'required',
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_weight_subjects',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Subjects Weight', 'jobus' ),
+			'default'    => 1,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_mode_travel_distance',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Travel Distance Mode', 'jobus' ),
+			'options'    => array( 'required' => esc_html__( 'Required', 'jobus' ), 'preferred' => esc_html__( 'Preferred', 'jobus' ) ),
+			'default'    => 'required',
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_weight_travel_distance',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Travel Distance Weight', 'jobus' ),
+			'default'    => 1,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_mode_availability',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Availability Mode', 'jobus' ),
+			'options'    => array( 'required' => esc_html__( 'Required', 'jobus' ), 'preferred' => esc_html__( 'Preferred', 'jobus' ) ),
+			'default'    => 'required',
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_weight_availability',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Availability Weight', 'jobus' ),
+			'default'    => 1,
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_mode_job_date_time',
+			'type'       => 'select',
+			'title'      => esc_html__( 'Job Date & Time Mode', 'jobus' ),
+			'options'    => array( 'required' => esc_html__( 'Required', 'jobus' ), 'preferred' => esc_html__( 'Preferred', 'jobus' ) ),
+			'default'    => 'required',
+			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
+		),
+		array(
+			'id'         => 'matching_weight_job_date_time',
+			'type'       => 'number',
+			'title'      => esc_html__( 'Job Date & Time Weight', 'jobus' ),
+			'default'    => 1,
 			'dependency' => array( 'enable_candidate_matching', '==', 'true' ),
 		),
 		array(

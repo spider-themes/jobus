@@ -15,6 +15,17 @@
 
 Job published → Pro engine stores matches → Pro UI + optional email.
 
+## Custom Matching Configuration
+
+Settings → Candidate Matching controls the engine without code:
+
+- **Enable/disable** each criterion: Teaching Level, Subjects, Travel Distance, Availability, and Job Date & Time (off by default).
+- **Mode per criterion** (`matching_mode_{id}`): `Required` (default) excludes candidates who fail; `Preferred` never excludes, only lowers their score — avoids empty shortlists.
+- **Weight per criterion** (`matching_weight_{id}`, 0-10, default 1): weighted ranking score in `Match_Engine`. All weights at 1 reproduces the original equal-weight average.
+- **Job Date & Time**: job sets `match_job_date` + start/end time; candidate sets available days (`mon`–`sun`) + available from/until. The job date's weekday must be an available day and the time windows must overlap. Empty job fields skip the rule.
+
+New criteria are added by implementing `Criterion_Interface` (`id`/`is_enabled`/`matches`/`score`) and registering via the `jobus_matching_criteria` filter or `Criteria_Registry` — no engine changes needed. Mode/weight settings then work automatically via `matching_mode_{id}` / `matching_weight_{id}`.
+
 ## Setup
 
 1. Activate Jobus Pro
