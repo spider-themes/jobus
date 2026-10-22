@@ -8,7 +8,7 @@ $sync_url = wp_nonce_url( admin_url( 'edit.php?post_type=jobus_job&jobus_setup_m
 
 $guide = '<div style="background:#f8f9fa;padding:16px 18px;border-radius:6px;border:1px solid #dcdcde;margin:0 0 4px;font-size:13px;line-height:1.65;color:#1d2327;">'
 	. '<p style="margin:0 0 10px;"><strong>' . esc_html__( 'How it works', 'jobus' ) . '</strong> — '
-	. esc_html__( 'When a job is published, Jobus Pro matches candidates by the criteria enabled below (teaching level, subjects, travel distance, availability, and optionally job date/time). Each criterion can be Required or Preferred, with a ranking weight. Requires Jobus Pro.', 'jobus' )
+	. esc_html__( 'When a job is submitted or published, Jobus Pro immediately matches candidates by the criteria enabled below (teaching level, subjects, travel distance, availability, and optionally job date/time) and sends match-alert emails. Each criterion can be Required or Preferred, with a ranking weight. Requires Jobus Pro. No daily or weekly job-alert schedule is used.', 'jobus' )
 	. '</p>'
 	. '<p style="margin:0 0 6px;"><strong>' . esc_html__( 'Setup', 'jobus' ) . '</strong></p>'
 	. '<ol style="margin:0 0 10px 18px;padding:0;">'

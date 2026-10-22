@@ -199,7 +199,8 @@ class Job_Form_Submission {
 			}
 		}
 
-        // Fire hooks after everything is saved
+        // Fire hooks after everything is saved (matching criteria included).
+        // Jobus Pro listens to jobus_job_submitted to match candidates immediately.
         if ( isset( $post_data['job_id'] ) && ! empty( $post_data['job_id'] ) ) {
             do_action( 'jobus_job_updated', $job_id, $post_data );
         } else {

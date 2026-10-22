@@ -13,7 +13,9 @@
 
 ## Flow
 
-Job published → Pro engine stores matches → Pro UI + optional email.
+New job submitted (`jobus_job_submitted`, after all fields are saved) → Pro engine matches immediately (teaching/category, availability, travel distance) → stores matches → match-alert emails for opted-in candidates. No daily/weekly job-alert cron.
+
+Fallbacks: job edit (`jobus_job_updated`), admin publish, CSF save (same request / shutdown). Pending jobs wait until they are published.
 
 ## Custom Matching Configuration
 

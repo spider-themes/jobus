@@ -2,6 +2,7 @@
 New: Added configurable Candidate Matching settings with per-criterion Required/Preferred mode and ranking weight controls.
 New: Added Job Date, start/end time, and candidate available days/hours fields for Candidate Matching.
 New: Added Specific Available Dates field so candidates can set exact dates and time ranges they are available to work.
+Improved: Candidate Matching now runs as soon as a job is submitted or published, with no daily or weekly job-alert schedule.
 
 = 1.13.0 (October 21, 2026) =
 New: Added padding controls for Job, Company, and Candidate archive blocks.
