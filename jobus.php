@@ -218,6 +218,11 @@ final class Jobus {
 			flush_rewrite_rules( false );
 			delete_option( 'jobus_flush_rewrite_rules_flag' );
 		}
+
+		/**
+		 * Action fired on WordPress init after Jobus core initialization.
+		 */
+		do_action( 'jobus_init' );
 	}
 
 
@@ -258,6 +263,12 @@ final class Jobus {
 		// Radius / Geolocation engine
 		new \jobus\includes\Classes\Geolocation();
 
+		// Custom Search Index engine for fast faceted queries
+		new \jobus\includes\Classes\Search_Index();
+
+		// Platform Telemetry and Growth Milestones engine
+		new \jobus\includes\Classes\Telemetry();
+
 		// Candidate matching engine lives in Jobus Pro (Jobus_Pro\Matching\Init).
 
 		// Social Login engine
@@ -281,9 +292,18 @@ final class Jobus {
 			\jobus\Admin\Analytics::get_instance();
 			\jobus\Admin\Messaging::get_instance();
 
+			// System status & governance diagnostics
+			new \jobus\Admin\Status();
+
+			// Customer governance feedback engine
+			new \jobus\Admin\Feedback();
+
 			// Helpdesk docs assistant on Jobus admin pages.
 			require_once __DIR__ . '/Admin/class-support-assistant.php';
 			\Jobus_Support_Assistant::get_instance();
+
+			// In-dashboard milestone review prompt engine.
+			new \jobus\Admin\Review_Notice();
 		}
 
 		// Post Type
@@ -423,6 +443,12 @@ final class Jobus {
 				Noticepilot_Remote_Notice_Client::set_metric( 'Jobus', 'jobs_created', $count );
 			}, 10, 2 );
 		}
+
+		/**
+		 * Action fired once Jobus Free has completely loaded all classes and modules.
+		 * Jobus Pro and third-party extensions hook into this to initialize safely.
+		 */
+		do_action( 'jobus_loaded' );
 	}
 
 	/**

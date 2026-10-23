@@ -340,7 +340,7 @@ class Onboarding
                 <div class="jbs-step-content">
                     <h1><?php esc_html_e('Welcome to Jobus! 🎉', 'jobus'); ?></h1>
                     <p class="jbs-step-description">
-                        <?php esc_html_e('Thank you for choosing Jobus - the powerful recruitment and job listing solution for WordPress. Let\'s get your job board set up in just a few steps.', 'jobus'); ?>
+                        <?php esc_html_e('Thank you for choosing Jobus — the universal recruitment and job listing plugin for WordPress. Jobus works seamlessly with your active theme and Elementor to get your job board set up in minutes.', 'jobus'); ?>
                     </p>
 
                     <div class="jbs-features-grid">
@@ -361,6 +361,18 @@ class Onboarding
                             <h3><?php esc_html_e('Job Management', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Powerful job listing features with custom specifications and filters.', 'jobus'); ?>
                             </p>
+                        </div>
+                    </div>
+
+                    <?php
+                    $current_theme = wp_get_theme();
+                    $theme_name    = $current_theme->get( 'Name' );
+                    ?>
+                    <div class="jbs-info-box">
+                        <span class="jbs-info-icon">🎨</span>
+                        <div class="jbs-info-content">
+                            <strong><?php printf( esc_html__( 'Active Theme Detected: %s', 'jobus' ), esc_html( $theme_name ) ); ?></strong>
+                            <p><?php esc_html_e( 'Jobus integrates seamlessly with your active theme styles, Elementor, and block layouts with zero theme lock-in.', 'jobus' ); ?></p>
                         </div>
                     </div>
 
@@ -576,6 +588,20 @@ class Onboarding
                                         <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
+
+                                <label class="jbs-toggle-item">
+                                    <div class="jbs-toggle-info">
+                                        <span class="jbs-toggle-icon">🚀</span>
+                                        <div class="jbs-toggle-text">
+                                            <strong><?php esc_html_e('Import Sample Jobs & Content (Recommended)', 'jobus'); ?></strong>
+                                            <span><?php esc_html_e('Pre-populate your portal with sample jobs, categories, and companies so your archives are ready to explore immediately.', 'jobus'); ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="jbs-toggle-switch">
+                                        <input type="checkbox" name="import_sample_data" id="import_sample_data" value="1" checked>
+                                        <span class="jbs-toggle-slider"></span>
+                                    </div>
+                                </label>
                             </div>
                         </div>
 
@@ -733,6 +759,11 @@ class Onboarding
 
 		// Save options.
 		update_option('jobus_opt', $options);
+
+		// Import sample demo content if selected
+		if (!empty($_POST['import_sample_data'])) {
+			Demo_Importer::import_sample_data();
+		}
 
 		// Mark onboarding as complete.
 		update_option(self::ONBOARDING_COMPLETE_OPTION, '1');

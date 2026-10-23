@@ -54,6 +54,11 @@ function jobus_load_taxonomy_template( $config ) {
 		}
 	}
 
+	// Allow extensions to modify query arguments before execution
+	if ( $config['post_type'] === 'jobus_job' ) {
+		$args = apply_filters( 'jobus_job_query_args', $args, $_GET );
+	}
+
 	// Create query with post-type-specific variable name
 	$query = new WP_Query( $args );
 

@@ -71,6 +71,62 @@ CSF::createSection($settings_prefix, array(
             ),
         ),
 
+        // Diagnostic Test Email
+        array(
+            'type'    => 'heading',
+            'content' => esc_html__('Send Test Email', 'jobus'),
+        ),
+        array(
+            'type'    => 'content',
+            'content' => '
+                <div class="jbs-test-email-container">
+                    <p class="description">
+                        ' . esc_html__('Send a test email to verify your sender settings, HTML template layout, and email delivery.', 'jobus') . '
+                    </p>
+                    <p>
+                        <input type="email" id="jbs_test_email_input" class="regular-text" value="' . esc_attr( wp_get_current_user()->user_email ?? get_option('admin_email') ) . '" placeholder="name@domain.com">
+                        <button type="button" id="jbs_send_test_email_btn" class="button button-secondary">
+                            ' . esc_html__('Send Test Email', 'jobus') . '
+                        </button>
+                    </p>
+                    <div id="jbs_test_email_status"></div>
+                </div>
+                <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    $("#jbs_send_test_email_btn").on("click", function(e) {
+                        e.preventDefault();
+                        var $btn = $(this);
+                        var $status = $("#jbs_test_email_status");
+                        var email = $("#jbs_test_email_input").val();
+                        if (!email) {
+                            $status.html("<p class=\"notice notice-error\"><span class=\"dashicons dashicons-warning\"></span> ' . esc_js(__('Please enter an email address.', 'jobus')) . '</p>");
+                            return;
+                        }
+                        $btn.prop("disabled", true).text("' . esc_js(__('Sending...', 'jobus')) . '");
+                        $status.html("<p class=\"description\">' . esc_js(__('Sending test email...', 'jobus')) . '</p>");
+
+                        $.post(ajaxurl, {
+                            action: "jobus_send_test_email",
+                            nonce: "' . wp_create_nonce('jobus_send_test_email_nonce') . '",
+                            email: email
+                        }, function(res) {
+                            $btn.prop("disabled", false).text("' . esc_js(__('Send Test Email', 'jobus')) . '");
+                            if (res.success) {
+                                $status.html("<p class=\"notice notice-success is-dismissible\">" + res.data.message + "</p>");
+                            } else {
+                                var errMsg = res.data && res.data.message ? res.data.message : "' . esc_js(__('Failed to send email.', 'jobus')) . '";
+                                $status.html("<p class=\"notice notice-error is-dismissible\">" + errMsg + "</p>");
+                            }
+                        }).fail(function() {
+                            $btn.prop("disabled", false).text("' . esc_js(__('Send Test Email', 'jobus')) . '");
+                            $status.html("<p class=\"notice notice-error\"><span class=\"dashicons dashicons-warning\"></span> ' . esc_js(__('Server error occurred.', 'jobus')) . '</p>");
+                        });
+                    });
+                });
+                </script>
+            ',
+        ),
+
         // Candidate Notification
         array(
             'type'    => 'heading',

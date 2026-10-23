@@ -60,10 +60,10 @@ $specs_options = jobus_get_specs_options('candidate_specifications');
         <i class="bi bi-funnel"></i>
         <?php esc_html_e('Filter', 'jobus'); ?>
     </button>
-    <div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+    <div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="candidateFilterOffcanvasLabel">
         <button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
-            aria-label="Close"></button>
-        <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark">
+            aria-label="<?php esc_attr_e('Close', 'jobus'); ?>"></button>
+        <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark" id="candidateFilterOffcanvasLabel">
             <?php esc_html_e('Filter By', 'jobus'); ?>
             <?php
             $has_active_filters = false;

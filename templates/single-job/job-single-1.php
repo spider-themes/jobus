@@ -152,7 +152,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                                     // Show the apply button if the user has not applied yet
                                     if (!empty($meta['is_apply_btn']) && $meta['is_apply_btn'] === 'external' && !empty($meta['apply_form_url'])) {
                                         ?>
-                                        <a href="<?php echo esc_url($meta['apply_form_url']); ?>"
+                                        <a href="<?php echo esc_url( apply_filters( 'jobus_job_external_apply_url', $meta['apply_form_url'], get_the_ID() ) ); ?>"
                                             class="jbs-job-apply btn-one jbs-w-100 jbs-mt-25"
                                             target="_blank"
                                             rel="noopener noreferrer">
@@ -169,7 +169,7 @@ $meta = get_post_meta(get_the_ID(), 'jobus_meta_options', true);
                             }
                         } else {
                             if ( ! empty( $meta['is_apply_btn'] ) && $meta['is_apply_btn'] === 'external' && ! empty( $meta['apply_form_url'] ) ) { ?>
-                                <a href="<?php echo esc_url( $meta['apply_form_url'] ); ?>"
+                                <a href="<?php echo esc_url( apply_filters( 'jobus_job_external_apply_url', $meta['apply_form_url'], get_the_ID() ) ); ?>"
                                     class="jbs-job-apply btn-one jbs-w-100 jbs-mt-25"
                                     target="_blank"
                                     rel="noopener noreferrer">

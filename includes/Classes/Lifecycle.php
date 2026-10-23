@@ -166,24 +166,8 @@ class Lifecycle {
 	 * @return void
 	 */
 	public static function create_tables(): void {
-		global $wpdb;
-
-		$charset_collate = $wpdb->get_charset_collate();
-
-		$table_name = $wpdb->prefix . 'jobus_search_index';
-
-		$sql = "CREATE TABLE $table_name (
-			id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-			post_id bigint(20) unsigned NOT NULL,
-			lat decimal(10,8) NOT NULL,
-			lng decimal(11,8) NOT NULL,
-			PRIMARY KEY  (id),
-			KEY post_id (post_id),
-			KEY lat_lng (lat, lng)
-		) $charset_collate;";
-
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		dbDelta( $sql );
+		// Update search index schema using dedicated Search_Index engine.
+		\jobus\includes\Classes\Search_Index::update_schema();
 
 		/**
 		 * Pro creates candidate geo index + job matches tables.

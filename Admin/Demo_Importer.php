@@ -283,6 +283,16 @@ class Demo_Importer {
 	}
 
 	/**
+	 * Programmatically import sample demo data (used by Onboarding Wizard).
+	 *
+	 * @return array
+	 */
+	public static function import_sample_data(): array {
+		$importer = new self();
+		return $importer->run_import();
+	}
+
+	/**
 	 * Run the import process.
 	 * 
 	 * @return array Result message and status.

@@ -13,11 +13,37 @@
 
         const ANIM_DURATION = 300;
 
+        let lastActiveTrigger = null;
+
         $(document).on('click', '.jbs-passVicon', function() {
             $(this).toggleClass("jbs-eye-slash");
             const $input = $(this).closest('.jbs-input-group-meta').find('input');
             const type = $input.attr('type') === 'password' ? 'text' : 'password';
             $input.attr('type', type);
+        });
+
+        // 1-Click Demo Sandbox Credentials Auto-Fill
+        $(document).on('click', '.jbs-btn-fill-demo', function(e) {
+            e.preventDefault();
+            const user = $(this).data('user');
+            const pass = $(this).data('pass');
+            const $wrapper = $(this).closest('.jbs-user-data-form, .jbs-login-form-wrapper, .jbs-modal-content');
+            const $form = $wrapper.find('form').length ? $wrapper.find('form') : $wrapper.parent().find('form');
+
+            const $userInput = $form.find('input[name="log"], input#user_login, input#user_input').first();
+            const $passInput = $form.find('input[name="pwd"], input#user_pass, input#password').first();
+
+            if ($userInput.length) {
+                $userInput.val(user).trigger('change');
+            }
+            if ($passInput.length) {
+                $passInput.val(pass).trigger('change');
+            }
+
+            // Give natural focus to input for accessibility and native focus styling
+            if ($userInput.length) {
+                $userInput.trigger('focus');
+            }
         });
 
         // ============================
@@ -35,12 +61,25 @@
             },
 
             closeOffcanvas() {
-                $(".jbs-offcanvas.show").removeClass("jbs-show");
-                $(".jbs-offcanvas-backdrop").removeClass("jbs-show");
+                const $active = $(".jbs-offcanvas.jbs-show, .jbs-offcanvas.show");
+                $active.removeClass("jbs-show show");
+                $(".jbs-offcanvas-backdrop").removeClass("jbs-show show");
+                if (lastActiveTrigger && lastActiveTrigger.length) {
+                    lastActiveTrigger.focus();
+                    lastActiveTrigger = null;
+                }
             },
 
             closeModal($modal) {
-                $modal.fadeOut(ANIM_DURATION).removeClass("jbs-show");
+                if ($modal && $modal.length) {
+                    $modal.fadeOut(ANIM_DURATION).removeClass("jbs-show show");
+                } else {
+                    $(".jbs-modal.jbs-show, .jbs-modal.show").fadeOut(ANIM_DURATION).removeClass("jbs-show show");
+                }
+                if (lastActiveTrigger && lastActiveTrigger.length) {
+                    lastActiveTrigger.focus();
+                    lastActiveTrigger = null;
+                }
             },
 
             switchTab($trigger, $targetPane, fade) {
@@ -107,31 +146,99 @@
         // ============================
         $(document).on("click", '[data-jbs-toggle="jbs-offcanvas"]', function (e) {
             e.preventDefault();
+            lastActiveTrigger = $(this);
             const target = $(this).data("jbs-target");
-            $(target).addClass("jbs-show");
+            const $target = $(target);
+            $target.addClass("jbs-show");
             $(".jbs-offcanvas-backdrop").addClass("jbs-show");
+
+            // Move focus into the offcanvas
+            setTimeout(function () {
+                const $focusable = $target.find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])').filter(':visible');
+                if ($focusable.length) {
+                    $focusable.first().focus();
+                }
+            }, 60);
         });
 
-        $(document).on("click", ".jbs-offcanvas-close, .jbs-offcanvas-backdrop", function () {
+        $(document).on("click", ".jbs-offcanvas-close, .jbs-offcanvas-backdrop, [data-jbs-dismiss=\"offcanvas\"]", function () {
             Helpers.closeOffcanvas();
         });
 
         // ============================
         // Modal
         // ============================
-        $(document).on("click", ".jbs-open-modal", function (e) {
-            e.preventDefault();
-            const target = $(this).data("target");
-            $(target).fadeIn(ANIM_DURATION).addClass("jbs-show");
+        $(document).on("click", ".jbs-open-modal, [data-jbs-toggle=\"modal\"]", function (e) {
+            const target = $(this).data("target") || $(this).data("jbs-target");
+            const $target = $(target);
+            if ($target.length) {
+                e.preventDefault();
+                lastActiveTrigger = $(this);
+                $target.fadeIn(ANIM_DURATION).addClass("jbs-show");
+
+                // Move focus into the modal
+                setTimeout(function () {
+                    const $focusable = $target.find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])').filter(':visible');
+                    if ($focusable.length) {
+                        $focusable.first().focus();
+                    }
+                }, 60);
+            }
         });
 
-        $(document).on("click", ".jbs-btn-close", function () {
+        $(document).on("click", ".jbs-btn-close, [data-jbs-dismiss=\"modal\"]", function () {
             Helpers.closeModal($(this).closest(".jbs-modal"));
         });
 
         $(document).on("click", ".jbs-modal", function (e) {
             if ($(e.target).is(".jbs-modal")) {
                 Helpers.closeModal($(this));
+            }
+        });
+
+        // Close active offcanvas or modal on Escape key
+        $(document).on("keydown", function (e) {
+            if (e.key === "Escape" || e.keyCode === 27) {
+                if ($(".jbs-offcanvas.jbs-show, .jbs-offcanvas.show").length) {
+                    Helpers.closeOffcanvas();
+                } else if ($(".jbs-modal.jbs-show:visible, .jbs-modal.show:visible").length) {
+                    Helpers.closeModal($(".jbs-modal.jbs-show:visible, .jbs-modal.show:visible").first());
+                }
+            }
+        });
+
+        // Keyboard Focus Trap within active Offcanvas or Modal
+        $(document).on("keydown", function (e) {
+            if (e.key !== "Tab" && e.keyCode !== 9) {
+                return;
+            }
+
+            const $activeContainer = $(".jbs-offcanvas.jbs-show:visible, .jbs-modal.jbs-show:visible").first();
+            if (!$activeContainer.length) {
+                return;
+            }
+
+            const $focusable = $activeContainer.find(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            ).filter(':visible');
+
+            if (!$focusable.length) {
+                return;
+            }
+
+            const firstElement = $focusable.first()[0];
+            const lastElement = $focusable.last()[0];
+
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
             }
         });
 

@@ -1,6 +1,6 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
-Tags: job board, job portal, hiring, jobs, careers
+Tags: job board, elementor job board, recruitment, hiring portal, careers
 Stable tag: 1.13.0
 Requires at least: 6.0
 Tested up to: 7.1.3
@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The ultimate WordPress Job Board plugin. Create a professional recruitment website with unlimited job listings, candidate profiles, and company pages.
+The ultimate WordPress Job Board plugin. Create a professional recruitment website with unlimited job listings, candidate profiles, and company pages. Works with any WordPress theme.
 
 == Description ==
 
@@ -16,10 +16,11 @@ The ultimate WordPress Job Board plugin. Create a professional recruitment websi
 
 Whether you are running a niche job board, a company career page, or a large-scale recruitment site, Jobus provides everything you need to manage jobs, employers, and candidates efficiently—**without writing a single line of code**.
 
-Built with usability and SEO in mind, Jobus integrates seamlessly with your theme and offers native **Elementor** support, allowing you to design stunning job layouts with drag-and-drop ease.
+Built with usability and SEO in mind, Jobus integrates seamlessly with any theme and offers native **Elementor** support, allowing you to design stunning job layouts with drag-and-drop ease.
 
 ### Why Choose Jobus?
 
+*   **Universal Theme Compatibility:** Works with any standard WordPress theme (Astra, Hello Elementor, GeneratePress, Kadence, Divi, OceanWP) — zero theme lock-in.
 *   **Zero Coding Required:** Set up a complete job board in minutes.
 *   **Elementor Ready:** Includes custom Elementor widgets for Jobs, Search, and Categories.
 *   **Modern & Responsive:** Looks great on all devices (Mobile, Tablet, Desktop).

@@ -21,13 +21,13 @@ if (class_exists('CSF')) {
 		'show_bar_menu'   => false,
 	));
 
-	// Determine Pro features (license only)
-	$is_pro_access    = function_exists('jobus_fs') && jobus_fs()->can_use_premium_code();
+	// Determine Pro features (license or Jobus Pro plugin active)
+	$is_pro_access    = ( function_exists('jobus_fs') && jobus_fs()->can_use_premium_code() ) || defined('JOBUS_PRO_VERSION');
 	$pro_access_class = $is_pro_access ? ' jbs-pro-unlocked' : ' jbs-pro-locked';
 
 	// Set $active_theme_class if theme is active
 	$is_active_theme_jobi = in_array(strtolower(get_template()), ['jobi', 'jobi-child'], true);
-	$active_theme_class   = $is_active_theme_jobi ? ' active-theme-jobi' : '';
+	$active_theme_class   = $is_active_theme_jobi ? ' jbs-active-theme-jobi active-theme-jobi' : '';
 
 	$options          = get_option('jobus_opt', []);
 	$enable_candidate = $options['enable_candidate'] ?? true;

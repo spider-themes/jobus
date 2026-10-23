@@ -20,6 +20,16 @@ if ( class_exists( 'CSF' ) ) {
 	$jobus_opt         = get_option( 'jobus_opt', [] );
 	$enable_job_expiry = ! isset( $jobus_opt['enable_job_expiry'] ) || $jobus_opt['enable_job_expiry'];
 
+	// Determine Pro features and active theme lock classes
+	if ( ! isset( $pro_access_class ) ) {
+		$is_pro_access    = ( function_exists( 'jobus_fs' ) && jobus_fs()->can_use_premium_code() ) || defined( 'JOBUS_PRO_VERSION' );
+		$pro_access_class = $is_pro_access ? ' jbs-pro-unlocked' : ' jbs-pro-locked';
+	}
+	if ( ! isset( $active_theme_class ) ) {
+		$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
+		$active_theme_class   = $is_active_theme_jobi ? ' active-theme-jobi' : '';
+	}
+
 	// Construct General Meta Fields
 	$general_fields = array(
 		// Single Post Layout
@@ -282,4 +292,43 @@ if ( class_exists( 'CSF' ) ) {
 		) );
 	}
 
-	}
+	// Screening Questions Section
+	CSF::createSection( $meta_prefix, array(
+		'title'  => esc_html__( 'Screening Questions', 'jobus' ),
+		'icon'   => 'fa fa-question-circle',
+		'fields' => array(
+			array(
+				'id'           => 'screening_questions',
+				'type'         => 'group',
+				'title'        => esc_html__( 'Application Screening Questions', 'jobus' ),
+				'subtitle'     => esc_html__( 'Require candidates to answer custom questions when applying for this position.', 'jobus' ),
+				'button_title' => esc_html__( 'Add Question', 'jobus' ),
+				'class'        => trim( $pro_access_class ),
+				'fields'       => array(
+					array(
+						'id'    => 'question',
+						'type'  => 'text',
+						'title' => esc_html__( 'Question Text', 'jobus' ),
+					),
+					array(
+						'id'      => 'type',
+						'type'    => 'select',
+						'title'   => esc_html__( 'Answer Type', 'jobus' ),
+						'options' => array(
+							'text'  => esc_html__( 'Short Text', 'jobus' ),
+							'radio' => esc_html__( 'Yes / No', 'jobus' ),
+						),
+						'default' => 'text',
+					),
+					array(
+						'id'      => 'required',
+						'type'    => 'switcher',
+						'title'   => esc_html__( 'Required', 'jobus' ),
+						'default' => true,
+					),
+				),
+			),
+		),
+	) );
+
+}

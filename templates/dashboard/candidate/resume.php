@@ -118,6 +118,14 @@ if ( isset( $_POST['candidate_resume_form_submit'] ) ) {
             <div id="jbs-cv-file-info" class="jbs-file-info <?php echo ! empty( $cv_attachment ) ? 'hidden' : ''; ?>">
                 <small><?php esc_html_e( 'Upload file .pdf, .doc, .docx', 'jobus' ); ?></small>
             </div>
+            <?php if ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() ) : ?>
+            <div id="jbs-cv-parse-wrapper" class="jbs-mt-20 <?php echo empty( $cv_attachment ) ? 'hidden' : ''; ?>">
+                <button type="button" id="jbs-auto-parse-cv" class="jbs-dash-btn-two" data-nonce="<?php echo esc_attr( wp_create_nonce( 'jobus_ajax_nonce' ) ); ?>">
+                    <i class="bi bi-magic"></i> <?php esc_html_e( 'Auto-Extract Profile Data (Beta)', 'jobus' ); ?>
+                </button>
+                <span id="jbs-cv-parse-feedback" class="jbs-ms-3"></span>
+            </div>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
 

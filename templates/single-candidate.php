@@ -45,7 +45,11 @@ $single_layout = ! empty( $single_layout_page ) ? $single_layout_page : $single_
 $single_layout = ! empty( $single_layout ) ? $single_layout : '1'; // Set default layout to 1 if both sources are empty
 
 // Define template file path
-$template_file = 'single-candidate/candidate-single-' . $single_layout . '.php';
+if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+	$template_file = 'single-candidate/candidate-single-' . $single_layout . '.php';
+} else {
+	$template_file = 'single-candidate/candidate-single-1.php';
+}
 
 // Check if template file exists before trying to include it
 $template_path = dirname( __FILE__ ) . '/' . $template_file;
@@ -59,6 +63,10 @@ endwhile;
 
 if ($is_block_theme) {
     echo '</main></div>';
+}
+
+if ( ! is_user_logged_in() ) {
+    include 'candidate-auth-modal.php';
 }
 
 get_footer();

@@ -73,11 +73,11 @@ $specs_options = jobus_get_specs_options();
         <?php esc_html_e('Filter', 'jobus'); ?>
     </button>
 
-    <div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+    <div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="jobFilterOffcanvasLabel">
         <button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
             aria-label="<?php esc_attr_e('Close', 'jobus'); ?>"></button>
         <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center">
-            <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark"><?php esc_html_e('Filter By', 'jobus'); ?></div>
+            <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark" id="jobFilterOffcanvasLabel"><?php esc_html_e('Filter By', 'jobus'); ?></div>
             <?php
             $has_active_filters = false;
             $ignored_keys = array( 'post_type', 'jobus_nonce', '_wp_http_referer' );

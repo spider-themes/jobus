@@ -63,7 +63,7 @@
                     <?php endif; ?>
 
                     <!-- ===== PANEL 2: Application Form ===== -->
-                    <div id="jbs-apply-form-panel"<?php if ( ! is_user_logged_in() ) : ?> style="display:none;"<?php endif; ?>>
+                    <div id="jbs-apply-form-panel" class="<?php echo ! is_user_logged_in() ? 'jbs-d-none' : ''; ?>">
                         <form action="#" name="job_application_form" class="jbs-job-application-form" id="jobApplicationForm" method="post"
                               enctype="multipart/form-data">
                             <div class="jbs-row jbs-gy-4">
@@ -134,6 +134,15 @@
                                            <?php echo jobus_is_field_required( 'cv' ) ? 'required' : ''; ?>>
                                 </div>
 
+                                <?php
+                                /**
+                                 * Fires before application submit button to render screening questions.
+                                 *
+                                 * @param int $job_id Job post ID.
+                                 */
+                                do_action( 'jobus_application_form_fields', get_the_ID() );
+                                ?>
+
                                 <div class="jbs-col-md-12">
                                     <button type="submit" class="jbs-btn <?php echo esc_attr( $btn_class ) ?>">
                                         <?php esc_html_e( 'Submit Application', 'jobus' ); ?>
@@ -142,7 +151,7 @@
                             </div>
                         </form>
 
-                        <div id="jbs-application-inline-success" style="display:none;" class="jbs-mt-3">
+                        <div id="jbs-application-inline-success" class="jbs-d-none jbs-mt-3">
                             <div class="jbs-alert jbs-alert-success jbs-d-flex jbs-align-items-center jbs-gap-2">
                                 <i class="bi bi-check-circle-fill jbs-text-success jbs-fs-5"></i>
                                 <span><?php esc_html_e( 'Application submitted successfully!', 'jobus' ); ?></span>

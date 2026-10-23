@@ -34,14 +34,14 @@ $specifications = jobus_get_specs();
 $specs_options = jobus_get_specs_options();
 ?>
 
-<div class="jbs-modal jbs-popUpModal jbs-fade jbs-login_from" id="filterPopUp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="jbs-modal jbs-popUpModal jbs-fade jbs-login_from" id="filterPopUp" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="filterPopUpLabel" aria-hidden="true">
     <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
         <div class="jbs-container">
             <div class="jbs-filter-area-tab jbs-modal-content">
-                <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="Close"></button>
+                <button type="button" class="jbs-btn-close" data-target="#filterPopUp" aria-label="<?php esc_attr_e('Close', 'jobus'); ?>"></button>
                 <div class="jbs-position-relative">
 
-                    <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom">
+                    <div class="jbs-filter-heading jbs-fw-500 jbs-text-dark jbs-ps-4 jbs-pe-4 jbs-pt-15 jbs-pb-15 jbs-border-bottom" id="filterPopUpLabel">
                         <?php esc_html_e('Filter By', 'jobus'); ?>
                     </div>
 

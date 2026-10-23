@@ -43,7 +43,7 @@ class Template_Loader {
 				}
 			}
 
-			if ( $is_dashboard_page ) {
+			if ( $is_dashboard_page && jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
 				$plugin_template = JOBUS_PATH . '/templates/dashboard/page-template-dashboard.php';
 				if ( file_exists( $plugin_template ) ) {
 					return $plugin_template;
@@ -74,30 +74,37 @@ class Template_Loader {
 			return $this->locate_template( 'single-job', $template );
 		}
 
+		$options          = get_option( 'jobus_opt', [] );
+		$enable_candidate = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
+
 		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
+			if ( $enable_company ) {
+				if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location' ) ) {
+					return $this->locate_template( 'taxonomy-company', $template );
+				}
 
-			if ( is_tax( 'jobus_company_cat' ) || is_tax( 'jobus_company_location') ) {
-				return $this->locate_template( 'taxonomy-company', $template );
+				if ( is_post_type_archive( 'jobus_company' ) ) {
+					return $this->locate_template( 'archive-company', $template );
+				}
+
+				if ( is_singular( 'jobus_company' ) ) {
+					return $this->locate_template( 'single-company', $template );
+				}
 			}
 
-			if ( is_post_type_archive( 'jobus_company' ) ) {
-				return $this->locate_template( 'archive-company', $template );
-			}
+			if ( $enable_candidate ) {
+				if ( is_tax( 'jobus_candidate_cat' ) || is_tax( 'jobus_candidate_location' ) || is_tax( 'jobus_candidate_skill' ) ) {
+					return $this->locate_template( 'taxonomy-candidate', $template );
+				}
 
-			if ( is_singular( 'jobus_company' ) ) {
-				return $this->locate_template( 'single-company', $template );
-			}
+				if ( is_post_type_archive( 'jobus_candidate' ) ) {
+					return $this->locate_template( 'archive-candidate', $template );
+				}
 
-			if ( is_tax( 'jobus_candidate_cat' ) || is_tax( 'jobus_candidate_location' ) || is_tax( 'jobus_candidate_skill' ) ) {
-				return $this->locate_template( 'taxonomy-candidate', $template );
-			}
-
-			if ( is_post_type_archive( 'jobus_candidate' ) ) {
-				return $this->locate_template( 'archive-candidate', $template );
-			}
-
-			if ( is_singular( 'jobus_candidate' ) ) {
-				return $this->locate_template( 'single-candidate', $template );
+				if ( is_singular( 'jobus_candidate' ) ) {
+					return $this->locate_template( 'single-candidate', $template );
+				}
 			}
 		}
 
@@ -151,25 +158,31 @@ class Template_Loader {
 
 
 	/**
-	 * Load template content from jobus-pro directory with optional variables (premium only)
+	 * Load template content from jobus-pro directory with child theme override support.
 	 *
-	 * @param string $name
-	 * @param array  $args
-	 * @return string
+	 * @param string $name Template relative name.
+	 * @param array  $args Template arguments.
+	 * @return string Rendered HTML content.
 	 */
 	public static function get_template_part_pro( string $name, array $args = [] ): string {
 		if ( ! jobus_is_premium() ) {
 			return '';
 		}
-		// Define pro plugin path
+
 		if ( ! defined( 'JOBUS_PRO_PATH' ) ) {
 			$pro_path = WP_PLUGIN_DIR . '/jobus-pro';
 			if ( is_dir( $pro_path ) ) {
 				define( 'JOBUS_PRO_PATH', $pro_path );
 			}
 		}
-		$template = defined('JOBUS_PRO_PATH') ? JOBUS_PRO_PATH . "/templates/{$name}.php" : '';
+
+		$pro_dir = defined( 'JOBUS_PRO_PATH' ) ? JOBUS_PRO_PATH : ( WP_PLUGIN_DIR . '/jobus-pro' );
+
+		// Check child theme overrides first, then Pro plugin templates.
+		$template = self::locate( $name, $pro_dir );
+
 		if ( $template && file_exists( $template ) ) {
+			$template = apply_filters( 'jobus_locate_template_pro', $template, $name, $args );
 			if ( ! empty( $args ) && is_array( $args ) ) {
 				extract( $args, EXTR_SKIP );
 			}
@@ -177,28 +190,70 @@ class Template_Loader {
 			include $template;
 			return ob_get_clean();
 		}
+
 		return '';
 	}
 
 	/**
-	 * Locate template file
+	 * Locate template file with child theme override support.
 	 *
-	 * @param string $name
-	 * @param string $plugin_dir
+	 * Checks in order:
+	 * 1. Child theme: stylesheet_dir/jobus/{$name}.php
+	 * 2. Parent theme: template_dir/jobus/{$name}.php
+	 * 3. Theme root: stylesheet_dir/{$name}.php
+	 * 4. Plugin templates directory: {$plugin_dir}/templates/{$name}.php
 	 *
-	 * @return string|false
+	 * @param string $name       Template relative path without extension.
+	 * @param string $plugin_dir Base plugin directory.
+	 * @return string|false Absolute file path if found, false otherwise.
 	 */
-	public static function locate( string $name, string $plugin_dir = JOBUS_PATH ): bool|string {
-		$theme_file = locate_template( [ "jobus/{$name}.php" ] );
+	public static function locate( string $name, string $plugin_dir = JOBUS_PATH ) {
+		// Clean leading slashes.
+		$name = ltrim( $name, '/\\' );
+
+		// Check theme candidates.
+		$candidates = [
+			"jobus/{$name}.php",
+			"{$name}.php",
+		];
+
+		// Check reorganized aliases (e.g. auth/login-popup -> login-form/login-popup).
+		$aliases = [
+			'auth/login-popup'     => 'login-form/login-popup',
+			'auth/register'        => 'register-form/register',
+			'dashboards/employer'  => 'dashboard/employer',
+			'dashboards/candidate' => 'dashboard/candidate',
+		];
+
+		foreach ( $aliases as $alias_from => $alias_to ) {
+			if ( 0 === strpos( $name, $alias_from ) ) {
+				$aliased_name = str_replace( $alias_from, $alias_to, $name );
+				$candidates[] = "jobus/{$aliased_name}.php";
+				$candidates[] = "{$aliased_name}.php";
+			}
+		}
+
+		$theme_file = locate_template( $candidates );
 		if ( $theme_file ) {
-			return $theme_file;
+			return apply_filters( 'jobus_locate_template', $theme_file, $name, $plugin_dir );
 		}
 
-		$plugin_template = "$plugin_dir/templates/{$name}.php";
+		// Fallback to plugin template file.
+		$plugin_template = "{$plugin_dir}/templates/{$name}.php";
 		if ( file_exists( $plugin_template ) ) {
-			return $plugin_template;
+			return apply_filters( 'jobus_locate_template', $plugin_template, $name, $plugin_dir );
 		}
 
-		return false;
+		// Check aliases in plugin templates directory.
+		foreach ( $aliases as $alias_from => $alias_to ) {
+			if ( 0 === strpos( $name, $alias_from ) ) {
+				$aliased_path = "{$plugin_dir}/templates/" . str_replace( $alias_from, $alias_to, $name ) . '.php';
+				if ( file_exists( $aliased_path ) ) {
+					return apply_filters( 'jobus_locate_template', $aliased_path, $name, $plugin_dir );
+				}
+			}
+		}
+
+		return apply_filters( 'jobus_locate_template', false, $name, $plugin_dir );
 	}
 }

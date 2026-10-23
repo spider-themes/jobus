@@ -70,6 +70,7 @@ class Dashboard_Candidate {
 		add_rewrite_endpoint( 'resume', EP_PAGES );
 		add_rewrite_endpoint( 'applied-jobs', EP_PAGES );
 		add_rewrite_endpoint( 'saved-jobs', EP_PAGES );
+		add_rewrite_endpoint( 'job-alerts', EP_PAGES );
 		add_rewrite_endpoint( 'messages', EP_PAGES );
 		add_rewrite_endpoint( 'change-password', EP_PAGES );
 	}
@@ -121,6 +122,14 @@ class Dashboard_Candidate {
 			$nav_items['saved-jobs'] = [
 				'label' => jobus_opt( 'label_candidate_saved_jobs', esc_html__( 'Saved Jobs', 'jobus' ) ),
 				'icon'  => JOBUS_IMG . '/dashboard/icons/saved-job.svg'
+			];
+		}
+
+		// Job Alerts (Candidate Automated Alerts)
+		if ( jobus_opt( 'candidate_menu_job_alerts', true ) ) {
+			$nav_items['job-alerts'] = [
+				'label' => jobus_opt( 'label_candidate_job_alerts', esc_html__( 'Job Alerts', 'jobus' ) ),
+				'icon'  => JOBUS_IMG . '/dashboard/icons/applications.svg'
 			];
 		}
 
@@ -198,6 +207,10 @@ class Dashboard_Candidate {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_candidate_saved_job( $user );
 				break;
+			case 'job-alerts':
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
+				echo $this->load_job_alerts( $user );
+				break;
 			case 'messages':
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is escaped in template
 				echo $this->load_messages( $user );
@@ -258,6 +271,32 @@ class Dashboard_Candidate {
 			'user_id'      => $user->ID,
 			'username'     => $user->user_login,
 			'is_dashboard' => false
+		] );
+	}
+
+	/**
+	 * Load the candidate job alerts section template.
+	 *
+	 * @param WP_User $user The current user.
+	 *
+	 * @return string Job alerts section HTML.
+	 */
+	private function load_job_alerts( WP_User $user ): string {
+		if ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() ) {
+			return Template_Loader::get_template_part_pro( 'dashboard/candidate/job-alerts', [
+				'user_id'  => $user->ID,
+				'username' => $user->user_login,
+			] );
+		}
+
+		return Template_Loader::get_template_part( 'dashboard/template-part/pro-feature-lock', [
+			'title'       => __( 'Automated Job Alerts', 'jobus' ),
+			'description' => __( 'Receive automated daily or weekly email digests when jobs matching your criteria are posted.', 'jobus' ),
+			'features'    => [
+				__( 'Save custom search criteria as job alerts', 'jobus' ),
+				__( 'Automated email digests with matching jobs', 'jobus' ),
+				__( 'Manage alert frequencies anytime', 'jobus' ),
+			],
 		] );
 	}
 

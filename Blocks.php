@@ -86,10 +86,10 @@ class Blocks {
 
 		// Register a block with a render callback
 		if ( jobus_unlock_themes( 'jobi', 'jobi-child' )  ) {
-			$this->register_block( 'register-form', array(
-				'render_callback' => [ $this, 'register_form_block_render' ],
-			));
-		}
+		$this->register_block( 'register-form', array(
+			'render_callback' => [ $this, 'register_form_block_render' ],
+		));
+	}
 	}
 
 	/**

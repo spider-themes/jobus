@@ -6525,4 +6525,233 @@ msgstr ""
 msgid "Overrides global archive page padding."
 msgstr ""
 
+#: includes/Frontend/Shortcode.php:199
+#: templates/login-form/login-popup.php:57
+msgid "Demo Sandbox Accounts"
+msgstr ""
+
+#: includes/Frontend/Shortcode.php:200
+#: templates/login-form/login-popup.php:58
+msgid "Click to auto-fill:"
+msgstr ""
+
+#: includes/Frontend/Shortcode.php:204
+#: templates/login-form/login-popup.php:62
+msgid "Demo Employer"
+msgstr ""
+
+#: includes/Frontend/Shortcode.php:212
+#: templates/login-form/login-popup.php:70
+msgid "Demo Candidate"
+msgstr ""
+
+#: Admin/Review_Notice.php:156
+msgid "Are you enjoying Jobus?"
+msgstr ""
+
+#: Admin/Review_Notice.php:162
+msgid "Congratulations on publishing %d jobs! If Jobus is helping power your hiring platform, could you please take 30 seconds to rate it on WordPress.org? Your feedback directly helps us keep developing free features."
+msgstr ""
+
+#: Admin/Review_Notice.php:166
+msgid "If Jobus is helping power your hiring portal and candidate applications, could you please take 30 seconds to rate it on WordPress.org? Your feedback directly helps us keep developing free features."
+msgstr ""
+
+#: Admin/Review_Notice.php:172
+msgid "★★★★★ Leave a Review"
+msgstr ""
+
+#: Admin/Review_Notice.php:175
+msgid "Remind Me in 14 Days"
+msgstr ""
+
+#: Admin/Review_Notice.php:178
+msgid "I Already Did / Don't Ask Again"
+msgstr ""
+
+#: Admin/Review_Notice.php:230
+msgid "Invalid security token."
+msgstr ""
+
+#: Admin/Review_Notice.php:234
+msgid "Unauthorized user."
+msgstr ""
+
+#: Admin/Onboarding.php:343
+msgid "Thank you for choosing Jobus — the universal recruitment and job listing plugin for WordPress. Jobus works seamlessly with your active theme and Elementor to get your job board set up in minutes."
+msgstr ""
+
+#: Admin/Onboarding.php:373
+msgid "Active Theme Detected: %s"
+msgstr ""
+
+#: Admin/Onboarding.php:374
+msgid "Jobus integrates seamlessly with your active theme styles, Elementor, and block layouts with zero theme lock-in."
+msgstr ""
+
+#: Admin/Onboarding.php:582
+msgid "Import Sample Jobs & Content (Recommended)"
+msgstr ""
+
+#: Admin/Onboarding.php:583
+msgid "Pre-populate your portal with sample jobs, categories, and companies so your archives are ready to explore immediately."
+msgstr ""
+
+#: templates/candidate-auth-modal.php:28
+msgid "Sign In to Access Candidate Details"
+msgstr ""
+
+#: templates/candidate-auth-modal.php:31
+msgid "Please log in with an Employer or Recruiter account to download candidate resumes and send direct messages."
+msgstr ""
+
+#: templates/candidate-auth-modal.php:37
+msgid "Create an Account"
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:559
+msgid "Please provide a valid email address."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:564
+msgid "[%s] Jobus Test Email Notification"
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:570
+msgid "This is a test email sent from Jobus Email Template Settings to confirm that your email delivery and branded HTML templates are working properly."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:582
+msgid "Test email successfully sent to %s! Please check your inbox."
+msgstr ""
+
+#: includes/Classes/Ajax_Actions.php:588
+msgid "Failed to send test email. Please check your WordPress mail / SMTP configuration."
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Job Alerts"
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Automated Job Alerts"
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Receive automated daily or weekly email digests when jobs matching your criteria are posted."
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Save custom search criteria as job alerts"
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Automated email digests with matching jobs"
+msgstr ""
+
+#: includes/Frontend/Dashboard_Candidate.php
+msgid "Manage alert frequencies anytime"
+msgstr ""
+
+#: templates/dashboard/employer/jobs.php
+msgid "%d external click"
+msgid_plural "%d external clicks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Screening Questions"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Application Screening Questions"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Require candidates to answer custom questions when applying for this position."
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Add Question"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Question Text"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Answer Type"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Short Text"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Yes / No"
+msgstr ""
+
+#: Admin/csf/meta/meta-options-job.php
+msgid "Required"
+msgstr ""
+
+#: templates/dashboard/candidate/resume.php
+msgid "Auto-Extract Profile Data (Beta)"
+msgstr ""
+
+#: Admin/Status.php
+msgid "System Status"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Search index successfully rebuilt! %d jobs indexed."
+msgstr ""
+
+#: Admin/Status.php
+msgid "Search Index engine is not available."
+msgstr ""
+
+#: Admin/Status.php
+msgid "Jobus System Status & Diagnostics"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Diagnostic Actions"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Re-Index All Jobs (Flattened Search Index)"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Copy System Report for Support"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Database & Index Scaling"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Environment & Extension Health"
+msgstr ""
+
+#: Admin/Status.php
+msgid "Report Copied to Clipboard!"
+msgstr ""
+
+#: Admin/Feedback.php
+msgid "Help Shape the Jobus Product Roadmap"
+msgstr ""
+
+#: Admin/Feedback.php
+msgid "How satisfied are you with Jobus?"
+msgstr ""
+
+#: Admin/Feedback.php
+msgid "Submit Product Feedback"
+msgstr ""
+
+#: Admin/Feedback.php
+msgid "Thank you! Your feedback has been recorded and shared with the product architecture team."
+msgstr ""
 

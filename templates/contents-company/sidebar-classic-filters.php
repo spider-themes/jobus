@@ -47,10 +47,10 @@ $specs_options = jobus_get_specs_options('company_specifications');
 		<?php esc_html_e('Filter', 'jobus'); ?>
 	</button>
 
-	<div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas">
+	<div class="jbs-filter-area-tab jbs-offcanvas jbs-offcanvas-start" id="filteroffcanvas" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="companyFilterOffcanvasLabel">
 		<button type="button" class="jbs-btn-close jbs-text-reset jbs-d-lg-none jbs-offcanvas-close"
-			data-jbs-dismiss="offcanvas" aria-label="Close"></button>
-		<div class="jbs-filter-heading jbs-fw-500 jbs-text-dark">
+			data-jbs-dismiss="offcanvas" aria-label="<?php esc_attr_e('Close', 'jobus'); ?>"></button>
+		<div class="jbs-filter-heading jbs-fw-500 jbs-text-dark" id="companyFilterOffcanvasLabel">
 			<?php esc_html_e('Filter By', 'jobus'); ?>
 			<?php
 			$has_active_filters = false;

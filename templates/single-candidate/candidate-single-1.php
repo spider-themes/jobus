@@ -295,11 +295,19 @@ wp_enqueue_script( 'lightbox' );
                             }
                             // Render the button if valid URL found
                             if ( ! empty( $cv_url ) ) : ?>
-                                <a href="<?php echo esc_url( $cv_url ); ?>"
-                                   class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mt-15"
-                                   target="_blank" rel="noopener noreferrer">
-                                    <?php esc_html_e( 'Download CV', 'jobus' ); ?>
-                                </a>
+                                <?php if ( ! is_user_logged_in() ) : ?>
+                                    <button type="button"
+                                       class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mt-15"
+                                       data-jbs-toggle="modal" data-jbs-target="#candidateAuthPromptModal">
+                                        <?php esc_html_e( 'Download CV', 'jobus' ); ?>
+                                    </button>
+                                <?php else : ?>
+                                    <a href="<?php echo esc_url( $cv_url ); ?>"
+                                       class="jbs-btn-ten jbs-fw-500 jbs-text-white jbs-w-100 jbs-text-center jbs-tran3s jbs-mt-15"
+                                       target="_blank" rel="noopener noreferrer">
+                                        <?php esc_html_e( 'Download CV', 'jobus' ); ?>
+                                    </a>
+                                <?php endif; ?>
                             <?php endif;
                         }
                         

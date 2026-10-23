@@ -51,6 +51,9 @@ class Ajax_Actions {
 		// Employer Registration
 		add_action( 'wp_ajax_nopriv_jobus_register_employer', [ $this, 'ajax_register_employer' ] );
 		add_action( 'wp_ajax_jobus_register_employer', [ $this, 'ajax_register_employer' ] );
+
+		// Send Test Email diagnostic (Admin only)
+		add_action( 'wp_ajax_jobus_send_test_email', [ $this, 'ajax_send_test_email' ] );
 	}
 
 	/**
@@ -540,5 +543,57 @@ class Ajax_Actions {
 			'message'      => esc_html__( 'Registration successful! Redirecting to dashboard...', 'jobus' ),
 			'redirect_url' => $redirect_url,
 		] );
+	}
+
+	/**
+	 * AJAX Handler for sending a branded test email from settings.
+	 *
+	 * @return void
+	 */
+	public function ajax_send_test_email(): void {
+		if ( ! check_ajax_referer( 'jobus_send_test_email_nonce', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ], 403 );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Unauthorized user.', 'jobus' ) ], 403 );
+		}
+
+		$recipient = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		if ( ! is_email( $recipient ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Please provide a valid email address.', 'jobus' ) ] );
+		}
+
+		$subject = sprintf(
+			/* translators: %s: site name */
+			esc_html__( '[%s] Jobus Test Email Notification', 'jobus' ),
+			get_bloginfo( 'name' )
+		);
+
+		$message = sprintf(
+			'<p>%s</p><p>%s</p><p><strong>%s:</strong> %s<br><strong>%s:</strong> %s</p>',
+			esc_html__( 'Hello!', 'jobus' ),
+			esc_html__( 'This is a test email sent from Jobus Email Template Settings to confirm that your email delivery and branded HTML templates are working properly.', 'jobus' ),
+			esc_html__( 'Sent To', 'jobus' ),
+			esc_html( $recipient ),
+			esc_html__( 'Timestamp', 'jobus' ),
+			esc_html( current_time( 'mysql' ) )
+		);
+
+		$sent = \jobus\includes\Classes\Emails\Mailer::send( $recipient, $subject, $message );
+
+		if ( $sent ) {
+			wp_send_json_success( [
+				'message' => sprintf(
+					/* translators: %s: recipient email */
+					esc_html__( 'Test email successfully sent to %s! Please check your inbox.', 'jobus' ),
+					esc_html( $recipient )
+				),
+			] );
+		} else {
+			wp_send_json_error( [
+				'message' => esc_html__( 'Failed to send test email. Please check your WordPress mail / SMTP configuration.', 'jobus' ),
+			] );
+		}
 	}
 }

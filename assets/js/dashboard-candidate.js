@@ -460,6 +460,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         fileInfo.classList.add('hidden');
                     }
 
+                    let parseWrapper = document.getElementById('jbs-cv-parse-wrapper');
+                    if (parseWrapper) {
+                        parseWrapper.classList.remove('hidden');
+                    }
+
                     // Set action to upload for form processing
                     if (cvActionField) {
                         cvActionField.value = 'upload';
@@ -484,8 +489,111 @@ document.addEventListener('DOMContentLoaded', function() {
                 if(uploadBtnWrapper) uploadBtnWrapper.classList.remove('hidden');
                 if(fileInfo) fileInfo.classList.remove('hidden');
 
+                let parseWrapper = document.getElementById('jbs-cv-parse-wrapper');
+                if (parseWrapper) {
+                    parseWrapper.classList.add('hidden');
+                }
+
                 // Set the action to delete for form processing
                 if(cvActionField) cvActionField.value = 'delete';
+            });
+        }
+
+        // Resume Auto-Parse Beta Handler
+        let autoParseBtn = document.getElementById('jbs-auto-parse-cv');
+        let parseFeedback = document.getElementById('jbs-cv-parse-feedback');
+
+        if (autoParseBtn) {
+            autoParseBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                let attachmentId = cvAttachmentId ? cvAttachmentId.value : '';
+                if (!attachmentId) {
+                    if (parseFeedback) parseFeedback.textContent = 'Please select or upload a CV first.';
+                    return;
+                }
+
+                let originalText = autoParseBtn.innerHTML;
+                autoParseBtn.disabled = true;
+                autoParseBtn.textContent = 'Extracting...';
+                if (parseFeedback) parseFeedback.textContent = '';
+
+                let ajaxUrl = (window.jobus_dashboard_params && window.jobus_dashboard_params.ajax_url)
+                    ? window.jobus_dashboard_params.ajax_url
+                    : (window.ajaxurl || '/wp-admin/admin-ajax.php');
+
+                let formData = new FormData();
+                formData.append('action', 'jobus_parse_resume');
+                formData.append('security', autoParseBtn.getAttribute('data-nonce') || '');
+                formData.append('attachment_id', attachmentId);
+
+                fetch(ajaxUrl, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(function(res) { return res.json(); })
+                .then(function(res) {
+                    autoParseBtn.disabled = false;
+                    autoParseBtn.innerHTML = originalText;
+
+                    if (!res.success) {
+                        if (parseFeedback) {
+                            parseFeedback.textContent = res.data && res.data.message ? res.data.message : 'Error extracting resume.';
+                        }
+                        return;
+                    }
+
+                    let parsed = res.data.data;
+                    let summary = [];
+
+                    // Auto-fill skills
+                    if (parsed.skills && parsed.skills.length > 0) {
+                        let skillsInput = document.getElementById('candidate_skills_input');
+                        let skillsList = document.getElementById('candidate-skills-list');
+                        if (skillsInput && skillsList) {
+                            let currentIds = skillsInput.value ? skillsInput.value.split(',').filter(Boolean) : [];
+                            let moreTag = skillsList.querySelector('.jbs-more_tag');
+
+                            parsed.skills.forEach(function(skillId) {
+                                let idStr = String(skillId);
+                                if (!currentIds.includes(idStr)) {
+                                    currentIds.push(idStr);
+                                    let li = document.createElement('li');
+                                    li.className = 'jbs-is_tag';
+                                    li.setAttribute('data-skill-id', idStr);
+                                    let btn = document.createElement('button');
+                                    btn.type = 'button';
+                                    btn.innerHTML = (parsed.skills_text || ('Skill #' + idStr)) + ' <i class="bi bi-x"></i>';
+                                    li.appendChild(btn);
+                                    if (moreTag) {
+                                        skillsList.insertBefore(li, moreTag);
+                                    } else {
+                                        skillsList.appendChild(li);
+                                    }
+                                }
+                            });
+                            skillsInput.value = currentIds.join(',');
+                            summary.push(parsed.skills.length + ' skills detected');
+                        }
+                    }
+
+                    if (parsed.email) {
+                        summary.push('Email: ' + parsed.email);
+                    }
+                    if (parsed.phone) {
+                        summary.push('Phone: ' + parsed.phone);
+                    }
+
+                    if (parseFeedback) {
+                        parseFeedback.textContent = summary.length > 0 ? ('Extracted: ' + summary.join(', ')) : 'Resume processed. No standard fields detected.';
+                    }
+                })
+                .catch(function() {
+                    autoParseBtn.disabled = false;
+                    autoParseBtn.innerHTML = originalText;
+                    if (parseFeedback) {
+                        parseFeedback.textContent = 'Network error while parsing resume.';
+                    }
+                });
             });
         }
     }

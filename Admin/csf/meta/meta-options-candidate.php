@@ -16,6 +16,16 @@ if ( class_exists( 'CSF' ) ) {
 		'show_restore' => true,
 	) );
 
+	// Determine Pro features and active theme lock classes
+	if ( ! isset( $pro_access_class ) ) {
+		$is_pro_access    = ( function_exists( 'jobus_fs' ) && jobus_fs()->can_use_premium_code() ) || defined( 'JOBUS_PRO_VERSION' );
+		$pro_access_class = $is_pro_access ? ' jbs-pro-unlocked' : ' jbs-pro-locked';
+	}
+	if ( ! isset( $active_theme_class ) ) {
+		$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
+		$active_theme_class   = $is_active_theme_jobi ? ' active-theme-jobi' : '';
+	}
+
 	// Company Info Meta Options
 	CSF::createSection( $meta_candidate_prefix, array(
 		'title'  => esc_html__( 'General', 'jobus' ),

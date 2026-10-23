@@ -70,6 +70,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                             <th scope="col"><?php esc_html_e( 'Title', 'jobus' ); ?></th>
                             <th scope="col"><?php esc_html_e( 'Job Created', 'jobus' ); ?></th>
                             <th scope="col"><?php esc_html_e( 'Applicants', 'jobus' ); ?></th>
+                            <th scope="col"><?php esc_html_e( 'Views', 'jobus' ); ?></th>
                             <?php
 							/**
 							 * Fires after Applicants header (Jobus Pro adds Matches column).
@@ -101,6 +102,7 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                             'posts_per_page' => -1
                         ]);
                         $job_applicants_count = count($job_applicants);
+                        $job_views = (int) get_post_meta( $job_id, 'all_user_view_count', true );
                         ?>
                         <tr class="<?php echo esc_attr( $status ); ?>">
                             <td>
@@ -112,7 +114,18 @@ $edit_job_url = $dashboard_url ? trailingslashit( $dashboard_url ) . 'submit-job
                                 <div class="jbs-info1"><?php echo esc_html( get_post_meta( $job_id, 'job_location', true ) ); ?></div>
                             </td>
                             <td><?php echo esc_html( get_the_date( 'd M, Y', $job_id ) ); ?></td>
-                            <td><?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?></td>
+                            <td>
+                                <?php echo esc_html( $job_applicants_count ) . ' ' . esc_html( _n( 'Applicant', 'Applicants', $job_applicants_count, 'jobus' ) ); ?>
+                                <?php
+                                $ext_clicks = (int) get_post_meta( $job_id, '_jobus_external_apply_clicks', true );
+                                if ( $ext_clicks > 0 ) :
+                                    ?>
+                                    <div class="jbs-info1"><?php echo esc_html( sprintf( _n( '%d external click', '%d external clicks', $ext_clicks, 'jobus' ), $ext_clicks ) ); ?></div>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <span class="jbs-fw-500"><?php echo esc_html( number_format_i18n( $job_views ) ); ?></span>
+                            </td>
                             <?php
 							/**
 							 * Fires after Applicants cell (Jobus Pro adds Matches cell).

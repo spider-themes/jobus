@@ -46,22 +46,51 @@ if ( is_user_logged_in() ) {
     <?php
 } else {
     ?>
-    <div class="jbs-modal jbs-fade jbs-login_from" id="jbsLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="jbs-modal jbs-fade jbs-login_from" id="jbsLoginModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="jbsLoginModalTitle" aria-hidden="true">
         <div class="jbs-modal-dialog jbs-modal-fullscreen jbs-modal-dialog-centered">
             <div class="jbs-container">
                 <div class="jbs-user-data-form jbs-modal-content">
-                    <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="jbs-btn-close" data-jbs-dismiss="modal" aria-label="<?php esc_attr_e( 'Close', 'jobus' ); ?>"></button>
                     <div class="jbs-text-center">
-                        <h2><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ) ?></h2>
+                        <h2 id="jbsLoginModalTitle"><?php esc_html_e( 'Hi, Welcome Back!', 'jobus' ); ?></h2>
                         <p>
                             <?php esc_html_e( 'Still don\'t have an account?', 'jobus' ); ?>
                             <?php if ( function_exists( 'jobus_opt' ) ) : ?>
-                                <a href="<?php echo esc_url( jobus_opt( 'login_signup_btn_url' ) ) ?>">
-                                    <?php echo esc_html( jobus_opt( 'login_signup_btn_label' ) ) ?>
+                                <a href="<?php echo esc_url( jobus_opt( 'login_signup_btn_url' ) ); ?>">
+                                    <?php echo esc_html( jobus_opt( 'login_signup_btn_label' ) ); ?>
                                 </a>
                             <?php endif; ?>
                         </p>
                     </div>
+                    <?php
+                    $enable_demo    = function_exists( 'jobus_opt' ) && jobus_opt( 'enable_demo_credentials' );
+                    $demo_candidate = function_exists( 'jobus_opt' ) ? trim( (string) jobus_opt( 'login_demo_candidate', 'candidate' ) ) : 'candidate';
+                    $demo_employer  = function_exists( 'jobus_opt' ) ? trim( (string) jobus_opt( 'login_demo_employer', 'employer' ) ) : 'employer';
+                    $demo_password  = function_exists( 'jobus_opt' ) ? trim( (string) jobus_opt( 'login_demo_password', 'demo' ) ) : 'demo';
+                    if ( $enable_demo && ( ! empty( $demo_candidate ) || ! empty( $demo_employer ) ) ) :
+                        ?>
+                        <div class="jbs-login-form-demo jbs-light-bg jbs-border-20 jbs-mb-20 jbs-p-20">
+                            <div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-10">
+                                <span class="jbs-fw-600 jbs-fs-12 jbs-text-dark">
+                                    <i class="bi bi-shield-check jbs-text-success jbs-me-1"></i>
+                                    <?php esc_html_e( 'Demo Sandbox Accounts', 'jobus' ); ?>
+                                </span>
+                                <small class="jbs-text-muted"><?php esc_html_e( 'Click to auto-fill', 'jobus' ); ?></small>
+                            </div>
+                            <div class="jbs-d-flex jbs-gap-2 jbs-flex-wrap">
+                                <?php if ( ! empty( $demo_employer ) ) : ?>
+                                    <button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_employer ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+                                        <i class="bi bi-briefcase jbs-me-1"></i><?php esc_html_e( 'Demo Employer', 'jobus' ); ?>
+                                    </button>
+                                <?php endif; ?>
+                                <?php if ( ! empty( $demo_candidate ) ) : ?>
+                                    <button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_candidate ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+                                        <i class="bi bi-person jbs-me-1"></i><?php esc_html_e( 'Demo Candidate', 'jobus' ); ?>
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="jbs-form-wrapper jbs-m-auto">
                         <form action="<?php echo esc_url( home_url( '/' ) ); ?>wp-login.php" class="jbs-mt-10" name="loginform" id="loginform" method="post">
 

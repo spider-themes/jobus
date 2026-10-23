@@ -101,6 +101,28 @@ if ( $candidate_cv_url ) {
 					<?php echo wp_kses_post( wpautop( $candidate_message ) ) ?>
                 </li>
 			<?php endif; ?>
+			<?php
+			$screening_answers = get_post_meta( $post->ID, '_jobus_screening_answers', true );
+			if ( ! empty( $screening_answers ) && is_array( $screening_answers ) ) :
+				?>
+				<li>
+					<label><?php esc_html_e( 'Screening Questions', 'jobus' ); ?></label>
+					<div class="jbs-screening-answers-list">
+						<?php foreach ( $screening_answers as $item ) :
+							$q_text = is_array( $item ) ? ( $item['question'] ?? '' ) : '';
+							$a_text = is_array( $item ) ? ( $item['answer'] ?? '' ) : (string) $item;
+							if ( empty( $q_text ) && empty( $a_text ) ) {
+								continue;
+							}
+							?>
+							<div class="jbs-screening-item jbs-mb-2">
+								<strong><?php echo esc_html( $q_text ); ?>:</strong>
+								<span><?php echo esc_html( $a_text ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</li>
+			<?php endif; ?>
         </ul>
     </div>
 

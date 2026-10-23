@@ -193,15 +193,28 @@ class Shortcode
 
 		ob_start();
 ?>
-		<div class="jbs-login-form-wrapper section-padding">
-			<?php if ($show_demo) : ?>
-				<div class="jbs-login-form-demo jbs-text-start">
-					<?php esc_html_e('Username', 'jobus'); ?>:
-					<strong><?php echo esc_html($demo_candidate); ?></strong>
-					<?php esc_html_e('or', 'jobus'); ?>
-					<strong><?php echo esc_html($demo_employer); ?></strong><br>
-					<?php esc_html_e('Password', 'jobus'); ?>:
-					<strong><?php echo esc_html($demo_password); ?></strong>
+		<div class="jbs-login-form-wrapper">
+			<?php if ( $show_demo ) : ?>
+				<div class="jbs-login-form-demo jbs-light-bg jbs-border-20 jbs-mb-25 jbs-p-20">
+					<div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-15">
+						<span class="jbs-fw-600 jbs-fs-13 jbs-text-dark">
+							<i class="bi bi-shield-check jbs-text-success jbs-me-1"></i>
+							<?php esc_html_e( 'Demo Sandbox Accounts', 'jobus' ); ?>
+						</span>
+						<small class="jbs-text-muted"><?php esc_html_e( 'Click to auto-fill', 'jobus' ); ?></small>
+					</div>
+					<div class="jbs-d-flex jbs-gap-2 jbs-flex-wrap">
+						<?php if ( ! empty( $demo_employer ) ) : ?>
+							<button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_employer ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+								<i class="bi bi-briefcase jbs-me-1"></i><?php esc_html_e( 'Demo Employer', 'jobus' ); ?>
+							</button>
+						<?php endif; ?>
+						<?php if ( ! empty( $demo_candidate ) ) : ?>
+							<button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_candidate ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+								<i class="bi bi-person jbs-me-1"></i><?php esc_html_e( 'Demo Candidate', 'jobus' ); ?>
+							</button>
+						<?php endif; ?>
+					</div>
 				</div>
 			<?php endif; ?>
 		</div>
