@@ -664,6 +664,11 @@ final class Jobus {
 		}
 
 		foreach ( $pages_to_create as $key => $args ) {
+			// Skip if already recorded and exists in DB.
+			if ( ! empty( $created[ $key ] ) && get_post( $created[ $key ] ) ) {
+				continue;
+			}
+
 			// If a page with the desired slug already exists, record and skip.
 			$existing = get_page_by_path( $args['slug'] );
 			if ( $existing ) {
@@ -671,14 +676,15 @@ final class Jobus {
 				continue;
 			}
 
-			// Also try to avoid duplicates by searching for the content (shortcode or block comment).
-			if ( ! empty( $args['content'] ) ) {
+			// Also try to avoid duplicates by searching for the content (shortcode only).
+			$search_term = trim( strip_tags( $args['content'] ) );
+			if ( ! empty( $search_term ) ) {
 				$found = get_posts( [
 					'post_type'      => 'page',
 					'posts_per_page' => 1,
 					'post_status'    => 'publish',
 					'fields'         => 'ids',
-					's'              => trim( strip_tags( $args['content'] ) ),
+					's'              => $search_term,
 				] );
 				if ( ! empty( $found ) ) {
 					$created[ $key ] = $found[0];
