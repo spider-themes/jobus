@@ -81,6 +81,9 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 
 			require_once $freemius_start;
 
+			$is_local_env = ( function_exists( 'wp_get_environment_type' ) && in_array( wp_get_environment_type(), [ 'development', 'local' ], true ) )
+				|| ( isset( $_SERVER['HTTP_HOST'] ) && preg_match( '/\.(local|test|staging)$|^localhost(:[0-9]+)?$/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) ) );
+
 			$jobus_fs = fs_dynamic_init( [
 				'id'                  => '20775',
 				'slug'                => 'jobus',
@@ -88,6 +91,7 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 				'type'                => 'plugin',
 				'public_key'          => 'pk_6a0f17605a633bbd71c8f387b2678',
 				'is_premium'          => false,
+				'is_live'             => ! $is_local_env,
 				'premium_suffix'      => 'Pro',
 				// If your plugin is a serviceware, set this option to false.
 				'has_premium_version' => true,
@@ -120,10 +124,96 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 			return $message . '<br><br>' . esc_html__( 'Opting in also pre-fills your name and email in the Jobus support chat, so you can get help without typing them. They are only sent to our helpdesk when you open the chat.', 'jobus' );
 		} );
 
+		// Customize deactivation reasons to collect actionable job-board feedback.
+		jobus_fs()->add_filter( 'uninstall_reasons', 'jobus_custom_uninstall_reasons' );
+
 		// Signal that SDK was initiated.
 		do_action( 'jobus_fs_loaded' );
 	}
 }
+
+/**
+ * Filter Freemius uninstall reasons for Jobus Free.
+ *
+ * @param array $uninstall_reasons Predefined Freemius uninstall reasons by user type.
+ * @return array
+ */
+function jobus_custom_uninstall_reasons( $uninstall_reasons ) {
+	$custom_reasons = [
+		[
+			'id'                => 10, // REASON_COULDNT_MAKE_IT_WORK
+			'text'              => esc_html__( "Couldn't set up the job board or submission pages", 'jobus' ),
+			'input_type'        => 'textarea',
+			'input_placeholder' => esc_html__( 'Which page or setup step was confusing?', 'jobus' ),
+		],
+		[
+			'id'                => 4, // REASON_BROKE_MY_SITE
+			'text'              => esc_html__( 'Layout or styling clashed with my active theme', 'jobus' ),
+			'input_type'        => 'textfield',
+			'input_placeholder' => esc_html__( 'Which theme are you using?', 'jobus' ),
+		],
+		[
+			'id'                => 11, // REASON_GREAT_BUT_NEED_SPECIFIC_FEATURE
+			'text'              => esc_html__( 'Needed front-end job submission in the Free version', 'jobus' ),
+			'input_type'        => '',
+			'input_placeholder' => '',
+		],
+		[
+			'id'                => 13, // REASON_NOT_WHAT_I_WAS_LOOKING_FOR
+			'text'              => esc_html__( 'Missing translation for my language', 'jobus' ),
+			'input_type'        => 'textfield',
+			'input_placeholder' => esc_html__( 'Which language do you need?', 'jobus' ),
+		],
+		[
+			'id'                => 3, // REASON_NEEDED_FOR_A_SHORT_PERIOD
+			'text'              => esc_html__( 'Just testing / staging environment', 'jobus' ),
+			'input_type'        => '',
+			'input_placeholder' => '',
+		],
+		[
+			'id'                => 15, // REASON_TEMPORARY_DEACTIVATION
+			'text'              => esc_html__( "Temporary deactivation — I'm troubleshooting an issue", 'jobus' ),
+			'input_type'        => '',
+			'input_placeholder' => '',
+		],
+		[
+			'id'                => 7, // REASON_OTHER
+			'text'              => esc_html__( 'Other', 'jobus' ),
+			'input_type'        => 'textarea',
+			'input_placeholder' => esc_html__( 'Please tell us what happened so we can improve...', 'jobus' ),
+		],
+	];
+
+	if ( is_array( $uninstall_reasons ) ) {
+		foreach ( array_keys( $uninstall_reasons ) as $type ) {
+			$uninstall_reasons[ $type ] = $custom_reasons;
+		}
+	}
+
+	return $uninstall_reasons;
+}
+
+/**
+ * Enrich Freemius deactivation feedback payload with local tenure and active theme.
+ *
+ * @return void
+ */
+function jobus_capture_uninstall_tenure() {
+	$installed = (int) get_option( 'jobus_installed', time() );
+	$days      = max( 0, round( ( time() - $installed ) / DAY_IN_SECONDS, 1 ) );
+	$theme     = sanitize_key( get_template() );
+
+	$existing = isset( $_POST['reason_info'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_info'] ) ) : '';
+	$context  = sprintf( '[Tenure: %sd, Theme: %s]', $days, $theme );
+
+	if ( ! empty( $existing ) ) {
+		$max_existing = max( 0, 128 - strlen( $context ) - 1 );
+		$_POST['reason_info'] = substr( $existing, 0, $max_existing ) . ' ' . $context;
+	} else {
+		$_POST['reason_info'] = $context;
+	}
+}
+add_action( 'wp_ajax_fs_submit_uninstall_reason_20775', 'jobus_capture_uninstall_tenure', 5 );
 
 
 /**
@@ -332,10 +422,8 @@ final class Jobus {
 			\jobus\includes\Frontend\Dashboard_Employer::get_instance();
 		}
 
-		if ( jobus_unlock_themes( 'jobi', 'jobi-child' ) ) {
-			new \jobus\includes\Frontend\Dashboard();
-			new \jobus\includes\Frontend\Dashboard_Helper();
-		}
+		new \jobus\includes\Frontend\Dashboard();
+		new \jobus\includes\Frontend\Dashboard_Helper();
 
 		// Elementor & Blocks
 		new \jobus\Blocks();
@@ -461,7 +549,7 @@ final class Jobus {
 		define( 'JOBUS_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'JOBUS_URL', plugins_url( '', JOBUS_FILE ) );
 		define( 'JOBUS_CSS', JOBUS_URL . '/assets/css' );
-		define( 'JOBUS_BUILD_CSS', JOBUS_URL . '/build/css' );
+		define( 'JOBUS_BUILD_CSS', file_exists( __DIR__ . '/build/css/main.css' ) ? JOBUS_URL . '/build/css' : JOBUS_CSS );
 		define( 'JOBUS_JS', JOBUS_URL . '/assets/js' );
 		define( 'JOBUS_IMG', JOBUS_URL . '/assets/images' );
 		define( 'JOBUS_VEND', JOBUS_URL . '/assets/vendors' );
@@ -504,26 +592,13 @@ final class Jobus {
 	public function deactivate(): void {
 		// Clear cron events
 		\jobus\includes\Classes\Cron_Manager::deactivate();
-
-		// If premium is NOT active, we might want to clean up.
-		// However, per user request, we remove the dashboard page if Jobus-pro is not active.
-		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
-			$pages = get_option( 'jobus_pages', [] );
-			if ( ! empty( $pages['dashboard'] ) ) {
-				wp_delete_post( $pages['dashboard'], true );
-				unset( $pages['dashboard'] );
-				update_option( 'jobus_pages', $pages );
-			}
-		}
 	}
 
 	/**
 	 * Create default pages used by the plugin (if they don't already exist).
 	 *
-	 * Rules:
-	 * - If the active theme is `jobi` or `jobi-child`, or Freemius indicates a pro license,
-	 *   create Dashboard, Register Form, Job Archive, Candidate Archive and Company Archive.
-	 * - Otherwise (free theme), create only the Job Archive page.
+	 * Creates Job Archive, Dashboard, Register Form, Candidate Archive, and Company Archive
+	 * to ensure users on any theme have a functional job board out-of-the-box.
 	 *
 	 * Created page IDs are stored in the `jobus_pages` option as an associative array.
 	 *
@@ -535,47 +610,41 @@ final class Jobus {
 			return;
 		}
 
-		// Determine unlocked state (theme match or premium license).
-		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
+		$options          = get_option( 'jobus_opt', [] );
+		$enable_candidate = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
 
-		$pages_to_create = [];
-		if ( $is_unlocked ) {
-			$pages_to_create = [
-				'dashboard'         => [
-					'title'   => 'Dashboard',
-					'slug'    => 'jobus-dashboard',
-					'content' => '[jobus_dashboard]',
-				],
-				'register'          => [
-					'title'   => 'Register Form',
-					'slug'    => 'jobus-register',
-					'content' => '<!-- wp:jobus/register-form /-->',
-				],
-				'job_archive'       => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-				'candidate_archive' => [
-					'title'   => 'Candidate Archive',
-					'slug'    => 'jobus-candidate-archive',
-					'content' => '[jobus_candidate_archive]',
-				],
-				'company_archive'   => [
-					'title'   => 'Company Archive',
-					'slug'    => 'jobus-company-archive',
-					'content' => '[jobus_company_archive]',
-				],
+		$pages_to_create = [
+			'job_archive' => [
+				'title'   => esc_html__( 'Job Archive', 'jobus' ),
+				'slug'    => 'jobus-job-archive',
+				'content' => '[jobus_job_archive]',
+			],
+			'dashboard'   => [
+				'title'   => esc_html__( 'Dashboard', 'jobus' ),
+				'slug'    => 'jobus-dashboard',
+				'content' => '[jobus_dashboard]',
+			],
+			'register'    => [
+				'title'   => esc_html__( 'Register Form', 'jobus' ),
+				'slug'    => 'jobus-register',
+				'content' => '<!-- wp:jobus/register-form /-->',
+			],
+		];
+
+		if ( $enable_candidate ) {
+			$pages_to_create['candidate_archive'] = [
+				'title'   => esc_html__( 'Candidate Archive', 'jobus' ),
+				'slug'    => 'jobus-candidate-archive',
+				'content' => '[jobus_candidate_archive]',
 			];
-		} else {
-			// Free theme only
-			$pages_to_create = [
-				'job_archive' => [
-					'title'   => 'Job Archive',
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
+		}
+
+		if ( $enable_company ) {
+			$pages_to_create['company_archive'] = [
+				'title'   => esc_html__( 'Company Archive', 'jobus' ),
+				'slug'    => 'jobus-company-archive',
+				'content' => '[jobus_company_archive]',
 			];
 		}
 

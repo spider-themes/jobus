@@ -26,6 +26,7 @@
             this.JobLogoUpload();
             this.ExternalApplicationUrlToggle();
             this.SubmitJobForm();
+            this.ApplicantStatusUpdate();
         },
 
 
@@ -464,6 +465,106 @@
                     },
                     complete: function () {
                         $submitButton.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            });
+        },
+
+        /**
+         * Handle real-time applicant status change (Approve/Hire, Shortlist, Reject).
+         */
+        ApplicantStatusUpdate: function () {
+            $(document).on('click', '.jbs-quick-status-btn, .jbs-update-status', function (e) {
+                e.preventDefault();
+
+                const $btn = $(this);
+                const applicationId = $btn.data('application-id');
+                const newStatus = $btn.data('status');
+
+                if (!applicationId || !newStatus) {
+                    return;
+                }
+
+                if ($btn.hasClass('jbs-loading')) {
+                    return;
+                }
+
+                const originalHtml = $btn.html();
+                $btn.addClass('jbs-loading').prop('disabled', true).html(
+                    '<span class="jbs-spinner-border jbs-spinner-border-sm" role="status" aria-hidden="true"></span>'
+                );
+
+                const ajaxUrl = (typeof jobus_dashboard_obj !== 'undefined' && jobus_dashboard_obj.ajax_url)
+                    ? jobus_dashboard_obj.ajax_url
+                    : ((typeof jobus_public_obj !== 'undefined') ? jobus_public_obj.ajax_url : '/wp-admin/admin-ajax.php');
+
+                const nonce = (typeof jobus_dashboard_obj !== 'undefined' && jobus_dashboard_obj.status_nonce)
+                    ? jobus_dashboard_obj.status_nonce
+                    : '';
+
+                $.ajax({
+                    url: ajaxUrl,
+                    type: 'POST',
+                    data: {
+                        action: 'jobus_update_applicant_status',
+                        application_id: applicationId,
+                        status: newStatus,
+                        nonce: nonce
+                    },
+                    success: function (response) {
+                        if (response.success && response.data) {
+                            const data = response.data;
+
+                            // 1. Update row badge in the list table
+                            const $badge = $('span.status-badge[data-application-id="' + applicationId + '"]');
+                            if ($badge.length) {
+                                $badge.removeClass('jbs-bg-warning jbs-bg-info jbs-bg-success jbs-bg-danger pending shortlisted approved rejected')
+                                      .addClass(data.badge_class + ' ' + data.status)
+                                      .text(data.label);
+
+                                // Subtle pulse animation
+                                $badge.closest('tr').css('transition', 'background-color 0.4s ease').css('background-color', '#f0fdf4');
+                                setTimeout(function () {
+                                    $badge.closest('tr').css('background-color', '');
+                                }, 1200);
+                            }
+
+                            // 2. Update status selector on details page if present
+                            const $selectWrap = $('.jbs-app-status-select[data-application-id="' + applicationId + '"]');
+                            if ($selectWrap.length) {
+                                $selectWrap.find('.jbs-app-status-select-label').text(data.label);
+                                $selectWrap.find('.jbs-app-status-swatch')
+                                           .removeClass('jbs-app-status-swatch--pending jbs-app-status-swatch--shortlisted jbs-app-status-swatch--approved jbs-app-status-swatch--rejected')
+                                           .addClass('jbs-app-status-swatch--' + data.status);
+                            }
+
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.label,
+                                    text: data.message,
+                                    timer: 1400,
+                                    showConfirmButton: false
+                                });
+                            }
+                        } else {
+                            const err = (response.data && response.data.message) ? response.data.message : 'Failed to update status.';
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({ icon: 'error', title: 'Error', text: err });
+                            } else {
+                                alert(err);
+                            }
+                        }
+                    },
+                    error: function () {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({ icon: 'error', title: 'Error', text: 'Network error. Please try again.' });
+                        } else {
+                            alert('Network error. Please try again.');
+                        }
+                    },
+                    complete: function () {
+                        $btn.removeClass('jbs-loading').prop('disabled', false).html(originalHtml);
                     }
                 });
             });

@@ -401,38 +401,33 @@ class Onboarding
                                 <?php esc_html_e('Enable the modules you need. You can always change these later in Settings.', 'jobus'); ?>
                             </p>
 
-                            <?php $is_pro = function_exists('jobus_is_premium') && jobus_is_premium(); ?>
                             <div class="jbs-toggle-group">
-                                <label class="jbs-toggle-item<?php echo $is_pro ? '' : ' jbs-pro-locked'; ?>"
-                                    <?php echo $is_pro ? '' : ' title="Pro feature"'; ?>>
+                                <label class="jbs-toggle-item">
                                     <div class="jbs-toggle-info">
                                         <span class="jbs-toggle-icon">👤</span>
                                         <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Candidate Module', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Allow job seekers to create profiles and apply for jobs.', 'jobus'); ?></span>
                                         </div>
-                                        <?php if (!$is_pro): ?><span class="jbs-pro-badge">Pro</span><?php endif; ?>
                                     </div>
                                     <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_candidate" id="enable_candidate" value="1"
-                                            <?php checked($enable_candidate, true); echo $is_pro ? '' : ' disabled'; ?>>
+                                            <?php checked($enable_candidate, true); ?>>
                                         <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
 
-                                <label class="jbs-toggle-item<?php echo $is_pro ? '' : ' jbs-pro-locked'; ?>"
-                                    <?php echo $is_pro ? '' : ' title="Pro feature"'; ?>>
+                                <label class="jbs-toggle-item">
                                     <div class="jbs-toggle-info">
                                         <span class="jbs-toggle-icon">🏢</span>
                                         <div class="jbs-toggle-text">
                                             <strong><?php esc_html_e('Company Module', 'jobus'); ?></strong>
                                             <span><?php esc_html_e('Allow employers to create company profiles and post jobs.', 'jobus'); ?></span>
                                         </div>
-                                        <?php if (!$is_pro): ?><span class="jbs-pro-badge">Pro</span><?php endif; ?>
                                     </div>
                                     <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_company" id="enable_company" value="1"
-                                            <?php checked($enable_company, true); echo $is_pro ? '' : ' disabled'; ?>>
+                                            <?php checked($enable_company, true); ?>>
                                         <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
@@ -652,6 +647,19 @@ class Onboarding
                     </p>
 
                     <div class="jbs-next-steps">
+                        <?php
+                        $created_pages = get_option( 'jobus_pages', [] );
+                        $archive_page_id = ! empty( $created_pages['job_archive'] ) ? $created_pages['job_archive'] : 0;
+                        $archive_url = $archive_page_id ? get_permalink( $archive_page_id ) : home_url( '/jobus-job-archive/' );
+                        ?>
+                        <a href="<?php echo esc_url( $archive_url ); ?>" target="_blank" rel="noopener noreferrer" class="jbs-next-step-item">
+                            <span class="jbs-step-icon">🌐</span>
+                            <div class="jbs-step-info">
+                                <strong><?php esc_html_e('View Live Job Board', 'jobus'); ?></strong>
+                                <span><?php esc_html_e('See your public job listings archive in action.', 'jobus'); ?></span>
+                            </div>
+                        </a>
+
                         <a href="<?php echo esc_url(admin_url('post-new.php?post_type=jobus_job')); ?>"
                             class="jbs-next-step-item">
                             <span class="jbs-step-icon">➕</span>

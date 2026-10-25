@@ -6755,3 +6755,186 @@ msgstr ""
 msgid "Thank you! Your feedback has been recorded and shared with the product architecture team."
 msgstr ""
 
+#: jobus.php
+msgid "Couldn't set up the job board or submission pages"
+msgstr ""
+
+#: jobus.php
+msgid "Which page or setup step was confusing?"
+msgstr ""
+
+#: jobus.php
+msgid "Layout or styling clashed with my active theme"
+msgstr ""
+
+#: jobus.php
+msgid "Which theme are you using?"
+msgstr ""
+
+#: jobus.php
+msgid "Needed front-end job submission in the Free version"
+msgstr ""
+
+#: jobus.php
+msgid "Missing translation for my language"
+msgstr ""
+
+#: jobus.php
+msgid "Which language do you need?"
+msgstr ""
+
+#: jobus.php
+msgid "Just testing / staging environment"
+msgstr ""
+
+#: jobus.php
+msgid "Temporary deactivation — I'm troubleshooting an issue"
+msgstr ""
+
+#: jobus.php
+msgid "Please tell us what happened so we can improve..."
+msgstr ""
+
+#: Admin/Onboarding.php
+msgid "View Live Job Board"
+msgstr ""
+
+#: Admin/Onboarding.php
+msgid "See your public job listings archive in action."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Jobus v%s is Active!"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Enjoy improved theme styling compatibility, dark mode support, and seamless first-run setup. Make sure to keep your installation updated for maximum performance."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Dismiss"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Free vs Pro"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Feature Matrix"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Jobus Free vs. Jobus Pro"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Compare features and choose the best plan for your job portal. Upgrade anytime with a 14-day free trial or 30-day money-back guarantee."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Feature"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Free (Active)"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Jobus Pro"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Job Board & Public Archive Listings"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Candidate & Company Profiles"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Faceted Radius & Geolocation Search"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "One-Click Demo Content Importer"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "WooCommerce Monetization & Job Packages"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Charge employers for listings, package subscriptions, and featured jobs with instant credits."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Smart Candidate-Job Matching Engine"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Multi-factor match scoring by availability, travel distance, subjects, and teaching level."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Automated Match Alert Emails"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Instantly notify matched candidates the moment an employer publishes a relevant job."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "PDF & DOCX Resume Parser"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Extract names, emails, phones, and matching skills directly from uploaded candidate CVs."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Job Screening Questions"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Add custom pre-screening questions (text & yes/no) to filter out unqualified applicants."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Direct In-Platform Messaging"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Real-time threaded chat between employers and candidates directly from their dashboard."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "7-Dimension Recruitment Analytics"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Interactive Chart.js visualizers, conversion funnels, location demand heatmaps, and search logs."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Basic Counters"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Applicant CSV / Excel Export"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Download and sync applicant data with external HR and payroll systems."
+msgstr ""
+
+#: Admin/Admin.php
+msgid "Upgrade to Jobus Pro"
+msgstr ""
+
+#: Admin/Admin.php
+msgid "* Prices exclude local VAT / sales tax where applicable, calculated automatically at checkout based on your country."
+msgstr ""
+
+
+
+

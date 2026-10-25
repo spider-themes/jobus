@@ -91,6 +91,11 @@ class Assets {
 		// Employer Dashboard Scripts
 		if ( ( $post && has_shortcode( $post->post_content, 'jobus_employer_dashboard' ) ) || ( $has_unified_dashboard && $is_employer ) ) {
 			wp_enqueue_script( 'jobus-dashboard-employer', esc_url( JOBUS_JS . '/dashboard-employer.js' ), [ 'jquery' ], JOBUS_VERSION, true );
+			wp_localize_script( 'jobus-dashboard-employer', 'jobus_dashboard_obj', [
+				'ajax_url'     => $ajax_url,
+				'nonce'        => wp_create_nonce( 'jobus_dashboard_nonce' ),
+				'status_nonce' => wp_create_nonce( 'jobus_update_applicant_status_nonce' ),
+			] );
 		}
 
 		// Candidate Dashboard Scripts

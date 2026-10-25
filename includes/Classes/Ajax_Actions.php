@@ -54,6 +54,9 @@ class Ajax_Actions {
 
 		// Send Test Email diagnostic (Admin only)
 		add_action( 'wp_ajax_jobus_send_test_email', [ $this, 'ajax_send_test_email' ] );
+
+		// Update Application Status (Employer & Admin)
+		add_action( 'wp_ajax_jobus_update_applicant_status', [ $this, 'ajax_update_applicant_status' ] );
 	}
 
 	/**
@@ -595,5 +598,73 @@ class Ajax_Actions {
 				'message' => esc_html__( 'Failed to send test email. Please check your WordPress mail / SMTP configuration.', 'jobus' ),
 			] );
 		}
+	}
+
+	/**
+	 * AJAX endpoint to update an application status.
+	 *
+	 * @return void
+	 */
+	public function ajax_update_applicant_status(): void {
+		if ( ! check_ajax_referer( 'jobus_update_applicant_status_nonce', 'nonce', false ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'jobus' ) ], 403 );
+		}
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to update applications.', 'jobus' ) ], 403 );
+		}
+
+		$application_id = isset( $_POST['application_id'] ) ? absint( $_POST['application_id'] ) : 0;
+		$new_status     = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
+
+		if ( ! $application_id || empty( $new_status ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid request parameters.', 'jobus' ) ], 400 );
+		}
+
+		$application = get_post( $application_id );
+		if ( ! $application || 'jobus_applicant' !== $application->post_type ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Application not found.', 'jobus' ) ], 404 );
+		}
+
+		// Authorization: Administrator or Job Author
+		$job_id          = (int) get_post_meta( $application_id, 'job_applied_for_id', true );
+		$job_author_id   = $job_id ? (int) get_post_field( 'post_author', $job_id ) : 0;
+		$current_user_id = get_current_user_id();
+		$is_authorized   = current_user_can( 'manage_options' ) || ( $job_author_id && $job_author_id === $current_user_id );
+
+		if ( ! $is_authorized ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'You do not have permission to manage this application.', 'jobus' ) ], 403 );
+		}
+
+		$all_statuses = function_exists( 'jobus_get_application_statuses' ) ? jobus_get_application_statuses() : [];
+		if ( ! isset( $all_statuses[ $new_status ] ) ) {
+			wp_send_json_error( [ 'message' => esc_html__( 'Invalid application status.', 'jobus' ) ], 400 );
+		}
+
+		$old_status = (string) get_post_meta( $application_id, 'application_status', true );
+		update_post_meta( $application_id, 'application_status', $new_status );
+
+		/**
+		 * Action triggered after an applicant status is updated.
+		 *
+		 * @param int    $application_id Application post ID.
+		 * @param string $new_status     New status key.
+		 * @param string $old_status     Old status key.
+		 */
+		do_action( 'jobus_application_status_updated', $application_id, $new_status, $old_status );
+
+		$status_data = $all_statuses[ $new_status ];
+
+		wp_send_json_success( [
+			'message'     => sprintf(
+				/* translators: %s: status label */
+				esc_html__( 'Status updated to %s.', 'jobus' ),
+				$status_data['label']
+			),
+			'status'      => $new_status,
+			'label'       => $status_data['label'],
+			'badge_class' => $status_data['badge_class'],
+			'icon'        => $status_data['icon'],
+		] );
 	}
 }

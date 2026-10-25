@@ -51,16 +51,6 @@ class Lifecycle {
 		// Clean up scheduled hooks.
 		wp_clear_scheduled_hook( 'jobus_daily_job_expiry_check' );
 
-		// Logic for removing pages if not premium (moved from jobus.php).
-		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
-			$pages = get_option( 'jobus_pages', [] );
-			if ( ! empty( $pages['dashboard'] ) ) {
-				wp_delete_post( $pages['dashboard'], true );
-				unset( $pages['dashboard'] );
-				update_option( 'jobus_pages', $pages );
-			}
-		}
-
 		// Clear rewrite rules.
 		flush_rewrite_rules();
 	}
@@ -75,45 +65,41 @@ class Lifecycle {
 			return;
 		}
 
-		$theme       = strtolower( get_template() );
-		$is_unlocked = in_array( $theme, [ 'jobi', 'jobi-child' ], true ) || ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() );
+		$options          = get_option( 'jobus_opt', [] );
+		$enable_candidate = ! isset( $options['enable_candidate'] ) || $options['enable_candidate'];
+		$enable_company   = ! isset( $options['enable_company'] ) || $options['enable_company'];
 
-		$pages_to_create = [];
-		if ( $is_unlocked ) {
-			$pages_to_create = [
-				'dashboard'         => [
-					'title'   => esc_html__( 'Dashboard', 'jobus' ),
-					'slug'    => 'jobus-dashboard',
-					'content' => '[jobus_dashboard]',
-				],
-				'register'          => [
-					'title'   => esc_html__( 'Register Form', 'jobus' ),
-					'slug'    => 'jobus-register',
-					'content' => '<!-- wp:jobus/register-form /-->',
-				],
-				'job_archive'       => [
-					'title'   => esc_html__( 'Job Archive', 'jobus' ),
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
-				'candidate_archive' => [
-					'title'   => esc_html__( 'Candidate Archive', 'jobus' ),
-					'slug'    => 'jobus-candidate-archive',
-					'content' => '[jobus_candidate_archive]',
-				],
-				'company_archive'   => [
-					'title'   => esc_html__( 'Company Archive', 'jobus' ),
-					'slug'    => 'jobus-company-archive',
-					'content' => '[jobus_company_archive]',
-				],
+		$pages_to_create = [
+			'job_archive' => [
+				'title'   => esc_html__( 'Job Archive', 'jobus' ),
+				'slug'    => 'jobus-job-archive',
+				'content' => '[jobus_job_archive]',
+			],
+			'dashboard'   => [
+				'title'   => esc_html__( 'Dashboard', 'jobus' ),
+				'slug'    => 'jobus-dashboard',
+				'content' => '[jobus_dashboard]',
+			],
+			'register'    => [
+				'title'   => esc_html__( 'Register Form', 'jobus' ),
+				'slug'    => 'jobus-register',
+				'content' => '<!-- wp:jobus/register-form /-->',
+			],
+		];
+
+		if ( $enable_candidate ) {
+			$pages_to_create['candidate_archive'] = [
+				'title'   => esc_html__( 'Candidate Archive', 'jobus' ),
+				'slug'    => 'jobus-candidate-archive',
+				'content' => '[jobus_candidate_archive]',
 			];
-		} else {
-			$pages_to_create = [
-				'job_archive' => [
-					'title'   => esc_html__( 'Job Archive', 'jobus' ),
-					'slug'    => 'jobus-job-archive',
-					'content' => '[jobus_job_archive]',
-				],
+		}
+
+		if ( $enable_company ) {
+			$pages_to_create['company_archive'] = [
+				'title'   => esc_html__( 'Company Archive', 'jobus' ),
+				'slug'    => 'jobus-company-archive',
+				'content' => '[jobus_company_archive]',
 			];
 		}
 
