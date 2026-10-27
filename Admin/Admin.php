@@ -44,8 +44,8 @@ class Admin {
 		$current_theme = get_template();
 		$classes      .= ' ' . $current_theme;
 
-		// Example: Add premium/pro class if needed for Jobus (update logic as needed)
-		if ( function_exists('jobus_fs') && jobus_fs()->is_paying_or_trial() ) {
+		// Add premium/pro class if needed for Jobus
+		if ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() ) {
 			$classes .= ' jbs-premium';
 		}
 
@@ -225,14 +225,16 @@ class Admin {
 		}
 
 		// === FREE VS PRO COMPARISON PAGE ===
-		add_submenu_page(
-			'edit.php?post_type=jobus_job',
-			__( 'Free vs Pro', 'jobus' ),
-			__( 'Free vs Pro', 'jobus' ),
-			'manage_options',
-			'jobus-free-vs-pro',
-			[ $this, 'render_free_vs_pro_page' ]
-		);
+		if ( ! function_exists( 'jobus_is_premium' ) || ! jobus_is_premium() ) {
+			add_submenu_page(
+				'edit.php?post_type=jobus_job',
+				__( 'Free vs Pro', 'jobus' ),
+				__( 'Free vs Pro', 'jobus' ),
+				'manage_options',
+				'jobus-free-vs-pro',
+				[ $this, 'render_free_vs_pro_page' ]
+			);
+		}
 	}
 
 	/**

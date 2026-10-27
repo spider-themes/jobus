@@ -38,7 +38,7 @@ class Frontend {
 		$classes[] = 'jbs-frontend';
 
 		// Add premium class if pro version is active
-		if ( function_exists( 'jobus_fs' ) && jobus_fs()->is_paying_or_trial() ) {
+		if ( function_exists( 'jobus_is_premium' ) && jobus_is_premium() ) {
 			$classes[] = 'jbs-premium';
 		}
 

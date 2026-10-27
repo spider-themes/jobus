@@ -81,8 +81,8 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 
 			require_once $freemius_start;
 
-			$is_local_env = ( function_exists( 'wp_get_environment_type' ) && in_array( wp_get_environment_type(), [ 'development', 'local' ], true ) )
-				|| ( isset( $_SERVER['HTTP_HOST'] ) && preg_match( '/\.(local|test|staging)$|^localhost(:[0-9]+)?$/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) ) );
+			// Support optional sandbox override via constant if explicitly testing Freemius sandbox.
+			$is_live = defined( 'JOBUS_FS_IS_LIVE' ) ? (bool) JOBUS_FS_IS_LIVE : true;
 
 			$jobus_fs = fs_dynamic_init( [
 				'id'                  => '20775',
@@ -91,7 +91,7 @@ if ( ! function_exists( 'jobus_fs' ) ) {
 				'type'                => 'plugin',
 				'public_key'          => 'pk_6a0f17605a633bbd71c8f387b2678',
 				'is_premium'          => false,
-				'is_live'             => ! $is_local_env,
+				'is_live'             => $is_live,
 				'premium_suffix'      => 'Pro',
 				// If your plugin is a serviceware, set this option to false.
 				'has_premium_version' => true,

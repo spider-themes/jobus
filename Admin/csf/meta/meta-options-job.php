@@ -22,7 +22,7 @@ if ( class_exists( 'CSF' ) ) {
 
 	// Determine Pro features and active theme lock classes
 	if ( ! isset( $pro_access_class ) ) {
-		$is_pro_access    = ( function_exists( 'jobus_fs' ) && jobus_fs()->can_use_premium_code() ) || defined( 'JOBUS_PRO_VERSION' );
+		$is_pro_access    = function_exists( 'jobus_is_premium' ) && jobus_is_premium();
 		$pro_access_class = $is_pro_access ? ' jbs-pro-unlocked' : ' jbs-pro-locked';
 	}
 	if ( ! isset( $active_theme_class ) ) {
