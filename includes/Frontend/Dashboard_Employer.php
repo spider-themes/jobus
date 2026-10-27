@@ -330,7 +330,7 @@ class Dashboard_Employer
 				__('Pipeline analytics in the admin dashboard', 'jobus'),
 			],
 			'preview'     => $this->render_applications_preview(),
-			'upgrade_url' => function_exists('jobus_fs') ? jobus_fs()->get_upgrade_url() : admin_url('admin.php?page=jobus-pricing'),
+			'upgrade_url' => function_exists('jobus_fs') && jobus_fs() ? jobus_fs()->get_upgrade_url() : admin_url('admin.php?page=jobus-pricing'),
 		]);
 	}
 
@@ -514,7 +514,7 @@ class Dashboard_Employer
 					__( 'Save matched candidates to your talent pool', 'jobus' ),
 					__( 'Email alerts to matching candidates', 'jobus' ),
 				),
-				'upgrade_url' => function_exists( 'jobus_fs' ) ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' ),
+				'upgrade_url' => function_exists( 'jobus_fs' ) && jobus_fs() ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' ),
 			)
 		);
 	}

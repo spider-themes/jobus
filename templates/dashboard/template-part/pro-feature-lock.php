@@ -32,7 +32,7 @@ $preview     = isset( $preview ) ? (string) $preview : '';
 $cta_label   = ( isset( $cta_label ) && '' !== $cta_label ) ? (string) $cta_label : __( 'Upgrade to Pro', 'jobus' );
 
 if ( ! isset( $upgrade_url ) || '' === $upgrade_url ) {
-    $upgrade_url = function_exists( 'jobus_fs' ) ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' );
+    $upgrade_url = function_exists( 'jobus_fs' ) && jobus_fs() ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' );
 }
 ?>
 <div class="jbs-dashboard-pro-lock" role="region" aria-label="<?php echo esc_attr( $title ); ?>">
@@ -63,9 +63,15 @@ if ( ! isset( $upgrade_url ) || '' === $upgrade_url ) {
                 </ul>
             <?php endif; ?>
 
-            <a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-btn jbs-btn-primary jbs-dashboard-pro-lock__cta" target="_blank" rel="noopener">
-                <i class="bi bi-stars"></i> <?php echo esc_html( $cta_label ); ?>
-            </a>
+            <?php if ( current_user_can( 'manage_options' ) ) : ?>
+                <a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-btn jbs-btn-primary jbs-dashboard-pro-lock__cta" target="_blank" rel="noopener">
+                    <i class="bi bi-stars"></i> <?php echo esc_html( $cta_label ); ?>
+                </a>
+            <?php else : ?>
+                <p class="jbs-dashboard-pro-lock__user-notice">
+                    <i class="bi bi-info-circle"></i> <?php esc_html_e( 'This feature is currently not enabled by the site administrator.', 'jobus' ); ?>
+                </p>
+            <?php endif; ?>
         </div>
     </div>
 </div>

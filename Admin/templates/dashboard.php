@@ -465,7 +465,7 @@ $plugin_version     = $data['plugin_version'] ?? '1.0.0';
 						</li>
 						<?php if ( ! $is_premium ) : ?>
 						<li>
-							<a href="<?php echo esc_url( jobus_fs()->get_upgrade_url() ); ?>" class="jbs-upgrade-link">
+							<a href="<?php echo esc_url( function_exists( 'jobus_fs' ) && jobus_fs() ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' ) ); ?>" class="jbs-upgrade-link">
 								<span class="dashicons dashicons-star-filled"></span>
 								<?php esc_html_e( 'Upgrade to Pro', 'jobus' ); ?>
 								<span class="dashicons dashicons-arrow-right-alt"></span>

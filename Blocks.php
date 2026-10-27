@@ -309,7 +309,7 @@ class Blocks {
 		$block_params = [
 			'jobus_image_dir'  	=> JOBUS_IMG,
 			'jobus_is_premium' 	=> jobus_is_premium(),
-			'jobus_upgrade_url' => admin_url('edit.php?post_type=jobus_job&page=jobus-pricing'),
+			'jobus_upgrade_url' => function_exists( 'jobus_fs' ) && jobus_fs() ? jobus_fs()->get_upgrade_url() : admin_url( 'admin.php?page=jobus-pricing' ),
 		];
 
 		if ( is_admin() ) {

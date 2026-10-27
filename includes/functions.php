@@ -4,22 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Check if the pro-plugin and plan is active
+ * Check if the pro-plugin and plan is active.
+ *
+ * Uses the authoritative Freemius entitlement state: returns true if the user
+ * has an active valid license, is on an active trial, or is otherwise entitled
+ * to execute premium code.
  *
  * @return bool
  */
 function jobus_is_premium(): bool {
-    if ( defined( 'JOBUS_PRO_VERSION' ) ) {
-        return true;
-    }
+    $is_premium = false;
 
     if ( function_exists( 'jobus_fs' ) && jobus_fs() ) {
-        return jobus_fs()->can_use_premium_code()
-            || jobus_fs()->is_plan( 'pro' )
-            || ( method_exists( jobus_fs(), 'is_trial' ) && jobus_fs()->is_trial() );
+        $is_premium = (bool) jobus_fs()->can_use_premium_code();
     }
 
-    return false;
+    return (bool) apply_filters( 'jobus_is_premium', $is_premium );
 }
 
 /**

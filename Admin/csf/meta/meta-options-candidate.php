@@ -23,7 +23,7 @@ if ( class_exists( 'CSF' ) ) {
 	}
 	if ( ! isset( $active_theme_class ) ) {
 		$is_active_theme_jobi = in_array( strtolower( get_template() ), [ 'jobi', 'jobi-child' ], true );
-		$active_theme_class   = $is_active_theme_jobi ? ' active-theme-jobi' : '';
+		$active_theme_class   = $is_active_theme_jobi ? ' jbs-active-theme-jobi active-theme-jobi' : '';
 	}
 
 	// Company Info Meta Options

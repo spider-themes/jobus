@@ -62,6 +62,16 @@ if ( ! jobus_load_dependencies() ) {
 	return;
 }
 
+// Fix for WordPress 6.7+ textdomain loading too early issue.
+add_action(
+	'plugins_loaded',
+	function () {
+		remove_action( 'plugins_loaded', [ 'Freemius', '_load_textdomain' ], 1 );
+	},
+	0
+);
+add_action( 'init', [ 'Freemius', '_load_textdomain' ], 1 );
+
 if ( ! function_exists( 'jobus_fs' ) ) {
 	/**
 	 * Create a helper function for easy SDK access.
@@ -207,6 +217,9 @@ function jobus_capture_uninstall_tenure() {
 	$context  = sprintf( '[Tenure: %sd, Theme: %s]', $days, $theme );
 
 	if ( ! empty( $existing ) ) {
+		if ( false !== strpos( $existing, '[Tenure:' ) ) {
+			return;
+		}
 		$max_existing = max( 0, 128 - strlen( $context ) - 1 );
 		$_POST['reason_info'] = substr( $existing, 0, $max_existing ) . ' ' . $context;
 	} else {

@@ -198,6 +198,15 @@ Table of Contents:
   align-items: center;
   gap: 6px;
 }
+.jbs-dashboard-pro-lock__user-notice {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
 
 .jbs-dashboard-navbar .jbs-main-nav .active img {
   filter: brightness(0) saturate(100%) invert(1);

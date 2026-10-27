@@ -6935,6 +6935,10 @@ msgstr ""
 msgid "* Prices exclude local VAT / sales tax where applicable, calculated automatically at checkout based on your country."
 msgstr ""
 
+#: templates/dashboard/template-part/pro-feature-lock.php
+msgid "This feature is currently not enabled by the site administrator."
+msgstr ""
+
 
 
 
