@@ -12,14 +12,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return bool
  */
-function jobus_is_premium(): bool {
-    $is_premium = false;
+if ( ! function_exists( 'jobus_is_premium' ) ) {
+    function jobus_is_premium(): bool {
+        $is_premium = false;
 
-    if ( function_exists( 'jobus_fs' ) && jobus_fs() ) {
-        $is_premium = (bool) jobus_fs()->can_use_premium_code();
+        if ( function_exists( 'jobus_fs' ) && jobus_fs() ) {
+            $is_premium = (bool) jobus_fs()->can_use_premium_code();
+        }
+
+        return (bool) apply_filters( 'jobus_is_premium', $is_premium );
     }
-
-    return (bool) apply_filters( 'jobus_is_premium', $is_premium );
 }
 
 /**
