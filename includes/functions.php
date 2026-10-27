@@ -32,17 +32,19 @@ if ( ! function_exists( 'jobus_is_premium' ) ) {
  *
  * @return bool Returns true if the current theme is allowed or premium access is enabled, otherwise false.
  */
-function jobus_unlock_themes( ...$themes ): bool {
-    // Flatten and normalize
-    $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
-    $current_theme  = strtolower( get_template() );
+if ( ! function_exists( 'jobus_unlock_themes' ) ) {
+    function jobus_unlock_themes( ...$themes ): bool {
+        // Flatten and normalize
+        $allowed_themes = array_map( 'strtolower', array_map( 'trim', $themes ) );
+        $current_theme  = strtolower( get_template() );
 
-    // Always allow administrators to access locked features
-    if (current_user_can('manage_options')) {
-        return true;
+        // Always allow administrators to access locked features
+        if ( current_user_can( 'manage_options' ) ) {
+            return true;
+        }
+
+        return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
     }
-
-    return in_array( $current_theme, $allowed_themes, true ) || jobus_is_premium();
 }
 
 /**
@@ -50,8 +52,10 @@ function jobus_unlock_themes( ...$themes ): bool {
  *
  * @return string Returns 'true' if the text direction is RTL, otherwise 'false'.
  */
-function jobus_rtl(): string {
-    return is_rtl() ? 'true' : 'false';
+if ( ! function_exists( 'jobus_rtl' ) ) {
+    function jobus_rtl(): string {
+        return is_rtl() ? 'true' : 'false';
+    }
 }
 
 /**

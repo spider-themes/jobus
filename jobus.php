@@ -24,20 +24,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param string $message Notice message.
  * @return void
  */
-function jobus_missing_dependency_notice( $message ) {
-	if ( ! is_admin() ) {
-		return;
-	}
-
-	add_action(
-		'admin_notices',
-		static function () use ( $message ) {
-			printf(
-				'<div class="notice notice-error"><p>%s</p></div>',
-				esc_html( $message )
-			);
+if ( ! function_exists( 'jobus_missing_dependency_notice' ) ) {
+	function jobus_missing_dependency_notice( $message ) {
+		if ( ! is_admin() ) {
+			return;
 		}
-	);
+
+		add_action(
+			'admin_notices',
+			static function () use ( $message ) {
+				printf(
+					'<div class="notice notice-error"><p>%s</p></div>',
+					esc_html( $message )
+				);
+			}
+		);
+	}
 }
 
 /**
@@ -45,17 +47,19 @@ function jobus_missing_dependency_notice( $message ) {
  *
  * @return bool
  */
-function jobus_load_dependencies() {
-	$autoload_file = __DIR__ . '/vendor/autoload.php';
+if ( ! function_exists( 'jobus_load_dependencies' ) ) {
+	function jobus_load_dependencies() {
+		$autoload_file = __DIR__ . '/vendor/autoload.php';
 
-	if ( ! file_exists( $autoload_file ) ) {
-		jobus_missing_dependency_notice( 'Jobus dependencies are missing. Run composer install to restore the Composer vendor directory.' );
-		return false;
+		if ( ! file_exists( $autoload_file ) ) {
+			jobus_missing_dependency_notice( 'Jobus dependencies are missing. Run composer install to restore the Composer vendor directory.' );
+			return false;
+		}
+
+		require_once $autoload_file;
+
+		return true;
 	}
-
-	require_once $autoload_file;
-
-	return true;
 }
 
 if ( ! jobus_load_dependencies() ) {
@@ -148,59 +152,61 @@ if ( ! function_exists( 'jobus_fs' ) ) {
  * @param array $uninstall_reasons Predefined Freemius uninstall reasons by user type.
  * @return array
  */
-function jobus_custom_uninstall_reasons( $uninstall_reasons ) {
-	$custom_reasons = [
-		[
-			'id'                => 10, // REASON_COULDNT_MAKE_IT_WORK
-			'text'              => esc_html__( "Couldn't set up the job board or submission pages", 'jobus' ),
-			'input_type'        => 'textarea',
-			'input_placeholder' => esc_html__( 'Which page or setup step was confusing?', 'jobus' ),
-		],
-		[
-			'id'                => 4, // REASON_BROKE_MY_SITE
-			'text'              => esc_html__( 'Layout or styling clashed with my active theme', 'jobus' ),
-			'input_type'        => 'textfield',
-			'input_placeholder' => esc_html__( 'Which theme are you using?', 'jobus' ),
-		],
-		[
-			'id'                => 11, // REASON_GREAT_BUT_NEED_SPECIFIC_FEATURE
-			'text'              => esc_html__( 'Needed front-end job submission in the Free version', 'jobus' ),
-			'input_type'        => '',
-			'input_placeholder' => '',
-		],
-		[
-			'id'                => 13, // REASON_NOT_WHAT_I_WAS_LOOKING_FOR
-			'text'              => esc_html__( 'Missing translation for my language', 'jobus' ),
-			'input_type'        => 'textfield',
-			'input_placeholder' => esc_html__( 'Which language do you need?', 'jobus' ),
-		],
-		[
-			'id'                => 3, // REASON_NEEDED_FOR_A_SHORT_PERIOD
-			'text'              => esc_html__( 'Just testing / staging environment', 'jobus' ),
-			'input_type'        => '',
-			'input_placeholder' => '',
-		],
-		[
-			'id'                => 15, // REASON_TEMPORARY_DEACTIVATION
-			'text'              => esc_html__( "Temporary deactivation — I'm troubleshooting an issue", 'jobus' ),
-			'input_type'        => '',
-			'input_placeholder' => '',
-		],
-		[
-			'id'                => 7, // REASON_OTHER
-			'text'              => esc_html__( 'Other', 'jobus' ),
-			'input_type'        => 'textarea',
-			'input_placeholder' => esc_html__( 'Please tell us what happened so we can improve...', 'jobus' ),
-		],
-	];
+if ( ! function_exists( 'jobus_custom_uninstall_reasons' ) ) {
+	function jobus_custom_uninstall_reasons( $uninstall_reasons ) {
+		$custom_reasons = [
+			[
+				'id'                => 10, // REASON_COULDNT_MAKE_IT_WORK
+				'text'              => esc_html__( "Couldn't set up the job board or submission pages", 'jobus' ),
+				'input_type'        => 'textarea',
+				'input_placeholder' => esc_html__( 'Which page or setup step was confusing?', 'jobus' ),
+			],
+			[
+				'id'                => 4, // REASON_BROKE_MY_SITE
+				'text'              => esc_html__( 'Layout or styling clashed with my active theme', 'jobus' ),
+				'input_type'        => 'textfield',
+				'input_placeholder' => esc_html__( 'Which theme are you using?', 'jobus' ),
+			],
+			[
+				'id'                => 11, // REASON_GREAT_BUT_NEED_SPECIFIC_FEATURE
+				'text'              => esc_html__( 'Needed front-end job submission in the Free version', 'jobus' ),
+				'input_type'        => '',
+				'input_placeholder' => '',
+			],
+			[
+				'id'                => 13, // REASON_NOT_WHAT_I_WAS_LOOKING_FOR
+				'text'              => esc_html__( 'Missing translation for my language', 'jobus' ),
+				'input_type'        => 'textfield',
+				'input_placeholder' => esc_html__( 'Which language do you need?', 'jobus' ),
+			],
+			[
+				'id'                => 3, // REASON_NEEDED_FOR_A_SHORT_PERIOD
+				'text'              => esc_html__( 'Just testing / staging environment', 'jobus' ),
+				'input_type'        => '',
+				'input_placeholder' => '',
+			],
+			[
+				'id'                => 15, // REASON_TEMPORARY_DEACTIVATION
+				'text'              => esc_html__( "Temporary deactivation — I'm troubleshooting an issue", 'jobus' ),
+				'input_type'        => '',
+				'input_placeholder' => '',
+			],
+			[
+				'id'                => 7, // REASON_OTHER
+				'text'              => esc_html__( 'Other', 'jobus' ),
+				'input_type'        => 'textarea',
+				'input_placeholder' => esc_html__( 'Please tell us what happened so we can improve...', 'jobus' ),
+			],
+		];
 
-	if ( is_array( $uninstall_reasons ) ) {
-		foreach ( array_keys( $uninstall_reasons ) as $type ) {
-			$uninstall_reasons[ $type ] = $custom_reasons;
+		if ( is_array( $uninstall_reasons ) ) {
+			foreach ( array_keys( $uninstall_reasons ) as $type ) {
+				$uninstall_reasons[ $type ] = $custom_reasons;
+			}
 		}
-	}
 
-	return $uninstall_reasons;
+		return $uninstall_reasons;
+	}
 }
 
 /**
@@ -208,25 +214,27 @@ function jobus_custom_uninstall_reasons( $uninstall_reasons ) {
  *
  * @return void
  */
-function jobus_capture_uninstall_tenure() {
-	$installed = (int) get_option( 'jobus_installed', time() );
-	$days      = max( 0, round( ( time() - $installed ) / DAY_IN_SECONDS, 1 ) );
-	$theme     = sanitize_key( get_template() );
+if ( ! function_exists( 'jobus_capture_uninstall_tenure' ) ) {
+	function jobus_capture_uninstall_tenure() {
+		$installed = (int) get_option( 'jobus_installed', time() );
+		$days      = max( 0, round( ( time() - $installed ) / DAY_IN_SECONDS, 1 ) );
+		$theme     = sanitize_key( get_template() );
 
-	$existing = isset( $_POST['reason_info'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_info'] ) ) : '';
-	$context  = sprintf( '[Tenure: %sd, Theme: %s]', $days, $theme );
+		$existing = isset( $_POST['reason_info'] ) ? sanitize_text_field( wp_unslash( $_POST['reason_info'] ) ) : '';
+		$context  = sprintf( '[Tenure: %sd, Theme: %s]', $days, $theme );
 
-	if ( ! empty( $existing ) ) {
-		if ( false !== strpos( $existing, '[Tenure:' ) ) {
-			return;
+		if ( ! empty( $existing ) ) {
+			if ( false !== strpos( $existing, '[Tenure:' ) ) {
+				return;
+			}
+			$max_existing = max( 0, 128 - strlen( $context ) - 1 );
+			$_POST['reason_info'] = substr( $existing, 0, $max_existing ) . ' ' . $context;
+		} else {
+			$_POST['reason_info'] = $context;
 		}
-		$max_existing = max( 0, 128 - strlen( $context ) - 1 );
-		$_POST['reason_info'] = substr( $existing, 0, $max_existing ) . ' ' . $context;
-	} else {
-		$_POST['reason_info'] = $context;
 	}
+	add_action( 'wp_ajax_fs_submit_uninstall_reason_20775', 'jobus_capture_uninstall_tenure', 5 );
 }
-add_action( 'wp_ajax_fs_submit_uninstall_reason_20775', 'jobus_capture_uninstall_tenure', 5 );
 
 
 /**
