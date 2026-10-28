@@ -1,0 +1,947 @@
+/**
+ * Jobus Free vs Pro Comparison Page Styles
+ *
+ * Uses the exact Jobus design system variables, class prefixes,
+ * spacing hierarchy, and color tokens.
+ *
+ * @package Jobus
+ */
+
+/* ==========================================================================
+   Variables (Standard Jobus Design Tokens)
+   ========================================================================== */
+:root {
+	--jbs-primary: #31795a;
+	--jbs-primary-dark: #255a44;
+	--jbs-primary-light: #4a9e7a;
+	--jbs-accent: #10b981;
+	--jbs-success: #22c55e;
+	--jbs-warning: #f59e0b;
+	--jbs-info: #3b82f6;
+	--jbs-danger: #ef4444;
+	--jbs-purple: #8b5cf6;
+	--jbs-gray-50: #f9fafb;
+	--jbs-gray-100: #f3f4f6;
+	--jbs-gray-200: #e5e7eb;
+	--jbs-gray-300: #d1d5db;
+	--jbs-gray-400: #9ca3af;
+	--jbs-gray-500: #6b7280;
+	--jbs-gray-600: #4b5563;
+	--jbs-gray-700: #374151;
+	--jbs-gray-800: #1f2937;
+	--jbs-gray-900: #111827;
+	--jbs-radius: 8px;
+	--jbs-radius-lg: 12px;
+	--jbs-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--jbs-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+	--jbs-shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Main Containers & Layout
+   ========================================================================== */
+.jbs-free-vs-pro-wrap {
+	max-width: 100%;
+	margin: 20px 20px 24px 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	color: var(--jbs-gray-700);
+	box-sizing: border-box;
+}
+
+.jbs-free-vs-pro-wrap *,
+.jbs-free-vs-pro-wrap *::before,
+.jbs-free-vs-pro-wrap *::after {
+	box-sizing: inherit;
+}
+
+.jbs-comparison-presentation {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px 0 20px;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.jbs-btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 8px !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	line-height: 1 !important;
+	padding: 11px 22px !important;
+	border-radius: var(--jbs-radius) !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	white-space: nowrap !important;
+	border: 1px solid transparent !important;
+	box-shadow: none !important;
+}
+
+.jbs-btn .dashicons,
+.jbs-btn svg {
+	font-size: 17px !important;
+	width: 17px !important;
+	height: 17px !important;
+	line-height: 17px !important;
+	vertical-align: middle !important;
+	margin: 0 !important;
+	display: inline-block !important;
+}
+
+.jbs-btn-primary {
+	background: #ffffff !important;
+	color: var(--jbs-primary-dark) !important;
+	font-weight: 700 !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.jbs-btn-primary:hover,
+.jbs-btn-primary:focus {
+	background: #f8fafc !important;
+	color: var(--jbs-primary) !important;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+}
+
+.jbs-btn-secondary {
+	background: rgba(255, 255, 255, 0.14) !important;
+	color: #ffffff !important;
+	border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.jbs-btn-secondary:hover,
+.jbs-btn-secondary:focus {
+	background: rgba(255, 255, 255, 0.22) !important;
+	color: #ffffff !important;
+	border-color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.jbs-btn-upgrade {
+	background: var(--jbs-primary) !important;
+	color: #ffffff !important;
+	border-color: var(--jbs-primary-dark) !important;
+	box-shadow: 0 2px 6px rgba(49, 121, 90, 0.25) !important;
+}
+
+.jbs-btn-upgrade:hover,
+.jbs-btn-upgrade:focus {
+	background: var(--jbs-primary-dark) !important;
+	color: #ffffff !important;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(49, 121, 90, 0.35) !important;
+}
+
+.jbs-btn-disabled {
+	background: var(--jbs-gray-100) !important;
+	color: var(--jbs-gray-400) !important;
+	border-color: var(--jbs-gray-200) !important;
+	cursor: default !important;
+	pointer-events: none;
+}
+
+/* ==========================================================================
+   Hero Section (Matching Jobus Dashboard Header Pattern)
+   ========================================================================== */
+.jbs-presentation-hero {
+	background: linear-gradient(135deg, var(--jbs-primary) 0%, var(--jbs-primary-dark) 100%);
+	border-radius: var(--jbs-radius-lg);
+	padding: 28px 32px;
+	color: #ffffff;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 24px;
+	text-align: center;
+	box-shadow: var(--jbs-shadow);
+}
+
+.jbs-hero-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: rgba(255, 255, 255, 0.14);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	padding: 4px 14px;
+	border-radius: 9999px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: #ffffff;
+	margin-bottom: 12px;
+}
+
+.jbs-hero-badge .dashicons {
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	color: #facc15;
+}
+
+.jbs-hero-title {
+	font-size: 26px;
+	font-weight: 700;
+	color: #ffffff;
+	line-height: 1.3;
+	margin: 0 0 8px;
+}
+
+.jbs-hero-subtitle {
+	font-size: 14.5px;
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 720px;
+	margin: 0 auto 20px;
+}
+
+.jbs-hero-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.jbs-hero-trust {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+	flex-wrap: wrap;
+	padding-top: 16px;
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	font-size: 12.5px;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.jbs-trust-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.jbs-trust-item .dashicons {
+	color: #34d399;
+	font-size: 15px;
+	width: 15px;
+	height: 15px;
+	line-height: 15px;
+}
+
+/* ==========================================================================
+   Plan Comparison Cards Grid
+   ========================================================================== */
+.jbs-plans-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	margin-bottom: 24px;
+}
+
+.jbs-plan-card {
+	background: #ffffff;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius-lg);
+	padding: 24px;
+	box-shadow: var(--jbs-shadow);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.2s ease;
+}
+
+.jbs-plan-card:hover {
+	box-shadow: var(--jbs-shadow-md);
+	transform: translateY(-2px);
+}
+
+.jbs-plan-card.is-pro {
+	border: 2px solid var(--jbs-primary);
+}
+
+.jbs-plan-badge {
+	position: absolute;
+	top: -11px;
+	right: 22px;
+	background: var(--jbs-gray-500);
+	color: #ffffff;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	padding: 3px 10px;
+	border-radius: 9999px;
+}
+
+.jbs-plan-badge.badge-pro {
+	background: linear-gradient(135deg, var(--jbs-warning) 0%, #d97706 100%);
+	color: #ffffff;
+}
+
+.jbs-plan-badge .dashicons {
+	font-size: 12px;
+	width: 12px;
+	height: 12px;
+	line-height: 12px;
+	vertical-align: middle;
+}
+
+.jbs-plan-header {
+	margin-bottom: 16px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--jbs-gray-100);
+}
+
+.jbs-plan-header h3 {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--jbs-gray-900);
+	margin: 0 0 6px;
+}
+
+.jbs-plan-header p {
+	font-size: 13.5px;
+	color: var(--jbs-gray-500);
+	margin: 0 0 12px;
+	line-height: 1.5;
+}
+
+.jbs-plan-tier {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 4px;
+}
+
+.jbs-tier-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px 10px;
+	border-radius: var(--jbs-radius);
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+}
+
+.jbs-tier-badge.jbs-tier-free {
+	background: var(--jbs-gray-100);
+	color: var(--jbs-gray-600);
+	border: 1px solid var(--jbs-gray-300);
+}
+
+.jbs-tier-badge.jbs-tier-pro {
+	background: rgba(49, 121, 90, 0.1);
+	color: var(--jbs-primary);
+	border: 1px solid rgba(49, 121, 90, 0.3);
+}
+
+.jbs-tier-caption {
+	font-size: 12.5px;
+	color: var(--jbs-gray-500);
+	font-weight: 500;
+}
+
+.jbs-plan-features {
+	list-style: none;
+	margin: 0 0 20px;
+	padding: 0;
+	flex-grow: 1;
+}
+
+.jbs-plan-features li {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	font-size: 13.5px;
+	line-height: 1.45;
+	color: var(--jbs-gray-700);
+	margin-bottom: 10px;
+}
+
+.jbs-plan-features li strong {
+	color: var(--jbs-gray-900);
+}
+
+.jbs-plan-features li .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.jbs-plan-features li .dashicons-yes {
+	color: var(--jbs-primary);
+}
+
+.jbs-plan-features li .dashicons-star-filled {
+	color: var(--jbs-warning);
+}
+
+.jbs-plan-footer {
+	margin-top: auto;
+}
+
+.jbs-plan-footer .jbs-btn {
+	width: 100%;
+}
+
+.jbs-plan-guarantee {
+	font-size: 12px;
+	color: var(--jbs-gray-500);
+	text-align: center;
+	margin-top: 8px;
+	margin-bottom: 0;
+}
+
+.jbs-plan-guarantee .dashicons {
+	font-size: 13px;
+	width: 13px;
+	height: 13px;
+	line-height: 13px;
+	vertical-align: middle;
+}
+
+/* ==========================================================================
+   Pro Feature Spotlight (Bento Grid)
+   ========================================================================== */
+.jbs-spotlight-section {
+	margin-bottom: 24px;
+}
+
+.jbs-section-header {
+	text-align: center;
+	margin-bottom: 18px;
+}
+
+.jbs-section-tag {
+	display: inline-block;
+	background: rgba(49, 121, 90, 0.1);
+	color: var(--jbs-primary);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	padding: 3px 10px;
+	border-radius: 9999px;
+	margin-bottom: 6px;
+}
+
+.jbs-section-header h2 {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--jbs-gray-900);
+	margin: 0 0 6px;
+}
+
+.jbs-section-header p {
+	font-size: 14px;
+	color: var(--jbs-gray-500);
+	max-width: 580px;
+	margin: 0 auto;
+	line-height: 1.5;
+}
+
+.jbs-features-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+}
+
+.jbs-feature-card {
+	background: #ffffff;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius-lg);
+	padding: 20px;
+	box-shadow: var(--jbs-shadow);
+	transition: all 0.2s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.jbs-feature-card:hover {
+	border-color: var(--jbs-primary);
+	box-shadow: var(--jbs-shadow-md);
+	transform: translateY(-2px);
+}
+
+.jbs-feature-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--jbs-radius);
+	background: rgba(49, 121, 90, 0.1);
+	color: var(--jbs-primary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 14px;
+}
+
+.jbs-feature-icon .dashicons,
+.jbs-feature-icon svg {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.jbs-feature-card h4 {
+	font-size: 15px;
+	font-weight: 700;
+	color: var(--jbs-gray-900);
+	margin: 0 0 6px;
+}
+
+.jbs-feature-card p {
+	font-size: 13px;
+	color: var(--jbs-gray-500);
+	line-height: 1.5;
+	margin: 0 0 12px;
+	flex-grow: 1;
+}
+
+.jbs-feature-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--jbs-primary);
+	background: rgba(49, 121, 90, 0.1);
+	padding: 2px 8px;
+	border-radius: 4px;
+	width: fit-content;
+}
+
+/* ==========================================================================
+   Full Feature Comparison Matrix
+   ========================================================================== */
+.jbs-matrix-section {
+	background: #ffffff;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius-lg);
+	box-shadow: var(--jbs-shadow);
+	padding: 24px;
+	margin-bottom: 24px;
+}
+
+.jbs-matrix-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 18px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid var(--jbs-gray-100);
+}
+
+.jbs-matrix-filters {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+}
+
+.jbs-matrix-filter-btn {
+	background: var(--jbs-gray-50);
+	border: 1px solid var(--jbs-gray-200);
+	color: var(--jbs-gray-700);
+	font-size: 12px;
+	font-weight: 600;
+	padding: 5px 12px;
+	border-radius: 9999px;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.jbs-matrix-filter-btn:hover {
+	background: var(--jbs-gray-100);
+	color: var(--jbs-gray-900);
+}
+
+.jbs-matrix-filter-btn.is-active {
+	background: var(--jbs-primary);
+	border-color: var(--jbs-primary);
+	color: #ffffff;
+}
+
+.jbs-matrix-search {
+	position: relative;
+	min-width: 230px;
+}
+
+.jbs-matrix-search input {
+	width: 100%;
+	padding: 6px 12px 6px 32px;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: 9999px;
+	font-size: 13px;
+	color: var(--jbs-gray-900);
+	background: #ffffff;
+	outline: none;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.jbs-matrix-search input:focus {
+	border-color: var(--jbs-primary);
+	box-shadow: 0 0 0 2px rgba(49, 121, 90, 0.15);
+}
+
+.jbs-matrix-search .dashicons-search {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 15px;
+	width: 15px;
+	height: 15px;
+	color: var(--jbs-gray-400);
+}
+
+/* Table Styling */
+.jbs-table-wrap {
+	overflow-x: auto;
+}
+
+.jbs-matrix-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 13.5px;
+}
+
+.jbs-matrix-table thead th {
+	background: var(--jbs-gray-50);
+	color: var(--jbs-gray-900);
+	font-weight: 700;
+	font-size: 13.5px;
+	padding: 12px 16px;
+	border-top: 1px solid var(--jbs-gray-200);
+	border-bottom: 1px solid var(--jbs-gray-200);
+	text-align: left;
+}
+
+.jbs-matrix-table thead th.col-feature {
+	width: 52%;
+}
+
+.jbs-matrix-table thead th.col-plan {
+	width: 24%;
+	text-align: center;
+}
+
+.jbs-matrix-table thead th.col-pro {
+	color: var(--jbs-primary);
+	background: #f0fdf4;
+	border-top: 2px solid var(--jbs-primary);
+}
+
+/* Category Header Row */
+.jbs-matrix-category-header td {
+	background: var(--jbs-gray-100);
+	color: var(--jbs-gray-900);
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	padding: 9px 16px;
+	border-top: 1px solid var(--jbs-gray-200);
+	border-bottom: 1px solid var(--jbs-gray-200);
+}
+
+.jbs-matrix-category-header .cat-icon {
+	margin-right: 5px;
+	color: var(--jbs-primary);
+}
+
+/* Rows */
+.jbs-matrix-table tbody tr.jbs-feature-row {
+	transition: background 0.15s ease;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row:hover {
+	background: var(--jbs-gray-50);
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td {
+	padding: 11px 16px;
+	border-bottom: 1px solid var(--jbs-gray-100);
+	vertical-align: middle;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td.jbs-feature-info {
+	line-height: 1.45;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td.jbs-feature-info .jbs-feature-name {
+	font-weight: 600;
+	color: var(--jbs-gray-900);
+	margin-bottom: 2px;
+	display: block;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td.jbs-feature-info .jbs-feature-desc {
+	font-size: 12px;
+	color: var(--jbs-gray-500);
+	line-height: 1.45;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td.jbs-val-cell {
+	text-align: center;
+}
+
+.jbs-matrix-table tbody tr.jbs-feature-row td.jbs-val-pro {
+	background: rgba(240, 253, 244, 0.4);
+}
+
+/* Badges inside matrix */
+.jbs-check {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	background: #dcfce7;
+	color: #15803d;
+	border-radius: 50%;
+	font-size: 13px;
+}
+
+.jbs-cross {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	background: var(--jbs-gray-100);
+	color: var(--jbs-gray-400);
+	border-radius: 50%;
+	font-size: 13px;
+}
+
+.jbs-text-pill {
+	display: inline-block;
+	font-size: 11.5px;
+	font-weight: 600;
+	padding: 2px 8px;
+	border-radius: 4px;
+}
+
+.jbs-text-pill.pill-gray {
+	background: var(--jbs-gray-100);
+	color: var(--jbs-gray-600);
+}
+
+.jbs-text-pill.pill-green {
+	background: #dcfce7;
+	color: #15803d;
+	font-weight: 700;
+}
+
+.jbs-matrix-no-results {
+	display: none;
+	text-align: center;
+	padding: 30px 16px;
+	color: var(--jbs-gray-500);
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+.jbs-faq-section {
+	margin-bottom: 24px;
+}
+
+.jbs-faq-list {
+	max-width: 840px;
+	margin: 0 auto;
+}
+
+.jbs-faq-item {
+	background: #ffffff;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius-lg);
+	margin-bottom: 8px;
+	overflow: hidden;
+	transition: border-color 0.15s ease;
+}
+
+.jbs-faq-item.is-open {
+	border-color: var(--jbs-primary);
+}
+
+.jbs-faq-question {
+	padding: 13px 18px;
+	font-size: 14.5px;
+	font-weight: 600;
+	color: var(--jbs-gray-900);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	user-select: none;
+}
+
+.jbs-faq-question .dashicons {
+	color: var(--jbs-gray-400);
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	transition: transform 0.2s ease;
+}
+
+.jbs-faq-item.is-open .jbs-faq-question .dashicons {
+	transform: rotate(180deg);
+	color: var(--jbs-primary);
+}
+
+.jbs-faq-answer {
+	display: none;
+	padding: 0 18px 14px;
+	font-size: 13.5px;
+	line-height: 1.55;
+	color: var(--jbs-gray-700);
+}
+
+.jbs-faq-item.is-open .jbs-faq-answer {
+	display: block;
+}
+
+/* ==========================================================================
+   Final CTA Section (Matching Jobus Teaser / Dashboard Pattern)
+   ========================================================================== */
+.jbs-final-cta-section {
+	margin-bottom: 20px;
+}
+
+.jbs-cta-card {
+	background: linear-gradient(135deg, var(--jbs-primary) 0%, var(--jbs-primary-dark) 100%);
+	border-radius: var(--jbs-radius-lg);
+	padding: 28px 24px;
+	color: #ffffff;
+	text-align: center;
+	box-shadow: var(--jbs-shadow);
+}
+
+.jbs-cta-content h2 {
+	font-size: 22px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 6px;
+	line-height: 1.3;
+}
+
+.jbs-cta-content > p {
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	max-width: 600px;
+	margin: 0 auto 16px;
+	line-height: 1.5;
+}
+
+.jbs-cta-buttons {
+	margin-bottom: 14px;
+}
+
+.jbs-btn-cta {
+	background: #ffffff !important;
+	color: var(--jbs-primary-dark) !important;
+	font-weight: 700 !important;
+	font-size: 14.5px !important;
+	padding: 11px 26px !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.jbs-btn-cta:hover {
+	background: #f8fafc !important;
+	color: var(--jbs-primary) !important;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+}
+
+.jbs-cta-note {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.jbs-cta-note > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.jbs-cta-note .dashicons {
+	color: #34d399;
+	font-size: 14px;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 900px) {
+	.jbs-plans-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jbs-features-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.jbs-presentation-hero {
+		padding: 24px 20px;
+	}
+
+	.jbs-hero-title {
+		font-size: 22px;
+	}
+}
+
+@media (max-width: 600px) {
+	.jbs-free-vs-pro-wrap {
+		margin: 15px 10px 24px 0;
+	}
+
+	.jbs-features-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jbs-matrix-table thead th.col-feature {
+		width: 44%;
+	}
+
+	.jbs-matrix-table thead th.col-plan {
+		width: 28%;
+	}
+
+	.jbs-matrix-toolbar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.jbs-matrix-search {
+		width: 100%;
+	}
+
+	.jbs-cta-note {
+		flex-direction: column;
+		gap: 8px;
+	}
+}

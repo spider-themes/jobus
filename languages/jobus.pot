@@ -6939,6 +6939,814 @@ msgstr ""
 msgid "This feature is currently not enabled by the site administrator."
 msgstr ""
 
+#: Admin/templates/free-vs-pro.php
+msgid "Plan Comparison & Feature Matrix"
+msgstr ""
 
+#: Admin/templates/free-vs-pro.php
+msgid "Find the Perfect Jobus Plan for Your Recruitment Goals"
+msgstr ""
 
+#: Admin/templates/free-vs-pro.php
+msgid "Jobus provides everything you need to run an attractive job portal. Upgrade to Jobus Pro to unlock WooCommerce monetization, candidate matching, resume parsing, full ATS pipeline, live messaging, and 7-dimension recruitment analytics."
+msgstr ""
 
+#: Admin/templates/free-vs-pro.php
+msgid "View All 39+ Features"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "14-Day Free Trial"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "30-Day Money-Back Guarantee"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "100% Data Preservation on Upgrade"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Priority VIP Support"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Active Plan"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Jobus Free / Community"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Essential job board tools for community portals, personal blogs, and simple job listings."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "$0"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "/ Forever Free"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Unlimited"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Job Listings & Public Archives"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Geolocation & Geocoded Radius Search"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Guest Application Submissions with Resumes"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Social Login Integration (Google, Facebook, LinkedIn)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Google for Jobs Schema Structured Data"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Elementor Widgets & Pre-Built Templates"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Currently Active on Your Site"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Recommended for Growth"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Jobus Pro Edition"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "All-in-one recruitment powerhouse with monetization, automated matching, ATS pipeline, and live chat."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "$49"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "/ year (or Lifetime Option)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "WooCommerce Monetization:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Sell job packages, credits, and featured listings"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Smart Matching Engine:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "AI match scores & instant candidate notification alerts"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "PDF & DOCX Resume Parser:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Auto-extract names, contacts, and skills from CVs"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Complete ATS Pipeline:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Manage New, Shortlisted, Interviewed, and Hired stages"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "In-Platform Live Messaging:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Real-time threaded chat between employers & candidates"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "7-Dimension Analytics:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Views, conversion funnels, heatmaps, search logs, and CSV export"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "VIP Priority Support:"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Fast 1-on-1 assistance & regular automatic updates"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "14-Day Free Trial • Cancel Anytime • Risk Free"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Pro Superpowers"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Why Leading Job Portals Choose Jobus Pro"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Built with enterprise-grade tools designed to transform a static job listing site into an automated, profitable recruitment marketplace."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "WooCommerce Monetization"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Monetize with flexible pricing plans. Sell job submission packages, subscription credits, and charged featured badges through 100+ WooCommerce gateways."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Full E-Commerce"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Smart Candidate Matching"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Automated multi-factor algorithm scores candidates based on travel distance, availability, skills, and categories with percentage match breakdown."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Instant Match Alerts"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Eliminate manual data entry. Uploaded CVs are instantly parsed to extract candidate names, phone numbers, emails, and matching skill sets."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Auto CV Scanning"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Recruitment Pipeline (ATS)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Manage hiring workflows smoothly. Move candidates across status stages (Pending, Reviewed, Interview, Hired, Rejected) with private team notes."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Status Automation"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "In-Platform Live Chat"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Enable real-time, threaded conversations directly between employers and candidates on your site without relying on third-party email clients."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Unread Indicators"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Interactive visual dashboards showing job impressions, click funnels, candidate search logs, location heatmaps, and CSV/Excel exports."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Deep Insights"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Complete Side-by-Side Feature Comparison"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Browse all 39+ features across every module. Filter by category or use the live search to find specific capabilities."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "All Features (39)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Job Listings"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Candidates & CVs"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Employers & ATS"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Monetization"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Matching & Geolocation"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Chat & Alerts"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Analytics & SEO"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Search features (e.g. resume, payment)..."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Platform Feature & Capability"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Jobus Free (Active)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "1. Job Postings & Listing Management"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Unlimited Job Listings"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Publish and manage unlimited jobs with rich text descriptions, responsibilities, and requirements."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Job Taxonomies (Categories, Types, Locations)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Organize jobs by industry category, employment type (Full-time, Remote, Part-time), and regions."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Featured & Urgent Job Badges"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Highlight premium jobs with visual badges and prioritize them at the top of archive searches."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Manual Backend Only"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Automated & Monetized"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Job Expiry Dates & Auto-Reminders"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Set automatic job lifespan (e.g. 30 days) and send automatic expiration reminder emails to employers."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Job Pre-Screening Questions"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Add custom screening questions (Text, Yes/No, Passing criteria) to filter out unqualified applicants early."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "External URL & Email Applications"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Allow employers to direct candidates to external websites (e.g. Workday, Greenhouse, LinkedIn)."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Yes + Click Analytics"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Custom Salary Ranges & Currency Formats"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Flexible compensation displays (Hourly, Monthly, Yearly) with competitive salary filtering."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "2. Candidate Experience & Resume Management"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Public Candidate Profiles & Directory"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Searchable talent directory where employers can browse verified candidates and qualifications."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Automated PDF & DOCX Resume Parser"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Extract names, email addresses, phone numbers, and matching skills directly from uploaded candidate CVs."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Guest Application Submissions"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Allow candidates to apply instantly with a resume without mandatory upfront registration."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Yes + Auto-Account Option"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Saved Jobs & Bookmarks"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Candidates can save favorite jobs to revisit and apply later from their personal dashboard."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Basic Local Storage"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Persistent User DB Sync"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Custom Job Alerts & Subscriptions"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Candidates subscribe to personalized email alerts based on keywords, category, and desired location."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Multi-Resume & Portfolio Uploads"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Attach multiple resume variations, portfolio links, certificates, and work samples."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Single File Upload"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "3. Employer Tools & Applicant Tracking (ATS)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Company Profiles & Verified Badges"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Dedicated company pages with logos, company size, website links, social links, and active jobs."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Yes + Verified Badges"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Frontend Employer Dashboard"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Complete frontend management workspace for employers to post jobs and review applicants without WP-admin."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Basic Views"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Full Workspace + Package Controls"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Frontend Candidate Dashboard"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Frontend candidate portal to track applied jobs, update profile information, and review interviews."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Full Application Progress Tracker"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Applicant Tracking System (ATS Pipeline)"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Advance applicants through defined stages: New, Reviewed, Shortlisted, Interviewed, Hired, and Rejected."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Basic Application List"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Applicant CSV & Excel Export"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Export applicant lists, contact details, and screening notes directly into spreadsheets or external CRMs."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Internal Private Hiring Notes"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Add internal notes and evaluation scores on applicant submissions visible only to your hiring team."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "4. Monetization & Payment Gateways"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "WooCommerce E-Commerce Integration"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Seamlessly turns your job board into a revenue engine by selling products through WooCommerce."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Paid Job Posting Packages"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Create tiered pricing tiers (e.g. Starter: 3 jobs for 30 days, Enterprise: 20 jobs with featured listings)."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Single Job Paid Submission"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Charge employers for individual job posts with automatic credit allocation upon successful checkout."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Monetize Featured Listing Upgrades"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Upsell employers on featured job placements during or after job creation to increase visibility."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "100+ Global Payment Gateways"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Accept payments via Stripe, PayPal, Apple Pay, Google Pay, Razorpay, Mollie, and all WooCommerce providers."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "100+ Gateways"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "5. Intelligent Matching & Discovery"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Algorithmic multi-criteria match scoring by commute distance, availability, skills, and industry taxonomy."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Instant email notifications delivered to matched candidates the moment a relevant vacancy is published."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Proximity search allowing applicants to find opportunities within 5, 10, 25, or 50 miles of their location."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Enhanced Radius Sliders"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "AJAX Live Search & Filter Bar"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Instant search updating results in real-time without reloading the webpage."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "6. Real-Time Chat & Automated Communications"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Direct In-Platform Messaging / Live Chat"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Real-time threaded conversation between employers and candidates directly from their frontend dashboards."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Custom Email Notification Templates"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Brandable HTML email layouts with dynamic merge tags for application confirmations and status updates."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Default Plain Text"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Employer New Application Notifications"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Immediate alert sent to company recruiters whenever a new candidate applies with their CV."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Candidate Application Receipts"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Professional automated receipt sent to job applicants confirming receipt of their submission."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "7. Recruitment Analytics & Google for Jobs SEO"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Interactive visual dashboards showing job impressions, click funnels, and application conversion statistics."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Basic View Counters"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Search Query Logs & Talent Demand Insights"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Analyze popular search queries and zero-result searches to identify high-demand job categories."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Location Demand Heatmaps"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Geographic breakdown of where applicants and visitors are browsing your job opportunities."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Google for Jobs Structured Schema"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Automatic JSON-LD Schema structured data to help your job listings rank on Google for Jobs search."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Enhanced Schema + Direct Apply"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "8. Customization, Elementor & Priority Support"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Elementor Drag-and-Drop Widgets"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Build custom landing pages, job archives, search bars, and pricing grids with Elementor."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Essential Widgets"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Full Pro Widget Library"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Social Login Integration"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Enable seamless 1-click registration and sign-in with Google, Facebook, and LinkedIn."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "One-Click Demo Importer"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Get your website ready in 60 seconds with pre-built sample jobs, companies, and candidates."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Yes + Pro Demo Packages"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Support & Software Updates"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Dedicated technical assistance, feature updates, and performance patches."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "WP Community Forum"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "VIP 1-on-1 Helpdesk Support"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "No matching features found. Try another search query or select \"All Features\"."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Common Questions About Upgrading to Jobus Pro"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Everything you need to know about licensing, data safety, and guarantees."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Will I lose my existing jobs, candidates, or settings when upgrading?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "No, absolutely not. Jobus Pro is a seamless extension of Jobus Free. All your existing job postings, candidate resumes, company accounts, taxonomies, and settings will remain 100% intact. Upgrading immediately unlocks the advanced Pro features on top of your existing data."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Do I need WooCommerce installed to use Jobus Pro?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "WooCommerce is only required if you want to monetize your job board by selling paid job listing packages, featured job upgrades, or subscriptions. All other Pro features — such as candidate matching, resume parsing, ATS pipeline, and live chat — work completely standalone without WooCommerce."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "How does the 14-day free trial and 30-day money-back guarantee work?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "You can start with a 14-day free trial to test all Pro features on your site. If at any point during your first 30 days you decide that Jobus Pro is not the right fit for your recruitment portal, simply let our team know and you will receive a full 100% refund — no questions asked."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Can I upgrade, downgrade, or cancel my subscription at any time?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Yes. You have full control from your account portal. You can cancel recurring renewals at any time with a single click, and your Pro features will remain active until the end of your billing cycle."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "How do I activate Jobus Pro after purchasing?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Once purchased, you will receive your Jobus Pro zip file and license key. Simply upload the zip file under Plugins > Add New > Upload Plugin, activate it, and your Pro features will be live immediately!"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Ready to Build a High-Growth Recruitment Business?"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Join thousands of professional job boards, recruiters, and staffing agencies powering their business with Jobus Pro."
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Upgrade to Jobus Pro Now"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "14-Day Free Trial • 30-Day Money-Back Guarantee • Instant Automatic Setup • Keep 100% of Your Data"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Community Edition"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Standard License • Core Capabilities"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Pro Edition"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Commercial License • All Add-ons Included"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Instant Automatic Setup"
+msgstr ""
+
+#: Admin/templates/free-vs-pro.php
+msgid "Keep 100% of Your Data"
+msgstr ""

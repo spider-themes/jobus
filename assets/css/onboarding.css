@@ -246,6 +246,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  margin-top: 12px;
 }
 
 .jbs-analytics-btn-primary {

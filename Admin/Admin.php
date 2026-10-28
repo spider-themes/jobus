@@ -31,6 +31,8 @@ class Admin {
 		add_action( 'admin_notices', [ $this, 'radius_sync_notice' ] );
 		add_action( 'admin_notices', [ $this, 'matching_sync_notice' ] );
 		add_action( 'admin_notices', [ $this, 'version_update_notice' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_free_vs_pro_assets' ] );
+		add_action( 'admin_head', [ $this, 'hide_free_vs_pro_notices' ], 1 );
 	}
 
 	/**
@@ -369,135 +371,55 @@ class Admin {
 	}
 
 	/**
+	 * Enqueue assets for Free vs Pro comparison page.
+	 *
+	 * @param string $hook The current admin page hook.
+	 * @return void
+	 */
+	public function enqueue_free_vs_pro_assets( string $hook ): void {
+		if ( 'jobus_job_page_jobus-free-vs-pro' !== $hook ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'jobus-free-vs-pro',
+			JOBUS_URL . '/assets/css/free-vs-pro.css',
+			[ 'dashicons' ],
+			JOBUS_VERSION
+		);
+
+		wp_enqueue_script(
+			'jobus-free-vs-pro',
+			JOBUS_URL . '/assets/js/free-vs-pro.js',
+			[ 'jquery' ],
+			JOBUS_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Suppress external admin notices on the Free vs Pro page for clean presentation.
+	 *
+	 * @return void
+	 */
+	public function hide_free_vs_pro_notices(): void {
+		$screen = get_current_screen();
+
+		if ( ! $screen || 'jobus_job_page_jobus-free-vs-pro' !== $screen->id ) {
+			return;
+		}
+
+		remove_all_actions( 'admin_notices' );
+		remove_all_actions( 'all_admin_notices' );
+	}
+
+	/**
 	 * Render Free vs Pro comparison screen.
 	 *
 	 * @return void
 	 */
 	public function render_free_vs_pro_page(): void {
-		$upgrade_url = function_exists( 'jobus_fs' ) ? jobus_fs()->get_upgrade_url() : 'https://spiderthemes.net/jobus';
-		?>
-		<div class="wrap jbs-free-vs-pro-wrap" style="max-width: 1000px; margin: 25px auto;">
-			<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-				<div style="text-align: center; margin-bottom: 30px;">
-					<span style="background: #e6f7ec; color: #31795A; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 12px; border-radius: 9999px;">
-						<?php esc_html_e( 'Feature Matrix', 'jobus' ); ?>
-					</span>
-					<h1 style="font-size: 28px; font-weight: 700; color: #0f172a; margin: 12px 0 8px;">
-						<?php esc_html_e( 'Jobus Free vs. Jobus Pro', 'jobus' ); ?>
-					</h1>
-					<p style="font-size: 15px; color: #64748b; max-width: 600px; margin: 0 auto;">
-						<?php esc_html_e( 'Compare features and choose the best plan for your job portal. Upgrade anytime with a 14-day free trial or 30-day money-back guarantee.', 'jobus' ); ?>
-					</p>
-				</div>
-
-				<table class="widefat striped" style="border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
-					<thead>
-						<tr style="background: #f8fafc;">
-							<th style="padding: 16px; font-size: 15px; width: 50%;"><?php esc_html_e( 'Feature', 'jobus' ); ?></th>
-							<th style="padding: 16px; font-size: 15px; text-align: center; width: 25%;"><?php esc_html_e( 'Free (Active)', 'jobus' ); ?></th>
-							<th style="padding: 16px; font-size: 15px; text-align: center; width: 25%; color: #31795A;"><?php esc_html_e( 'Jobus Pro', 'jobus' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="padding: 14px 16px;"><strong><?php esc_html_e( 'Job Board & Public Archive Listings', 'jobus' ); ?></strong></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;"><strong><?php esc_html_e( 'Candidate & Company Profiles', 'jobus' ); ?></strong></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;"><strong><?php esc_html_e( 'Faceted Radius & Geolocation Search', 'jobus' ); ?></strong></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;"><strong><?php esc_html_e( 'One-Click Demo Content Importer', 'jobus' ); ?></strong></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'WooCommerce Monetization & Job Packages', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Charge employers for listings, package subscriptions, and featured jobs with instant credits.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'Smart Candidate-Job Matching Engine', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Multi-factor match scoring by availability, travel distance, subjects, and teaching level.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'Automated Match Alert Emails', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Instantly notify matched candidates the moment an employer publishes a relevant job.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'PDF & DOCX Resume Parser', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Extract names, emails, phones, and matching skills directly from uploaded candidate CVs.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'Job Screening Questions', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Add custom pre-screening questions (text & yes/no) to filter out unqualified applicants.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'Direct In-Platform Messaging', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Real-time threaded chat between employers and candidates directly from their dashboard.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( '7-Dimension Recruitment Analytics', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Interactive Chart.js visualizers, conversion funnels, location demand heatmaps, and search logs.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; font-size: 12px; color: #64748b;"><?php esc_html_e( 'Basic Counters', 'jobus' ); ?></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-						<tr>
-							<td style="padding: 14px 16px;">
-								<strong><?php esc_html_e( 'Applicant CSV / Excel Export', 'jobus' ); ?></strong>
-								<div style="font-size: 12px; color: #64748b;"><?php esc_html_e( 'Download and sync applicant data with external HR and payroll systems.', 'jobus' ); ?></div>
-							</td>
-							<td style="text-align: center; color: #94a3b8;"><span class="dashicons dashicons-no-alt"></span></td>
-							<td style="text-align: center; color: #16a34a;"><span class="dashicons dashicons-yes"></span></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div style="margin-top: 25px; text-align: center;">
-					<a href="<?php echo esc_url( $upgrade_url ); ?>" class="button button-primary button-hero" style="background: #31795A; border-color: #244034; box-shadow: none; font-size: 16px; padding: 6px 32px;">
-						<span class="dashicons dashicons-unlock" style="vertical-align: middle; margin-right: 6px;"></span>
-						<?php esc_html_e( 'Upgrade to Jobus Pro', 'jobus' ); ?>
-					</a>
-					<p style="font-size: 13px; color: #94a3b8; margin-top: 10px;">
-						<?php esc_html_e( '* Prices exclude local VAT / sales tax where applicable, calculated automatically at checkout based on your country.', 'jobus' ); ?>
-					</p>
-				</div>
-			</div>
-		</div>
-		<?php
+		include JOBUS_PATH . '/Admin/templates/free-vs-pro.php';
 	}
-
 }
+
