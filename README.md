@@ -240,6 +240,7 @@ Unlock advanced functionality with **[Jobus Pro](https://jobus.spiderthemes.net/
 - Application Tracking System (ATS)
 - Advanced Filters (Salary, Job Type, Experience)
 - Job Alerts & Bookmarks
+- Candidate Matching (travel distance, availability, match alerts)
 - Custom Email Notifications
 - Custom Application Forms
 - Analytics & Reporting

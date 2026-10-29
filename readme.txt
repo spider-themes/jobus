@@ -76,6 +76,7 @@ Unlock the full potential of your job board with **Jobus Pro**. Get advanced fea
 *   **Application Tracking:** Track and manage application statuses like pending, interview, and hired.
 *   **Advanced Filters:** Narrow job searches by salary, type, experience, and more criteria.
 *   **Alerts & Bookmarks:** Let candidates bookmark favorite jobs and receive new job alerts.
+*   **Candidate Matching:** Automatically match candidates to jobs by teaching level, subjects, travel distance, and availability, with match alert emails.
 *   **Email Notifications:** Automated email alerts for employers and candidates on key events.
 *   **Application Forms:** Connect external application forms like Google Forms or LinkedIn easily.
 *   **Analytics & Reporting:** Monitor job views, clicks, and application stats with visual charts.
