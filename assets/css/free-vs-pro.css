@@ -55,9 +55,28 @@
 }
 
 .jbs-comparison-presentation {
-	max-width: 1200px;
+	max-width: 1180px;
 	margin: 0 auto;
-	padding: 10px 0 20px;
+	padding: 4px 0 28px;
+}
+
+/* Hide the default WP submenu title and Freemius checkout leakage. */
+body.jobus_job_page_jobus-free-vs-pro #wpbody-content > h1,
+body.jobus_job_page_jobus-free-vs-pro .wrap > h1:not(.jbs-hero-title),
+body.jobus_job_page_jobus-free-vs-pro .fs-notice,
+body.jobus_job_page_jobus-free-vs-pro .fs-secure-notice,
+body.jobus_job_page_jobus-free-vs-pro .fs-terms,
+body.jobus_job_page_jobus-free-vs-pro .fs-checkout-taxes,
+body.jobus_job_page_jobus-free-vs-pro p.fs-subtitle {
+	display: none !important;
+}
+
+.jbs-free-vs-pro-wrap .fs-secure-notice,
+.jbs-free-vs-pro-wrap .fs-terms,
+.jbs-plan-footer .fs-secure-notice,
+.jbs-cta-buttons .fs-secure-notice,
+.jbs-hero-actions .fs-secure-notice {
+	display: none !important;
 }
 
 /* ==========================================================================
@@ -96,7 +115,7 @@
 	background: #ffffff !important;
 	color: var(--jbs-primary-dark) !important;
 	font-weight: 700 !important;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14) !important;
 }
 
 .jbs-btn-primary:hover,
@@ -149,13 +168,25 @@
 .jbs-presentation-hero {
 	background: linear-gradient(135deg, var(--jbs-primary) 0%, var(--jbs-primary-dark) 100%);
 	border-radius: var(--jbs-radius-lg);
-	padding: 28px 32px;
+	padding: 32px 36px 28px;
 	color: #ffffff;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: 24px;
+	margin-bottom: 18px;
 	text-align: center;
 	box-shadow: var(--jbs-shadow);
+}
+
+.jbs-presentation-hero::after {
+	content: "";
+	position: absolute;
+	width: 280px;
+	height: 280px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.06);
+	top: -90px;
+	right: -60px;
+	pointer-events: none;
 }
 
 .jbs-hero-badge {
@@ -183,11 +214,12 @@
 }
 
 .jbs-hero-title {
-	font-size: 26px;
+	font-size: 28px;
 	font-weight: 700;
 	color: #ffffff;
-	line-height: 1.3;
-	margin: 0 0 8px;
+	line-height: 1.28;
+	margin: 0 0 10px;
+	letter-spacing: -0.02em;
 }
 
 .jbs-hero-subtitle {
@@ -234,6 +266,49 @@
 }
 
 /* ==========================================================================
+   Stat chips
+   ========================================================================== */
+.jbs-stat-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px;
+	margin-bottom: 22px;
+}
+
+.jbs-stat-chip {
+	background: #ffffff;
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius-lg);
+	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	box-shadow: var(--jbs-shadow);
+}
+
+.jbs-stat-chip strong {
+	font-size: 22px;
+	line-height: 1.2;
+	color: var(--jbs-gray-900);
+	font-weight: 700;
+}
+
+.jbs-stat-chip span {
+	font-size: 12.5px;
+	color: var(--jbs-gray-500);
+	font-weight: 500;
+}
+
+.jbs-stat-chip-pro {
+	border-color: rgba(49, 121, 90, 0.28);
+	background: #f0fdf4;
+}
+
+.jbs-stat-chip-pro strong {
+	color: var(--jbs-primary-dark);
+}
+
+/* ==========================================================================
    Plan Comparison Cards Grid
    ========================================================================== */
 .jbs-plans-grid {
@@ -262,6 +337,7 @@
 
 .jbs-plan-card.is-pro {
 	border: 2px solid var(--jbs-primary);
+	box-shadow: 0 8px 24px rgba(49, 121, 90, 0.12);
 }
 
 .jbs-plan-badge {
@@ -382,16 +458,34 @@
 	color: var(--jbs-primary);
 }
 
+.jbs-plan-features li .dashicons-yes::before {
+	content: "\f147";
+}
+
 .jbs-plan-features li .dashicons-star-filled {
 	color: var(--jbs-warning);
 }
 
+.jbs-plan-features li .dashicons-star-filled::before {
+	content: "\f155";
+}
+
 .jbs-plan-footer {
 	margin-top: auto;
+	overflow: hidden;
 }
 
 .jbs-plan-footer .jbs-btn {
 	width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+.jbs-hero-actions,
+.jbs-cta-buttons {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
 }
 
 .jbs-plan-guarantee {
@@ -535,11 +629,10 @@
 
 .jbs-matrix-toolbar {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: stretch;
 	gap: 12px;
-	flex-wrap: wrap;
-	margin-bottom: 18px;
+	margin-bottom: 14px;
 	padding-bottom: 14px;
 	border-bottom: 1px solid var(--jbs-gray-100);
 }
@@ -574,9 +667,51 @@
 	color: #ffffff;
 }
 
+.jbs-filter-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	margin-left: 4px;
+	border-radius: 9999px;
+	background: rgba(0, 0, 0, 0.08);
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.jbs-matrix-filter-btn.is-active .jbs-filter-count {
+	background: rgba(255, 255, 255, 0.22);
+	color: #ffffff;
+}
+
+.jbs-legend {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 14px;
+	font-size: 12px;
+	color: var(--jbs-gray-500);
+}
+
+.jbs-legend > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.jbs-legend .jbs-check,
+.jbs-legend .jbs-cross {
+	width: 18px;
+	height: 18px;
+	font-size: 12px;
+}
+
 .jbs-matrix-search {
 	position: relative;
-	min-width: 230px;
+	max-width: 360px;
 }
 
 .jbs-matrix-search input {
@@ -609,7 +744,10 @@
 
 /* Table Styling */
 .jbs-table-wrap {
-	overflow-x: auto;
+	overflow: auto;
+	max-height: min(72vh, 920px);
+	border: 1px solid var(--jbs-gray-200);
+	border-radius: var(--jbs-radius);
 }
 
 .jbs-matrix-table {
@@ -623,11 +761,13 @@
 	background: var(--jbs-gray-50);
 	color: var(--jbs-gray-900);
 	font-weight: 700;
-	font-size: 13.5px;
+	font-size: 13px;
 	padding: 12px 16px;
-	border-top: 1px solid var(--jbs-gray-200);
 	border-bottom: 1px solid var(--jbs-gray-200);
 	text-align: left;
+	position: sticky;
+	top: 0;
+	z-index: 3;
 }
 
 .jbs-matrix-table thead th.col-feature {
@@ -656,6 +796,27 @@
 	padding: 9px 16px;
 	border-top: 1px solid var(--jbs-gray-200);
 	border-bottom: 1px solid var(--jbs-gray-200);
+	position: sticky;
+	top: 42px;
+	z-index: 2;
+}
+
+.jbs-cat-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 20px;
+	height: 18px;
+	padding: 0 6px;
+	margin-left: 8px;
+	border-radius: 9999px;
+	background: #ffffff;
+	color: var(--jbs-gray-600);
+	font-size: 10px;
+	letter-spacing: 0;
+	text-transform: none;
+	font-weight: 700;
+	border: 1px solid var(--jbs-gray-200);
 }
 
 .jbs-matrix-category-header .cat-icon {
@@ -714,6 +875,26 @@
 	color: #15803d;
 	border-radius: 50%;
 	font-size: 13px;
+	position: relative;
+}
+
+.jbs-check .dashicons,
+.jbs-cross .dashicons {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.jbs-check::after {
+	content: "";
+	display: block;
+	width: 5px;
+	height: 9px;
+	border-right: 2px solid #15803d;
+	border-bottom: 2px solid #15803d;
+	transform: rotate(45deg) translate(-1px, -1px);
 }
 
 .jbs-cross {
@@ -726,6 +907,16 @@
 	color: var(--jbs-gray-400);
 	border-radius: 50%;
 	font-size: 13px;
+	position: relative;
+}
+
+.jbs-cross::after {
+	content: "";
+	display: block;
+	width: 10px;
+	height: 2px;
+	background: currentColor;
+	border-radius: 1px;
 }
 
 .jbs-text-pill {
@@ -789,7 +980,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	gap: 12px;
 	user-select: none;
+	width: 100%;
+	background: transparent;
+	border: 0;
+	text-align: left;
 }
 
 .jbs-faq-question .dashicons {
@@ -905,12 +1101,25 @@
 		grid-template-columns: 1fr 1fr;
 	}
 
+	.jbs-stat-row {
+		grid-template-columns: 1fr 1fr;
+	}
+
 	.jbs-presentation-hero {
 		padding: 24px 20px;
 	}
 
 	.jbs-hero-title {
 		font-size: 22px;
+	}
+
+	.jbs-table-wrap {
+		max-height: none;
+	}
+
+	.jbs-matrix-table thead th,
+	.jbs-matrix-category-header td {
+		position: static;
 	}
 }
 

@@ -411,6 +411,14 @@ class Admin {
 
 		remove_all_actions( 'admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
+
+		echo '<style id="jobus-fvp-admin-clean">
+			body.jobus_job_page_jobus-free-vs-pro #wpbody-content > h1,
+			body.jobus_job_page_jobus-free-vs-pro .update-nag,
+			body.jobus_job_page_jobus-free-vs-pro .fs-notice,
+			body.jobus_job_page_jobus-free-vs-pro .fs-secure-notice,
+			body.jobus_job_page_jobus-free-vs-pro .fs-terms { display: none !important; }
+		</style>';
 	}
 
 	/**

@@ -137,7 +137,46 @@
         }
       });
 
+      // Locked Pro options — show upgrade notice instead of toggling.
+      $(document).on("click", ".jbs-pro-locked", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        self.showProNotice();
+      });
+
+      $(document).on("click", "[data-jbs-pro-modal-close]", function (e) {
+        e.preventDefault();
+        self.hideProNotice();
+      });
+
+      $(document).on("keydown", function (e) {
+        if (e.key === "Escape") {
+          self.hideProNotice();
+        }
+      });
+
       // Finish setup button (just a link, no special handling needed).
+    },
+
+    /**
+     * Show the Pro upgrade modal.
+     */
+    showProNotice: function () {
+      var $modal = $("#jbs-pro-modal");
+      if ($modal.length) {
+        $modal.prop("hidden", false);
+        return;
+      }
+      if (jobusOnboarding.upgradeUrl) {
+        window.open(jobusOnboarding.upgradeUrl, "_blank");
+      }
+    },
+
+    /**
+     * Hide the Pro upgrade modal.
+     */
+    hideProNotice: function () {
+      $("#jbs-pro-modal").prop("hidden", true);
     },
 
     /**
@@ -208,8 +247,8 @@
       var formData = {
         action: 'jobus_save_onboarding_settings',
         nonce: jobusOnboarding.saveNonce,
-        enable_candidate: $('#enable_candidate').is(':checked') ? '1' : '0',
-        enable_company: $('#enable_company').is(':checked') ? '1' : '0',
+        enable_candidate: (!$('#enable_candidate').prop('disabled') && $('#enable_candidate').is(':checked')) ? '1' : '0',
+        enable_company: (!$('#enable_company').prop('disabled') && $('#enable_company').is(':checked')) ? '1' : '0',
         color_scheme: $('input[name="color_scheme"]:checked').val() || 'scheme_default',
         // Job configuration settings
         job_submission_status: $('#job_submission_status').val() || 'publish',

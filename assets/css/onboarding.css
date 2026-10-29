@@ -204,10 +204,19 @@
 }
 
 .jbs-feature-item {
+  position: relative;
   background: #f8faf9;
   border-radius: 12px;
   padding: 24px;
   text-align: center;
+}
+
+.jbs-feature-item .jbs-pro-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  margin: 0;
+  z-index: 2;
 }
 
 .jbs-feature-item .feature-icon {
@@ -337,25 +346,60 @@
 }
 
 .jbs-pro-locked {
-  opacity: 0.6;
+  position: relative;
   cursor: not-allowed;
 }
 
-.jbs-pro-locked .jbs-toggle-switch {
+.jbs-pro-locked::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  z-index: 1;
+}
+
+.jbs-pro-locked > *:not(.jbs-pro-badge) {
+  opacity: 0.6;
+}
+
+.jbs-toggle-item.jbs-pro-locked:hover,
+.jbs-select-item.jbs-pro-locked:hover,
+.jbs-feature-item.jbs-pro-locked:hover {
+  background: #f8faf9;
+}
+
+.jbs-pro-locked .jbs-toggle-switch,
+.jbs-pro-locked .jbs-select {
   pointer-events: none;
 }
 
+/* Locked switchers stay visible but never look enabled. */
+.jbs-pro-locked .jbs-toggle-slider,
+.jbs-pro-locked .jbs-toggle-switch input:checked + .jbs-toggle-slider,
+.jbs-pro-locked .jbs-toggle-switch input:disabled + .jbs-toggle-slider {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.jbs-pro-locked .jbs-toggle-switch input:checked + .jbs-toggle-slider::before {
+  transform: none;
+}
+
 .jbs-pro-badge {
-  background: linear-gradient(135deg, #ff6b35, #f7931e);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  background-color: #f1bd6c;
+  color: #000;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
   margin-left: auto;
   margin-right: 12px;
+  flex-shrink: 0;
+  line-height: 1.2;
+  pointer-events: none;
 }
 
 .jbs-toggle-info {
@@ -390,6 +434,7 @@
   position: relative;
   width: 48px;
   height: 28px;
+  flex-shrink: 0;
 }
 
 .jbs-toggle-switch input {
@@ -785,4 +830,60 @@
   .jbs-color-schemes {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* ==========================================================================
+   Pro upgrade modal
+   ========================================================================== */
+
+.jbs-pro-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.jbs-pro-modal[hidden] {
+  display: none;
+}
+
+.jbs-pro-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+}
+
+.jbs-pro-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.jbs-pro-modal-dialog h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.jbs-pro-modal-dialog p {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.jbs-pro-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
 }

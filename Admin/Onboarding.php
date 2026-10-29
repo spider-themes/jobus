@@ -214,6 +214,7 @@ class Onboarding
 				'skipNonce' => wp_create_nonce('jobus_skip_onboarding'),
 				'dashboardUrl' => admin_url('edit.php?post_type=jobus_job'),
 				'settingsUrl' => admin_url('edit.php?post_type=jobus_job&page=jobus-settings'),
+				'upgradeUrl' => $this->get_upgrade_url(),
 				'strings' => array(
 					'saving' => esc_html__('Saving...', 'jobus'),
 					'success' => esc_html__('Settings saved!', 'jobus'),
@@ -243,6 +244,15 @@ class Onboarding
 		$is_job_related_posts = isset($options['is_job_related_posts']) ? $options['is_job_related_posts'] : true;
 		$job_submission_status = isset($options['job_submission_status']) ? $options['job_submission_status'] : 'publish';
 
+		// Pro features: Candidate/Company modules and Default Job Status.
+		// Matches Settings — unlocked with a Pro license or the Jobi theme.
+		$has_pro_access = $this->has_pro_access();
+		$upgrade_url    = $this->get_upgrade_url();
+		if ( ! $has_pro_access ) {
+			$enable_candidate = false;
+			$enable_company   = false;
+		}
+
 		// Manually enqueue assets for standalone page (since we exit early, admin_enqueue_scripts won't help)
 		wp_enqueue_style(
 			'jobus-onboarding',
@@ -268,6 +278,7 @@ class Onboarding
 				'skipNonce' => wp_create_nonce('jobus_skip_onboarding'),
 				'dashboardUrl' => admin_url('edit.php?post_type=jobus_job'),
 				'settingsUrl' => admin_url('edit.php?post_type=jobus_job&page=jobus-settings'),
+				'upgradeUrl' => $upgrade_url,
 				'strings' => array(
 					'saving' => esc_html__('Saving...', 'jobus'),
 					'success' => esc_html__('Settings saved!', 'jobus'),
@@ -287,7 +298,7 @@ class Onboarding
     <?php wp_print_scripts('jobus-onboarding'); ?>
 </head>
 
-<body class="jbs-onboarding-page">
+<body class="jbs-onboarding-page<?php echo $has_pro_access ? ' jbs-premium' : ''; ?>">
 
     <div class="jbs-onboarding-wrapper">
         <!-- Header -->
@@ -344,13 +355,19 @@ class Onboarding
                     </p>
 
                     <div class="jbs-features-grid">
-                        <div class="jbs-feature-item">
+                        <div class="jbs-feature-item<?php echo $has_pro_access ? '' : ' jbs-pro-locked'; ?>">
+                            <?php if ( ! $has_pro_access ) : ?>
+                            <span class="jbs-pro-badge"><?php esc_html_e('Pro', 'jobus'); ?></span>
+                            <?php endif; ?>
                             <span class="feature-icon">👥</span>
                             <h3><?php esc_html_e('Candidate Profiles', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Allow job seekers to create profiles, upload resumes, and apply for jobs.', 'jobus'); ?>
                             </p>
                         </div>
-                        <div class="jbs-feature-item">
+                        <div class="jbs-feature-item<?php echo $has_pro_access ? '' : ' jbs-pro-locked'; ?>">
+                            <?php if ( ! $has_pro_access ) : ?>
+                            <span class="jbs-pro-badge"><?php esc_html_e('Pro', 'jobus'); ?></span>
+                            <?php endif; ?>
                             <span class="feature-icon">🏢</span>
                             <h3><?php esc_html_e('Company Listings', 'jobus'); ?></h3>
                             <p><?php esc_html_e('Employers can create company profiles and post job listings.', 'jobus'); ?>
@@ -402,7 +419,7 @@ class Onboarding
                             </p>
 
                             <div class="jbs-toggle-group">
-                                <label class="jbs-toggle-item">
+                                <label class="jbs-toggle-item<?php echo $has_pro_access ? '' : ' jbs-pro-locked'; ?>">
                                     <div class="jbs-toggle-info">
                                         <span class="jbs-toggle-icon">👤</span>
                                         <div class="jbs-toggle-text">
@@ -410,14 +427,18 @@ class Onboarding
                                             <span><?php esc_html_e('Allow job seekers to create profiles and apply for jobs.', 'jobus'); ?></span>
                                         </div>
                                     </div>
+                                    <?php if ( ! $has_pro_access ) : ?>
+                                    <span class="jbs-pro-badge"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
+                                    <?php endif; ?>
                                     <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_candidate" id="enable_candidate" value="1"
-                                            <?php checked($enable_candidate, true); ?>>
+                                            <?php checked( $enable_candidate, true ); ?>
+                                            <?php disabled( ! $has_pro_access ); ?>>
                                         <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
 
-                                <label class="jbs-toggle-item">
+                                <label class="jbs-toggle-item<?php echo $has_pro_access ? '' : ' jbs-pro-locked'; ?>">
                                     <div class="jbs-toggle-info">
                                         <span class="jbs-toggle-icon">🏢</span>
                                         <div class="jbs-toggle-text">
@@ -425,9 +446,13 @@ class Onboarding
                                             <span><?php esc_html_e('Allow employers to create company profiles and post jobs.', 'jobus'); ?></span>
                                         </div>
                                     </div>
+                                    <?php if ( ! $has_pro_access ) : ?>
+                                    <span class="jbs-pro-badge"><?php esc_html_e( 'Pro', 'jobus' ); ?></span>
+                                    <?php endif; ?>
                                     <div class="jbs-toggle-switch">
                                         <input type="checkbox" name="enable_company" id="enable_company" value="1"
-                                            <?php checked($enable_company, true); ?>>
+                                            <?php checked( $enable_company, true ); ?>
+                                            <?php disabled( ! $has_pro_access ); ?>>
                                         <span class="jbs-toggle-slider"></span>
                                     </div>
                                 </label>
@@ -521,7 +546,7 @@ class Onboarding
                             </p>
 
                             <div class="jbs-select-group">
-                                <label class="jbs-select-item">
+                                <label class="jbs-select-item<?php echo $has_pro_access ? '' : ' jbs-pro-locked'; ?>">
                                     <div class="jbs-select-info">
                                         <span class="jbs-select-icon">📝</span>
                                         <div class="jbs-select-text">
@@ -529,8 +554,11 @@ class Onboarding
                                             <span><?php esc_html_e('Status for newly submitted jobs by employers.', 'jobus'); ?></span>
                                         </div>
                                     </div>
+                                    <?php if ( ! $has_pro_access ) : ?>
+                                    <span class="jbs-pro-badge"><?php esc_html_e('Pro', 'jobus'); ?></span>
+                                    <?php endif; ?>
                                     <select name="job_submission_status" id="job_submission_status"
-                                        class="jbs-select">
+                                        class="jbs-select" <?php disabled( ! $has_pro_access ); ?>>
                                         <option value="publish" <?php selected($job_submission_status, 'publish'); ?>>
                                             <?php esc_html_e('Published (Immediate)', 'jobus'); ?>
                                         </option>
@@ -713,6 +741,25 @@ class Onboarding
 
     </div>
 
+    <?php if ( ! $has_pro_access ) : ?>
+    <div class="jbs-pro-modal" id="jbs-pro-modal" hidden>
+        <div class="jbs-pro-modal-backdrop" data-jbs-pro-modal-close></div>
+        <div class="jbs-pro-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="jbs-pro-modal-title">
+            <h3 id="jbs-pro-modal-title"><?php esc_html_e('Pro Feature', 'jobus'); ?></h3>
+            <p><?php esc_html_e('This is a Pro feature. Upgrade to Jobus Pro to unlock candidate profiles, company listings, and advanced job settings.', 'jobus'); ?></p>
+            <div class="jbs-pro-modal-actions">
+                <button type="button" class="jbs-analytics-btn jbs-analytics-btn-secondary" data-jbs-pro-modal-close>
+                    <?php esc_html_e('Close', 'jobus'); ?>
+                </button>
+                <a href="<?php echo esc_url( $upgrade_url ); ?>" class="jbs-analytics-btn jbs-analytics-btn-primary">
+                    <?php esc_html_e('Upgrade to Pro', 'jobus'); ?>
+                    <span class="jbs-btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
 </body>
 
 </html>
@@ -748,19 +795,28 @@ class Onboarding
 		// Get current options.
 		$options = get_option('jobus_opt', array());
 
-		// Sanitize and update settings.
-		$options['enable_candidate'] = isset($_POST['enable_candidate']) && '1' === sanitize_text_field(wp_unslash($_POST['enable_candidate']));
-		$options['enable_company'] = isset($_POST['enable_company']) && '1' === sanitize_text_field(wp_unslash($_POST['enable_company']));
+		$has_pro_access = $this->has_pro_access();
+
+		// Candidate and Company modules are Pro-only.
+		if ( $has_pro_access ) {
+			$options['enable_candidate'] = isset($_POST['enable_candidate']) && '1' === sanitize_text_field(wp_unslash($_POST['enable_candidate']));
+			$options['enable_company'] = isset($_POST['enable_company']) && '1' === sanitize_text_field(wp_unslash($_POST['enable_company']));
+		} else {
+			$options['enable_candidate'] = false;
+			$options['enable_company']   = false;
+		}
 
 		// Validate color scheme.
 		$valid_schemes = array('scheme_default', 'scheme_lilac', 'scheme_midnight', 'scheme_sunset');
 		$color_scheme = isset($_POST['color_scheme']) ? sanitize_text_field(wp_unslash($_POST['color_scheme'])) : 'scheme_default';
 		$options['color_scheme'] = in_array($color_scheme, $valid_schemes, true) ? $color_scheme : 'scheme_default';
 
-		// Job configuration settings.
-		$valid_statuses = array('publish', 'pending', 'draft');
-		$job_status = isset($_POST['job_submission_status']) ? sanitize_text_field(wp_unslash($_POST['job_submission_status'])) : 'publish';
-		$options['job_submission_status'] = in_array($job_status, $valid_statuses, true) ? $job_status : 'publish';
+		// Job configuration settings. Default Job Status is Pro-only.
+		if ( $has_pro_access ) {
+			$valid_statuses = array('publish', 'pending', 'draft');
+			$job_status = isset($_POST['job_submission_status']) ? sanitize_text_field(wp_unslash($_POST['job_submission_status'])) : 'publish';
+			$options['job_submission_status'] = in_array($job_status, $valid_statuses, true) ? $job_status : 'publish';
+		}
 
 		$options['allow_guest_application'] = isset($_POST['allow_guest_application']) && '1' === sanitize_text_field(wp_unslash($_POST['allow_guest_application']));
 		$options['is_job_related_posts'] = isset($_POST['is_job_related_posts']) && '1' === sanitize_text_field(wp_unslash($_POST['is_job_related_posts']));
@@ -818,5 +874,35 @@ class Onboarding
 				'redirectUrl' => admin_url('edit.php?post_type=jobus_job'),
 			)
 		);
+	}
+
+	/**
+	 * Whether Pro features should be unlocked in the wizard.
+	 *
+	 * Matches Settings: a Pro license or the Jobi theme unlocks Candidate,
+	 * Company, and other premium options.
+	 *
+	 * @return bool
+	 */
+	private function has_pro_access(): bool
+	{
+		$is_premium = function_exists('jobus_is_premium') && jobus_is_premium();
+		$is_jobi    = in_array(strtolower(get_template()), array('jobi', 'jobi-child'), true);
+
+		return $is_premium || $is_jobi;
+	}
+
+	/**
+	 * Pricing / upgrade URL for Pro-locked wizard options.
+	 *
+	 * @return string
+	 */
+	private function get_upgrade_url(): string
+	{
+		if (function_exists('jobus_fs') && jobus_fs()) {
+			return jobus_fs()->get_upgrade_url();
+		}
+
+		return admin_url('admin.php?page=jobus-pricing');
 	}
 }
