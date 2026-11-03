@@ -4,9 +4,9 @@
  * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
  * Author: spider-themes
  * Author URI: https://spider-themes.com/
- * Version: 1.13.0
+ * Version: 1.14.0
  * Requires at least: 6.0
- * Tested up to: 7.1.3
+ * Tested up to: 7.1.4
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -249,7 +249,7 @@ final class Jobus {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.13.0';
+	const VERSION = '1.14.0';
 
 	/**
 	 * The plugin path

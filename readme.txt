@@ -1,9 +1,9 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, elementor job board, recruitment, hiring portal, careers
-Stable tag: 1.13.0
+Stable tag: 1.14.0
 Requires at least: 6.0
-Tested up to: 7.1.3
+Tested up to: 7.1.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -158,6 +158,14 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 12. **Job Categories** – Explore job listings organized by industry and category.
 
 == Changelog ==
+
+= 1.14.0 (3 November 2026) =
+* New: Added configurable Candidate Matching settings with per-criterion Required/Preferred mode and ranking weight controls.
+* New: Added Job Date, start/end time, and candidate available days/hours fields for Candidate Matching.
+* New: Added Specific Available Dates field so candidates can set exact dates and time ranges they are available to work.
+* Improved: Candidate Max Travel Distance now uses preset distances or a custom value, and falls back to the Candidate Matching default until the candidate chooses one.
+* Improved: Candidate Matching now runs as soon as a job is submitted or published, with no daily or weekly job-alert schedule.
+* Improved: Removed the dashboard sidebar logo for a cleaner frontend dashboard layout.
 
 = 1.13.0 (October 21, 2026) =
 * New: Added padding controls for Job, Company, and Candidate archive blocks.

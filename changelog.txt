@@ -1,4 +1,4 @@
-= Unreleased =
+= 1.14.0 (3 November 2026) =
 New: Added configurable Candidate Matching settings with per-criterion Required/Preferred mode and ranking weight controls.
 New: Added Job Date, start/end time, and candidate available days/hours fields for Candidate Matching.
 New: Added Specific Available Dates field so candidates can set exact dates and time ranges they are available to work.
