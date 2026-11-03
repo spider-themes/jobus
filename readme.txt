@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The ultimate WordPress Job Board plugin. Create a professional recruitment website with unlimited job listings, candidate profiles, and company pages. Works with any WordPress theme.
+The ultimate WordPress Job Board plugin. Create a recruitment website with unlimited job listings, candidate profiles, and company pages.
 
 == Description ==
 

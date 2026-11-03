@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Jobus
- * Description: A powerful recruitment and job listing plugin that seamlessly connects jobseekers with employers, enabling businesses to find the best talent quickly and efficiently.
+ * Description: The ultimate WordPress Job Board plugin. Create a recruitment website with unlimited job listings, candidate profiles, and company pages.
  * Author: spider-themes
  * Author URI: https://spider-themes.com/
  * Version: 1.14.0
