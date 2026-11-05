@@ -552,7 +552,9 @@
                         resultWrapper.innerHTML = newResultWrapper.innerHTML;
                         
                         // Re-initialize frontend behaviors inside the new DOM
-                        if (typeof $.fn.niceSelect === 'function') {
+                        if (typeof $.fn.jbsNiceSelect === 'function') {
+                            $(resultWrapper).find('.jbs-nice-select').jbsNiceSelect();
+                        } else if (typeof $.fn.niceSelect === 'function') {
                             $(resultWrapper).find('.jbs-nice-select').niceSelect();
                         }
                     }

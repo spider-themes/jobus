@@ -35,9 +35,12 @@ if ( ! $has_meta_widgets && ! $has_taxonomy_widgets && ! $show_search_form ) {
     return;
 }
 
-// Setup helper variables
-$post_type = 'jobus_candidate';
+// Setup helper variables (keep aliases used by shared filter widgets)
+$post_type           = 'jobus_candidate';
 $meta_opt_parent_key = 'jobus_meta_candidate_options';
+$meta_opt_key        = $meta_opt_parent_key;
+$widgets_option_key  = 'candidate_sidebar_widgets';
+$sidebar_widgets_key = $widgets_option_key;
 $specifications = jobus_get_specs( 'candidate_specifications' );
 $specs_options = jobus_get_specs_options( 'candidate_specifications' );
 ?>
@@ -93,7 +96,7 @@ $specs_options = jobus_get_specs_options( 'candidate_specifications' );
                             $taxonomy_mapping = [
                                 'is_candidate_widget_cat'      => [ 'jobus_candidate_cat', 'categories.php' ],
                                 'is_candidate_widget_location' => [ 'jobus_candidate_location', 'locations.php' ],
-                                'is_candidate_widget_tag'      => [ 'jobus_candidate_tag', 'tags.php' ],
+                                'is_candidate_widget_skill'    => [ 'jobus_candidate_skill', 'tags.php' ],
                             ];
 
                             foreach ( $taxonomy_mapping as $widget_key => $config ) {

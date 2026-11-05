@@ -21,8 +21,15 @@ if ( ! empty( $term_tags ) ) {
 
 		<?php
 		$searched_opt = jobus_search_terms( $taxonomy );
+		// jobus_search_terms encodes spaces as @space@ for meta matching; taxonomy slugs use hyphens.
+		$searched_opt = array_map(
+			static function ( $val ) {
+				return str_replace( '@space@', '-', (string) $val );
+			},
+			$searched_opt
+		);
 		foreach ( $term_tags as $index => $term ) {
-			$selected = (in_array($term->slug, $searched_opt)) ? ' checked' : '';
+			$selected = in_array( $term->slug, $searched_opt, true ) ? ' checked' : '';
 			$hidden_class = $index >= $initial_limit ? ' jbs-hide' : '';
 			?>
             <li class="jbs-tag-item<?php echo esc_attr($hidden_class); ?>">

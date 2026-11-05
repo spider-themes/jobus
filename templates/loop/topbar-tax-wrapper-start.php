@@ -14,6 +14,9 @@ if ( $taxonomy === 'jobus_job_location' || $taxonomy == 'jobus_company_location'
 if ( $taxonomy === 'jobus_job_tag' ) {
     $taxonomy_text = esc_html__('Tags', 'jobus');
 }
+if ( $taxonomy === 'jobus_candidate_skill' ) {
+    $taxonomy_text = esc_html__('Skills', 'jobus');
+}
 ?>
 <div class="jbs-col-lg-3 jbs-col-sm-6">
     <div class="jbs-filter-block jbs-pb-50 jbs-lg-pb-20">

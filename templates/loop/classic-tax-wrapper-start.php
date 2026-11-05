@@ -18,15 +18,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( !empty($taxonomy) ) {
-	// Verify nonce for taxonomy filtering
-	$nonce = isset($_GET['jobus_nonce']) ? sanitize_text_field(wp_unslash($_GET['jobus_nonce'])) : '';
-	if ( !wp_verify_nonce($nonce, 'jobus_search_filter') ) {
-		$taxonomy_arr = [];
-	} else {
-		// Sanitize and process taxonomy data
-		$taxonomy_arr = !empty($_GET[$taxonomy]) ? array_map('sanitize_text_field', wp_unslash($_GET[$taxonomy])) : [];
-	}
+if ( ! empty( $taxonomy ) ) {
+	// Use shared helper so clean URLs (string) and form arrays both work.
+	$taxonomy_arr = jobus_search_terms( $taxonomy );
+	// Display labels use slugs as submitted; strip legacy @space@ encoding for UI state.
+	$taxonomy_arr = array_map(
+		static function ( $val ) {
+			return str_replace( '@space@', ' ', (string) $val );
+		},
+		$taxonomy_arr
+	);
 }
 
 
@@ -51,6 +52,9 @@ if ( $taxonomy == 'jobus_job_location' || $taxonomy == 'jobus_company_location' 
 }
 if ( $taxonomy == 'jobus_job_tag' ) {
 	$taxonomy_text = esc_html__( 'Tags', 'jobus' );
+}
+if ( $taxonomy == 'jobus_candidate_skill' ) {
+	$taxonomy_text = esc_html__( 'Skills', 'jobus' );
 }
 ?>
 

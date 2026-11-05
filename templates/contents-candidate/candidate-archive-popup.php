@@ -24,24 +24,26 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="jbs-position-relative" data-jbs-filter-results="true">
 
                     <?php
-                    // Check if there are any filter widgets (meta or taxonomy) configured
+                    // Show Filter button when any sidebar filter surface is available
+                    // (meta widgets, taxonomy widgets, or keyword search) — matches classic/topbar.
                     $has_filter_widgets = false;
-                    
-                    // Check meta widgets
-                    $filter_widgets = jobus_opt( 'candidate_sidebar_widgets' );
-                    if ( isset( $filter_widgets ) && is_array( $filter_widgets ) && ! empty( $filter_widgets ) ) {
+                    $filter_widgets     = jobus_opt( 'candidate_sidebar_widgets' );
+                    $taxonomy_widgets   = jobus_opt( 'candidate_taxonomy_widgets' );
+                    $show_search_form   = jobus_opt( 'candidate_show_search_form', true );
+
+                    if ( ! empty( $filter_widgets ) && is_array( $filter_widgets ) ) {
                         $has_filter_widgets = true;
                     }
-                    
-                    // Check taxonomy widgets independently
-                    $taxonomy_widgets = jobus_opt( 'candidate_taxonomy_widgets' );
-                    if ( ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
+                    if ( ! $has_filter_widgets && ! empty( $taxonomy_widgets ) && is_array( $taxonomy_widgets ) ) {
                         foreach ( $taxonomy_widgets as $is_enabled ) {
                             if ( $is_enabled ) {
                                 $has_filter_widgets = true;
                                 break;
                             }
                         }
+                    }
+                    if ( ! $has_filter_widgets && $show_search_form ) {
+                        $has_filter_widgets = true;
                     }
                     ?>
                     <div class="jbs-upper-filter jbs-d-flex jbs-justify-content-between jbs-align-items-start jbs-align-items-md-center jbs-mb-20">

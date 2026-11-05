@@ -28,8 +28,11 @@ if ( ! $has_meta_widgets && ! $has_taxonomy_widgets && ! $show_search_form ) {
 }
 
 // Setup helper variables
-$post_type = 'jobus_job';
+$post_type           = 'jobus_job';
 $meta_opt_parent_key = 'jobus_meta_options';
+$meta_opt_key        = $meta_opt_parent_key;
+$widgets_option_key  = 'job_sidebar_widgets';
+$sidebar_widgets_key = $widgets_option_key;
 $specifications = jobus_get_specs();
 $specs_options = jobus_get_specs_options();
 ?>

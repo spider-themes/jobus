@@ -10,8 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Fetch dynamic range values extracted directly from actual published posts of this particular post_type.
-// Variables $post_type, $meta_opt_key, and $widgets_option_key are injected by the generic-sidebar-filters.php template loader.
-$dynamic_job_values = jobus_all_range_field_value( $post_type ?? 'jobus_job', $meta_opt_key ?? 'jobus_meta_options', $widgets_option_key ?? 'job_sidebar_widgets' );
+// Sidebars inject $post_type plus either $meta_opt_key / $widgets_option_key (generic)
+// or $meta_opt_parent_key / $sidebar_widgets_key / $widgets_option_key (classic/popup/topbar).
+$range_post_type   = $post_type ?? 'jobus_job';
+$range_meta_key    = $meta_opt_key ?? $meta_opt_parent_key ?? 'jobus_meta_options';
+$range_widgets_key = $widgets_option_key ?? $sidebar_widgets_key ?? 'job_sidebar_widgets';
+$dynamic_job_values = jobus_all_range_field_value( $range_post_type, $range_meta_key, $range_widgets_key );
 
 // Initialize an array to store all numeric values
 $all_values = [];

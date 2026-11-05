@@ -276,6 +276,13 @@ CSF::createSection($settings_prefix, array(
 					'title' => esc_html__('Location', 'jobus'),
 					'default' => true,
 				),
+
+				array(
+					'id' => 'is_candidate_widget_skill',
+					'type' => 'switcher',
+					'title' => esc_html__('Skills', 'jobus'),
+					'default' => true,
+				),
 			),
 		),
 	) ) ),

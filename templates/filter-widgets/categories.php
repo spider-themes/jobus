@@ -21,7 +21,15 @@ $term_cats = get_terms( array(
 
 if ( ! empty( $term_cats ) ) {
 	?>
-    <?php $searched_opt = jobus_search_terms($taxonomy); ?>
+    <?php
+	$searched_opt = jobus_search_terms( $taxonomy );
+	$searched_opt = array_map(
+		static function ( $val ) {
+			return str_replace( '@space@', '-', (string) $val );
+		},
+		$searched_opt
+	);
+	?>
     <select class="jbs-nice-select" name="<?php echo esc_attr($taxonomy) ?>[]">
         <option value="" <?php selected( empty( $searched_opt ), true ); ?>> <?php esc_html_e( 'Select Category', 'jobus' ); ?> </option>
 		<?php

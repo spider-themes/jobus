@@ -41,7 +41,14 @@ $unit_label = $radius_unit === 'km' ? esc_html__( 'km', 'jobus' ) : esc_html__( 
         </button>
     </div>
 
-    <?php if ( ! empty( $jobus_opt['enable_radius_search'] ) || ! isset( $jobus_opt['enable_radius_search'] ) ) : ?>
+    <?php
+    // Radius search is backed by the job geo index + jobus_job_query_args filter.
+    // Only show it on job archives so candidate/company filters are not misleading.
+    $radius_post_type = $post_type ?? ( isset( $_GET['post_type'] ) ? sanitize_key( wp_unslash( $_GET['post_type'] ) ) : 'jobus_job' );
+    $show_radius_search = ( 'jobus_job' === $radius_post_type )
+        && ( ! empty( $jobus_opt['enable_radius_search'] ) || ! isset( $jobus_opt['enable_radius_search'] ) );
+    ?>
+    <?php if ( $show_radius_search ) : ?>
     <!-- Geolocation Radius Search -->
     <div class="jbs-radius-search-wrapper jbs-p-20 jbs-rounded"
          data-text-my-loc="<?php esc_attr_e( 'My Current Location', 'jobus' ); ?>"

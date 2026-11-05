@@ -44,33 +44,43 @@ function jobus_load_archive_template( $config ) {
 		$paged
 	);
 
-	// Handle search
-	if ( ! empty( get_query_var( 's' ) ) ) {
-		$args['s'] = get_query_var( 's' );
+	// Handle search (query var first, then raw GET for AJAX/filter form requests).
+	$search_keyword = get_query_var( 's' );
+	if ( '' === $search_keyword && isset( $_GET['s'] ) ) {
+		$search_keyword = sanitize_text_field( wp_unslash( $_GET['s'] ) );
+	}
+	if ( '' !== $search_keyword && null !== $search_keyword ) {
+		$args['s'] = $search_keyword;
 	}
 
-	// Handle meta and taxonomy queries
+	// Handle meta and taxonomy queries.
+	// null  = no sidebar filters active (do not restrict the query).
+	// array = filters active; empty array means zero matches and must show no posts.
 	$result_ids = jobus_process_archive_filters(
 		$config['post_type'],
 		$config['query_var_prefix'],
 		$config['sidebar_widgets_key']
 	);
 
-	if ( ! empty( $result_ids ) ) {
-		// Re-order by relevance score so the best-matching posts surface first.
-		$keyword = sanitize_text_field( wp_unslash( $_GET['s'] ?? get_query_var( 's' ) ?? '' ) );
-		$result_ids = jobus_boost_result_ids(
-			$result_ids,
-			$keyword,
-			$config['query_var_prefix'],
-			$config['sidebar_widgets_key']
-		);
+	if ( is_array( $result_ids ) ) {
+		if ( ! empty( $result_ids ) ) {
+			// Re-order by relevance score so the best-matching posts surface first.
+			$result_ids = jobus_boost_result_ids(
+				$result_ids,
+				(string) $search_keyword,
+				$config['query_var_prefix'],
+				$config['sidebar_widgets_key']
+			);
+			$args['post__in'] = array_values( array_map( 'absint', $result_ids ) );
+		} else {
+			// Active filters matched nothing — force an empty result set.
+			$args['post__in'] = array( 0 );
+		}
 
-		$args['post__in']      = array_map( 'absint', $result_ids );
 		$args['no_found_rows'] = false; // Must stay false so pagination works.
 
 		// Respect the scored order unless the user explicitly chose a sort direction.
-		if ( empty( $_GET['orderby'] ) ) {
+		if ( empty( $_GET['orderby'] ) && ! empty( $result_ids ) ) {
 			$args['orderby'] = 'post__in'; // WordPress preserves the array order.
 			unset( $args['order'] );
 		}
@@ -91,9 +101,13 @@ function jobus_load_archive_template( $config ) {
 	if ( in_array( $config['post_type'], array( 'jobus_candidate', 'jobus_company' ), true ) ) {
 		$orphaned_post_ids = jobus_get_orphaned_post_ids( $config['post_type'] );
 		if ( ! empty( $orphaned_post_ids ) ) {
-			if ( ! empty( $args['post__in'] ) ) {
-				// If post__in is set, remove orphaned IDs from it
-				$args['post__in'] = array_diff( $args['post__in'], $orphaned_post_ids );
+			if ( isset( $args['post__in'] ) ) {
+				// If post__in is set, remove orphaned IDs from it.
+				$args['post__in'] = array_values( array_diff( $args['post__in'], $orphaned_post_ids ) );
+				// Empty post__in is ignored by WP_Query — force no results instead.
+				if ( empty( $args['post__in'] ) ) {
+					$args['post__in'] = array( 0 );
+				}
 			} else {
 				// Otherwise, use post__not_in
 				$args['post__not_in'] = isset( $args['post__not_in'] ) 
@@ -103,9 +117,14 @@ function jobus_load_archive_template( $config ) {
 		}
 	}
 
-	// Allow extensions to modify query arguments before execution
+	// Allow extensions to modify query arguments before execution.
+	// Jobs keep the historical filter name; candidate/company get matching hooks.
 	if ( $config['post_type'] === 'jobus_job' ) {
 		$args = apply_filters( 'jobus_job_query_args', $args, $_GET );
+	} elseif ( $config['post_type'] === 'jobus_candidate' ) {
+		$args = apply_filters( 'jobus_candidate_query_args', $args, $_GET );
+	} elseif ( $config['post_type'] === 'jobus_company' ) {
+		$args = apply_filters( 'jobus_company_query_args', $args, $_GET );
 	}
 
 	// Create query with post-type-specific variable name
@@ -237,7 +256,7 @@ add_action( 'deleted_user', function() {
  * @param string $post_type
  * @param string $query_var_prefix (e.g., 'jobus_job')
  * @param string $sidebar_widgets_key
- * @return array
+ * @return array|null Post IDs when filters are active (may be empty), or null when no filters are active.
  */
 function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_widgets_key ) {
 
@@ -259,6 +278,7 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
 		'jobus_candidate' => array(
 			$query_var_prefix . '_cat',
 			$query_var_prefix . '_location',
+			$query_var_prefix . '_skill',
 		),
 		'jobus_company'   => array(
 			$query_var_prefix . '_cat',
@@ -268,8 +288,9 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
 	$taxonomies = $taxonomy_map[ $post_type ] ?? array();
 
 	// Early exit — skip ALL queries if the user has not applied any filter.
+	// Return null (not []) so callers can tell "no filters" from "zero matches".
 	if ( ! jobus_has_active_filters( $query_var_prefix, $sidebar_widgets_key, $taxonomies ) ) {
-		return array();
+		return null;
 	}
 
 	/*
@@ -298,6 +319,13 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
 	foreach ( $taxonomies as $taxonomy ) {
 		$terms = jobus_search_terms( $taxonomy );
 		$terms = array_filter( $terms ); // Remove empty strings
+		// Taxonomy slugs never use the legacy @space@ meta encoding.
+		$terms = array_map(
+			static function ( $term ) {
+				return str_replace( '@space@', '-', (string) $term );
+			},
+			$terms
+		);
 		if ( ! empty( $terms ) ) {
 			$tax_clauses[] = array(
 				'taxonomy'         => $taxonomy,
@@ -362,9 +390,16 @@ function jobus_process_archive_filters( $post_type, $query_var_prefix, $sidebar_
  */
 function jobus_has_active_filters( $query_var_prefix, $sidebar_widgets_key, $taxonomies = array() ) {
 
-	// Check taxonomy filter params.
+	// Check taxonomy filter params (ignore empty "Select..." placeholders).
 	foreach ( $taxonomies as $taxonomy ) {
-		if ( ! empty( $_GET[ $taxonomy ] ) ) {
+		if ( empty( $_GET[ $taxonomy ] ) ) {
+			continue;
+		}
+		$terms = jobus_search_terms( $taxonomy );
+		$terms = array_filter( $terms, static function ( $term ) {
+			return '' !== trim( (string) $term );
+		} );
+		if ( ! empty( $terms ) ) {
 			return true;
 		}
 	}
@@ -374,7 +409,14 @@ function jobus_has_active_filters( $query_var_prefix, $sidebar_widgets_key, $tax
 	if ( is_array( $widgets ) ) {
 		foreach ( $widgets as $widget ) {
 			$widget_name = $widget['widget_name'] ?? '';
-			if ( $widget_name && ! empty( $_GET[ $widget_name ] ) ) {
+			if ( ! $widget_name || empty( $_GET[ $widget_name ] ) ) {
+				continue;
+			}
+			$values = jobus_search_terms( $widget_name );
+			$values = array_filter( $values, static function ( $value ) {
+				return '' !== trim( (string) $value );
+			} );
+			if ( ! empty( $values ) ) {
 				return true;
 			}
 		}
@@ -421,11 +463,12 @@ function jobus_boost_result_ids(
 	$active_taxonomy_slugs = [];
 	$active_meta_values    = [];
 
-	// Taxonomy signals.
+	// Taxonomy signals (job tags / candidate skills share the same suffix pattern).
 	$taxonomy_map = [
 		$query_var_prefix . '_cat',
 		$query_var_prefix . '_location',
 		$query_var_prefix . '_tag',
+		$query_var_prefix . '_skill',
 	];
 	foreach ( $taxonomy_map as $tax ) {
 		if ( ! empty( $_GET[ $tax ] ) ) {

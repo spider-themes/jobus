@@ -34,8 +34,11 @@ if (!$has_meta_widgets && !$has_taxonomy_widgets && !$show_search_form) {
 	return;
 }
 
-// Setup helper variables
+// Setup helper variables (keep aliases used by shared filter widgets)
 $meta_opt_parent_key = 'jobus_meta_company_options';
+$meta_opt_key        = $meta_opt_parent_key;
+$widgets_option_key  = 'company_sidebar_widgets';
+$sidebar_widgets_key = $widgets_option_key;
 $specifications = jobus_get_specs('company_specifications');
 $specs_options = jobus_get_specs_options('company_specifications');
 ?>

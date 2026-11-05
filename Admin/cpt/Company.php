@@ -66,6 +66,7 @@ class Company {
 			'show_in_rest'       => true,
 			'show_ui'            => true,
 			'show_in_menu'       => false,
+			'show_in_admin_bar'  => true,
 			'query_var'          => true,
 			'rewrite'            => [
 				'slug'       => 'company',
