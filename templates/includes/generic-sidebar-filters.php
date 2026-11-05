@@ -133,6 +133,12 @@ if ( ! function_exists( 'jobus_render_sidebar_filter_widget' ) ) {
 
 	$widget_specifications = jobus_get_specs_options( $specifications_options_key );
 	$specifications_data = $widget_specifications[ $widget_name ] ?? '';
+
+	// Skip empty shells — open/close with no content looks broken.
+	if ( ! jobus_sidebar_widget_has_visible_options( $post_type, $meta_opt_key, $widget_layout, $specifications_data ) ) {
+		return;
+	}
+
 	$widget_param = jobus_get_sanitized_query_param( $widget_name, '', 'jobus_search_filter' );
 
 	// Check if widget has active filters

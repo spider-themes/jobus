@@ -37,7 +37,7 @@ $area_expanded     = 'false';
 $is_collapsed      = ' jbs-collapsed';
 
 if ( ! empty( $taxonomy_arr  ) ) {
-	$is_collapsed_show = 'jbs-collapse show';
+	$is_collapsed_show = 'jbs-collapse jbs-show';
 	$area_expanded     = 'true';
 	$is_collapsed      = '';
 }

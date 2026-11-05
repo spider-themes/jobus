@@ -583,6 +583,51 @@ if ( ! function_exists( 'jobus_count_meta_key_usage' ) ) {
     }
 }
 
+if ( ! function_exists( 'jobus_sidebar_widget_has_visible_options' ) ) {
+	/**
+	 * Whether a sidebar meta filter widget would render any visible controls.
+	 *
+	 * Empty accordion shells (no layout / zero matching options) look like
+	 * broken open/close toggles — callers should skip those widgets.
+	 *
+	 * @param string       $post_type           Post type used for option counts.
+	 * @param string       $meta_opt_parent_key Serialized meta parent key.
+	 * @param string       $widget_layout       Filter widget template slug.
+	 * @param array|string $specifications_data Spec option rows for this widget.
+	 *
+	 * @return bool
+	 */
+	function jobus_sidebar_widget_has_visible_options( $post_type, $meta_opt_parent_key, $widget_layout, $specifications_data ): bool {
+		if ( empty( $widget_layout ) ) {
+			return false;
+		}
+
+		// Checkbox / dropdown only output options with a matching post count.
+		if ( in_array( $widget_layout, array( 'checkbox', 'dropdown' ), true ) ) {
+			if ( ! is_array( $specifications_data ) || empty( $specifications_data ) ) {
+				return false;
+			}
+
+			foreach ( $specifications_data as $value ) {
+				$meta_value = $value['meta_values'] ?? '';
+				if ( '' === trim( (string) $meta_value ) ) {
+					continue;
+				}
+
+				$opt_val = strtolower( preg_replace( '/[,\s]+/', '@space@', (string) $meta_value ) );
+				if ( jobus_count_meta_key_usage( $post_type, $meta_opt_parent_key, $opt_val ) > 0 ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		// Range and other layouts can still render from dynamic post data.
+		return true;
+	}
+}
+
 
 if ( ! function_exists( 'jobus_pagination' ) ) {
     /**

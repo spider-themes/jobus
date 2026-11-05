@@ -71,6 +71,11 @@ $specs_options = jobus_get_specs_options();
                                 $widget_layout = $widget['widget_layout'] ?? '';
                                 $widget_title = $specifications[ $widget_name ] ?? '';
                                 $specifications_data = $specs_options[ $widget_name ] ?? '';
+
+                                // Skip empty shells — open/close with no content looks broken.
+                                if ( ! jobus_sidebar_widget_has_visible_options( $post_type, $meta_opt_parent_key, $widget_layout, $specifications_data ) ) {
+                                    continue;
+                                }
                                 ?>
                                 <div class="jbs-col-lg-3 jbs-col-sm-6">
                                     <div class="jbs-filter-block jbs-pb-50 jbs-lg-pb-20">

@@ -134,19 +134,25 @@ $specs_options = jobus_get_specs_options();
 
                 // Render meta widgets
                 if ($has_meta_widgets) {
+                    $visible_meta_index = 0;
                     foreach ($filter_widgets as $index => $widget) {
                         $widget_name = $widget['widget_name'] ?? '';
                         $widget_layout = $widget['widget_layout'] ?? '';
-                        $widget_param = jobus_get_sanitized_query_param($widget_name, '', 'jobus_search_filter');
-                        // If search form is shown, first meta widget should consider that
-                        $is_first = !$show_search_form && 0 === $index;
-                        $is_active = !empty($widget_param);
-                        // First item should be open, others collapsed unless active
-                        $is_collapsed = !$is_first && !$is_active;
-
                         $widget_title = $specifications[$widget_name] ?? '';
                         $specifications_data = $specs_options[$widget_name] ?? '';
 
+                        // Skip empty shells — open/close with no content looks broken.
+                        if ( ! jobus_sidebar_widget_has_visible_options( $post_type, $meta_opt_parent_key, $widget_layout, $specifications_data ) ) {
+                            continue;
+                        }
+
+                        $widget_param = jobus_get_sanitized_query_param($widget_name, '', 'jobus_search_filter');
+                        // If search form is shown, first meta widget should consider that
+                        $is_first = !$show_search_form && 0 === $visible_meta_index;
+                        $is_active = !empty($widget_param);
+                        // First item should be open, others collapsed unless active
+                        $is_collapsed = !$is_first && !$is_active;
+                        $visible_meta_index++;
 
                         ?>
                         <div class="jbs-filter-block jbs-bottom-line">
