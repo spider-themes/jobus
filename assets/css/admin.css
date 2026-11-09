@@ -48,10 +48,16 @@
 }
 
 .jbs-application-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 .jbs-application-container .jbs-applicant-image-details {
+  -ms-flex-preferred-size: 20%;
   flex-basis: 20%;
   padding: 20px 23px;
   text-align: center;
@@ -60,6 +66,7 @@
   margin-bottom: 20px;
 }
 .jbs-application-container .jbs-applicant-image-details .jbs-applicant-image img {
+  -webkit-border-radius: 100%;
   border-radius: 100%;
 }
 .jbs-application-container .jbs-applicant-image-details .jbs-applicant-image .jbs-applicant-resume-btn {
@@ -100,7 +107,12 @@
 
 /* META [ JOB SPECIFICATIONS ] */
 .jbs-job_specifications .csf-fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
   gap: 10px;
 }
@@ -163,6 +175,7 @@
   background-color: #f1bd6c;
   color: #000;
   padding: 3px 10px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   margin-bottom: 10px;
   position: absolute;
@@ -606,7 +619,7 @@ body.jobi .jbs-active-theme-jobi .csf-fieldset {
   z-index: 5;
   transition: all 0.2s ease-in-out;
 }
-.jbs-registration-section .jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta .jbs-placeholder_icon span.eye-slash:before {
+.jbs-registration-section .jbs-user-data-form .jbs-form-wrapper .jbs-input-group-meta .jbs-placeholder_icon span.jbs-eye-slash:before {
   opacity: 0;
 }
 .jbs-registration-section .jbs-user-data-form .jbs-agreement-checkbox label {
