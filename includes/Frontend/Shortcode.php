@@ -195,23 +195,31 @@ class Shortcode
 ?>
 		<div class="jbs-login-form-wrapper">
 			<?php if ( $show_demo ) : ?>
-				<div class="jbs-login-form-demo jbs-light-bg jbs-border-20 jbs-mb-25 jbs-p-20">
-					<div class="jbs-d-flex jbs-justify-content-between jbs-align-items-center jbs-mb-15">
-						<span class="jbs-fw-600 jbs-fs-13 jbs-text-dark">
-							<i class="bi bi-shield-check jbs-text-success jbs-me-1"></i>
+				<div class="jbs-login-form-demo" role="group" aria-label="<?php esc_attr_e( 'Demo Sandbox Accounts', 'jobus' ); ?>">
+					<div class="jbs-login-form-demo__head">
+						<span class="jbs-login-form-demo__title">
+							<i class="bi bi-shield-check" aria-hidden="true"></i>
 							<?php esc_html_e( 'Demo Sandbox Accounts', 'jobus' ); ?>
 						</span>
-						<small class="jbs-text-muted"><?php esc_html_e( 'Click to auto-fill', 'jobus' ); ?></small>
+						<span class="jbs-login-form-demo__hint"><?php esc_html_e( 'Click to auto-fill', 'jobus' ); ?></span>
 					</div>
-					<div class="jbs-d-flex jbs-gap-2 jbs-flex-wrap">
+					<div class="jbs-login-form-demo__roles">
 						<?php if ( ! empty( $demo_employer ) ) : ?>
-							<button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_employer ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
-								<i class="bi bi-briefcase jbs-me-1"></i><?php esc_html_e( 'Demo Employer', 'jobus' ); ?>
+							<button type="button" class="jbs-btn-fill-demo jbs-login-form-demo__role" data-user="<?php echo esc_attr( $demo_employer ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+								<span class="jbs-login-form-demo__icon" aria-hidden="true"><i class="bi bi-briefcase"></i></span>
+								<span class="jbs-login-form-demo__meta">
+									<span class="jbs-login-form-demo__label"><?php esc_html_e( 'Employer', 'jobus' ); ?></span>
+									<span class="jbs-login-form-demo__user"><?php echo esc_html( $demo_employer ); ?></span>
+								</span>
 							</button>
 						<?php endif; ?>
 						<?php if ( ! empty( $demo_candidate ) ) : ?>
-							<button type="button" class="jbs-btn-fill-demo jbs-btn-ten jbs-text-white jbs-fs-13 jbs-fw-500 jbs-tran3s" data-user="<?php echo esc_attr( $demo_candidate ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
-								<i class="bi bi-person jbs-me-1"></i><?php esc_html_e( 'Demo Candidate', 'jobus' ); ?>
+							<button type="button" class="jbs-btn-fill-demo jbs-login-form-demo__role" data-user="<?php echo esc_attr( $demo_candidate ); ?>" data-pass="<?php echo esc_attr( $demo_password ); ?>">
+								<span class="jbs-login-form-demo__icon" aria-hidden="true"><i class="bi bi-person"></i></span>
+								<span class="jbs-login-form-demo__meta">
+									<span class="jbs-login-form-demo__label"><?php esc_html_e( 'Candidate', 'jobus' ); ?></span>
+									<span class="jbs-login-form-demo__user"><?php echo esc_html( $demo_candidate ); ?></span>
+								</span>
 							</button>
 						<?php endif; ?>
 					</div>

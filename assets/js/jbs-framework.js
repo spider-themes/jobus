@@ -23,24 +23,36 @@
         });
 
         // 1-Click Demo Sandbox Credentials Auto-Fill
+        // Credentials come from Admin → Jobus → Login Form (data-user / data-pass).
+        // Click fills the login fields below — it does not submit the form.
         $(document).on('click', '.jbs-btn-fill-demo', function(e) {
             e.preventDefault();
-            const user = $(this).data('user');
-            const pass = $(this).data('pass');
-            const $wrapper = $(this).closest('.jbs-user-data-form, .jbs-login-form-wrapper, .jbs-modal-content');
+            const $btn = $(this);
+            const user = $btn.data('user');
+            const pass = $btn.data('pass');
+            const $demo = $btn.closest('.jbs-login-form-demo');
+            const $wrapper = $btn.closest('.jbs-user-data-form, .jbs-login-form-wrapper, .jbs-modal-content');
             const $form = $wrapper.find('form').length ? $wrapper.find('form') : $wrapper.parent().find('form');
 
             const $userInput = $form.find('input[name="log"], input#user_login, input#user_input').first();
             const $passInput = $form.find('input[name="pwd"], input#user_pass, input#password').first();
 
-            if ($userInput.length) {
-                $userInput.val(user).trigger('change');
-            }
-            if ($passInput.length) {
-                $passInput.val(pass).trigger('change');
+            if ($demo.length) {
+                $demo.find('.jbs-btn-fill-demo').removeClass('is-active');
+                $btn.addClass('is-active');
             }
 
-            // Give natural focus to input for accessibility and native focus styling
+            if ($userInput.length) {
+                $userInput.val(user).trigger('change').addClass('jbs-demo-filled');
+            }
+            if ($passInput.length) {
+                $passInput.val(pass).trigger('change').addClass('jbs-demo-filled');
+            }
+
+            window.setTimeout(function () {
+                $form.find('.jbs-demo-filled').removeClass('jbs-demo-filled');
+            }, 900);
+
             if ($userInput.length) {
                 $userInput.trigger('focus');
             }

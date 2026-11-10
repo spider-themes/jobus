@@ -105,7 +105,7 @@
 
                 // Show success instantly and clear the form
                 jobApplication[0].reset();
-                $('#jbs-application-inline-success').fadeIn();
+                $('#jbs-application-inline-success').removeClass('jbs-d-none');
 
                 // Save to server in background
                 $.ajax({
@@ -136,8 +136,9 @@
         applicationFormUI: function () {
 
             $(document).on('click', '#jbs-continue-as-guest', function () {
-                $('#jbs-apply-gate-panel').hide();
-                $('#jbs-apply-form-panel').show();
+                // jbs-d-none uses display:none !important — jQuery .show() cannot override it
+                $('#jbs-apply-gate-panel').addClass('jbs-d-none');
+                $('#jbs-apply-form-panel').removeClass('jbs-d-none');
             });
 
             var i18n = (typeof jobus_public_obj !== 'undefined' && jobus_public_obj.i18n) ? jobus_public_obj.i18n : {};

@@ -546,7 +546,7 @@
     text-align: center;
     position: absolute;
     left: 0;
-    top: 0px;
+    top: 6px;
     transition: all 0.1s ease-in-out;
   }
 
@@ -621,28 +621,144 @@
   }
 }
 
-// Demo Login Form
+// Demo Login Form — sandbox role picker (fills username/password below)
 .jbs-user-data-form {
   .jbs-login-form-wrapper {
     display: flex;
     justify-content: center;
+  }
+}
 
-    .jbs-login-form-demo {
-      display: inline-block;
+.jbs-login-form-demo {
+  width: 100%;
+  margin: 0 0 22px;
+  padding: 14px 14px 12px;
+  border: 1px solid rgba(49, 121, 90, 0.16);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(239, 246, 243, 0.95) 0%, rgba(255, 255, 255, 0.92) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--jbs-heading_color, #254035);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+
+    i {
+      color: var(--jbs-brand_color_1, #31795A);
       font-size: 14px;
-      line-height: 1.7;
-      color: #212529;
-      background: #eff6f3;
-      padding: 10px 18px;
-      margin-bottom: 30px !important;
-      border-radius: 10px;
-      max-width: 565px;
+    }
+  }
 
-      strong {
-        color: #254035;
-        font-size: 16px;
+  &__hint {
+    color: #6a737c;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  &__roles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  &__role {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid rgba(37, 64, 53, 0.12);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--jbs-heading_color, #254035);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      border-color: rgba(49, 121, 90, 0.35);
+      box-shadow: 0 4px 14px rgba(37, 64, 53, 0.08);
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--jbs-brand_color_1, #31795A);
+      outline-offset: 2px;
+    }
+
+    &.is-active {
+      border-color: var(--jbs-brand_color_1, #31795A);
+      background: rgba(49, 121, 90, 0.06);
+      box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.12);
+
+      .jbs-login-form-demo__icon {
+        background: var(--jbs-brand_color_1, #31795A);
+        color: #fff;
       }
     }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(49, 121, 90, 0.1);
+    color: var(--jbs-brand_color_1, #31795A);
+    font-size: 15px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__user {
+    color: #6a737c;
+    font-size: 11px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.jbs-user-data-form .jbs-input-group-meta input.jbs-demo-filled,
+.jbs-modal-content .jbs-input-group-meta input.jbs-demo-filled {
+  border-color: var(--jbs-brand_color_1, #31795A) !important;
+  box-shadow: 0 0 0 3px rgba(49, 121, 90, 0.14);
+}
+
+@media (max-width: 480px) {
+  .jbs-login-form-demo__roles {
+    grid-template-columns: 1fr;
   }
 }
 
