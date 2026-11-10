@@ -617,13 +617,8 @@ body {
           .wp-block-jobus-shortcode-job-archive,
           .wp-block-jobus-shortcode-candidate-archive,
           .wp-block-jobus-shortcode-company-archive) {
-
-      // `.has-global-padding` adds horizontal padding via CSS vars on
-      // constrained groups — zero it out so the shortcode reaches edge-to-edge.
-      .has-global-padding {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-      }
+            padding-left: 0 !important;
+            padding-right: 0 !important;
 
       .entry-header,
       .wp-block-post-title,
