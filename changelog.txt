@@ -1,4 +1,4 @@
-= Unreleased =
+= 1.15.0 (11 November 2026) =
 New: Added a Candidate Skills filter widget option for candidate archive sidebars.
 New: Redesigned the Demo Sandbox login picker with Employer/Candidate role cards that show usernames and highlight the selected account.
 Improved: Unified taxonomy archive and sidebar filtering for jobs, candidates, and companies so filters, search, empty results, and orphaned-post handling behave consistently.

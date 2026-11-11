@@ -4,7 +4,7 @@
  * Description: The ultimate WordPress Job Board plugin. Create a recruitment website with unlimited job listings, candidate profiles, and company pages.
  * Author: spider-themes
  * Author URI: https://spider-themes.com/
- * Version: 1.14.0
+ * Version: 1.15.0
  * Requires at least: 6.0
  * Tested up to: 7.1.4
  * Requires PHP: 7.4
@@ -249,7 +249,7 @@ final class Jobus {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.14.0';
+	const VERSION = '1.15.0';
 
 	/**
 	 * The plugin path

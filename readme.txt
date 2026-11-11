@@ -1,7 +1,7 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
 Tags: job board, elementor job board, recruitment, hiring portal, careers
-Stable tag: 1.14.0
+Stable tag: 1.15.0
 Requires at least: 6.0
 Tested up to: 7.1.4
 Requires PHP: 7.4
@@ -158,6 +158,13 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 12. **Job Categories** – Explore job listings organized by industry and category.
 
 == Changelog ==
+
+= 1.15.0 (11 November 2026) =
+* New: Added a Candidate Skills filter widget option for candidate archive sidebars.
+* New: Redesigned the Demo Sandbox login picker with Employer/Candidate role cards that show usernames and highlight the selected account.
+* Improved: Unified taxonomy archive and sidebar filtering for jobs, candidates, and companies so filters, search, empty results, and orphaned-post handling behave consistently.
+* Fixed: Prevented WordPress canonical redirects from breaking filtered Job, Candidate, and Company archive requests.
+* Fixed: Resolved the Continue as Guest button and application success message not showing for guest applicants.
 
 = 1.14.0 (3 November 2026) =
 * New: Added configurable Candidate Matching settings with per-criterion Required/Preferred mode and ranking weight controls.
