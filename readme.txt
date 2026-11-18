@@ -1,6 +1,6 @@
 === Jobus – Job Board, Recruitment & Hiring Platform ===
 Contributors: spiderdevs, mdjwel, arifrahman1, delweratjk, alimran01
-Tags: job board, elementor job board, recruitment, hiring portal, careers
+Tags: job board, job portal, recruitment, job manager, career
 Stable tag: 1.15.0
 Requires at least: 6.0
 Tested up to: 7.1.4
@@ -12,76 +12,81 @@ The ultimate WordPress Job Board plugin. Create a recruitment website with unlim
 
 == Description ==
 
-**Jobus** is a modern, lightweight, and powerful WordPress plugin designed to transform your website into a fully functional **Job Board**, **Recruitment Portal**, or **Hiring Platform**. 
+**Jobus** is the ultimate WordPress Job Board plugin. Create a recruitment website with unlimited job listings, candidate profiles, and company pages.
 
-Whether you are running a niche job board, a company career page, or a large-scale recruitment site, Jobus provides everything you need to manage jobs, employers, and candidates efficiently—**without writing a single line of code**.
+Whether you need a clean **corporate careers page** to showcase your company's open positions, a niche **recruitment directory**, or a full-scale **job marketplace**, Jobus delivers an effortless, modern hiring solution out of the box. It connects employers and job seekers with intuitive dashboards, rich job specifications, radius distance filtering, and direct application workflows—**without writing a single line of code**.
 
-Built with usability and SEO in mind, Jobus integrates seamlessly with any theme and offers native **Elementor** support, allowing you to design stunning job layouts with drag-and-drop ease.
+Built with usability, theme compatibility, and SEO in mind, Jobus integrates smoothly with standard WordPress themes and offers native **Elementor** widgets and **Gutenberg** blocks, allowing you to design clean job layouts with drag-and-drop ease.
 
 ### Why Choose Jobus?
 
-*   **Universal Theme Compatibility:** Works with any standard WordPress theme (Astra, Hello Elementor, GeneratePress, Kadence, Divi, OceanWP) — zero theme lock-in.
-*   **Zero Coding Required:** Set up a complete job board in minutes.
-*   **Elementor Ready:** Includes custom Elementor widgets for Jobs, Search, and Categories.
-*   **Modern & Responsive:** Looks great on all devices (Mobile, Tablet, Desktop).
-*   **Developer Friendly:** Clean code, hooks, and filters for customization.
-*   **SEO Optimized:** Structured data and clean URLs to help your jobs rank in Google for Jobs.
+*   **Standard Theme Compatibility:** Works seamlessly with standard WordPress themes (Astra, Kadence, GeneratePress, Hello Elementor, Divi, OceanWP) with zero theme lock-in.
+*   **Zero Coding Required:** Set up a complete job board in minutes using the built-in Setup Wizard.
+*   **Elementor & Gutenberg Ready:** Includes custom Elementor widgets and native Gutenberg blocks for Jobs, Search, Categories, and Tabs.
+*   **Modern & Responsive:** Pixel-perfect layout across desktop, tablet, and mobile devices.
+*   **Fast & Lightweight:** Built for speed with optimized database queries and clean template architecture.
+*   **SEO Optimized:** Built-in Schema.org structured data (`JobPosting`) to help your jobs rank on Google for Jobs search results.
 
 ### Key Features (Free Version)
 
 ***For Employers & Companies***
 
-*   **Unlimited Job Postings:** Create and manage as many job listings as you need.
-*   **Company Profiles:** Dedicated pages for companies with logos, descriptions, and active jobs.
-*   **Verified Badges:** Highlight trusted companies with verified badges.
-*   **Job Specifications:** Add detailed requirements (Salary, Experience, Job Type, etc.).
-*   **Location-Based Listings:** Assign locations to jobs for easy filtering.
-*   **External Applications:** Redirect candidates to external websites for job applications.
-*   **Employer Dashboard:** A frontend dashboard to manage listings and profile details.
+*   **Unlimited Job Postings:** Create, manage, and categorize unlimited job listings from the WordPress admin.
+*   **Job Specifications:** Add rich specifications including salary ranges, job type (Full-Time, Part-Time, Remote), experience level, and deadlines.
+*   **Location-Based Listings:** Assign countries, cities, or custom locations to jobs for smooth filtering.
+*   **External Applications:** Redirect candidates directly to company career pages, LinkedIn, or external ATS forms.
+*   **Featured & Urgent Badges:** Highlight priority job posts to maximize applicant reach.
+*   **Monetization & Paid Packages:** *(Pro)* Sell job posting packages, featured listing badges, and tiered listings with custom job limits and duration via WooCommerce.
+*   **Company Profiles & Directory:** *(Pro)* Dedicated public company pages with logos and active listings.
+*   **Frontend Job Submission:** *(Pro)* Allow employers to submit, edit, and manage jobs directly from the frontend dashboard.
 
 ***For Candidates & Job Seekers***
 
-*   **Candidate Profiles:** Users can create professional profiles / resumes.
-*   **Easy Application:** Apply to jobs directly via a built-in form, or apply as a guest without creating an account.
-*   **Candidate Dashboard:** Manage applications and profile settings.
-*   **Job Search & Filters:** Fast, accurate, and smooth job filtering by keyword, location, and category.
-*   **Radius Search:** Find jobs based on your nearby location using geolocation.
+*   **Direct Modal Applications:** Apply to jobs directly via an interactive, lightweight AJAX application modal.
+*   **Guest Applications:** Allow applicants to submit resumes and contact details with or without registering for an account.
+*   **Job Search & Filters:** Fast, smooth job filtering by keyword, location, category, job type, and salary.
+*   **Radius & Geolocation Search:** Help candidates locate nearby job openings using distance-based location coordinates.
+*   **Candidate Profiles & Resumes:** *(Pro)* Public candidate resume profiles with skills, experience, and attachments.
+*   **Job Alerts & Bookmarks:** *(Pro)* Save jobs to bookmarks and receive automated email alerts for new matching positions.
 
 ***Powerful Management Tools***
 
-*   **Frontend Dashboards:** Separate dashboards for Employers and Candidates.
-*   **Social Login:** Easy login and signup using Google, Facebook, and LinkedIn.
-*   **Messaging System:** Built-in simple and consistent messaging system.
-*   **Application Tracking:** View and manage job applications with easy-to-read applicant details from the backend.
-*   **Custom User Roles:** Automatically assigns Employer and Candidate roles.
-*   **Social Sharing:** Built-in social share buttons for job posts.
-*   **Featured Jobs:** Highlight premium listings to boost visibility.
-*   **Google Jobs Integration:** Improved visibility with built-in Schema for Google Jobs search.
-*   **Demo Importer:** One-click demo setup with sample jobs to get started instantly.
+*   **Setup Wizard:** Guided 4-step setup wizard (**Jobs → Setup Wizard**) to configure global currency and default settings.
+*   **Auto-Created Core Pages:** Automatically generates required pages for Job Archive (`/jobus-job-archive/`) and Dashboard.
+*   **Google Jobs Integration:** Built-in JSON-LD structured data (Schema.org `JobPosting`) for organic Google for Jobs visibility.
+*   **Social Sharing:** Built-in social share buttons for job posts (LinkedIn, Twitter, Facebook, Email).
+*   **Custom User Roles:** Automatically registers and assigns dedicated Employer and Candidate roles.
+*   **Social Login:** Optional one-click login and signup using Google, Facebook, and LinkedIn.
+*   **Demo Importer:** One-click demo setup with sample jobs to test functionality instantly.
+*   **Frontend Dashboards:** Unified user portal for employers and candidates.
+*   **WooCommerce Monetization:** *(Pro)* Charge employers for job listings using custom WooCommerce Job Package products with custom limits and duration.
+*   **Application Tracking System (ATS):** *(Pro)* Move candidates through hiring stages (Applied, Screening, Interview, Hired, Rejected).
+*   **Direct In-App Messaging:** *(Pro)* Secure communication channel between employers and applicants.
 
 ### Design & Customization
-*   **Pre-made Templates:** Includes ready-to-use templates for Job Lists, Single Jobs, and Company pages.
-*   **Elementor Widgets:** Drag-and-drop widgets for Job Listings, Search Forms, Categories, and more.
-*   **Customizable Appearance:** Control colors, layouts, and styles via settings.
-*   **Modern Design & Layouts:** Enjoy improved sidebars and a consistent, modern design across Candidate, Job, and Company pages.
+
+*   **Pre-made Templates:** Ready-to-use templates for Job Lists, Single Job details, and taxonomy pages.
+*   **Elementor Widgets:** Dedicated drag-and-drop widgets for Job Listings, Search Forms, Categories, and Job Tabs.
+*   **Gutenberg Blocks:** Native WordPress block support including Job Archive and Category Tabs blocks.
+*   **Customizable Appearance:** Control brand colors, typography accents, and button borders via **Jobs → Settings → Appearance**.
+*   **Modern Design & Layouts:** Enjoy consistent sidebars and modern design across Job, Company, and Candidate pages.
 
 ---
 
 ### Upgrade to Jobus Pro
-Unlock the full potential of your job board with **Jobus Pro**. Get advanced features to monetize and automate your recruitment business.
 
-**Pro Features Include:**
+Unlock the complete monetization, automation, and recruitment engine with **[Jobus Pro](https://jobus.spiderthemes.net/)**:
 
-*   **Frontend Dashboards:** Advanced frontend panels giving employers and candidates full profile control.
-*   **Application Tracking:** Track and manage application statuses like pending, interview, and hired.
-*   **Advanced Filters:** Narrow job searches by salary, type, experience, and more criteria.
-*   **Alerts & Bookmarks:** Let candidates bookmark favorite jobs and receive new job alerts.
-*   **Candidate Matching:** Automatically match candidates to jobs by teaching level, subjects, travel distance, and availability, with match alert emails.
-*   **Email Notifications:** Automated email alerts for employers and candidates on key events.
-*   **Application Forms:** Connect external application forms like Google Forms or LinkedIn easily.
-*   **Analytics & Reporting:** Monitor job views, clicks, and application stats with visual charts.
-*   **Direct Messaging:** Enable real-time conversations between employers and candidates on your site.
-*   **WooCommerce Integration:** Monetize your job board by selling job packages via WooCommerce.
+*   **Frontend Job Submission:** Allow employers to submit, edit, and manage jobs directly from the frontend dashboard.
+*   **Monetization & Paid Packages (WooCommerce):** Sell single job listings, featured badges, and tiered posting packages via WooCommerce. Set custom job limits, listing duration (days), and accept payments through any gateway (Stripe, PayPal, etc.).
+*   **Application Tracking System (ATS):** Structured hiring stages: *Applied → Screening → Interview → Hired / Rejected*.
+*   **Smart Candidate Matching:** Automatically match applicants to jobs by distance, availability, and skills with automated email alerts.
+*   **Company Profiles & Directory:** Public company profiles, active job listings, and verified trust badges.
+*   **Candidate Profiles & Resumes:** Professional candidate resumes and searchable candidate directory.
+*   **Job Alerts & Bookmarks:** Email notifications for new matching jobs and saved job bookmarks.
+*   **In-App Direct Messaging:** Real-time messaging between employers and applicants.
+*   **Recruitment Analytics:** Track job views, clicks, and application conversion rates with visual charts.
+*   **Premium Priority Support:** Direct help from our dedicated support engineering team.
 
 ### Quick Links
 - [Full Documentation](https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/) – Complete guides and tutorials
@@ -91,28 +96,59 @@ Unlock the full potential of your job board with **Jobus Pro**. Get advanced fea
 
 == Installation ==
 
-1.  Go to your WordPress Dashboard > **Plugins** > **Add New**.
-2.  Search for "**Jobus**".
-3.  Click **Install Now** and then **Activate**.
-4.  Navigate to the **Jobus** menu in the sidebar to configure settings.
-5.  Use the shortcodes or Elementor widgets to display jobs on your pages.
+### 5-Minute Quick Start
+
+1. Go to your WordPress Dashboard > **Plugins** > **Add New**.
+2. Search for "**Jobus**", click **Install Now**, and then **Activate**.
+3. Follow the guided **Setup Wizard** under **Jobs > Setup Wizard** to configure currency and defaults.
+4. Verify your auto-created pages:
+   * **Job Archive** (`/jobus-job-archive/`) with shortcode `[jobus_job_archive]`
+   * **Dashboard** (`/jobus-dashboard/`) with shortcode `[jobus_dashboard]`
+5. **Crucial Step:** Go to **Settings > Permalinks** and click **Save Changes** to flush rewrite rules and prevent 404 errors on job listings.
+6. Add the Job Archive and Dashboard pages to your navigation menu under **Appearance > Menus**.
+
+### Manual Installation
+
+1. Download the `jobus.zip` file.
+2. Go to **Plugins** > **Add New** > **Upload Plugin**.
+3. Upload the ZIP file and click **Install Now**.
+4. Activate the plugin and resave permalinks under **Settings > Permalinks**.
+
+== Shortcodes ==
+
+Jobus provides clean, lightweight WordPress shortcodes:
+
+* `[jobus_job_archive]` – Displays the complete, filterable job listings directory with pagination (supports `job_layout="grid"` or `"list"`).
+* `[jobus_dashboard]` – Displays the unified user portal / dashboard (login form for guests, account overview for logged-in users).
+* `[jobus_login_form]` – Displays a clean frontend user authentication and login card.
+* `[jobus_logout_form]` – Displays a frontend logout button with redirect handling.
+* `[jobus_company_archive]` – Displays the searchable company directory (*Requires Jobus Pro*).
+* `[jobus_candidate_archive]` – Displays the searchable candidate directory (*Requires Jobus Pro*).
+
+*Note: Standalone search bars, category grids, and tabbed listings are provided as Elementor Widgets and Gutenberg Blocks.*
 
 == Frequently Asked Questions ==
 
 = Is Jobus compatible with Elementor? =
-Yes! Jobus comes with dedicated Elementor widgets, making it easy to design your job board pages using the drag-and-drop builder.
+Yes! Jobus includes dedicated Elementor widgets for Job Listings, Job Search, Job Categories, and Job Tabs.
 
 = Can I use Jobus with any WordPress theme? =
-Absolutely. Jobus is designed to work with any standard WordPress theme. It inherits your theme's styling for a seamless look.
+Yes. Jobus is designed to work with standard WordPress themes (Astra, Kadence, GeneratePress, Hello Elementor, Divi, OceanWP, etc.). For best results, select a "Full Width / Contained" page template for your job archive page.
+
+= Why do I see a 404 error on job pages? =
+This happens when WordPress rewrite rules have not refreshed after activating custom post types. Simply go to Settings > Permalinks in your WordPress dashboard and click "Save Changes" to flush rewrite rules.
+
+= Can candidates apply without an account? =
+Yes. Under Jobs > Settings > General, you can enable guest applications to let candidates submit their application and CV directly without registering.
 
 = Does it support Google for Jobs? =
-Yes, Jobus uses structured data (Schema.org) to help your job listings appear in Google for Jobs search results.
+Yes, Jobus automatically injects structured data (Schema.org `JobPosting`) to help your listings appear in Google for Jobs search results.
 
 = Can I translate the plugin into my language? =
-Yes, Jobus is fully translation-ready. You can use plugins like Loco Translate or WPML to translate it into your preferred language.
+Yes, Jobus is 100% translation-ready. You can translate strings using Loco Translate or WPML.
 
 = Where can I get support? =
-For free support, please post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spiderthemes.net/docs/jobi-wordpress-theme/).
+For free support, post in the [WordPress Support Forum](https://wordpress.org/support/plugin/jobus/). For Pro support, visit our [Help Desk](https://helpdesk.spiderthemes.net/docs/jobus-wordpress-plugin/).
 
 ## WHAT’S NEXT? 
 
