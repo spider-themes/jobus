@@ -57,7 +57,10 @@ class Blocks {
 	 * @param array  $options Optional block registration options.
 	 */
 	public function register_block( string $name, array $options = array() ): void {
-		register_block_type( plugin_dir_path( __FILE__ ) . 'build/' . $name, $options );
+		$block_dir = plugin_dir_path( __FILE__ ) . 'build/' . $name;
+		if ( file_exists( $block_dir . '/block.json' ) ) {
+			register_block_type( $block_dir, $options );
+		}
 	}
 
 	/**
