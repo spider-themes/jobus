@@ -510,7 +510,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
             echo ( $has_nav && $this->args['show_all_options'] ) ? '<div class="csf-expand-all" title="'. esc_html__( 'show all settings', 'csf' ) .'"><i class="fas fa-outdent"></i></div>' : '';
 
-            echo ( $this->args['show_search'] ) ? '<div class="csf-search"><input type="text" name="csf-search" placeholder="'. esc_html__( 'Search...', 'csf' ) .'" autocomplete="off" /></div>' : '';
+            echo ( $this->args['show_search'] ) ? '<div class="csf-search"><input type="search" name="csf-search" placeholder="'. esc_html__( 'Search...', 'csf' ) .'" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" /></div>' : '';
 
             echo '<div class="csf-buttons">';
             echo '<input type="submit" name="'. esc_attr( $this->unique ) .'[_nonce][save]" class="button button-primary csf-top-save csf-save'. esc_attr( $ajax_class ) .'" value="'. esc_html__( 'Save', 'csf' ) .'" data-save="'. esc_html__( 'Saving...', 'csf' ) .'">';
