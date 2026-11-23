@@ -178,6 +178,16 @@ You can turn the assistant off under Jobs → Settings → General → Hide Supp
 
 * [Spider Themes](https://spiderthemes.net) — [Terms](https://spiderthemes.net/terms) — [Privacy](https://spiderthemes.net/privacy)
 
+= Spider Themes Telemetry (anonymous usage tracking) =
+
+Jobus can send anonymous usage counts to Spider Themes so we can see which recruitment features and modules are in use. Reporting stays off until you allow Freemius tracking or turn on Share anonymous usage under Jobs → Settings → General.
+
+The report includes published job, application, candidate, and company counts, 30-day activity, and taxonomy totals (categories, locations, skills). It never includes job descriptions, applicant resumes, names, personal data, or employer contact info.
+
+Turn it off with the Share anonymous usage switch, or add `define( 'JOBUS_DISABLE_TELEMETRY', true );` to wp-config.php. `define( 'SPIDER_DISABLE_TELEMETRY', true );` stops it as well.
+
+* [Spider Themes](https://spiderthemes.net) — [Terms](https://spiderthemes.net/terms) — [Privacy](https://spiderthemes.net/privacy)
+
 == Screenshots ==
 
 1. **Jobus Dashboard** – Central hub to manage jobs, applications, and candidates.

@@ -55,6 +55,13 @@ CSF::createSection($settings_prefix, array(
 			'default'  => false,
 		),
 		array(
+			'id'       => 'share_anonymous_usage',
+			'type'     => 'switcher',
+			'title'    => esc_html__( 'Share anonymous usage', 'jobus' ),
+			'subtitle' => esc_html__( 'Help make Jobus better by sharing anonymous job, application, candidate, and company counts. Job details and applicant personal data are never collected.', 'jobus' ),
+			'default'  => false,
+		),
+		array(
 			'type'    => 'subheading',
 			'content' => esc_html__( 'Advanced Data Management', 'jobus' ),
 		),

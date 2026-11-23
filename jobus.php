@@ -453,6 +453,7 @@ final class Jobus {
 
 		// Remote Notice Integration
 		require_once JOBUS_PATH . '/includes/remote-notices/class-remote-notice-client.php';
+		require_once JOBUS_PATH . '/includes/telemetry.php';
 
 		/**
 		 * NoticePilot — remote admin-notice campaigns (SDK v1.6.1).
