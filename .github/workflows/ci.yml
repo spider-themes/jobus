@@ -1,0 +1,24 @@
+name: CI Checks
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  php-syntax:
+    name: PHP ${{ matrix.php }} Syntax Check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '7.4', '8.1', '8.3' ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+      - name: Run PHP lint
+        run: find . -name "*.php" -not -path "./vendor/*" -not -path "./lib/*" -not -path "./node_modules/*" -not -path "./build/*" -not -path "./assets/vendors/*" -print0 | xargs -0 -n1 php -l

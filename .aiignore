@@ -1,0 +1,11 @@
+# AI & IDE Indexing Exclusions
+vendor/
+node_modules/
+build/
+packages/
+lib/csf/
+assets/vendors/
+sample-data/demo.xml
+languages/*.mo
+*.log
+.DS_Store

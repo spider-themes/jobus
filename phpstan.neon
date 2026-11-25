@@ -1,0 +1,12 @@
+parameters:
+  level: 4
+  paths:
+    - jobus.php
+    - Blocks.php
+    - Admin
+    - includes
+  excludePaths:
+    - vendor
+    - lib
+    - Admin/csf
+  treatPhpDocTypesAsCertain: false

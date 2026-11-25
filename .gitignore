@@ -1,13 +1,12 @@
 /.specify
 /node_modules
 /specs
-/tests
 /auth.json
-/jest.config.js
-/phpcs.xml.dist
 /.vscode
 /.idea
 .DS_Store
+*.log
+.phpunit.result.cache
 /package-lock.json
 /composer.lock
 build/
